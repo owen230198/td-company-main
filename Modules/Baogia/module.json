@@ -1,0 +1,13 @@
+{
+    "name": "Baogia",
+    "alias": "baogia",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Baogia\\Providers\\BaogiaServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
