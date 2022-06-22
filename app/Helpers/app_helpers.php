@@ -1,0 +1,120 @@
+<?php  
+if (! function_exists('getModelByClass')) {
+    function getModelByClass($class)
+    {
+        $useObject = '\App\Models\\'.$class;
+        $models = new $useObject;
+        return $models;
+    }
+}
+
+if (! function_exists('getModelByTable')) {
+    function getModelByTable($table)
+    {
+    	$n_tables = new \App\Models\NTable;
+    	$class = $n_tables->select('model')->where('name', $table)->first();
+        $useObject = '\App\Models\\'.$class['model'];
+        $models = new $useObject;
+        return $models;
+    }
+}
+
+if (! function_exists('getNameByDefaultData')) {
+    function getNameByDefaultData($default_data, $value)
+    {
+        if (@$default_data->model) {
+            $models = getModelByClass($default_data->model);
+            $model = $models->select('name')->find($value);
+            $title = @$model['name']?$model['name']:'Không xác định';   
+        }else {
+            $list_option = $default_data->option;
+            $title = @$list_option->$value?$list_option->$value:'Không xác định';
+        }
+        return $title;
+    }
+}
+if (! function_exists('getSessionUser')) {
+    function getSessionUser()
+    {
+        $user_login = session('user_login');
+        $admin = @$user_login['user']?$user_login['user']:array();
+        return $admin;
+    }
+}
+
+if (! function_exists('getDetailDataByID')) {
+    function getDetailDataByID($model, $id)
+    {
+        $models = getModelByClass($model);
+        $data = $models->find($id);
+        return $data;
+    }
+}
+
+if(!function_exists('recursive')){
+    function recursive($array, $parent = 0, $level = 0){
+        $data = array();
+        foreach ($array as $key => $item) {
+            if ($item['parent'] == $parent) {
+                $item['level'] = $level;
+                array_push($data, $item);
+                $child = recursive($array, $item['_id'], $level + 1);
+                $data = array_merge($data, $child);
+            }       
+        }
+        return $data;   
+    }
+}
+
+if(!function_exists('getRoleByModule')){
+    function getRoleByModule($group, $module){
+        $roles = new \App\Models\NRole;
+        $role = $roles::where('module_id', $module)->where('group_user_id', $group)->first();
+        return $role;
+    }
+}
+
+if(!function_exists('getFieldDataById')){
+    function getFieldDataById($feild = '*', $class, $id){
+        $models = getModelByClass($class);
+        $data = $models::select($feild)->find($id);
+        return $data[$feild];
+    }
+}
+
+if (!function_exists('getIdByFeildValue')) {
+    function getIdByFeildValue($class, $feild, $value)
+    {
+        $models = getModelByClass($class);
+        $data = $models::select('id')->where($feild, $value)->first();
+        return @$data['_id']?$data['id']:0;
+    }
+}
+
+if (!function_exists('hasChild')) {
+    function hasChild($class, $id)
+    {
+        $models = getModelByClass($class);
+        $count = $models::where('parent', $id)->count();
+        return $count>0?true:false;
+    }
+}
+
+if (!function_exists('getDataTable')) {
+    function getDataTable($table, $select = "*", $where = array(), $pginate = 0, $order ='id', $order_by = 'desc')
+    {
+        $db = new \Illuminate\Support\Facades\DB;
+        $table = $db::table($table);
+        if (count($where)>0) {
+            foreach ($where as $w) {
+                $table->where($w['key'], $w['compare'], $w['value']);
+            }
+        }
+        if ($paginate>0) {
+            $data = $table->orderBy($order, $order_by)->paginate($paginate)->toArray();
+        }else{
+            $data = $table->orderBy($order, $order_by)->get()->toArray();
+        }
+        return $data;
+    }
+}

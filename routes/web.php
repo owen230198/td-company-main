@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthController;
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +15,9 @@ use App\Http\Controllers\Auth\AuthController;
 |
 */
 Route::any('login', [AuthController::class, 'login']);
-Route::get('/',[HomeController::class, 'index']);
-Route::any('/dev-update-data',[HomeController::class, 'devUpdateData']);
+Route::any('logout', [AuthController::class, 'logout']);
+Route::any('dev-update-data',[HomeController::class, 'devUpdateData']);
+Route::middleware(['checkLogin'])->group(function () {
+	Route::get('/',[HomeController::class, 'index']);
+	Route::get('permission-error',[AdminController::class, 'permissionError']);
+});

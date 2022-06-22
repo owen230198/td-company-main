@@ -16,18 +16,8 @@ class NRole extends Model
 
     public function getModuleByGroupUser($group_user_id)
     {
-    	$this->select('*');
-    	$this->where('view', 1);
-    	$this->orWhere('insert', 1);
-    	$this->orWhere('update', 1);
-    	$this->orWhere('remove', 1);
-    	$this->orWhere('copy', 1);
-		$this->join('n_modules', 
-		'right, n_modules.id = n_roles.module_id 
-        AND n_modules.menu = 1
-		AND n_roles.group_user_id = '.$group_user_id.'');
-		$data = $this->get()->toArray();
-        var_dump($data); die();
+		$data = $this->where('view', 1)->where('n_group_user_id', $group_user_id)->join('n_modules', 
+		'n_modules.id', '=', 'n_roles.module_id')->get()->toArray();
         return $data;
     }
 }

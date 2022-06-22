@@ -23,12 +23,9 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-    	$list_modules = $modules::all()->toArray();
-    	if (!$request->session()->has('list_modules')) {
-    		$request->session()->put('list_modules', $list_modules);
-    	}
+        var_dump(getDataTable()); die();
         $data['title'] = 'Management System';
-    	return view('main', $data);	
+        return view('main', $data); 
     }
 
     public function devUpdateData()

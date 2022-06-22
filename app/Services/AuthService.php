@@ -23,25 +23,10 @@ class AuthService extends BaseService
         }
         unset($user['password']);
         $arr['user'] = $user;
-        $role_module = $this->getMenuForAdmin($user);
-        $arr['parent_menu'] = $this->modules->orderBy('ord', 'asc')->whereNull('parent')->get();
-        $arr['menu'] = @$role_module['menu']?$role_module['menu']:array();
-        $arr['list_roles'] = @$role_module['list_roles']?$role_module['list_roles']:array();
+        $arr['parent_menu'] = $this->modules->orderBy('ord', 'asc')->whereNull('parent')->get()->toArray();
+        $arr['menu'] = $this->roles->getModuleByGroupUser($user['n_group_user_id']);
         session()->put('user_login', $arr);
         return $this->returnMessages(200, ['messages'=>'Đăng nhập thành công!']);
-    }
-
-    private function getMenuForAdmin($group_user_id)
-    {
-        $child_menu = $this->roles->getModuleByGroupUser($group_user_id);
-        $parent_menu = array();
-        foreach ($child_group as $key => $item) {
-            $parent_item = $this->modules->find($item['parent']);
-            array_push($parent_menu, $parent_item);       
-        }
-        $menu = array_merge($parent_menu, $child_menu);
-        
-        return $menu->toArray();
     }
 
     private function validatelogin($request)
