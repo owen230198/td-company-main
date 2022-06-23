@@ -23,7 +23,6 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        var_dump(getDataTable()); die();
         $data['title'] = 'Management System';
         return view('main', $data); 
     }

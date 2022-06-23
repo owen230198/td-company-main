@@ -202,6 +202,11 @@ input[type="checkbox"].toggle:disabled::after {
   border-left: none;
 }
 
+select.form-control:not([size]):not([multiple]),
+.station-richmenu-main-search__set{
+  height: 35px;
+}
+
 .group_btn_action_form{
   position: sticky;
   width: 100%;

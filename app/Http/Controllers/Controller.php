@@ -12,9 +12,10 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+	public function __construct()
+	{
+		$this->detail_tables = new \App\Models\NDetailTable;
+	}
 }
 
-function __construct()
-{
-	
-}
