@@ -22,10 +22,10 @@ if (! function_exists('getModelByTable')) {
 if (! function_exists('getNameByDefaultData')) {
     function getNameByDefaultData($default_data, $value)
     {
-        if (@$default_data->model) {
-            $models = getModelByClass($default_data->model);
-            $model = $models->select('name')->find($value);
-            $title = @$model['name']?$model['name']:'Không xác định';   
+        if (@$default_data->table) {
+            $models = getModelByClass($default_data->table);
+            $table = $models->select('name')->find($value);
+            $title = @$table['name']?$table['name']:'Không xác định';   
         }else {
             $list_option = $default_data->option;
             $title = @$list_option->$value?$list_option->$value:'Không xác định';
@@ -48,21 +48,6 @@ if (! function_exists('getDetailDataByID')) {
         $models = getModelByClass($model);
         $data = $models->find($id);
         return $data;
-    }
-}
-
-if(!function_exists('recursive')){
-    function recursive($array, $parent = 0, $level = 0){
-        $data = array();
-        foreach ($array as $key => $item) {
-            if ($item['parent'] == $parent) {
-                $item['level'] = $level;
-                array_push($data, $item);
-                $child = recursive($array, $item['_id'], $level + 1);
-                $data = array_merge($data, $child);
-            }       
-        }
-        return $data;   
     }
 }
 
@@ -101,7 +86,7 @@ if (!function_exists('hasChild')) {
 }
 
 if (!function_exists('getDataTable')) {
-    function getDataTable($table, $select = "*", $where = array(), $pginate = 0, $order ='id', $order_by = 'desc')
+    function getDataTable($table, $select = "*", $where = array(), $paginate = 0, $order ='id', $order_by = 'desc')
     {
         $db = new \Illuminate\Support\Facades\DB;
         $table = $db::table($table);
@@ -111,9 +96,9 @@ if (!function_exists('getDataTable')) {
             }
         }
         if ($paginate>0) {
-            $data = $table->orderBy($order, $order_by)->paginate($paginate)->toArray();
+            $data = $table->orderBy($order, $order_by)->paginate($paginate);
         }else{
-            $data = $table->orderBy($order, $order_by)->get()->toArray();
+            $data = $table->orderBy($order, $order_by)->get();
         }
         return $data;
     }
