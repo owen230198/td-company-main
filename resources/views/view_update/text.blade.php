@@ -1,6 +1,10 @@
 @php
-	$name = @$field['name']?$field['name']:'';
-	$value = isset($data[$name])?$data[$name]:'';
-	$type = @$field['default_data']?$field['default_data']:'text';
+	if (@$config&&$config==1) {
+		$name = $config_id;
+		$value = $config_value;	
+	}else{
+		$name = @$field['name']?$field['name']:'';
+		$value = isset($data[$name])?$data[$name]:''; 
+	}
 @endphp
-<input type="{{ $type }}" class="form-control" name="{{ $name }}" value="{{ $value }}" {{ @$field['require']?'required':'' }} {{ $type=='number'?'min=1':'' }}>
+<input type="text" class="form-control" name="{{ $name }}" value="{{ $value }}" {{ @$field['required']&&$field['required']==1?'required':'' }}>

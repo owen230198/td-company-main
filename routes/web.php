@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Controllers\Quote\QuoteController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,14 +23,18 @@ Route::middleware(['checkLogin'])->group(function () {
 	Route::get('permission-error',[AdminController::class, 'permissionError']);
 	Route::get('view/{table}', [AdminController::class, 'view']);
 	Route::get('insert/{table}', [AdminController::class, 'insert']);
-	Route::get('action-to-view/{insert}/{table}', [AdminController::class, 'actionToView']);
 	Route::get('update/{table}/{id}', [AdminController::class, 'update']);
 	Route::get('clone/{table}/{id}', [AdminController::class, 'clone']);
 	Route::get('grant-permissions', [AdminController::class, 'grantPermission']);
 	Route::get('get-permissions', [AdminController::class, 'getPermission']);
 	Route::post('do-insert/{table}', [AdminController::class, 'doInsert']);
+	Route::post('do-insert/{table}', [AdminController::class, 'doInsert']);
 	Route::post('do-update/{table}/{id}', [AdminController::class, 'doUpdate']);
 	Route::post('remove', [AdminController::class, 'remove']);
 	Route::post('multiple-remove', [AdminController::class, 'multipleRemove']);
 	Route::post('update-permissions/{module_id}/{role_id}', [AdminController::class, 'updatePermission']);
+
+	//quotes routes
+
+	Route::get('action-quote-views/{action}/{quote}', [QuoteController::class, 'actionQuoteView']);
 });

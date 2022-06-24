@@ -10,5 +10,6 @@ class BaseService
  		$this->users = new \App\Models\NUser;
  		$this->list_tables = new \App\Models\NTable;
         $this->detail_tables = new \App\Models\NDetailTable;
+        $this->db = new \Illuminate\Support\Facades\DB;
  	}
 }

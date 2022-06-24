@@ -80,15 +80,20 @@
     }
 
     if (!function_exists('getActionByKey')) {
-        function getActionByKey($key)
+        function getActionByKey($keyword)
         {
-            switch ($key) {
-                case expr:
-                    // code...
+            switch ($keyword) {
+                case 'insert':
+                    return 'Thêm mới';
                     break;
-                
+                case 'update':
+                    return 'Chỉnh sửa';
+                    break;
+                case 'clone':
+                    return 'Sao chép';
+                    break;
                 default:
-                    // code...
+                    return '';
                     break;
             }
         }        

@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 class AdminController extends Controller
 {
     public function __construct()
@@ -38,13 +40,36 @@ class AdminController extends Controller
         $data_tables = getDataTable($table, '*', array(), $data['page_item']);
         $data['data_tables'] = $data_tables;
         return view('table.'.$data['view_type'], $data);
-    } 
+    }
 
-    public function actionToView($action, $table)
+    private function getDataActionView($table, $action, $action_name)
     {
-        $data = $this->service->getBaseTable($table);
-        $data['title'] = getActionByKey($action).' '.$data['tableItem']['note'];
-        return view($table.'/'.$action, $data);
-    }   
+        $data['tableItem'] = $this->service->getTableItem($table);
+        $data['title'] = $action_name.' '.$data['tableItem']['note'];
+        $data['field_list'] = $this->service->getFieldAction($table, $action);
+        $data['action'] = $action;
+        $data['action_name'] = $action_name;
+        $data['regions'] = $this->regions->getRegionOfTable($table);
+        return $data;
+    }
+
+    public function insert($table)
+    {
+        $data = $this->getDataActionView($table, 'insert', 'Thêm mới');
+        return view('action.view', $data);
+    }
+
+    public function doInsert($table, Request $request)
+    {
+        $data = $request->all();
+        unset($data['_token']);
+        $insertID = $this->service->doInsertTable($table, $data);
+        if (@$insertID) {
+            $route = $table=='quotes'?'action-quote-views/insert/'.$insertID:'view/'.$table;
+            return redirect($route)->with('message','Thêm dữ liệu thành công !');  
+        }else {
+            return back()->with('error','Đã có lỗi xảy ra !');
+        }
+    }  
 }
 
