@@ -343,3 +343,9 @@ select.form-control:not([size]):not([multiple]),
       max-width: 725px;
   }
 }
+
+@media (max-width: 1400px){
+  body, .station-richmenu-main-btn-area, .siderbar-menu__lnk, .form-control, .fs-15{
+    font-size: 13px;
+  }
+}

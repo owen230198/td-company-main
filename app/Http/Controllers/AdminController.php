@@ -40,9 +40,11 @@ class AdminController extends Controller
         return view('table.'.$data['view_type'], $data);
     } 
 
-    public function insertTable($table)
+    public function actionToView($action, $table)
     {
-        return view($table.'insert'], $data);
+        $data = $this->service->getBaseTable($table);
+        $data['title'] = getActionByKey($action).' '.$data['tableItem']['note'];
+        return view($table.'/'.$action, $data);
     }   
 }
 

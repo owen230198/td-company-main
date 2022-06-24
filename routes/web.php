@@ -22,7 +22,7 @@ Route::middleware(['checkLogin'])->group(function () {
 	Route::get('permission-error',[AdminController::class, 'permissionError']);
 	Route::get('view/{table}', [AdminController::class, 'view']);
 	Route::get('insert/{table}', [AdminController::class, 'insert']);
-	Route::get('insert-table/{table}', [AdminController::class, 'insertTable']);
+	Route::get('action-to-view/{insert}/{table}', [AdminController::class, 'actionToView']);
 	Route::get('update/{table}/{id}', [AdminController::class, 'update']);
 	Route::get('clone/{table}/{id}', [AdminController::class, 'clone']);
 	Route::get('grant-permissions', [AdminController::class, 'grantPermission']);

@@ -78,3 +78,18 @@
             return $data;   
         }
     }
+
+    if (!function_exists('getActionByKey')) {
+        function getActionByKey($key)
+        {
+            switch ($key) {
+                case expr:
+                    // code...
+                    break;
+                
+                default:
+                    // code...
+                    break;
+            }
+        }        
+    }
