@@ -9,7 +9,7 @@ class QuoteController extends Controller
     {
         parent::__construct();
         $this->adminService = new \App\Services\AdminService;
-        $this->service = new \App\Services\QuoteService;
+        // $this->service = new \App\Services\QuoteService;
         $this->quotes = new \App\Models\Quote;
     }
 
@@ -18,12 +18,13 @@ class QuoteController extends Controller
         return redirect('/');
     }
 
-    public function actionQuoteView($action, $quote)
+    public function quoteManagement($table, $quote_id)
     {
-        $data = $this->adminService->getTableItem($table);
-        $data['data_quotes'] = $this->quotes::find($quote);
-        var_dump($data_quotes); die();
-        return view($table.'/'.$action, $data);
+        $data['tableItem'] = $this->adminService->getTableItem('quotes');
+        $quote = $this->quotes::find($quote_id);
+        $data['data_quotes'] = $quote;
+        $data['title'] = 'Chi tiết vật liệu - '.$quote['name'].'';
+        return view('quotes/managements', $data);
     }
 }
 

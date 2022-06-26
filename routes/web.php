@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthController;
-use App\Controllers\Quote\QuoteController;
+use App\Http\Controllers\Quote\QuoteController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,5 +36,5 @@ Route::middleware(['checkLogin'])->group(function () {
 
 	//quotes routes
 
-	Route::get('action-quote-views/{action}/{quote}', [QuoteController::class, 'actionQuoteView']);
+	Route::get('quote-managements/{table}/{quote_id}', [QuoteController::class, 'quoteManagement']);
 });
