@@ -7,9 +7,9 @@
         <div class="col-12 text-right">
           <div class="d-flex align-center mb-2 justify-content-end">
             @if ($tableItem['insert'] == 1)
-              <a href="insert/{{ $tableItem['name'] }}" class="station-richmenu-main-btn-area mx-2">
-                <i class="fa fa-plus mr-2 fs-18" aria-hidden="true"></i>Thêm mới
-              </a>
+            <button type="button" class="station-richmenu-main-btn-area mx-2 load_view_popup" data-toggle="modal" data-target="#actionModal" data-src="insert-detail-quotes/q_papers">
+              <i class="fa fa-plus mr-2 fs-18" aria-hidden="true"></i>Thêm mới
+            </button>
             @endif
             <a href="" class="station-richmenu-main-btn-area">
               <i class="fa fa-book mr-2 fs-18" aria-hidden="true"></i>Trợ giúp
@@ -53,6 +53,11 @@
      {{ $data_tables->links() }}
     </div>
   </div>
-  @include('table\remove_confirm')
-  @include('table\remove_confirm_check')
+  @include('table.remove_confirm')
+  @include('table.remove_confirm_check')
+  @include('table.action_popup')
+@endsection
+
+@section('script')
+  <script src="{{ asset('frontend/admin/script/quote.js') }}" defer></script>
 @endsection

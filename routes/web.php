@@ -37,4 +37,5 @@ Route::middleware(['checkLogin'])->group(function () {
 	//quotes routes
 
 	Route::get('quote-managements/{table}/{quote_id}', [QuoteController::class, 'quoteManagement']);
+	Route::get('insert-detail-quotes/{table}', [QuoteController::class, 'insertDetailQuote']);
 });

@@ -338,9 +338,23 @@ select.form-control:not([size]):not([multiple]),
   border: none;
 }
 
+.iframe_action_view{
+  height: calc(100vh - 100px)
+}
+
+.group_btn_action_form.popup {
+  position: absolute;
+  text-align: right;
+  padding: 5px;
+}
+
 @media (min-width: 576px){
   .guideModal .modal-dialog {
       max-width: 725px;
+  }
+
+  .modalAction .modal-dialog {
+    max-width: 1200px;
   }
 }
 

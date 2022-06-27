@@ -20,11 +20,20 @@ class QuoteController extends Controller
 
     public function quoteManagement($table, $quote_id)
     {
-        $data['tableItem'] = $this->adminService->getTableItem('quotes');
+        $data = $this->adminService->getDataBaseView('q_papers', 'Chi tiết');
         $quote = $this->quotes::find($quote_id);
         $data['data_quotes'] = $quote;
-        $data['title'] = 'Chi tiết vật liệu - '.$quote['name'].'';
+        $data['data_tables'] = getDataTable($table, '*', array(), $data['page_item']);
         return view('quotes/managements', $data);
+    }
+
+    public function insertDetailQuote($table)
+    {
+        $tableItem = $this->adminService->getTableItem($table);
+        $data['tableItem'] = $tableItem;
+        $data['title'] = 'Thêm mới '.$tableItem['note'];
+        $data['nosidebar'] = true;
+        return view('quotes.'.$table.'.view', $data);
     }
 }
 
