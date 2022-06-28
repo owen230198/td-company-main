@@ -18,23 +18,7 @@
       @include('quotes.q_papers.general', ['some' => 'data'])
     </div>
     <div class="tab-pane fade" id="detail-config" role="tabpanel" aria-labelledby="detail-config-tab">
-      <div class="list_config_incrideents">
-        <div class="row">
-          <div class="col-6">
-            <div class="incredent_items">
-              <div class="incredent_header d-flex align-item-centers">
-                <label class="base_label mr-2 mb-0 label_quotes fs-16 font_bold d-flex align-item-centers">
-                  <i class="fa fa-print mr-2 fs-23" aria-hidden="true"></i>In offset
-                </label>
-                <div class="checkbox_module">
-                  <input type="hidden" name="" value = "0">
-                  <input type="checkbox" class="toggle mx-auto change_submit"/>
-                </div>   
-              </div>  
-            </div> 
-          </div>
-        </div>
-      </div>
+      @include('quotes.q_papers.configs')
     </div>
   </div>
   <div class="group_btn_action_form popup">

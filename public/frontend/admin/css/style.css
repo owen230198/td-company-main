@@ -371,6 +371,14 @@ select.form-control:not([size]):not([multiple]),
   min-width: 150px;
 }
 
+.bg_grey{
+  background: #f1f4f9;
+}
+
+.incredent_content{
+  display: none;
+}
+
 select.form-control:not([size]):not([multiple]){
   height: 32px;
 }

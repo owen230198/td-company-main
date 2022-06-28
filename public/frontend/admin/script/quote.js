@@ -17,7 +17,20 @@ var submitPopUpAction = function()
 	});
 }
 
+var changeActiveStage = function()
+{
+	$(document).on('change', '.change_active_stage', function(event) {
+		event.preventDefault();
+		parent = $(this).closest('.incredent_items');
+		if ($(this).prop("checked") == true) {
+			parent.find('.incredent_content').fadeIn();
+		}else{
+			parent.find('.incredent_content').fadeOut();	
+		}
+	});
+}
 $(function(){
 	loadDataPopup();
-	submitPopUpAction();
+	// submitPopUpAction();
+	changeActiveStage();
 });
