@@ -38,9 +38,9 @@
     </div>
   </div>
   <div class="group_btn_action_form popup">
-      <button type="submit" class="station-richmenu-main-btn-area">
-        <i class="fa fa-check mr-2 fs-18" aria-hidden="true"></i>Hoàn tất
-      </button>
+    <button type="submit" class="station-richmenu-main-btn-area">
+      <i class="fa fa-check mr-2 fs-18" aria-hidden="true"></i>Hoàn tất
+    </button>
   </div>
 </form>
 @endsection
