@@ -343,9 +343,36 @@ select.form-control:not([size]):not([multiple]),
 }
 
 .group_btn_action_form.popup {
-  position: absolute;
+  position: fixed;
+  left: 0;
   text-align: right;
   padding: 5px;
+  text-align: center;
+}
+
+.close_action_popup{
+  position: absolute;
+  right: -20px;
+  top: -20px;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #d30000;
+  z-index: 2;
+  border-radius: 50%;
+  background: #d30000;
+  opacity: 1;
+  color: #ffffff;
+}
+
+.label_quotes{
+  min-width: 150px;
+}
+
+select.form-control:not([size]):not([multiple]){
+  height: 32px;
 }
 
 @media (min-width: 576px){

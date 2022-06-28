@@ -326,3 +326,10 @@ input[type=time]{
 .overflow_hidden{
   overflow: hidden;
 }
+
+.w_available{
+  width: -webkit-fill-available;
+}
+.short_input{
+  width: 200px;
+}
