@@ -17,6 +17,11 @@
                 <i class="fa fa-plus mr-2 fs-18" aria-hidden="true"></i>Thêm mới
               </a>
             @endif
+            @if ($tableItem['remove'])
+              <button class="station-richmenu-main-btn-area mx-2 red_button" data-toggle="modal" data-target="#multiDeleteModal">
+                <i class="fa fa-trash mr-2 fs-18" aria-hidden="true"></i>Xóa 
+              </button>
+            @endif
             <a href="" class="station-richmenu-main-btn-area">
               <i class="fa fa-book mr-2 fs-18" aria-hidden="true"></i>Trợ giúp
             </a>

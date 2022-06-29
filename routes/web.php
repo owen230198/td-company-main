@@ -24,6 +24,7 @@ Route::middleware(['checkLogin'])->group(function () {
 	Route::get('view/{table}', [AdminController::class, 'view']);
 	Route::get('insert/{table}', [AdminController::class, 'insert']);
 	Route::get('update/{table}/{id}', [AdminController::class, 'update']);
+	Route::get('search-table/{table}', [AdminController::class, 'searchTable']);
 	Route::get('clone/{table}/{id}', [AdminController::class, 'clone']);
 	Route::get('grant-permissions', [AdminController::class, 'grantPermission']);
 	Route::get('get-permissions', [AdminController::class, 'getPermission']);

@@ -25,13 +25,25 @@ class AdminController extends Controller
     {
         $data = $this->service->getDataBaseView($table, 'Danh sách');
         $data['data_tables'] = getDataTable($table, '*', array(), $data['page_item']);
+        session()->put('back_url', url()->full());
         return view('table.'.$data['view_type'], $data);
+    }
+
+
+    public function searchTable($table, Request $request)
+    {
+        $get = $request->all();
+        $data = $this->service->getDataBaseView($table, 'Tìm kiếm');
+        $data['data_tables'] = $this->service->getDataSearchTable($table, $get, $data['page_item']);
+        $data['data_search'] = $get;
+        return view('table.'.$data['view_type'], $data);  
     }
 
     private function getDataActionView($table, $action, $action_name)
     {
         $data['tableItem'] = $this->service->getTableItem($table);
         $data['title'] = $action_name.' '.$data['tableItem']['note'];
+        $action = $action=='clone'?'insert':$action;
         $data['field_list'] = $this->service->getFieldAction($table, $action);
         $data['action'] = $action;
         $data['action_name'] = $action_name;
@@ -42,6 +54,26 @@ class AdminController extends Controller
     public function insert($table)
     {
         $data = $this->getDataActionView($table, 'insert', 'Thêm mới');
+        return view('action.view', $data);
+    }
+
+    public function update($table, $id)
+    {
+        $data = $this->getDataActionView($table, 'update', 'Cập nhật');
+        $data['data_item'] = getModelByTable($table)->find($id);
+        return view('action.view', $data);
+    }
+
+    public function clone($table, $id)
+    {
+        $data = $this->getDataActionView($table, 'clone', 'Sao chép');
+        $data['data_item'] = getModelByTable($table)->find($id);
+        if (@$data['data_item']['id']) {
+            unset($data['data_item']['id']);  
+        }
+        if (@$data['data_item']['password']) {
+            unset($data['data_item']['password']);  
+        }
         return view('action.view', $data);
     }
 
@@ -56,6 +88,50 @@ class AdminController extends Controller
         }else {
             return back()->with('error','Đã có lỗi xảy ra !');
         }
-    }  
+    }
+
+    public function doUpdate($table, $id, Request $request)
+    {
+        $data = $request->all();
+        unset($data['_token']);
+        $success = $this->service->doUpdateTable($id, $table, $data);
+        if ($success) {
+            $routes = @session()->get('back_url')?session()->get('back_url'):'view/'.$table;
+            return redirect($routes)->with('message','Cập nhật dữ liệu thành công !');   
+        }else {
+            return back()->with('error','Đã có lỗi xảy ra !');
+        }
+    } 
+
+    public function remove(Request $request){
+       $data = $request->all();
+       $id = $data['remove_id'];
+       $table = $data['table'];
+       $success = $this->service->removeDataTable($table, $id);
+       if ($success) {
+            return back()->with('message','Xoá thành công dữ liệu!'); 
+        }else {
+            return back()->with('error','Đã có lỗi xảy ra !');
+        }
+    }
+
+    public function multipleRemove(Request $request)
+    {
+        $data = $request->all();
+        $str_id = @$data['multi_remove_id']?$data['multi_remove_id']:'';
+        if ($str_id == '') {
+            return back()->with('error','Chưa có mục được chọn !');
+        }
+        $table = $data['table'];
+        $arr_id = explode(',', $str_id);
+        foreach ($arr_id as $id) {
+            $delete = $this->service->removeDataTable($table, $id);           
+        }
+        if ($delete) {
+            return back()->with('message','Xóa dữ liệu thành công !');
+        }else{
+            return back()->with('error','Đã có lỗi xảy ra !');
+        }
+    } 
 }
 

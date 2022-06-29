@@ -29,10 +29,10 @@
         <button type="submit" class="station-richmenu-main-btn-area">
           <i class="fa fa-check mr-2 fs-18" aria-hidden="true"></i>Hoàn tất
         </button>
-        <a href="admin/view/{{ $tableItem['name'] }}" class="station-richmenu-main-btn-area mx-2">
+        <a href="{{ @session()->get('back_url')?session()->get('back_url'):'' }}" class="station-richmenu-main-btn-area mx-2">
           <i class="fa fa-angle-left mr-2 fs-18" aria-hidden="true"></i>Trở về
         </a>
-        <a href="admin/view/{{ $tableItem['name'] }}" class="station-richmenu-main-btn-area">
+        <a href="{{ @session()->get('back_url')?session()->get('back_url'):'' }}" class="station-richmenu-main-btn-area">
           <i class="fa fa-times mr-2 fs-18" aria-hidden="true"></i>Hủy
         </a>
       </div>

@@ -326,16 +326,9 @@ select.form-control:not([size]):not([multiple]),
   cursor: pointer;
 }
 
-.guide_btn{
-  background: none;
-  border: none;
-  padding: 0;
-  margin: 0;
-}
-
-.guide_btn:hover{
-  background: none;
-  border: none;
+.red_button{
+  background: #ff0000;
+  border: 1px solid #ff0000;
 }
 
 .iframe_action_view{
@@ -377,6 +370,11 @@ select.form-control:not([size]):not([multiple]),
 
 .incredent_content{
   display: none;
+}
+
+.checkbox_configs{
+  width: 17px;
+  height: 17px;
 }
 
 select.form-control:not([size]):not([multiple]){

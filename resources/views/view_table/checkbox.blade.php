@@ -1,4 +1,4 @@
-<form action="{{ asset('do-update/'.$field['map_document'].'/'.$data['id'].'') }}" method="POST" class="baseAjaxForm">
+<form action="{{ asset('do-update/'.$field['table_map'].'/'.$data['id'].'') }}" method="POST" class="baseAjaxForm">
 	@csrf
 	<div class="checkbox_module">
 		<input type="hidden" name="{{ $field['name'] }}" value = "{{ $data[$field['name']] }}">

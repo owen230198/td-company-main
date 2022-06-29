@@ -7,4 +7,4 @@
 		$value = isset($data[$name])?$data[$name]:''; 
 	}
 @endphp
-<input type="text" class="form-control" name="{{ $name }}" value="{{ $value }}" {{ @$field['required']&&$field['required']==1?'required':'' }}>
+<input type="text" class="form-control" name="{{ $name }}" value="{{ $value }}" {{ @$field['required']&&$field['required']==1?'required':'' }} {{ @$field['disable_field']&&$field['disable_field']==1?'disabled':'' }}>
