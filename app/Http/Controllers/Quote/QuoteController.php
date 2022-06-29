@@ -31,7 +31,7 @@ class QuoteController extends Controller
     {
         $quote = $this->quotes::find($quote_id);
         $tableItem = $this->adminService->getTableItem($table);
-        $data['data_item'] = $quote;
+        $data['dataitem'] = $quote;
         $data['tableItem'] = $tableItem;
         $data['title'] = getActionByKey($action).' '.$tableItem['note'].' ('.$quote['name'].')';
         $data['nosidebar'] = true;

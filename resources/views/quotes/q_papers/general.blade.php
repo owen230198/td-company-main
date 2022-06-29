@@ -1,6 +1,6 @@
 <div class="form-group d-flex align-items-center mb-4"> 
     <label class="base_label mr-2 mb-0 label_quotes">Tên sản phẩm báo giá</label>
-    <input class="form-control" type="text" name="name" value="" required>
+    <input class="form-control" type="text" name="name" value="{{ @$dataitem['name']?$dataitem['name']:'' }}" required>
   </div>
   <div class="form-group d-flex align-items-center mb-4">
     <label class="base_label mr-2 mb-0 label_quotes">Số lượng sản phẩm</label>

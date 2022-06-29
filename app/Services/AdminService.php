@@ -35,8 +35,8 @@ class AdminService extends BaseService
         $data['view_type'] = isset($data['tableItem']['view_type'])?$data['tableItem']['view_type']:'view';
         $data['field_searchs'] = $this->detail_tables->where('table_map', $table)->where('act', 1)->where('search', 1)->orderBy('ord', 'asc')->get();
         $data['title'] = $name.' '.$data['tableItem']['note'];
-        if ($data['view_type']=='config') {
-            $data['regions'] = $this->regions->getRegionOfConfig($table);   
+        if ($data['view_type']=='configs') {
+            $data['regions'] = $this->regions->getRegionOfConfig($table);
         }
         return $data;
     }

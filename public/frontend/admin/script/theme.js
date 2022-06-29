@@ -31,7 +31,7 @@ var responesive = function()
       $("#close").css("display" ,"none");
       $("#open").css("display" , "block");
       $("#set-width").removeClass("main__w");
-      $("#set-width-sd").css("width", "275px");
+      $("#set-width-sd").css("width", "200px");
       $("#set-width").removeClass("smooths");
       $("#set-width-sd").removeClass("smooths");
       $(".siderbar-menu__lnk").removeClass("margin-right");
@@ -45,7 +45,7 @@ var responesive = function()
         $(".siderbar-menu__list").on({
         mouseenter: function () {
           if ($(this).parents(".collapse-siderbar").length === 0) return; 
-          $("#set-width-sd").css("width", "275px");
+          $("#set-width-sd").css("width", "200px");
           $(".siderbar-menu__lnk").addClass("margin-right");
           $("#set-width").removeClass("smooths");
           $("#set-width-sd").removeClass("smooths");

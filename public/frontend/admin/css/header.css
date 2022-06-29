@@ -174,7 +174,7 @@
   position: fixed;
   left: 0;
   background: #000020;
-  width: 275px;
+  width: 250px;
   height: 100vh;
   z-index: 2;
   overflow: auto;
@@ -200,9 +200,8 @@
   transition: 0.3s all;
   text-decoration: none;
   font-size: 14px;
-  padding: 5px 0 5px 10px;
-  margin-left: 5px;
-  margin: 8px 0;
+  padding: 5px 0 5px 6px;
+  margin: 7px 0 7px 5px;
   text-align: center;
   position: relative;
   z-index: 1;
@@ -221,8 +220,8 @@
   content: "";
   background-color: #fff;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   top: 50%;
   left: 0px;
   -webkit-transform: translateY(-50%);
@@ -250,7 +249,7 @@
   max-width: 100%;
   -webkit-transition: 0.3s all;
   transition: 0.3s all;
-  padding-left: 300px;
+  padding-left: 255px;
 }
 
 .main-all .reponsive .main__w {
@@ -309,7 +308,7 @@
   top: 50%;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
-  padding: 0 0 0 45px;
+  padding: 0 0 0 30px;
   opacity: 1;
 }
 
@@ -343,7 +342,7 @@
   }
   .siderbar-menu {
     left: 0;
-    width: 275px;
+    width: 250px;
     z-index: 2;
     -webkit-transition: 0.3s all;
     transition: 0.3s all;

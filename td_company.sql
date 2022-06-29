@@ -11,7 +11,7 @@
  Target Server Version : 100424
  File Encoding         : 65001
 
- Date: 29/06/2022 17:44:48
+ Date: 29/06/2022 23:38:19
 */
 
 SET NAMES utf8mb4;
@@ -12118,27 +12118,6 @@ INSERT INTO `citys` VALUES (12078, 'Quận Bất động sản Mỹ', 12077, 1, 
 INSERT INTO `citys` VALUES (12079, 'Quận Bất động sản Úc', 12077, 1, 1, '2020-11-11 18:18:47', '2020-11-11 18:18:47');
 
 -- ----------------------------
--- Table structure for configs
--- ----------------------------
-DROP TABLE IF EXISTS `configs`;
-CREATE TABLE `configs`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `keyword` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `value` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
-  `act` tinyint(1) NULL DEFAULT 0,
-  `view_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `note` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `ord` int(10) NULL DEFAULT NULL COMMENT 'Sắp xếp',
-  `default_data` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
-  `required` tinyint(4) NULL DEFAULT NULL,
-  `region` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
-  `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
-  PRIMARY KEY (`id`, `keyword`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
 -- Table structure for customers
 -- ----------------------------
 DROP TABLE IF EXISTS `customers`;
@@ -13060,7 +13039,7 @@ CREATE TABLE `n_modules`  (
   `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of n_modules
@@ -13069,10 +13048,12 @@ INSERT INTO `n_modules` VALUES (1, 'p_quotes', NULL, 'Báo giá', 'javascript:vo
 INSERT INTO `n_modules` VALUES (2, 'customers', 'customers', 'Khách hàng', 'view/customers', 1, NULL, 1, 1, 0, '2022-06-21 14:45:35', '2022-06-21 14:45:35');
 INSERT INTO `n_modules` VALUES (3, 'quotes', 'quotes', 'Danh sách báo giá', 'view/quotes', 1, NULL, 1, 1, 0, '2022-06-21 14:58:39', '2022-06-21 14:58:39');
 INSERT INTO `n_modules` VALUES (4, 'configs', 'configs', 'Thông tin khác', 'view/configs', 1, NULL, 1, 1, 0, '2022-06-21 14:58:42', '2022-06-21 14:58:42');
-INSERT INTO `n_modules` VALUES (5, 'p_users', NULL, 'Tài khoản & phân quyền', 'javascript:void(0)', NULL, 'key', 1, 1, 0, '2022-06-22 14:59:41', '2022-06-22 14:59:41');
+INSERT INTO `n_modules` VALUES (5, 'p_users', NULL, 'Tài khoản & phân quyền', 'javascript:void(0)', NULL, 'key', 1, 1, 1, '2022-06-29 22:54:02', '2022-06-29 22:54:02');
 INSERT INTO `n_modules` VALUES (6, 'n_users', 'n_users', 'Ds Tài khoản', 'view/n_users', 5, NULL, 1, 1, 0, '2022-06-22 14:06:40', '2022-06-22 14:06:42');
 INSERT INTO `n_modules` VALUES (7, 'n_group_users', 'n_group_users', 'Nhóm quyền', 'view/n_group_users', 5, NULL, 1, 1, 0, '2022-06-22 14:07:39', '2022-06-22 14:07:43');
 INSERT INTO `n_modules` VALUES (8, 'n_roles', 'n_roles', 'Phân quyền', 'view/n_roles', 5, NULL, 1, 1, 0, '2022-06-22 14:07:39', '2022-06-22 14:07:43');
+INSERT INTO `n_modules` VALUES (9, 'p_configs', NULL, 'Đặt thông tin & chi phí', 'javascript:void(0)', NULL, 'credit-card', 1, 1, 0, '2022-06-29 23:01:53', '2022-06-29 23:01:53');
+INSERT INTO `n_modules` VALUES (10, 'q_configs', 'q_configs', 'Thông tin chung', 'view/q_configs', 9, NULL, 1, 1, 0, '2022-06-29 22:56:00', '2022-06-29 22:56:00');
 
 -- ----------------------------
 -- Table structure for n_regions
@@ -13112,7 +13093,7 @@ CREATE TABLE `n_roles`  (
   `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`role_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of n_roles
@@ -13123,6 +13104,7 @@ INSERT INTO `n_roles` VALUES (3, 4, 1, 1, 1, 1, 1, 1, '2022-06-22 14:16:24', '20
 INSERT INTO `n_roles` VALUES (4, 6, 1, 1, 1, 1, 1, 1, '2022-06-22 14:16:24', '2022-06-22 14:16:24');
 INSERT INTO `n_roles` VALUES (5, 7, 1, 1, 1, 1, 1, 1, '2022-06-22 14:16:24', '2022-06-22 14:16:24');
 INSERT INTO `n_roles` VALUES (6, 8, 1, 1, 1, 1, 1, 1, '2022-06-22 14:17:30', '2022-06-22 14:17:30');
+INSERT INTO `n_roles` VALUES (7, 10, 1, 1, 1, 1, 1, 1, '2022-06-22 14:17:30', '2022-06-22 14:17:30');
 
 -- ----------------------------
 -- Table structure for n_tables
@@ -13158,7 +13140,7 @@ INSERT INTO `n_tables` VALUES (1, 'n_users', 'NUser', 'Quản trị viên', 0, '
 INSERT INTO `n_tables` VALUES (2, 'n_group_users', 'NGroupUser', 'Nhóm quản trị', 0, 'n_group_uers', 'n_group_uers', 0, 10, 10, 'view', NULL, 1, 1, 1, 1, 0, '2022-06-23 17:21:37', '2022-06-23 17:21:37');
 INSERT INTO `n_tables` VALUES (3, 'n_roles', 'NRole', 'Phân quyền', 0, 'n_roles', 'n_roles', 0, 10, 10, 'view', NULL, 1, 1, 1, 1, 0, '2022-06-23 17:21:37', '2022-06-23 17:21:37');
 INSERT INTO `n_tables` VALUES (4, 'files', 'File', 'Kho Lưu trữ', 0, 'files', 'files', 0, 24, 10, 'media', NULL, 1, 1, 1, 1, 0, '2022-06-23 17:21:37', '2022-06-23 17:21:37');
-INSERT INTO `n_tables` VALUES (5, 'configs', 'Config', 'Cấu hình chung', 0, 'configs', 'configs', 0, 100, 10, 'config', NULL, 1, 1, 1, 1, 0, '2022-06-23 17:21:37', '2022-06-23 17:21:37');
+INSERT INTO `n_tables` VALUES (5, 'q_configs', 'QConfig', 'Thông tin chung & Giá thành', 0, 'q_configs', 'configs', 0, 100, 10, 'configs', NULL, 1, 1, 1, 1, 0, '2022-06-29 23:18:58', '2022-06-29 23:18:58');
 INSERT INTO `n_tables` VALUES (6, 'customers', 'Customer', 'Khách hàng', 0, 'customers', 'customers', 0, 10, 10, 'view', NULL, 1, 1, 1, 1, 0, '2022-06-29 13:41:09', '2022-06-29 13:41:09');
 INSERT INTO `n_tables` VALUES (7, 'quotes', 'Quote', 'Báo giá', 0, 'quotes', 'quotes', 0, 10, 10, 'view', 'quote_', 1, 1, 1, 1, 0, '2022-06-27 09:54:26', '2022-06-27 09:54:26');
 INSERT INTO `n_tables` VALUES (8, 'q_papers', 'QPaper', 'Tờ in', 0, 'quotes', 'q_papers', 0, 10, 10, 'view', '', 1, 1, 1, 1, 0, '2022-06-27 10:34:59', '2022-06-27 10:34:59');
@@ -13186,6 +13168,32 @@ CREATE TABLE `n_users`  (
 -- Records of n_users
 -- ----------------------------
 INSERT INTO `n_users` VALUES (1, 'dev', 'e10adc3949ba59abbe56e057f20f883e', 'Nguyen Duy Khanh', 'nguyenduykhanh2323@gmail.com', '0378050251', 'Lập trình viên', 1, 1, '2022-06-07 05:07:01', '2022-06-29 05:22:22');
+
+-- ----------------------------
+-- Table structure for q_configs
+-- ----------------------------
+DROP TABLE IF EXISTS `q_configs`;
+CREATE TABLE `q_configs`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `keyword` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `value` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `act` tinyint(1) NULL DEFAULT 0,
+  `view_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `note` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `ord` int(10) NULL DEFAULT NULL COMMENT 'Sắp xếp',
+  `default_data` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `required` tinyint(4) NULL DEFAULT NULL,
+  `region` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  PRIMARY KEY (`id`, `keyword`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of q_configs
+-- ----------------------------
+INSERT INTO `q_configs` VALUES (1, 'company_name', 'COMPANY_NAME', NULL, 1, 'text', 'Tên Công ty', 0, NULL, NULL, '1', '2022-06-29 23:35:59', '2022-06-29 23:36:01');
 
 -- ----------------------------
 -- Table structure for q_papers

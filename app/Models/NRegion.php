@@ -27,12 +27,8 @@ class NRegion extends Model
 
     public function getRegionOfConfig($table)
     {
-        $this->select('n_regions.id, n_regions.name');
-        $this->join(''.$table.' as config', 
-        'n_regions.id = config.region
-        AND config.act = 1');
-        $this->groupBy('n_regions.id');
-        $data = $this->get()->getResult('array');
+        $data = $this->select('n_regions.id', 'n_regions.name')->join($table, 'n_regions.id', '=', $table.'.region')
+        ->where($table.'.act', 1)->groupBy('n_regions.id')->get()->toArray();
         return $data;
     }
 }

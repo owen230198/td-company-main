@@ -60,19 +60,19 @@ class AdminController extends Controller
     public function update($table, $id)
     {
         $data = $this->getDataActionView($table, 'update', 'Cập nhật');
-        $data['data_item'] = getModelByTable($table)->find($id);
+        $data['dataitem'] = getModelByTable($table)->find($id);
         return view('action.view', $data);
     }
 
     public function clone($table, $id)
     {
         $data = $this->getDataActionView($table, 'clone', 'Sao chép');
-        $data['data_item'] = getModelByTable($table)->find($id);
-        if (@$data['data_item']['id']) {
-            unset($data['data_item']['id']);  
+        $data['dataitem'] = getModelByTable($table)->find($id);
+        if (@$data['dataitem']['id']) {
+            unset($data['dataitem']['id']);  
         }
-        if (@$data['data_item']['password']) {
-            unset($data['data_item']['password']);  
+        if (@$data['dataitem']['password']) {
+            unset($data['dataitem']['password']);  
         }
         return view('action.view', $data);
     }
