@@ -1,0 +1,19 @@
+@php
+  $list_devices = getDataTable('q_devices', 'id, name', array(
+    ['key'=>'act', 'compare'=>'=', 'value'=>1], 
+    ['key'=>'key_device', 'compare'=>'=', 'value'=>$key_device]), 0, 'ord', 'asc');
+  $list_devices = $list_devices!=null?$list_devices:array();
+@endphp
+<div class="d-flex align-items-center">
+  <label class="base_label mr-2 mb-0 label_quotes">Thiết bị</label>
+  <div class="d-flex align-items-center fs-15 mr-3 mb-md-0 mb-3">
+    <div class="form-group d-flex align-items-center mb-0">
+      <select class="form-control short_input" name="skin[device]">
+        <option value="0">Chọn thiết bị</option>
+        @foreach ($list_devices as $item)
+          <option value="{{ $item->id }}">{{ $item->name }}</option>
+        @endforeach
+      </select>
+    </div>
+  </div>
+</div> 

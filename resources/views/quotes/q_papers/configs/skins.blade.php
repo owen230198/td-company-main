@@ -10,13 +10,26 @@
 <div class="incredent_content mt-4">
   <div class="d-flex align-items-center mb-3">
     <label class="base_label mr-2 mb-0 label_quotes">Chất liệu</label>
-    <div class="d-flex align-items-center fs-15 mr-3 mb-md-0 mb-3">
-      <div class="form-group d-flex align-items-center mb-0">
-        <select class="form-control short_input" name="skin[materal]">
+    <div class="d-flex align-items-center fs-15 mr-3 mb-md-0 mb-3 group_select_other">
+      <div class="form-group d-flex align-items-center mb-0 ">
+        @php
+          $skin_materals = getDataTable('skin_materals', 'id, name', array(
+            ['key'=>'act', 'compare'=>'=', 'value'=>1]), 0, 'name', 'asc');
+          $skin_materals = $skin_materals!=null?$skin_materals:array();
+        @endphp
+        <select class="form-control short_input select_other" data-expland="other" name="skin[materal]">
           <option value="0">Chọn chất liệu</option>
-          <option>Màng bóng</option>
-          <option>Màng mờ</option>
+          @foreach ($skin_materals as $item)
+           <option value="{{ $item->id }}">{{ $item->name }}</option>
+          @endforeach
+          <option value="other">Chất liệu khác</option>
         </select>
+        <div class="input_add">
+          <div class="form-group d-flex align-items-center mb-0">
+            <span class="d-sm-flex font_bold mx-lg-3 mx-2">-</span>
+            <input class="form-control fs-15 short_input x_short_input" placeholder="Nhập chi phí" type="number" name="skin[materal_price]" value="" min="0" disabled>
+          </div>
+        </div>
       </div>
     </div>
   </div>   
@@ -32,16 +45,5 @@
       </div>
     </div>
   </div> 
-  <div class="d-flex align-items-center">
-    <label class="base_label mr-2 mb-0 label_quotes">Thiết bị</label>
-    <div class="d-flex align-items-center fs-15 mr-3 mb-md-0 mb-3">
-      <div class="form-group d-flex align-items-center mb-0">
-        <select class="form-control short_input" name="skin[device]">
-          <option value="0">Chọn thiết bị</option>
-          <option value="1">Tự động</option>
-          <option value="2">Bán tự động</option>
-        </select>
-      </div>
-    </div>
-  </div> 
+  @include('quotes.select_devices', ['key_device' => 'skin'])
 </div> 

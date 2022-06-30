@@ -64,10 +64,28 @@ var changQtyInput = function(){
     parent.find('input[name=qty_paper]').val(Math.ceil(ex_qty));
    });
 }
+
+var moduleSelectOther = function()
+{
+  $(document).on('change', 'select.select_other', function(event) {
+    event.preventDefault();
+    parent = $(this).closest('.group_select_other').find('.input_add');
+    if ($(this).val()==$(this).data('expland')) {
+      console.log(parent);
+      parent.fadeIn();
+      parent.find('input').prop('disabled', false);
+    }else{
+      parent.fadeOut();
+      parent.find('input').prop('disabled', true);
+    }
+  });
+}
+
 $(function(){
 	loadDataPopup();
 	// submitPopUpAction();
 	// selectConfigs();
 	changeActiveStage();
 	changQtyInput();
+  moduleSelectOther();
 });

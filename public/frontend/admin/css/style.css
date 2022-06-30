@@ -331,6 +331,9 @@ select.form-control:not([size]):not([multiple]),
   border: 1px solid #ff0000;
 }
 
+
+
+/*quote_style*/
 .iframe_action_view{
   height: calc(100vh - 100px)
 }
@@ -375,6 +378,10 @@ select.form-control:not([size]):not([multiple]),
 .checkbox_configs{
   width: 17px;
   height: 17px;
+}
+
+.input_add{
+  display: none;
 }
 
 select.form-control:not([size]):not([multiple]){
