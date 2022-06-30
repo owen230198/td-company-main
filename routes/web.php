@@ -34,10 +34,11 @@ Route::middleware(['checkLogin'])->group(function () {
 	Route::post('remove', [AdminController::class, 'remove']);
 	Route::post('multiple-remove', [AdminController::class, 'multipleRemove']);
 	Route::post('update-permissions/{module_id}/{role_id}', [AdminController::class, 'updatePermission']);
+	Route::post('do-config-data/{table}', [AdminController::class, 'doConfigData']);
 
 	//quotes routes
 
 	Route::get('quote-managements/{table}/{quote_id}', [QuoteController::class, 'quoteManagement']);
-	Route::get('action-detail-quotes/{action}/{table}/{quote_id}', [QuoteController::class, 'insertDetailQuote']);
-	Route::post('do-insert-detail', [QuoteController::class, 'doInsertDetail']);
+	Route::get('insert-detail-quotes/{table}/{quote_id}', [QuoteController::class, 'insertDetailQuote']);
+	Route::post('do-insert-detail/{table}/{quote_id}', [QuoteController::class, 'doInsertDetail']);
 });

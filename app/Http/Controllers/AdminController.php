@@ -36,7 +36,8 @@ class AdminController extends Controller
         $data = $this->service->getDataBaseView($table, 'Tìm kiếm');
         $data['data_tables'] = $this->service->getDataSearchTable($table, $get, $data['page_item']);
         $data['data_search'] = $get;
-        return view('table.'.$data['view_type'], $data);  
+        session()->put('back_url', url()->full());
+        return view('table.'.$data['view_type'], $data);
     }
 
     private function getDataActionView($table, $action, $action_name)
@@ -133,5 +134,22 @@ class AdminController extends Controller
             return back()->with('error','Đã có lỗi xảy ra !');
         }
     } 
+
+    public function doConfigData($table, Request $request)
+    {
+        $post = $request->all();
+        unset($post['_token']);
+        $success = false;
+        foreach ($post as $key => $value) {
+            $data['value'] = $value;  
+            $success = $this->db::table($table)->where('id', $key)->update($data);
+        }
+        if (isset($success)) {
+            echoJson(200, 'Cập nhật dữ liệu thành công!');
+            return;     
+        }else {
+            echoJson(100, 'Đã có lỗi xảy ra!');  
+        } 
+    }
 }
 

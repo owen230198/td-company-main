@@ -15,6 +15,7 @@ class Controller extends BaseController
 	{
 		$this->detail_tables = new \App\Models\NDetailTable;
 		$this->regions = new \App\Models\NRegion;
+		$this->db = new \Illuminate\Support\Facades\DB;
 	}
 }
 

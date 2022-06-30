@@ -4,16 +4,10 @@
   <div class="dashborad_content">
     <div class="form-decstop d-none d-lg-block">
       <div class="row align-items-center mb-24 align-items-center justify-content-between ">
-        <div class="col-12">
-           @include('table\form_search')
-        </div>
         <div class="col-12 text-right">
           <div class="d-flex align-center mb-2 justify-content-end">
             @if ($tableItem['insert'] == 1)
-            <button type="submit" class="station-richmenu-main-btn-area" form="form-search" value="submit">
-              <i class="fa fa-filter mr-2 fs-18" aria-hidden="true"></i>Tìm kiếm
-            </button>
-            <button type="button" class="station-richmenu-main-btn-area mx-2 load_view_popup" data-toggle="modal" data-target="#actionModal" data-src="action-detail-quotes/insert/q_papers/{{ $data_quotes['id'] }}">
+            <button type="button" class="station-richmenu-main-btn-area mx-2 load_view_popup" data-toggle="modal" data-target="#actionModal" data-src="insert-detail-quotes/q_papers/{{ $data_quotes['id'] }}">
               <i class="fa fa-plus mr-2 fs-18" aria-hidden="true"></i>Thêm mới
             </button>
             @endif

@@ -1,4 +1,21 @@
-<?php  
+<?php
+if(!function_exists('echoJson')){
+    function echoJson($code,$message){
+        $obj = new stdClass();
+        $obj->code= $code;
+        $obj->message= $message;
+        echo json_encode($obj);
+    }
+}  
+
+if(!function_exists('getDataConfigs')){
+    function getDataConfigs($classConfig, $keyword = ''){
+        $configs = getModelByClass($classConfig);
+        $data = $configs->where('keyword', $keyword)->first();
+        return $data!=null?$data['value']:'';       
+    }
+}
+
 if (! function_exists('getModelByClass')) {
     function getModelByClass($class)
     {
@@ -11,9 +28,9 @@ if (! function_exists('getModelByClass')) {
 if (! function_exists('getModelByTable')) {
     function getModelByTable($table)
     {
-    	$n_tables = new \App\Models\NTable;
-    	$class = $n_tables->select('model')->where('name', $table)->first();
-        $useObject = '\App\Models\\'.$class['model'];
+        $str = new \Illuminate\Support\Str;
+    	$class = $str::studly(Str::singular($table));
+        $useObject = '\App\Models\\'.$class;
         $models = new $useObject;
         return $models;
     }
@@ -101,5 +118,25 @@ if (!function_exists('getDataTable')) {
             $data = $table->orderBy($order, $order_by)->get();
         }
         return $data;
+    }
+}
+
+if (!function_exists('getValueWithPlusPercent')) {
+    function getValueWithPlusPercent($number = 0, $percent =0)
+    {
+        $add_percent = (int)$number*(int)$percent/100;
+        $total = $number + $add_percent;
+        return $total;
+    }
+}
+
+if (!function_exists('getServiceByTable')) {
+    function getServiceByTable($table)
+    {
+        $str = new \Illuminate\Support\Str;
+        $class = $str::studly(Str::singular($table));
+        $useObject = '\App\Services\\'.$class.'Service';
+        $object = new $useObject;
+        return $object;
     }
 }

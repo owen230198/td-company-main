@@ -57,6 +57,7 @@
   <script src="{{ asset('frontend/admin/tinymce/js/tinymce/tinymce.min.js') }}"></script>
   <script src="{{ asset('frontend/admin/tinymce/js/tinymce/init_tinymce.js') }}"></script>
   <script src="{{ asset('frontend/admin/script/theme.js') }}" defer></script>
+  <script src="{{ asset('frontend/admin/script/loading.js') }}" defer></script>
   <script src="{{ asset('frontend/admin/script/script.js') }}" defer></script>
   <script>
   @if(Session::has('message'))

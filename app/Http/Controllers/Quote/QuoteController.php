@@ -9,7 +9,6 @@ class QuoteController extends Controller
     {
         parent::__construct();
         $this->adminService = new \App\Services\AdminService;
-        // $this->service = new \App\Services\QuoteService;
         $this->quotes = new \App\Models\Quote;
     }
 
@@ -27,20 +26,25 @@ class QuoteController extends Controller
         return view('quotes/managements', $data);
     }
 
-    public function insertDetailQuote($action, $table, $quote_id)
+    public function insertDetailQuote($table, $quote_id)
     {
         $quote = $this->quotes::find($quote_id);
         $tableItem = $this->adminService->getTableItem($table);
         $data['dataitem'] = $quote;
         $data['tableItem'] = $tableItem;
-        $data['title'] = getActionByKey($action).' '.$tableItem['note'].' ('.$quote['name'].')';
+        $data['quote_id'] = $quote_id;
+        $data['action'] = 'insert';
+        $data['title'] = 'Thêm mới '.$tableItem['note'].' ('.$quote['name'].')';
         $data['nosidebar'] = true;
         return view('quotes.'.$table.'.view', $data);
     }
 
-    public function doInsertDetail()
+    public function doInsertDetail($table, $quote_id, Request $request)
     {
-        
+        $data = $request->all();
+        unset($data['_token']);
+        $object = getServiceByTable($table);
+        $stattus = $object->insert($data, $quote_id);
     }
 }
 

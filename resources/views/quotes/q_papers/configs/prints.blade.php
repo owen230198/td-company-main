@@ -3,7 +3,7 @@
     <i class="fa fa-print mr-2 fs-23" aria-hidden="true"></i>Kiểu in
   </label>
   <div class="checkbox_module">
-    <input type="hidden" name="" value = "0">
+    <input type="hidden" name="print[act]" value = "0">
     <input type="checkbox" class="toggle mx-auto change_active_stage"/>
   </div>   
 </div>
@@ -12,14 +12,11 @@
     <label class="base_label mr-2 mb-0 label_quotes">Màu in</label>
     <div class="d-flex align-items-center fs-15 mr-3 mb-md-0 mb-3">
       <div class="form-group d-flex align-items-center mb-0">
-        <select class="form-control short_input">
-          <option>Chọn số màu</option>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-          <option>6</option>
+        <select name="print[color]" class="form-control short_input">
+          <option value="0">Chọn số màu</option>
+          @for ($i = 1; $i <7 ; $i++)
+          <option value="{{ $i }}">{{ $i }}</option>
+          @endfor
         </select>
       </div>
     </div>
@@ -28,30 +25,24 @@
     <label class="base_label mr-2 mb-0 label_quotes">Kiểu in</label>
     <div class="d-flex align-items-center fs-15 mr-3 mb-md-0 mb-3">
       <div class="form-group d-flex align-items-center mb-0">
-        <select class="form-control short_input">
-          <option>Chọn kiểu in</option>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-          <option>6</option>
+        <select class="form-control short_input" name="print[style]">
+          <option value="0">Chọn kiểu in</option>
+          <option value="1">In một mặt</option>
+          <option value="2">Nó trở nó</option>
+          <option value="3">Nó trở lật</option>
+          <option value="4">Nó trở khác</option>
         </select>
       </div>
     </div>
   </div>
   <div class="d-flex align-items-center">
-    <label class="base_label mr-2 mb-0 label_quotes">Công nghệ</label>
+    <label class="base_label mr-2 mb-0 label_quotes">Thiết bị</label>
     <div class="d-flex align-items-center fs-15 mr-3 mb-md-0 mb-3">
       <div class="form-group d-flex align-items-center mb-0">
-        <select class="form-control short_input">
-          <option>Chọn công nghệ</option>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-          <option>6</option>
+        <select class="form-control short_input" name="print[device]">
+          <option value="0">Chọn thiết bị</option>
+          <option value="1">In offset</option>
+          <option value="2">In UV</option>
         </select>
       </div>
     </div>

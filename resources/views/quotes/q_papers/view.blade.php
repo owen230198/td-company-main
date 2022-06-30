@@ -1,6 +1,6 @@
 @extends('index')
 @section('content')
-<form action="do-insert-detail" method="POST" class="popupActionForm p-3 pb-5">
+<form action="do-{{ $action }}-detail/{{ $tableItem['name'] }}/{{ $quote_id }}" method="POST" class="popupActionForm formActionS p-3 pb-5">
   @csrf
   <div class="modal-header mb-4 p-0 pb-2">
     <h3 class="modal-title fs-17 font_bold text-capitalize" id="exampleModalLongTitle">{{ @$title?$title:'' }}</h3>

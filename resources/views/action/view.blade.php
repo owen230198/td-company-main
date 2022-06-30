@@ -2,7 +2,7 @@
 @section('content')
   {!! getBreadcrumb($tableItem['name'], 0, $action_name.' '.$tableItem['note']) !!}
   <div class="dashborad_content pt-3 position-relative">
-    <form action="do-{{ $action.'/'.$tableItem['name'] }}{{ @$dataitem['id']?'/'.$dataitem['id']:'' }}" method="POST" class="adminAjaxForm" enctype="multipart/form-data" data-table-name="{{ @$data_table_name?$data_table_name:$tableItem['name'] }}">
+    <form action="do-{{ $action.'/'.$tableItem['name'] }}{{ @$dataitem['id']?'/'.$dataitem['id']:'' }}" method="POST" class="actionForm" enctype="multipart/form-data" data-table-name="{{ @$data_table_name?$data_table_name:$tableItem['name'] }}">
       @csrf
       <ul class="nav nav-tabs" id="myTab" role="tablist">
         @foreach ($regions as $key => $region)

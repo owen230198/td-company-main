@@ -3,7 +3,7 @@
     <i class="fa fa-eercast mr-2 fs-23" aria-hidden="true"></i>Cán láng
   </label>
   <div class="checkbox_module">
-    <input type="hidden" name="" value = "0">
+    <input type="hidden" name="skin[act]" value = "0">
     <input type="checkbox" class="toggle mx-auto change_active_stage"/>
   </div>   
 </div>
@@ -12,10 +12,10 @@
     <label class="base_label mr-2 mb-0 label_quotes">Chất liệu</label>
     <div class="d-flex align-items-center fs-15 mr-3 mb-md-0 mb-3">
       <div class="form-group d-flex align-items-center mb-0">
-        <select class="form-control short_input">
-          <option>Chọn chất liệu</option>
-          <option>1</option>
-          <option>2</option>
+        <select class="form-control short_input" name="skin[materal]">
+          <option value="0">Chọn chất liệu</option>
+          <option>Màng bóng</option>
+          <option>Màng mờ</option>
         </select>
       </div>
     </div>
@@ -24,10 +24,10 @@
     <label class="base_label mr-2 mb-0 label_quotes">Số mặt</label>
     <div class="d-flex align-items-center fs-15 mr-3 mb-md-0 mb-3">
       <div class="form-group d-flex align-items-center mb-0">
-        <select class="form-control short_input">
-          <option>Chọn số mặt</option>
-          <option>1</option>
-          <option>2</option>
+        <select class="form-control short_input" name="skin[num_face]">
+          <option value="0">Chọn số mặt</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
         </select>
       </div>
     </div>
@@ -36,10 +36,10 @@
     <label class="base_label mr-2 mb-0 label_quotes">Thiết bị</label>
     <div class="d-flex align-items-center fs-15 mr-3 mb-md-0 mb-3">
       <div class="form-group d-flex align-items-center mb-0">
-        <select class="form-control short_input">
-          <option>Chọn thiết bị</option>
-          <option>1</option>
-          <option>2</option>
+        <select class="form-control short_input" name="skin[device]">
+          <option value="0">Chọn thiết bị</option>
+          <option value="1">Tự động</option>
+          <option value="2">Bán tự động</option>
         </select>
       </div>
     </div>

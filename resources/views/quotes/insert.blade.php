@@ -1,7 +1,7 @@
 @extends('index')
 @section('content')
 <div class="dashborad_content pt-3 position-relative">
-  <form action="{{ asset('do-action-table-'.$action.'/'.'orders') }}{{ @$dataitem['id']?'/'.$dataitem['id']:'' }}" method="POST" class="adminAjaxForm" enctype="multipart/form-data" data-table-name="{{ $tableItem['name'] }}">
+  <form action="{{ asset('do-action-table-'.$action.'/'.'orders') }}{{ @$dataitem['id']?'/'.$dataitem['id']:'' }}" method="POST" class="insertQuoteForm" enctype="multipart/form-data" data-table-name="{{ $tableItem['name'] }}">
     @csrf
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item">
