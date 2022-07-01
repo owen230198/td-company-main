@@ -4,7 +4,7 @@
     <label class="base_label mr-2 mb-0 label_quotes">Màu in</label>
     <div class="d-flex align-items-center fs-15 mr-3 mb-md-0 mb-3">
       <div class="form-group d-flex align-items-center mb-0">
-        <select name="print[color]" class="form-control short_input">
+        <select name="print[color_num]" class="form-control short_input">
           <option value="0">Chọn số màu</option>
           @for ($i = 1; $i <7 ; $i++)
           <option value="{{ $i }}">{{ $i }}</option>

@@ -11,7 +11,7 @@
  Target Server Version : 100424
  File Encoding         : 65001
 
- Date: 30/06/2022 23:35:22
+ Date: 01/07/2022 18:36:17
 */
 
 SET NAMES utf8mb4;
@@ -13032,11 +13032,19 @@ INSERT INTO `n_detail_tables` VALUES (61, 'act', 0, 'Kích hoạt', 'checkbox', 
 INSERT INTO `n_detail_tables` VALUES (62, 'updated_at', 0, 'Sửa', 'date_time', 'q_devices', 1, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-06-30 23:13:24', '2022-06-30 23:13:24');
 INSERT INTO `n_detail_tables` VALUES (63, 'id', 0, 'ID', 'text', 'q_laminate_materals', 0, NULL, 0, 0, NULL, NULL, 0, 0, 0, '2022-06-30 23:21:35', '2022-06-30 23:21:35');
 INSERT INTO `n_detail_tables` VALUES (64, 'name', 0, 'Chất liệu', 'text', 'q_laminate_materals', 1, 1, 1, 1, NULL, NULL, 1, 1, 1, '2022-06-30 23:21:35', '2022-06-30 23:21:35');
-INSERT INTO `n_detail_tables` VALUES (65, 'type', 0, 'Nhóm chất liệu', 'select', 'q_laminate_materals', 1, 1, 1, 1, NULL, '{\r\n \"data\": {\r\n   \"table\": null,\r\n    \"option\":{\r\n		\"skin\":\"Cán láng\",\r\n    \"metalai\":\"Metalai\",\r\n		\"cover\":\"Chất liệu phủ trên\"\r\n   }\r\n },\r\n \"config\": {\r\n  \"searchbox\": 0\r\n }\r\n}', 1, 1, 1, '2022-06-30 23:30:02', '2022-06-30 23:30:02');
+INSERT INTO `n_detail_tables` VALUES (65, 'laminate_key', 0, 'Nhóm chất liệu', 'select', 'q_laminate_materals', 1, 1, 1, 1, NULL, '{\r\n \"data\": {\r\n   \"table\": null,\r\n    \"option\":{\r\n		\"skin\":\"Cán láng\",\r\n    \"metalai\":\"Metalai\",\r\n		\"cover\":\"Chất liệu phủ trên\"\r\n   }\r\n },\r\n \"config\": {\r\n  \"searchbox\": 0\r\n }\r\n}', 1, 1, 1, '2022-07-01 12:40:59', '2022-07-01 12:40:59');
 INSERT INTO `n_detail_tables` VALUES (66, 'price', 0, 'Chi phí', 'text', 'q_laminate_materals', 1, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-06-30 23:21:35', '2022-06-30 23:21:35');
 INSERT INTO `n_detail_tables` VALUES (67, 'note', 0, 'Ghi chú', 'textarea', 'q_laminate_materals', 0, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-06-30 23:21:35', '2022-06-30 23:21:35');
 INSERT INTO `n_detail_tables` VALUES (68, 'act', 0, 'Kích hoạt', 'checkbox', 'q_laminate_materals', 1, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-06-30 23:21:35', '2022-06-30 23:21:35');
 INSERT INTO `n_detail_tables` VALUES (69, 'updated_at', 0, 'Sửa', 'date_time', 'q_laminate_materals', 1, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-06-30 23:21:35', '2022-06-30 23:21:35');
+INSERT INTO `n_detail_tables` VALUES (70, 'id', 0, 'ID', 'text', 'q_printer_devices', 0, NULL, 0, 0, NULL, NULL, 0, 0, 0, '2022-07-01 18:12:07', '2022-07-01 18:12:07');
+INSERT INTO `n_detail_tables` VALUES (71, 'name', 0, 'Tên máy in', 'text', 'q_printer_devices', 1, 1, 1, 1, NULL, NULL, 1, 1, 1, '2022-07-01 18:12:07', '2022-07-01 18:12:07');
+INSERT INTO `n_detail_tables` VALUES (72, 'model_price', 0, 'Chi phí khuôn mẫu', 'text', 'q_printer_devices', 1, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-07-01 18:12:07', '2022-07-01 18:12:07');
+INSERT INTO `n_detail_tables` VALUES (73, 'work_price', 0, 'ĐG lượt', 'text', 'q_printer_devices', 1, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-07-01 18:12:07', '2022-07-01 18:12:07');
+INSERT INTO `n_detail_tables` VALUES (74, 'shape_price', 0, 'ĐG lên khuôn', 'text', 'q_printer_devices', 1, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-07-01 18:12:07', '2022-07-01 18:12:07');
+INSERT INTO `n_detail_tables` VALUES (75, 'note', 0, 'Ghi chú', 'textarea', 'q_printer_devices', 0, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-07-01 18:12:07', '2022-07-01 18:12:07');
+INSERT INTO `n_detail_tables` VALUES (76, 'act', 0, 'Kích hoạt', 'checkbox', 'q_printer_devices', 1, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-07-01 18:12:07', '2022-07-01 18:12:07');
+INSERT INTO `n_detail_tables` VALUES (77, 'updated_at', 0, 'Sửa', 'date_time', 'q_printer_devices', 1, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-07-01 18:12:07', '2022-07-01 18:12:07');
 
 -- ----------------------------
 -- Table structure for n_group_users
@@ -13093,6 +13101,7 @@ INSERT INTO `n_modules` VALUES (9, 'p_configs', NULL, 'Đặt thông tin & chi p
 INSERT INTO `n_modules` VALUES (10, 'q_configs', 'q_configs', 'Thông tin chung', 'view/q_configs', 9, NULL, 1, 1, 0, '2022-06-29 22:56:00', '2022-06-29 22:56:00');
 INSERT INTO `n_modules` VALUES (11, 'q_papers', 'q_papers', 'Tờ in', 'view/q_papers', 3, NULL, 0, 1, 0, '2022-06-30 16:41:30', '2022-06-30 16:41:30');
 INSERT INTO `n_modules` VALUES (12, 'q_devices', 'q_devices', 'Đơn giá thiết bị', 'view/q_devices', 9, NULL, 1, 1, 0, '2022-06-30 22:28:05', '2022-06-30 22:28:05');
+INSERT INTO `n_modules` VALUES (13, 'q_printer_devices', 'q_printer_devices', 'DS máy in & ĐG', 'view/q_printer_devices', 9, NULL, 1, 1, 0, '2022-06-30 23:31:34', '2022-06-30 23:31:34');
 INSERT INTO `n_modules` VALUES (14, 'q_laminate_materals', 'q_laminate_materals', 'Chất liệu cán màng', 'view/q_laminate_materals', 9, NULL, 1, 1, 0, '2022-06-30 23:31:34', '2022-06-30 23:31:34');
 
 -- ----------------------------
@@ -13148,7 +13157,8 @@ INSERT INTO `n_roles` VALUES (6, 8, 1, 1, 1, 1, 1, 1, '2022-06-22 14:17:30', '20
 INSERT INTO `n_roles` VALUES (7, 10, 1, 1, 1, 1, 1, 1, '2022-06-22 14:17:30', '2022-06-22 14:17:30');
 INSERT INTO `n_roles` VALUES (8, 11, 1, 1, 1, 1, 1, 1, '2022-06-22 14:17:30', '2022-06-22 14:17:30');
 INSERT INTO `n_roles` VALUES (9, 12, 1, 1, 1, 1, 1, 1, '2022-06-22 14:17:30', '2022-06-22 14:17:30');
-INSERT INTO `n_roles` VALUES (10, 14, 1, 1, 1, 1, 1, 1, '2022-06-30 22:28:23', '2022-06-30 22:28:23');
+INSERT INTO `n_roles` VALUES (10, 13, 1, 1, 1, 1, 1, 1, '2022-07-01 18:14:22', '2022-07-01 18:14:22');
+INSERT INTO `n_roles` VALUES (11, 14, 1, 1, 1, 1, 1, 1, '2022-07-01 18:14:22', '2022-07-01 18:14:22');
 
 -- ----------------------------
 -- Table structure for n_tables
@@ -13189,6 +13199,7 @@ INSERT INTO `n_tables` VALUES (7, 'quotes', 'Báo giá', 0, 'quotes', 'quotes', 
 INSERT INTO `n_tables` VALUES (8, 'q_papers', 'Tờ in', 0, 'q_papers', 'q_papers', 0, 10, 10, 'view', '', 1, 1, 1, 1, 0, '2022-06-30 10:03:47', '2022-06-30 10:03:47');
 INSERT INTO `n_tables` VALUES (9, 'q_devices', 'Thiết bị & Chi phí', 0, 'q_devices', 'q_devices', 0, 10, 10, 'view', '', 1, 1, 1, 1, 0, '2022-06-30 10:03:47', '2022-06-30 10:03:47');
 INSERT INTO `n_tables` VALUES (10, 'q_laminate_materals', 'Chất liệu cán màng', 0, 'q_laminate_materals', 'q_laminate_materals', 0, 10, 10, 'view', '', 1, 1, 1, 1, 0, '2022-06-30 23:23:21', '2022-06-30 23:23:21');
+INSERT INTO `n_tables` VALUES (11, 'q_printer_devices', 'Máy in & chi phí', 0, 'q_printer_devices', 'q_printer_devices', 0, 10, 10, 'view', '', 1, 1, 1, 1, 0, '2022-06-30 23:23:21', '2022-06-30 23:23:21');
 
 -- ----------------------------
 -- Table structure for n_users
@@ -13233,7 +13244,7 @@ CREATE TABLE `q_configs`  (
   `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`, `keyword`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of q_configs
@@ -13241,6 +13252,7 @@ CREATE TABLE `q_configs`  (
 INSERT INTO `q_configs` VALUES (1, 'company_name', 'COMPANY_NAME', NULL, 1, 'text', 'Tên Công ty', 0, NULL, NULL, '1', '2022-06-29 23:35:59', '2022-06-29 23:36:01');
 INSERT INTO `q_configs` VALUES (2, 'plus_paper', 'PLUS_PAPER', '100', 1, 'text', 'Tờ in cộng thêm', 0, NULL, NULL, '11', '2022-06-30 09:46:55', '2022-06-30 09:46:55');
 INSERT INTO `q_configs` VALUES (3, 'plus_percent', 'PLUS_PERCENT', '2', 1, 'text', 'Số lượng bù hao(%)', 0, NULL, NULL, '11', '2022-06-30 09:44:11', '2022-06-30 09:44:11');
+INSERT INTO `q_configs` VALUES (4, 'min_valid_paper', 'MIN_VALID_PAPER', '1000', 1, 'text', 'Số tờ in tối thiểu tính giá máy in', 0, NULL, NULL, '11', '2022-07-01 18:23:36', '2022-07-01 18:23:36');
 
 -- ----------------------------
 -- Table structure for q_devices
@@ -13287,11 +13299,11 @@ CREATE TABLE `q_laminate_materals`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Mã nhóm',
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Tên nhóm',
   `price` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Cha',
+  `laminate_key` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Cha',
   `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Ghi chú',
   `act` tinyint(4) NULL DEFAULT NULL,
-  `created_at` datetime(0) NULL ON UPDATE CURRENT_TIMESTAMP(0),
-  `updated_at` datetime(0) NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
@@ -13342,6 +13354,42 @@ CREATE TABLE `q_papers`  (
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for q_printer_devices
+-- ----------------------------
+DROP TABLE IF EXISTS `q_printer_devices`;
+CREATE TABLE `q_printer_devices`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Mã nhóm',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Tên nhóm',
+  `print_length` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `print_width` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `model_price` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `work_price` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT '0',
+  `shape_price` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT '0',
+  `note` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Ghi chú',
+  `act` tinyint(4) NULL DEFAULT NULL,
+  `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `device` tinyint(4) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of q_printer_devices
+-- ----------------------------
+INSERT INTO `q_printer_devices` VALUES (1, 'Máy in offset 36x52', '36', '52', '55000', '30', '100000', '', 1, '2022-07-01 11:15:54', '2022-07-01 11:15:54', 1);
+INSERT INTO `q_printer_devices` VALUES (2, 'Máy in offset 47x65', '47', '65', '55000', '32', '100000', '', 1, '2022-07-01 11:15:53', '2022-07-01 11:15:53', 1);
+INSERT INTO `q_printer_devices` VALUES (3, 'Máy in offset 52x72', '52', '72', '60000', '35', '120000', '', 1, '2022-07-01 11:15:49', '2022-07-01 11:15:49', 1);
+INSERT INTO `q_printer_devices` VALUES (4, 'Máy in offset 54x79', '54', '79', '67000', '45', '150000', '', 1, '2022-07-01 11:15:47', '2022-07-01 11:15:47', 1);
+INSERT INTO `q_printer_devices` VALUES (5, 'Máy in offset 72x102', '72', '102', '105000', '80', '220000', '', 1, '2022-07-01 11:15:46', '2022-07-01 11:15:46', 1);
+INSERT INTO `q_printer_devices` VALUES (6, 'Máy in offset 79x109', '79', '109', '125000', '120', '350000', '', 1, '2022-07-01 11:15:45', '2022-07-01 11:15:45', 1);
+INSERT INTO `q_printer_devices` VALUES (7, 'Máy in uv 36x52', '36', '52', '60000', '150', '250000', '', 1, '2022-07-01 11:15:44', '2022-07-01 11:15:44', 2);
+INSERT INTO `q_printer_devices` VALUES (8, 'Máy in uv 47x65', '47', '65', '60000', '150', '250000', '', 1, '2022-07-01 11:15:43', '2022-07-01 11:15:43', 2);
+INSERT INTO `q_printer_devices` VALUES (9, 'Máy in uv 52x72', '52', '72', '60000', '200', '250000', '', 1, '2022-07-01 11:15:42', '2022-07-01 11:15:42', 2);
+INSERT INTO `q_printer_devices` VALUES (10, 'Máy in uv 54x79', '54', '79', '80000', '250', '300000', '', 1, '2022-07-01 11:15:41', '2022-07-01 11:15:41', 2);
+INSERT INTO `q_printer_devices` VALUES (11, 'Máy in uv 72x102', '72', '102', '115000', '500', '500000', '', 1, '2022-07-01 11:15:40', '2022-07-01 11:15:40', 2);
+INSERT INTO `q_printer_devices` VALUES (12, 'Máy in uv 79x109', '79', '109', '150000', '600', '800000', NULL, 1, '2022-07-01 11:17:02', '2022-07-01 11:17:02', 2);
 
 -- ----------------------------
 -- Table structure for quotes

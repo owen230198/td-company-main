@@ -20,3 +20,16 @@ if (!function_exists('getLaminateMateralByKey')) {
 	    return $materals;
 	}
 }
+
+if (!function_exists('getPriterDevice')) {
+	function getPriterDevice($length, $width, $device)
+	{
+		$ex_length = $length*100;
+        $ex_width = $width*100;
+        $printers  = new \App\Models\QPrinterDevice;
+        $printer = $printers->where('device', $device)
+        ->where('print_length', '>=', $ex_length)
+        ->where('print_width','>=', $ex_width)->orderBy('print_length', 'asc')->first()->toArray();
+        return $printer;
+	}
+}
