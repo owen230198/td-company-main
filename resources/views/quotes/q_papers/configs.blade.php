@@ -13,7 +13,7 @@
       <div class="incredent_items p-3 bg_grey radius_5 mb-4">
         @include('quotes.q_papers.configs.compresses')     
       </div>
-      <div class="incredent_items p-3 bg_grey radius_5 mb-4">
+      <div class="incredent_items p-3 bg_grey radius_5">
         @include('quotes.q_papers.configs.uv_prints')     
       </div>
     </div>
@@ -27,7 +27,7 @@
       <div class="incredent_items p-3 bg_grey radius_5 mb-4">
         @include('quotes.q_papers.configs.pastes')     
       </div>
-      <div class="incredent_items p-3 bg_grey radius_5 mb-4">
+      <div class="incredent_items p-3 bg_grey radius_5">
         @include('quotes.q_papers.configs.plus_prices')     
       </div> 
     </div>

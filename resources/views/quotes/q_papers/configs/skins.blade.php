@@ -1,25 +1,12 @@
-<div class="incredent_header d-flex align-item-centers">
-  <label class="base_label mr-2 mb-0 label_quotes fs-16 font_bold d-flex align-item-centers text-uppercase">
-    <i class="fa fa-eercast mr-2 fs-23" aria-hidden="true"></i>Cán láng
-  </label>
-  <div class="checkbox_module">
-    <input type="hidden" name="skin[act]" value = "0">
-    <input type="checkbox" class="toggle mx-auto change_active_stage"/>
-  </div>   
-</div>
+@include('quotes.q_papers.active_view', ['icon'=>'eercast', 'note'=>'Cán láng', 'key_act'=>'skin'])
 <div class="incredent_content mt-4">
   <div class="d-flex align-items-center mb-3">
     <label class="base_label mr-2 mb-0 label_quotes">Chất liệu</label>
     <div class="d-flex align-items-center fs-15 mr-3 mb-md-0 mb-3 group_select_other">
       <div class="form-group d-flex align-items-center mb-0 ">
-        @php
-          $skin_materals = getDataTable('skin_materals', 'id, name', array(
-            ['key'=>'act', 'compare'=>'=', 'value'=>1]), 0, 'name', 'asc');
-          $skin_materals = $skin_materals!=null?$skin_materals:array();
-        @endphp
         <select class="form-control short_input select_other" data-expland="other" name="skin[materal]">
           <option value="0">Chọn chất liệu</option>
-          @foreach ($skin_materals as $item)
+          @foreach (getgetLaminateMateralByKey('skin') as $item)
            <option value="{{ $item->id }}">{{ $item->name }}</option>
           @endforeach
           <option value="other">Chất liệu khác</option>

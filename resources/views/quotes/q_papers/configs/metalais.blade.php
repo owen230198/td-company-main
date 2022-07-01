@@ -1,12 +1,4 @@
-<div class="incredent_header d-flex align-item-centers">
-  <label class="base_label mr-2 mb-0 label_quotes fs-16 font_bold d-flex align-item-centers text-uppercase">
-    <i class="fa fa-ravelry mr-2 fs-23" aria-hidden="true"></i>Cán metalai
-  </label>
-  <div class="checkbox_module">
-    <input type="hidden" name="metalai[act]" value = "0">
-    <input type="checkbox" class="toggle mx-auto change_active_stage"/>
-  </div>   
-</div>
+@include('quotes.q_papers.active_view', ['icon'=>'ravelry', 'note'=>'Cán metalai', 'key_act'=>'metalai'])
 <div class="incredent_content mt-4">
   <div class="d-flex align-items-center mb-3">
     <label class="base_label mr-2 mb-0 label_quotes">Chất liệu cán</label>
@@ -14,8 +6,9 @@
       <div class="form-group d-flex align-items-center mb-0">
         <select class="form-control short_input select_other" name="metalai[materal]" data-expland="other">
           <option value="0">Chọn chất liệu</option>
-          <option value="">Màng bạc</option>
-          <option value="">Màng vàng</option>
+          @foreach (getgetLaminateMateralByKey('metalai') as $item)
+          <option value="{{ $item->id }}">{{ $item->name }}</option>
+          @endforeach
           <option value="other">Chất liệu khác</option>
         </select>
         <div class="input_add">
@@ -45,8 +38,9 @@
       <div class="form-group d-flex align-items-center mb-0">
         <select class="form-control short_input select_other" name="metalai[cover_materal]" data-expland="other">
           <option value="0">Chọn chất liệu</option>
-          <option value="">Màng bạc</option>
-          <option value="">Màng vàng</option>
+          @foreach (getgetLaminateMateralByKey('cover') as $item)
+          <option value="{{ $item->id }}">{{ $item->name }}</option>
+          @endforeach
           <option value="other">Chất liệu khác</option>
         </select>
         <div class="input_add">

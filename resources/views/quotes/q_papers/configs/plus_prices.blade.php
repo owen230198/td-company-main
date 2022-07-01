@@ -1,12 +1,4 @@
-<div class="incredent_header d-flex align-item-centers">
-  <label class="base_label mr-2 mb-0 label_quotes fs-16 font_bold d-flex align-item-centers text-uppercase">
-    <i class="fa fa-plus-square mr-2 fs-23" aria-hidden="true"></i>Phí phát sinh
-  </label>
-  <div class="checkbox_module">
-    <input type="hidden" name="plus[act]" value = "0">
-    <input type="checkbox" class="toggle mx-auto change_active_stage"/>
-  </div>   
-</div>
+@include('quotes.q_papers.active_view', ['icon'=>'plus-square', 'note'=>'Phát sinh', 'key_act'=>'plus'])
 <div class="incredent_content mt-4">
   <div class="d-flex align-items-center mb-3">
     <label class="base_label mr-2 mb-0 label_quotes">Chi phí phát sinh/SP:</label>

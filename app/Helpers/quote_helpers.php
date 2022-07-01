@@ -9,3 +9,14 @@ if (!function_exists('getExactQuantityPaper')) {
 		return ceil($ext);
 	}
 }
+
+if (!function_exists('getLaminateMateralByKey')) {
+	function getgetLaminateMateralByKey($key){
+		$materals = getDataTable('q_laminate_materals', 'id, name', array(
+	                                      ['key'=>'act', 'compare'=>'=', 'value'=>1],
+	                                      ['key'=>'laminate_key', 'compare'=>'=', 'value'=>$key]
+	                                      ), 0, 'name', 'asc');
+	    $materals = $materals!=null?$materals:array();
+	    return $materals;
+	}
+}

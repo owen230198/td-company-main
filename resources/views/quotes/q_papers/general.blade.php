@@ -44,11 +44,11 @@
   <label class="base_label mr-2 mb-0 label_quotes">Định lượng & Đơn giá</label>
   <div class="d-flex align-items-center fs-15 mr-3 mb-md-0 mb-3">
     <div class="form-group d-flex align-items-center mb-0">
-      <input class="form-control fs-15 short_input" placeholder="Nhập ĐL giấy" type="number" name="paper_size[quantitative]" value="" min="0" required>
+      <input class="form-control fs-15 short_input" placeholder="Nhập ĐL giấy" type="number" name="paper_size[quantitative]" value="" min="0" required step="any">
       <span class="d-sm-flex font_bold mx-lg-3 mx-2">-</span>
     </div>
     <div class="form-group d-flex align-items-center mb-0">
-      <input class="form-control fs-15 short_input" placeholder="Nhập ĐG tấn" type="number" name="paper_size[unit_price]" value="" min="0" required>
+      <input class="form-control fs-15 short_input" placeholder="Nhập ĐG tấn" type="number" name="paper_size[unit_price]" value="" min="0" required step="any">
     </div>
   </div>
 </div>
@@ -63,7 +63,7 @@
     <div class="input_add">
       <div class="form-group d-flex align-items-center mb-0">
         <span class="d-sm-flex font_bold mx-lg-3 mx-2">-</span>
-        <input class="form-control fs-15 short_input x_short_input" placeholder="Nhập Giá TK" type="number" name="design_model[price]" value="" min="0" disabled>
+        <input class="form-control fs-15 short_input x_short_input" placeholder="Nhập Giá TK" type="number" name="design_model[price]" value="" min="0" disabled step="any">
       </div>
     </div>
   </div>

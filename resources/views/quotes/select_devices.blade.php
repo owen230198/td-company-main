@@ -8,7 +8,7 @@
   <label class="base_label mr-2 mb-0 label_quotes">Thiết bị</label>
   <div class="d-flex align-items-center fs-15 mr-3 mb-md-0 mb-3">
     <div class="form-group d-flex align-items-center mb-0">
-      <select class="form-control short_input" name="skin[device]">
+      <select class="form-control short_input" name="{{ $key_device }}[device]">
         <option value="0">Chọn thiết bị</option>
         @foreach ($list_devices as $item)
           <option value="{{ $item->id }}">{{ $item->name }}</option>
