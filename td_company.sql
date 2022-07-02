@@ -11,7 +11,7 @@
  Target Server Version : 100424
  File Encoding         : 65001
 
- Date: 01/07/2022 18:36:17
+ Date: 02/07/2022 11:28:54
 */
 
 SET NAMES utf8mb4;
@@ -13143,7 +13143,7 @@ CREATE TABLE `n_roles`  (
   `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`role_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of n_roles
@@ -13244,7 +13244,7 @@ CREATE TABLE `q_configs`  (
   `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`, `keyword`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of q_configs
@@ -13253,6 +13253,7 @@ INSERT INTO `q_configs` VALUES (1, 'company_name', 'COMPANY_NAME', NULL, 1, 'tex
 INSERT INTO `q_configs` VALUES (2, 'plus_paper', 'PLUS_PAPER', '100', 1, 'text', 'Tờ in cộng thêm', 0, NULL, NULL, '11', '2022-06-30 09:46:55', '2022-06-30 09:46:55');
 INSERT INTO `q_configs` VALUES (3, 'plus_percent', 'PLUS_PERCENT', '2', 1, 'text', 'Số lượng bù hao(%)', 0, NULL, NULL, '11', '2022-06-30 09:44:11', '2022-06-30 09:44:11');
 INSERT INTO `q_configs` VALUES (4, 'min_valid_paper', 'MIN_VALID_PAPER', '1000', 1, 'text', 'Số tờ in tối thiểu tính giá máy in', 0, NULL, NULL, '11', '2022-07-01 18:23:36', '2022-07-01 18:23:36');
+INSERT INTO `q_configs` VALUES (5, 'plus_paper_device', 'PLUS_PAPER_DEVICE', '30', 1, 'text', 'Số tờ in thiết bị cộng thêm', 0, NULL, NULL, '11', '2022-07-01 18:23:36', '2022-07-01 18:23:36');
 
 -- ----------------------------
 -- Table structure for q_devices

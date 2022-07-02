@@ -13,9 +13,9 @@ if (!function_exists('getExactQuantityPaper')) {
 if (!function_exists('getLaminateMateralByKey')) {
 	function getgetLaminateMateralByKey($key){
 		$materals = getDataTable('q_laminate_materals', 'id, name', array(
-	                                      ['key'=>'act', 'compare'=>'=', 'value'=>1],
-	                                      ['key'=>'laminate_key', 'compare'=>'=', 'value'=>$key]
-	                                      ), 0, 'name', 'asc');
+	                ['key'=>'act', 'compare'=>'=', 'value'=>1],
+	                ['key'=>'laminate_key', 'compare'=>'=', 'value'=>$key]
+	                ), 0, 'name', 'asc');
 	    $materals = $materals!=null?$materals:array();
 	    return $materals;
 	}
@@ -31,5 +31,14 @@ if (!function_exists('getPriterDevice')) {
         ->where('print_length', '>=', $ex_length)
         ->where('print_width','>=', $ex_width)->orderBy('print_length', 'asc')->first()->toArray();
         return $printer;
+	}
+}
+
+if (!function_exists('getLaminateMateralQuote')) {
+	function getPriceMateralQuote($id)
+	{
+		$materals = new \App\Models\QLaminateMateral;
+        $materal = $materals->find($id);
+        return isset($materal['price'])?(int)$materal['price']:0;
 	}
 }
