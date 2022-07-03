@@ -62,16 +62,11 @@ trait QPaperTrait
         return json_encode($obj);	
 	}
 
-    private function configDataSkin($qty_pro, $n_qty, $length, $width, $skin)
+    private function configDataSkin($qty_paper, $length, $width, $shape_price, $skin)
     {
     	$materal_id = @$skin['materal']?$skin['materal']:0;
         $materal_cost = $materal_id=='other'&&@$skin['materal_price']?(int)$skin['materal_price']:getPriceMateralQuote($materal_id);
         $num_face = @$skin['num_face']?(int)$skin['num_face']:0;
-        $device_id = @$skin['device']?(int)$skin['device']:0;
-        $device = getDetailDataByID('QDevice', $device_id);
-        $shape_price = @$device['shape_price']?(int)$device['shape_price']:0;
-        $plus_paper_device = (int)getDataConfigs('QConfig', 'PLUS_PAPER_DEVICE');
-        $qty_paper = ceil($qty_pro/$n_qty)+$plus_paper_device;
         // Công thức tính chi phí Cán láng: dài x rộng x ĐG chất liệu x (SL tờ in + tờ cộng thêm) x số mặt + ĐG chỉnh máy
         $total = $length*$width*$materal_cost*$qty_paper*$num_face+$shape_price;
         $obj = new \stdClass();
@@ -81,7 +76,7 @@ trait QPaperTrait
             $obj->materal_cost = $materal_cost;
             $obj->num_face = $num_face;
             $obj->shape_price = $shape_price;
-            $obj->device = $device_id;
+            $obj->device = @$skin['device']?$skin['device']:0;
             $obj->total = $total;    
         }else{
             $obj->act = 0;
@@ -89,7 +84,7 @@ trait QPaperTrait
         return json_encode($obj);
     }
 
-    public function configDataMetalai($qty_pro, $n_qty, $length, $width, $metalai)
+    private function configDataMetalai($qty_pro, $n_qty, $length, $width, $metalai)
     {
         $materal_id = @$metalai['materal']?$metalai['materal']:0;
         $materal_cost = $materal_id=='other'&&@$metalai['materal_price']?(int)$metalai['materal_price']:getPriceMateralQuote($materal_id);
@@ -114,6 +109,45 @@ trait QPaperTrait
             $obj->cover_materal_id= $cover_materal_id;
             $obj->cover_materal_cost = $cover_materal_cost;
             $obj->cover_num_face = $cover_num_face;
+            $obj->total = $total;    
+        }else{
+            $obj->act = 0;
+        }
+        return json_encode($obj);
+    }
+
+    private function configDataCompress($qty_pro, $n_qty, $compress)
+    {
+        $price = @$compress['price']?(float)$compress['price']:0;
+        $shape_price = @$compress['shape']?(float)$compress['shape']:0;
+        $device = @$compress['device']?$compress['device']:0;
+        $obj = new \stdClass();
+        // Công thức tính chi phí ép nhũ: (SL sản phẩm x Giá tiền/sp) + (Số bát x Giá khuôn)
+        $total = ($qty_pro*$price)+($shape_price*$n_qty);
+        if (@$compress['act']&&$total>0) {
+            $obj->act= 1;
+            $obj->price= $price;
+            $obj->shape = $shape_price;
+            $obj->device = $device;
+            $obj->total = $total;    
+        }else{
+            $obj->act = 0;
+        }
+        return json_encode($obj);
+    }
+
+    private function configDataUv($qty_paper, $work_price, $shape_price, $uv)
+    {
+        $num_face = @$uv['num_face']?(int)$uv['num_face']:0;
+        // Công thức tính chi phí in uv: (SL tờ in x ĐG lượt + ĐG chỉnh máy) x Số mặt in;
+        $total = ($qty_paper*$work_price+$shape_price)*$num_face;
+        $obj = new \stdClass();
+        if (@$uv['act']&&$total>0) {
+            $obj->act= 1;
+            $obj->num_face = $num_face;
+            $obj->work_price = $work_price;
+            $obj->shape_price = $shape_price;
+            $obj->device = @$uv['device']?$uv['device']:0;
             $obj->total = $total;    
         }else{
             $obj->act = 0;

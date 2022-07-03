@@ -29,7 +29,7 @@ if (!function_exists('getPriterDevice')) {
         $printers  = new \App\Models\QPrinterDevice;
         $printer = $printers->where('device', $device)
         ->where('print_length', '>=', $ex_length)
-        ->where('print_width','>=', $ex_width)->orderBy('print_length', 'asc')->first()->toArray();
+        ->where('print_width','>=', $ex_width)->orderBy('print_length', 'asc')->first();
         return $printer;
 	}
 }

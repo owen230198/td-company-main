@@ -9,6 +9,7 @@ class QuoteController extends Controller
     {
         parent::__construct();
         $this->adminService = new \App\Services\AdminService;
+        $this->service = new \App\Services\QuoteService;
         $this->quotes = new \App\Models\Quote;
     }
 
@@ -43,8 +44,7 @@ class QuoteController extends Controller
     {
         $data = $request->all();
         unset($data['_token']);
-        $object = getServiceByTable($table);
-        $stattus = $object->insert($data, $quote_id);
+        $stattus = $this->service->insert($table, $data, $quote_id);
     }
 }
 
