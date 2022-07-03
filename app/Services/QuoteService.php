@@ -23,9 +23,9 @@ class QuoteService extends BaseService
         $dataAction['metalai'] = $this->configDataMetalai($qty_pro, $n_qty, $length, $width, $data['metalai']);
         $data_action['compress'] = $this->configDataCompress($qty_pro, $n_qty, $data['compress']);
         $data_action['uv'] = $this->configDataStage($qty_pro, $n_qty, $data['uv']);
-        $data_action['elevate'] = $this->configDataStage($data['elevate']);
-        $data_action['peel'] = $this->configDataStage($data['peel']);
-        $data_action['paste'] = $this->configDataStage($data['paste']);
+        $data_action['elevate'] = $this->configDataStage($qty_pro, $n_qty, $data['elevate']);
+        $data_action['peel'] = $this->configDataStage($qty_pro, $n_qty, $data['peel']);
+        $data_action['paste'] = $this->configDataStage($qty_pro, $n_qty, $data['paste']);
         var_dump($dataAction['paper_size']); die();
     }
 }

@@ -42,3 +42,12 @@ if (!function_exists('getLaminateMateralQuote')) {
         return isset($materal['price'])?(int)$materal['price']:0;
 	}
 }
+
+if (!function_exists('createNonActiveObj')) {
+	function createNonActiveObj()
+	{
+		$obj = new \stdClass();
+        $obj->act = 0;
+        return json_encode($obj);
+	}	
+}
