@@ -140,3 +140,27 @@ if (!function_exists('getServiceByTable')) {
         return $object;
     }
 }
+
+if (!function_exists('updateTotalCostQuote')) {
+    function updateTotalCostQuote($quote_id)
+    {
+        $quotes_products = new \App\Models\QuoteProduct;
+        // $quotes_cartons = new \App\Models\QuoteCarton;
+        // $quotes_silks = new \App\Models\QuoteSilk;
+        // $quotes_finishes = new \App\Models\QuoteFinish;
+        $list_pro = $quotes_products->where('quote', $parent)->findAll();
+        // $list_carton = $quotes_cartons->where('quote', $parent)->findAll();
+        // $list_silk = $quotes_silks->where('quote', $parent)->findAll();
+        // $list_finish = $quotes_finishes->where('quote', $parent)->findAll();
+        $list = $list_pro;
+        $data['total_cost'] = 0;
+        if ($list!=null&&count($list)>0) {
+            foreach ($list as $value) {
+                $total_cost += $value['total_cost'];     
+            }
+        }
+        $quotes = new \App\Models\Quote;
+        $quotes->where('id', $quote_id)->update($data); 
+        return $data['total_cost'];  
+    }
+}

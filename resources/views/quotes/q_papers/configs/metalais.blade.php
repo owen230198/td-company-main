@@ -11,11 +11,8 @@
           @endforeach
           <option value="other">Chất liệu khác</option>
         </select>
-        <div class="input_add">
-          <div class="form-group d-flex align-items-center mb-0">
-            <span class="d-sm-flex font_bold mx-lg-3 mx-2">-</span>
+        <div class="input_add mt-1">
             <input class="form-control fs-15 short_input" placeholder="Nhập chi phí" type="number" name="metalai[materal_price]" value="" min="0" disabled>
-          </div>
         </div>
       </div>
     </div>
@@ -43,11 +40,8 @@
           @endforeach
           <option value="other">Chất liệu khác</option>
         </select>
-        <div class="input_add">
-          <div class="form-group d-flex align-items-center mb-0">
-            <span class="d-sm-flex font_bold mx-lg-3 mx-2">-</span>
-            <input class="form-control fs-15 short_input" placeholder="Nhập chi phí" type="number" name="metalai[cover_materal_price]" value="" min="0" disabled>
-          </div>
+        <div class="input_add mt-1">
+          <input class="form-control fs-15 short_input" placeholder="Nhập chi phí" type="number" name="metalai[cover_materal_price]" value="" min="0" disabled>
         </div>
       </div>
     </div>

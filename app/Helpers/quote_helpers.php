@@ -51,3 +51,30 @@ if (!function_exists('createNonActiveObj')) {
         return json_encode($obj);
 	}	
 }
+
+if (!function_exists('priceCaculatedByArray')) {
+	function priceCaculatedByArray($arr)
+	{
+		$ret = 0;
+		if ($arr!=null&&count($arr)>0) {
+            foreach ($arr as $key => $value) {
+                $stage = json_decode($value);
+                if (@$stage->total) {
+                    $ret += $stage->total;
+                }
+            }
+        }
+        return $ret;
+	}
+}
+
+if (!function_exists('function_name')) {
+	if (!function_exists('getPriceOnlyPro')) {
+	    function getPriceOnlyPro($table, $id){
+	        $models = getModelByTable($table);
+	        $data = $models->find($id);
+	        $total = priceCaculatedByArray($data);
+	        return $total;
+	    }
+	}
+}

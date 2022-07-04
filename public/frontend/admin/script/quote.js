@@ -11,8 +11,24 @@ var submitPopUpAction = function()
 {
 	$(document).on('submit', '.popupActionForm', function(event) {
 		event.preventDefault();
-		$('.close_action_popup', parent.document).trigger('click');
-		window.parent.toastr['success']('Nguyen duy khanh');
+    $.ajax({
+      url: $(this).attr('action'),
+      type: $(this).attr('method'),
+      data: $(this).serialize(),
+    })
+    .done(function(data) {
+      var json = JSON.parse(data);
+      if((json.code) == 200){
+        $('.close_action_popup', parent.document).trigger('click');
+        window.parent.toastr['success'](json.message.toString());
+        setTimeout(function()
+        {
+          window.parent.location.reload();
+        },1000); 
+      }else{
+        toastr['error'](json.message);
+      }  
+    })
 	});
 }
 
@@ -83,7 +99,7 @@ var moduleSelectOther = function()
 
 $(function(){
 	loadDataPopup();
-	// submitPopUpAction();
+	submitPopUpAction();
 	// selectConfigs();
 	changeActiveStage();
 	changQtyInput();

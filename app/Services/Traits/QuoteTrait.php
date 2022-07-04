@@ -4,22 +4,16 @@ namespace App\Services\Traits;
 trait QuoteTrait
 {
 
-    private function getObjectConfig($data, $total, $device, $factor = 1, $float = 0)
+    private function getObjectConfig($data, $total, $float = 0)
     {
-        $obj = new \stdClass();
         if (@$data['act']&&$total>0) {
-            $obj->act= 1;
-            $obj->factor= $factor;
+            $obj = $data;
             if ($float>0) {
-                $obj->float= $float;    
+                $obj['float']= $float;    
             }
-            $obj->model_price = @$devive['model_price']?$devive['model_price']:0;
-            $obj->work_price = @$devive['work_price']?$devive['work_price']:0;
-            $obj->shape_price = @$devive['shape_price']?$devive['shape_price']:0;
-            $obj->device = @$data['device']?$data['device']:0;
-            $obj->total = $total;    
+            $obj['total'] = $total;    
         }else{
-            $obj->act = 0;
+            $obj['act'] = 0;
         }
         return json_encode($obj);
     }
@@ -45,7 +39,7 @@ trait QuoteTrait
             $float_price = @$data['float']?(float)getDataConfigs('QConfig', 'FLOAT_PRICE'):0;
             //Công thức tính chi phí bế: SL tờ in x ĐG lượt + (ĐG chỉnh máy + ĐG khuôn mẫu)
             $total = (($qty_paper*$work_price)+($shape_price+$model_price))+$float_price;    
-            $obj = $this->getObjectConfig($data, $total, $device, 1, $float_price);
+            $obj = $this->getObjectConfig($data, $total, $float_price);
         }elseif($key_device==9){
             if (isset($data['type'])&&$data['type']==1) {
                 $foams = getDetailTableById('carton_foams', $data['name']);
@@ -62,9 +56,8 @@ trait QuoteTrait
             }
             //Công thức tính chi phí bóc lề & dán hộp: SL sản phẩm x ĐG lượt + ĐG chỉnh máy
             $total = $qty_pro*$work_price+$shape_price;
-            $obj = $this->getObjectConfig($data, $total, $device);
-            dd($obj);        
+            $obj = $this->getObjectConfig($data, $total);       
         }
-        return json_encode($obj);    
+        return $obj;    
     }
 }

@@ -63,7 +63,7 @@
     <div class="input_add">
       <div class="form-group d-flex align-items-center mb-0">
         <span class="d-sm-flex font_bold mx-lg-3 mx-2">-</span>
-        <input class="form-control fs-15 short_input x_short_input" placeholder="Nhập Giá TK" type="number" name="design_model[price]" value="" min="0" disabled step="any">
+        <input class="form-control fs-15 short_input x_short_input" placeholder="Nhập Giá TK" type="number" name="design_model[total]" value="" min="0" disabled step="any">
       </div>
     </div>
   </div>

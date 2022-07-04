@@ -11,7 +11,7 @@
  Target Server Version : 100424
  File Encoding         : 65001
 
- Date: 02/07/2022 11:28:54
+ Date: 04/07/2022 18:02:10
 */
 
 SET NAMES utf8mb4;
@@ -13020,7 +13020,7 @@ INSERT INTO `n_detail_tables` VALUES (43, 'name', 0, 'Tên', 'text', 'q_papers',
 INSERT INTO `n_detail_tables` VALUES (44, 'qty_pro', 0, 'SL sản phẩm', 'text', 'q_papers', 1, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-06-29 17:02:24', '2022-06-29 17:02:24');
 INSERT INTO `n_detail_tables` VALUES (45, 'qty_paper', 0, 'SL tờ in', 'text', 'q_papers', 1, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-06-29 17:02:25', '2022-06-29 17:02:25');
 INSERT INTO `n_detail_tables` VALUES (46, 'main', 0, 'Xuất file', 'checkbox', 'q_papers', 1, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-06-29 16:56:09', '2022-06-29 16:56:09');
-INSERT INTO `n_detail_tables` VALUES (47, 'total_amount', 0, 'Chi phí', 'text', 'q_papers', 1, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-06-29 16:54:37', '2022-06-29 16:54:37');
+INSERT INTO `n_detail_tables` VALUES (47, 'total_cost', 0, 'Chi phí', 'text', 'q_papers', 1, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-07-04 16:17:12', '2022-07-04 16:17:12');
 INSERT INTO `n_detail_tables` VALUES (54, 'id', 0, 'ID', 'text', 'q_devices', 0, NULL, 0, 0, NULL, NULL, 0, 0, 0, '2022-06-30 15:11:33', '2022-06-30 15:11:33');
 INSERT INTO `n_detail_tables` VALUES (55, 'name', 0, 'Tên máy', 'text', 'q_devices', 1, 1, 1, 1, NULL, NULL, 1, 1, 1, '2022-06-30 15:11:33', '2022-06-30 15:11:33');
 INSERT INTO `n_detail_tables` VALUES (56, 'key_device', 0, 'Nhóm thiết bị', 'select', 'q_devices', 1, 1, 1, 1, NULL, '{\r\n \"data\": {\r\n   \"table\": null,\r\n    \"option\":{\r\n    \"skin\":\"Cán láng\",\r\n		\"compress\":\"Ép nhũ\",\r\n    \"uv\":\"In UV\",\r\n		\"elevate\":\"Máy bế\",\r\n		\"peel\":\"Bóc lề\",\r\n		\"paste\":\"Dán hộp\",\r\n		\"milling\":\"Máy phay\"\r\n   }\r\n },\r\n \"config\": {\r\n  \"searchbox\": 1\r\n }\r\n}', 1, 1, 1, '2022-06-30 22:45:19', '2022-06-30 22:45:19');
@@ -13333,7 +13333,7 @@ CREATE TABLE `q_papers`  (
   `qty_paper` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `add_paper` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `length` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `witdth` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `width` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `paper_size` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   `design_model` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   `print` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
@@ -13347,7 +13347,7 @@ CREATE TABLE `q_papers`  (
   `plus` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `quote_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `total_amount` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `total_cost` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `main` tinyint(4) NULL DEFAULT NULL,
   `act` tinyint(4) NULL DEFAULT NULL,
   `table_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'quote_products',
@@ -13410,8 +13410,8 @@ CREATE TABLE `quotes`  (
   `n_user_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `profit` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `ship_price` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `total_amount` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `total_cost` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `total_amount` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `act` tinyint(4) NULL DEFAULT NULL,
   `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),

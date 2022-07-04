@@ -44,7 +44,14 @@ class QuoteController extends Controller
     {
         $data = $request->all();
         unset($data['_token']);
-        $stattus = $this->service->insert($table, $data, $quote_id);
+        $status = $this->service->insert($table, $data, $quote_id);
+        if ($status) {
+            echoJson(200, 'Thêm dữ liệu thành công!');
+            return;
+        }else{
+            echoJson(100, 'Đã có lỗi xảy ra!');
+            return;
+        }
     }
 }
 
