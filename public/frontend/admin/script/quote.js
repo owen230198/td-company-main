@@ -20,7 +20,7 @@ var submitPopUpAction = function()
       var json = JSON.parse(data);
       if((json.code) == 200){
         $('.close_action_popup', parent.document).trigger('click');
-        window.parent.toastr['success'](json.message.toString());
+        window.parent.toastr['success'](json.message+'');
         setTimeout(function()
         {
           window.parent.location.reload();

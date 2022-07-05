@@ -59,6 +59,7 @@
   <script src="{{ asset('frontend/admin/script/theme.js') }}" defer></script>
   <script src="{{ asset('frontend/admin/script/loading.js') }}" defer></script>
   <script src="{{ asset('frontend/admin/script/script.js') }}" defer></script>
+  <script src="{{ asset('frontend/admin/script/quote.js') }}" defer></script>
   <script>
   @if(Session::has('message'))
   toastr.options =

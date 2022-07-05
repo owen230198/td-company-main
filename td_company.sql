@@ -11,7 +11,7 @@
  Target Server Version : 100424
  File Encoding         : 65001
 
- Date: 04/07/2022 18:02:10
+ Date: 05/07/2022 17:29:22
 */
 
 SET NAMES utf8mb4;
@@ -13354,7 +13354,13 @@ CREATE TABLE `q_papers`  (
   `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of q_papers
+-- ----------------------------
+INSERT INTO `q_papers` VALUES (7, 'Quote 1', '10000', '2', '5100', '2', '1', '1', '{\"quantitative\":\"1\",\"unit_price\":\"1\",\"act\":1,\"total\":5200}', '{\"type\":\"0\"}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '6', NULL, '5200', 0, NULL, 'quote_products', NULL, NULL);
+INSERT INTO `q_papers` VALUES (8, 'Quote 1', '10000', '1', '10200', '2', '1', '1', '{\"quantitative\":\"1\",\"unit_price\":\"1\",\"act\":1,\"total\":10300}', '{\"type\":\"0\"}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '6', NULL, '10300', 0, NULL, 'quote_products', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for q_printer_devices
@@ -13418,10 +13424,5 @@ CREATE TABLE `quotes`  (
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of quotes
--- ----------------------------
-INSERT INTO `quotes` VALUES (6, NULL, 'Quote 1', '10000', '0', 'Contacter a', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', 'paper_group', '1', '10', '200000', NULL, NULL, 'note', NULL, '2022-06-27 02:34:26', NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;

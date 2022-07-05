@@ -17,7 +17,7 @@ class QuoteService extends BaseService
         }
         $models = getModelByTable($table);
         $insert = $models->insert($data_insert);
-        updateTotalAmountQuote($quote_id);
+        updateTotalCostQuote($quote_id);
         return $insert;
     }
 }

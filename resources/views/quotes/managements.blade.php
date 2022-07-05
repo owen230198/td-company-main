@@ -32,7 +32,3 @@
   @include('table.remove_confirm_check')
   @include('table.action_popup')
 @endsection
-
-@section('script')
-  <script src="{{ asset('frontend/admin/script/quote.js') }}" defer></script>
-@endsection
