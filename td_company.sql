@@ -11,7 +11,7 @@
  Target Server Version : 100424
  File Encoding         : 65001
 
- Date: 05/07/2022 17:29:22
+ Date: 06/07/2022 17:26:35
 */
 
 SET NAMES utf8mb4;
@@ -13196,7 +13196,7 @@ INSERT INTO `n_tables` VALUES (4, 'files', 'Kho Lưu trữ', 0, 'files', 'files'
 INSERT INTO `n_tables` VALUES (5, 'q_configs', 'Thông tin chung & Giá thành', 0, 'q_configs', 'configs', 0, 100, 10, 'configs', NULL, 1, 1, 1, 1, 0, '2022-06-30 10:03:47', '2022-06-30 10:03:47');
 INSERT INTO `n_tables` VALUES (6, 'customers', 'Khách hàng', 0, 'customers', 'customers', 0, 10, 10, 'view', NULL, 1, 1, 1, 1, 0, '2022-06-30 10:03:47', '2022-06-30 10:03:47');
 INSERT INTO `n_tables` VALUES (7, 'quotes', 'Báo giá', 0, 'quotes', 'quotes', 0, 10, 10, 'view', 'quote_', 1, 1, 1, 1, 0, '2022-06-30 10:03:47', '2022-06-30 10:03:47');
-INSERT INTO `n_tables` VALUES (8, 'q_papers', 'Tờ in', 0, 'q_papers', 'q_papers', 0, 10, 10, 'view', '', 1, 1, 1, 1, 0, '2022-06-30 10:03:47', '2022-06-30 10:03:47');
+INSERT INTO `n_tables` VALUES (8, 'q_papers', 'Tờ in', 0, 'q_papers', 'q_papers', 0, 10, 10, 'view', 'q_management_', 1, 1, 1, 1, 0, '2022-07-06 16:28:52', '2022-07-06 16:28:52');
 INSERT INTO `n_tables` VALUES (9, 'q_devices', 'Thiết bị & Chi phí', 0, 'q_devices', 'q_devices', 0, 10, 10, 'view', '', 1, 1, 1, 1, 0, '2022-06-30 10:03:47', '2022-06-30 10:03:47');
 INSERT INTO `n_tables` VALUES (10, 'q_laminate_materals', 'Chất liệu cán màng', 0, 'q_laminate_materals', 'q_laminate_materals', 0, 10, 10, 'view', '', 1, 1, 1, 1, 0, '2022-06-30 23:23:21', '2022-06-30 23:23:21');
 INSERT INTO `n_tables` VALUES (11, 'q_printer_devices', 'Máy in & chi phí', 0, 'q_printer_devices', 'q_printer_devices', 0, 10, 10, 'view', '', 1, 1, 1, 1, 0, '2022-06-30 23:23:21', '2022-06-30 23:23:21');
@@ -13354,13 +13354,12 @@ CREATE TABLE `q_papers`  (
   `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 49 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of q_papers
 -- ----------------------------
-INSERT INTO `q_papers` VALUES (7, 'Quote 1', '10000', '2', '5100', '2', '1', '1', '{\"quantitative\":\"1\",\"unit_price\":\"1\",\"act\":1,\"total\":5200}', '{\"type\":\"0\"}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '6', NULL, '5200', 0, NULL, 'quote_products', NULL, NULL);
-INSERT INTO `q_papers` VALUES (8, 'Quote 1', '10000', '1', '10200', '2', '1', '1', '{\"quantitative\":\"1\",\"unit_price\":\"1\",\"act\":1,\"total\":10300}', '{\"type\":\"0\"}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '6', NULL, '10300', 0, NULL, 'quote_products', NULL, NULL);
+INSERT INTO `q_papers` VALUES (41, 'Nguyen Duy Owen', '10000', '2', '5100', '2', '0.35', '0.51', '{\"quantitative\":\"400\",\"unit_price\":\"29.5\",\"act\":1,\"total\":10952759.999999998}', '{\"type\":\"1\",\"total\":\"50000\"}', '{\"act\":\"1\",\"color_num\":\"3\",\"style\":\"2\",\"device\":\"1\",\"total\":880400}', '{\"act\":\"1\",\"materal\":\"other\",\"materal_price\":\"2000\",\"num_face\":\"2\",\"device\":\"1\",\"total\":3641420}', '{\"act\":\"1\",\"materal\":\"other\",\"materal_price\":\"2000\",\"num_face\":\"2\",\"cover_materal\":\"other\",\"cover_materal_price\":\"1000\",\"cover_num_face\":\"2\",\"total\":5569200}', '{\"act\":\"1\",\"price\":\"2000\",\"shape\":\"10000\",\"device\":\"2\",\"total\":20020000}', '{\"act\":\"1\",\"num_face\":\"1\",\"device\":\"3\",\"total\":4150000}', '{\"act\":\"1\",\"float\":\"1\",\"shape_price\":\"200\",\"device\":\"4\",\"total\":600000}', '{\"act\":\"1\",\"device\":\"5\",\"total\":120000}', '{\"act\":\"1\",\"device\":\"6\",\"total\":550000}', '{\"act\":\"1\",\"price\":\"', '7', 'note', '48533780', 1, NULL, 'quote_products', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for q_printer_devices
@@ -13423,6 +13422,11 @@ CREATE TABLE `quotes`  (
   `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of quotes
+-- ----------------------------
+INSERT INTO `quotes` VALUES (7, NULL, 'Nguyen Duy Owen', '10000', '0', 'Contacter c', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', 'hard_group', '1', NULL, NULL, '48580180', '48580180', NULL, NULL, '2022-07-06 16:27:23', '2022-07-06 09:27:23');
 
 SET FOREIGN_KEY_CHECKS = 1;
