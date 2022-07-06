@@ -3,10 +3,10 @@
   <div class="d-flex align-items-center mb-3">
     <label class="base_label mr-2 mb-0 label_quotes">Chất liệu cán</label>
     <div class="d-flex align-items-center fs-15 mr-3 mb-md-0 mb-3 group_select_other">
-      <div class="form-group d-flex align-items-center mb-0">
+      <div class="form-group mb-0">
         <select class="form-control short_input select_other" name="metalai[materal]" data-expland="other">
           <option value="0">Chọn chất liệu</option>
-          @foreach (getgetLaminateMateralByKey('metalai') as $item)
+          @foreach (getLaminateMateralByKey('metalai') as $item)
           <option value="{{ $item->id }}">{{ $item->name }}</option>
           @endforeach
           <option value="other">Chất liệu khác</option>
@@ -32,10 +32,10 @@
   <div class="d-flex align-items-center mb-3">
     <label class="base_label mr-2 mb-0 label_quotes">Chất liệu phủ trên</label>
     <div class="d-flex align-items-center fs-15 mr-3 mb-md-0 mb-3 group_select_other">
-      <div class="form-group d-flex align-items-center mb-0">
+      <div class="form-group mb-0">
         <select class="form-control short_input select_other" name="metalai[cover_materal]" data-expland="other">
           <option value="0">Chọn chất liệu</option>
-          @foreach (getgetLaminateMateralByKey('cover') as $item)
+          @foreach (getLaminateMateralByKey('cover') as $item)
           <option value="{{ $item->id }}">{{ $item->name }}</option>
           @endforeach
           <option value="other">Chất liệu khác</option>

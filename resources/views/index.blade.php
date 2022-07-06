@@ -59,44 +59,43 @@
   <script src="{{ asset('frontend/admin/script/theme.js') }}" defer></script>
   <script src="{{ asset('frontend/admin/script/loading.js') }}" defer></script>
   <script src="{{ asset('frontend/admin/script/script.js') }}" defer></script>
-  <script src="{{ asset('frontend/admin/script/quote.js') }}" defer></script>
-  <script>
-  @if(Session::has('message'))
-  toastr.options =
-  {
-    "closeButton" : true,
-    "progressBar" : true
-  }
-    toastr.success("{{ session('message') }}");
-  @endif
+  <script defer>
+    @if(Session::has('message'))
+    toastr.options =
+    {
+      "closeButton" : true,
+      "progressBar" : true
+    }
+      toastr.success("{{ session('message') }}");
+    @endif
 
-  @if(Session::has('error'))
-  toastr.options =
-  {
-    "closeButton" : true,
-    "progressBar" : true
-  }
-    toastr.error("{{ session('error') }}");
-  @endif
+    @if(Session::has('error'))
+    toastr.options =
+    {
+      "closeButton" : true,
+      "progressBar" : true
+    }
+      toastr.error("{{ session('error') }}");
+    @endif
 
-  @if(Session::has('info'))
-  toastr.options =
-  {
-    "closeButton" : true,
-    "progressBar" : true
-  }
-    toastr.info("{{ session('info') }}");
-  @endif
+    @if(Session::has('info'))
+    toastr.options =
+    {
+      "closeButton" : true,
+      "progressBar" : true
+    }
+      toastr.info("{{ session('info') }}");
+    @endif
 
-  @if(Session::has('warning'))
-  toastr.options =
-  {
-    "closeButton" : true,
-    "progressBar" : true
-  }
-    toastr.warning("{{ session('warning') }}");
-  @endif
-</script>
+    @if(Session::has('warning'))
+    toastr.options =
+    {
+      "closeButton" : true,
+      "progressBar" : true
+    }
+      toastr.warning("{{ session('warning') }}");
+    @endif
+  </script>
   @yield('script') 
 </body>
 

@@ -31,9 +31,9 @@ var confirmRemoveData = function()
 var checkBoxModule = function()
 {
 	$(document).on('change', '.checkbox_module input[type=checkbox]', function(event) {
-		parent = $(this).closest('.checkbox_module');
+		eParent = $(this).closest('.checkbox_module');
 		val = $(this).is(':checked')?1:0;
-		parent.find('input[type=hidden]').val(val);		
+		eParent.find('input[type=hidden]').val(val);		
 	});	
 }
 
@@ -113,6 +113,15 @@ var getValueMuliCheckbox = function()
 	$('input[name=multi_remove_id]').val(str);
 }
 
+var loadDataPopup = function()
+{
+	$(document).on('click', '.load_view_popup', function(event) {
+		event.preventDefault();
+		var src = $(this).data('src');
+		$('.modalAction').find('iframe').attr('src', src);
+	});
+}
+
 $(function(){
 	submitActionAjaxForm();
 	confirmRemoveData();
@@ -121,4 +130,5 @@ $(function(){
 	usernameInputPrevent();
 	passwordInputPrevent();
 	checkMultiRecordModule();
+	loadDataPopup();
 });

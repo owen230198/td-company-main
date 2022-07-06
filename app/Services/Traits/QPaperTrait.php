@@ -23,7 +23,7 @@ trait QPaperTrait
         $subtract_paper = (int)getDataConfigs('QConfig', 'MIN_VALID_PAPER');
         $plus_paper_device = (int)getDataConfigs('QConfig', 'PLUS_PAPER_DEVICE');
         $qty_paper = ceil($qty_pro/$n_qty)-$subtract_paper+$plus_paper_device;
-        $device = getPriterDevice($length, $width, $device_id);
+        $device = $this->getPriterDevice($length, $width, $device_id);
         $model_price = @$device['model_price']?(int)$device['model_price']:0;
         $work_price = @$device['work_price']?(int)$device['work_price']:0;
         $shape_price = @$device['shape_price']?(int)$device['shape_price']:0;
@@ -43,7 +43,7 @@ trait QPaperTrait
     private function configDataSkin($qty_paper, $length, $width, $shape_price, $skin)
     {
     	$materal_id = @$skin['materal']?$skin['materal']:0;
-        $materal_cost = $materal_id=='other'&&@$skin['materal_price']?(int)$skin['materal_price']:getPriceMateralQuote($materal_id);
+        $materal_cost = $materal_id=='other'&&@$skin['materal_price']?(int)$skin['materal_price']:$this->getPriceMateralQuote($materal_id);
         $num_face = @$skin['num_face']?(int)$skin['num_face']:0;
         // Công thức tính chi phí Cán láng: dài x rộng x ĐG chất liệu x (SL tờ in + tờ cộng thêm) x số mặt + ĐG chỉnh máy
         $total = $length*$width*$materal_cost*$qty_paper*$num_face+$shape_price;
@@ -54,10 +54,10 @@ trait QPaperTrait
     private function configDataMetalai($qty_paper, $length, $width, $metalai)
     {
         $materal_id = @$metalai['materal']?$metalai['materal']:0;
-        $materal_cost = $materal_id=='other'&&@$metalai['materal_price']?(int)$metalai['materal_price']:getPriceMateralQuote($materal_id);
+        $materal_cost = $materal_id=='other'&&@$metalai['materal_price']?(int)$metalai['materal_price']:$this->getPriceMateralQuote($materal_id);
         $num_face = @$metalai['num_face']?(int)$metalai['num_face']:0;
         $cover_materal_id = @$metalai['cover_materal']?$metalai['cover_materal']:0;
-        $cover_materal_cost = $cover_materal_id=='other'&&@$metalai['cover_materal_price']?(int)$metalai['cover_materal_price']:getPriceMateralQuote($cover_materal_id);
+        $cover_materal_cost = $cover_materal_id=='other'&&@$metalai['cover_materal_price']?(int)$metalai['cover_materal_price']:$this->getPriceMateralQuote($cover_materal_id);
         $cover_num_face = @$metalai['cover_num_face']?(int)$metalai['cover_num_face']:0;
         $plus_paper = (int)getDataConfigs('QConfig', 'PLUS_PAPER');
         $qty_paper = $qty_paper+$plus_paper;
@@ -121,7 +121,7 @@ trait QPaperTrait
         $dataAction['peel'] = $this->configDataStage($qty_pro, $n_qty, $data['peel']);
         $dataAction['paste'] = $this->configDataStage($qty_pro, $n_qty, $data['paste']);
         $dataAction['plus'] = $this->configDataPlus($qty_pro, $data['plus']);
-        $dataAction['total_cost'] = priceCaculatedByArray($dataAction);
+        $dataAction['total_cost'] = $this->priceCaculatedByArray($dataAction);
         return $dataAction;
     }
 }

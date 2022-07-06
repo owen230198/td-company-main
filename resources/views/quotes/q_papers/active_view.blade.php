@@ -3,7 +3,7 @@
     <i class="fa fa-{{ $icon }} mr-2 fs-23" aria-hidden="true"></i>{{ $note }}
   </label>
   <div class="checkbox_module">
-    <input type="hidden" name="{{ $key_act }}[act]" value = "0">
-    <input type="checkbox" class="toggle mx-auto change_active_stage"/>
+    <input type="hidden" name="{{ $key_act }}[act]" value = "{{ @$active?1:0 }}">
+    <input type="checkbox" class="toggle mx-auto change_active_stage" {{ @$active?'checked':'' }} />
   </div>   
 </div>

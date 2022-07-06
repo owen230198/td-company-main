@@ -27,7 +27,7 @@ trait QuoteTrait
         $key_device = @$device['key_device']?$device['key_device']:'';
         $qty_paper = ceil($qty_pro/$n_qty);
         if ($key_device == '') {
-            return createNonActiveObj();    
+            return $this->createNonActiveObj();    
         }
         if ($key_device == 'skin') {
         	$plus_paper_device = (int)getDataConfigs('QConfig', 'PLUS_PAPER_DEVICE');
@@ -59,5 +59,51 @@ trait QuoteTrait
             $obj = $this->getObjectConfig($data, $total);       
         }
         return $obj;    
+    }
+
+    private function getPriterDevice($length, $width, $device)
+    {
+        $ex_length = $length*100;
+        $ex_width = $width*100;
+        $printers  = new \App\Models\QPrinterDevice;
+        $printer = $printers->where('device', $device)
+        ->where('print_length', '>=', $ex_length)
+        ->where('print_width','>=', $ex_width)->orderBy('print_length', 'asc')->first();
+        return $printer;
+    }
+
+    private function getPriceMateralQuote($id)
+    {
+        $materals = new \App\Models\QLaminateMateral;
+        $materal = $materals->find($id);
+        return isset($materal['price'])?(int)$materal['price']:0;
+    }
+
+    private function createNonActiveObj()
+    {
+        $obj = new \stdClass();
+        $obj->act = 0;
+        return json_encode($obj);
+    }
+
+    private function priceCaculatedByArray($arr)
+    {
+        $ret = 0;
+        if ($arr!=null&&count($arr)>0) {
+            foreach ($arr as $key => $value) {
+                $stage = json_decode($value);
+                if (@$stage->total) {
+                    $ret += $stage->total;
+                }
+            }
+        }
+        return $ret;
+    }
+
+    private function getPriceOnlyPro($table, $id){
+        $models = getModelByTable($table);
+        $data = $models->find($id);
+        $total = priceCaculatedByArray($data);
+        return $total;
     }
 }
