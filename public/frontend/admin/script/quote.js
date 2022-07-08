@@ -1,4 +1,4 @@
-var ajaxListTable = function(url)
+var ajaxListTable = function()
 {
   url = $('meta[name=ajax-url]', parent.document).attr('content');
   if (url!='') {
