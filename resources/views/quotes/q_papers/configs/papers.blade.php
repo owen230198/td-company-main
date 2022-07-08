@@ -3,19 +3,6 @@
   $data_design = @$dataitem['design_model']?json_decode($dataitem['design_model'], true):array();
 @endphp
 <div class="d-flex align-items-center mb-4">
-  <label class="base_label mr-2 mb-0 label_quotes">Khổ giấy in</label>
-  <div class="d-flex align-items-center fs-15 mr-3 mb-md-0 mb-3">
-    <div class="form-group d-flex align-items-center mb-0">
-      <input class="form-control fs-15 short_input" placeholder="Nhập KT dài" type="number" name="length" value="{{ @$dataitem['length']?$dataitem['length']:'' }}" min="0" required step="any"> 
-      <span class="d-sm-flex font_bold mx-lg-3 mx-2">X</span>
-    </div>
-    <div class="form-group d-flex align-items-center mb-0">
-      <input class="form-control fs-15 short_input" placeholder="Nhập KT rộng" type="number" name="width" value="{{ @$dataitem['width']?$dataitem['width']:'' }}" min="0" required step="any">
-      <span class="ml-2 w_available">Đơn vị tính (m)</span> 
-    </div>
-  </div>
-</div>
-<div class="d-flex align-items-center mb-4">
   <label class="base_label mr-2 mb-0 label_quotes">Định lượng & Đơn giá</label>
   <div class="d-flex align-items-center fs-15 mr-3 mb-md-0 mb-3">
     <div class="form-group d-flex align-items-center mb-0">

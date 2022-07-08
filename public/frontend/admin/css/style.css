@@ -384,6 +384,24 @@ select.form-control:not([size]):not([multiple]),
   display: none;
 }
 
+.q_tab_action{
+  position: sticky;
+  top: -1px;
+  z-index: 2;
+  background: #f1f4f9;
+}
+
+.station-richmenu-main-btn-area.active{
+  background: #0000b7;
+  border-color: #0000b7;
+}
+
+.q_stage_btn{
+  clip-path: polygon(95% 1%, 100% 50%, 95% 100%, 0% 100%, 5% 50%, 0% 0%);
+  width: 180px;
+  justify-content: center;
+}
+
 select.form-control:not([size]):not([multiple]){
   height: 32px;
 }

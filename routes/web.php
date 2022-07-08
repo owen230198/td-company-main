@@ -37,8 +37,10 @@ Route::middleware(['checkLogin'])->group(function () {
 	Route::post('do-config-data/{table}', [AdminController::class, 'doConfigData']);
 
 	//quotes routes
+	Route::get('ajax-view-list/{table}/{quote_id}', [QuoteController::class, 'ajaxViewList']);
 	Route::get('quote-managements/{table}/{quote_id}', [QuoteController::class, 'quoteManagement']);
 	Route::get('insert-detail-quotes/{table}/{quote_id}', [QuoteController::class, 'insertDetailQuote']);
 	Route::get('update-detail-quotes/{table}/{quote_id}/{id}', [QuoteController::class, 'updateDetailQuote']);
 	Route::post('do-insert-detail/{table}/{quote_id}', [QuoteController::class, 'doInsertDetail']);
+	Route::post('do-update-detail/{table}/{quote_id}/{id}', [QuoteController::class, 'doUpdateDetail']);
 });

@@ -9,7 +9,7 @@ trait QuoteTrait
         if (@$data['act']&&$total>0) {
             $obj = $data;
             if ($float>0) {
-                $obj['float']= $float;    
+                $obj['float'] = $float;    
             }
             $obj['total'] = $total;    
         }else{

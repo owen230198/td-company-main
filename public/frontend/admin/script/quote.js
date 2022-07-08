@@ -1,3 +1,17 @@
+var ajaxListTable = function(url)
+{
+  url = $('meta[name=ajax-url]', parent.document).attr('content');
+  if (url!='') {
+    $.ajax({
+      url: url,
+      type: 'GET',
+    })
+    .done(function(data) {
+      $('.table_data', parent.document).html(data);  
+    })
+  } 
+}
+
 var submitPopUpAction = function()
 {
 	$(document).on('submit', '.popupActionForm', function(event) {
@@ -10,9 +24,9 @@ var submitPopUpAction = function()
     .done(function(data) {
       var json = JSON.parse(data);
       if((json.code) == 200){
-        window.parent.toastr['success'](json.message+'');
         $('.close_action_popup', parent.document).trigger('click');
-        window.parent.location.reload();
+        window.parent.toastr['success'](json.message);
+        ajaxListTable();
       }else{
         toastr['error'](json.message);
       }  

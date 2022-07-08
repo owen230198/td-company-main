@@ -49,4 +49,15 @@ class QuoteService extends BaseService
         $this->refreshQuoteTotal($quote_id);
         return $insert;
     }
+
+    public function doUpdate($table, $data, $quote_id, $id){
+        if ($table == 'q_papers') {
+            $data_insert = $this->getDataActionQPaper($data);
+            $data_insert['quote_id'] = $quote_id;
+        }
+        $models = getModelByTable($table);
+        $update = $models::where('id', $id)->update($data_insert);
+        $this->refreshQuoteTotal($quote_id);
+        return $update;
+    }
 }
