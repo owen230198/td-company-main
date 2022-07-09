@@ -1,5 +1,5 @@
 <?php  
-namespace App\Services\Traits;
+namespace App\Services\QTraits;
 trait QPaperTrait
 {
 	private function configDataSizePaper($qty_paper, $length, $width, $paper)

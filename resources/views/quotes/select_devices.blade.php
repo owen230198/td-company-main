@@ -5,7 +5,9 @@
   $list_devices = $list_devices!=null?$list_devices:array();
 @endphp
 <div class="d-flex align-items-center">
-  <label class="base_label mr-2 mb-0 label_quotes">Thiết bị</label>
+  @if (!@$hide_label)
+    <label class="base_label mr-2 mb-0 label_quotes">Thiết bị</label>
+  @endif
   <div class="d-flex align-items-center fs-15 mr-3 mb-md-0 mb-3">
     <div class="form-group d-flex align-items-center mb-0">
       <select class="form-control short_input" name="{{ $key_device }}[device]">

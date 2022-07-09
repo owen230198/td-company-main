@@ -1,8 +1,9 @@
 <?php 
 namespace App\Services;
 use App\Services\BaseService;
-use App\Services\Traits\QuoteTrait;
-use App\Services\Traits\QPaperTrait;
+use App\Services\QTraits\QuoteTrait;
+use App\Services\QTraits\QPaperTrait;
+use App\Services\QTraits\QCartonTrait;
 class QuoteService extends BaseService
 {
 	function __construct()
@@ -11,7 +12,7 @@ class QuoteService extends BaseService
         $this->quotes_products = new \App\Models\QPaper;
         $this->quotes = new \App\Models\Quote;
 	}
-    use QuoteTrait, QPaperTrait;
+    use QuoteTrait, QPaperTrait, QCartonTrait;
 
     public function refreshQuoteTotal($quote_id)
     {
@@ -42,9 +43,11 @@ class QuoteService extends BaseService
     public function doInsert($table, $data, $quote_id){
         if ($table == 'q_papers') {
             $data_insert = $this->getDataActionQPaper($data);
-            $data_insert['quote_id'] = $quote_id;
+        }elseif ($table == 'q_cartons') {
+            $data_insert = $this->getDataActionQCarton($data);
         }
         $models = getModelByTable($table);
+        $data_insert['quote_id'] = $quote_id;
         $insert = $models->insert($data_insert);
         $this->refreshQuoteTotal($quote_id);
         return $insert;

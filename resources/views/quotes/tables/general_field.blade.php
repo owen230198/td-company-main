@@ -1,16 +1,3 @@
-<div class="form-group d-flex align-items-center mb-4"> 
-  <label class="base_label mr-2 mb-0 label_quotes">Tên sản phẩm báo giá</label>
-  <input class="form-control" type="text" name="name" value="{{ @$dataitem['name']?$dataitem['name']:'' }}" required>
-</div>
-@if (@$main)
-  <div class="form-group d-flex align-items-center mb-4"> 
-    <label class="base_label mr-2 mb-0 label_quotes">Xuất file báo giá</label>
-    <div class="checkbox_module">
-      <input type="hidden" name="main" value = "{{ @$dataitem['main']?1:0 }}">
-      <input type="checkbox" class="toggle mx-auto change_active_stage" {{ @$dataitem['main']?'checked':'' }} />
-    </div>
-  </div>
-@endif
 <div class="form-group d-flex align-items-center mb-4">
   <label class="base_label mr-2 mb-0 label_quotes">Số lượng sản phẩm</label>
   <input class="form-control fs-15 short_input" type="number" name="qty_pro" value="{{ @$dataitem['qty_pro']?$dataitem['qty_pro']:'' }}" min="0" required> 

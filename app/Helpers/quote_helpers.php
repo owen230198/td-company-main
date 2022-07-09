@@ -19,4 +19,14 @@ if (!function_exists('getExactQuantityPaper')) {
 		    return $materals;
 		}
 	}
+
+	if (!function_exists('getNameSupplyByType')) {
+		function getSupplyByTypeType($table, $key){
+			$supply = getDataTable($table, 'id, name', array(
+		                ['key'=>'act', 'compare'=>'=', 'value'=>1],
+		                ['key'=>'type', 'compare'=>'=', 'value'=>$key]
+		                ), 0, 'name', 'asc');
+		    return $supply!=null?$supply:array();
+		}
+	}
 }
