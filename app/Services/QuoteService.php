@@ -44,7 +44,7 @@ class QuoteService extends BaseService
         if ($table == 'q_papers') {
             $data_insert = $this->getDataActionQPaper($data);
         }elseif ($table == 'q_cartons') {
-            $data_insert = $this->getDataActionQCarton($data);
+            $data_insert = $this->getDataActionQCarton($data, $table);
         }
         $models = getModelByTable($table);
         $data_insert['quote_id'] = $quote_id;
@@ -55,11 +55,10 @@ class QuoteService extends BaseService
 
     public function doUpdate($table, $data, $quote_id, $id){
         if ($table == 'q_papers') {
-            $data_insert = $this->getDataActionQPaper($data);
-            $data_insert['quote_id'] = $quote_id;
+            $data_update = $this->getDataActionQPaper($data);
         }
         $models = getModelByTable($table);
-        $update = $models::where('id', $id)->update($data_insert);
+        $update = $models::where('id', $id)->update($data_update);
         $this->refreshQuoteTotal($quote_id);
         return $update;
     }

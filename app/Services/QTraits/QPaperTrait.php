@@ -111,7 +111,6 @@ trait QPaperTrait
         $dataAction = $data;
         $dataAction['design_model'] = json_encode($data['design_model']);
         $dataAction['paper_size'] = $this->configDataSizePaper($qty_paper, $length, $width, $data['paper_size']);
-        $dataAction['paper_size'] = $this->configDataSizePaper($qty_paper, $length, $width, $data['paper_size']);
         $dataAction['print'] = $this->configDataPrint($qty_pro, $n_qty, $length, $width, $data['print']);
         $dataAction['skin'] = $this->configDataStage($qty_pro, $n_qty, $data['skin'], $length, $width);
         $dataAction['metalai'] = $this->configDataMetalai($qty_paper, $length, $width, $data['metalai']);

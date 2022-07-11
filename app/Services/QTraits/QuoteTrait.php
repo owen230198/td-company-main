@@ -4,6 +4,18 @@ namespace App\Services\QTraits;
 trait QuoteTrait
 {
 
+    private function configDatSizePaperHard($length, $width, $paper, $qty)
+    {
+        $quantative_id = @$paper['quantative']?(int)$paper['quantative']:0;
+        $quantative = getDetailDataByID('QSupplyPrice', $quantative_id);
+        $quantative_price = @$quantative['price']?$quantative['price']:0;
+        $qty_paper = $qty+(int)getDataConfigs('QConfig', 'PLUS_CARTON');
+        //Công thức tính chi phí khổ giấy vật tư hộp cứng: Dài x Rộng x ĐG định lượng x SL vật tư
+        $total = $length*$width*$quantative_price*$qty_paper;
+        $paper['act'] = $total>0?1:0;
+        return $this->getObjectConfig($paper, $total);
+    }
+
     private function getObjectConfig($data, $total, $float = 0)
     {
         if (@$data['act']&&$total>0) {
@@ -18,7 +30,7 @@ trait QuoteTrait
         return json_encode($obj);
     }
 
-	private function configDataStage($qty_pro, $n_qty, $data, $length = 0, $width = 0){
+	private function configDataStage($qty_pro, $n_qty, $data, $length = 0, $width = 0, $table = '', $type = 0){
         $device_id = @$data['device']?(int)$data['device']:0;
         $device = getDetailDataByID('QDevice', $device_id);
         $model_price = @$data['model_price']?(float)$data['model_price']:0;
@@ -38,21 +50,22 @@ trait QuoteTrait
         }elseif ($key_device == 'elevate') {
             $float_price = @$data['float']?(float)getDataConfigs('QConfig', 'FLOAT_PRICE'):0;
             //Công thức tính chi phí bế: SL tờ in x ĐG lượt + (ĐG chỉnh máy + ĐG khuôn mẫu)
-            $total = (($qty_paper*$work_price)+($shape_price+$model_price))+$float_price;    
+            $total = (($qty_paper*$work_price)+($shape_price+$model_price))+$float_price;   
             $obj = $this->getObjectConfig($data, $total, $float_price);
-        }elseif($key_device==9){
-            if (isset($data['type'])&&$data['type']==1) {
-                $foams = getDetailTableById('carton_foams', $data['name']);
-                $factor = isset($foams['factor'])?$foams['factor']:1;    
+        }elseif($key_device=='milling'){
+            if (@$table == 'q_cartons') {
+                $foams = getDetailDataByID('QSupply', $type);
+                $factor = @$foams['factor']?$foams['factor']:1;
             }else {
                 $factor = 1;
             }
-            $total = ($qty_pro*$work_price+$device_price)*$factor;
+            $total = ($qty_pro*$work_price+$shape_price)*$factor;
+            $obj = $this->getObjectConfig($data, $total);
         }else{
-            if (isset($data['type'])&&$data['type']==1) {
-                $work_price = $work_price+(int)getDataConfigs('QConfig', 'PEEL_CARTON_PLUS');
-            }elseif (isset($data['type'])&&$data['type']==2) {
-                $work_price = $work_price+(int)getDataConfigs('QConfig', 'PEEL_FOAM_PLUS');
+            if (@$table == 'q_cartons') {
+                $work_price = $work_price+(float)getDataConfigs('QConfig', 'PEEL_CARTON_PLUS');
+            }elseif (@$table == 'q_foams') {
+                $work_price = $work_price+(float)getDataConfigs('QConfig', 'PEEL_FOAM_PLUS');
             }
             //Công thức tính chi phí bóc lề & dán hộp: SL sản phẩm x ĐG lượt + ĐG chỉnh máy
             $total = $qty_pro*$work_price+$shape_price;

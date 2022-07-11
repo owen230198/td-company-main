@@ -11,7 +11,7 @@
  Target Server Version : 100424
  File Encoding         : 65001
 
- Date: 09/07/2022 12:44:57
+ Date: 11/07/2022 18:46:03
 */
 
 SET NAMES utf8mb4;
@@ -13059,11 +13059,11 @@ INSERT INTO `n_detail_tables` VALUES (80, 'qty_pro', 0, 'SL sản phẩm', 'text
 INSERT INTO `n_detail_tables` VALUES (81, 'qty_paper', 0, 'SL tờ in', 'text', 'q_cartons', 1, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-07-08 16:54:11', '2022-07-08 16:54:11');
 INSERT INTO `n_detail_tables` VALUES (82, 'total_cost', 0, 'Chi phí', 'text', 'q_cartons', 1, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-07-08 16:54:11', '2022-07-08 16:54:11');
 INSERT INTO `n_detail_tables` VALUES (83, 'id', 0, 'ID', 'text', 'q_supplies', 0, NULL, 0, 0, NULL, NULL, 0, 0, 0, '2022-07-09 11:50:24', '2022-07-09 11:50:24');
-INSERT INTO `n_detail_tables` VALUES (84, 'name', 0, 'Tên', 'text', 'q_supplies', 1, 1, 1, 1, NULL, NULL, 1, 1, 1, '2022-07-09 11:50:24', '2022-07-09 11:50:24');
-INSERT INTO `n_detail_tables` VALUES (85, 'type', 0, 'Loại vật tư', 'select', 'q_supplies', 1, 1, 1, 1, NULL, '{\r\n \"data\": {\r\n   \"table\": null,\r\n    \"option\":{\r\n			\"1\":\"Carton\",\r\n			\"2\":\"Mút xốp định hình\",\r\n			\"3\":\"Lụa\"\r\n   }\r\n },\r\n \"config\": {\r\n  \"searchbox\": 0\r\n }\r\n}', 1, 1, 1, '2022-07-09 11:50:24', '2022-07-09 11:50:24');
-INSERT INTO `n_detail_tables` VALUES (86, 'note', 0, 'Ghi chú', 'textarea', 'q_supplies', 0, 1, 1, 0, NULL, '', 1, 1, 1, '2022-07-09 11:50:24', '2022-07-09 11:50:24');
-INSERT INTO `n_detail_tables` VALUES (87, 'act', 0, 'Kích hoạt', 'checkbox', 'q_supplies', 1, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-07-09 11:50:24', '2022-07-09 11:50:24');
-INSERT INTO `n_detail_tables` VALUES (88, 'updated_at', 0, 'Sửa', 'date_time', 'q_supplies', 1, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-07-09 11:50:24', '2022-07-09 11:50:24');
+INSERT INTO `n_detail_tables` VALUES (84, 'name', 0, 'Tên', 'text', 'q_supplies', 1, 1, 1, 1, NULL, NULL, 1, 0, 1, '2022-07-11 12:07:14', '2022-07-11 12:07:14');
+INSERT INTO `n_detail_tables` VALUES (85, 'type', 0, 'Loại vật tư', 'select', 'q_supplies', 1, 1, 1, 1, NULL, '{\r\n \"data\": {\r\n   \"table\": null,\r\n    \"option\":{\r\n			\"1\":\"Carton\",\r\n			\"2\":\"Mút xốp định hình\",\r\n			\"3\":\"Lụa\"\r\n   }\r\n },\r\n \"config\": {\r\n  \"searchbox\": 0\r\n }\r\n}', 1, 2, 1, '2022-07-11 12:07:14', '2022-07-11 12:07:14');
+INSERT INTO `n_detail_tables` VALUES (86, 'note', 0, 'Ghi chú', 'textarea', 'q_supplies', 0, 1, 1, 0, NULL, '', 1, 3, 1, '2022-07-11 12:07:14', '2022-07-11 12:07:14');
+INSERT INTO `n_detail_tables` VALUES (87, 'act', 0, 'Kích hoạt', 'checkbox', 'q_supplies', 1, 1, 1, 0, NULL, NULL, 1, 4, 1, '2022-07-11 12:07:14', '2022-07-11 12:07:14');
+INSERT INTO `n_detail_tables` VALUES (88, 'updated_at', 0, 'Sửa', 'date_time', 'q_supplies', 1, 1, 1, 0, NULL, NULL, 1, 5, 1, '2022-07-11 12:07:14', '2022-07-11 12:07:14');
 INSERT INTO `n_detail_tables` VALUES (89, 'id', 0, 'ID', 'text', 'q_supply_prices', 0, NULL, 0, 0, NULL, NULL, 0, 0, 0, '2022-07-09 12:06:03', '2022-07-09 12:06:03');
 INSERT INTO `n_detail_tables` VALUES (90, 'name', 0, 'Tên', 'text', 'q_supply_prices', 1, 1, 1, 1, NULL, NULL, 1, 1, 1, '2022-07-09 12:06:03', '2022-07-09 12:06:03');
 INSERT INTO `n_detail_tables` VALUES (91, 'price', 0, 'Chi phí', 'text', 'q_supply_prices', 1, 1, 1, 0, NULL, '', 1, 1, 1, '2022-07-09 12:06:03', '2022-07-09 12:06:03');
@@ -13072,6 +13072,7 @@ INSERT INTO `n_detail_tables` VALUES (93, 'q_supply_id', 0, 'Nhóm vật tư', '
 INSERT INTO `n_detail_tables` VALUES (94, 'note', 0, 'Ghi chú', 'textarea', 'q_supply_prices', 0, 1, 1, 0, NULL, '', 1, 1, 1, '2022-07-09 12:06:03', '2022-07-09 12:06:03');
 INSERT INTO `n_detail_tables` VALUES (95, 'act', 0, 'Kích hoạt', 'checkbox', 'q_supply_prices', 1, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-07-09 12:06:03', '2022-07-09 12:06:03');
 INSERT INTO `n_detail_tables` VALUES (96, 'updated_at', 0, 'Sửa', 'date_time', 'q_supply_prices', 1, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-07-09 12:06:03', '2022-07-09 12:06:03');
+INSERT INTO `n_detail_tables` VALUES (97, 'factor', 0, 'Hệ số', 'text', 'q_supplies', 1, 1, 1, 1, NULL, NULL, 1, 1, 1, '2022-07-11 12:07:14', '2022-07-11 12:07:14');
 
 -- ----------------------------
 -- Table structure for n_group_users
@@ -13111,7 +13112,7 @@ CREATE TABLE `n_modules`  (
   `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of n_modules
@@ -13277,7 +13278,7 @@ CREATE TABLE `q_cartons`  (
   `paper_size` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   `elevate` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   `peel` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
-  `cut` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `milling` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   `quote_id` int(10) NULL DEFAULT NULL,
   `total_cost` bigint(20) NULL DEFAULT NULL,
   `act` tinyint(4) NULL DEFAULT NULL,
@@ -13285,7 +13286,7 @@ CREATE TABLE `q_cartons`  (
   `updated_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `quote_index`(`quote_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for q_configs
@@ -13306,7 +13307,7 @@ CREATE TABLE `q_configs`  (
   `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`, `keyword`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of q_configs
@@ -13317,6 +13318,8 @@ INSERT INTO `q_configs` VALUES (3, 'plus_percent', 'PLUS_PERCENT', '2', 1, 'text
 INSERT INTO `q_configs` VALUES (4, 'min_valid_paper', 'MIN_VALID_PAPER', '1000', 1, 'text', 'Số tờ in tối thiểu tính giá máy in', 0, NULL, NULL, '11', '2022-07-01 18:23:36', '2022-07-01 18:23:36');
 INSERT INTO `q_configs` VALUES (5, 'plus_paper_device', 'PLUS_PAPER_DEVICE', '30', 1, 'text', 'Số tờ in thiết bị cộng thêm', 0, NULL, NULL, '11', '2022-07-01 18:23:36', '2022-07-01 18:23:36');
 INSERT INTO `q_configs` VALUES (6, 'plus_carton', 'PLUS_CARTON', '50', 1, 'text', 'Carton cộng thêm', 0, NULL, NULL, '11', '2022-06-30 09:46:55', '2022-06-30 09:46:55');
+INSERT INTO `q_configs` VALUES (7, 'peel_carton_pluss', 'PEEL_CARTON_PLUS', '5', 1, 'text', 'Đơn giá bóc lề carton cộng thêm', 0, NULL, NULL, '11', '2022-07-11 18:24:08', '2022-07-11 18:24:11');
+INSERT INTO `q_configs` VALUES (8, 'peel_foam_pluss', 'PEEL_FOAM_PLUS', '10', 1, 'text', 'Đơn giá bóc lề cao su, mút xốp cộng thêm', 0, NULL, NULL, '11', '2022-07-11 18:24:08', '2022-07-11 18:24:11');
 
 -- ----------------------------
 -- Table structure for q_devices
@@ -13463,8 +13466,9 @@ DROP TABLE IF EXISTS `q_supplies`;
 CREATE TABLE `q_supplies`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Mã nhóm',
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Tên nhóm',
-  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Ghi chú',
   `type` tinyint(4) NULL DEFAULT NULL COMMENT 'Cha',
+  `factor` bigint(20) NULL DEFAULT NULL,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Ghi chú',
   `act` tinyint(4) NULL DEFAULT NULL,
   `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
@@ -13477,19 +13481,19 @@ CREATE TABLE `q_supplies`  (
 -- ----------------------------
 -- Records of q_supplies
 -- ----------------------------
-INSERT INTO `q_supplies` VALUES (1, 'Carton bìa', '', 1, 1, '2022-07-09 10:52:45', '2022-07-09 10:52:45');
-INSERT INTO `q_supplies` VALUES (2, 'Carton thành', '', 1, 1, '2022-07-09 10:52:45', '2022-07-09 10:52:45');
-INSERT INTO `q_supplies` VALUES (3, 'Carton nắp', '', 1, 1, '2022-07-09 10:52:45', '2022-07-09 10:52:45');
-INSERT INTO `q_supplies` VALUES (4, 'Carton đáy', '', 1, 1, '2022-07-09 10:52:45', '2022-07-09 10:52:45');
-INSERT INTO `q_supplies` VALUES (5, 'Carton định hình', '', 1, 1, '2022-07-09 10:52:45', '2022-07-09 10:52:45');
-INSERT INTO `q_supplies` VALUES (6, 'Cao su non', NULL, 2, 1, '2022-07-09 10:52:45', '2022-07-09 10:52:45');
-INSERT INTO `q_supplies` VALUES (7, 'Cao su non bồi nhung', NULL, 2, 1, '2022-07-09 10:52:45', '2022-07-09 10:52:45');
-INSERT INTO `q_supplies` VALUES (8, 'Mút phẳng K40', NULL, 2, 1, '2022-07-09 10:52:45', '2022-07-09 10:52:45');
-INSERT INTO `q_supplies` VALUES (9, 'Mút phẳng K30', NULL, 2, 1, '2022-07-09 10:52:45', '2022-07-09 10:52:45');
-INSERT INTO `q_supplies` VALUES (10, 'Mút phẳng K21', NULL, 2, 1, '2022-07-09 10:52:45', '2022-07-09 10:52:45');
-INSERT INTO `q_supplies` VALUES (11, 'Mút phẳng K21(Bồi nhung)', '', 2, 1, '2022-07-09 10:52:45', '2022-07-09 10:52:45');
-INSERT INTO `q_supplies` VALUES (12, 'Mút phẳng K30 bồi nhung', '', 2, 1, '2022-07-09 10:52:45', '2022-07-09 10:52:45');
-INSERT INTO `q_supplies` VALUES (13, 'Lụa', NULL, 3, 1, '2022-07-09 11:17:07', '2022-07-09 11:17:10');
+INSERT INTO `q_supplies` VALUES (1, 'Carton bìa', 1, 1, '', 1, '2022-07-11 12:08:25', '2022-07-11 12:08:25');
+INSERT INTO `q_supplies` VALUES (2, 'Carton thành', 1, 2, '', 1, '2022-07-11 12:08:25', '2022-07-11 12:08:25');
+INSERT INTO `q_supplies` VALUES (3, 'Carton nắp', 1, 2, '', 1, '2022-07-11 12:08:25', '2022-07-11 12:08:25');
+INSERT INTO `q_supplies` VALUES (4, 'Carton đáy', 1, 2, '', 1, '2022-07-11 12:08:25', '2022-07-11 12:08:25');
+INSERT INTO `q_supplies` VALUES (5, 'Carton định hình', 1, 2, '', 1, '2022-07-11 12:08:25', '2022-07-11 12:08:25');
+INSERT INTO `q_supplies` VALUES (6, 'Cao su non', 2, 0, NULL, 1, '2022-07-11 12:08:25', '2022-07-11 12:08:25');
+INSERT INTO `q_supplies` VALUES (7, 'Cao su non bồi nhung', 2, 0, NULL, 1, '2022-07-11 12:08:25', '2022-07-11 12:08:25');
+INSERT INTO `q_supplies` VALUES (8, 'Mút phẳng K40', 2, 0, NULL, 1, '2022-07-11 12:08:25', '2022-07-11 12:08:25');
+INSERT INTO `q_supplies` VALUES (9, 'Mút phẳng K30', 2, 0, NULL, 1, '2022-07-11 12:08:25', '2022-07-11 12:08:25');
+INSERT INTO `q_supplies` VALUES (10, 'Mút phẳng K21', 2, 0, NULL, 1, '2022-07-11 12:08:25', '2022-07-11 12:08:25');
+INSERT INTO `q_supplies` VALUES (11, 'Mút phẳng K21(Bồi nhung)', 2, 0, '', 1, '2022-07-11 12:08:25', '2022-07-11 12:08:25');
+INSERT INTO `q_supplies` VALUES (12, 'Mút phẳng K30 bồi nhung', 2, 0, '', 1, '2022-07-11 12:08:25', '2022-07-11 12:08:25');
+INSERT INTO `q_supplies` VALUES (13, 'Lụa', 3, 0, NULL, 1, '2022-07-11 05:11:37', '2022-07-11 05:11:37');
 
 -- ----------------------------
 -- Table structure for q_supply_prices
@@ -13613,6 +13617,6 @@ CREATE TABLE `quotes`  (
 -- ----------------------------
 -- Records of quotes
 -- ----------------------------
-INSERT INTO `quotes` VALUES (7, NULL, 'Báo giá 1', '10000', '0', 'Contacter c', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', 'hard_group', '1', NULL, NULL, '77719216', '77719216', NULL, NULL, '2022-07-08 18:27:21', '2022-07-08 11:27:21');
+INSERT INTO `quotes` VALUES (7, NULL, 'Báo giá 1', '10000', '0', 'Contacter c', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', 'hard_group', '1', NULL, NULL, '0', '0', NULL, NULL, '2022-07-11 15:52:25', '2022-07-11 08:52:25');
 
 SET FOREIGN_KEY_CHECKS = 1;
