@@ -11,7 +11,7 @@
  Target Server Version : 100424
  File Encoding         : 65001
 
- Date: 12/07/2022 18:05:10
+ Date: 13/07/2022 00:55:27
 */
 
 SET NAMES utf8mb4;
@@ -13079,7 +13079,7 @@ INSERT INTO `n_detail_tables` VALUES (100, 'qty_pro', 0, 'SL sản phẩm', 'tex
 INSERT INTO `n_detail_tables` VALUES (101, 'qty_paper', 0, 'SL vật tư', 'text', 'q_foams', 1, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-07-12 16:38:00', '2022-07-12 16:38:00');
 INSERT INTO `n_detail_tables` VALUES (102, 'total_cost', 0, 'Chi phí', 'text', 'q_foams', 1, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-07-12 14:40:49', '2022-07-12 14:40:49');
 INSERT INTO `n_detail_tables` VALUES (103, 'id', 0, 'ID', 'text', 'q_silks', 0, NULL, 0, 0, NULL, NULL, 0, 0, 0, '2022-07-12 16:45:15', '2022-07-12 16:45:15');
-INSERT INTO `n_detail_tables` VALUES (104, 'name', 0, 'Loại vật tư', 'select', 'q_silks', 1, 1, 1, 1, NULL, '{\r\n \"data\": {\r\n  \"source\": \"database\",\r\n  \"table\": \"QSupply\",\r\n  \"select\": \"id,name\",\r\n  \"field\": \"parent\"\r\n },\r\n \"config\": {\r\n  \"searchbox\": 1\r\n }\r\n}', 1, 1, 1, '2022-07-12 16:45:15', '2022-07-12 16:45:15');
+INSERT INTO `n_detail_tables` VALUES (104, 'name', 0, 'Loại vật tư', 'select', 'q_silks', 1, 1, 1, 1, NULL, '{\r\n \"data\": {\r\n  \"source\": \"database\",\r\n  \"table\": \"QSupplyPrice\",\r\n  \"select\": \"id,name\",\r\n  \"field\": \"parent\"\r\n },\r\n \"config\": {\r\n  \"searchbox\": 1\r\n }\r\n}', 1, 1, 1, '2022-07-12 19:46:01', '2022-07-12 19:46:01');
 INSERT INTO `n_detail_tables` VALUES (105, 'qty_pro', 0, 'SL sản phẩm', 'text', 'q_silks', 1, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-07-12 16:45:15', '2022-07-12 16:45:15');
 INSERT INTO `n_detail_tables` VALUES (106, 'qty_paper', 0, 'SL vật tư', 'text', 'q_silks', 1, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-07-12 16:45:15', '2022-07-12 16:45:15');
 INSERT INTO `n_detail_tables` VALUES (107, 'total_cost', 0, 'Chi phí', 'text', 'q_silks', 1, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-07-12 16:45:15', '2022-07-12 16:45:15');
@@ -13542,8 +13542,8 @@ CREATE TABLE `q_silks`  (
   `n_qty` int(10) NULL DEFAULT NULL,
   `qty_paper` bigint(20) NULL DEFAULT NULL,
   `add_paper` int(10) NULL DEFAULT NULL,
-  `length` float(10, 0) NULL DEFAULT NULL,
-  `width` float(10, 0) NULL DEFAULT NULL,
+  `length` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `width` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `paper_size` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   `hole_price` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   `quote_id` int(10) NULL DEFAULT NULL,
@@ -13558,7 +13558,7 @@ CREATE TABLE `q_silks`  (
 -- ----------------------------
 -- Records of q_silks
 -- ----------------------------
-INSERT INTO `q_silks` VALUES (1, NULL, 10000, 1, 10200, 2, 0, 1, '{\"quantative\":\"75\",\"act\":1,\"total\":12312300}', '{\"act\":1,\"total\":7000000}', 7, 19312300, NULL, NULL, NULL);
+INSERT INTO `q_silks` VALUES (1, 75, 10000, 1, 10200, 2, '0.35', '0.52', '{\"quantative\":\"75\",\"act\":1,\"total\":12312300}', '{\"num\":\"5\",\"act\":1,\"total\":13000000}', 7, 25312300, NULL, '2022-07-12 19:44:58', '2022-07-12 12:44:58');
 
 -- ----------------------------
 -- Table structure for q_supplies
@@ -13718,6 +13718,6 @@ CREATE TABLE `quotes`  (
 -- ----------------------------
 -- Records of quotes
 -- ----------------------------
-INSERT INTO `quotes` VALUES (7, NULL, 'Báo giá 1', '10000', '0', 'Contacter c', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', 'hard_group', '1', NULL, NULL, '60736492', '60736492', NULL, NULL, '2022-07-12 17:48:15', '2022-07-12 10:48:15');
+INSERT INTO `quotes` VALUES (7, NULL, 'Báo giá 1', '10000', '0', 'Contacter c', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', 'hard_group', '1', NULL, NULL, '60736492', '60736492', NULL, NULL, '2022-07-12 19:44:58', '2022-07-12 12:44:58');
 
 SET FOREIGN_KEY_CHECKS = 1;

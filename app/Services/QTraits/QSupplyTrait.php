@@ -27,8 +27,9 @@ trait QSupplyTrait{
       $n_qty = @$data['n_qty']?(int)$data['n_qty']:1;
       $hole_num = @$data['hole_price']['num']?(int)$data['hole_price']['num']:0;
       $dataAction = $data;
+      $dataAction['name'] = @$data['paper_size']['quantative'];
       $dataAction['paper_size'] = $this->configDatSizePaperHard($length, $width, $data['paper_size'], $qty_paper);
-      $dataAction['hole_price'] = $this->configDataHardPrice($hole_num, (int)getDataConfigs('QConfig', 'PRICE_SHAPE_HOLE'), (int)getDataConfigs('QConfig', 'PRICE_PLUS_HOLE'), $qty_pro);
+      $dataAction['hole_price'] = $this->configDataHardPrice($hole_num, (int)getDataConfigs('QConfig', 'PRICE_SHAPE_HOLE'), (int)getDataConfigs('QConfig', 'PRICE_PLUS_HOLE'), $qty_pro, $data['hole_price']);
       return $dataAction;
 
    }

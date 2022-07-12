@@ -16,7 +16,7 @@ trait QuoteTrait
         return $this->getObjectConfig($paper, $total);
     }
 
-    private function configDataHardPrice($num1, $num2, $plus, $num3)
+    private function configDataHardPrice($num1, $num2, $plus, $num3, $data)
     {
         //CT tính giá số lỗ vật tư lụa: ((số lỗ sp(num1) x ĐG lượt số lỗ lụa(num2)) + ĐG cộng số lỗ lụa(plus)) x SL vật tư(num3)
         $total = (($num1*$num2)+$plus)*$num3;

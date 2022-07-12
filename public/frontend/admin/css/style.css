@@ -420,4 +420,12 @@ select.form-control:not([size]):not([multiple]){
   body, .station-richmenu-main-btn-area, .siderbar-menu__lnk, .form-control, .fs-15{
     font-size: 13px;
   }
+
+  .q_stage_btn{
+    width: 160px;
+  }
+
+  .w-md-100{
+    width: 100%;
+  }
 }

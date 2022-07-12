@@ -6,9 +6,9 @@
   <div class="dashborad_content">
     <meta name="ajax-url" content="ajax-view-list/{{ $path_link }}">
     <div class="form-decstop d-none d-lg-block">
-      <div class="row align-items-center mb-24 align-items-center justify-content-between ">
+      <div class="row align-items-center align-items-center justify-content-between ">
         <div class="col-12 d-flex flex-wrap justify-content-between mb-2">
-          <div class="d-flex align-center">
+          <div class="d-flex align-center mb-3">
             <a href="{{ @session()->get('back_url') }}" class="station-richmenu-main-btn-area q_stage_btn mr-1">
               <i class="fa fa-th-list mr-2 fs-18" aria-hidden="true"></i>DS báo giá
             </a>
@@ -20,7 +20,7 @@
                 <i class="fa fa-dropbox mr-2 fs-18" aria-hidden="true"></i>Vật tư cartons
               </a>
               <a href="quote-managements/q_foams/{{ $data_quotes['id'] }}" class="station-richmenu-main-btn-area q_stage_btn mr-1 {{ $tableItem['name']=='q_foams'?'active':'' }}">
-                <i class="fa fa-barcode mr-2 fs-18" aria-hidden="true"></i>Mút xốp định hình
+                <i class="fa fa-barcode mr-2 fs-18" aria-hidden="true"></i>Mút xốp
               </a>
               <a href="quote-managements/q_silks/{{ $data_quotes['id'] }}" class="station-richmenu-main-btn-area q_stage_btn mr-1 {{ $tableItem['name']=='q_silks'?'active':'' }}">
                 <i class="fa fa-pied-piper mr-2 fs-18" aria-hidden="true"></i>Vật tư lụa
@@ -30,10 +30,10 @@
               </a>    
             @endif
           </div>
-          @if (condition)
-            <div class="d-flex align-center justify-content-end">
+          @if ($tableItem['name']!='q_finishes')
+            <div class="d-flex align-center justify-content-center mb-3 w-md-100">
               @if ($tableItem['insert'] == 1)
-              <button type="button" class="station-richmenu-main-btn-area mx-2 load_view_popup" data-toggle="modal" data-target="#actionModal" data-src="insert-detail-quotes/{{ $path_link }}">
+              <button type="button" class="station-richmenu-main-btn-area load_view_popup" data-toggle="modal" data-target="#actionModal" data-src="insert-detail-quotes/{{ $path_link }}">
                 <i class="fa fa-plus mr-2 fs-18" aria-hidden="true"></i>Thêm mới
               </button>
               @endif
@@ -50,8 +50,12 @@
         </div>
       </div>
     </div>
-    <div class="table_data">  
-      @include('table.table_base_view')
+    <div class="table_data">
+      @if ($tableItem['name']=='q_finishes')
+        {{-- expr --}}
+      @else
+        @include('table.table_base_view')
+      @endif  
     </div>
     <div class="paginate_view d-flex align-center justify-content-between">
      {{ $data_tables->links() }}
