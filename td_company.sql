@@ -11,7 +11,7 @@
  Target Server Version : 100424
  File Encoding         : 65001
 
- Date: 11/07/2022 18:46:03
+ Date: 12/07/2022 18:05:10
 */
 
 SET NAMES utf8mb4;
@@ -13054,9 +13054,9 @@ INSERT INTO `n_detail_tables` VALUES (75, 'note', 0, 'Ghi chú', 'textarea', 'q_
 INSERT INTO `n_detail_tables` VALUES (76, 'act', 0, 'Kích hoạt', 'checkbox', 'q_printer_devices', 1, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-07-01 18:12:07', '2022-07-01 18:12:07');
 INSERT INTO `n_detail_tables` VALUES (77, 'updated_at', 0, 'Sửa', 'date_time', 'q_printer_devices', 1, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-07-01 18:12:07', '2022-07-01 18:12:07');
 INSERT INTO `n_detail_tables` VALUES (78, 'id', 0, 'ID', 'text', 'q_cartons', 0, NULL, 0, 0, NULL, NULL, 0, 0, 0, '2022-07-08 16:54:11', '2022-07-08 16:54:11');
-INSERT INTO `n_detail_tables` VALUES (79, 'name', 0, 'Tên', 'text', 'q_cartons', 1, 1, 1, 1, NULL, NULL, 1, 1, 1, '2022-07-08 16:54:11', '2022-07-08 16:54:11');
+INSERT INTO `n_detail_tables` VALUES (79, 'name', 0, 'Loại vật tư', 'select', 'q_cartons', 1, 1, 1, 1, NULL, '{\r\n \"data\": {\r\n  \"source\": \"database\",\r\n  \"table\": \"QSupply\",\r\n  \"select\": \"id,name\",\r\n  \"field\": \"parent\"\r\n },\r\n \"config\": {\r\n  \"searchbox\": 1\r\n }\r\n}', 1, 1, 1, '2022-07-12 14:43:13', '2022-07-12 14:43:13');
 INSERT INTO `n_detail_tables` VALUES (80, 'qty_pro', 0, 'SL sản phẩm', 'text', 'q_cartons', 1, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-07-08 16:54:11', '2022-07-08 16:54:11');
-INSERT INTO `n_detail_tables` VALUES (81, 'qty_paper', 0, 'SL tờ in', 'text', 'q_cartons', 1, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-07-08 16:54:11', '2022-07-08 16:54:11');
+INSERT INTO `n_detail_tables` VALUES (81, 'qty_paper', 0, 'SL vật tư', 'text', 'q_cartons', 1, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-07-12 16:37:45', '2022-07-12 16:37:45');
 INSERT INTO `n_detail_tables` VALUES (82, 'total_cost', 0, 'Chi phí', 'text', 'q_cartons', 1, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-07-08 16:54:11', '2022-07-08 16:54:11');
 INSERT INTO `n_detail_tables` VALUES (83, 'id', 0, 'ID', 'text', 'q_supplies', 0, NULL, 0, 0, NULL, NULL, 0, 0, 0, '2022-07-09 11:50:24', '2022-07-09 11:50:24');
 INSERT INTO `n_detail_tables` VALUES (84, 'name', 0, 'Tên', 'text', 'q_supplies', 1, 1, 1, 1, NULL, NULL, 1, 0, 1, '2022-07-11 12:07:14', '2022-07-11 12:07:14');
@@ -13073,6 +13073,16 @@ INSERT INTO `n_detail_tables` VALUES (94, 'note', 0, 'Ghi chú', 'textarea', 'q_
 INSERT INTO `n_detail_tables` VALUES (95, 'act', 0, 'Kích hoạt', 'checkbox', 'q_supply_prices', 1, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-07-09 12:06:03', '2022-07-09 12:06:03');
 INSERT INTO `n_detail_tables` VALUES (96, 'updated_at', 0, 'Sửa', 'date_time', 'q_supply_prices', 1, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-07-09 12:06:03', '2022-07-09 12:06:03');
 INSERT INTO `n_detail_tables` VALUES (97, 'factor', 0, 'Hệ số', 'text', 'q_supplies', 1, 1, 1, 1, NULL, NULL, 1, 1, 1, '2022-07-11 12:07:14', '2022-07-11 12:07:14');
+INSERT INTO `n_detail_tables` VALUES (98, 'id', 0, 'ID', 'text', 'q_foams', 0, NULL, 0, 0, NULL, NULL, 0, 0, 0, '2022-07-12 14:40:49', '2022-07-12 14:40:49');
+INSERT INTO `n_detail_tables` VALUES (99, 'name', 0, 'Loại vật tư', 'select', 'q_foams', 1, 1, 1, 1, NULL, '{\r\n \"data\": {\r\n  \"source\": \"database\",\r\n  \"table\": \"QSupply\",\r\n  \"select\": \"id,name\",\r\n  \"field\": \"parent\"\r\n },\r\n \"config\": {\r\n  \"searchbox\": 1\r\n }\r\n}', 1, 1, 1, '2022-07-12 14:42:47', '2022-07-12 14:42:47');
+INSERT INTO `n_detail_tables` VALUES (100, 'qty_pro', 0, 'SL sản phẩm', 'text', 'q_foams', 1, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-07-12 14:40:49', '2022-07-12 14:40:49');
+INSERT INTO `n_detail_tables` VALUES (101, 'qty_paper', 0, 'SL vật tư', 'text', 'q_foams', 1, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-07-12 16:38:00', '2022-07-12 16:38:00');
+INSERT INTO `n_detail_tables` VALUES (102, 'total_cost', 0, 'Chi phí', 'text', 'q_foams', 1, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-07-12 14:40:49', '2022-07-12 14:40:49');
+INSERT INTO `n_detail_tables` VALUES (103, 'id', 0, 'ID', 'text', 'q_silks', 0, NULL, 0, 0, NULL, NULL, 0, 0, 0, '2022-07-12 16:45:15', '2022-07-12 16:45:15');
+INSERT INTO `n_detail_tables` VALUES (104, 'name', 0, 'Loại vật tư', 'select', 'q_silks', 1, 1, 1, 1, NULL, '{\r\n \"data\": {\r\n  \"source\": \"database\",\r\n  \"table\": \"QSupply\",\r\n  \"select\": \"id,name\",\r\n  \"field\": \"parent\"\r\n },\r\n \"config\": {\r\n  \"searchbox\": 1\r\n }\r\n}', 1, 1, 1, '2022-07-12 16:45:15', '2022-07-12 16:45:15');
+INSERT INTO `n_detail_tables` VALUES (105, 'qty_pro', 0, 'SL sản phẩm', 'text', 'q_silks', 1, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-07-12 16:45:15', '2022-07-12 16:45:15');
+INSERT INTO `n_detail_tables` VALUES (106, 'qty_paper', 0, 'SL vật tư', 'text', 'q_silks', 1, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-07-12 16:45:15', '2022-07-12 16:45:15');
+INSERT INTO `n_detail_tables` VALUES (107, 'total_cost', 0, 'Chi phí', 'text', 'q_silks', 1, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-07-12 16:45:15', '2022-07-12 16:45:15');
 
 -- ----------------------------
 -- Table structure for n_group_users
@@ -13237,6 +13247,9 @@ INSERT INTO `n_tables` VALUES (11, 'q_printer_devices', 'Máy in & chi phí', 0,
 INSERT INTO `n_tables` VALUES (12, 'q_cartons', 'Vật tư cartons', 0, 'q_cartons', 'q_cartons', 0, 10, 10, 'view', 'q_management_', 1, 1, 1, 1, 0, '2022-07-06 16:28:52', '2022-07-06 16:28:52');
 INSERT INTO `n_tables` VALUES (13, 'q_supplies', 'Vật tư tham gia sx', 0, 'q_supplies', 'q_supplies', 0, 10, 10, 'view', '', 1, 1, 1, 1, 0, '2022-07-09 11:50:36', '2022-07-09 11:50:36');
 INSERT INTO `n_tables` VALUES (14, 'q_supply_prices', 'Đơn giá vật tư', 0, 'q_supply_prices', 'q_supply_prices', 0, 10, 10, 'view', NULL, 1, 1, 1, 1, 0, '2022-07-09 11:59:07', '2022-07-09 11:59:08');
+INSERT INTO `n_tables` VALUES (15, 'q_foams', 'Mút xốp định hình', 0, 'q_foams', 'q_foams', 0, 10, 10, 'view', 'q_management_', 1, 1, 1, 1, 0, '2022-07-12 11:29:26', '2022-07-12 11:29:26');
+INSERT INTO `n_tables` VALUES (16, 'q_silks', 'Vật tư lụa', 0, 'q_silks', 'q_silks', 0, 10, 10, 'view', 'q_management_', 1, 1, 1, 1, 0, '2022-07-12 11:29:26', '2022-07-12 11:29:26');
+INSERT INTO `n_tables` VALUES (17, 'q_finishes', 'Chi phí bồi & hoàn thiện', 0, 'q_finishes', 'q_finishes', 0, 10, 10, 'view', 'q_management_', 1, 1, 1, 1, 0, '2022-07-12 11:29:26', '2022-07-12 11:29:26');
 
 -- ----------------------------
 -- Table structure for n_users
@@ -13286,7 +13299,12 @@ CREATE TABLE `q_cartons`  (
   `updated_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `quote_index`(`quote_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of q_cartons
+-- ----------------------------
+INSERT INTO `q_cartons` VALUES (7, 2, 10000, 2, 5100, 2, '0.34', '0.52', '{\"quantative\":\"3\",\"act\":1,\"total\":10653084}', '{\"act\":\"1\",\"shape_price\":\"100\",\"device\":\"11\",\"total\":850000}', '{\"act\":\"1\",\"device\":\"12\",\"total\":170000}', '{\"act\":\"1\",\"device\":\"14\",\"total\":2500000}', 7, 14173084, NULL, NULL, '2022-07-12 09:02:29');
 
 -- ----------------------------
 -- Table structure for q_configs
@@ -13307,7 +13325,7 @@ CREATE TABLE `q_configs`  (
   `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`, `keyword`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of q_configs
@@ -13318,8 +13336,10 @@ INSERT INTO `q_configs` VALUES (3, 'plus_percent', 'PLUS_PERCENT', '2', 1, 'text
 INSERT INTO `q_configs` VALUES (4, 'min_valid_paper', 'MIN_VALID_PAPER', '1000', 1, 'text', 'Số tờ in tối thiểu tính giá máy in', 0, NULL, NULL, '11', '2022-07-01 18:23:36', '2022-07-01 18:23:36');
 INSERT INTO `q_configs` VALUES (5, 'plus_paper_device', 'PLUS_PAPER_DEVICE', '30', 1, 'text', 'Số tờ in thiết bị cộng thêm', 0, NULL, NULL, '11', '2022-07-01 18:23:36', '2022-07-01 18:23:36');
 INSERT INTO `q_configs` VALUES (6, 'plus_carton', 'PLUS_CARTON', '50', 1, 'text', 'Carton cộng thêm', 0, NULL, NULL, '11', '2022-06-30 09:46:55', '2022-06-30 09:46:55');
-INSERT INTO `q_configs` VALUES (7, 'peel_carton_pluss', 'PEEL_CARTON_PLUS', '5', 1, 'text', 'Đơn giá bóc lề carton cộng thêm', 0, NULL, NULL, '11', '2022-07-11 18:24:08', '2022-07-11 18:24:11');
-INSERT INTO `q_configs` VALUES (8, 'peel_foam_pluss', 'PEEL_FOAM_PLUS', '10', 1, 'text', 'Đơn giá bóc lề cao su, mút xốp cộng thêm', 0, NULL, NULL, '11', '2022-07-11 18:24:08', '2022-07-11 18:24:11');
+INSERT INTO `q_configs` VALUES (7, 'peel_carton_pluss', 'PEEL_CARTON_PLUS', '5', 1, 'text', 'ĐG bóc lề carton cộng thêm', 0, NULL, NULL, '11', '2022-07-12 17:37:59', '2022-07-12 17:37:59');
+INSERT INTO `q_configs` VALUES (8, 'peel_foam_pluss', 'PEEL_FOAM_PLUS', '10', 1, 'text', 'ĐG bóclề vật tư cộng thêm', 0, NULL, NULL, '11', '2022-07-12 17:39:12', '2022-07-12 17:39:12');
+INSERT INTO `q_configs` VALUES (9, 'price_shape_hole', 'PRICE_SHAPE_HOLE', '200', 1, 'text', 'ĐG lượt số lỗ lụa', 0, NULL, NULL, '11', '2022-07-12 17:39:22', '2022-07-12 17:39:24');
+INSERT INTO `q_configs` VALUES (10, 'price_plus_hole', 'PRICE_PLUS_HOLE', '300', 1, 'text', 'ĐG cộng thêm số lỗ lụa', 0, NULL, NULL, '11', '2022-07-12 17:39:22', '2022-07-12 17:39:24');
 
 -- ----------------------------
 -- Table structure for q_devices
@@ -13357,6 +13377,53 @@ INSERT INTO `q_devices` VALUES (11, 'Máy bế bán tự động', '0', '150', '
 INSERT INTO `q_devices` VALUES (12, 'Máy bóc lề bán tự động', '0', '10', '20000', 'peel', '', 1, 1, '2022-06-30 22:22:41', '2022-06-30 22:22:41');
 INSERT INTO `q_devices` VALUES (13, 'Dán hộp tay', '0', '120', '50000', 'paste', '', 1, 1, '2022-06-30 22:22:41', '2022-06-30 22:22:41');
 INSERT INTO `q_devices` VALUES (14, 'Máy phay bán tự động', '0', '120', '50000', 'milling', '', 1, 1, '2022-06-30 22:22:41', '2022-06-30 22:22:41');
+
+-- ----------------------------
+-- Table structure for q_finishes
+-- ----------------------------
+DROP TABLE IF EXISTS `q_finishes`;
+CREATE TABLE `q_finishes`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `fill_price` float(10, 0) NULL DEFAULT NULL,
+  `finishes_price` float(10, 0) NULL DEFAULT NULL,
+  `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `total_cost` bigint(20) NULL DEFAULT NULL,
+  `quote_id` int(10) NULL DEFAULT NULL,
+  `act` tinyint(4) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `quote_index`(`quote_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for q_foams
+-- ----------------------------
+DROP TABLE IF EXISTS `q_foams`;
+CREATE TABLE `q_foams`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` int(10) NULL DEFAULT NULL,
+  `qty_pro` bigint(20) NULL DEFAULT NULL,
+  `n_qty` bigint(20) NULL DEFAULT NULL,
+  `qty_paper` bigint(20) NULL DEFAULT NULL,
+  `add_paper` bigint(20) NULL DEFAULT NULL,
+  `length` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `width` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `paper_size` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `elevate` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `peel` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `quote_id` int(10) NULL DEFAULT NULL,
+  `total_cost` bigint(20) NULL DEFAULT NULL,
+  `act` tinyint(4) NULL DEFAULT NULL,
+  `created_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `quote_indx`(`quote_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of q_foams
+-- ----------------------------
+INSERT INTO `q_foams` VALUES (1, 6, 10000, 2, 5100, 2, '0.38', '0.55', '{\"quantative\":\"12\",\"act\":1,\"total\":107635000.00000001}', '{\"act\":\"1\",\"shape_price\":\"100\",\"device\":\"4\",\"total\":600000}', '{\"act\":\"1\",\"device\":\"12\",\"total\":220000}', 7, 108455000, NULL, NULL, '2022-07-12 09:03:44');
 
 -- ----------------------------
 -- Table structure for q_laminate_materals
@@ -13421,7 +13488,12 @@ CREATE TABLE `q_papers`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `quote_indx`(`quote_id`) USING BTREE,
   INDEX `main_index`(`main`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of q_papers
+-- ----------------------------
+INSERT INTO `q_papers` VALUES (1, 'Báo giá 1', 10000, 1, 10200, 2, '0.32', '0.51', '{\"quantitative\":\"400\",\"unit_price\":\"29.5\",\"act\":1,\"total\":19835328}', '{\"type\":\"1\",\"total\":null}', '{\"act\":\"1\",\"color_num\":\"2\",\"style\":\"2\",\"device\":\"2\",\"total\":5728000}', '{\"act\":0}', '{\"act\":\"1\",\"materal\":\"2\",\"num_face\":\"2\",\"cover_materal\":\"5\",\"cover_num_face\":\"1\",\"total\":17650080.000000004}', '{\"act\":0}', '{\"act\":0}', '{\"act\":\"1\",\"float\":\"0\",\"shape_price\":\"200\",\"device\":\"4\",\"total\":1100000}', '{\"act\":0}', '{\"act\":\"1\",\"device\":\"13\",\"total\":1250000}', '{\"act\":\"1\",\"price\":\"100\",\"total\":1000000}', 7, NULL, 46563408, 1, NULL, '2022-07-12 03:24:14', '2022-07-12 03:24:14');
 
 -- ----------------------------
 -- Table structure for q_printer_devices
@@ -13460,6 +13532,35 @@ INSERT INTO `q_printer_devices` VALUES (11, 'Máy in uv 72x102', '72', '102', '1
 INSERT INTO `q_printer_devices` VALUES (12, 'Máy in uv 79x109', '79', '109', '150000', '600', '800000', NULL, 1, '2022-07-01 11:17:02', '2022-07-01 11:17:02', 2);
 
 -- ----------------------------
+-- Table structure for q_silks
+-- ----------------------------
+DROP TABLE IF EXISTS `q_silks`;
+CREATE TABLE `q_silks`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` int(10) NULL DEFAULT NULL,
+  `qty_pro` bigint(20) NULL DEFAULT NULL,
+  `n_qty` int(10) NULL DEFAULT NULL,
+  `qty_paper` bigint(20) NULL DEFAULT NULL,
+  `add_paper` int(10) NULL DEFAULT NULL,
+  `length` float(10, 0) NULL DEFAULT NULL,
+  `width` float(10, 0) NULL DEFAULT NULL,
+  `paper_size` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `hole_price` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `quote_id` int(10) NULL DEFAULT NULL,
+  `total_cost` bigint(20) NULL DEFAULT NULL,
+  `act` tinyint(4) NULL DEFAULT NULL,
+  `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `quote_indx`(`quote_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of q_silks
+-- ----------------------------
+INSERT INTO `q_silks` VALUES (1, NULL, 10000, 1, 10200, 2, 0, 1, '{\"quantative\":\"75\",\"act\":1,\"total\":12312300}', '{\"act\":1,\"total\":7000000}', 7, 19312300, NULL, NULL, NULL);
+
+-- ----------------------------
 -- Table structure for q_supplies
 -- ----------------------------
 DROP TABLE IF EXISTS `q_supplies`;
@@ -13493,7 +13594,6 @@ INSERT INTO `q_supplies` VALUES (9, 'Mút phẳng K30', 2, 0, NULL, 1, '2022-07-
 INSERT INTO `q_supplies` VALUES (10, 'Mút phẳng K21', 2, 0, NULL, 1, '2022-07-11 12:08:25', '2022-07-11 12:08:25');
 INSERT INTO `q_supplies` VALUES (11, 'Mút phẳng K21(Bồi nhung)', 2, 0, '', 1, '2022-07-11 12:08:25', '2022-07-11 12:08:25');
 INSERT INTO `q_supplies` VALUES (12, 'Mút phẳng K30 bồi nhung', 2, 0, '', 1, '2022-07-11 12:08:25', '2022-07-11 12:08:25');
-INSERT INTO `q_supplies` VALUES (13, 'Lụa', 3, 0, NULL, 1, '2022-07-11 05:11:37', '2022-07-11 05:11:37');
 
 -- ----------------------------
 -- Table structure for q_supply_prices
@@ -13514,7 +13614,7 @@ CREATE TABLE `q_supply_prices`  (
   INDEX `carton_foam_index`(`q_supply_id`) USING BTREE,
   INDEX `name_index`(`name`) USING BTREE,
   INDEX `act_indx`(`act`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 75 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 76 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of q_supply_prices
@@ -13585,6 +13685,7 @@ INSERT INTO `q_supply_prices` VALUES (69, '0.8cm', 60000, 2, 6, '', 1, '2022-07-
 INSERT INTO `q_supply_prices` VALUES (70, '4.0cm', 227000, 2, 7, '', 1, '2022-07-09 11:28:50', '2022-07-09 11:28:50');
 INSERT INTO `q_supply_prices` VALUES (71, '4.5cm', 227000, 2, 7, '', 1, '2022-07-09 11:28:50', '2022-07-09 11:28:50');
 INSERT INTO `q_supply_prices` VALUES (72, '5cm', 227000, 2, 7, '', 1, '2022-07-09 11:28:50', '2022-07-09 11:28:50');
+INSERT INTO `q_supply_prices` VALUES (75, 'Vật tư lụa thường ( lụa vàng )', 6600, 3, 0, NULL, 1, '2022-07-12 10:08:08', '2022-07-12 10:08:08');
 
 -- ----------------------------
 -- Table structure for quotes
@@ -13617,6 +13718,6 @@ CREATE TABLE `quotes`  (
 -- ----------------------------
 -- Records of quotes
 -- ----------------------------
-INSERT INTO `quotes` VALUES (7, NULL, 'Báo giá 1', '10000', '0', 'Contacter c', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', 'hard_group', '1', NULL, NULL, '0', '0', NULL, NULL, '2022-07-11 15:52:25', '2022-07-11 08:52:25');
+INSERT INTO `quotes` VALUES (7, NULL, 'Báo giá 1', '10000', '0', 'Contacter c', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', 'hard_group', '1', NULL, NULL, '60736492', '60736492', NULL, NULL, '2022-07-12 17:48:15', '2022-07-12 10:48:15');
 
 SET FOREIGN_KEY_CHECKS = 1;

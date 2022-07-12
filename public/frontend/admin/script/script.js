@@ -121,6 +121,21 @@ var loadDataPopup = function()
 		$('.modalAction').find('iframe').attr('src', src);
 	});
 }
+var ajaxChildOptionByParent = function()
+{
+  $(document).on('change', 'select.change_select_ajax', function(event) {
+    event.preventDefault();
+    eParent = $(this).closest('.ajaxSelectModule');
+    parent_id = $(this).val();
+    url = $(this).data('url')+parent_id;
+    $.ajax({
+      url: url,
+    })
+    .done(function(html) {
+      eParent.find('select.ajax_option').html(html);
+    });
+  }); 
+}
 
 $(function(){
 	submitActionAjaxForm();
@@ -131,4 +146,5 @@ $(function(){
 	passwordInputPrevent();
 	checkMultiRecordModule();
 	loadDataPopup();
+	ajaxChildOptionByParent();
 });

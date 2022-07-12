@@ -9,9 +9,11 @@
 <div class="form-group d-flex align-items-center mb-4">
   <label class="base_label mr-2 mb-0 label_quotes">Số lượng <span class="text-lowercase">{{ @$tableItem['note'] }}</span></label>
   <div class="d-flex align-items-center">
-    <input class="form-control fs-15 short_input" type="number" name="qty_paper" value="{{ @$dataitem['qty_paper']?$dataitem['qty_paper']:getExactQuantityPaper(@$dataitem['qty_pro'])}}" min="0" required>
-    <span class="ml-2 w_available">+{{ getDataConfigs('QConfig', @$key_plus_paper) }}</span>
-  </div>  
+    <div class="d-flex align-items-center">
+      <input class="form-control fs-15 short_input" type="number" name="qty_paper" value="{{ @$dataitem['qty_paper']?$dataitem['qty_paper']:getExactQuantityPaper(@$dataitem['qty_pro'])}}" min="0" required>
+    </div>
+    <span class="ml-2 w_available">+{{ getDataConfigs('QConfig', @$key_plus_paper) }}</span> 
+  </div> 
 </div>
 <div class="form-group d-none align-items-center mb-4">
   <input class="form-control fs-15 short_input" type="hidden" name="add_paper" value="{{ getDataConfigs('QConfig', 'PLUS_PERCENT') }}" min="0" required>  

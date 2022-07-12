@@ -3,28 +3,25 @@ namespace App\Services;
 use App\Services\BaseService;
 use App\Services\QTraits\QuoteTrait;
 use App\Services\QTraits\QPaperTrait;
-use App\Services\QTraits\QCartonTrait;
+use App\Services\QTraits\QSupplyTrait;
 class QuoteService extends BaseService
 {
 	function __construct()
 	{
 		parent::__construct();
-        $this->quotes_products = new \App\Models\QPaper;
+        $this->q_papers = new \App\Models\QPaper;
+        $this->q_cartons = new \App\Models\QCarton;
         $this->quotes = new \App\Models\Quote;
 	}
-    use QuoteTrait, QPaperTrait, QCartonTrait;
+    use QuoteTrait, QPaperTrait, QSupplyTrait;
 
     public function refreshQuoteTotal($quote_id)
     {
-        $this->quotes_products = new \App\Models\QPaper;
-        // $quotes_cartons = new \App\Models\QuoteCarton;
-        // $quotes_silks = new \App\Models\QuoteSilk;
-        // $quotes_finishes = new \App\Models\QuoteFinish;
-        $list_pro = $this->quotes_products->where('quote_id', $quote_id)->get();
-        // $list_carton = $quotes_cartons->where('quote', $parent)->get();
+        $lisPapers = $this->q_papers->where('quote_id', $quote_id)->get()->toArray();
+        $listCatons = $this->q_cartons->where('quote_id', $quote_id)->get()->toArray();
         // $list_silk = $quotes_silks->where('quote', $parent)->get();
         // $list_finish = $quotes_finishes->where('quote', $parent)->get();
-        $list = $list_pro;
+        $list = array_merge($lisPapers, $listCatons);
         $total_cost = 0;
         if ($list!=null&&count($list)>0) {
             foreach ($list as $value) {
@@ -40,23 +37,30 @@ class QuoteService extends BaseService
         $this->quotes->where('id', $quote_id)->update($data); 
     }
 
-    public function doInsert($table, $data, $quote_id){
+    private function getDataDoAction($data, $table)
+    {
         if ($table == 'q_papers') {
-            $data_insert = $this->getDataActionQPaper($data);
-        }elseif ($table == 'q_cartons') {
-            $data_insert = $this->getDataActionQCarton($data, $table);
+            $data_action = $this->getDataActionQPaper($data);
+        }elseif ($table == 'q_cartons' || $table == 'q_foams') {
+            $data_action = $this->getDataActionCartonFoam($data, $table);
+        }elseif ($table == 'q_silks') {
+            $data_action = $this->getDataActionSilk($data);
         }
-        $models = getModelByTable($table);
+        $data_action['total_cost'] = $this->priceCaculatedByArray($data_action);
+        return $data_action;
+    }
+
+    public function doInsert($table, $data, $quote_id){
+        $data_insert = $this->getDataDoAction($data, $table);
         $data_insert['quote_id'] = $quote_id;
+        $models = getModelByTable($table);
         $insert = $models->insert($data_insert);
         $this->refreshQuoteTotal($quote_id);
         return $insert;
     }
 
     public function doUpdate($table, $data, $quote_id, $id){
-        if ($table == 'q_papers') {
-            $data_update = $this->getDataActionQPaper($data);
-        }
+        $data_update = $this->getDataDoAction($data, $table);
         $models = getModelByTable($table);
         $update = $models::where('id', $id)->update($data_update);
         $this->refreshQuoteTotal($quote_id);

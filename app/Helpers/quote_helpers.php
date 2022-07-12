@@ -21,12 +21,21 @@ if (!function_exists('getExactQuantityPaper')) {
 	}
 
 	if (!function_exists('getNameSupplyByType')) {
-		function getSupplyByTypeType($table, $key){
+		function getSupplyByType($table, $key){
 			$supply = getDataTable($table, 'id, name', array(
 		                ['key'=>'act', 'compare'=>'=', 'value'=>1],
 		                ['key'=>'type', 'compare'=>'=', 'value'=>$key]
 		                ), 0, 'name', 'asc');
 		    return $supply!=null?$supply:array();
+		}
+	}
+
+	if (!function_exists('getSupplyPriceByParent')) {
+		function getSupplyPriceByParent($supply_id)
+		{
+			$supply_prices = new \App\Models\QSupplyPrice;
+			$data = $supply_prices->where('act', 1)->where('q_supply_id', $supply_id)->orderBy('name', 'asc')->get();
+            return $data!=null?$data:array();
 		}
 	}
 }

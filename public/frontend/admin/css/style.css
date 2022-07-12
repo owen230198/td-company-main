@@ -364,7 +364,7 @@ select.form-control:not([size]):not([multiple]),
 }
 
 .label_quotes{
-  min-width: 150px;
+  width: 150px;
 }
 
 .bg_grey{

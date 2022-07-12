@@ -16,10 +16,10 @@
               <i class="fa fa-file-o mr-2 fs-18" aria-hidden="true"></i>Tờ in
             </a>
             @if (@$data_quotes['group_product']=='hard_group')
-              <a href="quote-managements/q_cartons/{{ $data_quotes['id'] }}?type=0" class="station-richmenu-main-btn-area q_stage_btn mr-1 {{ $tableItem['name']=='q_cartons'?'active':'' }}">
+              <a href="quote-managements/q_cartons/{{ $data_quotes['id'] }}" class="station-richmenu-main-btn-area q_stage_btn mr-1 {{ $tableItem['name']=='q_cartons'?'active':'' }}">
                 <i class="fa fa-dropbox mr-2 fs-18" aria-hidden="true"></i>Vật tư cartons
               </a>
-              <a href="quote-managements/q_foams/{{ $data_quotes['id'] }}?type=1" class="station-richmenu-main-btn-area q_stage_btn mr-1 {{ $tableItem['name']=='q_foams'?'active':'' }}">
+              <a href="quote-managements/q_foams/{{ $data_quotes['id'] }}" class="station-richmenu-main-btn-area q_stage_btn mr-1 {{ $tableItem['name']=='q_foams'?'active':'' }}">
                 <i class="fa fa-barcode mr-2 fs-18" aria-hidden="true"></i>Mút xốp định hình
               </a>
               <a href="quote-managements/q_silks/{{ $data_quotes['id'] }}" class="station-richmenu-main-btn-area q_stage_btn mr-1 {{ $tableItem['name']=='q_silks'?'active':'' }}">
@@ -30,21 +30,23 @@
               </a>    
             @endif
           </div>
-          <div class="d-flex align-center justify-content-end">
-            @if ($tableItem['insert'] == 1)
-            <button type="button" class="station-richmenu-main-btn-area mx-2 load_view_popup" data-toggle="modal" data-target="#actionModal" data-src="insert-detail-quotes/{{ $path_link }}">
-              <i class="fa fa-plus mr-2 fs-18" aria-hidden="true"></i>Thêm mới
-            </button>
-            @endif
-            @if ($tableItem['remove'])
-              <button class="station-richmenu-main-btn-area mx-2 red_button" data-toggle="modal" data-target="#multiDeleteModal">
-                <i class="fa fa-trash mr-2 fs-18" aria-hidden="true"></i>Xóa 
+          @if (condition)
+            <div class="d-flex align-center justify-content-end">
+              @if ($tableItem['insert'] == 1)
+              <button type="button" class="station-richmenu-main-btn-area mx-2 load_view_popup" data-toggle="modal" data-target="#actionModal" data-src="insert-detail-quotes/{{ $path_link }}">
+                <i class="fa fa-plus mr-2 fs-18" aria-hidden="true"></i>Thêm mới
               </button>
-            @endif
-            <a href="" class="station-richmenu-main-btn-area">
-              <i class="fa fa-book mr-2 fs-18" aria-hidden="true"></i>Trợ giúp
-            </a>
-          </div>
+              @endif
+              @if ($tableItem['remove'])
+                <button class="station-richmenu-main-btn-area mx-2 red_button" data-toggle="modal" data-target="#multiDeleteModal">
+                  <i class="fa fa-trash mr-2 fs-18" aria-hidden="true"></i>Xóa 
+                </button>
+              @endif
+              <a href="" class="station-richmenu-main-btn-area">
+                <i class="fa fa-book mr-2 fs-18" aria-hidden="true"></i>Trợ giúp
+              </a>
+            </div>
+          @endif
         </div>
       </div>
     </div>

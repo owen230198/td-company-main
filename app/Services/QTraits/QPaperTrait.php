@@ -120,7 +120,6 @@ trait QPaperTrait
         $dataAction['peel'] = $this->configDataStage($qty_pro, $n_qty, $data['peel']);
         $dataAction['paste'] = $this->configDataStage($qty_pro, $n_qty, $data['paste']);
         $dataAction['plus'] = $this->configDataPlus($qty_pro, $data['plus']);
-        $dataAction['total_cost'] = $this->priceCaculatedByArray($dataAction);
         return $dataAction;
     }
 }

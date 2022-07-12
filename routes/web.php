@@ -35,6 +35,7 @@ Route::middleware(['checkLogin'])->group(function () {
 	Route::post('multiple-remove', [AdminController::class, 'multipleRemove']);
 	Route::post('update-permissions/{module_id}/{role_id}', [AdminController::class, 'updatePermission']);
 	Route::post('do-config-data/{table}', [AdminController::class, 'doConfigData']);
+	Route::get('option-child-data/{table}/{field}/{parent}', [AdminController::class, 'optionChildData']);
 
 	//quotes routes
 	Route::get('ajax-view-list/{table}/{quote_id}', [QuoteController::class, 'ajaxViewList']);

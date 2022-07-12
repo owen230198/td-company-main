@@ -151,5 +151,18 @@ class AdminController extends Controller
             echoJson(100, 'Đã có lỗi xảy ra!');  
         } 
     }
+
+    public function optionChildData($table, $field, $parent)
+    {
+        $html = '<option value="0">Danh sách chọn</option>';
+        if ($parent!=0) {
+            $models = getModelByTable($table);
+            $data = $models->where('act', 1)->where($field, $parent)->orderBy('name', 'asc')->get();
+            foreach ($data as $key => $item) {
+                $html .= '<option value="'.$item['id'].'">'.$item['name'].'</option>';
+            }
+        }
+        echo $html;
+    }
 }
 
