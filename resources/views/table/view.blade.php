@@ -9,7 +9,7 @@
         </div>
         <div class="col-12 text-right">
           <div class="d-flex align-center mb-2 justify-content-end">
-            <button type="submit" class="station-richmenu-main-btn-area" form="form-search" value="submit">
+            <button type="submit" class="station-richmenu-main-btn-area mr-2" form="form-search" value="submit">
               <i class="fa fa-filter mr-2 fs-18" aria-hidden="true"></i>Tìm kiếm
             </button>
             @if ($tableItem['insert'] == 1)

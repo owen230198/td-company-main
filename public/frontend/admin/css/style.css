@@ -398,7 +398,7 @@ select.form-control:not([size]):not([multiple]),
 
 .q_stage_btn{
   clip-path: polygon(95% 1%, 100% 50%, 95% 100%, 0% 100%, 5% 50%, 0% 0%);
-  width: 180px;
+  width: 150px;
   justify-content: center;
 }
 
@@ -416,13 +416,13 @@ select.form-control:not([size]):not([multiple]){
   }
 }
 
-@media (max-width: 1400px){
+@media (max-width: 1600px){
   body, .station-richmenu-main-btn-area, .siderbar-menu__lnk, .form-control, .fs-15{
     font-size: 13px;
   }
 
   .q_stage_btn{
-    width: 160px;
+    width: 140px;
   }
 
   .w-md-100{

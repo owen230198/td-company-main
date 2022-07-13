@@ -11,7 +11,7 @@
  Target Server Version : 100424
  File Encoding         : 65001
 
- Date: 13/07/2022 00:55:27
+ Date: 13/07/2022 18:24:30
 */
 
 SET NAMES utf8mb4;
@@ -13385,7 +13385,7 @@ DROP TABLE IF EXISTS `q_finishes`;
 CREATE TABLE `q_finishes`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `fill_price` float(10, 0) NULL DEFAULT NULL,
-  `finishes_price` float(10, 0) NULL DEFAULT NULL,
+  `finish_price` float(10, 0) NULL DEFAULT NULL,
   `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `total_cost` bigint(20) NULL DEFAULT NULL,
@@ -13393,7 +13393,12 @@ CREATE TABLE `q_finishes`  (
   `act` tinyint(4) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `quote_index`(`quote_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of q_finishes
+-- ----------------------------
+INSERT INTO `q_finishes` VALUES (1, 0, 0, NULL, NULL, 12000000, 7, NULL);
 
 -- ----------------------------
 -- Table structure for q_foams
@@ -13718,6 +13723,6 @@ CREATE TABLE `quotes`  (
 -- ----------------------------
 -- Records of quotes
 -- ----------------------------
-INSERT INTO `quotes` VALUES (7, NULL, 'Báo giá 1', '10000', '0', 'Contacter c', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', 'hard_group', '1', NULL, NULL, '60736492', '60736492', NULL, NULL, '2022-07-12 19:44:58', '2022-07-12 12:44:58');
+INSERT INTO `quotes` VALUES (7, NULL, 'Báo giá 1', '10000', '0', 'Contacter c', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', 'hard_group', '1', NULL, NULL, '206503792', '206503792', NULL, NULL, '2022-07-13 18:11:09', '2022-07-13 11:11:09');
 
 SET FOREIGN_KEY_CHECKS = 1;

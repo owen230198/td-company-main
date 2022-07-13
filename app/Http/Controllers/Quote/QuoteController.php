@@ -72,11 +72,19 @@ class QuoteController extends Controller
         unset($data['_token']);
         $status = $this->service->doInsert($table, $data, $quote_id);
         if ($status) {
-            echoJson(200, 'Thêm dữ liệu thành công!');
-            return;
+            if ($table == 'q_finishes') {
+                return back()->with('message','Thêm dữ liệu thành công !'); 
+            }else{
+                echoJson(200, 'Đã có lỗi xảy ra!');
+                return;
+            }
         }else{
-            echoJson(100, 'Đã có lỗi xảy ra!');
-            return;
+            if ($table == 'q_finishes') {
+                return back()->with('error','Thêm dữ liệu thành công !'); 
+            }else{
+                echoJson(100, 'Đã có lỗi xảy ra!');
+                return;
+            }
         }
     }
 
@@ -86,11 +94,19 @@ class QuoteController extends Controller
         unset($data['_token']);
         $status = $this->service->doUpdate($table, $data, $quote_id, $id);
         if ($status) {
-            echoJson(200, 'Cập nhật dữ liệu thành công!');
-            return;
+            if ($table == 'q_finishes') {
+                return back()->with('message','Thêm dữ liệu thành công !'); 
+            }else{
+                echoJson(200, 'Cập nhật dữ liệu thành công!');
+                return;
+            }
         }else{
-            echoJson(100, 'Đã có lỗi xảy ra!');
-            return;
+            if ($table == 'q_finishes') {
+                return back()->with('error','Đã có lỗi xảy ra !'); 
+            }else{
+                echoJson(100, 'Đã có lỗi xảy ra!');
+                return;
+            }
         }
     }
 }

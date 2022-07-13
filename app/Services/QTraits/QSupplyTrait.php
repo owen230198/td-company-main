@@ -33,4 +33,15 @@ trait QSupplyTrait{
       return $dataAction;
 
    }
+
+   public function getDataActionFinish($data, $quote_id)
+   {
+      $quote = $this->quotes->find($quote_id);
+      $qty_pro = @$quote['qty_pro']?(int)$quote['qty_pro']:0;
+      $fill_price = @$data['fill_price']['price']?(float)$data['fill_price']['price']:0;
+      $finish_price = @$data['finish_price']['price']?(float)$data['finish_price']['price']:0;
+      $dataAction['fill_price'] = $this->configDataHardPrice($fill_price, $qty_pro, 0, 1, $data['fill_price']);
+      $dataAction['finish_price'] = $this->configDataHardPrice($finish_price, $qty_pro, 0, 1, $data['finish_price']);
+      return $dataAction;
+   }
 }
