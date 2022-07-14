@@ -21,12 +21,12 @@
 			<input class="form-control fs-15 short_input mr-3" placeholder="Nhập giá" type="number" name="finish_price[price]" value="{{ @$data_finishes['price']?$data_finishes['price']:'' }}" min="0" required step="any">
 		</div>
 		<div class="d-flex justify-content-center">
-	    <button type="submit" class="station-richmenu-main-btn-area mr-2">
-	      <i class="fa fa-check mr-1 fs-17" aria-hidden="true"></i>Hoàn tất
-	    </button>
-	    <a href="config-profit/{{ $data_quotes['id'] }}" class="station-richmenu-main-btn-area">
-	      <i class="fa fa-step-forward mr-1 fs-17" aria-hidden="true"></i>Bỏ qua
-	    </a>
-	  </div>
+		    <button type="submit" class="station-richmenu-main-btn-area mr-2">
+		      <i class="fa fa-check mr-1 fs-17" aria-hidden="true"></i>Hoàn tất
+		    </button>
+		    <a href="config-profits/{{ $data_quotes['id'] }}" class="station-richmenu-main-btn-area">
+		      <i class="fa fa-step-forward mr-1 fs-17" aria-hidden="true"></i>Bỏ qua
+		    </a>
+		</div>
 	</div>
 </form>

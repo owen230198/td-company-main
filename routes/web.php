@@ -42,6 +42,7 @@ Route::middleware(['checkLogin'])->group(function () {
 	Route::get('quote-managements/{table}/{quote_id}', [QuoteController::class, 'quoteManagement']);
 	Route::get('insert-detail-quotes/{table}/{quote_id}', [QuoteController::class, 'insertDetailQuote']);
 	Route::get('update-detail-quotes/{table}/{quote_id}/{id}', [QuoteController::class, 'updateDetailQuote']);
+	Route::any('config-profits/{quote_id}', [QuoteController::class, 'configProfit']);
 	Route::post('do-insert-detail/{table}/{quote_id}', [QuoteController::class, 'doInsertDetail']);
 	Route::post('do-update-detail/{table}/{quote_id}/{id}', [QuoteController::class, 'doUpdateDetail']);
 });

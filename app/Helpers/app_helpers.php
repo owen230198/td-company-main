@@ -59,6 +59,15 @@ if (! function_exists('getSessionUser')) {
     }
 }
 
+if (! function_exists('getNameTableById')) {
+    function getNameTableById($model, $id)
+    {
+        $models = getModelByClass($model);
+        $data = $models->find($id);
+        return $data['name'];
+    }
+}
+
 if (! function_exists('getDetailDataByID')) {
     function getDetailDataByID($model, $id)
     {

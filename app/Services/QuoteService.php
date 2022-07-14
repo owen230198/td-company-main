@@ -18,14 +18,20 @@ class QuoteService extends BaseService
 	}
     use QuoteTrait, QPaperTrait, QSupplyTrait;
 
+    public function getListDataQuote($quote_id)
+    {
+        $list_data['listPapers'] = $this->q_papers->select('total_cost')->where('quote_id', $quote_id)->get()->toArray();
+        $list_data['listCatons'] = $this->q_cartons->select('total_cost')->where('quote_id', $quote_id)->get()->toArray();
+        $list_data['listFoams'] = $this->q_foams->select('total_cost')->where('quote_id', $quote_id)->get()->toArray();
+        $list_data['listSilks'] = $this->q_silks->select('total_cost')->where('quote_id', $quote_id)->get()->toArray();
+        $list_data['listFinishes'] = $this->q_finishes->select('total_cost')->where('quote_id', $quote_id)->get()->toArray();
+        return $list_data;
+    }
+
     public function refreshQuoteTotal($quote_id)
     {
-        $lisPapers = $this->q_papers->select('total_cost')->where('quote_id', $quote_id)->get()->toArray();
-        $listCatons = $this->q_cartons->select('total_cost')->where('quote_id', $quote_id)->get()->toArray();
-        $listFoams = $this->q_foams->select('total_cost')->where('quote_id', $quote_id)->get()->toArray();
-        $listSilks = $this->q_silks->select('total_cost')->where('quote_id', $quote_id)->get()->toArray();
-        $listFinishes = $this->q_finishes->select('total_cost')->where('quote_id', $quote_id)->get()->toArray();
-        $listSupplies = array_merge($lisPapers, $listCatons, $listFoams, $listSilks, $listFinishes);
+        $list_data = $this->getListDataQuote($quote_id);
+        $listSupplies = array_merge($list_data['lisPapers'], $list_data['listCatons'], $list_data['listFoams'], $list_data['listSilks'], $list_data['listFinishes']);
         $total_cost = 0;
         foreach ($listSupplies as $item) {
             $total_cost += $item['total_cost'];     

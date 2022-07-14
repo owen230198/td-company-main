@@ -11,7 +11,7 @@
  Target Server Version : 100424
  File Encoding         : 65001
 
- Date: 13/07/2022 18:24:30
+ Date: 14/07/2022 18:13:15
 */
 
 SET NAMES utf8mb4;
@@ -13384,8 +13384,8 @@ INSERT INTO `q_devices` VALUES (14, 'Máy phay bán tự động', '0', '120', '
 DROP TABLE IF EXISTS `q_finishes`;
 CREATE TABLE `q_finishes`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `fill_price` float(10, 0) NULL DEFAULT NULL,
-  `finish_price` float(10, 0) NULL DEFAULT NULL,
+  `fill_price` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `finish_price` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `total_cost` bigint(20) NULL DEFAULT NULL,
@@ -13398,7 +13398,7 @@ CREATE TABLE `q_finishes`  (
 -- ----------------------------
 -- Records of q_finishes
 -- ----------------------------
-INSERT INTO `q_finishes` VALUES (1, 0, 0, NULL, NULL, 12000000, 7, NULL);
+INSERT INTO `q_finishes` VALUES (1, '{\"act\":1,\"price\":\"100\",\"total\":1000000}', '{\"act\":1,\"price\":\"200\",\"total\":2000000}', '2022-07-14 14:00:46', '2022-07-14 07:00:46', 3000000, 7, NULL);
 
 -- ----------------------------
 -- Table structure for q_foams
@@ -13723,6 +13723,6 @@ CREATE TABLE `quotes`  (
 -- ----------------------------
 -- Records of quotes
 -- ----------------------------
-INSERT INTO `quotes` VALUES (7, NULL, 'Báo giá 1', '10000', '0', 'Contacter c', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', 'hard_group', '1', NULL, NULL, '206503792', '206503792', NULL, NULL, '2022-07-13 18:11:09', '2022-07-13 11:11:09');
+INSERT INTO `quotes` VALUES (7, NULL, 'Báo giá 1', '10000', '0', 'Contacter c', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', 'hard_group', '1', NULL, NULL, '197503792', '197503792', NULL, NULL, '2022-07-14 14:00:46', '2022-07-14 07:00:46');
 
 SET FOREIGN_KEY_CHECKS = 1;

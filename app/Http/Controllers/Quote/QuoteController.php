@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Quote;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Constants\NameConstant;
 class QuoteController extends Controller
 {
     public function __construct()
@@ -107,6 +108,22 @@ class QuoteController extends Controller
                 echoJson(100, 'Đã có lỗi xảy ra!');
                 return;
             }
+        }
+    }
+
+    public function configProfit($quote_id, Request $request)
+    {
+        $quote = $this->quotes->find($quote_id);
+        if (!$request->isMethod('post')) {
+            if ($quote['group_product']==NameConstant::HARDBOX) {
+                $data = $this->service->getListDataQuote($quote_id);     
+            }else{
+                $q_papers = new \App\Models\QPaper;
+                $data['list_data'] = $q_papers->where('quote_id', $quote_id)->get();
+            } 
+            $data['data_quotes'] = $quote;
+            $data['title'] = 'Lợi nhuận báo giá '.$quote['name'] ;
+            return view('quotes.managements', $data);
         }
     }
 }
