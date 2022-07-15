@@ -137,6 +137,26 @@ var ajaxChildOptionByParent = function()
   }); 
 }
 
+var selectCustomerAjax = function()
+{
+  form = $('.actionForm');
+  cusomerSelect = form.find('select[name=customer_id]');
+  console.log(cusomerSelect);
+  if (cusomerSelect.lengt>0) {
+    $(document).on('change', 'select[name=customer_id]', function(event) {
+      event.preventDefault();
+      parent_id = $(this).val();
+      $.ajax({
+        url: 'get-data-details/'+parent_id,
+      })
+      .done(function(data) {
+        var json = JSON.parse(data);
+        console.log(json)
+      });
+    }); 
+  }
+}
+
 $(function(){
 	submitActionAjaxForm();
 	confirmRemoveData();
@@ -147,4 +167,5 @@ $(function(){
 	checkMultiRecordModule();
 	loadDataPopup();
 	ajaxChildOptionByParent();
+	selectCustomerAjax();
 });

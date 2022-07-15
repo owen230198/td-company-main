@@ -402,6 +402,14 @@ select.form-control:not([size]):not([multiple]),
   justify-content: center;
 }
 
+.table_configs.table tr th:nth-child(1){
+  width: auto;
+}
+
+.border_grey{
+  border: 1px solid #ebebeb;
+}
+
 select.form-control:not([size]):not([multiple]){
   height: 32px;
 }

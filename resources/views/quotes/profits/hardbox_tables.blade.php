@@ -1,8 +1,8 @@
-<table class="table table-striped fs-18 mb-0">
+<table class="table table-striped fs-17 mb-0 table_configs">
 	<thead>
 	    <tr>
 		    <th scope="col" class="text-center color_red">Loại vật tư</th>
-	    	<th scope="col" class="text-center color_red" style="min-width: auto;">STT</th>
+	    	<th scope="col" class="text-center color_red">STT</th>
 		    <th scope="col" class="text-center color_red">SL</th>
 		    <th scope="col" class="text-center color_red">Chi phí</th>
 		    <th scope="col" class="text-center color_red">T.Tiền</th>
@@ -13,7 +13,7 @@
   			@foreach ($listPapers as $key =>$item)
   				<tr>
 		    		<td data-label="Vật tư" class="text-center">Tờ bồi</td>
-		    		<td data-label="STT" class="text-center" style="min-width: auto;">{{ $key+1 }}</td>
+		    		<td data-label="STT" class="text-center">{{ $key+1 }}</td>
 		    		<td data-label="SL" class="text-center">{{ $item['qty_pro'] }}</td>
 			      	<td data-label="Phí SX" class="font-italic">
 			      		<p class="d-flex align-items-center mb-1 font_bold">
@@ -130,7 +130,7 @@
   			@foreach ($listCatons as $key =>$item)
   				<tr>
 		    		<td data-label="Vật tư" class="text-center">Cartons</td>
-		    		<td data-label="STT" class="text-center" style="min-width: auto;">{{ $key+1 }}</td>
+		    		<td data-label="STT" class="text-center">{{ $key+1 }}</td>
 		    		<td data-label="SL" class="text-center">{{ (int)@$item['qty_pro'] }}</td>
 			      	<td data-label="Phí SX" class="font-italic">
 			      		<p class="d-flex align-items-center mb-1 font_bold">
@@ -192,7 +192,7 @@
   			@foreach ($listFoams as $key =>$item)
   				<tr>
 		    		<td data-label="Vật tư" class="text-center">Mút Xốp định hình</td>
-		    		<td data-label="STT" class="text-center" style="min-width: auto;">{{ $key+1 }}</td>
+		    		<td data-label="STT" class="text-center">{{ $key+1 }}</td>
 		    		<td data-label="SL" class="text-center">{{ (int)@$item['qty_pro'] }}</td>
 			      	<td data-label="Phí SX" class="font-italic">
 			      		<p class="d-flex align-items-center mb-1 font_bold">
@@ -244,7 +244,7 @@
   			@foreach ($listSilks as $key =>$item)
   				<tr>
 		    		<td data-label="Vật tư" class="text-center">Vật tư lụa</td>
-		    		<td data-label="STT" class="text-center" style="min-width: auto;">{{ $key+1 }}</td>
+		    		<td data-label="STT" class="text-center">{{ $key+1 }}</td>
 		    		<td data-label="SL" class="text-center">{{ (int)@$item['qty_pro'] }}</td>
 		      	<td data-label="Phí SX" class="font-italic">
 		      		<p class="d-flex align-items-center mb-1 font_bold">
@@ -282,12 +282,12 @@
   			@foreach ($listFinishes as $key =>$item)
   				<tr>
 		    		<td data-label="Vật tư" class="text-center">Bồi hộp & hoàn thiện</td>
-		    		<td data-label="STT" class="text-center" style="min-width: auto;">{{ $key+1 }}</td>
-		    		<td data-label="SL" class="text-center">___</td>
+		    		<td data-label="STT" class="text-center">{{ $key+1 }}</td>
+		    		<td data-label="SL" class="text-center">{{ (int)@$data_quotes['qty_pro'] }}</td>
 		      	<td data-label="Phí SX" class="font-italic">
 		      		@php
 		      			$fill_price = json_decode($item['fill_price']);
-			            $finishes_price = json_decode($item['finishes_price']);
+			            $finish_price = json_decode($item['finish_price']);
 		      		@endphp
 		      		@if (@$fill_price->act==1)
 		      			<p class="mb-1">
@@ -298,11 +298,11 @@
 			      		</p>
 		      		@endif
 
-		      		@if (@$finishes_price->act==1)
+		      		@if (@$finish_price->act==1)
 		      			<p class="mb-1">
 			      			<span class="font_bold mr-1"><i class="fs-10 fa fa-circle mr-1" aria-hidden="true"></i> Chi phí hoàn thiện: </span>
 		      				<span class="font-italic">
-			      				{{ number_format((int)$finishes_price->total) }} đ
+			      				{{ number_format((int)$finish_price->total) }} đ
 			      			</span>										
 			      		</p>
 		      		@endif

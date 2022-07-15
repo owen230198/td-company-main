@@ -74,14 +74,14 @@ class QuoteController extends Controller
         $status = $this->service->doInsert($table, $data, $quote_id);
         if ($status) {
             if ($table == 'q_finishes') {
-                return back()->with('message','Thêm dữ liệu thành công !'); 
+                return redirect('config-profits/'.$quote_id)->with('message','Thêm dữ liệu thành công !'); 
             }else{
                 echoJson(200, 'Đã có lỗi xảy ra!');
                 return;
             }
         }else{
             if ($table == 'q_finishes') {
-                return back()->with('error','Thêm dữ liệu thành công !'); 
+                return back()->with('error','Đã có lỗi xảy ra! !'); 
             }else{
                 echoJson(100, 'Đã có lỗi xảy ra!');
                 return;
@@ -96,7 +96,7 @@ class QuoteController extends Controller
         $status = $this->service->doUpdate($table, $data, $quote_id, $id);
         if ($status) {
             if ($table == 'q_finishes') {
-                return back()->with('message','Thêm dữ liệu thành công !'); 
+                return redirect('config-profits/'.$quote_id)->with('message','Cập nhật liệu thành công !'); 
             }else{
                 echoJson(200, 'Cập nhật dữ liệu thành công!');
                 return;
