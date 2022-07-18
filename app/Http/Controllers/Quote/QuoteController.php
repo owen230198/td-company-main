@@ -76,7 +76,7 @@ class QuoteController extends Controller
             if ($table == 'q_finishes') {
                 return redirect('config-profits/'.$quote_id)->with('message','Thêm dữ liệu thành công !'); 
             }else{
-                echoJson(200, 'Đã có lỗi xảy ra!');
+                echoJson(200, 'Thêm dữ liệu thành công!');
                 return;
             }
         }else{
@@ -89,7 +89,7 @@ class QuoteController extends Controller
         }
     }
 
-    public function doupdateDetail($table, $quote_id, $id, Request $request)
+    public function doUpdateDetail($table, $quote_id, $id, Request $request)
     {
         $data = $request->all();
         unset($data['_token']);
@@ -119,12 +119,32 @@ class QuoteController extends Controller
                 $data = $this->service->getListDataQuote($quote_id);     
             }else{
                 $q_papers = new \App\Models\QPaper;
-                $data['list_data'] = $q_papers->where('quote_id', $quote_id)->get();
+                $data['listPapers'] = $q_papers->where('quote_id', $quote_id)->get();
             } 
             $data['data_quotes'] = $quote;
             $data['title'] = 'Lợi nhuận báo giá '.$quote['name'] ;
             return view('quotes.managements', $data);
+        }else{
+            $data = $request->all();
+            unset($data['_token']);
+            $admin_services = new \App\Services\AdminService;
+            $success = $admin_services->doUpdateTable($quote_id, 'quotes', $data);
+            if ($success) {
+                $routes ='file-details/'.$quote_id;
+                return redirect($routes)->with('message','Cập nhật dữ liệu thành công !');   
+            }else {
+                return back()->with('error','Đã có lỗi xảy ra !');
+            }
         }
+    }
+
+    public function fileDetail($id)
+    {
+        $quote = $this->quotes::find($id);
+        $data['data_quotes'] = $quote;
+        $data['data_tables'] = \App\Models\QPaper::where('quote_id', $id)->where('main', 1)->first(); 
+        $data['title'] = 'File báo giá - '.$quote['comany_name'];
+        return view('quotes.files', $data);
     }
 }
 

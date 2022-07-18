@@ -141,17 +141,25 @@ var selectCustomerAjax = function()
 {
   form = $('.actionForm');
   cusomerSelect = form.find('select[name=customer_id]');
-  console.log(cusomerSelect);
-  if (cusomerSelect.lengt>0) {
+  companyInput = form.find('input[name=company_name]');
+  contacterInput = form.find('input[name=contacter]');
+  addressInput = form.find('input[name=address]');
+  emailInput = form.find('input[name=email]');
+  phoneInput = form.find('input[name=phone]');
+  if (cusomerSelect.length>0&&companyInput.length>0&&contacterInput.length>0&&addressInput.length>0&&emailInput.length>0&&phoneInput.length>0) {
     $(document).on('change', 'select[name=customer_id]', function(event) {
       event.preventDefault();
       parent_id = $(this).val();
       $.ajax({
-        url: 'get-data-details/'+parent_id,
+        url: 'get-data-details/customers/'+parent_id,
       })
       .done(function(data) {
         var json = JSON.parse(data);
-        console.log(json)
+        companyInput.val(json.name);
+        contacterInput.val(json.contacter)
+        addressInput.val(json.address)
+        emailInput.val(json.email)
+        phoneInput.val(json.phone)
       });
     }); 
   }

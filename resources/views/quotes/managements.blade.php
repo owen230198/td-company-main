@@ -11,7 +11,7 @@
             <a href="quote-managements/q_papers/{{ $data_quotes['id'] }}" class="station-richmenu-main-btn-area q_stage_btn {{ @$tableItem['name']=='q_papers'?'active':'' }}">
               <i class="fa fa-file-o mr-1 fs-16" aria-hidden="true"></i>Tờ in
             </a>
-            @if (@$data_quotes['group_product']=='hard_group')
+            @if (@$data_quotes['group_product']==\App\Constants\NameConstant::HARDBOX)
               <a href="quote-managements/q_cartons/{{ $data_quotes['id'] }}" class="station-richmenu-main-btn-area q_stage_btn {{ @$tableItem['name']=='q_cartons'?'active':'' }}">
                 <i class="fa fa-dropbox mr-1 fs-16" aria-hidden="true"></i>Vật tư cartons
               </a>
@@ -24,10 +24,10 @@
               <a href="quote-managements/q_finishes/{{ $data_quotes['id'] }}" class="station-richmenu-main-btn-area q_stage_btn {{ @$tableItem['name']=='q_finishes'?'active':'' }}">
                 <i class="fa fa-check-square-o mr-1 fs-16" aria-hidden="true"></i>Hoàn thiện
               </a>
-              <a href="config-profits/{{ $data_quotes['id'] }}" class="station-richmenu-main-btn-area q_stage_btn {{ @$tableItem['name']==null?'active':'' }}">
-                <i class="fa fa-percent mr-1 fs-16" aria-hidden="true"></i>Lợi nhuận
-              </a>     
             @endif
+            <a href="config-profits/{{ $data_quotes['id'] }}" class="station-richmenu-main-btn-area q_stage_btn {{ @$tableItem['name']==null?'active':'' }}">
+              <i class="fa fa-percent mr-1 fs-16" aria-hidden="true"></i>Lợi nhuận
+            </a>     
           </div>
           @if (@$tableItem['name']!='q_finishes'&&@$tableItem['name']!=null)
             @php

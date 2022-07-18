@@ -36,6 +36,7 @@ Route::middleware(['checkLogin'])->group(function () {
 	Route::post('update-permissions/{module_id}/{role_id}', [AdminController::class, 'updatePermission']);
 	Route::post('do-config-data/{table}', [AdminController::class, 'doConfigData']);
 	Route::get('option-child-data/{table}/{field}/{parent}', [AdminController::class, 'optionChildData']);
+	Route::get('get-data-details/{table}/{id}', [AdminController::class, 'getJsonDataById']);
 
 	//quotes routes
 	Route::get('ajax-view-list/{table}/{quote_id}', [QuoteController::class, 'ajaxViewList']);
@@ -45,4 +46,5 @@ Route::middleware(['checkLogin'])->group(function () {
 	Route::any('config-profits/{quote_id}', [QuoteController::class, 'configProfit']);
 	Route::post('do-insert-detail/{table}/{quote_id}', [QuoteController::class, 'doInsertDetail']);
 	Route::post('do-update-detail/{table}/{quote_id}/{id}', [QuoteController::class, 'doUpdateDetail']);
+	Route::get('file-details/{id}', [QuoteController::class, 'fileDetail']);
 });

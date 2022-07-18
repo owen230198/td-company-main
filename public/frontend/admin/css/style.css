@@ -410,6 +410,99 @@ select.form-control:not([size]):not([multiple]),
   border: 1px solid #ebebeb;
 }
 
+quote_percent{
+  padding: 2px 10px;
+    min-width: 100px;
+    text-align: center;
+    background: #00a500;
+    color: #ffffff;
+    font-size: 15px;
+}
+
+.border_right_dashed{
+  border-right: 2px dashed #333333;
+}
+
+.header_quote{
+  border-bottom: 1px solid #ff1313;
+}
+
+.quote_content{
+  font-family: auto;
+}
+
+.quote_content .table thead th{
+  border: 1px solid #333333;
+}
+
+.quote_content table td, .quote_content table th{
+  border: 1px solid #333333 !important;
+  vertical-align: middle;
+}
+
+.max_content{
+  max-width: 350px;
+}
+
+.quote_content .table-striped tbody tr:nth-of-type(odd){
+  background-color: rgb(0 0 0 / 0%);
+}
+
+.border_grey{
+  border: 1px solid #333333;
+  border-top: none;
+}
+
+.font_w_bold{
+  font-weight: 600;
+}
+
+.form_insert_order .select2-container, .select2-container--default .select2-selection--single, 
+.select2-container--default .select2-selection--single .select2-selection__rendered{
+  max-width: 550px !important;
+  height: 35px;
+  line-height: 33px;
+}
+
+.border_bot{
+  border-bottom: 1px solid #888888;
+}
+
+.table td, .table th{
+  padding: 5px;
+  min-width: 85px;
+}
+
+
+.bg_quote{
+  position: absolute;
+  top: 50%;
+  left: 0%;
+  z-index: 0;
+  opacity: 0.3;
+  -webkit-transform:translateY(-50%);
+  -moz-transform:translateY(-50%);
+  -ms-transform:translateY(-50%);
+  -o-transform:translateY(-50%);
+  transform:translateY(-50%);
+}
+
+.quote_bg_content{
+  position: relative;
+  z-index: 1;
+}
+
+.pb_375{
+  padding-bottom: 375px;
+}
+
+.footer_quote_img{
+  display: none;
+  position: absolute;
+  bottom:55px;
+  left: 0;
+}
+
 select.form-control:not([size]):not([multiple]){
   height: 32px;
 }

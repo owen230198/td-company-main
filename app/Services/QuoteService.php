@@ -37,8 +37,8 @@ class QuoteService extends BaseService
             $total_cost += $item['total_cost'];     
         }
         $quote = $this->quotes->find($quote_id);
-        $ship_price = @$quote['ship_price']?(float)$$quote['ship_price']:0;
-        $profit = @$quote['profit']?(float)$$quote['profit']:0;
+        $ship_price = @$quote['ship_price']?(float)$quote['ship_price']:0;
+        $profit = @$quote['profit']?(float)$quote['profit']:0;
         $data['total_amount'] = $total_cost+((($total_cost+$ship_price)*$profit)/100);
         $data['total_cost'] = (float)$total_cost;
         $this->quotes->where('id', $quote_id)->update($data); 

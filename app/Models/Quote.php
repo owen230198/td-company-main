@@ -13,4 +13,5 @@ class Quote extends Model
      */
     protected $table = 'quotes';
     protected $protectFields = false;
+    static $tableChild = array('q_papers', 'q_cartons', 'q_foams', 'q_silks', 'q_finishes');
 }

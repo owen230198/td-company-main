@@ -97,7 +97,8 @@ class AdminController extends Controller
         unset($data['_token']);
         $success = $this->service->doUpdateTable($id, $table, $data);
         if ($success) {
-            $routes = @session()->get('back_url')?session()->get('back_url'):'view/'.$table;
+            $back_routes = @session()->get('back_url')?session()->get('back_url'):'view/'.$table;
+            $routes = $table=='quotes'?'quote-managements/q_papers/'.$id:$back_routes;
             return redirect($routes)->with('message','Cập nhật dữ liệu thành công !');   
         }else {
             return back()->with('error','Đã có lỗi xảy ra !');
@@ -163,6 +164,16 @@ class AdminController extends Controller
             }
         }
         echo $html;
+    }
+
+    public function getJsonDataById($table, $id)
+    {
+        if ($id) {
+            $models = getModelByTable($table);
+            $data = $models->find($id);
+        }
+        $arr_data = @$data?$data->toArray():array();
+        return json_encode($arr_data);
     }
 }
 

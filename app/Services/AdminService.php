@@ -77,14 +77,37 @@ class AdminService extends BaseService
         return $data;
     }
 
+    private function getDataCustomerType($customer_id, $data)
+    {
+        if ($customer_id!=0) {
+            return \App\Constants\NameConstant::OLD_CUSTOMER;
+        }else{
+            $dataInsert['name'] = @$data['company_name'];
+            $dataInsert['contacter'] = @$data['contacter'];
+            $dataInsert['address'] = @$data['address'];
+            $dataInsert['email'] = @$data['email'];
+            $dataInsert['phone'] = @$data['phone'];
+            $dataInsert['act'] = 1;
+            $this->doInsertTable('customers', $dataInsert);
+            return \App\Constants\NameConstant::NEW_CUSTOMER;
+        }
+    }
+
     public function doInsertTable($table, $data)
     {
         if (@$data['password']) {
             $data['password'] = md5($data['password']);    
         }
+        if ($table=='quotes'&&isset($data['customer_id'])) {
+            $data['customer_type'] = $this->getDataCustomerType($data['customer_id'], $data);
+        }
         $data['created_at'] = date('y-m-d h:i:s', Time());
         $data['updated_at'] = date('y-m-d h:i:s', Time());
         $insertID = $this->db::table($table)->insertGetId($data);
+        if ($table=='quotes') {
+            $quote_service = new \App\Services\QuoteService;
+            $quote_service->refreshQuoteTotal($insertID);
+        }
         return $insertID;
     }
 
@@ -100,10 +123,17 @@ class AdminService extends BaseService
         if (@$data['password']) {
             $data['password'] = $this->getPasswordUpdate($table, $id, $data['password']);    
         }
+        if ($table=='quotes'&&isset($data['customer_id'])) {
+            $data['customer_type'] = $this->getDataCustomerType($data['customer_id'], $data);
+        }
         $created_at = @$data['created_at']?strtotime($data['created_at']):Time();
         $data['created_at'] = date('y-m-d h:i:s',$created_at);
         $data['updated_at'] = date('y-m-d h:i:s', Time());
         $update = $this->db::table($table)->where('id', $id)->update($data);
+        if ($table=='quotes') {
+            $quote_service = new \App\Services\QuoteService;
+            $quote_service->refreshQuoteTotal($id);
+        }
         return $update;
     }
 
@@ -117,7 +147,14 @@ class AdminService extends BaseService
         if ($table == 'n_group_users') {
             $this->removeRole($id);     
         }
+        if (in_array($table, \App\Models\Quote::$tableChild)) {
+            $quote_id = getFieldDataById('quote_id', getClassByTable($table), $id);
+        }
         $remove = $this->db::table($table)->where('id', $id)->delete();
+        if ($remove&&in_array($table, \App\Models\Quote::$tableChild)) {
+            $quote_service = new \App\Services\QuoteService;
+            $quote_service->refreshQuoteTotal($quote_id);
+        }
         return $remove;
     }
 

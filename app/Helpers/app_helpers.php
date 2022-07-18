@@ -25,11 +25,17 @@ if (! function_exists('getModelByClass')) {
     }
 }
 
+if (!function_exists('getClassByTable')){
+    function getClassByTable($table){
+        $str = new \Illuminate\Support\Str;
+        return $str::studly(Str::singular($table));
+    }
+}
+
 if (! function_exists('getModelByTable')) {
     function getModelByTable($table)
     {
-        $str = new \Illuminate\Support\Str;
-    	$class = $str::studly(Str::singular($table));
+        $class = getClassByTable($table);
         $useObject = '\App\Models\\'.$class;
         $models = new $useObject;
         return $models;
@@ -98,7 +104,7 @@ if (!function_exists('getIdByFeildValue')) {
     {
         $models = getModelByClass($class);
         $data = $models::select('id')->where($feild, $value)->first();
-        return @$data['_id']?$data['id']:0;
+        return @$data['id']?$data['id']:0;
     }
 }
 
