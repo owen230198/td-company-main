@@ -410,13 +410,13 @@ select.form-control:not([size]):not([multiple]),
   border: 1px solid #ebebeb;
 }
 
-quote_percent{
+.quote_percent{
   padding: 2px 10px;
-    min-width: 100px;
-    text-align: center;
-    background: #00a500;
-    color: #ffffff;
-    font-size: 15px;
+  min-width: 100px;
+  text-align: center;
+  background: #00a500;
+  color: #ffffff;
+  font-size: 15px;
 }
 
 .border_right_dashed{
@@ -457,13 +457,6 @@ quote_percent{
   font-weight: 600;
 }
 
-.form_insert_order .select2-container, .select2-container--default .select2-selection--single, 
-.select2-container--default .select2-selection--single .select2-selection__rendered{
-  max-width: 550px !important;
-  height: 35px;
-  line-height: 33px;
-}
-
 .border_bot{
   border-bottom: 1px solid #888888;
 }
@@ -492,7 +485,7 @@ quote_percent{
   z-index: 1;
 }
 
-.pb_375{
+.ex_quote_file .pb_375{
   padding-bottom: 375px;
 }
 
@@ -503,8 +496,35 @@ quote_percent{
   left: 0;
 }
 
+.ex_quote_file .footer_quote_img{
+  display: block;
+}
+
 select.form-control:not([size]):not([multiple]){
   height: 32px;
+}
+
+@page {
+  size: A4;
+  margin: 1cm;
+}
+@media print {
+  html, body {
+    width: 100%;
+    width: 210mm;
+    height: 297mm;
+    position: relative;
+  }
+}
+.page {
+    margin: 0;
+    border: initial;
+    border-radius: initial;
+    width: initial;
+    min-height: initial;
+    box-shadow: initial;
+    background: initial;
+    page-break-after: always;
 }
 
 @media (min-width: 576px){

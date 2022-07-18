@@ -11,7 +11,7 @@
  Target Server Version : 100424
  File Encoding         : 65001
 
- Date: 18/07/2022 17:44:15
+ Date: 19/07/2022 00:10:25
 */
 
 SET NAMES utf8mb4;
@@ -12159,7 +12159,7 @@ CREATE TABLE `customers`  (
   INDEX `name_index`(`name`) USING BTREE,
   INDEX `infor_index`(`address`, `email`, `phone`) USING BTREE,
   INDEX `conttacter_index`(`contacter`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of customers
@@ -12173,6 +12173,9 @@ INSERT INTO `customers` VALUES (10, '', 'CTY 678914', 'Contacter H', 'Hoa Sơn',
 INSERT INTO `customers` VALUES (11, '', 'Liverpool', 'Owen', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', '', 1, '2022-07-18 04:46:28', '2022-07-18 04:46:28');
 INSERT INTO `customers` VALUES (12, '', 'Liverpool', 'Gerrard', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', '', 1, '2022-07-18 04:53:48', '2022-07-18 04:53:48');
 INSERT INTO `customers` VALUES (13, '', 'Liverpool', 'Gerrard', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', '', 1, '2022-07-18 07:36:16', '2022-07-18 07:36:16');
+INSERT INTO `customers` VALUES (14, '', 'Liverpool', 'Gerrard', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', '', 1, '2022-07-18 04:13:41', '2022-07-18 04:13:41');
+INSERT INTO `customers` VALUES (15, '', 'Liverpool', 'Gerrard', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', '', 1, '2022-07-18 04:18:53', '2022-07-18 04:18:53');
+INSERT INTO `customers` VALUES (16, '', 'Liverpool', 'Gerrard', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', '', 1, '2022-07-18 04:23:35', '2022-07-18 04:23:35');
 
 -- ----------------------------
 -- Table structure for districts
@@ -13033,6 +13036,7 @@ INSERT INTO `n_detail_tables` VALUES (44, 'qty_pro', 0, 'number', 'SL sản ph�
 INSERT INTO `n_detail_tables` VALUES (45, 'qty_paper', 0, 'number', 'SL tờ in', 'text', 'q_papers', 1, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-07-18 11:15:36', '2022-07-18 11:15:36');
 INSERT INTO `n_detail_tables` VALUES (46, 'main', 0, NULL, 'Xuất file', 'checkbox', 'q_papers', 1, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-06-29 16:56:09', '2022-06-29 16:56:09');
 INSERT INTO `n_detail_tables` VALUES (47, 'total_cost', 0, 'number', 'Chi phí', 'money', 'q_papers', 1, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-07-18 11:18:58', '2022-07-18 11:18:58');
+INSERT INTO `n_detail_tables` VALUES (48, 'paper_materal', 0, NULL, 'Chất liệu giấy', 'text', 'quotes', 0, 1, 1, 0, NULL, '', 10, 3, 1, '2022-07-18 17:03:27', '2022-07-18 17:03:27');
 INSERT INTO `n_detail_tables` VALUES (54, 'id', 0, NULL, 'ID', 'text', 'q_devices', 0, NULL, 0, 0, NULL, NULL, 0, 0, 0, '2022-06-30 15:11:33', '2022-06-30 15:11:33');
 INSERT INTO `n_detail_tables` VALUES (55, 'name', 0, NULL, 'Tên máy', 'text', 'q_devices', 1, 1, 1, 1, NULL, NULL, 1, 1, 1, '2022-06-30 15:11:33', '2022-06-30 15:11:33');
 INSERT INTO `n_detail_tables` VALUES (56, 'key_device', 0, NULL, 'Nhóm thiết bị', 'select', 'q_devices', 1, 1, 1, 1, NULL, '{\r\n \"data\": {\r\n   \"table\": null,\r\n    \"option\":{\r\n    \"skin\":\"Cán láng\",\r\n		\"compress\":\"Ép nhũ\",\r\n    \"uv\":\"In UV\",\r\n		\"elevate\":\"Máy bế\",\r\n		\"peel\":\"Bóc lề\",\r\n		\"paste\":\"Dán hộp\",\r\n		\"milling\":\"Máy phay\"\r\n   }\r\n },\r\n \"config\": {\r\n  \"searchbox\": 1\r\n }\r\n}', 1, 1, 1, '2022-06-30 22:45:19', '2022-06-30 22:45:19');
@@ -13089,7 +13093,7 @@ INSERT INTO `n_detail_tables` VALUES (106, 'qty_paper', 0, 'number', 'SL vật t
 INSERT INTO `n_detail_tables` VALUES (107, 'total_cost', 0, 'number', 'Chi phí', 'money', 'q_silks', 1, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-07-18 11:18:58', '2022-07-18 11:18:58');
 INSERT INTO `n_detail_tables` VALUES (108, 'customer_type', 0, NULL, 'Khách hàng', 'select', 'quotes', 1, 0, 0, 1, NULL, '{\r\n \"data\": {\r\n   \"table\": null,\r\n    \"option\":{\r\n			\"1\":\"Khách hàng cũ\",\r\n			\"2\":\"Khách hàng mới\"\r\n   }\r\n },\r\n \"config\": {\r\n  \"searchbox\": 0\r\n }\r\n}', 9, 1, 1, '2022-07-15 10:29:48', '2022-07-15 10:29:48');
 INSERT INTO `n_detail_tables` VALUES (109, 'company_name', 0, NULL, 'Tên công ty', 'text', 'quotes', 0, 1, 1, 1, NULL, '', 9, 1, 1, '2022-07-15 10:34:48', '2022-07-15 10:34:48');
-INSERT INTO `n_detail_tables` VALUES (110, 'print_model', 0, NULL, 'Mẫu thiết kế', 'select', 'quotes', 0, 1, 1, 0, NULL, '{\r\n \"data\": {\r\n   \"table\": null,\r\n    \"option\":{\r\n    1:\"file đã sản xuất\",\r\n    2:\"File thiết kế mới\"\r\n   }\r\n },\r\n \"config\": {\r\n  \"searchbox\": 0\r\n }\r\n}', 10, 2, 1, '2022-07-18 17:03:26', '2022-07-18 17:03:26');
+INSERT INTO `n_detail_tables` VALUES (110, 'print_model', 0, NULL, 'Mẫu thiết kế', 'select', 'quotes', 0, 1, 1, 0, NULL, '{\r\n \"data\": {\r\n   \"table\": null,\r\n    \"option\":{\r\n    \"1\":\"file đã sản xuất\",\r\n    \"2\":\"File thiết kế mới\"\r\n   }\r\n },\r\n \"config\": {\r\n  \"searchbox\": 0\r\n }\r\n}', 10, 2, 1, '2022-07-18 23:13:17', '2022-07-18 23:13:17');
 INSERT INTO `n_detail_tables` VALUES (111, 'size', 0, NULL, 'Kích thước sản phẩm', 'text', 'quotes', 0, 1, 1, 0, NULL, '', 10, 3, 1, '2022-07-18 17:03:27', '2022-07-18 17:03:27');
 
 -- ----------------------------
@@ -13333,21 +13337,32 @@ CREATE TABLE `q_configs`  (
   `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`, `keyword`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of q_configs
 -- ----------------------------
-INSERT INTO `q_configs` VALUES (1, 'company_name', 'COMPANY_NAME', NULL, 1, 'text', 'Tên Công ty', 0, NULL, NULL, '1', '2022-06-29 23:35:59', '2022-06-29 23:36:01');
-INSERT INTO `q_configs` VALUES (2, 'plus_paper', 'PLUS_PAPER', '100', 1, 'text', 'Tờ in cộng thêm', 0, NULL, NULL, '11', '2022-06-30 09:46:55', '2022-06-30 09:46:55');
-INSERT INTO `q_configs` VALUES (3, 'plus_percent', 'PLUS_PERCENT', '2', 1, 'text', 'Số lượng bù hao(%)', 0, NULL, NULL, '11', '2022-06-30 09:44:11', '2022-06-30 09:44:11');
-INSERT INTO `q_configs` VALUES (4, 'min_valid_paper', 'MIN_VALID_PAPER', '1000', 1, 'text', 'Số tờ in tối thiểu tính giá máy in', 0, NULL, NULL, '11', '2022-07-01 18:23:36', '2022-07-01 18:23:36');
-INSERT INTO `q_configs` VALUES (5, 'plus_paper_device', 'PLUS_PAPER_DEVICE', '30', 1, 'text', 'Số tờ in thiết bị cộng thêm', 0, NULL, NULL, '11', '2022-07-01 18:23:36', '2022-07-01 18:23:36');
-INSERT INTO `q_configs` VALUES (6, 'plus_carton', 'PLUS_CARTON', '50', 1, 'text', 'Carton cộng thêm', 0, NULL, NULL, '11', '2022-06-30 09:46:55', '2022-06-30 09:46:55');
-INSERT INTO `q_configs` VALUES (7, 'peel_carton_pluss', 'PEEL_CARTON_PLUS', '5', 1, 'text', 'ĐG bóc lề carton cộng thêm', 0, NULL, NULL, '11', '2022-07-12 17:37:59', '2022-07-12 17:37:59');
-INSERT INTO `q_configs` VALUES (8, 'peel_foam_pluss', 'PEEL_FOAM_PLUS', '10', 1, 'text', 'ĐG bóclề vật tư cộng thêm', 0, NULL, NULL, '11', '2022-07-12 17:39:12', '2022-07-12 17:39:12');
-INSERT INTO `q_configs` VALUES (9, 'price_shape_hole', 'PRICE_SHAPE_HOLE', '200', 1, 'text', 'ĐG lượt số lỗ lụa', 0, NULL, NULL, '11', '2022-07-12 17:39:22', '2022-07-12 17:39:24');
-INSERT INTO `q_configs` VALUES (10, 'price_plus_hole', 'PRICE_PLUS_HOLE', '300', 1, 'text', 'ĐG cộng thêm số lỗ lụa', 0, NULL, NULL, '11', '2022-07-12 17:39:22', '2022-07-12 17:39:24');
+INSERT INTO `q_configs` VALUES (1, 'company_name', 'COMPANY_NAME', NULL, 1, 'text', 'Tên Công ty', 0, NULL, NULL, '1', '2022-06-29 23:35:59', '2022-06-29 23:35:59');
+INSERT INTO `q_configs` VALUES (2, 'plus_paper', 'PLUS_PAPER', '100', 1, 'text', 'Tờ in cộng thêm', 0, NULL, NULL, '11', '2022-06-29 23:35:59', '2022-06-29 23:35:59');
+INSERT INTO `q_configs` VALUES (3, 'plus_percent', 'PLUS_PERCENT', '2', 1, 'text', 'Số lượng bù hao(%)', 0, NULL, NULL, '11', '2022-06-29 23:35:59', '2022-06-29 23:35:59');
+INSERT INTO `q_configs` VALUES (4, 'min_valid_paper', 'MIN_VALID_PAPER', '1000', 1, 'text', 'Số tờ in tối thiểu tính giá máy in', 0, NULL, NULL, '11', '2022-06-29 23:35:59', '2022-06-29 23:35:59');
+INSERT INTO `q_configs` VALUES (5, 'plus_paper_device', 'PLUS_PAPER_DEVICE', '30', 1, 'text', 'Số tờ in thiết bị cộng thêm', 0, NULL, NULL, '11', '2022-06-29 23:35:59', '2022-06-29 23:35:59');
+INSERT INTO `q_configs` VALUES (6, 'plus_carton', 'PLUS_CARTON', '50', 1, 'text', 'Carton cộng thêm', 0, NULL, NULL, '11', '2022-06-29 23:35:59', '2022-06-29 23:35:59');
+INSERT INTO `q_configs` VALUES (7, 'peel_carton_pluss', 'PEEL_CARTON_PLUS', '5', 1, 'text', 'ĐG bóc lề carton cộng thêm', 0, NULL, NULL, '11', '2022-06-29 23:35:59', '2022-06-29 23:35:59');
+INSERT INTO `q_configs` VALUES (8, 'peel_foam_pluss', 'PEEL_FOAM_PLUS', '10', 1, 'text', 'ĐG bóclề vật tư cộng thêm', 0, NULL, NULL, '11', '2022-06-29 23:35:59', '2022-06-29 23:35:59');
+INSERT INTO `q_configs` VALUES (9, 'price_shape_hole', 'PRICE_SHAPE_HOLE', '200', 1, 'text', 'ĐG lượt số lỗ lụa', 0, NULL, NULL, '11', '2022-06-29 23:35:59', '2022-06-29 23:35:59');
+INSERT INTO `q_configs` VALUES (10, 'price_plus_hole', 'PRICE_PLUS_HOLE', '300', 1, 'text', 'ĐG cộng thêm số lỗ lụa', 0, NULL, NULL, '11', '2022-06-29 23:35:59', '2022-06-29 23:35:59');
+INSERT INTO `q_configs` VALUES (11, 'office_add', 'OFFICE_ADD', '120 Định Công - Hoàng Mai - Hà Nội', 1, 'text', 'Địa chỉ văn phòng', 2, NULL, 0, '1', '2022-06-29 23:35:59', '2022-06-29 23:35:59');
+INSERT INTO `q_configs` VALUES (12, 'office_phone', 'OFFICE_PHONE', '38.303.666 - 38.303.888', 1, 'text', 'SĐT văn phòng', 2, NULL, 0, '1', '2022-06-29 23:35:59', '2022-06-29 23:35:59');
+INSERT INTO `q_configs` VALUES (13, 'site', 'SITE', 'intuandung.vn', 1, 'text', 'Website', 2, NULL, 0, '1', '2022-06-29 23:35:59', '2022-06-29 23:35:59');
+INSERT INTO `q_configs` VALUES (14, 'fact_add', 'FACT_ADD', 'KCN Hoa Sơn - Ứng Hòa - TP Hà Nội', 1, 'text', 'Địa chỉ nhà xưởng', 2, NULL, 0, '1', '2022-06-29 23:35:59', '2022-06-29 23:35:59');
+INSERT INTO `q_configs` VALUES (15, 'fact_phone', 'FACT_PHONE', '38.303.777', 1, 'text', 'SĐT nhà xưởng', 2, NULL, 0, '1', '2022-06-29 23:35:59', '2022-06-29 23:35:59');
+INSERT INTO `q_configs` VALUES (16, 'quote_wish', 'QUOTE_WISH', 'Cty CP in & SX bao bì Tuấn Dung xin gửi báo giá theo yêu cầu của quý khách. </br> \r\n          Chúc quý khách Mạnh Khỏe – Hạnh Phúc – An Khang Thịnh Vượng!', 1, 'textarea', 'Lời chúc', 2, NULL, 0, '1', '2022-06-29 23:35:59', '2022-06-29 23:35:59');
+INSERT INTO `q_configs` VALUES (17, 'dvt', 'DVT', 'Sản phẩm', 1, 'text', 'Đơn vị tính', 2, NULL, 0, '1', '2022-06-29 23:35:59', '2022-06-29 23:35:59');
+INSERT INTO `q_configs` VALUES (18, 'attention', 'ATTENTION', '<p style=\"text-align: left;\">1. Giao h&agrave;ng tận nơi theo y&ecirc;u cầu của qu&yacute; kh&aacute;ch</p>\r\n<p class=\"font-italic mb-1\">2. Đơn gi&aacute; chưa bao gồm 10% VAT.</p>\r\n<p class=\"font-italic mb-1\">3&nbsp; B&aacute;o gi&aacute; c&oacute; hiệu lực trong v&ograve;ng 30 ng&agrave;y.</p>\r\n<p class=\"font-italic mb-1\"><strong>4. Xin Q&uacute;y kh&aacute;ch Lưu &yacute;:</strong></p>\r\n<p class=\"font-italic mb-1\"><strong>* Thời gian thực hiện sản xuất đối với hộp giấy mềm l&agrave; từ 5-8&nbsp;ng&agrave;y, T&ugrave;y theo y&ecirc;u cầu của kh&aacute;ch h&agrave;ng &amp; Thời điểm đặt h&agrave;ng hiện tại</strong></p>\r\n<p class=\"font-italic mb-1\"><strong>* Thời gian thực hiện sản xuất đối với hộp Cứng&nbsp;l&agrave; từ&nbsp;7-15&nbsp;ng&agrave;y, T&ugrave;y theo y&ecirc;u cầu của kh&aacute;ch h&agrave;ng &amp; Thời điểm đặt h&agrave;ng hiện tại</strong></p>\r\n<p class=\"font-italic mb-1\">5. Phương thức thanh to&aacute;n: Theo thỏa thuận 2 b&ecirc;n</p>\r\n<div class=\"font-italic ml-md-3\">\r\n<p class=\"font-italic mb-1\"><span style=\"color: #ff0000;\"><strong>&nbsp;</strong></span></p>\r\n</div>', 1, 'editor', 'Lưu ý khách hàng', 2, NULL, 0, '1', '2022-06-29 23:35:59', '2022-06-29 23:35:59');
+INSERT INTO `q_configs` VALUES (19, 'quote_percent', 'QUOTE_PERCENT', '10', 1, 'text', '% Lợi nhận báo giá', 1, NULL, 0, '1', '2022-06-29 23:35:59', '2022-06-29 23:35:59');
+INSERT INTO `q_configs` VALUES (20, 'office_tel', 'OFFICE_TEL', '0969.303.888 Ms Dung', 1, 'text', 'SĐT văn phòng', 2, NULL, 0, '1', '2022-06-29 23:35:59', '2022-06-29 23:35:59');
+INSERT INTO `q_configs` VALUES (21, 'fact_tel', 'FACT_TEL', '0963.303.999 Mr Tuấn', 1, 'text', 'SĐT nhà xưởng', 2, NULL, 0, '1', '2022-06-29 23:35:59', '2022-06-29 23:35:59');
 
 -- ----------------------------
 -- Table structure for q_devices
@@ -13507,7 +13522,7 @@ CREATE TABLE `q_papers`  (
 -- Records of q_papers
 -- ----------------------------
 INSERT INTO `q_papers` VALUES (1, 'Báo giá 1', 10000, 1, 10200, 2, '0.32', '0.51', '{\"quantitative\":\"400\",\"unit_price\":\"29.5\",\"act\":1,\"total\":19835328}', '{\"type\":\"1\",\"total\":null}', '{\"act\":\"1\",\"color_num\":\"2\",\"style\":\"2\",\"device\":\"2\",\"total\":5728000}', '{\"act\":0}', '{\"act\":\"1\",\"materal\":\"2\",\"num_face\":\"2\",\"cover_materal\":\"5\",\"cover_num_face\":\"1\",\"total\":17650080.000000004}', '{\"act\":0}', '{\"act\":0}', '{\"act\":\"1\",\"float\":\"0\",\"shape_price\":\"200\",\"device\":\"4\",\"total\":1100000}', '{\"act\":0}', '{\"act\":\"1\",\"device\":\"13\",\"total\":1250000}', '{\"act\":\"1\",\"price\":\"100\",\"total\":1000000}', 7, NULL, 46563408, 1, NULL, '2022-07-12 03:24:14', '2022-07-12 03:24:14');
-INSERT INTO `q_papers` VALUES (9, 'Quote 2', 10000, 1, 10200, 2, '0.35', '0.51', '{\"quantitative\":\"400\",\"unit_price\":\"29.5\",\"act\":1,\"total\":21694889.999999996}', '{\"type\":\"0\"}', '{\"act\":\"1\",\"color_num\":\"3\",\"style\":\"2\",\"device\":\"2\",\"total\":8437000}', '{\"act\":\"1\",\"materal\":\"8\",\"num_face\":\"1\",\"device\":\"1\",\"total\":4525887.5}', '{\"act\":\"1\",\"materal\":\"2\",\"num_face\":\"2\",\"cover_materal\":\"5\",\"cover_num_face\":\"1\",\"total\":19304775}', '{\"act\":\"1\",\"price\":\"200\",\"shape\":\"10000\",\"device\":\"2\",\"total\":2010000}', '{\"act\":\"1\",\"num_face\":\"2\",\"device\":\"10\",\"total\":12200000}', '{\"act\":\"1\",\"float\":\"0\",\"shape_price\":\"100\",\"device\":\"11\",\"total\":1600000}', '{\"act\":\"1\",\"device\":\"5\",\"total\":120000}', '{\"act\":\"1\",\"device\":\"6\",\"total\":550000}', '{\"act\":\"1\",\"price\":\"200\",\"total\":2000000}', 8, 'note', 72442553, 0, NULL, NULL, NULL);
+INSERT INTO `q_papers` VALUES (9, 'Quote 2', 10000, 1, 10200, 2, '0.35', '0.51', '{\"quantitative\":\"400\",\"unit_price\":\"29.5\",\"act\":1,\"total\":21694889.999999996}', '{\"type\":\"1\",\"total\":\"500000\"}', '{\"act\":\"1\",\"color_num\":\"3\",\"style\":\"3\",\"device\":\"2\",\"total\":8437000}', '{\"act\":\"1\",\"materal\":\"8\",\"num_face\":\"1\",\"device\":\"1\",\"total\":4525887.5}', '{\"act\":\"1\",\"materal\":\"2\",\"num_face\":\"2\",\"cover_materal\":\"5\",\"cover_num_face\":\"1\",\"total\":19304775}', '{\"act\":\"1\",\"price\":\"200\",\"shape\":\"10000\",\"device\":\"2\",\"total\":2010000}', '{\"act\":\"1\",\"num_face\":\"2\",\"device\":\"10\",\"total\":12200000}', '{\"act\":\"1\",\"shape_price\":\"100\",\"device\":\"11\",\"total\":1600000}', '{\"act\":\"1\",\"device\":\"5\",\"total\":120000}', '{\"act\":\"1\",\"device\":\"6\",\"total\":550000}', '{\"act\":\"1\",\"price\":\"200\",\"total\":2000000}', 8, 'note', 72942553, 1, NULL, '2022-07-18 23:14:29', '2022-07-18 16:14:29');
 
 -- ----------------------------
 -- Table structure for q_printer_devices
@@ -13712,6 +13727,7 @@ CREATE TABLE `quotes`  (
   `qty_pro` bigint(20) NULL DEFAULT NULL,
   `size` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `print_model` tinyint(4) NULL DEFAULT NULL,
+  `paper_materal` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `customer_id` int(10) NULL DEFAULT NULL,
   `customer_type` tinyint(4) NULL DEFAULT NULL,
   `company_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
@@ -13736,7 +13752,7 @@ CREATE TABLE `quotes`  (
 -- ----------------------------
 -- Records of quotes
 -- ----------------------------
-INSERT INTO `quotes` VALUES (7, NULL, 'Báo giá 1', 10000, NULL, NULL, 0, 2, NULL, 'Contacter c', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', 'hard_group', 1, NULL, NULL, '205503792', '205503792', NULL, NULL, '2022-07-15 10:32:24', '2022-07-15 10:32:24');
-INSERT INTO `quotes` VALUES (8, NULL, 'Quote 2', 10000, NULL, NULL, 0, 2, 'Liverpool', 'Gerrard', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', 'paper_group', 1, '10', '2000000', '72442553', '79886808.3', NULL, NULL, '2022-07-18 09:10:11', '2022-07-18 09:10:11');
+INSERT INTO `quotes` VALUES (7, NULL, 'Báo giá 1', 10000, NULL, NULL, NULL, 0, 2, NULL, 'Contacter c', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', 'hard_group', 1, NULL, NULL, '205503792', '205503792', NULL, NULL, '2022-07-15 10:32:24', '2022-07-15 10:32:24');
+INSERT INTO `quotes` VALUES (8, NULL, 'Quote 2', 10000, '100 x 50 x 20', 1, 'carton 1.8ly', 0, 2, 'Liverpool', 'Gerrard', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', 'paper_group', 1, '10', '5000000', '72942553', '80736808.3', NULL, NULL, '2022-07-18 23:43:15', '2022-07-18 16:43:15');
 
 SET FOREIGN_KEY_CHECKS = 1;

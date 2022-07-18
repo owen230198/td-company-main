@@ -143,7 +143,7 @@ class QuoteController extends Controller
         $quote = $this->quotes::find($id);
         $data['data_quotes'] = $quote;
         $data['data_tables'] = \App\Models\QPaper::where('quote_id', $id)->where('main', 1)->first(); 
-        $data['title'] = 'File báo giá - '.$quote['comany_name'];
+        $data['title'] = 'File báo giá - '.$quote['company_name'];
         return view('quotes.files', $data);
     }
 }
