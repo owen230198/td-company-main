@@ -11,7 +11,7 @@
  Target Server Version : 100424
  File Encoding         : 65001
 
- Date: 19/07/2022 17:53:21
+ Date: 19/07/2022 23:32:45
 */
 
 SET NAMES utf8mb4;
@@ -13037,6 +13037,7 @@ INSERT INTO `n_detail_tables` VALUES (45, 'qty_paper', 0, 'number', 'SL tờ in'
 INSERT INTO `n_detail_tables` VALUES (46, 'main', 0, NULL, 'Xuất file', 'checkbox', 'q_papers', 1, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-06-29 16:56:09', '2022-06-29 16:56:09');
 INSERT INTO `n_detail_tables` VALUES (47, 'total_cost', 0, 'number', 'Chi phí', 'money', 'q_papers', 1, 1, 1, 0, NULL, NULL, 1, 1, 1, '2022-07-18 11:18:58', '2022-07-18 11:18:58');
 INSERT INTO `n_detail_tables` VALUES (48, 'paper_materal', 0, NULL, 'Chất liệu giấy', 'text', 'quotes', 0, 1, 1, 0, NULL, '', 10, 3, 1, '2022-07-18 17:03:27', '2022-07-18 17:03:27');
+INSERT INTO `n_detail_tables` VALUES (49, 'super_admin', 1, NULL, 'Root', 'checkbox', 'n_users', 1, 1, 1, 0, NULL, '', 3, 4, 1, '2022-07-19 19:37:48', '2022-07-19 19:37:48');
 INSERT INTO `n_detail_tables` VALUES (54, 'id', 0, NULL, 'ID', 'text', 'q_devices', 0, NULL, 0, 0, NULL, NULL, 0, 0, 0, '2022-06-30 15:11:33', '2022-06-30 15:11:33');
 INSERT INTO `n_detail_tables` VALUES (55, 'name', 0, NULL, 'Tên máy', 'text', 'q_devices', 1, 1, 1, 1, NULL, NULL, 1, 1, 1, '2022-06-30 15:11:33', '2022-06-30 15:11:33');
 INSERT INTO `n_detail_tables` VALUES (56, 'key_device', 0, NULL, 'Nhóm thiết bị', 'select', 'q_devices', 1, 1, 1, 1, NULL, '{\r\n \"data\": {\r\n   \"table\": null,\r\n    \"option\":{\r\n    \"skin\":\"Cán láng\",\r\n		\"compress\":\"Ép nhũ\",\r\n    \"uv\":\"In UV\",\r\n		\"elevate\":\"Máy bế\",\r\n		\"peel\":\"Bóc lề\",\r\n		\"paste\":\"Dán hộp\",\r\n		\"milling\":\"Máy phay\"\r\n   }\r\n },\r\n \"config\": {\r\n  \"searchbox\": 1\r\n }\r\n}', 1, 1, 1, '2022-06-30 22:45:19', '2022-06-30 22:45:19');
@@ -13133,7 +13134,9 @@ CREATE TABLE `n_modules`  (
   `ord` int(10) NULL DEFAULT NULL,
   `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
-  PRIMARY KEY (`id`) USING BTREE
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `map_indx`(`table_map`) USING BTREE,
+  INDEX `parent_index`(`parent`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -13142,11 +13145,10 @@ CREATE TABLE `n_modules`  (
 INSERT INTO `n_modules` VALUES (1, 'p_quotes', NULL, 'Báo giá', 'javascript:void(0)', NULL, 'money', 1, 1, 0, '2022-06-22 15:00:34', '2022-06-22 15:00:34');
 INSERT INTO `n_modules` VALUES (2, 'customers', 'customers', 'Khách hàng', 'view/customers', 1, NULL, 1, 1, 0, '2022-06-21 14:45:35', '2022-06-21 14:45:35');
 INSERT INTO `n_modules` VALUES (3, 'quotes', 'quotes', 'Danh sách báo giá', 'view/quotes', 1, NULL, 1, 1, 0, '2022-06-21 14:58:39', '2022-06-21 14:58:39');
-INSERT INTO `n_modules` VALUES (4, 'configs', 'configs', 'Thông tin khác', 'view/configs', 1, NULL, 1, 1, 0, '2022-06-21 14:58:42', '2022-06-21 14:58:42');
 INSERT INTO `n_modules` VALUES (5, 'p_users', NULL, 'Tài khoản & phân quyền', 'javascript:void(0)', NULL, 'key', 1, 1, 1, '2022-06-29 22:54:02', '2022-06-29 22:54:02');
 INSERT INTO `n_modules` VALUES (6, 'n_users', 'n_users', 'Ds Tài khoản', 'view/n_users', 5, NULL, 1, 1, 0, '2022-06-22 14:06:40', '2022-06-22 14:06:42');
 INSERT INTO `n_modules` VALUES (7, 'n_group_users', 'n_group_users', 'Nhóm quyền', 'view/n_group_users', 5, NULL, 1, 1, 0, '2022-06-22 14:07:39', '2022-06-22 14:07:43');
-INSERT INTO `n_modules` VALUES (8, 'n_roles', 'n_roles', 'Phân quyền', 'view/n_roles', 5, NULL, 1, 1, 0, '2022-06-22 14:07:39', '2022-06-22 14:07:43');
+INSERT INTO `n_modules` VALUES (8, 'n_roles', 'n_roles', 'Phân quyền', 'grant-permissions', 5, NULL, 1, 1, 0, '2022-07-19 19:11:42', '2022-07-19 19:11:42');
 INSERT INTO `n_modules` VALUES (9, 'p_configs', NULL, 'Đặt thông tin & chi phí', 'javascript:void(0)', NULL, 'credit-card', 1, 1, 0, '2022-06-29 23:01:53', '2022-06-29 23:01:53');
 INSERT INTO `n_modules` VALUES (10, 'q_configs', 'q_configs', 'Thông tin chung', 'view/q_configs', 9, NULL, 1, 1, 0, '2022-06-29 22:56:00', '2022-06-29 22:56:00');
 INSERT INTO `n_modules` VALUES (11, 'q_papers', 'q_papers', 'Tờ in', 'view/q_papers', 3, NULL, 0, 1, 0, '2022-06-30 16:41:30', '2022-06-30 16:41:30');
@@ -13202,8 +13204,8 @@ CREATE TABLE `n_roles`  (
 -- ----------------------------
 -- Records of n_roles
 -- ----------------------------
-INSERT INTO `n_roles` VALUES (1, 2, 1, 1, 1, 1, 1, 1, '2022-06-22 14:16:24', '2022-06-22 14:16:24');
-INSERT INTO `n_roles` VALUES (2, 3, 1, 1, 1, 1, 1, 1, '2022-06-22 14:16:24', '2022-06-22 14:16:24');
+INSERT INTO `n_roles` VALUES (1, 2, 1, 1, 1, 1, 1, 1, '2022-07-19 22:38:14', '2022-07-19 22:38:14');
+INSERT INTO `n_roles` VALUES (2, 3, 1, 1, 1, 1, 1, 1, '2022-07-19 22:58:37', '2022-07-19 22:58:37');
 INSERT INTO `n_roles` VALUES (3, 4, 1, 1, 1, 1, 1, 1, '2022-06-22 14:16:24', '2022-06-22 14:16:24');
 INSERT INTO `n_roles` VALUES (4, 6, 1, 1, 1, 1, 1, 1, '2022-06-22 14:16:24', '2022-06-22 14:16:24');
 INSERT INTO `n_roles` VALUES (5, 7, 1, 1, 1, 1, 1, 1, '2022-06-22 14:16:24', '2022-06-22 14:16:24');
@@ -13274,8 +13276,9 @@ CREATE TABLE `n_users`  (
   `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `n_group_user_id` int(10) NULL DEFAULT NULL,
+  `super_admin` tinyint(4) NULL DEFAULT 0,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `act` tinyint(4) NULL DEFAULT NULL,
   `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
@@ -13285,7 +13288,7 @@ CREATE TABLE `n_users`  (
 -- ----------------------------
 -- Records of n_users
 -- ----------------------------
-INSERT INTO `n_users` VALUES (1, 'dev', 'e10adc3949ba59abbe56e057f20f883e', 'Nguyen Duy Khanh', 'nguyenduykhanh2323@gmail.com', '0378050251', 'Lập trình viên', 1, 1, '2022-06-07 05:07:01', '2022-06-29 05:22:22');
+INSERT INTO `n_users` VALUES (1, 'dev', 'e10adc3949ba59abbe56e057f20f883e', 'Nguyen Duy Khanh', 'nguyenduykhanh2323@gmail.com', '0378050251', 1, 0, 'Lập trình viên', 1, '2022-07-19 12:37:53', '2022-07-19 12:37:53');
 
 -- ----------------------------
 -- Table structure for q_cartons
@@ -13516,13 +13519,12 @@ CREATE TABLE `q_papers`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `quote_indx`(`quote_id`) USING BTREE,
   INDEX `main_index`(`main`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of q_papers
 -- ----------------------------
 INSERT INTO `q_papers` VALUES (1, 'Báo giá 1', 10000, 1, 10200, 2, '0.32', '0.51', '{\"quantitative\":\"400\",\"unit_price\":\"29.5\",\"act\":1,\"total\":19835328}', '{\"type\":\"1\",\"total\":null}', '{\"act\":\"1\",\"color_num\":\"2\",\"style\":\"2\",\"device\":\"2\",\"total\":5728000}', '{\"act\":0}', '{\"act\":\"1\",\"materal\":\"2\",\"num_face\":\"2\",\"cover_materal\":\"5\",\"cover_num_face\":\"1\",\"total\":17650080.000000004}', '{\"act\":0}', '{\"act\":0}', '{\"act\":\"1\",\"float\":\"0\",\"shape_price\":\"200\",\"device\":\"4\",\"total\":1100000}', '{\"act\":0}', '{\"act\":\"1\",\"device\":\"13\",\"total\":1250000}', '{\"act\":\"1\",\"price\":\"100\",\"total\":1000000}', 7, NULL, 46563408, 1, NULL, '2022-07-12 03:24:14', '2022-07-12 03:24:14');
-INSERT INTO `q_papers` VALUES (9, 'Quote 2', 10000, 1, 10200, 2, '0.35', '0.51', '{\"quantitative\":\"400\",\"unit_price\":\"29.5\",\"act\":1,\"total\":21694889.999999996}', '{\"type\":\"1\",\"total\":\"500000\"}', '{\"act\":\"1\",\"color_num\":\"3\",\"style\":\"3\",\"device\":\"2\",\"total\":8437000}', '{\"act\":\"1\",\"materal\":\"8\",\"num_face\":\"1\",\"device\":\"1\",\"total\":4525887.5}', '{\"act\":\"1\",\"materal\":\"2\",\"num_face\":\"2\",\"cover_materal\":\"5\",\"cover_num_face\":\"1\",\"total\":19304775}', '{\"act\":\"1\",\"price\":\"200\",\"shape\":\"10000\",\"device\":\"2\",\"total\":2010000}', '{\"act\":\"1\",\"num_face\":\"2\",\"device\":\"10\",\"total\":12200000}', '{\"act\":\"1\",\"shape_price\":\"100\",\"device\":\"11\",\"total\":1600000}', '{\"act\":\"1\",\"device\":\"5\",\"total\":120000}', '{\"act\":\"1\",\"device\":\"6\",\"total\":550000}', '{\"act\":\"1\",\"price\":\"200\",\"total\":2000000}', 8, 'note', 72942553, 1, NULL, '2022-07-18 23:14:29', '2022-07-18 16:14:29');
 
 -- ----------------------------
 -- Table structure for q_printer_devices
@@ -13753,6 +13755,6 @@ CREATE TABLE `quotes`  (
 -- Records of quotes
 -- ----------------------------
 INSERT INTO `quotes` VALUES (7, NULL, 'Báo giá 1', 10000, NULL, NULL, NULL, 0, 2, NULL, 'Contacter c', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', 'hard_group', 1, NULL, NULL, '205503792', '205503792', NULL, NULL, '2022-07-15 10:32:24', '2022-07-15 10:32:24');
-INSERT INTO `quotes` VALUES (8, NULL, 'Quote 2', 10000, '100 x 50 x 20', 1, 'carton 1.8ly', 0, 2, 'Liverpool', 'Gerrard', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', 'paper_group', 1, '10', '5000000', '72942553', '80736808.3', NULL, NULL, '2022-07-19 02:33:10', '2022-07-19 02:33:10');
+INSERT INTO `quotes` VALUES (8, NULL, 'Quote 2', 10000, '100 x 50 x 20', 1, 'carton 1.8ly', 0, 2, 'Liverpool', 'Gerrard', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', 'paper_group', 1, '10', '5000000', '0', '500000', NULL, NULL, '2022-07-19 23:32:14', '2022-07-19 16:32:14');
 
 SET FOREIGN_KEY_CHECKS = 1;

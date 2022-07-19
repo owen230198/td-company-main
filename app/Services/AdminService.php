@@ -9,6 +9,17 @@ class AdminService extends BaseService
     	parent::__construct();
     }
 
+    public function checkPermissionAction($table, $action)
+    {
+        $table = in_array($table, \App\Models\Quote::$tableChild)?'quotes':$table;
+        $admin = getSessionUser();
+        if (@$admin['super_admin']) {
+            return true;     
+        }
+        $permissions = $this->roles->getPermissionAction($action, $table, @$admin['n_group_user_id']);
+        return @$permissions[$action]?true:false;
+    }
+
     public function getTableItem($table)
     {
         $data = $this->list_tables->where('name', $table)->first();

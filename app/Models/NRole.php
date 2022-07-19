@@ -20,4 +20,11 @@ class NRole extends Model
 		'n_modules.id', '=', 'n_roles.module_id')->get()->toArray();
         return $data;
     }
+
+    public function getPermissionAction($index="*", $table, $group_user_id)
+    {
+        $data = $this->where('view', 1)->where('n_group_user_id', $group_user_id)->join('n_modules', 
+        'n_modules.id', '=', 'n_roles.module_id')->where('n_modules.table_map', $table)->select($index)->first();
+        return $data;
+    }
 }

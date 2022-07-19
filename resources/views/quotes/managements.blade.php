@@ -53,20 +53,20 @@
         </div>
       </div>
     </div>
-    <div class="table_data">
       @if (@$tableItem['name']=='q_finishes')
         @include('quotes.q_finishes.view', ['dataitem'=>@$data_tables[0]?(array)$data_tables[0]:array()])
       @elseif(@$tableItem['name']==null)
         @include('quotes.profits.view')
       @else
+      <div class="table_data">
         @include('table.table_base_view')
         <div class="paginate_view d-flex align-center justify-content-between">
          {{ $data_tables->links() }}
         </div>
-        @include('table.remove_confirm')
-        @include('table.remove_confirm_check')
-        @include('table.action_popup')
+      </div>
+      @include('table.remove_confirm')
+      @include('table.remove_confirm_check')
+      @include('table.action_popup')
       @endif  
-    </div>
   </div>
 @endsection

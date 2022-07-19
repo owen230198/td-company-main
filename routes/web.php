@@ -20,7 +20,6 @@ Route::any('logout', [AuthController::class, 'logout']);
 Route::any('dev-update-data',[HomeController::class, 'devUpdateData']);
 Route::middleware(['checkLogin'])->group(function () {
 	Route::get('/',[HomeController::class, 'index']);
-	Route::get('permission-error',[AdminController::class, 'permissionError']);
 	Route::get('view/{table}', [AdminController::class, 'view']);
 	Route::get('insert/{table}', [AdminController::class, 'insert']);
 	Route::get('update/{table}/{id}', [AdminController::class, 'update']);
@@ -39,6 +38,7 @@ Route::middleware(['checkLogin'])->group(function () {
 	Route::get('grant-permissions', [AdminController::class, 'grantPermission']);
 	Route::get('get-permissions', [AdminController::class, 'getPermission']);
 	Route::post('update-permissions/{module_id}/{role_id}', [AdminController::class, 'updatePermission']);
+	Route::get('permission-error',[AdminController::class, 'permissionError']);
 
 	//quotes routes
 	Route::get('ajax-view-list/{table}/{quote_id}', [QuoteController::class, 'ajaxViewList']);

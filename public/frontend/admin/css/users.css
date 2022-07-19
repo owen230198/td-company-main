@@ -567,7 +567,4 @@ body {
   .station-richmenu-main .col-set {
     max-width: 531px;
   }
-  .table tr th:nth-child(1) {
-    width: 55px;
-  }
 }

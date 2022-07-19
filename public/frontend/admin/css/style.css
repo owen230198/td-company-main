@@ -463,7 +463,6 @@ select.form-control:not([size]):not([multiple]),
 
 .table td, .table th{
   padding: 5px;
-  min-width: 85px;
 }
 
 

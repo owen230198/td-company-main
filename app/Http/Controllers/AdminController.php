@@ -16,14 +16,6 @@ class AdminController extends Controller
         return redirect('/');
     }
 
-    private function checkPermissionAction($table, $action)
-    {
-        $group_user = $this->group_users->find($this->group_admin);
-        $permissions = $this->roles->getPermissionAction($table, $this->group_admin);
-        $permission = $group_user['super_admin']==1||@$permissions[$action]&&$permissions[$action]==1?true:false;
-        return $permission;
-    }
-
     public function permissionError()
     {
         return view('403');
@@ -31,6 +23,9 @@ class AdminController extends Controller
 
     public function view($table)
     {
+        if (!$this->service->checkPermissionAction($table, 'view')) {
+            return redirect('permission-error');    
+        }
         $data = $this->service->getDataBaseView($table, 'Danh sách');
         $data['data_tables'] = getDataTable($table, '*', array(), $data['page_item']);
         session()->put('back_url', url()->full());
@@ -40,6 +35,9 @@ class AdminController extends Controller
 
     public function searchTable($table, Request $request)
     {
+        if (!$this->service->checkPermissionAction($table, 'view')) {
+            return redirect('permission-error');    
+        }
         $get = $request->all();
         $data = $this->service->getDataBaseView($table, 'Tìm kiếm');
         $data['data_tables'] = $this->service->getDataSearchTable($table, $get, $data['page_item']);
@@ -62,12 +60,18 @@ class AdminController extends Controller
 
     public function insert($table)
     {
+        if (!$this->service->checkPermissionAction($table, 'insert')) {
+            return redirect('permission-error');    
+        }
         $data = $this->getDataActionView($table, 'insert', 'Thêm mới');
         return view('action.view', $data);
     }
 
     public function update($table, $id)
     {
+        if (!$this->service->checkPermissionAction($table, 'update')) {
+            return redirect('permission-error');    
+        }
         $data = $this->getDataActionView($table, 'update', 'Cập nhật');
         $data['dataitem'] = getModelByTable($table)->find($id);
         return view('action.view', $data);
@@ -75,6 +79,9 @@ class AdminController extends Controller
 
     public function clone($table, $id)
     {
+        if (!$this->service->checkPermissionAction($table, 'copy')) {
+            return redirect('permission-error');    
+        }
         $data = $this->getDataActionView($table, 'clone', 'Sao chép');
         $data['dataitem'] = getModelByTable($table)->find($id);
         if (@$data['dataitem']['id']) {
@@ -88,6 +95,9 @@ class AdminController extends Controller
 
     public function doInsert($table, Request $request)
     {
+        if (!$this->service->checkPermissionAction($table, 'insert')) {
+            return back()->with('error','Không có quyền thực hiện thao tác này !');
+        }
         $data = $request->all();
         unset($data['_token']);
         $insertID = $this->service->doInsertTable($table, $data);
@@ -101,6 +111,9 @@ class AdminController extends Controller
 
     public function doUpdate($table, $id, Request $request)
     {
+        if (!$this->service->checkPermissionAction($table, 'update')) {
+            return back()->with('error','Không có quyền thực hiện thao tác này !');
+        }
         $data = $request->all();
         unset($data['_token']);
         $success = $this->service->doUpdateTable($id, $table, $data);
@@ -117,6 +130,9 @@ class AdminController extends Controller
        $data = $request->all();
        $id = $data['remove_id'];
        $table = $data['table'];
+        if (!$this->service->checkPermissionAction($table, 'remove')) {
+            return back()->with('error','Không có quyền thực hiện thao tác này !');
+        }
        $success = $this->service->removeDataTable($table, $id);
        if ($success) {
             return back()->with('message','Xoá thành công dữ liệu!'); 
@@ -133,6 +149,9 @@ class AdminController extends Controller
             return back()->with('error','Chưa có mục được chọn !');
         }
         $table = $data['table'];
+        if (!$this->service->checkPermissionAction($table, 'remove')) {
+            return back()->with('error','Không có quyền thực hiện thao tác này !');
+        }
         $arr_id = explode(',', $str_id);
         foreach ($arr_id as $id) {
             $delete = $this->service->removeDataTable($table, $id);           
@@ -146,6 +165,9 @@ class AdminController extends Controller
 
     public function doConfigData($table, Request $request)
     {
+        if (!$this->service->checkPermissionAction($table, 'update')) {
+            return back()->with('error','Không có quyền thực hiện thao tác này !');
+        }
         $post = $request->all();
         unset($post['_token']);
         $success = false;
@@ -164,6 +186,9 @@ class AdminController extends Controller
     public function optionChildData($table, $field, $parent)
     {
         $html = '<option value="0">Danh sách chọn</option>';
+        if (!$this->service->checkPermissionAction($table, 'view')) {
+            $html;
+        }
         if ($parent!=0) {
             $models = getModelByTable($table);
             $data = $models->where('act', 1)->where($field, $parent)->orderBy('name', 'asc')->get();
@@ -176,6 +201,9 @@ class AdminController extends Controller
 
     public function getJsonDataById($table, $id)
     {
+        if (!$this->service->checkPermissionAction($table, 'view')) {
+            return json_encode(array());
+        }
         if ($id) {
             $models = getModelByTable($table);
             $data = $models->find($id);

@@ -30,12 +30,18 @@ class QuoteController extends Controller
 
     public function quoteManagement($table, $quote_id)
     {
+        if (!$this->adminService->checkPermissionAction('quotes', 'view')) {
+            return redirect('permission-error');
+        }
         $data = $this->getBaseViewQuoteManagement($table, $quote_id);
         return view('quotes.managements', $data);
     }
 
     public function ajaxViewList($table, $quote_id)
     {
+        if (!$this->adminService->checkPermissionAction('quotes', 'view')) {
+            return 'Bạn không có quyền nhận dữ liệu !';
+        }
         $data = $this->getBaseViewQuoteManagement($table, $quote_id);
         return view('table.table_base_view', $data);    
     }
@@ -57,18 +63,27 @@ class QuoteController extends Controller
 
     public function insertDetailQuote($table, $quote_id)
     {
+        if (!$this->adminService->checkPermissionAction('quotes', 'insert')) {
+            return redirect('permission-error');
+        }
         $data = $this->getBaseActionQuote('insert', $table, $quote_id);
         return view('quotes.tables.view', $data);
     }
 
     public function updateDetailQuote($table, $quote_id, $id)
     {
+        if (!$this->adminService->checkPermissionAction('quotes', 'update')) {
+            return redirect('permission-error');
+        }
         $data = $this->getBaseActionQuote('update', $table, $quote_id, $id);
         return view('quotes.tables.view', $data);
     }
 
     public function doInsertDetail($table, $quote_id, Request $request)
     {
+        if (!$this->adminService->checkPermissionAction('quotes', 'insert')) {
+            return back()->with('error','Không có quyền thao tác!'); 
+        }
         $data = $request->all();
         unset($data['_token']);
         $status = $this->service->doInsert($table, $data, $quote_id);
@@ -81,7 +96,7 @@ class QuoteController extends Controller
             }
         }else{
             if ($table == 'q_finishes') {
-                return back()->with('error','Đã có lỗi xảy ra! !'); 
+                return back()->with('error','Đã có lỗi xảy ra!'); 
             }else{
                 echoJson(100, 'Đã có lỗi xảy ra!');
                 return;
@@ -91,6 +106,9 @@ class QuoteController extends Controller
 
     public function doUpdateDetail($table, $quote_id, $id, Request $request)
     {
+        if (!$this->adminService->checkPermissionAction('quotes', 'insert')) {
+            return back()->with('error','Không có quyền thao tác!'); 
+        }
         $data = $request->all();
         unset($data['_token']);
         $status = $this->service->doUpdate($table, $data, $quote_id, $id);
@@ -115,6 +133,9 @@ class QuoteController extends Controller
     {
         $quote = $this->quotes->find($quote_id);
         if (!$request->isMethod('post')) {
+            if (!$this->adminService->checkPermissionAction('quotes', 'update')) {
+                return redirect('permission-error');
+            }
             if ($quote['group_product']==NameConstant::HARDBOX) {
                 $data = $this->service->getListDataQuote($quote_id);     
             }else{
@@ -125,6 +146,9 @@ class QuoteController extends Controller
             $data['title'] = 'Lợi nhuận báo giá '.$quote['name'] ;
             return view('quotes.managements', $data);
         }else{
+            if (!$this->adminService->checkPermissionAction('quotes', 'update')) {
+                return back()->with('error','Không có quyền thao tác!'); 
+            }
             $data = $request->all();
             unset($data['_token']);
             $admin_services = new \App\Services\AdminService;
@@ -140,6 +164,9 @@ class QuoteController extends Controller
 
     public function fileDetail($id)
     {
+        if (!$this->adminService->checkPermissionAction('quotes', 'view')) {
+            return back()->with('error','Không có quyền thao tác!'); 
+        }
         $quote = $this->quotes::find($id);
         $data['data_quotes'] = $quote;
         $data['data_tables'] = \App\Models\QPaper::where('quote_id', $id)->where('main', 1)->first(); 
