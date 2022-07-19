@@ -500,6 +500,10 @@ select.form-control:not([size]):not([multiple]),
   display: block;
 }
 
+.ex_quote_file .color_red{
+  color: #d50202; 
+}
+
 select.form-control:not([size]):not([multiple]){
   height: 32px;
 }

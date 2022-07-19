@@ -52,77 +52,77 @@
 								</thead>
 							  	<tbody class="fs-17 font-italic">
 							    	<tr>
-							      	<td data-label="Nội dung" class="font-italic quote_content_section max_content">
-						      			<p class="d-flex align-items-center mb-1 font_w_bold">
-							      			<span class="pro_name fs-18 text-uppercase">{{ @$data_tables['name'] }}</span>
-							      		</p>
-							      		<p class=" mb-1">
-							      			<span class="font_w_bold mr-1"><i class="fs-10 fa fa-circle mr-1" aria-hidden="true"></i> Chất liệu giấy: </span>
-							      			{{ @$data_quotes['paper_materal'] }}	
-							      		</p>
-							      		<p class=" mb-1">
-							      			<span class="font_w_bold mr-1"><i class="fs-10 fa fa-circle mr-1" aria-hidden="true"></i> Kích thước: </span> 
-							      			<span class="">
-							      				{{ $data_quotes['size'] }} mm
-							      			</span>	
-							      		</p>
-							      		<p class=" mb-1">
-							      			<span class="font_w_bold mr-1"><i class="fs-10 fa fa-circle mr-1" aria-hidden="true"></i> Mẫu thiết kế do: </span>
-							      			{{ @$data_tables['design_model']==2?'Khách hàng cung cấp':'BB Tuấn Dung cung cấp' }}	
-							      		@php
-							      			$print = json_decode(@$data_tables['print']);
-							      			$skin = json_decode(@$data_tables['skin']);
-							      			$pressed = json_decode(@$data_tables['pressed']);
-							      			$uv = json_decode(@$data_tables['uv']);
-							      			$elevate = json_decode(@$data_tables['elevate']);
-							      		@endphp
-							      		@if (@$print->act == 1)	
-								      		<p class="d-flex align-items-center mb-1 font_w_bold">
-								      			<span class="mr-1">
-								      				<i class="fs-10 fa fa-circle mr-1" aria-hidden="true"></i> 
-								      				In: In {{ @$print->device==1?'print':'uv' }} theo {{ @$data_quotes['print_model']==1?'file đã sản xuất':'file thiết kế mới' }}
+								      	<td data-label="Nội dung" class="font-italic quote_content_section max_content">
+							      			<p class="d-flex align-items-center mb-1 font_w_bold">
+								      			<span class="pro_name fs-18 text-uppercase">{{ @$data_tables['name'] }}</span>
+								      		</p>
+								      		<p class=" mb-1">
+								      			<span class="font_w_bold mr-1"><i class="fs-10 fa fa-circle mr-1" aria-hidden="true"></i> Chất liệu giấy: </span>
+								      			{{ @$data_quotes['paper_materal'] }}	
+								      		</p>
+								      		<p class=" mb-1">
+								      			<span class="font_w_bold mr-1"><i class="fs-10 fa fa-circle mr-1" aria-hidden="true"></i> Kích thước: </span> 
+								      			<span class="">
+								      				{{ $data_quotes['size'] }} mm
 								      			</span>	
 								      		</p>
-							      		@endif
-							      		<p class=" mb-1">
-							      			<span class="font_w_bold mr-1"><i class="fs-10 fa fa-circle mr-1" aria-hidden="true"></i> Hoàn thiện: </span>
-							      			<span class="font-italic">
-							      				@if (@$skin->act==1)
-							      					{{ getNameTableById('QLaminateMateral', @$skin->materal).' '.$skin->num_face.' mặt ' }}
-							      				@endif
+								      		<p class=" mb-1">
+								      			<span class="font_w_bold mr-1"><i class="fs-10 fa fa-circle mr-1" aria-hidden="true"></i> Mẫu thiết kế do: </span>
+								      			{{ @$data_tables['design_model']==2?'Khách hàng cung cấp':'BB Tuấn Dung cung cấp' }}	
+								      		@php
+								      			$print = json_decode(@$data_tables['print']);
+								      			$skin = json_decode(@$data_tables['skin']);
+								      			$pressed = json_decode(@$data_tables['pressed']);
+								      			$uv = json_decode(@$data_tables['uv']);
+								      			$elevate = json_decode(@$data_tables['elevate']);
+								      		@endphp
+								      		@if (@$print->act == 1)	
+									      		<p class="d-flex align-items-center mb-1 font_w_bold">
+									      			<span class="mr-1">
+									      				<i class="fs-10 fa fa-circle mr-1" aria-hidden="true"></i> 
+									      				In: In {{ @$print->device==1?'print':'uv' }} theo {{ @$data_quotes['print_model']==1?'file đã sản xuất':'file thiết kế mới' }}
+									      			</span>	
+									      		</p>
+								      		@endif
+								      		<p class=" mb-1">
+								      			<span class="font_w_bold mr-1"><i class="fs-10 fa fa-circle mr-1" aria-hidden="true"></i> Hoàn thiện: </span>
+								      			<span class="font-italic">
+								      				@if (@$skin->act==1)
+								      					{{ getNameTableById('QLaminateMateral', @$skin->materal).' '.$skin->num_face.' mặt ' }}
+								      				@endif
 
-							      				@if (@$pressed->act==1)
-							      					+ ép nhũ theo maket
-							      				@endif
+								      				@if (@$pressed->act==1)
+								      					+ ép nhũ theo maket
+								      				@endif
 
-							      				@if (@$uv->act==1)
-							      					+ {{ getNameTableById('QDevice', @$uv->device) }} theo maket	
-							      				@endif
-								      			
-								      			@if (@$elevate->float)
-								      				+ Thúc nổi sản phẩm
-								      			@endif	
-							      			</span>
-							      		</p>
-
-							      		@if (@@$data_tables['note']!='')
-							      			<p class="mb-1">
-								      			<span class="font_w_bold mr-1"><i class="fs-10 fa fa-circle mr-1" aria-hidden="true"></i> Ghi chú: </span>
-								      				<span class="font-italic">
-									      				{{ @$data_tables['note'] }}
-									      			</span>										
+								      				@if (@$uv->act==1)
+								      					+ {{ getNameTableById('QDevice', @$uv->device) }} theo maket	
+								      				@endif
+									      			
+									      			@if (@$elevate->float)
+									      				+ Thúc nổi sản phẩm
+									      			@endif	
+								      			</span>
 								      		</p>
-							      		@endif
-							      	</td>
-							      	<td data-label="DVT" class="text-center">Sản phẩm</td>
-							      	<td data-label="SL" class="text-center">{{ $data_quotes['qty_pro'] }}</td>
-							      	@php
-							      		$price = (int)$data_quotes['total_amount'];
-							      		$e_price = @$data_quotes['qty_pro']?ceil($price/$data_quotes['qty_pro']):0; 
-							      	@endphp
-							      	<td data-label="ĐG" class="text-center">{{ number_format($e_price) }} đ</td>
-							      	<td data-label="T.Tiền(VNĐ)" class="text-center">{{ number_format($price) }} đ</td>
-								   </tr>
+
+								      		@if (@@$data_tables['note']!='')
+								      			<p class="mb-1">
+									      			<span class="font_w_bold mr-1"><i class="fs-10 fa fa-circle mr-1" aria-hidden="true"></i> Ghi chú: </span>
+									      				<span class="font-italic">
+										      				{{ @$data_tables['note'] }}
+										      			</span>										
+									      		</p>
+								      		@endif
+								      	</td>
+								      	<td data-label="DVT" class="text-center">Sản phẩm</td>
+								      	<td data-label="SL" class="text-center">{{ $data_quotes['qty_pro'] }}</td>
+								      	@php
+								      		$price = (int)$data_quotes['total_amount'];
+								      		$e_price = @$data_quotes['qty_pro']?ceil($price/$data_quotes['qty_pro']):0; 
+								      	@endphp
+								      	<td data-label="ĐG" class="text-center">{{ number_format($e_price) }} đ</td>
+								      	<td data-label="T.Tiền(VNĐ)" class="text-center">{{ number_format($price) }} đ</td>
+								   	</tr>
 							  	</tbody>
 							</table>	
 						    <div class="text-center p-2 border_grey">

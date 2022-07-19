@@ -26,17 +26,19 @@ Route::middleware(['checkLogin'])->group(function () {
 	Route::get('update/{table}/{id}', [AdminController::class, 'update']);
 	Route::get('search-table/{table}', [AdminController::class, 'searchTable']);
 	Route::get('clone/{table}/{id}', [AdminController::class, 'clone']);
-	Route::get('grant-permissions', [AdminController::class, 'grantPermission']);
-	Route::get('get-permissions', [AdminController::class, 'getPermission']);
 	Route::post('do-insert/{table}', [AdminController::class, 'doInsert']);
 	Route::post('do-insert/{table}', [AdminController::class, 'doInsert']);
 	Route::post('do-update/{table}/{id}', [AdminController::class, 'doUpdate']);
 	Route::post('remove', [AdminController::class, 'remove']);
 	Route::post('multiple-remove', [AdminController::class, 'multipleRemove']);
-	Route::post('update-permissions/{module_id}/{role_id}', [AdminController::class, 'updatePermission']);
 	Route::post('do-config-data/{table}', [AdminController::class, 'doConfigData']);
 	Route::get('option-child-data/{table}/{field}/{parent}', [AdminController::class, 'optionChildData']);
 	Route::get('get-data-details/{table}/{id}', [AdminController::class, 'getJsonDataById']);
+
+	//permission roles routes
+	Route::get('grant-permissions', [AdminController::class, 'grantPermission']);
+	Route::get('get-permissions', [AdminController::class, 'getPermission']);
+	Route::post('update-permissions/{module_id}/{role_id}', [AdminController::class, 'updatePermission']);
 
 	//quotes routes
 	Route::get('ajax-view-list/{table}/{quote_id}', [QuoteController::class, 'ajaxViewList']);

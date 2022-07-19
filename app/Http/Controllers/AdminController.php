@@ -16,6 +16,14 @@ class AdminController extends Controller
         return redirect('/');
     }
 
+    private function checkPermissionAction($table, $action)
+    {
+        $group_user = $this->group_users->find($this->group_admin);
+        $permissions = $this->roles->getPermissionAction($table, $this->group_admin);
+        $permission = $group_user['super_admin']==1||@$permissions[$action]&&$permissions[$action]==1?true:false;
+        return $permission;
+    }
+
     public function permissionError()
     {
         return view('403');

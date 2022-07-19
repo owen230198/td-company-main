@@ -11,7 +11,7 @@
  Target Server Version : 100424
  File Encoding         : 65001
 
- Date: 19/07/2022 00:10:25
+ Date: 19/07/2022 17:53:21
 */
 
 SET NAMES utf8mb4;
@@ -13753,6 +13753,6 @@ CREATE TABLE `quotes`  (
 -- Records of quotes
 -- ----------------------------
 INSERT INTO `quotes` VALUES (7, NULL, 'Báo giá 1', 10000, NULL, NULL, NULL, 0, 2, NULL, 'Contacter c', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', 'hard_group', 1, NULL, NULL, '205503792', '205503792', NULL, NULL, '2022-07-15 10:32:24', '2022-07-15 10:32:24');
-INSERT INTO `quotes` VALUES (8, NULL, 'Quote 2', 10000, '100 x 50 x 20', 1, 'carton 1.8ly', 0, 2, 'Liverpool', 'Gerrard', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', 'paper_group', 1, '10', '5000000', '72942553', '80736808.3', NULL, NULL, '2022-07-18 23:43:15', '2022-07-18 16:43:15');
+INSERT INTO `quotes` VALUES (8, NULL, 'Quote 2', 10000, '100 x 50 x 20', 1, 'carton 1.8ly', 0, 2, 'Liverpool', 'Gerrard', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', 'paper_group', 1, '10', '5000000', '72942553', '80736808.3', NULL, NULL, '2022-07-19 02:33:10', '2022-07-19 02:33:10');
 
 SET FOREIGN_KEY_CHECKS = 1;
