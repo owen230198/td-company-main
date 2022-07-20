@@ -1,6 +1,6 @@
 @extends('index')
 @section('content')
-{!! getBreadcrumb('', 0, 'File báo giá') !!}
+{!! getBreadcrumb('quotes', 0, 'File báo giá') !!}
 	<div class="position-relative">
 		<div class="dashborad_content bg_white">
 		 	<div class="quote_model py-lg-5 py-4">

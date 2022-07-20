@@ -11,7 +11,7 @@
  Target Server Version : 100424
  File Encoding         : 65001
 
- Date: 19/07/2022 23:32:45
+ Date: 20/07/2022 18:36:22
 */
 
 SET NAMES utf8mb4;
@@ -13254,16 +13254,16 @@ INSERT INTO `n_tables` VALUES (4, 'files', 'Kho Lưu trữ', 0, 'files', 'files'
 INSERT INTO `n_tables` VALUES (5, 'q_configs', 'Thông tin chung & Giá thành', 0, 'q_configs', 'configs', 0, 100, 10, 'configs', NULL, 1, 1, 1, 1, 0, '2022-06-30 10:03:47', '2022-06-30 10:03:47');
 INSERT INTO `n_tables` VALUES (6, 'customers', 'Khách hàng', 0, 'customers', 'customers', 0, 10, 10, 'view', NULL, 1, 1, 1, 1, 0, '2022-06-30 10:03:47', '2022-06-30 10:03:47');
 INSERT INTO `n_tables` VALUES (7, 'quotes', 'Báo giá', 0, 'quotes', 'quotes', 0, 10, 10, 'view', 'quote_', 1, 1, 1, 1, 0, '2022-06-30 10:03:47', '2022-06-30 10:03:47');
-INSERT INTO `n_tables` VALUES (8, 'q_papers', 'Tờ in', 0, 'q_papers', 'q_papers', 0, 10, 10, 'view', 'q_management_', 1, 1, 1, 1, 0, '2022-07-06 16:28:52', '2022-07-06 16:28:52');
+INSERT INTO `n_tables` VALUES (8, 'q_papers', 'Tờ in', 7, 'q_papers', 'q_papers', 0, 10, 10, 'view', 'q_management_', 1, 1, 1, 1, 0, '2022-07-20 14:57:37', '2022-07-20 14:57:37');
 INSERT INTO `n_tables` VALUES (9, 'q_devices', 'Thiết bị & Chi phí', 0, 'q_devices', 'q_devices', 0, 10, 10, 'view', '', 1, 1, 1, 1, 0, '2022-06-30 10:03:47', '2022-06-30 10:03:47');
 INSERT INTO `n_tables` VALUES (10, 'q_laminate_materals', 'Chất liệu cán màng', 0, 'q_laminate_materals', 'q_laminate_materals', 0, 10, 10, 'view', '', 1, 1, 1, 1, 0, '2022-06-30 23:23:21', '2022-06-30 23:23:21');
 INSERT INTO `n_tables` VALUES (11, 'q_printer_devices', 'Máy in & chi phí', 0, 'q_printer_devices', 'q_printer_devices', 0, 10, 10, 'view', '', 1, 1, 1, 1, 0, '2022-06-30 23:23:21', '2022-06-30 23:23:21');
-INSERT INTO `n_tables` VALUES (12, 'q_cartons', 'Vật tư cartons', 0, 'q_cartons', 'q_cartons', 0, 10, 10, 'view', 'q_management_', 1, 1, 1, 1, 0, '2022-07-06 16:28:52', '2022-07-06 16:28:52');
+INSERT INTO `n_tables` VALUES (12, 'q_cartons', 'Vật tư cartons', 7, 'q_cartons', 'q_cartons', 0, 10, 10, 'view', 'q_management_', 1, 1, 1, 1, 0, '2022-07-20 14:57:20', '2022-07-20 14:57:20');
 INSERT INTO `n_tables` VALUES (13, 'q_supplies', 'Vật tư tham gia sx', 0, 'q_supplies', 'q_supplies', 0, 10, 10, 'view', '', 1, 1, 1, 1, 0, '2022-07-09 11:50:36', '2022-07-09 11:50:36');
 INSERT INTO `n_tables` VALUES (14, 'q_supply_prices', 'Đơn giá vật tư', 0, 'q_supply_prices', 'q_supply_prices', 0, 10, 10, 'view', NULL, 1, 1, 1, 1, 0, '2022-07-09 11:59:07', '2022-07-09 11:59:08');
-INSERT INTO `n_tables` VALUES (15, 'q_foams', 'Mút xốp định hình', 0, 'q_foams', 'q_foams', 0, 10, 10, 'view', 'q_management_', 1, 1, 1, 1, 0, '2022-07-12 11:29:26', '2022-07-12 11:29:26');
-INSERT INTO `n_tables` VALUES (16, 'q_silks', 'Vật tư lụa', 0, 'q_silks', 'q_silks', 0, 10, 10, 'view', 'q_management_', 1, 1, 1, 1, 0, '2022-07-12 11:29:26', '2022-07-12 11:29:26');
-INSERT INTO `n_tables` VALUES (17, 'q_finishes', 'Chi phí bồi & hoàn thiện', 0, 'q_finishes', 'q_finishes', 0, 10, 10, 'view', 'q_management_', 1, 1, 1, 1, 0, '2022-07-12 11:29:26', '2022-07-12 11:29:26');
+INSERT INTO `n_tables` VALUES (15, 'q_foams', 'Mút xốp định hình', 7, 'q_foams', 'q_foams', 0, 10, 10, 'view', 'q_management_', 1, 1, 1, 1, 0, '2022-07-20 14:57:29', '2022-07-20 14:57:29');
+INSERT INTO `n_tables` VALUES (16, 'q_silks', 'Vật tư lụa', 7, 'q_silks', 'q_silks', 0, 10, 10, 'view', 'q_management_', 1, 1, 1, 1, 0, '2022-07-20 14:57:30', '2022-07-20 14:57:30');
+INSERT INTO `n_tables` VALUES (17, 'q_finishes', 'Chi phí bồi & hoàn thiện', 7, 'q_finishes', 'q_finishes', 0, 10, 10, 'view', 'q_management_', 1, 1, 1, 1, 0, '2022-07-20 14:57:31', '2022-07-20 14:57:31');
 
 -- ----------------------------
 -- Table structure for n_users
@@ -13755,6 +13755,6 @@ CREATE TABLE `quotes`  (
 -- Records of quotes
 -- ----------------------------
 INSERT INTO `quotes` VALUES (7, NULL, 'Báo giá 1', 10000, NULL, NULL, NULL, 0, 2, NULL, 'Contacter c', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', 'hard_group', 1, NULL, NULL, '205503792', '205503792', NULL, NULL, '2022-07-15 10:32:24', '2022-07-15 10:32:24');
-INSERT INTO `quotes` VALUES (8, NULL, 'Quote 2', 10000, '100 x 50 x 20', 1, 'carton 1.8ly', 0, 2, 'Liverpool', 'Gerrard', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', 'paper_group', 1, '10', '5000000', '0', '500000', NULL, NULL, '2022-07-19 23:32:14', '2022-07-19 16:32:14');
+INSERT INTO `quotes` VALUES (8, NULL, 'Quote 2', 10000, '100 x 50 x 20', 1, 'carton 1.8ly', 0, 2, 'Liverpool', 'Gerrard', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', 'paper_group', 1, '10', '5000000', '0', '500000', NULL, NULL, '2022-07-20 07:46:10', '2022-07-20 07:46:10');
 
 SET FOREIGN_KEY_CHECKS = 1;

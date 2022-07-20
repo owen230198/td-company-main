@@ -211,5 +211,21 @@ class AdminController extends Controller
         $arr_data = @$data?$data->toArray():array();
         return json_encode($arr_data);
     }
+
+    public function grantPermission()
+    {
+        if (!$this->service->checkPermissionAction('n_roles', 'view')) {
+            return redirect('permission-error');  
+        }
+        $data['title'] = 'Phân quyền';
+        $data['limit_roles'] = array();
+        $data['list_roles'] = array();
+        $data['other_modules'] = array();
+        $list_groups = \App\Models\NGroupUser::where('act', 1)->get()->toArray();
+        $admin = getSessionUser();
+        $data['list_groups'] = recursive($list_groups, $admin['n_group_user_id'], 0);
+        dd($data);
+        return view('roles.view', $data);  
+    }
 }
 

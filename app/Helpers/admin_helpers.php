@@ -41,12 +41,12 @@ if(!function_exists('getBreadcrumbFull')){
            $pid = $pid;
         }
         $model = getModelByTable($table);
-        $arr = $model->find($pid);
+        $arr = $model->find($pid)->toArray();
         if(count($arr)>0){
             if(array_key_exists('parent', $arr)){
                 $_ret = getBreadcrumbFull($table,$arr['parent'],"");
                 $obj = new stdClass();
-                $obj->url = $arr['slug'];
+                $obj->url = @$arr['slug']?$arr['slug']:'view/'.$arr['name'];
                 $obj->name = $arr['name'];
                 array_push($ret, $obj);
                 $ret = array_merge($ret,$_ret);
