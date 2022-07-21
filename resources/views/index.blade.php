@@ -48,7 +48,6 @@
           </div>
         </div>
       </div>
-      @include('guides.view')
     </section>
   @endif
   <script src="{{ asset('frontend/base/script/jquery.min.js') }}"></script>

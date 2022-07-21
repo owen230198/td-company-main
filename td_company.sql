@@ -11,7 +11,7 @@
  Target Server Version : 100424
  File Encoding         : 65001
 
- Date: 20/07/2022 18:36:22
+ Date: 21/07/2022 18:30:46
 */
 
 SET NAMES utf8mb4;
@@ -12996,7 +12996,7 @@ INSERT INTO `n_detail_tables` VALUES (3, 'username', 1, NULL, 'username', 'text'
 INSERT INTO `n_detail_tables` VALUES (4, 'password', 1, NULL, 'password', 'text', 'n_users', 0, 1, 1, 0, NULL, NULL, 4, 0, 1, '2022-06-24 16:02:33', '2022-06-24 16:02:33');
 INSERT INTO `n_detail_tables` VALUES (5, 'email', 1, NULL, 'email', 'text', 'n_users', 1, 1, 1, 1, NULL, NULL, 3, 2, 1, '2022-06-24 16:02:33', '2022-06-24 16:02:33');
 INSERT INTO `n_detail_tables` VALUES (6, 'phone', 0, NULL, 'SĐT cá nhân', 'text', 'n_users', 1, 1, 1, 1, NULL, NULL, 3, 3, 1, '2022-06-24 16:02:33', '2022-06-24 16:02:33');
-INSERT INTO `n_detail_tables` VALUES (7, 'n_group_user_id', 1, NULL, 'Nhóm quản trị', 'select', 'n_users', 1, 1, 1, 1, NULL, '{\r\n \"data\": {\r\n  \"source\": \"database\",\r\n  \"table\": \"NGroupUser\",\r\n  \"select\": \"id,name\",\r\n  \"field\": \"parent\",\r\n  \"recursive\":1\r\n },\r\n \"config\": {\r\n  \"searchbox\": 1\r\n }\r\n}', 3, 4, 1, '2022-06-24 16:02:33', '2022-06-24 16:02:33');
+INSERT INTO `n_detail_tables` VALUES (7, 'n_group_user_id', 1, NULL, 'Nhóm quyền', 'select', 'n_users', 1, 1, 1, 1, NULL, '{\r\n \"data\": {\r\n  \"source\": \"database\",\r\n  \"table\": \"NGroupUser\",\r\n  \"select\": \"id,name\",\r\n  \"field\": \"parent\",\r\n  \"recursive\":1\r\n },\r\n \"config\": {\r\n  \"searchbox\": 1\r\n }\r\n}', 3, 4, 1, '2022-07-21 09:28:57', '2022-07-21 09:28:57');
 INSERT INTO `n_detail_tables` VALUES (8, 'act', 1, NULL, 'Kích hoạt', 'checkbox', 'n_users', 1, 1, 1, 0, NULL, NULL, 3, 5, 1, '2022-06-24 16:02:33', '2022-06-24 16:02:33');
 INSERT INTO `n_detail_tables` VALUES (9, 'created_at', 1, NULL, 'Thời gian', 'date_time', 'n_users', 0, 1, 1, 0, NULL, NULL, 3, 6, 1, '2022-06-24 16:02:33', '2022-06-24 16:02:33');
 INSERT INTO `n_detail_tables` VALUES (10, 'id', 0, NULL, 'ID', 'text', 'n_group_users', 0, NULL, 0, 0, NULL, NULL, 0, 0, 0, '2022-06-21 14:54:20', '2022-06-21 14:54:20');
@@ -13110,12 +13110,13 @@ CREATE TABLE `n_group_users`  (
   `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 33 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 41 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of n_group_users
 -- ----------------------------
 INSERT INTO `n_group_users` VALUES (1, 'Admin cấp cao', 0, 'Admin cao nhất có mọi quyền truy cập', 1, '2022-06-21 14:54:35', '2022-06-21 14:54:37');
+INSERT INTO `n_group_users` VALUES (39, 'Nhân viên kinh doanh', 1, NULL, 1, '2022-07-21 03:53:12', '2022-07-21 03:53:12');
 
 -- ----------------------------
 -- Table structure for n_modules
@@ -13199,12 +13200,12 @@ CREATE TABLE `n_roles`  (
   PRIMARY KEY (`role_id`) USING BTREE,
   INDEX `foreign_indx`(`module_id`, `n_group_user_id`) USING BTREE,
   INDEX `action_index`(`view`, `insert`, `update`, `remove`, `copy`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 40 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of n_roles
 -- ----------------------------
-INSERT INTO `n_roles` VALUES (1, 2, 1, 1, 1, 1, 1, 1, '2022-07-19 22:38:14', '2022-07-19 22:38:14');
+INSERT INTO `n_roles` VALUES (1, 2, 1, 1, 1, 1, 1, 1, '2022-07-21 13:44:01', '2022-07-21 13:44:01');
 INSERT INTO `n_roles` VALUES (2, 3, 1, 1, 1, 1, 1, 1, '2022-07-19 22:58:37', '2022-07-19 22:58:37');
 INSERT INTO `n_roles` VALUES (3, 4, 1, 1, 1, 1, 1, 1, '2022-06-22 14:16:24', '2022-06-22 14:16:24');
 INSERT INTO `n_roles` VALUES (4, 6, 1, 1, 1, 1, 1, 1, '2022-06-22 14:16:24', '2022-06-22 14:16:24');
@@ -13217,6 +13218,19 @@ INSERT INTO `n_roles` VALUES (10, 13, 1, 1, 1, 1, 1, 1, '2022-07-01 18:14:22', '
 INSERT INTO `n_roles` VALUES (11, 14, 1, 1, 1, 1, 1, 1, '2022-07-01 18:14:22', '2022-07-01 18:14:22');
 INSERT INTO `n_roles` VALUES (12, 15, 1, 1, 1, 1, 1, 1, '2022-07-01 18:14:22', '2022-07-01 18:14:22');
 INSERT INTO `n_roles` VALUES (13, 16, 1, 1, 1, 1, 1, 1, '2022-07-01 18:14:22', '2022-07-01 18:14:22');
+INSERT INTO `n_roles` VALUES (14, 2, 39, 1, 1, 1, 1, 1, '2022-07-19 22:38:14', '2022-07-19 22:38:14');
+INSERT INTO `n_roles` VALUES (15, 3, 39, 1, 1, 1, 1, 1, '2022-07-19 22:58:37', '2022-07-19 22:58:37');
+INSERT INTO `n_roles` VALUES (16, 4, 39, 1, 1, 1, 1, 1, '2022-06-22 14:16:24', '2022-06-22 14:16:24');
+INSERT INTO `n_roles` VALUES (17, 6, 39, 1, 1, 1, 1, 1, '2022-06-22 14:16:24', '2022-06-22 14:16:24');
+INSERT INTO `n_roles` VALUES (18, 7, 39, 1, 1, 1, 1, 1, '2022-06-22 14:16:24', '2022-06-22 14:16:24');
+INSERT INTO `n_roles` VALUES (19, 8, 39, 1, 1, 1, 1, 1, '2022-06-22 14:17:30', '2022-06-22 14:17:30');
+INSERT INTO `n_roles` VALUES (20, 10, 39, 1, 1, 1, 1, 1, '2022-06-22 14:17:30', '2022-06-22 14:17:30');
+INSERT INTO `n_roles` VALUES (21, 11, 39, 1, 1, 1, 1, 1, '2022-06-22 14:17:30', '2022-06-22 14:17:30');
+INSERT INTO `n_roles` VALUES (22, 12, 39, 1, 1, 1, 1, 1, '2022-06-22 14:17:30', '2022-06-22 14:17:30');
+INSERT INTO `n_roles` VALUES (23, 13, 39, 1, 1, 1, 1, 1, '2022-07-01 18:14:22', '2022-07-01 18:14:22');
+INSERT INTO `n_roles` VALUES (24, 14, 39, 1, 1, 1, 1, 1, '2022-07-01 18:14:22', '2022-07-01 18:14:22');
+INSERT INTO `n_roles` VALUES (25, 15, 39, 1, 1, 1, 1, 1, '2022-07-01 18:14:22', '2022-07-01 18:14:22');
+INSERT INTO `n_roles` VALUES (26, 16, 39, 1, 1, 1, 1, 1, '2022-07-01 18:14:22', '2022-07-01 18:14:22');
 
 -- ----------------------------
 -- Table structure for n_tables

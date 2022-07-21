@@ -224,8 +224,33 @@ class AdminController extends Controller
         $list_groups = \App\Models\NGroupUser::where('act', 1)->get()->toArray();
         $admin = getSessionUser();
         $data['list_groups'] = recursive($list_groups, $admin['n_group_user_id'], 0);
-        dd($data);
         return view('roles.view', $data);  
+    }
+
+    public function getPermission(Request $request)
+    {
+        if (!$this->service->checkPermissionAction('n_roles', 'view')) {
+            return redirect('permission-error');  
+        }
+        $get = $request->all();
+        $group = @$get['group']?$get['group']:'';
+        $data['title'] = 'Phân quyền';
+        $list_groups = \App\Models\NGroupUser::where('act', 1)->get()->toArray();
+        $admin = getSessionUser();
+        $data['list_groups'] = recursive($list_groups, $admin['n_group_user_id'], 0);
+        if ($group == '') {
+            $data['limit_roles'] = array();
+            $data['list_roles'] = array();
+            $data['other_modules'] = array();
+        }else {
+            if (!$this->service->checkListGroup($group, $data['list_groups'])) {
+                return redirect('permission-error');    
+            }
+            $data['limit_roles'] = array_merge(@session('user_login')['parent_menu'], @session('user_login')['menu']);
+            $data['list_roles'] = (new \App\Models\NRole)->getModuleByGroupUser($admin['n_group_user_id']);
+            $data['group'] = $group;
+        }
+        return view('roles.view', $data);
     }
 }
 

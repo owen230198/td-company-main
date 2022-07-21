@@ -20,6 +20,18 @@ class AdminService extends BaseService
         return @$permissions[$action]?true:false;
     }
 
+    public function checkListGroup($group, $list_group)
+    {
+        $ret = false;
+        foreach ($list_group as $item) {
+            if ($item['id']==$group) {
+                $ret = true;
+                break;  
+            }
+        }
+        return $ret;
+    }
+
     public function getTableItem($table)
     {
         $data = $this->list_tables->where('name', $table)->first();
@@ -104,6 +116,24 @@ class AdminService extends BaseService
         }
     }
 
+    private function actionRoleByParent($group_id, $id, $action)
+    {
+        $extend_roles = $this->roles->where('n_group_user_id', $group_id)->get()->toArray();
+        $data_action = $extend_roles!=null?$extend_roles:array();
+        if (count($data_action)>0) {
+            foreach ($data_action as $data) {
+                unset($data['role_id']);
+                if ($action=='insert') {
+                    $data['n_group_user_id'] = $id;
+                    $this->roles->insert($data);  
+                }else{
+                    unset($data['n_group_user_id']);
+                    $this->roles->where(['n_group_user_id'=>$id, 'module_id'=>$data['module_id']])->update($data);     
+                }  
+            }
+        }
+    }
+
     public function doInsertTable($table, $data)
     {
         if (@$data['password']) {
@@ -118,6 +148,9 @@ class AdminService extends BaseService
         if ($table=='quotes') {
             $quote_service = new \App\Services\QuoteService;
             $quote_service->refreshQuoteTotal($insertID);
+        }
+        if ($table == 'n_group_users' && @$data['parent']) {
+            $this->actionRoleByParent($data['parent'], $insertID, 'insert');    
         }
         return $insertID;
     }
@@ -137,6 +170,9 @@ class AdminService extends BaseService
         if ($table=='quotes'&&isset($data['customer_id'])) {
             $data['customer_type'] = $this->getDataCustomerType($data['customer_id'], $data);
         }
+        if ($table == 'n_group_users' && @$data['parent']) {
+            $this->actionRoleByParent($data['parent'], $id, 'update');    
+        }
         $created_at = @$data['created_at']?strtotime($data['created_at']):Time();
         $data['created_at'] = date('y-m-d h:i:s',$created_at);
         $data['updated_at'] = date('y-m-d h:i:s', Time());
@@ -148,15 +184,10 @@ class AdminService extends BaseService
         return $update;
     }
 
-    private function removeRole($group_user_id)
-    {
-        $this->roles->where('n_group_user_id', $group_user_id)->delete();
-    }
-
     public function removeDataTable($table, $id)
     {
         if ($table == 'n_group_users') {
-            $this->removeRole($id);     
+            $this->roles->where('n_group_user_id', $id)->delete();    
         }
         if (in_array($table, \App\Models\Quote::$tableChild)) {
             $quote_id = getFieldDataById('quote_id', getClassByTable($table), $id);
