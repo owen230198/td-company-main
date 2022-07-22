@@ -165,6 +165,14 @@ var selectCustomerAjax = function()
   }
 }
 
+var selectConfigs = function() {
+  if($('select.select_config').length > 0){
+    $('select.select_config').select2({
+      minimumResultsForSearch: 1
+    });
+  };
+};
+
 $(function(){
 	submitActionAjaxForm();
 	confirmRemoveData();
@@ -176,4 +184,5 @@ $(function(){
 	loadDataPopup();
 	ajaxChildOptionByParent();
 	selectCustomerAjax();
+	selectConfigs();
 });

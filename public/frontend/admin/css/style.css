@@ -152,8 +152,8 @@ input[type="checkbox"].toggle:not(:disabled):focus-visible::before {
 
 input[type="checkbox"].toggle::before {
   content: "";
-  width: 2em;
-  height: 1em;
+  width: 50px;
+  height: 25px;
   background-color: hsl(0, 80%, 90%);
   border-radius: 1em;
 }
@@ -165,8 +165,8 @@ input[type="checkbox"].toggle::after {
   align-items: center;
   justify-content: center;
   font-size: 15px;
-  width: 1.8em;
-  height: 1.8em;
+  width: 25px;
+  height: 25px;
   left: -1px;
   border-radius: 1em;
   background-color: hsl(0, 80%, 60%);
@@ -533,6 +533,17 @@ select.form-control:not([size]):not([multiple]){
 @media (min-width: 576px){
   .guideModal .modal-dialog {
       max-width: 725px;
+  }
+
+  .modalAction .modal-dialog {
+    max-width: 1200px;
+  }
+}
+
+@media (min-width: 1400px){
+  .col_md_5 {
+    flex: 0 0 20%;
+    max-width: 20%;
   }
 
   .modalAction .modal-dialog {

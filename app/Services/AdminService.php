@@ -32,6 +32,29 @@ class AdminService extends BaseService
         return $ret;
     }
 
+    public function checkRoleUpdatePermission($module, $data)
+    {
+        $admin = getSessionUser();
+        if (@$admin['super_admin']) {
+            return true;     
+        }
+        $permission = $this->roles->select('view', 'insert', 'update', 'remove', 'copy')->where('module_id', $module)->where('n_group_user_id', @$admin['n_group_user_id'])->first()->toArray();
+        if ($permission == null) {
+            return false;   
+        }
+        $ret = true;
+        foreach ($permission as $key => $role) {
+            if ($role == 0) {
+                $bool = array_key_exists($key, $data);
+                if ($bool) {
+                    $ret = false;
+                    break;
+                }
+            }   
+        }
+        return $ret;
+    }
+
     public function getTableItem($table)
     {
         $data = $this->list_tables->where('name', $table)->first();

@@ -252,5 +252,27 @@ class AdminController extends Controller
         }
         return view('roles.view', $data);
     }
+
+    public function updatePermission($module_id, $role_id, Request $request)
+    {
+        if (!$this->service->checkPermissionAction('n_roles', 'view')) {
+            return redirect('permission-error');  
+        }
+        $data = $request->all();
+        unset($data['_token']);
+        if (!$this->service->checkRoleUpdatePermission($module_id, $data)) {
+            echoJson(110, 'Không được phân quyền module này !');
+            return; 
+        }else{
+            $update = \App\Models\NRole::where('role_id', $role_id)->update($data);
+            if ($update) {
+                echoJson(200, 'Đã cập nhật quyền truy cập !');
+                return; 
+            }else {
+                echoJson(100, 'Có lỗi xảy ra vui lòng thử lại !');
+                return;
+            }
+        }
+    }
 }
 

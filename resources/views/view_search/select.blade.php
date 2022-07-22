@@ -8,7 +8,7 @@
 @endphp
 <div class="d-flex align-items-center w-100">
 	<label class="mr-2 d-block mb-0 min_100">{{ $field['note'] }}:</label>
-	<select name="{{ $field['id'] }}" class="form-control">
+	<select name="{{ $field['id'] }}" class="form-control {{ @$config['searchbox']?'select_config':'' }}">
 		<option value="">Không xác định</option>
 		@foreach ($list_option as $key => $option)
 			@if ($parent['table']!=null)

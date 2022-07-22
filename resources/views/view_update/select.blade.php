@@ -13,8 +13,12 @@
 	}
 @endphp
 <div class="d-flex align-items-center w-100">
-	<select name="{{ $name }}" class="form-control">
-		<option value="0">Không xác định</option>
+	<select name="{{ $name }}" class="form-control {{ @$configs['searchbox']?'select_config':'' }}">
+		@if ($name=='customer_id')
+			<option value="0">Khách hàng mới</option>
+		@else
+			<option value="0">Không xác định</option>
+		@endif
 		@foreach ($list_option as $key => $option)
 			@if ($parent['table']!=null)
 	    		<option value="{{ $option['id'] }}" {{ $value==$option['id']?'selected':'' }}>

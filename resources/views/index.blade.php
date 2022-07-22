@@ -10,6 +10,7 @@
   <link rel="icon" type="image/x-icon" href="{{ asset('frontend/admin/images/logo.jpg') }}">
   <link rel="stylesheet" href="{{ asset('frontend/base/css/bootstrap.min.css') }}" />
   <link rel="stylesheet" href="{{ asset('frontend/base/css/font-awesome.min.css') }}" />
+  <link rel="stylesheet" href="{{ asset('frontend/base/css/select2.min.css') }}" />
   <link rel="stylesheet" href="{{ asset('frontend/admin/css/users.css') }}" />
   <link rel="stylesheet" href="{{ asset('frontend/admin/css/header.css') }}" />
   <link rel="stylesheet" href="{{ asset('frontend/base/css/style.css') }}" />
@@ -56,7 +57,8 @@
   <script src="{{ asset('frontend/admin/tinymce/js/tinymce/tinymce.min.js') }}"></script>
   <script src="{{ asset('frontend/admin/tinymce/js/tinymce/init_tinymce.js') }}"></script>
   <script src="{{ asset('frontend/admin/script/theme.js') }}" defer></script>
-  <script src="{{ asset('frontend/admin/script/loading.js') }}" defer></script>
+  <script src="{{ asset('frontend/base/script/select2.min.js') }}" defer></script>
+  {{-- <script src="{{ asset('frontend/admin/script/loading.js') }}" defer></script> --}}
   <script src="{{ asset('frontend/admin/script/script.js') }}" defer></script>
   <script defer>
     @if(Session::has('message'))

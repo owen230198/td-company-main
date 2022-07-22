@@ -47,13 +47,6 @@ var changeActiveStage = function()
 	});
 }
 
-var selectConfigs = function() {
-  if($('select.select_config').length > 0){
-    $('select.select_config').select2({
-      minimumResultsForSearch: 1
-    });
-  };
-};
 var getExQuantityPaper = function(allqty, valqty, addqty)
 {
 	qty = allqty/valqty;
@@ -144,7 +137,6 @@ var PrintQuote = function() {
 
 $(function(){
 	submitPopUpAction();
-	// selectConfigs();
 	changeActiveStage();
 	changQtyInput();
   moduleSelectOther();
