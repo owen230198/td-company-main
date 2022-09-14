@@ -3,10 +3,11 @@ namespace App\Services;
 use App\Constants\StattusConstant;
 use App\Services\BaseService;
 class AdminService extends BaseService
-{ 
+{
     function __construct()
     {
     	parent::__construct();
+        $this->quote_service = new \App\Services\QuoteService;
     }
 
     public function checkPermissionAction($table, $action)
@@ -14,7 +15,7 @@ class AdminService extends BaseService
         $table = in_array($table, \App\Models\Quote::$tableChild)?'quotes':$table;
         $admin = getSessionUser();
         if (@$admin['super_admin']) {
-            return true;     
+            return true;
         }
         $permissions = $this->roles->getPermissionAction($action, $table, @$admin['n_group_user_id']);
         return @$permissions[$action]?true:false;
@@ -26,7 +27,7 @@ class AdminService extends BaseService
         foreach ($list_group as $item) {
             if ($item['id']==$group) {
                 $ret = true;
-                break;  
+                break;
             }
         }
         return $ret;
@@ -36,11 +37,11 @@ class AdminService extends BaseService
     {
         $admin = getSessionUser();
         if (@$admin['super_admin']) {
-            return true;     
+            return true;
         }
         $permission = $this->roles->select('view', 'insert', 'update', 'remove', 'copy')->where('module_id', $module)->where('n_group_user_id', @$admin['n_group_user_id'])->first()->toArray();
         if ($permission == null) {
-            return false;   
+            return false;
         }
         $ret = true;
         foreach ($permission as $key => $role) {
@@ -50,7 +51,7 @@ class AdminService extends BaseService
                     $ret = false;
                     break;
                 }
-            }   
+            }
         }
         return $ret;
     }
@@ -64,12 +65,12 @@ class AdminService extends BaseService
     public function getFieldAction($table, $action = 'view')
     {
         $data = $this->detail_tables->where('table_map', $table)->where('act', 1)->where($action, 1)->orderBy('ord', 'asc')->get();
-        return $data;  
+        return $data;
     }
 
     public function getBaseTable($table)
     {
-    	$data['tableItem'] = $this->getTableItem($table); 
+    	$data['tableItem'] = $this->getTableItem($table);
         $data['field_shows'] = $this->getFieldAction($table);
         return $data;
     }
@@ -94,29 +95,29 @@ class AdminService extends BaseService
         foreach ($get as $key => $where) {
             if (strpos($key, 'from_')!==false) {
                 $field_id = str_replace('from_', '', $key);
-                $compareTime = '>=';    
+                $compareTime = '>=';
             }elseif (strpos($key, 'to_')!==false) {
                 $field_id = str_replace('to_', '', $key);
-                $compareTime = '<=';        
+                $compareTime = '<=';
             }else {
-                $field_id = (int)$key;   
+                $field_id = (int)$key;
             }
             $field = $this->detail_tables->select('id', 'name', 'view_type')->find($field_id);
             $name = $field['name'];
             $type = $field['view_type'];
             if ($type == 'text') {
                 $tmp = array('key'=>$name, 'compare'=>'like', 'value'=>'%'.$where.'%');
-                array_push($arrWhere, $tmp);       
+                array_push($arrWhere, $tmp);
             }elseif ($type == 'date_time') {
                 $timstamp = strtotime($where);
                 $date_time = date('y-m-d h:i:s', $timstamp);
                 $tmp = array('key'=>$name, 'compare'=>$compareTime, 'value'=>$date_time);
-                array_push($arrWhere, $tmp);       
+                array_push($arrWhere, $tmp);
             }else {
                 if ($where != '') {
                     $tmp = array('key'=>$name, 'compare'=>"=", 'value'=>$where);
-                    array_push($arrWhere, $tmp);        
-                }    
+                    array_push($arrWhere, $tmp);
+                }
             }
         }
         $data = getDataTable($table, '*', $arrWhere, $paginate);
@@ -148,11 +149,11 @@ class AdminService extends BaseService
                 unset($data['role_id']);
                 if ($action=='insert') {
                     $data['n_group_user_id'] = $id;
-                    $this->roles->insert($data);  
+                    $this->roles->insert($data);
                 }else{
                     unset($data['n_group_user_id']);
-                    $this->roles->where(['n_group_user_id'=>$id, 'module_id'=>$data['module_id']])->update($data);     
-                }  
+                    $this->roles->where(['n_group_user_id'=>$id, 'module_id'=>$data['module_id']])->update($data);
+                }
             }
         }
     }
@@ -160,7 +161,7 @@ class AdminService extends BaseService
     public function doInsertTable($table, $data)
     {
         if (@$data['password']) {
-            $data['password'] = md5($data['password']);    
+            $data['password'] = md5($data['password']);
         }
         if ($table=='quotes'&&isset($data['customer_id'])) {
             $data['customer_type'] = $this->getDataCustomerType($data['customer_id'], $data);
@@ -169,11 +170,10 @@ class AdminService extends BaseService
         $data['updated_at'] = date('y-m-d h:i:s', Time());
         $insertID = $this->db::table($table)->insertGetId($data);
         if ($table=='quotes') {
-            $quote_service = new \App\Services\QuoteService;
-            $quote_service->refreshQuoteTotal($insertID);
+            $this->quote_service->refreshQuoteTotal($insertID);
         }
         if ($table == 'n_group_users' && @$data['parent']) {
-            $this->actionRoleByParent($data['parent'], $insertID, 'insert');    
+            $this->actionRoleByParent($data['parent'], $insertID, 'insert');
         }
         return $insertID;
     }
@@ -188,21 +188,20 @@ class AdminService extends BaseService
     public function doUpdateTable($id, $table, $data)
     {
         if (@$data['password']) {
-            $data['password'] = $this->getPasswordUpdate($table, $id, $data['password']);    
+            $data['password'] = $this->getPasswordUpdate($table, $id, $data['password']);
         }
         if ($table=='quotes'&&isset($data['customer_id'])) {
             $data['customer_type'] = $this->getDataCustomerType($data['customer_id'], $data);
         }
         if ($table == 'n_group_users' && @$data['parent']) {
-            $this->actionRoleByParent($data['parent'], $id, 'update');    
+            $this->actionRoleByParent($data['parent'], $id, 'update');
         }
         $created_at = @$data['created_at']?strtotime($data['created_at']):Time();
         $data['created_at'] = date('y-m-d h:i:s',$created_at);
         $data['updated_at'] = date('y-m-d h:i:s', Time());
         $update = $this->db::table($table)->where('id', $id)->update($data);
         if ($table=='quotes') {
-            $quote_service = new \App\Services\QuoteService;
-            $quote_service->refreshQuoteTotal($id);
+            $this->quote_service->refreshQuoteTotal($id);
         }
         return $update;
     }
@@ -210,15 +209,17 @@ class AdminService extends BaseService
     public function removeDataTable($table, $id)
     {
         if ($table == 'n_group_users') {
-            $this->roles->where('n_group_user_id', $id)->delete();    
+            $this->roles->where('n_group_user_id', $id)->delete();
         }
         if (in_array($table, \App\Models\Quote::$tableChild)) {
             $quote_id = getFieldDataById('quote_id', getClassByTable($table), $id);
         }
         $remove = $this->db::table($table)->where('id', $id)->delete();
         if ($remove&&in_array($table, \App\Models\Quote::$tableChild)) {
-            $quote_service = new \App\Services\QuoteService;
-            $quote_service->refreshQuoteTotal($quote_id);
+            $this->quote_service->refreshQuoteTotal($quote_id);
+        }
+        if($table == 'quotes'){
+            $this->quote_service->removeDataChild($id);
         }
         return $remove;
     }

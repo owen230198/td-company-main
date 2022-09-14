@@ -3,7 +3,7 @@ namespace App\Services;
 use App\Constants\StattusConstant;
 use App\Services\BaseService;
 class AuthService extends BaseService
-{ 
+{
     function __construct()
     {
     	parent::__construct();
@@ -15,18 +15,18 @@ class AuthService extends BaseService
         $request = $request->all();
         $user = $this->users::where('act', 1)->where('username', $request['username'])->first();
         if (!$user) {
-            return $this->returnMessages(100, ['messages'=>'Không tìm thấy tài khoản trên hệ thống!']);      
+            return $this->returnMessage(100, ['messages'=>'Không tìm thấy tài khoản trên hệ thống!']);
         }
         $password = md5($request['password']);
         if ($password != $user['password']) {
-            return $this->returnMessages(100, ['messages'=>'Thông tin mật khẩu không chính xác!']);       
+            return $this->returnMessage(100, ['messages'=>'Thông tin mật khẩu không chính xác!']);
         }
         unset($user['password']);
         $arr['user'] = $user;
         $arr['parent_menu'] = $this->modules->orderBy('ord', 'asc')->whereNull('parent')->get()->toArray();
         $arr['menu'] = $this->roles->getModuleByGroupUser($user['n_group_user_id']);
         session()->put('user_login', $arr);
-        return $this->returnMessages(200, ['messages'=>'Đăng nhập thành công!']);
+        return $this->returnMessage(200, ['messages'=>'Đăng nhập thành công!']);
     }
 
     private function validatelogin($request)
@@ -41,23 +41,25 @@ class AuthService extends BaseService
             'password.required'=> 'Password không được để trống!',
             'password.min'=> 'Password yêu cầu ít nhất 3 ký tự'
         ];
-        $request->validate($rule, $messages);    
+        $request->validate($rule, $messages);
     }
 
-    private function returnMessages($code, $mess)
+    private function returnMessage($code, $mess)
     {
         if ($code == 200) {
             return [
                 'status'=>StattusConstant::SUCCESS_CODE,
                 'messageCode'=>StattusConstant::SUCCESS_MSG,
                 'errorMessage'=>['sucess'=>$mess]
-            ]; 
+            ];
+        }else{
+            return [
+                'status'=>StattusConstant::ERR_CODE,
+                'messageCode'=>StattusConstant::ERR_MSG,
+                'errorMessage'=> $mess
+            ];
         }
-        return [
-            'status'=>StattusConstant::ERR_CODE,
-            'messageCode'=>StattusConstant::ERR_MSG,
-            'errorMessage'=> $mess
-        ];
+
     }
 
 }

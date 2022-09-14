@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace App\Services;
 use App\Services\BaseService;
 use App\Services\QTraits\QuoteTrait;
@@ -34,14 +34,14 @@ class QuoteService extends BaseService
         $listSupplies = array_merge($list_data['listPapers'], $list_data['listCatons'], $list_data['listFoams'], $list_data['listSilks'], $list_data['listFinishes']);
         $total_cost = 0;
         foreach ($listSupplies as $item) {
-            $total_cost += $item['total_cost'];     
+            $total_cost += $item['total_cost'];
         }
         $quote = $this->quotes->find($quote_id);
         $ship_price = @$quote['ship_price']?(float)$quote['ship_price']:0;
         $profit = @$quote['profit']?(float)$quote['profit']:0;
         $data['total_amount'] = $total_cost+((($total_cost+$ship_price)*$profit)/100);
         $data['total_cost'] = (float)$total_cost;
-        $this->quotes->where('id', $quote_id)->update($data); 
+        $this->quotes->where('id', $quote_id)->update($data);
     }
 
     private function getDataDoAction($data, $table, $quote_id)
@@ -74,5 +74,14 @@ class QuoteService extends BaseService
         $update = $models::where('id', $id)->update($data_update);
         $this->refreshQuoteTotal($quote_id);
         return $update;
+    }
+
+    public function removeDataChild($quote_id)
+    {
+        $arr_table = $this->quotes::$tableChild;
+        foreach ($arr_table as $table) {
+            $models = getModelByTable($table);
+            $models::where('quote_id', $quote_id)->delete();
+        }
     }
 }

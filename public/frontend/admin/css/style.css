@@ -11,6 +11,14 @@ body, html {
   background: #f1f4f9;
 }
 
+.form-control,
+.select2-container--default .select2-selection--single{
+    height: 33px;
+}
+.select2.select2-container.select2-container--default{
+    width: 100% !important;
+}
+
 .siderbar-menu__lnk:hover i {
   color: #04aaa1;
 }
@@ -500,7 +508,7 @@ select.form-control:not([size]):not([multiple]),
 }
 
 .ex_quote_file .color_red{
-  color: #d50202; 
+  color: #d50202;
 }
 
 select.form-control:not([size]):not([multiple]){

@@ -30,16 +30,17 @@ class AuthController extends Controller
         }
         $result = $this->service->hasLogin($request);
         if ($result['status'] === StattusConstant::SUCCESS_CODE) {
-            return redirect('/')->with('message','Đăng nhập thành công!');
+            $rede = session('afterLoginRoute')??'/';
+            return redirect($rede)->with('message','Đăng nhập thành công!');
         }
-        return redirect('login')->withInput()->with($result['messageCode'], $result['errorMessage']);	
+        return redirect('login')->withInput()->with($result['messageCode'], $result['errorMessage']);
     }
 
     public function logout ()
     {
         if (session()->has('user_login')) {
             session()->forget('user_login');
-            return redirect('login'); 
+            return redirect('login');
         }
         return redirect('login');
     }
