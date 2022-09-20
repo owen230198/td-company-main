@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\DevController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Quote\QuoteController;
@@ -17,7 +18,7 @@ use App\Http\Controllers\Quote\QuoteController;
 */
 Route::any('login', [AuthController::class, 'login']);
 Route::any('logout', [AuthController::class, 'logout']);
-Route::any('dev-update-data',[HomeController::class, 'devUpdateData']);
+Route::any('dev/{method}',[DevController::class, 'index']);
 Route::middleware(['checkLogin'])->group(function () {
 	Route::get('/',[HomeController::class, 'index']);
 	Route::get('view/{table}', [AdminController::class, 'view']);

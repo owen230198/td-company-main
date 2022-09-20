@@ -6,13 +6,13 @@ if(!function_exists('echoJson')){
         $obj->message= $message;
         echo json_encode($obj);
     }
-}  
+}
 
 if(!function_exists('getDataConfigs')){
     function getDataConfigs($classConfig, $keyword = ''){
         $configs = getModelByClass($classConfig);
         $data = $configs->where('keyword', $keyword)->first();
-        return $data!=null?$data['value']:'';       
+        return $data!=null?$data['value']:'';
     }
 }
 
@@ -48,20 +48,12 @@ if (! function_exists('getNameByDefaultData')) {
         if (@$default_data->table) {
             $models = getModelByClass($default_data->table);
             $table = $models->select('name')->find($value);
-            $title = @$table['name']?$table['name']:'Không xác định';   
+            $title = @$table['name']?$table['name']:'Không xác định';
         }else {
             $list_option = $default_data->option;
             $title = @$list_option->$value?$list_option->$value:'Không xác định';
         }
         return $title;
-    }
-}
-if (! function_exists('getSessionUser')) {
-    function getSessionUser()
-    {
-        $user_login = session('user_login');
-        $admin = @$user_login['user']?$user_login['user']:array();
-        return $admin;
     }
 }
 

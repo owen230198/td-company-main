@@ -1,4 +1,4 @@
-<?php  
+<?php
 if(!function_exists('getBreadcrumb')){
     function getBreadcrumb($table,$pid,$currentName){
         $arrBreadcrumbs =array_reverse(getBreadcrumbFull($table,$pid,""));
@@ -73,9 +73,9 @@ if(!function_exists('recursive')){
                 $data[] = $item;
                 $child = recursive($array, $item['id'], $level + 1);
                 $data = array_merge($data, $child);
-            }       
+            }
         }
-        return $data;   
+        return $data;
     }
 }
 
@@ -96,7 +96,7 @@ if (!function_exists('getActionByKey')) {
                 return '';
                 break;
         }
-    }        
+    }
 }
 
 if (! function_exists('getSessionUser')) {
