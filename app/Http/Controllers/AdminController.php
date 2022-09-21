@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 class AdminController extends Controller
 {
+    static $viewWhere = array();
     public function __construct()
     {
         parent::__construct();
@@ -23,11 +24,15 @@ class AdminController extends Controller
 
     public function view($table)
     {
-        if (!$this->service->checkPermissionAction($table, 'view')) {
-            return redirect('permission-error');    
+        $permission = $this->service->checkPermissionAction($table, 'view');
+        if (!@$permission['allow']) {
+            return redirect('permission-error');
         }
         $data = $this->service->getDataBaseView($table, 'Danh sách');
-        $data['data_tables'] = getDataTable($table, '*', array(), $data['page_item']);
+        if(count($permission['viewWhere'])>0){
+            static::$viewWhere[] = @$permission['viewWhere'];
+        }
+        $data['data_tables'] = getDataTable($table, '*', self::$viewWhere, $data['page_item']);
         session()->put('back_url', url()->full());
         return view('table.'.$data['view_type'], $data);
     }
@@ -35,12 +40,16 @@ class AdminController extends Controller
 
     public function searchTable($table, Request $request)
     {
-        if (!$this->service->checkPermissionAction($table, 'view')) {
-            return redirect('permission-error');    
+        $permission = $this->service->checkPermissionAction($table, 'view');
+        if (!@$permission['allow']) {
+            return redirect('permission-error');
         }
         $get = $request->all();
+        if(count($permission['viewWhere'])>0){
+            static::$viewWhere[] = @$permission['viewWhere'];
+        }
         $data = $this->service->getDataBaseView($table, 'Tìm kiếm');
-        $data['data_tables'] = $this->service->getDataSearchTable($table, $get, $data['page_item']);
+        $data['data_tables'] = $this->service->getDataSearchTable($table, self::$viewWhere, $get, $data['page_item']);
         $data['data_search'] = $get;
         session()->put('back_url', url()->full());
         return view('table.'.$data['view_type'], $data);
@@ -61,7 +70,7 @@ class AdminController extends Controller
     public function insert($table)
     {
         if (!$this->service->checkPermissionAction($table, 'insert')) {
-            return redirect('permission-error');    
+            return redirect('permission-error');
         }
         $data = $this->getDataActionView($table, 'insert', 'Thêm mới');
         return view('action.view', $data);
@@ -70,7 +79,7 @@ class AdminController extends Controller
     public function update($table, $id)
     {
         if (!$this->service->checkPermissionAction($table, 'update')) {
-            return redirect('permission-error');    
+            return redirect('permission-error');
         }
         $data = $this->getDataActionView($table, 'update', 'Cập nhật');
         $data['dataitem'] = getModelByTable($table)->find($id);
@@ -80,15 +89,15 @@ class AdminController extends Controller
     public function clone($table, $id)
     {
         if (!$this->service->checkPermissionAction($table, 'copy')) {
-            return redirect('permission-error');    
+            return redirect('permission-error');
         }
         $data = $this->getDataActionView($table, 'clone', 'Sao chép');
         $data['dataitem'] = getModelByTable($table)->find($id);
         if (@$data['dataitem']['id']) {
-            unset($data['dataitem']['id']);  
+            unset($data['dataitem']['id']);
         }
         if (@$data['dataitem']['password']) {
-            unset($data['dataitem']['password']);  
+            unset($data['dataitem']['password']);
         }
         return view('action.view', $data);
     }
@@ -103,7 +112,7 @@ class AdminController extends Controller
         $insertID = $this->service->doInsertTable($table, $data);
         if (@$insertID) {
             $route = $table=='quotes'?'quote-managements/q_papers/'.$insertID:'view/'.$table;
-            return redirect($route)->with('message','Thêm dữ liệu thành công !');  
+            return redirect($route)->with('message','Thêm dữ liệu thành công !');
         }else {
             return back()->with('error','Đã có lỗi xảy ra !');
         }
@@ -120,11 +129,11 @@ class AdminController extends Controller
         if ($success) {
             $back_routes = @session()->get('back_url')?session()->get('back_url'):'view/'.$table;
             $routes = $table=='quotes'?'quote-managements/q_papers/'.$id:$back_routes;
-            return redirect($routes)->with('message','Cập nhật dữ liệu thành công !');   
+            return redirect($routes)->with('message','Cập nhật dữ liệu thành công !');
         }else {
             return back()->with('error','Đã có lỗi xảy ra !');
         }
-    } 
+    }
 
     public function remove(Request $request){
        $data = $request->all();
@@ -135,7 +144,7 @@ class AdminController extends Controller
         }
        $success = $this->service->removeDataTable($table, $id);
        if ($success) {
-            return back()->with('message','Xoá thành công dữ liệu!'); 
+            return back()->with('message','Xoá thành công dữ liệu!');
         }else {
             return back()->with('error','Đã có lỗi xảy ra !');
         }
@@ -154,14 +163,14 @@ class AdminController extends Controller
         }
         $arr_id = explode(',', $str_id);
         foreach ($arr_id as $id) {
-            $delete = $this->service->removeDataTable($table, $id);           
+            $delete = $this->service->removeDataTable($table, $id);
         }
         if ($delete) {
             return back()->with('message','Xóa dữ liệu thành công !');
         }else{
             return back()->with('error','Đã có lỗi xảy ra !');
         }
-    } 
+    }
 
     public function doConfigData($table, Request $request)
     {
@@ -172,15 +181,15 @@ class AdminController extends Controller
         unset($post['_token']);
         $success = false;
         foreach ($post as $key => $value) {
-            $data['value'] = $value;  
+            $data['value'] = $value;
             $success = $this->db::table($table)->where('id', $key)->update($data);
         }
         if (isset($success)) {
             echoJson(200, 'Cập nhật dữ liệu thành công!');
-            return;     
+            return;
         }else {
-            echoJson(100, 'Đã có lỗi xảy ra!');  
-        } 
+            echoJson(100, 'Đã có lỗi xảy ra!');
+        }
     }
 
     public function optionChildData($table, $field, $parent)
@@ -215,7 +224,7 @@ class AdminController extends Controller
     public function grantPermission()
     {
         if (!$this->service->checkPermissionAction('n_roles', 'view')) {
-            return redirect('permission-error');  
+            return redirect('permission-error');
         }
         $data['title'] = 'Phân quyền';
         $data['limit_roles'] = array();
@@ -224,13 +233,13 @@ class AdminController extends Controller
         $list_groups = \App\Models\NGroupUser::where('act', 1)->get()->toArray();
         $admin = getSessionUser();
         $data['list_groups'] = recursive($list_groups, $admin['n_group_user_id'], 0);
-        return view('roles.view', $data);  
+        return view('roles.view', $data);
     }
 
     public function getPermission(Request $request)
     {
         if (!$this->service->checkPermissionAction('n_roles', 'view')) {
-            return redirect('permission-error');  
+            return redirect('permission-error');
         }
         $get = $request->all();
         $group = @$get['group']?$get['group']:'';
@@ -244,7 +253,7 @@ class AdminController extends Controller
             $data['other_modules'] = array();
         }else {
             if (!$this->service->checkListGroup($group, $data['list_groups'])) {
-                return redirect('permission-error');    
+                return redirect('permission-error');
             }
             $data['limit_roles'] = array_merge(@session('user_login')['parent_menu'], @session('user_login')['menu']);
             $data['list_roles'] = (new \App\Models\NRole)->getModuleByGroupUser($admin['n_group_user_id']);
@@ -256,18 +265,18 @@ class AdminController extends Controller
     public function updatePermission($module_id, $role_id, Request $request)
     {
         if (!$this->service->checkPermissionAction('n_roles', 'view')) {
-            return redirect('permission-error');  
+            return redirect('permission-error');
         }
         $data = $request->all();
         unset($data['_token']);
         if (!$this->service->checkRoleUpdatePermission($module_id, $data)) {
             echoJson(110, 'Không được phân quyền module này !');
-            return; 
+            return;
         }else{
             $update = \App\Models\NRole::where('role_id', $role_id)->update($data);
             if ($update) {
                 echoJson(200, 'Đã cập nhật quyền truy cập !');
-                return; 
+                return;
             }else {
                 echoJson(100, 'Có lỗi xảy ra vui lòng thử lại !');
                 return;

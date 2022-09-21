@@ -11,7 +11,7 @@
  Target Server Version : 100424
  File Encoding         : 65001
 
- Date: 20/09/2022 17:46:55
+ Date: 21/09/2022 17:54:02
 */
 
 SET NAMES utf8mb4;
@@ -12150,12 +12150,12 @@ CREATE TABLE `customers`  (
   `contacter` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `act` int(11) NULL DEFAULT NULL,
   `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
-  `created_by` int(11) NOT NULL,
+  `created_by` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `name_index`(`name`) USING BTREE,
   INDEX `infor_index`(`address`, `email`, `phone`) USING BTREE,
@@ -12165,18 +12165,18 @@ CREATE TABLE `customers`  (
 -- ----------------------------
 -- Records of customers
 -- ----------------------------
-INSERT INTO `customers` VALUES (3, '', 'CTY 678910', 'Contacter c', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '123456789', 'note', 1, '2022-09-20 16:04:20', '2022-09-20 16:04:20', 1);
-INSERT INTO `customers` VALUES (6, '', 'CTY 678911', 'Contacter D', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '123456789', 'note', 1, '2022-09-20 16:04:20', '2022-09-20 16:04:20', 1);
-INSERT INTO `customers` VALUES (7, '', 'CTY 678912', 'Contacter E', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '123456789', 'note', 1, '2022-09-20 16:04:20', '2022-09-20 16:04:20', 1);
-INSERT INTO `customers` VALUES (8, '', 'CTY 678913', 'Contacter F', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '123456789', 'note', 1, '2022-09-20 16:04:20', '2022-09-20 16:04:20', 1);
-INSERT INTO `customers` VALUES (9, '', 'CTY 678914', 'Contacter G', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '123456789', 'note', 1, '2022-09-20 16:04:20', '2022-09-20 16:04:20', 1);
-INSERT INTO `customers` VALUES (10, '', 'CTY 678914', 'Contacter H', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '123456789', 'note', 1, '2022-09-20 16:04:20', '2022-09-20 16:04:20', 1);
-INSERT INTO `customers` VALUES (11, '', 'Liverpool', 'Owen', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', '', 1, '2022-09-20 16:04:20', '2022-09-20 16:04:20', 1);
-INSERT INTO `customers` VALUES (12, '', 'Liverpool', 'Gerrard', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', '', 1, '2022-09-20 16:04:20', '2022-09-20 16:04:20', 1);
-INSERT INTO `customers` VALUES (13, '', 'Liverpool', 'Gerrard', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', '', 1, '2022-09-20 16:04:20', '2022-09-20 16:04:20', 1);
-INSERT INTO `customers` VALUES (14, '', 'Liverpool', 'Gerrard', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', '', 1, '2022-09-20 16:04:20', '2022-09-20 16:04:20', 1);
-INSERT INTO `customers` VALUES (15, '', 'Liverpool', 'Gerrard', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', '', 1, '2022-09-20 16:04:20', '2022-09-20 16:04:20', 1);
-INSERT INTO `customers` VALUES (16, '', 'Liverpool', 'Gerrard', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', '', 1, '2022-09-20 16:04:20', '2022-09-20 16:04:20', 1);
+INSERT INTO `customers` VALUES (3, '', 'CTY 678910', 'Contacter c', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '123456789', 'note', 1, '2022-09-20 00:00:00', '2022-09-20 00:00:00', 1);
+INSERT INTO `customers` VALUES (6, '', 'CTY 678911', 'Contacter D', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '123456789', 'note', 1, '2022-09-20 00:00:00', '2022-09-20 00:00:00', 1);
+INSERT INTO `customers` VALUES (7, '', 'CTY 678912', 'Contacter E', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '123456789', 'note', 1, '2022-09-20 00:00:00', '2022-09-20 00:00:00', 1);
+INSERT INTO `customers` VALUES (8, '', 'CTY 678913', 'Contacter F', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '123456789', 'note', 1, '2022-09-20 00:00:00', '2022-09-20 00:00:00', 1);
+INSERT INTO `customers` VALUES (9, '', 'CTY 678914', 'Contacter G', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '123456789', 'note', 1, '2022-09-20 00:00:00', '2022-09-20 00:00:00', 1);
+INSERT INTO `customers` VALUES (10, '', 'CTY 678914', 'Contacter H', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '123456789', 'note', 1, '2022-09-20 00:00:00', '2022-09-20 00:00:00', 1);
+INSERT INTO `customers` VALUES (11, '', 'Liverpool1', 'Owen', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', '', 1, '2022-09-21 00:00:00', '2022-09-21 00:00:00', 1);
+INSERT INTO `customers` VALUES (12, '', 'Liverpool2', 'Gerrard1', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', '', 1, '2022-09-21 00:00:00', '2022-09-21 00:00:00', 1);
+INSERT INTO `customers` VALUES (13, '', 'Liverpool3', 'Gerrard2', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', '', 1, '2022-09-21 00:00:00', '2022-09-21 00:00:00', 1);
+INSERT INTO `customers` VALUES (14, '', 'Liverpool4', 'Gerrard3', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', '', 1, '2022-09-21 00:00:00', '2022-09-21 00:00:00', 1);
+INSERT INTO `customers` VALUES (15, '', 'Liverpool5', 'Gerrard4', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', '', 1, '2022-09-20 00:00:00', '2022-09-21 00:00:00', 16);
+INSERT INTO `customers` VALUES (16, '', 'Liverpool6', 'Gerrard5', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', '', 1, '2022-09-20 00:00:00', '2022-09-21 00:00:00', 16);
 
 -- ----------------------------
 -- Table structure for districts
@@ -13197,10 +13197,13 @@ CREATE TABLE `n_roles`  (
   `insert` tinyint(4) NULL DEFAULT NULL,
   `update` tinyint(4) NULL DEFAULT NULL,
   `remove` tinyint(4) NULL DEFAULT NULL,
+  `view_my` tinyint(4) NULL DEFAULT NULL,
+  `update_my` tinyint(4) NULL DEFAULT NULL,
+  `remove_my` tinyint(4) NULL DEFAULT NULL,
   `copy` tinyint(4) NULL DEFAULT NULL,
   `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
-  `created_by` int(11) NOT NULL,
+  `created_by` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`role_id`) USING BTREE,
   INDEX `foreign_indx`(`module_id`, `n_group_user_id`) USING BTREE,
   INDEX `action_index`(`view`, `insert`, `update`, `remove`, `copy`) USING BTREE
@@ -13209,28 +13212,28 @@ CREATE TABLE `n_roles`  (
 -- ----------------------------
 -- Records of n_roles
 -- ----------------------------
-INSERT INTO `n_roles` VALUES (1, 2, 1, 1, 1, 1, 1, 1, '2022-07-22 16:40:42', '2022-07-22 16:40:42', 0);
-INSERT INTO `n_roles` VALUES (2, 3, 1, 1, 1, 1, 1, 1, '2022-07-22 16:40:42', '2022-07-22 16:40:42', 0);
-INSERT INTO `n_roles` VALUES (4, 6, 1, 1, 1, 1, 1, 1, '2022-06-22 14:16:24', '2022-06-22 14:16:24', 0);
-INSERT INTO `n_roles` VALUES (5, 7, 1, 1, 1, 1, 1, 1, '2022-06-22 14:16:24', '2022-06-22 14:16:24', 0);
-INSERT INTO `n_roles` VALUES (6, 8, 1, 1, 1, 1, 1, 1, '2022-06-22 14:17:30', '2022-06-22 14:17:30', 0);
-INSERT INTO `n_roles` VALUES (7, 10, 1, 1, 1, 1, 1, 1, '2022-06-22 14:17:30', '2022-06-22 14:17:30', 0);
-INSERT INTO `n_roles` VALUES (9, 12, 1, 1, 1, 1, 1, 1, '2022-06-22 14:17:30', '2022-06-22 14:17:30', 0);
-INSERT INTO `n_roles` VALUES (10, 13, 1, 1, 1, 1, 1, 1, '2022-07-01 18:14:22', '2022-07-01 18:14:22', 0);
-INSERT INTO `n_roles` VALUES (11, 14, 1, 1, 1, 1, 1, 1, '2022-07-01 18:14:22', '2022-07-01 18:14:22', 0);
-INSERT INTO `n_roles` VALUES (12, 15, 1, 1, 1, 1, 1, 1, '2022-07-01 18:14:22', '2022-07-01 18:14:22', 0);
-INSERT INTO `n_roles` VALUES (13, 16, 1, 1, 1, 1, 1, 1, '2022-07-01 18:14:22', '2022-07-01 18:14:22', 0);
-INSERT INTO `n_roles` VALUES (14, 2, 39, 1, 1, 1, 1, 1, '2022-07-22 16:40:42', '2022-07-22 16:40:42', 0);
-INSERT INTO `n_roles` VALUES (15, 3, 39, 1, 1, 1, 1, 1, '2022-09-14 11:17:48', '2022-09-14 04:17:48', 0);
-INSERT INTO `n_roles` VALUES (17, 6, 39, 0, 0, 0, 0, 0, '2022-07-22 17:00:24', '2022-07-22 10:00:24', 0);
-INSERT INTO `n_roles` VALUES (18, 7, 39, 0, 0, 0, 0, 0, '2022-07-22 17:00:27', '2022-07-22 10:00:27', 0);
-INSERT INTO `n_roles` VALUES (19, 8, 39, 0, 0, 0, 0, 0, '2022-07-22 17:00:30', '2022-07-22 10:00:30', 0);
-INSERT INTO `n_roles` VALUES (20, 10, 39, 0, 0, 0, 0, 0, '2022-07-22 17:00:35', '2022-07-22 10:00:35', 0);
-INSERT INTO `n_roles` VALUES (22, 12, 39, 0, 0, 0, 0, 0, '2022-07-22 17:00:38', '2022-07-22 10:00:38', 0);
-INSERT INTO `n_roles` VALUES (23, 13, 39, 0, 0, 0, 0, 0, '2022-07-22 17:00:41', '2022-07-22 10:00:41', 0);
-INSERT INTO `n_roles` VALUES (24, 14, 39, 0, 0, 0, 0, 0, '2022-07-22 17:00:43', '2022-07-22 10:00:43', 0);
-INSERT INTO `n_roles` VALUES (25, 15, 39, 0, 0, 0, 0, 0, '2022-07-22 17:00:49', '2022-07-22 10:00:49', 0);
-INSERT INTO `n_roles` VALUES (26, 16, 39, 0, 0, 0, 0, 0, '2022-07-22 17:00:32', '2022-07-22 10:00:32', 0);
+INSERT INTO `n_roles` VALUES (1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, '2022-09-21 11:20:17', '2022-09-21 11:20:17', 0);
+INSERT INTO `n_roles` VALUES (2, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, '2022-09-21 11:20:17', '2022-09-21 11:20:17', 0);
+INSERT INTO `n_roles` VALUES (4, 6, 1, 1, 1, 1, 1, 1, 1, 1, 1, '2022-09-21 11:20:17', '2022-09-21 11:20:17', 0);
+INSERT INTO `n_roles` VALUES (5, 7, 1, 1, 1, 1, 1, 1, 1, 1, 1, '2022-09-21 11:20:17', '2022-09-21 11:20:17', 0);
+INSERT INTO `n_roles` VALUES (6, 8, 1, 1, 1, 1, 1, 1, 1, 1, 1, '2022-09-21 11:20:17', '2022-09-21 11:20:17', 0);
+INSERT INTO `n_roles` VALUES (7, 10, 1, 1, 1, 1, 1, 1, 1, 1, 1, '2022-09-21 11:20:17', '2022-09-21 11:20:17', 0);
+INSERT INTO `n_roles` VALUES (9, 12, 1, 1, 1, 1, 1, 1, 1, 1, 1, '2022-09-21 11:20:17', '2022-09-21 11:20:17', 0);
+INSERT INTO `n_roles` VALUES (10, 13, 1, 1, 1, 1, 1, 1, 1, 1, 1, '2022-09-21 11:20:17', '2022-09-21 11:20:17', 0);
+INSERT INTO `n_roles` VALUES (11, 14, 1, 1, 1, 1, 1, 1, 1, 1, 1, '2022-09-21 11:20:17', '2022-09-21 11:20:17', 0);
+INSERT INTO `n_roles` VALUES (12, 15, 1, 1, 1, 1, 1, 1, 1, 1, 1, '2022-09-21 11:20:17', '2022-09-21 11:20:17', 0);
+INSERT INTO `n_roles` VALUES (13, 16, 1, 1, 1, 1, 1, 1, 1, 1, 1, '2022-09-21 11:20:17', '2022-09-21 11:20:17', 0);
+INSERT INTO `n_roles` VALUES (14, 2, 39, 0, 0, 0, 0, 1, 1, 1, 1, '2022-09-21 14:36:59', '2022-09-21 07:36:59', 0);
+INSERT INTO `n_roles` VALUES (15, 3, 39, 0, 0, 0, 0, 1, 1, 1, 1, '2022-09-21 14:37:05', '2022-09-21 07:37:05', 0);
+INSERT INTO `n_roles` VALUES (17, 6, 39, 0, 0, 0, 0, 1, 1, 1, 0, '2022-09-21 11:20:17', '2022-09-21 11:20:17', 0);
+INSERT INTO `n_roles` VALUES (18, 7, 39, 0, 0, 0, 0, 1, 1, 1, 0, '2022-09-21 11:20:17', '2022-09-21 11:20:17', 0);
+INSERT INTO `n_roles` VALUES (19, 8, 39, 0, 0, 0, 0, 1, 1, 1, 0, '2022-09-21 11:20:17', '2022-09-21 11:20:17', 0);
+INSERT INTO `n_roles` VALUES (20, 10, 39, 0, 0, 0, 0, 1, 1, 1, 0, '2022-09-21 11:26:36', '2022-09-21 04:26:36', 0);
+INSERT INTO `n_roles` VALUES (22, 12, 39, 0, 0, 0, 0, 1, 1, 1, 0, '2022-09-21 11:20:17', '2022-09-21 11:20:17', 0);
+INSERT INTO `n_roles` VALUES (23, 13, 39, 0, 0, 0, 0, 1, 1, 1, 0, '2022-09-21 11:20:17', '2022-09-21 11:20:17', 0);
+INSERT INTO `n_roles` VALUES (24, 14, 39, 0, 0, 0, 0, 1, 1, 1, 0, '2022-09-21 11:20:17', '2022-09-21 11:20:17', 0);
+INSERT INTO `n_roles` VALUES (25, 15, 39, 0, 0, 0, 0, 1, 1, 1, 0, '2022-09-21 11:20:17', '2022-09-21 11:20:17', 0);
+INSERT INTO `n_roles` VALUES (26, 16, 39, 0, 0, 0, 0, 1, 1, 1, 0, '2022-09-21 11:20:17', '2022-09-21 11:20:17', 0);
 
 -- ----------------------------
 -- Table structure for n_tables
@@ -13299,12 +13302,13 @@ CREATE TABLE `n_users`  (
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `created_by` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of n_users
 -- ----------------------------
 INSERT INTO `n_users` VALUES (1, 'dev', 'e10adc3949ba59abbe56e057f20f883e', 'Nguyen Duy Khanh', 'nguyenduykhanh2323@gmail.com', '0378050251', 1, 0, 1, 'Lập trình viên', 1, '2022-09-20 15:23:18', '2022-09-20 15:23:18', 0);
+INSERT INTO `n_users` VALUES (16, 'busn2', 'e10adc3949ba59abbe56e057f20f883e', 'Nguyen Duy Khanh', 'nguyenduykhanh2323@gmail.com', '0378050251', 39, 0, NULL, NULL, 1, '2022-09-21 09:03:30', '2022-09-21 09:03:30', 1);
 
 -- ----------------------------
 -- Table structure for q_cartons

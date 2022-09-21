@@ -153,12 +153,12 @@ textarea{
 }
 
 .bg_green{
-    background: #5cb85c;  
+    background: #5cb85c;
 }
 
 
 .bg_xblue{
-    background: #000050;  
+    background: #000050;
 }
 
 .bg_blue{
@@ -260,9 +260,9 @@ textarea{
   color: #888888;
 }
 
-input[type=date], 
-input[type=datetime-local], 
-input[type=month], 
+input[type=date],
+input[type=datetime-local],
+input[type=month],
 input[type=time]{
   max-width: 250px;
 }
@@ -319,7 +319,7 @@ input[type=time]{
 }
 
 .height_auto{
-  height: auto !important; 
+  height: auto !important;
 }
 
 .border_bot_white{
@@ -335,4 +335,7 @@ input[type=time]{
 }
 .short_input{
   width: 220px;
+}
+.min_155{
+    min-width: 155px;
 }

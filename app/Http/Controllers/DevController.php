@@ -15,7 +15,7 @@ class DevController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('auth');
+        parent::__construct();
     }
 
     /**
@@ -38,6 +38,7 @@ class DevController extends Controller
 
     public function addColumnTable()
     {
+        die();
         $arrTables = NTable::select('name')->where('insert', 1)->get()->toArray();
         foreach ($arrTables as $item) {
             Schema::table($item['name'], function($table){

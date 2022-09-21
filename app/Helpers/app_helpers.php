@@ -113,7 +113,7 @@ if (!function_exists('getDataTable')) {
     function getDataTable($table, $select = "*", $where = array(), $paginate = 0, $order ='id', $order_by = 'desc')
     {
         $db = new \Illuminate\Support\Facades\DB;
-        $table = $db::table($table);
+        $table = $db::table($table)->select($select);
         if (count($where)>0) {
             foreach ($where as $w) {
                 $table->where($w['key'], $w['compare'], $w['value']);

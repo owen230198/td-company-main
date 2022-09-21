@@ -1,7 +1,7 @@
 <?php
 namespace App\Services;
-use App\Constants\StattusConstant;
 use App\Services\BaseService;
+use Illuminate\Support\Facades\Schema;
 class AdminService extends BaseService
 {
     function __construct()
@@ -10,15 +10,28 @@ class AdminService extends BaseService
         $this->quote_service = new \App\Services\QuoteService;
     }
 
-    public function checkPermissionAction($table, $action)
+    public function checkPermissionAction($table, $action, $id=0)
     {
         $table = in_array($table, \App\Models\Quote::$tableChild)?'quotes':$table;
         $admin = getSessionUser();
         if (@$admin['super_admin']) {
             return true;
         }
-        $permissions = $this->roles->getPermissionAction($action, $table, @$admin['n_group_user_id']);
-        return @$permissions[$action]?true:false;
+        $select = !in_array($action, ['insert', 'copy'])?[$action, $action.'_my']:$action;
+        $permissions = $this->roles->getPermissionAction($select, $table, @$admin['n_group_user_id']);
+        if($action=='view'&&Schema::hasColumn($table, 'created_by')){
+            $viewWhere = !@$permissions['view']&&@$permissions['view_my']?['key'=>'created_by', 'compare'=>'=', 'value'=>$admin['id']]:array();
+            $allow = @$permissions['view']||@$permissions['view_my'];
+            return ['allow'=>$allow, 'viewWhere'=>$viewWhere];
+        }else{
+            if(!@$permissions[$action]&&@$permissions[$action.'_my']&&Schema::hasColumn($table, 'created_by')){
+                $object = getModelByTable($table)->select('created_by')->find($id);
+                return @$object['created_by']==$admin['id'];
+            }else{
+                return @$permissions[$action];
+            }
+        }
+
     }
 
     public function checkListGroup($group, $list_group)
@@ -89,9 +102,8 @@ class AdminService extends BaseService
         return $data;
     }
 
-    public function getDataSearchTable($table, $get, $paginate = 10, $order = 'id', $order_by='desc')
+    public function getDataSearchTable($table, $arrWhere = array(), $get, $paginate = 10, $order = 'id', $order_by='desc')
     {
-        $arrWhere = array();
         foreach ($get as $key => $where) {
             if (strpos($key, 'from_')!==false) {
                 $field_id = str_replace('from_', '', $key);
@@ -110,7 +122,7 @@ class AdminService extends BaseService
                 array_push($arrWhere, $tmp);
             }elseif ($type == 'date_time') {
                 $timstamp = strtotime($where);
-                $date_time = date('y-m-d h:i:s', $timstamp);
+                $date_time = date('Y-m-d h:i:s', $timstamp);
                 $tmp = array('key'=>$name, 'compare'=>$compareTime, 'value'=>$date_time);
                 array_push($arrWhere, $tmp);
             }else {
@@ -120,7 +132,7 @@ class AdminService extends BaseService
                 }
             }
         }
-        $data = getDataTable($table, '*', $arrWhere, $paginate);
+        $data = getDataTable($table, '*', $arrWhere, $paginate, $order, $order_by);
         return $data;
     }
 
@@ -168,6 +180,9 @@ class AdminService extends BaseService
         }
         $data['created_at'] = date('y-m-d h:i:s', Time());
         $data['updated_at'] = date('y-m-d h:i:s', Time());
+        if(Schema::hasColumn($table, 'created_by')){
+            $data['created_by'] = getSessionUser()['id'];
+        }
         $insertID = $this->db::table($table)->insertGetId($data);
         if ($table=='quotes') {
             $this->quote_service->refreshQuoteTotal($insertID);
