@@ -78,7 +78,7 @@ class AdminController extends Controller
 
     public function update($table, $id)
     {
-        if (!$this->service->checkPermissionAction($table, 'update')) {
+        if (!$this->service->checkPermissionAction($table, 'update', $id)) {
             return redirect('permission-error');
         }
         $data = $this->getDataActionView($table, 'update', 'Cập nhật');
@@ -120,7 +120,7 @@ class AdminController extends Controller
 
     public function doUpdate($table, $id, Request $request)
     {
-        if (!$this->service->checkPermissionAction($table, 'update')) {
+        if (!$this->service->checkPermissionAction($table, 'update', $id)) {
             return back()->with('error','Không có quyền thực hiện thao tác này !');
         }
         $data = $request->all();
@@ -139,7 +139,7 @@ class AdminController extends Controller
        $data = $request->all();
        $id = $data['remove_id'];
        $table = $data['table'];
-        if (!$this->service->checkPermissionAction($table, 'remove')) {
+        if (!$this->service->checkPermissionAction($table, 'remove', $id)) {
             return back()->with('error','Không có quyền thực hiện thao tác này !');
         }
        $success = $this->service->removeDataTable($table, $id);
