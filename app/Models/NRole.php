@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
 
 class NRole extends Model
 {
@@ -16,9 +17,12 @@ class NRole extends Model
     static $roleSelf = ['view'=>'Xem dữ liệu', 'update'=>'Sửa dữ liệu'];
     public function getModuleByGroupUser($group_user_id)
     {
-		$data = $this->where('view', 1)->orWhere('view_my', 1)->where('n_group_user_id', $group_user_id)->join('n_modules',
-		'n_modules.id', '=', 'n_roles.module_id')->get()->toArray();
-        return $data;
+		$roleModule = $this->where('n_group_user_id', $group_user_id)->join('n_modules',
+		'n_modules.id', '=', 'n_roles.module_id')->get();
+        $data = $roleModule->filter(function($item){
+            return $item['view']==1||$item['view_my']==1||$item['update']==1||$item['update_my']==1;
+        });
+        return $data->values()->all();
     }
 
     public function getPermissionAction($index="*", $table, $group_user_id)

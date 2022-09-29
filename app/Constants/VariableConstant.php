@@ -11,5 +11,5 @@ class VariableConstant
                         'view_my'=>'Xem dữ liệu của mình',
                         'update_my'=>'Sửa dữ liệu của mình',
                         'remove_my'=>'Xóa dữ liệu của mình'];
-    const ROLE_SELF_TABLE = ['n_roles'];
+    const ROLE_SELF_TABLE = ['n_roles', 'quotes'];
 }
