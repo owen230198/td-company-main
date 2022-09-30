@@ -6,7 +6,7 @@ a {
 }
 
 body, html {
-  font-size: 14px;
+  font-size: 13px;
   height: 100%;
   background: #f1f4f9;
 }
@@ -561,7 +561,7 @@ select.form-control:not([size]):not([multiple]){
 
 @media (max-width: 1600px){
   body, .station-richmenu-main-btn-area, .siderbar-menu__lnk, .form-control, .fs-15{
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .q_stage_btn{

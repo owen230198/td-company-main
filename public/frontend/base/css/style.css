@@ -318,6 +318,10 @@ input[type=time]{
   max-width: 200px;
 }
 
+.max_w_150{
+  max-width: 150px;
+}
+
 .height_auto{
   height: auto !important;
 }

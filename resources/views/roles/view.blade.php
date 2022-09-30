@@ -37,13 +37,16 @@
                                                 {{ $role['note'] }}</h3>
                                             <div class="detail_role px-3">
                                                 @php
-                                                    $arrRoles = !in_array(@$role['table_map'], \App\Constants\VariableConstant::ROLE_SELF_TABLE) ? \App\Constants\VariableConstant::BASE_ROLE : getModelByTable($role['table_map'])::$roleSelf;
+                                                    if (in_array(@$role['table_map'], \App\Constants\VariableConstant::ROLE_SELF_TABLE)) {
+                                                        $arrRoles = getModelByTable($role['table_map'])::$roleSelf;  
+                                                    }elseif (in_array(@$role['table_map'], \App\Constants\VariableConstant::CONFIG_TABLE)) {
+                                                        $arrRoles =  \App\Constants\VariableConstant::CONFIG_TABLE_ROLE;
+                                                    }else{
+                                                        $arrRoles =  \App\Constants\VariableConstant::BASE_ROLE;
+                                                    } 
                                                 @endphp
                                                 @foreach ($arrRoles as $key => $item)
-                                                    @include('roles.item', [
-                                                        'roleIndex' => $key,
-                                                        'roleName' => $item,
-                                                    ])
+                                                    @include('roles.item', ['roleIndex' => $key, 'roleName' => $item])
                                                 @endforeach
                                             </div>
                                         </form>
