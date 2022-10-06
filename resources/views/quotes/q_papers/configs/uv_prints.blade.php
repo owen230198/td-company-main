@@ -5,7 +5,7 @@
 <div class="incredent_content mt-4" style="display: {{ @$data_uv['act']?'block':'' }};">
   <div class="d-flex align-items-center mb-3">
     <label class="base_label mr-2 mb-0 label_quotes">Số mặt in</label>
-    <div class="d-flex align-items-center fs-15 mr-3 mb-md-0 mb-3">
+    <div class="d-flex align-items-center fs-13 mr-3 mb-md-0 mb-3">
       <div class="form-group d-flex align-items-center mb-0">
         <select class="form-control short_input" name="uv[num_face]">
           <option value="0" {{ @$data_uv['num_face']==0?'selected':'' }}>Chọn số mặt in</option>

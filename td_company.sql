@@ -11,7 +11,7 @@
  Target Server Version : 100424
  File Encoding         : 65001
 
- Date: 30/09/2022 23:06:27
+ Date: 06/10/2022 17:49:07
 */
 
 SET NAMES utf8mb4;
@@ -12176,7 +12176,7 @@ INSERT INTO `customers` VALUES (12, '', 'Liverpool2', 'Gerrard1', 'Hoa Sơn', 'n
 INSERT INTO `customers` VALUES (13, '', 'Liverpool3', 'Gerrard2', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', '', 1, '2022-09-21 00:00:00', '2022-09-21 00:00:00', 1);
 INSERT INTO `customers` VALUES (14, '', 'Liverpool4', 'Gerrard3', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', '', 1, '2022-09-21 00:00:00', '2022-09-21 00:00:00', 1);
 INSERT INTO `customers` VALUES (15, '', 'Liverpool5', 'Gerrard4', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', '', 1, '2022-09-20 00:00:00', '2022-09-21 00:00:00', 16);
-INSERT INTO `customers` VALUES (16, '', 'Liverpool6', 'Gerrard5', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', '', 1, '2022-09-20 00:00:00', '2022-09-21 00:00:00', 16);
+INSERT INTO `customers` VALUES (16, '', 'Liverpool6', 'Gerrard5', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', '', 1, '2022-10-06 00:00:00', '2022-10-06 07:58:50', 16);
 
 -- ----------------------------
 -- Table structure for districts
@@ -13759,6 +13759,11 @@ CREATE TABLE `quotes`  (
   `created_by` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `_index`(`seri`, `name`, `customer_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of quotes
+-- ----------------------------
+INSERT INTO `quotes` VALUES (11, NULL, 'not_send', 'BG 1', 10000, '33x55x66', 1, 'i350', 3, 1, 'CTY 678910', 'Contacter c', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '123456789', 'hard_group', 1, '10', '200000', '0', '20000', 'note', NULL, '2022-10-06 11:33:46', '2022-10-06 04:33:46', 1);
 
 SET FOREIGN_KEY_CHECKS = 1;

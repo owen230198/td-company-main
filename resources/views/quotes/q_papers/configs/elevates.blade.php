@@ -9,7 +9,7 @@
   </div>
   <div class="d-flex align-items-center mb-3">
     <label class="base_label mr-2 mb-0 label_quotes">Giá khuôn của bài in:</label>
-    <input class="form-control fs-15 short_input" type="number" name="elevate[shape_price]" value="{{ @$data_elevate['shape_price']?$data_elevate['shape_price']:'' }}" min="0">
+    <input class="form-control fs-13 short_input" type="number" name="elevate[shape_price]" value="{{ @$data_elevate['shape_price']?$data_elevate['shape_price']:'' }}" min="0">
   </div> 
   @include('quotes.select_devices', ['key_device' => 'elevate', 'device'=>@$data_elevate['device']])
 </div> 

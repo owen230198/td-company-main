@@ -33,7 +33,7 @@
                                             method="POST" enctype="multipart/form-data"
                                             class="border_main bg_white adminAjaxForm">
                                             @csrf
-                                            <h3 class="fs-15 p-2 mb-2 mx-3 border_bot text-center text-capitalize">
+                                            <h3 class="fs-13 p-2 mb-2 mx-3 border_bot text-center text-capitalize">
                                                 {{ $role['note'] }}</h3>
                                             <div class="detail_role px-3">
                                                 @php

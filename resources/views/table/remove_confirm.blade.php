@@ -9,7 +9,7 @@
           <h4 class="modal-title fs-17">Xác thực xóa <span class="text-lowercase">{{ $tableItem['note'] }}</span></h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
-        <div class="modal-body fs-15 color_red font-italic">
+        <div class="modal-body fs-13 color_red font-italic">
           Bạn sẽ xóa vĩnh viễn <span class="text-lowercase">{{ $tableItem['note'] }}</span> này ?
         </div>
         <div class="modal-footer">

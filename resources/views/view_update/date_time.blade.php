@@ -6,7 +6,7 @@
 		$name = @$field['name']?$field['name']:'';
 		$value = @$data[$name]?$data[$name]:''; 
 	}
-	$time_stamp = $value!=''?$value->getTimestamp():Time();
-	$time = strftime('%Y-%m-%dT%H:%M:%S', $time_stamp);
+	$time_stamp = $value!=''?strtotime($value):Time();
+	$time = date('m/d/Y', $time_stamp);
 @endphp
-<input type="datetime-local" name="{{ $name }}" value="{{ $time }}" class="form-control">
+<input type="text" name="{{ $name }}" value="{{ @$time }}" class="form-control max_w_200 inputDatePicker">

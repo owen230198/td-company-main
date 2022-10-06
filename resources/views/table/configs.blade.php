@@ -20,7 +20,7 @@
 		        @endphp
 			        @if ($field['region']==$c_region['id'])
 				        <div class="form-group d-flex mb-4 pb-4 border_bot_eb">
-				          <label class="mb-0 mr-3 min_150 fs-15 text-capitalize">{{ $field['note'] }}</label>
+				          <label class="mb-0 mr-3 min_150 fs-13 text-capitalize">{{ $field['note'] }}</label>
 				          @include('view_update.'.$field['view_type'].'',['config'=>1, 'config_id'=>$field['id'], 'config_value'=>$field['value']])
 				        </div>
 			        @endif
@@ -30,13 +30,13 @@
 	    </div>
 	    <div class="group_btn_action_form">
 	      <button type="submit" class="station-richmenu-main-btn-area">
-	        <i class="fa fa-check mr-2 fs-18" aria-hidden="true"></i>Hoàn tất
+	        <i class="fa fa-check mr-2 fs-15" aria-hidden="true"></i>Hoàn tất
 	      </button>
 	      <a href="{{ url('') }}" class="station-richmenu-main-btn-area mx-2">
-	        <i class="fa fa-angle-left mr-2 fs-18" aria-hidden="true"></i>Trở về
+	        <i class="fa fa-chevron-left mr-2 fs-15" aria-hidden="true"></i>Trở về
 	      </a>
 	      <a href="{{ url('') }}" class="station-richmenu-main-btn-area">
-	        <i class="fa fa-times mr-2 fs-18" aria-hidden="true"></i>Hủy
+	        <i class="fa fa-times mr-2 fs-15" aria-hidden="true"></i>Hủy
 	      </a>
 	    </div>
 	  </form>

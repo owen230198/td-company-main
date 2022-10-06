@@ -104,31 +104,31 @@ class AdminService extends BaseService
 
     public function getDataSearchTable($table, $arrWhere = array(), $get, $paginate = 10, $order = 'id', $order_by='desc')
     {
-        foreach ($get as $key => $where) {
-            if (strpos($key, 'from_')!==false) {
-                $field_id = str_replace('from_', '', $key);
-                $compareTime = '>=';
-            }elseif (strpos($key, 'to_')!==false) {
-                $field_id = str_replace('to_', '', $key);
-                $compareTime = '<=';
-            }else {
+        if(!empty($arrWhere)){
+            foreach ($get as $key => $where) {
                 $field_id = (int)$key;
-            }
-            $field = $this->detail_tables->select('id', 'name', 'view_type')->find($field_id);
-            $name = $field['name'];
-            $type = $field['view_type'];
-            if ($type == 'text') {
-                $tmp = array('key'=>$name, 'compare'=>'like', 'value'=>'%'.$where.'%');
-                array_push($arrWhere, $tmp);
-            }elseif ($type == 'date_time') {
-                $timstamp = strtotime($where);
-                $date_time = date('Y-m-d h:i:s', $timstamp);
-                $tmp = array('key'=>$name, 'compare'=>$compareTime, 'value'=>$date_time);
-                array_push($arrWhere, $tmp);
-            }else {
-                if ($where != '') {
-                    $tmp = array('key'=>$name, 'compare'=>"=", 'value'=>$where);
+                $field = $this->detail_tables->select('id', 'name', 'view_type')->find($field_id);
+                $name = $field['name'];
+                $type = $field['view_type'];
+                if ($type == 'text') {
+                    $tmp = array('key'=>$name, 'compare'=>'like', 'value'=>'%'.$where.'%');
                     array_push($arrWhere, $tmp);
+                }elseif ($type == 'date_time') {
+                    $dateRange = explode(' - ', $where);
+                    if (is_array($dateRange)){
+                        foreach ($dateRange as $key => $str) {
+                            $timstamp = strtotime(trim($str));
+                            $date_time = date('Y-m-d h:i:s', $timstamp);
+                            $compareTime = $key==0?'>=':'<=';
+                            $tmp = array('key'=>$name, 'compare'=>$compareTime, 'value'=>$date_time);
+                            array_push($arrWhere, $tmp);
+                        }
+                    }
+                }else {
+                    if ($where != '') {
+                        $tmp = array('key'=>$name, 'compare'=>"=", 'value'=>$where);
+                        array_push($arrWhere, $tmp);
+                    }
                 }
             }
         }
@@ -178,8 +178,6 @@ class AdminService extends BaseService
         if ($table=='quotes'&&isset($data['customer_id'])) {
             $data['customer_type'] = $this->getDataCustomerType($data['customer_id'], $data);
         }
-        $data['created_at'] = date('y-m-d h:i:s', Time());
-        $data['updated_at'] = date('y-m-d h:i:s', Time());
         if(Schema::hasColumn($table, 'created_by')){
             $data['created_by'] = getSessionUser()['id'];
         }
@@ -200,6 +198,18 @@ class AdminService extends BaseService
         return $new_pass;
     }
 
+    private function getDataDoAction($data, $table)
+    {
+        $data = array_map(function($key, $value, $table){
+            $field = $this->detail_tables->where(['table_map'=>$table, 'name'=>$key])->first();
+            if (@$field['view_type']=='date_time') {
+                $timstamp = strtotime($value);
+                return $data[$key] = date('Y-m-d h:i:s', $timstamp);
+            }       
+        }, array_keys($data), array_values($data), $table);
+        dd($data);
+    }
+
     public function doUpdateTable($id, $table, $data)
     {
         if (@$data['password']) {
@@ -211,9 +221,7 @@ class AdminService extends BaseService
         if ($table == 'n_group_users' && @$data['parent']) {
             $this->actionRoleByParent($data['parent'], $id, 'update');
         }
-        $created_at = @$data['created_at']?strtotime($data['created_at']):Time();
-        $data['created_at'] = date('y-m-d h:i:s',$created_at);
-        $data['updated_at'] = date('y-m-d h:i:s', Time());
+        $data = $this->getDataDoAction($data, $table);
         $update = $this->db::table($table)->where('id', $id)->update($data);
         if ($table=='quotes') {
             $this->quote_service->refreshQuoteTotal($id);

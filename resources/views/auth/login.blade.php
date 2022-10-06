@@ -16,11 +16,11 @@
         <form action="{{ asset('login') }}" method="POST" class="form_login form-group">
             @csrf
             @error ('username')
-                <p class="err_mess fs-15 font-italic color_red text-left">{{ $message }}</p>
+                <p class="err_mess fs-13 font-italic color_red text-left">{{ $message }}</p>
             @enderror
             <input type="text" class="form-control mb-3" name="username" placeholder="Username" value="{{ old('username') }}">
             @error ('password')
-                <p class="err_mess fs-15 font-italic color_red text-left">{{ $message }}</p>
+                <p class="err_mess fs-13 font-italic color_red text-left">{{ $message }}</p>
             @enderror
             <input type="password" class="form-control mb-3" name="password" placeholder="Password">
             <button type="submit" class="station-richmenu-main-btn-area click">Đăng nhập</button>

@@ -1,7 +1,7 @@
 <div class="config_paper_quantative {{ $tableItem['name']=='q_foams'?'ajaxSelectModule':'' }}">
   <div class="d-flex align-items-center mb-4">
     <label class="base_label mr-2 mb-0 label_quotes">Loại {{ @$tableItem['note'] }}</label>
-    <div class="d-flex align-items-center fs-15 mr-3 mb-md-0 mb-3">
+    <div class="d-flex align-items-center fs-13 mr-3 mb-md-0 mb-3">
       <select name="name" class="form-control short_input {{ $tableItem['name']=='q_foams'?'change_select_ajax':'' }}" {{ $tableItem['name']=='q_foams'?'data-url=option-child-data/q_supply_prices/q_supply_id/':'' }}>
         <option value="0" {{ @$dataitem['name']==0?'selected':'' }}>Chọn loại {{ @$tableItem['note'] }}</option>
         @foreach (getSupplyByType('q_supplies', @$key_supply) as $item)
@@ -12,7 +12,7 @@
   </div>
   <div class="d-flex align-items-center mb-4">
     <label class="base_label mr-2 mb-0 label_quotes">Định lượng</label>
-    <div class="d-flex align-items-center fs-15 mr-3 mb-md-0 mb-3">
+    <div class="d-flex align-items-center fs-13 mr-3 mb-md-0 mb-3">
       @php
         $data_paper = @$dataitem['paper_size']?json_decode($dataitem['paper_size'], true):array();
       @endphp
@@ -37,7 +37,7 @@
   @php
     $data_elevate = @$dataitem['elevate']?json_decode($dataitem['elevate'], true):array();
   @endphp
-	<input class="form-control fs-15 short_input mr-3" placeholder="Giá khuôn" type="number" name="elevate[shape_price]" value="{{ @$data_elevate['shape_price']?$data_elevate['shape_price']:'' }}" min="0">
+	<input class="form-control fs-13 short_input mr-3" placeholder="Giá khuôn" type="number" name="elevate[shape_price]" value="{{ @$data_elevate['shape_price']?$data_elevate['shape_price']:'' }}" min="0">
 	@include('quotes.select_devices', ['key_device' => 'elevate', 'device'=>@$data_elevate['device'], 'hide_label'=>true])
 </div> 
 @if ($tableItem['name'] == 'q_cartons')

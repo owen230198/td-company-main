@@ -16,13 +16,13 @@
 		<div class="form-group mb-3 d-md-flex flex-wrap align-items-center">
 			<label class="base_label mr-2 label_quotes">Chi phí vận chuyển</label>
 			<div class="d-flex align-items-center">
-				<input class="form-control fs-15 short_input" type="number" name="ship_price" value="{{ @$data_quotes['ship_price']?(int)$data_quotes['ship_price']:'' }}" min="0" step="any" required>
+				<input class="form-control fs-13 short_input" type="number" name="ship_price" value="{{ @$data_quotes['ship_price']?(int)$data_quotes['ship_price']:'' }}" min="0" step="any" required>
 			</div> 	
 		</div>
 		<div class="form-group mb-3 d-md-flex flex-wrap align-items-center">
 			<label class="base_label mr-2 label_quotes">Lợi nhuận đơn (%)</label>
 			<div class="d-flex align-items-center">
-				<input class="form-control fs-15 short_input" type="number" name="profit" value="{{ @$data_quotes['profit']?(int)$data_quotes['profit']:'' }}" min="0" step="any" required>
+				<input class="form-control fs-13 short_input" type="number" name="profit" value="{{ @$data_quotes['profit']?(int)$data_quotes['profit']:'' }}" min="0" step="any" required>
 			</div> 	
 		</div>
 		<div class="d-flex justify-content-center mt-4">

@@ -40,7 +40,7 @@
 						<p class="fs-21 text-center font-italic"></span>{!! getDataConfigs('QConfig', 'QUOTE_WISH') !!}</p>
 
 						<div class="table_quote my-lg-4 my-3">
-							<table class="table table-striped fs-18 mb-0 table_configs">
+							<table class="table table-striped fs-15 mb-0 table_configs">
 								<thead>
 								    <tr>
 									   <th scope="col" class="text-center color_red max_content">THÔNG SỐ SẢN PHẨM</th>
@@ -54,7 +54,7 @@
 							    	<tr>
 								      	<td data-label="Nội dung" class="font-italic quote_content_section max_content">
 							      			<p class="d-flex align-items-center mb-1 font_w_bold">
-								      			<span class="pro_name fs-18 text-uppercase">{{ @$data_tables['name'] }}</span>
+								      			<span class="pro_name fs-15 text-uppercase">{{ @$data_tables['name'] }}</span>
 								      		</p>
 								      		<p class=" mb-1">
 								      			<span class="font_w_bold mr-1"><i class="fs-10 fa fa-circle mr-1" aria-hidden="true"></i> Chất liệu giấy: </span>
@@ -127,7 +127,7 @@
 							</table>	
 						    <div class="text-center p-2 border_grey">
 						    	<p class="fs-23 color_red font_w_bold mb-1">TỔNG GIÁ : 	{{ number_format((int)$data_quotes['total_amount']) }} VNĐ</p>
-						    	<p class="fs-18 font-italic">(Tổng cộng chưa VAT 10%)</p>
+						    	<p class="fs-15 font-italic">(Tổng cộng chưa VAT 10%)</p>
 						    </div>
 						</div>
 						<div class="footer_quote fs-17 font-italic pb_375">
@@ -150,10 +150,10 @@
 			</div>
 			<div class="group_btn_action_form">
 			    <button type="button" class="station-richmenu-main-btn-area print_quotes">
-			      <i class="fa fa-download mr-2 fs-18" aria-hidden="true"></i>Xuất file
+			      <i class="fa fa-download mr-2 fs-15" aria-hidden="true"></i>Xuất file
 			    </button>
 			    <a href="" class="station-richmenu-main-btn-area print_quotes">
-			      <i class="fa fa-paper-plane mr-2 fs-18" aria-hidden="true"></i>Gửi báo giá
+			      <i class="fa fa-paper-plane mr-2 fs-15" aria-hidden="true"></i>Gửi báo giá
 			    </a>
 			    <a href="{{ url('') }}" class="station-richmenu-main-btn-area red_button">
 			      <i class="fa fa-times mr-1 fs-17" aria-hidden="true"></i>Thoát

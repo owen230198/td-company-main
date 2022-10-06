@@ -10,7 +10,7 @@
 		    	$data_fill = @$dataitem['fill_price']?json_decode($dataitem['fill_price'], true):array();
 		  	@endphp
 		  	<input type="hidden" name="fill_price[act]" value="1">
-			<input class="form-control fs-15 short_input mr-3" placeholder="Nhập giá" type="number" name="fill_price[price]" value="{{ @$data_fill['price']?$data_fill['price']:'' }}" min="0" required step="any">
+			<input class="form-control fs-13 short_input mr-3" placeholder="Nhập giá" type="number" name="fill_price[price]" value="{{ @$data_fill['price']?$data_fill['price']:'' }}" min="0" required step="any">
 		</div>
 		<div class="d-flex align-items-center mb-4">
 		  	<label class="base_label mr-2 mb-0 label_quotes">Đơn giá hoàn thiện:</label>
@@ -18,7 +18,7 @@
 		    	$data_finishes = @$dataitem['finish_price']?json_decode($dataitem['finish_price'], true):array();
 		  	@endphp
 		  	<input type="hidden" name="finish_price[act]" value="1">
-			<input class="form-control fs-15 short_input mr-3" placeholder="Nhập giá" type="number" name="finish_price[price]" value="{{ @$data_finishes['price']?$data_finishes['price']:'' }}" min="0" required step="any">
+			<input class="form-control fs-13 short_input mr-3" placeholder="Nhập giá" type="number" name="finish_price[price]" value="{{ @$data_finishes['price']?$data_finishes['price']:'' }}" min="0" required step="any">
 		</div>
 		<div class="d-flex justify-content-center">
 		    <button type="submit" class="station-richmenu-main-btn-area mr-2">
