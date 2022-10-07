@@ -15,7 +15,6 @@
   </div>
 </form>
 @endsection
-
 @section('script')
   <script src="{{ asset('frontend/admin/script/quote.js') }}" defer></script>
 @endsection

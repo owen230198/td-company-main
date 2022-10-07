@@ -104,30 +104,35 @@ class AdminService extends BaseService
 
     public function getDataSearchTable($table, $arrWhere = array(), $get, $paginate = 10, $order = 'id', $order_by='desc')
     {
-        if(!empty($arrWhere)){
+        if(!empty($get)){
+            if (@$get['page']) {
+                unset($get['page']);
+            }
             foreach ($get as $key => $where) {
-                $field_id = (int)$key;
-                $field = $this->detail_tables->select('id', 'name', 'view_type')->find($field_id);
-                $name = $field['name'];
-                $type = $field['view_type'];
-                if ($type == 'text') {
-                    $tmp = array('key'=>$name, 'compare'=>'like', 'value'=>'%'.$where.'%');
-                    array_push($arrWhere, $tmp);
-                }elseif ($type == 'date_time') {
-                    $dateRange = explode(' - ', $where);
-                    if (is_array($dateRange)){
-                        foreach ($dateRange as $key => $str) {
-                            $timstamp = strtotime(trim($str));
-                            $date_time = date('Y-m-d h:i:s', $timstamp);
-                            $compareTime = $key==0?'>=':'<=';
-                            $tmp = array('key'=>$name, 'compare'=>$compareTime, 'value'=>$date_time);
+                if (!empty($where)) {
+                    $field_id = (int)$key;
+                    $field = $this->detail_tables->select('id', 'name', 'view_type')->find($field_id);
+                    $name = $field['name'];
+                    $type = $field['view_type'];
+                    if ($type == 'text') {
+                        $tmp = array('key'=>$name, 'compare'=>'like', 'value'=>'%'.$where.'%');
+                        array_push($arrWhere, $tmp);
+                    }elseif ($type == 'date_time') {
+                        $dateRange = explode(' - ', $where);
+                        if (is_array($dateRange)){
+                            foreach ($dateRange as $key => $str) {
+                                $timstamp = strtotime(trim($str));
+                                $date_time = date('Y-m-d H:i', $timstamp);
+                                $compareTime = $key==0?'>=':'<=';
+                                $tmp = array('key'=>$name, 'compare'=>$compareTime, 'value'=>$date_time);
+                                array_push($arrWhere, $tmp);
+                            }
+                        }
+                    }else {
+                        if ($where != '') {
+                            $tmp = array('key'=>$name, 'compare'=>"=", 'value'=>$where);
                             array_push($arrWhere, $tmp);
                         }
-                    }
-                }else {
-                    if ($where != '') {
-                        $tmp = array('key'=>$name, 'compare'=>"=", 'value'=>$where);
-                        array_push($arrWhere, $tmp);
                     }
                 }
             }
@@ -172,6 +177,7 @@ class AdminService extends BaseService
 
     public function doInsertTable($table, $data)
     {
+        $data = $this->getDataDoAction($data, $table);
         if (@$data['password']) {
             $data['password'] = md5($data['password']);
         }
@@ -200,18 +206,19 @@ class AdminService extends BaseService
 
     private function getDataDoAction($data, $table)
     {
-        $data = array_map(function($key, $value, $table){
+        foreach ($data as $key => $item) {
             $field = $this->detail_tables->where(['table_map'=>$table, 'name'=>$key])->first();
             if (@$field['view_type']=='date_time') {
-                $timstamp = strtotime($value);
-                return $data[$key] = date('Y-m-d h:i:s', $timstamp);
-            }       
-        }, array_keys($data), array_values($data), $table);
-        dd($data);
+                $timstamp = strtotime($item);
+                $data[$key] = date('Y-m-d H:i', @$timstamp);
+            }  
+        }
+        return $data;
     }
 
     public function doUpdateTable($id, $table, $data)
     {
+        $data = $this->getDataDoAction($data, $table);
         if (@$data['password']) {
             $data['password'] = $this->getPasswordUpdate($table, $id, $data['password']);
         }
@@ -221,7 +228,6 @@ class AdminService extends BaseService
         if ($table == 'n_group_users' && @$data['parent']) {
             $this->actionRoleByParent($data['parent'], $id, 'update');
         }
-        $data = $this->getDataDoAction($data, $table);
         $update = $this->db::table($table)->where('id', $id)->update($data);
         if ($table=='quotes') {
             $this->quote_service->refreshQuoteTotal($id);

@@ -1,5 +1,5 @@
 @php
-  $list_devices = getDataTable('q_devices', 'id, name', array(
+  $list_devices = getDataTable('q_devices', '*', array(
     ['key'=>'act', 'compare'=>'=', 'value'=>1], 
     ['key'=>'key_device', 'compare'=>'=', 'value'=>$key_device]), 0, 'ord', 'asc');
   $list_devices = $list_devices!=null?$list_devices:array();

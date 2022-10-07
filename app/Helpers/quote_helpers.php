@@ -11,7 +11,7 @@ if (!function_exists('getExactQuantityPaper')) {
 
     if (!function_exists('getLaminateMateralByKey')) {
 		function getLaminateMateralByKey($key){
-			$materals = getDataTable('q_laminate_materals', 'id, name', array(
+			$materals = getDataTable('q_laminate_materals', '*', array(
 		                ['key'=>'act', 'compare'=>'=', 'value'=>1],
 		                ['key'=>'laminate_key', 'compare'=>'=', 'value'=>$key]
 		                ), 0, 'name', 'asc');
@@ -22,7 +22,7 @@ if (!function_exists('getExactQuantityPaper')) {
 
 	if (!function_exists('getNameSupplyByType')) {
 		function getSupplyByType($table, $key){
-			$supply = getDataTable($table, 'id, name', array(
+			$supply = getDataTable($table, '*', array(
 		                ['key'=>'act', 'compare'=>'=', 'value'=>1],
 		                ['key'=>'type', 'compare'=>'=', 'value'=>$key]
 		                ), 0, 'name', 'asc');

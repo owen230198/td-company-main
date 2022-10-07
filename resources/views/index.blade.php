@@ -32,7 +32,7 @@
         @include('header')
         @include('sidebar')
         <section class="main-all">
-            <div class="reponsive">
+            <div class="reponsive container-fluid">
                 <div class="station-richmenu-main" id="set-width">
                     <div class="station-richmenu-main-area justify-content-between">
                         <div class="station-richmenu-main-area--item d-flex align-items-center">
@@ -42,11 +42,10 @@
                             <button type="button" class="station-richmenu-main__btn" id="close">
                                 <img src="{{ asset('frontend/admin/images/station-user-btn-02.png') }}" alt="" />
                             </button>
-                            <h1 class="station-richmenu-main__ttl text-capitalize">{{ $title ? $title : 'Management' }}
-                            </h1>
+                            <h1 class="station-richmenu-main__ttl text-capitalize">{{ $title ? $title : 'Management' }}</h1>
                         </div>
                     </div>
-                    <div class="dash_board_content my-3 py-3 border_top container-fluid px-0">
+                    <div class="dash_board_content my-3 py-3 border_top">
                         @yield('content')
                     </div>
                 </div>

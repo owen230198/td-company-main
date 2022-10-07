@@ -4,7 +4,7 @@
 	$config = $default_data['config'];
 	$list_option = $parent['table']!=null?getOptionByClass($parent['table']):$parent['option'];
 	$list_option = $parent['table']!=null&&@$parent['recursive']?recursive($list_option, 0, 0):$list_option;
-	$select_search = @$data_search[$id]?$data_search[$id]:0;
+	$select_search = @$data_search[$field['id']]??0;
 @endphp
 <div class="d-flex align-items-center w-100">
 	<label class="mr-2 d-block mb-0 min_100">{{ $field['note'] }}:</label>

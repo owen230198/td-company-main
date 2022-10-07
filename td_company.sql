@@ -11,7 +11,7 @@
  Target Server Version : 100424
  File Encoding         : 65001
 
- Date: 06/10/2022 17:49:07
+ Date: 07/10/2022 17:30:11
 */
 
 SET NAMES utf8mb4;
@@ -12175,8 +12175,8 @@ INSERT INTO `customers` VALUES (11, '', 'Liverpool1', 'Owen', 'Hoa Sơn', 'nguye
 INSERT INTO `customers` VALUES (12, '', 'Liverpool2', 'Gerrard1', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', '', 1, '2022-09-21 00:00:00', '2022-09-21 00:00:00', 1);
 INSERT INTO `customers` VALUES (13, '', 'Liverpool3', 'Gerrard2', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', '', 1, '2022-09-21 00:00:00', '2022-09-21 00:00:00', 1);
 INSERT INTO `customers` VALUES (14, '', 'Liverpool4', 'Gerrard3', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', '', 1, '2022-09-21 00:00:00', '2022-09-21 00:00:00', 1);
-INSERT INTO `customers` VALUES (15, '', 'Liverpool5', 'Gerrard4', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', '', 1, '2022-09-20 00:00:00', '2022-09-21 00:00:00', 16);
-INSERT INTO `customers` VALUES (16, '', 'Liverpool6', 'Gerrard5', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', '', 1, '2022-10-06 00:00:00', '2022-10-06 07:58:50', 16);
+INSERT INTO `customers` VALUES (15, '', 'Liverpool5', 'Gerrard4', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', NULL, 1, '2022-10-03 07:00:00', '2022-10-07 15:14:04', 16);
+INSERT INTO `customers` VALUES (16, '', 'Liverpool6', 'Gerrard5', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', NULL, 1, '2022-10-07 17:00:34', '2022-10-07 17:00:34', 16);
 
 -- ----------------------------
 -- Table structure for districts
@@ -13337,7 +13337,12 @@ CREATE TABLE `q_cartons`  (
   `created_by` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `quote_index`(`quote_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of q_cartons
+-- ----------------------------
+INSERT INTO `q_cartons` VALUES (1, 1, 10000, 1, 10200, 2, '0.35', '0.51', '{\"quantative\":\"6\",\"act\":1,\"total\":33299174.999999996}', '{\"act\":\"1\",\"shape_price\":\"100\",\"device\":\"4\",\"total\":1100000}', '{\"act\":\"1\",\"device\":\"5\",\"total\":170000}', '{\"act\":\"1\",\"device\":\"7\",\"total\":1100000}', 11, 35669175, NULL, NULL, NULL, 0);
 
 -- ----------------------------
 -- Table structure for q_configs
@@ -13440,7 +13445,12 @@ CREATE TABLE `q_finishes`  (
   `created_by` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `quote_index`(`quote_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of q_finishes
+-- ----------------------------
+INSERT INTO `q_finishes` VALUES (1, '{\"act\":1,\"price\":\"100\",\"total\":1000000}', '{\"act\":1,\"price\":\"300\",\"total\":3000000}', NULL, NULL, 4000000, 11, NULL, 0);
 
 -- ----------------------------
 -- Table structure for q_foams
@@ -13466,7 +13476,12 @@ CREATE TABLE `q_foams`  (
   `created_by` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `quote_indx`(`quote_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of q_foams
+-- ----------------------------
+INSERT INTO `q_foams` VALUES (1, 10, 10000, 1, 10200, 2, '0.25', '0.14', '{\"quantative\":\"60\",\"act\":1,\"total\":24036250}', '{\"act\":\"1\",\"shape_price\":\"100\",\"device\":\"11\",\"total\":1600000}', '{\"act\":\"1\",\"device\":\"5\",\"total\":220000}', 11, 25856250, NULL, NULL, NULL, 0);
 
 -- ----------------------------
 -- Table structure for q_laminate_materals
@@ -13533,7 +13548,13 @@ CREATE TABLE `q_papers`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `quote_indx`(`quote_id`) USING BTREE,
   INDEX `main_index`(`main`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of q_papers
+-- ----------------------------
+INSERT INTO `q_papers` VALUES (2, 'BG 1', 10000, 1, 10200, 2, '0.35', '0.51', '{\"quantitative\":\"350\",\"unit_price\":\"20\",\"act\":1,\"total\":12869849.999999998}', '{\"type\":\"1\",\"total\":\"500000\"}', '{\"act\":\"1\",\"color_num\":\"4\",\"style\":\"4\",\"device\":\"2\",\"total\":11146000}', '{\"act\":\"1\",\"materal\":\"8\",\"num_face\":\"0\",\"device\":\"1\",\"total\":50000}', '{\"act\":\"1\",\"materal\":\"other\",\"materal_price\":\"100\",\"num_face\":\"2\",\"cover_materal\":\"6\",\"cover_num_face\":\"2\",\"total\":10663589.999999998}', '{\"act\":\"1\",\"price\":\"1000\",\"shape\":\"10\",\"device\":\"2\",\"total\":10000010}', '{\"act\":\"1\",\"num_face\":\"2\",\"device\":\"3\",\"total\":16300000}', '{\"act\":\"1\",\"shape_price\":\"1000\",\"device\":\"11\",\"total\":1600000}', '{\"act\":\"1\",\"device\":\"5\",\"total\":120000}', '{\"act\":\"1\",\"device\":\"6\",\"total\":550000}', '{\"act\":\"1\",\"price\":\"200\",\"total\":2000000}', 11, 'note', 65799450, 1, NULL, '2022-10-07 16:22:17', '2022-10-07 09:22:17', 0);
+INSERT INTO `q_papers` VALUES (3, 'BG 1 - tờ HDSD', 10000, 1, 10200, 2, '0.25', '0.14', '{\"quantitative\":\"400\",\"unit_price\":\"20\",\"act\":1,\"total\":2884000.0000000005}', '{\"type\":\"1\",\"total\":\"100000\"}', '{\"act\":\"1\",\"color_num\":\"2\",\"style\":\"4\",\"device\":\"1\",\"total\":1238600}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', 11, 'note', 4222600, 0, NULL, NULL, NULL, 0);
 
 -- ----------------------------
 -- Table structure for q_printer_devices
@@ -13595,7 +13616,12 @@ CREATE TABLE `q_silks`  (
   `created_by` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `quote_indx`(`quote_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of q_silks
+-- ----------------------------
+INSERT INTO `q_silks` VALUES (1, 75, 10000, 1, 10200, 2, '0.28', '0.75', '{\"quantative\":\"75\",\"act\":1,\"total\":14206500.000000002}', '{\"num\":\"10\",\"act\":1,\"total\":23000000}', 11, 37206500, NULL, NULL, NULL, 0);
 
 -- ----------------------------
 -- Table structure for q_supplies
@@ -13764,6 +13790,6 @@ CREATE TABLE `quotes`  (
 -- ----------------------------
 -- Records of quotes
 -- ----------------------------
-INSERT INTO `quotes` VALUES (11, NULL, 'not_send', 'BG 1', 10000, '33x55x66', 1, 'i350', 3, 1, 'CTY 678910', 'Contacter c', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '123456789', 'hard_group', 1, '10', '200000', '0', '20000', 'note', NULL, '2022-10-06 11:33:46', '2022-10-06 04:33:46', 1);
+INSERT INTO `quotes` VALUES (11, NULL, 'not_send', 'BG 1', 10000, '33x55x66', 1, 'i350', 3, 1, 'CTY 678910', 'Contacter c', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '123456789', 'hard_group', 1, '10', '200000', '172753975', '190049372.5', 'note', NULL, '2022-10-07 16:56:11', '2022-10-07 09:56:11', 1);
 
 SET FOREIGN_KEY_CHECKS = 1;

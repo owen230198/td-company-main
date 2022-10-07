@@ -34,7 +34,7 @@ class QuoteService extends BaseService
         $listSupplies = array_merge($list_data['listPapers'], $list_data['listCatons'], $list_data['listFoams'], $list_data['listSilks'], $list_data['listFinishes']);
         $total_cost = 0;
         foreach ($listSupplies as $item) {
-            $total_cost += $item['total_cost'];
+            $total_cost += (int)@$item['total_cost'];
         }
         $quote = $this->quotes->find($quote_id);
         $ship_price = @$quote['ship_price']?(float)$quote['ship_price']:0;
@@ -46,14 +46,22 @@ class QuoteService extends BaseService
 
     private function getDataDoAction($data, $table, $quote_id)
     {
-        if ($table == 'q_papers') {
-            $data_action = $this->getDataActionQPaper($data);
-        }elseif ($table == 'q_cartons' || $table == 'q_foams') {
-            $data_action = $this->getDataActionCartonFoam($data, $table);
-        }elseif ($table == 'q_silks') {
-            $data_action = $this->getDataActionSilk($data);
-        }elseif ($table == 'q_finishes') {
-            $data_action = $this->getDataActionFinish($data, $quote_id);
+        switch ($table) {
+            case 'q_papers':
+                $data_action = $this->getDataActionQPaper($data);
+                break;
+            case 'q_cartons':
+                $data_action = $this->getDataActionCartonFoam($data, $table);
+                break;
+            case 'q_silks':
+                $data_action = $this->getDataActionSilk($data);
+                break;
+            case 'q_finishes':
+                $data_action = $this->getDataActionFinish($data, $quote_id);
+                break;
+            default:
+                $data_action = array();
+                break;
         }
         $data_action['total_cost'] = $this->priceCaculatedByArray($data_action);
         return $data_action;

@@ -50,7 +50,11 @@ class AdminController extends Controller
         }
         $data = $this->service->getDataBaseView($table, 'Tìm kiếm');
         $data['data_tables'] = $this->service->getDataSearchTable($table, self::$viewWhere, $get, $data['page_item']);
-        $data['data_search'] = $get;
+        if (!@$get['page']) {
+            session(['dataSearch'=>$get]);
+        }
+        $data['data_search'] = @session('dataSearch');
+        dump($data['data_search']);
         session()->put('back_url', url()->full());
         return view('table.'.$data['view_type'], $data);
     }
@@ -201,7 +205,7 @@ class AdminController extends Controller
         if ($parent!=0) {
             $models = getModelByTable($table);
             $data = $models->where('act', 1)->where($field, $parent)->orderBy('name', 'asc')->get();
-            foreach ($data as $key => $item) {
+            foreach ($data as $item) {
                 $html .= '<option value="'.$item['id'].'">'.$item['name'].'</option>';
             }
         }
