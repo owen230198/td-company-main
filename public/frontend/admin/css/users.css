@@ -13,8 +13,7 @@ body {
 
 .station-richmenu-main {
     padding-top: 10px;
-    padding-right: 12px;
-    padding-left: 12px;
+    padding-left: 15px;
 }
 .station-richmenu-main__btn {
     cursor: pointer;
@@ -130,7 +129,7 @@ body {
     color: #000020;
     text-transform: capitalize;
     font-family: inter;
-    padding: 10px;
+    padding: 5px;
     text-align: center;
 }
 .table tr td {
@@ -149,25 +148,21 @@ body {
 }
 
 .table-btn {
+    display: block;
     border: 1px solid #3b5999;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
     border-radius: 5px;
     color: #3b5999;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    padding: 5px;
-    display: -webkit-inline-box;
-    display: -ms-inline-flexbox;
-    display: inline-flex;
+    padding: 2px 4px;
     background: #ffffff;
     -webkit-transition: 0.3s all;
     transition: 0.3s all;
-    width: 25px;
-    height: 25px;
-    justify-content: center;
+    width: 100px;
+    text-align: left;
 }
+.table-btn i {
+    font-size: 14px;
+}
+
 .table-btn:hover {
     -webkit-transition: 0.3s all;
     transition: 0.3s all;

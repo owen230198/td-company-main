@@ -27,7 +27,14 @@
                 </td>
             @endforeach
             <td>
-                @include('table.' . $tableItem['function_view'] . 'func_btn', ['data' => $data])
+                <div class="func_btn_module text-center position-relative">
+                    <button class="station-richmenu-main-btn-area change_menu_func_btn">
+                        <i class="fa fa-ellipsis-v fs-15" aria-hidden="true"></i>
+                    </button>
+                    <div class="list_func_table">
+                        @include('table.' . $tableItem['function_view'] . 'func_btn', ['data' => $data])
+                    </div>
+                </div>
             </td>
         </tr>
     @endforeach
