@@ -31,7 +31,7 @@
     </div>
     @include('table.table_base_view')
     <div class="paginate_view d-flex align-center justify-content-between">
-     {{ $data_tables->links() }}
+     {!! $data_tables->links('pagination::bootstrap-4') !!}
     </div>
   </div>
   @include('table.remove_confirm')
