@@ -149,15 +149,16 @@ body {
 
 .table-btn {
     display: block;
-    border: 1px solid #3b5999;
-    border-radius: 5px;
-    color: #3b5999;
+    border: none;
+    border-radius: 0;
+    color: #000020;
     padding: 2px 4px;
-    background: #ffffff;
+    background: #fff;
     -webkit-transition: 0.3s all;
     transition: 0.3s all;
     width: 100px;
     text-align: left;
+    border-bottom: 1px solid #000020;
 }
 .table-btn i {
     font-size: 14px;

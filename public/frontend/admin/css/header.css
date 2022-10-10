@@ -10,7 +10,7 @@
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
     justify-content: space-between;
-    padding: 0px 15px 0px 30px;
+    padding: 0px 15px;
     margin-bottom: 3px;
     -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 4px,
         #ebebeb30 0px 0px 0px 3px;
@@ -107,8 +107,7 @@
     position: relative;
 }
 .header-menu-user__avatar {
-    border: 3px solid #12db00;
-    padding: 2px;
+    border: 2px solid #12db00;
     border-radius: 50%;
     overflow: hidden;
 }
@@ -174,7 +173,7 @@
     position: fixed;
     left: 0;
     background: #000020;
-    width: 205px;
+    width: 175px;
     height: 100vh;
     z-index: 2;
     overflow: auto;
@@ -193,19 +192,17 @@
 .siderbar-menu__lnk {
     position: relative;
     color: #fff;
-    display: -webkit-inline-box;
-    display: -ms-inline-flexbox;
     display: inline-flex;
     -webkit-transition: 0.3s all;
     transition: 0.3s all;
     text-decoration: none;
     font-size: 13px;
-    padding: 3px 0 3px 6px;
-    margin: 3px 0 3px 5px;
+    padding: 4px 0 4px 5px;
+    margin: 4px 0 4px 5px;
     text-align: center;
     position: relative;
     z-index: 1;
-    border-radius: 24px;
+    border-radius: 25px;
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
@@ -249,7 +246,7 @@
     max-width: 100%;
     -webkit-transition: 0.3s all;
     transition: 0.3s all;
-    padding-left: 205px;
+    padding-left: 175px;
 }
 
 .main-all .reponsive .main__w {
@@ -342,7 +339,7 @@
     }
     .siderbar-menu {
         left: 0;
-        width: 205px;
+        width: 175px;
         z-index: 2;
         -webkit-transition: 0.3s all;
         transition: 0.3s all;

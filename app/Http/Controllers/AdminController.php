@@ -44,7 +44,7 @@ class AdminController extends Controller
         if (!@$permission['allow']) {
             return redirect('permission-error');
         }
-        $get = $request->all();
+        $get = $request->all()+session('dataSearch');
         if(count($permission['viewWhere'])>0){
             static::$viewWhere[] = @$permission['viewWhere'];
         }
@@ -54,7 +54,6 @@ class AdminController extends Controller
             session(['dataSearch'=>$get]);
         }
         $data['data_search'] = @session('dataSearch');
-        dump($data['data_search']);
         session()->put('back_url', url()->full());
         return view('table.'.$data['view_type'], $data);
     }

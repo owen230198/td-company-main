@@ -49,7 +49,7 @@ html {
 }
 
 .header-logo_lnk img {
-    max-height: 45px;
+    max-height: 35px;
 }
 
 .siderbar_child {
@@ -58,12 +58,22 @@ html {
 
 .siderbar_child li a {
     display: block;
-    padding: 3px;
+    padding: 4px;
     padding-left: 20px;
     background: #000332;
     color: #ffffff;
     border-bottom: 1px solid #010f6a;
     transition: all 0.3s;
+}
+
+.list_func_table{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    display: none;
+    width: 100px;
+    box-shadow: 1px 1px 3px #000020;
 }
 
 .siderbar_child li:hover a {
@@ -236,8 +246,8 @@ select.form-control:not([size]):not([multiple]),
 }
 
 .header-menu-user__avatar img {
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     object-fit: cover;
 }
 
@@ -573,7 +583,8 @@ select.form-control:not([size]):not([multiple]) {
     .fs-13,
     select.form-control:not([size]):not([multiple]),
     .station-richmenu-main-search__set,
-    .siderbar-menu__lnk {
+    .siderbar-menu__lnk,
+    .table tr td {
         font-size: 12px;
     }
 

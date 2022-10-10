@@ -9,6 +9,6 @@
 	</a>
 	<button type="button" class="btn btn-primary table-btn color_red delete_btn" data-toggle="modal" data-target="#deleteModal" data-id="{{ $data['id'] }}">
 		<i class="fa fa-times fs-13 mr-1" aria-hidden="true"></i>
+		Xóa
 	</button>
-	Xóa
 </div>
