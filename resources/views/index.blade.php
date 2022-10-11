@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ @$title ? $title : 'Management' }}</title>
     <base href="{{ url('') }}">
-    <link rel="icon" type="image/x-icon" href="{{ asset('frontend/admin/images/logo.jpg') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('frontend/admin/images/logo.png') }}">
     <link rel="stylesheet" href="{{ asset('frontend/base/css/bootstrap.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/base/css/font-awesome.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/base/css/select2.min.css') }}" />

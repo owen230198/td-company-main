@@ -3,7 +3,7 @@
 <div class=" main_login d-flex justify-content-center align-items-center">
     <div class="form_login_content text-center">
         <div class="login_logo mb-4">
-            <img src="{{ asset('frontend/admin/images/logo.jpg') }}" />
+            <img src="{{ asset('frontend/admin/images/logo.png') }}" />
         </div>
         @php
             $const = new \App\Constants\StattusConstant;

@@ -17,14 +17,15 @@ class NRole extends Model
 		$roleModule = $this->where('n_group_user_id', $group_user_id)->join('n_modules',
 		'n_modules.id', '=', 'n_roles.module_id')->get();
         $data = $roleModule->filter(function($item){
-                return $item['view']==1||$item['view_my']==1;
+            return $item['view']==1||$item['view_my']==1;
         });
         return $data->values()->all();
     }
 
     public function getPermissionAction($index="*", $table, $group_user_id)
     {
-        $data = $this->where('n_roles.n_group_user_id', $group_user_id)->join('n_modules','n_modules.id', '=', 'n_roles.module_id')
+        $data = $this->where('n_roles.n_group_user_id', $group_user_id)
+        ->join('n_modules','n_modules.id', '=', 'n_roles.module_id')
         ->where('n_modules.table_map', $table)->select($index)->first();
         return $data;
     }

@@ -8,7 +8,7 @@
 					<div class="row jusify-content-center">
 						<div class="col-4">
 							<a class="quote_logo d-inline-block" href="system">
-								<img src="frontend/admin/images/logo.jpg" class="w-100 mb-1">	
+								<img src="frontend/admin/images/logo.png" class="w-100 mb-1">	
 							</a>	
 						</div>
 						<div class="col-8">

@@ -19,7 +19,7 @@ class AdminService extends BaseService
         }
         $select = !in_array($action, ['insert', 'copy'])?[$action, $action.'_my']:$action;
         $permissions = $this->roles->getPermissionAction($select, $table, @$admin['n_group_user_id']);
-        if($action=='view'&&Schema::hasColumn($table, 'created_by')){
+        if($action=='view'){
             $viewWhere = !@$permissions['view']&&@$permissions['view_my']?['key'=>'created_by', 'compare'=>'=', 'value'=>$admin['id']]:array();
             $allow = @$permissions['view']||@$permissions['view_my'];
             return ['allow'=>$allow, 'viewWhere'=>$viewWhere];

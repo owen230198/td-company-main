@@ -13,7 +13,7 @@
               <i class="fa fa-filter mr-2 fs-15" aria-hidden="true"></i>Tìm kiếm
             </button>
             @if ($tableItem['insert'] == 1)
-              <a href="insert/{{ $tableItem['name'] }}" class="station-richmenu-main-btn-area">
+              <a href="{{ !empty($tableItem['link_insert'])?$tableItem['link_insert']:'insert/'.$tableItem['name'] }}" class="station-richmenu-main-btn-area">
                 <i class="fa fa-plus mr-2 fs-15" aria-hidden="true"></i>Thêm mới
               </a>
             @endif

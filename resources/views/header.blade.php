@@ -1,7 +1,7 @@
 <header class="header">
     <div class="header-logo">
         <a href="{{ url('') }}" class="header-logo_lnk d-inline-block py-1">
-            <img src="{{ asset('frontend/admin/images/logo.jpg') }}" />
+            <img src="{{ asset('frontend/admin/images/logo.png') }}" />
         </a>
     </div>
     <div class="header-menu">
