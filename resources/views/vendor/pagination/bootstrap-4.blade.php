@@ -12,8 +12,8 @@
     @endif
 
     <?php
-        $start = $paginator->currentPage() - 2; // show 3 pagination links before current
-        $end = $paginator->currentPage() + 2; // show 3 pagination links after current
+        $start = $paginator->currentPage() - 1; // show 3 pagination links before current
+        $end = $paginator->currentPage() + 1; // show 3 pagination links after current
         if($start < 1) {
             $start = 1; // reset start to 1
             $end += 1;
@@ -25,7 +25,7 @@
         <li class="page-item">
             <a class="page-link" href="{{ $paginator->url(1) }}">{{1}}</a>
         </li>
-        @if($paginator->currentPage() != 4)
+        @if($paginator->currentPage() != 3)
             {{-- "Three Dots" Separator --}}
             <li class="page-item disabled" aria-disabled="true"><span class="page-link">...</span></li>
         @endif
@@ -36,7 +36,7 @@
             </li>
         @endfor
     @if($end < $paginator->lastPage())
-        @if($paginator->currentPage() + 3 != $paginator->lastPage())
+        @if($paginator->currentPage() + 2 != $paginator->lastPage())
             {{-- "Three Dots" Separator --}}
             <li class="page-item disabled" aria-disabled="true"><span class="page-link">...</span></li>
         @endif

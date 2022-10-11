@@ -44,16 +44,17 @@ class AdminController extends Controller
         if (!@$permission['allow']) {
             return redirect('permission-error');
         }
-        $get = $request->all()+session('dataSearch');
+        $sess = !empty(session('dataSearch')[$table])?session('dataSearch')[$table]:array();
+        $get = $request->all()+$sess;
         if(count($permission['viewWhere'])>0){
             static::$viewWhere[] = @$permission['viewWhere'];
         }
         $data = $this->service->getDataBaseView($table, 'Tìm kiếm');
         $data['data_tables'] = $this->service->getDataSearchTable($table, self::$viewWhere, $get, $data['page_item']);
         if (!@$get['page']) {
-            session(['dataSearch'=>$get]);
+            session(['dataSearch'=>[$table=>$get]]);
         }
-        $data['data_search'] = @session('dataSearch');
+        $data['data_search'] = $get;
         session()->put('back_url', url()->full());
         return view('table.'.$data['view_type'], $data);
     }
@@ -201,7 +202,7 @@ class AdminController extends Controller
         if (!$this->service->checkPermissionAction($table, 'view')) {
             $html;
         }
-        if ($parent!=0) {
+        if (@$parent) {
             $models = getModelByTable($table);
             $data = $models->where('act', 1)->where($field, $parent)->orderBy('name', 'asc')->get();
             foreach ($data as $item) {

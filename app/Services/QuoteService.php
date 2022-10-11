@@ -53,6 +53,9 @@ class QuoteService extends BaseService
             case 'q_cartons':
                 $data_action = $this->getDataActionCartonFoam($data, $table);
                 break;
+            case 'q_foams':
+                $data_action = $this->getDataActionCartonFoam($data, $table);
+                break;
             case 'q_silks':
                 $data_action = $this->getDataActionSilk($data);
                 break;

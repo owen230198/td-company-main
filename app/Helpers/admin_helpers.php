@@ -57,12 +57,13 @@ if(!function_exists('getBreadcrumbFull')){
 }
 
 if(!function_exists('getOptionByClass')){
-    function getOptionByClass($class){
+    function getOptionByClass($class, $where = ['act'=>1]){
         $models = getModelByClass($class);
-        $data = $models::where('act', 1)->get()->toArray();
+        $data = $models::where($where)->get()->toArray();
         return $data;
     }
 }
+
 
 if(!function_exists('recursive')){
     function recursive($array, $parent = 0, $level = 0){
@@ -71,6 +72,7 @@ if(!function_exists('recursive')){
             if ($item['parent'] == $parent) {
                 $item['level'] = $level;
                 $data[] = $item;
+                unset($array[$key]);
                 $child = recursive($array, $item['id'], $level + 1);
                 $data = array_merge($data, $child);
             }

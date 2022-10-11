@@ -91,8 +91,8 @@ class AdminService extends BaseService
     public function getDataBaseView($table, $name='')
     {
         $data = $this->getBaseTable($table);
-        $data['page_item'] = isset($data['tableItem']['admin_paginate'])?$data['tableItem']['admin_paginate']:10;
-        $data['view_type'] = isset($data['tableItem']['view_type'])?$data['tableItem']['view_type']:'view';
+        $data['page_item'] = @$data['tableItem']['admin_paginate']??10;
+        $data['view_type'] = @$data['tableItem']['view_type']??'view';
         $data['field_searchs'] = $this->detail_tables->where('table_map', $table)->where('act', 1)->where('search', 1)->orderBy('ord', 'asc')->get();
         $name = @$data['view_type']=='configs'?'Cài đặt':$name;
         $data['title'] = $name.' '.$data['tableItem']['note'];

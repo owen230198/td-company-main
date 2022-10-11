@@ -127,6 +127,29 @@ var ajaxChildOptionByParent = function () {
     });
 };
 
+var tableSelectConfig = function () {
+    $(document).on("change", ".tableSelectAjaxChild", function (event) {
+        event.preventDefault();
+        sChilTable = $(this).data("child-table");
+        sAjaxTarget = $(this).data("child-target");
+        sChildField = $(this).data("child-field");
+        sUrl =
+            "option-child-data/" +
+            sChilTable +
+            "/" +
+            sChildField +
+            "/" +
+            $(this).val();
+        if (sAjaxTarget.length != "") {
+            $.ajax({
+                url: sUrl,
+            }).done(function (shtml) {
+                $("select[name=" + sAjaxTarget + "]").html(shtml);
+            });
+        }
+    });
+};
+
 var selectCustomerAjax = function () {
     form = $(".actionForm");
     cusomerSelect = form.find("select[name=customer_id]");
@@ -266,6 +289,7 @@ $(function () {
     checkMultiRecordModule();
     loadDataPopup();
     ajaxChildOptionByParent();
+    tableSelectConfig();
     selectCustomerAjax();
     selectConfigs();
     dateRangeInputModule();
