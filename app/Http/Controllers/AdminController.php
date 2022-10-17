@@ -1,9 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
-use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Constants\VariableConstant;
 class AdminController extends Controller
 {
     static $viewWhere = array();
@@ -77,13 +76,18 @@ class AdminController extends Controller
         return $data;
     }
 
-    public function insert($table)
+    public function insert(Request $request, $table)
     {
         if (!$this->service->checkPermissionAction($table, 'insert')) {
             return redirect('permission-error');
         }
         $data = $this->getDataActionView($table, 'insert', 'Thêm mới');
-        return view('action.view', $data);
+        if (in_array($table, VariableConstant::ACTION_TABLE_SELF)) {
+            $controller = getObjectByTable($table);
+            return $controller->insert($request, $data);
+        }else{
+            return view('action.view', $data);
+        }
     }
 
     public function update($table, $id)

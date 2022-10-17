@@ -11,7 +11,7 @@
  Target Server Version : 100424
  File Encoding         : 65001
 
- Date: 11/10/2022 23:08:12
+ Date: 17/10/2022 23:45:32
 */
 
 SET NAMES utf8mb4;
@@ -13251,7 +13251,6 @@ CREATE TABLE `n_tables`  (
   `update` tinyint(4) NULL DEFAULT NULL,
   `remove` tinyint(4) NULL DEFAULT NULL,
   `copy` tinyint(4) NULL DEFAULT NULL,
-  `link_insert` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE
@@ -13260,24 +13259,24 @@ CREATE TABLE `n_tables`  (
 -- ----------------------------
 -- Records of n_tables
 -- ----------------------------
-INSERT INTO `n_tables` VALUES (1, 'n_users', 'Quản trị viên', 0, 'n_group_users', 'n_users', 0, 10, 10, 'view', NULL, 1, 1, 1, 1, '', '2022-10-11 22:06:30', '2022-10-11 22:06:30');
-INSERT INTO `n_tables` VALUES (2, 'n_group_users', 'Nhóm quản trị', 0, 'n_group_uers', 'n_group_uers', 0, 10, 10, 'view', NULL, 1, 1, 1, 1, '', '2022-10-11 22:06:30', '2022-10-11 22:06:30');
-INSERT INTO `n_tables` VALUES (3, 'n_roles', 'Phân quyền', 0, 'n_roles', 'n_roles', 0, 10, 10, 'view', NULL, 1, 1, 1, 1, '', '2022-10-11 22:06:30', '2022-10-11 22:06:30');
-INSERT INTO `n_tables` VALUES (4, 'files', 'Kho Lưu trữ', 0, 'files', 'files', 0, 24, 10, 'media', NULL, 1, 1, 1, 1, '', '2022-10-11 22:06:30', '2022-10-11 22:06:30');
-INSERT INTO `n_tables` VALUES (5, 'q_configs', 'Thông tin chung & Giá thành', 0, 'q_configs', 'configs', 0, 100, 10, 'configs', NULL, 1, 1, 1, 1, '', '2022-10-11 22:06:30', '2022-10-11 22:06:30');
-INSERT INTO `n_tables` VALUES (6, 'customers', 'Khách hàng', 0, 'customers', 'customers', 0, 10, 10, 'view', NULL, 1, 1, 1, 1, '', '2022-10-11 22:06:30', '2022-10-11 22:06:30');
-INSERT INTO `n_tables` VALUES (7, 'quotes', 'Báo giá', 0, 'quotes', 'quotes', 0, 10, 10, 'view', 'quote_', 1, 1, 1, 1, '', '2022-10-11 22:06:30', '2022-10-11 22:06:30');
-INSERT INTO `n_tables` VALUES (8, 'q_papers', 'Tờ in', 7, 'q_papers', 'q_papers', 0, 10, 10, 'view', 'q_management_', 1, 1, 1, 1, '', '2022-10-11 22:06:30', '2022-10-11 22:06:30');
-INSERT INTO `n_tables` VALUES (9, 'q_devices', 'Thiết bị & Chi phí', 0, 'q_devices', 'q_devices', 0, 10, 10, 'view', '', 1, 1, 1, 1, '', '2022-10-11 22:06:30', '2022-10-11 22:06:30');
-INSERT INTO `n_tables` VALUES (10, 'q_laminate_materals', 'Chất liệu cán màng', 0, 'q_laminate_materals', 'q_laminate_materals', 0, 10, 10, 'view', '', 1, 1, 1, 1, '', '2022-10-11 22:06:30', '2022-10-11 22:06:30');
-INSERT INTO `n_tables` VALUES (11, 'q_printer_devices', 'Máy in & chi phí', 0, 'q_printer_devices', 'q_printer_devices', 0, 10, 10, 'view', '', 1, 1, 1, 1, '', '2022-10-11 22:06:30', '2022-10-11 22:06:30');
-INSERT INTO `n_tables` VALUES (12, 'q_cartons', 'Vật tư cartons', 7, 'q_cartons', 'q_cartons', 0, 10, 10, 'view', 'q_management_', 1, 1, 1, 1, '', '2022-10-11 22:06:30', '2022-10-11 22:06:30');
-INSERT INTO `n_tables` VALUES (13, 'q_supplies', 'Vật tư tham gia sx', 0, 'q_supplies', 'q_supplies', 0, 10, 10, 'view', '', 1, 1, 1, 1, '', '2022-10-11 22:06:30', '2022-10-11 22:06:30');
-INSERT INTO `n_tables` VALUES (14, 'q_supply_prices', 'Đơn giá vật tư', 0, 'q_supply_prices', 'q_supply_prices', 0, 20, 10, 'view', NULL, 1, 1, 1, 1, '', '2022-10-11 22:06:30', '2022-10-11 22:06:30');
-INSERT INTO `n_tables` VALUES (15, 'q_foams', 'Mút xốp định hình', 7, 'q_foams', 'q_foams', 0, 10, 10, 'view', 'q_management_', 1, 1, 1, 1, '', '2022-10-11 22:06:30', '2022-10-11 22:06:30');
-INSERT INTO `n_tables` VALUES (16, 'q_silks', 'Vật tư lụa', 7, 'q_silks', 'q_silks', 0, 10, 10, 'view', 'q_management_', 1, 1, 1, 1, '', '2022-10-11 22:06:30', '2022-10-11 22:06:30');
-INSERT INTO `n_tables` VALUES (17, 'q_finishes', 'Chi phí bồi & hoàn thiện', 7, 'q_finishes', 'q_finishes', 0, 10, 10, 'view', 'q_management_', 1, 1, 1, 1, '', '2022-10-11 22:06:30', '2022-10-11 22:06:30');
-INSERT INTO `n_tables` VALUES (18, 'orders', 'Đơn hàng', 0, 'orders', 'orders', 0, 20, 0, 'view', NULL, 1, 1, 1, 0, 'insert-orders', '2022-10-11 22:06:33', '2022-10-11 22:06:33');
+INSERT INTO `n_tables` VALUES (1, 'n_users', 'Quản trị viên', 0, 'n_group_users', 'n_users', 0, 10, 10, 'view', NULL, 1, 1, 1, 1, '2022-10-11 22:06:30', '2022-10-11 22:06:30');
+INSERT INTO `n_tables` VALUES (2, 'n_group_users', 'Nhóm quản trị', 0, 'n_group_uers', 'n_group_uers', 0, 10, 10, 'view', NULL, 1, 1, 1, 1, '2022-10-11 22:06:30', '2022-10-11 22:06:30');
+INSERT INTO `n_tables` VALUES (3, 'n_roles', 'Phân quyền', 0, 'n_roles', 'n_roles', 0, 10, 10, 'view', NULL, 1, 1, 1, 1, '2022-10-11 22:06:30', '2022-10-11 22:06:30');
+INSERT INTO `n_tables` VALUES (4, 'files', 'Kho Lưu trữ', 0, 'files', 'files', 0, 24, 10, 'media', NULL, 1, 1, 1, 1, '2022-10-11 22:06:30', '2022-10-11 22:06:30');
+INSERT INTO `n_tables` VALUES (5, 'q_configs', 'Thông tin chung & Giá thành', 0, 'q_configs', 'configs', 0, 100, 10, 'configs', NULL, 1, 1, 1, 1, '2022-10-11 22:06:30', '2022-10-11 22:06:30');
+INSERT INTO `n_tables` VALUES (6, 'customers', 'Khách hàng', 0, 'customers', 'customers', 0, 10, 10, 'view', NULL, 1, 1, 1, 1, '2022-10-11 22:06:30', '2022-10-11 22:06:30');
+INSERT INTO `n_tables` VALUES (7, 'quotes', 'Báo giá', 0, 'quotes', 'quotes', 0, 10, 10, 'view', 'quote_', 1, 1, 1, 1, '2022-10-11 22:06:30', '2022-10-11 22:06:30');
+INSERT INTO `n_tables` VALUES (8, 'q_papers', 'Tờ in', 7, 'q_papers', 'q_papers', 0, 10, 10, 'view', 'q_management_', 1, 1, 1, 1, '2022-10-11 22:06:30', '2022-10-11 22:06:30');
+INSERT INTO `n_tables` VALUES (9, 'q_devices', 'Thiết bị & Chi phí', 0, 'q_devices', 'q_devices', 0, 10, 10, 'view', '', 1, 1, 1, 1, '2022-10-11 22:06:30', '2022-10-11 22:06:30');
+INSERT INTO `n_tables` VALUES (10, 'q_laminate_materals', 'Chất liệu cán màng', 0, 'q_laminate_materals', 'q_laminate_materals', 0, 10, 10, 'view', '', 1, 1, 1, 1, '2022-10-11 22:06:30', '2022-10-11 22:06:30');
+INSERT INTO `n_tables` VALUES (11, 'q_printer_devices', 'Máy in & chi phí', 0, 'q_printer_devices', 'q_printer_devices', 0, 10, 10, 'view', '', 1, 1, 1, 1, '2022-10-11 22:06:30', '2022-10-11 22:06:30');
+INSERT INTO `n_tables` VALUES (12, 'q_cartons', 'Vật tư cartons', 7, 'q_cartons', 'q_cartons', 0, 10, 10, 'view', 'q_management_', 1, 1, 1, 1, '2022-10-11 22:06:30', '2022-10-11 22:06:30');
+INSERT INTO `n_tables` VALUES (13, 'q_supplies', 'Vật tư tham gia sx', 0, 'q_supplies', 'q_supplies', 0, 10, 10, 'view', '', 1, 1, 1, 1, '2022-10-11 22:06:30', '2022-10-11 22:06:30');
+INSERT INTO `n_tables` VALUES (14, 'q_supply_prices', 'Đơn giá vật tư', 0, 'q_supply_prices', 'q_supply_prices', 0, 20, 10, 'view', NULL, 1, 1, 1, 1, '2022-10-11 22:06:30', '2022-10-11 22:06:30');
+INSERT INTO `n_tables` VALUES (15, 'q_foams', 'Mút xốp định hình', 7, 'q_foams', 'q_foams', 0, 10, 10, 'view', 'q_management_', 1, 1, 1, 1, '2022-10-11 22:06:30', '2022-10-11 22:06:30');
+INSERT INTO `n_tables` VALUES (16, 'q_silks', 'Vật tư lụa', 7, 'q_silks', 'q_silks', 0, 10, 10, 'view', 'q_management_', 1, 1, 1, 1, '2022-10-11 22:06:30', '2022-10-11 22:06:30');
+INSERT INTO `n_tables` VALUES (17, 'q_finishes', 'Chi phí bồi & hoàn thiện', 7, 'q_finishes', 'q_finishes', 0, 10, 10, 'view', 'q_management_', 1, 1, 1, 1, '2022-10-11 22:06:30', '2022-10-11 22:06:30');
+INSERT INTO `n_tables` VALUES (18, 'orders', 'Đơn hàng', 0, 'orders', 'orders', 0, 20, 0, 'view', NULL, 1, 1, 1, 0, '2022-10-11 22:06:33', '2022-10-11 22:06:33');
 
 -- ----------------------------
 -- Table structure for n_users

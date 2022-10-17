@@ -42,6 +42,15 @@ if (! function_exists('getModelByTable')) {
     }
 }
 
+if (!function_exists('getObjectByTable')) {
+    function getObjectByTable($table)
+    {
+        $class = getClassByTable($table);
+        $useObject = '\App\Http\Controllers\\'.$class.'\\'.$class.'Controller';
+        return new $useObject;
+    }
+}
+
 if (! function_exists('getNameByDefaultData')) {
     function getNameByDefaultData($default_data, $value)
     {
