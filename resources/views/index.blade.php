@@ -63,6 +63,7 @@
     <script src="{{ asset('frontend/admin/script/loading.js') }}"></script>
     <script src="{{ asset('frontend/admin/script/theme.js') }}"></script>
     <script src="{{ asset('frontend/admin/script/script.js') }}"></script>
+    @yield('script')
     <script>
         @if (Session::has('message'))
             toastr.options = {
@@ -96,7 +97,6 @@
             toastr.warning("{{ session('warning') }}");
         @endif
     </script>
-    @yield('script')
 </body>
 
 </html>

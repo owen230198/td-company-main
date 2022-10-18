@@ -12,6 +12,10 @@ html {
     background: #f1f4f9;
 }
 
+.d_flex{
+    display: flex;
+}
+
 .form-control,
 .select2-container--default .select2-selection--single {
     height: 30px;

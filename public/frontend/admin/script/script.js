@@ -29,9 +29,14 @@ var checkBoxModule = function () {
         "change",
         ".checkbox_module input[type=checkbox]",
         function (event) {
+            event.preventDefault();
             eParent = $(this).closest(".checkbox_module");
             val = $(this).is(":checked") ? 1 : 0;
-            eParent.find("input[type=hidden]").val(val);
+            eInutHidden = eParent.find("input[type=hidden]")
+            eInutHidden.val(val);
+            if (eInutHidden.attr('name')=='vat') {
+                vatCheckBoxModule(val);
+            }
         }
     );
 };

@@ -6,6 +6,7 @@ use App\Http\Controllers\DevController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Quote\QuoteController;
+use App\Http\Controllers\Order\OrderController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -50,4 +51,7 @@ Route::middleware(['checkLogin'])->group(function () {
 	Route::post('do-insert-detail/{table}/{quote_id}', [QuoteController::class, 'doInsertDetail']);
 	Route::post('do-update-detail/{table}/{quote_id}/{id}', [QuoteController::class, 'doUpdateDetail']);
 	Route::get('file-details/{id}', [QuoteController::class, 'fileDetail']);
+
+	//orders routes
+	Route::post('insert-orders', [OrderController::class, 'insert']);
 });

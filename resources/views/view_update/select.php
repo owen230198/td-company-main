@@ -12,8 +12,9 @@
 		$value = @$data[$name]?$data[$name]:0 ;
 	}
 ?>
+@dd(configs);
 <div class="d-flex align-items-center w-100">
-	<select name="<?= $name ?>" class="form-control">
+	<select name="<?= $name ?>" class="form-control{{ @$configs['searchbox']?'select_config':'' }}">
 		<option value="0">Không xác định</option>
 		<?php foreach ($list_option as $key => $option): ?>
 			<?php if ($parent['table']!=null): ?>

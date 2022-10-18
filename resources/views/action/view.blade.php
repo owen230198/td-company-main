@@ -11,16 +11,16 @@
         </li>
         @endforeach
       </ul>
-      <div class="tab-content px-3 py-4 bg_white content_form" id="myTabContent">
+      <div class="tab-content px-2 py-3 bg_white content_form" id="myTabContent">
         @foreach ($regions as $key => $c_region)
         <div class="tab-pane fade {{ $key==0?'show active':'' }}" id="{{ $c_region['id'] }}" role="tabpanel" aria-labelledby="{{ $c_region['id'] }}-tab">
           @foreach ($field_list as $field)
-          @if ($field['region']==$c_region['id'])
-            <div class="form-group d-flex mb-4 pb-4 border_bot_eb">
-              <label class="mb-0 mr-3 min_150 fs-13 text-capitalize">{{ $field['note'] }}</label>
-              @include('view_update.'.$field['view_type'].'',['field'=>$field, 'data'=>@$dataitem?$dataitem:array()])
-            </div>
-          @endif
+            @if ($field['region']==$c_region['id'])
+              <div class="form-group d-flex mb-4 pb-4 border_bot_eb">
+                <label class="mb-0 mr-3 min_150 fs-13 text-capitalize">{{ $field['note'] }}</label>
+                @include('view_update.'.$field['view_type'].'',['field'=>$field, 'data'=>@$dataitem?$dataitem:array()])
+              </div>
+            @endif
           @endforeach
         </div>
         @endforeach

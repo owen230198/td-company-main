@@ -11,7 +11,7 @@
  Target Server Version : 100424
  File Encoding         : 65001
 
- Date: 17/10/2022 23:45:32
+ Date: 19/10/2022 01:15:55
 */
 
 SET NAMES utf8mb4;
@@ -13099,6 +13099,17 @@ INSERT INTO `n_detail_tables` VALUES (109, 'company_name', 0, NULL, 'Tên công 
 INSERT INTO `n_detail_tables` VALUES (110, 'print_model', 0, NULL, 'Mẫu thiết kế', 'select', 'quotes', 0, 1, 1, 0, NULL, '{\r\n \"data\": {\r\n   \"table\": null,\r\n    \"option\":{\r\n    \"1\":\"file đã sản xuất\",\r\n    \"2\":\"File thiết kế mới\"\r\n   }\r\n },\r\n \"config\": {\r\n  \"searchbox\": 0\r\n }\r\n}', 10, 3, 1, '2022-09-30 23:00:39', '2022-09-30 23:00:39');
 INSERT INTO `n_detail_tables` VALUES (111, 'size', 0, NULL, 'Kích thước sản phẩm', 'text', 'quotes', 0, 1, 1, 0, NULL, '', 10, 4, 1, '2022-09-30 23:00:41', '2022-09-30 23:00:41');
 INSERT INTO `n_detail_tables` VALUES (112, 'status', 0, NULL, 'Trạng thái', 'select', 'quotes', 1, 1, 1, 1, NULL, '{\r\n \"data\": {\r\n   \"table\": null,\r\n    \"option\":{\r\n    \"not_send\":\"Chưa gửi\",\r\n    \"not_acept\":\"Chờ KH duyệt\",\r\n    \"acepted\":\"Khách đã duyệt\"\r\n   }\r\n },\r\n \"config\": {\r\n  \"searchbox\": 0\r\n }\r\n}', 10, 0, 1, '2022-10-11 15:50:06', '2022-10-11 15:50:06');
+INSERT INTO `n_detail_tables` VALUES (113, 'id', 0, NULL, 'ID', 'text', 'orders', 0, NULL, 0, 0, NULL, NULL, 0, 0, 1, '2022-10-18 22:47:37', '2022-10-18 22:47:37');
+INSERT INTO `n_detail_tables` VALUES (114, 'name', 0, NULL, 'Tên đơn hàng', 'text', 'orders', 1, 1, 1, 1, NULL, NULL, 0, 0, 1, '2022-10-18 22:47:37', '2022-10-18 22:47:37');
+INSERT INTO `n_detail_tables` VALUES (115, 'qty', 0, 'number', 'Số lượng sản phẩm', 'money', 'orders', 1, 1, 1, 0, NULL, NULL, 0, 0, 1, '2022-10-18 23:59:05', '2022-10-18 23:59:05');
+INSERT INTO `n_detail_tables` VALUES (116, 'customer_id', 0, NULL, 'Khách hàng', 'select', 'orders', 1, 1, 1, 1, NULL, '{\r\n \"data\": {\r\n  \"source\": \"database\",\r\n  \"table\": \"Customer\",\r\n  \"select\": \"id,name\",\r\n  \"field\": \"parent\"\r\n },\r\n \"config\": {\r\n  \"searchbox\": 1\r\n }\r\n}', 9, 0, 1, '2022-10-18 22:51:19', '2022-10-18 22:51:19');
+INSERT INTO `n_detail_tables` VALUES (117, 'order_date', 0, NULL, 'Ngày đặt', 'date_time', 'orders', 1, 1, 1, 1, NULL, '', 0, 0, 1, '2022-10-18 23:02:25', '2022-10-18 23:02:25');
+INSERT INTO `n_detail_tables` VALUES (118, 'submit_date', 0, NULL, 'Ngày trả hàng', 'date_time', 'orders', 1, 1, 1, 1, NULL, '', 0, 0, 1, '2022-10-18 23:02:27', '2022-10-18 23:02:27');
+INSERT INTO `n_detail_tables` VALUES (119, 'vat', 0, NULL, 'VAT (?)', 'checkbox', 'orders', 1, 1, 1, 0, NULL, NULL, 0, 0, 1, '2022-10-18 23:21:15', '2022-10-18 23:21:15');
+INSERT INTO `n_detail_tables` VALUES (120, 'total_cost', 0, 'number', 'Tổng tiền', 'money', 'orders', 1, 0, 1, 0, NULL, NULL, 0, 0, 1, '2022-10-18 23:02:33', '2022-10-18 23:02:33');
+INSERT INTO `n_detail_tables` VALUES (121, 'advance_cost', 0, 'number', 'Tạm ứng', 'money', 'orders', 1, 0, 0, 0, NULL, NULL, 0, 0, 1, '2022-10-18 23:02:34', '2022-10-18 23:02:34');
+INSERT INTO `n_detail_tables` VALUES (122, 'rest_cost', 0, 'number', 'Còn lại', 'money', 'orders', 1, 0, 0, 0, NULL, NULL, 0, 0, 1, '2022-10-18 23:02:36', '2022-10-18 23:02:36');
+INSERT INTO `n_detail_tables` VALUES (123, 'created_by', 0, NULL, 'Tạo bởi', 'select', 'orders', 1, 0, 0, 1, NULL, '{\r\n \"data\": {\r\n  \"source\": \"database\",\r\n  \"table\": \"User\",\r\n  \"select\": \"id,name\",\r\n  \"field\": \"parent\"\r\n },\r\n \"config\": {\r\n  \"searchbox\": 1\r\n }\r\n}', 0, 0, 1, '2022-10-18 23:02:40', '2022-10-18 23:02:40');
 
 -- ----------------------------
 -- Table structure for n_group_users
@@ -13312,12 +13323,15 @@ INSERT INTO `n_users` VALUES (16, 'busn2', 'e10adc3949ba59abbe56e057f20f883e', '
 DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders`  (
   `id` int(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `qty` bigint(20) NULL DEFAULT NULL,
   `customer_id` int(10) NULL DEFAULT NULL,
   `created_by` int(10) NULL DEFAULT NULL,
   `order_date` datetime(0) NULL DEFAULT NULL,
   `submit_date` datetime(0) NULL DEFAULT NULL,
   `product_cost` int(20) NULL DEFAULT NULL,
-  `vat_cost` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `vat_cost` int(10) NULL DEFAULT NULL,
+  `vat` tinyint(4) NULL DEFAULT NULL,
   `total_cost` bigint(20) NULL DEFAULT NULL,
   `advance_cost` bigint(20) NULL DEFAULT NULL,
   `rest_cost` bigint(20) NULL DEFAULT NULL,

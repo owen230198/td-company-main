@@ -7,4 +7,5 @@
 		$value = isset($data[$name])?$data[$name]:''; 
 	}
 @endphp
-<input type="{{ @$field['type_input']?$field['type_input']:'text' }}" class="form-control" name="{{ $name }}" value="{{ $value }}" {{ @$field['required']&&$field['required']==1?'required':'' }} {{ @$field['disable_field']&&$field['disable_field']==1?'disabled':'' }}>
+<input type="{{ @$field['type_input']?$field['type_input']:'text' }}" class="form-control" 
+name="{{ @$field['table_map']=='orders'?'order['.$name.']':$name }}" value="{{ $value }}" {{ @$field['required']&&$field['required']==1?'required':'' }} {{ @$field['disable_field']&&$field['disable_field']==1?'disabled':'' }}>

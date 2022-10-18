@@ -14,11 +14,11 @@
 	}
 @endphp
 <div class="d-flex align-items-center w-100">
-	<select name="{{ $name }}" class="form-control {{ @$config['searchbox']?'select_config':'' }} {{ @$ajaxChild['ajax-child']?'tableSelectAjaxChild':'' }}"
+	<select name="{{ @$field['table_map']=='orders'?'order['.$name.']':$name }}" class="form-control {{ @$configs['searchbox']?'select_config':'' }} {{ @$ajaxChild['ajax-child']?'tableSelectAjaxChild':'' }}"
 	{{ @$ajaxChild['table']?'data-child-table='.$ajaxChild['table']:'' }}
 	{{ @$ajaxChild['target']?'data-child-target='.$ajaxChild['target']:'' }}
 	{{ @$ajaxChild['field']?'data-child-field='.$ajaxChild['field']:'' }}>
-		@if ($name=='customer_id')
+		@if ($name=='customer_id' && @$field['table_map'=='quotes'])
 			<option value="0">Khách hàng mới</option>
 		@else
 			<option value="0">Không xác định</option>

@@ -9,10 +9,12 @@ class OrderController extends Controller
         parent::__construct();
     }
 
-    public function insert($request, $data = array())
+    public function insert(Request $request, $data = array())
     {
         if (!$request->isMethod('POST')) {
             return view('orders.insert', $data);    
+        }else{
+            dd($request->all());
         }   
     }
 }
