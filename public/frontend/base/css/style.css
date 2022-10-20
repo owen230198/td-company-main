@@ -237,6 +237,14 @@ textarea{
   pointer-events: none;
 }
 
+.font_inter{
+  font-family: inter;
+}
+
+.font_bold{
+  font-weight: bold;
+}
+
 .breadcrumb li:after{
   position: absolute;
   content: '\f105';
@@ -299,10 +307,16 @@ input[type=time]{
 
 .disable_field{
   pointer-events: none;
+  background:#686868;
+  color:#ffffff;
 }
 
-.min_25{
+.w_125{
+  width: 125px;
   min-width: 125px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .flex_100{

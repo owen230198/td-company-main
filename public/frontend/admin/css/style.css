@@ -558,6 +558,16 @@ select.form-control:not([size]):not([multiple]) {
     page-break-after: always;
 }
 
+.list_product_order{
+    border-top: 2px solid #000020;
+}
+
+.command_title{
+    background: -webkit-linear-gradient(90deg, #CCCCCC, #FFFFFF) repeat scroll 0 0 transparent;
+    padding: 5px;
+    box-shadow: 3px 3px 6px #000020;
+}
+
 @media (min-width: 576px) {
     .guideModal .modal-dialog {
         max-width: 725px;
@@ -601,7 +611,7 @@ select.form-control:not([size]):not([multiple]) {
     }
 
     .station-richmenu-main__ttl {
-        font-size: 20px;
+        font-size: 18px;
     }
 
     .q_stage_btn {

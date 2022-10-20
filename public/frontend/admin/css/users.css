@@ -22,8 +22,8 @@ body {
     outline: none;
 }
 .station-richmenu-main__btn img {
-    width: 35px;
-    max-height: 35px;
+    width: 30px;
+    max-height: 30px;
 }
 .station-richmenu-main__btn:focus {
     border: none;

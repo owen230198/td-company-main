@@ -34,7 +34,7 @@ var checkBoxModule = function () {
             val = $(this).is(":checked") ? 1 : 0;
             eInutHidden = eParent.find("input[type=hidden]")
             eInutHidden.val(val);
-            if (eInutHidden.attr('name')=='vat') {
+            if (eInutHidden.attr('name')=='order[vat]') {
                 vatCheckBoxModule(val);
             }
         }
