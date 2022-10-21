@@ -19,7 +19,7 @@
                   @include('orders.list_products')
                 </div>
             </div>
-            <div class="group_btn_action_form p-1">
+            <div class="group_btn_action_form p-1 mt-3">
                 <button type="submit" class="station-richmenu-main-btn-area">
                     <i class="fa fa-check mr-2 fs-14" aria-hidden="true"></i>Hoàn tất
                 </button>
