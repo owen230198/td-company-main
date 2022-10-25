@@ -4,19 +4,21 @@
         <form action="insert-orders" method="POST" class="actionForm" enctype="multipart/form-data"
             data-table-name="{{ @$data_table_name ? $data_table_name : $tableItem['name'] }}">
             @csrf
-            <div class="form_order_action row justify-content-center">
-                @foreach ($field_list as $field)
-                    <div class="form-group d-flex mb-3 pb-3 border_bot_eb col-4">
-                        <label class="mb-0 mr-3 w_125 fs-13 text-capitalize">{{ $field['note'] }}</label>
-                        @include('view_update.' . $field['view_type'] . '', [
-                            'field' => $field,
-                            'data' => @$dataitem ? $dataitem : [],
-                        ])
-                    </div>
-                @endforeach
-                @include('orders.field_actions')
-                <div class="ajax_product_orders mt-4 pt-4 list_product_order col-12">
-                  @include('orders.list_products')
+            <div class="form_order_action">
+                <div class="order_base_input row justify-content-center">
+                    @foreach ($field_list as $field)
+                        <div class="form-group d-flex mb-3 pb-3 border_bot_eb col-4">
+                            <label class="mb-0 mr-3 w_125 fs-13 text-capitalize">{{ $field['note'] }}</label>
+                            @include('view_update.' . $field['view_type'] . '', [
+                                'field' => $field,
+                                'data' => @$dataitem ? $dataitem : [],
+                            ])
+                        </div>
+                    @endforeach
+                    @include('orders.field_actions')
+                </div>
+                <div class="ajax_product_orders mt-4 pt-4 list_product_order">
+                  
                 </div>
             </div>
             <div class="group_btn_action_form p-1 mt-3">

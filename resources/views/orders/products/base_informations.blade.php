@@ -1,11 +1,12 @@
-<div class="row">
+<div class="row baseInfoProductItem">
     <div class="form-group d-flex mb-3 pb-3 border_bot_eb col-4">
         <label class="mb-0 mr-3 w_125 fs-13 text-capitalize">Tên sản phẩm</label>
-        <input type="text" class="form-control" name="product[0]['name']" value="">
+        <input type="text" class="form-control nameProductInput" data-label="pro-{{ $key }}-label" 
+        name="product[{{ $key }}][name]" value="{{ $proName.' '. $key+1 }}">
     </div>
     <div class="form-group d-flex mb-3 pb-3 border_bot_eb col-4">
         <label class="mb-0 mr-3 w_125 fs-13 text-capitalize">Nhóm sản phẩm</label>
-        <select name="product[0]['product_category_id']" class="form-control select_config">
+        <select name="product[{{ $key }}][product_category_id]" class="form-control select_config">
             <option value="">Tất cả danh mục</option>
             <optgroup label="Hàng đặt">
                 <option value="">___Hộp cứng</option>
@@ -27,22 +28,22 @@
     </div>
     <div class="form-group d-flex mb-3 pb-3 border_bot_eb col-4">
         <label class="mb-0 mr-3 w_125 fs-13 text-capitalize">Số mặt thiết kế</label>
-        <input type="number" class="form-control" name="product[0]['num_face_design']" value="" min="1">
+        <input type="number" class="form-control" name="product[{{ $key }}][num_face_design]" value="" min="1">
     </div>
     <div class="form-group d-flex mb-3 pb-3 border_bot_eb col-4">
         <label class="mb-0 mr-3 w_125 fs-13 text-capitalize">SL thành phẩm</label>
-        <input type="number" class="form-control" name="product[0]['qty']" value="" min="0">
+        <input type="number" class="form-control proItemQtyInput" name="product[{{ $key }}][qty]" value="0" min="0">
     </div>
     <div class="form-group d-flex mb-3 pb-3 border_bot_eb col-4">
         <label class="mb-0 mr-3 w_125 fs-13 text-capitalize">Đơn giá</label>
-        <input type="number" class="form-control" name="product[0]['price']" value="" min="0">
+        <input type="number" class="form-control proItemPriceInput" name="product[{{ $key }}][price]" value="0" min="0">
     </div>
     <div class="form-group d-flex mb-3 pb-3 border_bot_eb col-4">
         <label class="mb-0 mr-3 w_125 fs-13 text-capitalize">Thành tiền</label>
-        <input type="number" class="form-control disable_field" name="product[0]['total_cost']" value="">
+        <input type="number" class="form-control disable_field proItemTotalInput" name="product[{{ $key }}][total_cost]" value="0">
     </div>
     <div class="form-group d-flex border_bot_eb col-12">
         <label class="mb-0 mr-3 w_125 fs-13 text-capitalize align-items-start">Ghi chú về sản phẩm</label>
-        <textarea class="form-control" name="product[0]['note']"></textarea>
+        <textarea class="form-control" name="product[{{ $key }}][note]"></textarea>
     </div>
 </div>

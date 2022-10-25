@@ -53,5 +53,5 @@ Route::middleware(['checkLogin'])->group(function () {
 	Route::get('file-details/{id}', [QuoteController::class, 'fileDetail']);
 
 	//orders routes
-	Route::post('insert-orders', [OrderController::class, 'insert']);
+	Route::get('set-quantity-order-products', [OrderController::class, 'setListProductView']);
 });

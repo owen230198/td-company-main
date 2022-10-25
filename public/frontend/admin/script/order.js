@@ -37,7 +37,67 @@ var moduleChangePrintQuantity = function(){
     });
 }
 
+var setListProductViewModule = function()
+{
+    $(document).on('change', '.order_base_input input[name="order[qty]"]', function(event){
+        event.preventDefault();
+        ordQty = $(this).val();
+        ordName = $(this).closest('.order_base_input').find('input[name="order[name]"]').val();
+        $.ajax({
+            url: 'set-quantity-order-products',
+            type: 'GET',
+            data: {qty: ordQty, name: ordName}
+        })
+        .done(function(html){
+            $('.ajax_product_orders').html(html);
+        })  
+    });
+
+    $(document).on('change', 'input.nameProductInput', function(event){
+        event.preventDefault();
+        proNameSet = $(this).val();
+        labelClass = $(this).data('label');
+        $('.'+labelClass).text(proNameSet);
+    });
+}
+
+var configProductItemSetOrderCost = function()
+{
+    $(document).on('change', '.proItemQtyInput', function(event){
+        event.preventDefault();
+        proItemQty = parseInt($(this).val());
+        proItemModule = $(this).closest('.baseInfoProductItem');
+        proItemPriceInput = proItemModule.find('input.proItemPriceInput');
+        proItemPrice = parseInt(proItemPriceInput.val());
+        proItemTotalInput = proItemModule.find('input.proItemTotalInput');
+        setCostItemAndOrder(proItemQty, proItemPrice, proItemTotalInput);
+    });
+    $(document).on('change', '.proItemPriceInput', function(event){
+        event.preventDefault();
+        proItemPrice = parseInt($(this).val());
+        proItemModule = $(this).closest('.baseInfoProductItem');
+        proItemQtyInput = proItemModule.find('input.proItemQtyInput');
+        proItemQty = parseInt(proItemQtyInput.val());
+        proItemTotalInput = proItemModule.find('input.proItemTotalInput');
+        setCostItemAndOrder(proItemQty, proItemPrice, proItemTotalInput);
+    });
+}
+
+var setCostItemAndOrder = function(qty, price, itemInput){
+    itemCost = qty*price;
+    itemInput.val(itemCost);
+    proOrderCostInput = $('input[name="order[product_cost]"]');
+    proOrderCost = 0;
+    $('.baseInfoProductItem').each(function(){
+        proItemTotalCost = parseInt($(this).find('.proItemTotalInput').val());
+        proOrderCost +=  proItemTotalCost;
+    });
+    proOrderCostInput.val(proOrderCost);
+}
+
 $(function(){
     showUploadDesignFileButton();
     moduleChangePrintQuantity();
+    setListProductViewModule();
+    configProductItemSetOrderCost();
 });

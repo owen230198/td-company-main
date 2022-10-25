@@ -11,7 +11,7 @@
  Target Server Version : 100424
  File Encoding         : 65001
 
- Date: 21/10/2022 00:29:21
+ Date: 26/10/2022 00:18:06
 */
 
 SET NAMES utf8mb4;
@@ -13103,13 +13103,13 @@ INSERT INTO `n_detail_tables` VALUES (113, 'id', 0, NULL, 'ID', 'text', 'orders'
 INSERT INTO `n_detail_tables` VALUES (114, 'name', 0, NULL, 'Tên đơn hàng', 'text', 'orders', 1, 1, 1, 1, NULL, NULL, 0, 0, 1, '2022-10-18 22:47:37', '2022-10-18 22:47:37');
 INSERT INTO `n_detail_tables` VALUES (115, 'qty', 0, 'number', 'Số lượng sản phẩm', 'money', 'orders', 1, 1, 1, 0, NULL, NULL, 0, 0, 1, '2022-10-18 23:59:05', '2022-10-18 23:59:05');
 INSERT INTO `n_detail_tables` VALUES (116, 'customer_id', 0, NULL, 'Khách hàng', 'select', 'orders', 1, 1, 1, 1, NULL, '{\r\n \"data\": {\r\n  \"source\": \"database\",\r\n  \"table\": \"Customer\",\r\n  \"select\": \"id,name\",\r\n  \"field\": \"parent\"\r\n },\r\n \"config\": {\r\n  \"searchbox\": 1\r\n }\r\n}', 9, 0, 1, '2022-10-18 22:51:19', '2022-10-18 22:51:19');
-INSERT INTO `n_detail_tables` VALUES (117, 'order_date', 0, NULL, 'Ngày đặt', 'date_time', 'orders', 1, 1, 1, 1, NULL, '', 0, 0, 1, '2022-10-18 23:02:25', '2022-10-18 23:02:25');
-INSERT INTO `n_detail_tables` VALUES (118, 'submit_date', 0, NULL, 'Ngày trả hàng', 'date_time', 'orders', 1, 1, 1, 1, NULL, '', 0, 0, 1, '2022-10-18 23:02:27', '2022-10-18 23:02:27');
-INSERT INTO `n_detail_tables` VALUES (119, 'vat', 0, NULL, 'VAT (?)', 'checkbox', 'orders', 1, 1, 1, 0, NULL, NULL, 0, 0, 1, '2022-10-18 23:21:15', '2022-10-18 23:21:15');
+INSERT INTO `n_detail_tables` VALUES (117, 'order_date', 0, NULL, 'Ngày đặt', 'date_time', 'orders', 0, 1, 1, 1, NULL, '', 0, 0, 1, '2022-10-25 21:56:55', '2022-10-25 21:56:55');
+INSERT INTO `n_detail_tables` VALUES (118, 'submit_date', 0, NULL, 'Ngày trả hàng', 'date_time', 'orders', 0, 1, 1, 1, NULL, '', 0, 0, 1, '2022-10-25 21:56:55', '2022-10-25 21:56:55');
+INSERT INTO `n_detail_tables` VALUES (119, 'vat', 0, NULL, 'VAT (?)', 'checkbox', 'orders', 0, 1, 1, 0, NULL, NULL, 0, 0, 1, '2022-10-25 21:57:17', '2022-10-25 21:57:17');
 INSERT INTO `n_detail_tables` VALUES (120, 'total_cost', 0, 'number', 'Tổng tiền', 'money', 'orders', 1, 0, 1, 0, NULL, NULL, 0, 0, 1, '2022-10-18 23:02:33', '2022-10-18 23:02:33');
-INSERT INTO `n_detail_tables` VALUES (121, 'advance_cost', 0, 'number', 'Tạm ứng', 'money', 'orders', 1, 0, 0, 0, NULL, NULL, 0, 0, 1, '2022-10-18 23:02:34', '2022-10-18 23:02:34');
+INSERT INTO `n_detail_tables` VALUES (121, 'advance_cost', 0, 'number', 'Tạm ứng', 'money', 'orders', 0, 0, 0, 0, NULL, NULL, 0, 0, 1, '2022-10-25 21:57:02', '2022-10-25 21:57:02');
 INSERT INTO `n_detail_tables` VALUES (122, 'rest_cost', 0, 'number', 'Còn lại', 'money', 'orders', 1, 0, 0, 0, NULL, NULL, 0, 0, 1, '2022-10-18 23:02:36', '2022-10-18 23:02:36');
-INSERT INTO `n_detail_tables` VALUES (123, 'created_by', 0, NULL, 'Tạo bởi', 'select', 'orders', 1, 0, 0, 1, NULL, '{\r\n \"data\": {\r\n  \"source\": \"database\",\r\n  \"table\": \"User\",\r\n  \"select\": \"id,name\",\r\n  \"field\": \"parent\"\r\n },\r\n \"config\": {\r\n  \"searchbox\": 1\r\n }\r\n}', 0, 0, 1, '2022-10-18 23:02:40', '2022-10-18 23:02:40');
+INSERT INTO `n_detail_tables` VALUES (123, 'created_by', 0, NULL, 'Tạo bởi', 'select', 'orders', 1, 0, 0, 1, NULL, '{\r\n \"data\": {\r\n  \"source\": \"database\",\r\n  \"table\": \"NUser\",\r\n  \"select\": \"id,name\",\r\n  \"field\": \"parent\"\r\n },\r\n \"config\": {\r\n  \"searchbox\": 1\r\n }\r\n}', 0, 0, 1, '2022-10-25 21:56:13', '2022-10-25 21:56:13');
 
 -- ----------------------------
 -- Table structure for n_group_users
