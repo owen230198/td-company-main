@@ -11,7 +11,7 @@
  Target Server Version : 100424
  File Encoding         : 65001
 
- Date: 26/10/2022 00:18:06
+ Date: 28/10/2022 23:42:15
 */
 
 SET NAMES utf8mb4;
@@ -13330,7 +13330,7 @@ CREATE TABLE `orders`  (
   `order_date` datetime(0) NULL DEFAULT NULL,
   `submit_date` datetime(0) NULL DEFAULT NULL,
   `product_cost` int(20) NULL DEFAULT NULL,
-  `vat_cost` int(10) NULL DEFAULT NULL,
+  `vat_percent` float NULL DEFAULT NULL,
   `vat` tinyint(4) NULL DEFAULT NULL,
   `total_cost` bigint(20) NULL DEFAULT NULL,
   `advance_cost` bigint(20) NULL DEFAULT NULL,

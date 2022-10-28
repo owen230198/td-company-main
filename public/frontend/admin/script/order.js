@@ -4,6 +4,11 @@ var vatCheckBoxModule = function (val) {
         vatCostInput.fadeIn();
     }else{
         vatCostInput.fadeOut();
+        orderVatPercentInput = $('input[name="order[vat_percent]"]');
+        orderVatPercentInput.val(0);
+        orderVatPercent = orderVatPercentInput.val();
+        orderproCost = $('input[name="order[product_cost]"]').val();
+        updateOrderCostTotal(orderproCost, orderVatPercent);
     }
 };
 
@@ -81,6 +86,13 @@ var configProductItemSetOrderCost = function()
         proItemTotalInput = proItemModule.find('input.proItemTotalInput');
         setCostItemAndOrder(proItemQty, proItemPrice, proItemTotalInput);
     });
+    
+    $(document).on('change', 'input[name="order[vat_percent]"]', function(event){
+        event.preventDefault();
+        orderproCost = $('input[name="order[product_cost]"]').val();
+        orderVatPercent = $(this).val();
+        updateOrderCostTotal(orderproCost, orderVatPercent);
+    });
 }
 
 var setCostItemAndOrder = function(qty, price, itemInput){
@@ -93,7 +105,19 @@ var setCostItemAndOrder = function(qty, price, itemInput){
         proOrderCost +=  proItemTotalCost;
     });
     proOrderCostInput.val(proOrderCost);
+    orderVatPercent = $('input[name="order[vat_percent]"]').val();
+    updateOrderCostTotal(proOrderCost, orderVatPercent);
 }
+
+var updateOrderCostTotal= function(proCost, vatPercent){
+    proCost = parseInt(proCost);
+    vatPercent =parseFloat(vatPercent);
+    vatCost = (proCost*vatPercent)/100;
+    orderCostTotal = proCost+vatCost;
+    $('input[name="order[total_cost]"]').val(orderCostTotal);
+    $('input[name="order[rest_cost]"]').val(orderCostTotal); 
+}
+
 
 $(function(){
     showUploadDesignFileButton();
