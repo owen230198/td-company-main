@@ -17,25 +17,7 @@
                 <label class="mb-0 mr-3 w_125 fs-13 text-capitalize">Tổng số cho bài in</label>
                 <input type="number" class="form-control disable_field print_amount_qty_field" name="c_print[{{ $key }}][amount_qty]" value="" min="0">
             </div>
-            <div class="form-group d-flex mb-3 pb-3 border_bot_eb col-4">
-                <label class="mb-0 mr-3 w_125 fs-13 text-capitalize">Định lượng giấy</label>
-                <input type="number" class="form-control" name="c_print[{{ $key }}][quantative]" value="" min="0">
-            </div>
-            <div class="form-group d-flex mb-3 pb-3 border_bot_eb col-4">
-                <label class="mb-0 mr-3 w_125 fs-13 text-capitalize">Loại giấy</label>
-                <select name="c_print[{{ $key }}][num_face]" class="form-control">
-                    <option value="0">Chọn loại giấy</option>
-                    <option value="1">C</option>
-                    <option value="1">OF</option>
-                    <option value="1">DUPLEX</option>
-                    <option value="1">IVOLY</option>
-                    <option value="1">CACBON</option>
-                    <option value="1">Bãi Bằng</option>
-                    <option value="1">DECAN</option>
-                    <option value="1">Giấy ngoại</option>
-                    <option value="1">Bạt hiplex</option>
-                </select>
-            </div>
+            
             <div class="form-group d-flex mb-3 pb-3 border_bot_eb col-4 align-items-center">
                 <label class="mb-0 mr-3 w_125 fs-13 text-capitalize">Khổ giấy in</label>
                 <input type="number" class="form-control" name="c_print[{{ $key }}][length]" value="" placeholder="Dài" min="0">

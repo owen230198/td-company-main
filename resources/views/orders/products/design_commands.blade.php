@@ -7,11 +7,12 @@
         <div class="row command_config_detail">
             <div class="form-group d-flex mb-3 pb-3 border_bot_eb col-12">
                 <label class="mb-0 mr-3 w_125 fs-13 text-capitalize">Người liên hệ</label>
-                <input type="text" class="form-control" name="c_design[{{ $key }}][name]" value="">
+                <input type="text" class="form-control" name="c_design[{{ $key }}][name]" 
+                value="{{ @$cDesignContacter }}">
             </div>
             <div class="form-group d-flex mb-3 pb-3 border_bot_eb col-4">
                 <label class="mb-0 mr-3 w_125 fs-13 text-capitalize">Số màu TK</label>
-                <select name="c_design[{{ $key }}][num_color]" class="form-control">
+                <select name="c_design[{{ $key }}][num_color]" class="form-control" required>
                     <option value="">Chọn số màu</option>
                     @for($i = 1; $i<7; $i++)
                         <option value="{{ $i }}">{{ $i }} màu {{ $i==5?'Panton':'' }}</option>   
@@ -20,7 +21,7 @@
             </div>
             <div class="form-group d-flex mb-3 pb-3 border_bot_eb col-4">
                 <label class="mb-0 mr-3 w_125 fs-13 text-capitalize">Số mặt TK</label>
-                <select name="c_design[{{ $key }}][num_face]" class="form-control">
+                <select name="c_design[{{ $key }}][num_face]" class="form-control" required>
                     <option value="">Chọn số mặt</option>
                     @for($i = 1; $i<3; $i++)
                         <option value="{{ $i }}">{{ $i }} mặt</option>   
@@ -30,13 +31,14 @@
             <div class="form-group d-flex mb-3 pb-3 border_bot_eb col-4">
                 <label class="mb-0 mr-3 w_125 fs-13 text-capitalize">Kiểu TK</label>
                 <select name="c_design[{{ $key }}][type]" class="form-control">
-                    <option value="">Thiết kế</option>
-                    <option value="">Chế bản</option>
+                    <option value="1">Thiết kế</option>
+                    <option value="2">Chế bản</option>
                 </select>
             </div>
             <div class="form-group d-flex mb-3 pb-3 border_bot_eb col-4">
                 <label class="mb-0 mr-3 w_125 fs-13 text-capitalize">Loại TK</label>
-                <select name="c_design[{{ $key }}][style]" class="form-control design_style_order">
+                <select name="c_design[{{ $key }}][style]" class="form-control design_style_order" required>
+                    <option value="">Chọn loại thiết kế</option>
                     <option value="1">Thiết kế mới</option>
                     <option value="2">File cũ không chỉnh sửa</option>
                     <option value="3">File cũ có chỉnh sửa</option>
@@ -45,29 +47,29 @@
             </div>
             <div class="form-group d-flex mb-3 pb-3 border_bot_eb col-4">
                 <label class="mb-0 mr-3 w_125 fs-13 text-capitalize">Kiểu in</label>
-                <select name="c_design[{{ $key }}][type]" class="form-control">
+                <select name="c_design[{{ $key }}][type]" class="form-control" required>
                     <option value="">Chọn kiểu in</option>
-                    <option value="">In Offset</option>
-                    <option value="">In Offset UV</option>
-                    <option value="">In TEST Offset</option>
-                    <option value="">In lưới</option>
+                    <option value="1">In Offset</option>
+                    <option value="2">In Offset UV</option>
+                    <option value="3">In TEST Offset</option>
+                    <option value="4">In lưới</option>
                 </select>
             </div>
             <div class="form-group d-flex mb-3 pb-3 border_bot_eb col-4">
                 <label class="mb-0 mr-3 w_125 fs-13 text-capitalize">Màu sắc</label>
-                <select name="c_design[{{ $key }}][type]" class="form-control">
+                <select name="c_design[{{ $key }}][type]" class="form-control" required>
                     <option value="">Chọn màu sắc</option>
-                    <option value="">Màu cơ bản</option>
-                    <option value="">Màu pha đính kèm</option>
+                    <option value="1">Màu cơ bản</option>
+                    <option value="2">Màu pha đính kèm</option>
                 </select>
             </div>
             <div class="form-group d-flex mb-3 pb-3 border_bot_eb col-4">
-                <label class="mb-0 mr-3 w_125 fs-13 text-capitalize">Tùy KH duyệt</label>
+                <label class="mb-0 mr-3 w_125 fs-13 text-capitalize">Tùy chọn KH duyệt</label>
                 <select name="c_design[{{ $key }}][type]" class="form-control">
-                    <option value="">Không gửi</option>
-                    <option value="">Gửi mail khách duyệt</option>
-                    <option value="">In maket khách duyệt</option>
-                    <option value="">cả hai</option>
+                    <option value="1">Không gửi</option>
+                    <option value="2">Gửi mail khách duyệt</option>
+                    <option value="3">In maket khách duyệt</option>
+                    <option value="4">cả hai</option>
                 </select>
             </div>
             <div class="form-group d-flex mb-3 pb-3 border_bot_eb col-4">

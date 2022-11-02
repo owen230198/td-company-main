@@ -1,8 +1,7 @@
 @extends('index')
 @section('content')
     <div class="dashborad_content position-relative p-3 bg_white">
-        <form action="insert-orders" method="POST" class="actionForm" enctype="multipart/form-data"
-            data-table-name="{{ @$data_table_name ? $data_table_name : $tableItem['name'] }}">
+        <form action="insert-orders" method="POST" class="actionForm" enctype="multipart/form-data" lang="vi">
             @csrf
             <div class="form_order_action">
                 <div class="order_base_input row justify-content-center">

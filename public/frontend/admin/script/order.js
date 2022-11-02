@@ -42,20 +42,34 @@ var moduleChangePrintQuantity = function(){
     });
 }
 
+var ajaxSetViewCommand = function(qty, name, customer_id)
+{
+    $.ajax({
+        url: 'set-quantity-order-products',
+        type: 'GET',
+        data: {qty: qty, name: name, customer_id: customer_id}
+    })
+    .done(function(html){
+        $('.ajax_product_orders').html(html);
+    })  
+}
+
 var setListProductViewModule = function()
 {
     $(document).on('change', '.order_base_input input[name="order[qty]"]', function(event){
         event.preventDefault();
         ordQty = $(this).val();
         ordName = $(this).closest('.order_base_input').find('input[name="order[name]"]').val();
-        $.ajax({
-            url: 'set-quantity-order-products',
-            type: 'GET',
-            data: {qty: ordQty, name: ordName}
-        })
-        .done(function(html){
-            $('.ajax_product_orders').html(html);
-        })  
+        ordCustomerId = $(this).closest('.order_base_input').find('select[name="order[customer_id]"]').val();
+        ajaxSetViewCommand(ordQty, ordName, ordCustomerId);
+    });
+
+    $(document).on('change', '.order_base_input select[name="order[customer_id]"]', function(event){
+        event.preventDefault();
+        ordQty = $(this).closest('.order_base_input').find('input[name="order[qty]"]').val();
+        ordName = $(this).closest('.order_base_input').find('input[name="order[name]"]').val();
+        ordCustomerId = $(this).val();
+        ajaxSetViewCommand(ordQty, ordName, ordCustomerId);
     });
 
     $(document).on('change', 'input.nameProductInput', function(event){

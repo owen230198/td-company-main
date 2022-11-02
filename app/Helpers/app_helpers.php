@@ -66,15 +66,6 @@ if (! function_exists('getNameByDefaultData')) {
     }
 }
 
-if (! function_exists('getNameTableById')) {
-    function getNameTableById($model, $id)
-    {
-        $models = getModelByClass($model);
-        $data = $models->find($id);
-        return $data['name'];
-    }
-}
-
 if (! function_exists('getDetailDataByID')) {
     function getDetailDataByID($model, $id)
     {
@@ -84,19 +75,12 @@ if (! function_exists('getDetailDataByID')) {
     }
 }
 
-if(!function_exists('getRoleByModule')){
-    function getRoleByModule($group, $module){
-        $roles = new \App\Models\NRole;
-        $role = $roles::where('module_id', $module)->where('group_user_id', $group)->first();
-        return $role;
-    }
-}
 
 if(!function_exists('getFieldDataById')){
     function getFieldDataById($feild = '*', $class, $id){
         $models = getModelByClass($class);
         $data = $models::select($feild)->find($id);
-        return $data[$feild];
+        return !empty($data[$feild])?$data[$feild]:'';
     }
 }
 
@@ -119,7 +103,8 @@ if (!function_exists('hasChild')) {
 }
 
 if (!function_exists('getDataTable')) {
-    function getDataTable($table, $select = "*", $where = array(), $paginate = 0, $order ='id', $order_by = 'desc')
+    function getDataTable($table, $select = "*", $where = array(), $paginate = 0, $order ='id', 
+    $order_by = 'desc', $to_array = false)
     {
         $db = new \Illuminate\Support\Facades\DB;
         $table = $db::table($table)->select($select);
@@ -132,6 +117,9 @@ if (!function_exists('getDataTable')) {
             $data = $table->orderBy($order, $order_by)->paginate($paginate);
         }else{
             $data = $table->orderBy($order, $order_by)->get();
+        }
+        if(@$to_array){
+            $data = json_decode($data, true);
         }
         return $data;
     }

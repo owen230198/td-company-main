@@ -139,11 +139,17 @@ class AdminController extends Controller
         }
         $data = $request->all();
         unset($data['_token']);
+        unset($data['ajax']);
         $success = $this->service->doUpdateTable($id, $table, $data);
         if ($success) {
-            $back_routes = @session()->get('back_url')?session()->get('back_url'):'view/'.$table;
-            $routes = $table=='quotes'?'quote-managements/q_papers/'.$id:$back_routes;
-            return redirect($routes)->with('message','Cập nhật dữ liệu thành công !');
+            if (@Request('ajax')==1) {
+                echoJson(200, 'Cập nhật dữ liệu thành công !');
+                return;
+            }else{
+                $back_routes = @session()->get('back_url')?session()->get('back_url'):'view/'.$table;
+                $routes = $table=='quotes'?'quote-managements/q_papers/'.$id:$back_routes;
+                return redirect($routes)->with('message','Cập nhật dữ liệu thành công !');
+            }
         }else {
             return back()->with('error','Đã có lỗi xảy ra !');
         }

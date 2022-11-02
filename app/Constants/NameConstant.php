@@ -10,4 +10,16 @@ class NameConstant
     //Customer Type
     const OLD_CUSTOMER = 1;
     const NEW_CUSTOMER = 2;
+
+    // PRODUCT CATEGORY TYPE
+    const PRO_CATE_TYPE = [
+        'pre_order'=>['name'=>'Hàng đặt'],
+        'available'=>[
+            'name'=>'Hàng bán sẵn', 
+            'child'=>[
+                'hard'=>['name'=>'Hộp cứng'],
+                'paper'=>['name'=>'Hộp giấy']
+            ]
+        ]
+    ];
 }

@@ -54,4 +54,5 @@ Route::middleware(['checkLogin'])->group(function () {
 
 	//orders routes
 	Route::get('set-quantity-order-products', [OrderController::class, 'setListProductView']);
+	Route::post('insert-orders', [OrderController::class, 'insert']);
 });
