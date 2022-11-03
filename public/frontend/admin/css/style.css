@@ -560,6 +560,27 @@ select.form-control:not([size]):not([multiple]) {
 
 .list_product_order{
     border-top: 2px solid #000020;
+    position: relative;
+}
+
+.tab_product_list{
+    position: sticky;
+    top: 50px;
+    left: 0;
+    z-index: 2;
+    background: #f5f5f5;
+    box-shadow: 3px 3px 6px #000020;
+}
+
+.nav-tabs.tab_product_list .nav-item.show .nav-link, 
+.nav-tabs.tab_product_list .nav-link.active{
+    background: #000020;
+    color: #ffffff;
+}
+
+.nav-tabs.tab_product_list .nav-link {
+    padding: 5px 15px;
+    font-size: 13px;
 }
 
 .command_title{

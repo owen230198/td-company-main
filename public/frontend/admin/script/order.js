@@ -132,10 +132,18 @@ var updateOrderCostTotal= function(proCost, vatPercent){
     $('input[name="order[rest_cost]"]').val(orderCostTotal); 
 }
 
+var slideToTopProductConfig = function(){
+    $(document).on('click', '.button_item_config_product', function(){
+        $([document.documentElement, document.body]).animate({
+            scrollTop: $(".ajax_product_orders").offset().top-50
+        }, 200);
+    });
+}
 
 $(function(){
     showUploadDesignFileButton();
     moduleChangePrintQuantity();
     setListProductViewModule();
     configProductItemSetOrderCost();
+    slideToTopProductConfig();
 });
