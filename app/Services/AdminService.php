@@ -209,8 +209,7 @@ class AdminService extends BaseService
         foreach ($data as $key => $item) {
             $field = $this->detail_tables->where(['table_map'=>$table, 'name'=>$key])->first();
             if (@$field['view_type']=='date_time') {
-                $timstamp = strtotime($item);
-                $data[$key] = date('Y-m-d H:i', @$timstamp);
+                $data[$key] = getDataDateTime($item);
             }  
         }
         return $data;

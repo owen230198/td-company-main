@@ -13,4 +13,14 @@ class BaseService
         $this->regions = new \App\Models\NRegion;
         $this->db = new \Illuminate\Support\Facades\DB;
  	}
+
+	public function processDataBefore($data)
+	{
+		foreach ($data as $key => $value) {
+			if (str_contains($key, 'date') || str_contains($key, 'expired') || str_contains($key, '_at')) {
+				$data[$key] = getDataDateTime($value);
+			}
+		}
+		return $data;
+	}
 }

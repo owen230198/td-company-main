@@ -84,6 +84,14 @@ if(!function_exists('getFieldDataById')){
     }
 }
 
+if (!function_exists('getNameTableById')) {
+    function getNameTableById($class, $id)
+    {
+        $obj = getModelByClass($class)->select('name')->find($id);
+        return @$obj['name'];
+    }
+}
+
 if (!function_exists('getIdByFeildValue')) {
     function getIdByFeildValue($class, $feild, $value)
     {
@@ -142,6 +150,13 @@ if (!function_exists('getServiceByTable')) {
         $useObject = '\App\Services\\'.$class.'Service';
         $object = new $useObject;
         return $object;
+    }
+}
+
+if (!function_exists('getDataDateTime')) {
+    function getDataDateTime($time){
+        $timstamp = strtotime($time);
+        return date('Y-m-d H:i', @$timstamp);    
     }
 }
 

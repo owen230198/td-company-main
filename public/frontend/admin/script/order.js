@@ -51,6 +51,7 @@ var ajaxSetViewCommand = function(qty, name, customer_id)
     })
     .done(function(html){
         $('.ajax_product_orders').html(html);
+        datePickerModule();
     })  
 }
 

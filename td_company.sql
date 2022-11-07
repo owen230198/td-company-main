@@ -11,7 +11,7 @@
  Target Server Version : 100424
  File Encoding         : 65001
 
- Date: 03/11/2022 00:00:17
+ Date: 08/11/2022 00:13:32
 */
 
 SET NAMES utf8mb4;
@@ -13230,31 +13230,33 @@ CREATE TABLE `n_roles`  (
   `update_my` tinyint(4) NULL DEFAULT NULL,
   `remove_my` tinyint(4) NULL DEFAULT NULL,
   `copy` tinyint(4) NULL DEFAULT NULL,
+  `accept` tinyint(4) NULL DEFAULT NULL,
+  `received` tinyint(4) NULL DEFAULT NULL,
   `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `created_by` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`role_id`) USING BTREE,
   INDEX `foreign_indx`(`module_id`, `n_group_user_id`) USING BTREE,
-  INDEX `action_index`(`view`, `insert`, `update`, `remove`, `copy`) USING BTREE
+  INDEX `action_index`(`view`, `insert`, `update`, `remove`, `copy`, `accept`, `received`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 40 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of n_roles
 -- ----------------------------
-INSERT INTO `n_roles` VALUES (1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, '2022-09-21 11:20:17', '2022-09-21 11:20:17', 0);
-INSERT INTO `n_roles` VALUES (2, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, '2022-09-21 11:20:17', '2022-09-21 11:20:17', 0);
-INSERT INTO `n_roles` VALUES (4, 6, 1, 1, 1, 1, 1, 1, 1, 1, 1, '2022-09-21 11:20:17', '2022-09-21 11:20:17', 0);
-INSERT INTO `n_roles` VALUES (5, 7, 1, 1, 1, 1, 1, 1, 1, 1, 1, '2022-09-21 11:20:17', '2022-09-21 11:20:17', 0);
-INSERT INTO `n_roles` VALUES (6, 8, 1, 1, 0, 1, 0, 0, 0, 0, 0, '2022-09-30 21:56:24', '2022-09-30 21:56:24', 0);
-INSERT INTO `n_roles` VALUES (7, 10, 1, 1, 0, 1, 0, 0, 0, 0, 0, '2022-09-30 22:20:05', '2022-09-30 22:20:05', 0);
-INSERT INTO `n_roles` VALUES (9, 12, 1, 1, 1, 1, 1, 1, 1, 1, 1, '2022-09-21 11:20:17', '2022-09-21 11:20:17', 0);
-INSERT INTO `n_roles` VALUES (10, 13, 1, 1, 1, 1, 1, 1, 1, 1, 1, '2022-09-21 11:20:17', '2022-09-21 11:20:17', 0);
-INSERT INTO `n_roles` VALUES (11, 14, 1, 1, 1, 1, 1, 1, 1, 1, 1, '2022-09-21 11:20:17', '2022-09-21 11:20:17', 0);
-INSERT INTO `n_roles` VALUES (12, 15, 1, 1, 1, 1, 1, 1, 1, 1, 1, '2022-09-21 11:20:17', '2022-09-21 11:20:17', 0);
-INSERT INTO `n_roles` VALUES (13, 16, 1, 1, 1, 1, 1, 1, 1, 1, 1, '2022-09-21 11:20:17', '2022-09-21 11:20:17', 0);
-INSERT INTO `n_roles` VALUES (14, 18, 1, 1, 1, 1, 1, 1, 1, 1, 0, '2022-10-11 20:13:48', '2022-10-11 20:13:52', 0);
-INSERT INTO `n_roles` VALUES (15, 19, 1, 1, 1, 1, 1, 1, 1, 1, 1, '2022-10-11 20:13:48', '2022-10-11 20:13:52', 0);
-INSERT INTO `n_roles` VALUES (16, 20, 1, 1, 1, 1, 1, 1, 1, 1, 1, '2022-10-11 20:13:48', '2022-10-11 20:13:52', 0);
+INSERT INTO `n_roles` VALUES (1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, NULL, NULL, '2022-09-21 11:20:17', '2022-09-21 11:20:17', 0);
+INSERT INTO `n_roles` VALUES (2, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, NULL, NULL, '2022-09-21 11:20:17', '2022-09-21 11:20:17', 0);
+INSERT INTO `n_roles` VALUES (4, 6, 1, 1, 1, 1, 1, 1, 1, 1, 1, NULL, NULL, '2022-09-21 11:20:17', '2022-09-21 11:20:17', 0);
+INSERT INTO `n_roles` VALUES (5, 7, 1, 1, 1, 1, 1, 1, 1, 1, 1, NULL, NULL, '2022-09-21 11:20:17', '2022-09-21 11:20:17', 0);
+INSERT INTO `n_roles` VALUES (6, 8, 1, 1, 0, 1, 0, 0, 0, 0, 0, NULL, NULL, '2022-09-30 21:56:24', '2022-09-30 21:56:24', 0);
+INSERT INTO `n_roles` VALUES (7, 10, 1, 1, 0, 1, 0, 0, 0, 0, 0, NULL, NULL, '2022-09-30 22:20:05', '2022-09-30 22:20:05', 0);
+INSERT INTO `n_roles` VALUES (9, 12, 1, 1, 1, 1, 1, 1, 1, 1, 1, NULL, NULL, '2022-09-21 11:20:17', '2022-09-21 11:20:17', 0);
+INSERT INTO `n_roles` VALUES (10, 13, 1, 1, 1, 1, 1, 1, 1, 1, 1, NULL, NULL, '2022-09-21 11:20:17', '2022-09-21 11:20:17', 0);
+INSERT INTO `n_roles` VALUES (11, 14, 1, 1, 1, 1, 1, 1, 1, 1, 1, NULL, NULL, '2022-09-21 11:20:17', '2022-09-21 11:20:17', 0);
+INSERT INTO `n_roles` VALUES (12, 15, 1, 1, 1, 1, 1, 1, 1, 1, 1, NULL, NULL, '2022-09-21 11:20:17', '2022-09-21 11:20:17', 0);
+INSERT INTO `n_roles` VALUES (13, 16, 1, 1, 1, 1, 1, 1, 1, 1, 1, NULL, NULL, '2022-09-21 11:20:17', '2022-09-21 11:20:17', 0);
+INSERT INTO `n_roles` VALUES (14, 18, 1, 1, 1, 1, 1, 1, 1, 1, 0, NULL, NULL, '2022-10-11 20:13:48', '2022-10-11 20:13:52', 0);
+INSERT INTO `n_roles` VALUES (15, 19, 1, 1, 1, 1, 1, 1, 1, 1, 1, NULL, NULL, '2022-10-11 20:13:48', '2022-10-11 20:13:52', 0);
+INSERT INTO `n_roles` VALUES (16, 20, 1, 1, 1, 1, 1, 1, 1, 1, 1, NULL, NULL, '2022-10-11 20:13:48', '2022-10-11 20:13:52', 0);
 
 -- ----------------------------
 -- Table structure for n_tables
@@ -13344,6 +13346,7 @@ CREATE TABLE `orders`  (
   `created_by` int(10) NULL DEFAULT NULL,
   `order_date` datetime(0) NULL DEFAULT NULL,
   `submit_date` datetime(0) NULL DEFAULT NULL,
+  `paper` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `product_cost` int(20) NULL DEFAULT NULL,
   `vat_percent` float NULL DEFAULT NULL,
   `vat` tinyint(4) NULL DEFAULT NULL,
@@ -13356,7 +13359,17 @@ CREATE TABLE `orders`  (
   `updated_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx`(`customer_id`, `created_by`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of orders
+-- ----------------------------
+INSERT INTO `orders` VALUES (1, NULL, 2, 6, NULL, '2022-11-07 14:37:00', '2022-11-25 14:37:00', '{\"quantative\":\"400\",\"substance\":\"3\"}', 22000000, 0, 0, 22000000, 2300000, 22000000, NULL, NULL, NULL, NULL);
+INSERT INTO `orders` VALUES (2, NULL, 2, 6, NULL, '2022-11-07 14:37:00', '2022-11-25 14:37:00', '{\"quantative\":\"400\",\"substance\":\"3\"}', 22000000, 0, 0, 22000000, 2300000, 22000000, NULL, NULL, NULL, NULL);
+INSERT INTO `orders` VALUES (3, NULL, 2, 6, NULL, '2022-11-07 14:37:00', '2022-11-25 14:37:00', '{\"quantative\":\"400\",\"substance\":\"3\"}', 22000000, 0, 0, 22000000, 2300000, 22000000, NULL, NULL, NULL, NULL);
+INSERT INTO `orders` VALUES (4, NULL, 1, 6, NULL, '2022-11-07 16:33:00', '2022-11-07 16:33:00', '{\"quantative\":\"400\",\"substance\":\"6\"}', 10000000, 0, 0, 10000000, 0, 10000000, NULL, NULL, NULL, NULL);
+INSERT INTO `orders` VALUES (5, NULL, 1, 6, NULL, '2022-11-07 16:33:00', '2022-11-07 16:33:00', '{\"quantative\":\"400\",\"substance\":\"6\"}', 10000000, 0, 0, 10000000, 0, 10000000, NULL, NULL, NULL, NULL);
+INSERT INTO `orders` VALUES (6, NULL, 2, 6, NULL, '2022-11-07 14:37:00', '2022-11-25 14:37:00', '{\"quantative\":\"400\",\"substance\":\"3\"}', 22000000, 0, 0, 22000000, 2300000, 22000000, NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for p_substances
@@ -13406,7 +13419,7 @@ CREATE TABLE `product_categories`  (
 -- Records of product_categories
 -- ----------------------------
 INSERT INTO `product_categories` VALUES (1, 'Hộp cứng', 'pre_order', 1, 1, '2022-11-02 23:34:38', '2022-11-02 23:34:42');
-INSERT INTO `product_categories` VALUES (2, 'Hộp giấy', 'pre_order', 0, 1, '2022-11-02 23:34:00', '2022-11-02 23:34:00');
+INSERT INTO `product_categories` VALUES (2, 'Hộp giấy', 'pre_order', 1, 1, '2022-11-02 23:34:00', '2022-11-02 23:34:00');
 INSERT INTO `product_categories` VALUES (3, 'Hộp quà tết', 'hard', 1, 1, '2022-11-02 23:36:02', '2022-11-02 23:36:04');
 INSERT INTO `product_categories` VALUES (4, 'Hộp bánh trung thu', 'hard', 1, 1, '2022-11-02 23:36:02', '2022-11-02 23:36:04');
 INSERT INTO `product_categories` VALUES (5, 'Hộp trụ tròn', 'hard', 1, 1, '2022-11-02 23:36:02', '2022-11-02 23:36:04');
@@ -13649,13 +13662,15 @@ CREATE TABLE `q_papers`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `quote_indx`(`quote_id`) USING BTREE,
   INDEX `main_index`(`main`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of q_papers
 -- ----------------------------
 INSERT INTO `q_papers` VALUES (2, 'BG 1', 10000, 1, 10200, 2, '0.35', '0.51', '{\"quantitative\":\"350\",\"unit_price\":\"20\",\"act\":1,\"total\":12869849.999999998}', '{\"type\":\"1\",\"total\":\"500000\"}', '{\"act\":\"1\",\"color_num\":\"4\",\"style\":\"4\",\"device\":\"2\",\"total\":11146000}', '{\"act\":\"1\",\"materal\":\"8\",\"num_face\":\"0\",\"device\":\"1\",\"total\":50000}', '{\"act\":\"1\",\"materal\":\"other\",\"materal_price\":\"100\",\"num_face\":\"2\",\"cover_materal\":\"6\",\"cover_num_face\":\"2\",\"total\":10663589.999999998}', '{\"act\":\"1\",\"price\":\"1000\",\"shape\":\"10\",\"device\":\"2\",\"total\":10000010}', '{\"act\":\"1\",\"num_face\":\"2\",\"device\":\"3\",\"total\":16300000}', '{\"act\":\"1\",\"shape_price\":\"1000\",\"device\":\"11\",\"total\":1600000}', '{\"act\":\"1\",\"device\":\"5\",\"total\":120000}', '{\"act\":\"1\",\"device\":\"6\",\"total\":550000}', '{\"act\":\"1\",\"price\":\"200\",\"total\":2000000}', 11, 'note', 65799450, 1, NULL, '2022-10-07 16:22:17', '2022-10-07 09:22:17', 0);
 INSERT INTO `q_papers` VALUES (3, 'BG 1 - tờ HDSD', 10000, 1, 10200, 2, '0.25', '0.14', '{\"quantitative\":\"400\",\"unit_price\":\"20\",\"act\":1,\"total\":2884000.0000000005}', '{\"type\":\"1\",\"total\":\"100000\"}', '{\"act\":\"1\",\"color_num\":\"2\",\"style\":\"4\",\"device\":\"1\",\"total\":1238600}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', 11, 'note', 4222600, 0, NULL, NULL, NULL, 0);
+INSERT INTO `q_papers` VALUES (4, 'Hộp giấy 1 tờ in', 10000, 1, 10200, 2, '0.35', '0.56', '{\"quantitative\":\"400\",\"unit_price\":\"2000\",\"act\":1,\"total\":1615040000.0000002}', '{\"type\":\"1\",\"total\":\"500000\"}', '{\"act\":\"1\",\"color_num\":\"2\",\"style\":\"3\",\"device\":\"2\",\"total\":5728000}', '{\"act\":\"1\",\"materal\":\"9\",\"num_face\":\"2\",\"device\":\"8\",\"total\":11058928.000000002}', '{\"act\":0}', '{\"act\":\"1\",\"price\":\"200\",\"shape\":\"200000\",\"device\":\"2\",\"total\":2200000}', '{\"act\":0}', '{\"act\":\"1\",\"float\":\"0\",\"shape_price\":\"2000\",\"device\":\"11\",\"total\":1600000}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', 12, NULL, 1636126928, 1, NULL, NULL, NULL, 0);
+INSERT INTO `q_papers` VALUES (5, 'Báo Giá Test 1', 1000, 1, 1020, 2, '0.43', '0.65', '{\"quantitative\":\"350\",\"unit_price\":\"25\",\"act\":1,\"total\":2739100}', '{\"type\":\"1\",\"total\":\"100000\"}', '{\"act\":0}', '{\"act\":\"1\",\"materal\":\"9\",\"num_face\":\"1\",\"device\":\"1\",\"total\":856078}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":\"1\",\"device\":\"13\",\"total\":170000}', '{\"act\":0}', 14, NULL, 3865178, 1, NULL, NULL, NULL, 0);
 
 -- ----------------------------
 -- Table structure for q_printer_devices
@@ -13886,11 +13901,13 @@ CREATE TABLE `quotes`  (
   `created_by` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `_index`(`seri`, `name`, `customer_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of quotes
 -- ----------------------------
 INSERT INTO `quotes` VALUES (11, NULL, 'not_send', 'BG 1', 10000, '33x55x66', 1, 'i350', 3, 1, 'CTY 678910', 'Contacter c', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '123456789', 'hard_group', 1, '10', '200000', '167254475', '183999922.5', 'note', NULL, '2022-10-11 14:24:08', '2022-10-11 07:24:08', 1);
+INSERT INTO `quotes` VALUES (12, NULL, 'not_send', 'Hộp giấy 1', 10000, '10x10x10', 2, 'i 350', 6, 1, 'CTY 678911', 'Contacter D', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '123456789', 'paper_group', 1, '10', '100000', '1636126928', '1799749620.8', NULL, NULL, '2022-11-05 13:51:40', '2022-11-05 06:51:40', 1);
+INSERT INTO `quotes` VALUES (14, NULL, 'not_send', 'Báo Giá Test 1', 10000, '20x10x5', 1, 'I350', 6, 1, 'CTY 678911', 'Contacter D', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '123456789', 'paper_group', 1, '10', '100000', '3865178', '4261695.8', NULL, NULL, '2022-11-05 14:02:24', '2022-11-05 07:02:24', 1);
 
 SET FOREIGN_KEY_CHECKS = 1;

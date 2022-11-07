@@ -12,7 +12,7 @@
 </div>
 <div class="form-group d-flex mb-3 pb-3 border_bot_eb col-4">
     <label class="mb-0 mr-3 w_125 fs-13 text-capitalize">Tạm ứng</label>
-    <input type="number" class="form-control" name="order[advance_cost]" value="">
+    <input type="number" class="form-control" name="order[advance_cost]" value="0">
 </div>
 <div class="form-group d-flex mb-3 pb-3 border_bot_eb col-4">
     <label class="mb-0 mr-3 w_125 fs-13 text-capitalize">Còn lại</label>

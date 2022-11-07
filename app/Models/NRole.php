@@ -17,7 +17,7 @@ class NRole extends Model
 		$roleModule = $this->where('n_group_user_id', $group_user_id)->join('n_modules',
 		'n_modules.id', '=', 'n_roles.module_id')->get();
         $data = $roleModule->filter(function($item){
-            return $item['view']==1||$item['view_my']==1;
+            return $item['view']==1||$item['view_my']==1||$item['accept']==1||$item['received']==1;
         });
         return $data->values()->all();
     }

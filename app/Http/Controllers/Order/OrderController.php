@@ -9,6 +9,7 @@ class OrderController extends Controller
     {
         parent::__construct();
         $this->admins = new \App\Services\AdminService;
+        $this->order_service =  new \App\Services\OrderService;
     }
 
     public function insert(Request $request, $data = array())
@@ -18,7 +19,28 @@ class OrderController extends Controller
             [['key'=>'act', 'compare'=>'=', 'value'=>1]], 0, 'name', 'asc', true);
             return view('orders.insert', $data);    
         }else{
-            dd($request->all());
+            if (!$this->admins->checkPermissionAction('orders', 'insert')) {
+                echoJson(110, 'Bạn không có quyền thực hiện thao tác này!');
+                return;
+            }
+            $dataInsert = $request->all();
+            $dataInsertOrder = @$dataInsert['order']??[];
+            if (count($dataInsertOrder)>0) {
+                $orderId = $this->order_service->insertOrder($dataInsertOrder);
+            }
+            if ($orderId) {
+                $status = $this->order_service->insertOrderDetail($dataInsert, $orderId);
+                if ($status) {
+                    echoJson(200, 'Thêm đơn hàng thành công!');
+                    return;
+                }else{
+                    echoJson(110, 'Đã xảy ra lỗi khi cấu hình lệnh!');
+                    return;
+                }
+            }else{
+                echoJson(110, 'Có lỗi khi thêm mới đơn hàng!');
+                return;
+            }
         }   
     }
 
