@@ -77,7 +77,7 @@
             <div class="form-group d-flex mb-3 pb-3 border_bot_eb col-4">
                 <label class="mb-0 mr-3 w_125 fs-13 text-capitalize">Cán đế</label>
                 <select name="c_process[{{ $key }}][soles_roll]" class="form-control">
-                    <option value="0">Chọn đế bồi</option>
+                    <option value="0">Chọn đế cán</option>
                     <option value="1">Đế cán bóng</option>
                     <option value="2">Đế cán mờ</option>
                 </select>
@@ -108,18 +108,42 @@
                 <input type="text" name="c_process[{{ $key }}][expired]" value="" 
                 class="form-control max_w_200 inputDatePicker">
             </div>
-            @include('orders.products.checkbox', ['label'=>'Ghim lồng', 'name'=>"c_process[{{ $key }}][pin]"])
-            @include('orders.products.checkbox', ['label'=>'Keo gáy', 'name'=>"c_process[{{ $key }}][glue]"])
-            @include('orders.products.checkbox', ['label'=>'Bế', 'name'=>"c_process[{{ $key }}][elevated]"])
-            @include('orders.products.checkbox', ['label'=>'Ép nhũ', 'name'=>"c_process[{{ $key }}][compress]"])
-            @include('orders.products.checkbox', ['label'=>'Số nhảy', 'name'=>"c_process[{{ $key }}][jump]"])
-            @include('orders.products.checkbox', ['label'=>'Bồi', 'name'=>"c_process[{{ $key }}][fill]"])
-            @include('orders.products.checkbox', ['label'=>'Dập nổi', 'name'=>"c_process[{{ $key }}][stamp]"])
-            @include('orders.products.checkbox', ['label'=>'Phay - sẻ rãnh', 'name'=>"c_process[{{ $key }}][grooved]"])
-            @include('orders.products.checkbox', ['label'=>'GC thành phẩm', 'name'=>"c_process[{{ $key }}][finish]"])
-            @include('orders.products.checkbox', ['label'=>'Gấp máy', 'name'=>"c_process[{{ $key }}][fold]"])
-            @include('orders.products.checkbox', ['label'=>'Khâu chỉ', 'name'=>"c_process[{{ $key }}][sew]"])
-            @include('orders.products.checkbox', ['label'=>'Bế răng cưa', 'name'=>"c_process[{{ $key }}][sawing]"])
+            @include('orders.products.checkbox', 
+            ['label'=>'Ghim lồng', 'name'=>"c_process[$key][json_data_conf][pin]"])
+
+            @include('orders.products.checkbox', 
+            ['label'=>'Keo gáy', 'name'=>"c_process[$key][json_data_conf][glue]"])
+
+            @include('orders.products.checkbox', 
+            ['label'=>'Bế', 'name'=>"c_process[$key][json_data_conf][elevated]"])
+
+            @include('orders.products.checkbox', 
+            ['label'=>'Ép nhũ', 'name'=>"c_process[$key][json_data_conf][compress]"])
+
+            @include('orders.products.checkbox', 
+            ['label'=>'Số nhảy', 'name'=>"c_process[$key][json_data_conf][jump]"])
+
+            @include('orders.products.checkbox', 
+            ['label'=>'Bồi', 'name'=>"c_process[$key][json_data_conf][fill]"])
+
+            @include('orders.products.checkbox', 
+            ['label'=>'Dập nổi', 'name'=>"c_process[$key][json_data_conf][stamp]"])
+
+            @include('orders.products.checkbox', 
+            ['label'=>'Phay - sẻ rãnh', 'name'=>"c_process[$key][json_data_conf][grooved]"])
+
+            @include('orders.products.checkbox', 
+            ['label'=>'GC thành phẩm', 'name'=>"c_process[$key][json_data_conf][finish]"])
+
+            @include('orders.products.checkbox', 
+            ['label'=>'Gấp máy', 'name'=>"c_process[$key][json_data_conf][fold]"])
+
+            @include('orders.products.checkbox', 
+            ['label'=>'Khâu chỉ', 'name'=>"c_process[$key][json_data_conf][sew]"])
+
+            @include('orders.products.checkbox', 
+            ['label'=>'Bế răng cưa', 'name'=>"c_process[$key][json_data_conf][sawing]"])
+
             <div class="form-group d-flex border_bot_eb col-12">
                 <label class="mb-0 mr-3 w_125 fs-13 text-capitalize align-items-start">Ghi chú</label>
                 <textarea class="form-control" name="c_process[{{ $key }}][note]"></textarea>

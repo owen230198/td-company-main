@@ -3,19 +3,84 @@
 
  Source Server         : localhost
  Source Server Type    : MySQL
- Source Server Version : 100425
+ Source Server Version : 100424
  Source Host           : localhost:3306
  Source Schema         : td_company
 
  Target Server Type    : MySQL
- Target Server Version : 100425
+ Target Server Version : 100424
  File Encoding         : 65001
 
- Date: 08/11/2022 18:30:37
+ Date: 09/11/2022 00:14:01
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for c_designs
+-- ----------------------------
+DROP TABLE IF EXISTS `c_designs`;
+CREATE TABLE `c_designs`  (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `num_color` tinyint(10) NULL DEFAULT NULL,
+  `num_face` tinyint(4) NULL DEFAULT NULL,
+  `type` tinyint(4) NULL DEFAULT NULL,
+  `style` tinyint(10) NULL DEFAULT NULL,
+  `demo_expired` datetime(0) NULL DEFAULT NULL,
+  `expired` datetime(0) NULL DEFAULT NULL,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `product_id` int(10) NULL DEFAULT NULL,
+  `status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `created_by` int(10) NULL DEFAULT NULL,
+  `created_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of c_designs
+-- ----------------------------
+INSERT INTO `c_designs` VALUES (6, 'Contacter c', 2, 2, 2, 1, '2022-11-08 00:00:00', '2022-11-08 00:00:00', 'tk hop cung', 15, 'accepted', 1, '2022-11-08 17:12:00', NULL);
+INSERT INTO `c_designs` VALUES (7, 'Contacter c', 1, 1, 2, 1, '2022-11-08 00:00:00', '2022-11-08 00:00:00', 'tk hop giay', 16, 'accepted', 1, '2022-11-08 17:12:00', NULL);
+
+-- ----------------------------
+-- Table structure for c_processes
+-- ----------------------------
+DROP TABLE IF EXISTS `c_processes`;
+CREATE TABLE `c_processes`  (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `crop` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Xén theo ốc',
+  `soles_size` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `finished_size` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `roll` tinyint(5) NULL DEFAULT NULL,
+  `num_face` tinyint(5) NULL DEFAULT NULL,
+  `elevated_frame` tinyint(5) NULL DEFAULT NULL,
+  `compress_frame` tinyint(5) NULL DEFAULT NULL,
+  `push_frame` tinyint(5) NULL DEFAULT NULL,
+  `soles_fill` tinyint(5) NULL DEFAULT NULL,
+  `emul_color` tinyint(5) NULL DEFAULT NULL,
+  `soles_roll` tinyint(5) NULL DEFAULT NULL,
+  `finished_style` tinyint(5) NULL DEFAULT NULL,
+  `finished_type` tinyint(5) NULL DEFAULT NULL,
+  `order_expired` datetime(0) NULL DEFAULT NULL,
+  `expired` datetime(0) NULL DEFAULT NULL,
+  `json_data_conf` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `created_by` int(1) NULL DEFAULT NULL,
+  `created_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL,
+  `product_id` int(10) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of c_processes
+-- ----------------------------
+INSERT INTO `c_processes` VALUES (3, 'accepted', 'Xén theo ốc', '10x10', '20X20', 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, '2022-11-08 00:00:00', '2022-11-08 00:00:00', '{\"pin\":\"0\",\"glue\":\"0\",\"elevated\":\"0\",\"compress\":\"1\",\"jump\":\"0\",\"fill\":\"1\",\"stamp\":\"1\",\"grooved\":\"1\",\"finish\":\"0\",\"fold\":\"0\",\"sew\":\"0\",\"sawing\":\"1\"}', 'sx hop cung', 1, '2022-11-08 17:12:00', NULL, 15);
+INSERT INTO `c_processes` VALUES (4, 'accepted', 'Xén theo ốc', '40x33', '20x22', 1, 2, 1, 1, 1, 1, 0, 1, 1, 1, '2022-11-08 00:00:00', '2022-11-08 00:00:00', '{\"pin\":\"1\",\"glue\":\"1\",\"elevated\":\"1\",\"compress\":\"1\",\"jump\":\"1\",\"fill\":\"1\",\"stamp\":\"1\",\"grooved\":\"1\",\"finish\":\"1\",\"fold\":\"1\",\"sew\":\"1\",\"sawing\":\"1\"}', 'sx hop giay', 1, '2022-11-08 17:12:00', NULL, 16);
 
 -- ----------------------------
 -- Table structure for citys
@@ -13357,29 +13422,25 @@ CREATE TABLE `orders`  (
   `created_by` int(10) NULL DEFAULT NULL,
   `order_date` datetime(0) NULL DEFAULT NULL,
   `submit_date` datetime(0) NULL DEFAULT NULL,
-  `paper` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `json_data_paper` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `product_cost` int(20) NULL DEFAULT NULL,
   `vat_percent` float NULL DEFAULT NULL,
   `vat` tinyint(4) NULL DEFAULT NULL,
   `total_cost` bigint(20) NULL DEFAULT NULL,
   `advance_cost` bigint(20) NULL DEFAULT NULL,
   `rest_cost` bigint(20) NULL DEFAULT NULL,
-  `status_payment` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `payment_status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx`(`customer_id`, `created_by`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of orders
 -- ----------------------------
-INSERT INTO `orders` VALUES (7, NULL, 2, 7, NULL, '2022-11-08 07:24:00', '2022-11-08 07:24:00', '{\"quantative\":\"400\",\"substance\":\"9\"}', 45000000, 10, 1, 49500000, 2000000, 49500000, NULL, NULL, NULL, NULL);
-INSERT INTO `orders` VALUES (8, NULL, 2, 7, NULL, '2022-11-08 07:24:00', '2022-11-08 07:24:00', '{\"quantative\":\"400\",\"substance\":\"9\"}', 45000000, 10, 1, 49500000, 2000000, 49500000, NULL, NULL, NULL, NULL);
-INSERT INTO `orders` VALUES (9, NULL, 2, 7, NULL, '2022-11-08 07:24:00', '2022-11-08 07:24:00', '{\"quantative\":\"400\",\"substance\":\"9\"}', 45000000, 10, 1, 49500000, 2000000, 49500000, NULL, NULL, NULL, NULL);
-INSERT INTO `orders` VALUES (10, NULL, 2, 7, NULL, '2022-11-08 07:24:00', '2022-11-08 07:24:00', '{\"quantative\":\"400\",\"substance\":\"9\"}', 45000000, 10, 1, 49500000, 2000000, 49500000, NULL, NULL, NULL, NULL);
-INSERT INTO `orders` VALUES (11, NULL, 2, 7, 1, '2022-11-08 07:24:00', '2022-11-08 07:24:00', '{\"quantative\":\"400\",\"substance\":\"9\"}', 45000000, 10, 1, 49500000, 2000000, 49500000, NULL, NULL, '2022-11-08 11:13:00', NULL);
+INSERT INTO `orders` VALUES (10, NULL, 2, 3, 1, '2022-11-08 16:23:00', '2022-11-08 16:23:00', '{\"quantative\":\"400\",\"substance\":\"0\"}', 200000000, 10, 1, 220000000, 5000000, 220000000, 'advance_payment', 'not_accept', '2022-11-08 17:12:00', NULL);
 
 -- ----------------------------
 -- Table structure for p_substances
@@ -13443,7 +13504,7 @@ DROP TABLE IF EXISTS `products`;
 CREATE TABLE `products`  (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `status` tinyint(10) NULL DEFAULT NULL,
+  `status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `product_category_id` int(10) NULL DEFAULT NULL,
   `num_face_design` tinyint(4) NULL DEFAULT NULL,
   `qty` bigint(20) NULL DEFAULT NULL,
@@ -13455,7 +13516,13 @@ CREATE TABLE `products`  (
   `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of products
+-- ----------------------------
+INSERT INTO `products` VALUES (15, 'Hop cung', 'not_accept', 1, 2, 20000, '5000', '100000000', 'note hop cung', 10, 1, '2022-11-08 17:12:00', NULL);
+INSERT INTO `products` VALUES (16, 'Hop giay', 'not_accept', 2, 1, 50000, '2000', '100000000', 'sp hop giay', 10, 1, '2022-11-08 17:12:00', NULL);
 
 -- ----------------------------
 -- Table structure for q_cartons

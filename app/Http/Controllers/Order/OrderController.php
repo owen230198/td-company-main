@@ -30,6 +30,7 @@ class OrderController extends Controller
             }
             if ($orderId) {
                 $status = $this->order_service->insertOrderDetail($dataInsert, $orderId);
+                dd($status);
                 if ($status) {
                     echoJson(200, 'Thêm đơn hàng thành công!');
                     return;

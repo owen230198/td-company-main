@@ -20,9 +20,12 @@ class BaseService
 			if (str_contains($key, 'date') || str_contains($key, 'expired') || str_contains($key, '_at')) {
 				$data[$key] = getDataDateTime($value);
 			}
+			if (str_contains($key, 'json_data') && is_array($value)) {
+				$data[$key] = json_encode($value);
+			}
 		}
 		$data['created_by'] = @getSessionUser()['id'];
-		$data['created_at'] = !empty($data['created_at'])?$data['created_at']:date('Y-m-d H:i', Time()); 
+		$data['created_at'] = !empty($data['created_at'])?$data['created_at']:date('Y-m-d H:i', Time());
 		return $data;
 	}
 }
