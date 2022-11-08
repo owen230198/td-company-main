@@ -3,15 +3,15 @@
 
  Source Server         : localhost
  Source Server Type    : MySQL
- Source Server Version : 100424
+ Source Server Version : 100425
  Source Host           : localhost:3306
  Source Schema         : td_company
 
  Target Server Type    : MySQL
- Target Server Version : 100424
+ Target Server Version : 100425
  File Encoding         : 65001
 
- Date: 08/11/2022 00:13:32
+ Date: 08/11/2022 18:30:37
 */
 
 SET NAMES utf8mb4;
@@ -13101,13 +13101,13 @@ INSERT INTO `n_detail_tables` VALUES (111, 'size', 0, NULL, 'Kích thước sả
 INSERT INTO `n_detail_tables` VALUES (112, 'status', 0, NULL, 'Trạng thái', 'select', 'quotes', 1, 1, 1, 1, NULL, '{\r\n \"data\": {\r\n   \"table\": null,\r\n    \"option\":{\r\n    \"not_send\":\"Chưa gửi\",\r\n    \"not_acept\":\"Chờ KH duyệt\",\r\n    \"acepted\":\"Khách đã duyệt\"\r\n   }\r\n },\r\n \"config\": {\r\n  \"searchbox\": 0\r\n }\r\n}', 10, 0, 1, '2022-10-11 15:50:06', '2022-10-11 15:50:06');
 INSERT INTO `n_detail_tables` VALUES (113, 'id', 0, NULL, 'ID', 'text', 'orders', 0, NULL, 0, 0, NULL, NULL, 0, 0, 1, '2022-10-18 22:47:37', '2022-10-18 22:47:37');
 INSERT INTO `n_detail_tables` VALUES (114, 'name', 0, NULL, 'Tên đơn hàng', 'text', 'orders', 0, 0, 0, 0, NULL, NULL, 0, 0, 0, '2022-10-31 22:50:49', '2022-10-31 22:50:49');
-INSERT INTO `n_detail_tables` VALUES (115, 'qty', 1, 'number', 'Số lượng sản phẩm', 'money', 'orders', 1, 1, 1, 0, NULL, NULL, 0, 0, 1, '2022-11-02 21:15:26', '2022-11-02 21:15:26');
+INSERT INTO `n_detail_tables` VALUES (115, 'qty', 1, 'number', 'SL sản phẩm', 'text', 'orders', 0, 1, 1, 0, NULL, NULL, 0, 0, 1, '2022-11-08 13:07:28', '2022-11-08 13:07:28');
 INSERT INTO `n_detail_tables` VALUES (116, 'customer_id', 1, NULL, 'Khách hàng', 'select', 'orders', 1, 1, 1, 1, NULL, '{\r\n \"data\": {\r\n  \"source\": \"database\",\r\n  \"table\": \"Customer\",\r\n  \"select\": \"id,name\",\r\n  \"field\": \"parent\"\r\n },\r\n \"config\": {\r\n  \"searchbox\": 1\r\n }\r\n}', 9, 0, 1, '2022-11-02 21:15:35', '2022-11-02 21:15:35');
-INSERT INTO `n_detail_tables` VALUES (117, 'order_date', 0, NULL, 'Ngày đặt', 'date_time', 'orders', 0, 1, 1, 1, NULL, '', 0, 0, 1, '2022-10-25 21:56:55', '2022-10-25 21:56:55');
-INSERT INTO `n_detail_tables` VALUES (118, 'submit_date', 0, NULL, 'Ngày trả hàng', 'date_time', 'orders', 0, 1, 1, 1, NULL, '', 0, 0, 1, '2022-10-25 21:56:55', '2022-10-25 21:56:55');
+INSERT INTO `n_detail_tables` VALUES (117, 'order_date', 0, NULL, 'Ngày đặt', 'date_time', 'orders', 1, 1, 1, 1, NULL, '', 0, 0, 1, '2022-11-08 13:07:39', '2022-11-08 13:07:39');
+INSERT INTO `n_detail_tables` VALUES (118, 'submit_date', 0, NULL, 'Ngày trả hàng', 'date_time', 'orders', 1, 1, 1, 1, NULL, '', 0, 0, 1, '2022-11-08 13:07:40', '2022-11-08 13:07:40');
 INSERT INTO `n_detail_tables` VALUES (119, 'vat', 0, NULL, 'VAT (?)', 'checkbox', 'orders', 0, 1, 1, 0, NULL, NULL, 0, 0, 1, '2022-10-25 21:57:17', '2022-10-25 21:57:17');
 INSERT INTO `n_detail_tables` VALUES (120, 'total_cost', 0, 'number', 'Tổng tiền', 'money', 'orders', 1, 0, 1, 0, NULL, NULL, 0, 0, 1, '2022-10-18 23:02:33', '2022-10-18 23:02:33');
-INSERT INTO `n_detail_tables` VALUES (121, 'advance_cost', 0, 'number', 'Tạm ứng', 'money', 'orders', 0, 0, 0, 0, NULL, NULL, 0, 0, 1, '2022-10-25 21:57:02', '2022-10-25 21:57:02');
+INSERT INTO `n_detail_tables` VALUES (121, 'advance_cost', 0, 'number', 'Tạm ứng', 'money', 'orders', 0, 0, 0, 0, NULL, NULL, 0, 0, 1, '2022-11-08 13:07:35', '2022-11-08 13:07:35');
 INSERT INTO `n_detail_tables` VALUES (122, 'rest_cost', 0, 'number', 'Còn lại', 'money', 'orders', 1, 0, 0, 0, NULL, NULL, 0, 0, 1, '2022-10-18 23:02:36', '2022-10-18 23:02:36');
 INSERT INTO `n_detail_tables` VALUES (123, 'created_by', 0, NULL, 'Tạo bởi', 'select', 'orders', 1, 0, 0, 1, NULL, '{\r\n \"data\": {\r\n  \"source\": \"database\",\r\n  \"table\": \"NUser\",\r\n  \"select\": \"id,name\",\r\n  \"field\": \"parent\"\r\n },\r\n \"config\": {\r\n  \"searchbox\": 1\r\n }\r\n}', 0, 0, 1, '2022-10-25 21:56:13', '2022-10-25 21:56:13');
 INSERT INTO `n_detail_tables` VALUES (124, 'id', 0, NULL, 'ID', 'text', 'p_substances', 0, 0, 0, 0, NULL, NULL, 0, 0, 0, '2022-10-31 23:07:54', '2022-10-31 23:07:54');
@@ -13121,6 +13121,16 @@ INSERT INTO `n_detail_tables` VALUES (131, 'parent', 0, NULL, 'Loại danh mục
 INSERT INTO `n_detail_tables` VALUES (132, 'act', 0, NULL, 'Kích hoạt', 'checkbox', 'product_categories', 1, 1, 1, 0, NULL, NULL, 1, 0, 1, '2022-10-31 23:36:52', '2022-10-31 23:36:52');
 INSERT INTO `n_detail_tables` VALUES (133, 'created_at', 0, NULL, 'Thời gian tạo', 'date_time', 'product_categories', 1, 1, 1, 1, NULL, NULL, 1, 0, 1, '2022-10-31 23:37:55', '2022-10-31 23:37:55');
 INSERT INTO `n_detail_tables` VALUES (134, 'updated_at', 0, NULL, 'Thời gian sửa', 'date_time', 'product_categories', 1, 1, 1, 0, NULL, NULL, 1, 0, 1, '2022-10-31 23:37:52', '2022-10-31 23:37:52');
+INSERT INTO `n_detail_tables` VALUES (135, 'created_at', 0, NULL, 'Ngày tạo', 'date_time', 'orders', 1, 0, 0, 1, NULL, '', 0, 0, 1, '2022-10-25 21:56:13', '2022-10-25 21:56:13');
+INSERT INTO `n_detail_tables` VALUES (136, 'id', 0, NULL, 'ID', 'text', 'products', 0, 0, 0, 0, NULL, NULL, 0, 0, 0, '2022-11-08 18:24:23', '2022-11-08 18:24:23');
+INSERT INTO `n_detail_tables` VALUES (137, 'name', 0, NULL, 'Sản phẩm', 'text', 'products', 1, 1, 1, 1, NULL, NULL, 1, 0, 1, '2022-11-08 18:24:23', '2022-11-08 18:24:23');
+INSERT INTO `n_detail_tables` VALUES (138, 'status', 0, NULL, 'Trạng thái', 'select', 'products', 1, 1, 1, 1, NULL, '{\r\n \"data\": {\r\n   \"table\": null,\r\n    \"option\":{\r\n    \"not_accept\":\"Chưa duyệt\",\r\n    \"accepted\":\"Đã duyệt\"\r\n   }\r\n },\r\n \"config\": {\r\n  \"searchbox\": 0\r\n }\r\n}', 10, 0, 1, '2022-11-08 18:24:23', '2022-11-08 18:24:23');
+INSERT INTO `n_detail_tables` VALUES (139, 'product_category_id', 1, NULL, 'Danh mục', 'select', 'products', 1, 1, 1, 1, NULL, '{\r\n \"data\": {\r\n  \"source\": \"database\",\r\n  \"table\": \"ProductCategory\",\r\n  \"select\": \"id,name\",\r\n  \"field\": \"parent\"\r\n },\r\n \"config\": {\r\n  \"searchbox\": 1\r\n }\r\n}', 9, 0, 1, '2022-11-08 18:24:23', '2022-11-08 18:24:23');
+INSERT INTO `n_detail_tables` VALUES (140, 'num_face_design', 1, 'number', 'Số mặt in', 'text', 'products', 0, 1, 1, 0, NULL, NULL, 0, 0, 1, '2022-11-08 18:24:23', '2022-11-08 18:24:23');
+INSERT INTO `n_detail_tables` VALUES (141, 'qty', 1, 'number', 'SL thành phẩm', 'text', 'products', 1, 1, 1, 0, NULL, NULL, 0, 0, 1, '2022-11-08 18:24:23', '2022-11-08 18:24:23');
+INSERT INTO `n_detail_tables` VALUES (142, 'price', 0, 'number', 'Đơn giá', 'money', 'products', 1, 0, 1, 0, NULL, NULL, 0, 0, 1, '2022-11-08 18:24:23', '2022-11-08 18:24:23');
+INSERT INTO `n_detail_tables` VALUES (143, 'total_cost', 0, 'number', 'Tổng tiền', 'money', 'products', 1, 0, 1, 0, NULL, NULL, 0, 0, 1, '2022-11-08 18:24:23', '2022-11-08 18:24:23');
+INSERT INTO `n_detail_tables` VALUES (144, 'created_at', 0, NULL, 'Thời gian tạo', 'date_time', 'products', 1, 1, 1, 1, NULL, NULL, 1, 0, 1, '2022-11-08 18:24:23', '2022-11-08 18:24:23');
 
 -- ----------------------------
 -- Table structure for n_group_users
@@ -13305,6 +13315,7 @@ INSERT INTO `n_tables` VALUES (17, 'q_finishes', 'Chi phí bồi & hoàn thiện
 INSERT INTO `n_tables` VALUES (18, 'orders', 'Đơn hàng', 0, 'orders', 'orders', 20, 'view', NULL, 1, 1, 1, 0, '2022-10-11 22:06:33', '2022-10-11 22:06:33');
 INSERT INTO `n_tables` VALUES (19, 'p_substances', 'Chất liệu giấy in', 0, 'p_substances', 'p_substances', 20, 'view', NULL, 1, 1, 1, 1, '2022-10-31 23:11:53', '2022-10-31 23:11:56');
 INSERT INTO `n_tables` VALUES (20, 'product_categories', 'Danh mục sản phẩm', 0, 'product_categories', 'product_categories', 20, 'view', NULL, 1, 1, 1, 1, '2022-11-02 22:45:04', '2022-11-02 22:45:06');
+INSERT INTO `n_tables` VALUES (21, 'products', 'Sản phẩm', 0, 'orders', 'products', 20, 'view', NULL, 1, 1, 1, 1, '2022-10-11 22:06:33', '2022-10-11 22:06:33');
 
 -- ----------------------------
 -- Table structure for n_users
@@ -13359,17 +13370,16 @@ CREATE TABLE `orders`  (
   `updated_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx`(`customer_id`, `created_by`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of orders
 -- ----------------------------
-INSERT INTO `orders` VALUES (1, NULL, 2, 6, NULL, '2022-11-07 14:37:00', '2022-11-25 14:37:00', '{\"quantative\":\"400\",\"substance\":\"3\"}', 22000000, 0, 0, 22000000, 2300000, 22000000, NULL, NULL, NULL, NULL);
-INSERT INTO `orders` VALUES (2, NULL, 2, 6, NULL, '2022-11-07 14:37:00', '2022-11-25 14:37:00', '{\"quantative\":\"400\",\"substance\":\"3\"}', 22000000, 0, 0, 22000000, 2300000, 22000000, NULL, NULL, NULL, NULL);
-INSERT INTO `orders` VALUES (3, NULL, 2, 6, NULL, '2022-11-07 14:37:00', '2022-11-25 14:37:00', '{\"quantative\":\"400\",\"substance\":\"3\"}', 22000000, 0, 0, 22000000, 2300000, 22000000, NULL, NULL, NULL, NULL);
-INSERT INTO `orders` VALUES (4, NULL, 1, 6, NULL, '2022-11-07 16:33:00', '2022-11-07 16:33:00', '{\"quantative\":\"400\",\"substance\":\"6\"}', 10000000, 0, 0, 10000000, 0, 10000000, NULL, NULL, NULL, NULL);
-INSERT INTO `orders` VALUES (5, NULL, 1, 6, NULL, '2022-11-07 16:33:00', '2022-11-07 16:33:00', '{\"quantative\":\"400\",\"substance\":\"6\"}', 10000000, 0, 0, 10000000, 0, 10000000, NULL, NULL, NULL, NULL);
-INSERT INTO `orders` VALUES (6, NULL, 2, 6, NULL, '2022-11-07 14:37:00', '2022-11-25 14:37:00', '{\"quantative\":\"400\",\"substance\":\"3\"}', 22000000, 0, 0, 22000000, 2300000, 22000000, NULL, NULL, NULL, NULL);
+INSERT INTO `orders` VALUES (7, NULL, 2, 7, NULL, '2022-11-08 07:24:00', '2022-11-08 07:24:00', '{\"quantative\":\"400\",\"substance\":\"9\"}', 45000000, 10, 1, 49500000, 2000000, 49500000, NULL, NULL, NULL, NULL);
+INSERT INTO `orders` VALUES (8, NULL, 2, 7, NULL, '2022-11-08 07:24:00', '2022-11-08 07:24:00', '{\"quantative\":\"400\",\"substance\":\"9\"}', 45000000, 10, 1, 49500000, 2000000, 49500000, NULL, NULL, NULL, NULL);
+INSERT INTO `orders` VALUES (9, NULL, 2, 7, NULL, '2022-11-08 07:24:00', '2022-11-08 07:24:00', '{\"quantative\":\"400\",\"substance\":\"9\"}', 45000000, 10, 1, 49500000, 2000000, 49500000, NULL, NULL, NULL, NULL);
+INSERT INTO `orders` VALUES (10, NULL, 2, 7, NULL, '2022-11-08 07:24:00', '2022-11-08 07:24:00', '{\"quantative\":\"400\",\"substance\":\"9\"}', 45000000, 10, 1, 49500000, 2000000, 49500000, NULL, NULL, NULL, NULL);
+INSERT INTO `orders` VALUES (11, NULL, 2, 7, 1, '2022-11-08 07:24:00', '2022-11-08 07:24:00', '{\"quantative\":\"400\",\"substance\":\"9\"}', 45000000, 10, 1, 49500000, 2000000, 49500000, NULL, NULL, '2022-11-08 11:13:00', NULL);
 
 -- ----------------------------
 -- Table structure for p_substances
@@ -13425,6 +13435,27 @@ INSERT INTO `product_categories` VALUES (4, 'Hộp bánh trung thu', 'hard', 1, 
 INSERT INTO `product_categories` VALUES (5, 'Hộp trụ tròn', 'hard', 1, 1, '2022-11-02 23:36:02', '2022-11-02 23:36:04');
 INSERT INTO `product_categories` VALUES (6, 'Thuyền', 'hard', 1, 1, '2022-11-02 23:36:02', '2022-11-02 23:36:04');
 INSERT INTO `product_categories` VALUES (7, 'Hộp bánh trung thu', 'paper', 1, 1, '2022-11-02 23:36:02', '2022-11-02 23:36:04');
+
+-- ----------------------------
+-- Table structure for products
+-- ----------------------------
+DROP TABLE IF EXISTS `products`;
+CREATE TABLE `products`  (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `status` tinyint(10) NULL DEFAULT NULL,
+  `product_category_id` int(10) NULL DEFAULT NULL,
+  `num_face_design` tinyint(4) NULL DEFAULT NULL,
+  `qty` bigint(20) NULL DEFAULT NULL,
+  `price` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `total_cost` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `order_id` int(10) NULL DEFAULT NULL,
+  `created_by` int(10) NULL DEFAULT NULL,
+  `created_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for q_cartons

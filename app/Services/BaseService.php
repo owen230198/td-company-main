@@ -21,6 +21,8 @@ class BaseService
 				$data[$key] = getDataDateTime($value);
 			}
 		}
+		$data['created_by'] = @getSessionUser()['id'];
+		$data['created_at'] = !empty($data['created_at'])?$data['created_at']:date('Y-m-d H:i', Time()); 
 		return $data;
 	}
 }

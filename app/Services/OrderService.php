@@ -2,6 +2,7 @@
 namespace App\Services;
 use App\Services\BaseService;
 use App\Models\Order;
+use App\Models\Product;
 use App\Constants\OrderConstant;
 class OrderService extends BaseService
 {
@@ -19,20 +20,26 @@ class OrderService extends BaseService
     
     public function insertOrderDetail($data, $orderId)
     {
-        $arrTable = OrderConstant::DETAIL_ORDER_KEY_TABLE;
         $ret = true;
-        foreach ($arrTable as $key => $table) {
-            $listData = @$data[$key]??[];
-            if (count($listData)>0) {
-                foreach ($listData as $data) {
-                    $dataInsert = $this->processDataBefore($data);
-                    $dataInsert['order_id'] = $orderId;
-                    $insert = $this->db::table($table)->insert($dataInsert);
-                    if (!$insert) {
-                        $ret = false;
+        $listDataProduct = @$data['product']??[];
+        $arrTable = OrderConstant::COMMAND_KEY_TABLE;
+        if (count($listDataProduct) > 0) {
+            foreach ($listDataProduct as $key => $order) {
+                $dataInsertProduct = $this->processDataBefore($order);
+                $dataInsertProduct['order_id'] = $orderId;
+                $product_id = Product::insertGetId($dataInsertProduct);
+                foreach ($arrTable as $keyTable => $table) {
+                    $dataInsertTable = @$data[$keyTable][$key]??[];
+                    if (count($dataInsertTable)>0) {
+                        $dataInsertTable = $this->processDataBefore($dataInsertTable);
+                        $dataInsertTable['product_id'] = $product_id;
+                        $this->db->insert($dataInsertTable);
                     }
+                    
                 }
             }
+        }else{
+            return false;
         }
         return $ret;
     }
