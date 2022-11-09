@@ -1,7 +1,13 @@
 <table class="table">
     <tr>
-        <th class="font-bold fs-13 text-center">#</th>
-        <th class="font-bold fs-13 text-center"><input type="checkbox" class="c_all_remove"></th>
+        <th class="font-bold fs-13 text-center">
+            <div class="d-flex align-items-center justify-content-center">
+                <span>#</span>
+                @if (!@$hideCheck)
+                    <input type="checkbox" class="c_all_remove ml-2">          
+                @endif
+            </div>
+        </th>
         @foreach ($field_shows as $field)
             <th class="font-bold fs-13">{{ $field['note'] }}</th>
         @endforeach
@@ -13,10 +19,12 @@
         @endphp
         <tr>
             <td class="text-center">
-                {{ $key + 1 }}
-            </td>
-            <td class="text-center">
-                <input type="checkbox" class="c_one_remove" data-id="{{ $data['id'] }}">
+                <div class="d-flex align-items-center justify-content-center">
+                    <span>{{ $key + 1 }}</span>
+                    @if (!@$hideCheck)
+                        <input type="checkbox" class="c_one_remove ml-2" data-id="{{ $data['id'] }}">
+                    @endif
+                </div>
             </td>
             @foreach ($field_shows as $field)
                 <td>

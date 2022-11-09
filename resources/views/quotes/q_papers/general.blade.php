@@ -4,7 +4,7 @@
 </div>
 <div class="form-group d-flex align-items-center mb-4"> 
 <label class="base_label mr-2 mb-0 label_quotes">Xuất file báo giá</label>
-<div class="checkbox_module">
+<div class="checkbox_module d-flex align-items-center">
   <input type="hidden" name="main" value = "{{ @$dataitem['main']?1:0 }}">
   <input type="checkbox" class="toggle mx-auto change_active_stage" {{ @$dataitem['main']?'checked':'' }} />
 </div>

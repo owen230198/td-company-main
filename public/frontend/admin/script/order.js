@@ -57,7 +57,7 @@ var ajaxSetViewCommand = function(qty, name, customer_id)
 
 var setListProductViewModule = function()
 {
-    $(document).on('change', '.order_base_input input[name="order[qty]"]', function(event){
+    $(document).on('change', '.insert_order_form .order_base_input input[name="order[qty]"]', function(event){
         event.preventDefault();
         ordQty = $(this).val();
         ordName = $(this).closest('.order_base_input').find('input[name="order[name]"]').val();
@@ -65,7 +65,7 @@ var setListProductViewModule = function()
         ajaxSetViewCommand(ordQty, ordName, ordCustomerId);
     });
 
-    $(document).on('change', '.order_base_input select[name="order[customer_id]"]', function(event){
+    $(document).on('change', '.insert_order_form .order_base_input select[name="order[customer_id]"]', function(event){
         event.preventDefault();
         ordQty = $(this).closest('.order_base_input').find('input[name="order[qty]"]').val();
         ordName = $(this).closest('.order_base_input').find('input[name="order[name]"]').val();

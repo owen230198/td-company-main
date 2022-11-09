@@ -3,15 +3,15 @@
 
  Source Server         : localhost
  Source Server Type    : MySQL
- Source Server Version : 100424
+ Source Server Version : 100425
  Source Host           : localhost:3306
  Source Schema         : td_company
 
  Target Server Type    : MySQL
- Target Server Version : 100424
+ Target Server Version : 100425
  File Encoding         : 65001
 
- Date: 09/11/2022 00:14:01
+ Date: 09/11/2022 18:09:31
 */
 
 SET NAMES utf8mb4;
@@ -13071,7 +13071,7 @@ INSERT INTO `n_detail_tables` VALUES (11, 'name', 1, NULL, 'Tên nhóm', 'text',
 INSERT INTO `n_detail_tables` VALUES (12, 'note', 0, NULL, 'Ghi chú', 'textarea', 'n_group_users', 0, 1, 1, 0, NULL, NULL, 1, 2, 1, '2022-06-24 17:45:08', '2022-06-24 17:45:08');
 INSERT INTO `n_detail_tables` VALUES (14, 'act', 0, NULL, 'Kích hoạt', 'checkbox', 'n_group_users', 1, 1, 1, 0, NULL, NULL, 1, 4, 1, '2022-06-24 16:02:33', '2022-06-24 16:02:33');
 INSERT INTO `n_detail_tables` VALUES (15, 'created_at', 0, NULL, 'Thời gian tạo', 'date_time', 'n_group_users', 1, 1, 1, 1, NULL, NULL, 1, 5, 1, '2022-06-24 16:02:33', '2022-06-24 16:02:33');
-INSERT INTO `n_detail_tables` VALUES (16, 'parent', 1, NULL, 'Nhóm quản trị', 'select', 'n_group_users', 1, 1, 1, 1, NULL, '{\r\n \"data\": {\r\n  \"source\": \"database\",\r\n  \"table\": \"NGroupUser\",\r\n  \"select\": \"id,name\",\r\n  \"field\": \"parent\",\r\n  \"recursive\":1\r\n },\r\n \"config\": {\r\n  \"searchbox\": 1\r\n }\r\n}', 1, 1, 1, '2022-06-24 16:02:33', '2022-06-24 16:02:33');
+INSERT INTO `n_detail_tables` VALUES (16, 'parent', 1, NULL, 'Nhóm quản trị', 'select', 'n_group_users', 1, 1, 1, 1, NULL, '{\r\n \"data\": {\r\n  \"source\": \"database\",\r\n  \"table\": \"NGroupUser\",\r\n  \"select\": \"id,name\",\r\n  \"field\": \"parent\",\r\n  \"recursive\":1\r\n },\r\n \"config\": {\r\n  \"searchbox\": 1\r\n }\r\n}', 1, 1, 1, '2022-11-09 11:16:49', '2022-11-09 11:16:49');
 INSERT INTO `n_detail_tables` VALUES (17, 'id', 0, NULL, 'ID', 'text', 'customers', 0, NULL, 0, 0, NULL, NULL, 0, 0, 0, '2022-06-21 14:54:20', '2022-06-21 14:54:20');
 INSERT INTO `n_detail_tables` VALUES (18, 'name', 0, NULL, 'Tên Cty', 'text', 'customers', 1, 1, 1, 1, NULL, NULL, 1, 1, 1, '2022-06-24 16:02:33', '2022-06-24 16:02:33');
 INSERT INTO `n_detail_tables` VALUES (19, 'contacter', 0, NULL, 'Người liên hệ', 'text', 'customers', 1, 1, 1, 1, NULL, NULL, 1, 2, 1, '2022-06-24 17:45:47', '2022-06-24 17:45:47');
@@ -13164,17 +13164,17 @@ INSERT INTO `n_detail_tables` VALUES (109, 'company_name', 0, NULL, 'Tên công 
 INSERT INTO `n_detail_tables` VALUES (110, 'print_model', 0, NULL, 'Mẫu thiết kế', 'select', 'quotes', 0, 1, 1, 0, NULL, '{\r\n \"data\": {\r\n   \"table\": null,\r\n    \"option\":{\r\n    \"1\":\"file đã sản xuất\",\r\n    \"2\":\"File thiết kế mới\"\r\n   }\r\n },\r\n \"config\": {\r\n  \"searchbox\": 0\r\n }\r\n}', 10, 3, 1, '2022-09-30 23:00:39', '2022-09-30 23:00:39');
 INSERT INTO `n_detail_tables` VALUES (111, 'size', 0, NULL, 'Kích thước sản phẩm', 'text', 'quotes', 0, 1, 1, 0, NULL, '', 10, 4, 1, '2022-09-30 23:00:41', '2022-09-30 23:00:41');
 INSERT INTO `n_detail_tables` VALUES (112, 'status', 0, NULL, 'Trạng thái', 'select', 'quotes', 1, 1, 1, 1, NULL, '{\r\n \"data\": {\r\n   \"table\": null,\r\n    \"option\":{\r\n    \"not_send\":\"Chưa gửi\",\r\n    \"not_acept\":\"Chờ KH duyệt\",\r\n    \"acepted\":\"Khách đã duyệt\"\r\n   }\r\n },\r\n \"config\": {\r\n  \"searchbox\": 0\r\n }\r\n}', 10, 0, 1, '2022-10-11 15:50:06', '2022-10-11 15:50:06');
-INSERT INTO `n_detail_tables` VALUES (113, 'id', 0, NULL, 'ID', 'text', 'orders', 0, NULL, 0, 0, NULL, NULL, 0, 0, 1, '2022-10-18 22:47:37', '2022-10-18 22:47:37');
-INSERT INTO `n_detail_tables` VALUES (114, 'name', 0, NULL, 'Tên đơn hàng', 'text', 'orders', 0, 0, 0, 0, NULL, NULL, 0, 0, 0, '2022-10-31 22:50:49', '2022-10-31 22:50:49');
-INSERT INTO `n_detail_tables` VALUES (115, 'qty', 1, 'number', 'SL sản phẩm', 'text', 'orders', 0, 1, 1, 0, NULL, NULL, 0, 0, 1, '2022-11-08 13:07:28', '2022-11-08 13:07:28');
-INSERT INTO `n_detail_tables` VALUES (116, 'customer_id', 1, NULL, 'Khách hàng', 'select', 'orders', 1, 1, 1, 1, NULL, '{\r\n \"data\": {\r\n  \"source\": \"database\",\r\n  \"table\": \"Customer\",\r\n  \"select\": \"id,name\",\r\n  \"field\": \"parent\"\r\n },\r\n \"config\": {\r\n  \"searchbox\": 1\r\n }\r\n}', 9, 0, 1, '2022-11-02 21:15:35', '2022-11-02 21:15:35');
-INSERT INTO `n_detail_tables` VALUES (117, 'order_date', 0, NULL, 'Ngày đặt', 'date_time', 'orders', 1, 1, 1, 1, NULL, '', 0, 0, 1, '2022-11-08 13:07:39', '2022-11-08 13:07:39');
-INSERT INTO `n_detail_tables` VALUES (118, 'submit_date', 0, NULL, 'Ngày trả hàng', 'date_time', 'orders', 1, 1, 1, 1, NULL, '', 0, 0, 1, '2022-11-08 13:07:40', '2022-11-08 13:07:40');
-INSERT INTO `n_detail_tables` VALUES (119, 'vat', 0, NULL, 'VAT (?)', 'checkbox', 'orders', 0, 1, 1, 0, NULL, NULL, 0, 0, 1, '2022-10-25 21:57:17', '2022-10-25 21:57:17');
-INSERT INTO `n_detail_tables` VALUES (120, 'total_cost', 0, 'number', 'Tổng tiền', 'money', 'orders', 1, 0, 1, 0, NULL, NULL, 0, 0, 1, '2022-10-18 23:02:33', '2022-10-18 23:02:33');
-INSERT INTO `n_detail_tables` VALUES (121, 'advance_cost', 0, 'number', 'Tạm ứng', 'money', 'orders', 0, 0, 0, 0, NULL, NULL, 0, 0, 1, '2022-11-08 13:07:35', '2022-11-08 13:07:35');
-INSERT INTO `n_detail_tables` VALUES (122, 'rest_cost', 0, 'number', 'Còn lại', 'money', 'orders', 1, 0, 0, 0, NULL, NULL, 0, 0, 1, '2022-10-18 23:02:36', '2022-10-18 23:02:36');
-INSERT INTO `n_detail_tables` VALUES (123, 'created_by', 0, NULL, 'Tạo bởi', 'select', 'orders', 1, 0, 0, 1, NULL, '{\r\n \"data\": {\r\n  \"source\": \"database\",\r\n  \"table\": \"NUser\",\r\n  \"select\": \"id,name\",\r\n  \"field\": \"parent\"\r\n },\r\n \"config\": {\r\n  \"searchbox\": 1\r\n }\r\n}', 0, 0, 1, '2022-10-25 21:56:13', '2022-10-25 21:56:13');
+INSERT INTO `n_detail_tables` VALUES (113, 'id', 0, NULL, 'ID', 'text', 'orders', 0, NULL, 0, 0, NULL, NULL, 0, 1, 1, '2022-11-09 16:40:16', '2022-11-09 16:40:16');
+INSERT INTO `n_detail_tables` VALUES (114, 'name', 0, NULL, 'Tên đơn hàng', 'text', 'orders', 0, 0, 0, 0, NULL, NULL, 0, 1, 0, '2022-11-09 16:40:16', '2022-11-09 16:40:16');
+INSERT INTO `n_detail_tables` VALUES (115, 'qty', 1, 'number', 'SL sản phẩm', 'text', 'orders', 0, 1, 0, 0, NULL, NULL, 0, 1, 1, '2022-11-09 16:40:16', '2022-11-09 16:40:16');
+INSERT INTO `n_detail_tables` VALUES (116, 'customer_id', 1, NULL, 'Khách hàng', 'select', 'orders', 1, 1, 1, 1, NULL, '{\r\n \"data\": {\r\n  \"source\": \"database\",\r\n  \"table\": \"Customer\",\r\n  \"select\": \"id,name\",\r\n  \"field\": \"parent\"\r\n },\r\n \"config\": {\r\n  \"searchbox\": 1\r\n }\r\n}', 9, 1, 1, '2022-11-09 16:40:16', '2022-11-09 16:40:16');
+INSERT INTO `n_detail_tables` VALUES (117, 'order_date', 0, NULL, 'Ngày đặt', 'date_time', 'orders', 1, 1, 1, 1, NULL, '', 0, 1, 1, '2022-11-09 16:40:16', '2022-11-09 16:40:16');
+INSERT INTO `n_detail_tables` VALUES (118, 'submit_date', 0, NULL, 'Ngày trả hàng', 'date_time', 'orders', 1, 1, 1, 1, NULL, '', 0, 1, 1, '2022-11-09 16:40:16', '2022-11-09 16:40:16');
+INSERT INTO `n_detail_tables` VALUES (119, 'vat', 0, NULL, 'VAT (?)', 'checkbox', 'orders', 0, 1, 1, 0, NULL, NULL, 0, 1, 1, '2022-11-09 16:40:16', '2022-11-09 16:40:16');
+INSERT INTO `n_detail_tables` VALUES (120, 'total_cost', 0, 'number', 'Tổng tiền', 'money', 'orders', 1, 0, 0, 0, NULL, NULL, 0, 1, 1, '2022-11-09 16:40:16', '2022-11-09 16:40:16');
+INSERT INTO `n_detail_tables` VALUES (121, 'advance_cost', 0, 'number', 'Tạm ứng', 'money', 'orders', 1, 0, 0, 0, NULL, NULL, 0, 1, 1, '2022-11-09 16:40:16', '2022-11-09 16:40:16');
+INSERT INTO `n_detail_tables` VALUES (122, 'rest_cost', 0, 'number', 'Còn lại', 'money', 'orders', 1, 0, 0, 0, NULL, NULL, 0, 1, 1, '2022-11-09 16:40:16', '2022-11-09 16:40:16');
+INSERT INTO `n_detail_tables` VALUES (123, 'created_by', 0, NULL, 'Tạo bởi', 'select', 'orders', 1, 0, 0, 1, NULL, '{\r\n \"data\": {\r\n  \"source\": \"database\",\r\n  \"table\": \"NUser\",\r\n  \"select\": \"id,name\",\r\n  \"field\": \"parent\"\r\n },\r\n \"config\": {\r\n  \"searchbox\": 1\r\n }\r\n}', 0, 1, 1, '2022-11-09 16:40:16', '2022-11-09 16:40:16');
 INSERT INTO `n_detail_tables` VALUES (124, 'id', 0, NULL, 'ID', 'text', 'p_substances', 0, 0, 0, 0, NULL, NULL, 0, 0, 0, '2022-10-31 23:07:54', '2022-10-31 23:07:54');
 INSERT INTO `n_detail_tables` VALUES (125, 'name', 0, NULL, 'Chất liệu', 'text', 'p_substances', 1, 1, 1, 1, NULL, NULL, 1, 0, 1, '2022-10-31 23:07:54', '2022-10-31 23:07:54');
 INSERT INTO `n_detail_tables` VALUES (126, 'act', 0, NULL, 'Kích hoạt', 'checkbox', 'p_substances', 1, 1, 1, 0, NULL, NULL, 1, 0, 1, '2022-10-31 23:36:52', '2022-10-31 23:36:52');
@@ -13186,16 +13186,17 @@ INSERT INTO `n_detail_tables` VALUES (131, 'parent', 0, NULL, 'Loại danh mục
 INSERT INTO `n_detail_tables` VALUES (132, 'act', 0, NULL, 'Kích hoạt', 'checkbox', 'product_categories', 1, 1, 1, 0, NULL, NULL, 1, 0, 1, '2022-10-31 23:36:52', '2022-10-31 23:36:52');
 INSERT INTO `n_detail_tables` VALUES (133, 'created_at', 0, NULL, 'Thời gian tạo', 'date_time', 'product_categories', 1, 1, 1, 1, NULL, NULL, 1, 0, 1, '2022-10-31 23:37:55', '2022-10-31 23:37:55');
 INSERT INTO `n_detail_tables` VALUES (134, 'updated_at', 0, NULL, 'Thời gian sửa', 'date_time', 'product_categories', 1, 1, 1, 0, NULL, NULL, 1, 0, 1, '2022-10-31 23:37:52', '2022-10-31 23:37:52');
-INSERT INTO `n_detail_tables` VALUES (135, 'created_at', 0, NULL, 'Ngày tạo', 'date_time', 'orders', 1, 0, 0, 1, NULL, '', 0, 0, 1, '2022-10-25 21:56:13', '2022-10-25 21:56:13');
+INSERT INTO `n_detail_tables` VALUES (135, 'created_at', 0, NULL, 'Ngày tạo', 'date_time', 'orders', 1, 0, 0, 1, NULL, '', 0, 1, 1, '2022-11-09 16:40:16', '2022-11-09 16:40:16');
 INSERT INTO `n_detail_tables` VALUES (136, 'id', 0, NULL, 'ID', 'text', 'products', 0, 0, 0, 0, NULL, NULL, 0, 0, 0, '2022-11-08 18:24:23', '2022-11-08 18:24:23');
 INSERT INTO `n_detail_tables` VALUES (137, 'name', 0, NULL, 'Sản phẩm', 'text', 'products', 1, 1, 1, 1, NULL, NULL, 1, 0, 1, '2022-11-08 18:24:23', '2022-11-08 18:24:23');
 INSERT INTO `n_detail_tables` VALUES (138, 'status', 0, NULL, 'Trạng thái', 'select', 'products', 1, 1, 1, 1, NULL, '{\r\n \"data\": {\r\n   \"table\": null,\r\n    \"option\":{\r\n    \"not_accept\":\"Chưa duyệt\",\r\n    \"accepted\":\"Đã duyệt\"\r\n   }\r\n },\r\n \"config\": {\r\n  \"searchbox\": 0\r\n }\r\n}', 10, 0, 1, '2022-11-08 18:24:23', '2022-11-08 18:24:23');
 INSERT INTO `n_detail_tables` VALUES (139, 'product_category_id', 1, NULL, 'Danh mục', 'select', 'products', 1, 1, 1, 1, NULL, '{\r\n \"data\": {\r\n  \"source\": \"database\",\r\n  \"table\": \"ProductCategory\",\r\n  \"select\": \"id,name\",\r\n  \"field\": \"parent\"\r\n },\r\n \"config\": {\r\n  \"searchbox\": 1\r\n }\r\n}', 9, 0, 1, '2022-11-08 18:24:23', '2022-11-08 18:24:23');
-INSERT INTO `n_detail_tables` VALUES (140, 'num_face_design', 1, 'number', 'Số mặt in', 'text', 'products', 0, 1, 1, 0, NULL, NULL, 0, 0, 1, '2022-11-08 18:24:23', '2022-11-08 18:24:23');
+INSERT INTO `n_detail_tables` VALUES (140, 'num_face_design', 1, 'number', 'Số mặt in', 'text', 'products', 1, 1, 1, 0, NULL, NULL, 0, 0, 1, '2022-11-09 16:48:41', '2022-11-09 16:48:41');
 INSERT INTO `n_detail_tables` VALUES (141, 'qty', 1, 'number', 'SL thành phẩm', 'text', 'products', 1, 1, 1, 0, NULL, NULL, 0, 0, 1, '2022-11-08 18:24:23', '2022-11-08 18:24:23');
 INSERT INTO `n_detail_tables` VALUES (142, 'price', 0, 'number', 'Đơn giá', 'money', 'products', 1, 0, 1, 0, NULL, NULL, 0, 0, 1, '2022-11-08 18:24:23', '2022-11-08 18:24:23');
 INSERT INTO `n_detail_tables` VALUES (143, 'total_cost', 0, 'number', 'Tổng tiền', 'money', 'products', 1, 0, 1, 0, NULL, NULL, 0, 0, 1, '2022-11-08 18:24:23', '2022-11-08 18:24:23');
 INSERT INTO `n_detail_tables` VALUES (144, 'created_at', 0, NULL, 'Thời gian tạo', 'date_time', 'products', 1, 1, 1, 1, NULL, NULL, 1, 0, 1, '2022-11-08 18:24:23', '2022-11-08 18:24:23');
+INSERT INTO `n_detail_tables` VALUES (145, 'status', 0, NULL, 'Trạng thái', 'select', 'orders', 1, 1, 1, 1, NULL, '{\r\n \"data\": {\r\n   \"table\": null,\r\n    \"option\":{\r\n    \"not_accept\":\"Chưa duyệt\",\r\n    \"accepted\":\"Đã duyệt\"\r\n   }\r\n },\r\n \"config\": {\r\n  \"searchbox\": 0\r\n }\r\n}', 10, 0, 1, '2022-11-08 18:24:23', '2022-11-08 18:24:23');
 
 -- ----------------------------
 -- Table structure for n_group_users
@@ -13212,13 +13213,14 @@ CREATE TABLE `n_group_users`  (
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `created_by` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 41 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 42 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of n_group_users
 -- ----------------------------
-INSERT INTO `n_group_users` VALUES (1, 'Admin cấp cao', 1, 'Admin cao nhất có mọi quyền truy cập', 1, 1, '2022-09-30 22:53:00', '2022-10-11 15:51:07', 1);
-INSERT INTO `n_group_users` VALUES (39, 'Phòng kinh doanh', 39, NULL, NULL, 1, '2022-09-20 16:04:00', '2022-10-08 03:20:14', 1);
+INSERT INTO `n_group_users` VALUES (1, 'Admin cấp cao', 0, 'Admin cao nhất có mọi quyền truy cập', 1, 1, '2022-09-30 22:53:00', '2022-11-09 11:29:28', 1);
+INSERT INTO `n_group_users` VALUES (39, 'Phòng kinh doanh', 1, NULL, NULL, 1, '2022-09-20 16:04:00', '2022-11-09 11:05:56', 1);
+INSERT INTO `n_group_users` VALUES (41, 'Phòng thiết kế', 1, 'Phòng thiết kế', NULL, 1, '2022-11-09 04:33:00', '2022-11-09 11:34:17', 1);
 
 -- ----------------------------
 -- Table structure for n_modules
@@ -13408,7 +13410,7 @@ CREATE TABLE `n_users`  (
 -- Records of n_users
 -- ----------------------------
 INSERT INTO `n_users` VALUES (1, 'dev', 'e10adc3949ba59abbe56e057f20f883e', 'Nguyen Duy Khanh', 'nguyenduykhanh2323@gmail.com', '0378050251', 1, 0, 1, 'Lập trình viên', 1, '2022-09-20 15:23:18', '2022-09-20 15:23:18', 0);
-INSERT INTO `n_users` VALUES (16, 'busn2', 'e10adc3949ba59abbe56e057f20f883e', 'Nguyen Duy Khanh', 'nguyenduykhanh2323@gmail.com', '0378050251', 39, 0, NULL, NULL, 1, '2022-09-21 09:03:30', '2022-09-21 09:03:30', 1);
+INSERT INTO `n_users` VALUES (16, 'busn2', 'e10adc3949ba59abbe56e057f20f883e', 'Michael Owen', 'nguyenduykhanh2323@gmail.com', '0378050251', 0, 0, NULL, NULL, 1, '2022-09-21 09:03:00', '2022-11-09 11:00:30', 1);
 
 -- ----------------------------
 -- Table structure for orders
@@ -13440,7 +13442,7 @@ CREATE TABLE `orders`  (
 -- ----------------------------
 -- Records of orders
 -- ----------------------------
-INSERT INTO `orders` VALUES (10, NULL, 2, 3, 1, '2022-11-08 16:23:00', '2022-11-08 16:23:00', '{\"quantative\":\"400\",\"substance\":\"0\"}', 200000000, 10, 1, 220000000, 5000000, 220000000, 'advance_payment', 'not_accept', '2022-11-08 17:12:00', NULL);
+INSERT INTO `orders` VALUES (10, NULL, 2, 3, 1, '2022-11-08 16:23:00', '2022-11-08 16:23:00', '{\"quantative\":\"400\",\"substance\":\"1\"}', 200000000, 10, 1, 220000000, 5000000, 220000000, 'advance_payment', 'not_accept', '2022-11-08 17:12:00', NULL);
 
 -- ----------------------------
 -- Table structure for p_substances
@@ -13767,7 +13769,6 @@ CREATE TABLE `q_papers`  (
 -- ----------------------------
 INSERT INTO `q_papers` VALUES (2, 'BG 1', 10000, 1, 10200, 2, '0.35', '0.51', '{\"quantitative\":\"350\",\"unit_price\":\"20\",\"act\":1,\"total\":12869849.999999998}', '{\"type\":\"1\",\"total\":\"500000\"}', '{\"act\":\"1\",\"color_num\":\"4\",\"style\":\"4\",\"device\":\"2\",\"total\":11146000}', '{\"act\":\"1\",\"materal\":\"8\",\"num_face\":\"0\",\"device\":\"1\",\"total\":50000}', '{\"act\":\"1\",\"materal\":\"other\",\"materal_price\":\"100\",\"num_face\":\"2\",\"cover_materal\":\"6\",\"cover_num_face\":\"2\",\"total\":10663589.999999998}', '{\"act\":\"1\",\"price\":\"1000\",\"shape\":\"10\",\"device\":\"2\",\"total\":10000010}', '{\"act\":\"1\",\"num_face\":\"2\",\"device\":\"3\",\"total\":16300000}', '{\"act\":\"1\",\"shape_price\":\"1000\",\"device\":\"11\",\"total\":1600000}', '{\"act\":\"1\",\"device\":\"5\",\"total\":120000}', '{\"act\":\"1\",\"device\":\"6\",\"total\":550000}', '{\"act\":\"1\",\"price\":\"200\",\"total\":2000000}', 11, 'note', 65799450, 1, NULL, '2022-10-07 16:22:17', '2022-10-07 09:22:17', 0);
 INSERT INTO `q_papers` VALUES (3, 'BG 1 - tờ HDSD', 10000, 1, 10200, 2, '0.25', '0.14', '{\"quantitative\":\"400\",\"unit_price\":\"20\",\"act\":1,\"total\":2884000.0000000005}', '{\"type\":\"1\",\"total\":\"100000\"}', '{\"act\":\"1\",\"color_num\":\"2\",\"style\":\"4\",\"device\":\"1\",\"total\":1238600}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', 11, 'note', 4222600, 0, NULL, NULL, NULL, 0);
-INSERT INTO `q_papers` VALUES (4, 'Hộp giấy 1 tờ in', 10000, 1, 10200, 2, '0.35', '0.56', '{\"quantitative\":\"400\",\"unit_price\":\"2000\",\"act\":1,\"total\":1615040000.0000002}', '{\"type\":\"1\",\"total\":\"500000\"}', '{\"act\":\"1\",\"color_num\":\"2\",\"style\":\"3\",\"device\":\"2\",\"total\":5728000}', '{\"act\":\"1\",\"materal\":\"9\",\"num_face\":\"2\",\"device\":\"8\",\"total\":11058928.000000002}', '{\"act\":0}', '{\"act\":\"1\",\"price\":\"200\",\"shape\":\"200000\",\"device\":\"2\",\"total\":2200000}', '{\"act\":0}', '{\"act\":\"1\",\"float\":\"0\",\"shape_price\":\"2000\",\"device\":\"11\",\"total\":1600000}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', 12, NULL, 1636126928, 1, NULL, NULL, NULL, 0);
 INSERT INTO `q_papers` VALUES (5, 'Báo Giá Test 1', 1000, 1, 1020, 2, '0.43', '0.65', '{\"quantitative\":\"350\",\"unit_price\":\"25\",\"act\":1,\"total\":2739100}', '{\"type\":\"1\",\"total\":\"100000\"}', '{\"act\":0}', '{\"act\":\"1\",\"materal\":\"9\",\"num_face\":\"1\",\"device\":\"1\",\"total\":856078}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":\"1\",\"device\":\"13\",\"total\":170000}', '{\"act\":0}', 14, NULL, 3865178, 1, NULL, NULL, NULL, 0);
 
 -- ----------------------------
@@ -14005,7 +14006,6 @@ CREATE TABLE `quotes`  (
 -- Records of quotes
 -- ----------------------------
 INSERT INTO `quotes` VALUES (11, NULL, 'not_send', 'BG 1', 10000, '33x55x66', 1, 'i350', 3, 1, 'CTY 678910', 'Contacter c', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '123456789', 'hard_group', 1, '10', '200000', '167254475', '183999922.5', 'note', NULL, '2022-10-11 14:24:08', '2022-10-11 07:24:08', 1);
-INSERT INTO `quotes` VALUES (12, NULL, 'not_send', 'Hộp giấy 1', 10000, '10x10x10', 2, 'i 350', 6, 1, 'CTY 678911', 'Contacter D', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '123456789', 'paper_group', 1, '10', '100000', '1636126928', '1799749620.8', NULL, NULL, '2022-11-05 13:51:40', '2022-11-05 06:51:40', 1);
 INSERT INTO `quotes` VALUES (14, NULL, 'not_send', 'Báo Giá Test 1', 10000, '20x10x5', 1, 'I350', 6, 1, 'CTY 678911', 'Contacter D', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '123456789', 'paper_group', 1, '10', '100000', '3865178', '4261695.8', NULL, NULL, '2022-11-05 14:02:24', '2022-11-05 07:02:24', 1);
 
 SET FOREIGN_KEY_CHECKS = 1;

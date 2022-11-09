@@ -3,21 +3,30 @@ namespace App\Http\Controllers\Order;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Constants\NameConstant;
+use App\Models\Order;
+use App\Models\Product;
+
 class OrderController extends Controller
 {
     function __construct()
     {
         parent::__construct();
-        $this->admins = new \App\Services\AdminService;
         $this->order_service =  new \App\Services\OrderService;
     }
 
-    public function insert(Request $request, $data = array())
+    private function getOrderActionViewData($action, $actioName)
+    {
+        $data = $this->getDataActionView('orders', $action, $actioName);
+        $data['listPaperSubs'] = getDataTable('p_substances', ['id', 'name'], 
+            [['key'=>'act', 'compare'=>'=', 'value'=>1]], 0, 'name', 'asc', true);
+        return $data;
+    }
+
+    public function insert(Request $request)
     {
         if (!$request->isMethod('POST')) {
-            $data['listPaperSubs'] = getDataTable('p_substances', ['id', 'name'], 
-            [['key'=>'act', 'compare'=>'=', 'value'=>1]], 0, 'name', 'asc', true);
-            return view('orders.insert', $data);    
+            $data = $this->getOrderActionViewData('insert', 'Thêm');
+            return view('orders.view', $data);    
         }else{
             if (!$this->admins->checkPermissionAction('orders', 'insert')) {
                 echoJson(110, 'Bạn không có quyền thực hiện thao tác này!');
@@ -45,7 +54,7 @@ class OrderController extends Controller
         }   
     }
 
-    public function setListProductView(Request $request)
+    public function setListProductView()
     {
         if (!$this->admins->checkPermissionAction('orders', 'insert')) {
             return '403 : Lỗi quyền truy cập !';
@@ -57,6 +66,18 @@ class OrderController extends Controller
         $data['listProCate'] = getDataTable('product_categories', '*', 
         [['key'=>'act', 'compare'=>'=', 'value'=>1]], 0, 'name', 'asc', true);
         return view('orders.list_products', $data);
+    }
+
+    public function update(Request $request, $id){
+        if (!$request->isMethod('POST')) {
+            $data = $this->getOrderActionViewData('update', 'Chi tiết');
+            $data['dataItemOrder'] = Order::find($id);
+            if (@$data['dataItemOrder']['id']) {
+                $data['dataViewProductList'] = $this->admins->getBaseTable('products');
+                $data['listDataProduct'] = Product::where('order_id', $id)->get()->toArray();
+            }
+            return view('orders.view', $data);
+        }
     }
 }
 ?>
