@@ -39,9 +39,8 @@ class OrderController extends Controller
             }
             if ($orderId) {
                 $status = $this->order_service->insertOrderDetail($dataInsert, $orderId);
-                dd($status);
                 if ($status) {
-                    echoJson(200, 'Thêm đơn hàng thành công!');
+                    echoJsonRedirect('view/orders', 200, 'Thêm thành công đơn hàng!');
                     return;
                 }else{
                     echoJson(110, 'Đã xảy ra lỗi khi cấu hình lệnh!');
@@ -77,6 +76,22 @@ class OrderController extends Controller
                 $data['listDataProduct'] = Product::where('order_id', $id)->get()->toArray();
             }
             return view('orders.view', $data);
+        }else{
+            if (!$this->admins->checkPermissionAction('orders', 'update')) {
+                echoJson(110, 'Bạn không có quyền thực hiện thao tác này!');
+                return;
+            }
+            $data = $request->except('_token');
+            $data = @$data['order']??[];
+            $status = $this->order_service->updateOrder($data, $id);
+            if ($status) {
+                $back_url = @session()->get('back_url')??'view/orders';
+                echoJsonRedirect($back_url, 200, 'Cập nhật đơn hàng thành công !');
+                return;
+            }else{
+                echoJson(110, 'Có lỗi xảy ra khi cập nhật đơn hàng !');
+                return;
+            }
         }
     }
 }

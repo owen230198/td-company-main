@@ -3,15 +3,15 @@
 
  Source Server         : localhost
  Source Server Type    : MySQL
- Source Server Version : 100425
+ Source Server Version : 100424
  Source Host           : localhost:3306
  Source Schema         : td_company
 
  Target Server Type    : MySQL
- Target Server Version : 100425
+ Target Server Version : 100424
  File Encoding         : 65001
 
- Date: 09/11/2022 18:09:31
+ Date: 10/11/2022 00:16:12
 */
 
 SET NAMES utf8mb4;
@@ -32,18 +32,13 @@ CREATE TABLE `c_designs`  (
   `expired` datetime(0) NULL DEFAULT NULL,
   `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `product_id` int(10) NULL DEFAULT NULL,
+  `order_id` int(10) NULL DEFAULT NULL,
   `status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `created_by` int(10) NULL DEFAULT NULL,
   `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of c_designs
--- ----------------------------
-INSERT INTO `c_designs` VALUES (6, 'Contacter c', 2, 2, 2, 1, '2022-11-08 00:00:00', '2022-11-08 00:00:00', 'tk hop cung', 15, 'accepted', 1, '2022-11-08 17:12:00', NULL);
-INSERT INTO `c_designs` VALUES (7, 'Contacter c', 1, 1, 2, 1, '2022-11-08 00:00:00', '2022-11-08 00:00:00', 'tk hop giay', 16, 'accepted', 1, '2022-11-08 17:12:00', NULL);
 
 -- ----------------------------
 -- Table structure for c_processes
@@ -73,14 +68,9 @@ CREATE TABLE `c_processes`  (
   `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL,
   `product_id` int(10) NULL DEFAULT NULL,
+  `order_id` int(10) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of c_processes
--- ----------------------------
-INSERT INTO `c_processes` VALUES (3, 'accepted', 'Xén theo ốc', '10x10', '20X20', 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, '2022-11-08 00:00:00', '2022-11-08 00:00:00', '{\"pin\":\"0\",\"glue\":\"0\",\"elevated\":\"0\",\"compress\":\"1\",\"jump\":\"0\",\"fill\":\"1\",\"stamp\":\"1\",\"grooved\":\"1\",\"finish\":\"0\",\"fold\":\"0\",\"sew\":\"0\",\"sawing\":\"1\"}', 'sx hop cung', 1, '2022-11-08 17:12:00', NULL, 15);
-INSERT INTO `c_processes` VALUES (4, 'accepted', 'Xén theo ốc', '40x33', '20x22', 1, 2, 1, 1, 1, 1, 0, 1, 1, 1, '2022-11-08 00:00:00', '2022-11-08 00:00:00', '{\"pin\":\"1\",\"glue\":\"1\",\"elevated\":\"1\",\"compress\":\"1\",\"jump\":\"1\",\"fill\":\"1\",\"stamp\":\"1\",\"grooved\":\"1\",\"finish\":\"1\",\"fold\":\"1\",\"sew\":\"1\",\"sawing\":\"1\"}', 'sx hop giay', 1, '2022-11-08 17:12:00', NULL, 16);
 
 -- ----------------------------
 -- Table structure for citys
@@ -13440,11 +13430,6 @@ CREATE TABLE `orders`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of orders
--- ----------------------------
-INSERT INTO `orders` VALUES (10, NULL, 2, 3, 1, '2022-11-08 16:23:00', '2022-11-08 16:23:00', '{\"quantative\":\"400\",\"substance\":\"1\"}', 200000000, 10, 1, 220000000, 5000000, 220000000, 'advance_payment', 'not_accept', '2022-11-08 17:12:00', NULL);
-
--- ----------------------------
 -- Table structure for p_substances
 -- ----------------------------
 DROP TABLE IF EXISTS `p_substances`;
@@ -13519,12 +13504,6 @@ CREATE TABLE `products`  (
   `updated_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of products
--- ----------------------------
-INSERT INTO `products` VALUES (15, 'Hop cung', 'not_accept', 1, 2, 20000, '5000', '100000000', 'note hop cung', 10, 1, '2022-11-08 17:12:00', NULL);
-INSERT INTO `products` VALUES (16, 'Hop giay', 'not_accept', 2, 1, 50000, '2000', '100000000', 'sp hop giay', 10, 1, '2022-11-08 17:12:00', NULL);
 
 -- ----------------------------
 -- Table structure for q_cartons

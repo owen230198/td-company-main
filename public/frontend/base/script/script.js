@@ -14,7 +14,12 @@ var baseAjaxForm = function()
 		    }
 		    else{
 		      	toastr['error'](json.message);
-		    } 
+		    }
+			if (json.url != null) {
+				setTimeout(() => {
+					window.location.href=json.url;
+				}, 1500);
+			} 
 	    })
 	});
 }

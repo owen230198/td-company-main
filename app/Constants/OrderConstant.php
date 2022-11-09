@@ -6,6 +6,7 @@ class OrderConstant
         'c_design'=>'c_designs',
         'c_process'=>'c_processes'
     ];
+    const CHILD_TABLE_ORDER = ['products', 'c_designs', 'c_processes'];
 
     //Order Status
     const ORDER_NOT_ACCEPT = 'not_accept';

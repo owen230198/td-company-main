@@ -1,7 +1,9 @@
 @extends('index')
 @section('content')
     <div class="dashborad_content position-relative p-3 bg_white">
-        <form action="{{ $action }}-orders" method="POST" class="actionForm {{ $action }}_order_form baseAjaxFor" enctype="multipart/form-data" lang="vi">
+        <form action="{{ $action }}-orders{{ $action==\App\Constants\VariableConstant::ACTION_UPDATE?
+        '/'.@$dataItemOrder['id']:'' }}" method="POST" class="actionForm {{ $action }}_order_form baseAjaxForm" 
+        enctype="multipart/form-data" lang="vi">
             @csrf
             <div class="form_order_action">
                 <div class="order_base_input row justify-content-center">
@@ -17,21 +19,23 @@
                     @include('orders.field_actions')
                 </div>
                 <div class="ajax_product_orders mt-4 pt-4 list_product_order">
-                    @if ($action == 'update')
-                    <div class="mb-4">
-                    <h1 class="station-richmenu-main__ttl text-capitalize mb-3 fs-18">Danh sách sản phẩm trong đơn hàng</h1>
-                        @include('table.table_base_view', ['field_shows'=>@$dataViewProductList['field_shows'], 
-                        'tableItem'=>@$dataViewProductList['tableItem'], 'data_tables'=>@$listDataProduct, 'hideCheck'=>true])
-                    </div>
-                    @endif
+
                 </div>
             </div>
             <div class="group_btn_action_form p-1 mt-3">
                 <button type="submit" class="station-richmenu-main-btn-area">
-                    <i class="fa fa-check mr-2 fs-14" aria-hidden="true"></i>Hoàn tất
+                    <i class="fa fa-check mr-2 fs-14" aria-hidden="true"></i>{{ getActionByKey($action) }}
                 </button>
+                @if ($action == \App\Constants\VariableConstant::ACTION_UPDATE)
+                <button type="button" class="station-richmenu-main-btn-area">
+                    <i class="fa fa-print mr-2 fs-14" aria-hidden="true"></i>In đơn hàng
+                </button>
+                <a href="" class="station-richmenu-main-btn-area">
+                    <i class="fa fa-file-text-o mr-2 fs-14" aria-hidden="true"></i>Tạo phiếu chi
+                </a>      
+                @endif
                 <a href="{{ @session()->get('back_url') ? session()->get('back_url') : '' }}"
-                    class="station-richmenu-main-btn-area mx-2">
+                    class="station-richmenu-main-btn-area">
                     <i class="fa fa-chevron-left mr-2 fs-14" aria-hidden="true"></i>Trở về
                 </a>
                 <a href="{{ @session()->get('back_url') ? session()->get('back_url') : '' }}"
@@ -40,6 +44,13 @@
                 </a>
             </div>
         </form>
+        @if ($action == 'update')
+            <div class="my-4">
+                <h1 class="station-richmenu-main__ttl text-capitalize mb-3 fs-18">Danh sách sản phẩm trong đơn hàng</h1>
+                @include('table.table_base_view', ['field_shows'=>@$dataViewProductList['field_shows'], 
+                'tableItem'=>@$dataViewProductList['tableItem'], 'data_tables'=>@$listDataProduct, 'hideCheck'=>true])
+            </div>
+        @endif
     </div>
 @endsection
 

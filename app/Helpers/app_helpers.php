@@ -1,10 +1,18 @@
 <?php
 if(!function_exists('echoJson')){
-    function echoJson($code,$message){
+    function echoJson($code, $message){
         $obj = new stdClass();
         $obj->code= $code;
         $obj->message= $message;
         echo json_encode($obj);
+    }
+}
+
+if (!function_exists('echoJsonRedirect')) {
+    function echoJsonRedirect($url, $code, $msg)
+    {
+        $arr = ['url'=>$url, 'code'=>$code, 'message'=>$msg];
+        echo json_encode($arr);
     }
 }
 

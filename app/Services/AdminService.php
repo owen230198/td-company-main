@@ -2,6 +2,7 @@
 namespace App\Services;
 use App\Services\BaseService;
 use Illuminate\Support\Facades\Schema;
+use App\Constants\VariableConstant;
 class AdminService extends BaseService
 {
     function __construct()
@@ -243,6 +244,10 @@ class AdminService extends BaseService
             $quote_id = getFieldDataById('quote_id', getClassByTable($table), $id);
         }
         $remove = $this->db::table($table)->where('id', $id)->delete();
+        if ($remove && in_array($table, VariableConstant::ACTION_TABLE_SELF)) {
+            $objService = getServiceByTable($table);
+            $objService->afterRemove($id);
+        }
         if ($remove&&in_array($table, \App\Models\Quote::$tableChild)) {
             $this->quote_service->refreshQuoteTotal($quote_id);
         }
