@@ -3,15 +3,15 @@
 
  Source Server         : localhost
  Source Server Type    : MySQL
- Source Server Version : 100424
+ Source Server Version : 100425
  Source Host           : localhost:3306
  Source Schema         : td_company
 
  Target Server Type    : MySQL
- Target Server Version : 100424
+ Target Server Version : 100425
  File Encoding         : 65001
 
- Date: 10/11/2022 00:16:12
+ Date: 10/11/2022 17:42:25
 */
 
 SET NAMES utf8mb4;
@@ -38,7 +38,13 @@ CREATE TABLE `c_designs`  (
   `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of c_designs
+-- ----------------------------
+INSERT INTO `c_designs` VALUES (8, 'Gerrard5', 3, 2, 3, 2, '2022-11-10 00:00:00', '2022-11-25 00:00:00', 'tk hop cung note', 17, 11, 'not_accept', 1, '2022-11-10 09:33:00', '2022-11-10 10:24:27');
+INSERT INTO `c_designs` VALUES (9, 'Gerrard5', 2, 2, 3, 2, '2022-11-10 00:00:00', '2022-11-24 00:00:00', 'note tk hop giay', 18, 11, 'not_accept', 1, '2022-11-10 09:33:00', '2022-11-10 10:24:27');
 
 -- ----------------------------
 -- Table structure for c_processes
@@ -70,7 +76,13 @@ CREATE TABLE `c_processes`  (
   `product_id` int(10) NULL DEFAULT NULL,
   `order_id` int(10) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of c_processes
+-- ----------------------------
+INSERT INTO `c_processes` VALUES (5, 'not_accept', 'Xén theo ốc', '10x10', '20x20', 1, 2, 2, 2, 2, 1, 0, 1, 2, 2, '2022-11-10 00:00:00', '2022-11-28 00:00:00', '{\"pin\":\"0\",\"glue\":\"0\",\"elevated\":\"0\",\"compress\":\"1\",\"jump\":\"1\",\"fill\":\"1\",\"stamp\":\"0\",\"grooved\":\"1\",\"finish\":\"0\",\"fold\":\"1\",\"sew\":\"1\",\"sawing\":\"1\"}', 'note sx hop cung', 1, '2022-11-10 09:33:00', NULL, 17, 11);
+INSERT INTO `c_processes` VALUES (6, 'not_accept', 'Xén theo ốc', '30x20', '50x30', 1, 2, 1, 2, 2, 1, 0, 0, 2, 1, '2022-11-10 00:00:00', '2022-11-30 00:00:00', '{\"pin\":\"1\",\"glue\":\"1\",\"elevated\":\"1\",\"compress\":\"1\",\"jump\":\"1\",\"fill\":\"1\",\"stamp\":\"1\",\"grooved\":\"1\",\"finish\":\"1\",\"fold\":\"1\",\"sew\":\"1\",\"sawing\":\"1\"}', 'note sx hop giay', 1, '2022-11-10 09:33:00', NULL, 18, 11);
 
 -- ----------------------------
 -- Table structure for citys
@@ -13186,7 +13198,7 @@ INSERT INTO `n_detail_tables` VALUES (141, 'qty', 1, 'number', 'SL thành phẩm
 INSERT INTO `n_detail_tables` VALUES (142, 'price', 0, 'number', 'Đơn giá', 'money', 'products', 1, 0, 1, 0, NULL, NULL, 0, 0, 1, '2022-11-08 18:24:23', '2022-11-08 18:24:23');
 INSERT INTO `n_detail_tables` VALUES (143, 'total_cost', 0, 'number', 'Tổng tiền', 'money', 'products', 1, 0, 1, 0, NULL, NULL, 0, 0, 1, '2022-11-08 18:24:23', '2022-11-08 18:24:23');
 INSERT INTO `n_detail_tables` VALUES (144, 'created_at', 0, NULL, 'Thời gian tạo', 'date_time', 'products', 1, 1, 1, 1, NULL, NULL, 1, 0, 1, '2022-11-08 18:24:23', '2022-11-08 18:24:23');
-INSERT INTO `n_detail_tables` VALUES (145, 'status', 0, NULL, 'Trạng thái', 'select', 'orders', 1, 1, 1, 1, NULL, '{\r\n \"data\": {\r\n   \"table\": null,\r\n    \"option\":{\r\n    \"not_accept\":\"Chưa duyệt\",\r\n    \"accepted\":\"Đã duyệt\"\r\n   }\r\n },\r\n \"config\": {\r\n  \"searchbox\": 0\r\n }\r\n}', 10, 0, 1, '2022-11-08 18:24:23', '2022-11-08 18:24:23');
+INSERT INTO `n_detail_tables` VALUES (145, 'status', 0, NULL, 'Trạng thái', 'select', 'orders', 1, 0, 1, 1, NULL, '{\r\n \"data\": {\r\n   \"table\": null,\r\n    \"option\":{\r\n    \"not_accept\":\"Chưa duyệt\",\r\n    \"accepted\":\"Đã duyệt\"\r\n   }\r\n },\r\n \"config\": {\r\n  \"searchbox\": 0\r\n }\r\n}', 10, 0, 1, '2022-11-10 15:31:49', '2022-11-10 15:31:49');
 
 -- ----------------------------
 -- Table structure for n_group_users
@@ -13427,7 +13439,12 @@ CREATE TABLE `orders`  (
   `updated_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx`(`customer_id`, `created_by`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of orders
+-- ----------------------------
+INSERT INTO `orders` VALUES (11, NULL, 2, 16, 1, '2022-11-10 09:04:00', '2022-11-30 09:04:00', '{\"quantative\":\"400\",\"substance\":\"5\"}', 100000000, 20, 1, 120000000, 5000000, 120000000, 'advance_payment', 'not_accept', '2022-11-10 10:24:00', '2022-11-10 10:24:27');
 
 -- ----------------------------
 -- Table structure for p_substances
@@ -13503,7 +13520,13 @@ CREATE TABLE `products`  (
   `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of products
+-- ----------------------------
+INSERT INTO `products` VALUES (17, 'Hop cung', 'not_accept', 1, 2, 10000, '5000', '50000000', 'Hop cung note', 11, 1, '2022-11-10 09:33:00', NULL);
+INSERT INTO `products` VALUES (18, 'Hop giay', 'not_accept', 2, 1, 50000, '1000', '50000000', 'note hop giay', 11, 1, '2022-11-10 09:33:00', NULL);
 
 -- ----------------------------
 -- Table structure for q_cartons

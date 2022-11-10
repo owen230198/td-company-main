@@ -8,6 +8,18 @@ class OrderConstant
     ];
     const CHILD_TABLE_ORDER = ['products', 'c_designs', 'c_processes'];
 
+    // PRODUCT CATEGORY TYPE
+    const PRO_CATE_TYPE = [
+        'pre_order'=>['name'=>'Hàng đặt'],
+        'available'=>[
+            'name'=>'Hàng bán sẵn', 
+            'child'=>[
+                'hard'=>['name'=>'Hộp cứng'],
+                'paper'=>['name'=>'Hộp giấy']
+            ]
+        ]
+    ];
+
     //Order Status
     const ORDER_NOT_ACCEPT = 'not_accept';
     const ORDER_ACCEPTED = 'accepted';

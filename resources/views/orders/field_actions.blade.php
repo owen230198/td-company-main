@@ -1,4 +1,4 @@
-<div class="form-group mb-3 pb-3 border_bot_eb vat_cost_group_input d_flex col-4" {{ @$dataItemOrder['vat']==1?'style="display: none"':'' }}>
+<div class="form-group mb-3 pb-3 border_bot_eb vat_cost_group_input d_flex col-4" {{ (int)@$dataItemOrder['vat']==0?'style=display:none':'' }}>
     <label class="mb-0 mr-3 w_125 fs-13 text-capitalize">VAT(%)</label>
     <input type="number" class="form-control" name="order[vat_percent]" value="{{ (int)@$dataItemOrder['vat_percent'] }}">
 </div>

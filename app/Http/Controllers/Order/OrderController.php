@@ -58,12 +58,10 @@ class OrderController extends Controller
         if (!$this->admins->checkPermissionAction('orders', 'insert')) {
             return '403 : Lỗi quyền truy cập !';
         }
+        $data = getProductCategoryOption();
         $data['proQuantity'] = (int)@request('qty');
         $data['proName'] = !empty(request('name'))?request('name'):'Sản phẩm';
         $data['cDesignContacter'] = getFieldDataById('contacter', 'Customer', (int)@request('customer_id'));
-        $data['listTypeProcate'] = NameConstant::PRO_CATE_TYPE;
-        $data['listProCate'] = getDataTable('product_categories', '*', 
-        [['key'=>'act', 'compare'=>'=', 'value'=>1]], 0, 'name', 'asc', true);
         return view('orders.list_products', $data);
     }
 

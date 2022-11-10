@@ -16,7 +16,7 @@ class VariableConstant
     const CONFIG_TABLE = ['q_configs', 'n_roles'];
     const CONFIG_TABLE_ROLE = ['view'=>'Xem dữ liệu', 'update'=>'Sửa dữ liệu']; 
     const ROLE_SELF_TABLE = [];
-    const ACTION_TABLE_SELF = ['orders'];
+    const ACTION_TABLE_SELF = ['orders', 'products'];
 
     //Action name
     const ACTION_INSERT = 'insert';
