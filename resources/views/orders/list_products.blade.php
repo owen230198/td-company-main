@@ -1,4 +1,4 @@
-<ul class="nav nav-tabs tab_product_list" id="myTab" role="tablist">
+<ul class="nav nav-pills tab_product_list" id="myTab" role="tablist">
     @for($i=0; $i<$proQuantity; $i++)
         <li class="nav-item button_item_config_product" data-target="pro-{{ $i }}">
             <a class="nav-link {{ $i==0?'active':'' }} pro-{{ $i }}-label" id="pro-{{ $i }}-tab" data-toggle="tab" href="#pro-{{ $i }}" role="tab" aria-controls="pro-{{ $i }}"

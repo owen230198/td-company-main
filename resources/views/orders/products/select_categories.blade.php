@@ -1,6 +1,6 @@
 <div class="form-group d-flex mb-3 pb-3 border_bot_eb col-4">
     <label class="mb-0 mr-3 w_125 fs-13 text-capitalize">Nhóm sản phẩm</label>
-    <select name="product[{{ $key }}][product_category_id]" class="form-control select_config">
+    <select name="{{ $singleRecord?'product_category_id':'product['.$key.'][product_category_id]' }}" class="form-control select_config">
         <option value="">Chọn danh mục</option>
         @foreach ($listTypeProcate as $t_key => $cateType)
             <optgroup label="{{ @$cateType['name'] }}">
@@ -9,7 +9,7 @@
                         <optgroup label="__{{ @$typeChild['name'] }}">
                             @foreach ($listProCate as $cateroryChild)
                                 @if (@$cateroryChild['parent'] == $tc_key)
-                                    <option value="{{ @$cateroryChild['id'] }}">
+                                    <option value="{{ @$cateroryChild['id'] }}" {{ @$dataItemProduct['product_category_id']==$cateroryChild['id']?'selected':'' }}>
                                         ___{{ @$cateroryChild['name'] }}
                                     </option>
                                 @endif    
@@ -19,7 +19,7 @@
                 @endif
                 @foreach ($listProCate as $category)
                     @if (@$category['parent'] == $t_key)
-                        <option value="{{ @$category['id'] }}">___{{ @$category['name'] }}</option>
+                        <option value="{{ @$category['id'] }}" {{ @$dataItemProduct['product_category_id']==$category['id']?'selected':'' }}>___{{ @$category['name'] }}</option>
                     @endif    
                 @endforeach
             </optgroup> 

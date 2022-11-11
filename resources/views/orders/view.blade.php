@@ -10,10 +10,7 @@
                     @foreach ($field_list as $field)
                         <div class="form-group d-flex mb-3 pb-3 border_bot_eb col-4">
                             <label class="mb-0 mr-3 w_125 fs-13 text-capitalize">{{ $field['note'] }}</label>
-                            @include('view_update.' . $field['view_type'] . '', [
-                                'field' => $field,
-                                'data' => @$dataItemOrder??[],
-                            ])
+                            @include('view_update.'.$field['view_type'], ['field' => $field, 'data' => @$dataItemOrder??[]])
                         </div>
                     @endforeach
                     @include('orders.field_actions')
@@ -38,15 +35,11 @@
                     class="station-richmenu-main-btn-area">
                     <i class="fa fa-chevron-left mr-2 fs-14" aria-hidden="true"></i>Trở về
                 </a>
-                <a href="{{ @session()->get('back_url') ? session()->get('back_url') : '' }}"
-                    class="station-richmenu-main-btn-area">
-                    <i class="fa fa-times mr-2 fs-14" aria-hidden="true"></i>Hủy
-                </a>
             </div>
         </form>
         @if ($action == 'update')
             <div class="my-4">
-                <h1 class="station-richmenu-main__ttl text-capitalize mb-3 fs-18">Danh sách sản phẩm trong đơn hàng</h1>
+                <h2 class="station-richmenu-main__ttl text-capitalize mb-3 fs-18">Danh sách sản phẩm trong đơn hàng</h2>
                 @include('table.table_base_view', ['field_shows'=>@$dataViewProductList['field_shows'], 
                 'tableItem'=>@$dataViewProductList['tableItem'], 'data_tables'=>@$listDataProduct, 'hideCheck'=>true])
             </div>

@@ -11,7 +11,7 @@
  Target Server Version : 100425
  File Encoding         : 65001
 
- Date: 10/11/2022 17:42:25
+ Date: 11/11/2022 18:29:22
 */
 
 SET NAMES utf8mb4;
@@ -38,13 +38,15 @@ CREATE TABLE `c_designs`  (
   `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of c_designs
 -- ----------------------------
 INSERT INTO `c_designs` VALUES (8, 'Gerrard5', 3, 2, 3, 2, '2022-11-10 00:00:00', '2022-11-25 00:00:00', 'tk hop cung note', 17, 11, 'not_accept', 1, '2022-11-10 09:33:00', '2022-11-10 10:24:27');
 INSERT INTO `c_designs` VALUES (9, 'Gerrard5', 2, 2, 3, 2, '2022-11-10 00:00:00', '2022-11-24 00:00:00', 'note tk hop giay', 18, 11, 'not_accept', 1, '2022-11-10 09:33:00', '2022-11-10 10:24:27');
+INSERT INTO `c_designs` VALUES (10, 'Contacter c', 1, 1, 2, 2, '2022-11-11 00:00:00', '2022-11-12 00:00:00', 'note tk hop giay 1', 19, 14, 'not_accept', 1, '2022-11-11 04:01:00', NULL);
+INSERT INTO `c_designs` VALUES (11, 'Contacter c', 3, 1, 3, 1, '2022-11-11 00:00:00', '2022-11-12 00:00:00', 'note tk hop cung 1', 20, 14, 'not_accept', 1, '2022-11-11 04:01:00', NULL);
 
 -- ----------------------------
 -- Table structure for c_processes
@@ -76,13 +78,15 @@ CREATE TABLE `c_processes`  (
   `product_id` int(10) NULL DEFAULT NULL,
   `order_id` int(10) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of c_processes
 -- ----------------------------
 INSERT INTO `c_processes` VALUES (5, 'not_accept', 'Xén theo ốc', '10x10', '20x20', 1, 2, 2, 2, 2, 1, 0, 1, 2, 2, '2022-11-10 00:00:00', '2022-11-28 00:00:00', '{\"pin\":\"0\",\"glue\":\"0\",\"elevated\":\"0\",\"compress\":\"1\",\"jump\":\"1\",\"fill\":\"1\",\"stamp\":\"0\",\"grooved\":\"1\",\"finish\":\"0\",\"fold\":\"1\",\"sew\":\"1\",\"sawing\":\"1\"}', 'note sx hop cung', 1, '2022-11-10 09:33:00', NULL, 17, 11);
 INSERT INTO `c_processes` VALUES (6, 'not_accept', 'Xén theo ốc', '30x20', '50x30', 1, 2, 1, 2, 2, 1, 0, 0, 2, 1, '2022-11-10 00:00:00', '2022-11-30 00:00:00', '{\"pin\":\"1\",\"glue\":\"1\",\"elevated\":\"1\",\"compress\":\"1\",\"jump\":\"1\",\"fill\":\"1\",\"stamp\":\"1\",\"grooved\":\"1\",\"finish\":\"1\",\"fold\":\"1\",\"sew\":\"1\",\"sawing\":\"1\"}', 'note sx hop giay', 1, '2022-11-10 09:33:00', NULL, 18, 11);
+INSERT INTO `c_processes` VALUES (7, 'not_accept', 'Xén theo ốc', '10x10', '20x20', 1, 2, 2, 1, 2, 2, 1, 2, 1, 1, '2022-11-11 00:00:00', '2022-11-15 00:00:00', '{\"pin\":\"1\",\"glue\":\"0\",\"elevated\":\"0\",\"compress\":\"0\",\"jump\":\"1\",\"fill\":\"0\",\"stamp\":\"1\",\"grooved\":\"0\",\"finish\":\"1\",\"fold\":\"0\",\"sew\":\"1\",\"sawing\":\"0\"}', 'note sx hop giay 1', 1, '2022-11-11 04:01:00', NULL, 19, 14);
+INSERT INTO `c_processes` VALUES (8, 'not_accept', 'Xén theo ốc', '30x20', '50x30', 1, 1, 1, 1, 2, 1, 0, 0, 0, 1, '2022-11-11 00:00:00', '2022-11-30 00:00:00', '{\"pin\":\"1\",\"glue\":\"0\",\"elevated\":\"0\",\"compress\":\"0\",\"jump\":\"1\",\"fill\":\"0\",\"stamp\":\"0\",\"grooved\":\"1\",\"finish\":\"1\",\"fold\":\"1\",\"sew\":\"0\",\"sawing\":\"1\"}', 'note hop cung 1', 1, '2022-11-11 04:01:00', NULL, 20, 14);
 
 -- ----------------------------
 -- Table structure for citys
@@ -13190,15 +13194,15 @@ INSERT INTO `n_detail_tables` VALUES (133, 'created_at', 0, NULL, 'Thời gian t
 INSERT INTO `n_detail_tables` VALUES (134, 'updated_at', 0, NULL, 'Thời gian sửa', 'date_time', 'product_categories', 1, 1, 1, 0, NULL, NULL, 1, 0, 1, '2022-10-31 23:37:52', '2022-10-31 23:37:52');
 INSERT INTO `n_detail_tables` VALUES (135, 'created_at', 0, NULL, 'Ngày tạo', 'date_time', 'orders', 1, 0, 0, 1, NULL, '', 0, 1, 1, '2022-11-09 16:40:16', '2022-11-09 16:40:16');
 INSERT INTO `n_detail_tables` VALUES (136, 'id', 0, NULL, 'ID', 'text', 'products', 0, 0, 0, 0, NULL, NULL, 0, 0, 0, '2022-11-08 18:24:23', '2022-11-08 18:24:23');
-INSERT INTO `n_detail_tables` VALUES (137, 'name', 0, NULL, 'Sản phẩm', 'text', 'products', 1, 1, 1, 1, NULL, NULL, 1, 0, 1, '2022-11-08 18:24:23', '2022-11-08 18:24:23');
-INSERT INTO `n_detail_tables` VALUES (138, 'status', 0, NULL, 'Trạng thái', 'select', 'products', 1, 1, 1, 1, NULL, '{\r\n \"data\": {\r\n   \"table\": null,\r\n    \"option\":{\r\n    \"not_accept\":\"Chưa duyệt\",\r\n    \"accepted\":\"Đã duyệt\"\r\n   }\r\n },\r\n \"config\": {\r\n  \"searchbox\": 0\r\n }\r\n}', 10, 0, 1, '2022-11-08 18:24:23', '2022-11-08 18:24:23');
-INSERT INTO `n_detail_tables` VALUES (139, 'product_category_id', 1, NULL, 'Danh mục', 'select', 'products', 1, 1, 1, 1, NULL, '{\r\n \"data\": {\r\n  \"source\": \"database\",\r\n  \"table\": \"ProductCategory\",\r\n  \"select\": \"id,name\",\r\n  \"field\": \"parent\"\r\n },\r\n \"config\": {\r\n  \"searchbox\": 1\r\n }\r\n}', 9, 0, 1, '2022-11-08 18:24:23', '2022-11-08 18:24:23');
+INSERT INTO `n_detail_tables` VALUES (137, 'name', 0, NULL, 'Sản phẩm', 'text', 'products', 1, 1, 1, 1, NULL, NULL, 0, 0, 1, '2022-11-11 11:26:03', '2022-11-11 11:26:03');
+INSERT INTO `n_detail_tables` VALUES (138, 'status', 0, NULL, 'Trạng thái', 'select', 'products', 1, 1, 1, 1, NULL, '{\r\n \"data\": {\r\n   \"table\": null,\r\n    \"option\":{\r\n    \"not_accept\":\"Chưa duyệt\",\r\n    \"accepted\":\"Đã duyệt\"\r\n   }\r\n },\r\n \"config\": {\r\n  \"searchbox\": 0\r\n }\r\n}', 0, 0, 1, '2022-11-11 11:26:03', '2022-11-11 11:26:03');
+INSERT INTO `n_detail_tables` VALUES (139, 'product_category_id', 1, NULL, 'Danh mục', 'select', 'products', 1, 1, 1, 1, NULL, '{\r\n \"data\": {\r\n  \"source\": \"database\",\r\n  \"table\": \"ProductCategory\",\r\n  \"select\": \"id,name\",\r\n  \"field\": \"parent\"\r\n },\r\n \"config\": {\r\n  \"searchbox\": 1\r\n }\r\n}', 0, 0, 1, '2022-11-11 11:26:03', '2022-11-11 11:26:03');
 INSERT INTO `n_detail_tables` VALUES (140, 'num_face_design', 1, 'number', 'Số mặt in', 'text', 'products', 1, 1, 1, 0, NULL, NULL, 0, 0, 1, '2022-11-09 16:48:41', '2022-11-09 16:48:41');
 INSERT INTO `n_detail_tables` VALUES (141, 'qty', 1, 'number', 'SL thành phẩm', 'text', 'products', 1, 1, 1, 0, NULL, NULL, 0, 0, 1, '2022-11-08 18:24:23', '2022-11-08 18:24:23');
 INSERT INTO `n_detail_tables` VALUES (142, 'price', 0, 'number', 'Đơn giá', 'money', 'products', 1, 0, 1, 0, NULL, NULL, 0, 0, 1, '2022-11-08 18:24:23', '2022-11-08 18:24:23');
-INSERT INTO `n_detail_tables` VALUES (143, 'total_cost', 0, 'number', 'Tổng tiền', 'money', 'products', 1, 0, 1, 0, NULL, NULL, 0, 0, 1, '2022-11-08 18:24:23', '2022-11-08 18:24:23');
-INSERT INTO `n_detail_tables` VALUES (144, 'created_at', 0, NULL, 'Thời gian tạo', 'date_time', 'products', 1, 1, 1, 1, NULL, NULL, 1, 0, 1, '2022-11-08 18:24:23', '2022-11-08 18:24:23');
+INSERT INTO `n_detail_tables` VALUES (143, 'total_cost', 0, 'number', 'Tổng tiền', 'money', 'products', 1, 0, 1, 0, 1, NULL, 0, 0, 1, '2022-11-11 10:04:39', '2022-11-11 10:04:39');
 INSERT INTO `n_detail_tables` VALUES (145, 'status', 0, NULL, 'Trạng thái', 'select', 'orders', 1, 0, 1, 1, NULL, '{\r\n \"data\": {\r\n   \"table\": null,\r\n    \"option\":{\r\n    \"not_accept\":\"Chưa duyệt\",\r\n    \"accepted\":\"Đã duyệt\"\r\n   }\r\n },\r\n \"config\": {\r\n  \"searchbox\": 0\r\n }\r\n}', 10, 0, 1, '2022-11-10 15:31:49', '2022-11-10 15:31:49');
+INSERT INTO `n_detail_tables` VALUES (147, 'note', 0, NULL, 'Ghi chú sản phẩm', 'textarea', 'products', 0, 1, 1, 0, NULL, NULL, 0, 0, 1, '2022-11-11 16:04:48', '2022-11-11 16:04:48');
 
 -- ----------------------------
 -- Table structure for n_group_users
@@ -13426,7 +13430,6 @@ CREATE TABLE `orders`  (
   `created_by` int(10) NULL DEFAULT NULL,
   `order_date` datetime(0) NULL DEFAULT NULL,
   `submit_date` datetime(0) NULL DEFAULT NULL,
-  `json_data_paper` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `product_cost` int(20) NULL DEFAULT NULL,
   `vat_percent` float NULL DEFAULT NULL,
   `vat` tinyint(4) NULL DEFAULT NULL,
@@ -13439,12 +13442,13 @@ CREATE TABLE `orders`  (
   `updated_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx`(`customer_id`, `created_by`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of orders
 -- ----------------------------
-INSERT INTO `orders` VALUES (11, NULL, 2, 16, 1, '2022-11-10 09:04:00', '2022-11-30 09:04:00', '{\"quantative\":\"400\",\"substance\":\"5\"}', 100000000, 20, 1, 120000000, 5000000, 120000000, 'advance_payment', 'not_accept', '2022-11-10 10:24:00', '2022-11-10 10:24:27');
+INSERT INTO `orders` VALUES (11, NULL, 2, 16, 1, '2022-11-10 09:04:00', '2022-11-30 09:04:00', 100000000, 20, 1, 120000000, 5000000, 120000000, 'advance_payment', 'not_accept', '2022-11-10 10:24:00', '2022-11-10 10:24:27');
+INSERT INTO `orders` VALUES (14, NULL, 2, 3, 1, '2022-11-11 03:43:00', '2022-11-11 03:43:00', 380000000, 0, 0, 380000000, 0, 380000000, 'not_payment', 'not_accept', '2022-11-11 04:01:00', NULL);
 
 -- ----------------------------
 -- Table structure for p_substances
@@ -13511,6 +13515,9 @@ CREATE TABLE `products`  (
   `status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `product_category_id` int(10) NULL DEFAULT NULL,
   `num_face_design` tinyint(4) NULL DEFAULT NULL,
+  `json_data_paper` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `order_date` datetime(0) NULL DEFAULT NULL,
+  `expired_date` datetime(0) NULL DEFAULT NULL,
   `qty` bigint(20) NULL DEFAULT NULL,
   `price` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `total_cost` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
@@ -13520,13 +13527,15 @@ CREATE TABLE `products`  (
   `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of products
 -- ----------------------------
-INSERT INTO `products` VALUES (17, 'Hop cung', 'not_accept', 1, 2, 10000, '5000', '50000000', 'Hop cung note', 11, 1, '2022-11-10 09:33:00', NULL);
-INSERT INTO `products` VALUES (18, 'Hop giay', 'not_accept', 2, 1, 50000, '1000', '50000000', 'note hop giay', 11, 1, '2022-11-10 09:33:00', NULL);
+INSERT INTO `products` VALUES (17, 'Hop cung', 'not_accept', 1, 2, NULL, '2022-11-11 11:45:16', '2022-11-11 11:45:16', 10000, '5000', '50000000', 'Hop cung note', 11, 1, '2022-11-10 09:33:00', NULL);
+INSERT INTO `products` VALUES (18, 'Hop giay', 'not_accept', 2, 1, NULL, '2022-11-11 11:45:16', '2022-11-11 11:45:16', 50000, '1000', '50000000', 'note hop giay', 11, 1, '2022-11-10 09:33:00', NULL);
+INSERT INTO `products` VALUES (19, 'Hop giay 1', 'not_accept', 2, 1, '{\"quantative\":\"300\",\"substance\":\"9\"}', '2022-11-11 11:45:16', '2022-11-11 11:45:16', 50000, '2000', '100000000', 'note hop giay 1', 14, 1, '2022-11-11 04:01:00', NULL);
+INSERT INTO `products` VALUES (20, 'Hop cung 1', 'not_accept', 1, 2, '{\"quantative\":\"400\",\"substance\":\"7\"}', '2022-11-11 11:45:16', '2022-11-11 11:45:16', 70000, '4000', '280000000', 'note hop cung 1', 14, 1, '2022-11-11 04:01:00', NULL);
 
 -- ----------------------------
 -- Table structure for q_cartons

@@ -17,8 +17,6 @@ class OrderController extends Controller
     private function getOrderActionViewData($action, $actioName)
     {
         $data = $this->getDataActionView('orders', $action, $actioName);
-        $data['listPaperSubs'] = getDataTable('p_substances', ['id', 'name'], 
-            [['key'=>'act', 'compare'=>'=', 'value'=>1]], 0, 'name', 'asc', true);
         return $data;
     }
 
