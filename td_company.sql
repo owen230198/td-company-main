@@ -11,7 +11,7 @@
  Target Server Version : 100425
  File Encoding         : 65001
 
- Date: 11/11/2022 18:29:22
+ Date: 12/11/2022 10:37:18
 */
 
 SET NAMES utf8mb4;
@@ -28,9 +28,13 @@ CREATE TABLE `c_designs`  (
   `num_face` tinyint(4) NULL DEFAULT NULL,
   `type` tinyint(4) NULL DEFAULT NULL,
   `style` tinyint(10) NULL DEFAULT NULL,
+  `print_style` int(10) NULL DEFAULT NULL,
   `demo_expired` datetime(0) NULL DEFAULT NULL,
+  `print_color` int(10) NULL DEFAULT NULL,
+  `custom_sending` int(10) NULL DEFAULT NULL,
   `expired` datetime(0) NULL DEFAULT NULL,
   `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `file` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   `product_id` int(10) NULL DEFAULT NULL,
   `order_id` int(10) NULL DEFAULT NULL,
   `status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
@@ -43,10 +47,10 @@ CREATE TABLE `c_designs`  (
 -- ----------------------------
 -- Records of c_designs
 -- ----------------------------
-INSERT INTO `c_designs` VALUES (8, 'Gerrard5', 3, 2, 3, 2, '2022-11-10 00:00:00', '2022-11-25 00:00:00', 'tk hop cung note', 17, 11, 'not_accept', 1, '2022-11-10 09:33:00', '2022-11-10 10:24:27');
-INSERT INTO `c_designs` VALUES (9, 'Gerrard5', 2, 2, 3, 2, '2022-11-10 00:00:00', '2022-11-24 00:00:00', 'note tk hop giay', 18, 11, 'not_accept', 1, '2022-11-10 09:33:00', '2022-11-10 10:24:27');
-INSERT INTO `c_designs` VALUES (10, 'Contacter c', 1, 1, 2, 2, '2022-11-11 00:00:00', '2022-11-12 00:00:00', 'note tk hop giay 1', 19, 14, 'not_accept', 1, '2022-11-11 04:01:00', NULL);
-INSERT INTO `c_designs` VALUES (11, 'Contacter c', 3, 1, 3, 1, '2022-11-11 00:00:00', '2022-11-12 00:00:00', 'note tk hop cung 1', 20, 14, 'not_accept', 1, '2022-11-11 04:01:00', NULL);
+INSERT INTO `c_designs` VALUES (8, 'Gerrard5', 3, 2, 3, 2, 1, '2022-11-10 00:00:00', 2, 1, '2022-11-25 00:00:00', 'tk hop cung note', NULL, 17, 11, 'not_accept', 1, '2022-11-10 09:33:00', '2022-11-10 10:24:27');
+INSERT INTO `c_designs` VALUES (9, 'Gerrard5', 2, 2, 3, 2, 1, '2022-11-10 00:00:00', 2, 1, '2022-11-24 00:00:00', 'note tk hop giay', NULL, 18, 11, 'not_accept', 1, '2022-11-10 09:33:00', '2022-11-10 10:24:27');
+INSERT INTO `c_designs` VALUES (10, 'Contacter c', 1, 1, 2, 2, 1, '2022-11-11 00:00:00', 2, 1, '2022-11-12 00:00:00', 'note tk hop giay 1', NULL, 19, 14, 'not_accept', 1, '2022-11-11 04:01:00', '2022-11-12 10:35:26');
+INSERT INTO `c_designs` VALUES (11, 'Contacter c', 3, 1, 3, 1, 1, '2022-11-11 00:00:00', 2, 1, '2022-11-12 00:00:00', 'note tk hop cung 1', NULL, 20, 14, 'not_accept', 1, '2022-11-11 04:01:00', '2022-11-12 10:35:29');
 
 -- ----------------------------
 -- Table structure for c_processes

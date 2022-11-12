@@ -1,10 +1,13 @@
 @extends('index')
 @section('content')
+@php
+    $singleObject = true;
+@endphp
     <div class="dashborad_content position-relative p-3 bg_white">
         <form action="{{ $action }}-products{{ $action==\App\Constants\VariableConstant::ACTION_UPDATE?'/'.@$dataItemProduct['id']:'' }}" method="POST" 
         class="actionForm baseAjaxForm" enctype="multipart/form-data" lang="vi">
             @csrf
-            @include('orders.products.base_informations', ['sigleObject'=>true])
+            @include('orders.products.base_informations', ['sigleObject'=>$singleObject])
             <div class="group_btn_action_form p-1 mt-3">
                 <button type="submit" class="station-richmenu-main-btn-area d-none">
                     <i class="fa fa-check mr-2 fs-14" aria-hidden="true"></i>{{ getActionByKey($action) }}
@@ -36,10 +39,12 @@
             </ul>
             <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="pills-design" role="tabpanel" aria-labelledby="pills-design-tab">
-                    @include('orders.products.design_commands', ['key'=>0])
+                    <form action="update-commands/c_designs/{{ @$dataItemCDesign['id'] }}" method="POST" class="actionCommandForm baseAjacForm" enctype="multipart/form-data">
+                        @include('orders.products.design_commands', ['singleObject'=>$singleObject]);
+                    </form>
                 </div>
                 <div class="tab-pane fade" id="pills-process" role="tabpanel" aria-labelledby="pills-process-tab">
-                    @include('orders.products.process_commands', ['key'=>0])
+                    @include('orders.products.process_commands', ['singleObject'=>$singleObject])
                 </div>
             </div>
         </div>
