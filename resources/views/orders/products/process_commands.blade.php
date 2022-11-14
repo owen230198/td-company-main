@@ -112,40 +112,40 @@
                 class="form-control max_w_200 inputDatePicker">
             </div>
             @include('orders.products.checkbox', 
-            ['label'=>'Ghim lồng', 'name'=>$singleRecord?'json_data_conf[pin]':'c_process[$key][json_data_conf][pin]'])
+            ['label'=>'Ghim lồng', 'name'=>$singleRecord?'json_data_conf[pin]':'c_process['.$key.'][json_data_conf][pin]'])
 
             @include('orders.products.checkbox', 
-            ['label'=>'Keo gáy', 'name'=>$singleRecord?'json_data_conf[glue]':'c_process[$key][json_data_conf][glue]'])
+            ['label'=>'Keo gáy', 'name'=>$singleRecord?'json_data_conf[glue]':'c_process['.$key.'][json_data_conf][glue]'])
 
             @include('orders.products.checkbox', 
-            ['label'=>'Bế', 'name'=>$singleRecord?'json_data_conf[elevated]':'c_process[$key][json_data_conf][elevated]'])
+            ['label'=>'Bế', 'name'=>$singleRecord?'json_data_conf[elevated]':'c_process['.$key.'][json_data_conf][elevated]'])
 
             @include('orders.products.checkbox', 
-            ['label'=>'Ép nhũ', 'name'=>$singleRecord?'json_data_conf[compress]':'c_process[$key][json_data_conf][compress]'])
+            ['label'=>'Ép nhũ', 'name'=>$singleRecord?'json_data_conf[compress]':'c_process['.$key.'][json_data_conf][compress]'])
 
             @include('orders.products.checkbox', 
-            ['label'=>'Số nhảy', 'name'=>$singleRecord?'json_data_conf[jump]':'c_process[$key][json_data_conf][jump]'])
+            ['label'=>'Số nhảy', 'name'=>$singleRecord?'json_data_conf[jump]':'c_process['.$key.'][json_data_conf][jump]'])
 
             @include('orders.products.checkbox', 
-            ['label'=>'Bồi', 'name'=>$singleRecord?'json_data_conf[fill]':'c_process[$key][json_data_conf][fill]'])
+            ['label'=>'Bồi', 'name'=>$singleRecord?'json_data_conf[fill]':'c_process['.$key.'][json_data_conf][fill]'])
 
             @include('orders.products.checkbox', 
-            ['label'=>'Dập nổi', 'name'=>$singleRecord?'json_data_conf[stamp]':'c_process[$key][json_data_conf][stamp]'])
+            ['label'=>'Dập nổi', 'name'=>$singleRecord?'json_data_conf[stamp]':'c_process['.$key.'][json_data_conf][stamp]'])
 
             @include('orders.products.checkbox', 
-            ['label'=>'Phay - sẻ rãnh', 'name'=>$singleRecord?'json_data_conf[grooved]':'c_process[$key][json_data_conf][grooved]'])
+            ['label'=>'Phay - sẻ rãnh', 'name'=>$singleRecord?'json_data_conf[grooved]':'c_process['.$key.'][json_data_conf][grooved]'])
 
             @include('orders.products.checkbox', 
-            ['label'=>'GC thành phẩm', 'name'=>$singleRecord?'json_data_conf[finish]':'c_process[$key][json_data_conf][finish]'])
+            ['label'=>'GC thành phẩm', 'name'=>$singleRecord?'json_data_conf[finish]':'c_process['.$key.'][json_data_conf][finish]'])
 
             @include('orders.products.checkbox', 
-            ['label'=>'Gấp máy', 'name'=>$singleRecord?'json_data_conf[fold]':'c_process[$key][json_data_conf][fold]'])
+            ['label'=>'Gấp máy', 'name'=>$singleRecord?'json_data_conf[fold]':'c_process['.$key.'][json_data_conf][fold]'])
 
             @include('orders.products.checkbox', 
-            ['label'=>'Khâu chỉ', 'name'=>$singleRecord?'json_data_conf[sew]':'c_process[$key][json_data_conf][sew]'])
+            ['label'=>'Khâu chỉ', 'name'=>$singleRecord?'json_data_conf[sew]':'c_process['.$key.'][json_data_conf][sew]'])
 
             @include('orders.products.checkbox', 
-            ['label'=>'Bế răng cưa', 'name'=>$singleRecord?'json_data_conf[sawing]':'c_process[$key][json_data_conf][sawing]'])
+            ['label'=>'Bế răng cưa', 'name'=>$singleRecord?'json_data_conf[sawing]':'c_process['.$key.'][json_data_conf][sawing]'])
 
             <div class="form-group d-flex border_bot_eb col-12">
                 <label class="mb-0 mr-3 w_125 fs-13 text-capitalize align-items-start">Ghi chú</label>
