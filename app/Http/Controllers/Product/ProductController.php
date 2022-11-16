@@ -27,7 +27,7 @@ class ProductController extends Controller
         if (!$request->isMethod('POST')) {
             $data = $this->getProductActionViewData('update', 'Chi tiết');
             $data['dataItemProduct'] = Product::find($id);
-            if (is_array($data['dataItemProduct']) && count($data['dataItemProduct'])>0) {
+            if ($data['dataItemProduct']) {
                 $data['dataItemCDesign'] = CDesign::where('product_id', $id)->first();
                 $data['dataItemCProcess'] = CProcess::where('product_id', $id)->first();
             }

@@ -34,7 +34,7 @@ class AdminController extends Controller
         }
         $data = $this->admins->getDataBaseView($table, 'Danh sách');
         if(count($permission['viewWhere'])>0){
-            static::$viewWhere[] = @$permission['viewWhere'];
+            static::$viewWhere = @$permission['viewWhere'];
         }
         $data['data_tables'] = getDataTable($table, '*', self::$viewWhere, $data['page_item']);
         session()->put('back_url', url()->full());
@@ -51,7 +51,7 @@ class AdminController extends Controller
         $sess = !empty(session('dataSearch')[$table])?session('dataSearch')[$table]:array();
         $get = $request->all()+$sess;
         if(count($permission['viewWhere'])>0){
-            static::$viewWhere[] = @$permission['viewWhere'];
+            static::$viewWhere = @$permission['viewWhere'];
         }
         $data = $this->admins->getDataBaseView($table, 'Tìm kiếm');
         $data['data_tables'] = $this->admins->getDataSearchTable($table, self::$viewWhere, $get, $data['page_item']);
@@ -79,15 +79,15 @@ class AdminController extends Controller
 
     public function update(Request $request, $table, $id)
     {
-        if (!$this->admins->checkPermissionAction($table, 'view', $id)) {
+        if (!$this->admins->checkPermissionAction($table, 'update', $id)) {
             return redirect('permission-error');
         }
         if (in_array($table, VariableConstant::ACTION_TABLE_SELF)) {
             $controller = getObjectByTable($table);
             return $controller->update($request, $id);
         }else{
-            $data['dataitem'] = getModelByTable($table)->find($id);
             $data = $this->getDataActionView($table, 'update', 'Chi tiết');
+            $data['dataitem'] = getModelByTable($table)->find($id);
             return view('action.view', $data);
         }
     }
@@ -239,9 +239,6 @@ class AdminController extends Controller
             return redirect('permission-error');
         }
         $data['title'] = 'Phân quyền';
-        $data['limit_roles'] = array();
-        $data['list_roles'] = array();
-        $data['other_modules'] = array();
         $list_groups = \App\Models\NGroupUser::where('act', 1)->get()->toArray();
         $admin = getSessionUser();
         $data['list_groups'] = recursive($list_groups, $admin['n_group_user_id'], 0);
@@ -259,11 +256,7 @@ class AdminController extends Controller
         $list_groups = \App\Models\NGroupUser::where('act', 1)->get()->toArray();
         $admin = getSessionUser();
         $data['list_groups'] = recursive($list_groups, $admin['n_group_user_id'], 0);
-        if ($group == '') {
-            $data['limit_roles'] = array();
-            $data['list_roles'] = array();
-            $data['other_modules'] = array();
-        }else {
+        if ($group != '') {
             if (!$this->admins->checkListGroup($group, $data['list_groups'])) {
                 return redirect('permission-error');
             }

@@ -18,18 +18,23 @@ class AdminService extends BaseService
         if (@$admin['super_admin']) {
             return true;
         }
-        $select = !in_array($action, ['insert', 'copy'])?[$action, $action.'_my']:$action;
-        $permissions = $this->roles->getPermissionAction($select, $table, @$admin['n_group_user_id']);
-        if($action=='view'){
-            $viewWhere = !@$permissions['view']&&@$permissions['view_my']?['key'=>'created_by', 'compare'=>'=', 'value'=>$admin['id']]:array();
-            $allow = @$permissions['view']||@$permissions['view_my'];
+        $permissions = $this->roles->getPermissionAction('json_data_role', $table, @$admin['n_group_user_id']);
+        $roles = !empty($permissions['json_data_role'])?json_decode($permissions['json_data_role'], true):[];
+        if($action == 'view'){
+            $viewWhere = [];
+            if(empty($roles['view'])){
+                if ($roles['view_my']) {
+                    array_push($viewWhere, ['key'=>'created_by', 'compare'=>'=', 'value'=>$admin['id']]);
+                }
+            }
+            $allow = @$roles['view']||@$roles['view_my'];
             return ['allow'=>$allow, 'viewWhere'=>$viewWhere];
         }else{
-            if(!@$permissions[$action]&&@$permissions[$action.'_my']&&Schema::hasColumn($table, 'created_by')){
+            if(!@$roles[$action]&&@$roles[$action.'_my']&&Schema::hasColumn($table, 'created_by')){
                 $object = getModelByTable($table)->select('created_by')->find($id);
                 return @$object['created_by']==$admin['id'];
             }else{
-                return @$permissions[$action];
+                return @$roles[$action];
             }
         }
 

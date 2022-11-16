@@ -164,7 +164,14 @@ if (!function_exists('getServiceByTable')) {
 if (!function_exists('getDataDateTime')) {
     function getDataDateTime($time){
         $timstamp = strtotime($time);
-        return date('Y-m-d H:i', @$timstamp);    
+        return date('Y-m-d h:i:s', @$timstamp);    
+    }
+}
+
+if (!function_exists('getDataDateTimeShow')) {
+    function getDataDateTimeShow($time){
+        $timstamp = strtotime($time);
+        return date('m/d/Y h:i A', @$timstamp);    
     }
 }
 

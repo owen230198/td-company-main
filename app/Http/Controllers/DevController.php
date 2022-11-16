@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Models\NDetailTable;
 use App\Models\NTable;
 use Illuminate\Support\Facades\Schema;
+use App\Constants\VariableConstant;
 
 class DevController extends Controller
 {
@@ -47,7 +48,7 @@ class DevController extends Controller
         }
     }
 
-    public function devUpdateData()
+    public function updateDataRole()
     {
         die();
         $modules = new \App\Models\NModule;
@@ -59,13 +60,17 @@ class DevController extends Controller
             $group_id = $group->id;
             foreach ($list_modules as $module) {
                 if (@$module->parent) {
+                    $baseArrRole = VariableConstant::BASE_ROLE;
+                    $configArrRole = VariableConstant::CONFIG_TABLE_ROLE;
+                    $arrRole = in_array($module->name, VariableConstant::CONFIG_TABLE)?$configArrRole:$baseArrRole;
+                    $roleArr = [];
+                    foreach ($arrRole as $key => $value) {
+                        $roleArr[$key] = 1; 
+                    }
                     $module_id = $module->id;
                     $data['n_group_user_id'] = $group_id;
                     $data['module_id'] = $module_id;
-                    $data['insert'] = 1;
-                    $data['update'] = 1;
-                    $data['copy'] = 1;
-                    $data['remove'] = 1;
+                    $data['json_data_role'] = json_encode($roleArr);
                     $insert = $roles->insert($data);
                     if (@$insert) {
                         echo 'Thêm thành công !';

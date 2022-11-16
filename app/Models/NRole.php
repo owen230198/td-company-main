@@ -17,7 +17,10 @@ class NRole extends Model
 		$roleModule = $this->where('n_group_user_id', $group_user_id)->join('n_modules',
 		'n_modules.id', '=', 'n_roles.module_id')->get();
         $data = $roleModule->filter(function($item){
-            return $item['view']==1||$item['view_my']==1||$item['accept']==1||$item['received']==1;
+            $roleItem = json_decode($item['json_data_role'], true); 
+            return @$roleItem['view']==1 || @$roleItem['view_my']==1
+            || @$roleItem['update']==1 || @$roleItem['update_my']==1
+            || @$roleItem['accept']==1 || @$roleItem['received']==1;
         });
         return $data->values()->all();
     }
