@@ -5,6 +5,20 @@ namespace App\Constants;
 class VariableConstant
 {
     const BASE_ROLE = [
+        'view'=> 1,
+        'insert'=> 1,
+        'update'=> 1,
+        'remove'=> 1,
+        'view_my'=> 1,
+        'update_my'=> 1,
+        'remove_my'=> 1
+    ];
+    const CONFIG_TABLE_ROLE = ['view'=> 1, 'update'=> 1]; 
+    const CONFIG_TABLE = ['q_configs', 'n_roles'];
+    const ROLE_SELF_TABLE = [];
+    const ACTION_TABLE_SELF = ['orders', 'products'];
+
+    const ROLE_TITLE = [
         'view'=>'Xem toàn bộ',
         'insert'=>'Thêm dữ liệu',
         'update'=>'Sửa dữ liệu',
@@ -13,10 +27,6 @@ class VariableConstant
         'update_my'=>'Sửa dữ liệu của mình',
         'remove_my'=>'Xóa dữ liệu của mình'
     ];
-    const CONFIG_TABLE = ['q_configs', 'n_roles'];
-    const CONFIG_TABLE_ROLE = ['view'=>'Xem dữ liệu', 'update'=>'Sửa dữ liệu']; 
-    const ROLE_SELF_TABLE = [];
-    const ACTION_TABLE_SELF = ['orders', 'products'];
 
     //Action name
     const ACTION_INSERT = 'insert';

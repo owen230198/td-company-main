@@ -269,16 +269,20 @@ class AdminController extends Controller
 
     public function updatePermission($module_id, $role_id, Request $request)
     {
-        if (!$this->admins->checkPermissionAction('n_roles', 'view')) {
-            return redirect('permission-error');
+        
+        if (!$this->admins->checkPermissionAction('n_roles', 'update')) {
+            echoJson(110, 'Không có quyền thực hiện !');
+            return;
         }
         $data = $request->all();
         unset($data['_token']);
-        if (!$this->admins->checkRoleUpdatePermission($module_id, $data)) {
+        $dataRole = !empty($data['json_data_role'])?$data['json_data_role']:[];
+        if (!$this->admins->checkRoleUpdatePermission($module_id, $dataRole)) {
             echoJson(110, 'Không được phân quyền module này !');
             return;
         }else{
-            $update = \App\Models\NRole::where('role_id', $role_id)->update($data);
+            $dataUpdate['json_data_role'] = json_encode($dataRole);
+            $update = \App\Models\NRole::where('role_id', $role_id)->update($dataUpdate);
             if ($update) {
                 echoJson(200, 'Đã cập nhật quyền truy cập !');
                 return;

@@ -52,24 +52,26 @@ class AdminService extends BaseService
         return $ret;
     }
 
-    public function checkRoleUpdatePermission($module, $data)
+    public function checkRoleUpdatePermission($module, $dataRole)
     {
         $admin = getSessionUser();
         if (@$admin['super_admin']) {
             return true;
         }
-        $permission = $this->roles->select('view', 'insert', 'update', 'remove', 'copy')->where('module_id', $module)->where('n_group_user_id', @$admin['n_group_user_id'])->first()->toArray();
-        if ($permission == null) {
+        $permissions = $this->roles->select('json_data_role')->where('module_id', $module)
+        ->where('n_group_user_id', @$admin['n_group_user_id'])->first();
+        if ($permissions == null) {
+            return false;
+        }
+        $arrRole = !empty($permissions['json_data_role'])?json_decode($permissions['json_data_role'], true):[];
+        if (empty($arrRole)) {
             return false;
         }
         $ret = true;
-        foreach ($permission as $key => $role) {
-            if ($role == 0) {
-                $bool = array_key_exists($key, $data);
-                if ($bool) {
-                    $ret = false;
-                    break;
-                }
+        foreach ($dataRole as $key => $value) {
+            if (!array_key_exists($key, $arrRole) || empty($arrRole[$key])) {
+                $ret = false;
+                break;
             }
         }
         return $ret;
@@ -166,7 +168,7 @@ class AdminService extends BaseService
     private function actionRoleByParent($group_id, $id, $action)
     {
         $extend_roles = $this->roles->where('n_group_user_id', $group_id)->get()->toArray();
-        $data_action = $extend_roles!=null?$extend_roles:array();
+        $data_action = !empty($extend_roles)?$extend_roles:array();
         if (count($data_action)>0) {
             foreach ($data_action as $data) {
                 unset($data['role_id']);
