@@ -34,5 +34,17 @@ class ProductController extends Controller
             return view('orders.products.view', $data);
         }
     }
+
+    public function getProcessByCategory(Request $request)
+    {
+        $cate_id = @$request->cate_id??0;
+        $key = @$request->key??0;
+        if ($cate_id) {
+            $category = getDetailDataByID('ProductCategory', $cate_id);
+            $data['listProcess'] = !empty($category['json_data_process'])?json_decode($category['json_data_process'],true):[];
+            $data['key'] = $key;
+            return view('orders.products.process_ajax.view', $data);       
+        }
+    }
 }
 ?>

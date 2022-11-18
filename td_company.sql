@@ -11,7 +11,7 @@
  Target Server Version : 100425
  File Encoding         : 65001
 
- Date: 17/11/2022 00:33:10
+ Date: 18/11/2022 00:19:12
 */
 
 SET NAMES utf8mb4;
@@ -45,14 +45,6 @@ CREATE TABLE `c_designs`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of c_designs
--- ----------------------------
-INSERT INTO `c_designs` VALUES (8, 'Gerrard5', 3, 2, 2, 2, 1, '2022-11-10 00:00:00', 2, 1, '2022-11-25 00:00:00', 'tk hop cung note', NULL, 17, 11, 'not_accept', 1, '2022-11-10 09:33:00', '2022-11-10 10:24:27');
-INSERT INTO `c_designs` VALUES (9, 'Gerrard5', 2, 2, 2, 2, 1, '2022-11-10 00:00:00', 2, 1, '2022-11-24 00:00:00', 'note tk hop giay', NULL, 18, 11, 'not_accept', 1, '2022-11-10 09:33:00', '2022-11-10 10:24:27');
-INSERT INTO `c_designs` VALUES (10, 'Contacter c', 1, 1, 2, 2, 1, '2022-11-11 00:00:00', 2, 1, '2022-11-12 00:00:00', 'note tk hop giay 1', NULL, 19, 14, 'not_accept', 1, '2022-11-11 04:01:00', '2022-11-12 10:35:26');
-INSERT INTO `c_designs` VALUES (11, 'Contacter c', 3, 1, 2, 1, 1, '2022-11-11 00:00:00', 2, 1, '2022-11-12 00:00:00', 'note tk hop cung 1', NULL, 20, 14, 'not_accept', 1, '2022-11-11 04:01:00', '2022-11-12 10:35:29');
-
--- ----------------------------
 -- Table structure for c_processes
 -- ----------------------------
 DROP TABLE IF EXISTS `c_processes`;
@@ -83,14 +75,6 @@ CREATE TABLE `c_processes`  (
   `order_id` int(10) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of c_processes
--- ----------------------------
-INSERT INTO `c_processes` VALUES (5, 'not_accept', 'Xén theo ốc', '10x10', '20x20', 1, 2, 2, 2, 2, 1, 0, 1, 2, 2, '2022-11-10 00:00:00', '2022-11-28 00:00:00', '{\"pin\":\"0\",\"glue\":\"0\",\"elevated\":\"0\",\"compress\":\"1\",\"jump\":\"1\",\"fill\":\"1\",\"stamp\":\"0\",\"grooved\":\"1\",\"finish\":\"0\",\"fold\":\"1\",\"sew\":\"1\",\"sawing\":\"1\"}', 'note sx hop cung', 1, '2022-11-10 09:33:00', NULL, 17, 11);
-INSERT INTO `c_processes` VALUES (6, 'not_accept', 'Xén theo ốc', '30x20', '50x30', 1, 2, 1, 2, 2, 1, 0, 0, 2, 1, '2022-11-10 00:00:00', '2022-11-30 00:00:00', '{\"pin\":\"1\",\"glue\":\"1\",\"elevated\":\"1\",\"compress\":\"1\",\"jump\":\"1\",\"fill\":\"1\",\"stamp\":\"1\",\"grooved\":\"1\",\"finish\":\"1\",\"fold\":\"1\",\"sew\":\"1\",\"sawing\":\"1\"}', 'note sx hop giay', 1, '2022-11-10 09:33:00', NULL, 18, 11);
-INSERT INTO `c_processes` VALUES (7, 'not_accept', 'Xén theo ốc', '10x10', '20x20', 1, 2, 2, 1, 2, 2, 1, 2, 1, 1, '2022-11-11 00:00:00', '2022-11-15 00:00:00', '{\"pin\":\"1\",\"glue\":\"0\",\"elevated\":\"0\",\"compress\":\"0\",\"jump\":\"1\",\"fill\":\"0\",\"stamp\":\"1\",\"grooved\":\"0\",\"finish\":\"1\",\"fold\":\"0\",\"sew\":\"1\",\"sawing\":\"0\"}', 'note sx hop giay 1', 1, '2022-11-11 04:01:00', NULL, 19, 14);
-INSERT INTO `c_processes` VALUES (8, 'not_accept', 'Xén theo ốc', '30x20', '50x30', 1, 1, 1, 1, 2, 1, 0, 0, 0, 1, '2022-11-11 00:00:00', '2022-11-30 00:00:00', '{\"pin\":\"1\",\"glue\":\"0\",\"elevated\":\"0\",\"compress\":\"0\",\"jump\":\"1\",\"fill\":\"0\",\"stamp\":\"0\",\"grooved\":\"1\",\"finish\":\"1\",\"fold\":\"1\",\"sew\":\"0\",\"sawing\":\"1\"}', 'note hop cung 1', 1, '2022-11-11 04:01:00', NULL, 20, 14);
 
 -- ----------------------------
 -- Table structure for citys
@@ -13487,12 +13471,6 @@ CREATE TABLE `orders`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of orders
--- ----------------------------
-INSERT INTO `orders` VALUES (11, NULL, 2, 16, 1, '2022-11-10 09:04:00', '2022-11-30 09:04:00', 100000000, 20, 1, 120000000, 5000000, 120000000, 'advance_payment', 'not_accept', '2022-11-10 10:24:00', '2022-11-10 10:24:27');
-INSERT INTO `orders` VALUES (14, NULL, 2, 3, 1, '2022-11-11 03:43:00', '2022-11-11 03:43:00', 380000000, 0, 0, 380000000, 0, 380000000, 'not_payment', 'not_accept', '2022-11-11 04:01:00', NULL);
-
--- ----------------------------
 -- Table structure for p_substances
 -- ----------------------------
 DROP TABLE IF EXISTS `p_substances`;
@@ -13571,14 +13549,6 @@ CREATE TABLE `products`  (
   `updated_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of products
--- ----------------------------
-INSERT INTO `products` VALUES (17, 'Hop cung', 'not_accept', 1, 2, NULL, '2022-11-11 11:45:16', '2022-11-11 11:45:16', 10000, '5000', '50000000', 'Hop cung note', 11, 1, '2022-11-10 09:33:00', NULL);
-INSERT INTO `products` VALUES (18, 'Hop giay', 'not_accept', 2, 1, NULL, '2022-11-11 11:45:16', '2022-11-11 11:45:16', 50000, '1000', '50000000', 'note hop giay', 11, 1, '2022-11-10 09:33:00', NULL);
-INSERT INTO `products` VALUES (19, 'Hop giay 1', 'not_accept', 2, 1, '{\"quantative\":\"300\",\"substance\":\"9\"}', '2022-11-11 11:45:16', '2022-11-11 11:45:16', 50000, '2000', '100000000', 'note hop giay 1', 14, 1, '2022-11-11 04:01:00', NULL);
-INSERT INTO `products` VALUES (20, 'Hop cung 1', 'not_accept', 1, 2, '{\"quantative\":\"400\",\"substance\":\"7\"}', '2022-11-11 11:45:16', '2022-11-11 11:45:16', 70000, '4000', '280000000', 'note hop cung 1', 14, 1, '2022-11-11 04:01:00', NULL);
 
 -- ----------------------------
 -- Table structure for q_cartons

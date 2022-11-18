@@ -7,6 +7,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Quote\QuoteController;
 use App\Http\Controllers\Order\OrderController;
+use App\Http\Controllers\Product\ProductController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -56,4 +58,5 @@ Route::middleware(['checkLogin'])->group(function () {
 	Route::get('set-quantity-order-products', [OrderController::class, 'setListProductView']);
 	Route::post('insert-orders', [OrderController::class, 'insert']);
 	Route::post('update-orders/{id}', [OrderController::class, 'update']);
+	Route::get('get-process-by-category', [ProductController::class, 'getProcessByCategory']);
 });

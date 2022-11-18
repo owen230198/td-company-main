@@ -141,10 +141,28 @@ var slideToTopProductConfig = function(){
     });
 }
 
+var selectProcategoryModule = function(){
+    $(document).on('change', '.sellectProCate', function(){
+        cate_id = $(this).val();
+        key = $(this).data('key');
+        pconfig_item = $(this).closest('.product_config_item');
+        item_cprocess = pconfig_item.find('.c_process_config_detail');
+        $.ajax({
+            url: 'get-process-by-category',
+            type: 'GET',
+            data: {cate_id: cate_id, key: key}
+        }).done(function(html){
+            item_cprocess.html(html);
+        })
+
+    });
+}
+
 $(function(){
     showUploadDesignFileButton();
     moduleChangePrintQuantity();
     setListProductViewModule();
     configProductItemSetOrderCost();
     slideToTopProductConfig();
+    selectProcategoryModule();
 });

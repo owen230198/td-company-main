@@ -8,7 +8,7 @@
 </ul>
 <div class="tab-content" id="myTabContent">
     @for($key=0; $key < $proQuantity; $key++)
-        <div class="tab-pane {{ $key==0?'fade show active':'' }} py-3" id="pro-{{ $key }}" role="tabpanel" 
+        <div class="tab-pane product_config_item {{ $key==0?'fade show active':'' }} py-3" id="pro-{{ $key }}" role="tabpanel" 
         aria-labelledby="pro-{{ $key }}-tab">
             @include('orders.products.base_informations')
             @include('orders.products.design_commands')
