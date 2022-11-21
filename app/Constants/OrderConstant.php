@@ -43,7 +43,7 @@ class OrderConstant
         "emul_color"=>"Màu Nhũ",
         "soles_roll"=>"Cán Đế",
         "finished_style"=>"Thành Phẩm(Lò xo, nẹp,..)",
-        "finished_type"=>"Loại Thành Phẩm(Đóng gói hoặc bỏ thùng)",
+        "finished_type"=>"Đóng gói hoặc bỏ thùng",
         "pin"=>"Ghim Lồng",
         "glue"=>"Keo Gáy",
         "elevated"=>"Bế",

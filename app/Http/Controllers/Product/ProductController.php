@@ -41,7 +41,11 @@ class ProductController extends Controller
         $key = @$request->key??0;
         if ($cate_id) {
             $category = getDetailDataByID('ProductCategory', $cate_id);
-            $data['listProcess'] = !empty($category['json_data_process'])?json_decode($category['json_data_process'],true):[];
+            $listProcess = !empty($category['json_data_process'])?json_decode($category['json_data_process'],true):[];
+           $processActive = array_filter($listProcess, function($item){
+                return $item == 1;
+            });
+            $data['listProcess'] = array_keys($processActive);
             $data['key'] = $key;
             return view('orders.products.process_ajax.view', $data);       
         }

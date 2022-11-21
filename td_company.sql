@@ -11,7 +11,7 @@
  Target Server Version : 100425
  File Encoding         : 65001
 
- Date: 18/11/2022 00:19:12
+ Date: 22/11/2022 00:16:35
 */
 
 SET NAMES utf8mb4;
@@ -51,19 +51,6 @@ DROP TABLE IF EXISTS `c_processes`;
 CREATE TABLE `c_processes`  (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `crop` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Xén theo ốc',
-  `soles_size` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `finished_size` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `roll` tinyint(5) NULL DEFAULT NULL,
-  `num_face` tinyint(5) NULL DEFAULT NULL,
-  `elevated_frame` tinyint(5) NULL DEFAULT NULL,
-  `compress_frame` tinyint(5) NULL DEFAULT NULL,
-  `push_frame` tinyint(5) NULL DEFAULT NULL,
-  `soles_fill` tinyint(5) NULL DEFAULT NULL,
-  `emul_color` tinyint(5) NULL DEFAULT NULL,
-  `soles_roll` tinyint(5) NULL DEFAULT NULL,
-  `finished_style` tinyint(5) NULL DEFAULT NULL,
-  `finished_type` tinyint(5) NULL DEFAULT NULL,
   `order_expired` datetime(0) NULL DEFAULT NULL,
   `expired` datetime(0) NULL DEFAULT NULL,
   `json_data_conf` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
@@ -12233,8 +12220,8 @@ INSERT INTO `customers` VALUES (10, '', 'CTY 678914', 'Contacter H', 'Hoa Sơn',
 INSERT INTO `customers` VALUES (11, '', 'Liverpool1', 'Owen', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', '', 1, '2022-09-21 00:00:00', '2022-09-21 00:00:00', 1);
 INSERT INTO `customers` VALUES (12, '', 'Liverpool2', 'Gerrard1', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', '', 1, '2022-09-21 00:00:00', '2022-09-21 00:00:00', 1);
 INSERT INTO `customers` VALUES (13, '', 'Liverpool3', 'Gerrard2', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', '', 1, '2022-09-21 00:00:00', '2022-09-21 00:00:00', 1);
-INSERT INTO `customers` VALUES (14, '', 'Liverpool4', 'Gerrard3', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', '', 1, '2022-09-21 00:00:00', '2022-09-21 00:00:00', 1);
-INSERT INTO `customers` VALUES (15, '', 'Liverpool5', 'Gerrard4', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', NULL, 1, '2022-10-03 07:00:00', '2022-10-07 15:14:04', 16);
+INSERT INTO `customers` VALUES (14, '', 'Liverpool4', 'Gerrard3', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', '', 1, '2022-11-19 15:57:38', '2022-11-19 15:57:38', 1);
+INSERT INTO `customers` VALUES (15, '', 'Liverpool5', 'Gerrard4', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', NULL, 1, '2022-11-19 15:57:40', '2022-11-19 15:57:40', 16);
 
 -- ----------------------------
 -- Table structure for districts
@@ -13518,7 +13505,7 @@ CREATE TABLE `product_categories`  (
 -- ----------------------------
 -- Records of product_categories
 -- ----------------------------
-INSERT INTO `product_categories` VALUES (1, 'Hộp cứng', 'pre_order', NULL, 1, 1, '2022-11-02 23:34:38', '2022-11-02 23:34:42');
+INSERT INTO `product_categories` VALUES (1, 'Hộp cứng', 'pre_order', '{\"crop\":\"1\",\"soles_size\":\"1\",\"finished_size\":\"1\",\"roll\":\"1\",\"num_face\":\"1\",\"elevated_frame\":\"1\",\"compress_frame\":\"1\",\"push_frame\":\"1\",\"soles_fill\":\"1\",\"emul_color\":\"1\",\"soles_roll\":\"1\",\"finished_style\":\"1\",\"finished_type\":\"1\",\"pin\":\"1\",\"glue\":\"1\",\"elevated\":\"1\",\"compress\":\"1\",\"jump\":\"1\",\"fill\":\"1\",\"stamp\":\"1\",\"grooved\":\"1\",\"finish\":\"1\",\"fold\":\"0\",\"sew\":\"0\",\"sawing\":\"0\"}', 1, 1, '2022-11-02 11:34:00', '2022-11-02 11:34:00');
 INSERT INTO `product_categories` VALUES (2, 'Hộp giấy', 'pre_order', NULL, 1, 1, '2022-11-02 23:34:00', '2022-11-02 23:34:00');
 INSERT INTO `product_categories` VALUES (3, 'Hộp quà tết', 'hard', NULL, 1, 1, '2022-11-02 23:36:02', '2022-11-02 23:36:04');
 INSERT INTO `product_categories` VALUES (4, 'Hộp bánh trung thu', 'hard', NULL, 1, 1, '2022-11-02 23:36:02', '2022-11-02 23:36:04');
