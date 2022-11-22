@@ -11,7 +11,7 @@
  Target Server Version : 100425
  File Encoding         : 65001
 
- Date: 22/11/2022 00:16:35
+ Date: 23/11/2022 00:27:31
 */
 
 SET NAMES utf8mb4;
@@ -42,7 +42,13 @@ CREATE TABLE `c_designs`  (
   `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of c_designs
+-- ----------------------------
+INSERT INTO `c_designs` VALUES (12, 'Gerrard2', 2, 1, 2, 1, 2, '1970-01-01 12:00:00', 2, 2, '1970-01-01 12:00:00', 'tk hop cung', NULL, 21, 15, 'not_accept', 1, '2022-11-22 14:31:00', NULL);
+INSERT INTO `c_designs` VALUES (13, 'Gerrard2', 2, 2, 2, 2, 1, '1970-01-01 12:00:00', 1, 3, '1970-01-01 12:00:00', 'tk hop banh', NULL, 22, 15, 'not_accept', 1, '2022-11-22 14:31:00', NULL);
 
 -- ----------------------------
 -- Table structure for c_processes
@@ -61,7 +67,13 @@ CREATE TABLE `c_processes`  (
   `product_id` int(10) NULL DEFAULT NULL,
   `order_id` int(10) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of c_processes
+-- ----------------------------
+INSERT INTO `c_processes` VALUES (9, 'not_accept', '2022-11-22 12:00:00', '2022-11-22 12:00:00', '{\"crop\":\"X\\u00e9n theo \\u1ed1c\",\"soles_size\":\"20x30\",\"finished_size\":\"40x50\",\"roll\":\"1\",\"num_face\":\"1\",\"elevated_frame\":\"1\",\"compress_frame\":\"0\",\"push_frame\":\"0\",\"soles_fill\":\"0\",\"emul_color\":\"0\",\"soles_roll\":\"1\",\"finished_style\":\"0\",\"finished_type\":\"1\",\"pin\":\"1\",\"glue\":\"1\",\"elevated\":\"1\",\"compress\":\"1\",\"jump\":\"0\",\"fill\":\"0\",\"stamp\":\"1\",\"grooved\":\"1\",\"finish\":\"1\"}', 'sx hop cung', 1, '2022-11-22 14:31:00', NULL, 21, 15);
+INSERT INTO `c_processes` VALUES (10, 'not_accept', '2022-11-22 12:00:00', '2022-11-22 12:00:00', '{\"crop\":\"X\\u00e9n theo \\u1ed1c\",\"num_face\":\"1\",\"soles_fill\":\"1\",\"finished_type\":\"1\",\"compress\":\"1\",\"jump\":\"0\",\"finish\":\"1\"}', 'sx hop banh', 1, '2022-11-22 14:31:00', NULL, 22, 15);
 
 -- ----------------------------
 -- Table structure for citys
@@ -13201,9 +13213,6 @@ CREATE TABLE `n_group_users`  (
 -- Records of n_group_users
 -- ----------------------------
 INSERT INTO `n_group_users` VALUES (1, 'Admin cấp cao', 0, 'Admin cao nhất có mọi quyền truy cập', 1, 1, '2022-09-30 22:53:00', '2022-11-09 11:29:28', 1);
-INSERT INTO `n_group_users` VALUES (39, 'Phòng kinh doanh', 1, NULL, NULL, 1, '2022-09-20 16:04:00', '2022-11-09 11:05:56', 1);
-INSERT INTO `n_group_users` VALUES (41, 'Phòng thiết kế', 1, 'Phòng thiết kế', NULL, 1, '2022-11-09 04:33:00', '2022-11-09 11:34:17', 1);
-INSERT INTO `n_group_users` VALUES (42, 'Nhân viên kinh doanh', 39, 'Nhân viên kinh doanh', NULL, 1, '2022-11-16 22:24:53', '2022-11-16 22:24:53', 1);
 
 -- ----------------------------
 -- Table structure for n_modules
@@ -13226,7 +13235,7 @@ CREATE TABLE `n_modules`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `map_indx`(`table_map`) USING BTREE,
   INDEX `parent_index`(`parent`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of n_modules
@@ -13250,6 +13259,7 @@ INSERT INTO `n_modules` VALUES (17, 'p_orders', NULL, 'Đơn hàng', 'javascript
 INSERT INTO `n_modules` VALUES (18, 'orders', 'orders', 'Đơn hàng của tôi', 'view/orders', 17, NULL, NULL, 1, 1, 0, '2022-10-11 21:28:12', '2022-10-11 21:28:12');
 INSERT INTO `n_modules` VALUES (19, 'p_substances', 'p_substances', 'Chất liệu giấy', 'view/p_substances', 9, NULL, NULL, 1, 1, 0, '2022-10-31 23:17:50', '2022-10-31 23:17:50');
 INSERT INTO `n_modules` VALUES (20, 'product_categories', 'product_categories', 'Danh mục SP', 'view/product_categories', 9, NULL, NULL, 1, 1, 0, '2022-10-31 23:17:50', '2022-10-31 23:17:50');
+INSERT INTO `n_modules` VALUES (21, 'products', 'products', 'Danh sách SP', 'view/products', 17, NULL, NULL, 0, 0, 0, '2022-10-11 21:28:12', '2022-10-11 21:28:12');
 
 -- ----------------------------
 -- Table structure for n_regions
@@ -13308,51 +13318,7 @@ INSERT INTO `n_roles` VALUES (12, 16, 1, '{\"view\":1,\"insert\":1,\"update\":1,
 INSERT INTO `n_roles` VALUES (13, 18, 1, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
 INSERT INTO `n_roles` VALUES (14, 19, 1, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
 INSERT INTO `n_roles` VALUES (15, 20, 1, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (16, 2, 39, '{\"view\":\"0\",\"insert\":\"1\",\"update\":\"0\",\"remove\":\"0\",\"view_my\":\"1\",\"update_my\":\"1\",\"remove_my\":\"1\"}', '2022-11-16 22:16:15', '2022-11-17 06:16:15', NULL);
-INSERT INTO `n_roles` VALUES (17, 3, 39, '{\"view\":\"0\",\"insert\":\"1\",\"update\":\"0\",\"remove\":\"0\",\"view_my\":\"1\",\"update_my\":\"1\",\"remove_my\":\"1\"}', '2022-11-16 22:16:55', '2022-11-17 06:16:55', NULL);
-INSERT INTO `n_roles` VALUES (18, 6, 39, '{\"view\":\"0\",\"insert\":\"1\",\"update\":\"0\",\"remove\":\"0\",\"view_my\":\"1\",\"update_my\":\"1\",\"remove_my\":\"1\"}', '2022-11-16 22:19:37', '2022-11-17 06:19:37', NULL);
-INSERT INTO `n_roles` VALUES (19, 7, 39, '{\"view\":\"0\",\"insert\":\"1\",\"update\":\"0\",\"remove\":\"0\",\"view_my\":\"1\",\"update_my\":\"1\",\"remove_my\":\"1\"}', '2022-11-16 22:19:43', '2022-11-17 06:19:43', NULL);
-INSERT INTO `n_roles` VALUES (20, 8, 39, '{\"view\":1,\"update\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (21, 10, 39, '{\"view\":1,\"update\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (22, 11, 39, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (23, 12, 39, '{\"view\":\"0\",\"insert\":\"1\",\"update\":\"0\",\"remove\":\"0\",\"view_my\":\"1\",\"update_my\":\"1\",\"remove_my\":\"1\"}', '2022-11-16 22:17:23', '2022-11-17 06:17:23', NULL);
-INSERT INTO `n_roles` VALUES (24, 13, 39, '{\"view\":\"0\",\"insert\":\"1\",\"update\":\"0\",\"remove\":\"0\",\"view_my\":\"1\",\"update_my\":\"1\",\"remove_my\":\"1\"}', '2022-11-16 22:17:33', '2022-11-17 06:17:33', NULL);
-INSERT INTO `n_roles` VALUES (25, 14, 39, '{\"view\":\"0\",\"insert\":\"1\",\"update\":\"0\",\"remove\":\"0\",\"view_my\":\"1\",\"update_my\":\"1\",\"remove_my\":\"1\"}', '2022-11-16 22:17:40', '2022-11-17 06:17:40', NULL);
-INSERT INTO `n_roles` VALUES (26, 15, 39, '{\"view\":\"0\",\"insert\":\"1\",\"update\":\"0\",\"remove\":\"0\",\"view_my\":\"1\",\"update_my\":\"1\",\"remove_my\":\"1\"}', '2022-11-16 22:17:47', '2022-11-17 06:17:47', NULL);
-INSERT INTO `n_roles` VALUES (27, 16, 39, '{\"view\":\"0\",\"insert\":\"1\",\"update\":\"0\",\"remove\":\"0\",\"view_my\":\"1\",\"update_my\":\"1\",\"remove_my\":\"1\"}', '2022-11-16 22:17:54', '2022-11-17 06:17:54', NULL);
-INSERT INTO `n_roles` VALUES (28, 18, 39, '{\"view\":\"0\",\"insert\":\"1\",\"update\":\"0\",\"remove\":\"0\",\"view_my\":\"1\",\"update_my\":\"1\",\"remove_my\":\"1\"}', '2022-11-16 22:17:08', '2022-11-17 06:17:08', NULL);
-INSERT INTO `n_roles` VALUES (29, 19, 39, '{\"view\":\"0\",\"insert\":\"1\",\"update\":\"0\",\"remove\":\"0\",\"view_my\":\"1\",\"update_my\":\"1\",\"remove_my\":\"1\"}', '2022-11-16 22:18:00', '2022-11-17 06:18:00', NULL);
-INSERT INTO `n_roles` VALUES (30, 20, 39, '{\"view\":\"0\",\"insert\":\"1\",\"update\":\"0\",\"remove\":\"0\",\"view_my\":\"1\",\"update_my\":\"1\",\"remove_my\":\"1\"}', '2022-11-16 22:19:30', '2022-11-17 06:19:30', NULL);
-INSERT INTO `n_roles` VALUES (31, 2, 41, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (32, 3, 41, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (33, 6, 41, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (34, 7, 41, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (35, 8, 41, '{\"view\":1,\"update\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (36, 10, 41, '{\"view\":1,\"update\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (37, 11, 41, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (38, 12, 41, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (39, 13, 41, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (40, 14, 41, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (41, 15, 41, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (42, 16, 41, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (43, 18, 41, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (44, 19, 41, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (45, 20, 41, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (46, 2, 42, '{\"insert\":\"1\",\"view_my\":\"1\",\"update_my\":\"1\",\"remove_my\":\"0\"}', '2022-11-16 22:43:15', '2022-11-17 06:43:15', NULL);
-INSERT INTO `n_roles` VALUES (47, 3, 42, '{\"insert\":\"1\",\"view_my\":\"1\",\"update_my\":\"1\",\"remove_my\":\"0\"}', '2022-11-16 22:43:17', '2022-11-17 06:43:17', NULL);
-INSERT INTO `n_roles` VALUES (48, 6, 42, '{\"insert\":\"0\",\"view_my\":\"0\",\"update_my\":\"0\",\"remove_my\":\"0\"}', '2022-11-16 22:41:49', '2022-11-17 06:41:49', NULL);
-INSERT INTO `n_roles` VALUES (49, 7, 42, '{\"insert\":\"0\",\"view_my\":\"0\",\"update_my\":\"0\",\"remove_my\":\"0\"}', '2022-11-16 22:41:56', '2022-11-17 06:41:56', NULL);
-INSERT INTO `n_roles` VALUES (50, 8, 42, '{\"view\":\"0\",\"update\":\"0\"}', '2022-11-16 22:42:00', '2022-11-17 06:42:00', NULL);
-INSERT INTO `n_roles` VALUES (51, 10, 42, '{\"view\":\"1\",\"update\":\"0\"}', '2022-11-16 22:40:39', '2022-11-17 06:40:39', NULL);
-INSERT INTO `n_roles` VALUES (52, 11, 42, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (53, 12, 42, '{\"insert\":\"0\",\"view_my\":\"0\",\"update_my\":\"0\",\"remove_my\":\"0\"}', '2022-11-16 22:40:50', '2022-11-17 06:40:50', NULL);
-INSERT INTO `n_roles` VALUES (54, 13, 42, '{\"insert\":\"0\",\"view_my\":\"0\",\"update_my\":\"0\",\"remove_my\":\"0\"}', '2022-11-16 22:40:58', '2022-11-17 06:40:58', NULL);
-INSERT INTO `n_roles` VALUES (55, 14, 42, '{\"insert\":\"0\",\"view_my\":\"0\",\"update_my\":\"0\",\"remove_my\":\"0\"}', '2022-11-16 22:41:07', '2022-11-17 06:41:07', NULL);
-INSERT INTO `n_roles` VALUES (56, 15, 42, '{\"insert\":\"0\",\"view_my\":\"0\",\"update_my\":\"0\",\"remove_my\":\"0\"}', '2022-11-16 22:41:17', '2022-11-17 06:41:17', NULL);
-INSERT INTO `n_roles` VALUES (57, 16, 42, '{\"insert\":\"0\",\"view_my\":\"0\",\"update_my\":\"0\",\"remove_my\":\"0\"}', '2022-11-16 22:41:24', '2022-11-17 06:41:24', NULL);
-INSERT INTO `n_roles` VALUES (58, 18, 42, '{\"insert\":\"1\",\"view_my\":\"1\",\"update_my\":\"1\",\"remove_my\":\"0\"}', '2022-11-16 22:43:01', '2022-11-17 06:43:01', NULL);
-INSERT INTO `n_roles` VALUES (59, 19, 42, '{\"insert\":\"0\",\"view_my\":\"0\",\"update_my\":\"0\",\"remove_my\":\"0\"}', '2022-11-16 22:41:31', '2022-11-17 06:41:31', NULL);
-INSERT INTO `n_roles` VALUES (60, 20, 42, '{\"insert\":\"0\",\"view_my\":\"0\",\"update_my\":\"0\",\"remove_my\":\"0\"}', '2022-11-16 22:41:39', '2022-11-17 06:41:39', NULL);
+INSERT INTO `n_roles` VALUES (16, 21, 1, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for n_tables
@@ -13401,7 +13367,7 @@ INSERT INTO `n_tables` VALUES (17, 'q_finishes', 'Chi phí bồi & hoàn thiện
 INSERT INTO `n_tables` VALUES (18, 'orders', 'Đơn hàng', 0, 'orders', 'orders', 20, 'view', NULL, 1, 1, 1, 0, '2022-10-11 22:06:33', '2022-10-11 22:06:33');
 INSERT INTO `n_tables` VALUES (19, 'p_substances', 'Chất liệu giấy in', 0, 'p_substances', 'p_substances', 20, 'view', NULL, 1, 1, 1, 1, '2022-10-31 23:11:53', '2022-10-31 23:11:56');
 INSERT INTO `n_tables` VALUES (20, 'product_categories', 'Danh mục sản phẩm', 0, 'product_categories', 'product_categories', 20, 'view', NULL, 1, 1, 1, 1, '2022-11-02 22:45:04', '2022-11-02 22:45:06');
-INSERT INTO `n_tables` VALUES (21, 'products', 'Sản phẩm', 0, 'orders', 'products', 20, 'view', NULL, 1, 1, 1, 1, '2022-10-11 22:06:33', '2022-10-11 22:06:33');
+INSERT INTO `n_tables` VALUES (21, 'products', 'Sản phẩm', 0, 'orders', 'products', 20, 'view', NULL, 0, 1, 0, 1, '2022-11-22 21:40:35', '2022-11-22 21:40:35');
 
 -- ----------------------------
 -- Table structure for n_users
@@ -13455,7 +13421,12 @@ CREATE TABLE `orders`  (
   `updated_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx`(`customer_id`, `created_by`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of orders
+-- ----------------------------
+INSERT INTO `orders` VALUES (15, NULL, 2, 13, 1, '2022-11-22 02:25:00', '2022-11-22 02:25:00', 520000000, 0, 0, 520000000, 2000000, 520000000, 'advance_payment', 'not_accept', '2022-11-22 14:31:00', NULL);
 
 -- ----------------------------
 -- Table structure for p_substances
@@ -13535,7 +13506,13 @@ CREATE TABLE `products`  (
   `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of products
+-- ----------------------------
+INSERT INTO `products` VALUES (21, 'Hop cung', 'not_accept', 1, 2, '{\"quantative\":\"300\",\"substance\":\"9\"}', NULL, NULL, 10000, '2000', '20000000', 'note hop cung', 15, 1, '2022-11-22 14:31:00', NULL);
+INSERT INTO `products` VALUES (22, 'Hop banh', 'not_accept', 7, 2, '{\"quantative\":\"200\",\"substance\":\"3\"}', NULL, NULL, 500000, '1000', '500000000', 'note hop banh', 15, 1, '2022-11-22 14:31:00', NULL);
 
 -- ----------------------------
 -- Table structure for q_cartons

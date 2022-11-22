@@ -9,7 +9,9 @@
     <div class="p-3 config_detail">
         <div class="command_config_detail">
             <div class="c_process_config_detail row">
-
+                @if ($action == 'update')
+                    @include('orders.products.process_ajax.view')
+                @endif
             </div>
             <div class="row justify-between">
                 <div class="form-group d-flex border_bot_eb col-12">

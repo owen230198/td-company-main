@@ -170,7 +170,7 @@ if (!function_exists('getDataDateTime')) {
 
 if (!function_exists('getDataDateTimeShow')) {
     function getDataDateTimeShow($time){
-        $timstamp = strtotime($time);
+        $timstamp = !empty($time)?strtotime($time):Time();
         return date('m/d/Y h:i A', @$timstamp);    
     }
 }
