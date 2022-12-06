@@ -60,12 +60,17 @@ class DevController extends Controller
             $group_id = $group->id;
             foreach ($list_modules as $module) {
                 if (@$module->parent) {
-                    $baseArrRole = VariableConstant::BASE_ROLE;
-                    $configArrRole = VariableConstant::CONFIG_TABLE_ROLE;
-                    $arrRole = in_array($module->name, VariableConstant::CONFIG_TABLE)?$configArrRole:$baseArrRole;
+                    if(in_array($module->name, VariableConstant::CONFIG_TABLE)){
+                        $arrRole = VariableConstant::CONFIG_TABLE_ROLE;    
+                    }elseif(in_array($module->name, VariableConstant::ROLE_SELF_TABLE)){
+                        $model = getModelByTable($module->name);
+                        $arrRole = $model::ARR_ROLE;
+                    }else{
+                        $arrRole = VariableConstant::BASE_ROLE;
+                    }
                     $roleArr = [];
                     foreach ($arrRole as $key => $value) {
-                        $roleArr[$key] = 1; 
+                        $roleArr[$key] = $value; 
                     }
                     $module_id = $module->id;
                     $data['n_group_user_id'] = $group_id;

@@ -34,7 +34,7 @@
               $path_link = @$tableItem['name'].'/'.@$data_quotes['id'];
             @endphp
             <meta name="ajax-url" content="ajax-view-list/{{ $path_link }}">
-            <div class="d-flex align-center justify-content-center mb-3 w-md-100">
+            <div class="d-flex align-center justify-content-end mb-3 w-md-100">
               @if ($tableItem['insert'] == 1)
               <button type="button" class="station-richmenu-main-btn-area load_view_popup" data-toggle="modal" data-target="#actionModal" data-src="insert-detail-quotes/{{ $path_link }}">
                 <i class="fa fa-plus mr-1 fs-15" aria-hidden="true"></i>Thêm mới

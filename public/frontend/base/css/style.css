@@ -319,6 +319,14 @@ input[type=time]{
   justify-content: flex-end;
 }
 
+.w_150{
+  width: 150px;
+  min-width: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
 .flex_100{
   max-width: 100%;
   flex: 0 0 100%;

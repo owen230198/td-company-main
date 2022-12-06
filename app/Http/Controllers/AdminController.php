@@ -261,7 +261,7 @@ class AdminController extends Controller
                 return redirect('permission-error');
             }
             $data['limit_roles'] = array_merge(@session('user_login')['parent_menu'], @session('user_login')['menu']);
-            $data['list_roles'] = (new \App\Models\NRole)->getModuleByGroupUser($admin['n_group_user_id']);
+            $data['list_roles'] = (new \App\Models\NRole)->getModuleByGroupUser($admin['n_group_user_id'], 0);
             $data['group'] = $group;
         }
         return view('roles.view', $data);

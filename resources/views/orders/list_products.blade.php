@@ -11,8 +11,8 @@
         <div class="tab-pane product_config_item {{ $key==0?'fade show active':'' }} py-3" id="pro-{{ $key }}" role="tabpanel" 
         aria-labelledby="pro-{{ $key }}-tab">
             @include('orders.products.base_informations')
-            @include('orders.products.design_commands')
             @include('orders.products.process_commands')
+            @include('orders.products.design_commands')
         </div>
     @endfor
 </div>

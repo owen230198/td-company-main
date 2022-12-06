@@ -8,7 +8,7 @@
            @include('table.form_search')
         </div>
         <div class="col-12">
-          <div class="d-flex align-center justify-content-center">
+          <div class="d-flex align-center justify-content-end">
             <button type="submit" class="station-richmenu-main-btn-area mr-2" form="form-search" value="submit">
               <i class="fa fa-filter mr-2 fs-15" aria-hidden="true"></i>Tìm kiếm
             </button>

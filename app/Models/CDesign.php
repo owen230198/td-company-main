@@ -4,7 +4,11 @@
     class CDesign extends Model
     {
         protected $table = 'c_designs';
-        protected $protectFields = false;    
+        protected $protectFields = false;
+        const ARR_ROLE =  [
+            'acept'=>1,
+            'receive'=>1
+        ];    
     }
     
 ?>

@@ -3,7 +3,7 @@
 @php
     $singleObject = true;
 @endphp
-    <div class="dashborad_content position-relative p-3 bg_white">
+    <div class="dashborad_content position-relative p-3 bg_white product_config_item">
         <form action="{{ $action }}-products{{ $action==\App\Constants\VariableConstant::ACTION_UPDATE?'/'.@$dataItemProduct['id']:'' }}" method="POST" 
         class="actionForm baseAjaxForm" enctype="multipart/form-data" lang="vi">
             @csrf

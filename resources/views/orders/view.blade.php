@@ -9,7 +9,7 @@
                 <div class="order_base_input row justify-content-center">
                     @foreach ($field_list as $field)
                         <div class="form-group d-flex mb-3 pb-3 border_bot_eb col-4">
-                            <label class="mb-0 mr-3 w_125 fs-13 text-capitalize">{{ $field['note'] }}</label>
+                            <label class="mb-0 mr-3 w_150 fs-13 text-capitalize">{{ $field['note'] }}</label>
                             @include('view_update.'.$field['view_type'], ['field' => $field, 'data' => @$dataItemOrder??[]])
                         </div>
                     @endforeach
@@ -37,7 +37,7 @@
                 </a>
             </div>
         </form>
-        @if ($action == 'update')
+        @if ($action == \App\Constants\VariableConstant::ACTION_UPDATE)
             <div class="my-4">
                 <h2 class="station-richmenu-main__ttl text-capitalize mb-3 fs-18">Danh sách sản phẩm trong đơn hàng</h2>
                 @include('table.table_base_view', ['field_shows'=>@$dataViewProductList['field_shows'], 
