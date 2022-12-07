@@ -11,7 +11,7 @@
  Target Server Version : 100425
  File Encoding         : 65001
 
- Date: 06/12/2022 18:43:05
+ Date: 07/12/2022 18:27:58
 */
 
 SET NAMES utf8mb4;
@@ -13307,60 +13307,60 @@ CREATE TABLE `n_roles`  (
 -- ----------------------------
 -- Records of n_roles
 -- ----------------------------
-INSERT INTO `n_roles` VALUES (1, 2, 1, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (2, 3, 1, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (3, 6, 1, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (4, 7, 1, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (5, 8, 1, '{\"view\":1,\"update\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (6, 10, 1, '{\"view\":1,\"update\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (7, 11, 1, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (8, 12, 1, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (9, 13, 1, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (10, 14, 1, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (11, 15, 1, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (12, 16, 1, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (13, 18, 1, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (14, 19, 1, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (15, 20, 1, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (16, 21, 1, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (17, 22, 1, '{\"acept\":1,\"receive\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (18, 23, 1, '{\"acept\":1,\"receive\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (19, 2, 43, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (20, 3, 43, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (21, 6, 43, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (22, 7, 43, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (23, 8, 43, '{\"view\":1,\"update\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (24, 10, 43, '{\"view\":1,\"update\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (25, 11, 43, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (26, 12, 43, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (27, 13, 43, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (28, 14, 43, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (29, 15, 43, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (30, 16, 43, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (31, 18, 43, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (32, 19, 43, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (33, 20, 43, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (34, 21, 43, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (35, 22, 43, '{\"acept\":1,\"receive\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (36, 23, 43, '{\"acept\":1,\"receive\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (37, 2, 44, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (38, 3, 44, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (39, 6, 44, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (40, 7, 44, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (41, 8, 44, '{\"view\":1,\"update\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (42, 10, 44, '{\"view\":1,\"update\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (43, 11, 44, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (44, 12, 44, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (45, 13, 44, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (46, 14, 44, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (47, 15, 44, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (48, 16, 44, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (49, 18, 44, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (50, 19, 44, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (51, 20, 44, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (52, 21, 44, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (53, 22, 44, '{\"acept\":1,\"receive\":1}', NULL, NULL, NULL);
-INSERT INTO `n_roles` VALUES (54, 23, 44, '{\"acept\":1,\"receive\":1}', NULL, NULL, NULL);
+INSERT INTO `n_roles` VALUES (1, 2, 1, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (2, 3, 1, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (3, 6, 1, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (4, 7, 1, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (5, 8, 1, '{\"view\":1,\"update\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (6, 10, 1, '{\"view\":1,\"update\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (7, 11, 1, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (8, 12, 1, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (9, 13, 1, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (10, 14, 1, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (11, 15, 1, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (12, 16, 1, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (13, 18, 1, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (14, 19, 1, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (15, 20, 1, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (16, 21, 1, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (17, 22, 1, '{\"accept\":1,\"receive\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (18, 23, 1, '{\"accept\":1,\"receive\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (19, 2, 43, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (20, 3, 43, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (21, 6, 43, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (22, 7, 43, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (23, 8, 43, '{\"view\":1,\"update\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (24, 10, 43, '{\"view\":1,\"update\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (25, 11, 43, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (26, 12, 43, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (27, 13, 43, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (28, 14, 43, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (29, 15, 43, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (30, 16, 43, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (31, 18, 43, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (32, 19, 43, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (33, 20, 43, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (34, 21, 43, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (35, 22, 43, '{\"accept\":1,\"receive\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (36, 23, 43, '{\"accept\":1,\"receive\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (37, 2, 44, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (38, 3, 44, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (39, 6, 44, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (40, 7, 44, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (41, 8, 44, '{\"view\":1,\"update\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (42, 10, 44, '{\"view\":1,\"update\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (43, 11, 44, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (44, 12, 44, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (45, 13, 44, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (46, 14, 44, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (47, 15, 44, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (48, 16, 44, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (49, 18, 44, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (50, 19, 44, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (51, 20, 44, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (52, 21, 44, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (53, 22, 44, '{\"accept\":1,\"receive\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (54, 23, 44, '{\"accept\":1,\"receive\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
 
 -- ----------------------------
 -- Table structure for n_tables

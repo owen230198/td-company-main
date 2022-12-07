@@ -25,7 +25,7 @@ class VariableConstant
         'view_my'=>'Xem dữ liệu của mình',
         'update_my'=>'Sửa dữ liệu của mình',
         'remove_my'=>'Xóa dữ liệu của mình',
-        'acept'=>'Duyệt dữ liệu',
+        'accept'=>'Duyệt dữ liệu',
         'receive'=>'Tiếp nhận'
     ];
 
@@ -35,4 +35,5 @@ class VariableConstant
     //Action name
     const ACTION_INSERT = 'insert';
     const ACTION_UPDATE = 'update';
+    const ACTION_ACCEPT = 'accept';
 }

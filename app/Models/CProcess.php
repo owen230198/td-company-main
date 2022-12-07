@@ -6,7 +6,7 @@ class CProcess extends Model
     protected $table = 'c_processes';
     protected $protectFields = false;
     const ARR_ROLE =  [
-        'acept'=>1,
+        'accept'=>1,
         'receive'=>1
     ];    
 }

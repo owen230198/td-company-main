@@ -1,5 +1,7 @@
 <?php
 namespace App\Services;
+
+use App\Constants\OrderConstant;
 use App\Services\BaseService;
 use Illuminate\Support\Facades\Schema;
 use App\Constants\VariableConstant;
@@ -26,6 +28,9 @@ class AdminService extends BaseService
                 if ($roles['view_my']) {
                     array_push($viewWhere, ['key'=>'created_by', 'compare'=>'=', 'value'=>$admin['id']]);
                 }
+            }
+            if(@$roles['accept']==1){
+                $viewWhere = [['key'=>'status', 'compare'=>'=', 'value'=>OrderConstant::ORDER_NOT_ACCEPT]];
             }
             $allow = @$roles['view']||@$roles['view_my'];
             return ['allow'=>$allow, 'viewWhere'=>$viewWhere];

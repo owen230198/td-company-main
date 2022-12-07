@@ -14,7 +14,7 @@
             'view_my'=> 1,
             'update_my'=> 1,
             'remove_my'=> 1,
-            'acept'=>1
+            'accept'=>1
         ];
     }
     
