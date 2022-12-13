@@ -24,7 +24,7 @@ html {
     width: 100% !important;
 }
 
-.siderbar-menu__lnk:hover i {
+.siderbar-menu__lnk:hover .siderbar-menu__bg i {
     color: #04aaa1;
 }
 
@@ -49,11 +49,11 @@ html {
 
 .menu_item_btn {
     position: absolute;
-    right: 5px;
+    right: 11px;
 }
 
 .header-logo_lnk img {
-    max-height: 35px;
+    max-height: 30px;
 }
 
 .siderbar_child {

@@ -14,7 +14,7 @@ class NRole extends Model
     protected $protectFields = false;
     public function getModuleByGroupUser($group_user_id, $menu = 1)
     {
-        $where = ['n_group_user_id' => $group_user_id];
+        $where = ['n_group_user_id' => $group_user_id, 'act'=>1];
         if($menu == 1){
             $where['menu'] = 1;
         }

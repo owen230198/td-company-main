@@ -190,53 +190,33 @@
     padding: 0;
 }
 .siderbar-menu__lnk {
-    position: relative;
     color: #fff;
-    display: inline-flex;
-    -webkit-transition: 0.3s all;
+    display: flex;
     transition: 0.3s all;
-    text-decoration: none;
     font-size: 13px;
-    padding: 4px 0 4px 5px;
-    margin: 4px 0 4px 5px;
-    text-align: center;
-    position: relative;
-    z-index: 1;
     border-radius: 25px;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
     align-items: center;
-    width: 95%;
+    margin: 3px;
 }
 .siderbar-menu__lnk .siderbar-menu__bg {
-    margin: 0 15px 0 0px;
-    z-index: 1;
-}
-.siderbar-menu__lnk::before {
-    position: absolute;
-    content: "";
-    background-color: #fff;
-    border-radius: 50%;
+    display: inline-flex;
     width: 25px;
     height: 25px;
-    top: 50%;
-    left: 0px;
-    -webkit-transform: translateY(-50%);
-    transform: translateY(-50%);
-    visibility: hidden;
-    opacity: 0;
+    margin-right: 10px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    transition: all .2s;
 }
+
 .siderbar-menu__lnk:hover {
-    text-decoration: none;
     border-radius: 25px;
     color: #fff;
     background: #03aaa1;
 }
-.siderbar-menu__lnk:hover::before {
-    visibility: visible;
-    opacity: 1;
-    -webkit-transition: 0.3s all;
-    transition: 0.3s all;
+
+.siderbar-menu__lnk:hover .siderbar-menu__bg{
+    background: #ffffff;
 }
 
 .station-richmenu-main {
@@ -273,9 +253,7 @@
     width: 75%;
     margin-bottom: 0;
 }
-.margin-right .siderbar-menu__bg {
-    margin: 0 15px 0 -4px;
-}
+
 .margin-right:hover {
     background: transparent;
     width: 18%;
@@ -299,22 +277,10 @@
 }
 
 .sider-bar_name {
-    white-space: nowrap;
-    visibility: visible;
-    position: absolute;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-    transform: translateY(-50%);
-    padding: 0 0 0 20px;
-    opacity: 1;
+    display: block;
 }
 
 .sider-name-opa {
-    -webkit-transform: translateY(-50%);
-    transform: translateY(-50%);
-    width: 100%;
-    -webkit-transition: 0.3s all;
-    transition: 0.3s all;
     visibility: hidden;
     overflow: hidden;
     opacity: 0;

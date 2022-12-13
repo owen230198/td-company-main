@@ -11,7 +11,7 @@
                     </div>
                     @foreach ($list_roles as $role)
                         @if ($role['parent'] == $parent['id'])
-                            <div class="col-lg-2 col-md-4 mb-3">
+                            <div class="col_md_5 col-3 mb-3">
                                 @php
                                     $roleObj = getRoleIdByModule($group, $role['module_id']);
                                     $arrRolesGrant = !empty($role['json_data_role'])?json_decode($role['json_data_role'], true):[];

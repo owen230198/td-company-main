@@ -25,7 +25,7 @@ class VariableConstant
         'view_my'=>'Xem dữ liệu của mình',
         'update_my'=>'Sửa dữ liệu của mình',
         'remove_my'=>'Xóa dữ liệu của mình',
-        'accept'=>'Duyệt dữ liệu',
+        'accept'=>'Duyệt xác nhận',
         'receive'=>'Tiếp nhận'
     ];
 
