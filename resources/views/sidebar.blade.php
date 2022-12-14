@@ -9,7 +9,6 @@
       </a>
     </li>
     @foreach ($parent_menu as $item)
-      @if (hasChild('NModule', $item['id']))
         <li class="siderbar-menu__list text-capitalize parent_li">
           <a href="{{ $item['link'] }}" class="siderbar-menu__lnk">
             <span class="siderbar-menu__bg">
@@ -28,7 +27,6 @@
             @endforeach
           </ul>
         </li> 
-      @endif
     @endforeach
   </ul>
 </div>

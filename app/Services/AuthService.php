@@ -23,8 +23,8 @@ class AuthService extends BaseService
         }
         unset($user['password']);
         $arr['user'] = $user;
-        $arr['parent_menu'] = $this->modules->orderBy('ord', 'asc')->whereNull('parent')->get()->toArray();
         $arr['menu'] = $this->roles->getModuleByGroupUser($user['n_group_user_id']);
+        $arr['parent_menu'] = $this->modules->getParentByModule($arr['menu']);
         session()->put('user_login', $arr);
         return $this->returnMessage(200, ['messages'=>'Đăng nhập thành công!']);
     }

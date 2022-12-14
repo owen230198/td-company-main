@@ -4,7 +4,11 @@
 	$configs = $default_data['config'];
 	$ajaxChild = @$default_data['child'];
 	$list_option = $parent['table']!=null?getOptionByClass($parent['table']):$parent['option'];
-	$list_option = $parent['table']!=null&&@$parent['recursive']?recursive($list_option, 0, 0):$list_option;
+	if ($parent['table'] == 'NGroupUser') {
+		$re_level = @getSessionUser()['n_group_user_id']??0;
+	}
+	$list_option = $parent['table']!=null&&@$parent['recursive']?
+	recursive($list_option, $re_level, 0):$list_option;
 	if (@$config&&$config==1) {
 		$name = $config_id;
 		$value = $config_value;	

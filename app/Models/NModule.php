@@ -13,4 +13,16 @@ class NModule extends Model
      */
     protected $table = 'n_modules';
     protected $protectFields = false;
+
+    public function getParentbyModule($menus)
+    {
+        $arr_parents = array();
+        foreach($menus as $menu){
+            $parent = $this->find(@$menu['parent'])->toArray();
+            if ($parent && !in_array($parent, $arr_parents)) {
+                array_push($arr_parents, $parent);
+            }
+        }
+        return $arr_parents;
+    }
 }

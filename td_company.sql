@@ -11,7 +11,7 @@
  Target Server Version : 100425
  File Encoding         : 65001
 
- Date: 13/12/2022 23:06:15
+ Date: 15/12/2022 00:13:39
 */
 
 SET NAMES utf8mb4;
@@ -13063,7 +13063,7 @@ INSERT INTO `n_detail_tables` VALUES (11, 'name', 1, NULL, 'Tên nhóm', 'text',
 INSERT INTO `n_detail_tables` VALUES (12, 'note', 0, NULL, 'Ghi chú', 'textarea', 'n_group_users', 0, 1, 1, 0, NULL, NULL, 1, 2, 1, '2022-06-24 17:45:08', '2022-06-24 17:45:08');
 INSERT INTO `n_detail_tables` VALUES (14, 'act', 0, NULL, 'Kích hoạt', 'checkbox', 'n_group_users', 1, 1, 1, 0, NULL, NULL, 1, 4, 1, '2022-06-24 16:02:33', '2022-06-24 16:02:33');
 INSERT INTO `n_detail_tables` VALUES (15, 'created_at', 0, NULL, 'Thời gian tạo', 'date_time', 'n_group_users', 1, 1, 1, 1, NULL, NULL, 1, 5, 1, '2022-06-24 16:02:33', '2022-06-24 16:02:33');
-INSERT INTO `n_detail_tables` VALUES (16, 'parent', 1, NULL, 'Nhóm quản trị', 'select', 'n_group_users', 1, 1, 1, 1, NULL, '{\r\n \"data\": {\r\n  \"source\": \"database\",\r\n  \"table\": \"NGroupUser\",\r\n  \"select\": \"id,name\",\r\n  \"field\": \"parent\",\r\n  \"recursive\":1\r\n },\r\n \"config\": {\r\n  \"searchbox\": 1\r\n }\r\n}', 1, 1, 1, '2022-11-09 11:16:49', '2022-11-09 11:16:49');
+INSERT INTO `n_detail_tables` VALUES (16, 'parent', 1, NULL, 'Nhóm cha', 'select', 'n_group_users', 1, 1, 1, 1, NULL, '{\r\n \"data\": {\r\n  \"source\": \"database\",\r\n  \"table\": \"NGroupUser\",\r\n  \"select\": \"id,name\",\r\n  \"field\": \"parent\",\r\n  \"recursive\":1\r\n },\r\n \"config\": {\r\n  \"searchbox\": 1\r\n }\r\n}', 1, 1, 1, '2022-12-14 22:17:35', '2022-12-14 22:17:35');
 INSERT INTO `n_detail_tables` VALUES (17, 'id', 0, NULL, 'ID', 'text', 'customers', 0, NULL, 0, 0, NULL, NULL, 0, 0, 0, '2022-06-21 14:54:20', '2022-06-21 14:54:20');
 INSERT INTO `n_detail_tables` VALUES (18, 'name', 0, NULL, 'Tên Cty', 'text', 'customers', 1, 1, 1, 1, NULL, NULL, 1, 1, 1, '2022-06-24 16:02:33', '2022-06-24 16:02:33');
 INSERT INTO `n_detail_tables` VALUES (19, 'contacter', 0, NULL, 'Người liên hệ', 'text', 'customers', 1, 1, 1, 1, NULL, NULL, 1, 2, 1, '2022-06-24 17:45:47', '2022-06-24 17:45:47');
@@ -13207,7 +13207,7 @@ CREATE TABLE `n_group_users`  (
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `created_by` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 45 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 46 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of n_group_users
@@ -13215,6 +13215,7 @@ CREATE TABLE `n_group_users`  (
 INSERT INTO `n_group_users` VALUES (1, 'Admin cấp cao', 0, 'Admin cao nhất có mọi quyền truy cập', 1, 1, '2022-09-30 22:53:00', '2022-11-09 11:29:28', 1);
 INSERT INTO `n_group_users` VALUES (43, 'Trưởng phòng Kinh Doanh', 1, 'Trưởng phòng Kinh doanh', NULL, 1, '2022-12-06 09:17:00', NULL, 1);
 INSERT INTO `n_group_users` VALUES (44, 'Trưởng phòng Thiết kế', 1, 'Trưởng phòng thiết kế', NULL, 1, '2022-12-06 09:17:00', NULL, 1);
+INSERT INTO `n_group_users` VALUES (45, 'Nhân viên kinh doanh', 43, 'Nhân viên kinh doanh', NULL, 1, '2022-12-14 02:50:00', NULL, 17);
 
 -- ----------------------------
 -- Table structure for n_modules
@@ -13302,7 +13303,7 @@ CREATE TABLE `n_roles`  (
   `created_by` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`role_id`) USING BTREE,
   INDEX `foreign_indx`(`module_id`, `n_group_user_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 55 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 73 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of n_roles
@@ -13327,7 +13328,7 @@ INSERT INTO `n_roles` VALUES (17, 22, 1, '{\"accept\":1,\"receive\":1}', '2022-1
 INSERT INTO `n_roles` VALUES (18, 23, 1, '{\"accept\":1,\"receive\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
 INSERT INTO `n_roles` VALUES (19, 2, 43, '{\"view\":\"1\",\"insert\":\"1\",\"update\":\"0\",\"remove\":\"0\",\"view_my\":\"1\",\"update_my\":\"1\",\"remove_my\":\"1\"}', '2022-12-13 21:59:09', '2022-12-13 14:59:09', 1);
 INSERT INTO `n_roles` VALUES (20, 3, 43, '{\"view\":\"0\",\"insert\":\"1\",\"update\":\"0\",\"remove\":\"0\",\"view_my\":\"1\",\"update_my\":\"1\",\"remove_my\":\"1\"}', '2022-12-13 21:59:07', '2022-12-13 14:59:07', 1);
-INSERT INTO `n_roles` VALUES (21, 6, 43, '{\"view\":\"0\",\"insert\":\"0\",\"update\":\"0\",\"remove\":\"0\",\"view_my\":\"1\",\"update_my\":\"1\",\"remove_my\":\"1\"}', '2022-12-13 22:12:16', '2022-12-13 15:12:16', 1);
+INSERT INTO `n_roles` VALUES (21, 6, 43, '{\"view\":\"0\",\"insert\":\"1\",\"update\":\"0\",\"remove\":\"0\",\"view_my\":\"1\",\"update_my\":\"1\",\"remove_my\":\"1\"}', '2022-12-14 22:19:46', '2022-12-14 15:19:46', 1);
 INSERT INTO `n_roles` VALUES (22, 7, 43, '{\"view\":\"0\",\"insert\":\"1\",\"update\":\"0\",\"remove\":\"0\",\"view_my\":\"1\",\"update_my\":\"1\",\"remove_my\":\"1\"}', '2022-12-13 22:12:58', '2022-12-13 15:12:58', 1);
 INSERT INTO `n_roles` VALUES (23, 8, 43, '{\"view\":1,\"update\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
 INSERT INTO `n_roles` VALUES (24, 10, 43, '{\"view\":\"0\",\"update\":\"0\"}', '2022-12-13 22:01:54', '2022-12-13 15:01:54', 1);
@@ -13361,6 +13362,24 @@ INSERT INTO `n_roles` VALUES (51, 20, 44, '{\"view\":1,\"insert\":1,\"update\":1
 INSERT INTO `n_roles` VALUES (52, 21, 44, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
 INSERT INTO `n_roles` VALUES (53, 22, 44, '{\"accept\":1,\"receive\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
 INSERT INTO `n_roles` VALUES (54, 23, 44, '{\"accept\":1,\"receive\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (55, 2, 45, '{\"view\":\"1\",\"insert\":\"1\",\"update\":\"0\",\"remove\":\"0\",\"view_my\":\"1\",\"update_my\":\"1\",\"remove_my\":\"1\"}', '2022-12-13 21:59:09', '2022-12-13 14:59:09', 1);
+INSERT INTO `n_roles` VALUES (56, 3, 45, '{\"view\":\"0\",\"insert\":\"1\",\"update\":\"0\",\"remove\":\"0\",\"view_my\":\"1\",\"update_my\":\"1\",\"remove_my\":\"1\"}', '2022-12-13 21:59:07', '2022-12-13 14:59:07', 1);
+INSERT INTO `n_roles` VALUES (57, 6, 45, '{\"view_my\":\"0\",\"update_my\":\"0\",\"remove_my\":\"0\"}', '2022-12-14 21:52:51', '2022-12-14 14:52:51', 1);
+INSERT INTO `n_roles` VALUES (58, 7, 45, '{\"insert\":\"0\",\"view_my\":\"0\",\"update_my\":\"0\",\"remove_my\":\"0\"}', '2022-12-14 21:52:58', '2022-12-14 14:52:58', 1);
+INSERT INTO `n_roles` VALUES (59, 8, 45, '{\"view\":\"0\",\"update\":\"0\"}', '2022-12-14 21:53:02', '2022-12-14 14:53:02', 1);
+INSERT INTO `n_roles` VALUES (60, 10, 45, '{\"view\":\"0\",\"update\":\"0\"}', '2022-12-13 22:01:54', '2022-12-13 15:01:54', 1);
+INSERT INTO `n_roles` VALUES (61, 11, 45, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (62, 12, 45, '{\"view\":\"0\",\"insert\":\"0\",\"update\":\"0\",\"remove\":\"0\",\"view_my\":\"0\",\"update_my\":\"0\",\"remove_my\":\"0\"}', '2022-12-13 22:10:20', '2022-12-13 15:10:20', 1);
+INSERT INTO `n_roles` VALUES (63, 13, 45, '{\"view\":\"0\",\"insert\":\"0\",\"update\":\"0\",\"remove\":\"0\",\"view_my\":\"0\",\"update_my\":\"0\",\"remove_my\":\"0\"}', '2022-12-13 22:10:35', '2022-12-13 15:10:35', 1);
+INSERT INTO `n_roles` VALUES (64, 14, 45, '{\"view\":\"0\",\"insert\":\"0\",\"update\":\"0\",\"remove\":\"0\",\"view_my\":\"0\",\"update_my\":\"0\",\"remove_my\":\"0\"}', '2022-12-13 22:10:48', '2022-12-13 15:10:48', 1);
+INSERT INTO `n_roles` VALUES (65, 15, 45, '{\"view\":\"0\",\"insert\":\"0\",\"update\":\"0\",\"remove\":\"0\",\"view_my\":\"0\",\"update_my\":\"0\",\"remove_my\":\"0\"}', '2022-12-13 22:11:01', '2022-12-13 15:11:01', 1);
+INSERT INTO `n_roles` VALUES (66, 16, 45, '{\"view\":\"0\",\"insert\":\"0\",\"update\":\"0\",\"remove\":\"0\",\"view_my\":\"0\",\"update_my\":\"0\",\"remove_my\":\"0\"}', '2022-12-13 22:11:14', '2022-12-13 15:11:14', 1);
+INSERT INTO `n_roles` VALUES (67, 18, 45, '{\"insert\":\"1\",\"view_my\":\"1\",\"update_my\":\"1\",\"remove_my\":\"1\",\"accept\":\"0\"}', '2022-12-14 21:52:28', '2022-12-14 14:52:28', 1);
+INSERT INTO `n_roles` VALUES (68, 19, 45, '{\"view\":\"0\",\"insert\":\"0\",\"update\":\"0\",\"remove\":\"0\",\"view_my\":\"0\",\"update_my\":\"0\",\"remove_my\":\"0\"}', '2022-12-13 22:11:27', '2022-12-13 15:11:27', 1);
+INSERT INTO `n_roles` VALUES (69, 20, 45, '{\"view\":\"0\",\"insert\":\"0\"}', '2022-12-14 21:52:38', '2022-12-14 14:52:38', 1);
+INSERT INTO `n_roles` VALUES (70, 21, 45, '{\"view\":1,\"insert\":1,\"update\":1,\"remove\":1,\"view_my\":1,\"update_my\":1,\"remove_my\":1}', '2022-12-07 18:26:53', '2022-12-07 18:26:53', 1);
+INSERT INTO `n_roles` VALUES (71, 22, 45, '{\"accept\":\"0\",\"receive\":\"0\"}', '2022-12-13 22:02:32', '2022-12-13 15:02:32', 1);
+INSERT INTO `n_roles` VALUES (72, 23, 45, '{\"accept\":\"0\",\"receive\":\"0\"}', '2022-12-13 22:02:36', '2022-12-13 15:02:36', 1);
 
 -- ----------------------------
 -- Table structure for n_tables
@@ -13390,7 +13409,7 @@ CREATE TABLE `n_tables`  (
 -- Records of n_tables
 -- ----------------------------
 INSERT INTO `n_tables` VALUES (1, 'n_users', 'Quản trị viên', 0, 'n_group_users', 'n_users', 10, 'view', NULL, 1, 1, 1, 1, '2022-10-11 22:06:30', '2022-10-11 22:06:30');
-INSERT INTO `n_tables` VALUES (2, 'n_group_users', 'Nhóm quản trị', 0, 'n_group_uers', 'n_group_uers', 10, 'view', NULL, 1, 1, 1, 1, '2022-10-11 22:06:30', '2022-10-11 22:06:30');
+INSERT INTO `n_tables` VALUES (2, 'n_group_users', 'Nhóm quyền', 0, 'n_group_uers', 'n_group_uers', 10, 'view', NULL, 1, 1, 1, 1, '2022-12-14 22:17:15', '2022-12-14 22:17:15');
 INSERT INTO `n_tables` VALUES (3, 'n_roles', 'Phân quyền', 0, 'n_roles', 'n_roles', 10, 'view', NULL, 1, 1, 1, 1, '2022-10-11 22:06:30', '2022-10-11 22:06:30');
 INSERT INTO `n_tables` VALUES (4, 'files', 'Kho Lưu trữ', 0, 'files', 'files', 24, 'media', NULL, 1, 1, 1, 1, '2022-10-11 22:06:30', '2022-10-11 22:06:30');
 INSERT INTO `n_tables` VALUES (5, 'q_configs', 'Thông tin chung & Giá thành', 0, 'q_configs', 'configs', 100, 'configs', NULL, 1, 1, 1, 1, '2022-10-11 22:06:30', '2022-10-11 22:06:30');
@@ -13431,13 +13450,14 @@ CREATE TABLE `n_users`  (
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `created_by` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of n_users
 -- ----------------------------
 INSERT INTO `n_users` VALUES (1, 'dev', 'e10adc3949ba59abbe56e057f20f883e', 'Nguyen Duy Khanh', 'nguyenduykhanh2323@gmail.com', '0378050251', 1, 0, 1, 'Lập trình viên', 1, '2022-09-20 15:23:18', '2022-09-20 15:23:18', 0);
-INSERT INTO `n_users` VALUES (16, 'busn2', 'e10adc3949ba59abbe56e057f20f883e', 'Michael Owen', 'nguyenduykhanh2323@gmail.com', '0378050251', 39, 0, NULL, NULL, 1, '2022-11-15 23:49:11', '2022-11-15 23:49:11', 1);
+INSERT INTO `n_users` VALUES (17, 'bmanager', 'e10adc3949ba59abbe56e057f20f883e', 'TP Kinh doanh', 'bmanager@gmail.com', NULL, 43, 0, NULL, NULL, 1, '2022-12-14 02:21:00', NULL, 1);
+INSERT INTO `n_users` VALUES (18, 'bstaff', 'e10adc3949ba59abbe56e057f20f883e', 'Nhân viên kinh doanh', 'bstaff@gmail.com', NULL, 45, 0, NULL, NULL, 1, '2022-12-14 03:25:00', NULL, 17);
 
 -- ----------------------------
 -- Table structure for orders
