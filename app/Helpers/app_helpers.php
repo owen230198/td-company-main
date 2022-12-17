@@ -120,13 +120,21 @@ if (!function_exists('hasChild')) {
 
 if (!function_exists('getDataTable')) {
     function getDataTable($table, $select = "*", $where = array(), $paginate = 0, $order ='id', 
-    $order_by = 'desc', $to_array = false)
+    $order_by = 'desc', $to_array = false, $table_list = false)
     {
         $db = new \Illuminate\Support\Facades\DB;
         $table = $db::table($table)->select($select);
         if (count($where)>0) {
-            foreach ($where as $w) {
-                $table->where($w['key'], $w['compare'], $w['value']);
+            foreach ($where as $key => $w) {
+                if($table_list){
+                    if ($key == 0) {
+                        $table->where($w['key'], $w['compare'], $w['value']);
+                    }else{
+                        $table->orWhere($w['key'], $w['compare'], $w['value']);  
+                    }
+                }else{
+                    $table->orWhere($w['key'], $w['compare'], $w['value']);    
+                }
             }
         }
         if ($paginate>0) {

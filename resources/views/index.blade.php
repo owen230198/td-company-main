@@ -42,7 +42,7 @@
                             <button type="button" class="station-richmenu-main__btn" id="close">
                                 <img src="{{ asset('frontend/admin/images/station-user-btn-02.png') }}" alt="" />
                             </button>
-                            <h1 class="station-richmenu-main__ttl text-capitalize">{{ $title ? $title : 'Management' }}</h1>
+                            <h1 class="station-richmenu-main__ttl text-capitalize">{{ $title ?? '' }}</h1>
                         </div>
                     </div>
                     <div class="dash_board_content my-3 py-3 border_top">

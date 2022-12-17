@@ -598,6 +598,31 @@ select.form-control:not([size]):not([multiple]) {
     font-size: 14px;
 }
 
+.main_item_command {
+    background: #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: -3px 3px 8px #555555;
+}
+.main_item_command .command_detail_tiltle {
+    margin-bottom: -5px;
+}
+
+.main_item_command .command_icon{
+    width: 55px;
+    height: 55px;
+    margin-right: 15px;
+    transform: rotateZ(0deg);
+    transition: all .7s;
+    padding: 1px;
+    border: 1px solid #ebebeb;
+    border-radius: 50%;
+}
+
+.main_item_command:hover>.command_icon{
+    transform: rotateZ(360deg);
+}
+
 @media (min-width: 576px) {
     .guideModal .modal-dialog {
         max-width: 725px;

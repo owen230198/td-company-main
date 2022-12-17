@@ -23,7 +23,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $data['title'] = 'Management System';
+        $data['title'] = 'Báo cáo & Thống kê';
         return view('main', $data); 
     }
 

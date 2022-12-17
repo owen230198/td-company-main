@@ -150,7 +150,7 @@ class AdminService extends BaseService
                 }
             }
         }
-        $data = getDataTable($table, '*', $arrWhere, $paginate, $order, $order_by);
+        $data = getDataTable($table, '*', $arrWhere, $paginate, $order, $order_by, false, true);
         return $data;
     }
 

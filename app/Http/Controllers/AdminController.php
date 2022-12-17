@@ -36,7 +36,7 @@ class AdminController extends Controller
         if(count($permission['viewWhere'])>0){
             static::$viewWhere = @$permission['viewWhere'];
         }
-        $data['data_tables'] = getDataTable($table, '*', self::$viewWhere, $data['page_item']);
+        $data['data_tables'] = getDataTable($table, '*', self::$viewWhere, $data['page_item'], 'id', 'desc', false, true);
         session()->put('back_url', url()->full());
         return view('table.'.$data['view_type'], $data);
     }
