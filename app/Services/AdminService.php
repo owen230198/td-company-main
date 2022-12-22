@@ -30,7 +30,7 @@ class AdminService extends BaseService
                 }
             }
             if(@$roles['accept']==1){
-                $viewWhere = [['key'=>'status', 'compare'=>'=', 'value'=>OrderConstant::ORDER_NOT_ACCEPT]];
+                $viewWhere = [['key'=>'status', 'compare'=>'=', 'value'=>OrderConstant::ORDER_NOT_ACCEPTED]];
             }
             $allow = @$roles['view']||@$roles['view_my'];
             return ['allow'=>$allow, 'viewWhere'=>$viewWhere];

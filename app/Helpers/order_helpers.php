@@ -25,4 +25,11 @@
             return $arr;
         }
     }
+
+    if (!function_exists('getCountDataNotAcceptedTable')) {
+        function getCountDataNotAcceptedTable($table)
+        {
+            return 200;
+        }
+    }
 ?>

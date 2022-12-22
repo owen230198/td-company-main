@@ -50,6 +50,13 @@ html {
 .menu_item_btn {
     position: absolute;
     right: 11px;
+    visibility: visible;
+    opacity: 1;
+    transition: all .2s;
+}
+.admin_sidebar.collapse-siderbar .menu_item_btn{
+    visibility: hidden;
+    opacity: 0;
 }
 
 .header-logo_lnk img {

@@ -17,7 +17,7 @@ class OrderService extends BaseService
     {
         $data = $this->processDataBefore($data);
         $data['payment_status'] = getPaymentStatus((int)@$data['advance_cost'], (int)@$data['total_cost']);
-        $data['status'] = OrderConstant::ORDER_NOT_ACCEPT;
+        $data['status'] = OrderConstant::ORDER_NOT_ACCEPTED;
         return Order::insertGetId($data);
     }
     
@@ -29,7 +29,7 @@ class OrderService extends BaseService
             foreach ($listDataProduct as $key => $product) {
                 $dataInsertProduct = $this->processDataBefore($product);
                 $dataInsertProduct['order_id'] = $orderId;
-                $dataInsertProduct['status'] = OrderConstant::ORDER_NOT_ACCEPT;
+                $dataInsertProduct['status'] = OrderConstant::ORDER_NOT_ACCEPTED;
                 $product_id = Product::insertGetId($dataInsertProduct);
                 foreach ($arrTable as $keyTable => $table) {
                     $dataInsertTable = @$data[$keyTable][$key]??[];
@@ -37,7 +37,7 @@ class OrderService extends BaseService
                         $dataInsertTable = $this->processDataBefore($dataInsertTable);
                         $dataInsertTable['product_id'] = $product_id;
                         $dataInsertTable['order_id'] = $orderId;
-                        $dataInsertTable['status'] = OrderConstant::ORDER_NOT_ACCEPT;
+                        $dataInsertTable['status'] = OrderConstant::ORDER_NOT_ACCEPTED;
                         $this->db::table($table)->insert($dataInsertTable);
                     }
                 }

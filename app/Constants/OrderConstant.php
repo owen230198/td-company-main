@@ -7,6 +7,7 @@ class OrderConstant
         'c_process'=>'c_processes'
     ];
     const CHILD_TABLE_ORDER = ['products', 'c_designs', 'c_processes'];
+    const ACCEPT_REQURIRED_TABLE = ['orders'=>'Đơn hàng', 'c_designs'=>'Lệnh thiết kế', 'c_prints'=>'Lệnh in', 'c_processes'=>'Lệnh sản xuất'];
 
     // PRODUCT CATEGORY TYPE
     const PRO_CATE_TYPE = [
@@ -21,7 +22,7 @@ class OrderConstant
     ];
 
     //Order Status
-    const ORDER_NOT_ACCEPT = 'not_accept';
+    const ORDER_NOT_ACCEPTED = 'not_accepted';
     const ORDER_ACCEPTED = 'accepted';
 
     //ORDER PAYMENT STATUS

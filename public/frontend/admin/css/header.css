@@ -168,8 +168,6 @@
 .siderbar {
     -webkit-transition: 0.3s all;
     transition: 0.3s all;
-    -webkit-transform: translateX(0%);
-    transform: translateX(0%);
     position: fixed;
     left: 0;
     background: #000020;
@@ -232,7 +230,7 @@
 .main-all .reponsive .main__w {
     -webkit-transition: 0.3s all;
     transition: 0.3s all;
-    padding-left: 80px;
+    padding-left: 0;
 }
 
 .main-all .reponsive .side-bar_w {
@@ -272,18 +270,15 @@
 }
 
 .smooths {
-    -webkit-transition: 0.3s all;
-    transition: 0.3s all;
-}
-
-.sider-bar_name {
-    display: block;
+    -webkit-transition: 0.2s all;
+    transition: 0.2s all;
 }
 
 .sider-name-opa {
     visibility: hidden;
     overflow: hidden;
     opacity: 0;
+    display: none;
 }
 
 @media (max-width: 991px) {

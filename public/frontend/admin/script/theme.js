@@ -16,13 +16,12 @@ var responesive = function()
       $("#close").css("display" ,"block");
       $("#open").css("display" , "none");
       $("#set-width").addClass("main__w");
-      $("#set-width-sd").css("width", "80px");
+      $("#set-width-sd").css("transform", "translateY(-100%)");
       $("#set-width").addClass("smooths");
       $("#set-width-sd").addClass("smooths");
       $(".siderbar-menu__lnk").addClass("margin-right");
       $(".sider-bar_name").addClass("sider-name-opa");
       $(".siderbar-menu__list").addClass("sider-name-br"); 
-      $(".siderbar-menu").css("padding","0 0 20px");
       $("#set-width-sd").addClass("collapse-siderbar");
     });
 
@@ -31,42 +30,14 @@ var responesive = function()
       $("#close").css("display" ,"none");
       $("#open").css("display" , "block");
       $("#set-width").removeClass("main__w");
-      $("#set-width-sd").css("width", "175px");
+      $("#set-width-sd").css("transform", "translateY(0)");
       $("#set-width").removeClass("smooths");
       $("#set-width-sd").removeClass("smooths");
       $(".siderbar-menu__lnk").removeClass("margin-right");
       $(".sider-bar_name").removeClass("sider-name-opa");
       $(".siderbar-menu__list").removeClass("sider-name-br");
-      $(".siderbar-menu").css("padding","0 0 20px");
       $("#set-width-sd").removeClass("collapse-siderbar");
-    });
-
-    if ($(".siderbar-menu__list").length > 0) {
-        $(".siderbar-menu__list").on({
-        mouseenter: function () {
-          if ($(this).parents(".collapse-siderbar").length === 0) return; 
-          $("#set-width-sd").css("width", "175px");
-          $(".siderbar-menu__lnk").addClass("margin-right");
-          $("#set-width").removeClass("smooths");
-          $("#set-width-sd").removeClass("smooths");
-          $(".siderbar-menu__lnk").removeClass("margin-right");
-          $(".sider-bar_name").removeClass("sider-name-opa");
-          $(".siderbar-menu__list").removeClass("sider-name-br");
-          $(".siderbar-menu").css("padding","0 0 20px");
-      },
-        mouseleave: function () {
-          if ($(this).parents(".collapse-siderbar").length === 0) return; 
-          $("#set-width-sd").css("width", "80px");
-          $(".siderbar-menu__lnk").addClass("margin-right");
-          $("#set-width").removeClass("smooths");
-          $("#set-width-sd").removeClass("smooths");
-          $(".siderbar-menu__lnk").addClass("margin-right");
-          $(".sider-bar_name").addClass("sider-name-opa");
-          $(".siderbar-menu__list").addClass("sider-name-br"); 
-          $(".siderbar-menu").css("padding","0 0 20px");
-        }
-      });
-    }  
+    });  
   }else{
     let mainSidebar = $("#set-width-sd");
     mainSidebar.append('<div class="bg_sidebar"></div>');

@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Order;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Constants\NameConstant;
+use App\Constants\OrderConstant;
 use App\Models\Order;
 use App\Models\Product;
 
@@ -90,6 +91,17 @@ class OrderController extends Controller
                 return;
             }
         }
+    }
+
+    public function getDataTableCommand(Request $request, $table, $status = 0){
+        $permission = $this->admins->checkPermissionAction($table, 'view');
+        if (!@$permission['allow']) {
+            return redirect('permission-error');
+        }
+        $w_status = $status == 0 ? OrderConstant::ORDER_NOT_ACCEPTED : OrderConstant::ORDER_ACCEPTED;
+        $data = $this->admins->getDataBaseView($table, 'Danh sách');
+        $data['data_tables'] = $this->db::table($table)->where(['act'=>1, 'status'=>$w_status])->paginate(50);
+        return view('table.'.$data['view_type'], $data);           
     }
 }
 ?>
