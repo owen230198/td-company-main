@@ -126,14 +126,14 @@ if (!function_exists('getDataTable')) {
         $table = $db::table($table)->select($select);
         if (count($where)>0) {
             foreach ($where as $key => $w) {
-                if($table_list){
+                if(!$table_list){
                     if ($key == 0) {
                         $table->where($w['key'], $w['compare'], $w['value']);
                     }else{
                         $table->orWhere($w['key'], $w['compare'], $w['value']);  
                     }
                 }else{
-                    $table->orWhere($w['key'], $w['compare'], $w['value']);    
+                    $table->where($w['key'], $w['compare'], $w['value']);    
                 }
             }
         }

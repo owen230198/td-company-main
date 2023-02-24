@@ -84,5 +84,10 @@ class DevController extends Controller
             }
         }
     }
+
+    public function generateString()
+    {
+        echo 'TD-'.Time();
+    }
 }
 

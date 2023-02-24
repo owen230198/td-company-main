@@ -25,14 +25,16 @@ class AdminService extends BaseService
         if($action == 'view'){
             $viewWhere = [];
             if(empty($roles['view'])){
-                if ($roles['view_my']) {
+                if (@$roles['view_my'] == 1) {
                     array_push($viewWhere, ['key'=>'created_by', 'compare'=>'=', 'value'=>$admin['id']]);
                 }
             }
             if(@$roles['accept']==1){
                 $viewWhere = [['key'=>'status', 'compare'=>'=', 'value'=>OrderConstant::ORDER_NOT_ACCEPTED]];
             }
-            $allow = @$roles['view']||@$roles['view_my'];
+            $allow = @$roles['view'] == 1|| @$roles['view_my'] == 1 
+                    || @$roles['update']==1 || @$roles['update_my']==1
+                    || @$roles['accept'] == 1 || @$roles['receive'] == 1;
             return ['allow'=>$allow, 'viewWhere'=>$viewWhere];
         }else{
             if(!@$roles[$action]&&@$roles[$action.'_my']&&Schema::hasColumn($table, 'created_by')){

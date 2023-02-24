@@ -14,8 +14,8 @@
                             <div class="col_md_5 col-3 mb-3">
                                 @php
                                     $roleObj = getRoleIdByModule($group, $role['module_id']);
-                                    $arrRolesGrant = !empty($role['json_data_role'])?json_decode($role['json_data_role'], true):[];
-                                    $listRole = !empty($roleObj['json_data_role'])?json_decode($roleObj['json_data_role'], true):[];
+                                    $arrRolesGrant = !empty($role['json_data_role']) ? json_decode($role['json_data_role'], true):[];
+                                    $listRole = !empty($roleObj['json_data_role']) ? json_decode($roleObj['json_data_role'], true):[];
                                 @endphp
                                 <form action="update-permissions/{{ $roleObj['module_id'] . '/' . $roleObj['role_id'] }}"
                                     method="POST" enctype="multipart/form-data" class="border_main bg_white adminAjaxForm h-100">

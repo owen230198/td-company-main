@@ -26,10 +26,13 @@
         }
     }
 
-    if (!function_exists('getCountDataNotAcceptedTable')) {
-        function getCountDataNotAcceptedTable($table)
+    if (!function_exists('getCountDataTable')) {
+        function getCountDataTable($table, $where = [])
         {
-            return 200;
+            if (Schema::hasTable($table)) {
+                return \DB::table($table)->where($where)->count();
+            }
+            return 0;
         }
     }
 ?>

@@ -576,7 +576,7 @@ select.form-control:not([size]):not([multiple]) {
 
 .tab_product_list{
     position: sticky;
-    top: 50px;
+    top: 48px;
     left: 0;
     z-index: 2;
     background: #f5f5f5;

@@ -93,14 +93,14 @@ class OrderController extends Controller
         }
     }
 
-    public function getDataTableCommand(Request $request, $table, $status = 0){
+    public function getDataTableCommand(Request $request, $table){
         $permission = $this->admins->checkPermissionAction($table, 'view');
         if (!@$permission['allow']) {
             return redirect('permission-error');
         }
-        $w_status = $status == 0 ? OrderConstant::ORDER_NOT_ACCEPTED : OrderConstant::ORDER_ACCEPTED;
+        $status = $request->input('status') == 0 ? OrderConstant::ORDER_NOT_ACCEPTED : OrderConstant::ORDER_ACCEPTED;
         $data = $this->admins->getDataBaseView($table, 'Danh sách');
-        $data['data_tables'] = $this->db::table($table)->where(['act'=>1, 'status'=>$w_status])->paginate(50);
+        $data['data_tables'] = $this->db::table($table)->where(['status'=>$status])->paginate(50);
         return view('table.'.$data['view_type'], $data);           
     }
 }

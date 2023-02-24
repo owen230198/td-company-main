@@ -29,6 +29,7 @@ class OrderService extends BaseService
             foreach ($listDataProduct as $key => $product) {
                 $dataInsertProduct = $this->processDataBefore($product);
                 $dataInsertProduct['order_id'] = $orderId;
+                $dataInsertProduct['name'] = 'TD-'.Time();
                 $dataInsertProduct['status'] = OrderConstant::ORDER_NOT_ACCEPTED;
                 $product_id = Product::insertGetId($dataInsertProduct);
                 foreach ($arrTable as $keyTable => $table) {
