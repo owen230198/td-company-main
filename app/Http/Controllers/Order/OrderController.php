@@ -116,6 +116,7 @@ class OrderController extends Controller
             $data['dataItemCProcess'] = $data['dataItem'];
             $processData = !empty($data['dataItem']['json_data_conf'])?json_decode($data['dataItem']['json_data_conf'], true):[];
             $data['listProcess'] = array_keys($processData);
+            $data['dataConfProcess'] = $processData;
         }
         return view('orders.commands.view', $data);
     }
