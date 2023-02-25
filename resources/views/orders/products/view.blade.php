@@ -41,12 +41,12 @@
                 <div class="tab-pane fade show active" id="pills-design" role="tabpanel" aria-labelledby="pills-design-tab">
                     <form action="update-commands/c_designs/{{ @$dataItemCDesign['id'] }}" method="POST" class="actionCommandForm baseAjacForm" enctype="multipart/form-data">
                         @include('orders.products.design_commands', 
-                        ['singleObject'=>$singleObject, 'dataItem'=>@$dataItemCDesign??[]]);
+                        ['singleObject'=>$singleObject, 'dataItem'=>@$dataItemCDesign ?? []]);
                     </form>
                 </div>
                 <div class="tab-pane fade" id="pills-process" role="tabpanel" aria-labelledby="pills-process-tab">
                     @include('orders.products.process_commands', 
-                    ['singleObject'=>$singleObject, 'dataItem'=>@$dataItemCProcess??[]])
+                    ['singleObject'=>$singleObject, 'dataItem'=>@$dataItemCProcess ?? []])
                 </div>
             </div>
         </div>

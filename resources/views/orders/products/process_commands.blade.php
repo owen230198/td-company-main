@@ -9,7 +9,7 @@
     <div class="p-3 config_detail">
         <div class="command_config_detail">
             <div class="c_process_config_detail row">
-                @if ($action == \App\Constants\VariableConstant::ACTION_UPDATE)
+                @if ($action == \App\Constants\VariableConstant::ACTION_UPDATE || !empty($dataItem))
                     @include('orders.products.process_ajax.view')
                 @endif
             </div>

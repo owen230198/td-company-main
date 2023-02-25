@@ -10,8 +10,8 @@
         <div class="row command_config_detail">
             <div class="form-group d-flex mb-3 pb-3 border_bot_eb col-12">
                 <label class="mb-0 mr-3 w_150 fs-13 text-capitalize">Người liên hệ</label>
-                <input type="text" class="form-control" name="{{ $singleRecord?'name':'c_design['.$key.'][name]' }}" 
-                value="{{ @$dataItem['name']??@$cDesignContacter }}">
+                <input type="text" class="form-control" name="{{ $singleRecord ? 'name' : 'c_design['.$key.'][name]' }}" 
+                value="{{ @$dataItem['name'] ?? @$cDesignContacter }}">
             </div>
             <div class="form-group d-flex mb-3 pb-3 border_bot_eb col-4">
                 <label class="mb-0 mr-3 w_150 fs-13 text-capitalize">Số màu TK</label>

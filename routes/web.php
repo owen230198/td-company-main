@@ -60,4 +60,5 @@ Route::middleware(['checkLogin'])->group(function () {
 	Route::post('update-orders/{id}', [OrderController::class, 'update']);
 	Route::get('get-process-by-category', [ProductController::class, 'getProcessByCategory']);
 	Route::get('get-data-table-command/{table}', [OrderController::class, 'getDataTableCommand']);
+	Route::get('view-command/{table}/{id}', [OrderController::class, 'ViewCommand']);
 });

@@ -103,5 +103,21 @@ class OrderController extends Controller
         $data['data_tables'] = $this->db::table($table)->where(['status'=>$status])->paginate(50);
         return view('table.'.$data['view_type'], $data);           
     }
+
+    public function viewCommand(Request $request, $table, $id)
+    {
+        $permission = $this->admins->checkPermissionAction($table, 'view');
+        if (!@$permission['allow']) {
+            return redirect('permission-error');
+        }
+        $data = $this->getDataActionView($table, 'view', 'Chi tiết');
+        $data['dataItem'] = json_decode(json_encode(\DB::table($table)->find($id)), true);
+        if ($table == 'c_processes') {
+            $data['dataItemCProcess'] = $data['dataItem'];
+            $processData = !empty($data['dataItem']['json_data_conf'])?json_decode($data['dataItem']['json_data_conf'], true):[];
+            $data['listProcess'] = array_keys($processData);
+        }
+        return view('orders.commands.view', $data);
+    }
 }
 ?>

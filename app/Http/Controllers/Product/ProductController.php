@@ -41,8 +41,8 @@ class ProductController extends Controller
 
     public function getProcessByCategory(Request $request)
     {
-        $cate_id = @$request->cate_id??0;
-        $key = @$request->key??0;
+        $cate_id = @$request->cate_id ?? 0;
+        $key = @$request->key ?? 0;
         if ($cate_id) {
             $category = getDetailDataByID('ProductCategory', $cate_id);
             $listProcess = !empty($category['json_data_process'])?json_decode($category['json_data_process'],true):[];
