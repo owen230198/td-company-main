@@ -109,11 +109,3 @@ if (! function_exists('getSessionUser')) {
         return $admin;
     }
 }
-
-if(!function_exists('getRoleIdByModule')){
-    function getRoleIdByModule($group, $module){
-        $roles = new \App\Models\NRole;
-        $role = $roles->where('module_id', $module)->where('n_group_user_id', $group)->first();
-        return $role;
-    }
-}

@@ -36,6 +36,6 @@
 @endsection
 
 @section('script')
-    <script src="{{ asset('frontend/admin/script/chart.js') }}"></script>
-    <script src="{{ asset('frontend/admin/script/index.js') }}"></script>
+    <script src="{{ asset('frontend/admin/script/chart.js') }}" defer></script>
+    <script src="{{ asset('frontend/admin/script/index.js') }}" defer></script>
 @endsection

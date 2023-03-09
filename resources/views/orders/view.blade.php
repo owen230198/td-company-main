@@ -21,8 +21,13 @@
             </div>
             <div class="group_btn_action_form p-1 mt-3">
                 <button type="submit" class="station-richmenu-main-btn-area">
-                    <i class="fa fa-check mr-2 fs-14" aria-hidden="true"></i>{{ getActionByKey($action) }}
+                    <i class="fa fa-pencil mr-2 fs-14" aria-hidden="true"></i>{{ getActionByKey($action) }}
                 </button>
+                @if (!empty($dataItemOrder))
+                    <a href="{{ asset('apply-order/'.$dataItemOrder['id']) }}" class="station-richmenu-main-btn-area">
+                        <i class="fa fa-check mr-2 fs-14" aria-hidden="true"></i>Duyệt đơn
+                    </a>
+                @endif
                 @if ($action == \App\Constants\VariableConstant::ACTION_UPDATE)
                 <button type="button" class="station-richmenu-main-btn-area">
                     <i class="fa fa-print mr-2 fs-14" aria-hidden="true"></i>In đơn hàng

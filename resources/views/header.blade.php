@@ -1,26 +1,24 @@
-<header class="header">
-    <div class="header-logo">
-        <a href="{{ url('') }}" class="header-logo_lnk d-inline-block py-1">
+<header class="header d-flex justify-content-between align-items-center bg_white">
+    <div class="header_logo">
+        <a href="{{ url('') }}" class="header_logo d-inline-block py-1">
             <img src="{{ asset('frontend/admin/images/logo.png') }}" />
         </a>
     </div>
-    <div class="header-menu">
-        <div class="header-menu-user">
-            <p class="header-menu-user__name">
-                <span class="mr-1">{{ $user_login['user']['name'] }}</span>
-                <img src="{{ asset('frontend/admin/images/arow-donw.png') }}" />
-            </p>
-            <ul class="header-menu-user-all">
-                <li class="header-menu-user__list">
-                    <a href="{{ asset('profile') }}" class="header-menu-user__lnk">Profile</a>
-                </li>
-                <li class="header-menu-user__list">
-                    <a href="{{ asset('logout') }}" class="header-menu-user__lnk">Đăng xuất</a>
-                </li>
-            </ul>
-            <span class="header-menu-user__avatar">
-                <img src="{{ asset('frontend/admin/images/avatar.jpg') }}" />
-            </span>
-        </div>
+    <div class="header_menu_user d-flex align-items-center position-relative cursor_pointer">
+        <p class="user_name mr-1 font_bold">
+            <span class="mr-1">{{ $user_login['user']['name'] }}</span>
+            <i class="fa fa-angle-down fs-14" aria-hidden="true"></i>
+        </p>
+        <ul class="header_menu_user_list" style="display:none">
+            <li>
+                <a href="{{ asset('profile') }}">Profile</a>
+            </li>
+            <li>
+                <a href="{{ asset('logout') }}">Đăng xuất</a>
+            </li>
+        </ul>
+        <span class="header_menu_user_avatar">
+            <img src="{{ asset('frontend/admin/images/avatar.jpg') }}" />
+        </span>
     </div>
 </header>

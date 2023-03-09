@@ -3,6 +3,9 @@ ul{
   padding: 0;
   list-style: none;
 }
+.cursor_pointer{
+  cursor: pointer;
+}
 a{
   text-decoration: none !important;
 }
@@ -152,19 +155,6 @@ textarea{
   background: #ffffff;
 }
 
-.bg_green{
-    background: #5cb85c;
-}
-
-
-.bg_xblue{
-    background: #000050;
-}
-
-.bg_blue{
-  background: #337ab7;
-}
-
 .bg_red{
   background: #ff4646;
 }
@@ -177,13 +167,8 @@ textarea{
   background: #000000;
 }
 
-.nd_title {
-  background: #000020;
-  padding: 10px;
-}
-
-.box_shadow_3{
-  box-shadow: 3px 3px 9px #000020;
+.font_bold{
+  font-weight: 600;
 }
 
 .row-7{
@@ -223,47 +208,6 @@ textarea{
 .mb_20{
   margin-bottom: 20px;
 }
-
-.breadcrumb li{
-  position: relative;
-  padding-right: 15px;
-}
-
-.breadcrumb li:last-child:after{
-  display: none;
-}
-
-.breadcrumb li:last-child a{
-  pointer-events: none;
-}
-
-.font_inter{
-  font-family: inter;
-}
-
-.font_bold{
-  font-weight: bold;
-}
-
-.breadcrumb li:after{
-  position: absolute;
-  content: '\f105';
-  font-family: FontAwesome;
-  right: 5px;
-}
-
-.min_100{
-  min-width: 100px;
-}
-
-.border_right_eb{
-  border-right: 1px solid #ebebeb;
-}
-
-.border_bot_eb{
-  border-bottom: 1px solid #ebebeb;
-}
-
 .color_gray{
   color: #888888;
 }
@@ -297,10 +241,6 @@ input[type=time]{
     border-radius: inherit;
 }
 
-.modal-open .modal {
-    background: #000000db;
-}
-
 .border_right_white{
   border-right: 1px solid #ffffff;
 }
@@ -310,65 +250,6 @@ input[type=time]{
   background:#686868;
   color:#ffffff;
 }
-
-.w_125{
-  width: 125px;
-  min-width: 125px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-.w_150{
-  width: 150px;
-  min-width: 150px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-.flex_100{
-  max-width: 100%;
-  flex: 0 0 100%;
-}
-
-.border_eb{
-  border: 1px solid #ebebeb;
-}
-
-.limit_line_content {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.max_200{
-  max-width: 200px;
-}
-
-.max_w_150{
-  max-width: 150px;
-}
-
-.height_auto{
-  height: auto !important;
-}
-
-.border_bot_white{
-  border-bottom: 1px solid #ffffff;
-}
-
 .overflow_hidden{
   overflow: hidden;
-}
-
-.w_available{
-  width: -webkit-fill-available;
-}
-.short_input{
-  width: 220px;
-}
-.min_155{
-    min-width: 155px;
 }

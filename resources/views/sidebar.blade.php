@@ -1,27 +1,21 @@
-<div class="siderbar admin_sidebar" id="set-width-sd">
-  <ul class="siderbar-menu">
-    <li class="siderbar-menu__list text-capitalize parent_li">
-      <a href="{{url('')}}" class="siderbar-menu__lnk">
-        <span class="siderbar-menu__bg">
-          <i class="icon_menu fa fa-home fs-13" aria-hidden="true"></i>
-        </span>
-        <span class="sider-bar_name">Trang chủ</span>
+<div class="sidebar admin_sidebar">
+  <ul class="sidebar_menu">
+    <li>
+      <a href="{{url('')}}">
+        Trang chủ
       </a>
     </li>
-    @foreach ($parent_menu as $item)
-        <li class="siderbar-menu__list text-capitalize parent_li">
-          <a href="{{ $item['link'] }}" class="siderbar-menu__lnk">
-            <span class="siderbar-menu__bg">
-              <i class="icon_menu fa fa-{{ $item['icon'] }} fs-14" aria-hidden="true"></i>
-            </span>
-            <span class="sider-bar_name">{{ $item['note'] }}</span>
-            <i class="fa fa-angle-right menu_click fs-14 color_white menu_item_btn" aria-hidden="true"></i>
+    @foreach ($group_modules as $key_group => $group)
+        <li>
+          <a href="javascript:void(0)">
+            {{ $group }}
           </a>
-          <ul class="siderbar_child">
-            @foreach ($menu as $child)
-              @if(@$child['parent'] && $child['parent']==$item['id'])
+          <i class="fa fa-angle-right fs-14" aria-hidden="true"></i>
+          <ul>
+            @foreach ($modules as $module)
+              @if(@$module['parent'] && $module['parent'] == $key_group)
                 <li>
-                  <a href="{{ asset($child['link']) }}">{{ $child['note'] }}</a>
+                  <a href="{{ asset($module['link']) }}">{{ $module['name'] }}</a>
                 </li>
               @endif 
             @endforeach

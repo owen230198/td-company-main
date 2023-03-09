@@ -26,13 +26,5 @@
         }
     }
 
-    if (!function_exists('getCountDataTable')) {
-        function getCountDataTable($table, $where = [])
-        {
-            if (Schema::hasTable($table)) {
-                return \DB::table($table)->where($where)->count();
-            }
-            return 0;
-        }
-    }
+    
 ?>

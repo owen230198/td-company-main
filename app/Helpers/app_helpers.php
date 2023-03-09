@@ -101,36 +101,26 @@ if (!function_exists('getNameTableById')) {
 }
 
 if (!function_exists('getIdByFeildValue')) {
-    function getIdByFeildValue($class, $feild, $value)
+    function getIdByFeildValue($class, $where)
     {
         $models = getModelByClass($class);
-        $data = $models::select('id')->where($feild, $value)->first();
+        $data = $models::select('id')->where($where)->first();
         return @$data['id']?$data['id']:0;
-    }
-}
-
-if (!function_exists('hasChild')) {
-    function hasChild($class, $id)
-    {
-        $models = getModelByClass($class);
-        $count = $models::where('parent', $id)->count();
-        return $count>0?true:false;
     }
 }
 
 if (!function_exists('getDataTable')) {
     function getDataTable($table, $select = "*", $where = array(), $paginate = 0, $order ='id', 
-    $order_by = 'desc', $to_array = false, $table_list = false)
+    $order_by = 'desc', $table_list = false)
     {
-        $db = new \Illuminate\Support\Facades\DB;
-        $table = $db::table($table)->select($select);
+        $table = \DB::table($table)->select($select);
         if (count($where)>0) {
             foreach ($where as $key => $w) {
                 if(!$table_list){
-                    if ($key == 0) {
-                        $table->where($w['key'], $w['compare'], $w['value']);
+                    if ($key == 'or') {
+                        $table->orWhere($w['key'], $w['compare'], $w['value']);
                     }else{
-                        $table->orWhere($w['key'], $w['compare'], $w['value']);  
+                        $table->where($w['key'], $w['compare'], $w['value']);  
                     }
                 }else{
                     $table->where($w['key'], $w['compare'], $w['value']);    
@@ -141,9 +131,6 @@ if (!function_exists('getDataTable')) {
             $data = $table->orderBy($order, $order_by)->paginate($paginate);
         }else{
             $data = $table->orderBy($order, $order_by)->get();
-        }
-        if(@$to_array){
-            $data = json_decode($data, true);
         }
         return $data;
     }
@@ -176,10 +163,13 @@ if (!function_exists('getDataDateTime')) {
     }
 }
 
-if (!function_exists('getDataDateTimeShow')) {
-    function getDataDateTimeShow($time){
-        $timstamp = !empty($time)?strtotime($time):Time();
-        return date('m/d/Y h:i A', @$timstamp);    
+if (!function_exists('getCountDataTable')) {
+    function getCountDataTable($table, $where = [])
+    {
+        if (Schema::hasTable($table)) {
+            return \DB::table($table)->where($where)->count();
+        }
+        return 0;
     }
 }
 

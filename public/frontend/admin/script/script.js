@@ -118,75 +118,6 @@ var loadDataPopup = function () {
         $(".modalAction").find("iframe").attr("src", src);
     });
 };
-var ajaxChildOptionByParent = function () {
-    $(document).on("change", "select.change_select_ajax", function (event) {
-        event.preventDefault();
-        eParent = $(this).closest(".ajaxSelectModule");
-        parent_id = $(this).val();
-        url = $(this).data("url") + parent_id;
-        $.ajax({
-            url: url,
-        }).done(function (html) {
-            eParent.find("select.ajax_option").html(html);
-        });
-    });
-};
-
-var tableSelectConfig = function () {
-    $(document).on("change", ".tableSelectAjaxChild", function (event) {
-        event.preventDefault();
-        sChilTable = $(this).data("child-table");
-        sAjaxTarget = $(this).data("child-target");
-        sChildField = $(this).data("child-field");
-        sUrl =
-            "option-child-data/" +
-            sChilTable +
-            "/" +
-            sChildField +
-            "/" +
-            $(this).val();
-        if (sAjaxTarget.length != "") {
-            $.ajax({
-                url: sUrl,
-            }).done(function (shtml) {
-                $("select[name=" + sAjaxTarget + "]").html(shtml);
-            });
-        }
-    });
-};
-
-var selectCustomerAjax = function () {
-    form = $(".actionForm");
-    cusomerSelect = form.find("select[name=customer_id]");
-    companyInput = form.find("input[name=company_name]");
-    contacterInput = form.find("input[name=contacter]");
-    addressInput = form.find("input[name=address]");
-    emailInput = form.find("input[name=email]");
-    phoneInput = form.find("input[name=phone]");
-    if (
-        cusomerSelect.length > 0 &&
-        companyInput.length > 0 &&
-        contacterInput.length > 0 &&
-        addressInput.length > 0 &&
-        emailInput.length > 0 &&
-        phoneInput.length > 0
-    ) {
-        $(document).on("change", "select[name=customer_id]", function (event) {
-            event.preventDefault();
-            parent_id = $(this).val();
-            $.ajax({
-                url: "get-data-details/customers/" + parent_id,
-            }).done(function (data) {
-                var json = JSON.parse(data);
-                companyInput.val(json.name);
-                contacterInput.val(json.contacter);
-                addressInput.val(json.address);
-                emailInput.val(json.email);
-                phoneInput.val(json.phone);
-            });
-        });
-    }
-};
 
 var selectConfigs = function () {
     if ($("select.select_config").length > 0) {
@@ -284,6 +215,35 @@ var datePickerModule = function () {
     });
 };
 
+var menuUserHeader = function(){
+    $(document).on('click', '.user_name', function(event){
+        event.preventDefault();
+        let user_menu = $(this).closest('.header_menu_user').find('.header_menu_user_list');
+        user_menu.slideToggle(200);
+    });
+}
+
+var menuSidebar = function()
+{
+    $(document).on('click', '.admin_sidebar .sidebar_menu>li', function(event){
+        let child_menu = $(this).find('ul');
+        let list_child = $('.admin_sidebar .sidebar_menu>li').find('ul');
+        list_child.each(function(){
+            if ($(this).css('display') === 'block') {
+                $(this).parent().removeClass('active');
+                $(this).slideUp(200);
+            }
+        });
+        if (child_menu.css('display') === 'none') {
+            $(this).toggleClass('active');
+            child_menu.slideToggle(200);
+        }else{
+            $(this).removeClass('active');
+            child_menu.slideUp(200);    
+        }
+    });
+}
+
 $(function () {
     submitActionAjaxForm();
     confirmRemoveData();
@@ -293,10 +253,9 @@ $(function () {
     passwordInputPrevent();
     checkMultiRecordModule();
     loadDataPopup();
-    ajaxChildOptionByParent();
-    tableSelectConfig();
-    selectCustomerAjax();
     selectConfigs();
     dateRangeInputModule();
     datePickerModule();
+    menuUserHeader();
+    menuSidebar();
 });

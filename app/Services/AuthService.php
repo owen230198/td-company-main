@@ -1,6 +1,7 @@
 <?php
 namespace App\Services;
 use App\Constants\StattusConstant;
+use App\Models\NGroupUser;
 use App\Services\BaseService;
 class AuthService extends BaseService
 {
@@ -22,9 +23,8 @@ class AuthService extends BaseService
             return $this->returnMessage(100, ['messages'=>'Thông tin mật khẩu không chính xác!']);
         }
         unset($user['password']);
+        $arr = NGroupUser::getMenuModule($user['n_group_user_id']);
         $arr['user'] = $user;
-        $arr['menu'] = $this->roles->getModuleByGroupUser($user['n_group_user_id']);
-        $arr['parent_menu'] = $this->modules->getParentByModule($arr['menu']);
         session()->put('user_login', $arr);
         return $this->returnMessage(200, ['messages'=>'Đăng nhập thành công!']);
     }
@@ -36,10 +36,10 @@ class AuthService extends BaseService
             'password'=>'required|min:6',
         ];
         $messages = [
-            'username.required'=> 'Username không được để trống!',
-            'username.min'=> 'Username yêu cầu ít nhất 3 ký tự!',
-            'password.required'=> 'Password không được để trống!',
-            'password.min'=> 'Password yêu cầu ít nhất 3 ký tự'
+            'username.required'=> 'Username không được để trống !',
+            'username.min'=> 'Username yêu cầu ít nhất 3 ký tự !',
+            'password.required'=> 'Password không được để trống !',
+            'password.min'=> 'Password yêu cầu ít nhất 6 ký tự !'
         ];
         $request->validate($rule, $messages);
     }

@@ -23,11 +23,8 @@
                 <p class="err_mess fs-13 font-italic color_red text-left">{{ $message }}</p>
             @enderror
             <input type="password" class="form-control mb-3" name="password" placeholder="Password">
-            <button type="submit" class="station-richmenu-main-btn-area click">Đăng nhập</button>
+            <button type="submit" class="main_button bg_main color_white smooth border_main radius_5 font_bold smooth login_button">Đăng Nhập</button>
         </form>
-        <div id="formFooter">
-            
-        </div>
     </div>
 </div>
 @endsection

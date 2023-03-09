@@ -13,8 +13,6 @@
     <link rel="stylesheet" href="{{ asset('frontend/base/css/select2.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/base/css/toastr.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/base/daterangepickers/daterangepicker.css') }}" />
-    <link rel="stylesheet" href="{{ asset('frontend/admin/css/users.css') }}" />
-    <link rel="stylesheet" href="{{ asset('frontend/admin/css/header.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/base/css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/admin/css/style.css') }}" />
     @yield('css')
@@ -26,31 +24,12 @@
     @else
         @php
             $user_login = session('user_login');
-            $menu = $user_login['menu'];
-            $parent_menu = $user_login['parent_menu'];
+            $modules = @$user_login['modules'] ?? [];
+            $group_modules = @$user_login['group_modules'] ?? [];
         @endphp
         @include('header')
         @include('sidebar')
-        <section class="main-all">
-            <div class="reponsive container-fluid">
-                <div class="station-richmenu-main" id="set-width">
-                    <div class="station-richmenu-main-area justify-content-between">
-                        <div class="station-richmenu-main-area--item d-flex align-items-center">
-                            <button type="button" class="station-richmenu-main__btn" id="open">
-                                <img src="{{ asset('frontend/admin/images/station-user-btn-01.png') }}" alt="" />
-                            </button>
-                            <button type="button" class="station-richmenu-main__btn" id="close">
-                                <img src="{{ asset('frontend/admin/images/station-user-btn-02.png') }}" alt="" />
-                            </button>
-                            <h1 class="station-richmenu-main__ttl text-capitalize">{{ $title ?? '' }}</h1>
-                        </div>
-                    </div>
-                    <div class="dash_board_content my-3 py-3 border_top">
-                        @yield('content')
-                    </div>
-                </div>
-            </div>
-        </section>
+        @yield('content')
     @endif
     <script src="{{ asset('frontend/base/script/jquery.min.js') }}"></script>
     <script src="{{ asset('frontend/base/script/bootstrap.min.js') }}"></script>
@@ -61,7 +40,6 @@
     <script src="{{ asset('frontend/base/daterangepickers/moment.min.js') }}"></script>
     <script src="{{ asset('frontend/base/daterangepickers/daterangepicker.js') }}"></script>
     <script src="{{ asset('frontend/admin/script/loading.js') }}"></script>
-    <script src="{{ asset('frontend/admin/script/theme.js') }}"></script>
     <script src="{{ asset('frontend/base/script/script.js') }}"></script>
     <script src="{{ asset('frontend/admin/script/script.js') }}"></script>
     @yield('script')
