@@ -173,3 +173,17 @@ if (!function_exists('getCountDataTable')) {
     }
 }
 
+if (!function_exists('isHome')) {
+    function isHome()
+    {
+        return url()->current() == url('');
+    }
+}
+
+if (!function_exists('getInsertNextId')) {
+    function getInsertNextId($table)
+    {
+        $id = \DB::select("SHOW TABLE STATUS LIKE '".$table."'");
+        return $id[0]->Auto_increment;
+    }
+}

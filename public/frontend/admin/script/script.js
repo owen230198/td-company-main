@@ -244,6 +244,38 @@ var menuSidebar = function()
     });
 }
 
+var selectAjaxModule = function()
+{
+    let select_ajax = $('select.select_ajax');
+    if (select_ajax.length > 0) {
+        select_ajax.each(function(){
+            let url = $(this).data('url');
+            $(this).select2({
+                ajax: {
+                    url: url,
+                    dataType: 'json',
+                    data: (params) => {
+                        return {
+                        q: params.term,
+                        }
+                    },
+                    processResults: (data, params) => {
+                        const results = data.map(item => {
+                        return {
+                            id: item.id,
+                            text: item.label,
+                        };
+                        });
+                        return {
+                        results: results,
+                        }
+                    },
+                },
+            });
+        })
+    }
+}
+
 $(function () {
     submitActionAjaxForm();
     confirmRemoveData();
@@ -258,4 +290,5 @@ $(function () {
     datePickerModule();
     menuUserHeader();
     menuSidebar();
+    selectAjaxModule();
 });

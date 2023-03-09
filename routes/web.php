@@ -35,24 +35,10 @@ Route::middleware(['checkLogin'])->group(function () {
 	Route::post('remove', [AdminController::class, 'remove']);
 	Route::post('multiple-remove', [AdminController::class, 'multipleRemove']);
 	Route::post('do-config-data/{table}', [AdminController::class, 'doConfigData']);
-	Route::get('option-child-data/{table}/{field}/{parent}', [AdminController::class, 'optionChildData']);
-	Route::get('get-data-details/{table}/{id}', [AdminController::class, 'getJsonDataById']);
-
-	//permission roles routes
-	Route::get('grant-permissions', [AdminController::class, 'grantPermission']);
-	Route::get('get-permissions', [AdminController::class, 'getPermission']);
-	Route::post('update-permissions/{module_id}/{role_id}', [AdminController::class, 'updatePermission']);
-	Route::get('permission-error',[AdminController::class, 'permissionError']);
+	Route::get('get-data-json-customer', [AdminController::class, 'getDataJsonCustomer']);
 
 	//quotes routes
-	Route::get('ajax-view-list/{table}/{quote_id}', [QuoteController::class, 'ajaxViewList']);
-	Route::get('quote-managements/{table}/{quote_id}', [QuoteController::class, 'quoteManagement']);
-	Route::get('insert-detail-quotes/{table}/{quote_id}', [QuoteController::class, 'insertDetailQuote']);
-	Route::get('update-detail-quotes/{table}/{quote_id}/{id}', [QuoteController::class, 'updateDetailQuote']);
-	Route::any('config-profits/{quote_id}', [QuoteController::class, 'configProfit']);
-	Route::post('do-insert-detail/{table}/{quote_id}', [QuoteController::class, 'doInsertDetail']);
-	Route::post('do-update-detail/{table}/{quote_id}/{id}', [QuoteController::class, 'doUpdateDetail']);
-	Route::get('file-details/{id}', [QuoteController::class, 'fileDetail']);
+	Route::get('create-quote', [QuoteController::class, 'createQuote']);
 
 	//orders routes
 	Route::get('set-quantity-order-products', [OrderController::class, 'setListProductView']);

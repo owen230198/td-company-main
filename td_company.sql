@@ -11,7 +11,7 @@
  Target Server Version : 100425
  File Encoding         : 65001
 
- Date: 25/02/2023 08:39:19
+ Date: 09/03/2023 23:45:41
 */
 
 SET NAMES utf8mb4;
@@ -131,19 +131,21 @@ CREATE TABLE `c_designs`  (
   `order_id` int(10) NULL DEFAULT NULL,
   `status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `created_by` int(10) NULL DEFAULT NULL,
-  `assgin_by` int(10) NULL DEFAULT NULL,
+  `assign_by` int(10) NULL DEFAULT NULL,
   `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of c_designs
 -- ----------------------------
-INSERT INTO `c_designs` VALUES (12, 'Gerrard2', 2, 1, 2, 1, 2, '1970-01-01 12:00:00', 2, 2, '1970-01-01 12:00:00', 'tk hop cung', NULL, 21, 15, 'not_accepted', 1, NULL, '2022-11-22 14:31:00', NULL);
-INSERT INTO `c_designs` VALUES (13, 'Gerrard2', 2, 2, 2, 2, 1, '1970-01-01 12:00:00', 1, 3, '1970-01-01 12:00:00', 'tk hop banh', NULL, 22, 15, 'not_accepted', 1, NULL, '2022-11-22 14:31:00', NULL);
+INSERT INTO `c_designs` VALUES (12, 'Gerrard2', 2, 1, 2, 1, 2, '1970-01-01 12:00:00', 2, 2, '1970-01-01 12:00:00', 'tk hop cung', NULL, 21, 15, 'not_accepted', 1, NULL, '2022-11-22 14:31:00', '2023-02-25 08:14:26');
+INSERT INTO `c_designs` VALUES (13, 'Gerrard2', 2, 2, 2, 2, 1, '1970-01-01 12:00:00', 1, 3, '1970-01-01 12:00:00', 'tk hop banh', NULL, 22, 15, 'not_accepted', 1, NULL, '2022-11-22 14:31:00', '2023-02-25 08:14:26');
 INSERT INTO `c_designs` VALUES (14, 'Contacter D', 3, 2, 2, 3, 2, '2023-02-22 10:56:00', 2, 3, '2023-02-25 10:56:00', 'ghi chu tk sp 1', NULL, 23, 16, 'not_accepted', 1, NULL, '2023-02-22 23:01:00', NULL);
 INSERT INTO `c_designs` VALUES (15, 'Contacter D', 2, 2, 2, 2, 2, '2023-02-22 10:56:00', 2, 2, '2023-02-22 10:56:00', 'ghi chu tk sp 2', NULL, 24, 16, 'not_accepted', 1, NULL, '2023-02-22 23:01:00', NULL);
+INSERT INTO `c_designs` VALUES (16, 'Contacter D', 2, 1, 2, 1, 2, '2023-02-25 09:27:00', 1, 3, '2023-02-26 09:27:00', 'note', NULL, 25, 17, 'not_accepted', 1, NULL, '2023-02-25 09:30:00', NULL);
+INSERT INTO `c_designs` VALUES (17, 'Contacter D', 3, 2, 2, 1, 2, '2023-02-25 09:27:00', 1, 1, '2023-02-25 09:27:00', NULL, NULL, 26, 17, 'not_accepted', 1, NULL, '2023-02-25 09:30:00', NULL);
 
 -- ----------------------------
 -- Table structure for c_processes
@@ -163,7 +165,7 @@ CREATE TABLE `c_processes`  (
   `product_id` int(10) NULL DEFAULT NULL,
   `order_id` int(10) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of c_processes
@@ -172,6 +174,8 @@ INSERT INTO `c_processes` VALUES (9, 'not_accepted', '2022-11-22 12:00:00', '202
 INSERT INTO `c_processes` VALUES (10, 'not_accepted', '2022-11-22 12:00:00', '2022-11-22 12:00:00', '{\"crop\":\"X\\u00e9n theo \\u1ed1c\",\"num_face\":\"1\",\"soles_fill\":\"1\",\"finished_type\":\"1\",\"compress\":\"1\",\"jump\":\"0\",\"finish\":\"1\"}', 'sx hop banh', 1, NULL, '2022-11-22 14:31:00', NULL, 22, 15);
 INSERT INTO `c_processes` VALUES (11, 'not_accepted', '2023-02-22 10:56:00', '2023-02-23 10:56:00', '{\"crop\":\"X\\u00e9n theo \\u1ed1c\",\"num_face\":\"2\",\"soles_fill\":\"1\",\"finished_type\":\"1\",\"compress\":\"1\",\"jump\":\"1\",\"finish\":\"1\"}', 'ghi chu gia cong sp 1', 1, NULL, '2023-02-22 23:01:00', NULL, 23, 16);
 INSERT INTO `c_processes` VALUES (12, 'not_accepted', '2023-02-22 10:56:00', '2023-02-23 10:56:00', '{\"crop\":\"X\\u00e9n theo \\u1ed1c\",\"num_face\":\"2\",\"soles_fill\":\"2\",\"finished_type\":\"1\",\"compress\":\"1\",\"jump\":\"0\",\"finish\":\"1\"}', 'ghi chu gia cong sp 2', 1, NULL, '2023-02-22 23:01:00', NULL, 24, 16);
+INSERT INTO `c_processes` VALUES (13, 'not_accepted', '2023-02-25 09:27:00', '2023-02-26 09:27:00', '{\"crop\":\"X\\u00e9n theo \\u1ed1c\",\"num_face\":\"2\",\"soles_fill\":\"1\",\"finished_type\":\"2\",\"compress\":\"1\",\"jump\":\"1\",\"finish\":\"1\"}', 'note', 1, NULL, '2023-02-25 09:30:00', NULL, 25, 17);
+INSERT INTO `c_processes` VALUES (14, 'not_accepted', '2023-02-25 09:27:00', '2023-02-25 09:27:00', '{\"crop\":\"X\\u00e9n theo \\u1ed1c\",\"num_face\":\"2\",\"soles_fill\":\"2\",\"finished_type\":\"0\",\"compress\":\"1\",\"jump\":\"1\",\"finish\":\"1\"}', NULL, 1, NULL, '2023-02-25 09:30:00', NULL, 26, 17);
 
 -- ----------------------------
 -- Table structure for citys
@@ -12301,13 +12305,14 @@ CREATE TABLE `configs`  (
 DROP TABLE IF EXISTS `customers`;
 CREATE TABLE `customers`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `customer_code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `contacter` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `status` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `act` int(11) NULL DEFAULT NULL,
   `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
@@ -12316,22 +12321,22 @@ CREATE TABLE `customers`  (
   INDEX `name_index`(`name`) USING BTREE,
   INDEX `infor_index`(`address`, `email`, `phone`) USING BTREE,
   INDEX `conttacter_index`(`contacter`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of customers
 -- ----------------------------
-INSERT INTO `customers` VALUES (3, '', 'CTY 678910', 'Contacter c', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '123456789', 'note', 1, '2022-09-20 00:00:00', '2022-09-20 00:00:00', 1);
-INSERT INTO `customers` VALUES (6, '', 'CTY 678911', 'Contacter D', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '123456789', 'note', 1, '2022-09-20 00:00:00', '2022-09-20 00:00:00', 1);
-INSERT INTO `customers` VALUES (7, '', 'CTY 678912', 'Contacter E', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '123456789', 'note', 1, '2022-09-20 00:00:00', '2022-09-20 00:00:00', 1);
-INSERT INTO `customers` VALUES (8, '', 'CTY 678913', 'Contacter F', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '123456789', 'note', 1, '2022-09-20 00:00:00', '2022-09-20 00:00:00', 1);
-INSERT INTO `customers` VALUES (9, '', 'CTY 678914', 'Contacter G', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '123456789', 'note', 1, '2022-09-20 00:00:00', '2022-09-20 00:00:00', 1);
-INSERT INTO `customers` VALUES (10, '', 'CTY 678914', 'Contacter H', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '123456789', 'note', 1, '2022-09-20 00:00:00', '2022-09-20 00:00:00', 1);
-INSERT INTO `customers` VALUES (11, '', 'Liverpool1', 'Owen', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', '', 1, '2022-09-21 00:00:00', '2022-09-21 00:00:00', 1);
-INSERT INTO `customers` VALUES (12, '', 'Liverpool2', 'Gerrard1', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', '', 1, '2022-09-21 00:00:00', '2022-09-21 00:00:00', 1);
-INSERT INTO `customers` VALUES (13, '', 'Liverpool3', 'Gerrard2', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', '', 1, '2022-09-21 00:00:00', '2022-09-21 00:00:00', 1);
-INSERT INTO `customers` VALUES (14, '', 'Liverpool4', 'Gerrard3', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', '', 1, '2022-11-19 15:57:38', '2022-11-19 15:57:38', 1);
-INSERT INTO `customers` VALUES (15, '', 'Liverpool5', 'Gerrard4', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', NULL, 1, '2022-11-19 03:57:00', '2022-12-17 01:00:26', 17);
+INSERT INTO `customers` VALUES (3, 'KH-000003', 'CTY 678910', 'Contacter c', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '123456789', 'note', 'old', 1, '2023-03-09 23:39:32', '2023-03-09 23:39:32', 1);
+INSERT INTO `customers` VALUES (6, 'KH-000006', 'CTY 678911', 'Contacter D', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '123456789', 'note', 'old', 1, '2023-03-09 23:39:32', '2023-03-09 23:39:32', 1);
+INSERT INTO `customers` VALUES (7, 'KH-000007', 'CTY 678912', 'Contacter E', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '123456789', 'note', 'old', 1, '2023-03-09 23:39:32', '2023-03-09 23:39:32', 1);
+INSERT INTO `customers` VALUES (8, 'KH-000008', 'CTY 678913', 'Contacter F', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '123456789', 'note', 'old', 1, '2023-03-09 23:39:32', '2023-03-09 23:39:32', 1);
+INSERT INTO `customers` VALUES (9, 'KH-000009', 'CTY 678914', 'Contacter G', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '123456789', 'note', 'old', 1, '2023-03-09 23:39:32', '2023-03-09 23:39:32', 1);
+INSERT INTO `customers` VALUES (10, 'KH-0000010', 'CTY 678914', 'Contacter H', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '123456789', 'note', 'old', 1, '2023-03-09 23:39:32', '2023-03-09 23:39:32', 1);
+INSERT INTO `customers` VALUES (11, 'KH-0000011', 'Liverpool1', 'Owen', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', '', 'old', 1, '2023-03-09 23:39:32', '2023-03-09 23:39:32', 1);
+INSERT INTO `customers` VALUES (12, 'KH-0000012', 'Liverpool2', 'Gerrard1', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', '', 'old', 1, '2023-03-09 23:39:32', '2023-03-09 23:39:32', 1);
+INSERT INTO `customers` VALUES (13, 'KH-0000013', 'Liverpool3', 'Gerrard2', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', '', 'old', 1, '2023-03-09 23:39:32', '2023-03-09 23:39:32', 1);
+INSERT INTO `customers` VALUES (14, 'KH-0000014', 'Liverpool4', 'Gerrard3', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', '', 'old', 1, '2023-03-09 23:39:32', '2023-03-09 23:39:32', 1);
+INSERT INTO `customers` VALUES (15, 'KH-0000015', 'Liverpool5', 'Gerrard4', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '1234 56789', NULL, 'old', 1, '2023-03-09 23:39:32', '2023-03-09 23:39:32', 17);
 
 -- ----------------------------
 -- Table structure for districts
@@ -13327,9 +13332,9 @@ CREATE TABLE `n_group_users`  (
 -- Records of n_group_users
 -- ----------------------------
 INSERT INTO `n_group_users` VALUES (1, 'Admin cấp cao', 0, 'Admin cao nhất có mọi quyền truy cập', 1, 1, '2022-09-30 22:53:00', '2022-11-09 11:29:28', 1);
-INSERT INTO `n_group_users` VALUES (43, 'Trưởng phòng Kinh Doanh', 1, 'Trưởng phòng Kinh doanh', NULL, 1, '2022-12-06 09:17:00', NULL, 1);
-INSERT INTO `n_group_users` VALUES (44, 'Trưởng phòng Thiết kế', 1, 'Trưởng phòng thiết kế', NULL, 1, '2022-12-06 09:17:00', NULL, 1);
-INSERT INTO `n_group_users` VALUES (45, 'Nhân viên kinh doanh', 43, 'Nhân viên kinh doanh', NULL, 1, '2022-12-14 02:50:00', NULL, 17);
+INSERT INTO `n_group_users` VALUES (2, 'Trưởng phòng Kinh Doanh', 1, 'Trưởng phòng Kinh doanh', NULL, 1, '2023-03-06 20:06:54', '2023-03-06 20:06:54', 1);
+INSERT INTO `n_group_users` VALUES (3, 'Trưởng phòng Thiết kế', 1, 'Trưởng phòng thiết kế', NULL, 1, '2023-03-06 20:06:56', '2023-03-06 20:06:56', 1);
+INSERT INTO `n_group_users` VALUES (4, 'Nhân viên kinh doanh', 1, 'Nhân viên kinh doanh', NULL, 1, '2023-03-06 20:07:10', '2023-03-06 20:07:10', 17);
 
 -- ----------------------------
 -- Table structure for n_modules
@@ -13600,13 +13605,14 @@ CREATE TABLE `orders`  (
   `updated_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx`(`customer_id`, `created_by`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of orders
 -- ----------------------------
-INSERT INTO `orders` VALUES (15, 'TD-1677199455', 2, 13, 1, '2022-11-22 02:25:00', '2022-11-22 02:25:00', 520000000, 0, 0, 520000000, 2000000, 520000000, 'advance_payment', 'not_accepted', 1, '2022-11-22 14:31:00', NULL);
+INSERT INTO `orders` VALUES (15, 'TD-1677199455', 2, 13, 1, '2022-11-22 02:25:00', '2022-11-22 02:25:00', 520000000, 0, 0, 520000000, 2000000, 520000000, 'advance_payment', 'not_accepted', 1, '2023-02-25 08:14:00', '2023-02-25 08:14:26');
 INSERT INTO `orders` VALUES (16, 'TD-1677199475', 2, 6, 1, '2023-02-22 10:55:00', '2023-02-23 10:55:00', 2200000, 0, 0, 2200000, 200000, 2200000, 'advance_payment', 'not_accepted', 1, '2023-02-22 23:01:00', NULL);
+INSERT INTO `orders` VALUES (17, NULL, 2, 6, 1, '2023-02-25 09:27:00', '2023-02-25 09:27:00', 2020000000, 0, 0, 2020000000, 2000000, 2020000000, 'advance_payment', 'not_accepted', NULL, '2023-02-25 09:30:00', NULL);
 
 -- ----------------------------
 -- Table structure for p_substances
@@ -13661,7 +13667,7 @@ INSERT INTO `product_categories` VALUES (2, 'Hộp giấy', 'pre_order', NULL, 1
 INSERT INTO `product_categories` VALUES (3, 'Hộp quà tết', 'hard', NULL, 1, 1, '2022-11-02 23:36:02', '2022-11-02 23:36:04');
 INSERT INTO `product_categories` VALUES (4, 'Hộp bánh trung thu', 'hard', NULL, 1, 1, '2022-11-02 23:36:02', '2022-11-02 23:36:04');
 INSERT INTO `product_categories` VALUES (5, 'Hộp trụ tròn', 'hard', NULL, 1, 1, '2022-11-02 23:36:02', '2022-11-02 23:36:04');
-INSERT INTO `product_categories` VALUES (6, 'Thuyền', 'hard', NULL, 1, 1, '2022-11-02 23:36:02', '2022-11-02 23:36:04');
+INSERT INTO `product_categories` VALUES (6, 'Thuyền', 'hard', '{\"crop\":\"1\",\"soles_size\":null,\"finished_size\":null,\"roll\":null,\"num_face\":\"1\",\"elevated_frame\":null,\"compress_frame\":null,\"push_frame\":null,\"soles_fill\":\"1\",\"emul_color\":null,\"soles_roll\":null,\"finished_style\":null,\"finished_type\":\"1\",\"pin\":null,\"glue\":null,\"elevated\":null,\"compress\":null,\"jump\":null,\"fill\":null,\"stamp\":null,\"grooved\":null,\"finish\":null,\"fold\":null,\"sew\":null,\"sawing\":null}', 1, 1, '2022-11-02 11:36:00', '2022-11-02 11:36:00');
 INSERT INTO `product_categories` VALUES (7, 'Hộp bánh trung thu', 'paper', '{\"crop\":\"1\",\"soles_size\":null,\"finished_size\":null,\"roll\":null,\"num_face\":\"1\",\"elevated_frame\":null,\"compress_frame\":null,\"push_frame\":null,\"soles_fill\":\"1\",\"emul_color\":null,\"soles_roll\":null,\"finished_style\":null,\"finished_type\":\"1\",\"pin\":null,\"glue\":null,\"elevated\":null,\"compress\":\"1\",\"jump\":\"1\",\"fill\":null,\"stamp\":null,\"grooved\":null,\"finish\":\"1\",\"fold\":null,\"sew\":null,\"sawing\":null}', 1, 1, '2022-11-02 11:36:00', '2022-11-02 11:36:00');
 
 -- ----------------------------
@@ -13687,7 +13693,7 @@ CREATE TABLE `products`  (
   `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 27 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of products
@@ -13696,6 +13702,8 @@ INSERT INTO `products` VALUES (21, 'Hop cung', 'not_accepted', 1, 2, '{\"quantat
 INSERT INTO `products` VALUES (22, 'Hop banh', 'not_accepted', 7, 2, '{\"quantative\":\"200\",\"substance\":\"3\"}', NULL, NULL, 500000, '1000', '500000000', 'note hop banh', 15, 1, 1, '2022-11-22 14:31:00', NULL);
 INSERT INTO `products` VALUES (23, 'Sản phẩm 1', 'not_accepted', 7, 2, '{\"quantative\":\"300\",\"substance\":\"1\"}', NULL, NULL, 10000, '200', '2000000', 'ghi chu sp 1', 16, 1, 1, '2023-02-22 23:01:00', NULL);
 INSERT INTO `products` VALUES (24, 'Sản phẩm 2', 'not_accepted', 7, 2, '{\"quantative\":\"400\",\"substance\":\"9\"}', NULL, NULL, 2000, '100', '200000', 'ghi chu sp 2', 16, 1, 1, '2023-02-22 23:01:00', NULL);
+INSERT INTO `products` VALUES (25, 'TD-1677317435', 'not_accepted', 7, 2, '{\"quantative\":\"300\",\"substance\":\"9\"}', NULL, NULL, 1000000, '2000', '2000000000', 'note', 17, NULL, 1, '2023-02-25 09:30:00', NULL);
+INSERT INTO `products` VALUES (26, 'TD-1677317435', 'not_accepted', 7, 2, '{\"quantative\":\"300\",\"substance\":\"1\"}', NULL, NULL, 10000, '2000', '20000000', 'note', 17, NULL, 1, '2023-02-25 09:30:00', NULL);
 
 -- ----------------------------
 -- Table structure for q_cartons
@@ -13933,7 +13941,7 @@ CREATE TABLE `q_papers`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `quote_indx`(`quote_id`) USING BTREE,
   INDEX `main_index`(`main`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of q_papers
@@ -13941,6 +13949,7 @@ CREATE TABLE `q_papers`  (
 INSERT INTO `q_papers` VALUES (2, 'BG 1', 10000, 1, 10200, 2, '0.35', '0.51', '{\"quantitative\":\"350\",\"unit_price\":\"20\",\"act\":1,\"total\":12869849.999999998}', '{\"type\":\"1\",\"total\":\"500000\"}', '{\"act\":\"1\",\"color_num\":\"4\",\"style\":\"4\",\"device\":\"2\",\"total\":11146000}', '{\"act\":\"1\",\"materal\":\"8\",\"num_face\":\"0\",\"device\":\"1\",\"total\":50000}', '{\"act\":\"1\",\"materal\":\"other\",\"materal_price\":\"100\",\"num_face\":\"2\",\"cover_materal\":\"6\",\"cover_num_face\":\"2\",\"total\":10663589.999999998}', '{\"act\":\"1\",\"price\":\"1000\",\"shape\":\"10\",\"device\":\"2\",\"total\":10000010}', '{\"act\":\"1\",\"num_face\":\"2\",\"device\":\"3\",\"total\":16300000}', '{\"act\":\"1\",\"shape_price\":\"1000\",\"device\":\"11\",\"total\":1600000}', '{\"act\":\"1\",\"device\":\"5\",\"total\":120000}', '{\"act\":\"1\",\"device\":\"6\",\"total\":550000}', '{\"act\":\"1\",\"price\":\"200\",\"total\":2000000}', 11, 'note', 65799450, 1, NULL, '2022-10-07 16:22:17', '2022-10-07 09:22:17', 0);
 INSERT INTO `q_papers` VALUES (3, 'BG 1 - tờ HDSD', 10000, 1, 10200, 2, '0.25', '0.14', '{\"quantitative\":\"400\",\"unit_price\":\"20\",\"act\":1,\"total\":2884000.0000000005}', '{\"type\":\"1\",\"total\":\"100000\"}', '{\"act\":\"1\",\"color_num\":\"2\",\"style\":\"4\",\"device\":\"1\",\"total\":1238600}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', 11, 'note', 4222600, 0, NULL, NULL, NULL, 0);
 INSERT INTO `q_papers` VALUES (5, 'Báo Giá Test 1', 1000, 1, 1020, 2, '0.43', '0.65', '{\"quantitative\":\"350\",\"unit_price\":\"25\",\"act\":1,\"total\":2739100}', '{\"type\":\"1\",\"total\":\"100000\"}', '{\"act\":0}', '{\"act\":\"1\",\"materal\":\"9\",\"num_face\":\"1\",\"device\":\"1\",\"total\":856078}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":\"1\",\"device\":\"13\",\"total\":170000}', '{\"act\":0}', 14, NULL, 3865178, 1, NULL, NULL, NULL, 0);
+INSERT INTO `q_papers` VALUES (6, 'bao Gia 0111', 10000, 1, 10200, 2, '0.35', '0.51', '{\"quantitative\":\"300\",\"unit_price\":\"200\",\"act\":1,\"total\":110313000}', '{\"type\":\"2\"}', '{\"act\":\"1\",\"color_num\":\"3\",\"style\":\"2\",\"device\":\"2\",\"total\":8437000}', '{\"act\":\"1\",\"materal\":\"6\",\"num_face\":\"2\",\"device\":\"1\",\"total\":10075988}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":\"1\",\"device\":\"2\",\"total\":100000}', '{\"act\":\"1\",\"price\":\"300\",\"total\":3000000}', 15, 'note', 131925988, 1, NULL, '2023-03-01 18:30:41', '2023-03-01 18:30:41', 0);
 
 -- ----------------------------
 -- Table structure for q_printer_devices
@@ -14171,12 +14180,13 @@ CREATE TABLE `quotes`  (
   `created_by` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `_index`(`seri`, `name`, `customer_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of quotes
 -- ----------------------------
 INSERT INTO `quotes` VALUES (11, NULL, 'not_send', 'BG 1', 10000, '33x55x66', 1, 'i350', 3, 1, 'CTY 678910', 'Contacter c', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '123456789', 'hard_group', 1, '10', '200000', '167254475', '183999922.5', 'note', NULL, '2022-10-11 14:24:08', '2022-10-11 07:24:08', 1);
 INSERT INTO `quotes` VALUES (14, NULL, 'not_send', 'Báo Giá Test 1', 10000, '20x10x5', 1, 'I350', 6, 1, 'CTY 678911', 'Contacter D', 'Hoa Sơn', 'nguyenduykhanh2323@gmail.com', '123456789', 'paper_group', 1, '10', '100000', '3865178', '4261695.8', NULL, NULL, '2022-11-05 14:02:24', '2022-11-05 07:02:24', 1);
+INSERT INTO `quotes` VALUES (15, NULL, 'not_send', 'bao Gia 0111', 10000, '30x10x10', 1, 'i350', 0, 2, 'Cty Khanh', 'Khanh', 'Ha Noi', 'khanh@gmail.com', '123456', 'paper_group', 1, NULL, NULL, '131925988', '131925988', 'note', NULL, '2023-03-01 18:29:28', '2023-03-01 11:29:28', 1);
 
 SET FOREIGN_KEY_CHECKS = 1;

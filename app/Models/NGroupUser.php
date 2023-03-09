@@ -28,7 +28,7 @@ class NGroupUser extends Model
     ];
 
     const MODULE = [
-        'create_quote' => ['name' => 'Tính giá', 'link' => 'create-quote', 'parent' => 'customer_quote'],
+        'create_quote' => ['name' => 'Tính giá', 'link' => 'create-quote?step=chose_customer', 'parent' => 'customer_quote'],
         'quote_not_accepted' => ['name' => 'DS báo giá (chưa duyệt)', 'link' => 'create-quote?status=not_accepted', 'parent' => 'customer_quote'],
         'create_new_order' => ['name' => 'Tạo mới đơn hàng', 'link' => 'create-handle-order', 'parent' => 'order_handle'],
         'order' => ['name' => 'Tạo đơn hàng cũ', 'link' => 'view/orders', 'parent' => 'order_handle'],
@@ -38,7 +38,7 @@ class NGroupUser extends Model
         'rpt_quote_accepted' => ['name' => 'Báo giá đã duyệt', 'link' => 'report/quotes?status=accepted', 'parent' => 'report'],
         'rpt_debt' => ['name' => 'Báo cáo công nợ', 'link' => 'report/quotes?status=accepted', 'parent' => 'report'],
         'rpt_categories_revenue' => ['name' => 'Doanh thu theo nhóm SP', 'link' => 'report/revenue?type=category', 'parent' => 'report'],
-        'rpt_location_revenue' => ['name' => 'Doanh thu theo khu vũng miền', 'link' => 'report/revenue?type=location', 'parent' => 'report'],
+        'rpt_location_revenue' => ['name' => 'Doanh thu theo vùng miền', 'link' => 'report/revenue?type=location', 'parent' => 'report'],
         'create_available_order' => ['name' => 'Tạo đơn hàng', 'link' => 'create-available-order', 'parent' => 'available_order'],
         'shipping_process' => ['name' => 'Lộ trình xuất - giao hàng', 'link' => 'shipping-process', 'parent' => 'available_order'],
         'account' => ['name' => 'Thông tin tài khoản', 'link' => 'account-detail', 'parent' => 'account'],

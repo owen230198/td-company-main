@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{ @$title ? $title : 'Management' }}</title>
+    <title>{{ @$title ? $title : 'Trang quản trị' }}</title>
     <base href="{{ url('') }}">
     <link rel="icon" type="image/x-icon" href="{{ asset('frontend/admin/images/logo.png') }}">
     <link rel="stylesheet" href="{{ asset('frontend/base/css/bootstrap.min.css') }}" />
@@ -29,7 +29,20 @@
         @endphp
         @include('header')
         @include('sidebar')
-        @yield('content')
+        <div class="basse_content h-100">
+            <div class="container-fluid h-100">
+                <div class="base_page h-100">
+                    @if (!isHome())
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h2 class="fs-15 text-uppercase font_bold pb-1 mb-3 border_bot_eb">{{ @$title }}</h2>
+                    </div>
+                    @endif
+                    <div class="page_content">
+                        @yield('content')
+                    </div>
+                </div>
+            </div>
+        </div>
     @endif
     <script src="{{ asset('frontend/base/script/jquery.min.js') }}"></script>
     <script src="{{ asset('frontend/base/script/bootstrap.min.js') }}"></script>
@@ -39,7 +52,6 @@
     <script src="{{ asset('frontend/base/script/select2.min.js') }}"></script>
     <script src="{{ asset('frontend/base/daterangepickers/moment.min.js') }}"></script>
     <script src="{{ asset('frontend/base/daterangepickers/daterangepicker.js') }}"></script>
-    <script src="{{ asset('frontend/admin/script/loading.js') }}"></script>
     <script src="{{ asset('frontend/base/script/script.js') }}"></script>
     <script src="{{ asset('frontend/admin/script/script.js') }}"></script>
     @yield('script')

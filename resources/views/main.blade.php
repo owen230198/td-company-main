@@ -1,6 +1,6 @@
 @extends('index')
 @section('content')
-    <div class="home_index mt-3">
+    <div class="home_index">
         <div class="row">
             <div class="col-lg-6">
                 <h2 class="fs-15 text-uppercase font_bold pb-1 mb-3 border_bot_eb">thống kê đơn hàng trong năm</h2>
@@ -15,7 +15,7 @@
                             <a href={{ asset('get-data-table-command/'.$table.'?status=0') }} class="main_item_command h-100 smooth d-flex align-items-center position-relative h-100">
                                 <img src="{{ asset('frontend/admin/images/'.$table.'_icon.png') }}" alt="order-icon" 
                                 class="command_icon smooth">
-                                <div class="command_detail">
+                                <div class="command_detail ml-2">
                                     <p class="command_detail_tiltle text-uppercase font_bold color_main">
                                         {{ $text }}
                                     </p>

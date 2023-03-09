@@ -2,8 +2,6 @@
 namespace App\Http\Controllers\Quote;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Constants\NameConstant;
 class QuoteController extends Controller
 {
     public function __construct()
@@ -19,159 +17,13 @@ class QuoteController extends Controller
         return redirect('/');
     }
 
-    private function getBaseViewQuoteManagement($table, $quote_id)
+    public function createQuote(Request $request)
     {
-        $quote = $this->quotes::find($quote_id);
-        $data = $this->adminService->getDataBaseView($table, 'Chi tiết '.$quote['name']);
-        $data['data_quotes'] = $quote;
-        $data['data_tables'] = getDataTable($table, '*', array(array('key'=>'quote_id', 'compare'=>'=', 'value'=>$quote_id)), $data['page_item']);
-        return $data;
-    }
-
-    public function quoteManagement($table, $quote_id)
-    {
-        if (!$this->adminService->checkPermissionAction('quotes', 'view')) {
-            return redirect('permission-error');
+        if (!$request->isMethod('POST')) {
+            $data['title'] = 'Tạo mới báo giá';
+            $step = $request->input('step') ?? 'chose_customer';
+            return view('quotes.'.$step, $data);
         }
-        $data = $this->getBaseViewQuoteManagement($table, $quote_id);
-        return view('quotes.managements', $data);
-    }
-
-    public function ajaxViewList($table, $quote_id)
-    {
-        if (!$this->adminService->checkPermissionAction('quotes', 'view')) {
-            return 'Bạn không có quyền nhận dữ liệu !';
-        }
-        $data = $this->getBaseViewQuoteManagement($table, $quote_id);
-        return view('table.table_base_view', $data);    
-    }
-
-    private function getBaseActionQuote($action, $table, $quote_id, $id = 0)
-    {
-        $models = getModelByTable($table);
-        $quote = $this->quotes::find($quote_id);
-        unset($quote['id']);
-        $tableItem = $this->adminService->getTableItem($table);
-        $data['dataitem'] = $id==0?$quote:$models->find($id);
-        $data['tableItem'] = $tableItem;
-        $data['quote_id'] = $quote_id;
-        $data['action'] = $action;
-        $data['title'] = getActionByKey($action).' '.$tableItem['note'].' ('.$quote['name'].')';
-        $data['nosidebar'] = true; 
-        return $data;   
-    }
-
-    public function insertDetailQuote($table, $quote_id)
-    {
-        if (!$this->adminService->checkPermissionAction('quotes', 'insert')) {
-            return redirect('permission-error');
-        }
-        $data = $this->getBaseActionQuote('insert', $table, $quote_id);
-        return view('quotes.tables.view', $data);
-    }
-
-    public function updateDetailQuote($table, $quote_id, $id)
-    {
-        if (!$this->adminService->checkPermissionAction('quotes', 'update')) {
-            return redirect('permission-error');
-        }
-        $data = $this->getBaseActionQuote('update', $table, $quote_id, $id);
-        return view('quotes.tables.view', $data);
-    }
-
-    public function doInsertDetail($table, $quote_id, Request $request)
-    {
-        if (!$this->adminService->checkPermissionAction('quotes', 'insert')) {
-            return back()->with('error','Không có quyền thao tác!'); 
-        }
-        $data = $request->all();
-        unset($data['_token']);
-        $status = $this->service->doInsert($table, $data, $quote_id);
-        if ($status) {
-            if ($table == 'q_finishes') {
-                return redirect('config-profits/'.$quote_id)->with('message','Thêm dữ liệu thành công !'); 
-            }else{
-                echoJson(200, 'Thêm dữ liệu thành công!');
-                return;
-            }
-        }else{
-            if ($table == 'q_finishes') {
-                return back()->with('error','Đã có lỗi xảy ra!'); 
-            }else{
-                echoJson(100, 'Đã có lỗi xảy ra!');
-                return;
-            }
-        }
-    }
-
-    public function doUpdateDetail($table, $quote_id, $id, Request $request)
-    {
-        if (!$this->adminService->checkPermissionAction('quotes', 'insert')) {
-            return back()->with('error','Không có quyền thao tác!'); 
-        }
-        $data = $request->all();
-        unset($data['_token']);
-        $status = $this->service->doUpdate($table, $data, $quote_id, $id);
-        if ($status) {
-            if ($table == 'q_finishes') {
-                return redirect('config-profits/'.$quote_id)->with('message','Cập nhật liệu thành công !'); 
-            }else{
-                echoJson(200, 'Cập nhật dữ liệu thành công!');
-                return;
-            }
-        }else{
-            if ($table == 'q_finishes') {
-                return back()->with('error','Đã có lỗi xảy ra !'); 
-            }else{
-                echoJson(100, 'Đã có lỗi xảy ra!');
-                return;
-            }
-        }
-    }
-
-    public function configProfit($quote_id, Request $request)
-    {
-        $quote = $this->quotes->find($quote_id);
-        if (!$request->isMethod('post')) {
-            if (!$this->adminService->checkPermissionAction('quotes', 'update')) {
-                return redirect('permission-error');
-            }
-            if ($quote['group_product']==NameConstant::HARDBOX) {
-                $data = $this->service->getListDataQuote($quote_id);     
-            }else{
-                $q_papers = new \App\Models\QPaper;
-                $data['listPapers'] = $q_papers->where('quote_id', $quote_id)->get();
-            } 
-            $data['data_quotes'] = $quote;
-            $data['title'] = 'Lợi nhuận báo giá '.$quote['name'] ;
-            return view('quotes.managements', $data);
-        }else{
-            if (!$this->adminService->checkPermissionAction('quotes', 'update')) {
-                return back()->with('error','Không có quyền thao tác!'); 
-            }
-            $data = $request->all();
-            unset($data['_token']);
-            $admin_services = new \App\Services\AdminService;
-            $success = $admin_services->doUpdateTable($quote_id, 'quotes', $data);
-            if ($success) {
-                $routes ='file-details/'.$quote_id;
-                return redirect($routes)->with('message','Cập nhật dữ liệu thành công !');   
-            }else {
-                return back()->with('error','Đã có lỗi xảy ra !');
-            }
-        }
-    }
-
-    public function fileDetail($id)
-    {
-        if (!$this->adminService->checkPermissionAction('quotes', 'view')) {
-            return back()->with('error','Không có quyền thao tác!'); 
-        }
-        $quote = $this->quotes::find($id);
-        $data['data_quotes'] = $quote;
-        $data['data_tables'] = \App\Models\QPaper::where('quote_id', $id)->where('main', 1)->first(); 
-        $data['title'] = 'File báo giá - '.$quote['company_name'];
-        return view('quotes.files', $data);
     }
 }
 

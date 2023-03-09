@@ -220,77 +220,22 @@ class AdminController extends Controller
         echo $html;
     }
 
-    public function getJsonDataById($table, $id)
+    public function getDataJsonCustomer(Request $request)
     {
-        if (!$this->admins->checkPermissionAction($table, 'view')) {
-            return json_encode(array());
+        $status = !empty($request->input('status')) ? $request->input('status') : 'old';
+        $q = '%'.trim($request->input('q')).'%';
+        $customers = \DB::table('customers')->where('status', $status);
+        if (!empty($q)) {
+            $customers = $customers->where('code', 'like', $q)->orWhere('name', 'like', $q);
         }
-        if ($id) {
-            $models = getModelByTable($table);
-            $data = $models->find($id);
-        }
-        $arr_data = @$data?$data->toArray():array();
-        return json_encode($arr_data);
+        $data = $customers->paginate(50)->all();
+        $arr = array_map(function($item){
+            return ['id' => @$item->id, 'label' => $item->code.' - '.$item->name];
+        }, $data);
+        array_unshift($arr, ['id' => 0, 'label' => 'Khách hàng mới']);
+        return json_encode($arr);
+
     }
 
-    public function grantPermission()
-    {
-        if (!$this->admins->checkPermissionAction('n_roles', 'view')) {
-            return redirect('permission-error');
-        }
-        $data['title'] = 'Phân quyền';
-        $list_groups = \App\Models\NGroupUser::where('act', 1)->get()->toArray();
-        $admin = getSessionUser();
-        $data['list_groups'] = recursive($list_groups, $admin['n_group_user_id'], 0);
-        return view('roles.view', $data);
-    }
-
-    public function getPermission(Request $request)
-    {
-        if (!$this->admins->checkPermissionAction('n_roles', 'view')) {
-            return redirect('permission-error');
-        }
-        $get = $request->all();
-        $group = @$get['group']?$get['group']:'';
-        $data['title'] = 'Phân quyền';
-        $list_groups = \App\Models\NGroupUser::where('act', 1)->get()->toArray();
-        $admin = getSessionUser();
-        $data['list_groups'] = recursive($list_groups, $admin['n_group_user_id'], 0);
-        if ($group != '') {
-            if (!$this->admins->checkListGroup($group, $data['list_groups'])) {
-                return redirect('permission-error');
-            }
-            $data['limit_roles'] = array_merge(@session('user_login')['parent_menu'], @session('user_login')['menu']);
-            $data['list_roles'] = (new \App\Models\NRole)->getModuleByGroupUser($admin['n_group_user_id'], 0);
-            $data['group'] = $group;
-        }
-        return view('roles.view', $data);
-    }
-
-    public function updatePermission($module_id, $role_id, Request $request)
-    {
-        
-        if (!$this->admins->checkPermissionAction('n_roles', 'update')) {
-            echoJson(110, 'Không có quyền thực hiện !');
-            return;
-        }
-        $data = $request->all();
-        unset($data['_token']);
-        $dataRole = !empty($data['json_data_role'])?$data['json_data_role']:[];
-        if (!$this->admins->checkRoleUpdatePermission($module_id, $dataRole)) {
-            echoJson(110, 'Không được phân quyền module này !');
-            return;
-        }else{
-            $dataUpdate['json_data_role'] = json_encode($dataRole);
-            $update = \App\Models\NRole::where('role_id', $role_id)->update($dataUpdate);
-            if ($update) {
-                echoJson(200, 'Đã cập nhật quyền truy cập !');
-                return;
-            }else {
-                echoJson(100, 'Có lỗi xảy ra vui lòng thử lại !');
-                return;
-            }
-        }
-    }
 }
 
