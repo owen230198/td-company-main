@@ -36,9 +36,11 @@ Route::middleware(['checkLogin'])->group(function () {
 	Route::post('multiple-remove', [AdminController::class, 'multipleRemove']);
 	Route::post('do-config-data/{table}', [AdminController::class, 'doConfigData']);
 	Route::get('get-data-json-customer', [AdminController::class, 'getDataJsonCustomer']);
+	Route::get('get-data-json-linking', [AdminController::class, 'getDataJsonLinking']);
 
 	//quotes routes
-	Route::get('create-quote', [QuoteController::class, 'createQuote']);
+	Route::any('create-quote', [QuoteController::class, 'createQuote']);
+	Route::get('get-view-customer-data', [QuoteController::class, 'getViewCustomerData']);
 
 	//orders routes
 	Route::get('set-quantity-order-products', [OrderController::class, 'setListProductView']);

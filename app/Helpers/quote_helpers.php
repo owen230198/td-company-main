@@ -38,4 +38,16 @@ if (!function_exists('getExactQuantityPaper')) {
             return $data!=null?$data:array();
 		}
 	}
+
+	if (!function_exists('getStepCreateQuote')) {
+		function getStepCreateQuote($key){
+			switch($key){
+				case $key == 'chose_customer':
+					return 'Chọn khách hàng (khách hàng cũ hoặc thêm khách hàng mới)';
+					break;
+				default:
+					return '';
+			};
+		}
+	}
 }

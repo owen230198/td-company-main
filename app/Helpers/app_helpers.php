@@ -85,18 +85,9 @@ if (! function_exists('getDetailDataByID')) {
 
 
 if(!function_exists('getFieldDataById')){
-    function getFieldDataById($feild = '*', $class, $id){
-        $models = getModelByClass($class);
-        $data = $models::select($feild)->find($id);
-        return !empty($data[$feild])?$data[$feild]:'';
-    }
-}
-
-if (!function_exists('getNameTableById')) {
-    function getNameTableById($class, $id)
-    {
-        $obj = getModelByClass($class)->select('name')->find($id);
-        return @$obj['name'];
+    function getFieldDataById($feild = '*', $table, $id){
+        $data = \DB::table($table)->select($feild)->find($id);
+        return !empty($data->$feild) ? $data->$feild : '';
     }
 }
 
@@ -185,5 +176,12 @@ if (!function_exists('getInsertNextId')) {
     {
         $id = \DB::select("SHOW TABLE STATUS LIKE '".$table."'");
         return $id[0]->Auto_increment;
+    }
+}
+
+if (!function_exists('getCodeInsertTable')) {
+    function getCodeInsertTable($table, $num = '06')
+    {
+        return sprintf("%".$num."s", getInsertNextId($table));
     }
 }

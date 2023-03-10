@@ -14,10 +14,7 @@ class Controller extends BaseController
 
 	public function __construct()
 	{
-		$this->detail_tables = new \App\Models\NDetailTable;
-		$this->regions = new \App\Models\NRegion;
-		$this->db = new \Illuminate\Support\Facades\DB;
-		$this->admins = new \App\Services\AdminService;
+		$this->base_services = new \App\Services\BaseService;
 	}
 
 	public function getDataActionView($table, $action, $action_name)

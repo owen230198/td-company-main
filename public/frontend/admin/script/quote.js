@@ -1,52 +1,3 @@
-var ajaxListTable = function()
-{
-  url = $('meta[name=ajax-url]', parent.document).attr('content');
-  if (url!='') {
-    $.ajax({
-      url: url,
-      type: 'GET',
-    })
-    .done(function(data) {
-      $('.table_data', parent.document).html(data);  
-    })
-  } 
-}
-
-var submitPopUpAction = function()
-{
-	$(document).on('submit', '.popupActionForm', function(event) {
-		event.preventDefault();
-    $.ajax({
-      url: $(this).attr('action'),
-      type: $(this).attr('method'),
-      data: $(this).serialize(),
-    })
-    .done(function(data) {
-      var json = JSON.parse(data);
-      if((json.code) == 200){
-        $('.close_action_popup', parent.document).trigger('click');
-        window.parent.toastr['success'](json.message);
-        ajaxListTable();
-      }else{
-        toastr['error'](json.message);
-      }  
-    })
-	});
-}
-
-var changeActiveStage = function()
-{
-	$(document).on('change', '.change_active_stage', function(event) {
-		event.preventDefault();
-		eParent = $(this).closest('.incredent_items');
-		if ($(this).prop("checked") == true) {
-			eParent.find('.incredent_content').fadeIn();
-		}else{
-			eParent.find('.incredent_content').fadeOut();	
-		}
-	});
-}
-
 var getExQuantityPaper = function(allqty, valqty, addqty)
 {
 	qty = allqty/valqty;
@@ -135,10 +86,25 @@ var PrintQuote = function() {
   });
 }
 
+var selectCustomerQuote = function()
+{
+  $(document).on('change', '.select_customer_quote', function(event){
+    event.preventDefault();
+    $.ajax({
+      url: 'get-view-customer-data?id='+$(this).val(),
+      type: 'GET'
+    })
+    .done(function(html){
+      console.log($(this).parent());
+      $('.customer_info_quote').html(html);
+      selectAjaxModule('.customer_info_quote');
+    });
+  })
+}
+
 $(function(){
-	submitPopUpAction();
-	changeActiveStage();
 	changQtyInput();
   moduleSelectOther();
   PrintQuote();
+  selectCustomerQuote();
 });

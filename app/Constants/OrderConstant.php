@@ -22,8 +22,6 @@ class OrderConstant
     ];
 
     //Order Status
-    const ORDER_NOT_ACCEPTED = 'not_accepted';
-    const ORDER_ACCEPTED = 'accepted';
 
     //ORDER PAYMENT STATUS
     const ORD_NOT_PAYMENT = 'not_payment';

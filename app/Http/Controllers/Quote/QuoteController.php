@@ -2,14 +2,16 @@
 namespace App\Http\Controllers\Quote;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Customer;
 class QuoteController extends Controller
 {
+    private $services;
+    private $admins;
     public function __construct()
     {
         parent::__construct();
-        $this->adminService = new \App\Services\AdminService;
-        $this->service = new \App\Services\QuoteService;
-        $this->quotes = new \App\Models\Quote;
+        $this->admins = new \App\Services\AdminService;
+        $this->services = new \App\Services\QuoteService;
     }
 
     public function index()
@@ -19,11 +21,34 @@ class QuoteController extends Controller
 
     public function createQuote(Request $request)
     {
-        if (!$request->isMethod('POST')) {
-            $data['title'] = 'Tạo mới báo giá';
-            $step = $request->input('step') ?? 'chose_customer';
-            return view('quotes.'.$step, $data);
+        $step = $request->input('step') ?? 'chose_customer';
+        if ($step == 'chose_customer') {
+            if (!$request->isMethod('POST')) {
+                $data['title'] = 'Tạo mới báo giá - ' .getStepCreateQuote($step);
+                return view('quotes.'.$step, $data);
+            }else{
+                $data_customer = $request->except('_token', 'step', 'customer_id');
+                $customer_id = $request->input('customer_id');
+                $quote_id = $this->services->insertCustomerQuote($customer_id, $data_customer);
+                if ($quote_id) {
+                    return redirect('create-quote?step=handle_config&id='.$quote_id)->with('message','Thêm dữ liệu khách hàng thành công !');
+                }else{
+                    return back()->with('error', 'Đã có lỗi xảy ra !');
+                }
+            }
+        }else{
+            $data['title'] = 'Tạo mới báo giá - Chi tiết sản phẩm và sản xuất';
+            return view('quotes.'.$step, $data);   
         }
+    }
+
+    public function getViewCustomerData(Request $request)
+    {
+        $id = (int) $request->input('id');
+        $data_customer = Customer::find($id);
+        $data['fields'] = Customer::FIELD_UPDATE;
+        $data['data_customer'] = !empty($data_customer) ? $data_customer : [];
+        return view('quotes.customer_info', $data);
     }
 }
 

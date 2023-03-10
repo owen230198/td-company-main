@@ -244,9 +244,9 @@ var menuSidebar = function()
     });
 }
 
-var selectAjaxModule = function()
+var selectAjaxModule = function(section = '.basse_content ')
 {
-    let select_ajax = $('select.select_ajax');
+    let select_ajax = $(section).find('select.select_ajax');
     if (select_ajax.length > 0) {
         select_ajax.each(function(){
             let url = $(this).data('url');
@@ -272,8 +272,13 @@ var selectAjaxModule = function()
                     },
                 },
             });
+            if ($(this).data('id') !== 'undefind' && $(this).data('label') !== 'undefind') {
+                var newOption = new Option($(this).data('label'), $(this).data('id'), true, true);
+                $(this).append(newOption).trigger('change');
+            }
         })
     }
+
 }
 
 $(function () {

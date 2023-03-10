@@ -226,7 +226,15 @@ class AdminController extends Controller
         $q = '%'.trim($request->input('q')).'%';
         $customers = \DB::table('customers')->where('status', $status);
         if (!empty($q)) {
-            $customers = $customers->where('code', 'like', $q)->orWhere('name', 'like', $q);
+            $customers = $customers->where('code', 'like', $q)
+            ->orWhere('name', 'like', $q)
+            ->orWhere('contacter', 'like', $q)
+            ->orWhere('phone', 'like', $q)
+            ->orWhere('telephone', 'like', $q)
+            ->orWhere('email', 'like', $q)
+            ->orWhere('address', 'like', $q)
+            ->orWhere('city', 'like', $q)
+            ->orWhere('tax_code', 'like', $q);
         }
         $data = $customers->paginate(50)->all();
         $arr = array_map(function($item){
@@ -234,7 +242,22 @@ class AdminController extends Controller
         }, $data);
         array_unshift($arr, ['id' => 0, 'label' => 'Khách hàng mới']);
         return json_encode($arr);
+    }
 
+    public function getDataJsonLinking(Request $request)
+    {
+        $table = $request->input('table');
+        $where = $request->except('table', 'q');
+        $q = '%'.trim($request->input('q')).'%';
+        $data = \DB::table($table)->where($where);
+        if (!empty($q)) {
+            $data = $data->where('name', 'like', $q);
+        }
+        $data = $data->paginate(50)->all();
+        $arr = array_map(function($item){
+            return ['id' => @$item->id, 'label' => !empty($item->code) ? $item->code.' - '.$item->name : $item->name];
+        }, $data);
+        return json_encode($arr);
     }
 
 }

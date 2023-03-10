@@ -1,8 +1,13 @@
 a {
-    color: #459300;
+    color: #333;
     display: inline-block;
     text-decoration: none;
     font-weight: 400;
+}
+
+.select2.select2-container.select2-container--default,
+.form-control{
+    max-width: 350px;
 }
 
 .smooth{
@@ -12,7 +17,7 @@ a {
 body, html {
     font-size: 13px;
     height: 100%;
-    color: #459300;
+    color: #333;
     font-weight: 600;
 }
 .select2-container--default .select2-selection--single {
@@ -34,7 +39,7 @@ body, html {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: #459300;
+    background: #333;
 }
 
 /* Handle on hover */
@@ -54,27 +59,27 @@ body, html {
 }
 
 .border_top {
-    border-top: 1px solid #459300;
+    border-top: 1px solid #333;
 }
 
 .border_top_thin{
-    border-top: 3px solid #459300;
+    border-top: 3px solid #333;
 }
 
 .color_main {
-    color: #459300;
+    color: #333;
 }
 
 .border_main {
-    border: 1px solid #459300;
+    border: 1px solid #333;
 }
 
 .border_bot {
-    border-bottom: 1px solid #459300;
+    border-bottom: 1px solid #333;
 }
 
 .bg_main {
-    background: #459300;
+    background: #333;
 }
 
 body {
@@ -173,11 +178,12 @@ input[type="checkbox"].toggle:disabled::after {
 
 .main_button{
     padding: 5px 10px;
+    box-shadow: 1px 1px 3px #777;
 }
 
 .login_button:hover{
     background: none;
-    color: #459300;
+    color: #333;
 }
 
 .red_button {
@@ -222,7 +228,7 @@ input[type="checkbox"].toggle:disabled::after {
 .header_menu_user_list li a{
     padding: 5px;
     color: #ffffff;
-    background: #459300;
+    background: #333;
     display: block;
     border-bottom: 1px solid;
     font-weight: 600;
@@ -235,7 +241,7 @@ input[type="checkbox"].toggle:disabled::after {
 
 .header_menu_user_list li:hover>a{
     background: #ffffff;
-    color: #459300;
+    color: #333;
 }
 
 .sidebar{
@@ -255,15 +261,15 @@ input[type="checkbox"].toggle:disabled::after {
 .sidebar ul li a{
     display: block;
     font-weight: 600;
-    color: #459300;
+    color: #333;
     padding: 5px 10px;
-    border-top: 1px solid;
+    border-bottom: 1px solid;
     text-transform: capitalize;
     transition: all .2s;
 }
 
-.sidebar>ul>li:first-child>a{
-    border-top: none;
+.sidebar>ul>li:last-child>a{
+    border-bottom: none;
 }
 
 .sidebar ul li{
@@ -279,11 +285,21 @@ input[type="checkbox"].toggle:disabled::after {
 .sidebar ul li>a:hover{
     background: #459300;
     color: #ffffff;
+    border-color: #459300;
+}
+
+.bg_green{
+    background: #459300;   
+}
+
+.border_green{
+    border: 1px solid #459300;
 }
 
 .sidebar>ul>li.active>a, .sidebar li>ul>li.active>a{
     background: #459300;
     color: #ffffff;
+    border-color: #459300;
 }
 
 .sidebar li ul:has(> li.active){
@@ -328,6 +344,19 @@ input[type="checkbox"].toggle:disabled::after {
     box-shadow: 1px 1px 10px #888888;
 }
 
+.main_button:hover{
+    background: none;
+    color: #333;
+}
+
+.red_btn{
+    border: 1px solid #ff0000;
+}
+
+.red_btn:hover{
+    background: none;
+    color: #ff0000;
+}
 
 @page {
     size: A4;
@@ -353,8 +382,8 @@ input[type="checkbox"].toggle:disabled::after {
     page-break-after: always;
 }
 
-.min_250{
-    min-width: 250px;
+.min_150{
+    min-width: 150px;
 }
 
 @media (max-width: 1400px) {
