@@ -1,7 +1,7 @@
 @extends('index')
 @section('css')
     <link rel="stylesheet" href="frontend/admin/css/quote.css">
-    <link rel="stylesheet" href="frontend/base/css/multiple-select.css">
+    <link rel="stylesheet" href="frontend/base/css/bootstrap-multiselect.min.css">
 @endsection
 @section('content')
     <div class="quote_handle_section mb-3">
@@ -57,7 +57,7 @@
                         
                         @php
                             $pro_group_field = [
-                                'name' => 'product[name]',
+                                'name' => 'product[group]',
                                 'type' => 'linking',
                                 'note' => 'Nhóm sản phẩm',
                                 'other_data' => ['config' => ['search' => 1], 'data' => ['table' => 'product_categories']]
@@ -69,14 +69,74 @@
                         <span>Sản phẩm gồm các chi tiết sau</span>
                     </h3>
                     @php
-                        $pro_group_field = [
-                            'name' => 'product[name]',
+                        $pro_design_field = [
+                            'name' => 'product[design]',
                             'type' => 'multiplechoicelinking',
                             'note' => 'Thiết kế',
-                            'other_data' => ['data' => ['table' => 'type_designs']]
+                            'other_data' => ['data' => ['table' => 'qs_type_designs']]
                         ] 
                     @endphp
-                    @include('view_update.view', $pro_group_field)  
+                    @include('view_update.view', $pro_design_field)
+
+                    @php
+                        $pro_print_form_field = [
+                            'name' => 'product[print_form]',
+                            'type' => 'multiplechoicelinking',
+                            'note' => 'Làm mẫu',
+                            'other_data' => ['data' => ['table' => 'qs_print_forms']]
+                        ] 
+                    @endphp
+                    @include('view_update.view', $pro_print_form_field)
+                    
+                    @php
+                        $pro_print_tech_field = [
+                            'name' => 'product[print_tech]',
+                            'type' => 'multiplechoicelinking',
+                            'note' => 'Công nghệ in',
+                            'other_data' => ['data' => ['table' => 'qs_print_techs']]
+                        ] 
+                    @endphp
+                    @include('view_update.view', $pro_print_tech_field)  
+
+                    @php
+                        $pro_after_print_field = [
+                            'name' => 'product[name]',
+                            'type' => 'multiplechoicelinking',
+                            'note' => 'Công đoạn sau in',
+                            'other_data' => ['data' => ['table' => 'qs_after_prints']]
+                        ] 
+                    @endphp
+                    @include('view_update.view', $pro_after_print_field)
+
+                    @php
+                        $pro_box_fill_field = [
+                            'name' => 'product[box_fill]',
+                            'type' => 'multiplechoicelinking',
+                            'note' => 'Bồi hộp',
+                            'other_data' => ['data' => ['table' => 'qs_box_fills']]
+                        ] 
+                    @endphp
+                    @include('view_update.view', $pro_box_fill_field)
+                    
+                    @php
+                        $pro_finish_field = [
+                            'name' => 'product[finish]',
+                            'type' => 'multiplechoicelinking',
+                            'note' => 'Hoàn thiện',
+                            'other_data' => ['data' => ['table' => 'qs_finishes']]
+                        ] 
+                    @endphp
+                    @include('view_update.view', $pro_finish_field)
+
+                    @php
+                        $pro_shipping_field = [
+                            'name' => 'product[shipping]',
+                            'type' => 'multiplechoicelinking',
+                            'note' => 'Hoàn thiện',
+                            'other_data' => ['data' => ['table' => 'qs_shipping_types']]
+                        ] 
+                    @endphp
+                    @include('view_update.view', $pro_shipping_field)
                 </div>
                 <div class="tab-pane fade" id="quote-pro-2" role="tabpanel" aria-labelledby="quote-pro-2-tab">
     
@@ -86,6 +146,7 @@
     </div>  
 @endsection
 @section('script')
-    <script src="frontend/admin/script/quote.js"></script>
-    <script src="frontend/base/script/multiple-select.js"></script>
+<script src="frontend/base/script/bootstrap-multiselect.min.js"></script>
+<script src="frontend/admin/script/quote.js"></script>
+    
 @endsection

@@ -255,7 +255,6 @@ class AdminService extends BaseService
             $this->roles->where('n_group_user_id', $id)->delete();
         }
         if (in_array($table, \App\Models\Quote::$tableChild)) {
-            $quote_id = getFieldDataById('quote_id', getClassByTable($table), $id);
         }
         $remove = $this->db::table($table)->where('id', $id)->delete();
         if ($remove && in_array($table, VariableConstant::ACTION_TABLE_SELF)) {

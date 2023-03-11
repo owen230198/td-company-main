@@ -60,7 +60,6 @@ class OrderController extends Controller
         $data = getProductCategoryOption();
         $data['proQuantity'] = (int)@request('qty');
         $data['proName'] = !empty(request('name'))?request('name'):'Sản phẩm';
-        $data['cDesignContacter'] = getFieldDataById('contacter', 'Customer', (int)@request('customer_id'));
         $data['action'] = \App\Constants\VariableConstant::ACTION_INSERT;
         return view('orders.list_products', $data);
     }

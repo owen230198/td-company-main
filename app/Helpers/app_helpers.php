@@ -85,9 +85,13 @@ if (! function_exists('getDetailDataByID')) {
 
 
 if(!function_exists('getFieldDataById')){
-    function getFieldDataById($feild = '*', $table, $id){
-        $data = \DB::table($table)->select($feild)->find($id);
-        return !empty($data->$feild) ? $data->$feild : '';
+    function getFieldDataById($feild, $table, $id){
+        if (!empty($id)) {
+            $data = \DB::table($table)->select($feild)->find($id);
+            return !empty($data->$feild) ? $data->$feild : '';
+        }else{
+            return false;
+        }
     }
 }
 

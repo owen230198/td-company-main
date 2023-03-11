@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : localhost
+ Source Server         : owen
  Source Server Type    : MySQL
- Source Server Version : 100427
+ Source Server Version : 100425
  Source Host           : localhost:3306
  Source Schema         : td_company
 
  Target Server Type    : MySQL
- Target Server Version : 100427
+ Target Server Version : 100425
  File Encoding         : 65001
 
- Date: 11/03/2023 11:31:21
+ Date: 11/03/2023 16:21:37
 */
 
 SET NAMES utf8mb4;
@@ -14051,6 +14051,167 @@ INSERT INTO `q_supply_prices` VALUES (72, '5cm', 227000, 2, 7, '', 1, '2022-07-0
 INSERT INTO `q_supply_prices` VALUES (75, 'Vật tư lụa thường ( lụa vàng )', 6600, 3, 0, NULL, 1, '2022-07-12 10:08:08', '2022-07-12 10:08:08', 0);
 
 -- ----------------------------
+-- Table structure for qs_after_prints
+-- ----------------------------
+DROP TABLE IF EXISTS `qs_after_prints`;
+CREATE TABLE `qs_after_prints`  (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `act` tinyint(4) NULL DEFAULT NULL,
+  `created_by` int(10) NULL DEFAULT NULL,
+  `created_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `index`(`id`, `name`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of qs_after_prints
+-- ----------------------------
+INSERT INTO `qs_after_prints` VALUES (1, 'Cán nilon', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:25');
+INSERT INTO `qs_after_prints` VALUES (2, 'Bế', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:25');
+INSERT INTO `qs_after_prints` VALUES (3, 'Ép nhũ', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:25');
+INSERT INTO `qs_after_prints` VALUES (4, 'Thúc nổi', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:25');
+INSERT INTO `qs_after_prints` VALUES (5, 'In lưới UV', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:25');
+
+-- ----------------------------
+-- Table structure for qs_box_fills
+-- ----------------------------
+DROP TABLE IF EXISTS `qs_box_fills`;
+CREATE TABLE `qs_box_fills`  (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `act` tinyint(4) NULL DEFAULT NULL,
+  `created_by` int(10) NULL DEFAULT NULL,
+  `created_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `index`(`id`, `name`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of qs_box_fills
+-- ----------------------------
+INSERT INTO `qs_box_fills` VALUES (1, 'Mặt trong bồi tờ in', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:25');
+INSERT INTO `qs_box_fills` VALUES (2, 'Mặt trong bồi giấy trắng', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:25');
+INSERT INTO `qs_box_fills` VALUES (3, 'Mặt trong không bồi', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:25');
+
+-- ----------------------------
+-- Table structure for qs_finishes
+-- ----------------------------
+DROP TABLE IF EXISTS `qs_finishes`;
+CREATE TABLE `qs_finishes`  (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `act` tinyint(4) NULL DEFAULT NULL,
+  `created_by` int(10) NULL DEFAULT NULL,
+  `created_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `index`(`id`, `name`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of qs_finishes
+-- ----------------------------
+INSERT INTO `qs_finishes` VALUES (1, 'Khay giấy', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:25');
+INSERT INTO `qs_finishes` VALUES (2, 'Khay cartons', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:25');
+INSERT INTO `qs_finishes` VALUES (3, 'Mút phẳng', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:25');
+INSERT INTO `qs_finishes` VALUES (4, 'Cao su non', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:25');
+INSERT INTO `qs_finishes` VALUES (5, 'Vải lụa', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:25');
+INSERT INTO `qs_finishes` VALUES (6, 'Laser CNS', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:25');
+INSERT INTO `qs_finishes` VALUES (7, 'Vật liệu khay carton', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:25');
+INSERT INTO `qs_finishes` VALUES (8, 'Cao su non', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:25');
+
+-- ----------------------------
+-- Table structure for qs_print_forms
+-- ----------------------------
+DROP TABLE IF EXISTS `qs_print_forms`;
+CREATE TABLE `qs_print_forms`  (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `act` tinyint(4) NULL DEFAULT NULL,
+  `created_by` int(10) NULL DEFAULT NULL,
+  `created_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `index`(`id`, `name`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of qs_print_forms
+-- ----------------------------
+INSERT INTO `qs_print_forms` VALUES (1, 'Mẫu in offset', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:25');
+INSERT INTO `qs_print_forms` VALUES (2, 'Mẫu in KTS', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:25');
+INSERT INTO `qs_print_forms` VALUES (3, 'Mẫu Không in', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:25');
+
+-- ----------------------------
+-- Table structure for qs_print_techs
+-- ----------------------------
+DROP TABLE IF EXISTS `qs_print_techs`;
+CREATE TABLE `qs_print_techs`  (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `act` tinyint(4) NULL DEFAULT NULL,
+  `created_by` int(10) NULL DEFAULT NULL,
+  `created_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `index`(`id`, `name`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of qs_print_techs
+-- ----------------------------
+INSERT INTO `qs_print_techs` VALUES (1, 'In offset', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:25');
+INSERT INTO `qs_print_techs` VALUES (2, 'In UV Offset', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:25');
+INSERT INTO `qs_print_techs` VALUES (3, 'In Label', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:25');
+INSERT INTO `qs_print_techs` VALUES (4, 'offset & UV offset', 1, 1, '2023-03-11 15:25:31', '2023-03-11 15:25:33');
+
+-- ----------------------------
+-- Table structure for qs_shipping_types
+-- ----------------------------
+DROP TABLE IF EXISTS `qs_shipping_types`;
+CREATE TABLE `qs_shipping_types`  (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `act` tinyint(4) NULL DEFAULT NULL,
+  `created_by` int(10) NULL DEFAULT NULL,
+  `created_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `index`(`id`, `name`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of qs_shipping_types
+-- ----------------------------
+INSERT INTO `qs_shipping_types` VALUES (1, 'Ghép xe', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:25');
+INSERT INTO `qs_shipping_types` VALUES (2, 'Nguyên xe', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:25');
+
+-- ----------------------------
+-- Table structure for qs_type_designs
+-- ----------------------------
+DROP TABLE IF EXISTS `qs_type_designs`;
+CREATE TABLE `qs_type_designs`  (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `act` tinyint(4) NULL DEFAULT NULL,
+  `created_by` int(10) NULL DEFAULT NULL,
+  `created_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `index`(`id`, `name`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of qs_type_designs
+-- ----------------------------
+INSERT INTO `qs_type_designs` VALUES (1, 'Thiết kế mới', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:25');
+INSERT INTO `qs_type_designs` VALUES (2, 'Chỉnh sửa file', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:25');
+INSERT INTO `qs_type_designs` VALUES (3, 'Chế bản lại', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:25');
+
+-- ----------------------------
 -- Table structure for quotes
 -- ----------------------------
 DROP TABLE IF EXISTS `quotes`;
@@ -14091,20 +14252,5 @@ CREATE TABLE `quotes`  (
 -- ----------------------------
 INSERT INTO `quotes` VALUES (1, 'BG-000001', 'not_accepted', 'Công ty WS', NULL, NULL, NULL, NULL, 1, 'Công ty WS', 'Nguyễn Duy Khánh', '360 Mieng Ha, Hoa Sơn, Ung Hoa, TP Ha Noi', 'nguyenduykhanh2323@gmail.com', '0378050251', '0223344556', 351, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `quotes` VALUES (2, 'BG-000002', 'not_accepted', 'Cong Ty Test', NULL, NULL, NULL, NULL, 2, 'Cong Ty Test', 'Nguyen Van A', 'Ho Chi Minh', 'congtytest@gmail.com', '0987654321', '0123456789', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
-
--- ----------------------------
--- Table structure for type_designs
--- ----------------------------
-DROP TABLE IF EXISTS `type_designs`;
-CREATE TABLE `type_designs`  (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `act` tinyint(4) NULL DEFAULT NULL,
-  `created_by` int(10) NULL DEFAULT NULL,
-  `created_at` datetime(0) NULL DEFAULT NULL,
-  `updated_at` datetime(0) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  INDEX `index`(`id`, `name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 SET FOREIGN_KEY_CHECKS = 1;

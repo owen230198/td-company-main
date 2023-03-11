@@ -55,7 +55,6 @@ class OrderService extends BaseService
         $dataUpdate = $this->processDataBefore($data);
         $ret = Order::where('id', $id)->update($dataUpdate);
         if ($ret && !empty($data['customer_id']) && $ret) {
-            $dataUpdateCD['name'] = getFieldDataById('contacter', 'Customer', $data['customer_id']);
             CDesign::where('order_id', $id)->update($dataUpdateCD);
         }
         return $ret;

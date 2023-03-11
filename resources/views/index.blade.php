@@ -45,6 +45,7 @@
         </div>
     @endif
     <script src="{{ asset('frontend/base/script/jquery.min.js') }}"></script>
+    <script src="{{ asset('frontend/base/script/popper.js') }}"></script>
     <script src="{{ asset('frontend/base/script/bootstrap.min.js') }}"></script>
     <script src="{{ asset('frontend/base/script/toastr.min.js') }}"></script>
     <script src="{{ asset('frontend/admin/tinymce/js/tinymce/tinymce.min.js') }}"></script>

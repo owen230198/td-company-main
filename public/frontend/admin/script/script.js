@@ -281,6 +281,23 @@ var selectAjaxModule = function(section = '.basse_content ')
 
 }
 
+var multipleSelectInit = function()
+{
+    let select_multiple = $('select.multiple_select');
+    if (select_multiple.length > 0) {
+        select_multiple.each(function(){
+            let note = $(this).data('note')
+            $(this).multiselect(
+                {
+                    nonSelectedText: 'Chọn '+note,
+                    nSelectedText: note + 'đã được chọn',
+                    allSelectedText: 'Đã chọn hết' + note,
+                }
+            );
+        });
+    }
+}
+
 $(function () {
     submitActionAjaxForm();
     confirmRemoveData();
@@ -296,4 +313,5 @@ $(function () {
     menuUserHeader();
     menuSidebar();
     selectAjaxModule();
+    multipleSelectInit();
 });

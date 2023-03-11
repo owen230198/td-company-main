@@ -56,14 +56,6 @@ if(!function_exists('getBreadcrumbFull')){
     }
 }
 
-if(!function_exists('getOptionByClass')){
-    function getOptionByClass($class, $where = ['act'=>1]){
-        $models = getModelByClass($class);
-        $data = $models::where($where)->get()->toArray();
-        return $data;
-    }
-}
-
 
 if(!function_exists('recursive')){
     function recursive($array, $parent = 0, $level = 0){
@@ -107,5 +99,14 @@ if (! function_exists('getSessionUser')) {
         $user_login = session('user_login');
         $admin = @$user_login['user']?$user_login['user']:array();
         return $admin;
+    }
+}
+
+if (!function_exists('getOptionDataField')) {
+    function getOptionDataField($param)
+    {
+        $where = !empty($param['where']) ? $param['where'] : [];
+        $where['act'] = 1;
+        return \DB::table($param['table'])->where($where)->get()->all();
     }
 }
