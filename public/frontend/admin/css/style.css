@@ -8,6 +8,18 @@ a {
 .select2.select2-container.select2-container--default,
 .form-control{
     max-width: 350px;
+    min-width: 350px;
+    width: 350px;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link{
+    background-color: #459300;
+}
+
+.nav-pills .nav-link{
+    color: #333;
+    font-weight: 600;
+    font
 }
 
 .smooth{
@@ -68,6 +80,14 @@ body, html {
 
 .color_main {
     color: #333;
+}
+
+.color_green{
+    color: #459300;
+}
+
+.min_120{
+    min-width: 120px;
 }
 
 .border_main {
@@ -391,7 +411,7 @@ input[type="checkbox"].toggle:disabled::after {
         font-size: 12px;
     }
 
-    .fs-13{
+    .fs-13, .nav-pills .nav-link{
         font-size: 12px;
     }
 }

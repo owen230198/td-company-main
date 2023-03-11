@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Constants\StattusConstant;
+use App\Constants\StatusConstant;
 class AuthController extends Controller
 {
     /**
@@ -29,7 +29,7 @@ class AuthController extends Controller
             return view('auth.login', $data);
         }
         $result = $this->service->hasLogin($request);
-        if ($result['status'] === StattusConstant::SUCCESS_CODE) {
+        if ($result['status'] === StatusConstant::SUCCESS_CODE) {
             $rede = session('afterLoginRoute')??'/';
             return redirect($rede)->with('message','Đăng nhập thành công!');
         }

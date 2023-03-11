@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : owen
+ Source Server         : localhost
  Source Server Type    : MySQL
- Source Server Version : 100425
+ Source Server Version : 100427
  Source Host           : localhost:3306
  Source Schema         : td_company
 
  Target Server Type    : MySQL
- Target Server Version : 100425
+ Target Server Version : 100427
  File Encoding         : 65001
 
- Date: 10/03/2023 17:55:49
+ Date: 11/03/2023 11:31:21
 */
 
 SET NAMES utf8mb4;
@@ -12233,12 +12233,13 @@ CREATE TABLE `customers`  (
   INDEX `name_index`(`name`) USING BTREE,
   INDEX `infor_index`(`address`, `email`, `phone`) USING BTREE,
   INDEX `conttacter_index`(`contacter`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of customers
 -- ----------------------------
-INSERT INTO `customers` VALUES (1, 'KHM-00001', 'Công ty WS', 'Nguyễn Duy Khánh', NULL, '360 Mieng Ha, Hoa Sơn, Ung Hoa, TP Ha Noi', '351', 'nguyenduykhanh2323@gmail.com', '0378050251', '0223344556', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `customers` VALUES (1, 'KHM-00001', 'Công ty WS', 'Nguyễn Duy Khánh', NULL, '360 Mieng Ha, Hoa Sơn, Ung Hoa, TP Ha Noi', '351', 'nguyenduykhanh2323@gmail.com', '0378050251', '0223344556', NULL, NULL, '0', NULL, '2023-03-11 00:11:06', '2023-03-11 00:11:06', NULL);
+INSERT INTO `customers` VALUES (2, 'KHM-000002', 'Cong Ty Test', 'Nguyen Van A', NULL, 'Ho Chi Minh', '1', 'congtytest@gmail.com', '0987654321', '0123456789', NULL, NULL, '0', NULL, '2023-03-11 00:11:06', '2023-03-11 00:11:06', NULL);
 
 -- ----------------------------
 -- Table structure for districts
@@ -14089,6 +14090,21 @@ CREATE TABLE `quotes`  (
 -- Records of quotes
 -- ----------------------------
 INSERT INTO `quotes` VALUES (1, 'BG-000001', 'not_accepted', 'Công ty WS', NULL, NULL, NULL, NULL, 1, 'Công ty WS', 'Nguyễn Duy Khánh', '360 Mieng Ha, Hoa Sơn, Ung Hoa, TP Ha Noi', 'nguyenduykhanh2323@gmail.com', '0378050251', '0223344556', 351, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
-INSERT INTO `quotes` VALUES (2, 'BG-000002', 'not_accepted', 'Công ty WS', NULL, NULL, NULL, NULL, 1, 'Công ty WS', 'Nguyễn Duy Khánh', '360 Mieng Ha, Hoa Sơn, Ung Hoa, TP Ha Noi', 'nguyenduykhanh2323@gmail.com', '0378050251', '0223344556', 351, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `quotes` VALUES (2, 'BG-000002', 'not_accepted', 'Cong Ty Test', NULL, NULL, NULL, NULL, 2, 'Cong Ty Test', 'Nguyen Van A', 'Ho Chi Minh', 'congtytest@gmail.com', '0987654321', '0123456789', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
+
+-- ----------------------------
+-- Table structure for type_designs
+-- ----------------------------
+DROP TABLE IF EXISTS `type_designs`;
+CREATE TABLE `type_designs`  (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `act` tinyint(4) NULL DEFAULT NULL,
+  `created_by` int(10) NULL DEFAULT NULL,
+  `created_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `index`(`id`, `name`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 SET FOREIGN_KEY_CHECKS = 1;

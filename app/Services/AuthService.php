@@ -1,6 +1,6 @@
 <?php
 namespace App\Services;
-use App\Constants\StattusConstant;
+use App\Constants\StatusConstant;
 use App\Models\NGroupUser;
 use App\Services\BaseService;
 class AuthService extends BaseService
@@ -48,14 +48,14 @@ class AuthService extends BaseService
     {
         if ($code == 200) {
             return [
-                'status'=>StattusConstant::SUCCESS_CODE,
-                'messageCode'=>StattusConstant::SUCCESS_MSG,
+                'status'=>StatusConstant::SUCCESS_CODE,
+                'messageCode'=>StatusConstant::SUCCESS_MSG,
                 'errorMessage'=>['sucess'=>$mess]
             ];
         }else{
             return [
-                'status'=>StattusConstant::ERR_CODE,
-                'messageCode'=>StattusConstant::ERR_MSG,
+                'status'=>StatusConstant::ERR_CODE,
+                'messageCode'=>StatusConstant::ERR_MSG,
                 'errorMessage'=> $mess
             ];
         }

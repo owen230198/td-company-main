@@ -14,5 +14,5 @@
 @endphp
 <select name="{{ @$field['table_map']=='orders'?'order['.$name.']':$name }}" 
 class="form-control {{ @$select_config['search'] == 1 ? 'select_ajax' : '' }}"
-data-url="{{ $url }}" data-id="{{ $data_id }}", data-label = "{{ $data_label }}">
+data-url="{{ $url }}" data-id="{{ @$data_id }}", data-label = "{{ @$data_label }}">
 </select>

@@ -6,7 +6,7 @@
             <img src="{{ asset('frontend/admin/images/logo.png') }}" />
         </div>
         @php
-            $const = new \App\Constants\StattusConstant;
+            $const = new \App\Constants\StatusConstant;
         @endphp
         @if (@session($const::ERR_MSG))
             <div class="alert alert-danger">

@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Quote;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Customer;
+use App\Models\Quote;
 class QuoteController extends Controller
 {
     private $services;
@@ -31,13 +32,15 @@ class QuoteController extends Controller
                 $customer_id = $request->input('customer_id');
                 $quote_id = $this->services->insertCustomerQuote($customer_id, $data_customer);
                 if ($quote_id) {
-                    return redirect('create-quote?step=handle_config&id='.$quote_id)->with('message','Thêm dữ liệu khách hàng thành công !');
+                    return redirect('create-quote?step=handle_config&id='.$quote_id)->with('message','Thêm dữ liệu khách hàng thành công!');
                 }else{
                     return back()->with('error', 'Đã có lỗi xảy ra !');
                 }
             }
         }else{
             $data['title'] = 'Tạo mới báo giá - Chi tiết sản phẩm và sản xuất';
+            $data['customer_fields'] = Customer::FIELD_UPDATE;
+            $data['data_quote'] = Quote::find($request->input('id'));
             return view('quotes.'.$step, $data);   
         }
     }

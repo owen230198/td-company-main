@@ -222,19 +222,21 @@ class AdminController extends Controller
 
     public function getDataJsonCustomer(Request $request)
     {
-        $status = !empty($request->input('status')) ? $request->input('status') : 'old';
-        $q = '%'.trim($request->input('q')).'%';
+        $status = !empty($request->input('status')) ? $request->input('status') : 1;
         $customers = \DB::table('customers')->where('status', $status);
-        if (!empty($q)) {
-            $customers = $customers->where('code', 'like', $q)
-            ->orWhere('name', 'like', $q)
-            ->orWhere('contacter', 'like', $q)
-            ->orWhere('phone', 'like', $q)
-            ->orWhere('telephone', 'like', $q)
-            ->orWhere('email', 'like', $q)
-            ->orWhere('address', 'like', $q)
-            ->orWhere('city', 'like', $q)
-            ->orWhere('tax_code', 'like', $q);
+        if (!empty($request->input('q'))) {
+            $q = '%'.trim($request->input('q')).'%';
+            $customers->where(function ($customers) use ($q) {
+                $customers->where('code', 'like', $q)
+                            ->orWhere('name', 'like', $q)
+                            ->orWhere('contacter', 'like', $q)
+                            ->orWhere('phone', 'like', $q)
+                            ->orWhere('telephone', 'like', $q)
+                            ->orWhere('email', 'like', $q)
+                            ->orWhere('address', 'like', $q)
+                            ->orWhere('city', 'like', $q)
+                            ->orWhere('tax_code', 'like', $q);
+            });
         }
         $data = $customers->paginate(50)->all();
         $arr = array_map(function($item){
