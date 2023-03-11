@@ -1,29 +1,13 @@
-var getExQuantityPaper = function(allqty, valqty, addqty)
-{
-	qty = allqty/valqty;
-    add_qty = qty*addqty/100;
-    ex_qty = qty+add_qty;
-    return ex_qty;
-}
 var changQtyInput = function(){
-  $(document).on('change','input[name=n_qty]',function(e){
+  $(document).on('change','input.paper_qty_modul_input',function(e){
     e.preventDefault();
-    eParent = $(this).closest('.formActionS');
-    var allqty = parseInt(eParent.find('input[name=qty_pro]').val());
-    var valqty = parseInt($(this).val());
-    var addqty = parseInt(eParent.find('input[name=add_paper]').val());
-    ex_qty = getExQuantityPaper(allqty, valqty, addqty);
-    eParent.find('input[name=qty_paper]').val(Math.ceil(ex_qty));
-   });
-
-  $(document).on('change','input[name=qty_pro]',function(e){
-    e.preventDefault();
-    eParent = $(this).closest('.formActionS');
-    var allqty = $(this).val();
-    var valqty = parseInt(eParent.find('input[name=n_qty]').val());
-    var addqty = eParent.find('input[name=add_paper]').val();
-    ex_qty = getExQuantityPaper(allqty, valqty, addqty);
-    eParent.find('input[name=qty_paper]').val(Math.ceil(ex_qty));
+    let parent = $(this).closest('.quantity_paper_module');
+    let qty_pro = parseInt(parent.find('input.pro_qty_input').val());
+    let nqty = parseInt(parent.find('input.pro_nqty_input').val());
+    let qty_paper = Math.ceil(qty_pro/nqty)
+    let addqty = Math.ceil(qty_paper*10/100);
+    parent.find('input.paper_qty_input').val(qty_paper);
+    parent.find('input.total_paper_qty_input').val(qty_paper+addqty);
    });
 }
 
@@ -102,9 +86,28 @@ var selectCustomerQuote = function()
   })
 }
 
+var selectPaperMateralModule = function()
+{
+  $(document).on('change', 'select.select_paper_materal', function(event){
+    event.preventDefault();
+    let module_size_paper = $(this).closest('.materal_paper_module').find('.paper_price_config_input');
+    let price_input = module_size_paper.find('input.price_input_paper');
+    if ($(this).val() === '0') {
+      if (module_size_paper.css('display') === 'none' && price_input.attr('disabled') === 'disabled') {
+        module_size_paper.fadeIn(100);
+        price_input.attr('disabled', false);  
+      }
+    }else{
+      module_size_paper.fadeOut(100);
+      price_input.attr('disabled', true);   
+    }
+  });
+}
+
 $(function(){
 	changQtyInput();
   moduleSelectOther();
   PrintQuote();
   selectCustomerQuote();
+  selectPaperMateralModule();
 });

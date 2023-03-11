@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : owen
+ Source Server         : localhost
  Source Server Type    : MySQL
- Source Server Version : 100425
+ Source Server Version : 100427
  Source Host           : localhost:3306
  Source Schema         : td_company
 
  Target Server Type    : MySQL
- Target Server Version : 100425
+ Target Server Version : 100427
  File Encoding         : 65001
 
- Date: 11/03/2023 16:21:37
+ Date: 11/03/2023 23:10:44
 */
 
 SET NAMES utf8mb4;
@@ -13544,6 +13544,27 @@ INSERT INTO `p_substances` VALUES (6, 'Bãi Bằng', 1, 1, '2022-10-31 16:19:00'
 INSERT INTO `p_substances` VALUES (7, 'DECAN', 1, 1, '2022-10-31 16:19:00', '2022-10-31 16:19:00');
 INSERT INTO `p_substances` VALUES (8, 'Giấy ngoại', 1, 1, '2022-10-31 16:19:00', '2022-10-31 16:19:00');
 INSERT INTO `p_substances` VALUES (9, 'Bạt hiplex', 1, 1, '2022-10-31 16:19:00', '2022-10-31 16:19:00');
+
+-- ----------------------------
+-- Table structure for paper_materals
+-- ----------------------------
+DROP TABLE IF EXISTS `paper_materals`;
+CREATE TABLE `paper_materals`  (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `act` tinyint(4) NULL DEFAULT NULL,
+  `created_by` int(10) NULL DEFAULT NULL,
+  `created_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `index`(`id`, `name`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of paper_materals
+-- ----------------------------
+INSERT INTO `paper_materals` VALUES (1, 'Couches', 1, 1, '2023-03-11 22:23:07', '2023-03-11 22:23:09');
+INSERT INTO `paper_materals` VALUES (2, 'Ivoly', 1, 1, '2023-03-11 22:23:07', '2023-03-11 22:23:09');
 
 -- ----------------------------
 -- Table structure for product_categories

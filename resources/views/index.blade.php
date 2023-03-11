@@ -29,7 +29,7 @@
         @endphp
         @include('header')
         @include('sidebar')
-        <div class="basse_content h-100">
+        <div class="basse_content">
             <div class="container-fluid h-100">
                 <div class="base_page h-100">
                     @if (!isHome())

@@ -1,5 +1,5 @@
 <input type="{{ @$attr['type_input'] ?? 'text' }}" 
-class="form-control" name="{{ $name }}" 
+class="form-control{{ @$attr['inject_class'] ? ' '.$attr['inject_class'] : '' }}" name="{{ $name }}" 
 value="{{ @$value }}" 
 {{ @$attr['required'] == 1 ? 'required' : '' }} 
 {{ @$attr['disable_field'] == 1 ? 'disabled' : '' }}

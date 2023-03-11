@@ -14,7 +14,7 @@
           <ul>
             @foreach ($modules as $module)
               @if(@$module['parent'] && $module['parent'] == $key_group)
-                <li class="{{ url()->full() == url($module['link']) ? 'active' : '' }}">
+                <li class="{{ url()->current() == url($module['link']) ? 'active' : '' }}">
                   <a href="{{ asset($module['link']) }}">{{ $module['name'] }}</a>
                 </li>
               @endif 

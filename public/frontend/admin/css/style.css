@@ -9,9 +9,21 @@ a {
 .form-control,
 .btn-group, .btn-group-vertical,
 .multiselect-container{
-    max-width: 350px;
-    min-width: 350px;
-    width: 350px;
+    max-width: 375px;
+    min-width: 375px;
+    width: 375px;
+}
+
+.form-control.short_input{
+    max-width: 102px;
+    min-width: 102px;
+    width: 102px   
+}
+
+.form-control.medium_input{
+    max-width: 200px;
+    min-width: 200px;
+    width: 200px   
 }
 
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link{
@@ -340,8 +352,12 @@ input[type="checkbox"].toggle:disabled::after {
 .basse_content{
     padding-top: 70px;
     padding-left: 210px;
+    padding-bottom: 20px;
     background-color: #f9f9f9;
-    height: 100%;
+}
+
+.dropdown-menu.show{
+    box-shadow: 3px 3px 6px #777;
 }
 
 .command_icon {

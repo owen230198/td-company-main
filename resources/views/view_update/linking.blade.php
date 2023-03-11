@@ -13,6 +13,7 @@
     }
 @endphp
 <select name="{{ @$field['table_map']=='orders'?'order['.$name.']':$name }}" 
-class="form-control {{ @$select_config['search'] == 1 ? 'select_ajax' : '' }}"
+class="form-control{{ @$select_config['search'] == 1 ? ' select_ajax' : '' }}
+{{ @$attr['inject_class'] ? ' '.$attr['inject_class'] : '' }}" name="{{ $name }}"
 data-url="{{ $url }}" data-id="{{ @$data_id }}", data-label = "{{ @$data_label }}">
 </select>
