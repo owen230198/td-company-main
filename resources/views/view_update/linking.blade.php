@@ -1,7 +1,7 @@
 @php
     $select_config = !empty($other_data['config']) ? $other_data['config'] : [];
     $select_data = !empty($other_data['data']) ? $other_data['data'] : [];
-    $url = 'get-data-json-linking?table='.$select_data['table'];
+    $url = asset('get-data-json-linking?table='.$select_data['table']);
     if (!empty($select_data['where'])) {
         foreach ($select_data['where'] as $key => $val) {
             $url .= '&'.$key.'='.$val;

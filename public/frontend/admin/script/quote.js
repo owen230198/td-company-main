@@ -51,10 +51,10 @@ var PrintQuote = function() {
     var mywindow = window.open('', '', '');
     mywindow.document.write('<html><head><title>'+title+'</title>');
     mywindow.document.write('<base href="' + baseUrl + '">');
-    mywindow.document.write('<link rel="icon" href="frontend/admin/images/logo.png" type="image/gif">');
-    mywindow.document.write('<link href="frontend/base/css/bootstrap.min.css" rel="stylesheet">');
-    mywindow.document.write('<link href="frontend/base/css/font-awesome.min.css" rel="stylesheet" type="text/css">');
-    mywindow.document.write('<link rel="stylesheet" href="frontend/admin/css/style.css" type="text/css">');
+    mywindow.document.write('<link rel="icon" href="public/frontend/admin/images/logo.png" type="image/gif">');
+    mywindow.document.write('<link href="public/frontend/base/css/bootstrap.min.css" rel="stylesheet">');
+    mywindow.document.write('<link href="public/frontend/base/css/font-awesome.min.css" rel="stylesheet" type="text/css">');
+    mywindow.document.write('<link rel="stylesheet" href="public/frontend/admin/css/style.css" type="text/css">');
     mywindow.document.write('</head><body style="overflow:hidden">');
     mywindow.document.write('<div class="ex_quote_file">');
     mywindow.document.write(html);

@@ -22,7 +22,7 @@ use App\Http\Controllers\Product\ProductController;
 Route::any('login', [AuthController::class, 'login']);
 Route::any('logout', [AuthController::class, 'logout']);
 Route::any('dev/{method}',[DevController::class, 'index']);
-Route::middleware(['checkLogin'])->group(function () {
+Route::middleware(['check_login'])->group(function () {
 	Route::get('/',[HomeController::class, 'index']);
 	Route::get('view/{table}', [AdminController::class, 'view']);
 	Route::get('insert/{table}', [AdminController::class, 'insert']);

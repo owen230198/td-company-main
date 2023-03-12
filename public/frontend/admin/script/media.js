@@ -152,7 +152,7 @@ var removeImg = function(){
 		input = parent.find('input');
 		img = parent.find('img');
 		input.val('');
-		img.attr('src', 'frontend/base/images/default.webp');
+		img.attr('src', 'public/frontend/base/images/default.webp');
 	});
 }
 

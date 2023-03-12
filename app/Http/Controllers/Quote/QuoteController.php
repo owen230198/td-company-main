@@ -32,7 +32,7 @@ class QuoteController extends Controller
                 $customer_id = $request->input('customer_id');
                 $quote_id = $this->services->insertCustomerQuote($customer_id, $data_customer);
                 if ($quote_id) {
-                    return redirect('create-quote?step=handle_config&id='.$quote_id)->with('message','Thêm dữ liệu khách hàng thành công!');
+                    return redirect(asset('create-quote?step=handle_config&id='.$quote_id))->with('message', 'Thêm dữ liệu khách hàng thành công!');
                 }else{
                     return back()->with('error', 'Đã có lỗi xảy ra !');
                 }

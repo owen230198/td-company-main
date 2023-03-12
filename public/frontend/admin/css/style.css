@@ -74,6 +74,7 @@ body, html {
 }
 .main_login {
     height: 100vh;
+    background: #f1f4f9;
 }
 
 .form_login_content {
@@ -394,6 +395,10 @@ input[type="checkbox"].toggle:disabled::after {
 .red_btn:hover{
     background: none;
     color: #ff0000;
+}
+
+.max_150{
+    max-width: 150px;
 }
 
 @page {

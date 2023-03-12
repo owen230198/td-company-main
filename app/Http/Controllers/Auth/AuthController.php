@@ -33,16 +33,16 @@ class AuthController extends Controller
             $rede = session('afterLoginRoute')??'/';
             return redirect($rede)->with('message','Đăng nhập thành công!');
         }
-        return redirect('login')->withInput()->with($result['messageCode'], $result['errorMessage']);
+        return redirect(asset('login'))->withInput()->with($result['messageCode'], $result['errorMessage']);
     }
 
     public function logout ()
     {
         if (session()->has('user_login')) {
             session()->forget('user_login');
-            return redirect('login');
+            return redirect(asset('login'));
         }
-        return redirect('login');
+        return redirect(asset('login'));
     }
 }
 

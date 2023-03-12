@@ -18,7 +18,7 @@ class CheckLogin
     {
         if (!session()->exists('user_login')) {
             session()->put('afterLoginRoute', url()->full());
-            return redirect('login');
+            return redirect(asset('login'));
         }
         return $next($request);
     }

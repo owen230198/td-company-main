@@ -38,5 +38,5 @@
     </div>    
 @endsection
 @section('script')
-    <script src="{{ asset('frontend/admin/script/order.js') }} "></script>
+    <script src="{{ asset('public/frontend/admin/script/order.js') }} "></script>
 @endsection
