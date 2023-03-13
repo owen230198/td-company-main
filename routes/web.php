@@ -41,6 +41,8 @@ Route::middleware(['check_login'])->group(function () {
 	//quotes routes
 	Route::any('create-quote', [QuoteController::class, 'createQuote']);
 	Route::get('get-view-customer-data', [QuoteController::class, 'getViewCustomerData']);
+	Route::get('get-view-product-quantity', [QuoteController::class, 'getViewProductQuantity']);
+	Route::get('add-print-paper-quote', [QuoteController::class, 'addPrintPaperQuote']);
 
 	//orders routes
 	Route::get('set-quantity-order-products', [OrderController::class, 'setListProductView']);

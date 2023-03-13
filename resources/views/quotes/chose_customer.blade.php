@@ -21,7 +21,7 @@
                 <a href="{{ url('') }}" class="main_button bg_red color_white smooth radius_5 font_bold smooth red_btn">
                   <i class="fa fa-times mr-2 fs-14" aria-hidden="true"></i>Hủy
                 </a>
-              </div>
+            </div>
         </form>
     </div>   
 @endsection

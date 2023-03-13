@@ -281,21 +281,27 @@ var selectAjaxModule = function(section = '.basse_content ')
 
 }
 
-var multipleSelectInit = function()
+var multipleSelectModule = function(section = '.basse_content')
 {
-    let select_multiple = $('select.multiple_select');
+    let select_multiple = $(section).find('select.multiple_select');
     if (select_multiple.length > 0) {
         select_multiple.each(function(){
             let note = $(this).data('note')
             $(this).multiselect(
                 {
                     nonSelectedText: 'Chọn '+note,
-                    nSelectedText: note + 'đã được chọn',
-                    allSelectedText: 'Đã chọn hết' + note,
+                    nSelectedText: note + ' đã được chọn',
+                    allSelectedText: 'Đã chọn hết ' + note,
                 }
             );
         });
     }
+}
+
+var initInputModuleAfterAjax = function(section)
+{
+    selectAjaxModule(section);
+    multipleSelectModule(section);
 }
 
 $(function () {
@@ -313,5 +319,5 @@ $(function () {
     menuUserHeader();
     menuSidebar();
     selectAjaxModule();
-    multipleSelectInit();
+    multipleSelectModule();
 });

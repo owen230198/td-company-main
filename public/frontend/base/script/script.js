@@ -24,6 +24,26 @@ var baseAjaxForm = function()
 	});
 }
 
+var ajaxViewTarget = function(url, target_ajax, section_class, type = 1)
+{
+	$.ajax({
+		url: url,
+		type: 'GET'
+	})
+	.done(function(data){
+		if (typeof data === 'object' && data.code == 100) {
+		  toastr['error'](data.message);
+		}else{
+		  if (type === 1) {
+			target_ajax.html(data);
+		  }else{
+			target_ajax.append(data);
+		  }
+		  initInputModuleAfterAjax(section_class);
+		}
+	})
+}
+
 $(function(){
 	baseAjaxForm();
 });

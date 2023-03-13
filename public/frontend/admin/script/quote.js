@@ -11,7 +11,7 @@ var changQtyInput = function(){
    });
 }
 
-var moduleSelectOther = function()
+var moduleSelectOtherPaper = function()
 {
   $(document).on('change', 'select.select_other', function(event) {
     event.preventDefault();
@@ -104,10 +104,51 @@ var selectPaperMateralModule = function()
   });
 }
 
+var moduleInputQuantityProduct = function()
+{
+  $(document).on('change', 'input.quote_set_qty_pro_input', function(event){
+    event.preventDefault();
+    let url = 'get-view-product-quantity?quantity='+$(this).val();
+    let ajax_target = $(this).closest('.quote_handle_section.handle_pro_section').find('.ajax_product_quote_number');
+    let section_class = '.ajax_product_quote_number';
+    ajaxViewTarget(url, ajax_target, section_class);
+  });
+}
+
+var addPrintPaperModule = function()
+{
+  $(document).on('click', 'button.add_print_paper_quote_button', function(event){
+    event.preventDefault();
+    let list_section = $(this).closest('.section_quote_print_paper').find('.list_paper_config');
+    let item = list_section.find('.quote_paper_item');
+    let pro_index = $(this).data('product');
+    let paper_index = item.length;
+    let url = 'add-print-paper-quote?pro_index='+pro_index+'&paper_index='+paper_index;
+    let section_class = '.list_paper_config';
+    ajaxViewTarget(url, list_section, section_class, 2);
+  });
+}
+
+var setNameProductQuote = function()
+{
+  $(document).on('change', 'input.quote_set_product_name', function(event){
+    event.preventDefault();
+    let text = $(this).val();
+    let tabpane = $(this).closest('.tab-pane.tab_pane_quote_pro');
+    let li_id = tabpane.attr('id');
+    $('a#'+li_id+'-tab').text(text);
+    $('input.quote_receive_paper_name').val(text);
+    tabpane.data('pname', text);
+  })
+}
+
 $(function(){
 	changQtyInput();
-  moduleSelectOther();
+  moduleSelectOtherPaper();
   PrintQuote();
   selectCustomerQuote();
   selectPaperMateralModule();
+  moduleInputQuantityProduct();
+  addPrintPaperModule();
+  setNameProductQuote();
 });

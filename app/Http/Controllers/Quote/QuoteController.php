@@ -53,5 +53,21 @@ class QuoteController extends Controller
         $data['data_customer'] = !empty($data_customer) ? $data_customer : [];
         return view('quotes.customer_info', $data);
     }
+
+    public function getViewProductQuantity(Request $request)
+    {
+        $quantity = (int) $request->input('quantity');
+        if (empty($quantity) || $quantity > 10) {
+            return ['code' => 100, 'message' => 'Số lượng sản phẩm không hợp lệ!'];
+        }
+        return view('quotes.products.ajax_view', ['qty' => $quantity]);
+    }
+
+    public function addPrintPaperQuote(Request $request)
+    {
+        $pro_index = (int) $request->input('pro_index');
+        $paper_index = (int) $request->input('paper_index');
+        return view('quotes.products.papers.ajax_view', ['j' => $pro_index, 'pindex' => $paper_index]);
+    }
 }
 

@@ -214,6 +214,8 @@ input[type="checkbox"].toggle:disabled::after {
 .main_button{
     padding: 5px 10px;
     box-shadow: 1px 1px 3px #777;
+    border: 1px solid;
+    text-transform: capitalize;
 }
 
 .login_button:hover{
@@ -295,12 +297,8 @@ input[type="checkbox"].toggle:disabled::after {
 
 .sidebar ul li a{
     display: block;
-    font-weight: 600;
-    color: #333;
     padding: 5px 10px;
-    border-bottom: 1px solid;
-    text-transform: capitalize;
-    transition: all .2s;
+    font-weight: 600;
 }
 
 .sidebar>ul>li:last-child>a{
@@ -315,6 +313,7 @@ input[type="checkbox"].toggle:disabled::after {
     position: absolute;
     right: 5px;
     top: 8px;
+    color: #ffffff;
 }
 
 .sidebar ul li>a:hover{
@@ -341,9 +340,25 @@ input[type="checkbox"].toggle:disabled::after {
     display: block;
 }
 
+.sidebar>ul>li>a{
+    margin: 5px 0;
+    margin-left: 10px;
+    background: #459300;
+    color: #ffffff;
+    border-radius: 10px 0 0 10px
+}
+
 .sidebar li ul li a{
-    padding-left: 20px;
+    color: #333;
+    border-bottom: 1px solid;
+    text-transform: capitalize;
+    transition: all .2s;
     background: #ffffff;
+    margin-left: 20px;
+}
+
+.sidebar li ul li:last-child>a{
+    border-bottom: none;
 }
 
 .sidebar li ul {
