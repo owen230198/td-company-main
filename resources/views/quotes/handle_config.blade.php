@@ -1,7 +1,7 @@
 @extends('index')
 @section('css')
-    <link rel="stylesheet" href="frontend/admin/css/quote.css">
-    <link rel="stylesheet" href="frontend/base/css/bootstrap-multiselect.min.css">
+    <link rel="stylesheet" href="{{ asset('frontend/admin/css/quote.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/base/css/bootstrap-multiselect.min.css') }}">
 @endsection
 @section('content')
     <div class="quote_handle_section mb-3">
@@ -30,7 +30,7 @@
             $quote_pro_qty_field = [
                 'name' => 'quote[product_qty]',
                 'note' => 'Số lượng sản phẩm',
-                'attr' => ['type_input' => 'number']
+                'attr' => ['type_input' => 'number', 'inject_class' => 'quote_set_qty_pro_input']
             ] 
         @endphp
         @include('view_update.view', $quote_pro_qty_field)
@@ -325,7 +325,7 @@
     </div>  
 @endsection
 @section('script')
-<script src="frontend/base/script/bootstrap-multiselect.min.js"></script>
-<script src="frontend/admin/script/quote.js"></script>
+<script src="{{ asset('frontend/base/script/bootstrap-multiselect.min.js') }}"></script>
+<script src="{{ asset('frontend/admin/script/quote.js') }}"></script>
     
 @endsection
