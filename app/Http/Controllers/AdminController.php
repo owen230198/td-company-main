@@ -223,7 +223,7 @@ class AdminController extends Controller
     public function getDataJsonCustomer(Request $request)
     {
         $status = !empty($request->input('status')) ? $request->input('status') : 1;
-        $customers = \DB::table('customers')->where('status', $status);
+        $customers = \DB::table('customers');
         if (!empty($request->input('q'))) {
             $q = '%'.trim($request->input('q')).'%';
             $customers->where(function ($customers) use ($q) {

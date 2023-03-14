@@ -107,6 +107,7 @@ if (!function_exists('getOptionDataField')) {
     {
         $where = !empty($param['where']) ? $param['where'] : [];
         $where['act'] = 1;
-        return \DB::table($param['table'])->where($where)->get()->all();
+        $select = @$param['select'] ?? '*';
+        return \DB::table($param['table'])->select($select)->where($where)->get()->all();
     }
 }

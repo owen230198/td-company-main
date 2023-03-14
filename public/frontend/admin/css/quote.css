@@ -11,3 +11,17 @@
     border-radius: 10px;
     box-shadow: 1px 1px 3px #333333;
 }
+
+.remove_ext_paper_quote{
+    position: absolute;
+    padding: 5px;
+    width: 30px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    box-shadow: 1px 1px 3px #333333;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+}

@@ -26,6 +26,7 @@ var baseAjaxForm = function()
 
 var ajaxViewTarget = function(url, target_ajax, section_class, type = 1)
 {
+	$('#loader').fadeIn(200);
 	$.ajax({
 		url: url,
 		type: 'GET'
@@ -41,6 +42,7 @@ var ajaxViewTarget = function(url, target_ajax, section_class, type = 1)
 		  }
 		  initInputModuleAfterAjax(section_class);
 		}
+		$('#loader').delay(200).fadeOut(500); 
 	})
 }
 

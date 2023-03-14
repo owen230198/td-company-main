@@ -37,7 +37,7 @@
             @endphp
             @include('view_update.view', $quote_pro_qty_field)
             <div class="ajax_product_quote_number">
-                   
+                @include('quotes.products.ajax_view', ['qty' => 1])       
             </div>
         </div> 
     </form>

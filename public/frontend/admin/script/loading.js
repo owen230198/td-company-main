@@ -18,14 +18,14 @@ var LOADING = (function(){
 			$('#loader').fadeIn(200);
 		});
 		$(document).ajaxComplete(function(event, xhr, settings) {
-			$('#loader').delay(500).fadeOut(500); 
+			$('#loader').delay(200).fadeOut(500); 
 		});
 	}
 	return {
 		_:function(){
 			_initHTML();
 			_initCss();
-			_initAjax();
+			// _initAjax();
 		}
 	}
 })();

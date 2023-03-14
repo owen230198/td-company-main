@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : localhost
+ Source Server         : owen
  Source Server Type    : MySQL
- Source Server Version : 100427
+ Source Server Version : 100425
  Source Host           : localhost:3306
  Source Schema         : td_company
 
  Target Server Type    : MySQL
- Target Server Version : 100427
+ Target Server Version : 100425
  File Encoding         : 65001
 
- Date: 12/03/2023 18:05:21
+ Date: 14/03/2023 21:05:14
 */
 
 SET NAMES utf8mb4;
@@ -12242,6 +12242,44 @@ INSERT INTO `customers` VALUES (1, 'KHM-00001', 'Công ty WS', 'Nguyễn Duy Kh�
 INSERT INTO `customers` VALUES (2, 'KHM-000002', 'Cong Ty Test', 'Nguyen Van A', NULL, 'Ho Chi Minh', '1', 'congtytest@gmail.com', '0987654321', '0123456789', NULL, NULL, '0', NULL, '2023-03-11 00:11:06', '2023-03-11 00:11:06', NULL);
 
 -- ----------------------------
+-- Table structure for devices
+-- ----------------------------
+DROP TABLE IF EXISTS `devices`;
+CREATE TABLE `devices`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Mã nhóm',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Tên nhóm',
+  `model_price` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `work_price` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+  `shape_price` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+  `key_device` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Ghi chú',
+  `act` tinyint(4) NULL DEFAULT NULL,
+  `ord` int(10) NULL DEFAULT NULL,
+  `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `created_by` int(11) NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of devices
+-- ----------------------------
+INSERT INTO `devices` VALUES (1, 'Cán láng tự động', '0', '0', '50000', 'nilon', NULL, 1, 0, '2023-03-14 20:22:44', '2023-03-14 20:22:44', 0);
+INSERT INTO `devices` VALUES (2, 'Ép nhũ tự động', '0', '0', '100000', 'compress', NULL, 1, 0, '2023-03-14 20:22:44', '2023-03-14 20:22:44', 0);
+INSERT INTO `devices` VALUES (3, 'In UV tự động', '0', '800', '150000', 'uv', NULL, 1, 0, '2023-03-14 20:41:50', '2023-03-14 20:41:50', 0);
+INSERT INTO `devices` VALUES (4, 'Máy bế tự động', '0', '100', '100000', 'elevate', NULL, 1, 0, '2023-03-14 20:22:44', '2023-03-14 20:22:44', 0);
+INSERT INTO `devices` VALUES (5, 'Máy bóc lề tự động', '0', '10', '20000', 'peel', NULL, 1, 0, '2023-03-14 20:22:44', '2023-03-14 20:22:44', 0);
+INSERT INTO `devices` VALUES (6, 'Dán hộp tự động', '0', '50', '50000', 'box_paste', NULL, 1, 0, '2023-03-14 20:53:28', '2023-03-14 20:53:28', 0);
+INSERT INTO `devices` VALUES (7, 'Máy phay tự động', '0', '100', '100000', 'milling', NULL, 1, 0, '2023-03-14 20:22:45', '2023-03-14 20:22:45', 0);
+INSERT INTO `devices` VALUES (8, 'Cán láng bán tự động', '0', '0', '50000', 'nilon', NULL, 1, 1, '2023-03-14 20:22:45', '2023-03-14 20:22:45', 0);
+INSERT INTO `devices` VALUES (9, 'Máy ép thủy lực', '0', '0', '100000', 'compress', NULL, 1, 1, '2022-06-30 10:22:41', '2022-06-30 03:48:45', 0);
+INSERT INTO `devices` VALUES (10, 'In UV bán tự động', '0', '600', '100000', 'uv', NULL, 1, 1, '2023-03-14 20:42:24', '2023-03-14 20:42:24', 0);
+INSERT INTO `devices` VALUES (11, 'Máy bế bán tự động', '0', '150', '100000', 'elevate', NULL, 1, 1, '2023-03-14 20:22:45', '2023-03-14 20:22:45', 0);
+INSERT INTO `devices` VALUES (12, 'Máy bóc lề bán tự động', '0', '10', '20000', 'peel', NULL, 1, 1, '2023-03-14 20:22:45', '2023-03-14 20:22:45', 0);
+INSERT INTO `devices` VALUES (13, 'Dán hộp tay', '0', '120', '50000', 'box_paste', NULL, 1, 1, '2023-03-14 20:53:33', '2023-03-14 20:53:33', 0);
+INSERT INTO `devices` VALUES (14, 'Máy phay bán tự động', '0', '120', '50000', 'milling', NULL, 1, 1, '2023-03-14 20:22:45', '2023-03-14 20:22:45', 0);
+
+-- ----------------------------
 -- Table structure for districts
 -- ----------------------------
 DROP TABLE IF EXISTS `districts`;
@@ -13023,6 +13061,36 @@ CREATE TABLE `files`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Table structure for materals
+-- ----------------------------
+DROP TABLE IF EXISTS `materals`;
+CREATE TABLE `materals`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Mã nhóm',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Tên nhóm',
+  `price` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `materal_key` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Cha',
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Ghi chú',
+  `act` tinyint(4) NULL DEFAULT NULL,
+  `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `created_by` int(11) NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of materals
+-- ----------------------------
+INSERT INTO `materals` VALUES (1, 'Màng bạc', '3800', 'metalai', NULL, 1, '2022-06-30 23:28:03', '2022-06-30 23:28:03', 0);
+INSERT INTO `materals` VALUES (2, 'Màng vàng', '4000', 'metalai', NULL, 1, '2022-06-30 23:28:09', '2022-06-30 23:28:09', 0);
+INSERT INTO `materals` VALUES (3, 'in offset mực bóng hoặc mờ', '600', 'cover', NULL, 1, '2022-06-30 23:28:13', '2022-06-30 23:28:13', 0);
+INSERT INTO `materals` VALUES (4, 'Phủ bóng nhật sơn ( Trên metailai )', '1800', 'cover', NULL, 1, '2022-06-30 23:28:16', '2022-06-30 23:28:16', 0);
+INSERT INTO `materals` VALUES (5, 'Cán bóng', '2500', 'cover', NULL, 1, '2022-06-30 23:28:18', '2022-06-30 23:28:18', 0);
+INSERT INTO `materals` VALUES (6, 'Cán mờ', '2800', 'cover', NULL, 1, '2022-06-30 23:28:21', '2022-06-30 23:28:21', 0);
+INSERT INTO `materals` VALUES (7, 'Phủ bóng gốc dầu nhật sơn trên giấy ', '1500', 'cover', NULL, 1, '2022-06-30 23:28:23', '2022-06-30 23:28:23', 0);
+INSERT INTO `materals` VALUES (8, 'Cán bóng', '2500', 'nilon', '', 1, '2023-03-14 20:07:01', '2023-03-14 20:07:01', 0);
+INSERT INTO `materals` VALUES (9, 'Cán mờ', '2800', 'nilon', NULL, 1, '2023-03-14 20:05:53', '2023-03-14 20:05:53', 0);
+
+-- ----------------------------
 -- Table structure for n_detail_tables
 -- ----------------------------
 DROP TABLE IF EXISTS `n_detail_tables`;
@@ -13567,6 +13635,29 @@ INSERT INTO `paper_materals` VALUES (1, 'Couches', 1, 1, '2023-03-11 22:23:07', 
 INSERT INTO `paper_materals` VALUES (2, 'Ivoly', 1, 1, '2023-03-11 22:23:07', '2023-03-11 22:23:09');
 
 -- ----------------------------
+-- Table structure for print_techs
+-- ----------------------------
+DROP TABLE IF EXISTS `print_techs`;
+CREATE TABLE `print_techs`  (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `act` tinyint(4) NULL DEFAULT NULL,
+  `created_by` int(10) NULL DEFAULT NULL,
+  `created_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `index`(`id`, `name`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of print_techs
+-- ----------------------------
+INSERT INTO `print_techs` VALUES (1, 'In offset', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:25');
+INSERT INTO `print_techs` VALUES (2, 'In UV Offset', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:25');
+INSERT INTO `print_techs` VALUES (3, 'In Label', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:25');
+INSERT INTO `print_techs` VALUES (4, 'offset & UV offset', 1, 1, '2023-03-11 15:25:31', '2023-03-11 15:25:33');
+
+-- ----------------------------
 -- Table structure for product_categories
 -- ----------------------------
 DROP TABLE IF EXISTS `product_categories`;
@@ -13709,44 +13800,6 @@ INSERT INTO `q_configs` VALUES (20, 'office_tel', 'OFFICE_TEL', '0969.303.888 Ms
 INSERT INTO `q_configs` VALUES (21, 'fact_tel', 'FACT_TEL', '0963.303.999 Mr Tuấn', 1, 'text', 'SĐT nhà xưởng', 2, NULL, 0, '1', '2022-06-29 23:35:59', '2022-06-29 23:35:59', 0);
 
 -- ----------------------------
--- Table structure for q_devices
--- ----------------------------
-DROP TABLE IF EXISTS `q_devices`;
-CREATE TABLE `q_devices`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Mã nhóm',
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Tên nhóm',
-  `model_price` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `work_price` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `shape_price` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `key_device` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Ghi chú',
-  `act` tinyint(4) NULL DEFAULT NULL,
-  `ord` int(10) NULL DEFAULT NULL,
-  `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
-  `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
-  `created_by` int(11) NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of q_devices
--- ----------------------------
-INSERT INTO `q_devices` VALUES (1, 'Cán láng tự động', '0', '0', '50000', 'skin', '', 1, 0, '2022-06-30 22:22:41', '2022-06-30 22:22:41', 0);
-INSERT INTO `q_devices` VALUES (2, 'Ép nhũ tự động', '0', '0', '100000', 'compress', '', 1, 0, '2022-06-30 22:22:41', '2022-06-30 22:22:41', 0);
-INSERT INTO `q_devices` VALUES (3, 'In UV phủ sần', '0', '800', '150000', 'uv', '', 1, 0, '2022-07-18 16:47:17', '2022-07-18 16:47:17', 0);
-INSERT INTO `q_devices` VALUES (4, 'Máy bế tự động', '0', '100', '100000', 'elevate', '', 1, 0, '2022-06-30 22:22:41', '2022-06-30 22:22:41', 0);
-INSERT INTO `q_devices` VALUES (5, 'Máy bóc lề tự động', '0', '10', '20000', 'peel', '', 1, 0, '2022-06-30 22:22:41', '2022-06-30 22:22:41', 0);
-INSERT INTO `q_devices` VALUES (6, 'Dán hộp tự động', '0', '50', '50000', 'paste', '', 1, 0, '2022-06-30 22:22:41', '2022-06-30 22:22:41', 0);
-INSERT INTO `q_devices` VALUES (7, 'Máy phay tự động', '0', '100', '100000', 'milling', '', 1, 0, '2022-06-30 22:22:41', '2022-06-30 22:22:41', 0);
-INSERT INTO `q_devices` VALUES (8, 'Cán láng bán tự động', '0', '0', '50000', 'skin', '', 1, 1, '2022-06-30 22:22:41', '2022-06-30 22:22:41', 0);
-INSERT INTO `q_devices` VALUES (9, 'Máy ép thủy lực', '0', '0', '100000', 'compress', NULL, 1, 1, '2022-06-30 10:22:41', '2022-06-30 03:48:45', 0);
-INSERT INTO `q_devices` VALUES (10, 'In UV phủ  bóng', '0', '600', '100000', 'uv', '', 1, 1, '2022-07-18 16:47:22', '2022-07-18 16:47:22', 0);
-INSERT INTO `q_devices` VALUES (11, 'Máy bế bán tự động', '0', '150', '100000', 'elevate', '', 1, 1, '2022-06-30 22:22:41', '2022-06-30 22:22:41', 0);
-INSERT INTO `q_devices` VALUES (12, 'Máy bóc lề bán tự động', '0', '10', '20000', 'peel', '', 1, 1, '2022-06-30 22:22:41', '2022-06-30 22:22:41', 0);
-INSERT INTO `q_devices` VALUES (13, 'Dán hộp tay', '0', '120', '50000', 'paste', '', 1, 1, '2022-06-30 22:22:41', '2022-06-30 22:22:41', 0);
-INSERT INTO `q_devices` VALUES (14, 'Máy phay bán tự động', '0', '120', '50000', 'milling', '', 1, 1, '2022-06-30 22:22:41', '2022-06-30 22:22:41', 0);
-
--- ----------------------------
 -- Table structure for q_finishes
 -- ----------------------------
 DROP TABLE IF EXISTS `q_finishes`;
@@ -13799,36 +13852,6 @@ CREATE TABLE `q_foams`  (
 -- Records of q_foams
 -- ----------------------------
 INSERT INTO `q_foams` VALUES (1, 7, 10000, 2, 5100, 2, '0.25', '0.14', '{\"quantative\":\"20\",\"act\":1,\"total\":19286750.000000004}', '{\"act\":\"1\",\"shape_price\":\"100\",\"device\":\"11\",\"total\":850000}', '{\"act\":\"1\",\"device\":\"5\",\"total\":220000}', 11, 20356750, NULL, NULL, '2022-10-11 07:24:08', 0);
-
--- ----------------------------
--- Table structure for q_laminate_materals
--- ----------------------------
-DROP TABLE IF EXISTS `q_laminate_materals`;
-CREATE TABLE `q_laminate_materals`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Mã nhóm',
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Tên nhóm',
-  `price` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `laminate_key` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Cha',
-  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Ghi chú',
-  `act` tinyint(4) NULL DEFAULT NULL,
-  `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
-  `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
-  `created_by` int(11) NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of q_laminate_materals
--- ----------------------------
-INSERT INTO `q_laminate_materals` VALUES (1, 'Màng bạc', '3800', 'metalai', NULL, 1, '2022-06-30 23:28:03', '2022-06-30 23:28:03', 0);
-INSERT INTO `q_laminate_materals` VALUES (2, 'Màng vàng', '4000', 'metalai', NULL, 1, '2022-06-30 23:28:09', '2022-06-30 23:28:09', 0);
-INSERT INTO `q_laminate_materals` VALUES (3, 'in offset mực bóng hoặc mờ', '600', 'cover', NULL, 1, '2022-06-30 23:28:13', '2022-06-30 23:28:13', 0);
-INSERT INTO `q_laminate_materals` VALUES (4, 'Phủ bóng nhật sơn ( Trên metailai )', '1800', 'cover', NULL, 1, '2022-06-30 23:28:16', '2022-06-30 23:28:16', 0);
-INSERT INTO `q_laminate_materals` VALUES (5, 'Cán bóng', '2500', 'cover', NULL, 1, '2022-06-30 23:28:18', '2022-06-30 23:28:18', 0);
-INSERT INTO `q_laminate_materals` VALUES (6, 'Cán mờ', '2800', 'cover', NULL, 1, '2022-06-30 23:28:21', '2022-06-30 23:28:21', 0);
-INSERT INTO `q_laminate_materals` VALUES (7, 'Phủ bóng gốc dầu nhật sơn trên giấy ', '1500', 'cover', NULL, 1, '2022-06-30 23:28:23', '2022-06-30 23:28:23', 0);
-INSERT INTO `q_laminate_materals` VALUES (8, 'Màng bóng', '2500', 'skin', '', 1, '2022-06-30 23:28:25', '2022-06-30 23:28:25', 0);
-INSERT INTO `q_laminate_materals` VALUES (9, 'Cán mờ', '2800', 'skin', NULL, 1, '2022-06-30 04:34:04', '2022-06-30 04:34:04', 0);
 
 -- ----------------------------
 -- Table structure for q_papers
@@ -14165,29 +14188,6 @@ CREATE TABLE `qs_print_forms`  (
 INSERT INTO `qs_print_forms` VALUES (1, 'Mẫu in offset', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:25');
 INSERT INTO `qs_print_forms` VALUES (2, 'Mẫu in KTS', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:25');
 INSERT INTO `qs_print_forms` VALUES (3, 'Mẫu Không in', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:25');
-
--- ----------------------------
--- Table structure for qs_print_techs
--- ----------------------------
-DROP TABLE IF EXISTS `qs_print_techs`;
-CREATE TABLE `qs_print_techs`  (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `act` tinyint(4) NULL DEFAULT NULL,
-  `created_by` int(10) NULL DEFAULT NULL,
-  `created_at` datetime(0) NULL DEFAULT NULL,
-  `updated_at` datetime(0) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  INDEX `index`(`id`, `name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of qs_print_techs
--- ----------------------------
-INSERT INTO `qs_print_techs` VALUES (1, 'In offset', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:25');
-INSERT INTO `qs_print_techs` VALUES (2, 'In UV Offset', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:25');
-INSERT INTO `qs_print_techs` VALUES (3, 'In Label', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:25');
-INSERT INTO `qs_print_techs` VALUES (4, 'offset & UV offset', 1, 1, '2023-03-11 15:25:31', '2023-03-11 15:25:33');
 
 -- ----------------------------
 -- Table structure for qs_shipping_types

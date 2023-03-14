@@ -1,0 +1,1 @@
+<textarea class="form-control" name="<?php echo e($name); ?>"><?php echo e(@$value); ?></textarea><?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/view_update/textarea.blade.php ENDPATH**/ ?>

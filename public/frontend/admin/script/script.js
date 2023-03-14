@@ -292,6 +292,7 @@ var multipleSelectModule = function(section = '.basse_content')
                     nonSelectedText: 'Chọn '+note,
                     nSelectedText: note + ' đã được chọn',
                     allSelectedText: 'Đã chọn hết ' + note,
+                    dropRight: true,
                 }
             );
         });

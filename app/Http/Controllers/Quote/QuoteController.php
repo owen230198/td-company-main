@@ -67,7 +67,8 @@ class QuoteController extends Controller
     {
         $pro_index = (int) $request->input('pro_index');
         $paper_index = (int) $request->input('paper_index');
-        return view('quotes.products.papers.ajax_view', ['j' => $pro_index, 'pindex' => $paper_index]);
+        $paper_name = $request->input('paper_name');
+        return view('quotes.products.papers.ajax_view', ['j' => $pro_index, 'pindex' => $paper_index, 'paper_name' => $paper_name]);
     }
 }
 

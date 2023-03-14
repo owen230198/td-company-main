@@ -1,6 +1,7 @@
 
 <?php if($pindex > 0): ?>
-    <div class="quote_paper_item mt-3 border_main p-3 radius_5">  
+    <div class="quote_paper_item mt-3 border_main p-3 radius_5 position-relative"> 
+    <span class="remove_ext_paper_quote d-flex bg_red color_white red_btn smooth"><i class="fa fa-times" aria-hidden="true"></i></span> 
 <?php endif; ?>
     <div class="mb-2 paper_product_config">
         <?php if($pindex > 0): ?>
@@ -11,12 +12,12 @@
                     'note' => 'Chọn tên phụ',
                     'attr' => ['required' => 1, 'inject_class' => 'select_ext_name_paper'],
                     'other_data' => ['data' => ['options' => [
-                        $pindex => 'Chọn tên phụ cho lệnh in này',
-                        'Tờ bồi khay định hình' => '1. Tờ bồi khay định hình',
-                        'Tờ bồi thành' => '2. Tờ bồi thành',
-                        'Tờ bồi mặt trong hộp' => '3. Tờ bồi mặt trong hộp',
-                        'Khay giấy định hình' => '4. Khay giấy định hình',
-                        'Tờ phụ trang trí' => '5. Tờ phụ trang trí'
+                        @$paper_name => 'Chọn tên phụ cho lệnh in này',
+                        @$paper_name.' (Tờ bồi khay định hình)' => '1. Tờ bồi khay định hình',
+                        @$paper_name.' (Tờ bồi thành)' => '2. Tờ bồi thành',
+                        @$paper_name.' (Tờ bồi mặt trong hộp)' => '3. Tờ bồi mặt trong hộp',
+                        @$paper_name.' (Khay giấy định hình)' => '4. Khay giấy định hình',
+                        @$paper_name.' (Tờ phụ trang trí)' => '5. Tờ phụ trang trí'
                     ]]]
                 ] 
             ?>
@@ -29,7 +30,8 @@
             $pro_paper_name = [
                 'name' => 'product['.$j.'][paper]['.$pindex.'][name]',
                 'note' => 'Tên SP giấy in',
-                'attr' => ['required' => 1, 'inject_class' => $pindex == 0 ? 'quote_receive_paper_name' : '']
+                'value' => @$paper_name,
+                'attr' => ['required' => 1, 'inject_class' => $pindex == 0 ? 'quote_receive_paper_name_main' : 'quote_receive_paper_name_ext']
             ] 
         ?>
         <?php echo $__env->make('view_update.view', $pro_paper_name, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
@@ -118,7 +120,7 @@
             </div>
         </div>
     </div>
-    <?php echo $__env->make('quotes.products.papers.print', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php echo $__env->make('quotes.products.papers.after_print', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php if($pindex > 0): ?>
 </div>   
 <?php endif; ?>

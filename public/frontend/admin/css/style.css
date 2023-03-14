@@ -307,6 +307,7 @@ input[type="checkbox"].toggle:disabled::after {
 
 .sidebar ul li{
     position: relative;
+    margin-top: 1px;
 }
 
 .sidebar ul li i{

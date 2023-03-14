@@ -42,13 +42,13 @@
                     <?php echo $__env->make('quotes.products.papers.handles.print', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                 </div>
                 <div class="tab-pane fade" id="v-nilon_cover_<?php echo e($j.'_'.$pindex); ?>" role="tabpanel" aria-labelledby="v-nilon_cover_<?php echo e($j.'_'.$pindex); ?>-tab">
-                    Cán nilon
+                    <?php echo $__env->make('quotes.products.papers.handles.nilon', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                 </div>
                 <div class="tab-pane fade" id="v-metalai_cover_<?php echo e($j.'_'.$pindex); ?>" role="tabpanel" aria-labelledby="v-metalai_cover_<?php echo e($j.'_'.$pindex); ?>-tab">
-                    Cán Metalai
+                    <?php echo $__env->make('quotes.products.papers.handles.metalai', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                 </div>
                 <div class="tab-pane fade" id="v-glossy_compress_<?php echo e($j.'_'.$pindex); ?>" role="tabpanel" aria-labelledby="v-glossy_compress_<?php echo e($j.'_'.$pindex); ?>-tab">
-                    Ép Nhũ
+                    <?php echo $__env->make('quotes.products.papers.handles.compress', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                 </div>
                 <div class="tab-pane fade" id="v-floating_<?php echo e($j.'_'.$pindex); ?>" role="tabpanel" aria-labelledby="v-floating_<?php echo e($j.'_'.$pindex); ?>-tab">
                     Thúc nổi
@@ -71,4 +71,4 @@
             </div>
         </div>
     </div>
-</div><?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/quotes/products/papers/print.blade.php ENDPATH**/ ?>
+</div><?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/quotes/products/papers/after_print.blade.php ENDPATH**/ ?>

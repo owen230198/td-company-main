@@ -36,7 +36,7 @@
             ?>
             <?php echo $__env->make('view_update.view', $quote_pro_qty_field, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
             <div class="ajax_product_quote_number">
-                   
+                <?php echo $__env->make('quotes.products.ajax_view', ['qty' => 1], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>       
             </div>
         </div> 
     </form>

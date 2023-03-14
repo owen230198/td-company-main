@@ -106,12 +106,15 @@ var selectPaperMateralModule = function()
 
 var moduleInputQuantityProduct = function()
 {
-  $(document).on('change', 'input.quote_set_qty_pro_input', function(event){
+  $(document).on('keyup', 'input.quote_set_qty_pro_input', function(event){
     event.preventDefault();
-    let url = 'get-view-product-quantity?quantity='+$(this).val();
-    let ajax_target = $(this).closest('.quote_handle_section.handle_pro_section').find('.ajax_product_quote_number');
-    let section_class = '.ajax_product_quote_number';
-    ajaxViewTarget(url, ajax_target, section_class);
+    let quantity = parseInt($(this).val());
+    if (quantity > 0) {
+      let url = 'get-view-product-quantity?quantity='+$(this).val();
+      let ajax_target = $(this).closest('.quote_handle_section.handle_pro_section').find('.ajax_product_quote_number');
+      let section_class = '.ajax_product_quote_number';
+      ajaxViewTarget(url, ajax_target, section_class);
+    }
   });
 }
 
@@ -123,9 +126,18 @@ var addPrintPaperModule = function()
     let item = list_section.find('.quote_paper_item');
     let pro_index = $(this).data('product');
     let paper_index = item.length;
-    let url = 'add-print-paper-quote?pro_index='+pro_index+'&paper_index='+paper_index;
+    let paper_name = $(this).closest('.section_quote_print_paper').find('input.quote_receive_paper_name_main').val();
+    let url = 'add-print-paper-quote?pro_index='+pro_index+'&paper_index='+paper_index+'&paper_name='+paper_name;
     let section_class = '.list_paper_config';
     ajaxViewTarget(url, list_section, section_class, 2);
+  });
+}
+
+var removePrintPaperModule = function()
+{
+  $(document).on('click', 'span.remove_ext_paper_quote', function(event){
+    event.preventDefault();
+    $(this).parent().remove();
   });
 }
 
@@ -137,9 +149,18 @@ var setNameProductQuote = function()
     let tabpane = $(this).closest('.tab-pane.tab_pane_quote_pro');
     let li_id = tabpane.attr('id');
     $('a#'+li_id+'-tab').text(text);
-    $('input.quote_receive_paper_name').val(text);
+    $('input.quote_receive_paper_name_main').val(text);
     tabpane.data('pname', text);
   })
+}
+
+var selectExtNamePaperModule = function()
+{
+  $(document).on('change', 'select.select_ext_name_paper', function(event){
+    event.preventDefault();
+    text = $(this).val();
+    $(this).closest('.paper_product_config').find('input.quote_receive_paper_name_ext').val(text);
+  });
 }
 
 $(function(){
@@ -150,5 +171,7 @@ $(function(){
   selectPaperMateralModule();
   moduleInputQuantityProduct();
   addPrintPaperModule();
+  removePrintPaperModule();
   setNameProductQuote();
+  selectExtNamePaperModule();
 });

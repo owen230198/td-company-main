@@ -53,6 +53,7 @@
     <script src="<?php echo e(asset('frontend/base/script/select2.min.js')); ?>"></script>
     <script src="<?php echo e(asset('frontend/base/daterangepickers/moment.min.js')); ?>"></script>
     <script src="<?php echo e(asset('frontend/base/daterangepickers/daterangepicker.js')); ?>"></script>
+    <script src="<?php echo e(asset('frontend/admin/script/loading.js')); ?>"></script>
     <script src="<?php echo e(asset('frontend/base/script/script.js')); ?>"></script>
     <script src="<?php echo e(asset('frontend/admin/script/script.js')); ?>"></script>
     <?php echo $__env->yieldContent('script'); ?>
