@@ -11,8 +11,16 @@ class BaseService
         $this->regions = new \App\Models\NRegion;
  	}
 
+	public function conFigBaseDataAction(&$data)
+	{
+		$data['created_by'] = @getSessionUser()['id'];
+		$data['created_at'] = !empty($data['created_at']) ? $data['created_at'] : date('Y-m-d H:i', Time());
+		$data['created_at'] = !empty($data['update_at']) ? $data['update_at'] : date('Y-m-d H:i', Time());
+	}
+
 	public function processDataBefore($data)
 	{
+		$this->conFigBaseDataAction($data);
 		foreach ($data as $key => $value) {
 			if (str_contains($key, 'date') || str_contains($key, 'expired') || str_contains($key, '_at')) {
 				$data[$key] = getDataDateTime($value);
@@ -21,8 +29,6 @@ class BaseService
 				$data[$key] = json_encode($value);
 			}
 		}
-		$data['created_by'] = @getSessionUser()['id'];
-		$data['created_at'] = !empty($data['created_at'])?$data['created_at']:date('Y-m-d H:i', Time());
 		return $data;
 	}
 }

@@ -17,7 +17,7 @@
           @foreach ($field_list as $field)
             @if ($field['region']==$c_region['id'])
               <div class="form-group d-flex mb-4 pb-4 border_bot_eb">
-                <label class="mb-0 mr-3 min_150 fs-13 text-capitalize">{{ $field['note'] }}</label>
+                <label class="mb-0 mr-3 min_180 fs-13 text-capitalize">{{ $field['note'] }}</label>
                 @include('view_update.'.$field['view_type'].'',['field'=>$field, 'data'=>@$dataitem?$dataitem:array()])
               </div>
             @endif

@@ -1,5 +1,5 @@
 .quote_handle_title{
-    max-width: 666px;
+    max-width: 868px;
 }
 
 .quote_pro_nav_link{
@@ -24,4 +24,8 @@
     right: 10px;
     top: 10px;
     cursor: pointer;
+}
+
+.height_input{
+    margin-bottom: 20.61px;
 }

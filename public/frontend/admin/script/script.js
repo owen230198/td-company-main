@@ -49,30 +49,17 @@ var changeSubmit = function () {
 };
 
 var usernameInputPrevent = function () {
-    $("input[name=username]").keypress(function (e) {
-        var txt = String.fromCharCode(e.which);
-        if (!txt.match(/[A-Za-z0-9&. ]/)) {
+    $(document).on('keypress paste', 'input[name=username]', function(e){
+        let txt = String.fromCharCode(e.which);
+        if (!txt.match(/[A-Za-z0-9&. ]/) && e.which !== 8) {
             return false;
         }
-        if (e.which === 32) return false;
-    });
-
-    $("input[name=username]").bind("paste", function (e) {
-        setTimeout(function () {
-            var value = $("input[name=username]").val();
-            var updated = value.replace(/[^A-Za-z0-9&. ]/g, "");
-            $("input[name=username]").val(updated);
-        });
         if (e.which === 32) return false;
     });
 };
 
 var passwordInputPrevent = function () {
-    $("input[name=password]").keypress(function (e) {
-        if (e.which === 32) return false;
-    });
-
-    $("input[name=password]").bind("paste", function (e) {
+    $(document).on('keypress paste', 'input[name*=password]', function(e){
         if (e.which === 32) return false;
     });
 };
@@ -281,6 +268,14 @@ var selectAjaxModule = function(section = '.basse_content ')
 
 }
 
+var phoneInputPrevent = function () {
+    $(document).on('keypress paste keydown', 'input[name*=phone]', function (e) {
+        let txt = String.fromCharCode(e.which);
+        if ((!txt.match(/^[0-9]+$/) && e.which !== 8) || e.which === 32)
+            return false;
+    });
+};
+
 var multipleSelectModule = function(section = '.basse_content')
 {
     let select_multiple = $(section).find('select.multiple_select');
@@ -321,4 +316,5 @@ $(function () {
     menuSidebar();
     selectAjaxModule();
     multipleSelectModule();
+    phoneInputPrevent();
 });

@@ -1,6 +1,7 @@
 <?php
+    $key_stage = \App\Constants\TDConstant::PRINT;
     $paper_print_type = [
-        'name' => 'product['.$j.'][paper]['.$pindex.'][print][type]',
+        'name' => 'product['.$j.'][paper]['.$pindex.']['.$key_stage.'][type]',
         'type' => 'select',
         'note' => 'kiểu in',
         'other_data' => ['data' => ['options' => \App\Constants\TDConstant::PRINT_TYPE]]
@@ -10,7 +11,7 @@
 
 <?php
     $paper_print_color = [
-        'name' => 'product['.$j.'][paper]['.$pindex.'][print][color]',
+        'name' => 'product['.$j.'][paper]['.$pindex.']['.$key_stage.'][color]',
         'type' => 'select',
         'note' => 'số màu in',
         'other_data' => ['data' => ['options' => \App\Constants\TDConstant::PRINT_COLOR]]
@@ -20,7 +21,7 @@
 
 <?php
     $paper_print_tech = [
-        'name' => 'product['.$j.'][paper]['.$pindex.'][print][machine]',
+        'name' => 'product['.$j.'][paper]['.$pindex.']['.$key_stage.'][machine]',
         'type' => 'select',
         'note' => 'công nghệ in',
         'other_data' => ['data' => ['options' => \App\Constants\TDConstant::PRINT_TECH]]
@@ -30,7 +31,7 @@
 
 <?php
     $paper_print_req = [
-        'name' => 'product['.$j.'][paper]['.$pindex.'][print][color]',
+        'name' => 'product['.$j.'][paper]['.$pindex.']['.$key_stage.'][color]',
         'type' => 'select',
         'note' => 'Yêu cầu thợ in',
         'other_data' => ['data' => ['options' => \App\Constants\TDConstant::PRINT_REQUIRED]]
@@ -40,7 +41,7 @@
 
 <?php
     $paper_print_note = [
-        'name' => 'product['.$j.'][paper]['.$pindex.'][print][note]',
+        'name' => 'product['.$j.'][paper]['.$pindex.']['.$key_stage.'][note]',
         'type' => 'textarea',
         'note' => 'Ghi chú'
     ] 

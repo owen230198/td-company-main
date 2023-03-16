@@ -1,7 +1,8 @@
 <div class="d-flex align-items-center">
     @php
+        $key_stage = \App\Constants\TDConstant::COMPRESS;
         $paper_compress_price = [
-            'name' => 'product['.$j.'][paper]['.$pindex.'][compress][price]',
+            'name' => 'product['.$j.'][paper]['.$pindex.']['.$key_stage.'][price]',
             'note' => 'Giá tiền 1 sản phẩm',
             'attr' => ['type_input' => 'number'],
             'value' => 0
@@ -14,7 +15,7 @@
 <div class="d-flex align-items-center">
     @php
         $paper_compress_shape_price = [
-            'name' => 'product['.$j.'][paper]['.$pindex.'][compress][shape_price]',
+            'name' => 'product['.$j.'][paper]['.$pindex.']['.$key_stage.'][shape_price]',
             'note' => 'Giá khuôn 1 sản phẩm',
             'attr' => ['type_input' => 'number'],
             'value' => 0
@@ -24,4 +25,4 @@
     <span class="ml-2 fs-12 font-italic color_red">Giá khuôn/bát sp (không phả giá khuôn/ tờ in)</span>
 </div>
 
-@include('quotes.products.papers.handles.device_note', ['key_device' => 'compress'])
+@include('quotes.products.papers.handles.device_note', ['key_device' => $key_stage])

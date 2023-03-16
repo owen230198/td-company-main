@@ -3,5 +3,5 @@ class="form-control<?php echo e(@$attr['inject_class'] ? ' '.$attr['inject_class
 <?php echo e(@$attr['required'] == 1 ? 'required' : ''); ?> 
 <?php echo e(@$attr['disable_field'] == 1 ? 'disabled' : ''); ?>
 
-<?php echo e(@$attr['type_input'] == 'number' ? 'min=0' : ''); ?> 
+<?php echo e(@$attr['type_input'] == 'number' ? 'min=0 step=any' : ''); ?> 
 placeholder="<?php echo e(@$attr['placehoder'] ?? 'Nhập '.strtolower($note)); ?>"><?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/view_update/text.blade.php ENDPATH**/ ?>

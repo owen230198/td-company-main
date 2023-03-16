@@ -1,8 +1,10 @@
-
 @if ($pindex > 0)
-    <div class="quote_paper_item mt-3 border_main p-3 radius_5 position-relative"> 
+<div class="quote_paper_item mt-3 border_green p-3 radius_5 position-relative"> 
     <span class="remove_ext_paper_quote d-flex bg_red color_white red_btn smooth"><i class="fa fa-times" aria-hidden="true"></i></span> 
 @endif
+<div class="quote_product_structure">
+    @include('quotes.products.structure')
+</div>
     <div class="mb-2 paper_product_config">
         @if ($pindex > 0)
             @php
@@ -35,16 +37,19 @@
             ] 
         @endphp
         @include('view_update.view', $pro_paper_name)
-        <div class="d-flex align-items-center mb-2 fs-13">
-            <label class="mb-0 min_150 text-capitalize text-right mr-3">
+        {{-- <div class="d-flex align-items-center mb-2 fs-13">
+            <label class="mb-0 min_180 text-capitalize text-right mr-3">
                 <span class="fs-15 mr-1">*</span>Kích thước 
             </label>
             <div class="d-flex justify-content-between align-items-center">
-                <input type="number" name = 'product[{{ $j }}][paper][{{ $pindex }}][size][length]' placeholder="Dài" class="form-control short_input"> <span class="mx-3">X</span>
-                <input type="number" name = 'product[{{ $j }}][paper][{{ $pindex }}][size][width]' placeholder="Rộng" class="form-control short_input"> <span class="mx-3">X</span>
-                <input type="number" name = 'product[{{ $j }}][paper][{{ $pindex }}][size][height]' placeholder="Cao" class="form-control short_input">
+                <input type="number" name = 'product[{{ $j }}][paper][{{ $pindex }}][pro_size][length]' placeholder="Dài" 
+                class="form-control short_input" step="any"> <span class="mx-3">X</span>
+                <input type="number" name = 'product[{{ $j }}][paper][{{ $pindex }}][pro_size][width]' placeholder="Rộng" 
+                class="form-control short_input" step="any"> <span class="mx-3">X</span>
+                <input type="number" name = 'product[{{ $j }}][paper][{{ $pindex }}][pro_size][height]' placeholder="Cao" 
+                class="form-control short_input" step="any">
             </div>
-        </div>
+        </div> --}}
         <div class="quantity_paper_module">
             @php
                 $pro_qty_field = [
@@ -104,16 +109,19 @@
             @endphp
             @include('view_update.view', $pro_paper_quantitative)
             <div class="d-flex align-items-center mb-2 fs-13">
-                <label class="mb-0 min_150 text-capitalize text-right mr-3">
-                    <span class="fs-15 mr-1">*</span>Khổ giấy in
+                <label class="mb-0 min_180 text-capitalize text-right mr-3">
+                    <span class="fs-15 mr-1">*</span>Kích thước khổ giấy tối ưu
                 </label>
                 <div class="d-flex justify-content-between align-items-center">
-                    <input type="number" name = 'product[{{ $j }}][paper][{{ $pindex }}][size][length]' placeholder="Chiều dài" class="form-control medium_input"> <span class="mx-3">X</span>
-                    <input type="number" name = 'product[{{ $j }}][paper][{{ $pindex }}][size][width]' placeholder="Chiều rộng" class="form-control medium_input"> 
+                    <input type="number" name = 'product[{{ $j }}][paper][{{ $pindex }}][size][length]' placeholder="Chiều dài" 
+                    class="form-control medium_input" step="any"> <span class="mx-3">X</span>
+                    <input type="number" name = 'product[{{ $j }}][paper][{{ $pindex }}][size][width]' placeholder="Chiều rộng" 
+                    class="form-control medium_input" step="any"> 
                     <div class="paper_price_config_input" style="display: none">
                         <div class="d-flex align-items-center">
                             <span class="mx-3">X</span>
-                            <input type="number" name = 'product[{{ $j }}][paper][{{ $pindex }}][size][height]' placeholder="Đơn giá" class="form-control medium_input price_input_paper" disabled="disabled">
+                            <input type="number" name = 'product[{{ $j }}][paper][{{ $pindex }}][size][height]' placeholder="Đơn giá" 
+                            class="form-control medium_input price_input_paper" disabled="disabled" step="any">
                         </div>
                     </div>
                 </div>

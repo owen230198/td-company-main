@@ -1,5 +1,5 @@
 <ul class="nav nav-pills mb-3 quote_pro_nav_link" id="quote-pro-tab" role="tablist">
-    <label class="mb-0 min_150 mr-3"></label>
+    <label class="mb-0 min_180 mr-3"></label>
     <?php for($i = 0; $i < $qty; $i++): ?>
     <li class="nav-item">
         <a class="nav-link<?php echo e($i == 0 ? ' active' : ''); ?>" id="quote-pro-<?php echo e($i); ?>-tab" data-toggle="pill" href="#quote-pro-<?php echo e($i); ?>" role="tab" aria-controls="quote-pro-<?php echo e($i); ?>" aria-selected="true">Sản phẩm <?php echo e($i+1); ?></a>
@@ -30,8 +30,10 @@
                         ] 
                     ?>
                     <?php echo $__env->make('view_update.view', $pro_group_field, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                    <div class="quote_product_design_config">
+                        <?php echo $__env->make('quotes.products.papers.design', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                    </div>
                 </div>
-
                 <?php echo $__env->make('quotes.products.papers.view', ['pindex' => 0], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
             </div>
         </div>

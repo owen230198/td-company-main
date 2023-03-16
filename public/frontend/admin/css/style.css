@@ -21,9 +21,9 @@ a {
 }
 
 .form-control.medium_input{
-    max-width: 200px;
-    min-width: 200px;
-    width: 200px   
+    max-width: 170px;
+    min-width: 170px;
+    width: 170px   
 }
 
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link{
@@ -369,7 +369,7 @@ input[type="checkbox"].toggle:disabled::after {
 .basse_content{
     padding-top: 70px;
     padding-left: 210px;
-    padding-bottom: 20px;
+    padding-bottom: 60px;
     background-color: #f9f9f9;
 }
 
@@ -417,6 +417,18 @@ input[type="checkbox"].toggle:disabled::after {
     max-width: 150px;
 }
 
+.group_btn_action_form{
+    position: fixed;
+    width: calc(100% - 210px);
+    bottom: 0;
+    right: 0;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f1f4f9;
+}
+
 @page {
     size: A4;
     margin: 1cm;
@@ -441,8 +453,8 @@ input[type="checkbox"].toggle:disabled::after {
     page-break-after: always;
 }
 
-.min_150{
-    min-width: 150px;
+.min_180{
+    min-width: 180px;
 }
 
 @media (max-width: 1400px) {

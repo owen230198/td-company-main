@@ -2,7 +2,7 @@
     $type = !empty($type) ? $type : 'text';
 ?>
 <div class="form-group d-flex mb-2">
-    <label class="mb-0 min_150 fs-13 text-capitalize justify-content-end mr-3 d-flex align-items-center">
+    <label class="mb-0 min_180 fs-13 text-capitalize justify-content-end mr-3 d-flex mt-1">
         <?php if(@$attr['required'] == 1): ?>
             <span class="fs-15 mr-1">*</span>
         <?php endif; ?>

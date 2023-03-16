@@ -55,19 +55,31 @@
         const ELEVATE = 'elevate';
         const PEEL = 'peel';
         const BOX_PASTE = 'box_paste'; 
+        const TEMP_EXT = 'temp_ext';
+        const OTHER_EXT = 'other_ext';
         const HANDLE_STAGE = [
-            self::PRINT => 'Quy cách - kiểu in',
-            self::NILON => 'Cán nilon',
-            self::METALAI => 'Cán metalai',
-            self::COMPRESS => 'Ép nhũ',
-            self::FLOAT => 'Thúc nổi',
-            self::UV => 'In lưới UV',
-            self::ELEVATE => 'Máy bế',
-            self::PEEL => 'Máy bóc lề',
-            self::BOX_PASTE => 'Máy dán hộp giấy',
-            'temp_ext' => 'Phát sinh tem, toa',
-            'other_ext' => 'Phát sinh vật tư khác'
+            ['key' => self::PRINT, 'note' => 'Quy cách - kiểu in',],
+            ['key' => self::NILON, 'note' => 'Cán nilon'],
+            ['key' => self::METALAI, 'note' => 'Cán metalai'],
+            ['key' => self::COMPRESS, 'note' => 'Ép nhũ'],
+            ['key' => self::FLOAT, 'note' => 'Thúc nổi'],
+            ['key' => self::UV, 'note' => 'In lưới UV'],
+            ['key' => self::ELEVATE, 'note' => 'Máy bế'],
+            ['key' => self::PEEL, 'note' => 'Máy bóc lề'],
+            ['key' => self::BOX_PASTE, 'note' => 'Máy dán hộp giấy'],
+            ['key' => self::TEMP_EXT, 'note' => 'Phát sinh tem, toa'],
+            ['key' => self::OTHER_EXT, 'note' => 'Phát sinh vật tư khác']
         ]; 
+
+        const SIDE_LID = 1;
+        const SIDE_BOTTOM = 2;
+        const SIDE_HALF_BOTTOM = 3;
+        const PRO_SIZE_SIDE = [
+            'Chọn KT hông nắp + đáy',
+            self::SIDE_LID => 'Hông cạnh nắp',
+            self::SIDE_BOTTOM => 'Hông cạnh đáy',
+            self::SIDE_HALF_BOTTOM => 'Hông cạnh đáy 1/2'
+        ];
     }
     
 ?>

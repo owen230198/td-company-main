@@ -11,7 +11,7 @@
  Target Server Version : 100425
  File Encoding         : 65001
 
- Date: 14/03/2023 21:05:14
+ Date: 16/03/2023 15:30:17
 */
 
 SET NAMES utf8mb4;
@@ -12242,6 +12242,30 @@ INSERT INTO `customers` VALUES (1, 'KHM-00001', 'Công ty WS', 'Nguyễn Duy Kh�
 INSERT INTO `customers` VALUES (2, 'KHM-000002', 'Cong Ty Test', 'Nguyen Van A', NULL, 'Ho Chi Minh', '1', 'congtytest@gmail.com', '0987654321', '0123456789', NULL, NULL, '0', NULL, '2023-03-11 00:11:06', '2023-03-11 00:11:06', NULL);
 
 -- ----------------------------
+-- Table structure for design_types
+-- ----------------------------
+DROP TABLE IF EXISTS `design_types`;
+CREATE TABLE `design_types`  (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `act` tinyint(4) NULL DEFAULT NULL,
+  `created_by` int(10) NULL DEFAULT NULL,
+  `created_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `index`(`id`, `name`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of design_types
+-- ----------------------------
+INSERT INTO `design_types` VALUES (1, 'Thiết kế mới', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:23');
+INSERT INTO `design_types` VALUES (2, 'Chế bản', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:23');
+INSERT INTO `design_types` VALUES (3, 'File cũ có chỉnh sửa', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:23');
+INSERT INTO `design_types` VALUES (4, 'File cũ không chỉnh sửa', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:23');
+INSERT INTO `design_types` VALUES (5, 'File khách hàng gửi', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:23');
+
+-- ----------------------------
 -- Table structure for devices
 -- ----------------------------
 DROP TABLE IF EXISTS `devices`;
@@ -13614,6 +13638,35 @@ INSERT INTO `p_substances` VALUES (8, 'Giấy ngoại', 1, 1, '2022-10-31 16:19:
 INSERT INTO `p_substances` VALUES (9, 'Bạt hiplex', 1, 1, '2022-10-31 16:19:00', '2022-10-31 16:19:00');
 
 -- ----------------------------
+-- Table structure for paper_lots
+-- ----------------------------
+DROP TABLE IF EXISTS `paper_lots`;
+CREATE TABLE `paper_lots`  (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `act` tinyint(4) NULL DEFAULT NULL,
+  `created_by` int(10) NULL DEFAULT NULL,
+  `created_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `index`(`id`, `name`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of paper_lots
+-- ----------------------------
+INSERT INTO `paper_lots` VALUES (9, 'Lô 62', 1, 1, '2023-03-16 15:21:53', '2023-03-16 15:21:53');
+INSERT INTO `paper_lots` VALUES (10, 'Lô 65', 1, 1, '2023-03-16 15:21:53', '2023-03-16 15:21:53');
+INSERT INTO `paper_lots` VALUES (11, 'Lô 72', 1, 1, '2023-03-16 15:21:53', '2023-03-16 15:21:53');
+INSERT INTO `paper_lots` VALUES (12, 'Lô 75', 1, 1, '2023-03-16 15:21:53', '2023-03-16 15:21:53');
+INSERT INTO `paper_lots` VALUES (13, 'Lô 79', 1, 1, '2023-03-16 15:21:53', '2023-03-16 15:21:53');
+INSERT INTO `paper_lots` VALUES (14, 'Lô 86', 1, 1, '2023-03-16 15:21:53', '2023-03-16 15:21:53');
+INSERT INTO `paper_lots` VALUES (15, 'Lô 90', 1, 1, '2023-03-16 15:21:53', '2023-03-16 15:21:53');
+INSERT INTO `paper_lots` VALUES (16, 'Lô 96', 1, 1, '2023-03-16 15:21:53', '2023-03-16 15:21:53');
+INSERT INTO `paper_lots` VALUES (17, 'Lô 102', 1, 1, '2023-03-16 15:21:53', '2023-03-16 15:21:53');
+INSERT INTO `paper_lots` VALUES (18, 'Lô 109', 1, 1, '2023-03-16 15:21:53', '2023-03-16 15:21:53');
+
+-- ----------------------------
 -- Table structure for paper_materals
 -- ----------------------------
 DROP TABLE IF EXISTS `paper_materals`;
@@ -14211,28 +14264,6 @@ INSERT INTO `qs_shipping_types` VALUES (1, 'Ghép xe', 1, 1, '2023-03-11 15:10:2
 INSERT INTO `qs_shipping_types` VALUES (2, 'Nguyên xe', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:25');
 
 -- ----------------------------
--- Table structure for qs_type_designs
--- ----------------------------
-DROP TABLE IF EXISTS `qs_type_designs`;
-CREATE TABLE `qs_type_designs`  (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `act` tinyint(4) NULL DEFAULT NULL,
-  `created_by` int(10) NULL DEFAULT NULL,
-  `created_at` datetime(0) NULL DEFAULT NULL,
-  `updated_at` datetime(0) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  INDEX `index`(`id`, `name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of qs_type_designs
--- ----------------------------
-INSERT INTO `qs_type_designs` VALUES (1, 'Thiết kế mới', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:25');
-INSERT INTO `qs_type_designs` VALUES (2, 'Chỉnh sửa file', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:25');
-INSERT INTO `qs_type_designs` VALUES (3, 'Chế bản lại', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:25');
-
--- ----------------------------
 -- Table structure for quotes
 -- ----------------------------
 DROP TABLE IF EXISTS `quotes`;
@@ -14241,10 +14272,7 @@ CREATE TABLE `quotes`  (
   `seri` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `status` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `qty_pro` bigint(20) NULL DEFAULT NULL,
-  `size` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `print_model` tinyint(4) NULL DEFAULT NULL,
-  `paper_materal` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `product_qty` bigint(20) NULL DEFAULT NULL,
   `customer_id` int(10) NULL DEFAULT NULL,
   `company_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `contacter` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
@@ -14253,8 +14281,6 @@ CREATE TABLE `quotes`  (
   `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `telephone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `city` int(10) NULL DEFAULT NULL,
-  `group_product` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `n_user_id` int(10) NULL DEFAULT NULL,
   `profit` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `ship_price` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `total_cost` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
@@ -14271,7 +14297,29 @@ CREATE TABLE `quotes`  (
 -- ----------------------------
 -- Records of quotes
 -- ----------------------------
-INSERT INTO `quotes` VALUES (1, 'BG-000001', 'not_accepted', 'Công ty WS', NULL, NULL, NULL, NULL, 1, 'Công ty WS', 'Nguyễn Duy Khánh', '360 Mieng Ha, Hoa Sơn, Ung Hoa, TP Ha Noi', 'nguyenduykhanh2323@gmail.com', '0378050251', '0223344556', 351, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
-INSERT INTO `quotes` VALUES (2, 'BG-000002', 'not_accepted', 'Cong Ty Test', NULL, NULL, NULL, NULL, 2, 'Cong Ty Test', 'Nguyen Van A', 'Ho Chi Minh', 'congtytest@gmail.com', '0987654321', '0123456789', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `quotes` VALUES (1, 'BG-000001', 'not_accepted', 'Công ty WS', NULL, 1, 'Công ty WS', 'Nguyễn Duy Khánh', '360 Mieng Ha, Hoa Sơn, Ung Hoa, TP Ha Noi', 'nguyenduykhanh2323@gmail.com', '0378050251', '0223344556', 351, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `quotes` VALUES (2, 'BG-000002', 'not_accepted', 'Cong Ty Test', NULL, 2, 'Cong Ty Test', 'Nguyen Van A', 'Ho Chi Minh', 'congtytest@gmail.com', '0987654321', '0123456789', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
+
+-- ----------------------------
+-- Table structure for uv_inks
+-- ----------------------------
+DROP TABLE IF EXISTS `uv_inks`;
+CREATE TABLE `uv_inks`  (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `price` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `act` tinyint(4) NULL DEFAULT NULL,
+  `created_by` int(10) NULL DEFAULT NULL,
+  `created_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `index`(`id`, `name`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of uv_inks
+-- ----------------------------
+INSERT INTO `uv_inks` VALUES (1, 'Mực bóng', NULL, 1, 1, '2023-03-15 09:45:23', '2023-03-15 09:45:25');
+INSERT INTO `uv_inks` VALUES (2, 'Mực sần cát', NULL, 1, 1, '2023-03-15 09:45:23', '2023-03-15 09:45:25');
 
 SET FOREIGN_KEY_CHECKS = 1;

@@ -22,6 +22,7 @@ class QuoteService extends BaseService
 
     public function insertCustomerQuote($customer_id, $data_customer)
     {
+        $this->conFigBaseDataAction($data_customer);
         $data_quote = $data_customer;
         if (empty($customer_id)) {
             $data_customer['code'] = Customer::getInsertCode();

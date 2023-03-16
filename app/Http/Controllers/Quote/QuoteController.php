@@ -38,10 +38,14 @@ class QuoteController extends Controller
                 }
             }
         }else{
-            $data['title'] = 'Tạo mới báo giá - Chi tiết sản phẩm và sản xuất';
-            $data['customer_fields'] = Customer::FIELD_UPDATE;
-            $data['data_quote'] = Quote::find($request->input('id'));
-            return view('quotes.'.$step, $data);   
+            if (!$request->isMethod('POST')) {
+                $data['title'] = 'Tạo mới báo giá - Chi tiết sản phẩm và sản xuất';
+                $data['customer_fields'] = Customer::FIELD_UPDATE;
+                $data['data_quote'] = Quote::find($request->input('id'));
+                return view('quotes.'.$step, $data);
+            }else{
+                dd($request->except('_token', 'step'));
+            }   
         }
     }
 
