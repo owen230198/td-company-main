@@ -231,9 +231,9 @@ var menuSidebar = function()
     });
 }
 
-var selectAjaxModule = function(section = '.basse_content ')
+var selectAjaxModule = function(section = $('.basse_content '))
 {
-    let select_ajax = $(section).find('select.select_ajax');
+    let select_ajax = section.find('select.select_ajax');
     if (select_ajax.length > 0) {
         select_ajax.each(function(){
             let url = $(this).data('url');
@@ -276,9 +276,9 @@ var phoneInputPrevent = function () {
     });
 };
 
-var multipleSelectModule = function(section = '.basse_content')
+var multipleSelectModule = function(section = $('.basse_content'))
 {
-    let select_multiple = $(section).find('select.multiple_select');
+    let select_multiple = section.find('select.multiple_select');
     if (select_multiple.length > 0) {
         select_multiple.each(function(){
             let note = $(this).data('note')

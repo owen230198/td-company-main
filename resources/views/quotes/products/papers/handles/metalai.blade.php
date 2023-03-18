@@ -19,4 +19,4 @@
 @endphp
 @include('view_update.view', $paper_metalai_face)
 
-@include('quotes.products.papers.handles.device_note', ['key_device' => $key_stage])
+@include('quotes.products.papers.handles.select_device', ['key_device' => $key_stage])

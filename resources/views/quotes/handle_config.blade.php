@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="{{ asset('frontend/base/css/bootstrap-multiselect.min.css') }}">
 @endsection
 @section('content')
-    <form action="{{ asset('create-quote?step=handle_config&id='.$data_quote['id']) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ asset('create-quote?step=handle_config&id='.$data_quote['id']) }}" method="POST" class="config_handle_form" enctype="multipart/form-data">
         @csrf
         <div class="quote_handle_section mb-3">
             <h3 class="fs-14 text-uppercase pb-1 mb-3 text-center quote_handle_title">
@@ -37,7 +37,7 @@
             @endphp
             @include('view_update.view', $quote_pro_qty_field)
             <div class="ajax_product_quote_number">
-                @include('quotes.products.ajax_view', ['qty' => 2])       
+                  
             </div>
         </div>
         <div class="group_btn_action_form text-center">

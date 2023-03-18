@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="<?php echo e(asset('frontend/base/css/bootstrap-multiselect.min.css')); ?>">
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
-    <form action="<?php echo e(asset('create-quote?step=handle_config&id='.$data_quote['id'])); ?>" method="POST" enctype="multipart/form-data">
+    <form action="<?php echo e(asset('create-quote?step=handle_config&id='.$data_quote['id'])); ?>" method="POST" class="config_handle_form" enctype="multipart/form-data">
         <?php echo csrf_field(); ?>
         <div class="quote_handle_section mb-3">
             <h3 class="fs-14 text-uppercase pb-1 mb-3 text-center quote_handle_title">
@@ -36,7 +36,7 @@
             ?>
             <?php echo $__env->make('view_update.view', $quote_pro_qty_field, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
             <div class="ajax_product_quote_number">
-                <?php echo $__env->make('quotes.products.ajax_view', ['qty' => 2], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>       
+                  
             </div>
         </div>
         <div class="group_btn_action_form text-center">

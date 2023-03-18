@@ -33,7 +33,14 @@ a {
 .nav-pills .nav-link{
     color: #333;
     font-weight: 600;
-    font
+}
+
+.nav-pills .nav-link.green_stage{
+    color: #459300;
+}
+
+.nav-pills .nav-link.green_stage.active{
+    color:#ffffff;
 }
 
 .smooth{
@@ -427,6 +434,11 @@ input[type="checkbox"].toggle:disabled::after {
     justify-content: center;
     align-items: center;
     background: #f1f4f9;
+}
+
+.form-control.readonly{
+    pointer-events: none;
+    background: #f1f1f1;
 }
 
 @page {

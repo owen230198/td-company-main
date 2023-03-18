@@ -22,7 +22,7 @@
         ] 
     ?>
     <?php echo $__env->make('view_update.view', $paper_compress_shape_price, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-    <span class="ml-2 fs-12 font-italic color_red">Giá khuôn/bát sp (không phả giá khuôn/ tờ in)</span>
+    <span class="ml-2 fs-12 font-italic color_red">Giá khuôn/bát sp (không phả giá khuôn/tờ in)</span>
 </div>
 
-<?php echo $__env->make('quotes.products.papers.handles.device_note', ['key_device' => $key_stage], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/quotes/products/papers/handles/compress.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('quotes.products.papers.handles.select_device', ['key_device' => $key_stage], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/quotes/products/papers/handles/compress.blade.php ENDPATH**/ ?>

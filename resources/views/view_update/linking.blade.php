@@ -16,7 +16,7 @@
         }
     @endphp
     <select name="{{ $name }}" class="form-control select_ajax {{ @$attr['inject_class'] ? ' '.$attr['inject_class'] : '' }}"
-    data-url="{{ $url }}" data-id="{{ @$data_id }}", data-label = "{{ @$data_label }}">
+    data-url="{{ $url }}" data-id="{{ @$data_id }}", data-label = "{{ @$data_label }}" {{ @$attr['inject_attr'] ?? '' }}>
     </select>
 @else
     @php
@@ -24,10 +24,12 @@
         $field_value = @$select_data['select_data'] ?? 'id';
         $field_title = @$select_data['field_title'] ?? 'name';
     @endphp
-    <select name="{{ $name }}" class="form-control {{ @$attr['inject_class'] ? ' '.$attr['inject_class'] : '' }}">
+    <select name="{{ $name }}" class="form-control {{ @$attr['inject_class'] ? ' '.$attr['inject_class'] : '' }}" {{ @$attr['inject_attr'] ?? '' }}>
         <option value="0">Chọn {{ $note }}</option>
         @foreach ($list_options as $item)
-            <option value="{{ $item->$field_value }}">{{ $item->$field_title }}</option>
+            <option value="{{ $item->$field_value }}" {{ $item->$field_value == @$value ? 'selected' : '' }}>
+                {{ $item->$field_title }}
+            </option>
         @endforeach
     </select>
 @endif

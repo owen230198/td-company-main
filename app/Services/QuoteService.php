@@ -35,4 +35,24 @@ class QuoteService extends BaseService
         $data_quote['status'] = StatusConstant::NOT_ACCEPTED;
         return Quote::insertGetId($data_quote);
     }
+
+    public function getPaperSizeAjax(&$data){
+        $data['size_length'] = (($data['length'] + $data['width']) * 2 + $data['edge']) * $data['nqty_length'];
+        if ($data['nqty_height'] > 1 && $data['nqty_height'] < 7) {
+            $data['size_height']  = $data['height'] + 0 + $data['lid'] + $data['nqty_space']; 
+        }else{
+            $data['size_height'] = ($data['height'] + 0 + $data['lid'] + $data['bottom']);
+        }
+        $temp_length = $data['size_length'] + 10;
+        $temp_height = $data['size_height'] + 10;
+        if ($temp_length < $temp_height) {
+            $temp_length = $temp_length + $data['min_paper_size'];
+        }else{
+            $temp_height = $temp_height + $data['min_paper_size']; 
+        }
+        $data['temp_length'] = $temp_length / 10;
+        $data['temp_height'] = $temp_height / 10;
+        $data['optimal_length'] = $temp_length / 1000;
+        $data['optimal_width'] = $temp_height / 1000;
+    }
 }

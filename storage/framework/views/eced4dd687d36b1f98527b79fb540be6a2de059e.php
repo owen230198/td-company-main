@@ -26,6 +26,7 @@
                             'name' => 'product['.$j.'][group]',
                             'type' => 'linking',
                             'note' => 'Nhóm sản phẩm',
+                            'attr' => ['inject_class' => 'select_quote_procategory', 'inject_attr' => 'proindex='.$j],
                             'other_data' => ['config' => ['search' => 1], 'data' => ['table' => 'product_categories']]
                         ] 
                     ?>
@@ -34,7 +35,9 @@
                         <?php echo $__env->make('quotes.products.papers.design', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                     </div>
                 </div>
-                <?php echo $__env->make('quotes.products.papers.view', ['pindex' => 0], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                <div class="ajax_product_view_by_category mt-4">
+                   
+                </div>
             </div>
         </div>
     <?php endfor; ?>

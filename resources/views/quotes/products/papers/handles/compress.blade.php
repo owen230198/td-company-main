@@ -22,7 +22,7 @@
         ] 
     @endphp
     @include('view_update.view', $paper_compress_shape_price)
-    <span class="ml-2 fs-12 font-italic color_red">Giá khuôn/bát sp (không phả giá khuôn/ tờ in)</span>
+    <span class="ml-2 fs-12 font-italic color_red">Giá khuôn/bát sp (không phả giá khuôn/tờ in)</span>
 </div>
 
-@include('quotes.products.papers.handles.device_note', ['key_device' => $key_stage])
+@include('quotes.products.papers.handles.select_device', ['key_device' => $key_stage])

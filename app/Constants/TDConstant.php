@@ -55,20 +55,19 @@
         const ELEVATE = 'elevate';
         const PEEL = 'peel';
         const BOX_PASTE = 'box_paste'; 
-        const TEMP_EXT = 'temp_ext';
-        const OTHER_EXT = 'other_ext';
+        const EXT_PRICE = 'ext_price';
+        const MILL = 'mill';
         const HANDLE_STAGE = [
-            ['key' => self::PRINT, 'note' => 'Quy cách - kiểu in',],
-            ['key' => self::NILON, 'note' => 'Cán nilon'],
-            ['key' => self::METALAI, 'note' => 'Cán metalai'],
-            ['key' => self::COMPRESS, 'note' => 'Ép nhũ'],
-            ['key' => self::FLOAT, 'note' => 'Thúc nổi'],
-            ['key' => self::UV, 'note' => 'In lưới UV'],
-            ['key' => self::ELEVATE, 'note' => 'Máy bế'],
-            ['key' => self::PEEL, 'note' => 'Máy bóc lề'],
-            ['key' => self::BOX_PASTE, 'note' => 'Máy dán hộp giấy'],
-            ['key' => self::TEMP_EXT, 'note' => 'Phát sinh tem, toa'],
-            ['key' => self::OTHER_EXT, 'note' => 'Phát sinh vật tư khác']
+            ['key' => self::PRINT, 'note' => 'Quy cách - kiểu in', 'color' => 'green'],
+            ['key' => self::NILON, 'note' => 'Cán nilon', 'color' => 'green'],
+            ['key' => self::ELEVATE, 'note' => 'Máy bế', 'color' => 'green'],
+            ['key' => self::PEEL, 'note' => 'Máy bóc lề', 'color' => 'green'],
+            ['key' => self::BOX_PASTE, 'note' => 'Máy dán hộp giấy', 'color' => 'green'],
+            ['key' => self::METALAI, 'note' => 'Cán metalai', 'color' => 'red'],
+            ['key' => self::COMPRESS, 'note' => 'Ép nhũ', 'color' => 'red'],
+            ['key' => self::FLOAT, 'note' => 'Thúc nổi', 'color' => 'red'],
+            ['key' => self::UV, 'note' => 'In lưới UV', 'color' => 'red'],
+            ['key' => self::EXT_PRICE, 'note' => 'Phát sinh', 'color' => 'red']
         ]; 
 
         const SIDE_LID = 1;
@@ -80,6 +79,36 @@
             self::SIDE_BOTTOM => 'Hông cạnh đáy',
             self::SIDE_HALF_BOTTOM => 'Hông cạnh đáy 1/2'
         ];
+
+        // Thông số bù hao
+        const COMPEN_PERCENT = 1;
+        const COMPEN_NUM = 100;
+        const CARTON_COMPEN_PERCENT = 1;
+        const CARTON_COMPEN_NUM = 50;
+
+        //Loại thiết bị
+        const AUTO_DEVICE = 1;
+        const SEMI_AUTO_DEVICE = 2;
+
+        //Cấu tạo sản phẩm
+        const PAPER_ELEMENT = [['key' => 'papers', 'note' => 'Giấy in']];
+        const HARD_ELEMENT = [
+            ['key' => 'papers', 'note' => 'Giấy in'],
+            ['key' => 'cartons', 'note' => 'Carton'],
+            ['key' => 'rubbers', 'note' => 'Cao su non'],
+            ['key' => 'decals', 'note' => 'Đề can nhung'],
+            ['key' => 'silks', 'note' => 'Vải lụa'],
+            ['key' => 'styrofoams', 'note' => 'Mút phẳng'],
+            ['key' => 'micaes', 'note' => 'Me Ka'],
+            ['key' => 'fill_finishes', 'note' => 'Bồi + hoàn thiện'] 
+        ];
+
+        //Vật tư định lượng
+        const CARTON_SUPP = 1;
+        const RUBB_SUPP = 2;
+        const STYRO_SUPP = 3;
+        const SILK_SUPP = 4;
+        const DECAL_SUPP = 5;
     }
     
 ?>

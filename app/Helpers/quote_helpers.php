@@ -50,4 +50,21 @@ if (!function_exists('getExactQuantityPaper')) {
 			};
 		}
 	}
+
+	if (!function_exists('getDeviceIdByKey')) {
+		function getDeviceIdByKey($key, $type = \App\Constants\TDConstant::SEMI_AUTO_DEVICE)
+		{
+			$device = \DB::table('devices')->select('id')->where(['act' => 1, 'key_device' => $key, 'type' => $type])->first();
+			return @$device->id ?? 0;
+
+		}
+	}
+
+	if (!function_exists('getDefaultMateralIDByKey')) {
+		function getDefaultMateralIDByKey($key)
+		{
+			$materal = \DB::table('materals')->select('id')->where(['act' => 1, 'materal_key' => $key, 'default' => 1])->first();
+			return $materal->id;
+		}
+	}
 }

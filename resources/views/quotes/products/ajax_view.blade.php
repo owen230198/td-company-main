@@ -26,6 +26,7 @@
                             'name' => 'product['.$j.'][group]',
                             'type' => 'linking',
                             'note' => 'Nhóm sản phẩm',
+                            'attr' => ['inject_class' => 'select_quote_procategory', 'inject_attr' => 'proindex='.$j],
                             'other_data' => ['config' => ['search' => 1], 'data' => ['table' => 'product_categories']]
                         ] 
                     @endphp
@@ -34,7 +35,9 @@
                         @include('quotes.products.papers.design')
                     </div>
                 </div>
-                @include('quotes.products.papers.view', ['pindex' => 0])
+                <div class="ajax_product_view_by_category mt-4">
+                   
+                </div>
             </div>
         </div>
     @endfor

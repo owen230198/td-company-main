@@ -43,6 +43,9 @@ Route::middleware(['check_login'])->group(function () {
 	Route::get('get-view-customer-data', [QuoteController::class, 'getViewCustomerData']);
 	Route::get('get-view-product-quantity', [QuoteController::class, 'getViewProductQuantity']);
 	Route::get('add-print-paper-quote', [QuoteController::class, 'addPrintPaperQuote']);
+	Route::get('compute-paper-size', [QuoteController::class, 'computePaperSize']);
+	Route::get('get-view-product-structure', [QuoteController::class, 'getViewProductStructure']);
+
 
 	//orders routes
 	Route::get('set-quantity-order-products', [OrderController::class, 'setListProductView']);

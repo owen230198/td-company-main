@@ -5,9 +5,10 @@ var changQtyInput = function(){
     let qty_pro = parseInt(parent.find('input.pro_qty_input').val());
     let nqty = parseInt(parent.find('input.pro_nqty_input').val());
     let qty_paper = Math.ceil(qty_pro/nqty)
-    let addqty = Math.ceil(qty_paper*10/100);
-    parent.find('input.paper_qty_input').val(qty_paper);
-    parent.find('input.total_paper_qty_input').val(qty_paper+addqty);
+    let compen_percent = parent.data('percent');
+    let compen_num = parent.data('num');
+    let addqty = Math.ceil(qty_paper*compen_percent/100) + compen_num;
+    parent.find('input.paper_qty_input').val(qty_paper + addqty);
    });
 }
 
@@ -81,7 +82,7 @@ var selectCustomerQuote = function()
     .done(function(html){
       console.log($(this).parent());
       $('.customer_info_quote').html(html);
-      selectAjaxModule('.customer_info_quote');
+      selectAjaxModule($('.customer_info_quote'));
     });
   })
 }
@@ -113,7 +114,7 @@ var moduleInputQuantityProduct = function()
       let url = 'get-view-product-quantity?quantity='+$(this).val();
       let ajax_target = $(this).closest('.quote_handle_section.handle_pro_section').find('.ajax_product_quote_number');
       let section_class = '.ajax_product_quote_number';
-      ajaxViewTarget(url, ajax_target, section_class);
+      ajaxViewTarget(url, ajax_target, ajax_target);
     }
   });
 }
@@ -128,8 +129,7 @@ var addPrintPaperModule = function()
     let paper_index = item.length;
     let paper_name = $(this).closest('.section_quote_print_paper').find('input.quote_receive_paper_name_main').val();
     let url = 'add-print-paper-quote?pro_index='+pro_index+'&paper_index='+paper_index+'&paper_name='+paper_name;
-    let section_class = '.list_paper_config';
-    ajaxViewTarget(url, list_section, section_class, 2);
+    ajaxViewTarget(url, list_section, list_section, 2);
   });
 }
 
@@ -163,6 +163,40 @@ var selectExtNamePaperModule = function()
   });
 }
 
+var autoComputePaperAjax = function()
+{
+  $(document).on('click', 'button.auto_computed_btn', function(event){
+    event.preventDefault();
+    let data = $(this).closest('.quote_product_structure').find('.struture_pro_input').serialize();
+    let paper_name = $(this).closest('.section_quote_print_paper').find('input.quote_receive_paper_name_main').val();
+    let proindex = $(this).data('proindex');
+    let paperindex = $(this).data('paperindex');
+    let section = $(this).closest('.quote_paper_item');
+    $('#loader').fadeIn(200);
+    $.ajax({
+      url: 'compute-paper-size?paper_name='+paper_name+'&proindex='+proindex+'paperindex='+paperindex,
+      type: 'GET',
+      data: data
+    })
+    .done(function(html){
+      section.html(html);
+      initInputModuleAfterAjax(section);
+      $('#loader').delay(200).fadeOut(500); 
+    })
+  });
+}
+
+var selectProductCategory = function()
+{
+  $(document).on('change', 'select.select_quote_procategory', function(event){
+    event.preventDefault();
+    let proindex = $(this).attr('proindex');
+    let url = 'get-view-product-structure?category='+$(this).val()+'&proindex='+proindex;
+    section = $(this).closest('.config_handle_paper_pro').find('.ajax_product_view_by_category');
+    ajaxViewTarget(url, section, section);
+  });
+}
+
 $(function(){
 	changQtyInput();
   moduleSelectOtherPaper();
@@ -174,4 +208,6 @@ $(function(){
   removePrintPaperModule();
   setNameProductQuote();
   selectExtNamePaperModule();
+  selectProductCategory();
+  // autoComputePaperAjax();
 });

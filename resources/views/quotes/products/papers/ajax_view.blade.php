@@ -3,7 +3,6 @@
     <span class="remove_ext_paper_quote d-flex bg_red color_white red_btn smooth"><i class="fa fa-times" aria-hidden="true"></i></span> 
 @endif
 <div class="quote_product_structure">
-    @include('quotes.products.structure')
 </div>
     <div class="mb-2 paper_product_config">
         @if ($pindex > 0)
@@ -37,20 +36,20 @@
             ] 
         @endphp
         @include('view_update.view', $pro_paper_name)
-        {{-- <div class="d-flex align-items-center mb-2 fs-13">
-            <label class="mb-0 min_180 text-capitalize text-right mr-3">
-                <span class="fs-15 mr-1">*</span>Kích thước 
-            </label>
-            <div class="d-flex justify-content-between align-items-center">
-                <input type="number" name = 'product[{{ $j }}][paper][{{ $pindex }}][pro_size][length]' placeholder="Dài" 
-                class="form-control short_input" step="any"> <span class="mx-3">X</span>
-                <input type="number" name = 'product[{{ $j }}][paper][{{ $pindex }}][pro_size][width]' placeholder="Rộng" 
-                class="form-control short_input" step="any"> <span class="mx-3">X</span>
-                <input type="number" name = 'product[{{ $j }}][paper][{{ $pindex }}][pro_size][height]' placeholder="Cao" 
-                class="form-control short_input" step="any">
-            </div>
-        </div> --}}
-        <div class="quantity_paper_module">
+        
+        @php
+            $pro_paper_size = [
+                'name' => 'product['.$j.'][paper]['.$pindex.'][size]',
+                'note' => 'Kích thước hộp'
+            ]
+        @endphp
+        @include('view_update.view', $pro_paper_name)
+        @php
+            $compen_percent = \App\Constants\TDConstant::COMPEN_PERCENT;
+            $compen_num = \App\Constants\TDConstant::COMPEN_NUM;
+        @endphp
+        
+        <div class="quantity_paper_module" data-percent = {{ $compen_percent }} data-num = {{ $compen_num }}>
             @php
                 $pro_qty_field = [
                     'name' => 'product['.$j.'][paper]['.$pindex.'][qty]',
@@ -65,7 +64,7 @@
                     'name' => 'product['.$j.'][paper]['.$pindex.'][nqty]',
                     'note' => 'Số bát/tờ in',
                     'attr' => ['type_input' => 'number', 'required' => 1, 'inject_class' => 'pro_nqty_input paper_qty_modul_input'],
-                    'value' => 1
+                    'value' => @$pro_size['nqty'] ?? 1
                 ] 
             @endphp
             @include('view_update.view', $pro_nqty_field)
@@ -73,20 +72,14 @@
             @php
                 $pro_paper_qty = [
                     'name' => 'product['.$j.'][paper]['.$pindex.'][paper_qty]',
-                    'note' => 'Tờ in chuẩn',
+                    'note' => 'Số lượng tờ in',
                     'attr' => ['type_input' => 'number', 'inject_class' => 'paper_qty_input'],
                 ] 
             @endphp
-            @include('view_update.view', $pro_paper_qty) 
-
-            @php
-                $pro_total_paper_qty = [
-                    'name' => 'product['.$j.'][paper]['.$pindex.'][total_paper_qty]',
-                    'note' => 'Tổng cả BH',
-                    'attr' => ['type_input' => 'number', 'inject_class' => 'total_paper_qty_input']
-                ] 
-            @endphp
-            @include('view_update.view', $pro_total_paper_qty)
+            <div class="d-flex align-items-center">
+                @include('view_update.view', $pro_paper_qty)
+                <span class="ml-1 color_gray">Thêm {{ $compen_percent }} % + {{ $compen_num }} BH</span>
+            </div> 
         </div>
         <div class="materal_paper_module">
             @php
@@ -113,10 +106,12 @@
                     <span class="fs-15 mr-1">*</span>Kích thước khổ giấy tối ưu
                 </label>
                 <div class="d-flex justify-content-between align-items-center">
-                    <input type="number" name = 'product[{{ $j }}][paper][{{ $pindex }}][size][length]' placeholder="Chiều dài" 
-                    class="form-control medium_input" step="any"> <span class="mx-3">X</span>
-                    <input type="number" name = 'product[{{ $j }}][paper][{{ $pindex }}][size][width]' placeholder="Chiều rộng" 
-                    class="form-control medium_input" step="any"> 
+                    <input type="number" name = 'product[{{ $j }}][paper][{{ $pindex }}][size][length]' placeholder="Chiều dài (cm)" 
+                    class="form-control medium_input" step="any" value="{{ @$pro_size['optimal_length'] }}"> 
+                    <span class="mx-3">X</span>
+                    <input type="number" name = 'product[{{ $j }}][paper][{{ $pindex }}][size][width]' placeholder="Chiều rộng (cm)" 
+                    class="form-control medium_input" step="any"
+                    value="{{ @$pro_size['optimal_width'] }}"> 
                     <div class="paper_price_config_input" style="display: none">
                         <div class="d-flex align-items-center">
                             <span class="mx-3">X</span>

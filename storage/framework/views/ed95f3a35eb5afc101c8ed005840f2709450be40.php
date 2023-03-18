@@ -3,7 +3,6 @@
     <span class="remove_ext_paper_quote d-flex bg_red color_white red_btn smooth"><i class="fa fa-times" aria-hidden="true"></i></span> 
 <?php endif; ?>
 <div class="quote_product_structure">
-    <?php echo $__env->make('quotes.products.structure', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 </div>
     <div class="mb-2 paper_product_config">
         <?php if($pindex > 0): ?>
@@ -38,7 +37,19 @@
         ?>
         <?php echo $__env->make('view_update.view', $pro_paper_name, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         
-        <div class="quantity_paper_module">
+        <?php
+            $pro_paper_size = [
+                'name' => 'product['.$j.'][paper]['.$pindex.'][size]',
+                'note' => 'Kích thước hộp'
+            ]
+        ?>
+        <?php echo $__env->make('view_update.view', $pro_paper_name, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        <?php
+            $compen_percent = \App\Constants\TDConstant::COMPEN_PERCENT;
+            $compen_num = \App\Constants\TDConstant::COMPEN_NUM;
+        ?>
+        
+        <div class="quantity_paper_module" data-percent = <?php echo e($compen_percent); ?> data-num = <?php echo e($compen_num); ?>>
             <?php
                 $pro_qty_field = [
                     'name' => 'product['.$j.'][paper]['.$pindex.'][qty]',
@@ -53,7 +64,7 @@
                     'name' => 'product['.$j.'][paper]['.$pindex.'][nqty]',
                     'note' => 'Số bát/tờ in',
                     'attr' => ['type_input' => 'number', 'required' => 1, 'inject_class' => 'pro_nqty_input paper_qty_modul_input'],
-                    'value' => 1
+                    'value' => @$pro_size['nqty'] ?? 1
                 ] 
             ?>
             <?php echo $__env->make('view_update.view', $pro_nqty_field, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
@@ -61,20 +72,14 @@
             <?php
                 $pro_paper_qty = [
                     'name' => 'product['.$j.'][paper]['.$pindex.'][paper_qty]',
-                    'note' => 'Tờ in chuẩn',
+                    'note' => 'Số lượng tờ in',
                     'attr' => ['type_input' => 'number', 'inject_class' => 'paper_qty_input'],
                 ] 
             ?>
-            <?php echo $__env->make('view_update.view', $pro_paper_qty, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?> 
-
-            <?php
-                $pro_total_paper_qty = [
-                    'name' => 'product['.$j.'][paper]['.$pindex.'][total_paper_qty]',
-                    'note' => 'Tổng cả BH',
-                    'attr' => ['type_input' => 'number', 'inject_class' => 'total_paper_qty_input']
-                ] 
-            ?>
-            <?php echo $__env->make('view_update.view', $pro_total_paper_qty, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+            <div class="d-flex align-items-center">
+                <?php echo $__env->make('view_update.view', $pro_paper_qty, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                <span class="ml-1 color_gray">Thêm <?php echo e($compen_percent); ?> % + <?php echo e($compen_num); ?> BH</span>
+            </div> 
         </div>
         <div class="materal_paper_module">
             <?php
@@ -101,10 +106,12 @@
                     <span class="fs-15 mr-1">*</span>Kích thước khổ giấy tối ưu
                 </label>
                 <div class="d-flex justify-content-between align-items-center">
-                    <input type="number" name = 'product[<?php echo e($j); ?>][paper][<?php echo e($pindex); ?>][size][length]' placeholder="Chiều dài" 
-                    class="form-control medium_input" step="any"> <span class="mx-3">X</span>
-                    <input type="number" name = 'product[<?php echo e($j); ?>][paper][<?php echo e($pindex); ?>][size][width]' placeholder="Chiều rộng" 
-                    class="form-control medium_input" step="any"> 
+                    <input type="number" name = 'product[<?php echo e($j); ?>][paper][<?php echo e($pindex); ?>][size][length]' placeholder="Chiều dài (cm)" 
+                    class="form-control medium_input" step="any" value="<?php echo e(@$pro_size['optimal_length']); ?>"> 
+                    <span class="mx-3">X</span>
+                    <input type="number" name = 'product[<?php echo e($j); ?>][paper][<?php echo e($pindex); ?>][size][width]' placeholder="Chiều rộng (cm)" 
+                    class="form-control medium_input" step="any"
+                    value="<?php echo e(@$pro_size['optimal_width']); ?>"> 
                     <div class="paper_price_config_input" style="display: none">
                         <div class="d-flex align-items-center">
                             <span class="mx-3">X</span>

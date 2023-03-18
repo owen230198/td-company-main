@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Customer;
 use App\Models\Quote;
+use App\Constants\TDConstant;
 class QuoteController extends Controller
 {
     private $services;
@@ -73,6 +74,28 @@ class QuoteController extends Controller
         $paper_index = (int) $request->input('paper_index');
         $paper_name = $request->input('paper_name');
         return view('quotes.products.papers.ajax_view', ['j' => $pro_index, 'pindex' => $paper_index, 'paper_name' => $paper_name]);
+    }
+
+    public function computePaperSize(Request $request)
+    {
+        $product = collect($request->input('product'))->first();
+        $paper = collect($product['paper'])->first();
+        $this->services->getPaperSizeAjax($paper['pro_size']);
+        $pro_index = (int) $request->input('proindex');
+        $paper_index = (int) $request->input('paperindex');
+        $paper_name = $request->input('paper_name');
+        return view('quotes.products.papers.ajax_view', ['j' => $pro_index, 'pindex' => $paper_index, 'paper_name' => $paper_name, 'pro_size' => $paper['pro_size']]);
+    }
+
+    public function getViewProductStructure(Request $request)
+    {
+        $cate = $request->input('category');
+        if (!empty($cate)) {
+            $data['elements'] = $cate == 1 ? TDConstant::HARD_ELEMENT : TDConstant::PAPER_ELEMENT;
+            $data['j'] = (int) $request->input('proindex');
+            $data['pindex'] = 0;
+            return view('quotes.products.structure', $data);
+        }
     }
 }
 
