@@ -22,18 +22,36 @@
                     @include('view_update.view', $pro_name_field)
                     
                     @php
-                        $pro_group_field = [
-                            'name' => 'product['.$j.'][group]',
+                        $pro_category_field = [
+                            'name' => 'product['.$j.'][category]',
                             'type' => 'linking',
                             'note' => 'Nhóm sản phẩm',
-                            'attr' => ['inject_class' => 'select_quote_procategory', 'inject_attr' => 'proindex='.$j],
+                            'attr' => ['required' => 1 , 'inject_class' => 'select_quote_procategory', 'inject_attr' => 'proindex='.$j],
                             'other_data' => ['config' => ['search' => 1], 'data' => ['table' => 'product_categories']]
                         ] 
                     @endphp
-                    @include('view_update.view', $pro_group_field)
+                    @include('view_update.view', $pro_category_field)
+
                     <div class="quote_product_design_config">
-                        @include('quotes.products.papers.design')
+                        @php
+                            $quote_pro_design = [
+                                'name' => 'product['.$j.'][design]',
+                                'note' => 'thiết kế',
+                                'type' => 'linking',
+                                'other_data' => ['data' => ['table' => 'design_types', 'select' => ['id', 'name']]]
+                            ]
+                        @endphp
+                        @include('view_update.view', $quote_pro_design)
                     </div>
+
+                    @php
+                        $pro_size_field = [
+                            'name' => 'product['.$j.'][size]',
+                            'note' => 'Kích thước hộp',
+                            'attr' => ['placeholder' => 'D x R x C']
+                        ]
+                    @endphp
+                    @include('view_update.view', $pro_size_field)
                 </div>
                 <div class="ajax_product_view_by_category mt-4">
                    

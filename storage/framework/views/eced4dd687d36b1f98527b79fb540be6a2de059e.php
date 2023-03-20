@@ -22,18 +22,36 @@
                     <?php echo $__env->make('view_update.view', $pro_name_field, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                     
                     <?php
-                        $pro_group_field = [
-                            'name' => 'product['.$j.'][group]',
+                        $pro_category_field = [
+                            'name' => 'product['.$j.'][category]',
                             'type' => 'linking',
                             'note' => 'Nhóm sản phẩm',
-                            'attr' => ['inject_class' => 'select_quote_procategory', 'inject_attr' => 'proindex='.$j],
+                            'attr' => ['required' => 1 , 'inject_class' => 'select_quote_procategory', 'inject_attr' => 'proindex='.$j],
                             'other_data' => ['config' => ['search' => 1], 'data' => ['table' => 'product_categories']]
                         ] 
                     ?>
-                    <?php echo $__env->make('view_update.view', $pro_group_field, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                    <?php echo $__env->make('view_update.view', $pro_category_field, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
                     <div class="quote_product_design_config">
-                        <?php echo $__env->make('quotes.products.papers.design', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                        <?php
+                            $quote_pro_design = [
+                                'name' => 'product['.$j.'][design]',
+                                'note' => 'thiết kế',
+                                'type' => 'linking',
+                                'other_data' => ['data' => ['table' => 'design_types', 'select' => ['id', 'name']]]
+                            ]
+                        ?>
+                        <?php echo $__env->make('view_update.view', $quote_pro_design, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                     </div>
+
+                    <?php
+                        $pro_size_field = [
+                            'name' => 'product['.$j.'][size]',
+                            'note' => 'Kích thước hộp',
+                            'attr' => ['placeholder' => 'D x R x C']
+                        ]
+                    ?>
+                    <?php echo $__env->make('view_update.view', $pro_size_field, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                 </div>
                 <div class="ajax_product_view_by_category mt-4">
                    

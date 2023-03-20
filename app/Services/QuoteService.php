@@ -1,17 +1,14 @@
 <?php
 namespace App\Services;
 use App\Services\BaseService;
+use App\Models\Customer;
 use App\Models\Quote;
-use App\Models\QPaper;
-use App\Models\QCarton;
-use App\Models\QFoam;
-use App\Models\QSilk;
-use App\Models\QFinish;
+use App\Models\QProduct;
 use App\Services\QTraits\QuoteTrait;
 use App\Services\QTraits\QPaperTrait;
 use App\Services\QTraits\QSupplyTrait;
-use App\Models\Customer;
 use App\Constants\StatusConstant;
+use App\Constants\TDConstant;
 class QuoteService extends BaseService
 {
 	function __construct()
@@ -54,5 +51,66 @@ class QuoteService extends BaseService
         $data['temp_height'] = $temp_height / 10;
         $data['optimal_length'] = $temp_length / 1000;
         $data['optimal_width'] = $temp_height / 1000;
+    }
+
+    private function productValidate($data, $key){
+        $valid = true;
+        $arr = returnMessageAjax(200, 'Cập nhật dữ liệu thành công !');
+        $num = $key + 1;
+        if (empty($data['name'])) {
+            $valid = false;
+            $arr = returnMessageAjax(110, 'Bạn chưa nhập tên cho sản phẩm '. $num);
+        }else{
+            if (empty($data['category'])) {
+                $valid = false;
+                $arr = returnMessageAjax(110, 'Bạn chưa chọn nhóm sản phẩm cho '. $data['name']);
+            }
+    
+            if (empty($data['design'])) {
+                $valid = false;
+                $arr = returnMessageAjax(110, 'Bạn chưa chọn mẫu thiết kế cho '. $data['name']);
+            }
+        }
+        return ['valid' => $valid, 'arr' => $arr];
+    }
+
+    public function getDataActionProduct($data){
+        $data_action['name'] = $data['name'];
+        $data_action['category'] = $data['category'];
+        $data_action['design'] = $data['design'];
+        $data_action['quote_id'] = $data['quote_id'];
+        $this->conFigBaseDataAction($data_action);
+        return $data_action;
+    }
+
+    public function insertProduct($data)
+    {
+        $data_insert = $this->getDataActionProduct($data);
+        return QProduct::insertGetId($data_insert);
+    }
+
+    public function insertDataProduct($data)
+    {
+        $data_product = $data['product'];
+        foreach ($data_product as $key => $product) {
+            $product_valid = ['valid' => true];
+            if (@$product_valid['valid'] == false) {
+               return $product_valid['arr'];
+               break;
+            }else{
+                $product['quote_id'] = $data['id'];
+                $product_id = $this->insertProduct($product);
+                $elements = TDConstant::HARD_ELEMENT;
+                foreach ($elements as $el) {
+                    if (!empty($product[$el['pro_field']])) {
+                        $model = getModelByTable($el['key']);
+                        $status = $model->insertData($data['id'], $product_id, $product[$el['pro_field']]);
+                    }
+                }
+            }
+        }
+        $code = !empty($status) ? 200 : 100;
+        $message = !empty($status) ? 'Cập nhật dữ liệu thành công !' : 'Có lỗi xảy ra, vui lòng thử lại !';
+        return returnMessageAjax($code, $message);
     }
 }

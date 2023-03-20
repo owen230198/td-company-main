@@ -11,7 +11,7 @@
  Target Server Version : 100425
  File Encoding         : 65001
 
- Date: 18/03/2023 17:09:40
+ Date: 20/03/2023 18:48:37
 */
 
 SET NAMES utf8mb4;
@@ -13707,6 +13707,7 @@ DROP TABLE IF EXISTS `paper_materals`;
 CREATE TABLE `paper_materals`  (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `unit_price` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `act` tinyint(4) NULL DEFAULT NULL,
   `created_by` int(10) NULL DEFAULT NULL,
   `created_at` datetime(0) NULL DEFAULT NULL,
@@ -13718,8 +13719,53 @@ CREATE TABLE `paper_materals`  (
 -- ----------------------------
 -- Records of paper_materals
 -- ----------------------------
-INSERT INTO `paper_materals` VALUES (1, 'Couches', 1, 1, '2023-03-11 22:23:07', '2023-03-11 22:23:09');
-INSERT INTO `paper_materals` VALUES (2, 'Ivoly', 1, 1, '2023-03-11 22:23:07', '2023-03-11 22:23:09');
+INSERT INTO `paper_materals` VALUES (1, 'Couches', NULL, 1, 1, '2023-03-11 22:23:07', '2023-03-11 22:23:09');
+INSERT INTO `paper_materals` VALUES (2, 'Ivoly', NULL, 1, 1, '2023-03-11 22:23:07', '2023-03-11 22:23:09');
+
+-- ----------------------------
+-- Table structure for papers
+-- ----------------------------
+DROP TABLE IF EXISTS `papers`;
+CREATE TABLE `papers`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `qty_pro` bigint(20) NULL DEFAULT NULL,
+  `n_qty` bigint(20) NULL DEFAULT NULL,
+  `qty_paper` bigint(20) NULL DEFAULT NULL,
+  `add_paper` bigint(20) NULL DEFAULT NULL,
+  `length` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `width` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `paper_size` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `design_model` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `print` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `skin` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `metalai` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `compress` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `uv` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `elevate` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `peel` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `paste` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `plus` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `quote_id` int(10) NULL DEFAULT NULL,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `total_cost` bigint(20) NULL DEFAULT NULL,
+  `main` tinyint(4) NULL DEFAULT NULL,
+  `act` tinyint(4) NULL DEFAULT NULL,
+  `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `created_by` int(11) NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `quote_indx`(`quote_id`) USING BTREE,
+  INDEX `main_index`(`main`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of papers
+-- ----------------------------
+INSERT INTO `papers` VALUES (2, 'BG 1', 10000, 1, 10200, 2, '0.35', '0.51', '{\"quantitative\":\"350\",\"unit_price\":\"20\",\"act\":1,\"total\":12869849.999999998}', '{\"type\":\"1\",\"total\":\"500000\"}', '{\"act\":\"1\",\"color_num\":\"4\",\"style\":\"4\",\"device\":\"2\",\"total\":11146000}', '{\"act\":\"1\",\"materal\":\"8\",\"num_face\":\"0\",\"device\":\"1\",\"total\":50000}', '{\"act\":\"1\",\"materal\":\"other\",\"materal_price\":\"100\",\"num_face\":\"2\",\"cover_materal\":\"6\",\"cover_num_face\":\"2\",\"total\":10663589.999999998}', '{\"act\":\"1\",\"price\":\"1000\",\"shape\":\"10\",\"device\":\"2\",\"total\":10000010}', '{\"act\":\"1\",\"num_face\":\"2\",\"device\":\"3\",\"total\":16300000}', '{\"act\":\"1\",\"shape_price\":\"1000\",\"device\":\"11\",\"total\":1600000}', '{\"act\":\"1\",\"device\":\"5\",\"total\":120000}', '{\"act\":\"1\",\"device\":\"6\",\"total\":550000}', '{\"act\":\"1\",\"price\":\"200\",\"total\":2000000}', 11, 'note', 65799450, 1, NULL, '2022-10-07 16:22:17', '2022-10-07 09:22:17', 0);
+INSERT INTO `papers` VALUES (3, 'BG 1 - tờ HDSD', 10000, 1, 10200, 2, '0.25', '0.14', '{\"quantitative\":\"400\",\"unit_price\":\"20\",\"act\":1,\"total\":2884000.0000000005}', '{\"type\":\"1\",\"total\":\"100000\"}', '{\"act\":\"1\",\"color_num\":\"2\",\"style\":\"4\",\"device\":\"1\",\"total\":1238600}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', 11, 'note', 4222600, 0, NULL, NULL, NULL, 0);
+INSERT INTO `papers` VALUES (5, 'Báo Giá Test 1', 1000, 1, 1020, 2, '0.43', '0.65', '{\"quantitative\":\"350\",\"unit_price\":\"25\",\"act\":1,\"total\":2739100}', '{\"type\":\"1\",\"total\":\"100000\"}', '{\"act\":0}', '{\"act\":\"1\",\"materal\":\"9\",\"num_face\":\"1\",\"device\":\"1\",\"total\":856078}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":\"1\",\"device\":\"13\",\"total\":170000}', '{\"act\":0}', 14, NULL, 3865178, 1, NULL, NULL, NULL, 0);
+INSERT INTO `papers` VALUES (6, 'bao Gia 0111', 10000, 1, 10200, 2, '0.35', '0.51', '{\"quantitative\":\"300\",\"unit_price\":\"200\",\"act\":1,\"total\":110313000}', '{\"type\":\"2\"}', '{\"act\":\"1\",\"color_num\":\"3\",\"style\":\"2\",\"device\":\"2\",\"total\":8437000}', '{\"act\":\"1\",\"materal\":\"6\",\"num_face\":\"2\",\"device\":\"1\",\"total\":10075988}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":\"1\",\"device\":\"2\",\"total\":100000}', '{\"act\":\"1\",\"price\":\"300\",\"total\":3000000}', 15, 'note', 131925988, 1, NULL, '2023-03-01 18:30:41', '2023-03-01 18:30:41', 0);
 
 -- ----------------------------
 -- Table structure for print_techs
@@ -13903,51 +13949,6 @@ CREATE TABLE `q_foams`  (
 INSERT INTO `q_foams` VALUES (1, 7, 10000, 2, 5100, 2, '0.25', '0.14', '{\"quantative\":\"20\",\"act\":1,\"total\":19286750.000000004}', '{\"act\":\"1\",\"shape_price\":\"100\",\"device\":\"11\",\"total\":850000}', '{\"act\":\"1\",\"device\":\"5\",\"total\":220000}', 11, 20356750, NULL, NULL, '2022-10-11 07:24:08', 0);
 
 -- ----------------------------
--- Table structure for q_papers
--- ----------------------------
-DROP TABLE IF EXISTS `q_papers`;
-CREATE TABLE `q_papers`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `qty_pro` bigint(20) NULL DEFAULT NULL,
-  `n_qty` bigint(20) NULL DEFAULT NULL,
-  `qty_paper` bigint(20) NULL DEFAULT NULL,
-  `add_paper` bigint(20) NULL DEFAULT NULL,
-  `length` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `width` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `paper_size` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
-  `design_model` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
-  `print` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
-  `skin` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
-  `metalai` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
-  `compress` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
-  `uv` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
-  `elevate` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
-  `peel` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
-  `paste` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
-  `plus` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
-  `quote_id` int(10) NULL DEFAULT NULL,
-  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `total_cost` bigint(20) NULL DEFAULT NULL,
-  `main` tinyint(4) NULL DEFAULT NULL,
-  `act` tinyint(4) NULL DEFAULT NULL,
-  `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
-  `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
-  `created_by` int(11) NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  INDEX `quote_indx`(`quote_id`) USING BTREE,
-  INDEX `main_index`(`main`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of q_papers
--- ----------------------------
-INSERT INTO `q_papers` VALUES (2, 'BG 1', 10000, 1, 10200, 2, '0.35', '0.51', '{\"quantitative\":\"350\",\"unit_price\":\"20\",\"act\":1,\"total\":12869849.999999998}', '{\"type\":\"1\",\"total\":\"500000\"}', '{\"act\":\"1\",\"color_num\":\"4\",\"style\":\"4\",\"device\":\"2\",\"total\":11146000}', '{\"act\":\"1\",\"materal\":\"8\",\"num_face\":\"0\",\"device\":\"1\",\"total\":50000}', '{\"act\":\"1\",\"materal\":\"other\",\"materal_price\":\"100\",\"num_face\":\"2\",\"cover_materal\":\"6\",\"cover_num_face\":\"2\",\"total\":10663589.999999998}', '{\"act\":\"1\",\"price\":\"1000\",\"shape\":\"10\",\"device\":\"2\",\"total\":10000010}', '{\"act\":\"1\",\"num_face\":\"2\",\"device\":\"3\",\"total\":16300000}', '{\"act\":\"1\",\"shape_price\":\"1000\",\"device\":\"11\",\"total\":1600000}', '{\"act\":\"1\",\"device\":\"5\",\"total\":120000}', '{\"act\":\"1\",\"device\":\"6\",\"total\":550000}', '{\"act\":\"1\",\"price\":\"200\",\"total\":2000000}', 11, 'note', 65799450, 1, NULL, '2022-10-07 16:22:17', '2022-10-07 09:22:17', 0);
-INSERT INTO `q_papers` VALUES (3, 'BG 1 - tờ HDSD', 10000, 1, 10200, 2, '0.25', '0.14', '{\"quantitative\":\"400\",\"unit_price\":\"20\",\"act\":1,\"total\":2884000.0000000005}', '{\"type\":\"1\",\"total\":\"100000\"}', '{\"act\":\"1\",\"color_num\":\"2\",\"style\":\"4\",\"device\":\"1\",\"total\":1238600}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', 11, 'note', 4222600, 0, NULL, NULL, NULL, 0);
-INSERT INTO `q_papers` VALUES (5, 'Báo Giá Test 1', 1000, 1, 1020, 2, '0.43', '0.65', '{\"quantitative\":\"350\",\"unit_price\":\"25\",\"act\":1,\"total\":2739100}', '{\"type\":\"1\",\"total\":\"100000\"}', '{\"act\":0}', '{\"act\":\"1\",\"materal\":\"9\",\"num_face\":\"1\",\"device\":\"1\",\"total\":856078}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":\"1\",\"device\":\"13\",\"total\":170000}', '{\"act\":0}', 14, NULL, 3865178, 1, NULL, NULL, NULL, 0);
-INSERT INTO `q_papers` VALUES (6, 'bao Gia 0111', 10000, 1, 10200, 2, '0.35', '0.51', '{\"quantitative\":\"300\",\"unit_price\":\"200\",\"act\":1,\"total\":110313000}', '{\"type\":\"2\"}', '{\"act\":\"1\",\"color_num\":\"3\",\"style\":\"2\",\"device\":\"2\",\"total\":8437000}', '{\"act\":\"1\",\"materal\":\"6\",\"num_face\":\"2\",\"device\":\"1\",\"total\":10075988}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":\"1\",\"device\":\"2\",\"total\":100000}', '{\"act\":\"1\",\"price\":\"300\",\"total\":3000000}', 15, 'note', 131925988, 1, NULL, '2023-03-01 18:30:41', '2023-03-01 18:30:41', 0);
-
--- ----------------------------
 -- Table structure for q_printer_devices
 -- ----------------------------
 DROP TABLE IF EXISTS `q_printer_devices`;
@@ -13985,6 +13986,40 @@ INSERT INTO `q_printer_devices` VALUES (11, 'Máy in uv 72x102', '72', '102', '1
 INSERT INTO `q_printer_devices` VALUES (12, 'Máy in uv 79x109', '79', '109', '150000', '600', '800000', NULL, 1, '2022-07-01 11:17:02', '2022-07-01 11:17:02', 2, 0);
 
 -- ----------------------------
+-- Table structure for q_products
+-- ----------------------------
+DROP TABLE IF EXISTS `q_products`;
+CREATE TABLE `q_products`  (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `category` int(10) NULL DEFAULT NULL,
+  `design` int(10) NULL DEFAULT NULL,
+  `quote_id` int(10) NULL DEFAULT NULL,
+  `total_amount` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `act` tinyint(4) NULL DEFAULT NULL,
+  `created_by` int(10) NULL DEFAULT NULL,
+  `created_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 38 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of q_products
+-- ----------------------------
+INSERT INTO `q_products` VALUES (27, 'Hop giay', 2, 2, 3, NULL, NULL, NULL, 1, '2023-03-20 10:37:00', '2023-03-20 10:37:00');
+INSERT INTO `q_products` VALUES (28, 'Hop giay', 2, 2, 3, NULL, NULL, NULL, 1, '2023-03-20 10:41:00', '2023-03-20 10:41:00');
+INSERT INTO `q_products` VALUES (29, 'Hop giay', 2, 2, 3, NULL, NULL, NULL, 1, '2023-03-20 10:42:00', '2023-03-20 10:42:00');
+INSERT INTO `q_products` VALUES (30, 'Hop giay', 2, 2, 3, NULL, NULL, 1, 1, '2023-03-20 10:48:00', '2023-03-20 10:48:00');
+INSERT INTO `q_products` VALUES (31, 'Hop giay', 2, 2, 3, NULL, NULL, 1, 1, '2023-03-20 10:50:00', '2023-03-20 10:50:00');
+INSERT INTO `q_products` VALUES (32, 'Hop giay', 2, 2, 3, NULL, NULL, 1, 1, '2023-03-20 10:50:00', '2023-03-20 10:50:00');
+INSERT INTO `q_products` VALUES (33, 'Hop giay', 2, 2, 3, NULL, NULL, 1, 1, '2023-03-20 10:51:00', '2023-03-20 10:51:00');
+INSERT INTO `q_products` VALUES (34, 'Hop giay', 2, 2, 3, NULL, NULL, 1, 1, '2023-03-20 10:51:00', '2023-03-20 10:51:00');
+INSERT INTO `q_products` VALUES (35, 'Hop giay', 2, 2, 3, NULL, NULL, 1, 1, '2023-03-20 11:09:00', '2023-03-20 11:09:00');
+INSERT INTO `q_products` VALUES (36, 'Hop giay', 2, 2, 3, NULL, NULL, 1, 1, '2023-03-20 11:12:00', '2023-03-20 11:12:00');
+INSERT INTO `q_products` VALUES (37, 'Hop giay', 2, 2, 3, NULL, NULL, 1, 1, '2023-03-20 11:13:00', '2023-03-20 11:13:00');
+
+-- ----------------------------
 -- Table structure for quotes
 -- ----------------------------
 DROP TABLE IF EXISTS `quotes`;
@@ -14018,9 +14053,9 @@ CREATE TABLE `quotes`  (
 -- ----------------------------
 -- Records of quotes
 -- ----------------------------
-INSERT INTO `quotes` VALUES (1, 'BG-000001', 'not_accepted', 'Công ty WS', NULL, 1, 'Công ty WS', 'Nguyễn Duy Khánh', '360 Mieng Ha, Hoa Sơn, Ung Hoa, TP Ha Noi', 'nguyenduykhanh2323@gmail.com', '0378050251', '0223344556', 351, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
-INSERT INTO `quotes` VALUES (2, 'BG-000002', 'not_accepted', 'Cong Ty Test', NULL, 2, 'Cong Ty Test', 'Nguyen Van A', 'Ho Chi Minh', 'congtytest@gmail.com', '0987654321', '0123456789', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
-INSERT INTO `quotes` VALUES (3, 'BG-000003', 'not_accepted', 'Cong Ty Test', NULL, 2, 'Cong Ty Test', 'Nguyen Van A', 'Ho Chi Minh', 'congtytest@gmail.com', '0987654321', '0123456789', 1, NULL, NULL, NULL, NULL, NULL, NULL, '2023-03-16 09:00:00', NULL, 1);
+INSERT INTO `quotes` VALUES (1, 'BG-000001', 'not_accepted', 'Công ty WS', NULL, 1, 'Công ty WS', 'Nguyễn Duy Khánh', '360 Mieng Ha, Hoa Sơn, Ung Hoa, TP Ha Noi', 'nguyenduykhanh2323@gmail.com', '0378050251', '0223344556', 351, NULL, NULL, NULL, NULL, NULL, 1, '2023-03-20 14:31:30', '2023-03-20 14:31:30', 0);
+INSERT INTO `quotes` VALUES (2, 'BG-000002', 'not_accepted', 'Cong Ty Test', NULL, 2, 'Cong Ty Test', 'Nguyen Van A', 'Ho Chi Minh', 'congtytest@gmail.com', '0987654321', '0123456789', 1, NULL, NULL, NULL, NULL, NULL, 1, '2023-03-20 14:31:30', '2023-03-20 14:31:30', 0);
+INSERT INTO `quotes` VALUES (3, 'BG-000003', 'not_accepted', 'Cong Ty Test', NULL, 2, 'Cong Ty Test', 'Nguyen Van A', 'Ho Chi Minh', 'congtytest@gmail.com', '0987654321', '0123456789', 1, NULL, NULL, NULL, NULL, NULL, 1, '2023-03-20 14:31:30', '2023-03-20 14:31:30', 1);
 
 -- ----------------------------
 -- Table structure for silks

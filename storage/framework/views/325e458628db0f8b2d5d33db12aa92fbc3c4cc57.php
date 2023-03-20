@@ -4,11 +4,12 @@
     <link rel="stylesheet" href="<?php echo e(asset('frontend/base/css/bootstrap-multiselect.min.css')); ?>">
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
-    <form action="<?php echo e(asset('create-quote?step=handle_config&id='.$data_quote['id'])); ?>" method="POST" class="config_handle_form" enctype="multipart/form-data">
+    <form action="<?php echo e(asset('create-quote?step=handle_config&id='.$data_quote['id'])); ?>" method="POST" class="config_handle_form baseAjaxForm" 
+    enctype="multipart/form-data" onkeydown="return event.key != 'Enter'">
         <?php echo csrf_field(); ?>
         <div class="quote_handle_section mb-3">
             <h3 class="fs-14 text-uppercase pb-1 mb-3 text-center quote_handle_title">
-                <span>Thông tin khách hàng</span>
+                <span>Thông tin khách hàng - Mã báo giá <strong><?php echo e($data_quote['seri']); ?></strong></span>
             </h3>
             <?php $__currentLoopData = $customer_fields; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $customer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <div class="d-flex align-items-center mb-2 fs-13">
@@ -55,6 +56,5 @@
 <?php $__env->startSection('script'); ?>
 <script src="<?php echo e(asset('frontend/base/script/bootstrap-multiselect.min.js')); ?>"></script>
 <script src="<?php echo e(asset('frontend/admin/script/quote.js')); ?>"></script>
-    
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('index', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/quotes/handle_config.blade.php ENDPATH**/ ?>

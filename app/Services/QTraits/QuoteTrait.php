@@ -28,11 +28,8 @@ trait QuoteTrait
 
     private function getObjectConfig($data, $total, $float = 0)
     {
-        if (@$data['act']&&$total>0) {
+        if (!empty($data['act']) && $total > 0) {
             $obj = $data;
-            if ($float>0) {
-                $obj['float'] = $float;    
-            }
             $obj['total'] = $total;    
         }else{
             $obj['act'] = 0;

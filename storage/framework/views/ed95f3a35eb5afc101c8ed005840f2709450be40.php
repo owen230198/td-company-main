@@ -1,6 +1,8 @@
 <?php if($pindex > 0): ?>
 <div class="quote_paper_item mt-3 border_green p-3 radius_5 position-relative"> 
     <span class="remove_ext_paper_quote d-flex bg_red color_white red_btn smooth"><i class="fa fa-times" aria-hidden="true"></i></span> 
+<?php else: ?> 
+<input type="hidden" value="1" name="main">
 <?php endif; ?>
 <div class="quote_product_structure">
 </div>
@@ -34,14 +36,6 @@
                 'value' => @$paper_name,
                 'attr' => ['required' => 1, 'inject_class' => $pindex == 0 ? 'quote_receive_paper_name_main' : 'quote_receive_paper_name_ext']
             ] 
-        ?>
-        <?php echo $__env->make('view_update.view', $pro_paper_name, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-        
-        <?php
-            $pro_paper_size = [
-                'name' => 'product['.$j.'][paper]['.$pindex.'][size]',
-                'note' => 'Kích thước hộp'
-            ]
         ?>
         <?php echo $__env->make('view_update.view', $pro_paper_name, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <?php
@@ -84,7 +78,7 @@
         <div class="materal_paper_module">
             <?php
                 $pro_paper_materals = [
-                    'name' => 'product['.$j.'][paper]['.$pindex.'][paper_materals]',
+                    'name' => 'product['.$j.'][paper]['.$pindex.'][size][materal]',
                     'type' => 'linking',
                     'note' => 'Chọn chất liệu giấy',
                     'attr' => ['required' => 1, 'inject_class' => 'select_paper_materal'],
@@ -94,13 +88,13 @@
             <?php echo $__env->make('view_update.view', $pro_paper_materals, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
             
             <?php
-                $pro_paper_quantitative = [
-                    'name' => 'product['.$j.'][paper]['.$pindex.'][quantitative]',
+                $pro_paper_qttv = [
+                    'name' => 'product['.$j.'][paper]['.$pindex.'][size][qttv]',
                     'note' => 'Định lượng',
                     'attr' => ['type_input' => 'number', 'required' => 1]
                 ] 
             ?>
-            <?php echo $__env->make('view_update.view', $pro_paper_quantitative, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+            <?php echo $__env->make('view_update.view', $pro_paper_qttv, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
             <div class="d-flex align-items-center mb-2 fs-13">
                 <label class="mb-0 min_180 text-capitalize text-right mr-3">
                     <span class="fs-15 mr-1">*</span>Kích thước khổ giấy tối ưu
@@ -110,12 +104,11 @@
                     class="form-control medium_input" step="any" value="<?php echo e(@$pro_size['optimal_length']); ?>"> 
                     <span class="mx-3">X</span>
                     <input type="number" name = 'product[<?php echo e($j); ?>][paper][<?php echo e($pindex); ?>][size][width]' placeholder="Chiều rộng (cm)" 
-                    class="form-control medium_input" step="any"
-                    value="<?php echo e(@$pro_size['optimal_width']); ?>"> 
+                    class="form-control medium_input" step="any"value="<?php echo e(@$pro_size['optimal_width']); ?>"> 
                     <div class="paper_price_config_input" style="display: none">
                         <div class="d-flex align-items-center">
                             <span class="mx-3">X</span>
-                            <input type="number" name = 'product[<?php echo e($j); ?>][paper][<?php echo e($pindex); ?>][size][height]' placeholder="Đơn giá" 
+                            <input type="number" name = 'product[<?php echo e($j); ?>][paper][<?php echo e($pindex); ?>][size][unit_price]' placeholder="Đơn giá" 
                             class="form-control medium_input price_input_paper" disabled="disabled" step="any">
                         </div>
                     </div>

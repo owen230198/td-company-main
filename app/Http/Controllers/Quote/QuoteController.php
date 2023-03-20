@@ -43,9 +43,19 @@ class QuoteController extends Controller
                 $data['title'] = 'Tạo mới báo giá - Chi tiết sản phẩm và sản xuất';
                 $data['customer_fields'] = Customer::FIELD_UPDATE;
                 $data['data_quote'] = Quote::find($request->input('id'));
-                return view('quotes.'.$step, $data);
+                if (!empty($data['data_quote'])) {
+                    return view('quotes.'.$step, $data);
+                }else{
+                    return redirect(url('/'))->with('error', 'Dữ liệu báo giá không tồn tại !');
+                }
             }else{
-                dd($request->except('_token', 'step'));
+                $data = $request->except('_token', 'step');
+                if (empty($data['product'])) {
+                    return returnMessageAjax(110, 'Không tìm thấy sản phẩm !');
+                }else{
+                    $status = $this->services->insertDataProduct($data);
+                    return $status;
+                }
             }   
         }
     }

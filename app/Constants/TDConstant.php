@@ -93,14 +93,14 @@
         //Cấu tạo sản phẩm
         const PAPER_ELEMENT = [['key' => 'papers', 'note' => 'Giấy in']];
         const HARD_ELEMENT = [
-            ['key' => 'papers', 'note' => 'Giấy in'],
-            ['key' => 'cartons', 'note' => 'Carton'],
-            ['key' => 'rubbers', 'note' => 'Cao su non'],
-            ['key' => 'decals', 'note' => 'Đề can nhung'],
-            ['key' => 'silks', 'note' => 'Vải lụa'],
-            ['key' => 'styrofoams', 'note' => 'Mút phẳng'],
-            ['key' => 'micaes', 'note' => 'Me Ka'],
-            ['key' => 'fill_finishes', 'note' => 'Bồi + hoàn thiện'] 
+            ['key' => 'papers', 'note' => 'Giấy in', 'pro_field' => 'paper'],
+            ['key' => 'cartons', 'note' => 'Carton', 'pro_field' => 'carton'],
+            ['key' => 'rubbers', 'note' => 'Cao su non', 'pro_field' => 'rubber'],
+            ['key' => 'decals', 'note' => 'Đề can nhung', 'pro_field' => 'decal'],
+            ['key' => 'silks', 'note' => 'Vải lụa', 'pro_field' => 'silk'],
+            ['key' => 'styrofoams', 'note' => 'Mút phẳng', 'pro_field' => 'styrofoam'],
+            ['key' => 'micaes', 'note' => 'Me Ka', 'pro_field' => 'mica'],
+            ['key' => 'fill_finishes', 'note' => 'Bồi + hoàn thiện', 'pro_field' => 'fill_finish'] 
         ];
 
         //Vật tư định lượng
@@ -109,6 +109,8 @@
         const STYRO_SUPP = 3;
         const SILK_SUPP = 4;
         const DECAL_SUPP = 5;
+
+        const PLUS_PAPER = 100;
     }
     
 ?>

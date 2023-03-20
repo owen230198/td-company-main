@@ -1,16 +1,18 @@
 <?php  
 namespace App\Services\QTraits;
+use App\Constants\TDConstant;
 trait QPaperTrait
 {
 	private function configDataSizePaper($qty_paper, $length, $width, $paper)
 	{
-        $quantitative = @$paper['quantitative']?(float)$paper['quantitative']:0;
-        $price = @$paper['unit_price']?(float)$paper['unit_price']:0;
-        $plusPaper = (int)getDataConfigs('QConfig', 'PLUS_PAPER');
-        $qty_paper = $qty_paper+$plusPaper; 
+        $qttv = !empty($paper['qttv']) ? (float) $paper['qttv'] : 0;
+        $price = !empty($paper['materal']) ? ((int) getFieldDataById('unit_price', 'paper_materals', $paper['materal'])) : 
+                (!empty($paper['unit_price']) ? (float) $paper['unit_price'] : 0);
+        $plusPaper = (int) TDConstant::PLUS_PAPER;
+        $qty_paper = $qty_paper + $plusPaper; 
         // Công thức tính chi phí khổ in : dài x rộng x định lượng x (số tờ in + 100) x ĐG
-        $total = $length*$width*$quantitative*$qty_paper*$price;
-        $paper['act'] = $total>0?1:0;
+        $total = $length*$width*$qttv*$qty_paper*$price;
+        $paper['act'] = $total > 0 ? 1 : 0;
         $obj = $this->getObjectConfig($paper, $total);
         return $obj;
 	}
@@ -101,25 +103,24 @@ trait QPaperTrait
         return $obj;
     }
 
-    private function getDataActionQPaper($data)
+    private function getDataActionPaper($data)
     {
-        $length = @$data['length']?$data['length']:0;
-        $width = @$data['width']?$data['width']:0;
-        $qty_paper = @$data['qty_paper']?(int)$data['qty_paper']:0;
-        $qty_pro = @$data['qty_pro']?(int)$data['qty_pro']:0;
-        $n_qty = @$data['n_qty']?(int)$data['n_qty']:1;
-        $dataAction = $data;
-        $dataAction['design_model'] = json_encode($data['design_model']);
-        $dataAction['paper_size'] = $this->configDataSizePaper($qty_paper, $length, $width, $data['paper_size']);
-        $dataAction['print'] = $this->configDataPrint($qty_pro, $n_qty, $length, $width, $data['print']);
-        $dataAction['skin'] = $this->configDataStage($qty_pro, $n_qty, $data['skin'], $length, $width);
-        $dataAction['metalai'] = $this->configDataMetalai($qty_paper, $length, $width, $data['metalai']);
-        $dataAction['compress'] = $this->configDataCompress($qty_pro, $n_qty, $data['compress']);
-        $dataAction['uv'] = $this->configDataStage($qty_pro, $n_qty, $data['uv']);
-        $dataAction['elevate'] = $this->configDataStage($qty_pro, $n_qty, $data['elevate']);
-        $dataAction['peel'] = $this->configDataStage($qty_pro, $n_qty, $data['peel']);
-        $dataAction['paste'] = $this->configDataStage($qty_pro, $n_qty, $data['paste']);
-        $dataAction['plus'] = $this->configDataPlus($qty_pro, $data['plus']);
-        return $dataAction;
+        $length = !empty($data['size']['length']) ? $data['size']['length'] : 0;
+        $width = !empty($data['size']['width']) ? $data['size']['width'] : 0;
+        $qty_paper = !empty($data['paper_qty']) ? (int) $data['paper_qty'] : 0;
+        $qty_pro = !empty($data['qty']) ? (int) $data['qty'] : 0;
+        $n_qty = !empty($data['n_qty']) ? (int) $data['n_qty'] : 1;
+        $data_action['paper_size'] = $this->configDataSizePaper($qty_paper, $length, $width, $data['size']);
+        dd($data_action);
+        $data_action['print'] = $this->configDataPrint($qty_pro, $n_qty, $length, $width, $data['print']);
+        $data_action['skin'] = $this->configDataStage($qty_pro, $n_qty, $data['skin'], $length, $width);
+        $data_action['metalai'] = $this->configDataMetalai($qty_paper, $length, $width, $data['metalai']);
+        $data_action['compress'] = $this->configDataCompress($qty_pro, $n_qty, $data['compress']);
+        $data_action['uv'] = $this->configDataStage($qty_pro, $n_qty, $data['uv']);
+        $data_action['elevate'] = $this->configDataStage($qty_pro, $n_qty, $data['elevate']);
+        $data_action['peel'] = $this->configDataStage($qty_pro, $n_qty, $data['peel']);
+        $data_action['paste'] = $this->configDataStage($qty_pro, $n_qty, $data['paste']);
+        $data_action['plus'] = $this->configDataPlus($qty_pro, $data['plus']);
+        return $data_action;
     }
 }

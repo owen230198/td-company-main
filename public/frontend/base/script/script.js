@@ -2,22 +2,23 @@ var baseAjaxForm = function()
 { 
 	$('.baseAjaxForm').submit(function(event) {
 		event.preventDefault();
+		// $('#loader').fadeIn(200);
 		$.ajax({
 			url: $(this).attr('action'),
 			type: $(this).attr('method'),
 			data: $(this).serialize(),
 		})
 		.done(function(data) {
-			var json = JSON.parse(data);
-		    if((json.code) == 200){
-		    	toastr['success'](json.message);
+			// $('#loader').delay(200).fadeOut(500); 
+		    if((data.code) == 200){
+		    	toastr['success'](data.message);
 		    }
 		    else{
-		      	toastr['error'](json.message);
+		      	toastr['error'](data.message);
 		    }
-			if (json.url != null) {
+			if (data.url != null) {
 				setTimeout(() => {
-					window.location.href=json.url;
+					window.location.href=data.url;
 				}, 1500);
 			} 
 	    })
