@@ -16,7 +16,7 @@ class Paper extends Model
     protected $table = 'papers';
     protected $protectFields = false;
     use QPaperTrait, QuoteTrait;
-    public function insertData($quote_id, $product_id, $data)
+    public function insertData($product_id, $data)
     {
         foreach ($data as $paper) {
             $data_insert = $this->getDataActionPaper($paper);

@@ -4,13 +4,13 @@ namespace App\Models;
  
 use Illuminate\Database\Eloquent\Model;
  
-class QDevice extends Model
+class Device extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'q_devices';
+    protected $table = 'devices';
     protected $protectFields = false;
 }

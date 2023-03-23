@@ -104,7 +104,7 @@ class QuoteService extends BaseService
                 foreach ($elements as $el) {
                     if (!empty($product[$el['pro_field']])) {
                         $model = getModelByTable($el['key']);
-                        $status = $model->insertData($data['id'], $product_id, $product[$el['pro_field']]);
+                        $status = $model->insertData($product_id, $product[$el['pro_field']]);
                     }
                 }
             }

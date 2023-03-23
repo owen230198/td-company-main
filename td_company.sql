@@ -11,7 +11,7 @@
  Target Server Version : 100425
  File Encoding         : 65001
 
- Date: 20/03/2023 18:48:37
+ Date: 23/03/2023 16:57:17
 */
 
 SET NAMES utf8mb4;
@@ -12316,7 +12316,7 @@ CREATE TABLE `devices`  (
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `created_by` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of devices
@@ -12335,6 +12335,8 @@ INSERT INTO `devices` VALUES (11, 'Máy bế bán tự động', '0', '150', '10
 INSERT INTO `devices` VALUES (12, 'Máy bóc lề bán tự động', '0', '10', '20000', 'peel', 2, NULL, 1, 1, '2023-03-18 11:47:39', '2023-03-18 11:47:39', 0);
 INSERT INTO `devices` VALUES (13, 'Dán hộp tay', '0', '120', '50000', 'box_paste', 2, NULL, 1, 1, '2023-03-18 11:47:41', '2023-03-18 11:47:41', 0);
 INSERT INTO `devices` VALUES (14, 'Máy phay bán tự động', '0', '120', '50000', 'mill', 2, NULL, 1, 1, '2023-03-18 15:46:54', '2023-03-18 15:46:54', 0);
+INSERT INTO `devices` VALUES (15, 'Cán metalai tự động', '0', '0', '50000', 'metalai', 1, NULL, 1, 0, '2023-03-23 16:18:02', '2023-03-23 16:18:02', 0);
+INSERT INTO `devices` VALUES (16, 'Cán metalai bán tự động', '0', '0', '50000', 'metalai', 2, NULL, 1, 1, '2023-03-18 11:47:35', '2023-03-18 11:47:35', 0);
 
 -- ----------------------------
 -- Table structure for districts
@@ -13719,8 +13721,8 @@ CREATE TABLE `paper_materals`  (
 -- ----------------------------
 -- Records of paper_materals
 -- ----------------------------
-INSERT INTO `paper_materals` VALUES (1, 'Couches', NULL, 1, 1, '2023-03-11 22:23:07', '2023-03-11 22:23:09');
-INSERT INTO `paper_materals` VALUES (2, 'Ivoly', NULL, 1, 1, '2023-03-11 22:23:07', '2023-03-11 22:23:09');
+INSERT INTO `paper_materals` VALUES (1, 'Couches', '100', 1, 1, '2023-03-11 22:23:07', '2023-03-11 22:23:09');
+INSERT INTO `paper_materals` VALUES (2, 'Ivoly', '100', 1, 1, '2023-03-11 22:23:07', '2023-03-11 22:23:09');
 
 -- ----------------------------
 -- Table structure for papers
@@ -13730,23 +13732,22 @@ CREATE TABLE `papers`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `qty_pro` bigint(20) NULL DEFAULT NULL,
-  `n_qty` bigint(20) NULL DEFAULT NULL,
+  `nqty` bigint(20) NULL DEFAULT NULL,
   `qty_paper` bigint(20) NULL DEFAULT NULL,
-  `add_paper` bigint(20) NULL DEFAULT NULL,
   `length` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `width` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `paper_size` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
-  `design_model` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `design` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   `print` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
-  `skin` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `nilon` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `elevate` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `peel` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   `metalai` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   `compress` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   `uv` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
-  `elevate` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
-  `peel` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
-  `paste` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
-  `plus` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
-  `quote_id` int(10) NULL DEFAULT NULL,
+  `ext_price` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `product` int(10) NULL DEFAULT NULL,
+  `box_paste` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `total_cost` bigint(20) NULL DEFAULT NULL,
   `main` tinyint(4) NULL DEFAULT NULL,
@@ -13755,17 +13756,17 @@ CREATE TABLE `papers`  (
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `created_by` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `quote_indx`(`quote_id`) USING BTREE,
+  INDEX `quote_indx`(`product`) USING BTREE,
   INDEX `main_index`(`main`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of papers
 -- ----------------------------
-INSERT INTO `papers` VALUES (2, 'BG 1', 10000, 1, 10200, 2, '0.35', '0.51', '{\"quantitative\":\"350\",\"unit_price\":\"20\",\"act\":1,\"total\":12869849.999999998}', '{\"type\":\"1\",\"total\":\"500000\"}', '{\"act\":\"1\",\"color_num\":\"4\",\"style\":\"4\",\"device\":\"2\",\"total\":11146000}', '{\"act\":\"1\",\"materal\":\"8\",\"num_face\":\"0\",\"device\":\"1\",\"total\":50000}', '{\"act\":\"1\",\"materal\":\"other\",\"materal_price\":\"100\",\"num_face\":\"2\",\"cover_materal\":\"6\",\"cover_num_face\":\"2\",\"total\":10663589.999999998}', '{\"act\":\"1\",\"price\":\"1000\",\"shape\":\"10\",\"device\":\"2\",\"total\":10000010}', '{\"act\":\"1\",\"num_face\":\"2\",\"device\":\"3\",\"total\":16300000}', '{\"act\":\"1\",\"shape_price\":\"1000\",\"device\":\"11\",\"total\":1600000}', '{\"act\":\"1\",\"device\":\"5\",\"total\":120000}', '{\"act\":\"1\",\"device\":\"6\",\"total\":550000}', '{\"act\":\"1\",\"price\":\"200\",\"total\":2000000}', 11, 'note', 65799450, 1, NULL, '2022-10-07 16:22:17', '2022-10-07 09:22:17', 0);
-INSERT INTO `papers` VALUES (3, 'BG 1 - tờ HDSD', 10000, 1, 10200, 2, '0.25', '0.14', '{\"quantitative\":\"400\",\"unit_price\":\"20\",\"act\":1,\"total\":2884000.0000000005}', '{\"type\":\"1\",\"total\":\"100000\"}', '{\"act\":\"1\",\"color_num\":\"2\",\"style\":\"4\",\"device\":\"1\",\"total\":1238600}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', 11, 'note', 4222600, 0, NULL, NULL, NULL, 0);
-INSERT INTO `papers` VALUES (5, 'Báo Giá Test 1', 1000, 1, 1020, 2, '0.43', '0.65', '{\"quantitative\":\"350\",\"unit_price\":\"25\",\"act\":1,\"total\":2739100}', '{\"type\":\"1\",\"total\":\"100000\"}', '{\"act\":0}', '{\"act\":\"1\",\"materal\":\"9\",\"num_face\":\"1\",\"device\":\"1\",\"total\":856078}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":\"1\",\"device\":\"13\",\"total\":170000}', '{\"act\":0}', 14, NULL, 3865178, 1, NULL, NULL, NULL, 0);
-INSERT INTO `papers` VALUES (6, 'bao Gia 0111', 10000, 1, 10200, 2, '0.35', '0.51', '{\"quantitative\":\"300\",\"unit_price\":\"200\",\"act\":1,\"total\":110313000}', '{\"type\":\"2\"}', '{\"act\":\"1\",\"color_num\":\"3\",\"style\":\"2\",\"device\":\"2\",\"total\":8437000}', '{\"act\":\"1\",\"materal\":\"6\",\"num_face\":\"2\",\"device\":\"1\",\"total\":10075988}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":\"1\",\"device\":\"2\",\"total\":100000}', '{\"act\":\"1\",\"price\":\"300\",\"total\":3000000}', 15, 'note', 131925988, 1, NULL, '2023-03-01 18:30:41', '2023-03-01 18:30:41', 0);
+INSERT INTO `papers` VALUES (2, 'BG 1', 10000, 1, 10200, '0.35', '0.51', '{\"quantitative\":\"350\",\"unit_price\":\"20\",\"act\":1,\"total\":12869849.999999998}', '{\"type\":\"1\",\"total\":\"500000\"}', '{\"act\":\"1\",\"color_num\":\"4\",\"style\":\"4\",\"device\":\"2\",\"total\":11146000}', '{\"act\":\"1\",\"materal\":\"8\",\"num_face\":\"0\",\"device\":\"1\",\"total\":50000}', '{\"act\":\"1\",\"shape_price\":\"1000\",\"device\":\"11\",\"total\":1600000}', '{\"act\":\"1\",\"device\":\"5\",\"total\":120000}', '{\"act\":\"1\",\"materal\":\"other\",\"materal_price\":\"100\",\"num_face\":\"2\",\"cover_materal\":\"6\",\"cover_num_face\":\"2\",\"total\":10663589.999999998}', '{\"act\":\"1\",\"price\":\"1000\",\"shape\":\"10\",\"device\":\"2\",\"total\":10000010}', '{\"act\":\"1\",\"num_face\":\"2\",\"device\":\"3\",\"total\":16300000}', '{\"act\":\"1\",\"price\":\"200\",\"total\":2000000}', 11, '{\"act\":\"1\",\"device\":\"6\",\"total\":550000}', 'note', 65799450, 1, NULL, '2022-10-07 16:22:17', '2022-10-07 09:22:17', 0);
+INSERT INTO `papers` VALUES (3, 'BG 1 - tờ HDSD', 10000, 1, 10200, '0.25', '0.14', '{\"quantitative\":\"400\",\"unit_price\":\"20\",\"act\":1,\"total\":2884000.0000000005}', '{\"type\":\"1\",\"total\":\"100000\"}', '{\"act\":\"1\",\"color_num\":\"2\",\"style\":\"4\",\"device\":\"1\",\"total\":1238600}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', 11, '{\"act\":0}', 'note', 4222600, 0, NULL, NULL, NULL, 0);
+INSERT INTO `papers` VALUES (5, 'Báo Giá Test 1', 1000, 1, 1020, '0.43', '0.65', '{\"quantitative\":\"350\",\"unit_price\":\"25\",\"act\":1,\"total\":2739100}', '{\"type\":\"1\",\"total\":\"100000\"}', '{\"act\":0}', '{\"act\":\"1\",\"materal\":\"9\",\"num_face\":\"1\",\"device\":\"1\",\"total\":856078}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', 14, '{\"act\":\"1\",\"device\":\"13\",\"total\":170000}', NULL, 3865178, 1, NULL, NULL, NULL, 0);
+INSERT INTO `papers` VALUES (6, 'bao Gia 0111', 10000, 1, 10200, '0.35', '0.51', '{\"quantitative\":\"300\",\"unit_price\":\"200\",\"act\":1,\"total\":110313000}', '{\"type\":\"2\"}', '{\"act\":\"1\",\"color_num\":\"3\",\"style\":\"2\",\"device\":\"2\",\"total\":8437000}', '{\"act\":\"1\",\"materal\":\"6\",\"num_face\":\"2\",\"device\":\"1\",\"total\":10075988}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":\"1\",\"price\":\"300\",\"total\":3000000}', 15, '{\"act\":\"1\",\"device\":\"2\",\"total\":100000}', 'note', 131925988, 1, NULL, '2023-03-01 18:30:41', '2023-03-01 18:30:41', 0);
 
 -- ----------------------------
 -- Table structure for print_techs
@@ -14002,7 +14003,7 @@ CREATE TABLE `q_products`  (
   `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 38 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 94 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of q_products
@@ -14018,6 +14019,62 @@ INSERT INTO `q_products` VALUES (34, 'Hop giay', 2, 2, 3, NULL, NULL, 1, 1, '202
 INSERT INTO `q_products` VALUES (35, 'Hop giay', 2, 2, 3, NULL, NULL, 1, 1, '2023-03-20 11:09:00', '2023-03-20 11:09:00');
 INSERT INTO `q_products` VALUES (36, 'Hop giay', 2, 2, 3, NULL, NULL, 1, 1, '2023-03-20 11:12:00', '2023-03-20 11:12:00');
 INSERT INTO `q_products` VALUES (37, 'Hop giay', 2, 2, 3, NULL, NULL, 1, 1, '2023-03-20 11:13:00', '2023-03-20 11:13:00');
+INSERT INTO `q_products` VALUES (38, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 07:34:00', '2023-03-23 07:34:00');
+INSERT INTO `q_products` VALUES (39, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 07:35:00', '2023-03-23 07:35:00');
+INSERT INTO `q_products` VALUES (40, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 07:36:00', '2023-03-23 07:36:00');
+INSERT INTO `q_products` VALUES (41, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 07:37:00', '2023-03-23 07:37:00');
+INSERT INTO `q_products` VALUES (42, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 07:41:00', '2023-03-23 07:41:00');
+INSERT INTO `q_products` VALUES (43, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 07:46:00', '2023-03-23 07:46:00');
+INSERT INTO `q_products` VALUES (44, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 07:46:00', '2023-03-23 07:46:00');
+INSERT INTO `q_products` VALUES (45, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 07:47:00', '2023-03-23 07:47:00');
+INSERT INTO `q_products` VALUES (46, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 07:47:00', '2023-03-23 07:47:00');
+INSERT INTO `q_products` VALUES (47, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 07:48:00', '2023-03-23 07:48:00');
+INSERT INTO `q_products` VALUES (48, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 07:51:00', '2023-03-23 07:51:00');
+INSERT INTO `q_products` VALUES (49, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 07:52:00', '2023-03-23 07:52:00');
+INSERT INTO `q_products` VALUES (50, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 07:56:00', '2023-03-23 07:56:00');
+INSERT INTO `q_products` VALUES (51, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 07:57:00', '2023-03-23 07:57:00');
+INSERT INTO `q_products` VALUES (52, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 08:05:00', '2023-03-23 08:05:00');
+INSERT INTO `q_products` VALUES (53, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 08:15:00', '2023-03-23 08:15:00');
+INSERT INTO `q_products` VALUES (54, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 08:20:00', '2023-03-23 08:20:00');
+INSERT INTO `q_products` VALUES (55, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 08:21:00', '2023-03-23 08:21:00');
+INSERT INTO `q_products` VALUES (56, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 08:26:00', '2023-03-23 08:26:00');
+INSERT INTO `q_products` VALUES (57, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 08:27:00', '2023-03-23 08:27:00');
+INSERT INTO `q_products` VALUES (58, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 08:27:00', '2023-03-23 08:27:00');
+INSERT INTO `q_products` VALUES (59, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 08:27:00', '2023-03-23 08:27:00');
+INSERT INTO `q_products` VALUES (60, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 08:28:00', '2023-03-23 08:28:00');
+INSERT INTO `q_products` VALUES (61, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 08:28:00', '2023-03-23 08:28:00');
+INSERT INTO `q_products` VALUES (62, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 08:30:00', '2023-03-23 08:30:00');
+INSERT INTO `q_products` VALUES (63, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 08:30:00', '2023-03-23 08:30:00');
+INSERT INTO `q_products` VALUES (64, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 08:31:00', '2023-03-23 08:31:00');
+INSERT INTO `q_products` VALUES (65, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 08:32:00', '2023-03-23 08:32:00');
+INSERT INTO `q_products` VALUES (66, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 08:40:00', '2023-03-23 08:40:00');
+INSERT INTO `q_products` VALUES (67, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 08:41:00', '2023-03-23 08:41:00');
+INSERT INTO `q_products` VALUES (68, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 08:48:00', '2023-03-23 08:48:00');
+INSERT INTO `q_products` VALUES (69, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 08:48:00', '2023-03-23 08:48:00');
+INSERT INTO `q_products` VALUES (70, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 08:49:00', '2023-03-23 08:49:00');
+INSERT INTO `q_products` VALUES (71, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 08:53:00', '2023-03-23 08:53:00');
+INSERT INTO `q_products` VALUES (72, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 08:54:00', '2023-03-23 08:54:00');
+INSERT INTO `q_products` VALUES (73, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 08:57:00', '2023-03-23 08:57:00');
+INSERT INTO `q_products` VALUES (74, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 09:03:00', '2023-03-23 09:03:00');
+INSERT INTO `q_products` VALUES (75, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 09:06:00', '2023-03-23 09:06:00');
+INSERT INTO `q_products` VALUES (76, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 09:07:00', '2023-03-23 09:07:00');
+INSERT INTO `q_products` VALUES (77, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 09:09:00', '2023-03-23 09:09:00');
+INSERT INTO `q_products` VALUES (78, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 09:11:00', '2023-03-23 09:11:00');
+INSERT INTO `q_products` VALUES (79, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 09:11:00', '2023-03-23 09:11:00');
+INSERT INTO `q_products` VALUES (80, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 09:12:00', '2023-03-23 09:12:00');
+INSERT INTO `q_products` VALUES (81, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 09:13:00', '2023-03-23 09:13:00');
+INSERT INTO `q_products` VALUES (82, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 09:13:00', '2023-03-23 09:13:00');
+INSERT INTO `q_products` VALUES (83, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 09:14:00', '2023-03-23 09:14:00');
+INSERT INTO `q_products` VALUES (84, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 09:23:00', '2023-03-23 09:23:00');
+INSERT INTO `q_products` VALUES (85, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 09:24:00', '2023-03-23 09:24:00');
+INSERT INTO `q_products` VALUES (86, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 09:25:00', '2023-03-23 09:25:00');
+INSERT INTO `q_products` VALUES (87, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 09:26:00', '2023-03-23 09:26:00');
+INSERT INTO `q_products` VALUES (88, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 09:28:00', '2023-03-23 09:28:00');
+INSERT INTO `q_products` VALUES (89, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 09:29:00', '2023-03-23 09:29:00');
+INSERT INTO `q_products` VALUES (90, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 09:31:00', '2023-03-23 09:31:00');
+INSERT INTO `q_products` VALUES (91, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 09:32:00', '2023-03-23 09:32:00');
+INSERT INTO `q_products` VALUES (92, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 09:34:00', '2023-03-23 09:34:00');
+INSERT INTO `q_products` VALUES (93, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 09:35:00', '2023-03-23 09:35:00');
 
 -- ----------------------------
 -- Table structure for quotes

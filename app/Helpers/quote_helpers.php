@@ -67,4 +67,11 @@ if (!function_exists('getExactQuantityPaper')) {
 			return $materal->id;
 		}
 	}
+
+	if (!function_exists('convertCmToMeter')) {
+		function convertCmToMeter(&$length, &$width){
+			$length = $length/100;
+			$width = $width/100;
+		}
+	}
 }

@@ -180,3 +180,9 @@ if (!function_exists('getCodeInsertTable')) {
         return sprintf("%".$num."s", getInsertNextId($table));
     }
 }
+
+if (!function_exists('checkEmptyValue')) {
+    function checkEmptyValue($value, $type = 'str'){
+       
+    }
+}

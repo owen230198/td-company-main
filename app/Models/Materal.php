@@ -4,13 +4,13 @@ namespace App\Models;
  
 use Illuminate\Database\Eloquent\Model;
  
-class QLaminateMateral extends Model
+class Materal extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'q_laminate_materals';
+    protected $table = 'materals';
     protected $protectFields = false;
 }

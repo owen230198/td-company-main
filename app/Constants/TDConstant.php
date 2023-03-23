@@ -17,6 +17,8 @@
 
         //số màu in
         const APLA_PRINT_COLOR = 'apla_print_color';
+        const APLA_PRICE_FACTOR = 1000;
+        const APLA_PRICE_PLUS = 100000;
         const PRINT_COLOR = ['Chọn số màu in', 1, 2, 3, 4, 5, 6, self::APLA_PRINT_COLOR => 'In áp la 1 mặt'];
 
         //Yêu cầu thợ in
@@ -111,6 +113,10 @@
         const DECAL_SUPP = 5;
 
         const PLUS_PAPER = 100;
+
+        const PRINT_SUBTRACT_PAPER = 1000;
+        const PLUS_PAPER_DEVICE = 30;
+        const FLOAT_PRICE = 30000;
     }
     
 ?>
