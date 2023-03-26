@@ -145,11 +145,11 @@ var setNameProductQuote = function()
 {
   $(document).on('change', 'input.quote_set_product_name', function(event){
     event.preventDefault();
-    let text = $(this).val();
+    let text = $(this).val() != '' ? $(this).val() : 'Chưa có tên';
     let tabpane = $(this).closest('.tab-pane.tab_pane_quote_pro');
     let li_id = tabpane.attr('id');
     $('a#'+li_id+'-tab').text(text);
-    $('input.quote_receive_paper_name_main').val(text);
+    $(this).closest('.config_handle_paper_pro').find('input.quote_receive_paper_name_main').val(text);
     tabpane.data('pname', text);
   })
 }
@@ -191,7 +191,8 @@ var selectProductCategory = function()
   $(document).on('change', 'select.select_quote_procategory', function(event){
     event.preventDefault();
     let proindex = $(this).attr('proindex');
-    let url = 'get-view-product-structure?category='+$(this).val()+'&proindex='+proindex;
+    let paper_name = $(this).closest('.config_handle_paper_pro').find('input.quote_set_product_name').val();
+    let url = 'get-view-product-structure?category='+$(this).val()+'&proindex='+proindex+'&paper_name='+paper_name;
     section = $(this).closest('.config_handle_paper_pro').find('.ajax_product_view_by_category');
     ajaxViewTarget(url, section, section);
   });

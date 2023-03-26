@@ -19,7 +19,7 @@ class QuoteService extends BaseService
 
     public function insertCustomerQuote($customer_id, $data_customer)
     {
-        $this->conFigBaseDataAction($data_customer);
+        $this->configBaseDataAction($data_customer);
         $data_quote = $data_customer;
         if (empty($customer_id)) {
             $data_customer['code'] = Customer::getInsertCode();
@@ -79,7 +79,7 @@ class QuoteService extends BaseService
         $data_action['category'] = $data['category'];
         $data_action['design'] = $data['design'];
         $data_action['quote_id'] = $data['quote_id'];
-        $this->conFigBaseDataAction($data_action);
+        $this->configBaseDataAction($data_action);
         return $data_action;
     }
 

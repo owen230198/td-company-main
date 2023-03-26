@@ -2,7 +2,7 @@
 <div class="quote_paper_item mt-3 border_green p-3 radius_5 position-relative"> 
     <span class="remove_ext_paper_quote d-flex bg_red color_white red_btn smooth"><i class="fa fa-times" aria-hidden="true"></i></span> 
 <?php else: ?> 
-<input type="hidden" value="1" name="main">
+<input type="hidden" value="1" name="product[<?php echo e($j); ?>][paper][<?php echo e($pindex); ?>][main]">
 <?php endif; ?>
 <div class="quote_product_structure">
 </div>

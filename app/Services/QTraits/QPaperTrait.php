@@ -119,7 +119,7 @@ trait QPaperTrait
         $qty_paper = !empty($data['paper_qty']) ? (int) $data['paper_qty'] : 0;
         $qty_pro = !empty($data['qty']) ? (int) $data['qty'] : 0;
         $n_qty = !empty($data['n_qty']) ? (int) $data['n_qty'] : 1;
-        $data_action['paper_size'] = $this->configDataSizePaper($qty_paper, $length, $width, $data['size']);
+        $data_action['size'] = $this->configDataSizePaper($qty_paper, $length, $width, $data['size']);
         $data_action['print'] = $this->configDataPrint($qty_pro, $n_qty, $length, $width, $data['print']);
         $data_action['nilon'] = $this->configDataStage($qty_pro, $n_qty, $data['nilon'], $length, $width);
         $data_action['elevate'] = $this->configDataStage($qty_pro, $n_qty, $data['elevate']);
@@ -129,6 +129,7 @@ trait QPaperTrait
         $data_action['compress'] = $this->configDataCompress($qty_pro, $n_qty, $data['compress']);
         $data_action['uv'] = $this->configDataStage($qty_pro, $n_qty, $data['uv']);
         $data_action['ext_price'] = $this->configDataPlus($qty_pro, $data['ext_price']);
+        $data_action['total_cost'] = $this->priceCaculatedByArray($data_action);
         return $data_action;
     }
 }

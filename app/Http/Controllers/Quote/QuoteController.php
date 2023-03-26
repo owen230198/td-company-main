@@ -104,6 +104,7 @@ class QuoteController extends Controller
             $data['elements'] = $cate == 1 ? TDConstant::HARD_ELEMENT : TDConstant::PAPER_ELEMENT;
             $data['j'] = (int) $request->input('proindex');
             $data['pindex'] = 0;
+            $data['paper_name'] = $request->input('paper_name');
             return view('quotes.products.structure', $data);
         }
     }

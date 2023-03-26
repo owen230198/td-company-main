@@ -1,17 +1,12 @@
 <?php
 namespace App\Services;
-use App\Models\NGroupUser;
 class BaseService
 {
  	function __construct(){
- 		$this->users = new \App\Models\NUser;
- 		$this->group_users = new NGroupUser;
- 		$this->list_tables = new \App\Models\NTable;
-        $this->detail_tables = new \App\Models\NDetailTable;
-        $this->regions = new \App\Models\NRegion;
+ 		
  	}
 
-	public function conFigBaseDataAction(&$data)
+	public function configBaseDataAction(&$data)
 	{
 		$data['act'] = !empty($data['act']) ? $data['act'] : 1;
 		$data['created_by'] = @getSessionUser()['id'];
@@ -21,7 +16,7 @@ class BaseService
 
 	public function processDataBefore($data)
 	{
-		$this->conFigBaseDataAction($data);
+		$this->configBaseDataAction($data);
 		foreach ($data as $key => $value) {
 			if (str_contains($key, 'date') || str_contains($key, 'expired') || str_contains($key, '_at')) {
 				$data[$key] = getDataDateTime($value);
