@@ -111,6 +111,7 @@
         const STYRO_SUPP = 3;
         const SILK_SUPP = 4;
         const DECAL_SUPP = 5;
+        const MICA_SUPP = 6;
 
         const PLUS_PAPER = 100;
 

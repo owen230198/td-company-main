@@ -2,6 +2,7 @@
 namespace App\Services;
 use App\Constants\StatusConstant;
 use App\Models\NGroupUser;
+use App\Models\NUser;
 use App\Services\BaseService;
 class AuthService extends BaseService
 {
@@ -14,7 +15,7 @@ class AuthService extends BaseService
     {
     	$this->validatelogin($request);
         $request = $request->all();
-        $user = $this->users::where('act', 1)->where('username', $request['username'])->first();
+        $user = NUser::where('act', 1)->where('username', $request['username'])->first();
         if (!$user) {
             return $this->returnMessage(100, ['messages'=>'Không tìm thấy tài khoản trên hệ thống!']);
         }

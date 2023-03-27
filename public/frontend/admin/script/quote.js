@@ -107,14 +107,17 @@ var selectPaperMateralModule = function()
 
 var moduleInputQuantityProduct = function()
 {
+  let input_time;
   $(document).on('keyup', 'input.quote_set_qty_pro_input', function(event){
     event.preventDefault();
     let quantity = parseInt($(this).val());
     if (quantity > 0) {
       let url = 'get-view-product-quantity?quantity='+$(this).val();
       let ajax_target = $(this).closest('.quote_handle_section.handle_pro_section').find('.ajax_product_quote_number');
-      let section_class = '.ajax_product_quote_number';
-      ajaxViewTarget(url, ajax_target, ajax_target);
+      clearTimeout(input_time)
+      input_time = setTimeout(function(){
+        ajaxViewTarget(url, ajax_target, ajax_target);
+      }, 500)
     }
   });
 }

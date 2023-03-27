@@ -17,10 +17,12 @@
         ?>
         <?php echo $__env->make('view_update.view', $pro_rubber_qty, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
+        <?php echo $__env->make('quotes.products.supply_size', ['supp_key' => 'rubber', 'with_size1' => '120', 'with_size2' => '244'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
         <?php
             $pro_rubber_nqty = [
                 'name' => 'product['.$j.'][rubber]['.$pindex.'][nqty]',
-                'note' => 'Số bát/tờ in',
+                'note' => 'Tổng số bát',
                 'attr' => ['type_input' => 'number', 'required' => 1, 'inject_class' => 'pro_nqty_input paper_qty_modul_input'],
                 'value' => @$pro_size['nqty'] ?? 1
             ] 
@@ -39,19 +41,6 @@
             <span class="ml-1 color_gray">+ <?php echo e($rubber_compen_num); ?> BH</span>
         </div> 
     </div>
-    <div class="d-flex align-items-center mb-2 fs-13">
-        <label class="mb-0 min_180 text-capitalize text-right mr-3">
-            <span class="fs-15 mr-1">*</span>Kích thước
-        </label>
-        <div class="d-flex justify-content-between align-items-center">
-            <input type="number" name = 'product[<?php echo e($j); ?>][rubber][<?php echo e($pindex); ?>][size][length]' placeholder="Chiều dài (cm)" 
-            class="form-control medium_input" step="any"> 
-            <span class="mx-3">X</span>
-            <input type="number" name = 'product[<?php echo e($j); ?>][rubber][<?php echo e($pindex); ?>][size][width]' placeholder="Chiều rộng (cm)" 
-            class="form-control medium_input" step="any"> 
-        </div>
-    </div>
-
     <?php
         $pro_rubber_supply = [
             'name' => 'product['.$j.'][rubber]['.$pindex.'][supplies]',

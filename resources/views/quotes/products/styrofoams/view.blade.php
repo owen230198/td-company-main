@@ -17,10 +17,12 @@
         @endphp
         @include('view_update.view', $pro_styro_qty)
 
+        @include('quotes.products.supply_size', ['supp_key' => 'styro', 'with_size1' => '160', 'with_size2' => '200'])
+
         @php
             $pro_styro_nqty = [
                 'name' => 'product['.$j.'][styro]['.$pindex.'][nqty]',
-                'note' => 'Số bát/tờ in',
+                'note' => 'Tổng số bát',
                 'attr' => ['type_input' => 'number', 'required' => 1, 'inject_class' => 'pro_nqty_input paper_qty_modul_input'],
                 'value' => @$pro_size['nqty'] ?? 1
             ] 
@@ -38,18 +40,6 @@
             @include('view_update.view', $pro_styro_qty)
             <span class="ml-1 color_gray">+ {{ $styro_compen_num }} BH</span>
         </div> 
-    </div>
-    <div class="d-flex align-items-center mb-2 fs-13">
-        <label class="mb-0 min_180 text-capitalize text-right mr-3">
-            <span class="fs-15 mr-1">*</span>Kích thước
-        </label>
-        <div class="d-flex justify-content-between align-items-center">
-            <input type="number" name = 'product[{{ $j }}][styro][{{ $pindex }}][size][length]' placeholder="Chiều dài (cm)" 
-            class="form-control medium_input" step="any"> 
-            <span class="mx-3">X</span>
-            <input type="number" name = 'product[{{ $j }}][styro][{{ $pindex }}][size][width]' placeholder="Chiều rộng (cm)" 
-            class="form-control medium_input" step="any"> 
-        </div>
     </div>
 
     @php

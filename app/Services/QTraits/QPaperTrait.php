@@ -130,6 +130,7 @@ trait QPaperTrait
         $data_action['uv'] = $this->configDataStage($qty_pro, $n_qty, $data['uv']);
         $data_action['ext_price'] = $this->configDataPlus($qty_pro, $data['ext_price']);
         $data_action['total_cost'] = $this->priceCaculatedByArray($data_action);
+        dd($data_action);
         return $data_action;
     }
 }

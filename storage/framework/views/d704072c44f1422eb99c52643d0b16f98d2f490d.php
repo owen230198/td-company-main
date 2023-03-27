@@ -17,10 +17,33 @@
         ?>
         <?php echo $__env->make('view_update.view', $pro_decal_qty, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
+        <div class="d-flex align-items-center mb-2 fs-13">
+            <label class="mb-0 min_180 text-capitalize text-right mr-3">
+                <span class="fs-15 mr-1">*</span>Chọn kích thước
+            </label>
+            <div class="d-flex justify-content-between align-items-center">
+                <select name="product[<?php echo e($j); ?>][decal][<?php echo e($pindex); ?>][size][from]" class="form-control medium_input">
+                    <option class="rubber">Cao su non</option>
+                    <option class="styro">Mút phẳng</option>
+                    <option class="carton">Carton</option>
+                </select>
+                <span class="mx-3">=</span>
+                <input type="number" name = 'product[<?php echo e($j); ?>][decal][<?php echo e($pindex); ?>][size][length]' placeholder="Chiều dài (cm)" 
+                class="form-control medium_input" step="any"> 
+                <span class="mx-2">X</span>
+                <input type="number" name = 'product[<?php echo e($j); ?>][decal][<?php echo e($pindex); ?>][size][width]' placeholder="Chiều rộng (cm)" 
+                class="form-control medium_input" step="any"> 
+                <span class="mx-2">+</span>
+                <input type="number" name = 'product[<?php echo e($j); ?>][decal][<?php echo e($pindex); ?>][size][margin]' placeholder="Thừa lề (cm)" 
+                class="form-control medium_input" step="any">
+                <span class="ml-2 color_red font-italic">Khớp chiều 150cm</span> 
+            </div>
+        </div>
+
         <?php
             $pro_decal_nqty = [
                 'name' => 'product['.$j.'][decal]['.$pindex.'][nqty]',
-                'note' => 'Số bát/tờ in',
+                'note' => 'Tổng số bát',
                 'attr' => ['type_input' => 'number', 'required' => 1, 'inject_class' => 'pro_nqty_input paper_qty_modul_input'],
                 'value' => @$pro_size['nqty'] ?? 1
             ] 
@@ -39,18 +62,6 @@
             <span class="ml-1 color_gray">+ <?php echo e($decal_compen_num); ?> BH</span>
         </div> 
     </div>
-    <div class="d-flex align-items-center mb-2 fs-13">
-        <label class="mb-0 min_180 text-capitalize text-right mr-3">
-            <span class="fs-15 mr-1">*</span>Kích thước
-        </label>
-        <div class="d-flex justify-content-between align-items-center">
-            <input type="number" name = 'product[<?php echo e($j); ?>][decal][<?php echo e($pindex); ?>][size][length]' placeholder="Chiều dài (cm)" 
-            class="form-control medium_input" step="any"> 
-            <span class="mx-3">X</span>
-            <input type="number" name = 'product[<?php echo e($j); ?>][decal][<?php echo e($pindex); ?>][size][width]' placeholder="Chiều rộng (cm)" 
-            class="form-control medium_input" step="any"> 
-        </div>
-    </div>
 
     <?php
         $pro_decal_supply = [
@@ -63,12 +74,5 @@
         ] 
     ?>
     <?php echo $__env->make('view_update.view', $pro_decal_supply, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-    <?php
-            $pro_decal_mill_nqty = [
-                'name' => 'product['.$j.'][decal]['.$pindex.'][nqty_mill]',
-                'note' => 'Xén số bát',
-                'value' => 0
-            ] 
-        ?>
-        <?php echo $__env->make('view_update.view', $pro_decal_mill_nqty, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    
 </div><?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/quotes/products/decals/view.blade.php ENDPATH**/ ?>

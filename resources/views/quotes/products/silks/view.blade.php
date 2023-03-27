@@ -17,6 +17,23 @@
         @endphp
         @include('view_update.view', $pro_silk_qty)
 
+        <div class="d-flex align-items-center mb-2 fs-13">
+            <label class="mb-0 min_180 text-capitalize text-right mr-3">
+                <span class="fs-15 mr-1">*</span>Kích thước
+            </label>
+            <div class="d-flex justify-content-between align-items-center">
+                <input type="number" name = 'product[{{ $j }}][silk][{{ $pindex }}][size][length]' placeholder="Chiều dài (cm)" 
+                class="form-control medium_input" step="any"> 
+                <span class="mx-3">X</span>
+                <input type="number" name = 'product[{{ $j }}][silk][{{ $pindex }}][size][width]' placeholder="Chiều rộng (cm)" 
+                class="form-control medium_input" step="any"> 
+                <span class="mx-2">+</span>
+                <input type="number" name = 'product[{{ $j }}][silk][{{ $pindex }}][size][margin]' placeholder="Thừa lề (cm)" 
+                class="form-control medium_input" step="any">
+                <span class="ml-2 color_red font-italic">Khớp chiều 150cm</span> 
+            </div>
+        </div>
+
         @php
             $pro_silk_nqty = [
                 'name' => 'product['.$j.'][silk]['.$pindex.'][nqty]',
@@ -39,18 +56,6 @@
             <span class="ml-1 color_gray">+ {{ $silk_compen_num }} BH</span>
         </div> 
     </div>
-    <div class="d-flex align-items-center mb-2 fs-13">
-        <label class="mb-0 min_180 text-capitalize text-right mr-3">
-            <span class="fs-15 mr-1">*</span>Kích thước
-        </label>
-        <div class="d-flex justify-content-between align-items-center">
-            <input type="number" name = 'product[{{ $j }}][silk][{{ $pindex }}][size][length]' placeholder="Chiều dài (cm)" 
-            class="form-control medium_input" step="any"> 
-            <span class="mx-3">X</span>
-            <input type="number" name = 'product[{{ $j }}][silk][{{ $pindex }}][size][width]' placeholder="Chiều rộng (cm)" 
-            class="form-control medium_input" step="any"> 
-        </div>
-    </div>
 
     @php
         $pro_silk_supply = [
@@ -63,13 +68,4 @@
         ] 
     @endphp
     @include('view_update.view', $pro_silk_supply)
-    
-    @php
-        $pro_silk_mill_nqty = [
-            'name' => 'product['.$j.'][silk]['.$pindex.'][nqty_mill]',
-            'note' => 'Xén số bát',
-            'value' => 0
-        ] 
-    @endphp
-    @include('view_update.view', $pro_silk_mill_nqty)
 </div>
