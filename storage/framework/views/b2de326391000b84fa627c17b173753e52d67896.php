@@ -5,9 +5,12 @@
     <?php
         $rubber_compen_percent = 0;
         $rubber_compen_num = \App\Constants\TDConstant::CARTON_COMPEN_NUM;
+        $rubber_plus_size = \App\Constants\TDConstant::SUPPLY_PLUS_SIZE;
+        $rubber_with_size1 = \App\Constants\TDConstant::RUBBER_WITH_SIZE1;
+        $rubber_with_size2 = \App\Constants\TDConstant::RUBBER_WITH_SIZE2;
     ?>
     
-    <div class="quantity_paper_module" data-percent = <?php echo e($rubber_compen_percent); ?> data-num = <?php echo e($rubber_compen_num); ?>>
+    <div class="quantity_paper_module quantity_supply_module" data-percent = <?php echo e($rubber_compen_percent); ?> data-num = <?php echo e($rubber_compen_num); ?>>
         <?php
             $pro_rubber_qty = [
                 'name' => 'product['.$j.'][rubber]['.$pindex.'][qty]',
@@ -17,7 +20,8 @@
         ?>
         <?php echo $__env->make('view_update.view', $pro_rubber_qty, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-        <?php echo $__env->make('quotes.products.supply_size', ['supp_key' => 'rubber', 'with_size1' => '120', 'with_size2' => '244'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        <?php echo $__env->make('quotes.products.supply_size', 
+        ['supp_key' => 'rubber', 'plus_size' => $rubber_plus_size, 'with_size1' => $rubber_with_size1, 'with_size2' => $rubber_with_size2], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
         <?php
             $pro_rubber_nqty = [

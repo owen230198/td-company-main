@@ -43,12 +43,12 @@
         <label class="mb-0 min_180 text-capitalize text-right mr-3">
             <span class="fs-15 mr-1">*</span>Kích thước
         </label>
-        <div class="d-flex justify-content-between align-items-center">
-            <input type="number" name = 'product[{{ $j }}][carton][{{ $pindex }}][size][length]' placeholder="Chiều dài (cm)" 
-            class="form-control medium_input" step="any"> 
+        <div class="d-flex justify-content-between align-items-center{{ $pindex == 0 ? ' carton_module_size' : '' }}">
+            <input type="number" name = 'product[{{ $j }}][carton][{{ $pindex }}][size][length][total]' placeholder="Chiều dài (cm)" 
+            class="form-control medium_input input_size_length" step="any"> 
             <span class="mx-3">X</span>
-            <input type="number" name = 'product[{{ $j }}][carton][{{ $pindex }}][size][width]' placeholder="Chiều rộng (cm)" 
-            class="form-control medium_input" step="any"> 
+            <input type="number" name = 'product[{{ $j }}][carton][{{ $pindex }}][size][width][total]' placeholder="Chiều rộng (cm)" 
+            class="form-control medium_input input_size_width" step="any"> 
         </div>
     </div>
 

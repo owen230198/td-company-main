@@ -434,6 +434,7 @@ input[type="checkbox"].toggle:disabled::after {
     justify-content: center;
     align-items: center;
     background: #f1f4f9;
+    z-index: 2;
 }
 
 .form-control.readonly{

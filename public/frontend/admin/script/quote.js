@@ -1,5 +1,5 @@
 var changQtyInput = function(){
-  $(document).on('change','input.paper_qty_modul_input',function(e){
+  $(document).on('keyup','input.paper_qty_modul_input',function(e){
     e.preventDefault();
     let parent = $(this).closest('.quantity_paper_module');
     let qty_pro = parseInt(parent.find('input.pro_qty_input').val());
@@ -10,6 +10,30 @@ var changQtyInput = function(){
     let addqty = Math.ceil(qty_paper*compen_percent/100) + compen_num;
     parent.find('input.paper_qty_input').val(qty_paper + addqty);
    });
+
+  $(document).on('keyup', 'input.supp_size_change', function(){
+    let parent = $(this).closest('.supp_size_param_module');
+    let param_val = parent.find('input.supp_param_input').val();
+    let param = !Number.isNaN(parseFloat(param_val)) ? parseFloat(param_val) : 0;
+    let nqty_val = parent.find('input.supp_nqty_input').val();
+    let nqty = !Number.isNaN(parseInt(nqty_val)) ? parseInt(nqty_val) : 1;
+    parent.find('input.supp_exparam_input').val(param*nqty);
+    let plus = parseFloat(parent.data('plus'));
+    let margin_val = parent.find('input.supp_margin_input').val();
+    let margin = !Number.isNaN(parseFloat(margin_val)) ? parseFloat(margin_val) : 0;
+    parent.find('input.supp_total_input').val((param*nqty)+plus+margin);
+  })
+
+  $(document).on('keyup', 'input.supp_nqty_input', function(){
+    let module = $(this).closest('.quantity_supply_module');
+    let nqty_val1 = module.find('input.supp_nqty_input.nqty1').val();
+    let nqty1 = !Number.isNaN(parseInt(nqty_val1)) ? parseInt(nqty_val1) : 1;
+    let nqty_val2 = module.find('input.supp_nqty_input.nqty2').val();
+    let nqty2 = !Number.isNaN(parseInt(nqty_val2)) ? parseInt(nqty_val2) : 1;
+    let nqty_input = module.find('input.pro_nqty_input');
+    nqty_input.val(nqty1*nqty2);
+    nqty_input.trigger('keyup');
+  })
 }
 
 var moduleSelectOtherPaper = function()
@@ -39,17 +63,17 @@ var GetTodayDate = function() {
 var PrintQuote = function() {
   $(document).on('click','.print_quotes',function(event){
     event.preventDefault();
-    var baseUrl = $('base').attr('href');
-    var arrs = document.querySelectorAll('.quote_model');
-    var html = '';
-    var name = $('.pro_name').text();
-    var company = $('.company').text();
-    for (var i = 0; i < arrs.length; i++) {
+    let baseUrl = $('base').attr('href');
+    let arrs = document.querySelectorAll('.quote_model');
+    let html = '';
+    let name = $('.pro_name').text();
+    let company = $('.company').text();
+    for (let i = 0; i < arrs.length; i++) {
       html += arrs[i].innerHTML;
     }
     str_today = GetTodayDate();
     title = str_today + ' ' + name + ' ' + company ;
-    var mywindow = window.open('', '', '');
+    let mywindow = window.open('', '', '');
     mywindow.document.write('<html><head><title>'+title+'</title>');
     mywindow.document.write('<base href="' + baseUrl + '">');
     mywindow.document.write('<link rel="icon" href="public/frontend/admin/images/logo.png" type="image/gif">');

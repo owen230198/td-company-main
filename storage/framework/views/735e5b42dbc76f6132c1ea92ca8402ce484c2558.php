@@ -5,9 +5,12 @@
     <?php
         $styro_compen_percent = 0;
         $styro_compen_num = \App\Constants\TDConstant::CARTON_COMPEN_NUM;
+        $styro_plus_size = \App\Constants\TDConstant::SUPPLY_PLUS_SIZE;
+        $styro_with_size1 = \App\Constants\TDConstant::STYRO_WITH_SIZE1;
+        $styro_with_size2 = \App\Constants\TDConstant::STYRO_WITH_SIZE2;
     ?>
     
-    <div class="quantity_paper_module" data-percent = <?php echo e($styro_compen_percent); ?> data-num = <?php echo e($styro_compen_num); ?>>
+    <div class="quantity_paper_module quantity_supply_module" data-percent = <?php echo e($styro_compen_percent); ?> data-num = <?php echo e($styro_compen_num); ?>>
         <?php
             $pro_styro_qty = [
                 'name' => 'product['.$j.'][styro]['.$pindex.'][qty]',
@@ -17,7 +20,8 @@
         ?>
         <?php echo $__env->make('view_update.view', $pro_styro_qty, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-        <?php echo $__env->make('quotes.products.supply_size', ['supp_key' => 'styro', 'with_size1' => '160', 'with_size2' => '200'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        <?php echo $__env->make('quotes.products.supply_size', 
+        ['supp_key' => 'rubber', 'plus_size' => $styro_plus_size, 'with_size1' => $styro_with_size1, 'with_size2' => $styro_with_size2], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
         <?php
             $pro_styro_nqty = [

@@ -17,7 +17,7 @@
         @endphp
         @include('view_update.view', $pro_decal_qty)
 
-        <div class="d-flex align-items-center mb-2 fs-13">
+        <div class="d-flex align-items-center mb-2 fs-13 module_size_decal">
             <label class="mb-0 min_180 text-capitalize text-right mr-3">
                 <span class="fs-15 mr-1">*</span>Chọn kích thước
             </label>

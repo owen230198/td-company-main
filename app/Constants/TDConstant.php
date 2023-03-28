@@ -118,6 +118,12 @@
         const PRINT_SUBTRACT_PAPER = 1000;
         const PLUS_PAPER_DEVICE = 30;
         const FLOAT_PRICE = 30000;
+
+        const SUPPLY_PLUS_SIZE = 1.2;
+        const RUBBER_WITH_SIZE1 = 120;
+        const RUBBER_WITH_SIZE2 = 244;
+        const STYRO_WITH_SIZE1 = 160;
+        const STYRO_WITH_SIZE2 = 200;
     }
     
 ?>
