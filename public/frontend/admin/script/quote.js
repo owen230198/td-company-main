@@ -1,5 +1,5 @@
 var changQtyInput = function(){
-  $(document).on('keyup','input.paper_qty_modul_input',function(e){
+  $(document).on('keyup change','input.paper_qty_modul_input',function(e){
     e.preventDefault();
     let parent = $(this).closest('.quantity_paper_module');
     let qty_pro = parseInt(parent.find('input.pro_qty_input').val());
@@ -33,7 +33,17 @@ var changQtyInput = function(){
     let nqty_input = module.find('input.pro_nqty_input');
     nqty_input.val(nqty1*nqty2);
     nqty_input.trigger('keyup');
-  })
+  });
+
+  $(document).on('change', 'select.decal_select_module_size', function(event){
+    event.preventDefault();
+    let val = $(this).val();
+    let product = $(this).closest('#quote-pro-struct-tabContent');
+    let module_size = product.find(val);
+    let length = module_size.find('input.input_size_length');
+    let width = module_size.find('input.input_size_width');
+    console.log('size', length, width);
+  });
 }
 
 var moduleSelectOtherPaper = function()
@@ -100,7 +110,7 @@ var selectCustomerQuote = function()
   $(document).on('change', '.select_customer_quote', function(event){
     event.preventDefault();
     $.ajax({
-      url: 'get-view-customer-data?id='+$(this).val(),
+      url: getBaseRoute('get-view-customer-data?id='+$(this).val()),
       type: 'GET'
     })
     .done(function(html){
@@ -201,7 +211,7 @@ var autoComputePaperAjax = function()
     let section = $(this).closest('.quote_paper_item');
     $('#loader').fadeIn(200);
     $.ajax({
-      url: 'compute-paper-size?paper_name='+paper_name+'&proindex='+proindex+'paperindex='+paperindex,
+      url: getBaseRoute('compute-paper-size?paper_name='+paper_name+'&proindex='+proindex+'paperindex='+paperindex),
       type: 'GET',
       data: data
     })

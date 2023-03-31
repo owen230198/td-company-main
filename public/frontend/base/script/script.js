@@ -1,3 +1,8 @@
+var getBaseRoute = function(route)
+{
+	let base_url = $('head base').attr('href');
+	return base_url+'/'+route;
+}
 var baseAjaxForm = function()
 { 
 	$('.baseAjaxForm').submit(function(event) {
@@ -29,7 +34,7 @@ var ajaxViewTarget = function(url, target_ajax, section_class, type = 1)
 {
 	$('#loader').fadeIn(200);
 	$.ajax({
-		url: url,
+		url: getBaseRoute(url),
 		type: 'GET'
 	})
 	.done(function(data){

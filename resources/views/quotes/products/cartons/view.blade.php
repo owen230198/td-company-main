@@ -30,27 +30,39 @@
         @php
             $pro_carton_qty = [
                 'name' => 'product['.$j.'][carton]['.$pindex.'][carton_qty]',
-                'note' => 'Số lượng tờ in',
-                'attr' => ['type_input' => 'number', 'inject_class' => 'paper_qty_input'],
+                'note' => 'Tổng SL vật tư',
+                'attr' => ['type_input' => 'number', 'inject_class' => 'paper_qty_input', 'readonly' => 1],
             ] 
         @endphp
         <div class="d-flex align-items-center">
             @include('view_update.view', $pro_carton_qty)
-            <span class="ml-1 color_gray">Thêm {{ $carton_compen_percent }} % + {{ $carton_compen_num }} BH</span>
+            <span class="ml-1 color_gray"> x {{ $carton_compen_percent }} % + {{ $carton_compen_num }} BH</span>
         </div> 
     </div>
-    <div class="d-flex align-items-center mb-2 fs-13">
-        <label class="mb-0 min_180 text-capitalize text-right mr-3">
-            <span class="fs-15 mr-1">*</span>Kích thước
-        </label>
-        <div class="d-flex justify-content-between align-items-center{{ $pindex == 0 ? ' carton_module_size' : '' }}">
-            <input type="number" name = 'product[{{ $j }}][carton][{{ $pindex }}][size][length][total]' placeholder="Chiều dài (cm)" 
-            class="form-control medium_input input_size_length" step="any"> 
-            <span class="mx-3">X</span>
-            <input type="number" name = 'product[{{ $j }}][carton][{{ $pindex }}][size][width][total]' placeholder="Chiều rộng (cm)" 
-            class="form-control medium_input input_size_width" step="any"> 
-        </div>
-    </div>
+    @php
+        $pro_carton_length = [
+            'name' => 'product['.$j.'][carton]['.$pindex.'][size][length]',
+            'note' => 'Kích thước chiều dài',
+            'attr' => ['type_input' => 'number', 'placeholder' => 'Mặc định 100cm'],
+        ] 
+    @endphp
+    <div class="d-flex align-items-center">
+        @include('view_update.view', $pro_carton_length)
+        <span class="ml-1 color_gray">Kích thước tấm carton là 100cm x 120cm</span>
+    </div> 
+
+    @php
+        $pro_carton_width = [
+            'name' => 'product['.$j.'][carton]['.$pindex.'][size][width]',
+            'note' => 'Kích thước chiều rộng',
+            'attr' => ['type_input' => 'number', 'placeholder' => 'Nhập KT (cm)'],
+];
+        $carton_width_plus = \App\Constants\TDConstant::CARTON_SIZE_WIDTH_PLUS; 
+    @endphp
+    <div class="d-flex align-items-center">
+        @include('view_update.view', $pro_carton_width)
+        <span class="ml-1 color_gray"> + {{ $carton_width_plus }}cm BH</span>
+    </div> 
 
     @php
         $pro_carton_supply = [
@@ -76,13 +88,10 @@
 
     @php
         $key_device_elevate = \App\Constants\TDConstant::ELEVATE;
-        $key_device_mill = \App\Constants\TDConstant::MILL;
         $key_device_peel = \App\Constants\TDConstant::PEEL;
     @endphp
     @include('quotes.products.select_device', 
     ['key_device' => $key_device_elevate, 'note' => 'Máy bế', 'value' => getDeviceIdByKey($key_device_elevate), 'element' => 'carton'])
     @include('quotes.products.select_device', 
-    ['key_device' => $key_device_mill, 'note' => 'Máy phay', 'value' => getDeviceIdByKey($key_device_mill), 'element' => 'carton'])
-    @include('quotes.products.select_device', 
-    ['key_device' => $key_device_peel, 'note' => 'Máy phay', 'value' => getDeviceIdByKey($key_device_peel), 'element' => 'carton'])
+    ['key_device' => $key_device_peel, 'note' => 'Máy bóc lề', 'value' => getDeviceIdByKey($key_device_peel), 'element' => 'carton'])
 </div>

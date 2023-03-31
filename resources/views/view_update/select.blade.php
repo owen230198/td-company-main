@@ -5,7 +5,8 @@
 @endphp
 <div class="d-flex align-items-center w-100">
 	<select name="{{ $name }}" class="form-control{{ @$configs['searchbox']?' select_config' : '' }}
-	{{ @$attr['inject_class'] ? ' '.$attr['inject_class'] : '' }}">
+	{{ @$attr['inject_class'] ? ' '.$attr['inject_class'] : '' }}" 
+	{{ @$attr['placeholder'] ? 'placehoder='.$attr['placeholder'] : '' }}>
 		@foreach ($list_options as $key => $option)
 			<option value="{{ $key }}" {{ @$value == $key ? 'selected' : '' }}>
 				{{ $option }}

@@ -7,55 +7,55 @@
         $silk_compen_num = \App\Constants\TDConstant::CARTON_COMPEN_NUM;
     ?>
     
-    <div class="quantity_paper_module" data-percent = <?php echo e($silk_compen_percent); ?> data-num = <?php echo e($silk_compen_num); ?>>
-        <?php
-            $pro_silk_qty = [
-                'name' => 'product['.$j.'][silk]['.$pindex.'][qty]',
-                'note' => 'Số lượng',
-                'attr' => ['type_input' => 'number', 'required' => 1, 'inject_class' => 'pro_qty_input paper_qty_modul_input']
-            ] 
-        ?>
-        <?php echo $__env->make('view_update.view', $pro_silk_qty, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php
+        $pro_silk_qty = [
+            'name' => 'product['.$j.'][silk]['.$pindex.'][qty]',
+            'note' => 'Số lượng',
+            'attr' => ['type_input' => 'number', 'required' => 1, 'inject_class' => 'pro_qty_input paper_qty_modul_input']
+        ] 
+    ?>
+    <?php echo $__env->make('view_update.view', $pro_silk_qty, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-        <div class="d-flex align-items-center mb-2 fs-13">
-            <label class="mb-0 min_180 text-capitalize text-right mr-3">
-                <span class="fs-15 mr-1">*</span>Kích thước
-            </label>
-            <div class="d-flex justify-content-between align-items-center">
-                <input type="number" name = 'product[<?php echo e($j); ?>][silk][<?php echo e($pindex); ?>][size][length]' placeholder="Chiều dài (cm)" 
-                class="form-control medium_input" step="any"> 
-                <span class="mx-3">X</span>
-                <input type="number" name = 'product[<?php echo e($j); ?>][silk][<?php echo e($pindex); ?>][size][width]' placeholder="Chiều rộng (cm)" 
-                class="form-control medium_input" step="any"> 
-                <span class="mx-2">+</span>
-                <input type="number" name = 'product[<?php echo e($j); ?>][silk][<?php echo e($pindex); ?>][size][margin]' placeholder="Thừa lề (cm)" 
-                class="form-control medium_input" step="any">
-                <span class="ml-2 color_red font-italic">Khớp chiều 150cm</span> 
-            </div>
-        </div>
+    <?php
+        $pro_silk_nqty = [
+            'name' => 'product['.$j.'][silk]['.$pindex.'][nqty]',
+            'note' => 'Số bát',
+            'type' => 'select',
+            'other_data' => ['data' => ['options' => \App\Constants\TDConstant::SELECT_SUPP_LINK]]
+        ] 
+    ?>
+    <?php echo $__env->make('view_update.view', $pro_silk_nqty, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    
+    <?php
+        $pro_silk_qty_supp = [
+            'name' => 'product['.$j.'][silk]['.$pindex.'][silk_qty]',
+            'note' => 'Tổng SL vật tư',
+            'type' => 'select',
+            'other_data' => ['data' => ['options' => \App\Constants\TDConstant::SELECT_SUPP_LINK]]
+        ] 
+    ?>
+    <?php echo $__env->make('view_update.view', $pro_silk_qty_supp, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-        <?php
-            $pro_silk_nqty = [
-                'name' => 'product['.$j.'][silk]['.$pindex.'][nqty]',
-                'note' => 'Số bát/tờ in',
-                'attr' => ['type_input' => 'number', 'required' => 1, 'inject_class' => 'pro_nqty_input paper_qty_modul_input'],
-                'value' => @$pro_size['nqty'] ?? 1
-            ] 
-        ?>
-        <?php echo $__env->make('view_update.view', $pro_silk_nqty, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-        
-        <?php
-            $pro_silk_qty = [
-                'name' => 'product['.$j.'][silk]['.$pindex.'][silk_qty]',
-                'note' => 'Số lượng tờ in',
-                'attr' => ['type_input' => 'number', 'inject_class' => 'paper_qty_input'],
-            ] 
-        ?>
-        <div class="d-flex align-items-center">
-            <?php echo $__env->make('view_update.view', $pro_silk_qty, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-            <span class="ml-1 color_gray">+ <?php echo e($silk_compen_num); ?> BH</span>
-        </div> 
-    </div>
+    <?php
+        $pro_silk_length = [
+            'name' => 'product['.$j.'][silk]['.$pindex.'][size][length]',
+            'note' => 'Kích thước chiều dài',
+            'attr' => ['type_input' => 'number', 'placeholder' => 'Mặc định 150cm'],
+        ] 
+    ?>
+    <div class="d-flex align-items-center">
+        <?php echo $__env->make('view_update.view', $pro_silk_length, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        <span class="ml-1 color_gray">Kích thước tấm cao su non là 150cm x 1000cm</span>
+    </div> 
+
+    <?php
+        $pro_silk_width = [
+            'name' => 'product['.$j.'][silk]['.$pindex.'][size][width]',
+            'note' => 'Kích thước chiều rộng',
+            'attr' => ['type_input' => 'number', 'placeholder' => 'Nhập KT (cm)'],
+        ]
+    ?>
+    <?php echo $__env->make('view_update.view', $pro_silk_width, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     <?php
         $pro_silk_supply = [
@@ -68,4 +68,17 @@
         ] 
     ?>
     <?php echo $__env->make('view_update.view', $pro_silk_supply, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
+    <?php
+        $pro_silk_ext_price = [
+            'name' => 'product['.$j.'][silk]['.$pindex.'][prescript_price]',
+            'note' => 'Phát sinh giá lụa cao cấp',
+            'attr' => ['type_input' => 'number'],
+            'value' => 0
+        ] 
+    ?>
+    <div class="d-flex align-items-center">
+        <?php echo $__env->make('view_update.view', $pro_silk_ext_price, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        <span class="ml-1 color_gray">Giá cho 1 sản phẩm</span>
+    </div> 
 </div><?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/quotes/products/silks/view.blade.php ENDPATH**/ ?>

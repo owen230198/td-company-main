@@ -1,6 +1,6 @@
 @extends('index')
 @section('css')
-    <link rel="stylesheet" href="frontend/admin/css/quote.css">
+    <link rel="stylesheet" href="{{ asset('frontend/admin/css/quote.css') }}">
 @endsection
 @section('content')
     <div class="chose_customer_form">
@@ -18,5 +18,5 @@
     </div>   
 @endsection
 @section('script')
-    <script src="frontend/admin/script/quote.js"></script>
+    <script src="{{ asset('frontend/admin/script/quote.js') }}"></script>
 @endsection

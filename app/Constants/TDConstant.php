@@ -86,7 +86,12 @@
         const COMPEN_PERCENT = 1;
         const COMPEN_NUM = 100;
         const CARTON_COMPEN_PERCENT = 1;
-        const CARTON_COMPEN_NUM = 50;
+        const CARTON_COMPEN_NUM = 10;
+        const CARTON_SIZE_WIDTH_PLUS = 1;
+        const RUBBER_SIZE_WIDTH_PLUS = 2;
+        const STYRO_SIZE_WIDTH_PLUS = 2;
+
+        const SELECT_SUPP_LINK = [0 => 'Chọn vật tư link', 'carton' => 'Vật tư carton', 'rubber' => 'Vật tư cao su non'];
 
         //Loại thiết bị
         const AUTO_DEVICE = 1;

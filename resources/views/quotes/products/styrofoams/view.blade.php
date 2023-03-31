@@ -3,11 +3,8 @@
         <span>{{ $pindex == 0 ? 'Phần vật tư mút phẳng' : 'Vật tư mút phẳng thêm '.$pindex }}</span>
     </h3>
     @php
-        $styro_compen_percent = 0;
+        $styro_compen_percent = \App\Constants\TDConstant::CARTON_COMPEN_PERCENT;
         $styro_compen_num = \App\Constants\TDConstant::CARTON_COMPEN_NUM;
-        $styro_plus_size = \App\Constants\TDConstant::SUPPLY_PLUS_SIZE;
-        $styro_with_size1 = \App\Constants\TDConstant::STYRO_WITH_SIZE1;
-        $styro_with_size2 = \App\Constants\TDConstant::STYRO_WITH_SIZE2;
     @endphp
     
     <div class="quantity_paper_module quantity_supply_module" data-percent = {{ $styro_compen_percent }} data-num = {{ $styro_compen_num }}>
@@ -19,9 +16,6 @@
             ] 
         @endphp
         @include('view_update.view', $pro_styro_qty)
-
-        @include('quotes.products.supply_size', 
-        ['supp_key' => 'rubber', 'plus_size' => $styro_plus_size, 'with_size1' => $styro_with_size1, 'with_size2' => $styro_with_size2])
 
         @php
             $pro_styro_nqty = [
@@ -42,7 +36,7 @@
         @endphp
         <div class="d-flex align-items-center">
             @include('view_update.view', $pro_styro_qty)
-            <span class="ml-1 color_gray">+ {{ $styro_compen_num }} BH</span>
+            <span class="ml-1 color_gray"> x {{ $styro_compen_percent }} % + {{ $styro_compen_num }} BH</span>
         </div> 
     </div>
 
@@ -67,6 +61,31 @@
         ] 
     @endphp
     @include('view_update.view', $pro_styro_supply)
+
+    @php
+        $pro_styro_length = [
+            'name' => 'product['.$j.'][styro]['.$pindex.'][size][length]',
+            'note' => 'Kích thước chiều dài',
+            'attr' => ['type_input' => 'number', 'placeholder' => 'Mặc định 160cm'],
+        ] 
+    @endphp
+    <div class="d-flex align-items-center">
+        @include('view_update.view', $pro_styro_length)
+        <span class="ml-1 color_gray">Kích thước tấm mút phẳng là 160cm x 200cm</span>
+    </div> 
+
+    @php
+        $pro_styro_width = [
+            'name' => 'product['.$j.'][styro]['.$pindex.'][size][width]',
+            'note' => 'Kích thước chiều rộng',
+            'attr' => ['type_input' => 'number', 'placeholder' => 'Nhập KT (cm)'],
+        ];
+        $styro_width_plus = \App\Constants\TDConstant::STYRO_SIZE_WIDTH_PLUS; 
+    @endphp
+    <div class="d-flex align-items-center">
+        @include('view_update.view', $pro_styro_width)
+        <span class="ml-1 color_gray"> + {{ $styro_width_plus }}cm BH</span>
+    </div> 
 
     @php
         $key_device_elevate = \App\Constants\TDConstant::ELEVATE;

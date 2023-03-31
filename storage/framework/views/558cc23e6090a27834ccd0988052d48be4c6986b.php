@@ -30,27 +30,39 @@
         <?php
             $pro_carton_qty = [
                 'name' => 'product['.$j.'][carton]['.$pindex.'][carton_qty]',
-                'note' => 'Số lượng tờ in',
-                'attr' => ['type_input' => 'number', 'inject_class' => 'paper_qty_input'],
+                'note' => 'Tổng SL vật tư',
+                'attr' => ['type_input' => 'number', 'inject_class' => 'paper_qty_input', 'readonly' => 1],
             ] 
         ?>
         <div class="d-flex align-items-center">
             <?php echo $__env->make('view_update.view', $pro_carton_qty, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-            <span class="ml-1 color_gray">Thêm <?php echo e($carton_compen_percent); ?> % + <?php echo e($carton_compen_num); ?> BH</span>
+            <span class="ml-1 color_gray"> x <?php echo e($carton_compen_percent); ?> % + <?php echo e($carton_compen_num); ?> BH</span>
         </div> 
     </div>
-    <div class="d-flex align-items-center mb-2 fs-13">
-        <label class="mb-0 min_180 text-capitalize text-right mr-3">
-            <span class="fs-15 mr-1">*</span>Kích thước
-        </label>
-        <div class="d-flex justify-content-between align-items-center<?php echo e($pindex == 0 ? ' carton_module_size' : ''); ?>">
-            <input type="number" name = 'product[<?php echo e($j); ?>][carton][<?php echo e($pindex); ?>][size][length][total]' placeholder="Chiều dài (cm)" 
-            class="form-control medium_input input_size_length" step="any"> 
-            <span class="mx-3">X</span>
-            <input type="number" name = 'product[<?php echo e($j); ?>][carton][<?php echo e($pindex); ?>][size][width][total]' placeholder="Chiều rộng (cm)" 
-            class="form-control medium_input input_size_width" step="any"> 
-        </div>
-    </div>
+    <?php
+        $pro_carton_length = [
+            'name' => 'product['.$j.'][carton]['.$pindex.'][size][length]',
+            'note' => 'Kích thước chiều dài',
+            'attr' => ['type_input' => 'number', 'placeholder' => 'Mặc định 100cm'],
+        ] 
+    ?>
+    <div class="d-flex align-items-center">
+        <?php echo $__env->make('view_update.view', $pro_carton_length, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        <span class="ml-1 color_gray">Kích thước tấm carton là 100cm x 120cm</span>
+    </div> 
+
+    <?php
+        $pro_carton_width = [
+            'name' => 'product['.$j.'][carton]['.$pindex.'][size][width]',
+            'note' => 'Kích thước chiều rộng',
+            'attr' => ['type_input' => 'number', 'placeholder' => 'Nhập KT (cm)'],
+];
+        $carton_width_plus = \App\Constants\TDConstant::CARTON_SIZE_WIDTH_PLUS; 
+    ?>
+    <div class="d-flex align-items-center">
+        <?php echo $__env->make('view_update.view', $pro_carton_width, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        <span class="ml-1 color_gray"> + <?php echo e($carton_width_plus); ?>cm BH</span>
+    </div> 
 
     <?php
         $pro_carton_supply = [
@@ -76,13 +88,10 @@
 
     <?php
         $key_device_elevate = \App\Constants\TDConstant::ELEVATE;
-        $key_device_mill = \App\Constants\TDConstant::MILL;
         $key_device_peel = \App\Constants\TDConstant::PEEL;
     ?>
     <?php echo $__env->make('quotes.products.select_device', 
     ['key_device' => $key_device_elevate, 'note' => 'Máy bế', 'value' => getDeviceIdByKey($key_device_elevate), 'element' => 'carton'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <?php echo $__env->make('quotes.products.select_device', 
-    ['key_device' => $key_device_mill, 'note' => 'Máy phay', 'value' => getDeviceIdByKey($key_device_mill), 'element' => 'carton'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-    <?php echo $__env->make('quotes.products.select_device', 
-    ['key_device' => $key_device_peel, 'note' => 'Máy phay', 'value' => getDeviceIdByKey($key_device_peel), 'element' => 'carton'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    ['key_device' => $key_device_peel, 'note' => 'Máy bóc lề', 'value' => getDeviceIdByKey($key_device_peel), 'element' => 'carton'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 </div><?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/quotes/products/cartons/view.blade.php ENDPATH**/ ?>

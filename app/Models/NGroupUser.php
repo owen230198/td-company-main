@@ -38,7 +38,7 @@ class NGroupUser extends Model
         'rpt_quote_accepted' => ['name' => 'Báo giá đã duyệt', 'link' => 'report/quotes?status=accepted', 'parent' => 'report'],
         'rpt_debt' => ['name' => 'Báo cáo công nợ', 'link' => 'report/quotes?status=accepted', 'parent' => 'report'],
         'rpt_categories_revenue' => ['name' => 'Doanh thu theo nhóm SP', 'link' => 'report/revenue?type=category', 'parent' => 'report'],
-        'rpt_location_revenue' => ['name' => 'Doanh thu theo vùng miền', 'link' => 'report/revenue?type=location', 'parent' => 'report'],
+        'rpt_location_revenue' => ['name' => 'Doanh thu theo tỉnh/TP', 'link' => 'report/revenue?type=location', 'parent' => 'report'],
         'create_available_order' => ['name' => 'Tạo đơn hàng', 'link' => 'create-available-order', 'parent' => 'available_order'],
         'shipping_process' => ['name' => 'Lộ trình xuất - giao hàng', 'link' => 'shipping-process', 'parent' => 'available_order'],
         'account' => ['name' => 'Thông tin tài khoản', 'link' => 'account-detail', 'parent' => 'account'],
@@ -46,7 +46,7 @@ class NGroupUser extends Model
     ];
 
     static $role_module = [
-        '2' => [
+        self::SALE_MANAGER => [
             'group_modules' => [
                 self::GROUP_MODULE['customer_quote'],
                 self::GROUP_MODULE['order_handle'],

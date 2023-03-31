@@ -1,6 +1,6 @@
 
 <?php $__env->startSection('css'); ?>
-    <link rel="stylesheet" href="frontend/admin/css/quote.css">
+    <link rel="stylesheet" href="<?php echo e(asset('frontend/admin/css/quote.css')); ?>">
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
     <div class="chose_customer_form">
@@ -18,6 +18,6 @@
     </div>   
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('script'); ?>
-    <script src="frontend/admin/script/quote.js"></script>
+    <script src="<?php echo e(asset('frontend/admin/script/quote.js')); ?>"></script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('index', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/quotes/chose_customer.blade.php ENDPATH**/ ?>

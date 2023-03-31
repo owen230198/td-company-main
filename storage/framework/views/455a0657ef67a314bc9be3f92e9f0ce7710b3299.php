@@ -14,7 +14,7 @@
           <i class="fa fa-angle-right fs-14" aria-hidden="true"></i>
           <ul>
             <?php $__currentLoopData = $modules; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $module): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-              <?php if(@$module['parent'] && $module['parent'] == $key_group): ?>
+              <?php if(@$module['parent'] == $key_group): ?>
                 <li class="<?php echo e(url()->current() == url($module['link']) ? 'active' : ''); ?>">
                   <a href="<?php echo e(asset($module['link'])); ?>"><?php echo e($module['name']); ?></a>
                 </li>
