@@ -20,6 +20,15 @@
                         ] 
                     @endphp
                     @include('view_update.view', $pro_name_field)
+
+                    @php
+                    $pro_name_field = [
+                        'name' => 'product['.$j.'][qty]',
+                        'note' => 'SL sản phẩm',
+                        'attr' => ['required' => 1]
+                    ] 
+                @endphp
+                @include('view_update.view', $pro_name_field)
                     
                     @php
                         $pro_category_field = [
@@ -27,7 +36,7 @@
                             'type' => 'linking',
                             'note' => 'Nhóm sản phẩm',
                             'attr' => ['required' => 1 , 'inject_class' => 'select_quote_procategory', 'inject_attr' => 'proindex='.$j],
-                            'other_data' => ['config' => ['search' => 1], 'data' => ['table' => 'product_categories']]
+                            'other_data' => ['data' => ['table' => 'product_categories']]
                         ] 
                     @endphp
                     @include('view_update.view', $pro_category_field)

@@ -59,6 +59,7 @@
         const BOX_PASTE = 'box_paste'; 
         const EXT_PRICE = 'ext_price';
         const MILL = 'mill';
+        const CUT = 'cut';
         const HANDLE_STAGE = [
             ['key' => self::PRINT, 'note' => 'Quy cách - kiểu in', 'color' => 'green'],
             ['key' => self::NILON, 'note' => 'Cán nilon', 'color' => 'green'],
@@ -87,9 +88,17 @@
         const COMPEN_NUM = 100;
         const CARTON_COMPEN_PERCENT = 1;
         const CARTON_COMPEN_NUM = 10;
-        const CARTON_SIZE_WIDTH_PLUS = 1;
-        const RUBBER_SIZE_WIDTH_PLUS = 2;
-        const STYRO_SIZE_WIDTH_PLUS = 2;
+        const CARTON_SIZE_PLUS = 1;
+        const RUBBER_SIZE_PLUS = 2;
+        const STYRO_SIZE_PLUS = 2;
+        const SILK_SIZE_PLUS = 2;
+        const MICA_SIZE_PLUS = 2;
+        const CARTON_SIZE_DIVIDE = [100, 120];
+        const RUBBER_SIZE_DIVIDE = [125, 250];
+        const SILK_SIZE_DIVIDE = [150, 3000];
+        const STYRO_SIZE_DIVIDE = [160, 200];
+        const DECAL_SIZE_DIVIDE = [150, 3000];
+        const MICA_SIZE_DIVIDE = [160, 1000];
 
         const SELECT_SUPP_LINK = [0 => 'Chọn vật tư link', 'carton' => 'Vật tư carton', 'rubber' => 'Vật tư cao su non'];
 
@@ -97,17 +106,27 @@
         const AUTO_DEVICE = 1;
         const SEMI_AUTO_DEVICE = 2;
 
+        //Vật tư
+        const PAPER = 'paper';
+        const CARTON = 'carton';
+        const RUBBER = 'rubber';
+        const DECAL = 'decal';
+        const SILK = 'silk';
+        const STYRO = 'styrofoam';
+        const MICA = 'mica';
+        const FILL_FINISH = 'fill_finish';
+
         //Cấu tạo sản phẩm
         const PAPER_ELEMENT = [['key' => 'papers', 'note' => 'Giấy in']];
         const HARD_ELEMENT = [
-            ['key' => 'papers', 'note' => 'Giấy in', 'pro_field' => 'paper'],
-            ['key' => 'cartons', 'note' => 'Carton', 'pro_field' => 'carton'],
-            ['key' => 'rubbers', 'note' => 'Cao su non', 'pro_field' => 'rubber'],
-            ['key' => 'decals', 'note' => 'Đề can nhung', 'pro_field' => 'decal'],
-            ['key' => 'silks', 'note' => 'Vải lụa', 'pro_field' => 'silk'],
-            ['key' => 'styrofoams', 'note' => 'Mút phẳng', 'pro_field' => 'styrofoam'],
-            ['key' => 'micaes', 'note' => 'Me Ka', 'pro_field' => 'mica'],
-            ['key' => 'fill_finishes', 'note' => 'Bồi + hoàn thiện', 'pro_field' => 'fill_finish'] 
+            ['key' => 'papers', 'note' => 'Giấy in', 'pro_field' => self::PAPER],
+            ['key' => 'cartons', 'note' => 'Carton', 'pro_field' => self::CARTON],
+            ['key' => 'rubbers', 'note' => 'Cao su non', 'pro_field' => self::RUBBER],
+            ['key' => 'decals', 'note' => 'Đề can nhung', 'pro_field' => self::DECAL],
+            ['key' => 'silks', 'note' => 'Vải lụa', 'pro_field' => self::SILK],
+            ['key' => 'styrofoams', 'note' => 'Mút phẳng', 'pro_field' => self::STYRO],
+            ['key' => 'micaes', 'note' => 'Me Ka', 'pro_field' => self::MICA],
+            ['key' => 'fill_finishes', 'note' => 'Bồi + hoàn thiện', 'pro_field' => self::FILL_FINISH] 
         ];
 
         //Vật tư định lượng
@@ -123,12 +142,6 @@
         const PRINT_SUBTRACT_PAPER = 1000;
         const PLUS_PAPER_DEVICE = 30;
         const FLOAT_PRICE = 30000;
-
-        const SUPPLY_PLUS_SIZE = 1.2;
-        const RUBBER_WITH_SIZE1 = 120;
-        const RUBBER_WITH_SIZE2 = 244;
-        const STYRO_WITH_SIZE1 = 160;
-        const STYRO_WITH_SIZE2 = 200;
     }
     
 ?>

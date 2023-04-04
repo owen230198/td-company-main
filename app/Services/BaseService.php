@@ -3,7 +3,7 @@ namespace App\Services;
 class BaseService
 {
  	function __construct(){
- 		
+		$this->group_user = new \App\Models\NGroupUser;
  	}
 
 	public function configBaseDataAction(&$data)

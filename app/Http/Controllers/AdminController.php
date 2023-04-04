@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 use App\Constants\VariableConstant;
 class AdminController extends Controller
 {
-    static $viewWhere = array();
+    static $view_where = array();
     public function __construct()
     {
         parent::__construct();
@@ -33,10 +33,10 @@ class AdminController extends Controller
             return redirect('permission-error');
         }
         $data = $this->admins->getDataBaseView($table, 'Danh sách');
-        if(count($permission['viewWhere'])>0){
-            static::$viewWhere = @$permission['viewWhere'];
+        if(!empty($permission['where'])){
+            static::$view_where = @$permission['where'];
         }
-        $data['data_tables'] = getDataTable($table, '*', self::$viewWhere, $data['page_item'], 'id', 'desc', false, true);
+        $data['data_tables'] = getDataTable($table, self::$view_where, ['paginate' => $data['page_item']]);
         session()->put('back_url', url()->full());
         return view('table.'.$data['view_type'], $data);
     }
@@ -51,10 +51,10 @@ class AdminController extends Controller
         $sess = !empty(session('dataSearch')[$table])?session('dataSearch')[$table]:array();
         $get = $request->all()+$sess;
         if(count($permission['viewWhere'])>0){
-            static::$viewWhere = @$permission['viewWhere'];
+            static::$view_where = @$permission['viewWhere'];
         }
         $data = $this->admins->getDataBaseView($table, 'Tìm kiếm');
-        $data['data_tables'] = $this->admins->getDataSearchTable($table, self::$viewWhere, $get, $data['page_item']);
+        $data['data_tables'] = $this->admins->getDataSearchTable($table, self::$view_where, $get, $data['page_item']);
         if (!@$get['page']) {
             session(['dataSearch'=>[$table=>$get]]);
         }
@@ -227,7 +227,7 @@ class AdminController extends Controller
         if (!empty($request->input('q'))) {
             $q = '%'.trim($request->input('q')).'%';
             $customers->where(function ($customers) use ($q) {
-                $customers->where('code', 'like', $q)
+                $customers->orWhere('code', 'like', $q)
                             ->orWhere('name', 'like', $q)
                             ->orWhere('contacter', 'like', $q)
                             ->orWhere('phone', 'like', $q)

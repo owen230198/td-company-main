@@ -15,6 +15,7 @@ class Controller extends BaseController
 	public function __construct()
 	{
 		$this->base_services = new \App\Services\BaseService;
+        $this->admins = new \App\Services\AdminService;
 	}
 
 	public function getDataActionView($table, $action, $action_name)

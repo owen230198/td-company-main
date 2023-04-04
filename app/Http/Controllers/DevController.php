@@ -89,5 +89,67 @@ class DevController extends Controller
     {
         echo 'TD-'.Time();
     }
+
+    public function handleQueryCondition(&$table, $where)
+    {
+        foreach ($where as $w) {
+            if (!empty($w['type']) && $w['type'] == 'group' && !empty($w['query'])) {
+                $gr_where = $w['query'];
+                if ($w['con'] == 'or') {
+                    $table->orWhere(function($table) use($gr_where){
+                        foreach ($gr_where  as $grw) {
+                            $this->handleQueryCondition($table, $grw);
+                        }
+                    }); 
+                }else{
+                    $table->where(function($table) use($gr_where){
+                        foreach ($gr_where  as $grw) {
+                            $this->handleQueryCondition($table, $grw);
+                        }
+                    }); 
+                }
+            }else{
+                $compare = !empty($w['compare']) ? $w['compare'] : '=';
+                $value = $compare == 'like' ? '%'.$w['value'].'%' : $w['value'];
+                if (@$w['con'] == 'or') {
+                    $table->orWhere($w['key'], $compare, $value);
+                }else{
+                    $table->where($w['key'], $compare, $value);  
+                }
+            }
+        }
+    }
+
+    public function testQuery()
+    {
+        \DB::enableQueryLog();
+        $table = \DB::table('devices')->select('*');
+        $where = [
+            ['key' => 'act', 'value' =>  1],
+            [
+                'type' => 'group',
+                'con' => 'nd',
+                'query' => [
+                        [['key' => 'key_device', 'value' => 'nilon']],
+                        [
+                            [
+                                'type' => 'group',
+                                'con' => 'or',
+                                'query' => [
+                                    [['or' => 'nd', 'key' => 'key_device', 'value' => 'uv']],
+                                    [['or' => 'nd', 'key' => 'shape_price', 'value' => 100000]]
+                                ]
+                            ]
+                        ]
+                    ]
+            ]
+        ];
+        if (!empty($where)) {
+            $this->handleQueryCondition($table, $where);
+        }
+        $data = $table->get();
+        dump($data);
+        dd(\DB::getQueryLog());
+    }
 }
 

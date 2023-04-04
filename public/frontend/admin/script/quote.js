@@ -10,40 +10,6 @@ var changQtyInput = function(){
     let addqty = Math.ceil(qty_paper*compen_percent/100) + compen_num;
     parent.find('input.paper_qty_input').val(qty_paper + addqty);
    });
-
-  $(document).on('keyup', 'input.supp_size_change', function(){
-    let parent = $(this).closest('.supp_size_param_module');
-    let param_val = parent.find('input.supp_param_input').val();
-    let param = !Number.isNaN(parseFloat(param_val)) ? parseFloat(param_val) : 0;
-    let nqty_val = parent.find('input.supp_nqty_input').val();
-    let nqty = !Number.isNaN(parseInt(nqty_val)) ? parseInt(nqty_val) : 1;
-    parent.find('input.supp_exparam_input').val(param*nqty);
-    let plus = parseFloat(parent.data('plus'));
-    let margin_val = parent.find('input.supp_margin_input').val();
-    let margin = !Number.isNaN(parseFloat(margin_val)) ? parseFloat(margin_val) : 0;
-    parent.find('input.supp_total_input').val((param*nqty)+plus+margin);
-  })
-
-  $(document).on('keyup', 'input.supp_nqty_input', function(){
-    let module = $(this).closest('.quantity_supply_module');
-    let nqty_val1 = module.find('input.supp_nqty_input.nqty1').val();
-    let nqty1 = !Number.isNaN(parseInt(nqty_val1)) ? parseInt(nqty_val1) : 1;
-    let nqty_val2 = module.find('input.supp_nqty_input.nqty2').val();
-    let nqty2 = !Number.isNaN(parseInt(nqty_val2)) ? parseInt(nqty_val2) : 1;
-    let nqty_input = module.find('input.pro_nqty_input');
-    nqty_input.val(nqty1*nqty2);
-    nqty_input.trigger('keyup');
-  });
-
-  $(document).on('change', 'select.decal_select_module_size', function(event){
-    event.preventDefault();
-    let val = $(this).val();
-    let product = $(this).closest('#quote-pro-struct-tabContent');
-    let module_size = product.find(val);
-    let length = module_size.find('input.input_size_length');
-    let width = module_size.find('input.input_size_width');
-    console.log('size', length, width);
-  });
 }
 
 var moduleSelectOtherPaper = function()
@@ -235,6 +201,41 @@ var selectProductCategory = function()
   });
 }
 
+var calcSizeSupply = function()
+{
+  $(document).on('keyup change', 'input.temp_size_length', function(event){
+    event.preventDefault();
+    let parent = $(this).closest('.calc_size_module');
+    let plus = getEmptyDefault(parent.data('plus'), 0, 'float');
+    let divide = getEmptyDefault(parent.data('divide'), 0, 'float');
+    let value = getEmptyDefault($(this).val(), 0, 'float');
+    let otm_input = parent.find('input.otm_size_length');
+    let nqty = Math.floor(divide/(value+plus));
+    if (value > 0 && nqty > 0) {
+      otm_input.attr('readonly', true);
+      otm_input.val(divide/nqty);
+    }else{
+      otm_input.attr('readonly', false);
+      otm_input.val('')
+    } 
+  })
+}
+
+var selectDecalNQty = function()
+{
+  $(document).on('change', 'select.select_decal_nqty', function(event){
+    event.preventDefault();
+    let decal_module = $(this).closest('.decal_module');
+    let size_module = decal_module.find('.module_decal_size');
+    let val = $(this).val();
+    if (val == 1) {
+      size_module.fadeIn();    
+    }else{
+      size_module.fadeOut();
+    }
+  })
+}
+
 $(function(){
 	changQtyInput();
   moduleSelectOtherPaper();
@@ -247,5 +248,7 @@ $(function(){
   setNameProductQuote();
   selectExtNamePaperModule();
   selectProductCategory();
+  calcSizeSupply();
+  selectDecalNQty();
   // autoComputePaperAjax();
 });

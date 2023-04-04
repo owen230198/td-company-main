@@ -1,6 +1,10 @@
 <div class="mb-2 paper_product_config">
+    <?php
+        $carton_divide = \App\Constants\TDConstant::CARTON_SIZE_DIVIDE;
+    ?>
     <h3 class="fs-14 text-uppercase border_top_eb pt-3 mt-3 text-center quote_handle_title">
-        <span><?php echo e($pindex == 0 ? 'Phần vật tư carton' : 'Vật tư carton thêm '.$pindex); ?></span>
+        <p class="mb-1"><?php echo e($pindex == 0 ? 'Phần vật tư carton' : 'Vật tư carton thêm '.$pindex); ?></p>
+        <p class="mb-1">Kích thước tấm carton là <?php echo e($carton_divide[0]); ?> x <?php echo e($carton_divide[1]); ?>cm</p>
     </h3>
     <?php
         $carton_compen_percent = \App\Constants\TDConstant::CARTON_COMPEN_PERCENT;
@@ -34,34 +38,48 @@
                 'attr' => ['type_input' => 'number', 'inject_class' => 'paper_qty_input', 'readonly' => 1],
             ] 
         ?>
-        <div class="d-flex align-items-center">
+        <div class="d-flex">
             <?php echo $__env->make('view_update.view', $pro_carton_qty, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-            <span class="ml-1 color_gray"> x <?php echo e($carton_compen_percent); ?> % + <?php echo e($carton_compen_num); ?> BH</span>
+            <span class="ml-1 color_gray mt-1"> x <?php echo e($carton_compen_percent); ?> % + <?php echo e($carton_compen_num); ?> BH</span>
         </div> 
     </div>
+    
     <?php
-        $pro_carton_length = [
-            'name' => 'product['.$j.'][carton]['.$pindex.'][size][length]',
-            'note' => 'Kích thước chiều dài',
-            'attr' => ['type_input' => 'number', 'placeholder' => 'Mặc định 100cm'],
-        ] 
+        $carton_plus = \App\Constants\TDConstant::CARTON_SIZE_PLUS; 
     ?>
-    <div class="d-flex align-items-center">
+    <div class="calc_size_module" data-plus = <?php echo e($carton_plus); ?> data-divide = <?php echo e($carton_divide[0]); ?>>
+        <?php
+            $pro_carton_temp_length = [
+                'name' => 'product['.$j.'][carton]['.$pindex.'][size][temp_length]',
+                'note' => 'KT chiều dài sơ bộ',
+                'attr' => ['type_input' => 'number', 'placeholder' => 'Nhập KT(cm)', 'inject_class' => 'temp_size_length'],
+            ] 
+        ?>
+        <div class="d-flex alig-items-center">
+            <?php echo $__env->make('view_update.view', $pro_carton_temp_length, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+            <span class="ml-1 color_gray mt-1"> + <?php echo e($carton_plus); ?>cm</span>
+        </div>
+
+        <?php
+            $pro_carton_length = [
+                'name' => 'product['.$j.'][carton]['.$pindex.'][size][length]',
+                'note' => 'KT chiều dài tối ưu',
+                'attr' => ['type_input' => 'number', 'placeholder' => 'Đơn vị cm', 'inject_class' => 'otm_size_length'],
+            ] 
+        ?>
         <?php echo $__env->make('view_update.view', $pro_carton_length, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-        <span class="ml-1 color_gray">Kích thước tấm carton là 100cm x 120cm</span>
-    </div> 
+    </div>
 
     <?php
         $pro_carton_width = [
             'name' => 'product['.$j.'][carton]['.$pindex.'][size][width]',
             'note' => 'Kích thước chiều rộng',
             'attr' => ['type_input' => 'number', 'placeholder' => 'Nhập KT (cm)'],
-];
-        $carton_width_plus = \App\Constants\TDConstant::CARTON_SIZE_WIDTH_PLUS; 
+        ];
     ?>
-    <div class="d-flex align-items-center">
+    <div class="d-flex">
         <?php echo $__env->make('view_update.view', $pro_carton_width, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-        <span class="ml-1 color_gray"> + <?php echo e($carton_width_plus); ?>cm BH</span>
+        <span class="ml-1 color_gray mt-1"> + <?php echo e($carton_plus); ?>cm BH</span>
     </div> 
 
     <?php
@@ -89,9 +107,18 @@
     <?php
         $key_device_elevate = \App\Constants\TDConstant::ELEVATE;
         $key_device_peel = \App\Constants\TDConstant::PEEL;
+        $key_device_cut = \App\Constants\TDConstant::CUT;
+        $key_device_mill = \App\Constants\TDConstant::MILL;
     ?>
     <?php echo $__env->make('quotes.products.select_device', 
+    ['key_device' => $key_device_cut, 'note' => 'Máy xén', 'value' => getDeviceIdByKey($key_device_cut), 'element' => 'carton'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
+    <?php echo $__env->make('quotes.products.select_device', 
     ['key_device' => $key_device_elevate, 'note' => 'Máy bế', 'value' => getDeviceIdByKey($key_device_elevate), 'element' => 'carton'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
+    <?php echo $__env->make('quotes.products.select_device', 
+    ['key_device' => $key_device_mill, 'note' => 'Máy phay', 'value' => getDeviceIdByKey($key_device_mill), 'element' => 'carton'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
     <?php echo $__env->make('quotes.products.select_device', 
     ['key_device' => $key_device_peel, 'note' => 'Máy bóc lề', 'value' => getDeviceIdByKey($key_device_peel), 'element' => 'carton'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 </div><?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/quotes/products/cartons/view.blade.php ENDPATH**/ ?>

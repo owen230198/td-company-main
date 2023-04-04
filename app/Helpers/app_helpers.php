@@ -96,20 +96,20 @@ if (!function_exists('getIdByFeildValue')) {
 }
 
 if (!function_exists('getDataTable')) {
-    function getDataTable($table, $select = "*", $where = array(), $paginate = 0, $order ='id', 
-    $order_by = 'desc', $table_list = false)
+    function getDataTable($table, $where = [], $param)
     {
+        $select = @$param['select'] ?? '*';
+        $paginate = @$param['paginate'] ?? 0;
+        $order = @$param['order'] ?? 'id';
+        $order_by = @$param['order_by'] ?? 'desc';
         $table = \DB::table($table)->select($select);
-        if (count($where)>0) {
+        if (!empty($where)) {
             foreach ($where as $key => $w) {
-                if(!$table_list){
-                    if ($key == 'or') {
-                        $table->orWhere($w['key'], $w['compare'], $w['value']);
-                    }else{
-                        $table->where($w['key'], $w['compare'], $w['value']);  
-                    }
+                $value = @$w['compare'] == 'like' ? '%'.@$w['value'].'%' : @$w['value'];
+                if ($key == 'or') {
+                    $table->orWhere($w['key'], $w['compare'], $value);
                 }else{
-                    $table->where($w['key'], $w['compare'], $w['value']);    
+                    $table->where($w['key'], $w['compare'], $value);  
                 }
             }
         }

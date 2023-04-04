@@ -1,11 +1,13 @@
 <div class="mb-2 paper_product_config">
-    <h3 class="fs-14 text-uppercase border_top_eb pt-3 mt-3 text-center quote_handle_title">
-        <span>{{ $pindex == 0 ? 'Phần vật tư mica' : 'Vật tư mica thêm '.$pindex }}</span>
-    </h3>
     @php
+        $mica_divide = \App\Constants\TDConstant::MICA_SIZE_DIVIDE;
         $mica_compen_percent = 0;
         $mica_compen_num = \App\Constants\TDConstant::CARTON_COMPEN_NUM;
     @endphp
+    <h3 class="fs-14 text-uppercase border_top_eb pt-3 mt-3 text-center quote_handle_title">
+        <p class="mb-1">{{ $pindex == 0 ? 'Phần vật tư mica' : 'Vật tư mica thêm '.$pindex }}</p>
+        <p class="mb-1">Kích thước tấm mica là {{ $mica_divide[0] }} x {{ $mica_divide[1] }}cm</p>
+    </h3>
     
     <div class="quantity_paper_module" data-percent = {{ $mica_compen_percent }} data-num = {{ $mica_compen_num }}>
         @php
@@ -16,23 +18,6 @@
             ] 
         @endphp
         @include('view_update.view', $pro_mica_qty)
-
-        <div class="d-flex align-items-center mb-2 fs-13">
-            <label class="mb-0 min_180 text-capitalize text-right mr-3">
-                <span class="fs-15 mr-1">*</span>Kích thước
-            </label>
-            <div class="d-flex justify-content-between align-items-center">
-                <input type="number" name = 'product[{{ $j }}][decal][{{ $pindex }}][size][length]' placeholder="Chiều dài (cm)" 
-                class="form-control medium_input" step="any"> 
-                <span class="mx-3">X</span>
-                <input type="number" name = 'product[{{ $j }}][decal][{{ $pindex }}][size][width]' placeholder="Chiều rộng (cm)" 
-                class="form-control medium_input" step="any"> 
-                <span class="mx-2">+</span>
-                <input type="number" name = 'product[{{ $j }}][decal][{{ $pindex }}][size][margin]' placeholder="Thừa lề (cm)" 
-                class="form-control medium_input" step="any">
-                <span class="ml-2 color_red font-italic">Khớp chiều 150cm</span> 
-            </div>
-        </div>
 
         @php
             $pro_mica_nqty = [
@@ -47,7 +32,7 @@
         @php
             $pro_mica_qty = [
                 'name' => 'product['.$j.'][mica]['.$pindex.'][mica_qty]',
-                'note' => 'Số lượng tờ in',
+                'note' => 'Số lượng vật tư',
                 'attr' => ['type_input' => 'number', 'inject_class' => 'paper_qty_input'],
             ] 
         @endphp
@@ -55,6 +40,44 @@
             @include('view_update.view', $pro_mica_qty)
             <span class="ml-1 color_gray">+ {{ $mica_compen_num }} BH</span>
         </div> 
+    </div>
+
+    @php
+        $mica_plus = \App\Constants\TDConstant::MICA_SIZE_PLUS; 
+    @endphp
+    <div class="calc_size_module" data-plus = {{ $mica_plus }} data-divide = {{ $mica_divide[0] }}>
+        @php
+            $pro_mica_temp_length = [
+                'name' => 'product['.$j.'][mica]['.$pindex.'][size][temp_length]',
+                'note' => 'KT chiều dài sơ bộ',
+                'attr' => ['type_input' => 'number', 'placeholder' => 'Nhập KT(cm)', 'inject_class' => 'temp_size_length'],
+            ] 
+        @endphp
+        <div class="d-flex alig-items-center">
+            @include('view_update.view', $pro_mica_temp_length)
+            <span class="ml-1 color_gray mt-1"> + {{ $mica_plus }}cm</span>
+        </div>
+
+        @php
+            $pro_mica_length = [
+                'name' => 'product['.$j.'][mica]['.$pindex.'][size][length]',
+                'note' => 'KT chiều dài tối ưu',
+                'attr' => ['type_input' => 'number', 'placeholder' => 'Đơn vị cm', 'inject_class' => 'otm_size_length'],
+            ] 
+        @endphp
+        @include('view_update.view', $pro_mica_length)
+    </div>
+    
+    @php
+        $pro_mica_width = [
+            'name' => 'product['.$j.'][mica]['.$pindex.'][size][width]',
+            'note' => 'Kích thước chiều rộng',
+            'attr' => ['type_input' => 'number', 'placeholder' => 'Nhập KT (cm)'],
+        ];
+    @endphp
+    <div class="d-flex">
+        @include('view_update.view', $pro_mica_width)
+        <span class="ml-1 color_gray mt-1"> + {{ $mica_plus }}cm BH</span>
     </div>
 
     @php
@@ -71,7 +94,15 @@
 
     @php
         $key_device_elevate = \App\Constants\TDConstant::ELEVATE;
+        $key_device_peel = \App\Constants\TDConstant::PEEL;
+        $key_device_cut = \App\Constants\TDConstant::CUT;
     @endphp
     @include('quotes.products.select_device', 
+    ['key_device' => $key_device_cut, 'note' => 'Máy xén', 'value' => getDeviceIdByKey($key_device_cut), 'element' => 'mica'])
+
+    @include('quotes.products.select_device', 
     ['key_device' => $key_device_elevate, 'note' => 'Máy bế', 'value' => getDeviceIdByKey($key_device_elevate), 'element' => 'mica'])
+
+    @include('quotes.products.select_device', 
+    ['key_device' => $key_device_peel, 'note' => 'Máy bóc lề', 'value' => getDeviceIdByKey($key_device_peel), 'element' => 'mica'])
 </div>

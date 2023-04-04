@@ -1,10 +1,9 @@
 <?php
 namespace App\Services;
-
-use App\Constants\OrderConstant;
 use App\Services\BaseService;
 use Illuminate\Support\Facades\Schema;
 use App\Constants\VariableConstant;
+use \App\Models\NDetailTable;
 class AdminService extends BaseService
 {
     function __construct()
@@ -13,38 +12,10 @@ class AdminService extends BaseService
         $this->quote_service = new \App\Services\QuoteService;
     }
 
-    public function checkPermissionAction($table, $action, $id=0)
+    public function checkPermissionAction($param)
     {
-        $table = in_array($table, \App\Models\Quote::$tableChild)?'quotes':$table;
-        $admin = getSessionUser();
-        if (@$admin['super_admin']) {
-            return true;
-        }
-        $permissions = $this->roles->getPermissionAction('json_data_role', $table, @$admin['n_group_user_id']);
-        $roles = !empty($permissions['json_data_role'])?json_decode($permissions['json_data_role'], true):[];
-        if($action == 'view'){
-            $viewWhere = [];
-            if(empty($roles['view'])){
-                if (@$roles['view_my'] == 1) {
-                    array_push($viewWhere, ['key'=>'created_by', 'compare'=>'=', 'value'=>$admin['id']]);
-                }
-            }
-            if(@$roles['accept']==1){
-                $viewWhere = [['key'=>'status', 'compare'=>'=', 'value'=>OrderConstant::ORDER_NOT_ACCEPTED]];
-            }
-            $allow = @$roles['view'] == 1|| @$roles['view_my'] == 1 
-                    || @$roles['update']==1 || @$roles['update_my']==1
-                    || @$roles['accept'] == 1 || @$roles['receive'] == 1;
-            return ['allow'=>$allow, 'viewWhere'=>$viewWhere];
-        }else{
-            if(!@$roles[$action]&&@$roles[$action.'_my']&&Schema::hasColumn($table, 'created_by')){
-                $object = getModelByTable($table)->select('created_by')->find($id);
-                return @$object['created_by']==$admin['id'];
-            }else{
-                return @$roles[$action];
-            }
-        }
-
+        if($this->group_user::isAdmin());
+            return ['allow' => true];
     }
 
     public function checkListGroup($group, $list_group)
@@ -86,13 +57,13 @@ class AdminService extends BaseService
 
     public function getTableItem($table)
     {
-        $data = $this->list_tables->where('name', $table)->first();
+        $data = \App\Models\NTable::where('name', $table)->first();
         return $data;
     }
 
     public function getFieldAction($table, $action = 'view')
     {
-        $data = $this->detail_tables->where('table_map', $table)->where('act', 1)->where($action, 1)->orderBy('ord', 'asc')->get();
+        $data = NDetailTable::where('table_map', $table)->where('act', 1)->where($action, 1)->orderBy('ord', 'asc')->get();
         return $data;
     }
 
@@ -108,7 +79,7 @@ class AdminService extends BaseService
         $data = $this->getBaseTable($table);
         $data['page_item'] = @$data['tableItem']['admin_paginate']??10;
         $data['view_type'] = @$data['tableItem']['view_type']??'view';
-        $data['field_searchs'] = $this->detail_tables->where('table_map', $table)->where('act', 1)->where('search', 1)->orderBy('ord', 'asc')->get();
+        $data['field_searchs'] = NDetailTable::where('table_map', $table)->where('act', 1)->where('search', 1)->orderBy('ord', 'asc')->get();
         $name = @$data['view_type']=='configs'?'Cài đặt':$name;
         $data['title'] = $name.' '.$data['tableItem']['note'];
         if ($data['view_type']=='configs') {
@@ -126,7 +97,7 @@ class AdminService extends BaseService
             foreach ($get as $key => $where) {
                 if (!empty($where)) {
                     $field_id = (int)$key;
-                    $field = $this->detail_tables->select('id', 'name', 'view_type')->find($field_id);
+                    $field = NDetailTable::select('id', 'name', 'view_type')->find($field_id);
                     $name = $field['name'];
                     $type = $field['view_type'];
                     if ($type == 'text') {
@@ -222,7 +193,7 @@ class AdminService extends BaseService
     private function getDataDoAction($data, $table)
     {
         foreach ($data as $key => $item) {
-            $field = $this->detail_tables->where(['table_map'=>$table, 'name'=>$key])->first();
+            $field = NDetailTable::where(['table_map'=>$table, 'name'=>$key])->first();
             if (@$field['view_type']=='date_time') {
                 $data[$key] = getDataDateTime($item);
             }  

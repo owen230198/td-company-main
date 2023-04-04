@@ -1,6 +1,10 @@
 <div class="mb-2 paper_product_config">
+    @php
+        $carton_divide = \App\Constants\TDConstant::CARTON_SIZE_DIVIDE;
+    @endphp
     <h3 class="fs-14 text-uppercase border_top_eb pt-3 mt-3 text-center quote_handle_title">
-        <span>{{ $pindex == 0 ? 'Phần vật tư carton' : 'Vật tư carton thêm '.$pindex }}</span>
+        <p class="mb-1">{{ $pindex == 0 ? 'Phần vật tư carton' : 'Vật tư carton thêm '.$pindex }}</p>
+        <p class="mb-1">Kích thước tấm carton là {{ $carton_divide[0] }} x {{ $carton_divide[1] }}cm</p>
     </h3>
     @php
         $carton_compen_percent = \App\Constants\TDConstant::CARTON_COMPEN_PERCENT;
@@ -34,34 +38,48 @@
                 'attr' => ['type_input' => 'number', 'inject_class' => 'paper_qty_input', 'readonly' => 1],
             ] 
         @endphp
-        <div class="d-flex align-items-center">
+        <div class="d-flex">
             @include('view_update.view', $pro_carton_qty)
-            <span class="ml-1 color_gray"> x {{ $carton_compen_percent }} % + {{ $carton_compen_num }} BH</span>
+            <span class="ml-1 color_gray mt-1"> x {{ $carton_compen_percent }} % + {{ $carton_compen_num }} BH</span>
         </div> 
     </div>
+    
     @php
-        $pro_carton_length = [
-            'name' => 'product['.$j.'][carton]['.$pindex.'][size][length]',
-            'note' => 'Kích thước chiều dài',
-            'attr' => ['type_input' => 'number', 'placeholder' => 'Mặc định 100cm'],
-        ] 
+        $carton_plus = \App\Constants\TDConstant::CARTON_SIZE_PLUS; 
     @endphp
-    <div class="d-flex align-items-center">
+    <div class="calc_size_module" data-plus = {{ $carton_plus }} data-divide = {{ $carton_divide[0] }}>
+        @php
+            $pro_carton_temp_length = [
+                'name' => 'product['.$j.'][carton]['.$pindex.'][size][temp_length]',
+                'note' => 'KT chiều dài sơ bộ',
+                'attr' => ['type_input' => 'number', 'placeholder' => 'Nhập KT(cm)', 'inject_class' => 'temp_size_length'],
+            ] 
+        @endphp
+        <div class="d-flex alig-items-center">
+            @include('view_update.view', $pro_carton_temp_length)
+            <span class="ml-1 color_gray mt-1"> + {{ $carton_plus }}cm</span>
+        </div>
+
+        @php
+            $pro_carton_length = [
+                'name' => 'product['.$j.'][carton]['.$pindex.'][size][length]',
+                'note' => 'KT chiều dài tối ưu',
+                'attr' => ['type_input' => 'number', 'placeholder' => 'Đơn vị cm', 'inject_class' => 'otm_size_length'],
+            ] 
+        @endphp
         @include('view_update.view', $pro_carton_length)
-        <span class="ml-1 color_gray">Kích thước tấm carton là 100cm x 120cm</span>
-    </div> 
+    </div>
 
     @php
         $pro_carton_width = [
             'name' => 'product['.$j.'][carton]['.$pindex.'][size][width]',
             'note' => 'Kích thước chiều rộng',
             'attr' => ['type_input' => 'number', 'placeholder' => 'Nhập KT (cm)'],
-];
-        $carton_width_plus = \App\Constants\TDConstant::CARTON_SIZE_WIDTH_PLUS; 
+        ];
     @endphp
-    <div class="d-flex align-items-center">
+    <div class="d-flex">
         @include('view_update.view', $pro_carton_width)
-        <span class="ml-1 color_gray"> + {{ $carton_width_plus }}cm BH</span>
+        <span class="ml-1 color_gray mt-1"> + {{ $carton_plus }}cm BH</span>
     </div> 
 
     @php
@@ -89,9 +107,18 @@
     @php
         $key_device_elevate = \App\Constants\TDConstant::ELEVATE;
         $key_device_peel = \App\Constants\TDConstant::PEEL;
+        $key_device_cut = \App\Constants\TDConstant::CUT;
+        $key_device_mill = \App\Constants\TDConstant::MILL;
     @endphp
     @include('quotes.products.select_device', 
+    ['key_device' => $key_device_cut, 'note' => 'Máy xén', 'value' => getDeviceIdByKey($key_device_cut), 'element' => 'carton'])
+
+    @include('quotes.products.select_device', 
     ['key_device' => $key_device_elevate, 'note' => 'Máy bế', 'value' => getDeviceIdByKey($key_device_elevate), 'element' => 'carton'])
+
+    @include('quotes.products.select_device', 
+    ['key_device' => $key_device_mill, 'note' => 'Máy phay', 'value' => getDeviceIdByKey($key_device_mill), 'element' => 'carton'])
+
     @include('quotes.products.select_device', 
     ['key_device' => $key_device_peel, 'note' => 'Máy bóc lề', 'value' => getDeviceIdByKey($key_device_peel), 'element' => 'carton'])
 </div>

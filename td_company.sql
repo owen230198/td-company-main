@@ -11,7 +11,7 @@
  Target Server Version : 100425
  File Encoding         : 65001
 
- Date: 31/03/2023 16:03:13
+ Date: 04/04/2023 19:05:46
 */
 
 SET NAMES utf8mb4;
@@ -12309,6 +12309,7 @@ CREATE TABLE `devices`  (
   `shape_price` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
   `key_device` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `type` tinyint(4) NULL DEFAULT NULL,
+  `supply` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Ghi chú',
   `act` tinyint(4) NULL DEFAULT NULL,
   `ord` int(10) NULL DEFAULT NULL,
@@ -12316,27 +12317,29 @@ CREATE TABLE `devices`  (
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `created_by` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of devices
 -- ----------------------------
-INSERT INTO `devices` VALUES (1, 'Cán láng tự động', '0', '0', '50000', 'nilon', 1, NULL, 1, 0, '2023-03-18 11:47:11', '2023-03-18 11:47:11', 0);
-INSERT INTO `devices` VALUES (2, 'Ép nhũ tự động', '0', '0', '100000', 'compress', 1, NULL, 1, 0, '2023-03-18 11:47:12', '2023-03-18 11:47:12', 0);
-INSERT INTO `devices` VALUES (3, 'In UV tự động', '0', '800', '150000', 'uv', 1, NULL, 1, 0, '2023-03-18 11:47:13', '2023-03-18 11:47:13', 0);
-INSERT INTO `devices` VALUES (4, 'Máy bế tự động', '0', '100', '100000', 'elevate', 1, NULL, 1, 0, '2023-03-18 11:47:13', '2023-03-18 11:47:13', 0);
-INSERT INTO `devices` VALUES (5, 'Máy bóc lề tự động', '0', '10', '20000', 'peel', 1, NULL, 1, 0, '2023-03-18 11:47:14', '2023-03-18 11:47:14', 0);
-INSERT INTO `devices` VALUES (6, 'Dán hộp tự động', '0', '50', '50000', 'box_paste', 1, NULL, 1, 0, '2023-03-18 11:47:15', '2023-03-18 11:47:15', 0);
-INSERT INTO `devices` VALUES (7, 'Máy phay tự động', '0', '100', '100000', 'mill', 1, NULL, 1, 0, '2023-03-18 15:46:56', '2023-03-18 15:46:56', 0);
-INSERT INTO `devices` VALUES (8, 'Cán láng bán tự động', '0', '0', '50000', 'nilon', 2, NULL, 1, 1, '2023-03-18 11:47:35', '2023-03-18 11:47:35', 0);
-INSERT INTO `devices` VALUES (9, 'Máy ép thủy lực', '0', '0', '100000', 'compress', 2, NULL, 1, 1, '2023-03-18 11:47:29', '2023-03-18 11:47:29', 0);
-INSERT INTO `devices` VALUES (10, 'In UV bán tự động', '0', '600', '100000', 'uv', 2, NULL, 1, 1, '2023-03-18 11:47:36', '2023-03-18 11:47:36', 0);
-INSERT INTO `devices` VALUES (11, 'Máy bế bán tự động', '0', '150', '100000', 'elevate', 2, NULL, 1, 1, '2023-03-18 11:47:37', '2023-03-18 11:47:37', 0);
-INSERT INTO `devices` VALUES (12, 'Máy bóc lề bán tự động', '0', '10', '20000', 'peel', 2, NULL, 1, 1, '2023-03-18 11:47:39', '2023-03-18 11:47:39', 0);
-INSERT INTO `devices` VALUES (13, 'Dán hộp tay', '0', '120', '50000', 'box_paste', 2, NULL, 1, 1, '2023-03-18 11:47:41', '2023-03-18 11:47:41', 0);
-INSERT INTO `devices` VALUES (14, 'Máy phay bán tự động', '0', '120', '50000', 'mill', 2, NULL, 1, 1, '2023-03-18 15:46:54', '2023-03-18 15:46:54', 0);
-INSERT INTO `devices` VALUES (15, 'Cán metalai tự động', '0', '0', '50000', 'metalai', 1, NULL, 1, 0, '2023-03-23 16:18:02', '2023-03-23 16:18:02', 0);
-INSERT INTO `devices` VALUES (16, 'Cán metalai bán tự động', '0', '0', '50000', 'metalai', 2, NULL, 1, 1, '2023-03-18 11:47:35', '2023-03-18 11:47:35', 0);
+INSERT INTO `devices` VALUES (1, 'Cán láng tự động', '0', '0', '50000', 'nilon', 1, 'paper', NULL, 1, 0, '2023-04-04 14:53:16', '2023-04-04 14:53:16', 0);
+INSERT INTO `devices` VALUES (2, 'Ép nhũ tự động', '0', '0', '100000', 'compress', 1, 'paper', NULL, 1, 0, '2023-04-04 14:53:16', '2023-04-04 14:53:16', 0);
+INSERT INTO `devices` VALUES (3, 'In UV tự động', '0', '800', '150000', 'uv', 1, 'paper', NULL, 1, 0, '2023-04-04 14:53:16', '2023-04-04 14:53:16', 0);
+INSERT INTO `devices` VALUES (4, 'Máy bế tự động', '0', '100', '100000', 'elevate', 1, 'paper', NULL, 1, 0, '2023-04-04 14:53:16', '2023-04-04 14:53:16', 0);
+INSERT INTO `devices` VALUES (5, 'Máy bóc lề tự động', '0', '10', '20000', 'peel', 1, 'paper', NULL, 1, 0, '2023-04-04 14:53:16', '2023-04-04 14:53:16', 0);
+INSERT INTO `devices` VALUES (6, 'Dán hộp tự động', '0', '50', '50000', 'box_paste', 1, 'paper', NULL, 1, 0, '2023-04-04 14:53:16', '2023-04-04 14:53:16', 0);
+INSERT INTO `devices` VALUES (7, 'Máy phay tự động', '0', '100', '100000', 'mill', 1, 'carton', NULL, 1, 0, '2023-04-04 14:53:54', '2023-04-04 14:53:54', 0);
+INSERT INTO `devices` VALUES (8, 'Cán láng bán tự động', '0', '0', '50000', 'nilon', 2, 'paper', NULL, 1, 1, '2023-04-04 14:53:16', '2023-04-04 14:53:16', 0);
+INSERT INTO `devices` VALUES (9, 'Máy ép thủy lực', '0', '0', '100000', 'compress', 2, 'paper', NULL, 1, 1, '2023-04-04 14:53:16', '2023-04-04 14:53:16', 0);
+INSERT INTO `devices` VALUES (10, 'In UV bán tự động', '0', '600', '100000', 'uv', 2, 'paper', NULL, 1, 1, '2023-04-04 14:53:16', '2023-04-04 14:53:16', 0);
+INSERT INTO `devices` VALUES (11, 'Máy bế bán tự động', '0', '150', '100000', 'elevate', 2, 'paper', NULL, 1, 1, '2023-04-04 14:53:16', '2023-04-04 14:53:16', 0);
+INSERT INTO `devices` VALUES (12, 'Máy bóc lề bán tự động', '0', '10', '20000', 'peel', 2, 'paper', NULL, 1, 1, '2023-04-04 14:53:16', '2023-04-04 14:53:16', 0);
+INSERT INTO `devices` VALUES (13, 'Dán hộp tay', '0', '120', '50000', 'box_paste', 2, 'paper', NULL, 1, 1, '2023-04-04 14:53:16', '2023-04-04 14:53:16', 0);
+INSERT INTO `devices` VALUES (14, 'Máy phay bán tự động', '0', '120', '50000', 'mill', 2, 'carton', NULL, 1, 1, '2023-04-04 14:54:15', '2023-04-04 14:54:15', 0);
+INSERT INTO `devices` VALUES (15, 'Cán metalai tự động', '0', '0', '50000', 'metalai', 1, 'paper', NULL, 1, 0, '2023-04-04 14:53:16', '2023-04-04 14:53:16', 0);
+INSERT INTO `devices` VALUES (16, 'Cán metalai bán tự động', '0', '0', '50000', 'metalai', 2, 'paper', NULL, 1, 1, '2023-04-04 14:53:16', '2023-04-04 14:53:16', 0);
+INSERT INTO `devices` VALUES (17, 'Máy xén  tự động', '0', '0', '50000', 'cut', 1, 'carton', NULL, 1, 0, '2023-04-04 14:54:19', '2023-04-04 14:54:19', 0);
+INSERT INTO `devices` VALUES (18, 'Máy xén bán tự động', '0', '0', '50000', 'cut', 2, 'carton', NULL, 1, 1, '2023-04-04 14:54:25', '2023-04-04 14:54:25', 0);
 
 -- ----------------------------
 -- Table structure for districts
@@ -13566,7 +13569,7 @@ INSERT INTO `n_tables` VALUES (5, 'q_configs', 'Thông tin chung & Giá thành',
 INSERT INTO `n_tables` VALUES (6, 'customers', 'Khách hàng', 0, 'customers', 'customers', 10, 'view', NULL, 1, 1, 1, 1, '2022-10-11 22:06:30', '2022-10-11 22:06:30');
 INSERT INTO `n_tables` VALUES (7, 'quotes', 'Báo giá', 0, 'quotes', 'quotes', 10, 'view', 'quote_', 1, 1, 1, 1, '2022-10-11 22:06:30', '2022-10-11 22:06:30');
 INSERT INTO `n_tables` VALUES (8, 'q_papers', 'Tờ in', 7, 'q_papers', 'q_papers', 10, 'view', 'q_management_', 1, 1, 1, 1, '2022-10-11 22:06:30', '2022-10-11 22:06:30');
-INSERT INTO `n_tables` VALUES (9, 'q_devices', 'Thiết bị & Chi phí', 0, 'q_devices', 'q_devices', 10, 'view', '', 1, 1, 1, 1, '2022-10-11 22:06:30', '2022-10-11 22:06:30');
+INSERT INTO `n_tables` VALUES (9, 'devices', 'Thiết bị & Chi phí', 0, 'q_devices', 'q_devices', 10, 'view', '', 1, 1, 1, 1, '2023-04-03 18:22:52', '2023-04-03 18:22:52');
 INSERT INTO `n_tables` VALUES (10, 'q_laminate_materals', 'Chất liệu cán màng', 0, 'q_laminate_materals', 'q_laminate_materals', 10, 'view', '', 1, 1, 1, 1, '2022-10-11 22:06:30', '2022-10-11 22:06:30');
 INSERT INTO `n_tables` VALUES (11, 'q_printer_devices', 'Máy in & chi phí', 0, 'q_printer_devices', 'q_printer_devices', 10, 'view', '', 1, 1, 1, 1, '2022-10-11 22:06:30', '2022-10-11 22:06:30');
 INSERT INTO `n_tables` VALUES (12, 'q_cartons', 'Vật tư cartons', 7, 'q_cartons', 'q_cartons', 10, 'view', 'q_management_', 1, 1, 1, 1, '2022-10-11 22:06:30', '2022-10-11 22:06:30');
@@ -13786,6 +13789,43 @@ INSERT INTO `print_techs` VALUES (3, 'In Label', 1, 1, '2023-03-11 15:10:23', '2
 INSERT INTO `print_techs` VALUES (4, 'offset & UV offset', 1, 1, '2023-03-11 15:25:31', '2023-03-11 15:25:33');
 
 -- ----------------------------
+-- Table structure for printers
+-- ----------------------------
+DROP TABLE IF EXISTS `printers`;
+CREATE TABLE `printers`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Mã nhóm',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Tên nhóm',
+  `print_length` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `print_width` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `model_price` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `work_price` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT '0',
+  `shape_price` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT '0',
+  `note` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Ghi chú',
+  `act` tinyint(4) NULL DEFAULT NULL,
+  `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `device` tinyint(4) NULL DEFAULT NULL,
+  `created_by` int(11) NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of printers
+-- ----------------------------
+INSERT INTO `printers` VALUES (1, 'Máy in offset 36x52', '36', '52', '55000', '30', '100000', NULL, 1, '2023-04-04 15:01:35', '2023-04-04 15:01:35', 1, 0);
+INSERT INTO `printers` VALUES (2, 'Máy in offset 47x65', '47', '65', '55000', '32', '100000', NULL, 1, '2023-04-04 15:01:35', '2023-04-04 15:01:35', 1, 0);
+INSERT INTO `printers` VALUES (3, 'Máy in offset 52x72', '52', '72', '60000', '35', '120000', NULL, 1, '2023-04-04 15:01:35', '2023-04-04 15:01:35', 1, 0);
+INSERT INTO `printers` VALUES (4, 'Máy in offset 54x79', '54', '79', '67000', '45', '150000', NULL, 1, '2023-04-04 15:01:35', '2023-04-04 15:01:35', 1, 0);
+INSERT INTO `printers` VALUES (5, 'Máy in offset 72x102', '72', '102', '105000', '80', '220000', NULL, 1, '2023-04-04 15:01:35', '2023-04-04 15:01:35', 1, 0);
+INSERT INTO `printers` VALUES (6, 'Máy in offset 79x109', '79', '109', '125000', '120', '350000', NULL, 1, '2023-04-04 15:01:35', '2023-04-04 15:01:35', 1, 0);
+INSERT INTO `printers` VALUES (7, 'Máy in uv 36x52', '36', '52', '60000', '150', '250000', NULL, 1, '2023-04-04 15:01:36', '2023-04-04 15:01:36', 2, 0);
+INSERT INTO `printers` VALUES (8, 'Máy in uv 47x65', '47', '65', '60000', '150', '250000', NULL, 1, '2023-04-04 15:01:36', '2023-04-04 15:01:36', 2, 0);
+INSERT INTO `printers` VALUES (9, 'Máy in uv 52x72', '52', '72', '60000', '200', '250000', NULL, 1, '2023-04-04 15:01:36', '2023-04-04 15:01:36', 2, 0);
+INSERT INTO `printers` VALUES (10, 'Máy in uv 54x79', '54', '79', '80000', '250', '300000', NULL, 1, '2023-04-04 15:01:36', '2023-04-04 15:01:36', 2, 0);
+INSERT INTO `printers` VALUES (11, 'Máy in uv 72x102', '72', '102', '115000', '500', '500000', NULL, 1, '2023-04-04 15:01:36', '2023-04-04 15:01:36', 2, 0);
+INSERT INTO `printers` VALUES (12, 'Máy in uv 79x109', '79', '109', '150000', '600', '800000', NULL, 1, '2022-07-01 11:17:02', '2022-07-01 11:17:02', 2, 0);
+
+-- ----------------------------
 -- Table structure for product_categories
 -- ----------------------------
 DROP TABLE IF EXISTS `product_categories`;
@@ -13942,43 +13982,6 @@ CREATE TABLE `q_foams`  (
 -- Records of q_foams
 -- ----------------------------
 INSERT INTO `q_foams` VALUES (1, 7, 10000, 2, 5100, 2, '0.25', '0.14', '{\"quantative\":\"20\",\"act\":1,\"total\":19286750.000000004}', '{\"act\":\"1\",\"shape_price\":\"100\",\"device\":\"11\",\"total\":850000}', '{\"act\":\"1\",\"device\":\"5\",\"total\":220000}', 11, 20356750, NULL, NULL, '2022-10-11 07:24:08', 0);
-
--- ----------------------------
--- Table structure for q_printer_devices
--- ----------------------------
-DROP TABLE IF EXISTS `q_printer_devices`;
-CREATE TABLE `q_printer_devices`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Mã nhóm',
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Tên nhóm',
-  `print_length` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `print_width` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `model_price` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `work_price` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT '0',
-  `shape_price` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT '0',
-  `note` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Ghi chú',
-  `act` tinyint(4) NULL DEFAULT NULL,
-  `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
-  `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
-  `device` tinyint(4) NULL DEFAULT NULL,
-  `created_by` int(11) NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of q_printer_devices
--- ----------------------------
-INSERT INTO `q_printer_devices` VALUES (1, 'Máy in offset 36x52', '36', '52', '55000', '30', '100000', '', 1, '2022-07-01 11:15:54', '2022-07-01 11:15:54', 1, 0);
-INSERT INTO `q_printer_devices` VALUES (2, 'Máy in offset 47x65', '47', '65', '55000', '32', '100000', '', 1, '2022-07-01 11:15:53', '2022-07-01 11:15:53', 1, 0);
-INSERT INTO `q_printer_devices` VALUES (3, 'Máy in offset 52x72', '52', '72', '60000', '35', '120000', '', 1, '2022-07-01 11:15:49', '2022-07-01 11:15:49', 1, 0);
-INSERT INTO `q_printer_devices` VALUES (4, 'Máy in offset 54x79', '54', '79', '67000', '45', '150000', '', 1, '2022-07-01 11:15:47', '2022-07-01 11:15:47', 1, 0);
-INSERT INTO `q_printer_devices` VALUES (5, 'Máy in offset 72x102', '72', '102', '105000', '80', '220000', '', 1, '2022-07-01 11:15:46', '2022-07-01 11:15:46', 1, 0);
-INSERT INTO `q_printer_devices` VALUES (6, 'Máy in offset 79x109', '79', '109', '125000', '120', '350000', '', 1, '2022-07-01 11:15:45', '2022-07-01 11:15:45', 1, 0);
-INSERT INTO `q_printer_devices` VALUES (7, 'Máy in uv 36x52', '36', '52', '60000', '150', '250000', '', 1, '2022-07-01 11:15:44', '2022-07-01 11:15:44', 2, 0);
-INSERT INTO `q_printer_devices` VALUES (8, 'Máy in uv 47x65', '47', '65', '60000', '150', '250000', '', 1, '2022-07-01 11:15:43', '2022-07-01 11:15:43', 2, 0);
-INSERT INTO `q_printer_devices` VALUES (9, 'Máy in uv 52x72', '52', '72', '60000', '200', '250000', '', 1, '2022-07-01 11:15:42', '2022-07-01 11:15:42', 2, 0);
-INSERT INTO `q_printer_devices` VALUES (10, 'Máy in uv 54x79', '54', '79', '80000', '250', '300000', '', 1, '2022-07-01 11:15:41', '2022-07-01 11:15:41', 2, 0);
-INSERT INTO `q_printer_devices` VALUES (11, 'Máy in uv 72x102', '72', '102', '115000', '500', '500000', '', 1, '2022-07-01 11:15:40', '2022-07-01 11:15:40', 2, 0);
-INSERT INTO `q_printer_devices` VALUES (12, 'Máy in uv 79x109', '79', '109', '150000', '600', '800000', NULL, 1, '2022-07-01 11:17:02', '2022-07-01 11:17:02', 2, 0);
 
 -- ----------------------------
 -- Table structure for q_products

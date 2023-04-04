@@ -52,6 +52,27 @@ var ajaxViewTarget = function(url, target_ajax, section_class, type = 1)
 	})
 }
 
+var getEmptyDefault = function(value, deflt = '', type = 'string'){
+	if (value === '' || value == 'undefined') {
+		if (type == 'float') {
+			return !Number.isNaN(parseFloat(value)) ? parseFloat(value) : deflt;	
+		}else if(type == 'number'){
+			return !Number.isNaN(parseInt(value)) ? parseInt(value) : deflt;		
+		}else{
+			return deflt;
+		}	
+	}else{
+		if (type == 'float') {
+			return parseFloat(value);
+		}else if (type == 'number') {
+			return parseInt($value);	
+		}else{
+			return value;
+		}
+		
+	}
+}
+
 $(function(){
 	baseAjaxForm();
 });

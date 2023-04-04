@@ -8,11 +8,9 @@ use App\Constants\TDConstant;
 class QuoteController extends Controller
 {
     private $services;
-    private $admins;
     public function __construct()
     {
         parent::__construct();
-        $this->admins = new \App\Services\AdminService;
         $this->services = new \App\Services\QuoteService;
     }
 

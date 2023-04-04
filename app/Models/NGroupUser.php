@@ -19,6 +19,7 @@ class NGroupUser extends Model
     const SALE_STAFF = 4;
     const DESIGN_STAFF = 5;
     const GROUP_MODULE = [
+        'quote_price_config' => 'Cài đặt đơn giá SX',
         'customer_quote' => 'Báo giá & Khách hàng',
         'order_handle' => 'Đơn hàng & sản xuất',
         'profit' => '% Hoa hồng',
@@ -28,6 +29,7 @@ class NGroupUser extends Model
     ];
 
     const MODULE = [
+        'price_device' => ['name' => 'Đơn giá thiết bị máy', 'link' => 'view/devices', 'parent' => 'quote_price_config'],
         'create_quote' => ['name' => 'Tính giá', 'link' => 'create-quote', 'parent' => 'customer_quote'],
         'quote_not_accepted' => ['name' => 'DS báo giá (chưa duyệt)', 'link' => 'create-quote?status=not_accepted', 'parent' => 'customer_quote'],
         'create_new_order' => ['name' => 'Tạo mới đơn hàng', 'link' => 'create-handle-order', 'parent' => 'order_handle'],
