@@ -14,6 +14,7 @@
             $pro_silk_qty = [
                 'name' => 'product['.$j.'][silk]['.$pindex.'][qty]',
                 'note' => 'Số lượng',
+                'value' => @$pro_qty,
                 'attr' => ['type_input' => 'number', 'required' => 1, 'inject_class' => 'pro_qty_input paper_qty_modul_input']
             ] 
         @endphp
@@ -33,6 +34,7 @@
             $pro_silk_qty = [
                 'name' => 'product['.$j.'][silk]['.$pindex.'][silk_qty]',
                 'note' => 'Tổng SL vật tư',
+                'value' => @$pro_qty,
                 'attr' => ['type_input' => 'number', 'inject_class' => 'paper_qty_input'],
             ] 
         @endphp

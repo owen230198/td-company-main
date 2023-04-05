@@ -1,8 +1,11 @@
 <?php
 namespace App\Http\Controllers;
+
+use App\Constants\TDConstant;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Constants\VariableConstant;
+use App\Models\Device;
 class AdminController extends Controller
 {
     static $view_where = array();
@@ -39,6 +42,23 @@ class AdminController extends Controller
         $data['data_tables'] = getDataTable($table, self::$view_where, ['paginate' => $data['page_item']]);
         session()->put('back_url', url()->full());
         return view('table.'.$data['view_type'], $data);
+    }
+
+    public function configDevicePrice(Request $request, $step){
+        if (!$request->isMethod('POST')) {
+            if (!$this->group_users::isAdmin()) {
+                return redirect('permission-error');
+            }
+            if ($step == 'supplies') {
+                $data['title'] = 'Danh sách thiết bị máy theo vật tư';
+                $data['supply'] = TDConstant::HARD_ELEMENT;
+            }else{
+                $data['title'] = 'Đơn giá thiết bị '. $request->input('name');
+                $where = $request->except('name');
+                $data['list_data'] = Device::where($where)->paginate(10);
+            }
+            return view('config_devices/'.$step.'/view', $data);
+        }
     }
 
 

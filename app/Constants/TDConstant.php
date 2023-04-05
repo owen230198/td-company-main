@@ -60,6 +60,7 @@
         const EXT_PRICE = 'ext_price';
         const MILL = 'mill';
         const CUT = 'cut';
+        const BAG_PASTE = 'bag_paste';
         const HANDLE_STAGE = [
             ['key' => self::PRINT, 'note' => 'Quy cách - kiểu in', 'color' => 'green'],
             ['key' => self::NILON, 'note' => 'Cán nilon', 'color' => 'green'],
@@ -85,8 +86,8 @@
 
         // Thông số bù hao
         const COMPEN_PERCENT = 1;
-        const COMPEN_NUM = 100;
         const CARTON_COMPEN_PERCENT = 1;
+        const COMPEN_NUM = 100;
         const CARTON_COMPEN_NUM = 10;
         const CARTON_SIZE_PLUS = 1;
         const RUBBER_SIZE_PLUS = 2;
@@ -116,16 +117,57 @@
         const MICA = 'mica';
         const FILL_FINISH = 'fill_finish';
 
+        //Thiết bị máy
+        const PAPER_DEVICE = [
+                                self::NILON => 'Máy cán màng',
+                                self::ELEVATE => 'Máy bế',
+                                self::PEEL => 'Máy bóc lề',
+                                self::BOX_PASTE => 'Máy dán hộp giấy',
+                                self::METALAI => 'Máy cán metalai',
+                                self::COMPRESS => 'Máy ép nhũ',
+                                self::UV => 'Máy in UV',
+                                self::BAG_PASTE => 'Máy dán túi giấy'
+                            ];
+                            
+        const CARTON_DEVICE = [
+                                self::CUT => 'Máy xén',
+                                self::ELEVATE => 'Máy bế',
+                                self::MILL => 'Máy phay',
+                                self::PEEL => 'Máy bóc lề'
+                            ];
+
+        const RUBBER_DEVICE = [
+                                self::CUT => 'Máy xén',
+                                self::ELEVATE => 'Máy bế',
+                                self::PEEL => 'Máy bóc lề'
+                            ];
+
+        const DECAL_DEVICE = [self::CUT => 'Máy xén'];
+
+        const SILK_DEVICE = [self::CUT => 'Máy xén'];
+
+        const STYRO_DEVICE = [
+                                self::CUT => 'Máy xén',
+                                self::ELEVATE => 'Máy bế',
+                                self::PEEL => 'Máy bóc lề'
+                            ];
+
+        const MICA_DEVICE = [
+                                self::CUT => 'Máy xén',
+                                self::ELEVATE => 'Máy bế',
+                                self::PEEL => 'Máy bóc lề'
+                            ];
+
         //Cấu tạo sản phẩm
         const PAPER_ELEMENT = [['key' => 'papers', 'note' => 'Giấy in']];
         const HARD_ELEMENT = [
-            ['key' => 'papers', 'note' => 'Giấy in', 'pro_field' => self::PAPER],
-            ['key' => 'cartons', 'note' => 'Carton', 'pro_field' => self::CARTON],
-            ['key' => 'rubbers', 'note' => 'Cao su non', 'pro_field' => self::RUBBER],
-            ['key' => 'decals', 'note' => 'Đề can nhung', 'pro_field' => self::DECAL],
-            ['key' => 'silks', 'note' => 'Vải lụa', 'pro_field' => self::SILK],
-            ['key' => 'styrofoams', 'note' => 'Mút phẳng', 'pro_field' => self::STYRO],
-            ['key' => 'micaes', 'note' => 'Me Ka', 'pro_field' => self::MICA],
+            ['key' => 'papers', 'note' => 'Giấy in', 'pro_field' => self::PAPER, 'device' => self::PAPER_DEVICE],
+            ['key' => 'cartons', 'note' => 'Carton', 'pro_field' => self::CARTON, 'device' => self::CARTON_DEVICE],
+            ['key' => 'rubbers', 'note' => 'Cao su non', 'pro_field' => self::RUBBER, 'device' => self::RUBBER_DEVICE],
+            ['key' => 'decals', 'note' => 'Đề can nhung', 'pro_field' => self::DECAL, 'device' => self::DECAL_DEVICE],
+            ['key' => 'silks', 'note' => 'Vải lụa', 'pro_field' => self::SILK, 'device' => self::SILK_DEVICE],
+            ['key' => 'styrofoams', 'note' => 'Mút phẳng', 'pro_field' => self::STYRO, 'device' => self::STYRO_DEVICE],
+            ['key' => 'micaes', 'note' => 'Me Ka', 'pro_field' => self::MICA, 'device' => self::MICA_DEVICE],
             ['key' => 'fill_finishes', 'note' => 'Bồi + hoàn thiện', 'pro_field' => self::FILL_FINISH] 
         ];
 

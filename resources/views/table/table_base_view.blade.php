@@ -28,7 +28,7 @@
             </td>
             @foreach ($field_shows as $field)
                 <td>
-                    @include('view_table.' . $field['view_type'] . '', [
+                    @include('view_table.' . $field['type'] . '', [
                         'data' => $data,
                         'field' => $field,
                     ])

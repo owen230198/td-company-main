@@ -95,28 +95,64 @@ if (!function_exists('getIdByFeildValue')) {
     }
 }
 
-if (!function_exists('getDataTable')) {
-    function getDataTable($table, $where = [], $param)
-    {
-        $select = @$param['select'] ?? '*';
-        $paginate = @$param['paginate'] ?? 0;
-        $order = @$param['order'] ?? 'id';
-        $order_by = @$param['order_by'] ?? 'desc';
-        $table = \DB::table($table)->select($select);
-        if (!empty($where)) {
-            foreach ($where as $key => $w) {
-                $value = @$w['compare'] == 'like' ? '%'.@$w['value'].'%' : @$w['value'];
-                if ($key == 'or') {
-                    $table->orWhere($w['key'], $w['compare'], $value);
+if (!function_exists('handleQueryCondition')) {
+    function handleQueryCondition(&$query, $where){
+        foreach ($where as $w) {
+            if (!empty($w['type']) && $w['type'] == 'group' && !empty($w['query'])) {
+                $gr_where = $w['query'];
+                if ($w['con'] == 'or') {
+                    $query->orWhere(function($query) use($gr_where){
+                        foreach ($gr_where  as $grw) {
+                            $this->handleQueryCondition($query, $grw);
+                        }
+                    }); 
                 }else{
-                    $table->where($w['key'], $w['compare'], $value);  
+                    $query->where(function($query) use($gr_where){
+                        foreach ($gr_where  as $grw) {
+                            $this->handleQueryCondition($query, $grw);
+                        }
+                    }); 
+                }
+            }else{
+                $compare = !empty($w['compare']) ? $w['compare'] : '=';
+                $value = $compare == 'like' ? '%'.$w['value'].'%' : $w['value'];
+                if (@$w['con'] == 'or') {
+                    $query->orWhere($w['key'], $compare, $value);
+                }else{
+                    $query->where($w['key'], $compare, $value);  
                 }
             }
         }
+    }
+}
+
+if (!function_exists('getDataTable')) {
+    function getDataTable($table, $where = [], $param, $last_query = false)
+    {
+        if ($last_query) {
+            \DB::enableQueryLog();
+        }
+        $select = @$param['select'] ?? '*';
+        $paginate = @$param['paginate'] ?? 0;
+        $limit = @$param['limit'] ?? 0;
+        $offset = @$param['offset'] ?? 0;
+        $order = @$param['order'] ?? 'id';
+        $order_by = @$param['order_by'] ?? 'desc';
+        $query = \DB::table($table)->select($select);
+        if (!empty($where)) {
+            handleQueryCondition($query, $where);
+        }
         if ($paginate>0) {
-            $data = $table->orderBy($order, $order_by)->paginate($paginate);
-        }else{
+            $data = $query->orderBy($order, $order_by)->paginate($paginate);
+        }elseif($limit > 0){
+            $data = $query->orderBy($order, $order_by)->take($limit, $offset);
+        }
+        else{
             $data = $table->orderBy($order, $order_by)->get();
+        }
+        if ($last_query) {
+            dump($data);
+            dd(\DB::getQueryLog());
         }
         return $data;
     }

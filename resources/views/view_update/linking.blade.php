@@ -2,6 +2,7 @@
     $select_config = !empty($other_data['config']) ? $other_data['config'] : [];
     $select_data = !empty($other_data['data']) ? $other_data['data'] : [];
 @endphp
+
 @if (@$select_config['search'] == 1)
     @php
         $url = asset('get-data-json-linking?table='.$select_data['table']);

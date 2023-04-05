@@ -103,6 +103,13 @@ class QuoteController extends Controller
             $data['j'] = (int) $request->input('proindex');
             $data['pindex'] = 0;
             $data['paper_name'] = $request->input('paper_name');
+            $data['pro_qty'] = (int) $request->input('pro_qty');
+            if (empty($data['paper_name'])) {
+                return ['code' => 100, 'message' => 'Bạn chưa nhập tên sản phẩm!'];
+            }
+            if (empty($data['pro_qty'])) {
+                return ['code' => 100, 'message' => 'Bạn chưa nhập số lượng sản phẩm!'];
+            }
             return view('quotes.products.structure', $data);
         }
     }

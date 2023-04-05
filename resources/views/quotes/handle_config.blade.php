@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="{{ asset('frontend/base/css/bootstrap-multiselect.min.css') }}">
 @endsection
 @section('content')
-    <form action="{{ asset('create-quote?step=handle_config&id='.$data_quote['id']) }}" method="POST" class="config_handle_form baseAjaxForm" 
+    <form action="{{ asset('create-quote?step=handle_config&id='.$data_quote['id']) }}" method="POST" class="config_handle_form config_content baseAjaxForm" 
     enctype="multipart/form-data" onkeydown="return event.key != 'Enter'">
         @csrf
         <div class="quote_handle_section mb-3">

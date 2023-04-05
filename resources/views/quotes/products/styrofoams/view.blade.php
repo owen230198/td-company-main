@@ -14,6 +14,7 @@
             $pro_styro_qty = [
                 'name' => 'product['.$j.'][styro]['.$pindex.'][qty]',
                 'note' => 'Số lượng',
+                'value' => @$pro_qty,
                 'attr' => ['type_input' => 'number', 'required' => 1, 'inject_class' => 'pro_qty_input paper_qty_modul_input']
             ] 
         @endphp
@@ -33,6 +34,7 @@
             $pro_styro_qty = [
                 'name' => 'product['.$j.'][styro]['.$pindex.'][styro_qty]',
                 'note' => 'Số lượng tờ in',
+                'value' => @$pro_qty,
                 'attr' => ['type_input' => 'number', 'inject_class' => 'paper_qty_input'],
             ] 
         @endphp

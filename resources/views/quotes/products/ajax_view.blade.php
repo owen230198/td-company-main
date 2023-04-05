@@ -25,7 +25,7 @@
                     $pro_name_field = [
                         'name' => 'product['.$j.'][qty]',
                         'note' => 'SL sản phẩm',
-                        'attr' => ['required' => 1]
+                        'attr' => ['type_input' => 'number', 'required' => 1, 'inject_class' => 'input_pro_qty'],
                     ] 
                 @endphp
                 @include('view_update.view', $pro_name_field)

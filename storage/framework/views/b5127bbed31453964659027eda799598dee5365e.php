@@ -1,6 +1,6 @@
 <div class="mb-2 paper_product_config">
     <?php
-        $silk_compen_percent = 0;
+        $silk_compen_percent = \App\Constants\TDConstant::CARTON_COMPEN_PERCENT;;
         $silk_compen_num = \App\Constants\TDConstant::CARTON_COMPEN_NUM;
         $silk_divide = \App\Constants\TDConstant::SILK_SIZE_DIVIDE;
     ?>
@@ -14,6 +14,7 @@
             $pro_silk_qty = [
                 'name' => 'product['.$j.'][silk]['.$pindex.'][qty]',
                 'note' => 'Số lượng',
+                'value' => @$pro_qty,
                 'attr' => ['type_input' => 'number', 'required' => 1, 'inject_class' => 'pro_qty_input paper_qty_modul_input']
             ] 
         ?>
@@ -33,6 +34,7 @@
             $pro_silk_qty = [
                 'name' => 'product['.$j.'][silk]['.$pindex.'][silk_qty]',
                 'note' => 'Tổng SL vật tư',
+                'value' => @$pro_qty,
                 'attr' => ['type_input' => 'number', 'inject_class' => 'paper_qty_input'],
             ] 
         ?>

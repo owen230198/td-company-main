@@ -8,7 +8,7 @@ var changQtyInput = function(){
     let compen_percent = parent.data('percent');
     let compen_num = parent.data('num');
     let addqty = Math.ceil(qty_paper*compen_percent/100) + compen_num;
-    parent.find('input.paper_qty_input').val(qty_paper + addqty);
+    parent.find('input.paper_qty_input').val(qty_paper);
    });
 }
 
@@ -195,7 +195,8 @@ var selectProductCategory = function()
     event.preventDefault();
     let proindex = $(this).attr('proindex');
     let paper_name = $(this).closest('.config_handle_paper_pro').find('input.quote_set_product_name').val();
-    let url = 'get-view-product-structure?category='+$(this).val()+'&proindex='+proindex+'&paper_name='+paper_name;
+    let pro_qty = $(this).closest('.config_handle_paper_pro').find('input.input_pro_qty').val();
+    let url = 'get-view-product-structure?category='+$(this).val()+'&proindex='+proindex+'&paper_name='+paper_name+'&pro_qty='+pro_qty;
     section = $(this).closest('.config_handle_paper_pro').find('.ajax_product_view_by_category');
     ajaxViewTarget(url, section, section);
   });

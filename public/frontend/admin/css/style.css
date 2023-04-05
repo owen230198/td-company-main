@@ -3,24 +3,29 @@ a {
     display: inline-block;
     text-decoration: none;
     font-weight: 400;
+    transition: all .2s;
 }
 
-.select2.select2-container.select2-container--default,
-.form-control,
-.btn-group, .btn-group-vertical,
-.multiselect-container{
+a:hover{
+    color: #459300;
+}
+
+.config_content .select2.select2-container.select2-container--default,
+.config_content .form-control,
+.config_content .btn-group, .btn-group-vertical,
+.config_content .multiselect-container{
     max-width: 375px;
     min-width: 375px;
     width: 375px;
 }
 
-.form-control.short_input{
+.config_content .form-control.short_input{
     max-width: 102px;
     min-width: 102px;
     width: 102px   
 }
 
-.form-control.medium_input{
+.config_content .form-control.medium_input{
     max-width: 170px;
     min-width: 170px;
     width: 170px   
@@ -339,9 +344,9 @@ input[type="checkbox"].toggle:disabled::after {
 }
 
 .sidebar>ul>li.active>a, .sidebar li>ul>li.active>a{
-    background: #459300;
+    background: #65d303;
     color: #ffffff;
-    border-color: #459300;
+    border-color: #65d303;
 }
 
 .sidebar li ul:has(> li.active){
@@ -356,13 +361,18 @@ input[type="checkbox"].toggle:disabled::after {
     border-radius: 10px 0 0 10px
 }
 
+.w_120{
+    width: 120px;
+}
+
 .sidebar li ul li a{
     color: #333;
-    border-bottom: 1px solid;
     text-transform: capitalize;
     transition: all .2s;
     background: #ffffff;
-    margin-left: 20px;
+    margin-left: 30px;
+    border-radius: 10px 0 0 10px;
+    margin-bottom: 2px;
 }
 
 .sidebar li ul li:last-child>a{
@@ -371,6 +381,17 @@ input[type="checkbox"].toggle:disabled::after {
 
 .sidebar li ul {
     display: none;
+}
+
+a.device_supp_item {
+    padding: 5px 15px;
+    margin: 10px;
+    background: #ebebeb;
+    font-weight: 600;
+    border-radius: 5px;
+    width: 150px;
+    text-align: center;
+    box-shadow: 1px 1px 3px #777777;
 }
 
 .basse_content{
@@ -400,10 +421,17 @@ input[type="checkbox"].toggle:disabled::after {
 }
 
 .page_content{
-    padding: 15px;
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 1px 1px 10px #888888;
+    padding-top: 0;
+}
+
+.title_page_content{
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    background: -webkit-linear-gradient(top, rgb(255, 255, 255) 0%, rgb(242, 242, 242) 100%) rgb(242, 242, 242);
+    border-radius: 10px 10px 0 0;
 }
 
 .main_button:hover{
@@ -440,6 +468,13 @@ input[type="checkbox"].toggle:disabled::after {
 .form-control.readonly{
     pointer-events: none;
     background: #f1f1f1;
+}
+
+.header_chose_supp_device{
+    padding: 15px;
+    margin-bottom: 20px;
+    background: #f1f4f9;
+    border-radius: 10px;
 }
 
 @page {

@@ -3,7 +3,7 @@
     <link rel="stylesheet" href="{{ asset('frontend/admin/css/quote.css') }}">
 @endsection
 @section('content')
-    <div class="chose_customer_form">
+    <div class="chose_customer_form config_content">
         <form action="{{ asset('create-quote?step=chose_customer') }}" method="POST" class="chose_customer_quote_form" enctype="multipart/form-data">
             @csrf
             <div class="form-group d-flex mb-3 pb-3">

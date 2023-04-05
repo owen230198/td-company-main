@@ -16,6 +16,7 @@
             $pro_carton_qty = [
                 'name' => 'product['.$j.'][carton]['.$pindex.'][qty]',
                 'note' => 'Số lượng',
+                'value' => @$pro_qty,
                 'attr' => ['type_input' => 'number', 'required' => 1, 'inject_class' => 'pro_qty_input paper_qty_modul_input']
             ] 
         ?>
@@ -35,6 +36,7 @@
             $pro_carton_qty = [
                 'name' => 'product['.$j.'][carton]['.$pindex.'][carton_qty]',
                 'note' => 'Tổng SL vật tư',
+                'value' => @$pro_qty,
                 'attr' => ['type_input' => 'number', 'inject_class' => 'paper_qty_input', 'readonly' => 1],
             ] 
         ?>

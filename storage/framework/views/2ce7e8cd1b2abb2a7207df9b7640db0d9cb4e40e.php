@@ -28,7 +28,7 @@
             </td>
             <?php $__currentLoopData = $field_shows; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $field): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <td>
-                    <?php echo $__env->make('view_table.' . $field['view_type'] . '', [
+                    <?php echo $__env->make('view_table.' . $field['type'] . '', [
                         'data' => $data,
                         'field' => $field,
                     ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>

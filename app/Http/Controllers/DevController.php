@@ -2,7 +2,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\NDetailTable;
 use App\Models\NTable;
 use Illuminate\Support\Facades\Schema;
 use App\Constants\VariableConstant;

@@ -20,6 +20,15 @@
                         ] 
                     ?>
                     <?php echo $__env->make('view_update.view', $pro_name_field, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
+                    <?php
+                    $pro_name_field = [
+                        'name' => 'product['.$j.'][qty]',
+                        'note' => 'SL sản phẩm',
+                        'attr' => ['type_input' => 'number', 'required' => 1, 'inject_class' => 'input_pro_qty'],
+                    ] 
+                ?>
+                <?php echo $__env->make('view_update.view', $pro_name_field, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                     
                     <?php
                         $pro_category_field = [
