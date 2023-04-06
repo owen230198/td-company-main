@@ -17,6 +17,7 @@ class Controller extends BaseController
 		$this->base_services = new \App\Services\BaseService;
         $this->admins = new \App\Services\AdminService;
         $this->group_users = new \App\Models\NGroupUser;
+        $this->regions = new \App\Models\NRegion;
 	}
 
 	public function getDataActionView($table, $action, $action_name)

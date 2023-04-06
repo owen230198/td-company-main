@@ -47,7 +47,6 @@
         </div>
     <?php endif; ?>
     <script src="<?php echo e(asset('frontend/base/script/jquery.min.js')); ?>"></script>
-    <script src="<?php echo e(asset('frontend/base/script/popper.js')); ?>"></script>
     <script src="<?php echo e(asset('frontend/base/script/bootstrap.min.js')); ?>"></script>
     <script src="<?php echo e(asset('frontend/base/script/toastr.min.js')); ?>"></script>
     <script src="<?php echo e(asset('frontend/admin/tinymce/js/tinymce/tinymce.min.js')); ?>"></script>

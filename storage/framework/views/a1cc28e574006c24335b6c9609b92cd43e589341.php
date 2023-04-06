@@ -6,4 +6,4 @@ class="form-control<?php echo e(@$attr['inject_class'] ? ' '.$attr['inject_class
 <?php echo e(@$attr['readonly'] == 1 ? 'readonly' : ''); ?>
 
 <?php echo e(@$attr['type_input'] == 'number' ? 'min=0 step=any' : ''); ?> 
-placeholder="<?php echo e(@$attr['placeholder'] ?? 'Nhập '.strtolower($note)); ?>"><?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/view_update/text.blade.php ENDPATH**/ ?>
+placeholder="<?php echo e(@$attr['placeholder'] ?? 'Nhập '.mb_strtolower($note)); ?>"><?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/view_update/text.blade.php ENDPATH**/ ?>

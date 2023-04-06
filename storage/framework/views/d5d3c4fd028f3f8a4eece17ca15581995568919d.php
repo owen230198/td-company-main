@@ -22,8 +22,12 @@
         <i class="fa fa-book mr-2 fs-15" aria-hidden="true"></i>Trợ giúp
       </a>
     </div>
+    <div class="paginate_view d-flex align-center justify-content-between mb-3">
+      <?php echo $data_tables->links('pagination::bootstrap-4'); ?>
+
+     </div>
     <?php echo $__env->make('table.table_base_view', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-    <div class="paginate_view d-flex align-center justify-content-between">
+    <div class="paginate_view d-flex align-center justify-content-between mt-3">
      <?php echo $data_tables->links('pagination::bootstrap-4'); ?>
 
     </div>

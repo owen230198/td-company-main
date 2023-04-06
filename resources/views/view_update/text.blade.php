@@ -4,4 +4,4 @@ class="form-control{{ @$attr['inject_class'] ? ' '.$attr['inject_class'] : '' }}
 {{ @$attr['disable_field'] == 1 ? 'disabled' : '' }}
 {{ @$attr['readonly'] == 1 ? 'readonly' : '' }}
 {{ @$attr['type_input'] == 'number' ? 'min=0 step=any' : '' }} 
-placeholder="{{ @$attr['placeholder'] ?? 'Nhập '.strtolower($note) }}">
+placeholder="{{ @$attr['placeholder'] ?? 'Nhập '.mb_strtolower($note) }}">

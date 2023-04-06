@@ -11,7 +11,7 @@
  Target Server Version : 100425
  File Encoding         : 65001
 
- Date: 06/04/2023 00:25:26
+ Date: 06/04/2023 18:01:34
 */
 
 SET NAMES utf8mb4;
@@ -13184,11 +13184,11 @@ CREATE TABLE `n_detail_tables`  (
 -- ----------------------------
 -- Records of n_detail_tables
 -- ----------------------------
-INSERT INTO `n_detail_tables` VALUES (1, 'code', '{\"disable_field\":1,\"required\":1}', 'Mã KH', 'text', 'customers', 1, 1, 1, 1, '', 1, 0, 1, '2023-04-05 22:09:17', '2023-04-05 22:09:17');
+INSERT INTO `n_detail_tables` VALUES (1, 'code', '{\"disable_field\":1,\"required\":1}', 'Mã KH', 'text', 'customers', 1, 0, 1, 1, '', 1, 0, 1, '2023-04-06 17:13:57', '2023-04-06 17:13:57');
 INSERT INTO `n_detail_tables` VALUES (2, 'name', '{\"required\":1}', 'Tên KH/Cty', 'text', 'customers', 1, 1, 1, 1, '', 1, 0, 1, '2023-04-05 22:48:55', '2023-04-05 22:48:55');
 INSERT INTO `n_detail_tables` VALUES (3, 'contacter', '{\"required\":1}', 'Người liên hệ', 'text', 'customers', 1, 1, 1, 1, '', 1, 0, 1, '2023-04-05 22:48:55', '2023-04-05 22:48:55');
-INSERT INTO `n_detail_tables` VALUES (4, 'phone', '{\"required\":1}', 'SĐT di động', 'text', 'customers', 1, 1, 1, 1, '', 1, 0, 1, '2023-04-05 22:48:55', '2023-04-05 22:48:55');
-INSERT INTO `n_detail_tables` VALUES (5, 'telephone', '', 'SĐT cố định', 'text', 'customers', 1, 1, 1, 1, '', 1, 0, 1, '2023-04-05 22:48:55', '2023-04-05 22:48:55');
+INSERT INTO `n_detail_tables` VALUES (4, 'phone', '{\"required\":1}', 'SĐT di động', 'text', 'customers', 1, 1, 1, 1, '', 1, 0, 1, '2023-04-06 17:11:06', '2023-04-06 17:11:06');
+INSERT INTO `n_detail_tables` VALUES (5, 'telephone', '', 'SĐT cố định', 'text', 'customers', 1, 1, 1, 1, '', 1, 0, 1, '2023-04-06 17:11:12', '2023-04-06 17:11:12');
 INSERT INTO `n_detail_tables` VALUES (6, 'email', '{\"required\":1}', 'Email', 'text', 'customers', 1, 1, 1, 1, '', 1, 0, 1, '2023-04-05 22:48:55', '2023-04-05 22:48:55');
 INSERT INTO `n_detail_tables` VALUES (7, 'address', '{\"required\":1}', 'Địa chỉ', 'text', 'customers', 1, 1, 1, 1, '', 1, 0, 1, '2023-04-05 22:48:55', '2023-04-05 22:48:55');
 INSERT INTO `n_detail_tables` VALUES (8, 'city', '{\"required\":1}', 'Tỉnh/TP', 'linking', 'customers', 1, 1, 1, 1, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"citys\",\r\n		\"where\":{\"parent\":0}\r\n	}\r\n}', 1, 0, 1, '2023-04-05 23:09:44', '2023-04-05 23:09:44');
@@ -13414,7 +13414,7 @@ INSERT INTO `n_tables` VALUES (2, 'n_group_users', 'Nhóm quyền', 0, 'n_group_
 INSERT INTO `n_tables` VALUES (3, 'n_roles', 'Phân quyền', 0, 'n_roles', 'n_roles', 10, 'view', NULL, 1, 1, 1, 1, '2022-10-11 22:06:30', '2022-10-11 22:06:30');
 INSERT INTO `n_tables` VALUES (4, 'files', 'Kho Lưu trữ', 0, 'files', 'files', 24, 'media', NULL, 1, 1, 1, 1, '2022-10-11 22:06:30', '2022-10-11 22:06:30');
 INSERT INTO `n_tables` VALUES (5, 'q_configs', 'Thông tin chung & Giá thành', 0, 'q_configs', 'configs', 100, 'configs', NULL, 1, 1, 1, 1, '2022-10-11 22:06:30', '2022-10-11 22:06:30');
-INSERT INTO `n_tables` VALUES (6, 'customers', 'Khách hàng', 0, 'customers', 'customers', 10, 'view', NULL, 1, 1, 1, 1, '2022-10-11 22:06:30', '2022-10-11 22:06:30');
+INSERT INTO `n_tables` VALUES (6, 'customers', 'Khách hàng', 0, 'customers', 'customers', 10, 'view', NULL, 1, 1, 1, 1, '2023-04-06 16:41:25', '2023-04-06 16:41:25');
 INSERT INTO `n_tables` VALUES (7, 'quotes', 'Báo giá', 0, 'quotes', 'quotes', 10, 'view', 'quote_', 1, 1, 1, 1, '2022-10-11 22:06:30', '2022-10-11 22:06:30');
 INSERT INTO `n_tables` VALUES (8, 'q_papers', 'Tờ in', 7, 'q_papers', 'q_papers', 10, 'view', 'q_management_', 1, 1, 1, 1, '2022-10-11 22:06:30', '2022-10-11 22:06:30');
 INSERT INTO `n_tables` VALUES (9, 'devices', 'Thiết bị & Chi phí', 0, 'q_devices', 'q_devices', 10, 'view', '', 1, 1, 1, 1, '2023-04-03 18:22:52', '2023-04-03 18:22:52');

@@ -1,8 +1,8 @@
 @extends('index')
 @section('content')
-  {!! getBreadcrumb($tableItem['name'], 0, $action_name.' '.$tableItem['note']) !!}
-  <div class="dashborad_content pt-3 position-relative">
-    <form action="do-{{ $action.'/'.$tableItem['name'] }}{{ @$dataitem['id']?'/'.$dataitem['id']:'' }}" method="POST" class="actionForm" enctype="multipart/form-data" data-table-name="{{ @$data_table_name?$data_table_name:$tableItem['name'] }}">
+  <div class="dashborad_content position-relative">
+    <form action="do-{{ $action.'/'.$tableItem['name'] }}{{ @$dataitem['id']?'/'.$dataitem['id']:'' }}" method="POST" 
+    class="actionForm config_content" enctype="multipart/form-data" data-table-name="{{ @$data_table_name?$data_table_name:$tableItem['name'] }}">
       @csrf
       <ul class="nav nav-tabs" id="myTab" role="tablist">
         @foreach ($regions as $key => $region)
@@ -16,23 +16,26 @@
         <div class="tab-pane fade {{ $key==0?'show active':'' }}" id="{{ $c_region['id'] }}" role="tabpanel" aria-labelledby="{{ $c_region['id'] }}-tab">
           @foreach ($field_list as $field)
             @if ($field['region']==$c_region['id'])
-              <div class="form-group d-flex mb-4 pb-4 border_bot_eb">
-                <label class="mb-0 mr-3 min_180 fs-13 text-capitalize">{{ $field['note'] }}</label>
-                @include('view_update.'.$field['view_type'].'',['field'=>$field, 'data'=>@$dataitem?$dataitem:array()])
-              </div>
+              @php
+                $arr = $field;
+                $arr['attr'] = !empty($field['attr']) ? json_decode($field['attr'], true) : [];
+                $arr['other_data'] = !empty($field['other_data']) ? json_decode($field['other_data'], true) : [];
+                $arr['value'] = @$dataitem[$field['name']];
+              @endphp
+            @include('view_update.view', $arr)
             @endif
           @endforeach
         </div>
         @endforeach
       </div>
-      <div class="group_btn_action_form">
-        <button type="submit" class="station-richmenu-main-btn-area">
+      <div class="group_btn_action_form text-center">
+        <button type="submit" class="main_button color_white bg_green border_green radius_5 font_bold smooth">
           <i class="fa fa-check mr-2 fs-14" aria-hidden="true"></i>Hoàn tất
         </button>
-        <a href="{{ @session()->get('back_url')?session()->get('back_url'):'' }}" class="station-richmenu-main-btn-area mx-2">
-          <i class="fa fa-chevron-left mr-2 fs-14" aria-hidden="true"></i>Trở về
+        <a href="{{ @session()->get('back_url') ?? '' }}" class="main_button color_white bg_green radius_5 font_bold smooth mx-3">
+            <i class="fa fa-angle-double-left mr-2 fs-14" aria-hidden="true"></i>Trở về
         </a>
-        <a href="{{ @session()->get('back_url')?session()->get('back_url'):'' }}" class="station-richmenu-main-btn-area">
+        <a href="{{ url('') }}" class="main_button bg_red color_white radius_5 font_bold smooth red_btn">
           <i class="fa fa-times mr-2 fs-14" aria-hidden="true"></i>Hủy
         </a>
       </div>

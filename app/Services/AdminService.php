@@ -63,7 +63,7 @@ class AdminService extends BaseService
 
     public function getFieldAction($table, $action = 'view')
     {
-        $data = NDetailTable::where('table_map', $table)->where('act', 1)->where($action, 1)->orderBy('ord', 'asc')->get();
+        $data = NDetailTable::where('table_map', $table)->where('act', 1)->where($action, 1)->orderBy('ord', 'asc')->get()->toArray();
         return $data;
     }
 
@@ -79,7 +79,7 @@ class AdminService extends BaseService
         $data = $this->getBaseTable($table);
         $data['page_item'] = @$data['tableItem']['admin_paginate']??10;
         $data['view_type'] = @$data['tableItem']['view_type']??'view';
-        $data['field_searchs'] = NDetailTable::where('table_map', $table)->where('act', 1)->where('search', 1)->orderBy('ord', 'asc')->get();
+        $data['field_searchs'] = NDetailTable::where('table_map', $table)->where('act', 1)->where('search', 1)->orderBy('ord', 'asc')->get()->toArray();
         $name = @$data['view_type']=='configs'?'Cài đặt':$name;
         $data['title'] = $name.' '.$data['tableItem']['note'];
         if ($data['view_type']=='configs') {

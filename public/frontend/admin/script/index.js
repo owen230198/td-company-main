@@ -2,9 +2,9 @@ var orderLastSixMonthChart = function()
 {
     var bar_ctx = document.getElementById('bar-chart').getContext('2d');
 
-    var purple_orange_gradient = bar_ctx.createLinearGradient(0, 0, 0, 500);
-    purple_orange_gradient.addColorStop(0, '#000020');
-    purple_orange_gradient.addColorStop(1, '#000088');
+    var purple_orange_gradient = bar_ctx.createLinearGradient(0, 100, 200, 500);
+    purple_orange_gradient.addColorStop(0, '#459300');
+    purple_orange_gradient.addColorStop(1, '#6be102');
 
     var bar_chart = new Chart(bar_ctx, {
         type: 'bar',
