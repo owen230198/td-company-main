@@ -67,10 +67,24 @@ class AdminService extends BaseService
         return $data;
     }
 
+    public function handleDataFieldShow($field_shows)
+    {
+        $rowspan = 1;
+        foreach ($field_shows as $key => $field) {
+            if($field['parent'] == 0 && $field['type'] == 'group'){
+                $rowspan = 2;
+                $field_shows[$key]['child'] = NDetailTable::where(['act' => 1, 'parent' => $field['id']])->orderBy('ord', 'asc')->get()->toArray();
+                $field_shows[$key]['colspan'] = !empty($field_shows[$key]['child']) ? count($field_shows[$key]['child']) : 1;
+            }
+        }
+        return ['rowspan' => $rowspan, 'field_shows' => $field_shows];
+    }
+
     public function getBaseTable($table)
     {
+        $field_shows = $this->getFieldAction($table);
+        $data = $this->handleDataFieldShow($field_shows);
     	$data['tableItem'] = $this->getTableItem($table);
-        $data['field_shows'] = $this->getFieldAction($table);
         return $data;
     }
 

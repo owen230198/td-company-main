@@ -22,15 +22,19 @@
         <i class="fa fa-book mr-2 fs-15" aria-hidden="true"></i>Trợ giúp
       </a>
     </div>
-    <div class="paginate_view d-flex align-center justify-content-between mb-3">
+    <?php if(count($data_tables) > 0): ?>
+      <div class="paginate_view d-flex align-center justify-content-between mb-3">
+        <?php echo $data_tables->links('pagination::bootstrap-4'); ?>
+
+      </div>
+      <?php echo $__env->make('table.table_base_view', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+      <div class="paginate_view d-flex align-center justify-content-between mt-3">
       <?php echo $data_tables->links('pagination::bootstrap-4'); ?>
 
-     </div>
-    <?php echo $__env->make('table.table_base_view', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-    <div class="paginate_view d-flex align-center justify-content-between mt-3">
-     <?php echo $data_tables->links('pagination::bootstrap-4'); ?>
-
-    </div>
+      </div>
+    <?php else: ?>
+      <p class="fs-15 font-italic color_red">Chưa có dữ liệu <?php echo e(@$title); ?> !</p>
+    <?php endif; ?>
   </div>
   <?php echo $__env->make('table.remove_confirm', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
   <?php echo $__env->make('table.remove_confirm_check', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>

@@ -22,13 +22,17 @@
         <i class="fa fa-book mr-2 fs-15" aria-hidden="true"></i>Trợ giúp
       </a>
     </div>
-    <div class="paginate_view d-flex align-center justify-content-between mb-3">
+    @if (count($data_tables) > 0)
+      <div class="paginate_view d-flex align-center justify-content-between mb-3">
+        {!! $data_tables->links('pagination::bootstrap-4') !!}
+      </div>
+      @include('table.table_base_view')
+      <div class="paginate_view d-flex align-center justify-content-between mt-3">
       {!! $data_tables->links('pagination::bootstrap-4') !!}
-     </div>
-    @include('table.table_base_view')
-    <div class="paginate_view d-flex align-center justify-content-between mt-3">
-     {!! $data_tables->links('pagination::bootstrap-4') !!}
-    </div>
+      </div>
+    @else
+      <p class="fs-15 font-italic color_red">Chưa có dữ liệu {{ @$title }} !</p>
+    @endif
   </div>
   @include('table.remove_confirm')
   @include('table.remove_confirm_check')

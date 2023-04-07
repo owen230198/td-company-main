@@ -1,0 +1,1 @@
+<input type="text" autocomplete="off" name="{{ $id }}" class="form-control dateRangeInput" placeholder="Chọn thời gian" value = "{{ @$data_search[$id] }}"/>

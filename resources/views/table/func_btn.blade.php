@@ -1,4 +1,4 @@
-<div class="list_table_func d-flex align-items-center">
+<div class="list_table_func d-flex align-items-center justify-content-center">
 	<a href="{{ asset('update/'.$tableItem['name'].'/'.$data->id.'') }}" class="table-btn" title="Sửa">
 		<i class="fa fa-pencil-square-o fs-14" aria-hidden="true"></i>
 	</a>

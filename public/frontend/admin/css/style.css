@@ -503,7 +503,7 @@ a.device_supp_item {
 }
 
 .page_content .table tr td:first-child, 
-.page_content .table tr th:first-child{
+.page_content .table tr th.parentth:first-child{
     min-width: auto;
     position: sticky;
     left: -1px;
@@ -512,7 +512,7 @@ a.device_supp_item {
 }
 
 .page_content .table tr td:last-child, 
-.page_content .table tr th:last-child{
+.page_content .table tr th.parentth:last-child{
     min-width: auto;
     position: sticky;
     right: -1px;

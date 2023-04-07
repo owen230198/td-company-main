@@ -120,7 +120,7 @@ var dateRangeInputModule = function () {
             autoUpdateInput: false,
             timePicker: true,
             locale: {
-                format: "MM/DD/YYYY HH:mm",
+                format: "DD/MM/YYYY HH:mm",
                 separator: " - ",
                 applyLabel: "Xong",
                 cancelLabel: "Hủy",
@@ -148,9 +148,9 @@ var dateRangeInputModule = function () {
 
         $(".dateRangeInput").on("apply.daterangepicker", function (ev, picker) {
             $(this).val(
-                picker.startDate.format("MM/DD/YYYY H:mm") +
+                picker.startDate.format("DD/MM/YYYY H:mm") +
                     " - " +
-                    picker.endDate.format("MM/DD/YYYY H:mm")
+                    picker.endDate.format("DD/MM/YYYY H:mm")
             );
         });
         $(".dateRangeInput").on(
@@ -170,7 +170,7 @@ var datePickerModule = function () {
                 minYear: 2010,
                 timePicker: true,
                 locale: {
-                    format: "MM/DD/YYYY hh:mm A",
+                    format: "DD/MM/YYYY hh:mm A",
                     separator: " - ",
                     applyLabel: "Xong",
                     cancelLabel: "Hủy",

@@ -53,9 +53,10 @@ class AdminController extends Controller
                 $data['title'] = 'Danh sách thiết bị máy theo vật tư';
                 $data['supply'] = TDConstant::HARD_ELEMENT;
             }else{
+                $data = $this->admins->getDataBaseView('devices', 'Danh sách');
                 $data['title'] = 'Đơn giá thiết bị '. $request->input('name');
                 $where = $request->except('name');
-                $data['list_data'] = Device::where($where)->paginate(10);
+                $data['data_tables'] = Device::where($where)->paginate(10);
             }
             return view('config_devices/'.$step.'/view', $data);
         }
