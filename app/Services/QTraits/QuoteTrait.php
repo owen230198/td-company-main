@@ -50,18 +50,18 @@ trait QuoteTrait
         if (empty($key_device)) {
             return $this->createNonActiveObj();    
         }
-        if (in_array($key_device, ['nilon', 'metalai'])) {
+        if (in_array($key_device, [TDConstant::NILON, TDConstant::METALAI])) {
         	$plus_paper_device = TDConstant::PLUS_PAPER_DEVICE;
         	$qty_paper = $qty_paper+$plus_paper_device;
-        	$obj = $this->configDataNilon($qty_paper, $length, $width, $shape_price, $data);
-        }elseif ($key_device == 'uv') {
+        	$obj = $this->configDataNilon($qty_paper, $length, $width, $shape_price, $work_price, $data);
+        }elseif ($key_device == TDConstant::UV) {
         	$obj = $this->configDataUv($qty_paper, $work_price, $shape_price, $data);	
-        }elseif ($key_device == 'elevate') {
+        }elseif ($key_device == TDConstant::ELEVATE) {
             $float_price = !empty($data['float']) ? TDConstant::FLOAT_PRICE : 1;
             //Công thức tính chi phí bế: SL tờ in x ĐG lượt + (ĐG chỉnh máy + ĐG khuôn mẫu)
             $total = ($qty_paper*$work_price*$float_price)+($shape_price+$model_price);   
             $obj = $this->getObjectConfig($data, $total, $float_price);
-        }elseif($key_device=='milling'){
+        }elseif($key_device == TDConstant::MILL){
             if (@$table == 'q_cartons') {
                 $foams = getDetailDataByID('QSupply', $type);
                 $factor = @$foams['factor']?$foams['factor']:1;
@@ -87,8 +87,7 @@ trait QuoteTrait
     {
         $ex_length = $length*100;
         $ex_width = $width*100;
-        $printers  = new \App\Models\QPrinterDevice;
-        $printer = $printers->where('device', $device)
+        $printer = \App\Models\Printer::where('device', $device)
         ->where('print_length', '>=', $ex_length)
         ->where('print_width','>=', $ex_width)->orderBy('print_length', 'asc')->first();
         return $printer;

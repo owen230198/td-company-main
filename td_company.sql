@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : localhost
+ Source Server         : owen
  Source Server Type    : MySQL
- Source Server Version : 100427
+ Source Server Version : 100425
  Source Host           : localhost:3306
  Source Schema         : td_company
 
  Target Server Type    : MySQL
- Target Server Version : 100427
+ Target Server Version : 100425
  File Encoding         : 65001
 
- Date: 08/04/2023 02:27:12
+ Date: 11/04/2023 17:12:49
 */
 
 SET NAMES utf8mb4;
@@ -13838,7 +13838,7 @@ CREATE TABLE `q_products`  (
   `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 104 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 108 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of q_products
@@ -13920,6 +13920,10 @@ INSERT INTO `q_products` VALUES (100, 'Hop giay 1', 2, 3, 1, NULL, NULL, 1, 1, '
 INSERT INTO `q_products` VALUES (101, 'Hop giay 1', 2, 0, 1, NULL, NULL, 1, 1, '2023-03-26 10:51:00', '2023-03-26 10:51:00');
 INSERT INTO `q_products` VALUES (102, 'Hop giay 1', 2, 0, 1, NULL, NULL, 1, 1, '2023-03-26 10:52:00', '2023-03-26 10:52:00');
 INSERT INTO `q_products` VALUES (103, 'Hop giay 1', 2, 0, 1, NULL, NULL, 1, 1, '2023-03-26 10:53:00', '2023-03-26 10:53:00');
+INSERT INTO `q_products` VALUES (104, 'Hop cung', 2, 0, 1, NULL, NULL, 1, 1, '2023-04-10 11:41:00', '2023-04-10 11:41:00');
+INSERT INTO `q_products` VALUES (105, 'Hop cung', 2, 0, 1, NULL, NULL, 1, 1, '2023-04-10 11:44:00', '2023-04-10 11:44:00');
+INSERT INTO `q_products` VALUES (106, 'Hop cung', 2, 0, 1, NULL, NULL, 1, 1, '2023-04-10 11:45:00', '2023-04-10 11:45:00');
+INSERT INTO `q_products` VALUES (107, 'Hop giay 1', 2, 2, 1, NULL, NULL, 1, 1, '2023-04-10 11:46:00', '2023-04-10 11:46:00');
 
 -- ----------------------------
 -- Table structure for quotes

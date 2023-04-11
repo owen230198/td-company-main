@@ -395,7 +395,7 @@ a.device_supp_item {
     box-shadow: 1px 1px 3px #777777;
 }
 
-.basse_content{
+.base_content{
     padding-top: 70px;
     padding-left: 210px;
     padding-bottom: 60px;
@@ -502,6 +502,14 @@ a.device_supp_item {
     min-width: 120px;
 }
 
+.page_content .table td{
+    font-weight: normal;
+}
+
+.page_content .table th{
+    text-align: center;
+}
+
 .page_content .table tr td:first-child, 
 .page_content .table tr th.parentth:first-child{
     min-width: auto;
@@ -520,9 +528,11 @@ a.device_supp_item {
     color: #459300;
 }
 
+
+
 .table_base_view .w_max_content{
     width: max-content;
-    max-width: 200px;
+    max-width: 220px;
 }
 
 .linking_table{

@@ -231,7 +231,7 @@ var menuSidebar = function()
     });
 }
 
-var selectAjaxModule = function(section = $('.basse_content '))
+var selectAjaxModule = function(section = $('.base_content '))
 {
     let select_ajax = section.find('select.select_ajax');
     if (select_ajax.length > 0) {
@@ -276,7 +276,7 @@ var phoneInputPrevent = function () {
     });
 };
 
-var multipleSelectModule = function(section = $('.basse_content'))
+var multipleSelectModule = function(section = $('.base_content'))
 {
     let select_multiple = section.find('select.multiple_select');
     if (select_multiple.length > 0) {

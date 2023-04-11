@@ -49,13 +49,24 @@ trait QPaperTrait
         return $obj;	
 	}
 
-    private function configDataNilon($qty_paper, $length, $width, $shape_price, $nilon)
+    private function configDataNilon($qty_paper, $length, $width, $shape_price, $work_price, $nilon)
     {
-    	$materal_id = @$nilon['materal'] ? $nilon['materal']:0;
+    	$materal_id = !empty($nilon['materal']) ? $nilon['materal'] : 0;
         $materal_cost = $this->getPriceMateralQuote($materal_id);
-        $num_face = @$nilon['face'] ? (int)$nilon['face'] : 0;
-        // Công thức tính chi phí Cán láng: dài x rộng x ĐG chất liệu x (SL tờ in + tờ cộng thêm) x số mặt + ĐG chỉnh máy
-        $total = $length*$width*$materal_cost*$qty_paper*$num_face+$shape_price;
+        $num_face = !empty($nilon['face']) ? (int)$nilon['face'] : 0;
+
+        // CPVTK: D x R x DGL (1)
+        $a = $length*$width*$work_price;
+
+        // DGVT: D x R x DGVT x (SL tờ in + 30) (2)
+        $b = $length*$width*$materal_cost*$qty_paper;
+
+        // DGL = (SL tờ in + 30) x DGL x Số mặt (3)
+        $c = $qty_paper*$work_price*$num_face;
+        
+        // Tổng chi phí  = (1) + (2) + ĐGCM + (3);
+        $total = $a+$b+$shape_price+$c;
+        // $total = $length*$width*$materal_cost*$qty_paper*$num_face+$shape_price;
         $obj = $this->getObjectConfig($nilon, $total);
         return $obj;
     }
