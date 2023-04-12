@@ -39,7 +39,22 @@ trait QuoteTrait
         return json_encode($obj);
     }
 
-	private function configDataStage($qty_pro, $n_qty, $data, $length = 0, $width = 0, $table = '', $type = 0){
+    private function getBaseTotalStage($qty, $work_price, $shape_price, $length = 0, $width = 0, $materal_cost = 0, $factor = 1, $plus_qty = 0)
+    {
+        // CPVTK: D x R x DGL (1)
+        $a = $length*$width*$work_price;
+
+        // DGVT: D x R x DGVT x (SL tờ in - sp + BH %) x hệ số (2)
+        $b = $length*$width*$materal_cost*($qty + $plus_qty)*$factor;
+
+        // DGL = (SL tờ in hoặc SL sản phẩm + BH %) x DGL x hệ số (3)
+        $c = $qty*$work_price*$factor;
+        
+        // Tổng chi phí  = (1) + (2) + ĐGCM + (3);
+        return $a + $b + $shape_price + $c;
+    }
+
+	private function configDataStage($data, $qty_pro, $n_qty = 1,  $length = 0, $width = 0){
         $device_id = !empty($data['machine']) ? (int)$data['machine'] : 0;
         $device = getDetailDataByID('Device', $device_id);
         $model_price = !empty($data['model_price']) ? (float) $data['model_price'] : 0;
@@ -47,18 +62,19 @@ trait QuoteTrait
         $shape_price = !empty($device['shape_price']) ? (float) $device['shape_price'] : 0;
         $key_device = !empty($device['key_device']) ? $device['key_device'] : '';
         $qty_paper = ceil($qty_pro/$n_qty);
+        $plus_paper_device = (int) TDConstant::PLUS_PAPER_DEVICE;
+        $qty_paper = $qty_paper+$plus_paper_device;
         if (empty($key_device)) {
             return $this->createNonActiveObj();    
         }
-        if (in_array($key_device, [TDConstant::NILON, TDConstant::METALAI])) {
-        	$plus_paper_device = TDConstant::PLUS_PAPER_DEVICE;
-        	$qty_paper = $qty_paper+$plus_paper_device;
+        if ($key_device == TDConstant::NILON) {
         	$obj = $this->configDataNilon($qty_paper, $length, $width, $shape_price, $work_price, $data);
-        }elseif ($key_device == TDConstant::UV) {
-        	$obj = $this->configDataUv($qty_paper, $work_price, $shape_price, $data);	
-        }elseif ($key_device == TDConstant::ELEVATE) {
-            $float_price = !empty($data['float']) ? TDConstant::FLOAT_PRICE : 1;
-            //Công thức tính chi phí bế: SL tờ in x ĐG lượt + (ĐG chỉnh máy + ĐG khuôn mẫu)
+        }elseif ($key_device == TDConstant::METALAI){
+            $qty_paper = $qty_paper+$plus_paper_device;
+            $obj = $this->configDataMetalai($qty_paper, $length, $width, $shape_price, $work_price, $data);
+        }elseif (in_array($key_device, [TDConstant::COMPRESS, TDConstant::ELEVATE, TDConstant::UV])) {
+            //Công thức tính chi phí ép nhũ, máy bế, in uv
+
             $total = ($qty_paper*$work_price*$float_price)+($shape_price+$model_price);   
             $obj = $this->getObjectConfig($data, $total, $float_price);
         }elseif($key_device == TDConstant::MILL){
