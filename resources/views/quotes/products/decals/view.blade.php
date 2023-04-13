@@ -9,7 +9,7 @@
     @php
         $pro_decal_qty = [
             'name' => 'product['.$j.'][decal]['.$pindex.'][qty]',
-            'note' => 'Số lượng SP',
+            'note' => 'Số lượng',
             'value' => @$pro_qty,
             'attr' => ['type_input' => 'number', 'required' => 1]
         ] 

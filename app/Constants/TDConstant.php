@@ -116,6 +116,9 @@
         const STYRO = 'styrofoam';
         const MICA = 'mica';
         const FILL_FINISH = 'fill_finish';
+        const FILL = 'fill';
+        const FINISH = 'finish';
+        const MAGNET = 'magnet';
 
         //Thiết bị máy
         const PAPER_DEVICE = [

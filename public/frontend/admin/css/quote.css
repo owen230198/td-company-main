@@ -37,6 +37,15 @@
     cursor: pointer;
 }
 
+.remove_ext_paper_quote.remove_ff_quote {
+    width: 25px;
+    height: 25px;
+    border-radius: 0;
+    box-shadow: none;
+    right: -20px;
+    top: -5px;
+}
+
 .height_input{
     margin-bottom: 20.61px;
 }

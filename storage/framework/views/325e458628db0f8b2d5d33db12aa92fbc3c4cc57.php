@@ -13,7 +13,7 @@
             </h3>
             <?php $__currentLoopData = $customer_fields; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $customer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <div class="d-flex align-items-center mb-2 fs-13">
-                    <label class="mb-0 min_180 text-capitalize text-right mr-3"><?php echo e($customer['note']); ?>: </label>
+                    <label class="mb-0 min_210 text-capitalize text-right mr-3"><?php echo e($customer['note']); ?>: </label>
                     <p class="font_italic">
                         <?php if(!empty($data_quote[$customer['name']])): ?>
                             <?php echo e(@$customer['type'] != 'linking' ? $data_quote[$customer['name']] 

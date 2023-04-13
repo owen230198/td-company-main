@@ -1,5 +1,5 @@
 @if ($pindex > 0)
-<div class="quote_paper_item mt-3 border_green p-3 radius_5 position-relative"> 
+<div class="quote_paper_item mt-3 border_green p-3 radius_5 position-relative" data-index={{ $pindex }}> 
     <span class="remove_ext_paper_quote d-flex bg_red color_white red_btn smooth"><i class="fa fa-times" aria-hidden="true"></i></span> 
 @else 
 <input type="hidden" value="1" name="product[{{ $j }}][paper][{{ $pindex }}][main]">
@@ -98,7 +98,7 @@
             @endphp
             @include('view_update.view', $pro_paper_qttv)
             <div class="d-flex align-items-center mb-2 fs-13">
-                <label class="mb-0 min_180 text-capitalize text-right mr-3">
+                <label class="mb-0 min_210 text-capitalize text-right mr-3">
                     <span class="fs-15 mr-1">*</span>Kích thước khổ giấy tối ưu
                 </label>
                 <div class="d-flex justify-content-between align-items-center">

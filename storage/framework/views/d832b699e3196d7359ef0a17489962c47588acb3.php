@@ -1,6 +1,6 @@
 <div class="section_quote_print_paper">
     <div class="list_paper_config">
-        <div class="quote_paper_item item_main">
+        <div class="quote_paper_item item_main" data-index=0>
             <?php echo $__env->make('quotes.products.papers.ajax_view', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         </div>    
     </div>

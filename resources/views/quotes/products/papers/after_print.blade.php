@@ -7,7 +7,7 @@
 @endphp
     <div class="quote_after_print_tab">
         <div class="d-flex">
-            <div class="nav flex-column nav-pills  min_180 max_150 mr-3 bg_white" id="after-print-tab-pro{{ $j.'_'.$pindex }}" role="tablist" aria-orientation="vertical">
+            <div class="nav flex-column nav-pills  min_210 max_150 mr-3 bg_white" id="after-print-tab-pro{{ $j.'_'.$pindex }}" role="tablist" aria-orientation="vertical">
                 @foreach ($handle_stage as $navkey => $nav)
                     <a class="nav-link text-right {{ $navkey == 0 ? $nav['color'].'_stage active' : $nav['color'].'_stage' }}" 
                     id="v-{{ $nav['key'].'_'.$j.'_'.$pindex }}-tab" 

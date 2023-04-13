@@ -11,7 +11,7 @@
  Target Server Version : 100425
  File Encoding         : 65001
 
- Date: 11/04/2023 17:12:49
+ Date: 14/04/2023 03:34:00
 */
 
 SET NAMES utf8mb4;
@@ -13125,6 +13125,43 @@ CREATE TABLE `files`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Table structure for fill_finish_prices
+-- ----------------------------
+DROP TABLE IF EXISTS `fill_finish_prices`;
+CREATE TABLE `fill_finish_prices`  (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `price` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `act` tinyint(4) NULL DEFAULT NULL,
+  `created_by` int(10) NULL DEFAULT NULL,
+  `created_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `index`(`id`, `name`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of fill_finish_prices
+-- ----------------------------
+INSERT INTO `fill_finish_prices` VALUES (1, 'Giấy bồi nắp', NULL, 'fill', 1, 1, '2023-03-15 09:45:23', '2023-03-15 09:45:25');
+INSERT INTO `fill_finish_prices` VALUES (2, 'Giấy bồi thành', NULL, 'fill', 1, 1, '2023-03-15 09:45:23', '2023-03-15 09:45:25');
+INSERT INTO `fill_finish_prices` VALUES (3, 'Giấy bồi bìa', NULL, 'fill', 1, 1, '2023-04-13 23:57:20', '2023-04-13 23:57:22');
+INSERT INTO `fill_finish_prices` VALUES (4, 'Giấy bồi khay', NULL, 'fill', 1, 1, '2023-04-13 23:57:20', '2023-04-13 23:57:22');
+INSERT INTO `fill_finish_prices` VALUES (5, 'Giấy bồi mặt trong', NULL, 'fill', 1, 1, '2023-04-13 23:57:20', '2023-04-13 23:57:22');
+INSERT INTO `fill_finish_prices` VALUES (9, 'Giấy bồi bìa', NULL, 'fill', 1, 1, '2023-04-13 23:57:20', '2023-04-13 23:57:22');
+INSERT INTO `fill_finish_prices` VALUES (10, 'Gắn keo bìa với thành', NULL, 'finish', 1, 1, '2023-04-14 01:46:27', '2023-04-14 01:46:29');
+INSERT INTO `fill_finish_prices` VALUES (11, 'Gắn khay định hình', NULL, 'finish', 1, 1, '2023-04-14 01:46:27', '2023-04-14 01:46:29');
+INSERT INTO `fill_finish_prices` VALUES (12, 'Gắn cao su non', NULL, 'finish', 1, 1, '2023-04-14 01:46:27', '2023-04-14 01:46:29');
+INSERT INTO `fill_finish_prices` VALUES (13, 'Gắn mút phẳng', NULL, 'finish', 1, 1, '2023-04-14 01:46:27', '2023-04-14 01:46:29');
+INSERT INTO `fill_finish_prices` VALUES (14, 'Gắn vải lụa', NULL, 'finish', 1, 1, '2023-04-14 01:46:27', '2023-04-14 01:46:29');
+INSERT INTO `fill_finish_prices` VALUES (15, 'Đột khuyết', NULL, 'finish', 1, 1, '2023-04-14 01:46:27', '2023-04-14 01:46:29');
+INSERT INTO `fill_finish_prices` VALUES (16, 'Cắt CNC', NULL, 'finish', 1, 1, '2023-04-14 01:46:27', '2023-04-14 01:46:29');
+INSERT INTO `fill_finish_prices` VALUES (17, 'Nam châm bé', NULL, 'magnet', 1, 1, '2023-04-14 01:46:27', '2023-04-14 01:46:29');
+INSERT INTO `fill_finish_prices` VALUES (18, 'Nam châm trung', NULL, 'magnet', 1, 1, '2023-04-14 01:46:27', '2023-04-14 01:46:29');
+INSERT INTO `fill_finish_prices` VALUES (19, 'Nam châm lớn', NULL, 'magnet', 1, 1, '2023-04-14 01:46:27', '2023-04-14 01:46:29');
+
+-- ----------------------------
 -- Table structure for materals
 -- ----------------------------
 DROP TABLE IF EXISTS `materals`;
@@ -13838,7 +13875,7 @@ CREATE TABLE `q_products`  (
   `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 108 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 121 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of q_products
@@ -13924,6 +13961,19 @@ INSERT INTO `q_products` VALUES (104, 'Hop cung', 2, 0, 1, NULL, NULL, 1, 1, '20
 INSERT INTO `q_products` VALUES (105, 'Hop cung', 2, 0, 1, NULL, NULL, 1, 1, '2023-04-10 11:44:00', '2023-04-10 11:44:00');
 INSERT INTO `q_products` VALUES (106, 'Hop cung', 2, 0, 1, NULL, NULL, 1, 1, '2023-04-10 11:45:00', '2023-04-10 11:45:00');
 INSERT INTO `q_products` VALUES (107, 'Hop giay 1', 2, 2, 1, NULL, NULL, 1, 1, '2023-04-10 11:46:00', '2023-04-10 11:46:00');
+INSERT INTO `q_products` VALUES (108, 'Hop cung', 2, 0, 1, NULL, NULL, 1, 1, '2023-04-12 08:22:00', '2023-04-12 08:22:00');
+INSERT INTO `q_products` VALUES (109, 'Hop cung', 2, 0, 1, NULL, NULL, 1, 1, '2023-04-12 08:23:00', '2023-04-12 08:23:00');
+INSERT INTO `q_products` VALUES (110, 'Hop cung', 2, 0, 1, NULL, NULL, 1, 1, '2023-04-12 08:24:00', '2023-04-12 08:24:00');
+INSERT INTO `q_products` VALUES (111, 'Hop cung', 2, 0, 1, NULL, NULL, 1, 1, '2023-04-12 08:24:00', '2023-04-12 08:24:00');
+INSERT INTO `q_products` VALUES (112, 'Hop cung', 2, 0, 1, NULL, NULL, 1, 1, '2023-04-12 08:30:00', '2023-04-12 08:30:00');
+INSERT INTO `q_products` VALUES (113, 'Hop cung', 2, 0, 1, NULL, NULL, 1, 1, '2023-04-12 08:55:00', '2023-04-12 08:55:00');
+INSERT INTO `q_products` VALUES (114, 'Hop cung', 2, 0, 1, NULL, NULL, 1, 1, '2023-04-12 08:55:00', '2023-04-12 08:55:00');
+INSERT INTO `q_products` VALUES (115, 'Hop cung', 2, 0, 1, NULL, NULL, 1, 1, '2023-04-12 08:55:00', '2023-04-12 08:55:00');
+INSERT INTO `q_products` VALUES (116, 'Hop cung', 2, 0, 1, NULL, NULL, 1, 1, '2023-04-12 08:56:00', '2023-04-12 08:56:00');
+INSERT INTO `q_products` VALUES (117, 'Hop cung', 2, 0, 1, NULL, NULL, 1, 1, '2023-04-12 08:57:00', '2023-04-12 08:57:00');
+INSERT INTO `q_products` VALUES (118, 'Hop cung', 2, 0, 1, NULL, NULL, 1, 1, '2023-04-12 08:57:00', '2023-04-12 08:57:00');
+INSERT INTO `q_products` VALUES (119, 'Hop giay', 2, 0, 1, NULL, NULL, 1, 1, '2023-04-12 09:15:00', '2023-04-12 09:15:00');
+INSERT INTO `q_products` VALUES (120, 'Hop giay', 2, 0, 1, NULL, NULL, 1, 1, '2023-04-12 09:15:00', '2023-04-12 09:15:00');
 
 -- ----------------------------
 -- Table structure for quotes

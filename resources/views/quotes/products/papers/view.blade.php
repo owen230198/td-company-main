@@ -1,6 +1,6 @@
 <div class="section_quote_print_paper">
     <div class="list_paper_config">
-        <div class="quote_paper_item item_main">
+        <div class="quote_paper_item item_main" data-index=0>
             @include('quotes.products.papers.ajax_view')
         </div>    
     </div>

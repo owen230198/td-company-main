@@ -25,6 +25,9 @@ a:hover{
     width: 102px   
 }
 
+.config_content .medium_input .select2.select2-container.select2-container--default,
+.config_content .medium_input .btn-group, .btn-group-vertical,
+.config_content .medium_input .multiselect-container,
 .config_content .form-control.medium_input{
     max-width: 170px;
     min-width: 170px;
@@ -59,7 +62,7 @@ body, html {
     font-weight: 600;
 }
 .select2-container--default .select2-selection--single {
-    height: 30px;
+    height: 31.5px;
 }
 .select2.select2-container.select2-container--default {
     width: 100% !important;
@@ -570,8 +573,8 @@ a.device_supp_item {
     page-break-after: always;
 }
 
-.min_180{
-    min-width: 180px;
+.min_210{
+    min-width: 210px;
 }
 
 @media (max-width: 1400px) {

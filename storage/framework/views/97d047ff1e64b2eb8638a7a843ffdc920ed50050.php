@@ -7,7 +7,7 @@
 ?>
     <div class="quote_after_print_tab">
         <div class="d-flex">
-            <div class="nav flex-column nav-pills  min_180 max_150 mr-3 bg_white" id="after-print-tab-pro<?php echo e($j.'_'.$pindex); ?>" role="tablist" aria-orientation="vertical">
+            <div class="nav flex-column nav-pills  min_210 max_150 mr-3 bg_white" id="after-print-tab-pro<?php echo e($j.'_'.$pindex); ?>" role="tablist" aria-orientation="vertical">
                 <?php $__currentLoopData = $handle_stage; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $navkey => $nav): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <a class="nav-link text-right <?php echo e($navkey == 0 ? $nav['color'].'_stage active' : $nav['color'].'_stage'); ?>" 
                     id="v-<?php echo e($nav['key'].'_'.$j.'_'.$pindex); ?>-tab" 

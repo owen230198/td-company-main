@@ -5,7 +5,7 @@
 
     <div class="quote_after_print_tab">
         <div class="d-flex">
-            <div class="nav flex-column nav-pills  min_180 max_150 mr-3 bg_white" id="after-print-tab-pro<?php echo e($j.'_'.$pindex); ?>" role="tablist" aria-orientation="vertical">
+            <div class="nav flex-column nav-pills  min_210 max_150 mr-3 bg_white" id="after-print-tab-pro<?php echo e($j.'_'.$pindex); ?>" role="tablist" aria-orientation="vertical">
                 <a class="nav-link text-right active" id="v-print_type_<?php echo e($j.'_'.$pindex); ?>-tab" data-toggle="pill" href="#v-print_type_<?php echo e($j.'_'.$pindex); ?>" role="tab" aria-controls="v-print_type_<?php echo e($j.'_'.$pindex); ?>" aria-selected="true">
                     Quy Cách - kiểu in
                 </a>

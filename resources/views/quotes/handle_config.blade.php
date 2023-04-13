@@ -13,7 +13,7 @@
             </h3>
             @foreach ($customer_fields as $customer)
                 <div class="d-flex align-items-center mb-2 fs-13">
-                    <label class="mb-0 min_180 text-capitalize text-right mr-3">{{ $customer['note'] }}: </label>
+                    <label class="mb-0 min_210 text-capitalize text-right mr-3">{{ $customer['note'] }}: </label>
                     <p class="font_italic">
                         @if (!empty($data_quote[$customer['name']]))
                             {{ 

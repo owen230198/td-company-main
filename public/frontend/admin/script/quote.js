@@ -129,14 +129,29 @@ var addPrintPaperModule = function()
     let list_section = $(this).closest('.section_quote_print_paper').find('.list_paper_config');
     let item = list_section.find('.quote_paper_item');
     let pro_index = $(this).data('product');
-    let paper_index = item.length;
+    let paper_index = parseInt(item.last().data('index')) + 1;
     let paper_name = $(this).closest('.section_quote_print_paper').find('input.quote_receive_paper_name_main').val();
     let url = 'add-print-paper-quote?pro_index='+pro_index+'&paper_index='+paper_index+'&paper_name='+paper_name;
     ajaxViewTarget(url, list_section, list_section, 2);
   });
 }
 
-var removePrintPaperModule = function()
+var addFillFinishModule = function()
+{
+  $(document).on('click', 'button.add_fill_finish_quote_button', function(event){
+    event.preventDefault();
+    let list_section = $(this).closest('.section_quote_fill_finish').find('.list_item_fill_finish');
+    let item = list_section.find('.quote_fill_finish_item');
+    let pro_index = $(this).data('product');
+    let findex = parseInt(item.last().data('index')) + 1;
+    let view = $(this).data('view');
+    let ajax_target = list_section.find('.ajax_ff_quote');
+    let url = 'add-fill-finish-quote?pro_index='+pro_index+'&ff_index='+findex+'&view='+view;
+    ajaxViewTarget(url, ajax_target, list_section, 2);
+  });
+}
+
+var removeItemAddedModule = function()
 {
   $(document).on('click', 'span.remove_ext_paper_quote', function(event){
     event.preventDefault();
@@ -245,7 +260,8 @@ $(function(){
   selectPaperMateralModule();
   moduleInputQuantityProduct();
   addPrintPaperModule();
-  removePrintPaperModule();
+  addFillFinishModule();
+  removeItemAddedModule();
   setNameProductQuote();
   selectExtNamePaperModule();
   selectProductCategory();

@@ -84,6 +84,14 @@ class QuoteController extends Controller
         return view('quotes.products.papers.ajax_view', ['j' => $pro_index, 'pindex' => $paper_index, 'paper_name' => $paper_name]);
     }
 
+    public function addFillFinishQuote(Request $request)
+    {
+        $pro_index = (int) $request->input('pro_index');
+        $findex = (int) $request->input('ff_index');
+        $view = $request->input('view');
+        return view('quotes.products.fill_finishes.'.$view, ['j' => $pro_index, 'findex' => $findex]);   
+    }
+
     public function computePaperSize(Request $request)
     {
         $product = collect($request->input('product'))->first();
@@ -102,6 +110,7 @@ class QuoteController extends Controller
             $data['elements'] = $cate == 1 ? TDConstant::HARD_ELEMENT : TDConstant::PAPER_ELEMENT;
             $data['j'] = (int) $request->input('proindex');
             $data['pindex'] = 0;
+            $data['findex'] = 0;
             $data['paper_name'] = $request->input('paper_name');
             $data['pro_qty'] = (int) $request->input('pro_qty');
             if (empty($data['paper_name'])) {
