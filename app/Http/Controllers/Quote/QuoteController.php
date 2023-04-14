@@ -37,10 +37,11 @@ class QuoteController extends Controller
                 }
             }
         }else{
+            $arr_quote = Quote::find($request->input('id'));
             if (!$request->isMethod('POST')) {
                 $data['title'] = 'Tạo mới báo giá - Chi tiết sản phẩm và sản xuất';
                 $data['customer_fields'] = Customer::FIELD_UPDATE;
-                $data['data_quote'] = Quote::find($request->input('id'));
+                $data['data_quote'] = $arr_quote;
                 if (!empty($data['data_quote'])) {
                     return view('quotes.'.$step, $data);
                 }else{
@@ -51,7 +52,7 @@ class QuoteController extends Controller
                 if (empty($data['product'])) {
                     return returnMessageAjax(110, 'Không tìm thấy sản phẩm !');
                 }else{
-                    $status = $this->services->insertDataProduct($data);
+                    $status = $this->services->processDataProduct($data, $arr_quote);
                     return $status;
                 }
             }   

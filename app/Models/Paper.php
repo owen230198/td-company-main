@@ -16,8 +16,9 @@ class Paper extends Model
     protected $table = 'papers';
     protected $protectFields = false;
     use QPaperTrait, QuoteTrait;
-    public function insertData($product_id, $data)
+    public function processData($product_id, $data)
     {
+        $cost = 0;
         foreach ($data as $paper) {
             $data_insert = $this->getDataActionPaper($paper);
             $data['name'] = $paper['name'];
@@ -27,7 +28,9 @@ class Paper extends Model
             $data_insert['product'] = $product_id;
             $data_insert['main'] = !empty($paper['main']) ? $paper['main'] : 0;
             (new BaseService)->configBaseDataAction($data_insert);
-            return $this->insert($data_insert);
-         }
+            $this->insert($data_insert);
+            $cost += $data_insert['total_cost'];
+        }
+        return $cost;
     }
 }

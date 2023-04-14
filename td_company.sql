@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : owen
+ Source Server         : localhost
  Source Server Type    : MySQL
- Source Server Version : 100425
+ Source Server Version : 100427
  Source Host           : localhost:3306
  Source Schema         : td_company
 
  Target Server Type    : MySQL
- Target Server Version : 100425
+ Target Server Version : 100427
  File Encoding         : 65001
 
- Date: 14/04/2023 03:34:00
+ Date: 15/04/2023 03:14:15
 */
 
 SET NAMES utf8mb4;
@@ -13177,7 +13177,7 @@ CREATE TABLE `materals`  (
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `created_by` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of materals
@@ -13191,6 +13191,8 @@ INSERT INTO `materals` VALUES (6, 'Cán mờ', '2800', 'cover', NULL, NULL, 1, '
 INSERT INTO `materals` VALUES (7, 'Phủ bóng gốc dầu nhật sơn trên giấy ', '1500', 'cover', NULL, NULL, 1, '2022-06-30 23:28:23', '2022-06-30 23:28:23', 0);
 INSERT INTO `materals` VALUES (8, 'Cán bóng', '2500', 'nilon', NULL, '', 1, '2023-03-14 20:07:01', '2023-03-14 20:07:01', 0);
 INSERT INTO `materals` VALUES (9, 'Cán mờ', '2800', 'nilon', 1, NULL, 1, '2023-03-18 12:10:16', '2023-03-18 12:10:16', 0);
+INSERT INTO `materals` VALUES (10, 'Mực bóng', '2500', 'uv', NULL, '', 1, '2023-03-14 20:07:01', '2023-03-14 20:07:01', 0);
+INSERT INTO `materals` VALUES (11, 'Mực sần cát', '2800', 'uv', 1, NULL, 1, '2023-03-18 12:10:16', '2023-03-18 12:10:16', 0);
 
 -- ----------------------------
 -- Table structure for n_detail_tables
@@ -13521,6 +13523,41 @@ INSERT INTO `n_users` VALUES (17, 'bmanager', 'e10adc3949ba59abbe56e057f20f883e'
 INSERT INTO `n_users` VALUES (18, 'bstaff', 'e10adc3949ba59abbe56e057f20f883e', 'Nhân viên kinh doanh', 'bstaff@gmail.com', NULL, 45, 0, NULL, NULL, 1, '2022-12-14 03:25:00', NULL, 17);
 
 -- ----------------------------
+-- Table structure for ord_products
+-- ----------------------------
+DROP TABLE IF EXISTS `ord_products`;
+CREATE TABLE `ord_products`  (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `product_category_id` int(10) NULL DEFAULT NULL,
+  `num_face_design` tinyint(4) NULL DEFAULT NULL,
+  `json_data_paper` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `order_date` datetime(0) NULL DEFAULT NULL,
+  `expired_date` datetime(0) NULL DEFAULT NULL,
+  `qty` bigint(20) NULL DEFAULT NULL,
+  `price` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `total_cost` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `order_id` int(10) NULL DEFAULT NULL,
+  `act` tinyint(4) NULL DEFAULT NULL,
+  `created_by` int(10) NULL DEFAULT NULL,
+  `created_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 27 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of ord_products
+-- ----------------------------
+INSERT INTO `ord_products` VALUES (21, 'Hop cung', 'not_accepted', 1, 2, '{\"quantative\":\"300\",\"substance\":\"9\"}', NULL, NULL, 10000, '2000', '20000000', 'note hop cung', 15, 1, 1, '2022-11-22 14:31:00', NULL);
+INSERT INTO `ord_products` VALUES (22, 'Hop banh', 'not_accepted', 7, 2, '{\"quantative\":\"200\",\"substance\":\"3\"}', NULL, NULL, 500000, '1000', '500000000', 'note hop banh', 15, 1, 1, '2022-11-22 14:31:00', NULL);
+INSERT INTO `ord_products` VALUES (23, 'Sản phẩm 1', 'not_accepted', 7, 2, '{\"quantative\":\"300\",\"substance\":\"1\"}', NULL, NULL, 10000, '200', '2000000', 'ghi chu sp 1', 16, 1, 1, '2023-02-22 23:01:00', NULL);
+INSERT INTO `ord_products` VALUES (24, 'Sản phẩm 2', 'not_accepted', 7, 2, '{\"quantative\":\"400\",\"substance\":\"9\"}', NULL, NULL, 2000, '100', '200000', 'ghi chu sp 2', 16, 1, 1, '2023-02-22 23:01:00', NULL);
+INSERT INTO `ord_products` VALUES (25, 'TD-1677317435', 'not_accepted', 7, 2, '{\"quantative\":\"300\",\"substance\":\"9\"}', NULL, NULL, 1000000, '2000', '2000000000', 'note', 17, NULL, 1, '2023-02-25 09:30:00', NULL);
+INSERT INTO `ord_products` VALUES (26, 'TD-1677317435', 'not_accepted', 7, 2, '{\"quantative\":\"300\",\"substance\":\"1\"}', NULL, NULL, 10000, '2000', '20000000', 'note', 17, NULL, 1, '2023-02-25 09:30:00', NULL);
+
+-- ----------------------------
 -- Table structure for orders
 -- ----------------------------
 DROP TABLE IF EXISTS `orders`;
@@ -13653,7 +13690,7 @@ CREATE TABLE `papers`  (
   `compress` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   `uv` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   `ext_price` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
-  `total_cost` float(20, 0) NULL DEFAULT NULL,
+  `total_cost` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `product` int(10) NULL DEFAULT NULL,
   `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `main` tinyint(4) NULL DEFAULT NULL,
@@ -13664,12 +13701,13 @@ CREATE TABLE `papers`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `quote_indx`(`product`) USING BTREE,
   INDEX `main_index`(`main`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of papers
 -- ----------------------------
-INSERT INTO `papers` VALUES (7, NULL, 1000, 2, 605, '{\"materal\":\"2\",\"qttv\":\"300\",\"length\":\"35\",\"width\":\"61\",\"act\":1,\"total\":4515525}', '{\"type\":\"1\",\"color\":\"4\",\"machine\":\"1\",\"total\":623840}', '{\"materal\":\"9\",\"face\":\"1\",\"machine\":\"8\",\"total\":665734}', '{\"price\":\"0\",\"machine\":\"11\",\"total\":250000}', '{\"machine\":\"12\",\"nqty\":\"0\",\"total\":30000}', '{\"machine\":\"6\",\"total\":100000}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', 6185099, 103, NULL, 1, 1, '2023-03-26 10:53:00', '2023-03-26 10:53:00', 1);
+INSERT INTO `papers` VALUES (1, NULL, 1000, 1, 1000, '{\"materal\":\"2\",\"qttv\":\"300\",\"length\":\"35\",\"width\":\"58\",\"act\":1,\"total\":6759900}', '{\"type\":\"1\",\"color\":\"4\",\"machine\":\"1\",\"act\":1,\"total\":623840}', '{\"materal\":\"9\",\"face\":\"1\",\"machine\":\"8\",\"act\":1,\"total\":624084}', '{\"ext_price\":\"0\",\"machine\":\"11\",\"act\":1,\"total\":251530.45}', '{\"machine\":\"12\",\"nqty\":\"0\",\"act\":1,\"total\":30102.03}', '{\"machine\":\"6\",\"act\":1,\"total\":100510.15}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '8389966.63', 1, NULL, 1, 1, '2023-04-14 20:13:00', '2023-04-14 20:13:00', 1);
+INSERT INTO `papers` VALUES (2, NULL, 2000, 1, 2000, '{\"materal\":\"1\",\"qttv\":\"200\",\"length\":\"30\",\"width\":\"25\",\"act\":1,\"total\":3180000}', '{\"type\":\"1\",\"color\":\"4\",\"machine\":\"1\",\"act\":1,\"total\":743600}', '{\"materal\":\"9\",\"face\":\"1\",\"machine\":\"8\",\"act\":1,\"total\":474200}', '{\"ext_price\":\"0\",\"machine\":\"11\",\"act\":1,\"total\":403011.25}', '{\"machine\":\"12\",\"nqty\":\"0\",\"act\":1,\"total\":40200.75}', '{\"machine\":\"6\",\"act\":1,\"total\":151003.75}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '4992015.75', 2, NULL, 1, 1, '2023-04-14 20:13:00', '2023-04-14 20:13:00', 1);
 
 -- ----------------------------
 -- Table structure for print_techs
@@ -13760,33 +13798,23 @@ DROP TABLE IF EXISTS `products`;
 CREATE TABLE `products`  (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `product_category_id` int(10) NULL DEFAULT NULL,
-  `num_face_design` tinyint(4) NULL DEFAULT NULL,
-  `json_data_paper` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `order_date` datetime(0) NULL DEFAULT NULL,
-  `expired_date` datetime(0) NULL DEFAULT NULL,
-  `qty` bigint(20) NULL DEFAULT NULL,
-  `price` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `total_cost` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `category` int(10) NULL DEFAULT NULL,
+  `design` int(10) NULL DEFAULT NULL,
+  `quote_id` int(10) NULL DEFAULT NULL,
+  `total_cost` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `order_id` int(10) NULL DEFAULT NULL,
   `act` tinyint(4) NULL DEFAULT NULL,
   `created_by` int(10) NULL DEFAULT NULL,
   `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 27 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of products
 -- ----------------------------
-INSERT INTO `products` VALUES (21, 'Hop cung', 'not_accepted', 1, 2, '{\"quantative\":\"300\",\"substance\":\"9\"}', NULL, NULL, 10000, '2000', '20000000', 'note hop cung', 15, 1, 1, '2022-11-22 14:31:00', NULL);
-INSERT INTO `products` VALUES (22, 'Hop banh', 'not_accepted', 7, 2, '{\"quantative\":\"200\",\"substance\":\"3\"}', NULL, NULL, 500000, '1000', '500000000', 'note hop banh', 15, 1, 1, '2022-11-22 14:31:00', NULL);
-INSERT INTO `products` VALUES (23, 'Sản phẩm 1', 'not_accepted', 7, 2, '{\"quantative\":\"300\",\"substance\":\"1\"}', NULL, NULL, 10000, '200', '2000000', 'ghi chu sp 1', 16, 1, 1, '2023-02-22 23:01:00', NULL);
-INSERT INTO `products` VALUES (24, 'Sản phẩm 2', 'not_accepted', 7, 2, '{\"quantative\":\"400\",\"substance\":\"9\"}', NULL, NULL, 2000, '100', '200000', 'ghi chu sp 2', 16, 1, 1, '2023-02-22 23:01:00', NULL);
-INSERT INTO `products` VALUES (25, 'TD-1677317435', 'not_accepted', 7, 2, '{\"quantative\":\"300\",\"substance\":\"9\"}', NULL, NULL, 1000000, '2000', '2000000000', 'note', 17, NULL, 1, '2023-02-25 09:30:00', NULL);
-INSERT INTO `products` VALUES (26, 'TD-1677317435', 'not_accepted', 7, 2, '{\"quantative\":\"300\",\"substance\":\"1\"}', NULL, NULL, 10000, '2000', '20000000', 'note', 17, NULL, 1, '2023-02-25 09:30:00', NULL);
+INSERT INTO `products` VALUES (1, 'Hop giay 1', 2, 1, 1, '8389966.63', NULL, 1, 1, '2023-04-14 20:13:00', '2023-04-14 20:13:06');
+INSERT INTO `products` VALUES (2, 'Hop giay 2', 2, 1, 1, '4992015.75', NULL, 1, 1, '2023-04-14 20:13:00', '2023-04-14 20:13:06');
 
 -- ----------------------------
 -- Table structure for q_configs
@@ -13859,123 +13887,6 @@ CREATE TABLE `q_finishes`  (
 INSERT INTO `q_finishes` VALUES (1, '{\"act\":1,\"price\":\"100\",\"total\":1000000}', '{\"act\":1,\"price\":\"300\",\"total\":3000000}', NULL, NULL, 4000000, 11, NULL, 0);
 
 -- ----------------------------
--- Table structure for q_products
--- ----------------------------
-DROP TABLE IF EXISTS `q_products`;
-CREATE TABLE `q_products`  (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `category` int(10) NULL DEFAULT NULL,
-  `design` int(10) NULL DEFAULT NULL,
-  `quote_id` int(10) NULL DEFAULT NULL,
-  `total_amount` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `act` tinyint(4) NULL DEFAULT NULL,
-  `created_by` int(10) NULL DEFAULT NULL,
-  `created_at` datetime(0) NULL DEFAULT NULL,
-  `updated_at` datetime(0) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 121 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of q_products
--- ----------------------------
-INSERT INTO `q_products` VALUES (27, 'Hop giay', 2, 2, 3, NULL, NULL, NULL, 1, '2023-03-20 10:37:00', '2023-03-20 10:37:00');
-INSERT INTO `q_products` VALUES (28, 'Hop giay', 2, 2, 3, NULL, NULL, NULL, 1, '2023-03-20 10:41:00', '2023-03-20 10:41:00');
-INSERT INTO `q_products` VALUES (29, 'Hop giay', 2, 2, 3, NULL, NULL, NULL, 1, '2023-03-20 10:42:00', '2023-03-20 10:42:00');
-INSERT INTO `q_products` VALUES (30, 'Hop giay', 2, 2, 3, NULL, NULL, 1, 1, '2023-03-20 10:48:00', '2023-03-20 10:48:00');
-INSERT INTO `q_products` VALUES (31, 'Hop giay', 2, 2, 3, NULL, NULL, 1, 1, '2023-03-20 10:50:00', '2023-03-20 10:50:00');
-INSERT INTO `q_products` VALUES (32, 'Hop giay', 2, 2, 3, NULL, NULL, 1, 1, '2023-03-20 10:50:00', '2023-03-20 10:50:00');
-INSERT INTO `q_products` VALUES (33, 'Hop giay', 2, 2, 3, NULL, NULL, 1, 1, '2023-03-20 10:51:00', '2023-03-20 10:51:00');
-INSERT INTO `q_products` VALUES (34, 'Hop giay', 2, 2, 3, NULL, NULL, 1, 1, '2023-03-20 10:51:00', '2023-03-20 10:51:00');
-INSERT INTO `q_products` VALUES (35, 'Hop giay', 2, 2, 3, NULL, NULL, 1, 1, '2023-03-20 11:09:00', '2023-03-20 11:09:00');
-INSERT INTO `q_products` VALUES (36, 'Hop giay', 2, 2, 3, NULL, NULL, 1, 1, '2023-03-20 11:12:00', '2023-03-20 11:12:00');
-INSERT INTO `q_products` VALUES (37, 'Hop giay', 2, 2, 3, NULL, NULL, 1, 1, '2023-03-20 11:13:00', '2023-03-20 11:13:00');
-INSERT INTO `q_products` VALUES (38, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 07:34:00', '2023-03-23 07:34:00');
-INSERT INTO `q_products` VALUES (39, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 07:35:00', '2023-03-23 07:35:00');
-INSERT INTO `q_products` VALUES (40, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 07:36:00', '2023-03-23 07:36:00');
-INSERT INTO `q_products` VALUES (41, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 07:37:00', '2023-03-23 07:37:00');
-INSERT INTO `q_products` VALUES (42, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 07:41:00', '2023-03-23 07:41:00');
-INSERT INTO `q_products` VALUES (43, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 07:46:00', '2023-03-23 07:46:00');
-INSERT INTO `q_products` VALUES (44, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 07:46:00', '2023-03-23 07:46:00');
-INSERT INTO `q_products` VALUES (45, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 07:47:00', '2023-03-23 07:47:00');
-INSERT INTO `q_products` VALUES (46, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 07:47:00', '2023-03-23 07:47:00');
-INSERT INTO `q_products` VALUES (47, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 07:48:00', '2023-03-23 07:48:00');
-INSERT INTO `q_products` VALUES (48, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 07:51:00', '2023-03-23 07:51:00');
-INSERT INTO `q_products` VALUES (49, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 07:52:00', '2023-03-23 07:52:00');
-INSERT INTO `q_products` VALUES (50, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 07:56:00', '2023-03-23 07:56:00');
-INSERT INTO `q_products` VALUES (51, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 07:57:00', '2023-03-23 07:57:00');
-INSERT INTO `q_products` VALUES (52, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 08:05:00', '2023-03-23 08:05:00');
-INSERT INTO `q_products` VALUES (53, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 08:15:00', '2023-03-23 08:15:00');
-INSERT INTO `q_products` VALUES (54, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 08:20:00', '2023-03-23 08:20:00');
-INSERT INTO `q_products` VALUES (55, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 08:21:00', '2023-03-23 08:21:00');
-INSERT INTO `q_products` VALUES (56, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 08:26:00', '2023-03-23 08:26:00');
-INSERT INTO `q_products` VALUES (57, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 08:27:00', '2023-03-23 08:27:00');
-INSERT INTO `q_products` VALUES (58, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 08:27:00', '2023-03-23 08:27:00');
-INSERT INTO `q_products` VALUES (59, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 08:27:00', '2023-03-23 08:27:00');
-INSERT INTO `q_products` VALUES (60, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 08:28:00', '2023-03-23 08:28:00');
-INSERT INTO `q_products` VALUES (61, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 08:28:00', '2023-03-23 08:28:00');
-INSERT INTO `q_products` VALUES (62, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 08:30:00', '2023-03-23 08:30:00');
-INSERT INTO `q_products` VALUES (63, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 08:30:00', '2023-03-23 08:30:00');
-INSERT INTO `q_products` VALUES (64, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 08:31:00', '2023-03-23 08:31:00');
-INSERT INTO `q_products` VALUES (65, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 08:32:00', '2023-03-23 08:32:00');
-INSERT INTO `q_products` VALUES (66, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 08:40:00', '2023-03-23 08:40:00');
-INSERT INTO `q_products` VALUES (67, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 08:41:00', '2023-03-23 08:41:00');
-INSERT INTO `q_products` VALUES (68, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 08:48:00', '2023-03-23 08:48:00');
-INSERT INTO `q_products` VALUES (69, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 08:48:00', '2023-03-23 08:48:00');
-INSERT INTO `q_products` VALUES (70, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 08:49:00', '2023-03-23 08:49:00');
-INSERT INTO `q_products` VALUES (71, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 08:53:00', '2023-03-23 08:53:00');
-INSERT INTO `q_products` VALUES (72, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 08:54:00', '2023-03-23 08:54:00');
-INSERT INTO `q_products` VALUES (73, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 08:57:00', '2023-03-23 08:57:00');
-INSERT INTO `q_products` VALUES (74, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 09:03:00', '2023-03-23 09:03:00');
-INSERT INTO `q_products` VALUES (75, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 09:06:00', '2023-03-23 09:06:00');
-INSERT INTO `q_products` VALUES (76, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 09:07:00', '2023-03-23 09:07:00');
-INSERT INTO `q_products` VALUES (77, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 09:09:00', '2023-03-23 09:09:00');
-INSERT INTO `q_products` VALUES (78, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 09:11:00', '2023-03-23 09:11:00');
-INSERT INTO `q_products` VALUES (79, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 09:11:00', '2023-03-23 09:11:00');
-INSERT INTO `q_products` VALUES (80, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 09:12:00', '2023-03-23 09:12:00');
-INSERT INTO `q_products` VALUES (81, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 09:13:00', '2023-03-23 09:13:00');
-INSERT INTO `q_products` VALUES (82, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 09:13:00', '2023-03-23 09:13:00');
-INSERT INTO `q_products` VALUES (83, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 09:14:00', '2023-03-23 09:14:00');
-INSERT INTO `q_products` VALUES (84, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 09:23:00', '2023-03-23 09:23:00');
-INSERT INTO `q_products` VALUES (85, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 09:24:00', '2023-03-23 09:24:00');
-INSERT INTO `q_products` VALUES (86, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 09:25:00', '2023-03-23 09:25:00');
-INSERT INTO `q_products` VALUES (87, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 09:26:00', '2023-03-23 09:26:00');
-INSERT INTO `q_products` VALUES (88, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 09:28:00', '2023-03-23 09:28:00');
-INSERT INTO `q_products` VALUES (89, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 09:29:00', '2023-03-23 09:29:00');
-INSERT INTO `q_products` VALUES (90, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 09:31:00', '2023-03-23 09:31:00');
-INSERT INTO `q_products` VALUES (91, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 09:32:00', '2023-03-23 09:32:00');
-INSERT INTO `q_products` VALUES (92, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 09:34:00', '2023-03-23 09:34:00');
-INSERT INTO `q_products` VALUES (93, 'Hop giay 1', 2, 1, 1, NULL, NULL, 1, 1, '2023-03-23 09:35:00', '2023-03-23 09:35:00');
-INSERT INTO `q_products` VALUES (94, 'Hop giay 1', 2, 2, 1, NULL, NULL, 1, 1, '2023-03-26 03:17:00', '2023-03-26 03:17:00');
-INSERT INTO `q_products` VALUES (95, 'Hop giay 1', 2, 3, 1, NULL, NULL, 1, 1, '2023-03-26 10:29:00', '2023-03-26 10:29:00');
-INSERT INTO `q_products` VALUES (96, 'Hop giay 1', 2, 3, 1, NULL, NULL, 1, 1, '2023-03-26 10:30:00', '2023-03-26 10:30:00');
-INSERT INTO `q_products` VALUES (97, 'Hop giay 1', 2, 3, 1, NULL, NULL, 1, 1, '2023-03-26 10:30:00', '2023-03-26 10:30:00');
-INSERT INTO `q_products` VALUES (98, 'Hop giay 1', 2, 3, 1, NULL, NULL, 1, 1, '2023-03-26 10:32:00', '2023-03-26 10:32:00');
-INSERT INTO `q_products` VALUES (99, 'Hop giay 1', 2, 3, 1, NULL, NULL, 1, 1, '2023-03-26 10:33:00', '2023-03-26 10:33:00');
-INSERT INTO `q_products` VALUES (100, 'Hop giay 1', 2, 3, 1, NULL, NULL, 1, 1, '2023-03-26 10:35:00', '2023-03-26 10:35:00');
-INSERT INTO `q_products` VALUES (101, 'Hop giay 1', 2, 0, 1, NULL, NULL, 1, 1, '2023-03-26 10:51:00', '2023-03-26 10:51:00');
-INSERT INTO `q_products` VALUES (102, 'Hop giay 1', 2, 0, 1, NULL, NULL, 1, 1, '2023-03-26 10:52:00', '2023-03-26 10:52:00');
-INSERT INTO `q_products` VALUES (103, 'Hop giay 1', 2, 0, 1, NULL, NULL, 1, 1, '2023-03-26 10:53:00', '2023-03-26 10:53:00');
-INSERT INTO `q_products` VALUES (104, 'Hop cung', 2, 0, 1, NULL, NULL, 1, 1, '2023-04-10 11:41:00', '2023-04-10 11:41:00');
-INSERT INTO `q_products` VALUES (105, 'Hop cung', 2, 0, 1, NULL, NULL, 1, 1, '2023-04-10 11:44:00', '2023-04-10 11:44:00');
-INSERT INTO `q_products` VALUES (106, 'Hop cung', 2, 0, 1, NULL, NULL, 1, 1, '2023-04-10 11:45:00', '2023-04-10 11:45:00');
-INSERT INTO `q_products` VALUES (107, 'Hop giay 1', 2, 2, 1, NULL, NULL, 1, 1, '2023-04-10 11:46:00', '2023-04-10 11:46:00');
-INSERT INTO `q_products` VALUES (108, 'Hop cung', 2, 0, 1, NULL, NULL, 1, 1, '2023-04-12 08:22:00', '2023-04-12 08:22:00');
-INSERT INTO `q_products` VALUES (109, 'Hop cung', 2, 0, 1, NULL, NULL, 1, 1, '2023-04-12 08:23:00', '2023-04-12 08:23:00');
-INSERT INTO `q_products` VALUES (110, 'Hop cung', 2, 0, 1, NULL, NULL, 1, 1, '2023-04-12 08:24:00', '2023-04-12 08:24:00');
-INSERT INTO `q_products` VALUES (111, 'Hop cung', 2, 0, 1, NULL, NULL, 1, 1, '2023-04-12 08:24:00', '2023-04-12 08:24:00');
-INSERT INTO `q_products` VALUES (112, 'Hop cung', 2, 0, 1, NULL, NULL, 1, 1, '2023-04-12 08:30:00', '2023-04-12 08:30:00');
-INSERT INTO `q_products` VALUES (113, 'Hop cung', 2, 0, 1, NULL, NULL, 1, 1, '2023-04-12 08:55:00', '2023-04-12 08:55:00');
-INSERT INTO `q_products` VALUES (114, 'Hop cung', 2, 0, 1, NULL, NULL, 1, 1, '2023-04-12 08:55:00', '2023-04-12 08:55:00');
-INSERT INTO `q_products` VALUES (115, 'Hop cung', 2, 0, 1, NULL, NULL, 1, 1, '2023-04-12 08:55:00', '2023-04-12 08:55:00');
-INSERT INTO `q_products` VALUES (116, 'Hop cung', 2, 0, 1, NULL, NULL, 1, 1, '2023-04-12 08:56:00', '2023-04-12 08:56:00');
-INSERT INTO `q_products` VALUES (117, 'Hop cung', 2, 0, 1, NULL, NULL, 1, 1, '2023-04-12 08:57:00', '2023-04-12 08:57:00');
-INSERT INTO `q_products` VALUES (118, 'Hop cung', 2, 0, 1, NULL, NULL, 1, 1, '2023-04-12 08:57:00', '2023-04-12 08:57:00');
-INSERT INTO `q_products` VALUES (119, 'Hop giay', 2, 0, 1, NULL, NULL, 1, 1, '2023-04-12 09:15:00', '2023-04-12 09:15:00');
-INSERT INTO `q_products` VALUES (120, 'Hop giay', 2, 0, 1, NULL, NULL, 1, 1, '2023-04-12 09:15:00', '2023-04-12 09:15:00');
-
--- ----------------------------
 -- Table structure for quotes
 -- ----------------------------
 DROP TABLE IF EXISTS `quotes`;
@@ -14009,7 +13920,7 @@ CREATE TABLE `quotes`  (
 -- ----------------------------
 -- Records of quotes
 -- ----------------------------
-INSERT INTO `quotes` VALUES (1, 'BG-000001', 'not_accepted', 'Công ty WS', NULL, 1, 'Công ty WS', 'Nguyễn Duy Khánh', '360 Mieng Ha, Hoa Sơn, Ung Hoa, TP Ha Noi', 'nguyenduykhanh2323@gmail.com', '0378050251', '0223344556', 351, NULL, NULL, NULL, NULL, NULL, 1, '2023-03-20 14:31:30', '2023-03-20 14:31:30', 0);
+INSERT INTO `quotes` VALUES (1, 'BG-000001', 'not_accepted', 'Công ty WS', NULL, 1, 'Công ty WS', 'Nguyễn Duy Khánh', '360 Mieng Ha, Hoa Sơn, Ung Hoa, TP Ha Noi', 'nguyenduykhanh2323@gmail.com', '0378050251', '0223344556', 351, NULL, NULL, '13381982.38', '13381982.38', NULL, 1, '2023-04-15 03:13:06', '2023-04-14 20:13:06', 0);
 INSERT INTO `quotes` VALUES (2, 'BG-000002', 'not_accepted', 'Cong Ty Test', NULL, 2, 'Cong Ty Test', 'Nguyen Van A', 'Ho Chi Minh', 'congtytest@gmail.com', '0987654321', '0123456789', 1, NULL, NULL, NULL, NULL, NULL, 1, '2023-03-20 14:31:30', '2023-03-20 14:31:30', 0);
 INSERT INTO `quotes` VALUES (3, 'BG-000003', 'not_accepted', 'Cong Ty Test', NULL, 2, 'Cong Ty Test', 'Nguyen Van A', 'Ho Chi Minh', 'congtytest@gmail.com', '0987654321', '0123456789', 1, NULL, NULL, NULL, NULL, NULL, 1, '2023-03-20 14:31:30', '2023-03-20 14:31:30', 1);
 

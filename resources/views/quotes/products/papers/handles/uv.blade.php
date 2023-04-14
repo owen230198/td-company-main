@@ -14,7 +14,7 @@
         'name' => 'product['.$j.'][paper]['.$pindex.']['.$key_stage.'][materal]',
         'type' => 'linking',
         'note' => 'mực in',
-        'other_data' => ['data' => ['table' => 'uv_inks', 'select' => ['id', 'name']]]
+        'other_data' => ['data' => ['table' => 'materals', 'where' => ['materal_key' => $key_stage], 'select' => ['id', 'name']]]
     ]  
 @endphp
 @include('view_update.view', $paper_uv_materal)

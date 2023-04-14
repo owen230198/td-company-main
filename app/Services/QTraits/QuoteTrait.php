@@ -7,12 +7,27 @@ trait QuoteTrait
 {
     static $plus_paper_device = TDConstant::PLUS_PAPER_DEVICE;
     static $plus_compen_perc = TDConstant::COMPEN_PERCENT;
+    static $base_qty_pro = 0;
     static $qty_pro = 0;
     static $nqty = 1;
     static $base_qty_paper = 0;
     static $qty_paper = 0;
     static $length = 0;
     static $width = 0;
+
+    private function newObjectSetProperty($data)
+    {
+        static::$base_qty_pro = !empty($data['qty']) ? (int) $data['qty'] : 0;
+        static::$qty_pro = ceil(calValuePercentPlus(self::$base_qty_pro, self::$base_qty_pro, self::$plus_compen_perc)); 
+        static::$nqty = !empty($data['nqty']) ? (int) $data['nqty'] : 1;
+        static::$base_qty_paper = !empty($data['paper_qty']) ? (int) $data['paper_qty'] : 0;
+        static::$qty_paper = ceil(calValuePercentPlus(self::$base_qty_paper, self::$base_qty_paper, self::$plus_compen_perc)); 
+        $length = !empty($data['size']['length']) ? $data['size']['length'] : 0;
+        $width = !empty($data['size']['width']) ? $data['size']['width'] : 0;
+        convertCmToMeter($length, $width);
+        static::$length = $length;
+        static::$width = $width;
+    }
     private function configDatSizePaperHard($length, $width, $paper, $qty)
     {
         $quantative_id = @$paper['quantative']?(int)$paper['quantative']:0;
@@ -20,25 +35,29 @@ trait QuoteTrait
         $quantative_price = @$quantative['price']?$quantative['price']:0;
         $qty_paper = $qty+(int)getDataConfigs('QConfig', 'PLUS_CARTON');
         //Công thức tính chi phí khổ giấy vật tư hộp cứng: Dài x Rộng x ĐG định lượng x SL vật tư
-        $total = $length*$width*$quantative_price*$qty_paper;
-        $paper['act'] = $total>0?1:0;
+        $total = $length * $width * $quantative_price * $qty_paper;
         return $this->getObjectConfig($paper, $total);
     }
 
-    private function configDataHardPrice($num1, $num2, $plus, $num3, $data)
+    private function configDataElevate($work_price, $shape_price, $elevate)
     {
-        //CT tính chi phí số lỗ vật tư lụa: ((số lỗ sp(num1) x ĐG lượt số lỗ lụa(num2)) + ĐG cộng số lỗ lụa(plus)) x SL vật tư(num3)
-        //CT tính chi phí bồi: ĐG bồi(num1) x SL sản phẩm(num2)
-        //CT tính chi phí hoàn thiện: ĐG hoàn thiện(num1) x SL sản phẩm(num2)
-        $total = (($num1*$num2)+$plus)*$num3;
-        $data['act'] = $total>0?1:0;
-        return $this->getObjectConfig($data, $total);
+        $ext_price = !empty($elevate['ext_price']) ? (float) $elevate['ext_price'] : 0;
+        $cost = $this->getBaseTotalStage(self::$qty_paper, $work_price, $shape_price);
+        $total = $cost + $ext_price;
+        return $this->getObjectConfig($elevate, $total);
     }
 
-    private function getObjectConfig($data, $total, $float = 0)
+    private function configDataByOnlyDevice($work_price, $shape_price, $peel)
+    {
+        $total = $this->getBaseTotalStage(self::$qty_pro, $work_price, $shape_price);
+        return $this->getObjectConfig($peel, $total);
+    }
+
+    private function getObjectConfig($data, $total)
     {
         if ($total > 0) {
             $obj = $data;
+            $obj['act'] = 1;
             $obj['total'] = $total;    
         }else{
             $obj['act'] = 0;
@@ -46,22 +65,22 @@ trait QuoteTrait
         return json_encode($obj);
     }
 
-    private function getBaseTotalStage($qty, $work_price, $shape_price, $length, $width, $materal_cost = 0, $factor = 1, $plus_qty = 0)
+    private function getBaseTotalStage($qty, $work_price, $shape_price, $materal_cost = 0, $factor = 1, $plus_qty = 0)
     {
         // CPVTK: D x R x DGL (1)
-        $a = $length*$width*$work_price;
+        $a = self::$length * self::$width * $work_price;
 
         // DGVT: D x R x DGVT x (SL tờ in - sp + BH %) x hệ số (2)
-        $b = $length*$width*$materal_cost*($qty + $plus_qty)*$factor;
+        $b = self::$length * self::$width * $materal_cost * ($qty + $plus_qty) * $factor;
 
         // DGL = (SL tờ in hoặc SL sản phẩm + BH %) x DGL x hệ số (3)
-        $c = $qty*$work_price*$factor;
+        $c = $qty * $work_price * $factor;
         
         // Tổng chi phí  = (1) + (2) + ĐGCM + (3);
         return $a + $b + $shape_price + $c;
     }
 
-	private function configDataStage($data, $qty_pro, $qty_paper,  $length = 0, $width = 0){
+	private function configDataStage($data){
         $device_id = !empty($data['machine']) ? (int)$data['machine'] : 0;
         $device = getDetailDataByID('Device', $device_id);
         $model_price = !empty($data['model_price']) ? (float) $data['model_price'] : 0;
@@ -71,35 +90,26 @@ trait QuoteTrait
         if (empty($key_device)) {
             return $this->createNonActiveObj();    
         }
-        if ($key_device == TDConstant::NILON) {
+        if (in_array($key_device, [TDConstant::NILON, TDConstant::UV])) {
             //Tính chi phí cán nilon
-        	$obj = $this->configDataNilon($qty_paper, $length, $width, $shape_price, $work_price, $data);
+        	$obj = $this->configDataUVNAndNilon($work_price, $shape_price, $data);
         }elseif ($key_device == TDConstant::METALAI){
             //Tính chi phí cán metalai
-            $obj = $this->configDataMetalai($qty_paper, $length, $width, $shape_price, $work_price, $data);
-        }elseif ($key_device == TDConstant::COMPRESS) {
-            //Tính chi phí ép nhũ
-            // $total = ($qty_paper*$work_price*$float_price)+($shape_price+$model_price);   
-            $obj = $this->configDataCompress($qty_paper, $length, $width, $data);
-        }elseif($key_device == TDConstant::ELEVATE){
-            
+            $obj = $this->configDataMetalai($work_price, $shape_price, $data);
+        }elseif ($key_device == TDConstant::ELEVATE){
+            //Tính chi phí máy bế
+            $obj = $this->configDataElevate($work_price, $shape_price, $data);
         }else{
-            if (@$table == 'q_cartons') {
-                $work_price = $work_price+(float)getDataConfigs('QConfig', 'PEEL_CARTON_PLUS');
-            }elseif (@$table == 'q_foams') {
-                $work_price = $work_price+(float)getDataConfigs('QConfig', 'PEEL_FOAM_PLUS');
-            }
-            //Công thức tính chi phí bóc lề & dán hộp: SL sản phẩm x ĐG lượt + ĐG chỉnh máy
-            $total = $qty_pro*$work_price+$shape_price;
-            $obj = $this->getObjectConfig($data, $total);       
+            //Tính chi phí bóc lề, dán hộp, máy phay
+            $obj = $this->configDataByOnlyDevice($work_price, $shape_price, $data);        
         }
         return $obj;    
     }
 
-    private function getPriterDevice($length, $width, $device)
+    private function getPriterDevice($device)
     {
-        $ex_length = $length*100;
-        $ex_width = $width*100;
+        $ex_length = self::$length*100;
+        $ex_width = self::$width*100;
         $printer = \App\Models\Printer::where('device', $device)
         ->where('print_length', '>=', $ex_length)
         ->where('print_width','>=', $ex_width)->orderBy('print_length', 'asc')->first();

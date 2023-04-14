@@ -3,7 +3,7 @@ namespace App\Services;
 use App\Services\BaseService;
 use App\Models\Customer;
 use App\Models\Quote;
-use App\Models\QProduct;
+use App\Models\Product;
 use App\Services\QTraits\QuoteTrait;
 use App\Services\QTraits\QPaperTrait;
 use App\Services\QTraits\QSupplyTrait;
@@ -86,12 +86,13 @@ class QuoteService extends BaseService
     public function insertProduct($data)
     {
         $data_insert = $this->getDataActionProduct($data);
-        return QProduct::insertGetId($data_insert);
+        return Product::insertGetId($data_insert);
     }
 
-    public function insertDataProduct($data)
+    public function processDataProduct($data, $arr_quote)
     {
         $data_product = $data['product'];
+        $quote_update['total_cost'] = 0;
         foreach ($data_product as $key => $product) {
             $product_valid = ['valid' => true];
             if (@$product_valid['valid'] == false) {
@@ -101,16 +102,22 @@ class QuoteService extends BaseService
                 $product['quote_id'] = $data['id'];
                 $product_id = $this->insertProduct($product);
                 $elements = TDConstant::HARD_ELEMENT;
+                $product_update['total_cost'] = 0;
                 foreach ($elements as $el) {
                     if (!empty($product[$el['pro_field']])) {
                         $model = getModelByTable($el['key']);
-                        $status = $model->insertData($product_id, $product[$el['pro_field']]);
+                        $supply_cost = $model->processData($product_id, $product[$el['pro_field']]);
+                        $product_update['total_cost'] += $supply_cost;
                     }
                 }
+                $update = Product::where(['id' => $product_id])->update($product_update);    
             }
+            $quote_update['total_cost'] += $product_update['total_cost'];
         }
-        $code = !empty($status) ? 200 : 100;
-        $message = !empty($status) ? 'Cập nhật dữ liệu thành công !' : 'Có lỗi xảy ra, vui lòng thử lại !';
+        $quote_update['total_amount'] = calValuePercentPlus($quote_update['total_cost'], $arr_quote['profit'], $arr_quote['ship_price']);
+        Quote::where('id', $arr_quote['id'])->update($quote_update);
+        $code = !empty($update) ? 200 : 100;
+        $message = !empty($update) ? 'Cập nhật dữ liệu thành công !' : 'Có lỗi xảy ra, vui lòng thử lại !';
         return returnMessageAjax($code, $message);
     }
 }
