@@ -5,7 +5,14 @@ use App\Constants\TDConstant;
 
 trait QuoteTrait
 {
-
+    static $plus_paper_device = TDConstant::PLUS_PAPER_DEVICE;
+    static $plus_compen_perc = TDConstant::COMPEN_PERCENT;
+    static $qty_pro = 0;
+    static $nqty = 1;
+    static $base_qty_paper = 0;
+    static $qty_paper = 0;
+    static $length = 0;
+    static $width = 0;
     private function configDatSizePaperHard($length, $width, $paper, $qty)
     {
         $quantative_id = @$paper['quantative']?(int)$paper['quantative']:0;
@@ -39,7 +46,7 @@ trait QuoteTrait
         return json_encode($obj);
     }
 
-    private function getBaseTotalStage($qty, $work_price, $shape_price, $length = 0, $width = 0, $materal_cost = 0, $factor = 1, $plus_qty = 0)
+    private function getBaseTotalStage($qty, $work_price, $shape_price, $length, $width, $materal_cost = 0, $factor = 1, $plus_qty = 0)
     {
         // CPVTK: D x R x DGL (1)
         $a = $length*$width*$work_price;
@@ -54,38 +61,28 @@ trait QuoteTrait
         return $a + $b + $shape_price + $c;
     }
 
-	private function configDataStage($data, $qty_pro, $n_qty = 1,  $length = 0, $width = 0){
+	private function configDataStage($data, $qty_pro, $qty_paper,  $length = 0, $width = 0){
         $device_id = !empty($data['machine']) ? (int)$data['machine'] : 0;
         $device = getDetailDataByID('Device', $device_id);
         $model_price = !empty($data['model_price']) ? (float) $data['model_price'] : 0;
         $work_price = !empty($device['work_price']) ? (float) $device['work_price'] : 0;
         $shape_price = !empty($device['shape_price']) ? (float) $device['shape_price'] : 0;
         $key_device = !empty($device['key_device']) ? $device['key_device'] : '';
-        $qty_paper = ceil($qty_pro/$n_qty);
-        $plus_paper_device = (int) TDConstant::PLUS_PAPER_DEVICE;
-        $qty_paper = $qty_paper+$plus_paper_device;
         if (empty($key_device)) {
             return $this->createNonActiveObj();    
         }
         if ($key_device == TDConstant::NILON) {
+            //Tính chi phí cán nilon
         	$obj = $this->configDataNilon($qty_paper, $length, $width, $shape_price, $work_price, $data);
         }elseif ($key_device == TDConstant::METALAI){
-            $qty_paper = $qty_paper+$plus_paper_device;
+            //Tính chi phí cán metalai
             $obj = $this->configDataMetalai($qty_paper, $length, $width, $shape_price, $work_price, $data);
-        }elseif (in_array($key_device, [TDConstant::COMPRESS, TDConstant::ELEVATE, TDConstant::UV])) {
-            //Công thức tính chi phí ép nhũ, máy bế, in uv
-
-            $total = ($qty_paper*$work_price*$float_price)+($shape_price+$model_price);   
-            $obj = $this->getObjectConfig($data, $total, $float_price);
-        }elseif($key_device == TDConstant::MILL){
-            if (@$table == 'q_cartons') {
-                $foams = getDetailDataByID('QSupply', $type);
-                $factor = @$foams['factor']?$foams['factor']:1;
-            }else {
-                $factor = 1;
-            }
-            $total = ($qty_pro*$work_price+$shape_price)*$factor;
-            $obj = $this->getObjectConfig($data, $total);
+        }elseif ($key_device == TDConstant::COMPRESS) {
+            //Tính chi phí ép nhũ
+            // $total = ($qty_paper*$work_price*$float_price)+($shape_price+$model_price);   
+            $obj = $this->configDataCompress($qty_paper, $length, $width, $data);
+        }elseif($key_device == TDConstant::ELEVATE){
+            
         }else{
             if (@$table == 'q_cartons') {
                 $work_price = $work_price+(float)getDataConfigs('QConfig', 'PEEL_CARTON_PLUS');

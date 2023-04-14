@@ -3,29 +3,28 @@ namespace App\Services\QTraits;
 use App\Constants\TDConstant;
 trait QPaperTrait
 {
-	private function configDataSizePaper($qty_paper, $length, $width, $paper)
+	private function configDataSizePaper($paper)
 	{
         $qttv = !empty($paper['qttv']) ? (float) $paper['qttv'] : 0;
         $price = !empty($paper['materal']) ? ((int) getFieldDataById('unit_price', 'paper_materals', $paper['materal'])) : 
                 (!empty($paper['unit_price']) ? (float) $paper['unit_price'] : 0);
         $plus_paper = (int) TDConstant::PLUS_PAPER;
-        $plus_paper_perc = (int) TDConstant::COMPEN_PERCENT;
-        $qty_paper = calValuePercent($qty_paper, $qty_paper, $plus_paper_perc, $plus_paper); 
+        $qty_paper = self::$qty_paper + $plus_paper;
+        dd(self::$qty_paper);
         // Công thức tính chi phí khổ in : dài x rộng x định lượng x (số tờ in + 100) x ĐG
-        $total = $length*$width*$qttv*$qty_paper*$price;
+        $total = self::$length*slef::$width*$qttv*$qty_paper*$price;
         $paper['act'] = $total > 0 ? 1 : 0;
         $obj = $this->getObjectConfig($paper, $total);
         return $obj;
 	}
 
-	private function configDataPrint($qty_pro, $n_qty, $length, $width, $print)
+	private function configDataPrint($qty_pro, $nqty, $length, $width, $print)
 	{
 		$color = !empty($print['color']) ? $print['color'] : 0;
         $type = !empty($print['type']) ? $print['type'] : 0;
         $device_id = !empty($print['machine']) ? $print['machine'] : 0;
         $subtract_paper = TDConstant::PRINT_SUBTRACT_PAPER;
-        $plus_paper_device = TDConstant::PLUS_PAPER_DEVICE;
-        $qty_paper = ceil($qty_pro/$n_qty)-$subtract_paper+$plus_paper_device;
+        $qty_paper = ceil($qty_pro/$nqty)-$subtract_paper+self::$plus_paper_device;
         $device = $this->getPriterDevice($length, $width, $device_id);
         $model_price = !empty($device['model_price']) ? (int) $device['model_price'] : 0;
         $work_price = !empty($device['work_price']) ? (int) $device['work_price'] : 0;
@@ -72,7 +71,7 @@ trait QPaperTrait
         $cover_materal_id = !empty($metalai['cover_materal']) ? $metalai['cover_materal'] : 0;
         $cover_materal_cost = $this->getPriceMateralQuote($cover_materal_id);
         $cover_num_face = !empty($metalai['cover_face']) ? (int) $metalai['cover_face'] : 0;
-        $total_cover = $this->getBaseTotalStage($qty_paper + $work_price, $shape_price, $length, $width, $cover_materal_cost, $cover_num_face);
+        $total_cover = $this->getBaseTotalStage($qty_paper + $work_price, $shape_price, $length, $width, $cover_materal_cost, $cover_num_face, self::$plus_paper_device);
         // $total_cover = $length*$width*$cover_materal_cost*$qty_paper*$cover_num_face;
 
         // Công thức tính chi phí cán metalai : chi phí cán metalai + chi phí cán phủ trên
@@ -81,13 +80,12 @@ trait QPaperTrait
         return $obj;
     }
 
-    private function configDataCompress($qty_pro, $n_qty, $compress)
+    private function configDataCompress($qty_paper, $length, $width, $compress)
     {
         $price = !empty($compress['price']) ? (float)$compress['price'] : 0;
         $shape_price = !empty($compress['shape_price']) ? (float) $compress['shape_price'] : 0;
-        $obj = new \stdClass();
-        // Công thức tính chi phí ép nhũ: (SL sản phẩm x Giá tiền/sp) + (Số bát x Giá khuôn)
-        $total = ($qty_pro*$price)+($shape_price*$n_qty);
+        $total = $this->getBaseTotalStage($qty_paper + $price, $shape_price, $length, $width);
+        // $total = ($qty_pro*$price)+($shape_price*$nqty);
         $obj = $this->getObjectConfig($compress, $total);
         return $obj;
     }
@@ -114,21 +112,24 @@ trait QPaperTrait
 
     private function getDataActionPaper($data)
     {
+        static::$qty_pro = !empty($data['qty']) ? (int) $data['qty'] : 0;
+        static::$nqty = !empty($data['nqty']) ? (int) $data['nqty'] : 1;
+        static::$base_qty_paper = !empty($data['paper_qty']) ? (int) $data['paper_qty'] : 0;
+        static::$qty_paper = ceil(calValuePercentPlus(self::$base_qty_paper, self::$base_qty_paper, self::$plus_compen_perc)); 
         $length = !empty($data['size']['length']) ? $data['size']['length'] : 0;
         $width = !empty($data['size']['width']) ? $data['size']['width'] : 0;
         convertCmToMeter($length, $width);
-        $qty_paper = !empty($data['paper_qty']) ? (int) $data['paper_qty'] : 0;
-        $qty_pro = !empty($data['qty']) ? (int) $data['qty'] : 0;
-        $n_qty = !empty($data['n_qty']) ? (int) $data['n_qty'] : 1;
-        $data_action['size'] = $this->configDataSizePaper($qty_paper, $length, $width, $data['size']);
-        $data_action['print'] = $this->configDataPrint($qty_pro, $n_qty, $length, $width, $data['print']);
-        $data_action['nilon'] = $this->configDataStage($data['nilon'], $qty_pro, $n_qty, $length, $width);
-        $data_action['elevate'] = $this->configDataStage($qty_pro, $n_qty, $data['elevate'], $length, $width);
-        $data_action['peel'] = $this->configDataStage($qty_pro, $n_qty, $data['peel'], $length, $width);
-        $data_action['box_paste'] = $this->configDataStage($qty_pro, $n_qty, $data['box_paste'], $length, $width);
-        $data_action['metalai'] = $this->configDataStage($qty_pro,$n_qty, $data['metalai'], $length, $width);
-        $data_action['compress'] = $this->configDataCompress($qty_pro, $n_qty, $data['compress'], $length, $width);
-        $data_action['uv'] = $this->configDataStage($qty_pro, $n_qty, $data['uv'], $length, $width);
+        static::$length = $length;
+        static::$width = $width;
+        $data_action['size'] = $this->configDataSizePaper($data['size']);
+        $data_action['print'] = $this->configDataPrint($qty_pro, $nqty, $length, $width, $data['print']);
+        $data_action['nilon'] = $this->configDataStage($data['nilon'], $qty_pro, $nqty, $length, $width);
+        $data_action['elevate'] = $this->configDataStage($qty_pro, $nqty, $data['elevate'], $length, $width);
+        $data_action['peel'] = $this->configDataStage($qty_pro, $nqty, $data['peel'], $length, $width);
+        $data_action['box_paste'] = $this->configDataStage($qty_pro, $nqty, $data['box_paste'], $length, $width);
+        $data_action['metalai'] = $this->configDataStage($qty_pro,$nqty, $data['metalai'], $length, $width);
+        $data_action['compress'] = $this->configDataCompress($qty_pro, $nqty, $data['compress'], $length, $width);
+        $data_action['uv'] = $this->configDataStage($qty_pro, $nqty, $data['uv'], $length, $width);
         $data_action['ext_price'] = $this->configDataPlus($qty_pro, $data['ext_price']);
         $data_action['total_cost'] = $this->priceCaculatedByArray($data_action);
         return $data_action;

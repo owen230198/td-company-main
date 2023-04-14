@@ -158,12 +158,11 @@ if (!function_exists('getDataTable')) {
     }
 }
 
-if (!function_exists('getValueWithPlusPercent')) {
-    function getValueWithPlusPercent($number = 0, $percent =0)
+if (!function_exists('calValuePercentPlus')) {
+    function calValuePercentPlus($value, $get_perc, $perc, $plus =0)
     {
-        $add_percent = (int)$number*(int)$percent/100;
-        $total = $number + $add_percent;
-        return $total;
+        $add_percent = $get_perc * $perc / 100;
+        return $value + $add_percent + $plus;
     }
 }
 
