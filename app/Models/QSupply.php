@@ -4,13 +4,13 @@ namespace App\Models;
  
 use Illuminate\Database\Eloquent\Model;
  
-class QSupply extends Model
+class SupplyType extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'q_supplies';
+    protected $table = 'supply_types';
     protected $protectFields = false;
 }

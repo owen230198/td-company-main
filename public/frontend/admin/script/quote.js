@@ -227,6 +227,7 @@ var calcSizeSupply = function()
     let value = getEmptyDefault($(this).val(), 0, 'float');
     let otm_input = parent.find('input.otm_size_length');
     let nqty = Math.floor(divide/(value+plus));
+    console.log(divide/(value+plus), nqty);
     if (value > 0 && nqty > 0) {
       otm_input.attr('readonly', true);
       otm_input.val(divide/nqty);

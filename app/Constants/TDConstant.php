@@ -69,10 +69,21 @@
             ['key' => self::BOX_PASTE, 'note' => 'Máy dán hộp giấy', 'color' => 'green'],
             ['key' => self::METALAI, 'note' => 'Cán metalai', 'color' => 'red'],
             ['key' => self::COMPRESS, 'note' => 'Ép nhũ', 'color' => 'red'],
-            ['key' => self::FLOAT, 'note' => 'Thúc nổi', 'color' => 'red'],
             ['key' => self::UV, 'note' => 'In lưới UV', 'color' => 'red'],
             ['key' => self::EXT_PRICE, 'note' => 'Phát sinh', 'color' => 'red']
-        ]; 
+        ];
+        
+        const HANDLE_STAGE_HARD = [
+            ['key' => self::PRINT, 'note' => 'Quy cách - kiểu in', 'color' => 'green'],
+            ['key' => self::NILON, 'note' => 'Cán nilon', 'color' => 'green'],
+            ['key' => self::ELEVATE, 'note' => 'Máy bế', 'color' => 'green'],
+            ['key' => self::PEEL, 'note' => 'Máy bóc lề', 'color' => 'green'],
+            ['key' => self::METALAI, 'note' => 'Cán metalai', 'color' => 'red'],
+            ['key' => self::COMPRESS, 'note' => 'Ép nhũ', 'color' => 'red'],
+            ['key' => self::FLOAT, 'note' => 'Thúc nổi carton', 'color' => 'red'],
+            ['key' => self::UV, 'note' => 'In lưới UV', 'color' => 'red'],
+            ['key' => self::EXT_PRICE, 'note' => 'Phát sinh', 'color' => 'red']
+        ];
 
         const SIDE_LID = 1;
         const SIDE_BOTTOM = 2;
@@ -162,16 +173,18 @@
                             ];
 
         //Cấu tạo sản phẩm
+        const HARD_BOX = 1;
+        const PAPER_BOX = 2;
         const PAPER_ELEMENT = [['key' => 'papers', 'note' => 'Giấy in']];
         const HARD_ELEMENT = [
-            ['key' => 'papers', 'note' => 'Giấy in', 'pro_field' => self::PAPER, 'device' => self::PAPER_DEVICE],
-            ['key' => 'cartons', 'note' => 'Carton', 'pro_field' => self::CARTON, 'device' => self::CARTON_DEVICE],
-            ['key' => 'rubbers', 'note' => 'Cao su non', 'pro_field' => self::RUBBER, 'device' => self::RUBBER_DEVICE],
-            ['key' => 'decals', 'note' => 'Đề can nhung', 'pro_field' => self::DECAL, 'device' => self::DECAL_DEVICE],
-            ['key' => 'silks', 'note' => 'Vải lụa', 'pro_field' => self::SILK, 'device' => self::SILK_DEVICE],
-            ['key' => 'styrofoams', 'note' => 'Mút phẳng', 'pro_field' => self::STYRO, 'device' => self::STYRO_DEVICE],
-            ['key' => 'micaes', 'note' => 'Me Ka', 'pro_field' => self::MICA, 'device' => self::MICA_DEVICE],
-            ['key' => 'fill_finishes', 'note' => 'Bồi + hoàn thiện', 'pro_field' => self::FILL_FINISH] 
+            ['key' => 'papers', 'note' => 'Giấy in', 'pro_field' => self::PAPER, 'device' => self::PAPER_DEVICE ,'table' => 'papers'],
+            ['key' => 'cartons', 'note' => 'Carton', 'pro_field' => self::CARTON, 'device' => self::CARTON_DEVICE ,'table' => 'supplies'],
+            ['key' => 'rubbers', 'note' => 'Cao su non', 'pro_field' => self::RUBBER, 'device' => self::RUBBER_DEVICE ,'table' => 'supplies'],
+            ['key' => 'decals', 'note' => 'Đề can nhung', 'pro_field' => self::DECAL, 'device' => self::DECAL_DEVICE ,'table' => 'supplies'],
+            ['key' => 'silks', 'note' => 'Vải lụa', 'pro_field' => self::SILK, 'device' => self::SILK_DEVICE ,'table' => 'supplies'],
+            ['key' => 'styrofoams', 'note' => 'Mút phẳng', 'pro_field' => self::STYRO, 'device' => self::STYRO_DEVICE ,'table' => 'supplies'],
+            ['key' => 'micaes', 'note' => 'Me Ka', 'pro_field' => self::MICA, 'device' => self::MICA_DEVICE ,'table' => 'supplies'],
+            ['key' => 'fill_finishes', 'note' => 'Bồi + hoàn thiện', 'pro_field' => self::FILL_FINISH ,'table' => 'fill_finishes'] 
         ];
 
         //Vật tư định lượng

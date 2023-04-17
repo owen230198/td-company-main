@@ -1,10 +1,30 @@
 @php
     $key_stage = \App\Constants\TDConstant::FLOAT;
+    $elevate_key = \App\Constants\TDConstant::ELEVATE;
+    $float_base_name = @$category == 1 ? '['.$key_stage.']' : '['.$elevate_key.']['.$key_stage.']';
     $paper_float_price = [
-        'name' => 'product['.$j.'][paper]['.$pindex.']['.$key_stage.'][price]',
-        'note' => 'Đơn giá thúc nổi',
+        'name' => 'product['.$j.'][paper]['.$pindex.']'.$float_base_name.'[price]',
+        'note' => 'Giá tiền thúc nổi 1 sp',
         'attr' => ['type_input' => 'number'],
         'value' => 0
-    ]
+    ];
+    $paper_float_shape_price = [
+        'name' => 'product['.$j.'][paper]['.$pindex.']'.$float_base_name.'[shape_price]',
+        'note' => 'Giá khuôn thúc nổi 1 sp',
+        'attr' => ['type_input' => 'number'],
+        'value' => 0
+    ]  
 @endphp
-@include('view_update.view', $paper_float_price)
+<div class="d-flex align-items-center">
+    @include('view_update.view', $paper_float_price)
+    <span class="ml-2 fs-12 font-italic color_red">Giá lượt/bát sp (không phải giá lượt/ tờ in)</span>
+</div>
+
+<div class="d-flex align-items-center">
+    @include('view_update.view', $paper_float_shape_price)
+    <span class="ml-2 fs-12 font-italic color_red">Giá khuôn/bát sp (không phải giá khuôn/tờ in)</span>
+</div>
+
+@if ($category == 1)
+    @include('quotes.products.papers.handles.select_device', ['key_device' => $key_stage])
+@endif

@@ -46,28 +46,28 @@ trait QPaperTrait
         return $this->getObjectConfig($print, $total);	
 	}
 
-    private function configDataUVNAndNilon($work_price, $shape_price, $nilon)
+    private function configDataUVNAndNilon($model_price, $work_price, $shape_price, $uv_nilon)
     {
-    	$materal_id = !empty($nilon['materal']) ? $nilon['materal'] : 0;
+    	$materal_id = !empty($uv_nilon['materal']) ? $uv_nilon['materal'] : 0;
         $materal_cost = $this->getPriceMateralQuote($materal_id);
-        $num_face = !empty($nilon['face']) ? (int)$nilon['face'] : 0;
-        $total = $this->getBaseTotalStage(self::$qty_paper, $work_price, $shape_price, $materal_cost, $num_face);
+        $num_face = !empty($uv_nilon['face']) ? (int)$uv_nilon['face'] : 0;
+        $total = $this->getBaseTotalStage(self::$qty_paper, $model_price, $work_price, $shape_price, $materal_cost, $num_face);
         // $total = $length*$width*$materal_cost*$qty_paper*$num_face+$shape_price;
-        return $this->getObjectConfig($nilon, $total);
+        return $this->getObjectConfig($uv_nilon, $total);
     }
 
-    private function configDataMetalai($work_price, $shape_price, $metalai)
+    private function configDataMetalai($model_price, $work_price, $shape_price, $metalai)
     {
         $materal_id = !empty($metalai['materal']) ? $metalai['materal'] : 0;
         $materal_cost = $this->getPriceMateralQuote($materal_id);
         $num_face = !empty($metalai['face']) ? (int) $metalai['face'] : 0;
-        $total_metalai = $this->getBaseTotalStage(self::$qty_paper, $work_price, $shape_price, $materal_cost, $num_face, self::$plus_paper_device);
+        $total_metalai = $this->getBaseTotalStage(self::$qty_paper, $model_price, $work_price, $shape_price, $materal_cost, $num_face, self::$plus_paper_device);
         // $total_metalai = $length*$width*$materal_cost*$qty_paper*$num_face;
 
         $cover_materal_id = !empty($metalai['cover_materal']) ? $metalai['cover_materal'] : 0;
         $cover_materal_cost = $this->getPriceMateralQuote($cover_materal_id);
         $cover_num_face = !empty($metalai['cover_face']) ? (int) $metalai['cover_face'] : 0;
-        $total_cover = $this->getBaseTotalStage(self::$qty_paper, $work_price, $shape_price, $cover_materal_cost, $cover_num_face, self::$plus_paper_device);
+        $total_cover = $this->getBaseTotalStage(self::$qty_paper, $model_price, $work_price, $shape_price, $cover_materal_cost, $cover_num_face, self::$plus_paper_device);
         // $total_cover = $length*$width*$cover_materal_cost*$qty_paper*$cover_num_face;
 
         // Công thức tính chi phí cán metalai : chi phí cán metalai + chi phí cán phủ trên
@@ -75,13 +75,12 @@ trait QPaperTrait
         return $this->getObjectConfig($metalai, $total);
     }
 
-    private function configDataCompress($compress)
+    private function configDataCompressFloat($compress_float, $get_total = false)
     {
-        $price = !empty($compress['price']) ? (float)$compress['price'] : 0;
-        $shape_price = !empty($compress['shape_price']) ? (float) $compress['shape_price'] : 0;
-        $total = $this->getBaseTotalStage(self::$qty_paper, $price, $shape_price);
-        // $total = ($qty_pro*$price)+($shape_price*$nqty);
-        return $this->getObjectConfig($compress, $total);
+        $price = !empty($compress_float['price']) ? (float)$compress_float['price'] : 0;
+        $shape_price = !empty($compress_float['shape_price']) ? (float) $compress_float['shape_price'] : 0;
+        $total = (self::$qty_pro * $price) + (self::$nqty * $shape_price);
+        return !empty($get_total) ? $total : $this->getObjectConfig($compress_float, $total);
     }
 
     private function configDataExtPrice($plus)
@@ -90,7 +89,7 @@ trait QPaperTrait
         $temp_price = !empty($plus['temp_price']) ? (float) $plus['temp_price'] : 0;
         $pre_price = !empty($plus['prescript_price']) ? (float) $plus['prescript_price'] : 0;
         $supp_price = !empty($plus['supp_price']) ? (float) $plus['supp_price'] : 0;
-        $total = self::$base_qty_pro*($temp_price + $pre_price + $supp_price);
+        $total = self::$base_qty_pro * ($temp_price + $pre_price + $supp_price);
         $obj = $this->getObjectConfig($plus, $total);
         return $obj;
     }
@@ -98,17 +97,50 @@ trait QPaperTrait
     private function getDataActionPaper($data)
     {
         $this->newObjectSetProperty($data);
-        $data_action['size'] = $this->configDataSizePaper($data['size']);
-        $data_action['print'] = $this->configDataPrint($data['print']);
-        $data_action['nilon'] = $this->configDataStage($data['nilon']);
-        $data_action['elevate'] = $this->configDataStage($data['elevate']);
-        $data_action['peel'] = $this->configDataStage($data['peel']);
-        $data_action['box_paste'] = $this->configDataStage($data['box_paste']);
-        $data_action['metalai'] = $this->configDataStage($data['metalai']);
-        $data_action['compress'] = $this->configDataCompress($data['compress']);
-        $data_action['uv'] = $this->configDataStage($data['uv']);
-        $data_action['ext_price'] = $this->configDataExtPrice($data['ext_price']);
+        if (!empty($data['size'])) {
+            $data_action['size'] = $this->configDataSizePaper($data['size']);
+        }
+
+        if (!empty($data['print'])) {
+            $data_action['print'] = $this->configDataPrint($data['print']);
+        }
+        
+        if (!empty($data['nilon'])) {
+            $data_action['nilon'] = $this->configDataStage($data['nilon']);
+        }
+
+        if (!empty($data['elevate'])) {
+            $data_action['elevate'] = $this->configDataStage($data['elevate']);
+        }
+        if (!empty($data['peel'])) {
+            $data_action['peel'] = $this->configDataStage($data['peel']);
+        }
+        
+        if (!empty($data['box_paste'])) {
+            $data_action['box_paste'] = $this->configDataStage($data['box_paste']);
+        }
+        
+        if (!empty($data['metalai'])) {
+            $data_action['metalai'] = $this->configDataStage($data['metalai']);
+        }
+        
+        if (!empty($data['compress'])) {
+            $data_action['compress'] = $this->configDataCompressFloat($data['compress']);
+        }
+        if (!empty($data['float'])) {
+            $data_action['float'] = $this->configDataCompressFloat($data['float']);
+        }
+        
+        if (!empty($data['uv'])) {
+            $data_action['uv'] = $this->configDataStage($data['uv']);
+        }
+        
+        if (!empty($data['ext_price'])) {
+            $data_action['ext_price'] = $this->configDataExtPrice($data['ext_price']);
+        }
+        
         $data_action['total_cost'] = $this->priceCaculatedByArray($data_action);
+
         return $data_action;
     }
 }

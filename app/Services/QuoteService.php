@@ -105,7 +105,7 @@ class QuoteService extends BaseService
                 $product_update['total_cost'] = 0;
                 foreach ($elements as $el) {
                     if (!empty($product[$el['pro_field']])) {
-                        $model = getModelByTable($el['key']);
+                        $model = getModelByTable($el['table']);
                         $supply_cost = $model->processData($product_id, $product[$el['pro_field']]);
                         $product_update['total_cost'] += $supply_cost;
                     }

@@ -84,12 +84,12 @@
 
     @php
         $pro_silk_supply = [
-            'name' => 'product['.$j.'][silk]['.$pindex.'][supplies]',
+            'name' => 'product['.$j.'][silk]['.$pindex.'][supply_type]',
             'type' => 'linking',
             'note' => 'Chọn vật tư',
             'attr' => ['required' => 1, 'inject_class' => 'select_supply'],
             'other_data' => ['config' => ['search' => 1], 
-            'data' => ['table' => 'supplies', 'where' => ['type' => \App\Constants\TDConstant::SILK_SUPP]]]
+            'data' => ['table' => 'supply_type', 'where' => ['type' => \App\Constants\TDConstant::SILK_SUPP]]]
         ] 
     @endphp
     @include('view_update.view', $pro_silk_supply)

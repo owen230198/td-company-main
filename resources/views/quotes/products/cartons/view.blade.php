@@ -86,18 +86,18 @@
 
     @php
         $pro_carton_supply = [
-            'name' => 'product['.$j.'][carton]['.$pindex.'][supplies]',
+            'name' => 'product['.$j.'][carton]['.$pindex.'][supply_type]',
             'type' => 'linking',
             'note' => 'Chọn vật tư',
             'attr' => ['required' => 1, 'inject_class' => 'select_supply'],
             'other_data' => ['config' => ['search' => 1], 
-            'data' => ['table' => 'supplies', 'where' => ['type' => \App\Constants\TDConstant::CARTON_SUPP]]]
+            'data' => ['table' => 'supply_type', 'where' => ['type' => \App\Constants\TDConstant::CARTON_SUPP]]]
         ] 
     @endphp
     @include('view_update.view', $pro_carton_supply)
     @php
         $pro_carton_supply = [
-            'name' => 'product['.$j.'][carton]['.$pindex.'][supplies]',
+            'name' => 'product['.$j.'][carton]['.$pindex.'][supply_type]',
             'type' => 'linking',
             'note' => 'Chọn định lượng',
             'attr' => ['required' => 1, 'inject_class' => 'ajax_supply_price'],

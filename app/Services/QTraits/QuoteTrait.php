@@ -39,17 +39,19 @@ trait QuoteTrait
         return $this->getObjectConfig($paper, $total);
     }
 
-    private function configDataElevate($work_price, $shape_price, $elevate)
+    private function configDataElevate($model_price, $work_price, $shape_price, $elevate)
     {
         $ext_price = !empty($elevate['ext_price']) ? (float) $elevate['ext_price'] : 0;
-        $cost = $this->getBaseTotalStage(self::$qty_paper, $work_price, $shape_price);
-        $total = $cost + $ext_price;
+        $cost = $this->getBaseTotalStage(self::$qty_paper, $model_price, $work_price, $shape_price);
+        $float_cost = !empty($elevate['float']) ? $this->configDataCompressFloat($elevate, true) : 0;
+        $total = $cost + $float_cost + $ext_price;
         return $this->getObjectConfig($elevate, $total);
     }
 
-    private function configDataByOnlyDevice($work_price, $shape_price, $peel)
+    private function configDataByOnlyDevice($model_price, $work_price, $shape_price, $peel)
     {
-        $total = $this->getBaseTotalStage(self::$qty_pro, $work_price, $shape_price);
+        $nqty = !empty($data['nqty']) ? (int) $data['nqty'] : 1;
+        $total = $this->getBaseTotalStage(self::$qty_pro, $model_price, $work_price, $shape_price, 0, $nqty);
         return $this->getObjectConfig($peel, $total);
     }
 
@@ -65,10 +67,10 @@ trait QuoteTrait
         return json_encode($obj);
     }
 
-    private function getBaseTotalStage($qty, $work_price, $shape_price, $materal_cost = 0, $factor = 1, $plus_qty = 0)
+    private function getBaseTotalStage($qty, $model_price, $work_price, $shape_price, $materal_cost = 0, $factor = 1, $plus_qty = 0)
     {
         // CPVTK: D x R x DGL (1)
-        $a = self::$length * self::$width * $work_price;
+        $a = self::$length * self::$width * $model_price;
 
         // DGVT: D x R x DGVT x (SL tờ in - sp + BH %) x hệ số (2)
         $b = self::$length * self::$width * $materal_cost * ($qty + $plus_qty) * $factor;
@@ -92,16 +94,16 @@ trait QuoteTrait
         }
         if (in_array($key_device, [TDConstant::NILON, TDConstant::UV])) {
             //Tính chi phí cán nilon
-        	$obj = $this->configDataUVNAndNilon($work_price, $shape_price, $data);
+        	$obj = $this->configDataUVNAndNilon($model_price, $work_price, $shape_price, $data);
         }elseif ($key_device == TDConstant::METALAI){
             //Tính chi phí cán metalai
-            $obj = $this->configDataMetalai($work_price, $shape_price, $data);
+            $obj = $this->configDataMetalai($model_price, $work_price, $shape_price, $data);
         }elseif ($key_device == TDConstant::ELEVATE){
             //Tính chi phí máy bế
-            $obj = $this->configDataElevate($work_price, $shape_price, $data);
+            $obj = $this->configDataElevate($model_price, $work_price, $shape_price, $data);
         }else{
             //Tính chi phí bóc lề, dán hộp, máy phay
-            $obj = $this->configDataByOnlyDevice($work_price, $shape_price, $data);        
+            $obj = $this->configDataByOnlyDevice($model_price, $work_price, $shape_price, $data);        
         }
         return $obj;    
     }

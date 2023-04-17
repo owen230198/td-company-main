@@ -61,12 +61,12 @@
 
     @php
         $pro_decal_supply = [
-            'name' => 'product['.$j.'][decal]['.$pindex.'][supplies]',
+            'name' => 'product['.$j.'][decal]['.$pindex.'][supply_type]',
             'type' => 'linking',
             'note' => 'Chọn vật tư',
             'attr' => ['required' => 1, 'inject_class' => 'select_supply'],
             'other_data' => ['config' => ['search' => 1], 
-            'data' => ['table' => 'supplies', 'where' => ['type' => \App\Constants\TDConstant::DECAL_SUPP]]]
+            'data' => ['table' => 'supply_type', 'where' => ['type' => \App\Constants\TDConstant::DECAL_SUPP]]]
         ] 
     @endphp
     @include('view_update.view', $pro_decal_supply)

@@ -114,6 +114,7 @@ class QuoteController extends Controller
             $data['findex'] = 0;
             $data['paper_name'] = $request->input('paper_name');
             $data['pro_qty'] = (int) $request->input('pro_qty');
+            $data['cate'] = $cate;
             if (empty($data['paper_name'])) {
                 return ['code' => 100, 'message' => 'Bạn chưa nhập tên sản phẩm!'];
             }

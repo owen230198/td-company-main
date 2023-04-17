@@ -157,6 +157,10 @@ input[type="checkbox"].toggle {
     border-top: 1px solid #ebebeb;
 }
 
+.border_top_white {
+    border-top: 1px solid #ffffff;
+}
+
 input[type="checkbox"].toggle + label {
     font-size: var(--toggle-font-size);
     vertical-align: bottom;
