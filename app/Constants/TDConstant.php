@@ -187,19 +187,14 @@
             ['key' => 'fill_finishes', 'note' => 'Bồi + hoàn thiện', 'pro_field' => self::FILL_FINISH ,'table' => 'fill_finishes'] 
         ];
 
-        //Vật tư định lượng
-        const CARTON_SUPP = 1;
-        const RUBB_SUPP = 2;
-        const STYRO_SUPP = 3;
-        const SILK_SUPP = 4;
-        const DECAL_SUPP = 5;
-        const MICA_SUPP = 6;
-
         const PLUS_PAPER = 100;
 
         const PRINT_SUBTRACT_PAPER = 1000;
         const PLUS_PAPER_DEVICE = 30;
         const FLOAT_PRICE = 30000;
+
+        const FILL_PRICE = 50000;
+        const MAGNET_PERC = 1.5;
     }
     
 ?>

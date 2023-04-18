@@ -97,6 +97,8 @@ trait QPaperTrait
     private function getDataActionPaper($data)
     {
         $this->newObjectSetProperty($data);
+        static::$base_qty_paper = !empty($data['paper_qty']) ? (int) $data['paper_qty'] : 0;
+        static::$qty_paper = ceil(calValuePercentPlus(self::$base_qty_paper, self::$base_qty_paper, self::$plus_compen_perc)); 
         if (!empty($data['size'])) {
             $data_action['size'] = $this->configDataSizePaper($data['size']);
         }

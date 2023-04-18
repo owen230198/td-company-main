@@ -1,47 +1,110 @@
 <?php
 namespace App\Services\QTraits;
+
+use App\Constants\TDConstant;
+
 trait QSupplyTrait{
-  public function getDataActionCartonFoam($data, $table)
-  {
-      $length = @$data['length']?$data['length']:0;
-      $width = @$data['width']?$data['width']:0;
-      $qty_paper = @$data['qty_paper']?(int)$data['qty_paper']:0;
-      $qty_pro = @$data['qty_pro']?(int)$data['qty_pro']:0;
-      $n_qty = @$data['n_qty']?(int)$data['n_qty']:1;
-      $dataAction = $data;
-      $dataAction['paper_size'] = $this->configDatSizePaperHard($length, $width, $data['paper_size'], $qty_paper);
-      $dataAction['elevate'] = $this->configDataStage($qty_pro, $n_qty, $data['elevate']);
-      if ($table=='q_cartons') {
-         $dataAction['milling'] =  $this->configDataStage($qty_pro, $n_qty, $data['milling'], $length, $width, $table, $data['name']);
-      }
-      $dataAction['peel'] = $this->configDataStage($qty_pro, $n_qty, $data['peel'], $length, $width, $table);
-      return $dataAction;
-  }
-
-   public function getDataActionSilk($data)
+   private function configDataCut($model_price, $work_price, $shape_price, $elevate)
    {
-      $length = @$data['length']?$data['length']:0;
-      $width = @$data['width']?$data['width']:0;
-      $qty_paper = @$data['qty_paper']?(int)$data['qty_paper']:0;
-      $qty_pro = @$data['qty_pro']?(int)$data['qty_pro']:0;
-      $n_qty = @$data['n_qty']?(int)$data['n_qty']:1;
-      $hole_num = @$data['hole_price']['num']?(int)$data['hole_price']['num']:0;
-      $dataAction = $data;
-      $dataAction['name'] = @$data['paper_size']['quantative'];
-      $dataAction['paper_size'] = $this->configDatSizePaperHard($length, $width, $data['paper_size'], $qty_paper);
-      $dataAction['hole_price'] = $this->configDataHardPrice($hole_num, (int)getDataConfigs('QConfig', 'PRICE_SHAPE_HOLE'), (int)getDataConfigs('QConfig', 'PRICE_PLUS_HOLE'), $qty_pro, $data['hole_price']);
-      return $dataAction;
-
+      $total = $this->getBaseTotalStage(self::$supp_qty, $model_price, $work_price, $shape_price);
+      return $this->getObjectConfig($elevate, $total);
    }
 
-   public function getDataActionFinish($data, $quote_id)
+   public function getDataActionSupply($data)
    {
-      $quote = $this->quotes->find($quote_id);
-      $qty_pro = @$quote['qty_pro']?(int)$quote['qty_pro']:0;
-      $fill_price = @$data['fill_price']['price']?(float)$data['fill_price']['price']:0;
-      $finish_price = @$data['finish_price']['price']?(float)$data['finish_price']['price']:0;
-      $dataAction['fill_price'] = $this->configDataHardPrice($fill_price, $qty_pro, 0, 1, $data['fill_price']);
-      $dataAction['finish_price'] = $this->configDataHardPrice($finish_price, $qty_pro, 0, 1, $data['finish_price']);
-      return $dataAction;
+      $this->newObjectSetProperty($data);
+      static::$base_supp_qty = !empty($data['supp_qty']) ? (int) $data['supp_qty'] : 0;
+      static::$supp_qty = ceil(calValuePercentPlus(self::$base_supp_qty, self::$base_supp_qty, self::$hard_compen_perc)); 
+      
+      if (!empty($data['size'])) {
+         $data_action['size'] = $this->configDataSupplySize($data['size']);
+      }
+
+      if (!empty($data['cut'])) {
+         $data_action['cut'] = $this->configDataStage($data['cut']);
+      }
+
+      if (!empty($data['mill'])) {
+         $data_action['mill'] = $this->configDataStage($data['mill']);
+      }
+
+      if (!empty($data['elevate'])) {
+         $data_action['elevate'] = $this->configDataStage($data['elevate']);
+      }
+
+      if (!empty($data['peel'])) {
+         $data_action['peel'] = $this->configDataStage($data['peel']);
+      }
+
+      $data_action['total_cost'] = $this->priceCaculatedByArray($data_action);
+
+      return $data_action;
+   }
+
+   private function configDataFill($fill)
+   {
+      $fill_price = (float) TDConstant::FILL_PRICE;
+      $fill_cost = 0;
+      $stage = !empty($fill['stage']) ? $fill['stage'] : [];
+      foreach ($stage as $key => $item) {
+         $qttv_id = @$item['materal'] ? (int) $item['materal'] : 0;
+         $qttv = getDetailDataByID('SupplyPrice', $qttv_id);
+         $qttv_price = @$qttv['price']?$qttv['price']:0; 
+         $length = !empty($item['size']['length']) ? $item['size']['length'] : 0;
+         $width = !empty($item['size']['width']) ? $item['size']['width'] : 0;
+         convertCmToMeter($length, $width); 
+         $fill['stage'][$key]['cost'] = ($length * $width * $qttv_price) + $fill_price; 
+         $fill_cost += $fill['stage'][$key]['cost'];
+      }
+      $ext_price = @$fill['ext_price'] ? (float) $fill['ext_price'] : 0;
+      $total = $fill_cost + ($ext_price *self::$base_qty_pro);
+      return $this->getObjectConfig($fill, $total);
+   }
+
+   private function configDataFinish($finish)
+   {
+      $stage = !empty($finish['stage']) ? $finish['stage'] : [];
+      $finish_cost = 0;
+      foreach ($stage as $key => $item) {
+         $qttv_id = @$item['materal'] ? (int) $item['materal'] : 0;
+         $qttv = getDetailDataByID('SupplyPrice', $qttv_id);
+         $qttv_price = @$qttv['price']?$qttv['price']:0; 
+         $finish['stage'][$key]['cost'] = self::$base_qty_pro * $qttv_price; 
+         $finish_cost += $finish['stage'][$key]['cost'];
+      }
+      $ext_price = @$finish['ext_price'] ? (float) $finish['ext_price'] : 0;
+      $total = $finish_cost + ($ext_price *self::$base_qty_pro);
+      return $this->getObjectConfig($finish, $total);
+   }
+
+   private function configDataMagnet($magnet)
+   {
+      $magnet_perc = TDConstant::MAGNET_PERC;
+      $qttv_id = @$magnet['type'] ? (int) $magnet['type'] : 0;
+      $qttv = getDetailDataByID('SupplyPrice', $qttv_id);
+      $qttv_price = @$qttv['price']?$qttv['price']:0;  
+      $qty = @$magnet['qty'] ? (int) $magnet['qty'] : 0; 
+      $total = (self::$base_qty_pro * $qttv_price) * (($qty * $magnet_perc) / 100);
+      return $this->getObjectConfig($magnet, $total);
+   }
+
+   public function getDataActionFillFinish($data)
+   {
+      $this->newObjectSetProperty($data);
+      if (!empty($data['fill'])) {
+         $data_action['fill'] = $this->configDataFill($data['fill']);
+      }
+
+      if (!empty($data['Finish'])) {
+         $data_action['Finish'] = $this->configDataFinish($data['Finish']);
+      }
+
+      if (!empty($data['magnet'])) {
+         $data_action['magnet'] = $this->configDataMagnet($data['magnet']);
+      }
+
+      $data_action['total_cost'] = $this->priceCaculatedByArray($data_action);
+
+      return $data_action;
    }
 }

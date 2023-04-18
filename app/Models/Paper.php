@@ -16,9 +16,10 @@ class Paper extends Model
     protected $table = 'papers';
     protected $protectFields = false;
     use QPaperTrait, QuoteTrait;
-    public function processData($product_id, $data)
+    public function processData($product_id, $product, $type)
     {
         $cost = 0;
+        $data = $product[$type];
         foreach ($data as $paper) {
             $data_insert = $this->getDataActionPaper($paper);
             $data['name'] = $paper['name'];

@@ -253,6 +253,7 @@ var selectDecalNQty = function()
   })
 }
 
+
 $(function(){
 	changQtyInput();
   moduleSelectOtherPaper();

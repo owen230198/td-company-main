@@ -237,32 +237,35 @@ var selectAjaxModule = function(section = $('.base_content '))
     if (select_ajax.length > 0) {
         select_ajax.each(function(){
             let url = $(this).data('url');
-            $(this).select2({
-                ajax: {
-                    url: url,
-                    dataType: 'json',
-                    data: (params) => {
-                        return {
-                        q: params.term,
-                        }
+            if ($(this).val() == null) {
+                $(this).select2({
+                    ajax: {
+                        url: url,
+                        dataType: 'json',
+                        data: (params) => {
+                            return {
+                            q: params.term,
+                            }
+                        },
+                        processResults: (data, params) => {
+                            const results = data.map(item => {
+                            return {
+                                id: item.id,
+                                text: item.label,
+                            };
+                            });
+                            return {
+                            results: results,
+                            }
+                        },
                     },
-                    processResults: (data, params) => {
-                        const results = data.map(item => {
-                        return {
-                            id: item.id,
-                            text: item.label,
-                        };
-                        });
-                        return {
-                        results: results,
-                        }
-                    },
-                },
-            });
-            if ($(this).data('id') !== 'undefind' && $(this).data('label') !== 'undefind') {
-                var newOption = new Option($(this).data('label'), $(this).data('id'), true, true);
-                $(this).append(newOption).trigger('change');
+                });
+                if ($(this).data('id') !== 'undefind' && $(this).data('label') !== 'undefind') {
+                    var newOption = new Option($(this).data('label'), $(this).data('id'), true, true);
+                    $(this).append(newOption).trigger('change');
+                }
             }
+            
         })
     }
 

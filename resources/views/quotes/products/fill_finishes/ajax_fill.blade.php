@@ -2,9 +2,10 @@
     $data_select_fill = [
         'other_data' => [
             'config' => ['search' => 1], 
-            'data' => ['table' => 'fill_finish_prices', 'where' => ['type' => \App\Constants\TDConstant::FILL]]
+            'data' => ['table' => 'supply_prices', 'where' => ['type' => \App\Constants\TDConstant::FILL]]
         ],
-        'name' => 'product['.$j.'][fill_finish][fill]['.$findex.'][materal]'
+        'note' => 'Tên giấy bồi',
+        'name' => 'product['.$j.'][fill_finish][fill][stage]['.$findex.'][materal]'
     ]
 @endphp
 <div class="d-flex align-items-center mb-2 fs-13 quote_fill_finish_item position-relative" data-index={{ $findex }}>
@@ -18,10 +19,10 @@
         ĐG các công đoạn bồi hộp {{ $findex > 0 ? '('.$num.')' : '' }}
     </label>
     <div class="d-flex justify-content-between align-items-center">
-        <input type="number" name = 'product[{{ $j }}][fill_finish][fill][{{ $findex }}][length]' placeholder="KT chiều dài (cm)" 
+        <input type="number" name = 'product[{{ $j }}][fill_finish][fill][stage][{{ $findex }}][length]' placeholder="KT chiều dài (cm)" 
         class="form-control medium_input" step="any"> 
         <span class="mx-3">X</span>
-        <input type="number" name = 'product[{{ $j }}][fill_finish][fill][{{ $findex }}][width]' placeholder="KT chiều rộng (cm)" 
+        <input type="number" name = 'product[{{ $j }}][fill_finish][fill][stage][{{ $findex }}][width]' placeholder="KT chiều rộng (cm)" 
         class="form-control medium_input" step="any"> 
         <span class="mx-2">||</span> 
         <div class="medium_input">

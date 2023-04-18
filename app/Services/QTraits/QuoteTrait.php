@@ -7,11 +7,14 @@ trait QuoteTrait
 {
     static $plus_paper_device = TDConstant::PLUS_PAPER_DEVICE;
     static $plus_compen_perc = TDConstant::COMPEN_PERCENT;
+    static $hard_compen_perc = TDConstant::CARTON_COMPEN_PERCENT;
     static $base_qty_pro = 0;
     static $qty_pro = 0;
     static $nqty = 1;
     static $base_qty_paper = 0;
     static $qty_paper = 0;
+    static $base_supp_qty = 0;
+    static $supp_qty = 0;
     static $length = 0;
     static $width = 0;
 
@@ -20,22 +23,19 @@ trait QuoteTrait
         static::$base_qty_pro = !empty($data['qty']) ? (int) $data['qty'] : 0;
         static::$qty_pro = ceil(calValuePercentPlus(self::$base_qty_pro, self::$base_qty_pro, self::$plus_compen_perc)); 
         static::$nqty = !empty($data['nqty']) ? (int) $data['nqty'] : 1;
-        static::$base_qty_paper = !empty($data['paper_qty']) ? (int) $data['paper_qty'] : 0;
-        static::$qty_paper = ceil(calValuePercentPlus(self::$base_qty_paper, self::$base_qty_paper, self::$plus_compen_perc)); 
         $length = !empty($data['size']['length']) ? $data['size']['length'] : 0;
         $width = !empty($data['size']['width']) ? $data['size']['width'] : 0;
         convertCmToMeter($length, $width);
         static::$length = $length;
         static::$width = $width;
     }
-    private function configDatSizePaperHard($length, $width, $paper, $qty)
+    private function configDataSupplySize($paper)
     {
-        $quantative_id = @$paper['quantative']?(int)$paper['quantative']:0;
-        $quantative = getDetailDataByID('QSupplyPrice', $quantative_id);
-        $quantative_price = @$quantative['price']?$quantative['price']:0;
-        $qty_paper = $qty+(int)getDataConfigs('QConfig', 'PLUS_CARTON');
+        $qttv_id = @$paper['quantative'] ? (int)$paper['quantative'] : 0;
+        $qttv = getDetailDataByID('SupplyPrice', $qttv_id);
+        $qttv_price = @$qttv['price'] ? $qttv['price'] : 0;
         //Công thức tính chi phí khổ giấy vật tư hộp cứng: Dài x Rộng x ĐG định lượng x SL vật tư
-        $total = $length * $width * $quantative_price * $qty_paper;
+        $total = self::$length * self::$width * $qttv_price * self::$supp_qty;
         return $this->getObjectConfig($paper, $total);
     }
 
@@ -101,6 +101,9 @@ trait QuoteTrait
         }elseif ($key_device == TDConstant::ELEVATE){
             //Tính chi phí máy bế
             $obj = $this->configDataElevate($model_price, $work_price, $shape_price, $data);
+        }elseif ($key_device == TDConstant::CUT){
+            //Tính chi phí máy xén
+            $obj = $this->configDataCut($model_price, $work_price, $shape_price, $data);
         }else{
             //Tính chi phí bóc lề, dán hộp, máy phay
             $obj = $this->configDataByOnlyDevice($model_price, $work_price, $shape_price, $data);        
