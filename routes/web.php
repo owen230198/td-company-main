@@ -47,7 +47,7 @@ Route::middleware(['check_login'])->group(function () {
 	Route::get('add-fill-finish-quote', [QuoteController::class, 'addFillFinishQuote']);
 	Route::get('compute-paper-size', [QuoteController::class, 'computePaperSize']);
 	Route::get('get-view-product-structure', [QuoteController::class, 'getViewProductStructure']);
-
+	Route::get('profit-config-quote', [QuoteController::class, 'profitConfigQuote']);
 
 	//orders routes
 	Route::get('set-quantity-order-products', [OrderController::class, 'setListProductView']);

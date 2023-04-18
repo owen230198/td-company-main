@@ -118,6 +118,6 @@ class QuoteService extends BaseService
         Quote::where('id', $arr_quote['id'])->update($quote_update);
         $code = !empty($update) ? 200 : 100;
         $message = !empty($update) ? 'Cập nhật dữ liệu thành công !' : 'Có lỗi xảy ra, vui lòng thử lại !';
-        return returnMessageAjax($code, $message);
+        return returnMessageAjax($code, $message, url('/profit-config-quote?quote_id='.$data['id']));
     }
 }

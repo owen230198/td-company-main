@@ -22,7 +22,7 @@ class Paper extends Model
         $data = $product[$type];
         foreach ($data as $paper) {
             $data_insert = $this->getDataActionPaper($paper);
-            $data['name'] = $paper['name'];
+            $data_insert['name'] = $paper['name'];
             $data_insert['product_qty'] = $paper['qty'];
             $data_insert['nqty'] = $paper['nqty'];
             $data_insert['paper_qty'] = $paper['paper_qty'];

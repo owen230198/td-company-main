@@ -48,6 +48,7 @@
         ];
 
         //công đoạn sản xuất
+        const SIZE = 'size';
         const PRINT = 'print';
         const NILON = 'nilon';
         const METALAI = 'metalai';
@@ -172,10 +173,16 @@
                                 self::PEEL => 'Máy bóc lề'
                             ];
 
+        const FILL_FINISH_STAGE = [
+            self::FILL => 'Bồi',
+            self::FINISH => 'Hoàn thiện',
+            self::MAGNET => 'vật tư nam châm'
+        ];
+
         //Cấu tạo sản phẩm
         const HARD_BOX = 1;
         const PAPER_BOX = 2;
-        const PAPER_ELEMENT = [['key' => 'papers', 'note' => 'Giấy in']];
+        const PAPER_ELEMENT = [['key' => 'papers', 'note' => 'Giấy in', 'pro_field' => self::PAPER, 'device' => self::PAPER_DEVICE ,'table' => 'papers']];
         const HARD_ELEMENT = [
             ['key' => 'papers', 'note' => 'Giấy in', 'pro_field' => self::PAPER, 'device' => self::PAPER_DEVICE ,'table' => 'papers'],
             ['key' => 'cartons', 'note' => 'Carton', 'pro_field' => self::CARTON, 'device' => self::CARTON_DEVICE ,'table' => 'supplies'],

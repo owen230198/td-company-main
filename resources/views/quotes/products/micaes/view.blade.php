@@ -27,11 +27,14 @@
     @include('view_update.view', $pro_mica_supply)
 
     @include('quotes.products.select_device', 
-    ['key_device' => $key_device_cut, 'note' => 'Máy xén', 'value' => getDeviceIdByKey($key_device_cut), 'element' => $key_supp])
+    ['key_device' => $key_device_cut, 'note' => 'Máy xén', 
+    'value' =>  getDeviceId(['key_device' => $key_device_cut, 'supply' => $key_supp, 'default_device' => 1]), 'element' => $key_supp])
 
     @include('quotes.products.select_device', 
-    ['key_device' => $key_device_elevate, 'note' => 'Máy bế', 'value' => getDeviceIdByKey($key_device_elevate), 'element' => $key_supp])
+    ['key_device' => $key_device_elevate, 'note' => 'Máy bế', 
+    'value' =>  getDeviceId(['key_device' => $key_device_elevate, 'supply' => $key_supp, 'default_device' => 1]), 'element' => $key_supp])
 
     @include('quotes.products.select_device', 
-    ['key_device' => $key_device_peel, 'note' => 'Máy bóc lề', 'value' => getDeviceIdByKey($key_device_peel), 'element' => $key_supp])
+    ['key_device' => $key_device_peel, 'note' => 'Máy bóc lề', 
+    'value' =>  getDeviceId(['key_device' => $key_device_peel, 'supply' => $key_supp, 'default_device' => 1]), 'element' => $key_supp])
 </div>

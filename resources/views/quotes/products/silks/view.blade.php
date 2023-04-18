@@ -35,5 +35,6 @@
     </div> 
 
     @include('quotes.products.select_device', 
-    ['key_device' => $key_device_cut, 'note' => 'Máy xén', 'value' => getDeviceIdByKey($key_device_cut), 'element' => $key_supp])
+    ['key_device' => $key_device_cut, 'note' => 'Máy xén', 
+    'value' =>  getDeviceId(['key_device' => $key_device_cut, 'supply' => $key_supp, 'default_device' => 1]), 'element' => $key_supp])
 </div>

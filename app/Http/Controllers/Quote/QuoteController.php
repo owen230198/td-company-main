@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Models\Customer;
 use App\Models\Quote;
 use App\Constants\TDConstant;
+use App\Models\Product;
 class QuoteController extends Controller
 {
     private $services;
@@ -40,7 +41,6 @@ class QuoteController extends Controller
             $arr_quote = Quote::find($request->input('id'));
             if (!$request->isMethod('POST')) {
                 $data['title'] = 'Tạo mới báo giá - Chi tiết sản phẩm và sản xuất';
-                $data['customer_fields'] = Customer::FIELD_UPDATE;
                 $data['data_quote'] = $arr_quote;
                 if (!empty($data['data_quote'])) {
                     return view('quotes.'.$step, $data);
@@ -82,7 +82,8 @@ class QuoteController extends Controller
         $pro_index = (int) $request->input('pro_index');
         $paper_index = (int) $request->input('paper_index');
         $paper_name = $request->input('paper_name');
-        return view('quotes.products.papers.ajax_view', ['j' => $pro_index, 'pindex' => $paper_index, 'paper_name' => $paper_name]);
+        $pro_qty = $request->input('pro_qty');
+        return view('quotes.products.papers.ajax_view', ['j' => $pro_index, 'pindex' => $paper_index, 'paper_name' => $paper_name, 'pro_qty' => $pro_qty]);
     }
 
     public function addFillFinishQuote(Request $request)
@@ -101,7 +102,8 @@ class QuoteController extends Controller
         $pro_index = (int) $request->input('proindex');
         $paper_index = (int) $request->input('paperindex');
         $paper_name = $request->input('paper_name');
-        return view('quotes.products.papers.ajax_view', ['j' => $pro_index, 'pindex' => $paper_index, 'paper_name' => $paper_name, 'pro_size' => $paper['pro_size']]);
+        return view('quotes.products.papers.ajax_view', 
+        ['j' => $pro_index, 'pindex' => $paper_index, 'paper_name' => $paper_name, 'pro_size' => $paper['pro_size']]);
     }
 
     public function getViewProductStructure(Request $request)
@@ -122,6 +124,21 @@ class QuoteController extends Controller
                 return ['code' => 100, 'message' => 'Bạn chưa nhập số lượng sản phẩm!'];
             }
             return view('quotes.products.structure', $data);
+        }
+    }
+
+    public function profitConfigQuote(Request $request)
+    {
+        if (!$request->isMethod('POST')) {
+            $id = $request->input('quote_id');
+            if (empty($id)) {
+                return redirect(url())->with('error', 'Báo giá không tồn tại !');
+            }
+            $data['data_quote'] = Quote::find($id);
+            $data['title'] = 'Lợi nhuận báo giá mã - '.@$data['data_quote']['seri'];
+            $data['products'] = Product::where(['act' => 1, 'quote_id' => $id])->get();
+            $data['supply_fields'] = TDConstant::HARD_ELEMENT;
+            return view('quotes.profits.view', $data);
         }
     }
 }

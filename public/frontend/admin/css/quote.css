@@ -49,3 +49,36 @@
 .height_input{
     margin-bottom: 20.61px;
 }
+
+ul.list_supplies li.supply_item{
+    margin: 0 -10px;
+    border-bottom: 3px solid #459300;
+    padding: 5px 10px;
+    min-width: 200px;
+}
+
+ul.list_supplies li.supply_item:last-child{
+    border: none;
+}
+
+ul.supply_info li.supply_item_inf{
+    padding: 2px 0;
+    margin: 2px 0;
+    border-bottom: 1px solid #ebebeb;
+}
+
+ul.supply_info li.supply_item_inf:last-child{
+    border:none;
+}
+
+.quote_table_stage{
+    overflow: auto;
+}
+
+.quote_total_cost{
+    padding: 5px 10px;
+    background: #ebebeb;
+    text-align: center;
+    position: sticky;
+    top: 55px;
+}

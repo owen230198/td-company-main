@@ -7,23 +7,7 @@
     <form action="<?php echo e(asset('create-quote?step=handle_config&id='.$data_quote['id'])); ?>" method="POST" class="config_handle_form config_content baseAjaxForm" 
     enctype="multipart/form-data" onkeydown="return event.key != 'Enter'">
         <?php echo csrf_field(); ?>
-        <div class="quote_handle_section mb-3">
-            <h3 class="fs-14 text-uppercase pb-1 mb-3 text-center quote_handle_title">
-                <span>Thông tin khách hàng - Mã báo giá <strong><?php echo e($data_quote['seri']); ?></strong></span>
-            </h3>
-            <?php $__currentLoopData = $customer_fields; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $customer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <div class="d-flex align-items-center mb-2 fs-13">
-                    <label class="mb-0 min_210 text-capitalize text-right mr-3"><?php echo e($customer['note']); ?>: </label>
-                    <p class="font_italic">
-                        <?php if(!empty($data_quote[$customer['name']])): ?>
-                            <?php echo e(@$customer['type'] != 'linking' ? $data_quote[$customer['name']] 
-                                : getFieldDataById('name', $customer['other_data']['data']['table'], $data_quote[$customer['name']])); ?>
-
-                        <?php endif; ?>
-                    </p>
-                </div>    
-            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-        </div>
+        <?php echo $__env->make('quotes.head_information', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <div class="quote_handle_section handle_pro_section mb-3">
             <h3 class="fs-14 text-uppercase border_top_eb pt-3 mt-3 text-center quote_handle_title">
                 <span>Khởi tạo sản phẩm</span>

@@ -9,7 +9,7 @@
 @endphp
 
 @include('quotes.products.papers.handles.select_device', 
-['key_device' => $key_stage, 'value' => getDeviceIdByKey($key_stage, \App\Constants\TDConstant::SEMI_AUTO_DEVICE)])
+['key_device' => $key_stage, 'value' =>  getDeviceId(['key_device' => $key_stage, 'supply' => 'paper', 'default_device' => 1])])
 
 @php
     $key_stage = \App\Constants\TDConstant::EXT_PRICE;

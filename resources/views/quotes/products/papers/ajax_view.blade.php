@@ -49,7 +49,9 @@
                     'name' => 'product['.$j.'][paper]['.$pindex.'][qty]',
                     'note' => 'Số lượng',
                     'value' => @$pro_qty,
-                    'attr' => ['type_input' => 'number', 'required' => 1, 'inject_class' => 'pro_qty_input paper_qty_modul_input']
+                    'attr' => ['type_input' => 'number', 
+                    'required' => 1, 
+                    'inject_class' => $pindex == 0 ? 'pro_qty_input paper_qty_modul_input quote_receive_paper_qty_main' : 'pro_qty_input paper_qty_modul_input']
                 ] 
             @endphp
             @include('view_update.view', $pro_qty_field)

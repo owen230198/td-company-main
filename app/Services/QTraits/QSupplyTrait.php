@@ -95,8 +95,8 @@ trait QSupplyTrait{
          $data_action['fill'] = $this->configDataFill($data['fill']);
       }
 
-      if (!empty($data['Finish'])) {
-         $data_action['Finish'] = $this->configDataFinish($data['Finish']);
+      if (!empty($data['finish'])) {
+         $data_action['Finish'] = $this->configDataFinish($data['finish']);
       }
 
       if (!empty($data['magnet'])) {

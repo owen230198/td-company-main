@@ -131,7 +131,8 @@ var addPrintPaperModule = function()
     let pro_index = $(this).data('product');
     let paper_index = parseInt(item.last().data('index')) + 1;
     let paper_name = $(this).closest('.section_quote_print_paper').find('input.quote_receive_paper_name_main').val();
-    let url = 'add-print-paper-quote?pro_index='+pro_index+'&paper_index='+paper_index+'&paper_name='+paper_name;
+    let pro_qty = $(this).closest('.section_quote_print_paper').find('input.quote_receive_paper_qty_main').val();
+    let url = 'add-print-paper-quote?pro_index='+pro_index+'&paper_index='+paper_index+'&paper_name='+paper_name+'&pro_qty='+pro_qty;
     ajaxViewTarget(url, list_section, list_section, 2);
   });
 }

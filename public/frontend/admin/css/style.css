@@ -161,6 +161,12 @@ input[type="checkbox"].toggle {
     border-top: 1px solid #ffffff;
 }
 
+.w_50{
+    width: 50px !important;
+    min-width: 50px !important;
+    max-width: 50px !important;
+}
+
 input[type="checkbox"].toggle + label {
     font-size: var(--toggle-font-size);
     vertical-align: bottom;
@@ -517,8 +523,8 @@ a.device_supp_item {
     text-align: center;
 }
 
-.page_content .table tr td:first-child, 
-.page_content .table tr th.parentth:first-child{
+.page_content .table.table_main tr td:first-child, 
+.page_content .table.table_main tr th.parentth:first-child{
     min-width: auto;
     position: sticky;
     left: -1px;
@@ -526,8 +532,8 @@ a.device_supp_item {
     color: #459300;
 }
 
-.page_content .table tr td:last-child, 
-.page_content .table tr th.parentth:last-child{
+.page_content .table.table_main tr td:last-child, 
+.page_content .table.table_main tr th.parentth:last-child{
     min-width: auto;
     position: sticky;
     right: -1px;

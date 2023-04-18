@@ -9,7 +9,7 @@
 ?>
 
 <?php echo $__env->make('quotes.products.papers.handles.select_device', 
-['key_device' => $key_stage, 'value' => getDeviceIdByKey($key_stage, \App\Constants\TDConstant::SEMI_AUTO_DEVICE)], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+['key_device' => $key_stage, 'value' =>  getDeviceId(['key_device' => $key_stage, 'supply' => 'paper', 'default_device' => 1])], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
 <?php
     $key_stage = \App\Constants\TDConstant::EXT_PRICE;

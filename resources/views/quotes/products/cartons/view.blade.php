@@ -11,7 +11,7 @@
         $key_device_mill = \App\Constants\TDConstant::MILL; 
     @endphp
 
-    @include('quotes.products.supplies.title_config', ['divide' => $carton_divide, 'name' => 'carton'])
+    @include('quotes.products.supplies.title_config', ['divide' => $carton_divide, 'name' => $key_supp])
     
     @include('quotes.products.supplies.quantity_config', 
     ['compen_percent' => $carton_compen_percent, 'compen_num' => $carton_compen_num])
@@ -21,14 +21,18 @@
     @include('quotes.products.supplies.select_supply_type')
 
     @include('quotes.products.select_device', 
-    ['key_device' => $key_device_cut, 'note' => 'Máy xén', 'value' => getDeviceIdByKey($key_device_cut), 'element' => $key_supp])
+    ['key_device' => $key_device_cut, 'note' => 'Máy xén', 
+    'value' =>  getDeviceId(['key_device' => $key_device_cut, 'supply' => $key_supp, 'default_device' => 1]), 'element' => $key_supp])
 
     @include('quotes.products.select_device', 
-    ['key_device' => $key_device_elevate, 'note' => 'Máy bế', 'value' => getDeviceIdByKey($key_device_elevate), 'element' => $key_supp])
+    ['key_device' => $key_device_elevate, 'note' => 'Máy bế', 
+    'value' =>  getDeviceId(['key_device' => $key_device_elevate, 'supply' => $key_supp, 'default_device' => 1]), 'element' => $key_supp])
 
     @include('quotes.products.select_device', 
-    ['key_device' => $key_device_mill, 'note' => 'Máy phay', 'value' => getDeviceIdByKey($key_device_mill), 'element' => $key_supp])
+    ['key_device' => $key_device_mill, 'note' => 'Máy phay', 
+    'value' =>  getDeviceId(['key_device' => $key_device_mill, 'supply' => $key_supp, 'default_device' => 1]), 'element' => $key_supp])
 
     @include('quotes.products.select_device', 
-    ['key_device' => $key_device_peel, 'note' => 'Máy bóc lề', 'value' => getDeviceIdByKey($key_device_peel), 'element' => $key_supp])
+    ['key_device' => $key_device_peel, 'note' => 'Máy bóc lề', 
+    'value' =>  getDeviceId(['key_device' => $key_device_peel, 'supply' => $key_supp, 'default_device' => 1]), 'element' => $key_supp])
 </div>

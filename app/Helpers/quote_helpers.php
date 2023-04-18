@@ -51,12 +51,11 @@ if (!function_exists('getExactQuantityPaper')) {
 		}
 	}
 
-	if (!function_exists('getDeviceIdByKey')) {
-		function getDeviceIdByKey($key, $type = \App\Constants\TDConstant::SEMI_AUTO_DEVICE)
+	if (!function_exists('getDeviceId')) {
+		function getDeviceId($where)
 		{
-			$device = \DB::table('devices')->select('id')->where(['act' => 1, 'key_device' => $key, 'type' => $type])->first();
+			$device = \DB::table('devices')->select('id')->where($where)->first();
 			return @$device->id ?? 0;
-
 		}
 	}
 
@@ -72,6 +71,13 @@ if (!function_exists('getExactQuantityPaper')) {
 		function convertCmToMeter(&$length, &$width){
 			$length = $length/100;
 			$width = $width/100;
+		}
+	}
+
+	if (!function_exists('isHardBox')) {
+		function isHardbox($category)
+		{
+			return $category == \App\Constants\TDConstant::HARD_BOX;
 		}
 	}
 }

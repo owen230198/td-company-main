@@ -4,7 +4,7 @@
         'name' => 'product['.$j.'][paper]['.$pindex.']['.$key_stage.'][machine]',
         'type' => 'linking',
         'note' => 'thiết bị',
-        'value' => getDeviceIdByKey($key_stage, \App\Constants\TDConstant::AUTO_DEVICE),
+        'value' => getDeviceId(['key_device' => $key_stage, 'supply' => 'paper', 'default_device' => 1]),
         'other_data' => ['data' => ['table' => 'devices', 'where' => ['key_device' => $key_stage], 'select' => ['id', 'name']]]
     ] 
 @endphp

@@ -49,7 +49,7 @@ class AdminController extends Controller
             if (!$this->group_users::isAdmin()) {
                 return redirect('permission-error');
             }
-            if ($step == 'supplies') {
+            if ($step == 'supply_types') {
                 $data['title'] = 'Danh sách thiết bị máy theo vật tư';
                 $data['supply'] = TDConstant::HARD_ELEMENT;
             }else{
@@ -57,6 +57,10 @@ class AdminController extends Controller
                 $data['title'] = 'Đơn giá thiết bị '. $request->input('name');
                 $where = $request->except('name');
                 $data['data_tables'] = Device::where($where)->paginate(10);
+                $data['param_action'] = '?act=1';
+                foreach ($where as $key => $value) {
+                    $data['param_action'] .= '&'.$key.'='.$value;
+                }
             }
             return view('config_devices/'.$step.'/view', $data);
         }

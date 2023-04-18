@@ -22,4 +22,5 @@
 <?php echo $__env->make('view_update.view', $paper_nilon_face, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
 <?php echo $__env->make('quotes.products.papers.handles.select_device', 
-['key_device' => $key_stage, 'value' => getDeviceIdByKey($key_stage, \App\Constants\TDConstant::SEMI_AUTO_DEVICE)], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/quotes/products/papers/handles/nilon.blade.php ENDPATH**/ ?>
+['key_device' => $key_stage, 
+'value' => getDeviceId(['key_device' => $key_stage, 'supply' => 'paper', 'default_device' => 1])], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/quotes/products/papers/handles/nilon.blade.php ENDPATH**/ ?>
