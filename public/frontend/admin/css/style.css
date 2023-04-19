@@ -504,7 +504,6 @@ a.device_supp_item {
 
 .header_chose_supp_device{
     padding: 15px;
-    margin-bottom: 20px;
     background: #f1f4f9;
     border-radius: 10px;
 }
@@ -583,8 +582,8 @@ a.device_supp_item {
     page-break-after: always;
 }
 
-.min_210{
-    min-width: 210px;
+.min_185{
+    min-width: 185px;
 }
 
 @media (max-width: 1400px) {

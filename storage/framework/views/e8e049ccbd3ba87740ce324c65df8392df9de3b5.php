@@ -2,7 +2,7 @@
     $data_select_fill = [
         'other_data' => [
             'config' => ['search' => 1], 
-            'data' => ['table' => 'supply_prices', 'where' => ['type' => \App\Constants\TDConstant::FILL]]
+            'data' => ['table' => 'supply_prices', 'where' => ['type' => \TDConst::FILL]]
         ],
         'note' => 'Tên giấy bồi',
         'name' => 'product['.$j.'][fill_finish][fill][stage]['.$findex.'][materal]'
@@ -12,7 +12,7 @@
     <?php if($findex > 0): ?>
         <span class="remove_ext_paper_quote d-flex remove_ff_quote color_red smooth"><i class="fa fa-times" aria-hidden="true"></i></span> 
     <?php endif; ?>
-    <label class="mb-0 min_210 text-capitalize text-right mr-3">
+    <label class="mb-0 min_185 text-capitalize text-right mr-3">
         <?php
             $num = $findex + 1;
         ?>

@@ -8,7 +8,7 @@
     @foreach ($field_infomation as $customer)
         @if (!empty($data_quote[$customer['name']]))
             <div class="d-flex align-items-center mb-2 fs-13">
-                <label class="mb-0 min_210 text-capitalize text-right mr-3">{{ $customer['note'] }}: </label>
+                <label class="mb-0 min_185 text-capitalize text-right mr-3">{{ $customer['note'] }}: </label>
                 <p class="font_italic">
                     {{ 
                         @$customer['type'] != 'linking' ? $data_quote[$customer['name']] 

@@ -1,6 +1,6 @@
 <div class="d-flex align-items-center">
     <?php
-        $key_stage = \App\Constants\TDConstant::TEMP_EXT;
+        $key_stage = \TDConst::TEMP_EXT;
         $paper_temp_ext = [
             'name' => 'product['.$j.'][paper]['.$pindex.']['.$key_stage.'][price]',
             'note' => 'Chi phí 1 sản phẩm',

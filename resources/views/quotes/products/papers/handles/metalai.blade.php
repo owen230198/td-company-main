@@ -1,5 +1,5 @@
 @php
-    $key_stage = \App\Constants\TDConstant::METALAI;
+    $key_stage = \TDConst::METALAI;
     $paper_metalai_materal = [
         'name' => 'product['.$j.'][paper]['.$pindex.']['.$key_stage.'][materal]',
         'type' => 'linking',

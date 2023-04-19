@@ -21,7 +21,7 @@
 
     $data_select_magnet = [
         'other_data' => [
-            'data' => ['table' => 'supply_prices', 'where' => ['type' => \App\Constants\TDConstant::MAGNET]]
+            'data' => ['table' => 'supply_prices', 'where' => ['type' => \TDConst::MAGNET]]
         ],
         'name' => 'product['.$j.'][fill_finish][magnet][type]',
         'type' => 'linking',

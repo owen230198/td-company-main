@@ -122,17 +122,18 @@ var moduleInputQuantityProduct = function()
   });
 }
 
-var addPrintPaperModule = function()
+var addSuppModule = function()
 {
-  $(document).on('click', 'button.add_print_paper_quote_button', function(event){
+  $(document).on('click', 'button.add_supp_quote_button', function(event){
     event.preventDefault();
-    let list_section = $(this).closest('.section_quote_print_paper').find('.list_paper_config');
-    let item = list_section.find('.quote_paper_item');
+    let list_section = $(this).closest('.module_quote_supp_config').find('.list_supp_item');
+    let item = list_section.find('.quote_supp_item');
     let pro_index = $(this).data('product');
-    let paper_index = parseInt(item.last().data('index')) + 1;
-    let paper_name = $(this).closest('.section_quote_print_paper').find('input.quote_receive_paper_name_main').val();
-    let pro_qty = $(this).closest('.section_quote_print_paper').find('input.quote_receive_paper_qty_main').val();
-    let url = 'add-print-paper-quote?pro_index='+pro_index+'&paper_index='+paper_index+'&paper_name='+paper_name+'&pro_qty='+pro_qty;
+    let supp_key = $(this).data('key')
+    let supp_index = parseInt(item.last().data('index')) + 1;
+    let supp_name = $(this).closest('.section_quote_print_paper').find('input.quote_receive_paper_name_main').val();
+    let pro_qty = $(this).closest('.section_quote_print_paper').find('input.pro_qty_input ').first().val();
+    let url = 'add-supp-quote?pro_index='+pro_index+'&supp_index='+supp_index+'&supp_key'+supp_key+'&supp_name='+supp_name+'&pro_qty='+pro_qty;
     ajaxViewTarget(url, list_section, list_section, 2);
   });
 }
@@ -262,7 +263,7 @@ $(function(){
   selectCustomerQuote();
   selectPaperMateralModule();
   moduleInputQuantityProduct();
-  addPrintPaperModule();
+  addSuppModule();
   addFillFinishModule();
   removeItemAddedModule();
   setNameProductQuote();

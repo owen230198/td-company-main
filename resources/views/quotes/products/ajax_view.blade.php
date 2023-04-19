@@ -1,5 +1,5 @@
 <ul class="nav nav-pills mb-3 quote_pro_nav_link" id="quote-pro-tab" role="tablist">
-    <label class="mb-0 min_210 mr-3"></label>
+    <label class="mb-0 min_185 mr-3"></label>
     @for($i = 0; $i < $qty; $i++)
     <li class="nav-item">
         <a class="nav-link{{ $i == 0 ? ' active' : '' }}" id="quote-pro-{{ $i }}-tab" data-toggle="pill" href="#quote-pro-{{ $i }}" role="tab" aria-controls="quote-pro-{{ $i }}" aria-selected="true">Sản phẩm {{ $i+1 }}</a>

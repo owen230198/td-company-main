@@ -4,7 +4,7 @@
     $data_select_finish = [
         'other_data' => [
             'config' => ['search' => 1], 
-            'data' => ['table' => 'supply_prices', 'where' => ['type' => \App\Constants\TDConstant::FINISH]]
+            'data' => ['table' => 'supply_prices', 'where' => ['type' => \TDConst::FINISH]]
         ],
         'name' => 'product['.$j.'][fill_finish][finish][stage]['.$findex.'][materal]',
         'type' => 'linking',

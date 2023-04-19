@@ -77,7 +77,7 @@ if (!function_exists('getExactQuantityPaper')) {
 	if (!function_exists('isHardBox')) {
 		function isHardbox($category)
 		{
-			return $category == \App\Constants\TDConstant::HARD_BOX;
+			return $category == \TDConst::HARD_BOX;
 		}
 	}
 }

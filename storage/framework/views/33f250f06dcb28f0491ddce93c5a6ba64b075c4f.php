@@ -1,5 +1,5 @@
 <?php
-    $key_stage = \App\Constants\TDConstant::UV;
+    $key_stage = \TDConst::UV;
     $paper_uv_face = [
         'name' => 'product['.$j.'][paper]['.$pindex.']['.$key_stage.'][face]',
         'type' => 'select',

@@ -1,7 +1,7 @@
 <div class="mb-2 paper_product_config decal_module">
     @php
-        $key_supp = \App\Constants\TDConstant::DECAL;
-        $decal_divide = \App\Constants\TDConstant::DECAL_SIZE_DIVIDE;
+        $key_supp = \TDConst::DECAL;
+        $decal_divide = \TDConst::DECAL_SIZE_DIVIDE;
         $pro_decal_qty = [
             'name' => 'product['.$j.']['.$key_supp.']['.$pindex.'][qty]',
             'note' => 'Số lượng',
@@ -9,7 +9,7 @@
             'attr' => ['type_input' => 'number', 'required' => 1]
         ];
 
-        $arr_option = \App\Constants\TDConstant::SELECT_SUPP_LINK;
+        $arr_option = \TDConst::SELECT_SUPP_LINK;
         array_push($arr_option, 'Khác');
         $pro_decal_nqty = [
             'name' => 'product['.$j.']['.$key_supp.']['.$pindex.'][nqty]',
@@ -22,7 +22,7 @@
             'name' => 'product['.$j.']['.$key_supp.']['.$pindex.'][supp_qty]',
             'note' => 'Tổng SL vật tư',
             'type' => 'select',
-            'other_data' => ['data' => ['options' => \App\Constants\TDConstant::SELECT_SUPP_LINK]]
+            'other_data' => ['data' => ['options' => \TDConst::SELECT_SUPP_LINK]]
         ];
         $pro_decal_length_supp = [
             'name' => 'product['.$j.']['.$key_supp.']['.$pindex.'][size][length]',
@@ -42,7 +42,7 @@
             'other_data' => ['config' => ['search' => 1], 
             'data' => ['table' => 'supply_prices', 'where' => ['type' => $key_supp]]]
         ];
-        $key_device_cut = \App\Constants\TDConstant::CUT;
+        $key_device_cut = \TDConst::CUT;
     @endphp
     
     @include('quotes.products.supplies.title_config', ['divide' => $decal_divide, 'name' => 'đề can nhung'])

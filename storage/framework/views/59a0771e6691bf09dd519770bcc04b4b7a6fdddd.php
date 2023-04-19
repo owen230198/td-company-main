@@ -1,10 +1,10 @@
 <div class="mb-2 paper_product_config">
     <?php
-        $key_supp = \App\Constants\TDConstant::MICA;
-        $mica_divide = \App\Constants\TDConstant::MICA_SIZE_DIVIDE;
+        $key_supp = \TDConst::MICA;
+        $mica_divide = \TDConst::MICA_SIZE_DIVIDE;
         $mica_compen_percent = 0;
-        $mica_compen_num = \App\Constants\TDConstant::CARTON_COMPEN_NUM;
-        $mica_plus = \App\Constants\TDConstant::MICA_SIZE_PLUS; 
+        $mica_compen_num = \TDConst::CARTON_COMPEN_NUM;
+        $mica_plus = \TDConst::MICA_SIZE_PLUS; 
         $pro_mica_supply = [
             'name' => 'product['.$j.']['.$key_supp.']['.$pindex.'][supply_price]',
             'type' => 'linking',
@@ -13,9 +13,9 @@
             'other_data' => ['config' => ['search' => 1], 
             'data' => ['table' => 'supply_prices', 'where' => ['type' => $key_supp]]]
         ];
-        $key_device_elevate = \App\Constants\TDConstant::ELEVATE;
-        $key_device_peel = \App\Constants\TDConstant::PEEL;
-        $key_device_cut = \App\Constants\TDConstant::CUT;
+        $key_device_elevate = \TDConst::ELEVATE;
+        $key_device_peel = \TDConst::PEEL;
+        $key_device_cut = \TDConst::CUT;
     ?>
     <?php echo $__env->make('quotes.products.supplies.title_config', ['divide' => $mica_divide, 'name' => 'mica'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     

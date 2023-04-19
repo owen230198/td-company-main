@@ -2,7 +2,7 @@
     <span>Phần kích thước sản phẩm</span>
 </h3>
 <div class="form-group d-flex mb-2">
-    <label class="mb-0 min_210 fs-13 text-capitalize justify-content-end mr-3 d-flex align-items-center">
+    <label class="mb-0 min_185 fs-13 text-capitalize justify-content-end mr-3 d-flex align-items-center">
         Nhập kích thước hộp
     </label>
     <div class="d-flex align-items-center">
@@ -43,14 +43,14 @@
         'attr' => ['inject_class' => 'struture_pro_input'],
         'note' => 'KT hông nắp + đáy',
         'type' => 'select',
-        'other_data' => ['data' => ['options' => \App\Constants\TDConstant::PRO_SIZE_SIDE]],
+        'other_data' => ['data' => ['options' => \TDConst::PRO_SIZE_SIDE]],
         'value' => @$pro_size['lid_bottom_type'] 
     ]
 @endphp
 @include('view_update.view', $quote_size_pro_side)
 
 <div class="form-group d-flex mb-2">
-    <label class="mb-0 min_210 fs-13 text-capitalize justify-content-end mr-3 d-flex align-items-center">
+    <label class="mb-0 min_185 fs-13 text-capitalize justify-content-end mr-3 d-flex align-items-center">
        KT tai cài hộp
     </label>
     <div class="d-flex align-items-center">
@@ -80,7 +80,7 @@
 @include('view_update.view', $quote_size_edge)
 
 <div class="form-group d-flex mb-2">
-    <label class="mb-0 min_210 fs-13 text-capitalize justify-content-end mr-3 d-flex align-items-center">
+    <label class="mb-0 min_185 fs-13 text-capitalize justify-content-end mr-3 d-flex align-items-center">
        Số bát chiều dài
     </label>
     <div class="d-flex align-items-center">
@@ -100,7 +100,7 @@
 </div>
 
 <div class="form-group d-flex mb-2">
-    <label class="mb-0 min_210 fs-13 text-capitalize justify-content-end mr-3 d-flex align-items-center">
+    <label class="mb-0 min_185 fs-13 text-capitalize justify-content-end mr-3 d-flex align-items-center">
        Số bát chiều cao
     </label>
     <div class="d-flex align-items-center">
@@ -153,7 +153,7 @@
 @include('view_update.view', $quote_size_min)
 
 <div class="form-group d-flex mb-2">
-    <label class="mb-0 min_210 fs-13 text-capitalize justify-content-end mr-3 d-flex align-items-center">
+    <label class="mb-0 min_185 fs-13 text-capitalize justify-content-end mr-3 d-flex align-items-center">
        Khổ giấy tạm tính
     </label>
     <div class="d-flex align-items-center">

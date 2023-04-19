@@ -11,7 +11,7 @@
  Target Server Version : 100425
  File Encoding         : 65001
 
- Date: 19/04/2023 06:13:48
+ Date: 19/04/2023 19:42:41
 */
 
 SET NAMES utf8mb4;
@@ -13663,8 +13663,8 @@ CREATE TABLE `papers`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `product_qty` bigint(20) NULL DEFAULT NULL,
-  `nqty` bigint(20) NULL DEFAULT NULL,
-  `paper_qty` bigint(20) NULL DEFAULT NULL,
+  `nqty` int(10) NULL DEFAULT NULL,
+  `supp_qty` bigint(20) NULL DEFAULT NULL,
   `size` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   `print` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   `nilon` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
@@ -13687,16 +13687,7 @@ CREATE TABLE `papers`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `quote_indx`(`product`) USING BTREE,
   INDEX `main_index`(`main`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of papers
--- ----------------------------
-INSERT INTO `papers` VALUES (1, NULL, 1000, 1, 1000, '{\"materal\":\"2\",\"qttv\":\"200\",\"length\":\"35\",\"width\":\"52\",\"act\":1,\"total\":4040400}', '{\"type\":\"1\",\"color\":\"4\",\"machine\":\"1\",\"act\":1,\"total\":623600}', '{\"materal\":\"8\",\"face\":\"1\",\"machine\":\"8\",\"act\":1,\"total\":509550}', '{\"ext_price\":\"200\",\"machine\":\"4\",\"float\":{\"price\":\"100\",\"shape_price\":\"100\"},\"act\":1,\"total\":201200}', '{\"machine\":\"5\",\"nqty\":\"4\",\"act\":1,\"total\":30100}', '{\"machine\":\"13\",\"act\":1,\"total\":171200}', '{\"materal\":\"1\",\"face\":\"1\",\"cover_materal\":\"3\",\"cover_face\":\"2\",\"machine\":\"15\",\"act\":1,\"total\":1046400}', '{\"price\":\"1000\",\"shape_price\":\"2000\",\"machine\":\"2\",\"act\":1,\"total\":1012000}', NULL, '{\"face\":\"1\",\"materal\":\"10\",\"machine\":\"10\",\"act\":1,\"total\":1165550}', '{\"temp_price\":\"200\",\"prescript_price\":\"100\",\"supp_price\":\"200\",\"act\":1,\"total\":500000}', '9300000', 1, NULL, 1, 1, '2023-04-18 19:44:00', '2023-04-18 19:44:00', 1);
-INSERT INTO `papers` VALUES (2, NULL, 1000, 2, 500, '{\"materal\":\"2\",\"qttv\":\"300\",\"length\":\"25\",\"width\":\"35\",\"act\":1,\"total\":1588125}', '{\"type\":\"2\",\"color\":\"2\",\"machine\":\"2\",\"act\":1,\"total\":28000}', '{\"materal\":\"9\",\"face\":\"1\",\"machine\":\"8\",\"act\":1,\"total\":173725}', '{\"ext_price\":\"200\",\"machine\":\"4\",\"float\":{\"price\":\"300\",\"shape_price\":\"500\"},\"act\":1,\"total\":150700}', '{\"machine\":\"5\",\"nqty\":\"6\",\"act\":1,\"total\":30100}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', NULL, '{\"face\":\"1\",\"materal\":\"10\",\"machine\":\"3\",\"act\":1,\"total\":664468.75}', '{\"act\":0}', '2635118.75', 1, NULL, 0, 1, '2023-04-18 19:44:00', '2023-04-18 19:44:00', 1);
-INSERT INTO `papers` VALUES (3, NULL, 2000, 2, 1000, '{\"materal\":\"0\",\"qttv\":\"500\",\"length\":\"25\",\"width\":\"54\",\"unit_price\":\"300\",\"act\":1,\"total\":22477500}', '{\"act\":0}', '{\"materal\":\"8\",\"face\":\"2\",\"machine\":\"1\",\"act\":1,\"total\":731750}', '{\"ext_price\":\"3000\",\"machine\":\"4\",\"act\":1,\"total\":204000}', '{\"machine\":\"5\",\"nqty\":\"2\",\"act\":1,\"total\":40200}', NULL, '{\"materal\":\"2\",\"face\":\"2\",\"cover_materal\":\"5\",\"cover_face\":\"2\",\"machine\":\"16\",\"act\":1,\"total\":1925200}', '{\"act\":0}', '{\"act\":0}', '{\"face\":\"1\",\"materal\":\"10\",\"machine\":\"3\",\"act\":1,\"total\":1298875}', '{\"act\":0}', '26677525', 2, NULL, 1, 1, '2023-04-18 19:44:00', '2023-04-18 19:44:00', 1);
-INSERT INTO `papers` VALUES (4, NULL, 3000, 1, 3000, '{\"materal\":\"1\",\"qttv\":\"300\",\"length\":\"51\",\"width\":\"25\",\"act\":1,\"total\":11972250}', '{\"type\":\"1\",\"color\":\"4\",\"machine\":\"1\",\"act\":1,\"total\":1004200}', '{\"materal\":\"9\",\"face\":\"1\",\"machine\":\"8\",\"act\":1,\"total\":1131710}', '{\"ext_price\":\"1000\",\"machine\":\"4\",\"float\":{\"price\":\"200\",\"shape_price\":\"500\"},\"act\":1,\"total\":404000}', '{\"machine\":\"12\",\"nqty\":\"1000\",\"act\":1,\"total\":50300}', '{\"machine\":\"13\",\"act\":1,\"total\":413600}', '{\"act\":0}', '{\"price\":\"200\",\"shape_price\":\"2000\",\"machine\":\"0\",\"act\":1,\"total\":608000}', NULL, '{\"face\":\"1\",\"materal\":\"10\",\"machine\":\"10\",\"act\":1,\"total\":2883812.5}', '{\"act\":0}', '18467872.5', 3, NULL, 1, 1, '2023-04-18 19:44:00', '2023-04-18 19:44:00', 1);
-INSERT INTO `papers` VALUES (5, NULL, 5000, 3, 1667, '{\"materal\":\"0\",\"qttv\":\"500\",\"length\":\"25\",\"width\":\"30\",\"unit_price\":\"1000\",\"act\":1,\"total\":66900000}', '{\"type\":\"3\",\"color\":\"6\",\"machine\":\"1\",\"act\":1,\"total\":405920}', '{\"materal\":\"9\",\"face\":\"1\",\"machine\":\"8\",\"act\":1,\"total\":403640}', '{\"ext_price\":\"2000\",\"machine\":\"4\",\"act\":1,\"total\":270400}', '{\"machine\":\"5\",\"nqty\":\"5\",\"act\":1,\"total\":70500}', NULL, '{\"materal\":\"1\",\"face\":\"1\",\"cover_materal\":\"3\",\"cover_face\":\"2\",\"machine\":\"15\",\"act\":1,\"total\":742750}', '{\"price\":\"200\",\"shape_price\":\"500\",\"machine\":\"0\",\"act\":1,\"total\":1011500}', '{\"price\":\"100\",\"shape_price\":\"2000\",\"machine\":\"0\",\"act\":1,\"total\":511000}', '{\"face\":\"2\",\"materal\":\"10\",\"machine\":\"10\",\"act\":1,\"total\":2752300}', '{\"act\":0}', '73068010', 4, NULL, 1, 1, '2023-04-18 19:44:00', '2023-04-18 19:44:00', 1);
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for print_techs
@@ -13799,15 +13790,7 @@ CREATE TABLE `products`  (
   `updated_at` datetime(0) NULL DEFAULT NULL,
   `created_by` int(10) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of products
--- ----------------------------
-INSERT INTO `products` VALUES (1, 'Hop giay 1', 2, NULL, 1, NULL, 1, '11935118.75', NULL, 1, '2023-04-18 19:44:00', '2023-04-18 19:44:47', 1);
-INSERT INTO `products` VALUES (2, 'Hop cung 1', 1, NULL, 2, NULL, 1, '44080125', NULL, 1, '2023-04-18 19:44:00', '2023-04-18 19:44:47', 1);
-INSERT INTO `products` VALUES (3, 'Hop giay 2', 2, NULL, 1, NULL, 1, '18467872.5', NULL, 1, '2023-04-18 19:44:00', '2023-04-18 19:44:48', 1);
-INSERT INTO `products` VALUES (4, 'Hop cung 2', 1, NULL, 2, NULL, 1, '108565010', NULL, 1, '2023-04-18 19:44:00', '2023-04-18 19:44:48', 1);
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for quote_configs
@@ -13902,7 +13885,7 @@ CREATE TABLE `supplies`  (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `product_qty` bigint(20) NULL DEFAULT NULL,
-  `nqty` bigint(20) NULL DEFAULT NULL,
+  `nqty` int(10) NULL DEFAULT NULL,
   `supp_qty` bigint(20) NULL DEFAULT NULL,
   `size` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   `cut` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,

@@ -1,6 +1,6 @@
 <div class="d-flex align-items-center">
     <?php
-        $key_stage = \App\Constants\TDConstant::COMPRESS;
+        $key_stage = \TDConst::COMPRESS;
         $paper_compress_price = [
             'name' => 'product['.$j.'][paper]['.$pindex.']['.$key_stage.'][price]',
             'note' => 'Giá tiền 1 sản phẩm',

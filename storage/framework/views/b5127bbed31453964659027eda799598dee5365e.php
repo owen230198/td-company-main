@@ -1,10 +1,10 @@
 <div class="mb-2 paper_product_config">
     <?php
-        $key_supp = \App\Constants\TDConstant::SILK;
-        $silk_compen_percent = \App\Constants\TDConstant::CARTON_COMPEN_PERCENT;;
-        $silk_compen_num = \App\Constants\TDConstant::CARTON_COMPEN_NUM;
-        $silk_divide = \App\Constants\TDConstant::SILK_SIZE_DIVIDE;
-        $silk_plus = \App\Constants\TDConstant::SILK_SIZE_PLUS; 
+        $key_supp = \TDConst::SILK;
+        $silk_compen_percent = \TDConst::CARTON_COMPEN_PERCENT;;
+        $silk_compen_num = \TDConst::CARTON_COMPEN_NUM;
+        $silk_divide = \TDConst::SILK_SIZE_DIVIDE;
+        $silk_plus = \TDConst::SILK_SIZE_PLUS; 
         $pro_silk_supply = [
             'name' => 'product['.$j.']['.$key_supp.']['.$pindex.'][supply_price]',
             'type' => 'linking',
@@ -18,7 +18,7 @@
             'attr' => ['type_input' => 'number'],
             'value' => 0
         ];
-        $key_device_cut = \App\Constants\TDConstant::CUT;
+        $key_device_cut = \TDConst::CUT;
     ?>
     <?php echo $__env->make('quotes.products.supplies.title_config', ['divide' => $silk_divide, 'name' => 'vải lụa'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     

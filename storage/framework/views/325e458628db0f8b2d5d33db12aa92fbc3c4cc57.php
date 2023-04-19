@@ -28,7 +28,7 @@
             <button type="submit" class="main_button color_white bg_green border_green radius_5 font_bold smooth">
               <i class="fa fa-check mr-2 fs-14" aria-hidden="true"></i>Hoàn tất
             </button>
-            <a href="" class="main_button color_white bg_green radius_5 font_bold smooth mx-3">
+            <a href="<?php echo e(url('')); ?>" class="main_button color_white bg_green radius_5 font_bold smooth mx-3">
                 <i class="fa fa-angle-double-left mr-2 fs-14" aria-hidden="true"></i>Chọn khách hàng khác
             </a>
             <a href="<?php echo e(url('')); ?>" class="main_button bg_red color_white radius_5 font_bold smooth red_btn">

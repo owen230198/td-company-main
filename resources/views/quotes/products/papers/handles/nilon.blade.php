@@ -1,5 +1,5 @@
 @php
-    $key_stage = \App\Constants\TDConstant::NILON;
+    $key_stage = \TDConst::NILON;
     $paper_nilon_materal = [
         'name' => 'product['.$j.'][paper]['.$pindex.']['.$key_stage.'][materal]',
         'type' => 'linking',

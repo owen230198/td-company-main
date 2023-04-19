@@ -9,7 +9,7 @@
         @foreach ($listCheckbox as $key => $title)
             <div class="col-3 mb-3">
                 <div class="checkbox_item d-flex align-content-center p-2 radius_5 border_main">
-                    <label class="mb-0 mr-3 min_210 fs-13 text-capitalize">{{ $title }}</label>
+                    <label class="mb-0 mr-3 min_185 fs-13 text-capitalize">{{ $title }}</label>
                     @include('view_update.json_checkbox_item', 
                     ['name'=>$name.'['.$key.']', 'value'=>@$value[$key]])
                 </div>

@@ -38,7 +38,7 @@
                                 <h2 class="fs-14 font_bold text-capitalize mb-0 d-flex align-items-center"><i class="fa fa-qrcode fs-18 mr-2" aria-hidden="true"></i><?php echo e(@$title); ?></h2>
                             </div>
                         <?php endif; ?>
-                        <div class="p-3">
+                        <div class="px-3 pb-3">
                             <?php echo $__env->yieldContent('content'); ?>
                         </div>
                     </div>

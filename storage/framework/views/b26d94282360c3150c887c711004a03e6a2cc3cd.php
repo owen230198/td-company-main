@@ -1,5 +1,5 @@
 <?php
-    $key_stage = \App\Constants\TDConstant::PEEL;
+    $key_stage = \TDConst::PEEL;
     $paper_nqty_peel = [
         'name' => 'product['.$j.'][paper]['.$pindex.']['.$key_stage.'][nqty]',
         'note' => 'Số bát lề',
@@ -12,7 +12,7 @@
 ['key_device' => $key_stage, 'value' =>  getDeviceId(['key_device' => $key_stage, 'supply' => 'paper', 'default_device' => 1])], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
 <?php
-    $key_stage = \App\Constants\TDConstant::EXT_PRICE;
+    $key_stage = \TDConst::EXT_PRICE;
     
 ?>
 <div class="d-flex align-items-center">

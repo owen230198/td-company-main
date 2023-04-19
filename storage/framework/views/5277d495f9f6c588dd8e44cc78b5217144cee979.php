@@ -1,5 +1,5 @@
 <?php
-    $key_stage = \App\Constants\TDConstant::BOX_PASTE;
+    $key_stage = \TDConst::BOX_PASTE;
     $paper_box_device = [
         'name' => 'product['.$j.'][paper]['.$pindex.']['.$key_stage.'][machine]',
         'type' => 'linking',

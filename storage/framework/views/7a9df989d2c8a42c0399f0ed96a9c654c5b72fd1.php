@@ -1,6 +1,6 @@
 <?php
-    $key_stage = \App\Constants\TDConstant::FLOAT;
-    $elevate_key = \App\Constants\TDConstant::ELEVATE;
+    $key_stage = \TDConst::FLOAT;
+    $elevate_key = \TDConst::ELEVATE;
     $float_base_name = @$category == 1 ? '['.$key_stage.']' : '['.$elevate_key.']['.$key_stage.']';
     $paper_float_price = [
         'name' => 'product['.$j.'][paper]['.$pindex.']'.$float_base_name.'[price]',

@@ -73,6 +73,7 @@ ul.supply_info li.supply_item_inf:last-child{
 
 .quote_table_stage{
     overflow: auto;
+    max-height: calc(100vh - 350px);
 }
 
 .quote_total_cost{
@@ -80,5 +81,11 @@ ul.supply_info li.supply_item_inf:last-child{
     background: #ebebeb;
     text-align: center;
     position: sticky;
-    top: 55px;
+    bottom: 45px;
+}
+
+.quote_table_stage .table thead{
+    position: sticky;
+    top: -1px;
+    background: #f1f4f9;
 }

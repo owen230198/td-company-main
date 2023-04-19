@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-between">
     <div class="d-block">
         @php
-            $key_stage = \App\Constants\TDConstant::EXT_PRICE;
+            $key_stage = \TDConst::EXT_PRICE;
             $paper_ext_temp = [
                 'name' => 'product['.$j.'][paper]['.$pindex.']['.$key_stage.'][temp_price]',
                 'note' => '1. Chi phí tem',

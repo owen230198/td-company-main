@@ -49,7 +49,7 @@ trait QSupplyTrait{
       foreach ($stage as $key => $item) {
          $qttv_id = @$item['materal'] ? (int) $item['materal'] : 0;
          $qttv = getDetailDataByID('SupplyPrice', $qttv_id);
-         $qttv_price = @$qttv['price']?$qttv['price']:0; 
+         $qttv_price = !empty($qttv['price']) ? (float) $qttv['price'] : 0; 
          $length = !empty($item['size']['length']) ? $item['size']['length'] : 0;
          $width = !empty($item['size']['width']) ? $item['size']['width'] : 0;
          convertCmToMeter($length, $width); 
@@ -96,7 +96,7 @@ trait QSupplyTrait{
       }
 
       if (!empty($data['finish'])) {
-         $data_action['Finish'] = $this->configDataFinish($data['finish']);
+         $data_action['finish'] = $this->configDataFinish($data['finish']);
       }
 
       if (!empty($data['magnet'])) {

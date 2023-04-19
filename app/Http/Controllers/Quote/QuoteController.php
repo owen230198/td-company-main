@@ -77,13 +77,14 @@ class QuoteController extends Controller
         return view('quotes.products.ajax_view', ['qty' => $quantity]);
     }
 
-    public function addPrintPaperQuote(Request $request)
+    public function addSupplyQuote(Request $request)
     {
-        $pro_index = (int) $request->input('pro_index');
-        $paper_index = (int) $request->input('paper_index');
-        $paper_name = $request->input('paper_name');
-        $pro_qty = $request->input('pro_qty');
-        return view('quotes.products.papers.ajax_view', ['j' => $pro_index, 'pindex' => $paper_index, 'paper_name' => $paper_name, 'pro_qty' => $pro_qty]);
+        $data['pro_index'] = (int) $request->input('pro_index');
+        $data['supp_index'] = (int) $request->input('supp_index');
+        $data['supp_name'] = $request->input('supply_name');
+        $data['pro_qty'] = $request->input('pro_qty');
+        $view_key = $request->input('supp_key');
+        return view('quotes.products.'.$view_key.'.ajax_view', $data);
     }
 
     public function addFillFinishQuote(Request $request)

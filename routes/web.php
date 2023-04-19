@@ -43,7 +43,7 @@ Route::middleware(['check_login'])->group(function () {
 	Route::any('create-quote', [QuoteController::class, 'createQuote']);
 	Route::get('get-view-customer-data', [QuoteController::class, 'getViewCustomerData']);
 	Route::get('get-view-product-quantity', [QuoteController::class, 'getViewProductQuantity']);
-	Route::get('add-print-paper-quote', [QuoteController::class, 'addPrintPaperQuote']);
+	Route::get('add-supply-quote', [QuoteController::class, 'addSupplyQuote']);
 	Route::get('add-fill-finish-quote', [QuoteController::class, 'addFillFinishQuote']);
 	Route::get('compute-paper-size', [QuoteController::class, 'computePaperSize']);
 	Route::get('get-view-product-structure', [QuoteController::class, 'getViewProductStructure']);

@@ -1,5 +1,5 @@
 <?php
-    $key_stage = \App\Constants\TDConstant::ELEVATE;
+    $key_stage = \TDConst::ELEVATE;
     $paper_elevate_ext_price = [
             'name' => 'product['.$j.'][paper]['.$pindex.']['.$key_stage.'][ext_price]',
             'note' => 'Thêm giá cho khuôn phức tạp',

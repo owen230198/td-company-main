@@ -38,7 +38,7 @@
                                 <h2 class="fs-14 font_bold text-capitalize mb-0 d-flex align-items-center"><i class="fa fa-qrcode fs-18 mr-2" aria-hidden="true"></i>{{ @$title }}</h2>
                             </div>
                         @endif
-                        <div class="p-3">
+                        <div class="px-3 pb-3">
                             @yield('content')
                         </div>
                     </div>

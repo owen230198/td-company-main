@@ -4,10 +4,6 @@
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
     <div class="position-relative">
-        <?php echo $__env->make('quotes.head_information', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-        <div class="quote_total_cost">
-            <h3 class="font_bold fs-18 color_red mb-0">TỔNG GIÁ : <?php echo e(number_format((int) @$data_quote['total_amount'])); ?> Vnđ</h3>
-        </div>
         <div class="quote_table_stage mb-4">
             <table class="table table-bordered mb-1">
                 <thead>
@@ -25,7 +21,7 @@
                             <td class="w_50"><?php echo e($key + 1); ?></td>
                             <td><?php echo e($product['name']); ?></td>
                             <?php
-                                $supply_product = isHardbox($product['category']) ? $supply_fields : \App\Constants\TDConstant::PAPER_ELEMENT;
+                                $supply_product = isHardbox($product['category']) ? $supply_fields : \TDConst::PAPER_ELEMENT;
                             ?>
                             <?php $__currentLoopData = $supply_product; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $supply): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <td>
@@ -38,7 +34,7 @@
                                         if (!empty($supply['device'])) {
                                             $supply['device']['size'] = 'vật tư';
                                         }else{
-                                            $supply['device'] = \App\Constants\TDConstant::FILL_FINISH_STAGE;   
+                                            $supply['device'] = \TDConst::FILL_FINISH_STAGE;   
                                         }
                                     ?>
                                     <ul class="list_supplies">
@@ -106,6 +102,9 @@
                 </a>
             </div> 
         </form>
+        <div class="quote_total_cost">
+            <h3 class="font_bold fs-18 color_red mb-0">BỘ SẢN PHẨM BAO GỒ COMBO <?php echo e(count($products)); ?> SẢN PHẨM - TỔNG GIÁ : <?php echo e(number_format((int) @$data_quote['total_amount'])); ?> đ</h3>
+        </div>
     </div>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('script'); ?>

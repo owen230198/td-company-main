@@ -1,6 +1,6 @@
 <div class="supply_size_module{{ $pindex == 0 ? ' '.$supp_key.'_module_size' : '' }}">
     <div class="d-flex align-items-center mb-2 fs-13 supp_size_param_module" data-plus={{ $plus_size }}>
-        <label class="mb-0 min_210 text-capitalize text-right mr-3">
+        <label class="mb-0 min_185 text-capitalize text-right mr-3">
             <span class="fs-15 mr-1">*</span>Kích thước chiều 1
         </label>
         <div class="d-flex justify-content-between align-items-center">
@@ -22,7 +22,7 @@
     </div>
     
     <div class="d-flex align-items-center mb-2 fs-13 supp_size_param_module" data-plus={{ $plus_size }}>
-        <label class="mb-0 min_210 text-capitalize text-right mr-3">
+        <label class="mb-0 min_185 text-capitalize text-right mr-3">
             <span class="fs-15 mr-1">*</span>Kích thước chiều 2
         </label>
         <div class="d-flex justify-content-between align-items-center">
