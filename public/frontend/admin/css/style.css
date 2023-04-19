@@ -582,8 +582,8 @@ a.device_supp_item {
     page-break-after: always;
 }
 
-.min_185{
-    min-width: 185px;
+.min_210{
+    min-width: 210px;
 }
 
 @media (max-width: 1400px) {

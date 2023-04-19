@@ -53,22 +53,27 @@ class QuoteService extends BaseService
         $data['optimal_width'] = $temp_height / 1000;
     }
 
-    private function productValidate($data, $key){
+    private function productValidate($data_product){
         $valid = true;
         $arr = returnMessageAjax(200, 'Cập nhật dữ liệu thành công !');
-        $num = $key + 1;
-        if (empty($data['name'])) {
-            $valid = false;
-            $arr = returnMessageAjax(110, 'Bạn chưa nhập tên cho sản phẩm '. $num);
-        }else{
-            if (empty($data['category'])) {
+        foreach ($data_product as $key => $data) {
+            $num = $key + 1;
+            if (empty($data['name'])) {
                 $valid = false;
-                $arr = returnMessageAjax(110, 'Bạn chưa chọn nhóm sản phẩm cho '. $data['name']);
-            }
-    
-            if (empty($data['design'])) {
-                $valid = false;
-                $arr = returnMessageAjax(110, 'Bạn chưa chọn mẫu thiết kế cho '. $data['name']);
+                $arr = returnMessageAjax(110, 'Bạn chưa nhập tên cho sản phẩm '. $num);
+                return ['valid' => $valid, 'arr' => $arr];
+            }else{
+                if (empty($data['category'])) {
+                    $valid = false;
+                    $arr = returnMessageAjax(110, 'Bạn chưa chọn nhóm sản phẩm cho '. $data['name']);
+                    return ['valid' => $valid, 'arr' => $arr];
+                }
+        
+                if (empty($data['design'])) {
+                    $valid = false;
+                    $arr = returnMessageAjax(110, 'Bạn chưa chọn mẫu thiết kế cho '. $data['name']);
+                    return ['valid' => $valid, 'arr' => $arr];
+                }
             }
         }
         return ['valid' => $valid, 'arr' => $arr];
@@ -78,6 +83,7 @@ class QuoteService extends BaseService
         $data_action['name'] = $data['name'];
         $data_action['category'] = $data['category'];
         $data_action['design'] = $data['design'];
+        $data_action['size'] = $data['size'];
         $data_action['quote_id'] = $data['quote_id'];
         $this->configBaseDataAction($data_action);
         return $data_action;
@@ -93,25 +99,23 @@ class QuoteService extends BaseService
     {
         $data_product = $data['product'];
         $quote_update['total_cost'] = 0;
+        $product_valid = $this->productValidate($data_product);
+        if (@$product_valid['valid'] == false) {
+           return $product_valid['arr'];
+        }
         foreach ($data_product as $key => $product) {
-            $product_valid = ['valid' => true];
-            if (@$product_valid['valid'] == false) {
-               return $product_valid['arr'];
-               break;
-            }else{
-                $product['quote_id'] = $data['id'];
-                $product_id = $this->insertProduct($product);
-                $elements = TDConstant::HARD_ELEMENT;
-                $product_update['total_cost'] = 0;
-                foreach ($elements as $el) {
-                    if (!empty($product[$el['pro_field']])) {
-                        $model = getModelByTable($el['table']);
-                        $supply_cost = $model->processData($product_id, $product, $el['pro_field']);
-                        $product_update['total_cost'] += $supply_cost;
-                    }
+            $product['quote_id'] = $data['id'];
+            $product_id = $this->insertProduct($product);
+            $elements = TDConstant::HARD_ELEMENT;
+            $product_update['total_cost'] = 0;
+            foreach ($elements as $el) {
+                if (!empty($product[$el['pro_field']])) {
+                    $model = getModelByTable($el['table']);
+                    $supply_cost = $model->processData($product_id, $product, $el['pro_field']);
+                    $product_update['total_cost'] += $supply_cost;
                 }
-                $update = Product::where(['id' => $product_id])->update($product_update);    
             }
+            $update = Product::where(['id' => $product_id])->update($product_update);
             $quote_update['total_cost'] += $product_update['total_cost'];
         }
         $quote_update['total_amount'] = calValuePercentPlus($quote_update['total_cost'], $arr_quote['profit'], $arr_quote['ship_price']);

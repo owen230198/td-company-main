@@ -23,36 +23,49 @@ trait QuoteTrait
         static::$base_qty_pro = !empty($data['qty']) ? (int) $data['qty'] : 0;
         static::$qty_pro = ceil(calValuePercentPlus(self::$base_qty_pro, self::$base_qty_pro, self::$plus_compen_perc)); 
         static::$nqty = !empty($data['nqty']) ? (int) $data['nqty'] : 1;
+        static::$base_supp_qty = !empty($data['supp_qty']) ? (int) $data['supp_qty'] : 0;
         $length = !empty($data['size']['length']) ? $data['size']['length'] : 0;
         $width = !empty($data['size']['width']) ? $data['size']['width'] : 0;
         convertCmToMeter($length, $width);
         static::$length = $length;
         static::$width = $width;
     }
-    private function configDataSupplySize($paper)
+    private function configDataSupplySize($supply)
     {
-        $qttv_id = @$paper['quantative'] ? (int)$paper['quantative'] : 0;
         $qttv = getDetailDataByID('SupplyPrice', $qttv_id);
         $qttv_price = @$qttv['price'] ? $qttv['price'] : 0;
         //Công thức tính chi phí khổ giấy vật tư hộp cứng: Dài x Rộng x ĐG định lượng x SL vật tư
         $total = self::$length * self::$width * $qttv_price * self::$supp_qty;
-        return $this->getObjectConfig($paper, $total);
+        $supply['qttv_price'] = $qttv_price;
+        $supply['supp_qty'] = self::$supp_qty;
+        return $this->getObjectConfig($supply, $total);
     }
 
     private function configDataElevate($model_price, $work_price, $shape_price, $elevate)
     {
         $ext_price = !empty($elevate['ext_price']) ? (float) $elevate['ext_price'] : 0;
-        $cost = $this->getBaseTotalStage(self::$qty_paper, $model_price, $work_price, $shape_price);
-        $float_cost = !empty($elevate['float']) ? $this->configDataCompressFloat($elevate, true) : 0;
+        $cost = $this->getBaseTotalStage(self::$supp_qty, $model_price, $work_price, $shape_price);
+        $float_cost = !empty($elevate['float']) ? $this->configDataCompressFloat($elevate['float'], true) : 0;
+        if ($float_cost > 0) {
+            $elevate['float']['qty_pro'] = self::$qty_pro;
+            $elevate['float']['nqty'] = self::$nqty;
+            $elevate['float']['float_cost'] = $float_cost;
+        }
+        $elevate['supp_qty'] = self::$supp_qty;
+        $elevate['cost'] = $cost;
         $total = $cost + $float_cost + $ext_price;
         return $this->getObjectConfig($elevate, $total);
     }
 
-    private function configDataByOnlyDevice($model_price, $work_price, $shape_price, $peel)
+    private function configDataByOnlyDevice($model_price, $work_price, $shape_price, $data)
     {
         $nqty = !empty($data['nqty']) ? (int) $data['nqty'] : 1;
+        $data['qty_pro'] = self::$qty_pro;
+        if ($nqty > 1) {
+            $data['nqty'] = $nqty;
+        }
         $total = $this->getBaseTotalStage(self::$qty_pro, $model_price, $work_price, $shape_price, 0, $nqty);
-        return $this->getObjectConfig($peel, $total);
+        return $this->getObjectConfig($data, $total);
     }
 
     private function getObjectConfig($data, $total)
@@ -89,6 +102,9 @@ trait QuoteTrait
         $work_price = !empty($device['work_price']) ? (float) $device['work_price'] : 0;
         $shape_price = !empty($device['shape_price']) ? (float) $device['shape_price'] : 0;
         $key_device = !empty($device['key_device']) ? $device['key_device'] : '';
+        $data['model_price'] = $model_price;
+        $data['work_price'] = $work_price;
+        $data['shape_price'] = $shape_price;
         if (empty($key_device)) {
             return $this->createNonActiveObj();    
         }

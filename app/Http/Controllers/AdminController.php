@@ -290,5 +290,16 @@ class AdminController extends Controller
         return json_encode($arr);
     }
 
+    public function getListOptionAjax(Request $request, $table)
+    {
+        $options = '<option value = "0">Không xác định</option>';
+        $where = $request->all();
+        $where['act'] = 1;
+        $data = \DB::table($table)->where($where)->orderBy('name', 'asc')->get();
+        foreach ($data as $item) {
+            $options .= '<option value = "'.@$item->id.'">'.@$item->name.'</option>';
+        }
+        echo $options;
+    }
 }
 

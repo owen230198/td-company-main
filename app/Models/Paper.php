@@ -25,7 +25,7 @@ class Paper extends Model
             $data_insert['name'] = $paper['name'];
             $data_insert['product_qty'] = $paper['qty'];
             $data_insert['nqty'] = $paper['nqty'];
-            $data_insert['paper_qty'] = $paper['paper_qty'];
+            $data_insert['supp_qty'] = $paper['supp_qty'];
             $data_insert['product'] = $product_id;
             $data_insert['main'] = !empty($paper['main']) ? $paper['main'] : 0;
             (new BaseService)->configBaseDataAction($data_insert);

@@ -81,9 +81,9 @@ class QuoteController extends Controller
     {
         $data['pro_index'] = (int) $request->input('pro_index');
         $data['supp_index'] = (int) $request->input('supp_index');
-        $data['supp_name'] = $request->input('supply_name');
+        $data['supp_name'] = $request->input('supp_name');
         $data['pro_qty'] = $request->input('pro_qty');
-        $view_key = $request->input('supp_key');
+        $view_key = $request->input('supp_view');
         return view('quotes.products.'.$view_key.'.ajax_view', $data);
     }
 
@@ -92,7 +92,7 @@ class QuoteController extends Controller
         $pro_index = (int) $request->input('pro_index');
         $findex = (int) $request->input('ff_index');
         $view = $request->input('view');
-        return view('quotes.products.fill_finishes.'.$view, ['j' => $pro_index, 'findex' => $findex]);   
+        return view('quotes.products.fill_finishes.'.$view, ['pro_index' => $pro_index, 'findex' => $findex]);   
     }
 
     public function computePaperSize(Request $request)
@@ -112,13 +112,13 @@ class QuoteController extends Controller
         $cate = $request->input('category');
         if (!empty($cate)) {
             $data['elements'] = $cate == 1 ? TDConstant::HARD_ELEMENT : TDConstant::PAPER_ELEMENT;
-            $data['j'] = (int) $request->input('proindex');
-            $data['pindex'] = 0;
+            $data['pro_index'] = (int) $request->input('proindex');
+            $data['supp_index'] = 0;
             $data['findex'] = 0;
-            $data['paper_name'] = $request->input('paper_name');
+            $data['supp_name'] = $request->input('paper_name');
             $data['pro_qty'] = (int) $request->input('pro_qty');
             $data['cate'] = $cate;
-            if (empty($data['paper_name'])) {
+            if (empty($data['supp_name'])) {
                 return ['code' => 100, 'message' => 'Bạn chưa nhập tên sản phẩm!'];
             }
             if (empty($data['pro_qty'])) {

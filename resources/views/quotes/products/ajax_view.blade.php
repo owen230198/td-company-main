@@ -1,5 +1,5 @@
 <ul class="nav nav-pills mb-3 quote_pro_nav_link" id="quote-pro-tab" role="tablist">
-    <label class="mb-0 min_185 mr-3"></label>
+    <label class="mb-0 min_210 mr-3"></label>
     @for($i = 0; $i < $qty; $i++)
     <li class="nav-item">
         <a class="nav-link{{ $i == 0 ? ' active' : '' }}" id="quote-pro-{{ $i }}-tab" data-toggle="pill" href="#quote-pro-{{ $i }}" role="tab" aria-controls="quote-pro-{{ $i }}" aria-selected="true">Sản phẩm {{ $i+1 }}</a>
@@ -8,13 +8,13 @@
 </ul>
 
 <div class="tab-content" id="quote-pro-tabContent">
-    @for($j = 0; $j < $qty; $j++)
-        <div class="tab-pane fade{{ $j == 0 ? ' show active' : '' }} tab_pane_quote_pro" id="quote-pro-{{ $j }}" role="tabpanel" aria-labelledby="quote-pro-{{ $j }}-tab">
+    @for($pro_index = 0; $pro_index < $qty; $pro_index++)
+        <div class="tab-pane fade{{ $pro_index == 0 ? ' show active' : '' }} tab_pane_quote_pro" id="quote-pro-{{ $pro_index }}" role="tabpanel" aria-labelledby="quote-pro-{{ $pro_index }}-tab">
             <div class="config_handle_paper_pro">
                 <div class="mb-2 base_product_config">
                     @php
                         $pro_name_field = [
-                            'name' => 'product['.$j.'][name]',
+                            'name' => 'product['.$pro_index.'][name]',
                             'note' => 'Tên sản phẩm',
                             'attr' => ['required' => 1, 'inject_class' => 'quote_set_product_name']
                         ] 
@@ -23,7 +23,7 @@
 
                     @php
                     $pro_name_field = [
-                        'name' => 'product['.$j.'][qty]',
+                        'name' => 'product['.$pro_index.'][qty]',
                         'note' => 'SL sản phẩm',
                         'attr' => ['type_input' => 'number', 'required' => 1, 'inject_class' => 'input_pro_qty'],
                     ] 
@@ -32,10 +32,10 @@
                     
                     @php
                         $pro_category_field = [
-                            'name' => 'product['.$j.'][category]',
+                            'name' => 'product['.$pro_index.'][category]',
                             'type' => 'linking',
                             'note' => 'Nhóm sản phẩm',
-                            'attr' => ['required' => 1 , 'inject_class' => 'select_quote_procategory', 'inject_attr' => 'proindex='.$j],
+                            'attr' => ['required' => 1 , 'inject_class' => 'select_quote_procategory', 'inject_attr' => 'proindex='.$pro_index],
                             'other_data' => ['data' => ['table' => 'product_categories']]
                         ] 
                     @endphp
@@ -44,7 +44,7 @@
                     <div class="quote_product_design_config">
                         @php
                             $quote_pro_design = [
-                                'name' => 'product['.$j.'][design]',
+                                'name' => 'product['.$pro_index.'][design]',
                                 'note' => 'thiết kế',
                                 'type' => 'linking',
                                 'other_data' => ['data' => ['table' => 'design_types', 'select' => ['id', 'name']]]
@@ -55,7 +55,7 @@
 
                     @php
                         $pro_size_field = [
-                            'name' => 'product['.$j.'][size]',
+                            'name' => 'product['.$pro_index.'][size]',
                             'note' => 'Kích thước hộp',
                             'attr' => ['placeholder' => 'D x R x C']
                         ]

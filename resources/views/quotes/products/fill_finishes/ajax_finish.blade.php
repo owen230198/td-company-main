@@ -6,7 +6,7 @@
             'config' => ['search' => 1], 
             'data' => ['table' => 'supply_prices', 'where' => ['type' => \TDConst::FINISH]]
         ],
-        'name' => 'product['.$j.'][fill_finish][finish][stage]['.$findex.'][materal]',
+        'name' => 'product['.$pro_index.'][fill_finish][finish][stage]['.$findex.'][materal]',
         'type' => 'linking',
         'note' => $note
     ]

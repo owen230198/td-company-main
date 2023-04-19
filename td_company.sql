@@ -11,7 +11,7 @@
  Target Server Version : 100425
  File Encoding         : 65001
 
- Date: 19/04/2023 19:42:41
+ Date: 20/04/2023 06:27:00
 */
 
 SET NAMES utf8mb4;
@@ -13874,7 +13874,7 @@ CREATE TABLE `quotes`  (
 -- Records of quotes
 -- ----------------------------
 INSERT INTO `quotes` VALUES (1, 'BG-000001', 'not_accepted', 'Công ty WS', NULL, 1, 'Công ty WS', 'Nguyễn Duy Khánh', '360 Mieng Ha, Hoa Sơn, Ung Hoa, TP Ha Noi', 'nguyenduykhanh2323@gmail.com', '0378050251', '0223344556', 351, NULL, NULL, '183048126.25', '183048126.25', NULL, 1, '2023-04-19 02:44:48', '2023-04-18 19:44:48', 0);
-INSERT INTO `quotes` VALUES (2, 'BG-000002', 'not_accepted', 'Cong Ty Test', NULL, 2, 'Cong Ty Test', 'Nguyen Van A', 'Ho Chi Minh', 'congtytest@gmail.com', '0987654321', '0123456789', 1, NULL, NULL, NULL, NULL, NULL, 1, '2023-03-20 14:31:30', '2023-03-20 14:31:30', 0);
+INSERT INTO `quotes` VALUES (2, 'BG-000002', 'not_accepted', 'Cong Ty Test', NULL, 2, 'Cong Ty Test', 'Nguyen Van A', 'Ho Chi Minh', 'congtytest@gmail.com', '0987654321', '0123456789', 1, NULL, NULL, '0', '0', NULL, 1, '2023-04-19 22:51:26', '2023-04-19 15:51:26', 0);
 INSERT INTO `quotes` VALUES (3, 'BG-000003', 'not_accepted', 'Cong Ty Test', NULL, 2, 'Cong Ty Test', 'Nguyen Van A', 'Ho Chi Minh', 'congtytest@gmail.com', '0987654321', '0123456789', 1, NULL, NULL, NULL, NULL, NULL, 1, '2023-03-20 14:31:30', '2023-03-20 14:31:30', 1);
 
 -- ----------------------------

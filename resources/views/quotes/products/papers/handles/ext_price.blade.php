@@ -3,7 +3,7 @@
         @php
             $key_stage = \TDConst::EXT_PRICE;
             $paper_ext_temp = [
-                'name' => 'product['.$j.'][paper]['.$pindex.']['.$key_stage.'][temp_price]',
+                'name' => 'product['.$pro_index.'][paper]['.$supp_index.']['.$key_stage.'][temp_price]',
                 'note' => '1. Chi phí tem',
                 'attr' => ['type_input' => 'number'],
                 'value' => 0
@@ -13,7 +13,7 @@
     
         @php
             $paper_ext_prescript = [
-                'name' => 'product['.$j.'][paper]['.$pindex.']['.$key_stage.'][prescript_price]',
+                'name' => 'product['.$pro_index.'][paper]['.$supp_index.']['.$key_stage.'][prescript_price]',
                 'note' => '2. Chi phí toa',
                 'attr' => ['type_input' => 'number'],
                 'value' => 0
@@ -23,7 +23,7 @@
     
         @php
             $paper_ext_supp = [
-                'name' => 'product['.$j.'][paper]['.$pindex.']['.$key_stage.'][supp_price]',
+                'name' => 'product['.$pro_index.'][paper]['.$supp_index.']['.$key_stage.'][supp_price]',
                 'note' => '3. Chi phí vật tư khác',
                 'attr' => ['type_input' => 'number'],
                 'value' => 0

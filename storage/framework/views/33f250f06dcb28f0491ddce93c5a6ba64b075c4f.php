@@ -1,7 +1,7 @@
 <?php
     $key_stage = \TDConst::UV;
     $paper_uv_face = [
-        'name' => 'product['.$j.'][paper]['.$pindex.']['.$key_stage.'][face]',
+        'name' => 'product['.$pro_index.'][paper]['.$supp_index.']['.$key_stage.'][face]',
         'type' => 'select',
         'note' => 'Số mặt',
         'other_data' => ['data' => ['options' => ['Chọn số mặt', 1, 2]]]
@@ -11,7 +11,7 @@
 
 <?php
     $paper_uv_materal = [
-        'name' => 'product['.$j.'][paper]['.$pindex.']['.$key_stage.'][materal]',
+        'name' => 'product['.$pro_index.'][paper]['.$supp_index.']['.$key_stage.'][materal]',
         'type' => 'linking',
         'note' => 'mực in',
         'other_data' => ['data' => ['table' => 'materals', 'where' => ['materal_key' => $key_stage], 'select' => ['id', 'name']]]

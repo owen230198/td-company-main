@@ -20,7 +20,7 @@
 		        @endphp
 			        @if ($field['region']==$c_region['id'])
 				        <div class="form-group d-flex mb-4 pb-4 border_bot_eb">
-				          <label class="mb-0 mr-3 min_185 fs-13 text-capitalize">{{ $field['note'] }}</label>
+				          <label class="mb-0 mr-3 min_210 fs-13 text-capitalize">{{ $field['note'] }}</label>
 				          @include('view_update.'.$field['view_type'].'',['config'=>1, 'config_id'=>$field['id'], 'config_value'=>$field['value']])
 				        </div>
 			        @endif

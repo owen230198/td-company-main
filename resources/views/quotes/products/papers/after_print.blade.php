@@ -8,20 +8,20 @@
 @endphp
     <div class="quote_after_print_tab">
         <div class="d-flex">
-            <div class="nav flex-column nav-pills  min_185 max_150 mr-3 bg_white" id="after-print-tab-pro{{ $j.'_'.$pindex }}" role="tablist" aria-orientation="vertical">
+            <div class="nav flex-column nav-pills  min_210 max_150 mr-3 bg_white" id="after-print-tab-pro{{ $pro_index.'_'.$supp_index }}" role="tablist" aria-orientation="vertical">
                 @foreach ($handle_stage as $navkey => $nav)
                     <a class="nav-link text-right {{ $navkey == 0 ? $nav['color'].'_stage active' : $nav['color'].'_stage' }}" 
-                    id="v-{{ $nav['key'].'_'.$j.'_'.$pindex }}-tab" 
-                    data-toggle="pill" href="#v-{{ $nav['key'].'_'.$j.'_'.$pindex }}" role="tab" 
-                    aria-controls="v-{{ $nav['key'].'_'.$j.'_'.$pindex }}" aria-selected="true">
+                    id="v-{{ $nav['key'].'_'.$pro_index.'_'.$supp_index }}-tab" 
+                    data-toggle="pill" href="#v-{{ $nav['key'].'_'.$pro_index.'_'.$supp_index }}" role="tab" 
+                    aria-controls="v-{{ $nav['key'].'_'.$pro_index.'_'.$supp_index }}" aria-selected="true">
                         {{ $nav['note'] }}
                     </a>    
                 @endforeach
             </div>
-            <div class="tab-content p-3 w-100 bg_eb radius_5" id="after-print-tab-pro{{ $j.'_'.$pindex }}Content">
+            <div class="tab-content p-3 w-100 bg_eb radius_5" id="after-print-tab-pro{{ $pro_index.'_'.$supp_index }}Content">
                 @foreach ($handle_stage as $tabkey => $tab)
-                    <div class="tab-pane fade show{{ $tabkey == 0 ? ' active' : '' }}" id="v-{{ $tab['key'].'_'.$j.'_'.$pindex }}" 
-                    role="tabpanel" aria-labelledby="v-{{ $tab['key'].'_'.$j.'_'.$pindex }}-tab">
+                    <div class="tab-pane fade show{{ $tabkey == 0 ? ' active' : '' }}" id="v-{{ $tab['key'].'_'.$pro_index.'_'.$supp_index }}" 
+                    role="tabpanel" aria-labelledby="v-{{ $tab['key'].'_'.$pro_index.'_'.$supp_index }}-tab">
                         @include('quotes.products.papers.handles.'.$tab['key'])
                     </div>
                 @endforeach

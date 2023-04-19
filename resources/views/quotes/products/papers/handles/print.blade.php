@@ -1,7 +1,7 @@
 @php
     $key_stage = \TDConst::PRINT;
     $paper_print_type = [
-        'name' => 'product['.$j.'][paper]['.$pindex.']['.$key_stage.'][type]',
+        'name' => 'product['.$pro_index.'][paper]['.$supp_index.']['.$key_stage.'][type]',
         'type' => 'select',
         'note' => 'kiểu in',
         'value' => \TDConst::ONE_PRINT_TYPE,
@@ -12,7 +12,7 @@
 
 @php
     $paper_print_color = [
-        'name' => 'product['.$j.'][paper]['.$pindex.']['.$key_stage.'][color]',
+        'name' => 'product['.$pro_index.'][paper]['.$supp_index.']['.$key_stage.'][color]',
         'type' => 'select',
         'note' => 'số màu in',
         'value' => 4,
@@ -23,7 +23,7 @@
 
 @php
     $paper_print_tech = [
-        'name' => 'product['.$j.'][paper]['.$pindex.']['.$key_stage.'][machine]',
+        'name' => 'product['.$pro_index.'][paper]['.$supp_index.']['.$key_stage.'][machine]',
         'type' => 'select',
         'note' => 'công nghệ in',
         'value' => \TDConst::OFFSET_PRINT_TECH,

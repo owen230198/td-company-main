@@ -1,7 +1,7 @@
 @php
     $key_stage = \TDConst::NILON;
     $paper_nilon_materal = [
-        'name' => 'product['.$j.'][paper]['.$pindex.']['.$key_stage.'][materal]',
+        'name' => 'product['.$pro_index.'][paper]['.$supp_index.']['.$key_stage.'][materal]',
         'type' => 'linking',
         'note' => 'chất liệu',
         'value' => getDefaultMateralIDByKey($key_stage),
@@ -12,7 +12,7 @@
 
 @php
     $paper_nilon_face = [
-        'name' => 'product['.$j.'][paper]['.$pindex.']['.$key_stage.'][face]',
+        'name' => 'product['.$pro_index.'][paper]['.$supp_index.']['.$key_stage.'][face]',
         'type' => 'select',
         'note' => 'Số mặt',
         'value' => 1,

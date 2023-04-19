@@ -260,7 +260,7 @@ var selectAjaxModule = function(section = $('.base_content '))
                         },
                     },
                 });
-                if ($(this).data('id') !== 'undefind' && $(this).data('label') !== 'undefind') {
+                if ($(this).data('id') !== '' && $(this).data('label') !== '') {
                     var newOption = new Option($(this).data('label'), $(this).data('id'), true, true);
                     $(this).append(newOption).trigger('change');
                 }

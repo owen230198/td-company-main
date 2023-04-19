@@ -38,6 +38,7 @@ Route::middleware(['check_login'])->group(function () {
 	Route::get('get-data-json-customer', [AdminController::class, 'getDataJsonCustomer']);
 	Route::get('get-data-json-linking', [AdminController::class, 'getDataJsonLinking']);
 	Route::any('config-device-price/{step}', [AdminController::class, 'configDevicePrice']);
+	Route::get('get-list-option-ajax/{table}', [AdminController::class, 'getListOptionAjax']);
 
 	//quotes routes
 	Route::any('create-quote', [QuoteController::class, 'createQuote']);

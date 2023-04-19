@@ -8,7 +8,7 @@
     <?php $__currentLoopData = $field_infomation; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $customer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
         <?php if(!empty($data_quote[$customer['name']])): ?>
             <div class="d-flex align-items-center mb-2 fs-13">
-                <label class="mb-0 min_185 text-capitalize text-right mr-3"><?php echo e($customer['note']); ?>: </label>
+                <label class="mb-0 min_210 text-capitalize text-right mr-3"><?php echo e($customer['note']); ?>: </label>
                 <p class="font_italic">
                     <?php echo e(@$customer['type'] != 'linking' ? $data_quote[$customer['name']] 
                         : getFieldDataById('name', $customer['other_data']['data']['table'], $data_quote[$customer['name']])); ?>

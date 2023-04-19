@@ -3,7 +3,7 @@
 </h3>
 @php
     $quote_pro_design = [
-        'name' => 'product['.$j.'][design]',
+        'name' => 'product['.$pro_index.'][design]',
         'note' => 'thiết kế',
         'type' => 'linking',
         'other_data' => ['data' => ['table' => 'design_types', 'select' => ['id', 'name']]]

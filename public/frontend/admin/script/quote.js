@@ -129,11 +129,12 @@ var addSuppModule = function()
     let list_section = $(this).closest('.module_quote_supp_config').find('.list_supp_item');
     let item = list_section.find('.quote_supp_item');
     let pro_index = $(this).data('product');
-    let supp_key = $(this).data('key')
+    let supp_view = $(this).data('key');
     let supp_index = parseInt(item.last().data('index')) + 1;
-    let supp_name = $(this).closest('.section_quote_print_paper').find('input.quote_receive_paper_name_main').val();
-    let pro_qty = $(this).closest('.section_quote_print_paper').find('input.pro_qty_input ').first().val();
-    let url = 'add-supp-quote?pro_index='+pro_index+'&supp_index='+supp_index+'&supp_key'+supp_key+'&supp_name='+supp_name+'&pro_qty='+pro_qty;
+    let supp_name = item.first().find('input.quote_receive_paper_name_main').val();
+    console.log(supp_name);
+    let pro_qty = item.first().find('input.pro_qty_input ').first().val();
+    let url = 'add-supply-quote?pro_index='+pro_index+'&supp_index='+supp_index+'&supp_view='+supp_view+'&supp_name='+supp_name+'&pro_qty='+pro_qty;
     ajaxViewTarget(url, list_section, list_section, 2);
   });
 }
@@ -255,6 +256,16 @@ var selectDecalNQty = function()
   })
 }
 
+var moduleSelectSupply = function()
+{
+  $(document).on('change', 'select.select_supply_type', function(event){
+    event.preventDefault();
+    let id = $(this).val();
+    let url = 'get-list-option-ajax/supply_prices?supply_id='+id;
+    let ajax_target = $(this).closest('.module_select_supply_type').find('select.ajax_supply_price');
+    ajaxViewTarget(url, ajax_target, ajax_target);
+  });
+} 
 
 $(function(){
 	changQtyInput();
@@ -271,5 +282,6 @@ $(function(){
   selectProductCategory();
   calcSizeSupply();
   selectDecalNQty();
+  moduleSelectSupply();
   // autoComputePaperAjax();
 });

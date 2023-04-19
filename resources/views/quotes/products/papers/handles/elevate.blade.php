@@ -1,7 +1,7 @@
 @php
     $key_stage = \TDConst::ELEVATE;
     $paper_elevate_ext_price = [
-            'name' => 'product['.$j.'][paper]['.$pindex.']['.$key_stage.'][ext_price]',
+            'name' => 'product['.$pro_index.'][paper]['.$supp_index.']['.$key_stage.'][ext_price]',
             'note' => 'Thêm giá cho khuôn phức tạp',
             'attr' => ['type_input' => 'number'],
             'value' => 0

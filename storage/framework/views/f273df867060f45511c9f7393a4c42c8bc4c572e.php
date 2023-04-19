@@ -1,6 +1,6 @@
 <?php
     $device = [
-        'name' => 'product['.$j.']['.$element.']['.$pindex.']['.$key_device.'][machine]',
+        'name' => 'product['.$pro_index.']['.$element.']['.$supp_index.']['.$key_device.'][machine]',
         'type' => 'linking',
         'note' => $note,
         'value' => @$value ?? 0,

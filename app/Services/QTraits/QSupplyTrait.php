@@ -7,13 +7,13 @@ trait QSupplyTrait{
    private function configDataCut($model_price, $work_price, $shape_price, $elevate)
    {
       $total = $this->getBaseTotalStage(self::$supp_qty, $model_price, $work_price, $shape_price);
+      $data['supp_qty'] = self::$supp_qty;
       return $this->getObjectConfig($elevate, $total);
    }
 
    public function getDataActionSupply($data)
    {
       $this->newObjectSetProperty($data);
-      static::$base_supp_qty = !empty($data['supp_qty']) ? (int) $data['supp_qty'] : 0;
       static::$supp_qty = ceil(calValuePercentPlus(self::$base_supp_qty, self::$base_supp_qty, self::$hard_compen_perc)); 
       
       if (!empty($data['size'])) {
@@ -44,12 +44,14 @@ trait QSupplyTrait{
    private function configDataFill($fill)
    {
       $fill_price = (float) TDConstant::FILL_PRICE;
+      $fill['fill_price'] = $fill_price;
       $fill_cost = 0;
       $stage = !empty($fill['stage']) ? $fill['stage'] : [];
       foreach ($stage as $key => $item) {
          $qttv_id = @$item['materal'] ? (int) $item['materal'] : 0;
          $qttv = getDetailDataByID('SupplyPrice', $qttv_id);
          $qttv_price = !empty($qttv['price']) ? (float) $qttv['price'] : 0; 
+         $fill['stage'][$key]['qttv_price'] = $qttv_price;
          $length = !empty($item['size']['length']) ? $item['size']['length'] : 0;
          $width = !empty($item['size']['width']) ? $item['size']['width'] : 0;
          convertCmToMeter($length, $width); 
@@ -57,6 +59,8 @@ trait QSupplyTrait{
          $fill_cost += $fill['stage'][$key]['cost'];
       }
       $ext_price = @$fill['ext_price'] ? (float) $fill['ext_price'] : 0;
+      $fill['fill_cost'] = $fill_cost;
+      $fill['qty_pro'] = self::$base_qty_pro;
       $total = $fill_cost + ($ext_price *self::$base_qty_pro);
       return $this->getObjectConfig($fill, $total);
    }
@@ -69,11 +73,14 @@ trait QSupplyTrait{
          $qttv_id = @$item['materal'] ? (int) $item['materal'] : 0;
          $qttv = getDetailDataByID('SupplyPrice', $qttv_id);
          $qttv_price = @$qttv['price']?$qttv['price']:0; 
-         $finish['stage'][$key]['cost'] = self::$base_qty_pro * $qttv_price; 
+         $finish['stage'][$key]['qttv_price'] = $qttv_price;
+         $finish['stage'][$key]['cost'] = self::$base_qty_pro * $qttv_price;
          $finish_cost += $finish['stage'][$key]['cost'];
       }
       $ext_price = @$finish['ext_price'] ? (float) $finish['ext_price'] : 0;
       $total = $finish_cost + ($ext_price *self::$base_qty_pro);
+      $finish['qty_pro'] = self::$base_qty_pro;
+      $finish['finish_cost'] = $finish_cost;
       return $this->getObjectConfig($finish, $total);
    }
 
@@ -83,6 +90,8 @@ trait QSupplyTrait{
       $qttv_id = @$magnet['type'] ? (int) $magnet['type'] : 0;
       $qttv = getDetailDataByID('SupplyPrice', $qttv_id);
       $qttv_price = @$qttv['price']?$qttv['price']:0;  
+      $magnet['qttv_price'] = $qttv_price;
+      $magnet['magnet_perc'] = $magnet_perc;
       $qty = @$magnet['qty'] ? (int) $magnet['qty'] : 0; 
       $total = (self::$base_qty_pro * $qttv_price) * (($qty * $magnet_perc) / 100);
       return $this->getObjectConfig($magnet, $total);
