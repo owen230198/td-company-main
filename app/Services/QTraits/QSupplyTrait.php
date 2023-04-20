@@ -48,7 +48,7 @@ trait QSupplyTrait{
       $fill_cost = 0;
       $stage = !empty($fill['stage']) ? $fill['stage'] : [];
       foreach ($stage as $key => $item) {
-         $qttv_id = @$item['materal'] ? (int) $item['materal'] : 0;
+         $qttv_id = !empty($item['materal']) ? $item['materal'] : 0;
          $qttv = getDetailDataByID('SupplyPrice', $qttv_id);
          $qttv_price = !empty($qttv['price']) ? (float) $qttv['price'] : 0; 
          $fill['stage'][$key]['qttv_price'] = $qttv_price;
@@ -58,7 +58,7 @@ trait QSupplyTrait{
          $fill['stage'][$key]['cost'] = ($length * $width * $qttv_price) + $fill_price; 
          $fill_cost += $fill['stage'][$key]['cost'];
       }
-      $ext_price = @$fill['ext_price'] ? (float) $fill['ext_price'] : 0;
+      $ext_price = !empty($fill['ext_price']) ? (float) $fill['ext_price'] : 0;
       $fill['fill_cost'] = $fill_cost;
       $fill['qty_pro'] = self::$base_qty_pro;
       $total = $fill_cost + ($ext_price *self::$base_qty_pro);
@@ -70,14 +70,14 @@ trait QSupplyTrait{
       $stage = !empty($finish['stage']) ? $finish['stage'] : [];
       $finish_cost = 0;
       foreach ($stage as $key => $item) {
-         $qttv_id = @$item['materal'] ? (int) $item['materal'] : 0;
+         $qttv_id = !empty($item['materal']) ? (int) $item['materal'] : 0;
          $qttv = getDetailDataByID('SupplyPrice', $qttv_id);
-         $qttv_price = @$qttv['price']?$qttv['price']:0; 
+         $qttv_price = !empty($qttv['price']) ? (float) $qttv['price'] : 0; 
          $finish['stage'][$key]['qttv_price'] = $qttv_price;
          $finish['stage'][$key]['cost'] = self::$base_qty_pro * $qttv_price;
          $finish_cost += $finish['stage'][$key]['cost'];
       }
-      $ext_price = @$finish['ext_price'] ? (float) $finish['ext_price'] : 0;
+      $ext_price = !empty($finish['ext_price']) ? (float) $finish['ext_price'] : 0;
       $total = $finish_cost + ($ext_price *self::$base_qty_pro);
       $finish['qty_pro'] = self::$base_qty_pro;
       $finish['finish_cost'] = $finish_cost;
@@ -87,12 +87,12 @@ trait QSupplyTrait{
    private function configDataMagnet($magnet)
    {
       $magnet_perc = TDConstant::MAGNET_PERC;
-      $qttv_id = @$magnet['type'] ? (int) $magnet['type'] : 0;
+      $qttv_id = !empty($magnet['type']) ? $magnet['type'] : 0;
       $qttv = getDetailDataByID('SupplyPrice', $qttv_id);
       $qttv_price = @$qttv['price']?$qttv['price']:0;  
       $magnet['qttv_price'] = $qttv_price;
       $magnet['magnet_perc'] = $magnet_perc;
-      $qty = @$magnet['qty'] ? (int) $magnet['qty'] : 0; 
+      $qty = !empty($magnet['qty']) ? $magnet['qty'] : 0; 
       $total = (self::$base_qty_pro * $qttv_price) * (($qty * $magnet_perc) / 100);
       return $this->getObjectConfig($magnet, $total);
    }

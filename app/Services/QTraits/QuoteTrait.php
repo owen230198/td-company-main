@@ -32,8 +32,9 @@ trait QuoteTrait
     }
     private function configDataSupplySize($supply)
     {
+        $qttv_id = !empty($supply['supply_price']) ? $supply['supply_price'] : 0;
         $qttv = getDetailDataByID('SupplyPrice', $qttv_id);
-        $qttv_price = @$qttv['price'] ? $qttv['price'] : 0;
+        $qttv_price = !empty($qttv['price']) ? (float) $qttv['price'] : 0;
         //Công thức tính chi phí khổ giấy vật tư hộp cứng: Dài x Rộng x ĐG định lượng x SL vật tư
         $total = self::$length * self::$width * $qttv_price * self::$supp_qty;
         $supply['qttv_price'] = $qttv_price;

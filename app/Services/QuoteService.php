@@ -81,6 +81,7 @@ class QuoteService extends BaseService
 
     public function getDataActionProduct($data){
         $data_action['name'] = $data['name'];
+        $data_action['qty'] = $data['qty'];
         $data_action['category'] = $data['category'];
         $data_action['design'] = $data['design'];
         $data_action['size'] = $data['size'];
