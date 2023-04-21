@@ -33,38 +33,16 @@
                                         $data_supply = \DB::table($supply['table'])->where($where)->get()->toArray();
                                         if (!empty($supply['device'])) {
                                             $supply['device']['size'] = 'vật tư';
+                                            if ($supply['table'] == 'papers') {
+                                                $supply['device']['print'] = 'máy in';
+                                            }
                                         }else{
                                             $supply['device'] = \TDConst::FILL_FINISH_STAGE;   
                                         }
                                     ?>
                                     <ul class="list_supplies">
                                         <?php $__currentLoopData = $data_supply; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key_supp => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <li class="supply_item">
-                                                <?php if(!empty($supply['device'])): ?>
-                                                    <ul class="supply_info">
-                                                        <li class="supply_item_inf">
-                                                            <span class="font_bold mr-1">Tên vật tư: </span>
-                                                            <span><?php echo e(@$item->name ?? @$supply['note']); ?> <?php echo e($key_supp > 0 ? $key_supp + 1 : ''); ?></span>
-                                                        </li>
-                                                        <?php $__currentLoopData = $supply['device']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $device): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                            <?php
-                                                                $stage = !empty($item->{$key}) ? json_decode($item->{$key}, true) : [];
-                                                                $cost = @$stage['total'] ?? 0;
-                                                            ?>
-                                                            <?php if($cost > 0): ?>
-                                                                <li class="supply_item_inf">
-                                                                    <span class="font_bold mr-1"><?php echo e($device); ?>: </span>
-                                                                    <span><?php echo e(number_format($cost)); ?>đ</span>
-                                                                </li>
-                                                            <?php endif; ?>
-                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                                        <li class="supply_item_inf">
-                                                            <span class="font_bold mr-1">Tổng chi phí: </span>
-                                                            <span class="font_bold color_red"><?php echo e(number_format((int) @$item->total_cost)); ?>đ</span>
-                                                        </li>
-                                                    </ul>
-                                                <?php endif; ?>
-                                            </li>
+                                            <?php echo $__env->make('quotes.profits.item', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </ul> 
                                 </td> 

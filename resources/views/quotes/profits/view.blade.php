@@ -33,38 +33,16 @@
                                         $data_supply = \DB::table($supply['table'])->where($where)->get()->toArray();
                                         if (!empty($supply['device'])) {
                                             $supply['device']['size'] = 'vật tư';
+                                            if ($supply['table'] == 'papers') {
+                                                $supply['device']['print'] = 'máy in';
+                                            }
                                         }else{
                                             $supply['device'] = \TDConst::FILL_FINISH_STAGE;   
                                         }
                                     @endphp
                                     <ul class="list_supplies">
                                         @foreach ($data_supply as $key_supp => $item)
-                                            <li class="supply_item">
-                                                @if (!empty($supply['device']))
-                                                    <ul class="supply_info">
-                                                        <li class="supply_item_inf">
-                                                            <span class="font_bold mr-1">Tên vật tư: </span>
-                                                            <span>{{ @$item->name ?? @$supply['note'] }} {{ $key_supp > 0 ? $key_supp + 1 : '' }}</span>
-                                                        </li>
-                                                        @foreach ($supply['device'] as $key => $device)
-                                                            @php
-                                                                $stage = !empty($item->{$key}) ? json_decode($item->{$key}, true) : [];
-                                                                $cost = @$stage['total'] ?? 0;
-                                                            @endphp
-                                                            @if ($cost > 0)
-                                                                <li class="supply_item_inf">
-                                                                    <span class="font_bold mr-1">{{ $device }}: </span>
-                                                                    <span>{{ number_format($cost) }}đ</span>
-                                                                </li>
-                                                            @endif
-                                                        @endforeach
-                                                        <li class="supply_item_inf">
-                                                            <span class="font_bold mr-1">Tổng chi phí: </span>
-                                                            <span class="font_bold color_red">{{ number_format((int) @$item->total_cost) }}đ</span>
-                                                        </li>
-                                                    </ul>
-                                                @endif
-                                            </li>
+                                            @include('quotes.profits.item')
                                         @endforeach
                                     </ul> 
                                 </td> 

@@ -1,5 +1,5 @@
 <div class="table_base_view position-relative">
-    <table class="table table-bordered mb-2">
+    <table class="table table-bordered mb-2 table_main">
         <theader>
             <tr>
                 <th class="font-bold fs-13 text-center parentth" rowspan="<?php echo e(@$rowspan); ?>">

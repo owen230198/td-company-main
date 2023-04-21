@@ -1,0 +1,31 @@
+<li class="supply_item">
+    @if (!empty($supply['device']))
+        <ul class="supply_info">
+            <li class="supply_item_inf">
+                <span class="font_bold mr-1">Tên vật tư: </span>
+                <span>{{ @$item->name ?? @$supply['note'] }} {{ $key_supp > 0 ? $key_supp + 1 : '' }}</span>
+            </li>
+            @foreach ($supply['device'] as $key => $device)
+                @php
+                    $stage = !empty($item->{$key}) ? json_decode($item->{$key}, true) : [];
+                    $size = !empty($item->size) ? json_decode($item->size, true) : [];
+                    $cost = @$stage['total'] ?? 0;
+                @endphp
+                @if ($cost > 0)
+                    <li class="supply_item_inf cursor_pointer position-relative">
+                        <span class="font_bold mr-1">{{ $device }}: </span>
+                        <span>{{ number_format($cost) }}đ</span>
+                        <div class="detail_quote_supply_item">
+                            <p class="mb-2 fs-15 font_bold color_green text-center text-capitalize">Chi Tiết Chi Phí {{ $device }}</p>
+                            @include('quotes.profits.'.$supply['table'].'/'.$key, ['stage' => $stage, 'size' => $size])
+                        </div>
+                    </li>
+                @endif
+            @endforeach
+            <li class="supply_item_inf">
+                <span class="font_bold mr-1">Chi phí : </span>
+                <span class="font_bold color_red">{{ number_format((int) @$item->total_cost) }}đ</span>
+            </li>
+        </ul>
+    @endif
+</li>
