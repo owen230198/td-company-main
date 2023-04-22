@@ -50,7 +50,8 @@ trait QPaperTrait
         $print['supp_qty'] = $supp_qty;
         $print['model_price'] = $model_price;
         $print['work_price'] = $work_price;
-        $price['shape_price'] = $shape_price;
+        $print['shape_price'] = $shape_price;
+        $print['printer'] = !empty($device['id']) ? $device['id'] : 0;
         return $this->getObjectConfig($print, $total);	
 	}
 
@@ -73,7 +74,7 @@ trait QPaperTrait
         $num_face = !empty($metalai['face']) ? (int) $metalai['face'] : 0;
         $total_metalai = $this->getBaseTotalStage(self::$supp_qty, $model_price, $work_price, $shape_price, $materal_cost, 
         $num_face, self::$plus_paper_device);
-        $uv_nilon['supp_qty'] = self::$supp_qty;
+        $metalai['supp_qty'] = self::$supp_qty + self::$plus_paper_device;
         $metalai['materal_price'] = $materal_cost;
         $metalai['metalai_price'] = $total_metalai;
 

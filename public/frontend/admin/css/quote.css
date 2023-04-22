@@ -88,4 +88,28 @@ ul.supply_info li.supply_item_inf:last-child{
     position: sticky;
     top: -1px;
     background: #f1f4f9;
+    z-index: 1;
+}
+
+.detail_quote_supply_item{
+    position: absolute;
+    top: -5px;
+    left: 100%;
+    min-width: 850px;
+    width: max-content;
+    background: #ebebeb;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px #333333;
+    z-index: 1;
+    transform: translateX(-10px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all .2s;
+}
+
+ul.supply_info li.supply_item_inf:hover>.detail_quote_supply_item{
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
 }

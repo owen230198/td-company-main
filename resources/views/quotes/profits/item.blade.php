@@ -13,12 +13,14 @@
                 @endphp
                 @if ($cost > 0)
                     <li class="supply_item_inf cursor_pointer position-relative">
-                        <span class="font_bold mr-1">{{ $device }}: </span>
-                        <span>{{ number_format($cost) }}đ</span>
+                        <div class="supp_cost_name">
+                            <span class="font_bold mr-1">{{ $device }}: </span>
+                            <span>{{ number_format($cost) }}đ</span>
+                        </div>
                         <div class="detail_quote_supply_item">
                             <p class="mb-2 fs-15 font_bold color_green text-center text-capitalize">Chi Tiết Chi Phí {{ $device }}</p>
                             @include('quotes.profits.'.$supply['table'].'/'.$key, ['stage' => $stage, 'size' => $size])
-                        </div>
+                        </div> 
                     </li>
                 @endif
             @endforeach

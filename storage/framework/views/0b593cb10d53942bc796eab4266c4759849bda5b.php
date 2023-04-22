@@ -13,12 +13,14 @@
                 ?>
                 <?php if($cost > 0): ?>
                     <li class="supply_item_inf cursor_pointer position-relative">
-                        <span class="font_bold mr-1"><?php echo e($device); ?>: </span>
-                        <span><?php echo e(number_format($cost)); ?>đ</span>
+                        <div class="supp_cost_name">
+                            <span class="font_bold mr-1"><?php echo e($device); ?>: </span>
+                            <span><?php echo e(number_format($cost)); ?>đ</span>
+                        </div>
                         <div class="detail_quote_supply_item">
                             <p class="mb-2 fs-15 font_bold color_green text-center text-capitalize">Chi Tiết Chi Phí <?php echo e($device); ?></p>
                             <?php echo $__env->make('quotes.profits.'.$supply['table'].'/'.$key, ['stage' => $stage, 'size' => $size], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                        </div>
+                        </div> 
                     </li>
                 <?php endif; ?>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
