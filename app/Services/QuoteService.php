@@ -17,7 +17,7 @@ class QuoteService extends BaseService
 	}
     use QuoteTrait, QPaperTrait, QSupplyTrait;
 
-    public function insertCustomerQuote($customer_id, $data_customer)
+    public function dataActionCustomer($customer_id, $data_customer)
     {
         $this->configBaseDataAction($data_customer);
         $data_quote = $data_customer;
@@ -29,8 +29,7 @@ class QuoteService extends BaseService
         $data_quote['seri'] = 'BG-'.getCodeInsertTable('quotes');
         $data_quote['customer_id'] = $customer_id;
         $data_quote['company_name'] = $data_customer['name'];
-        $data_quote['status'] = StatusConstant::NOT_ACCEPTED;
-        return Quote::insertGetId($data_quote);
+        return $data_quote;
     }
 
     public function getPaperSizeAjax(&$data){
@@ -124,5 +123,30 @@ class QuoteService extends BaseService
         $code = !empty($update) ? 200 : 100;
         $message = !empty($update) ? 'Cập nhật dữ liệu thành công !' : 'Có lỗi xảy ra, vui lòng thử lại !';
         return returnMessageAjax($code, $message, url('/profit-config-quote?quote_id='.$data['id']));
+    }
+
+    public function getCustomerSelectDataView($id)
+    {
+        $data['data_customer'] = Customer::find($id);
+        $data['fields'] = Customer::FIELD_UPDATE;
+        return $data;
+    }
+
+    public function selectCustomerUpdateQuote($request, $id = 0)
+    {
+        $data_customer = $request->except('_token', 'step', 'customer_id');
+        $customer_id = $request->input('customer_id');
+        $data_quote = $this->dataActionCustomer($customer_id, $data_customer);
+        if (!empty($id)) {
+            Quote::where('id', $id)->update($data_quote);
+        }else{
+            $data_quote['status'] = StatusConstant::NOT_ACCEPTED;
+            $insert_id = Quote::insertGetId($data_quote);
+        }
+        if (!empty($insert_id)) {
+            return redirect(asset('create-quote?step=handle_config&id='.$insert_id))->with('message', 'Thêm dữ liệu khách hàng thành công!');
+        }else{
+            return redirect(asset('update/quotes/'.$id.'?step=handle_config'))->with('message', 'Thêm dữ liệu khách hàng thành công!');
+        }
     }
 }

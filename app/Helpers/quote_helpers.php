@@ -46,7 +46,7 @@ if (!function_exists('getExactQuantityPaper')) {
 					return 'Chọn khách hàng (khách hàng cũ hoặc thêm khách hàng mới)';
 					break;
 				default:
-					return '';
+					return 'Chi tiết sản xuất';
 			};
 		}
 	}

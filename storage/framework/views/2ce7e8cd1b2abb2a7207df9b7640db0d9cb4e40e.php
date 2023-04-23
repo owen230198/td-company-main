@@ -62,10 +62,7 @@
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     <td>
                         <div class="func_btn_module text-center position-relative">
-                            <?php
-                                $func_view = !empty($tableItem['function_view']) ? $tableItem['function_view'] : 'func_btn';
-                            ?>
-                            <?php echo $__env->make('table.'.$func_view, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                            <?php echo $__env->make('table.func_btn', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                         </div>
                     </td>
                 </tr>

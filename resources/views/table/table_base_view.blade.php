@@ -60,10 +60,7 @@
                     @endforeach
                     <td>
                         <div class="func_btn_module text-center position-relative">
-                            @php
-                                $func_view = !empty($tableItem['function_view']) ? $tableItem['function_view'] : 'func_btn';
-                            @endphp
-                            @include('table.'.$func_view)
+                            @include('table.func_btn')
                         </div>
                     </td>
                 </tr>

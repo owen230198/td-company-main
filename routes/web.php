@@ -25,10 +25,10 @@ Route::any('dev/{method}',[DevController::class, 'index']);
 Route::middleware(['check_login'])->group(function () {
 	Route::get('/',[HomeController::class, 'index']);
 	Route::get('view/{table}', [AdminController::class, 'view']);
-	Route::get('insert/{table}', [AdminController::class, 'insert']);
-	Route::get('update/{table}/{id}', [AdminController::class, 'update']);
+	Route::any('insert/{table}', [AdminController::class, 'insert']);
+	Route::any('update/{table}/{id}', [AdminController::class, 'update']);
 	Route::get('search-table/{table}', [AdminController::class, 'searchTable']);
-	Route::get('clone/{table}/{id}', [AdminController::class, 'clone']);
+	Route::any('clone/{table}/{id}', [AdminController::class, 'clone']);
 	Route::post('do-insert/{table}', [AdminController::class, 'doInsert']);
 	Route::post('do-insert/{table}', [AdminController::class, 'doInsert']);
 	Route::post('do-update/{table}/{id}', [AdminController::class, 'doUpdate']);

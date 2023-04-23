@@ -20,6 +20,35 @@ class QuoteController extends Controller
         return redirect('/');
     }
 
+    public function insert($request){
+        return $this->createQuote($request);
+    }
+
+    public function update($request, $id)
+    {
+        $step = $request->input('step') ?? 'chose_customer';
+        $quote = Quote::find($id);
+        if (!empty($quote)) {
+            if($request->isMethod('POST')){
+                if ($step == 'chose_customer') {
+                    return $this->services->selectCustomerUpdateQuote($request, $id);
+                }
+            }else{
+                if ($step == 'chose_customer') {
+                    $data = $this->services->getCustomerSelectDataView($quote['customer_id']);
+                }else{
+                    $data['data_quote'] = $quote;   
+                }
+                $data['title'] = 'Chỉnh sửa báo giá - '.$quote['seri'].' - '.getStepCreateQuote($step);
+                $data['link_update'] = url('update/quotes/'.$id.'?step='.$step);
+                return view('quotes.'.$step, $data);
+            }
+            
+        }else{
+            return redirect(url('/'))->with('error', 'Dữ liệu báo giá không tồn tại !');
+        } 
+    }
+
     public function createQuote(Request $request)
     {
         $step = $request->input('step') ?? 'chose_customer';
@@ -28,14 +57,7 @@ class QuoteController extends Controller
                 $data['title'] = 'Tạo mới báo giá - ' .getStepCreateQuote($step);
                 return view('quotes.'.$step, $data);
             }else{
-                $data_customer = $request->except('_token', 'step', 'customer_id');
-                $customer_id = $request->input('customer_id');
-                $quote_id = $this->services->insertCustomerQuote($customer_id, $data_customer);
-                if ($quote_id) {
-                    return redirect(asset('create-quote?step=handle_config&id='.$quote_id))->with('message', 'Thêm dữ liệu khách hàng thành công!');
-                }else{
-                    return back()->with('error', 'Đã có lỗi xảy ra !');
-                }
+                return $this->services->selectCustomerUpdateQuote($request);
             }
         }else{
             $arr_quote = Quote::find($request->input('id'));
@@ -59,12 +81,11 @@ class QuoteController extends Controller
         }
     }
 
+
     public function getViewCustomerData(Request $request)
     {
         $id = (int) $request->input('id');
-        $data_customer = Customer::find($id);
-        $data['fields'] = Customer::FIELD_UPDATE;
-        $data['data_customer'] = !empty($data_customer) ? $data_customer : [];
+        $data = $this->services->getCustomerSelectDataView($id);
         return view('quotes.customer_info', $data);
     }
 

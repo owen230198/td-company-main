@@ -58,6 +58,12 @@ class AdminService extends BaseService
     public function getTableItem($table)
     {
         $data = \App\Models\NTable::where('name', $table)->first();
+        if (!empty($data)) {
+            $data['insert'] = json_decode($data['insert'], true);
+            $data['update'] = json_decode($data['update'], true);
+            $data['remove'] = json_decode($data['remove'], true);
+            $data['copy'] = json_decode($data['copy'], true);
+        }
         return $data;
     }
 

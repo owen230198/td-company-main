@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 use App\Constants\TDConstant;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Constants\VariableConstant;
-use App\Models\Device;
+use App\Models\NTable;
 class AdminController extends Controller
 {
     static $view_where = array();
@@ -29,15 +28,20 @@ class AdminController extends Controller
         return view('404');
     }
 
-    public function view($table)
+    public function view(Request $request, $table)
     {
+        if (!empty($request->all())) {
+            foreach ($request->all() as $key => $value) {
+                static::$view_where[] = ['key' => $key, 'value' => $value];
+            }
+        }
         $permission = $this->admins->checkPermissionAction($table, 'view');
         if (!@$permission['allow']) {
             return redirect('permission-error');
         }
         $data = $this->admins->getDataBaseView($table, 'Danh sách');
         if(!empty($permission['where'])){
-            static::$view_where = @$permission['where'];
+            static::$view_where[] = @$permission['where'];
         }
         $data['data_tables'] = getDataTable($table, self::$view_where, ['paginate' => $data['page_item']]);
         session()->put('back_url', url()->full());
@@ -56,7 +60,7 @@ class AdminController extends Controller
                 $data = $this->admins->getDataBaseView('devices', 'Danh sách');
                 $data['title'] = 'Đơn giá thiết bị '. $request->input('name');
                 $where = $request->except('name');
-                $data['data_tables'] = Device::where($where)->paginate(10);
+                $data['data_tables'] = \App\Models\Device::where($where)->paginate(10);
                 $data['param_action'] = '?act=1';
                 foreach ($where as $key => $value) {
                     $data['param_action'] .= '&'.$key.'='.$value;
@@ -93,7 +97,7 @@ class AdminController extends Controller
         if (!$this->admins->checkPermissionAction($table, 'insert')) {
             return redirect('permission-error');
         }
-        if (in_array($table, VariableConstant::ACTION_TABLE_SELF)) {
+        if (in_array($table, NTable::$specific['insert'])) {
             $controller = getObjectByTable($table);
             return $controller->insert($request);
         }else{
@@ -107,13 +111,24 @@ class AdminController extends Controller
         if (!$this->admins->checkPermissionAction($table, 'update', $id)) {
             return redirect('permission-error');
         }
-        if (in_array($table, VariableConstant::ACTION_TABLE_SELF)) {
+        if (in_array($table, NTable::$specific['update'])) {
             $controller = getObjectByTable($table);
             return $controller->update($request, $id);
         }else{
-            $data = $this->getDataActionView($table, 'update', 'Chi tiết');
-            $data['dataitem'] = getModelByTable($table)->find($id);
-            return view('action.view', $data);
+            if ($request->isMethod('GET')) {
+                $data = $this->getDataActionView($table, 'update', 'Chi tiết');
+                $data['dataitem'] = getModelByTable($table)->find($id);
+                return view('action.view', $data);
+            }else{
+                $data = $request->all();
+                $success = $this->admins->doUpdateTable($id, $table, $data);
+                if ($success) {
+                    $back_routes = @session()->get('back_url') ?? 'view/'.$table;
+                    return redirect($back_routes)->with('message','Cập nhật dữ liệu thành công !');
+                }else {
+                    return back()->with('error','Đã có lỗi xảy ra !');
+                }
+            }
         }
     }
 
@@ -144,29 +159,6 @@ class AdminController extends Controller
         if (@$insertID) {
             $route = $table=='quotes'?'quote-managements/q_papers/'.$insertID:'view/'.$table;
             return redirect($route)->with('message','Thêm dữ liệu thành công !');
-        }else {
-            return back()->with('error','Đã có lỗi xảy ra !');
-        }
-    }
-
-    public function doUpdate($table, $id, Request $request)
-    {
-        if (!$this->admins->checkPermissionAction($table, 'update', $id)) {
-            return back()->with('error','Không có quyền thực hiện thao tác này !');
-        }
-        $data = $request->all();
-        unset($data['_token']);
-        unset($data['ajax']);
-        $success = $this->admins->doUpdateTable($id, $table, $data);
-        if ($success) {
-            if (@Request('ajax')==1) {
-                echoJson(200, 'Cập nhật dữ liệu thành công !');
-                return;
-            }else{
-                $back_routes = @session()->get('back_url')??'view/'.$table;
-                $routes = $table=='quotes'?'quote-managements/q_papers/'.$id:$back_routes;
-                return redirect($routes)->with('message','Cập nhật dữ liệu thành công !');
-            }
         }else {
             return back()->with('error','Đã có lỗi xảy ra !');
         }
@@ -245,7 +237,7 @@ class AdminController extends Controller
         echo $html;
     }
 
-    public function getDataJsonCustomer(Request $request)
+    public function getDataJsonCustomer(Request $request, $filter = false)
     {
         $status = !empty($request->input('status')) ? $request->input('status') : 1;
         $customers = \DB::table('customers');
@@ -267,13 +259,18 @@ class AdminController extends Controller
         $arr = array_map(function($item){
             return ['id' => @$item->id, 'label' => $item->code.' - '.$item->name];
         }, $data);
-        array_unshift($arr, ['id' => 0, 'label' => 'Khách hàng mới']);
+        if (!$filter) {
+            array_unshift($arr, ['id' => 0, 'label' => 'Khách hàng mới']);
+        }
         return json_encode($arr);
     }
 
     public function getDataJsonLinking(Request $request)
     {
         $table = $request->input('table');
+        if ($table == 'customers') {
+            return $this->getDataJsonCustomer($request, true);
+        }
         $where = $request->except('table', 'q');
         $q = '%'.trim($request->input('q')).'%';
         $data = \DB::table($table)->where($where);
