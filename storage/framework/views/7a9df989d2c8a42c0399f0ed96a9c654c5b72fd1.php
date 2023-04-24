@@ -25,6 +25,6 @@
     <span class="ml-2 fs-12 font-italic color_red">Giá khuôn/bát sp (không phải giá khuôn/tờ in)</span>
 </div>
 
-<?php if($category == 1): ?>
+<?php if(isHardBox(@$cate)): ?>
     <?php echo $__env->make('quotes.products.papers.handles.select_device', ['key_device' => $key_stage], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php endif; ?><?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/quotes/products/papers/handles/float.blade.php ENDPATH**/ ?>

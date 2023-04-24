@@ -37,7 +37,19 @@ class QuoteController extends Controller
                 if ($step == 'chose_customer') {
                     $data = $this->services->getCustomerSelectDataView($quote['customer_id']);
                 }else{
-                    $data['data_quote'] = $quote;   
+                    $data['data_quote'] = $quote;
+                    $data['products'] = Product::where(['act' => 1, 'quote_id' => $id])->get();
+                    $data['product_qty'] = count($data['products']);  
+                    $data['products']->map(function($product){
+                        $supply = isHardBox($product['category']) ? TDConstant::HARD_ELEMENT : TDConstant::PAPER_ELEMENT;
+                        foreach ($supply as $item) {
+                            $where = ['act' => 1, 'product' => $product['id']];
+                            if ($item['table'] == 'cartons') {
+                                $where['type'] = $item['pro_field'];
+                            }
+                            $product[$item['pro_field']] = \DB::table($item['table'])->where($where)->get()->toArray();
+                        }
+                    });
                 }
                 $data['title'] = 'Chỉnh sửa báo giá - '.$quote['seri'].' - '.getStepCreateQuote($step);
                 $data['link_update'] = url('update/quotes/'.$id.'?step='.$step);
@@ -95,6 +107,11 @@ class QuoteController extends Controller
         if (empty($quantity) || $quantity > 10) {
             return ['code' => 100, 'message' => 'Số lượng sản phẩm không hợp lệ!'];
         }
+        $data['products'] = [];
+        for ($i=0; $i < $quantity ; $i++) {
+            $num = $i + 1; 
+            $data['products'][$i] = ['name' => 'Sản phẩm '.$num];
+        }
         return view('quotes.products.ajax_view', ['qty' => $quantity]);
     }
 
@@ -132,7 +149,6 @@ class QuoteController extends Controller
     {
         $cate = $request->input('category');
         if (!empty($cate)) {
-            $data['elements'] = $cate == 1 ? TDConstant::HARD_ELEMENT : TDConstant::PAPER_ELEMENT;
             $data['pro_index'] = (int) $request->input('proindex');
             $data['supp_index'] = 0;
             $data['findex'] = 0;

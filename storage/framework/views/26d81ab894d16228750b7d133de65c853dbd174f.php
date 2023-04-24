@@ -40,7 +40,7 @@
 <div class="module_fill_quote pb-2 mb-2 border_bot_eb section_quote_fill_finish">
     <div class="d-flex align-items-end list_item_fill_finish">
         <div class="ajax_fill_quote ajax_ff_quote">
-            <?php echo $__env->make('quotes.products.fill_finishes.ajax_fill', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+            <?php echo $__env->make('quotes.products.fill_finishes.ajax_fill', ['findex' => 0], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         </div>
         <button type="button" data-product="<?php echo e($pro_index); ?>" data-view="ajax_fill"
         class="main_button color_white bg_green border_green radius_5 font_bold sooth quote_add_fill_item ml-5 mb-2 add_fill_finish_quote_button">
@@ -56,7 +56,7 @@
 <div class="module_finish_quote pb-2 mb-2 border_bot_eb section_quote_fill_finish">
     <div class="d-flex align-items-end list_item_fill_finish">
         <div class="ajax_fill_quote ajax_ff_quote">
-            <?php echo $__env->make('quotes.products.fill_finishes.ajax_finish', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+            <?php echo $__env->make('quotes.products.fill_finishes.ajax_finish', ['findex' => 0], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         </div>
         <button type="button" data-product="<?php echo e($pro_index); ?>" data-view="ajax_finish" 
         class="main_button color_white bg_green border_green radius_5 font_bold sooth quote_add_finish_item ml-5 mb-2 add_fill_finish_quote_button">

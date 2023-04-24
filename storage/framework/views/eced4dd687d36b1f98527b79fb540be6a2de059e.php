@@ -1,14 +1,18 @@
 <ul class="nav nav-pills mb-3 quote_pro_nav_link" id="quote-pro-tab" role="tablist">
     <label class="mb-0 min_210 mr-3"></label>
-    <?php for($i = 0; $i < $qty; $i++): ?>
-    <li class="nav-item">
-        <a class="nav-link<?php echo e($i == 0 ? ' active' : ''); ?>" id="quote-pro-<?php echo e($i); ?>-tab" data-toggle="pill" href="#quote-pro-<?php echo e($i); ?>" role="tab" aria-controls="quote-pro-<?php echo e($i); ?>" aria-selected="true">Sản phẩm <?php echo e($i+1); ?></a>
-    </li>
-    <?php endfor; ?>
+    <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i => $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <li class="nav-item">
+            <a class="nav-link<?php echo e($i == 0 ? ' active' : ''); ?>" id="quote-pro-<?php echo e($i); ?>-tab" data-toggle="pill" href="#quote-pro-<?php echo e($i); ?>" 
+            role="tab" aria-controls="quote-pro-<?php echo e($i); ?>" aria-selected="true">
+                <?php echo e(@$product['name']); ?>
+
+            </a>
+        </li>
+    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 </ul>
 
 <div class="tab-content" id="quote-pro-tabContent">
-    <?php for($pro_index = 0; $pro_index < $qty; $pro_index++): ?>
+    <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $pro_index => $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
         <div class="tab-pane fade<?php echo e($pro_index == 0 ? ' show active' : ''); ?> tab_pane_quote_pro" id="quote-pro-<?php echo e($pro_index); ?>" role="tabpanel" aria-labelledby="quote-pro-<?php echo e($pro_index); ?>-tab">
             <div class="config_handle_paper_pro">
                 <div class="mb-2 base_product_config">
@@ -16,7 +20,8 @@
                         $pro_name_field = [
                             'name' => 'product['.$pro_index.'][name]',
                             'note' => 'Tên sản phẩm',
-                            'attr' => ['required' => 1, 'inject_class' => 'quote_set_product_name']
+                            'attr' => ['required' => 1, 'inject_class' => 'quote_set_product_name'],
+                            'value' => @$product['name']
                         ] 
                     ?>
                     <?php echo $__env->make('view_update.view', $pro_name_field, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
@@ -26,6 +31,7 @@
                         'name' => 'product['.$pro_index.'][qty]',
                         'note' => 'SL sản phẩm',
                         'attr' => ['type_input' => 'number', 'required' => 1, 'inject_class' => 'input_pro_qty'],
+                        'value' => @$product['qty']
                     ] 
                 ?>
                 <?php echo $__env->make('view_update.view', $pro_name_field, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
@@ -36,7 +42,8 @@
                             'type' => 'linking',
                             'note' => 'Nhóm sản phẩm',
                             'attr' => ['required' => 1 , 'inject_class' => 'select_quote_procategory', 'inject_attr' => 'proindex='.$pro_index],
-                            'other_data' => ['data' => ['table' => 'product_categories']]
+                            'other_data' => ['data' => ['table' => 'product_categories']],
+                            'value' => @$product['category']
                         ] 
                     ?>
                     <?php echo $__env->make('view_update.view', $pro_category_field, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
@@ -47,7 +54,8 @@
                                 'name' => 'product['.$pro_index.'][design]',
                                 'note' => 'thiết kế',
                                 'type' => 'linking',
-                                'other_data' => ['data' => ['table' => 'design_types', 'select' => ['id', 'name']]]
+                                'other_data' => ['data' => ['table' => 'design_types', 'select' => ['id', 'name']]],
+                                'value' => @$product['design']
                             ]
                         ?>
                         <?php echo $__env->make('view_update.view', $quote_pro_design, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
@@ -57,15 +65,18 @@
                         $pro_size_field = [
                             'name' => 'product['.$pro_index.'][size]',
                             'note' => 'Kích thước hộp',
-                            'attr' => ['placeholder' => 'D x R x C']
+                            'attr' => ['placeholder' => 'D x R x C'],
+                            'value' => @$product['size']
                         ]
                     ?>
                     <?php echo $__env->make('view_update.view', $pro_size_field, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                 </div>
                 <div class="ajax_product_view_by_category mt-4">
-                   
+                    <?php if(!empty($product['category'])): ?>
+                        <?php echo $__env->make('quotes.products.structure', ['cate' => $product['category']], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
-    <?php endfor; ?>
+    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 </div><?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/quotes/products/ajax_view.blade.php ENDPATH**/ ?>

@@ -108,6 +108,13 @@ if (!function_exists('getOptionDataField')) {
         $where = !empty($param['where']) ? $param['where'] : [];
         $where['act'] = 1;
         $select = @$param['select'] ?? '*';
-        return \DB::table($param['table'])->select($select)->where($where)->get()->all();
+        $object = \DB::table($param['table'])->select($select)->where($where)->get();
+        if (!empty($param['ext_option'])) {
+            $ext = collect($param['ext_option'])->map(function($option){
+                return (object) $option;
+            });
+            $object = $object->merge($ext);
+        }
+        return $object;
     }
 }

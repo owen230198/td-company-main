@@ -1,3 +1,6 @@
+@php
+    $elements = isHardBox($cate) ? \TDConst::HARD_ELEMENT : \TDConst::PAPER_ELEMENT;
+@endphp
 @if (count($elements) > 1)
     <ul class="nav nav-pills mb-3 quote_pro_strct_nav_link" id="quote-pro-{{ $pro_index }}-struct-tab" role="tablist">
         @foreach ($elements as $key => $element)
@@ -16,5 +19,5 @@
         @endforeach
     </div>
 @else
-    @include('quotes.products.papers.view', ['pindex' => 0])
+    @include('quotes.products.supplies.view', ['supp_view' => 'papers', 'data_supply' => @$product['paper']])
 @endif

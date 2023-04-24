@@ -281,9 +281,6 @@ class AdminController extends Controller
         $arr = array_map(function($item){
             return ['id' => @$item->id, 'label' => !empty($item->code) ? $item->code.' - '.$item->name : $item->name];
         }, $data);
-        if ($table == 'paper_materals') {
-            array_push($arr, ['id' => 0, 'label' => 'Giấy khác']);
-        }
         return json_encode($arr);
     }
 

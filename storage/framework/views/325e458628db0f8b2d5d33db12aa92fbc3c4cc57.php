@@ -4,8 +4,8 @@
     <link rel="stylesheet" href="<?php echo e(asset('frontend/base/css/bootstrap-multiselect.min.css')); ?>">
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
-    <form action="<?php echo e(asset('create-quote?step=handle_config&id='.$data_quote['id'])); ?>" method="POST" class="config_handle_form config_content baseAjaxForm" 
-    enctype="multipart/form-data" onkeydown="return event.key != 'Enter'">
+    <form action="<?php echo e(!empty($link_update) ? $link_update : asset('create-quote?step=handle_config&id='.$data_quote['id'])); ?>" method="POST" 
+    class="config_handle_form config_content baseAjaxForm" enctype="multipart/form-data" onkeydown="return event.key != 'Enter'">
         <?php echo csrf_field(); ?>
         <?php echo $__env->make('quotes.head_information', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <div class="quote_handle_section handle_pro_section mb-3">
@@ -16,12 +16,15 @@
                 $quote_pro_qty_field = [
                     'name' => 'quote[product_qty]',
                     'note' => 'Số lượng sản phẩm',
-                    'attr' => ['type_input' => 'number', 'inject_class' => 'quote_set_qty_pro_input']
+                    'attr' => ['type_input' => 'number', 'inject_class' => 'quote_set_qty_pro_input'],
+                    'value' => @$product_qty
                 ] 
             ?>
             <?php echo $__env->make('view_update.view', $quote_pro_qty_field, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
             <div class="ajax_product_quote_number">
-                  
+                <?php if(!empty($products)): ?>
+                    <?php echo $__env->make('quotes.products.ajax_view', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                <?php endif; ?>       
             </div>
         </div>
         <div class="group_btn_action_form text-center">

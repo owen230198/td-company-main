@@ -247,7 +247,7 @@ var selectAjaxModule = function(section = $('.base_content '))
                             q: params.term,
                             }
                         },
-                        processResults: (data, params) => {
+                        processResults: (data) => {
                             const results = data.map(item => {
                             return {
                                 id: item.id,

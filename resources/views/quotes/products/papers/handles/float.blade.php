@@ -25,6 +25,6 @@
     <span class="ml-2 fs-12 font-italic color_red">Giá khuôn/bát sp (không phải giá khuôn/tờ in)</span>
 </div>
 
-@if ($category == 1)
+@if (isHardBox(@$cate))
     @include('quotes.products.papers.handles.select_device', ['key_device' => $key_stage])
 @endif

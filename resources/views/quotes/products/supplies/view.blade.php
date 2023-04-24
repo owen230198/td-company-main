@@ -1,6 +1,15 @@
 <div class="module_quote_supp_config">
     <div class="list_supp_item">
-        @include('quotes.products.'.$supp_view.'.ajax_view')  
+        @if (!empty($data_supply))
+            @foreach ($data_supply as $supp_index => $supply)
+                @php
+                    $supply->size = !empty($supply->size) ? json_decode($supply->size, true) : [];
+                @endphp
+                @include('quotes.products.'.$supp_view.'.ajax_view', ['supp_index' => $supp_index, 'supply_obj' => $supply, 'supply_size' => $supply->size])  
+            @endforeach
+        @else
+            @include('quotes.products.'.$supp_view.'.ajax_view', ['supp_index' => 0])  
+        @endif
     </div>
     <div class="text-center my-3">
         <button type="button" data-product="{{ $pro_index }}" data-key={{ $supp_view }}

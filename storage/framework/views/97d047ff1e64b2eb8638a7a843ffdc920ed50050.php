@@ -3,8 +3,7 @@
         <span>Phần công đoạn sản xuất in & sau in</span>
     </h3>
 <?php
-    $category =  @$cate == \TDConst::HARD_BOX ? 1 : 2;
-    $handle_stage =  @$category == 1 ? \TDConst::HANDLE_STAGE_HARD : \TDConst::HANDLE_STAGE
+    $handle_stage =  isHardBox(@$cate) ? \TDConst::HANDLE_STAGE_HARD : \TDConst::HANDLE_STAGE
 ?>
     <div class="quote_after_print_tab">
         <div class="d-flex">
@@ -14,6 +13,7 @@
                     id="v-<?php echo e($nav['key'].'_'.$pro_index.'_'.$supp_index); ?>-tab" 
                     data-toggle="pill" href="#v-<?php echo e($nav['key'].'_'.$pro_index.'_'.$supp_index); ?>" role="tab" 
                     aria-controls="v-<?php echo e($nav['key'].'_'.$pro_index.'_'.$supp_index); ?>" aria-selected="true">
+                    <?php dump(@$data_paper->print); ?>;
                         <?php echo e($nav['note']); ?>
 
                     </a>    
