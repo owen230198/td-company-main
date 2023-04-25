@@ -71,11 +71,20 @@
                     ?>
                     <?php echo $__env->make('view_update.view', $pro_size_field, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                 </div>
-                <div class="ajax_product_view_by_category mt-4">
-                    <?php if(!empty($product['category'])): ?>
-                        <?php echo $__env->make('quotes.products.structure', ['cate' => $product['category']], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                    <?php endif; ?>
+                <div class="ajax_product_view_by_category">
+                    
                 </div>
+                <?php if(!empty($product['id'])): ?>
+                    <input type="hidden" name="product[<?php echo e($pro_index); ?>][id]" value="<?php echo e($product['id']); ?>">
+                    <div class="text-center">
+                        <button type="button" 
+                        class="main_button color_white bg_green border_green radius_5 font_bold smooth show_config_handle_quote"
+                        proindex = <?php echo e($pro_index); ?> data-proid = <?php echo e($product['id']); ?> data-category = <?php echo e(@$product['category']); ?>>
+                            <i class="fa fa-angle-double-down fs-14 mr-2" aria-hidden="true"></i>
+                            <span>Xem chi tiết sản xuất</span>
+                        </button>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

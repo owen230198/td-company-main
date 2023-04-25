@@ -287,11 +287,16 @@ class AdminController extends Controller
     public function getListOptionAjax(Request $request, $table)
     {
         $options = '<option value = "0">Không xác định</option>';
-        $where = $request->all();
+        $cvalue = $request->input('cvalue'); 
+        $where = $request->except('cvalue');
         $where['act'] = 1;
         $data = \DB::table($table)->where($where)->orderBy('name', 'asc')->get();
         foreach ($data as $item) {
-            $options .= '<option value = "'.@$item->id.'">'.@$item->name.'</option>';
+            if (@$item->id == $cvalue) {
+                $options .= '<option value = "'.@$item->id.'" selected>'.@$item->name.'</option>';
+            }else{
+                $options .= '<option value = "'.@$item->id.'">'.@$item->name.'</option>';
+            }
         }
         echo $options;
     }

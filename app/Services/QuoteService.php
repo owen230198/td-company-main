@@ -89,10 +89,15 @@ class QuoteService extends BaseService
         return $data_action;
     }
 
-    public function insertProduct($data)
+    public function processProduct($data)
     {
-        $data_insert = $this->getDataActionProduct($data);
-        return Product::insertGetId($data_insert);
+        $data_process = $this->getDataActionProduct($data);
+        if (!empty($data['id'])) {
+            Product::where('id', $data['id'])->update($data_process);
+            return $data['id'];
+        }else{
+            return Product::insertGetId($data_process);
+        }
     }
 
     public function processDataProduct($data, $arr_quote)
@@ -103,9 +108,9 @@ class QuoteService extends BaseService
         if (@$product_valid['valid'] == false) {
            return $product_valid['arr'];
         }
-        foreach ($data_product as $key => $product) {
-            $product['quote_id'] = $data['id'];
-            $product_id = $this->insertProduct($product);
+        foreach ($data_product as $product) {
+            $product['quote_id'] = $arr_quote['id'];
+            $product_id = $this->processProduct($product);
             $elements = TDConstant::HARD_ELEMENT;
             $product_update['total_cost'] = 0;
             foreach ($elements as $el) {
@@ -122,7 +127,7 @@ class QuoteService extends BaseService
         Quote::where('id', $arr_quote['id'])->update($quote_update);
         $code = !empty($update) ? 200 : 100;
         $message = !empty($update) ? 'Cập nhật dữ liệu thành công !' : 'Có lỗi xảy ra, vui lòng thử lại !';
-        return returnMessageAjax($code, $message, url('/profit-config-quote?quote_id='.$data['id']));
+        return returnMessageAjax($code, $message, url('/profit-config-quote?quote_id='.$arr_quote['id']));
     }
 
     public function getCustomerSelectDataView($id)
@@ -147,6 +152,17 @@ class QuoteService extends BaseService
             return redirect(asset('create-quote?step=handle_config&id='.$insert_id))->with('message', 'Thêm dữ liệu khách hàng thành công!');
         }else{
             return redirect(asset('update/quotes/'.$id.'?step=handle_config'))->with('message', 'Thêm dữ liệu khách hàng thành công!');
+        }
+    }
+
+    public function processDataQuote($request, $arr_quote)
+    {
+        $data = $request->except('_token', 'step');
+        if (empty($data['product'])) {
+            return returnMessageAjax(110, 'Không tìm thấy sản phẩm !');
+        }else{
+            $status = $this->processDataProduct($data, $arr_quote);
+            return $status;
         }
     }
 }

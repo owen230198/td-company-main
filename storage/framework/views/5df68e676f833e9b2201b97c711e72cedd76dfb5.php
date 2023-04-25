@@ -17,4 +17,12 @@
             </div>
         <?php endif; ?>    
     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+    <?php if((int) $data_quote['total_amount'] > 0): ?>
+        <div class="d-flex align-items-center mb-2 fs-15">
+            <label class="mb-0 min_210 text-capitalize text-right mr-3">Tổng chi phí báo giá: </label>
+            <p class="font_bold color_red">
+                <?php echo e(number_format((int) $data_quote['total_amount'])); ?>đ
+            </p>
+        </div>
+    <?php endif; ?>
 </div><?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/quotes/head_information.blade.php ENDPATH**/ ?>

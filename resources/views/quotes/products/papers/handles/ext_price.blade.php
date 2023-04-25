@@ -6,7 +6,7 @@
                 'name' => 'product['.$pro_index.'][paper]['.$supp_index.']['.$key_stage.'][temp_price]',
                 'note' => '1. Chi phí tem',
                 'attr' => ['type_input' => 'number'],
-                'value' => 0
+                'value' => @$data_handle['temp_price'] ?? 0
             ] 
         @endphp
         @include('view_update.view', $paper_ext_temp)
@@ -16,7 +16,7 @@
                 'name' => 'product['.$pro_index.'][paper]['.$supp_index.']['.$key_stage.'][prescript_price]',
                 'note' => '2. Chi phí toa',
                 'attr' => ['type_input' => 'number'],
-                'value' => 0
+                'value' => @$data_handle['prescript_price'] ?? 0
             ] 
         @endphp
         @include('view_update.view', $paper_ext_prescript)
@@ -26,7 +26,7 @@
                 'name' => 'product['.$pro_index.'][paper]['.$supp_index.']['.$key_stage.'][supp_price]',
                 'note' => '3. Chi phí vật tư khác',
                 'attr' => ['type_input' => 'number'],
-                'value' => 0
+                'value' => @$data_handle['supp_price'] ?? 0
             ] 
         @endphp
         @include('view_update.view', $paper_ext_supp)

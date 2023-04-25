@@ -13,7 +13,6 @@
                     id="v-<?php echo e($nav['key'].'_'.$pro_index.'_'.$supp_index); ?>-tab" 
                     data-toggle="pill" href="#v-<?php echo e($nav['key'].'_'.$pro_index.'_'.$supp_index); ?>" role="tab" 
                     aria-controls="v-<?php echo e($nav['key'].'_'.$pro_index.'_'.$supp_index); ?>" aria-selected="true">
-                    <?php dump(@$data_paper->print); ?>;
                         <?php echo e($nav['note']); ?>
 
                     </a>    
@@ -23,7 +22,10 @@
                 <?php $__currentLoopData = $handle_stage; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tabkey => $tab): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="tab-pane fade show<?php echo e($tabkey == 0 ? ' active' : ''); ?>" id="v-<?php echo e($tab['key'].'_'.$pro_index.'_'.$supp_index); ?>" 
                     role="tabpanel" aria-labelledby="v-<?php echo e($tab['key'].'_'.$pro_index.'_'.$supp_index); ?>-tab">
-                        <?php echo $__env->make('quotes.products.papers.handles.'.$tab['key'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                    <?php
+                        $data_handle = !empty($data_paper->{$tab['key']}) ? json_decode($data_paper->{$tab['key']}, true) : [];
+                    ?>
+                        <?php echo $__env->make('quotes.products.papers.handles.'.$tab['key'], ['data_handle' => $data_handle], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                     </div>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>

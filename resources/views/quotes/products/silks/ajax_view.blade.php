@@ -6,9 +6,10 @@
         $silk_divide = \TDConst::SILK_SIZE_DIVIDE;
         $silk_plus = \TDConst::SILK_SIZE_PLUS; 
         $pro_silk_supply = [
-            'name' => 'product['.$pro_index.']['.$key_supp.']['.$supp_index.'][supply_price]',
+            'name' => 'product['.$pro_index.']['.$key_supp.']['.$supp_index.'][size][supply_price]',
             'type' => 'linking',
             'note' => 'Chọn vật tư',
+            'value' => @$supply_size['supply_price'],
             'other_data' => ['config' => ['search' => 1], 
             'data' => ['table' => 'supply_prices', 'where' => ['type' => $key_supp]]]
         ];
@@ -16,12 +17,17 @@
             'name' => 'product['.$pro_index.']['.$key_supp.']['.$supp_index.'][prescript_price]',
             'note' => 'Phát sinh giá lụa cao cấp',
             'attr' => ['type_input' => 'number'],
-            'value' => 0
+            'value' => @$supply_size['prescript_price'] ?? 0
         ];
         $key_device_cut = \TDConst::CUT;
+        $data_cut = !empty($supply_obj->cut) ? json_decode($supply_obj->cut, true) : []; 
     @endphp
     @include('quotes.products.supplies.title_config', ['divide' => $silk_divide, 'name' => 'vải lụa'])
     
+    @if (!empty($supply_obj->id))
+        <input type="hidden" name="product[{{ $pro_index }}][{{ $key_supp }}][{{ $supp_index }}][id]" value="{{ $supply_obj->id }}">
+    @endif
+
     @include('quotes.products.supplies.quantity_config', 
     ['compen_percent' => $silk_compen_percent, 'compen_num' => $silk_compen_num])
 
@@ -36,5 +42,5 @@
 
     @include('quotes.products.select_device', 
     ['key_device' => $key_device_cut, 'note' => 'Máy xén', 
-    'value' =>  getDeviceId(['key_device' => $key_device_cut, 'supply' => $key_supp, 'default_device' => 1]), 'element' => $key_supp])
+    'value' => !empty($supply_obj->id) ? @$data_cut['machine'] : getDeviceId(['key_device' => $key_device_cut, 'supply' => $key_supp, 'default_device' => 1]), 'element' => $key_supp])
 </div>

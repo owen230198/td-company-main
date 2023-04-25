@@ -13,7 +13,6 @@
                     id="v-{{ $nav['key'].'_'.$pro_index.'_'.$supp_index }}-tab" 
                     data-toggle="pill" href="#v-{{ $nav['key'].'_'.$pro_index.'_'.$supp_index }}" role="tab" 
                     aria-controls="v-{{ $nav['key'].'_'.$pro_index.'_'.$supp_index }}" aria-selected="true">
-                    @dump(@$data_paper->print);
                         {{ $nav['note'] }}
                     </a>    
                 @endforeach
@@ -22,7 +21,10 @@
                 @foreach ($handle_stage as $tabkey => $tab)
                     <div class="tab-pane fade show{{ $tabkey == 0 ? ' active' : '' }}" id="v-{{ $tab['key'].'_'.$pro_index.'_'.$supp_index }}" 
                     role="tabpanel" aria-labelledby="v-{{ $tab['key'].'_'.$pro_index.'_'.$supp_index }}-tab">
-                        @include('quotes.products.papers.handles.'.$tab['key'])
+                    @php
+                        $data_handle = !empty($data_paper->{$tab['key']}) ? json_decode($data_paper->{$tab['key']}, true) : [];
+                    @endphp
+                        @include('quotes.products.papers.handles.'.$tab['key'], ['data_handle' => $data_handle])
                     </div>
                 @endforeach
             </div>

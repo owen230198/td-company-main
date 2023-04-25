@@ -71,13 +71,9 @@ trait QuoteTrait
 
     private function getObjectConfig($data, $total)
     {
-        if ($total > 0) {
-            $obj = $data;
-            $obj['act'] = 1;
-            $obj['total'] = $total;    
-        }else{
-            $obj['act'] = 0;
-        }
+        $obj = $data;
+        $obj['act'] = 1;
+        $obj['total'] = $total; 
         return json_encode($obj);
     }
 
@@ -157,7 +153,7 @@ trait QuoteTrait
         if (!empty($arr)) {
             foreach ($arr as $value) {
                 $stage = json_decode($value);
-                if (!empty($stage->total)) {
+                if (!empty($stage->total) && $stage->total > 0) {
                     $ret += $stage->total;
                 }
             }

@@ -2,7 +2,6 @@
 namespace App\Http\Controllers\Quote;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Customer;
 use App\Models\Quote;
 use App\Constants\TDConstant;
 use App\Models\Product;
@@ -32,6 +31,8 @@ class QuoteController extends Controller
             if($request->isMethod('POST')){
                 if ($step == 'chose_customer') {
                     return $this->services->selectCustomerUpdateQuote($request, $id);
+                }else{
+                    return $this->services->processDataQuote($request, $quote);
                 }
             }else{
                 if ($step == 'chose_customer') {
@@ -39,17 +40,7 @@ class QuoteController extends Controller
                 }else{
                     $data['data_quote'] = $quote;
                     $data['products'] = Product::where(['act' => 1, 'quote_id' => $id])->get();
-                    $data['product_qty'] = count($data['products']);  
-                    $data['products']->map(function($product){
-                        $supply = isHardBox($product['category']) ? TDConstant::HARD_ELEMENT : TDConstant::PAPER_ELEMENT;
-                        foreach ($supply as $item) {
-                            $where = ['act' => 1, 'product' => $product['id']];
-                            if ($item['table'] == 'cartons') {
-                                $where['type'] = $item['pro_field'];
-                            }
-                            $product[$item['pro_field']] = \DB::table($item['table'])->where($where)->get()->toArray();
-                        }
-                    });
+                    $data['product_qty'] = count($data['products']);
                 }
                 $data['title'] = 'Chỉnh sửa báo giá - '.$quote['seri'].' - '.getStepCreateQuote($step);
                 $data['link_update'] = url('update/quotes/'.$id.'?step='.$step);
@@ -82,13 +73,7 @@ class QuoteController extends Controller
                     return redirect(url('/'))->with('error', 'Dữ liệu báo giá không tồn tại !');
                 }
             }else{
-                $data = $request->except('_token', 'step');
-                if (empty($data['product'])) {
-                    return returnMessageAjax(110, 'Không tìm thấy sản phẩm !');
-                }else{
-                    $status = $this->services->processDataProduct($data, $arr_quote);
-                    return $status;
-                }
+                return $this->services->processDataQuote($request, $arr_quote);
             }   
         }
     }
@@ -150,11 +135,13 @@ class QuoteController extends Controller
         $cate = $request->input('category');
         if (!empty($cate)) {
             $data['pro_index'] = (int) $request->input('proindex');
-            $data['supp_index'] = 0;
-            $data['findex'] = 0;
-            $data['supp_name'] = $request->input('paper_name');
-            $data['pro_qty'] = (int) $request->input('pro_qty');
+            $arr['name'] = $request->input('paper_name');
+            $arr['product_qty'] = (int) $request->input('pro_qty');
             $data['cate'] = $cate;
+            $data['elements'] = isHardBox($cate) ? TDConstant::HARD_ELEMENT : TDConstant::PAPER_ELEMENT;
+            foreach ($data['elements'] as $key => $item) {
+                $data['elements'][$key]['data'] = $arr;
+            }
             if (empty($data['supp_name'])) {
                 return ['code' => 100, 'message' => 'Bạn chưa nhập tên sản phẩm!'];
             }
@@ -163,6 +150,26 @@ class QuoteController extends Controller
             }
             return view('quotes.products.structure', $data);
         }
+    }
+
+    public function getViewProductStructureData(Request $request)
+    {
+        $id = (int) $request->input('id');
+        $data['cate'] = (int) $request->input('category');
+        if (!empty($id) && !empty($data['cate'])) {
+            $where = ['act' => 1, 'product' => $id];
+            $data['pro_index'] = (int) $request->input('proindex');
+            $data['elements'] = isHardBox($data['cate']) ? TDConstant::HARD_ELEMENT : TDConstant::PAPER_ELEMENT;
+            foreach ($data['elements'] as $key => $item) {
+                if ($item['table'] == 'supplies') {
+                    $where['type'] = $item['pro_field'];
+                }
+                $data['elements'][$key]['data'] = \DB::table($item['table'])->where($where)->get()->toArray();
+                unset($where['type']);
+            }
+            return view('quotes.products.structure', $data);
+        }
+
     }
 
     public function profitConfigQuote(Request $request)

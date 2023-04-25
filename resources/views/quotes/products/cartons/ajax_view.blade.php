@@ -10,6 +10,9 @@
         $key_device_cut = \TDConst::CUT;
         $key_device_mill = \TDConst::MILL; 
     @endphp
+    @if (!empty($supply_obj->id))
+        <input type="hidden" name="product[{{ $pro_index }}][{{ $key_supp }}][{{ $supp_index }}][id]" value="{{ $supply_obj->id }}">
+    @endif
 
     @include('quotes.products.supplies.title_config', ['divide' => $carton_divide, 'name' => $key_supp])
     
@@ -20,19 +23,27 @@
 
     @include('quotes.products.supplies.select_supply_type')
 
+    @php
+        $data_cut = !empty($supply_obj->cut) ? json_decode($supply_obj->cut, true) : []; 
+        $data_elevate = !empty($supply_obj->elevate) ? json_decode($supply_obj->elevate, true) : []; 
+        $data_mill = !empty($supply_obj->mill) ? json_decode($supply_obj->mill, true) : []; 
+        $data_peel = !empty($supply_obj->peel) ? json_decode($supply_obj->peel, true) : []; 
+    @endphp
+
     @include('quotes.products.select_device', 
     ['key_device' => $key_device_cut, 'note' => 'Máy xén', 
-    'value' =>  getDeviceId(['key_device' => $key_device_cut, 'supply' => $key_supp, 'default_device' => 1]), 'element' => $key_supp])
+    'value' => !empty($supply_obj->id) ? @$data_cut['machine'] : getDeviceId(['key_device' => $key_device_cut, 'supply' => $key_supp, 'default_device' => 1]), 
+    'element' => $key_supp])
 
     @include('quotes.products.select_device', 
     ['key_device' => $key_device_elevate, 'note' => 'Máy bế', 
-    'value' =>  getDeviceId(['key_device' => $key_device_elevate, 'supply' => $key_supp, 'default_device' => 1]), 'element' => $key_supp])
+    'value' => !empty($supply_obj->id) ? @$data_elevate['machine'] : getDeviceId(['key_device' => $key_device_elevate, 'supply' => $key_supp, 'default_device' => 1]), 'element' => $key_supp])
 
     @include('quotes.products.select_device', 
     ['key_device' => $key_device_mill, 'note' => 'Máy phay', 
-    'value' =>  getDeviceId(['key_device' => $key_device_mill, 'supply' => $key_supp, 'default_device' => 1]), 'element' => $key_supp])
+    'value' => !empty($supply_obj->id) ? @$data_mill['machine'] : getDeviceId(['key_device' => $key_device_mill, 'supply' => $key_supp, 'default_device' => 1]), 'element' => $key_supp])
 
     @include('quotes.products.select_device', 
     ['key_device' => $key_device_peel, 'note' => 'Máy bóc lề', 
-    'value' =>  getDeviceId(['key_device' => $key_device_peel, 'supply' => $key_supp, 'default_device' => 1]), 'element' => $key_supp])
+    'value' => !empty($supply_obj->id) ? @$data_peel['machine'] : getDeviceId(['key_device' => $key_device_peel, 'supply' => $key_supp, 'default_device' => 1]), 'element' => $key_supp])
 </div>

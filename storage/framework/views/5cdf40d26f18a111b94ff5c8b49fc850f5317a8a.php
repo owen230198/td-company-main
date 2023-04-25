@@ -10,6 +10,9 @@
         $key_device_cut = \TDConst::CUT;
         $key_device_mill = \TDConst::MILL; 
     ?>
+    <?php if(!empty($supply_obj->id)): ?>
+        <input type="hidden" name="product[<?php echo e($pro_index); ?>][<?php echo e($key_supp); ?>][<?php echo e($supp_index); ?>][id]" value="<?php echo e($supply_obj->id); ?>">
+    <?php endif; ?>
 
     <?php echo $__env->make('quotes.products.supplies.title_config', ['divide' => $carton_divide, 'name' => $key_supp], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     
@@ -20,19 +23,27 @@
 
     <?php echo $__env->make('quotes.products.supplies.select_supply_type', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
+    <?php
+        $data_cut = !empty($supply_obj->cut) ? json_decode($supply_obj->cut, true) : []; 
+        $data_elevate = !empty($supply_obj->elevate) ? json_decode($supply_obj->elevate, true) : []; 
+        $data_mill = !empty($supply_obj->mill) ? json_decode($supply_obj->mill, true) : []; 
+        $data_peel = !empty($supply_obj->peel) ? json_decode($supply_obj->peel, true) : []; 
+    ?>
+
     <?php echo $__env->make('quotes.products.select_device', 
     ['key_device' => $key_device_cut, 'note' => 'Máy xén', 
-    'value' =>  getDeviceId(['key_device' => $key_device_cut, 'supply' => $key_supp, 'default_device' => 1]), 'element' => $key_supp], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    'value' => !empty($supply_obj->id) ? @$data_cut['machine'] : getDeviceId(['key_device' => $key_device_cut, 'supply' => $key_supp, 'default_device' => 1]), 
+    'element' => $key_supp], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     <?php echo $__env->make('quotes.products.select_device', 
     ['key_device' => $key_device_elevate, 'note' => 'Máy bế', 
-    'value' =>  getDeviceId(['key_device' => $key_device_elevate, 'supply' => $key_supp, 'default_device' => 1]), 'element' => $key_supp], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    'value' => !empty($supply_obj->id) ? @$data_elevate['machine'] : getDeviceId(['key_device' => $key_device_elevate, 'supply' => $key_supp, 'default_device' => 1]), 'element' => $key_supp], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     <?php echo $__env->make('quotes.products.select_device', 
     ['key_device' => $key_device_mill, 'note' => 'Máy phay', 
-    'value' =>  getDeviceId(['key_device' => $key_device_mill, 'supply' => $key_supp, 'default_device' => 1]), 'element' => $key_supp], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    'value' => !empty($supply_obj->id) ? @$data_mill['machine'] : getDeviceId(['key_device' => $key_device_mill, 'supply' => $key_supp, 'default_device' => 1]), 'element' => $key_supp], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     <?php echo $__env->make('quotes.products.select_device', 
     ['key_device' => $key_device_peel, 'note' => 'Máy bóc lề', 
-    'value' =>  getDeviceId(['key_device' => $key_device_peel, 'supply' => $key_supp, 'default_device' => 1]), 'element' => $key_supp], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    'value' => !empty($supply_obj->id) ? @$data_peel['machine'] : getDeviceId(['key_device' => $key_device_peel, 'supply' => $key_supp, 'default_device' => 1]), 'element' => $key_supp], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 </div><?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/quotes/products/cartons/ajax_view.blade.php ENDPATH**/ ?>

@@ -18,4 +18,12 @@
             </div>
         @endif    
     @endforeach
+    @if ((int) $data_quote['total_amount'] > 0)
+        <div class="d-flex align-items-center mb-2 fs-15">
+            <label class="mb-0 min_210 text-capitalize text-right mr-3">Tổng chi phí báo giá: </label>
+            <p class="font_bold color_red">
+                {{ number_format((int) $data_quote['total_amount']) }}đ
+            </p>
+        </div>
+    @endif
 </div>

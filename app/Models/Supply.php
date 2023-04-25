@@ -27,18 +27,22 @@ class Supply extends Model
                     $supply['size']['length'] = !empty($product[$supply['nqty']][0]['size']['length']) ? $product[$supply['nqty']][0]['size']['length'] : 0;
                     $supply['size']['width'] = !empty($product[$supply['nqty']][0]['size']['width']) ? $product[$supply['nqty']][0]['size']['width'] : 0;
                 }
-                if (in_array($supply['supp_qty'], [TDConstant::CARTON, TDConstant::RUBBER])) {
+                if (in_array($supply['supp_qty_linking'], [TDConstant::CARTON, TDConstant::RUBBER])) {
                     $supply['supp_qty'] = !empty($product[$supply['nqty']][0]['supp_qty']) ? $product[$supply['nqty']][0]['supp_qty'] : 0;
                 }
             }
             $data_process = $this->getDataActionSupply($supply);
             $data_process['product_qty'] = $supply['qty'];
             $data_process['nqty'] = $supply['nqty'];
-            $data_process['supp_qty'] = $supply['supp_qty'];
+            $data_process['supp_qty'] = @$supply['supp_qty'];
             $data_process['type'] = $type;
             $data_process['product'] = $product_id;
             (new BaseService)->configBaseDataAction($data_process);
-            $this->insert($data_process);
+            if (!empty($supply['id'])) {
+                $this->where('id', $supply['id'])->update($data_process);   
+            }else{
+                $this->insert($data_process);
+            }
             $cost += $data_process['total_cost'];
         }
         return $cost;

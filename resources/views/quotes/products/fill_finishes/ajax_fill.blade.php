@@ -5,6 +5,7 @@
             'data' => ['table' => 'supply_prices', 'where' => ['type' => \TDConst::FILL]]
         ],
         'note' => 'Tên giấy bồi',
+        'value' => @$fill_data['materal'],
         'name' => 'product['.$pro_index.'][fill_finish][fill][stage]['.$findex.'][materal]'
     ]
 @endphp
@@ -20,10 +21,10 @@
     </label>
     <div class="d-flex justify-content-between align-items-center">
         <input type="number" name = 'product[{{ $pro_index }}][fill_finish][fill][stage][{{ $findex }}][length]' placeholder="KT chiều dài (cm)" 
-        class="form-control medium_input" step="any"> 
+        class="form-control medium_input" step="any" value="{{ @$fill_data['length'] }}"> 
         <span class="mx-3">X</span>
         <input type="number" name = 'product[{{ $pro_index }}][fill_finish][fill][stage][{{ $findex }}][width]' placeholder="KT chiều rộng (cm)" 
-        class="form-control medium_input" step="any"> 
+        class="form-control medium_input" step="any" value="{{ @$fill_data['width'] }}"> 
         <span class="mx-2">||</span> 
         <div class="medium_input">
             @include('view_update.linking', $data_select_fill)

@@ -8,7 +8,7 @@
     class="config_handle_form config_content baseAjaxForm" enctype="multipart/form-data" onkeydown="return event.key != 'Enter'">
         @csrf
         @include('quotes.head_information')
-        <div class="quote_handle_section handle_pro_section mb-3">
+        <div class="quote_handle_section handle_pro_section">
             <h3 class="fs-14 text-uppercase border_top_eb pt-3 mt-3 text-center quote_handle_title">
                 <span>Khởi tạo sản phẩm</span>
             </h3>
@@ -16,7 +16,9 @@
                 $quote_pro_qty_field = [
                     'name' => 'quote[product_qty]',
                     'note' => 'Số lượng sản phẩm',
-                    'attr' => ['type_input' => 'number', 'inject_class' => 'quote_set_qty_pro_input'],
+                    'attr' => ['type_input' => 'number', 
+                    'inject_class' => 'quote_set_qty_pro_input',
+                    'disable_field' => @$product_qty ? 1 : 0 ],
                     'value' => @$product_qty
                 ] 
             @endphp

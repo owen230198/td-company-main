@@ -4,19 +4,19 @@
         'name' => 'product['.$pro_index.'][paper]['.$supp_index.']['.$key_stage.'][face]',
         'type' => 'select',
         'note' => 'Số mặt',
+        'value' => @$data_handle['face'],
         'other_data' => ['data' => ['options' => ['Chọn số mặt', 1, 2]]]
-    ]
-@endphp
-@include('view_update.view', $paper_uv_face)
-
-@php
+    ];
     $paper_uv_materal = [
         'name' => 'product['.$pro_index.'][paper]['.$supp_index.']['.$key_stage.'][materal]',
         'type' => 'linking',
         'note' => 'mực in',
+        'value' => @$data_handle['materal'],
         'other_data' => ['data' => ['table' => 'materals', 'where' => ['materal_key' => $key_stage], 'select' => ['id', 'name']]]
-    ]  
+    ];
 @endphp
+@include('view_update.view', $paper_uv_face)
+
 @include('view_update.view', $paper_uv_materal)
 
-@include('quotes.products.papers.handles.select_device', ['key_device' => $key_stage])
+@include('quotes.products.papers.handles.select_device', ['key_device' => $key_stage, 'value' => @$data_handle['machine']])

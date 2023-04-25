@@ -7,10 +7,9 @@
         $pro_paper_name = [
             'name' => 'product['.$pro_index.']['.$key_supp.']['.$supp_index.'][name]',
             'note' => 'Tên SP giấy in',
-            'value' => @$supp_name,
             'attr' => ['required' => 1, 
                         'inject_class' => $supp_index == 0 ? 'quote_receive_paper_name_main' : 'quote_receive_paper_name_ext'],
-            'value' => @$supply_obj->name
+            'value' => @$supply_obj->name ?? @$supp_name
         ];
         $pro_paper_materals = [
             'name' => 'product['.$pro_index.']['.$key_supp.']['.$supp_index.'][size][materal]',
@@ -89,6 +88,6 @@
             </div>
         </div>
     </div>
-    @include('quotes.products.papers.after_print', ['data_paper' => @$supply])
+    @include('quotes.products.papers.after_print', ['data_paper' => @$supply_obj])
 </div>
 

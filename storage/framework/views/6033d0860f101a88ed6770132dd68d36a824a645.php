@@ -7,7 +7,7 @@
 	<select name="<?php echo e($name); ?>" class="form-control<?php echo e(@$configs['searchbox']?' select_config' : ''); ?>
 
 	<?php echo e(@$attr['inject_class'] ? ' '.$attr['inject_class'] : ''); ?>" 
-	<?php echo e(@$attr['placeholder'] ? 'placehoder='.$attr['placeholder'] : ''); ?>>
+	<?php echo e(@$attr['placeholder'] ? 'placehoder='.$attr['placeholder'] : ''); ?> <?php echo e(@$attr['inject_attr'] ?? ''); ?>>
 		<?php $__currentLoopData = $list_options; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $option): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 			<option value="<?php echo e($key); ?>" <?php echo e(@$value == $key ? 'selected' : ''); ?>>
 				<?php echo e($option); ?>

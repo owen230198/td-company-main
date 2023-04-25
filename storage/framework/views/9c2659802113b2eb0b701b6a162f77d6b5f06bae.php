@@ -4,30 +4,26 @@
         'name' => 'product['.$pro_index.'][paper]['.$supp_index.']['.$key_stage.'][type]',
         'type' => 'select',
         'note' => 'kiểu in',
-        'value' => \TDConst::ONE_PRINT_TYPE,
+        'value' => !empty($data_paper->id) ? @$data_handle['type'] : \TDConst::ONE_PRINT_TYPE,
         'other_data' => ['data' => ['options' => \TDConst::PRINT_TYPE]]
-    ] 
-?>
-<?php echo $__env->make('view_update.view', $paper_print_type, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-
-<?php
+    ];
     $paper_print_color = [
         'name' => 'product['.$pro_index.'][paper]['.$supp_index.']['.$key_stage.'][color]',
         'type' => 'select',
         'note' => 'số màu in',
-        'value' => 4,
+        'value' => !empty($data_paper->id) ? @$data_handle['color'] : 4,
         'other_data' => ['data' => ['options' => \TDConst::PRINT_COLOR]]
-    ] 
-?>
-<?php echo $__env->make('view_update.view', $paper_print_color, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-
-<?php
+    ];
     $paper_print_tech = [
         'name' => 'product['.$pro_index.'][paper]['.$supp_index.']['.$key_stage.'][machine]',
         'type' => 'select',
         'note' => 'công nghệ in',
-        'value' => \TDConst::OFFSET_PRINT_TECH,
+        'value' => !empty($data_paper->id) ? @$data_handle['machine'] : \TDConst::OFFSET_PRINT_TECH,
         'other_data' => ['data' => ['options' => \TDConst::PRINT_TECH]]
-    ] 
+    ];
 ?>
+<?php echo $__env->make('view_update.view', $paper_print_type, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
+<?php echo $__env->make('view_update.view', $paper_print_color, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
 <?php echo $__env->make('view_update.view', $paper_print_tech, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/quotes/products/papers/handles/print.blade.php ENDPATH**/ ?>

@@ -70,11 +70,20 @@
                     @endphp
                     @include('view_update.view', $pro_size_field)
                 </div>
-                <div class="ajax_product_view_by_category mt-4">
-                    @if (!empty($product['category']))
-                        @include('quotes.products.structure', ['cate' => $product['category']])
-                    @endif
+                <div class="ajax_product_view_by_category">
+                    
                 </div>
+                @if (!empty($product['id']))
+                    <input type="hidden" name="product[{{ $pro_index }}][id]" value="{{ $product['id'] }}">
+                    <div class="text-center">
+                        <button type="button" 
+                        class="main_button color_white bg_green border_green radius_5 font_bold smooth show_config_handle_quote"
+                        proindex = {{ $pro_index }} data-proid = {{ $product['id'] }} data-category = {{ @$product['category'] }}>
+                            <i class="fa fa-angle-double-down fs-14 mr-2" aria-hidden="true"></i>
+                            <span>Xem chi tiết sản xuất</span>
+                        </button>
+                    </div>
+                @endif
             </div>
         </div>
     @endforeach

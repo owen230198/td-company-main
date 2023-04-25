@@ -21,16 +21,20 @@ class Paper extends Model
         $cost = 0;
         $data = $product[$type];
         foreach ($data as $paper) {
-            $data_insert = $this->getDataActionPaper($paper);
-            $data_insert['name'] = $paper['name'];
-            $data_insert['product_qty'] = $paper['qty'];
-            $data_insert['nqty'] = $paper['nqty'];
-            $data_insert['supp_qty'] = $paper['supp_qty'];
-            $data_insert['product'] = $product_id;
-            $data_insert['main'] = !empty($paper['main']) ? $paper['main'] : 0;
-            (new BaseService)->configBaseDataAction($data_insert);
-            $this->insert($data_insert);
-            $cost += $data_insert['total_cost'];
+            $data_process = $this->getDataActionPaper($paper);
+            $data_process['name'] = $paper['name'];
+            $data_process['product_qty'] = $paper['qty'];
+            $data_process['nqty'] = $paper['nqty'];
+            $data_process['supp_qty'] = $paper['supp_qty'];
+            $data_process['product'] = $product_id;
+            $data_process['main'] = !empty($paper['main']) ? $paper['main'] : 0;
+            (new BaseService)->configBaseDataAction($data_process);
+            if (!empty($paper['id'])) {
+                $this->where('id', $paper['id'])->update($data_process);   
+            }else{
+                $this->insert($data_process);
+            }
+            $cost += $data_process['total_cost'];
         }
         return $cost;
     }

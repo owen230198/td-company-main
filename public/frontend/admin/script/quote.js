@@ -215,8 +215,33 @@ var selectProductCategory = function()
     let paper_name = $(this).closest('.config_handle_paper_pro').find('input.quote_set_product_name').val();
     let pro_qty = $(this).closest('.config_handle_paper_pro').find('input.input_pro_qty').val();
     let url = 'get-view-product-structure?category='+$(this).val()+'&proindex='+proindex+'&paper_name='+paper_name+'&pro_qty='+pro_qty;
-    section = $(this).closest('.config_handle_paper_pro').find('.ajax_product_view_by_category');
+    let section = $(this).closest('.config_handle_paper_pro').find('.ajax_product_view_by_category');
     ajaxViewTarget(url, section, section);
+  });
+}
+
+var showHandleDetail = function()
+{
+  $(document).on('click', 'button.show_config_handle_quote', function(event){
+    let section = $(this).closest('.config_handle_paper_pro').find('.ajax_product_view_by_category');
+    let icon = $(this).find('i');
+    let text = $(this).find('span');
+    if (section.find('.product_structure_quote').length > 0) {
+      text.text('Xem chi tiết sản xuất');
+      icon.removeClass('fa-angle-double-up');
+      icon.toggleClass('fa-angle-double-down');
+      section.html('');
+    }else{
+      text.text('Thu gọn');
+      icon.removeClass('fa-angle-double-down');
+      icon.toggleClass('fa-angle-double-up');
+      let proindex = $(this).attr('proindex'); 
+      let id = $(this).data('proid');
+      let cate = $(this).data('category');
+      let url = 'get-view-product-structure-data?id='+id+'&category='+cate+'&proindex='+proindex;
+      ajaxViewTarget(url, section, section);
+    }
+    
   });
 }
 
@@ -261,7 +286,8 @@ var moduleSelectSupply = function()
   $(document).on('change', 'select.select_supply_type', function(event){
     event.preventDefault();
     let id = $(this).val();
-    let url = 'get-list-option-ajax/supply_prices?supply_id='+id;
+    let cvalue = $(this).attr('cvalue');
+    let url = 'get-list-option-ajax/supply_prices?supply_id='+id+'&cvalue='+cvalue;
     let ajax_target = $(this).closest('.module_select_supply_type').find('select.ajax_supply_price');
     ajaxViewTarget(url, ajax_target, ajax_target);
   });
@@ -283,5 +309,6 @@ $(function(){
   calcSizeSupply();
   selectDecalNQty();
   moduleSelectSupply();
+  showHandleDetail();
   // autoComputePaperAjax();
 });

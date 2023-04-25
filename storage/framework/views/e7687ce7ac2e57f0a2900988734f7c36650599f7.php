@@ -3,16 +3,19 @@
         'name' => 'product['.$pro_index.']['.$key_supp.']['.$supp_index.'][size][temp_length]',
         'note' => 'KT chiều dài sơ bộ',
         'attr' => ['type_input' => 'number', 'placeholder' => 'Nhập KT(cm)', 'inject_class' => 'temp_size_length'],
+        'value' => @$supply_size['temp_length']
     ];
     $pro_length = [
         'name' => 'product['.$pro_index.']['.$key_supp.']['.$supp_index.'][size][length]',
         'note' => 'KT chiều dài tối ưu',
         'attr' => ['type_input' => 'number', 'placeholder' => 'Đơn vị cm', 'inject_class' => 'otm_size_length'],
+        'value' => @$supply_size['length']
     ];
     $pro_width = [
         'name' => 'product['.$pro_index.']['.$key_supp.']['.$supp_index.'][size][width]',
         'note' => 'Kích thước chiều rộng',
         'attr' => ['type_input' => 'number', 'placeholder' => 'Nhập KT (cm)'],
+        'value' => @$supply_size['width']
     ]; 
 ?>
 <div class="calc_size_module" data-plus = <?php echo e($plus); ?> data-divide = <?php echo e($divide[0]); ?>>
