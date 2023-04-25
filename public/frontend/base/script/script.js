@@ -7,14 +7,13 @@ var baseAjaxForm = function()
 { 
 	$('.baseAjaxForm').submit(function(event) {
 		event.preventDefault();
-		// $('#loader').fadeIn(200);
+		$('#loader').fadeIn(200);
 		$.ajax({
 			url: $(this).attr('action'),
 			type: $(this).attr('method'),
 			data: $(this).serialize(),
 		})
 		.done(function(data) {
-			// $('#loader').delay(200).fadeOut(500); 
 		    if((data.code) == 200){
 		    	toastr['success'](data.message);
 		    }
@@ -26,6 +25,7 @@ var baseAjaxForm = function()
 					window.location.href=data.url;
 				}, 1500);
 			} 
+			$('#loader').delay(200).fadeOut(500); 
 	    })
 	});
 }

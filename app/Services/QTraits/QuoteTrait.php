@@ -37,6 +37,9 @@ trait QuoteTrait
         $qttv_price = !empty($qttv['price']) ? (float) $qttv['price'] : 0;
         //Công thức tính chi phí khổ giấy vật tư hộp cứng: Dài x Rộng x ĐG định lượng x SL vật tư
         $total = self::$length * self::$width * $qttv_price * self::$supp_qty;
+        if (!empty($supply['prescript_price'])) {
+            $total = $total + ((float) $supply['prescript_price'] * self::$supp_qty);
+        }
         $supply['qttv_price'] = $qttv_price;
         $supply['supp_qty'] = self::$supp_qty;
         return $this->getObjectConfig($supply, $total);

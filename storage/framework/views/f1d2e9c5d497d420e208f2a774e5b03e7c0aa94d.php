@@ -38,7 +38,7 @@
         <?php endif; ?> 
         <?php if(!empty($float['qty_pro'])): ?>
             <li>
-                <span>Số bát: </span>
+                <span>SL sản phẩm: </span>
                 <strong class="color_red"><?php echo e($float['qty_pro']); ?></strong>
             </li>
         <?php endif; ?>           
@@ -107,7 +107,7 @@
             <p class="font_bold formula_result"> = <?php echo e(number_format($stage['supp_qty'] * $stage['work_price'])); ?>đ</p>
         </div>
     </div>
-    <p class="fs-15 font_bold">Tổng chi phí cho máy cán: (1) + (2) + (3) + (4) = <?php echo e(number_format($stage['cost'])); ?>đ</p>       
+    <p class="fs-15 font_bold">Tổng chi phí cho máy bế: (1) + (2) + (3) + (4) = <?php echo e(number_format($stage['cost'])); ?>đ</p>       
 </div>
 
 <?php if(!empty($float)): ?>

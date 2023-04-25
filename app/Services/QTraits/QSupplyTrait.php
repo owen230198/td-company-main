@@ -4,11 +4,11 @@ namespace App\Services\QTraits;
 use App\Constants\TDConstant;
 
 trait QSupplyTrait{
-   private function configDataCut($model_price, $work_price, $shape_price, $elevate)
+   private function configDataCut($model_price, $work_price, $shape_price, $cut)
    {
       $total = $this->getBaseTotalStage(self::$supp_qty, $model_price, $work_price, $shape_price);
-      $data['supp_qty'] = self::$supp_qty;
-      return $this->getObjectConfig($elevate, $total);
+      $cut['supp_qty'] = self::$supp_qty;
+      return $this->getObjectConfig($cut, $total);
    }
 
    public function getDataActionSupply($data)
@@ -52,10 +52,13 @@ trait QSupplyTrait{
          $qttv = getDetailDataByID('SupplyPrice', $qttv_id);
          $qttv_price = !empty($qttv['price']) ? (float) $qttv['price'] : 0; 
          $fill['stage'][$key]['qttv_price'] = $qttv_price;
-         $length = !empty($item['size']['length']) ? $item['size']['length'] : 0;
-         $width = !empty($item['size']['width']) ? $item['size']['width'] : 0;
+         $length = !empty($item['length']) ? $item['length'] : 0;
+         $width = !empty($item['width']) ? $item['width'] : 0;
          convertCmToMeter($length, $width); 
-         $fill['stage'][$key]['cost'] = ($length * $width * $qttv_price) + $fill_price; 
+         $fill['stage'][$key]['cost'] = ($length * $width * $qttv_price); 
+         if ( $fill['stage'][$key]['cost'] > 0) {
+            $fill['stage'][$key]['cost'] =  $fill['stage'][$key]['cost'] + $fill_price;
+         }
          $fill_cost += $fill['stage'][$key]['cost'];
       }
       $ext_price = !empty($fill['ext_price']) ? (float) $fill['ext_price'] : 0;
@@ -93,7 +96,8 @@ trait QSupplyTrait{
       $magnet['qttv_price'] = $qttv_price;
       $magnet['magnet_perc'] = $magnet_perc;
       $qty = !empty($magnet['qty']) ? $magnet['qty'] : 0; 
-      $total = (self::$base_qty_pro * $qttv_price) * (($qty * $magnet_perc) / 100);
+      $total = (self::$base_qty_pro * $qttv_price) * (($qty * $magnet_perc));
+      $magnet['qty_pro'] = self::$base_qty_pro;
       return $this->getObjectConfig($magnet, $total);
    }
 

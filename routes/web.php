@@ -29,9 +29,6 @@ Route::middleware(['check_login'])->group(function () {
 	Route::any('update/{table}/{id}', [AdminController::class, 'update']);
 	Route::get('search-table/{table}', [AdminController::class, 'searchTable']);
 	Route::any('clone/{table}/{id}', [AdminController::class, 'clone']);
-	Route::post('do-insert/{table}', [AdminController::class, 'doInsert']);
-	Route::post('do-insert/{table}', [AdminController::class, 'doInsert']);
-	Route::post('do-update/{table}/{id}', [AdminController::class, 'doUpdate']);
 	Route::post('remove', [AdminController::class, 'remove']);
 	Route::post('multiple-remove', [AdminController::class, 'multipleRemove']);
 	Route::post('do-config-data/{table}', [AdminController::class, 'doConfigData']);
@@ -48,7 +45,7 @@ Route::middleware(['check_login'])->group(function () {
 	Route::get('add-fill-finish-quote', [QuoteController::class, 'addFillFinishQuote']);
 	Route::get('compute-paper-size', [QuoteController::class, 'computePaperSize']);
 	Route::get('get-view-product-structure', [QuoteController::class, 'getViewProductStructure']);
-	Route::get('profit-config-quote', [QuoteController::class, 'profitConfigQuote']);
+	Route::any('profit-config-quote', [QuoteController::class, 'profitConfigQuote']);
 	Route::get('get-view-product-structure-data', [QuoteController::class, 'getViewProductStructureData']);
 
 	//orders routes

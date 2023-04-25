@@ -77,11 +77,11 @@
         <p class="formula_name font_bold">(4) Chi phí lượt:</p>
         <div class="formula_content d-flex align-items-center">
             <p class="formula_param mx-2">
-                SL tờ in cả BH x ĐG lượt  x  Số mặt cán
+                SL tờ in cả BH x ĐG lượt  x  số bát
             </p>
             <p class="font_bold formula_result"> = <?php echo e($stage['qty_pro']); ?> x <?php echo e($stage['work_price']); ?> x <?php echo e($stage['nqty']); ?></p>
             <p class="font_bold formula_result"> = <?php echo e(number_format($stage['qty_pro'] * $stage['work_price'] * $stage['nqty'])); ?>đ</p>
         </div>
     </div>
-    <p class="fs-15 color_red font_bold">Tổng chi phí cho máy cán: (1) + (2) + (3) + (4) = <?php echo e(number_format($stage['total'])); ?>đ</p>       
+    <p class="fs-15 color_red font_bold">Tổng chi phí: (1) + (2) + (3) + (4) = <?php echo e(number_format($stage['total'])); ?>đ</p>       
 </div><?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/quotes/profits/papers/peel.blade.php ENDPATH**/ ?>

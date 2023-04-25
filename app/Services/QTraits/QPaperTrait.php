@@ -35,16 +35,18 @@ trait QPaperTrait
             $print_factor = $type == TDConstant::ONE_PRINT_TYPE ? 1 : 2;
             $apla_price = self::$length * self::$width * $apla_factor * $print_factor;
             $print['print_factor'] = $print_factor;
+            $print['apla_factor'] = $apla_factor;
+            $print['apla_plus'] = $apla_plus;
             $print['apla_price'] = $apla_price;
             $total = ($supp_qty * $apla_price) + $apla_plus;
         }else{
             $color_num = (int) $color;
             if ($type == TDConstant::ONE_PRINT_TYPE) {
                 // Công thức tính chi phí in một mặt: (SL tờ in + tờ cộng thêm khi in) x số màu x DG lượt + (ĐG chỉnh máy x số màu) + (ĐG khuôn mẫu x số màu)
-                $total = ($supp_qty) * $color_num * $work_price + ($shape_price * $color_num) + ($model_price * $color_num);
+                $total = $supp_qty * $color_num * $work_price + ($shape_price * $color_num) + ($model_price * $color_num);
             }else{
                 // Công thức tính chi phí các kiểu in còn lại: (SL tờ in + tờ cộng thêm khi in) x số màu x 2 x DG lượt + ĐG chỉnh máy + ĐG khuôn mẫu
-                $total = ($supp_qty) * $color_num * 2 * $work_price + $shape_price + $model_price;
+                $total = $supp_qty * $color_num * 2 * $work_price + $shape_price + $model_price;
             }
         }
         $print['supp_qty'] = $supp_qty;

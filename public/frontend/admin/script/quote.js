@@ -291,7 +291,24 @@ var moduleSelectSupply = function()
     let ajax_target = $(this).closest('.module_select_supply_type').find('select.ajax_supply_price');
     ajaxViewTarget(url, ajax_target, ajax_target);
   });
-} 
+}
+
+var hoverDetailSupplyCost = function()
+{
+  $("li.supply_item_inf").hover(
+    function() {
+      let tab_detail = $(this).find('.detail_quote_supply_item');
+      let timeout = setTimeout(function() {
+        tab_detail.addClass("hover");
+      }, 2000);
+      tab_detail.data("timeout", timeout);
+    },
+    function() {
+      let tab_detail = $(this).find('.detail_quote_supply_item');
+      clearTimeout(tab_detail.removeClass('hover').data('timeout'));
+    }
+  )
+}
 
 $(function(){
 	changQtyInput();
@@ -310,5 +327,6 @@ $(function(){
   selectDecalNQty();
   moduleSelectSupply();
   showHandleDetail();
+  hoverDetailSupplyCost();
   // autoComputePaperAjax();
 });

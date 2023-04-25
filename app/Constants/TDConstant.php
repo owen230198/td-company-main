@@ -143,6 +143,18 @@
                                 self::UV => 'Máy in UV',
                                 self::BAG_PASTE => 'Máy dán túi giấy'
                             ];
+
+        const PAPER_HARD_DEVICE = [
+                                self::NILON => 'Máy cán màng',
+                                self::ELEVATE => 'Máy bế',
+                                self::PEEL => 'Máy bóc lề',
+                                self::BOX_PASTE => 'Máy dán hộp giấy',
+                                self::METALAI => 'Máy cán metalai',
+                                self::COMPRESS => 'Máy ép nhũ',
+                                self::FLOAT => 'Máy thúc nổi carton',
+                                self::UV => 'Máy in UV',
+                                self::BAG_PASTE => 'Máy dán túi giấy'
+                            ];
                             
         const CARTON_DEVICE = [
                                 self::CUT => 'Máy xén',
@@ -184,7 +196,7 @@
         const PAPER_BOX = 2;
         const PAPER_ELEMENT = [['key' => 'papers', 'note' => 'Giấy in', 'pro_field' => self::PAPER, 'device' => self::PAPER_DEVICE ,'table' => 'papers']];
         const HARD_ELEMENT = [
-            ['key' => 'papers', 'note' => 'Giấy in', 'pro_field' => self::PAPER, 'device' => self::PAPER_DEVICE ,'table' => 'papers'],
+            ['key' => 'papers', 'note' => 'Giấy in', 'pro_field' => self::PAPER, 'device' => self::PAPER_HARD_DEVICE ,'table' => 'papers'],
             ['key' => 'cartons', 'note' => 'Carton', 'pro_field' => self::CARTON, 'device' => self::CARTON_DEVICE ,'table' => 'supplies'],
             ['key' => 'rubbers', 'note' => 'Cao su non', 'pro_field' => self::RUBBER, 'device' => self::RUBBER_DEVICE ,'table' => 'supplies'],
             ['key' => 'decals', 'note' => 'Đề can nhung', 'pro_field' => self::DECAL, 'device' => self::DECAL_DEVICE ,'table' => 'supplies'],

@@ -16,7 +16,7 @@
             'note' => 'Số bát',
             'type' => 'select',
             'attr' => ['inject_class' => 'select_decal_nqty'],
-            'value' => @$supply_obj->product_qty,
+            'value' => @$supply_obj->nqty,
             'other_data' => ['data' => ['options' => $arr_option]]
         ];
         $pro_decal_qty_supp = [
@@ -43,8 +43,8 @@
             'name' => 'product['.$pro_index.']['.$key_supp.']['.$supp_index.'][size][supply_price]',
             'type' => 'linking',
             'note' => 'Chọn vật tư',
-            'other_data' => ['config' => ['search' => 1], 
             'value' => @$supply_size['supply_price'],
+            'other_data' => ['config' => ['search' => 1],
             'data' => ['table' => 'supply_prices', 'where' => ['type' => $key_supp]]]
         ];
         $key_device_cut = \TDConst::CUT;

@@ -92,11 +92,10 @@ ul.supply_info li.supply_item_inf:last-child{
 }
 
 .detail_quote_supply_item{
-    position: absolute;
-    top: -5px;
-    left: 100%;
-    min-width: 850px;
-    width: max-content;
+    position: fixed;
+    top: 50%;
+    left: 230px;
+    right: 175px;
     background: #ebebeb;
     padding: 10px;
     border-radius: 10px;
@@ -105,11 +104,25 @@ ul.supply_info li.supply_item_inf:last-child{
     transform: translateX(-10px);
     opacity: 0;
     visibility: hidden;
-    transition: all .2s;
+    transition: all 0.5s;
+    height: calc(100vh - 120px);
+    overflow: auto;
 }
 
-ul.supply_info li.supply_item_inf:hover>.detail_quote_supply_item{
+ul.supply_info li.supply_item_inf>.detail_quote_supply_item.hover{
     transform: translateX(0);
     opacity: 1;
     visibility: visible;
+    transform: translateY(-50%);
+    opacity: 1;
+    visibility: visible;
+    z-index: 3;
+}
+
+.list_stage_supply{
+    border-left: 1px solid #333;
+}
+
+.list_stage_supply li{
+    border-bottom: 1px solid #333;    
 }

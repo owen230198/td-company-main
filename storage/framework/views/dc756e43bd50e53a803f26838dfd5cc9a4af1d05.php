@@ -14,7 +14,7 @@
             'data' => ['table' => 'supply_prices', 'where' => ['type' => $key_supp]]]
         ];
         $pro_silk_ext_price = [
-            'name' => 'product['.$pro_index.']['.$key_supp.']['.$supp_index.'][prescript_price]',
+            'name' => 'product['.$pro_index.']['.$key_supp.']['.$supp_index.'][size][prescript_price]',
             'note' => 'Phát sinh giá lụa cao cấp',
             'attr' => ['type_input' => 'number'],
             'value' => @$supply_size['prescript_price'] ?? 0

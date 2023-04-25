@@ -52,18 +52,20 @@
                 </tbody>
             </table>
         </div>
-        <form action="<?php echo e(asset('profit-config-quote')); ?>" method="POST" class="baseAjaxForm config_content" enctype="multipart/form-data">
+        <form action="<?php echo e(asset('profit-config-quote?quote_id='.$data_quote['id'])); ?>" method="POST" class="baseAjaxForm config_content" enctype="multipart/form-data">
             <?php echo csrf_field(); ?>
             <?php
                 $ship_price_input = [
-                            'name' => 'ship_price',
-                            'note' => 'Chi phí vận chuyển',
-                            'attr' => ['type_input' => 'number', 'required' => 1],
-                        ]; 
+                    'name' => 'ship_price',
+                    'note' => 'Chi phí vận chuyển',
+                    'attr' => ['type_input' => 'number', 'required' => 1],
+                    'value' => @$data_quote['ship_price']
+                ]; 
                 $profit_input = [
                     'name' => 'profit',
                     'note' => 'Lợi nhuận (%)',
                     'attr' => ['type_input' => 'number', 'required' => 1],
+                    'value' => @$data_quote['profit']
                 ];
             ?>
             <?php echo $__env->make('view_update.view', $ship_price_input, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>

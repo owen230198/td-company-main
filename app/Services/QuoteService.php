@@ -123,7 +123,8 @@ class QuoteService extends BaseService
             $update = Product::where(['id' => $product_id])->update($product_update);
             $quote_update['total_cost'] += $product_update['total_cost'];
         }
-        $quote_update['total_amount'] = calValuePercentPlus($quote_update['total_cost'], $arr_quote['profit'], $arr_quote['ship_price']);
+        $get_perc = (float) $quote_update['total_cost'] + (float) $arr_quote['ship_price'];
+        $quote_update['total_amount'] = calValuePercentPlus($quote_update['total_cost'], $get_perc,  $arr_quote['profit']);
         Quote::where('id', $arr_quote['id'])->update($quote_update);
         $code = !empty($update) ? 200 : 100;
         $message = !empty($update) ? 'Cập nhật dữ liệu thành công !' : 'Có lỗi xảy ra, vui lòng thử lại !';
@@ -151,7 +152,7 @@ class QuoteService extends BaseService
         if (!empty($insert_id)) {
             return redirect(asset('create-quote?step=handle_config&id='.$insert_id))->with('message', 'Thêm dữ liệu khách hàng thành công!');
         }else{
-            return redirect(asset('update/quotes/'.$id.'?step=handle_config'))->with('message', 'Thêm dữ liệu khách hàng thành công!');
+            return redirect(asset('update/quotes/'.$id.'?step=handle_config'))->with('message', 'Cập nhật liệu khách hàng thành công!');
         }
     }
 

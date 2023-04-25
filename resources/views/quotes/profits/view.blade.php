@@ -52,18 +52,20 @@
                 </tbody>
             </table>
         </div>
-        <form action="{{ asset('profit-config-quote') }}" method="POST" class="baseAjaxForm config_content" enctype="multipart/form-data">
+        <form action="{{ asset('profit-config-quote?quote_id='.$data_quote['id']) }}" method="POST" class="baseAjaxForm config_content" enctype="multipart/form-data">
             @csrf
             @php
                 $ship_price_input = [
-                            'name' => 'ship_price',
-                            'note' => 'Chi phí vận chuyển',
-                            'attr' => ['type_input' => 'number', 'required' => 1],
-                        ]; 
+                    'name' => 'ship_price',
+                    'note' => 'Chi phí vận chuyển',
+                    'attr' => ['type_input' => 'number', 'required' => 1],
+                    'value' => @$data_quote['ship_price']
+                ]; 
                 $profit_input = [
                     'name' => 'profit',
                     'note' => 'Lợi nhuận (%)',
                     'attr' => ['type_input' => 'number', 'required' => 1],
+                    'value' => @$data_quote['profit']
                 ];
             @endphp
             @include('view_update.view', $ship_price_input)

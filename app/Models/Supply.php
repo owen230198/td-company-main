@@ -34,6 +34,7 @@ class Supply extends Model
             $data_process = $this->getDataActionSupply($supply);
             $data_process['product_qty'] = $supply['qty'];
             $data_process['nqty'] = $supply['nqty'];
+            $data_process['supp_qty_linking'] = @$supply['supp_qty_linking'];
             $data_process['supp_qty'] = @$supply['supp_qty'];
             $data_process['type'] = $type;
             $data_process['product'] = $product_id;

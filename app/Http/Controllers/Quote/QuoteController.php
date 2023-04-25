@@ -97,7 +97,7 @@ class QuoteController extends Controller
             $num = $i + 1; 
             $data['products'][$i] = ['name' => 'Sản phẩm '.$num];
         }
-        return view('quotes.products.ajax_view', ['qty' => $quantity]);
+        return view('quotes.products.ajax_view', $data);
     }
 
     public function addSupplyQuote(Request $request)
@@ -140,12 +140,12 @@ class QuoteController extends Controller
             $data['cate'] = $cate;
             $data['elements'] = isHardBox($cate) ? TDConstant::HARD_ELEMENT : TDConstant::PAPER_ELEMENT;
             foreach ($data['elements'] as $key => $item) {
-                $data['elements'][$key]['data'] = $arr;
+                $data['elements'][$key]['data'] = [(object) $arr];
             }
-            if (empty($data['supp_name'])) {
+            if (empty($arr['name'])) {
                 return ['code' => 100, 'message' => 'Bạn chưa nhập tên sản phẩm!'];
             }
-            if (empty($data['pro_qty'])) {
+            if (empty($arr['product_qty'])) {
                 return ['code' => 100, 'message' => 'Bạn chưa nhập số lượng sản phẩm!'];
             }
             return view('quotes.products.structure', $data);
@@ -174,16 +174,36 @@ class QuoteController extends Controller
 
     public function profitConfigQuote(Request $request)
     {
+        $id = $request->input('quote_id');
+        $arr_quote = Quote::find($id);
         if (!$request->isMethod('POST')) {
-            $id = $request->input('quote_id');
             if (empty($id)) {
                 return redirect(url())->with('error', 'Báo giá không tồn tại !');
             }
-            $data['data_quote'] = Quote::find($id);
+            $data['data_quote'] = $arr_quote;
             $data['title'] = 'Lợi nhuận báo giá mã - '.@$data['data_quote']['seri'];
             $data['products'] = Product::where(['act' => 1, 'quote_id' => $id])->get();
             $data['supply_fields'] = TDConstant::HARD_ELEMENT;
             return view('quotes.profits.view', $data);
+        }else{
+            $data = $request->except('_token', 'quote_id');
+            if (empty($id)) {
+                return returnMessageAjax(100, 'Không tìm thấy thông tin báo giá !');
+            }
+
+            if ($data['ship_price'] == null) {
+                return returnMessageAjax(100, 'Vui lòng nhập phí vận chuyển !');
+            }
+
+            if ($data['profit'] == null) {
+                return returnMessageAjax(100, 'Vui lòng nhập lợi nhuận báo giá !');
+            }
+            $get_perc = (float) $arr_quote['total_cost'] + (float) $data['ship_price'];
+            $data['total_amount'] = calValuePercentPlus($arr_quote['total_cost'], $get_perc,  $data['profit']);
+            $update = Quote::where('id', $id)->update($data);
+            if ($update) {
+                return returnMessageAjax(200, 'Cập nhật lợi nhuận báo giá thành công !', url()->full());
+            }
         }
     }
 }
