@@ -9,7 +9,7 @@
                 <i class="fa fa-filter mr-2 fs-15" aria-hidden="true"></i>Tìm kiếm
             </button>
             @if ($tableItem['insert'] == 1)
-                <a href="{{ 'insert/' . $tableItem['name'] }}"
+                <a href="{{ url('insert/' . $tableItem['name'].''.@$param_action) }}"
                     class="main_button bg_main color_white smooth bg_green border_green radius_5 font_bold smooth mr-2">
                     <i class="fa fa-plus mr-2 fs-15" aria-hidden="true"></i>Thêm mới
                 </a>

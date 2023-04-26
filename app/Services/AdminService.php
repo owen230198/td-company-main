@@ -184,23 +184,7 @@ class AdminService extends BaseService
     public function doInsertTable($table, $data)
     {
         $data = $this->getDataDoAction($data, $table);
-        if (@$data['password']) {
-            $data['password'] = md5($data['password']);
-        }
-        if ($table=='quotes'&&isset($data['customer_id'])) {
-            $data['customer_type'] = $this->getDataCustomerType($data['customer_id'], $data);
-        }
-        if(Schema::hasColumn($table, 'created_by')){
-            $data['created_by'] = getSessionUser()['id'];
-        }
-        $insertID = $this->db::table($table)->insertGetId($data);
-        if ($table=='quotes') {
-            $this->quote_service->refreshQuoteTotal($insertID);
-        }
-        if ($table == 'n_group_users' && @$data['parent']) {
-            $this->actionRoleByParent($data['parent'], $insertID, 'insert');
-        }
-        return $insertID;
+        return \DB::table($table)->insertGetId($data);
     }
 
     private function getPasswordUpdate($table, $id, $password)
@@ -214,8 +198,10 @@ class AdminService extends BaseService
     {
         foreach ($data as $key => $item) {
             $field = NDetailTable::where(['table_map'=>$table, 'name'=>$key])->first();
-            if (@$field['view_type']=='date_time') {
+            if (@$field['view_type'] == 'date_time') {
                 $data[$key] = getDataDateTime($item);
+            }elseif (@$field['view_type'] == 'password') {
+                $data[$key] = md5($data['password']);
             }  
         }
         return $data;
@@ -224,20 +210,7 @@ class AdminService extends BaseService
     public function doUpdateTable($id, $table, $data)
     {
         $data = $this->getDataDoAction($data, $table);
-        if (@$data['password']) {
-            $data['password'] = $this->getPasswordUpdate($table, $id, $data['password']);
-        }
-        if ($table=='quotes'&&isset($data['customer_id'])) {
-            $data['customer_type'] = $this->getDataCustomerType($data['customer_id'], $data);
-        }
-        if ($table == 'n_group_users' && @$data['parent']) {
-            $this->actionRoleByParent($data['parent'], $id, 'update');
-        }
-        $update = $this->db::table($table)->where('id', $id)->update($data);
-        if ($table=='quotes') {
-            $this->quote_service->refreshQuoteTotal($id);
-        }
-        return $update;
+        return \DB::table($table)->where('id', $id)->update($data);
     }
 
     public function removeDataTable($table, $id)

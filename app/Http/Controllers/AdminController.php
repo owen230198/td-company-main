@@ -61,11 +61,9 @@ class AdminController extends Controller
                 $data['title'] = 'Đơn giá thiết bị '. $request->input('name');
                 $where = $request->except('name');
                 $data['data_tables'] = \App\Models\Device::where($where)->paginate(10);
-                $data['param_action'] = '?act=1';
-                foreach ($where as $key => $value) {
-                    $data['param_action'] .= '&'.$key.'='.$value;
-                }
+                $data['param_action'] = getParamUrlByArray($where);
             }
+            session()->put('back_url', url()->full());
             return view('config_devices/'.$step.'/view', $data);
         }
     }
@@ -101,8 +99,20 @@ class AdminController extends Controller
             $controller = getObjectByTable($table);
             return $controller->insert($request);
         }else{
-            $data = $this->getDataActionView($table, 'insert', 'Thêm mới');
-            return view('action.view', $data);
+            $param = $request->except('_token');
+            if ($request->isMethod('GET')) {
+                $data = $this->getDataActionView($table, 'insert', 'Thêm mới', $param);
+                $data['action_url'] = url('insert/'.$table);
+                return view('action.view', $data);
+            }else{
+                $insertID = $this->admins->doInsertTable($table, $param);
+                if (@$insertID) {
+                    $back_routes = @session()->get('back_url') ?? url('view/'.$table);
+                    return redirect($back_routes)->with('message','Thêm dữ liệu thành công !');
+                }else {
+                    return back()->with('error','Đã có lỗi xảy ra !');
+                }
+            }
         }
     }
 
@@ -115,15 +125,16 @@ class AdminController extends Controller
             $controller = getObjectByTable($table);
             return $controller->update($request, $id);
         }else{
+            $param = $request->except('_token');
             if ($request->isMethod('GET')) {
-                $data = $this->getDataActionView($table, 'update', 'Chi tiết');
+                $data = $this->getDataActionView($table, 'update', 'Chi tiết', $param);
                 $data['dataitem'] = getModelByTable($table)->find($id);
+                $data['action_url'] = url('update/'.$table.'/'.$id);
                 return view('action.view', $data);
             }else{
-                $data = $request->all();
-                $success = $this->admins->doUpdateTable($id, $table, $data);
+                $success = $this->admins->doUpdateTable($id, $table, $param);
                 if ($success) {
-                    $back_routes = @session()->get('back_url') ?? 'view/'.$table;
+                    $back_routes = @session()->get('back_url') ?? url('view/'.$table);
                     return redirect($back_routes)->with('message','Cập nhật dữ liệu thành công !');
                 }else {
                     return back()->with('error','Đã có lỗi xảy ra !');
@@ -146,22 +157,6 @@ class AdminController extends Controller
             unset($data['dataitem']['password']);
         }
         return view('action.view', $data);
-    }
-
-    public function doInsert($table, Request $request)
-    {
-        if (!$this->admins->checkPermissionAction($table, 'insert')) {
-            return back()->with('error','Không có quyền thực hiện thao tác này !');
-        }
-        $data = $request->all();
-        unset($data['_token']);
-        $insertID = $this->admins->doInsertTable($table, $data);
-        if (@$insertID) {
-            $route = $table=='quotes'?'quote-managements/q_papers/'.$insertID:'view/'.$table;
-            return redirect($route)->with('message','Thêm dữ liệu thành công !');
-        }else {
-            return back()->with('error','Đã có lỗi xảy ra !');
-        }
     }
 
     public function remove(Request $request){

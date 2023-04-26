@@ -9,6 +9,8 @@ use App\Services\QTraits\QPaperTrait;
 use App\Services\QTraits\QSupplyTrait;
 use App\Constants\StatusConstant;
 use App\Constants\TDConstant;
+use Illuminate\Foundation\Testing\RefreshDatabaseState;
+
 class QuoteService extends BaseService
 {
 	function __construct()
@@ -103,7 +105,6 @@ class QuoteService extends BaseService
     public function processDataProduct($data, $arr_quote)
     {
         $data_product = $data['product'];
-        $quote_update['total_cost'] = 0;
         $product_valid = $this->productValidate($data_product);
         if (@$product_valid['valid'] == false) {
            return $product_valid['arr'];
@@ -112,23 +113,17 @@ class QuoteService extends BaseService
             $product['quote_id'] = $arr_quote['id'];
             $product_id = $this->processProduct($product);
             $elements = TDConstant::HARD_ELEMENT;
-            $product_update['total_cost'] = 0;
             foreach ($elements as $el) {
                 if (!empty($product[$el['pro_field']])) {
                     $model = getModelByTable($el['table']);
-                    $supply_cost = $model->processData($product_id, $product, $el['pro_field']);
-                    $product_update['total_cost'] += $supply_cost;
+                    $process = $model->processData($product_id, $product, $el['pro_field']);
                 }
             }
-            $update = Product::where(['id' => $product_id])->update($product_update);
-            $quote_update['total_cost'] += $product_update['total_cost'];
         }
-        $get_perc = (float) $quote_update['total_cost'] + (float) $arr_quote['ship_price'];
-        $quote_update['total_amount'] = calValuePercentPlus($quote_update['total_cost'], $get_perc,  $arr_quote['profit']);
-        Quote::where('id', $arr_quote['id'])->update($quote_update);
-        $code = !empty($update) ? 200 : 100;
-        $message = !empty($update) ? 'Cập nhật dữ liệu thành công !' : 'Có lỗi xảy ra, vui lòng thử lại !';
-        return returnMessageAjax($code, $message, url('/profit-config-quote?quote_id='.$arr_quote['id']));
+        if (!empty($process)) {
+            RefreshQuotePrice($arr_quote);
+        }
+        return returnMessageAjax(200, 'Cập nhật dữ liệu thành công !', url('/profit-config-quote?quote_id='.$arr_quote['id']));
     }
 
     public function getCustomerSelectDataView($id)

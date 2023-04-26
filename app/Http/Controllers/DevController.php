@@ -150,5 +150,9 @@ class DevController extends Controller
         dump($data);
         dd(\DB::getQueryLog());
     }
+
+    public function testData(){
+        dd(date('d/m/Y h:i:s', Time()));
+    }
 }
 

@@ -20,17 +20,14 @@ class Controller extends BaseController
         $this->regions = new \App\Models\NRegion;
 	}
 
-	public function getDataActionView($table, $action, $action_name)
+	public function getDataActionView($table, $action, $action_name, $param = [])
     {
         $data['tableItem'] = $this->admins->getTableItem($table);
         $data['title'] = $action_name.' '.$data['tableItem']['note'];
-        $action = $action=='clone'?'insert':$action;
         $data['field_list'] = $this->admins->getFieldAction($table, $action);
-        $data['action'] = $action;
         $data['action_name'] = $action_name;
-        if (!in_array($table, VariableConstant::ACTION_TABLE_SELF)) {
-            $data['regions'] = $this->regions->getRegionOfTable($table);
-        }
+        $data['default_field'] = $param;
+        $data['regions'] = $this->regions->getRegionOfTable($table);
         return $data;
     }
 }

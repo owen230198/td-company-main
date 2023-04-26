@@ -20,7 +20,6 @@ class Supply extends Model
     public function processData($product_id, $product, $type)
     {
         $data = $product[$type];
-        $cost = 0;
         foreach ($data as $supply) {
             if ($type == TDConstant::DECAL) {
                 if (in_array($supply['nqty'], [TDConstant::CARTON, TDConstant::RUBBER])) {
@@ -40,12 +39,11 @@ class Supply extends Model
             $data_process['product'] = $product_id;
             (new BaseService)->configBaseDataAction($data_process);
             if (!empty($supply['id'])) {
-                $this->where('id', $supply['id'])->update($data_process);   
+                $process = $this->where('id', $supply['id'])->update($data_process);   
             }else{
-                $this->insert($data_process);
+                $process = $this->insert($data_process);
             }
-            $cost += $data_process['total_cost'];
         }
-        return $cost;
+        return !empty($process);
     }
 }

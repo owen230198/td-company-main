@@ -216,8 +216,12 @@ if (!function_exists('getCodeInsertTable')) {
     }
 }
 
-if (!function_exists('checkEmptyValue')) {
-    function checkEmptyValue($value, $type = 'str'){
-       
+if (!function_exists('getParamUrlByArray')) {
+    function getParamUrlByArray($arr){
+        $param = '';
+        foreach ($arr as $key => $value) {
+            $param .= $param == '' ? '?'.$key.'='.$value : '&'.$key.'='.$value;
+        }
+        return $param;
     }
 }

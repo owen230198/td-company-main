@@ -18,7 +18,6 @@ class Paper extends Model
     use QPaperTrait, QuoteTrait;
     public function processData($product_id, $product, $type)
     {
-        $cost = 0;
         $data = $product[$type];
         foreach ($data as $paper) {
             $data_process = $this->getDataActionPaper($paper);
@@ -30,12 +29,11 @@ class Paper extends Model
             $data_process['main'] = !empty($paper['main']) ? $paper['main'] : 0;
             (new BaseService)->configBaseDataAction($data_process);
             if (!empty($paper['id'])) {
-                $this->where('id', $paper['id'])->update($data_process);   
+                $process = $this->where('id', $paper['id'])->update($data_process);   
             }else{
-                $this->insert($data_process);
+                $process = $this->insert($data_process);
             }
-            $cost += $data_process['total_cost'];
         }
-        return $cost;
+        return !empty($process);
     }
 }
