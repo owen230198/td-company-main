@@ -152,7 +152,7 @@ class DevController extends Controller
     }
 
     public function testData(){
-        dd(date('d/m/Y h:i:s', Time()));
+        dd(phpInfo());
     }
 }
 

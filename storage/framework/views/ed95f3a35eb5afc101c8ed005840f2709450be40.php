@@ -16,7 +16,7 @@
             'type' => 'linking',
             'note' => 'Chọn chất liệu giấy',
             'attr' => ['required' => 1, 'inject_class' => 'select_paper_materal'],
-            'other_data' => ['data' => ['table' => 'paper_materals', 'ext_option' => [['id' => 0, 'name' => 'Giấy khác']]]],
+            'other_data' => ['data' => ['table' => 'materals','where' => ['materal_key' => $key_supp], 'ext_option' => [['id' => 0, 'name' => 'Giấy khác']]]],
             'value' => @$supply_size['materal']
         ];
         $pro_paper_qttv = [

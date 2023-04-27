@@ -129,8 +129,8 @@ trait QuoteTrait
 
     private function getPriterDevice($device)
     {
-        $ex_length = self::$length*100;
-        $ex_width = self::$width*100;
+        $ex_length = self::$length;
+        $ex_width = self::$width;
         $printer = \App\Models\Printer::where('device', $device)
         ->where('print_length', '>=', $ex_length)
         ->where('print_width','>=', $ex_width)->orderBy('print_length', 'asc')->first();
@@ -161,13 +161,6 @@ trait QuoteTrait
                 }
             }
         }
-        return $ret;
-    }
-
-    private function getPriceOnlyPro($table, $id){
-        $models = getModelByTable($table);
-        $data = $models->find($id);
-        $total = $this->priceCaculatedByArray($data);
-        return $total;
+        return (string) $ret;
     }
 }

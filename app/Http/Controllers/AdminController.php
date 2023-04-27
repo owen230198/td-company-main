@@ -56,12 +56,19 @@ class AdminController extends Controller
             if ($step == 'supply_types') {
                 $data['title'] = 'Danh sách thiết bị máy theo vật tư';
                 $data['supply'] = TDConstant::HARD_ELEMENT;
-            }else{
-                $data = $this->admins->getDataBaseView('devices', 'Danh sách');
+            }elseif(in_array($step, ['devices', 'printers']) ){
+                $table = @$request->input('table') ?? 'devices';
+                $data = $this->admins->getDataBaseView($table, 'Danh sách');
                 $data['title'] = 'Đơn giá thiết bị '. $request->input('name');
-                $where = $request->except('name');
-                $data['data_tables'] = \App\Models\Device::where($where)->paginate(10);
+                $where = $request->except('name', 'table');
+                $data['data_tables'] = \DB::table($table)->where($where)->paginate(10);
                 $data['param_action'] = getParamUrlByArray($where);
+            }elseif ($step = 'print_techs') {
+                $data['title'] = 'Danh sách thiết bị máy in theo công nghệ in';
+                $data['supply'] = TDConstant::PRINT_TECH;
+                unset($data['supply'][0]);
+            }elseif ($step = 'printers') {
+
             }
             session()->put('back_url', url()->full());
             return view('config_devices/'.$step.'/view', $data);
@@ -143,19 +150,16 @@ class AdminController extends Controller
         }
     }
 
-    public function clone($table, $id)
+    public function clone(Request $request, $table, $id)
     {
         if (!$this->admins->checkPermissionAction($table, 'copy')) {
             return redirect('permission-error');
         }
-        $data = $this->getDataActionView($table, 'clone', 'Sao chép');
+        $param = $request->except('_token');
+        $data = $this->getDataActionView($table, 'insert', 'Sao chép', $param);
         $data['dataitem'] = getModelByTable($table)->find($id);
-        if (@$data['dataitem']['id']) {
-            unset($data['dataitem']['id']);
-        }
-        if (@$data['dataitem']['password']) {
-            unset($data['dataitem']['password']);
-        }
+        unset($data['dataitem']['id']);
+        $data['action_url'] = url('insert/'.$table);
         return view('action.view', $data);
     }
 

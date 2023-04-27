@@ -6,7 +6,7 @@ trait QPaperTrait
 	private function configDataSizePaper($paper)
 	{
         $qttv = !empty($paper['qttv']) ? (float) $paper['qttv'] : 0;
-        $price = !empty($paper['materal']) ? ((int) getFieldDataById('unit_price', 'paper_materals', $paper['materal'])) : 
+        $price = !empty($paper['materal']) ? ((int) getFieldDataById('price', 'materals', $paper['materal'])) : 
                 (!empty($paper['unit_price']) ? (float) $paper['unit_price'] : 0);
         $plus_paper = (int) TDConstant::PLUS_PAPER;
         $supp_qty = self::$supp_qty + $plus_paper;

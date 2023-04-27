@@ -77,7 +77,7 @@
         <p class="formula_name font_bold">(4) Chi phí lượt:</p>
         <div class="formula_content d-flex align-items-center">
             <p class="formula_param mx-2">
-                SL tờ in cả BH x ĐG lượt  x  số bát
+                SL sản phẩm cả BH x ĐG lượt  x  số bát
             </p>
             <p class="font_bold formula_result"> = {{ $stage['qty_pro'] }} x {{ $stage['work_price'] }} x {{ $stage['nqty'] }}</p>
             <p class="font_bold formula_result"> = {{ number_format($stage['qty_pro'] * $stage['work_price'] * $stage['nqty']) }}đ</p>
