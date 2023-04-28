@@ -179,27 +179,17 @@ class AdminService extends BaseService
     public function doUpdateTable($id, $table, $data)
     {
         $data = $this->getDataDoAction($data, $table);
-        return \DB::table($table)->where('id', $id)->update($data);
+        $update =  \DB::table($table)->where('id', $id)->update($data);
+        return $update;
     }
 
     public function removeDataTable($table, $id)
     {
-        if ($table == 'n_group_users') {
-            $this->roles->where('n_group_user_id', $id)->delete();
-        }
-        if (in_array($table, \App\Models\Quote::$tableChild)) {
-        }
-        $remove = $this->db::table($table)->where('id', $id)->delete();
-        if ($remove && in_array($table, VariableConstant::ACTION_TABLE_SELF)) {
-            $objService = getServiceByTable($table);
-            $objService->afterRemove($id);
-        }
-        if ($remove&&in_array($table, \App\Models\Quote::$tableChild)) {
-            $this->quote_service->refreshQuoteTotal($quote_id);
-        }
-        if($table == 'quotes'){
-            $this->quote_service->removeDataChild($id);
-        }
+        $remove = \DB::table($table)->where('id', $id)->delete();
+        // if ($remove && in_array($table, \App\Models\NTable::$specific['insert'])) {
+        //     $objService = getServiceByTable($table);
+        //     $objService->afterRemove($id);
+        // }
         return $remove;
     }
 }

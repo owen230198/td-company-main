@@ -1,4 +1,4 @@
-<form action="{{ asset('do-update/'.$table_map.'/'.$id.'').'?ajax=1' }}" method="POST" class="baseAjaxForm">
+<form action="{{ asset('update/'.$table_map.'/'.$obj_id.'') }}" method="POST" class="change_submit checkbox_module">
 	@csrf
 	@include('view_update.checkbox')
 </form>

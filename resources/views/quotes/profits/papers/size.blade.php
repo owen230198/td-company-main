@@ -9,7 +9,7 @@
     @if (!empty($stage['materal']))
         <li>
             <span>Chất liệu giấy: </span>
-            <strong class="color_red">{{ getFieldDataById('name', 'paper_materals', $stage['materal']) }}</strong>
+            <strong class="color_red">{{ getFieldDataById('name', 'materals', $stage['materal']) }}</strong>
         </li>
     @endif
 

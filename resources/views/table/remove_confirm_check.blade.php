@@ -3,7 +3,7 @@
     <div class="modal-content">
       <form action="{{ asset('multiple-remove') }}" method="POST" class="confirmMultiRemoveForm">
         @csrf
-        <input type="hidden" name="multi_remove_id" = value="">
+        <input type="hidden" name="multi_remove_id" value="">
         <input type="hidden" name="table" value="{{ $tableItem['name'] }}">
         <div class="modal-header">
           <h4 class="modal-title fs-17">Xác thực xóa <span class="text-lowercase">{{ $tableItem['note'] }}</span></h4>

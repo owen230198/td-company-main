@@ -56,7 +56,12 @@ class AdminController extends Controller
                 return redirect('permission-error');
             }
             if ($step == 'supply_types') {
-                $data['title'] = 'Danh sách thiết bị máy theo vật tư';
+                $data['type'] = $request->input('type');
+                if ($data['type'] == 'devices') {
+                    $data['title'] = 'Danh sách thiết bị máy theo vật tư';
+                }else{
+                    $data['title'] = 'Danh sách chất liệu & vật tư sản xuất';   
+                }
                 $data['supply'] = TDConstant::HARD_ELEMENT;
             }elseif ($step = 'print_techs') {
                 $data['title'] = 'Danh sách thiết bị máy in theo công nghệ in';

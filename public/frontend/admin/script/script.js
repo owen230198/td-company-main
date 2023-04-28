@@ -25,18 +25,12 @@ var confirmRemoveData = function () {
 };
 
 var checkBoxModule = function () {
-    $(document).on(
-        "change",
-        ".checkbox_module input[type=checkbox]",
-        function (event) {
+    $(document).on("change", ".checkbox_module input[type=checkbox]", function (event) {
             event.preventDefault();
-            eParent = $(this).closest(".checkbox_module");
-            val = $(this).is(":checked") ? 1 : 0;
-            eInutHidden = eParent.find("input[type=hidden]")
-            eInutHidden.val(val);
-            if (eInutHidden.attr('name')=='order[vat]') {
-                vatCheckBoxModule(val);
-            }
+            let parent = $(this).closest(".checkbox_module");
+            let val = $(this).is(":checked") ? 1 : 0;
+            let value_input = parent.find("input[type=hidden]")
+            value_input.val(val);
         }
     );
 };

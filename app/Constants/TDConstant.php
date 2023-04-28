@@ -217,7 +217,7 @@
                 ['key' => self::STYRO, 'name' => 'Loại vật tư', 'table' => 'supply_types']   
             ],
             self::MICA => [
-                ['key' => self::MICA, 'name' => 'Loại vật tư', 'table' => 'supply_types']   
+                ['key' => self::MICA, 'name' => 'Loại vật tư', 'table' => 'supply_prices']   
             ],
             self::FILL_FINISH => [
                 ['key' => self::FILL, 'name' => 'Loại giấy bồi', 'table' => 'supply_prices'],
