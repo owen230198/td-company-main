@@ -1,7 +1,6 @@
 <?php
 namespace App\Services;
 use App\Services\BaseService;
-use Illuminate\Support\Facades\Schema;
 use App\Constants\VariableConstant;
 use \App\Models\NDetailTable;
 class AdminService extends BaseService
@@ -86,6 +85,17 @@ class AdminService extends BaseService
         return ['rowspan' => $rowspan, 'field_shows' => $field_shows];
     }
 
+    public function getDataActionView($table, $action, $action_name, $param = [])
+    {
+        $data['tableItem'] = $this->getTableItem($table);
+        $data['title'] = $action_name.' '.$data['tableItem']['note'];
+        $data['field_list'] = $this->getFieldAction($table, $action);
+        $data['action_name'] = $action_name;
+        $data['default_field'] = $param;
+        $data['regions'] = $this->regions->getRegionOfTable($table);
+        return $data;
+    }
+
     public function getBaseTable($table)
     {
         $field_shows = $this->getFieldAction($table);
@@ -147,51 +157,10 @@ class AdminService extends BaseService
         return $data;
     }
 
-    private function getDataCustomerType($customer_id, $data)
-    {
-        if ($customer_id!=0) {
-            return \App\Constants\NameConstant::OLD_CUSTOMER;
-        }else{
-            $dataInsert['name'] = @$data['company_name'];
-            $dataInsert['contacter'] = @$data['contacter'];
-            $dataInsert['address'] = @$data['address'];
-            $dataInsert['email'] = @$data['email'];
-            $dataInsert['phone'] = @$data['phone'];
-            $dataInsert['act'] = 1;
-            $this->doInsertTable('customers', $dataInsert);
-            return \App\Constants\NameConstant::NEW_CUSTOMER;
-        }
-    }
-
-    private function actionRoleByParent($group_id, $id, $action)
-    {
-        $extend_roles = $this->roles->where('n_group_user_id', $group_id)->get()->toArray();
-        $data_action = !empty($extend_roles)?$extend_roles:array();
-        if (count($data_action)>0) {
-            foreach ($data_action as $data) {
-                unset($data['role_id']);
-                if ($action=='insert') {
-                    $data['n_group_user_id'] = $id;
-                    $this->roles->insert($data);
-                }else{
-                    unset($data['n_group_user_id']);
-                    $this->roles->where(['n_group_user_id'=>$id, 'module_id'=>$data['module_id']])->update($data);
-                }
-            }
-        }
-    }
-
     public function doInsertTable($table, $data)
     {
         $data = $this->getDataDoAction($data, $table);
         return \DB::table($table)->insertGetId($data);
-    }
-
-    private function getPasswordUpdate($table, $id, $password)
-    {
-        $data = $this->db::table($table)->find($id);
-        $new_pass = $password==$data->password?$password:md5($password);
-        return $new_pass;
     }
 
     private function getDataDoAction($data, $table)

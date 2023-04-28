@@ -11,7 +11,7 @@
  Target Server Version : 100425
  File Encoding         : 65001
 
- Date: 28/04/2023 00:45:43
+ Date: 28/04/2023 12:02:01
 */
 
 SET NAMES utf8mb4;
@@ -13157,7 +13157,7 @@ CREATE TABLE `materals`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Mã nhóm',
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Tên nhóm',
   `price` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `materal_key` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Cha',
+  `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Cha',
   `default` tinyint(4) NULL DEFAULT NULL,
   `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Ghi chú',
   `act` tinyint(4) NULL DEFAULT NULL,
@@ -13165,7 +13165,7 @@ CREATE TABLE `materals`  (
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `created_by` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of materals
@@ -13182,7 +13182,8 @@ INSERT INTO `materals` VALUES (9, 'Cán mờ', '2800', 'nilon', 1, NULL, 1, '202
 INSERT INTO `materals` VALUES (10, 'Mực bóng', '2500', 'uv', NULL, '', 1, '2023-03-14 20:07:01', '2023-03-14 20:07:01', 0);
 INSERT INTO `materals` VALUES (11, 'Mực sần cát', '2800', 'uv', 1, NULL, 1, '2023-03-18 12:10:16', '2023-03-18 12:10:16', 0);
 INSERT INTO `materals` VALUES (12, 'Couches', '1500', 'paper', NULL, NULL, 1, '2023-04-28 00:41:36', '2023-04-28 00:41:38', 0);
-INSERT INTO `materals` VALUES (13, 'Ivoly', '1800', 'paper', NULL, NULL, 1, '2023-04-28 00:41:41', '2023-04-28 00:41:43', 0);
+INSERT INTO `materals` VALUES (13, 'Ivoly', '1900', 'paper', NULL, NULL, 1, '2030-11-01 12:00:00', '2030-11-01 12:00:00', 0);
+INSERT INTO `materals` VALUES (14, 'Chất liệu mới', '6600', 'paper', NULL, NULL, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0);
 
 -- ----------------------------
 -- Table structure for n_detail_tables
@@ -13211,7 +13212,7 @@ CREATE TABLE `n_detail_tables`  (
   INDEX `map_insert`(`table_map`, `insert`) USING BTREE,
   INDEX `map_update`(`table_map`, `update`) USING BTREE,
   INDEX `map_search`(`table_map`, `search`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 46 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 64 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of n_detail_tables
@@ -13261,6 +13262,24 @@ INSERT INTO `n_detail_tables` VALUES (42, 'shape_price', '{\"required\":1,\"type
 INSERT INTO `n_detail_tables` VALUES (43, 'act', '', 'Kích hoạt', 'checkbox', 'printers', 1, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-28 00:28:28', '2023-04-28 00:28:28');
 INSERT INTO `n_detail_tables` VALUES (44, 'created_at', '', 'Ngày tạo', 'datetime', 'printers', 1, 1, 1, 1, 0, '', 1, 0, 1, '2023-04-28 00:28:28', '2023-04-28 00:28:28');
 INSERT INTO `n_detail_tables` VALUES (45, 'updated_at', '', 'Ngày sửa', 'datetime', 'printers', 0, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-28 00:28:28', '2023-04-28 00:28:28');
+INSERT INTO `n_detail_tables` VALUES (46, 'name', '{\"required\":1}', 'Tên vật tư', 'text', 'materals', 1, 1, 1, 1, 0, '', 1, 0, 1, '2023-04-28 11:32:02', '2023-04-28 11:32:02');
+INSERT INTO `n_detail_tables` VALUES (47, 'price', '{\"required\":1,\"type_input\":\"number\"}', 'Đơn giá', 'text', 'materals', 1, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-28 11:32:02', '2023-04-28 11:32:02');
+INSERT INTO `n_detail_tables` VALUES (48, 'default', '', 'Lựa chọn mặc định', 'checkbox', 'materals', 1, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-28 11:32:02', '2023-04-28 11:32:02');
+INSERT INTO `n_detail_tables` VALUES (49, 'act', '', 'Kích hoạt', 'checkbox', 'materals', 1, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-28 11:32:02', '2023-04-28 11:32:02');
+INSERT INTO `n_detail_tables` VALUES (50, 'note', '', 'Ghi chú', 'textarea', 'materals', 0, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-28 11:32:40', '2023-04-28 11:32:40');
+INSERT INTO `n_detail_tables` VALUES (51, 'created_at', '', 'Ngày tạo', 'datetime', 'materals', 1, 1, 1, 1, 0, '', 1, 0, 1, '2023-04-28 00:28:28', '2023-04-28 00:28:28');
+INSERT INTO `n_detail_tables` VALUES (52, 'updated_at', '', 'Ngày sửa', 'datetime', 'materals', 0, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-28 00:28:28', '2023-04-28 00:28:28');
+INSERT INTO `n_detail_tables` VALUES (53, 'name', '{\"required\":1}', 'Tên vật tư', 'text', 'supply_prices', 1, 1, 1, 1, 0, '', 1, 0, 1, '2023-04-28 11:38:57', '2023-04-28 11:38:57');
+INSERT INTO `n_detail_tables` VALUES (54, 'price', '{\"required\":1,\"type_input\":\"number\"}', 'Đơn giá', 'text', 'supply_prices', 1, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-28 11:38:57', '2023-04-28 11:38:57');
+INSERT INTO `n_detail_tables` VALUES (55, 'act', '', 'Kích hoạt', 'checkbox', 'supply_prices', 1, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-28 11:38:57', '2023-04-28 11:38:57');
+INSERT INTO `n_detail_tables` VALUES (56, 'note', '', 'Ghi chú', 'textarea', 'supply_prices', 0, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-28 11:38:57', '2023-04-28 11:38:57');
+INSERT INTO `n_detail_tables` VALUES (57, 'created_at', '', 'Ngày tạo', 'datetime', 'supply_prices', 1, 1, 1, 1, 0, '', 1, 0, 1, '2023-04-28 11:38:57', '2023-04-28 11:38:57');
+INSERT INTO `n_detail_tables` VALUES (58, 'updated_at', '', 'Ngày sửa', 'datetime', 'supply_prices', 0, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-28 11:38:57', '2023-04-28 11:38:57');
+INSERT INTO `n_detail_tables` VALUES (59, 'name', '{\"required\":1}', 'Tên vật tư', 'text', 'supply_types', 1, 1, 1, 1, 0, '', 1, 0, 1, '2023-04-28 11:43:12', '2023-04-28 11:43:12');
+INSERT INTO `n_detail_tables` VALUES (60, 'act', '', 'Kích hoạt', 'checkbox', 'supply_types', 1, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-28 11:43:12', '2023-04-28 11:43:12');
+INSERT INTO `n_detail_tables` VALUES (61, 'note', '', 'Ghi chú', 'textarea', 'supply_types', 0, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-28 11:43:12', '2023-04-28 11:43:12');
+INSERT INTO `n_detail_tables` VALUES (62, 'created_at', '', 'Ngày tạo', 'datetime', 'supply_types', 1, 1, 1, 1, 0, '', 1, 0, 1, '2023-04-28 11:43:12', '2023-04-28 11:43:12');
+INSERT INTO `n_detail_tables` VALUES (63, 'updated_at', '', 'Ngày sửa', 'datetime', 'supply_types', 0, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-28 11:43:12', '2023-04-28 11:43:12');
 
 -- ----------------------------
 -- Table structure for n_group_users
@@ -13489,14 +13508,12 @@ INSERT INTO `n_tables` VALUES (6, 'customers', 'Khách hàng', 0, 'customers', '
 INSERT INTO `n_tables` VALUES (7, 'quotes', 'Báo giá', 0, 'quotes', 'quotes', 10, 'view', NULL, '1', '1', '1', '1', '2023-04-23 11:30:46', '2023-04-23 11:30:46');
 INSERT INTO `n_tables` VALUES (8, 'q_papers', 'Tờ in', 7, 'q_papers', 'q_papers', 10, 'view', NULL, '1', '1', '1', '1', '2023-04-23 11:30:46', '2023-04-23 11:30:46');
 INSERT INTO `n_tables` VALUES (9, 'devices', 'Thiết bị & Chi phí', 0, 'q_devices', 'q_devices', 10, 'view', NULL, '1', '1', '1', '1', '2023-04-23 11:30:46', '2023-04-23 11:30:46');
-INSERT INTO `n_tables` VALUES (10, 'q_laminate_materals', 'Chất liệu cán màng', 0, 'q_laminate_materals', 'q_laminate_materals', 10, 'view', NULL, '1', '1', '1', '1', '2023-04-23 11:30:46', '2023-04-23 11:30:46');
+INSERT INTO `n_tables` VALUES (10, 'materals', 'Chất liệu vật tư', 0, 'materals', 'materals', 10, 'view', NULL, '1', '1', '1', '1', '2023-04-28 10:32:23', '2023-04-28 10:32:23');
 INSERT INTO `n_tables` VALUES (11, 'printers', 'Máy in & chi phí', 0, 'printers', 'printers', 10, 'view', NULL, '1', '1', '1', '1', '2023-04-28 00:18:55', '2023-04-28 00:18:55');
-INSERT INTO `n_tables` VALUES (12, 'q_cartons', 'Vật tư cartons', 7, 'q_cartons', 'q_cartons', 10, 'view', NULL, '1', '1', '1', '1', '2023-04-23 11:30:46', '2023-04-23 11:30:46');
-INSERT INTO `n_tables` VALUES (13, 'q_supplies', 'Vật tư tham gia sx', 0, 'q_supplies', 'q_supplies', 10, 'view', NULL, '1', '1', '1', '1', '2023-04-23 11:30:46', '2023-04-23 11:30:46');
-INSERT INTO `n_tables` VALUES (14, 'q_supply_prices', 'Đơn giá vật tư', 0, 'q_supply_prices', 'q_supply_prices', 20, 'view', NULL, '1', '1', '1', '1', '2023-04-23 11:30:46', '2023-04-23 11:30:46');
-INSERT INTO `n_tables` VALUES (15, 'q_foams', 'Mút xốp định hình', 7, 'q_foams', 'q_foams', 10, 'view', NULL, '1', '1', '1', '1', '2023-04-23 11:30:46', '2023-04-23 11:30:46');
-INSERT INTO `n_tables` VALUES (16, 'q_silks', 'Vật tư lụa', 7, 'q_silks', 'q_silks', 10, 'view', NULL, '1', '1', '1', '1', '2023-04-23 11:30:46', '2023-04-23 11:30:46');
-INSERT INTO `n_tables` VALUES (17, 'q_finishes', 'Chi phí bồi & hoàn thiện', 7, 'q_finishes', 'q_finishes', 10, 'view', NULL, '1', '1', '1', '1', '2023-04-23 11:30:46', '2023-04-23 11:30:46');
+INSERT INTO `n_tables` VALUES (12, 'supplies', 'Vật tư hộp', 7, 'supplies', 'supplies', 10, 'view', NULL, '1', '1', '1', '1', '2023-04-28 10:34:00', '2023-04-28 10:34:00');
+INSERT INTO `n_tables` VALUES (13, 'supply_types', 'Vật tư tham gia sx', 0, 'supply_types', 'supply_types', 10, 'view', '[\r\n	{\"icon\":\"list-ul\",\"note\":\"Đơn giá\", \"link\":\"view/supply_prices?supply_id=\"}\r\n]', '1', '1', '1', '1', '2023-04-28 11:49:44', '2023-04-28 11:49:44');
+INSERT INTO `n_tables` VALUES (14, 'supply_prices', 'Đơn giá vật tư', 0, 'supply_prices', 'supply_prices', 20, 'view', NULL, '1', '1', '1', '1', '2023-04-28 10:33:01', '2023-04-28 10:33:01');
+INSERT INTO `n_tables` VALUES (17, 'fill_finishes', 'Chi phí bồi & hoàn thiện', 7, 'fill_finishes', 'fill_finishes', 10, 'view', NULL, '1', '1', '1', '1', '2023-04-28 10:33:32', '2023-04-28 10:33:32');
 INSERT INTO `n_tables` VALUES (18, 'orders', 'Đơn hàng', 0, 'orders', 'orders', 20, 'view', NULL, '1', '1', '1', '1', '2023-04-23 11:30:46', '2023-04-23 11:30:46');
 INSERT INTO `n_tables` VALUES (19, 'p_substances', 'Chất liệu giấy in', 0, 'p_substances', 'p_substances', 20, 'view', NULL, '1', '1', '1', '1', '2023-04-23 11:30:46', '2023-04-23 11:30:46');
 INSERT INTO `n_tables` VALUES (20, 'product_categories', 'Danh mục sản phẩm', 0, 'product_categories', 'product_categories', 20, 'view', NULL, '1', '1', '1', '1', '2023-04-23 11:30:46', '2023-04-23 11:30:46');
@@ -13658,28 +13675,6 @@ INSERT INTO `paper_lots` VALUES (15, 'Lô 90', 1, 1, '2023-03-16 15:21:53', '202
 INSERT INTO `paper_lots` VALUES (16, 'Lô 96', 1, 1, '2023-03-16 15:21:53', '2023-03-16 15:21:53');
 INSERT INTO `paper_lots` VALUES (17, 'Lô 102', 1, 1, '2023-03-16 15:21:53', '2023-03-16 15:21:53');
 INSERT INTO `paper_lots` VALUES (18, 'Lô 109', 1, 1, '2023-03-16 15:21:53', '2023-03-16 15:21:53');
-
--- ----------------------------
--- Table structure for paper_materals
--- ----------------------------
-DROP TABLE IF EXISTS `paper_materals`;
-CREATE TABLE `paper_materals`  (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `unit_price` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `act` tinyint(4) NULL DEFAULT NULL,
-  `created_by` int(10) NULL DEFAULT NULL,
-  `created_at` datetime(0) NULL DEFAULT NULL,
-  `updated_at` datetime(0) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  INDEX `index`(`id`, `name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of paper_materals
--- ----------------------------
-INSERT INTO `paper_materals` VALUES (1, 'Couches', '100', 1, 1, '2023-03-11 22:23:07', '2023-03-11 22:23:09');
-INSERT INTO `paper_materals` VALUES (2, 'Ivoly', '100', 1, 1, '2023-03-11 22:23:07', '2023-03-11 22:23:09');
 
 -- ----------------------------
 -- Table structure for papers
@@ -14009,7 +14004,7 @@ CREATE TABLE `supply_prices`  (
   INDEX `carton_foam_index`(`supply_id`) USING BTREE,
   INDEX `name_index`(`name`) USING BTREE,
   INDEX `act_indx`(`act`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 94 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 95 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of supply_prices
@@ -14099,6 +14094,7 @@ INSERT INTO `supply_prices` VALUES (90, 'Nam châm trung', 2000, 'magnet', 0, '1
 INSERT INTO `supply_prices` VALUES (91, 'Nam châm lớn', 2000, 'magnet', 0, '1', 1, '2023-04-18 19:29:18', '2023-04-18 19:29:18', 0);
 INSERT INTO `supply_prices` VALUES (92, 'Vật tư Decal test', 2000, 'decal', 0, '1', 1, '2023-04-26 05:48:31', '2023-04-26 05:48:31', 0);
 INSERT INTO `supply_prices` VALUES (93, 'Vật tư mica test', 2000, 'mica', 0, '1', 1, '2023-04-26 05:48:43', '2023-04-26 05:48:43', 0);
+INSERT INTO `supply_prices` VALUES (94, 'Vật tư decal test 2', 6600, 'decal', NULL, NULL, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0);
 
 -- ----------------------------
 -- Table structure for supply_types

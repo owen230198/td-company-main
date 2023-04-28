@@ -30,16 +30,18 @@ class AdminController extends Controller
 
     public function view(Request $request, $table)
     {
-        if (!empty($request->all())) {
-            foreach ($request->all() as $key => $value) {
+        $data = $this->admins->getDataBaseView($table, 'Danh sách');
+        $param = $request->all();
+        if (!empty($param)) {
+            foreach ($param as $key => $value) {
                 static::$view_where[] = ['key' => $key, 'value' => $value];
             }
+            $data['param_action'] = getParamUrlByArray($param);
         }
         $permission = $this->admins->checkPermissionAction($table, 'view');
         if (!@$permission['allow']) {
             return redirect('permission-error');
         }
-        $data = $this->admins->getDataBaseView($table, 'Danh sách');
         if(!empty($permission['where'])){
             static::$view_where[] = @$permission['where'];
         }
@@ -56,19 +58,10 @@ class AdminController extends Controller
             if ($step == 'supply_types') {
                 $data['title'] = 'Danh sách thiết bị máy theo vật tư';
                 $data['supply'] = TDConstant::HARD_ELEMENT;
-            }elseif(in_array($step, ['devices', 'printers']) ){
-                $table = @$request->input('table') ?? 'devices';
-                $data = $this->admins->getDataBaseView($table, 'Danh sách');
-                $data['title'] = 'Đơn giá thiết bị '. $request->input('name');
-                $where = $request->except('name', 'table');
-                $data['data_tables'] = \DB::table($table)->where($where)->paginate(10);
-                $data['param_action'] = getParamUrlByArray($where);
             }elseif ($step = 'print_techs') {
                 $data['title'] = 'Danh sách thiết bị máy in theo công nghệ in';
                 $data['supply'] = TDConstant::PRINT_TECH;
                 unset($data['supply'][0]);
-            }elseif ($step = 'printers') {
-
             }
             session()->put('back_url', url()->full());
             return view('config_devices/'.$step.'/view', $data);
@@ -108,7 +101,7 @@ class AdminController extends Controller
         }else{
             $param = $request->except('_token');
             if ($request->isMethod('GET')) {
-                $data = $this->getDataActionView($table, 'insert', 'Thêm mới', $param);
+                $data = $this->admins->getDataActionView($table, 'insert', 'Thêm mới', $param);
                 $data['action_url'] = url('insert/'.$table);
                 return view('action.view', $data);
             }else{
@@ -134,7 +127,7 @@ class AdminController extends Controller
         }else{
             $param = $request->except('_token');
             if ($request->isMethod('GET')) {
-                $data = $this->getDataActionView($table, 'update', 'Chi tiết', $param);
+                $data = $this->admins->getDataActionView($table, 'update', 'Chi tiết', $param);
                 $data['dataitem'] = getModelByTable($table)->find($id);
                 $data['action_url'] = url('update/'.$table.'/'.$id);
                 return view('action.view', $data);
@@ -156,7 +149,7 @@ class AdminController extends Controller
             return redirect('permission-error');
         }
         $param = $request->except('_token');
-        $data = $this->getDataActionView($table, 'insert', 'Sao chép', $param);
+        $data = $this->admins->getDataActionView($table, 'insert', 'Sao chép', $param);
         $data['dataitem'] = getModelByTable($table)->find($id);
         unset($data['dataitem']['id']);
         $data['action_url'] = url('insert/'.$table);

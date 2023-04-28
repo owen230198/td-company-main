@@ -52,6 +52,7 @@
         const PRINT = 'print';
         const NILON = 'nilon';
         const METALAI = 'metalai';
+        const COVER = 'cover';
         const COMPRESS = 'compress';
         const FLOAT = 'float';
         const UV = 'uv';
@@ -145,6 +146,7 @@
                             ];
 
         const PAPER_HARD_DEVICE = [
+                                self::PRINT => 'Máy in',
                                 self::NILON => 'Máy cán màng',
                                 self::ELEVATE => 'Máy bế',
                                 self::PEEL => 'Máy bóc lề',
@@ -189,6 +191,39 @@
             self::FILL => 'Bồi',
             self::FINISH => 'Hoàn thiện',
             self::MAGNET => 'vật tư nam châm'
+        ];
+
+        const MATERAL_SUPPLY_TYPE = [
+            self::PAPER => [
+                ['key' => self::PAPER, 'name' => 'Chất liệu giấy', 'table' => 'materals'],
+                ['key' => self::NILON, 'name' => 'Chất liệu cán nilon', 'table' => 'materals'],
+                ['key' => self::METALAI, 'name' => 'Chất liệu cán metalai', 'table' => 'materals'],
+                ['key' => self::COVER, 'name' => 'Chất liệu cán phủ trên', 'table' => 'materals'],
+                ['key' => self::UV, 'name' => 'Mực in UV', 'table' => 'materals']
+            ],
+            self::CARTON => [
+                ['key' => self::CARTON, 'name' => 'Loại vật tư', 'table' => 'supply_types']   
+            ],
+            self::RUBBER => [
+                ['key' => self::RUBBER, 'name' => 'Loại vật tư', 'table' => 'supply_types']   
+            ],
+            self::DECAL => [
+                ['key' => self::DECAL, 'name' => 'Loại vật tư', 'table' => 'supply_prices']   
+            ],
+            self::SILK => [
+                ['key' => self::SILK, 'name' => 'Loại vật tư', 'table' => 'supply_prices']   
+            ],
+            self::STYRO => [
+                ['key' => self::STYRO, 'name' => 'Loại vật tư', 'table' => 'supply_types']   
+            ],
+            self::MICA => [
+                ['key' => self::MICA, 'name' => 'Loại vật tư', 'table' => 'supply_types']   
+            ],
+            self::FILL_FINISH => [
+                ['key' => self::FILL, 'name' => 'Loại giấy bồi', 'table' => 'supply_prices'],
+                ['key' => self::FINISH, 'name' => 'Công đoạn hoàn thiện', 'table' => 'supply_prices'],
+                ['key' => self::MAGNET, 'name' => 'Vật tư nam châm', 'table' => 'supply_prices'],     
+            ]
         ];
 
         //Cấu tạo sản phẩm

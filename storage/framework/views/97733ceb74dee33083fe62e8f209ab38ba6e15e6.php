@@ -5,7 +5,7 @@
         'type' => 'linking',
         'note' => 'chất liệu',
         'value' =>  @$data_handle['materal'],
-        'other_data' => ['data' => ['table' => 'materals', 'where' => ['materal_key' => $key_stage], 'select' => ['id', 'name']]]
+        'other_data' => ['data' => ['table' => 'materals', 'where' => ['type' => $key_stage], 'select' => ['id', 'name']]]
     ]; 
     $paper_metalai_face = [
         'name' => 'product['.$pro_index.'][paper]['.$supp_index.']['.$key_stage.'][face]',
@@ -20,7 +20,7 @@
         'type' => 'linking',
         'note' => 'chất liệu cán phủ trên',
         'value' =>  @$data_handle['cover_materal'],
-        'other_data' => ['data' => ['table' => 'materals', 'where' => ['materal_key' => 'cover'], 'select' => ['id', 'name']]]
+        'other_data' => ['data' => ['table' => 'materals', 'where' => ['type' => 'cover'], 'select' => ['id', 'name']]]
     ]; 
     $paper_cover_face = [
         'name' => 'product['.$pro_index.'][paper]['.$supp_index.']['.$key_stage.'][cover_face]',

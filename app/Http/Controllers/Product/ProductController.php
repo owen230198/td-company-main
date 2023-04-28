@@ -14,7 +14,7 @@ class ProductController extends Controller
 
     private function getProductActionViewData($action, $actionName)
     {
-        $data = $this->getDataActionView('products', $action, $actionName);
+        $data = $this->admins->getDataActionView('products', $action, $actionName);
         $proCateOption = getProductCategoryOption();
         $data['listTypeProcate'] = $proCateOption['listTypeProcate'];
         $data['listProCate'] = $proCateOption['listProCate'];

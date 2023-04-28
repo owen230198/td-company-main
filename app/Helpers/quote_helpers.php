@@ -62,7 +62,7 @@ if (!function_exists('getExactQuantityPaper')) {
 	if (!function_exists('getDefaultMateralIDByKey')) {
 		function getDefaultMateralIDByKey($key)
 		{
-			$materal = \DB::table('materals')->select('id')->where(['act' => 1, 'materal_key' => $key, 'default' => 1])->first();
+			$materal = \DB::table('materals')->select('id')->where(['act' => 1, 'type' => $key, 'default' => 1])->first();
 			return $materal->id;
 		}
 	}

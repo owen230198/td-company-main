@@ -17,7 +17,7 @@ class OrderController extends Controller
 
     private function getOrderActionViewData($action, $actioName)
     {
-        $data = $this->getDataActionView('orders', $action, $actioName);
+        $data = $this->admins->getDataActionView('orders', $action, $actioName);
         return $data;
     }
 
@@ -109,7 +109,7 @@ class OrderController extends Controller
         if (!@$permission['allow']) {
             return redirect('permission-error');
         }
-        $data = $this->getDataActionView($table, 'view', 'Chi tiết');
+        $data = $this->admins->getDataActionView($table, 'view', 'Chi tiết');
         $data['dataItem'] = json_decode(json_encode(\DB::table($table)->find($id)), true);
         if ($table == 'c_processes') {
             $data['dataItemCProcess'] = $data['dataItem'];

@@ -1,4 +1,14 @@
 <div class="list_table_func d-flex align-items-center justify-content-center">
+	<?php
+		$ext_action = !empty($tableItem['ext_action']) ? json_decode($tableItem['ext_action'], true) : []
+ 	?>
+	<?php if(!empty($ext_action)): ?>
+		<?php $__currentLoopData = $ext_action; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $button): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+			<a href="<?php echo e(url(@$button['link'].''.$data->id)); ?>" class="table-btn mr-2" title="<?php echo e(@$button['note']); ?>">
+				<i class="fa fa-<?php echo e($button['icon']); ?> fs-14" aria-hidden="true"></i>
+			</a>	
+		<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+	<?php endif; ?>
 	<a href="<?php echo e(asset('update/'.$tableItem['name'].'/'.$data->id.''.@$param_action)); ?>" class="table-btn" title="Sửa">
 		<i class="fa fa-pencil-square-o fs-14" aria-hidden="true"></i>
 	</a>

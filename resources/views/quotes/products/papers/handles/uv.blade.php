@@ -12,7 +12,7 @@
         'type' => 'linking',
         'note' => 'mực in',
         'value' => @$data_handle['materal'],
-        'other_data' => ['data' => ['table' => 'materals', 'where' => ['materal_key' => $key_stage], 'select' => ['id', 'name']]]
+        'other_data' => ['data' => ['table' => 'materals', 'where' => ['type' => $key_stage], 'select' => ['id', 'name']]]
     ];
 @endphp
 @include('view_update.view', $paper_uv_face)
