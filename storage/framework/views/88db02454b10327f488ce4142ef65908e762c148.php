@@ -3,7 +3,7 @@
     <div class="modal-content">
       <form action="<?php echo e(asset('multiple-remove')); ?>" method="POST" class="confirmMultiRemoveForm">
         <?php echo csrf_field(); ?>
-        <input type="hidden" name="multi_remove_id" = value="">
+        <input type="hidden" name="multi_remove_id" value="">
         <input type="hidden" name="table" value="<?php echo e($tableItem['name']); ?>">
         <div class="modal-header">
           <h4 class="modal-title fs-17">Xác thực xóa <span class="text-lowercase"><?php echo e($tableItem['note']); ?></span></h4>

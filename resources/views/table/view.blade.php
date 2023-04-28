@@ -37,6 +37,6 @@
             <p class="fs-15 font-italic color_red">Chưa có dữ liệu {{ @$title }} !</p>
         @endif
     </div>
-    @include('table.remove_confirm')
+    @include('table.remove_confirm', ['table_name' => $tableItem['name'], 'table_note' => $tableItem['note']])
     @include('table.remove_confirm_check')
 @endsection

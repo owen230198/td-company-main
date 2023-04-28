@@ -9,7 +9,7 @@
     <?php if(!empty($stage['materal'])): ?>
         <li>
             <span>Chất liệu giấy: </span>
-            <strong class="color_red"><?php echo e(getFieldDataById('name', 'paper_materals', $stage['materal'])); ?></strong>
+            <strong class="color_red"><?php echo e(getFieldDataById('name', 'materals', $stage['materal'])); ?></strong>
         </li>
     <?php endif; ?>
 

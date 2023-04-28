@@ -39,7 +39,7 @@
             <p class="fs-15 font-italic color_red">Chưa có dữ liệu <?php echo e(@$title); ?> !</p>
         <?php endif; ?>
     </div>
-    <?php echo $__env->make('table.remove_confirm', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php echo $__env->make('table.remove_confirm', ['table_name' => $tableItem['name'], 'table_note' => $tableItem['note']], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <?php echo $__env->make('table.remove_confirm_check', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php $__env->stopSection(); ?>
 
