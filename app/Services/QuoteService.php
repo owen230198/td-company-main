@@ -161,4 +161,18 @@ class QuoteService extends BaseService
             return $status;
         }
     }
+
+    public function afterRemove($id)
+    {
+        $products = Product::where('quote_id', $id)->get('id');
+        $childs = Product::$childTable;
+        foreach ($products as $product) {
+            $remove_pro = Product::where('id', $product['id'])->delete();
+            if ($remove_pro) {
+                foreach ($childs as $table) {
+                    \DB::table($table)->where('product', $product['id'])->delete();
+                }
+            }        
+        }
+    }
 }

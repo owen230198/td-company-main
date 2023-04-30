@@ -52,7 +52,7 @@
                                 @php
                                     $arr = $field;
                                     $arr['obj_id'] = $data->id;
-                                    $arr['value'] = $data->{$field['name']};
+                                    $arr['value'] = @$data->{$field['name']};
                                     $arr['other_data'] = !empty($field['other_data']) ? json_decode($field['other_data'], true) : [];
                                 @endphp
                                 @include('view_table.'.$field['type'], $arr)

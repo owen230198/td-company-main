@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="<?php echo e(asset('frontend/base/css/bootstrap-multiselect.min.css')); ?>">
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
-    <form action="<?php echo e(!empty($link_update) ? $link_update : asset('create-quote?step=handle_config&id='.$data_quote['id'])); ?>" method="POST" 
+    <form action="<?php echo e(!empty($link_action) ? $link_action : asset('create-quote?step=handle_config&id='.$data_quote['id'])); ?>" method="POST" 
     class="config_handle_form config_content baseAjaxForm" enctype="multipart/form-data" onkeydown="return event.key != 'Enter'">
         <?php echo csrf_field(); ?>
         <?php echo $__env->make('quotes.head_information', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>

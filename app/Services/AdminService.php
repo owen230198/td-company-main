@@ -186,10 +186,12 @@ class AdminService extends BaseService
     public function removeDataTable($table, $id)
     {
         $remove = \DB::table($table)->where('id', $id)->delete();
-        // if ($remove && in_array($table, \App\Models\NTable::$specific['insert'])) {
-        //     $objService = getServiceByTable($table);
-        //     $objService->afterRemove($id);
-        // }
+        if ($remove && in_array($table, \App\Models\NTable::$specific['insert'])) {
+            $objService = getServiceByTable($table);
+            if (method_exists($objService, 'afterRemove')) {
+                $objService->afterRemove($id);
+            }
+        }
         return $remove;
     }
 }

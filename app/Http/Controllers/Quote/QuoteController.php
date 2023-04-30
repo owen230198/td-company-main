@@ -14,6 +14,8 @@ class QuoteController extends Controller
         $this->services = new \App\Services\QuoteService;
     }
 
+    static $copy = false;
+
     public function index()
     {
         return redirect('/');
@@ -42,14 +44,24 @@ class QuoteController extends Controller
                     $data['products'] = Product::where(['act' => 1, 'quote_id' => $id])->get();
                     $data['product_qty'] = count($data['products']);
                 }
-                $data['title'] = 'Chỉnh sửa báo giá - '.$quote['seri'].' - '.getStepCreateQuote($step);
-                $data['link_update'] = url('update/quotes/'.$id.'?step='.$step);
+                if (self::$copy) {
+                    $data['title'] = 'Sao chép báo giá - '.$quote['seri'].' - '.getStepCreateQuote($step);   
+                }else{
+                    $data['title'] = 'Chỉnh sửa báo giá - '.$quote['seri'].' - '.getStepCreateQuote($step);
+                    $data['link_update'] = url('update/quotes/'.$id.'?step='.$step);
+                }
                 return view('quotes.'.$step, $data);
             }
             
         }else{
             return redirect(url('/'))->with('error', 'Dữ liệu báo giá không tồn tại !');
         } 
+    }
+
+    public function clone($request, $id)
+    {
+        static::$copy = true;
+        return $this->update($request, $id);
     }
 
     public function createQuote(Request $request)

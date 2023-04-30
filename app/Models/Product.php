@@ -5,6 +5,7 @@ class Product extends Model
 {
     protected $table = 'products';
     protected $protectFields = false;
+    static $childTable = ['papers', 'supplies', 'fill_finishes'];
 }
 
 ?>

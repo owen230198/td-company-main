@@ -511,7 +511,6 @@ a.device_supp_item {
 .page_content .table td, .page_content .table th{
     padding: 5px 10px;
     vertical-align: middle;
-    min-width: 120px;
 }
 
 .page_content .table td{

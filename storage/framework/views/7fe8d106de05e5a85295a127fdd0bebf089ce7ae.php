@@ -4,7 +4,7 @@
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
     <div class="chose_customer_form config_content">
-        <form action="<?php echo e(!empty($link_update) ? $link_update : asset('create-quote?step=chose_customer')); ?>" method="POST" class="chose_customer_quote_form" 
+        <form action="<?php echo e(!empty($link_action) ? $link_action : asset('create-quote?step=chose_customer')); ?>" method="POST" class="chose_customer_quote_form" 
         enctype="multipart/form-data">
             <?php echo csrf_field(); ?>
             <div class="form-group d-flex mb-3 pb-3">

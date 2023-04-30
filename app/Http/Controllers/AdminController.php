@@ -153,12 +153,17 @@ class AdminController extends Controller
         if (!$this->admins->checkPermissionAction($table, 'copy')) {
             return redirect('permission-error');
         }
-        $param = $request->except('_token');
-        $data = $this->admins->getDataActionView($table, 'insert', 'Sao chép', $param);
-        $data['dataitem'] = getModelByTable($table)->find($id);
-        unset($data['dataitem']['id']);
-        $data['action_url'] = url('insert/'.$table);
-        return view('action.view', $data);
+        if (in_array($table, NTable::$specific['update'])) {
+            $controller = getObjectByTable($table);
+            return $controller->clone($request, $id);
+        }else{
+            $param = $request->except('_token');
+            $data = $this->admins->getDataActionView($table, 'insert', 'Sao chép', $param);
+            $data['dataitem'] = getModelByTable($table)->find($id);
+            unset($data['dataitem']['id']);
+            $data['action_url'] = url('insert/'.$table);
+            return view('action.view', $data);
+        }  
     }
 
     public function remove(Request $request){
