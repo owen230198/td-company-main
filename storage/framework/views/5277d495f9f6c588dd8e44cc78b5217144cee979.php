@@ -11,5 +11,8 @@
 
 <div class="d-flex align-items-center">
     <?php echo $__env->make('view_update.view', $paper_box_device, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-    <span class="ml-2 color_red fs-12 font-italic">(Dán hộp tay dành cho sản phẩm nhỏ hoặc dị dạng)</span>
+    <div class="d-block">
+        <p class="ml-2 color_red fs-12 font-italic mb-1">Dán hộp tay dành cho sản phẩm nhỏ hoặc dị dạng</p>
+        <p class="ml-2 color_red fs-12 font-italic">(VD: Hộp nhỏ là chiều song song với cạnh dán dưới 12cm là không được sử dụng máy tự động)</p>
+    </div>
 </div><?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/quotes/products/papers/handles/box_paste.blade.php ENDPATH**/ ?>

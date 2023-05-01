@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="{{ asset('frontend/base/css/bootstrap-multiselect.min.css') }}">
 @endsection
 @section('content')
-    <form action="{{ !empty($link_update) ? $link_update : asset('create-quote?step=handle_config&id='.$data_quote['id']) }}" method="POST" 
+    <form action="{{ !empty($link_action) ? $link_action : asset('create-quote?step=handle_config&id='.$data_quote['id']) }}" method="POST" 
     class="config_handle_form config_content baseAjaxForm" enctype="multipart/form-data" onkeydown="return event.key != 'Enter'">
         @csrf
         @include('quotes.head_information')
@@ -15,7 +15,7 @@
             @php
                 $quote_pro_qty_field = [
                     'name' => 'quote[product_qty]',
-                    'note' => 'Số lượng sản phẩm',
+                    'note' => 'Số đơn hàng',
                     'attr' => ['type_input' => 'number', 
                     'inject_class' => 'quote_set_qty_pro_input',
                     'disable_field' => @$product_qty ? 1 : 0 ],

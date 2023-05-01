@@ -64,6 +64,13 @@
             <strong class="color_red">{{ number_format((float) $stage['work_price']) }}đ</strong>
         </li>
     @endif
+
+    @if (!empty($stage['ext_price']))
+        <li>
+            <span>Thêm Giá Cho Khuôn Phức Tạp: </span>
+            <strong class="color_red">{{ number_format((float) $stage['ext_price']) }}đ</strong>
+        </li>
+    @endif
 </ul>
 <div class="mt-2 pt-2 border_top_thin formula_tab">
     @php
@@ -107,7 +114,7 @@
             <p class="font_bold formula_result"> = {{ number_format($stage['supp_qty'] * $stage['work_price']) }}đ</p>
         </div>
     </div>
-    <p class="fs-15 font_bold">Tổng chi phí cho máy bế: (1) + (2) + (3) + (4) = {{ number_format($stage['cost']) }}đ</p>       
+    <p class="fs-15 font_bold">Tổng chi phí cho máy bế: (1) + (2) + (3) + (4) + Giá thêm cho khuôn phức tạp (nếu có) = {{ number_format($stage['cost']) }}đ</p>       
 </div>
 
 @if (!empty($float))

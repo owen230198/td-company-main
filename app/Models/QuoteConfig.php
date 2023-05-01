@@ -11,6 +11,6 @@ class QConfig extends Model
      *
      * @var string
      */
-    protected $table = 'q_configs';
+    protected $table = 'quote_configs';
     protected $protectFields = false;
 }

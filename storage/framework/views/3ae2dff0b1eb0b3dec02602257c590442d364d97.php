@@ -1,4 +1,4 @@
-<div class="d-flex justify-content-between">
+<div class="d-flex">
     <div class="d-block">
         <?php
             $key_stage = \TDConst::EXT_PRICE;

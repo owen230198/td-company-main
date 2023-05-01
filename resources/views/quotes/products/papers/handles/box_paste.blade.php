@@ -11,5 +11,8 @@
 
 <div class="d-flex align-items-center">
     @include('view_update.view', $paper_box_device)
-    <span class="ml-2 color_red fs-12 font-italic">(Dán hộp tay dành cho sản phẩm nhỏ hoặc dị dạng)</span>
+    <div class="d-block">
+        <p class="ml-2 color_red fs-12 font-italic mb-1">Dán hộp tay dành cho sản phẩm nhỏ hoặc dị dạng</p>
+        <p class="ml-2 color_red fs-12 font-italic">(VD: Hộp nhỏ là chiều song song với cạnh dán dưới 12cm là không được sử dụng máy tự động)</p>
+    </div>
 </div>

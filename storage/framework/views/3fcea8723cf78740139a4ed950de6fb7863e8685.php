@@ -5,12 +5,9 @@
         <div class="login_logo mb-4">
             <img src="<?php echo e(asset('frontend/admin/images/logo.png')); ?>" />
         </div>
-        <?php
-            $const = new \App\Constants\StatusConstant;
-        ?>
-        <?php if(@session($const::ERR_MSG)): ?>
+        <?php if(@session(\StatusConst::ERR_MSG)): ?>
             <div class="alert alert-danger">
-                <?php echo e(session($const::ERR_MSG)['messages']); ?>
+                <?php echo e(session(\StatusConst::ERR_MSG)['messages']); ?>
 
             </div>
         <?php endif; ?>
@@ -21,7 +18,10 @@ $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                <p class="err_mess fs-13 font-italic color_red text-left"><?php echo e($message); ?></p>
+                <div class="alert alert-danger">
+                    <?php echo e(@$message); ?>
+
+                </div>
             <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
@@ -32,7 +32,10 @@ $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                <p class="err_mess fs-13 font-italic color_red text-left"><?php echo e($message); ?></p>
+                <div class="alert alert-danger">
+                    <?php echo e(@$message); ?>
+
+                </div>
             <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;

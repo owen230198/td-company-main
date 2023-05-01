@@ -14,7 +14,7 @@
 @endphp
 <div class="quote_fill_finish_item position-relative" data-index={{ $findex }}>
     @if ($findex > 0)
-        <span class="remove_ext_paper_quote d-flex remove_ff_quote color_red smooth"><i class="fa fa-times" aria-hidden="true"></i></span> 
+        <span class="remove_ext_element_quote d-flex remove_ff_quote color_red smooth"><i class="fa fa-times" aria-hidden="true"></i></span> 
     @endif
     @include('view_update.view', $data_select_finish)
 </div>

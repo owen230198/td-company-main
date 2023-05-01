@@ -93,7 +93,7 @@ var selectPaperMateralModule = function()
     event.preventDefault();
     let module_size_paper = $(this).closest('.materal_paper_module').find('.paper_price_config_input');
     let price_input = module_size_paper.find('input.price_input_paper');
-    if ($(this).val() === '0') {
+    if ($(this).val() === 'other') {
       if (module_size_paper.css('display') === 'none' && price_input.attr('disabled') === 'disabled') {
         module_size_paper.fadeIn(100);
         price_input.attr('disabled', false);  
@@ -132,7 +132,6 @@ var addSuppModule = function()
     let supp_view = $(this).data('key');
     let supp_index = parseInt(item.last().data('index')) + 1;
     let supp_name = item.first().find('input.quote_receive_paper_name_main').val();
-    console.log(supp_name);
     let pro_qty = item.first().find('input.pro_qty_input ').first().val();
     let url = 'add-supply-quote?pro_index='+pro_index+'&supp_index='+supp_index+'&supp_view='+supp_view+'&supp_name='+supp_name+'&pro_qty='+pro_qty;
     ajaxViewTarget(url, list_section, list_section, 2);
@@ -156,7 +155,7 @@ var addFillFinishModule = function()
 
 var removeItemAddedModule = function()
 {
-  $(document).on('click', 'span.remove_ext_paper_quote', function(event){
+  $(document).on('click', 'button.remove_ext_element_quote', function(event){
     event.preventDefault();
     $(this).parent().remove();
   });
@@ -300,7 +299,7 @@ var hoverDetailSupplyCost = function()
       let tab_detail = $(this).find('.detail_quote_supply_item');
       let timeout = setTimeout(function() {
         tab_detail.addClass("hover");
-      }, 2000);
+      }, 1500);
       tab_detail.data("timeout", timeout);
     },
     function() {

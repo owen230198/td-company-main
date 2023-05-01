@@ -23,7 +23,7 @@
     <?php if(!empty($stage['qttv_price'])): ?>
         <li>
             <span>ĐG vật tư: </span>
-            <strong class="color_red"><?php echo e(number_format((float) $stage['qttv_price'])); ?>đ</strong>
+            <strong class="color_red"><?php echo e((float) $stage['qttv_price']); ?>đ</strong>
         </li>
     <?php endif; ?>
 

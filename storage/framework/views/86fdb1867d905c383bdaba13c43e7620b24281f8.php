@@ -6,6 +6,13 @@
         </li>
     <?php endif; ?>
 
+    <?php if(!empty($stage['cover_supp_qty'])): ?>
+        <li>
+            <span>SL tờ in (phủ trên): </span>
+            <strong class="color_red"><?php echo e($stage['cover_supp_qty']); ?></strong>
+        </li>
+    <?php endif; ?>
+
     <?php if(!empty($stage['materal'])): ?>
         <li>
             <span>Chất liệu cán: </span>
@@ -137,8 +144,8 @@
             <p class="formula_param mx-2">
                 Dài (<?php echo e($size['length']); ?>) x Rộng x ĐG chất liệu cán phủ trên x (SL tờ in cả BH + BH thiết bị)  x Số mặt cán phủ trên
             </p>
-            <p class="font_bold formula_result mr-2"> = <?php echo e($size['length']); ?> x <?php echo e($size['width']); ?> x <?php echo e($stage['materal_cover_price']); ?> x <?php echo e($stage['supp_qty']); ?> x <?php echo e($stage['cover_face']); ?></p>
-            <p class="font_bold formula_result"> = <?php echo e(number_format($size['length'] * $size['width'] * $stage['materal_cover_price'] * $stage['supp_qty'] * $stage['cover_face'])); ?>đ</p>
+            <p class="font_bold formula_result mr-2"> = <?php echo e($size['length']); ?> x <?php echo e($size['width']); ?> x <?php echo e($stage['materal_cover_price']); ?> x <?php echo e((int) @$stage['cover_supp_qty']); ?> x <?php echo e($stage['cover_face']); ?></p>
+            <p class="font_bold formula_result"> = <?php echo e(number_format($size['length'] * $size['width'] * $stage['materal_cover_price'] * (int) @$stage['cover_supp_qty'] * $stage['cover_face'])); ?>đ</p>
         </div>
     </div>   
     <div class="formula_item d-flex align-items-center color_brown mb-1">
@@ -156,8 +163,8 @@
             <p class="formula_param mx-2">
                 (SL tờ in cả BH + BH thiết bị) x ĐG lượt  x  Số mặt cán phủ trên
             </p>
-            <p class="font_bold formula_result"> = <?php echo e($stage['supp_qty']); ?> x <?php echo e($stage['work_price']); ?> x <?php echo e($stage['cover_face']); ?></p>
-            <p class="font_bold formula_result"> = <?php echo e(number_format($stage['supp_qty'] * $stage['work_price'] * $stage['cover_face'])); ?>đ</p>
+            <p class="font_bold formula_result"> = <?php echo e((int) @$stage['cover_supp_qty']); ?> x <?php echo e($stage['work_price']); ?> x <?php echo e($stage['cover_face']); ?></p>
+            <p class="font_bold formula_result"> = <?php echo e(number_format((int) @$stage['cover_supp_qty'] * $stage['work_price'] * $stage['cover_face'])); ?>đ</p>
         </div>
     </div>
     <p class="fs-15 font_bold">Tổng chi phí cho máy cán: (1) + (2) + (3) + (4) = <?php echo e(number_format($stage['metalai_cover_price'])); ?>đ</p>       

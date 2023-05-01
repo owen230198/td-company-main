@@ -7,7 +7,10 @@
             'value' => @$data_handle['ext_price'] ?? 0
         ] 
 ?>
-<?php echo $__env->make('view_update.view', $paper_elevate_ext_price, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<div class="d-flex align-items-center">
+    <?php echo $__env->make('view_update.view', $paper_elevate_ext_price, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <span class="ml-2 font-italic color_red fs-12">Khuôn nhiều chi tiết khác thường</span>
+</div>
 
 <?php echo $__env->make('quotes.products.papers.handles.select_device', ['key_device' => $key_stage, 'value' => @$data_handle['machine']], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 

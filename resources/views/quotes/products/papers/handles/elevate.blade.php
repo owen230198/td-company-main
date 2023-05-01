@@ -7,7 +7,10 @@
             'value' => @$data_handle['ext_price'] ?? 0
         ] 
 @endphp
-@include('view_update.view', $paper_elevate_ext_price)
+<div class="d-flex align-items-center">
+    @include('view_update.view', $paper_elevate_ext_price)
+    <span class="ml-2 font-italic color_red fs-12">Khuôn nhiều chi tiết khác thường</span>
+</div>
 
 @include('quotes.products.papers.handles.select_device', ['key_device' => $key_stage, 'value' => @$data_handle['machine']])
 

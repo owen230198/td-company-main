@@ -64,26 +64,26 @@
         const CUT = 'cut';
         const BAG_PASTE = 'bag_paste';
         const HANDLE_STAGE = [
-            ['key' => self::PRINT, 'note' => 'Quy cách - kiểu in', 'color' => 'green'],
-            ['key' => self::NILON, 'note' => 'Cán nilon', 'color' => 'green'],
-            ['key' => self::ELEVATE, 'note' => 'Máy bế', 'color' => 'green'],
-            ['key' => self::PEEL, 'note' => 'Máy bóc lề', 'color' => 'green'],
-            ['key' => self::BOX_PASTE, 'note' => 'Máy dán hộp giấy', 'color' => 'green'],
+            ['key' => self::PRINT, 'note' => 'Quy cách - kiểu in', 'color' => 'normal'],
+            ['key' => self::NILON, 'note' => 'Cán nilon', 'color' => 'normal'],
             ['key' => self::METALAI, 'note' => 'Cán metalai', 'color' => 'red'],
             ['key' => self::COMPRESS, 'note' => 'Ép nhũ', 'color' => 'red'],
             ['key' => self::UV, 'note' => 'In lưới UV', 'color' => 'red'],
+            ['key' => self::ELEVATE, 'note' => 'Máy bế', 'color' => 'normal'],
+            ['key' => self::PEEL, 'note' => 'Máy bóc lề', 'color' => 'normal'],
+            ['key' => self::BOX_PASTE, 'note' => 'Máy dán hộp giấy', 'color' => 'normal'],
             ['key' => self::EXT_PRICE, 'note' => 'Phát sinh', 'color' => 'red']
         ];
         
         const HANDLE_STAGE_HARD = [
-            ['key' => self::PRINT, 'note' => 'Quy cách - kiểu in', 'color' => 'green'],
-            ['key' => self::NILON, 'note' => 'Cán nilon', 'color' => 'green'],
-            ['key' => self::ELEVATE, 'note' => 'Máy bế', 'color' => 'green'],
-            ['key' => self::PEEL, 'note' => 'Máy bóc lề', 'color' => 'green'],
+            ['key' => self::PRINT, 'note' => 'Quy cách - kiểu in', 'color' => 'normal'],
+            ['key' => self::NILON, 'note' => 'Cán nilon', 'color' => 'normal'],
             ['key' => self::METALAI, 'note' => 'Cán metalai', 'color' => 'red'],
             ['key' => self::COMPRESS, 'note' => 'Ép nhũ', 'color' => 'red'],
-            ['key' => self::FLOAT, 'note' => 'Thúc nổi carton', 'color' => 'red'],
             ['key' => self::UV, 'note' => 'In lưới UV', 'color' => 'red'],
+            ['key' => self::ELEVATE, 'note' => 'Máy bế', 'color' => 'normal'],
+            ['key' => self::FLOAT, 'note' => 'Thúc nổi carton', 'color' => 'red'],
+            ['key' => self::PEEL, 'note' => 'Máy bóc lề', 'color' => 'normal'],
             ['key' => self::EXT_PRICE, 'note' => 'Phát sinh', 'color' => 'red']
         ];
 
@@ -136,25 +136,25 @@
         //Thiết bị máy
         const PAPER_DEVICE = [
                                 self::NILON => 'Máy cán màng',
-                                self::ELEVATE => 'Máy bế',
-                                self::PEEL => 'Máy bóc lề',
-                                self::BOX_PASTE => 'Máy dán hộp giấy',
                                 self::METALAI => 'Máy cán metalai',
                                 self::COMPRESS => 'Máy ép nhũ',
                                 self::UV => 'Máy in UV',
+                                self::ELEVATE => 'Máy bế',
+                                self::PEEL => 'Máy bóc lề',
+                                self::BOX_PASTE => 'Máy dán hộp giấy',
                                 self::BAG_PASTE => 'Máy dán túi giấy'
                             ];
 
         const PAPER_HARD_DEVICE = [
                                 self::PRINT => 'Máy in',
                                 self::NILON => 'Máy cán màng',
-                                self::ELEVATE => 'Máy bế',
-                                self::PEEL => 'Máy bóc lề',
-                                self::BOX_PASTE => 'Máy dán hộp giấy',
                                 self::METALAI => 'Máy cán metalai',
                                 self::COMPRESS => 'Máy ép nhũ',
-                                self::FLOAT => 'Máy thúc nổi carton',
                                 self::UV => 'Máy in UV',
+                                self::ELEVATE => 'Máy bế',
+                                self::FLOAT => 'Máy thúc nổi carton',
+                                self::PEEL => 'Máy bóc lề',
+                                self::BOX_PASTE => 'Máy dán hộp giấy',
                                 self::BAG_PASTE => 'Máy dán túi giấy'
                             ];
                             

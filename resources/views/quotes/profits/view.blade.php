@@ -32,9 +32,13 @@
                                         }
                                         $data_supply = \DB::table($supply['table'])->where($where)->get()->toArray();
                                         if (!empty($supply['device'])) {
-                                            $supply['device']['size'] = 'vật tư';
+                                            $insert_device = ['size' => 'Vật tư'];
                                             if ($supply['table'] == 'papers') {
-                                                $supply['device']['print'] = 'máy in';
+                                                $insert_device['print'] = 'Máy in';
+                                                $supply['device'] = $insert_device + $supply['device'];
+                                                $supply['device']['ext_price'] = 'Phát sinh';
+                                            }else{
+                                                $supply['device'] = $insert_device + $supply['device'];
                                             }
                                         }else{
                                             $supply['device'] = \TDConst::FILL_FINISH_STAGE;   

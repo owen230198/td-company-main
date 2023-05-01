@@ -23,7 +23,7 @@
     @if (!empty($stage['qttv_price']))
         <li>
             <span>ĐG vật tư: </span>
-            <strong class="color_red">{{ number_format((float) $stage['qttv_price']) }}đ</strong>
+            <strong class="color_red">{{ (float) $stage['qttv_price'] }}đ</strong>
         </li>
     @endif
 

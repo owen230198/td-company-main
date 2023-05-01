@@ -4,7 +4,7 @@
         'name' => 'product['.$pro_index.'][paper]['.$supp_index.']['.$key_stage.'][type]',
         'type' => 'select',
         'note' => 'kiểu in',
-        'value' => !empty($data_paper->id) ? @$data_handle['type'] : \TDConst::ONE_PRINT_TYPE,
+        'value' => @$data_handle['type'],
         'other_data' => ['data' => ['options' => \TDConst::PRINT_TYPE]]
     ];
     $paper_print_color = [
@@ -18,7 +18,7 @@
         'name' => 'product['.$pro_index.'][paper]['.$supp_index.']['.$key_stage.'][machine]',
         'type' => 'select',
         'note' => 'công nghệ in',
-        'value' => !empty($data_paper->id) ? @$data_handle['machine'] : \TDConst::OFFSET_PRINT_TECH,
+        'value' => @$data_handle['machine'],
         'other_data' => ['data' => ['options' => \TDConst::PRINT_TECH]]
     ];
 ?>

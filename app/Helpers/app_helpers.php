@@ -7,11 +7,11 @@ if (!function_exists('returnMessageAjax')) {
     }
 }
 
-if(!function_exists('getDataConfigs')){
-    function getDataConfigs($classConfig, $keyword = ''){
+if(!function_exists('getDataConfig')){
+    function getDataConfig($classConfig, $keyword = ''){
         $configs = getModelByClass($classConfig);
-        $data = $configs->where('keyword', $keyword)->first();
-        return $data!=null?$data['value']:'';
+        $data = $configs->select('value')->where('keyword', $keyword)->first();
+        return @$data['value'];
     }
 }
 
@@ -103,13 +103,13 @@ if (!function_exists('handleQueryCondition')) {
                 if ($w['con'] == 'or') {
                     $query->orWhere(function($query) use($gr_where){
                         foreach ($gr_where  as $grw) {
-                            $this->handleQueryCondition($query, $grw);
+                            handleQueryCondition($query, $grw);
                         }
                     }); 
                 }else{
                     $query->where(function($query) use($gr_where){
                         foreach ($gr_where  as $grw) {
-                            $this->handleQueryCondition($query, $grw);
+                            handleQueryCondition($query, $grw);
                         }
                     }); 
                 }

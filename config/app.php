@@ -209,9 +209,9 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        // 'ExampleClass' => App\Example\ExampleClass::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
-        'TDConst' =>   App\Constants\TDConstant::class
+        'TDConst' =>   App\Constants\TDConstant::class,
+        'StatusConst' => App\Constants\StatusConstant::class
     ])->toArray(),
 
 ];

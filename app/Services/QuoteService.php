@@ -9,6 +9,7 @@ use App\Services\QTraits\QPaperTrait;
 use App\Services\QTraits\QSupplyTrait;
 use App\Constants\StatusConstant;
 use App\Constants\TDConstant;
+use App\Http\Controllers\AdminController;
 use Illuminate\Foundation\Testing\RefreshDatabaseState;
 
 class QuoteService extends BaseService

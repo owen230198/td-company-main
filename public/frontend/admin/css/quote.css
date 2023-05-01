@@ -23,7 +23,7 @@
     box-shadow: 1px 1px 3px #333333;
 }
 
-.remove_ext_paper_quote{
+.remove_ext_element_quote{
     position: absolute;
     padding: 5px;
     width: 30px;
@@ -37,7 +37,7 @@
     cursor: pointer;
 }
 
-.remove_ext_paper_quote.remove_ff_quote {
+.remove_ext_element_quote.remove_ff_quote {
     width: 25px;
     height: 25px;
     border-radius: 0;

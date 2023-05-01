@@ -20,8 +20,8 @@
                         $pro_name_field = [
                             'name' => 'product['.$pro_index.'][name]',
                             'note' => 'Tên sản phẩm',
-                            'attr' => ['required' => 1, 'inject_class' => 'quote_set_product_name'],
-                            'value' => @$product['name']
+                            'attr' => ['required' => 1, 'inject_class' => 'quote_set_product_name', 'placeholder' => 'Nhập tên'],
+                            'value' => !empty($product['id']) ? @$product['name'] : ''
                         ] 
                     ?>
                     <?php echo $__env->make('view_update.view', $pro_name_field, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
@@ -29,8 +29,8 @@
                     <?php
                     $pro_name_field = [
                         'name' => 'product['.$pro_index.'][qty]',
-                        'note' => 'SL sản phẩm',
-                        'attr' => ['type_input' => 'number', 'required' => 1, 'inject_class' => 'input_pro_qty'],
+                        'note' => 'Số lượng sản phẩm',
+                        'attr' => ['type_input' => 'number', 'required' => 1, 'inject_class' => 'input_pro_qty', 'placeholder' => 'Nhập số lượng'],
                         'value' => @$product['qty']
                     ] 
                 ?>
@@ -65,7 +65,7 @@
                         $pro_size_field = [
                             'name' => 'product['.$pro_index.'][size]',
                             'note' => 'Kích thước hộp',
-                            'attr' => ['placeholder' => 'D x R x C'],
+                            'attr' => ['placeholder' => 'D x R x C (DVT cm)'],
                             'value' => @$product['size']
                         ]
                     ?>

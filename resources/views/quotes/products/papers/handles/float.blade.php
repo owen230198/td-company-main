@@ -10,7 +10,7 @@
     ];
     $paper_float_shape_price = [
         'name' => 'product['.$pro_index.'][paper]['.$supp_index.']'.$float_base_name.'[shape_price]',
-        'note' => 'Giá khuôn thúc nổi 1 sp',
+        'note' => 'TIỀN KHUÔN/1 BÁT SẢN PHẨM',
         'attr' => ['type_input' => 'number'],
         'value' => @$data_handle['shape_price'] ?? 0
     ]  
@@ -22,7 +22,7 @@
 
 <div class="d-flex align-items-center">
     @include('view_update.view', $paper_float_shape_price)
-    <span class="ml-2 fs-12 font-italic color_red">Giá khuôn/bát sp (không phải giá khuôn/tờ in)</span>
+    <span class="ml-2 fs-12 font-italic color_red">Không phải tiền khuôn/ 1tờ in</span>
 </div>
 
 @if (isHardBox(@$cate))

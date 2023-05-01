@@ -6,7 +6,7 @@
 
         $pro_paper_name = [
             'name' => 'product['.$pro_index.']['.$key_supp.']['.$supp_index.'][name]',
-            'note' => 'Tên SP giấy in',
+            'note' => 'Tên sản phẩm',
             'attr' => ['required' => 1, 
                         'inject_class' => $supp_index == 0 ? 'quote_receive_paper_name_main' : 'quote_receive_paper_name_ext'],
             'value' => @$supply_obj->name ?? @$supp_name
@@ -16,7 +16,7 @@
             'type' => 'linking',
             'note' => 'Chọn chất liệu giấy',
             'attr' => ['required' => 1, 'inject_class' => 'select_paper_materal'],
-            'other_data' => ['data' => ['table' => 'materals','where' => ['type' => $key_supp], 'ext_option' => [['id' => 0, 'name' => 'Giấy khác']]]],
+            'other_data' => ['data' => ['table' => 'materals','where' => ['type' => $key_supp], 'ext_option' => [['id' => 'other', 'name' => 'Giấy khác']]]],
             'value' => @$supply_size['materal']
         ];
         $pro_paper_qttv = [
@@ -26,13 +26,9 @@
             'value' => @$supply_size['qttv']
         ];
     ?>
-    <?php if(!empty($supply_obj->id)): ?>
-        <input type="hidden" name="product[<?php echo e($pro_index); ?>][<?php echo e($key_supp); ?>][<?php echo e($supp_index); ?>][id]" value="<?php echo e($supply_obj->id); ?>">
-    <?php endif; ?>
+    <?php echo $__env->make('quotes.products.supplies.check_index_data', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <?php if($supp_index == 0 || @$supply_obj->main == 1): ?>
-        <input type="hidden" value="1" name="product[<?php echo e($pro_index); ?>][<?php echo e($key_supp); ?>][<?php echo e($supp_index); ?>][main]"> 
-    <?php else: ?> 
-        <span class="remove_ext_paper_quote d-flex bg_red color_white red_btn smooth"><i class="fa fa-times" aria-hidden="true"></i></span>   
+        <input type="hidden" value="1" name="product[<?php echo e($pro_index); ?>][<?php echo e($key_supp); ?>][<?php echo e($supp_index); ?>][main]">   
     <?php endif; ?>
     <div class="mb-2 paper_product_config">
         <?php if($supp_index > 0): ?>
@@ -76,12 +72,13 @@
                     <span class="mx-3">X</span>
                     <input type="number" name = 'product[<?php echo e($pro_index); ?>][<?php echo e($key_supp); ?>][<?php echo e($supp_index); ?>][size][width]' placeholder="Chiều rộng (cm)" 
                     class="form-control medium_input" step="any"value="<?php echo e(@$supply_size['width']); ?>"> 
-                    <div class="paper_price_config_input" style="display:<?php echo e(@$supply_size['materal'] != 0 ? 'none' : 'block'); ?>">
+                    <div class="paper_price_config_input" style="display:<?php echo e(@$supply_size['materal'] != 'other' ? 'none' : 'block'); ?>">
                         <div class="d-flex align-items-center">
                             <span class="mx-3">X</span>
                             <input type="number" name = 'product[<?php echo e($pro_index); ?>][<?php echo e($key_supp); ?>][<?php echo e($supp_index); ?>][size][unit_price]' placeholder="Đơn giá" 
                             class="form-control medium_input price_input_paper" 
-                            <?php echo e(@$supply_size['materal'] != 0 ? 'disabled="disabled"' : ''); ?> step="any" value="<?php echo e(@$supply_size['unit_price']); ?>">
+                            <?php echo e(@$supply_size['materal'] != 'other' ? 'disabled="disabled"' : ''); ?> step="any" value="<?php echo e(@$supply_size['unit_price']); ?>">
+                            <span class="ml-3 fs-12 color_gray">VD 22 triệu/tấn = 0.00022</span>
                         </div>
                     </div>
                 </div>

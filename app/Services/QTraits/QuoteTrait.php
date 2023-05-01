@@ -8,6 +8,7 @@ trait QuoteTrait
     static $plus_paper_device = TDConstant::PLUS_PAPER_DEVICE;
     static $plus_compen_perc = TDConstant::COMPEN_PERCENT;
     static $hard_compen_perc = TDConstant::CARTON_COMPEN_PERCENT;
+    static $plus_paper = TDConstant::PLUS_PAPER;
     static $base_qty_pro = 0;
     static $qty_pro = 0;
     static $nqty = 1;
@@ -98,7 +99,7 @@ trait QuoteTrait
 	private function configDataStage($data){
         $device_id = !empty($data['machine']) ? (int)$data['machine'] : 0;
         $device = getDetailDataByID('Device', $device_id);
-        $model_price = !empty($data['model_price']) ? (float) $data['model_price'] : 0;
+        $model_price = !empty($device['model_price']) ? (float) $device['model_price'] : 0;
         $work_price = !empty($device['work_price']) ? (float) $device['work_price'] : 0;
         $shape_price = !empty($device['shape_price']) ? (float) $device['shape_price'] : 0;
         $key_device = !empty($device['key_device']) ? $device['key_device'] : '';

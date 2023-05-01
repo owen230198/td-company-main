@@ -9,14 +9,14 @@
     <?php if(!empty($stage['materal'])): ?>
         <li>
             <span>Chất liệu giấy: </span>
-            <strong class="color_red"><?php echo e(getFieldDataById('name', 'materals', $stage['materal'])); ?></strong>
+            <strong class="color_red"><?php echo e(@$stage['materal'] == 'other' ? 'Giấy khác' : getFieldDataById('name', 'materals', $stage['materal'])); ?></strong>
         </li>
     <?php endif; ?>
 
     <?php if(!empty($stage['materal_price'])): ?>
         <li>
             <span>ĐG chất liệu giấy: </span>
-            <strong class="color_red"><?php echo e(number_format((float) $stage['materal_price'])); ?>đ</strong>
+            <strong class="color_red"><?php echo e($stage['materal_price']); ?></strong>
         </li>
     <?php endif; ?>
 

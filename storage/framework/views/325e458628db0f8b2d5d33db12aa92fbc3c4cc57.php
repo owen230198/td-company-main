@@ -15,7 +15,7 @@
             <?php
                 $quote_pro_qty_field = [
                     'name' => 'quote[product_qty]',
-                    'note' => 'Số lượng sản phẩm',
+                    'note' => 'Số đơn hàng',
                     'attr' => ['type_input' => 'number', 
                     'inject_class' => 'quote_set_qty_pro_input',
                     'disable_field' => @$product_qty ? 1 : 0 ],

@@ -44,12 +44,8 @@ class QuoteController extends Controller
                     $data['products'] = Product::where(['act' => 1, 'quote_id' => $id])->get();
                     $data['product_qty'] = count($data['products']);
                 }
-                if (self::$copy) {
-                    $data['title'] = 'Sao chép báo giá - '.$quote['seri'].' - '.getStepCreateQuote($step);   
-                }else{
-                    $data['title'] = 'Chỉnh sửa báo giá - '.$quote['seri'].' - '.getStepCreateQuote($step);
-                    $data['link_update'] = url('update/quotes/'.$id.'?step='.$step);
-                }
+                $data['title'] = 'Chỉnh sửa báo giá - '.$quote['seri'].' - '.getStepCreateQuote($step);
+                $data['link_action'] = url('update/quotes/'.$id.'?step='.$step);
                 return view('quotes.'.$step, $data);
             }
             
@@ -60,8 +56,39 @@ class QuoteController extends Controller
 
     public function clone($request, $id)
     {
-        static::$copy = true;
-        return $this->update($request, $id);
+        $hidden_clone_field = ['created_by', 'created_at', 'updated_at'];
+        $data_quote = Quote::find($id)->makeHidden($hidden_clone_field)->toArray();
+        $data_products = Product::where('quote_id', $id)->get()->makeHidden($hidden_clone_field)->toArray();
+        $this->services->configBaseDataAction($data_quote);
+        $data_quote['seri'] = 'BG-'.getCodeInsertTable('quotes');
+        unset($data_quote['id']);
+        $quote_id = Quote::insertGetId($data_quote);
+        $child_tables = Product::$childTable;
+        if ($quote_id) {
+            foreach ($data_products as $product) {
+                $this->services->configBaseDataAction($product);
+                $product['quote_id'] = $quote_id;
+                $old_product_id = $product['id'];
+                unset($product['id']);
+                $product_id = Product::insertGetId($product);
+                if ($product_id) {
+                    foreach ($child_tables as $table) {
+                        $model = getModelByTable($table);
+                        $data_supplies = $model->where('product', $old_product_id)->get()->makeHidden($hidden_clone_field)->toArray();
+                        foreach ($data_supplies as $supply) {
+                            $this->services->configBaseDataAction($supply);
+                            unset($supply['id']);
+                            $supply['product'] = $product_id;
+                            $model->insert($supply);
+                        }
+                    }
+                }
+            }
+            return redirect('update/quotes/'.$quote_id)->with('message', 'Sao chép báo giá thành công !');
+        }else{
+            return back()->with('error', 'Đã xảy ra lỗi khi thực hiện sao chép !');
+        }
+
     }
 
     public function createQuote(Request $request)

@@ -9,14 +9,14 @@
     @if (!empty($stage['materal']))
         <li>
             <span>Chất liệu giấy: </span>
-            <strong class="color_red">{{ getFieldDataById('name', 'materals', $stage['materal']) }}</strong>
+            <strong class="color_red">{{ @$stage['materal'] == 'other' ? 'Giấy khác' : getFieldDataById('name', 'materals', $stage['materal']) }}</strong>
         </li>
     @endif
 
     @if (!empty($stage['materal_price']))
         <li>
             <span>ĐG chất liệu giấy: </span>
-            <strong class="color_red">{{ number_format((float) $stage['materal_price']) }}đ</strong>
+            <strong class="color_red">{{ $stage['materal_price'] }}</strong>
         </li>
     @endif
 

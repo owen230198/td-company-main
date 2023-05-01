@@ -6,9 +6,9 @@ trait QPaperTrait
 	private function configDataSizePaper($paper)
 	{
         $qttv = !empty($paper['qttv']) ? (float) $paper['qttv'] : 0;
-        $price = !empty($paper['materal']) ? ((int) getFieldDataById('price', 'materals', $paper['materal'])) : 
+        $price = !empty($paper['materal']) && $paper['materal'] != 'other' ? ((float) getFieldDataById('price', 'materals', $paper['materal'])) : 
                 (!empty($paper['unit_price']) ? (float) $paper['unit_price'] : 0);
-        $plus_paper = (int) TDConstant::PLUS_PAPER;
+        $plus_paper = (float) TDConstant::PLUS_PAPER;
         $supp_qty = self::$supp_qty + $plus_paper;
         // Công thức tính chi phí khổ in : dài x rộng x định lượng x (số tờ in + 100) x ĐG
         $total = self::$length * self::$width * $qttv * $supp_qty * $price;
@@ -74,9 +74,11 @@ trait QPaperTrait
         $materal_id = !empty($metalai['materal']) ? $metalai['materal'] : 0;
         $materal_cost = $this->getPriceMateralQuote($materal_id);
         $num_face = !empty($metalai['face']) ? (int) $metalai['face'] : 0;
-        $total_metalai = $this->getBaseTotalStage(self::$supp_qty, $model_price, $work_price, $shape_price, $materal_cost, 
-        $num_face, self::$plus_paper_device);
-        $metalai['supp_qty'] = self::$supp_qty + self::$plus_paper_device;
+        $supp_qty = self::$supp_qty + self::$plus_paper;
+        $total_metalai = $this->getBaseTotalStage($supp_qty, $model_price, $work_price, $shape_price, $materal_cost, 
+        $num_face);
+        $metalai['supp_qty'] = $supp_qty;
+        $metalai['cover_supp_qty'] = self::$supp_qty + self::$plus_paper_device;
         $metalai['materal_price'] = $materal_cost;
         $metalai['metalai_price'] = $total_metalai;
 

@@ -64,6 +64,13 @@
             <strong class="color_red"><?php echo e(number_format((float) $stage['work_price'])); ?>đ</strong>
         </li>
     <?php endif; ?>
+
+    <?php if(!empty($stage['ext_price'])): ?>
+        <li>
+            <span>Thêm Giá Cho Khuôn Phức Tạp: </span>
+            <strong class="color_red"><?php echo e(number_format((float) $stage['ext_price'])); ?>đ</strong>
+        </li>
+    <?php endif; ?>
 </ul>
 <div class="mt-2 pt-2 border_top_thin formula_tab">
     <?php
@@ -107,7 +114,7 @@
             <p class="font_bold formula_result"> = <?php echo e(number_format($stage['supp_qty'] * $stage['work_price'])); ?>đ</p>
         </div>
     </div>
-    <p class="fs-15 font_bold">Tổng chi phí cho máy bế: (1) + (2) + (3) + (4) = <?php echo e(number_format($stage['cost'])); ?>đ</p>       
+    <p class="fs-15 font_bold">Tổng chi phí cho máy bế: (1) + (2) + (3) + (4) + Giá thêm cho khuôn phức tạp (nếu có) = <?php echo e(number_format($stage['cost'])); ?>đ</p>       
 </div>
 
 <?php if(!empty($float)): ?>
