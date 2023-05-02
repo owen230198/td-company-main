@@ -15,6 +15,14 @@
         'attr' => ['type_input' => 'number']
     ];
 
+    $fill_device_select = [
+        'name' => 'product['.$pro_index.'][fill_finish][fill][machine]',
+        'type' => 'linking',
+        'note' => 'Chọn thiết bị máy bồi',
+        'value' => !empty($supply_obj->id) ? @$data_fill['machine'] : getDeviceId(['key_device' => 'fill', 'supply' => 'fill_finish', 'default_device' => 1]),
+        'other_data' => ['data' => ['table' => 'devices', 'where' => ['key_device' => 'fill', 'supply' => 'fill_finish'], 'select' => ['id', 'name']]]
+    ];
+
     $data_finish = !empty($supply_obj->finish) ? json_decode($supply->finish, true) : [];
 
     $pro_finish_ext = [
@@ -67,8 +75,9 @@
     </div>
     <div class="d-flex align-items-center">
         @include('view_update.view', $pro_fill_ext)
-        <span class="fs-12 color_red font-italic ml-2">ĐG/1 sản phẩm</span>
+        <span class="fs-12 color_red font-italic ml-2">Đơn giá/1 sản phẩm</span>
     </div>
+    @include('view_update.view', $fill_device_select)
 </div>
 
 <div class="module_finish_quote pb-2 mb-2 border_bot_eb section_quote_fill_finish">

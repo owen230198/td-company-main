@@ -41,10 +41,9 @@ trait QSupplyTrait{
       return $data_action;
    }
 
-   private function configDataFill($fill)
+   private function configDataFill($work_price, $shape_price, $fill)
    {
-      $fill_price = (float) TDConstant::FILL_PRICE;
-      $fill['fill_price'] = $fill_price;
+      $fill['qty_pro'] = self::$base_qty_pro;
       $fill_cost = 0;
       $stage = !empty($fill['stage']) ? $fill['stage'] : [];
       foreach ($stage as $key => $item) {
@@ -54,16 +53,14 @@ trait QSupplyTrait{
          $fill['stage'][$key]['qttv_price'] = $qttv_price;
          $length = !empty($item['length']) ? $item['length'] : 0;
          $width = !empty($item['width']) ? $item['width'] : 0;
-         convertCmToMeter($length, $width); 
          $fill['stage'][$key]['cost'] = ($length * $width * $qttv_price); 
          if ( $fill['stage'][$key]['cost'] > 0) {
-            $fill['stage'][$key]['cost'] =  $fill['stage'][$key]['cost'] + $fill_price;
+            $fill['stage'][$key]['cost'] =  (($fill['stage'][$key]['cost'] + $work_price)*self::$base_qty_pro)+$shape_price;
          }
          $fill_cost += $fill['stage'][$key]['cost'];
       }
       $ext_price = !empty($fill['ext_price']) ? (float) $fill['ext_price'] : 0;
       $fill['fill_cost'] = $fill_cost;
-      $fill['qty_pro'] = self::$base_qty_pro;
       $total = $fill_cost + ($ext_price *self::$base_qty_pro);
       return $this->getObjectConfig($fill, $total);
    }
@@ -105,7 +102,7 @@ trait QSupplyTrait{
    {
       $this->newObjectSetProperty($data);
       if (!empty($data['fill'])) {
-         $data_action['fill'] = $this->configDataFill($data['fill']);
+         $data_action['fill'] = $this->configDataStage($data['fill']);
       }
 
       if (!empty($data['finish'])) {

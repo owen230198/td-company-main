@@ -1,4 +1,40 @@
-<div class="d-flex align-items-center mb-2 pb-2 border_bot">
+<ul>
+    <?php if(!empty($stage['qty_pro'])): ?>
+        <li>
+            <span>SL sản phẩm: </span>
+            <strong class="color_red"><?php echo e($stage['qty_pro']); ?></strong>
+        </li>
+    <?php endif; ?>
+
+    <?php if(!empty($stage['machine'])): ?>
+        <li>
+            <span>Thiết bị: </span>
+            <strong class="color_red"><?php echo e(getFieldDataById('name', 'devices', $stage['machine'])); ?></strong>
+        </li>
+    <?php endif; ?>
+
+    <?php if(!empty($stage['work_price'])): ?>
+        <li>
+            <span>ĐG lượt: </span>
+            <strong class="color_red"><?php echo e($stage['work_price']); ?>đ</strong>
+        </li>
+    <?php endif; ?>
+
+    <?php if(!empty($stage['shape_price'])): ?>
+        <li>
+            <span>ĐG chỉnh máy: </span>
+            <strong class="color_red"><?php echo e($stage['shape_price']); ?>đ</strong>
+        </li>
+    <?php endif; ?>
+
+    <?php if(!empty($stage['ext_price'])): ?>
+        <li>
+            <span>ĐG Phát sinh chi tiết bồi khó: </span>
+            <strong class="color_red"><?php echo e(number_format($stage['ext_price'])); ?>đ</strong>
+        </li>
+    <?php endif; ?>
+</ul>
+<div class="d-flex align-items-center mt-2 pt-2 border_top">
     <p class="font_bold">Các công đoạn bồi:</p>
     <ul class="ml-2 pl-2 list_stage_supply">
         <?php $__currentLoopData = $stage['stage']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $fstage): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -21,32 +57,21 @@
                     </div>
                     <div class="mb-2 d-flex align-items-center">
                         <span class="mr-1">ĐG giấy bồi : </span>
-                        <p class="font_bold"><?php echo e(number_format($fstage['qttv_price'])); ?>đ</p>
+                        <p class="font_bold"><?php echo e($fstage['qttv_price']); ?>đ</p>
                     </div>
                     <div class="mb-2 d-flex align-items-center">
                         <span class="mr-1">Chi phí : </span>
-                        <p class="font_bold color_red">(Dài x Rộng x ĐG giấy bồi) + <?php echo e($stage['fill_price']); ?> = <?php echo e($fstage['cost']); ?></p>
+                        <p class="font_bold color_red">
+                            ((Dài x Rộng x ĐG giấy bồi + ĐG lượt) x SL sản phẩm) + ĐG chỉnh máy = 
+                            ((<?php echo e($fstage['length']); ?> x <?php echo e($fstage['width']); ?> x <?php echo e($fstage['qttv_price']); ?> + <?php echo e($stage['work_price']); ?>) x <?php echo e($stage['qty_pro']); ?>) + <?php echo e($stage['shape_price']); ?>
+
+                             = <?php echo e(number_format((float) @$fstage['cost'])); ?>đ</p>
                     </div>
                 </li>
             <?php endif; ?>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </ul>
 </div>
-<ul>
-    <?php if(!empty($stage['qty_pro'])): ?>
-        <li>
-            <span>SL sản phẩm: </span>
-            <strong class="color_red"><?php echo e($stage['qty_pro']); ?></strong>
-        </li>
-    <?php endif; ?>
-
-    <?php if(!empty($stage['ext_price'])): ?>
-        <li>
-            <span>ĐG Phát sinh chi tiết bồi khó: </span>
-            <strong class="color_red"><?php echo e(number_format($stage['ext_price'])); ?>đ</strong>
-        </li>
-    <?php endif; ?>
-</ul>
 
 <div class="mt-2 pt-2 border_top_thin formula_tab">
     <p class="fs-15 color_green mb-2 font_bold">Công Thức Tính</p>

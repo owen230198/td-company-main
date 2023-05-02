@@ -1,4 +1,40 @@
-<div class="d-flex align-items-center mb-2 pb-2 border_bot">
+<ul>
+    @if (!empty($stage['qty_pro']))
+        <li>
+            <span>SL sản phẩm: </span>
+            <strong class="color_red">{{ $stage['qty_pro'] }}</strong>
+        </li>
+    @endif
+
+    @if (!empty($stage['machine']))
+        <li>
+            <span>Thiết bị: </span>
+            <strong class="color_red">{{ getFieldDataById('name', 'devices', $stage['machine']) }}</strong>
+        </li>
+    @endif
+
+    @if (!empty($stage['work_price']))
+        <li>
+            <span>ĐG lượt: </span>
+            <strong class="color_red">{{ $stage['work_price'] }}đ</strong>
+        </li>
+    @endif
+
+    @if (!empty($stage['shape_price']))
+        <li>
+            <span>ĐG chỉnh máy: </span>
+            <strong class="color_red">{{ $stage['shape_price'] }}đ</strong>
+        </li>
+    @endif
+
+    @if (!empty($stage['ext_price']))
+        <li>
+            <span>ĐG Phát sinh chi tiết bồi khó: </span>
+            <strong class="color_red">{{ number_format($stage['ext_price']) }}đ</strong>
+        </li>
+    @endif
+</ul>
+<div class="d-flex align-items-center mt-2 pt-2 border_top">
     <p class="font_bold">Các công đoạn bồi:</p>
     <ul class="ml-2 pl-2 list_stage_supply">
         @foreach ($stage['stage'] as $fstage)
@@ -21,32 +57,20 @@
                     </div>
                     <div class="mb-2 d-flex align-items-center">
                         <span class="mr-1">ĐG giấy bồi : </span>
-                        <p class="font_bold">{{ number_format($fstage['qttv_price']) }}đ</p>
+                        <p class="font_bold">{{ $fstage['qttv_price'] }}đ</p>
                     </div>
                     <div class="mb-2 d-flex align-items-center">
                         <span class="mr-1">Chi phí : </span>
-                        <p class="font_bold color_red">(Dài x Rộng x ĐG giấy bồi) + {{ $stage['fill_price'] }} = {{ $fstage['cost'] }}</p>
+                        <p class="font_bold color_red">
+                            ((Dài x Rộng x ĐG giấy bồi + ĐG lượt) x SL sản phẩm) + ĐG chỉnh máy = 
+                            (({{ $fstage['length'] }} x {{ $fstage['width'] }} x {{ $fstage['qttv_price'] }} + {{ $stage['work_price'] }}) x {{ $stage['qty_pro'] }}) + {{ $stage['shape_price'] }}
+                             = {{ number_format((float) @$fstage['cost']) }}đ</p>
                     </div>
                 </li>
             @endif
         @endforeach
     </ul>
 </div>
-<ul>
-    @if (!empty($stage['qty_pro']))
-        <li>
-            <span>SL sản phẩm: </span>
-            <strong class="color_red">{{ $stage['qty_pro'] }}</strong>
-        </li>
-    @endif
-
-    @if (!empty($stage['ext_price']))
-        <li>
-            <span>ĐG Phát sinh chi tiết bồi khó: </span>
-            <strong class="color_red">{{ number_format($stage['ext_price']) }}đ</strong>
-        </li>
-    @endif
-</ul>
 
 <div class="mt-2 pt-2 border_top_thin formula_tab">
     <p class="fs-15 color_green mb-2 font_bold">Công Thức Tính</p>

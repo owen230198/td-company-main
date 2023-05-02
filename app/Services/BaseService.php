@@ -9,8 +9,11 @@ class BaseService
 
 	public function configBaseDataAction(&$data)
 	{
-		$data['created_by'] = @getSessionUser()['id'];
-		$data['created_at'] = !empty($data['created_at']) ? $data['created_at'] : date('Y-m-d H:i', Time());
+		
+		if (empty($data['id'])) {
+			$data['created_by'] = @getSessionUser()['id'];
+			$data['created_at'] = !empty($data['created_at']) ? $data['created_at'] : date('Y-m-d H:i', Time());
+		}
 		$data['updated_at'] = !empty($data['updated_at']) ? $data['updated_at'] : date('Y-m-d H:i', Time());
 	}
 

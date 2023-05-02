@@ -59,25 +59,25 @@ class QuoteController extends Controller
         $hidden_clone_field = ['created_by', 'created_at', 'updated_at'];
         $data_quote = Quote::find($id)->makeHidden($hidden_clone_field)->toArray();
         $data_products = Product::where('quote_id', $id)->get()->makeHidden($hidden_clone_field)->toArray();
-        $this->services->configBaseDataAction($data_quote);
-        $data_quote['seri'] = 'BG-'.getCodeInsertTable('quotes');
         unset($data_quote['id']);
         $quote_id = Quote::insertGetId($data_quote);
+        $this->services->configBaseDataAction($data_quote);
+        $data_quote['seri'] = 'BG-'.getCodeInsertTable('quotes');
         $child_tables = Product::$childTable;
         if ($quote_id) {
             foreach ($data_products as $product) {
-                $this->services->configBaseDataAction($product);
                 $product['quote_id'] = $quote_id;
                 $old_product_id = $product['id'];
                 unset($product['id']);
+                $this->services->configBaseDataAction($product);
                 $product_id = Product::insertGetId($product);
                 if ($product_id) {
                     foreach ($child_tables as $table) {
                         $model = getModelByTable($table);
                         $data_supplies = $model->where('product', $old_product_id)->get()->makeHidden($hidden_clone_field)->toArray();
                         foreach ($data_supplies as $supply) {
-                            $this->services->configBaseDataAction($supply);
                             unset($supply['id']);
+                            $this->services->configBaseDataAction($supply);
                             $supply['product'] = $product_id;
                             $model->insert($supply);
                         }
