@@ -175,9 +175,18 @@ class AdminController extends Controller
         }
        $success = $this->admins->removeDataTable($table, $id);
        if ($success) {
-            return back()->with('message','Xoá thành công dữ liệu!');
+            if (@$request->input('ajax') == 1) {
+                return returnMessageAjax(200, 'Xoá thành công dữ liệu!');
+            }else{
+                return back()->with('message','Xoá thành công dữ liệu!'); 
+            }
         }else {
-            return back()->with('error','Đã có lỗi xảy ra !');
+            if (@$request->input('ajax') == 1) {
+                return \returnMessageAjax(500, 'Đã có lỗi xảy ra !');
+            }else{
+                return back()->with('error','Đã có lỗi xảy ra !');   
+            }
+            
         }
     }
 

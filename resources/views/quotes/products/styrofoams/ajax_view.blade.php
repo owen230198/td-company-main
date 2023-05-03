@@ -9,11 +9,9 @@
         $key_device_peel = \TDConst::PEEL;
         $key_device_cut = \TDConst::CUT;
     @endphp
-    @include('quotes.products.supplies.title_config', ['divide' => $styro_divide, 'name' => 'mút phẳng'])
+    @include('quotes.products.supplies.check_index_data')
     
-    @if (!empty($supply_obj->id))
-        <input type="hidden" name="product[{{ $pro_index }}][{{ $key_supp }}][{{ $supp_index }}][id]" value="{{ $supply_obj->id }}">
-    @endif
+    @include('quotes.products.supplies.title_config', ['divide' => $styro_divide, 'name' => 'mút phẳng'])
 
     @include('quotes.products.supplies.quantity_config', 
     ['compen_percent' => $styro_compen_percent, 'compen_num' => $styro_compen_num])

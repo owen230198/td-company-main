@@ -26,7 +26,7 @@
         $field_value = @$select_data['select_data'] ?? 'id';
     @endphp
     <select name="{{ $name }}" class="form-control {{ @$attr['inject_class'] ? ' '.$attr['inject_class'] : '' }}" {{ @$attr['inject_attr'] ?? '' }}>
-        <option value="0">Chọn {{ $note }}</option>
+        <option value="0">Chọn</option>
         @foreach ($list_options as $item)
             <option value="{{ $item->$field_value }}" {{ $item->$field_value == @$value ? 'selected' : '' }}>
                 {{ $item->$field_title }}

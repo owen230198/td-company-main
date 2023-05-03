@@ -29,8 +29,8 @@ Route::middleware(['check_login'])->group(function () {
 	Route::any('update/{table}/{id}', [AdminController::class, 'update']);
 	Route::get('search-table/{table}', [AdminController::class, 'searchTable']);
 	Route::any('clone/{table}/{id}', [AdminController::class, 'clone']);
-	Route::post('remove', [AdminController::class, 'remove']);
-	Route::post('multiple-remove', [AdminController::class, 'multipleRemove']);
+	Route::delete('remove', [AdminController::class, 'remove']);
+	Route::delete('multiple-remove', [AdminController::class, 'multipleRemove']);
 	Route::post('do-config-data/{table}', [AdminController::class, 'doConfigData']);
 	Route::get('get-data-json-customer', [AdminController::class, 'getDataJsonCustomer']);
 	Route::get('get-data-json-linking', [AdminController::class, 'getDataJsonLinking']);
@@ -47,6 +47,7 @@ Route::middleware(['check_login'])->group(function () {
 	Route::get('get-view-product-structure', [QuoteController::class, 'getViewProductStructure']);
 	Route::any('profit-config-quote', [QuoteController::class, 'profitConfigQuote']);
 	Route::get('get-view-product-structure-data', [QuoteController::class, 'getViewProductStructureData']);
+	Route::any('quote-file-export/{id}', [QuoteController::class, 'QuoteFileExport']);
 
 	//orders routes
 	Route::get('set-quantity-order-products', [OrderController::class, 'setListProductView']);

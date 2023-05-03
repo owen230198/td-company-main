@@ -3,6 +3,7 @@
         <div class="modal-content">
             <form action="<?php echo e(asset('remove')); ?>" method="POST" class="confirmRemoveForm">
                 <?php echo csrf_field(); ?>
+                <?php echo method_field('delete'); ?>
                 <input type="hidden" name="remove_id" value="">
                 <input type="hidden" name="table" value="<?php echo e($table_name); ?>">
                 <div class="modal-header">

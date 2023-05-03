@@ -51,9 +51,7 @@
         $data_cut = !empty($supply_obj->cut) ? json_decode($supply_obj->cut, true) : []; 
     @endphp
 
-    @if (!empty($supply_obj->id))
-        <input type="hidden" name="product[{{ $pro_index }}][{{ $key_supp }}][{{ $supp_index }}][id]" value="{{ $supply_obj->id }}">
-    @endif
+    @include('quotes.products.supplies.check_index_data')
 
     @include('quotes.products.supplies.title_config', ['divide' => $decal_divide, 'name' => 'đề can nhung'])
 

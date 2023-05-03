@@ -117,6 +117,10 @@ body, html {
     color: #459300;
 }
 
+.color_red{
+    color: #d50202 ;
+}
+
 .min_120{
     min-width: 120px;
 }

@@ -12,7 +12,7 @@
         <div class="tab-content" id="quote-pro-{{ $pro_index }}-struct-tabContent">
             @foreach ($elements as $key => $element)
                 <div class="tab-pane fade{{ $key == 0 ? ' show active' : '' }} tab_pane_quote_pro" id="quote-pro-{{ $pro_index }}-struct-{{ $element['key'] }}" role="tabpanel" aria-labelledby="quote-pro-{{ $pro_index }}-struct-{{ $element['key'] }}-tab">
-                    @include('quotes.products.supplies.view', ['supp_view' => $element['key'], 'data_supply' => @$element['data']])
+                    @include('quotes.products.supplies.view', ['supp_view' => $element['key'], 'supp_table' => @$element['table'], 'data_supply' => @$element['data']])
                 </div>
             @endforeach
         </div>

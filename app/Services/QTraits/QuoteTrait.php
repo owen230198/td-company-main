@@ -76,7 +76,7 @@ trait QuoteTrait
     private function getObjectConfig($data, $total)
     {
         $obj = $data;
-        $obj['act'] = 1;
+        $obj['act'] = $total > 0 ? 1 : 0;
         $obj['total'] = $total; 
         return json_encode($obj);
     }

@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Models\Quote;
 use App\Constants\TDConstant;
 use App\Models\Product;
+use \App\Models\Customer;
 class QuoteController extends Controller
 {
     private $services;
@@ -216,8 +217,8 @@ class QuoteController extends Controller
         $id = $request->input('quote_id');
         $arr_quote = Quote::find($id);
         if (!$request->isMethod('POST')) {
-            if (empty($id)) {
-                return redirect(url())->with('error', 'Báo giá không tồn tại !');
+            if (empty($arr_quote)) {
+                return redirect(url(''))->with('error', 'Báo giá không tồn tại !');
             }
             $data['data_quote'] = $arr_quote;
             $data['title'] = 'Lợi nhuận báo giá mã - '.@$data['data_quote']['seri'];
@@ -243,6 +244,20 @@ class QuoteController extends Controller
             if ($update) {
                 return returnMessageAjax(200, 'Cập nhật lợi nhuận báo giá thành công !', url()->full());
             }
+        }
+    }
+
+    public function quoteFileExport($id)
+    {
+        $arr_quote = Quote::find($id);
+        if ($arr_quote) {
+            $data['title'] = 'Quản lí file báo giá - '. $arr_quote['seri'];
+            $data['data_quote'] = $arr_quote;
+            $data['data_customer'] = Customer::find($arr_quote['customer_id']);
+            $data['data_products'] = Product::where(['act' => 1, 'quote_id' => $id])->get()->toArray();
+            return view('quotes.files/view', $data);
+        }else{
+            return redirect(url(''))->with('error', 'Không tìm thấy dữ liệu báo giá !');
         }
     }
 }

@@ -12,7 +12,7 @@
         <div class="tab-content" id="quote-pro-<?php echo e($pro_index); ?>-struct-tabContent">
             <?php $__currentLoopData = $elements; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $element): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <div class="tab-pane fade<?php echo e($key == 0 ? ' show active' : ''); ?> tab_pane_quote_pro" id="quote-pro-<?php echo e($pro_index); ?>-struct-<?php echo e($element['key']); ?>" role="tabpanel" aria-labelledby="quote-pro-<?php echo e($pro_index); ?>-struct-<?php echo e($element['key']); ?>-tab">
-                    <?php echo $__env->make('quotes.products.supplies.view', ['supp_view' => $element['key'], 'data_supply' => @$element['data']], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                    <?php echo $__env->make('quotes.products.supplies.view', ['supp_view' => $element['key'], 'supp_table' => @$element['table'], 'data_supply' => @$element['data']], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                 </div>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </div>

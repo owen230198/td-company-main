@@ -3,6 +3,7 @@
     <div class="modal-content">
       <form action="<?php echo e(asset('multiple-remove')); ?>" method="POST" class="confirmMultiRemoveForm">
         <?php echo csrf_field(); ?>
+        <?php echo method_field('delete'); ?>
         <input type="hidden" name="multi_remove_id" value="">
         <input type="hidden" name="table" value="<?php echo e($tableItem['name']); ?>">
         <div class="modal-header">

@@ -10,9 +10,7 @@
         $key_device_cut = \TDConst::CUT;
         $key_device_mill = \TDConst::MILL; 
     @endphp
-    @if (!empty($supply_obj->id))
-        <input type="hidden" name="product[{{ $pro_index }}][{{ $key_supp }}][{{ $supp_index }}][id]" value="{{ $supply_obj->id }}">
-    @endif
+    @include('quotes.products.supplies.check_index_data')
 
     @include('quotes.products.supplies.title_config', ['divide' => $carton_divide, 'name' => $key_supp])
     

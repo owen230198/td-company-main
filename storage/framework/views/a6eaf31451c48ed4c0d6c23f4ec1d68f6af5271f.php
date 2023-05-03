@@ -1,5 +1,5 @@
-<?php if(!empty($supply_obj->id) || $supp_index > 0): ?>
-    <span class="remove_ext_element_quote d-flex bg_red color_white red_btn smooth" data-id = "<?php echo e(@$supply_obj->id); ?>">
+<?php if((!empty($supply_obj->id) && $supp_index > 0) || $supp_index > 0): ?>
+    <span class="remove_ext_element_quote d-flex bg_red color_white red_btn smooth" data-id = "<?php echo e(@$supply_obj->id); ?>" data-table="<?php echo e(@$supp_table); ?>">
         <i class="fa fa-times" aria-hidden="true"></i>
     </span>   
 <?php endif; ?>

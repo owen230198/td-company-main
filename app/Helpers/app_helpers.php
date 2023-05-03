@@ -50,21 +50,6 @@ if (!function_exists('getObjectByTable')) {
     }
 }
 
-if (! function_exists('getNameByDefaultData')) {
-    function getNameByDefaultData($default_data, $value)
-    {
-        if (@$default_data->table) {
-            $models = getModelByClass($default_data->table);
-            $table = $models->select('name')->find($value);
-            $title = @$table['name']?$table['name']:'Không xác định';
-        }else {
-            $list_option = $default_data->option;
-            $title = @$list_option->$value?$list_option->$value:'Không xác định';
-        }
-        return $title;
-    }
-}
-
 if (! function_exists('getDetailDataByID')) {
     function getDetailDataByID($model, $id)
     {

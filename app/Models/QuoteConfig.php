@@ -4,7 +4,7 @@ namespace App\Models;
  
 use Illuminate\Database\Eloquent\Model;
  
-class QConfig extends Model
+class QuoteConfig extends Model
 {
     /**
      * The table associated with the model.

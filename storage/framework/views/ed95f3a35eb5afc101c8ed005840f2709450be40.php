@@ -1,4 +1,4 @@
-<div class="quote_product_structure quote_supp_item position-relative<?php echo e($supp_index > 0 ? ' mt-4 border_green p-3 radius_5' : ''); ?>" data-index=<?php echo e(@$supp_index ?? 0); ?>>
+<div class="quote_product_structure quote_supp_item<?php echo e($supp_index > 0 ? ' mt-4 border_green p-3 radius_5' : ''); ?>" data-index=<?php echo e(@$supp_index ?? 0); ?>>
     <?php
         $key_supp = \TDConst::PAPER;
         $paper_compen_percent = \TDConst::COMPEN_PERCENT;

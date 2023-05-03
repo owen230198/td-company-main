@@ -63,7 +63,7 @@
                         <span class="mr-1">Chi phí : </span>
                         <p class="font_bold color_red">
                             ((Dài x Rộng x ĐG giấy bồi + ĐG lượt) x SL sản phẩm) + ĐG chỉnh máy = 
-                            (({{ $fstage['length'] }} x {{ $fstage['width'] }} x {{ $fstage['qttv_price'] }} + {{ $stage['work_price'] }}) x {{ $stage['qty_pro'] }}) + {{ $stage['shape_price'] }}
+                            (({{ $fstage['length'] }} x {{ $fstage['width'] }} x {{ $fstage['qttv_price'] }} + {{ (float) @$stage['work_price'] }}) x {{ $stage['qty_pro'] }}) + {{ (float) @$stage['shape_price'] }}
                              = {{ number_format((float) @$fstage['cost']) }}đ</p>
                     </div>
                 </li>

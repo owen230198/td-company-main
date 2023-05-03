@@ -22,11 +22,9 @@
         $key_device_cut = \TDConst::CUT;
         $data_cut = !empty($supply_obj->cut) ? json_decode($supply_obj->cut, true) : []; 
     @endphp
-    @include('quotes.products.supplies.title_config', ['divide' => $silk_divide, 'name' => 'vải lụa'])
+    @include('quotes.products.supplies.check_index_data')
     
-    @if (!empty($supply_obj->id))
-        <input type="hidden" name="product[{{ $pro_index }}][{{ $key_supp }}][{{ $supp_index }}][id]" value="{{ $supply_obj->id }}">
-    @endif
+    @include('quotes.products.supplies.title_config', ['divide' => $silk_divide, 'name' => 'vải lụa'])
 
     @include('quotes.products.supplies.quantity_config', 
     ['compen_percent' => $silk_compen_percent, 'compen_num' => $silk_compen_num])

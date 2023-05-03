@@ -19,9 +19,7 @@
         $key_device_cut = \TDConst::CUT;
     ?>
 
-    <?php if(!empty($supply_obj->id)): ?>
-        <input type="hidden" name="product[<?php echo e($pro_index); ?>][<?php echo e($key_supp); ?>][<?php echo e($supp_index); ?>][id]" value="<?php echo e($supply_obj->id); ?>">
-    <?php endif; ?>
+    <?php echo $__env->make('quotes.products.supplies.check_index_data', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     <?php echo $__env->make('quotes.products.supplies.title_config', ['divide' => $mica_divide, 'name' => 'mica'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     

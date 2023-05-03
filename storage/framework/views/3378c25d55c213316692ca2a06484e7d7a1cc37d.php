@@ -26,7 +26,7 @@
         $field_value = @$select_data['select_data'] ?? 'id';
     ?>
     <select name="<?php echo e($name); ?>" class="form-control <?php echo e(@$attr['inject_class'] ? ' '.$attr['inject_class'] : ''); ?>" <?php echo e(@$attr['inject_attr'] ?? ''); ?>>
-        <option value="0">Chọn <?php echo e($note); ?></option>
+        <option value="0">Chọn</option>
         <?php $__currentLoopData = $list_options; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <option value="<?php echo e($item->$field_value); ?>" <?php echo e($item->$field_value == @$value ? 'selected' : ''); ?>>
                 <?php echo e($item->$field_title); ?>

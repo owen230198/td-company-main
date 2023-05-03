@@ -155,9 +155,14 @@ var addFillFinishModule = function()
 
 var removeItemAddedModule = function()
 {
-  $(document).on('click', 'button.remove_ext_element_quote', function(event){
+  $(document).on('click', 'span.remove_ext_element_quote', function(event){
     event.preventDefault();
     $(this).parent().remove();
+    if ($(this).data('id').length !== 0) {
+      ajaxBaseCall({url:getBaseRoute('remove?ajax=1'), 
+      type:'DELETE', 
+      data:{remove_id:$(this).data('id'), table:$(this).data('table')}});
+    }
   });
 }
 

@@ -7,27 +7,39 @@ var baseAjaxForm = function()
 { 
 	$('.baseAjaxForm').submit(function(event) {
 		event.preventDefault();
-		$('#loader').fadeIn(200);
-		$.ajax({
-			url: $(this).attr('action'),
-			type: $(this).attr('method'),
-			data: $(this).serialize(),
-		})
-		.done(function(data) {
-		    if((data.code) == 200){
-		    	toastr['success'](data.message);
-		    }
-		    else{
-		      	toastr['error'](data.message);
-		    }
-			if (data.url != null) {
-				setTimeout(() => {
-					window.location.href=data.url;
-				}, 1500);
-			} 
-			$('#loader').delay(200).fadeOut(500); 
-	    })
+		ajaxBaseCall({url:$(this).attr('action'), 
+		type:$(this).attr('method'), 
+		data:$(this).serialize()});
 	});
+}
+
+var ajaxBaseCall = function(param)
+{
+	console.log(param.data._token);
+	if (['POST', 'PUT', 'DELETE'].includes(param.type) && param.data._token == undefined) {
+		let token = $('head meta[name=csrf-token]').attr('content');
+		param.data._token = token;	
+	}
+	$('#loader').fadeIn(200);
+	$.ajax({
+		url: param.url,
+		type: param.type,
+		data: param.data,
+	})
+	.done(function(data) {
+		if((data.code) == 200){
+			toastr['success'](data.message);
+		}
+		else{
+			toastr['error'](data.message);
+		}
+		if (data.url != null) {
+			setTimeout(() => {
+				window.location.href=data.url;
+			}, 1500);
+		} 
+		$('#loader').delay(200).fadeOut(500); 
+	})
 }
 
 var ajaxViewTarget = function(url, target_ajax, section_class, type = 1)
