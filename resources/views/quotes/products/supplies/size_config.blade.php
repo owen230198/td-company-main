@@ -19,10 +19,10 @@
     ]; 
 @endphp
 <div class="calc_size_module" data-plus = {{ $plus }} data-divide = {{ $divide[0] }}>
-    <div class="d-flex alig-items-center">
+    {{-- <div class="d-flex alig-items-center">
         @include('view_update.view', $pro_temp_length)
         <span class="ml-1 color_gray mt-1"> + {{ $plus }}cm</span>
-    </div>
+    </div> --}}
     
     @include('view_update.view', $pro_length)
 </div>
