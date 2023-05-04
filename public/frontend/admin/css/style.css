@@ -118,7 +118,8 @@ body, html {
 }
 
 .color_red{
-    color: #d50202 ;
+    color: #d50202;
+    -webkit-text-fill-color:#d50202;
 }
 
 .min_120{

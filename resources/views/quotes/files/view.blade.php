@@ -7,8 +7,8 @@
     @if ($check)
         @include('quotes.files.file_word')  
     @else
-        <div class="quote_model py-lg-5 py-4" id="quote_model_w">
-            <div class="header_quote pb-2 mb-lg-4 mb-3 quote_content">
+        <div class="quote_model py-lg-5 py-4" id="quote_model_w" style="line-height: 30px">
+            <div class="header_quote pb-2 mb-4 quote_content">
                 <div class="row jusify-content-center">
                     <div class="col-4">
                         <a class="quote_logo d-inline-block" href="{{ url('') }}">
@@ -35,7 +35,7 @@
             </div>
             <div class="px-lg-5 position-relative quote_content">
                 <div class="quote_bg_content">
-                    <h1 class="text-uppercase fs-39 font_bold text-center mb-3">bảng báo giá</h1>
+                    <h1 class="text-uppercase fs-39 font_bold text-center mb-3 qbig_tt">bảng báo giá</h1>
                     <p class="fs-17 ml-lg-5 ml-md-3 mb-1">Kính gửi : <span class="font-italic"><span class="company">{{ @$data_customer['name'] }}</span></span></p>
                     <p class="fs-17 ml-lg-5 ml-md-3 mb-1">Người liên hệ : <span class="font-italic">{{ @$data_customer['contacter'] }}</span></p>
                     <p class="fs-17 ml-lg-5 ml-md-3 mb-1">Địa chỉ : <span class="font-italic">{{ @$data_customer['address'] }}</span></p>

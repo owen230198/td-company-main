@@ -1,12 +1,12 @@
-<table class="table table-striped fs-18 mb-0">
+<table class="table table-bordered fs-18 mb-0">
     <thead>
         <tr>
-            <th scope="col" class="text-center color_red" style="min-width: auto;">STT</th>
-            <th scope="col" class="text-center color_red max_content">THÔNG SỐ SẢN PHẨM</th>
-            <th scope="col" class="text-center color_red">ĐVT</th>
-            <th scope="col" class="text-center color_red">SL</th>
-            <th scope="col" class="text-center color_red">ĐG</th>
-            <th scope="col" class="text-center color_red">TT</th>
+            <th scope="col" class="text-center color_red table_style" style="min-width: auto;">STT</th>
+            <th scope="col" class="text-center color_red table_style max_content">THÔNG SỐ SẢN PHẨM</th>
+            <th scope="col" class="text-center color_red table_style">ĐVT</th>
+            <th scope="col" class="text-center color_red table_style">SL</th>
+            <th scope="col" class="text-center color_red table_style">ĐG</th>
+            <th scope="col" class="text-center color_red table_style">TT</th>
         </tr>
     </thead>
     <tbody class="fs-17 font-italic">
@@ -22,38 +22,38 @@
                 $data_float = isHardBox($product['category']) ? json_decode(@$main_paper['float'], true) : @$data_elevate['float'];
             ?>
             <tr>
-                <td data-label="Sản phẩm thứ" class="text-center" style="min-width: auto;"><?php echo e($key + 1); ?></td>
-                <td data-label="Nội dung" class="font-italic quote_content_section max_content">
+                <td data-label="Sản phẩm thứ" class="table_style text-center" style="min-width: auto;"><?php echo e($key + 1); ?></td>
+                <td data-label="Nội dung" class="table_style font-italic quote_content_section max_content">
                     <p class="d-flex align-items-center mb-1 font_bold">
                         <span class="pro_name fs-18 text-uppercase"><?php echo e(@$product['name']); ?></span>
                     </p>
                     <p class="mb-1">
-                        <span class="font_bold mr-1"><i class="fs-10 fa fa-circle mr-1" aria-hidden="true"></i> Chất liệu giấy: </span>
+                        <span class="font_bold mr-1"><i class="dot"></i> Chất liệu giấy: </span>
                         <?php echo e(getFieldDataById('name', 'materals', @$data_size['materal'])); ?>
 
                     </p>
                     <p class="mb-1">
-                        <span class="font_bold mr-1"><i class="fs-10 fa fa-circle mr-1" aria-hidden="true"></i> Kích thước: </span>
+                        <span class="font_bold mr-1"><i class="dot"></i> Kích thước: </span>
                         <span class="">
                             <?php echo e(@$product['size']); ?>
 
                         </span>
                     </p>
                     <p class="mb-1">
-                        <span class="font_bold mr-1"><i class="fs-10 fa fa-circle mr-1" aria-hidden="true"></i>
+                        <span class="font_bold mr-1"><i class="dot"></i>
                              Mẫu thiết kế do: </span>
                         <?php echo e(@$product['design']); ?>
 
                     </p>
                     <p class="d-flex align-items-center mb-1 font_bold">
                         <span class="mr-1">
-                            <i class="fs-10 fa fa-circle mr-1" aria-hidden="true"></i>
+                            <i class="dot"></i>
                             In: In <?php echo e(\TDConst::PRINT_TECH[@$data_print['machine']]); ?>
 
                         </span>
                     </p>
                     <p class="mb-1">
-                        <span class="font_bold mr-1"><i class="fs-10 fa fa-circle mr-1" aria-hidden="true"></i> Hoàn thiện: </span>
+                        <span class="font_bold mr-1"><i class="dot"></i> Hoàn thiện: </span>
                         <span class="font-italic">
                             <?php if(@$data_nilon['act'] == 1): ?>
                                 + Cán nilon: <?php echo e(getFieldDataById('name', 'materals', @$data_nilon['materal']).' '. $data_nilon['face'] . ' mặt '); ?> 
@@ -74,7 +74,7 @@
                     </p>
                     <?php if(!empty($main_paper['note'])): ?>
                         <p class="mb-1">
-                            <span class="font_bold mr-1"><i class="fs-10 fa fa-circle mr-1" aria-hidden="true"></i> Ghi chú: </span>
+                            <span class="font_bold mr-1"><i class="dot"></i> Ghi chú: </span>
                             <span class="font-italic">
                                 <?php echo e($main_paper['note']); ?>
 
@@ -82,14 +82,14 @@
                         </p>
                     <?php endif; ?>
                 </td>
-                <td data-label="DVT" class="text-center">Sản phẩm</td>
-                <td data-label="SL" class="text-center"><?php echo e(@$product['qty']); ?></td>
+                <td data-label="DVT" class="text-center table_style">Sản phẩm</td>
+                <td data-label="SL" class="text-center table_style"><?php echo e(@$product['qty']); ?></td>
                 <?php
                     $price = (int) $product['total_cost'];
                     $each_price = $price / (int) @$product['qty'];
                 ?>
-                <td data-label="ĐG" class="text-center"><?php echo e(number_format($each_price)); ?> đ</td>
-                <td data-label="T.Tiền(VNĐ)" class="text-center"><?php echo e(number_format(round($price, -3))); ?> đ</td>
+                <td data-label="ĐG" class="text-center table_style"><?php echo e(number_format($each_price)); ?> đ</td>
+                <td data-label="T.Tiền(VNĐ)" class="text-center table_style"><?php echo e(number_format(round($price, -3))); ?> đ</td>
             </tr>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </tbody>
