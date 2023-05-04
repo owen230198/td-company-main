@@ -255,7 +255,8 @@ class QuoteController extends Controller
             $data['data_quote'] = $arr_quote;
             $data['data_customer'] = Customer::find($arr_quote['customer_id']);
             $data['data_products'] = Product::where(['act' => 1, 'quote_id' => $id])->get()->toArray();
-            return view('quotes.files/view', $data);
+            $data['check'] = false;
+            return view('quotes.files.view', $data);
         }else{
             return redirect(url(''))->with('error', 'Không tìm thấy dữ liệu báo giá !');
         }
