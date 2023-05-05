@@ -12,14 +12,7 @@
     <tbody class="fs-17 font-italic">
         <?php $__currentLoopData = $data_products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <?php
-                $main_paper = \App\Models\Paper::where(['act' => 1, 'main' => 1])->first()->toArray();
-                $data_size = !empty($main_paper['size']) ? json_decode($main_paper['size'], true) : [];
-                $data_print = !empty($main_paper['print']) ? json_decode($main_paper['print'], true) : [];  
-                $data_nilon = !empty($main_paper['nilon']) ? json_decode($main_paper['nilon'], true) : [];
-                $data_compress = !empty($main_paper['compress']) ? json_decode($main_paper['compress'], true) : [];
-                $data_uv = !empty($main_paper['uv']) ? json_decode($main_paper['uv'], true) : [];
-                $data_elevate = !empty($main_paper['elevate']) ? json_decode($main_paper['elevate'], true) : [];
-                $data_float = isHardBox($product['category']) ? json_decode(@$main_paper['float'], true) : @$data_elevate['float'];
+                $main_paper = getDataProExportFile($product);
             ?>
             <tr>
                 <td data-label="Sản phẩm thứ" class="table_style text-center" style="min-width: auto;"><?php echo e($key + 1); ?></td>
@@ -29,7 +22,7 @@
                     </p>
                     <p class="mb-1">
                         <span class="font_bold mr-1"><i class="dot"></i> Chất liệu giấy: </span>
-                        <?php echo e(getFieldDataById('name', 'materals', @$data_size['materal'])); ?>
+                        <?php echo e(getFieldDataById('name', 'materals', @$main_paper['size']['materal'])); ?>
 
                     </p>
                     <p class="mb-1">
@@ -41,42 +34,42 @@
                     </p>
                     <p class="mb-1">
                         <span class="font_bold mr-1"><i class="dot"></i>
-                             Mẫu thiết kế do: </span>
-                        <?php echo e(@$product['design']); ?>
+                             Mẫu thiết kế : </span>
+                        <?php echo e(getFieldDataById('name', 'design_types', @$product['design'])); ?>
 
                     </p>
                     <p class="d-flex align-items-center mb-1 font_bold">
                         <span class="mr-1">
                             <i class="dot"></i>
-                            In: In <?php echo e(\TDConst::PRINT_TECH[@$data_print['machine']]); ?>
+                            Công nghệ in: <?php echo e(\TDConst::PRINT_TECH[@$main_paper['print']['machine']]); ?>
 
                         </span>
                     </p>
                     <p class="mb-1">
                         <span class="font_bold mr-1"><i class="dot"></i> Hoàn thiện: </span>
                         <span class="font-italic">
-                            <?php if(@$data_nilon['act'] == 1): ?>
-                                + Cán nilon: <?php echo e(getFieldDataById('name', 'materals', @$data_nilon['materal']).' '. $data_nilon['face'] . ' mặt '); ?> 
+                            <?php if(@$main_paper['nilon']['act'] == 1): ?>
+                                + Cán nilon: <?php echo e(getFieldDataById('name', 'materals', @$main_paper['nilon']['materal']).' '. $main_paper['nilon']['face'] . ' mặt '); ?> 
                             <?php endif; ?>
 
-                            <?php if(@$data_compress['act'] == 1): ?>
+                            <?php if(@$main_paper['compress']['act'] == 1): ?>
                                 + ép nhũ theo maket
                             <?php endif; ?>
                             
-                            <?php if(@$data_uv['act'] == 1): ?>
-                                + in lưới UV <?php echo e(mb_strtolower(getFieldDataById('name', 'materals', $data_uv['materal']))); ?> theo maket   
+                            <?php if(@$main_paper['uv']['act'] == 1): ?>
+                                + in lưới UV <?php echo e(mb_strtolower(getFieldDataById('name', 'materals', $main_paper['uv']['materal']))); ?> theo maket   
                             <?php endif; ?>
 
-                            <?php if(!empty($data_float)): ?>
+                            <?php if(!empty($main_paper['float'])): ?>
                                 + thúc nổi sản phẩm
                             <?php endif; ?>
                         </span>
                     </p>
-                    <?php if(!empty($main_paper['note'])): ?>
+                    <?php if(!empty($main_paper['main_paper']['note'])): ?>
                         <p class="mb-1">
                             <span class="font_bold mr-1"><i class="dot"></i> Ghi chú: </span>
                             <span class="font-italic">
-                                <?php echo e($main_paper['note']); ?>
+                                <?php echo e($main_paper['main_paper']['note']); ?>
 
                             </span>
                         </p>

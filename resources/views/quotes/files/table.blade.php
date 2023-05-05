@@ -12,14 +12,7 @@
     <tbody class="fs-17 font-italic">
         @foreach ($data_products as $key => $product)
             @php
-                $main_paper = \App\Models\Paper::where(['act' => 1, 'main' => 1])->first()->toArray();
-                $data_size = !empty($main_paper['size']) ? json_decode($main_paper['size'], true) : [];
-                $data_print = !empty($main_paper['print']) ? json_decode($main_paper['print'], true) : [];  
-                $data_nilon = !empty($main_paper['nilon']) ? json_decode($main_paper['nilon'], true) : [];
-                $data_compress = !empty($main_paper['compress']) ? json_decode($main_paper['compress'], true) : [];
-                $data_uv = !empty($main_paper['uv']) ? json_decode($main_paper['uv'], true) : [];
-                $data_elevate = !empty($main_paper['elevate']) ? json_decode($main_paper['elevate'], true) : [];
-                $data_float = isHardBox($product['category']) ? json_decode(@$main_paper['float'], true) : @$data_elevate['float'];
+                $main_paper = getDataProExportFile($product);
             @endphp
             <tr>
                 <td data-label="Sản phẩm thứ" class="table_style text-center" style="min-width: auto;">{{ $key + 1 }}</td>
@@ -29,7 +22,7 @@
                     </p>
                     <p class="mb-1">
                         <span class="font_bold mr-1"><i class="dot"></i> Chất liệu giấy: </span>
-                        {{ getFieldDataById('name', 'materals', @$data_size['materal']) }}
+                        {{ getFieldDataById('name', 'materals', @$main_paper['size']['materal']) }}
                     </p>
                     <p class="mb-1">
                         <span class="font_bold mr-1"><i class="dot"></i> Kích thước: </span>
@@ -39,40 +32,40 @@
                     </p>
                     <p class="mb-1">
                         <span class="font_bold mr-1"><i class="dot"></i>
-                             Mẫu thiết kế do: </span>
-                        {{ @$product['design'] }}
+                             Mẫu thiết kế : </span>
+                        {{ getFieldDataById('name', 'design_types', @$product['design']) }}
                     </p>
                     <p class="d-flex align-items-center mb-1 font_bold">
                         <span class="mr-1">
                             <i class="dot"></i>
-                            In: In {{ \TDConst::PRINT_TECH[@$data_print['machine']] }}
+                            Công nghệ in: {{ \TDConst::PRINT_TECH[@$main_paper['print']['machine']] }}
                         </span>
                     </p>
                     <p class="mb-1">
                         <span class="font_bold mr-1"><i class="dot"></i> Hoàn thiện: </span>
                         <span class="font-italic">
-                            @if (@$data_nilon['act'] == 1)
-                                + Cán nilon: {{ getFieldDataById('name', 'materals', @$data_nilon['materal']).' '. $data_nilon['face'] . ' mặt ' }} 
+                            @if (@$main_paper['nilon']['act'] == 1)
+                                + Cán nilon: {{ getFieldDataById('name', 'materals', @$main_paper['nilon']['materal']).' '. $main_paper['nilon']['face'] . ' mặt ' }} 
                             @endif
 
-                            @if (@$data_compress['act'] == 1)
+                            @if (@$main_paper['compress']['act'] == 1)
                                 + ép nhũ theo maket
                             @endif
                             
-                            @if (@$data_uv['act'] == 1)
-                                + in lưới UV {{ mb_strtolower(getFieldDataById('name', 'materals', $data_uv['materal'])) }} theo maket   
+                            @if (@$main_paper['uv']['act'] == 1)
+                                + in lưới UV {{ mb_strtolower(getFieldDataById('name', 'materals', $main_paper['uv']['materal'])) }} theo maket   
                             @endif
 
-                            @if (!empty($data_float))
+                            @if (!empty($main_paper['float']))
                                 + thúc nổi sản phẩm
                             @endif
                         </span>
                     </p>
-                    @if (!empty($main_paper['note']))
+                    @if (!empty($main_paper['main_paper']['note']))
                         <p class="mb-1">
                             <span class="font_bold mr-1"><i class="dot"></i> Ghi chú: </span>
                             <span class="font-italic">
-                                {{ $main_paper['note'] }}
+                                {{ $main_paper['main_paper']['note'] }}
                             </span>
                         </p>
                     @endif

@@ -9,8 +9,9 @@ use App\Services\QTraits\QPaperTrait;
 use App\Services\QTraits\QSupplyTrait;
 use App\Constants\StatusConstant;
 use App\Constants\TDConstant;
-use App\Http\Controllers\AdminController;
-use Illuminate\Foundation\Testing\RefreshDatabaseState;
+use PhpOffice\PhpWord\PhpWord;
+use PhpOffice\PhpWord\IOFactory;
+use PhpOffice\PhpWord\TemplateProcessor;
 
 class QuoteService extends BaseService
 {
@@ -175,5 +176,69 @@ class QuoteService extends BaseService
                 }
             }        
         }
+    }
+
+    private function getArrValueExportQuote($product, $main_paper, $num = 1)
+    {
+        $arr['pro_num'] = $num;
+        $arr['pro_name'] = $product['name'];
+        $arr['paper_materal'] = getFieldDataById('name', 'materals', $main_paper['size']['materal']);
+        $arr['pro_size'] = $product['size'];
+        $arr['pro_design'] = getFieldDataById('name', 'design_types', $product['design']);
+        $arr['paper_print_tech'] = TDConstant::PRINT_TECH[@$main_paper['print']['machine']];
+        $finish = '';
+        if (@$main_paper['nilon']['act'] == 1) {
+            $finish .= "+ Cán nilon: ".getFieldDataById('name', 'materals', @$main_paper['nilon']['materal']).' '. $main_paper['nilon']['face'] . ' mặt ';
+        }
+
+        if (@$main_paper['nilon']['act'] == 1) {
+            $finish .= "+ ép nhũ theo maket";
+        }
+
+        if (@$main_paper['uv']['act'] == 1) {
+            $finish .= "+ in lưới UV ".mb_strtolower(getFieldDataById('name', 'materals', @$main_paper['uv']['materal']))." theo maket";
+        }
+
+        if (@$main_paper['float']['act'] == 1) {
+            $finish .= "+ thúc nổi sản phẩm";
+        }
+        $arr['paper_finish'] = $finish;
+        $arr['pro_qty'] = @$product['qty'];
+        $pro_total = (int) $product['total_cost'];
+        $each_price = $pro_total / (int) @$product['qty'];
+        $arr['pro_price'] = $each_price;
+        $arr['pro_total'] = round($pro_total, -3);
+        return $arr;
+    }
+
+    public function export($arr_quote, $customer, $products)
+    {
+        $templateProcessor = new TemplateProcessor(base_path('public/frontend/admin/templates/words/quote_template.docx'));
+        \PhpOffice\PhpWord\Settings::setOutputEscapingEnabled(true);
+        $templateProcessor->setValue('customer_name', @$customer['name']);
+        $templateProcessor->setValue('customer_contacter', @$customer['contacter']);
+        $templateProcessor->setValue('customer_phone', @$customer['phone']);
+        $templateProcessor->setValue('customer_address', @$customer['address']);
+        $templateProcessor->setValue('customer_email', @$customer['email']);
+
+        $list_pro = [];
+        foreach ($products as $key => $product) {
+            $main_paper = getDataProExportFile($product);
+            $num = $key + 1;
+            $arr_value = $this->getArrValueExportQuote($product, $main_paper, $num);
+            array_push($list_pro, $arr_value);
+        }
+        if (count($list_pro) > 0) {
+            $templateProcessor->cloneRowAndSetValues('pro_num', $list_pro);
+        }
+
+        $templateProcessor->setValue('quote_total', number_format(round((int) @$arr_quote['total_amount'], -3)));
+        $user = getDetailDataByID('NUser', @$arr_quote['created_by']);
+        $templateProcessor->setValue('user_name', @$user['name']);
+        $templateProcessor->setValue('user_phone', @$user['phone']);
+        $fileName = $arr_quote['seri'].".docx";
+        $fileStorage = base_path('public/' . $fileName);
+        $templateProcessor->saveAs($fileStorage);
+        return response()->download($fileStorage);
     }
 }

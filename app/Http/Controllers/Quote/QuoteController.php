@@ -247,19 +247,26 @@ class QuoteController extends Controller
         }
     }
 
-    public function quoteFileExport($id)
+    public function quoteFileExport(Request $request, $id)
     {
         $arr_quote = Quote::find($id);
+        $data_customer = Customer::find($arr_quote['customer_id']);
+        $data_products = Product::where(['act' => 1, 'quote_id' => $id])->get()->toArray();
+        $step = $request->input('step') ?? 'review';
         if ($arr_quote) {
-            $data['title'] = 'Quản lí file báo giá - '. $arr_quote['seri'];
-            $data['data_quote'] = $arr_quote;
-            $data['data_customer'] = Customer::find($arr_quote['customer_id']);
-            $data['data_products'] = Product::where(['act' => 1, 'quote_id' => $id])->get()->toArray();
-            $data['check'] = false;
-            return view('quotes.files.view', $data);
+            if ($step == 'review') {
+                $data['title'] = 'Quản lí file báo giá - '. $arr_quote['seri'];
+                $data['data_quote'] = $arr_quote;
+                $data['data_customer'] = $data_customer;
+                $data['data_products'] = $data_products;
+                return view('quotes.files.view', $data);
+            }else{
+                return $this->services->export($arr_quote, $data_customer, $data_products);   
+            }
         }else{
             return redirect(url(''))->with('error', 'Không tìm thấy dữ liệu báo giá !');
         }
     }
+    
 }
 

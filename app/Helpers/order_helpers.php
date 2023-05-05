@@ -18,11 +18,7 @@
     if (!function_exists('getProductCategoryOption')) {
         function getProductCategoryOption()
         {
-            $arr['listTypeProcate'] = OrderConstant::PRO_CATE_TYPE;
-            $arr['listProCate'] = getDataTable('product_categories', '*', 
-            [['key'=>'act', 'compare'=>'=', 'value'=>1]], 0, 'name', 'asc', true);
-            $arr['listPaperSubs'] = getDataTable('p_substances', ['id', 'name'],[['key'=>'act', 'compare'=>'=', 'value'=>1]], 0, 'name', 'asc', true);
-            return $arr;
+            
         }
     }
 

@@ -246,15 +246,3 @@ ul.supply_info li.supply_item_inf>.detail_quote_supply_item.hover{
     background: initial;
     page-break-after: always;
 }
-
-.dot{
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: #333;
-}
-
-.qbig_tt{
-    line-height: 59px;
-}

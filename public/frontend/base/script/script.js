@@ -85,6 +85,24 @@ var getEmptyDefault = function(value, deflt = '', type = 'string'){
 	}
 }
 
+var getCssAndSetInlineCss = function(element)
+{
+	let str = '';
+        let arr = getComputedStyle(element, null);
+        for(let i = 0; i < arr.length; i++){
+            str += arr[i] + ':' + arr.getPropertyValue(arr[i]) + ';';
+        }
+        $(element).attr('style', str);
+}
+
+var setCssInlineChildrenRecursively = function(element)
+{
+	element.children().each(function () {
+		getCssAndSetInlineCss(this);
+		setCssInlineChildrenRecursively($(this));   
+	});
+}
+
 $(function(){
 	baseAjaxForm();
 });
