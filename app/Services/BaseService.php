@@ -17,17 +17,15 @@ class BaseService
 		$data['updated_at'] = !empty($data['updated_at']) ? $data['updated_at'] : date('Y-m-d H:i', Time());
 	}
 
-	public function processDataBefore($data)
+	public function processDataBefore(&$data, $table)
 	{
-		$this->configBaseDataAction($data);
-		foreach ($data as $key => $value) {
-			if (str_contains($key, 'date') || str_contains($key, 'expired') || str_contains($key, '_at')) {
-				$data[$key] = getDataDateTime($value);
-			}
-			if (str_contains($key, 'json_data') && is_array($value)) {
-				$data[$key] = json_encode($value);
-			}
-		}
-		return $data;
+		foreach ($data as $key => $item) {
+            $field = \App\Models\NDetailTable::where(['table_map'=>$table, 'name'=>$key])->first();
+            if (@$field['view_type'] == 'date_time') {
+                $data[$key] = getDataDateTime($item);
+            }elseif (@$field['view_type'] == 'password') {
+                $data[$key] = md5($data['password']);
+            }  
+        }
 	}
 }

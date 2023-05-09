@@ -1,8 +1,7 @@
 <div class="quote_product_structure quote_supp_item{{ $supp_index > 0 ? ' mt-4 border_green p-3 radius_5' : '' }}" data-index={{ @$supp_index ?? 0 }}>
     @php
         $key_supp = \TDConst::PAPER;
-        $paper_compen_percent = \TDConst::COMPEN_PERCENT;
-        $paper_compen_num = \TDConst::COMPEN_NUM;
+        $paper_compen_percent = getDataConfig('QuoteConfig', 'COMPEN_PERCENT');
 
         $pro_paper_name = [
             'name' => 'product['.$pro_index.']['.$key_supp.']['.$supp_index.'][name]',

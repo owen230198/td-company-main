@@ -68,8 +68,7 @@ class AdminService extends BaseService
 
     public function getFieldAction($table, $action = 'view')
     {
-        $data = NDetailTable::where('table_map', $table)->where('act', 1)->where($action, 1)->orderBy('ord', 'asc')->get()->toArray();
-        return $data;
+        return NDetailTable::where(['act' => 1, 'table_map'=> $table, $action => 1])->orderBy('ord', 'asc')->get();
     }
 
     public function handleDataFieldShow($field_shows)
@@ -107,13 +106,14 @@ class AdminService extends BaseService
     public function getDataBaseView($table, $name='')
     {
         $data = $this->getBaseTable($table);
-        $data['page_item'] = @$data['tableItem']['admin_paginate']??10;
-        $data['view_type'] = @$data['tableItem']['view_type']??'view';
-        $data['field_searchs'] = NDetailTable::where('table_map', $table)->where('act', 1)->where('search', 1)->orderBy('ord', 'asc')->get()->toArray();
-        $name = @$data['view_type']=='configs'?'Cài đặt':$name;
+        $data['page_item'] = @$data['tableItem']['admin_paginate'] ?? 10;
+        $data['view_type'] = @$data['tableItem']['view_type'] ?? 'view';
+        $name = @$data['view_type'] == 'config' ? 'Cài đặt':$name;
         $data['title'] = $name.' '.$data['tableItem']['note'];
-        if ($data['view_type']=='configs') {
+        if ($data['view_type']=='config') {
             $data['regions'] = $this->regions->getRegionOfConfig($table);
+        }else{
+            $data['field_searchs'] = NDetailTable::where(['act' => 1,'table_map' => $table, 'search' => 1])->orderBy('ord', 'asc')->get();
         }
         return $data;
     }
@@ -158,26 +158,13 @@ class AdminService extends BaseService
 
     public function doInsertTable($table, $data)
     {
-        $data = $this->getDataDoAction($data, $table);
+        $this->processDataBefore($data, $table);
         return \DB::table($table)->insertGetId($data);
-    }
-
-    private function getDataDoAction($data, $table)
-    {
-        foreach ($data as $key => $item) {
-            $field = NDetailTable::where(['table_map'=>$table, 'name'=>$key])->first();
-            if (@$field['view_type'] == 'date_time') {
-                $data[$key] = getDataDateTime($item);
-            }elseif (@$field['view_type'] == 'password') {
-                $data[$key] = md5($data['password']);
-            }  
-        }
-        return $data;
     }
 
     public function doUpdateTable($id, $table, $data)
     {
-        $data = $this->getDataDoAction($data, $table);
+        $this->processDataBefore($data, $table);
         $update =  \DB::table($table)->where('id', $id)->update($data);
         return $update;
     }

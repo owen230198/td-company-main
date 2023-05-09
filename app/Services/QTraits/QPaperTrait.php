@@ -8,7 +8,7 @@ trait QPaperTrait
         $qttv = !empty($paper['qttv']) ? (float) $paper['qttv'] : 0;
         $price = !empty($paper['materal']) && $paper['materal'] != 'other' ? ((float) getFieldDataById('price', 'materals', $paper['materal'])) : 
                 (!empty($paper['unit_price']) ? (float) $paper['unit_price'] : 0);
-        $plus_paper = (float) TDConstant::PLUS_PAPER;
+        $plus_paper = (float) getDataConfig('QuoteConfig', 'PLUS_PAPER');
         $supp_qty = self::$supp_qty + $plus_paper;
         // Công thức tính chi phí khổ in : dài x rộng x định lượng x (số tờ in + 100) x ĐG
         $total = self::$length * self::$width * $qttv * $supp_qty * $price;
@@ -23,15 +23,16 @@ trait QPaperTrait
 		$color = !empty($print['color']) ? $print['color'] : 0;
         $type = !empty($print['type']) ? $print['type'] : 0;
         $device_id = !empty($print['machine']) ? $print['machine'] : 0;
-        $subtract_paper = TDConstant::PRINT_SUBTRACT_PAPER;
-        $supp_qty = self::$base_supp_qty - $subtract_paper + self::$plus_paper_device;
+        $subtract_paper = (int) getDataConfig('QuoteConfig', 'PRINT_SUBTRACT_PAPER');
+        $plus_paper_device = (int) getDataConfig('QuoteConfig', 'PLUS_PAPER_DEVICE');
+        $supp_qty = self::$base_supp_qty - $subtract_paper + $plus_paper_device;
         $device = $this->getPriterDevice($device_id);
         $model_price = !empty($device['model_price']) ? (int) $device['model_price'] : 0;
         $work_price = !empty($device['work_price']) ? (int) $device['work_price'] : 0;
         $shape_price = !empty($device['shape_price']) ? (int) $device['shape_price'] : 0;
         if ($color == TDConstant::APLA_PRINT_COLOR) {
-            $apla_factor = TDConstant::APLA_PRICE_FACTOR;
-            $apla_plus = TDConstant::APLA_PRICE_PLUS;
+            $apla_factor = (float) getDataConfig('QuoteConfig', 'APLA_PRICE_FACTOR');
+            $apla_plus = (float) getDataConfig('QuoteConfig', 'APLA_PRICE_PLUS');
             $print_factor = $type == TDConstant::ONE_PRINT_TYPE ? 1 : 2;
             $apla_price = self::$length * self::$width * $apla_factor * $print_factor;
             $print['print_factor'] = $print_factor;
@@ -74,11 +75,12 @@ trait QPaperTrait
         $materal_id = !empty($metalai['materal']) ? $metalai['materal'] : 0;
         $materal_cost = $this->getPriceMateralQuote($materal_id);
         $num_face = !empty($metalai['face']) ? (int) $metalai['face'] : 0;
-        $supp_qty = self::$supp_qty + self::$plus_paper;
+        $plus_paper = (float) getDataConfig('QuoteConfig', 'PLUS_PAPER_METALAI');
+        $supp_qty = self::$supp_qty + $plus_paper;
         $total_metalai = $this->getBaseTotalStage($supp_qty, $model_price, $work_price, $shape_price, $materal_cost, 
         $num_face);
         $metalai['supp_qty'] = $supp_qty;
-        $metalai['cover_supp_qty'] = self::$supp_qty + self::$plus_paper_device;
+        $metalai['cover_supp_qty'] = $supp_qty;
         $metalai['materal_price'] = $materal_cost;
         $metalai['metalai_price'] = $total_metalai;
 
@@ -86,7 +88,7 @@ trait QPaperTrait
         $cover_materal_cost = $this->getPriceMateralQuote($cover_materal_id);
         $cover_num_face = !empty($metalai['cover_face']) ? (int) $metalai['cover_face'] : 0;
         $total_cover = $this->getBaseTotalStage(self::$supp_qty, $model_price, $work_price, $shape_price, $cover_materal_cost, 
-        $cover_num_face, self::$plus_paper_device);
+        $cover_num_face);
         $metalai['materal_cover_price'] = $cover_materal_cost;
         $metalai['metalai_cover_price'] = $total_cover;
 
@@ -120,7 +122,8 @@ trait QPaperTrait
     private function getDataActionPaper($data)
     {
         $this->newObjectSetProperty($data);
-        static::$supp_qty = ceil(calValuePercentPlus(self::$base_supp_qty, self::$base_supp_qty, self::$plus_compen_perc)); 
+        $plus_compen_perc = (float) getDataConfig('QuoteConfig', 'COMPEN_PERCENT');
+        static::$supp_qty = ceil(calValuePercentPlus(self::$base_supp_qty, self::$base_supp_qty, $plus_compen_perc)); 
         if (!empty($data['size'])) {
             $data_action['size'] = $this->configDataSizePaper($data['size']);
         }

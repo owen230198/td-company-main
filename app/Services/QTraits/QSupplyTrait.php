@@ -14,7 +14,8 @@ trait QSupplyTrait{
    public function getDataActionSupply($data)
    {
       $this->newObjectSetProperty($data);
-      static::$supp_qty = ceil(calValuePercentPlus(self::$base_supp_qty, self::$base_supp_qty, self::$hard_compen_perc)); 
+      $hard_compen_perc = (float) getDataConfig('QuoteConfig', 'CARTON_COMPEN_PERCENT');
+      static::$supp_qty = ceil(calValuePercentPlus(self::$base_supp_qty, self::$base_supp_qty, $hard_compen_perc)); 
       
       if (!empty($data['size'])) {
          $data_action['size'] = $this->configDataSupplySize($data['size']);
@@ -86,7 +87,7 @@ trait QSupplyTrait{
 
    private function configDataMagnet($magnet)
    {
-      $magnet_perc = TDConstant::MAGNET_PERC;
+      $magnet_perc = (float) getDataConfig('QuoteConfig', 'MAGNET_PERC');
       $qttv_id = !empty($magnet['type']) ? $magnet['type'] : 0;
       $qttv = getDetailDataByID('SupplyPrice', $qttv_id);
       $qttv_price = @$qttv['price']?$qttv['price']:0;  

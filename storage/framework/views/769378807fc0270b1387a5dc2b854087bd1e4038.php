@@ -13,19 +13,24 @@
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </ul>
             <div class="tab-content px-2 py-3 bg_white content_form" id="myTabContent">
-                <?php $__currentLoopData = $default_field; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $df_value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                  <input type="hidden" name = "<?php echo e($key); ?>" value = "<?php echo e($df_value); ?>">   
-                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                <?php if(!empty($default_field)): ?>
+                    <?php $__currentLoopData = $default_field; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $df_value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <input type="hidden" name = "<?php echo e($key); ?>" value = "<?php echo e($df_value); ?>">   
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                <?php endif; ?>
                 <?php $__currentLoopData = $regions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $c_region): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="tab-pane fade <?php echo e($key == 0 ? 'show active' : ''); ?>" id="<?php echo e($c_region['id']); ?>"
                         role="tabpanel" aria-labelledby="<?php echo e($c_region['id']); ?>-tab">
                         <?php $__currentLoopData = $field_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $field): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <?php
+                                $field = (array) $field;
+                            ?>
                             <?php if($field['region'] == $c_region['id']): ?>
                                 <?php
                                     $arr = $field;
                                     $arr['attr'] = !empty($field['attr']) ? json_decode($field['attr'], true) : [];
                                     $arr['other_data'] = !empty($field['other_data']) ? json_decode($field['other_data'], true) : [];
-                                    $arr['value'] = @$dataitem[$field['name']];
+                                    $arr['value'] = @$tableItem['view_type'] == 'config' ? @$field['value'] : @$dataitem[$field['name']];
                                 ?>
                                 <?php echo $__env->make('view_update.view', $arr, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                             <?php endif; ?>

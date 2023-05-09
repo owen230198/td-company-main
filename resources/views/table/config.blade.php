@@ -1,0 +1,1 @@
+@include('action/view', ['field_list' => $data_tables])

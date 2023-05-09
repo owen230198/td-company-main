@@ -5,10 +5,6 @@ use App\Constants\TDConstant;
 
 trait QuoteTrait
 {
-    static $plus_paper_device = TDConstant::PLUS_PAPER_DEVICE;
-    static $plus_compen_perc = TDConstant::COMPEN_PERCENT;
-    static $hard_compen_perc = TDConstant::CARTON_COMPEN_PERCENT;
-    static $plus_paper = TDConstant::PLUS_PAPER;
     static $base_qty_pro = 0;
     static $qty_pro = 0;
     static $nqty = 1;
@@ -21,8 +17,9 @@ trait QuoteTrait
 
     private function newObjectSetProperty($data)
     {
+        $plus_compen_perc = (float) getDataConfig('QuoteConfig', 'COMPEN_PERCENT_PRO');
         static::$base_qty_pro = !empty($data['qty']) ? (int) $data['qty'] : 0;
-        static::$qty_pro = ceil(calValuePercentPlus(self::$base_qty_pro, self::$base_qty_pro, self::$plus_compen_perc)); 
+        static::$qty_pro = ceil(calValuePercentPlus(self::$base_qty_pro, self::$base_qty_pro, $plus_compen_perc)); 
         static::$nqty = !empty($data['nqty']) ? (int) $data['nqty'] : 1;
         static::$base_supp_qty = !empty($data['supp_qty']) ? (int) $data['supp_qty'] : 0;
         $length = !empty($data['size']['length']) ? $data['size']['length'] : 0;

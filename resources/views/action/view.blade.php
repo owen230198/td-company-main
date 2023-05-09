@@ -13,19 +13,24 @@
                 @endforeach
             </ul>
             <div class="tab-content px-2 py-3 bg_white content_form" id="myTabContent">
-                @foreach ($default_field as $key => $df_value)
-                  <input type="hidden" name = "{{ $key }}" value = "{{ $df_value }}">   
-                @endforeach
+                @if (!empty($default_field))
+                    @foreach ($default_field as $key => $df_value)
+                        <input type="hidden" name = "{{ $key }}" value = "{{ $df_value }}">   
+                    @endforeach
+                @endif
                 @foreach ($regions as $key => $c_region)
                     <div class="tab-pane fade {{ $key == 0 ? 'show active' : '' }}" id="{{ $c_region['id'] }}"
                         role="tabpanel" aria-labelledby="{{ $c_region['id'] }}-tab">
                         @foreach ($field_list as $field)
+                            @php
+                                $field = (array) $field;
+                            @endphp
                             @if ($field['region'] == $c_region['id'])
                                 @php
                                     $arr = $field;
                                     $arr['attr'] = !empty($field['attr']) ? json_decode($field['attr'], true) : [];
                                     $arr['other_data'] = !empty($field['other_data']) ? json_decode($field['other_data'], true) : [];
-                                    $arr['value'] = @$dataitem[$field['name']];
+                                    $arr['value'] = @$tableItem['view_type'] == 'config' ? @$field['value'] : @$dataitem[$field['name']];
                                 @endphp
                                 @include('view_update.view', $arr)
                             @endif

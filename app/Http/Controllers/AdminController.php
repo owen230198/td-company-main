@@ -30,23 +30,27 @@ class AdminController extends Controller
 
     public function view(Request $request, $table)
     {
-        $data = $this->admins->getDataBaseView($table, 'Danh sách');
-        $param = $request->all();
-        if (!empty($param)) {
-            foreach ($param as $key => $value) {
-                static::$view_where[] = ['key' => $key, 'value' => $value];
-            }
-            $data['param_action'] = getParamUrlByArray($param);
-        }
         $permission = $this->admins->checkPermissionAction($table, 'view');
         if (!@$permission['allow']) {
             return redirect('permission-error');
         }
-        if(!empty($permission['where'])){
-            static::$view_where[] = @$permission['where'];
+        $data = $this->admins->getDataBaseView($table, 'Danh sách');
+        if($data['view_type'] == 'config'){
+            $data['action_url'] = url('do-config-data/'.$table);   
+        }else{
+            $param = $request->all();
+            if (!empty($param)) {
+                foreach ($param as $key => $value) {
+                    static::$view_where[] = ['key' => $key, 'value' => $value];
+                }
+                $data['param_action'] = getParamUrlByArray($param);
+            }
+            if(!empty($permission['where'])){
+                static::$view_where[] = @$permission['where'];
+            }
         }
         $data['data_tables'] = getDataTable($table, self::$view_where, ['paginate' => $data['page_item']]);
-        session()->put('back_url', url()->full());
+        session()->put('back_url', url()->full());    
         return view('table.'.$data['view_type'], $data);
     }
 
@@ -217,12 +221,11 @@ class AdminController extends Controller
         if (!$this->admins->checkPermissionAction($table, 'update')) {
             return back()->with('error','Không có quyền thực hiện thao tác này !');
         }
-        $post = $request->all();
-        unset($post['_token']);
+        $post = $request->except('_token');
         $success = false;
         foreach ($post as $key => $value) {
             $data['value'] = $value;
-            $success = $this->db::table($table)->where('id', $key)->update($data);
+            $success = \DB::table($table)->where('name', $key)->update($data);
         }
         if (isset($success)) {
             echoJson(200, 'Cập nhật dữ liệu thành công!');

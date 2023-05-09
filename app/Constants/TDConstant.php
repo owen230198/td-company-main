@@ -17,8 +17,6 @@
 
         //số màu in
         const APLA_PRINT_COLOR = 'apla_print_color';
-        const APLA_PRICE_FACTOR = 1000;
-        const APLA_PRICE_PLUS = 100000;
         const PRINT_COLOR = ['Chọn số màu in', 1, 2, 3, 4, 5, 6, self::APLA_PRINT_COLOR => 'In áp la 1 mặt'];
 
         //Yêu cầu thợ in
@@ -98,10 +96,6 @@
         ];
 
         // Thông số bù hao
-        const COMPEN_PERCENT = 1;
-        const CARTON_COMPEN_PERCENT = 1;
-        const COMPEN_NUM = 100;
-        const CARTON_COMPEN_NUM = 10;
         const CARTON_SIZE_PLUS = 1;
         const RUBBER_SIZE_PLUS = 2;
         const STYRO_SIZE_PLUS = 2;
@@ -243,14 +237,6 @@
             ['key' => 'micaes', 'note' => 'Me Ka', 'pro_field' => self::MICA, 'device' => self::MICA_DEVICE ,'table' => 'supplies'],
             ['key' => 'fill_finishes', 'note' => 'Bồi + hoàn thiện', 'pro_field' => self::FILL_FINISH, 'table' => 'fill_finishes', 'device' => self::FILL_DEVICE] 
         ];
-
-        const PLUS_PAPER = 100;
-
-        const PRINT_SUBTRACT_PAPER = 1000;
-        const PLUS_PAPER_DEVICE = 30;
-        const FLOAT_PRICE = 30000;
-
-        const MAGNET_PERC = 1.5;
     }
     
 ?>

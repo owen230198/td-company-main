@@ -2,8 +2,7 @@
     @php
         $key_supp = \TDConst::CARTON;
         $carton_divide = \TDConst::CARTON_SIZE_DIVIDE;
-        $carton_compen_percent = \TDConst::CARTON_COMPEN_PERCENT;
-        $carton_compen_num = \TDConst::CARTON_COMPEN_NUM;
+        $carton_compen_percent = (float) getDataConfig('QuoteConfig', 'CARTON_COMPEN_PERCENT');
         $carton_plus = \TDConst::CARTON_SIZE_PLUS;
         $key_device_elevate = \TDConst::ELEVATE;
         $key_device_peel = \TDConst::PEEL;

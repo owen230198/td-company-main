@@ -31,6 +31,7 @@ class NGroupUser extends Model
     const MODULE = [
         'price_device' => ['name' => 'Đơn giá thiết bị máy', 'link' => 'config-device-price/supply_types?type=devices', 'parent' => 'quote_price_config'],
         'price_materal' => ['name' => 'Đơn giá vật tư sx', 'link' => 'config-device-price/supply_types?type=materals', 'parent' => 'quote_price_config'],
+        'quote_config' => ['name' => 'Các thông số khác', 'link' => 'view/quote_configs', 'parent' => 'quote_price_config'],
         'create_quote' => ['name' => 'Tính giá', 'link' => 'create-quote', 'parent' => 'customer_quote'],
         'quote_not_accepted' => ['name' => 'DS báo giá (chưa duyệt)', 'link' => 'view/quotes?status=not_accepted', 'parent' => 'customer_quote'],
         'create_new_order' => ['name' => 'Tạo mới đơn hàng', 'link' => 'create-handle-order', 'parent' => 'order_handle'],
