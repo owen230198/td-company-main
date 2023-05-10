@@ -1,7 +1,7 @@
 @extends('index')
 @section('content')
     <div class="dashborad_content position-relative">
-        <form action="{{ $action_url }}" method="POST" class="actionForm config_content" enctype="multipart/form-data">
+        <form action="{{ $action_url }}" method="POST" class="config_content {{ @$config_view == 1 ? 'baseAjaxForm' : '' }}" enctype="multipart/form-data">
             @csrf
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 @foreach ($regions as $key => $region)
@@ -30,7 +30,7 @@
                                     $arr = $field;
                                     $arr['attr'] = !empty($field['attr']) ? json_decode($field['attr'], true) : [];
                                     $arr['other_data'] = !empty($field['other_data']) ? json_decode($field['other_data'], true) : [];
-                                    $arr['value'] = @$tableItem['view_type'] == 'config' ? @$field['value'] : @$dataitem[$field['name']];
+                                    $arr['value'] = @$config_view == 1 ? @$field['value'] : @$dataitem[$field['name']];
                                 @endphp
                                 @include('view_update.view', $arr)
                             @endif

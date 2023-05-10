@@ -2,8 +2,7 @@
     <?php
         $key_supp = \TDConst::CARTON;
         $carton_divide = \TDConst::CARTON_SIZE_DIVIDE;
-        $carton_compen_percent = \TDConst::CARTON_COMPEN_PERCENT;
-        $carton_compen_num = \TDConst::CARTON_COMPEN_NUM;
+        $carton_compen_percent = (float) getDataConfig('QuoteConfig', 'CARTON_COMPEN_PERCENT');
         $carton_plus = \TDConst::CARTON_SIZE_PLUS;
         $key_device_elevate = \TDConst::ELEVATE;
         $key_device_peel = \TDConst::PEEL;
@@ -15,7 +14,7 @@
     <?php echo $__env->make('quotes.products.supplies.title_config', ['divide' => $carton_divide, 'name' => $key_supp], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     
     <?php echo $__env->make('quotes.products.supplies.quantity_config', 
-    ['compen_percent' => $carton_compen_percent, 'compen_num' => $carton_compen_num], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    ['compen_percent' => $carton_compen_percent], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     <?php echo $__env->make('quotes.products.supplies.size_config', ['plus' => $carton_plus, 'divide' => $carton_divide], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 

@@ -118,41 +118,31 @@ class AdminService extends BaseService
         return $data;
     }
 
-    public function getDataSearchTable($table, $arrWhere = array(), $get, $paginate = 10, $order = 'id', $order_by='desc')
+    public function getConditionTable($table, $field_name, $value)
     {
-        if(!empty($get)){
-            if (@$get['page']) {
-                unset($get['page']);
-            }
-            foreach ($get as $key => $where) {
-                if (!empty($where)) {
-                    $field_id = (int)$key;
-                    $field = NDetailTable::select('id', 'name', 'view_type')->find($field_id);
-                    $name = $field['name'];
-                    $type = $field['view_type'];
-                    if ($type == 'text') {
-                        $tmp = array('key'=>$name, 'compare'=>'like', 'value'=>'%'.$where.'%');
+        $field = NDetailTable::select('id', 'name', 'type')->where(['act' => 1, 'table_map' => $table, 'name' =>$field_name])->get();
+            $name = $field['name'];
+            $type = $field['type'];
+            if ($type == 'text') {
+                $tmp = array('key'=>$name, 'compare'=>'like', 'value'=>'%'.$where.'%');
+                array_push($arrWhere, $tmp);
+            }elseif ($type == 'date_time') {
+                $dateRange = explode(' - ', $where);
+                if (is_array($dateRange)){
+                    foreach ($dateRange as $key => $str) {
+                        $timstamp = strtotime(trim($str));
+                        $date_time = date('Y-m-d H:i', $timstamp);
+                        $compareTime = $key==0?'>=':'<=';
+                        $tmp = array('key'=>$name, 'compare'=>$compareTime, 'value'=>$date_time);
                         array_push($arrWhere, $tmp);
-                    }elseif ($type == 'date_time') {
-                        $dateRange = explode(' - ', $where);
-                        if (is_array($dateRange)){
-                            foreach ($dateRange as $key => $str) {
-                                $timstamp = strtotime(trim($str));
-                                $date_time = date('Y-m-d H:i', $timstamp);
-                                $compareTime = $key==0?'>=':'<=';
-                                $tmp = array('key'=>$name, 'compare'=>$compareTime, 'value'=>$date_time);
-                                array_push($arrWhere, $tmp);
-                            }
-                        }
-                    }else {
-                        if ($where != '') {
-                            $tmp = array('key'=>$name, 'compare'=>"=", 'value'=>$where);
-                            array_push($arrWhere, $tmp);
-                        }
                     }
                 }
+            }else {
+                if ($where != '') {
+                    $tmp = array('key'=>$name, 'compare'=>"=", 'value'=>$where);
+                    array_push($arrWhere, $tmp);
+                }
             }
-        }
         return $data;
     }
 

@@ -23,7 +23,7 @@
     @include('quotes.products.supplies.title_config', ['divide' => $mica_divide, 'name' => 'mica'])
     
     @include('quotes.products.supplies.quantity_config', 
-    ['compen_percent' => $mica_compen_percent, 'compen_num' => $mica_compen_num])
+    ['compen_percent' => $mica_compen_percent])
 
     @include('quotes.products.supplies.size_config', ['plus' => $mica_plus, 'divide' => $mica_divide])
 

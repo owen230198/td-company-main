@@ -1,8 +1,7 @@
 <div class="quote_supp_item <?php echo e($supp_index > 0 ? ' mt-4 border_green p-3 radius_5' : ''); ?>" data-index=<?php echo e(@$supp_index ?? 0); ?>>
     <?php
         $key_supp = \TDConst::STYRO;
-        $styro_compen_percent = \TDConst::CARTON_COMPEN_PERCENT;
-        $styro_compen_num = \TDConst::CARTON_COMPEN_NUM;
+        $styro_compen_percent = (float) getDataConfig('QuoteConfig', 'CARTON_COMPEN_PERCENT');
         $styro_divide = \TDConst::STYRO_SIZE_DIVIDE;
         $styro_plus = \TDConst::STYRO_SIZE_PLUS;
         $key_device_elevate = \TDConst::ELEVATE;
@@ -14,7 +13,7 @@
     <?php echo $__env->make('quotes.products.supplies.title_config', ['divide' => $styro_divide, 'name' => 'mút phẳng'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     <?php echo $__env->make('quotes.products.supplies.quantity_config', 
-    ['compen_percent' => $styro_compen_percent, 'compen_num' => $styro_compen_num], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    ['compen_percent' => $styro_compen_percent], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     <?php echo $__env->make('quotes.products.supplies.size_config', ['plus' => $styro_plus, 'divide' => $styro_divide], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 

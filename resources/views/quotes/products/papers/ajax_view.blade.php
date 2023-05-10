@@ -55,7 +55,7 @@
         @include('view_update.view', $pro_paper_name)
         
         @include('quotes.products.supplies.quantity_config', 
-        ['compen_percent' => $paper_compen_percent, 'compen_num' => $paper_compen_num])
+        ['compen_percent' => $paper_compen_percent])
         
         <div class="materal_paper_module">
             @include('view_update.view', $pro_paper_materals)

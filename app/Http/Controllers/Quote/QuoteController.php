@@ -242,7 +242,7 @@ class QuoteController extends Controller
             $data['total_amount'] = calValuePercentPlus($arr_quote['total_cost'], $get_perc,  $data['profit']);
             $update = Quote::where('id', $id)->update($data);
             if ($update) {
-                return returnMessageAjax(200, 'Cập nhật lợi nhuận báo giá thành công !', url()->full());
+                return returnMessageAjax(200, 'Cập nhật lợi nhuận báo giá thành công !', url('quote-file-export/'.$id));
             }
         }
     }

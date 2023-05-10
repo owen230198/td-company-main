@@ -1,8 +1,7 @@
 <div class="quote_supp_item <?php echo e($supp_index > 0 ? ' mt-4 border_green p-3 radius_5' : ''); ?>" data-index=<?php echo e(@$supp_index ?? 0); ?>>
     <?php
         $key_supp = \TDConst::SILK;
-        $silk_compen_percent = \TDConst::CARTON_COMPEN_PERCENT;;
-        $silk_compen_num = \TDConst::CARTON_COMPEN_NUM;
+        $silk_compen_percent = (float) getDataConfig('QuoteConfig', 'CARTON_COMPEN_PERCENT');
         $silk_divide = \TDConst::SILK_SIZE_DIVIDE;
         $silk_plus = \TDConst::SILK_SIZE_PLUS; 
         $pro_silk_supply = [
@@ -27,7 +26,7 @@
     <?php echo $__env->make('quotes.products.supplies.title_config', ['divide' => $silk_divide, 'name' => 'vải lụa'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     <?php echo $__env->make('quotes.products.supplies.quantity_config', 
-    ['compen_percent' => $silk_compen_percent, 'compen_num' => $silk_compen_num], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    ['compen_percent' => $silk_compen_percent], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     <?php echo $__env->make('quotes.products.supplies.size_config', ['plus' => $silk_plus, 'divide' => $silk_divide], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 

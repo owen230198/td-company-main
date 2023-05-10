@@ -1,7 +1,7 @@
 
 <?php $__env->startSection('content'); ?>
     <div class="dashborad_content position-relative">
-        <form action="<?php echo e($action_url); ?>" method="POST" class="actionForm config_content" enctype="multipart/form-data">
+        <form action="<?php echo e($action_url); ?>" method="POST" class="config_content <?php echo e(@$config_view == 1 ? 'baseAjaxForm' : ''); ?>" enctype="multipart/form-data">
             <?php echo csrf_field(); ?>
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <?php $__currentLoopData = $regions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $region): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -30,7 +30,7 @@
                                     $arr = $field;
                                     $arr['attr'] = !empty($field['attr']) ? json_decode($field['attr'], true) : [];
                                     $arr['other_data'] = !empty($field['other_data']) ? json_decode($field['other_data'], true) : [];
-                                    $arr['value'] = @$tableItem['view_type'] == 'config' ? @$field['value'] : @$dataitem[$field['name']];
+                                    $arr['value'] = @$config_view == 1 ? @$field['value'] : @$dataitem[$field['name']];
                                 ?>
                                 <?php echo $__env->make('view_update.view', $arr, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                             <?php endif; ?>

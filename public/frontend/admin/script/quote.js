@@ -39,7 +39,6 @@ var GetTodayDate = function() {
 var PrintQuote = function() {
   $(document).on('click', 'button.print_quotes', function(event){
     event.preventDefault();
-    let baseUrl = $('base').attr('href');
     let arrs = document.querySelectorAll('.quote_model');
     let html = '';
     let seri = $(this).data('seri');
@@ -51,7 +50,7 @@ var PrintQuote = function() {
     title =  company + ' - ' + seri + ' - ' + str_today;
     let mywindow = window.open('', '', '');
     mywindow.document.write('<html><head><title>'+title+'</title>');
-    mywindow.document.write('<base href="' + baseUrl + '">');
+    mywindow.document.write('<base href="' + getBaseRoute('/') + '">');
     mywindow.document.write('<link rel="icon" href="'+getBaseRoute('frontend/admin/images/logo.png')+'" type="image/gif">');
     mywindow.document.write('<link href="'+getBaseRoute('frontend/base/css/bootstrap.min.css')+'" rel="stylesheet">');
     mywindow.document.write('<link href="'+getBaseRoute('frontend/base/css/font-awesome.min.css')+'" rel="stylesheet" type="text/css">');

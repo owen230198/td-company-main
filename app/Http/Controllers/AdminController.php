@@ -28,6 +28,13 @@ class AdminController extends Controller
         return view('404');
     }
 
+    public function injectViewWhereParam($table, $arr)
+    {
+        foreach ($arr as $key => $value) {
+            static::$view_where[] = $this->admins->getConditionTable($table, $key, $value);;
+        }
+    }
+
     public function view(Request $request, $table)
     {
         $permission = $this->admins->checkPermissionAction($table, 'view');
@@ -38,17 +45,21 @@ class AdminController extends Controller
         if($data['view_type'] == 'config'){
             $data['action_url'] = url('do-config-data/'.$table);   
         }else{
-            $param = $request->all();
+            $default_data = $request->input('default_data');
+            if (!empty($default_data)) {
+                $param_default = json_decode($default_data, true);
+                $this->injectViewWhereParam($table, $param_default);
+                $data['param_action'] = getParamUrlByArray($param_default);
+            }
+            $param =  $request->except('default_data');
             if (!empty($param)) {
-                foreach ($param as $key => $value) {
-                    static::$view_where[] = ['key' => $key, 'value' => $value];
-                }
-                $data['param_action'] = getParamUrlByArray($param);
+                $this->injectViewWhereParam($table, $param);
             }
             if(!empty($permission['where'])){
-                static::$view_where[] = @$permission['where'];
+                $this->injectViewWhereParam($table, $permission['where']);
             }
         }
+        dd(self::$view_where);
         $data['data_tables'] = getDataTable($table, self::$view_where, ['paginate' => $data['page_item']]);
         session()->put('back_url', url()->full());    
         return view('table.'.$data['view_type'], $data);
@@ -84,17 +95,14 @@ class AdminController extends Controller
         if (!@$permission['allow']) {
             return redirect('permission-error');
         }
-        $sess = !empty(session('dataSearch')[$table])?session('dataSearch')[$table]:array();
-        $get = $request->all()+$sess;
-        if(count($permission['viewWhere'])>0){
-            static::$view_where = @$permission['viewWhere'];
-        }
         $data = $this->admins->getDataBaseView($table, 'Tìm kiếm');
-        $data['data_tables'] = $this->admins->getDataSearchTable($table, self::$view_where, $get, $data['page_item']);
-        if (!@$get['page']) {
-            session(['dataSearch'=>[$table=>$get]]);
+        $data_search = $request->except('page');
+        if (!empty($data_search)) {
+            foreach ($data_search as $key => $value) {
+                dump($key);
+            }
         }
-        $data['data_search'] = $get;
+        $data['data_tables'] = $this->admins->getDataSearchTable($table, self::$view_where, $data['page_item']);
         session()->put('back_url', url()->full());
         return view('table.'.$data['view_type'], $data);
     }
@@ -228,10 +236,9 @@ class AdminController extends Controller
             $success = \DB::table($table)->where('name', $key)->update($data);
         }
         if (isset($success)) {
-            echoJson(200, 'Cập nhật dữ liệu thành công!');
-            return;
+            return returnMessageAjax(200, 'Cập nhật dữ liệu thành công !');
         }else {
-            echoJson(100, 'Đã có lỗi xảy ra!');
+            return returnMessageAjax(100, 'Có lỗi xảy ra, vui lòng thử lại !');
         }
     }
 

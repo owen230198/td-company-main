@@ -14,7 +14,7 @@
     @include('quotes.products.supplies.title_config', ['divide' => $carton_divide, 'name' => $key_supp])
     
     @include('quotes.products.supplies.quantity_config', 
-    ['compen_percent' => $carton_compen_percent, 'compen_num' => $carton_compen_num])
+    ['compen_percent' => $carton_compen_percent])
 
     @include('quotes.products.supplies.size_config', ['plus' => $carton_plus, 'divide' => $carton_divide])
 

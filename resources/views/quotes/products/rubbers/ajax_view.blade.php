@@ -13,7 +13,7 @@
     @include('quotes.products.supplies.title_config', ['divide' => $rubber_divide, 'name' => 'cao su non'])
     
     @include('quotes.products.supplies.quantity_config', 
-    ['compen_percent' => $rubber_compen_percent, 'compen_num' => $rubber_compen_num])
+    ['compen_percent' => $rubber_compen_percent])
     
     @include('quotes.products.supplies.size_config', ['plus' => $rubber_plus, 'divide' => $rubber_divide])
     

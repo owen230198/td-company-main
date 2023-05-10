@@ -24,12 +24,10 @@
                     @foreach ($field_shows as $key => $field)
                         @if ($field['type'] == 'group' && !empty($field['child']))
                             @foreach ($field['child'] as $field_child)
-                                <th class="font-bold fs-13"">
+                                <th class="font-bold fs-13">
                                     {{ $field_child['note'] }}
                                 </th>   
                             @endforeach
-                        @else
-                            
                         @endif
                     @endforeach
                 </tr>
@@ -46,7 +44,7 @@
                             @endif
                         </div>
                     </td>
-                    @foreach ($field_shows as $field)
+                    @foreach ($field_shows->toArray() as $field)
                         @if ($field['type'] != 'group')
                             <td>
                                 @php

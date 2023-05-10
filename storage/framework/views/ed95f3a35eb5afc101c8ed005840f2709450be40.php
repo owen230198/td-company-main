@@ -1,8 +1,7 @@
 <div class="quote_product_structure quote_supp_item<?php echo e($supp_index > 0 ? ' mt-4 border_green p-3 radius_5' : ''); ?>" data-index=<?php echo e(@$supp_index ?? 0); ?>>
     <?php
         $key_supp = \TDConst::PAPER;
-        $paper_compen_percent = \TDConst::COMPEN_PERCENT;
-        $paper_compen_num = \TDConst::COMPEN_NUM;
+        $paper_compen_percent = getDataConfig('QuoteConfig', 'COMPEN_PERCENT');
 
         $pro_paper_name = [
             'name' => 'product['.$pro_index.']['.$key_supp.']['.$supp_index.'][name]',
@@ -56,7 +55,7 @@
         <?php echo $__env->make('view_update.view', $pro_paper_name, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         
         <?php echo $__env->make('quotes.products.supplies.quantity_config', 
-        ['compen_percent' => $paper_compen_percent, 'compen_num' => $paper_compen_num], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        ['compen_percent' => $paper_compen_percent], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         
         <div class="materal_paper_module">
             <?php echo $__env->make('view_update.view', $pro_paper_materals, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>

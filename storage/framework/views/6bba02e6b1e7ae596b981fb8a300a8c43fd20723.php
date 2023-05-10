@@ -3,7 +3,6 @@
         $key_supp = \TDConst::MICA;
         $mica_divide = \TDConst::MICA_SIZE_DIVIDE;
         $mica_compen_percent = 0;
-        $mica_compen_num = \TDConst::CARTON_COMPEN_NUM;
         $mica_plus = \TDConst::MICA_SIZE_PLUS; 
         $pro_mica_supply = [
             'name' => 'product['.$pro_index.']['.$key_supp.']['.$supp_index.'][size][supply_price]',
@@ -24,7 +23,7 @@
     <?php echo $__env->make('quotes.products.supplies.title_config', ['divide' => $mica_divide, 'name' => 'mica'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     
     <?php echo $__env->make('quotes.products.supplies.quantity_config', 
-    ['compen_percent' => $mica_compen_percent, 'compen_num' => $mica_compen_num], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    ['compen_percent' => $mica_compen_percent], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     <?php echo $__env->make('quotes.products.supplies.size_config', ['plus' => $mica_plus, 'divide' => $mica_divide], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
