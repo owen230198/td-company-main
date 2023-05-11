@@ -31,7 +31,12 @@ class AdminController extends Controller
     public function injectViewWhereParam($table, $arr)
     {
         foreach ($arr as $key => $value) {
-            static::$view_where[] = $this->admins->getConditionTable($table, $key, $value);;
+            $conditions = $this->admins->getConditionTable($table, $key, $value);
+            if (!empty($conditions)) {
+                foreach ($conditions as $condition) {
+                    static::$view_where[] = $condition;
+                }
+            }
         }
     }
 
@@ -49,17 +54,18 @@ class AdminController extends Controller
             if (!empty($default_data)) {
                 $param_default = json_decode($default_data, true);
                 $this->injectViewWhereParam($table, $param_default);
+                $data['param_default'] = $default_data;
                 $data['param_action'] = getParamUrlByArray($param_default);
             }
-            $param =  $request->except('default_data');
+            $param =  $request->except('default_data', 'page');
             if (!empty($param)) {
+                $data['data_search'] = $param;
                 $this->injectViewWhereParam($table, $param);
             }
             if(!empty($permission['where'])){
                 $this->injectViewWhereParam($table, $permission['where']);
             }
         }
-        dd(self::$view_where);
         $data['data_tables'] = getDataTable($table, self::$view_where, ['paginate' => $data['page_item']]);
         session()->put('back_url', url()->full());    
         return view('table.'.$data['view_type'], $data);
@@ -89,22 +95,9 @@ class AdminController extends Controller
     }
 
 
-    public function searchTable($table, Request $request)
+    public function searchTable(Request $request, $table)
     {
-        $permission = $this->admins->checkPermissionAction($table, 'view');
-        if (!@$permission['allow']) {
-            return redirect('permission-error');
-        }
-        $data = $this->admins->getDataBaseView($table, 'Tìm kiếm');
-        $data_search = $request->except('page');
-        if (!empty($data_search)) {
-            foreach ($data_search as $key => $value) {
-                dump($key);
-            }
-        }
-        $data['data_tables'] = $this->admins->getDataSearchTable($table, self::$view_where, $data['page_item']);
-        session()->put('back_url', url()->full());
-        return view('table.'.$data['view_type'], $data);
+        return $this->view($request, $table);
     }
 
     public function insert(Request $request, $table)

@@ -27,12 +27,12 @@
         </div>
         <?php if(count($data_tables) > 0): ?>
             <div class="paginate_view d-flex align-center justify-content-between mb-3">
-                <?php echo $data_tables->links('pagination::bootstrap-4'); ?>
+                <?php echo $data_tables->appends(request()->input())->links('pagination::bootstrap-4'); ?>
 
             </div>
             <?php echo $__env->make('table.table_base_view', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
             <div class="paginate_view d-flex align-center justify-content-between mt-3">
-                <?php echo $data_tables->links('pagination::bootstrap-4'); ?>
+                <?php echo $data_tables->appends(request()->input())->links('pagination::bootstrap-4'); ?>
 
             </div>
         <?php else: ?>

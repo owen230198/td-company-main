@@ -1,1 +1,1 @@
-@include('view_search.text')
+@include('view_search.text', ['value' => @$data_search[$name]])

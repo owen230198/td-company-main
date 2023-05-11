@@ -1,1 +1,1 @@
-@include('view_update.select', ['value' => @$data_search[$id]])
+@include('view_update.select', ['value' => @$data_search[$name]])

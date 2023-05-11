@@ -1,5 +1,8 @@
-<div class="station-richmenu-main-search">
-  <form action="{{ asset('search-table/'.$tableItem['name'].''.@$param_action) }}" method="GET" class="form-group d-flex align-items-center row mb-0" id="form-search">
+<div class="base_table_form_search">
+  <form action="{{ asset('search-table/'.$tableItem['name']) }}" method="GET" class="form-group d-flex align-items-center row mb-0" id="form-search">
+    @if (!empty($param_default))
+        <input type="hidden" name="default_data" value='{{ $param_default }}'>
+    @endif
     @php
       $data_search = @$data_search?$data_search:array()
     @endphp

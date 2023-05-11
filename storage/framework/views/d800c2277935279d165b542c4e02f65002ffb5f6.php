@@ -34,7 +34,7 @@
                                 <?php $__currentLoopData = $item['device']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key_device => $device): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <?php
                                         $link = $key_device == \TDConst::PRINT ? 'config-device-price/print_techs' 
-                                        : 'view/devices?supply='.$item['pro_field'].'&key_device='.$key_device;
+                                        : 'view/devices?default_data={"supply":"'.$item['pro_field'].'","key_device":"'.$key_device.'"}';
                                     ?>
                                     <a href="<?php echo e(url($link)); ?>" class="device_supp_item"><?php echo e($device); ?></a>    
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> 
@@ -48,7 +48,7 @@
                         <div class="device_list_by_supply">
                             
                             <?php $__currentLoopData = $materal_supplies; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $materal_supply): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <a href="<?php echo e(url('view/'.$materal_supply['table'].'?type='.$materal_supply['key'])); ?>" class="device_supp_item">
+                                <a href="<?php echo e(url('view/'.$materal_supply['table'].'?default_data={"type":"'.$materal_supply['key'].'"}')); ?>" class="device_supp_item">
                                     <?php echo e($materal_supply['name']); ?>
 
                                 </a>    

@@ -562,6 +562,10 @@ a.device_supp_item {
     box-shadow: 1px 1px 10px #888888;
 }
 
+.base_table_form_search .form-control, .base_table_form_search .select2-container{
+    max-width: 294px;   
+}
+
 @page {
     size: A4;
     margin: 1cm;

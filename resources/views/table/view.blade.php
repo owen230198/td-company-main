@@ -27,11 +27,11 @@
         </div>
         @if (count($data_tables) > 0)
             <div class="paginate_view d-flex align-center justify-content-between mb-3">
-                {!! $data_tables->links('pagination::bootstrap-4') !!}
+                {!! $data_tables->appends(request()->input())->links('pagination::bootstrap-4') !!}
             </div>
             @include('table.table_base_view')
             <div class="paginate_view d-flex align-center justify-content-between mt-3">
-                {!! $data_tables->links('pagination::bootstrap-4') !!}
+                {!! $data_tables->appends(request()->input())->links('pagination::bootstrap-4') !!}
             </div>
         @else
             <p class="fs-15 font-italic color_red">Chưa có dữ liệu {{ @$title }} !</p>

@@ -63,7 +63,11 @@ if (! function_exists('getDetailDataByID')) {
 if(!function_exists('getFieldDataById')){
     function getFieldDataById($feild, $table, $id){
         if (!empty($id)) {
-            $data = \DB::table($table)->select($feild)->find($id);
+            if (is_array($id)) {
+                $data = \DB::table($table)->select($feild)->where($id)->first();
+            }else{
+                $data = \DB::table($table)->select($feild)->find($id);
+            }
             return !empty($data->$feild) ? $data->$feild : '';
         }else{
             return false;
@@ -101,10 +105,16 @@ if (!function_exists('handleQueryCondition')) {
             }else{
                 $compare = !empty($w['compare']) ? $w['compare'] : '=';
                 $value = $compare == 'like' ? '%'.$w['value'].'%' : $w['value'];
-                if (@$w['con'] == 'or') {
-                    $query->orWhere($w['key'], $compare, $value);
+                if ($compare == 'in') {
+                    $query->whereIn($w['key'], $value);
+                }elseif($compare == 'not_in'){
+                    $query->whereNotIn($w['key'], $value);
                 }else{
-                    $query->where($w['key'], $compare, $value);  
+                    if (@$w['con'] == 'or') {
+                        $query->orWhere($w['key'], $compare, $value);
+                    }else{
+                        $query->where($w['key'], $compare, $value);  
+                    }
                 }
             }
         }

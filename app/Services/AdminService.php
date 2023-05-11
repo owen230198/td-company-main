@@ -120,30 +120,40 @@ class AdminService extends BaseService
 
     public function getConditionTable($table, $field_name, $value)
     {
-        $field = NDetailTable::select('id', 'name', 'type')->where(['act' => 1, 'table_map' => $table, 'name' =>$field_name])->get();
-            $name = $field['name'];
-            $type = $field['type'];
-            if ($type == 'text') {
-                $tmp = array('key'=>$name, 'compare'=>'like', 'value'=>'%'.$where.'%');
-                array_push($arrWhere, $tmp);
-            }elseif ($type == 'date_time') {
-                $dateRange = explode(' - ', $where);
-                if (is_array($dateRange)){
-                    foreach ($dateRange as $key => $str) {
-                        $timstamp = strtotime(trim($str));
-                        $date_time = date('Y-m-d H:i', $timstamp);
-                        $compareTime = $key==0?'>=':'<=';
-                        $tmp = array('key'=>$name, 'compare'=>$compareTime, 'value'=>$date_time);
-                        array_push($arrWhere, $tmp);
+        if (!empty($value)) {
+            $field = NDetailTable::select('id', 'name', 'type', 'other_data')->where(['act' => 1, 'table_map' => $table, 'name' =>$field_name])->first();
+            if (empty($field)) {
+                $where[] = ['key' => $field_name, 'value' => $value];
+            }else{
+                $name = $field['name'];
+                $type = $field['type'];
+                if ($type == 'text') {
+                    $tmp = ['key' => $name, 'compare' => 'like', 'value' => '%'.$value.'%'];
+                    $where[] = $tmp;
+                }elseif($type == 'child_linking'){
+                $other_data = json_decode($field['other_data'], true);
+                $linking_data = @$other_data['data'] ?? [];
+                $field_title = @$linking_data['field_title'] ?? 'name';
+                $field_query = @$linking_data['field_query'];
+                $arr_id = \DB::table($linking_data['table'])->where('act', 1)->where($field_title, 'like', '%'.$value.'%')->pluck($field_query)->all();
+                $where[] = ['key' => 'id', 'compare' => 'in', 'value' => array_unique($arr_id)];
+                }elseif ($type == 'datetime') {
+                    $date_range = explode(' - ', $value);
+                    if (is_array($date_range)){
+                        foreach ($date_range as $key => $str) {
+                            $timstamp = strtotime(str_replace('/', '-', $str));
+                            $date_time = date('Y-m-d H:i:s', $timstamp);
+                            $compare_time = $key == 0 ? '>=' : '<=';
+                            $tmp = ['key' => $name, 'compare' => $compare_time, 'value' => $date_time];
+                            $where[] = $tmp;
+                        }
                     }
-                }
-            }else {
-                if ($where != '') {
-                    $tmp = array('key'=>$name, 'compare'=>"=", 'value'=>$where);
-                    array_push($arrWhere, $tmp);
+                }else {
+                    $where[] = ['key' => $field_name, 'value' => $value];
                 }
             }
-        return $data;
+            return $where;
+        }
     }
 
     public function doInsertTable($table, $data)

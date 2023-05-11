@@ -34,7 +34,7 @@
                                 @foreach ($item['device'] as $key_device => $device)
                                     @php
                                         $link = $key_device == \TDConst::PRINT ? 'config-device-price/print_techs' 
-                                        : 'view/devices?supply='.$item['pro_field'].'&key_device='.$key_device;
+                                        : 'view/devices?default_data={"supply":"'.$item['pro_field'].'","key_device":"'.$key_device.'"}';
                                     @endphp
                                     <a href="{{ url($link) }}" class="device_supp_item">{{ $device }}</a>    
                                 @endforeach 
@@ -48,7 +48,7 @@
                         <div class="device_list_by_supply">
                             {{-- <h3 class="fs-14 text-uppercase border_top_eb pt-3 mt-3 mb-2 text-center">ĐG Chất liệu & vật tư</h3> --}}
                             @foreach ($materal_supplies as $materal_supply)
-                                <a href="{{ url('view/'.$materal_supply['table'].'?type='.$materal_supply['key']) }}" class="device_supp_item">
+                                <a href="{{ url('view/'.$materal_supply['table'].'?default_data={"type":"'.$materal_supply['key'].'"}') }}" class="device_supp_item">
                                     {{ $materal_supply['name'] }}
                                 </a>    
                             @endforeach 

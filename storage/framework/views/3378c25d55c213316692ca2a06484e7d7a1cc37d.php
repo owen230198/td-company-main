@@ -2,6 +2,7 @@
     $select_config = !empty($other_data['config']) ? $other_data['config'] : [];
     $select_data = !empty($other_data['data']) ? $other_data['data'] : [];
     $field_title = @$select_data['field_title'] ?? 'name';
+    $field_value = @$select_data['select_data'] ?? 'id';
 ?>
 
 <?php if(@$select_config['search'] == 1): ?>
@@ -14,7 +15,7 @@
         }
         if (!empty($value)) {
             $data_id = $value;
-            $data_label = getFieldDataById($field_title, $select_data['table'], $value);
+            $data_label = getFieldDataById($field_title, $select_data['table'], [$field_value => $value]);
         }
     ?>
     <select name="<?php echo e($name); ?>" class="form-control select_ajax <?php echo e(@$attr['inject_class'] ? ' '.$attr['inject_class'] : ''); ?>"
@@ -23,7 +24,6 @@
 <?php else: ?>
     <?php
         $list_options = getOptionDataField($select_data);
-        $field_value = @$select_data['select_data'] ?? 'id';
     ?>
     <select name="<?php echo e($name); ?>" class="form-control <?php echo e(@$attr['inject_class'] ? ' '.$attr['inject_class'] : ''); ?>" <?php echo e(@$attr['inject_attr'] ?? ''); ?>>
         <option value="0">Chọn</option>
