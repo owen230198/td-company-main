@@ -118,6 +118,7 @@ class AdminController extends Controller
                 $insertID = $this->admins->doInsertTable($table, $param);
                 if (@$insertID) {
                     $back_routes = @session()->get('back_url') ?? url('view/'.$table);
+                    $this->admins->logActionUserData(__FUNCTION__, $table, $insertID);
                     return redirect($back_routes)->with('message','Thêm dữ liệu thành công !');
                 }else {
                     return back()->with('error','Đã có lỗi xảy ra !');

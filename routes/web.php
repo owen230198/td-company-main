@@ -48,6 +48,7 @@ Route::middleware(['check_login'])->group(function () {
 	Route::any('profit-config-quote', [QuoteController::class, 'profitConfigQuote']);
 	Route::get('get-view-product-structure-data', [QuoteController::class, 'getViewProductStructureData']);
 	Route::any('quote-file-export/{id}', [QuoteController::class, 'QuoteFileExport']);
+	Route::any('send-quote/{id}', [QuoteController::class, 'sendQuote']);
 
 	//orders routes
 	Route::get('set-quantity-order-products', [OrderController::class, 'setListProductView']);

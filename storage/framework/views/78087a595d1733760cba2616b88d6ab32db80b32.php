@@ -71,19 +71,19 @@
     </div>
 </div>
 <div class="group_btn_action_form text-center">
-    <button type="button" class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-3 print_quotes" data-seri="<?php echo e(@$data_quote['seri']); ?>">
+    <button type="button" class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-2 print_quotes" data-seri="<?php echo e(@$data_quote['seri']); ?>">
       <i class="fa fa-file-pdf-o mr-2 fs-14" aria-hidden="true"></i>Xuất file PDF
     </button>
-    <a href="<?php echo e(url('quote-file-export/'.$data_quote['id'].'?step=file_docx')); ?>" class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-3">
+    <a href="<?php echo e(url('quote-file-export/'.$data_quote['id'].'?step=file_docx')); ?>" class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-2">
         <i class="fa fa-file-word-o mr-2 fs-14" aria-hidden="true"></i>Xuất file words
     </a>
-    <a href="<?php echo e(url('profit-config-quote?quote_id='.$data_quote['id'])); ?>" class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-3">
+    <a href="<?php echo e(url('profit-config-quote?quote_id='.$data_quote['id'])); ?>" class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-2">
         <i class="fa fa-percent mr-2 fs-14" aria-hidden="true"></i> Lợi nhuận
     </a>
-    <a href="<?php echo e(url('update/quotes/'.$data_quote['id'].'?step=handle_config')); ?>" class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-3">
+    <a href="<?php echo e(url('update/quotes/'.$data_quote['id'].'?step=handle_config')); ?>" class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-2">
         <i class="fa fa-hand-lizard-o mr-2 fs-14" aria-hidden="true"></i>Chi tiết sản xuất
     </a>
-    <a href="<?php echo e(url('update/quotes/'.$data_quote['id'])); ?>" class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-3">
+    <a href="<?php echo e(url('update/quotes/'.$data_quote['id'])); ?>" class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-2">
         <i class="fa fa-address-card-o mr-2 fs-14" aria-hidden="true"></i>Khách hàng
     </a>
     <a href="<?php echo e(url('')); ?>" class="main_button bg_red color_white radius_5 font_bold smooth red_btn">

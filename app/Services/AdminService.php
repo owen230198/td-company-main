@@ -1,7 +1,6 @@
 <?php
 namespace App\Services;
 use App\Services\BaseService;
-use App\Constants\VariableConstant;
 use \App\Models\NDetailTable;
 class AdminService extends BaseService
 {
@@ -27,6 +26,11 @@ class AdminService extends BaseService
             }
         }
         return $ret;
+    }
+
+    public function logActionUserData($action, $table, $id)
+    {
+        return true;
     }
 
     public function checkRoleUpdatePermission($module, $dataRole)
