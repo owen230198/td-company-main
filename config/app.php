@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', getDataConfig('Config', 'APP_NAME')),
 
     /*
     |--------------------------------------------------------------------------

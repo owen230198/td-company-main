@@ -11,7 +11,7 @@
  Target Server Version : 100425
  File Encoding         : 65001
 
- Date: 11/05/2023 19:09:37
+ Date: 13/05/2023 14:03:29
 */
 
 SET NAMES utf8mb4;
@@ -13172,21 +13172,21 @@ CREATE TABLE `materals`  (
 -- ----------------------------
 -- Records of materals
 -- ----------------------------
-INSERT INTO `materals` VALUES (1, 'Màng bạc', '0.36', 'metalai', NULL, '0.36 = 3600đ/m2', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0);
-INSERT INTO `materals` VALUES (2, 'Màng vàng', '0.38', 'metalai', NULL, '0.38 = 3800đ/m2', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0);
-INSERT INTO `materals` VALUES (3, 'in offset mực bóng hoặc mờ', '0.06', 'cover', NULL, '0.06 = 600đ/m2', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0);
-INSERT INTO `materals` VALUES (4, 'Phủ bóng nhật sơn ( Trên metailai )', '0.18', 'cover', NULL, '0.18 = 1800đ/m2', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0);
-INSERT INTO `materals` VALUES (5, 'Cán bóng', '0.23', 'cover', NULL, '0.23 = 2300đ/m2', 1, '2030-11-01 12:00:00', '2030-11-01 12:00:00', 0);
-INSERT INTO `materals` VALUES (6, 'Cán mờ', '0.25', 'cover', NULL, '0.25 = 2500đ/m2', 1, '2030-11-01 12:00:00', '2030-11-01 12:00:00', 0);
-INSERT INTO `materals` VALUES (7, 'Phủ bóng gốc dầu nhật sơn trên giấy', '0.15', 'cover', NULL, '0.15 = 1500đ/m2', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0);
-INSERT INTO `materals` VALUES (8, 'Cán bóng', '0.23', 'nilon', 0, '0.23 = 2300đ/m2', 1, '2030-11-01 12:00:00', '2030-11-01 12:00:00', 0);
-INSERT INTO `materals` VALUES (9, 'Cán mờ', '0.25', 'nilon', 0, '0.25 = 2500đ/m2', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0);
-INSERT INTO `materals` VALUES (10, 'Mực bóng', '0', 'uv', NULL, 'CT này không áp dụng tính khách hàng, chỉ áp dụng đo lường vật tư', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0);
-INSERT INTO `materals` VALUES (11, 'Mực sần cát', '0', 'uv', 0, 'CT này không áp dụng tính khách hàng, chỉ áp dụng đo lường vật tư', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0);
-INSERT INTO `materals` VALUES (12, 'Couches', '0.0023', 'paper', NULL, '0.0023 = 23 triệu/ tấn', 1, '2030-11-01 12:00:00', '2030-11-01 12:00:00', 0);
-INSERT INTO `materals` VALUES (13, 'Ivoly', '0.0022', 'paper', 0, '0.0022 = 22 triệu/ tấn', 1, '2030-11-01 12:00:00', '2030-11-01 12:00:00', 0);
-INSERT INTO `materals` VALUES (14, 'Duplex', '0.00155', 'paper', NULL, '0.00155 = 15.5 triệu/ tấn', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0);
-INSERT INTO `materals` VALUES (15, 'Bãi Bằng', '0.0024', 'paper', NULL, '0.0024 = 24 triệu/ tấn', 1, '2030-11-01 12:00:00', '2030-11-01 12:00:00', 0);
+INSERT INTO `materals` VALUES (1, 'Màng bạc', '0.36', 'metalai', NULL, '0.36 = 3600đ/m2', 1, '2023-05-13 10:15:37', '2023-05-13 10:15:43', 0);
+INSERT INTO `materals` VALUES (2, 'Màng vàng', '0.38', 'metalai', NULL, '0.38 = 3800đ/m2', 1, '2023-05-13 10:15:37', '2023-05-13 10:15:43', 0);
+INSERT INTO `materals` VALUES (3, 'in offset mực bóng hoặc mờ', '0.06', 'cover', NULL, '0.06 = 600đ/m2', 1, '2023-05-13 10:15:37', '2023-05-13 10:15:43', 0);
+INSERT INTO `materals` VALUES (4, 'Phủ bóng nhật sơn ( Trên metailai )', '0.18', 'cover', NULL, '0.18 = 1800đ/m2', 1, '2023-05-13 10:15:37', '2023-05-13 10:15:43', 0);
+INSERT INTO `materals` VALUES (5, 'Cán bóng', '0.23', 'cover', NULL, '0.23 = 2300đ/m2', 1, '2023-05-13 10:15:37', '2023-05-13 10:15:43', 0);
+INSERT INTO `materals` VALUES (6, 'Cán mờ', '0.25', 'cover', NULL, '0.25 = 2500đ/m2', 1, '2023-05-13 10:15:37', '2023-05-13 10:15:43', 0);
+INSERT INTO `materals` VALUES (7, 'Phủ bóng gốc dầu nhật sơn trên giấy', '0.15', 'cover', NULL, '0.15 = 1500đ/m2', 1, '2023-05-13 10:15:37', '2023-05-13 10:15:43', 0);
+INSERT INTO `materals` VALUES (8, 'Cán bóng', '0.23', 'nilon', 0, '0.23 = 2300đ/m2', 1, '2023-05-13 10:15:37', '2023-05-13 10:15:43', 0);
+INSERT INTO `materals` VALUES (9, 'Cán mờ', '0.25', 'nilon', 0, '0.25 = 2500đ/m2', 1, '2023-05-13 10:15:37', '2023-05-13 10:15:43', 0);
+INSERT INTO `materals` VALUES (10, 'Mực bóng', '0', 'uv', NULL, 'CT này không áp dụng tính khách hàng, chỉ áp dụng đo lường vật tư', 1, '2023-05-13 10:15:37', '2023-05-13 10:15:43', 0);
+INSERT INTO `materals` VALUES (11, 'Mực sần cát', '0', 'uv', 0, 'CT này không áp dụng tính khách hàng, chỉ áp dụng đo lường vật tư', 1, '2023-05-13 10:15:37', '2023-05-13 10:15:43', 0);
+INSERT INTO `materals` VALUES (12, 'Couches', '0.0023', 'paper', NULL, '0.0023 = 23 triệu/ tấn', 1, '2023-05-13 10:15:37', '2023-05-13 10:15:43', 0);
+INSERT INTO `materals` VALUES (13, 'Ivoly', '0.0022', 'paper', 0, '0.0022 = 22 triệu/ tấn', 1, '2023-05-13 10:15:37', '2023-05-13 10:15:43', 0);
+INSERT INTO `materals` VALUES (14, 'Duplex', '0.00155', 'paper', NULL, '0.00155 = 15.5 triệu/ tấn', 1, '2023-05-13 10:15:37', '2023-05-13 10:15:43', 0);
+INSERT INTO `materals` VALUES (15, 'Bãi Bằng', '0.0024', 'paper', NULL, '0.0024 = 24 triệu/ tấn', 1, '2023-05-13 10:15:37', '2023-05-13 10:15:44', 0);
 
 -- ----------------------------
 -- Table structure for n_detail_tables

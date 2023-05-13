@@ -230,11 +230,9 @@ class QuoteController extends Controller
             if (empty($id)) {
                 return returnMessageAjax(100, 'Không tìm thấy thông tin báo giá !');
             }
-
             if ($data['ship_price'] == null) {
                 return returnMessageAjax(100, 'Vui lòng nhập phí vận chuyển !');
             }
-
             if ($data['profit'] == null) {
                 return returnMessageAjax(100, 'Vui lòng nhập lợi nhuận báo giá !');
             }
