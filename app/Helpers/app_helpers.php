@@ -8,10 +8,10 @@ if (!function_exists('returnMessageAjax')) {
 }
 
 if(!function_exists('getDataConfig')){
-    function getDataConfig($classConfig, $keyword = ''){
+    function getDataConfig($classConfig, $keyword = '', $default = ''){
         $configs = getModelByClass($classConfig);
         $data = $configs->select('value')->where('keyword', $keyword)->first();
-        return @$data['value'];
+        return !empty($data['value']) ? $data['value'] : $default;
     }
 }
 

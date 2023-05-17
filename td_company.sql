@@ -11,7 +11,7 @@
  Target Server Version : 100425
  File Encoding         : 65001
 
- Date: 13/05/2023 14:03:29
+ Date: 17/05/2023 17:10:50
 */
 
 SET NAMES utf8mb4;
@@ -12205,7 +12205,18 @@ CREATE TABLE `configs`  (
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`, `keyword`) USING BTREE,
   INDEX `_index`(`id`, `keyword`, `act`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of configs
+-- ----------------------------
+INSERT INTO `configs` VALUES (1, 'app_name', 'APP_NAME', 'Tuan Dung app', 1, 'text', 'Tên phần mềm', 0, NULL, NULL, '1', '2023-05-16 21:51:59', '2023-05-16 21:52:03');
+INSERT INTO `configs` VALUES (2, 'timezone', 'TIMEZONE', 'Asia/Ho_Chi_Minh', 1, 'text', 'Múi giờ', 0, NULL, NULL, '1', '2023-05-16 22:15:15', '2023-05-16 22:15:15');
+INSERT INTO `configs` VALUES (3, 'mail_host', 'MAIL_HOST', 'smtp.gmail.com', 1, 'text', 'Mail host', 0, NULL, NULL, '1', '2023-05-16 23:41:06', '2023-05-16 23:41:06');
+INSERT INTO `configs` VALUES (4, 'mail_port', 'MAIL_PORT', '587', 1, 'text', 'Mail port', 0, NULL, NULL, '1', '2023-05-16 23:41:15', '2023-05-16 23:41:15');
+INSERT INTO `configs` VALUES (5, 'mail_encryption', 'MAIL_ENCRYPTION', 'tls', 1, 'text', 'Giao thức gửi mail', 0, NULL, NULL, '1', '2023-05-16 23:44:05', '2023-05-16 23:44:05');
+INSERT INTO `configs` VALUES (6, 'mail_username', 'MAIL_USERNAME', 'nguyenduykhanh2323@gmail.com', 1, 'text', 'Mail gửi', 0, NULL, NULL, '1', '2023-05-16 23:42:40', '2023-05-16 23:42:40');
+INSERT INTO `configs` VALUES (7, 'mail_password', 'MAIL_PASSWORD', 'pass23', 1, 'text', 'Mail gửi', 0, NULL, NULL, '1', '2023-05-16 23:42:38', '2023-05-16 23:42:38');
 
 -- ----------------------------
 -- Table structure for customers
