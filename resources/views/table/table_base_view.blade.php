@@ -44,7 +44,7 @@
                             @endif
                         </div>
                     </td>
-                    @foreach ($field_shows->toArray() as $field)
+                    @foreach ($field_shows as $field)
                         @if ($field['type'] != 'group')
                             <td>
                                 @php

@@ -1,4 +1,4 @@
-<ul class="nav nav-pills mb-3 quote_pro_nav_link" id="quote-pro-tab" role="tablist">
+<ul class="nav nav-pills mb-3 pro_nav_link" id="quote-pro-tab" role="tablist">
     <label class="mb-0 min_210 mr-3"></label>
     @foreach ($products as $i => $product)
         <li class="nav-item">
@@ -21,21 +21,13 @@
                             'note' => 'Tên sản phẩm',
                             'attr' => ['required' => 1, 'inject_class' => 'quote_set_product_name', 'placeholder' => 'Nhập tên'],
                             'value' => !empty($product['id']) ? @$product['name'] : ''
-                        ] 
-                    @endphp
-                    @include('view_update.view', $pro_name_field)
-
-                    @php
-                    $pro_name_field = [
-                        'name' => 'product['.$pro_index.'][qty]',
-                        'note' => 'Số lượng sản phẩm',
-                        'attr' => ['type_input' => 'number', 'required' => 1, 'inject_class' => 'input_pro_qty', 'placeholder' => 'Nhập số lượng'],
-                        'value' => @$product['qty']
-                    ] 
-                @endphp
-                @include('view_update.view', $pro_name_field)
-                    
-                    @php
+                        ];
+                        $pro_qty_field = [
+                            'name' => 'product['.$pro_index.'][qty]',
+                            'note' => 'Số lượng sản phẩm',
+                            'attr' => ['type_input' => 'number', 'required' => 1, 'inject_class' => 'input_pro_qty', 'placeholder' => 'Nhập số lượng'],
+                            'value' => @$product['qty']
+                        ];
                         $pro_category_field = [
                             'name' => 'product['.$pro_index.'][category]',
                             'type' => 'linking',
@@ -43,31 +35,32 @@
                             'attr' => ['required' => 1 , 'inject_class' => 'select_quote_procategory', 'inject_attr' => 'proindex='.$pro_index],
                             'other_data' => ['data' => ['table' => 'product_categories']],
                             'value' => @$product['category']
-                        ] 
-                    @endphp
-                    @include('view_update.view', $pro_category_field)
-
-                    <div class="quote_product_design_config">
-                        @php
-                            $quote_pro_design = [
-                                'name' => 'product['.$pro_index.'][design]',
-                                'note' => 'thiết kế',
-                                'type' => 'linking',
-                                'other_data' => ['data' => ['table' => 'design_types', 'select' => ['id', 'name']]],
-                                'value' => @$product['design']
-                            ]
-                        @endphp
-                        @include('view_update.view', $quote_pro_design)
-                    </div>
-
-                    @php
+                        ];
+                        $quote_pro_design = [
+                            'name' => 'product['.$pro_index.'][design]',
+                            'note' => 'thiết kế',
+                            'type' => 'linking',
+                            'other_data' => ['data' => ['table' => 'design_types', 'select' => ['id', 'name']]],
+                            'value' => @$product['design']
+                        ];
                         $pro_size_field = [
                             'name' => 'product['.$pro_index.'][size]',
                             'note' => 'Kích thước hộp',
                             'attr' => ['placeholder' => 'D x R x C (DVT cm)'],
                             'value' => @$product['size']
-                        ]
+                        ] 
                     @endphp
+
+                    @include('view_update.view', $pro_name_field)
+
+                    @include('view_update.view', $pro_qty_field)
+                    
+                    @include('view_update.view', $pro_category_field)
+
+                    <div class="quote_product_design_config">
+                        @include('view_update.view', $quote_pro_design)
+                    </div>
+
                     @include('view_update.view', $pro_size_field)
                 </div>
                 <div class="ajax_product_view_by_category">

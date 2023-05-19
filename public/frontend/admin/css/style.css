@@ -516,6 +516,22 @@ a.device_supp_item {
 .page_content .table td, .page_content .table th{
     padding: 5px 10px;
     vertical-align: middle;
+    border: 1px solid #dee2e6;
+}
+
+.handle_title{
+    max-width: 868px;
+    font-weight: 800;
+}
+
+.pro_nav_link{
+    position: sticky;
+    top: 55px;
+    z-index: 1;
+    background: #f9f9f9;
+    padding: 5px 0;
+    border-radius: 10px;
+    box-shadow: 1px 1px 3px #333333;
 }
 
 .page_content .table td{
@@ -564,6 +580,11 @@ a.device_supp_item {
 
 .base_table_form_search .form-control, .base_table_form_search .select2-container{
     max-width: 294px;   
+}
+
+.list_table_func{
+    width: 100px;
+    flex-wrap: wrap;
 }
 
 @page {

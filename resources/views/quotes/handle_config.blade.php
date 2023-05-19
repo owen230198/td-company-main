@@ -4,12 +4,12 @@
     <link rel="stylesheet" href="{{ asset('frontend/base/css/bootstrap-multiselect.min.css') }}">
 @endsection
 @section('content')
-    <form action="{{ !empty($link_action) ? $link_action : asset('create-quote?step=handle_config&id='.$data_quote['id']) }}" method="POST" 
+    <form action="{{ !empty($link_action) ? $link_action : asset('insert/quotes?step=handle_config&id='.$data_quote['id']) }}" method="POST" 
     class="config_handle_form config_content baseAjaxForm" enctype="multipart/form-data" onkeydown="return event.key != 'Enter'">
         @csrf
         @include('quotes.head_information')
         <div class="quote_handle_section handle_pro_section">
-            <h3 class="fs-14 text-uppercase border_top_eb pt-3 mt-3 text-center quote_handle_title">
+            <h3 class="fs-14 text-uppercase border_top_eb pt-3 mt-3 text-center handle_title">
                 <span>Khởi tạo sản phẩm</span>
             </h3>
             @php

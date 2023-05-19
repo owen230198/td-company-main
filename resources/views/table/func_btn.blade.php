@@ -4,18 +4,18 @@
  	@endphp
 	@if (!empty($ext_action))
 		@foreach ($ext_action as $button)
-			<a href="{{ url(@$button['link'].''.$data->id) }}" class="table-btn mr-2" title="{{ @$button['note'] }}">
+			<a href="{{ url(@$button['link'].''.$data->id) }}" class="table-btn mr-2 mb-2" title="{{ @$button['note'] }}">
 				<i class="fa fa-{{ $button['icon'] }} fs-14" aria-hidden="true"></i>
 			</a>	
 		@endforeach
 	@endif
-	<a href="{{ asset('update/'.$tableItem['name'].'/'.$data->id.''.@$param_action) }}" class="table-btn" title="Sửa">
+	<a href="{{ asset('update/'.$tableItem['name'].'/'.$data->id.''.@$param_action) }}" class="table-btn mr-2 mb-2" title="Sửa">
 		<i class="fa fa-pencil-square-o fs-14" aria-hidden="true"></i>
 	</a>
-	<a href="{{ asset('clone/'.$tableItem['name'].'/'.$data->id.''.@$param_action) }}" class="table-btn mx-2" title="Chép">
+	<a href="{{ asset('clone/'.$tableItem['name'].'/'.$data->id.''.@$param_action) }}" class="table-btn mr-2 mb-2" title="Chép">
 		<i class="fa fa-clone fs-14" aria-hidden="true"></i>
 	</a>
-	<button type="button" title="Xóa" class="btn btn-primary table-btn delete_btn bg_red" data-toggle="modal" data-target="#deleteModal" data-id="{{ $data->id }}">
+	<button type="button" title="Xóa" class="btn btn-primary mb-2 table-btn delete_btn bg_red" data-toggle="modal" data-target="#deleteModal" data-id="{{ $data->id }}">
 		<i class="fa fa-times fs-14" aria-hidden="true"></i>
 	</button>
 </div>

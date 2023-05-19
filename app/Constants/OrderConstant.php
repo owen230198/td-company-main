@@ -2,27 +2,6 @@
 namespace App\Constants;
 class OrderConstant
 {
-    const COMMAND_KEY_TABLE = [
-        'c_design'=>'c_designs',
-        'c_process'=>'c_processes'
-    ];
-    const CHILD_TABLE_ORDER = ['products', 'c_designs', 'c_processes'];
-    const ACCEPT_REQURIRED_TABLE = ['orders'=>'Đơn hàng', 'c_designs'=>'Lệnh thiết kế', 'c_prints'=>'Lệnh in', 'c_processes'=>'Lệnh sản xuất'];
-
-    // PRODUCT CATEGORY TYPE
-    const PRO_CATE_TYPE = [
-        'pre_order'=>['name'=>'Hàng đặt'],
-        'available'=>[
-            'name'=>'Hàng bán sẵn', 
-            'child'=>[
-                'hard'=>['name'=>'Hộp cứng'],
-                'paper'=>['name'=>'Hộp giấy']
-            ]
-        ]
-    ];
-
-    //Order Status
-
     //ORDER PAYMENT STATUS
     const ORD_NOT_PAYMENT = 'not_payment';
     const ORD_ADVANCE_PAYMENT = 'advance_payment';

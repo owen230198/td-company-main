@@ -49,7 +49,7 @@
             @endphp
             @include('view_update.view', $pro_paper_extend_name)
         @endif
-        <h3 class="fs-14 text-uppercase border_top_eb pt-3 mt-3 text-center quote_handle_title">
+        <h3 class="fs-14 text-uppercase border_top_eb pt-3 mt-3 text-center handle_title">
             <span>{{ $supp_index == 0 ? 'Phần giấy in' : 'Lệnh in thêm thứ '.$supp_index }}</span>
         </h3>
         @include('view_update.view', $pro_paper_name)

@@ -23,7 +23,7 @@
                         role="tabpanel" aria-labelledby="{{ $c_region['id'] }}-tab">
                         @foreach ($field_list as $field)
                             @php
-                                $field = (array) $field;
+                                $field =  (array) $field;
                             @endphp
                             @if ($field['region'] == $c_region['id'])
                                 @php

@@ -1,57 +1,28 @@
 @extends('index')
-@section('content')
-    <div class="dashborad_content position-relative p-3 bg_white">
-        <form action="{{ $action }}-orders{{ $action==\App\Constants\VariableConstant::ACTION_UPDATE?
-        '/'.@$dataItemOrder['id']:'' }}" method="POST" class="actionForm {{ $action }}_order_form baseAjaxForm" 
-        enctype="multipart/form-data" lang="vi">
-            @csrf
-            <div class="form_order_action">
-                <div class="order_base_input row justify-content-center">
-                    @foreach ($field_list as $field)
-                        <div class="form-group d-flex mb-3 pb-3 border_bot_eb col-4">
-                            <label class="mb-0 mr-3 w_150 fs-13 text-capitalize">{{ $field['note'] }}</label>
-                            @include('view_update.'.$field['view_type'], ['field' => $field, 'data' => @$dataItemOrder??[]])
-                        </div>
-                    @endforeach
-                    @include('orders.field_actions')
-                </div>
-                <div class="ajax_product_orders mt-4 pt-4 list_product_order">
-
-                </div>
-            </div>
-            <div class="group_btn_action_form p-1 mt-3">
-                <button type="submit" class="station-richmenu-main-btn-area">
-                    <i class="fa fa-pencil mr-2 fs-14" aria-hidden="true"></i>{{ getActionByKey($action) }}
-                </button>
-                @if (!empty($dataItemOrder))
-                    <a href="{{ asset('apply-order/'.$dataItemOrder['id']) }}" class="station-richmenu-main-btn-area">
-                        <i class="fa fa-check mr-2 fs-14" aria-hidden="true"></i>Duyệt đơn
-                    </a>
-                @endif
-                @if ($action == \App\Constants\VariableConstant::ACTION_UPDATE)
-                <button type="button" class="station-richmenu-main-btn-area">
-                    <i class="fa fa-print mr-2 fs-14" aria-hidden="true"></i>In đơn hàng
-                </button>
-                <a href="" class="station-richmenu-main-btn-area">
-                    <i class="fa fa-file-text-o mr-2 fs-14" aria-hidden="true"></i>Tạo phiếu chi
-                </a>      
-                @endif
-                <a href="{{ @session()->get('back_url') ? session()->get('back_url') : '' }}"
-                    class="station-richmenu-main-btn-area">
-                    <i class="fa fa-chevron-left mr-2 fs-14" aria-hidden="true"></i>Trở về
-                </a>
-            </div>
-        </form>
-        @if ($action == \App\Constants\VariableConstant::ACTION_UPDATE)
-            <div class="my-4">
-                <h2 class="station-richmenu-main__ttl text-capitalize mb-3 fs-18">Danh sách sản phẩm trong đơn hàng</h2>
-                @include('table.table_base_view', ['field_shows'=>@$dataViewProductList['field_shows'], 
-                'tableItem'=>@$dataViewProductList['tableItem'], 'data_tables'=>@$listDataProduct, 'hideCheck'=>true])
-            </div>
-        @endif
-    </div>
+@section('css')
+    <link rel="stylesheet" href="{{ asset('frontend/admin/css/order.css') }}">
 @endsection
-
+@section('content')
+    <form action="{{ @$link_action }}" method="POST" class="baseAjaxForm config_content" enctype="multipart/form-data" 
+    onkeydown="return event.key != 'Enter'">
+        @csrf
+        @include('quotes.head_information')
+        <h3 class="fs-14 text-uppercase border_top_eb pt-3 mt-3 text-center handle_title">
+            <span>Danh sách sản phẩm</span>
+        </h3>
+        <div class="order_list_product">
+            @include('quotes.products.ajax_view')
+        </div>
+        <div class="group_btn_action_form text-center">
+            <button type="submit" class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-2">
+              <i class="fa fa-check mr-2 fs-14" aria-hidden="true"></i>Hoàn tất
+            </button>
+            <a href="{{ url('') }}" class="main_button bg_red color_white radius_5 font_bold smooth red_btn">
+              <i class="fa fa-times mr-2 fs-14" aria-hidden="true"></i>Hủy
+            </a>
+        </div>  
+    </form>
+@endsection
 @section('script')
     <script src="{{ asset('frontend/admin/script/order.js') }}"></script>
 @endsection

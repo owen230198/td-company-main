@@ -46,7 +46,7 @@
                             <?php endif; ?>
                         </div>
                     </td>
-                    <?php $__currentLoopData = $field_shows->toArray(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $field): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php $__currentLoopData = $field_shows; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $field): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <?php if($field['type'] != 'group'): ?>
                             <td>
                                 <?php

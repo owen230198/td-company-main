@@ -23,7 +23,7 @@
                         role="tabpanel" aria-labelledby="<?php echo e($c_region['id']); ?>-tab">
                         <?php $__currentLoopData = $field_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $field): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <?php
-                                $field = (array) $field;
+                                $field =  (array) $field;
                             ?>
                             <?php if($field['region'] == $c_region['id']): ?>
                                 <?php

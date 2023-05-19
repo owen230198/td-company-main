@@ -72,7 +72,7 @@ class AdminService extends BaseService
 
     public function getFieldAction($table, $action = 'view')
     {
-        return NDetailTable::where(['act' => 1, 'table_map'=> $table, $action => 1])->orderBy('ord', 'asc')->get();
+        return NDetailTable::where(['act' => 1, 'table_map'=> $table, $action => 1])->orderBy('ord', 'asc')->get()->toArray();
     }
 
     public function handleDataFieldShow($field_shows)
@@ -117,7 +117,7 @@ class AdminService extends BaseService
         if ($data['view_type']=='config') {
             $data['regions'] = $this->regions->getRegionOfConfig($table);
         }else{
-            $data['field_searchs'] = NDetailTable::where(['act' => 1,'table_map' => $table, 'search' => 1])->orderBy('ord', 'asc')->get();
+            $data['field_searchs'] = NDetailTable::where(['act' => 1,'table_map' => $table, 'search' => 1])->orderBy('ord', 'asc')->get()->toArray();
         }
         return $data;
     }

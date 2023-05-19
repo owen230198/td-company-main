@@ -2,53 +2,35 @@
 namespace App\Http\Controllers\Order;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Constants\NameConstant;
-use App\Constants\OrderConstant;
 use App\Models\Order;
+use App\Models\Quote;
 use App\Models\Product;
+use App\Constants\StatusConstant;
 
 class OrderController extends Controller
 {
     function __construct()
     {
         parent::__construct();
-        $this->order_service =  new \App\Services\OrderService;
-    }
-
-    private function getOrderActionViewData($action, $actioName)
-    {
-        $data = $this->admins->getDataActionView('orders', $action, $actioName);
-        return $data;
+        $this->services = new \App\Services\OrderService;
     }
 
     public function insert(Request $request)
     {
         if (!$request->isMethod('POST')) {
-            $data = $this->getOrderActionViewData('insert', 'Thêm');
-            return view('orders.view', $data);    
+            $qtote_id = $request->input('quote');
+            $arr_quote = Quote::find($qtote_id);
+            if (empty($arr_quote) || @$arr_quote['status'] == StatusConstant::NOT_ACCEPTED) {
+                return back()->with('error', 'Dữ liệu báo giá không hợp lệ!');
+            }
+            $data['data_quote'] = $arr_quote;
+            $data['products'] = Product::select(['name', 'qty', 'design', 'category', 'size'])->where(['act' => 1, 'quote_id' => $qtote_id])->get();
+            $data['product_qty'] = count($data['products']);
+            $data['title'] = 'Thêm đơn hàng - Mã báo giá : '.$arr_quote['seri'];
+            $data['link_action'] = url('insert/orders');
+            return view('orders.view', $data);
         }else{
-            if (!$this->admins->checkPermissionAction('orders', 'insert')) {
-                echoJson(110, 'Bạn không có quyền thực hiện thao tác này!');
-                return;
-            }
-            $dataInsert = $request->all();
-            $dataInsertOrder = @$dataInsert['order']??[];
-            if (count($dataInsertOrder)>0) {
-                $orderId = $this->order_service->insertOrder($dataInsertOrder);
-            }
-            if ($orderId) {
-                $status = $this->order_service->insertOrderDetail($dataInsert, $orderId);
-                if ($status) {
-                    echoJsonRedirect('view/orders', 200, 'Thêm thành công đơn hàng!');
-                    return;
-                }else{
-                    echoJson(110, 'Đã xảy ra lỗi khi cấu hình lệnh!');
-                    return;
-                }
-            }else{
-                echoJson(110, 'Có lỗi khi thêm mới đơn hàng!');
-                return;
-            }
+                
         }   
     }
 

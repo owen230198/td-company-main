@@ -147,7 +147,7 @@ class QuoteService extends BaseService
             $insert_id = Quote::insertGetId($data_quote);
         }
         if (!empty($insert_id)) {
-            return redirect(asset('create-quote?step=handle_config&id='.$insert_id))->with('message', 'Thêm dữ liệu khách hàng thành công!');
+            return redirect(asset('insert/quotes?step=handle_config&id='.$insert_id))->with('message', 'Thêm dữ liệu khách hàng thành công!');
         }else{
             return redirect(asset('update/quotes/'.$id.'?step=handle_config'))->with('message', 'Cập nhật liệu khách hàng thành công!');
         }

@@ -49,7 +49,7 @@
             ?>
             <?php echo $__env->make('view_update.view', $pro_paper_extend_name, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <?php endif; ?>
-        <h3 class="fs-14 text-uppercase border_top_eb pt-3 mt-3 text-center quote_handle_title">
+        <h3 class="fs-14 text-uppercase border_top_eb pt-3 mt-3 text-center handle_title">
             <span><?php echo e($supp_index == 0 ? 'Phần giấy in' : 'Lệnh in thêm thứ '.$supp_index); ?></span>
         </h3>
         <?php echo $__env->make('view_update.view', $pro_paper_name, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>

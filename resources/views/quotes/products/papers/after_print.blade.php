@@ -1,5 +1,5 @@
 <div class="mb-2 handle_after_print_config">
-    <h3 class="fs-14 text-uppercase border_top_eb pt-3 mt-3 text-center quote_handle_title">
+    <h3 class="fs-14 text-uppercase border_top_eb pt-3 mt-3 text-center handle_title">
         <span>Phần công đoạn sản xuất in & sau in</span>
     </h3>
 @php
