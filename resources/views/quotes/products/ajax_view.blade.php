@@ -62,6 +62,18 @@
                     </div>
 
                     @include('view_update.view', $pro_size_field)
+
+                    @if (!empty($order_get))
+                        @php
+                            $pro_cost_field = [
+                                'name' => 'product['.$pro_index.'][total_cost]',
+                                'note' => 'Tổng chi phí sản phẩm',
+                                'attr' => ['type_input' => 'number', 'disable_field' => 1, ],
+                                'value' => @$product['qty']
+                            ];    
+                        @endphp
+                        @include('view_update.view', $pro_cost_field)   
+                    @endif
                 </div>
                 <div class="ajax_product_view_by_category">
                     

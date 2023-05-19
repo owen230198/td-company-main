@@ -6,7 +6,7 @@ class OrderConstant
     const ORD_NOT_PAYMENT = 'not_payment';
     const ORD_ADVANCE_PAYMENT = 'advance_payment';
     const ORD_PAID_PAYMENT = 'paid_payment';
-
+    const ACCEPT_REQURIRED_TABLE = ['orders'=>'Đơn hàng', 'c_designs'=>'Lệnh thiết kế', 'c_prints'=>'Lệnh in', 'c_processes'=>'Lệnh sản xuất'];
     //PROCESS STAGE 
     const STAGE_PROCESS = [   
         "crop"=>"Xén Thành Phẩm",
