@@ -24,7 +24,7 @@ class OrderController extends Controller
                 return back()->with('error', 'Dữ liệu báo giá không hợp lệ!');
             }
             $data['data_quote'] = $arr_quote;
-            $data['products'] = Product::select(['name', 'qty', 'design', 'category', 'size'])->where(['act' => 1, 'quote_id' => $qtote_id])->get();
+            $data['products'] = Product::where(['act' => 1, 'quote_id' => $qtote_id])->get();
             $data['product_qty'] = count($data['products']);
             $data['title'] = 'Thêm đơn hàng - Mã báo giá : '.$arr_quote['seri'];
             $data['link_action'] = url('insert/orders');

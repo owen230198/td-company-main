@@ -1,5 +1,6 @@
 @extends('index')
 @section('css')
+    <link rel="stylesheet" href="{{ asset('frontend/admin/css/quote.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/admin/css/order.css') }}">
 @endsection
 @section('content')
@@ -11,7 +12,7 @@
             <span>Danh sách sản phẩm</span>
         </h3>
         <div class="order_list_product">
-            @include('quotes.products.ajax_view')
+            @include('quotes.products.ajax_view', ['order_get' => true])
         </div>
         <div class="group_btn_action_form text-center">
             <button type="submit" class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-2">
@@ -24,5 +25,6 @@
     </form>
 @endsection
 @section('script')
+    <script src="{{ asset('frontend/admin/script/quote.js') }}"></script>
     <script src="{{ asset('frontend/admin/script/order.js') }}"></script>
 @endsection

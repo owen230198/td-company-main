@@ -1,5 +1,6 @@
 
 <?php $__env->startSection('css'); ?>
+    <link rel="stylesheet" href="<?php echo e(asset('frontend/admin/css/quote.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(asset('frontend/admin/css/order.css')); ?>">
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
@@ -11,7 +12,7 @@
             <span>Danh sách sản phẩm</span>
         </h3>
         <div class="order_list_product">
-            <?php echo $__env->make('quotes.products.ajax_view', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+            <?php echo $__env->make('quotes.products.ajax_view', ['order_get' => true], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         </div>
         <div class="group_btn_action_form text-center">
             <button type="submit" class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-2">
@@ -24,6 +25,7 @@
     </form>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('script'); ?>
+    <script src="<?php echo e(asset('frontend/admin/script/quote.js')); ?>"></script>
     <script src="<?php echo e(asset('frontend/admin/script/order.js')); ?>"></script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('index', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/orders/view.blade.php ENDPATH**/ ?>

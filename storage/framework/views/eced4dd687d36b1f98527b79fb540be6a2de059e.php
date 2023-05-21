@@ -17,20 +17,21 @@
             <div class="config_handle_paper_pro">
                 <div class="mb-2 base_product_config">
                     <?php
+                        $pro_base_name_input = 'product['.$pro_index.']';
                         $pro_name_field = [
-                            'name' => 'product['.$pro_index.'][name]',
+                            'name' => $pro_base_name_input.'[name]',
                             'note' => 'Tên sản phẩm',
                             'attr' => ['required' => 1, 'inject_class' => 'quote_set_product_name', 'placeholder' => 'Nhập tên'],
                             'value' => !empty($product['id']) ? @$product['name'] : ''
                         ];
                         $pro_qty_field = [
-                            'name' => 'product['.$pro_index.'][qty]',
+                            'name' => $pro_base_name_input.'[qty]',
                             'note' => 'Số lượng sản phẩm',
                             'attr' => ['type_input' => 'number', 'required' => 1, 'inject_class' => 'input_pro_qty', 'placeholder' => 'Nhập số lượng'],
                             'value' => @$product['qty']
                         ];
                         $pro_category_field = [
-                            'name' => 'product['.$pro_index.'][category]',
+                            'name' => $pro_base_name_input.'[category]',
                             'type' => 'linking',
                             'note' => 'Nhóm sản phẩm',
                             'attr' => ['required' => 1 , 'inject_class' => 'select_quote_procategory', 'inject_attr' => 'proindex='.$pro_index],
@@ -38,14 +39,14 @@
                             'value' => @$product['category']
                         ];
                         $quote_pro_design = [
-                            'name' => 'product['.$pro_index.'][design]',
+                            'name' => $pro_base_name_input.'[design]',
                             'note' => 'thiết kế',
                             'type' => 'linking',
                             'other_data' => ['data' => ['table' => 'design_types', 'select' => ['id', 'name']]],
                             'value' => @$product['design']
                         ];
                         $pro_size_field = [
-                            'name' => 'product['.$pro_index.'][size]',
+                            'name' => $pro_base_name_input.'[size]',
                             'note' => 'Kích thước hộp',
                             'attr' => ['placeholder' => 'D x R x C (DVT cm)'],
                             'value' => @$product['size']
@@ -63,6 +64,28 @@
                     </div>
 
                     <?php echo $__env->make('view_update.view', $pro_size_field, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
+                    <?php if(!empty($order_get)): ?>
+                        <?php
+                            $pro_per_price = (int) @$product['total_cost'] / (int) @$product['qty'];
+                            $pro_per_price_field = [
+                                'name' => $pro_base_name_input.'[per_price]',
+                                'note' => 'Đơn giá sản phẩm',
+                                'attr' => ['disable_field' => 1],
+                                'value' => number_format($pro_per_price)
+                            ];  
+                            $pro_cost_field = [
+                                'name' => $pro_base_name_input.'[total_cost]',
+                                'note' => 'Tổng chi phí sản phẩm',
+                                'attr' => ['disable_field' => 1],
+                                'value' => number_format($product['total_cost'])
+                            ];    
+                        ?>
+
+                        <?php echo $__env->make('view_update.view', $pro_per_price_field, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>   
+
+                        <?php echo $__env->make('view_update.view', $pro_cost_field, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>   
+                    <?php endif; ?>
                 </div>
                 <div class="ajax_product_view_by_category">
                     
