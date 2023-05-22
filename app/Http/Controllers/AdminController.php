@@ -315,5 +315,11 @@ class AdminController extends Controller
         }
         echo $options;
     }
+
+    public function uploadFile(Request $request)
+    {
+        $file = $request->input('file');
+        dd($file);
+    }
 }
 

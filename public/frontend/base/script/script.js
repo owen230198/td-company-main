@@ -13,12 +13,15 @@ var baseAjaxForm = function()
 	});
 }
 
+var getTokenRequest = function()
+{
+	return $('head meta[name=csrf-token]').attr('content');
+}
+
 var ajaxBaseCall = function(param)
 {
-	console.log(param.data._token);
 	if (['POST', 'PUT', 'DELETE'].includes(param.type) && param.data._token == undefined) {
-		let token = $('head meta[name=csrf-token]').attr('content');
-		param.data._token = token;	
+		param.data._token = getTokenRequest();	
 	}
 	$('#loader').fadeIn(200);
 	$.ajax({

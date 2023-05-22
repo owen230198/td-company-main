@@ -11,7 +11,7 @@
  Target Server Version : 100427
  File Encoding         : 65001
 
- Date: 21/05/2023 23:11:14
+ Date: 22/05/2023 11:47:37
 */
 
 SET NAMES utf8mb4;
@@ -13743,6 +13743,29 @@ INSERT INTO `papers` VALUES (9, 'Hop giay 1 (Khay giấy định hình)', 10000,
 INSERT INTO `papers` VALUES (10, 'tuan dung', 10000, 1, 10000, '{\"materal\":\"13\",\"qttv\":\"400\",\"length\":\"43\",\"width\":\"65\",\"materal_price\":0.0022,\"supp_qty\":10200,\"act\":1,\"total\":25087920}', '{\"type\":\"1\",\"color\":\"4\",\"machine\":\"1\",\"supp_qty\":9050,\"model_price\":55000,\"work_price\":30,\"shape_price\":100000,\"printer\":2,\"act\":1,\"total\":1706000}', '{\"materal\":\"9\",\"face\":\"1\",\"machine\":\"47\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":10100,\"materal_price\":0.25,\"act\":1,\"total\":7107375}', '{\"ext_price\":\"100000\",\"machine\":\"11\",\"float\":{\"price\":\"50\",\"shape_price\":\"100000\",\"qty_pro\":10100,\"nqty\":1,\"float_cost\":605000},\"model_price\":150,\"work_price\":150,\"shape_price\":100000,\"supp_qty\":10100,\"cost\":2034250,\"act\":1,\"total\":2739250}', '{\"machine\":\"12\",\"nqty\":\"1\",\"model_price\":0,\"work_price\":10,\"shape_price\":20000,\"qty_pro\":10100,\"act\":1,\"total\":121000}', '{\"machine\":\"6\",\"model_price\":0,\"work_price\":50,\"shape_price\":50000,\"qty_pro\":10100,\"act\":1,\"total\":555000}', '{\"materal\":\"2\",\"face\":\"1\",\"cover_materal\":\"6\",\"cover_face\":\"1\",\"machine\":\"15\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":10200,\"cover_supp_qty\":10200,\"materal_price\":0.38,\"metalai_price\":10883420,\"materal_cover_price\":0.25,\"metalai_cover_price\":7107375,\"act\":1,\"total\":17990795}', '{\"price\":\"100\",\"shape_price\":\"100000\",\"machine\":\"2\",\"qty_pro\":10100,\"nqty\":1,\"act\":1,\"total\":1110000}', NULL, '{\"face\":\"1\",\"materal\":\"10\",\"machine\":\"10\",\"model_price\":80,\"work_price\":600,\"shape_price\":150000,\"supp_qty\":10100,\"materal_price\":0,\"act\":1,\"total\":6433600}', '{\"temp_price\":\"500\",\"prescript_price\":\"150\",\"supp_price\":\"0\",\"qty_pro\":10000,\"act\":1,\"total\":6500000}', '69350940', 6, NULL, 1, 1, '2023-05-19 14:38:00', '2023-05-19 14:38:00', 1);
 INSERT INTO `papers` VALUES (11, 'Hộp giấy Tuấn Dung thử ( Test lần 1 )', 10000, 1, 10000, '{\"materal\":\"13\",\"qttv\":\"400\",\"length\":\"43\",\"width\":\"65\",\"materal_price\":0,\"supp_qty\":10200,\"act\":1,\"total\":0}', '{\"type\":\"1\",\"color\":\"4\",\"machine\":\"1\",\"supp_qty\":9030,\"model_price\":55000,\"work_price\":30,\"shape_price\":100000,\"printer\":2,\"act\":1,\"total\":1703600}', '{\"materal\":\"9\",\"face\":\"1\",\"machine\":\"47\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":10100,\"materal_price\":0.25,\"act\":1,\"total\":7107375}', '{\"ext_price\":\"100000\",\"machine\":\"4\",\"float\":{\"price\":\"100\",\"shape_price\":\"100000\",\"qty_pro\":10100,\"nqty\":1,\"float_cost\":1110000},\"model_price\":0,\"work_price\":120,\"shape_price\":150000,\"supp_qty\":10100,\"cost\":1362000,\"act\":1,\"total\":2572000}', '{\"machine\":\"5\",\"nqty\":\"1\",\"model_price\":0,\"work_price\":10,\"shape_price\":20000,\"qty_pro\":10100,\"act\":1,\"total\":121000}', '{\"machine\":\"6\",\"model_price\":0,\"work_price\":50,\"shape_price\":50000,\"qty_pro\":10100,\"act\":1,\"total\":555000}', '{\"materal\":\"1\",\"face\":\"1\",\"cover_materal\":\"6\",\"cover_face\":\"1\",\"machine\":\"15\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":10130,\"materal_price\":0.36,\"metalai_price\":10242806,\"materal_cover_price\":0.25,\"metalai_cover_price\":7128337.5,\"act\":1,\"total\":17371143.5}', '{\"price\":\"100\",\"shape_price\":\"50000\",\"machine\":\"2\",\"qty_pro\":10100,\"nqty\":1,\"act\":1,\"total\":1060000}', NULL, '{\"face\":\"1\",\"materal\":\"10\",\"machine\":\"3\",\"model_price\":0,\"work_price\":800,\"shape_price\":150000,\"supp_qty\":10100,\"materal_price\":0.25,\"act\":1,\"total\":15287375}', '{\"temp_price\":\"1000\",\"prescript_price\":\"200\",\"supp_price\":\"500\",\"qty_pro\":10000,\"act\":1,\"total\":17000000}', '62777493.5', 7, NULL, 1, 1, '2023-04-30 08:51:00', '2023-04-30 08:51:00', 1);
 INSERT INTO `papers` VALUES (12, 'Tetst Hộp giấy 10000', 10000, 1, 10000, '{\"materal\":\"13\",\"qttv\":\"400\",\"length\":\"43\",\"width\":\"65\",\"materal_price\":0,\"supp_qty\":10200,\"act\":1,\"total\":0}', '{\"type\":\"1\",\"color\":\"4\",\"machine\":\"1\",\"supp_qty\":9030,\"model_price\":55000,\"work_price\":30,\"shape_price\":100000,\"printer\":2,\"act\":1,\"total\":1703600}', '{\"materal\":\"8\",\"face\":\"1\",\"machine\":\"47\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":10100,\"materal_price\":0.23,\"act\":1,\"total\":6542785}', '{\"ext_price\":\"100000\",\"machine\":\"4\",\"float\":{\"price\":\"100\",\"shape_price\":\"100000\",\"qty_pro\":10100,\"nqty\":1,\"float_cost\":1110000},\"model_price\":0,\"work_price\":120,\"shape_price\":150000,\"supp_qty\":10100,\"cost\":1362000,\"act\":1,\"total\":2572000}', '{\"machine\":\"5\",\"nqty\":\"1\",\"model_price\":0,\"work_price\":10,\"shape_price\":20000,\"qty_pro\":10100,\"act\":1,\"total\":121000}', '{\"machine\":\"6\",\"model_price\":0,\"work_price\":50,\"shape_price\":50000,\"qty_pro\":10100,\"act\":1,\"total\":555000}', '{\"materal\":\"1\",\"face\":\"1\",\"cover_materal\":\"5\",\"cover_face\":\"1\",\"machine\":\"15\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":10130,\"materal_price\":0.36,\"metalai_price\":10242806,\"materal_cover_price\":0.23,\"metalai_cover_price\":6562070.5,\"act\":1,\"total\":16804876.5}', '{\"price\":\"100\",\"shape_price\":\"100000\",\"machine\":\"2\",\"qty_pro\":10100,\"nqty\":1,\"act\":1,\"total\":1110000}', NULL, '{\"face\":\"1\",\"materal\":\"10\",\"machine\":\"3\",\"model_price\":0,\"work_price\":800,\"shape_price\":150000,\"supp_qty\":10100,\"materal_price\":0.25,\"act\":1,\"total\":15287375}', '{\"temp_price\":\"100\",\"prescript_price\":\"100\",\"supp_price\":\"100\",\"qty_pro\":10000,\"act\":1,\"total\":3000000}', '47696636.5', 8, NULL, 1, 1, '2023-04-30 09:12:00', '2023-04-30 09:12:00', 1);
+
+-- ----------------------------
+-- Table structure for print_notes
+-- ----------------------------
+DROP TABLE IF EXISTS `print_notes`;
+CREATE TABLE `print_notes`  (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `act` tinyint(4) NULL DEFAULT NULL,
+  `created_by` int(10) NULL DEFAULT NULL,
+  `created_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `index`(`id`, `name`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of print_notes
+-- ----------------------------
+INSERT INTO `print_notes` VALUES (1, 'In theo màn hình Dell ultra', 1, 1, '2023-05-22 10:29:05', '2023-05-22 10:29:05');
+INSERT INTO `print_notes` VALUES (2, 'In theo mẫu đã in trước', 1, 1, '2023-05-22 10:29:05', '2023-05-22 10:29:05');
+INSERT INTO `print_notes` VALUES (3, 'In theo mẫu khách hàng gửi', 1, 1, '2023-05-22 10:29:05', '2023-05-22 10:29:05');
+INSERT INTO `print_notes` VALUES (4, 'Khách hàng duyệt màu', 1, 1, '2023-05-22 10:29:05', '2023-05-22 10:29:05');
 
 -- ----------------------------
 -- Table structure for print_techs

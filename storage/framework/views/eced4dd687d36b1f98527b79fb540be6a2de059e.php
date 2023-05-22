@@ -66,25 +66,7 @@
                     <?php echo $__env->make('view_update.view', $pro_size_field, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
                     <?php if(!empty($order_get)): ?>
-                        <?php
-                            $pro_per_price = (int) @$product['total_cost'] / (int) @$product['qty'];
-                            $pro_per_price_field = [
-                                'name' => $pro_base_name_input.'[per_price]',
-                                'note' => 'Đơn giá sản phẩm',
-                                'attr' => ['disable_field' => 1],
-                                'value' => number_format($pro_per_price)
-                            ];  
-                            $pro_cost_field = [
-                                'name' => $pro_base_name_input.'[total_cost]',
-                                'note' => 'Tổng chi phí sản phẩm',
-                                'attr' => ['disable_field' => 1],
-                                'value' => number_format($product['total_cost'])
-                            ];    
-                        ?>
-
-                        <?php echo $__env->make('view_update.view', $pro_per_price_field, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>   
-
-                        <?php echo $__env->make('view_update.view', $pro_cost_field, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>   
+                        <?php echo $__env->make('orders.products.extend_info', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>   
                     <?php endif; ?>
                 </div>
                 <div class="ajax_product_view_by_category">

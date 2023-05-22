@@ -65,25 +65,7 @@
                     @include('view_update.view', $pro_size_field)
 
                     @if (!empty($order_get))
-                        @php
-                            $pro_per_price = (int) @$product['total_cost'] / (int) @$product['qty'];
-                            $pro_per_price_field = [
-                                'name' => $pro_base_name_input.'[per_price]',
-                                'note' => 'Đơn giá sản phẩm',
-                                'attr' => ['disable_field' => 1],
-                                'value' => number_format($pro_per_price)
-                            ];  
-                            $pro_cost_field = [
-                                'name' => $pro_base_name_input.'[total_cost]',
-                                'note' => 'Tổng chi phí sản phẩm',
-                                'attr' => ['disable_field' => 1],
-                                'value' => number_format($product['total_cost'])
-                            ];    
-                        @endphp
-
-                        @include('view_update.view', $pro_per_price_field)   
-
-                        @include('view_update.view', $pro_cost_field)   
+                        @include('orders.products.extend_info')   
                     @endif
                 </div>
                 <div class="ajax_product_view_by_category">
