@@ -318,8 +318,9 @@ class AdminController extends Controller
 
     public function uploadFile(Request $request)
     {
-        $file = $request->input('file');
-        dd($file);
+        dd($request);
+        $path = $request->file('file')->store('public/uploads/files');
+        dd($path);
     }
 }
 

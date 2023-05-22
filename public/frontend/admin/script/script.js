@@ -300,13 +300,16 @@ var initInputModuleAfterAjax = function(section)
 var fileUploadModule = function() {
     $(document).on('change', 'input.__file_upload_input', function(event) {
         event.preventDefault();
-        let file = $(this).val();
+        let file = new FormData();
+        file.append('file')
         if (file.length > 0) {
             $('#loader').fadeIn(200);
             $.ajax({
                 url: getBaseRoute('upload-file'),
                 type: 'POST',
-                data: {file:file,_token:getTokenRequest()}
+                data: {file:file[0]},
+                dataType: 'json',
+                processData: false,
             })
             .done(function(data){
                 console.log(data);
