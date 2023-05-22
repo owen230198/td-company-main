@@ -19,16 +19,8 @@ var baseAjaxForm = function()
 	});
 }
 
-var getTokenRequest = function()
-{
-	return $('head meta[name=csrf-token]').attr('content');
-}
-
 var ajaxBaseCall = function(param)
 {
-	if (['POST', 'PUT', 'DELETE'].includes(param.type) && param.data._token == undefined) {
-		param.data._token = getTokenRequest();	
-	}
 	$('#loader').fadeIn(200);
 	$.ajax({
 		url: param.url,

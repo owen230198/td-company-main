@@ -318,9 +318,26 @@ class AdminController extends Controller
 
     public function uploadFile(Request $request)
     {
-        dd($request);
-        $path = $request->file('file')->store('public/uploads/files');
-        dd($path);
+        $file = $request->file('file');
+        $data['code'] = 100;
+        $data['message'] = 'Không thể upload file !';
+        if (!empty($file)) {
+            $name = $file->getClientOriginalName();
+            $location = 'uploads/files';
+            if (file_exists(public_path().'/'.$location.'/'.$name)) {
+                $data['message'] = 'Tên file đã tồn tại, vui lòng đổi tên trước !';
+            }else{
+                $status = $file->move($location ,$name);
+                if (!empty($status)) {
+                    $data['code'] = 200;
+                    $data['message'] = 'Đã upload file thành công !';
+                    $data['path'] = url($location.'/'.$name);
+                    $data['name'] = $name;
+                }
+            }
+            
+        }
+        return response()->json($data);
     }
 }
 

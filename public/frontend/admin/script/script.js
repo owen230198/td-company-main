@@ -300,19 +300,29 @@ var initInputModuleAfterAjax = function(section)
 var fileUploadModule = function() {
     $(document).on('change', 'input.__file_upload_input', function(event) {
         event.preventDefault();
-        let file = new FormData();
-        file.append('file')
-        if (file.length > 0) {
+        let files = $(this)[0].files;
+        if (files.length > 0) {
+            let form_data = new FormData();
+            form_data.append('file', files[0]);
+            let parent = $(this).closest('.__module_upload_file');
             $('#loader').fadeIn(200);
             $.ajax({
                 url: getBaseRoute('upload-file'),
-                type: 'POST',
-                data: {file:file[0]},
-                dataType: 'json',
+                method: 'POST',
+                data: form_data,
+                contentType: false,
                 processData: false,
+                dataType: 'json'
             })
             .done(function(data){
-                console.log(data);
+                if (data.code == 100) {
+                    toastr['error'](data.message);
+                }else{
+                    parent.find('input.__file_value').val(data.path);
+                    parent.find('.__file_preview').fadeIn(200);
+                    parent.find('.__file_name').text(data.name);
+                    toastr['success'](data.message);
+                }
                 $('#loader').fadeOut(200);
             })
         }   
