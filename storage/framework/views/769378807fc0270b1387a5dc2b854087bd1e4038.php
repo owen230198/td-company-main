@@ -1,7 +1,7 @@
 
 <?php $__env->startSection('content'); ?>
     <div class="dashborad_content position-relative">
-        <form action="<?php echo e($action_url); ?>" method="POST" class="config_content <?php echo e(@$config_view == 1 ? 'baseAjaxForm' : ''); ?>" enctype="multipart/form-data">
+        <form action="<?php echo e($action_url); ?>" method="POST" class="config_content baseAjaxForm" enctype="multipart/form-data">
             <?php echo csrf_field(); ?>
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <?php $__currentLoopData = $regions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $region): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>

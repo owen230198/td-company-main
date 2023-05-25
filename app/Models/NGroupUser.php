@@ -29,64 +29,147 @@ class NGroupUser extends Model
     ];
 
     const MODULE = [
-        'price_device' => ['name' => 'Đơn giá thiết bị máy', 'link' => 'config-device-price/supply_types?type=devices', 'parent' => 'quote_price_config'],
-        'price_materal' => ['name' => 'Đơn giá vật tư sx', 'link' => 'config-device-price/supply_types?type=materals', 'parent' => 'quote_price_config'],
-        'quote_config' => ['name' => 'Các thông số khác', 'link' => 'view/quote_configs', 'parent' => 'quote_price_config'],
-        'create_quote' => ['name' => 'Tính giá', 'link' => 'insert/quotes', 'parent' => 'customer_quote'],
-        'quote_not_accepted' => ['name' => 'DS báo giá (chưa duyệt)', 'link' => 'view/quotes?default_data={"status":"not_accepted"}', 'parent' => 'customer_quote'],
-        'create_new_order' => ['name' => 'Tạo mới đơn hàng', 'link' => 'create-handle-order', 'parent' => 'order_handle'],
-        'order' => ['name' => 'Tạo đơn hàng cũ', 'link' => 'view/orders', 'parent' => 'order_handle'],
-        'handle_process' => ['name' => 'Theo dõi sản xuất', 'link' => 'view/orders', 'parent' => 'order_handle'],
-        'profit' => ['name' => 'Thu nhập cá nhân', 'link' => 'profit/sale', 'parent' => 'profit'],
-        'rpt_quote_not_accepted' => ['name' => 'Báo giá chưa duyệt', 'link' => 'report/status=not_accepted', 'parent' => 'report'],
-        'rpt_quote_accepted' => ['name' => 'Báo giá đã duyệt', 'link' => 'report/quotes?status=accepted', 'parent' => 'report'],
-        'rpt_debt' => ['name' => 'Báo cáo công nợ', 'link' => 'report/quotes?status=accepted', 'parent' => 'report'],
-        'rpt_categories_revenue' => ['name' => 'Doanh thu theo nhóm SP', 'link' => 'report/revenue?type=category', 'parent' => 'report'],
-        'rpt_location_revenue' => ['name' => 'Doanh thu theo tỉnh/TP', 'link' => 'report/revenue?type=location', 'parent' => 'report'],
-        'create_available_order' => ['name' => 'Tạo đơn hàng', 'link' => 'create-available-order', 'parent' => 'available_order'],
-        'shipping_process' => ['name' => 'Lộ trình xuất - giao hàng', 'link' => 'shipping-process', 'parent' => 'available_order'],
-        'account' => ['name' => 'Thông tin tài khoản', 'link' => 'account-detail', 'parent' => 'account'],
-        'change_password' => ['name' => 'Thông tin tài khoản', 'link' => 'change/password', 'parent' => 'account']
+        'price_device' => [
+            'name' => 'Đơn giá thiết bị máy', 
+            'link' => 'config-device-price/supply_types?type=devices', 
+            'group' => 'quote_price_config'
+        ],
+        'price_materal' => [
+            'name' => 'Đơn giá vật tư sx', 
+            'link' => 'config-device-price/supply_types?type=materals', 
+            'group' => 'quote_price_config'
+        ],
+        'quote_config' => [
+            'name' => 'Các thông số khác', 
+            'link' => 'view/quote_configs', 
+            'group' => 'quote_price_config'
+        ],
+        'create_quote' => [
+            'name' => 'Tính giá', 
+            'link' => 'insert/quotes', 
+            'group' => 'customer_quote'
+        ],
+        'quote_not_accepted' => [
+            'name' => 'DS báo giá (chưa duyệt)', 
+            'link' => 'view/quotes?default_data={"status":"not_accepted"}', 
+            'group' => 'customer_quote'
+        ],
+        'create_new_order' => [
+            'name' => 'Tạo mới đơn hàng', 
+            'link' => 'create-handle-order', 
+            'group' => 'order_handle'
+        ],
+        'order' => [
+            'name' => 'Tạo đơn hàng cũ', 'link' => 
+            'view/orders', 'group' => 
+            'order_handle'
+        ],
+        'handle_process' => [
+            'name' => 'Theo dõi sản xuất', 
+            'link' => 'view/orders', 
+            'group' => 
+            'order_handle'
+        ],
+        'profit' => [
+            'name' => 'Thu nhập cá nhân', 
+            'link' => 
+            'profit/sale', 
+            'group' => 'profit'
+        ],
+        'rpt_quote_not_accepted' => [
+            'name' => 'Báo giá chưa duyệt', 
+            'link' => 'report/status=not_accepted', 
+            'group' => 'report'
+        ],
+        'rpt_quote_accepted' => [
+            'name' => 'Báo giá đã duyệt', 
+            'link' => 'report/quotes?status=accepted', 
+            'group' => 'report'
+        ],
+        'rpt_debt' => [
+            'name' => 'Báo cáo công nợ', 
+            'link' => 'report/quotes?status=accepted', 
+            'group' => 'report'
+        ],
+        'rpt_categories_revenue' => [
+            'name' => 'Doanh thu theo nhóm SP', 
+            'link' => 'report/revenue?type=category', 
+            'group' => 'report'
+        ],
+        'rpt_location_revenue' => [
+            'name' => 'Doanh thu theo tỉnh/TP', 
+            'link' => 'report/revenue?type=location', 
+            'group' => 'report'
+        ],
+        'create_available_order' => [
+            'name' => 'Tạo đơn hàng', 
+            'link' => 'create-available-order', 
+            'group' => 'available_order'
+        ],
+        'shipping_process' => [
+            'name' => 'Lộ trình xuất - giao hàng', 
+            'link' => 'shipping-process', 
+            'group' => 'available_order'
+        ],
+        'account' => [
+            'name' => 'Thông tin tài khoản', 
+            'link' => 'account-detail', 
+            'group' => 'account'
+        ],
+        'change_password' => [
+            'name' => 'Thông tin tài khoản', 
+            'link' => 'change/password', 
+            'group' => 'account'
+        ]
     ];
 
     static $role_module = [
         self::SALE_MANAGER => [
-            'group_modules' => [
-                self::GROUP_MODULE['customer_quote'],
-                self::GROUP_MODULE['order_handle'],
-                self::GROUP_MODULE['profit'],
-                self::GROUP_MODULE['report'],
-                self::GROUP_MODULE['available_order'],
-                self::GROUP_MODULE['account']
-            ],
-            'modules' => [
-                self::MODULE['create_quote'],
-                self::MODULE['quote_not_accepted'],
-                self::MODULE['create_new_order'],
-                self::MODULE['handle_process'],
-                self::MODULE['profit'],
-                self::MODULE['rpt_quote_not_accepted'],
-                self::MODULE['rpt_quote_accepted'],
-                self::MODULE['rpt_debt'],
-                self::MODULE['rpt_categories_revenue'],
-                self::MODULE['rpt_location_revenue'],
-                self::MODULE['create_available_order'],
-                self::MODULE['shipping_process'],
-                self::MODULE['account'],
-                self::MODULE['change_password'],
-            ]
+            self::MODULE['create_quote'],
+            self::MODULE['quote_not_accepted'],
+            self::MODULE['create_new_order'],
+            self::MODULE['handle_process'],
+            self::MODULE['profit'],
+            self::MODULE['rpt_quote_not_accepted'],
+            self::MODULE['rpt_quote_accepted'],
+            self::MODULE['rpt_debt'],
+            self::MODULE['rpt_categories_revenue'],
+            self::MODULE['rpt_location_revenue'],
+            self::MODULE['create_available_order'],
+            self::MODULE['shipping_process'],
+            self::MODULE['account'],
+            self::MODULE['change_password'],
         ]
     ];
 
+    static function getGroupByModule($modules)
+    {
+        $ret = [];
+        foreach ($modules as $module) {
+            $parent_key = $module['group'];
+            if (!array_key_exists($parent_key, $ret)) {
+                $ret[$parent_key] = self::GROUP_MODULE[$module['group']];
+            }
+        }
+        
+        return $ret;
+    }
+
     static function getMenuModule($group_user)
     {
-        return $group_user == self::ADMIN ? ['group_modules' => self::GROUP_MODULE, 'modules' => self::MODULE] : self::$role_module[$group_user];
+        if ($group_user == self::ADMIN) {
+            return ['group_modules' => self::GROUP_MODULE, 'modules' => self::MODULE];
+        }else{
+            $modules = self::$role_module[$group_user];
+            return ['group_modules' => self::getGroupByModule($modules), 'modules' => $modules];
+        }
+        
     }
 
     static function isAdmin()
     {
         $user_login = session('user_login');
         $admin = @$user_login['user']?$user_login['user']:array();
-        return @$admin['n_group_user_id'] == self::ADMIN;
+        return @$admin['group_user'] == self::ADMIN;
     }
 }

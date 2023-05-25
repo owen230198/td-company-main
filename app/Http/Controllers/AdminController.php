@@ -115,13 +115,13 @@ class AdminController extends Controller
                 $data['action_url'] = url('insert/'.$table);
                 return view('action.view', $data);
             }else{
-                $insertID = $this->admins->doInsertTable($table, $param);
-                if (@$insertID) {
+                $status = $this->admins->doInsertTable($table, $param);
+                if ($status['valid']) {
                     $back_routes = @session()->get('back_url') ?? url('view/'.$table);
-                    $this->admins->logActionUserData(__FUNCTION__, $table, $insertID);
-                    return redirect($back_routes)->with('message','Thêm dữ liệu thành công !');
+                    $this->admins->logActionUserData(__FUNCTION__, $table, $status['id']);
+                    return returnMessageAjax(200, 'Thêm dữ liệu thành công!', $back_routes);
                 }else {
-                    return back()->with('error','Đã có lỗi xảy ra !');
+                    return returnMessageAjax(100, $status['message']);
                 }
             }
         }

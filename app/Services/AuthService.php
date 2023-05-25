@@ -23,7 +23,7 @@ class AuthService extends BaseService
             return $this->returnMessage(100, ['messages'=>'Thông tin mật khẩu không chính xác!']);
         }
         unset($user['password']);
-        $arr = $this->group_user::getMenuModule($user['n_group_user_id']);
+        $arr = $this->group_user::getMenuModule($user['group_user']);
         $arr['user'] = $user;
         session()->put('user_login', $arr);
         return $this->returnMessage(200, ['messages'=>'Đăng nhập thành công!']);

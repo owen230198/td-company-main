@@ -40,7 +40,7 @@ class AdminService extends BaseService
             return true;
         }
         $permissions = $this->roles->select('json_data_role')->where('module_id', $module)
-        ->where('n_group_user_id', @$admin['n_group_user_id'])->first();
+        ->where('group_user', @$admin['group_user'])->first();
         if ($permissions == null) {
             return false;
         }
@@ -162,8 +162,12 @@ class AdminService extends BaseService
 
     public function doInsertTable($table, $data)
     {
-        $this->processDataBefore($data, $table);
-        return \DB::table($table)->insertGetId($data);
+        $process = $this->processDataBefore($data, $table);
+        if (!@$process['valid']) {
+            return $process;
+        }
+        $id = \DB::table($table)->insertGetId($process['data']);
+        return ['valid' =>  true, 'id' => $id];
     }
 
     public function doUpdateTable($id, $table, $data)

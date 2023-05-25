@@ -17,15 +17,44 @@ class BaseService
 		$data['updated_at'] = !empty($data['updated_at']) ? $data['updated_at'] : date('Y-m-d H:i', Time());
 	}
 
-	public function processDataBefore(&$data, $table)
+	public function validateDataTable($field, $attr, $value)
+	{
+		$ret['valid'] = true;
+		$note = mb_strtolower(@$field['note']);
+		if (!empty($attr['required']) && empty($value)) {
+			$ret['valid'] = false;
+			$ret['message'] = 'Dữ liệu '.$note.' không được để trống !';
+			return $ret;
+		}
+
+		if (!empty($attr['unique'])) {
+			$count = getCountDataTable($field['table_map'], [$field['name'] => $value]);
+			if ($count > 0) {
+				$ret['valid'] = false;
+				$ret['message'] = $note. ' "'.$value.'" '.' đã tồn tại !';
+				return $ret;
+			}
+		}
+		return $ret;
+	}
+
+	public function processDataBefore($data, $table)
 	{
 		foreach ($data as $key => $item) {
-            $field = \App\Models\NDetailTable::where(['table_map'=>$table, 'name'=>$key])->first();
-            if (@$field['view_type'] == 'date_time') {
+            $field = \App\Models\NDetailTable::select(['type', 'attr', 'note', 'name', 'table_map'])->where(['table_map'=>$table, 'name'=>$key])->first();
+			$attr = !empty($field['attr']) ? json_decode($field['attr'], true) : [];
+			$validation = $this->validateDataTable($field, $attr, $item);
+			if (!$validation['valid']) {
+				return $validation;
+				break;
+			}
+            if (@$field['type'] == 'datetime') {
                 $data[$key] = getDataDateTime($item);
-            }elseif (@$field['view_type'] == 'password') {
+            }elseif (@$attr['type_input'] == 'password') {
                 $data[$key] = md5($data['password']);
             }  
         }
+		$this->configBaseDataAction($data);
+		return ['valid' => true, 'data' => $data];
 	}
 }

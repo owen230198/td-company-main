@@ -72,7 +72,7 @@ class DevController extends Controller
                         $roleArr[$key] = $value; 
                     }
                     $module_id = $module->id;
-                    $data['n_group_user_id'] = $group_id;
+                    $data['group_user'] = $group_id;
                     $data['module_id'] = $module_id;
                     $data['json_data_role'] = json_encode($roleArr);
                     $insert = $roles->insert($data);
