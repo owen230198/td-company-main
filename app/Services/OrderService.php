@@ -5,6 +5,7 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\CDesign;
 use App\Constants\OrderConstant;
+use App\Constants\StatusConstant;
 
 class OrderService extends BaseService
 {
@@ -13,12 +14,20 @@ class OrderService extends BaseService
         parent::__construct();
     }
 
-    public function insertOrder($data)
+    public function processDataOrder($arr_order)
     {
-        $data = $this->processDataBefore($data);
-        $data['payment_status'] = getPaymentStatus((int)@$data['advance_cost'], (int)@$data['total_cost']);
-        $data['status'] = OrderConstant::ORDER_NOT_ACCEPTED;
-        return Order::insertGetId($data);
+        if ((int) @$arr_order['advance'] > 0 && empty($arr_order['rest_bill'])) {
+            return ['valid' => false, 'message' => 'Bạn cần upload bill tạm ứng cho đơn này !'];
+        }
+        $arr_order['code'] = 'DH-'.getCodeInsertTable('orders');
+        $arr_order['status'] = StatusConstant::NOT_ACCEPTED;
+        $this->configBaseDataAction($arr_order);
+        if (!empty($arr_order['id'])) {
+            Order::where('id', $arr_order['id'])->update($arr_order);
+        }else{
+            Order::insertGetId($arr_order);
+        }
+        return ['valid' => true, 'message' => 'Cập nhật dữ liệu thành công!'];
     }
     
     public function insertOrderDetail($data, $orderId)

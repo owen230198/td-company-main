@@ -17,6 +17,6 @@
             @endforeach
         </div>
     @else
-        @include('quotes.products.supplies.view', ['supp_view' => 'papers', 'data_supply' => @$elements[0]['data']])
+        @include('quotes.products.supplies.view', ['supp_view' => 'papers', 'data_supply' => @$elements[0]['data'], 'supp_table' => 'papers'])
     @endif
 </div>

@@ -35,7 +35,11 @@ class QuoteController extends Controller
                 if ($step == 'chose_customer') {
                     return $this->services->selectCustomerUpdateQuote($request, $id);
                 }else{
-                    return $this->services->processDataQuote($request, $quote);
+                    $process = $this->services->processDataQuote($request, $quote);
+                    if ($process) {
+                        RefreshQuotePrice($quote);
+                    }
+                    return returnMessageAjax(200, 'Cập nhật dữ liệu thành công !', url('/profit-config-quote?quote_id='.$quote['id']));
                 }
             }else{
                 if ($step == 'chose_customer') {
@@ -113,7 +117,11 @@ class QuoteController extends Controller
                     return redirect(url('/'))->with('error', 'Dữ liệu báo giá không tồn tại !');
                 }
             }else{
-                return $this->services->processDataQuote($request, $arr_quote);
+                $process = $this->services->processDataQuote($request, $arr_quote);
+                if ($process) {
+                    RefreshQuotePrice($arr_quote);
+                }
+                return returnMessageAjax(200, 'Cập nhật dữ liệu thành công !', url('/profit-config-quote?quote_id='.$arr_quote['id']));
             }   
         }
     }

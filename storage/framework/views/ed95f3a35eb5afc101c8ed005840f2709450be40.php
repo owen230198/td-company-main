@@ -63,7 +63,7 @@
             <?php echo $__env->make('view_update.view', $pro_paper_qttv, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
             <div class="d-flex align-items-center mb-2 fs-13">
                 <label class="mb-0 min_210 text-capitalize text-right mr-3">
-                    <span class="fs-15 mr-1">*</span>Kích thước khổ giấy tối ưu
+                    <span class="fs-15 mr-1">*</span>Kích thước khổ giấy
                 </label>
                 <div class="d-flex justify-content-between align-items-center">
                     <input type="number" name = 'product[<?php echo e($pro_index); ?>][<?php echo e($key_supp); ?>][<?php echo e($supp_index); ?>][size][length]' placeholder="Chiều dài (cm)" 

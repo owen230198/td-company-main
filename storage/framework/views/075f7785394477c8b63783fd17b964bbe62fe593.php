@@ -17,6 +17,6 @@
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </div>
     <?php else: ?>
-        <?php echo $__env->make('quotes.products.supplies.view', ['supp_view' => 'papers', 'data_supply' => @$elements[0]['data']], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        <?php echo $__env->make('quotes.products.supplies.view', ['supp_view' => 'papers', 'data_supply' => @$elements[0]['data'], 'supp_table' => 'papers'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <?php endif; ?>
 </div><?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/quotes/products/structure.blade.php ENDPATH**/ ?>

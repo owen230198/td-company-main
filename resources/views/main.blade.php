@@ -12,7 +12,7 @@
                     <div class="row row-7">
                         @foreach ($not_accepted_table as $table => $text)
                         <div class="col-lg-6 mb-3">
-                            <a href={{ asset('get-data-table-command/'.$table.'?status=0') }} class="main_item_command h-100 smooth d-flex align-items-center position-relative h-100">
+                            <a href={{ asset('view/'.$table.'?default_data={"status":"not_accepted"}') }} class="main_item_command h-100 smooth d-flex align-items-center position-relative h-100">
                                 <img src="{{ asset('frontend/admin/images/'.$table.'_icon.png') }}" alt="order-icon" 
                                 class="command_icon smooth">
                                 <div class="command_detail ml-2">

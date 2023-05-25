@@ -12,7 +12,7 @@
                     <div class="row row-7">
                         <?php $__currentLoopData = $not_accepted_table; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $table => $text): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="col-lg-6 mb-3">
-                            <a href=<?php echo e(asset('get-data-table-command/'.$table.'?status=0')); ?> class="main_item_command h-100 smooth d-flex align-items-center position-relative h-100">
+                            <a href=<?php echo e(asset('view/'.$table.'?default_data={"status":"not_accepted"}')); ?> class="main_item_command h-100 smooth d-flex align-items-center position-relative h-100">
                                 <img src="<?php echo e(asset('frontend/admin/images/'.$table.'_icon.png')); ?>" alt="order-icon" 
                                 class="command_icon smooth">
                                 <div class="command_detail ml-2">

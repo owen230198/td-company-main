@@ -318,7 +318,8 @@ var fileUploadModule = function() {
                 if (data.code == 100) {
                     toastr['error'](data.message);
                 }else{
-                    parent.find('input.__file_value').val(data.path);
+                    let value = '{"path":"'+data.path+'","name":"'+data.name+'"}'
+                    parent.find('input.__file_value').val(value);
                     parent.find('.__file_preview').fadeIn(200);
                     parent.find('.__file_name').text(data.name);
                     toastr['success'](data.message);

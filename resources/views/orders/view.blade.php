@@ -7,7 +7,58 @@
     <form action="{{ @$link_action }}" method="POST" class="baseAjaxForm config_content" enctype="multipart/form-data" 
     onkeydown="return event.key != 'Enter'">
         @csrf
-        @include('quotes.head_information')
+        @if (!empty($customer_info))
+            @include('quotes.head_information')
+        @endif
+        <div class="order_field_update __order_field_module mt- pt-3 border_top_eb">
+            @if (!empty($data_order['id']))
+                <input type="hidden" name="order[id]" value="{{ $data_order['id'] }}">     
+            @endif
+            <input type="hidden" name="order[quote]" value="{{ $data_quote['id'] }}">
+            @php
+                $order_field_update = [
+                    [
+                        'name' => '',
+                        'note' => 'Tổng tiền (chưa bao gồm VAT)',
+                        'attr' => ['disable_field' => 1, 'inject_class' => '__order_total_input'],
+                        'value' => round(@$data_quote['total_amount'])
+                    ],
+                    [
+                        'name' => 'order[advance]',
+                        'note' => 'Tạm ứng đơn hàng',
+                        'attr' => ['type_input' => 'number', 'inject_class' => '__order_advance_input'],
+                        'value' => @$data_order['advance'] ?? 0
+                    ],
+                    [
+                        'name' => 'order[rest]',
+                        'note' => 'Chi phí còn lại',
+                        'attr' => ['readonly' => 1, 'inject_class' => '__order_rest_input'],
+                        'value' => @$data_order['rest'] ?? round(@$data_quote['total_amount'])
+                    ],
+                    [
+                        'name' => 'order[rest_bill]',
+                        'note' => 'File bill tạm ứng',
+                        'type' => 'file',
+                        'value' => @$data_order['rest_bill']
+                    ],
+                    [
+                        'name' => 'order[rest_note]',
+                        'note' => 'Ghi chú công nợ',
+                        'type' => 'textarea',
+                        'value' => @$data_order['rest_note']
+                    ],
+                    [
+                        'name' => 'order[ship_note]',
+                        'note' => 'Ghi chú giao hàng',
+                        'type' => 'textarea',
+                        'value' => @$data_order['ship_note']
+                    ]
+                ]
+            @endphp
+            @foreach ($order_field_update as $order_field)
+                @include('view_update.view', $order_field)    
+            @endforeach
+        </div>
         <h3 class="fs-14 text-uppercase border_top_eb pt-3 mt-3 text-center handle_title">
             <span>Danh sách sản phẩm</span>
         </h3>
@@ -18,6 +69,11 @@
             <button type="submit" class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-2">
               <i class="fa fa-check mr-2 fs-14" aria-hidden="true"></i>Hoàn tất
             </button>
+            @if (!empty($data_order['status']) && $data_order['status'] == \App\Constants\StatusConstant::NOT_ACCEPTED)
+                <button type="button" class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-2">
+                    <i class="fa fa-thumbs-o-up mr-2 fs-14" aria-hidden="true"></i>Xác nhận sản xuất
+                </button>    
+            @endif
             <button type="button" class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-2">
                 <i class="fa fa-print mr-2 fs-14" aria-hidden="true"></i>In đơn
             </button>

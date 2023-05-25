@@ -220,3 +220,20 @@ if (!function_exists('getParamUrlByArray')) {
         return $param;
     }
 }
+
+if (!function_exists('subStringLimit')) {
+    function subStringLimit($str, $limit, $type = 'char') {
+        if ($type == 'char') {
+            if (strlen($str) > $limit) {
+                $str  = substr($str, 0, $limit - 3) . '...';
+            }
+        }else{
+            if (str_word_count($str, 0) > $limit) {
+                $words = str_word_count($str, 3);
+                $pos   = array_keys($words);
+                $str  = substr($str, 0, $pos[$limit]) . '...';
+            }
+        }
+        return $str;
+    }    
+}

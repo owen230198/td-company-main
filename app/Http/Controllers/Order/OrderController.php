@@ -13,64 +13,61 @@ class OrderController extends Controller
     {
         parent::__construct();
         $this->services = new \App\Services\OrderService;
+        $this->quotes = new \App\Services\QuoteService;
     }
 
     public function insert(Request $request)
     {
+        $quote_id = $request->input('quote');
+        $arr_quote = Quote::find($quote_id);
         if (!$request->isMethod('POST')) {
-            $qtote_id = $request->input('quote');
-            $arr_quote = Quote::find($qtote_id);
             if (empty($arr_quote) || @$arr_quote['status'] == StatusConstant::NOT_ACCEPTED) {
                 return back()->with('error', 'Dữ liệu báo giá không hợp lệ!');
             }
             $data['data_quote'] = $arr_quote;
-            $data['products'] = Product::where(['act' => 1, 'quote_id' => $qtote_id])->get();
+            $data['products'] = Product::where(['act' => 1, 'quote_id' => $quote_id])->get();
             $data['product_qty'] = count($data['products']);
             $data['title'] = 'Thêm đơn hàng - Mã báo giá : '.$arr_quote['seri'];
             $data['link_action'] = url('insert/orders');
             return view('orders.view', $data);
         }else{
-                
+            if (empty($arr_quote)) {
+                return returnMessageAjax(100, 'Báo giá không tồn tại!');
+            }
+            if ($arr_quote == StatusConstant::NOT_ACCEPTED) {
+                return returnMessageAjax(100, 'Báo giá chưa được khách hàng duyệt !');
+            }
+            $data = $request->except('_token');
+            $arr_order = !empty($data['order']) ? $data['order'] : [];
+            if (@$arr_order['status'] == StatusConstant::ACCEPTED) {
+                return returnMessageAjax(100, 'Dữ liệu không hợp lệ');
+            }
+            $process = $this->services->processDataOrder($arr_order);
+            if ($process['valid']) {
+                $this->quotes->processDataProduct($data, $arr_quote);
+                return returnMessageAjax(200, $process['message'], @session()->get('back_url')); 
+            }
+            return returnMessageAjax(100, $process['message']); 
         }   
     }
 
-    public function setListProductView()
-    {
-        if (!$this->admins->checkPermissionAction('orders', 'insert')) {
-            return '403 : Lỗi quyền truy cập !';
-        }
-        $data = getProductCategoryOption();
-        $data['proQuantity'] = (int)@request('qty');
-        $data['proName'] = !empty(request('name'))?request('name'):'Sản phẩm';
-        $data['action'] = \App\Constants\VariableConstant::ACTION_INSERT;
-        return view('orders.list_products', $data);
-    }
-
     public function update(Request $request, $id){
+        $arr_order = Order::find($id);
+        $arr_quote = Quote::find($arr_order['quote']);
         if (!$request->isMethod('POST')) {
-            $data = $this->getOrderActionViewData('update', 'Chi tiết');
-            $data['dataItemOrder'] = Order::find($id);
-            if (@$data['dataItemOrder']['id']) {
-                $data['dataViewProductList'] = $this->admins->getBaseTable('products');
-                $data['listDataProduct'] = Product::where('order_id', $id)->get()->toArray();
+            if (empty($arr_order)) {
+                return back()->with('error', 'Dữ liệu Đơn hàng không hợp lệ!');
             }
+            $data['customer_info'] = false;
+            $data['data_order'] = $arr_order;
+            $data['data_quote'] = $arr_quote;
+            $data['products'] = Product::where(['act' => 1, 'quote_id' => $arr_quote['id']])->get();
+            $data['product_qty'] = count($data['products']);
+            $data['title'] = 'Cập nhật & Xác nhận đơn - '.$arr_order['code'];
+            $data['link_action'] = url('update/orders/'.$id);
             return view('orders.view', $data);
         }else{
-            if (!$this->admins->checkPermissionAction('orders', 'update')) {
-                echoJson(110, 'Bạn không có quyền thực hiện thao tác này!');
-                return;
-            }
-            $data = $request->except('_token');
-            $data = @$data['order']??[];
-            $status = $this->order_service->updateOrder($data, $id);
-            if ($status) {
-                $back_url = @session()->get('back_url')??'view/orders';
-                echoJsonRedirect($back_url, 200, 'Cập nhật đơn hàng thành công !');
-                return;
-            }else{
-                echoJson(110, 'Có lỗi xảy ra khi cập nhật đơn hàng !');
-                return;
-            }
+            
         }
     }
 
@@ -79,9 +76,9 @@ class OrderController extends Controller
         if (!@$permission['allow']) {
             return redirect('permission-error');
         }
-        $status = $request->input('status') == 0 ? OrderConstant::ORDER_NOT_ACCEPTED : OrderConstant::ORDER_ACCEPTED;
+        $status = $request->input('status') == 0 ? StatusConstant::NOT_ACCEPTED : StatusConstant::ACCEPTED;
         $data = $this->admins->getDataBaseView($table, 'Danh sách');
-        $data['data_tables'] = $this->db::table($table)->where(['status'=>$status])->paginate(50);
+        $data['data_tables'] = \DB::table($table)->where(['status'=>$status])->paginate(50);
         return view('table.'.$data['view_type'], $data);           
     }
 

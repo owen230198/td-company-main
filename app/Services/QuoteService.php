@@ -9,8 +9,6 @@ use App\Services\QTraits\QPaperTrait;
 use App\Services\QTraits\QSupplyTrait;
 use App\Constants\StatusConstant;
 use App\Constants\TDConstant;
-use PhpOffice\PhpWord\PhpWord;
-use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\TemplateProcessor;
 
 class QuoteService extends BaseService
@@ -122,10 +120,7 @@ class QuoteService extends BaseService
                 }
             }
         }
-        if (!empty($process)) {
-            RefreshQuotePrice($arr_quote);
-        }
-        return returnMessageAjax(200, 'Cập nhật dữ liệu thành công !', url('/profit-config-quote?quote_id='.$arr_quote['id']));
+        return !empty($process);
     }
 
     public function getCustomerSelectDataView($id)
