@@ -138,7 +138,7 @@ class QuoteController extends Controller
     {
         $quantity = (int) $request->input('quantity');
         if (empty($quantity) || $quantity > 10) {
-            return ['code' => 100, 'message' => 'Số lượng sản phẩm không hợp lệ!'];
+            return returnMessageAjax(100, 'Số lượng sản phẩm không hợp lệ!');
         }
         $data['products'] = [];
         for ($i=0; $i < $quantity ; $i++) {
@@ -191,10 +191,10 @@ class QuoteController extends Controller
                 $data['elements'][$key]['data'] = [(object) $arr];
             }
             if (empty($arr['name'])) {
-                return ['code' => 100, 'message' => 'Bạn chưa nhập tên sản phẩm!'];
+                return returnMessageAjax(100, 'Bạn chưa nhập tên sản phẩm!');
             }
             if (empty($arr['product_qty'])) {
-                return ['code' => 100, 'message' => 'Bạn chưa nhập số lượng sản phẩm!'];
+                return returnMessageAjax(100, 'Bạn chưa nhập số lượng sản phẩm!');
             }
             return view('quotes.products.structure', $data);
         }

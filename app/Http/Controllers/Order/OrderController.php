@@ -31,23 +31,7 @@ class OrderController extends Controller
             $data['link_action'] = url('insert/orders');
             return view('orders.view', $data);
         }else{
-            if (empty($arr_quote)) {
-                return returnMessageAjax(100, 'Báo giá không tồn tại!');
-            }
-            if ($arr_quote == StatusConstant::NOT_ACCEPTED) {
-                return returnMessageAjax(100, 'Báo giá chưa được khách hàng duyệt !');
-            }
-            $data = $request->except('_token');
-            $arr_order = !empty($data['order']) ? $data['order'] : [];
-            if (@$arr_order['status'] == StatusConstant::ACCEPTED) {
-                return returnMessageAjax(100, 'Dữ liệu không hợp lệ');
-            }
-            $process = $this->services->processDataOrder($arr_order);
-            if ($process['valid']) {
-                $this->quotes->processDataProduct($data, $arr_quote);
-                return returnMessageAjax(200, $process['message'], @session()->get('back_url')); 
-            }
-            return returnMessageAjax(100, $process['message']); 
+            return $this->services->processDataOrder($request, $arr_quote); 
         }   
     }
 
@@ -67,7 +51,7 @@ class OrderController extends Controller
             $data['link_action'] = url('update/orders/'.$id);
             return view('orders.view', $data);
         }else{
-            
+            return $this->services->processDataOrder($request, $arr_quote);           
         }
     }
 

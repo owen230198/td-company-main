@@ -116,7 +116,7 @@ class AdminController extends Controller
                 return view('action.view', $data);
             }else{
                 $status = $this->admins->doInsertTable($table, $param);
-                if ($status['valid']) {
+                if ($status['code'] == 200) {
                     $back_routes = @session()->get('back_url') ?? url('view/'.$table);
                     $this->admins->logActionUserData(__FUNCTION__, $table, $status['id']);
                     return returnMessageAjax(200, 'Thêm dữ liệu thành công!', $back_routes);
@@ -143,12 +143,12 @@ class AdminController extends Controller
                 $data['action_url'] = url('update/'.$table.'/'.$id);
                 return view('action.view', $data);
             }else{
-                $success = $this->admins->doUpdateTable($id, $table, $param);
-                if ($success) {
+                $status = $this->admins->doUpdateTable($id, $table, $param);
+                if ($status['code'] == 200) {
                     $back_routes = @session()->get('back_url') ?? url('view/'.$table);
-                    return redirect($back_routes)->with('message','Cập nhật dữ liệu thành công !');
+                    return returnMessageAjax(200, 'Cập nhật dữ liệu thành công!', $back_routes);
                 }else {
-                    return back()->with('error','Đã có lỗi xảy ra !');
+                    return returnMessageAjax(100, $status['message']);
                 }
             }
         }

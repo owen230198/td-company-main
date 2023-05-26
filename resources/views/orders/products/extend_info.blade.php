@@ -61,6 +61,10 @@
     ];
     if (in_array(\GroupUser::getCurrent(), [\GroupUser::SALE])) {
         unset($ext_pro_fields['tech_shape_file'], $ext_pro_fields['design_file'], $ext_pro_fields['design_shape_file']);    
+    }elseif (in_array(\GroupUser::getCurrent(), [\GroupUser::TECH_APPLY])) {
+        unset($ext_pro_fields['design_file'], $ext_pro_fields['design_shape_file']);    
+    }elseif (in_array(\GroupUser::getCurrent(), [\GroupUser::DESIGN])) {
+        unset($ext_pro_fields['design_file'], $ext_pro_fields['sale_shape_file']);    
     }
 @endphp
 

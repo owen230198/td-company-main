@@ -12,22 +12,40 @@ class OrderService extends BaseService
     function __construct()
     {
         parent::__construct();
+        $this->quote_services = new \App\Services\QuoteService;
     }
 
-    public function processDataOrder($arr_order)
+    public function processDataOrder($request, $arr_quote)
     {
+        $data = $request->except('_token');
+        $arr_order = !empty($data['order']) ? $data['order'] : [];
+        if (empty($arr_quote)) {
+            return returnMessageAjax(100, 'Báo giá không tồn tại!');
+        }
+        if ($arr_quote == StatusConstant::NOT_ACCEPTED) {
+            return returnMessageAjax(100, 'Báo giá chưa được khách hàng duyệt !');
+        }
+        $arr_order = !empty($data['order']) ? $data['order'] : [];
+        if (@$arr_order['status'] == StatusConstant::ACCEPTED) {
+            return returnMessageAjax(100, 'Dữ liệu không hợp lệ');
+        }
         if ((int) @$arr_order['advance'] > 0 && empty($arr_order['rest_bill'])) {
-            return ['valid' => false, 'message' => 'Bạn cần upload bill tạm ứng cho đơn này !'];
+            return ['code' => 100, 'message' => 'Bạn cần upload bill tạm ứng cho đơn này !'];
         }
-        $arr_order['code'] = 'DH-'.getCodeInsertTable('orders');
-        $arr_order['status'] = StatusConstant::NOT_ACCEPTED;
-        $this->configBaseDataAction($arr_order);
-        if (!empty($arr_order['id'])) {
-            Order::where('id', $arr_order['id'])->update($arr_order);
+        $product_process = $this->quote_services->processDataProduct($data, $arr_quote, \GroupUser::GetCurrent);
+        if ($product_process['code'] == 200) {
+            $arr_order['code'] = 'DH-'.getCodeInsertTable('orders');
+            $arr_order['status'] = StatusConstant::NOT_ACCEPTED;
+            $this->configBaseDataAction($arr_order);
+            if (!empty($arr_order['id'])) {
+                Order::where('id', $arr_order['id'])->update($arr_order);
+            }else{
+                Order::insertGetId($arr_order);
+            }
+            return returnMessageAjax(200, 'Cập nhật dữ liệu thành công!', @session()->get('back_url'));
         }else{
-            Order::insertGetId($arr_order);
+            return returnMessageAjax(100, $product_process['message']);    
         }
-        return ['valid' => true, 'message' => 'Cập nhật dữ liệu thành công!'];
     }
     
     public function insertOrderDetail($data, $orderId)

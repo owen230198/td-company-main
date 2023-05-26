@@ -7,6 +7,7 @@
     <form action="<?php echo e(@$link_action); ?>" method="POST" class="baseAjaxForm config_content" enctype="multipart/form-data" 
     onkeydown="return event.key != 'Enter'">
         <?php echo csrf_field(); ?>
+        <input type="hidden" name="quote" value="<?php echo e($data_quote['id']); ?>">
         <?php if(!empty($customer_info)): ?>
             <?php echo $__env->make('quotes.head_information', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <?php endif; ?>

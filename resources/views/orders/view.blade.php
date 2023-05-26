@@ -7,6 +7,7 @@
     <form action="{{ @$link_action }}" method="POST" class="baseAjaxForm config_content" enctype="multipart/form-data" 
     onkeydown="return event.key != 'Enter'">
         @csrf
+        <input type="hidden" name="quote" value="{{ $data_quote['id'] }}">
         @if (!empty($customer_info))
             @include('quotes.head_information')
         @endif

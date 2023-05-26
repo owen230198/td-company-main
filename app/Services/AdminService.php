@@ -163,18 +163,26 @@ class AdminService extends BaseService
     public function doInsertTable($table, $data)
     {
         $process = $this->processDataBefore($data, $table);
-        if (!@$process['valid']) {
+        if (@$process['code'] == 100) {
             return $process;
         }
         $id = \DB::table($table)->insertGetId($process['data']);
-        return ['valid' =>  true, 'id' => $id];
+        return ['code' =>  200, 'id' => $id];
     }
 
     public function doUpdateTable($id, $table, $data)
     {
+        $process = $this->processDataBefore($data, $table);
+        if (@$process['code'] == 100) {
+            return $process;
+        }
         $this->processDataBefore($data, $table);
-        $update =  \DB::table($table)->where('id', $id)->update($data);
-        return $update;
+        $update = \DB::table($table)->where('id', $id)->update($data);
+        if ($update) {
+            return returnMessageAjax(200, 'Cập nhật dữ liệu thành công!');
+        }else{
+            return returnMessageAjax(100, 'Không có thay đổi dữ liệu !');
+        }
     }
 
     public function removeDataTable($table, $id)

@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : owen
+ Source Server         : localhost
  Source Server Type    : MySQL
- Source Server Version : 100425
+ Source Server Version : 100427
  Source Host           : localhost:3306
  Source Schema         : td_company
 
  Target Server Type    : MySQL
- Target Server Version : 100425
+ Target Server Version : 100427
  File Encoding         : 65001
 
- Date: 26/05/2023 17:32:34
+ Date: 27/05/2023 06:41:01
 */
 
 SET NAMES utf8mb4;
@@ -13579,13 +13579,14 @@ CREATE TABLE `n_users`  (
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `created_by` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of n_users
 -- ----------------------------
 INSERT INTO `n_users` VALUES (1, 'dev', 'e10adc3949ba59abbe56e057f20f883e', 'Nguyen Duy Khanh', 'nguyenduykhanh2323@gmail.com', '0378050251', 1, 0, 1, 'Lập trình viên', 1, '2023-05-23 14:37:42', '2023-05-23 14:37:42', 1);
 INSERT INTO `n_users` VALUES (4, 'sale', 'e10adc3949ba59abbe56e057f20f883e', 'Kinh doanh', 'sale@gmail.com', '0123456789', 2, 0, NULL, 'test nhan vien kinh doanh', 1, '1970-01-01 08:00:00', '2023-05-23 15:48:00', 1);
+INSERT INTO `n_users` VALUES (5, 'design', 'e10adc3949ba59abbe56e057f20f883e', 'Design test', 'design@gmail.com', '0987654321', 4, 0, NULL, 'test design', 1, '0000-00-00 00:00:00', '2023-05-27 06:16:29', 1);
 
 -- ----------------------------
 -- Table structure for ord_products
@@ -13643,7 +13644,7 @@ CREATE TABLE `orders`  (
   `created_by` int(10) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx`(`created_by`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of orders
@@ -13875,6 +13876,12 @@ CREATE TABLE `products`  (
   `size` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `quote_id` int(10) NULL DEFAULT NULL,
   `total_cost` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `custom_design_file` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `sale_shape_file` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `tech_shape_file` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `design_file` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `design_shape_file` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `note` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   `act` tinyint(4) NULL DEFAULT NULL,
   `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL,
@@ -13885,14 +13892,14 @@ CREATE TABLE `products`  (
 -- ----------------------------
 -- Records of products
 -- ----------------------------
-INSERT INTO `products` VALUES (1, 'Hop giay 1', 2, '10000', 2, '10x10x10', 1, '7264840715', 1, '2023-05-26 02:49:00', '2023-05-26 02:49:00', 1);
-INSERT INTO `products` VALUES (2, 'Hop banh', 2, '2000', 4, '10x10x10', 1, '1136630', 1, '2023-05-26 02:49:00', '2023-05-26 02:49:00', 1);
-INSERT INTO `products` VALUES (3, 'Hop cung 1', 1, '8000', 1, '10x20x30', 1, '196038057430', 1, '2023-05-26 02:49:00', '2023-05-26 02:49:00', 1);
-INSERT INTO `products` VALUES (4, 'Hop cung 2', 1, '4000', 2, '20x15x11', 1, '83019600', 1, '2023-05-26 02:49:00', '2023-05-26 02:49:00', 1);
-INSERT INTO `products` VALUES (5, 'Hop cung 3', 1, '5000', 1, '15x20x25', 1, '1156000', 1, '2023-05-26 02:49:00', '2023-05-26 02:49:00', 1);
-INSERT INTO `products` VALUES (6, 'tuan dung', 2, '10000', 1, '100 x 200  x 50', 8, '69350940', 1, '2023-05-19 14:38:00', '2023-05-19 14:38:00', 1);
-INSERT INTO `products` VALUES (7, 'Hộp giấy Tuấn Dung thử ( Test lần 1 )', 2, '10000', 1, '10 x 20 x 30', 9, '62777493.5', 1, '2023-04-30 09:05:00', '2023-04-30 09:05:00', 1);
-INSERT INTO `products` VALUES (8, 'Tetst Hộp giấy 10000', 2, '10000', 1, '10 x 10 x 10', 11, '47696636.5', 1, '2023-04-30 09:12:00', '2023-04-30 09:12:00', 1);
+INSERT INTO `products` VALUES (1, 'Hop giay 1', 2, '10000', 2, '10x10x10', 1, '7264840715', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-05-26 02:49:00', '2023-05-26 02:49:00', 1);
+INSERT INTO `products` VALUES (2, 'Hop banh', 2, '2000', 4, '10x10x10', 1, '1136630', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-05-26 02:49:00', '2023-05-26 02:49:00', 1);
+INSERT INTO `products` VALUES (3, 'Hop cung 1', 1, '8000', 1, '10x20x30', 1, '196038057430', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-05-26 02:49:00', '2023-05-26 02:49:00', 1);
+INSERT INTO `products` VALUES (4, 'Hop cung 2', 1, '4000', 2, '20x15x11', 1, '83019600', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-05-26 02:49:00', '2023-05-26 02:49:00', 1);
+INSERT INTO `products` VALUES (5, 'Hop cung 3', 1, '5000', 1, '15x20x25', 1, '1156000', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-05-26 02:49:00', '2023-05-26 02:49:00', 1);
+INSERT INTO `products` VALUES (6, 'tuan dung', 2, '10000', 1, '100 x 200  x 50', 8, '69350940', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-05-19 14:38:00', '2023-05-19 14:38:00', 1);
+INSERT INTO `products` VALUES (7, 'Hộp giấy Tuấn Dung thử ( Test lần 1 )', 2, '10000', 1, '10 x 20 x 30', 9, '62777493.5', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-04-30 09:05:00', '2023-04-30 09:05:00', 1);
+INSERT INTO `products` VALUES (8, 'Tetst Hộp giấy 10000', 2, '10000', 1, '10 x 10 x 10', 11, '47696636.5', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-04-30 09:12:00', '2023-04-30 09:12:00', 1);
 
 -- ----------------------------
 -- Table structure for quote_configs

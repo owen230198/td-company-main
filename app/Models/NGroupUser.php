@@ -15,8 +15,8 @@ class NGroupUser extends Model
     protected $protectFields = false;
     const ADMIN = 1;
     const SALE = 2;
-    const DESIGN_MANAGER = 3;
-    const SALE_STAFF = 4;
+    const TECH_APPLY = 3;
+    const DESIGN = 4;
     const DESIGN_STAFF = 5;
     const GROUP_MODULE = [
         'quote_price_config' => 'Cài đặt đơn giá SX',
@@ -101,6 +101,11 @@ class NGroupUser extends Model
             'link' => 'shipping-process', 
             'group' => 'available_order'
         ],
+        'user' => [
+            'name' => 'Danh sách nhân viên', 
+            'link' => 'view/n_users', 
+            'group' => 'account'
+        ],
         'account' => [
             'name' => 'Thông tin tài khoản', 
             'link' => 'account-detail', 
@@ -108,7 +113,7 @@ class NGroupUser extends Model
         ],
         'change_password' => [
             'name' => 'Thông tin tài khoản', 
-            'link' => 'change/password', 
+            'link' => 'change-password', 
             'group' => 'account'
         ]
     ];

@@ -54,30 +54,54 @@ class QuoteService extends BaseService
         $data['optimal_width'] = $temp_height / 1000;
     }
 
-    private function productValidate($data_product){
+    private function productValidate($data_product, $step){
         $valid = true;
         $arr = returnMessageAjax(200, 'Cập nhật dữ liệu thành công !');
         foreach ($data_product as $key => $data) {
             $num = $key + 1;
             if (empty($data['name'])) {
-                $valid = false;
+                $valid = 200;
                 $arr = returnMessageAjax(110, 'Bạn chưa nhập tên cho sản phẩm '. $num);
-                return ['valid' => $valid, 'arr' => $arr];
+                return ['code' => $valid, 'arr' => $arr];
             }else{
                 if (empty($data['category'])) {
-                    $valid = false;
+                    $code = 100;
                     $arr = returnMessageAjax(110, 'Bạn chưa chọn nhóm sản phẩm cho '. $data['name']);
-                    return ['valid' => $valid, 'arr' => $arr];
+                    return ['code' => $code, 'arr' => $arr];
                 }
         
                 if (empty($data['design'])) {
-                    $valid = false;
+                    $code = 100;
                     $arr = returnMessageAjax(110, 'Bạn chưa chọn mẫu thiết kế cho '. $data['name']);
-                    return ['valid' => $valid, 'arr' => $arr];
+                    return ['code' => $code, 'arr' => $arr];
+                }
+
+                if ($step == \GroupUser::SALE && empty($data['custom_design_file'])) {
+                    $code = 100;
+                    $arr = returnMessageAjax(110, 'Bạn chưa upload file thiết kế của khách hàng cho '. $data['name']);
+                    return ['code' => $code, 'arr' => $arr];
+                }
+
+                if ($step == \GroupUser::SALE && empty($data['sale_shape_file'])) {
+                    $code = 100;
+                    $arr = returnMessageAjax(110, 'Bạn chưa upload file khuôn tính giá cho '. $data['name']);
+                    return ['code' => $code, 'arr' => $arr];
+                }
+
+                if ($step == \GroupUser::TECH_APPLY && empty($data['tech_shape_file'])) {
+                    $code = 100;
+                    $arr = returnMessageAjax(110, 'Bạn chưa upload file khuôn tính giá cho '. $data['name']);
+                    return ['code' => $code, 'arr' => $arr];
+                }
+
+                if (($step == \GRoupUser::DESIGN && empty($data['design_file'])) || ($step == \GRoupUser::DESIGN && empty($data['design_shape_file']))) {
+                    $code = 100;
+                    $arr = returnMessageAjax(110, 'Bạn chưa upload file thiết kế hoặc file thiết kế đã bình cho '. $data['name']);
+                    return ['code' => $code, 'arr' => $arr];
                 }
             }
         }
-        return ['valid' => $valid, 'arr' => $arr];
+        return ['code' => $code, 'arr' => $arr];
     }
 
     public function getDataActionProduct($data){
@@ -102,11 +126,11 @@ class QuoteService extends BaseService
         }
     }
 
-    public function processDataProduct($data, $arr_quote)
+    public function processDataProduct($data, $arr_quote, $step = \GroupUser::SALE)
     {
         $data_product = $data['product'];
-        $product_valid = $this->productValidate($data_product);
-        if (@$product_valid['valid'] == false) {
+        $product_valid = $this->productValidate($data_product, $step);
+        if (@$product_valid['code'] == 100) {
            return $product_valid['arr'];
         }
         foreach ($data_product as $product) {

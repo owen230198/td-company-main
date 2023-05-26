@@ -19,18 +19,18 @@ class BaseService
 
 	public function validateDataTable($field, $attr, $value)
 	{
-		$ret['valid'] = true;
+		$ret['code'] = 200;
 		$note = mb_strtolower(@$field['note']);
 		if (!empty($attr['required']) && empty($value)) {
-			$ret['valid'] = false;
+			$ret['code'] = 100;
 			$ret['message'] = 'Dữ liệu '.$note.' không được để trống !';
 			return $ret;
 		}
 
 		if (!empty($attr['unique'])) {
 			$count = getCountDataTable($field['table_map'], [$field['name'] => $value]);
-			if ($count > 0) {
-				$ret['valid'] = false;
+			if ($count > 1) {
+				$ret['code'] = 100;
 				$ret['message'] = $note. ' "'.$value.'" '.' đã tồn tại !';
 				return $ret;
 			}
@@ -44,7 +44,7 @@ class BaseService
             $field = \App\Models\NDetailTable::select(['type', 'attr', 'note', 'name', 'table_map'])->where(['table_map'=>$table, 'name'=>$key])->first();
 			$attr = !empty($field['attr']) ? json_decode($field['attr'], true) : [];
 			$validation = $this->validateDataTable($field, $attr, $item);
-			if (!$validation['valid']) {
+			if ($validation['code'] == 100) {
 				return $validation;
 				break;
 			}
@@ -55,6 +55,6 @@ class BaseService
             }  
         }
 		$this->configBaseDataAction($data);
-		return ['valid' => true, 'data' => $data];
+		return ['code' => 200, 'data' => $data];
 	}
 }
