@@ -14,7 +14,7 @@ class NGroupUser extends Model
     protected $table = 'n_group_users';
     protected $protectFields = false;
     const ADMIN = 1;
-    const SALE_MANAGER = 2;
+    const SALE = 2;
     const DESIGN_MANAGER = 3;
     const SALE_STAFF = 4;
     const DESIGN_STAFF = 5;
@@ -53,16 +53,6 @@ class NGroupUser extends Model
             'name' => 'DS báo giá (chưa duyệt)', 
             'link' => 'view/quotes?default_data={"status":"not_accepted"}', 
             'group' => 'customer_quote'
-        ],
-        'create_new_order' => [
-            'name' => 'Tạo mới đơn hàng', 
-            'link' => 'create-handle-order', 
-            'group' => 'order_handle'
-        ],
-        'order' => [
-            'name' => 'Tạo đơn hàng cũ', 'link' => 
-            'view/orders', 'group' => 
-            'order_handle'
         ],
         'handle_process' => [
             'name' => 'Theo dõi sản xuất', 
@@ -124,10 +114,9 @@ class NGroupUser extends Model
     ];
 
     static $role_module = [
-        self::SALE_MANAGER => [
+        self::SALE => [
             self::MODULE['create_quote'],
             self::MODULE['quote_not_accepted'],
-            self::MODULE['create_new_order'],
             self::MODULE['handle_process'],
             self::MODULE['profit'],
             self::MODULE['rpt_quote_not_accepted'],
@@ -166,10 +155,15 @@ class NGroupUser extends Model
         
     }
 
+    static function getCurrent()
+    {
+        $user = \App\Models\NUser::getCurrent();
+        return @$user['group_user'];
+    }
+
     static function isAdmin()
     {
-        $user_login = session('user_login');
-        $admin = @$user_login['user']?$user_login['user']:array();
-        return @$admin['group_user'] == self::ADMIN;
+        $user = self::getCurrent();
+        return @$user['group_user'] == self::ADMIN;
     }
 }

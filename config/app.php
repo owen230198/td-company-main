@@ -211,7 +211,9 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'TDConst' =>   App\Constants\TDConstant::class,
-        'StatusConst' => App\Constants\StatusConstant::class
+        'StatusConst' => App\Constants\StatusConstant::class,
+        'StatusConst' => App\Constants\StatusConstant::class,
+        'GroupUser' => App\Models\NGroupUser::class
     ])->toArray(),
 
 ];

@@ -8,7 +8,7 @@
         <p class="fs-13 font_bold __file_name"><?php echo e(subStringLimit(@$file['name'], 20)); ?></p>
     </div>
     <?php if(!empty($file)): ?>
-        <button type="button" class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-2" data-path="<?php echo e(@$file['path']); ?>">
+        <button type="button" class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-2 __file_download" data-path="<?php echo e(@$file['path']); ?>">
             <i class="fa fa-download mr-2 fs-14" aria-hidden="true"></i>Download
         </button>   
     <?php endif; ?>
@@ -18,7 +18,7 @@
         </button>
         <input type="file" class="upload_input __file_upload_input">
     </div>
-    <button type="button" class="main_button bg_red color_white radius_5 font_bold smooth red_btn">
+    <button type="button" class="main_button bg_red color_white radius_5 font_bold smooth red_btn" data-path="<?php echo e(@$file['path']); ?>">
         <i class="fa fa-times fs-14" aria-hidden="true"></i>
     </button>
 </div><?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/view_update/file.blade.php ENDPATH**/ ?>
