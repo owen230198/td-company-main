@@ -33,18 +33,18 @@ class OrderService extends BaseService
             return ['code' => 100, 'message' => 'Bạn cần upload bill tạm ứng cho đơn này !'];
         }
         $product_process = $this->quote_services->processDataProduct($data, $arr_quote, \GroupUser::GetCurrent());
-        if ($product_process['code'] == 200) {
-            $arr_order['code'] = 'DH-'.getCodeInsertTable('orders');
+        if (@$product_process['code'] == 100) {
+            return returnMessageAjax(100, $product_process['message']);  
+        }else{
             $arr_order['status'] = StatusConstant::NOT_ACCEPTED;
             $this->configBaseDataAction($arr_order);
             if (!empty($arr_order['id'])) {
                 Order::where('id', $arr_order['id'])->update($arr_order);
             }else{
+                $arr_order['code'] = 'DH-'.getCodeInsertTable('orders');
                 Order::insertGetId($arr_order);
             }
-            return returnMessageAjax(200, 'Cập nhật dữ liệu thành công!', @session()->get('back_url'));
-        }else{
-            return returnMessageAjax(100, $product_process['message']);    
+            return returnMessageAjax(200, 'Cập nhật dữ liệu thành công!', @session()->get('back_url'));     
         }
     }
     

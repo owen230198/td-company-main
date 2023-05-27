@@ -11,7 +11,7 @@
  Target Server Version : 100427
  File Encoding         : 65001
 
- Date: 27/05/2023 06:41:01
+ Date: 27/05/2023 18:14:40
 */
 
 SET NAMES utf8mb4;
@@ -13644,12 +13644,13 @@ CREATE TABLE `orders`  (
   `created_by` int(10) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx`(`created_by`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of orders
 -- ----------------------------
-INSERT INTO `orders` VALUES (1, 'DH-000001', NULL, 1, '100000000000', '123727051413', '{\"path\":\"http://127.0.0.1:8000/uploads/files/_Liverpool_Steven_Gerrard_048843_.jpg\",\"name\":\"_Liverpool_Steven_Gerrard_048843_.jpg\"}', 'not_accepted', 'note', 'note', 1, '2023-05-26 02:49:00', '2023-05-26 02:49:00', 1);
+INSERT INTO `orders` VALUES (1, 'DH-000001', NULL, 1, '100000000000', '123727051413', '{\"path\":\"http://127.0.0.1:8000/uploads/files/_Liverpool_Steven_Gerrard_048843_.jpg\",\"name\":\"_Liverpool_Steven_Gerrard_048843_.jpg\"}', 'not_accepted', 'note', 'note', 1, '2023-05-26 02:49:00', '2023-05-27 16:04:00', 1);
+INSERT INTO `orders` VALUES (3, 'DH-000003', NULL, 11, '1', '47696636', '{\"path\":\"http://127.0.0.1:8000/uploads/files/Screenshot (15).png\",\"name\":\"Screenshot (15).png\"}', 'not_accepted', 'rest note', 'ship note', 1, '2023-05-27 17:45:00', '2023-05-27 18:06:00', 4);
 
 -- ----------------------------
 -- Table structure for p_substances
@@ -13892,14 +13893,14 @@ CREATE TABLE `products`  (
 -- ----------------------------
 -- Records of products
 -- ----------------------------
-INSERT INTO `products` VALUES (1, 'Hop giay 1', 2, '10000', 2, '10x10x10', 1, '7264840715', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-05-26 02:49:00', '2023-05-26 02:49:00', 1);
-INSERT INTO `products` VALUES (2, 'Hop banh', 2, '2000', 4, '10x10x10', 1, '1136630', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-05-26 02:49:00', '2023-05-26 02:49:00', 1);
-INSERT INTO `products` VALUES (3, 'Hop cung 1', 1, '8000', 1, '10x20x30', 1, '196038057430', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-05-26 02:49:00', '2023-05-26 02:49:00', 1);
-INSERT INTO `products` VALUES (4, 'Hop cung 2', 1, '4000', 2, '20x15x11', 1, '83019600', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-05-26 02:49:00', '2023-05-26 02:49:00', 1);
-INSERT INTO `products` VALUES (5, 'Hop cung 3', 1, '5000', 1, '15x20x25', 1, '1156000', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-05-26 02:49:00', '2023-05-26 02:49:00', 1);
+INSERT INTO `products` VALUES (1, 'Hop banh', 2, '10000', 2, '10x10x10', 1, '7264840715', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-05-27 16:04:00', '2023-05-27 16:04:00', 1);
+INSERT INTO `products` VALUES (2, 'Hop banh', 2, '2000', 4, '10x10x10', 1, '1136630', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-05-27 16:04:00', '2023-05-27 16:04:00', 1);
+INSERT INTO `products` VALUES (3, 'Hop cung 1', 1, '8000', 1, '10x20x30', 1, '196038057430', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-05-27 16:04:00', '2023-05-27 16:04:00', 1);
+INSERT INTO `products` VALUES (4, 'Hop cung 2', 1, '4000', 2, '20x15x11', 1, '83019600', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-05-27 16:04:00', '2023-05-27 16:04:00', 1);
+INSERT INTO `products` VALUES (5, 'Hop cung 3', 1, '5000', 1, '15x20x25', 1, '1156000', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-05-27 16:04:00', '2023-05-27 16:04:00', 1);
 INSERT INTO `products` VALUES (6, 'tuan dung', 2, '10000', 1, '100 x 200  x 50', 8, '69350940', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-05-19 14:38:00', '2023-05-19 14:38:00', 1);
 INSERT INTO `products` VALUES (7, 'Hộp giấy Tuấn Dung thử ( Test lần 1 )', 2, '10000', 1, '10 x 20 x 30', 9, '62777493.5', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-04-30 09:05:00', '2023-04-30 09:05:00', 1);
-INSERT INTO `products` VALUES (8, 'Tetst Hộp giấy 10000', 2, '10000', 1, '10 x 10 x 10', 11, '47696636.5', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-04-30 09:12:00', '2023-04-30 09:12:00', 1);
+INSERT INTO `products` VALUES (8, 'Tetst Hộp giấy 10000', 2, '10000', 1, '10 x 10 x 10', 11, '47696636.5', '{\"path\":\"http://127.0.0.1:8000/uploads/files/Screenshot (16).png\",\"name\":\"Screenshot (16).png\"}', '{\"path\":\"http://127.0.0.1:8000/uploads/files/.env\",\"name\":\".env\"}', NULL, NULL, NULL, '{\"print\":\"2\",\"handle\":\"note\"}', 1, '2023-05-27 18:06:00', '2023-05-27 18:06:00', 4);
 
 -- ----------------------------
 -- Table structure for quote_configs
@@ -13985,7 +13986,7 @@ CREATE TABLE `quotes`  (
 -- ----------------------------
 INSERT INTO `quotes` VALUES (1, 'BG-00001', 'accepted', 'Công ty WS', NULL, 1, 'Công ty WS', 'Nguyễn Duy Khánh', '360 Mieng Ha, Hoa Sơn, Ung Hoa, TP Ha Noi', 'nguyenduykhanh2323@gmail.com', '0378050251', '0223344556', 351, '10', '200000', NULL, '203388210375', '223727051412.5', NULL, 1, '2023-05-19 16:40:49', '2023-05-19 16:40:49', 1);
 INSERT INTO `quotes` VALUES (8, 'BG-000014', 'not_accepted', 'CÔNG TY CP IN & SẢN XUẤT BAO BÌ TUẤN DUNG', NULL, 3, 'CÔNG TY CP IN & SẢN XUẤT BAO BÌ TUẤN DUNG', 'Mr Tuấn', 'Lô D5-16 Làng nghề Triều Khúc - Tân triều - HN', 'kd1.intuandung@gmail.com', '0963303999', '38303888', 351, '10', '0', NULL, '69350940', '76286034', NULL, 1, '2023-05-19 17:14:00', '2023-05-19 17:14:00', 1);
-INSERT INTO `quotes` VALUES (9, 'BG-00009', 'not_accepted', 'CÔNG TY CP IN & SẢN XUẤT BAO BÌ TUẤN DUNG', NULL, 3, 'CÔNG TY CP IN & SẢN XUẤT BAO BÌ TUẤN DUNG', 'Mr Tuấn', 'Lô D5-16 Làng nghề Triều Khúc - Tân triều - HN', 'kd1.intuandung@gmail.com', '0963303999', '38303888', 351, NULL, NULL, NULL, '62777493.5', '62777493.5', NULL, 1, '2023-05-19 14:40:03', '2023-05-19 14:40:03', 1);
+INSERT INTO `quotes` VALUES (9, 'BG-000014', 'not_accepted', 'CÔNG TY CP IN & SẢN XUẤT BAO BÌ TUẤN DUNG', NULL, 3, 'CÔNG TY CP IN & SẢN XUẤT BAO BÌ TUẤN DUNG', 'Mr Tuấn', 'Lô D5-16 Làng nghề Triều Khúc - Tân triều - HN', 'kd1.intuandung@gmail.com', '0963303999', '38303888', 351, NULL, NULL, NULL, '62777493.5', '62777493.5', NULL, 1, '2023-05-27 16:05:00', '2023-05-27 16:05:00', 1);
 INSERT INTO `quotes` VALUES (11, 'BG-000011', 'accepted', 'CÔNG TY CP IN & SẢN XUẤT BAO BÌ TUẤN DUNG', NULL, 3, 'CÔNG TY CP IN & SẢN XUẤT BAO BÌ TUẤN DUNG', 'Mr Tuấn', 'Lô D5-16 Làng nghề Triều Khúc - Tân triều - HN', 'kd1.intuandung@gmail.com', '0963303999', '38303888', 351, NULL, NULL, NULL, '47696636.5', '47696636.5', NULL, 1, '2023-05-19 14:41:31', '2023-05-19 14:41:31', 1);
 
 -- ----------------------------

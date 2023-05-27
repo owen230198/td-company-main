@@ -93,6 +93,14 @@ class QuoteService extends BaseService
         $data_action['design'] = $data['design'];
         $data_action['size'] = $data['size'];
         $data_action['quote_id'] = $data['quote_id'];
+        $data_action['custom_design_file'] = @$data['custom_design_file'];
+        $data_action['sale_shape_file'] = @$data['sale_shape_file'];
+        $data_action['tech_shape_file'] = @$data['tech_shape_file'];
+        $data_action['design_file'] = @$data['design_file'];
+        $data_action['design_shape_file'] = @$data['design_shape_file'];
+        if (!empty($data['note'])) {
+            $data_action['note'] = json_encode($data['note']);
+        }
         $this->configBaseDataAction($data_action);
         return $data_action;
     }

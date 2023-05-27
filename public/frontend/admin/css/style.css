@@ -593,6 +593,10 @@ a.device_supp_item {
     cursor: pointer;
 }
 
+.__file_preview {
+    width: 150px;
+}
+
 @page {
     size: A4;
     margin: 1cm;

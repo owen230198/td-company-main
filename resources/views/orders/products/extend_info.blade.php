@@ -1,5 +1,6 @@
 @php
     $pro_per_price = (int) @$product['total_cost'] / (int) @$product['qty'];
+    $product_note = !empty($product['note']) ? json_decode($product['note'], true) : [];
     $ext_pro_fields = [
         'per_price' => 
         [
@@ -19,44 +20,51 @@
         [
             'name' => $pro_base_name_input.'[custom_design_file]',
             'note' => 'File thiết kế khách gửi',
-            'type' => 'file'
+            'type' => 'file',
+            'value' => @$product['custom_design_file']
         ],
         'sale_shape_file' =>
         [
             'name' => $pro_base_name_input.'[sale_shape_file]',
             'note' => 'Khuôn kinh doanh tính giá',
-            'type' => 'file'
+            'type' => 'file',
+            'value' => @$product['sale_shape_file']
         ],
         'tech_shape_file' =>
         [
             'name' => $pro_base_name_input.'[tech_shape_file]',
             'note' => 'Khuôn sản xuất (Kỹ thuật)',
-            'type' => 'file'
+            'type' => 'file',
+            'value' => @$product['tech_shape_file']
         ],
         'design_file' =>
         [
             'name' => $pro_base_name_input.'[design_file]',
             'note' => 'File gốc (P. Thiết kế)',
-            'type' => 'file'
+            'type' => 'file',
+            'value' => @$product['design_file']
         ],
         'design_shape_file' =>
         [
             'name' => $pro_base_name_input.'[design_shape_file]',
             'note' => 'File bình theo khuôn (P. Thiết kế)',
-            'type' => 'file'
+            'type' => 'file',
+            'value' => @$product['design_shape_file']
         ],
-        'note_prince' => 
+        'note_print' => 
         [
             'name' => $pro_base_name_input.'[note][print]',
             'note' => 'Ghi chú cho khâu in',
             'type' => 'linking',
-            'other_data' => ['data' => ['table' => 'print_notes', 'select' => ['id', 'name']]]
+            'other_data' => ['data' => ['table' => 'print_notes', 'select' => ['id', 'name']]],
+            'value' => @$product_note['print']
         ],
         'note_handle' =>
         [
             'name' => $pro_base_name_input.'[note][handle]',
             'note' => 'Ghi chú cho khâu gia công',
-            'type' => 'textarea'
+            'type' => 'textarea',
+            'value' => @$product_note['handle']
         ]
     ];
     if (in_array(\GroupUser::getCurrent(), [\GroupUser::SALE])) {
