@@ -55,53 +55,35 @@ class QuoteService extends BaseService
     }
 
     private function productValidate($data_product, $step){
-        $valid = true;
-        $arr = returnMessageAjax(200, 'Cập nhật dữ liệu thành công !');
         foreach ($data_product as $key => $data) {
             $num = $key + 1;
             if (empty($data['name'])) {
-                $valid = 200;
-                $arr = returnMessageAjax(110, 'Bạn chưa nhập tên cho sản phẩm '. $num);
-                return ['code' => $valid, 'arr' => $arr];
+                return returnMessageAjax(100, 'Bạn chưa nhập tên cho sản phẩm '. $num);
             }else{
                 if (empty($data['category'])) {
-                    $code = 100;
-                    $arr = returnMessageAjax(110, 'Bạn chưa chọn nhóm sản phẩm cho '. $data['name']);
-                    return ['code' => $code, 'arr' => $arr];
+                    return returnMessageAjax(100, 'Bạn chưa chọn nhóm sản phẩm cho '. $data['name']);
                 }
         
                 if (empty($data['design'])) {
-                    $code = 100;
-                    $arr = returnMessageAjax(110, 'Bạn chưa chọn mẫu thiết kế cho '. $data['name']);
-                    return ['code' => $code, 'arr' => $arr];
+                    return returnMessageAjax(100, 'Bạn chưa chọn mẫu thiết kế cho '. $data['name']);
                 }
-
                 if ($step == \GroupUser::SALE && empty($data['custom_design_file'])) {
-                    $code = 100;
-                    $arr = returnMessageAjax(110, 'Bạn chưa upload file thiết kế của khách hàng cho '. $data['name']);
-                    return ['code' => $code, 'arr' => $arr];
+                    return returnMessageAjax(100, 'Bạn chưa upload file thiết kế của khách hàng cho '. $data['name']);
                 }
-
                 if ($step == \GroupUser::SALE && empty($data['sale_shape_file'])) {
-                    $code = 100;
-                    $arr = returnMessageAjax(110, 'Bạn chưa upload file khuôn tính giá cho '. $data['name']);
-                    return ['code' => $code, 'arr' => $arr];
+                    return returnMessageAjax(100, 'Bạn chưa upload file khuôn tính giá cho '. $data['name']);
                 }
 
                 if ($step == \GroupUser::TECH_APPLY && empty($data['tech_shape_file'])) {
-                    $code = 100;
-                    $arr = returnMessageAjax(110, 'Bạn chưa upload file khuôn tính giá cho '. $data['name']);
-                    return ['code' => $code, 'arr' => $arr];
+                    return returnMessageAjax(100, 'Bạn chưa upload file khuôn tính giá cho '. $data['name']);
                 }
 
                 if (($step == \GRoupUser::DESIGN && empty($data['design_file'])) || ($step == \GRoupUser::DESIGN && empty($data['design_shape_file']))) {
-                    $code = 100;
-                    $arr = returnMessageAjax(110, 'Bạn chưa upload file thiết kế hoặc file thiết kế đã bình cho '. $data['name']);
-                    return ['code' => $code, 'arr' => $arr];
+                    return returnMessageAjax(100, 'Bạn chưa upload file thiết kế hoặc file thiết kế đã bình cho '. $data['name']);
                 }
             }
         }
-        return ['code' => $code, 'arr' => $arr];
+        return returnMessageAjax(200, 'Cập nhật thành công dữ liệu !');
     }
 
     public function getDataActionProduct($data){
@@ -126,12 +108,12 @@ class QuoteService extends BaseService
         }
     }
 
-    public function processDataProduct($data, $arr_quote, $step = \GroupUser::SALE)
+    public function processDataProduct($data, $arr_quote, $step = \GroupUser::ADMIN)
     {
         $data_product = $data['product'];
         $product_valid = $this->productValidate($data_product, $step);
         if (@$product_valid['code'] == 100) {
-           return $product_valid['arr'];
+           return $product_valid;
         }
         foreach ($data_product as $product) {
             $product['quote_id'] = $arr_quote['id'];
@@ -176,7 +158,7 @@ class QuoteService extends BaseService
     {
         $data = $request->except('_token', 'step');
         if (empty($data['product'])) {
-            return returnMessageAjax(110, 'Không tìm thấy sản phẩm !');
+            return returnMessageAjax(100, 'Không tìm thấy sản phẩm !');
         }else{
             $status = $this->processDataProduct($data, $arr_quote);
             return $status;

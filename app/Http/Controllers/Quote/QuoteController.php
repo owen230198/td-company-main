@@ -36,6 +36,9 @@ class QuoteController extends Controller
                     return $this->services->selectCustomerUpdateQuote($request, $id);
                 }else{
                     $process = $this->services->processDataQuote($request, $quote);
+                    if (@$process['code'] == 100) {
+                        return $process;
+                    }
                     if ($process) {
                         RefreshQuotePrice($quote);
                     }
@@ -118,6 +121,9 @@ class QuoteController extends Controller
                 }
             }else{
                 $process = $this->services->processDataQuote($request, $arr_quote);
+                if (@$process['code'] == 100) {
+                    return $process;
+                }
                 if ($process) {
                     RefreshQuotePrice($arr_quote);
                 }

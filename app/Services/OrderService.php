@@ -32,7 +32,7 @@ class OrderService extends BaseService
         if ((int) @$arr_order['advance'] > 0 && empty($arr_order['rest_bill'])) {
             return ['code' => 100, 'message' => 'Bạn cần upload bill tạm ứng cho đơn này !'];
         }
-        $product_process = $this->quote_services->processDataProduct($data, $arr_quote, \GroupUser::GetCurrent);
+        $product_process = $this->quote_services->processDataProduct($data, $arr_quote, \GroupUser::GetCurrent());
         if ($product_process['code'] == 200) {
             $arr_order['code'] = 'DH-'.getCodeInsertTable('orders');
             $arr_order['status'] = StatusConstant::NOT_ACCEPTED;
