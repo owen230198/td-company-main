@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="<?php echo e(asset('frontend/admin/css/order.css')); ?>">
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
-    <form action="<?php echo e(@$link_action); ?>" method="POST" class="baseAjaxForm config_content" enctype="multipart/form-data" 
+    <form action="<?php echo e(@$link_action); ?>" method="POST" class="baseAjaxForm config_content __form_order" enctype="multipart/form-data" 
     onkeydown="return event.key != 'Enter'">
         <?php echo csrf_field(); ?>
         <input type="hidden" name="quote" value="<?php echo e($data_quote['id']); ?>">
@@ -71,7 +71,8 @@
               <i class="fa fa-check mr-2 fs-14" aria-hidden="true"></i>Hoàn tất
             </button>
             <?php if(!empty($data_order['status']) && $data_order['status'] == StatusConst::NOT_ACCEPTED): ?>
-                <button type="button" class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-2">
+                <button type="button" class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-2 __apply_order" 
+                data-step="<?php echo e(\TDConst::APPLY_HANDLE); ?>">
                     <i class="fa fa-thumbs-o-up mr-2 fs-14" aria-hidden="true"></i>Xác nhận sản xuất
                 </button>    
             <?php endif; ?>

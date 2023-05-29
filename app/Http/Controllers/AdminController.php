@@ -130,7 +130,7 @@ class AdminController extends Controller
     public function update(Request $request, $table, $id)
     {
         if (!$this->admins->checkPermissionAction($table, 'update', $id)) {
-            return redirect('permission-error');
+            return customReturnMessage(false, $request->isMethod('POST'), ['url' => url('permission-error')]);
         }
         if (in_array($table, NTable::$specific['update'])) {
             $controller = getObjectByTable($table);
@@ -177,7 +177,11 @@ class AdminController extends Controller
        $id = $data['remove_id'];
        $table = $data['table'];
         if (!$this->admins->checkPermissionAction($table, 'remove', $id)) {
-            return back()->with('error','Không có quyền thực hiện thao tác này !');
+            if (@$request->input('ajax') == 1) {
+                return returnMessageAjax(500, 'Bạn không có quyền thực hiện thao tác này !');
+            }else{
+                return back()->with('error','Bạn không có quyền thực hiện thao tác này !');   
+            }
         }
        $success = $this->admins->removeDataTable($table, $id);
        if ($success) {
@@ -188,7 +192,7 @@ class AdminController extends Controller
             }
         }else {
             if (@$request->input('ajax') == 1) {
-                return \returnMessageAjax(500, 'Đã có lỗi xảy ra !');
+                return returnMessageAjax(500, 'Đã có lỗi xảy ra !');
             }else{
                 return back()->with('error','Đã có lỗi xảy ra !');   
             }
@@ -221,7 +225,7 @@ class AdminController extends Controller
     public function doConfigData($table, Request $request)
     {
         if (!$this->admins->checkPermissionAction($table, 'update')) {
-            return back()->with('error','Không có quyền thực hiện thao tác này !');
+            return returnMessageAjax(100, 'Bạn không có quyền thực hiện thao tác này !');
         }
         $post = $request->except('_token');
         $success = false;
@@ -324,7 +328,7 @@ class AdminController extends Controller
         if (!empty($file)) {
             $name = $file->getClientOriginalName();
             $location = 'uploads/files';
-            if (file_exists(public_path().'/'.$location.'/'.$name)) {
+            if (file_exists(public_path().'/'.$location.'/'.$name) || file_exists(base_path().'/'.$location.'/'.$name)) {
                 $data['message'] = 'Tên file đã tồn tại, vui lòng đổi tên trước !';
             }else{
                 $status = $file->move($location ,$name);

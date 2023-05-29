@@ -168,7 +168,6 @@ class NGroupUser extends Model
 
     static function isAdmin()
     {
-        $user = self::getCurrent();
-        return @$user['group_user'] == self::ADMIN;
+        return self::getCurrent() == self::ADMIN;
     }
 }

@@ -11,6 +11,20 @@ var setAdvanceCostOrder = function()
     });
 }
 
+var applyOrderStep = function(){
+    $(document).on('click', '.__apply_order', function(event){
+        event.preventDefault();
+        let form = $(this).closest('.__form_order');
+        let step = $(this).data('step');
+        let form_data = form.serialize();
+        ajaxBaseCall({
+            url:getBaseRoute('apply-order?step='+step), 
+            type:'POST', 
+            data:form_data
+        });
+    })
+}
+
 $(function(){
     setAdvanceCostOrder();  
 });

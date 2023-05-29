@@ -235,5 +235,19 @@ if (!function_exists('subStringLimit')) {
             }
         }
         return $str;
-    }    
+    }
+    
+    if (!function_exists('customReturnMessage')) {
+        function customReturnMessage($pass, $ajax, $param)
+        {
+            if ($ajax) {
+                $code = $pass ? 200 : 100;
+                return returnMessageAjax($code, $param['message'], @$param['url']);
+            }else{
+                $key = $pass ? 'message' : 'error';
+                $ret = !empty($param['url']) ? redirect($param['url']) : back();
+                return $ret->with($key, $param['message']);  
+            }     
+        }
+    }
 }

@@ -55,32 +55,6 @@ class OrderController extends Controller
         }
     }
 
-    public function getDataTableCommand(Request $request, $table){
-        $permission = $this->admins->checkPermissionAction($table, 'view');
-        if (!@$permission['allow']) {
-            return redirect('permission-error');
-        }
-        $status = $request->input('status') == 0 ? StatusConstant::NOT_ACCEPTED : StatusConstant::ACCEPTED;
-        $data = $this->admins->getDataBaseView($table, 'Danh sách');
-        $data['data_tables'] = \DB::table($table)->where(['status'=>$status])->paginate(50);
-        return view('table.'.$data['view_type'], $data);           
-    }
-
-    public function viewCommand(Request $request, $table, $id)
-    {
-        $permission = $this->admins->checkPermissionAction($table, 'view');
-        if (!@$permission['allow']) {
-            return redirect('permission-error');
-        }
-        $data = $this->admins->getDataActionView($table, 'view', 'Chi tiết');
-        $data['dataItem'] = json_decode(json_encode(\DB::table($table)->find($id)), true);
-        if ($table == 'c_processes') {
-            $data['dataItemCProcess'] = $data['dataItem'];
-            $processData = !empty($data['dataItem']['json_data_conf'])?json_decode($data['dataItem']['json_data_conf'], true):[];
-            $data['listProcess'] = array_keys($processData);
-            $data['dataConfProcess'] = $processData;
-        }
-        return view('orders.commands.view', $data);
-    }
+    
 }
 ?>
