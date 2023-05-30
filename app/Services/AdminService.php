@@ -176,7 +176,6 @@ class AdminService extends BaseService
         if (@$process['code'] == 100) {
             return $process;
         }
-        $this->processDataBefore($data, $table);
         $update = \DB::table($table)->where('id', $id)->update($data);
         if ($update) {
             return returnMessageAjax(200, 'Cập nhật dữ liệu thành công!');

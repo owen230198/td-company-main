@@ -52,7 +52,7 @@ Route::middleware(['check_login'])->group(function () {
 	Route::any('send-quote/{id}', [QuoteController::class, 'sendQuote']);
 
 	//orders routes
-	Route::get('apply-order/{id}/{step}', [OrderController::class, 'applyOrder']);
+	Route::any('apply-order/{id}/{step}', [OrderController::class, 'applyOrder']);
 	Route::post('insert-orders', [OrderController::class, 'insert']);
 	Route::post('update-orders/{id}', [OrderController::class, 'update']);
 	Route::get('get-process-by-category', [ProductController::class, 'getProcessByCategory']);

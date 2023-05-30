@@ -78,7 +78,8 @@ class QuoteService extends BaseService
                     return returnMessageAjax(100, 'Bạn chưa upload file khuôn tính giá cho '. $data['name']);
                 }
 
-                if (($step == \GRoupUser::DESIGN && empty($data['design_file'])) || ($step == \GRoupUser::DESIGN && empty($data['design_shape_file']))) {
+                if (($step == \GRoupUser::DESIGN && empty($data['design_file'])) 
+                || ($step == \GRoupUser::DESIGN && empty($data['design_shape_file']))) {
                     return returnMessageAjax(100, 'Bạn chưa upload file thiết kế hoặc file thiết kế đã bình cho '. $data['name']);
                 }
             }
@@ -87,12 +88,12 @@ class QuoteService extends BaseService
     }
 
     public function getDataActionProduct($data){
-        $data_action['name'] = $data['name'];
-        $data_action['qty'] = $data['qty'];
-        $data_action['category'] = $data['category'];
-        $data_action['design'] = $data['design'];
-        $data_action['size'] = $data['size'];
-        $data_action['quote_id'] = $data['quote_id'];
+        $data_action['name'] = @$data['name'];
+        $data_action['qty'] = @$data['qty'];
+        $data_action['category'] = @$data['category'];
+        $data_action['design'] = @$data['design'];
+        $data_action['size'] = @$data['size'];
+        $data_action['quote_id'] = @$data['quote_id'];
         $data_action['custom_design_file'] = @$data['custom_design_file'];
         $data_action['sale_shape_file'] = @$data['sale_shape_file'];
         $data_action['tech_shape_file'] = @$data['tech_shape_file'];

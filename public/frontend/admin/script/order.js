@@ -17,8 +17,9 @@ var applyOrderStep = function(){
         let form = $(this).closest('.__form_order');
         let step = $(this).data('step');
         let form_data = form.serialize();
+        let id = $(this).data('id');
         ajaxBaseCall({
-            url:getBaseRoute('apply-order?step='+step), 
+            url:getBaseRoute('apply-order/'+id+'/'+step), 
             type:'POST', 
             data:form_data
         });
@@ -26,5 +27,6 @@ var applyOrderStep = function(){
 }
 
 $(function(){
-    setAdvanceCostOrder();  
+    setAdvanceCostOrder(); 
+    applyOrderStep(); 
 });

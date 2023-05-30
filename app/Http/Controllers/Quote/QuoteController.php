@@ -39,9 +39,6 @@ class QuoteController extends Controller
                     if (@$process['code'] == 100) {
                         return $process;
                     }
-                    if ($process) {
-                        RefreshQuotePrice($quote);
-                    }
                     return returnMessageAjax(200, 'Cập nhật dữ liệu thành công !', url('/profit-config-quote?quote_id='.$quote['id']));
                 }
             }else{
@@ -123,9 +120,6 @@ class QuoteController extends Controller
                 $process = $this->services->processDataQuote($request, $arr_quote);
                 if (@$process['code'] == 100) {
                     return $process;
-                }
-                if ($process) {
-                    RefreshQuotePrice($arr_quote);
                 }
                 return returnMessageAjax(200, 'Cập nhật dữ liệu thành công !', url('/profit-config-quote?quote_id='.$arr_quote['id']));
             }   
