@@ -172,10 +172,17 @@ if (!function_exists('getServiceByTable')) {
     }
 }
 
+if (!function_exists('getTimeStamp')) {
+    function getTimeStamp($time)
+    {
+        return \Carbon\Carbon::createFromFormat('d/m/Y H:i', $time)->timestamp;
+    }
+}
+
 if (!function_exists('getDataDateTime')) {
     function getDataDateTime($time){
-        $timstamp = strtotime($time);
-        return date('Y-m-d h:i:s', @$timstamp);    
+        $timstamp = getTimeStamp($time);
+        return date('Y-m-d H:i:s', @$timstamp);    
     }
 }
 

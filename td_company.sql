@@ -11,7 +11,7 @@
  Target Server Version : 100427
  File Encoding         : 65001
 
- Date: 27/05/2023 18:14:40
+ Date: 31/05/2023 19:55:02
 */
 
 SET NAMES utf8mb4;
@@ -13579,14 +13579,15 @@ CREATE TABLE `n_users`  (
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `created_by` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of n_users
 -- ----------------------------
-INSERT INTO `n_users` VALUES (1, 'dev', 'e10adc3949ba59abbe56e057f20f883e', 'Nguyen Duy Khanh', 'nguyenduykhanh2323@gmail.com', '0378050251', 1, 0, 1, 'Lập trình viên', 1, '2023-05-23 14:37:42', '2023-05-23 14:37:42', 1);
-INSERT INTO `n_users` VALUES (4, 'sale', 'e10adc3949ba59abbe56e057f20f883e', 'Kinh doanh', 'sale@gmail.com', '0123456789', 2, 0, NULL, 'test nhan vien kinh doanh', 1, '1970-01-01 08:00:00', '2023-05-23 15:48:00', 1);
-INSERT INTO `n_users` VALUES (5, 'design', 'e10adc3949ba59abbe56e057f20f883e', 'Design test', 'design@gmail.com', '0987654321', 4, 0, NULL, 'test design', 1, '0000-00-00 00:00:00', '2023-05-27 06:16:29', 1);
+INSERT INTO `n_users` VALUES (1, 'dev', 'e10adc3949ba59abbe56e057f20f883e', 'Nguyen Duy Khanh', 'nguyenduykhanh2323@gmail.com', '0378050251', 1, 0, 1, 'Lập trình viên', 1, '2023-05-23 00:00:00', '2023-05-23 14:37:42', 1);
+INSERT INTO `n_users` VALUES (4, 'sale', 'e10adc3949ba59abbe56e057f20f883e', 'Kinh doanh', 'sale@gmail.com', '0123456789', 2, 0, NULL, 'test nhan vien kinh doanh', 1, '2023-05-31 12:10:00', '2023-05-31 13:07:21', 1);
+INSERT INTO `n_users` VALUES (5, 'design', 'e10adc3949ba59abbe56e057f20f883e', 'Design test', 'design@gmail.com', '0987654321', 4, 0, NULL, 'test design', 1, '2023-05-31 12:10:00', '2023-05-31 13:07:18', 1);
+INSERT INTO `n_users` VALUES (6, 'techapplytest', 'e10adc3949ba59abbe56e057f20f883e', 'Tech apply order test', 'techapplyorder@gmail.com', '0234567912', 3, 0, NULL, 'Technical apply order group tests', 1, '2023-05-31 12:10:00', '2023-05-31 13:06:58', 1);
 
 -- ----------------------------
 -- Table structure for ord_products

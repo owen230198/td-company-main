@@ -44,11 +44,12 @@
 		}
 	}
 
-	if (!function_exists('RefreshQuotePrice')) {
-		function RefreshQuotePrice($arr_quote){
-			$qwhere = ['act' => 1, 'quote_id' => $arr_quote['id']];
+	if (!function_exists('getProductTotalCost')) {
+		function getProductTotalCost($quote_id)
+		{
+			$qwhere = ['act' => 1, 'quote_id' => $quote_id];
 			$products = \DB::table('products')->where($qwhere)->get();
-			$update_quote['total_cost'] = 0;
+			$ret = 0;
 			foreach ($products as $product) {
 				$pwhere = ['act' => 1, 'product' => $product->id];
 				$paper_total = \DB::table('papers')->select('total_cost')->where($pwhere)->sum('total_cost');
@@ -56,10 +57,28 @@
 				$fill_finish_total = \DB::table('fill_finishes')->select('total_cost')->where($pwhere)->sum('total_cost');
 				$update_product['total_cost'] = (string) ($paper_total + $supply_total + $fill_finish_total);
 				\DB::table('products')->where('id', $product->id)->update($update_product);
-				$update_quote['total_cost'] += $update_product['total_cost']; 
+				$ret += $update_product['total_cost']; 
 			}
+			return (float) $ret;
+		}
+	}
+
+	if (!function_exists('RefreshQuotePrice')) {
+		function RefreshQuotePrice($arr_quote){
+			$update_quote['total_cost'] = getProductTotalCost($arr_quote['id']);
 			$get_perc = (float) $update_quote['total_cost'] + (float) $arr_quote['ship_price'];
 			$update_quote['total_amount'] = (string) calValuePercentPlus($update_quote['total_cost'], $get_perc,  $arr_quote['profit']);
+			\DB::table('quotes')->where('id', $arr_quote['id'])->update($update_quote);
+		}
+	}
+
+	if (!function_exists('refreshQuoteProfit')) {
+		function refreshQuoteProfit($arr_quote)
+		{
+			$update_quote['total_cost'] = getProductTotalCost($arr_quote);
+			$quote_total = $update_quote['total_cost'] + (float) @$arr_quote['ship_price'];
+			$quote_amount = (float) @$arr_quote['total_amount'];
+			$update_quote['profit'] = (($quote_amount - $quote_total) / $quote_total) * 100;
 			\DB::table('quotes')->where('id', $arr_quote['id'])->update($update_quote);
 		}
 	}

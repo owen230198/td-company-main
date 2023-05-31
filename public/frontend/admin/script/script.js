@@ -164,7 +164,7 @@ var datePickerModule = function () {
                 minYear: 2010,
                 timePicker: true,
                 locale: {
-                    format: "DD/MM/YYYY hh:mm A",
+                    format: "DD/MM/YYYY H:mm",
                     separator: " - ",
                     applyLabel: "Xong",
                     cancelLabel: "Hủy",

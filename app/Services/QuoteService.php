@@ -135,7 +135,15 @@ class QuoteService extends BaseService
                 }
             }
         }
-        return !empty($process);
+        if (!empty($process)) {
+            if (\GroupUser::isSale()) {
+                RefreshQuotePrice($arr_quote);
+            }else{
+                refreshQuoteProfit($arr_quote);
+            }
+        }else{
+            return returnMessageAjax(100, 'Có lỗi xảy ra khi cập nhật sản phẩm !');
+        }
     }
 
     public function getCustomerSelectDataView($id)

@@ -170,4 +170,9 @@ class NGroupUser extends Model
     {
         return self::getCurrent() == self::ADMIN;
     }
+
+    static function isSale()
+    {
+        return self::getCurrent() == self::SALE;
+    }
 }
