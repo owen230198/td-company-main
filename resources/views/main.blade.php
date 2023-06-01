@@ -1,4 +1,7 @@
 @extends('index')
+@section('css')
+    <link rel="stylesheet" href="{{ asset('frontend/base/css/animate.css') }}">
+@endsection
 @section('content')
     <div class="home_index">
         <div class="row">
@@ -12,17 +15,24 @@
                     <div class="row row-7">
                         @foreach ($not_accepted_table as $table => $text)
                         <div class="col-lg-6 mb-3">
-                            <a href={{ asset('view/'.$table.'?default_data={"status":"not_accepted"}') }} class="main_item_command h-100 smooth d-flex align-items-center position-relative h-100">
+                            <a href={{ asset('view/'.$table.'?default_data={"status":"'.\StatusConst::NOT_ACCEPTED.'"}') }} class="main_item_command h-100 smooth d-flex align-items-center position-relative h-100">
                                 <img src="{{ asset('frontend/admin/images/'.$table.'_icon.png') }}" alt="order-icon" 
                                 class="command_icon smooth">
                                 <div class="command_detail ml-2">
                                     <p class="command_detail_tiltle text-uppercase font_bold color_main">
                                         {{ $text }}
                                     </p>
-                                    <p class="fs-18 font_bold color_red">{{ getCountDataTable($table, ['status' => 'not_accepted']) }}</p>
-                                    <p class="border_top_eb pt-2 mt-2 fs-12 color_gray d-flex align-items-center">
-                                        Xem chi tiết 
-                                    </p>
+                                    @php
+                                        $command_count = getCountDataTable($table, ['status' => \StatusConst::NOT_ACCEPTED]);
+                                    @endphp
+                                    @if ($command_count > 0)
+                                        <p class="fs-18 font_bold notify_style">
+                                            {{ $command_count }}
+                                        </p>
+                                        <p class="border_top_eb pt-2 mt-2 fs-12 color_gray d-flex align-items-center">
+                                            Xem chi tiết 
+                                        </p>
+                                    @endif
                                 </div>
                             </a>
                         </div>     

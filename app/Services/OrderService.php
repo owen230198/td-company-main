@@ -2,6 +2,7 @@
 namespace App\Services;
 use App\Services\BaseService;
 use App\Models\Order;
+use App\Models\Quote;
 use App\Constants\StatusConstant;
 
 class OrderService extends BaseService
@@ -34,6 +35,8 @@ class OrderService extends BaseService
             return returnMessageAjax(100, $product_process['message']);  
         }else{
             $arr_order['status'] = StatusConstant::NOT_ACCEPTED;
+            $new_arr_quote = Quote::find($arr_quote['id']);
+            $arr_order['rest'] = (float) $new_arr_quote['total_amount'] - (float) $arr_order['advance'];
             $this->configBaseDataAction($arr_order);
             if (!empty($arr_order['id'])) {
                 Order::where('id', $arr_order['id'])->update($arr_order);

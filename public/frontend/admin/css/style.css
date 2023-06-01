@@ -597,6 +597,18 @@ a.device_supp_item {
     width: 150px;
 }
 
+.notify_style{
+    animation-name: tada;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    text-align: center;
+    background: #d50202;
+    width: 35px;
+    margin: auto;
+    -webkit-text-fill-color: #ffffff;
+    border-radius: 50%;
+}
+
 @page {
     size: A4;
     margin: 1cm;

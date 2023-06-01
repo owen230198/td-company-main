@@ -75,7 +75,7 @@
 	if (!function_exists('refreshQuoteProfit')) {
 		function refreshQuoteProfit($arr_quote)
 		{
-			$update_quote['total_cost'] = getProductTotalCost($arr_quote);
+			$update_quote['total_cost'] = getProductTotalCost($arr_quote['id']);
 			$quote_total = $update_quote['total_cost'] + (float) @$arr_quote['ship_price'];
 			$quote_amount = (float) @$arr_quote['total_amount'];
 			$update_quote['profit'] = (($quote_amount - $quote_total) / $quote_total) * 100;

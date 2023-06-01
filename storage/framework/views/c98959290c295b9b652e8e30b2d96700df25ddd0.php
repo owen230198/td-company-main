@@ -1,4 +1,7 @@
 
+<?php $__env->startSection('css'); ?>
+    <link rel="stylesheet" href="<?php echo e(asset('frontend/base/css/animate.css')); ?>">
+<?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
     <div class="home_index">
         <div class="row">
@@ -12,7 +15,7 @@
                     <div class="row row-7">
                         <?php $__currentLoopData = $not_accepted_table; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $table => $text): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="col-lg-6 mb-3">
-                            <a href=<?php echo e(asset('view/'.$table.'?default_data={"status":"not_accepted"}')); ?> class="main_item_command h-100 smooth d-flex align-items-center position-relative h-100">
+                            <a href=<?php echo e(asset('view/'.$table.'?default_data={"status":"'.\StatusConst::NOT_ACCEPTED.'"}')); ?> class="main_item_command h-100 smooth d-flex align-items-center position-relative h-100">
                                 <img src="<?php echo e(asset('frontend/admin/images/'.$table.'_icon.png')); ?>" alt="order-icon" 
                                 class="command_icon smooth">
                                 <div class="command_detail ml-2">
@@ -20,10 +23,18 @@
                                         <?php echo e($text); ?>
 
                                     </p>
-                                    <p class="fs-18 font_bold color_red"><?php echo e(getCountDataTable($table, ['status' => 'not_accepted'])); ?></p>
-                                    <p class="border_top_eb pt-2 mt-2 fs-12 color_gray d-flex align-items-center">
-                                        Xem chi tiết 
-                                    </p>
+                                    <?php
+                                        $command_count = getCountDataTable($table, ['status' => \StatusConst::NOT_ACCEPTED]);
+                                    ?>
+                                    <?php if($command_count > 0): ?>
+                                        <p class="fs-18 font_bold notify_style">
+                                            <?php echo e($command_count); ?>
+
+                                        </p>
+                                        <p class="border_top_eb pt-2 mt-2 fs-12 color_gray d-flex align-items-center">
+                                            Xem chi tiết 
+                                        </p>
+                                    <?php endif; ?>
                                 </div>
                             </a>
                         </div>     

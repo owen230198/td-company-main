@@ -133,6 +133,13 @@ class NGroupUser extends Model
             self::MODULE['shipping_process'],
             self::MODULE['account'],
             self::MODULE['change_password'],
+        ],
+        self::TECH_APPLY => [
+            self::MODULE['handle_process'],
+            self::MODULE['profit'],
+            self::MODULE['create_available_order'],
+            self::MODULE['account'],
+            self::MODULE['change_password'],
         ]
     ];
 

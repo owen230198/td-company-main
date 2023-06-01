@@ -65,22 +65,22 @@ class QuoteService extends BaseService
                 }
         
                 if (empty($data['design'])) {
-                    return returnMessageAjax(100, 'Bạn chưa chọn mẫu thiết kế cho '. $data['name']);
+                    return returnMessageAjax(100, 'Bạn chưa chọn mẫu thiết kế cho sản phẩm '. $data['name']);
                 }
                 if ($step == \GroupUser::SALE && empty($data['custom_design_file'])) {
-                    return returnMessageAjax(100, 'Bạn chưa upload file thiết kế của khách hàng cho '. $data['name']);
+                    return returnMessageAjax(100, 'Bạn chưa upload file thiết kế của khách hàng cho sản phẩm '. $data['name']);
                 }
                 if ($step == \GroupUser::SALE && empty($data['sale_shape_file'])) {
-                    return returnMessageAjax(100, 'Bạn chưa upload file khuôn tính giá cho '. $data['name']);
+                    return returnMessageAjax(100, 'Bạn chưa upload file khuôn tính giá cho sản phẩm '. $data['name']);
                 }
 
                 if ($step == \GroupUser::TECH_APPLY && empty($data['tech_shape_file'])) {
-                    return returnMessageAjax(100, 'Bạn chưa upload file khuôn tính giá cho '. $data['name']);
+                    return returnMessageAjax(100, 'Bạn chưa upload file sản xuất giá cho sản phẩm '. $data['name']);
                 }
 
                 if (($step == \GRoupUser::DESIGN && empty($data['design_file'])) 
                 || ($step == \GRoupUser::DESIGN && empty($data['design_shape_file']))) {
-                    return returnMessageAjax(100, 'Bạn chưa upload file thiết kế hoặc file thiết kế đã bình cho '. $data['name']);
+                    return returnMessageAjax(100, 'Bạn chưa upload file thiết kế hoặc file thiết kế đã bình cho sản phẩm '. $data['name']);
                 }
             }
         }
@@ -88,17 +88,39 @@ class QuoteService extends BaseService
     }
 
     public function getDataActionProduct($data){
-        $data_action['name'] = @$data['name'];
-        $data_action['qty'] = @$data['qty'];
-        $data_action['category'] = @$data['category'];
-        $data_action['design'] = @$data['design'];
-        $data_action['size'] = @$data['size'];
-        $data_action['quote_id'] = @$data['quote_id'];
-        $data_action['custom_design_file'] = @$data['custom_design_file'];
-        $data_action['sale_shape_file'] = @$data['sale_shape_file'];
-        $data_action['tech_shape_file'] = @$data['tech_shape_file'];
-        $data_action['design_file'] = @$data['design_file'];
-        $data_action['design_shape_file'] = @$data['design_shape_file'];
+        if (!empty($data['name'])) {
+            $data_action['name'] = $data['name'];
+        }
+        if (!empty($data['qty'])) {
+            $data_action['qty'] = $data['qty'];
+        }
+        if (!empty($data['category'])) {
+            $data_action['category'] = $data['category'];
+        }
+        if (!empty($data['desgin'])) {
+            $data_action['design'] = $data['design'];
+        }
+        if (!empty($data['size'])) {
+            $data_action['size'] = $data['size'];
+        }
+        if ($data['quote_id']) {
+            !empty($data_action['quote_id'] = $data['quote_id']);
+        }
+        if (!empty($data['custom_design_file'])) {
+            $data_action['custom_design_file'] = $data['custom_design_file'];
+        }
+        if (!empty($data['sale_shape_file'])) {
+            $data_action['sale_shape_file'] = $data['sale_shape_file'];
+        }
+        if (!empty($data['tech_shape_file'])) {
+            $data_action['tech_shape_file'] = $data['tech_shape_file'];
+        }
+        if (!empty($data['design_file'])) {
+            $data_action['design_file'] = $data['design_file'];
+        }
+        if (!empty($data['design_shape_file'])) {
+            $data_action['design_shape_file'] = $data['design_shape_file'];
+        }
         if (!empty($data['note'])) {
             $data_action['note'] = json_encode($data['note']);
         }
