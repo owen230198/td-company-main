@@ -104,7 +104,7 @@ class QuoteService extends BaseService
             $data_action['design'] = $data['design'];
         }
         if (!empty($data['size'])) {
-            $data_action['size'] = $data['size'];
+            $data_action['size'] = json_encode($data['size']);
         }
         if ($data['quote_id']) {
             !empty($data_action['quote_id'] = $data['quote_id']);
