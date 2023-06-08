@@ -4,6 +4,7 @@ use App\Services\BaseService;
 use App\Models\Order;
 use App\Models\Quote;
 use App\Constants\StatusConstant;
+use App\Constants\TDConstant;
 
 class OrderService extends BaseService
 {
@@ -30,7 +31,7 @@ class OrderService extends BaseService
         if ((int) @$arr_order['advance'] > 0 && empty($arr_order['rest_bill'])) {
             return ['code' => 100, 'message' => 'Bạn cần upload bill tạm ứng cho đơn này !'];
         }
-        $product_process = $this->quote_services->processDataProduct($data, $arr_quote, \GroupUser::GetCurrent());
+        $product_process = $this->quote_services->processDataProduct($data, $arr_quote, TDConstant::ORDER_ACTION_FLOW);
         if (@$product_process['code'] == 100) {
             return returnMessageAjax(100, $product_process['message']);  
         }else{

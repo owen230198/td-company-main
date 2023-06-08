@@ -67,11 +67,11 @@
             'value' => @$product_note['handle']
         ]
     ];
-    if (in_array(\GroupUser::getCurrent(), [\GroupUser::SALE])) {
+    if (\GroupUser::isSale()) {
         unset($ext_pro_fields['tech_shape_file'], $ext_pro_fields['design_file'], $ext_pro_fields['design_shape_file']);    
-    }elseif (in_array(\GroupUser::getCurrent(), [\GroupUser::TECH_APPLY])) {
+    }elseif (\GroupUser::isTechAplly()) {
         unset($ext_pro_fields['design_file'], $ext_pro_fields['design_shape_file']);    
-    }elseif (in_array(\GroupUser::getCurrent(), [\GroupUser::DESIGN])) {
+    }elseif (\GroupUser::isDesign()) {
         unset($ext_pro_fields['design_file'], $ext_pro_fields['sale_shape_file']);    
     }
 @endphp

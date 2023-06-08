@@ -240,6 +240,12 @@
             ['key' => 'micaes', 'note' => 'Me Ka', 'pro_field' => self::MICA, 'device' => self::MICA_DEVICE ,'table' => 'supplies'],
             ['key' => 'fill_finishes', 'note' => 'Bồi + hoàn thiện', 'pro_field' => self::FILL_FINISH, 'table' => 'fill_finishes', 'device' => self::FILL_DEVICE] 
         ];
+
+        // flow xử lí 
+        const QUOTE_FLOW = 1;
+        const ORDER_ACTION_FLOW = 2;
+        const ORDER_APLLY_FLOW = 3;
+        const ORDER_DESIGN_FLOW = 4;
     }
     
 ?>

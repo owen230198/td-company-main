@@ -9,6 +9,7 @@ use App\Services\QTraits\QPaperTrait;
 use App\Services\QTraits\QSupplyTrait;
 use App\Constants\StatusConstant;
 use App\Constants\TDConstant;
+use App\Models\NGroupUser;
 use PhpOffice\PhpWord\TemplateProcessor;
 
 class QuoteService extends BaseService
@@ -67,20 +68,22 @@ class QuoteService extends BaseService
                 if (empty($data['design'])) {
                     return returnMessageAjax(100, 'Bạn chưa chọn mẫu thiết kế cho sản phẩm '. $data['name']);
                 }
-                if ($step == \GroupUser::SALE && empty($data['custom_design_file'])) {
-                    return returnMessageAjax(100, 'Bạn chưa upload file thiết kế của khách hàng cho sản phẩm '. $data['name']);
-                }
-                if ($step == \GroupUser::SALE && empty($data['sale_shape_file'])) {
-                    return returnMessageAjax(100, 'Bạn chưa upload file khuôn tính giá cho sản phẩm '. $data['name']);
-                }
-
-                if ($step == \GroupUser::TECH_APPLY && empty($data['tech_shape_file'])) {
-                    return returnMessageAjax(100, 'Bạn chưa upload file sản xuất giá cho sản phẩm '. $data['name']);
-                }
-
-                if (($step == \GRoupUser::DESIGN && empty($data['design_file'])) 
-                || ($step == \GRoupUser::DESIGN && empty($data['design_shape_file']))) {
-                    return returnMessageAjax(100, 'Bạn chưa upload file thiết kế hoặc file thiết kế đã bình cho sản phẩm '. $data['name']);
+                if ($step == TDConstant::ORDER_ACTION_FLOW) {
+                    if (NGroupUser::isSale() && empty($data['custom_design_file'])) {
+                        return returnMessageAjax(100, 'Bạn chưa upload file thiết kế của khách hàng cho sản phẩm '. $data['name']);
+                    }
+                    if (NGroupUser::isSale() && empty($data['sale_shape_file'])) {
+                        return returnMessageAjax(100, 'Bạn chưa upload file khuôn tính giá cho sản phẩm '. $data['name']);
+                    }
+    
+                    if (NGroupUser::isTechApply() && empty($data['tech_shape_file'])) {
+                        return returnMessageAjax(100, 'Bạn chưa upload file sản xuất giá cho sản phẩm '. $data['name']);
+                    }
+    
+                    if ((NGroupUser::isDesign() && empty($data['design_file'])) 
+                    || (NGroupUser::isDesign() && empty($data['design_shape_file']))) {
+                        return returnMessageAjax(100, 'Bạn chưa upload file thiết kế hoặc file thiết kế đã bình cho sản phẩm '. $data['name']);
+                    }
                 }
             }
         }
@@ -139,7 +142,7 @@ class QuoteService extends BaseService
         }
     }
 
-    public function processDataProduct($data, $arr_quote, $step = \GroupUser::ADMIN)
+    public function processDataProduct($data, $arr_quote, $step = TDConstant::QUOTE_FLOW)
     {
         $data_product = $data['product'];
         $product_valid = $this->productValidate($data_product, $step);
@@ -158,13 +161,13 @@ class QuoteService extends BaseService
             }
         }
         if (!empty($process)) {
-            if (\GroupUser::isSale()) {
+            if ($step== TDConstant::QUOTE_FLOW) {
                 RefreshQuotePrice($arr_quote);
             }else{
                 refreshQuoteProfit($arr_quote);
             }
         }else{
-            return returnMessageAjax(100, 'Có lỗi xảy ra khi cập nhật sản phẩm !');
+            return !empty($product_id);
         }
     }
 

@@ -173,13 +173,27 @@ class NGroupUser extends Model
         return @$user['group_user'];
     }
 
-    static function isAdmin()
+    static function isAdmin($group_user = 0)
     {
-        return self::getCurrent() == self::ADMIN;
+        $group_user = !empty($group_user) ? $group_user : self::getCurrent();
+        return $group_user == self::ADMIN;
     }
 
-    static function isSale()
+    static function isSale($group_user = 0)
     {
-        return self::getCurrent() == self::SALE;
+        $group_user = !empty($group_user) ? $group_user : self::getCurrent();
+        return $group_user == self::SALE;
+    }
+
+    static function isTechApply($group_user = 0)
+    {
+        $group_user = !empty($group_user) ? $group_user : self::getCurrent();
+        return $group_user == self::TECH_APPLY;
+    }
+
+    static function isDesign($group_user = 0)
+    {
+        $group_user = !empty($group_user) ? $group_user : self::getCurrent();
+        return $group_user == self::DESIGN;
     }
 }

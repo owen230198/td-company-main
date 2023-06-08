@@ -233,6 +233,8 @@ var selectAjaxModule = function(section = $('.base_content '))
             let url = $(this).data('url');
             if ($(this).val() == null) {
                 $(this).select2({
+                    allowClear: true,
+                    placeholder: '',
                     ajax: {
                         url: url,
                         dataType: 'json',

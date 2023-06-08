@@ -43,13 +43,7 @@
                             'type' => 'linking',
                             'other_data' => ['data' => ['table' => 'design_types', 'select' => ['id', 'name']]],
                             'value' => @$product['design']
-                        ];
-                        $pro_size_field = [
-                            'name' => $pro_base_name_input.'[size]',
-                            'note' => 'Kích thước hộp',
-                            'attr' => ['placeholder' => 'D x R x C (DVT cm)'],
-                            'value' => @$product['size']
-                        ] 
+                        ]
                     @endphp
 
                     @include('view_update.view', $pro_name_field)
@@ -62,7 +56,7 @@
                         @include('view_update.view', $quote_pro_design)
                     </div>
 
-                    @include('view_update.view', $pro_size_field)
+                    @include('quotes.products.size')
 
                     @if (!empty($order_get))
                         @include('orders.products.extend_info')   
