@@ -2,9 +2,6 @@
     namespace App\Constants;
     class TDConstant
     {
-        //Quy trình vận hành
-        const APPLY_HANDLE = 'apply-handle';
-
         //kiểu in
         const ONE_PRINT_TYPE = 1;
         const SELF_PRINT_TYPE = 2;

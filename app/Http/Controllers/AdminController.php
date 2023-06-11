@@ -102,8 +102,8 @@ class AdminController extends Controller
 
     public function insert(Request $request, $table)
     {
-        if (!$this->admins->checkPermissionAction($table, 'insert')) {
-            return redirect('permission-error');
+        if (!$this->admins->checkPermissionAction($table, 'insert', $id)) {
+            return customReturnMessage(false, $request->isMethod('POST'), ['url' => url('permission-error')]);
         }
         if (in_array($table, NTable::$specific['insert'])) {
             $controller = getObjectByTable($table);

@@ -74,7 +74,7 @@
             </button>
             <?php if(@$data_order['status'] == StatusConst::NOT_ACCEPTED): ?>
                 <button type="button" class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-2 __apply_order" 
-                data-step="<?php echo e(\TDConst::APPLY_HANDLE); ?>" data-id=<?php echo e(@$data_order['id']); ?>>
+                data-step="<?php echo e(\GroupUser::getCurrent()); ?>" data-id=<?php echo e(@$data_order['id']); ?>>
                     <i class="fa fa-thumbs-o-up mr-2 fs-14" aria-hidden="true"></i>Xác nhận sản xuất
                 </button>    
             <?php endif; ?>

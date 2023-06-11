@@ -57,7 +57,10 @@ class OrderController extends Controller
 
     public function applyOrder(Request $request, $id, $step)
     {
-        return customReturnMessage(false, 1, ['message' => 'dmm', 'url' => url('view/quotes')]);
+        if (!\GroupUser::isTechApply()) {
+            return returnMessageAjax(100, 'Bạn không có quyền duyệt sản xuất!');
+        }
+        dd($step);
     }
 }
 ?>
