@@ -12,7 +12,7 @@
             <i class="fa fa-download mr-2 fs-14" aria-hidden="true"></i>Download
         </button>   
     <?php endif; ?>
-    <div class="upload_click position-relative mr-2">
+    <div class="upload_click position-relative mr-2 <?php echo e(!empty($file['path']) ? 'd-none' : ''); ?>">
         <button type="button" class="main_button color_white bg_green border_green radius_5 font_bold smooth">
             <i class="fa fa-upload mr-2 fs-14" aria-hidden="true"></i>Chọn file
         </button>

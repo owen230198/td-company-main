@@ -69,7 +69,7 @@
     ];
     if (\GroupUser::isSale()) {
         unset($ext_pro_fields['tech_shape_file'], $ext_pro_fields['design_file'], $ext_pro_fields['design_shape_file']);    
-    }elseif (\GroupUser::isTechAplly()) {
+    }elseif (\GroupUser::isTechApply()) {
         unset($ext_pro_fields['design_file'], $ext_pro_fields['design_shape_file']);    
     }elseif (\GroupUser::isDesign()) {
         unset($ext_pro_fields['design_file'], $ext_pro_fields['sale_shape_file']);    
