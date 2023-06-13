@@ -5,6 +5,13 @@
     {
         protected $table = 'orders';
         protected $protectFields = false;
+
+        //Status
+        const NOT_ACCEPTED = \StatusConst::NOT_ACCEPTED;
+        const TO_DESIGN = 'to_design';
+        const DESIGNING = 'designing';
+        const DESIGN_SUBMITED = 'design_submited';
+
         // Insert sourc new or clone
         const NEW_SRC = 1;
         const CLONE_SRC = 2;

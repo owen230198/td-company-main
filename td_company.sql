@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : localhost
+ Source Server         : owen
  Source Server Type    : MySQL
- Source Server Version : 100428
+ Source Server Version : 100425
  Source Host           : localhost:3306
  Source Schema         : td_company
 
  Target Server Type    : MySQL
- Target Server Version : 100428
+ Target Server Version : 100425
  File Encoding         : 65001
 
- Date: 11/06/2023 22:25:51
+ Date: 13/06/2023 08:20:39
 */
 
 SET NAMES utf8mb4;
@@ -23,37 +23,21 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `c_designs`;
 CREATE TABLE `c_designs`  (
   `id` int(10) NOT NULL AUTO_INCREMENT,
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `num_color` tinyint(10) NULL DEFAULT NULL,
-  `num_face` tinyint(4) NULL DEFAULT NULL,
-  `type` tinyint(4) NULL DEFAULT NULL,
-  `style` tinyint(10) NULL DEFAULT NULL,
-  `print_style` int(10) NULL DEFAULT NULL,
+  `order` int(10) NULL DEFAULT NULL,
+  `product` int(10) NULL DEFAULT NULL,
+  `customer` int(10) NULL DEFAULT NULL,
   `demo_expired` datetime(0) NULL DEFAULT NULL,
-  `print_color` int(10) NULL DEFAULT NULL,
-  `custom_sending` int(10) NULL DEFAULT NULL,
   `expired` datetime(0) NULL DEFAULT NULL,
   `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `file` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
-  `product_id` int(10) NULL DEFAULT NULL,
-  `order_id` int(10) NULL DEFAULT NULL,
   `status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `created_by` int(10) NULL DEFAULT NULL,
   `assign_by` int(10) NULL DEFAULT NULL,
   `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of c_designs
--- ----------------------------
-INSERT INTO `c_designs` VALUES (12, 'Gerrard2', 2, 1, 2, 1, 2, '1970-01-01 12:00:00', 2, 2, '1970-01-01 12:00:00', 'tk hop cung', NULL, 21, 15, 'not_accepted', 1, NULL, '2022-11-22 14:31:00', '2023-02-25 08:14:26');
-INSERT INTO `c_designs` VALUES (13, 'Gerrard2', 2, 2, 2, 2, 1, '1970-01-01 12:00:00', 1, 3, '1970-01-01 12:00:00', 'tk hop banh', NULL, 22, 15, 'not_accepted', 1, NULL, '2022-11-22 14:31:00', '2023-02-25 08:14:26');
-INSERT INTO `c_designs` VALUES (14, 'Contacter D', 3, 2, 2, 3, 2, '2023-02-22 10:56:00', 2, 3, '2023-02-25 10:56:00', 'ghi chu tk sp 1', NULL, 23, 16, 'not_accepted', 1, NULL, '2023-02-22 23:01:00', NULL);
-INSERT INTO `c_designs` VALUES (15, 'Contacter D', 2, 2, 2, 2, 2, '2023-02-22 10:56:00', 2, 2, '2023-02-22 10:56:00', 'ghi chu tk sp 2', NULL, 24, 16, 'not_accepted', 1, NULL, '2023-02-22 23:01:00', NULL);
-INSERT INTO `c_designs` VALUES (16, 'Contacter D', 2, 1, 2, 1, 2, '2023-02-25 09:27:00', 1, 3, '2023-02-26 09:27:00', 'note', NULL, 25, 17, 'not_accepted', 1, NULL, '2023-02-25 09:30:00', NULL);
-INSERT INTO `c_designs` VALUES (17, 'Contacter D', 3, 2, 2, 1, 2, '2023-02-25 09:27:00', 1, 1, '2023-02-25 09:27:00', NULL, NULL, 26, 17, 'not_accepted', 1, NULL, '2023-02-25 09:30:00', NULL);
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for c_processes
@@ -13645,13 +13629,13 @@ CREATE TABLE `orders`  (
   `created_by` int(10) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx`(`created_by`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of orders
 -- ----------------------------
 INSERT INTO `orders` VALUES (1, 'DH-000001', NULL, 1, '100000000000', '123727051413', '{\"path\":\"http://127.0.0.1:8000/uploads/files/_Liverpool_Steven_Gerrard_048843_.jpg\",\"name\":\"_Liverpool_Steven_Gerrard_048843_.jpg\"}', 'not_accepted', 'note', 'note', 1, '2023-05-26 02:49:00', '2023-05-27 16:04:00', 1);
-INSERT INTO `orders` VALUES (3, 'DH-000003', NULL, 11, '20', '75134284', '{\"path\":\"http://127.0.0.1:8000/uploads/files/Screenshot (15).png\",\"name\":\"Screenshot (15).png\"}', 'not_accepted', 'rest notes', 'ship note', 1, '2023-05-27 17:45:00', '2023-06-07 18:24:32', 4);
+INSERT INTO `orders` VALUES (3, 'DH-000003', NULL, 11, '20', '75134284', '{\"path\":\"http://127.0.0.1:8000/uploads/files/Screenshot (15).png\",\"name\":\"Screenshot (15).png\"}', 'not_accepted', 'rest notes', 'ship note', 1, '2023-05-27 17:45:00', '2023-06-13 07:47:26', 4);
 
 -- ----------------------------
 -- Table structure for p_substances
@@ -13900,7 +13884,7 @@ INSERT INTO `products` VALUES (3, 'Hop cung 1', 1, '8000', 1, '10x20x30', 1, '19
 INSERT INTO `products` VALUES (4, 'Hop cung 2', 1, '4000', 2, '20x15x11', 1, '83019600', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-05-27 16:04:00', '2023-05-27 16:04:00', 1);
 INSERT INTO `products` VALUES (5, 'Hop cung 3', 1, '5000', 1, '15x20x25', 1, '1156000', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-05-27 16:04:00', '2023-05-27 16:04:00', 1);
 INSERT INTO `products` VALUES (6, 'tuan dung', 2, '10000', 1, '100 x 200  x 50', 8, '69350940', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-05-19 14:38:00', '2023-05-19 14:38:00', 1);
-INSERT INTO `products` VALUES (7, 'Hộp giấy Tuấn Dung thử ( Test lần 1 )', 2, '10000', 1, '{\"length\":\"20\",\"width\":\"10\",\"height\":\"30\"}', 11, '69568800', '{\"path\":\"http://127.0.0.1:8000/uploads/files/Screenshot (16).png\",\"name\":\"Screenshot (16).png\"}', '{\"path\":\"http://127.0.0.1:8000/uploads/files/.gitignore\",\"name\":\".gitignore\"}', '{\"path\":\"http://127.0.0.1:8000/uploads/files/Yêu-cầu-Hệ-thống-Nhà-ở-ngay_ĐXMB.docx\",\"name\":\"Yêu-cầu-Hệ-thống-Nhà-ở-ngay_ĐXMB.docx\"}', NULL, NULL, '{\"print\":\"2\",\"handle\":\"fdsfaf\"}', 1, '2023-06-08 10:39:32', '2023-06-08 10:39:32', 4);
+INSERT INTO `products` VALUES (7, 'Hộp giấy Tuấn Dung thử ( Test lần 1 )', 2, '10000', 1, '{\"length\":\"20\",\"width\":\"10\",\"height\":\"30\"}', 11, '69568800', '{\"path\":\"http://127.0.0.1:8000/uploads/files/Screenshot (16).png\",\"name\":\"Screenshot (16).png\"}', '{\"path\":\"http://127.0.0.1:8000/uploads/files/.gitignore\",\"name\":\".gitignore\"}', '{\"path\":\"http://127.0.0.1:8000/uploads/files/Yêu-cầu-Hệ-thống-Nhà-ở-ngay_ĐXMB.docx\",\"name\":\"Yêu-cầu-Hệ-thống-Nhà-ở-ngay_ĐXMB.docx\"}', NULL, NULL, '{\"print\":\"2\",\"handle\":\"fdsfaf\"}', 1, '2023-06-13 07:47:26', '2023-06-13 07:47:26', 4);
 
 -- ----------------------------
 -- Table structure for quote_configs

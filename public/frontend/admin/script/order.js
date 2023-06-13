@@ -19,7 +19,7 @@ var applyOrderStep = function(){
         let form_data = form.serialize();
         let id = $(this).data('id');
         ajaxBaseCall({
-            url:getBaseRoute('apply-order/'+id+'/'+step), 
+            url:getBaseRoute('apply-order/'+id), 
             type:'POST', 
             data:form_data
         });

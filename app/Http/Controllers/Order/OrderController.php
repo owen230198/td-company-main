@@ -5,7 +5,6 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Quote;
 use App\Models\Product;
-use App\Constants\StatusConstant;
 
 class OrderController extends Controller
 {
@@ -21,12 +20,10 @@ class OrderController extends Controller
         $quote_id = $request->input('quote');
         $arr_quote = Quote::find($quote_id);
         if (!$request->isMethod('POST')) {
-            if (empty($arr_quote) || @$arr_quote['status'] == StatusConstant::NOT_ACCEPTED) {
+            if (empty($arr_quote) || @$arr_quote['status'] == \StatusConst::NOT_ACCEPTED) {
                 return back()->with('error', 'Dữ liệu báo giá không hợp lệ!');
             }
-            $data['data_quote'] = $arr_quote;
-            $data['products'] = Product::where(['act' => 1, 'quote_id' => $quote_id])->get();
-            $data['product_qty'] = count($data['products']);
+            $data = $this->services->getBaseDataAction($arr_quote, $quote_id);
             $data['title'] = 'Thêm đơn hàng - Mã báo giá : '.$arr_quote['seri'];
             $data['link_action'] = url('insert/orders');
             return view('orders.view', $data);
@@ -42,25 +39,39 @@ class OrderController extends Controller
             if (empty($arr_order)) {
                 return back()->with('error', 'Dữ liệu Đơn hàng không hợp lệ!');
             }
-            $data['customer_info'] = false;
+            $data = $this->services->getBaseDataAction($arr_quote, $arr_quote['id']);
             $data['data_order'] = $arr_order;
-            $data['data_quote'] = $arr_quote;
-            $data['products'] = Product::where(['act' => 1, 'quote_id' => $arr_quote['id']])->get();
-            $data['product_qty'] = count($data['products']);
             $data['title'] = 'Cập nhật & Xác nhận đơn - '.$arr_order['code'];
             $data['link_action'] = url('update/orders/'.$id);
-            return view('orders.view', $data);
+            return view('orders.users.'.\GroupUser::getCurrent().'.view', $data);
         }else{
             return $this->services->processDataOrder($request, $arr_quote);           
         }
     }
 
-    public function applyOrder(Request $request, $id, $step)
+    private function techApplyToDesign($arr_order, $data)
     {
-        if (!\GroupUser::isTechApply()) {
+        if (\GroupUser::isTechApply()) {
+            $command = $this->services->ProcessDesignCommand($arr_order);    
+        }else{
             return returnMessageAjax(100, 'Bạn không có quyền duyệt sản xuất!');
         }
-        dd($step);
+    }
+
+    public function applyOrder(Request $request, $id)
+    {
+        $arr_order = Order::find($id);
+        $arr_quote = Quote::find($request->input('quote'));
+        if (!empty($arr_quote)) {
+            $this->services->processDataOrder($request, $arr_quote);
+        }
+        $data = $request->except('_token');
+        switch (@$arr_order['status'] == Order::NOT_ACCEPTED) {
+            case \TDConst::ORDER_APLLY_FLOW :
+                return $this->techApplyToDesign($arr_order, $data);
+            default:
+                return returnMessageAjax(100, 'Lỗi không xác định !');
+        }
     }
 }
 ?>

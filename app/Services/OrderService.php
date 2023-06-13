@@ -3,6 +3,7 @@ namespace App\Services;
 use App\Services\BaseService;
 use App\Models\Order;
 use App\Models\Quote;
+use App\Models\Product;
 use App\Constants\StatusConstant;
 use App\Constants\TDConstant;
 
@@ -12,6 +13,14 @@ class OrderService extends BaseService
     {
         parent::__construct();
         $this->quote_services = new \App\Services\QuoteService;
+    }
+
+    public function getBaseDataAction($arr_quote, $quote_id)
+    {
+        $data['data_quote'] = $arr_quote;
+        $data['products'] = Product::where(['act' => 1, 'quote_id' => $quote_id])->get();
+        $data['product_qty'] = count($data['products']);
+        return $data;
     }
 
     public function processDataOrder($request, $arr_quote)
@@ -37,7 +46,9 @@ class OrderService extends BaseService
         }else{
             $arr_order['status'] = StatusConstant::NOT_ACCEPTED;
             $new_arr_quote = Quote::find($arr_quote['id']);
-            $arr_order['rest'] = (float) $new_arr_quote['total_amount'] - (float) $arr_order['advance'];
+            if (!empty($arr_order['advance'])) {
+                $arr_order['rest'] = (float) $new_arr_quote['total_amount'] - (float) $arr_order['advance'];
+            }
             $this->configBaseDataAction($arr_order);
             if (!empty($arr_order['id'])) {
                 Order::where('id', $arr_order['id'])->update($arr_order);
