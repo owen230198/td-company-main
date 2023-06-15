@@ -5,8 +5,6 @@ use App\Models\Order;
 use App\Models\Quote;
 use App\Models\Product;
 use \App\Models\CDesign;
-use App\Constants\StatusConstant;
-use App\Constants\TDConstant;
 
 class OrderService extends BaseService
 {
@@ -31,18 +29,18 @@ class OrderService extends BaseService
         if (empty($arr_quote)) {
             return returnMessageAjax(100, 'Báo giá không tồn tại!');
         }
-        if ($arr_quote == StatusConstant::NOT_ACCEPTED) {
+        if ($arr_quote == \StatusConst::NOT_ACCEPTED) {
             return returnMessageAjax(100, 'Báo giá chưa được khách hàng duyệt !');
         }
         $arr_order = !empty($data['order']) ? $data['order'] : [];
         if ((int) @$arr_order['advance'] > 0 && empty($arr_order['rest_bill'])) {
             return ['code' => 100, 'message' => 'Bạn cần upload bill tạm ứng cho đơn này !'];
         }
-        $product_process = $this->quote_services->processDataProduct($data, $arr_quote, TDConstant::ORDER_ACTION_FLOW);
+        $product_process = $this->quote_services->processDataProduct($data, $arr_quote, \TDConst::ORDER_ACTION_FLOW);
         if (@$product_process['code'] == 100) {
             return returnMessageAjax(100, $product_process['message']);  
         }else{
-            $arr_order['status'] = StatusConstant::NOT_ACCEPTED;
+            $arr_order['status'] = \StatusConst::NOT_ACCEPTED;
             $new_arr_quote = Quote::find($arr_quote['id']);
             if (!empty($arr_order['advance'])) {
                 $arr_order['rest'] = (float) $new_arr_quote['total_amount'] - (float) $arr_order['advance'];
