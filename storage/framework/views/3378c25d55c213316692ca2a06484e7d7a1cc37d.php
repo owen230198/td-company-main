@@ -7,7 +7,7 @@
 
 <?php if(@$select_config['search'] == 1): ?>
     <?php
-        $url = asset('get-data-json-linking?table='.$select_data['table']);
+        $url = asset('get-data-json-linking?table='.$select_data['table'].'&field_search='.$field_title);
         if (!empty($select_data['where'])) {
             foreach ($select_data['where'] as $key => $val) {
                 $url .= '&'.$key.'='.$val;

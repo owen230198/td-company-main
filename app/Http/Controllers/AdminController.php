@@ -290,15 +290,17 @@ class AdminController extends Controller
         if ($table == 'customers') {
             return $this->getDataJsonCustomer($request, true);
         }
-        $where = $request->except('table', 'q');
-        $q = '%'.trim($request->input('q')).'%';
+        $where = $request->except('table', 'q', 'field_search');
         $data = \DB::table($table)->where($where);
+        $q = $request->input('q');
+        $label = $request->input('field_search');
         if (!empty($q)) {
-            $data = $data->where('name', 'like', $q);
+            $q = '%'.trim($q).'%';
+            $data = $data->where($label, 'like', $q);
         }
         $data = $data->paginate(50)->all();
-        $arr = array_map(function($item){
-            return ['id' => @$item->id, 'label' => !empty($item->code) ? $item->code.' - '.$item->name : $item->name];
+        $arr = array_map(function($item) use($label){
+            return ['id' => @$item->id, 'label' => $item->{$label}];
         }, $data);
         return json_encode($arr);
     }

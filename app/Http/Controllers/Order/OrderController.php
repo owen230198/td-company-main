@@ -12,7 +12,7 @@ class OrderController extends Controller
     {
         parent::__construct();
         $this->services = new \App\Services\OrderService;
-        $this->quotes = new \App\Services\QuoteService;
+        $this->quote_services = new \App\Services\QuoteService;
     }
 
     public function insert(Request $request)
@@ -28,6 +28,9 @@ class OrderController extends Controller
             $data['link_action'] = url('insert/orders');
             return view('orders.view', $data);
         }else{
+            if (!empty($request['order']['status'])) {
+                return returnMessageAjax(100, 'Dữ liệu không hợp lệ !');
+            }
             return $this->services->processDataOrder($request, $arr_quote); 
         }   
     }
@@ -45,32 +48,31 @@ class OrderController extends Controller
             $data['link_action'] = url('update/orders/'.$id);
             return view('orders.users.'.\GroupUser::getCurrent().'.view', $data);
         }else{
+            if (!empty($request['order']['status'])) {
+                return returnMessageAjax(100, 'Dữ liệu không hợp lệ !');
+            }
             return $this->services->processDataOrder($request, $arr_quote);           
-        }
-    }
-
-    private function techApplyToDesign($arr_order, $data)
-    {
-        if (\GroupUser::isTechApply()) {
-            $command = $this->services->ProcessDesignCommand($arr_order);    
-        }else{
-            return returnMessageAjax(100, 'Bạn không có quyền duyệt sản xuất!');
         }
     }
 
     public function applyOrder(Request $request, $id)
     {
-        $arr_order = Order::find($id);
-        $arr_quote = Quote::find($request->input('quote'));
-        if (!empty($arr_quote)) {
-            $this->services->processDataOrder($request, $arr_quote);
-        }
-        $data = $request->except('_token');
-        switch (@$arr_order['status'] == Order::NOT_ACCEPTED) {
-            case \TDConst::ORDER_APLLY_FLOW :
-                return $this->techApplyToDesign($arr_order, $data);
-            default:
-                return returnMessageAjax(100, 'Lỗi không xác định !');
+        if (\GroupUser::isTechApply()) {
+            $arr_order = Order::find($id);
+            if ($arr_order != \StatusConst::NOT_ACCEPTED) {
+                returnMessageAjax(100, 'Lỗi không xác định !');
+            }
+            $arr_quote = Quote::find($request->input('quote'));
+            $data = $request->except('_token');
+            if (!empty($arr_quote)) {
+                $this->quote_services->processDataProduct($data, $arr_quote, \TDConst::ORDER_ACTION_FLOW);
+            }
+            $status = $this->services->insertDesignCommand($arr_order);
+            if ($status) {
+                return returnMessageAjax(200, 'Đã thêm lệnh thiết kế cho đơn hàng '.$arr_order['code'].' !', getBackUrl());
+            }    
+        }else{
+            return returnMessageAjax(100, 'Bạn không có quyền duyệt sản xuất!');
         }
     }
 }

@@ -4,6 +4,7 @@ use App\Services\BaseService;
 use App\Models\Order;
 use App\Models\Quote;
 use App\Models\Product;
+use \App\Models\CDesign;
 use App\Constants\StatusConstant;
 use App\Constants\TDConstant;
 
@@ -34,9 +35,6 @@ class OrderService extends BaseService
             return returnMessageAjax(100, 'Báo giá chưa được khách hàng duyệt !');
         }
         $arr_order = !empty($data['order']) ? $data['order'] : [];
-        if (@$arr_order['status'] == StatusConstant::ACCEPTED) {
-            return returnMessageAjax(100, 'Dữ liệu không hợp lệ');
-        }
         if ((int) @$arr_order['advance'] > 0 && empty($arr_order['rest_bill'])) {
             return ['code' => 100, 'message' => 'Bạn cần upload bill tạm ứng cho đơn này !'];
         }
@@ -56,8 +54,23 @@ class OrderService extends BaseService
                 $arr_order['code'] = 'DH-'.getCodeInsertTable('orders');
                 Order::insertGetId($arr_order);
             }
-            return returnMessageAjax(200, 'Cập nhật dữ liệu thành công!', @session()->get('back_url'));     
+            return returnMessageAjax(200, 'Cập nhật dữ liệu thành công!', getBackUrl());     
         }
+    }
+
+    public function insertDesignCommand($arr_order)
+    {
+        $products = Product::where(['act' => 1, 'quote_id' => $arr_order['quote']])->get();
+        $data_insert['order'] = $arr_order['id'];
+        $data_insert['status'] = \StatusConst::NOT_ACCEPTED;
+        $this->configBaseDataAction($data_insert);
+        foreach ($products as $key => $product) {
+            $h = $key > 0 ? $key.'.' : '';
+            $data_insert['code'] = 'TK-'.$h.$arr_order['code'];
+            $data_insert['product'] = $product['id'];
+            CDesign::insert($data_insert);
+        }
+        return 1;
     }
     
     public function afterRemove($id)
