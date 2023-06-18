@@ -18,7 +18,15 @@
 
         public function update(Request $request, $id){
             if (!$request->isMethod('POST')) {
-                
+                $arr_command = CDesign::find($id);
+                $data['data_order'] = Order::find($arr_command['order']);
+                $data['data_product'] = Product::find($arr_command['product']);
+                $data['data_command'] = $arr_command;
+                $data['id'] = $id;
+                if ($arr_command == \StatusConst::NOT_ACCEPTED) {
+                    $data['stage'] = Order::TO_DESIGN;
+                }
+                return view('c_designs.view', $data);
             }else{
                     
             }

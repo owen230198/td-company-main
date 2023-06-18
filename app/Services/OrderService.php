@@ -68,7 +68,7 @@ class OrderService extends BaseService
             $data_insert['product'] = $product['id'];
             CDesign::insert($data_insert);
         }
-        return 1;
+        return Order::where('id', $arr_order['id'])->update(['status' => Order::TO_DESIGN]);
     }
     
     public function afterRemove($id)

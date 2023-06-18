@@ -15,11 +15,11 @@ var applyOrderStep = function(){
     $(document).on('click', '.__apply_order', function(event){
         event.preventDefault();
         let form = $(this).closest('.__form_order');
-        let step = $(this).data('step');
+        let stage = $(this).data('stage');
         let form_data = form.serialize();
         let id = $(this).data('id');
         ajaxBaseCall({
-            url:getBaseRoute('apply-order/'+id), 
+            url:getBaseRoute('apply-order/'+stage+'/'+id), 
             type:'POST', 
             data:form_data
         });

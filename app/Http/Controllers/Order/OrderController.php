@@ -46,6 +46,10 @@ class OrderController extends Controller
             $data['data_order'] = $arr_order;
             $data['title'] = 'Cập nhật & Xác nhận đơn - '.$arr_order['code'];
             $data['link_action'] = url('update/orders/'.$id);
+            $data['id'] = $id;
+            if ($arr_order['status'] = Order::NOT_ACEPTED) {
+                $data['stage'] = Order::NOT_ACCEPTED;
+            }
             return view('orders.users.'.\GroupUser::getCurrent().'.view', $data);
         }else{
             if (!empty($request['order']['status'])) {
@@ -55,15 +59,14 @@ class OrderController extends Controller
         }
     }
 
-    public function applyOrder(Request $request, $id)
+    public function applyToDesign($data, $id)
     {
         if (\GroupUser::isTechApply()) {
             $arr_order = Order::find($id);
             if ($arr_order != \StatusConst::NOT_ACCEPTED) {
                 returnMessageAjax(100, 'Lỗi không xác định !');
             }
-            $arr_quote = Quote::find($request->input('quote'));
-            $data = $request->except('_token');
+            $arr_quote = Quote::find($data->input('quote'));
             if (!empty($arr_quote)) {
                 $this->quote_services->processDataProduct($data, $arr_quote, \TDConst::ORDER_ACTION_FLOW);
             }
@@ -73,6 +76,17 @@ class OrderController extends Controller
             }    
         }else{
             return returnMessageAjax(100, 'Bạn không có quyền duyệt sản xuất!');
+        }
+    }
+
+    public function applyOrder(Request $request, $stage, $id)
+    {
+        $data = $request->except('_token');
+        switch ($stage) {
+            case Order::NOT_ACCEPTED:
+                return $this->applyToDesign($data, $id);
+            default:
+                return returnAjaxMessage(100, 'Lỗi không xác định ! ');
         }
     }
 }
