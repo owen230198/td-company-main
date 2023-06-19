@@ -129,7 +129,7 @@ class QuoteService extends BaseService
         return $data_action;
     }
 
-    public function processProduct($key, $data, $step)
+    public function processProduct($data, $step, $key = 0)
     {
         $product_valid = $this->productValidate($data, $key, $step);
         if (@$product_valid['code'] == 100) {
@@ -150,7 +150,7 @@ class QuoteService extends BaseService
         $data_product = $data['product'];
         foreach ($data_product as $key => $product) {
             $product['quote_id'] = $arr_quote['id'];
-            $product_process = $this->processProduct($key, $product, $step);
+            $product_process = $this->processProduct($product, $step, $key);
             if (@$product_process['code'] == 100) {
                 return $product_process;
                 break;
