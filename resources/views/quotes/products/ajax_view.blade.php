@@ -65,7 +65,7 @@
                 <div class="ajax_product_view_by_category">
                     
                 </div>
-                @if (!empty($product['id']))
+                @if (!empty($product['id']) && empty($not_detail))
                     <input type="hidden" name="product[{{ $pro_index }}][id]" value="{{ $product['id'] }}">
                     <div class="text-center">
                         <button type="button" 

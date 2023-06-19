@@ -4,7 +4,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Quote;
-use App\Models\Product;
 
 class OrderController extends Controller
 {
@@ -47,10 +46,15 @@ class OrderController extends Controller
             $data['title'] = 'Cập nhật & Xác nhận đơn - '.$arr_order['code'];
             $data['link_action'] = url('update/orders/'.$id);
             $data['id'] = $id;
-            if ($arr_order['status'] = Order::NOT_ACEPTED) {
+            if ($arr_order['status'] = Order::NOT_ACCEPTED) {
                 $data['stage'] = Order::NOT_ACCEPTED;
             }
-            return view('orders.users.'.\GroupUser::getCurrent().'.view', $data);
+            if (view()->exists('orders.users.'.\GroupUser::getCurrent().'.view')) {
+                return view('orders.users.'.\GroupUser::getCurrent().'.view', $data);
+            }else{
+                return back()->with('error', 'Bạn không có quyền truy cập giao diện này !');
+            }
+            
         }else{
             if (!empty($request['order']['status'])) {
                 return returnMessageAjax(100, 'Dữ liệu không hợp lệ !');
@@ -66,9 +70,12 @@ class OrderController extends Controller
             if ($arr_order != \StatusConst::NOT_ACCEPTED) {
                 returnMessageAjax(100, 'Lỗi không xác định !');
             }
-            $arr_quote = Quote::find($data->input('quote'));
+            $arr_quote = Quote::find($data['quote']);
             if (!empty($arr_quote)) {
-                $this->quote_services->processDataProduct($data, $arr_quote, \TDConst::ORDER_ACTION_FLOW);
+                $product_process = $this->quote_services->processDataProduct($data, $arr_quote, \TDConst::ORDER_ACTION_FLOW);
+                if (@$product_process['code'] == 100) {
+                    return returnMessageAjax(100, $product_process['message']);  
+                }
             }
             $status = $this->services->insertDesignCommand($arr_order);
             if ($status) {
@@ -86,7 +93,7 @@ class OrderController extends Controller
             case Order::NOT_ACCEPTED:
                 return $this->applyToDesign($data, $id);
             default:
-                return returnAjaxMessage(100, 'Lỗi không xác định ! ');
+                return returnMessageAjax(100, 'Lỗi không xác định !');
         }
     }
 }

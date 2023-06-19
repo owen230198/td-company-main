@@ -13,7 +13,6 @@ class NUser extends Model
      */
     protected $table = 'n_users';
     protected $protectFields = false;
-
     static function getCurrent()
     {
         $user_login = session('user_login');

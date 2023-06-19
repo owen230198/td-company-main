@@ -55,35 +55,33 @@ class QuoteService extends BaseService
         $data['optimal_width'] = $temp_height / 1000;
     }
 
-    private function productValidate($data_product, $step){
-        foreach ($data_product as $key => $data) {
-            $num = $key + 1;
-            if (empty($data['name'])) {
-                return returnMessageAjax(100, 'Bạn chưa nhập tên cho sản phẩm '. $num);
-            }else{
-                if (empty($data['category'])) {
-                    return returnMessageAjax(100, 'Bạn chưa chọn nhóm sản phẩm cho '. $data['name']);
-                }
-        
-                if (empty($data['design'])) {
-                    return returnMessageAjax(100, 'Bạn chưa chọn mẫu thiết kế cho sản phẩm '. $data['name']);
-                }
-                if ($step == TDConstant::ORDER_ACTION_FLOW) {
-                    if (NGroupUser::isSale() && empty($data['custom_design_file'])) {
-                        return returnMessageAjax(100, 'Bạn chưa upload file thiết kế của khách hàng cho sản phẩm '. $data['name']);
-                    }
-                    if (NGroupUser::isSale() && empty($data['sale_shape_file'])) {
-                        return returnMessageAjax(100, 'Bạn chưa upload file khuôn tính giá cho sản phẩm '. $data['name']);
-                    }
+    private function productValidate($data, $key, $step){
+        $num = $key + 1;
+        if (empty($data['name'])) {
+            return returnMessageAjax(100, 'Bạn chưa nhập tên cho sản phẩm '. $num);
+        }else{
+            if (empty($data['category'])) {
+                return returnMessageAjax(100, 'Bạn chưa chọn nhóm sản phẩm cho '. $data['name']);
+            }
     
-                    if (NGroupUser::isTechApply() && empty($data['tech_shape_file'])) {
-                        return returnMessageAjax(100, 'Bạn chưa upload file sản xuất giá cho sản phẩm '. $data['name']);
-                    }
-    
-                    if ((NGroupUser::isDesign() && empty($data['design_file'])) 
-                    || (NGroupUser::isDesign() && empty($data['design_shape_file']))) {
-                        return returnMessageAjax(100, 'Bạn chưa upload file thiết kế hoặc file thiết kế đã bình cho sản phẩm '. $data['name']);
-                    }
+            if (empty($data['design'])) {
+                return returnMessageAjax(100, 'Bạn chưa chọn mẫu thiết kế cho sản phẩm '. $data['name']);
+            }
+            if ($step == TDConstant::ORDER_ACTION_FLOW) {
+                if (NGroupUser::isSale() && empty($data['custom_design_file'])) {
+                    return returnMessageAjax(100, 'Bạn chưa upload file thiết kế của khách hàng cho sản phẩm '. $data['name']);
+                }
+                if (NGroupUser::isSale() && empty($data['sale_shape_file'])) {
+                    return returnMessageAjax(100, 'Bạn chưa upload file khuôn tính giá cho sản phẩm '. $data['name']);
+                }
+
+                if (NGroupUser::isTechApply() && empty($data['tech_shape_file'])) {
+                    return returnMessageAjax(100, 'Bạn chưa upload file sản xuất giá cho sản phẩm '. $data['name']);
+                }
+
+                if ((NGroupUser::isDesign() && empty($data['design_file'])) 
+                || (NGroupUser::isDesign() && empty($data['design_shape_file']))) {
+                    return returnMessageAjax(100, 'Bạn chưa upload file thiết kế hoặc file thiết kế đã bình cho sản phẩm '. $data['name']);
                 }
             }
         }
@@ -131,32 +129,38 @@ class QuoteService extends BaseService
         return $data_action;
     }
 
-    public function processProduct($data)
+    public function processProduct($key, $data, $step)
     {
-        $data_process = $this->getDataActionProduct($data);
-        if (!empty($data['id'])) {
-            Product::where('id', $data['id'])->update($data_process);
-            return $data['id'];
+        $product_valid = $this->productValidate($data, $key, $step);
+        if (@$product_valid['code'] == 100) {
+            return $product_valid;    
         }else{
-            return Product::insertGetId($data_process);
+            $data_process = $this->getDataActionProduct($data);
+            if (!empty($data['id'])) {
+                Product::where('id', $data['id'])->update($data_process);
+                return $data['id'];
+            }else{
+                return Product::insertGetId($data_process);
+            }
         }
     }
 
     public function processDataProduct($data, $arr_quote, $step = TDConstant::QUOTE_FLOW)
     {
         $data_product = $data['product'];
-        $product_valid = $this->productValidate($data_product, $step);
-        if (@$product_valid['code'] == 100) {
-           return $product_valid;
-        }
-        foreach ($data_product as $product) {
+        foreach ($data_product as $key => $product) {
             $product['quote_id'] = $arr_quote['id'];
-            $product_id = $this->processProduct($product);
-            $elements = TDConstant::HARD_ELEMENT;
-            foreach ($elements as $el) {
-                if (!empty($product[$el['pro_field']])) {
-                    $model = getModelByTable($el['table']);
-                    $process = $model->processData($product_id, $product, $el['pro_field']);
+            $product_process = $this->processProduct($key, $product, $step);
+            if (@$product_process['code'] == 100) {
+                return $product_process;
+                break;
+            }else{
+                $elements = TDConstant::HARD_ELEMENT;
+                foreach ($elements as $el) {
+                    if (!empty($product[$el['pro_field']])) {
+                        $model = getModelByTable($el['table']);
+                        $process = $model->processData($product_process, $product, $el['pro_field']);
+                    }
                 }
             }
         }

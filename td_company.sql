@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : localhost
+ Source Server         : owen
  Source Server Type    : MySQL
- Source Server Version : 100428
+ Source Server Version : 100425
  Source Host           : localhost:3306
  Source Schema         : td_company
 
  Target Server Type    : MySQL
- Target Server Version : 100428
+ Target Server Version : 100425
  File Encoding         : 65001
 
- Date: 15/06/2023 21:40:07
+ Date: 19/06/2023 12:58:20
 */
 
 SET NAMES utf8mb4;
@@ -43,7 +43,7 @@ CREATE TABLE `c_designs`  (
 -- ----------------------------
 -- Records of c_designs
 -- ----------------------------
-INSERT INTO `c_designs` VALUES (1, 'DH-000003-0', NULL, 3, 7, NULL, NULL, NULL, NULL, 'not_accepted', 1, 6, NULL, '2023-06-15 06:31:54', '2023-06-15 06:31:54');
+INSERT INTO `c_designs` VALUES (1, 'TK-DH-000003', NULL, 3, 7, NULL, NULL, NULL, NULL, 'not_accepted', 1, 6, NULL, '2023-06-19 10:39:12', '2023-06-19 10:39:12');
 
 -- ----------------------------
 -- Table structure for c_processes
@@ -13642,13 +13642,13 @@ CREATE TABLE `orders`  (
   `created_by` int(10) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx`(`created_by`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of orders
 -- ----------------------------
 INSERT INTO `orders` VALUES (1, 'DH-000001', NULL, 1, '100000000000', '123727051413', '{\"path\":\"http://127.0.0.1:8000/uploads/files/_Liverpool_Steven_Gerrard_048843_.jpg\",\"name\":\"_Liverpool_Steven_Gerrard_048843_.jpg\"}', 'not_accepted', 'note', 'note', 1, '2023-05-26 02:49:00', '2023-05-27 16:04:00', 1);
-INSERT INTO `orders` VALUES (3, 'DH-000003', NULL, 11, '20', '75134284', '{\"path\":\"http://127.0.0.1:8000/uploads/files/Screenshot (15).png\",\"name\":\"Screenshot (15).png\"}', 'not_accepted', 'rest notes', 'ship note', 1, '2023-05-27 17:45:00', '2023-06-13 07:47:26', 4);
+INSERT INTO `orders` VALUES (3, 'DH-000003', NULL, 11, '20', '75134284', '{\"path\":\"http://127.0.0.1:8000/uploads/files/Screenshot (15).png\",\"name\":\"Screenshot (15).png\"}', 'to_design', 'rest notes', 'ship note', 1, '2023-05-27 17:45:00', '2023-06-19 10:39:12', 4);
 
 -- ----------------------------
 -- Table structure for p_substances
@@ -13897,7 +13897,7 @@ INSERT INTO `products` VALUES (3, 'Hop cung 1', 1, '8000', 1, '10x20x30', 1, '19
 INSERT INTO `products` VALUES (4, 'Hop cung 2', 1, '4000', 2, '20x15x11', 1, '83019600', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-05-27 16:04:00', '2023-05-27 16:04:00', 1);
 INSERT INTO `products` VALUES (5, 'Hop cung 3', 1, '5000', 1, '15x20x25', 1, '1156000', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-05-27 16:04:00', '2023-05-27 16:04:00', 1);
 INSERT INTO `products` VALUES (6, 'tuan dung', 2, '10000', 1, '100 x 200  x 50', 8, '69350940', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-05-19 14:38:00', '2023-05-19 14:38:00', 1);
-INSERT INTO `products` VALUES (7, 'Hộp giấy Tuấn Dung thử ( Test lần 1 )', 2, '10000', 1, '{\"length\":\"20\",\"width\":\"10\",\"height\":\"30\"}', 11, '69568800', '{\"path\":\"http://127.0.0.1:8000/uploads/files/Screenshot (16).png\",\"name\":\"Screenshot (16).png\"}', '{\"path\":\"http://127.0.0.1:8000/uploads/files/.gitignore\",\"name\":\".gitignore\"}', '{\"path\":\"http://127.0.0.1:8000/uploads/files/Yêu-cầu-Hệ-thống-Nhà-ở-ngay_ĐXMB.docx\",\"name\":\"Yêu-cầu-Hệ-thống-Nhà-ở-ngay_ĐXMB.docx\"}', NULL, NULL, '{\"print\":\"2\",\"handle\":\"fdsfafm\"}', 1, '2023-06-15 06:31:54', '2023-06-15 06:31:54', 6);
+INSERT INTO `products` VALUES (7, 'Hộp giấy Tuấn Dung thử ( Test lần 1 )', 2, '10000', 1, '{\"length\":\"20\",\"width\":\"10\",\"height\":\"30\"}', 11, '69568800', '{\"path\":\"http://127.0.0.1:8000/uploads/files/Screenshot (16).png\",\"name\":\"Screenshot (16).png\"}', '{\"path\":\"http://127.0.0.1:8000/uploads/files/.gitignore\",\"name\":\".gitignore\"}', '{\"path\":\"http://127.0.0.1:8000/uploads/files/Yêu-cầu-Hệ-thống-Nhà-ở-ngay_ĐXMB.docx\",\"name\":\"Yêu-cầu-Hệ-thống-Nhà-ở-ngay_ĐXMB.docx\"}', NULL, NULL, '{\"print\":\"2\",\"handle\":\"fdsfafm\"}', 1, '2023-06-19 10:39:12', '2023-06-19 10:39:12', 6);
 
 -- ----------------------------
 -- Table structure for quote_configs

@@ -1,7 +1,4 @@
 <div class="order_field_update __order_field_module mt- pt-3 border_top_eb">
-    <?php if(!empty($data_order['id'])): ?>
-        <input type="hidden" name="order[id]" value="<?php echo e($data_order['id']); ?>">     
-    <?php endif; ?>
     <input type="hidden" name="order[quote]" value="<?php echo e($data_quote['id']); ?>">
     <?php
         $order_field_update = [

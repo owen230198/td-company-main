@@ -11,10 +11,10 @@ a{
 }
 button {
   cursor: pointer;
+  border: none;
 }
 button, a, input, select, textarea{
   outline: none !important;
-  border: none !important;
 }
 p{
   padding: 0;

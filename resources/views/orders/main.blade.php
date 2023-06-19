@@ -7,7 +7,12 @@
     <form action="{{ @$link_action }}" method="POST" class="baseAjaxForm config_content __form_order" enctype="multipart/form-data" 
     onkeydown="return event.key != 'Enter'">
         @csrf
-        <input type="hidden" name="quote" value="{{ $data_quote['id'] }}">
+        @if (!empty($data_quote['id']))
+            <input type="hidden" name="quote" value="{{ $data_quote['id'] }}">
+        @endif
+        @if (!empty($data_order['id']))
+            <input type="hidden" name="order[id]" value="{{ $data_order['id'] }}">     
+        @endif
         @yield('main')
         <div class="group_btn_action_form text-center">
             <button type="submit" class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-2">

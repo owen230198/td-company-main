@@ -4,7 +4,6 @@
     use Illuminate\Http\Request;
     use App\Models\CDesign;
     use App\Models\Order;
-    use App\Models\Quote;
     use App\Models\Product;
 
     class CDesignController extends Controller
@@ -14,16 +13,19 @@
             parent::__construct();
             $this->services = new \App\Services\CDesignService;
             $this->quote_services = new \App\Services\QuoteService;
+            $this->order_services = new \App\Services\OrderService;
         }
 
         public function update(Request $request, $id){
             if (!$request->isMethod('POST')) {
                 $arr_command = CDesign::find($id);
                 $data['data_order'] = Order::find($arr_command['order']);
-                $data['data_product'] = Product::find($arr_command['product']);
+                $data['products'] = Product::where('id', $arr_command['product'])->get()->toArray();
                 $data['data_command'] = $arr_command;
                 $data['id'] = $id;
-                if ($arr_command == \StatusConst::NOT_ACCEPTED) {
+                $data['title'] = 'Cập nhật & Xác nhận lệnh - '.$arr_command['code'];
+                 $data['link_action'] = url('update/c_designs/'.$id);
+                if ($arr_command['status'] == \StatusConst::NOT_ACCEPTED) {
                     $data['stage'] = Order::TO_DESIGN;
                 }
                 return view('c_designs.view', $data);

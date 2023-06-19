@@ -7,17 +7,22 @@
     <form action="<?php echo e(@$link_action); ?>" method="POST" class="baseAjaxForm config_content __form_order" enctype="multipart/form-data" 
     onkeydown="return event.key != 'Enter'">
         <?php echo csrf_field(); ?>
-        <input type="hidden" name="quote" value="<?php echo e($data_quote['id']); ?>">
+        <?php if(!empty($data_quote['id'])): ?>
+            <input type="hidden" name="quote" value="<?php echo e($data_quote['id']); ?>">
+        <?php endif; ?>
+        <?php if(!empty($data_order['id'])): ?>
+            <input type="hidden" name="order[id]" value="<?php echo e($data_order['id']); ?>">     
+        <?php endif; ?>
         <?php echo $__env->yieldContent('main'); ?>
         <div class="group_btn_action_form text-center">
             <button type="submit" class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-2">
               <i class="fa fa-check mr-2 fs-14" aria-hidden="true"></i>Hoàn tất
             </button>
-            <?php if(@$data_order['status'] == StatusConst::NOT_ACCEPTED): ?>
+            <?php if(!empty($stage)): ?>
                 <button type="button" class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-2 __apply_order" 
-                data-id=<?php echo e(@$data_order['id']); ?>>
+                data-id=<?php echo e($id); ?> data-stage="<?php echo e($stage); ?>">
                     <i class="fa fa-thumbs-o-up mr-2 fs-14" aria-hidden="true"></i>Xác nhận sản xuất
-                </button>    
+                </button> 
             <?php endif; ?>
             <button type="button" class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-2">
                 <i class="fa fa-print mr-2 fs-14" aria-hidden="true"></i>In đơn

@@ -66,7 +66,7 @@
                 <div class="ajax_product_view_by_category">
                     
                 </div>
-                <?php if(!empty($product['id'])): ?>
+                <?php if(!empty($product['id']) && empty($not_detail)): ?>
                     <input type="hidden" name="product[<?php echo e($pro_index); ?>][id]" value="<?php echo e($product['id']); ?>">
                     <div class="text-center">
                         <button type="button" 

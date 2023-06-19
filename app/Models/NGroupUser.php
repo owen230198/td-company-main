@@ -21,6 +21,7 @@ class NGroupUser extends Model
     const GROUP_MODULE = [
         'quote_price_config' => 'Cài đặt đơn giá SX',
         'customer_quote' => 'Báo giá & Khách hàng',
+        'design_module' => 'Thiết kế',
         'order_handle' => 'Đơn hàng & sản xuất',
         'profit' => '% Hoa hồng',
         'report' => 'Báo cáo',
@@ -53,6 +54,21 @@ class NGroupUser extends Model
             'name' => 'DS báo giá (chưa duyệt)', 
             'link' => 'view/quotes?default_data={"status":"not_accepted"}', 
             'group' => 'customer_quote'
+        ],
+        'design_not_accepted' => [
+            'name' => 'DS lệnh TK chưa duyệt', 
+            'link' => 'view/c_designs?default_data={"status":"not_accepted"}', 
+            'group' => 'design_module'
+        ],
+        'designing_command' => [
+            'name' => 'DS lệnh TK đang nhận', 
+            'link' => 'view/c_designs?default_data={"status":"designing"}', 
+            'group' => 'design_module'
+        ],
+        'design_submited' => [
+            'name' => 'DS lệnh TK đã xong', 
+            'link' => 'view/c_designs?default_data={"status":"submited"}', 
+            'group' => 'design_module'
         ],
         'handle_process' => [
             'name' => 'Theo dõi sản xuất', 
@@ -138,6 +154,14 @@ class NGroupUser extends Model
             self::MODULE['handle_process'],
             self::MODULE['profit'],
             self::MODULE['create_available_order'],
+            self::MODULE['account'],
+            self::MODULE['change_password'],
+        ],
+        self::DESIGN => [
+            self::MODULE['profit'],
+            self::MODULE['design_not_accepted'],
+            self::MODULE['designing_command'],
+            self::MODULE['design_submited'],
             self::MODULE['account'],
             self::MODULE['change_password'],
         ]
