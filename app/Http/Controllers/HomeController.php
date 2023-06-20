@@ -25,6 +25,9 @@ class HomeController extends Controller
     {
         $data['title'] = 'Báo cáo & Thống kê';
         $data['not_accepted_table'] = \App\Constants\OrderConstant::ACCEPT_REQURIRED_TABLE;
+        if (\GroupUser::isDesign()) {
+            unset($data['not_accepted_table']['orders']);
+        }
         return view('main', $data); 
     }
 }
