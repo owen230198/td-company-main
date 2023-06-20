@@ -73,7 +73,7 @@ class OrderController extends Controller
             $arr_quote = Quote::find($data['quote']);
             if (!empty($arr_quote)) {
                 $product_process = $this->quote_services->processDataProduct($data, $arr_quote, \TDConst::ORDER_ACTION_FLOW);
-                if (@$product_process['code'] == 100) {
+                if (!empty($product_process['code']) && $product_process['code'] == 100) {
                     return returnMessageAjax(100, $product_process['message']);  
                 }
             }

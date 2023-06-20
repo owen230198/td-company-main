@@ -37,7 +37,7 @@ class OrderService extends BaseService
             return ['code' => 100, 'message' => 'Bạn cần upload bill tạm ứng cho đơn này !'];
         }
         $product_process = $this->quote_services->processDataProduct($data, $arr_quote, \TDConst::ORDER_ACTION_FLOW);
-        if (@$product_process['code'] == 100) {
+        if (!empty($product_process['code']) && $product_process['code'] == 100) {
             return returnMessageAjax(100, $product_process['message']);  
         }else{
             $arr_order['status'] = \StatusConst::NOT_ACCEPTED;

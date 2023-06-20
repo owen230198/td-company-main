@@ -151,7 +151,7 @@ class QuoteService extends BaseService
         foreach ($data_product as $key => $product) {
             $product['quote_id'] = $arr_quote['id'];
             $product_process = $this->processProduct($product, $step, $key);
-            if (@$product_process['code'] == 100) {
+            if (!empty($product_process['code']) && $product_process['code'] == 100) {
                 return $product_process;
                 break;
             }else{

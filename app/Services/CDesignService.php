@@ -20,7 +20,7 @@
                 return returnMessageAjax(100, 'Không có dữ liệu đc cập nhật!');
             }
             $process_product = $this->quote_services->processProduct($data[0], \TDConst::ORDER_ACTION_FLOW);
-            if (@$process_product['code'] == 100) {
+            if (!empty($process_product['code']) && $process_product['code'] == 100) {
                 return $process_product;
             }else{
                 CDesign::where('id', $command['id'])->update(['status' => \TDConst::SUBMITED]);
