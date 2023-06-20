@@ -16,9 +16,6 @@
 
         public function processDataCommand($data, $command)
         {
-            if ($command['status'] != Order::DESIGNING || $command['assign_by'] != \User::getCurrent()) {
-                return returnMessageAjax(100, 'Bạn cần tiếp nhận lệnh trước !');
-            }
             if (count($data) == 0) {
                 return returnMessageAjax(100, 'Không có dữ liệu đc cập nhật!');
             }
@@ -26,7 +23,11 @@
             if (@$process_product['code'] == 100) {
                 return $process_product;
             }else{
-                Product::where('id', $command['id'])->update(['status' => \TDConst::SUBMITED]);  
+                CDesign::where('id', $command['id'])->update(['status' => \TDConst::SUBMITED]);
+                if (CDesign::where('status', Order::NOT_ACCEPTED)->orWhere('status', Order::DESIGNING)->count() == 0) {
+                    Order::where('id', $command['order'])->update(['status' => Order::DESIGN_SUBMITED]);
+                }
+                return returnMessageAjax(200, 'Cập nhật thành công lệnh thiết kế!', url());  
             }
         }
     }

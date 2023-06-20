@@ -11,7 +11,7 @@
  Target Server Version : 100425
  File Encoding         : 65001
 
- Date: 19/06/2023 17:41:13
+ Date: 20/06/2023 17:37:35
 */
 
 SET NAMES utf8mb4;
@@ -43,7 +43,7 @@ CREATE TABLE `c_designs`  (
 -- ----------------------------
 -- Records of c_designs
 -- ----------------------------
-INSERT INTO `c_designs` VALUES (1, 'TK-DH-000003', NULL, 3, 7, NULL, NULL, NULL, NULL, 'not_accepted', 1, 6, NULL, '2023-06-19 10:39:12', '2023-06-19 10:39:12');
+INSERT INTO `c_designs` VALUES (1, 'TK-DH-000003', NULL, 3, 7, NULL, NULL, NULL, NULL, 'designing', 1, 6, 5, '2023-06-19 10:39:12', '2023-06-20 15:55:21');
 
 -- ----------------------------
 -- Table structure for c_processes

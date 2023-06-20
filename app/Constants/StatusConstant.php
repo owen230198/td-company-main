@@ -7,6 +7,7 @@ class StatusConstant
     const ERR_CODE = 100;
     const SUCCESS_MSG = 'success_msg';
     const ERR_MSG = 'err_msg';
+    const RELOAD = 'f5';
 
     const NOT_ACCEPTED = 'not_accepted';
     const ACCEPTED = 'accepted';

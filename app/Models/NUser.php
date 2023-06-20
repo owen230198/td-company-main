@@ -13,9 +13,9 @@ class NUser extends Model
      */
     protected $table = 'n_users';
     protected $protectFields = false;
-    static function getCurrent()
+    static function getCurrent($field = '')
     {
-        $user_login = session('user_login');
-        return @$user_login['user'] ? $user_login['user'] : array();
+        $user_login = !empty(session('user_login')['user']) ? session('user_login')['user'] : [];
+        return !empty($field) && !empty($user_login[$field]) ? $user_login[$field] : $user_login;
     }
 }

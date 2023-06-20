@@ -72,7 +72,7 @@
     }elseif (\GroupUser::isTechApply()) {
         unset($ext_pro_fields['design_file'], $ext_pro_fields['design_shape_file']);    
     }elseif (\GroupUser::isDesign()) {
-        unset($ext_pro_fields['design_file'], $ext_pro_fields['sale_shape_file']);    
+        unset($ext_pro_fields['sale_shape_file']);    
     }
 ?>
 

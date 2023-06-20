@@ -128,7 +128,7 @@ class NGroupUser extends Model
             'group' => 'account'
         ],
         'change_password' => [
-            'name' => 'Thông tin tài khoản', 
+            'name' => 'Thay đổi mật khẩu', 
             'link' => 'change-password', 
             'group' => 'account'
         ]

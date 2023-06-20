@@ -36,7 +36,11 @@ var ajaxBaseCall = function(param)
 		}
 		if (data.url != null) {
 			setTimeout(() => {
-				window.location.href=data.url;
+				if (data.url == 'f5') {
+					window.location.reload();	
+				}else{
+					window.location.href=data.url;
+				}
 			}, 1500);
 		} 
 		$('#loader').delay(200).fadeOut(500); 

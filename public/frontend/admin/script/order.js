@@ -11,7 +11,8 @@ var setAdvanceCostOrder = function()
     });
 }
 
-var applyOrderStep = function(){
+var applyOrderStep = function()
+{
     $(document).on('click', '.__apply_order', function(event){
         event.preventDefault();
         let form = $(this).closest('.__form_order');
@@ -28,5 +29,5 @@ var applyOrderStep = function(){
 
 $(function(){
     setAdvanceCostOrder(); 
-    applyOrderStep(); 
+    applyOrderStep();
 });

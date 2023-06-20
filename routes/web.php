@@ -52,10 +52,6 @@ Route::middleware(['check_login'])->group(function () {
 	Route::any('send-quote/{id}', [QuoteController::class, 'sendQuote']);
 
 	//orders routes
-	Route::any('apply-order/{stage}/{id}', [OrderController::class, 'applyOrder']);
-	Route::post('insert-orders', [OrderController::class, 'insert']);
-	Route::post('update-orders/{id}', [OrderController::class, 'update']);
-	Route::get('get-process-by-category', [ProductController::class, 'getProcessByCategory']);
-	Route::get('get-data-table-command/{table}', [OrderController::class, 'getDataTableCommand']);
-	Route::get('view-command/{table}/{id}', [OrderController::class, 'ViewCommand']);
+	Route::post('apply-order/{stage}/{id}', [OrderController::class, 'applyOrder']);
+	Route::post('receive-command/{table}/{id}', [OrderController::class, 'receiveCommand']);
 });

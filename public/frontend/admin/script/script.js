@@ -332,12 +332,25 @@ var fileUploadModule = function() {
     })    
 }
 
+var receiveCommand = function()
+{
+    $(document).on('click', '.__receive_command', function(event){
+        event.preventDefault();
+        let table = $(this).data('table');
+        let id = $(this).data('id');
+        ajaxBaseCall({
+            url: getBaseRoute('receive-command/'+table+'/'+id),
+            type: 'POST'
+        });
+    });
+}
+
 $(function () {
     submitActionAjaxForm();
     confirmRemoveData();
     checkBoxModule();
     changeSubmit();
-    usernameInputPrevent();
+    // usernameInputPrevent();
     passwordInputPrevent();
     checkMultiRecordModule();
     loadDataPopup();
@@ -348,6 +361,7 @@ $(function () {
     menuSidebar();
     selectAjaxModule();
     multipleSelectModule();
-    phoneInputPrevent();
+    // phoneInputPrevent();
     fileUploadModule();
+    receiveCommand();
 });

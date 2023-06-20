@@ -96,5 +96,24 @@ class OrderController extends Controller
                 return returnMessageAjax(100, 'Lỗi không xác định !');
         }
     }
+
+    public function receiveCommand($table, $id)
+    {
+        $model = getModelByTable($table);
+        $command = $model::find($id);
+        if ($command['status'] != \StatusConst::NOT_ACCEPTED || empty($command['assign'])) {
+            return returnMessageAjax(100, 'Lệnh này đã được nhận !');
+        }
+        if (\GroupUser::isAdmin() || \GroupUser::getCurrent() == $model::GR_USER) {
+            $process = $model::where('id', $id)->update(['assign_by' => \User::getCurrent('id'), 'status' => $model::PROCESSING]);
+            if ($process) {
+                return returnMessageAjax(200, 'Đã tiếp nhận lệnh, vui lòng truy cập danh sách lệnh của bạn!', \StatusConst::RELOAD);
+            }else{
+                return returnMessageAjax(100, 'Có lỗi xảy ra, vui lòng thử lại!');
+            }       
+        }else{
+            return returnMessageAjax(100, 'Bạn không thuộc bộ phận nhận lệnh này !');
+        }    
+    }
 }
 ?>
