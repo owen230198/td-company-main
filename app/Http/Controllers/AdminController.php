@@ -42,7 +42,7 @@ class AdminController extends Controller
 
     public function view(Request $request, $table)
     {
-        $permission = $this->admins->checkPermissionAction($table, 'view');
+        $permission = $this->admins->checkPermissionAction($table, __FUNCTION__);
         if (!@$permission['allow']) {
             return redirect('permission-error');
         }
@@ -66,6 +66,7 @@ class AdminController extends Controller
                 $this->injectViewWhereParam($table, $permission['where']);
             }
         }
+        dd(self::$view_where);
         $data['data_tables'] = getDataTable($table, self::$view_where, ['paginate' => $data['page_item']]);
         session()->put('back_url', url()->full());    
         return view('table.'.$data['view_type'], $data);
@@ -102,16 +103,17 @@ class AdminController extends Controller
 
     public function insert(Request $request, $table)
     {
-        if (!$this->admins->checkPermissionAction($table, 'insert')) {
+        $role = $this->admins->checkPermissionAction($table, __FUNCTION__);
+        if (empty($role['allow'])) {
             return customReturnMessage(false, $request->isMethod('POST'), ['url' => url('permission-error')]);
         }
-        if (in_array($table, NTable::$specific['insert'])) {
+        if (in_array($table, NTable::$specific[__FUNCTION__])) {
             $controller = getObjectByTable($table);
             return $controller->insert($request);
         }else{
             $param = $request->except('_token');
             if ($request->isMethod('GET')) {
-                $data = $this->admins->getDataActionView($table, 'insert', 'Thêm mới', $param);
+                $data = $this->admins->getDataActionView($table, __FUNCTION__, 'Thêm mới', $param);
                 $data['action_url'] = url('insert/'.$table);
                 return view('action.view', $data);
             }else{

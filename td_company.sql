@@ -11,7 +11,7 @@
  Target Server Version : 100425
  File Encoding         : 65001
 
- Date: 21/06/2023 13:23:35
+ Date: 21/06/2023 17:39:13
 */
 
 SET NAMES utf8mb4;
@@ -13553,7 +13553,7 @@ INSERT INTO `n_tables` VALUES (18, 'orders', 'Đơn hàng', 0, 'orders', 'orders
 INSERT INTO `n_tables` VALUES (19, 'p_substances', 'Chất liệu giấy in', 0, 'p_substances', 'p_substances', 20, 'view', NULL, '1', '1', '1', '1', '2023-04-23 11:30:46', '2023-04-23 11:30:46');
 INSERT INTO `n_tables` VALUES (20, 'product_categories', 'Danh mục sản phẩm', 0, 'product_categories', 'product_categories', 20, 'view', NULL, '1', '1', '1', '1', '2023-04-23 11:30:46', '2023-04-23 11:30:46');
 INSERT INTO `n_tables` VALUES (21, 'products', 'Sản phẩm', 0, 'orders', 'products', 20, 'view', NULL, '1', '1', '1', '1', '2023-04-23 11:30:46', '2023-04-23 11:30:46');
-INSERT INTO `n_tables` VALUES (22, 'c_designs', 'Lệnh thiết kế', 0, 'c_designs', 'c_designs', 20, 'view', '[\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"level-down\",\"note\":\"Nhận lệnh\", \r\n		\"class\":\"__receive_command\"\r\n	}\r\n]', '0', '1', '1', '0', '2023-06-15 10:57:53', '2023-06-15 10:57:53');
+INSERT INTO `n_tables` VALUES (22, 'c_designs', 'Lệnh thiết kế', 0, 'c_designs', 'c_designs', 20, 'view', '[\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"level-down\",\"note\":\"Nhận lệnh\", \r\n		\"class\":\"__receive_command\",\r\n		\"condition\":{\"status\":\"not_accepted\"}\r\n	}\r\n]', '0', '1', '1', '0', '2023-06-21 15:12:43', '2023-06-21 15:12:43');
 INSERT INTO `n_tables` VALUES (23, 'c_processes', 'Lệnh sản xuất', 0, 'c_processes', 'c_processes', 20, 'view', NULL, '1', '1', '1', '1', '2023-04-23 11:30:46', '2023-04-23 11:30:46');
 
 -- ----------------------------

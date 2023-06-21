@@ -8,13 +8,13 @@
         protected $protectFields = false;
         const PROCESSING = Order::DESIGNING;
         const GR_USER = \GroupUser::DESIGN;
-        static function getRoleData()
+        public function getRole()
         {
-            return [
+            $role = [
                 \GroupUser::DESIGN => [
                     'view' => 
                     [
-                        'view_with' => [
+                        'with' => [
                             'type' => 'group',
                             'cond' => 'or',
                             'query' => 
@@ -42,6 +42,7 @@
                     ]
                 ]
             ];
+            return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];
         }    
     }
     

@@ -10,52 +10,29 @@ class AdminService extends BaseService
         $this->quote_service = new \App\Services\QuoteService;
     }
 
-    public function checkPermissionAction($param)
+    public function checkPermissionAction($table, $action)
     {
-        if($this->group_user::isAdmin());
+        if($this->group_user::isAdmin()){
+            return ['allow' => true];   
+        }
+        $model = getModelByTable($table);
+        $role = method_exists($model, 'getRole') ? $model::getRole() : [];
+        if (!empty($role[$action]['all'])) {
             return ['allow' => true];
-    }
-
-    public function checkListGroup($group, $list_group)
-    {
-        $ret = false;
-        foreach ($list_group as $item) {
-            if ($item['id']==$group) {
-                $ret = true;
-                break;
+        }
+        if (!empty($role[$action]['with'])) {
+            if ($action == 'view') {
+                return ['allow' => true, 'where' => $role[$action]['with']];
+            }else{
+                return ['allow' => true];
             }
         }
-        return $ret;
+        
     }
 
     public function logActionUserData($action, $table, $id)
     {
         return true;
-    }
-
-    public function checkRoleUpdatePermission($module, $dataRole)
-    {
-        $admin = getSessionUser();
-        if (@$admin['super_admin']) {
-            return true;
-        }
-        $permissions = $this->roles->select('json_data_role')->where('module_id', $module)
-        ->where('group_user', @$admin['group_user'])->first();
-        if ($permissions == null) {
-            return false;
-        }
-        $arrRole = !empty($permissions['json_data_role'])?json_decode($permissions['json_data_role'], true):[];
-        if (empty($arrRole)) {
-            return false;
-        }
-        $ret = true;
-        foreach ($dataRole as $key => $value) {
-            if (!array_key_exists($key, $arrRole) || empty($arrRole[$key])) {
-                $ret = false;
-                break;
-            }
-        }
-        return $ret;
     }
 
     public function getTableItem($table)

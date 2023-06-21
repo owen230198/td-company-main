@@ -67,7 +67,7 @@ class NGroupUser extends Model
         ],
         'design_submited' => [
             'name' => 'DS lệnh TK đã xong', 
-            'link' => 'view/c_designs?default_data={"status":"submited"}', 
+            'link' => 'view/c_designs?default_data={"status":"design_submited"}', 
             'group' => 'design_module'
         ],
         'handle_process' => [
