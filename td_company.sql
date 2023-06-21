@@ -11,7 +11,7 @@
  Target Server Version : 100425
  File Encoding         : 65001
 
- Date: 20/06/2023 17:37:35
+ Date: 21/06/2023 13:23:35
 */
 
 SET NAMES utf8mb4;
@@ -43,7 +43,7 @@ CREATE TABLE `c_designs`  (
 -- ----------------------------
 -- Records of c_designs
 -- ----------------------------
-INSERT INTO `c_designs` VALUES (1, 'TK-DH-000003', NULL, 3, 7, NULL, NULL, NULL, NULL, 'designing', 1, 6, 5, '2023-06-19 10:39:12', '2023-06-20 15:55:21');
+INSERT INTO `c_designs` VALUES (1, 'TK-DH-000003', NULL, 3, 7, NULL, NULL, NULL, NULL, 'design_submited', 1, 6, 5, '2023-06-19 10:39:12', '2023-06-21 13:19:50');
 
 -- ----------------------------
 -- Table structure for c_processes
@@ -13549,7 +13549,7 @@ INSERT INTO `n_tables` VALUES (12, 'supplies', 'Vật tư hộp', 7, 'supplies',
 INSERT INTO `n_tables` VALUES (13, 'supply_types', 'Vật tư tham gia sx', 0, 'supply_types', 'supply_types', 10, 'view', '[\r\n	{\"icon\":\"list-ul\",\"note\":\"Đơn giá\", \"link\":\"view/supply_prices?supply_id=\"}\r\n]', '1', '1', '1', '1', '2023-04-28 11:49:44', '2023-04-28 11:49:44');
 INSERT INTO `n_tables` VALUES (14, 'supply_prices', 'Đơn giá vật tư', 0, 'supply_prices', 'supply_prices', 20, 'view', NULL, '1', '1', '1', '1', '2023-04-28 10:33:01', '2023-04-28 10:33:01');
 INSERT INTO `n_tables` VALUES (17, 'fill_finishes', 'Chi phí bồi & hoàn thiện', 7, 'fill_finishes', 'fill_finishes', 10, 'view', NULL, '1', '1', '1', '1', '2023-04-28 10:33:32', '2023-04-28 10:33:32');
-INSERT INTO `n_tables` VALUES (18, 'orders', 'Đơn hàng', 0, 'orders', 'orders', 20, 'view', NULL, '1', '1', '1', '1', '2023-04-23 11:30:46', '2023-04-23 11:30:46');
+INSERT INTO `n_tables` VALUES (18, 'orders', 'Đơn hàng', 0, 'orders', 'orders', 20, 'view', NULL, '0', '1', '1', '1', '2023-06-21 13:22:33', '2023-06-21 13:22:33');
 INSERT INTO `n_tables` VALUES (19, 'p_substances', 'Chất liệu giấy in', 0, 'p_substances', 'p_substances', 20, 'view', NULL, '1', '1', '1', '1', '2023-04-23 11:30:46', '2023-04-23 11:30:46');
 INSERT INTO `n_tables` VALUES (20, 'product_categories', 'Danh mục sản phẩm', 0, 'product_categories', 'product_categories', 20, 'view', NULL, '1', '1', '1', '1', '2023-04-23 11:30:46', '2023-04-23 11:30:46');
 INSERT INTO `n_tables` VALUES (21, 'products', 'Sản phẩm', 0, 'orders', 'products', 20, 'view', NULL, '1', '1', '1', '1', '2023-04-23 11:30:46', '2023-04-23 11:30:46');
@@ -13648,7 +13648,7 @@ CREATE TABLE `orders`  (
 -- Records of orders
 -- ----------------------------
 INSERT INTO `orders` VALUES (1, 'DH-000001', NULL, 1, '100000000000', '123727051413', '{\"path\":\"http://127.0.0.1:8000/uploads/files/_Liverpool_Steven_Gerrard_048843_.jpg\",\"name\":\"_Liverpool_Steven_Gerrard_048843_.jpg\"}', 'not_accepted', 'note', 'note', 1, '2023-05-26 02:49:00', '2023-05-27 16:04:00', 1);
-INSERT INTO `orders` VALUES (3, 'DH-000003', NULL, 11, '20', '75134284', '{\"path\":\"http://127.0.0.1:8000/uploads/files/Screenshot (15).png\",\"name\":\"Screenshot (15).png\"}', 'to_design', 'rest notes', 'ship note', 1, '2023-05-27 17:45:00', '2023-06-19 10:39:12', 4);
+INSERT INTO `orders` VALUES (3, 'DH-000003', NULL, 11, '20', '75134284', '{\"path\":\"http://127.0.0.1:8000/uploads/files/Screenshot (15).png\",\"name\":\"Screenshot (15).png\"}', 'design_submited', 'rest notes', 'ship note', 1, '2023-05-27 17:45:00', '2023-06-21 13:19:50', 4);
 
 -- ----------------------------
 -- Table structure for p_substances
@@ -13886,7 +13886,7 @@ CREATE TABLE `products`  (
   `updated_at` datetime(0) NULL DEFAULT NULL,
   `created_by` int(10) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of products
@@ -13898,6 +13898,8 @@ INSERT INTO `products` VALUES (4, 'Hop cung 2', 1, '4000', 2, '20x15x11', 1, '83
 INSERT INTO `products` VALUES (5, 'Hop cung 3', 1, '5000', 1, '15x20x25', 1, '1156000', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-05-27 16:04:00', '2023-05-27 16:04:00', 1);
 INSERT INTO `products` VALUES (6, 'tuan dung', 2, '10000', 1, '100 x 200  x 50', 8, '69350940', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-05-19 14:38:00', '2023-05-19 14:38:00', 1);
 INSERT INTO `products` VALUES (7, 'Hộp giấy Tuấn Dung thử ( Test lần 1 )', 2, '10000', 1, '{\"length\":\"20\",\"width\":\"10\",\"height\":\"30\"}', 11, '69568800', '{\"path\":\"http://127.0.0.1:8000/uploads/files/Screenshot (16).png\",\"name\":\"Screenshot (16).png\"}', '{\"path\":\"http://127.0.0.1:8000/uploads/files/.gitignore\",\"name\":\".gitignore\"}', '{\"path\":\"http://127.0.0.1:8000/uploads/files/Yêu-cầu-Hệ-thống-Nhà-ở-ngay_ĐXMB.docx\",\"name\":\"Yêu-cầu-Hệ-thống-Nhà-ở-ngay_ĐXMB.docx\"}', NULL, NULL, '{\"print\":\"2\",\"handle\":\"fdsfafm\"}', 1, '2023-06-19 10:39:12', '2023-06-19 10:39:12', 6);
+INSERT INTO `products` VALUES (9, 'Hộp giấy Tuấn Dung thử ( Test lần 1 )', 2, '10000', NULL, '{\"length\":\"20\",\"width\":\"10\",\"height\":\"30\"}', NULL, NULL, '{\"path\":\"http://127.0.0.1:8000/uploads/files/Screenshot (16).png\",\"name\":\"Screenshot (16).png\"}', NULL, '{\"path\":\"http://127.0.0.1:8000/uploads/files/Yêu-cầu-Hệ-thống-Nhà-ở-ngay_ĐXMB.docx\",\"name\":\"Yêu-cầu-Hệ-thống-Nhà-ở-ngay_ĐXMB.docx\"}', '{\"path\":\"http://127.0.0.1:8000/uploads/files/bitnami.css\",\"name\":\"bitnami.css\"}', '{\"path\":\"http://127.0.0.1:8000/uploads/files/applications.html\",\"name\":\"applications.html\"}', '{\"print\":\"2\",\"handle\":\"fdsfafmd\"}', 1, '2023-06-21 13:18:08', '2023-06-21 13:18:08', 5);
+INSERT INTO `products` VALUES (10, 'Hộp giấy Tuấn Dung thử ( Test lần 1 )', 2, '10000', NULL, '{\"length\":\"20\",\"width\":\"10\",\"height\":\"30\"}', NULL, NULL, '{\"path\":\"http://127.0.0.1:8000/uploads/files/Screenshot (16).png\",\"name\":\"Screenshot (16).png\"}', NULL, '{\"path\":\"http://127.0.0.1:8000/uploads/files/Yêu-cầu-Hệ-thống-Nhà-ở-ngay_ĐXMB.docx\",\"name\":\"Yêu-cầu-Hệ-thống-Nhà-ở-ngay_ĐXMB.docx\"}', '{\"path\":\"http://127.0.0.1:8000/uploads/files/bitnami.css\",\"name\":\"bitnami.css\"}', '{\"path\":\"http://127.0.0.1:8000/uploads/files/applications.html\",\"name\":\"applications.html\"}', '{\"print\":\"2\",\"handle\":\"fdsfafmd\"}', 1, '2023-06-21 13:19:50', '2023-06-21 13:19:50', 5);
 
 -- ----------------------------
 -- Table structure for quote_configs

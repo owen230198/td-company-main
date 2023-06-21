@@ -23,11 +23,12 @@
             if (!empty($process_product['code']) && $process_product['code'] == 100) {
                 return $process_product;
             }else{
-                CDesign::where('id', $command['id'])->update(['status' => \TDConst::SUBMITED]);
-                if (CDesign::where('status', Order::NOT_ACCEPTED)->orWhere('status', Order::DESIGNING)->count() == 0) {
+                CDesign::where('id', $command['id'])->update(['status' => Order::DESIGN_SUBMITED]);
+                $command_list = CDesign::where('order', $command['order']);
+                if ($command_list->count() == $command_list->where('status', Order::DESIGN_SUBMITED)->count()) {
                     Order::where('id', $command['order'])->update(['status' => Order::DESIGN_SUBMITED]);
                 }
-                return returnMessageAjax(200, 'Cập nhật thành công lệnh thiết kế!', url());  
+                return returnMessageAjax(200, 'Cập nhật thành công lệnh thiết kế!', url(''));  
             }
         }
     }

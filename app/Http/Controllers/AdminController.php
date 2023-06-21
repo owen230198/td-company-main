@@ -176,7 +176,7 @@ class AdminController extends Controller
        $data = $request->all();
        $id = $data['remove_id'];
        $table = $data['table'];
-        if (!$this->admins->checkPermissionAction($table, 'remove', $id)) {
+        if (!\GroupUser::isAdmin()) {
             if (@$request->input('ajax') == 1) {
                 return returnMessageAjax(500, 'Bạn không có quyền thực hiện thao tác này !');
             }else{
@@ -208,7 +208,7 @@ class AdminController extends Controller
             return back()->with('error','Chưa có mục được chọn !');
         }
         $table = $data['table'];
-        if (!$this->admins->checkPermissionAction($table, 'remove')) {
+        if (!\GroupUser::isAdmin()) {
             return back()->with('error','Không có quyền thực hiện thao tác này !');
         }
         $arr_id = explode(',', $str_id);

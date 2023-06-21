@@ -1,12 +1,40 @@
 <?php
 namespace App\Constants;
+use \App\Models\Order;
 class OrderConstant
 {
     //ORDER PAYMENT STATUS
     const ORD_NOT_PAYMENT = 'not_payment';
     const ORD_ADVANCE_PAYMENT = 'advance_payment';
     const ORD_PAID_PAYMENT = 'paid_payment';
-    const ACCEPT_REQURIRED_TABLE = ['orders'=>'Đơn hàng', 'c_designs'=>'Lệnh thiết kế', 'c_prints'=>'Lệnh in', 'c_processes'=>'Lệnh sản xuất'];
+    const ACCEPT_REQURIRED_TABLE = [
+        [
+            'icon' => 'orders', 
+            'table' => 'orders', 
+            'text' => 'Đơn chờ duyệt thiết kế', 
+            'status' => Order::NOT_ACCEPTED 
+        ], 
+        [
+            'icon' => 'c_designs', 
+            'table' => 'c_designs', 
+            'text' => 'Lệnh thiết kế', 
+            'status' => Order::NOT_ACCEPTED 
+        ],
+        [
+            'icon' => 'tech', 
+            'table' => 'orders', 
+            'text' => 'Đơn cần xử lí kỹ thuật', 
+            'status' => Order::DESIGN_SUBMITED
+        ],
+        [
+            'icon' => 'c_processes', 
+            'table' => 'orders', 
+            'text' => 'Đơn cần duyệt sản xuất', 
+            'status' => Order::TECH_SUBMITED
+        ],
+        ['icon' => 'buy', 'table' => 'c_prints', 'text' => 'Yêu cầu mua vật tư'],
+        ['icon' => 'export', 'table' => 'c_prints', 'text' => 'Yêu cầu xuất khuôn'],
+    ];
     //PROCESS STAGE 
     const STAGE_PROCESS = [   
         "crop"=>"Xén Thành Phẩm",
