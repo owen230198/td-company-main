@@ -89,17 +89,13 @@ if (!function_exists('handleQueryCondition')) {
         foreach ($where as $w) {
             if (!empty($w['type']) && $w['type'] == 'group' && !empty($w['query'])) {
                 $gr_where = $w['query'];
-                if ($w['con'] == 'or') {
+                if (@$w['con'] == 'or') {
                     $query->orWhere(function($query) use($gr_where){
-                        foreach ($gr_where  as $grw) {
-                            handleQueryCondition($query, $grw);
-                        }
+                        handleQueryCondition($query, $gr_where);
                     }); 
                 }else{
                     $query->where(function($query) use($gr_where){
-                        foreach ($gr_where  as $grw) {
-                            handleQueryCondition($query, $grw);
-                        }
+                        handleQueryCondition($query, $gr_where);
                     }); 
                 }
             }else{

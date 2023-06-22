@@ -1,9 +1,8 @@
 <?php
 
 namespace App\Models;
-
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\Order;
 class Quote extends Model
 {
     /**
@@ -20,24 +19,7 @@ class Quote extends Model
             \GroupUser::SALE => [
                 'view' => 
                 [
-                    'with' => [
-                        'type' => 'group',
-                        'cond' => 'or',
-                        'query' => 
-                        [
-                            [
-                                ['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED]
-                            ],
-                            [
-                                ['key' => 'status', 'value' => \StatusConst::SUBMITED],
-                                ['key' => 'assign_by', 'value' => \User::getCurrent()]
-                            ],
-                            [
-                                ['key' => 'status', 'value' => Order::DESIGNING],
-                                ['key' => 'assign_by', 'value' => \User::getCurrent()]
-                            ]
-                        ]
-                    ]
+                    'with' => ['key' => 'created_by', 'value' => \User::getCurrent('id')],
                 ],
                 'update' => [
                     'view_with' => 

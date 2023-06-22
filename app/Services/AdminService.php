@@ -17,6 +17,9 @@ class AdminService extends BaseService
         }
         $model = getModelByTable($table);
         $role = method_exists($model, 'getRole') ? $model::getRole() : [];
+        if(count($role) == 0){
+            return ['allow' => false];
+        }
         if (!empty($role[$action]['all'])) {
             return ['allow' => true];
         }

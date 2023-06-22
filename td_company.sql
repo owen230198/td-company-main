@@ -11,7 +11,7 @@
  Target Server Version : 100425
  File Encoding         : 65001
 
- Date: 21/06/2023 17:39:13
+ Date: 22/06/2023 22:42:26
 */
 
 SET NAMES utf8mb4;
@@ -13985,8 +13985,8 @@ CREATE TABLE `quotes`  (
 -- Records of quotes
 -- ----------------------------
 INSERT INTO `quotes` VALUES (1, 'BG-00001', 'accepted', 'Công ty WS', NULL, 1, 'Công ty WS', 'Nguyễn Duy Khánh', '360 Mieng Ha, Hoa Sơn, Ung Hoa, TP Ha Noi', 'nguyenduykhanh2323@gmail.com', '0378050251', '0223344556', 351, '10', '200000', NULL, '203388210375', '223727051412.5', NULL, 1, NULL, '2023-05-19 16:40:49', '2023-05-19 16:40:49', 1);
-INSERT INTO `quotes` VALUES (8, 'BG-000014', 'not_accepted', 'CÔNG TY CP IN & SẢN XUẤT BAO BÌ TUẤN DUNG', NULL, 3, 'CÔNG TY CP IN & SẢN XUẤT BAO BÌ TUẤN DUNG', 'Mr Tuấn', 'Lô D5-16 Làng nghề Triều Khúc - Tân triều - HN', 'kd1.intuandung@gmail.com', '0963303999', '38303888', 351, '10', '0', NULL, '69350940', '76286034', NULL, 1, NULL, '2023-05-19 17:14:00', '2023-05-19 17:14:00', 1);
-INSERT INTO `quotes` VALUES (9, 'BG-000014', 'not_accepted', 'CÔNG TY CP IN & SẢN XUẤT BAO BÌ TUẤN DUNG', NULL, 3, 'CÔNG TY CP IN & SẢN XUẤT BAO BÌ TUẤN DUNG', 'Mr Tuấn', 'Lô D5-16 Làng nghề Triều Khúc - Tân triều - HN', 'kd1.intuandung@gmail.com', '0963303999', '38303888', 351, NULL, NULL, NULL, '62777493.5', '62777493.5', NULL, 1, NULL, '2023-05-27 16:05:00', '2023-05-27 16:05:00', 1);
+INSERT INTO `quotes` VALUES (8, 'BG-000014', 'not_accepted', 'CÔNG TY CP IN & SẢN XUẤT BAO BÌ TUẤN DUNG', NULL, 3, 'CÔNG TY CP IN & SẢN XUẤT BAO BÌ TUẤN DUNG', 'Mr Tuấn', 'Lô D5-16 Làng nghề Triều Khúc - Tân triều - HN', 'kd1.intuandung@gmail.com', '0963303999', '38303888', 351, '10', '0', NULL, '69350940', '76286034', NULL, 1, NULL, '2023-06-22 11:35:41', '2023-06-22 11:35:41', 4);
+INSERT INTO `quotes` VALUES (9, 'BG-000014', 'not_accepted', 'CÔNG TY CP IN & SẢN XUẤT BAO BÌ TUẤN DUNG', NULL, 3, 'CÔNG TY CP IN & SẢN XUẤT BAO BÌ TUẤN DUNG', 'Mr Tuấn', 'Lô D5-16 Làng nghề Triều Khúc - Tân triều - HN', 'kd1.intuandung@gmail.com', '0963303999', '38303888', 351, NULL, NULL, NULL, '62777493.5', '62777493.5', NULL, 1, NULL, '2023-06-22 11:35:41', '2023-06-22 11:35:41', 4);
 INSERT INTO `quotes` VALUES (11, 'BG-000014', 'accepted', 'CÔNG TY CP IN & SẢN XUẤT BAO BÌ TUẤN DUNG', NULL, 3, 'CÔNG TY CP IN & SẢN XUẤT BAO BÌ TUẤN DUNG', 'Mr Tuấn', 'Lô D5-16 Làng nghề Triều Khúc - Tân triều - HN', 'kd1.intuandung@gmail.com', '0963303999', '38303888', 351, '8', '0', NULL, '69568800', '75134304', NULL, 1, NULL, '2023-06-08 06:46:05', '2023-06-08 06:46:05', 4);
 
 -- ----------------------------

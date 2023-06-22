@@ -63,10 +63,9 @@ class AdminController extends Controller
                 $this->injectViewWhereParam($table, $param);
             }
             if(!empty($permission['where'])){
-                $this->injectViewWhereParam($table, $permission['where']);
+                static::$view_where[] = $permission['where'];
             }
         }
-        dd(self::$view_where);
         $data['data_tables'] = getDataTable($table, self::$view_where, ['paginate' => $data['page_item']]);
         session()->put('back_url', url()->full());    
         return view('table.'.$data['view_type'], $data);
