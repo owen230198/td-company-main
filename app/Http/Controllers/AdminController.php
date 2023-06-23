@@ -42,9 +42,9 @@ class AdminController extends Controller
 
     public function view(Request $request, $table)
     {
-        $permission = $this->admins->checkPermissionAction($table, __FUNCTION__);
-        if (!@$permission['allow']) {
-            return redirect('permission-error');
+        $role = $this->admins->checkPermissionAction($table, __FUNCTION__);
+        if (!@$role['allow']) {
+            return redirect(url('permission-error'))->with('error', 'Bạn không có quyền truy cập!');
         }
         $data = $this->admins->getDataBaseView($table, 'Danh sách');
         if($data['view_type'] == 'config'){
@@ -62,8 +62,8 @@ class AdminController extends Controller
                 $data['data_search'] = $param;
                 $this->injectViewWhereParam($table, $param);
             }
-            if(!empty($permission['where'])){
-                static::$view_where[] = $permission['where'];
+            if(!empty($role['where'])){
+                static::$view_where[] = $role['where'];
             }
         }
         $data['data_tables'] = getDataTable($table, self::$view_where, ['paginate' => $data['page_item']]);
@@ -130,8 +130,10 @@ class AdminController extends Controller
 
     public function update(Request $request, $table, $id)
     {
-        if (!$this->admins->checkPermissionAction($table, 'update', $id)) {
-            return customReturnMessage(false, $request->isMethod('POST'), ['url' => url('permission-error')]);
+        $dataItem = getModelByTable($table)->find($id);
+        $role = $this->admins->checkPermissionAction($table, __FUNCTION__, $dataItem);
+        if (!@$role['allow']) {
+            return customReturnMessage(false, $request->isMethod('POST'), ['message' => 'Không có quyền thao tác']);
         }
         if (in_array($table, NTable::$specific['update'])) {
             $controller = getObjectByTable($table);
@@ -140,7 +142,7 @@ class AdminController extends Controller
             $param = $request->except('_token');
             if ($request->isMethod('GET')) {
                 $data = $this->admins->getDataActionView($table, 'update', 'Chi tiết', $param);
-                $data['dataitem'] = getModelByTable($table)->find($id);
+                $data['dataItem'] = $dataItem;
                 $data['action_url'] = url('update/'.$table.'/'.$id);
                 return view('action.view', $data);
             }else{
@@ -166,8 +168,8 @@ class AdminController extends Controller
         }else{
             $param = $request->except('_token');
             $data = $this->admins->getDataActionView($table, 'insert', 'Sao chép', $param);
-            $data['dataitem'] = getModelByTable($table)->find($id);
-            unset($data['dataitem']['id']);
+            $data['dataItem'] = getModelByTable($table)->find($id);
+            unset($data['dataItem']['id']);
             $data['action_url'] = url('insert/'.$table);
             return view('action.view', $data);
         }  

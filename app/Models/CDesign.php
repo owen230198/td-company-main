@@ -8,7 +8,7 @@
         protected $protectFields = false;
         const PROCESSING = Order::DESIGNING;
         const GR_USER = \GroupUser::DESIGN;
-        public function getRole()
+        static function getRole()
         {
             $role = [
                 \GroupUser::DESIGN => [
@@ -16,29 +16,39 @@
                     [
                         'with' => [
                             'type' => 'group',
-                            'cond' => 'or',
                             'query' => 
                             [
                                 [
-                                    ['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED]
+                                    'type' => 'group',
+                                    'query' =>[
+                                        ['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED]
+                                    ]
                                 ],
                                 [
-                                    ['key' => 'status', 'value' => \StatusConst::SUBMITED],
-                                    ['key' => 'assign_by', 'value' => \User::getCurrent()]
+                                    'type' => 'group',
+                                    'con' => 'or',
+                                    'query' => [
+                                        ['key' => 'status', 'value' => Order::DESIGN_SUBMITED],
+                                        ['key' => 'assign_by', 'value' => \User::getCurrent('id')]
+                                    ]
                                 ],
                                 [
-                                    ['key' => 'status', 'value' => Order::DESIGNING],
-                                    ['key' => 'assign_by', 'value' => \User::getCurrent()]
+                                    'type' => 'group',
+                                    'con' => 'or',
+                                    'query' => [
+                                        ['key' => 'status', 'value' => Order::DESIGNING],
+                                        ['key' => 'assign_by', 'value' => \User::getCurrent('id')]
+                                    ]
                                 ]
                             ]
                         ]
                     ],
                     'update' => [
-                        'view_with' => 
-                        [
-                            ['key' => 'status', 'value' => Order::DESIGNING],
-                            ['key' => 'assign_by', 'value' => \User::getCurrent()]
-                        ]
+                        'with' => 
+                            [
+                                ['key' => 'status', 'value' => Order::DESIGNING],
+                                ['key' => 'assign_by', 'value' => \User::getCurrent('id')]
+                            ]
                     ]
                 ]
             ];

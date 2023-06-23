@@ -151,6 +151,32 @@ class DevController extends Controller
         dd(\DB::getQueryLog());
     }
 
+    public function getRoleModel($table)
+    {
+        $role = [
+            \GroupUser::SALE => [
+                'view' => 
+                    [
+                        'with' => ['key' => 'created_by', 'value' => \User::getCurrent('id')],
+                    ],
+                'update' => 
+                    [
+                        'with' => 
+                            [
+                                ['key' => 'created_by', 'value' => \User::getCurrent('id')],
+                                [
+                                    'type' => 'group',
+                                    'query' => [
+                                        ['con'=> 'or', 'key' => 'status', 'value' => Order::DESIGN_SUBMITED],
+                                        ['con'=> 'or', 'key' => 'status', 'value' => Order::NOT_ACCEPTED]
+                                    ]
+                                ]
+                            ]
+                    ]
+            ]
+        ];
+    }
+
     public function testData(){
         dd(phpInfo());
     }

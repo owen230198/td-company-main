@@ -101,7 +101,7 @@ class OrderController extends Controller
     {
         $model = getModelByTable($table);
         $command = $model::find($id);
-        if ($command['status'] != \StatusConst::NOT_ACCEPTED || empty($command['assign'])) {
+        if ($command['status'] != \StatusConst::NOT_ACCEPTED || !empty($command['assign'])) {
             return returnMessageAjax(100, 'Lệnh này đã được nhận !');
         }
         if (\GroupUser::isAdmin() || \GroupUser::getCurrent() == $model::GR_USER) {

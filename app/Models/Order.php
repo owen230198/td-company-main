@@ -19,26 +19,26 @@
         const CLONE_SRC = 2;
 
         // Role
-        const ARR_ROLE =  [
-            \GroupUser::SALE => [
-                'view' => [
-                    'view_own' => 1,
-                    'view_with' => [
-                        ['source' => self::NEW_SRC]
-                    ]
-                ],
-                'insert' => 1,
-                'update' => [
-                    'update_with' => [
+        static function getRole()
+        {
+            $role = [
+                \GroupUser::SALE => [
+                    'view' => 
                         [
-                            [
-                                ['status' => \StatusConst::NOT_ACCEPTED]
-                            ]
+                            'with' => ['key' => 'created_by', 'value' => \User::getCurrent('id')],
+                        ],
+                    'update' => 
+                        [
+                            'with' => 
+                                [
+                                    ['key' => 'created_by', 'value' => \User::getCurrent('id')],
+                                    ['con'=> 'or', 'key' => 'status', 'value' => self::NOT_ACCEPTED]
+                                ]
                         ]
-                    ]
                 ]
-            ]
-        ];
+            ];
+            return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];
+        } 
     }
     
 ?>
