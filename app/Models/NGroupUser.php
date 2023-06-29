@@ -17,7 +17,7 @@ class NGroupUser extends Model
     const SALE = 2;
     const TECH_APPLY = 3;
     const DESIGN = 4;
-    const DESIGN_STAFF = 5;
+    const TECH_HANDLE = 5;
     const GROUP_MODULE = [
         'quote_price_config' => 'Cài đặt đơn giá SX',
         'customer_quote' => 'Báo giá & Khách hàng',
@@ -164,6 +164,13 @@ class NGroupUser extends Model
             self::MODULE['design_submited'],
             self::MODULE['account'],
             self::MODULE['change_password'],
+        ],
+        self::TECH_HANDLE => [
+            self::MODULE['handle_process'],
+            self::MODULE['profit'],
+            self::MODULE['create_available_order'],
+            self::MODULE['account'],
+            self::MODULE['change_password'],
         ]
     ];
 
@@ -219,5 +226,11 @@ class NGroupUser extends Model
     {
         $group_user = !empty($group_user) ? $group_user : self::getCurrent();
         return $group_user == self::DESIGN;
+    }
+
+    static function isTechHandle($group_user = 0)
+    {
+        $group_user = !empty($group_user) ? $group_user : self::getCurrent();
+        return $group_user == self::TECH_HANDLE;
     }
 }

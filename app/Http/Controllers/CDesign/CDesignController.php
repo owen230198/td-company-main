@@ -19,7 +19,7 @@
         public function update(Request $request, $id){
             $arr_command = CDesign::find($id);
             if ($arr_command['status'] != CDesign::PROCESSING || $arr_command['assign_by'] != \User::getCurrent('id')) {
-                return customReturnMessage(false, $request->isMethod('POST'), ['message' => 'Lệnh này không thể nhận !']);
+                return customReturnMessage(false, $request->isMethod('POST'), ['message' => 'Bạn cần tiếp nhận lệnh trước !']);
             }
             if (!$request->isMethod('POST')) {
                 $data['data_order'] = Order::find($arr_command['order']);

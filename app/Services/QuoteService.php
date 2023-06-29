@@ -79,9 +79,17 @@ class QuoteService extends BaseService
                     return returnMessageAjax(100, 'Bạn chưa upload file sản xuất giá cho sản phẩm '. $data['name']);
                 }
 
-                if ((NGroupUser::isDesign() && empty($data['design_file'])) 
-                || (NGroupUser::isDesign() && empty($data['design_shape_file']))) {
-                    return returnMessageAjax(100, 'Bạn chưa upload file thiết kế hoặc file thiết kế đã bình cho sản phẩm '. $data['name']);
+                if (NGroupUser::isDesign()) {
+                    if (empty($data['design_file'])) {
+                        return returnMessageAjax(100, 'Bạn chưa upload file thiết kế cho sản phẩm '. $data['name']);
+                    }
+                    if (empty($data['design_shape_file'])) {
+                        return returnMessageAjax(100, 'Bạn chưa upload file thiết kế đã bình cho sản phẩm '. $data['name']);
+                    }
+                }
+
+                if (NGroupUser::isTechHandle() && empty($data['handle_shape_file'])) {
+                    return returnMessageAjax(100, 'Bạn chưa upload khuôn ép nhũ, thúc nổi, in UV cho sản phẩm '. $data['name']);
                 }
             }
         }

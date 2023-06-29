@@ -40,7 +40,6 @@ class OrderService extends BaseService
         if (!empty($product_process['code']) && $product_process['code'] == 100) {
             return returnMessageAjax(100, $product_process['message']);  
         }else{
-            $arr_order['status'] = \StatusConst::NOT_ACCEPTED;
             $new_arr_quote = Quote::find($arr_quote['id']);
             if (!empty($arr_order['advance'])) {
                 $arr_order['rest'] = (float) $new_arr_quote['total_amount'] - (float) $arr_order['advance'];
@@ -50,6 +49,7 @@ class OrderService extends BaseService
                 Order::where('id', $arr_order['id'])->update($arr_order);
             }else{
                 $arr_order['code'] = 'DH-'.getCodeInsertTable('orders');
+                $arr_order['status'] = \StatusConst::NOT_ACCEPTED;
                 Order::insertGetId($arr_order);
             }
             return returnMessageAjax(200, 'Cập nhật dữ liệu thành công!', getBackUrl());     
@@ -68,7 +68,7 @@ class OrderService extends BaseService
             $data_insert['product'] = $product['id'];
             CDesign::insert($data_insert);
         }
-        return Order::where('id', $arr_order['id'])->update(['status' => Order::TO_DESIGN]);
+        return Order::where('id', $arr_order['id'])->update(['status' => Order::TO_DESIGN, 'apply_by' => \User::getCurrent('id')]);
     }
     
     public function afterRemove($id)

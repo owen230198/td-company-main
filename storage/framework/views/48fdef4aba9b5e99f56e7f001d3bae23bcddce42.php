@@ -1,6 +1,5 @@
 <?php
     $pro_per_price = (int) @$product['total_cost'] / (int) @$product['qty'];
-    $product_note = !empty($product['note']) ? json_decode($product['note'], true) : [];
     $ext_pro_fields = [
         'per_price' => 
         [
@@ -51,31 +50,68 @@
             'type' => 'file',
             'value' => @$product['design_shape_file']
         ],
-        'note_print' => 
+        'handle_shape_file' =>
         [
-            'name' => $pro_base_name_input.'[note][print]',
-            'note' => 'Ghi chú cho khâu in',
-            'type' => 'linking',
-            'other_data' => ['data' => ['table' => 'print_notes', 'select' => ['id', 'name']]],
-            'value' => @$product_note['print']
-        ],
-        'note_handle' =>
-        [
-            'name' => $pro_base_name_input.'[note][handle]',
-            'note' => 'Ghi chú cho khâu gia công',
-            'type' => 'textarea',
-            'value' => @$product_note['handle']
+            'name' => $pro_base_name_input.'[handle_shape_file]',
+            'note' => 'Khuôn ép nhũ, thúc nổi, in UV',
+            'type' => 'file',
+            'value' => @$product['handle_shape_file']
         ]
     ];
     if (\GroupUser::isSale()) {
-        unset($ext_pro_fields['tech_shape_file'], $ext_pro_fields['design_file'], $ext_pro_fields['design_shape_file']);    
+        unset(
+            $ext_pro_fields['tech_shape_file'], 
+            $ext_pro_fields['design_file'], 
+            $ext_pro_fields['design_shape_file'], 
+            $ext_pro_fields['sale_shape_file']
+        );    
     }elseif (\GroupUser::isTechApply()) {
-        unset($ext_pro_fields['design_file'], $ext_pro_fields['design_shape_file']);    
+        unset(
+            $ext_pro_fields['design_file'], 
+            $ext_pro_fields['design_shape_file'], 
+            $ext_pro_fields['sale_shape_file']
+        );    
     }elseif (\GroupUser::isDesign()) {
-        unset($ext_pro_fields['sale_shape_file']);    
+        unset(
+            $ext_pro_fields['sale_shape_file'], 
+            $ext_pro_fields['sale_shape_file']
+        );    
+    }elseif(\GroupUser::isTechHandle()){
+        unset(
+            $ext_pro_fields['custom_design_file'],
+            $ext_pro_fields['sale_shape_file'], 
+            $ext_pro_fields['tech_shape_file'], 
+            $ext_pro_fields['design_file']
+        );  
     }
 ?>
 
 <?php $__currentLoopData = $ext_pro_fields; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ext_pro_field): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
     <?php echo $__env->make('view_update.view', $ext_pro_field, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>     
-<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/orders/products/extend_info.blade.php ENDPATH**/ ?>
+<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+<?php if(\GroupUser::isAdmin() || \GroupUser::isTechApply()): ?>
+    <?php
+        $product_note = !empty($product['note']) ? json_decode($product['note'], true) : [];
+        $note_values = [
+            'note_print' => 
+            [
+                'name' => $pro_base_name_input.'[note][print]',
+                'note' => 'Ghi chú cho khâu in',
+                'type' => 'linking',
+                'other_data' => ['data' => ['table' => 'print_notes', 'select' => ['id', 'name']]],
+                'value' => @$product_note['print']
+            ],
+            'note_handle' =>
+            [
+                'name' => $pro_base_name_input.'[note][handle]',
+                'note' => 'Ghi chú cho khâu gia công',
+                'type' => 'textarea',
+                'value' => @$product_note['handle']
+            ]
+        ]
+    ?>
+    <?php $__currentLoopData = $note_values; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $note_value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <?php echo $__env->make('view_update.view', $note_value, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>     
+    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+<?php endif; ?><?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/orders/products/extend_info.blade.php ENDPATH**/ ?>

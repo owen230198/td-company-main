@@ -32,7 +32,7 @@ class OrderConstant
             'text' => 'Đơn cần duyệt sản xuất', 
             'status' => Order::TECH_SUBMITED
         ],
-        ['icon' => 'buy', 'table' => 'c_prints', 'text' => 'Yêu cầu mua vật tư'],
+        ['icon' => 'buy', 'table' => 'c_prints', 'text' => 'Yêu cầu xuât vật tư'],
         ['icon' => 'export', 'table' => 'c_prints', 'text' => 'Yêu cầu xuất khuôn'],
     ];
     //PROCESS STAGE 

@@ -46,9 +46,7 @@ class OrderController extends Controller
             $data['title'] = 'Cập nhật & Xác nhận đơn - '.$arr_order['code'];
             $data['link_action'] = url('update/orders/'.$id);
             $data['id'] = $id;
-            if ($arr_order['status'] = Order::NOT_ACCEPTED) {
-                $data['stage'] = Order::NOT_ACCEPTED;
-            }
+            $data['stage'] = $arr_order['status'];
             if (view()->exists('orders.users.'.\GroupUser::getCurrent().'.view')) {
                 return view('orders.users.'.\GroupUser::getCurrent().'.view', $data);
             }else{
@@ -67,7 +65,7 @@ class OrderController extends Controller
     {
         if (\GroupUser::isTechApply()) {
             $arr_order = Order::find($id);
-            if ($arr_order != \StatusConst::NOT_ACCEPTED) {
+            if (@$arr_order['status'] != \StatusConst::NOT_ACCEPTED) {
                 returnMessageAjax(100, 'Lỗi không xác định !');
             }
             $arr_quote = Quote::find($data['quote']);
@@ -92,6 +90,8 @@ class OrderController extends Controller
         switch ($stage) {
             case Order::NOT_ACCEPTED:
                 return $this->applyToDesign($data, $id);
+            case Order::DESIGN_SUBMITED:
+                return $this->applyToHandlePlan($data, $id);   
             default:
                 return returnMessageAjax(100, 'Lỗi không xác định !');
         }

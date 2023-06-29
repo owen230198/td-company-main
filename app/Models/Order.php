@@ -35,7 +35,27 @@
                                     ['con'=> 'or', 'key' => 'status', 'value' => self::NOT_ACCEPTED]
                                 ]
                         ]
-                ]
+                ],
+                \GroupUser::TECH_APPLY => [
+                    'view' => 
+                        [
+                            'with' => ['key' => 'status', 'value' => self::NOT_ACCEPTED],
+                        ],
+                    'update' => 
+                        [
+                            'with' => [['key' => 'status', 'value' => self::NOT_ACCEPTED]]
+                        ]
+                ],
+                \GroupUser::TECH_HANDLE => [
+                    'view' => 
+                        [
+                            'with' => ['key' => 'status', 'value' => self::DESIGN_SUBMITED],
+                        ],
+                    'update' => 
+                        [
+                            'with' => [['key' => 'status', 'value' => self::DESIGN_SUBMITED]]
+                        ]
+                ],
             ];
             return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];
         } 
