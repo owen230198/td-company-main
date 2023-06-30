@@ -149,6 +149,31 @@ if (!function_exists('getDataTable')) {
     }
 }
 
+if (!function_exists('')) {
+    function getBoolByCondArr($arr, $data)
+    {
+        $ret = true;
+        foreach ($arr as $cond) {
+            if (!empty($cond['type']) && $cond['type'] == 'group') {
+                $ret = getBoolByCondArr($cond['query'], $data);
+                if (@$cond['con'] == 'or' && $ret == true) {
+                    return true;
+                    break;
+                }
+            }else{
+                if (@$cond['con'] == 'or' && @$data[$cond['key']] == $cond['value']) {
+                    return true;
+                    break;   
+                }
+                if (@$data[$cond['key']] != $cond['value']) {
+                    $ret = false;
+                }  
+            }
+        }
+        return $ret;
+    }
+}
+
 if (!function_exists('calValuePercentPlus')) {
     function calValuePercentPlus($value, $get_perc, $perc, $plus =0)
     {

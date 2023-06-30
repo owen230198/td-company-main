@@ -18,9 +18,6 @@
 
         public function update(Request $request, $id){
             $arr_command = CDesign::find($id);
-            if ($arr_command['status'] != CDesign::PROCESSING || $arr_command['assign_by'] != \User::getCurrent('id')) {
-                return customReturnMessage(false, $request->isMethod('POST'), ['message' => 'Bạn cần tiếp nhận lệnh trước !']);
-            }
             if (!$request->isMethod('POST')) {
                 $data['data_order'] = Order::find($arr_command['order']);
                 $data['products'] = Product::where('id', $arr_command['product'])->get()->toArray();
@@ -30,6 +27,9 @@
                 $data['link_action'] = url('update/c_designs/'.$id);
                 return view('c_designs.view', $data);
             }else{
+                if ($arr_command['status'] != CDesign::PROCESSING || $arr_command['assign_by'] != \User::getCurrent('id')) {
+                    return returnMessageAjax(100, 'Bạn cần tiếp nhận lệnh trước !');
+                }
                 $data = $request->input('product');
                 return $this->services->processDataCommand($data, $arr_command);       
             }

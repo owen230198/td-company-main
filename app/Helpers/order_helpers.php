@@ -1,24 +1,22 @@
 <?php
-    use \App\Constants\OrderConstant;
-    if (!function_exists('getPaymentStatus')) {
-        function getPaymentStatus($advanceCost, $totalCost)
+    use \App\Models\Order;
+    if (!function_exists('getOrderNameStageByKey')) {
+        function getOrderNameStageByKey($key)
         {
-            if ($advanceCost == 0) {
-                return OrderConstant::ORD_NOT_PAYMENT;   
-            }elseif ($advanceCost>0&&$advanceCost<$totalCost) {
-                return OrderConstant::ORD_ADVANCE_PAYMENT;
-            }elseif ($advanceCost>0&&$advanceCost==$totalCost) {
-                return OrderConstant::ORD_PAID_PAYMENT;
-            }else{
-                return '';
-            }
-        }
-    }
-
-    if (!function_exists('getProductCategoryOption')) {
-        function getProductCategoryOption()
-        {
-            
+            switch ($key) {
+                case Order::NOT_ACCEPTED:
+                    return 'Duyệt xuống P. Thiết kế';
+                    break;
+                case Order::DESIGN_SUBMITED:
+                    return 'Duyệt xuống P. Kế hoạch';
+                    break;
+                case Order::TECH_SUBMITED:
+                    return 'Xác nhận xuất khuôn';
+                    break;
+                default:
+                    return '';
+                    break;
+            }    
         }
     }
 

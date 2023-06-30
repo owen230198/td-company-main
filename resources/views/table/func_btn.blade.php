@@ -4,15 +4,17 @@
  	@endphp
 	@if (!empty($ext_action))
 		@foreach ($ext_action as $button)
-			@if (@$button['type'] == 2)
-				<button type="button" class="table-btn mr-2 mb-2 {{ @$button['class'] }}" title="{{ @$button['note'] }}" data-table="{{ $tableItem['name'] }}" data-id="{{ $data->id }}">
-					<i class="fa fa-{{ $button['icon'] }} fs-14" aria-hidden="true"></i>
-				</button>
-			@else
-				<a href="{{ url(@$button['link'].''.$data->id) }}" class="table-btn mr-2 mb-2" title="{{ @$button['note'] }}">
-					<i class="fa fa-{{ $button['icon'] }} fs-14" aria-hidden="true"></i>
-				</a>
-			@endif	
+			@if (!empty($button['condition']) && getBoolByCondArr($button['condition'], (array) $data))
+				@if (@$button['type'] == 2)
+					<button type="button" class="table-btn mr-2 mb-2 {{ @$button['class'] }}" title="{{ @$button['note'] }}" data-table="{{ $tableItem['name'] }}" data-id="{{ $data->id }}">
+						<i class="fa fa-{{ $button['icon'] }} fs-14" aria-hidden="true"></i>
+					</button>
+				@else
+					<a href="{{ url(@$button['link'].''.$data->id) }}" class="table-btn mr-2 mb-2" title="{{ @$button['note'] }}">
+						<i class="fa fa-{{ $button['icon'] }} fs-14" aria-hidden="true"></i>
+					</a>
+				@endif	
+			@endif
 		@endforeach
 	@endif
 	@if ($tableItem['update'] == 1)

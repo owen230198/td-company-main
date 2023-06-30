@@ -21,7 +21,9 @@
             <?php if(!empty($stage)): ?>
                 <button type="button" class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-2 __apply_order" 
                 data-id=<?php echo e($id); ?> data-stage="<?php echo e($stage); ?>">
-                    <i class="fa fa-thumbs-o-up mr-2 fs-14" aria-hidden="true"></i>Xác nhận sản xuất
+                    <i class="fa fa-thumbs-o-up mr-2 fs-14" aria-hidden="true"></i>
+                    <?php echo e(getOrderNameStageByKey($stage)); ?>
+
                 </button> 
             <?php endif; ?>
             <button type="button" class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-2">

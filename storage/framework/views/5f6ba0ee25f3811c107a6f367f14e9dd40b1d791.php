@@ -4,15 +4,17 @@
  	?>
 	<?php if(!empty($ext_action)): ?>
 		<?php $__currentLoopData = $ext_action; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $button): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-			<?php if(@$button['type'] == 2): ?>
-				<button type="button" class="table-btn mr-2 mb-2 <?php echo e(@$button['class']); ?>" title="<?php echo e(@$button['note']); ?>" data-table="<?php echo e($tableItem['name']); ?>" data-id="<?php echo e($data->id); ?>">
-					<i class="fa fa-<?php echo e($button['icon']); ?> fs-14" aria-hidden="true"></i>
-				</button>
-			<?php else: ?>
-				<a href="<?php echo e(url(@$button['link'].''.$data->id)); ?>" class="table-btn mr-2 mb-2" title="<?php echo e(@$button['note']); ?>">
-					<i class="fa fa-<?php echo e($button['icon']); ?> fs-14" aria-hidden="true"></i>
-				</a>
-			<?php endif; ?>	
+			<?php if(!empty($button['condition']) && getBoolByCondArr($button['condition'], (array) $data)): ?>
+				<?php if(@$button['type'] == 2): ?>
+					<button type="button" class="table-btn mr-2 mb-2 <?php echo e(@$button['class']); ?>" title="<?php echo e(@$button['note']); ?>" data-table="<?php echo e($tableItem['name']); ?>" data-id="<?php echo e($data->id); ?>">
+						<i class="fa fa-<?php echo e($button['icon']); ?> fs-14" aria-hidden="true"></i>
+					</button>
+				<?php else: ?>
+					<a href="<?php echo e(url(@$button['link'].''.$data->id)); ?>" class="table-btn mr-2 mb-2" title="<?php echo e(@$button['note']); ?>">
+						<i class="fa fa-<?php echo e($button['icon']); ?> fs-14" aria-hidden="true"></i>
+					</a>
+				<?php endif; ?>	
+			<?php endif; ?>
 		<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 	<?php endif; ?>
 	<?php if($tableItem['update'] == 1): ?>

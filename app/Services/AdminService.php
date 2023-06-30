@@ -10,29 +10,6 @@ class AdminService extends BaseService
         $this->quote_service = new \App\Services\QuoteService;
     }
 
-    static function getBoolByCondArr($arr, $data)
-    {
-        $ret = true;
-        foreach ($arr as $cond) {
-            if (!empty($cond['type']) && $cond['type'] == 'group') {
-                $ret = self::getBoolByCondArr($cond['query'], $data);
-                if (@$cond['con'] == 'or' && $ret == true) {
-                    return true;
-                    break;
-                }
-            }else{
-                if (@$cond['con'] == 'or' && @$data[$cond['key']] == $cond['value']) {
-                    return true;
-                    break;   
-                }
-                if (@$data[$cond['key']] != $cond['value']) {
-                    $ret = false;
-                }  
-            }
-        }
-        return $ret;
-    }
-
     public function checkPermissionAction($table, $action, $data = array())
     {
         if($this->group_user::isAdmin()){
@@ -50,7 +27,7 @@ class AdminService extends BaseService
             if ($action == 'view') {
                 return ['allow' => true, 'where' => $role[$action]['with']];
             }else{
-                return ['allow' => self::getBoolByCondArr($role[$action]['with'], $data)];
+                return ['allow' => getBoolByCondArr($role[$action]['with'], $data)];
             }
         }
         
