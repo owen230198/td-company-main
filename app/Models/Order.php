@@ -56,6 +56,16 @@
                             'with' => [['key' => 'status', 'value' => self::DESIGN_SUBMITED]]
                         ]
                 ],
+                \GroupUser::PLAN_HANDLE => [
+                    'view' => 
+                        [
+                            'with' => ['key' => 'status', 'value' => self::TECH_SUBMITED],
+                        ],
+                    'update' => 
+                        [
+                            'with' => [['key' => 'status', 'value' => self::TECH_SUBMITED]]
+                        ]
+                ],
             ];
             return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];
         } 

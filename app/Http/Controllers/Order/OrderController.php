@@ -84,6 +84,29 @@ class OrderController extends Controller
         }
     }
 
+    public function applyToHandlePlan($data, $id)
+    {
+        if (\GroupUser::isTechHandle()) {
+            $arr_order = Order::find($id);
+            if (@$arr_order['status'] != Order::DESIGN_SUBMITED) {
+                returnMessageAjax(100, 'Lỗi không xác định !');
+            }
+            $arr_quote = Quote::find($data['quote']);
+            if (!empty($arr_quote)) {
+                $product_process = $this->quote_services->processDataProduct($data, $arr_quote, \TDConst::ORDER_ACTION_FLOW);
+                if (!empty($product_process['code']) && $product_process['code'] == 100) {
+                    return returnMessageAjax(100, $product_process['message']);  
+                }
+            }
+            $status = Order::where('id', $id)->update(['status' => Order::TECH_SUBMITED, 'apply_plan_by' => \User::getCurrent('id')]);
+            if ($status) {
+                return returnMessageAjax(200, 'Đã gửi yêu cầu thành công tới P. Kế hoạch SX cho đơn '.$arr_order['code'].' !', getBackUrl());
+            }    
+        }else{
+            return returnMessageAjax(100, 'Bạn không có quyền duyệt sản xuất!');
+        }
+    }
+
     public function applyOrder(Request $request, $stage, $id)
     {
         $data = $request->except('_token');

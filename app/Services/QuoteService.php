@@ -87,7 +87,6 @@ class QuoteService extends BaseService
                         return returnMessageAjax(100, 'Bạn chưa upload file thiết kế đã bình cho sản phẩm '. $data['name']);
                     }
                 }
-
                 if (NGroupUser::isTechHandle() && empty($data['handle_shape_file'])) {
                     return returnMessageAjax(100, 'Bạn chưa upload khuôn ép nhũ, thúc nổi, in UV cho sản phẩm '. $data['name']);
                 }
@@ -129,6 +128,9 @@ class QuoteService extends BaseService
         }
         if (!empty($data['design_shape_file'])) {
             $data_action['design_shape_file'] = $data['design_shape_file'];
+        }
+        if (!empty($data['handle_shape_file'])) {
+            $data_action['handle_shape_file'] = $data['design_shape_file'];
         }
         if (!empty($data['note'])) {
             $data_action['note'] = json_encode($data['note']);

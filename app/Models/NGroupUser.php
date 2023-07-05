@@ -18,6 +18,7 @@ class NGroupUser extends Model
     const TECH_APPLY = 3;
     const DESIGN = 4;
     const TECH_HANDLE = 5;
+    const PLAN_HANDLE = 6;
     const GROUP_MODULE = [
         'quote_price_config' => 'Cài đặt đơn giá SX',
         'customer_quote' => 'Báo giá & Khách hàng',
@@ -171,6 +172,13 @@ class NGroupUser extends Model
             self::MODULE['create_available_order'],
             self::MODULE['account'],
             self::MODULE['change_password'],
+        ],
+        self::PLAN_HANDLE => [
+            self::MODULE['handle_process'],
+            self::MODULE['profit'],
+            self::MODULE['create_available_order'],
+            self::MODULE['account'],
+            self::MODULE['change_password'],
         ]
     ];
 
@@ -232,5 +240,11 @@ class NGroupUser extends Model
     {
         $group_user = !empty($group_user) ? $group_user : self::getCurrent();
         return $group_user == self::TECH_HANDLE;
+    }
+
+    static function isPlanHandle($group_user = 0)
+    {
+        $group_user = !empty($group_user) ? $group_user : self::getCurrent();
+        return $group_user == self::PLAN_HANDLE;
     }
 }
