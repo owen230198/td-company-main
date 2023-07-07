@@ -20,5 +20,20 @@
         }
     }
 
+    if (!function_exists('getProductElementData')) {
+        function getProductElementData($category, $id)
+        {
+            $ret = isHardBox($category) ? \TDConst::HARD_ELEMENT : \TDConst::PAPER_ELEMENT;
+            $where = ['act' => 1, 'product' => $id];
+            foreach ($ret as $key => $item) {
+                if ($item['table'] == 'supplies') {
+                    $where['type'] = $item['pro_field'];
+                }
+                $ret[$key]['data'] = \DB::table($item['table'])->where($where)->get()->toArray();
+                unset($where['type']);
+            }
+            return $ret;
+        }
+    }
     
 ?>

@@ -1,14 +1,4 @@
-<ul class="nav nav-pills mb-3 pro_nav_link" id="quote-pro-tab" role="tablist">
-    <label class="mb-0 min_210 mr-3"></label>
-    @foreach ($products as $i => $product)
-        <li class="nav-item">
-            <a class="nav-link{{ $i == 0 ? ' active' : '' }}" id="quote-pro-{{ $i }}-tab" data-toggle="pill" href="#quote-pro-{{ $i }}" 
-            role="tab" aria-controls="quote-pro-{{ $i }}" aria-selected="true">
-                {{ @$product['name'] }}
-            </a>
-        </li>
-    @endforeach
-</ul>
+@include('quotes.products.list_tab')
 
 <div class="tab-content" id="quote-pro-tabContent">
     @foreach ($products as $pro_index => $product)

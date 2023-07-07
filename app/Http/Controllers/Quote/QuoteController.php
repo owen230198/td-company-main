@@ -205,16 +205,8 @@ class QuoteController extends Controller
         $id = (int) $request->input('id');
         $data['cate'] = (int) $request->input('category');
         if (!empty($id) && !empty($data['cate'])) {
-            $where = ['act' => 1, 'product' => $id];
             $data['pro_index'] = (int) $request->input('proindex');
-            $data['elements'] = isHardBox($data['cate']) ? TDConstant::HARD_ELEMENT : TDConstant::PAPER_ELEMENT;
-            foreach ($data['elements'] as $key => $item) {
-                if ($item['table'] == 'supplies') {
-                    $where['type'] = $item['pro_field'];
-                }
-                $data['elements'][$key]['data'] = \DB::table($item['table'])->where($where)->get()->toArray();
-                unset($where['type']);
-            }
+            $data['elements'] = getProductElementData($data['cate'], $id);
             return view('quotes.products.structure', $data);
         }
 

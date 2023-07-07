@@ -60,10 +60,6 @@
                     'view' => 
                         [
                             'with' => ['key' => 'status', 'value' => self::TECH_SUBMITED],
-                        ],
-                    'update' => 
-                        [
-                            'with' => [['key' => 'status', 'value' => self::TECH_SUBMITED]]
                         ]
                 ],
             ];
