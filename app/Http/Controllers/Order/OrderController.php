@@ -138,5 +138,28 @@ class OrderController extends Controller
             return returnMessageAjax(100, 'Bạn không thuộc bộ phận nhận lệnh này !');
         }    
     }
+
+    public function supplyHandle(Request $request, $table, $id)
+    {
+        if (\GroupUser::isAdmin() || \GroupUser::isPlanHandle()) {
+            if ($request->isMethod('GET')) {
+                $data_supply = \DB::table($table)->find($id);
+                if (!empty($data_supply)) {
+                    $data['supply_obj'] = $data_supply;
+                    $data['title'] = 'Xử lí vật tư sản xuất sản phẩm '.getFieldDataById('name', 'products', $data_supply->product);
+                    $prefix = !empty($data_supply->type) ? $data_supply->type : $table;
+                    if (view()->exists('orders.users.6.supply_handles.'.$prefix)) {
+                        return view('orders.users.6.supply_handles.'.$prefix, $data); 
+                    }else{
+                        return back()->with('error', 'Giao diện này không tồn tại!');
+                    }
+                }else{
+                    return customReturnMessage(false, $request->isMethod('POST'), ['message' => 'Dữ liệu không hợp lệ']);
+                }   
+            }     
+        }else{
+            return customReturnMessage(false, $request->isMethod('POST'), ['message' => 'Bạn không có quyền thực hiện hành động!']);
+        }
+    }
 }
 ?>
