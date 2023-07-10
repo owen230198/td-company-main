@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : localhost
+ Source Server         : owen
  Source Server Type    : MySQL
- Source Server Version : 100428
+ Source Server Version : 100425
  Source Host           : localhost:3306
  Source Schema         : td_company
 
  Target Server Type    : MySQL
- Target Server Version : 100428
+ Target Server Version : 100425
  File Encoding         : 65001
 
- Date: 10/07/2023 20:00:13
+ Date: 11/07/2023 02:59:56
 */
 
 SET NAMES utf8mb4;
@@ -14199,11 +14199,15 @@ CREATE TABLE `supply_warehouses`  (
   `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `supp_type` int(10) NULL DEFAULT NULL,
   `supp_price` int(10) NULL DEFAULT NULL,
-  `insert_bill` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL,
   `created_by` int(10) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of supply_warehouses
+-- ----------------------------
+INSERT INTO `supply_warehouses` VALUES (1, 'Carton thành ĐL 0.8mm KT 30 x 40', '1000000', 'carton', 2, 1, '2023-07-11 02:25:04', '2023-07-11 02:25:07', 1);
 
 SET FOREIGN_KEY_CHECKS = 1;

@@ -148,6 +148,10 @@ class OrderController extends Controller
                     $data['supply_obj'] = $data_supply;
                     $data['title'] = 'Xử lí vật tư sản xuất sản phẩm '.getFieldDataById('name', 'products', $data_supply->product);
                     $prefix = !empty($data_supply->type) ? $data_supply->type : $table;
+                    $data['pro_index'] = 0;
+                    $data['supp_index'] = 0;
+                    $data['table'] = $table;
+                    $data['supply_size'] = !empty($data_supply->size) ? json_decode($data_supply->size, true) : [];
                     if (view()->exists('orders.users.6.supply_handles.'.$prefix)) {
                         return view('orders.users.6.supply_handles.'.$prefix, $data); 
                     }else{
