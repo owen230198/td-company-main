@@ -27,7 +27,50 @@ var applyOrderStep = function()
     })
 }
 
+var planHandleElevateModule = function()
+{
+    $(document).on('keyup change', 'input.input_elevate_change', function(event){
+        event.preventDefault();
+        let parent = $(this).closest('.plan_handle_elevate_module');
+        let supp_qty = parseInt(parent.find('input.plan_input_supp_qty').val());
+        let elevate = parseInt(parent.find('input.plan_input_elevate').val());
+        let total_elevate = supp_qty*elevate;
+        let input_total_elevate = parent.find('input.plan_input_total_elevate')
+        input_total_elevate.val(total_elevate);
+        input_total_elevate.trigger('change');
+        
+    });
+
+    $(document).on('change', 'input.plan_input_total_elevate', function(event){
+        event.preventDefault();
+        updateHandleWareHouse($(this));
+    });
+
+    $(document).on('keyup change', 'input.plan_input_warehouse_size', function(event)
+    {
+        event.preventDefault();
+        updateHandleWareHouse($(this));
+    });
+}
+
+var updateHandleWareHouse = function(obj)
+{
+    let parent = obj.closest('.plan_handle_supply_module');
+    let size = parent.find('input.plan_input_warehouse_size');
+    let bool = true;
+    size.each(function(){
+        if ($(this).val() <= 0) {
+            bool = false;    
+        }
+    });
+    if (bool == true) {
+        let supp_qty = parseInt(parent.find('input.plan_input_supp_qty').val());
+        parent.find('input.plan_input_warehouse_qty').val(supp_qty);    
+    }
+}
+
 $(function(){
     setAdvanceCostOrder(); 
     applyOrderStep();
+    planHandleElevateModule();
 });

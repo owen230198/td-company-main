@@ -11,7 +11,7 @@
  Target Server Version : 100425
  File Encoding         : 65001
 
- Date: 11/07/2023 02:59:56
+ Date: 11/07/2023 17:01:20
 */
 
 SET NAMES utf8mb4;
@@ -14193,8 +14193,10 @@ INSERT INTO `supply_types` VALUES (21, 'Carton NẮP + ĐÁY', 'carton', NULL, N
 -- ----------------------------
 DROP TABLE IF EXISTS `supply_warehouses`;
 CREATE TABLE `supply_warehouses`  (
-  `id` int(10) NOT NULL,
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `length` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `width` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `quantity` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `supp_type` int(10) NULL DEFAULT NULL,
@@ -14203,11 +14205,13 @@ CREATE TABLE `supply_warehouses`  (
   `updated_at` datetime(0) NULL DEFAULT NULL,
   `created_by` int(10) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of supply_warehouses
 -- ----------------------------
-INSERT INTO `supply_warehouses` VALUES (1, 'Carton thành ĐL 0.8mm KT 30 x 40', '1000000', 'carton', 2, 1, '2023-07-11 02:25:04', '2023-07-11 02:25:07', 1);
+INSERT INTO `supply_warehouses` VALUES (1, 'Carton thành ĐL 0.8mm KT 50 x 40', '50', '40', '1000000', 'carton', 2, 1, '2023-07-11 02:25:04', '2023-07-11 02:25:07', 1);
+INSERT INTO `supply_warehouses` VALUES (2, 'Carton thành ĐL 0.8mm KT 50 x 30', '50', '30', '1000000', 'carton', 2, 1, '2023-07-11 02:25:04', '2023-07-11 02:25:07', 1);
+INSERT INTO `supply_warehouses` VALUES (3, 'Carton thành ĐL 0.8mm KT 100 x 50', '100', '50', '1000000', 'carton', 2, 1, '2023-07-11 02:25:04', '2023-07-11 02:25:07', 1);
 
 SET FOREIGN_KEY_CHECKS = 1;

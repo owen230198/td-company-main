@@ -3,7 +3,7 @@
     <link rel="stylesheet" href="{{ asset('frontend/admin/css/quote.css') }}">
 @endsection
 @section('content')
-    <form action="{{ url('plan-handle-supply') }}" method="POST" class="baseAjaxForm config_content" enctype="multipart/form-data" 
+    <form action="{{ url('supply-handle') }}" method="POST" class="baseAjaxForm config_content" enctype="multipart/form-data" 
     onkeydown="return event.key != 'Enter'">
         @csrf
         @yield('process')
@@ -19,4 +19,8 @@
             </a>
         </div>  
     </form>
+@endsection
+@section('script')
+    <script src="{{ asset('frontend/admin/script/quote.js') }}"></script>
+    <script src="{{ asset('frontend/admin/script/order.js') }}"></script>
 @endsection

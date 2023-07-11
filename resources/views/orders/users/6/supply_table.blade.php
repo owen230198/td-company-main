@@ -33,7 +33,7 @@
                     @endforeach
                     <td>
                         <div class="func_btn_module text-center">
-                            <a href="{{ url('supply-handle/'.$element['table'].'/'.$data->id) }}">
+                            <a href="{{ url('supply-handle?table='.$element['table'].'&id='.$data->id) }}">
                                 <i class="fa fa-paper-plane-o mr-1" aria-hidden="true"></i> Yêu cầu xuất vật tư
                             </a>   
                         </div>

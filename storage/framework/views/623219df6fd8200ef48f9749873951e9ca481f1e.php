@@ -3,7 +3,7 @@
     <link rel="stylesheet" href="<?php echo e(asset('frontend/admin/css/quote.css')); ?>">
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
-    <form action="<?php echo e(url('plan-handle-supply')); ?>" method="POST" class="baseAjaxForm config_content" enctype="multipart/form-data" 
+    <form action="<?php echo e(url('supply-handle')); ?>" method="POST" class="baseAjaxForm config_content" enctype="multipart/form-data" 
     onkeydown="return event.key != 'Enter'">
         <?php echo csrf_field(); ?>
         <?php echo $__env->yieldContent('process'); ?>
@@ -19,5 +19,9 @@
             </a>
         </div>  
     </form>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('script'); ?>
+    <script src="<?php echo e(asset('frontend/admin/script/quote.js')); ?>"></script>
+    <script src="<?php echo e(asset('frontend/admin/script/order.js')); ?>"></script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('index', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/orders/users/6/supply_handles/supplies.blade.php ENDPATH**/ ?>

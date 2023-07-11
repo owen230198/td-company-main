@@ -5,6 +5,7 @@ use App\Models\Order;
 use App\Models\Quote;
 use App\Models\Product;
 use \App\Models\CDesign;
+use \App\Models\CSupply;
 
 class OrderService extends BaseService
 {
@@ -69,6 +70,32 @@ class OrderService extends BaseService
             CDesign::insert($data_insert);
         }
         return Order::where('id', $arr_order['id'])->update(['status' => Order::TO_DESIGN, 'apply_design_by' => \User::getCurrent('id')]);
+    }
+
+    public function supplyHandleProcess($supply, $command, $elevate, $over_supply)
+    {
+        if (empty($command['size_type'])) {
+            return returnMessageAjax(100, 'Vui lòng chọn khổ giấy !');
+        }
+
+        if (empty($command['nqty'])) {
+            return returnMessageAjax(100, 'Vui lòng nhập số lượng sản phẩm/tờ to !');
+        }
+
+        if (empty($elevate['num'])) {
+            return returnMessageAjax(100, 'Vui lòng nhập số lượt bế !');
+        }
+        $product = Product::find($supply['product']);
+        $data_command = $command;
+        $data_command['supply'] = $supply['id']; 
+        $data_command['order'] = $product['order'];
+        $data_command['product'] = $supply['product'];
+        $data_command['status'] = CSupply::NOT_HANDLE;
+        $this->configBaseDataAction($data_command);
+        $insert_command = CSupply::insert($data_command);
+        if (!$insert_command) {
+            return returnMessageAjax(110, 'Không thể tạo yêu cầu xuất vật tư, vui lòng thử lại!');
+        }
     }
     
     public function afterRemove($id)

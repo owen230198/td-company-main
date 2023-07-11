@@ -9,6 +9,10 @@ var changQtyInput = function(){
     let compen_num = parent.data('num');
     let addqty = Math.ceil(qty_paper*compen_percent/100) + compen_num;
     parent.find('input.paper_qty_input').val(qty_paper);
+    let plan_qty = parent.find('input.plan_input_supp_qty');
+    if (plan_qty.length>0) {
+      plan_qty.trigger('change');
+    }
    });
 }
 
