@@ -145,6 +145,7 @@ class OrderController extends Controller
             $table = $request->input('table');
             $id = $request->input('id');
             $data_supply = \DB::table($table)->find($id);
+            $data_supply->order = $request->input('order');
             $supp_size = !empty($data_supply->size) ? json_decode($data_supply->size, true) : [];
             if (!empty($data_supply)) {
                 if ($request->isMethod('GET')) {

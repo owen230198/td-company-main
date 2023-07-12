@@ -25,18 +25,6 @@
                 
             ],
             [
-                'name' => '',
-                'note' => 'Tình trạng xử lí vật tư',
-                'type' => 'child_linking',
-                'other_data' => '{
-                    "data":{
-                        "table":"c_supplies",
-                        "field_query":"supply",
-                        "field_title":"status"
-                    }
-                }'
-            ],
-            [
                 'name' => 'created_by',
                 'note' => 'Tạo bởi',
                 'type' => 'linking', 

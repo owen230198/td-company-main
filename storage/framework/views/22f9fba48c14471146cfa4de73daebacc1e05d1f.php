@@ -20,6 +20,7 @@
     </h3>
     <input type="hidden" name="id" value="<?php echo e(@$supply_obj->id); ?>">
     <input type="hidden" name="table" value="<?php echo e(@$table); ?>">
+    <input type="hidden" name="order" value="<?php echo e(@$supply_obj->order); ?>">
     <div class="plan_handle_supply_module">
         <div class="module_hanle_supply_plan quantity_paper_module plan_handle_elevate_module" data-percent = <?php echo e($carton_compen_percent); ?>>
             <?php
@@ -39,6 +40,7 @@
                                     'type' => $key_supp, 
                                     'supp_type' => @$supply_size['supply_type'],
                                     'supp_price' => @$supply_size['supply_price'],
+                                    'status' => 'imported'
                                 ]
                             ]
                         ]
@@ -97,6 +99,11 @@
                         'note' => 'SL nhập kho',
                         'attr' => ['inject_class' => 'plan_input_warehouse_qty', 'type_input' => 'number', 'readonly' => 1],
                         'value' => 0,
+                    ],
+                    [
+                        'name' => $wh_name.'[note]',
+                        'note' => 'Ghi chú',
+                        'type' => 'textarea'
                     ]
                 ]      
             ?>

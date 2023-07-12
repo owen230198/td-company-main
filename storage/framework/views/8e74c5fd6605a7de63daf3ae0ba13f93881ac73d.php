@@ -5,16 +5,17 @@
     $childs = \DB::table($select_data['table'])->where(['act' => 1, $field_query => $obj_id])->get();
     $child_field = \DB::table('n_detail_tables')->where(['act' => 1, 'table_map' => $select_data['table'], 'name' => $field_title])->first();
 ?>
+<?php dump($childs); ?>;
 <?php $__currentLoopData = $childs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $child): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 	<?php if(!empty($child_field)): ?>
         <?php
             $arr = (array) $child_field;
             $arr['obj_id'] = $child->id;
             $arr['value'] = @$child->{$field_title};
-            $arr['other_data'] = !empty($child_field['other_data']) ? json_decode($child_field['other_data'], true) : [];
+            $arr['other_data'] = !empty($child_field->other_data) ? json_decode($child_field->other_data, true) : [];
         ?>
         <div class="mb-1">
-            <?php echo $__env->make('view_table.'.$child_field['type'], $arr, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+            <?php echo $__env->make('view_table.'.$child_field->type, $arr, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         </div>
     <?php else: ?>
         <p class="color_main radius_5 mb-2 text-center linking_table">

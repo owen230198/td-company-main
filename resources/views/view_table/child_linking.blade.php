@@ -11,10 +11,10 @@
             $arr = (array) $child_field;
             $arr['obj_id'] = $child->id;
             $arr['value'] = @$child->{$field_title};
-            $arr['other_data'] = !empty($child_field['other_data']) ? json_decode($child_field['other_data'], true) : [];
+            $arr['other_data'] = !empty($child_field->other_data) ? json_decode($child_field->other_data, true) : [];
         @endphp
         <div class="mb-1">
-            @include('view_table.'.$child_field['type'], $arr)
+            @include('view_table.'.$child_field->type, $arr)
         </div>
     @else
         <p class="color_main radius_5 mb-2 text-center linking_table">

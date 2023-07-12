@@ -7,8 +7,9 @@
             <th class="font-bold fs-13 text-center">
                 <span>#</span>
             </th>
+            <th class="font-bold fs-13">Tình trạng vật tư</th>
             <?php $__currentLoopData = $field_shows; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $field): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <th class="font-bold fs-13" rowspan="<?php echo e(!empty($field['colspan']) ? 1 : @$rowspan); ?>" colspan="<?php echo e(!empty($field['colspan']) ? $field['colspan'] : 1); ?>">
+                <th class="font-bold fs-13">
                     <?php echo e($field['note']); ?>
 
                 </th>
@@ -19,7 +20,17 @@
             <?php $__currentLoopData = $element['data']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <tr>
                     <td class="text-center">
-                        <span><?php echo e($key + 1); ?></span>
+                        <span><?php echo e($key+1); ?></span>
+                    </td>
+                    <?php
+                        $command = \DB::table('c_supplies')->where(['product' => $data->product, 'supply' => $data->id])->first();
+                        $bg_color = @$command->status == 'handled' ? 'stt_bg_green' : 
+                                    (@$command->status == 'handling' ? 'stt_bg_blue' : 'stt_bg_red');
+                        $stt_title = @$command->status == 'handled' ? 'Đã xử lí' : 
+                                    (@$command->status == 'handling' ? 'Đang xử lí' : 'Cần xử lí ngay');
+                    ?> 
+                    <td class="text-center <?php echo e($bg_color); ?>">
+                        <span class="color_white font_bold"><?php echo e($stt_title); ?></span>
                     </td>
                     <?php $__currentLoopData = $field_shows; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $field): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <td>
@@ -34,7 +45,7 @@
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     <td>
                         <div class="func_btn_module text-center">
-                            <a href="<?php echo e(url('supply-handle?table='.$element['table'].'&id='.$data->id)); ?>">
+                            <a href="<?php echo e(url('supply-handle?table='.$element['table'].'&id='.$data->id.'&order='.$id)); ?>">
                                 <i class="fa fa-paper-plane-o mr-1" aria-hidden="true"></i> Yêu cầu xuất vật tư
                             </a>   
                         </div>

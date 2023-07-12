@@ -609,6 +609,21 @@ a.device_supp_item {
     border-radius: 50%;
 }
 
+.stt_bg_green{
+    background: #65d303;
+    color: #ffffff;
+}
+
+.stt_bg_red{
+    background: #d50202;
+    color: #ffffff;
+}
+
+.stt_bg_blue{
+    background: #00bf99;
+    color: #ffffff;
+}
+
 @page {
     size: A4;
     margin: 1cm;

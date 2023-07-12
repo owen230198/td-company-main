@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : localhost
+ Source Server         : owen
  Source Server Type    : MySQL
- Source Server Version : 100428
+ Source Server Version : 100425
  Source Host           : localhost:3306
  Source Schema         : td_company
 
  Target Server Type    : MySQL
- Target Server Version : 100428
+ Target Server Version : 100425
  File Encoding         : 65001
 
- Date: 12/07/2023 19:59:53
+ Date: 13/07/2023 00:10:20
 */
 
 SET NAMES utf8mb4;
@@ -88,7 +88,7 @@ CREATE TABLE `c_supplies`  (
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `size_type` int(10) NULL DEFAULT NULL,
   `product_qty` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `n_qty` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `nqty` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `qty` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `order` int(10) NULL DEFAULT NULL,
   `product` int(10) NULL DEFAULT NULL,
@@ -101,7 +101,12 @@ CREATE TABLE `c_supplies`  (
   `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of c_supplies
+-- ----------------------------
+INSERT INTO `c_supplies` VALUES (1, 'XVT-000001', NULL, 2, '3000', '5', '600', 1, 3, 1, NULL, 'handling', 1, 8, NULL, '2023-07-12 23:28:05', '2023-07-12 23:28:05');
 
 -- ----------------------------
 -- Table structure for citys
@@ -13339,7 +13344,7 @@ INSERT INTO `n_detail_tables` VALUES (87, 'status', '', 'Trạng thái', 'select
 INSERT INTO `n_detail_tables` VALUES (88, 'created_at', '', 'Ngày tạo', 'datetime', 'c_designs', 1, 0, 1, 1, 0, '', 1, 0, 1, '2023-06-15 06:55:51', '2023-06-15 06:55:51');
 INSERT INTO `n_detail_tables` VALUES (89, 'created_by', '', 'Tạo bởi', 'linking', 'c_designs', 1, 0, 1, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', 1, 0, 1, '2023-06-15 06:55:51', '2023-06-15 06:55:51');
 INSERT INTO `n_detail_tables` VALUES (90, 'assign_by', '', 'Nhận bởi', 'linking', 'c_designs', 1, 0, 1, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', 1, 0, 1, '2023-06-15 10:42:46', '2023-06-15 10:42:46');
-INSERT INTO `n_detail_tables` VALUES (91, 'status', '', 'Trạng thái', 'select', 'c_supplies', 1, 0, 1, 0, 0, '{\r\n                    \"data\":{\r\n                        \"options\":{\"\":\"Chưa gửi yêu cầu xuất\", \"accepted\":\"Đang chờ xuất kho\", \"desgin\":\"Đã xuất kho\"}\r\n                    }\r\n                }', 1, 0, 1, '2023-07-12 09:24:44', '2023-07-12 09:24:44');
+INSERT INTO `n_detail_tables` VALUES (91, 'status', '', 'Trạng thái', 'select', 'c_supplies', 1, 0, 1, 0, 0, '{\r\n		\"data\":{\r\n				\"options\":{\"\":\"Chưa gửi yêu cầu xuất\", \"handling\":\"Đang chờ xuất kho\", \"handled\":\"Đã xuất kho\"}\r\n		}\r\n}', 1, 0, 1, '2023-07-12 23:33:40', '2023-07-12 23:33:40');
 
 -- ----------------------------
 -- Table structure for n_group_users
@@ -14047,7 +14052,7 @@ CREATE TABLE `supplies`  (
 -- ----------------------------
 INSERT INTO `supplies` VALUES (1, NULL, 3000, '6', NULL, 500, '{\"length\":\"50\",\"width\":\"28\",\"supply_type\":\"2\",\"supply_price\":\"1\",\"qttv_price\":0.58,\"supp_qty\":505,\"act\":1,\"total\":410060}', '{\"machine\":\"18\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":505,\"act\":1,\"total\":50000}', '{\"machine\":\"7\",\"model_price\":0,\"work_price\":120,\"shape_price\":70000,\"qty_pro\":3030,\"act\":1,\"total\":433600}', '{\"machine\":\"21\",\"model_price\":150,\"work_price\":200,\"shape_price\":100000,\"supp_qty\":505,\"cost\":411000,\"act\":1,\"total\":411000}', '{\"act\":0}', NULL, 'carton', 3, '1304660', 1, '2023-07-07 14:45:45', '2023-07-07 14:45:45', 8);
 INSERT INTO `supplies` VALUES (2, NULL, 3001, '7', NULL, 429, '{\"length\":\"33.333333333333336\",\"width\":\"31\",\"supply_type\":\"2\",\"supply_price\":\"1\",\"qttv_price\":0.58,\"supp_qty\":434,\"act\":1,\"total\":260110.6666666667}', '{\"machine\":\"18\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":434,\"act\":1,\"total\":50000}', '{\"machine\":\"7\",\"model_price\":0,\"work_price\":120,\"shape_price\":70000,\"qty_pro\":3032,\"act\":1,\"total\":433840}', '{\"machine\":\"21\",\"model_price\":150,\"work_price\":200,\"shape_price\":100000,\"supp_qty\":434,\"cost\":341800,\"act\":1,\"total\":341800}', '{\"machine\":\"39\",\"model_price\":0,\"work_price\":20,\"shape_price\":20000,\"qty_pro\":3032,\"act\":1,\"total\":80640}', NULL, 'carton', 3, '1166390.6666667', 1, '2023-07-07 14:45:45', '2023-07-07 14:45:45', 8);
-INSERT INTO `supplies` VALUES (3, NULL, 3000, '3', NULL, 1000, '{\"length\":\"25\",\"width\":\"15\",\"supply_type\":\"7\",\"supply_price\":\"0\",\"qttv_price\":0,\"supp_qty\":1010,\"act\":0,\"total\":0}', '{\"act\":0}', NULL, '{\"act\":0}', '{\"machine\":\"41\",\"model_price\":0,\"work_price\":30,\"shape_price\":20000,\"qty_pro\":3030,\"act\":1,\"total\":110900}', NULL, 'rubber', 3, '110900', 1, '2023-07-07 14:45:45', '2023-07-07 14:45:45', 8);
+INSERT INTO `supplies` VALUES (3, NULL, 3000, '3', NULL, 1000, '{\"length\":\"25\",\"width\":\"15\",\"supply_type\":\"7\",\"supply_price\":\"0\",\"qttv_price\":0,\"supp_qty\":1010,\"act\":0,\"total\":0}', '{\"act\":0}', NULL, '{\"act\":0}', '{\"machine\":\"41\",\"model_price\":0,\"work_price\":30,\"shape_price\":20000,\"qty_pro\":3030,\"act\":1,\"total\":110900}', '{\"num\":\"10\",\"total\":\"6000\"}', 'rubber', 3, '110900', 1, '2023-07-07 14:45:45', '2023-07-12 23:28:05', 8);
 INSERT INTO `supplies` VALUES (4, NULL, 3000, '4', NULL, 750, '{\"length\":\"25\",\"width\":\"21\",\"supply_type\":\"6\",\"supply_price\":\"9\",\"qttv_price\":40000,\"supp_qty\":758,\"act\":1,\"total\":15918000000}', '{\"act\":0}', NULL, '{\"act\":0}', '{\"act\":0}', NULL, 'rubber', 3, '15918000000', 1, '2023-07-07 14:45:45', '2023-07-07 14:45:45', 8);
 INSERT INTO `supplies` VALUES (5, NULL, 3000, '1', 'rubber', 0, '{\"length\":\"51\",\"width\":\"50\",\"supply_price\":\"92\",\"qttv_price\":26000,\"supp_qty\":0,\"act\":0,\"total\":0}', '{\"machine\":\"31\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":0,\"act\":1,\"total\":50000}', NULL, NULL, NULL, NULL, 'decal', 3, '50000', 1, '2023-07-07 14:45:45', '2023-07-07 14:45:45', 8);
 INSERT INTO `supplies` VALUES (6, NULL, 3000, 'carton', 'carton', 500, '{\"length\":\"50\",\"width\":\"28\",\"supply_price\":\"92\",\"qttv_price\":26000,\"supp_qty\":505,\"act\":1,\"total\":18382000000}', '{\"machine\":\"31\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":505,\"act\":1,\"total\":50000}', NULL, NULL, NULL, NULL, 'decal', 3, '18382050000', 1, '2023-07-07 14:45:45', '2023-07-07 14:45:45', 8);
@@ -14224,7 +14229,7 @@ CREATE TABLE `supply_warehouses`  (
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `length` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `width` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `quantity` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `qty` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `supp_type` int(10) NULL DEFAULT NULL,
   `supp_price` int(10) NULL DEFAULT NULL,
@@ -14236,13 +14241,14 @@ CREATE TABLE `supply_warehouses`  (
   `updated_at` datetime(0) NULL DEFAULT NULL,
   `created_by` int(10) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of supply_warehouses
 -- ----------------------------
-INSERT INTO `supply_warehouses` VALUES (1, 'Carton thành ĐL 0.8mm KT 50 x 40', '50', '40', '1000000', 'carton', 2, 1, NULL, NULL, NULL, NULL, '2023-07-11 02:25:04', '2023-07-11 02:25:07', 1);
-INSERT INTO `supply_warehouses` VALUES (2, 'Carton thành ĐL 0.8mm KT 50 x 30', '50', '30', '1000000', 'carton', 2, 1, NULL, NULL, NULL, NULL, '2023-07-11 02:25:04', '2023-07-11 02:25:07', 1);
-INSERT INTO `supply_warehouses` VALUES (3, 'Carton thành ĐL 0.8mm KT 100 x 50', '100', '50', '1000000', 'carton', 2, 1, NULL, NULL, NULL, NULL, '2023-07-11 02:25:04', '2023-07-11 02:25:07', 1);
+INSERT INTO `supply_warehouses` VALUES (1, 'Carton thành ĐL 0.8mm KT 50 x 40', '50', '40', '1000000', 'carton', 2, 1, 'imported', NULL, NULL, 1, '2023-07-11 02:25:04', '2023-07-11 02:25:07', 1);
+INSERT INTO `supply_warehouses` VALUES (2, 'Carton thành ĐL 0.8mm KT 50 x 30', '50', '30', '1000000', 'carton', 2, 1, 'imported', NULL, NULL, 1, '2023-07-11 02:25:04', '2023-07-11 02:25:07', 1);
+INSERT INTO `supply_warehouses` VALUES (3, 'Carton thành ĐL 0.8mm KT 100 x 50', '100', '50', '1000000', 'carton', 2, 1, 'imported', NULL, NULL, 1, '2023-07-11 02:25:04', '2023-07-11 02:25:07', 1);
+INSERT INTO `supply_warehouses` VALUES (4, 'Băng lề carton 10x11', '10', '11', '600', 'carton', 2, NULL, 'waiting', 2, 'note', 1, '2023-07-12 23:28:05', '2023-07-12 23:28:05', 8);
 
 SET FOREIGN_KEY_CHECKS = 1;

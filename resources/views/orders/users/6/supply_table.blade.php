@@ -7,8 +7,9 @@
             <th class="font-bold fs-13 text-center">
                 <span>#</span>
             </th>
+            <th class="font-bold fs-13">Tình trạng vật tư</th>
             @foreach ($field_shows as $key => $field)
-                <th class="font-bold fs-13" rowspan="{{ !empty($field['colspan']) ? 1 : @$rowspan }}" colspan="{{ !empty($field['colspan']) ? $field['colspan'] : 1 }}">
+                <th class="font-bold fs-13">
                     {{ $field['note'] }}
                 </th>
             @endforeach
@@ -18,7 +19,17 @@
             @foreach ($element['data'] as $key => $data)
                 <tr>
                     <td class="text-center">
-                        <span>{{ $key + 1 }}</span>
+                        <span>{{ $key+1 }}</span>
+                    </td>
+                    @php
+                        $command = \DB::table('c_supplies')->where(['product' => $data->product, 'supply' => $data->id])->first();
+                        $bg_color = @$command->status == 'handled' ? 'stt_bg_green' : 
+                                    (@$command->status == 'handling' ? 'stt_bg_blue' : 'stt_bg_red');
+                        $stt_title = @$command->status == 'handled' ? 'Đã xử lí' : 
+                                    (@$command->status == 'handling' ? 'Đang xử lí' : 'Cần xử lí ngay');
+                    @endphp 
+                    <td class="text-center {{ $bg_color }}">
+                        <span class="color_white font_bold">{{ $stt_title }}</span>
                     </td>
                     @foreach ($field_shows as $field)
                     <td>
@@ -33,7 +44,7 @@
                     @endforeach
                     <td>
                         <div class="func_btn_module text-center">
-                            <a href="{{ url('supply-handle?table='.$element['table'].'&id='.$data->id) }}">
+                            <a href="{{ url('supply-handle?table='.$element['table'].'&id='.$data->id.'&order='.$id) }}">
                                 <i class="fa fa-paper-plane-o mr-1" aria-hidden="true"></i> Yêu cầu xuất vật tư
                             </a>   
                         </div>

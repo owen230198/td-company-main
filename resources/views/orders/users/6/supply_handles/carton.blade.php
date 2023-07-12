@@ -20,6 +20,7 @@
     </h3>
     <input type="hidden" name="id" value="{{ @$supply_obj->id }}">
     <input type="hidden" name="table" value="{{ @$table }}">
+    <input type="hidden" name="order" value="{{ @$supply_obj->order }}">
     <div class="plan_handle_supply_module">
         <div class="module_hanle_supply_plan quantity_paper_module plan_handle_elevate_module" data-percent = {{ $carton_compen_percent }}>
             @php
@@ -39,6 +40,7 @@
                                     'type' => $key_supp, 
                                     'supp_type' => @$supply_size['supply_type'],
                                     'supp_price' => @$supply_size['supply_price'],
+                                    'status' => 'imported'
                                 ]
                             ]
                         ]
@@ -93,10 +95,15 @@
                         'value' => 0,
                     ],
                     [
-                        'name' => $wh_name.'[quantity]',
+                        'name' => $wh_name.'[qty]',
                         'note' => 'SL nhập kho',
                         'attr' => ['inject_class' => 'plan_input_warehouse_qty', 'type_input' => 'number', 'readonly' => 1],
                         'value' => 0,
+                    ],
+                    [
+                        'name' => $wh_name.'[note]',
+                        'note' => 'Ghi chú',
+                        'type' => 'textarea'
                     ]
                 ]      
             @endphp
