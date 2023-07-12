@@ -145,6 +145,7 @@ class OrderController extends Controller
             $table = $request->input('table');
             $id = $request->input('id');
             $data_supply = \DB::table($table)->find($id);
+            $supp_size = !empty($data_supply->size) ? json_decode($data_supply->size, true) : [];
             if (!empty($data_supply)) {
                 if ($request->isMethod('GET')) {
                         $data['supply_obj'] = $data_supply;
@@ -153,7 +154,7 @@ class OrderController extends Controller
                         $data['pro_index'] = 0;
                         $data['supp_index'] = 0;
                         $data['table'] = $table;
-                        $data['supply_size'] = !empty($data_supply->size) ? json_decode($data_supply->size, true) : [];
+                        $data['supply_size'] = $supp_size;
                         if (view()->exists('orders.users.6.supply_handles.'.$prefix)) {
                             return view('orders.users.6.supply_handles.'.$prefix, $data); 
                         }else{
@@ -163,7 +164,7 @@ class OrderController extends Controller
                     $data_command = $request->input('c_supply');
                     $data_elevate = $request->input('elevate');
                     $data_over_supp = $request->input('over_supply');
-                    return $this->services->supplyHandleProcess($data_supply, $data_command, $data_elevate, $data_over_supp);
+                    return $this->services->supplyHandleProcess($data_supply, $supp_size, $data_command, $data_elevate, $data_over_supp);
                 } 
             }else{
                 return customReturnMessage(false, $request->isMethod('POST'), ['message' => 'Dữ liệu không hợp lệ']);

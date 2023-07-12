@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : owen
+ Source Server         : localhost
  Source Server Type    : MySQL
- Source Server Version : 100425
+ Source Server Version : 100428
  Source Host           : localhost:3306
  Source Schema         : td_company
 
  Target Server Type    : MySQL
- Target Server Version : 100425
+ Target Server Version : 100428
  File Encoding         : 65001
 
- Date: 11/07/2023 17:01:20
+ Date: 12/07/2023 19:59:53
 */
 
 SET NAMES utf8mb4;
@@ -77,6 +77,31 @@ INSERT INTO `c_processes` VALUES (11, 'not_accepted', '2023-02-22 10:56:00', '20
 INSERT INTO `c_processes` VALUES (12, 'not_accepted', '2023-02-22 10:56:00', '2023-02-23 10:56:00', '{\"crop\":\"X\\u00e9n theo \\u1ed1c\",\"num_face\":\"2\",\"soles_fill\":\"2\",\"finished_type\":\"1\",\"compress\":\"1\",\"jump\":\"0\",\"finish\":\"1\"}', 'ghi chu gia cong sp 2', 1, NULL, '2023-02-22 23:01:00', NULL, 24, 16);
 INSERT INTO `c_processes` VALUES (13, 'not_accepted', '2023-02-25 09:27:00', '2023-02-26 09:27:00', '{\"crop\":\"X\\u00e9n theo \\u1ed1c\",\"num_face\":\"2\",\"soles_fill\":\"1\",\"finished_type\":\"2\",\"compress\":\"1\",\"jump\":\"1\",\"finish\":\"1\"}', 'note', 1, NULL, '2023-02-25 09:30:00', NULL, 25, 17);
 INSERT INTO `c_processes` VALUES (14, 'not_accepted', '2023-02-25 09:27:00', '2023-02-25 09:27:00', '{\"crop\":\"X\\u00e9n theo \\u1ed1c\",\"num_face\":\"2\",\"soles_fill\":\"2\",\"finished_type\":\"0\",\"compress\":\"1\",\"jump\":\"1\",\"finish\":\"1\"}', NULL, 1, NULL, '2023-02-25 09:30:00', NULL, 26, 17);
+
+-- ----------------------------
+-- Table structure for c_supplies
+-- ----------------------------
+DROP TABLE IF EXISTS `c_supplies`;
+CREATE TABLE `c_supplies`  (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `size_type` int(10) NULL DEFAULT NULL,
+  `product_qty` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `n_qty` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `qty` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `order` int(10) NULL DEFAULT NULL,
+  `product` int(10) NULL DEFAULT NULL,
+  `supply` int(10) NULL DEFAULT NULL,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `act` tinyint(4) NULL DEFAULT NULL,
+  `created_by` int(10) NULL DEFAULT NULL,
+  `assign_by` int(10) NULL DEFAULT NULL,
+  `created_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for citys
@@ -13219,7 +13244,7 @@ CREATE TABLE `n_detail_tables`  (
   INDEX `map_insert`(`table_map`, `insert`) USING BTREE,
   INDEX `map_update`(`table_map`, `update`) USING BTREE,
   INDEX `map_search`(`table_map`, `search`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 91 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 92 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of n_detail_tables
@@ -13314,6 +13339,7 @@ INSERT INTO `n_detail_tables` VALUES (87, 'status', '', 'Trạng thái', 'select
 INSERT INTO `n_detail_tables` VALUES (88, 'created_at', '', 'Ngày tạo', 'datetime', 'c_designs', 1, 0, 1, 1, 0, '', 1, 0, 1, '2023-06-15 06:55:51', '2023-06-15 06:55:51');
 INSERT INTO `n_detail_tables` VALUES (89, 'created_by', '', 'Tạo bởi', 'linking', 'c_designs', 1, 0, 1, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', 1, 0, 1, '2023-06-15 06:55:51', '2023-06-15 06:55:51');
 INSERT INTO `n_detail_tables` VALUES (90, 'assign_by', '', 'Nhận bởi', 'linking', 'c_designs', 1, 0, 1, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', 1, 0, 1, '2023-06-15 10:42:46', '2023-06-15 10:42:46');
+INSERT INTO `n_detail_tables` VALUES (91, 'status', '', 'Trạng thái', 'select', 'c_supplies', 1, 0, 1, 0, 0, '{\r\n                    \"data\":{\r\n                        \"options\":{\"\":\"Chưa gửi yêu cầu xuất\", \"accepted\":\"Đang chờ xuất kho\", \"desgin\":\"Đã xuất kho\"}\r\n                    }\r\n                }', 1, 0, 1, '2023-07-12 09:24:44', '2023-07-12 09:24:44');
 
 -- ----------------------------
 -- Table structure for n_group_users
@@ -14004,6 +14030,7 @@ CREATE TABLE `supplies`  (
   `mill` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   `elevate` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   `peel` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `handle_elevate` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `product` int(10) NULL DEFAULT NULL,
   `total_cost` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
@@ -14018,22 +14045,22 @@ CREATE TABLE `supplies`  (
 -- ----------------------------
 -- Records of supplies
 -- ----------------------------
-INSERT INTO `supplies` VALUES (1, NULL, 3000, '6', NULL, 500, '{\"length\":\"50\",\"width\":\"28\",\"supply_type\":\"2\",\"supply_price\":\"1\",\"qttv_price\":0.58,\"supp_qty\":505,\"act\":1,\"total\":410060}', '{\"machine\":\"18\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":505,\"act\":1,\"total\":50000}', '{\"machine\":\"7\",\"model_price\":0,\"work_price\":120,\"shape_price\":70000,\"qty_pro\":3030,\"act\":1,\"total\":433600}', '{\"machine\":\"21\",\"model_price\":150,\"work_price\":200,\"shape_price\":100000,\"supp_qty\":505,\"cost\":411000,\"act\":1,\"total\":411000}', '{\"act\":0}', 'carton', 3, '1304660', 1, '2023-07-07 14:45:45', '2023-07-07 14:45:45', 8);
-INSERT INTO `supplies` VALUES (2, NULL, 3001, '7', NULL, 429, '{\"length\":\"33.333333333333336\",\"width\":\"31\",\"supply_type\":\"2\",\"supply_price\":\"1\",\"qttv_price\":0.58,\"supp_qty\":434,\"act\":1,\"total\":260110.6666666667}', '{\"machine\":\"18\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":434,\"act\":1,\"total\":50000}', '{\"machine\":\"7\",\"model_price\":0,\"work_price\":120,\"shape_price\":70000,\"qty_pro\":3032,\"act\":1,\"total\":433840}', '{\"machine\":\"21\",\"model_price\":150,\"work_price\":200,\"shape_price\":100000,\"supp_qty\":434,\"cost\":341800,\"act\":1,\"total\":341800}', '{\"machine\":\"39\",\"model_price\":0,\"work_price\":20,\"shape_price\":20000,\"qty_pro\":3032,\"act\":1,\"total\":80640}', 'carton', 3, '1166390.6666667', 1, '2023-07-07 14:45:45', '2023-07-07 14:45:45', 8);
-INSERT INTO `supplies` VALUES (3, NULL, 3000, '3', NULL, 1000, '{\"length\":\"25\",\"width\":\"15\",\"supply_type\":\"7\",\"supply_price\":\"0\",\"qttv_price\":0,\"supp_qty\":1010,\"act\":0,\"total\":0}', '{\"act\":0}', NULL, '{\"act\":0}', '{\"machine\":\"41\",\"model_price\":0,\"work_price\":30,\"shape_price\":20000,\"qty_pro\":3030,\"act\":1,\"total\":110900}', 'rubber', 3, '110900', 1, '2023-07-07 14:45:45', '2023-07-07 14:45:45', 8);
-INSERT INTO `supplies` VALUES (4, NULL, 3000, '4', NULL, 750, '{\"length\":\"25\",\"width\":\"21\",\"supply_type\":\"6\",\"supply_price\":\"9\",\"qttv_price\":40000,\"supp_qty\":758,\"act\":1,\"total\":15918000000}', '{\"act\":0}', NULL, '{\"act\":0}', '{\"act\":0}', 'rubber', 3, '15918000000', 1, '2023-07-07 14:45:45', '2023-07-07 14:45:45', 8);
-INSERT INTO `supplies` VALUES (5, NULL, 3000, '1', 'rubber', 0, '{\"length\":\"51\",\"width\":\"50\",\"supply_price\":\"92\",\"qttv_price\":26000,\"supp_qty\":0,\"act\":0,\"total\":0}', '{\"machine\":\"31\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":0,\"act\":1,\"total\":50000}', NULL, NULL, NULL, 'decal', 3, '50000', 1, '2023-07-07 14:45:45', '2023-07-07 14:45:45', 8);
-INSERT INTO `supplies` VALUES (6, NULL, 3000, 'carton', 'carton', 500, '{\"length\":\"50\",\"width\":\"28\",\"supply_price\":\"92\",\"qttv_price\":26000,\"supp_qty\":505,\"act\":1,\"total\":18382000000}', '{\"machine\":\"31\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":505,\"act\":1,\"total\":50000}', NULL, NULL, NULL, 'decal', 3, '18382050000', 1, '2023-07-07 14:45:45', '2023-07-07 14:45:45', 8);
-INSERT INTO `supplies` VALUES (7, NULL, 3000, '4', NULL, 750, '{\"length\":\"25\",\"width\":\"22\",\"supply_price\":\"75\",\"prescript_price\":\"1000\",\"qttv_price\":6600,\"supp_qty\":758,\"act\":1,\"total\":2752298000}', '{\"machine\":\"32\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":758,\"act\":1,\"total\":50000}', NULL, NULL, NULL, 'silk', 3, '2752348000', 1, '2023-07-07 14:45:45', '2023-07-07 14:45:45', 8);
-INSERT INTO `supplies` VALUES (8, NULL, 3000, '1', NULL, 3000, '{\"length\":\"26.666666666666668\",\"width\":\"20\",\"supply_type\":\"10\",\"supply_price\":\"60\",\"qttv_price\":67000,\"supp_qty\":3030,\"act\":1,\"total\":108272000000}', '{\"machine\":\"35\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":3030,\"act\":1,\"total\":50000}', NULL, '{\"act\":0}', '{\"machine\":\"42\",\"model_price\":0,\"work_price\":10,\"shape_price\":20000,\"qty_pro\":3030,\"act\":1,\"total\":50300}', 'styrofoam', 3, '108272100300', 1, '2023-07-07 14:45:45', '2023-07-07 14:45:45', 8);
-INSERT INTO `supplies` VALUES (9, NULL, 3000, '1', NULL, 3000, '{\"length\":\"32\",\"width\":\"11\",\"supply_price\":\"93\",\"qttv_price\":2000,\"supp_qty\":3030,\"act\":1,\"total\":2133120000}', '{\"machine\":\"36\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":3030,\"act\":1,\"total\":50000}', NULL, '{\"act\":0}', '{\"machine\":\"44\",\"model_price\":0,\"work_price\":10,\"shape_price\":20000,\"qty_pro\":3030,\"act\":1,\"total\":50300}', 'mica', 3, '2133220300', 1, '2023-07-07 14:45:45', '2023-07-07 14:45:45', 8);
-INSERT INTO `supplies` VALUES (27, NULL, 3000, '1', NULL, 3000, '{\"length\":\"25\",\"width\":\"21\",\"supply_price\":\"75\",\"prescript_price\":\"3000\",\"qttv_price\":6600,\"supp_qty\":3030,\"act\":1,\"total\":10508040000}', '{\"machine\":\"32\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":3030,\"act\":1,\"total\":50000}', NULL, NULL, NULL, 'silk', 3, '10508090000', 1, '2023-07-07 14:45:45', '2023-07-07 14:45:45', 8);
-INSERT INTO `supplies` VALUES (28, NULL, 3000, '1', NULL, 3000, '{\"length\":\"26.666666666666668\",\"width\":\"21\",\"supply_type\":\"8\",\"supply_price\":\"67\",\"qttv_price\":2500,\"supp_qty\":3030,\"act\":1,\"total\":4242000000}', '{\"machine\":\"34\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":3030,\"act\":1,\"total\":50000}', NULL, '{\"act\":0}', '{\"machine\":\"42\",\"model_price\":0,\"work_price\":10,\"shape_price\":20000,\"qty_pro\":3030,\"act\":1,\"total\":50300}', 'styrofoam', 3, '4242100300', 1, '2023-07-07 14:45:45', '2023-07-07 14:45:45', 8);
-INSERT INTO `supplies` VALUES (29, NULL, 3000, '1', NULL, 3000, '{\"length\":\"26.666666666666668\",\"width\":\"20\",\"supply_type\":\"9\",\"supply_price\":\"44\",\"qttv_price\":5500,\"supp_qty\":3030,\"act\":1,\"total\":8888000000}', '{\"machine\":\"34\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":3030,\"act\":1,\"total\":50000}', NULL, '{\"act\":0}', '{\"machine\":\"42\",\"model_price\":0,\"work_price\":10,\"shape_price\":20000,\"qty_pro\":3030,\"act\":1,\"total\":50300}', 'styrofoam', 3, '8888100300', 1, '2023-07-07 14:45:45', '2023-07-07 14:45:45', 8);
-INSERT INTO `supplies` VALUES (30, NULL, 3000, '1', NULL, 3000, '{\"length\":\"26.666666666666668\",\"width\":\"21\",\"supply_price\":\"93\",\"qttv_price\":2000,\"supp_qty\":3030,\"act\":1,\"total\":3393600000}', '{\"machine\":\"36\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":3030,\"act\":1,\"total\":50000}', NULL, '{\"act\":0}', '{\"machine\":\"44\",\"model_price\":0,\"work_price\":10,\"shape_price\":20000,\"qty_pro\":3030,\"act\":1,\"total\":50300}', 'mica', 3, '3393700300', 1, '2023-07-07 14:45:45', '2023-07-07 14:45:45', 8);
-INSERT INTO `supplies` VALUES (31, NULL, 3000, '1', NULL, 3000, '{\"length\":\"30\",\"width\":\"21\",\"supply_price\":\"75\",\"prescript_price\":\"2000\",\"qttv_price\":6600,\"supp_qty\":3030,\"act\":1,\"total\":12604800000}', '{\"machine\":\"33\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":3030,\"act\":1,\"total\":50000}', NULL, NULL, NULL, 'silk', 3, '12604850000', 1, '2023-07-07 14:45:45', '2023-07-07 14:45:45', 8);
-INSERT INTO `supplies` VALUES (32, NULL, 3000, '1', NULL, 3000, '{\"length\":\"26.666666666666668\",\"width\":\"22\",\"supply_type\":\"8\",\"supply_price\":\"30\",\"qttv_price\":3000,\"supp_qty\":3030,\"act\":1,\"total\":5332800000.000001}', '{\"machine\":\"34\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":3030,\"act\":1,\"total\":50000}', NULL, '{\"act\":0}', '{\"machine\":\"42\",\"model_price\":0,\"work_price\":10,\"shape_price\":20000,\"qty_pro\":3030,\"act\":1,\"total\":50300}', 'styrofoam', 3, '5332900300', 1, '2023-07-07 14:45:45', '2023-07-07 14:45:45', 8);
-INSERT INTO `supplies` VALUES (33, NULL, 3000, '1', NULL, 3000, '{\"length\":\"26.666666666666668\",\"width\":\"22\",\"supply_price\":\"93\",\"qttv_price\":2000,\"supp_qty\":3030,\"act\":1,\"total\":3555200000.0000005}', '{\"machine\":\"37\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":3030,\"act\":1,\"total\":50000}', NULL, '{\"act\":0}', '{\"machine\":\"44\",\"model_price\":0,\"work_price\":10,\"shape_price\":20000,\"qty_pro\":3030,\"act\":1,\"total\":50300}', 'mica', 3, '3555300300', 1, '2023-07-07 14:45:45', '2023-07-07 14:45:45', 8);
+INSERT INTO `supplies` VALUES (1, NULL, 3000, '6', NULL, 500, '{\"length\":\"50\",\"width\":\"28\",\"supply_type\":\"2\",\"supply_price\":\"1\",\"qttv_price\":0.58,\"supp_qty\":505,\"act\":1,\"total\":410060}', '{\"machine\":\"18\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":505,\"act\":1,\"total\":50000}', '{\"machine\":\"7\",\"model_price\":0,\"work_price\":120,\"shape_price\":70000,\"qty_pro\":3030,\"act\":1,\"total\":433600}', '{\"machine\":\"21\",\"model_price\":150,\"work_price\":200,\"shape_price\":100000,\"supp_qty\":505,\"cost\":411000,\"act\":1,\"total\":411000}', '{\"act\":0}', NULL, 'carton', 3, '1304660', 1, '2023-07-07 14:45:45', '2023-07-07 14:45:45', 8);
+INSERT INTO `supplies` VALUES (2, NULL, 3001, '7', NULL, 429, '{\"length\":\"33.333333333333336\",\"width\":\"31\",\"supply_type\":\"2\",\"supply_price\":\"1\",\"qttv_price\":0.58,\"supp_qty\":434,\"act\":1,\"total\":260110.6666666667}', '{\"machine\":\"18\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":434,\"act\":1,\"total\":50000}', '{\"machine\":\"7\",\"model_price\":0,\"work_price\":120,\"shape_price\":70000,\"qty_pro\":3032,\"act\":1,\"total\":433840}', '{\"machine\":\"21\",\"model_price\":150,\"work_price\":200,\"shape_price\":100000,\"supp_qty\":434,\"cost\":341800,\"act\":1,\"total\":341800}', '{\"machine\":\"39\",\"model_price\":0,\"work_price\":20,\"shape_price\":20000,\"qty_pro\":3032,\"act\":1,\"total\":80640}', NULL, 'carton', 3, '1166390.6666667', 1, '2023-07-07 14:45:45', '2023-07-07 14:45:45', 8);
+INSERT INTO `supplies` VALUES (3, NULL, 3000, '3', NULL, 1000, '{\"length\":\"25\",\"width\":\"15\",\"supply_type\":\"7\",\"supply_price\":\"0\",\"qttv_price\":0,\"supp_qty\":1010,\"act\":0,\"total\":0}', '{\"act\":0}', NULL, '{\"act\":0}', '{\"machine\":\"41\",\"model_price\":0,\"work_price\":30,\"shape_price\":20000,\"qty_pro\":3030,\"act\":1,\"total\":110900}', NULL, 'rubber', 3, '110900', 1, '2023-07-07 14:45:45', '2023-07-07 14:45:45', 8);
+INSERT INTO `supplies` VALUES (4, NULL, 3000, '4', NULL, 750, '{\"length\":\"25\",\"width\":\"21\",\"supply_type\":\"6\",\"supply_price\":\"9\",\"qttv_price\":40000,\"supp_qty\":758,\"act\":1,\"total\":15918000000}', '{\"act\":0}', NULL, '{\"act\":0}', '{\"act\":0}', NULL, 'rubber', 3, '15918000000', 1, '2023-07-07 14:45:45', '2023-07-07 14:45:45', 8);
+INSERT INTO `supplies` VALUES (5, NULL, 3000, '1', 'rubber', 0, '{\"length\":\"51\",\"width\":\"50\",\"supply_price\":\"92\",\"qttv_price\":26000,\"supp_qty\":0,\"act\":0,\"total\":0}', '{\"machine\":\"31\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":0,\"act\":1,\"total\":50000}', NULL, NULL, NULL, NULL, 'decal', 3, '50000', 1, '2023-07-07 14:45:45', '2023-07-07 14:45:45', 8);
+INSERT INTO `supplies` VALUES (6, NULL, 3000, 'carton', 'carton', 500, '{\"length\":\"50\",\"width\":\"28\",\"supply_price\":\"92\",\"qttv_price\":26000,\"supp_qty\":505,\"act\":1,\"total\":18382000000}', '{\"machine\":\"31\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":505,\"act\":1,\"total\":50000}', NULL, NULL, NULL, NULL, 'decal', 3, '18382050000', 1, '2023-07-07 14:45:45', '2023-07-07 14:45:45', 8);
+INSERT INTO `supplies` VALUES (7, NULL, 3000, '4', NULL, 750, '{\"length\":\"25\",\"width\":\"22\",\"supply_price\":\"75\",\"prescript_price\":\"1000\",\"qttv_price\":6600,\"supp_qty\":758,\"act\":1,\"total\":2752298000}', '{\"machine\":\"32\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":758,\"act\":1,\"total\":50000}', NULL, NULL, NULL, NULL, 'silk', 3, '2752348000', 1, '2023-07-07 14:45:45', '2023-07-07 14:45:45', 8);
+INSERT INTO `supplies` VALUES (8, NULL, 3000, '1', NULL, 3000, '{\"length\":\"26.666666666666668\",\"width\":\"20\",\"supply_type\":\"10\",\"supply_price\":\"60\",\"qttv_price\":67000,\"supp_qty\":3030,\"act\":1,\"total\":108272000000}', '{\"machine\":\"35\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":3030,\"act\":1,\"total\":50000}', NULL, '{\"act\":0}', '{\"machine\":\"42\",\"model_price\":0,\"work_price\":10,\"shape_price\":20000,\"qty_pro\":3030,\"act\":1,\"total\":50300}', NULL, 'styrofoam', 3, '108272100300', 1, '2023-07-07 14:45:45', '2023-07-07 14:45:45', 8);
+INSERT INTO `supplies` VALUES (9, NULL, 3000, '1', NULL, 3000, '{\"length\":\"32\",\"width\":\"11\",\"supply_price\":\"93\",\"qttv_price\":2000,\"supp_qty\":3030,\"act\":1,\"total\":2133120000}', '{\"machine\":\"36\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":3030,\"act\":1,\"total\":50000}', NULL, '{\"act\":0}', '{\"machine\":\"44\",\"model_price\":0,\"work_price\":10,\"shape_price\":20000,\"qty_pro\":3030,\"act\":1,\"total\":50300}', NULL, 'mica', 3, '2133220300', 1, '2023-07-07 14:45:45', '2023-07-07 14:45:45', 8);
+INSERT INTO `supplies` VALUES (27, NULL, 3000, '1', NULL, 3000, '{\"length\":\"25\",\"width\":\"21\",\"supply_price\":\"75\",\"prescript_price\":\"3000\",\"qttv_price\":6600,\"supp_qty\":3030,\"act\":1,\"total\":10508040000}', '{\"machine\":\"32\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":3030,\"act\":1,\"total\":50000}', NULL, NULL, NULL, NULL, 'silk', 3, '10508090000', 1, '2023-07-07 14:45:45', '2023-07-07 14:45:45', 8);
+INSERT INTO `supplies` VALUES (28, NULL, 3000, '1', NULL, 3000, '{\"length\":\"26.666666666666668\",\"width\":\"21\",\"supply_type\":\"8\",\"supply_price\":\"67\",\"qttv_price\":2500,\"supp_qty\":3030,\"act\":1,\"total\":4242000000}', '{\"machine\":\"34\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":3030,\"act\":1,\"total\":50000}', NULL, '{\"act\":0}', '{\"machine\":\"42\",\"model_price\":0,\"work_price\":10,\"shape_price\":20000,\"qty_pro\":3030,\"act\":1,\"total\":50300}', NULL, 'styrofoam', 3, '4242100300', 1, '2023-07-07 14:45:45', '2023-07-07 14:45:45', 8);
+INSERT INTO `supplies` VALUES (29, NULL, 3000, '1', NULL, 3000, '{\"length\":\"26.666666666666668\",\"width\":\"20\",\"supply_type\":\"9\",\"supply_price\":\"44\",\"qttv_price\":5500,\"supp_qty\":3030,\"act\":1,\"total\":8888000000}', '{\"machine\":\"34\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":3030,\"act\":1,\"total\":50000}', NULL, '{\"act\":0}', '{\"machine\":\"42\",\"model_price\":0,\"work_price\":10,\"shape_price\":20000,\"qty_pro\":3030,\"act\":1,\"total\":50300}', NULL, 'styrofoam', 3, '8888100300', 1, '2023-07-07 14:45:45', '2023-07-07 14:45:45', 8);
+INSERT INTO `supplies` VALUES (30, NULL, 3000, '1', NULL, 3000, '{\"length\":\"26.666666666666668\",\"width\":\"21\",\"supply_price\":\"93\",\"qttv_price\":2000,\"supp_qty\":3030,\"act\":1,\"total\":3393600000}', '{\"machine\":\"36\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":3030,\"act\":1,\"total\":50000}', NULL, '{\"act\":0}', '{\"machine\":\"44\",\"model_price\":0,\"work_price\":10,\"shape_price\":20000,\"qty_pro\":3030,\"act\":1,\"total\":50300}', NULL, 'mica', 3, '3393700300', 1, '2023-07-07 14:45:45', '2023-07-07 14:45:45', 8);
+INSERT INTO `supplies` VALUES (31, NULL, 3000, '1', NULL, 3000, '{\"length\":\"30\",\"width\":\"21\",\"supply_price\":\"75\",\"prescript_price\":\"2000\",\"qttv_price\":6600,\"supp_qty\":3030,\"act\":1,\"total\":12604800000}', '{\"machine\":\"33\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":3030,\"act\":1,\"total\":50000}', NULL, NULL, NULL, NULL, 'silk', 3, '12604850000', 1, '2023-07-07 14:45:45', '2023-07-07 14:45:45', 8);
+INSERT INTO `supplies` VALUES (32, NULL, 3000, '1', NULL, 3000, '{\"length\":\"26.666666666666668\",\"width\":\"22\",\"supply_type\":\"8\",\"supply_price\":\"30\",\"qttv_price\":3000,\"supp_qty\":3030,\"act\":1,\"total\":5332800000.000001}', '{\"machine\":\"34\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":3030,\"act\":1,\"total\":50000}', NULL, '{\"act\":0}', '{\"machine\":\"42\",\"model_price\":0,\"work_price\":10,\"shape_price\":20000,\"qty_pro\":3030,\"act\":1,\"total\":50300}', NULL, 'styrofoam', 3, '5332900300', 1, '2023-07-07 14:45:45', '2023-07-07 14:45:45', 8);
+INSERT INTO `supplies` VALUES (33, NULL, 3000, '1', NULL, 3000, '{\"length\":\"26.666666666666668\",\"width\":\"22\",\"supply_price\":\"93\",\"qttv_price\":2000,\"supp_qty\":3030,\"act\":1,\"total\":3555200000.0000005}', '{\"machine\":\"37\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":3030,\"act\":1,\"total\":50000}', NULL, '{\"act\":0}', '{\"machine\":\"44\",\"model_price\":0,\"work_price\":10,\"shape_price\":20000,\"qty_pro\":3030,\"act\":1,\"total\":50300}', NULL, 'mica', 3, '3555300300', 1, '2023-07-07 14:45:45', '2023-07-07 14:45:45', 8);
 
 -- ----------------------------
 -- Table structure for supply_prices
@@ -14201,6 +14228,10 @@ CREATE TABLE `supply_warehouses`  (
   `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `supp_type` int(10) NULL DEFAULT NULL,
   `supp_price` int(10) NULL DEFAULT NULL,
+  `status` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `source` tinyint(4) NULL DEFAULT NULL,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `act` tinyint(4) NULL DEFAULT NULL,
   `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL,
   `created_by` int(10) NULL DEFAULT NULL,
@@ -14210,8 +14241,8 @@ CREATE TABLE `supply_warehouses`  (
 -- ----------------------------
 -- Records of supply_warehouses
 -- ----------------------------
-INSERT INTO `supply_warehouses` VALUES (1, 'Carton thành ĐL 0.8mm KT 50 x 40', '50', '40', '1000000', 'carton', 2, 1, '2023-07-11 02:25:04', '2023-07-11 02:25:07', 1);
-INSERT INTO `supply_warehouses` VALUES (2, 'Carton thành ĐL 0.8mm KT 50 x 30', '50', '30', '1000000', 'carton', 2, 1, '2023-07-11 02:25:04', '2023-07-11 02:25:07', 1);
-INSERT INTO `supply_warehouses` VALUES (3, 'Carton thành ĐL 0.8mm KT 100 x 50', '100', '50', '1000000', 'carton', 2, 1, '2023-07-11 02:25:04', '2023-07-11 02:25:07', 1);
+INSERT INTO `supply_warehouses` VALUES (1, 'Carton thành ĐL 0.8mm KT 50 x 40', '50', '40', '1000000', 'carton', 2, 1, NULL, NULL, NULL, NULL, '2023-07-11 02:25:04', '2023-07-11 02:25:07', 1);
+INSERT INTO `supply_warehouses` VALUES (2, 'Carton thành ĐL 0.8mm KT 50 x 30', '50', '30', '1000000', 'carton', 2, 1, NULL, NULL, NULL, NULL, '2023-07-11 02:25:04', '2023-07-11 02:25:07', 1);
+INSERT INTO `supply_warehouses` VALUES (3, 'Carton thành ĐL 0.8mm KT 100 x 50', '100', '50', '1000000', 'carton', 2, 1, NULL, NULL, NULL, NULL, '2023-07-11 02:25:04', '2023-07-11 02:25:07', 1);
 
 SET FOREIGN_KEY_CHECKS = 1;

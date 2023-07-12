@@ -56,7 +56,7 @@
                         'value' => 0,
                     ],
                     [
-                        'name' => $c_name.'[supp_qty]',
+                        'name' => $c_name.'[qty]',
                         'note' => 'SL vật tư cần xuất + '.$carton_compen_percent.'%',
                         'attr' => ['inject_class' => 'paper_qty_input plan_input_supp_qty input_elevate_change', 'type_input' => 'number', 'readonly' => 1],
                         'value' => 0,
@@ -76,6 +76,10 @@
                 ];
                 $wh_name = 'over_supply';
                 $field_warehouses = [
+                    [
+                        'name' => $wh_name.'[name]',
+                        'note' => 'Tên',
+                    ],
                     [
                         'name' => $wh_name.'[length]',
                         'note' => 'Khổ chiều dài',

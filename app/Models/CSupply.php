@@ -5,7 +5,14 @@ class CSupply extends Model
 {
     protected $table = 'c_supplies';
     protected $protectFields = false;
-    const NOT_HANDLE = 'not_handle';    
+    //status
+    const NOT_HANDLE = 'not_handle';
+    const HANDLING = 'handling'; 
+    const HANDLE_SUBMITED = 'handle_submited';
+
+    //type
+    const IMPORT = 1;
+    const EXPORT = 2;     
 }
 
 ?>

@@ -6,6 +6,8 @@ use App\Models\Quote;
 use App\Models\Product;
 use \App\Models\CDesign;
 use \App\Models\CSupply;
+use App\Models\Supply;
+use App\Models\SupplyWarehouse;
 
 class OrderService extends BaseService
 {
@@ -72,7 +74,7 @@ class OrderService extends BaseService
         return Order::where('id', $arr_order['id'])->update(['status' => Order::TO_DESIGN, 'apply_design_by' => \User::getCurrent('id')]);
     }
 
-    public function supplyHandleProcess($supply, $command, $elevate, $over_supply)
+    public function supplyHandleProcess($supply, $size, $command, $elevate, $over_supply)
     {
         if (empty($command['size_type'])) {
             return returnMessageAjax(100, 'Vui lòng chọn khổ giấy !');
@@ -85,16 +87,30 @@ class OrderService extends BaseService
         if (empty($elevate['num'])) {
             return returnMessageAjax(100, 'Vui lòng nhập số lượt bế !');
         }
-        $product = Product::find($supply['product']);
+        $product = Product::find($supply->product);
         $data_command = $command;
-        $data_command['supply'] = $supply['id']; 
-        $data_command['order'] = $product['order'];
-        $data_command['product'] = $supply['product'];
-        $data_command['status'] = CSupply::NOT_HANDLE;
+        $data_command['code'] = 'XVT-'.getCodeInsertTable('c_supplies');
+        $data_command['supply'] = $supply->id; 
+        $data_command['order'] = $product->order;
+        $data_command['product'] = $supply->product;
+        $data_command['status'] = CSupply::HANDLING;
         $this->configBaseDataAction($data_command);
         $insert_command = CSupply::insert($data_command);
         if (!$insert_command) {
             return returnMessageAjax(110, 'Không thể tạo yêu cầu xuất vật tư, vui lòng thử lại!');
+        }else{
+            Supply::where('id', $product->id)->update(['handle_elevate' => json_encode($elevate)]);
+            if (!empty($over_supply['quantity'])) {
+                $data_whouse = $over_supply;
+                $data_whouse['type'] = $supply->type;
+                $data_whouse['supp_type'] = @$size['supply_type'];
+                $data_whouse['supp_price'] = @$size['supp_price'];
+                $data_whouse['status'] = SupplyWarehouse::WAITING;
+                $data_whouse['source'] = SupplyWarehouse::OVER;
+                $this->configBaseDataAction($data_whouse);
+                SupplyWarehouse::insert($data_whouse);       
+            }
+            return redirect(url('update/orders/'.$product->order))->with('message', 'Đã gửi thành công yêu cầu xử lí vật tư');
         }
     }
     
