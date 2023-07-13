@@ -19,6 +19,9 @@ class NGroupUser extends Model
     const DESIGN = 4;
     const TECH_HANDLE = 5;
     const PLAN_HANDLE = 6;
+    const WAREHOUSE = 7;
+
+    //group modules
     const GROUP_MODULE = [
         'quote_price_config' => 'Cài đặt đơn giá SX',
         'customer_quote' => 'Báo giá & Khách hàng',
@@ -27,9 +30,12 @@ class NGroupUser extends Model
         'profit' => '% Hoa hồng',
         'report' => 'Báo cáo',
         'available_order' => 'Đơn hàng bán sẵn',
+        'warehouse' => 'Kho vật tư',
+        'handle_supply' => 'Lệnh xử lí vật tư',
         'account' => 'Thông tin tài khoản'
     ];
 
+    //modules
     const MODULE = [
         'price_device' => [
             'name' => 'Đơn giá thiết bị máy', 
@@ -113,6 +119,21 @@ class NGroupUser extends Model
             'link' => 'create-available-order', 
             'group' => 'available_order'
         ],
+        'supp_warehouse' => [
+            'name' => 'Quản lí kho vật tư', 
+            'link' => 'view/supply_warehouses?default_data={&quot;status&quot;:&quot;imported&quot;}', 
+            'group' => 'warehouse'
+        ],
+        'ex_supply' => [
+            'name' => 'Yêu cầu xuất vật tư', 
+            'link' => 'view/c_supplies?default_data={&quot;status&quot;:&quot;handling&quot;}', 
+            'group' => 'handle_supply'
+        ],
+        'im_supply' => [
+            'name' => 'Yêu cầu nhập kho băng lề', 
+            'link' => 'view/supply_warehouses?default_data={&quot;status&quot;:&quot;waiting&quot;}', 
+            'group' => 'handle_supply'
+        ],
         'shipping_process' => [
             'name' => 'Lộ trình xuất - giao hàng', 
             'link' => 'shipping-process', 
@@ -135,6 +156,7 @@ class NGroupUser extends Model
         ]
     ];
 
+    //role modules
     static $role_module = [
         self::SALE => [
             self::MODULE['create_quote'],
@@ -179,9 +201,17 @@ class NGroupUser extends Model
             self::MODULE['create_available_order'],
             self::MODULE['account'],
             self::MODULE['change_password'],
+        ],
+        self::WAREHOUSE => [
+            self::MODULE['supp_warehouse'],
+            self::MODULE['ex_supply'],
+            self::MODULE['im_supply'],
+            self::MODULE['account'],
+            self::MODULE['change_password'],
         ]
     ];
 
+    //check method
     static function getGroupByModule($modules)
     {
         $ret = [];
@@ -246,5 +276,10 @@ class NGroupUser extends Model
     {
         $group_user = !empty($group_user) ? $group_user : self::getCurrent();
         return $group_user == self::PLAN_HANDLE;
+    }
+    static function isWarehouse($group_user = 0)
+    {
+        $group_user = !empty($group_user) ? $group_user : self::getCurrent();
+        return $group_user == self::WAREHOUSE;
     }
 }

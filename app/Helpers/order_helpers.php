@@ -1,5 +1,6 @@
 <?php
     use \App\Models\Order;
+    use \App\Models\CSupply;
     if (!function_exists('getOrderNameStageByKey')) {
         function getOrderNameStageByKey($key)
         {
@@ -33,6 +34,17 @@
                 unset($where['type']);
             }
             return $ret;
+        }
+    }
+
+    if (!function_exists('getHandleSupplyStatus')) {
+        function getHandleSupplyStatus($product, $supply)
+        {
+            $command = \DB::table('c_supplies')->where(['product' => $product, 'supply' => $supply])->first();
+            if (empty($command)) {
+                return CSupply::NOT_HANDLE;
+            }
+            return @$command->status;
         }
     }
     

@@ -1,6 +1,9 @@
 <?php
 namespace App\Constants;
 use \App\Models\Order;
+use \App\Models\CSupply;
+use App\Models\SupplyWarehouse;
+
 class OrderConstant
 {
     //ORDER PAYMENT STATUS
@@ -32,7 +35,16 @@ class OrderConstant
             'text' => 'Đơn cần duyệt sản xuất', 
             'status' => Order::TECH_SUBMITED
         ],
-        ['icon' => 'buy', 'table' => 'c_prints', 'text' => 'Yêu cầu xuât vật tư'],
+        ['icon' => 'exsupp', 
+        'table' => 'c_supplies', 
+        'text' => 'Yêu cầu xuất vật tư',
+        'status' => CSupply::HANDLING
+        ],
+        ['icon' => 'imsupp', 
+        'table' => 'supply_warehouses', 
+        'text' => 'Yêu cầu nhập kho băng lề',
+        'status' => SupplyWarehouse::WAITING
+        ],
         ['icon' => 'export', 'table' => 'c_prints', 'text' => 'Yêu cầu xuất khuôn'],
     ];
     //PROCESS STAGE 

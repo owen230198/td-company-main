@@ -12,7 +12,17 @@ class CSupply extends Model
 
     //type
     const IMPORT = 1;
-    const EXPORT = 2;     
+    const EXPORT = 2;
+    
+    static function getRole()
+        {
+            $role = [
+                \GroupUser::WAREHOUSE => [
+                    'view' => ['with' => ['key' => 'status', 'value' =>self::HANDLING]]
+                ]
+            ];
+            return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];
+        }
 }
 
 ?>

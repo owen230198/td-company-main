@@ -22,11 +22,11 @@
                         <span>{{ $key+1 }}</span>
                     </td>
                     @php
-                        $command = \DB::table('c_supplies')->where(['product' => $data->product, 'supply' => $data->id])->first();
-                        $bg_color = @$command->status == 'handled' ? 'stt_bg_green' : 
-                                    (@$command->status == 'handling' ? 'stt_bg_blue' : 'stt_bg_red');
-                        $stt_title = @$command->status == 'handled' ? 'Đã xử lí' : 
-                                    (@$command->status == 'handling' ? 'Đang xử lí' : 'Cần xử lí ngay');
+                        $supp_handle_status = getHandleSupplyStatus($data->product, $data->id);
+                        $bg_color = @$supp_handle_status == 'handled' ? 'stt_bg_green' : 
+                                    (@$supp_handle_status == 'handling' ? 'stt_bg_blue' : 'stt_bg_red');
+                        $stt_title = @$supp_handle_status == 'handled' ? 'Đã xử lí' : 
+                                    (@$supp_handle_status == 'handling' ? 'Đang xử lí' : 'Cần xử lí ngay');
                     @endphp 
                     <td class="text-center {{ $bg_color }}">
                         <span class="color_white font_bold">{{ $stt_title }}</span>

@@ -304,16 +304,7 @@ class AdminController extends Controller
         }
         $data = $data->paginate(50)->all();
         $arr = array_map(function($item) use($label){
-            $item_label = $item->{$label};
-            if (!empty($item->code)) {
-                $item_label .= ' - Mã: '.$item->code;
-            }
-            if (!empty($item->seri)) {
-                $item_label .= ' - Seri: '.$item->seri;
-            }
-            if (!empty($item->qty)) {
-                $item_label .= ' - Số lượng: '.$item->qty;
-            }
+            $item_label = getlabelLinking($item, $label, true);
             return ['id' => @$item->id, 'label' => $item_label];
         }, $data);
         return json_encode($arr);

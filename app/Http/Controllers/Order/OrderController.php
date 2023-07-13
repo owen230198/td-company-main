@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Order;
 use App\Http\Controllers\Controller;
+use App\Models\CSupply;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Quote;
@@ -145,6 +146,9 @@ class OrderController extends Controller
             $table = $request->input('table');
             $id = $request->input('id');
             $data_supply = \DB::table($table)->find($id);
+            if (getHandleSupplyStatus($data_supply->product, $data_supply->id) != CSupply::NOT_HANDLE) {
+                return back()->with('error', 'Vật tư đang được xử lí bởi kế toán kho !');
+            }
             $data_supply->order = $request->input('order');
             $supp_size = !empty($data_supply->size) ? json_decode($data_supply->size, true) : [];
             if (!empty($data_supply)) {

@@ -125,3 +125,20 @@ if (!function_exists('getBackUrl')) {
         return !empty(session()->get('back_url')) ? session()->get('back_url') : url(); 
     }
 }
+
+if (!function_exists('getlabelLinking')) {
+    function getLabelLinking($data, $label, $ext_info = false)
+    {
+        $ret = @$data->{$label};
+        if (!empty($data->code)) {
+            $ret .= ' - Mã: '.$data->code;
+        }
+        if (!empty($data->seri)) {
+            $ret .= ' - Seri: '.$data->seri;
+        }
+        if (!empty($data->qty) && $ext_info) {
+            $ret .= ' - Số lượng: '.$data->qty;
+        }
+        return $ret;
+    }
+}

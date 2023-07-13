@@ -345,6 +345,18 @@ var receiveCommand = function()
     });
 }
 
+var confirmTakeOutSupply = function()
+{
+    $(document).on('click', '.__confirm_ex_supp', function(event){
+        event.preventDefault();
+        let id = $(this).data('id');
+        ajaxBaseCall({
+            url: getBaseRoute('take-out-supply/'+'/'+id),
+            type: 'POST'
+        });
+    });
+}
+
 $(function () {
     submitActionAjaxForm();
     confirmRemoveData();
@@ -364,4 +376,5 @@ $(function () {
     // phoneInputPrevent();
     fileUploadModule();
     receiveCommand();
+    confirmTakeOutSupply();
 });
