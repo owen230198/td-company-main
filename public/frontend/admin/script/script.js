@@ -351,7 +351,7 @@ var confirmTakeOutSupply = function()
         event.preventDefault();
         let id = $(this).data('id');
         ajaxBaseCall({
-            url: getBaseRoute('take-out-supply/'+'/'+id),
+            url: getBaseRoute('take-out-supply/'+id),
             type: 'POST'
         });
     });

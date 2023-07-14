@@ -8,7 +8,7 @@ class CSupply extends Model
     //status
     const NOT_HANDLE = 'not_handle';
     const HANDLING = 'handling'; 
-    const HANDLE_SUBMITED = 'handle_submited';
+    const HANDLED= 'handled';
 
     //type
     const IMPORT = 1;
@@ -18,7 +18,18 @@ class CSupply extends Model
         {
             $role = [
                 \GroupUser::WAREHOUSE => [
-                    'view' => ['with' => ['key' => 'status', 'value' =>self::HANDLING]]
+                    'view' => ['with' => ['key' => 'status', 'value' => self::HANDLING]]
+                ],
+                \GroupUser::PLAN_HANDLE => [
+                    'view' => ['with' => 
+                        [
+                            'type' => 'group',
+                            'query' => [
+                                ['key' => 'status', 'value' => self::HANDLING],
+                                ['key' => 'created_by', 'value' => \User::getCurrent('id')]
+                            ]
+                        ],
+                    ]
                 ]
             ];
             return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];

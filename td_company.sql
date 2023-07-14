@@ -11,7 +11,7 @@
  Target Server Version : 100425
  File Encoding         : 65001
 
- Date: 14/07/2023 03:33:58
+ Date: 14/07/2023 17:20:47
 */
 
 SET NAMES utf8mb4;
@@ -100,13 +100,14 @@ CREATE TABLE `c_supplies`  (
   `assign_by` int(10) NULL DEFAULT NULL,
   `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL,
+  `confirm_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of c_supplies
 -- ----------------------------
-INSERT INTO `c_supplies` VALUES (1, 'XVT-000001', NULL, 2, '3000', '5', '600', 1, 3, 1, NULL, 'handling', 1, 8, NULL, '2023-07-12 23:28:05', '2023-07-12 23:28:05');
+INSERT INTO `c_supplies` VALUES (1, 'XVT-000001', NULL, 2, '3000', '5', '600', 1, 3, 1, NULL, 'handled', 1, 8, 9, '2023-07-12 23:28:05', '2023-07-12 23:28:05', '2023-07-14 17:16:55');
 
 -- ----------------------------
 -- Table structure for citys

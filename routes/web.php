@@ -56,4 +56,5 @@ Route::middleware(['check_login'])->group(function () {
 	Route::post('apply-order/{stage}/{id}', [OrderController::class, 'applyOrder']);
 	Route::post('receive-command/{table}/{id}', [OrderController::class, 'receiveCommand']);
 	Route::any('supply-handle', [OrderController::class, 'supplyHandle']);
+	Route::post('take-out-supply/{id}', [OrderController::class, 'takeOutSupply']);
 });

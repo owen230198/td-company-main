@@ -5,6 +5,7 @@ use App\Models\CSupply;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Quote;
+use Carbon\Carbon;
 
 class OrderController extends Controller
 {
@@ -176,6 +177,26 @@ class OrderController extends Controller
             }      
         }else{
             return customReturnMessage(false, $request->isMethod('POST'), ['message' => 'Bạn không có quyền thực hiện hành động!']);
+        }
+    }
+
+    public function takeOutSupply($id)
+    {
+        if (\GroupUser::isAdmin() || \GroupUser::isWarehouse()) {
+            $command = \DB::table('c_supplies');
+            $data_command = $command->find($id);
+            if (@$data_command->status != CSupply::HANDLING) {
+                return returnMessageAjax(110, 'Dữ liệu không hợp lệ!');
+            } 
+            $data_update = ['status' => CSupply::HANDLED, 
+                            'assign_by' => \User::getCurrent('id'), 
+                            'confirm_at' => \Carbon\Carbon::now()];
+            $update = $command->where('id' , $id)->update($data_update);
+            if ($update) {
+                return returnMessageAjax(200, 'Bạn đã xác nhận xuất vật tư!');
+            }  
+        }else{
+            return returnMessageAjax(110, 'Bạn không có quyền duyệt xuất vật tư!');
         }
     }
 }
