@@ -77,7 +77,7 @@ class OrderService extends BaseService
     public function supplyHandleProcess($supply, $size, $command, $elevate, $over_supply)
     {
         if (empty($command['size_type'])) {
-            return returnMessageAjax(100, 'Vui lòng chọn khổ giấy !');
+            return returnMessageAjax(100, 'Vui lòng chọn khổ vật tư !');
         }
 
         if (empty($command['nqty'])) {
