@@ -4,7 +4,9 @@
     <link rel="stylesheet" href="<?php echo e(asset('frontend/admin/css/order.css')); ?>">
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
-    <div class="config_content">
+    <form action="<?php echo e(url('apply-to-worker-handle/'.$id)); ?>" method="POST" class="config_content baseAjaxForm" enctype="multipart/form-data" 
+    onkeydown="return event.key != 'Enter'">
+        <?php echo csrf_field(); ?>
         <h3 class="fs-14 text-uppercase border_top_eb pt-3 mt-3 text-center handle_title">
             <span>Danh sách sản phẩm</span>
         </h3>
@@ -15,24 +17,23 @@
                     <div class="config_handle_paper_pro">
                         <div class="mb-2 base_product_config">
                             <?php
-                                $pro_base_name_input = 'product['.$pro_index.']';
                                 $pro_name_field = [
-                                    'name' => $pro_base_name_input.'[name]',
+                                    'name' => '',
                                     'note' => 'Tên sản phẩm',
-                                    'attr' => ['required' => 1, 'inject_class' => 'quote_set_product_name', 'placeholder' => 'Nhập tên'],
+                                    'attr' => ['required' => 1, 'inject_class' => 'quote_set_product_name', 'placeholder' => 'Nhập tên', 'disable_field' => 1],
                                     'value' => !empty($product['id']) ? @$product['name'] : ''
                                 ];
                                 $pro_qty_field = [
-                                    'name' => $pro_base_name_input.'[qty]',
+                                    'name' => '',
                                     'note' => 'Số lượng sản phẩm',
-                                    'attr' => ['type_input' => 'number', 'required' => 1, 'inject_class' => 'input_pro_qty', 'placeholder' => 'Nhập số lượng'],
+                                    'attr' => ['type_input' => 'number', 'required' => 1, 'inject_class' => 'input_pro_qty', 'placeholder' => 'Nhập số lượng', 'disable_field' => 1],
                                     'value' => @$product['qty']
                                 ];
                                 $pro_category_field = [
-                                    'name' => $pro_base_name_input.'[category]',
+                                    'name' => '',
                                     'type' => 'linking',
                                     'note' => 'Nhóm sản phẩm',
-                                    'attr' => ['required' => 1 , 'inject_class' => 'select_quote_procategory', 'inject_attr' => 'proindex='.$pro_index],
+                                    'attr' => ['required' => 1, 'inject_class' => 'select_quote_procategory', 'inject_attr' => 'proindex='.$pro_index, 'disable_field' => 1],
                                     'other_data' => ['data' => ['table' => 'product_categories']],
                                     'value' => @$product['category']
                                 ]
@@ -73,7 +74,14 @@
                 </div>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </div>
-
-    </div>
+        <div class="group_btn_action_form text-center">
+            <button type="submit" class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-2">
+              <i class="fa fa-check mr-2 fs-14" aria-hidden="true"></i>Xác nhận xuống xưởng SX
+            </button>
+            <a href="<?php echo e(url('')); ?>" class="main_button bg_red color_white radius_5 font_bold smooth red_btn">
+              <i class="fa fa-times mr-2 fs-14" aria-hidden="true"></i>Hủy
+            </a>
+        </div>
+    </form>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('index', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/orders/users/6/view.blade.php ENDPATH**/ ?>

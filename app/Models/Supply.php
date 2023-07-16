@@ -46,4 +46,9 @@ class Supply extends Model
         }
         return !empty($process);
     }
+
+    public static function getDataWithOrder($id)
+    {
+        
+    }
 }

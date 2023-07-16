@@ -25,7 +25,11 @@
     <?php
         $list_options = getOptionDataField($select_data);
     ?>
-    <select name="<?php echo e($name); ?>" class="form-control <?php echo e(@$attr['inject_class'] ? ' '.$attr['inject_class'] : ''); ?>" <?php echo e(@$attr['inject_attr'] ?? ''); ?>>
+    <select name="<?php echo e($name); ?>" 
+            class="form-control <?php echo e(@$attr['inject_class']); ?>" 
+            <?php echo e(@$attr['inject_attr'] ?? ''); ?>
+
+            <?php echo e(@$attr['disable_field'] == 1 ? 'disabled' : ''); ?>>
         <option value="0">Chọn</option>
         <?php $__currentLoopData = $list_options; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <option value="<?php echo e($item->$field_value); ?>" <?php echo e($item->$field_value == @$value ? 'selected' : ''); ?>>

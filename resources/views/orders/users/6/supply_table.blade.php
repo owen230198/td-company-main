@@ -22,7 +22,7 @@
                         <span>{{ $key+1 }}</span>
                     </td>
                     @php
-                        $supp_handle_status = getHandleSupplyStatus($data->product, $data->id);
+                        $supp_handle_status = getHandleSupplyStatus($data->product, $data->id, @$data->type);
                         $bg_color = @$supp_handle_status == 'handled' ? 'stt_bg_green' : 
                                     (@$supp_handle_status == 'handling' ? 'stt_bg_blue' : 'stt_bg_red');
                         $stt_title = @$supp_handle_status == 'handled' ? 'Đã xử lí' : 

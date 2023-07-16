@@ -88,10 +88,11 @@ class OrderService extends BaseService
             return returnMessageAjax(100, 'Vui lòng nhập số lượt bế !');
         }
         $data_command = $command;
-        $data_command['code'] = 'XVT-'.getCodeInsertTable('c_supplies');
-        $data_command['supply'] = $supply->id; 
+        $data_command['code'] = 'XVT-'.getCodeInsertTable('c_supplies'); 
         $data_command['order'] = $supply->order;
         $data_command['product'] = $supply->product;
+        $data_command['supply'] = $supply->id;
+        $data_command['supp_type'] = $supply->type;
         $data_command['status'] = CSupply::HANDLING;
         $this->configBaseDataAction($data_command);
         $insert_command = CSupply::insert($data_command);

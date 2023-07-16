@@ -1,7 +1,7 @@
 <div class="quote_supp_item {{ $supp_index > 0 ? ' mt-4 border_green p-3 radius_5' : '' }}" data-index={{ @$supp_index ?? 0 }}>
     @php
         $key_supp = \TDConst::SILK;
-        $silk_compen_percent = (float) getDataConfig('QuoteConfig', 'CARTON_COMPEN_PERCENT');
+        $silk_compen_percent = (float) getDataConfig('QuoteConfig', 'SILK_COMPEN_PERCENT');
         $silk_divide = \TDConst::SILK_SIZE_DIVIDE;
         $silk_plus = \TDConst::SILK_SIZE_PLUS; 
         $pro_silk_supply = [

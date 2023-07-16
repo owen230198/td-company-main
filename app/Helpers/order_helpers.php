@@ -38,9 +38,9 @@
     }
 
     if (!function_exists('getHandleSupplyStatus')) {
-        function getHandleSupplyStatus($product, $supply)
+        function getHandleSupplyStatus($product, $supply, $type)
         {
-            $command = \DB::table('c_supplies')->where(['product' => $product, 'supply' => $supply])->first();
+            $command = \DB::table('c_supplies')->where(['product' => $product, 'supply' => $supply, 'supp_type' => $type])->first();
             if (empty($command)) {
                 return CSupply::NOT_HANDLE;
             }

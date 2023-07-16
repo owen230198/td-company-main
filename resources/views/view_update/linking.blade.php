@@ -25,7 +25,10 @@
     @php
         $list_options = getOptionDataField($select_data);
     @endphp
-    <select name="{{ $name }}" class="form-control {{ @$attr['inject_class'] ? ' '.$attr['inject_class'] : '' }}" {{ @$attr['inject_attr'] ?? '' }}>
+    <select name="{{ $name }}" 
+            class="form-control {{ @$attr['inject_class'] }}" 
+            {{ @$attr['inject_attr'] ?? '' }}
+            {{ @$attr['disable_field'] == 1 ? 'disabled' : '' }}>
         <option value="0">Chọn</option>
         @foreach ($list_options as $item)
             <option value="{{ $item->$field_value }}" {{ $item->$field_value == @$value ? 'selected' : '' }}>

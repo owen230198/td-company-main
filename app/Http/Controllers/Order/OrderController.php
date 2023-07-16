@@ -147,7 +147,7 @@ class OrderController extends Controller
             $table = $request->input('table');
             $id = $request->input('id');
             $data_supply = \DB::table($table)->find($id);
-            if (getHandleSupplyStatus($data_supply->product, $data_supply->id) != CSupply::NOT_HANDLE) {
+            if (getHandleSupplyStatus($data_supply->product, $data_supply->id, $data_supply->type) != CSupply::NOT_HANDLE) {
                 return back()->with('error', 'Vật tư đang được xử lí bởi kế toán kho !');
             }
             $data_supply->order = $request->input('order');
@@ -198,6 +198,11 @@ class OrderController extends Controller
         }else{
             return returnMessageAjax(110, 'Bạn không có quyền duyệt xuất vật tư!');
         }
+    }
+
+    public function applyToWorkerHandle($id)
+    {
+        return returnMessageAjax(110, 'Vật tư chưa sẵn sàng để sản xuất, vui lòng liên hệ kế toán kho !');
     }
 }
 ?>
