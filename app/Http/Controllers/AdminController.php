@@ -150,6 +150,7 @@ class AdminController extends Controller
                 $status = $this->admins->doUpdateTable($id, $table, $param);
                 if ($status['code'] == 200) {
                     $back_routes = @session()->get('back_url') ?? url('view/'.$table);
+                    $this->admins->logActionUserData(__FUNCTION__, $table, $id, $dataItem);
                     return returnMessageAjax(200, 'Cập nhật dữ liệu thành công!', $back_routes);
                 }else {
                     return returnMessageAjax(100, $status['message']);

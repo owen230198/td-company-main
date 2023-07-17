@@ -10,7 +10,7 @@ class AdminService extends BaseService
         $this->quote_service = new \App\Services\QuoteService;
     }
 
-    public function checkPermissionAction($table, $action, $data = array())
+    public function checkPermissionAction($table, $action, $data = new \stdClass())
     {
         if($this->group_user::isAdmin()){
             return ['allow' => true];   
@@ -33,26 +33,30 @@ class AdminService extends BaseService
         
     }
 
-    public function logActionUserData($action, $table, $id, $old_data)
+    public function logActionUserData($action, $table, $id, $old_data = new \stdClass())
     {
         $data_log = [   'table_map' => $table, 
                         'action' => $action, 
-                        'target' => $id, 
-                        'do_at' => \Carbon\Carbon::now(), 
+                        'target' => $id,  
                         'user' => \User::getCurrent('id'),
+                        'do_at' => \Carbon\Carbon::now(),
                         'act' => 1,
                         'created_at' => \Carbon\Carbon::now(),
                         'updated_at' => \Carbon\Carbon::now(),
                     ];
-        if ($action == 'update' && !empty($detail_data)) {
+        if ($action == 'update' && !empty($old_data)) {
             $data_target = \DB::table($table)->find($id);
             foreach ($data_target as $key => $value) {
-                if ($value != @$old_data->{$key}) {
-                    $detail_data[$key] = $value;
+                $old_value = @$old_data->{$key};
+                if ($key != 'updated_at' && $value != $old_value) {
+                    $detail_data[$key] = ['old' => $old_value, 'new' => $value];
                 }    
             }
-            $data_log['detail_data'] = json_encode($detail_data);
-        }            
+            if (!empty($detail_data)) {
+                $data_log['detail_data'] = json_encode($detail_data);
+            }
+        }
+        \DB::table('n_log_actions')->insert($data_log);            
     }
 
     public function getTableItem($table)

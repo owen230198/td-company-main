@@ -11,7 +11,7 @@
  Target Server Version : 100425
  File Encoding         : 65001
 
- Date: 17/07/2023 19:37:12
+ Date: 18/07/2023 02:13:02
 */
 
 SET NAMES utf8mb4;
@@ -12231,7 +12231,7 @@ CREATE TABLE `configs`  (
   `default_data` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   `required` tinyint(4) NULL DEFAULT NULL,
   `region` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`, `keyword`) USING BTREE,
   INDEX `_index`(`id`, `keyword`, `act`) USING BTREE
@@ -12267,7 +12267,7 @@ CREATE TABLE `customers`  (
   `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `status` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `act` int(11) NULL DEFAULT NULL,
-  `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `created_by` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
@@ -12293,7 +12293,7 @@ CREATE TABLE `design_types`  (
   `act` tinyint(4) NULL DEFAULT NULL,
   `created_by` int(10) NULL DEFAULT NULL,
   `created_at` datetime(0) NULL DEFAULT NULL,
-  `updated_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `index`(`id`, `name`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
@@ -12326,34 +12326,34 @@ CREATE TABLE `devices`  (
   `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Ghi chú',
   `act` tinyint(4) NULL DEFAULT NULL,
   `ord` int(10) NULL DEFAULT NULL,
-  `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `created_by` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 49 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 53 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of devices
 -- ----------------------------
 INSERT INTO `devices` VALUES (1, 'Cán láng nước tự động', '0', '0', '50000', '40', '25000', 'nilon', 1, 'paper', NULL, NULL, 0, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `devices` VALUES (2, 'Ép nhũ tự động', '0', '0', '100000', '0', '0', 'compress', 1, 'paper', NULL, NULL, 1, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `devices` VALUES (3, 'In UV tự động', '0', '600', '150000', '0', '0', 'uv', 1, 'paper', NULL, NULL, 0, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
+INSERT INTO `devices` VALUES (2, 'Ép nhũ tự động', '0', '0', '100000', '0', '50000', 'compress', 1, 'paper', NULL, NULL, 1, 0, '0000-00-00 00:00:00', '2023-07-17 13:10:00', 0);
+INSERT INTO `devices` VALUES (3, 'In UV tự động', '0', '600', '150000', '0', '0', 'uv', 1, 'paper', NULL, NULL, 0, 0, '2023-07-17 20:11:13', '2023-07-17 13:11:13', 0);
 INSERT INTO `devices` VALUES (4, 'Máy bế tự động', '150', '120', '150000', '30', '80000', 'elevate', 1, 'paper', NULL, '150đ/cm ( Ví dụ: 43 x 65 x 150 = 420.000đ tiền khuôn', 1, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `devices` VALUES (5, 'Bóc lề tự động', '0', '10', '20000', '5', '0', 'peel', 1, 'paper', NULL, NULL, 1, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
+INSERT INTO `devices` VALUES (5, 'Bóc lề tự động', '0', '10', '20000', '5', '0', 'peel', 1, 'paper', NULL, NULL, 0, 0, '2023-07-17 20:12:56', '2023-07-17 13:12:56', 0);
 INSERT INTO `devices` VALUES (6, 'Dán hộp tự động', '0', '50', '50000', '10', '25000', 'box_paste', 1, 'paper', NULL, NULL, 1, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
 INSERT INTO `devices` VALUES (7, 'Máy phay tự động', '0', '120', '70000', '0', '0', 'mill', 1, 'carton', NULL, NULL, 1, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `devices` VALUES (8, 'Cán láng nhiệt tự động', '0', '0', '50000', '40', '25000', 'nilon', 2, 'paper', 1, NULL, 0, 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `devices` VALUES (9, 'Máy ép thủy lực', '0', '0', '100000', '0', '0', 'compress', 2, 'paper', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `devices` VALUES (10, 'In UV bán tự động', '80', '600', '150000', '0', '0', 'uv', 2, 'paper', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
+INSERT INTO `devices` VALUES (8, 'Cán láng nhiệt tự động', '0', '0', '50000', '40', '25000', 'nilon', 2, 'paper', 1, NULL, 0, 1, '2030-11-01 00:00:00', '2023-07-17 13:08:00', 1);
+INSERT INTO `devices` VALUES (9, 'Máy ép thủy lực', '0', '0', '100000', '0', '50000', 'compress', 2, 'paper', NULL, NULL, 1, 1, '0000-00-00 00:00:00', '2023-05-23 17:01:00', 0);
+INSERT INTO `devices` VALUES (10, 'In UV bán tự động', '80', '700', '150000', '150', '100000', 'uv', 2, 'paper', NULL, NULL, 1, 1, '0000-00-00 00:00:00', '2023-05-23 17:01:00', 0);
 INSERT INTO `devices` VALUES (11, 'Máy bế bán tự động', '150', '150', '100000', '50', '50000', 'elevate', 2, 'paper', NULL, '150đ/cm ( Ví dụ: 43 x 65 x 150 = 420.000đ tiền khuôn', 1, 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `devices` VALUES (12, 'Bóc lề bán tự động', '0', '10', '20000', '5', '0', 'peel', 2, 'paper', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
+INSERT INTO `devices` VALUES (12, 'Bóc lề bán tự động', '0', '10', '20000', '5', '0', 'peel', 2, 'paper', NULL, NULL, 1, 1, '0000-00-00 00:00:00', '2023-05-23 17:01:00', 0);
 INSERT INTO `devices` VALUES (13, 'Dán hộp tay', '0', '50', '50000', '10', '25000', 'box_paste', 2, 'paper', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
 INSERT INTO `devices` VALUES (14, 'Máy phay bán tự động', '0', '120', '50000', '0', '0', 'mill', 2, 'carton', NULL, NULL, 0, 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `devices` VALUES (15, 'Cán metalai tự động', '0', '0', '50000', '0', '0', 'metalai', 1, 'paper', NULL, NULL, 1, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `devices` VALUES (16, 'Cán metalai bán tự động', '0', '0', '50000', '0', '0', 'metalai', 2, 'paper', NULL, NULL, 0, 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
+INSERT INTO `devices` VALUES (15, 'Cán metalai tự động', '0', '0', '50000', '0', '0', 'metalai', 1, 'paper', NULL, NULL, 0, 0, '2023-07-17 20:09:06', '2023-07-17 13:09:06', 1);
+INSERT INTO `devices` VALUES (16, 'Cán metalai bán tự động', '0', '0', '50000', '50', '25000', 'metalai', 2, 'paper', NULL, NULL, 1, 1, '2030-11-01 00:00:00', '2023-07-17 12:46:00', 1);
 INSERT INTO `devices` VALUES (17, 'Máy xén  tự động', '0', '0', '50000', '0', '0', 'cut', 1, 'carton', NULL, NULL, 0, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
 INSERT INTO `devices` VALUES (18, 'Máy xén bán tự động', '0', '0', '50000', '0', '0', 'cut', 2, 'carton', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `devices` VALUES (19, 'Máy thúc nổi carton', '0', '100', '100000', '0', '0', 'float', 1, 'paper', NULL, NULL, 1, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
+INSERT INTO `devices` VALUES (19, 'Máy thúc nổi carton', '0', '100', '100000', '50', '500000', 'float', 1, 'paper', NULL, NULL, 1, 0, '0000-00-00 00:00:00', '2023-05-23 17:01:00', 0);
 INSERT INTO `devices` VALUES (20, 'Máy bế tự động', '0', '100', '100000', '0', '0', 'elevate', 1, 'carton', NULL, NULL, 0, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
 INSERT INTO `devices` VALUES (21, 'Máy bế bán tự động', '150', '200', '100000', '0', '0', 'elevate', 2, 'carton', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
 INSERT INTO `devices` VALUES (22, 'Máy bế tự động', '0', '100', '100000', '0', '0', 'elevate', 1, 'rubber', NULL, NULL, 1, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
@@ -12380,9 +12380,13 @@ INSERT INTO `devices` VALUES (42, 'Máy bóc lề tự động', '0', '10', '200
 INSERT INTO `devices` VALUES (43, 'Máy bóc lề bán tự động', '0', '10', '20000', '0', '0', 'peel', 2, 'styrofoam', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
 INSERT INTO `devices` VALUES (44, 'Máy bóc lề tự động', '0', '10', '20000', '0', '0', 'peel', 1, 'mica', NULL, NULL, 1, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
 INSERT INTO `devices` VALUES (45, 'Máy bóc lề bán tự động', '0', '10', '20000', '0', '0', 'peel', 2, 'mica', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `devices` VALUES (46, 'Máy cán nước', '0', '0', '50000', '40', '25000', 'nilon', NULL, 'paper', NULL, NULL, 1, NULL, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
+INSERT INTO `devices` VALUES (46, 'Máy cán nước', '0', '0', '50000', '40', '25000', 'nilon', NULL, 'paper', NULL, NULL, 0, NULL, '0000-00-00 00:00:00', '2023-07-17 13:07:00', 1);
 INSERT INTO `devices` VALUES (47, 'Máy cán nhiệt', '0', '0', '50000', '40', '25000', 'nilon', NULL, 'paper', NULL, NULL, 1, NULL, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
 INSERT INTO `devices` VALUES (48, 'Máy bồi 1', '150', '150', '150000', '50', '50000', 'fill', NULL, 'fill_finish', NULL, NULL, 1, NULL, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
+INSERT INTO `devices` VALUES (49, 'Túi giấy khổ in  43 x 65', '200000', '1200', '100000', '440', '50000', 'bag_paste', NULL, 'paper', NULL, NULL, 1, NULL, '0000-00-00 00:00:00', '2023-07-17 13:16:00', 1);
+INSERT INTO `devices` VALUES (50, 'Túi giấy khổ in  52 x 72', '100000', '1500', '100000', '440', '50000', 'bag_paste', NULL, 'paper', NULL, NULL, 1, NULL, '0000-00-00 00:00:00', '2023-07-17 13:18:00', 1);
+INSERT INTO `devices` VALUES (51, 'Túi giấy khổ in  65 x 86', '100000', '1700', '100000', '440', '50000', 'bag_paste', NULL, 'paper', NULL, NULL, 1, NULL, '0000-00-00 00:00:00', '2023-07-17 13:21:00', 1);
+INSERT INTO `devices` VALUES (52, 'Túi giấy khổ in 72 x 102', '100000', '2000', '100000', '440', '50000', 'bag_paste', NULL, 'paper', NULL, NULL, 1, NULL, '2023-07-17 13:22:00', '2023-07-17 13:22:00', 1);
 
 -- ----------------------------
 -- Table structure for districts
@@ -12395,7 +12399,7 @@ CREATE TABLE `districts`  (
   `ord` tinyint(4) NULL DEFAULT NULL,
   `parent` int(11) NULL DEFAULT NULL,
   `act` tinyint(1) NULL DEFAULT NULL,
-  `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 780 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
@@ -13129,7 +13133,7 @@ CREATE TABLE `domains`  (
   `note` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL COMMENT 'Ghi chú',
   `ord` tinyint(4) NULL DEFAULT NULL COMMENT 'Sắp xếp',
   `act` tinyint(1) NULL DEFAULT NULL COMMENT 'Kích hoạt',
-  `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT 'Thời gian tạo',
+  `created_at` datetime(0) NULL DEFAULT NULL COMMENT 'Thời gian tạo',
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT 'Thời gian sửa',
   `pos_x` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT 'Kính tuyến',
   `pos_y` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT 'Vĩ tuyến',
@@ -13159,7 +13163,7 @@ CREATE TABLE `files`  (
   `file_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `is_dir` tinyint(4) NULL DEFAULT 0,
   `act` tinyint(4) NULL DEFAULT NULL,
-  `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `created_by` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
@@ -13176,7 +13180,7 @@ CREATE TABLE `fill_finishes`  (
   `finish` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   `magnet` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   `total_cost` bigint(20) NULL DEFAULT NULL,
-  `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `product` int(10) NULL DEFAULT NULL,
   `act` tinyint(4) NULL DEFAULT NULL,
@@ -13204,7 +13208,7 @@ CREATE TABLE `materals`  (
   `default` tinyint(4) NULL DEFAULT NULL,
   `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Ghi chú',
   `act` tinyint(4) NULL DEFAULT NULL,
-  `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `created_by` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
@@ -13220,7 +13224,7 @@ INSERT INTO `materals` VALUES (4, 'Phủ bóng nhật sơn ( Trên metailai )', 
 INSERT INTO `materals` VALUES (5, 'Cán bóng', '0.23', 'cover', NULL, '0.23 = 2300đ/m2', 1, '2023-05-13 10:15:37', '2023-05-13 10:15:43', 0);
 INSERT INTO `materals` VALUES (6, 'Cán mờ', '0.25', 'cover', NULL, '0.25 = 2500đ/m2', 1, '2023-05-13 10:15:37', '2023-05-13 10:15:43', 0);
 INSERT INTO `materals` VALUES (7, 'Phủ bóng gốc dầu nhật sơn trên giấy', '0.15', 'cover', NULL, '0.15 = 1500đ/m2', 1, '2023-05-13 10:15:37', '2023-05-13 10:15:43', 0);
-INSERT INTO `materals` VALUES (8, 'Cán bóng', '0.23', 'nilon', 0, '0.23 = 2300đ/m2', 1, '2023-05-13 10:15:37', '2023-05-13 10:15:43', 0);
+INSERT INTO `materals` VALUES (8, 'Cán bóng', '0.23', 'nilon', 0, '0.23 = 2300đ/m2', 0, '2023-07-17 20:51:34', '2023-07-17 20:51:34', 0);
 INSERT INTO `materals` VALUES (9, 'Cán mờ', '0.25', 'nilon', 0, '0.25 = 2500đ/m2', 1, '2023-05-13 10:15:37', '2023-05-13 10:15:43', 0);
 INSERT INTO `materals` VALUES (10, 'Mực bóng', '0', 'uv', NULL, 'CT này không áp dụng tính khách hàng, chỉ áp dụng đo lường vật tư', 1, '2023-05-13 10:15:37', '2023-05-13 10:15:43', 0);
 INSERT INTO `materals` VALUES (11, 'Mực sần cát', '0', 'uv', 0, 'CT này không áp dụng tính khách hàng, chỉ áp dụng đo lường vật tư', 1, '2023-05-13 10:15:37', '2023-05-13 10:15:43', 0);
@@ -13249,7 +13253,7 @@ CREATE TABLE `n_detail_tables`  (
   `region` int(10) NULL DEFAULT NULL,
   `ord` int(10) NULL DEFAULT NULL,
   `act` tinyint(4) NULL DEFAULT NULL,
-  `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `map_view`(`table_map`, `view`) USING BTREE,
@@ -13370,7 +13374,7 @@ CREATE TABLE `n_group_users`  (
   `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `act` tinyint(4) NULL DEFAULT NULL,
-  `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `created_by` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
@@ -13390,6 +13394,30 @@ INSERT INTO `n_group_users` VALUES (8, 'Phòng mua hàng', 'Phòng mua hàng', 1
 INSERT INTO `n_group_users` VALUES (9, 'Khuôn mẫu', 'Khuôn mẫu', 1, '2023-05-23 14:44:18', '2023-05-23 14:44:18', 1);
 
 -- ----------------------------
+-- Table structure for n_log_actions
+-- ----------------------------
+DROP TABLE IF EXISTS `n_log_actions`;
+CREATE TABLE `n_log_actions`  (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `table_map` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `action` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `target` int(10) NULL DEFAULT NULL,
+  `user` int(10) NULL DEFAULT NULL,
+  `do_at` datetime(0) NULL DEFAULT NULL,
+  `detail_data` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `act` tinyint(4) NULL DEFAULT NULL,
+  `created_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of n_log_actions
+-- ----------------------------
+INSERT INTO `n_log_actions` VALUES (1, 'printers', 'update', 6, 1, '2023-07-18 01:58:11', '{\"act\":{\"old\":1,\"new\":0}}', 1, '2023-07-18 01:58:11', '2023-07-18 01:58:11');
+INSERT INTO `n_log_actions` VALUES (2, 'printers', 'update', 6, 1, '2023-07-18 01:59:05', '{\"act\":{\"old\":0,\"new\":1}}', 1, '2023-07-18 01:59:05', '2023-07-18 01:59:05');
+
+-- ----------------------------
 -- Table structure for n_modules
 -- ----------------------------
 DROP TABLE IF EXISTS `n_modules`;
@@ -13405,7 +13433,7 @@ CREATE TABLE `n_modules`  (
   `menu` tinyint(4) NULL DEFAULT NULL,
   `act` tinyint(4) NULL DEFAULT NULL,
   `ord` int(10) NULL DEFAULT NULL,
-  `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `map_indx`(`table_map`) USING BTREE,
@@ -13473,7 +13501,7 @@ CREATE TABLE `n_roles`  (
   `module_id` int(10) NULL DEFAULT NULL,
   `n_group_user_id` int(10) NULL DEFAULT NULL,
   `json_data_role` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
-  `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `created_by` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`role_id`) USING BTREE,
@@ -13574,7 +13602,7 @@ CREATE TABLE `n_tables`  (
   `update` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   `remove` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   `copy` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
-  `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `indx`(`id`, `name`) USING BTREE
@@ -13621,7 +13649,7 @@ CREATE TABLE `n_users`  (
   `dev` tinyint(4) NULL DEFAULT NULL,
   `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `act` tinyint(4) NULL DEFAULT NULL,
-  `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `created_by` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
@@ -13659,7 +13687,7 @@ CREATE TABLE `ord_products`  (
   `act` tinyint(4) NULL DEFAULT NULL,
   `created_by` int(10) NULL DEFAULT NULL,
   `created_at` datetime(0) NULL DEFAULT NULL,
-  `updated_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 27 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
@@ -13690,7 +13718,7 @@ CREATE TABLE `orders`  (
   `ship_note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `act` tinyint(4) NULL DEFAULT NULL,
   `created_at` datetime(0) NULL DEFAULT NULL,
-  `updated_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `created_by` int(10) NULL DEFAULT NULL,
   `apply_design_by` int(10) NULL DEFAULT NULL,
   `apply_plan_by` int(10) NULL DEFAULT NULL,
@@ -13714,7 +13742,7 @@ CREATE TABLE `p_substances`  (
   `act` tinyint(4) NULL DEFAULT NULL,
   `created_by` int(10) NULL DEFAULT NULL,
   `created_at` datetime(0) NULL DEFAULT NULL,
-  `updated_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `index`(`id`, `name`, `act`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
@@ -13742,7 +13770,7 @@ CREATE TABLE `paper_lots`  (
   `act` tinyint(4) NULL DEFAULT NULL,
   `created_by` int(10) NULL DEFAULT NULL,
   `created_at` datetime(0) NULL DEFAULT NULL,
-  `updated_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `index`(`id`, `name`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
@@ -13787,7 +13815,7 @@ CREATE TABLE `papers`  (
   `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `main` tinyint(4) NULL DEFAULT NULL,
   `act` tinyint(4) NULL DEFAULT NULL,
-  `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `created_by` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
@@ -13817,7 +13845,7 @@ CREATE TABLE `print_notes`  (
   `act` tinyint(4) NULL DEFAULT NULL,
   `created_by` int(10) NULL DEFAULT NULL,
   `created_at` datetime(0) NULL DEFAULT NULL,
-  `updated_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `index`(`id`, `name`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
@@ -13840,7 +13868,7 @@ CREATE TABLE `print_techs`  (
   `act` tinyint(4) NULL DEFAULT NULL,
   `created_by` int(10) NULL DEFAULT NULL,
   `created_at` datetime(0) NULL DEFAULT NULL,
-  `updated_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `index`(`id`, `name`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
@@ -13867,7 +13895,7 @@ CREATE TABLE `printers`  (
   `shape_price` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT '0',
   `note` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Ghi chú',
   `act` tinyint(4) NULL DEFAULT NULL,
-  `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `device` tinyint(4) NULL DEFAULT NULL,
   `created_by` int(11) NOT NULL,
@@ -13877,16 +13905,16 @@ CREATE TABLE `printers`  (
 -- ----------------------------
 -- Records of printers
 -- ----------------------------
-INSERT INTO `printers` VALUES (1, 'Máy in offset 36x52', '36', '52', '55000', '30', '100000', NULL, 1, '2023-05-23 16:04:14', '2023-05-23 16:04:14', 1, 0);
-INSERT INTO `printers` VALUES (2, 'Máy in offset 47x65', '48', '65', '55000', '30', '100000', NULL, 1, '2023-05-23 16:04:14', '2023-05-23 16:04:14', 1, 0);
-INSERT INTO `printers` VALUES (3, 'Máy in offset 52x72', '52.5', '72.5', '55000', '32', '110000', NULL, 1, '2023-05-23 16:04:14', '2023-05-23 16:04:14', 1, 0);
-INSERT INTO `printers` VALUES (4, 'Máy in offset 54x79', '56', '81', '81000', '45', '180000', NULL, 1, '2023-05-23 16:04:14', '2023-05-23 16:04:14', 1, 0);
+INSERT INTO `printers` VALUES (1, 'Máy in offset 36x52', '36', '52', '55000', '30', '100000', NULL, 1, '2023-05-23 16:04:00', '2023-05-23 16:04:00', 1, 1);
+INSERT INTO `printers` VALUES (2, 'Máy in offset 47x65', '47', '65', '55000', '30', '100000', NULL, 1, '2023-05-23 16:04:00', '2023-05-23 16:04:00', 1, 1);
+INSERT INTO `printers` VALUES (3, 'Máy in offset 52x72', '52', '72', '60000', '35', '110000', NULL, 1, '2023-05-23 16:04:00', '2023-05-23 16:04:00', 1, 1);
+INSERT INTO `printers` VALUES (4, 'Máy in offset 54x79', '55', '80', '81000', '50', '180000', NULL, 1, '2023-05-23 16:04:00', '2023-05-23 16:04:00', 1, 1);
 INSERT INTO `printers` VALUES (5, 'Máy in offset 72x102', '72.5', '103', '110000', '70', '220000', NULL, 1, '2023-05-23 16:04:14', '2023-05-23 16:04:14', 1, 0);
-INSERT INTO `printers` VALUES (6, 'Máy in offset 79x109', '79', '109', '130000', '120', '350000', NULL, 1, '2023-05-23 16:04:14', '2023-05-23 16:04:14', 1, 0);
+INSERT INTO `printers` VALUES (6, 'Máy in offset 79x109', '79', '109', '130000', '120', '350000', NULL, 1, '2023-07-18 01:51:57', '2023-07-18 01:59:05', 1, 0);
 INSERT INTO `printers` VALUES (7, 'Máy in uv 36x52', '36', '52', '60000', '150', '250000', NULL, 1, '2023-05-23 16:04:14', '2023-05-23 16:04:14', 2, 0);
 INSERT INTO `printers` VALUES (8, 'Máy in uv 47x65', '47', '65', '60000', '150', '250000', NULL, 1, '2023-05-23 16:04:14', '2023-05-23 16:04:14', 2, 0);
-INSERT INTO `printers` VALUES (9, 'Máy in uv 52x72', '52', '72', '60000', '200', '250000', NULL, 1, '2023-05-23 16:04:14', '2023-05-23 16:04:14', 2, 0);
-INSERT INTO `printers` VALUES (10, 'Máy in uv 54x79', '54', '79', '80000', '250', '300000', NULL, 1, '2023-05-23 16:04:14', '2023-05-23 16:04:14', 2, 0);
+INSERT INTO `printers` VALUES (9, 'Máy in uv 52x72', '52', '72', '60000', '180', '250000', NULL, 1, '2023-05-23 16:04:00', '2023-05-23 16:04:00', 2, 1);
+INSERT INTO `printers` VALUES (10, 'Máy in uv 54x79', '54', '79', '80000', '200', '300000', NULL, 1, '2023-05-23 16:04:00', '2023-05-23 16:04:00', 2, 1);
 INSERT INTO `printers` VALUES (11, 'Máy in uv 72x102', '72', '102', '115000', '500', '500000', NULL, 1, '2023-05-23 16:04:14', '2023-05-23 16:04:14', 2, 0);
 INSERT INTO `printers` VALUES (12, 'Máy in uv 79x109', '79', '109', '150000', '600', '800000', NULL, 1, '2023-05-23 16:04:14', '2023-05-23 16:04:14', 2, 0);
 
@@ -13901,7 +13929,7 @@ CREATE TABLE `product_categories`  (
   `act` tinyint(4) NULL DEFAULT NULL,
   `created_by` int(10) NULL DEFAULT NULL,
   `created_at` datetime(0) NULL DEFAULT NULL,
-  `updated_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `index`(`id`, `name`, `parent`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
@@ -13934,7 +13962,7 @@ CREATE TABLE `products`  (
   `note` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   `act` tinyint(4) NULL DEFAULT NULL,
   `created_at` datetime(0) NULL DEFAULT NULL,
-  `updated_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `created_by` int(10) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
@@ -13963,7 +13991,7 @@ CREATE TABLE `quote_configs`  (
   `other_data` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   `required` tinyint(4) NULL DEFAULT NULL,
   `region` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `created_by` int(11) NOT NULL,
   PRIMARY KEY (`id`, `keyword`) USING BTREE
@@ -14020,7 +14048,7 @@ CREATE TABLE `quotes`  (
   `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `act` tinyint(4) NULL DEFAULT NULL,
   `src` tinyint(4) NULL DEFAULT NULL,
-  `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `created_by` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
@@ -14056,7 +14084,7 @@ CREATE TABLE `supplies`  (
   `total_cost` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `act` tinyint(4) NULL DEFAULT NULL,
   `created_at` datetime(0) NULL DEFAULT NULL,
-  `updated_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `created_by` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `quote_index`(`product`) USING BTREE
@@ -14094,7 +14122,7 @@ CREATE TABLE `supply_prices`  (
   `supply_id` int(11) NULL DEFAULT NULL COMMENT 'Cha',
   `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Ghi chú',
   `act` tinyint(4) NULL DEFAULT NULL,
-  `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `created_by` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
@@ -14102,13 +14130,13 @@ CREATE TABLE `supply_prices`  (
   INDEX `carton_foam_index`(`supply_id`) USING BTREE,
   INDEX `name_index`(`name`) USING BTREE,
   INDEX `act_indx`(`act`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 115 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 155 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of supply_prices
 -- ----------------------------
-INSERT INTO `supply_prices` VALUES (1, 'Carton 0.8 mm', '0.58', 'carton', 2, '5800đ/m2 ( CT: D100cm x R100cm x 0.58 = 5800đ/m2 )', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `supply_prices` VALUES (8, 'Carton 0.8 mm', '0.58', 'carton', 1, '5800đ/m2 ( CT: D100cm x R100cm x 0.58 = 5800đ/m2 )', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
+INSERT INTO `supply_prices` VALUES (1, 'Carton 0.8ly', '0.58', 'carton', 2, '5800đ/m2 ( CT: D100cm x R100cm x 0.58 = 5800đ/m2 )', 1, '0000-00-00 00:00:00', '2023-05-23 17:01:00', 0);
+INSERT INTO `supply_prices` VALUES (8, 'Carton 0.8ly', '0.58', 'carton', 1, '5800đ/m2 ( CT: D100cm x R100cm x 0.58 = 5800đ/m2 )', 1, '0000-00-00 00:00:00', '2023-05-23 17:01:00', 0);
 INSERT INTO `supply_prices` VALUES (9, '1.0cm', '40000', 'rubber', 6, 'Tính theo m2 là 1.25 x 2.5 = 3.125m2 ( tính ra là 40.000đ/m2 )', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
 INSERT INTO `supply_prices` VALUES (10, '1.5cm', '60000', 'rubber', 6, '', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
 INSERT INTO `supply_prices` VALUES (11, '2.0cm', '80000', 'rubber', 6, '', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
@@ -14177,26 +14205,59 @@ INSERT INTO `supply_prices` VALUES (91, 'Nam châm lớn', '2000', 'magnet', 0, 
 INSERT INTO `supply_prices` VALUES (92, 'Đề can Nhung dài cao cấp', '26000', 'decal', 0, '26000đ/m2', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
 INSERT INTO `supply_prices` VALUES (93, 'Vật tư mica test', '2000', 'mica', 0, '1', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
 INSERT INTO `supply_prices` VALUES (94, 'Đề can Nhung thường', '22000', 'decal', NULL, '22000đ/m2', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `supply_prices` VALUES (95, 'Carton 0.8 mm', '0.58', NULL, 5, '5800đ/m2 ( CT: D100cm x R100cm x 0.58 = 5800đ/m2 )', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `supply_prices` VALUES (96, 'Carton 0.8 mm', '0.58', NULL, 4, '5800đ/m2 ( CT: D100cm x R100cm x 0.58 = 5800đ/m2 )', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `supply_prices` VALUES (97, 'Carton 0.8 mm', '0.58', NULL, 3, '5800đ/m2 ( CT: D100cm x R100cm x 0.58 = 5800đ/m2 )', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `supply_prices` VALUES (98, 'Carton 0.8 mm', '0.58', NULL, 21, '5800đ/m2 ( CT: D100cm x R100cm x 0.58 = 5800đ/m2 )', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `supply_prices` VALUES (99, 'Carton 1 mm', '0.8085', NULL, 21, '8085đ/m2 ( CT: D100cm x R100cm x 0.8085 = 8085đ/m2 )', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `supply_prices` VALUES (100, 'Carton 1 mm', '0.8085', NULL, 5, '8085đ/m2 ( CT: D100cm x R100cm x 0.8085 = 8085đ/m2 )', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `supply_prices` VALUES (101, 'Carton 1 mm', '0.8085', NULL, 4, '8085đ/m2 ( CT: D100cm x R100cm x 0.8085 = 8085đ/m2 )', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `supply_prices` VALUES (102, 'Carton 1 mm', '0.8085', NULL, 3, '8085đ/m2 ( CT: D100cm x R100cm x 0.8085 = 8085đ/m2 )', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `supply_prices` VALUES (103, 'Carton 1 mm', '0.8085', NULL, 2, '8085đ/m2 ( CT: D100cm x R100cm x 0.8085 = 8085đ/m2 )', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `supply_prices` VALUES (104, 'Carton 1 mm', '0.8085', NULL, 1, '8085đ/m2 ( CT: D100cm x R100cm x 0.8085 = 8085đ/m2 )', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `supply_prices` VALUES (105, 'Carton 1.2 mm', '0.9240', NULL, 21, '9240đ/m2 ( CT: D100cm x R100cm x 0.9240 = 9240đ/m2 )', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `supply_prices` VALUES (106, 'Carton 1.2 mm', '0.9240', NULL, 5, '9240đ/m2 ( CT: D100cm x R100cm x 0.9240 = 9240đ/m2 )', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `supply_prices` VALUES (107, 'Carton 1.2 mm', '0.9240', NULL, 4, '9240đ/m2 ( CT: D100cm x R100cm x 0.9240 = 9240đ/m2 )', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `supply_prices` VALUES (108, 'Carton 1.2 mm', '0.9240', NULL, 3, '9240đ/m2 ( CT: D100cm x R100cm x 0.9240 = 9240đ/m2 )', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `supply_prices` VALUES (109, 'Carton 1.2 mm', '0.9240', NULL, 2, '9240đ/m2 ( CT: D100cm x R100cm x 0.9240 = 9240đ/m2 )', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `supply_prices` VALUES (110, 'Carton 1.2 mm', '0.9240', NULL, 1, '9240đ/m2 ( CT: D100cm x R100cm x 0.9240 = 9240đ/m2 )', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `supply_prices` VALUES (111, 'Carton 1.5 mm', '1.1907', NULL, 2, '11.970đ/m2 ( CT: D100cm x R100cm x 1.1907 = 11.907đ/m2 )', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `supply_prices` VALUES (112, 'Carton 1.5 mm', '1.1907', NULL, 1, '11.970đ/m2 ( CT: D100cm x R100cm x 1.1907 = 11.907đ/m2 )', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `supply_prices` VALUES (113, 'Carton 1.8 mm', '1.4175', NULL, 2, '14.175đ/m2 ( CT: D100cm x R100cm x 1.4175 = 14.175đ/m2 )', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `supply_prices` VALUES (114, 'Carton 1.8 mm', '1.4715', NULL, 1, '14.175đ/m2 ( CT: D100cm x R100cm x 1.4175 = 14.175đ/m2 )', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
+INSERT INTO `supply_prices` VALUES (96, 'Carton 0.8ly', '0.58', NULL, 4, '5800đ/m2 ( CT: D100cm x R100cm x 0.58 = 5800đ/m2 )', 1, '0000-00-00 00:00:00', '2023-05-23 17:01:00', 0);
+INSERT INTO `supply_prices` VALUES (101, 'Carton 1ly', '0.8085', NULL, 4, '8085đ/m2 ( CT: D100cm x R100cm x 0.8085 = 8085đ/m2 )', 1, '0000-00-00 00:00:00', '2023-05-23 17:01:00', 0);
+INSERT INTO `supply_prices` VALUES (103, 'Carton 1ly', '0.8085', NULL, 2, '8085đ/m2 ( CT: D100cm x R100cm x 0.8085 = 8085đ/m2 )', 1, '0000-00-00 00:00:00', '2023-05-23 17:01:00', 0);
+INSERT INTO `supply_prices` VALUES (104, 'Carton 1ly', '0.8085', NULL, 1, '8085đ/m2 ( CT: D100cm x R100cm x 0.8085 = 8085đ/m2 )', 1, '0000-00-00 00:00:00', '2023-05-23 17:01:00', 0);
+INSERT INTO `supply_prices` VALUES (105, 'Carton 0.8ly', '0.9240', NULL, 21, 'Định lượng 700mgr quy đổi ra ly = 1ly, Vd dụ carton 1.8ly thì quy ra CT là 1.8 x 700 = 1260mgr, tương tự như cái khác 2ly x 700 = 1400mgr ( GIÁ NHÀ MAK đưa ra tháng 7 là 10.5/ tấn, giá lấy khách hàng là 11/ tấn để bù trừ băng lề )', 1, '0000-00-00 00:00:00', '2023-05-23 17:01:00', 0);
+INSERT INTO `supply_prices` VALUES (106, 'Carton 0.8ly', '1', NULL, 5, 'Định lượng 700mgr quy đổi ra ly = 1ly, Vd dụ carton 1.8ly thì quy ra CT là 1.8 x 700 = 1260mgr, tương tự như cái khác 2ly x 700 = 1400mgr ( GIÁ NHÀ MAK đưa ra tháng 7 là 10.5/ tấn, giá lấy khách hàng là 11/ tấn để bù trừ băng lề )', 1, '0000-00-00 00:00:00', '2023-05-23 17:01:00', 0);
+INSERT INTO `supply_prices` VALUES (107, 'Carton 1.2ly', '0.9240', NULL, 4, '9240đ/m2 ( CT: D100cm x R100cm x 0.9240 = 9240đ/m2 )', 1, '0000-00-00 00:00:00', '2023-05-23 17:01:00', 0);
+INSERT INTO `supply_prices` VALUES (108, 'Carton 0.8ly', '0.9240', NULL, 3, '9240đ/m2 ( CT: D100cm x R100cm x 0.9240 = 9240đ/m2 )', 1, '0000-00-00 00:00:00', '2023-05-23 17:01:00', 0);
+INSERT INTO `supply_prices` VALUES (109, 'Carton 1.2ly', '0.9240', NULL, 2, '9240đ/m2 ( CT: D100cm x R100cm x 0.9240 = 9240đ/m2 )', 1, '0000-00-00 00:00:00', '2023-05-23 17:01:00', 0);
+INSERT INTO `supply_prices` VALUES (110, 'Carton 1.2ly', '0.9240', NULL, 1, '9240đ/m2 ( CT: D100cm x R100cm x 0.9240 = 9240đ/m2 )', 1, '0000-00-00 00:00:00', '2023-05-23 17:01:00', 0);
+INSERT INTO `supply_prices` VALUES (111, 'Carton 1.5ly', '1.1907', NULL, 2, '11.970đ/m2 ( CT: D100cm x R100cm x 1.1907 = 11.907đ/m2 )', 1, '0000-00-00 00:00:00', '2023-05-23 17:01:00', 0);
+INSERT INTO `supply_prices` VALUES (112, 'Carton 1.5ly', '1.1907', NULL, 1, '11.970đ/m2 ( CT: D100cm x R100cm x 1.1907 = 11.907đ/m2 )', 1, '0000-00-00 00:00:00', '2023-05-23 17:01:00', 0);
+INSERT INTO `supply_prices` VALUES (113, 'Carton 1.8ly', '1.3860', NULL, 2, '14.175đ/m2 ( CT: D100cm x R100cm x 1.4175 = 14.175đ/m2 )', 1, '0000-00-00 00:00:00', '2023-05-23 17:01:00', 0);
+INSERT INTO `supply_prices` VALUES (114, 'Carton 1.8ly', '1.3860', NULL, 1, '14.175đ/m2 ( CT: D100cm x R100cm x 1.4175 = 14.175đ/m2 )', 1, '0000-00-00 00:00:00', '2023-05-23 17:01:00', 0);
+INSERT INTO `supply_prices` VALUES (115, 'Carton 1ly', '0.77', NULL, 21, 'Định lượng 700mgr quy đổi ra ly = 1ly, Vd dụ carton 1.8ly thì quy ra CT là 1.8 x 700 = 1260mgr, tương tự như cái khác 2ly x 700 = 1400mgr ( GIÁ NHÀ MAK đưa ra tháng 7 là 10.5/ tấn, giá lấy khách hàng là 11/ tấn để bù trừ băng lề )', 1, '2030-11-01 00:00:00', '2023-07-17 13:46:00', 1);
+INSERT INTO `supply_prices` VALUES (116, 'Carton 1.2ly', '1', NULL, 21, NULL, 1, '0000-00-00 00:00:00', '2023-07-17 13:46:00', 1);
+INSERT INTO `supply_prices` VALUES (117, 'Carton 1.5ly', '1', NULL, 21, NULL, 1, '0000-00-00 00:00:00', '2023-07-17 13:46:00', 1);
+INSERT INTO `supply_prices` VALUES (118, 'Carton 1.8ly', '1.3860', NULL, 21, 'Định lượng 700mgr quy đổi ra ly = 1ly, Vd dụ carton 1.8ly thì quy ra CT là 1.8 x 700 = 1260mgr, tương tự như cái khác 2ly x 700 = 1400mgr ( GIÁ NHÀ MAK đưa ra tháng 7 là 10.5/ tấn, giá lấy khách hàng là 11/ tấn để bù trừ băng lề )', 1, '2030-11-01 00:00:00', '2023-07-17 13:47:00', 1);
+INSERT INTO `supply_prices` VALUES (119, 'Carton 2ly', '1', NULL, 21, NULL, 1, '2023-07-17 13:47:00', '2023-07-17 13:47:00', 1);
+INSERT INTO `supply_prices` VALUES (120, 'Carton 2.2ly', '1', NULL, 21, NULL, 1, '2023-07-17 13:49:00', '2023-07-17 13:49:00', 1);
+INSERT INTO `supply_prices` VALUES (121, 'Carton 2.5ly', '1', NULL, 21, NULL, 1, '2023-07-17 13:49:00', '2023-07-17 13:49:00', 1);
+INSERT INTO `supply_prices` VALUES (122, 'Carton 3ly', '1', NULL, 21, NULL, 1, '2023-07-17 13:49:00', '2023-07-17 13:49:00', 1);
+INSERT INTO `supply_prices` VALUES (123, 'Carton 1ly', '1', NULL, 5, NULL, 1, '2023-07-17 14:05:00', '2023-07-17 14:05:00', 1);
+INSERT INTO `supply_prices` VALUES (124, 'Carton 1.2ly', '1', NULL, 5, NULL, 1, '2023-07-17 14:06:00', '2023-07-17 14:06:00', 1);
+INSERT INTO `supply_prices` VALUES (125, 'Carton 1.5ly', '1', NULL, 5, NULL, 1, '2023-07-17 14:06:00', '2023-07-17 14:06:00', 1);
+INSERT INTO `supply_prices` VALUES (126, 'Carton 1.8ly', '1', NULL, 5, NULL, 1, '2023-07-17 14:06:00', '2023-07-17 14:06:00', 1);
+INSERT INTO `supply_prices` VALUES (127, 'Carton 2ly', '1', NULL, 5, NULL, 1, '2023-07-17 14:07:00', '2023-07-17 14:07:00', 1);
+INSERT INTO `supply_prices` VALUES (128, 'Carton 2.2ly', '1', NULL, 5, NULL, 1, '2023-07-17 14:07:00', '2023-07-17 14:07:00', 1);
+INSERT INTO `supply_prices` VALUES (129, 'Carton 2.5ly', '1', NULL, 5, NULL, 1, '2023-07-17 14:07:00', '2023-07-17 14:07:00', 1);
+INSERT INTO `supply_prices` VALUES (131, 'Carton 3ly', '1', NULL, 5, NULL, 1, '2023-07-17 14:08:00', '2023-07-17 14:08:00', 1);
+INSERT INTO `supply_prices` VALUES (132, 'Carton 1.5ly', '1', NULL, 4, NULL, 1, '2023-07-17 14:11:00', '2023-07-17 14:11:00', 1);
+INSERT INTO `supply_prices` VALUES (133, 'Carton 1.8ly', '1', NULL, 4, NULL, 1, '2023-07-17 14:11:00', '2023-07-17 14:11:00', 1);
+INSERT INTO `supply_prices` VALUES (134, 'Carton 2ly', '1', NULL, 4, NULL, 1, '2023-07-17 14:12:00', '2023-07-17 14:12:00', 1);
+INSERT INTO `supply_prices` VALUES (135, 'Carton 2.2ly', '1', NULL, 4, NULL, 1, '2023-07-17 14:12:00', '2023-07-17 14:12:00', 1);
+INSERT INTO `supply_prices` VALUES (136, 'Carton 2.5ly', '1', NULL, 4, NULL, 1, '2023-07-17 14:12:00', '2023-07-17 14:12:00', 1);
+INSERT INTO `supply_prices` VALUES (137, 'Carton 3ly', '1', NULL, 4, NULL, 1, '2023-07-17 14:12:00', '2023-07-17 14:12:00', 1);
+INSERT INTO `supply_prices` VALUES (138, 'Carton 1ly', '1', NULL, 3, NULL, 1, '2023-07-17 14:13:00', '2023-07-17 14:13:00', 1);
+INSERT INTO `supply_prices` VALUES (139, 'Carton 1.2ly', '1', NULL, 3, NULL, 1, '2023-07-17 14:14:00', '2023-07-17 14:14:00', 1);
+INSERT INTO `supply_prices` VALUES (140, 'Carton 1.5ly', '1', NULL, 3, NULL, 1, '2023-07-17 14:14:00', '2023-07-17 14:14:00', 1);
+INSERT INTO `supply_prices` VALUES (141, 'Carton 1.8ly', '1.3860', NULL, 3, NULL, 1, '2023-07-17 14:14:00', '2023-07-17 14:14:00', 1);
+INSERT INTO `supply_prices` VALUES (142, 'Carton 2ly', '1', NULL, 3, NULL, 1, '2023-07-17 14:15:00', '2023-07-17 14:15:00', 1);
+INSERT INTO `supply_prices` VALUES (143, 'Carton 2.2ly', '1', NULL, 3, NULL, 1, '2023-07-17 14:15:00', '2023-07-17 14:15:00', 1);
+INSERT INTO `supply_prices` VALUES (144, 'Carton 2.5ly', '1', NULL, 3, NULL, 1, '2023-07-17 14:15:00', '2023-07-17 14:15:00', 1);
+INSERT INTO `supply_prices` VALUES (145, 'Carton 3ly', '1', NULL, 3, NULL, 1, '2023-07-17 14:15:00', '2023-07-17 14:15:00', 1);
+INSERT INTO `supply_prices` VALUES (146, 'Carton 2ly', '1', NULL, 2, NULL, 1, '2023-07-17 14:17:00', '2023-07-17 14:17:00', 1);
+INSERT INTO `supply_prices` VALUES (147, 'Carton 2.2ly', '1', NULL, 2, NULL, 1, '2023-07-17 14:17:00', '2023-07-17 14:17:00', 1);
+INSERT INTO `supply_prices` VALUES (148, 'Carton 2..5ly', '1', NULL, 2, NULL, 1, '2023-07-17 14:17:00', '2023-07-17 14:17:00', 1);
+INSERT INTO `supply_prices` VALUES (149, 'Carton 3ly', '1', NULL, 2, NULL, 1, '2023-07-17 14:18:00', '2023-07-17 14:18:00', 1);
+INSERT INTO `supply_prices` VALUES (150, 'Carton 2ly', '1', NULL, 1, NULL, 1, '2023-07-17 14:22:00', '2023-07-17 14:22:00', 1);
+INSERT INTO `supply_prices` VALUES (151, 'Carton 2.2ly', '1', NULL, 1, NULL, 1, '2023-07-17 14:22:00', '2023-07-17 14:22:00', 1);
+INSERT INTO `supply_prices` VALUES (152, 'Carton 2.5ly', '1', NULL, 1, NULL, 1, '2023-07-17 14:23:00', '2023-07-17 14:23:00', 1);
+INSERT INTO `supply_prices` VALUES (153, 'Carton 3ly', '1', NULL, 1, NULL, 1, '2023-07-17 14:23:00', '2023-07-17 14:23:00', 1);
+INSERT INTO `supply_prices` VALUES (154, 'Cao su non bồi nhung 0.8cm', '1', NULL, 22, NULL, 1, '2023-07-17 14:34:00', '2023-07-17 14:34:00', 1);
 
 -- ----------------------------
 -- Table structure for supply_types
@@ -14209,14 +14270,14 @@ CREATE TABLE `supply_types`  (
   `factor` bigint(20) NULL DEFAULT NULL,
   `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Ghi chú',
   `act` tinyint(4) NULL DEFAULT NULL,
-  `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `created_by` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `name_index`(`name`) USING BTREE,
   INDEX `type_index`(`type`) USING BTREE,
   INDEX `act_indx`(`act`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of supply_types
@@ -14226,14 +14287,21 @@ INSERT INTO `supply_types` VALUES (2, 'Carton THÀNH', 'carton', 2, NULL, 1, '20
 INSERT INTO `supply_types` VALUES (3, 'Carton NẮP', 'carton', 2, NULL, 1, '2023-05-23 17:01:50', '2023-05-23 17:01:50', 1);
 INSERT INTO `supply_types` VALUES (4, 'Carton ĐÁY', 'carton', 2, NULL, 1, '2023-05-23 17:01:50', '2023-05-23 17:01:50', 1);
 INSERT INTO `supply_types` VALUES (5, 'Carton ĐỊNH HÌNH', 'carton', 2, NULL, 1, '2023-05-23 17:01:50', '2023-05-23 17:01:50', 1);
-INSERT INTO `supply_types` VALUES (6, 'Cao su non', 'rubber', 0, NULL, 0, '2023-05-23 17:01:50', '2023-05-23 17:01:50', 1);
-INSERT INTO `supply_types` VALUES (7, 'Cao su non bồi nhung', 'rubber', 0, NULL, 1, '2023-05-23 17:01:00', '2023-05-23 17:01:00', 1);
+INSERT INTO `supply_types` VALUES (7, 'Cao su non bồi nhung 0.5cm', 'rubber', 0, NULL, 1, '0000-00-00 00:00:00', '2023-05-23 17:01:00', 1);
 INSERT INTO `supply_types` VALUES (8, 'Mút phẳng K40', 'styrofoam', 0, NULL, 1, '2023-05-23 17:01:50', '2023-05-23 17:01:50', 1);
 INSERT INTO `supply_types` VALUES (9, 'Mút phẳng K30', 'styrofoam', 0, NULL, 1, '2023-05-23 17:01:50', '2023-05-23 17:01:50', 1);
 INSERT INTO `supply_types` VALUES (10, 'Mút phẳng K21', 'styrofoam', 0, NULL, 1, '2023-05-23 17:01:50', '2023-05-23 17:01:50', 1);
 INSERT INTO `supply_types` VALUES (11, 'Mút phẳng K21(Bồi nhung)', 'styrofoam', 0, NULL, 1, '2023-05-23 17:01:50', '2023-05-23 17:01:50', 1);
 INSERT INTO `supply_types` VALUES (12, 'Mút phẳng K30 bồi nhung', 'styrofoam', 0, NULL, 1, '2023-05-23 17:01:50', '2023-05-23 17:01:50', 1);
 INSERT INTO `supply_types` VALUES (21, 'Carton NẮP + ĐÁY', 'carton', NULL, NULL, 1, '2023-05-23 17:01:50', '2023-05-23 17:01:50', 1);
+INSERT INTO `supply_types` VALUES (22, 'Cao su non bồi nhung 0.8cm', 'rubber', NULL, NULL, 1, '2023-07-17 14:27:00', '2023-07-17 14:27:00', 1);
+INSERT INTO `supply_types` VALUES (23, 'Cao su non bồi nhung 1cm', 'rubber', NULL, NULL, 1, '2023-07-17 14:27:00', '2023-07-17 14:27:00', 1);
+INSERT INTO `supply_types` VALUES (24, 'Cao su non bồi nhung 1.2cm', 'rubber', NULL, NULL, 1, '2023-07-17 14:28:00', '2023-07-17 14:28:00', 1);
+INSERT INTO `supply_types` VALUES (25, 'Cao su non bồi nhung 1.5cm', 'rubber', NULL, NULL, 1, '2023-07-17 14:28:00', '2023-07-17 14:28:00', 1);
+INSERT INTO `supply_types` VALUES (26, 'Cao su non bồi nhung 1.8cm', 'rubber', NULL, NULL, 1, '2030-11-01 00:00:00', '2023-07-17 14:28:00', 1);
+INSERT INTO `supply_types` VALUES (27, 'Cao su non bồi nhung 2cm', 'rubber', NULL, NULL, 1, '0000-00-00 00:00:00', '2023-07-17 14:28:00', 1);
+INSERT INTO `supply_types` VALUES (28, 'Cao su non bồi nhung 2.5cm', 'rubber', NULL, NULL, 1, '0000-00-00 00:00:00', '2023-07-17 14:29:00', 1);
+INSERT INTO `supply_types` VALUES (29, 'Cao su non bồi nhung 3cm', 'rubber', NULL, NULL, 1, '0000-00-00 00:00:00', '2023-07-17 14:29:00', 1);
 
 -- ----------------------------
 -- Table structure for supply_warehouses
@@ -14253,7 +14321,7 @@ CREATE TABLE `supply_warehouses`  (
   `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `act` tinyint(4) NULL DEFAULT NULL,
   `created_at` datetime(0) NULL DEFAULT NULL,
-  `updated_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `created_by` int(10) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
