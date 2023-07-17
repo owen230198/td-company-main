@@ -17,17 +17,19 @@ class Quote extends Model
     {
         $role = [
             \GroupUser::SALE => [
+                'insert' => 1,
                 'view' => 
-                [
-                    'with' => ['key' => 'created_by', 'value' => \User::getCurrent('id')],
-                ],
-                'update' => [
-                    'view_with' => 
                     [
-                        ['key' => 'status', 'value' => Order::DESIGNING],
-                        ['key' => 'assign_by', 'value' => \User::getCurrent()]
+                        'with' => ['key' => 'created_by', 'value' => \User::getCurrent('id')],
+                    ],
+                'update' => 
+                    [
+                        'with' => 
+                            [
+                                ['key' => 'created_by', 'value' => \User::getCurrent('id')],
+                                ['con'=> 'or', 'key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED]
+                            ]
                     ]
-                ]
             ]
         ];
         return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];

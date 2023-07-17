@@ -11,7 +11,7 @@
  Target Server Version : 100425
  File Encoding         : 65001
 
- Date: 17/07/2023 01:02:33
+ Date: 17/07/2023 19:37:12
 */
 
 SET NAMES utf8mb4;
@@ -13595,7 +13595,7 @@ INSERT INTO `n_tables` VALUES (9, 'devices', 'Thiết bị & Chi phí', 0, 'q_de
 INSERT INTO `n_tables` VALUES (10, 'materals', 'Chất liệu vật tư', 0, 'materals', 'materals', 10, 'view', NULL, '1', '1', '1', '1', '2023-04-28 10:32:23', '2023-04-28 10:32:23');
 INSERT INTO `n_tables` VALUES (11, 'printers', 'Máy in & chi phí', 0, 'printers', 'printers', 10, 'view', NULL, '1', '1', '1', '1', '2023-04-28 00:18:55', '2023-04-28 00:18:55');
 INSERT INTO `n_tables` VALUES (12, 'supplies', 'Vật tư hộp', 7, 'supplies', 'supplies', 10, 'view', NULL, '1', '1', '1', '1', '2023-04-28 10:34:00', '2023-04-28 10:34:00');
-INSERT INTO `n_tables` VALUES (13, 'supply_types', 'Vật tư tham gia sx', 0, 'supply_types', 'supply_types', 10, 'view', '[\r\n	{\"icon\":\"list-ul\",\"note\":\"Đơn giá\", \"link\":\"view/supply_prices?supply_id=\"}\r\n]', '1', '1', '1', '1', '2023-04-28 11:49:44', '2023-04-28 11:49:44');
+INSERT INTO `n_tables` VALUES (13, 'supply_types', 'Vật tư tham gia sx', 0, 'supply_types', 'supply_types', 10, 'view', '[\r\n	{\r\n	\"icon\":\"list-ul\",\r\n	\"note\":\"Đơn giá định lượng\", \r\n	\"link\":\"view/supply_prices?default_data={%22supply_id%22:%22<id>%22}\"\r\n	}\r\n]', '1', '1', '1', '1', '2023-07-17 19:30:41', '2023-07-17 19:30:41');
 INSERT INTO `n_tables` VALUES (14, 'supply_prices', 'Đơn giá vật tư', 0, 'supply_prices', 'supply_prices', 20, 'view', NULL, '1', '1', '1', '1', '2023-04-28 10:33:01', '2023-04-28 10:33:01');
 INSERT INTO `n_tables` VALUES (17, 'fill_finishes', 'Chi phí bồi & hoàn thiện', 7, 'fill_finishes', 'fill_finishes', 10, 'view', NULL, '1', '1', '1', '1', '2023-04-28 10:33:32', '2023-04-28 10:33:32');
 INSERT INTO `n_tables` VALUES (18, 'orders', 'Đơn hàng', 0, 'orders', 'orders', 20, 'view', NULL, '0', '1', '1', '1', '2023-06-21 13:22:33', '2023-06-21 13:22:33');
@@ -14156,7 +14156,7 @@ INSERT INTO `supply_prices` VALUES (66, '0.5cm Mút phẳng K40', '2500', 'styro
 INSERT INTO `supply_prices` VALUES (67, '0.8cm Mút phẳng K40', '2500', 'styrofoam', 8, '', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
 INSERT INTO `supply_prices` VALUES (68, '0.5cm', '60000', 'styrofoam', 6, '', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
 INSERT INTO `supply_prices` VALUES (69, '0.8cm', '60000', 'styrofoam', 6, '', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `supply_prices` VALUES (72, '1 cm', '6', 'styrofoam', 7, '60.000đ/m2 ( Cao su non 35k/m2 + Nhung 25k/m2 )', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
+INSERT INTO `supply_prices` VALUES (72, '1 cm', '6', 'styrofoam', 7, '60.000đ/m2 ( Cao su non 35k/m2 + Nhung 25k/m2 )', 1, '2023-05-23 17:01:00', '2023-05-23 17:01:00', 1);
 INSERT INTO `supply_prices` VALUES (75, 'Vật tư lụa thường ( lụa vàng )', '6600', 'silk', 0, NULL, 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
 INSERT INTO `supply_prices` VALUES (76, 'Giấy bồi nắp', '2000', 'fill', 0, '1', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
 INSERT INTO `supply_prices` VALUES (77, 'Giấy bồi thành', '2000', 'fill', 0, '1', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
@@ -14227,7 +14227,7 @@ INSERT INTO `supply_types` VALUES (3, 'Carton NẮP', 'carton', 2, NULL, 1, '202
 INSERT INTO `supply_types` VALUES (4, 'Carton ĐÁY', 'carton', 2, NULL, 1, '2023-05-23 17:01:50', '2023-05-23 17:01:50', 1);
 INSERT INTO `supply_types` VALUES (5, 'Carton ĐỊNH HÌNH', 'carton', 2, NULL, 1, '2023-05-23 17:01:50', '2023-05-23 17:01:50', 1);
 INSERT INTO `supply_types` VALUES (6, 'Cao su non', 'rubber', 0, NULL, 0, '2023-05-23 17:01:50', '2023-05-23 17:01:50', 1);
-INSERT INTO `supply_types` VALUES (7, 'Cao su non bồi nhung', 'rubber', 0, NULL, 1, '2023-05-23 17:01:50', '2023-05-23 17:01:50', 1);
+INSERT INTO `supply_types` VALUES (7, 'Cao su non bồi nhung', 'rubber', 0, NULL, 1, '2023-05-23 17:01:00', '2023-05-23 17:01:00', 1);
 INSERT INTO `supply_types` VALUES (8, 'Mút phẳng K40', 'styrofoam', 0, NULL, 1, '2023-05-23 17:01:50', '2023-05-23 17:01:50', 1);
 INSERT INTO `supply_types` VALUES (9, 'Mút phẳng K30', 'styrofoam', 0, NULL, 1, '2023-05-23 17:01:50', '2023-05-23 17:01:50', 1);
 INSERT INTO `supply_types` VALUES (10, 'Mút phẳng K21', 'styrofoam', 0, NULL, 1, '2023-05-23 17:01:50', '2023-05-23 17:01:50', 1);

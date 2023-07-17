@@ -13,7 +13,7 @@ class BaseService
 			$data['created_by'] = @getSessionUser()['id'];
 			$data['created_at'] = !empty($data['created_at']) ? getDataDateTime($data['created_at']) : date('Y-m-d H:i:s', Time());
 		}
-		$data['act'] = !empty($data['act']) ? $data['act'] : 1;
+		$data['act'] = isset($data['act']) ? $data['act'] : 1;
 		$data['updated_at'] = !empty($data['updated_at']) ? getDataDateTime($data['updated_at']) : date('Y-m-d H:i:s', Time());
 	}
 
@@ -21,7 +21,7 @@ class BaseService
 	{
 		$ret['code'] = 200;
 		$note = mb_strtolower(@$field['note']);
-		if (!empty($attr['required']) && empty($value)) {
+		if (!empty($attr['required']) && $value == '') {
 			$ret['code'] = 100;
 			$ret['message'] = 'Dữ liệu '.$note.' không được để trống !';
 			return $ret;

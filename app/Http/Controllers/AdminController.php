@@ -104,7 +104,7 @@ class AdminController extends Controller
     {
         $role = $this->admins->checkPermissionAction($table, __FUNCTION__);
         if (empty($role['allow'])) {
-            return customReturnMessage(false, $request->isMethod('POST'), ['url' => url('permission-error')]);
+            return customReturnMessage(false, $request->isMethod('POST'), ['message' => 'Không có quyền thao tác']);
         }
         if (in_array($table, NTable::$specific[__FUNCTION__])) {
             $controller = getObjectByTable($table);

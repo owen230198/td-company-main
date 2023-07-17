@@ -154,18 +154,18 @@ class OrderController extends Controller
             $supp_size = !empty($data_supply->size) ? json_decode($data_supply->size, true) : [];
             if (!empty($data_supply)) {
                 if ($request->isMethod('GET')) {
-                        $data['supply_obj'] = $data_supply;
-                        $data['title'] = 'Xử lí vật tư sản xuất sản phẩm '.getFieldDataById('name', 'products', $data_supply->product);
-                        $prefix = !empty($data_supply->type) ? $data_supply->type : $table;
-                        $data['pro_index'] = 0;
-                        $data['supp_index'] = 0;
-                        $data['table'] = $table;
-                        $data['supply_size'] = $supp_size;
-                        if (view()->exists('orders.users.6.supply_handles.'.$prefix)) {
-                            return view('orders.users.6.supply_handles.'.$prefix, $data); 
-                        }else{
-                            return back()->with('error', 'Giao diện này không tồn tại!');
-                        } 
+                    $data['supply_obj'] = $data_supply;
+                    $data['title'] = 'Xử lí vật tư sản xuất sản phẩm '.getFieldDataById('name', 'products', $data_supply->product);
+                    $prefix = !empty($data_supply->type) ? $data_supply->type : $table;
+                    $data['pro_index'] = 0;
+                    $data['supp_index'] = 0;
+                    $data['table'] = $table;
+                    $data['supply_size'] = $supp_size;
+                    if (view()->exists('orders.users.6.supply_handles.'.$prefix)) {
+                        return view('orders.users.6.supply_handles.'.$prefix, $data); 
+                    }else{
+                        return back()->with('error', 'Giao diện này không tồn tại!');
+                    } 
                 }else{
                     $data_command = $request->input('c_supply');
                     $data_elevate = $request->input('elevate');
@@ -202,7 +202,15 @@ class OrderController extends Controller
 
     public function applyToWorkerHandle($id)
     {
-        return returnMessageAjax(110, 'Vật tư chưa sẵn sàng để sản xuất, vui lòng liên hệ kế toán kho !');
+        if (\GroupUser::isAdmin || \GroupUser::isPlanHandle()) {
+            $obj_order = DB::table('orders')->find($id);
+            if ($obj_order->status != Order::TECH_SUBMITED) {
+                return returnMessageAjax(110, 'DỮ liệu trạng thái đơn hàng không hợp lệ !');
+            }
+            return returnMessageAjax(110, 'Vật tư chưa sẵn sàng để sản xuất, vui lòng liên hệ kế toán kho !');
+        }else{
+            return returnMessageAjax(110, 'Bạn không có quyền duyệt sản xuất !');    
+        } 
     }
 }
 ?>

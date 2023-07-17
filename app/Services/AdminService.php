@@ -20,7 +20,7 @@ class AdminService extends BaseService
         if(count($role) == 0){
             return ['allow' => false];
         }
-        if (!empty($role[$action]['all'])) {
+        if (!empty($role[$action]['all']) || (!empty($role[$action]) && $role[$action] == 1)) {
             return ['allow' => true];
         }
         if (!empty($role[$action]['with'])) {
@@ -33,9 +33,26 @@ class AdminService extends BaseService
         
     }
 
-    public function logActionUserData($action, $table, $id)
+    public function logActionUserData($action, $table, $id, $old_data)
     {
-        return true;
+        $data_log = [   'table_map' => $table, 
+                        'action' => $action, 
+                        'target' => $id, 
+                        'do_at' => \Carbon\Carbon::now(), 
+                        'user' => \User::getCurrent('id'),
+                        'act' => 1,
+                        'created_at' => \Carbon\Carbon::now(),
+                        'updated_at' => \Carbon\Carbon::now(),
+                    ];
+        if ($action == 'update' && !empty($detail_data)) {
+            $data_target = \DB::table($table)->find($id);
+            foreach ($data_target as $key => $value) {
+                if ($value != @$old_data->{$key}) {
+                    $detail_data[$key] = $value;
+                }    
+            }
+            $data_log['detail_data'] = json_encode($detail_data);
+        }            
     }
 
     public function getTableItem($table)
@@ -152,11 +169,13 @@ class AdminService extends BaseService
 
     public function doUpdateTable($id, $table, $data)
     {
+        $data['id'] = $id;
         $process = $this->processDataBefore($data, $table);
         if (@$process['code'] == 100) {
             return $process;
         }
-        $update = \DB::table($table)->where('id', $id)->update($process['data']);
+        $object = \DB::table($table)->where('id', $id);
+        $update = $object->update($process['data']);
         if ($update) {
             return returnMessageAjax(200, 'Cập nhật dữ liệu thành công!');
         }else{

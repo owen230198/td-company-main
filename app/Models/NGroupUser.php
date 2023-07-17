@@ -62,6 +62,11 @@ class NGroupUser extends Model
             'link' => 'view/quotes?default_data={"status":"not_accepted"}', 
             'group' => 'customer_quote'
         ],
+        'quote_accepted' => [
+            'name' => 'DS báo giá (khách đã duyệt)', 
+            'link' => 'view/quotes?default_data={"status":"accepted"}', 
+            'group' => 'customer_quote'
+        ],
         'design_not_accepted' => [
             'name' => 'DS lệnh TK chưa duyệt', 
             'link' => 'view/c_designs?default_data={"status":"not_accepted"}', 
@@ -161,6 +166,7 @@ class NGroupUser extends Model
         self::SALE => [
             self::MODULE['create_quote'],
             self::MODULE['quote_not_accepted'],
+            self::MODULE['quote_accepted'],
             self::MODULE['handle_process'],
             self::MODULE['profit'],
             self::MODULE['rpt_quote_not_accepted'],
