@@ -57,7 +57,10 @@ class AdminController extends Controller
                 $data['param_default'] = $default_data;
                 $data['param_action'] = getParamUrlByArray($param_default);
             }
-            $param =  $request->except('default_data', 'page');
+            if ($request->input('nosidebar') == 1) {
+                $data['nosidebar'] = 1;
+            }
+            $param =  $request->except('default_data', 'page', 'nosidebar');
             if (!empty($param)) {
                 $data['data_search'] = $param;
                 $this->injectViewWhereParam($table, $param);

@@ -3,6 +3,9 @@
     @if (!empty($param_default))
         <input type="hidden" name="default_data" value='{{ $param_default }}'>
     @endif
+    @if (!empty($nosidebar))
+        <input type="hidden" name="nosidebar" value = '1'>
+    @endif
     @php
       $data_search = @$data_search?$data_search:array()
     @endphp

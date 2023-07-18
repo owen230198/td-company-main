@@ -86,6 +86,9 @@ if (!function_exists('getActionByKey')) {
             case 'clone':
                 return 'Sao chép';
                 break;
+            case 'remove':
+                return 'Xóa';
+                break;
             default:
                 return '';
                 break;

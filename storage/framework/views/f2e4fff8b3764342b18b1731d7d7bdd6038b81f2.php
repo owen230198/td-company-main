@@ -21,7 +21,9 @@
 
 <body>
     <?php if(@$nosidebar): ?>
-        <?php echo $__env->yieldContent('content'); ?>
+        <div class="page_content container-fluid h-100">
+            <?php echo $__env->yieldContent('content'); ?>
+        </div>
     <?php else: ?>
         <?php
             $user_login = session('user_login');

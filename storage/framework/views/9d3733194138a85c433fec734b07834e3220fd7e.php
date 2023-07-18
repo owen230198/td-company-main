@@ -3,6 +3,9 @@
     <?php if(!empty($param_default)): ?>
         <input type="hidden" name="default_data" value='<?php echo e($param_default); ?>'>
     <?php endif; ?>
+    <?php if(!empty($nosidebar)): ?>
+        <input type="hidden" name="nosidebar" value = '1'>
+    <?php endif; ?>
     <?php
       $data_search = @$data_search?$data_search:array()
     ?>

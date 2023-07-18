@@ -21,7 +21,9 @@
 
 <body>
     @if (@$nosidebar)
-        @yield('content')
+        <div class="page_content container-fluid h-100">
+            @yield('content')
+        </div>
     @else
         @php
             $user_login = session('user_login');

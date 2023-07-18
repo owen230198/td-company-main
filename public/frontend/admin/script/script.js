@@ -225,7 +225,7 @@ var menuSidebar = function()
     });
 }
 
-var selectAjaxModule = function(section = $('.base_content '))
+var selectAjaxModule = function(section = $('.page_content '))
 {
     let select_ajax = section.find('select.select_ajax');
     if (select_ajax.length > 0) {
