@@ -98,6 +98,9 @@ var loadDataPopup = function () {
         var src = $(this).data("src");
         $(".modalAction").find("iframe").attr("src", src);
     });
+    $('.modalAction').on('hidden.bs.modal', function (e) {
+        location.reload();
+      })
 };
 
 var selectConfigs = function () {

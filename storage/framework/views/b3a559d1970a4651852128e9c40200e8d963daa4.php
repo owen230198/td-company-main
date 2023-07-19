@@ -28,7 +28,7 @@
                     <p class="mb-1">
                         <span class="font_bold mr-1"><i class="dot"></i> Kích thước: </span>
                         <span class="">
-                            <?php echo e(@$product['size']); ?>
+                            <?php echo e(getSizeTitleProduct($product)); ?>
 
                         </span>
                     </p>

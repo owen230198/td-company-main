@@ -63,7 +63,7 @@ class NGroupUser extends Model
             'group' => 'customer_quote'
         ],
         'quote_accepted' => [
-            'name' => 'DS báo giá (khách đã duyệt)', 
+            'name' => 'DS báo giá (đã duyệt)', 
             'link' => 'view/quotes?default_data={"status":"accepted"}', 
             'group' => 'customer_quote'
         ],

@@ -182,6 +182,7 @@
                             ];
         const FILL_DEVICE = [
                                 self::FILL => 'Thiết bị máy bồi',
+                                self::FINISH => 'Công đoạn hoàn thiện'
                             ];
 
         const FILL_FINISH_STAGE = [
@@ -218,7 +219,6 @@
             ],
             self::FILL_FINISH => [
                 ['key' => self::FILL, 'name' => 'Loại giấy bồi', 'table' => 'supply_prices'],
-                ['key' => self::FINISH, 'name' => 'Công đoạn hoàn thiện', 'table' => 'supply_prices'],
                 ['key' => self::MAGNET, 'name' => 'Vật tư nam châm', 'table' => 'supply_prices'],     
             ]
         ];

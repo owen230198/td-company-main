@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : owen
+ Source Server         : localhost
  Source Server Type    : MySQL
- Source Server Version : 100425
+ Source Server Version : 100428
  Source Host           : localhost:3306
  Source Schema         : td_company
 
  Target Server Type    : MySQL
- Target Server Version : 100425
+ Target Server Version : 100428
  File Encoding         : 65001
 
- Date: 19/07/2023 14:02:15
+ Date: 19/07/2023 22:46:15
 */
 
 SET NAMES utf8mb4;
@@ -12330,32 +12330,32 @@ CREATE TABLE `devices`  (
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `created_by` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 53 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 60 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of devices
 -- ----------------------------
 INSERT INTO `devices` VALUES (1, 'Cán láng nước tự động', '0', '0', '50000', '40', '25000', 'nilon', 1, 'paper', NULL, NULL, 0, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `devices` VALUES (2, 'Ép nhũ tự động', '0', '0', '100000', '0', '50000', 'compress', 1, 'paper', NULL, NULL, 1, 0, '0000-00-00 00:00:00', '2023-07-17 13:10:00', 0);
-INSERT INTO `devices` VALUES (3, 'In UV tự động', '0', '600', '150000', '0', '0', 'uv', 1, 'paper', NULL, NULL, 0, 0, '2023-07-17 20:11:13', '2023-07-17 13:11:13', 0);
-INSERT INTO `devices` VALUES (4, 'Máy bế tự động', '150', '120', '150000', '30', '80000', 'elevate', 1, 'paper', NULL, '150đ/cm ( Ví dụ: 43 x 65 x 150 = 420.000đ tiền khuôn', 1, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
+INSERT INTO `devices` VALUES (2, 'Ép nhũ tự động', '0', '0', '100000', '25', '50000', 'compress', 1, 'paper', NULL, NULL, 1, 0, '0000-00-00 00:00:00', '2023-07-17 13:10:00', 0);
+INSERT INTO `devices` VALUES (3, 'In UV tự động', '0', '700', '200000', '0', '0', 'uv', 1, 'paper', NULL, NULL, 1, 0, '0000-00-00 00:00:00', '2023-07-19 01:45:00', 0);
+INSERT INTO `devices` VALUES (4, 'MÁY BẾ NGÁP', '150', '150', '100000', '50', '50000', 'elevate', 1, 'paper', NULL, '150đ/cm ( Ví dụ: 43 x 65 x 150 = 420.000đ tiền khuôn', 1, 0, '0000-00-00 00:00:00', '2023-05-23 17:01:00', 0);
 INSERT INTO `devices` VALUES (5, 'Bóc lề tự động', '0', '10', '20000', '5', '0', 'peel', 1, 'paper', NULL, NULL, 0, 0, '2023-07-17 20:12:56', '2023-07-17 13:12:56', 0);
-INSERT INTO `devices` VALUES (6, 'Dán hộp tự động', '0', '50', '50000', '10', '25000', 'box_paste', 1, 'paper', NULL, NULL, 1, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `devices` VALUES (7, 'Máy phay tự động', '0', '120', '70000', '0', '0', 'mill', 1, 'carton', NULL, NULL, 1, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `devices` VALUES (8, 'Cán láng nhiệt tự động', '0', '0', '50000', '40', '25000', 'nilon', 2, 'paper', 1, NULL, 0, 1, '2030-11-01 00:00:00', '2023-07-17 13:08:00', 1);
-INSERT INTO `devices` VALUES (9, 'Máy ép thủy lực', '0', '0', '100000', '0', '50000', 'compress', 2, 'paper', NULL, NULL, 1, 1, '0000-00-00 00:00:00', '2023-05-23 17:01:00', 0);
-INSERT INTO `devices` VALUES (10, 'In UV bán tự động', '80', '700', '150000', '150', '100000', 'uv', 2, 'paper', NULL, NULL, 1, 1, '0000-00-00 00:00:00', '2023-05-23 17:01:00', 0);
-INSERT INTO `devices` VALUES (11, 'Máy bế bán tự động', '150', '150', '100000', '50', '50000', 'elevate', 2, 'paper', NULL, '150đ/cm ( Ví dụ: 43 x 65 x 150 = 420.000đ tiền khuôn', 1, 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `devices` VALUES (12, 'Bóc lề bán tự động', '0', '10', '20000', '5', '0', 'peel', 2, 'paper', NULL, NULL, 1, 1, '0000-00-00 00:00:00', '2023-05-23 17:01:00', 0);
-INSERT INTO `devices` VALUES (13, 'Dán hộp tay', '0', '50', '50000', '10', '25000', 'box_paste', 2, 'paper', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `devices` VALUES (14, 'Máy phay bán tự động', '0', '120', '50000', '0', '0', 'mill', 2, 'carton', NULL, NULL, 0, 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
+INSERT INTO `devices` VALUES (6, 'MÁY RÁN TỰ ĐỘNG', '0', '50', '100000', '10', '25000', 'box_paste', 1, 'paper', NULL, NULL, 1, 0, '2030-11-01 00:00:00', '2023-05-23 17:01:00', 0);
+INSERT INTO `devices` VALUES (7, 'MÁY PHAY TỰ ĐỘNG', '0', '100', '70000', '25', '25000', 'mill', 1, 'carton', NULL, NULL, 1, 0, '0000-00-00 00:00:00', '2023-05-23 17:01:00', 0);
+INSERT INTO `devices` VALUES (8, 'Cán láng nhiệt tự động', '0', '0', '50000', '40', '25000', 'nilon', 2, 'paper', 1, NULL, 0, 1, '2023-07-19 09:52:27', '2023-07-19 02:52:27', 1);
+INSERT INTO `devices` VALUES (9, 'Máy ép thủy lực', '0', '0', '100000', '50', '35000', 'compress', 2, 'paper', NULL, NULL, 1, 1, '0000-00-00 00:00:00', '2023-05-23 17:01:00', 0);
+INSERT INTO `devices` VALUES (10, 'In UV bán tự động', '80', '700', '200000', '150', '100000', 'uv', 2, 'paper', NULL, NULL, 1, 1, '2030-11-01 00:00:00', '2023-05-23 17:01:00', 0);
+INSERT INTO `devices` VALUES (11, 'MÁY BẾ TỰ ĐỘNG', '150', '120', '150000', '30', '75000', 'elevate', 2, 'paper', NULL, '150đ/cm ( Ví dụ: 43 x 65 x 150 = 420.000đ tiền khuôn', 1, 1, '0000-00-00 00:00:00', '2023-05-23 17:01:00', 0);
+INSERT INTO `devices` VALUES (12, 'Bóc lề bán tự động', '0', '10', '30000', '5', '0', 'peel', 2, 'paper', NULL, NULL, 1, 1, '2030-11-01 00:00:00', '2023-05-23 17:01:00', 0);
+INSERT INTO `devices` VALUES (13, 'RÁN TAY THỦ CÔNG', '0', '100', '50000', '30', '25000', 'box_paste', 2, 'paper', NULL, NULL, 1, 1, '0000-00-00 00:00:00', '2023-05-23 17:01:00', 0);
+INSERT INTO `devices` VALUES (14, 'MÁY PHAY BÁN TỰ ĐỘNG', '0', '130', '70000', '35', '25000', 'mill', 2, 'carton', NULL, NULL, 1, 1, '2030-11-01 00:00:00', '2023-07-19 04:15:00', 0);
 INSERT INTO `devices` VALUES (15, 'Cán metalai tự động', '0', '0', '50000', '0', '0', 'metalai', 1, 'paper', NULL, NULL, 0, 0, '2023-07-17 20:09:06', '2023-07-17 13:09:06', 1);
 INSERT INTO `devices` VALUES (16, 'Cán metalai bán tự động', '0', '0', '50000', '50', '25000', 'metalai', 2, 'paper', NULL, NULL, 1, 1, '2030-11-01 00:00:00', '2023-07-17 12:46:00', 1);
 INSERT INTO `devices` VALUES (17, 'Máy xén  tự động', '0', '0', '50000', '0', '0', 'cut', 1, 'carton', NULL, NULL, 0, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `devices` VALUES (18, 'Máy xén bán tự động', '0', '0', '50000', '0', '0', 'cut', 2, 'carton', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `devices` VALUES (19, 'Máy thúc nổi carton', '0', '100', '100000', '50', '500000', 'float', 1, 'paper', NULL, NULL, 1, 0, '0000-00-00 00:00:00', '2023-05-23 17:01:00', 0);
-INSERT INTO `devices` VALUES (20, 'Máy bế tự động', '0', '100', '100000', '0', '0', 'elevate', 1, 'carton', NULL, NULL, 0, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `devices` VALUES (21, 'Máy bế bán tự động', '150', '200', '100000', '0', '0', 'elevate', 2, 'carton', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
+INSERT INTO `devices` VALUES (18, 'MÁY XÉN', '0', '100', '100000', '50', '10000', 'cut', 2, 'carton', NULL, NULL, 1, 1, '0000-00-00 00:00:00', '2023-05-23 17:01:00', 0);
+INSERT INTO `devices` VALUES (19, 'Máy thúc nổi carton', '0', '100', '100000', '50', '500000', 'float', 1, 'paper', NULL, 'Chưa có máy', 0, 0, '0000-00-00 00:00:00', '2023-07-19 01:49:00', 0);
+INSERT INTO `devices` VALUES (20, 'MÁY BẾ TỰ ĐỘNG', '0', '100', '100000', '0', '0', 'elevate', 1, 'carton', NULL, NULL, 1, 0, '0000-00-00 00:00:00', '2023-07-19 04:11:00', 0);
+INSERT INTO `devices` VALUES (21, 'MÁY BẾ NGÁP', '150', '150', '100000', '50', '50000', 'elevate', 2, 'carton', NULL, '150đ/cm áp dụng cho tất cả các khuôn máy bế, Khuôn phức tạp + thêm ngoài theo cảm nhận', 1, 1, '2030-11-01 00:00:00', '2023-05-23 17:01:00', 0);
 INSERT INTO `devices` VALUES (22, 'Máy bế tự động', '0', '100', '100000', '0', '0', 'elevate', 1, 'rubber', NULL, NULL, 1, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
 INSERT INTO `devices` VALUES (23, 'Máy bế bán tự động', '150', '1000', '100000', '0', '0', 'elevate', 2, 'rubber', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
 INSERT INTO `devices` VALUES (24, 'Máy bế tự động', '0', '100', '100000', '0', '0', 'elevate', 1, 'styrofoam', NULL, NULL, 1, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
@@ -12363,30 +12363,37 @@ INSERT INTO `devices` VALUES (25, 'Máy bế bán tự động', '0', '150', '10
 INSERT INTO `devices` VALUES (26, 'Máy bế tự động', '0', '100', '100000', '0', '0', 'elevate', 1, 'mica', NULL, NULL, 1, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
 INSERT INTO `devices` VALUES (27, 'Máy bế bán tự động', '0', '150', '100000', '0', '0', 'elevate', 2, 'mica', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
 INSERT INTO `devices` VALUES (28, 'Máy xén  tự động', '0', '0', '50000', '0', '0', 'cut', 1, 'rubber', NULL, NULL, 0, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `devices` VALUES (29, 'Máy xén bán tự động', '0', '100', '50000', '0', '0', 'cut', 2, 'rubber', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
+INSERT INTO `devices` VALUES (29, 'MÁY XÉN', '0', '200', '50000', '100', '10000', 'cut', 2, 'rubber', NULL, NULL, 1, 1, '0000-00-00 00:00:00', '2023-05-23 17:01:00', 0);
 INSERT INTO `devices` VALUES (30, 'Máy xén  tự động', '0', '0', '50000', '0', '0', 'cut', 1, 'decal', NULL, NULL, 1, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
 INSERT INTO `devices` VALUES (31, 'Máy xén bán tự động', '0', '0', '50000', '0', '0', 'cut', 2, 'decal', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
 INSERT INTO `devices` VALUES (32, 'Máy xén  tự động', '0', '0', '50000', '0', '0', 'cut', 1, 'silk', NULL, NULL, 1, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
 INSERT INTO `devices` VALUES (33, 'Máy xén bán tự động', '0', '0', '50000', '0', '0', 'cut', 2, 'silk', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `devices` VALUES (34, 'Máy xén  tự động', '0', '0', '50000', '0', '0', 'cut', 1, 'styrofoam', NULL, NULL, 1, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `devices` VALUES (35, 'Máy xén bán tự động', '0', '0', '50000', '0', '0', 'cut', 2, 'styrofoam', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
+INSERT INTO `devices` VALUES (34, 'Máy xén  tự động', '0', '0', '50000', '0', '0', 'cut', 1, 'styrofoam', NULL, NULL, 0, 0, '2023-07-19 11:19:08', '2023-07-19 04:19:08', 0);
+INSERT INTO `devices` VALUES (35, 'MÁY XÉN', '0', '100', '50000', '50', '10000', 'cut', 2, 'styrofoam', NULL, NULL, 1, 1, '0000-00-00 00:00:00', '2023-05-23 17:01:00', 0);
 INSERT INTO `devices` VALUES (36, 'Máy xén  tự động', '0', '0', '50000', '0', '0', 'cut', 1, 'mica', NULL, NULL, 1, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `devices` VALUES (37, 'Máy xén bán tự động', '0', '0', '50000', '0', '0', 'cut', 2, 'mica', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
+INSERT INTO `devices` VALUES (37, 'Máy xén bán tự động', '0', '100', '50000', '50', '20000', 'cut', 2, 'mica', NULL, NULL, 1, 1, '0000-00-00 00:00:00', '2023-05-23 17:01:00', 0);
 INSERT INTO `devices` VALUES (38, 'Máy bóc lề tự động', '0', '10', '20000', '0', '0', 'peel', 1, 'carton', NULL, NULL, 0, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `devices` VALUES (39, 'Máy bóc lề bán tự động', '0', '20', '20000', '0', '0', 'peel', 2, 'carton', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
+INSERT INTO `devices` VALUES (39, 'BÓC LỀ CARTON', '0', '20', '20000', '0', '0', 'peel', 2, 'carton', NULL, NULL, 1, 1, '2030-11-01 00:00:00', '2023-05-23 17:01:00', 0);
 INSERT INTO `devices` VALUES (40, 'Máy bóc lề tự động', '0', '10', '20000', '0', '0', 'peel', 1, 'rubber', NULL, NULL, 0, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
 INSERT INTO `devices` VALUES (41, 'Máy bóc lề bán tự động', '0', '30', '20000', '0', '0', 'peel', 2, 'rubber', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
 INSERT INTO `devices` VALUES (42, 'Máy bóc lề tự động', '0', '10', '20000', '0', '0', 'peel', 1, 'styrofoam', NULL, NULL, 1, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
 INSERT INTO `devices` VALUES (43, 'Máy bóc lề bán tự động', '0', '10', '20000', '0', '0', 'peel', 2, 'styrofoam', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
 INSERT INTO `devices` VALUES (44, 'Máy bóc lề tự động', '0', '10', '20000', '0', '0', 'peel', 1, 'mica', NULL, NULL, 1, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
 INSERT INTO `devices` VALUES (45, 'Máy bóc lề bán tự động', '0', '10', '20000', '0', '0', 'peel', 2, 'mica', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `devices` VALUES (46, 'Máy cán nước', '0', '0', '50000', '40', '25000', 'nilon', NULL, 'paper', NULL, NULL, 0, NULL, '0000-00-00 00:00:00', '2023-07-17 13:07:00', 1);
-INSERT INTO `devices` VALUES (47, 'Máy cán nhiệt', '0', '0', '50000', '40', '25000', 'nilon', NULL, 'paper', NULL, NULL, 1, NULL, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `devices` VALUES (48, 'Máy bồi 1', '150', '150', '150000', '50', '50000', 'fill', NULL, 'fill_finish', NULL, NULL, 1, NULL, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `devices` VALUES (49, 'Túi giấy khổ in  43 x 65', '200000', '1200', '100000', '440', '50000', 'bag_paste', NULL, 'paper', NULL, NULL, 1, NULL, '0000-00-00 00:00:00', '2023-07-17 13:16:00', 1);
-INSERT INTO `devices` VALUES (50, 'Túi giấy khổ in  52 x 72', '100000', '1500', '100000', '440', '50000', 'bag_paste', NULL, 'paper', NULL, NULL, 1, NULL, '0000-00-00 00:00:00', '2023-07-17 13:18:00', 1);
+INSERT INTO `devices` VALUES (46, 'MÁY CÁN NƯỚC - THUÊ BÊN NGOÀI', '0', '0', '50000', '0', '0', 'nilon', NULL, 'paper', NULL, NULL, 1, NULL, '2030-11-01 00:00:00', '2023-07-19 01:18:00', 1);
+INSERT INTO `devices` VALUES (47, 'MÁY CÁN NHIỆT', '0', '0', '50000', '40', '25000', 'nilon', NULL, 'paper', NULL, NULL, 1, NULL, '0000-00-00 00:00:00', '2023-05-23 17:01:00', 0);
+INSERT INTO `devices` VALUES (48, 'Máy bồi 1', '0', '300', '300000', '80', '100000', 'fill', NULL, 'fill_finish', NULL, NULL, 1, NULL, '2030-11-01 00:00:00', '2023-05-23 17:01:00', 0);
+INSERT INTO `devices` VALUES (49, 'Túi giấy khổ in  43 x 65', '200000', '1360', '100000', '440', '50000', 'bag_paste', NULL, 'paper', NULL, NULL, 1, NULL, '0000-00-00 00:00:00', '2023-07-17 13:16:00', 1);
+INSERT INTO `devices` VALUES (50, 'Túi giấy khổ in  52 x 72', '100000', '1550', '100000', '440', '50000', 'bag_paste', NULL, 'paper', NULL, NULL, 1, NULL, '2030-11-01 00:00:00', '2023-07-17 13:18:00', 1);
 INSERT INTO `devices` VALUES (51, 'Túi giấy khổ in  65 x 86', '100000', '1700', '100000', '440', '50000', 'bag_paste', NULL, 'paper', NULL, NULL, 1, NULL, '0000-00-00 00:00:00', '2023-07-17 13:21:00', 1);
 INSERT INTO `devices` VALUES (52, 'Túi giấy khổ in 72 x 102', '100000', '2000', '100000', '440', '50000', 'bag_paste', NULL, 'paper', NULL, NULL, 1, NULL, '2023-07-17 13:22:00', '2023-07-17 13:22:00', 1);
+INSERT INTO `devices` VALUES (53, 'Gắn keo bìa với thành', '0', '300', '0', '0', '0', 'finish', NULL, 'fill_finish', NULL, NULL, 1, NULL, '2023-07-19 22:06:00', '2023-07-19 22:06:00', 1);
+INSERT INTO `devices` VALUES (54, 'Gắn khay định hình', '0', '300', '0', '0', '0', 'finish', NULL, 'fill_finish', NULL, NULL, 1, NULL, '2023-07-19 22:08:00', '2023-07-19 22:08:00', 1);
+INSERT INTO `devices` VALUES (55, 'Gắn cao su non', '0', '300', '0', '0', '0', 'finish', NULL, 'fill_finish', NULL, NULL, 1, NULL, '2023-07-19 22:09:00', '2023-07-19 22:09:00', 1);
+INSERT INTO `devices` VALUES (56, 'Gắn mút phẳng', '0', '300', '0', '0', '0', 'finish', NULL, 'fill_finish', NULL, NULL, 1, NULL, '2023-07-19 22:10:00', '2023-07-19 22:10:00', 1);
+INSERT INTO `devices` VALUES (57, 'Gắn vải lụa', '0', '500', '0', '0', '0', 'finish', NULL, 'fill_finish', NULL, NULL, 1, NULL, '2023-07-19 22:10:00', '2023-07-19 22:10:00', 1);
+INSERT INTO `devices` VALUES (58, 'Đột khuyết', '0', '200', '0', '0', '0', 'finish', NULL, 'fill_finish', NULL, NULL, 1, NULL, '2023-07-19 22:11:00', '2023-07-19 22:11:00', 1);
+INSERT INTO `devices` VALUES (59, 'Gắn vật tư khác', '0', '200', '0', '0', '0', 'finish', NULL, 'fill_finish', NULL, NULL, 1, NULL, '2030-11-01 00:00:00', '2023-07-19 22:11:00', 1);
 
 -- ----------------------------
 -- Table structure for districts
@@ -13187,7 +13194,7 @@ CREATE TABLE `fill_finishes`  (
   `created_by` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `quote_index`(`product`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of fill_finishes
@@ -13195,6 +13202,7 @@ CREATE TABLE `fill_finishes`  (
 INSERT INTO `fill_finishes` VALUES (1, '3000', '{\"act\":0}', '{\"stage\":[{\"materal\":\"84\",\"qttv_price\":2000,\"cost\":6000000},{\"materal\":\"86\",\"qttv_price\":2000,\"cost\":6000000},{\"materal\":\"85\",\"qttv_price\":2000,\"cost\":6000000}],\"ext_price\":\"2000\",\"qty_pro\":3000,\"finish_cost\":18000000,\"act\":1,\"total\":24000000}', '{\"type\":\"90\",\"qty\":\"3\",\"qttv_price\":\"2000\",\"magnet_perc\":1.5,\"qty_pro\":3000,\"act\":1,\"total\":27000000}', 51000000, '2023-07-16 15:20:38', '2023-07-16 15:20:38', 3, 1, 1);
 INSERT INTO `fill_finishes` VALUES (2, '4000', '{\"act\":0}', '{\"stage\":[{\"materal\":\"86\",\"qttv_price\":2000,\"cost\":8000000},{\"materal\":\"85\",\"qttv_price\":2000,\"cost\":8000000},{\"materal\":\"84\",\"qttv_price\":2000,\"cost\":8000000},{\"materal\":\"87\",\"qttv_price\":2000,\"cost\":8000000}],\"ext_price\":\"11\",\"qty_pro\":4000,\"finish_cost\":32000000,\"act\":1,\"total\":32044000}', '{\"type\":\"89\",\"qty\":\"4\",\"qttv_price\":\"2000\",\"magnet_perc\":1.5,\"qty_pro\":4000,\"act\":1,\"total\":48000000}', 80044000, '2023-05-10 10:53:00', '2023-05-10 10:53:00', 4, 1, 1);
 INSERT INTO `fill_finishes` VALUES (3, '5000', '{\"act\":0}', '{\"ext_price\":\"0\",\"qty_pro\":5000,\"finish_cost\":0,\"act\":0,\"total\":0}', '{\"type\":\"0\",\"qty\":null,\"qttv_price\":0,\"magnet_perc\":1.5,\"qty_pro\":5000,\"act\":0,\"total\":0}', 0, '2023-05-10 10:53:00', '2023-05-10 10:53:00', 5, 1, 1);
+INSERT INTO `fill_finishes` VALUES (5, '10000', '{\"stage\":[{\"length\":\"20\",\"width\":\"45\",\"materal\":\"78\",\"qttv_price\":0.5,\"cost\":7800000},{\"length\":\"30\",\"width\":\"40\",\"materal\":\"77\",\"qttv_price\":0.5,\"cost\":9300000},{\"length\":\"20\",\"width\":\"20\",\"materal\":\"79\",\"qttv_price\":0.5,\"cost\":5300000},{\"length\":\"30\",\"width\":\"54\",\"materal\":\"80\",\"qttv_price\":0.5,\"cost\":11400000}],\"ext_price\":\"100\",\"machine\":\"48\",\"model_price\":0,\"work_price\":300,\"shape_price\":300000,\"qty_pro\":10000,\"fill_cost\":33800000,\"act\":1,\"total\":34800000}', '{\"stage\":[{\"materal\":\"53\",\"qttv_price\":300,\"cost\":3000000},{\"materal\":\"54\",\"qttv_price\":300,\"cost\":3000000},{\"materal\":\"55\",\"qttv_price\":300,\"cost\":3000000},{\"materal\":\"56\",\"qttv_price\":300,\"cost\":3000000},{\"materal\":\"57\",\"qttv_price\":500,\"cost\":5000000},{\"materal\":\"58\",\"qttv_price\":200,\"cost\":2000000},{\"materal\":\"59\",\"qttv_price\":200,\"cost\":2000000}],\"ext_price\":\"0\",\"qty_pro\":10000,\"finish_cost\":21000000,\"act\":1,\"total\":21000000}', '{\"type\":\"89\",\"qty\":\"2\",\"qttv_price\":\"2000\",\"magnet_perc\":1.5,\"qty_pro\":10000,\"act\":1,\"total\":60000000}', 115800000, '2023-07-19 22:37:17', '2023-07-19 22:37:17', 15, 1, 1);
 
 -- ----------------------------
 -- Table structure for materals
@@ -13212,26 +13220,25 @@ CREATE TABLE `materals`  (
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `created_by` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of materals
 -- ----------------------------
-INSERT INTO `materals` VALUES (1, 'Màng bạc', '0.36', 'metalai', NULL, '0.36 = 3600đ/m2', 1, '2023-05-13 10:15:37', '2023-05-13 10:15:43', 0);
-INSERT INTO `materals` VALUES (2, 'Màng vàng', '0.38', 'metalai', NULL, '0.38 = 3800đ/m2', 1, '2023-05-13 10:15:37', '2023-05-13 10:15:43', 0);
-INSERT INTO `materals` VALUES (3, 'in offset mực bóng hoặc mờ', '0.06', 'cover', NULL, '0.06 = 600đ/m2', 1, '2023-05-13 10:15:37', '2023-05-13 10:15:43', 0);
-INSERT INTO `materals` VALUES (4, 'Phủ bóng nhật sơn ( Trên metailai )', '0.18', 'cover', NULL, '0.18 = 1800đ/m2', 1, '2023-05-13 10:15:37', '2023-05-13 10:15:43', 0);
-INSERT INTO `materals` VALUES (5, 'Cán bóng', '0.23', 'cover', NULL, '0.23 = 2300đ/m2', 1, '2023-05-13 10:15:37', '2023-05-13 10:15:43', 0);
-INSERT INTO `materals` VALUES (6, 'Cán mờ', '0.25', 'cover', NULL, '0.25 = 2500đ/m2', 1, '2023-05-13 10:15:37', '2023-05-13 10:15:43', 0);
-INSERT INTO `materals` VALUES (7, 'Phủ bóng gốc dầu nhật sơn trên giấy', '0.15', 'cover', NULL, '0.15 = 1500đ/m2', 1, '2023-05-13 10:15:37', '2023-05-13 10:15:43', 0);
-INSERT INTO `materals` VALUES (8, 'Cán bóng', '0.23', 'nilon', 0, '0.23 = 2300đ/m2', 0, '2023-07-17 20:51:34', '2023-07-17 20:51:34', 0);
-INSERT INTO `materals` VALUES (9, 'Cán mờ', '0.25', 'nilon', 0, '0.25 = 2500đ/m2', 1, '2023-05-13 10:15:37', '2023-05-13 10:15:43', 0);
-INSERT INTO `materals` VALUES (10, 'Mực bóng', '0', 'uv', NULL, 'CT này không áp dụng tính khách hàng, chỉ áp dụng đo lường vật tư', 1, '2023-05-13 10:15:37', '2023-05-13 10:15:43', 0);
-INSERT INTO `materals` VALUES (11, 'Mực sần cát', '0', 'uv', 0, 'CT này không áp dụng tính khách hàng, chỉ áp dụng đo lường vật tư', 1, '2023-05-13 10:15:37', '2023-05-13 10:15:43', 0);
-INSERT INTO `materals` VALUES (12, 'Couches', '0.0023', 'paper', NULL, '0.0023 = 23 triệu/ tấn', 1, '2023-05-13 10:15:37', '2023-05-13 10:15:43', 0);
-INSERT INTO `materals` VALUES (13, 'Ivoly', '0.0022', 'paper', 0, '0.0022 = 22 triệu/ tấn', 1, '2023-05-13 10:15:37', '2023-05-13 10:15:43', 0);
-INSERT INTO `materals` VALUES (14, 'Duplex', '0.00155', 'paper', NULL, '0.00155 = 15.5 triệu/ tấn', 1, '2023-05-13 10:15:37', '2023-05-13 10:15:43', 0);
-INSERT INTO `materals` VALUES (15, 'Bãi Bằng', '0.0024', 'paper', NULL, '0.0024 = 24 triệu/ tấn', 1, '2023-05-13 10:15:37', '2023-05-13 10:15:44', 0);
+INSERT INTO `materals` VALUES (1, 'Màng bạc', '0.36', 'metalai', 1, '0.36 = 3600đ/m2', 1, '2023-07-17 20:26:23', '2023-07-17 13:26:23', 0);
+INSERT INTO `materals` VALUES (2, 'Màng vàng', '0.38', 'metalai', 1, '0.38 = 3800đ/m2', 1, '2023-07-17 20:26:21', '2023-07-17 13:26:21', 0);
+INSERT INTO `materals` VALUES (3, 'IN OFFSET PHỦ MỜ hoặc BÓNG', '0.08', 'cover', 1, '0.08 = 800đ/m2', 1, '2030-11-01 00:00:00', '2023-07-17 13:27:00', 0);
+INSERT INTO `materals` VALUES (5, 'Cán bóng', '0.23', 'cover', 1, '0.23 = 2300đ/m2', 1, '2023-07-17 20:27:15', '2023-07-17 13:27:15', 0);
+INSERT INTO `materals` VALUES (6, 'Cán mờ', '0.25', 'cover', 1, '0.25 = 2500đ/m2', 1, '2023-07-17 20:27:14', '2023-07-17 13:27:14', 0);
+INSERT INTO `materals` VALUES (7, 'PHỦ BÓNG GỐC DẦU tại cty Nhật Sơn', '0.15', 'cover', 1, '0.15 = 1500đ/m2', 1, '0000-00-00 00:00:00', '2023-07-17 13:27:00', 0);
+INSERT INTO `materals` VALUES (8, 'Cán bóng', '0.23', 'nilon', 1, '0.23 = 2300đ/m2', 1, '2023-07-17 20:25:58', '2023-07-17 13:25:58', 0);
+INSERT INTO `materals` VALUES (9, 'Cán mờ', '0.25', 'nilon', 1, '0.25 = 2500đ/m2', 1, '2023-07-17 20:25:57', '2023-07-17 13:25:57', 0);
+INSERT INTO `materals` VALUES (10, 'Mực bóng', '0', 'uv', 1, 'CT này không áp dụng tính khách hàng, chỉ áp dụng đo lường vật tư', 1, '2023-07-17 20:27:41', '2023-07-17 13:27:41', 0);
+INSERT INTO `materals` VALUES (11, 'Mực sần cát', '0', 'uv', 1, 'CT này không áp dụng tính khách hàng, chỉ áp dụng đo lường vật tư', 1, '2023-07-17 20:27:40', '2023-07-17 13:27:40', 0);
+INSERT INTO `materals` VALUES (12, 'GIẤY COUCHES', '0.0021', 'paper', 1, '0.0021 = 21triệu/ tấn', 1, '2030-11-01 00:00:00', '2023-07-17 13:24:00', 0);
+INSERT INTO `materals` VALUES (13, 'GIẤY IVOLRY', '0.0020', 'paper', 1, '0.0020 = 20 triệu/ tấn', 1, '2030-11-01 00:00:00', '2023-07-17 13:24:00', 0);
+INSERT INTO `materals` VALUES (14, 'GIẤY DUPLEX', '0.0015', 'paper', 1, '0.00150 = 15 triệu/ tấn', 1, '2030-11-01 00:00:00', '2023-07-17 13:24:00', 0);
+INSERT INTO `materals` VALUES (15, 'GIẤY OFFSET', '0.0028', 'paper', 1, '0.0024 = 24 triệu/ tấn', 1, '0000-00-00 00:00:00', '2023-07-17 13:24:00', 0);
 
 -- ----------------------------
 -- Table structure for n_detail_tables
@@ -13413,13 +13420,22 @@ CREATE TABLE `n_log_actions`  (
   `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of n_log_actions
 -- ----------------------------
 INSERT INTO `n_log_actions` VALUES (1, 'printers', 'update', 6, 1, '2023-07-18 01:58:11', '{\"act\":{\"old\":1,\"new\":0}}', 1, '2023-07-18 01:58:11', '2023-07-18 01:58:11');
 INSERT INTO `n_log_actions` VALUES (2, 'printers', 'update', 6, 1, '2023-07-18 01:59:05', '{\"act\":{\"old\":0,\"new\":1}}', 1, '2023-07-18 01:59:05', '2023-07-18 01:59:05');
+INSERT INTO `n_log_actions` VALUES (3, 'devices', 'insert', 53, 1, '2023-07-19 22:07:45', NULL, 1, '2023-07-19 22:07:45', '2023-07-19 22:07:45');
+INSERT INTO `n_log_actions` VALUES (4, 'devices', 'insert', 54, 1, '2023-07-19 22:08:46', NULL, 1, '2023-07-19 22:08:46', '2023-07-19 22:08:46');
+INSERT INTO `n_log_actions` VALUES (5, 'devices', 'insert', 55, 1, '2023-07-19 22:09:58', NULL, 1, '2023-07-19 22:09:58', '2023-07-19 22:09:58');
+INSERT INTO `n_log_actions` VALUES (6, 'devices', 'insert', 56, 1, '2023-07-19 22:10:29', NULL, 1, '2023-07-19 22:10:29', '2023-07-19 22:10:29');
+INSERT INTO `n_log_actions` VALUES (7, 'devices', 'insert', 57, 1, '2023-07-19 22:10:54', NULL, 1, '2023-07-19 22:10:54', '2023-07-19 22:10:54');
+INSERT INTO `n_log_actions` VALUES (8, 'devices', 'insert', 58, 1, '2023-07-19 22:11:21', NULL, 1, '2023-07-19 22:11:21', '2023-07-19 22:11:21');
+INSERT INTO `n_log_actions` VALUES (9, 'devices', 'insert', 59, 1, '2023-07-19 22:11:43', NULL, 1, '2023-07-19 22:11:43', '2023-07-19 22:11:43');
+INSERT INTO `n_log_actions` VALUES (10, 'devices', 'update', 59, 1, '2023-07-19 22:15:04', '{\"name\":{\"old\":\"G\\u1eafn v\\u1eadt t\\u01b0 kh\\u00e1c\",\"new\":\"G\\u1eafn v\\u1eadt t\\u01b0 kh\\u00e1\"},\"created_at\":{\"old\":\"2023-07-19T15:11:00.000000Z\",\"new\":\"0000-00-00 00:00:00\"}}', 1, '2023-07-19 22:15:04', '2023-07-19 22:15:04');
+INSERT INTO `n_log_actions` VALUES (11, 'devices', 'update', 59, 1, '2023-07-19 22:15:15', '{\"name\":{\"old\":\"G\\u1eafn v\\u1eadt t\\u01b0 kh\\u00e1\",\"new\":\"G\\u1eafn v\\u1eadt t\\u01b0 kh\\u00e1c\"},\"created_at\":{\"old\":\"-000001-11-29T16:53:30.000000Z\",\"new\":\"2030-11-01 00:00:00\"}}', 1, '2023-07-19 22:15:15', '2023-07-19 22:15:15');
 
 -- ----------------------------
 -- Table structure for n_modules
@@ -13826,7 +13842,7 @@ CREATE TABLE `papers`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `quote_indx`(`product`) USING BTREE,
   INDEX `main_index`(`main`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of papers
@@ -13839,6 +13855,55 @@ INSERT INTO `papers` VALUES (9, 'Hop giay 1 (Khay giấy định hình)', 10000,
 INSERT INTO `papers` VALUES (10, 'tuan dung', 10000, 1, 10000, '{\"materal\":\"13\",\"qttv\":\"400\",\"length\":\"43\",\"width\":\"65\",\"materal_price\":0.0022,\"supp_qty\":10200,\"act\":1,\"total\":25087920}', '{\"type\":\"1\",\"color\":\"4\",\"machine\":\"1\",\"supp_qty\":9050,\"model_price\":55000,\"work_price\":30,\"shape_price\":100000,\"printer\":2,\"act\":1,\"total\":1706000}', '{\"materal\":\"9\",\"face\":\"1\",\"machine\":\"47\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":10100,\"materal_price\":0.25,\"act\":1,\"total\":7107375}', '{\"ext_price\":\"100000\",\"machine\":\"11\",\"float\":{\"price\":\"50\",\"shape_price\":\"100000\",\"qty_pro\":10100,\"nqty\":1,\"float_cost\":605000},\"model_price\":150,\"work_price\":150,\"shape_price\":100000,\"supp_qty\":10100,\"cost\":2034250,\"act\":1,\"total\":2739250}', '{\"machine\":\"12\",\"nqty\":\"1\",\"model_price\":0,\"work_price\":10,\"shape_price\":20000,\"qty_pro\":10100,\"act\":1,\"total\":121000}', '{\"machine\":\"6\",\"model_price\":0,\"work_price\":50,\"shape_price\":50000,\"qty_pro\":10100,\"act\":1,\"total\":555000}', '{\"materal\":\"2\",\"face\":\"1\",\"cover_materal\":\"6\",\"cover_face\":\"1\",\"machine\":\"15\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":10200,\"cover_supp_qty\":10200,\"materal_price\":0.38,\"metalai_price\":10883420,\"materal_cover_price\":0.25,\"metalai_cover_price\":7107375,\"act\":1,\"total\":17990795}', '{\"price\":\"100\",\"shape_price\":\"100000\",\"machine\":\"2\",\"qty_pro\":10100,\"nqty\":1,\"act\":1,\"total\":1110000}', NULL, '{\"face\":\"1\",\"materal\":\"10\",\"machine\":\"10\",\"model_price\":80,\"work_price\":600,\"shape_price\":150000,\"supp_qty\":10100,\"materal_price\":0,\"act\":1,\"total\":6433600}', '{\"temp_price\":\"500\",\"prescript_price\":\"150\",\"supp_price\":\"0\",\"qty_pro\":10000,\"act\":1,\"total\":6500000}', '69350940', 6, NULL, 1, 1, '2023-05-19 14:38:00', '2023-05-19 14:38:00', 1);
 INSERT INTO `papers` VALUES (11, 'Hộp giấy Tuấn Dung thử ( Test lần 1 )', 10000, 1, 10000, '{\"materal\":\"13\",\"qttv\":\"400\",\"length\":\"40\",\"width\":\"65\",\"materal_price\":0.0022,\"supp_qty\":10200,\"act\":1,\"total\":23337600}', '{\"type\":\"1\",\"color\":\"4\",\"machine\":\"1\",\"supp_qty\":9050,\"model_price\":55000,\"work_price\":30,\"shape_price\":100000,\"printer\":2,\"act\":1,\"total\":1706000}', '{\"materal\":\"9\",\"face\":\"1\",\"machine\":\"47\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":10100,\"materal_price\":0.25,\"act\":1,\"total\":6615000}', '{\"ext_price\":\"100000\",\"machine\":\"4\",\"float\":{\"price\":\"100\",\"shape_price\":\"100000\",\"qty_pro\":10100,\"nqty\":1,\"float_cost\":1110000},\"model_price\":150,\"work_price\":120,\"shape_price\":150000,\"supp_qty\":10100,\"cost\":1752000,\"act\":1,\"total\":2962000}', '{\"machine\":\"5\",\"nqty\":\"1\",\"model_price\":0,\"work_price\":10,\"shape_price\":20000,\"qty_pro\":10100,\"act\":1,\"total\":121000}', '{\"machine\":\"6\",\"model_price\":0,\"work_price\":50,\"shape_price\":50000,\"qty_pro\":10100,\"act\":1,\"total\":555000}', '{\"materal\":\"1\",\"face\":\"1\",\"cover_materal\":\"6\",\"cover_face\":\"1\",\"machine\":\"15\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":10200,\"cover_supp_qty\":10200,\"materal_price\":0.36,\"metalai_price\":9597200,\"materal_cover_price\":0.25,\"metalai_cover_price\":6615000,\"act\":1,\"total\":16212200}', '{\"price\":\"100\",\"shape_price\":\"50000\",\"machine\":\"2\",\"qty_pro\":10100,\"nqty\":1,\"act\":1,\"total\":1060000}', NULL, '{\"act\":0}', '{\"temp_price\":\"1000\",\"prescript_price\":\"200\",\"supp_price\":\"500\",\"qty_pro\":10000,\"act\":1,\"total\":17000000}', '69568800', 7, NULL, 1, 1, '2023-06-08 06:46:17', '2023-06-08 06:46:17', 4);
 INSERT INTO `papers` VALUES (12, 'Tetst Hộp giấy 10000', 10000, 1, 10000, '{\"materal\":\"13\",\"qttv\":\"400\",\"length\":\"40\",\"width\":\"65\",\"materal_price\":0.0022,\"supp_qty\":10200,\"act\":1,\"total\":23337600}', '{\"type\":\"1\",\"color\":\"4\",\"machine\":\"1\",\"supp_qty\":9050,\"model_price\":55000,\"work_price\":30,\"shape_price\":100000,\"printer\":2,\"act\":1,\"total\":1706000}', '{\"materal\":\"8\",\"face\":\"1\",\"machine\":\"47\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":10100,\"materal_price\":0.23,\"act\":1,\"total\":6089800}', '{\"ext_price\":\"100000\",\"machine\":\"4\",\"float\":{\"price\":\"100\",\"shape_price\":\"100000\",\"qty_pro\":10100,\"nqty\":1,\"float_cost\":1110000},\"model_price\":150,\"work_price\":120,\"shape_price\":150000,\"supp_qty\":10100,\"cost\":1752000,\"act\":1,\"total\":2962000}', '{\"machine\":\"5\",\"nqty\":\"1\",\"model_price\":0,\"work_price\":10,\"shape_price\":20000,\"qty_pro\":10100,\"act\":1,\"total\":121000}', '{\"machine\":\"6\",\"model_price\":0,\"work_price\":50,\"shape_price\":50000,\"qty_pro\":10100,\"act\":1,\"total\":555000}', '{\"materal\":\"1\",\"face\":\"1\",\"cover_materal\":\"5\",\"cover_face\":\"1\",\"machine\":\"15\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":10200,\"cover_supp_qty\":10200,\"materal_price\":0.36,\"metalai_price\":9597200,\"materal_cover_price\":0.23,\"metalai_cover_price\":6089800,\"act\":1,\"total\":15687000}', '{\"price\":\"100\",\"shape_price\":\"100000\",\"machine\":\"2\",\"qty_pro\":10100,\"nqty\":1,\"act\":1,\"total\":1110000}', NULL, '{\"act\":0}', '{\"temp_price\":\"100\",\"prescript_price\":\"100\",\"supp_price\":\"100\",\"qty_pro\":10000,\"act\":1,\"total\":3000000}', '54568400', 8, NULL, 1, 1, '2023-06-02 00:52:17', '2023-06-02 00:52:17', 4);
+INSERT INTO `papers` VALUES (13, NULL, NULL, NULL, NULL, '{\"materal\":\"0\",\"qttv\":null,\"length\":null,\"width\":null,\"materal_price\":0,\"supp_qty\":100,\"act\":0,\"total\":0}', '{\"type\":\"0\",\"color\":\"4\",\"machine\":\"0\",\"supp_qty\":-950,\"model_price\":0,\"work_price\":0,\"shape_price\":0,\"printer\":0,\"act\":0,\"total\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', NULL, '{\"act\":0}', '{\"price\":\"0\",\"shape_price\":\"0\",\"machine\":\"0\",\"qty_pro\":0,\"nqty\":1,\"act\":0,\"total\":0}', '{\"price\":\"0\",\"shape_price\":\"0\",\"machine\":\"0\",\"qty_pro\":0,\"nqty\":1,\"act\":0,\"total\":0}', '{\"act\":0}', '{\"temp_price\":\"0\",\"prescript_price\":\"0\",\"supp_price\":\"0\",\"qty_pro\":0,\"act\":0,\"total\":0}', '0', 15, NULL, 1, 1, '2023-07-19 22:36:50', '2023-07-19 22:36:50', 1);
+INSERT INTO `papers` VALUES (14, NULL, NULL, NULL, NULL, '{\"materal\":\"0\",\"qttv\":null,\"length\":null,\"width\":null,\"materal_price\":0,\"supp_qty\":100,\"act\":0,\"total\":0}', '{\"type\":\"0\",\"color\":\"4\",\"machine\":\"0\",\"supp_qty\":-950,\"model_price\":0,\"work_price\":0,\"shape_price\":0,\"printer\":0,\"act\":0,\"total\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', NULL, '{\"act\":0}', '{\"price\":\"0\",\"shape_price\":\"0\",\"machine\":\"0\",\"qty_pro\":0,\"nqty\":1,\"act\":0,\"total\":0}', '{\"price\":\"0\",\"shape_price\":\"0\",\"machine\":\"0\",\"qty_pro\":0,\"nqty\":1,\"act\":0,\"total\":0}', '{\"act\":0}', '{\"temp_price\":\"0\",\"prescript_price\":\"0\",\"supp_price\":\"0\",\"qty_pro\":0,\"act\":0,\"total\":0}', '0', 15, NULL, 1, 1, '2023-07-19 22:37:17', '2023-07-19 22:37:17', 1);
+
+-- ----------------------------
+-- Table structure for papers_copy1
+-- ----------------------------
+DROP TABLE IF EXISTS `papers_copy1`;
+CREATE TABLE `papers_copy1`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `product_qty` bigint(20) NULL DEFAULT NULL,
+  `nqty` int(10) NULL DEFAULT NULL,
+  `supp_qty` bigint(20) NULL DEFAULT NULL,
+  `size` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `print` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `nilon` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `elevate` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `peel` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `box_paste` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `metalai` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `compress` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `float` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `uv` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `ext_price` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `total_cost` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `product` int(10) NULL DEFAULT NULL,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `main` tinyint(4) NULL DEFAULT NULL,
+  `act` tinyint(4) NULL DEFAULT NULL,
+  `created_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `created_by` int(11) NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `quote_indx`(`product`) USING BTREE,
+  INDEX `main_index`(`main`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of papers_copy1
+-- ----------------------------
+INSERT INTO `papers_copy1` VALUES (1, 'Hop giay 1', 10000, 2, 5000, '{\"materal\":\"13\",\"qttv\":\"300\",\"length\":\"35\",\"width\":\"51\",\"materal_price\":0.0022,\"supp_qty\":5150,\"act\":1,\"total\":6067215}', '{\"type\":\"1\",\"color\":\"apla_print_color\",\"machine\":\"2\",\"print_factor\":1,\"apla_factor\":1000,\"apla_plus\":100000,\"apla_price\":1785000,\"supp_qty\":4050,\"model_price\":60000,\"work_price\":150,\"shape_price\":250000,\"printer\":7,\"act\":1,\"total\":7229350000}', '{\"act\":0}', '{\"ext_price\":\"5000\",\"machine\":\"11\",\"float\":{\"price\":\"100\",\"shape_price\":\"200\",\"qty_pro\":10100,\"nqty\":2,\"float_cost\":1010400},\"model_price\":150,\"work_price\":150,\"shape_price\":100000,\"supp_qty\":5050,\"cost\":1125250,\"act\":1,\"total\":2140650}', '{\"machine\":\"5\",\"nqty\":4,\"model_price\":0,\"work_price\":10,\"shape_price\":20000,\"qty_pro\":10100,\"act\":1,\"total\":424000}', '{\"machine\":\"13\",\"model_price\":0,\"work_price\":50,\"shape_price\":50000,\"qty_pro\":10100,\"act\":1,\"total\":555000}', '{\"materal\":\"1\",\"face\":\"2\",\"cover_materal\":\"3\",\"cover_face\":\"2\",\"machine\":\"15\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":5150,\"cover_supp_qty\":5150,\"materal_price\":0.36,\"metalai_price\":6668780,\"materal_cover_price\":0.06,\"metalai_cover_price\":1131710,\"act\":1,\"total\":7800490}', '{\"price\":\"400\",\"shape_price\":\"200\",\"machine\":\"2\",\"qty_pro\":10100,\"nqty\":2,\"act\":1,\"total\":4040400}', NULL, '{\"face\":\"2\",\"materal\":\"11\",\"machine\":\"10\",\"model_price\":80,\"work_price\":600,\"shape_price\":150000,\"supp_qty\":5050,\"materal_price\":0,\"act\":1,\"total\":6352800}', '{\"temp_price\":\"100\",\"prescript_price\":\"200\",\"supp_price\":\"300\",\"qty_pro\":10000,\"act\":1,\"total\":6000000}', '7262730555', 1, NULL, 1, 1, '2023-07-07 14:45:45', '2023-07-07 14:45:45', 8);
+INSERT INTO `papers_copy1` VALUES (2, 'Hop giay 1 (Tờ bồi mặt trong hộp)', 1000, 3, 334, '{\"materal\":\"0\",\"qttv\":\"400\",\"length\":\"25\",\"width\":\"34\",\"materal_price\":0,\"supp_qty\":438,\"act\":0,\"total\":0}', '{\"type\":\"2\",\"color\":\"4\",\"machine\":\"2\",\"supp_qty\":-616,\"model_price\":60000,\"work_price\":150,\"shape_price\":250000,\"printer\":7,\"act\":0,\"total\":-429200}', '{\"act\":0}', '{\"ext_price\":\"2000\",\"machine\":\"4\",\"float\":{\"price\":\"100\",\"shape_price\":\"200\",\"qty_pro\":1010,\"nqty\":3,\"float_cost\":101600},\"model_price\":150,\"work_price\":120,\"shape_price\":150000,\"supp_qty\":338,\"cost\":318060,\"act\":1,\"total\":421660}', '{\"machine\":\"5\",\"nqty\":4,\"model_price\":0,\"work_price\":10,\"shape_price\":20000,\"qty_pro\":1010,\"act\":1,\"total\":60400}', '{\"machine\":\"13\",\"model_price\":0,\"work_price\":50,\"shape_price\":50000,\"qty_pro\":1010,\"act\":1,\"total\":100500}', '{\"act\":0}', '{\"price\":\"100\",\"shape_price\":\"200\",\"machine\":\"9\",\"qty_pro\":1010,\"nqty\":3,\"act\":1,\"total\":101600}', NULL, '{\"act\":0}', '{\"temp_price\":\"100\",\"prescript_price\":\"200\",\"supp_price\":\"500\",\"qty_pro\":1000,\"act\":1,\"total\":800000}', '1484160', 1, NULL, 0, 1, '2023-07-07 14:45:45', '2023-07-07 14:45:45', 8);
+INSERT INTO `papers_copy1` VALUES (4, 'Hop cung 1', 666, 4, 167, '{\"materal\":\"0\",\"qttv\":\"500\",\"length\":\"25\",\"width\":\"15\",\"materal_price\":0,\"supp_qty\":269,\"act\":0,\"total\":0}', '{\"type\":\"1\",\"color\":\"4\",\"machine\":\"1\",\"supp_qty\":-783,\"model_price\":55000,\"work_price\":30,\"shape_price\":100000,\"printer\":1,\"act\":1,\"total\":526040}', '{\"act\":0}', '{\"ext_price\":\"2000\",\"machine\":\"4\",\"model_price\":150,\"work_price\":120,\"shape_price\":150000,\"supp_qty\":169,\"cost\":226530,\"act\":1,\"total\":228530}', '{\"act\":0}', NULL, '{\"act\":0}', '{\"price\":\"0\",\"shape_price\":\"0\",\"machine\":\"0\",\"qty_pro\":673,\"nqty\":4,\"act\":0,\"total\":0}', '{\"price\":\"2000\",\"shape_price\":\"3000\",\"machine\":\"19\",\"qty_pro\":673,\"nqty\":4,\"act\":1,\"total\":1358000}', '{\"act\":0}', '{\"temp_price\":\"0\",\"prescript_price\":\"0\",\"supp_price\":\"0\",\"qty_pro\":666,\"act\":0,\"total\":0}', '2112570', 3, NULL, 1, 1, '2023-07-16 15:20:37', '2023-07-16 15:20:37', 1);
+INSERT INTO `papers_copy1` VALUES (5, 'Hop cung 1 (Tờ bồi mặt trong hộp)', 3000, 5, 600, '{\"materal\":\"0\",\"qttv\":\"300\",\"length\":\"15\",\"width\":\"11\",\"materal_price\":0,\"supp_qty\":706,\"act\":0,\"total\":0}', '{\"type\":\"1\",\"color\":\"4\",\"machine\":\"1\",\"supp_qty\":-350,\"model_price\":55000,\"work_price\":30,\"shape_price\":100000,\"printer\":1,\"act\":1,\"total\":578000}', '{\"act\":0}', '{\"act\":0}', '{\"machine\":\"5\",\"nqty\":4,\"model_price\":0,\"work_price\":10,\"shape_price\":20000,\"qty_pro\":3030,\"act\":1,\"total\":141200}', '{\"act\":0}', '{\"act\":0}', '{\"price\":\"0\",\"shape_price\":\"0\",\"machine\":\"0\",\"qty_pro\":3030,\"nqty\":5,\"act\":0,\"total\":0}', '{\"price\":\"0\",\"shape_price\":\"0\",\"machine\":\"0\",\"qty_pro\":3030,\"nqty\":5,\"act\":0,\"total\":0}', '{\"act\":0}', '{\"temp_price\":\"0\",\"prescript_price\":\"0\",\"supp_price\":\"0\",\"qty_pro\":3000,\"act\":0,\"total\":0}', '719200', 3, NULL, 0, 1, '2023-07-16 15:20:37', '2023-07-16 15:20:37', 1);
+INSERT INTO `papers_copy1` VALUES (9, 'Hop giay 1 (Khay giấy định hình)', 10000, 10, 1000, '{\"materal\":\"0\",\"qttv\":\"200\",\"length\":\"20\",\"width\":\"11\",\"materal_price\":0,\"supp_qty\":1110,\"act\":0,\"total\":0}', '{\"type\":\"1\",\"color\":\"4\",\"machine\":\"1\",\"supp_qty\":50,\"model_price\":55000,\"work_price\":30,\"shape_price\":100000,\"printer\":1,\"act\":1,\"total\":626000}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', '{\"price\":\"0\",\"shape_price\":\"0\",\"machine\":\"0\",\"qty_pro\":10100,\"nqty\":10,\"act\":0,\"total\":0}', NULL, '{\"act\":0}', '{\"temp_price\":\"0\",\"prescript_price\":\"0\",\"supp_price\":\"0\",\"qty_pro\":10000,\"act\":0,\"total\":0}', '626000', 1, NULL, 0, 1, '2023-07-07 14:45:45', '2023-07-07 14:45:45', 8);
+INSERT INTO `papers_copy1` VALUES (11, 'Hộp giấy Tuấn Dung thử ( Test lần 1 )', 10000, 1, 10000, '{\"materal\":\"13\",\"qttv\":\"400\",\"length\":\"40\",\"width\":\"65\",\"materal_price\":0.0022,\"supp_qty\":10200,\"act\":1,\"total\":23337600}', '{\"type\":\"1\",\"color\":\"4\",\"machine\":\"1\",\"supp_qty\":9050,\"model_price\":55000,\"work_price\":30,\"shape_price\":100000,\"printer\":2,\"act\":1,\"total\":1706000}', '{\"materal\":\"9\",\"face\":\"1\",\"machine\":\"47\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":10100,\"materal_price\":0.25,\"act\":1,\"total\":6615000}', '{\"ext_price\":\"100000\",\"machine\":\"4\",\"float\":{\"price\":\"100\",\"shape_price\":\"100000\",\"qty_pro\":10100,\"nqty\":1,\"float_cost\":1110000},\"model_price\":150,\"work_price\":120,\"shape_price\":150000,\"supp_qty\":10100,\"cost\":1752000,\"act\":1,\"total\":2962000}', '{\"machine\":\"5\",\"nqty\":\"1\",\"model_price\":0,\"work_price\":10,\"shape_price\":20000,\"qty_pro\":10100,\"act\":1,\"total\":121000}', '{\"machine\":\"6\",\"model_price\":0,\"work_price\":50,\"shape_price\":50000,\"qty_pro\":10100,\"act\":1,\"total\":555000}', '{\"materal\":\"1\",\"face\":\"1\",\"cover_materal\":\"6\",\"cover_face\":\"1\",\"machine\":\"15\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":10200,\"cover_supp_qty\":10200,\"materal_price\":0.36,\"metalai_price\":9597200,\"materal_cover_price\":0.25,\"metalai_cover_price\":6615000,\"act\":1,\"total\":16212200}', '{\"price\":\"100\",\"shape_price\":\"50000\",\"machine\":\"2\",\"qty_pro\":10100,\"nqty\":1,\"act\":1,\"total\":1060000}', NULL, '{\"act\":0}', '{\"temp_price\":\"1000\",\"prescript_price\":\"200\",\"supp_price\":\"500\",\"qty_pro\":10000,\"act\":1,\"total\":17000000}', '69568800', 7, NULL, 1, 1, '2023-06-08 06:46:17', '2023-06-08 06:46:17', 4);
+INSERT INTO `papers_copy1` VALUES (12, 'Tetst Hộp giấy 10000', 10000, 1, 10000, '{\"materal\":\"13\",\"qttv\":\"400\",\"length\":\"40\",\"width\":\"65\",\"materal_price\":0.0022,\"supp_qty\":10200,\"act\":1,\"total\":23337600}', '{\"type\":\"1\",\"color\":\"4\",\"machine\":\"1\",\"supp_qty\":9050,\"model_price\":55000,\"work_price\":30,\"shape_price\":100000,\"printer\":2,\"act\":1,\"total\":1706000}', '{\"materal\":\"8\",\"face\":\"1\",\"machine\":\"47\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":10100,\"materal_price\":0.23,\"act\":1,\"total\":6089800}', '{\"ext_price\":\"100000\",\"machine\":\"4\",\"float\":{\"price\":\"100\",\"shape_price\":\"100000\",\"qty_pro\":10100,\"nqty\":1,\"float_cost\":1110000},\"model_price\":150,\"work_price\":120,\"shape_price\":150000,\"supp_qty\":10100,\"cost\":1752000,\"act\":1,\"total\":2962000}', '{\"machine\":\"5\",\"nqty\":\"1\",\"model_price\":0,\"work_price\":10,\"shape_price\":20000,\"qty_pro\":10100,\"act\":1,\"total\":121000}', '{\"machine\":\"6\",\"model_price\":0,\"work_price\":50,\"shape_price\":50000,\"qty_pro\":10100,\"act\":1,\"total\":555000}', '{\"materal\":\"1\",\"face\":\"1\",\"cover_materal\":\"5\",\"cover_face\":\"1\",\"machine\":\"15\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":10200,\"cover_supp_qty\":10200,\"materal_price\":0.36,\"metalai_price\":9597200,\"materal_cover_price\":0.23,\"metalai_cover_price\":6089800,\"act\":1,\"total\":15687000}', '{\"price\":\"100\",\"shape_price\":\"100000\",\"machine\":\"2\",\"qty_pro\":10100,\"nqty\":1,\"act\":1,\"total\":1110000}', NULL, '{\"act\":0}', '{\"temp_price\":\"100\",\"prescript_price\":\"100\",\"supp_price\":\"100\",\"qty_pro\":10000,\"act\":1,\"total\":3000000}', '54568400', 8, NULL, 1, 1, '2023-06-02 00:52:17', '2023-06-02 00:52:17', 4);
+INSERT INTO `papers_copy1` VALUES (14, 'Test hộp giấy CT 19-7', 10000, 2, 5000, '{\"materal\":\"13\",\"qttv\":\"400\",\"length\":\"43\",\"width\":\"65\",\"materal_price\":0.002,\"supp_qty\":5150,\"act\":1,\"total\":11515400}', '{\"type\":\"1\",\"color\":\"4\",\"machine\":\"1\",\"supp_qty\":4050,\"model_price\":65000,\"work_price\":30,\"shape_price\":100000,\"printer\":2,\"act\":1,\"total\":1146000}', '{\"materal\":\"8\",\"face\":\"1\",\"machine\":\"47\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":5050,\"materal_price\":0.23,\"act\":1,\"total\":3296392.5}', '{\"ext_price\":\"1000000\",\"machine\":\"4\",\"float\":{\"price\":\"100\",\"shape_price\":\"100000\",\"qty_pro\":10100,\"nqty\":2,\"float_cost\":1210000},\"model_price\":150,\"work_price\":150,\"shape_price\":100000,\"supp_qty\":5050,\"cost\":1276750,\"act\":1,\"total\":3486750}', '{\"machine\":\"12\",\"nqty\":\"1\",\"model_price\":0,\"work_price\":10,\"shape_price\":30000,\"qty_pro\":10100,\"act\":1,\"total\":131000}', '{\"machine\":\"6\",\"model_price\":0,\"work_price\":50,\"shape_price\":100000,\"qty_pro\":10100,\"act\":1,\"total\":605000}', '{\"materal\":\"1\",\"face\":\"1\",\"cover_materal\":\"5\",\"cover_face\":\"1\",\"machine\":\"16\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":5150,\"cover_supp_qty\":5150,\"materal_price\":0.36,\"metalai_price\":5231930,\"materal_cover_price\":0.23,\"metalai_cover_price\":3296392.5,\"act\":1,\"total\":8528322.5}', '{\"price\":\"100\",\"shape_price\":\"100000\",\"machine\":\"2\",\"qty_pro\":10100,\"nqty\":2,\"act\":1,\"total\":1210000}', NULL, '{\"face\":\"1\",\"materal\":\"10\",\"machine\":\"3\",\"model_price\":0,\"work_price\":700,\"shape_price\":200000,\"supp_qty\":5050,\"materal_price\":0,\"act\":1,\"total\":3735000}', '{\"temp_price\":\"100\",\"prescript_price\":\"100\",\"supp_price\":\"100\",\"qty_pro\":10000,\"act\":1,\"total\":3000000}', '36653865', 14, NULL, 1, 1, '2023-07-19 03:27:39', '2023-07-19 03:27:39', 1);
+INSERT INTO `papers_copy1` VALUES (15, 'Test hộp cứng TD', 10000, NULL, NULL, '{\"materal\":\"0\",\"qttv\":null,\"length\":null,\"width\":null,\"materal_price\":0,\"supp_qty\":100,\"act\":0,\"total\":0}', '{\"type\":\"0\",\"color\":\"4\",\"machine\":\"0\",\"supp_qty\":-950,\"model_price\":0,\"work_price\":0,\"shape_price\":0,\"printer\":0,\"act\":0,\"total\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', NULL, '{\"act\":0}', '{\"price\":\"0\",\"shape_price\":\"0\",\"machine\":\"0\",\"qty_pro\":10100,\"nqty\":1,\"act\":0,\"total\":0}', '{\"price\":\"0\",\"shape_price\":\"0\",\"machine\":\"0\",\"qty_pro\":10100,\"nqty\":1,\"act\":0,\"total\":0}', '{\"act\":0}', '{\"temp_price\":\"0\",\"prescript_price\":\"0\",\"supp_price\":\"0\",\"qty_pro\":10000,\"act\":0,\"total\":0}', '0', 15, NULL, 1, 1, '2023-07-19 06:20:43', '2023-07-19 06:20:43', 1);
 
 -- ----------------------------
 -- Table structure for print_notes
@@ -13910,18 +13975,18 @@ CREATE TABLE `printers`  (
 -- ----------------------------
 -- Records of printers
 -- ----------------------------
-INSERT INTO `printers` VALUES (1, 'Máy in offset 36x52', '36', '52', '55000', '30', '100000', NULL, 1, '2023-05-23 16:04:00', '2023-05-23 16:04:00', 1, 1);
-INSERT INTO `printers` VALUES (2, 'Máy in offset 47x65', '47', '65', '55000', '30', '100000', NULL, 1, '2023-05-23 16:04:00', '2023-05-23 16:04:00', 1, 1);
-INSERT INTO `printers` VALUES (3, 'Máy in offset 52x72', '52', '72', '60000', '35', '110000', NULL, 1, '2023-05-23 16:04:00', '2023-05-23 16:04:00', 1, 1);
-INSERT INTO `printers` VALUES (4, 'Máy in offset 54x79', '55', '80', '81000', '50', '180000', NULL, 1, '2023-05-23 16:04:00', '2023-05-23 16:04:00', 1, 1);
-INSERT INTO `printers` VALUES (5, 'Máy in offset 72x102', '72.5', '103', '110000', '70', '220000', NULL, 1, '2023-05-23 16:04:14', '2023-05-23 16:04:14', 1, 0);
-INSERT INTO `printers` VALUES (6, 'Máy in offset 79x109', '79', '109', '130000', '120', '350000', NULL, 1, '2023-07-18 01:51:57', '2023-07-18 01:59:05', 1, 0);
-INSERT INTO `printers` VALUES (7, 'Máy in uv 36x52', '36', '52', '60000', '150', '250000', NULL, 1, '2023-05-23 16:04:14', '2023-05-23 16:04:14', 2, 0);
-INSERT INTO `printers` VALUES (8, 'Máy in uv 47x65', '47', '65', '60000', '150', '250000', NULL, 1, '2023-05-23 16:04:14', '2023-05-23 16:04:14', 2, 0);
-INSERT INTO `printers` VALUES (9, 'Máy in uv 52x72', '52', '72', '60000', '180', '250000', NULL, 1, '2023-05-23 16:04:00', '2023-05-23 16:04:00', 2, 1);
-INSERT INTO `printers` VALUES (10, 'Máy in uv 54x79', '54', '79', '80000', '200', '300000', NULL, 1, '2023-05-23 16:04:00', '2023-05-23 16:04:00', 2, 1);
-INSERT INTO `printers` VALUES (11, 'Máy in uv 72x102', '72', '102', '115000', '500', '500000', NULL, 1, '2023-05-23 16:04:14', '2023-05-23 16:04:14', 2, 0);
-INSERT INTO `printers` VALUES (12, 'Máy in uv 79x109', '79', '109', '150000', '600', '800000', NULL, 1, '2023-05-23 16:04:14', '2023-05-23 16:04:14', 2, 0);
+INSERT INTO `printers` VALUES (1, 'Máy in offset 36x52', '36', '52', '65000', '30', '100000', NULL, 1, '0000-00-00 00:00:00', '2023-05-23 16:04:00', 1, 1);
+INSERT INTO `printers` VALUES (2, 'Máy in offset 47x65', '47', '65', '65000', '30', '100000', NULL, 1, '0000-00-00 00:00:00', '2023-05-23 16:04:00', 1, 1);
+INSERT INTO `printers` VALUES (3, 'Máy in offset 52x72', '52', '72', '65000', '35', '110000', NULL, 1, '0000-00-00 00:00:00', '2023-05-23 16:04:00', 1, 1);
+INSERT INTO `printers` VALUES (4, 'Máy in offset 54x79', '55', '80', '123000', '50', '180000', NULL, 1, '0000-00-00 00:00:00', '2023-05-23 16:04:00', 1, 1);
+INSERT INTO `printers` VALUES (5, 'Máy in offset 72x102', '72', '102', '123000', '70', '220000', NULL, 1, '2030-11-01 00:00:00', '2023-05-23 16:04:00', 1, 0);
+INSERT INTO `printers` VALUES (6, 'Máy in offset 79x109', '79', '109', '150000', '120', '350000', NULL, 1, '0000-00-00 00:00:00', '2023-05-23 16:04:00', 1, 0);
+INSERT INTO `printers` VALUES (7, 'Máy in uv 36x52', '36', '52', '65000', '150', '250000', NULL, 1, '0000-00-00 00:00:00', '2023-05-23 16:04:00', 2, 0);
+INSERT INTO `printers` VALUES (8, 'Máy in uv 47x65', '47', '65', '65000', '180', '250000', NULL, 1, '2030-11-01 00:00:00', '2023-05-23 16:04:00', 2, 0);
+INSERT INTO `printers` VALUES (9, 'Máy in uv 52x72', '52', '72', '65000', '200', '250000', NULL, 1, '2030-11-01 00:00:00', '2023-05-23 16:04:00', 2, 1);
+INSERT INTO `printers` VALUES (10, 'Máy in uv 54x79', '54', '79', '123000', '220', '300000', NULL, 1, '2030-11-01 00:00:00', '2023-05-23 16:04:00', 2, 1);
+INSERT INTO `printers` VALUES (11, 'Máy in uv 72x102', '72', '102', '123000', '400', '500000', NULL, 1, '2030-11-01 00:00:00', '2023-05-23 16:04:00', 2, 0);
+INSERT INTO `printers` VALUES (12, 'Máy in uv 79x109', '79', '109', '150000', '500', '800000', NULL, 1, '0000-00-00 00:00:00', '2023-05-23 16:04:00', 2, 0);
 
 -- ----------------------------
 -- Table structure for product_categories
@@ -13955,7 +14020,9 @@ CREATE TABLE `products`  (
   `category` int(10) NULL DEFAULT NULL,
   `qty` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `design` int(10) NULL DEFAULT NULL,
-  `size` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `length` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `width` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `height` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `quote_id` int(10) NULL DEFAULT NULL,
   `total_cost` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `custom_design_file` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
@@ -13967,18 +14034,19 @@ CREATE TABLE `products`  (
   `note` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   `act` tinyint(4) NULL DEFAULT NULL,
   `created_at` datetime(0) NULL DEFAULT NULL,
-  `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `updated_at` datetime(0) NULL DEFAULT NULL,
   `created_by` int(10) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of products
 -- ----------------------------
-INSERT INTO `products` VALUES (1, 'Hop banh', 2, '10000', 2, '{\"length\":\"0\",\"width\":\"0\",\"height\":\"0\"}', 1, '7264840715', NULL, '{\"path\":\"http://127.0.0.1:8000/uploads/files/.env\",\"name\":\".env\"}', '{\"path\":\"http://127.0.0.1:8000/uploads/files/.editorconfig\",\"name\":\".editorconfig\"}', '{\"path\":\"http://127.0.0.1:8000/uploads/files/composer.lock\",\"name\":\"composer.lock\"}', '{\"path\":\"http://127.0.0.1:8000/uploads/files/package.json\",\"name\":\"package.json\"}', '{\"path\":\"http://127.0.0.1:8000/uploads/files/package.json\",\"name\":\"package.json\"}', '{\"print\":\"1\",\"handle\":\"abc\"}', 1, '2023-07-16 15:20:37', '2023-07-16 15:20:37', 1);
-INSERT INTO `products` VALUES (3, 'Hop cung 1', 1, '8000', 1, '{\"length\":\"0\",\"width\":\"0\",\"height\":\"0\"}', 1, '202850341270.67', NULL, '{\"path\":\"http://127.0.0.1:8000/uploads/files/.env.example\",\"name\":\".env.example\"}', '{\"path\":\"http://127.0.0.1:8000/uploads/files/.gitattributes\",\"name\":\".gitattributes\"}', '{\"path\":\"http://127.0.0.1:8000/uploads/files/artisan\",\"name\":\"artisan\"}', '{\"path\":\"http://127.0.0.1:8000/uploads/files/composer.json\",\"name\":\"composer.json\"}', '{\"path\":\"http://127.0.0.1:8000/uploads/files/composer.json\",\"name\":\"composer.json\"}', '{\"print\":\"3\",\"handle\":\"def\"}', 1, '2023-07-16 15:20:37', '2023-07-16 15:20:37', 1);
-INSERT INTO `products` VALUES (6, 'tuan dung', 2, '10000', 1, '100 x 200  x 50', 8, '69350940', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-05-19 14:38:00', '2023-05-19 14:38:00', 1);
-INSERT INTO `products` VALUES (7, 'Hộp giấy Tuấn Dung thử ( Test lần 1 )', 2, '10000', 1, '{\"length\":\"20\",\"width\":\"10\",\"height\":\"30\"}', 11, '69568800', '{\"path\":\"http://127.0.0.1:8000/uploads/files/Screenshot (16).png\",\"name\":\"Screenshot (16).png\"}', '{\"path\":\"http://127.0.0.1:8000/uploads/files/.gitignore\",\"name\":\".gitignore\"}', '{\"path\":\"http://127.0.0.1:8000/uploads/files/Yêu-cầu-Hệ-thống-Nhà-ở-ngay_ĐXMB.docx\",\"name\":\"Yêu-cầu-Hệ-thống-Nhà-ở-ngay_ĐXMB.docx\"}', '{\"path\":\"http://127.0.0.1:8000/uploads/files/README.md\",\"name\":\"README.md\"}', '{\"path\":\"http://127.0.0.1:8000/uploads/files/.styleci.yml\",\"name\":\".styleci.yml\"}', NULL, '{\"print\":\"2\",\"handle\":\"fdsfafm\"}', 1, '2023-06-30 01:08:37', '2023-06-30 01:08:37', 7);
+INSERT INTO `products` VALUES (1, 'Hop banh', 2, '10000', 2, '{\"length\":\"0\",\"width', NULL, NULL, 1, '7264840715', NULL, '{\"path\":\"http://127.0.0.1:8000/uploads/files/.env\",\"name\":\".env\"}', '{\"path\":\"http://127.0.0.1:8000/uploads/files/.editorconfig\",\"name\":\".editorconfig\"}', '{\"path\":\"http://127.0.0.1:8000/uploads/files/composer.lock\",\"name\":\"composer.lock\"}', '{\"path\":\"http://127.0.0.1:8000/uploads/files/package.json\",\"name\":\"package.json\"}', '{\"path\":\"http://127.0.0.1:8000/uploads/files/package.json\",\"name\":\"package.json\"}', '{\"print\":\"1\",\"handle\":\"abc\"}', 1, '2023-07-16 15:20:37', '2023-07-16 15:20:37', 1);
+INSERT INTO `products` VALUES (3, 'Hop cung 1', 1, '8000', 1, '{\"length\":\"0\",\"width', NULL, NULL, 1, '202850341270.67', NULL, '{\"path\":\"http://127.0.0.1:8000/uploads/files/.env.example\",\"name\":\".env.example\"}', '{\"path\":\"http://127.0.0.1:8000/uploads/files/.gitattributes\",\"name\":\".gitattributes\"}', '{\"path\":\"http://127.0.0.1:8000/uploads/files/artisan\",\"name\":\"artisan\"}', '{\"path\":\"http://127.0.0.1:8000/uploads/files/composer.json\",\"name\":\"composer.json\"}', '{\"path\":\"http://127.0.0.1:8000/uploads/files/composer.json\",\"name\":\"composer.json\"}', '{\"print\":\"3\",\"handle\":\"def\"}', 1, '2023-07-16 15:20:37', '2023-07-16 15:20:37', 1);
+INSERT INTO `products` VALUES (7, 'Hộp giấy Tuấn Dung thử ( Test lần 1 )', 2, '10000', 1, '{\"length\":\"20\",\"widt', NULL, NULL, 11, '69568800', '{\"path\":\"http://127.0.0.1:8000/uploads/files/Screenshot (16).png\",\"name\":\"Screenshot (16).png\"}', '{\"path\":\"http://127.0.0.1:8000/uploads/files/.gitignore\",\"name\":\".gitignore\"}', '{\"path\":\"http://127.0.0.1:8000/uploads/files/Yêu-cầu-Hệ-thống-Nhà-ở-ngay_ĐXMB.docx\",\"name\":\"Yêu-cầu-Hệ-thống-Nhà-ở-ngay_ĐXMB.docx\"}', '{\"path\":\"http://127.0.0.1:8000/uploads/files/README.md\",\"name\":\"README.md\"}', '{\"path\":\"http://127.0.0.1:8000/uploads/files/.styleci.yml\",\"name\":\".styleci.yml\"}', NULL, '{\"print\":\"2\",\"handle\":\"fdsfafm\"}', 1, '2023-06-30 01:08:37', '2023-06-30 01:08:37', 7);
+INSERT INTO `products` VALUES (14, 'Test hộp giấy CT 19-7', 2, '10000', NULL, '{\"length\":\"90\",\"widt', NULL, NULL, 16, '36653865', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-07-19 03:27:39', '2023-07-19 03:27:39', 1);
+INSERT INTO `products` VALUES (15, 'Test hộp cứng TD', 1, '10000', 1, '90', '50', '120', 17, '145191449', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-07-19 22:37:17', '2023-07-19 22:37:17', 1);
 
 -- ----------------------------
 -- Table structure for quote_configs
@@ -14058,14 +14126,15 @@ CREATE TABLE `quotes`  (
   `created_by` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `_index`(`seri`, `name`, `customer_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of quotes
 -- ----------------------------
 INSERT INTO `quotes` VALUES (1, 'BG-00001', 'accepted', 'Công ty WS', NULL, 1, 'Công ty WS', 'Nguyễn Duy Khánh', '360 Mieng Ha, Hoa Sơn, Ung Hoa, TP Ha Noi', 'nguyenduykhanh2323@gmail.com', '0378050251', '0223344556', 351, '6.4781879832854', '200000', NULL, '210115181985.67', '223727051412.5', NULL, 1, NULL, '2023-07-16 15:20:38', '2023-07-16 15:20:38', 1);
-INSERT INTO `quotes` VALUES (8, 'BG-000014', 'not_accepted', 'CÔNG TY CP IN & SẢN XUẤT BAO BÌ TUẤN DUNG', NULL, 3, 'CÔNG TY CP IN & SẢN XUẤT BAO BÌ TUẤN DUNG', 'Mr Tuấn', 'Lô D5-16 Làng nghề Triều Khúc - Tân triều - HN', 'kd1.intuandung@gmail.com', '0963303999', '38303888', 351, '10', '0', NULL, '69350940', '76286034', NULL, 1, NULL, '2023-07-16 15:07:18', '2023-07-16 15:07:18', 1);
 INSERT INTO `quotes` VALUES (11, 'BG-000014', 'accepted', 'CÔNG TY CP IN & SẢN XUẤT BAO BÌ TUẤN DUNG', NULL, 3, 'CÔNG TY CP IN & SẢN XUẤT BAO BÌ TUẤN DUNG', 'Mr Tuấn', 'Lô D5-16 Làng nghề Triều Khúc - Tân triều - HN', 'kd1.intuandung@gmail.com', '0963303999', '38303888', 351, '8', '0', NULL, '69568800', '75134304', NULL, 1, NULL, '2023-06-08 06:46:05', '2023-06-08 06:46:05', 4);
+INSERT INTO `quotes` VALUES (16, 'BG-000016', 'not_accepted', 'CÔNG TY CP IN & SẢN XUẤT BAO BÌ TUẤN DUNG', NULL, 3, 'CÔNG TY CP IN & SẢN XUẤT BAO BÌ TUẤN DUNG', 'Mr Tuấn', 'Lô D5-16 Làng nghề Triều Khúc - Tân triều - HN', 'kd1.intuandung@gmail.com', '0963303999', '38303888', 351, '10', '500000', NULL, '36653865', '40369251.5', NULL, 1, NULL, '2023-07-19 10:27:46', '2023-07-19 03:27:46', 1);
+INSERT INTO `quotes` VALUES (17, 'BG-000018', 'not_accepted', 'CÔNG TY CP IN & SẢN XUẤT BAO BÌ TUẤN DUNG', NULL, 3, 'CÔNG TY CP IN & SẢN XUẤT BAO BÌ TUẤN DUNG', 'Mr Tuấn', 'Lô D5-16 Làng nghề Triều Khúc - Tân triều - HN', 'kd1.intuandung@gmail.com', '0963303999', '38303888', 351, NULL, NULL, NULL, '145191449', '145191449', NULL, 1, NULL, '2023-07-19 22:16:45', '2023-07-19 22:37:17', 1);
 
 -- ----------------------------
 -- Table structure for supplies
@@ -14089,11 +14158,11 @@ CREATE TABLE `supplies`  (
   `total_cost` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `act` tinyint(4) NULL DEFAULT NULL,
   `created_at` datetime(0) NULL DEFAULT NULL,
-  `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `updated_at` datetime(0) NULL DEFAULT NULL,
   `created_by` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `quote_index`(`product`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 34 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 47 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of supplies
@@ -14114,6 +14183,13 @@ INSERT INTO `supplies` VALUES (30, NULL, 3000, '1', NULL, 3000, '{\"length\":\"2
 INSERT INTO `supplies` VALUES (31, NULL, 3000, '1', NULL, 3000, '{\"length\":\"30\",\"width\":\"21\",\"supply_price\":\"75\",\"prescript_price\":\"2000\",\"qttv_price\":6600,\"supp_qty\":3030,\"act\":1,\"total\":12604800000}', '{\"machine\":\"33\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":3030,\"act\":1,\"total\":50000}', NULL, NULL, NULL, NULL, 'silk', 3, '12604850000', 1, '2023-07-16 15:20:38', '2023-07-16 15:20:38', 1);
 INSERT INTO `supplies` VALUES (32, NULL, 3000, '1', NULL, 3000, '{\"length\":\"26.666666666666668\",\"width\":\"22\",\"supply_type\":\"8\",\"supply_price\":\"30\",\"qttv_price\":3000,\"supp_qty\":3030,\"act\":1,\"total\":5332800000.000001}', '{\"machine\":\"34\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":3030,\"act\":1,\"total\":50000}', NULL, '{\"act\":0}', '{\"machine\":\"42\",\"model_price\":0,\"work_price\":10,\"shape_price\":20000,\"qty_pro\":3030,\"act\":1,\"total\":50300}', NULL, 'styrofoam', 3, '5332900300', 1, '2023-07-16 15:20:38', '2023-07-16 15:20:38', 1);
 INSERT INTO `supplies` VALUES (33, NULL, 3000, '1', NULL, 3000, '{\"length\":\"26.666666666666668\",\"width\":\"22\",\"supply_price\":\"93\",\"qttv_price\":2000,\"supp_qty\":3030,\"act\":1,\"total\":3555200000.0000005}', '{\"machine\":\"37\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":3030,\"act\":1,\"total\":50000}', NULL, '{\"act\":0}', '{\"machine\":\"44\",\"model_price\":0,\"work_price\":10,\"shape_price\":20000,\"qty_pro\":3030,\"act\":1,\"total\":50300}', NULL, 'mica', 3, '3555300300', 1, '2023-07-16 15:20:38', '2023-07-16 15:20:38', 1);
+INSERT INTO `supplies` VALUES (40, NULL, 10000, '3', NULL, 3334, '{\"length\":\"50\",\"width\":\"60\",\"supply_type\":\"1\",\"supply_price\":\"114\",\"qttv_price\":1.386,\"supp_qty\":3368,\"act\":1,\"total\":14004144}', '{\"machine\":\"18\",\"model_price\":0,\"work_price\":100,\"shape_price\":100000,\"supp_qty\":3368,\"act\":1,\"total\":436800}', '{\"machine\":\"14\",\"model_price\":0,\"work_price\":130,\"shape_price\":70000,\"qty_pro\":10100,\"act\":1,\"total\":1383000}', '{\"machine\":\"21\",\"model_price\":150,\"work_price\":150,\"shape_price\":100000,\"supp_qty\":3368,\"cost\":1055200,\"act\":1,\"total\":1055200}', '{\"machine\":\"39\",\"model_price\":0,\"work_price\":20,\"shape_price\":20000,\"qty_pro\":10100,\"act\":1,\"total\":222000}', NULL, 'carton', 15, '17101144', 1, '2023-07-19 22:37:17', '2023-07-19 22:37:17', 1);
+INSERT INTO `supplies` VALUES (41, NULL, 10000, '4', NULL, 2500, '{\"length\":\"60\",\"width\":\"45\",\"supply_type\":\"2\",\"supply_price\":\"113\",\"qttv_price\":1.386,\"supp_qty\":2525,\"act\":1,\"total\":9449055}', '{\"machine\":\"18\",\"model_price\":0,\"work_price\":100,\"shape_price\":100000,\"supp_qty\":2525,\"act\":1,\"total\":352500}', '{\"machine\":\"14\",\"model_price\":0,\"work_price\":130,\"shape_price\":70000,\"qty_pro\":10100,\"act\":1,\"total\":1383000}', '{\"machine\":\"21\",\"model_price\":150,\"work_price\":150,\"shape_price\":100000,\"supp_qty\":2525,\"cost\":883750,\"act\":1,\"total\":883750}', '{\"machine\":\"39\",\"model_price\":0,\"work_price\":20,\"shape_price\":20000,\"qty_pro\":10100,\"act\":1,\"total\":222000}', NULL, 'carton', 15, '12290305', 1, '2023-07-19 22:37:17', '2023-07-19 22:37:17', 1);
+INSERT INTO `supplies` VALUES (42, NULL, 10000, NULL, NULL, NULL, '{\"length\":null,\"width\":null,\"supply_price\":\"0\",\"qttv_price\":0,\"supp_qty\":0,\"act\":0,\"total\":0}', '{\"act\":0}', NULL, '{\"act\":0}', '{\"act\":0}', NULL, 'rubber', 15, '0', 1, '2023-07-19 22:37:17', '2023-07-19 22:37:17', 1);
+INSERT INTO `supplies` VALUES (43, NULL, NULL, '0', '0', NULL, '{\"length\":null,\"width\":null,\"qttv_price\":0,\"supp_qty\":0,\"act\":0,\"total\":0}', '{\"act\":0}', NULL, NULL, NULL, NULL, 'decal', 15, '0', 1, '2023-07-19 22:37:17', '2023-07-19 22:37:17', 1);
+INSERT INTO `supplies` VALUES (44, NULL, 10000, NULL, NULL, NULL, '{\"length\":null,\"width\":null,\"prescript_price\":\"0\",\"qttv_price\":0,\"supp_qty\":0,\"act\":0,\"total\":0}', '{\"act\":0}', NULL, NULL, NULL, NULL, 'silk', 15, '0', 1, '2023-07-19 22:37:17', '2023-07-19 22:37:17', 1);
+INSERT INTO `supplies` VALUES (45, NULL, 10000, NULL, NULL, NULL, '{\"length\":null,\"width\":null,\"supply_price\":\"0\",\"qttv_price\":0,\"supp_qty\":0,\"act\":0,\"total\":0}', '{\"act\":0}', NULL, '{\"act\":0}', '{\"act\":0}', NULL, 'styrofoam', 15, '0', 1, '2023-07-19 22:37:17', '2023-07-19 22:37:17', 1);
+INSERT INTO `supplies` VALUES (46, NULL, 10000, NULL, NULL, NULL, '{\"length\":null,\"width\":null,\"qttv_price\":0,\"supp_qty\":0,\"act\":0,\"total\":0}', '{\"act\":0}', NULL, '{\"act\":0}', '{\"act\":0}', NULL, 'mica', 15, '0', 1, '2023-07-19 22:37:17', '2023-07-19 22:37:17', 1);
 
 -- ----------------------------
 -- Table structure for supply_prices
@@ -14135,7 +14211,7 @@ CREATE TABLE `supply_prices`  (
   INDEX `carton_foam_index`(`supply_id`) USING BTREE,
   INDEX `name_index`(`name`) USING BTREE,
   INDEX `act_indx`(`act`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 155 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 156 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of supply_prices
@@ -14190,20 +14266,13 @@ INSERT INTO `supply_prices` VALUES (67, '0.8cm Mút phẳng K40', '2500', 'styro
 INSERT INTO `supply_prices` VALUES (68, '0.5cm', '60000', 'styrofoam', 6, '', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
 INSERT INTO `supply_prices` VALUES (69, '0.8cm', '60000', 'styrofoam', 6, '', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
 INSERT INTO `supply_prices` VALUES (72, '1 cm', '6', 'styrofoam', 7, '60.000đ/m2 ( Cao su non 35k/m2 + Nhung 25k/m2 )', 1, '2023-05-23 17:01:00', '2023-05-23 17:01:00', 1);
-INSERT INTO `supply_prices` VALUES (75, 'Vật tư lụa thường ( lụa vàng )', '6600', 'silk', 0, NULL, 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `supply_prices` VALUES (76, 'Giấy bồi nắp', '2000', 'fill', 0, '1', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `supply_prices` VALUES (77, 'Giấy bồi thành', '2000', 'fill', 0, '1', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `supply_prices` VALUES (78, 'Giấy bồi bìa', '2000', 'fill', 0, '1', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `supply_prices` VALUES (79, 'Giấy bồi khay', '2000', 'fill', 0, '1', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `supply_prices` VALUES (80, 'Giấy bồi mặt trong', '2000', 'fill', 0, '1', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `supply_prices` VALUES (81, 'Giấy bồi bìa', '2000', 'fill', 0, '1', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `supply_prices` VALUES (82, 'Gắn keo bìa với thành', '2000', 'finish', 0, '1', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `supply_prices` VALUES (83, 'Gắn khay định hình', '2000', 'finish', 0, '1', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `supply_prices` VALUES (84, 'Gắn cao su non', '2000', 'finish', 0, '1', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `supply_prices` VALUES (85, 'Gắn mút phẳng', '2000', 'finish', 0, '1', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `supply_prices` VALUES (86, 'Gắn vải lụa', '2000', 'finish', 0, '1', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `supply_prices` VALUES (87, 'Đột khuyết', '2000', 'finish', 0, '1', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `supply_prices` VALUES (88, 'Cắt CNC', '2000', 'finish', 0, '1', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
+INSERT INTO `supply_prices` VALUES (75, 'Vật tư lụa thường ( lụa vàng )', '8000', 'silk', 0, NULL, 1, '0000-00-00 00:00:00', '2023-05-23 17:01:00', 0);
+INSERT INTO `supply_prices` VALUES (76, 'Giấy bồi nắp', '0.5', 'fill', 0, '0.5 = 5000đ/m2', 1, '0000-00-00 00:00:00', '2023-05-23 17:01:00', 0);
+INSERT INTO `supply_prices` VALUES (77, 'Giấy bồi thành', '0.5', 'fill', 0, '0.5 = 5000đ/m2', 1, '0000-00-00 00:00:00', '2023-05-23 17:01:00', 0);
+INSERT INTO `supply_prices` VALUES (78, 'Giấy bồi bìa', '0.5', 'fill', 0, '0.5 = 5000đ/m2', 1, '0000-00-00 00:00:00', '2023-05-23 17:01:00', 0);
+INSERT INTO `supply_prices` VALUES (79, 'Giấy bồi khay', '0.5', 'fill', 0, '0.5 = 5000đ/m2', 1, '2030-11-01 00:00:00', '2023-05-23 17:01:00', 0);
+INSERT INTO `supply_prices` VALUES (80, 'Giấy bồi mặt trong', '0.5', 'fill', 0, '0.5 = 5000đ/m2', 1, '0000-00-00 00:00:00', '2023-05-23 17:01:00', 0);
+INSERT INTO `supply_prices` VALUES (81, 'Giấy bồi bìa', '0.5', 'fill', 0, '0.5 = 5000đ/m2', 1, '2030-11-01 00:00:00', '2023-05-23 17:01:00', 0);
 INSERT INTO `supply_prices` VALUES (89, 'Nam châm bé', '2000', 'magnet', 0, '1', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
 INSERT INTO `supply_prices` VALUES (90, 'Nam châm trung', '2000', 'magnet', 0, '1', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
 INSERT INTO `supply_prices` VALUES (91, 'Nam châm lớn', '2000', 'magnet', 0, '1', 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
@@ -14231,17 +14300,17 @@ INSERT INTO `supply_prices` VALUES (118, 'Carton 1.8ly', '1.3860', NULL, 21, 'Đ
 INSERT INTO `supply_prices` VALUES (119, 'Carton 2ly', '1', NULL, 21, NULL, 1, '2023-07-17 13:47:00', '2023-07-17 13:47:00', 1);
 INSERT INTO `supply_prices` VALUES (120, 'Carton 2.2ly', '1', NULL, 21, NULL, 1, '2023-07-17 13:49:00', '2023-07-17 13:49:00', 1);
 INSERT INTO `supply_prices` VALUES (121, 'Carton 2.5ly', '1', NULL, 21, NULL, 1, '2023-07-17 13:49:00', '2023-07-17 13:49:00', 1);
-INSERT INTO `supply_prices` VALUES (122, 'Carton 3ly', '1', NULL, 21, NULL, 1, '2023-07-17 13:49:00', '2023-07-17 13:49:00', 1);
+INSERT INTO `supply_prices` VALUES (122, 'Carton 3ly', '4', NULL, 21, NULL, 1, '0000-00-00 00:00:00', '2023-07-17 13:49:00', 1);
 INSERT INTO `supply_prices` VALUES (123, 'Carton 1ly', '1', NULL, 5, NULL, 1, '2023-07-17 14:05:00', '2023-07-17 14:05:00', 1);
 INSERT INTO `supply_prices` VALUES (124, 'Carton 1.2ly', '1', NULL, 5, NULL, 1, '2023-07-17 14:06:00', '2023-07-17 14:06:00', 1);
 INSERT INTO `supply_prices` VALUES (125, 'Carton 1.5ly', '1', NULL, 5, NULL, 1, '2023-07-17 14:06:00', '2023-07-17 14:06:00', 1);
-INSERT INTO `supply_prices` VALUES (126, 'Carton 1.8ly', '1', NULL, 5, NULL, 1, '2023-07-17 14:06:00', '2023-07-17 14:06:00', 1);
+INSERT INTO `supply_prices` VALUES (126, 'Carton 1.8ly', '1.3860', NULL, 5, NULL, 1, '0000-00-00 00:00:00', '2023-07-17 14:06:00', 1);
 INSERT INTO `supply_prices` VALUES (127, 'Carton 2ly', '1', NULL, 5, NULL, 1, '2023-07-17 14:07:00', '2023-07-17 14:07:00', 1);
 INSERT INTO `supply_prices` VALUES (128, 'Carton 2.2ly', '1', NULL, 5, NULL, 1, '2023-07-17 14:07:00', '2023-07-17 14:07:00', 1);
 INSERT INTO `supply_prices` VALUES (129, 'Carton 2.5ly', '1', NULL, 5, NULL, 1, '2023-07-17 14:07:00', '2023-07-17 14:07:00', 1);
 INSERT INTO `supply_prices` VALUES (131, 'Carton 3ly', '1', NULL, 5, NULL, 1, '2023-07-17 14:08:00', '2023-07-17 14:08:00', 1);
 INSERT INTO `supply_prices` VALUES (132, 'Carton 1.5ly', '1', NULL, 4, NULL, 1, '2023-07-17 14:11:00', '2023-07-17 14:11:00', 1);
-INSERT INTO `supply_prices` VALUES (133, 'Carton 1.8ly', '1', NULL, 4, NULL, 1, '2023-07-17 14:11:00', '2023-07-17 14:11:00', 1);
+INSERT INTO `supply_prices` VALUES (133, 'Carton 1.8ly', '1.3860', NULL, 4, NULL, 1, '0000-00-00 00:00:00', '2023-07-17 14:11:00', 1);
 INSERT INTO `supply_prices` VALUES (134, 'Carton 2ly', '1', NULL, 4, NULL, 1, '2023-07-17 14:12:00', '2023-07-17 14:12:00', 1);
 INSERT INTO `supply_prices` VALUES (135, 'Carton 2.2ly', '1', NULL, 4, NULL, 1, '2023-07-17 14:12:00', '2023-07-17 14:12:00', 1);
 INSERT INTO `supply_prices` VALUES (136, 'Carton 2.5ly', '1', NULL, 4, NULL, 1, '2023-07-17 14:12:00', '2023-07-17 14:12:00', 1);
@@ -14263,6 +14332,7 @@ INSERT INTO `supply_prices` VALUES (151, 'Carton 2.2ly', '1', NULL, 1, NULL, 1, 
 INSERT INTO `supply_prices` VALUES (152, 'Carton 2.5ly', '1', NULL, 1, NULL, 1, '2023-07-17 14:23:00', '2023-07-17 14:23:00', 1);
 INSERT INTO `supply_prices` VALUES (153, 'Carton 3ly', '1', NULL, 1, NULL, 1, '2023-07-17 14:23:00', '2023-07-17 14:23:00', 1);
 INSERT INTO `supply_prices` VALUES (154, 'Cao su non bồi nhung 0.8cm', '1', NULL, 22, NULL, 1, '2023-07-17 14:34:00', '2023-07-17 14:34:00', 1);
+INSERT INTO `supply_prices` VALUES (155, 'Cao su non bồi nhung 1cm', '14.6', NULL, 23, NULL, 1, '0000-00-00 00:00:00', '2023-07-18 09:34:00', 1);
 
 -- ----------------------------
 -- Table structure for supply_types
@@ -14282,7 +14352,7 @@ CREATE TABLE `supply_types`  (
   INDEX `name_index`(`name`) USING BTREE,
   INDEX `type_index`(`type`) USING BTREE,
   INDEX `act_indx`(`act`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of supply_types
@@ -14307,6 +14377,7 @@ INSERT INTO `supply_types` VALUES (26, 'Cao su non bồi nhung 1.8cm', 'rubber',
 INSERT INTO `supply_types` VALUES (27, 'Cao su non bồi nhung 2cm', 'rubber', NULL, NULL, 1, '0000-00-00 00:00:00', '2023-07-17 14:28:00', 1);
 INSERT INTO `supply_types` VALUES (28, 'Cao su non bồi nhung 2.5cm', 'rubber', NULL, NULL, 1, '0000-00-00 00:00:00', '2023-07-17 14:29:00', 1);
 INSERT INTO `supply_types` VALUES (29, 'Cao su non bồi nhung 3cm', 'rubber', NULL, NULL, 1, '0000-00-00 00:00:00', '2023-07-17 14:29:00', 1);
+INSERT INTO `supply_types` VALUES (30, 'C S Non 1cm', 'rubber', NULL, NULL, 1, '0000-00-00 00:00:00', '2023-07-18 09:30:00', 1);
 
 -- ----------------------------
 -- Table structure for supply_warehouses

@@ -47,5 +47,12 @@
             return @$command->status;
         }
     }
+
+    if (!function_exists('getSizeTitleProduct')) {
+        function getSizeTitleProduct($product)
+        {
+            return @$product['length'].' x '. @$product['width'].' x '.@$product['height'];
+        }
+    }
     
 ?>

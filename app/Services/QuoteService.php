@@ -63,7 +63,15 @@ class QuoteService extends BaseService
             if (empty($data['category'])) {
                 return returnMessageAjax(100, 'Bạn chưa chọn nhóm sản phẩm cho '. $data['name']);
             }
-    
+            if (empty($data['length'])) {
+                return returnMessageAjax(100, 'Bạn chưa nhập kích thước chiều dài cho '. $data['name']);
+            }
+            if (empty($data['width'])) {
+                return returnMessageAjax(100, 'Bạn chưa nhập kích thước chiều rộng cho '. $data['name']);
+            }
+            if (empty($data['height'])) {
+                return returnMessageAjax(100, 'Bạn chưa nhập kích thước chiều cao cho '. $data['name']);
+            }
             if (empty($data['design'])) {
                 return returnMessageAjax(100, 'Bạn chưa chọn mẫu thiết kế cho sản phẩm '. $data['name']);
             }
@@ -102,10 +110,19 @@ class QuoteService extends BaseService
         if (!empty($data['qty'])) {
             $data_action['qty'] = $data['qty'];
         }
+        if (!empty($data['length'])) {
+            $data_action['length'] = $data['length'];
+        }
+        if (!empty($data['width'])) {
+            $data_action['width'] = $data['width'];
+        }
+        if (!empty($data['height'])) {
+            $data_action['height'] = $data['height'];
+        }
         if (!empty($data['category'])) {
             $data_action['category'] = $data['category'];
         }
-        if (!empty($data['desgin'])) {
+        if (!empty($data['design'])) {
             $data_action['design'] = $data['design'];
         }
         if (!empty($data['size'])) {
@@ -240,7 +257,7 @@ class QuoteService extends BaseService
         $arr['pro_num'] = $num;
         $arr['pro_name'] = $product['name'];
         $arr['paper_materal'] = getFieldDataById('name', 'materals', $main_paper['size']['materal']);
-        $arr['pro_size'] = $product['size'];
+        $arr['pro_size'] = getSizeTitleProduct($product);
         $arr['pro_design'] = getFieldDataById('name', 'design_types', $product['design']);
         $arr['paper_print_tech'] = TDConstant::PRINT_TECH[@$main_paper['print']['machine']];
         $finish = '';

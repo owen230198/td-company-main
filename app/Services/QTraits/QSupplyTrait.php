@@ -72,8 +72,8 @@ trait QSupplyTrait{
       $finish_cost = 0;
       foreach ($stage as $key => $item) {
          $qttv_id = !empty($item['materal']) ? (int) $item['materal'] : 0;
-         $qttv = getDetailDataByID('SupplyPrice', $qttv_id);
-         $qttv_price = !empty($qttv['price']) ? (float) $qttv['price'] : 0; 
+         $qttv = getDetailDataByID('Device', $qttv_id);
+         $qttv_price = !empty($qttv['work_price']) ? (float) $qttv['work_price'] : 0; 
          $finish['stage'][$key]['qttv_price'] = $qttv_price;
          $finish['stage'][$key]['cost'] = self::$base_qty_pro * $qttv_price;
          $finish_cost += $finish['stage'][$key]['cost'];
