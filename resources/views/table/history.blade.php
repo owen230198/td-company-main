@@ -25,10 +25,13 @@
                         <td>
                             @include('view_table.datetime', ['value' => @$data->created_at])
                         </td>
+                        @php
+                            $htable = \DB::table('n_tables')->where('name', $data->table_map)->first();
+                        @endphp
                         <td>
                             <div>
-                                Nhân viên <strong class="color_main">{{ getFieldDataById('name', 'n_users', $data->user) }}</strong> đã 
-                                {{ mb_strtolower(getActionByKey($data->action)) }} 1 {{ getFieldDataById('note' , 'n_table', $user) }}
+                                Nhân viên <strong class="color_green">{{ getFieldDataById('name', 'n_users', $data->user) }}</strong> đã 
+                                <strong class="color_red">{{ mb_strtolower(getActionByKey($data->action)) }}</strong> 1 {{ @$htable->note }}
                             </div>
                         </td>
                         <td>

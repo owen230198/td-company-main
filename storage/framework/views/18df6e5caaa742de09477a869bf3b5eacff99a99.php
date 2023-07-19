@@ -25,10 +25,13 @@
                         <td>
                             <?php echo $__env->make('view_table.datetime', ['value' => @$data->created_at], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                         </td>
+                        <?php
+                            $htable = \DB::table('n_tables')->where('name', $data->table_map)->first();
+                        ?>
                         <td>
                             <div>
-                                Nhân viên <strong class="color_main"><?php echo e(getFieldDataById('name', 'n_users', $data->user)); ?></strong> đã 
-                                <?php echo e(mb_strtolower(getActionByKey($data->action))); ?> 1 <?php echo e(getFieldDataById('note' , 'n_table', $user)); ?>
+                                Nhân viên <strong class="color_green"><?php echo e(getFieldDataById('name', 'n_users', $data->user)); ?></strong> đã 
+                                <strong class="color_red"><?php echo e(mb_strtolower(getActionByKey($data->action))); ?></strong> 1 <?php echo e(@$htable->note); ?>
 
                             </div>
                         </td>
