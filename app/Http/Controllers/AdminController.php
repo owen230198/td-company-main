@@ -306,6 +306,9 @@ class AdminController extends Controller
             $q = '%'.trim($q).'%';
             $data = $data->where($label, 'like', $q);
         }
+        if (\Schema::hasColumn($table, 'ord')) {
+            $data = $data->orderBy('ord', 'asc');
+        }
         $data = $data->paginate(50)->all();
         $arr = array_map(function($item) use($label){
             $item_label = getlabelLinking($item, $label, true);
@@ -320,7 +323,12 @@ class AdminController extends Controller
         $cvalue = $request->input('cvalue'); 
         $where = $request->except('cvalue');
         $where['act'] = 1;
-        $data = \DB::table($table)->where($where)->orderBy('name', 'asc')->get();
+        $data = \DB::table($table)->where($where);
+        if (\Schema::hasColumn($table, 'ord')) {
+            $data = $data->orderBy('ord', 'asc')->get();
+        }else{
+            $data = $data->orderBy('name', 'asc')->get();    
+        }
         foreach ($data as $item) {
             if (@$item->id == $cvalue) {
                 $options .= '<option value = "'.@$item->id.'" selected>'.@$item->name.'</option>';

@@ -8,10 +8,21 @@
         $key_device_peel = \TDConst::PEEL;
         $key_device_cut = \TDConst::CUT;
         $key_device_mill = \TDConst::MILL; 
+        $pro_supply_name = [
+        'name' => 'product['.$pro_index.']['.$key_supp.']['.$supp_index.'][name]',
+        'type' => 'linking',
+        'note' => 'Chọn loại vật tư',
+        'attr' => ['required' => 1],
+        'value' => @$supply_obj->name,
+        'other_data' => ['config' => ['search' => 1], 'data' => ['table' => 'supply_types', 'where' => ['type' => $key_supp, 'is_name' => 1]]]
+    ];
     ?>
+
     <?php echo $__env->make('quotes.products.supplies.check_index_data', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     <?php echo $__env->make('quotes.products.supplies.title_config', ['divide' => $carton_divide, 'name' => $key_supp], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
+    <?php echo $__env->make('view_update.view', $pro_supply_name, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     
     <?php echo $__env->make('quotes.products.supplies.quantity_config', 
     ['compen_percent' => $carton_compen_percent], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>

@@ -48,7 +48,15 @@
                         <div class="device_list_by_supply">
                             {{-- <h3 class="fs-14 text-uppercase border_top_eb pt-3 mt-3 mb-2 text-center">ĐG Chất liệu & vật tư</h3> --}}
                             @foreach ($materal_supplies as $materal_supply)
-                                <a href="{{ url('view/'.$materal_supply['table'].'?default_data={"type":"'.$materal_supply['key'].'"}') }}" class="device_supp_item">
+                                @php
+                                    if ($materal_supply['table'] == 'supply_types') {
+                                        $default = 'default_data={"type":"'.$materal_supply['key'].'","is_name":"'.@$materal_supply['is_name'].'"}';
+                                    }else{
+                                        $default = 'default_data={"type":"'.$materal_supply['key'].'"}';   
+                                    }
+                                @endphp
+                                <a href="{{ url('view/'.$materal_supply['table'].'?'.$default) }}"
+                                 class="device_supp_item">
                                     {{ $materal_supply['name'] }}
                                 </a>    
                             @endforeach 

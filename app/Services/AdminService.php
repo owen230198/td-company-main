@@ -125,7 +125,7 @@ class AdminService extends BaseService
 
     public function getConditionTable($table, $field_name, $value)
     {
-        if (!empty($value)) {
+        if (isset($value)) {
             $field = NDetailTable::select('id', 'name', 'type', 'other_data')->where(['act' => 1, 'table_map' => $table, 'name' =>$field_name])->first();
             if (empty($field)) {
                 $where[] = ['key' => $field_name, 'value' => $value];

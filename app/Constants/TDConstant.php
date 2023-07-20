@@ -200,22 +200,23 @@
                 ['key' => self::UV, 'name' => 'Mực in UV', 'table' => 'materals']
             ],
             self::CARTON => [
-                ['key' => self::CARTON, 'name' => 'Loại vật tư', 'table' => 'supply_types']   
+                ['key' => self::CARTON, 'name' => 'Nhà cung cấp', 'table' => 'supply_types', 'is_name' => 0],
+                ['key' => self::CARTON, 'name' => 'Loại vật tư carton', 'table' => 'supply_types', 'is_name' => 1]    
             ],
             self::RUBBER => [
-                ['key' => self::RUBBER, 'name' => 'Loại vật tư', 'table' => 'supply_types']   
+                ['key' => self::RUBBER, 'name' => 'Loại vật tư', 'table' => 'supply_types', 'is_name' => 0]   
             ],
             self::DECAL => [
-                ['key' => self::DECAL, 'name' => 'Loại vật tư', 'table' => 'supply_prices']   
+                ['key' => self::DECAL, 'name' => 'Loại vật tư', 'table' => 'supply_prices', 'is_name' => 0]   
             ],
             self::SILK => [
-                ['key' => self::SILK, 'name' => 'Loại vật tư', 'table' => 'supply_prices']   
+                ['key' => self::SILK, 'name' => 'Loại vật tư', 'table' => 'supply_prices', 'is_name' => 0]   
             ],
             self::STYRO => [
-                ['key' => self::STYRO, 'name' => 'Loại vật tư', 'table' => 'supply_types']   
+                ['key' => self::STYRO, 'name' => 'Loại vật tư', 'table' => 'supply_types', 'is_name' => 0]   
             ],
             self::MICA => [
-                ['key' => self::MICA, 'name' => 'Loại vật tư', 'table' => 'supply_prices']   
+                ['key' => self::MICA, 'name' => 'Loại vật tư', 'table' => 'supply_prices', 'is_name' => 0]   
             ],
             self::FILL_FINISH => [
                 ['key' => self::FILL, 'name' => 'Loại giấy bồi', 'table' => 'supply_prices'],

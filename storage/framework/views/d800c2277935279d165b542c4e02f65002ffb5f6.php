@@ -48,7 +48,15 @@
                         <div class="device_list_by_supply">
                             
                             <?php $__currentLoopData = $materal_supplies; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $materal_supply): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <a href="<?php echo e(url('view/'.$materal_supply['table'].'?default_data={"type":"'.$materal_supply['key'].'"}')); ?>" class="device_supp_item">
+                                <?php
+                                    if ($materal_supply['table'] == 'supply_types') {
+                                        $default = 'default_data={"type":"'.$materal_supply['key'].'","is_name":"'.@$materal_supply['is_name'].'"}';
+                                    }else{
+                                        $default = 'default_data={"type":"'.$materal_supply['key'].'"}';   
+                                    }
+                                ?>
+                                <a href="<?php echo e(url('view/'.$materal_supply['table'].'?'.$default)); ?>"
+                                 class="device_supp_item">
                                     <?php echo e($materal_supply['name']); ?>
 
                                 </a>    

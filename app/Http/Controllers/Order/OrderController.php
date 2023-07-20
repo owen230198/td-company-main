@@ -21,17 +21,17 @@ class OrderController extends Controller
         $quote_id = $request->input('quote');
         $arr_quote = Quote::find($quote_id);
         if (!$request->isMethod('POST')) {
-            if (empty($arr_quote) || @$arr_quote['status'] == \StatusConst::NOT_ACCEPTED) {
-                return back()->with('error', 'Dữ liệu báo giá không hợp lệ!');
-            }
+            // if (empty($arr_quote) || @$arr_quote['status'] == \StatusConst::NOT_ACCEPTED) {
+            //     return back()->with('error', 'Dữ liệu báo giá không hợp lệ!');
+            // }
             $data = $this->services->getBaseDataAction($arr_quote, $quote_id);
             $data['title'] = 'Thêm đơn hàng - Mã báo giá : '.$arr_quote['seri'];
             $data['link_action'] = url('insert/orders');
             return view('orders.view', $data);
         }else{
-            if (!empty($request['order']['status'])) {
-                return returnMessageAjax(100, 'Dữ liệu không hợp lệ !');
-            }
+            // if (!empty($request['order']['status'])) {
+            //     return returnMessageAjax(100, 'Dữ liệu không hợp lệ !');
+            // }
             return $this->services->processDataOrder($request, $arr_quote); 
         }   
     }
