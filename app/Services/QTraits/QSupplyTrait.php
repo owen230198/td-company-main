@@ -1,8 +1,6 @@
 <?php
 namespace App\Services\QTraits;
 
-use App\Constants\TDConstant;
-
 trait QSupplyTrait{
    private function configDataCut($model_price, $work_price, $shape_price, $cut)
    {

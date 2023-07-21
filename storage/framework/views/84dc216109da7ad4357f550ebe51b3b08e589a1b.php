@@ -36,4 +36,6 @@
     <?php echo $__env->make('quotes.products.select_device', 
     ['key_device' => $key_device_peel, 'note' => 'Máy bóc lề', 
     'value' => !empty($supply_obj->id) ? @$data_peel['machine'] : getDeviceId(['key_device' => $key_device_peel, 'supply' => $key_supp, 'default_device' => 1]), 'element' => $key_supp], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    
+    <?php echo $__env->make('quotes.products.note_field', ['key_supp' => $key_supp], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 </div><?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/quotes/products/rubbers/ajax_view.blade.php ENDPATH**/ ?>

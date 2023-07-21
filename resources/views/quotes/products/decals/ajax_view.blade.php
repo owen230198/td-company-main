@@ -1,44 +1,9 @@
 <div class="quote_supp_item decal_module {{ $supp_index > 0 ? ' mt-4 border_green p-3 radius_5' : '' }}" data-index={{ @$supp_index ?? 0 }}>
     @php
         $key_supp = \TDConst::DECAL;
+        $decal_compen_percent = (float) getDataConfig('QuoteConfig', 'SILK_COMPEN_PERCENT');
         $decal_divide = \TDConst::DECAL_SIZE_DIVIDE;
-        $pro_decal_qty = [
-            'name' => 'product['.$pro_index.']['.$key_supp.']['.$supp_index.'][qty]',
-            'note' => 'Số lượng',
-            'value' => !empty($supply_obj->id) ? @$supply_obj->product_qty : @$pro_qty,
-            'attr' => ['type_input' => 'number', 'required' => 1]
-        ];
-
-        $arr_option = \TDConst::SELECT_SUPP_LINK;
-        array_push($arr_option, 'Khác');
-        $pro_decal_nqty = [
-            'name' => 'product['.$pro_index.']['.$key_supp.']['.$supp_index.'][nqty]',
-            'note' => 'Số bát',
-            'type' => 'select',
-            'attr' => ['inject_class' => 'select_decal_nqty'],
-            'value' => @$supply_obj->nqty,
-            'other_data' => ['data' => ['options' => $arr_option]]
-        ];
-        $pro_decal_qty_supp = [
-            'name' => 'product['.$pro_index.']['.$key_supp.']['.$supp_index.'][supp_qty_linking]',
-            'note' => 'Tổng SL vật tư',
-            'type' => 'select',
-            'value' => @$supply_obj->supp_qty_linking,
-            'other_data' => ['data' => ['options' => \TDConst::SELECT_SUPP_LINK]]
-        ];
-        $pro_decal_length_supp = [
-            'name' => 'product['.$pro_index.']['.$key_supp.']['.$supp_index.'][size][length]',
-            'note' => 'Kích thước chiều dài',
-            'attr' => ['type_input' => 'number', 'placeholder' => 'Nhập KT (cm)'],
-            'value' => @$supply_size['length']
-        ];
-
-        $pro_decal_width_supp = [
-            'name' => 'product['.$pro_index.']['.$key_supp.']['.$supp_index.'][size][width]',
-            'note' => 'Kích thước chiều rộng',
-            'attr' => ['type_input' => 'number', 'placeholder' => 'Nhập KT (cm)'],
-            'value' => @$supply_size['width']
-        ];
+        $decal_plus = \TDConst::DECAL_SIZE_PLUS;
         $pro_decal_supply = [
             'name' => 'product['.$pro_index.']['.$key_supp.']['.$supp_index.'][size][supply_price]',
             'type' => 'linking',
@@ -55,21 +20,15 @@
 
     @include('quotes.products.supplies.title_config', ['divide' => $decal_divide, 'name' => 'đề can nhung'])
 
-    @include('view_update.view', $pro_decal_qty)
+    @include('quotes.products.supplies.quantity_config', 
+    ['compen_percent' => $decal_compen_percent])
 
-    @include('view_update.view', $pro_decal_nqty)
-
-    @include('view_update.view', $pro_decal_qty_supp) 
-
-    <div class="module_decal_size" style="display: {{ @$supply_obj->nqty == 1 ? 'block' : 'none' }}">
-        @include('view_update.view', $pro_decal_length_supp) 
-
-        @include('view_update.view', $pro_decal_width_supp) 
-    </div>
+    @include('quotes.products.supplies.size_config', ['plus' => $decal_plus, 'divide' => $decal_divide])
 
     @include('view_update.view', $pro_decal_supply)
 
     @include('quotes.products.select_device', 
     ['key_device' => $key_device_cut, 'note' => 'Máy xén', 
     'value' => !empty($supply_obj->id) ? @$data_cut['machine'] : getDeviceId(['key_device' => $key_device_cut, 'supply' => $key_supp, 'default_device' => 1]), 'element' => $key_supp])
+    @include('quotes.products.note_field', ['key_supp' => $key_supp])
 </div>

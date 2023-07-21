@@ -11,7 +11,7 @@
                         $pro_name_field = [
                             'name' => $pro_base_name_input.'[name]',
                             'note' => 'Tên sản phẩm',
-                            'attr' => ['required' => 1, 'inject_class' => 'quote_set_product_name', 'placeholder' => 'Nhập tên'],
+                            'attr' => ['required' => 1, 'inject_class' => 'quote_set_product_name length_input', 'placeholder' => 'Nhập tên'],
                             'value' => !empty($product['id']) ? @$product['name'] : ''
                         ];
                         $pro_qty_field = [

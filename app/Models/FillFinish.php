@@ -22,7 +22,7 @@ class FillFinish extends Model
     {
         $data = $product[$type];
         $data_process = $this->getDataActionFillFinish($data);
-        $data_process['product_qty'] = $data['qty'];
+        $data_process['product_qty'] = $product['qty'];
         $data_process['product'] = $product_id;
         (new BaseService)->configBaseDataAction($data_process);
         if (!empty($data['id'])) {

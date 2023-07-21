@@ -44,7 +44,7 @@
                     <?php echo $__env->make('quotes.files.table', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     
                     <div class="text-center p-2 border_grey">
-                        <p class="fs-23 color_red font_bold mb-1">TỔNG GIÁ : 	<?php echo e(number_format(round((int)$data_quote['total_cost'], -3))); ?> VNĐ</p>
+                        <p class="fs-23 color_red font_bold mb-1">TỔNG GIÁ : 	<?php echo e(number_format(round((int)$data_quote['total_amount'], -3))); ?> VNĐ</p>
                         <p class="fs-18 font-italic">(Tổng cộng chưa VAT 10%)</p>
                     </div>
                 </div>

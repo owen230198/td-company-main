@@ -15,28 +15,29 @@
 </ul>
 <div class="d-flex align-items-center mt-2 pt-2 border_top">
     <p class="font_bold">Các công đoạn hoàn thiện:</p>
-    <ul class="ml-2 pl-2 list_stage_supply">
-        @foreach ($stage['stage'] as $fstage)
-            @if ($fstage['cost'] > 0)
-                <li class="mb-1 pb-1">
-                    @php
-                        convertCmToMeter($fstage['length'], $fstage['width'])
-                    @endphp
-                    <div class="mb-2 d-flex align-items-center">
-                        <span class="mr-1">Công đoạn hoàn thiện : </span>
-                        <p class="font_bold">{{ getFieldDataById('name', 'supply_prices', @$fstage['materal']) }}</p>
-                    </div>
-                    <div class="mb-2 d-flex align-items-center">
-                        <span class="mr-1">Chi phí công đoạn : </span>
-                        <p class="font_bold">{{ number_format($fstage['qttv_price']) }}đ</p>
-                    </div>
-                    <div class="mb-2 d-flex align-items-center">
-                        <span class="mr-1">Chi phí : </span>
-                        <p class="font_bold color_red">SL sản phẩm x Chi phí công đoạn = {{ $fstage['cost'] }}</p>
-                    </div>
-                </li>
-            @endif
-        @endforeach
+        @if (!empty($stage['stage']))
+            @foreach ($stage['stage'] as $fstage)
+                @if ($fstage['cost'] > 0)
+                    <li class="mb-1 pb-1">
+                        @php
+                            convertCmToMeter($fstage['length'], $fstage['width'])
+                        @endphp
+                        <div class="mb-2 d-flex align-items-center">
+                            <span class="mr-1">Công đoạn hoàn thiện : </span>
+                            <p class="font_bold">{{ getFieldDataById('name', 'supply_prices', @$fstage['materal']) }}</p>
+                        </div>
+                        <div class="mb-2 d-flex align-items-center">
+                            <span class="mr-1">Chi phí công đoạn : </span>
+                            <p class="font_bold">{{ number_format($fstage['qttv_price']) }}đ</p>
+                        </div>
+                        <div class="mb-2 d-flex align-items-center">
+                            <span class="mr-1">Chi phí : </span>
+                            <p class="font_bold color_red">SL sản phẩm x Chi phí công đoạn = {{ $fstage['cost'] }}</p>
+                        </div>
+                    </li>
+                @endif
+            @endforeach
+        @endif
     </ul>
 </div>
 

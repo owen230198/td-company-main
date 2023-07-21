@@ -22,9 +22,9 @@ class Paper extends Model
         foreach ($data as $paper) {
             $data_process = $this->getDataActionPaper($paper);
             $data_process['name'] = $paper['name'];
-            $data_process['product_qty'] = $paper['qty'];
+            $data_process['product_qty'] = $product['qty'];
             $data_process['nqty'] = $paper['nqty'];
-            $data_process['supp_qty'] = $paper['supp_qty'];
+            $data_process['supp_qty'] = getCeilSupplyQuantity($product['qty'], $paper['nqty']);
             $data_process['product'] = $product_id;
             $data_process['main'] = !empty($paper['main']) ? $paper['main'] : 0;
             (new BaseService)->configBaseDataAction($data_process);

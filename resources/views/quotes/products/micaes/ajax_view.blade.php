@@ -3,16 +3,7 @@
         $key_supp = \TDConst::MICA;
         $mica_divide = \TDConst::MICA_SIZE_DIVIDE;
         $mica_compen_percent = 0;
-        $mica_plus = \TDConst::MICA_SIZE_PLUS; 
-        $pro_mica_supply = [
-            'name' => 'product['.$pro_index.']['.$key_supp.']['.$supp_index.'][size][supply_price]',
-            'type' => 'linking',
-            'note' => 'Chọn vật tư',
-            'attr' => ['required' => 1, 'inject_class' => 'select_supply'],
-            'value' => @$supply_size['supply_price'],
-            'other_data' => ['config' => ['search' => 1], 
-            'data' => ['table' => 'supply_prices', 'where' => ['type' => $key_supp]]]
-        ];
+        $mica_plus = \TDConst::MICA_SIZE_PLUS;
         $key_device_elevate = \TDConst::ELEVATE;
         $key_device_peel = \TDConst::PEEL;
         $key_device_cut = \TDConst::CUT;
@@ -20,14 +11,14 @@
 
     @include('quotes.products.supplies.check_index_data')
 
-    @include('quotes.products.supplies.title_config', ['divide' => $mica_divide, 'name' => 'mica'])
+    @include('quotes.products.supplies.title_config', ['name' => 'mica'])
     
     @include('quotes.products.supplies.quantity_config', 
     ['compen_percent' => $mica_compen_percent])
 
-    @include('quotes.products.supplies.size_config', ['plus' => $mica_plus, 'divide' => $mica_divide])
+    @include('quotes.products.supplies.size_config', ['plus' => $mica_plus])
 
-    @include('view_update.view', $pro_mica_supply)
+    @include('quotes.products.supplies.select_supply_type')
 
     @php
         $data_cut = !empty($supply_obj->cut) ? json_decode($supply_obj->cut, true) : []; 
@@ -45,4 +36,5 @@
     @include('quotes.products.select_device', 
     ['key_device' => $key_device_peel, 'note' => 'Máy bóc lề', 
     'value' => !empty($supply_obj->id) ? @$data_peel['machine'] : getDeviceId(['key_device' => $key_device_peel, 'supply' => $key_supp, 'default_device' => 1]), 'element' => $key_supp])
+    @include('quotes.products.note_field', ['key_supp' => $key_supp])
 </div>

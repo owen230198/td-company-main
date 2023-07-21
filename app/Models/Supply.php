@@ -21,23 +21,24 @@ class Supply extends Model
     {
         $data = $product[$type];
         foreach ($data as $supply) {
-            if ($type == TDConstant::DECAL) {
-                if (in_array($supply['nqty'], [TDConstant::CARTON, TDConstant::RUBBER])) {
-                    $supply['size']['length'] = !empty($product[$supply['nqty']][0]['size']['length']) ? $product[$supply['nqty']][0]['size']['length'] : 0;
-                    $supply['size']['width'] = !empty($product[$supply['nqty']][0]['size']['width']) ? $product[$supply['nqty']][0]['size']['width'] : 0;
-                }
-                if (in_array($supply['supp_qty_linking'], [TDConstant::CARTON, TDConstant::RUBBER])) {
-                    $supply['supp_qty'] = !empty($product[$supply['nqty']][0]['supp_qty']) ? $product[$supply['nqty']][0]['supp_qty'] : 0;
-                }
-            }
+            // if ($type == TDConstant::DECAL) {
+            //     if (in_array($supply['nqty'], [TDConstant::CARTON, TDConstant::RUBBER])) {
+            //         $supply['size']['length'] = !empty($product[$supply['nqty']][0]['size']['length']) ? $product[$supply['nqty']][0]['size']['length'] : 0;
+            //         $supply['size']['width'] = !empty($product[$supply['nqty']][0]['size']['width']) ? $product[$supply['nqty']][0]['size']['width'] : 0;
+            //     }
+            //     if (in_array($supply['supp_qty_linking'], [TDConstant::CARTON, TDConstant::RUBBER])) {
+            //         $supply['supp_qty'] = !empty($product[$supply['nqty']][0]['supp_qty']) ? $product[$supply['nqty']][0]['supp_qty'] : 0;
+            //     }
+            // }
             $data_process = $this->getDataActionSupply($supply);
             $data_process['name'] = @$supply['name'];
-            $data_process['product_qty'] = $supply['qty'];
+            $data_process['product_qty'] = $product['qty'];
             $data_process['nqty'] = $supply['nqty'];
-            $data_process['supp_qty_linking'] = @$supply['supp_qty_linking'];
-            $data_process['supp_qty'] = @$supply['supp_qty'];
+            // $data_process['supp_qty_linking'] = @$supply['supp_qty_linking'];
+            $data_process['supp_qty'] = getCeilSupplyQuantity($product['qty'], $supply['nqty']);
             $data_process['type'] = $type;
             $data_process['product'] = $product_id;
+            $data_process['note'] = @$supply['note'];
             (new BaseService)->configBaseDataAction($data_process);
             if (!empty($supply['id'])) {
                 $process = $this->where('id', $supply['id'])->update($data_process);   

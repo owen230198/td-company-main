@@ -19,7 +19,9 @@
 		</a>
 	<?php endif; ?>
 	<?php if($tableItem['copy'] == 1): ?>
-		
+	<a href="<?php echo e(asset('clone/'.$tableItem['name'].'/'.$data->id.''.@$param_action)); ?>" class="table-btn mr-2 mb-2" title="Sao chép">
+		<i class="fa fa-clone fs-14" aria-hidden="true"></i>
+	</a>	
 	<?php endif; ?>
 	<?php if($tableItem['remove'] == 1): ?>
 		<button type="button" title="Xóa" class="btn btn-primary mb-2 table-btn delete_btn bg_red" data-toggle="modal" data-target="#deleteModal" data-id="<?php echo e($data->id); ?>">

@@ -7,7 +7,8 @@
             'name' => 'product['.$pro_index.']['.$key_supp.']['.$supp_index.'][name]',
             'note' => 'Tên sản phẩm',
             'attr' => ['required' => 1, 
-                        'inject_class' => $supp_index == 0 ? 'quote_receive_paper_name_main' : 'quote_receive_paper_name_ext'],
+                        'inject_class' => $supp_index == 0 ? 'length_input quote_receive_paper_name_main' 
+                        : 'length_input quote_receive_paper_name_ext'],
             'value' => @$supply_obj->name ?? @$supp_name
         ];
         $pro_paper_materals = [
@@ -34,17 +35,16 @@
             @php
                 $pro_paper_extend_name = [
                     'name' => '',
-                    'type' => 'select',
+                    'type' => 'linking',
                     'note' => 'Chọn tên phụ',
                     'attr' => ['required' => 1, 'inject_class' => 'select_ext_name_paper'],
-                    'other_data' => ['data' => ['options' => [
-                        @$supp_name => 'Chọn tên phụ cho lệnh in này',
-                        @$supp_name.' (Tờ bồi khay định hình)' => '1. Tờ bồi khay định hình',
-                        @$supp_name.' (Tờ bồi thành)' => '2. Tờ bồi thành',
-                        @$supp_name.' (Tờ bồi mặt trong hộp)' => '3. Tờ bồi mặt trong hộp',
-                        @$supp_name.' (Khay giấy định hình)' => '4. Khay giấy định hình',
-                        @$supp_name.' (Tờ phụ trang trí)' => '5. Tờ phụ trang trí'
-                    ]]]
+                    'other_data' => [
+                        'data' => [
+                            'table' => 'supply_types',
+                            'field_value' => 'name',
+                            'where' => ['type' => $key_supp, 'is_name' => 1]
+                        ]
+                    ]
                 ] 
             @endphp
             @include('view_update.view', $pro_paper_extend_name)

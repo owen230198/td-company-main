@@ -15,28 +15,29 @@
 </ul>
 <div class="d-flex align-items-center mt-2 pt-2 border_top">
     <p class="font_bold">Các công đoạn hoàn thiện:</p>
-    <ul class="ml-2 pl-2 list_stage_supply">
-        <?php $__currentLoopData = $stage['stage']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $fstage): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-            <?php if($fstage['cost'] > 0): ?>
-                <li class="mb-1 pb-1">
-                    <?php
-                        convertCmToMeter($fstage['length'], $fstage['width'])
-                    ?>
-                    <div class="mb-2 d-flex align-items-center">
-                        <span class="mr-1">Công đoạn hoàn thiện : </span>
-                        <p class="font_bold"><?php echo e(getFieldDataById('name', 'supply_prices', @$fstage['materal'])); ?></p>
-                    </div>
-                    <div class="mb-2 d-flex align-items-center">
-                        <span class="mr-1">Chi phí công đoạn : </span>
-                        <p class="font_bold"><?php echo e(number_format($fstage['qttv_price'])); ?>đ</p>
-                    </div>
-                    <div class="mb-2 d-flex align-items-center">
-                        <span class="mr-1">Chi phí : </span>
-                        <p class="font_bold color_red">SL sản phẩm x Chi phí công đoạn = <?php echo e($fstage['cost']); ?></p>
-                    </div>
-                </li>
-            <?php endif; ?>
-        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+        <?php if(!empty($stage['stage'])): ?>
+            <?php $__currentLoopData = $stage['stage']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $fstage): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <?php if($fstage['cost'] > 0): ?>
+                    <li class="mb-1 pb-1">
+                        <?php
+                            convertCmToMeter($fstage['length'], $fstage['width'])
+                        ?>
+                        <div class="mb-2 d-flex align-items-center">
+                            <span class="mr-1">Công đoạn hoàn thiện : </span>
+                            <p class="font_bold"><?php echo e(getFieldDataById('name', 'supply_prices', @$fstage['materal'])); ?></p>
+                        </div>
+                        <div class="mb-2 d-flex align-items-center">
+                            <span class="mr-1">Chi phí công đoạn : </span>
+                            <p class="font_bold"><?php echo e(number_format($fstage['qttv_price'])); ?>đ</p>
+                        </div>
+                        <div class="mb-2 d-flex align-items-center">
+                            <span class="mr-1">Chi phí : </span>
+                            <p class="font_bold color_red">SL sản phẩm x Chi phí công đoạn = <?php echo e($fstage['cost']); ?></p>
+                        </div>
+                    </li>
+                <?php endif; ?>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+        <?php endif; ?>
     </ul>
 </div>
 

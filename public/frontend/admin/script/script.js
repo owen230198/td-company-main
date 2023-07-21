@@ -271,10 +271,13 @@ var selectAjaxModule = function(section = $('.page_content '))
 }
 
 var phoneInputPrevent = function () {
-    $(document).on('keypress paste keydown', 'input[name*=phone]', function (e) {
-        let txt = String.fromCharCode(e.which);
-        if ((!txt.match(/^[0-9]+$/) && e.which !== 8) || e.which === 32)
+    $(document).on('keypress paste keydown', 'input[name*=phone]', function (event) {
+        let key = event.charCode ? event.charCode : event.keyCode;
+        if (key == 46)
+        {
+            event.preventDefault();
             return false;
+        } 
     });
 };
 
@@ -376,7 +379,7 @@ $(function () {
     menuSidebar();
     selectAjaxModule();
     multipleSelectModule();
-    // phoneInputPrevent();
+    phoneInputPrevent();
     fileUploadModule();
     receiveCommand();
     confirmTakeOutSupply();

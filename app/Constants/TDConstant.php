@@ -100,6 +100,7 @@
         const RUBBER_SIZE_PLUS = 2;
         const STYRO_SIZE_PLUS = 2;
         const SILK_SIZE_PLUS = 2;
+        const DECAL_SIZE_PLUS = 2;
         const MICA_SIZE_PLUS = 2;
         const CARTON_SIZE_DIVIDE = [100, 120];
         const RUBBER_SIZE_DIVIDE = [125, 250];
@@ -193,6 +194,7 @@
 
         const MATERAL_SUPPLY_TYPE = [
             self::PAPER => [
+                ['key' => self::PAPER, 'name' => 'Tên phụ giấy in', 'table' => 'supply_types', 'is_name' => 1],
                 ['key' => self::PAPER, 'name' => 'Chất liệu giấy', 'table' => 'materals'],
                 ['key' => self::NILON, 'name' => 'Chất liệu cán nilon', 'table' => 'materals'],
                 ['key' => self::METALAI, 'name' => 'Chất liệu cán metalai', 'table' => 'materals'],
@@ -206,17 +208,17 @@
             self::RUBBER => [
                 ['key' => self::RUBBER, 'name' => 'Loại vật tư', 'table' => 'supply_types', 'is_name' => 0]   
             ],
+            self::STYRO => [
+                ['key' => self::STYRO, 'name' => 'Loại vật tư', 'table' => 'supply_types', 'is_name' => 0]   
+            ],
             self::DECAL => [
                 ['key' => self::DECAL, 'name' => 'Loại vật tư', 'table' => 'supply_prices', 'is_name' => 0]   
             ],
             self::SILK => [
                 ['key' => self::SILK, 'name' => 'Loại vật tư', 'table' => 'supply_prices', 'is_name' => 0]   
             ],
-            self::STYRO => [
-                ['key' => self::STYRO, 'name' => 'Loại vật tư', 'table' => 'supply_types', 'is_name' => 0]   
-            ],
             self::MICA => [
-                ['key' => self::MICA, 'name' => 'Loại vật tư', 'table' => 'supply_prices', 'is_name' => 0]   
+                ['key' => self::MICA, 'name' => 'Loại vật tư', 'table' => 'supply_types', 'is_name' => 0]   
             ],
             self::FILL_FINISH => [
                 ['key' => self::FILL, 'name' => 'Loại giấy bồi', 'table' => 'supply_prices'],
@@ -232,9 +234,9 @@
             ['key' => 'papers', 'note' => 'Giấy in', 'pro_field' => self::PAPER, 'device' => self::PAPER_HARD_DEVICE ,'table' => 'papers'],
             ['key' => 'cartons', 'note' => 'Carton', 'pro_field' => self::CARTON, 'device' => self::CARTON_DEVICE ,'table' => 'supplies'],
             ['key' => 'rubbers', 'note' => 'Cao su non', 'pro_field' => self::RUBBER, 'device' => self::RUBBER_DEVICE ,'table' => 'supplies'],
+            ['key' => 'styrofoams', 'note' => 'Mút phẳng', 'pro_field' => self::STYRO, 'device' => self::STYRO_DEVICE ,'table' => 'supplies'],
             ['key' => 'decals', 'note' => 'Đề can nhung', 'pro_field' => self::DECAL, 'device' => self::DECAL_DEVICE ,'table' => 'supplies'],
             ['key' => 'silks', 'note' => 'Vải lụa', 'pro_field' => self::SILK, 'device' => self::SILK_DEVICE ,'table' => 'supplies'],
-            ['key' => 'styrofoams', 'note' => 'Mút phẳng', 'pro_field' => self::STYRO, 'device' => self::STYRO_DEVICE ,'table' => 'supplies'],
             ['key' => 'micaes', 'note' => 'Me Ka', 'pro_field' => self::MICA, 'device' => self::MICA_DEVICE ,'table' => 'supplies'],
             ['key' => 'fill_finishes', 'note' => 'Bồi + hoàn thiện', 'pro_field' => self::FILL_FINISH, 'table' => 'fill_finishes', 'device' => self::FILL_DEVICE] 
         ];

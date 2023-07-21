@@ -35,4 +35,5 @@
     @include('quotes.products.select_device', 
     ['key_device' => $key_device_peel, 'note' => 'Máy bóc lề', 
     'value' => !empty($supply_obj->id) ? @$data_peel['machine'] : getDeviceId(['key_device' => $key_device_peel, 'supply' => $key_supp, 'default_device' => 1]), 'element' => $key_supp])
+   @include('quotes.products.note_field', ['key_supp' => $key_supp])
 </div>

@@ -54,5 +54,14 @@
             return @$product['length'].' x '. @$product['width'].' x '.@$product['height'];
         }
     }
-    
+
+    if (!function_exists('getCeilSupplyQuantity')) {
+        function getCeilSupplyQuantity($product_qty, $nqty)
+        {
+            if ($nqty == 0) {
+                return 0;
+            }
+            return ceil($product_qty/$nqty);
+        }
+    }    
 ?>

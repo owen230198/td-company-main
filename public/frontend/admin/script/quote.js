@@ -13,7 +13,18 @@ var changQtyInput = function(){
     if (plan_qty.length>0) {
       plan_qty.trigger('change');
     }
-   });
+  });
+
+  $(document).on('keyup change', 'input.input_pro_qty', function(event){
+    event.preventDefault();
+    let parent = $(this).closest('.tab_pane_quote_pro');
+    let product_qty = parseInt($(this).val());
+    supp_product_qty = parent.find('.pro_qty_input');
+    if (supp_product_qty.length > 0) {
+      supp_product_qty.val(product_qty);
+      supp_product_qty.trigger('change');
+    }
+  });
 }
 
 var moduleSelectOtherPaper = function()
@@ -163,10 +174,11 @@ var removeItemAddedModule = function()
   $(document).on('click', 'span.remove_ext_element_quote', function(event){
     event.preventDefault();
     $(this).parent().remove();
-    if ($(this).data('id').length !== 0) {
+    let id = $(this).data('id'); 
+    if (id != undefined) {
       ajaxBaseCall({url:getBaseRoute('remove?ajax=1'), 
       type:'DELETE', 
-      data:{remove_id:$(this).data('id'), table:$(this).data('table')}});
+      data:{remove_id:id, table:$(this).data('table')}});
     }
   });
 }
@@ -186,7 +198,7 @@ var setNameProductQuote = function()
 
 var selectExtNamePaperModule = function()
 {
-  $(document).on('change', 'select.select_ext_name_paper', function(event){
+  $(document).on('keyup change', 'select.select_ext_name_paper', function(event){
     event.preventDefault();
     text = $(this).val();
     $(this).closest('.paper_product_config').find('input.quote_receive_paper_name_ext').val(text);

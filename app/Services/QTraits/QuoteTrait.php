@@ -52,6 +52,8 @@ trait QuoteTrait
             $elevate['float']['qty_pro'] = self::$qty_pro;
             $elevate['float']['nqty'] = self::$nqty;
             $elevate['float']['float_cost'] = $float_cost;
+        }else{
+            unset($elevate['float']);
         }
         $elevate['supp_qty'] = self::$supp_qty;
         $elevate['cost'] = $cost;

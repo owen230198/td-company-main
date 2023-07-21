@@ -15,6 +15,7 @@
 	if (!function_exists('getDeviceId')) {
 		function getDeviceId($where)
 		{
+			$where['act'] = 1;
 			$device = \DB::table('devices')->select('id')->where($where)->first();
 			return @$device->id ?? 0;
 		}

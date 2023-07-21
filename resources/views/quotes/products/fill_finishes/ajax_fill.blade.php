@@ -26,8 +26,6 @@
         <input type="number" name = 'product[{{ $pro_index }}][fill_finish][fill][stage][{{ $findex }}][width]' placeholder="KT chiều rộng (cm)" 
         class="form-control medium_input" step="any" value="{{ @$fill_data['width'] }}"> 
         <span class="mx-2">||</span> 
-        <div class="medium_input">
-            @include('view_update.linking', $data_select_fill)
-        </div>
+        @include('view_update.linking', $data_select_fill)
     </div>
 </div>

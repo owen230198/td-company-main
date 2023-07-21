@@ -252,7 +252,7 @@ class QuoteService extends BaseService
         }
     }
 
-    private function getArrValueExportQuote($product, $main_paper, $num = 1)
+    private function getArrValueExportQuote($product, $main_paper, $arr_quote, $num = 1)
     {
         $arr['pro_num'] = $num;
         $arr['pro_name'] = $product['name'];
@@ -278,7 +278,8 @@ class QuoteService extends BaseService
         }
         $arr['paper_finish'] = $finish;
         $arr['pro_qty'] = @$product['qty'];
-        $pro_total = (int) $product['total_cost'];
+        $pro_cost = (int) $product['total_cost'] + (float) $arr_quote['ship_price'];
+        $pro_total = calValuePercentPlus($product['total_cost'], $pro_cost, $arr_quote['profit']);
         $each_price = $pro_total / (int) @$product['qty'];
         $arr['pro_price'] = number_format($each_price);
         $arr['pro_total'] = number_format(round($pro_total, -3));
@@ -299,18 +300,17 @@ class QuoteService extends BaseService
         foreach ($products as $key => $product) {
             $main_paper = getDataProExportFile($product);
             $num = $key + 1;
-            $arr_value = $this->getArrValueExportQuote($product, $main_paper, $num);
+            $arr_value = $this->getArrValueExportQuote($product, $main_paper, $arr_quote, $num);
             array_push($list_pro, $arr_value);
         }
         if (count($list_pro) > 0) {
             $templateProcessor->cloneRowAndSetValues('pro_num', $list_pro);
         }
-
         $templateProcessor->setValue('quote_total', number_format(round((int) @$arr_quote['total_amount'], -3)));
         $user = getDetailDataByID('NUser', @$arr_quote['created_by']);
         $templateProcessor->setValue('user_name', @$user['name']);
         $templateProcessor->setValue('user_phone', @$user['phone']);
-        $fileName = $arr_quote['seri'].".docx";
+        $fileName = date('m-d-Y', Time()).'_'.$arr_quote['seri'].'_'.getFieldDataById('name', 'products', $products[0]['id']).'_'.$arr_quote['name'].".docx";
         $fileStorage = base_path('public/' . $fileName);
         $templateProcessor->saveAs($fileStorage);
         return response()->download($fileStorage);

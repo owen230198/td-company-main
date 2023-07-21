@@ -18,7 +18,7 @@
             </li>
         </ul>
         <span class="header_menu_user_avatar">
-            <img src="{{ asset('frontend/admin/images/avatar.jpg') }}" />
+            <img src="{{ asset('frontend/admin/images/avatar.png') }}" />
         </span>
     </div>
 </header>

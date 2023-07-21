@@ -17,7 +17,6 @@
 @endphp
 @include('view_update.view', $paper_nilon_materal)
 @include('view_update.view', $paper_nilon_face)
-
 @include('quotes.products.papers.handles.select_device', 
 ['key_device' => $key_stage, 
 'value' => !empty($data_paper->id) ? @$data_handle['machine'] : getDeviceId(['key_device' => $key_stage, 'supply' => 'paper', 'default_device' => 1])])

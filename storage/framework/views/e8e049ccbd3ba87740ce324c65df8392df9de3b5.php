@@ -27,8 +27,6 @@
         <input type="number" name = 'product[<?php echo e($pro_index); ?>][fill_finish][fill][stage][<?php echo e($findex); ?>][width]' placeholder="KT chiều rộng (cm)" 
         class="form-control medium_input" step="any" value="<?php echo e(@$fill_data['width']); ?>"> 
         <span class="mx-2">||</span> 
-        <div class="medium_input">
-            <?php echo $__env->make('view_update.linking', $data_select_fill, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-        </div>
+        <?php echo $__env->make('view_update.linking', $data_select_fill, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     </div>
 </div><?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/quotes/products/fill_finishes/ajax_fill.blade.php ENDPATH**/ ?>

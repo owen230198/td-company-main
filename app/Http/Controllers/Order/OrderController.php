@@ -5,7 +5,6 @@ use App\Models\CSupply;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Quote;
-use Carbon\Carbon;
 
 class OrderController extends Controller
 {
@@ -21,17 +20,20 @@ class OrderController extends Controller
         $quote_id = $request->input('quote');
         $arr_quote = Quote::find($quote_id);
         if (!$request->isMethod('POST')) {
-            // if (empty($arr_quote) || @$arr_quote['status'] == \StatusConst::NOT_ACCEPTED) {
-            //     return back()->with('error', 'Dữ liệu báo giá không hợp lệ!');
-            // }
+            if (empty($arr_quote) || @$arr_quote['status'] == \StatusConst::NOT_ACCEPTED) {
+                return back()->with('error', 'Dữ liệu báo giá không hợp lệ!');
+            }
+            if (getCountDataTable('orders', ['quote' => $quote_id]) > 0) {
+                return back()->with('error', 'Bạn đã tạo đơn hàng cho báo giá này rồi !');
+            }
             $data = $this->services->getBaseDataAction($arr_quote, $quote_id);
             $data['title'] = 'Thêm đơn hàng - Mã báo giá : '.$arr_quote['seri'];
             $data['link_action'] = url('insert/orders');
             return view('orders.view', $data);
         }else{
-            // if (!empty($request['order']['status'])) {
-            //     return returnMessageAjax(100, 'Dữ liệu không hợp lệ !');
-            // }
+            if (!empty($request['order']['status'])) {
+                return returnMessageAjax(100, 'Dữ liệu không hợp lệ !');
+            }
             return $this->services->processDataOrder($request, $arr_quote); 
         }   
     }
@@ -53,8 +55,7 @@ class OrderController extends Controller
                 return view('orders.users.'.\GroupUser::getCurrent().'.view', $data);
             }else{
                 return back()->with('error', 'Bạn không có quyền truy cập giao diện này !');
-            }
-            
+            } 
         }else{
             if (!empty($request['order']['status'])) {
                 return returnMessageAjax(100, 'Dữ liệu không hợp lệ !');

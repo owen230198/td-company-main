@@ -3,7 +3,7 @@
         'name' => 'product['.$pro_index.'][fill_finish][qty]',
         'note' => 'Số lượng',
         'value' => @$supply_obj->product_qty,
-        'attr' => ['type_input' => 'number', 'required' => 1,]
+        'attr' => ['type_input' => 'number', 'required' => 1, 'inject_class' => 'pro_qty_input']
     ];
 
     $data_fill = !empty($supply_obj->fill) ? json_decode($supply->fill, true) : [];

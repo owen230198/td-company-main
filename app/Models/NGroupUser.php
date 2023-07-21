@@ -24,6 +24,7 @@ class NGroupUser extends Model
     //group modules
     const GROUP_MODULE = [
         'quote_price_config' => 'Cài đặt đơn giá SX',
+        'customer' => 'Khách hàng',
         'customer_quote' => 'Báo giá & Khách hàng',
         'design_module' => 'Thiết kế',
         'order_handle' => 'Đơn hàng & sản xuất',
@@ -51,6 +52,11 @@ class NGroupUser extends Model
             'name' => 'Các thông số khác', 
             'link' => 'view/quote_configs', 
             'group' => 'quote_price_config'
+        ],
+        'customer_list' => [
+            'name' => 'DS khách hàng', 
+            'link' => 'view/customers', 
+            'group' => 'customer'
         ],
         'create_quote' => [
             'name' => 'Tính giá', 

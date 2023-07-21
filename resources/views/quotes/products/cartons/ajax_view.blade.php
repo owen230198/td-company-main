@@ -9,13 +9,13 @@
         $key_device_cut = \TDConst::CUT;
         $key_device_mill = \TDConst::MILL; 
         $pro_supply_name = [
-        'name' => 'product['.$pro_index.']['.$key_supp.']['.$supp_index.'][name]',
-        'type' => 'linking',
-        'note' => 'Chọn loại vật tư',
-        'attr' => ['required' => 1],
-        'value' => @$supply_obj->name,
-        'other_data' => ['config' => ['search' => 1], 'data' => ['table' => 'supply_types', 'where' => ['type' => $key_supp, 'is_name' => 1]]]
-    ];
+            'name' => 'product['.$pro_index.']['.$key_supp.']['.$supp_index.'][name]',
+            'type' => 'linking',
+            'note' => 'Chọn loại vật tư',
+            'attr' => ['required' => 1],
+            'value' => @$supply_obj->name,
+            'other_data' => ['config' => ['search' => 1], 'data' => ['table' => 'supply_types', 'where' => ['type' => $key_supp, 'is_name' => 1]]]
+        ];
     @endphp
 
     @include('quotes.products.supplies.check_index_data')
@@ -54,4 +54,6 @@
     @include('quotes.products.select_device', 
     ['key_device' => $key_device_peel, 'note' => 'Máy bóc lề', 
     'value' => !empty($supply_obj->id) ? @$data_peel['machine'] : getDeviceId(['key_device' => $key_device_peel, 'supply' => $key_supp, 'default_device' => 1]), 'element' => $key_supp])
+
+    @include('quotes.products.note_field')
 </div>

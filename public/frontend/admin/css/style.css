@@ -25,6 +25,12 @@ a:hover{
     width: 102px   
 }
 
+.config_content .form-control.length_input{
+    max-width: 750px;
+    min-width: 750px;
+    width: 750px   
+}
+
 .config_content .medium_input .select2.select2-container.select2-container--default,
 .config_content .medium_input .btn-group, .btn-group-vertical,
 .config_content .medium_input .multiselect-container,

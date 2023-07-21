@@ -2,7 +2,7 @@
     $select_config = !empty($other_data['config']) ? $other_data['config'] : [];
     $select_data = !empty($other_data['data']) ? $other_data['data'] : [];
     $field_title = @$select_data['field_title'] ?? 'name';
-    $field_value = @$select_data['select_data'] ?? 'id';
+    $field_value = @$select_data['field_value'] ?? 'id';
 ?>
 
 <?php if(@$select_config['search'] == 1): ?>

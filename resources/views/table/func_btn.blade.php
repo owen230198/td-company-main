@@ -20,7 +20,7 @@
 	@endif
 	@if ($tableItem['copy'] == 1)
 	<a href="{{ asset('clone/'.$tableItem['name'].'/'.$data->id.''.@$param_action) }}" class="table-btn mr-2 mb-2" title="Sao chép">
-		<i class="fa fa-pencil-square-o fs-14" aria-hidden="true"></i>
+		<i class="fa fa-clone fs-14" aria-hidden="true"></i>
 	</a>	
 	@endif
 	@if ($tableItem['remove'] == 1)
