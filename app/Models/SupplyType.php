@@ -13,4 +13,8 @@ class SupplyType extends Model
      */
     protected $table = 'supply_types';
     protected $protectFields = false;
+    public function afterRemove($id)
+    {
+        SupplyPrice::where('supply_id', $id)->delete();    
+    }
 }

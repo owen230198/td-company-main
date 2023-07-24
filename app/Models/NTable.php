@@ -17,6 +17,6 @@ class NTable extends Model
                         'insert' => ['quotes', 'orders'],
                         'update' => ['quotes', 'orders', 'c_designs'],
                         'copy' => ['quotes', 'orders'],
-                        'remove' => ['quotes', 'orders']
+                        'remove' => ['quotes', 'orders', 'supply_types']
                     ];
 }

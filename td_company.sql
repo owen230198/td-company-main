@@ -11,7 +11,7 @@
  Target Server Version : 100425
  File Encoding         : 65001
 
- Date: 22/07/2023 13:17:01
+ Date: 24/07/2023 23:48:00
 */
 
 SET NAMES utf8mb4;
@@ -13778,7 +13778,7 @@ INSERT INTO `n_tables` VALUES (3, 'n_roles', 'Phân quyền', 0, 'n_roles', 'n_r
 INSERT INTO `n_tables` VALUES (4, 'files', 'Kho Lưu trữ', 0, 'files', 'files', 24, 'media', NULL, '1', '1', '1', '1', '2023-04-23 11:30:46', '2023-04-23 11:30:46');
 INSERT INTO `n_tables` VALUES (5, 'quote_configs', 'Thông tin chung & Giá thành', 0, 'quote_configs', 'quote_configs', 100, 'config', NULL, '1', '1', '1', '1', '2023-05-09 16:15:02', '2023-05-09 16:15:02');
 INSERT INTO `n_tables` VALUES (6, 'customers', 'Khách hàng', 0, 'customers', 'customers', 10, 'view', NULL, '1', '1', '1', '1', '2023-04-23 11:30:46', '2023-04-23 11:30:46');
-INSERT INTO `n_tables` VALUES (7, 'quotes', 'Báo giá', 0, 'quotes', 'quotes', 10, 'view', '[\r\n	{\r\n		\"icon\":\"plus\",\r\n		\"note\":\"Thêm đơn hàng\", \r\n		\"link\":\"insert/orders?quote=\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"accepted\"}\r\n		]\r\n	},\r\n	{\r\n		\"icon\":\"check\",\r\n		\"note\":\"Duyệt đơn hàng\", \r\n		\"link\":\"appply_orders_customer?quote=\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"not_accepted\"}\r\n		]\r\n	}\r\n]', '1', '1', '1', '1', '2023-05-19 14:09:25', '2023-07-22 06:10:08');
+INSERT INTO `n_tables` VALUES (7, 'quotes', 'Báo giá', 0, 'quotes', 'quotes', 10, 'view', '[\r\n	{\r\n		\"icon\":\"plus\",\r\n		\"note\":\"Thêm đơn hàng\", \r\n		\"link\":\"insert/orders?quote=\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"accepted\"}\r\n		]\r\n	},\r\n	{\r\n		\"icon\":\"check\",\r\n		\"note\":\"Khách đã chốt giá\", \r\n		\"link\":\"appply_orders_customer?quote=\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"not_accepted\"}\r\n		]\r\n	}\r\n]', '1', '1', '1', '1', '2023-05-19 14:09:25', '2023-07-22 13:19:30');
 INSERT INTO `n_tables` VALUES (8, 'q_papers', 'Tờ in', 7, 'q_papers', 'q_papers', 10, 'view', NULL, '1', '1', '1', '1', '2023-04-23 11:30:46', '2023-04-23 11:30:46');
 INSERT INTO `n_tables` VALUES (9, 'devices', 'Thiết bị & Chi phí', 0, 'q_devices', 'q_devices', 10, 'view', NULL, '1', '1', '1', '1', '2023-04-23 11:30:46', '2023-04-23 11:30:46');
 INSERT INTO `n_tables` VALUES (10, 'materals', 'Chất liệu vật tư', 0, 'materals', 'materals', 10, 'view', NULL, '1', '1', '1', '1', '2023-04-28 10:32:23', '2023-04-28 10:32:23');

@@ -107,7 +107,7 @@ class AdminController extends Controller
     {
         $role = $this->admins->checkPermissionAction($table, __FUNCTION__);
         if (empty($role['allow'])) {
-            return customReturnMessage(false, $request->isMethod('POST'), ['message' => 'Không có quyền thao tác']);
+            return customReturnMessage(false, $request->isMethod('POST'), ['message' => 'Không có quyền thao tác !']);
         }
         if (in_array($table, NTable::$specific[__FUNCTION__])) {
             $controller = getObjectByTable($table);
@@ -137,7 +137,7 @@ class AdminController extends Controller
         $action_role = $request->isMethod('GET') ? 'view' : __FUNCTION__;
         $role = $this->admins->checkPermissionAction($table, $action_role, $dataItem);
         if (!@$role['allow']) {
-            return customReturnMessage(false, $request->isMethod('POST'), ['message' => 'Không có quyền thao tác']);
+            return customReturnMessage(false, $request->isMethod('POST'), ['message' => 'Không có quyền thao tác !']);
         }
         if (in_array($table, NTable::$specific['update'])) {
             $controller = getObjectByTable($table);
@@ -164,10 +164,11 @@ class AdminController extends Controller
 
     public function clone(Request $request, $table, $id)
     {
-        if (!$this->admins->checkPermissionAction($table, 'copy')) {
-            return redirect('permission-error');
+        $role = $this->admins->checkPermissionAction($table, __FUNCTION__);
+        if (empty($role['allow'])) {
+            return customReturnMessage(false, $request->isMethod('POST'), ['message' => 'Không có quyền thao tác !']);
         }
-        if (in_array($table, NTable::$specific['update'])) {
+        if (in_array($table, NTable::$specific['copy'])) {
             $controller = getObjectByTable($table);
             return $controller->clone($request, $id);
         }else{
@@ -181,30 +182,21 @@ class AdminController extends Controller
     }
 
     public function remove(Request $request){
-       $data = $request->all();
-       $id = $data['remove_id'];
-       $table = $data['table'];
-        if (!\GroupUser::isAdmin()) {
-            if (@$request->input('ajax') == 1) {
-                return returnMessageAjax(500, 'Bạn không có quyền thực hiện thao tác này !');
-            }else{
-                return back()->with('error','Bạn không có quyền thực hiện thao tác này !');   
-            }
+        $data = $request->all();
+        $id = $data['remove_id'];
+        $table = $data['table'];
+        $dataItem = \DB::table($table)->find($id);
+        $role = $this->admins->checkPermissionAction($table, __FUNCTION__);
+        $is_ajax = (boolean) $request->input('ajax');
+        if (empty($role['allow'])) {
+            $this->admins->logActionUserData(__FUNCTION__, $table, $id, $dataItem);
+            return customReturnMessage(false, $is_ajax, ['message' => 'Không có quyền thao tác !']);
         }
-       $success = $this->admins->removeDataTable($table, $id);
-       if ($success) {
-            if (@$request->input('ajax') == 1) {
-                return returnMessageAjax(200, 'Xoá thành công dữ liệu!');
-            }else{
-                return back()->with('message','Xoá thành công dữ liệu!'); 
-            }
+        $success = $this->admins->removeDataTable($table, $id);
+        if ($success) {
+            return customReturnMessage(true, $is_ajax, ['message' => 'Xoá thành công dữ liệu !']);
         }else {
-            if (@$request->input('ajax') == 1) {
-                return returnMessageAjax(500, 'Đã có lỗi xảy ra !');
-            }else{
-                return back()->with('error','Đã có lỗi xảy ra !');   
-            }
-            
+            return customReturnMessage(false, $is_ajax, ['message' => 'Đã có lỗi xảy ra !']);
         }
     }
 
