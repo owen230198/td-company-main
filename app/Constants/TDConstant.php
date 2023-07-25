@@ -56,7 +56,7 @@
         const UV = 'uv';
         const ELEVATE = 'elevate';
         const PEEL = 'peel';
-        const BOX_PASTE = 'box_paste'; 
+        const BOX_PASTE = 'box_paste';
         const EXT_PRICE = 'ext_price';
         const MILL = 'mill';
         const CUT = 'cut';
@@ -110,10 +110,6 @@
         const MICA_SIZE_DIVIDE = [160, 1000];
 
         const SELECT_SUPP_LINK = [0 => 'Chọn vật tư link', 'carton' => 'Vật tư carton', 'rubber' => 'Vật tư cao su non'];
-
-        //Loại thiết bị
-        const AUTO_DEVICE = 1;
-        const SEMI_AUTO_DEVICE = 2;
 
         //Vật tư
         const PAPER = 'paper';

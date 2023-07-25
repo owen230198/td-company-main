@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : localhost
+ Source Server         : owen
  Source Server Type    : MySQL
- Source Server Version : 100428
+ Source Server Version : 100425
  Source Host           : localhost:3306
  Source Schema         : td_company
 
  Target Server Type    : MySQL
- Target Server Version : 100428
+ Target Server Version : 100425
  File Encoding         : 65001
 
- Date: 25/07/2023 12:13:19
+ Date: 25/07/2023 16:04:56
 */
 
 SET NAMES utf8mb4;
@@ -14633,5 +14633,24 @@ INSERT INTO `supply_warehouses` VALUES (16, 'Băng lề mút phẳng k21 10x11',
 INSERT INTO `supply_warehouses` VALUES (17, 'Vật tư mica KT 100 x 50', '100', '50', '1000000', 'mica', 0, 93, 'imported', 1, NULL, 1, '2023-07-11 02:25:04', '2023-07-11 02:25:07', 1);
 INSERT INTO `supply_warehouses` VALUES (18, 'Vật tư mica KT 30 x 30', '30', '30', '1000000', 'mica', 0, 93, 'imported', 1, NULL, 1, '2023-07-11 02:25:04', '2023-07-11 02:25:07', 1);
 INSERT INTO `supply_warehouses` VALUES (19, 'Băng lề mica KT 2 x 18', '2', '18', '334', 'mica', NULL, NULL, 'waiting', 2, 'Nhập kho băng lề mica cho đơn này', 1, '2023-07-17 00:34:03', '2023-07-17 00:34:03', 8);
+
+-- ----------------------------
+-- Table structure for w_users
+-- ----------------------------
+DROP TABLE IF EXISTS `w_users`;
+CREATE TABLE `w_users`  (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `device` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `act` tinyint(4) NULL DEFAULT NULL,
+  `created_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `created_by` int(11) NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 SET FOREIGN_KEY_CHECKS = 1;

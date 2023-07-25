@@ -75,13 +75,9 @@ class AdminService extends BaseService
 
     public function getFieldAction($table, $action = 'view')
     {
-        return NDetailTable::where(['act' => 1, 'table_map'=> $table, $action => 1])->orderBy('ord', 'asc')->get()->toArray();
-    }
-
-    public function handleDataFieldShow($field_shows)
-    {
+        $list = NDetailTable::where(['act' => 1, 'table_map'=> $table, $action => 1])->orderBy('ord', 'asc')->get()->toArray();
         $rowspan = 1;
-        foreach ($field_shows as $key => $field) {
+        foreach ($list as $key => $field) {
             if($field['parent'] == 0 && $field['type'] == 'group'){
                 $rowspan = 2;
                 $field_shows[$key]['child'] = NDetailTable::where(['act' => 1, 'parent' => $field['id']])->orderBy('ord', 'asc')->get()->toArray();
@@ -104,8 +100,7 @@ class AdminService extends BaseService
 
     public function getBaseTable($table)
     {
-        $field_shows = $this->getFieldAction($table);
-        $data = $this->handleDataFieldShow($field_shows);
+        $data = $this->getFieldAction($table);
     	$data['tableItem'] = $this->getTableItem($table);
         return $data;
     }
@@ -120,7 +115,7 @@ class AdminService extends BaseService
         if ($data['view_type']=='config') {
             $data['regions'] = $this->regions->getRegionOfConfig($table);
         }else{
-            $data['field_searchs'] = NDetailTable::where(['act' => 1,'table_map' => $table, 'search' => 1])->orderBy('ord', 'asc')->get()->toArray();
+            $data['field_searchs'] = $this->getFieldAction($table, 'search');
         }
         return $data;
     }

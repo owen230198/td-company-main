@@ -5,6 +5,9 @@
         <div class="login_logo mb-4">
             <img src="{{ asset('frontend/admin/images/logo.png') }}" />
         </div>
+        <h3 class="fs-14 text-uppercase border_bot_eb pb-3 mb-3 text-center handle_title">
+            <p class="mb-1">{{ $title }}</p>
+        </h3>
         @if (@session(\StatusConst::ERR_MSG))
             <div class="alert alert-danger">
                 {{ session(\StatusConst::ERR_MSG)['messages'] }}

@@ -1,20 +1,21 @@
 <?php
 namespace App\Services;
 use App\Constants\StatusConstant;
-use App\Models\NUser;
 use App\Services\BaseService;
 class AuthService extends BaseService
 {
-    function __construct()
+    function __construct($auth_key = 'user_login', $table_user = 'n_users')
     {
     	parent::__construct();
+        $this->auth_key = $auth_key;
+        $this->table_user = getModelByTable($table_user);
     }
 
     public function hasLogin($request)
     {
     	$this->validatelogin($request);
         $request = $request->all();
-        $user = NUser::where('act', 1)->where('username', $request['username'])->first();
+        $user = $this->table_user->where('act', 1)->where('username', $request['username'])->first();
         if (!$user) {
             return $this->returnMessage(100, ['messages'=>'Không tìm thấy tài khoản trên hệ thống!']);
         }
@@ -23,9 +24,15 @@ class AuthService extends BaseService
             return $this->returnMessage(100, ['messages'=>'Thông tin mật khẩu không chính xác!']);
         }
         unset($user['password']);
-        $arr = $this->group_user::getMenuModule($user['group_user']);
+        $table_group = !empty($this->table_user::$table_group) ? $this->table_user::$table_group : '';
+        if ($table_group != '') {
+            $group_obj = getModelByTable($table_group);
+            if (method_exists($group_obj, 'getMenuModule')) {
+                $arr = $group_obj::getMenuModule($user['group_user']);
+            }
+        }
         $arr['user'] = $user;
-        session()->put('user_login', $arr);
+        session()->put($this->auth_key, $arr);
         return $this->returnMessage(200, ['messages'=>'Đăng nhập thành công!']);
     }
 
@@ -75,5 +82,13 @@ class AuthService extends BaseService
         }
         return redirect(asset('login'))->withInput()->with($result['messageCode'], $result['errorMessage']);
     }
-
+    public function baseLogout($prefix = '')
+    {
+        $ret = !empty($prefix) ? $prefix.'/login' : 'login';
+        if (session()->has($this->auth_key)) {
+            session()->forget($this->auth_key);
+            return redirect(asset($ret));
+        }
+        return redirect(asset($ret));
+    }
 }

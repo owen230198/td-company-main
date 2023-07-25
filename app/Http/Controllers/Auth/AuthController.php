@@ -13,7 +13,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->service = new \App\Services\AuthService;
+        $this->services = new \App\Services\AuthService;
     }
 
     /**
@@ -29,11 +29,7 @@ class AuthController extends Controller
 
     public function logout ()
     {
-        if (session()->has('user_login')) {
-            session()->forget('user_login');
-            return redirect(asset('login'));
-        }
-        return redirect(asset('login'));
+        return $this->services->baseLogout();
     }
 }
 

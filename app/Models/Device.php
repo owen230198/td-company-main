@@ -13,4 +13,8 @@ class Device extends Model
      */
     protected $table = 'devices';
     protected $protectFields = false;
+
+    // Loại thiết bị
+    const AUTO_DEVICE = 1;
+    const SEMI_AUTO_DEVICE = 2;
 }

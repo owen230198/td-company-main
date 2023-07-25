@@ -8,7 +8,7 @@ class AuthController extends Controller
     public function __construct()
     {
         parent::__construct();
-        $this->services = new \App\Services\AuthService;
+        $this->services = new \App\Services\AuthService('worker_login', 'w_users');
     }
     
     public function login(Request $request)

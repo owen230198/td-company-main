@@ -11,10 +11,10 @@ class BaseService
 	{
 		if (empty($data['id'])) {
 			$data['created_by'] = @getSessionUser()['id'];
-			$data['created_at'] = !empty($data['created_at']) ? getDataDateTime($data['created_at']) : date('Y-m-d H:i:s', Time());
+			$data['created_at'] = date('Y-m-d H:i:s', Time());
+			$data['act'] = isset($data['act']) ? $data['act'] : 1;
 		}
-		$data['act'] = isset($data['act']) ? $data['act'] : 1;
-		$data['updated_at'] = !empty($data['updated_at']) ? getDataDateTime($data['updated_at']) : date('Y-m-d H:i:s', Time());
+		$data['updated_at'] = date('Y-m-d H:i:s', Time());
 	}
 
 	public function validateDataTable($field, $attr, $value)
@@ -40,21 +40,20 @@ class BaseService
 
 	public function processDataBefore($data, $table)
 	{
+		unset($data['created_at'], $data['updated_at']);
 		foreach ($data as $key => $item) {
-            if ($key != 'created_at' && $key != 'updated_at') {
-				$field = \App\Models\NDetailTable::select(['type', 'attr', 'note', 'name', 'table_map'])->where(['table_map'=>$table, 'name'=>$key])->first();
-				$attr = !empty($field['attr']) ? json_decode($field['attr'], true) : [];
-				$validation = $this->validateDataTable($field, $attr, $item);
-				if ($validation['code'] == 100) {
-					return $validation;
-					break;
-				}
-				if (@$field['type'] == 'datetime') {
-					$data[$key] = getDataDateTime($item);
-				}elseif (@$attr['type_input'] == 'password') {
-					$data[$key] = md5($data['password']);
-				}  
+            $field = \App\Models\NDetailTable::select(['type', 'attr', 'note', 'name', 'table_map'])->where(['table_map'=>$table, 'name'=>$key])->first();
+			$attr = !empty($field['attr']) ? json_decode($field['attr'], true) : [];
+			$validation = $this->validateDataTable($field, $attr, $item);
+			if ($validation['code'] == 100) {
+				return $validation;
+				break;
 			}
+			if (@$field['type'] == 'datetime') {
+				$data[$key] = getDataDateTime($item);
+			}elseif (@$attr['type_input'] == 'password') {
+				$data[$key] = md5($data['password']);
+			} 
         }
 		$this->configBaseDataAction($data);
 		return ['code' => 200, 'data' => $data];

@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Str;
-
 return [
 
     /*
@@ -48,9 +47,9 @@ return [
             'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', 'localhost'),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'td_company'),
-            'username' => env('DB_USERNAME', 'root'),
-            'password' => env('DB_PASSWORD', ''),
+            'database' => isLocal() ? env('DB_DATABASE', 'td_company') : env('DB_DATABASE', 'nhwebbs9_db'),
+            'username' => isLocal() ? env('DB_USERNAME', 'root') : env('DB_USERNAME', 'nhwebbs9_db'),
+            'password' => isLocal() ? env('DB_PASSWORD', '') : env('DB_PASSWORD', 'l0os=k2p!wGx'),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',

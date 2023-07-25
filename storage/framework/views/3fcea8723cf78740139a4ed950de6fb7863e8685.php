@@ -5,6 +5,9 @@
         <div class="login_logo mb-4">
             <img src="<?php echo e(asset('frontend/admin/images/logo.png')); ?>" />
         </div>
+        <h3 class="fs-14 text-uppercase border_bot_eb pb-3 mb-3 text-center handle_title">
+            <p class="mb-1"><?php echo e($title); ?></p>
+        </h3>
         <?php if(@session(\StatusConst::ERR_MSG)): ?>
             <div class="alert alert-danger">
                 <?php echo e(session(\StatusConst::ERR_MSG)['messages']); ?>
