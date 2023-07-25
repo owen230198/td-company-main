@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : owen
+ Source Server         : localhost
  Source Server Type    : MySQL
- Source Server Version : 100425
+ Source Server Version : 100428
  Source Host           : localhost:3306
  Source Schema         : td_company
 
  Target Server Type    : MySQL
- Target Server Version : 100425
+ Target Server Version : 100428
  File Encoding         : 65001
 
- Date: 24/07/2023 23:48:00
+ Date: 25/07/2023 12:13:19
 */
 
 SET NAMES utf8mb4;
@@ -13778,7 +13778,7 @@ INSERT INTO `n_tables` VALUES (3, 'n_roles', 'Phân quyền', 0, 'n_roles', 'n_r
 INSERT INTO `n_tables` VALUES (4, 'files', 'Kho Lưu trữ', 0, 'files', 'files', 24, 'media', NULL, '1', '1', '1', '1', '2023-04-23 11:30:46', '2023-04-23 11:30:46');
 INSERT INTO `n_tables` VALUES (5, 'quote_configs', 'Thông tin chung & Giá thành', 0, 'quote_configs', 'quote_configs', 100, 'config', NULL, '1', '1', '1', '1', '2023-05-09 16:15:02', '2023-05-09 16:15:02');
 INSERT INTO `n_tables` VALUES (6, 'customers', 'Khách hàng', 0, 'customers', 'customers', 10, 'view', NULL, '1', '1', '1', '1', '2023-04-23 11:30:46', '2023-04-23 11:30:46');
-INSERT INTO `n_tables` VALUES (7, 'quotes', 'Báo giá', 0, 'quotes', 'quotes', 10, 'view', '[\r\n	{\r\n		\"icon\":\"plus\",\r\n		\"note\":\"Thêm đơn hàng\", \r\n		\"link\":\"insert/orders?quote=\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"accepted\"}\r\n		]\r\n	},\r\n	{\r\n		\"icon\":\"check\",\r\n		\"note\":\"Khách đã chốt giá\", \r\n		\"link\":\"appply_orders_customer?quote=\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"not_accepted\"}\r\n		]\r\n	}\r\n]', '1', '1', '1', '1', '2023-05-19 14:09:25', '2023-07-22 13:19:30');
+INSERT INTO `n_tables` VALUES (7, 'quotes', 'Báo giá', 0, 'quotes', 'quotes', 10, 'view', '[\r\n	{\r\n		\"icon\":\"plus\",\r\n		\"note\":\"Thêm đơn hàng\", \r\n		\"link\":\"insert/orders?quote=\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"accepted\"}\r\n		]\r\n	},\r\n	{\r\n		\"icon\":\"check\",\r\n		\"note\":\"Khách đã chốt giá\", \r\n		\"link\":\"apply-quote/\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"not_accepted\"}\r\n		]\r\n	}\r\n]', '1', '1', '1', '1', '2023-05-19 14:09:25', '2023-07-25 10:17:57');
 INSERT INTO `n_tables` VALUES (8, 'q_papers', 'Tờ in', 7, 'q_papers', 'q_papers', 10, 'view', NULL, '1', '1', '1', '1', '2023-04-23 11:30:46', '2023-04-23 11:30:46');
 INSERT INTO `n_tables` VALUES (9, 'devices', 'Thiết bị & Chi phí', 0, 'q_devices', 'q_devices', 10, 'view', NULL, '1', '1', '1', '1', '2023-04-23 11:30:46', '2023-04-23 11:30:46');
 INSERT INTO `n_tables` VALUES (10, 'materals', 'Chất liệu vật tư', 0, 'materals', 'materals', 10, 'view', NULL, '1', '1', '1', '1', '2023-04-28 10:32:23', '2023-04-28 10:32:23');
@@ -14255,8 +14255,8 @@ CREATE TABLE `quotes`  (
 INSERT INTO `quotes` VALUES (1, 'BG-00001', 'accepted', 'Công ty WS', NULL, 1, 'Công ty WS', 'Nguyễn Duy Khánh', '360 Mieng Ha, Hoa Sơn, Ung Hoa, TP Ha Noi', 'nguyenduykhanh2323@gmail.com', '0378050251', '0223344556', 351, '6.4781879832854', '200000', NULL, '210115181985.67', '223727051412.5', NULL, 1, NULL, '2023-07-16 15:20:38', '2023-07-16 15:20:38', 1);
 INSERT INTO `quotes` VALUES (11, 'BG-000014', 'accepted', 'CÔNG TY CP IN & SẢN XUẤT BAO BÌ TUẤN DUNG', NULL, 3, 'CÔNG TY CP IN & SẢN XUẤT BAO BÌ TUẤN DUNG', 'Mr Tuấn', 'Lô D5-16 Làng nghề Triều Khúc - Tân triều - HN', 'kd1.intuandung@gmail.com', '0963303999', '38303888', 351, '8', '0', NULL, '69568800', '75134304', NULL, 1, NULL, '2023-06-08 06:46:05', '2023-06-08 06:46:05', 4);
 INSERT INTO `quotes` VALUES (16, 'BG-000016', 'not_accepted', 'CÔNG TY CP IN & SẢN XUẤT BAO BÌ TUẤN DUNG', NULL, 3, 'CÔNG TY CP IN & SẢN XUẤT BAO BÌ TUẤN DUNG', 'Mr Tuấn', 'Lô D5-16 Làng nghề Triều Khúc - Tân triều - HN', 'kd1.intuandung@gmail.com', '0963303999', '38303888', 351, '10', '500000', NULL, '36653865', '40369251.5', NULL, 1, NULL, '2023-07-19 10:27:46', '2023-07-19 03:27:46', 1);
-INSERT INTO `quotes` VALUES (24, 'BG-000029', 'not_accepted', 'CTY DƯỢC PHẨM DIAMOND PHÁP', NULL, 5, 'CTY DƯỢC PHẨM DIAMOND PHÁP', 'Ms Hải', 'Khu CN Đồng Văn I - Hà Nam', 'zalo', '0917129458', '0917129458', 9047, NULL, NULL, NULL, '164458049.5', '164458049.5', NULL, 1, NULL, '2023-07-21 15:34:26', '2023-07-21 15:34:26', 1);
-INSERT INTO `quotes` VALUES (32, 'BG-000032', 'not_accepted', 'CTY DƯỢC PHẨM DIAMOND PHÁP', NULL, 5, 'CTY DƯỢC PHẨM DIAMOND PHÁP', 'Ms Hải', 'Khu CN Đồng Văn I - Hà Nam', 'zalo', '0917129458', '0917129458', 9047, NULL, NULL, NULL, '106533663.06', '106533663.06', NULL, 1, NULL, '2023-07-21 15:34:26', '2023-07-21 16:40:19', 1);
+INSERT INTO `quotes` VALUES (24, 'BG-000029', 'accepted', 'CTY DƯỢC PHẨM DIAMOND PHÁP', NULL, 5, 'CTY DƯỢC PHẨM DIAMOND PHÁP', 'Ms Hải', 'Khu CN Đồng Văn I - Hà Nam', 'zalo', '0917129458', '0917129458', 9047, NULL, NULL, NULL, '164458049.5', '164458049.5', NULL, 1, NULL, '2023-07-21 15:34:26', '2023-07-25 10:18:26', 1);
+INSERT INTO `quotes` VALUES (32, 'BG-000032', 'accepted', 'CTY DƯỢC PHẨM DIAMOND PHÁP', NULL, 5, 'CTY DƯỢC PHẨM DIAMOND PHÁP', 'Ms Hải', 'Khu CN Đồng Văn I - Hà Nam', 'zalo', '0917129458', '0917129458', 9047, NULL, NULL, NULL, '106533663.06', '106533663.06', NULL, 1, NULL, '2023-07-21 15:34:26', '2023-07-25 10:18:36', 1);
 INSERT INTO `quotes` VALUES (34, 'BG-000035', 'not_accepted', 'CTY DƯỢC PHẨM DIAMOND PHÁP', NULL, 5, 'CTY DƯỢC PHẨM DIAMOND PHÁP', 'Ms Hải', 'Khu CN Đồng Văn I - Hà Nam', 'zalo', '0917129458', '0917129458', 9047, '15', '1000000', NULL, '88232048.5', '101616855.7', NULL, 1, NULL, '2023-07-21 11:23:05', '2023-07-21 11:28:12', 1);
 INSERT INTO `quotes` VALUES (35, 'BG-000036', 'not_accepted', 'CTY DƯỢC PHẨM DIAMOND PHÁP', NULL, 5, 'CTY DƯỢC PHẨM DIAMOND PHÁP', 'Ms Hải', 'Khu CN Đồng Văn I - Hà Nam', 'zalo', '0917129458', '0917129458', 9047, '15', '1000000', NULL, '88232048.5', '101616855.7', NULL, 1, NULL, '2023-07-21 11:28:58', '2023-07-21 11:35:53', 1);
 INSERT INTO `quotes` VALUES (37, 'BG-000038', 'not_accepted', 'CTY DƯỢC PHẨM DIAMOND PHÁP', NULL, 5, 'CTY DƯỢC PHẨM DIAMOND PHÁP', 'Ms Hải', 'Khu CN Đồng Văn I - Hà Nam', 'zalo', '0917129458', '0917129458', 9047, '15', '1000000', NULL, '88232048.5', '101616855.7', NULL, 1, NULL, '2023-07-21 11:39:49', '2023-07-21 11:39:49', 1);

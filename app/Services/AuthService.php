@@ -62,4 +62,18 @@ class AuthService extends BaseService
 
     }
 
+    public function baseLogin($request, $data)
+    {
+        if (!$request->isMethod('post')) {
+            $data['nosidebar'] = true;
+            return view('auth.login', $data);
+        }
+        $result = $this->hasLogin($request);
+        if ($result['status'] === StatusConstant::SUCCESS_CODE) {
+            $rede = session('afterLoginRoute') ?? '/';
+            return redirect($rede)->with('message','Đăng nhập thành công!');
+        }
+        return redirect(asset('login'))->withInput()->with($result['messageCode'], $result['errorMessage']);
+    }
+
 }

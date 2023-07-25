@@ -388,6 +388,7 @@ input[type="checkbox"].toggle:disabled::after {
 
 .w_120{
     width: 120px;
+    min-width: 120px;
 }
 
 .sidebar li ul li a{

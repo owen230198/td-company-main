@@ -7,7 +7,6 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Quote\QuoteController;
 use App\Http\Controllers\Order\OrderController;
-use App\Http\Controllers\Product\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,6 +50,7 @@ Route::middleware(['check_login'])->group(function () {
 	Route::get('get-view-product-structure-data', [QuoteController::class, 'getViewProductStructureData']);
 	Route::any('quote-file-export/{id}', [QuoteController::class, 'QuoteFileExport']);
 	Route::any('send-quote/{id}', [QuoteController::class, 'sendQuote']);
+	Route::any('apply-quote/{id}', [QuoteController::class, 'applyQuote']);
 
 	//orders routes
 	Route::post('apply-order/{stage}/{id}', [OrderController::class, 'applyOrder']);
@@ -59,3 +59,15 @@ Route::middleware(['check_login'])->group(function () {
 	Route::post('take-out-supply/{id}', [OrderController::class, 'takeOutSupply']);
 	Route::post('apply-to-worker-handle/{id}', [OrderController::class, 'applyToWorkerHandle']);
 });
+$modules_path = dirname(__DIR__) . '/App/Modules/';
+if (is_dir($modules_path)) {
+	$modules = scandir($modules_path);
+	foreach ($modules as $module) {
+		if (is_dir($modules_path) . '/' . $module) {
+			$routes_path = $modules_path . $module . '/Routes/web.php';
+			if (file_exists($routes_path)) {
+				require $routes_path;
+			}
+		}
+	}
+}

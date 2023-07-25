@@ -272,5 +272,22 @@ class QuoteController extends Controller
             return redirect(url(''))->with('error', 'Không tìm thấy dữ liệu báo giá !');
         }
     }
+
+    public function applyQuote($id)
+    {
+        if (\GroupUser::isAdmin() || \GroupUser::isSale()) {
+            $quote_obj = \DB::table('quotes')->where('id', $id);
+            $quote = $quote_obj->first();
+            if (@$quote->status != \StatusConst::NOT_ACCEPTED) {
+                return back()->with('error', 'Dữ liệu không hợp lệ !');
+            }
+            $update = $quote_obj->update(['status' => \StatusConst::ACCEPTED]);
+            if ($update) {
+                return back()->with('message', 'Báo giá đã được duyệt và sẵn sàng tạo đơn !');
+            }
+        }else{
+            return back()->with('error', 'Bạn không có quyền duyệt báo giá !');
+        }
+    }
 }
 

@@ -10,7 +10,7 @@
                 {{ session(\StatusConst::ERR_MSG)['messages'] }}
             </div>
         @endif
-        <form action="{{ asset('login') }}" method="POST" class="form_login form-group">
+        <form action="{{ asset(@$link_login ?? 'login') }}" method="POST" class="form_login form-group">
             @csrf
             @error ('username')
                 <div class="alert alert-danger">

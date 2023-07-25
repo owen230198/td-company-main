@@ -23,17 +23,8 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-    	if (!$request->isMethod('post')) {
-            $data['title'] = 'Login';
-            $data['nosidebar'] = true;
-            return view('auth.login', $data);
-        }
-        $result = $this->service->hasLogin($request);
-        if ($result['status'] === StatusConstant::SUCCESS_CODE) {
-            $rede = session('afterLoginRoute')??'/';
-            return redirect($rede)->with('message','Đăng nhập thành công!');
-        }
-        return redirect(asset('login'))->withInput()->with($result['messageCode'], $result['errorMessage']);
+        $data['title'] = 'Đăng nhập - Nhân viên văn phòng';
+    	return $this->services->baseLogin($request, $data);
     }
 
     public function logout ()

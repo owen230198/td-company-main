@@ -11,7 +11,7 @@
 
             </div>
         <?php endif; ?>
-        <form action="<?php echo e(asset('login')); ?>" method="POST" class="form_login form-group">
+        <form action="<?php echo e(asset(@$link_login ?? 'login')); ?>" method="POST" class="form_login form-group">
             <?php echo csrf_field(); ?>
             <?php $__errorArgs = ['username'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
