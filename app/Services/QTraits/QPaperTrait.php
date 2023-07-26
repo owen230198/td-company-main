@@ -139,6 +139,7 @@ trait QPaperTrait
         if (!empty($data['elevate'])) {
             $data_action['elevate'] = $this->configDataStage($data['elevate']);
         }
+
         if (!empty($data['peel'])) {
             $data_action['peel'] = $this->configDataStage($data['peel']);
         }
@@ -164,6 +165,10 @@ trait QPaperTrait
         
         if (!empty($data['ext_price'])) {
             $data_action['ext_price'] = $this->configDataExtPrice($data['ext_price']);
+        }
+
+        if (!empty($data['fold'])) {
+            $data_action['fold'] = $this->configDataStage($data['fold'])
         }
         
         $data_action['total_cost'] = $this->priceCaculatedByArray($data_action);

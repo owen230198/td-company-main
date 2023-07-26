@@ -1,17 +1,15 @@
 <?php
-    use \App\Models\Order;
-    use \App\Models\CSupply;
     if (!function_exists('getOrderNameStageByKey')) {
         function getOrderNameStageByKey($key)
         {
             switch ($key) {
-                case Order::NOT_ACCEPTED:
+                case \App\Models\Order::NOT_ACCEPTED:
                     return 'Duyệt xuống P. Thiết kế';
                     break;
-                case Order::DESIGN_SUBMITED:
+                case \App\Models\Order::DESIGN_SUBMITED:
                     return 'Duyệt xuống P. Kế hoạch';
                     break;
-                case Order::TECH_SUBMITED:
+                case \App\Models\Order::TECH_SUBMITED:
                     return 'Xác nhận xuất khuôn';
                     break;
                 default:
@@ -42,7 +40,7 @@
         {
             $command = \DB::table('c_supplies')->where(['product' => $product, 'supply' => $supply, 'supp_type' => $type])->first();
             if (empty($command)) {
-                return CSupply::NOT_HANDLE;
+                return \App\Models\CSupply::NOT_HANDLE;
             }
             return @$command->status;
         }
@@ -63,5 +61,51 @@
             }
             return ceil($product_qty/$nqty);
         }
-    }    
-?>
+    }
+
+    if (!function_exists('getAfterPrintStageByCate')) {
+        function getAfterPrintStageByCate($category)
+        {
+            switch ($category) {
+                case \App\Models\ProductCategory::PAPER_BOX:
+                    return \TDConst::HANDLE_STAGE;
+                    break;
+
+                case \App\Models\ProductCategory::HARD_BOX:
+                    return \TDConst::HANDLE_STAGE_HARD;
+                    break;
+
+                case \App\Models\ProductCategory::PAPER_BAG:
+                    return \TDConst::HANDLE_STAGE_BAG;
+                    break;
+
+                case \App\Models\ProductCategory::STAMP:
+                    return \TDConst::HANDLE_STAGE_STAMP;
+                    break;
+
+                case \App\Models\ProductCategory::LABEL_STAMP:
+                    return \TDConst::HANDLE_STAGE_LABEL;
+                    break;
+
+                case \App\Models\ProductCategory::LEAFLET:
+                    return \TDConst::HANDLE_STAGE_LEAFLET;
+                    break;
+
+                default:
+                    return \TDConst::HANDLE_STAGE;
+                    break;
+            }
+        }
+    }
+
+    if (!function_exists('isBox')) {
+        function isNotBox($category)
+        {
+            $arr_box = [
+                \App\Models\ProductCategory::PAPER_BOX,
+                \App\Models\ProductCategory::HARD_BOX,
+                \App\Models\ProductCategory::PAPER_BAG
+            ];
+            return !in_array($category, $arr_box);
+        }
+    }

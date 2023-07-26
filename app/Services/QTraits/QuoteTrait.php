@@ -124,7 +124,7 @@ trait QuoteTrait
             //Tính chi phí bồi
             $obj = $this->configDataFill($work_price, $shape_price, $data);
         }else{
-            //Tính chi phí bóc lề, dán hộp, máy phay
+            //Tính chi phí bóc lề, dán hộp, máy phay, máy gấp vạch
             $obj = $this->configDataByOnlyDevice($model_price, $work_price, $shape_price, $data);        
         }
         return $obj;    

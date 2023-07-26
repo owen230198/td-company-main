@@ -3,7 +3,7 @@
         <span>Phần công đoạn sản xuất in & sau in</span>
     </h3>
 <?php
-    $handle_stage =  isHardBox(@$cate) ? \TDConst::HANDLE_STAGE_HARD : \TDConst::HANDLE_STAGE
+    $handle_stage =  getAfterPrintStageByCate($cate);
 ?>
     <div class="quote_after_print_tab">
         <div class="d-flex">

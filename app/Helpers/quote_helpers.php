@@ -41,7 +41,7 @@
 	if (!function_exists('isHardBox')) {
 		function isHardbox($category)
 		{
-			return $category == \TDConst::HARD_BOX;
+			return $category == \App\Models\ProductCategory::HARD_BOX;
 		}
 	}
 

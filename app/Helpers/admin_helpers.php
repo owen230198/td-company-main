@@ -145,3 +145,13 @@ if (!function_exists('getlabelLinking')) {
         return $ret;
     }
 }
+
+if (!function_exists('processArrField')) {
+    function processArrField($field)
+    {
+        $arr = $field;
+        $arr['attr'] = !empty($field['attr']) ? json_decode($field['attr'], true) : [];
+        $arr['other_data'] = !empty($field['other_data']) ? json_decode($field['other_data'], true) : [];
+        return $arr;
+    }
+}

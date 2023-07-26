@@ -1,3 +1,4 @@
+@include('quotes.products.size')
 <div class="product_structure_quote">
     @if (count($elements) > 1)
         <ul class="nav nav-pills mb-3 quote_pro_strct_nav_link" id="quote-pro-{{ $pro_index }}-struct-tab" role="tablist">

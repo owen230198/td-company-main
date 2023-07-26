@@ -1,3 +1,4 @@
+<?php echo $__env->make('quotes.products.size', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <div class="product_structure_quote">
     <?php if(count($elements) > 1): ?>
         <ul class="nav nav-pills mb-3 quote_pro_strct_nav_link" id="quote-pro-<?php echo e($pro_index); ?>-struct-tab" role="tablist">

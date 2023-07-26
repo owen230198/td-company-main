@@ -61,6 +61,7 @@
         const MILL = 'mill';
         const CUT = 'cut';
         const BAG_PASTE = 'bag_paste';
+        const FOLD = 'fold';
         const HANDLE_STAGE = [
             ['key' => self::PRINT, 'note' => 'Quy cách - kiểu in', 'color' => 'normal'],
             ['key' => self::NILON, 'note' => 'Cán nilon', 'color' => 'normal'],
@@ -82,6 +83,49 @@
             ['key' => self::ELEVATE, 'note' => 'Máy bế', 'color' => 'normal'],
             ['key' => self::FLOAT, 'note' => 'Thúc nổi carton', 'color' => 'red'],
             ['key' => self::PEEL, 'note' => 'Máy bóc lề', 'color' => 'normal'],
+            ['key' => self::EXT_PRICE, 'note' => 'Phát sinh', 'color' => 'red']
+        ];
+
+        const HANDLE_STAGE_BAG = [
+            ['key' => self::PRINT, 'note' => 'Quy cách - kiểu in', 'color' => 'normal'],
+            ['key' => self::NILON, 'note' => 'Cán nilon', 'color' => 'normal'],
+            ['key' => self::METALAI, 'note' => 'Cán metalai', 'color' => 'red'],
+            ['key' => self::COMPRESS, 'note' => 'Ép nhũ', 'color' => 'red'],
+            ['key' => self::UV, 'note' => 'In lưới UV', 'color' => 'red'],
+            ['key' => self::ELEVATE, 'note' => 'Máy bế', 'color' => 'normal'],
+            ['key' => self::PEEL, 'note' => 'Máy bóc lề', 'color' => 'normal'],
+            ['key' => self::BAG_PASTE, 'note' => 'Máy dán túi giấy', 'color' => 'normal'],
+            ['key' => self::EXT_PRICE, 'note' => 'Phát sinh', 'color' => 'red']
+        ];
+
+        const HANDLE_STAGE_STAMP = [
+            ['key' => self::NILON, 'note' => 'Cán nilon', 'color' => 'normal'],
+            ['key' => self::COMPRESS, 'note' => 'Ép nhũ', 'color' => 'red'],
+            ['key' => self::ELEVATE, 'note' => 'Máy bế', 'color' => 'normal'],
+            ['key' => self::MILL, 'note' => 'Máy xén', 'color' => 'normal'],
+            ['key' => self::EXT_PRICE, 'note' => 'Phát sinh', 'color' => 'red']
+        ];
+
+        const HANDLE_STAGE_LABEL = [
+            ['key' => self::PRINT, 'note' => 'Quy cách - kiểu in', 'color' => 'normal'],
+            ['key' => self::NILON, 'note' => 'Cán nilon', 'color' => 'normal'],
+            ['key' => self::METALAI, 'note' => 'Cán metalai', 'color' => 'red'],
+            ['key' => self::COMPRESS, 'note' => 'Ép nhũ', 'color' => 'red'],
+            ['key' => self::UV, 'note' => 'In lưới UV', 'color' => 'red'],
+            ['key' => self::ELEVATE, 'note' => 'Máy bế', 'color' => 'normal'],
+            ['key' => self::PEEL, 'note' => 'Máy bóc lề', 'color' => 'normal'],
+            ['key' => self::EXT_PRICE, 'note' => 'Phát sinh', 'color' => 'red']
+        ];
+
+        const HANDLE_STAGE_LEAFLET = [
+            ['key' => self::PRINT, 'note' => 'Quy cách - kiểu in', 'color' => 'normal'],
+            ['key' => self::NILON, 'note' => 'Cán nilon', 'color' => 'normal'],
+            ['key' => self::METALAI, 'note' => 'Cán metalai', 'color' => 'red'],
+            ['key' => self::COMPRESS, 'note' => 'Ép nhũ', 'color' => 'red'],
+            ['key' => self::UV, 'note' => 'In lưới UV', 'color' => 'red'],
+            ['key' => self::ELEVATE, 'note' => 'Máy bế', 'color' => 'normal'],
+            ['key' => self::PEEL, 'note' => 'Máy bóc lề', 'color' => 'normal'],
+            ['key' => self::FOLD, 'note' => 'Máy gấp vạch', 'color' => 'normal'],
             ['key' => self::EXT_PRICE, 'note' => 'Phát sinh', 'color' => 'red']
         ];
 
@@ -133,7 +177,8 @@
                                 self::ELEVATE => 'Máy bế',
                                 self::PEEL => 'Máy bóc lề',
                                 self::BOX_PASTE => 'Máy dán hộp giấy',
-                                self::BAG_PASTE => 'Máy dán túi giấy'
+                                self::BAG_PASTE => 'Máy dán túi giấy',
+                                self::MILL => 'Máy xén'
                             ];
 
         const PAPER_HARD_DEVICE = [
@@ -146,7 +191,9 @@
                                 self::FLOAT => 'Máy thúc nổi carton',
                                 self::PEEL => 'Máy bóc lề',
                                 self::BOX_PASTE => 'Máy dán hộp giấy',
-                                self::BAG_PASTE => 'Máy dán túi giấy'
+                                self::BAG_PASTE => 'Máy dán túi giấy',
+                                self::MILL => 'Máy xén',
+                                self::FOLD => 'Máy gấp vạch'
                             ];
                             
         const CARTON_DEVICE = [
@@ -223,8 +270,6 @@
         ];
 
         //Cấu tạo sản phẩm
-        const HARD_BOX = 1;
-        const PAPER_BOX = 2;
         const PAPER_ELEMENT = [['key' => 'papers', 'note' => 'Giấy in', 'pro_field' => self::PAPER, 'device' => self::PAPER_DEVICE ,'table' => 'papers']];
         const HARD_ELEMENT = [
             ['key' => 'papers', 'note' => 'Giấy in', 'pro_field' => self::PAPER, 'device' => self::PAPER_HARD_DEVICE ,'table' => 'papers'],

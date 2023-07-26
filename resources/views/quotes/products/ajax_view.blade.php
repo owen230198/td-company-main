@@ -47,8 +47,6 @@
                         @include('view_update.view', $quote_pro_design)
                     </div>
 
-                    @include('quotes.products.size')
-
                     @if (!empty($order_get))
                         @include('orders.products.extend_info')   
                     @endif

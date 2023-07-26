@@ -80,11 +80,15 @@ class AdminService extends BaseService
         foreach ($list as $key => $field) {
             if($field['parent'] == 0 && $field['type'] == 'group'){
                 $rowspan = 2;
-                $field_shows[$key]['child'] = NDetailTable::where(['act' => 1, 'parent' => $field['id']])->orderBy('ord', 'asc')->get()->toArray();
-                $field_shows[$key]['colspan'] = !empty($field_shows[$key]['child']) ? count($field_shows[$key]['child']) : 1;
+                $list[$key]['child'] = NDetailTable::where(['act' => 1, 'parent' => $field['id']])->orderBy('ord', 'asc')->get()->toArray();
+                $list[$key]['colspan'] = !empty($list[$key]['child']) ? count($list[$key]['child']) : 1;
             }
         }
-        return ['rowspan' => $rowspan, 'field_shows' => $field_shows];
+        if ($action == 'view') {
+            return ['rowspan' => $rowspan, 'field_shows' => $list];
+        }else{
+            return $list;
+        }
     }
 
     public function getDataActionView($table, $action, $action_name, $param = [])

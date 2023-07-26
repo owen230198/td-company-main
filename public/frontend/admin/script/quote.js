@@ -201,7 +201,8 @@ var selectExtNamePaperModule = function()
   $(document).on('keyup change', 'select.select_ext_name_paper', function(event){
     event.preventDefault();
     text = $(this).val();
-    $(this).closest('.paper_product_config').find('input.quote_receive_paper_name_ext').val(text);
+    let main_name = $(this).closest('.config_handle_paper_pro').find('.quote_set_product_name').val();
+    $(this).closest('.paper_product_config').find('input.quote_receive_paper_name_ext').val(main_name + ' ' + text);
   });
 }
 

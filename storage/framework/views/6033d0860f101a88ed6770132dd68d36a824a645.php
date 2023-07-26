@@ -4,7 +4,7 @@
 	$list_options = !empty($select_data['options']) ? $select_data['options'] : [];
 ?>
 <div class="d-flex align-items-center w-100">
-	<select name="<?php echo e($name); ?>" class="form-control<?php echo e(@$configs['searchbox']?' select_config' : ''); ?>
+	<select name="<?php echo e($name); ?>" class="form-control<?php echo e(@$select_config['searchbox']?' select_config' : ''); ?>
 
 	<?php echo e(@$attr['inject_class'] ? ' '.$attr['inject_class'] : ''); ?>" 
 	<?php echo e(@$attr['placeholder'] ? 'placehoder='.$attr['placeholder'] : ''); ?> <?php echo e(@$attr['inject_attr'] ?? ''); ?>>
