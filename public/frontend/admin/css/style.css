@@ -31,6 +31,11 @@ a:hover{
     width: 750px   
 }
 
+select[readonly]
+{
+    pointer-events: none;
+}
+
 .config_content .medium_input .select2.select2-container.select2-container--default,
 .config_content .medium_input .btn-group, .btn-group-vertical,
 .config_content .medium_input .multiselect-container,

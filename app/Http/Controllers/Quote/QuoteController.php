@@ -6,6 +6,7 @@ use App\Models\Quote;
 use App\Constants\TDConstant;
 use App\Models\Product;
 use \App\Models\Customer;
+
 class QuoteController extends Controller
 {
     private $services;
@@ -206,6 +207,7 @@ class QuoteController extends Controller
         $data['cate'] = (int) $request->input('category');
         if (!empty($id) && !empty($data['cate'])) {
             $data['pro_index'] = (int) $request->input('proindex');
+            $data['product'] = Product::find($id);
             $data['elements'] = getProductElementData($data['cate'], $id);
             return view('quotes.products.structure', $data);
         }
@@ -288,6 +290,26 @@ class QuoteController extends Controller
         }else{
             return back()->with('error', 'Bạn không có quyền duyệt báo giá !');
         }
+    }
+
+    public function getAfterPrintView(Request $request)
+    {
+        $name = $request->input('name');
+        $data = $request->all();
+        $paper_ext = \DB::table('paper_extends')->where('name', $name)->get('category')->first();
+        $data['cate'] = @$paper_ext->category;
+        return view('quotes.products.papers.after_print', $data);
+    }
+
+    public function getDeviceByType(Request $request)
+    {
+        $type = $request->input('param');
+        $arr = $type == 'print' ? \TDConst::PRINT_TECH : [\App\Models\Device::AUTO_DEVICE => 'Thiết bị tự động', \App\Models\Device::SEMI_AUTO_DEVICE => 'Thiết bị bán tự động'];
+        $html = '<option value="0">Danh sách chọn</option>';
+        foreach ($arr as $value => $note) {
+            $html .= '<option value="'.$value.'">'.$note.'</option>';
+        }
+        echo $html;
     }
 }
 

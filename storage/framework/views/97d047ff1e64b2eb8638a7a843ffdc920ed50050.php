@@ -3,9 +3,11 @@
         <span>Phần công đoạn sản xuất in & sau in</span>
     </h3>
 <?php
-    $handle_stage =  getAfterPrintStageByCate($cate);
+    $cate = !empty($data_paper->ext_cate) ? $data_paper->ext_cate : @$cate;
+    $handle_stage =  getAfterPrintStageByCate(@$cate);
 ?>
     <div class="quote_after_print_tab">
+        <input type="hidden" name="product[<?php echo e($pro_index); ?>][paper][<?php echo e($supp_index); ?>][ext_cate]" value="<?php echo e($cate); ?>">
         <div class="d-flex">
             <div class="nav flex-column nav-pills  min_210 max_150 mr-3 bg_white" id="after-print-tab-pro<?php echo e($pro_index.'_'.$supp_index); ?>" role="tablist" aria-orientation="vertical">
                 <?php $__currentLoopData = $handle_stage; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $navkey => $nav): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>

@@ -2,12 +2,6 @@
 namespace App\Services\QTraits;
 
 trait QSupplyTrait{
-   private function configDataCut($model_price, $work_price, $shape_price, $cut)
-   {
-      $total = $this->getBaseTotalStage(self::$supp_qty, $model_price, $work_price, $shape_price);
-      $cut['supp_qty'] = self::$supp_qty;
-      return $this->getObjectConfig($cut, $total);
-   }
 
    public function getDataActionSupply($data)
    {

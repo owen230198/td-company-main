@@ -167,8 +167,12 @@ trait QPaperTrait
             $data_action['ext_price'] = $this->configDataExtPrice($data['ext_price']);
         }
 
+        if (!empty($data['cut'])) {
+            $data_action['cut'] = $this->configDataStage($data['cut']);
+        }
+
         if (!empty($data['fold'])) {
-            $data_action['fold'] = $this->configDataStage($data['fold'])
+            $data_action['fold'] = $this->configDataStage($data['fold']);
         }
         
         $data_action['total_cost'] = $this->priceCaculatedByArray($data_action);

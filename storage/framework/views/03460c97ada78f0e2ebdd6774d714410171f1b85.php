@@ -21,7 +21,7 @@
                             <td class="w_50"><?php echo e($key + 1); ?></td>
                             <td><?php echo e($product['name']); ?></td>
                             <?php
-                                $supply_product = isHardbox($product['category']) ? $supply_fields : \TDConst::PAPER_ELEMENT;
+                                $supply_product = \TDConst::HARD_ELEMENT;
                             ?>
                             <?php $__currentLoopData = $supply_product; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $supply): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <td>

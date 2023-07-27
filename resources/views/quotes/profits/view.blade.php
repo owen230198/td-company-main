@@ -21,7 +21,7 @@
                             <td class="w_50">{{ $key + 1 }}</td>
                             <td>{{ $product['name'] }}</td>
                             @php
-                                $supply_product = isHardbox($product['category']) ? $supply_fields : \TDConst::PAPER_ELEMENT;
+                                $supply_product = \TDConst::HARD_ELEMENT;
                             @endphp
                             @foreach ($supply_product as $supply)
                                 <td>

@@ -61,6 +61,13 @@ trait QuoteTrait
         return $this->getObjectConfig($elevate, $total);
     }
 
+    public function configDataCut($model_price, $work_price, $shape_price, $cut)
+   {
+      $total = $this->getBaseTotalStage(self::$supp_qty, $model_price, $work_price, $shape_price);
+      $cut['supp_qty'] = self::$supp_qty;
+      return $this->getObjectConfig($cut, $total);
+   }
+
     private function configDataByOnlyDevice($model_price, $work_price, $shape_price, $data)
     {
         $nqty = !empty($data['nqty']) ? (int) $data['nqty'] : 1;

@@ -3,7 +3,6 @@
         <ul class="supply_info">
             <li class="supply_item_inf">
                 <span class="font_bold mr-1">Tên vật tư: </span>
-                <?php dump(@$supply['note']); ?>
                 <span><?php echo e(@$item->name ?? @$supply['note']); ?></span>
             </li>
             <?php $__currentLoopData = $supply['device']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $device): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>

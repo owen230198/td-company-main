@@ -363,6 +363,18 @@ var confirmTakeOutSupply = function()
     });
 }
 
+var moduleSelectAjaxChild = function()
+{
+    $(document).on('change', 'select.__select_parent', function(event){
+        event.preventDefault();
+        let value = $(this).val();
+        let parent = $(this).closest('.__module_select_ajax_value_child');
+        let url =  parent.attr('link')+'?param='+value;
+        let ajax_target = parent.find('select.__select_child');
+        ajaxViewTarget(url, ajax_target, ajax_target);
+    })
+}
+
 $(function () {
     submitActionAjaxForm();
     confirmRemoveData();
@@ -383,4 +395,5 @@ $(function () {
     fileUploadModule();
     receiveCommand();
     confirmTakeOutSupply();
+    moduleSelectAjaxChild();
 });

@@ -3,9 +3,11 @@
         <span>Phần công đoạn sản xuất in & sau in</span>
     </h3>
 @php
-    $handle_stage =  getAfterPrintStageByCate($cate);
+    $cate = !empty($data_paper->ext_cate) ? $data_paper->ext_cate : @$cate;
+    $handle_stage =  getAfterPrintStageByCate(@$cate);
 @endphp
     <div class="quote_after_print_tab">
+        <input type="hidden" name="product[{{ $pro_index }}][paper][{{ $supp_index }}][ext_cate]" value="{{ $cate }}">
         <div class="d-flex">
             <div class="nav flex-column nav-pills  min_210 max_150 mr-3 bg_white" id="after-print-tab-pro{{ $pro_index.'_'.$supp_index }}" role="tablist" aria-orientation="vertical">
                 @foreach ($handle_stage as $navkey => $nav)

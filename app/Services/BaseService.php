@@ -17,7 +17,7 @@ class BaseService
 		$data['updated_at'] = date('Y-m-d H:i:s', Time());
 	}
 
-	public function validateDataTable($field, $attr, $value)
+	public function validateDataTable($field, $attr, $value, $data)
 	{
 		$ret['code'] = 200;
 		$note = mb_strtolower(@$field['note']);
@@ -29,7 +29,8 @@ class BaseService
 
 		if (!empty($attr['unique'])) {
 			$count = getCountDataTable($field['table_map'], [$field['name'] => $value]);
-			if ($count > 1) {
+			$check_count = isset($data['id']) ? 1 : 0;
+			if ($count > $check_count) {
 				$ret['code'] = 100;
 				$ret['message'] = $note. ' "'.$value.'" '.' đã tồn tại !';
 				return $ret;
@@ -44,7 +45,7 @@ class BaseService
 		foreach ($data as $key => $item) {
             $field = \App\Models\NDetailTable::select(['type', 'attr', 'note', 'name', 'table_map'])->where(['table_map'=>$table, 'name'=>$key])->first();
 			$attr = !empty($field['attr']) ? json_decode($field['attr'], true) : [];
-			$validation = $this->validateDataTable($field, $attr, $item);
+			$validation = $this->validateDataTable($field, $attr, $item, $data);
 			if ($validation['code'] == 100) {
 				return $validation;
 				break;

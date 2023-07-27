@@ -5,7 +5,6 @@
         <div class="tab-pane fade{{ $pro_index == 0 ? ' show active' : '' }} tab_pane_quote_pro" id="quote-pro-{{ $pro_index }}" role="tabpanel" aria-labelledby="quote-pro-{{ $pro_index }}-tab">
             <div class="config_handle_paper_pro">
                 <div class="mb-2 base_product_config">
-                    
                     @php
                         $pro_base_name_input = 'product['.$pro_index.']';
                         $pro_name_field = [
@@ -28,6 +27,9 @@
                             'other_data' => ['data' => ['table' => 'product_categories']],
                             'value' => @$product['category']
                         ];
+                        if (!empty($product['category'])) {
+                            $pro_category_field['attr']['readonly'] = 1;    
+                        }
                         $quote_pro_design = [
                             'name' => $pro_base_name_input.'[design]',
                             'note' => 'thiết kế',

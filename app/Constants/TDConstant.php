@@ -99,10 +99,11 @@
         ];
 
         const HANDLE_STAGE_STAMP = [
+            ['key' => self::PRINT, 'note' => 'Quy cách - kiểu in', 'color' => 'normal'],
             ['key' => self::NILON, 'note' => 'Cán nilon', 'color' => 'normal'],
             ['key' => self::COMPRESS, 'note' => 'Ép nhũ', 'color' => 'red'],
             ['key' => self::ELEVATE, 'note' => 'Máy bế', 'color' => 'normal'],
-            ['key' => self::MILL, 'note' => 'Máy xén', 'color' => 'normal'],
+            ['key' => self::CUT, 'note' => 'Máy xén', 'color' => 'normal'],
             ['key' => self::EXT_PRICE, 'note' => 'Phát sinh', 'color' => 'red']
         ];
 
@@ -192,7 +193,7 @@
                                 self::PEEL => 'Máy bóc lề',
                                 self::BOX_PASTE => 'Máy dán hộp giấy',
                                 self::BAG_PASTE => 'Máy dán túi giấy',
-                                self::MILL => 'Máy xén',
+                                self::CUT => 'Máy xén',
                                 self::FOLD => 'Máy gấp vạch'
                             ];
                             
@@ -237,7 +238,7 @@
 
         const MATERAL_SUPPLY_TYPE = [
             self::PAPER => [
-                ['key' => self::PAPER, 'name' => 'Tên phụ giấy in', 'table' => 'supply_types', 'is_name' => 1],
+                ['key' => self::PAPER, 'name' => 'Tên phụ giấy in', 'table' => 'paper_extends'],
                 ['key' => self::PAPER, 'name' => 'Chất liệu giấy', 'table' => 'materals'],
                 ['key' => self::NILON, 'name' => 'Chất liệu cán nilon', 'table' => 'materals'],
                 ['key' => self::METALAI, 'name' => 'Chất liệu cán metalai', 'table' => 'materals'],

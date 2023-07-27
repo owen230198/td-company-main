@@ -28,7 +28,8 @@
     <select name="{{ $name }}" 
             class="form-control {{ @$attr['inject_class'] }}" 
             {{ @$attr['inject_attr'] ?? '' }}
-            {{ @$attr['disable_field'] == 1 ? 'disabled' : '' }}>
+            {{ @$attr['disable_field'] == 1 ? 'disabled' : '' }}
+            {{ @$attr['readonly'] == 1 ? 'readonly' : '' }}>
         <option value="0">Chọn</option>
         @foreach ($list_options as $item)
             <option value="{{ $item->$field_value }}" {{ $item->$field_value == @$value ? 'selected' : '' }}>

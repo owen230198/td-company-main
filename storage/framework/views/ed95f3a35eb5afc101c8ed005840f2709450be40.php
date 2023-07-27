@@ -37,12 +37,15 @@
                     'name' => '',
                     'type' => 'linking',
                     'note' => 'Chọn tên phụ',
-                    'attr' => ['required' => 1, 'inject_class' => 'select_ext_name_paper'],
+                    'attr' => [
+                        'required' => 1, 
+                        'inject_class' => 'select_ext_name_paper', 
+                        'inject_attr' => 'pro_index = '."$pro_index".' supp_index = '."$supp_index".''
+                    ],
                     'other_data' => [
                         'data' => [
-                            'table' => 'supply_types',
-                            'field_value' => 'name',
-                            'where' => ['type' => $key_supp, 'is_name' => 1]
+                            'table' => 'paper_extends',
+                            'field_value' => 'name'
                         ]
                     ]
                 ] 
@@ -84,7 +87,11 @@
             </div>
         </div>
     </div>
-    <?php echo $__env->make('quotes.products.papers.after_print', ['data_paper' => @$supply_obj], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <div class="paper_ajax_after_print">
+        <?php if(@$supp_index == 0 || !empty($supply_obj)): ?>
+            <?php echo $__env->make('quotes.products.papers.after_print', ['data_paper' => $supply_obj], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>    
+        <?php endif; ?>
+    </div>
 </div>
 
 <?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/quotes/products/papers/ajax_view.blade.php ENDPATH**/ ?>

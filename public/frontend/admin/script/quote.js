@@ -202,7 +202,13 @@ var selectExtNamePaperModule = function()
     event.preventDefault();
     text = $(this).val();
     let main_name = $(this).closest('.config_handle_paper_pro').find('.quote_set_product_name').val();
-    $(this).closest('.paper_product_config').find('input.quote_receive_paper_name_ext').val(main_name + ' ' + text);
+    let parent = $(this).closest('.quote_product_structure');
+    parent.find('input.quote_receive_paper_name_ext').val(main_name + ' ( ' + text + ' )');
+    let pro_index = $(this).attr('pro_index');
+    let supp_index = $(this).attr('supp_index');
+    let link_ajax = 'get-after-print-view?pro_index='+pro_index+'&supp_index='+supp_index+'&name='+text;
+    let ajax_target = parent.find('.paper_ajax_after_print');
+    ajaxViewTarget(link_ajax, ajax_target, ajax_target);
   });
 }
 

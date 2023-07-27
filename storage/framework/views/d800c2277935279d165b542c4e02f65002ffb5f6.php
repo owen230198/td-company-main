@@ -51,6 +51,8 @@
                                 <?php
                                     if ($materal_supply['table'] == 'supply_types') {
                                         $default = 'default_data={"type":"'.$materal_supply['key'].'","is_name":"'.@$materal_supply['is_name'].'"}';
+                                    }elseif ($materal_supply['table'] == 'paper_extends') {
+                                        $default = '';
                                     }else{
                                         $default = 'default_data={"type":"'.$materal_supply['key'].'"}';   
                                     }

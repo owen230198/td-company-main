@@ -1,7 +1,4 @@
-<?php
-    $group_class = @$other_data['group_class'];
-?>
-<div class="group_class_view <?php echo e($group_class); ?>">
+<div class="group_class_view <?php echo e(@$other_data['group_class']); ?>" <?php echo e(@$other_data['inject_attr']); ?>>
     <?php $__currentLoopData = $child; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $field_child): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
         <?php
             $arr = processArrField($field_child);

@@ -24,6 +24,7 @@ class NGroupUser extends Model
     //group modules
     const GROUP_MODULE = [
         'quote_price_config' => 'Cài đặt đơn giá SX',
+        'factory' => 'Quản lí nhà xưởng',
         'customer' => 'Khách hàng',
         'customer_quote' => 'Báo giá & Khách hàng',
         'design_module' => 'Thiết kế',
@@ -42,6 +43,11 @@ class NGroupUser extends Model
             'name' => 'Đơn giá thiết bị máy', 
             'link' => 'config-device-price/supply_types?type=devices', 
             'group' => 'quote_price_config'
+        ],
+        'worker' =>[
+            'name' => 'Quản lí công nhân',
+            'link' => '',
+            'group' => 'factory'
         ],
         'price_materal' => [
             'name' => 'Đơn giá vật tư sx', 

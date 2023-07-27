@@ -18,8 +18,6 @@ class QuoteService extends BaseService
 	{
 		parent::__construct();
 	}
-    use QuoteTrait, QPaperTrait, QSupplyTrait;
-
     public function dataActionCustomer($customer_id, $data_customer)
     {
         $this->configBaseDataAction($data_customer);
@@ -63,15 +61,15 @@ class QuoteService extends BaseService
             if (empty($data['category'])) {
                 return returnMessageAjax(100, 'Bạn chưa chọn nhóm sản phẩm cho '. $data['name']);
             }
-            if (empty($data['length'])) {
-                return returnMessageAjax(100, 'Bạn chưa nhập kích thước chiều dài cho '. $data['name']);
-            }
-            if (empty($data['width'])) {
-                return returnMessageAjax(100, 'Bạn chưa nhập kích thước chiều rộng cho '. $data['name']);
-            }
-            if (empty($data['height'])) {
-                return returnMessageAjax(100, 'Bạn chưa nhập kích thước chiều cao cho '. $data['name']);
-            }
+            // if (empty($data['length'])) {
+            //     return returnMessageAjax(100, 'Bạn chưa nhập kích thước chiều dài cho '. $data['name']);
+            // }
+            // if (empty($data['width'])) {
+            //     return returnMessageAjax(100, 'Bạn chưa nhập kích thước chiều rộng cho '. $data['name']);
+            // }
+            // if (empty($data['height'])) {
+            //     return returnMessageAjax(100, 'Bạn chưa nhập kích thước chiều cao cho '. $data['name']);
+            // }
             if (empty($data['design'])) {
                 return returnMessageAjax(100, 'Bạn chưa chọn mẫu thiết kế cho sản phẩm '. $data['name']);
             }
@@ -152,6 +150,7 @@ class QuoteService extends BaseService
         if (!empty($data['note'])) {
             $data_action['note'] = json_encode($data['note']);
         }
+        
         $this->configBaseDataAction($data_action);
         return $data_action;
     }
