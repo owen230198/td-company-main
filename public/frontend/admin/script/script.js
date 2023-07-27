@@ -371,6 +371,7 @@ var moduleSelectAjaxChild = function()
         let parent = $(this).closest('.__module_select_ajax_value_child');
         let url =  parent.attr('link')+'?param='+value;
         let ajax_target = parent.find('select.__select_child');
+        ajax_target.attr('disabled', false);
         ajaxViewTarget(url, ajax_target, ajax_target);
     })
 }

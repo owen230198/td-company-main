@@ -15,6 +15,6 @@ class Device extends Model
     protected $protectFields = false;
 
     // Loại thiết bị
-    const AUTO_DEVICE = 1;
-    const SEMI_AUTO_DEVICE = 2;
+    const AUTO_DEVICE = 'auto';
+    const SEMI_AUTO_DEVICE = 'semi_auto';
 }

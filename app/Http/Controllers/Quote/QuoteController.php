@@ -305,7 +305,7 @@ class QuoteController extends Controller
     {
         $type = $request->input('param');
         $arr = $type == 'print' ? \TDConst::PRINT_TECH : [\App\Models\Device::AUTO_DEVICE => 'Thiết bị tự động', \App\Models\Device::SEMI_AUTO_DEVICE => 'Thiết bị bán tự động'];
-        $html = '<option value="0">Danh sách chọn</option>';
+        $html = '<option value="">Danh sách chọn</option>';
         foreach ($arr as $value => $note) {
             $html .= '<option value="'.$value.'">'.$note.'</option>';
         }
