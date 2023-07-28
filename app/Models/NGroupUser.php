@@ -46,7 +46,7 @@ class NGroupUser extends Model
         ],
         'worker' =>[
             'name' => 'Quản lí công nhân',
-            'link' => '',
+            'link' => 'list-worker-by-device/machine',
             'group' => 'factory'
         ],
         'price_materal' => [

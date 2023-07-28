@@ -77,7 +77,7 @@ class AdminController extends Controller
     public function configDevicePrice(Request $request, $step){
         if (!$request->isMethod('POST')) {
             if (!$this->group_users::isAdmin()) {
-                return redirect('permission-error');
+                return back()->with('error', 'Không có quyền truy cập !');
             }
             if ($step == 'supply_types') {
                 $data['type'] = $request->input('type');
@@ -97,6 +97,27 @@ class AdminController extends Controller
         }
     }
 
+    public function listWorkerByDevice(Request $request, $step)
+    {
+        if (\GroupUser::isAdmin()) {
+            $data['title'] = 'Danh sách tổ máy';
+            $data['step'] = $step;
+            if ($step == 'machine') {
+                $data['list_data'] = TDConstant::ALL_DEVICE_KEY;
+            }else{
+                $type = $request->input('type');
+                $data['list_data'] = getDeviceByKeyType($type);
+                if (!empty($data['list_data'][0])) {
+                    unset($data['list_data'][0]);
+                }
+                $data['type'] = $type;
+                $data['table_device'] = $type == TDConstant::PRINT ? 'printers' : 'devices';
+            }
+            return view('group_workers.view', $data);
+        }else{
+            return back()->with('error', 'Không có quyền truy cập !');
+        }
+    }
 
     public function searchTable(Request $request, $table)
     {

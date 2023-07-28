@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : owen
+ Source Server         : localhost
  Source Server Type    : MySQL
- Source Server Version : 100425
+ Source Server Version : 100428
  Source Host           : localhost:3306
  Source Schema         : td_company
 
  Target Server Type    : MySQL
- Target Server Version : 100425
+ Target Server Version : 100428
  File Encoding         : 65001
 
- Date: 28/07/2023 00:52:55
+ Date: 28/07/2023 23:28:13
 */
 
 SET NAMES utf8mb4;
@@ -12340,7 +12340,7 @@ CREATE TABLE `devices`  (
   `w_work_price` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `w_shape_price` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `key_device` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `type` tinyint(4) NULL DEFAULT NULL,
+  `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `supply` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `default_device` tinyint(4) NULL DEFAULT NULL,
   `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Ghi chú',
@@ -12355,50 +12355,50 @@ CREATE TABLE `devices`  (
 -- ----------------------------
 -- Records of devices
 -- ----------------------------
-INSERT INTO `devices` VALUES (1, 'Cán láng nước tự động', '0', '0', '50000', '40', '25000', 'nilon', 1, 'paper', NULL, NULL, 0, 0, '2023-05-23 17:01:35', '2023-07-27 17:01:35', 0);
-INSERT INTO `devices` VALUES (2, 'TỰ ĐỘNG', '0', '0', '100000', '25', '50000', 'compress', 1, 'paper', 1, NULL, 1, 0, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
-INSERT INTO `devices` VALUES (3, 'In UV tự động', '0', '700', '200000', '0', '0', 'uv', 1, 'paper', NULL, NULL, 1, 0, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
-INSERT INTO `devices` VALUES (4, 'MÁY BẾ NGÁP', '150', '150', '100000', '50', '50000', 'elevate', 1, 'paper', NULL, '150đ/cm ( Ví dụ: 43 x 65 x 150 = 420.000đ tiền khuôn', 1, 0, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
-INSERT INTO `devices` VALUES (5, 'Bóc lề tự động', '0', '10', '20000', '5', '0', 'peel', 1, 'paper', NULL, NULL, 0, 0, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
-INSERT INTO `devices` VALUES (6, 'MÁY RÁN TỰ ĐỘNG', '0', '50', '100000', '10', '25000', 'box_paste', 1, 'paper', NULL, NULL, 1, 0, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
-INSERT INTO `devices` VALUES (7, 'MÁY PHAY TỰ ĐỘNG', '0', '100', '100000', '25', '35000', 'mill', 1, 'carton', 1, NULL, 1, 0, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
-INSERT INTO `devices` VALUES (8, 'Cán láng nhiệt tự động', '0', '0', '50000', '40', '25000', 'nilon', 2, 'paper', 0, NULL, 0, 1, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 1);
-INSERT INTO `devices` VALUES (9, 'Máy ép thủy lực', '0', '0', '100000', '50', '35000', 'compress', 2, 'paper', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
-INSERT INTO `devices` VALUES (10, 'In UV bán tự động', '80', '700', '200000', '150', '100000', 'uv', 2, 'paper', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
-INSERT INTO `devices` VALUES (11, 'MÁY BẾ TỰ ĐỘNG', '150', '120', '150000', '30', '75000', 'elevate', 2, 'paper', NULL, '150đ/cm ( Ví dụ: 43 x 65 x 150 = 420.000đ tiền khuôn', 1, 1, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
-INSERT INTO `devices` VALUES (12, 'Bóc lề bán tự động', '0', '10', '30000', '5', '0', 'peel', 2, 'paper', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
-INSERT INTO `devices` VALUES (13, 'RÁN TAY THỦ CÔNG', '0', '100', '50000', '30', '25000', 'box_paste', 2, 'paper', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
-INSERT INTO `devices` VALUES (14, 'MÁY PHAY BÁN TỰ ĐỘNG', '0', '130', '100000', '35', '35000', 'mill', 2, 'carton', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
-INSERT INTO `devices` VALUES (15, 'Cán metalai tự động', '0', '0', '50000', '0', '0', 'metalai', 1, 'paper', NULL, NULL, 0, 0, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 1);
-INSERT INTO `devices` VALUES (16, 'Cán metalai bán tự động', '0', '0', '50000', '50', '25000', 'metalai', 2, 'paper', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 1);
-INSERT INTO `devices` VALUES (18, 'MÁY XÉN', '0', '100', '100000', '50', '10000', 'cut', 2, 'carton', 1, NULL, 1, 1, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
-INSERT INTO `devices` VALUES (19, 'Máy thúc nổi carton', '0', '100', '100000', '50', '500000', 'float', 1, 'paper', NULL, 'Chưa có máy', 0, 0, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
-INSERT INTO `devices` VALUES (20, 'MÁY BẾ TỰ ĐỘNG', '150', '120', '150000', '30', '75000', 'elevate', 1, 'carton', NULL, NULL, 1, 0, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
-INSERT INTO `devices` VALUES (21, 'MÁY BẾ NGÁP', '150', '150', '100000', '50', '50000', 'elevate', 2, 'carton', 1, '150đ/cm áp dụng cho tất cả các khuôn máy bế, Khuôn phức tạp + thêm ngoài theo cảm nhận', 1, 1, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
-INSERT INTO `devices` VALUES (23, 'MÁY BẾ NGÁP', '150', '1000', '100000', '500', '50000', 'elevate', 2, 'rubber', 1, NULL, 1, 1, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
-INSERT INTO `devices` VALUES (24, 'Máy bế tự động', '0', '100', '100000', '0', '0', 'elevate', 1, 'styrofoam', NULL, NULL, 1, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `devices` VALUES (25, 'Máy bế bán tự động', '0', '150', '100000', '0', '0', 'elevate', 2, 'styrofoam', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `devices` VALUES (26, 'Máy bế tự động', '0', '100', '100000', '0', '0', 'elevate', 1, 'mica', NULL, NULL, 1, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `devices` VALUES (27, 'Máy bế bán tự động', '0', '150', '100000', '0', '0', 'elevate', 2, 'mica', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `devices` VALUES (28, 'Máy xén  tự động', '0', '300', '100000', '0', '0', 'cut', 1, 'rubber', NULL, NULL, 0, 0, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
-INSERT INTO `devices` VALUES (29, 'MÁY XÉN', '0', '300', '100000', '0', '0', 'cut', 2, 'rubber', 1, NULL, 1, 1, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
-INSERT INTO `devices` VALUES (30, 'Máy xén  tự động', '0', '0', '50000', '0', '0', 'cut', 1, 'decal', NULL, NULL, 1, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `devices` VALUES (31, 'Máy xén bán tự động', '0', '0', '50000', '0', '0', 'cut', 2, 'decal', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `devices` VALUES (32, 'Máy xén  tự động', '0', '0', '50000', '0', '0', 'cut', 1, 'silk', NULL, NULL, 1, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `devices` VALUES (33, 'Máy xén bán tự động', '0', '0', '50000', '0', '0', 'cut', 2, 'silk', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `devices` VALUES (34, 'Máy xén  tự động', '0', '0', '50000', '0', '0', 'cut', 1, 'styrofoam', NULL, NULL, 0, 0, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
-INSERT INTO `devices` VALUES (35, 'MÁY XÉN', '0', '100', '50000', '50', '10000', 'cut', 2, 'styrofoam', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
-INSERT INTO `devices` VALUES (36, 'Máy xén  tự động', '0', '0', '50000', '0', '0', 'cut', 1, 'mica', NULL, NULL, 1, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `devices` VALUES (37, 'Máy xén bán tự động', '0', '100', '50000', '50', '20000', 'cut', 2, 'mica', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
-INSERT INTO `devices` VALUES (39, 'BÓC LỀ CARTON', '0', '20', '20000', '0', '0', 'peel', 2, 'carton', 1, NULL, 1, 1, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
-INSERT INTO `devices` VALUES (40, 'Máy bóc lề tự động', '0', '10', '20000', '0', '0', 'peel', 1, 'rubber', NULL, NULL, 0, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `devices` VALUES (41, 'Máy bóc lề bán tự động', '0', '30', '20000', '0', '0', 'peel', 2, 'rubber', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `devices` VALUES (42, 'Máy bóc lề tự động', '0', '10', '20000', '0', '0', 'peel', 1, 'styrofoam', NULL, NULL, 1, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `devices` VALUES (43, 'Máy bóc lề bán tự động', '0', '10', '20000', '0', '0', 'peel', 2, 'styrofoam', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `devices` VALUES (44, 'Máy bóc lề tự động', '0', '10', '20000', '0', '0', 'peel', 1, 'mica', NULL, NULL, 1, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
-INSERT INTO `devices` VALUES (45, 'Máy bóc lề bán tự động', '0', '10', '20000', '0', '0', 'peel', 2, 'mica', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
+INSERT INTO `devices` VALUES (1, 'Cán láng nước tự động', '0', '0', '50000', '40', '25000', 'nilon', '1', 'paper', NULL, NULL, 0, 0, '2023-05-23 17:01:35', '2023-07-27 17:01:35', 0);
+INSERT INTO `devices` VALUES (2, 'TỰ ĐỘNG', '0', '0', '100000', '25', '50000', 'compress', '1', 'paper', 1, NULL, 1, 0, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
+INSERT INTO `devices` VALUES (3, 'In UV tự động', '0', '700', '200000', '0', '0', 'uv', '1', 'paper', NULL, NULL, 1, 0, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
+INSERT INTO `devices` VALUES (4, 'MÁY BẾ NGÁP', '150', '150', '100000', '50', '50000', 'elevate', '1', 'paper', NULL, '150đ/cm ( Ví dụ: 43 x 65 x 150 = 420.000đ tiền khuôn', 1, 0, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
+INSERT INTO `devices` VALUES (5, 'Bóc lề tự động', '0', '10', '20000', '5', '0', 'peel', '1', 'paper', NULL, NULL, 0, 0, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
+INSERT INTO `devices` VALUES (6, 'MÁY RÁN TỰ ĐỘNG', '0', '50', '100000', '10', '25000', 'box_paste', '1', 'paper', NULL, NULL, 1, 0, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
+INSERT INTO `devices` VALUES (7, 'MÁY PHAY TỰ ĐỘNG', '0', '100', '100000', '25', '35000', 'mill', '1', 'carton', 1, NULL, 1, 0, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
+INSERT INTO `devices` VALUES (8, 'Cán láng nhiệt tự động', '0', '0', '50000', '40', '25000', 'nilon', '2', 'paper', 0, NULL, 0, 1, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 1);
+INSERT INTO `devices` VALUES (9, 'Máy ép thủy lực', '0', '0', '100000', '50', '35000', 'compress', '2', 'paper', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
+INSERT INTO `devices` VALUES (10, 'In UV bán tự động', '80', '700', '200000', '150', '100000', 'uv', '2', 'paper', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
+INSERT INTO `devices` VALUES (11, 'MÁY BẾ TỰ ĐỘNG', '150', '120', '150000', '30', '75000', 'elevate', '2', 'paper', NULL, '150đ/cm ( Ví dụ: 43 x 65 x 150 = 420.000đ tiền khuôn', 1, 1, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
+INSERT INTO `devices` VALUES (12, 'Bóc lề bán tự động', '0', '10', '30000', '5', '0', 'peel', '2', 'paper', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
+INSERT INTO `devices` VALUES (13, 'RÁN TAY THỦ CÔNG', '0', '100', '50000', '30', '25000', 'box_paste', '2', 'paper', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
+INSERT INTO `devices` VALUES (14, 'MÁY PHAY BÁN TỰ ĐỘNG', '0', '130', '100000', '35', '35000', 'mill', '2', 'carton', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
+INSERT INTO `devices` VALUES (15, 'Cán metalai tự động', '0', '0', '50000', '0', '0', 'metalai', '1', 'paper', NULL, NULL, 0, 0, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 1);
+INSERT INTO `devices` VALUES (16, 'Cán metalai bán tự động', '0', '0', '50000', '50', '25000', 'metalai', '2', 'paper', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 1);
+INSERT INTO `devices` VALUES (18, 'MÁY XÉN', '0', '100', '100000', '50', '10000', 'cut', '2', 'carton', 1, NULL, 1, 1, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
+INSERT INTO `devices` VALUES (19, 'Máy thúc nổi carton', '0', '100', '100000', '50', '500000', 'float', '1', 'paper', NULL, 'Chưa có máy', 0, 0, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
+INSERT INTO `devices` VALUES (20, 'MÁY BẾ TỰ ĐỘNG', '150', '120', '150000', '30', '75000', 'elevate', '1', 'carton', NULL, NULL, 1, 0, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
+INSERT INTO `devices` VALUES (21, 'MÁY BẾ NGÁP', '150', '150', '100000', '50', '50000', 'elevate', '2', 'carton', 1, '150đ/cm áp dụng cho tất cả các khuôn máy bế, Khuôn phức tạp + thêm ngoài theo cảm nhận', 1, 1, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
+INSERT INTO `devices` VALUES (23, 'MÁY BẾ NGÁP', '150', '1000', '100000', '500', '50000', 'elevate', '2', 'rubber', 1, NULL, 1, 1, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
+INSERT INTO `devices` VALUES (24, 'Máy bế tự động', '0', '100', '100000', '0', '0', 'elevate', '1', 'styrofoam', NULL, NULL, 1, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
+INSERT INTO `devices` VALUES (25, 'Máy bế bán tự động', '0', '150', '100000', '0', '0', 'elevate', '2', 'styrofoam', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
+INSERT INTO `devices` VALUES (26, 'Máy bế tự động', '0', '100', '100000', '0', '0', 'elevate', '1', 'mica', NULL, NULL, 1, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
+INSERT INTO `devices` VALUES (27, 'Máy bế bán tự động', '0', '150', '100000', '0', '0', 'elevate', '2', 'mica', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
+INSERT INTO `devices` VALUES (28, 'Máy xén  tự động', '0', '300', '100000', '0', '0', 'cut', '1', 'rubber', NULL, NULL, 0, 0, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
+INSERT INTO `devices` VALUES (29, 'MÁY XÉN', '0', '300', '100000', '0', '0', 'cut', '2', 'rubber', 1, NULL, 1, 1, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
+INSERT INTO `devices` VALUES (30, 'Máy xén  tự động', '0', '0', '50000', '0', '0', 'cut', '1', 'decal', NULL, NULL, 1, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
+INSERT INTO `devices` VALUES (31, 'Máy xén bán tự động', '0', '0', '50000', '0', '0', 'cut', '2', 'decal', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
+INSERT INTO `devices` VALUES (32, 'Máy xén  tự động', '0', '0', '50000', '0', '0', 'cut', '1', 'silk', NULL, NULL, 1, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
+INSERT INTO `devices` VALUES (33, 'Máy xén bán tự động', '0', '0', '50000', '0', '0', 'cut', '2', 'silk', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
+INSERT INTO `devices` VALUES (34, 'Máy xén  tự động', '0', '0', '50000', '0', '0', 'cut', '1', 'styrofoam', NULL, NULL, 0, 0, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
+INSERT INTO `devices` VALUES (35, 'MÁY XÉN', '0', '100', '50000', '50', '10000', 'cut', '2', 'styrofoam', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
+INSERT INTO `devices` VALUES (36, 'Máy xén  tự động', '0', '0', '50000', '0', '0', 'cut', '1', 'mica', NULL, NULL, 1, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
+INSERT INTO `devices` VALUES (37, 'Máy xén bán tự động', '0', '100', '50000', '50', '20000', 'cut', '2', 'mica', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
+INSERT INTO `devices` VALUES (39, 'BÓC LỀ CARTON', '0', '20', '20000', '0', '0', 'peel', '2', 'carton', 1, NULL, 1, 1, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
+INSERT INTO `devices` VALUES (40, 'Máy bóc lề tự động', '0', '10', '20000', '0', '0', 'peel', '1', 'rubber', NULL, NULL, 0, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
+INSERT INTO `devices` VALUES (41, 'Máy bóc lề bán tự động', '0', '30', '20000', '0', '0', 'peel', '2', 'rubber', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
+INSERT INTO `devices` VALUES (42, 'Máy bóc lề tự động', '0', '10', '20000', '0', '0', 'peel', '1', 'styrofoam', NULL, NULL, 1, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
+INSERT INTO `devices` VALUES (43, 'Máy bóc lề bán tự động', '0', '10', '20000', '0', '0', 'peel', '2', 'styrofoam', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
+INSERT INTO `devices` VALUES (44, 'Máy bóc lề tự động', '0', '10', '20000', '0', '0', 'peel', '1', 'mica', NULL, NULL, 1, 0, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
+INSERT INTO `devices` VALUES (45, 'Máy bóc lề bán tự động', '0', '10', '20000', '0', '0', 'peel', '2', 'mica', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-05-23 17:01:35', 0);
 INSERT INTO `devices` VALUES (46, 'MÁY CÁN NƯỚC - THUÊ BÊN NGOÀI', '0', '0', '50000', '0', '0', 'nilon', NULL, 'paper', 0, NULL, 1, NULL, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 1);
-INSERT INTO `devices` VALUES (47, 'MÁY CÁN NHIỆT', '0', '0', '50000', '40', '25000', 'nilon', 1, 'paper', 1, NULL, 1, NULL, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
+INSERT INTO `devices` VALUES (47, 'MÁY CÁN NHIỆT', '0', '0', '50000', '40', '25000', 'nilon', '1', 'paper', 1, NULL, 1, NULL, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
 INSERT INTO `devices` VALUES (48, 'MÁY BỒI BÁN TỰ ĐỘNG', '0', '500', '300000', '70', '100000', 'fill', NULL, 'fill_finish', 1, NULL, 1, NULL, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 0);
 INSERT INTO `devices` VALUES (49, 'Túi giấy khổ in  43 x 65', '200000', '1360', '100000', '440', '50000', 'bag_paste', NULL, 'paper', NULL, NULL, 1, NULL, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 1);
 INSERT INTO `devices` VALUES (50, 'Túi giấy khổ in  52 x 72', '100000', '1550', '100000', '440', '50000', 'bag_paste', NULL, 'paper', NULL, NULL, 1, NULL, '2023-05-23 17:01:35', '2023-07-27 23:52:16', 1);
@@ -13422,9 +13422,9 @@ INSERT INTO `n_detail_tables` VALUES (114, 'act', '', 'Kích hoạt', 'checkbox'
 INSERT INTO `n_detail_tables` VALUES (115, 'note', '', 'Ghi chú', 'textarea', 'w_users', 0, 1, 1, 0, 0, '', 1, 0, 1, '2023-05-23 14:38:05', '2023-07-25 18:44:05');
 INSERT INTO `n_detail_tables` VALUES (116, 'username', '{\"required\":1,\"unique\":1}', 'Username', 'text', 'w_users', 0, 1, 1, 0, 0, '', 4, 0, 1, '2023-05-23 15:22:01', '2023-07-25 18:44:05');
 INSERT INTO `n_detail_tables` VALUES (117, 'password', '{\"required\":1,\"type_input\":\"password\"}', 'Password', 'text', 'w_users', 0, 1, 0, 0, 0, '', 4, 0, 1, '2023-05-23 14:41:41', '2023-07-25 18:44:05');
-INSERT INTO `n_detail_tables` VALUES (118, 'group_user', '', 'Thiết bị máy', 'group', 'w_users', 1, 1, 1, 1, 0, '{\r\n	\"group_class\":\"__module_select_ajax_value_child\",\r\n	\"inject_attr\":\"link=get-device-by-type\",\r\n	\"width\":\"8\",\r\n	\"width_child\":\"6\"\r\n}', 4, 0, 1, '2023-05-23 14:41:40', '2023-07-28 00:29:39');
-INSERT INTO `n_detail_tables` VALUES (119, 'type', '{\"required\":1,\"inject_class\":\"__select_parent\"}', 'Tổ máy', 'select', 'w_users', 1, 0, 0, 0, 118, '{\r\n	\"config\":{\r\n		\"searchbox\":1\r\n	},\r\n	\"data\":{\r\n		\"options\":{\r\n			\"0\":\"Chọn tổ máy\",\r\n			\"print\":\"Tổ in\", \r\n			\"nilon\":\"Cán màng\", \r\n			\"metalai\":\"Tổ cán metalai\",\r\n			\"compress\":\"Tổ ép nhũ\",\r\n			\"float\":\"Tổ thúc nổi\",\r\n			\"uv\":\"Tổ in UV\",\r\n			\"elevate\":\"Tổ bế\",\r\n			\"peel\":\"Tổ bóc lề\",\r\n			\"mill\":\"Tổ máy phay\",\r\n			\"cut\":\"Tổ máy xén\",\r\n			\"fill\":\"Tổ máy bồi\",\r\n			\"box_paste\":\"Tổ dán hộp giấy\",\r\n			\"bag_paste\":\"Tổ dán túi giấy\",\r\n			\"finish\":\"Tổ hoàn thiện cuối\"\r\n		}\r\n	}\r\n}', 1, 0, 1, '2023-06-15 06:55:51', '2023-07-27 14:17:29');
-INSERT INTO `n_detail_tables` VALUES (120, 'device', '{\"required\":1,\"disabled\":1,\"inject_class\":\"__select_child\"}', 'Thiết bị', 'select', 'w_users', 1, 0, 0, 0, 118, '{\r\n	\"data\":{\r\n		\"options\":{\r\n			\"\":\"Chọn loại thiết bị\",\r\n			\"1\":\"In offset\",\r\n			\"2\":\"In offset uv\",\r\n			\"3\":\"In label\",\r\n			\"4\":\"In KTS\",\r\n			\"auto\":\"Thiết bị tự động\",\r\n			\"semi_auto\":\"Thiết bị bán tự động\"\r\n		}\r\n	}\r\n}', 1, 0, 1, '2023-06-15 06:55:51', '2023-07-28 00:14:23');
+INSERT INTO `n_detail_tables` VALUES (118, 'group_user', '', 'Thiết bị máy', 'group', 'w_users', 1, 1, 1, 1, 0, '{\r\n	\"group_class\":\"__module_select_ajax_value_child\",\r\n	\"inject_attr\":\"link=get-device-by-type\",\r\n	\"width\":\"8\",\r\n	\"width_child\":\"6\"\r\n}', 4, 0, 0, '2023-05-23 14:41:40', '2023-07-28 23:27:33');
+INSERT INTO `n_detail_tables` VALUES (119, 'type', '{\"required\":1,\"inject_class\":\"__select_parent\"}', 'Tổ máy', 'select', 'w_users', 1, 0, 0, 0, 118, '{\r\n	\"config\":{\r\n		\"searchbox\":1\r\n	},\r\n	\"data\":{\r\n		\"options\":{\r\n			\"0\":\"Chọn tổ máy\",\r\n			\"print\":\"Tổ in\", \r\n			\"nilon\":\"Cán màng\", \r\n			\"metalai\":\"Tổ cán metalai\",\r\n			\"compress\":\"Tổ ép nhũ\",\r\n			\"float\":\"Tổ thúc nổi\",\r\n			\"uv\":\"Tổ in UV\",\r\n			\"elevate\":\"Tổ bế\",\r\n			\"peel\":\"Tổ bóc lề\",\r\n			\"mill\":\"Tổ máy phay\",\r\n			\"cut\":\"Tổ máy xén\",\r\n			\"fill\":\"Tổ máy bồi\",\r\n			\"box_paste\":\"Tổ dán hộp giấy\",\r\n			\"bag_paste\":\"Tổ dán túi giấy\",\r\n			\"finish\":\"Tổ hoàn thiện cuối\"\r\n		}\r\n	}\r\n}', 1, 0, 0, '2023-06-15 06:55:51', '2023-07-28 23:27:32');
+INSERT INTO `n_detail_tables` VALUES (120, 'device', '{\"required\":1,\"disabled\":1,\"inject_class\":\"__select_child\"}', 'Thiết bị', 'select', 'w_users', 1, 0, 0, 0, 118, '{\r\n	\"data\":{\r\n		\"options\":{\r\n			\"\":\"Chọn loại thiết bị\",\r\n			\"1\":\"In offset\",\r\n			\"2\":\"In offset uv\",\r\n			\"3\":\"In label\",\r\n			\"4\":\"In KTS\",\r\n			\"auto\":\"Thiết bị tự động\",\r\n			\"semi_auto\":\"Thiết bị bán tự động\"\r\n		}\r\n	}\r\n}', 1, 0, 0, '2023-06-15 06:55:51', '2023-07-28 23:27:31');
 INSERT INTO `n_detail_tables` VALUES (121, 'name', '{\"required\":\"1\",\"unique\":\"1\"}', 'Tên vật tư', 'text', 'paper_extends', 1, 1, 1, 1, 0, '', 1, 0, 1, '2023-04-28 11:43:12', '2023-07-27 16:04:34');
 INSERT INTO `n_detail_tables` VALUES (122, 'category', '', 'Nhóm sản phẩm', 'select', 'paper_extends', 1, 1, 1, 1, 0, '{\"data\":{\r\n		\"options\":{\r\n			\"0\":\"Chọn nhóm\", \r\n			\"2\":\"Hộp giấy\", \r\n			\"3\":\"Túi giấy\",\r\n			\"4\":\"Tem rời dán tay\",\r\n			\"5\":\"Mác giấy\",\r\n			\"6\":\"Toa - Tờ rơi - Tờ gấp\"\r\n		}\r\n	}\r\n}', 1, 0, 1, '2023-05-26 03:19:12', '2023-07-27 15:55:19');
 INSERT INTO `n_detail_tables` VALUES (123, 'ord', '{\"type_input\":\"number\"}', 'Sắp xếp', 'text', 'paper_extends', 1, 1, 1, 0, 0, '', 1, 3, 1, '2023-04-30 11:00:22', '2023-07-27 15:55:19');
@@ -14021,12 +14021,11 @@ CREATE TABLE `paper_extends`  (
   INDEX `name_index`(`name`) USING BTREE,
   INDEX `type_index`(`category`) USING BTREE,
   INDEX `act_indx`(`act`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 56 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 57 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of paper_extends
 -- ----------------------------
-INSERT INTO `paper_extends` VALUES (0, 'KHAY ĐỊNH HÌNH', 0, NULL, 1, NULL, '2023-07-27 18:15:17', '2023-07-27 18:15:17', 1, 1);
 INSERT INTO `paper_extends` VALUES (1, 'TỜ BỒI THÀNH', 0, NULL, 1, NULL, '2023-07-26 07:51:00', '2023-07-27 15:35:03', 1, 1);
 INSERT INTO `paper_extends` VALUES (2, 'TỜ BỒI KHAY', 0, NULL, 1, NULL, '2023-07-26 07:51:00', '2023-07-27 15:35:03', 1, 1);
 INSERT INTO `paper_extends` VALUES (3, 'TỜ BỒI MẶT THÉP', 6, NULL, 1, NULL, '2023-07-26 07:52:00', '2023-07-27 15:57:22', 1, 1);
@@ -14034,6 +14033,7 @@ INSERT INTO `paper_extends` VALUES (4, 'TỜ BỒI NẮP HỘP', 6, NULL, 1, NUL
 INSERT INTO `paper_extends` VALUES (5, 'TỜ BỒI ĐÁY HỘP', 6, NULL, 1, NULL, '2023-07-26 07:52:00', '2023-07-27 15:56:54', 1, 1);
 INSERT INTO `paper_extends` VALUES (6, 'TEM CUỘN', 4, NULL, 1, NULL, '0000-00-00 00:00:00', '2023-07-27 15:55:59', 1, 1);
 INSERT INTO `paper_extends` VALUES (7, 'TOA IN GHÉP', 6, NULL, 1, NULL, '2023-07-26 07:53:00', '2023-07-27 15:55:47', 1, 1);
+INSERT INTO `paper_extends` VALUES (56, 'KHAY ĐỊNH HÌNH', 0, NULL, 1, NULL, '2023-07-27 18:15:17', '2023-07-27 18:15:17', 1, 1);
 
 -- ----------------------------
 -- Table structure for paper_lots

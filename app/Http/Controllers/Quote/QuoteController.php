@@ -304,7 +304,7 @@ class QuoteController extends Controller
     public function getDeviceByType(Request $request)
     {
         $type = $request->input('param');
-        $arr = $type == 'print' ? \TDConst::PRINT_TECH : [\App\Models\Device::AUTO_DEVICE => 'Thiết bị tự động', \App\Models\Device::SEMI_AUTO_DEVICE => 'Thiết bị bán tự động'];
+        $arr = getDeviceByKeyType($type);
         $html = '<option value="">Danh sách chọn</option>';
         foreach ($arr as $value => $note) {
             $html .= '<option value="'.$value.'">'.$note.'</option>';

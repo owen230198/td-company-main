@@ -109,3 +109,11 @@
             return !in_array($category, $arr_box);
         }
     }
+
+    if (!function_exists('getDeviceByKeyType')) {
+        function getDeviceByKeyType($key)
+        {
+            return $key == \TDConst::PRINT ? \TDConst::PRINT_TECH : 
+            [\App\Models\Device::AUTO_DEVICE => 'Thiết bị tự động', \App\Models\Device::SEMI_AUTO_DEVICE => 'Thiết bị bán tự động'];
+        }
+    }

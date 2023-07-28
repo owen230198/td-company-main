@@ -37,6 +37,7 @@ Route::middleware(['check_login'])->group(function () {
 	Route::any('config-device-price/{step}', [AdminController::class, 'configDevicePrice']);
 	Route::get('get-list-option-ajax/{table}', [AdminController::class, 'getListOptionAjax']);
 	Route::post('upload-file', [AdminController::class, 'uploadFile']);
+	Route::get('list-worker-by-device/{step}', [AdminController::class, 'listWorkerByDevice']);
 
 	//quotes routes
 	Route::any('create-quote', [QuoteController::class, 'createQuote']);

@@ -230,6 +230,8 @@
                                 self::FINISH => 'Công đoạn hoàn thiện'
                             ];
 
+        const ALL_DEVICE_KEY = self::PAPER_HARD_DEVICE + self::FILL_DEVICE;
+
         const FILL_FINISH_STAGE = [
             self::FILL => 'Bồi',
             self::FINISH => 'Hoàn thiện',
