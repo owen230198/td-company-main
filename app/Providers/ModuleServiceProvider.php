@@ -14,7 +14,7 @@ class ModuleServiceProvider extends ServiceProvider
      */
     public function boot(Request $request)
     {
-        $dir = dirname(__DIR__).'\Modules';
+        $dir = dirname(__DIR__).'/Modules';
         if (\File::exists($dir)) {
             $list_modules = array_map('basename', \File::directories($dir));
             $segments = $request->segments();

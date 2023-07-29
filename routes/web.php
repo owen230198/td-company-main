@@ -62,7 +62,7 @@ Route::middleware(['check_login'])->group(function () {
 	Route::post('take-out-supply/{id}', [OrderController::class, 'takeOutSupply']);
 	Route::post('apply-to-worker-handle/{id}', [OrderController::class, 'applyToWorkerHandle']);
 });
-$modules_path = dirname(__DIR__) . '/App/Modules/';
+$modules_path = dirname(__DIR__) . '/app/Modules/';
 if (is_dir($modules_path)) {
 	$modules = scandir($modules_path);
 	foreach ($modules as $module) {
