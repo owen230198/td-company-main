@@ -8,7 +8,7 @@ class AuthController extends Controller
     public function __construct()
     {
         parent::__construct();
-        $this->services = new \App\Services\AuthService('worker_login', 'w_users');
+        $this->services = new \App\Services\AuthService('Worker', 'worker_login', 'w_users');
     }
     
     public function login(Request $request)
@@ -17,5 +17,10 @@ class AuthController extends Controller
         $data['link_login'] = 'Worker/login';
         return $this->services->baseLogin($request, $data);
     } 
+
+    public function logout()
+    {
+        return $this->services->baseLogout();
+    }
 }
 ?>

@@ -4,9 +4,10 @@ use App\Constants\StatusConstant;
 use App\Services\BaseService;
 class AuthService extends BaseService
 {
-    function __construct($auth_key = 'user_login', $table_user = 'n_users')
+    function __construct($prefix = '', $auth_key = 'user_login', $table_user = 'n_users')
     {
     	parent::__construct();
+        $this->prefix = $prefix;
         $this->auth_key = $auth_key;
         $this->table_user = getModelByTable($table_user);
     }
@@ -77,14 +78,14 @@ class AuthService extends BaseService
         }
         $result = $this->hasLogin($request);
         if ($result['status'] === StatusConstant::SUCCESS_CODE) {
-            $rede = session('afterLoginRoute') ?? '/';
-            return redirect($rede)->with('message','Đăng nhập thành công!');
+            return redirect($this->prefix)->with('message','Đăng nhập thành công!');
         }
-        return redirect(asset('login'))->withInput()->with($result['messageCode'], $result['errorMessage']);
+        return back()->withInput()->with($result['messageCode'], $result['errorMessage']);
     }
-    public function baseLogout($prefix = '')
+    
+    public function baseLogout()
     {
-        $ret = !empty($prefix) ? $prefix.'/login' : 'login';
+        $ret = !empty($this->prefix) ? $this->prefix.'/login' : 'login';
         if (session()->has($this->auth_key)) {
             session()->forget($this->auth_key);
             return redirect(asset($ret));

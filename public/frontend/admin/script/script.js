@@ -8,9 +8,9 @@ var submitActionAjaxForm = function () {
         }).done(function (data) {
             var json = JSON.parse(data);
             if (json.code == 200) {
-                toastr["success"](json.message);
+                swal('Thành công', json.message, 'success');
             } else {
-                toastr["error"](json.message);
+                swal('Không thành công', json.message, 'error');
             }
         });
     });
@@ -31,6 +31,7 @@ var checkBoxModule = function () {
             let val = $(this).is(":checked") ? 1 : 0;
             let value_input = parent.find("input[type=hidden]")
             value_input.val(val);
+            value_input.trigger('change');
         }
     );
 };
@@ -324,13 +325,13 @@ var fileUploadModule = function() {
             })
             .done(function(data){
                 if (data.code == 100) {
-                    toastr['error'](data.message);
+                    swal('Không thành công', data.message, 'error');
                 }else{
                     let value = '{"path":"'+data.path+'","name":"'+data.name+'"}'
                     parent.find('input.__file_value').val(value);
                     parent.find('.__file_preview').fadeIn(200);
                     parent.find('.__file_name').text(data.name);
-                    toastr['success'](data.message);
+                    swal('Thành công', data.message, 'succes');
                 }
                 $('#loader').fadeOut(200);
             })

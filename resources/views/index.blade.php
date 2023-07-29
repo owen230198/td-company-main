@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="{{ asset('frontend/base/css/bootstrap.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/base/css/font-awesome.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/base/css/select2.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('frontend/base/css/toastr.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/base/daterangepickers/daterangepicker.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/base/css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/admin/css/style.css') }}" />
@@ -51,7 +50,7 @@
     @endif
     <script src="{{ asset('frontend/base/script/jquery.min.js') }}"></script>
     <script src="{{ asset('frontend/base/script/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('frontend/base/script/toastr.min.js') }}"></script>
+    <script src="{{ asset('frontend/base/script/swal.min.js') }}"></script>
     <script src="{{ asset('frontend/admin/tinymce/js/tinymce/tinymce.min.js') }}"></script>
     <script src="{{ asset('frontend/admin/tinymce/js/tinymce/init_tinymce.js') }}"></script>
     <script src="{{ asset('frontend/base/script/select2.min.js') }}"></script>
@@ -63,35 +62,11 @@
     @yield('script')
     <script>
         @if (Session::has('message'))
-            toastr.options = {
-                "closeButton": true,
-                "progressBar": true
-            }
-            toastr.success("{{ session('message') }}");
+            swal('Thành công', "{{ session('message') }}", 'success');
         @endif
 
         @if (Session::has('error'))
-            toastr.options = {
-                "closeButton": true,
-                "progressBar": true
-            }
-            toastr.error("{{ session('error') }}");
-        @endif
-
-        @if (Session::has('info'))
-            toastr.options = {
-                "closeButton": true,
-                "progressBar": true
-            }
-            toastr.info("{{ session('info') }}");
-        @endif
-
-        @if (Session::has('warning'))
-            toastr.options = {
-                "closeButton": true,
-                "progressBar": true
-            }
-            toastr.warning("{{ session('warning') }}");
+            swal('Không thành công', "{{ session('error') }}", 'error');
         @endif
     </script>
 </body>

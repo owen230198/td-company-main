@@ -117,3 +117,12 @@
             [\App\Models\Device::AUTO_DEVICE => 'Thiết bị tự động', \App\Models\Device::SEMI_AUTO_DEVICE => 'Thiết bị bán tự động'];
         }
     }
+
+    if (!function_exists('getDeviceGroupName')) {
+        function getDeviceGroupName($type, $device)
+        {
+            $arr_type = \TDConst::ALL_DEVICE_KEY;
+            $arr_device = getDeviceByKeyType($type);
+            return 'Tổ '.mb_strtolower(@$arr_type[$type]. ' - '.@$arr_device[$device]);
+        }
+    }

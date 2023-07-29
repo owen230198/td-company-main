@@ -128,54 +128,60 @@ trait QPaperTrait
             $data_action['size'] = $this->configDataSizePaper($data['size']);
         }
 
-        if (!empty($data['print'])) {
-            $data_action['print'] = $this->configDataPrint($data['print']);
+        $except_handle = (int) @$data['except_handle'];
+        $data_action['except_handle'] = $except_handle;
+        if ($except_handle == 0) {
+            if (!empty($data['print'])) {
+                $data_action['print'] = $this->configDataPrint($data['print']);
+            }
+            
+            if (!empty($data['nilon'])) {
+                $data_action['nilon'] = $this->configDataStage($data['nilon']);
+            }
+    
+            if (!empty($data['elevate'])) {
+                $data_action['elevate'] = $this->configDataStage($data['elevate']);
+            }
+    
+            if (!empty($data['peel'])) {
+                $data_action['peel'] = $this->configDataStage($data['peel']);
+            }
+            
+            if (!empty($data['box_paste'])) {
+                $data_action['box_paste'] = $this->configDataStage($data['box_paste']);
+            }
+            
+            if (!empty($data['metalai'])) {
+                $data_action['metalai'] = $this->configDataStage($data['metalai']);
+            }
+            
+            if (!empty($data['compress'])) {
+                $data_action['compress'] = $this->configDataCompressFloat($data['compress']);
+            }
+            if (!empty($data['float'])) {
+                $data_action['float'] = $this->configDataCompressFloat($data['float']);
+            }
+            
+            if (!empty($data['uv'])) {
+                $data_action['uv'] = $this->configDataStage($data['uv']);
+            }
+            
+            if (!empty($data['ext_price'])) {
+                $data_action['ext_price'] = $this->configDataExtPrice($data['ext_price']);
+            }
+    
+            if (!empty($data['cut'])) {
+                $data_action['cut'] = $this->configDataStage($data['cut']);
+            }
+    
+            if (!empty($data['fold'])) {
+                $data_action['fold'] = $this->configDataStage($data['fold']);
+            }
+            
+            $data_action['total_cost'] = $this->priceCaculatedByArray($data_action);    
+        }else{
+            $data_action['total_cost'] = 0;    
         }
-        
-        if (!empty($data['nilon'])) {
-            $data_action['nilon'] = $this->configDataStage($data['nilon']);
-        }
-
-        if (!empty($data['elevate'])) {
-            $data_action['elevate'] = $this->configDataStage($data['elevate']);
-        }
-
-        if (!empty($data['peel'])) {
-            $data_action['peel'] = $this->configDataStage($data['peel']);
-        }
-        
-        if (!empty($data['box_paste'])) {
-            $data_action['box_paste'] = $this->configDataStage($data['box_paste']);
-        }
-        
-        if (!empty($data['metalai'])) {
-            $data_action['metalai'] = $this->configDataStage($data['metalai']);
-        }
-        
-        if (!empty($data['compress'])) {
-            $data_action['compress'] = $this->configDataCompressFloat($data['compress']);
-        }
-        if (!empty($data['float'])) {
-            $data_action['float'] = $this->configDataCompressFloat($data['float']);
-        }
-        
-        if (!empty($data['uv'])) {
-            $data_action['uv'] = $this->configDataStage($data['uv']);
-        }
-        
-        if (!empty($data['ext_price'])) {
-            $data_action['ext_price'] = $this->configDataExtPrice($data['ext_price']);
-        }
-
-        if (!empty($data['cut'])) {
-            $data_action['cut'] = $this->configDataStage($data['cut']);
-        }
-
-        if (!empty($data['fold'])) {
-            $data_action['fold'] = $this->configDataStage($data['fold']);
-        }
-        
-        $data_action['total_cost'] = $this->priceCaculatedByArray($data_action);
 
         return $data_action;
     }

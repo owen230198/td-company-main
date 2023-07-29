@@ -5,7 +5,7 @@ Route::prefix('Worker')->group(function()
 {
     Route::any('login', [AuthController::class, 'login']);
     Route::any('logout', [AuthController::class, 'logout']);
-    Route::middleware(['AdminAuthenticate'])->group(function () {
-        
+    Route::middleware(['WorkerAuth'])->group(function () {
+        Route::get('', [WorkerController::class, 'index']);
     });
 });

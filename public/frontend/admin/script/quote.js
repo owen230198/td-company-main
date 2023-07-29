@@ -338,6 +338,21 @@ var hoverDetailSupplyCost = function()
   )
 }
 
+var modulePaperExceptHandle = function()
+{
+  console.log($('.__paper_except_handle'));
+  $(document).on('change', '.__paper_except_handle', function(event){
+    event.preventDefault();
+    let value = $(this).val();
+    let after_print = $(this).closest('.quote_product_structure').find('.paper_ajax_after_print');
+    if (value == 1) {
+      after_print.hide(); 
+    }else{
+      after_print.show();
+    }
+  });
+}
+
 $(function(){
 	changQtyInput();
   moduleSelectOtherPaper();
@@ -356,5 +371,6 @@ $(function(){
   moduleSelectSupply();
   showHandleDetail();
   hoverDetailSupplyCost();
+  modulePaperExceptHandle();
   // autoComputePaperAjax();
 });

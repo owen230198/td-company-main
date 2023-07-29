@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="<?php echo e(asset('frontend/base/css/bootstrap.min.css')); ?>" />
     <link rel="stylesheet" href="<?php echo e(asset('frontend/base/css/font-awesome.min.css')); ?>" />
     <link rel="stylesheet" href="<?php echo e(asset('frontend/base/css/select2.min.css')); ?>" />
-    <link rel="stylesheet" href="<?php echo e(asset('frontend/base/css/toastr.min.css')); ?>" />
     <link rel="stylesheet" href="<?php echo e(asset('frontend/base/daterangepickers/daterangepicker.css')); ?>" />
     <link rel="stylesheet" href="<?php echo e(asset('frontend/base/css/style.css')); ?>" />
     <link rel="stylesheet" href="<?php echo e(asset('frontend/admin/css/style.css')); ?>" />
@@ -51,7 +50,7 @@
     <?php endif; ?>
     <script src="<?php echo e(asset('frontend/base/script/jquery.min.js')); ?>"></script>
     <script src="<?php echo e(asset('frontend/base/script/bootstrap.min.js')); ?>"></script>
-    <script src="<?php echo e(asset('frontend/base/script/toastr.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('frontend/base/script/swal.min.js')); ?>"></script>
     <script src="<?php echo e(asset('frontend/admin/tinymce/js/tinymce/tinymce.min.js')); ?>"></script>
     <script src="<?php echo e(asset('frontend/admin/tinymce/js/tinymce/init_tinymce.js')); ?>"></script>
     <script src="<?php echo e(asset('frontend/base/script/select2.min.js')); ?>"></script>
@@ -63,35 +62,11 @@
     <?php echo $__env->yieldContent('script'); ?>
     <script>
         <?php if(Session::has('message')): ?>
-            toastr.options = {
-                "closeButton": true,
-                "progressBar": true
-            }
-            toastr.success("<?php echo e(session('message')); ?>");
+            swal('Thành công', "<?php echo e(session('message')); ?>", 'success');
         <?php endif; ?>
 
         <?php if(Session::has('error')): ?>
-            toastr.options = {
-                "closeButton": true,
-                "progressBar": true
-            }
-            toastr.error("<?php echo e(session('error')); ?>");
-        <?php endif; ?>
-
-        <?php if(Session::has('info')): ?>
-            toastr.options = {
-                "closeButton": true,
-                "progressBar": true
-            }
-            toastr.info("<?php echo e(session('info')); ?>");
-        <?php endif; ?>
-
-        <?php if(Session::has('warning')): ?>
-            toastr.options = {
-                "closeButton": true,
-                "progressBar": true
-            }
-            toastr.warning("<?php echo e(session('warning')); ?>");
+            swal('Không thành công', "<?php echo e(session('error')); ?>", 'error');
         <?php endif; ?>
     </script>
 </body>

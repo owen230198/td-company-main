@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class CheckLogin
+class WorkerAuth
 {
     /**
      * Handle an incoming request.
@@ -16,8 +16,8 @@ class CheckLogin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!session()->exists('user_login')) {
-            return redirect(asset('login'));
+        if (!session()->exists('worker_login')) {
+            return redirect(asset('Worker/login'));
         }
         return $next($request);
     }

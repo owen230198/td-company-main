@@ -28,21 +28,13 @@ var ajaxBaseCall = function(param)
 		data: param.data,
 	})
 	.done(function(data) {
-		if((data.code) == 200){
-			toastr['success'](data.message);
-		}
-		else{
-			toastr['error'](data.message);
-		}
-		if (data.url != null) {
-			setTimeout(() => {
-				if (data.url == 'f5') {
-					window.location.reload();	
-				}else{
-					window.location.href=data.url;
-				}
-			}, 1500);
-		} 
+		let title = data.code == 200 ? 'Thành công' : 'Không thành công';
+		let key = data.code == 200 ? 'success' : 'error';
+		swal(title, data.message, key).then(function() {
+			if (data.url != null) {
+				window.location = data.url;
+			}
+		});
 		$('#loader').delay(200).fadeOut(500); 
 	})
 }
@@ -56,7 +48,7 @@ var ajaxViewTarget = function(url, target_ajax, section_class, type = 1)
 	})
 	.done(function(data){
 		if (typeof data === 'object' && data.code == 100) {
-		  toastr['error'](data.message);
+		  swal('Không thành công', data.message, 'error');
 		}else{
 		  if (type === 1) {
 			target_ajax.html(data);

@@ -44,7 +44,7 @@ class AdminController extends Controller
     {
         $role = $this->admins->checkPermissionAction($table, __FUNCTION__);
         if (!@$role['allow']) {
-            return redirect(url('permission-error'))->with('error', 'Bạn không có quyền truy cập!');
+            return redirect(url(''))->with('error', 'Bạn không có quyền truy cập!');
         }
         $data = $this->admins->getDataBaseView($table, 'Danh sách');
         if($data['view_type'] == 'config'){
