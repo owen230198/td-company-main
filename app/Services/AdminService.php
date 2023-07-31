@@ -1,7 +1,8 @@
 <?php
 namespace App\Services;
 use App\Services\BaseService;
-use \App\Models\NDetailTable;
+use App\Models\NDetailTable;
+use App\Models\NTable;
 class AdminService extends BaseService
 {
     function __construct()
@@ -190,8 +191,15 @@ class AdminService extends BaseService
 
     public function removeDataTable($table, $id)
     {
+        $except_remove = in_array($table, NTable::$specific['remove']);
+        if ($except_remove) {
+            $objModel = getModelByTable($table);
+            if (method_exists($objModel, 'beforeRemove')) {
+                $objModel->beforeRemove($id);
+            }
+        }
         $remove = \DB::table($table)->where('id', $id)->delete();
-        if ($remove && in_array($table, \App\Models\NTable::$specific['remove'])) {
+        if ($remove && $except_remove) {
             $objModel = getModelByTable($table);
             if (method_exists($objModel, 'afterRemove')) {
                 $objModel->afterRemove($id);

@@ -296,7 +296,7 @@ class QuoteService extends BaseService
         $templateProcessor->setValue('user_name', @$user['name']);
         $templateProcessor->setValue('user_phone', @$user['phone']);
         $fileName = date('m-d-Y', Time()).'_'.$arr_quote['seri'].'_'.getFieldDataById('name', 'products', $products[0]['id']).'_'.$arr_quote['name'].".docx";
-        $fileStorage = base_path('public/' . $fileName);
+        $fileStorage = public_path($fileName);
         $templateProcessor->saveAs($fileStorage);
         return response()->download($fileStorage);
     }

@@ -306,7 +306,8 @@ var initInputModuleAfterAjax = function(section)
     multipleSelectModule(section);
 }
 
-var fileUploadModule = function() {
+var fileProcessModule = function() {
+    //upload file
     $(document).on('change', 'input.__file_upload_input', function(event) {
         event.preventDefault();
         let files = $(this)[0].files;
@@ -314,9 +315,10 @@ var fileUploadModule = function() {
             let form_data = new FormData();
             form_data.append('file', files[0]);
             let parent = $(this).closest('.__module_upload_file');
+            let input_value = parent.find('input.__file_value');
             $('#loader').fadeIn(200);
             $.ajax({
-                url: getBaseRoute('upload-file'),
+                url: getBaseRoute('file-upload'),
                 method: 'POST',
                 data: form_data,
                 contentType: false,
@@ -328,15 +330,18 @@ var fileUploadModule = function() {
                     swal('Không thành công', data.message, 'error');
                 }else{
                     let value = '{"path":"'+data.path+'","name":"'+data.name+'"}'
-                    parent.find('input.__file_value').val(value);
+                    input_value.val(value);
                     parent.find('.__file_preview').fadeIn(200);
-                    parent.find('.__file_name').text(data.name);
-                    swal('Thành công', data.message, 'succes');
+                    if (data.name.length > 18) {
+                        parent.find('.__file_name').text(data.name.substr(0,18)+'...  ');
+                    }else{
+                        parent.find('.__file_name').text(data.name);
+                    } 
                 }
                 $('#loader').fadeOut(200);
             })
         }   
-    })    
+    });
 }
 
 var receiveCommand = function()
@@ -394,7 +399,7 @@ $(function () {
     selectAjaxModule();
     multipleSelectModule();
     phoneInputPrevent();
-    fileUploadModule();
+    fileProcessModule();
     receiveCommand();
     confirmTakeOutSupply();
     moduleSelectAjaxChild();

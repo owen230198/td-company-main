@@ -36,7 +36,8 @@ Route::middleware(['check_login'])->group(function () {
 	Route::get('get-data-json-linking', [AdminController::class, 'getDataJsonLinking']);
 	Route::any('config-device-price/{step}', [AdminController::class, 'configDevicePrice']);
 	Route::get('get-list-option-ajax/{table}', [AdminController::class, 'getListOptionAjax']);
-	Route::post('upload-file', [AdminController::class, 'uploadFile']);
+	Route::post('file-upload', [AdminController::class, 'fileUpload']);
+	Route::any('file-download', [AdminController::class, 'fileDownload']);
 	Route::get('list-worker-by-device/{step}', [AdminController::class, 'listWorkerByDevice']);
 
 	//quotes routes

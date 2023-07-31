@@ -53,6 +53,7 @@
                                     $arr = $field;
                                     $arr['obj_id'] = $data->id;
                                     $arr['value'] = @$data->{$field['name']};
+                                    $arr['attr'] = !empty($field['attr']) ? json_decode($field['attr'], true) : [];
                                     $arr['other_data'] = !empty($field['other_data']) ? json_decode($field['other_data'], true) : [];
                                 ?>
                                 <?php echo $__env->make('view_table.'.$field['type'], $arr, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>

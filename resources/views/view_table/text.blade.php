@@ -1,1 +1,1 @@
-<p class="mb-0 w_max_content">{{ @$value }}</p>
+<p class="mb-0 w_max_content">{{ @$attr['type_input'] == 'number' ? number_format(@$value) : @$value }}</p>

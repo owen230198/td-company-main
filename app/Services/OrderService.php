@@ -28,7 +28,6 @@ class OrderService extends BaseService
     public function processDataOrder($request, $arr_quote)
     {
         $data = $request->except('_token');
-        $arr_order = !empty($data['order']) ? $data['order'] : [];
         if (empty($arr_quote)) {
             return returnMessageAjax(100, 'Báo giá không tồn tại!');
         }

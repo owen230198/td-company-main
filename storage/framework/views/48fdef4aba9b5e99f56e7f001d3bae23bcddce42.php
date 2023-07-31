@@ -1,6 +1,6 @@
 <?php
     $pro_per_price = (int) @$product['total_cost'] / (int) @$product['qty'];
-    $ext_pro_fields = [
+    $ext_pro_fields_inf = [
         'per_price' => 
         [
             'name' => $pro_base_name_input.'[per_price]',
@@ -15,83 +15,24 @@
             'attr' => ['disable_field' => 1],
             'value' => number_format($product['total_cost'])
         ],
-        'custom_design_file' =>
-        [
-            'name' => $pro_base_name_input.'[custom_design_file]',
-            'note' => 'File thiết kế khách gửi',
-            'type' => 'file',
-            'value' => @$product['custom_design_file']
-        ],
-        'sale_shape_file' =>
-        [
-            'name' => $pro_base_name_input.'[sale_shape_file]',
-            'note' => 'Khuôn kinh doanh tính giá',
-            'type' => 'file',
-            'value' => @$product['sale_shape_file']
-        ],
-        'tech_shape_file' =>
-        [
-            'name' => $pro_base_name_input.'[tech_shape_file]',
-            'note' => 'Khuôn sản xuất (Kỹ thuật)',
-            'type' => 'file',
-            'value' => @$product['tech_shape_file']
-        ],
-        'design_file' =>
-        [
-            'name' => $pro_base_name_input.'[design_file]',
-            'note' => 'File gốc (P. Thiết kế)',
-            'type' => 'file',
-            'value' => @$product['design_file']
-        ],
-        'design_shape_file' =>
-        [
-            'name' => $pro_base_name_input.'[design_shape_file]',
-            'note' => 'File bình theo khuôn (P. Thiết kế)',
-            'type' => 'file',
-            'value' => @$product['design_shape_file']
-        ],
-        'handle_shape_file' =>
-        [
-            'name' => $pro_base_name_input.'[handle_shape_file]',
-            'note' => 'Khuôn ép nhũ, thúc nổi, in UV',
-            'type' => 'file',
-            'value' => @$product['handle_shape_file']
-        ]
     ];
-    if (\GroupUser::isSale()) {
-        unset(
-            $ext_pro_fields['tech_shape_file'], 
-            $ext_pro_fields['design_file'], 
-            $ext_pro_fields['design_shape_file'], 
-            $ext_pro_fields['handle_shape_file']
-        );    
-    }elseif (\GroupUser::isTechApply()) {
-        unset(
-            $ext_pro_fields['custom_design_file'],
-            $ext_pro_fields['design_file'], 
-            $ext_pro_fields['design_shape_file'], 
-            $ext_pro_fields['handle_shape_file']
-        );    
-    }elseif (\GroupUser::isDesign()) {
-        unset(
-            $ext_pro_fields['sale_shape_file'], 
-            $ext_pro_fields['handle_shape_file']
-        );    
-    }elseif(\GroupUser::isTechHandle()){
-        unset(
-            $ext_pro_fields['custom_design_file'],
-            $ext_pro_fields['sale_shape_file'], 
-            $ext_pro_fields['tech_shape_file'], 
-            $ext_pro_fields['design_file']
-        );  
-    }
+    
+    $ext_pro_feild_file = \App\Models\Product::getFeildFileByStage(@$stage);
 ?>
 
-<?php $__currentLoopData = $ext_pro_fields; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ext_pro_field): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+<?php $__currentLoopData = $ext_pro_fields_inf; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ext_pro_field): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
     <?php echo $__env->make('view_update.view', $ext_pro_field, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>     
 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-<?php if(\GroupUser::isAdmin() || \GroupUser::isTechApply()): ?>
+<?php $__currentLoopData = $ext_pro_feild_file; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $ext_feild_file): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+    <?php
+        $ext_feild_file['value'] = @$product[$key];
+        $ext_feild_file['name'] = $pro_base_name_input.'['.$key.']'
+    ?>
+    <?php echo $__env->make('view_update.view', $ext_feild_file, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>     
+<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+<?php if(@$stage == \App\Models\Order::TECH_SUBMITED): ?>
     <?php
         $product_note = !empty($product['note']) ? json_decode($product['note'], true) : [];
         $note_values = [

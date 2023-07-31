@@ -352,28 +352,39 @@ class AdminController extends Controller
         echo $options;
     }
 
-    public function uploadFile(Request $request)
+    public function fileUpload(Request $request)
     {
         $file = $request->file('file');
         $data['code'] = 100;
-        $data['message'] = 'Không thể upload file !';
+        $data['message'] = 'Không thể xử lí file !';
         if (!empty($file)) {
             $name = $file->getClientOriginalName();
-            $location = 'uploads/files';
-            if (file_exists(public_path().'/'.$location.'/'.$name) || file_exists(base_path().'/'.$location.'/'.$name)) {
+            $path = 'uploads/files';
+            $full_path = getFullPathFileUpload($path.'/'.$name);
+            if (file_exists($full_path)) {
                 $data['message'] = 'Tên file đã tồn tại, vui lòng đổi tên trước !';
             }else{
-                $status = $file->move($location ,$name);
-                if (!empty($status)) {
+                $status = $file->move($path ,$name);
+                if ($status) {
                     $data['code'] = 200;
-                    $data['message'] = 'Đã upload file thành công !';
-                    $data['path'] = url($location.'/'.$name);
+                    $data['path'] = $path.'/'.$name;
                     $data['name'] = $name;
                 }
             }
-            
         }
         return response()->json($data);
+    }
+
+    
+    public function fileDownload(Request $request)
+    {
+        $path = $request->input('path');
+        $full_path = getFullPathFileUpload($path);
+        if (file_exists($full_path)) {
+            return response()->download($full_path);  
+        }else{
+            return back()->with('error', 'Không tìm thấy file !');
+        } 
     }
 }
 

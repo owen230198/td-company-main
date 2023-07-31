@@ -155,3 +155,25 @@ if (!function_exists('processArrField')) {
         return $arr;
     }
 }
+
+if (!function_exists('getFullPathFileUpload')) {
+    function getFullPathFileUpload($path)
+    {
+        if (!empty($path)) {
+            return isLocal() ? public_path($path) : base_path($path);
+        }
+    }
+}
+
+if (!function_exists('removeFileData')) {
+    function removeFileData($data)
+    {
+        $data_path = json_decode($data, true);
+        if (!empty($data_path['path'])) {
+            $full_path = getFullPathFileUpload($data_path['path']);
+            if (file_exists($full_path)) {
+                unlink($full_path);
+            }
+        }
+    }
+}

@@ -36,9 +36,15 @@ class Quote extends Model
     }
     public function afterRemove($id)
     {
-        $products = Product::where('quote_id', $id)->get('id');
+        $products = Product::where('quote_id', $id)->get();
         $childs = Product::$childTable;
         foreach ($products as $product) {
+            $feild_file = Product::FEILD_FILE;
+            foreach ($feild_file as $key => $feild_file) {
+                if (!empty($product[$key])) {
+                    removeFileData($product[$key]);
+                }
+            }
             $remove_pro = Product::where('id', $product['id'])->delete();
             if ($remove_pro) {
                 foreach ($childs as $table) {
@@ -46,5 +52,11 @@ class Quote extends Model
                 }
             }        
         }
+        $order = Order::where('quote', $id)->get('id')->first();
+        if (!empty($order['id'])) {
+            $admin = new \App\Services\AdminService;
+            $admin->removeDataTable('orders', $order['id']);
+        }
+        
     } 
 }

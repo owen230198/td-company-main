@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Order;
 use App\Http\Controllers\Controller;
+use App\Models\CDesign;
 use App\Models\CSupply;
 use Illuminate\Http\Request;
 use App\Models\Order;
@@ -69,7 +70,7 @@ class OrderController extends Controller
         if (\GroupUser::isTechApply()) {
             $arr_order = Order::find($id);
             if (@$arr_order['status'] != \StatusConst::NOT_ACCEPTED) {
-                returnMessageAjax(100, 'Lỗi không xác định !');
+                return returnMessageAjax(100, 'Lỗi không xác định !');
             }
             $arr_quote = Quote::find($data['quote']);
             if (!empty($arr_quote)) {

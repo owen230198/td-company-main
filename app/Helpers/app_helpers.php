@@ -280,28 +280,17 @@ if (!function_exists('subStringLimit')) {
     }
 }
 
-if (!function_exists('baseUrl')) {
-    function baseUrl(){
-        return sprintf(
-          "%s://%s%s",
-          isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https' : 'http',
-          $_SERVER['SERVER_NAME'],
-          $_SERVER['REQUEST_URI']
-        );
-    }
-}
-
 if (!function_exists('isLocal')) {
     function isLocal()
     {
-        return baseUrl('') === 'http://127.0.0.1:8000';
+        return @$_SERVER['SERVER_NAME'] === '127.0.0.1';
     }
 }
 
 if (!function_exists('allModule')) {
     function allModule()
     {
-        $modules_path = dirname(__DIR__) . '/App/Modules/';
+        $modules_path = dirname(__DIR__) . '/app/Modules/';
 	    return is_dir($modules_path) ? scandir($modules_path) : [];
     }
 }

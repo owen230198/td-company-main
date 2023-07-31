@@ -32,7 +32,12 @@ var ajaxBaseCall = function(param)
 		let key = data.code == 200 ? 'success' : 'error';
 		swal(title, data.message, key).then(function() {
 			if (data.url != null) {
-				window.location = data.url;
+				if (data.url == 'f5') {
+					window.location.reload();	
+				}else{
+					window.location = data.url;
+				}
+				
 			}
 		});
 		$('#loader').delay(200).fadeOut(500); 
@@ -61,8 +66,17 @@ var ajaxViewTarget = function(url, target_ajax, section_class, type = 1)
 	})
 }
 
+var empty = function(value)
+{
+	if (value === '' || value == 'undefined' || value == null) {
+		return true;
+	}else{
+		return false;
+	}
+}
+
 var getEmptyDefault = function(value, deflt = '', type = 'string'){
-	if (value === '' || value == 'undefined') {
+	if (value === '' || value == 'undefined' || value == null) {
 		if (type == 'float') {
 			return !Number.isNaN(parseFloat(value)) ? parseFloat(value) : deflt;	
 		}else if(type == 'number'){
