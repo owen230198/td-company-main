@@ -6,6 +6,7 @@ use App\Models\CSupply;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Quote;
+use App\Models\SupplyWarehouse;
 
 class OrderController extends Controller
 {
@@ -195,10 +196,30 @@ class OrderController extends Controller
                             'confirm_at' => \Carbon\Carbon::now()];
             $update = $command->where('id' , $id)->update($data_update);
             if ($update) {
-                return returnMessageAjax(200, 'Bạn đã xác nhận xuất vật tư!');
+                return returnMessageAjax(200, 'Bạn đã xác nhận xuất vật tư!', \StatusConst::RELOAD);
             }  
         }else{
             return returnMessageAjax(110, 'Bạn không có quyền duyệt xuất vật tư!');
+        }
+    }
+
+    public function takeInSupply($id)
+    {
+        if (\GroupUser::isAdmin() || \GroupUser::isWarehouse()) {
+            $warehouse_table = \DB::table('supply_warehouses');
+            $warehouse = $warehouse_table->find($id);
+            if (@$warehouse->status != SupplyWarehouse::WAITING) {
+                return returnMessageAjax(110, 'Dữ liệu không hợp lệ!');
+            } 
+            $data_update = ['status' => SupplyWarehouse::IMPORTED, 
+                            'confirm_by' => \User::getCurrent('id'), 
+                            'confirm_at' => \Carbon\Carbon::now()];
+            $update = $warehouse_table->where('id' , $id)->update($data_update);
+            if ($update) {
+                return returnMessageAjax(200, 'Bạn đã xác nhận nhập kho vật tư !', \StatusConst::RELOAD);
+            }  
+        }else{
+            return returnMessageAjax(110, 'Bạn không có quyền duyệt nhập kho vật tư !');
         }
     }
 

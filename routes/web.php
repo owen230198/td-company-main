@@ -61,6 +61,7 @@ Route::middleware(['check_login'])->group(function () {
 	Route::post('receive-command/{table}/{id}', [OrderController::class, 'receiveCommand']);
 	Route::any('supply-handle', [OrderController::class, 'supplyHandle']);
 	Route::post('take-out-supply/{id}', [OrderController::class, 'takeOutSupply']);
+	Route::post('take-in-supply/{id}', [OrderController::class, 'takeInSupply']);
 	Route::post('apply-to-worker-handle/{id}', [OrderController::class, 'applyToWorkerHandle']);
 });
 $modules_path = dirname(__DIR__) . '/app/Modules/';

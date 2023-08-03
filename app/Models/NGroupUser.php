@@ -100,12 +100,6 @@ class NGroupUser extends Model
             'group' => 
             'order_handle'
         ],
-        'profit' => [
-            'name' => 'Thu nhập cá nhân', 
-            'link' => 
-            'profit/sale', 
-            'group' => 'profit'
-        ],
         'rpt_quote_not_accepted' => [
             'name' => 'Báo giá chưa duyệt', 
             'link' => 'report/status=not_accepted', 
@@ -131,24 +125,19 @@ class NGroupUser extends Model
             'link' => 'report/revenue?type=location', 
             'group' => 'report'
         ],
-        'create_available_order' => [
-            'name' => 'Tạo đơn hàng', 
-            'link' => 'create-available-order', 
-            'group' => 'available_order'
-        ],
         'supp_warehouse' => [
             'name' => 'Quản lí kho vật tư', 
-            'link' => 'view/supply_warehouses?default_data={&quot;status&quot;:&quot;imported&quot;}', 
+            'link' => 'view/supply_warehouses?default_data={"status":"imported"}', 
             'group' => 'warehouse'
         ],
         'ex_supply' => [
             'name' => 'Yêu cầu xuất vật tư', 
-            'link' => 'view/c_supplies?default_data={&quot;status&quot;:&quot;handling&quot;}', 
+            'link' => 'view/c_supplies?default_data={"status":"handling"}', 
             'group' => 'handle_supply'
         ],
         'im_supply' => [
             'name' => 'Yêu cầu nhập kho băng lề', 
-            'link' => 'view/supply_warehouses?default_data={&quot;status&quot;:&quot;waiting&quot;}', 
+            'link' => 'view/supply_warehouses?default_data={"status":"waiting"}', 
             'group' => 'handle_supply'
         ],
         'shipping_process' => [

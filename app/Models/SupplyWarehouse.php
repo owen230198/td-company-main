@@ -10,6 +10,7 @@ class SupplyWarehouse extends Model
     protected $protectFields = false;
     //status
     const WAITING = 'waiting';
+    const IMPORTED = 'imported';
 
     //source
     const BUY = 1;

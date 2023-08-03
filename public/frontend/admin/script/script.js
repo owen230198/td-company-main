@@ -369,6 +369,18 @@ var confirmTakeOutSupply = function()
     });
 }
 
+var confirmTakeOutSupply = function()
+{
+    $(document).on('click', '.__confirm_im_supp', function(event){
+        event.preventDefault();
+        let id = $(this).data('id');
+        ajaxBaseCall({
+            url: getBaseRoute('take-in-supply/'+id),
+            type: 'POST'
+        });
+    });
+}
+
 var moduleSelectAjaxChild = function()
 {
     $(document).on('change', 'select.__select_parent', function(event){
