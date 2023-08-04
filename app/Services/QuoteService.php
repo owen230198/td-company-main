@@ -219,11 +219,8 @@ class QuoteService extends BaseService
             $data_quote['status'] = StatusConstant::NOT_ACCEPTED;
             $insert_id = Quote::insertGetId($data_quote);
         }
-        if (!empty($insert_id)) {
-            return redirect(asset('insert/quotes?step=handle_config&id='.$insert_id));
-        }else{
-            return redirect(asset('update/quotes/'.$id.'?step=handle_config'));
-        }
+        $redr = !empty($insert_id) ? 'insert/quotes?step=handle_config&id='.$insert_id : 'update/quotes/'.$id.'?step=handle_config';
+        return returnMessageAjax(200, '', asset($redr));
     }
 
     public function processDataQuote($request, $arr_quote)

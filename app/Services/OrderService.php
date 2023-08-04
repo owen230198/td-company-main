@@ -44,7 +44,10 @@ class OrderService extends BaseService
         }else{
             $new_arr_quote = Quote::find($arr_quote['id']);
             if (!empty($arr_order['advance'])) {
-                $arr_order['rest'] = (float) $new_arr_quote['total_amount'] - (float) $arr_order['advance'];
+                $quote_amount = (float) $new_arr_quote['total_amount'];
+                $arr_order['total_amount'] = @$arr_order['vat'] == 1 ? 
+                calValuePercentPlus($quote_amount, $quote_amount, (float) getDataConfig('QuoteConfig', 'VAT_PERC', 0)) : $quote_amount;
+                $arr_order['rest'] = $arr_order['total_amount'] - (float) $arr_order['advance'];
             }
             $this->configBaseDataAction($arr_order);
             if (!empty($arr_order['id'])) {

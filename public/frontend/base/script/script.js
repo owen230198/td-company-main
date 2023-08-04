@@ -30,16 +30,24 @@ var ajaxBaseCall = function(param)
 	.done(function(data) {
 		let title = data.code == 200 ? 'Thành công' : 'Không thành công';
 		let key = data.code == 200 ? 'success' : 'error';
-		swal(title, data.message, key).then(function() {
-			if (data.url != null) {
-				if (data.url == 'f5') {
-					window.location.reload();	
-				}else{
-					window.location = data.url;
+		if (!empty(data.message)) {
+			swal(title, data.message, key).then(function() {
+				if (data.url != null) {
+					if (data.url == 'f5') {
+						window.location.reload();	
+					}else{
+						window.location = data.url;
+					}
+					
 				}
-				
+			});
+		}else{
+			if (data.url == 'f5') {
+				window.location.reload();	
+			}else{
+				window.location = data.url;
 			}
-		});
+		}
 		$('#loader').delay(200).fadeOut(500); 
 	})
 }

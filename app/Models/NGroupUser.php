@@ -100,6 +100,11 @@ class NGroupUser extends Model
             'group' => 
             'order_handle'
         ],
+        'profit' => [
+            'name' => 'Lợi nhuận của tôi', 
+            'link' => 'myprofit', 
+            'group' => 'profit'
+        ],
         'rpt_quote_not_accepted' => [
             'name' => 'Báo giá chưa duyệt', 
             'link' => 'report/status=not_accepted', 
@@ -124,6 +129,11 @@ class NGroupUser extends Model
             'name' => 'Doanh thu theo tỉnh/TP', 
             'link' => 'report/revenue?type=location', 
             'group' => 'report'
+        ],
+        'create_available_order' => [
+            'name' => 'Đơn hàng bán sẵn', 
+            'link' => 'view/available_orders', 
+            'group' => 'available_order'
         ],
         'supp_warehouse' => [
             'name' => 'Quản lí kho vật tư', 

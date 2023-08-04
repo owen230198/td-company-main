@@ -350,10 +350,32 @@ var receiveCommand = function()
         event.preventDefault();
         let table = $(this).data('table');
         let id = $(this).data('id');
-        ajaxBaseCall({
+        $('#loader').fadeIn(200);
+        $.ajax({
             url: getBaseRoute('receive-command/'+table+'/'+id),
             type: 'POST'
-        });
+        }).done(function(data){
+            let title = data.code == 200 ? 'Thành công' : 'Không thành công';
+            let key = data.code == 200 ? 'success' : 'error';
+            swal(title, data.message, key, {
+                buttons: {
+                  catch: {
+                    text: "Lệnh đang nhận",
+                    status: "received",
+                  },
+                  OK: true,
+                },
+              }).then((status) => {
+                switch (status) {
+                  case "received":
+                    window.location = getBaseRoute('view/c_designs?default_data={"status":"designing"}');
+                    break;
+                  default:
+                    window.location.reload();	
+                }
+            });
+        })
+        $('#loader').delay(200).fadeOut(500); 
     });
 }
 

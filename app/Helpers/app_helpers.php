@@ -177,8 +177,8 @@ if (!function_exists('')) {
 if (!function_exists('calValuePercentPlus')) {
     function calValuePercentPlus($value, $get_perc, $perc, $plus =0)
     {
-        $add_percent = (int) $get_perc * (int) $perc / 100;
-        return $value + $add_percent + (int) $plus;
+        $add_percent = (float) $get_perc * (float) $perc / 100;
+        return $value + $add_percent + (float) $plus;
     }
 }
 

@@ -2,7 +2,8 @@
     $select_data = !empty($other_data['data']) ? $other_data['data'] : [];
     $field_title = @$select_data['field_title'] ?? 'name';
     $field_query = @$select_data['field_query'];
-    $childs = \DB::table($select_data['table'])->where(['act' => 1, $field_query => $obj_id])->get();
+    $field_linking = !empty($select_data['field_linking']) ? $select_data['field_linking'] : 'id';
+    $childs = \DB::table($select_data['table'])->where(['act' => 1, $field_query => $data->{$field_linking}])->get();
     $child_field = \DB::table('n_detail_tables')->where(['act' => 1, 'table_map' => $select_data['table'], 'name' => $field_title])->first();
 @endphp
 @foreach ($childs as $child)

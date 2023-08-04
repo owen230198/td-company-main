@@ -11,6 +11,20 @@ var setAdvanceCostOrder = function()
     });
 }
 
+var moduleVATOrder = function()
+{
+    $(document).on('change', 'input.__vat_order_checkbox', function(event){
+        event.preventDefault();
+        let parent = $(this).closest('.__order_field_module');
+        let vat_per = $(this).val() == 1 ? getEmptyDefault($(this).attr('vat_per'), 0, 'float') : 0;
+        let total = getEmptyDefault(parent.find('.__quote_total_input').val(), 0, 'float');
+        let add_per = total*vat_per/100;
+        let order_amount = total+add_per;
+        parent.find('input.__order_total_input').val(order_amount);
+        parent.find('.__order_advance_input').trigger('change');
+    });
+}
+
 var applyOrderStep = function()
 {
     $(document).on('click', '.__apply_order', function(event){
@@ -71,6 +85,7 @@ var updateHandleWareHouse = function(obj)
 
 $(function(){
     setAdvanceCostOrder(); 
+    moduleVATOrder();
     applyOrderStep();
     planHandleElevateModule();
 });

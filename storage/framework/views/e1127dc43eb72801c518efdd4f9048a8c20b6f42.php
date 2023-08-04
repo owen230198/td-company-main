@@ -5,8 +5,21 @@
             [
                 'name' => '',
                 'note' => 'Tổng tiền (chưa bao gồm VAT)',
-                'attr' => ['disable_field' => 1, 'inject_class' => '__order_total_input'],
+                'attr' => ['disable_field' => 1, 'inject_class' => '__quote_total_input'],
                 'value' => round(@$data_quote['total_amount'])
+            ],
+            [
+                'name' => 'order[vat]',
+                'note' => 'VAT',
+                'type' => 'checkbox',
+                'attr' => ['disable_field' => 1, 'inject_class' => '__vat_order_checkbox', 'inject_attr' => 'vat_per='.getDataConfig('QuoteConfig', 'VAT_PERC', 0).''],
+                'value' => @$data_order['vat'] ?? 0
+            ],
+            [
+                'name' => 'order[total_amount]',
+                'note' => 'Tổng tiền đơn hàng',
+                'attr' => ['disable_field' => 1, 'inject_class' => '__order_total_input'],
+                'value' => round(@$data_order['total_amount'] ?? $data_quote['total_amount'])
             ],
             [
                 'name' => 'order[advance]',
@@ -18,7 +31,7 @@
                 'name' => 'order[rest]',
                 'note' => 'Chi phí còn lại',
                 'attr' => ['readonly' => 1, 'inject_class' => '__order_rest_input'],
-                'value' => @$data_order['rest'] ?? round(@$data_quote['total_amount'])
+                'value' => round(@$data_order['rest']) ?? round(@$data_quote['total_amount'])
             ],
             [
                 'name' => 'order[rest_bill]',
