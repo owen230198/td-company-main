@@ -5,7 +5,7 @@
 <?php $__env->startSection('content'); ?>
     <div class="position-relative">
         <div class="quote_table_stage mb-4">
-            <table class="table table-bordered mb-1">
+            <table class="table table-bordered mb-1 quote_table_profit">
                 <thead>
                     <tr>
                         <th class="w_50">#</th>

@@ -4,14 +4,14 @@
         $silk_compen_percent = (float) getDataConfig('QuoteConfig', 'SILK_COMPEN_PERCENT');
         $silk_divide = \TDConst::SILK_SIZE_DIVIDE;
         $silk_plus = \TDConst::SILK_SIZE_PLUS; 
-        $pro_silk_supply = [
-            'name' => 'product['.$pro_index.']['.$key_supp.']['.$supp_index.'][size][supply_price]',
-            'type' => 'linking',
-            'note' => 'Chọn vật tư',
-            'value' => @$supply_size['supply_price'],
-            'other_data' => ['config' => ['search' => 1], 
-            'data' => ['table' => 'supply_prices', 'where' => ['type' => $key_supp]]]
-        ];
+        // $pro_silk_supply = [
+        //     'name' => 'product['.$pro_index.']['.$key_supp.']['.$supp_index.'][size][supply_price]',
+        //     'type' => 'linking',
+        //     'note' => 'Chọn vật tư',
+        //     'value' => @$supply_size['supply_price'],
+        //     'other_data' => ['config' => ['search' => 1], 
+        //     'data' => ['table' => 'supply_prices', 'where' => ['type' => $key_supp]]]
+        // ];
         $pro_silk_ext_price = [
             'name' => 'product['.$pro_index.']['.$key_supp.']['.$supp_index.'][size][prescript_price]',
             'note' => 'Phát sinh giá lụa cao cấp',
@@ -30,7 +30,7 @@
 
     <?php echo $__env->make('quotes.products.supplies.size_config', ['plus' => $silk_plus, 'divide' => $silk_divide], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-    <?php echo $__env->make('view_update.view', $pro_silk_supply, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php echo $__env->make('quotes.products.supplies.select_supply_type', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     <div class="d-flex align-items-center">
         <?php echo $__env->make('view_update.view', $pro_silk_ext_price, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>

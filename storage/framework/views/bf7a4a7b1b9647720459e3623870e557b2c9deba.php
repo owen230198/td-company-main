@@ -65,7 +65,8 @@
                             ((Dài x Rộng x ĐG giấy bồi + ĐG lượt) x SL sản phẩm) + ĐG chỉnh máy = 
                             ((<?php echo e($fstage['length']); ?> x <?php echo e($fstage['width']); ?> x <?php echo e($fstage['qttv_price']); ?> + <?php echo e((float) @$stage['work_price']); ?>) x <?php echo e($stage['qty_pro']); ?>) + <?php echo e((float) @$stage['shape_price']); ?>
 
-                             = <?php echo e(number_format((float) @$fstage['cost'])); ?>đ</p>
+                             = <?php echo e(number_format((float) @$fstage['cost'])); ?>đ
+                        </p>
                     </div>
                 </li>
             <?php endif; ?>

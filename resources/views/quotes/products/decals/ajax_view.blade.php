@@ -4,14 +4,14 @@
         $decal_compen_percent = (float) getDataConfig('QuoteConfig', 'SILK_COMPEN_PERCENT');
         $decal_divide = \TDConst::DECAL_SIZE_DIVIDE;
         $decal_plus = \TDConst::DECAL_SIZE_PLUS;
-        $pro_decal_supply = [
-            'name' => 'product['.$pro_index.']['.$key_supp.']['.$supp_index.'][size][supply_price]',
-            'type' => 'linking',
-            'note' => 'Chọn vật tư',
-            'value' => @$supply_size['supply_price'],
-            'other_data' => ['config' => ['search' => 1],
-            'data' => ['table' => 'supply_prices', 'where' => ['type' => $key_supp]]]
-        ];
+        // $pro_decal_supply = [
+        //     'name' => 'product['.$pro_index.']['.$key_supp.']['.$supp_index.'][size][supply_price]',
+        //     'type' => 'linking',
+        //     'note' => 'Chọn vật tư',
+        //     'value' => @$supply_size['supply_price'],
+        //     'other_data' => ['config' => ['search' => 1],
+        //     'data' => ['table' => 'supply_prices', 'where' => ['type' => $key_supp]]]
+        // ];
         $key_device_cut = \TDConst::CUT;
         $data_cut = !empty($supply_obj->cut) ? json_decode($supply_obj->cut, true) : []; 
     @endphp
@@ -25,7 +25,7 @@
 
     @include('quotes.products.supplies.size_config', ['plus' => $decal_plus, 'divide' => $decal_divide])
 
-    @include('view_update.view', $pro_decal_supply)
+    @include('quotes.products.supplies.select_supply_type')
 
     @include('quotes.products.select_device', 
     ['key_device' => $key_device_cut, 'note' => 'Máy xén', 

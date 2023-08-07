@@ -209,6 +209,10 @@ ul.supply_info li.supply_item_inf>.detail_quote_supply_item.hover{
     max-width: 200px;
 }
 
+.page_content .table.quote_table_profit td {
+    vertical-align: top;
+}
+
 @page {
     size: A4;
     margin: 1cm;

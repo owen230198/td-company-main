@@ -15,6 +15,7 @@
 </ul>
 <div class="d-flex align-items-center mt-2 pt-2 border_top">
     <p class="font_bold">Các công đoạn hoàn thiện:</p>
+    <ul>
         <?php if(!empty($stage['stage'])): ?>
             <?php $__currentLoopData = $stage['stage']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $fstage): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <?php if($fstage['cost'] > 0): ?>
@@ -24,7 +25,7 @@
                         ?>
                         <div class="mb-2 d-flex align-items-center">
                             <span class="mr-1">Công đoạn hoàn thiện : </span>
-                            <p class="font_bold"><?php echo e(getFieldDataById('name', 'supply_prices', @$fstage['materal'])); ?></p>
+                            <p class="font_bold"><?php echo e(getFieldDataById('name', 'devices', @$fstage['materal'])); ?></p>
                         </div>
                         <div class="mb-2 d-flex align-items-center">
                             <span class="mr-1">Chi phí công đoạn : </span>

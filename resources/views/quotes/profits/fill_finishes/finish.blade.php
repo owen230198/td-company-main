@@ -13,9 +13,10 @@
         </li>
     @endif
 </ul>
-<div class="d-flex align-items-center mt-2 pt-2 border_top">
-    <p class="font_bold">Các công đoạn hoàn thiện:</p>
-        @if (!empty($stage['stage']))
+@if (!empty($stage['stage']))
+    <div class="d-flex align-items-center mt-2 pt-2 border_top">
+        <p class="font_bold">Các công đoạn hoàn thiện:</p>
+        <ul>
             @foreach ($stage['stage'] as $fstage)
                 @if ($fstage['cost'] > 0)
                     <li class="mb-1 pb-1">
@@ -24,7 +25,7 @@
                         @endphp
                         <div class="mb-2 d-flex align-items-center">
                             <span class="mr-1">Công đoạn hoàn thiện : </span>
-                            <p class="font_bold">{{ getFieldDataById('name', 'supply_prices', @$fstage['materal']) }}</p>
+                            <p class="font_bold">{{ getFieldDataById('name', 'devices', @$fstage['materal']) }}</p>
                         </div>
                         <div class="mb-2 d-flex align-items-center">
                             <span class="mr-1">Chi phí công đoạn : </span>
@@ -37,9 +38,9 @@
                     </li>
                 @endif
             @endforeach
-        @endif
-    </ul>
-</div>
+        </ul>
+    </div>
+@endif
 
 <div class="mt-2 pt-2 border_top_thin formula_tab">
     <p class="fs-15 color_green mb-2 font_bold">Công Thức Tính</p>

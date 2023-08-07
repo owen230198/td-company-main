@@ -150,6 +150,11 @@ class OrderController extends Controller
             $table = $request->input('table');
             $id = $request->input('id');
             $data_supply = \DB::table($table)->find($id);
+            if ($table == 'papers') {
+                $data_supply->type = \TDConst::PAPER;    
+            }elseif ($table == 'fill_finishes') {
+                $data_supply->type = \TDConst::FILL_FINISH; 
+            }
             if (getHandleSupplyStatus($data_supply->product, $data_supply->id, $data_supply->type) != CSupply::NOT_HANDLE) {
                 return back()->with('error', 'Vật tư đang được xử lí bởi kế toán kho !');
             }
@@ -225,8 +230,8 @@ class OrderController extends Controller
 
     public function applyToWorkerHandle($id)
     {
-        if (\GroupUser::isAdmin || \GroupUser::isPlanHandle()) {
-            $obj_order = DB::table('orders')->find($id);
+        if (\GroupUser::isPlanHandle()) {
+            $obj_order = \DB::table('orders')->find($id);
             if ($obj_order->status != Order::TECH_SUBMITED) {
                 return returnMessageAjax(110, 'DỮ liệu trạng thái đơn hàng không hợp lệ !');
             }

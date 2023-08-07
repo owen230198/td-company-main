@@ -104,11 +104,14 @@ var loadDataPopup = function () {
       })
 };
 
-var selectConfigs = function () {
-    if ($("select.select_config").length > 0) {
-        $("select.select_config").select2({
-            minimumResultsForSearch: 1,
-        });
+var selectConfig = function (section = $('.base_content')) {
+    let list_select2 = section.find("select.select_config");
+    if (list_select2.length > 0) {
+        list_select2.each(function () {
+            $(this).select2({
+                minimumResultsForSearch: 1,
+            });   
+        })
     }
 };
 
@@ -304,6 +307,7 @@ var initInputModuleAfterAjax = function(section)
 {
     selectAjaxModule(section);
     multipleSelectModule(section);
+    selectConfig(section);
 }
 
 var fileProcessModule = function() {
@@ -443,7 +447,7 @@ $(function () {
     passwordInputPrevent();
     checkMultiRecordModule();
     loadDataPopup();
-    selectConfigs();
+    selectConfig();
     dateRangeInputModule();
     datePickerModule();
     menuUserHeader();

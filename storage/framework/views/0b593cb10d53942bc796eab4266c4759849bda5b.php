@@ -3,7 +3,7 @@
         <ul class="supply_info">
             <li class="supply_item_inf">
                 <span class="font_bold mr-1">Tên vật tư: </span>
-                <span><?php echo e(@$item->name ?? @$supply['note']); ?></span>
+                <span><?php echo e(@$supply['pro_field'] == 'carton' ? getFieldDataById('name', 'supply_types', @$item->name) : (@$item->name ?? @$supply['note'])); ?></span>
             </li>
             <?php $__currentLoopData = $supply['device']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $device): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <?php
