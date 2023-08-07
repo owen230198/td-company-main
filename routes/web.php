@@ -36,9 +36,11 @@ Route::middleware(['check_login'])->group(function () {
 	Route::get('get-data-json-linking', [AdminController::class, 'getDataJsonLinking']);
 	Route::any('config-device-price/{step}', [AdminController::class, 'configDevicePrice']);
 	Route::get('get-list-option-ajax/{table}', [AdminController::class, 'getListOptionAjax']);
+	Route::get('option-ajax-child/{table}/{field}', [AdminController::class, 'optionChildData']);
 	Route::post('file-upload', [AdminController::class, 'fileUpload']);
 	Route::any('file-download', [AdminController::class, 'fileDownload']);
 	Route::get('list-worker-by-device/{step}', [AdminController::class, 'listWorkerByDevice']);
+	Route::get('get-device-by-type', [QuoteController::class, 'getDeviceByType']);
 
 	//quotes routes
 	Route::any('create-quote', [QuoteController::class, 'createQuote']);
@@ -54,7 +56,6 @@ Route::middleware(['check_login'])->group(function () {
 	Route::any('send-quote/{id}', [QuoteController::class, 'sendQuote']);
 	Route::any('apply-quote/{id}', [QuoteController::class, 'applyQuote']);
 	Route::get('get-after-print-view', [QuoteController::class, 'getAfterPrintView']);
-	Route::get('get-device-by-type', [QuoteController::class, 'getDeviceByType']);
 
 	//orders routes
 	Route::post('apply-order/{stage}/{id}', [OrderController::class, 'applyOrder']);

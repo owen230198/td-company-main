@@ -27,7 +27,10 @@
 @foreach ($ext_pro_feild_file as $key => $ext_feild_file)
     @php
         $ext_feild_file['value'] = @$product[$key];
-        $ext_feild_file['name'] = $pro_base_name_input.'['.$key.']'
+        $ext_feild_file['name'] = $pro_base_name_input.'['.$key.']';
+        $ext_feild_file['table_map'] = 'products';
+        $ext_feild_file['other_data']['field_name'] = $key;
+        $ext_feild_file['other_data']['obj_id'] = @$product['id'];
     @endphp
     @include('view_update.view', $ext_feild_file)     
 @endforeach

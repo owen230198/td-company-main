@@ -25,6 +25,7 @@
                 $data['id'] = $id;
                 $data['title'] = 'Cập nhật & Xác nhận lệnh - '.$arr_command['code'];
                 $data['link_action'] = url('update/c_designs/'.$id);
+                $data['stage'] = @$data['data_order']['status'];
                 return view('c_designs.view', $data);
             }else{
                 if ($arr_command['status'] != CDesign::PROCESSING || $arr_command['assign_by'] != \User::getCurrent('id')) {

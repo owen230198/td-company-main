@@ -18,11 +18,14 @@
             <button type="submit" class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-2">
               <i class="fa fa-check mr-2 fs-14" aria-hidden="true"></i>Hoàn tất
             </button>
-            <?php if(!empty($stage)): ?>
+            <?php
+                $stage_button = getOrderNameStageByKey(@$stage)
+            ?>
+            <?php if(!empty($stage_button)): ?>
                 <button type="button" class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-2 __apply_order" 
                 data-id=<?php echo e($id); ?> data-stage="<?php echo e($stage); ?>">
                     <i class="fa fa-thumbs-o-up mr-2 fs-14" aria-hidden="true"></i>
-                    <?php echo e(getOrderNameStageByKey($stage)); ?>
+                    <?php echo e($stage_button); ?>
 
                 </button> 
             <?php endif; ?>

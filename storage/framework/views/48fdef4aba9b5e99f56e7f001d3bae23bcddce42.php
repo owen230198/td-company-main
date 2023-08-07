@@ -27,7 +27,10 @@
 <?php $__currentLoopData = $ext_pro_feild_file; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $ext_feild_file): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
     <?php
         $ext_feild_file['value'] = @$product[$key];
-        $ext_feild_file['name'] = $pro_base_name_input.'['.$key.']'
+        $ext_feild_file['name'] = $pro_base_name_input.'['.$key.']';
+        $ext_feild_file['table_map'] = 'products';
+        $ext_feild_file['other_data']['field_name'] = $key;
+        $ext_feild_file['other_data']['obj_id'] = @$product['id'];
     ?>
     <?php echo $__env->make('view_update.view', $ext_feild_file, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>     
 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

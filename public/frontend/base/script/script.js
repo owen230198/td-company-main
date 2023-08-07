@@ -76,11 +76,7 @@ var ajaxViewTarget = function(url, target_ajax, section_class, type = 1)
 
 var empty = function(value)
 {
-	if (value === '' || value == 'undefined' || value == null) {
-		return true;
-	}else{
-		return false;
-	}
+	return value === '' || value == 'undefined' || value == null || value == undefined;
 }
 
 var getEmptyDefault = function(value, deflt = '', type = 'string'){

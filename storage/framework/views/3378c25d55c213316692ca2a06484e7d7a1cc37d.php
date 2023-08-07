@@ -19,19 +19,24 @@
         }
     ?>
     <select name="<?php echo e($name); ?>" class="form-control select_ajax <?php echo e(@$attr['inject_class'] ? ' '.$attr['inject_class'] : ''); ?>"
-    data-url="<?php echo e($url); ?>" data-id="<?php echo e(@$data_id); ?>", data-label = "<?php echo e(@$data_label); ?>" <?php echo e(@$attr['inject_attr'] ?? ''); ?>>
+    data-url="<?php echo e($url); ?>" data-id="<?php echo e(@$data_id); ?>", data-label = "<?php echo e(@$data_label); ?>" <?php echo e(@$attr['inject_attr'] ?? ''); ?> 
+    <?php echo e(@$attr['disable_field'] == 1 ? 'disabled' : ''); ?>
+
+    <?php echo e(@$attr['readonly'] == 1 ? 'readonly' : ''); ?>>
     </select>
 <?php else: ?>
     <?php
         $list_options = getOptionDataField($select_data);
     ?>
     <select name="<?php echo e($name); ?>" 
-            class="form-control <?php echo e(@$attr['inject_class']); ?>" 
+            class="form-control <?php echo e(@$select_config['searchbox'] == 1 ? ' select_config' : ''); ?> <?php echo e(@$attr['inject_class']); ?>" 
             <?php echo e(@$attr['inject_attr'] ?? ''); ?>
 
             <?php echo e(@$attr['disable_field'] == 1 ? 'disabled' : ''); ?>
 
-            <?php echo e(@$attr['readonly'] == 1 ? 'readonly' : ''); ?>>
+            <?php echo e(@$attr['readonly'] == 1 ? 'readonly' : ''); ?>
+
+            >
         <option value="0">Chọn</option>
         <?php $__currentLoopData = $list_options; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <option value="<?php echo e($item->$field_value); ?>" <?php echo e($item->$field_value == @$value ? 'selected' : ''); ?>>

@@ -261,17 +261,14 @@ class AdminController extends Controller
         }
     }
 
-    public function optionChildData($table, $field, $parent)
+    public function optionChildData(Request $request, $table, $field)
     {
-        $html = '<option value="0">Danh sách chọn</option>';
-        if (!$this->admins->checkPermissionAction($table, 'view')) {
-            $html;
-        }
-        if (@$parent) {
-            $models = getModelByTable($table);
-            $data = $models->where('act', 1)->where($field, $parent)->orderBy('name', 'asc')->get();
+        $html = '<option value="">Danh sách chọn</option>';
+        $parent = $request->input('param');
+        if (!empty($parent)) {
+            $data = \DB::table($table)->where(['act' => 1, $field => $parent])->orderBy('ord', 'asc')->get();
             foreach ($data as $item) {
-                $html .= '<option value="'.$item['id'].'">'.$item['name'].'</option>';
+                $html .= '<option value="'.@$item->id.'">'.@$item->name.'</option>';
             }
         }
         echo $html;
@@ -369,6 +366,13 @@ class AdminController extends Controller
                     $data['code'] = 200;
                     $data['path'] = $path.'/'.$name;
                     $data['name'] = $name;
+                    $table = $request->input('table');
+                    $field = $request->input('field');
+                    $obj_id = $request->input('obj');
+                    if (!empty($table) && !empty($field) && !empty($obj_id)) {
+                        \DB::table($table)->where('id', $obj_id)
+                        ->update([$field => json_encode(['path' => $data['path'], 'name' => $data['name']])]);
+                    }
                 }
             }
         }

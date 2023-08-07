@@ -314,6 +314,18 @@ var fileProcessModule = function() {
         if (files.length > 0) {
             let form_data = new FormData();
             form_data.append('file', files[0]);
+            let table = $(this).data('table');
+            if (!empty('table')) {
+                form_data.append('table', table);
+            }
+            let field = $(this).data('field');
+            if (!empty('field')) {
+                form_data.append('field', field);
+            }
+            let obj = $(this).data('obj');
+            if (!empty('obj')) {
+                form_data.append('obj', obj);
+            }
             let parent = $(this).closest('.__module_upload_file');
             let input_value = parent.find('input.__file_value');
             $('#loader').fadeIn(200);
@@ -340,6 +352,8 @@ var fileProcessModule = function() {
                 }
                 $('#loader').fadeOut(200);
             })
+        }else{
+            swal('Không thành công', 'Dữ liệu file không đúng', 'error');
         }   
     });
 }
@@ -361,12 +375,12 @@ var receiveCommand = function()
                 buttons: {
                   catch: {
                     text: "Lệnh đang nhận",
-                    status: "received",
+                    value: "received",
                   },
                   OK: true,
                 },
-              }).then((status) => {
-                switch (status) {
+              }).then((value) => {
+                switch (value) {
                   case "received":
                     window.location = getBaseRoute('view/c_designs?default_data={"status":"designing"}');
                     break;
@@ -411,8 +425,12 @@ var moduleSelectAjaxChild = function()
         let parent = $(this).closest('.__module_select_ajax_value_child');
         let url =  parent.attr('link')+'?param='+value;
         let ajax_target = parent.find('select.__select_child');
-        ajax_target.attr('disabled', false);
         ajaxViewTarget(url, ajax_target, ajax_target);
+        if (!empty(value)) {
+            ajax_target.attr('disabled', false);    
+        }else{
+            ajax_target.attr('disabled', true);   
+        }
     })
 }
 

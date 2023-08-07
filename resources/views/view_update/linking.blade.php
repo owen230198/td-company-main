@@ -19,17 +19,20 @@
         }
     @endphp
     <select name="{{ $name }}" class="form-control select_ajax {{ @$attr['inject_class'] ? ' '.$attr['inject_class'] : '' }}"
-    data-url="{{ $url }}" data-id="{{ @$data_id }}", data-label = "{{ @$data_label }}" {{ @$attr['inject_attr'] ?? '' }}>
+    data-url="{{ $url }}" data-id="{{ @$data_id }}", data-label = "{{ @$data_label }}" {{ @$attr['inject_attr'] ?? '' }} 
+    {{ @$attr['disable_field'] == 1 ? 'disabled' : '' }}
+    {{ @$attr['readonly'] == 1 ? 'readonly' : '' }}>
     </select>
 @else
     @php
         $list_options = getOptionDataField($select_data);
     @endphp
     <select name="{{ $name }}" 
-            class="form-control {{ @$attr['inject_class'] }}" 
+            class="form-control {{ @$select_config['searchbox'] == 1 ? ' select_config' : '' }} {{ @$attr['inject_class'] }}" 
             {{ @$attr['inject_attr'] ?? '' }}
             {{ @$attr['disable_field'] == 1 ? 'disabled' : '' }}
-            {{ @$attr['readonly'] == 1 ? 'readonly' : '' }}>
+            {{ @$attr['readonly'] == 1 ? 'readonly' : '' }}
+            >
         <option value="0">Chọn</option>
         @foreach ($list_options as $item)
             <option value="{{ $item->$field_value }}" {{ $item->$field_value == @$value ? 'selected' : '' }}>
