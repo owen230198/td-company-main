@@ -13,7 +13,7 @@
                 <span class="mx-3">X</span>
                 <input type="number" name = 'product[{{ $pro_index }}][{{ $key_supp }}][{{ $supp_index }}][size][unit_price]' placeholder="Đơn giá" 
                 class="form-control medium_input price_input_paper" 
-                {{ @$supply_size['materal'] != 'other' ? 'disabled="disabled"' : '' }} step="any" value="{{ @$supply_size['unit_price'] }}">
+                {{ @$supply_size['materal'] != 'other' ? 'disabled=disabled' : '' }} step="any" value="{{ @$supply_size['unit_price'] }}">
                 <span class="ml-3 fs-12 color_gray">VD 22 triệu/tấn = 0.00022</span>
             </div>
         </div>

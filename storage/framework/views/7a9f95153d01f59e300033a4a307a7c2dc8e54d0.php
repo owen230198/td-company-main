@@ -13,10 +13,10 @@
         </li>
     <?php endif; ?>
 </ul>
-<div class="d-flex align-items-center mt-2 pt-2 border_top">
-    <p class="font_bold">Các công đoạn hoàn thiện:</p>
-    <ul>
-        <?php if(!empty($stage['stage'])): ?>
+<?php if(!empty($stage['stage'])): ?>
+    <div class="d-flex align-items-center mt-2 pt-2 border_top">
+        <p class="font_bold">Các công đoạn hoàn thiện:</p>
+        <ul>
             <?php $__currentLoopData = $stage['stage']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $fstage): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <?php if($fstage['cost'] > 0): ?>
                     <li class="mb-1 pb-1">
@@ -38,9 +38,9 @@
                     </li>
                 <?php endif; ?>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-        <?php endif; ?>
-    </ul>
-</div>
+        </ul>
+    </div>
+<?php endif; ?>
 
 <div class="mt-2 pt-2 border_top_thin formula_tab">
     <p class="fs-15 color_green mb-2 font_bold">Công Thức Tính</p>

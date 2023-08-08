@@ -108,8 +108,10 @@ var selectPaperMateralModule = function()
   $(document).on('change', 'select.select_paper_materal', function(event){
     event.preventDefault();
     let module_size_paper = $(this).closest('.materal_paper_module').find('.paper_price_config_input');
+
     let price_input = module_size_paper.find('input.price_input_paper');
     if ($(this).val() === 'other') {
+      console.log(module_size_paper.css('display'));
       if (module_size_paper.css('display') === 'none' && price_input.attr('disabled') === 'disabled') {
         module_size_paper.fadeIn(100);
         price_input.attr('disabled', false);  

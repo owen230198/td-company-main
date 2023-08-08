@@ -9,6 +9,12 @@
         <div class="module_hanle_supply_plan quantity_paper_module plan_handle_elevate_module" data-percent = <?php echo e($compen_percent); ?>>
             <?php
                 $c_name = 'c_supply';
+                $where_size_type = [
+                    'type' => $key_supp, 
+                    'supp_type' => @$supply_size['supply_type'],
+                    'supp_price' => @$supply_size['supply_price'],
+                    'status' => 'imported'
+                ];
                 $field_handles = [
                     [
                         'name' => $c_name.'[size_type]',

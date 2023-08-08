@@ -20,7 +20,7 @@
     }
 
     if (!function_exists('getProductElementData')) {
-        function getProductElementData($category, $id)
+        function getProductElementData($category, $id, $exc_paper = false)
         {
             $ret = isHardBox($category) ? \TDConst::HARD_ELEMENT : \TDConst::PAPER_ELEMENT;
             $where = ['act' => 1, 'product' => $id];
@@ -28,8 +28,11 @@
                 if ($item['table'] == 'supplies') {
                     $where['type'] = $item['pro_field'];
                 }
+                if ($exc_paper && $item['table'] =='papers') {
+                    $where['except_handle'] = 0;
+                }
                 $ret[$key]['data'] = \DB::table($item['table'])->where($where)->get()->toArray();
-                unset($where['type']);
+                unset($where['type'], $where['except_handle']);
             }
             return $ret;
         }

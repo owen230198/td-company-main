@@ -13,7 +13,7 @@
                 <span class="mx-3">X</span>
                 <input type="number" name = 'product[<?php echo e($pro_index); ?>][<?php echo e($key_supp); ?>][<?php echo e($supp_index); ?>][size][unit_price]' placeholder="Đơn giá" 
                 class="form-control medium_input price_input_paper" 
-                <?php echo e(@$supply_size['materal'] != 'other' ? 'disabled="disabled"' : ''); ?> step="any" value="<?php echo e(@$supply_size['unit_price']); ?>">
+                <?php echo e(@$supply_size['materal'] != 'other' ? 'disabled=disabled' : ''); ?> step="any" value="<?php echo e(@$supply_size['unit_price']); ?>">
                 <span class="ml-3 fs-12 color_gray">VD 22 triệu/tấn = 0.00022</span>
             </div>
         </div>

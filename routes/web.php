@@ -41,6 +41,7 @@ Route::middleware(['check_login'])->group(function () {
 	Route::any('file-download', [AdminController::class, 'fileDownload']);
 	Route::get('list-worker-by-device/{step}', [AdminController::class, 'listWorkerByDevice']);
 	Route::get('get-device-by-type', [QuoteController::class, 'getDeviceByType']);
+	Route::get('warehouse-management', [AdminController::class, 'warehouseManagement']);
 
 	//quotes routes
 	Route::any('create-quote', [QuoteController::class, 'createQuote']);

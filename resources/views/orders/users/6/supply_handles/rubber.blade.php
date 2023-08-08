@@ -13,13 +13,6 @@
     @include('quotes.products.supplies.size_config', ['plus' => $rubber_plus, 'divide' => $rubber_divide])
 
     @include('quotes.products.supplies.select_supply_type')
-    @php
-        $where = [
-                    'type' => $key_supp, 
-                    'supp_type' => @$supply_size['supply_type'],
-                    'supp_price' => @$supply_size['supply_price'],
-                    'status' => 'imported'
-                ]
-    @endphp
-    @include('orders.users.6.supply_handles.handle', ['compen_percent' => $rubber_compen_percent, 'where_size_type' => $where])
+    
+    @include('orders.users.6.supply_handles.handle', ['compen_percent' => $rubber_compen_percent])
 @endsection
