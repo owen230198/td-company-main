@@ -9,12 +9,14 @@
         <div class="module_hanle_supply_plan quantity_paper_module plan_handle_elevate_module" data-percent = {{ $compen_percent }}>
             @php
                 $c_name = 'c_supply';
-                $where_size_type = [
+                $where_size_type = !empty($where_size_supp) ? $where_size_supp : 
+                [
                     'type' => $key_supp, 
                     'supp_type' => @$supply_size['supply_type'],
                     'supp_price' => @$supply_size['supply_price'],
                     'status' => 'imported'
                 ];
+                
                 $field_handles = [
                     [
                         'name' => $c_name.'[size_type]',
@@ -47,20 +49,9 @@
                         'note' => 'SL vật tư cần xuất + '.$compen_percent.'%',
                         'attr' => ['inject_class' => 'paper_qty_input plan_input_supp_qty input_elevate_change', 'type_input' => 'number', 'readonly' => 1],
                         'value' => 0,
-                    ],
-                    [
-                        'name' => 'elevate[num]',
-                        'note' => 'Nhập số lượt bế',
-                        'attr' => ['inject_class' => 'plan_input_elevate input_elevate_change', 'type_input' => 'number'],
-                        'value' => 0,
-                    ],
-                    [
-                        'name' => 'elevate[total]',
-                        'note' => 'Nhập số lượt bế',
-                        'attr' => ['inject_class' => 'plan_input_total_elevate', 'type_input' => 'number', 'readonly' => 1],
-                        'value' => 0,
-                    ],
+                    ]
                 ];
+
                 $wh_name = 'over_supply';
                 $field_warehouses = [
                     [
@@ -95,6 +86,28 @@
             @foreach ($field_handles as $field_handle)
                 @include('view_update.view', $field_handle)     
             @endforeach
+
+            @if (empty($no_elevate_handle))
+                @php
+                    $elevate_process = [
+                    [
+                        'name' => 'elevate[num]',
+                        'note' => 'Nhập số lượt bế',
+                        'attr' => ['inject_class' => 'plan_input_elevate input_elevate_change', 'type_input' => 'number'],
+                        'value' => 0,
+                    ],
+                    [
+                        'name' => 'elevate[total]',
+                        'note' => 'Nhập số lượt bế',
+                        'attr' => ['inject_class' => 'plan_input_total_elevate', 'type_input' => 'number', 'readonly' => 1],
+                        'value' => 0,
+                    ]
+                ]     
+                @endphp
+                @foreach ($elevate_process as $elevate_field)
+                    @include('view_update.view', $elevate_field)    
+                @endforeach
+            @endif
         </div>
         <div class="enter_warehouse_module">
             <h3 class="fs-14 text-uppercase border_top_eb pt-3 mt-3 text-center handle_title">

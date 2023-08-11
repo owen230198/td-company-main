@@ -135,8 +135,13 @@ class NGroupUser extends Model
             'link' => 'view/available_orders', 
             'group' => 'available_order'
         ],
+        'print_warehouse' => [
+            'name' => 'Kho vật tư in ấn', 
+            'link' => 'view/print_warehouses?default_data={"status":"imported"}', 
+            'group' => 'warehouse'
+        ],
         'supp_warehouse' => [
-            'name' => 'Quản lí kho vật tư', 
+            'name' => 'Kho vật tư sx hộp cứng', 
             'link' => 'view/supply_warehouses?default_data={"status":"imported"}', 
             'group' => 'warehouse'
         ],

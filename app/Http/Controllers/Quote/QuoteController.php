@@ -66,9 +66,9 @@ class QuoteController extends Controller
         $data_quote = Quote::find($id)->makeHidden($hidden_clone_field)->toArray();
         $data_products = Product::where('quote_id', $id)->get()->makeHidden($hidden_clone_field)->toArray();
         unset($data_quote['id']);
-        $quote_id = Quote::insertGetId($data_quote);
         $this->services->configBaseDataAction($data_quote);
         $data_quote['seri'] = 'BG-'.getCodeInsertTable('quotes');
+        $quote_id = Quote::insertGetId($data_quote);
         $child_tables = Product::$childTable;
         if ($quote_id) {
             foreach ($data_products as $product) {
