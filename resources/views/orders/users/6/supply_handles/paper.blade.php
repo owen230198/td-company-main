@@ -1,5 +1,4 @@
 @extends('orders.users.6.supply_handles.supplies')
-@dd($supply_size);
 @section('process')
     @include('quotes.products.papers.supply_print', ['no_exc' => 1])
     <div class="process_paper_plan">
@@ -9,6 +8,7 @@
                     'supp_price' => @$supply_size['supply_price'],
                     'status' => 'imported'
             ],
+            'table_type' => 'print_warehouses',
             'no_elevate_handle' => true,
             'compen_percent' => getDataConfig('QuoteConfig', 'COMPEN_PERCENT')
         ])

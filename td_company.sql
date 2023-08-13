@@ -11,7 +11,7 @@
  Target Server Version : 100428
  File Encoding         : 65001
 
- Date: 12/08/2023 00:37:57
+ Date: 13/08/2023 12:17:24
 */
 
 SET NAMES utf8mb4;
@@ -13269,7 +13269,7 @@ CREATE TABLE `n_detail_tables`  (
   INDEX `map_insert`(`table_map`, `insert`) USING BTREE,
   INDEX `map_update`(`table_map`, `update`) USING BTREE,
   INDEX `map_search`(`table_map`, `search`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 136 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 140 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of n_detail_tables
@@ -13409,6 +13409,10 @@ INSERT INTO `n_detail_tables` VALUES (132, 'qty', '{\"type_input\":\"number\",\"
 INSERT INTO `n_detail_tables` VALUES (133, 'supp_type', '{\"required\":1,\"inject_class\":\"__select_parent\"}', 'Nhà cung cấp', 'linking', 'supply_warehouses', 1, 0, 0, 0, 135, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"supply_types\",\r\n		\"where\":{\"is_name\":0}\r\n	}\r\n}', 1, 0, 1, '2023-05-11 11:18:58', '2023-08-07 16:19:33');
 INSERT INTO `n_detail_tables` VALUES (134, 'supp_price', '{\"required\":1,\"disable_field\":1,\"inject_class\":\"__select_child\"}', 'Định lượng', 'linking', 'supply_warehouses', 1, 0, 0, 0, 135, '{\r\n	\"config\":{\r\n		\"searchbox\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"supply_prices\"\r\n	}\r\n}', 1, 0, 1, '2023-05-11 11:18:58', '2023-08-07 17:07:52');
 INSERT INTO `n_detail_tables` VALUES (135, 'group_supply', '', 'Dạng vật tư', 'group', 'supply_warehouses', 1, 1, 1, 1, 0, '{\r\n	\"group_class\":\"__module_select_ajax_value_child\",\r\n	\"inject_attr\":\"link=option-ajax-child/supply_prices/supply_id\",\r\n	\"width\":\"8\",\r\n	\"width_child\":\"6\"\r\n}', 1, 0, 1, '2023-05-23 14:41:40', '2023-08-07 16:38:46');
+INSERT INTO `n_detail_tables` VALUES (136, 'name', '{\"required\":1}', 'Tên vật tư', 'text', 'print_warehouse', 1, 1, 1, 1, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2023-08-12 11:10:07');
+INSERT INTO `n_detail_tables` VALUES (137, 'length', '{\"required\":1}', 'KT dài', 'text', 'print_warehouse', 1, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2023-08-12 11:10:07');
+INSERT INTO `n_detail_tables` VALUES (138, 'width', '{\"required\":1}', 'KT rộng', 'text', 'print_warehouse', 1, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2023-08-12 11:10:07');
+INSERT INTO `n_detail_tables` VALUES (139, 'qty', '{\"type_input\":\"number\",\"required\":1}', 'Số lượng', 'text', 'print_warehouse', 1, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-30 11:00:22', '2023-08-12 11:10:07');
 
 -- ----------------------------
 -- Table structure for n_group_users
@@ -13846,7 +13850,7 @@ CREATE TABLE `n_tables`  (
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `indx`(`id`, `name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 32 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of n_tables
@@ -13875,7 +13879,8 @@ INSERT INTO `n_tables` VALUES (23, 'c_supplies', 'Yêu cầu Xuất vật tư', 
 INSERT INTO `n_tables` VALUES (24, 'n_log_actions', 'Lịch sử thao tác', 0, 'n_log_actions', 'n_log_actions', 10, 'history', NULL, '', '', '1', '', '2023-05-23 14:43:41', '2023-07-18 16:43:35');
 INSERT INTO `n_tables` VALUES (25, 'w_users', 'Công nhân', 0, 'w_users', 'w_users', 10, 'view', NULL, '1', '1', '1', '1', '2023-05-23 14:43:41', '2023-05-23 14:43:41');
 INSERT INTO `n_tables` VALUES (26, 'paper_extends', 'Tên phụ giấy in', 0, 'paper_extends', 'paper_extends', 10, 'view', '', '1', '1', '1', '1', '2023-07-17 19:30:41', '2023-07-20 15:51:23');
-INSERT INTO `n_tables` VALUES (27, 'supply_warehouses', 'Kho vật tư', 0, 'supply_warehouses', 'supply_warehouses', 20, 'view', '[\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"undo\",\"note\":\"Xác nhận nhập kho vật tư\", \r\n		\"class\":\"__confirm_im_supp\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"waiting\"}\r\n		]\r\n	}\r\n]', '1', '1', '1', '0', '2023-07-14 03:17:55', '2023-08-03 12:06:59');
+INSERT INTO `n_tables` VALUES (27, 'supply_warehouses', 'Kho vật tư (carton, mút xốp, nam châm)', 0, 'supply_warehouses', 'supply_warehouses', 10, 'view', '[\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"undo\",\"note\":\"Xác nhận nhập kho vật tư\", \r\n		\"class\":\"__confirm_im_supp\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"waiting\"}\r\n		]\r\n	}\r\n]', '1', '1', '1', '0', '2023-07-14 03:17:55', '2023-08-12 11:05:05');
+INSERT INTO `n_tables` VALUES (31, 'print_warehouses', 'Kho vật tư in ấn (giấy, màng)', 0, 'print_warehouses', 'print_warehouses', 10, 'view', '[\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"undo\",\"note\":\"Xác nhận nhập kho vật tư\", \r\n		\"class\":\"__confirm_im_supp\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"waiting\"}\r\n		]\r\n	}\r\n]', '1', '1', '1', '0', '2023-07-14 03:17:55', '2023-08-03 12:06:59');
 
 -- ----------------------------
 -- Table structure for n_users
@@ -14138,6 +14143,30 @@ INSERT INTO `print_techs` VALUES (1, 'In offset', 1, 1, '2023-03-11 15:10:23', '
 INSERT INTO `print_techs` VALUES (2, 'In UV Offset', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:25');
 INSERT INTO `print_techs` VALUES (3, 'In Label', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:25');
 INSERT INTO `print_techs` VALUES (4, 'offset & UV offset', 1, 1, '2023-03-11 15:25:31', '2023-03-11 15:25:33');
+
+-- ----------------------------
+-- Table structure for print_warehouses
+-- ----------------------------
+DROP TABLE IF EXISTS `print_warehouses`;
+CREATE TABLE `print_warehouses`  (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `length` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `width` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `qty` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `supp_price` int(10) NULL DEFAULT NULL,
+  `status` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `source` tinyint(4) NULL DEFAULT NULL,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `act` tinyint(4) NULL DEFAULT NULL,
+  `created_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `confirm_at` datetime(0) NULL DEFAULT NULL,
+  `created_by` int(10) NULL DEFAULT NULL,
+  `confirm_by` int(10) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for printers

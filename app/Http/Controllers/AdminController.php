@@ -47,6 +47,9 @@ class AdminController extends Controller
             return redirect(url(''))->with('error', 'Bạn không có quyền truy cập!');
         }
         $data = $this->admins->getDataBaseView($table, 'Danh sách');
+        if (empty($data)) {
+            return back()->with('error', 'Giao diện chưa hỗ trợ !');
+        }
         if($data['view_type'] == 'config'){
             $data['action_url'] = url('do-config-data/'.$table);   
         }else{

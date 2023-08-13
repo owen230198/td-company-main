@@ -40,12 +40,17 @@ class OrderConstant
         'text' => 'Yêu cầu xuất vật tư',
         'status' => CSupply::HANDLING
         ],
-        ['icon' => 'imsupp', 
+        ['icon' => 'export', 'table' => 'c_prints', 'text' => 'Yêu cầu xuất khuôn'],
+        ['icon' => 'imbox', 
         'table' => 'supply_warehouses', 
-        'text' => 'Yêu cầu nhập kho băng lề',
+        'text' => 'Yêu cầu nhập kho băng lề vật tư',
         'status' => SupplyWarehouse::WAITING
         ],
-        ['icon' => 'export', 'table' => 'c_prints', 'text' => 'Yêu cầu xuất khuôn'],
+        ['icon' => 'imsupp', 
+        'table' => 'print_warehouses', 
+        'text' => 'Yêu cầu nhập kho băng lề giấy in',
+        'status' => SupplyWarehouse::WAITING
+        ],
     ];
     //PROCESS STAGE 
     const STAGE_PROCESS = [   

@@ -113,16 +113,18 @@ class AdminService extends BaseService
     public function getDataBaseView($table, $name='')
     {
         $data = $this->getBaseTable($table);
-        $data['page_item'] = @$data['tableItem']['admin_paginate'] ?? 10;
-        $data['view_type'] = @$data['tableItem']['view_type'] ?? 'view';
-        $name = @$data['view_type'] == 'config' ? 'Cài đặt':$name;
-        $data['title'] = $name.' '.$data['tableItem']['note'];
-        if ($data['view_type']=='config') {
-            $data['regions'] = $this->regions->getRegionOfConfig($table);
-        }else{
-            $data['field_searchs'] = $this->getFieldAction($table, 'search');
+        if (!empty($data['tableItem'])) {
+            $data['page_item'] = @$data['tableItem']['admin_paginate'] ?? 10;
+            $data['view_type'] = @$data['tableItem']['view_type'] ?? 'view';
+            $name = @$data['view_type'] == 'config' ? 'Cài đặt':$name;
+            $data['title'] = $name.' '.$data['tableItem']['note'];
+            if ($data['view_type']=='config') {
+                $data['regions'] = $this->regions->getRegionOfConfig($table);
+            }else{
+                $data['field_searchs'] = $this->getFieldAction($table, 'search');
+            }
+            return $data;
         }
-        return $data;
     }
 
     public function getConditionTable($table, $field_name, $value)

@@ -1,5 +1,4 @@
 
-<?php dd($supply_size); ?>;
 <?php $__env->startSection('process'); ?>
     <?php echo $__env->make('quotes.products.papers.supply_print', ['no_exc' => 1], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <div class="process_paper_plan">
@@ -9,6 +8,7 @@
                     'supp_price' => @$supply_size['supply_price'],
                     'status' => 'imported'
             ],
+            'table_type' => 'print_warehouses',
             'no_elevate_handle' => true,
             'compen_percent' => getDataConfig('QuoteConfig', 'COMPEN_PERCENT')
         ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>

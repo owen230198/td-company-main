@@ -27,7 +27,7 @@
                         'other_data' => [
                             'config' => ['search' => 1], 
                             'data' => [
-                                'table' => 'supply_warehouses', 
+                                'table' => @$table_type ?? 'supply_warehouses', 
                                 'where' => $where_size_type
                             ]
                         ]
