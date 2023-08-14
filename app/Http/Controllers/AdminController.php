@@ -1,7 +1,5 @@
 <?php
 namespace App\Http\Controllers;
-
-use App\Constants\TDConstant;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\NTable;
@@ -58,6 +56,7 @@ class AdminController extends Controller
                 $param_default = json_decode($default_data, true);
                 $this->injectViewWhereParam($table, $param_default);
                 $data['param_default'] = $default_data;
+                $data['default_field'] = $param_default;
                 $data['param_action'] = getParamUrlByArray($param_default);
             }
             if ($request->input('nosidebar') == 1) {
@@ -89,14 +88,37 @@ class AdminController extends Controller
                 }else{
                     $data['title'] = 'Danh sách chất liệu & vật tư sản xuất';   
                 }
-                $data['supply'] = TDConstant::HARD_ELEMENT;
+                $data['supply'] = \TDConst::HARD_ELEMENT;
             }elseif ($step = 'print_techs') {
                 $data['title'] = 'Danh sách thiết bị máy in theo công nghệ in';
-                $data['supply'] = TDConstant::PRINT_TECH;
+                $data['supply'] = \TDConst::PRINT_TECH;
                 unset($data['supply'][0]);
             }
             session()->put('back_url', url()->full());
             return view('config_devices/'.$step.'/view', $data);
+        }
+    }
+
+    public function warehouseManagement()
+    {
+        if (\GroupUser::isAdmin()) {
+            $data['title'] = 'Quản lí vật tư trong kho';
+            $data['supply_list'] = [
+                ['note' => 'Giấy in', 'table' => 'print_warehouses', 'type' => \TDConst::PAPER],
+                ['note' => 'Màng nilon', 'table' => 'print_warehouses', 'type' => \TDConst::NILON],
+                ['note' => 'Màng metalai', 'table' => 'print_warehouses', 'type' => \TDConst::METALAI],
+                ['note' => 'Màng phủ metalai', 'table' => 'print_warehouses', 'type' => \TDConst::COVER],
+                ['note' => 'Vật tư carton', 'table' => 'supply_warehouses', 'type' => \TDConst::CARTON],
+                ['note' => 'Vật tư cao su non', 'table' => 'supply_warehouses', 'type' => \TDConst::RUBBER],
+                ['note' => 'Vật tư mút phẳng', 'table' => 'supply_warehouses', 'type' => \TDConst::STYRO],
+                ['note' => 'Vật tư đề can nhung', 'table' => 'print_warehouses', 'type' => \TDConst::DECAL],
+                ['note' => 'Vật tư vải lụa', 'table' => 'print_warehouses', 'type' => \TDConst::SILK],
+                ['note' => 'Vật tư mica', 'table' => 'supply_warehouses', 'type' => \TDConst::MICA],
+                ['note' => 'Vật tư nam châm', 'table' => 'print_warehouses', 'type' => \TDConst::MAGNET]
+            ];
+            return view('warehouses.view', $data); 
+        }else{
+            return back()->with('error', 'Không có quyền truy cập !');    
         }
     }
 
@@ -106,7 +128,7 @@ class AdminController extends Controller
             $data['title'] = 'Danh sách tổ máy';
             $data['step'] = $step;
             if ($step == 'machine') {
-                $data['list_data'] = TDConstant::ALL_DEVICE_KEY;
+                $data['list_data'] = \TDConst::ALL_DEVICE_KEY;
             }else{
                 $type = $request->input('type');
                 $data['list_data'] = getDeviceByKeyType($type);
@@ -114,7 +136,7 @@ class AdminController extends Controller
                     unset($data['list_data'][0]);
                 }
                 $data['type'] = $type;
-                $data['table_device'] = $type == TDConstant::PRINT ? 'printers' : 'devices';
+                $data['table_device'] = $type == \TDConst::PRINT ? 'printers' : 'devices';
             }
             return view('group_workers.view', $data);
         }else{

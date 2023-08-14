@@ -248,27 +248,27 @@
                 ['key' => self::UV, 'name' => 'Mực in UV', 'table' => 'materals']
             ],
             self::CARTON => [
-                ['key' => self::CARTON, 'name' => 'Nhà cung cấp', 'table' => 'supply_types', 'is_name' => 0],
-                ['key' => self::CARTON, 'name' => 'DS nhà cung cấp carton', 'table' => 'supply_types', 'is_name' => 1]    
+                ['key' => self::CARTON, 'name' => 'Loại vật tư carton', 'table' => 'supply_types', 'is_name' => 0],
+                ['key' => self::CARTON, 'name' => 'Tên vật tư carton', 'table' => 'supply_types', 'is_name' => 1]    
             ],
             self::RUBBER => [
-                ['key' => self::RUBBER, 'name' => 'DS nhà cung cấp', 'table' => 'supply_types', 'is_name' => 0]   
+                ['key' => self::RUBBER, 'name' => 'DS loại vật tư cao su non', 'table' => 'supply_types', 'is_name' => 0]   
             ],
             self::STYRO => [
-                ['key' => self::STYRO, 'name' => 'DS nhà cung cấp', 'table' => 'supply_types', 'is_name' => 0]   
+                ['key' => self::STYRO, 'name' => 'DS loại vật tư mút phẳng', 'table' => 'supply_types', 'is_name' => 0]   
             ],
             self::DECAL => [
-                ['key' => self::DECAL, 'name' => 'DS nhà cung cấp', 'table' => 'supply_types', 'is_name' => 0]   
+                ['key' => self::DECAL, 'name' => 'DS vật tư đề can nhung', 'table' => 'materals', 'is_name' => 0]   
             ],
             self::SILK => [
-                ['key' => self::SILK, 'name' => 'DS nhà cung cấp', 'table' => 'supply_types', 'is_name' => 0]   
+                ['key' => self::SILK, 'name' => 'DS vật tư vải lụa', 'table' => 'materals', 'is_name' => 0]   
             ],
             self::MICA => [
-                ['key' => self::MICA, 'name' => 'DS nhà cung cấp', 'table' => 'supply_types', 'is_name' => 0]   
+                ['key' => self::MICA, 'name' => 'DS loại vật tư mica', 'table' => 'supply_types', 'is_name' => 0]   
             ],
             self::FILL_FINISH => [
-                ['key' => self::FILL, 'name' => 'Loại giấy bồi', 'table' => 'supply_prices'],
-                ['key' => self::MAGNET, 'name' => 'Vật tư nam châm', 'table' => 'supply_prices'],     
+                ['key' => self::FILL, 'name' => 'Loại giấy bồi', 'table' => 'materals'],
+                ['key' => self::MAGNET, 'name' => 'Vật tư nam châm', 'table' => 'materals']     
             ]
         ];
 

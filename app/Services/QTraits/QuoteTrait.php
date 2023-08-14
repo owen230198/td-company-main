@@ -28,10 +28,11 @@ trait QuoteTrait
         static::$length = $length;
         static::$width = $width;
     }
-    private function configDataSupplySize($supply)
+    private function configDataSupplySize($supply, $type)
     {
         $qttv_id = !empty($supply['supply_price']) ? $supply['supply_price'] : 0;
-        $qttv = getDetailDataByID('SupplyPrice', $qttv_id);
+        $model = in_array($type, [\TDConst::DECAL, \TDConst::SILK]) ? 'Materal' : 'SupplyPrice';
+        $qttv = getDetailDataByID($model, $qttv_id);
         $qttv_price = !empty($qttv['price']) ? (float) $qttv['price'] : 0;
         //Công thức tính chi phí khổ giấy vật tư hộp cứng: Dài x Rộng x ĐG định lượng x SL vật tư
         $total = self::$length * self::$width * $qttv_price * self::$supp_qty;

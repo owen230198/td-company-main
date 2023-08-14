@@ -13,6 +13,13 @@
                 $url .= '&'.$key.'='.$val;
             }
         }
+        if (!empty($select_data['where_default'])) {
+            foreach ($select_data['where_default'] as $key => $val) {
+                if (!empty($default_field[$val])) {
+                    $url .= '&'.$key.'='.$default_field[$val];
+                }
+            }
+        }
         if (!empty($value)) {
             $data_id = $value;
             $data_label = getFieldDataById($field_title, $select_data['table'], [$field_value => $value]);

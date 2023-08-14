@@ -2,7 +2,7 @@
     $data_select_fill = [
         'other_data' => [
             'config' => ['search' => 1], 
-            'data' => ['table' => 'supply_prices', 'where' => ['type' => \TDConst::FILL]]
+            'data' => ['table' => 'materals', 'where' => ['type' => \TDConst::FILL]]
         ],
         'note' => 'Tên giấy bồi',
         'value' => @$fill_data['materal'],

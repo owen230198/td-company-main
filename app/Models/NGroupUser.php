@@ -135,14 +135,9 @@ class NGroupUser extends Model
             'link' => 'view/available_orders', 
             'group' => 'available_order'
         ],
-        'print_warehouse' => [
-            'name' => 'Kho vật tư in ấn', 
-            'link' => 'view/print_warehouses?default_data={"status":"imported"}', 
-            'group' => 'warehouse'
-        ],
-        'supp_warehouse' => [
-            'name' => 'Kho vật tư sx hộp cứng', 
-            'link' => 'view/supply_warehouses?default_data={"status":"imported"}', 
+        'warehouse_management' => [
+            'name' => 'Kho vật tư', 
+            'link' => 'warehouse-management', 
             'group' => 'warehouse'
         ],
         'ex_supply' => [
@@ -225,7 +220,7 @@ class NGroupUser extends Model
             self::MODULE['change_password'],
         ],
         self::WAREHOUSE => [
-            self::MODULE['supp_warehouse'],
+            self::MODULE['warehouse_management'],
             self::MODULE['ex_supply'],
             self::MODULE['im_supply'],
             self::MODULE['account'],

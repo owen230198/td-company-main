@@ -3,14 +3,14 @@ namespace App\Services\QTraits;
 
 trait QSupplyTrait{
 
-   public function getDataActionSupply($data)
+   public function getDataActionSupply($data, $type)
    {
       $this->newObjectSetProperty($data);
       $hard_compen_perc = (float) getDataConfig('QuoteConfig', 'CARTON_COMPEN_PERCENT');
       static::$supp_qty = ceil(calValuePercentPlus(self::$base_supp_qty, self::$base_supp_qty, $hard_compen_perc)); 
       
       if (!empty($data['size'])) {
-         $data_action['size'] = $this->configDataSupplySize($data['size']);
+         $data_action['size'] = $this->configDataSupplySize($data['size'], $type);
       }
 
       if (!empty($data['cut'])) {
@@ -81,7 +81,7 @@ trait QSupplyTrait{
    {
       $magnet_perc = (float) getDataConfig('QuoteConfig', 'MAGNET_PERC');
       $qttv_id = !empty($magnet['type']) ? $magnet['type'] : 0;
-      $qttv = getDetailDataByID('SupplyPrice', $qttv_id);
+      $qttv = getDetailDataByID('Materal', $qttv_id);
       $qttv_price = @$qttv['price']?$qttv['price']:0;  
       $magnet['qttv_price'] = $qttv_price;
       $magnet['magnet_perc'] = $magnet_perc;

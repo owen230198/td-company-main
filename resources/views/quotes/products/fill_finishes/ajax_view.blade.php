@@ -36,7 +36,7 @@
 
     $data_select_magnet = [
         'other_data' => [
-            'data' => ['table' => 'supply_prices', 'where' => ['type' => \TDConst::MAGNET]]
+            'data' => ['table' => 'materals', 'where' => ['type' => \TDConst::MAGNET]]
         ],
         'name' => 'product['.$pro_index.'][fill_finish][magnet][type]',
         'type' => 'linking',
