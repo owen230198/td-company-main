@@ -168,6 +168,10 @@ textarea{
   background: #000000;
 }
 
+.bg_none{
+  background: none;
+}
+
 .font_bold{
   font-weight: 700;
 }
