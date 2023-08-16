@@ -165,6 +165,16 @@ a.device_supp_item {
     box-shadow: 1px 1px 3px #777777;
 }
 
+.breadcrumb_section {
+    position: sticky;
+    top: 55px;
+    z-index: 1;
+}
+
+.pagination{
+    z-index: 0;
+}
+
 .base_content{
     padding-top: 70px;
     padding-left: 210px;

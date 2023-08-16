@@ -94,7 +94,6 @@ class AdminController extends Controller
                 $data['supply'] = \TDConst::PRINT_TECH;
                 unset($data['supply'][0]);
             }
-            session()->put('before_url', url()->full());
             return view('config_devices/'.$step.'/view', $data);
         }
     }
@@ -116,7 +115,6 @@ class AdminController extends Controller
                 ['note' => 'Vật tư mica', 'table' => 'supply_warehouses', 'type' => \TDConst::MICA],
                 ['note' => 'Vật tư nam châm', 'table' => 'other_warehouses', 'type' => \TDConst::MAGNET]
             ];
-            session()->put('before_url', url()->full());
             return view('warehouses.view', $data); 
         }else{
             return back()->with('error', 'Không có quyền truy cập !');    
@@ -139,7 +137,6 @@ class AdminController extends Controller
                 $data['type'] = $type;
                 $data['table_device'] = $type == \TDConst::PRINT ? 'printers' : 'devices';
             }
-            session()->put('before_url', url()->full());
             return view('group_workers.view', $data);
         }else{
             return back()->with('error', 'Không có quyền truy cập !');

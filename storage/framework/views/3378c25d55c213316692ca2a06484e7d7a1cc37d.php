@@ -3,11 +3,12 @@
     $select_data = !empty($other_data['data']) ? $other_data['data'] : [];
     $field_title = @$select_data['field_title'] ?? 'name';
     $field_value = @$select_data['field_value'] ?? 'id';
+    $table_linking = getTableLinkingWithData([], $select_data['table'])
 ?>
 
 <?php if(@$select_config['search'] == 1): ?>
     <?php
-        $url = asset('get-data-json-linking?table='.$select_data['table'].'&field_search='.$field_title);
+        $url = asset('get-data-json-linking?table='.$table_linking.'&field_search='.$field_title);
         if (!empty($select_data['where'])) {
             foreach ($select_data['where'] as $key => $val) {
                 $url .= '&'.$key.'='.$val;
@@ -22,7 +23,7 @@
         }
         if (!empty($value)) {
             $data_id = $value;
-            $data_label = getFieldDataById($field_title, $select_data['table'], [$field_value => $value]);
+            $data_label = getFieldDataById($field_title, $table_linking, [$field_value => $value]);
         }
     ?>
     <select name="<?php echo e($name); ?>" class="form-control select_ajax <?php echo e(@$attr['inject_class'] ? ' '.$attr['inject_class'] : ''); ?>"

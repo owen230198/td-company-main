@@ -33,17 +33,27 @@
         <?php echo $__env->make('sidebar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <div class="base_content">
             <div class="container-fluid h-100">
+                <?php if(!isHome()): ?>
+                    <nav aria-label="breadcrumb" class="breadcrumb_section">
+                        <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="<?php echo e(url('')); ?>" class="color_green">Trang chủ</a>
+                        </li>
+                        <?php if(!empty($parent_url)): ?>
+                            <li class="breadcrumb-item">
+                                <a href="<?php echo e(url(@$parent_url['link'])); ?>" class="color_green"><?php echo e(@$parent_url['note']); ?></a>
+                            </li>
+                        <?php endif; ?>
+                        <li class="breadcrumb-item active" aria-current="page"><?php echo e(@$title); ?></li>
+                        </ol>
+                    </nav>
+                <?php endif; ?>
                 <div class="base_page h-100">
                     <div class="page_content">
                         <?php if(!isHome()): ?>
                             <div class="title_page_content d-flex justify-content-between align-items-center">
-                                <h2 class="fs-14 font_bold text-capitalize mb-0 d-flex align-items-center"><i class="fa fa-qrcode fs-18 mr-2" aria-hidden="true"></i><?php echo e(@$title); ?></h2>
-                                <nav aria-label="breadcrumb">
-                                    <ol class="breadcrumb mb-0 p-0 bg_none">
-                                      <li class="breadcrumb-item"><a href="<?php echo e(url('')); ?>">Trang chủ</a></li>
-                                      <li class="breadcrumb-item active" aria-current="page"><?php echo e(@$title); ?></li>
-                                    </ol>
-                                </nav>
+                                <h2 class="fs-14 font_bold text-capitalize mb-0 d-flex align-items-center">
+                                <i class="fa fa-qrcode fs-18 mr-2" aria-hidden="true"></i><?php echo e(@$title); ?></h2>
                             </div>
                         <?php endif; ?>
                         <div class="px-3 pb-3">
@@ -54,6 +64,7 @@
             </div>
         </div>
     <?php endif; ?>
+    <?php echo $__env->make('index_script_const', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <script src="<?php echo e(asset('frontend/base/script/jquery.min.js')); ?>"></script>
     <script src="<?php echo e(asset('frontend/base/script/bootstrap.min.js')); ?>"></script>
     <script src="<?php echo e(asset('frontend/base/script/swal.min.js')); ?>"></script>

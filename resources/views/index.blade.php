@@ -33,17 +33,27 @@
         @include('sidebar')
         <div class="base_content">
             <div class="container-fluid h-100">
+                @if (!isHome())
+                    <nav aria-label="breadcrumb" class="breadcrumb_section">
+                        <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="{{ url('') }}" class="color_green">Trang chủ</a>
+                        </li>
+                        @if (!empty($parent_url))
+                            <li class="breadcrumb-item">
+                                <a href="{{ url(@$parent_url['link']) }}" class="color_green">{{ @$parent_url['note'] }}</a>
+                            </li>
+                        @endif
+                        <li class="breadcrumb-item active" aria-current="page">{{ @$title }}</li>
+                        </ol>
+                    </nav>
+                @endif
                 <div class="base_page h-100">
                     <div class="page_content">
                         @if (!isHome())
                             <div class="title_page_content d-flex justify-content-between align-items-center">
-                                <h2 class="fs-14 font_bold text-capitalize mb-0 d-flex align-items-center"><i class="fa fa-qrcode fs-18 mr-2" aria-hidden="true"></i>{{ @$title }}</h2>
-                                <nav aria-label="breadcrumb">
-                                    <ol class="breadcrumb mb-0 p-0 bg_none">
-                                      <li class="breadcrumb-item"><a href="{{ url('') }}">Trang chủ</a></li>
-                                      <li class="breadcrumb-item active" aria-current="page">{{ @$title }}</li>
-                                    </ol>
-                                </nav>
+                                <h2 class="fs-14 font_bold text-capitalize mb-0 d-flex align-items-center">
+                                <i class="fa fa-qrcode fs-18 mr-2" aria-hidden="true"></i>{{ @$title }}</h2>
                             </div>
                         @endif
                         <div class="px-3 pb-3">
@@ -54,6 +64,7 @@
             </div>
         </div>
     @endif
+    @include('index_script_const')
     <script src="{{ asset('frontend/base/script/jquery.min.js') }}"></script>
     <script src="{{ asset('frontend/base/script/bootstrap.min.js') }}"></script>
     <script src="{{ asset('frontend/base/script/swal.min.js') }}"></script>

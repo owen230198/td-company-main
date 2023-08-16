@@ -438,6 +438,36 @@ var moduleSelectAjaxChild = function()
     })
 }
 
+var getUrlLinkingWarehouseSize = function(type)
+{
+    if (['carton', 'rubber', 'styrofoam', 'mica'].includes(type)) {
+        wh_table = 'supply_warehouses';   
+    }else if(['magnet'].includes(type)){
+        wh_table = 'other_warehouses';
+    }else{
+        wh_table = 'print_warehouses';    
+    }
+    return getBaseRoute('get-data-json-linking?table='+wh_table+'&field_search=name&type='+type);
+}
+
+var selectTypeSuppWarehouse = function()
+{
+    $(document).on('change', 'select.__wh_select_type', function(event){
+        event.preventDefault();
+        let parent = $(this).closest('.__module_select_type_warehouse');
+        let value = $(this).val();
+        let url =  getUrlLinkingWarehouseSize(value);
+        let select_size = parent.find('select.__wh_select_size');
+        select_size.data('url', url);
+        initInputModuleAfterAjax(parent);
+        if (!empty(value)) {
+            select_size.attr('disabled', false);    
+        }else{
+            select_size.attr('disabled', true);   
+        }
+    })
+}
+
 $(function () {
     submitActionAjaxForm();
     confirmRemoveData();
@@ -459,4 +489,5 @@ $(function () {
     receiveCommand();
     confirmTakeOutSupply();
     moduleSelectAjaxChild();
+    selectTypeSuppWarehouse();
 });

@@ -129,3 +129,20 @@
             return 'Tổ '.mb_strtolower(@$arr_type[$type]. ' - '.@$arr_device[$device]);
         }
     }
+
+    if (!function_exists('getTableWarehouseByType')) {
+        function getTableWarehouseByType($param = []){
+            $type = !empty($param->supp_type) ? $param->supp_type : '';
+            switch ($type) {
+                case in_array($type, [\TDConst::CARTON, \TDConst::RUBBER, \TDConst::STYRO, \TDConst::MICA]):
+                    return 'supply_warehouses';
+                    break;
+                case in_array($type, [\TDConst::MAGNET]):
+                    return 'other_warehouses';
+                    break;
+                default:
+                    return 'print_warehouses';
+                    break;
+            }
+        }
+    }
