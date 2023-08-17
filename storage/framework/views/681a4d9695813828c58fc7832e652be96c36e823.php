@@ -15,7 +15,7 @@
                 'other_data' => [
                     'config' => ['search' => 1], 
                     'data' => [
-                        'table' => 'print_warehouses', 
+                        'table' => 'square_warehouses', 
                         'where' => ['type' => 'nilon',
                                     'supp_price' => $nilon['materal'],
                                     'status' => 'imported']
@@ -36,7 +36,7 @@
                 'other_data' => [
                     'config' => ['search' => 1], 
                     'data' => [
-                        'table' => 'print_warehouses', 
+                        'table' => 'square_warehouses', 
                         'where' => ['type' => 'metalai',
                                     'supp_price' => $metalai['materal'],
                                     'status' => 'imported']
@@ -58,7 +58,7 @@
                 'other_data' => [
                     'config' => ['search' => 1], 
                     'data' => [
-                        'table' => 'print_warehouses', 
+                        'table' => 'square_warehouses', 
                         'where' => ['type' => 'cover',
                                     'supp_price' => $metalai['cover_materal'],
                                     'status' => 'imported']

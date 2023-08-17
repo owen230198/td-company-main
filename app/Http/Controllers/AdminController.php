@@ -104,14 +104,14 @@ class AdminController extends Controller
             $data['title'] = 'Quản lí vật tư trong kho';
             $data['supply_list'] = [
                 ['note' => 'Giấy in', 'table' => 'print_warehouses', 'type' => \TDConst::PAPER],
-                ['note' => 'Màng nilon', 'table' => 'print_warehouses', 'type' => \TDConst::NILON],
-                ['note' => 'Màng metalai', 'table' => 'print_warehouses', 'type' => \TDConst::METALAI],
-                ['note' => 'Màng phủ metalai', 'table' => 'print_warehouses', 'type' => \TDConst::COVER],
+                ['note' => 'Màng nilon', 'table' => 'square_warehouses', 'type' => \TDConst::NILON],
+                ['note' => 'Màng metalai', 'table' => 'square_warehouses', 'type' => \TDConst::METALAI],
+                ['note' => 'Màng phủ metalai', 'table' => 'square_warehouses', 'type' => \TDConst::COVER],
                 ['note' => 'Vật tư carton', 'table' => 'supply_warehouses', 'type' => \TDConst::CARTON],
                 ['note' => 'Vật tư cao su non', 'table' => 'supply_warehouses', 'type' => \TDConst::RUBBER],
                 ['note' => 'Vật tư mút phẳng', 'table' => 'supply_warehouses', 'type' => \TDConst::STYRO],
-                ['note' => 'Vật tư đề can nhung', 'table' => 'print_warehouses', 'type' => \TDConst::DECAL],
-                ['note' => 'Vật tư vải lụa', 'table' => 'print_warehouses', 'type' => \TDConst::SILK],
+                ['note' => 'Vật tư đề can nhung', 'table' => 'square_warehouses', 'type' => \TDConst::DECAL],
+                ['note' => 'Vật tư vải lụa', 'table' => 'square_warehouses', 'type' => \TDConst::SILK],
                 ['note' => 'Vật tư mica', 'table' => 'supply_warehouses', 'type' => \TDConst::MICA],
                 ['note' => 'Vật tư nam châm', 'table' => 'other_warehouses', 'type' => \TDConst::MAGNET]
             ];

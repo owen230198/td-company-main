@@ -137,11 +137,14 @@
                 case in_array($type, [\TDConst::CARTON, \TDConst::RUBBER, \TDConst::STYRO, \TDConst::MICA]):
                     return 'supply_warehouses';
                     break;
+                case in_array($type, [\TDConst::PAPER]):
+                    return 'print_warehouses';
+                    break;
                 case in_array($type, [\TDConst::MAGNET]):
                     return 'other_warehouses';
                     break;
                 default:
-                    return 'print_warehouses';
+                    return 'square_warehouses';
                     break;
             }
         }

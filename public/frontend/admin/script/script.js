@@ -441,11 +441,13 @@ var moduleSelectAjaxChild = function()
 var getUrlLinkingWarehouseSize = function(type)
 {
     if (['carton', 'rubber', 'styrofoam', 'mica'].includes(type)) {
-        wh_table = 'supply_warehouses';   
+        wh_table = 'square_warehouses';   
     }else if(['magnet'].includes(type)){
         wh_table = 'other_warehouses';
-    }else{
+    }else if(['paper'].includes(type)){
         wh_table = 'print_warehouses';    
+    }else{
+        wh_table = 'square_warehouses';
     }
     return getBaseRoute('get-data-json-linking?table='+wh_table+'&field_search=name&type='+type);
 }
