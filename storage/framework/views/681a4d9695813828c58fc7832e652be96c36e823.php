@@ -1,6 +1,6 @@
 
 <?php $__env->startSection('process'); ?>
-    <?php echo $__env->make('quotes.products.papers.supply_print', ['no_exc' => 1], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php echo $__env->make('quotes.products.papers.supply_print', ['no_exc' => 1, 'disable_all' => true], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <?php
         $nilon = json_decode($supply_obj->nilon, true);
         $metalai = json_decode($supply_obj->metalai, true);
@@ -11,7 +11,7 @@
     <?php if(!empty($nilon['materal'])): ?>
         <?php
             $nilon_chose_supp = [
-                'name' => 'c_print_supp[nilon][materal]',
+                'name' => 'c_supply[materal][['.\TDConst::NILON.']]',
                 'type' => 'linking',
                 'note' => 'Chọn màng nilon',
                 'value' => '',
@@ -33,7 +33,7 @@
     <?php if(!empty($metalai['materal'])): ?>
         <?php
             $metalai_chose_supp = [
-                'name' => 'c_print_supp[metalai][materal]',
+                'name' => 'c_supply[materal]['.\TDConst::METALAI.']',
                 'type' => 'linking',
                 'note' => 'Chọn màng cán metalai ('.$metalai['face'].' mặt)' ,
                 'value' => '',
@@ -55,7 +55,7 @@
     <?php if(!empty($metalai['cover_materal'])): ?>
         <?php
             $metalai_chose_supp = [
-                'name' => 'c_print_supp[cover][materal]',
+                'name' => 'c_supply[materal]['.\TDConst::COVER.']',
                 'type' => 'linking',
                 'note' => 'Chọn màng cán phủ trên ('.$metalai['cover_face'].' mặt)' ,
                 'value' => '',
@@ -80,7 +80,6 @@
                     'status' => 'imported'
             ],
             'table_type' => 'print_warehouses',
-            'no_elevate_handle' => true,
             'compen_percent' => getDataConfig('QuoteConfig', 'COMPEN_PERCENT')
         ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     </div> 

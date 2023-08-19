@@ -4,10 +4,12 @@
     </label>
     <div class="d-flex justify-content-between align-items-center">
         <input type="number" name = 'product[{{ $pro_index }}][{{ $key_supp }}][{{ $supp_index }}][size][length]' placeholder="Chiều dài (cm)" 
-        class="form-control medium_input" step="any" value="{{ @$supply_size['length'] }}"> 
+        class="form-control medium_input" step="any" value="{{ @$supply_size['length'] }}"
+        {{ !empty($disable_all) || in_array('size_length', @$arr_disable ?? []) ? 'disabled' : '' }}> 
         <span class="mx-3">X</span>
         <input type="number" name = 'product[{{ $pro_index }}][{{ $key_supp }}][{{ $supp_index }}][size][width]' placeholder="Chiều rộng (cm)" 
-        class="form-control medium_input" step="any"value="{{ @$supply_size['width'] }}"> 
+        class="form-control medium_input" step="any"value="{{ @$supply_size['width'] }}"
+        {{ !empty($disable_all) || in_array('size_width', @$arr_disable ?? []) ? 'disabled' : '' }}> 
         <div class="paper_price_config_input" style="display:{{ @$supply_size['materal'] != 'other' ? 'none' : 'block' }}">
             <div class="d-flex align-items-center">
                 <span class="mx-3">X</span>

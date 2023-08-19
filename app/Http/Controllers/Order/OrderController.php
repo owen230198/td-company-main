@@ -150,6 +150,9 @@ class OrderController extends Controller
             $table = $request->input('table');
             $id = $request->input('id');
             $data_supply = \DB::table($table)->find($id);
+            if (empty($data_supply)) {
+                return back()->with('error', 'Dữ liệu không hợp lệ !');
+            }
             if ($table == 'papers') {
                 $data_supply->type = \TDConst::PAPER;    
             }elseif ($table == 'fill_finishes') {
@@ -177,9 +180,13 @@ class OrderController extends Controller
                     } 
                 }else{
                     $data_command = $request->input('c_supply');
-                    $data_elevate = $request->input('elevate');
                     $data_over_supp = $request->input('over_supply');
-                    return $this->services->supplyHandleProcess($data_supply, $supp_size, $data_command, $data_elevate, $data_over_supp);
+                    $method_handle_name = 'supply_handle_'.$data_supply->type;
+                    if (method_exists($this->services, $method_handle_name)) {
+                        return $this->services->{$method_handle_name}($data_supply, $supp_size, $data_command, $data_over_supp);
+                    }else{
+                        returnMessageAjax(100, 'Không thể xử lí vật tư !');
+                    } 
                 } 
             }else{
                 return customReturnMessage(false, $request->isMethod('POST'), ['message' => 'Dữ liệu không hợp lệ']);

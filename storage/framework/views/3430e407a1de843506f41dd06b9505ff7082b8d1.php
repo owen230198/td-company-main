@@ -1,34 +1,37 @@
 <?php
     $key_supp = \TDConst::PAPER;
     $paper_compen_percent = getDataConfig('QuoteConfig', 'COMPEN_PERCENT');
-
     $pro_paper_name = [
         'name' => 'product['.$pro_index.']['.$key_supp.']['.$supp_index.'][name]',
         'note' => 'Tên sản phẩm',
         'attr' => ['required' => 1, 
                     'inject_class' => $supp_index == 0 ? 'length_input quote_receive_paper_name_main' 
-                    : 'length_input quote_receive_paper_name_ext'],
+                    : 'length_input quote_receive_paper_name_ext',
+                'disable_field' => !empty($disable_all) || in_array('size_name', @$arr_disable ?? []) ? 1 : 0],
         'value' => @$supply_obj->name ?? @$supp_name
     ];
     $pro_paper_materals = [
         'name' => 'product['.$pro_index.']['.$key_supp.']['.$supp_index.'][size][materal]',
         'type' => 'linking',
         'note' => 'Chọn chất liệu giấy',
-        'attr' => ['required' => 1, 'inject_class' => 'select_paper_materal'],
+        'attr' => ['required' => 1, 'inject_class' => 'select_paper_materal', 
+        'disable_field' => !empty($disable_all) || in_array('size_materal', @$arr_disable ?? []) ? 1 : 0],
         'other_data' => ['data' => ['table' => 'materals','where' => ['type' => $key_supp], 'ext_option' => [['id' => 'other', 'name' => 'Giấy khác']]]],
         'value' => @$supply_size['materal']
     ];
     $pro_paper_qttv = [
         'name' => 'product['.$pro_index.']['.$key_supp.']['.$supp_index.'][size][qttv]',
         'note' => 'Định lượng',
-        'attr' => ['type_input' => 'number', 'required' => 1],
+        'attr' => ['type_input' => 'number', 'required' => 1,
+        'disable_field' => !empty($disable_all) || in_array('size_qttv', @$arr_disable ?? []) ? 1 : 0],
         'value' => @$supply_size['qttv']
     ];
     $pro_paper_except = [
         'name' => 'product['.$pro_index.'][paper]['.$supp_index.'][except_handle]',
         'note' => 'Lệnh in ghép',
         'type' => 'checkbox',
-        'attr' => ['inject_class' => "__paper_except_handle"],
+        'attr' => ['inject_class' => "__paper_except_handle",
+        'disable_field' => !empty($disable_all) || in_array('name', @$arr_disable ?? []) ? 1 : 0],
         'value' => @$supply_obj->except_handle
     ]
 ?>
@@ -46,6 +49,7 @@
                 'attr' => [
                     'required' => 1, 
                     'inject_class' => 'select_ext_name_paper', 
+                    'disable_field' => !empty($disable_all) || in_array('ext_name', @$arr_disable ?? []) ? 1 : 0,
                     'inject_attr' => 'pro_index = '."$pro_index".' supp_index = '."$supp_index".''
                 ],
                 'other_data' => [

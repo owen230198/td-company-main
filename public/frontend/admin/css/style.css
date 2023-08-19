@@ -238,7 +238,7 @@ a.device_supp_item {
 
 .pro_nav_link{
     position: sticky;
-    top: 55px;
+    top: 95px;
     z-index: 1;
     background: #f9f9f9;
     padding: 5px 0;
@@ -304,6 +304,12 @@ a.device_supp_item {
     margin: auto;
     -webkit-text-fill-color: #ffffff;
     border-radius: 50%;
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+    color: #459300;
+    content: "\f105";
+    font-family: 'FontAwesome';
 }
 
 @page {

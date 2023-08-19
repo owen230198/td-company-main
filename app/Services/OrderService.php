@@ -6,6 +6,8 @@ use App\Models\Quote;
 use App\Models\Product;
 use \App\Models\CDesign;
 use \App\Models\CSupply;
+use App\Models\Paper;
+use App\Models\PrintWarehouse;
 use App\Models\Supply;
 use App\Models\SupplyWarehouse;
 
@@ -76,11 +78,9 @@ class OrderService extends BaseService
         }
         return Order::where('id', $arr_order['id'])->update(['status' => Order::TO_DESIGN, 'apply_design_by' => \User::getCurrent('id')]);
     }
-
-    public function supplyHandleProcess($supply, $size, $command, $elevate, $over_supply)
-    {
+    public function validateElevatehandle($command, $elevate){
         if (empty($command['size_type'])) {
-            return returnMessageAjax(100, 'Vui lòng chọn khổ vật tư !');
+            return returnMessageAjax(100, 'Vui lòng chọn khổ vật tư trong kho !');
         }
 
         if (empty($command['nqty'])) {
@@ -90,28 +90,33 @@ class OrderService extends BaseService
         if (empty($elevate['num'])) {
             return returnMessageAjax(100, 'Vui lòng nhập số lượt bế !');
         }
-        $data_command = $command;
-        $data_command['code'] = 'XVT-'.getCodeInsertTable('c_supplies'); 
-        $data_command['order'] = $supply->order;
-        $data_command['product'] = $supply->product;
-        $data_command['supply'] = $supply->id;
-        $data_command['supp_type'] = $supply->type;
-        $data_command['status'] = CSupply::HANDLING;
-        $this->configBaseDataAction($data_command);
-        $insert_command = CSupply::insert($data_command);
+    }
+
+    public function supply_handle_paper($supply, $size, $c_supply, $over_supply)
+    {
+        $command = @$c_supply['command'] ?? [];
+        $elevate = @$c_supply['elevate'] ?? [];
+        $command['qty'] = calValuePercentPlus($command['qty'], $command['qty'], getDataConfig('QuoteConfig', 'COMPEN_PERCENT'), 0, true);
+        $valid = $this->validateElevatehandle($command, $elevate);
+        if (@$valid['code'] == 100) {
+            return returnMessageAjax(100, $valid['message']);
+        }
+        $insert_command = CSupply::insertCommand($command, $supply); 
+        if (!empty($c_supply['materal'])) {
+            foreach ($c_supply['materal'] as $key => $value) {
+                $c_mataeral['size_type'] = $value;
+                $c_mataeral['qty'] = (float) @$size['width'] * (float) @$size['length'] * $command['qty'];
+                $supply->type = $key;
+                CSupply::insertCommand($command, $supply);
+            }
+        }
         if (!$insert_command) {
             return returnMessageAjax(110, 'Không thể tạo yêu cầu xuất vật tư, vui lòng thử lại!');
         }else{
-            Supply::where('id', $supply->product)->update(['handle_elevate' => json_encode($elevate)]);
+            Paper::where('id', $supply->product)->update(['handle_elevate' => json_encode($elevate)]);
             if (!empty($over_supply['qty'])) {
-                $data_whouse = $over_supply;
-                $data_whouse['type'] = $supply->type;
-                $data_whouse['supp_type'] = @$size['supply_type'];
-                $data_whouse['supp_price'] = @$size['supp_price'];
-                $data_whouse['status'] = SupplyWarehouse::WAITING;
-                $data_whouse['source'] = SupplyWarehouse::OVER;
-                $this->configBaseDataAction($data_whouse);
-                SupplyWarehouse::insert($data_whouse);       
+                $over_supply['qty'] = $command['qty'];
+                PrintWarehouse::insertOverSupply($over_supply, $supply, $size);       
             }
             return returnMessageAjax(200, 'Đã gửi yêu cầu xử lí vật tư thành công!', url('update/orders/'.$supply->order));
         }

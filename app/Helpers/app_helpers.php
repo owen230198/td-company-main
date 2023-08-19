@@ -175,10 +175,11 @@ if (!function_exists('')) {
 }
 
 if (!function_exists('calValuePercentPlus')) {
-    function calValuePercentPlus($value, $get_perc, $perc, $plus =0)
+    function calValuePercentPlus($value, $get_perc, $perc, $plus = 0, $round = false)
     {
         $add_percent = (float) $get_perc * (float) $perc / 100;
-        return $value + $add_percent + (float) $plus;
+        $ret = (float) $value + $add_percent + (float) (float) $plus;
+        return $round ? ceil($ret) : $ret;
     }
 }
 

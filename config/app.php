@@ -214,7 +214,8 @@ return [
         'TDConst' =>   App\Constants\TDConstant::class,
         'StatusConst' => App\Constants\StatusConstant::class,
         'GroupUser' => App\Models\NGroupUser::class,
-        'User' => App\Models\NUser::class
+        'User' => App\Models\NUser::class,
+        'BaseService' => App\Services\BaseService::class
     ])->toArray(),
 
 ];

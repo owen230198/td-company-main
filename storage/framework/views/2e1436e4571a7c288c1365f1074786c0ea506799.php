@@ -4,10 +4,12 @@
     </label>
     <div class="d-flex justify-content-between align-items-center">
         <input type="number" name = 'product[<?php echo e($pro_index); ?>][<?php echo e($key_supp); ?>][<?php echo e($supp_index); ?>][size][length]' placeholder="Chiều dài (cm)" 
-        class="form-control medium_input" step="any" value="<?php echo e(@$supply_size['length']); ?>"> 
+        class="form-control medium_input" step="any" value="<?php echo e(@$supply_size['length']); ?>"
+        <?php echo e(!empty($disable_all) || in_array('size_length', @$arr_disable ?? []) ? 'disabled' : ''); ?>> 
         <span class="mx-3">X</span>
         <input type="number" name = 'product[<?php echo e($pro_index); ?>][<?php echo e($key_supp); ?>][<?php echo e($supp_index); ?>][size][width]' placeholder="Chiều rộng (cm)" 
-        class="form-control medium_input" step="any"value="<?php echo e(@$supply_size['width']); ?>"> 
+        class="form-control medium_input" step="any"value="<?php echo e(@$supply_size['width']); ?>"
+        <?php echo e(!empty($disable_all) || in_array('size_width', @$arr_disable ?? []) ? 'disabled' : ''); ?>> 
         <div class="paper_price_config_input" style="display:<?php echo e(@$supply_size['materal'] != 'other' ? 'none' : 'block'); ?>">
             <div class="d-flex align-items-center">
                 <span class="mx-3">X</span>
