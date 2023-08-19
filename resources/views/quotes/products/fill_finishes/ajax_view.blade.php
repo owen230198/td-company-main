@@ -23,7 +23,7 @@
         'other_data' => ['data' => ['table' => 'devices', 'where' => ['key_device' => 'fill', 'supply' => 'fill_finish'], 'select' => ['id', 'name']]]
     ];
 
-    $data_finish = !empty($supply_obj->finish) ? json_decode($supply->finish, true) : [];
+    $data_finish = !empty($supply_obj->finish) ? json_decode($supply_obj->finish, true) : [];
 
     $pro_finish_ext = [
         'name' => 'product['.$pro_index.'][fill_finish][finish][ext_price]',
@@ -32,7 +32,7 @@
         'attr' => ['type_input' => 'number']
     ];
 
-    $data_magnet = !empty($supply_obj->magnet) ? json_decode($supply->magnet, true) : [];
+    $data_magnet = !empty($supply_obj->magnet) ? json_decode($supply_obj->magnet, true) : [];
 
     $data_select_magnet = [
         'other_data' => [

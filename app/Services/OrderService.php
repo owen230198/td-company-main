@@ -22,6 +22,7 @@ class OrderService extends BaseService
         $data['data_quote'] = $arr_quote;
         $data['products'] = Product::where(['act' => 1, 'quote_id' => $quote_id])->get();
         $data['product_qty'] = count($data['products']);
+        $data['parent_url'] = ['link' => @session()->get('back_url'), 'note' => 'Danh sách đơn hàng'];
         return $data;
     }
 

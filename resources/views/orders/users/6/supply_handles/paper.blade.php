@@ -5,6 +5,9 @@
         $nilon = json_decode($supply_obj->nilon, true);
         $metalai = json_decode($supply_obj->metalai, true);
     @endphp
+    <h3 class="fs-14 text-uppercase border_top_eb pt-3 mt-3 text-center handle_title">
+        <span>Xuất vật tư màng theo yêu cầu</span>
+    </h3>
     @if (!empty($nilon['materal']))
         @php
             $nilon_chose_supp = [
@@ -25,6 +28,7 @@
         @endphp
         @include('view_update.view', $nilon_chose_supp)
     @endif
+
     {{-- chọn vật tư cán metalai --}}
     @if (!empty($metalai['materal']))
         @php

@@ -9,9 +9,9 @@
                 case \App\Models\Order::DESIGN_SUBMITED:
                     return 'Duyệt xuống P. Kế hoạch';
                     break;
-                case \App\Models\Order::TECH_SUBMITED:
-                    return 'Xác nhận xuất khuôn';
-                    break;
+                // case \App\Models\Order::TECH_SUBMITED:
+                //     return 'Xác nhận xuất khuôn';
+                //     break;
                 default:
                     return '';
                     break;

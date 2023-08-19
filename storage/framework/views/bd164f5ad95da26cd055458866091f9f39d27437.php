@@ -55,10 +55,12 @@
                     <?php if(count($elements) > 0): ?>
                         <ul class="nav nav-pills mb-3 quote_pro_strct_nav_link" id="quote-pro-<?php echo e($pro_index); ?>-struct-tab" role="tablist">
                             <?php $__currentLoopData = $elements; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $element): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <li class="nav-item">
-                                    <a class="nav-link<?php echo e($key == 0 ? ' active' : ''); ?>" id="quote-pro-<?php echo e($pro_index); ?>-struct-<?php echo e($element['key']); ?>-tab" data-toggle="pill" href="#quote-pro-<?php echo e($pro_index); ?>-struct-<?php echo e($element['key']); ?>" 
-                                    role="tab" aria-controls="quote-pro-<?php echo e($pro_index); ?>-struct-<?php echo e($element['key']); ?>" aria-selected="true"><?php echo e($element['note']); ?></a>
-                                </li>   
+                                <?php if(!empty($element['data'])): ?>
+                                    <li class="nav-item">
+                                        <a class="nav-link<?php echo e($key == 0 ? ' active' : ''); ?>" id="quote-pro-<?php echo e($pro_index); ?>-struct-<?php echo e($element['key']); ?>-tab" data-toggle="pill" href="#quote-pro-<?php echo e($pro_index); ?>-struct-<?php echo e($element['key']); ?>" 
+                                        role="tab" aria-controls="quote-pro-<?php echo e($pro_index); ?>-struct-<?php echo e($element['key']); ?>" aria-selected="true"><?php echo e($element['note']); ?></a>
+                                    </li>   
+                                <?php endif; ?>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </ul>
                         <div class="tab-content" id="quote-pro-<?php echo e($pro_index); ?>-struct-tabContent">

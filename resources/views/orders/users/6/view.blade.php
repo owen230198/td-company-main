@@ -55,10 +55,12 @@
                     @if (count($elements) > 0)
                         <ul class="nav nav-pills mb-3 quote_pro_strct_nav_link" id="quote-pro-{{ $pro_index }}-struct-tab" role="tablist">
                             @foreach ($elements as $key => $element)
-                                <li class="nav-item">
-                                    <a class="nav-link{{ $key == 0 ? ' active' : '' }}" id="quote-pro-{{ $pro_index }}-struct-{{ $element['key'] }}-tab" data-toggle="pill" href="#quote-pro-{{ $pro_index }}-struct-{{ $element['key'] }}" 
-                                    role="tab" aria-controls="quote-pro-{{ $pro_index }}-struct-{{ $element['key'] }}" aria-selected="true">{{ $element['note'] }}</a>
-                                </li>   
+                                @if (!empty($element['data']))
+                                    <li class="nav-item">
+                                        <a class="nav-link{{ $key == 0 ? ' active' : '' }}" id="quote-pro-{{ $pro_index }}-struct-{{ $element['key'] }}-tab" data-toggle="pill" href="#quote-pro-{{ $pro_index }}-struct-{{ $element['key'] }}" 
+                                        role="tab" aria-controls="quote-pro-{{ $pro_index }}-struct-{{ $element['key'] }}" aria-selected="true">{{ $element['note'] }}</a>
+                                    </li>   
+                                @endif
                             @endforeach
                         </ul>
                         <div class="tab-content" id="quote-pro-{{ $pro_index }}-struct-tabContent">

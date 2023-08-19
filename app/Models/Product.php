@@ -8,14 +8,14 @@
         protected $protectFields = false;
         static $childTable = ['papers', 'supplies', 'fill_finishes'];
         const SUPPLY_FIELDS = [
-            [
-                'name' => 'name',
-                'note' => 'Tên',
-                'type' => 'text' 
-            ],
+            // [
+            //     'name' => 'name',
+            //     'note' => 'Tên',
+            //     'type' => 'text' 
+            // ],
             [
                 'name' => 'product_qty',
-                'note' => 'Số lượng',
+                'note' => 'Số lượng sp',
                 'type' => 'text', 
                 
             ],
