@@ -38,13 +38,15 @@
                         <?php echo e(getFieldDataById('name', 'design_types', @$product['design'])); ?>
 
                     </p>
-                    <p class="d-flex align-items-center mb-1 font_bold">
-                        <span class="mr-1">
-                            <i class="dot"></i>
-                            Công nghệ in: <?php echo e(\TDConst::PRINT_TECH[@$main_paper['print']['machine']]); ?>
+                    <?php if(!empty($main_paper['print'])): ?>
+                        <p class="d-flex align-items-center mb-1 font_bold">
+                            <span class="mr-1">
+                                <i class="dot"></i>
+                                Công nghệ in: <?php echo e(\TDConst::PRINT_TECH[@$main_paper['print']['machine']]); ?>
 
-                        </span>
-                    </p>
+                            </span>
+                        </p>    
+                    <?php endif; ?>
                     <p class="mb-1">
                         <span class="font_bold mr-1"><i class="dot"></i> Hoàn thiện: </span>
                         <span class="font-italic">

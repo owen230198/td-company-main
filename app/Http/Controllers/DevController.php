@@ -84,11 +84,6 @@ class DevController extends Controller
         }
     }
 
-    public function generateString()
-    {
-        echo 'TD-'.Time();
-    }
-
     public function handleQueryCondition(&$table, $where)
     {
         foreach ($where as $w) {

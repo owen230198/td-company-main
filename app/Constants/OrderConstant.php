@@ -13,7 +13,7 @@ class OrderConstant
     const ACCEPT_REQURIRED_TABLE = [
         [
             'icon' => 'orders', 
-            'table' => 'orders', 
+            'table' => 'products', 
             'text' => 'Đơn chờ duyệt thiết kế', 
             'status' => Order::NOT_ACCEPTED 
         ], 
@@ -25,13 +25,13 @@ class OrderConstant
         ],
         [
             'icon' => 'tech', 
-            'table' => 'orders', 
+            'table' => 'products', 
             'text' => 'Đơn cần xử lí kỹ thuật', 
             'status' => Order::DESIGN_SUBMITED
         ],
         [
             'icon' => 'c_processes', 
-            'table' => 'orders', 
+            'table' => 'products', 
             'text' => 'Đơn cần duyệt sản xuất', 
             'status' => Order::TECH_SUBMITED
         ],

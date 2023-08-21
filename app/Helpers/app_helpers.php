@@ -304,3 +304,15 @@ if (!function_exists('currentModule')) {
     }
 }
 
+if (!function_exists('getCharacter')) {
+    function getCharaterByNum($num)
+    {
+        $char = '';
+        for ($i = 1; $num >= 0 && $i < 10; $i++) {
+        $char = chr(0x41 + ($num % pow(26, $i) / pow(26, $i - 1))) . $char;
+        $num -= pow(26, $i);
+        }
+        return $char;
+    }
+}
+

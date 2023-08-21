@@ -4,9 +4,6 @@ use App\Services\BaseService;
 use App\Models\Customer;
 use App\Models\Quote;
 use App\Models\Product;
-use App\Services\QTraits\QuoteTrait;
-use App\Services\QTraits\QPaperTrait;
-use App\Services\QTraits\QSupplyTrait;
 use App\Constants\StatusConstant;
 use App\Constants\TDConstant;
 use App\Models\NGroupUser;
@@ -171,12 +168,12 @@ class QuoteService extends BaseService
         }
     }
 
-    public function processDataProduct($data, $arr_quote, $step = TDConstant::QUOTE_FLOW)
+    public function processDataProduct($data, $arr_quote, $step = TDConstant::QUOTE_FLOW, $arr_order = [])
     {
         $data_product = $data['product'];
         foreach ($data_product as $key => $product) {
             $product['quote_id'] = $arr_quote['id'];
-            $product_process = $this->processProduct($product, $step, $key);
+            $product_process = $this->processProduct($product, $step, $key, $arr_order);
             if (!empty($product_process['code']) && $product_process['code'] == 100) {
                 return $product_process;
                 break;
@@ -241,7 +238,9 @@ class QuoteService extends BaseService
         $arr['paper_materal'] = getFieldDataById('name', 'materals', $main_paper['size']['materal']);
         $arr['pro_size'] = getSizeTitleProduct($product);
         $arr['pro_design'] = getFieldDataById('name', 'design_types', $product['design']);
-        $arr['paper_print_tech'] = TDConstant::PRINT_TECH[@$main_paper['print']['machine']];
+        if (!empty($main_paper['print'])) {
+            $arr['paper_print_tech'] = TDConstant::PRINT_TECH[@$main_paper['print']['machine']];
+        }
         $finish = '';
         if (@$main_paper['nilon']['act'] == 1) {
             $finish .= "+ Cán nilon: ".getFieldDataById('name', 'materals', @$main_paper['nilon']['materal']).' '. $main_paper['nilon']['face'] . ' mặt ';

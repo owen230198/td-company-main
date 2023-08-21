@@ -35,12 +35,14 @@
                              Mẫu thiết kế : </span>
                         {{ getFieldDataById('name', 'design_types', @$product['design']) }}
                     </p>
-                    <p class="d-flex align-items-center mb-1 font_bold">
-                        <span class="mr-1">
-                            <i class="dot"></i>
-                            Công nghệ in: {{ \TDConst::PRINT_TECH[@$main_paper['print']['machine']] }}
-                        </span>
-                    </p>
+                    @if (!empty($main_paper['print']))
+                        <p class="d-flex align-items-center mb-1 font_bold">
+                            <span class="mr-1">
+                                <i class="dot"></i>
+                                Công nghệ in: {{ \TDConst::PRINT_TECH[@$main_paper['print']['machine']] }}
+                            </span>
+                        </p>    
+                    @endif
                     <p class="mb-1">
                         <span class="font_bold mr-1"><i class="dot"></i> Hoàn thiện: </span>
                         <span class="font-italic">

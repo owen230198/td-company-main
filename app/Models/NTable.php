@@ -14,9 +14,9 @@ class NTable extends Model
     protected $table = 'n_tables';
     protected $protectFields = false;
     static $specific = [
-                        'insert' => ['quotes', 'orders'],
-                        'update' => ['quotes', 'orders', 'c_designs'],
-                        'copy' => ['quotes', 'orders'],
-                        'remove' => ['quotes', 'orders', 'supply_types']
+                        'insert' => ['quotes', 'orders', 'products'],
+                        'update' => ['quotes', 'orders', 'products', 'c_designs'],
+                        'copy' => ['quotes', 'orders', 'products'],
+                        'remove' => ['quotes', 'orders', 'products', 'supply_types']
                     ];
 }

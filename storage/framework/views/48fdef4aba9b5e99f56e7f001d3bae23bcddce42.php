@@ -1,5 +1,5 @@
 <?php
-    $pro_per_price = (int) @$product['total_cost'] / (int) @$product['qty'];
+    $pro_per_price = (int) @$product['total_amount'] / (int) @$product['qty'];
     $ext_pro_fields_inf = [
         'per_price' => 
         [
@@ -8,12 +8,12 @@
             'attr' => ['disable_field' => 1],
             'value' => number_format($pro_per_price)
         ],
-        'total_cost' =>
+        'total_amount' =>
         [
-            'name' => $pro_base_name_input.'[total_cost]',
+            'name' => $pro_base_name_input.'[total_amount]',
             'note' => 'Tổng chi phí sản phẩm',
             'attr' => ['disable_field' => 1],
-            'value' => number_format($product['total_cost'])
+            'value' => number_format($product['total_amount'])
         ],
     ];
     

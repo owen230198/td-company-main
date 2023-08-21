@@ -182,7 +182,6 @@ trait QPaperTrait
         }else{
             $data_action['total_cost'] = 0;    
         }
-
         return $data_action;
     }
 }

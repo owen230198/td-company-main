@@ -12,6 +12,7 @@ class Quote extends Model
      */
     protected $table = 'quotes';
     protected $protectFields = false;
+    const ORDER_CREATED = 'order_created';
     static $tableChild = array('q_papers', 'q_cartons', 'q_foams', 'q_silks', 'q_finishes');
     static function getRole()
     {
@@ -29,7 +30,8 @@ class Quote extends Model
                                 ['key' => 'created_by', 'value' => \User::getCurrent('id')],
                                 ['con'=> 'or', 'key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED]
                             ]
-                    ]
+                    ],
+                'clone' => 1
             ]
         ];
         return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];

@@ -17,7 +17,7 @@ class OrderController extends Controller
         $this->quote_services = new \App\Services\QuoteService;
     }
 
-    public function insert(Request $request)
+    public function insertByQuote($request)
     {
         $quote_id = $request->input('quote');
         $arr_quote = Quote::find($quote_id);
@@ -25,19 +25,28 @@ class OrderController extends Controller
             if (empty($arr_quote) || @$arr_quote['status'] == \StatusConst::NOT_ACCEPTED) {
                 return back()->with('error', 'Dữ liệu báo giá không hợp lệ!');
             }
-            if (getCountDataTable('orders', ['quote' => $quote_id]) > 0) {
+            if ($arr_quote['status'] == Quote::ORDER_CREATED) {
                 return back()->with('error', 'Bạn đã tạo đơn hàng cho báo giá này rồi !');
             }
             $data = $this->services->getBaseDataAction($arr_quote, $quote_id);
             $data['title'] = 'Thêm đơn hàng - Mã báo giá : '.$arr_quote['seri'];
-            $data['link_action'] = url('insert/orders');
+            $data['link_action'] = url('insert/orders?quote='.$quote_id);
             return view('orders.view', $data);
         }else{
             if (!empty($request['order']['status'])) {
                 return returnMessageAjax(100, 'Dữ liệu không hợp lệ !');
             }
             return $this->services->processDataOrder($request, $arr_quote); 
-        }   
+        } 
+    }
+
+    public function insert(Request $request)
+    {
+        if (!empty($request->input('quote'))) {
+            return $this->insertByQuote($request);
+        }else{
+            return $this->insertByProduct($request);
+        }  
     }
 
     public function update(Request $request, $id){

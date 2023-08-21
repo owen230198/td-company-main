@@ -21,7 +21,7 @@ class OrderService extends BaseService
 
     public function getBaseDataAction($arr_quote, $quote_id)
     {
-        $data['data_quote'] = $arr_quote;
+        $data['order_cost'] = $arr_quote['total_amount'];
         $data['products'] = Product::where(['act' => 1, 'quote_id' => $quote_id])->get();
         $data['product_qty'] = count($data['products']);
         $data['parent_url'] = ['link' => @session()->get('back_url'), 'note' => 'Danh sách đơn hàng'];
@@ -58,10 +58,22 @@ class OrderService extends BaseService
             }else{
                 $arr_order['code'] = 'DH-'.getCodeInsertTable('orders');
                 $arr_order['status'] = \StatusConst::NOT_ACCEPTED;
-                Order::insertGetId($arr_order);
+                $arr_order['id'] = Order::insertGetId($arr_order);
+                $this->handleProductAfter($data['product'], $arr_order);
+                Quote::where('id', $arr_quote['id'])->update(['status' => Quote::ORDER_CREATED]);
             }
             return returnMessageAjax(200, 'Cập nhật dữ liệu thành công!', getBackUrl());     
         }
+    }
+
+    public function handleProductAfter($data, $order)
+    {
+        foreach ($data as $key => $product) {
+            $data_update['code'] =  $order['code'].getCharaterByNum($key);
+            $data_update['status'] = $order['status'];
+            $data_update['order'] = $order['id'];
+            Product::where('id', $product['id'])->update($data_update);   
+        }  
     }
 
     public function insertDesignCommand($arr_order)
@@ -80,15 +92,15 @@ class OrderService extends BaseService
     }
     public function validateElevatehandle($command, $elevate){
         if (empty($command['size_type'])) {
-            return returnMessageAjax(100, 'Vui lòng chọn khổ vật tư trong kho !');
+            return returnMessageAjax(100, 'Bạn chưa chọn khổ vật tư trong kho !');
         }
 
         if (empty($command['nqty'])) {
-            return returnMessageAjax(100, 'Vui lòng nhập số lượng sản phẩm/tờ to !');
+            return returnMessageAjax(100, 'Bạn chưa nhập số lượng sản phẩm/tờ to !');
         }
 
         if (empty($elevate['num'])) {
-            return returnMessageAjax(100, 'Vui lòng nhập số lượt bế !');
+            return returnMessageAjax(100, 'Bạn chưa nhập số lượt bế !');
         }
     }
 
@@ -162,7 +174,9 @@ class OrderService extends BaseService
 
     public function supply_handle_decal($supply, $size, $c_supply, $over_supply)
     {
-        
+        if (empty($c_supply['supp_price'])) {
+            return returnMessageAjax(100, 'Bạn chưa chọn vật tư trong kho !');
+        } 
     }
 }
 

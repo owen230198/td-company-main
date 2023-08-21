@@ -1,12 +1,11 @@
 <div class="order_field_update __order_field_module mt- pt-3 border_top_eb">
-    <input type="hidden" name="order[quote]" value="<?php echo e($data_quote['id']); ?>">
     <?php
         $order_field_update = [
             [
                 'name' => '',
                 'note' => 'Tổng tiền (chưa bao gồm VAT)',
                 'attr' => ['disable_field' => 1, 'inject_class' => '__quote_total_input'],
-                'value' => round(@$data_quote['total_amount'])
+                'value' => round(@$order_cost)
             ],
             [
                 'name' => 'order[vat]',
@@ -19,7 +18,7 @@
                 'name' => 'order[total_amount]',
                 'note' => 'Tổng tiền đơn hàng',
                 'attr' => ['disable_field' => 1, 'inject_class' => '__order_total_input'],
-                'value' => round(@$data_order['total_amount'] ?? $data_quote['total_amount'])
+                'value' => round(@$data_order['total_amount'] ?? $order_cost)
             ],
             [
                 'name' => 'order[advance]',
@@ -31,7 +30,7 @@
                 'name' => 'order[rest]',
                 'note' => 'Chi phí còn lại',
                 'attr' => ['readonly' => 1, 'inject_class' => '__order_rest_input'],
-                'value' => round(@$data_order['rest']) ?? round(@$data_quote['total_amount'])
+                'value' => round(@$data_order['rest'] ?? @$order_cost)
             ],
             [
                 'name' => 'order[rest_bill]',
