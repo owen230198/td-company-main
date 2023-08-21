@@ -11,7 +11,7 @@
     <?php if(!empty($nilon['materal'])): ?>
         <?php
             $nilon_chose_supp = [
-                'name' => 'c_supply[materal][['.\TDConst::NILON.']]',
+                'name' => 'c_supply[materal]['.\TDConst::NILON.']]',
                 'type' => 'linking',
                 'note' => 'Chọn màng nilon',
                 'value' => '',

@@ -41,11 +41,25 @@
     if (!function_exists('getHandleSupplyStatus')) {
         function getHandleSupplyStatus($product, $supply, $type)
         {
-            $command = \DB::table('c_supplies')->where(['product' => $product, 'supply' => $supply, 'supp_type' => $type])->first();
-            if (empty($command)) {
+            if ($type == \TDConst::PAPER) {
+                $arr_supp_key = [\TDConst::PAPER, \TDConst::NILON, \TDConst::METALAI, \TDConst::COVER];
+                $commands = \DB::table('c_supplies')
+                ->where(['product' => $product, 'supply' => $supply])
+                ->whereIn('supp_type', $arr_supp_key)->get();
+            }else{
+                $commands = \DB::table('c_supplies')->where(['product' => $product, 'supply' => $supply, 'supp_type' => $type])->get();
+            }
+            if ($commands->isEmpty()) {
                 return \App\Models\CSupply::NOT_HANDLE;
             }
-            return @$command->status;
+            $ret = \App\Models\CSupply::HANDLED;
+            foreach ($commands as $c_supp) {
+                if (@$c_supp->status == \App\Models\CSupply::HANDLING) {
+                    $ret = \App\Models\CSupply::HANDLING;
+                    break;
+                }
+            }
+            return $ret;
         }
     }
 

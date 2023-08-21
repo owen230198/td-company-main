@@ -185,7 +185,7 @@ class OrderController extends Controller
                     if (method_exists($this->services, $method_handle_name)) {
                         return $this->services->{$method_handle_name}($data_supply, $supp_size, $data_command, $data_over_supp);
                     }else{
-                        returnMessageAjax(100, 'Không thể xử lí vật tư !');
+                        return returnMessageAjax(100, 'Không thể xử lí vật tư !');
                     } 
                 } 
             }else{

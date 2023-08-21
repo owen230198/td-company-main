@@ -101,13 +101,13 @@ class OrderService extends BaseService
         if (@$valid['code'] == 100) {
             return returnMessageAjax(100, $valid['message']);
         }
-        $insert_command = CSupply::insertCommand($command, $supply); 
+        $insert_command = CSupply::insertCommand($command, $supply);
         if (!empty($c_supply['materal'])) {
             foreach ($c_supply['materal'] as $key => $value) {
                 $c_mataeral['size_type'] = $value;
                 $c_mataeral['qty'] = (float) @$size['width'] * (float) @$size['length'] * $command['qty'];
                 $supply->type = $key;
-                CSupply::insertCommand($command, $supply);
+                CSupply::insertCommand($c_mataeral, $supply);
             }
         }
         if (!$insert_command) {
@@ -116,15 +116,53 @@ class OrderService extends BaseService
             Paper::where('id', $supply->product)->update(['handle_elevate' => json_encode($elevate)]);
             if (!empty($over_supply['qty'])) {
                 $over_supply['qty'] = $command['qty'];
+                $supply->type = \TDConst::PAPER;
                 PrintWarehouse::insertOverSupply($over_supply, $supply, $size);       
             }
             return returnMessageAjax(200, 'Đã gửi yêu cầu xử lí vật tư thành công!', url('update/orders/'.$supply->order));
         }
     }
-    
-    public function afterRemove($id)
+
+    public function supply_handle_carton($supply, $size, $c_supply, $over_supply)
     {
-           
+        $command = @$c_supply['command'] ?? [];
+        $elevate = @$c_supply['elevate'] ?? [];
+        $command['qty'] = calValuePercentPlus($command['qty'], $command['qty'], getDataConfig('QuoteConfig', 'CARTON_COMPEN_PERCENT'), 0, true);
+        $valid = $this->validateElevatehandle($command, $elevate);
+        if (@$valid['code'] == 100) {
+            return returnMessageAjax(100, $valid['message']);
+        }
+        $insert_command = CSupply::insertCommand($command, $supply);
+        if (!$insert_command) {
+            return returnMessageAjax(110, 'Không thể tạo yêu cầu xuất vật tư, vui lòng thử lại!');
+        }else{
+            Supply::where('id', $supply->product)->update(['handle_elevate' => json_encode($elevate)]);
+            if (!empty($over_supply['qty'])) {
+                $over_supply['qty'] = $command['qty'];
+                SupplyWarehouse::insertOverSupply($over_supply, $supply, $size);       
+            }
+            return returnMessageAjax(200, 'Đã gửi yêu cầu xử lí vật tư thành công!', url('update/orders/'.$supply->order));
+        }     
+    }
+
+    public function supply_handle_rubber($supply, $size, $c_supply, $over_supply)
+    {
+        return $this->supply_handle_carton($supply, $size, $c_supply, $over_supply);
+    }
+
+    public function supply_handle_styrofoam($supply, $size, $c_supply, $over_supply)
+    {
+        return $this->supply_handle_carton($supply, $size, $c_supply, $over_supply);
+    }
+
+    public function supply_handle_mica($supply, $size, $c_supply, $over_supply)
+    {
+        return $this->supply_handle_carton($supply, $size, $c_supply, $over_supply);
+    }
+
+    public function supply_handle_decal($supply, $size, $c_supply, $over_supply)
+    {
+        
     }
 }
 

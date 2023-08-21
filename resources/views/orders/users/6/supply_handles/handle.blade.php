@@ -2,9 +2,6 @@
     <h3 class="fs-14 text-uppercase border_top_eb pt-3 mt-3 text-center handle_title">
         <span>Xuất vật tư theo yêu cầu</span>
     </h3>
-    <input type="hidden" name="id" value="{{ @$supply_obj->id }}">
-    <input type="hidden" name="table" value="{{ @$table }}">
-    <input type="hidden" name="order" value="{{ @$supply_obj->order }}">
     <div class="plan_handle_supply_module">
         <div class="module_hanle_supply_plan quantity_paper_module plan_handle_elevate_module" data-percent = {{ $compen_percent }}>
             @php

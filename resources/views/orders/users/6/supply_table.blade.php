@@ -22,11 +22,11 @@
                         <span>{{ $key+1 }}</span>
                     </td>
                     @php
-                        $supp_handle_status = getHandleSupplyStatus($data->product, $data->id, @$data->type);
+                        $supp_handle_status = getHandleSupplyStatus($data->product, $data->id, @$element['pro_field']);
                         $bg_color = @$supp_handle_status == 'handled' ? 'stt_bg_green' : 
                                     (@$supp_handle_status == 'handling' ? 'stt_bg_blue' : 'stt_bg_red');
-                        $stt_title = @$supp_handle_status == 'handled' ? 'Đã xử lí' : 
-                                    (@$supp_handle_status == 'handling' ? 'Đang xử lí' : 'Cần xử lí ngay');
+                        $stt_title = @$supp_handle_status == 'handled' ? 'Kế toán kho đã xử lí' : 
+                                    (@$supp_handle_status == 'handling' ? 'Kế toán kho đang xử lí' : 'Cần xử lí ngay');
                     @endphp 
                     <td class="text-center {{ $bg_color }}">
                         <span class="color_white font_bold">{{ $stt_title }}</span>
