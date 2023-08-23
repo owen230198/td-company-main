@@ -168,12 +168,14 @@ class QuoteService extends BaseService
         }
     }
 
-    public function processDataProduct($data, $arr_quote, $step = TDConstant::QUOTE_FLOW, $arr_order = [])
+    public function processDataProduct($data, $arr_quote = [], $step = TDConstant::QUOTE_FLOW)
     {
         $data_product = $data['product'];
         foreach ($data_product as $key => $product) {
-            $product['quote_id'] = $arr_quote['id'];
-            $product_process = $this->processProduct($product, $step, $key, $arr_order);
+            if (!empty($arr_quote)) {
+                $product['quote_id'] = $arr_quote['id'];
+            }
+            $product_process = $this->processProduct($product, $step, $key);
             if (!empty($product_process['code']) && $product_process['code'] == 100) {
                 return $product_process;
                 break;
@@ -187,7 +189,7 @@ class QuoteService extends BaseService
                 }
             }
         }
-        if (!empty($process)) {
+        if (!empty($process) && !empty($arr_quote)) {
             if ($step== TDConstant::QUOTE_FLOW) {
                 RefreshQuotePrice($arr_quote);
             }else{

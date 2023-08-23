@@ -79,6 +79,11 @@ class NGroupUser extends Model
             'link' => 'view/quotes?default_data={"status":"accepted"}', 
             'group' => 'customer_quote'
         ],
+        'quote_order_created' => [
+            'name' => 'DS báo giá (đã tạo đơn)', 
+            'link' => 'view/quotes?default_data={"status":"order_created"}', 
+            'group' => 'customer_quote'
+        ],
         'design_not_accepted' => [
             'name' => 'DS lệnh TK chưa duyệt', 
             'link' => 'view/c_designs?default_data={"status":"not_accepted"}', 

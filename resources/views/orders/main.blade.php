@@ -23,7 +23,7 @@
             @endphp
             @if (!empty($stage_button))
                 <button type="button" class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-2 __apply_order" 
-                data-id={{ $id }} data-stage="{{ $stage }}">
+                data-id={{ $id }} data-stage="{{ $stage }}" data-type = {{ @$order_type ?? \OrderConst::SINGLE }}>
                     <i class="fa fa-thumbs-o-up mr-2 fs-14" aria-hidden="true"></i>
                     {{ $stage_button }}
                 </button> 

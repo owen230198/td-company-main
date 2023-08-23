@@ -54,11 +54,5 @@ class Quote extends Model
                 }
             }        
         }
-        $order = Order::where('quote', $id)->get('id')->first();
-        if (!empty($order['id'])) {
-            $admin = new \App\Services\AdminService;
-            $admin->removeDataTable('orders', $order['id']);
-        }
-        
     } 
 }

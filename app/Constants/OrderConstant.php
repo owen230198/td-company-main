@@ -52,6 +52,11 @@ class OrderConstant
         'status' => SupplyWarehouse::WAITING
         ],
     ];
+
+    //Kiểu đơn
+    const INCLUDE = 'include';
+    const SINGLE = 'single';
+
     //PROCESS STAGE 
     const STAGE_PROCESS = [   
         "crop"=>"Xén Thành Phẩm",

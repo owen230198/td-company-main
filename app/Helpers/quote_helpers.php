@@ -45,11 +45,9 @@
 		}
 	}
 
-	if (!function_exists('getProductTotalCost')) {
-		function getProductTotalCost($arr_quote, $get = '')
+	if (!function_exists('getTotalProductByArr')) {
+		function getTotalProductByArr($products, $get = '')
 		{
-			$qwhere = ['act' => 1, 'quote_id' => $arr_quote['id']];
-			$products = \DB::table('products')->where($qwhere)->get();
 			$ret = ['total_cost' => 0, 'total_amount' => 0];
 			foreach ($products as $product) {
 				$pwhere = ['act' => 1, 'product' => $product->id];
@@ -64,6 +62,16 @@
 				$ret['total_cost'] += $update_product['total_cost'];
 				$ret['total_amount'] += $update_product['total_amount'];  
 			}
+			return !empty($get) && !empty($ret[$get]) ? $ret[$get] : $ret;
+		}
+	}
+
+	if (!function_exists('getProductTotalCost')) {
+		function getProductTotalCost($arr_quote, $get = '')
+		{
+			$qwhere = ['act' => 1, 'quote_id' => $arr_quote['id']];
+			$products = \DB::table('products')->where($qwhere)->get();
+			$ret = getTotalProductByArr($products);
 			return !empty($get) && !empty($ret[$get]) ? $ret[$get] : $ret;
 		}
 	}

@@ -156,7 +156,11 @@ class AdminController extends Controller
         }
         if (in_array($table, NTable::$specific[__FUNCTION__])) {
             $controller = getObjectByTable($table);
-            return $controller->insert($request);
+            if (method_exists($controller, __FUNCTION__)) {
+                return $controller->insert($request);
+            }else{
+                return customReturnMessage(false, $request->isMethod('POST'), ['message' => 'Thao tác không hỗ trợ !']);
+            }
         }else{
             $param = $request->except('_token');
             if ($request->isMethod('GET')) {
@@ -186,7 +190,11 @@ class AdminController extends Controller
         }
         if (in_array($table, NTable::$specific['update'])) {
             $controller = getObjectByTable($table);
-            return $controller->update($request, $id);
+            if (method_exists($controller, __FUNCTION__)) {
+                return $controller->update($request, $id);
+            }else{
+                return customReturnMessage(false, $request->isMethod('POST'), ['message' => 'Thao tác không hỗ trợ !']);
+            }
         }else{
             $param = $request->except('_token');
             if ($request->isMethod('GET')) {
@@ -215,7 +223,11 @@ class AdminController extends Controller
         }
         if (in_array($table, NTable::$specific['copy'])) {
             $controller = getObjectByTable($table);
-            return $controller->clone($request, $id);
+            if (method_exists($controller, __FUNCTION__)) {
+                return $controller->clone($request, $id);
+            }else{
+                return customReturnMessage(false, $request->isMethod('POST'), ['message' => 'Thao tác không hỗ trợ !']);
+            }
         }else{
             $param = $request->except('_token');
             $data = $this->admins->getDataActionView($table, 'insert', 'Sao chép', $param);

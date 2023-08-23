@@ -307,12 +307,13 @@ if (!function_exists('currentModule')) {
 if (!function_exists('getCharacter')) {
     function getCharaterByNum($num)
     {
-        $char = '';
-        for ($i = 1; $num >= 0 && $i < 10; $i++) {
-        $char = chr(0x41 + ($num % pow(26, $i) / pow(26, $i - 1))) . $char;
-        $num -= pow(26, $i);
+        $alpha = "";
+        while ($num >= 0) {
+            $rem = $num % 26;
+            $alpha = chr($rem + 65) . $alpha;
+            $num = floor($num / 26) - 1;
         }
-        return $char;
+        return $alpha;
     }
 }
 

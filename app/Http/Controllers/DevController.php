@@ -173,7 +173,7 @@ class DevController extends Controller
     }
 
     public function testData(){
-        dd(\DB::table('customers')->where('act', 1)->join('customer_user', 'customers.id', 'customer_user.customer_id')->where('user_id', 1)->get());
+       dd(getCharaterByNum(2));
     }
 }
 

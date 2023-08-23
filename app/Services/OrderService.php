@@ -19,24 +19,15 @@ class OrderService extends BaseService
         $this->quote_services = new \App\Services\QuoteService;
     }
 
-    public function getBaseDataAction($arr_quote, $quote_id)
+    public function getBaseDataAction()
     {
-        $data['order_cost'] = $arr_quote['total_amount'];
-        $data['products'] = Product::where(['act' => 1, 'quote_id' => $quote_id])->get();
-        $data['product_qty'] = count($data['products']);
         $data['parent_url'] = ['link' => @session()->get('back_url'), 'note' => 'Danh sách đơn hàng'];
         return $data;
     }
 
-    public function processDataOrder($request, $arr_quote)
+    public function processDataOrder($request, $arr_quote = [])
     {
         $data = $request->except('_token');
-        if (empty($arr_quote)) {
-            return returnMessageAjax(100, 'Báo giá không tồn tại!');
-        }
-        if ($arr_quote == \StatusConst::NOT_ACCEPTED) {
-            return returnMessageAjax(100, 'Báo giá chưa được khách hàng duyệt !');
-        }
         $arr_order = !empty($data['order']) ? $data['order'] : [];
         if ((int) @$arr_order['advance'] > 0 && empty($arr_order['rest_bill'])) {
             return ['code' => 100, 'message' => 'Bạn cần upload bill tạm ứng cho đơn này !'];
@@ -45,22 +36,26 @@ class OrderService extends BaseService
         if (!empty($product_process['code']) && $product_process['code'] == 100) {
             return returnMessageAjax(100, $product_process['message']);  
         }else{
-            $new_arr_quote = Quote::find($arr_quote['id']);
             if (!empty($arr_order['advance'])) {
-                $quote_amount = (float) $new_arr_quote['total_amount'];
+                $amount = getTotalProductByArr($data['product'], 'total_amount');
                 $arr_order['total_amount'] = @$arr_order['vat'] == 1 ? 
-                calValuePercentPlus($quote_amount, $quote_amount, (float) getDataConfig('QuoteConfig', 'VAT_PERC', 0)) : $quote_amount;
+                calValuePercentPlus($amount, $amount, (float) getDataConfig('QuoteConfig', 'VAT_PERC', 0)) : $amount;
                 $arr_order['rest'] = $arr_order['total_amount'] - (float) $arr_order['advance'];
             }
             $this->configBaseDataAction($arr_order);
             if (!empty($arr_order['id'])) {
+                if (!empty($arr_quote['id'])) {
+                    $arr_order['quote'] = $arr_quote['id'];
+                }
                 Order::where('id', $arr_order['id'])->update($arr_order);
             }else{
                 $arr_order['code'] = 'DH-'.getCodeInsertTable('orders');
                 $arr_order['status'] = \StatusConst::NOT_ACCEPTED;
                 $arr_order['id'] = Order::insertGetId($arr_order);
                 $this->handleProductAfter($data['product'], $arr_order);
-                Quote::where('id', $arr_quote['id'])->update(['status' => Quote::ORDER_CREATED]);
+                if (!empty($arr_order['id'])) {
+                    Quote::where('id', $arr_quote['id'])->update(['status' => Quote::ORDER_CREATED]);
+                }
             }
             return returnMessageAjax(200, 'Cập nhật dữ liệu thành công!', getBackUrl());     
         }

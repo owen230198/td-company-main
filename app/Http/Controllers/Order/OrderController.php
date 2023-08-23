@@ -1,12 +1,12 @@
 <?php
 namespace App\Http\Controllers\Order;
 use App\Http\Controllers\Controller;
-use App\Models\CDesign;
 use App\Models\CSupply;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Quote;
 use App\Models\SupplyWarehouse;
+use App\Models\Product;
 
 class OrderController extends Controller
 {
@@ -28,7 +28,10 @@ class OrderController extends Controller
             if ($arr_quote['status'] == Quote::ORDER_CREATED) {
                 return back()->with('error', 'Bạn đã tạo đơn hàng cho báo giá này rồi !');
             }
-            $data = $this->services->getBaseDataAction($arr_quote, $quote_id);
+            $data = $this->services->getBaseDataAction();
+            $data['order_cost'] = @$arr_quote['total_amount'];
+            $data['products'] = Product::where(['act' => 1, 'quote_id' => $quote_id])->get();
+            $data['product_qty'] = count($data['products']);
             $data['title'] = 'Thêm đơn hàng - Mã báo giá : '.$arr_quote['seri'];
             $data['link_action'] = url('insert/orders?quote='.$quote_id);
             return view('orders.view', $data);
@@ -56,8 +59,12 @@ class OrderController extends Controller
             if (empty($arr_order)) {
                 return back()->with('error', 'Dữ liệu Đơn hàng không hợp lệ!');
             }
-            $data = $this->services->getBaseDataAction($arr_quote, $arr_quote['id']);
+            $data = $this->services->getBaseDataAction();
+            $data['order_cost'] = @$arr_order['total_amount'];
+            $data['products'] = Product::where(['act' => 1, 'order' => $id])->get();
+            $data['product_qty'] = count($data['products']);
             $data['data_order'] = $arr_order;
+            $data['order_type'] = \OrderConst::INCLUDE;
             $data['title'] = 'Cập nhật & Xác nhận đơn - '.$arr_order['code'];
             $data['link_action'] = url('update/orders/'.$id);
             $data['id'] = $id;

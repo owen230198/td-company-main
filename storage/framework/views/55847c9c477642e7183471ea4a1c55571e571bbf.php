@@ -1,0 +1,1 @@
+<?php /**PATH C:\xampp\htdocs\td-app\td-company-app\resources\views/index_script_const.blade.php ENDPATH**/ ?>

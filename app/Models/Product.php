@@ -112,6 +112,31 @@
             };
             return $ext_pro_feild_file;
         }
+
+        public function afterRemove($id)
+        {
+            $childs = self::$childTable;
+            foreach ($childs as $table) {
+                \DB::table($table)->where('product', $id)->delete();
+            }
+        }
+        
+        static function getRole()
+        {
+            return Order::getRole();
+        }
+        
+        static function handleDataSupply($process, $product)
+        {
+            $elements = \TDConst::HARD_ELEMENT;
+            foreach ($elements as $el) {
+                if (!empty($product[$el['pro_field']])) {
+                    $model = getModelByTable($el['table']);
+                    $process = $model->processData($process, $product, $el['pro_field']);
+                }
+            }
+            return !empty($process);
+        }
     }
 
 ?>

@@ -11,13 +11,13 @@
                 'name' => 'order[vat]',
                 'note' => 'VAT',
                 'type' => 'checkbox',
-                'attr' => ['disable_field' => 1, 'inject_class' => '__vat_order_checkbox', 'inject_attr' => 'vat_per='.getDataConfig('QuoteConfig', 'VAT_PERC', 0).''],
+                'attr' => ['inject_class' => '__vat_order_checkbox', 'inject_attr' => 'vat_per='.getDataConfig('QuoteConfig', 'VAT_PERC', 0).''],
                 'value' => @$data_order['vat'] ?? 0
             ],
             [
                 'name' => 'order[total_amount]',
                 'note' => 'Tổng tiền đơn hàng',
-                'attr' => ['disable_field' => 1, 'inject_class' => '__order_total_input'],
+                'attr' => ['readonly' => 1, 'inject_class' => '__order_total_input'],
                 'value' => round(@$data_order['total_amount'] ?? $order_cost)
             ],
             [

@@ -213,6 +213,7 @@ return [
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'TDConst' =>   App\Constants\TDConstant::class,
         'StatusConst' => App\Constants\StatusConstant::class,
+        'OrderConst' => App\Constants\OrderConstant::class,
         'GroupUser' => App\Models\NGroupUser::class,
         'User' => App\Models\NUser::class,
         'BaseService' => App\Services\BaseService::class

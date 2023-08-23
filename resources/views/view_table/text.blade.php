@@ -1,1 +1,4 @@
-<p class="mb-0 w_max_content">{{ @$attr['type_input'] == 'price' ? number_format(@$value) : @$value }}</p>
+@php
+    $value = !empty($value) ? $value : 'Chưa có nội dung';
+@endphp
+<p class="mb-0 w_max_content">{{ !empty($attr['type_input']) && $attr['type_input'] == 'price' ? number_format((float)$value) : @$value }}</p>

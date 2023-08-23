@@ -177,7 +177,7 @@ var removeItemAddedModule = function()
     event.preventDefault();
     $(this).parent().remove();
     let id = $(this).data('id'); 
-    if (id != undefined) {
+    if (!empty(id)) {
       ajaxBaseCall({url:getBaseRoute('remove?ajax=1'), 
       type:'DELETE', 
       data:{remove_id:id, table:$(this).data('table')}});
