@@ -1,5 +1,6 @@
-<?php echo $__env->make('quotes.products.list_tab', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-
+<?php if(count($products) > 1): ?>
+    <?php echo $__env->make('quotes.products.list_tab', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php endif; ?>
 <div class="tab-content" id="quote-pro-tabContent">
     <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $pro_index => $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
         <div class="tab-pane fade<?php echo e($pro_index == 0 ? ' show active' : ''); ?> tab_pane_quote_pro" id="quote-pro-<?php echo e($pro_index); ?>" role="tabpanel" aria-labelledby="quote-pro-<?php echo e($pro_index); ?>-tab">
@@ -7,47 +8,51 @@
                 <div class="mb-2 base_product_config">
                     <?php
                         $pro_base_name_input = 'product['.$pro_index.']';
-                        $pro_name_field = [
-                            'name' => $pro_base_name_input.'[name]',
-                            'note' => 'Tên sản phẩm',
-                            'attr' => ['required' => 1, 'inject_class' => 'quote_set_product_name length_input', 'placeholder' => 'Nhập tên'],
-                            'value' => !empty($product['id']) ? @$product['name'] : ''
-                        ];
-                        $pro_qty_field = [
-                            'name' => $pro_base_name_input.'[qty]',
-                            'note' => 'Số lượng sản phẩm',
-                            'attr' => ['type_input' => 'number', 'required' => 1, 'inject_class' => 'input_pro_qty', 'placeholder' => 'Nhập số lượng'],
-                            'value' => @$product['qty']
-                        ];
-                        $pro_category_field = [
-                            'name' => $pro_base_name_input.'[category]',
-                            'type' => 'linking',
-                            'note' => 'Nhóm sản phẩm',
-                            'attr' => ['required' => 1 , 'inject_class' => 'select_quote_procategory', 'inject_attr' => 'proindex='.$pro_index],
-                            'other_data' => ['data' => ['table' => 'product_categories']],
-                            'value' => @$product['category']
-                        ];
-                        if (!empty($product['category'])) {
-                            $pro_category_field['attr']['readonly'] = 1;    
-                        }
-                        $quote_pro_design = [
-                            'name' => $pro_base_name_input.'[design]',
-                            'note' => 'thiết kế',
-                            'type' => 'linking',
-                            'other_data' => ['data' => ['table' => 'design_types', 'select' => ['id', 'name']]],
-                            'value' => @$product['design']
+                        $arr_pro_field = [
+                            [
+                                'name' => $pro_base_name_input.'[name]',
+                                'note' => 'Tên sản phẩm',
+                                'attr' => ['required' => 1, 'inject_class' => 'quote_set_product_name length_input', 'placeholder' => 'Nhập tên'],
+                                'value' => !empty($product['id']) ? @$product['name'] : ''
+                            ],
+                            [
+                                'name' => $pro_base_name_input.'[qty]',
+                                'note' => 'Số lượng sản phẩm',
+                                'attr' => ['type_input' => 'number', 'required' => 1, 'inject_class' => 'input_pro_qty', 'placeholder' => 'Nhập số lượng'],
+                                'value' => @$product['qty']
+                            ],
+                            [
+                                'name' => $pro_base_name_input.'[category]',
+                                'type' => 'linking',
+                                'note' => 'Nhóm sản phẩm',
+                                'attr' => ['required' => 1 , 
+                                    'inject_class' => 'select_quote_procategory', 
+                                    'inject_attr' => 'proindex='.$pro_index,
+                                    'readonly' => !empty($product['category']) ? 1 : 0
+                                ],
+                                'other_data' => ['data' => ['table' => 'product_categories']],
+                                'value' => @$product['category']
+                            ],
+                            [
+                                'name' => $pro_base_name_input.'[design]',
+                                'note' => 'thiết kế',
+                                'type' => 'linking',
+                                'other_data' => ['data' => ['table' => 'design_types', 'select' => ['id', 'name']]],
+                                'value' => @$product['design']
+                            ],
+                            [
+                                'name' => $pro_base_name_input.'[sale_shape_file]',
+                                'note' => 'Khuôn kinh doanh tính giá',
+                                'type' => 'file',
+                                'other_data' => ['role_update' => [\GroupUser::SALE]],
+                                'value' => @$product['sale_shape_file'] 
+                            ],
                         ]
                     ?>
 
-                    <?php echo $__env->make('view_update.view', $pro_name_field, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-
-                    <?php echo $__env->make('view_update.view', $pro_qty_field, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                    
-                    <?php echo $__env->make('view_update.view', $pro_category_field, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-
-                    <div class="quote_product_design_config">
-                        <?php echo $__env->make('view_update.view', $quote_pro_design, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                    </div>
+                    <?php $__currentLoopData = $arr_pro_field; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $field): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <?php echo $__env->make('view_update.view', $field, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                     <?php if(!empty($order_get)): ?>
                         <?php echo $__env->make('orders.products.extend_info', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>   

@@ -37,7 +37,7 @@ class OrderService extends BaseService
             return returnMessageAjax(100, $product_process['message']);  
         }else{
             if (!empty($arr_order['advance'])) {
-                $amount = getTotalProductByArr($data['product'], 'total_amount');
+                $amount = getTotalProductByArr($data['product'], $arr_quote, 'total_amount');
                 $arr_order['total_amount'] = @$arr_order['vat'] == 1 ? 
                 calValuePercentPlus($amount, $amount, (float) getDataConfig('QuoteConfig', 'VAT_PERC', 0)) : $amount;
                 $arr_order['rest'] = $arr_order['total_amount'] - (float) $arr_order['advance'];
@@ -53,7 +53,7 @@ class OrderService extends BaseService
                 $arr_order['status'] = \StatusConst::NOT_ACCEPTED;
                 $arr_order['id'] = Order::insertGetId($arr_order);
                 $this->handleProductAfter($data['product'], $arr_order);
-                if (!empty($arr_order['id'])) {
+                if (!empty($arr_quote['id'])) {
                     Quote::where('id', $arr_quote['id'])->update(['status' => Quote::ORDER_CREATED]);
                 }
             }
@@ -71,19 +71,26 @@ class OrderService extends BaseService
         }  
     }
 
-    public function insertDesignCommand($arr_order)
+    public function insertDesignCommand($products, $order_id, $code)
     {
-        $products = Product::where(['act' => 1, 'quote_id' => $arr_order['quote']])->get();
-        $data_insert['order'] = $arr_order['id'];
+        $data_insert['order'] = $order_id;
         $data_insert['status'] = \StatusConst::NOT_ACCEPTED;
+        $arr_order_action = ['status' => Order::TO_DESIGN, 'apply_design_by' => \User::getCurrent('id')];
         $this->configBaseDataAction($data_insert);
         foreach ($products as $key => $product) {
             $h = $key > 0 ? $key.'.' : '';
-            $data_insert['code'] = 'TK-'.$h.$arr_order['code'];
+            $data_insert['code'] = 'TK-'.$h.''.$code;
             $data_insert['product'] = $product['id'];
-            CDesign::insert($data_insert);
+            $insert = CDesign::insert($data_insert);
+            if ($insert) {
+                Product::where('id', $product['id'])->update($arr_order_action);
+            }
         }
-        return Order::where('id', $arr_order['id'])->update(['status' => Order::TO_DESIGN, 'apply_design_by' => \User::getCurrent('id')]);
+        $arr_count = ['act' => 1, 'order' => $order_id];
+        if (getCountDataTable('products', $arr_count) == getCountDataTable('c_designs', $arr_count)) {
+            Order::where('id', $order_id)->update($arr_order_action);
+        }
+        return 1;
     }
     public function validateElevatehandle($command, $elevate){
         if (empty($command['size_type'])) {

@@ -7,10 +7,12 @@
     <form action="{{ url('apply-to-worker-handle/'.$id) }}" method="POST" class="config_content baseAjaxForm" enctype="multipart/form-data" 
     onkeydown="return event.key != 'Enter'">
         @csrf
-        <h3 class="fs-14 text-uppercase border_top_eb pt-3 mt-3 text-center handle_title">
-            <span>Danh sách sản phẩm</span>
-        </h3>
-        @include('quotes.products.list_tab')
+        @if (count($products) > 1)
+            <h3 class="fs-14 text-uppercase mt-3 text-center handle_title">
+                <span>Danh sách sản phẩm</span>
+            </h3>
+            @include('quotes.products.list_tab')
+        @endif
         <div class="tab-content" id="quote-pro-tabContent">
             @foreach ($products as $pro_index => $product)
                 <div class="tab-pane fade{{ $pro_index == 0 ? ' show active' : '' }} tab_pane_quote_pro" id="quote-pro-{{ $pro_index }}" role="tabpanel" aria-labelledby="quote-pro-{{ $pro_index }}-tab">

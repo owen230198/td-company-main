@@ -46,7 +46,7 @@
 	}
 
 	if (!function_exists('getTotalProductByArr')) {
-		function getTotalProductByArr($products, $get = '')
+		function getTotalProductByArr($products, $arr_quote = [], $get = '')
 		{
 			$ret = ['total_cost' => 0, 'total_amount' => 0];
 			foreach ($products as $product) {
@@ -56,8 +56,8 @@
 				$fill_finish_total = \DB::table('fill_finishes')->select('total_cost')->where($pwhere)->sum('total_cost');
 				$total_cost = (string) ($paper_total + $supply_total + $fill_finish_total);
 				$update_product['total_cost'] = $total_cost;
-				$get_perc = (float) $total_cost + (float) $arr_quote['ship_price'];
-				$update_product['total_amount'] = (string) calValuePercentPlus($total_cost, $get_perc,  $arr_quote['profit']);
+				$get_perc = (float) $total_cost + (float) @$arr_quote['ship_price'];
+				$update_product['total_amount'] = (string) calValuePercentPlus($total_cost, $get_perc,  @$arr_quote['profit']);
 				\DB::table('products')->where('id', $product->id)->update($update_product);
 				$ret['total_cost'] += $update_product['total_cost'];
 				$ret['total_amount'] += $update_product['total_amount'];  
@@ -71,7 +71,7 @@
 		{
 			$qwhere = ['act' => 1, 'quote_id' => $arr_quote['id']];
 			$products = \DB::table('products')->where($qwhere)->get();
-			$ret = getTotalProductByArr($products);
+			$ret = getTotalProductByArr($products, $arr_quote);
 			return !empty($get) && !empty($ret[$get]) ? $ret[$get] : $ret;
 		}
 	}

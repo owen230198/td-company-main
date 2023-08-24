@@ -2,7 +2,8 @@
     namespace App\Services;
     use App\Services\BaseService;
     use App\Models\Order;
-    use \App\Models\CDesign;
+    use App\Models\CDesign;
+    use App\Models\Product;
 
     class CDesignService extends BaseService
     {
@@ -21,12 +22,16 @@
             if (!empty($process_product['code']) && $process_product['code'] == 100) {
                 return $process_product;
             }else{
-                CDesign::where('id', $command['id'])->update(['status' => Order::DESIGN_SUBMITED]);
-                $command_list = CDesign::where('order', $command['order']);
-                if ($command_list->count() == $command_list->where('status', Order::DESIGN_SUBMITED)->count()) {
-                    Order::where('id', $command['order'])->update(['status' => Order::DESIGN_SUBMITED]);
+                $arr_where = ['status' => Order::DESIGN_SUBMITED];
+                $update = CDesign::where('id', $command['id'])->update($arr_where);
+                if ($update) {
+                    Product::where('id', $command['product'])->update($arr_where);
                 }
-                return returnMessageAjax(200, 'Cập nhật thành công lệnh thiết kế!', url(''));  
+                $command_list = CDesign::where('order', $command['order']);
+                if ($command_list->count() == $command_list->where($arr_where)->count()) {
+                    Order::where('id', $command['order'])->update($arr_where);
+                }
+                return returnMessageAjax(200, 'Cập nhật thành công lệnh thiết kế!', session()->get('back_url'));  
             }
         }
     }

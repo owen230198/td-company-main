@@ -6,7 +6,7 @@
         $styro_compen_percent = (float) getDataConfig('QuoteConfig', 'CARTON_COMPEN_PERCENT');
         $styro_plus = \TDConst::STYRO_SIZE_PLUS;
     @endphp
-    @include('quotes.products.supplies.title_config', ['divide' => $styro_divide, 'name' => $key_supp])
+    @include('quotes.products.supplies.title_config', ['divide' => $styro_divide, 'name' => 'Mút xốp'])
 
     @include('quotes.products.supplies.quantity_config', ['compen_percent' => $styro_compen_percent])
 

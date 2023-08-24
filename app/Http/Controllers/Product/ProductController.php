@@ -40,6 +40,38 @@
                     return returnMessageAjax(200, 'Cập nhật dữ liệu thành công!');       
                 }
             } 
-        }   
+        }
+        
+        public function clone($request, $id)
+        {
+            $arr_product = Product::where('id', $id)->get(Product::CLONE_FIELD)->first()->toArray();
+            $product_id = Product::insertGetId($arr_product);
+            foreach (Product::$childTable as $table) {
+                $model = getModelByTable($table);
+                $list_data = $model::where('product', $id)->get()->makeHidden(['id', 'product', 'handle_elevate'])->toArray();
+                foreach ($list_data as $data_insert) {
+                    $data_insert['product'] = $product_id;
+                    (new \BaseService)->configBaseDataAction($data_insert);  
+                    $model::insert($data_insert);   
+                }
+            }
+            if ($request->isMethod('GET')) {
+                $data['parent_url'] = ['link' => session()->get('back_url'), 'note' => 'Danh sách đơn sản phẩm'];
+                $data['order_cost'] = $arr_product['total_amount'];
+                $data['products'] = Product::where('id', $product_id)->get();
+                $data['product_qty'] = 1;
+                $data['link_action'] = url('insert/orders');
+                $data['order_type'] = \OrderConst::INCLUDE;
+                $data['title'] = 'Sao chép đơn sản phẩm - '.$arr_product['name'];
+                $blade_to = 'orders.users.'.\User::getCurrent('id').'.view';
+                if (view()->exists($blade_to)) {
+                    return view($blade_to, $data);
+                }else{
+                    return back()->with('error', 'Giao diện không được hỗ trợ !');
+                }               
+            }else{
+                return back()->with('error', 'Phương thức không hợp lệ !');
+            }
+        }
     }
 ?>

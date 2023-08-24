@@ -4,7 +4,8 @@
     use Illuminate\Http\Request;
     use App\Models\CDesign;
     use App\Models\Order;
-    use App\Models\Product;
+use App\Models\Paper;
+use App\Models\Product;
 
     class CDesignController extends Controller
     {
@@ -19,13 +20,16 @@
         public function update(Request $request, $id){
             $arr_command = CDesign::find($id);
             if (!$request->isMethod('POST')) {
+                $data['parent_url'] = ['link' => @session()->get('back_url'), 'note' => 'Danh sách lệnh thiết kế'];
                 $data['data_order'] = Order::find($arr_command['order']);
-                $data['products'] = Product::where('id', $arr_command['product'])->get()->toArray();
+                $product = Product::where('id', $arr_command['product'])->first();
+                $data['products'][0] = $product;
+                $data['data_paper'] = Paper::where(['main' => 1, 'product' => $product['id']])->first();
                 $data['data_command'] = $arr_command;
                 $data['id'] = $id;
                 $data['title'] = 'Cập nhật & Xác nhận lệnh - '.$arr_command['code'];
                 $data['link_action'] = url('update/c_designs/'.$id);
-                $data['stage'] = @$data['data_order']['status'];
+                $data['stage'] = @$product['status'];
                 return view('c_designs.view', $data);
             }else{
                 if ($arr_command['status'] != CDesign::PROCESSING || $arr_command['assign_by'] != \User::getCurrent('id')) {

@@ -18,7 +18,7 @@
                 'name' => 'order[total_amount]',
                 'note' => 'Tổng tiền đơn hàng',
                 'attr' => ['readonly' => 1, 'inject_class' => '__order_total_input'],
-                'value' => round(@$data_order['total_amount'] ?? $order_cost)
+                'value' => round(@$data_order['total_amount'] ?? @$order_cost)
             ],
             [
                 'name' => 'order[advance]',

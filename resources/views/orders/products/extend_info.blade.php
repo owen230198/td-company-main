@@ -16,8 +16,7 @@
             'value' => number_format($product['total_amount'])
         ],
     ];
-    
-    $ext_pro_feild_file = \App\Models\Product::getFeildFileByStage(@$stage);
+    $ext_pro_feild_file = \App\Models\Product::getFeildFileByStage(@$stage, $product);
 @endphp
 
 @foreach ($ext_pro_fields_inf as $ext_pro_field)

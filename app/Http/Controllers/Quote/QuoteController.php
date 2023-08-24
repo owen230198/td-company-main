@@ -241,8 +241,12 @@ class QuoteController extends Controller
             if ($data['profit'] == null) {
                 return returnMessageAjax(100, 'Vui lòng nhập lợi nhuận báo giá !');
             }
-            $update = RefreshQuotePrice($arr_quote);
-            return returnMessageAjax(200, 'Cập nhật lợi nhuận báo giá thành công !', url('quote-file-export/'.$id));
+            $get_perc = (float) $arr_quote['total_cost'] + (float) $data['ship_price'];
+            $data['total_amount'] = calValuePercentPlus($arr_quote['total_cost'], $get_perc,  $data['profit']);
+            $update = Quote::where('id', $id)->update($data);
+            if ($update) {
+                return returnMessageAjax(200, 'Cập nhật lợi nhuận báo giá thành công !', url('quote-file-export/'.$id));
+            }
         }
     }
 

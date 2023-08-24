@@ -32,6 +32,7 @@ class OrderController extends Controller
             $data['order_cost'] = @$arr_quote['total_amount'];
             $data['products'] = Product::where(['act' => 1, 'quote_id' => $quote_id])->get();
             $data['product_qty'] = count($data['products']);
+            $data['order_type'] = \OrderConst::INCLUDE;
             $data['title'] = 'Thêm đơn hàng - Mã báo giá : '.$arr_quote['seri'];
             $data['link_action'] = url('insert/orders?quote='.$quote_id);
             return view('orders.view', $data);
@@ -48,7 +49,7 @@ class OrderController extends Controller
         if (!empty($request->input('quote'))) {
             return $this->insertByQuote($request);
         }else{
-            return $this->insertByProduct($request);
+            return $this->services->processDataOrder($request); 
         }  
     }
 
@@ -69,8 +70,9 @@ class OrderController extends Controller
             $data['link_action'] = url('update/orders/'.$id);
             $data['id'] = $id;
             $data['stage'] = $arr_order['status'];
-            if (view()->exists('orders.users.'.\GroupUser::getCurrent().'.view')) {
-                return view('orders.users.'.\GroupUser::getCurrent().'.view', $data);
+            $blade_to = 'orders.users.'.\GroupUser::getCurrent().'.view';
+            if (view()->exists($blade_to)) {
+                return view($blade_to, $data);
             }else{
                 return back()->with('error', 'Bạn không có quyền truy cập giao diện này !');
             } 
@@ -82,60 +84,63 @@ class OrderController extends Controller
         }
     }
 
-    public function applyToDesign($data, $id)
+    public function applyToDesign($data, $arr_order, $base_order_id, $quote_id)
     {
         if (\GroupUser::isTechApply()) {
-            $arr_order = Order::find($id);
-            if (@$arr_order['status'] != \StatusConst::NOT_ACCEPTED) {
+            if (@$arr_order->status != \StatusConst::NOT_ACCEPTED) {
                 return returnMessageAjax(100, 'Lỗi không xác định !');
             }
-            $arr_quote = Quote::find($data['quote']);
-            if (!empty($arr_quote)) {
-                $product_process = $this->quote_services->processDataProduct($data, $arr_quote, \TDConst::ORDER_ACTION_FLOW);
-                if (!empty($product_process['code']) && $product_process['code'] == 100) {
-                    return returnMessageAjax(100, $product_process['message']);  
-                }
+            
+            $arr_quote = Quote::find($quote_id);
+            $product_process = $this->quote_services->processDataProduct($data, $arr_quote, \TDConst::ORDER_ACTION_FLOW);
+            if (!empty($product_process['code']) && $product_process['code'] == 100) {
+                return returnMessageAjax(100, $product_process['message']);  
             }
-            $status = $this->services->insertDesignCommand($arr_order);
+            $status = $this->services->insertDesignCommand($data['product'], $base_order_id, $arr_order->code);
             if ($status) {
-                return returnMessageAjax(200, 'Đã thêm lệnh thiết kế cho đơn hàng '.$arr_order['code'].' !', getBackUrl());
+                return returnMessageAjax(200, 'Đã thêm lệnh thiết kế cho đơn hàng '.$arr_order->code.' !', getBackUrl());
             }    
         }else{
             return returnMessageAjax(100, 'Bạn không có quyền duyệt sản xuất!');
         }
     }
 
-    public function applyToHandlePlan($data, $id)
+    public function applyToHandlePlan($data, $arr_order, $base_order_id, $quote_id)
     {
         if (\GroupUser::isTechHandle()) {
-            $arr_order = Order::find($id);
-            if (@$arr_order['status'] != Order::DESIGN_SUBMITED) {
-                returnMessageAjax(100, 'Lỗi không xác định !');
+            if (@$arr_order->status != Order::DESIGN_SUBMITED) {
+                returnMessageAjax(100, 'Dữ liệu không hợp lệ !');
             }
-            $arr_quote = Quote::find($data['quote']);
-            if (!empty($arr_quote)) {
-                $product_process = $this->quote_services->processDataProduct($data, $arr_quote, \TDConst::ORDER_ACTION_FLOW);
-                if (!empty($product_process['code']) && $product_process['code'] == 100) {
-                    return returnMessageAjax(100, $product_process['message']);  
-                }
+            $arr_quote = Quote::find($quote_id);
+            $product_process = $this->quote_services->processDataProduct($data, $arr_quote, \TDConst::ORDER_ACTION_FLOW);
+            if (!empty($product_process['code']) && $product_process['code'] == 100) {
+                return returnMessageAjax(100, $product_process['message']);  
             }
-            $status = Order::where('id', $id)->update(['status' => Order::TECH_SUBMITED, 'apply_plan_by' => \User::getCurrent('id')]);
-            if ($status) {
-                return returnMessageAjax(200, 'Đã gửi yêu cầu thành công tới P. Kế hoạch SX cho đơn '.$arr_order['code'].' !', getBackUrl());
-            }    
+            $arr_update = ['status' => Order::TECH_SUBMITED, 'apply_plan_by' => \User::getCurrent('id')];
+            foreach ($data['product'] as $product) {
+                Product::where('id', $product['id'])->update($arr_update);
+            }
+            if (checkUpdateeOrderStatus($base_order_id, Order::TECH_SUBMITED)) {
+                Order::where('id', $base_order_id)->update($arr_update);
+            }
+            return returnMessageAjax(200, 'Đã gửi yêu cầu thành công tới P. Kế hoạch SX cho đơn '.$arr_order->code.' !', getBackUrl()); 
         }else{
             return returnMessageAjax(100, 'Bạn không có quyền duyệt sản xuất!');
         }
     }
 
-    public function applyOrder(Request $request, $stage, $id)
+    public function applyOrder(Request $request, $stage, $type, $id)
     {
         $data = $request->except('_token');
+        $table = $type == \OrderConst::INCLUDE ? 'orders' : 'products';
+        $arr_order = \DB::table($table)->find($id);
+        $quote_id = $type == \OrderConst::INCLUDE ? $arr_order->quote : $arr_order->quote_id;
+        $base_order_id = $type == \OrderConst::INCLUDE ? $arr_order->id : $arr_order->order;
         switch ($stage) {
             case Order::NOT_ACCEPTED:
-                return $this->applyToDesign($data, $id);
+                return $this->applyToDesign($data, $arr_order, $base_order_id, $quote_id);
             case Order::DESIGN_SUBMITED:
-                return $this->applyToHandlePlan($data, $id);   
+                return $this->applyToHandlePlan($data, $arr_order, $base_order_id, $quote_id);   
             default:
                 return returnMessageAjax(100, 'Lỗi không xác định !');
         }
@@ -145,12 +150,21 @@ class OrderController extends Controller
     {
         $model = getModelByTable($table);
         $command = $model::find($id);
-        if ($command['status'] != \StatusConst::NOT_ACCEPTED || !empty($command['assign'])) {
-            return returnMessageAjax(100, 'Lệnh này đã được nhận !');
+        if ($command['status'] != \StatusConst::NOT_ACCEPTED || !empty($command['assign_by'])) {
+            $msg = 'Lệnh này đã được nhận ';
+            if (!empty($command['assign_by'])) {
+                $msg .= 'bởi '.getFieldDataById('name', 'n_users', $command['assign_by']);
+            }
+            return returnMessageAjax(100, $msg.' !');
         }
         if (\GroupUser::isAdmin() || \GroupUser::getCurrent() == $model::GR_USER) {
             $process = $model::where('id', $id)->update(['assign_by' => \User::getCurrent('id'), 'status' => $model::PROCESSING]);
             if ($process) {
+                $arr_status = ['status' => $model::PROCESSING];
+                Product::where('id', $command['product'])->update($arr_status);
+                if (checkUpdateeOrderStatus($command['id'], $model::PROCESSING)) {
+                    Order::where('id', $command['order'])->update($arr_status);
+                }
                 return returnMessageAjax(200, 'Đã tiếp nhận lệnh, vui lòng truy cập danh sách lệnh của bạn!', \StatusConst::RELOAD);
             }else{
                 return returnMessageAjax(100, 'Có lỗi xảy ra, vui lòng thử lại!');
@@ -183,7 +197,7 @@ class OrderController extends Controller
                 if ($request->isMethod('GET')) {
                     $data['supply_obj'] = $data_supply;
                     $data['title'] = 'Xử lí vật tư sản xuất sản phẩm '.getFieldDataById('name', 'products', $data_supply->product);
-                    $data['parent_url'] = ['link' => 'update/orders/'.$data_supply->order, 'note' => 'Danh sách vật tư cần xử lí'];
+                    $data['parent_url'] = ['link' => 'update/products/'.$data_supply->order, 'note' => 'Danh sách vật tư cần xử lí'];
                     $prefix = !empty($data_supply->type) ? $data_supply->type : $table;
                     $data['pro_index'] = 0;
                     $data['supp_index'] = 0;

@@ -31,10 +31,11 @@ var applyOrderStep = function()
         event.preventDefault();
         let form = $(this).closest('.__form_order');
         let stage = $(this).data('stage');
+        let type = $(this).data('type');
         let form_data = form.serialize();
         let id = $(this).data('id');
         ajaxBaseCall({
-            url:getBaseRoute('apply-order/'+stage+'/'+id), 
+            url:getBaseRoute('apply-order/'+stage+'/'+type+'/'+id), 
             type:'POST', 
             data:form_data
         });

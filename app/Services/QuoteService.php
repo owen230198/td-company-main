@@ -58,6 +58,10 @@ class QuoteService extends BaseService
             if (empty($data['category'])) {
                 return returnMessageAjax(100, 'Bạn chưa chọn nhóm sản phẩm cho '. $data['name']);
             }
+            if (NGroupUser::isSale() && empty($data['sale_shape_file'])) {
+                return returnMessageAjax(100, 'Bạn chưa upload file khuôn tính giá cho sản phẩm '. $data['name']);
+            }
+
             // if (empty($data['length'])) {
             //     return returnMessageAjax(100, 'Bạn chưa nhập kích thước chiều dài cho '. $data['name']);
             // }
@@ -71,13 +75,10 @@ class QuoteService extends BaseService
                 return returnMessageAjax(100, 'Bạn chưa chọn mẫu thiết kế cho sản phẩm '. $data['name']);
             }
             if ($step == TDConstant::ORDER_ACTION_FLOW) {
-                if (NGroupUser::isSale() && empty($data['custom_design_file'])) {
+                if (NGroupUser::isSale() && empty($data['custom_design_file']) && $data['design'] == 5) {
                     return returnMessageAjax(100, 'Bạn chưa upload file thiết kế của khách hàng cho sản phẩm '. $data['name']);
                 }
-                if (NGroupUser::isSale() && empty($data['sale_shape_file'])) {
-                    return returnMessageAjax(100, 'Bạn chưa upload file khuôn tính giá cho sản phẩm '. $data['name']);
-                }
-
+                
                 if (NGroupUser::isTechApply() && empty($data['tech_shape_file'])) {
                     return returnMessageAjax(100, 'Bạn chưa upload file sản xuất giá cho sản phẩm '. $data['name']);
                 }

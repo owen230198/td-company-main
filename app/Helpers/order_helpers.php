@@ -163,3 +163,12 @@
             }
         }
     }
+
+    if (!function_exists('checkUpdateeOrderStatus')) {
+        function checkUpdateeOrderStatus($id, $status)
+        {
+            $a = getCountDataTable('products', ['order' => $id]);
+            $b = getCountDataTable('products', ['order' => $id, 'status' => $status]);
+            return $a == $b;
+        }
+    }

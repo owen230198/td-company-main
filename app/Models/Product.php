@@ -47,6 +47,8 @@
             ],
         ];
 
+        const CLONE_FIELD = ['name', 'category', 'qty', 'design', 'length', 'width', 'height', 'total_amount'];
+
         const FEILD_FILE = [
             'custom_design_file' =>
             [
@@ -86,24 +88,26 @@
             ]
         ];
 
-        static function getFeildFileByStage($stage)
+        static function getFeildFileByStage($stage, $data)
         {
             $ext_pro_feild_file = self::FEILD_FILE;
             if ((\GroupUser::isSale() && @$stage == Order::NOT_ACCEPTED) || empty($stage)) {
-                return [
-                    'custom_design_file' => $ext_pro_feild_file['custom_design_file'],
-                    'sale_shape_file' => $ext_pro_feild_file['sale_shape_file'],
-                ];   
+                return @$data['design'] == 5 ? [
+                    'custom_design_file' => $ext_pro_feild_file['custom_design_file']
+                ] : [];   
             }elseif (@$stage == Order::NOT_ACCEPTED) {
                 return [
                     'sale_shape_file' => $ext_pro_feild_file['sale_shape_file'],
                     'tech_shape_file' => $ext_pro_feild_file['tech_shape_file'],
                 ];   
-            }elseif (@$stage == Order::TO_DESIGN) {
+            }elseif (@$stage == Order::TO_DESIGN || @$stage == Order::DESIGNING) {
                 unset(
                     $ext_pro_feild_file['sale_shape_file'], 
                     $ext_pro_feild_file['handle_shape_file']
-                );    
+                );
+                if (@$data['design'] != 5) {
+                    unset($ext_pro_feild_file['custom_design_file']);
+                }    
             }elseif(@$stage == Order::DESIGN_SUBMITED){
                 return [
                     'design_shape_file' => $ext_pro_feild_file['design_shape_file'],
@@ -123,7 +127,49 @@
         
         static function getRole()
         {
-            return Order::getRole();
+            $role = [
+                \GroupUser::SALE => [
+                    'insert' => 1,
+                    'view' => 
+                        [
+                            'with' => [
+                                'type' => 'group',
+                                'query' => [
+                                    ['key' => 'created_by', 'value' => \User::getCurrent('id')],
+                                    ['key' => 'status', 'value' => Order::NOT_ACCEPTED]
+                                ]
+                            ],
+                        ],
+                    'clone' => 1
+                ],
+                \GroupUser::TECH_APPLY => [
+                    'view' => 
+                        [
+                            'with' => ['key' => 'status', 'value' => Order::NOT_ACCEPTED],
+                        ],
+                    'update' => 
+                        [
+                            'with' => [['key' => 'status', 'value' => Order::NOT_ACCEPTED]]
+                        ]
+                ],
+                \GroupUser::TECH_HANDLE => [
+                    'view' => 
+                        [
+                            'with' => ['key' => 'status', 'value' => Order::DESIGN_SUBMITED],
+                        ],
+                    'update' => 
+                        [
+                            'with' => [['key' => 'status', 'value' => Order::DESIGN_SUBMITED]]
+                        ]
+                ],
+                \GroupUser::PLAN_HANDLE => [
+                    'view' => 
+                        [
+                            'with' => ['key' => 'status', 'value' => Order::TECH_SUBMITED],
+                        ]
+                ],
+            ];
+            return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];
         }
         
         static function handleDataSupply($process, $product)
@@ -137,6 +183,7 @@
             }
             return !empty($process);
         }
+        
     }
 
 ?>

@@ -39,7 +39,7 @@
                         <li class="breadcrumb-item">
                             <a href="{{ url('') }}" class="color_green">Trang chủ</a>
                         </li>
-                        @if (!empty($parent_url))
+                        @if (!empty($parent_url['link']))
                             <li class="breadcrumb-item">
                                 <a href="{{ url(@$parent_url['link']) }}" class="color_green">{{ @$parent_url['note'] }}</a>
                             </li>
