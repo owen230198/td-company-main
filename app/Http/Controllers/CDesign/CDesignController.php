@@ -24,12 +24,12 @@ use App\Models\Product;
                 $data['data_order'] = Order::find($arr_command['order']);
                 $product = Product::where('id', $arr_command['product'])->first();
                 $data['products'][0] = $product;
-                $data['data_paper'] = Paper::where(['main' => 1, 'product' => $product['id']])->first();
+                $data['data_paper'] = Paper::where(['product' => $product['id']])->get();
                 $data['data_command'] = $arr_command;
                 $data['id'] = $id;
                 $data['title'] = 'Cập nhật & Xác nhận lệnh - '.$arr_command['code'];
                 $data['link_action'] = url('update/c_designs/'.$id);
-                $data['stage'] = @$product['status'];
+                $data['stage'] = @$arr_command['status'];
                 return view('c_designs.view', $data);
             }else{
                 if ($arr_command['status'] != CDesign::PROCESSING || $arr_command['assign_by'] != \User::getCurrent('id')) {

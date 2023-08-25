@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Models\NTable;
 class AdminController extends Controller
@@ -310,46 +311,27 @@ class AdminController extends Controller
         echo $html;
     }
 
-    public function getDataJsonCustomer(Request $request, $filter = false)
+    public function getDataJsonCustomer(Request $request)
     {
-        $status = !empty($request->input('status')) ? $request->input('status') : 1;
-        $customers = \DB::table('customers');
-        if (!empty($request->input('q'))) {
-            $q = '%'.trim($request->input('q')).'%';
-            $customers->where(function ($customers) use ($q) {
-                $customers->orWhere('code', 'like', $q)
-                            ->orWhere('name', 'like', $q)
-                            ->orWhere('contacter', 'like', $q)
-                            ->orWhere('phone', 'like', $q)
-                            ->orWhere('telephone', 'like', $q)
-                            ->orWhere('email', 'like', $q)
-                            ->orWhere('address', 'like', $q)
-                            ->orWhere('city', 'like', $q)
-                            ->orWhere('tax_code', 'like', $q);
-            });
-        }
-        $data = $customers->paginate(50)->all();
-        $arr = array_map(function($item){
-            return ['id' => @$item->id, 'label' => $item->code.' - '.$item->name];
-        }, $data);
-        if (!$filter) {
-            array_unshift($arr, ['id' => 0, 'label' => 'Khách hàng mới']);
-        }
-        return json_encode($arr);
+        $data = \DB::table('customers');
+        $q = $request->input('q');
+        return Customer::getDataJsonLinking($data, $q);     
     }
 
     public function getDataJsonLinking(Request $request)
     {
         $table = $request->input('table');
-        if ($table == 'customers') {
-            return $this->getDataJsonCustomer($request, true);
-        }
         $where = $request->except('table', 'q', 'field_search');
         $data = \DB::table($table)->where($where);
         $q = $request->input('q');
+        if (in_array($table, NTable::$except_linking)) {
+            $model = getModelByTable($table);
+            if (method_exists($model, 'getDataJsonLinking')) {
+                return $model::getDataJsonLinking($data, $q);
+            }
+        }
         $label = $request->input('field_search');
         if (!empty($q)) {
-            $q = '%'.trim($q).'%';
             $data = $data->where($label, 'like', $q);
         }
         if (\Schema::hasColumn($table, 'ord')) {

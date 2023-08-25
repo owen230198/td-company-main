@@ -6,7 +6,7 @@
     <div class="order_list_product">
         <?php echo $__env->make('quotes.products.ajax_view', ['order_get' => true, 'not_detail' => true], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <div class="design_paper_info">
-            <?php dd($data_paper); ?>;
+            <?php echo $__env->make('c_designs.paper_table', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         </div>
     </div>
 <?php $__env->stopSection(); ?>

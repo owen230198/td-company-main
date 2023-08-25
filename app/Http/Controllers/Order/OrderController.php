@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\Quote;
 use App\Models\SupplyWarehouse;
 use App\Models\Product;
+use PhpOffice\PhpWord\Writer\Word2007\Part\Rels;
 
 class OrderController extends Controller
 {
@@ -134,8 +135,8 @@ class OrderController extends Controller
         $data = $request->except('_token');
         $table = $type == \OrderConst::INCLUDE ? 'orders' : 'products';
         $arr_order = \DB::table($table)->find($id);
-        $quote_id = $type == \OrderConst::INCLUDE ? $arr_order->quote : $arr_order->quote_id;
-        $base_order_id = $type == \OrderConst::INCLUDE ? $arr_order->id : $arr_order->order;
+        $quote_id = $type == \OrderConst::INCLUDE ? @$arr_order->quote : @$arr_order->quote_id;
+        $base_order_id = $type == \OrderConst::INCLUDE ? @$arr_order->id : @$arr_order->order;
         switch ($stage) {
             case Order::NOT_ACCEPTED:
                 return $this->applyToDesign($data, $arr_order, $base_order_id, $quote_id);
@@ -224,6 +225,33 @@ class OrderController extends Controller
         }else{
             return customReturnMessage(false, $request->isMethod('POST'), ['message' => 'Bạn không có quyền thực hiện hành động!']);
         }
+    }
+
+    public function selectSupplyWarehouse(Request $request, $table)
+    {
+        $supply_id = $request->input('supply');
+        $supply = \DB::table($table)->find($supply_id);
+        if (empty($supply)) {
+            return returnMessageAjax(100, 'Vật tư không tồn tại hoặc đã bị xóa !');
+        }
+        $square = (float) $supply->square;
+        $need = (float) $request->input('need');
+        if ($need > $square) {
+            $takeout = $square;
+            $rest = 0;
+            $lack = $need - $square;
+        }else{
+            $takeout = $need;
+            $rest = $square - $need;
+            $lack = 0;
+        }
+        return ['code' => 200, 'data' => ['square' => $square, 'takeout' => $takeout, 'rest' => $rest, 'lack' => $lack]];
+    }
+
+    public function addSelectSupplyHandle(Request $request)
+    {
+        $data = $request->all();
+        return view('orders.users.6.supply_handles.view_handles.squares.item', $data);
     }
 
     public function takeOutSupply($id)

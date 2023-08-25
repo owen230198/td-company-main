@@ -108,3 +108,21 @@
 			return $ret;
 		}
 	}
+
+	if (!function_exists('getTextDataPaperStage')) {
+		function getTextdataPaperStage($stage, $value)
+		{
+			switch ($stage) {
+				case \TDConst::PRINT:
+					return \TDConst::PRINT_TECH[$value];
+					break;
+				case \TDConst::NILON:
+					return getFieldDataById('name', 'materals', @$value['materal']).' '. @$value['face'] . ' mặt ';
+				case \TDConst::UV:
+					return getFieldDataById('name', 'materals', @$value['materal']);
+				default:
+					return '';
+					break;
+			}
+		}
+	}

@@ -87,7 +87,7 @@
                 'other_data' => ['role_update' => [\GroupUser::TECH_HANDLE]]
             ]
         ];
-
+        
         static function getFeildFileByStage($stage, $data)
         {
             $ext_pro_feild_file = self::FEILD_FILE;
@@ -100,7 +100,7 @@
                     'sale_shape_file' => $ext_pro_feild_file['sale_shape_file'],
                     'tech_shape_file' => $ext_pro_feild_file['tech_shape_file'],
                 ];   
-            }elseif (@$stage == Order::TO_DESIGN || @$stage == Order::DESIGNING) {
+            }elseif (@$stage == Order::TO_DESIGN || @$stage == Order::DESIGNING || @$stage == Order::DESIGN_SUBMITED) {
                 unset(
                     $ext_pro_feild_file['sale_shape_file'], 
                     $ext_pro_feild_file['handle_shape_file']

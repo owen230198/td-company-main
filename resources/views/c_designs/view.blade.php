@@ -6,7 +6,7 @@
     <div class="order_list_product">
         @include('quotes.products.ajax_view', ['order_get' => true, 'not_detail' => true])
         <div class="design_paper_info">
-            @dd($data_paper);
+            @include('c_designs.paper_table')
         </div>
     </div>
 @endsection

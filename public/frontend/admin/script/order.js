@@ -84,9 +84,82 @@ var updateHandleWareHouse = function(obj)
     }
 }
 
+var planGetNeddSupply= function(parent)
+{
+    let base = parent.data('need');
+    let take = 0;
+    parent.find('.__handle_supply_item').each(function(){
+        take += $(this).data('take');
+    });
+    return base - take;
+}
+
+var planChoseSupplyModule = function()
+{
+    $(document).on('change', 'select.__select_in_warehouse', function(event)
+    {
+        event.preventDefault();
+        let parent = $(this).closest('.__supply_handle_list');
+        let item = $(this).closest('.__handle_supply_item');
+        let need = planGetNeddSupply(parent);
+        let table = parent.data('table');
+        let target = item.find('.__handle_supply_detail_ajax');
+        let value = $(this).val();
+        let url = 'select-supply-warehouse/'+table+'?supply='+value+'&need='+need;
+        if (!empty(value)) {
+            $('#loader').fadeIn(200);
+            $.ajax({
+                url: getBaseRoute(url),
+                type: 'GET'
+            })
+            .done(function(obj){
+                if (obj.code == 100) {
+                    swal('Không thành công', obj.message, 'error');    
+                }else{
+                    data = obj.data;
+                    target.fadeIn();
+                    target.find('.__square').text(data.square);
+                    target.find("input[name*='qty']").val(data.takeout);
+                    target.find('.__takeout').text(data.takeout);
+                    item.data('take', data.takeout);
+                    target.find('.__rest').text(data.rest);
+                    target.find('.__lack').text(data.lack);
+                }
+                $('#loader').delay(200).fadeOut(500); 
+            })
+        }else{
+            target.fadeOut();
+            target.find('.__square').text(0);
+            target.find("input[name*='qty']").val(0);
+            target.find('.__takeout').text(0);
+            item.data('take', 0);
+            target.find('.__rest').text(0);
+            target.find('.__lack').text(0); 
+        }
+    });
+}
+
+var planAddSupplyHandle = function()
+{
+    $(document).on('click', 'button.__supply_handle_button_add', function(event){
+        event.preventDefault();
+        let parent = $(this).parent();
+        let ajax_target = parent.find('.__supply_handle_list');
+        let type = $(this).data('type');
+        let key = $(this).data('key');
+        let note = $(this).data('note');
+        let supp = $(this).data('supp');
+        let index = ajax_target.find('.__handle_supply_item').length;
+        let url = 'add-select-supply-handle?type='+type+'&index='+index+'&key_supp='+key+'&note='+note+'&supp_price='+supp;
+        ajaxViewTarget(url, ajax_target, ajax_target, 2);
+    });
+}
+
 $(function(){
     setAdvanceCostOrder(); 
     moduleVATOrder();
     applyOrderStep();
     planHandleElevateModule();
+    planChoseSupplyModule();
+    planAddSupplyHandle();
 });

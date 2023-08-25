@@ -33,4 +33,27 @@ class Customer extends Model
     {
         return 'KHM-'.getCodeInsertTable('customers');
     }
+
+    static function getDataJsonLinking($customers, $q)
+    {
+        if (!empty($q)) {
+            $q = '%'.trim($q).'%';
+            $customers->where(function ($customers) use ($q) {
+                $customers->orWhere('code', 'like', $q)
+                            ->orWhere('name', 'like', $q)
+                            ->orWhere('contacter', 'like', $q)
+                            ->orWhere('phone', 'like', $q)
+                            ->orWhere('telephone', 'like', $q)
+                            ->orWhere('email', 'like', $q)
+                            ->orWhere('address', 'like', $q)
+                            ->orWhere('city', 'like', $q)
+                            ->orWhere('tax_code', 'like', $q);
+            });
+        }
+        $data = $customers->paginate(50)->all();
+        $arr = array_map(function($item){
+            return ['id' => @$item->id, 'label' => $item->code.' - '.$item->name];
+        }, $data);
+        return json_encode($arr);
+    }
 }

@@ -242,19 +242,19 @@ class QuoteService extends BaseService
         $arr['pro_size'] = getSizeTitleProduct($product);
         $arr['pro_design'] = getFieldDataById('name', 'design_types', $product['design']);
         if (!empty($main_paper['print'])) {
-            $arr['paper_print_tech'] = TDConstant::PRINT_TECH[@$main_paper['print']['machine']];
+            $arr['paper_print_tech'] = getTextdataPaperStage(\TDconst::PRINT, @$main_paper['print']['machine']);
         }
         $finish = '';
         if (@$main_paper['nilon']['act'] == 1) {
-            $finish .= "+ Cán nilon: ".getFieldDataById('name', 'materals', @$main_paper['nilon']['materal']).' '. $main_paper['nilon']['face'] . ' mặt ';
+            $finish .= "+ Cán nilon: ".getTextdataPaperStage(\TDConst::NILON, $$main_paper['nilon']);
         }
 
-        if (@$main_paper['nilon']['act'] == 1) {
+        if (@$main_paper['compress']['act'] == 1) {
             $finish .= "+ ép nhũ theo maket";
         }
 
         if (@$main_paper['uv']['act'] == 1) {
-            $finish .= "+ in lưới UV ".mb_strtolower(getFieldDataById('name', 'materals', @$main_paper['uv']['materal']))." theo maket";
+            $finish .= "+ in lưới UV ".mb_strtolower(getTextdataPaperStage(\TDConst::UV, $main_paper['uv']))." theo maket";
         }
 
         if (@$main_paper['float']['act'] == 1) {
