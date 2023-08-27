@@ -1,4 +1,4 @@
-@php
+<?php
     $chose_supp = [
         'name' => 'c_supply[materal]['.$key_supp.']]['.$index.'][supp_price]',
         'type' => 'linking',
@@ -14,16 +14,16 @@
             ]
         ]
     ]
-@endphp
-<div class="__handle_supply_item position-relative {{ $index > 0 ? 'mt-3 pt-3 border_top_eb' : '' }}" data-take = "0">
-    @if ($index > 0)
+?>
+<div class="__handle_supply_item position-relative <?php echo e($index > 0 ? 'mt-3 pt-3 border_top_eb' : ''); ?>" data-take = "0">
+    <?php if($index > 0): ?>
         <span class="remove_ext_element_quote d-flex bg_red color_white red_btn smooth">
             <i class="fa fa-times" aria-hidden="true"></i>
         </span> 
-    @endif
-    @include('view_update.view', $chose_supp)
+    <?php endif; ?>
+    <?php echo $__env->make('view_update.view', $chose_supp, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <div class="__handle_supply_detail_ajax color_green" style="display:none">
-        <input type="hidden" name="c_supply[materal][{{ $key_supp }}]][{{ $index }}][qty]" value="">
+        <input type="hidden" name="c_supply[materal][<?php echo e($key_supp); ?>]][<?php echo e($index); ?>][qty]" value="">
         <div class="d-flex align-items-center mb-2 fs-13">
             <label class="mb-0 min_210 text-capitalize text-right mr-3">Còn lại trong kho : </label>
             <p class="font_bold __square"></p>
@@ -41,4 +41,4 @@
             <p class="color_red font_bold __lack"></p>
         </div>
     </div>
-</div>
+</div><?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/orders/users/6/supply_handles/view_handles/squares/item.blade.php ENDPATH**/ ?>

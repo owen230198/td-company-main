@@ -2,9 +2,6 @@
     <h3 class="fs-14 text-uppercase border_top_eb pt-3 mt-3 text-center handle_title">
         <span>Xuất vật tư theo yêu cầu</span>
     </h3>
-    <input type="hidden" name="id" value="<?php echo e(@$supply_obj->id); ?>">
-    <input type="hidden" name="table" value="<?php echo e(@$table); ?>">
-    <input type="hidden" name="order" value="<?php echo e(@$supply_obj->order); ?>">
     <div class="plan_handle_supply_module">
         <div class="module_hanle_supply_plan quantity_paper_module plan_handle_elevate_module" data-percent = <?php echo e($compen_percent); ?>>
             <?php

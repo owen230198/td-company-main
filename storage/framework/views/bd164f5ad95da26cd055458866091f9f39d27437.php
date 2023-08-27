@@ -7,10 +7,12 @@
     <form action="<?php echo e(url('apply-to-worker-handle/'.$id)); ?>" method="POST" class="config_content baseAjaxForm" enctype="multipart/form-data" 
     onkeydown="return event.key != 'Enter'">
         <?php echo csrf_field(); ?>
-        <h3 class="fs-14 text-uppercase border_top_eb pt-3 mt-3 text-center handle_title">
-            <span>Danh sách sản phẩm</span>
-        </h3>
-        <?php echo $__env->make('quotes.products.list_tab', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        <?php if(count($products) > 1): ?>
+            <h3 class="fs-14 text-uppercase mt-3 text-center handle_title">
+                <span>Danh sách sản phẩm</span>
+            </h3>
+            <?php echo $__env->make('quotes.products.list_tab', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        <?php endif; ?>
         <div class="tab-content" id="quote-pro-tabContent">
             <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $pro_index => $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <div class="tab-pane fade<?php echo e($pro_index == 0 ? ' show active' : ''); ?> tab_pane_quote_pro" id="quote-pro-<?php echo e($pro_index); ?>" role="tabpanel" aria-labelledby="quote-pro-<?php echo e($pro_index); ?>-tab">

@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : owen
+ Source Server         : localhost
  Source Server Type    : MySQL
- Source Server Version : 100425
+ Source Server Version : 100428
  Source Host           : localhost:3306
  Source Schema         : td_company
 
  Target Server Type    : MySQL
- Target Server Version : 100425
+ Target Server Version : 100428
  File Encoding         : 65001
 
- Date: 26/08/2023 05:24:45
+ Date: 27/08/2023 14:07:29
 */
 
 SET NAMES utf8mb4;
@@ -14250,6 +14250,7 @@ CREATE TABLE `print_warehouses`  (
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `length` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `width` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `qtv` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `qty` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `supp_price` int(10) NULL DEFAULT NULL,
@@ -14259,18 +14260,16 @@ CREATE TABLE `print_warehouses`  (
   `act` tinyint(4) NULL DEFAULT NULL,
   `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
-  `confirm_at` datetime(0) NULL DEFAULT NULL,
   `created_by` int(10) NULL DEFAULT NULL,
-  `confirm_by` int(10) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 35 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of print_warehouses
 -- ----------------------------
-INSERT INTO `print_warehouses` VALUES (20, 'Giấy couches 50 x 100', '50', '100', '10000', 'paper', 12, 'imported', 1, NULL, 1, '2023-08-16 14:44:32', '2023-08-16 14:54:49', '2023-08-16 14:54:39', 1, 1);
-INSERT INTO `print_warehouses` VALUES (21, 'Giấy ivoly 50 x 100', '50', '100', '10000', 'paper', 13, 'imported', 1, NULL, 1, '2023-08-16 14:54:05', '2023-08-16 14:54:55', '2023-08-16 14:54:50', 1, NULL);
-INSERT INTO `print_warehouses` VALUES (34, 'Băng lề giay 10x11', '10', '11', '460', 'paper', 12, 'waiting', 2, 'note', 1, '2023-08-21 17:12:03', '2023-08-21 17:12:03', NULL, 6, NULL);
+INSERT INTO `print_warehouses` VALUES (20, 'Giấy couches 50 x 100', '50', '100', NULL, '10000', 'paper', 12, 'imported', 1, NULL, 1, '2023-08-16 14:44:32', '2023-08-16 14:54:49', 1);
+INSERT INTO `print_warehouses` VALUES (21, 'Giấy ivoly 50 x 100', '50', '100', NULL, '10000', 'paper', 13, 'imported', 1, NULL, 1, '2023-08-16 14:54:05', '2023-08-16 14:54:55', 1);
+INSERT INTO `print_warehouses` VALUES (34, 'Băng lề giay 10x11', '10', '11', NULL, '460', 'paper', 12, 'waiting', 2, 'note', 1, '2023-08-21 17:12:03', '2023-08-21 17:12:03', 6);
 
 -- ----------------------------
 -- Table structure for printers

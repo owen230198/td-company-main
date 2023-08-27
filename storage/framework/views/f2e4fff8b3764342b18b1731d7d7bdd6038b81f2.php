@@ -39,7 +39,7 @@
                         <li class="breadcrumb-item">
                             <a href="<?php echo e(url('')); ?>" class="color_green">Trang chủ</a>
                         </li>
-                        <?php if(!empty($parent_url)): ?>
+                        <?php if(!empty($parent_url['link'])): ?>
                             <li class="breadcrumb-item">
                                 <a href="<?php echo e(url(@$parent_url['link'])); ?>" class="color_green"><?php echo e(@$parent_url['note']); ?></a>
                             </li>

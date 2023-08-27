@@ -3,12 +3,13 @@
     $select_data = !empty($other_data['data']) ? $other_data['data'] : [];
     $field_title = @$select_data['field_title'] ?? 'name';
     $field_value = @$select_data['field_value'] ?? 'id';
-    $table_linking = getTableLinkingWithData([], $select_data['table'])
+    $table_linking = getTableLinkingWithData([], $select_data['table']);
+    $except_linking = !empty($select_config['except_linking']) ? $select_config['except_linking'] : 0;
 @endphp
 
 @if (@$select_config['search'] == 1)
     @php
-        $url = asset('get-data-json-linking?table='.$table_linking.'&field_search='.$field_title);
+        $url = asset('get-data-json-linking?table='.$table_linking.'&field_search='.$field_title.'&except_linking='.$except_linking);
         if (!empty($select_data['where'])) {
             foreach ($select_data['where'] as $key => $val) {
                 $url .= '&'.$key.'='.$val;

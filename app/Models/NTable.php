@@ -19,5 +19,4 @@ class NTable extends Model
                         'copy' => ['quotes', 'orders', 'products'],
                         'remove' => ['quotes', 'orders', 'products', 'supply_types']
                     ];
-    static $except_linking = ['customers', 'square_warehouses'];
 }
