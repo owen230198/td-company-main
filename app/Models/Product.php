@@ -56,12 +56,6 @@
                 'type' => 'file',
                 'other_data' => ['role_update' => [\GroupUser::SALE]] 
             ],
-            'sale_shape_file' =>
-            [
-                'note' => 'Khuôn kinh doanh tính giá',
-                'type' => 'file',
-                'other_data' => ['role_update' => [\GroupUser::SALE]] 
-            ],
             'tech_shape_file' =>
             [
                 'note' => 'Khuôn sản xuất (Kỹ thuật)',
@@ -97,19 +91,23 @@
                 ] : [];   
             }elseif (@$stage == Order::NOT_ACCEPTED) {
                 return [
-                    'sale_shape_file' => $ext_pro_feild_file['sale_shape_file'],
                     'tech_shape_file' => $ext_pro_feild_file['tech_shape_file'],
                 ];   
-            }elseif (@$stage == Order::TO_DESIGN || @$stage == Order::DESIGNING || @$stage == Order::DESIGN_SUBMITED) {
-                unset(
-                    $ext_pro_feild_file['sale_shape_file'], 
-                    $ext_pro_feild_file['handle_shape_file']
-                );
-                if (@$data['design'] != 5) {
-                    unset($ext_pro_feild_file['custom_design_file']);
-                }    
+            }elseif ((@$stage == Order::TO_DESIGN 
+            || @$stage == Order::DESIGNING 
+            || @$stage == Order::DESIGN_SUBMITED)
+            && \GroupUser::isDesign()) {
+                $ret = [];
+                if (@$data['design'] == 5) {
+                    $ret['custom_design_file'] = $ext_pro_feild_file['custom_design_file'];
+                } 
+                $ret['tech_shape_file'] = $ext_pro_feild_file['tech_shape_file'];
+                $ret['design_file'] = $ext_pro_feild_file['design_file'];
+                $ret['design_shape_file'] = $ext_pro_feild_file['design_shape_file'];
+                return $ret;   
             }elseif(@$stage == Order::DESIGN_SUBMITED){
                 return [
+                    'tech_shape_file' => $ext_pro_feild_file['tech_shape_file'],
                     'design_shape_file' => $ext_pro_feild_file['design_shape_file'],
                     'handle_shape_file' => $ext_pro_feild_file['handle_shape_file']
                 ]; 

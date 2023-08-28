@@ -24,4 +24,21 @@ class SquareWarehouse extends Model
         }, $data);
         return json_encode($arr);
     }
+
+    static function getStructForPlan($param)
+    {
+        $supply = $param['supply'];
+        $need = $param['need'];
+        $inhouse = (float) $supply->square;
+        if ($need > $inhouse) {
+            $takeout = $inhouse;
+            $rest = 0;
+            $lack = $need - $inhouse;
+        }else{
+            $takeout = $need;
+            $rest = $inhouse - $need;
+            $lack = 0;
+        }
+        return ['code' => 200, 'data' => ['inhouse' => $inhouse, 'takeout' => $takeout, 'rest' => $rest, 'lack' => $lack]];
+    }
 }

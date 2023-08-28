@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : owen
+ Source Server         : localhost
  Source Server Type    : MySQL
- Source Server Version : 100425
+ Source Server Version : 100428
  Source Host           : localhost:3306
  Source Schema         : td_company
 
  Target Server Type    : MySQL
- Target Server Version : 100425
+ Target Server Version : 100428
  File Encoding         : 65001
 
- Date: 29/08/2023 06:09:48
+ Date: 27/08/2023 14:07:29
 */
 
 SET NAMES utf8mb4;
@@ -13283,7 +13283,7 @@ CREATE TABLE `n_detail_tables`  (
   INDEX `map_insert`(`table_map`, `insert`) USING BTREE,
   INDEX `map_update`(`table_map`, `update`) USING BTREE,
   INDEX `map_search`(`table_map`, `search`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 167 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 166 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of n_detail_tables
@@ -13453,7 +13453,6 @@ INSERT INTO `n_detail_tables` VALUES (162, 'total_amount', '{\"type_input\":\"pr
 INSERT INTO `n_detail_tables` VALUES (163, 'created_by', NULL, 'Người thêm', 'linking', 'products', 1, 0, 0, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', 1, 0, 1, '2023-04-08 00:08:00', '2023-08-22 04:03:06');
 INSERT INTO `n_detail_tables` VALUES (164, 'created_at', NULL, 'Ngày thêm', 'datetime', 'products', 1, 1, 1, 1, 0, '', 1, 0, 1, '2023-04-08 00:08:00', '2023-08-17 15:56:04');
 INSERT INTO `n_detail_tables` VALUES (165, 'width', '{\"type_input\":\"number\",\"required\":1}', 'Kích thước khổ', 'text', 'square_warehouses', 1, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-30 11:00:22', '2023-08-26 00:38:21');
-INSERT INTO `n_detail_tables` VALUES (166, 'qtv', '{\"type_input\":\"number\",\"required\":1}', 'Định lượng', 'text', 'print_warehouses', 1, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-30 11:00:22', '2023-08-16 14:47:29');
 
 -- ----------------------------
 -- Table structure for n_group_users
@@ -13499,7 +13498,7 @@ CREATE TABLE `n_log_actions`  (
   `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 248 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 242 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of n_log_actions
@@ -13745,12 +13744,6 @@ INSERT INTO `n_log_actions` VALUES (238, 'square_warehouses', 'insert', 48, 1, '
 INSERT INTO `n_log_actions` VALUES (239, 'square_warehouses', 'insert', 49, 1, '2023-08-26 00:41:24', NULL, 1, '2023-08-26 00:41:24', '2023-08-26 00:41:24');
 INSERT INTO `n_log_actions` VALUES (240, 'square_warehouses', 'update', 49, 1, '2023-08-26 03:04:24', '{\"square\":{\"old\":\"2000\",\"new\":\"200000\"}}', 1, '2023-08-26 03:04:24', '2023-08-26 03:04:24');
 INSERT INTO `n_log_actions` VALUES (241, 'square_warehouses', 'update', 34, 1, '2023-08-26 05:14:46', '{\"width\":{\"old\":null,\"new\":\"66\"}}', 1, '2023-08-26 05:14:46', '2023-08-26 05:14:46');
-INSERT INTO `n_log_actions` VALUES (242, 'print_warehouses', 'update', 21, 1, '2023-08-29 00:03:02', '{\"qtv\":{\"old\":null,\"new\":\"120\"}}', 1, '2023-08-29 00:03:02', '2023-08-29 00:03:02');
-INSERT INTO `n_log_actions` VALUES (243, 'print_warehouses', 'update', 20, 1, '2023-08-29 00:03:12', '{\"qtv\":{\"old\":null,\"new\":\"130\"}}', 1, '2023-08-29 00:03:12', '2023-08-29 00:03:12');
-INSERT INTO `n_log_actions` VALUES (244, 'print_warehouses', 'insert', 35, 1, '2023-08-29 02:54:16', NULL, 1, '2023-08-29 02:54:16', '2023-08-29 02:54:16');
-INSERT INTO `n_log_actions` VALUES (245, 'print_warehouses', 'insert', 36, 1, '2023-08-29 02:54:25', NULL, 1, '2023-08-29 02:54:25', '2023-08-29 02:54:25');
-INSERT INTO `n_log_actions` VALUES (246, 'print_warehouses', 'insert', 37, 1, '2023-08-29 02:54:43', NULL, 1, '2023-08-29 02:54:43', '2023-08-29 02:54:43');
-INSERT INTO `n_log_actions` VALUES (247, 'print_warehouses', 'insert', 38, 1, '2023-08-29 02:54:55', NULL, 1, '2023-08-29 02:54:55', '2023-08-29 02:54:55');
 
 -- ----------------------------
 -- Table structure for n_modules
@@ -14269,18 +14262,14 @@ CREATE TABLE `print_warehouses`  (
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `created_by` int(10) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 39 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 35 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of print_warehouses
 -- ----------------------------
-INSERT INTO `print_warehouses` VALUES (20, 'Giấy couches 50 x 100', '50', '100', '120', '10000', 'paper', 12, 'imported', 1, NULL, 1, '2023-08-16 14:44:32', '2023-08-29 02:41:39', 1);
-INSERT INTO `print_warehouses` VALUES (21, 'Giấy ivoly 50 x 100', '50', '100', '120', '10000', 'paper', 13, 'imported', 1, NULL, 1, '2023-08-16 14:54:05', '2023-08-29 00:03:02', 1);
+INSERT INTO `print_warehouses` VALUES (20, 'Giấy couches 50 x 100', '50', '100', NULL, '10000', 'paper', 12, 'imported', 1, NULL, 1, '2023-08-16 14:44:32', '2023-08-16 14:54:49', 1);
+INSERT INTO `print_warehouses` VALUES (21, 'Giấy ivoly 50 x 100', '50', '100', NULL, '10000', 'paper', 13, 'imported', 1, NULL, 1, '2023-08-16 14:54:05', '2023-08-16 14:54:55', 1);
 INSERT INTO `print_warehouses` VALUES (34, 'Băng lề giay 10x11', '10', '11', NULL, '460', 'paper', 12, 'waiting', 2, 'note', 1, '2023-08-21 17:12:03', '2023-08-21 17:12:03', 6);
-INSERT INTO `print_warehouses` VALUES (35, 'Giấy couches 50 x 100', '66', '100', '120', '10000', 'paper', 12, 'imported', NULL, NULL, 1, '2023-08-29 02:54:16', '2023-08-29 02:54:16', 1);
-INSERT INTO `print_warehouses` VALUES (36, 'Giấy couches 50 x 100', '68', '100', '120', '10000', 'paper', 12, 'imported', NULL, NULL, 1, '2023-08-29 02:54:25', '2023-08-29 02:54:25', 1);
-INSERT INTO `print_warehouses` VALUES (37, 'Giấy couches 50 x 100', '100', '69', '120', '10000', 'paper', 12, 'imported', NULL, NULL, 1, '2023-08-29 02:54:43', '2023-08-29 02:54:43', 1);
-INSERT INTO `print_warehouses` VALUES (38, 'Giấy couches 50 x 100', '200', '70', '120', '10000', 'paper', 12, 'imported', NULL, NULL, 1, '2023-08-29 02:54:55', '2023-08-29 02:54:55', 1);
 
 -- ----------------------------
 -- Table structure for printers

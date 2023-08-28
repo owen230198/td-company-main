@@ -42,4 +42,4 @@
             <p class="color_red font_bold __lack"></p>
         </div>
     </div>
-</div><?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/orders/users/6/supply_handles/view_handles/squares/item.blade.php ENDPATH**/ ?>
+</div><?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/orders/users/6/supply_handles/view_handles/square_warehouses/item.blade.php ENDPATH**/ ?>

@@ -18,4 +18,27 @@ class PrintWarehouse extends Model
         (new \BaseService)->configBaseDataAction($data_whouse);
         PrintWarehouse::insert($data_whouse);
     }
+
+    static function getDataJsonLinking($warehouse, $q)
+    {
+        if (!empty($q)) {
+            $warehouse->where(function ($warehouse) use ($q) {
+                $warehouse->orWhere('name', 'like', '%'.trim($q).'%')
+                            ->orWhere('width', '>=', (float)$q - 1)
+                            ->orWhere('length', '>=', (float)$q - 1);
+            });
+        }
+        $data = $warehouse->paginate(50)->all();
+        $arr = array_map(function($item){
+            return [
+                'id' => @$item->id, 
+                'label' => $item->name. ' / KT khổ : '.$item->width.' x '.$item->length.' / Còn lại : '.$item->qty.' tờ'];
+        }, $data);
+        return json_encode($arr);
+    }
+
+    static function getStructForPlan($param)
+    {
+        return ['code' => 200, 'data' => ['inhouse' => $param['supply']->qty]];
+    }
 }

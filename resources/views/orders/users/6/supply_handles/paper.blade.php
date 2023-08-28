@@ -4,34 +4,41 @@
     @php
         $nilon = json_decode($supply_obj->nilon, true);
         $metalai = json_decode($supply_obj->metalai, true);
+        $base_supp_qty = calValuePercentPlus($supply_obj->supp_qty, $supply_obj->supp_qty, getDataConfig('QuoteConfig', 'COMPEN_PERCENT'), 0, true);
+        $data_length = @$supply_size['width'] < @$supply_size['length'] ? @$supply_size['width'] : @$supply_size['length'];
+        $base_need = $base_supp_qty*($data_length/10);
     @endphp
     @if (!empty($nilon['materal']))
-        @include('orders.users.6.supply_handles.view_handles.squares.view', 
-        ['key_supp' => \TDConst::NILON, 'note' => 'màng nilon', 'supp_price' => $nilon['materal']])
+        @include('orders.users.6.supply_handles.view_handles.multiple', 
+        ['arr_items' => ['key_supp' => \TDConst::NILON, 'note' => 'màng nilon', 'supp_price' => $nilon['materal'],
+        'base_need' => $base_need],
+        'type' => 'square_warehouses'])
     @endif
 
     {{-- chọn vật tư cán metalai --}}
     @if (!empty($metalai['materal']))
-        @include('orders.users.6.supply_handles.view_handles.squares.view', 
-        ['key_supp' => \TDConst::METALAI, 'note' => 'màng metalai', 'supp_price' => $metalai['materal']])
+        @include('orders.users.6.supply_handles.view_handles.multiple', 
+        ['arr_items' => ['key_supp' => \TDConst::METALAI, 'note' => 'màng metalai', 'supp_price' => $metalai['materal'],
+        'base_need' => $base_need],
+        'type' => 'square_warehouses'])
     @endif 
     
     {{-- Chọn vật tư cán phủ trên --}}
     @if (!empty($metalai['cover_materal']))
-    @include('orders.users.6.supply_handles.view_handles.squares.view', 
-        ['key_supp' => \TDConst::COVER, 
+    @include('orders.users.6.supply_handles.view_handles.multiple', 
+        ['arr_items' => ['key_supp' => \TDConst::COVER, 
         'note' => 'màng phủ trên ('.$metalai['cover_face'].' mặt)', 
-        'supp_price' => $metalai['cover_materal']])
+        'supp_price' => $metalai['cover_materal'],
+        'base_need' => $base_need],
+        'type' => 'square_warehouses'])
     @endif 
     <div class="process_paper_plan">
-        @include('orders.users.6.supply_handles.handle', [
-            'where_size_supp' => [
-                    'type' => 'paper',
-                    'supp_price' => @$supply_size['materal'],
-                    'status' => 'imported'
-            ],
-            'table_type' => 'print_warehouses',
-            'compen_percent' => getDataConfig('QuoteConfig', 'COMPEN_PERCENT')
-        ])
+        @include('orders.users.6.supply_handles.view_handles.multiple', 
+        ['arr_items' => ['key_supp' => \TDConst::PAPER, 
+        'note' => 'giấy in', 
+        'supp_price' => $supply_size['materal'],
+        'qtv' => $supply_size['qttv'],
+        'base_need' => $base_supp_qty],
+        'type' => 'print_warehouses'])
     </div> 
 @endsection

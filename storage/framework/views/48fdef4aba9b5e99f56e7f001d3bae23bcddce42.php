@@ -16,8 +16,7 @@
             'value' => number_format($product['total_amount'])
         ],
     ];
-    
-    $ext_pro_feild_file = \App\Models\Product::getFeildFileByStage(@$stage);
+    $ext_pro_feild_file = \App\Models\Product::getFeildFileByStage(@$stage, $product);
 ?>
 
 <?php $__currentLoopData = $ext_pro_fields_inf; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ext_pro_field): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>

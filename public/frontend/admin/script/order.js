@@ -101,6 +101,7 @@ var planChoseSupplyModule = function()
         event.preventDefault();
         let parent = $(this).closest('.__supply_handle_list');
         let item = $(this).closest('.__handle_supply_item');
+        item.data('take', 0);
         let need = planGetNeddSupply(parent);
         let table = parent.data('table');
         let target = item.find('.__handle_supply_detail_ajax');
@@ -118,25 +119,45 @@ var planChoseSupplyModule = function()
                 }else{
                     data = obj.data;
                     target.fadeIn();
-                    target.find('.__square').text(data.square);
-                    target.find("input[name*='qty']").val(data.takeout);
-                    target.find('.__takeout').text(data.takeout);
-                    item.data('take', data.takeout);
-                    target.find('.__rest').text(data.rest);
-                    target.find('.__lack').text(data.lack);
+                    target.find('.__inhouse').text(data.inhouse);
+                    afterPlanSelectSupply(table, data, target, item);
                 }
                 $('#loader').delay(200).fadeOut(500); 
             })
         }else{
             target.fadeOut();
-            target.find('.__square').text(0);
-            target.find("input[name*='qty']").val(0);
-            target.find('.__takeout').text(0);
-            item.data('take', 0);
-            target.find('.__rest').text(0);
-            target.find('.__lack').text(0); 
+            target.find('.__inhouse').text(0);
+            afterPlanSelectSupply(table, data, target, item, true);
         }
     });
+}
+
+var afterPlanSelectSupply = function(table, data, target, item, reset = false) 
+{
+    if (reset) {
+        target.find("input[name*='qty']").val(0);
+        target.find('.__takeout').text(0);
+        item.data('take', 0);
+        target.find('.__rest').text(0);
+        target.find('.__lack').parent().fadeOut();
+        target.find('.__lack').parent().text(0);    
+    }else{
+        if (table == 'square_warehouses') {
+            target.find("input[name*='qty']").val(data.takeout);
+            target.find('.__takeout').text(data.takeout);
+            item.data('take', data.takeout);
+            target.find('.__rest').text(data.rest);
+            target.find('.__lack').text(data.lack);
+            if (data.lack == 0) {
+                target.find('.__lack').parent().fadeOut();    
+            }else{
+                target.find('.__lack').parent().fadeIn();    
+            }
+        }else if (table == 'print_warehouses') {
+            target.find('.__rest').text(data.inhouse);  
+            target.find('.__lack').parent().fadeOut();   
+        }
+    }
 }
 
 var planAddSupplyHandle = function()
@@ -145,13 +166,54 @@ var planAddSupplyHandle = function()
         event.preventDefault();
         let parent = $(this).parent();
         let ajax_target = parent.find('.__supply_handle_list');
-        let type = $(this).data('type');
-        let key = $(this).data('key');
-        let note = $(this).data('note');
-        let supp = $(this).data('supp');
-        let index = ajax_target.find('.__handle_supply_item').length;
-        let url = 'add-select-supply-handle?type='+type+'&index='+index+'&key_supp='+key+'&note='+note+'&supp_price='+supp;
+        let param = $(this).data('param');
+        let items = ajax_target.find('.__handle_supply_item');
+        let index = items.length;
+        let except_value = '';
+        items.each(function(){
+            let select_supply = $(this).find('select.__select_in_warehouse');
+            select_supply.attr('disabled', 'disabled');
+            except_value += ''+select_supply.val()+',';
+        })
+        let url = 'add-select-supply-handle?index='+index+''+param+'&except_value='+except_value;
         ajaxViewTarget(url, ajax_target, ajax_target, 2);
+    });
+}
+
+var planRemoveSupplyHandle = function()
+{
+    $(document).on('click', 'button.__supply_handle_btn_remove', function(event){
+        let parent = $(this).closest('.__supply_handle_list');
+        let items = parent.find('.__handle_supply_item');
+        $(this).parent().remove();
+        if (items.length  == 2) {
+            items.each(function(){
+                $(this).find('select.__select_in_warehouse').attr('disabled', false);
+            })
+        }
+    })
+}
+
+var planHandleSupplyQty = function()
+{
+    $(document).on('keyup change', 'input.__supp_plan_qty_change', function(event){
+        event.preventDefault();
+        let parent = $(this).closest('.__handle_supply_item');
+        let need_qty = getEmptyDefault(parent.find('input.__qty_supp_plan').val(), 0, 'float');
+        let nqty = getEmptyDefault(parent.find('input.__nqty_supp_plan').val(), 0, 'float');
+        let takeout = need_qty*nqty;
+        parent.find('input.__total_qty_supp_plan').val(takeout);
+        let inhouse = getEmptyDefault(parent.find('.__inhouse').text(), 0, 'float');
+        if (takeout > inhouse) {
+            parent.find('.__rest').text(0);
+            let lack = takeout - inhouse;
+            parent.find('.__lack').text(lack);
+            parent.find('.__lack').parent().fadeIn();     
+        }else{
+            parent.find('.__rest').text(inhouse - takeout);
+            parent.find('.__lack').text(0);
+            parent.find('.__lack').parent().fadeOut();  
+        }
     });
 }
 
@@ -162,4 +224,6 @@ $(function(){
     planHandleElevateModule();
     planChoseSupplyModule();
     planAddSupplyHandle();
+    planRemoveSupplyHandle();
+    planHandleSupplyQty();
 });

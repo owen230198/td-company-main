@@ -1,5 +1,5 @@
 <div class="order_field_update __order_field_module mt- pt-3 border_top_eb">
-    <?php
+    @php
         $order_field_update = [
             [
                 'name' => '',
@@ -53,8 +53,8 @@
                 'value' => @$data_order['ship_note']
             ]
         ]
-    ?>
-    <?php $__currentLoopData = $order_field_update; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $order_field): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-        <?php echo $__env->make('view_update.view', $order_field, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>    
-    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-</div><?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/orders/base_field.blade.php ENDPATH**/ ?>
+    @endphp
+    @foreach ($order_field_update as $order_field)
+        @include('view_update.view', $order_field)    
+    @endforeach
+</div>

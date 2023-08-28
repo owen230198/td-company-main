@@ -230,22 +230,13 @@ class OrderController extends Controller
     public function selectSupplyWarehouse(Request $request, $table)
     {
         $supply_id = $request->input('supply');
-        $supply = \DB::table($table)->find($supply_id);
+        $model = getModelByTable($table);
+        $supply = $model::find($supply_id);
+        $need = (float) $request->input('need');
         if (empty($supply)) {
             return returnMessageAjax(100, 'Vật tư không tồn tại hoặc đã bị xóa !');
         }
-        $square = (float) $supply->square;
-        $need = (float) $request->input('need');
-        if ($need > $square) {
-            $takeout = $square;
-            $rest = 0;
-            $lack = $need - $square;
-        }else{
-            $takeout = $need;
-            $rest = $square - $need;
-            $lack = 0;
-        }
-        return ['code' => 200, 'data' => ['square' => $square, 'takeout' => $takeout, 'rest' => $rest, 'lack' => $lack]];
+        return $model::getStructForPlan(['supply' => $supply, 'need' => $need]);
     }
 
     public function addSelectSupplyHandle(Request $request)

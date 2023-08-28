@@ -39,21 +39,22 @@
                                 'type' => 'linking',
                                 'other_data' => ['data' => ['table' => 'design_types', 'select' => ['id', 'name']]],
                                 'value' => @$product['design']
-                            ],
-                            [
-                                'name' => $pro_base_name_input.'[sale_shape_file]',
-                                'note' => 'Khuôn kinh doanh tính giá',
-                                'type' => 'file',
-                                'other_data' => ['role_update' => [\GroupUser::SALE]],
-                                'value' => @$product['sale_shape_file'] 
-                            ],
+                            ]
                         ]
                     @endphp
 
                     @foreach ($arr_pro_field as $field)
                         @include('view_update.view', $field)
                     @endforeach
-
+                    @if (\GroupUser::isSale() || \GroupUser::isTechApply() || \GroupUser::isAdmin())
+                        @include('view_update.view', [
+                            'name' => $pro_base_name_input.'[sale_shape_file]',
+                            'note' => 'Khuôn kinh doanh tính giá',
+                            'type' => 'file',
+                            'other_data' => ['role_update' => [\GroupUser::SALE]],
+                            'value' => @$product['sale_shape_file'] 
+                        ])
+                    @endif
                     @if (!empty($order_get))
                         @include('orders.products.extend_info')   
                     @endif
