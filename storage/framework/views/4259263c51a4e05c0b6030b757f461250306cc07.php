@@ -7,7 +7,8 @@
 ?>
 <div class="__module_multiple_handle_supply">
     <h3 class="fs-14 text-uppercase border_top_eb pt-3 mt-3 text-center handle_title">
-        Xuất vật tư <?php echo e(@$arr_items['note']); ?> theo yêu cầu
+        <?php echo e(@$arr_items['title_handle'] ?? 'Xuất vật tư '. @$arr_items['note'].' theo yêu cầu'); ?>
+
     </h3>
     <div class="__supply_handle_list" data-table = <?php echo e($type); ?> data-need ="<?php echo e(@$base_need ?? 0); ?>">
         <?php echo $__env->make('orders.users.6.supply_handles.view_handles.'.$type.'.item', $arr_items, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>

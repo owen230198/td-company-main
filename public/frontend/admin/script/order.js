@@ -120,25 +120,26 @@ var planChoseSupplyModule = function()
                     data = obj.data;
                     target.fadeIn();
                     target.find('.__inhouse').text(data.inhouse);
-                    afterPlanSelectSupply(table, data, target, item);
+                    afterPlanSelectSupply(table, data, target, item, parent);
                 }
                 $('#loader').delay(200).fadeOut(500); 
             })
         }else{
             target.fadeOut();
             target.find('.__inhouse').text(0);
-            afterPlanSelectSupply(table, data, target, item, true);
+            afterPlanSelectSupply(table, data, target, item, parent, true);
         }
     });
 }
 
-var afterPlanSelectSupply = function(table, data, target, item, reset = false) 
+var afterPlanSelectSupply = function(table, data, target, item, parent, reset = false) 
 {
     if (reset) {
         target.find("input[name*='qty']").val(0);
         target.find('.__takeout').text(0);
         item.data('take', 0);
         target.find('.__rest').text(0);
+        target.find("input[name*='lack']").val(0);
         target.find('.__lack').parent().fadeOut();
         target.find('.__lack').parent().text(0);    
     }else{
@@ -147,6 +148,7 @@ var afterPlanSelectSupply = function(table, data, target, item, reset = false)
             target.find('.__takeout').text(data.takeout);
             item.data('take', data.takeout);
             target.find('.__rest').text(data.rest);
+            target.find("input[name*='lack']").val(data.lack);
             target.find('.__lack').text(data.lack);
             if (data.lack == 0) {
                 target.find('.__lack').parent().fadeOut();    
@@ -172,7 +174,7 @@ var planAddSupplyHandle = function()
         let except_value = '';
         items.each(function(){
             let select_supply = $(this).find('select.__select_in_warehouse');
-            select_supply.attr('disabled', 'disabled');
+            select_supply.attr('readonly', true);
             except_value += ''+select_supply.val()+',';
         })
         let url = 'add-select-supply-handle?index='+index+''+param+'&except_value='+except_value;
@@ -185,12 +187,12 @@ var planRemoveSupplyHandle = function()
     $(document).on('click', 'button.__supply_handle_btn_remove', function(event){
         let parent = $(this).closest('.__supply_handle_list');
         let items = parent.find('.__handle_supply_item');
-        $(this).parent().remove();
         if (items.length  == 2) {
             items.each(function(){
-                $(this).find('select.__select_in_warehouse').attr('disabled', false);
+                $(this).find('select.__select_in_warehouse').attr('readonly', false);
             })
         }
+        $(this).parent().remove();
     })
 }
 
@@ -201,12 +203,13 @@ var planHandleSupplyQty = function()
         let parent = $(this).closest('.__handle_supply_item');
         let need_qty = getEmptyDefault(parent.find('input.__qty_supp_plan').val(), 0, 'float');
         let nqty = getEmptyDefault(parent.find('input.__nqty_supp_plan').val(), 0, 'float');
-        let takeout = need_qty*nqty;
-        parent.find('input.__total_qty_supp_plan').val(takeout);
+        let takeout = need_qty;
+        parent.find('input.__total_qty_supp_plan').val(need_qty*nqty);
         let inhouse = getEmptyDefault(parent.find('.__inhouse').text(), 0, 'float');
         if (takeout > inhouse) {
             parent.find('.__rest').text(0);
             let lack = takeout - inhouse;
+            parent.find("input[name*='lack']").val( lack);
             parent.find('.__lack').text(lack);
             parent.find('.__lack').parent().fadeIn();     
         }else{
@@ -214,6 +217,7 @@ var planHandleSupplyQty = function()
             parent.find('.__lack').text(0);
             parent.find('.__lack').parent().fadeOut();  
         }
+        parent.data('take', )
     });
 }
 

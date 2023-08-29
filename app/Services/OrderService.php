@@ -75,7 +75,7 @@ class OrderService extends BaseService
     {
         $data_insert['order'] = $order_id;
         $data_insert['status'] = \StatusConst::NOT_ACCEPTED;
-        $arr_order_action = ['status' => Order::TO_DESIGN, 'apply_design_by' => \User::getCurrent('id')];
+        $arr_order_action = ['status' => Order::TO_DESIGN];
         $this->configBaseDataAction($data_insert);
         foreach ($products as $key => $product) {
             $h = $key > 0 ? $key.'.' : '';
@@ -108,32 +108,34 @@ class OrderService extends BaseService
 
     public function supply_handle_paper($supply, $size, $c_supply, $over_supply)
     {
-        $command = @$c_supply['command'] ?? [];
-        $elevate = @$c_supply['elevate'] ?? [];
-        $command['qty'] = calValuePercentPlus($command['qty'], $command['qty'], getDataConfig('QuoteConfig', 'COMPEN_PERCENT'), 0, true);
-        $valid = $this->validateElevatehandle($command, $elevate);
-        if (@$valid['code'] == 100) {
-            return returnMessageAjax(100, $valid['message']);
+        $papers = @$c_supply['paper'] ?? [];
+        foreach ($papers as $key => $paper) {
+            if (empty($paper['size_type'])) {
+                return returnMessageAjax(100, 'bạn chưa chọn vật tư giấy in trong  kho !');
+            }
+            if ($paper['qty'] > 0) {
+                $insert_command = CSupply::insertCommand($paper, $supply);
+            }
         }
-        $insert_command = CSupply::insertCommand($command, $supply);
-        if (!empty($c_supply['materal'])) {
-            foreach ($c_supply['materal'] as $key => $value) {
-                $c_mataeral['size_type'] = $value;
-                $c_mataeral['qty'] = (float) @$size['width'] * (float) @$size['length'] * $command['qty'];
-                $supply->type = $key;
-                CSupply::insertCommand($c_mataeral, $supply);
+        $squares = @$c_supply['square'] ?? [];
+        foreach ($squares as $key => $supp_qsuare) {
+            foreach ($supp_qsuare as $square) {
+                if (@$square['qty'] > 0) {
+                    $supply->type = $key;
+                    CSupply::insertCommand($square, $supply);
+                }
             }
         }
         if (!$insert_command) {
             return returnMessageAjax(110, 'Không thể tạo yêu cầu xuất vật tư, vui lòng thử lại!');
         }else{
-            Paper::where('id', $supply->product)->update(['handle_elevate' => json_encode($elevate)]);
-            if (!empty($over_supply['qty'])) {
-                $over_supply['qty'] = $command['qty'];
-                $supply->type = \TDConst::PAPER;
-                PrintWarehouse::insertOverSupply($over_supply, $supply, $size);       
+            foreach ($over_supply as $over_supp) {
+                if ($over_supp['qty'] > 0) {
+                    $supply->type = \TDConst::PAPER;
+                    PrintWarehouse::insertOverSupply($over_supp, $supply, $size);       
+                }
             }
-            return returnMessageAjax(200, 'Đã gửi yêu cầu xử lí vật tư thành công!', url('update/orders/'.$supply->order));
+            return returnMessageAjax(200, 'Đã gửi yêu cầu xử lí vật tư thành công!', url('update/products/'.$supply->product));
         }
     }
 

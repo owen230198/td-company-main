@@ -172,3 +172,56 @@
             return $a == $b;
         }
     }
+
+    if (!function_exists('getArrHandleField')) {
+        function getArrHandleField($table)
+        {
+            switch ($table) {
+                case 'papers':
+                    return [\TDConst::PRINT, 
+                            \TDConst::NILON, 
+                            \TDConst::METALAI, 
+                            \TDConst::COMPRESS, 
+                            \TDConst::UV, 
+                            \TDConst::ELEVATE,
+                            \TDConst::FLOAT,
+                            \TDConst::PEEL,
+                            \TDConst::BOX_PASTE,
+                            \TDConst::BAG_PASTE,
+                            \TDConst::CUT,
+                            \TDConst::FOLD];
+                    break;
+                case 'supplies':
+                    return [\TDConst::ELEVATE, 
+                            \TDConst::PEEL, 
+                            \TDConst::CUT,
+                            \TDConst::MILL];
+                    break;
+                case 'fill_finishes':
+                    return [\TDConst::FILL, 
+                            \TDConst::FINISH];
+                    break;
+                default:
+                    return '*';
+                    break;
+            }
+        }
+    }
+
+    if (!function_exists('getStageActiveStartHandle')) {
+        function getStageActiveStartHandle($table, $id){
+            $arr_select = getArrHandleField($table);
+            $data = \DB::table($table)->select($arr_select)->find($id);
+            foreach ($data as $key => $value) {
+                $data_value = json_decode($value, true);
+                if (@$data_value['act'] == 1) {
+                    $ret['status'] = $key;
+                    if (!empty($data_value['machine'])) {
+                        $ret['machine_type'] = getFieldDataById('type', 'devices', $data_value['machine']); 
+                    }
+                    return $ret;
+                    break;
+                }
+            }
+        }
+    }

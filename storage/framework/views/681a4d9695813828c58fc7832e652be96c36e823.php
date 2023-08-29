@@ -41,5 +41,14 @@
         'base_need' => $base_supp_qty],
         'type' => 'print_warehouses'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     </div> 
+    
+    <div class="plan_over_supply">
+        <?php echo $__env->make('orders.users.6.supply_handles.view_handles.multiple', 
+        ['arr_items' => [
+        'title_handle' => 'Nhập kho băng lề giấy in', 
+        'supp_price' => $supply_size['materal'],
+        'qtv' => $supply_size['qttv']],
+        'type' => 'over_supplies'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    </div>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('orders.users.6.supply_handles.supplies', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/orders/users/6/supply_handles/paper.blade.php ENDPATH**/ ?>

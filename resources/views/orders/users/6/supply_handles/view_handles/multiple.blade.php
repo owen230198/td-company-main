@@ -7,7 +7,7 @@
 @endphp
 <div class="__module_multiple_handle_supply">
     <h3 class="fs-14 text-uppercase border_top_eb pt-3 mt-3 text-center handle_title">
-        Xuất vật tư {{ @$arr_items['note'] }} theo yêu cầu
+        {{ @$arr_items['title_handle'] ?? 'Xuất vật tư '. @$arr_items['note'].' theo yêu cầu' }}
     </h3>
     <div class="__supply_handle_list" data-table = {{ $type }} data-need ="{{ @$base_need ?? 0 }}">
         @include('orders.users.6.supply_handles.view_handles.'.$type.'.item', $arr_items)

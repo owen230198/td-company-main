@@ -41,4 +41,13 @@
         'base_need' => $base_supp_qty],
         'type' => 'print_warehouses'])
     </div> 
+    
+    <div class="plan_over_supply">
+        @include('orders.users.6.supply_handles.view_handles.multiple', 
+        ['arr_items' => [
+        'title_handle' => 'Nhập kho băng lề giấy in', 
+        'supp_price' => $supply_size['materal'],
+        'qtv' => $supply_size['qttv']],
+        'type' => 'over_supplies'])
+    </div>
 @endsection

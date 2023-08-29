@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="{{ asset('frontend/admin/css/order.css') }}">
 @endsection
 @section('content')
-    <form action="{{ url('apply-to-worker-handle/'.$id) }}" method="POST" class="config_content baseAjaxForm" enctype="multipart/form-data" 
+    <form action="{{ url('apply-to-worker-handle/products/'.$id) }}" method="POST" class="config_content baseAjaxForm" enctype="multipart/form-data" 
     onkeydown="return event.key != 'Enter'">
         @csrf
         @if (count($products) > 1)

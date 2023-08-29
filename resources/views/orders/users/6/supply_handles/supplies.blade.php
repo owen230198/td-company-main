@@ -8,7 +8,6 @@
         @csrf
         <input type="hidden" name="id" value="{{ @$supply_obj->id }}">
         <input type="hidden" name="table" value="{{ @$table }}">
-        <input type="hidden" name="order" value="{{ @$supply_obj->order }}">
         @yield('process')
         <div class="group_btn_action_form text-center">
             <button type="submit" class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-2">

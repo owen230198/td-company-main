@@ -39,7 +39,6 @@ class CSupply extends Model
     {
         $data_command = $data;
         $data_command['code'] = 'XVT-'.getCodeInsertTable('c_supplies'); 
-        $data_command['order'] = $supply->order;
         $data_command['product'] = $supply->product;
         $data_command['supply'] = $supply->id;
         $data_command['supp_type'] = $supply->type;

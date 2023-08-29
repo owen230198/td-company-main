@@ -1,6 +1,6 @@
 <?php
     $chose_supp = [
-        'name' => 'c_supply[materal]['.$key_supp.']]['.$index.'][supp_price]',
+        'name' => 'c_supply[square]['.$key_supp.']['.$index.'][size_type]',
         'type' => 'linking',
         'note' => 'Chọn khổ '.$note,
         'attr' => ['inject_class' => '__select_in_warehouse'],
@@ -24,10 +24,10 @@
     <?php endif; ?>
     <?php echo $__env->make('view_update.view', $chose_supp, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <div class="__handle_supply_detail_ajax color_green" style="display:none">
-        <input type="hidden" name="c_supply[materal][<?php echo e($key_supp); ?>]][<?php echo e($index); ?>][qty]" value="">
+        <input type="hidden" name="c_supply[square][<?php echo e($key_supp); ?>][<?php echo e($index); ?>][qty]" value="">
         <div class="d-flex align-items-center mb-2 fs-13">
             <label class="mb-0 min_210 text-capitalize text-right mr-3">Còn lại trong kho : </label>
-            <p class="font_bold __square"></p>
+            <p class="font_bold __inhouse"></p>
         </div>
         <div class="d-flex align-items-center mb-2 fs-13">
             <label class="mb-0 min_210 text-capitalize text-right mr-3">Xuất ra cho lệnh này : </label>
@@ -37,6 +37,7 @@
             <label class="mb-0 min_210 text-capitalize text-right mr-3">Còn lại : </label>
             <p class="font_bold __rest"></p>
         </div>
+        <input type="hidden" name="c_supply[square][<?php echo e($key_supp); ?>][<?php echo e($index); ?>][lack]" value="">
         <div class="align-items-center mb-2 fs-13" style="display: flex">
             <label class="mb-0 min_210 text-capitalize text-right mr-3">Vật tư thiếu : </label>
             <p class="color_red font_bold __lack"></p>

@@ -179,7 +179,7 @@
                                 self::PEEL => 'Máy bóc lề',
                                 self::BOX_PASTE => 'Máy dán hộp giấy',
                                 self::BAG_PASTE => 'Máy dán túi giấy',
-                                self::MILL => 'Máy xén'
+                                self::CUT => 'Máy xén'
                             ];
 
         const PAPER_HARD_DEVICE = [

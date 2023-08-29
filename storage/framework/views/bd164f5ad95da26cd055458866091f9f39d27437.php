@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="<?php echo e(asset('frontend/admin/css/order.css')); ?>">
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
-    <form action="<?php echo e(url('apply-to-worker-handle/'.$id)); ?>" method="POST" class="config_content baseAjaxForm" enctype="multipart/form-data" 
+    <form action="<?php echo e(url('apply-to-worker-handle/products/'.$id)); ?>" method="POST" class="config_content baseAjaxForm" enctype="multipart/form-data" 
     onkeydown="return event.key != 'Enter'">
         <?php echo csrf_field(); ?>
         <?php if(count($products) > 1): ?>

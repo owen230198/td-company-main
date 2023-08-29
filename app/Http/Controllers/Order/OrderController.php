@@ -117,7 +117,7 @@ class OrderController extends Controller
             if (!empty($product_process['code']) && $product_process['code'] == 100) {
                 return returnMessageAjax(100, $product_process['message']);  
             }
-            $arr_update = ['status' => Order::TECH_SUBMITED, 'apply_plan_by' => \User::getCurrent('id')];
+            $arr_update = ['status' => Order::TECH_SUBMITED];
             foreach ($data['product'] as $product) {
                 Product::where('id', $product['id'])->update($arr_update);
             }
@@ -192,13 +192,12 @@ class OrderController extends Controller
             if (getHandleSupplyStatus($data_supply->product, $data_supply->id, $data_supply->type) != CSupply::NOT_HANDLE) {
                 return back()->with('error', 'Vật tư đang được xử lí bởi kế toán kho !');
             }
-            $data_supply->order = $request->input('order');
             $supp_size = !empty($data_supply->size) ? json_decode($data_supply->size, true) : [];
             if (!empty($data_supply)) {
                 if ($request->isMethod('GET')) {
                     $data['supply_obj'] = $data_supply;
                     $data['title'] = 'Xử lí vật tư sản xuất sản phẩm '.getFieldDataById('name', 'products', $data_supply->product);
-                    $data['parent_url'] = ['link' => 'update/products/'.$data_supply->order, 'note' => 'Danh sách vật tư cần xử lí'];
+                    $data['parent_url'] = ['link' => 'update/products/'.$data_supply->product, 'note' => 'Danh sách vật tư cần xử lí'];
                     $prefix = !empty($data_supply->type) ? $data_supply->type : $table;
                     $data['pro_index'] = 0;
                     $data['supp_index'] = 0;
@@ -242,7 +241,7 @@ class OrderController extends Controller
     public function addSelectSupplyHandle(Request $request)
     {
         $data = $request->all();
-        return view('orders.users.6.supply_handles.view_handles.squares.item', $data);
+        return view('orders.users.6.supply_handles.view_handles.'.$data['type'].'.item', $data);
     }
 
     public function takeOutSupply($id)
@@ -285,14 +284,31 @@ class OrderController extends Controller
         }
     }
 
-    public function applyToWorkerHandle($id)
+    public function applyToWorkerHandle($table, $id)
     {
+        $obj_order = \DB::table($table)->find($id);
         if (\GroupUser::isPlanHandle()) {
-            $obj_order = \DB::table('orders')->find($id);
             if ($obj_order->status != Order::TECH_SUBMITED) {
                 return returnMessageAjax(110, 'DỮ liệu trạng thái đơn hàng không hợp lệ !');
             }
-            return returnMessageAjax(110, 'Vật tư chưa sẵn sàng để sản xuất, vui lòng liên hệ kế toán kho !');
+            $elements = getProductElementData($obj_order->category, $obj_order->id, true);
+            foreach ($elements as $element) {
+                if (!empty($element['data'])) {
+                    foreach ($element['data'] as $key => $supply) {
+                        $table = $element['table'];
+                        $data_update = getStageActiveStartHandle($table, $supply->id);
+                        if (!empty($data_update)) {
+                            $data_update['code'] =  $obj_order->code.getCharaterByNum($key);
+                            $update = \DB::table($table)->where('id', $supply->id)->update($data_update);
+                        }
+                    }
+                }
+            }
+            if (!empty($update)) {
+                return returnMessageAjax(200, 'Đã gửi lệnh sản xuất xuống xưởng !');
+            }else{
+                return returnMessageAjax(100, 'Đã có lỗi xảy ra, vui lòng thử lại !');
+            }
         }else{
             return returnMessageAjax(110, 'Bạn không có quyền duyệt sản xuất !');    
         } 
