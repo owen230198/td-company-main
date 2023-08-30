@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="{{ asset('frontend/base/css/select2.min.css') }}" />
         <link rel="stylesheet" href="{{ asset('frontend/base/daterangepickers/daterangepicker.css') }}" />
         <link rel="stylesheet" href="{{ asset('frontend/base/css/style.css') }}" />
+        <link rel="stylesheet" href="{{ asset('frontend/admin/css/style.css') }}" />
         <link rel="stylesheet" href="{{ asset('frontend/workers/css/style.css') }}" />
         @yield('css')
     </head>

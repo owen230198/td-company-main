@@ -272,7 +272,9 @@ a.device_supp_item {
     color: #459300;
 }
 
-
+.border_right_green{
+    border-right: 1px solid #459300;
+}
 
 .table_base_view .w_max_content{
     width: max-content;

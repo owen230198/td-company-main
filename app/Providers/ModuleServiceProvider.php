@@ -24,7 +24,7 @@ class ModuleServiceProvider extends ServiceProvider
                     if (is_dir($path_view)) {
                         $this->loadViewsFrom($path_view, $module);
                     }
-                    $path_helper = $dir.'/'.$module.'/Helpers';
+                    $path_helper = $dir.'/'.$module.'/helpers';
                     if(is_dir($path_helper)) {
                         foreach (glob($path_helper.'/*.php') as $helper) {
                             require_once($helper);

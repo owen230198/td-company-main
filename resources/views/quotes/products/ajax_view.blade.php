@@ -1,6 +1,4 @@
-@if (count($products) > 1)
-    @include('quotes.products.list_tab')
-@endif
+@include('quotes.products.list_tab')
 <div class="tab-content" id="quote-pro-tabContent">
     @foreach ($products as $pro_index => $product)
         <div class="tab-pane fade{{ $pro_index == 0 ? ' show active' : '' }} tab_pane_quote_pro" id="quote-pro-{{ $pro_index }}" role="tabpanel" aria-labelledby="quote-pro-{{ $pro_index }}-tab">

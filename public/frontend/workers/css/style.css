@@ -1,3 +1,57 @@
 .border_right{
     border-right: 1px solid #333;
 }
+
+.form_search{
+    max-width: 300px;
+    border: 1px solid #459300;
+    margin-left: auto;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px #333333;
+}
+
+.form_search input{
+    color:#459300;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 3px 10px;
+    padding-right: 45px;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    height: 30px;
+}
+
+.form_search button{
+    position: absolute;
+    width: 40px;
+    height: 100%;
+    right: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0;
+}
+
+.item_command {
+    background: #ebebebbf;
+    border-radius: 5px;
+    box-shadow: 3px 3px 10px #555555;
+}
+
+.item_command .machine_label{
+    padding: 5px 10px;
+    border-radius: 0 0 5px;
+    box-shadow: 1px 1px 3px #555555;
+    width: max-content;
+}
+
+.color_yellow{
+    color: #e5ff00;
+}
+
+.command_group_btn .button_command{
+    padding: 5px 10px;
+    flex: 0 0 50%;
+}

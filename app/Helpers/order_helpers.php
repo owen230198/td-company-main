@@ -217,7 +217,7 @@
                 if (@$data_value['act'] == 1) {
                     $ret['status'] = $key;
                     if (!empty($data_value['machine'])) {
-                        $ret['machine_type'] = getFieldDataById('type', 'devices', $data_value['machine']); 
+                        $ret['machine_type'] = $key == \TDConst::PRINT ? $data_value['machine'] : getFieldDataById('type', 'devices', $data_value['machine']); 
                     }
                     return $ret;
                     break;

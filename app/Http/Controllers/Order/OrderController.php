@@ -286,7 +286,8 @@ class OrderController extends Controller
 
     public function applyToWorkerHandle($table, $id)
     {
-        $obj_order = \DB::table($table)->find($id);
+        $table_data = \DB::table($table)->where('id', $id);
+        $obj_order = $table_data->first();
         if (\GroupUser::isPlanHandle()) {
             if ($obj_order->status != Order::TECH_SUBMITED) {
                 return returnMessageAjax(110, 'DỮ liệu trạng thái đơn hàng không hợp lệ !');
@@ -299,12 +300,17 @@ class OrderController extends Controller
                         $data_update = getStageActiveStartHandle($table, $supply->id);
                         if (!empty($data_update)) {
                             $data_update['code'] =  $obj_order->code.getCharaterByNum($key);
-                            $update = \DB::table($table)->where('id', $supply->id)->update($data_update);
+                            $update = getModelByTable($table)->where('id', $supply->id)->update($data_update);
                         }
                     }
                 }
             }
             if (!empty($update)) {
+                $arr_update = ['status' => Order::MAKING_PROCESS];
+                $table_data->update($arr_update);
+                if (checkUpdateeOrderStatus($obj_order->order, Order::MAKING_PROCESS)) {
+                    Order::where('id', $obj_order->order)->update($arr_update);
+                }
                 return returnMessageAjax(200, 'Đã gửi lệnh sản xuất xuống xưởng !');
             }else{
                 return returnMessageAjax(100, 'Đã có lỗi xảy ra, vui lòng thử lại !');

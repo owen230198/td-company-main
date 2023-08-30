@@ -216,6 +216,7 @@ return [
         'OrderConst' => App\Constants\OrderConstant::class,
         'GroupUser' => App\Models\NGroupUser::class,
         'User' => App\Models\NUser::class,
+        'Worker' => App\Models\Wuser::class,
         'BaseService' => App\Services\BaseService::class
     ])->toArray(),
 
