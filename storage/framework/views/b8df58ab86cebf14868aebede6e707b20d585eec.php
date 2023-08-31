@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
         <title><?php echo e(@$title ?? 'Chấm công - công nhân'); ?></title>
-        <base href="<?php echo e(url('Worker/')); ?>">
+        <base href="<?php echo e(url('Worker')); ?>">
         <link rel="icon" type="image/x-icon" href="<?php echo e(asset('frontend/admin/images/logo.png')); ?>">
         <link rel="stylesheet" href="<?php echo e(asset('frontend/base/css/bootstrap.min.css')); ?>" />
         <link rel="stylesheet" href="<?php echo e(asset('frontend/base/css/font-awesome.min.css')); ?>" />

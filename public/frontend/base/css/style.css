@@ -649,3 +649,11 @@ input[type="checkbox"].toggle:disabled::after {
 .bg_grey{
   background: #ebebeb;
 }
+
+.box_shadow_3{
+  box-shadow: 1px 1px 3px #333;
+}
+
+.min_150{
+  min-width: 150px;
+}

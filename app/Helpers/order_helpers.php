@@ -225,3 +225,31 @@
             }
         }
     }
+
+    if (!function_exists('getSupplyNameByKey')) {
+        function getSupplyNameByKey($key) {
+            switch ($key) {
+                case \TDConst::CARTON:
+                    return 'Vật tư carton';
+                    break;
+                case \TDConst::RUBBER:
+                    return 'Cao su non';
+                    break;
+                case \TDConst::STYRO:
+                    return 'Mút xốp';
+                    break;
+                case \TDConst::DECAL:
+                    return 'Đề can nhung';
+                    break;
+                case \TDConst::SILK:
+                    return 'Vải lụa';
+                    break;
+                case \TDConst::MICA:
+                    return 'Vật tư mica';
+                    break;
+                default:
+                    return "";
+                    break;
+            }
+        }
+    }

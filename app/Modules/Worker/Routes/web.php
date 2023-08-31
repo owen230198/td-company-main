@@ -7,5 +7,6 @@ Route::prefix('Worker')->group(function()
     Route::any('logout', [AuthController::class, 'logout']);
     Route::middleware(['WorkerAuth'])->group(function () {
         Route::get('', [WorkerController::class, 'index']);
+        Route::any('action-command/{action}', [WorkerController::class, 'actionCommand']);
     });
 });

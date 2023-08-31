@@ -12,4 +12,5 @@ class StatusConstant
     const NOT_ACCEPTED = 'not_accepted';
     const ACCEPTED = 'accepted';
     const SUBMITED = 'submited';
+    const PROCESSING = 'processing';
 }

@@ -219,9 +219,9 @@ if (!function_exists('getCountDataTable')) {
 }
 
 if (!function_exists('isHome')) {
-    function isHome()
+    function isHome($module = '')
     {
-        return url()->current() == url('');
+        return url()->current() == url($module);
     }
 }
 

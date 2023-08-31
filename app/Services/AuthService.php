@@ -16,7 +16,7 @@ class AuthService extends BaseService
     {
     	$this->validatelogin($request);
         $request = $request->all();
-        $user = $this->table_user->where('act', 1)->where('username', $request['username'])->first();
+        $user = $this->table_user->where('act', 1)->where('username', $request['username'])->first()->toArray();
         if (!$user) {
             return $this->returnMessage(100, ['messages'=>'Không tìm thấy tài khoản trên hệ thống!']);
         }

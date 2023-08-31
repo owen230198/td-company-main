@@ -3,7 +3,7 @@
     <div class="row my-4">
         <div class="col-lg-6 border_right_green">
             <div class="main_worker_home">
-                <h3 class="fs-14 text-uppercase border_bot_eb pb-1 mb-1 text-center handle_title color_green">
+                <h3 class="fs-14 text-uppercase border_bot_eb pb-1 mb-1 text-center handle_title color_green mx-auto">
                     Danh sách lệnh 
                     <a href="<?php echo e(url()->current()); ?>"><i class="fa fa-refresh ml-2 fs-14 color_green" aria-hidden="true"></i></a>
                 </h3>   
@@ -31,6 +31,7 @@
                 </div>
             </div>
         </div>
-    </div>       
+    </div> 
+    <?php echo $__env->make('Worker::commands.submit_modal', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>      
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('Worker::index', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\td-company-app\app/Modules/Worker/Views/main.blade.php ENDPATH**/ ?>

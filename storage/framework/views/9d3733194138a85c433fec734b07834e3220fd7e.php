@@ -1,5 +1,5 @@
 <div class="base_table_form_search">
-  <form action="<?php echo e(asset('search-table/'.$tableItem['name'])); ?>" method="GET" class="form-group d-flex align-items-center row mb-0" id="form-search">
+  <form action="<?php echo e(asset('search-table/'.$tableItem['name'])); ?>" method="GET" class="mb-0" id="form-search">
     <?php if(!empty($param_default)): ?>
         <input type="hidden" name="default_data" value='<?php echo e($param_default); ?>'>
     <?php endif; ?>
@@ -18,9 +18,7 @@
           ?>
           <?php echo $__env->make('view_search.'.$type, $field, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>    
         <?php else: ?>
-          <div class="col-4 align-self-center">
-            <?php echo $__env->make('view_search.view', ['field' => $field], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-          </div>
+          <?php echo $__env->make('view_search.view', ['field' => $field], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <?php endif; ?>
     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
   </form>

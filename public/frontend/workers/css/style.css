@@ -54,4 +54,5 @@
 .command_group_btn .button_command{
     padding: 5px 10px;
     flex: 0 0 50%;
+    border-radius: 3px;
 }

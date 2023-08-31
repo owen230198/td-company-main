@@ -3,7 +3,7 @@
     <div class="row my-4">
         <div class="col-lg-6 border_right_green">
             <div class="main_worker_home">
-                <h3 class="fs-14 text-uppercase border_bot_eb pb-1 mb-1 text-center handle_title color_green">
+                <h3 class="fs-14 text-uppercase border_bot_eb pb-1 mb-1 text-center handle_title color_green mx-auto">
                     Danh sách lệnh 
                     <a href="{{ url()->current() }}"><i class="fa fa-refresh ml-2 fs-14 color_green" aria-hidden="true"></i></a>
                 </h3>   

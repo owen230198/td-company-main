@@ -1,5 +1,5 @@
 <div class="base_table_form_search">
-  <form action="{{ asset('search-table/'.$tableItem['name']) }}" method="GET" class="form-group d-flex align-items-center row mb-0" id="form-search">
+  <form action="{{ asset('search-table/'.$tableItem['name']) }}" method="GET" class="mb-0" id="form-search">
     @if (!empty($param_default))
         <input type="hidden" name="default_data" value='{{ $param_default }}'>
     @endif
@@ -18,9 +18,7 @@
           @endphp
           @include('view_search.'.$type, $field)    
         @else
-          <div class="col-4 align-self-center">
-            @include('view_search.view', ['field' => $field])
-          </div>
+          @include('view_search.view', ['field' => $field])
         @endif
     @endforeach
   </form>

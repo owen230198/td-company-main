@@ -144,7 +144,7 @@ trait QuoteTrait
         $ex_width = self::$width;
         $printer = \App\Models\Printer::where('device', $device)
         ->where('print_length', '>=', $ex_length)
-        ->where('print_width','>=', $ex_width)->orderBy('print_length', 'asc')->first();
+        ->where('print_width', '>=', $ex_width)->orderBy('print_length', 'asc')->first();
         return $printer;
     }
 
