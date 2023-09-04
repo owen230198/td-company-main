@@ -19,7 +19,7 @@
     </head>
     <body>
         <?php echo $__env->make('Worker::header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-        <div class="container h-100">
+        <div class="container main_worker_content">
             <?php echo $__env->yieldContent('content'); ?>
         </div>
         <?php echo $__env->make('Worker::footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>

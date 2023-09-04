@@ -1,6 +1,6 @@
 @extends('Worker::index')
 @section('content')
-    <div class="row my-4">
+    <div class="row my-4 pb-3">
         <div class="col-lg-6 border_right_green mb-lg-0 mb-3">
             <div class="bg_eb radius_5 box_shadow_3 h-100 p-3 text-center">
                 <h3 class="fs-14 text-uppercase border_bot pb-1 mb-3 text-center handle_title color_green mx-auto">Thông tin đơn</h3>   
@@ -52,7 +52,7 @@
         </div>
     </div> 
     @include('Worker::commands.submit_modal')
-    <div class="text-center">
+    <div class="group_btn_worker_form text-center">
         @if (workerCommandIsProcessing($data_command))
             <button 
             type="button" data-toggle="modal" data-target="#worker-submit-modal"

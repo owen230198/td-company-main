@@ -17,7 +17,10 @@ use Illuminate\Http\Request;
             $data['title'] = 'Chấm công '.getDeviceGroupName($worker['type'], $worker['device']);
             $data['list_data'] = $this->services->getListDataHome($worker);
             $data['worker'] = $worker;
-            $data['item_command'] =  checkKeyWorkerExcept($worker['type']) ? $worker['type'] : 'base';
+            $worker_type = $worker['type'];
+            $list_my_command = getDataWorkerCommand($worker_type, ['status' => \StatusConst::PROCESSING, 'worker_process' => $worker['id']]);
+            $data['my_command'] = !empty($list_my_command[0]) ? $list_my_command[0] : '';
+            $data['item_command'] =  checkKeyWorkerExcept($worker_type) ? $worker_type : 'base';
             return view('Worker::main', $data);
         }
 
@@ -40,7 +43,7 @@ use Illuminate\Http\Request;
                     return $this->services->detailCommand($data_command, $worker);
                     break;
                 case 'submit':
-                    return $this->services->submitCommand($obj_command, $data_command, $worker);
+                    return $this->services->submitCommand($obj_command, $data_command, $worker, (int) $request->input('qty'));
                     break;
                 default:
                     return customReturnMessage(false, $is_ajax, ['message' => 'Thao tác không hợp lệ !']);

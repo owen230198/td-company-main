@@ -15,6 +15,12 @@
                 </button>
             </form>
             <div class="list_worker_command">
+                <?php if(!empty($my_command)): ?>
+                <a href="<?php echo e(url('Worker/action-command/detail?table='.@$my_command->table.'&id='.@$my_command->id)); ?>" 
+                    class="d-block px-3 py-2 bg_red color_white smooth  font_bold smooth text-center radius_5 box_shadow_3 mb-4">
+                    <i class="fa fa-id-card-o fs-14 mr-1" aria-hidden="true"></i> Lệnh đang nhận
+                </a>
+                <?php endif; ?>
                 <div class="row row-10">
                     <?php if(!empty($list_data)): ?>
                         <?php $__currentLoopData = $list_data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -31,7 +37,6 @@
                 </div>
             </div>
         </div>
-    </div> 
-    <?php echo $__env->make('Worker::commands.submit_modal', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>      
+    </div>       
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('Worker::index', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\td-company-app\app/Modules/Worker/Views/main.blade.php ENDPATH**/ ?>

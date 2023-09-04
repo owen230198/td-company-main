@@ -15,6 +15,12 @@
                 </button>
             </form>
             <div class="list_worker_command">
+                @if (!empty($my_command))
+                <a href="{{ url('Worker/action-command/detail?table='.@$my_command->table.'&id='.@$my_command->id) }}" 
+                    class="d-block px-3 py-2 bg_red color_white smooth  font_bold smooth text-center radius_5 box_shadow_3 mb-4">
+                    <i class="fa fa-id-card-o fs-14 mr-1" aria-hidden="true"></i> Lệnh đang nhận
+                </a>
+                @endif
                 <div class="row row-10">
                     @if (!empty($list_data))
                         @foreach ($list_data as $item)

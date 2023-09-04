@@ -17,8 +17,7 @@
                         <label class="mb-0 min_150 fs-13 text-capitalize justify-content-end mr-3 d-flex mt-1">
                             Số lượng hoàn thành
                         </label>
-                        <input type="number" class="form-control" min="1" value=""
-                            placeholder="Hoàn thành hết">
+                        <input type="number" name="qty" class="form-control" min="1" value="<?php echo e(@$data_handle['supp_qty'] ?? @$data_handle['product_qty']); ?>" placeholder="Hoàn thành hết">
                     </div>
                 </div>
                 <div class="modal-footer">

@@ -58,11 +58,20 @@ class WorkerService extends BaseService
         return view('Worker::commands.view', $data);
     }
 
-    public function submitCommand($obj, $data_commad, $worker){
+    public function submitCommand($obj, $data_commad, $worker, $qty){
         $worker_id = $worker['id'];
         if ($data_commad->worker_process != $worker_id) {
             return returnMessageAjax(100, 'Chấm công không thành công, Lệnh này không phải của bạn !');
         }
+        if($data_commad->status != \StatusConst::PROCESSING){
+            return returnMessageAjax(100, 'Dữ liệu không hợp lệ !');
+        }
+        if (empty($qty)) {
+            return returnMessageAjax(100, 'Số lượng chấm công không hợp lệ !');
+        }
         $type = $worker['type'];
+        if ($type == \TDConst::PRINT) {
+            
+        }
     }
 }

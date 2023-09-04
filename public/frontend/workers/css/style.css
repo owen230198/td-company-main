@@ -56,3 +56,17 @@
     flex: 0 0 50%;
     border-radius: 3px;
 }
+
+.main_worker_content{
+    padding-bottom: 65px;
+    position: relative;
+}
+
+.group_btn_worker_form{
+    position: fixed;
+    bottom: 45px;
+    left: 0;
+    width: 100%;
+    background: #cfcdcd;
+    padding: 5px 15px;
+}

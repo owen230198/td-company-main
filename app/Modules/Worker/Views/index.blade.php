@@ -19,7 +19,7 @@
     </head>
     <body>
         @include('Worker::header')
-        <div class="container h-100">
+        <div class="container main_worker_content">
             @yield('content')
         </div>
         @include('Worker::footer')
