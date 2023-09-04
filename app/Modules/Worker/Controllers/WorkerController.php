@@ -29,6 +29,7 @@ use Illuminate\Http\Request;
             $id = $request->input('id');
             $obj_command = \DB::table($table)->where('id', $id);
             $data_command = $obj_command->first();
+            $data_command->table = $table;
             $worker  = \Worker::getCurrent();
             $is_ajax = $request->isMethod('POST');
             if (empty($table) || empty($id) || empty($data_command)) {
@@ -39,7 +40,6 @@ use Illuminate\Http\Request;
                     return $this->services->receiveCommad($obj_command, $data_command, $worker);
                     break;
                 case 'detail':
-                    $data_command->table = $table;
                     return $this->services->detailCommand($data_command, $worker);
                     break;
                 case 'submit':

@@ -7,10 +7,10 @@ class BaseService
         $this->regions = new \App\Models\NRegion;
  	}
 
-	public function configBaseDataAction(&$data)
+	public function configBaseDataAction(&$data, $key_login = 'user_login')
 	{
 		if (empty($data['id'])) {
-			$data['created_by'] = @getSessionUser()['id'];
+			$data['created_by'] = @getSessionUser($key_login)['id'];
 			$data['created_at'] = date('Y-m-d H:i:s', Time());
 			$data['act'] = isset($data['act']) ? $data['act'] : 1;
 		}

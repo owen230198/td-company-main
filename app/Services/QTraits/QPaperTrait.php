@@ -1,6 +1,8 @@
 <?php  
 namespace App\Services\QTraits;
-use App\Constants\TDConstant;
+
+use App\Models\Paper;
+
 trait QPaperTrait
 {
 	private function configDataSizePaper($paper)
@@ -27,13 +29,13 @@ trait QPaperTrait
         $plus_paper_device = (int) getDataConfig('QuoteConfig', 'PLUS_PAPER_DEVICE');
         $supp_qty = self::$base_supp_qty - $subtract_paper + $plus_paper_device;
         $device = $this->getPriterDevice($device_id);
-        $model_price = !empty($device['model_price']) ? (int) $device['model_price'] : 0;
-        $work_price = !empty($device['work_price']) ? (int) $device['work_price'] : 0;
-        $shape_price = !empty($device['shape_price']) ? (int) $device['shape_price'] : 0;
-        if ($color == TDConstant::APLA_PRINT_COLOR) {
+        $model_price = !empty($device['model_price']) ? (float) $device['model_price'] : 0;
+        $work_price = !empty($device['work_price']) ? (float) $device['work_price'] : 0;
+        $shape_price = !empty($device['shape_price']) ? (float) $device['shape_price'] : 0;
+        if ($color == \TDConst::APLA_PRINT_COLOR) {
             $apla_factor = (float) getDataConfig('QuoteConfig', 'APLA_PRICE_FACTOR');
             $apla_plus = (float) getDataConfig('QuoteConfig', 'APLA_PRICE_PLUS');
-            $print_factor = $type == TDConstant::ONE_PRINT_TYPE ? 1 : 2;
+            $print_factor = $type == \TDConst::ONE_PRINT_TYPE ? 1 : 2;
             $apla_price = self::$length * self::$width * $apla_factor * $print_factor;
             $print['print_factor'] = $print_factor;
             $print['apla_factor'] = $apla_factor;
@@ -41,14 +43,7 @@ trait QPaperTrait
             $print['apla_price'] = $apla_price;
             $total = ($supp_qty * $apla_price) + $apla_plus;
         }else{
-            $color_num = (int) $color;
-            if ($type == TDConstant::ONE_PRINT_TYPE) {
-                // Công thức tính chi phí in một mặt: (SL tờ in + tờ cộng thêm khi in) x số màu x DG lượt + (ĐG chỉnh máy x số màu) + (ĐG khuôn mẫu x số màu)
-                $total = $supp_qty * $color_num * $work_price + ($shape_price * $color_num) + ($model_price * $color_num);
-            }else{
-                // Công thức tính chi phí các kiểu in còn lại: (SL tờ in + tờ cộng thêm khi in) x số màu x 2 x DG lượt + ĐG chỉnh máy + ĐG khuôn mẫu
-                $total = $supp_qty * $color_num * 2 * $work_price + $shape_price + $model_price;
-            }
+            $total = Paper::getPrintFormula($type, $supp_qty, (int) $color, $work_price, $shape_price, $model_price);
         }
         $print['supp_qty'] = $supp_qty;
         $print['model_price'] = $model_price;

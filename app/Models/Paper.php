@@ -37,4 +37,15 @@ class Paper extends Model
         }
         return !empty($process);
     }
+
+    static function getPrintFormula($type, $supp_qty, $color_num, $work_price, $shape_price, $model_price = 0)
+    {
+        if ($type == \TDConst::ONE_PRINT_TYPE) {
+            // Công thức tính chi phí in một mặt: (SL tờ in + tờ cộng thêm khi in) x số màu x DG lượt + (ĐG chỉnh máy x số màu) + (ĐG khuôn mẫu x số màu)
+            return $supp_qty * $color_num * $work_price + ($shape_price * $color_num) + ($model_price * $color_num);
+        }else{
+            // Công thức tính chi phí các kiểu in còn lại: (SL tờ in + tờ cộng thêm khi in) x số màu x 2 x DG lượt + ĐG chỉnh máy + ĐG khuôn mẫu
+            return $supp_qty * $color_num * 2 * $work_price + $shape_price + $model_price;
+        }
+    }
 }

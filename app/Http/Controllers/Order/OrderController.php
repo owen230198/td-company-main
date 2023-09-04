@@ -292,13 +292,15 @@ class OrderController extends Controller
                 return returnMessageAjax(110, 'DỮ liệu trạng thái đơn hàng không hợp lệ !');
             }
             $elements = getProductElementData($obj_order->category, $obj_order->id, true);
+            $count = -1;
             foreach ($elements as $element) {
                 if (!empty($element['data'])) {
-                    foreach ($element['data'] as $key => $supply) {
+                    foreach ($element['data'] as $supply) {
                         $table = $element['table'];
                         $data_update = getStageActiveStartHandle($table, $supply->id);
                         if (!empty($data_update)) {
-                            $data_update['code'] =  $obj_order->code.getCharaterByNum($key);
+                            $count++;
+                            $data_update['code'] =  $obj_order->code.getCharaterByNum($count);
                             $update = getModelByTable($table)->where('id', $supply->id)->update($data_update);
                         }
                     }

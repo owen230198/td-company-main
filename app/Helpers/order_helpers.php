@@ -209,8 +209,11 @@
     }
 
     if (!function_exists('getStageActiveStartHandle')) {
-        function getStageActiveStartHandle($table, $id){
+        function getStageActiveStartHandle($table, $id, $except = ''){
             $arr_select = getArrHandleField($table);
+            if (!empty($except)) {
+                unset($arr_select[$except]);
+            }
             $data = \DB::table($table)->select($arr_select)->find($id);
             foreach ($data as $key => $value) {
                 $data_value = json_decode($value, true);

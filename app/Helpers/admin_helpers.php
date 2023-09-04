@@ -97,9 +97,9 @@ if (!function_exists('getActionByKey')) {
 }
 
 if (! function_exists('getSessionUser')) {
-    function getSessionUser()
+    function getSessionUser($key)
     {
-        $user_login = session('user_login');
+        $user_login = session($key);
         $admin = @$user_login['user']?$user_login['user']:array();
         return $admin;
     }
