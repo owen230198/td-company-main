@@ -26,18 +26,10 @@
             <div class="bg_eb radius_5 box_shadow_3 h-100 p-3 text-center">
                 <h3 class="fs-14 text-uppercase border_bot pb-1 mb-3 text-center handle_title color_green mx-auto">Thông tin sản xuất</h3>
                 @include('Worker::commands.view_types.'.$view_type.'.view') 
-                @if (!empty($data_handle['product_qty']))
-                    <p class="d-flex align-items-center color_green mb-2">
-                        <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
-                        Số lượng SP : <strong class="color_main ml-1">{{ $data_handle['product_qty'] }}.</strong>
-                    </p>    
-                @endif
-                @if (!empty($data_handle['supp_qty']))
-                    <p class="d-flex align-items-center color_green mb-2">
-                        <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
-                        Số lượng vật tư : <strong class="color_main ml-1">{{ $data_handle['supp_qty'] }}.</strong>
-                    </p>    
-                @endif
+                <p class="d-flex align-items-center color_green mb-2">
+                    <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
+                    Số lượng : <strong class="color_main ml-1">{{ $data_handle['handle_qty'] }}.</strong>
+                </p> 
                 <p class="d-flex align-items-center color_green mb-2">
                     <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
                     Loại thiết bị : <strong class="color_main ml-1">{{ getTextMachineType($view_type, @$data_command->machine_type) }}.</strong>

@@ -2,6 +2,7 @@
 namespace App\Modules\Worker\Services;
 use App\Services\BaseService;
 use App\Models\WSalary;
+use App\Models\Product;
 
 class WorkerService extends BaseService
 {
@@ -33,7 +34,7 @@ class WorkerService extends BaseService
         $worker_id = $worker['id'];
         $type = $worker['type'];
         if (getDataWorkerCommand($type, ['worker_process' => $worker_id], true) > 0) {
-            return returnMessageAjax(100, 'Bạn cần hoàn thành lệnh đã nhận trước khi nhận lệnh mới !');
+            return returnMessageAjax(100, 'Bạn cần hoàn thành lệnh trước khi nhận lệnh mới !');
         }
         if ($data_command->status != $type || $data_command->machine_type != $worker['device']) {
             return returnMessageAjax(100, 'Bạn không thuộc tổ máy có thể nhận lệnh !');
@@ -69,9 +70,8 @@ class WorkerService extends BaseService
         }
         $type = $worker['type'];
         $data_handle = !empty($data_command->{$type}) ? json_decode($data_command->{$type}, true) : [];
-        $key_handel_qty = !empty($data_handle['supp_qty']) ? 'supp_qty' : 'product_qty';
-        $handle_qty = !empty($data_handle[$key_handel_qty]) ? $data_handle[$key_handel_qty] : 0;
-        if (empty($qty) || $qty > $handle_qty) {
+        $handle_qty = !empty($data_handle['handle_qty']) ? $data_handle['handle_qty'] : 0;
+        if ($qty > $handle_qty) {
             return returnMessageAjax(100, 'Số lượng chấm công không hợp lệ !');
         }
         $obj_salary = new WSalary($data_command, $data_handle, $worker);  
@@ -79,13 +79,17 @@ class WorkerService extends BaseService
             $data_insert = $obj_salary->getPrintSalary($qty, $type);      
         }
         $data_update['worker_process'] = 0;
+        $next_stage = getStageActiveStartHandle($data_command->table, $data_command->id, $type);
+        $data_update['status'] = @$next_stage['status'];
         if ($qty < $handle_qty) {
-            $data_update['status'] = $type;
-            $data_handle[$key_handel_qty] = $handle_qty - $qty;
+            if ((int) $qty == 0) {
+                $data_update['status'] = $type;
+            }
+            $data_handle['handle_qty'] = $handle_qty - $qty;
             
         }else{
+            $data_handle['handle_qty'] = 0;
             $data_handle['act'] = 2;
-            $data_update['status'] = getStageActiveStartHandle($data_command->table, $data_command->id, $type);
         }
         $data_update[$type] = json_encode($data_handle);
         $update = $obj->update($data_update);
@@ -97,6 +101,9 @@ class WorkerService extends BaseService
             $this->configBaseDataAction($data_insert, 'worker_login');
             $insert = \DB::table('w_salaries')->insert($data_insert);
             if ($insert) {
+                if ($data_update['status'] == \StatusConst::SUBMITED) {
+                    Product::checkStatusUpdate($data_command->product, \StatusConst::SUBMITED);
+                }
                 return returnMessageAjax(200, 'Bạn đã chấm công thành công với số lượng : '.$qty.' !', url('Worker'));
             }else{
                 return returnMessageAjax(100, 'Có lỗi xảy ra, vui lòng thử chấm công lại !');     

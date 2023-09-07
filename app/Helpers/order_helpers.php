@@ -214,7 +214,9 @@
             if (!empty($except)) {
                 unset($arr_select[$except]);
             }
+            dd($arr_select);
             $data = \DB::table($table)->select($arr_select)->find($id);
+            $ret['status'] = \StatusConst::SUBMITED;
             foreach ($data as $key => $value) {
                 $data_value = json_decode($value, true);
                 if (@$data_value['act'] == 1) {

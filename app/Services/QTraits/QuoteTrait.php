@@ -57,6 +57,7 @@ trait QuoteTrait
             unset($elevate['float']);
         }
         $elevate['supp_qty'] = self::$supp_qty;
+        $elevate['handle_qty'] = self::$supp_qty;
         $elevate['cost'] = $cost;
         $total = $cost + $float_cost + $ext_price;
         return $this->getObjectConfig($elevate, $total);
@@ -66,6 +67,7 @@ trait QuoteTrait
    {
       $total = $this->getBaseTotalStage(self::$supp_qty, $model_price, $work_price, $shape_price);
       $cut['supp_qty'] = self::$supp_qty;
+      $cut['handle_qty'] = self::$supp_qty;
       return $this->getObjectConfig($cut, $total);
    }
 
@@ -73,6 +75,7 @@ trait QuoteTrait
     {
         $nqty = !empty($data['nqty']) ? (int) $data['nqty'] : 1;
         $data['qty_pro'] = self::$qty_pro;
+        $data['handle_qty'] = self::$qty_pro;
         if ($nqty > 1) {
             $data['nqty'] = $nqty;
         }

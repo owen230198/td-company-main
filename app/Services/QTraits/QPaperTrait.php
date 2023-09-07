@@ -46,6 +46,7 @@ trait QPaperTrait
             $total = Paper::getPrintFormula($type, $supp_qty, (int) $color, $work_price, $shape_price, $model_price);
         }
         $print['supp_qty'] = $supp_qty;
+        $print['handle_qty'] = $supp_qty;
         $print['model_price'] = $model_price;
         $print['work_price'] = $work_price;
         $print['shape_price'] = $shape_price;
@@ -61,6 +62,7 @@ trait QPaperTrait
         $total = $this->getBaseTotalStage(self::$supp_qty, $model_price, $work_price, $shape_price, $materal_cost, $num_face);
         // $total = $length*$width*$materal_cost*$supp_qty*$num_face+$shape_price;
         $uv_nilon['supp_qty'] = self::$supp_qty;
+        $uv_nilon['handle_qty'] = self::$supp_qty;
         $uv_nilon['materal_price'] = $materal_cost;
         return $this->getObjectConfig($uv_nilon, $total);
     }
@@ -75,6 +77,7 @@ trait QPaperTrait
         $total_metalai = $this->getBaseTotalStage($supp_qty, $model_price, $work_price, $shape_price, $materal_cost, 
         $num_face);
         $metalai['supp_qty'] = $supp_qty;
+        $metalai['handle_qty'] = $supp_qty;
         $metalai['cover_supp_qty'] = $supp_qty;
         $metalai['materal_price'] = $materal_cost;
         $metalai['metalai_price'] = $total_metalai;
@@ -96,8 +99,10 @@ trait QPaperTrait
     {
         $price = !empty($compress_float['price']) ? (float)$compress_float['price'] : 0;
         $shape_price = !empty($compress_float['shape_price']) ? (float) $compress_float['shape_price'] : 0;
+        // Công thức tính chi phí ép nhũ - thúc nổi : chi phí cán metalai + chi phí cán phủ trên
         $total = (self::$qty_pro * $price) + (self::$nqty * $shape_price);
         $compress_float['qty_pro'] = self::$qty_pro;
+        $compress_float['handle_qty'] = self::$qty_pro;
         $compress_float['nqty'] = self::$nqty;
         return !empty($get_total) ? $total : $this->getObjectConfig($compress_float, $total);
     }

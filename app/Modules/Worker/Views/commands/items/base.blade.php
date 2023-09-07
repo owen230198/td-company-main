@@ -16,6 +16,10 @@
         </p>
         <p class="d-flex align-items-center color_green mb-2">
             <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
+            Số lượng : {{ @$command['handle_qty'] }}.
+        </p>
+        <p class="d-flex align-items-center color_green mb-2">
+            <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
             Trạng thái : {{ getStatusWorkerCommand($supply) }}.
         </p>
         <p class="d-flex align-items-center color_red mb-2">

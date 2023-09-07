@@ -16,7 +16,7 @@ class AuthService extends BaseService
     {
     	$this->validatelogin($request);
         $request = $request->all();
-        $user = $this->table_user->where('act', 1)->where('username', $request['username'])->first()->toArray();
+        $user = $this->table_user->where('act', 1)->where('username', $request['username'])->first();
         if (!$user) {
             return $this->returnMessage(100, ['messages'=>'Không tìm thấy tài khoản trên hệ thống!']);
         }
@@ -32,7 +32,7 @@ class AuthService extends BaseService
                 $arr = $group_obj::getMenuModule($user['group_user']);
             }
         }
-        $arr['user'] = $user;
+        $arr['user'] = $user->toArray();
         session()->put($this->auth_key, $arr);
         return $this->returnMessage(200, ['messages'=>'Đăng nhập thành công!']);
     }

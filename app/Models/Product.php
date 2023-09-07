@@ -182,6 +182,28 @@
             return !empty($process);
         }
         
+        static function checkStatusUpdate($id, $status)
+        {
+            $bool = true;
+            foreach (self::$childTable as $table) {
+                $data_command = \DB::table($table)->where('product', $id)->get('status');
+                foreach ($data_command as $command) {
+                    if (@$command->status != $status) {
+                        $bool = false;
+                        break;
+                    }
+                }
+            }
+            if ($bool) {
+                $update = Product::where('id', $id)->update(['status' => $status]);
+                if ($update) {
+                    $data_product = Product::find($id);
+                    if (checkUpdateeOrderStatus($data_product->order, $status)) {
+                        Order::where('product', $data_product->order)->update(['status' => $status]);
+                    }
+                }
+            }    
+        }
     }
 
 ?>
