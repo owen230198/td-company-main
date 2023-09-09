@@ -1,13 +1,13 @@
 <p class="d-flex align-items-center color_green mb-2">
     <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
     Loại vật tư gia công : <strong class="color_main ml-1">
-        {{ !empty($data_command->type) ? getSupplyNameByKey($data->command->type) : @$data_command->name }}.
+        {{ !empty($supply->type) ? getSupplyNameByKey($supply->type) : @$supply->name }}.
     </strong>
 </p>
 <ul class="d-flex flex-wrap">
     @foreach ($all_devices as $key => $device)
         @php
-            $data_stage = !empty($data_command->{$key}) ? json_decode($data_command->{$key}, true) : [];
+            $data_stage = !empty($supply->{$key}) ? json_decode($supply->{$key}, true) : [];
         @endphp
         @if (!empty($data_stage))
             @php
@@ -20,3 +20,10 @@
         @endif
     @endforeach 
 </ul> 
+
+@foreach ($data_handle as $handle)
+    <p class="d-flex align-items-center color_green mb-2">
+        <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
+        {{ @$handle['name'] }} : <strong class="color_main ml-1">{{ $handle['value'] }}.</strong>
+    </p>
+@endforeach

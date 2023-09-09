@@ -6,7 +6,7 @@ var workerReceiveCommand = function()
         let id = $(this).data('id');
         $('#loader').fadeIn(200);
         $.ajax({
-            url: getBaseRoute('action-command/receive?table='+table+'&id='+id),
+            url: getBaseRoute('action-command/receive?id='+id),
             type: 'POST'
         }).done(function(data){
             let title = data.code == 200 ? 'Thành công' : 'Không thành công';

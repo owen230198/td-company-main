@@ -202,7 +202,8 @@
                         Order::where('product', $data_product->order)->update(['status' => $status]);
                     }
                 }
-            }    
+            }
+            return true;    
         }
     }
 

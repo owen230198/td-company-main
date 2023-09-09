@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\Quote;
 use App\Models\SupplyWarehouse;
 use App\Models\Product;
+use App\Models\WSalary;
 
 class OrderController extends Controller
 {
@@ -296,12 +297,16 @@ class OrderController extends Controller
             foreach ($elements as $element) {
                 if (!empty($element['data'])) {
                     foreach ($element['data'] as $supply) {
-                        $table = $element['table'];
-                        $data_update = getStageActiveStartHandle($table, $supply->id);
+                        $table_supply = $element['table'];
+                        $data_command = getStageActiveStartHandle($table_supply, $supply->id);
+                        $data_update['status'] = $data_command['type'];
                         if (!empty($data_update)) {
                             $count++;
                             $data_update['code'] =  $obj_order->code.getCharaterByNum($count);
-                            $update = getModelByTable($table)->where('id', $supply->id)->update($data_update);
+                            $update = getModelByTable($table_supply)->where('id', $supply->id)->update($data_update);
+                            if ($data_command['type'] != \StatusConst::SUBMITED && $update && !empty($data_command['handle'])) {
+                                WSalary::CommandStarted($data_update['code'], $data_command, $table_supply, $supply); 
+                            }
                         }
                     }
                 }

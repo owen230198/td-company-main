@@ -24,12 +24,14 @@
                 <div class="row row-10">
                     <?php if(!empty($list_data)): ?>
                         <?php $__currentLoopData = $list_data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <?php if(!empty($item->{$worker['type']})): ?>
-                                <?php
-                                    $data = json_decode($item->{$worker['type']}, true);
-                                ?>
+                            <?php
+                                $supply = \DB::table($item->table_supply)->find($item->supply);
+                                $data_handle = !empty($supply->{$worker['type']}) ? json_decode($supply->{$worker['type']}, true) : [];
+                            ?>
+                            <?php if(!empty($data_handle)): ?>
                                 <div class="col-lg-6 mb_20">
-                                    <?php echo $__env->make('Worker::commands.items/'.$item_command, ['supply' => $item, 'command' => $data, 'key_type' => $worker['type']], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                                    <?php echo $__env->make('Worker::commands.items/'.$item_command, 
+                                    ['supply' => $supply, 'handle' => $data_handle, 'key_type' => $worker['type'], 'command' => $item], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                                 </div>
                             <?php endif; ?>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>  

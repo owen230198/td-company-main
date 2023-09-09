@@ -212,15 +212,16 @@
         function getStageActiveStartHandle($table, $id, $except = ''){
             $arr_select = getArrHandleField($table);
             if (!empty($except)) {
-                unset($arr_select[$except]);
+                $slice = (int) array_search($except, $arr_select) + 1;
+                $arr_select = array_slice($arr_select,$slice);
             }
-            dd($arr_select);
             $data = \DB::table($table)->select($arr_select)->find($id);
-            $ret['status'] = \StatusConst::SUBMITED;
+            $ret['type'] = \StatusConst::SUBMITED;
             foreach ($data as $key => $value) {
                 $data_value = json_decode($value, true);
                 if (@$data_value['act'] == 1) {
-                    $ret['status'] = $key;
+                    $ret['type'] = $key;
+                    $ret['handle'] = $data_value;
                     if (!empty($data_value['machine'])) {
                         $ret['machine_type'] = $key == \TDConst::PRINT ? $data_value['machine'] : getFieldDataById('type', 'devices', $data_value['machine']); 
                     }
@@ -228,6 +229,7 @@
                     break;
                 }
             }
+            return $ret;
         }
     }
 
@@ -256,5 +258,33 @@
                     return "";
                     break;
             }
+        }
+    }
+
+    if (!function_exists('getIconByStageHandle')) {
+        function getIconByStageHandle($status)
+        {
+            switch ($status) {
+                case 1:
+                    return ['icon' => 'spinner', 'color' => 'main'];
+                    break;
+                case 2:
+                    return ['icon' => 'check', 'color' => 'green'];
+                    break;
+                default:
+                    return ['icon' => 'times', 'color' => 'red'];
+                    break;
+            }     
+        }
+    }
+
+    if (!function_exists('getPrintInfo')) {
+        function getPrintInfo($type, $color, $tech)
+        {
+            return [
+                'type' => \TDConst::PRINT_TYPE[$type], 
+                'color' => \TDConst::PRINT_COLOR[$color],
+                'tech' => \TDConst::PRINT_TECH[$tech]
+            ];
         }
     }

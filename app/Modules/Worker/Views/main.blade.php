@@ -24,12 +24,14 @@
                 <div class="row row-10">
                     @if (!empty($list_data))
                         @foreach ($list_data as $item)
-                            @if (!empty($item->{$worker['type']}))
-                                @php
-                                    $data = json_decode($item->{$worker['type']}, true);
-                                @endphp
+                            @php
+                                $supply = \DB::table($item->table_supply)->find($item->supply);
+                                $data_handle = !empty($supply->{$worker['type']}) ? json_decode($supply->{$worker['type']}, true) : [];
+                            @endphp
+                            @if (!empty($data_handle))
                                 <div class="col-lg-6 mb_20">
-                                    @include('Worker::commands.items/'.$item_command, ['supply' => $item, 'command' => $data, 'key_type' => $worker['type']])
+                                    @include('Worker::commands.items/'.$item_command, 
+                                    ['supply' => $supply, 'handle' => $data_handle, 'key_type' => $worker['type'], 'command' => $item])
                                 </div>
                             @endif
                         @endforeach  

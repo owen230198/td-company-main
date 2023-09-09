@@ -95,13 +95,10 @@ trait QuoteTrait
     {
         // CPVTK: D x R x DGL (1)
         $a = self::$length * self::$width * $model_price;
-
         // DGVT: D x R x DGVT x (SL tờ in - sp + BH %) x hệ số (2)
         $b = self::$length * self::$width * $materal_cost * ($qty + $plus_qty) * $factor;
-
         // DGL = (SL tờ in hoặc SL sản phẩm + BH %) x DGL x hệ số (3)
-        $c = $qty * $work_price * $factor;
-        
+        $c = $qty * $work_price * $factor;        
         // Tổng chi phí  = (1) + (2) + ĐGCM + (3);
         return $a + $b + $shape_price + $c;
     }
@@ -154,7 +151,7 @@ trait QuoteTrait
     private function getPriceMateralQuote($id)
     {
         $materal = \App\Models\Materal::find($id);
-        return !empty($materal['price'])? (float) $materal['price'] : 0;
+        return !empty($materal['price']) ? (float) $materal['price'] : 0;
     }
 
     private function createNonActiveObj()
