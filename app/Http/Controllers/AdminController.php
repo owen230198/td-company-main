@@ -234,6 +234,9 @@ class AdminController extends Controller
             $data = $this->admins->getDataActionView($table, 'insert', 'Sao chép', $param);
             $data['dataItem'] = getModelByTable($table)->find($id);
             unset($data['dataItem']['id']);
+            if (!empty($data['dataItem']['password'])) {
+                unset($data['dataItem']['password']);
+            }
             $data['action_url'] = url('insert/'.$table);
             return view('action.view', $data);
         }  

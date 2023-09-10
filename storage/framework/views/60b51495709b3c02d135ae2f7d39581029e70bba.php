@@ -1,6 +1,6 @@
 <div class="item_command overflow_hidden">
     <p class="machine_label color_white bg_red text-uppercase">
-        Thiết bị : <?php echo e(getTextMachineType($key_type, @$supply->machine_type)); ?>
+        Thiết bị : <?php echo e(getTextMachineType($key_type, @$command->machine_type)); ?>
 
         <?php if(!empty($supply->type)): ?>
              - Loại : <?php echo e($supply->type); ?>    

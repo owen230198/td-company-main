@@ -54,10 +54,22 @@ class WSalary extends Model
                 ];
                 break;
             default:
-                $arr =  [['name' => 'Thiết bị máy', 'value' => getFieldDataById('name', 'devices', $handle['machine'])]];
+                $arr =  @$handle['machine'] ? [['name' => 'Thiết bị máy', 'value' => getFieldDataById('name', 'devices', $handle['machine'])]] : [];
                 break;
         }
         return $get_array ? $arr : json_encode($arr);
+    }
+
+    static function getBaseDataDevice($worker, $handle)
+    {
+        $device = !empty($handle['machine']) ? $handle['machine'] : [];
+        $data_device = Device::find($device);
+        $work_price = !empty($data_device['w_work_price']) ? (float) $data_device['w_work_price'] : 0;
+        $shape_price = !empty($data_device['w_shape_price']) ? (float) $data_device['w_shape_price'] : 0;
+        $data['work_price'] = $work_price;
+        $data['shape_price'] = $shape_price;
+        $data['handle'] = self::getHandleDataJson($worker['type'], $handle);
+        return $data;
     }
     
     public function getPrintSalary($paper_qty)
@@ -76,15 +88,11 @@ class WSalary extends Model
 
     public function getNilonSalary($paper_qty)
     {
-        $device = !empty($this->handle['machine']) ? $this->handle['machine'] : [];
-        $data_device = Device::find($device);
-        $work_price = !empty($data_device['w_work_price']) ? (float) $data_device['w_work_price'] : 0;
-        $shape_price = !empty($data_device['w_shape_price']) ? (float) $data_device['w_shape_price'] : 0;
-        $data['work_price'] = $work_price;
-        $data['shape_price'] = $shape_price;
-        $data['handle'] = self::getHandleDataJson($this->worker['type'], $this->handle);
+        $data = self::getBaseDatDevice($this->worker, $this->handle);
         $data['supp_type'] = @$this->command->name;
-        $data['total'] = Paper::getNilonFomula();
+        $face_num = (int) @$this->handle['face'];
+        $data['total'] = $paper_qty * $data['work_price'] * $face_num + $data['shape_price'];
+        return $data;
     }
 
     static function commandStarted($code, $data_command, $table_supply, $supply)
@@ -105,7 +113,7 @@ class WSalary extends Model
 
     static function checkStatusUpdate($table, $id, $status)
     {
-        $list_command = WSalary::where(['table_supply' => $table, 'supply_id' => $id])->get();
+        $list_command = WSalary::where(['table_supply' => $table, 'supply' => $id])->get();
         $bool = true;
         foreach ($list_command as $command) {
             if (@$command->status != $status) {

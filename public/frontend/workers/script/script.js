@@ -2,7 +2,6 @@ var workerReceiveCommand = function()
 {
     $(document).on('click', '.__worker_receive_btn', function(event){
         event.preventDefault();
-        let table = $(this).data('table');
         let id = $(this).data('id');
         $('#loader').fadeIn(200);
         $.ajax({
@@ -25,7 +24,7 @@ var workerReceiveCommand = function()
                 }).then((value) => {
                   switch (value) {
                     case "received":
-                      window.location = getBaseRoute('action-command/detail?table='+table+'&id='+id);
+                      window.location = getBaseRoute('action-command/detail?id='+id);
                       break;
                     default:
                       window.location.reload();	

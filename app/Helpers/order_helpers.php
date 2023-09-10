@@ -217,16 +217,18 @@
             }
             $data = \DB::table($table)->select($arr_select)->find($id);
             $ret['type'] = \StatusConst::SUBMITED;
-            foreach ($data as $key => $value) {
-                $data_value = json_decode($value, true);
-                if (@$data_value['act'] == 1) {
-                    $ret['type'] = $key;
-                    $ret['handle'] = $data_value;
-                    if (!empty($data_value['machine'])) {
-                        $ret['machine_type'] = $key == \TDConst::PRINT ? $data_value['machine'] : getFieldDataById('type', 'devices', $data_value['machine']); 
+            if (!empty($data)) {
+                foreach ($data as $key => $value) {
+                    $data_value = json_decode($value, true);
+                    if (@$data_value['act'] == 1) {
+                        $ret['type'] = $key;
+                        $ret['handle'] = $data_value;
+                        if (!empty($data_value['machine'])) {
+                            $ret['machine_type'] = $key == \TDConst::PRINT ? $data_value['machine'] : getFieldDataById('type', 'devices', $data_value['machine']); 
+                        }
+                        return $ret;
+                        break;
                     }
-                    return $ret;
-                    break;
                 }
             }
             return $ret;

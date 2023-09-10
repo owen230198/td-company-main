@@ -304,7 +304,7 @@ class OrderController extends Controller
                             $count++;
                             $data_update['code'] =  $obj_order->code.getCharaterByNum($count);
                             $update = getModelByTable($table_supply)->where('id', $supply->id)->update($data_update);
-                            if ($data_command['type'] != \StatusConst::SUBMITED && $update && !empty($data_command['handle'])) {
+                            if ($data_command['type'] != \StatusConst::SUBMITED && $update && !empty($data_command['handle']['machine'])) {
                                 WSalary::CommandStarted($data_update['code'], $data_command, $table_supply, $supply); 
                             }
                         }
@@ -317,7 +317,7 @@ class OrderController extends Controller
                 if (checkUpdateeOrderStatus($obj_order->order, Order::MAKING_PROCESS)) {
                     Order::where('id', $obj_order->order)->update($arr_update);
                 }
-                return returnMessageAjax(200, 'Đã gửi lệnh sản xuất xuống xưởng !');
+                return returnMessageAjax(200, 'Đã gửi lệnh sản xuất xuống xưởng !', getBackUrl());
             }else{
                 return returnMessageAjax(100, 'Đã có lỗi xảy ra, vui lòng thử lại !');
             }

@@ -1,6 +1,6 @@
 <div class="item_command overflow_hidden">
     <p class="machine_label color_white bg_red text-uppercase">
-        Thiết bị : {{ getTextMachineType($key_type, @$supply->machine_type) }}
+        Thiết bị : {{ getTextMachineType($key_type, @$command->machine_type) }}
         @if (!empty($supply->type))
              - Loại : {{ $supply->type }}    
         @endif

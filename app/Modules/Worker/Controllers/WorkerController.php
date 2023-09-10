@@ -30,10 +30,10 @@ use Illuminate\Http\Request;
             $data_command = $obj_command->find($id);
             $worker  = \Worker::getCurrent();
             $is_ajax = $request->isMethod('POST');
-            $supply = \DB::table($data_command->table_supply)->find($data_command->supply);
-            if (empty($id) || empty($data_command) || empty($supply)) {
+            if (empty($data_command)) {
                 return customReturnMessage(false, $is_ajax, ['message' => 'Dữ liệu không hợp lệ !']);
             }
+            $supply = \DB::table(@$data_command->table_supply)->find(@$data_command->supply);
             switch ($action) {
                 case 'receive':
                     return $this->services->receiveCommad($obj_command, $data_command, $worker);

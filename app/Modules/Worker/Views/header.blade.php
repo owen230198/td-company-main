@@ -11,8 +11,8 @@
     </h3>
 </div>
 <div class="header_worker_nav p-2 bg_grey">
-    @if (!isHome('Worker'))
-        <div class="container">
+    <div class="container">
+        @if (!isHome('Worker'))
             <nav aria-label="breadcrumb" class="breadcrumb_section">
                 <ol class="breadcrumb m-0 p-0">
                     <li class="breadcrumb-item">
@@ -26,17 +26,17 @@
                     <li class="breadcrumb-item active" aria-current="page">{{ @$title }}</li>
                 </ol>
             </nav>
-        </div>
-    @else
-        <ul class="d-flex justify-content-end">
-            <li class="d-inline-block color_green mr-2 pr-2 border_right">
-                <i class="fa fa-user fs-15" aria-hidden="true"></i>
-                <a href="{{ url('change-password/w_users') }}" class="color_green">{{ $worker_login['name'] }}</a>
-            </li>
-            <li class="d-inline-block color_green">
-                <i class="fa fa-sign-out fs-15" aria-hidden="true"></i>
-                <a href="{{ url('Worker/logout') }}" class="color_green">Thoát</a>
-            </li>
-        </ul>
-    @endif
+        @else
+            <ul class="d-flex justify-content-end">
+                <li class="d-inline-block color_green mr-2 pr-2 border_right">
+                    <i class="fa fa-user fs-15" aria-hidden="true"></i>
+                    <a href="{{ url('change-password/w_users') }}" class="color_green">{{ $worker_login['name'] }}</a>
+                </li>
+                <li class="d-inline-block color_green">
+                    <i class="fa fa-sign-out fs-15" aria-hidden="true"></i>
+                    <a href="{{ url('Worker/logout') }}" class="color_green">Thoát</a>
+                </li>
+            </ul>
+        @endif
+    </div>
 </div>

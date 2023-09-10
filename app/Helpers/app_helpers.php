@@ -149,7 +149,7 @@ if (!function_exists('getDataTable')) {
     }
 }
 
-if (!function_exists('')) {
+if (!function_exists('getBoolByCondArr')) {
     function getBoolByCondArr($arr, $data)
     {
         $ret = true;
