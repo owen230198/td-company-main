@@ -32,7 +32,7 @@
             <p class="formula_name font_bold">Chi phí thúc nổi:</p>
             <div class="formula_content d-flex align-items-center">
                 <p class="formula_param mx-2">(SL sản phẩm cả BH x Chi phí thúc nổi 1 SP) + (Số bát x Giá khuôn thúc nổi 1 SP)</p>
-                <p class="font_bold formula_result mr-2"> = (<?php echo e($stage['price']); ?> x <?php echo e($stage['qty_pro']); ?>) x (<?php echo e($stage['nqty']); ?> x <?php echo e($stage['shape_price']); ?>)</p>
+                <p class="font_bold formula_result mr-2"> = (<?php echo e($stage['price']); ?> x <?php echo e($stage['qty_pro']); ?>) + (<?php echo e($stage['nqty']); ?> x <?php echo e($stage['shape_price']); ?>)</p>
                 <p class="font_bold formula_result"> = <?php echo e(number_format(($stage['price'] * $stage['qty_pro']) + ($stage['nqty']) * $stage['shape_price'])); ?>đ</p>
             </div>
         </div>

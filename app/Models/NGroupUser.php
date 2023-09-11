@@ -49,6 +49,11 @@ class NGroupUser extends Model
             'link' => 'list-worker-by-device/machine',
             'group' => 'factory'
         ],
+        'worker_salary' =>[
+            'name' => 'Bảng lương công nhân',
+            'link' => 'view/w_salaries?default_data={"status":"submited"}',
+            'group' => 'factory'
+        ],
         'price_materal' => [
             'name' => 'Đơn giá vật tư sx', 
             'link' => 'config-device-price/supply_types?type=materals', 

@@ -60,12 +60,20 @@ class WSalary extends Model
         return $get_array ? $arr : json_encode($arr);
     }
 
-    static function getBaseDataDevice($worker, $handle)
+    static function getBaseData($handle, $type)
+    {
+        $data['submited_at'] = \Carbon\Carbon::now();
+        $data['handle'] = self::getHandleDataJson($type, $handle);
+        return $data;
+    }
+
+    static function getBaseDatDevice($worker, $handle)
     {
         $device = !empty($handle['machine']) ? $handle['machine'] : [];
         $data_device = Device::find($device);
         $work_price = !empty($data_device['w_work_price']) ? (float) $data_device['w_work_price'] : 0;
         $shape_price = !empty($data_device['w_shape_price']) ? (float) $data_device['w_shape_price'] : 0;
+        $data = self::getBaseData($handle, $worker['type']);
         $data['work_price'] = $work_price;
         $data['shape_price'] = $shape_price;
         $data['handle'] = self::getHandleDataJson($worker['type'], $handle);
@@ -78,10 +86,10 @@ class WSalary extends Model
         $data_printer = Printer::find($printer);
         $work_price = !empty($data_printer['w_work_price']) ? (float) $data_printer['w_work_price'] : 0;
         $shape_price = !empty($data_printer['w_shape_price']) ? (float) $data_printer['w_shape_price'] : 0;
+        $data = self::getBaseData($this->handle, $this->worker['type']);
         $data['work_price'] = $work_price;
         $data['shape_price'] = $shape_price;
-        $data['handle'] = self::getHandleDataJson($this->worker['type'], $this->handle);
-        $data['supp_type'] = @$this->command->name;
+        $data['name'] = @$this->command->name;
         $data['total'] = Paper::getPrintFormula(@$this->handle['type'], $paper_qty, $this->handle['color'], $work_price, $shape_price);
         return $data;
     }
@@ -89,9 +97,28 @@ class WSalary extends Model
     public function getNilonSalary($paper_qty)
     {
         $data = self::getBaseDatDevice($this->worker, $this->handle);
-        $data['supp_type'] = @$this->command->name;
+        $data['name'] = @$this->command->name;
         $face_num = (int) @$this->handle['face'];
-        $data['total'] = $paper_qty * $data['work_price'] * $face_num + $data['shape_price'];
+        $data['total'] = Paper::getNilonMetalaiFormula($paper_qty, $data['work_price'], $face_num, $data['shape_price']);
+        return $data;
+    }
+    public function getMetalaiSalary($paper_qty)
+    {
+        $data = self::getBaseDatDevice($this->worker, $this->handle);
+        $data['name'] = @$this->command->name;
+        $face_num = (int) @$this->handle['face'];
+        $cover_face_num = (int) @$this->handle['cover_face'];
+        $metalai = Paper::getNilonMetalaiFormula($paper_qty, $data['work_price'], $face_num, $data['shape_price']);
+        $cover = Paper::getNilonMetalaiFormula($paper_qty, $data['work_price'], $cover_face_num, $data['shape_price']);
+        $data['total'] = $metalai + $cover;
+        return $data;
+    }
+
+    public function getBaseSalaryPaper($qty_paper)
+    {
+        $data = self::getBaseDatDevice($this->worker, $this->handle);
+        $data['name'] = @$this->command->name;
+        $data['total'] = $qty_paper * $data['work_price'] + $data['shape_price'];
         return $data;
     }
 

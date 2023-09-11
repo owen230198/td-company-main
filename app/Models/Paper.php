@@ -38,6 +38,11 @@ class Paper extends Model
         return !empty($process);
     }
 
+    static function getNilonMetalaiFormula($paper_qty, $work_price, $face_num, $shape_price)
+    {
+        return $paper_qty * $work_price * $face_num + $shape_price;
+    }
+
     static function getPrintFormula($type, $supp_qty, $color_num, $work_price, $shape_price, $model_price = 0)
     {
         if ($type == \TDConst::ONE_PRINT_TYPE) {

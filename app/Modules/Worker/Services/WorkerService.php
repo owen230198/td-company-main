@@ -86,11 +86,11 @@ class WorkerService extends BaseService
                 case \TDConst::NILON:
                     $data_update = $obj_salary->getNilonSalary($qty);
                     break;
-                case \TDConst::COMPRESS:
-                    $data_update = $obj_salary->getCompressSalary($qty);
+                case \TDConst::METALAI:
+                    $data_update = $obj_salary->getMetalaiSalary($qty);
                     break;
-                case \TDConst::UV:
-                    $data_update = $obj_salary->getUvSalary($qty);
+                case in_array($type, [\TDConst::COMPRESS, \TDConst::UV, \TDConst::ELEVATE]):
+                    $data_update = $obj_salary->getBaseSalaryPaper($qty);
                     break;
                 case \TDConst::PEEL:
                     $data_update = $obj_salary->getPeelSalary($qty);
@@ -101,6 +101,7 @@ class WorkerService extends BaseService
             }
             $data_update['status'] = \StatusConst::SUBMITED;
             $data_update['qty'] = $qty;
+            $data_update['submited_at'] = \Carbon\Carbon::now();
         }
         $update = $obj->update($data_update);
         if ($update) {
@@ -109,7 +110,7 @@ class WorkerService extends BaseService
             if ($next_data['type'] != \StatusConst::SUBMITED) {
                 $where = ['table_supply' =>$table_supply, 'supply' => $supply->id, 'type' => $next_data['type'], 'status' => \StatusConst::NOT_ACCEPTED];
                 $exist_command = WSalary::where($where)->first();
-                if ($exist_command->count() == 0) {
+                if (empty($exist_command)) {
                     $next_data['qty'] = $qty;
                     WSalary::commandStarted($data_command->command, $next_data, $table_supply, $supply);
                 }else{

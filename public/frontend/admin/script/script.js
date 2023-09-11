@@ -470,6 +470,24 @@ var selectTypeSuppWarehouse = function()
     })
 }
 
+var selectTypeWorker = function()
+{
+    $(document).on('change', 'select.__worker_select_type', function(event){
+        event.preventDefault();
+        let parent = $(this).closest('.__module_select_type_worker');
+        let value = $(this).val();
+        let url =  getBaseRoute('get-data-json-linking?table=w_users&field_search=name&type='+value);
+        let select_worker = parent.find('select.__worker_select_worker');
+        select_worker.data('url', url);
+        if (!empty(value)) {
+            select_worker.attr('disabled', false);    
+        }else{
+            select_worker.attr('disabled', true);   
+        }
+        initInputModuleAfterAjax(parent);
+    })
+}
+
 $(function () {
     submitActionAjaxForm();
     confirmRemoveData();
@@ -492,4 +510,5 @@ $(function () {
     confirmTakeOutSupply();
     moduleSelectAjaxChild();
     selectTypeSuppWarehouse();
+    selectTypeWorker();
 });

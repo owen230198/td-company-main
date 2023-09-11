@@ -125,11 +125,13 @@ class AdminController extends Controller
     public function listWorkerByDevice(Request $request, $step)
     {
         if (\GroupUser::isAdmin()) {
-            $data['title'] = 'Danh sách tổ máy';
             $data['step'] = $step;
             if ($step == 'machine') {
+                $data['title'] = 'Danh sách tổ máy';
                 $data['list_data'] = \TDConst::ALL_DEVICE_KEY;
             }else{
+                $data['title'] = 'Danh sách nhóm thiết bị';
+                $data['parent_url'] = ['link' => 'list-worker-by-device/machine', 'note' => 'DS tổ máy'];
                 $type = $request->input('type');
                 $data['list_data'] = getDeviceByKeyType($type);
                 if (!empty($data['list_data'][0])) {

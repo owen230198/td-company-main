@@ -46,7 +46,7 @@ trait QPaperTrait
             $total = Paper::getPrintFormula($type, $supp_qty, (int) $color, $work_price, $shape_price, $model_price);
         }
         $print['supp_qty'] = $supp_qty;
-        $print['handle_qty'] = $supp_qty;
+        $print['handle_qty'] = self::$supp_qty;
         $print['model_price'] = $model_price;
         $print['work_price'] = $work_price;
         $print['shape_price'] = $shape_price;
