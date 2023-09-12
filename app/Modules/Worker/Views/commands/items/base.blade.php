@@ -1,9 +1,6 @@
 <div class="item_command overflow_hidden">
     <p class="machine_label color_white bg_red text-uppercase">
-        Thiết bị : {{ getTextMachineType($key_type, @$command->machine_type) }}
-        @if (!empty($supply->type))
-             - Loại : {{ $supply->type }}    
-        @endif
+        {{ getTextMachineType($key_type, @$command->machine_type) }}
     </p>
     <div class="item_command_content p-2">
         <p class="d-flex align-items-center color_green mb-2">
@@ -14,6 +11,12 @@
             <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
             Tên sản phẩm : {{ getFieldDataById('name', 'products', $supply->product) }}.
         </p>
+        @if (!empty(getTextSupply($supply->type)))
+        <p class="d-flex align-items-center color_green mb-2">
+            <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
+            Loại vật tư : {{ getTextSupply($supply->type) }}.
+        </p>  
+        @endif
         <p class="d-flex align-items-center color_green mb-2">
             <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
             Số lượng : {{ @$command->qty }}.

@@ -60,23 +60,24 @@ class WSalary extends Model
         return $get_array ? $arr : json_encode($arr);
     }
 
-    static function getBaseData($handle, $type)
+    private function getBaseData()
     {
+        $data['name'] = !empty($this->command->type) ? $this->command->type : $this->command->name;
         $data['submited_at'] = \Carbon\Carbon::now();
-        $data['handle'] = self::getHandleDataJson($type, $handle);
+        $data['handle'] = self::getHandleDataJson($this->worker['type'], $this->handle);
         return $data;
     }
 
-    static function getBaseDatDevice($worker, $handle)
+    private function getBaseDatDevice()
     {
         $device = !empty($handle['machine']) ? $handle['machine'] : [];
         $data_device = Device::find($device);
         $work_price = !empty($data_device['w_work_price']) ? (float) $data_device['w_work_price'] : 0;
         $shape_price = !empty($data_device['w_shape_price']) ? (float) $data_device['w_shape_price'] : 0;
-        $data = self::getBaseData($handle, $worker['type']);
+        $data = $this->getBaseData();
         $data['work_price'] = $work_price;
         $data['shape_price'] = $shape_price;
-        $data['handle'] = self::getHandleDataJson($worker['type'], $handle);
+        $data['handle'] = self::getHandleDataJson($this->worker['type'], $this->handle);
         return $data;
     }
     
@@ -86,26 +87,23 @@ class WSalary extends Model
         $data_printer = Printer::find($printer);
         $work_price = !empty($data_printer['w_work_price']) ? (float) $data_printer['w_work_price'] : 0;
         $shape_price = !empty($data_printer['w_shape_price']) ? (float) $data_printer['w_shape_price'] : 0;
-        $data = self::getBaseData($this->handle, $this->worker['type']);
+        $data = $this->getBaseData();
         $data['work_price'] = $work_price;
         $data['shape_price'] = $shape_price;
-        $data['name'] = @$this->command->name;
         $data['total'] = Paper::getPrintFormula(@$this->handle['type'], $paper_qty, $this->handle['color'], $work_price, $shape_price);
         return $data;
     }
 
     public function getNilonSalary($paper_qty)
     {
-        $data = self::getBaseDatDevice($this->worker, $this->handle);
-        $data['name'] = @$this->command->name;
+        $data = $this->getBaseDatDevice();
         $face_num = (int) @$this->handle['face'];
         $data['total'] = Paper::getNilonMetalaiFormula($paper_qty, $data['work_price'], $face_num, $data['shape_price']);
         return $data;
     }
     public function getMetalaiSalary($paper_qty)
     {
-        $data = self::getBaseDatDevice($this->worker, $this->handle);
-        $data['name'] = @$this->command->name;
+        $data = $this->getBaseDatDevice();
         $face_num = (int) @$this->handle['face'];
         $cover_face_num = (int) @$this->handle['cover_face'];
         $metalai = Paper::getNilonMetalaiFormula($paper_qty, $data['work_price'], $face_num, $data['shape_price']);
@@ -116,10 +114,15 @@ class WSalary extends Model
 
     public function getBaseSalaryPaper($qty_paper)
     {
-        $data = self::getBaseDatDevice($this->worker, $this->handle);
-        $data['name'] = @$this->command->name;
+        $data = $this->getBaseDatDevice();
         $data['total'] = $qty_paper * $data['work_price'] + $data['shape_price'];
         return $data;
+    }
+
+    public function getBaseSalaryProduct($product_qty)
+    {
+        $data = $this->getBaseDatDevice();
+        $data['total'] = $product_qty * $data['work_price'] + $data['shape_price'];   
     }
 
     static function commandStarted($code, $data_command, $table_supply, $supply)
@@ -134,7 +137,7 @@ class WSalary extends Model
             $insert_command['handle'] = WSalary::getHandleDataJson($insert_command['type'], $data_command['handle']);
         }
         $insert_command['status'] = Order::NOT_ACCEPTED;
-        (new \BaseService)->configBaseDataAction($insert_command, 'worker_login');
+        (new \BaseService)->configBaseDataAction($insert_command);
         return WSalary::insert($insert_command);  
     }
 

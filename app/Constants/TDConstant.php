@@ -169,6 +169,15 @@
         const FINISH = 'finish';
         const MAGNET = 'magnet';
 
+        const ALL_SUPPLY = [
+            self::CARTON => 'Carton',
+            self::RUBBER => 'Cao su non',
+            self::DECAL => 'Đề can nhung',
+            self::SILK => 'Vải lụa',
+            self::STYRO => 'Mút xốp',
+            self::MICA => 'Mica'
+        ];
+
         //Thiết bị máy
         const PAPER_DEVICE = [
                                 self::NILON => 'Máy cán màng',

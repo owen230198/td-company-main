@@ -18,7 +18,7 @@ class WorkerService extends BaseService
         if (!in_array($type, [\TDConst::FILL, \TDConst::FINISH])) {
             $where['machine_type'] = @$worker['device'];
         }
-        return getDataWorkerCommand($where);
+        return getDataWorkerCommand($where, true);
     }
 
     public function receiveCommad($obj, $data_command, $worker)
@@ -33,7 +33,7 @@ class WorkerService extends BaseService
         $worker_id = $worker['id'];
         $type = $worker['type'];
         $arr_status = ['status' => \StatusConst::PROCESSING, 'worker' => $worker_id];
-        if (getDataWorkerCommand($arr_status, true) > 0) {
+        if (getDataWorkerCommand($arr_status, false, true) > 0) {
             return returnMessageAjax(100, 'Bạn cần hoàn thành lệnh trước khi nhận lệnh mới !');
         }
         if ($data_command->type != $type || $data_command->machine_type != $worker['device']) {
@@ -89,14 +89,11 @@ class WorkerService extends BaseService
                 case \TDConst::METALAI:
                     $data_update = $obj_salary->getMetalaiSalary($qty);
                     break;
-                case in_array($type, [\TDConst::COMPRESS, \TDConst::UV, \TDConst::ELEVATE]):
-                    $data_update = $obj_salary->getBaseSalaryPaper($qty);
-                    break;
-                case \TDConst::PEEL:
-                    $data_update = $obj_salary->getPeelSalary($qty);
+                case !isQtyFormulaBySupply($type):
+                    $data_update = $obj_salary->getBaseSalaryProduct($qty);
                     break;
                 default:
-                    return returnMessageAjax(100, 'Lỗi không xác định !');
+                    $data_update = $obj_salary->getBaseSalaryPaper($qty);
                     break;
             }
             $data_update['status'] = \StatusConst::SUBMITED;
@@ -108,13 +105,21 @@ class WorkerService extends BaseService
             $table_supply = $data_command->table_supply;
             $next_data = getStageActiveStartHandle($table_supply, $data_command->supply, $type);
             if ($next_data['type'] != \StatusConst::SUBMITED) {
+                if (isQtyFormulaBySupply($type) && !isQtyFormulaBySupply($next_data['type'])) {
+                    $next_qty = $qty * $supply->nqty;
+                }elseif (!isQtyFormulaBySupply($type) && isQtyFormulaBySupply($next_data['type'])) {
+                    $next_qty = ceil($qty / $supply->nqty);
+                }else{
+                    $next_qty = $qty;
+                }
                 $where = ['table_supply' =>$table_supply, 'supply' => $supply->id, 'type' => $next_data['type'], 'status' => \StatusConst::NOT_ACCEPTED];
                 $exist_command = WSalary::where($where)->first();
                 if (empty($exist_command)) {
-                    $next_data['qty'] = $qty;
+                    $next_data['qty'] = $next_qty;
+                    $next_data['created_by'] = $data_command->created_by;
                     WSalary::commandStarted($data_command->command, $next_data, $table_supply, $supply);
                 }else{
-                    $exist_command->qty = (int) $exist_command->qty + $qty;
+                    $exist_command->qty = (int) $exist_command->qty + $next_qty;
                     $exist_command->save();
                 }
             }
@@ -122,6 +127,7 @@ class WorkerService extends BaseService
                 $re_insert['type'] = $type;
                 $re_insert['machine_type'] = $data_command->machine_type;
                 $re_insert['qty'] = $handle_qty - $qty;
+                $re_insert['created_by'] = $data_command->created_by;
                 WSalary::commandStarted($data_command->command, $re_insert, $table_supply, $supply);
             }
             WSalary::checkStatusUpdate($table_supply, $supply->id, \StatusConst::SUBMITED);

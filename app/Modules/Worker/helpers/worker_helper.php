@@ -1,4 +1,7 @@
 <?php
+
+use App\Constants\TDConstant;
+
 if (!function_exists('checkKeyWorkerExcept')) {
     function checkKeyWorkerExcept($key)
     {
@@ -21,9 +24,12 @@ if (!function_exists('workerCommandIsProcessing')) {
 }
 
 if (!function_exists('getDataWorkerCommand')) {
-    function getDataWorkerCommand($where = [], $get_count = false, $paginate = 50)
+    function getDataWorkerCommand($where = [], $get_obj = false, $get_count = false, $paginate = 50)
     {
         $obj = \DB::table('w_salaries')->where($where);
+        if ($get_obj) {
+            return $obj;
+        }
         if ($get_count) {
             return $obj->count();
         }else{
@@ -39,6 +45,20 @@ if (!function_exists('getDataWorkerCommand')) {
         function getStatusWorkerCommand($supply)
         {
             return workerCommandIsProcessing($supply) ? 'Đang gia công' : 'Chờ tiếp nhận';
+        }
+    }
+
+    if (!function_exists('isQtyFormulaBySupply')) {
+        function isQtyFormulaBySupply($key)
+        {
+            return in_array($key, [\TDConst::PRINT, \TDConst::NILON, \TDConst::METALAI, \TDConst::COMPRESS, \TDConst::UV, \TDConst::ELEVATE, \TDConst::FLOAT, \TDConst::CUT]);
+        }
+    }
+
+    if (!function_exists('getTextSupply')) {
+        function getTextSupply($type)
+        {
+            return @\TDConst::ALL_SUPPLY[$type];
         }
     }
 }

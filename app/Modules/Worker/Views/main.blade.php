@@ -9,7 +9,7 @@
                 </h3>   
             </div> 
             <form action="{{ url()->current() }}" method="GET" class="mt-3 mb-4 form_search position-relative">
-                <input type="text" name="q" value={{ @$key_search }}>
+                <input type="text" name="q" value={{ @$q }}>
                 <button type="submit" class="main_button color_white bg_green border_green radius_5 font_bold smooth">
                     <i class="fa fa-search fs-14" aria-hidden="true"></i>
                 </button>
@@ -36,6 +36,9 @@
                             @endif
                         @endforeach  
                     @endif
+                </div>
+                <div class="paginate_view d-flex align-center justify-content-between mt-3">
+                    {!! $list_data->appends(request()->input())->links('pagination::bootstrap-4') !!}
                 </div>
             </div>
         </div>

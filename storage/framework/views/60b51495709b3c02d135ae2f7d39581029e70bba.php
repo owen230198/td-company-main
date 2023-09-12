@@ -1,10 +1,7 @@
 <div class="item_command overflow_hidden">
     <p class="machine_label color_white bg_red text-uppercase">
-        Thiết bị : <?php echo e(getTextMachineType($key_type, @$command->machine_type)); ?>
+        <?php echo e(getTextMachineType($key_type, @$command->machine_type)); ?>
 
-        <?php if(!empty($supply->type)): ?>
-             - Loại : <?php echo e($supply->type); ?>    
-        <?php endif; ?>
     </p>
     <div class="item_command_content p-2">
         <p class="d-flex align-items-center color_green mb-2">
@@ -15,6 +12,12 @@
             <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
             Tên sản phẩm : <?php echo e(getFieldDataById('name', 'products', $supply->product)); ?>.
         </p>
+        <?php if(!empty(getTextSupply($supply->type))): ?>
+        <p class="d-flex align-items-center color_green mb-2">
+            <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
+            Loại vật tư : <?php echo e(getTextSupply($supply->type)); ?>.
+        </p>  
+        <?php endif; ?>
         <p class="d-flex align-items-center color_green mb-2">
             <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
             Số lượng : <?php echo e(@$command->qty); ?>.

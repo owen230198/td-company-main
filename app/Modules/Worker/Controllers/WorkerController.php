@@ -11,11 +11,17 @@ use Illuminate\Http\Request;
             $this->services = new \App\Modules\Worker\Services\WorkerService;
         }
         
-        public function index()
+        public function index(Request $request)
         {
             $worker = \Worker::getCurrent(); 
             $data['title'] = 'Chấm công '.getDeviceGroupName($worker['type'], $worker['device']);
-            $data['list_data'] = $this->services->getListDataHome($worker);
+            $obj = $this->services->getListDataHome($worker);
+            $q = trim($request->input('q'));
+            if ($q != '') {
+                $obj = $obj->where('command', 'like', '%'.$q.'%');
+                $data['q'] = $q;
+            }
+            $data['list_data'] = $obj->paginate(20);
             $data['worker'] = $worker;
             $worker_type = $worker['type'];
             $list_my_command = getDataWorkerCommand(['status' => \StatusConst::PROCESSING, 'worker' => $worker['id']]);

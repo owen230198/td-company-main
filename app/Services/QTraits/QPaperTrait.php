@@ -77,7 +77,7 @@ trait QPaperTrait
         $total_metalai = $this->getBaseTotalStage($supp_qty, $model_price, $work_price, $shape_price, $materal_cost, 
         $num_face);
         $metalai['supp_qty'] = $supp_qty;
-        $metalai['handle_qty'] = $supp_qty;
+        $metalai['handle_qty'] = self::$supp_qty;
         $metalai['cover_supp_qty'] = $supp_qty;
         $metalai['materal_price'] = $materal_cost;
         $metalai['metalai_price'] = $total_metalai;
@@ -102,7 +102,7 @@ trait QPaperTrait
         // Công thức tính chi phí ép nhũ - thúc nổi : chi phí cán metalai + chi phí cán phủ trên
         $total = (self::$qty_pro * $price) + (self::$nqty * $shape_price);
         $compress_float['qty_pro'] = self::$qty_pro;
-        $compress_float['handle_qty'] = self::$qty_pro;
+        $compress_float['handle_qty'] = self::$supp_qty;
         $compress_float['nqty'] = self::$nqty;
         return !empty($get_total) ? $total : $this->getObjectConfig($compress_float, $total);
     }
