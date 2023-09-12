@@ -8,5 +8,6 @@ Route::prefix('Worker')->group(function()
     Route::middleware(['WorkerAuth'])->group(function () {
         Route::get('', [WorkerController::class, 'index']);
         Route::any('action-command/{action}', [WorkerController::class, 'actionCommand']);
+        Route::any('my-table-salary', [WorkerController::class, 'myTableSalary']);
     });
 });

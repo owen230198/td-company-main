@@ -53,6 +53,13 @@ class WSalary extends Model
                     ['name' => 'Máy in', 'value' => getFieldDataById('name', 'devices', @$handle['machine'])]
                 ];
                 break;
+            case \TDConst::FINISH:
+                if (!empty($handle['stage'])) {
+                    foreach ($handle['stage'] as $key => $stage) {
+                        $arr[] = ['name' => 'Công đoạn '.$key, 'value' => getFieldDataById('name', 'devices', @$stage['materal'])];   
+                    }
+                }
+                break;
             default:
                 $arr =  @$handle['machine'] ? [['name' => 'Thiết bị máy', 'value' => getFieldDataById('name', 'devices', $handle['machine'])]] : [];
                 break;
@@ -62,7 +69,7 @@ class WSalary extends Model
 
     private function getBaseData()
     {
-        $data['name'] = !empty($this->command->type) ? $this->command->type : $this->command->name;
+        $data['name'] = !empty($this->command->type) ? $this->command->type : @$this->command->name;
         $data['submited_at'] = \Carbon\Carbon::now();
         $data['handle'] = self::getHandleDataJson($this->worker['type'], $this->handle);
         return $data;

@@ -1,7 +1,7 @@
 
 <?php $__env->startSection('content'); ?>
     <div class="row my-4">
-        <div class="col-lg-6 border_right_green">
+        <div class="col-lg-6 border_right_green mb-lg-0 mb-4">
             <div class="main_worker_home">
                 <h3 class="fs-14 text-uppercase border_bot_eb pb-1 mb-1 text-center handle_title color_green mx-auto">
                     Danh sách lệnh 
@@ -30,7 +30,7 @@
                             ?>
                             <?php if(!empty($data_handle)): ?>
                                 <div class="col-lg-6 mb_20">
-                                    <?php echo $__env->make('Worker::commands.items/'.$item_command, 
+                                    <?php echo $__env->make('Worker::commands.items.base', 
                                     ['supply' => $supply, 'handle' => $data_handle, 'key_type' => $worker['type'], 'command' => $item], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                                 </div>
                             <?php endif; ?>
@@ -42,6 +42,14 @@
 
                 </div>
             </div>
+        </div>
+        <div class="col-lg-6">
+            <h3 class="fs-14 text-uppercase border_bot_eb pb-1 mb-1 text-center handle_title color_green mx-auto">
+                Thông tin của bạn
+            </h3> 
+            <a href="<?php echo e(url('Worker/my-table-salary')); ?>" class="d-block color_green my-3 fs-15">
+                Bảng lương tháng
+            </a>
         </div>
     </div>       
 <?php $__env->stopSection(); ?>

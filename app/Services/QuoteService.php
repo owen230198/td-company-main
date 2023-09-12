@@ -171,6 +171,9 @@ class QuoteService extends BaseService
 
     public function processDataProduct($data, $arr_quote = [], $step = TDConstant::QUOTE_FLOW)
     {
+        if (empty($data['product'])) {
+            return returnMessageAjax(100, 'Bạn chưa có thông tin sản phẩm nào !');
+        }
         $data_product = $data['product'];
         foreach ($data_product as $key => $product) {
             if (!empty($arr_quote)) {

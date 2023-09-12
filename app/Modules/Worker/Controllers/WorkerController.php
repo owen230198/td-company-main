@@ -1,6 +1,7 @@
 <?php
     namespace App\Modules\Worker\Controllers;
     use App\Http\Controllers\Controller;
+use App\Models\WSalary;
 use Illuminate\Http\Request;
 
     class WorkerController extends Controller
@@ -54,6 +55,18 @@ use Illuminate\Http\Request;
                     return customReturnMessage(false, $is_ajax, ['message' => 'Thao tác không hợp lệ !']);
                     break;
             }
+        }
+
+        public function myTableSalary(Request $request)
+        {
+            $worker = \Worker::getCurrent('id');
+            $where = [
+                ['key' => 'worker', 'value' => $worker],
+                ['key' => 'submited_at','value' => 'this_motnh']
+            ];
+            $data = getDataTable('w_users', $where, [], true);
+            // $data = \App\Models\WUser::whereMonth('created_at', \Carbon\Carbon::now()->month)->get()->toArray();
+            dd($data);
         }
     }  
 ?>

@@ -102,9 +102,17 @@ if (!function_exists('handleQueryCondition')) {
                 $compare = !empty($w['compare']) ? $w['compare'] : '=';
                 $value = $compare == 'like' ? '%'.$w['value'].'%' : $w['value'];
                 if ($compare == 'in') {
-                    $query->whereIn($w['key'], $value);
+                    if (@$w['con'] == 'or') {
+                        $query->orWhereIn($w['key'], $value);
+                    }else{
+                        $query->whereIn($w['key'], $value);
+                    }
                 }elseif($compare == 'not_in'){
-                    $query->whereNotIn($w['key'], $value);
+                    if (@$w['con'] == 'or') {
+                        $query->orWhereNotIn($w['key'], $value);
+                    }else{
+                        $query->whereNotIn($w['key'], $value);
+                    }
                 }else{
                     if (@$w['con'] == 'or') {
                         $query->orWhere($w['key'], $compare, $value);
@@ -118,7 +126,7 @@ if (!function_exists('handleQueryCondition')) {
 }
 
 if (!function_exists('getDataTable')) {
-    function getDataTable($table, $where = [], $param, $last_query = false)
+    function getDataTable($table, $where = [], $param = [], $last_query = false)
     {
         if ($last_query) {
             \DB::enableQueryLog();
@@ -139,7 +147,7 @@ if (!function_exists('getDataTable')) {
             $data = $query->orderBy($order, $order_by)->take($limit, $offset);
         }
         else{
-            $data = $table->orderBy($order, $order_by)->get();
+            $data = $query->orderBy($order, $order_by)->get();
         }
         if ($last_query) {
             dump($data);

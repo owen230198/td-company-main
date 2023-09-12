@@ -12,7 +12,7 @@
             <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
             Tên sản phẩm : <?php echo e(getFieldDataById('name', 'products', $supply->product)); ?>.
         </p>
-        <?php if(!empty(getTextSupply($supply->type))): ?>
+        <?php if(!empty(getTextSupply(@$supply->type))): ?>
         <p class="d-flex align-items-center color_green mb-2">
             <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
             Loại vật tư : <?php echo e(getTextSupply($supply->type)); ?>.

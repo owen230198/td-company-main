@@ -11,7 +11,7 @@
             <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
             Tên sản phẩm : {{ getFieldDataById('name', 'products', $supply->product) }}.
         </p>
-        @if (!empty(getTextSupply($supply->type)))
+        @if (!empty(getTextSupply(@$supply->type)))
         <p class="d-flex align-items-center color_green mb-2">
             <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
             Loại vật tư : {{ getTextSupply($supply->type) }}.
