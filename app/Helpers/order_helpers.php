@@ -215,8 +215,8 @@
                 $slice = (int) array_search($except, $arr_select) + 1;
                 $arr_select = array_slice($arr_select,$slice);
             }
-            $data = \DB::table($table)->select($arr_select)->find($id);
             $ret['type'] = \StatusConst::SUBMITED;
+            $data = !empty($arr_select) ? \DB::table($table)->select($arr_select)->find($id) : [];
             if (!empty($data)) {
                 foreach ($data as $key => $value) {
                     $data_value = json_decode($value, true);

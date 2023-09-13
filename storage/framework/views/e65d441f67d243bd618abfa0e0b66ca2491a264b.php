@@ -48,7 +48,8 @@
                 Thông tin của bạn
             </h3> 
             <a href="<?php echo e(url('Worker/my-table-salary')); ?>" class="d-block color_green my-3 fs-15">
-                Bảng lương tháng
+                Bảng lương tháng <?php echo e(\Carbon\Carbon::now()->month); ?>
+
             </a>
         </div>
     </div>       

@@ -47,7 +47,7 @@
                 Thông tin của bạn
             </h3> 
             <a href="{{ url('Worker/my-table-salary') }}" class="d-block color_green my-3 fs-15">
-                Bảng lương tháng
+                Bảng lương tháng {{ \Carbon\Carbon::now()->month }}
             </a>
         </div>
     </div>       

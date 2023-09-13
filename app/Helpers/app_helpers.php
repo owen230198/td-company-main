@@ -113,6 +113,19 @@ if (!function_exists('handleQueryCondition')) {
                     }else{
                         $query->whereNotIn($w['key'], $value);
                     }
+                }elseif (@$w['compare'] == 'month') {
+                    switch (@$w['value']) {
+                        case 'this_month':
+                            $value = \Carbon\Carbon::now()->month;
+                            break;
+                        case 'this_year':
+                            $value = \Carbon\Carbon::now()->year;
+                            break;
+                        default:
+                            $value = @$w['value'];
+                            break;
+                    }
+                    $query->whereMonth($w['key'], $value);
                 }else{
                     if (@$w['con'] == 'or') {
                         $query->orWhere($w['key'], $compare, $value);

@@ -56,7 +56,8 @@ class WSalary extends Model
             case \TDConst::FINISH:
                 if (!empty($handle['stage'])) {
                     foreach ($handle['stage'] as $key => $stage) {
-                        $arr[] = ['name' => 'Công đoạn '.$key, 'value' => getFieldDataById('name', 'devices', @$stage['materal'])];   
+                        $num = (int) $key + 1;
+                        $arr[] = ['name' => 'Công đoạn '.$num, 'value' => getFieldDataById('name', 'devices', @$stage['materal'])];   
                     }
                 }
                 break;
@@ -77,7 +78,7 @@ class WSalary extends Model
 
     private function getBaseDatDevice()
     {
-        $device = !empty($handle['machine']) ? $handle['machine'] : [];
+        $device = !empty($handle['machine']) ? $handle['machine'] : 0;
         $data_device = Device::find($device);
         $work_price = !empty($data_device['w_work_price']) ? (float) $data_device['w_work_price'] : 0;
         $shape_price = !empty($data_device['w_shape_price']) ? (float) $data_device['w_shape_price'] : 0;
@@ -131,7 +132,28 @@ class WSalary extends Model
         $data = $this->getBaseDatDevice();
         $data['total'] = $product_qty * $data['work_price'] + $data['shape_price'];   
     }
-
+    public function getFinishSalary($product_qty)
+    {
+        $data = $this->getBaseData();
+        $data['work_price'] = 0;
+        $data['shape_price'] = 0;
+        $data['handle'] = self::getHandleDataJson($this->worker['type'], $this->handle);
+        $data['total'] = 0;
+        $stages = !empty($this->handle['stage']) ? $this->handle['stage'] : [];
+        if (!empty($this->handle['stage'])) {
+            foreach ($stages as $stage) {
+                $device = !empty($stage['materal']) ? $stage['materal'] : 0;
+                $data_device = Device::find($device);
+                $work_price = !empty($data_device['w_work_price']) ? (float) $data_device['w_work_price'] : 0;
+                $shape_price = !empty($data_device['w_shape_price']) ? (float) $data_device['w_shape_price'] : 0;
+                $data['work_price'] += $work_price;
+                $data['shape_price'] += $shape_price;
+                $data['total'] += $product_qty * $work_price + $shape_price;
+            }
+        }
+        return $data;
+    }
+    
     static function commandStarted($code, $data_command, $table_supply, $supply)
     {
         $insert_command = $data_command;

@@ -59,14 +59,17 @@ use Illuminate\Http\Request;
 
         public function myTableSalary(Request $request)
         {
+            $data['title'] = 'Bảng lương tháng '.\Carbon\Carbon::now()->month;
+            $table = 'w_salaries';
             $worker = \Worker::getCurrent('id');
             $where = [
                 ['key' => 'worker', 'value' => $worker],
-                ['key' => 'submited_at','value' => 'this_motnh']
+                ['key' => 'submited_at','compare' => 'month', 'value' => 'this_month']
             ];
-            $data = getDataTable('w_users', $where, [], true);
-            // $data = \App\Models\WUser::whereMonth('created_at', \Carbon\Carbon::now()->month)->get()->toArray();
+            $data['list_data'] = getDataTable($table, $where);
+            $data['summary'] = \DB::table($table)->where('worker', $worker)->whereMonth('submited_at', \Carbon\Carbon::now()->month)->sum('total');
             dd($data);
+            return view('Worker::salaries.view', $data);
         }
     }  
 ?>

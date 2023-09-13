@@ -36,7 +36,8 @@ class WorkerService extends BaseService
         if (getDataWorkerCommand($arr_status, false, true) > 0) {
             return returnMessageAjax(100, 'Bạn cần hoàn thành lệnh trước khi nhận lệnh mới !');
         }
-        if ($data_command->type != $type || $data_command->machine_type != $worker['device']) {
+        $check_device = $type == \TDConst::FINISH ? true : $data_command->machine_type == $worker['device'];
+        if ($data_command->type != $type || !$check_device) {
             return returnMessageAjax(100, 'Bạn không thuộc tổ máy có thể nhận lệnh !');
         }
         $update = $obj->update($arr_status);
@@ -88,6 +89,9 @@ class WorkerService extends BaseService
                     break;
                 case \TDConst::METALAI:
                     $data_update = $obj_salary->getMetalaiSalary($qty);
+                    break;
+                case \TDConst::FINISH:
+                    $data_update = $obj_salary->getFinishSalary($qty);
                     break;
                 case !isQtyFormulaBySupply($type):
                     $data_update = $obj_salary->getBaseSalaryProduct($qty);
