@@ -46,8 +46,11 @@
             <h3 class="fs-14 text-uppercase border_bot_eb pb-1 mb-1 text-center handle_title color_green mx-auto">
                 Thông tin của bạn
             </h3> 
-            <a href="{{ url('Worker/my-table-salary') }}" class="d-block color_green my-3 fs-15">
+            <a href="{{ url('Worker/my-table-salary') }}" class="d-block color_green mb-2 mt-3 fs-15">
                 Bảng lương tháng {{ \Carbon\Carbon::now()->month }}
+            </a>
+            <a href="{{ url('change-password/w_users') }}" class="d-block color_green mb-2 fs-15">
+                Thay đổi mật khẩu
             </a>
         </div>
     </div>       
