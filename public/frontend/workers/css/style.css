@@ -1,8 +1,8 @@
-.border_right{
+.border_right {
     border-right: 1px solid #333;
 }
 
-.form_search{
+.form_search {
     max-width: 300px;
     border: 1px solid #459300;
     margin-left: auto;
@@ -10,8 +10,8 @@
     box-shadow: 1px 1px 3px #333333;
 }
 
-.form_search input{
-    color:#459300;
+.form_search input {
+    color: #459300;
     font-size: 14px;
     font-weight: 600;
     padding: 3px 10px;
@@ -22,7 +22,7 @@
     height: 30px;
 }
 
-.form_search button{
+.form_search button {
     position: absolute;
     width: 40px;
     height: 100%;
@@ -40,33 +40,112 @@
     box-shadow: 3px 3px 10px #555555;
 }
 
-.item_command .machine_label{
+.item_command .machine_label {
     padding: 5px 10px;
     border-radius: 0 0 5px;
     box-shadow: 1px 1px 3px #555555;
     width: max-content;
 }
 
-.color_yellow{
+.color_yellow {
     color: #e5ff00;
 }
 
-.command_group_btn .button_command{
+.command_group_btn .button_command {
     padding: 5px 10px;
     flex: 0 0 50%;
     border-radius: 3px;
 }
 
-.main_worker_content{
+.main_worker_content {
     padding-bottom: 65px;
     position: relative;
 }
 
-.group_btn_worker_form{
+.group_btn_worker_form {
     position: fixed;
     bottom: 45px;
     left: 0;
     width: 100%;
     background: #cfcdcd;
     padding: 5px 15px;
+}
+
+/* table salary style */
+
+.worker_salary_table table {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    .worker_salary_table table-layout: fixed;
+}
+
+.worker_salary_table table caption {
+    font-size: 1.5em;
+    margin: .5em 0 .75em;
+}
+
+.worker_salary_table table tr {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: .35em;
+}
+
+.worker_salary_table table th,
+.worker_salary_table table td {
+    padding: .625em;
+    text-align: center;
+}
+
+.worker_salary_table table th {
+    font-size: .85em;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+@media screen and (max-width: 600px) {
+    .worker_salary_table table {
+        border: 0;
+    }
+
+    .worker_salary_table table caption {
+        font-size: 1.3em;
+    }
+
+    .worker_salary_table table thead {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+
+    .worker_salary_table table tr {
+        border-bottom: 3px solid #ddd;
+        display: block;
+        margin-bottom: .625em;
+    }
+
+    .worker_salary_table table td {
+        border-bottom: 1px solid #ddd;
+        display: block;
+        font-size: .8em;
+        text-align: right;
+    }
+
+    .worker_salary_table table td::before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .worker_salary_table table td:last-child {
+        border-bottom: 0;
+    }
 }

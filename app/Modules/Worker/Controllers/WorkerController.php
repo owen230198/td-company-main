@@ -68,7 +68,6 @@ use Illuminate\Http\Request;
             ];
             $data['list_data'] = getDataTable($table, $where);
             $data['summary'] = \DB::table($table)->where('worker', $worker)->whereMonth('submited_at', \Carbon\Carbon::now()->month)->sum('total');
-            dd($data);
             return view('Worker::salaries.view', $data);
         }
     }  

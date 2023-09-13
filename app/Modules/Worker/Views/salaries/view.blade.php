@@ -1,34 +1,21 @@
 @extends('Worker::index')
 @section('content')
-    <div class="worker_table_salary">
-        <table class="table table-responsive-sm table-bordered table-striped">
-            <thead class="thead-dark">
+    <div class="worker_salary_table">
+        <table>
+            <caption>{{ $title }} - Công nhân: {{ \Worker::getCurrent('name') }}</caption>
+            <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Họ và tên</th>
-                    <th scope="col">Tuổi</th>
-                    <th scope="col">Địa chỉ</th>
+                    <th scope="col">Mã lệnh</th>
+                    <th scope="col">Tên lệnh</th>
+                    <th scope="col">Chi tiết sản xuất</th>
+                    <th scope="col">Thời gian chấm công</th>
+                    <th scope="col">Thành tiền</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Nguyễn Văn A</td>
-                    <td>25</td>
-                    <td>Hà Nội</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Trần Thị B</td>
-                    <td>23</td>
-                    <td>Đà Nẵng</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Lê Văn C</td>
-                    <td>27</td>
-                    <td>Hồ Chí Minh</td>
-                </tr>
+                @foreach ($collection as $item)
+                    
+                @endforeach
             </tbody>
         </table>
     </div>    
