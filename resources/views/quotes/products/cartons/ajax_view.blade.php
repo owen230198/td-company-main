@@ -14,7 +14,7 @@
             'note' => 'Chọn loại vật tư',
             'attr' => ['required' => 1],
             'value' => @$supply_obj->name,
-            'other_data' => ['config' => ['search' => 1], 'data' => ['table' => 'supply_types', 'where' => ['type' => $key_supp, 'is_name' => 1]]]
+            'other_data' => ['config' => ['search' => 1], 'data' => ['table' => 'supply_names', 'where' => ['type' => $key_supp]]]
         ];
     @endphp
 

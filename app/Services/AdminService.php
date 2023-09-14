@@ -3,6 +3,7 @@ namespace App\Services;
 use App\Services\BaseService;
 use App\Models\NDetailTable;
 use App\Models\NTable;
+use App\Models\NLogAction;
 class AdminService extends BaseService
 {
     function __construct()
@@ -40,7 +41,6 @@ class AdminService extends BaseService
                         'action' => $action, 
                         'target' => $id,  
                         'user' => \User::getCurrent('id'),
-                        'do_at' => \Carbon\Carbon::now(),
                         'act' => 1,
                         'created_at' => \Carbon\Carbon::now(),
                         'updated_at' => \Carbon\Carbon::now(),
@@ -59,7 +59,7 @@ class AdminService extends BaseService
         if (!empty($detail_data)) {
             $data_log['detail_data'] = json_encode($detail_data);
         }
-        \DB::table('n_log_actions')->insert($data_log);            
+        return NLogAction::insertGetId($data_log);            
     }
 
     public function getTableItem($table)

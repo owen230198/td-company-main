@@ -53,7 +53,7 @@
                     </div>
                     <div class="mb-2 d-flex align-items-center">
                         <span class="mr-1">Giấy bồi : </span>
-                        <p class="font_bold">{{ getFieldDataById('name', 'supply_prices', @$fstage['materal']) }}</p>
+                        <p class="font_bold">{{ getFieldDataById('name', 'materals', @$fstage['materal']) }}</p>
                     </div>
                     <div class="mb-2 d-flex align-items-center">
                         <span class="mr-1">ĐG giấy bồi : </span>

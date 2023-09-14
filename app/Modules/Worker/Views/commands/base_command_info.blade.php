@@ -4,6 +4,12 @@
         {{ !empty($supply->type) ? getSupplyNameByKey($supply->type) : @$supply->name }}.
     </strong>
 </p>
+<p class="d-flex align-items-center color_green mb-2">
+    <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
+    Tên vật tư gia công : <strong class="color_main ml-1">
+        {{ !empty($supply->type) ? getSupplyNameByKey($supply->type) : @$supply->name }}.
+    </strong>
+</p>
 <ul class="d-flex flex-wrap">
     @foreach ($all_devices as $key => $device)
         @php

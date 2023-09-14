@@ -18,7 +18,7 @@ trait QSupplyTrait{
       }
 
       if (!empty($data['mill'])) {
-         $data_action['mill'] = $this->configDataStage($data['mill']);
+         $data_action['mill'] = $this->configDataStage($data['mill'], @$data['name']);
       }
 
       if (!empty($data['elevate'])) {
@@ -42,8 +42,8 @@ trait QSupplyTrait{
       $stage = !empty($fill['stage']) ? $fill['stage'] : [];
       foreach ($stage as $key => $item) {
          $qttv_id = !empty($item['materal']) ? $item['materal'] : 0;
-         $qttv = getDetailDataByID('SupplyPrice', $qttv_id);
-         $qttv_price = !empty($qttv['price']) ? (float) $qttv['price'] : 0; 
+         $qttv = getFieldDataById('price', 'materals', $qttv_id);
+         $qttv_price = !empty($qttv) ? (float) $qttv : 0;
          $fill['stage'][$key]['qttv_price'] = $qttv_price;
          $length = !empty($item['length']) ? $item['length'] : 0;
          $width = !empty($item['width']) ? $item['width'] : 0;

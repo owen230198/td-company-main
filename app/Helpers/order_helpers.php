@@ -192,10 +192,10 @@
                             \TDConst::FOLD];
                     break;
                 case 'supplies':
-                    return [\TDConst::ELEVATE, 
+                    return [\TDConst::MILL,
+                            \TDConst::ELEVATE, 
                             \TDConst::PEEL, 
-                            \TDConst::CUT,
-                            \TDConst::MILL];
+                            \TDConst::CUT];
                     break;
                 case 'fill_finishes':
                     return [\TDConst::FILL, 
@@ -288,5 +288,27 @@
                 'color' => \TDConst::PRINT_COLOR[$color],
                 'tech' => \TDConst::PRINT_TECH[$tech]
             ];
+        }
+    }
+
+    if (!function_exists('getNameCommandWorker')) {
+        function getNameCommandWorker($supply, $product_name)
+        {
+            $ext_name = !empty($supply->name) ? getFieldDataById('name', 'supply_names', $supply->name) : getTextSupply(@$supply->type);
+            if (@$supply->type == \TDConst::CARTON) {
+                return $product_name.'('.$ext_name.')';
+            }
+            if (@$supply->name) {
+                return @$supply->name;
+            }else{
+                return $product_name;
+            }
+        }
+    }
+
+    if (!function_exists('getTextSupply')) {
+        function getTextSupply($type)
+        {
+            return @\TDConst::ALL_SUPPLY[$type];
         }
     }

@@ -19,6 +19,10 @@
         @endif
         <p class="d-flex align-items-center color_green mb-2">
             <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
+            Tên vật tư : {{ $command->name }}.
+        </p>
+        <p class="d-flex align-items-center color_green mb-2">
+            <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
             Số lượng : {{ @$command->qty }}.
         </p>
         <p class="d-flex align-items-center color_green mb-2">

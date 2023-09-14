@@ -66,14 +66,17 @@
             <p class="font_bold formula_result"> = {{ number_format($stage['shape_price']) }}đ</p>
         </div>
     </div> 
+    @php
+        $factor = !empty($stage['factor']) ? (int) $stage['factor'] : 1;
+    @endphp
     <div class="formula_item d-flex align-items-center color_brown mb-1">
         <p class="formula_name font_bold">(4) Chi phí lượt:</p>
         <div class="formula_content d-flex align-items-center">
             <p class="formula_param mx-2">
-                SL tờ in cả BH x ĐG lượt
+                SL tờ in cả BH x ĐG lượt x Hệ số
             </p>
-            <p class="font_bold formula_result"> = {{ $stage['qty_pro'] }} x {{ $stage['work_price'] }}</p>
-            <p class="font_bold formula_result"> = {{ number_format($stage['qty_pro'] * $stage['work_price']) }}đ</p>
+            <p class="font_bold formula_result"> = {{ $stage['qty_pro'] }} x {{ $stage['work_price'] }} x {{ $factor }}</p>
+            <p class="font_bold formula_result"> = {{ number_format($stage['qty_pro'] * $stage['work_price'] * $factor) }}đ</p>
         </div>
     </div>
     <p class="fs-15 color_red font_bold">Tổng chi phí: (1) + (2) + (3) + (4) = {{ number_format($stage['total']) }}đ</p>       

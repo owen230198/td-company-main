@@ -42,7 +42,7 @@ Route::middleware(['check_login'])->group(function () {
 	Route::get('list-worker-by-device/{step}', [AdminController::class, 'listWorkerByDevice']);
 	Route::get('get-device-by-type', [QuoteController::class, 'getDeviceByType']);
 	Route::get('warehouse-management', [AdminController::class, 'warehouseManagement']);
-	Route::any('change-password/{table}', [AuthController::class, 'changePassword']);
+	Route::get('get-all-supply-product', [AdminController::class, 'getAllSupplyProduct']);
 
 	//quotes routes
 	Route::any('create-quote', [QuoteController::class, 'createQuote']);

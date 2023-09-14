@@ -116,9 +116,9 @@
             <div class="formula_item d-flex align-items-center color_brown mb-1">
                 <p class="formula_name font_bold">Tổng chi phí:</p>
                 <div class="formula_content d-flex align-items-center">
-                    <p class="formula_param mx-2">(SL tờ in x Số màu x 2 x ĐG lượt) + (ĐG chỉnh máy + ĐG Chi phí khuôn) </p>
+                    <p class="formula_param mx-2">(SL tờ in x Số màu x 2 x ĐG lượt) + ((ĐG chỉnh máy x số màu) + (ĐG Chi phí khuôn x số màu)) </p>
                     <p class="font_bold formula_result mr-2"> = 
-                        (<?php echo e($stage['supp_qty']); ?> x <?php echo e($stage['color']); ?> x 2 x <?php echo e($stage['work_price']); ?>) + (<?php echo e($stage['shape_price']); ?> + <?php echo e($stage['model_price']); ?>)
+                        (<?php echo e($stage['supp_qty']); ?> x <?php echo e($stage['color']); ?> x 2 x <?php echo e($stage['work_price']); ?>) + ((<?php echo e($stage['shape_price']); ?> x <?php echo e($stage['color']); ?>) + (<?php echo e($stage['model_price']); ?> x <?php echo e($stage['color']); ?>))
                     </p>
                     <p class="font_bold formula_result color_red"> = <?php echo e(number_format($stage['total'])); ?>đ</p>
                 </div>

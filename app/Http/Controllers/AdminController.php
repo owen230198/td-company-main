@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Models\NTable;
+use Illuminate\Support\Facades\Schema;
 class AdminController extends Controller
 {
     static $view_where = array();
@@ -327,6 +328,9 @@ class AdminController extends Controller
     {
         $table = $request->input('table');
         $where = $request->except('table', 'q', 'field_search', 'except_linking', 'except_value');
+        if (Schema::hasColumn($table, 'act')) {
+            $where['act'] = 1;
+        }
         $data = \DB::table($table)->where($where);
         if (!empty($request->input('except_value'))) {
             $except_value = json_decode($request->input('except_value'), true);

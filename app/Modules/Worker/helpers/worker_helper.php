@@ -1,7 +1,5 @@
 <?php
 
-use App\Constants\TDConstant;
-
 if (!function_exists('checkKeyWorkerExcept')) {
     function checkKeyWorkerExcept($key)
     {
@@ -52,13 +50,6 @@ if (!function_exists('getDataWorkerCommand')) {
         function isQtyFormulaBySupply($key)
         {
             return in_array($key, [\TDConst::PRINT, \TDConst::NILON, \TDConst::METALAI, \TDConst::COMPRESS, \TDConst::UV, \TDConst::ELEVATE, \TDConst::FLOAT, \TDConst::CUT]);
-        }
-    }
-
-    if (!function_exists('getTextSupply')) {
-        function getTextSupply($type)
-        {
-            return @\TDConst::ALL_SUPPLY[$type];
         }
     }
 }

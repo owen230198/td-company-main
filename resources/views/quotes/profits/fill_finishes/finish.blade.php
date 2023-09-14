@@ -16,7 +16,7 @@
 @if (!empty($stage['stage']))
     <div class="d-flex align-items-center mt-2 pt-2 border_top">
         <p class="font_bold">Các công đoạn hoàn thiện:</p>
-        <ul>
+        <ul class="ml-2 pl-2 list_stage_supply">
             @foreach ($stage['stage'] as $fstage)
                 @if ($fstage['cost'] > 0)
                     <li class="mb-1 pb-1">

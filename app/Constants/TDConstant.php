@@ -17,7 +17,7 @@
 
         //số màu in
         const APLA_PRINT_COLOR = 'apla_print_color';
-        const PRINT_COLOR = ['Chọn số màu in', 1, 2, 3, 4, 5, 6, self::APLA_PRINT_COLOR => 'In áp la 1 mặt'];
+        const PRINT_COLOR = ['Chọn số màu in', 1, 2, 3, 4, 5, 6, 7, 8, self::APLA_PRINT_COLOR => 'In áp la 1 mặt'];
 
         //Yêu cầu thợ in
         const DESIGN_PRINT_REQ = 1;
@@ -240,7 +240,7 @@
                                 self::FINISH => 'Công đoạn hoàn thiện'
                             ];
 
-        const ALL_DEVICE_KEY = self::PAPER_HARD_DEVICE + self::FILL_DEVICE;
+        const ALL_DEVICE_KEY = self::PAPER_HARD_DEVICE + [self::MILL => 'Máy phay'] + self::FILL_DEVICE;
 
         const FILL_FINISH_STAGE = [
             self::FILL => 'Bồi',
@@ -259,7 +259,7 @@
             ],
             self::CARTON => [
                 ['key' => self::CARTON, 'name' => 'Loại vật tư carton', 'table' => 'supply_types', 'is_name' => 0],
-                ['key' => self::CARTON, 'name' => 'Tên vật tư carton', 'table' => 'supply_types', 'is_name' => 1]    
+                ['key' => self::CARTON, 'name' => 'Tên vật tư carton', 'table' => 'supply_names']    
             ],
             self::RUBBER => [
                 ['key' => self::RUBBER, 'name' => 'DS loại vật tư cao su non', 'table' => 'supply_types', 'is_name' => 0]   

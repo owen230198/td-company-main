@@ -70,7 +70,6 @@ class WSalary extends Model
 
     private function getBaseData()
     {
-        $data['name'] = !empty($this->command->type) ? $this->command->type : @$this->command->name;
         $data['submited_at'] = \Carbon\Carbon::now();
         $data['handle'] = self::getHandleDataJson($this->worker['type'], $this->handle);
         return $data;
@@ -78,13 +77,14 @@ class WSalary extends Model
 
     private function getBaseDatDevice()
     {
-        $device = !empty($handle['machine']) ? $handle['machine'] : 0;
+        $device = !empty($this->handle['machine']) ? $this->handle['machine'] : 0;
         $data_device = Device::find($device);
         $work_price = !empty($data_device['w_work_price']) ? (float) $data_device['w_work_price'] : 0;
         $shape_price = !empty($data_device['w_shape_price']) ? (float) $data_device['w_shape_price'] : 0;
         $data = $this->getBaseData();
         $data['work_price'] = $work_price;
         $data['shape_price'] = $shape_price;
+        $data['factor'] = !empty($this->handle['factor']) ? (int) $this->handle['factor'] : 1;
         $data['handle'] = self::getHandleDataJson($this->worker['type'], $this->handle);
         return $data;
     }
@@ -98,7 +98,7 @@ class WSalary extends Model
         $data = $this->getBaseData();
         $data['work_price'] = $work_price;
         $data['shape_price'] = $shape_price;
-        $data['total'] = Paper::getPrintFormula(@$this->handle['type'], $paper_qty, $this->handle['color'], $work_price, $shape_price);
+        $data['total'] = Paper::getPrintFormula(@$this->handle['type'], $paper_qty, $this->handle['color'], $work_price, $shape_price, 0, true);
         return $data;
     }
 
@@ -130,7 +130,8 @@ class WSalary extends Model
     public function getBaseSalaryProduct($product_qty)
     {
         $data = $this->getBaseDatDevice();
-        $data['total'] = $product_qty * $data['work_price'] + $data['shape_price'];   
+        $data['total'] = $product_qty * $data['work_price'] * $data['factor'] + $data['shape_price'];
+        return $data;   
     }
     public function getFinishSalary($product_qty)
     {
@@ -164,6 +165,7 @@ class WSalary extends Model
         $insert_command['qty'] = !empty($data_command['qty']) ? $data_command['qty'] : (int) @$data_command['handle']['handle_qty'];
         if (!empty($data_command['handle'])) {
             $insert_command['handle'] = WSalary::getHandleDataJson($insert_command['type'], $data_command['handle']);
+            $insert_command['factor'] = !empty($data_command['handle']['handle_qty']) ? (int) $data_command['handle']['handle_qty'] : 1;
         }
         $insert_command['status'] = Order::NOT_ACCEPTED;
         (new \BaseService)->configBaseDataAction($insert_command);

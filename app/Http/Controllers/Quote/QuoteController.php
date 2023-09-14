@@ -70,13 +70,14 @@ class QuoteController extends Controller
         unset($data_quote['id']);
         $this->services->configBaseDataAction($data_quote);
         $data_quote['seri'] = 'BG-'.getCodeInsertTable('quotes');
+        $data_quote['status'] = \StatusConst::NOT_ACCEPTED;
         $quote_id = Quote::insertGetId($data_quote);
         $child_tables = Product::$childTable;
         if ($quote_id) {
             foreach ($data_products as $product) {
                 $product['quote_id'] = $quote_id;
                 $old_product_id = $product['id'];
-                unset($product['id']);
+                unset($product['id'], $product['code'], $product['status']);
                 $this->services->configBaseDataAction($product);
                 $product_id = Product::insertGetId($product);
                 if ($product_id) {
@@ -84,7 +85,7 @@ class QuoteController extends Controller
                         $model = getModelByTable($table);
                         $data_supplies = $model->where('product', $old_product_id)->get()->makeHidden($hidden_clone_field)->toArray();
                         foreach ($data_supplies as $supply) {
-                            unset($supply['id']);
+                            unset($supply['id'], $supply['code'], $supply['status']);
                             $this->services->configBaseDataAction($supply);
                             $supply['product'] = $product_id;
                             $model->insert($supply);

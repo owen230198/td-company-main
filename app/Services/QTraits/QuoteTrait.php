@@ -103,7 +103,7 @@ trait QuoteTrait
         return $a + $b + $shape_price + $c;
     }
 
-	private function configDataStage($data){
+	private function configDataStage($data, $ext_name =0){
         $device_id = !empty($data['machine']) ? (int)$data['machine'] : 0;
         $device = getDetailDataByID('Device', $device_id);
         $model_price = !empty($device['model_price']) ? (float) $device['model_price'] : 0;
@@ -131,11 +131,26 @@ trait QuoteTrait
         }elseif ($key_device == TDConstant::FILL){
             //Tính chi phí bồi
             $obj = $this->configDataFill($work_price, $shape_price, $data);
+        }elseif ($key_device == TDConstant::MILL){
+            //Tính chi phí bồi
+            $obj = $this->configDataMill($model_price, $work_price, $shape_price, $data, $ext_name);
         }else{
-            //Tính chi phí bóc lề, dán hộp, dán túi, máy phay, máy gấp vạch
+            //Tính chi phí bóc lề, dán hộp, dán túi, máy gấp vạch
             $obj = $this->configDataByOnlyDevice($model_price, $work_price, $shape_price, $data);        
         }
         return $obj;    
+    }
+
+    private function configDataMill($model_price, $work_price, $shape_price, $data, $ext_name)
+    {
+      $supp_name_id = !empty($ext_name) ? $ext_name : 0;
+      $supp_name = \DB::table('supply_names')->select('factor')->find($supp_name_id);
+      $factor = !empty($supp_name->factor) ? $supp_name->factor : 1;
+      $data['qty_pro'] = self::$qty_pro;
+      $data['factor'] = $factor; 
+      $data['handle_qty'] = self::$qty_pro;
+      $total = $this->getBaseTotalStage(self::$qty_pro, $model_price, $work_price, $shape_price, 0, $factor);
+      return $this->getObjectConfig($data, $total);
     }
 
     private function getPriterDevice($device)

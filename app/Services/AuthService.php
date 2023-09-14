@@ -98,14 +98,14 @@ class AuthService extends BaseService
             $view_path = '.change_password';
             $full_view_path = !empty($this->prefix) ? $this->prefix.'::'.$view_path : $view_path;
             if (view()->exists($full_view_path)) {
-                return view($full_view_path);
+                $data['title'] = 'Thay đổi mật khẩu';
+                return view($full_view_path, $data);
             }else{
                 return back()->with('error', 'Chức năng đổi mật khẩu không hỗ trợ !');
             }
         }else{
-            $model = getModelByTable($this->table_user);
-            $id = $model::getCurrent('id') != '' ? $model::getCurrent('id') : 0;
-            $user = $model::find($id);
+            $id = $this->table_user::getCurrent('id') != '' ? $this->table_user::getCurrent('id') : 0;
+            $user = $this->table_user::find($id);
             if (empty($user)) {
                 return returnMessageAjax(100, 'Không tìm thấy dữ liệu người dùng !');
             }
@@ -121,7 +121,7 @@ class AuthService extends BaseService
             if ($new_pass != $confirm_pass) {
                 return returnMessageAjax(100, 'Thông tin xác nhận mật khẩu bắt buộc giống với thông tin mật khẩu mới !');
             }
-            $user->password = md5($password);
+            $user->password = md5($new_pass);
             $change = $user->save();
             if ($change) {
                 return returnMessageAjax(200, 'Thay đổi mật khẩu thành công !', url($this->prefix.'/logout'));

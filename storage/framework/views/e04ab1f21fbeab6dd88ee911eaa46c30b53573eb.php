@@ -15,9 +15,11 @@
                 <tr>
                     <th scope="col">Mã lệnh</th>
                     <th scope="col">Tên lệnh</th>
-                    <th scope="col">Chi tiết sản xuất</th>
-                    <th scope="col">Thời gian</th>
+                    <th scope="col">Số lượng</th>
+                    <th scope="col">ĐG lượt</th>
+                    <th scope="col">ĐG lên khuôn</th>
                     <th scope="col">Thành tiền</th>
+                    <th scope="col">Thời gian</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,18 +33,23 @@
                             <?php echo e($item->name); ?>
 
                         </td>
-                        <td data-label="Chi tiết sản xuất">
-                            <div>
-                                <?php echo $__env->make('view_table.json_name', ['value' => $item->handle], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                            </div>
+                        <td data-label="Số lượng">
+                            <?php echo e($item->qty); ?>
+
+                        </td>
+                        <td data-label="ĐG lượt">
+                            <?php echo e(number_format($item->work_price)); ?>đ
+                        </td>
+                        <td data-label="ĐG lên khuôn">
+                            <?php echo e(number_format($item->shape_price)); ?>đ
+                        </td>
+                        <td data-label="Thành tiền">
+                            <?php echo e(number_format($item->total)); ?>đ
                         </td>
                         <td data-label="Thời gian">
                             <div>
                                 <?php echo $__env->make('view_table.datetime', ['value' => $item->submited_at], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                             </div>
-                        </td>
-                        <td data-label="Thành tiền">
-                            <?php echo e(number_format($item->total)); ?>đ
                         </td>
                     </tr>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

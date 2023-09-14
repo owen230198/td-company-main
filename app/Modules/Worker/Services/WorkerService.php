@@ -15,7 +15,7 @@ class WorkerService extends BaseService
         $type = @$worker['type'];
         $where['type'] = $type; 
         $where['status'] = \StatusConst::NOT_ACCEPTED;
-        if (!in_array($type, [\TDConst::FILL, \TDConst::FINISH])) {
+        if (!in_array($type, [\TDConst::FINISH])) {
             $where['machine_type'] = @$worker['device'];
         }
         return getDataWorkerCommand($where, true);
@@ -121,6 +121,8 @@ class WorkerService extends BaseService
                 if (empty($exist_command)) {
                     $next_data['qty'] = $next_qty;
                     $next_data['created_by'] = $data_command->created_by;
+                    $product_name = getFieldDataById('name', 'products', $supply->product);
+                    $next_data['name'] = getNameCommandWorker($supply, $product_name);
                     WSalary::commandStarted($data_command->command, $next_data, $table_supply, $supply);
                 }else{
                     $exist_command->qty = (int) $exist_command->qty + $next_qty;

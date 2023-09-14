@@ -488,6 +488,24 @@ var selectTypeWorker = function()
     })
 }
 
+var passwordChangeInput = function()
+{
+    $(document).on('click', 'button.__pass_change', function(event){
+        event.preventDefault();
+        let pass_input = $(this).parent().find('input[type=password]');
+        let i = $(this).find('i')
+        if (pass_input.attr('disabled') == 'disabled') {
+            i.toggleClass('fa-times');
+            i.removeClass('fa-pencil-square-o');
+            pass_input.prop('disabled', false);
+        }else{
+            i.removeClass('fa-times');
+            i.toggleClass('fa-pencil-square-o');
+            pass_input.prop('disabled', true);   
+        }
+    });
+}
+
 $(function () {
     submitActionAjaxForm();
     confirmRemoveData();
@@ -511,4 +529,5 @@ $(function () {
     moduleSelectAjaxChild();
     selectTypeSuppWarehouse();
     selectTypeWorker();
+    passwordChangeInput();
 });

@@ -14,9 +14,12 @@
                 <tr>
                     <th scope="col">Mã lệnh</th>
                     <th scope="col">Tên lệnh</th>
-                    <th scope="col">Chi tiết sản xuất</th>
-                    <th scope="col">Thời gian</th>
+                    <th scope="col">Số lượng</th>
+                    <th scope="col">ĐG lượt</th>
+                    <th scope="col">ĐG lên khuôn</th>
+                    <th scope="col">Hệ số</th>
                     <th scope="col">Thành tiền</th>
+                    <th scope="col">Thời gian</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,18 +31,25 @@
                         <td data-label="Tên lệnh">
                             {{ $item->name }}
                         </td>
-                        <td data-label="Chi tiết sản xuất">
-                            <div>
-                                @include('view_table.json_name', ['value' => $item->handle])
-                            </div>
+                        <td data-label="Số lượng">
+                            {{ $item->qty }}
+                        </td>
+                        <td data-label="ĐG lượt">
+                            {{ number_format($item->work_price) }}đ
+                        </td>
+                        <td data-label="ĐG lên khuôn">
+                            {{ number_format($item->shape_price) }}đ
+                        </td>
+                        <td data-label="Hệ số">
+                            {{ $item->factor }}
+                        </td>
+                        <td data-label="Thành tiền">
+                            {{ number_format($item->total) }}đ
                         </td>
                         <td data-label="Thời gian">
                             <div>
                                 @include('view_table.datetime', ['value' => $item->submited_at])
                             </div>
-                        </td>
-                        <td data-label="Thành tiền">
-                            {{ number_format($item->total) }}đ
                         </td>
                     </tr>
                 @endforeach

@@ -305,6 +305,7 @@ class OrderController extends Controller
                             $data_update['code'] =  $obj_order->code.getCharaterByNum($count);
                             $update = getModelByTable($table_supply)->where('id', $supply->id)->update($data_update);
                             if ($data_command['type'] != \StatusConst::SUBMITED && $update && !empty($data_command['handle']['machine'])) {
+                                $data_command['name'] = getNameCommandWorker($supply, $obj_order->name);
                                 WSalary::CommandStarted($data_update['code'], $data_command, $table_supply, $supply); 
                             }
                         }

@@ -16,7 +16,7 @@
 <?php if(!empty($stage['stage'])): ?>
     <div class="d-flex align-items-center mt-2 pt-2 border_top">
         <p class="font_bold">Các công đoạn hoàn thiện:</p>
-        <ul>
+        <ul class="ml-2 pl-2 list_stage_supply">
             <?php $__currentLoopData = $stage['stage']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $fstage): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <?php if($fstage['cost'] > 0): ?>
                     <li class="mb-1 pb-1">
