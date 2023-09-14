@@ -1,8 +1,7 @@
 <?php
     namespace App\Modules\Worker\Controllers;
     use App\Http\Controllers\Controller;
-use App\Models\WSalary;
-use Illuminate\Http\Request;
+    use Illuminate\Http\Request;
 
     class WorkerController extends Controller
     {

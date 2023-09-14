@@ -51,7 +51,7 @@
                 Bảng lương tháng <?php echo e(\Carbon\Carbon::now()->month); ?>
 
             </a>
-            <a href="<?php echo e(url('change-password/w_users')); ?>" class="d-block color_green mb-2 fs-15">
+            <a href="<?php echo e(url('Worker/change-password')); ?>" class="d-block color_green mb-2 fs-15">
                 Thay đổi mật khẩu
             </a>
         </div>

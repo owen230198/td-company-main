@@ -92,4 +92,40 @@ class AuthService extends BaseService
         }
         return redirect(asset($ret));
     }
+
+    public function baseChangePassword($request){
+        if (!$request->isMethod('POST')) {
+            $view_path = '.change_password';
+            $full_view_path = !empty($this->prefix) ? $this->prefix.'::'.$view_path : $view_path;
+            if (view()->exists($full_view_path)) {
+                return view($full_view_path);
+            }else{
+                return back()->with('error', 'Chức năng đổi mật khẩu không hỗ trợ !');
+            }
+        }else{
+            $model = getModelByTable($this->table_user);
+            $id = $model::getCurrent('id') != '' ? $model::getCurrent('id') : 0;
+            $user = $model::find($id);
+            if (empty($user)) {
+                return returnMessageAjax(100, 'Không tìm thấy dữ liệu người dùng !');
+            }
+            $old_pass = $request->input('old_pass');
+            $new_pass = $request->input('new_pass');
+            $confirm_pass = $request->input('confirm_pass');
+            if (strlen($old_pass) < 6 || strlen($new_pass) < 6 || strlen($confirm_pass) < 6) {
+                return returnMessageAjax(100, 'Thông tin mật khẩu cần nhiều hơn 6 ký tự !');
+            }
+            if ($user->password != md5($old_pass)) {
+                return returnMessageAjax(100, 'Mật khẩu cũ bạn đã nhập là không chính xác !');
+            }
+            if ($new_pass != $confirm_pass) {
+                return returnMessageAjax(100, 'Thông tin xác nhận mật khẩu bắt buộc giống với thông tin mật khẩu mới !');
+            }
+            $user->password = md5($password);
+            $change = $user->save();
+            if ($change) {
+                return returnMessageAjax(200, 'Thay đổi mật khẩu thành công !', url($this->prefix.'/logout'));
+            }
+        }
+    }
 }

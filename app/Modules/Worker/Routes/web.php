@@ -9,5 +9,6 @@ Route::prefix('Worker')->group(function()
         Route::get('', [WorkerController::class, 'index']);
         Route::any('action-command/{action}', [WorkerController::class, 'actionCommand']);
         Route::any('my-table-salary', [WorkerController::class, 'myTableSalary']);
+        Route::any('change-password', [AuthController::class, 'changePassword']);
     });
 });

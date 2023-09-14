@@ -22,5 +22,9 @@ class AuthController extends Controller
     {
         return $this->services->baseLogout();
     }
+
+    public function changePassword(Request $request){
+        return $this->services->baseChangePassword($request);
+    }
 }
 ?>
