@@ -128,9 +128,6 @@ trait QuoteTrait
         }elseif ($key_device == TDConstant::CUT){
             //Tính chi phí máy xén
             $obj = $this->configDataCut($model_price, $work_price, $shape_price, $data);
-        }elseif ($key_device == TDConstant::FILL){
-            //Tính chi phí bồi
-            $obj = $this->configDataFill($work_price, $shape_price, $data);
         }elseif ($key_device == TDConstant::MILL){
             //Tính chi phí bồi
             $obj = $this->configDataMill($model_price, $work_price, $shape_price, $data, $ext_name);

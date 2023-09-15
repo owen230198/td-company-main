@@ -34,7 +34,7 @@ trait QSupplyTrait{
       return $data_action;
    }
 
-   private function configDataFill($work_price, $shape_price, $fill)
+   private function configDataFill($fill)
    {
       $fill['qty_pro'] = self::$base_qty_pro;
       $fill['handle_qty'] = self::$base_qty_pro;
@@ -42,14 +42,19 @@ trait QSupplyTrait{
       $stage = !empty($fill['stage']) ? $fill['stage'] : [];
       foreach ($stage as $key => $item) {
          $qttv_id = !empty($item['materal']) ? $item['materal'] : 0;
-         $qttv = getFieldDataById('price', 'materals', $qttv_id);
-         $qttv_price = !empty($qttv) ? (float) $qttv : 0;
+         $qttv_price = (float) getFieldDataById('price', 'materals', $qttv_id);
          $fill['stage'][$key]['qttv_price'] = $qttv_price;
          $length = !empty($item['length']) ? $item['length'] : 0;
          $width = !empty($item['width']) ? $item['width'] : 0;
          $fill['stage'][$key]['cost'] = ($length * $width * $qttv_price); 
          if ( $fill['stage'][$key]['cost'] > 0) {
-            $fill['stage'][$key]['cost'] =  (($fill['stage'][$key]['cost'] + $work_price)*self::$base_qty_pro)+$shape_price;
+            $machine_id = !empty($item['machine']) ? $item['machine']  : 0;
+            $data_machine = getDetailDataByID('Device', $machine_id);
+            $work_price = (float) @$data_machine['work_price'];
+            $shape_price = (float) @$data_machine['shape_price'];
+            $fill['stage'][$key]['work_price'] = $work_price;
+            $fill['stage'][$key]['shape_price'] = $shape_price;
+            $fill['stage'][$key]['cost'] =  (($fill['stage'][$key]['cost'] + $work_price) * self::$base_qty_pro) + $shape_price;
          }
          $fill_cost += $fill['stage'][$key]['cost'];
       }
@@ -97,7 +102,7 @@ trait QSupplyTrait{
    {
       $this->newObjectSetProperty($data);
       if (!empty($data['fill'])) {
-         $data_action['fill'] = $this->configDataStage($data['fill']);
+         $data_action['fill'] = $this->configDataFill($data['fill']);
       }
 
       if (!empty($data['finish'])) {

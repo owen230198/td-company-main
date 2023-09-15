@@ -296,6 +296,16 @@ a.device_supp_item {
     max-width: 294px;   
 }
 
+.handle_stage_item{
+    display: flex;
+    width: 25px;
+    height: 25px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    margin: auto;
+}
+
 .notify_style{
     animation-name: tada;
     animation-duration: 1s;

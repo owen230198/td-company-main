@@ -15,14 +15,6 @@
         'attr' => ['type_input' => 'number']
     ];
 
-    $fill_device_select = [
-        'name' => 'product['.$pro_index.'][fill_finish][fill][machine]',
-        'type' => 'linking',
-        'note' => 'Chọn thiết bị máy bồi',
-        'value' => !empty($supply_obj->id) ? @$data_fill['machine'] : getDeviceId(['key_device' => 'fill', 'supply' => 'fill_finish', 'default_device' => 1]),
-        'other_data' => ['data' => ['table' => 'devices', 'where' => ['key_device' => 'fill', 'supply' => 'fill_finish'], 'select' => ['id', 'name']]]
-    ];
-
     $data_finish = !empty($supply_obj->finish) ? json_decode($supply_obj->finish, true) : [];
 
     $pro_finish_ext = [
@@ -58,7 +50,7 @@
 <?php echo $__env->make('view_update.view', $pro_fill_finish_qty, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
 <div class="module_fill_quote pb-2 mb-2 border_bot_eb section_quote_fill_finish">
-    <div class="d-flex align-items-end list_item_fill_finish">
+    <div class="list_item_fill_finish">
         <div class="ajax_fill_quote ajax_ff_quote">
             <?php if(!empty($data_fill['stage'])): ?>
                 <?php $__currentLoopData = $data_fill['stage']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $findex => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -68,16 +60,17 @@
                 <?php echo $__env->make('quotes.products.fill_finishes.ajax_fill', ['findex' => 0], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
             <?php endif; ?>
         </div>
-        <button type="button" data-product="<?php echo e($pro_index); ?>" data-view="ajax_fill"
-        class="main_button color_white bg_green border_green radius_5 font_bold sooth quote_add_fill_item ml-5 mb-2 add_fill_finish_quote_button">
+        <div class="text-center my-2 py-2 border_bot_eb">
+            <button type="button" data-product="<?php echo e($pro_index); ?>" data-view="ajax_fill"
+                    class="main_button color_white bg_green border_green radius_5 font_bold sooth quote_add_fill_item add_fill_finish_quote_button">
             <i class="fa fa-plus mr-2 fs-14" aria-hidden="true"></i> Thêm chi tiết
         </button>
+        </div>
     </div>
     <div class="d-flex align-items-center">
         <?php echo $__env->make('view_update.view', $pro_fill_ext, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <span class="fs-12 color_red font-italic ml-2">Đơn giá/1 sản phẩm</span>
     </div>
-    <?php echo $__env->make('view_update.view', $fill_device_select, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 </div>
 
 <div class="module_finish_quote pb-2 mb-2 border_bot_eb section_quote_fill_finish">

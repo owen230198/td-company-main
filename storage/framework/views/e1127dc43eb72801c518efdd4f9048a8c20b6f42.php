@@ -2,6 +2,13 @@
     <?php
         $order_field_update = [
             [
+                'name' => 'order[customer]',
+                'note' => 'Khách hàng',
+                'type' => 'linking',
+                'other_data' => ['config' => ['search' => 1], 'data'=> ['table' => 'customers']],
+                'value' => @$data_order['customer'] ?? 0
+            ],
+            [
                 'name' => '',
                 'note' => 'Tổng tiền (chưa bao gồm VAT)',
                 'attr' => ['disable_field' => 1, 'inject_class' => '__quote_total_input'],

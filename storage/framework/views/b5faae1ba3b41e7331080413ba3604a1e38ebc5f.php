@@ -1,7 +1,7 @@
 <p class="d-flex align-items-center color_green mb-2">
     <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
-    Loại vật tư gia công : <strong class="color_main ml-1">
-        <?php echo e(!empty($supply->type) ? getSupplyNameByKey($supply->type) : @$supply->name); ?>.
+    Tên vật tư gia công : <strong class="color_main ml-1">
+        <?php echo e($data_command->name); ?>.
     </strong>
 </p>
 <ul class="d-flex flex-wrap">

@@ -130,13 +130,7 @@
                     'insert' => 1,
                     'view' => 
                         [
-                            'with' => [
-                                'type' => 'group',
-                                'query' => [
-                                    ['key' => 'created_by', 'value' => \User::getCurrent('id')],
-                                    ['key' => 'status', 'value' => Order::NOT_ACCEPTED]
-                                ]
-                            ],
+                            'with' => ['key' => 'created_by', 'value' => \User::getCurrent('id')],
                         ],
                     'clone' => 1
                 ],

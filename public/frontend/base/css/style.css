@@ -289,9 +289,9 @@ input[type=time]{
 .config_content .form-control,
 .config_content .btn-group, .btn-group-vertical,
 .config_content .multiselect-container{
-  max-width: 375px;
-  min-width: 375px;
-  width: 375px;
+  max-width: 330px;
+  min-width: 330px;
+  width: 330px;
 }
 
 .config_content .form-control.short_input{

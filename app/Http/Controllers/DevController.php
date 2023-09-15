@@ -25,10 +25,10 @@ class DevController extends Controller
      */
     public function index(Request $request, $method)
     {
-        if(!@getSessionUser()['dev']){
-           echo 'method is only developers !';
-           return false;
-        }
+        // if(!@getSessionUser('user')['dev']){
+        //    echo 'method is only developers !';
+        //    return false;
+        // }
         if(!$method){
             echo 'method is not exists !';
         }else{
@@ -173,7 +173,14 @@ class DevController extends Controller
     }
 
     public function testData(){
-       dd(getCharaterByNum(2));
+        $table_salary = 'w_salaries';
+        $handle_materal = [20, 19, 21];
+        $where = ['type' => \TDConst::FILL, 'table_supply' => 'fill_finishes','supply' => 61, 'status' => \StatusConst::SUBMITED];
+        $arr_qty = [];
+        foreach ($handle_materal as $materal_id) {
+            $arr_qty[] = \DB::table($table_salary)->Where($where)->where('fill_materal', $materal_id)->sum('qty');
+        }
+        dd(collect($arr_qty)->min());
     }
 }
 

@@ -32,10 +32,6 @@
                 </p> 
                 <p class="d-flex align-items-center color_green mb-2">
                     <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
-                    Số lượng : <strong class="color_main ml-1">{{ (int) @$data_command->name }}.</strong>
-                </p> 
-                <p class="d-flex align-items-center color_green mb-2">
-                    <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
                     Loại thiết bị : <strong class="color_main ml-1">{{ getTextMachineType($view_type, @$data_command->machine_type) }}.</strong>
                 </p>
                 <p class="d-flex align-items-center color_green mb-2">

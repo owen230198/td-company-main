@@ -46,7 +46,7 @@
         <div class="col-lg-6">
             <h3 class="fs-14 text-uppercase border_bot_eb pb-1 mb-1 text-center handle_title color_green mx-auto">
                 Thông tin của bạn
-            </h3> 
+            </h3>
             <a href="<?php echo e(url('Worker/my-table-salary')); ?>" class="d-block color_green mb-2 mt-3 fs-15">
                 Bảng lương tháng <?php echo e(\Carbon\Carbon::now()->month); ?>
 

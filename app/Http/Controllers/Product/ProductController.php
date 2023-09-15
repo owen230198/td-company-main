@@ -3,6 +3,7 @@
     use App\Http\Controllers\Controller;
     use App\Models\Product;
     use App\Models\Quote;
+    use Illuminate\Http\Request;
     class ProductController extends Controller
     {
         function __construct()
@@ -72,6 +73,19 @@
             }else{
                 return back()->with('error', 'Phương thức không hợp lệ !');
             }
+        }
+
+        public function listSupplyProcess(Request $request)
+        {
+            $product_id = !empty($request->input('product')) ? $request->input('product') : 0;
+            $data_product = Product::find($product_id);
+            if (empty($data_product)) {
+                return back()->with('error', 'Không tìm thấy dữ liệu sản phẩm !');
+            }
+            $data['title'] = 'Thông tin sản xuất - '.$data_product['name'];
+            $data['parent_url'] = ['link' => @session()->get('back_url'), 'note' => 'Danh sách đơn sản phẩm'];
+            $data['elements'] = getProductElementData($data_product['category'], $product_id);
+            return view('products.view', $data);
         }
     }
 ?>

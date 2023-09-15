@@ -26,13 +26,17 @@
     cursor: pointer;
 }
 
+.quote_fill_finish_item {
+    width: max-content;
+}
+
 .remove_ext_element_quote.remove_ff_quote {
     width: 25px;
     height: 25px;
     border-radius: 0;
     box-shadow: none;
-    right: -20px;
-    top: -5px;
+    right: -25px;
+    top: 5px;
 }
 
 .height_input{

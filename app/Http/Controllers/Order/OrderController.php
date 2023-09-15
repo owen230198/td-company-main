@@ -30,6 +30,7 @@ class OrderController extends Controller
                 return back()->with('error', 'Bạn đã tạo đơn hàng cho báo giá này rồi !');
             }
             $data = $this->services->getBaseDataAction();
+            $data['data_order']['customer'] = $arr_quote['customer_id'];
             $data['order_cost'] = @$arr_quote['total_amount'];
             $data['products'] = Product::where(['act' => 1, 'quote_id' => $quote_id])->get();
             $data['product_qty'] = count($data['products']);
@@ -299,14 +300,32 @@ class OrderController extends Controller
                     foreach ($element['data'] as $supply) {
                         $table_supply = $element['table'];
                         $data_command = getStageActiveStartHandle($table_supply, $supply->id);
-                        $data_update['status'] = $data_command['type'];
+                        $type = $data_command['type'];
+                        $data_update['status'] = $type;
                         if (!empty($data_update)) {
                             $count++;
-                            $data_update['code'] =  $obj_order->code.getCharaterByNum($count);
+                            $code =  $obj_order->code.getCharaterByNum($count);
                             $update = getModelByTable($table_supply)->where('id', $supply->id)->update($data_update);
-                            if ($data_command['type'] != \StatusConst::SUBMITED && $update && !empty($data_command['handle']['machine'])) {
-                                $data_command['name'] = getNameCommandWorker($supply, $obj_order->name);
-                                WSalary::CommandStarted($data_update['code'], $data_command, $table_supply, $supply); 
+                            $update = true;
+                            $data_handle = !empty($data_command['handle']) ? $data_command['handle'] : [];
+                            if ($type != \StatusConst::SUBMITED && $update && (int) @$data_handle['handle_qty'] > 0) {
+                                if ($type == \TDConst::FILL && !empty($data_handle['stage'])) {
+                                    $data_command['qty'] = $data_handle['handle_qty'];
+                                    foreach ($data_handle['stage'] as $fillkey => $stage) {
+                                        $data_command['name'] = $obj_order->name.'('.getFieldDataById('name', 'materals', @$stage['materal']).')';
+                                        $data_command['fill_handle'] = json_encode($stage);
+                                        $data_command['handle'] = $stage;
+                                        $data_command['machine_type'] = getFieldDataById('type', 'devices', $stage['machine']);
+                                        $data_command['fill_materal'] = $stage['materal'];
+                                        $fill_code = $code.''.getCharaterByNum($fillkey);
+                                        WSalary::commandStarted($fill_code, $data_command, $table_supply, $supply);
+                                    }
+                                }else{
+                                    if (!empty($data_handle['machine'])) {
+                                        $data_command['name'] = getNameCommandWorker($supply, $obj_order->name);
+                                        WSalary::CommandStarted($code, $data_command, $table_supply, $supply); 
+                                    }   
+                                }
                             }
                         }
                     }

@@ -20,6 +20,10 @@
         <?php endif; ?>
         <p class="d-flex align-items-center color_green mb-2">
             <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
+            Tên vật tư : <?php echo e($command->name); ?>.
+        </p>
+        <p class="d-flex align-items-center color_green mb-2">
+            <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
             Số lượng : <?php echo e(@$command->qty); ?>.
         </p>
         <p class="d-flex align-items-center color_green mb-2">

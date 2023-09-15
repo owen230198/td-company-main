@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Quote\QuoteController;
 use App\Http\Controllers\Order\OrderController;
+use App\Http\Controllers\Product\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,6 +69,7 @@ Route::middleware(['check_login'])->group(function () {
 	Route::post('apply-to-worker-handle/{table}/{id}', [OrderController::class, 'applyToWorkerHandle']);
 	Route::get('select-supply-warehouse/{table}', [OrderController::class, 'selectSupplyWarehouse']);
 	Route::get('add-select-supply-handle', [OrderController::class, 'addSelectSupplyHandle']);
+	Route::get('list-supply-process', [ProductController::class, 'listSupplyProcess']);
 });
 $modules_path = dirname(__DIR__) . '/app/Modules/';
 if (is_dir($modules_path)) {

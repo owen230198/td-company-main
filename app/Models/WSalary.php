@@ -164,8 +164,10 @@ class WSalary extends Model
         $insert_command['product'] = $supply->product;
         $insert_command['qty'] = !empty($data_command['qty']) ? $data_command['qty'] : (int) @$data_command['handle']['handle_qty'];
         if (!empty($data_command['handle'])) {
-            $insert_command['handle'] = WSalary::getHandleDataJson($insert_command['type'], $data_command['handle']);
-            $insert_command['factor'] = !empty($data_command['handle']['handle_qty']) ? (int) $data_command['handle']['handle_qty'] : 1;
+            $insert_command['handle'] = is_array($data_command['handle']) ? 
+            WSalary::getHandleDataJson($insert_command['type'], $data_command['handle']) : 
+            $data_command['handle'];
+            $insert_command['factor'] = !empty($data_command['handle']['factor']) ? (int) $data_command['handle']['factor'] : 1;
         }
         $insert_command['status'] = Order::NOT_ACCEPTED;
         (new \BaseService)->configBaseDataAction($insert_command);
