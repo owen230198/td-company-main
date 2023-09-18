@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : owen
+ Source Server         : localhost
  Source Server Type    : MySQL
- Source Server Version : 100425
+ Source Server Version : 100428
  Source Host           : localhost:3306
  Source Schema         : td_company
 
  Target Server Type    : MySQL
- Target Server Version : 100425
+ Target Server Version : 100428
  File Encoding         : 65001
 
- Date: 16/09/2023 06:12:29
+ Date: 18/09/2023 05:42:11
 */
 
 SET NAMES utf8mb4;
@@ -13329,7 +13329,7 @@ CREATE TABLE `n_detail_tables`  (
   INDEX `map_insert`(`table_map`, `insert`) USING BTREE,
   INDEX `map_update`(`table_map`, `update`) USING BTREE,
   INDEX `map_search`(`table_map`, `search`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 219 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 232 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of n_detail_tables
@@ -13536,7 +13536,20 @@ INSERT INTO `n_detail_tables` VALUES (214, 'peel', '', 'Bóc lề', 'handle_stag
 INSERT INTO `n_detail_tables` VALUES (215, 'fold', '', 'Gấp vạch', 'handle_stage', 'papers', 1, 0, 0, 0, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2023-09-16 05:54:39');
 INSERT INTO `n_detail_tables` VALUES (216, 'box_paste', '', 'Dán hộp', 'handle_stage', 'papers', 1, 0, 0, 0, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2023-09-16 05:54:39');
 INSERT INTO `n_detail_tables` VALUES (217, 'bag_paste', '', 'Dấn túi', 'handle_stage', 'papers', 1, 0, 0, 0, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2023-09-16 05:54:39');
-INSERT INTO `n_detail_tables` VALUES (218, 'status', '', 'Trạng thái', 'text', 'papers', 1, 0, 0, 0, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2023-09-16 05:54:39');
+INSERT INTO `n_detail_tables` VALUES (218, 'status', '', 'Trạng thái', 'text', 'papers', 1, 0, 0, 0, 0, '', 1, 0, 0, '2023-04-07 23:41:47', '2023-09-17 10:42:36');
+INSERT INTO `n_detail_tables` VALUES (219, 'name', '', 'Tên vật tư', 'text', 'supplies', 1, 0, 0, 0, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2023-09-17 10:47:33');
+INSERT INTO `n_detail_tables` VALUES (220, 'product_qty', '', 'SL sản phẩm', 'text', 'supplies', 1, 0, 0, 0, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2023-09-17 10:47:33');
+INSERT INTO `n_detail_tables` VALUES (221, 'nqty', '', 'Số bát', 'text', 'supplies', 1, 0, 0, 0, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2023-09-17 10:47:33');
+INSERT INTO `n_detail_tables` VALUES (222, 'supp_qty', '', 'Số L vật tư', 'text', 'supplies', 1, 0, 0, 0, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2023-09-17 10:47:33');
+INSERT INTO `n_detail_tables` VALUES (223, 'cut', '', 'Xén', 'handle_stage', 'supplies', 1, 0, 0, 0, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2023-09-17 10:47:33');
+INSERT INTO `n_detail_tables` VALUES (224, 'elavate', '', 'Bế', 'handle_stage', 'supplies', 1, 0, 0, 0, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2023-09-17 10:47:33');
+INSERT INTO `n_detail_tables` VALUES (225, 'peel', '', 'Bóc lề', 'handle_stage', 'supplies', 1, 0, 0, 0, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2023-09-17 10:47:33');
+INSERT INTO `n_detail_tables` VALUES (226, 'mill', '', 'Phay', 'handle_stage', 'supplies', 1, 0, 0, 0, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2023-09-17 10:47:33');
+INSERT INTO `n_detail_tables` VALUES (227, 'status', '', 'Trạng thái', 'text', 'supplies', 1, 0, 0, 0, 0, '', 1, 0, 0, '2023-04-07 23:41:47', '2023-09-17 10:47:33');
+INSERT INTO `n_detail_tables` VALUES (228, 'product_qty', '', 'SL sản phẩm', 'text', 'fill_finishes', 1, 0, 0, 0, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2023-09-17 10:51:21');
+INSERT INTO `n_detail_tables` VALUES (229, 'fill', '', 'Bồi', 'handle_stage', 'fill_finishes', 1, 0, 0, 0, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2023-09-17 10:51:21');
+INSERT INTO `n_detail_tables` VALUES (230, 'finish', '', 'Hoàn thiện cuối', 'handle_stage', 'fill_finishes', 1, 0, 0, 0, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2023-09-17 10:51:21');
+INSERT INTO `n_detail_tables` VALUES (231, 'status', '', 'Trạng thái', 'text', 'fill_finishes', 1, 0, 0, 0, 0, '', 1, 0, 0, '2023-04-07 23:41:47', '2023-09-17 10:51:21');
 
 -- ----------------------------
 -- Table structure for n_group_users
@@ -14357,10 +14370,8 @@ INSERT INTO `n_tables` VALUES (8, 'q_papers', 'Tờ in', NULL, 10, 'view', NULL,
 INSERT INTO `n_tables` VALUES (9, 'devices', 'Thiết bị & Chi phí', '{\r\n	\"link\":\"config-device-price/supply_types?type=devices\", \r\n	\"note\":\"Danh sách thiết bị máy theo vật tư\"\r\n}', 10, 'view', NULL, '1', '1', '1', '1', '2023-04-23 11:30:46', '2023-08-30 04:55:37');
 INSERT INTO `n_tables` VALUES (10, 'materals', 'Chất liệu vật tư', NULL, 10, 'view', NULL, '1', '1', '1', '1', '2023-04-28 10:32:23', '2023-08-16 19:42:33');
 INSERT INTO `n_tables` VALUES (11, 'printers', 'Máy in & chi phí', NULL, 10, 'view', NULL, '1', '1', '1', '1', '2023-04-28 00:18:55', '2023-08-16 19:42:33');
-INSERT INTO `n_tables` VALUES (12, 'supplies', 'Vật tư hộp', NULL, 10, 'view', NULL, '1', '1', '1', '1', '2023-04-28 10:34:00', '2023-08-16 19:42:33');
 INSERT INTO `n_tables` VALUES (13, 'supply_types', 'Vật tư tham gia sx', NULL, 10, 'view', '[\r\n	{\r\n	\"icon\":\"list-ul\",\r\n	\"note\":\"Đơn giá định lượng\", \r\n	\"link\":\"view/supply_prices?default_data={%22supply_id%22:%22<id>%22}\",\r\n	\"condition\":[\r\n			{\"key\":\"is_name\", \"value\":\"0\"}\r\n		]\r\n	}\r\n]', '1', '1', '1', '1', '2023-07-17 19:30:41', '2023-08-16 19:42:34');
 INSERT INTO `n_tables` VALUES (14, 'supply_prices', 'Đơn giá vật tư', NULL, 20, 'view', NULL, '1', '1', '1', '1', '2023-04-28 10:33:01', '2023-08-16 19:42:34');
-INSERT INTO `n_tables` VALUES (17, 'fill_finishes', 'Chi phí bồi & hoàn thiện', NULL, 10, 'view', NULL, '1', '1', '1', '1', '2023-04-28 10:33:32', '2023-08-16 19:42:34');
 INSERT INTO `n_tables` VALUES (18, 'orders', 'Đơn hàng', NULL, 20, 'view', '[\r\n	{\r\n	\"icon\":\"list-ul\",\r\n	\"note\":\"DS sản phẩm\", \r\n	\"link\":\"view/products?default_data={%22order%22:%22<id>%22}\"\r\n	}\r\n]', '0', '1', '1', '1', '2023-06-21 13:22:33', '2023-09-15 21:19:43');
 INSERT INTO `n_tables` VALUES (19, 'p_substances', 'Chất liệu giấy in', NULL, 20, 'view', NULL, '1', '1', '1', '1', '2023-04-23 11:30:46', '2023-08-16 19:42:34');
 INSERT INTO `n_tables` VALUES (20, 'product_categories', 'Danh mục sản phẩm', NULL, 20, 'view', NULL, '1', '1', '1', '1', '2023-04-23 11:30:46', '2023-08-16 19:42:34');
@@ -14378,7 +14389,7 @@ INSERT INTO `n_tables` VALUES (32, 'w_salaries', 'Bảng chấm công - công nh
 INSERT INTO `n_tables` VALUES (33, 'supply_names', 'Tên phụ vật tư', NULL, 10, 'view', '', '1', '1', '1', '1', '2023-07-17 19:30:41', '2023-08-16 19:42:34');
 INSERT INTO `n_tables` VALUES (34, 'papers', 'Vật tư giấy', NULL, 20, 'view', '', '0', '1', '0', '0', '2023-06-21 13:22:33', '2023-09-16 05:48:43');
 INSERT INTO `n_tables` VALUES (35, 'supplies', 'Vật tư hộp cứng', NULL, 20, 'view', '', '0', '1', '0', '0', '2023-06-21 13:22:33', '2023-09-15 21:19:43');
-INSERT INTO `n_tables` VALUES (36, 'fill_finihes', 'Bồi & hoàn thiện', NULL, 20, 'view', '', '0', '1', '0', '0', '2023-06-21 13:22:33', '2023-09-15 21:19:43');
+INSERT INTO `n_tables` VALUES (36, 'fill_finishes', 'Bồi & hoàn thiện', NULL, 20, 'view', '', '0', '1', '0', '0', '2023-06-21 13:22:33', '2023-09-17 10:54:34');
 
 -- ----------------------------
 -- Table structure for n_users

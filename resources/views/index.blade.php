@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('frontend/base/css/bootstrap.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/base/css/font-awesome.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/base/css/select2.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('frontend/base/css/jquery-ui.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/base/daterangepickers/daterangepicker.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/base/css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/admin/css/style.css') }}" />
@@ -71,6 +72,7 @@
     <script src="{{ asset('frontend/admin/tinymce/js/tinymce/tinymce.min.js') }}"></script>
     <script src="{{ asset('frontend/admin/tinymce/js/tinymce/init_tinymce.js') }}"></script>
     <script src="{{ asset('frontend/base/script/select2.min.js') }}"></script>
+    <script src="{{ asset('frontend/base/script/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('frontend/base/daterangepickers/moment.min.js') }}"></script>
     <script src="{{ asset('frontend/base/daterangepickers/daterangepicker.js') }}"></script>
     <script src="{{ asset('frontend/admin/script/loading.js') }}"></script>
