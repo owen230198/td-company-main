@@ -30,10 +30,21 @@
         'name' => 'product['.$pro_index.'][paper]['.$supp_index.'][except_handle]',
         'note' => 'Lệnh in ghép',
         'type' => 'checkbox',
-        'attr' => ['inject_class' => "__paper_except_handle",
-        'disable_field' => !empty($disable_all) || in_array('name', @$arr_disable ?? []) ? 1 : 0],
+        'attr' => ['inject_class' => "__paper_except_handle"],
         'value' => @$supply_obj->except_handle
-    ]
+    ];
+    $paper_note_materal = [
+        'name' => 'product['.$pro_index.'][paper]['.$supp_index.'][size][note]',
+        'note' => 'Ghi chú giấy in',
+        'type' => 'textarea',
+        'attr' => [
+            'disable_field' => !empty($disable_all) 
+            || in_array('note', @$arr_disable ?? []) 
+            || @$supply_size['materal'] != 'other' ? 1 : 0,
+            'inject_class' => '__paper_materal_note'
+        ],
+        'value' => @$supply_size['note']
+    ];
 ?>
 <?php echo $__env->make('quotes.products.supplies.check_index_data', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php if($supp_index == 0 || @$supply_obj->main == 1): ?>
@@ -72,6 +83,9 @@
     
     <div class="materal_paper_module">
         <?php echo $__env->make('view_update.view', $pro_paper_materals, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        <div class="__module_paper_materal_note" style="display:<?php echo e(@$supply_size['materal'] != 'other' ? 'none' : 'block'); ?>">
+            <?php echo $__env->make('view_update.view', $paper_note_materal, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        </div>
         <?php echo $__env->make('view_update.view', $pro_paper_qttv, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <?php echo $__env->make('quotes.products.papers.size', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     </div>

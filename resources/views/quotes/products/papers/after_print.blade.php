@@ -23,10 +23,19 @@
                 @foreach ($handle_stage as $tabkey => $tab)
                     <div class="tab-pane fade show{{ $tabkey == 0 ? ' active' : '' }}" id="v-{{ $tab['key'].'_'.$pro_index.'_'.$supp_index }}" 
                     role="tabpanel" aria-labelledby="v-{{ $tab['key'].'_'.$pro_index.'_'.$supp_index }}-tab">
-                    @php
-                        $data_handle = !empty($data_paper->{$tab['key']}) ? json_decode($data_paper->{$tab['key']}, true) : [];
-                    @endphp
+                        @php
+                            $data_handle = !empty($data_paper->{$tab['key']}) ? json_decode($data_paper->{$tab['key']}, true) : [];
+                        @endphp
                         @include('quotes.products.papers.handles.'.$tab['key'], ['data_handle' => $data_handle])
+                        @php
+                        $textarea_note = [
+                                'name' => 'product['.$pro_index.'][paper]['.$supp_index.']['.$tab['key'].'][note]',
+                                'type' => 'textarea',
+                                'note' => 'Ghi chú',
+                                'value' => @$data_handle['note']
+                            ];
+                        @endphp
+                        @include('view_update.view', $textarea_note)
                     </div>
                 @endforeach
             </div>

@@ -10,7 +10,7 @@
             <div class="d-flex justify-content-between align-items-center">
                 <input type="number" name = 'product[<?php echo e($pro_index); ?>][length]' 
                 placeholder="Dài" class="form-control short_input text-center struture_pro_input" step="any"
-                value="<?php echo e(@$product['length'] ?? 0); ?>">
+                value="<?php echo e(@$product['length']); ?>">
             </div>
             <p class="text-center color_gray"><i class="fa fa-arrows-h fs-18" aria-hidden="true"></i></p>
         </div>
@@ -20,8 +20,9 @@
             <div class="d-flex justify-content-between align-items-center height_input">
                 <input type="number" name = 'product[<?php echo e($pro_index); ?>][height]' 
                 placeholder="Cao" class="form-control short_input text-center struture_pro_input" step="any"
-                value="<?php echo e(@$product['height'] ?? 0); ?>">
+                value="<?php echo e(@$product['height']); ?>">
                 <p class="text-center ml-1 color_gray"><i class="fa fa-arrows-v fs-18" aria-hidden="true"></i></p>
+                <p class="text-center ml-1 color_gray">cm</p>
             </div>
         </div>
     </div>
@@ -37,7 +38,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <input type="number" name = 'product[<?php echo e($pro_index); ?>][length]' 
                     placeholder="Dài" class="form-control short_input text-center struture_pro_input" step="any"
-                    value="<?php echo e(@$product['length'] ?? 0); ?>">
+                    value="<?php echo e(@$product['length']); ?>">
                 </div>
                 <p class="text-center color_gray"><i class="fa fa-arrows-h fs-18" aria-hidden="true"></i></p>
             </div>
@@ -47,7 +48,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <input type="number" name = 'product[<?php echo e($pro_index); ?>][width]' 
                     placeholder="Rộng" class="form-control short_input text-center struture_pro_input" step="any"
-                    value="<?php echo e(@$product['width'] ?? 0); ?>">
+                    value="<?php echo e(@$product['width']); ?>">
                 </div>
                 <p class="text-center color_gray"><i class="fa fa-arrows-h fs-18" aria-hidden="true"></i></p>
             </div>
@@ -57,8 +58,9 @@
                 <div class="d-flex justify-content-between align-items-center height_input">
                     <input type="number" name = 'product[<?php echo e($pro_index); ?>][height]' 
                     placeholder="Cao" class="form-control short_input text-center struture_pro_input" step="any"
-                    value="<?php echo e(@$product['height'] ?? 0); ?>">
+                    value="<?php echo e(@$product['height']); ?>">
                     <p class="text-center ml-1 color_gray"><i class="fa fa-arrows-v fs-18" aria-hidden="true"></i></p>
+                    <p class="text-center ml-1 color_gray">cm</p>
                 </div>
             </div>
         </div>

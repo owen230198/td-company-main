@@ -1,0 +1,1 @@
+@include('quotes.profits.papers.box_paste')

@@ -245,11 +245,11 @@ class QuoteService extends BaseService
         $arr['pro_size'] = getSizeTitleProduct($product);
         $arr['pro_design'] = getFieldDataById('name', 'design_types', $product['design']);
         if (!empty($main_paper['print'])) {
-            $arr['paper_print_tech'] = getTextdataPaperStage(\TDconst::PRINT, @$main_paper['print']['machine']);
+            $arr['paper_print_tech'] = getTextdataPaperStage(\TDConst::PRINT, @$main_paper['print']['machine']);
         }
         $finish = '';
         if (@$main_paper['nilon']['act'] == 1) {
-            $finish .= "+ Cán nilon: ".getTextdataPaperStage(\TDConst::NILON, $$main_paper['nilon']);
+            $finish .= "+ Cán nilon: ".getTextdataPaperStage(\TDConst::NILON, $main_paper['nilon']);
         }
 
         if (@$main_paper['compress']['act'] == 1) {

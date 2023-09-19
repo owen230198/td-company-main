@@ -133,7 +133,7 @@ trait QuoteTrait
             $obj = $this->configDataMill($model_price, $work_price, $shape_price, $data, $ext_name);
         }else{
             //Tính chi phí bóc lề, dán hộp, dán túi, máy gấp vạch
-            $obj = $this->configDataByOnlyDevice($model_price, $work_price, $shape_price, $data);        
+            $obj = $this->configDataByOnlyDevice($model_price, $work_price, $shape_price, $data);
         }
         return $obj;    
     }

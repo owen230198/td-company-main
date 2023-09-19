@@ -107,18 +107,25 @@ var selectPaperMateralModule = function()
 {
   $(document).on('change', 'select.select_paper_materal', function(event){
     event.preventDefault();
-    let module_size_paper = $(this).closest('.materal_paper_module').find('.paper_price_config_input');
-
+    let parent = $(this).closest('.materal_paper_module');
+    let module_size_paper = parent.find('.paper_price_config_input');
     let price_input = module_size_paper.find('input.price_input_paper');
+    let note_input_module = parent.find('.__module_paper_materal_note');
+    let note_input = note_input_module.find('textarea.__paper_materal_note');
     if ($(this).val() === 'other') {
-      console.log(module_size_paper.css('display'));
       if (module_size_paper.css('display') === 'none' && price_input.attr('disabled') === 'disabled') {
         module_size_paper.fadeIn(100);
         price_input.attr('disabled', false);  
       }
+      if (note_input_module.css('display') === 'none' && note_input.attr('disabled') === 'disabled') {
+        note_input_module.fadeIn();
+        note_input.attr('disabled', false);     
+      }
     }else{
       module_size_paper.fadeOut(100);
-      price_input.attr('disabled', true);   
+      price_input.attr('disabled', true); 
+      note_input_module.fadeOut(100);
+      note_input.attr('disabled', true);  
     }
   });
 }

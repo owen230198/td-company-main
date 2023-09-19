@@ -24,10 +24,19 @@
                 <?php $__currentLoopData = $handle_stage; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tabkey => $tab): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="tab-pane fade show<?php echo e($tabkey == 0 ? ' active' : ''); ?>" id="v-<?php echo e($tab['key'].'_'.$pro_index.'_'.$supp_index); ?>" 
                     role="tabpanel" aria-labelledby="v-<?php echo e($tab['key'].'_'.$pro_index.'_'.$supp_index); ?>-tab">
-                    <?php
-                        $data_handle = !empty($data_paper->{$tab['key']}) ? json_decode($data_paper->{$tab['key']}, true) : [];
-                    ?>
+                        <?php
+                            $data_handle = !empty($data_paper->{$tab['key']}) ? json_decode($data_paper->{$tab['key']}, true) : [];
+                        ?>
                         <?php echo $__env->make('quotes.products.papers.handles.'.$tab['key'], ['data_handle' => $data_handle], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                        <?php
+                        $textarea_note = [
+                                'name' => 'product['.$pro_index.'][paper]['.$supp_index.']['.$tab['key'].'][note]',
+                                'type' => 'textarea',
+                                'note' => 'Ghi chú',
+                                'value' => @$data_handle['note']
+                            ];
+                        ?>
+                        <?php echo $__env->make('view_update.view', $textarea_note, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                     </div>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>

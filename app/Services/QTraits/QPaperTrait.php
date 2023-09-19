@@ -177,6 +177,10 @@ trait QPaperTrait
             if (!empty($data['fold'])) {
                 $data_action['fold'] = $this->configDataStage($data['fold']);
             }
+
+            if (!empty($data['bag_paste'])) {
+                $data_action['bag_paste'] = $this->configDataStage($data['bag_paste']);
+            }
             
             $data_action['total_cost'] = $this->priceCaculatedByArray($data_action);    
         }else{

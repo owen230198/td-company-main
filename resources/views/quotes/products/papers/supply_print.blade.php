@@ -30,10 +30,21 @@
         'name' => 'product['.$pro_index.'][paper]['.$supp_index.'][except_handle]',
         'note' => 'Lệnh in ghép',
         'type' => 'checkbox',
-        'attr' => ['inject_class' => "__paper_except_handle",
-        'disable_field' => !empty($disable_all) || in_array('name', @$arr_disable ?? []) ? 1 : 0],
+        'attr' => ['inject_class' => "__paper_except_handle"],
         'value' => @$supply_obj->except_handle
-    ]
+    ];
+    $paper_note_materal = [
+        'name' => 'product['.$pro_index.'][paper]['.$supp_index.'][size][note]',
+        'note' => 'Ghi chú giấy in',
+        'type' => 'textarea',
+        'attr' => [
+            'disable_field' => !empty($disable_all) 
+            || in_array('note', @$arr_disable ?? []) 
+            || @$supply_size['materal'] != 'other' ? 1 : 0,
+            'inject_class' => '__paper_materal_note'
+        ],
+        'value' => @$supply_size['note']
+    ];
 @endphp
 @include('quotes.products.supplies.check_index_data')
 @if ($supp_index == 0 || @$supply_obj->main == 1)
@@ -72,6 +83,9 @@
     
     <div class="materal_paper_module">
         @include('view_update.view', $pro_paper_materals)
+        <div class="__module_paper_materal_note" style="display:{{ @$supply_size['materal'] != 'other' ? 'none' : 'block' }}">
+            @include('view_update.view', $paper_note_materal)
+        </div>
         @include('view_update.view', $pro_paper_qttv)
         @include('quotes.products.papers.size')
     </div>
