@@ -364,7 +364,7 @@ class AdminController extends Controller
 
     public function getListOptionAjax(Request $request, $table)
     {
-        $options = '<option value = "0">Không xác định</option>';
+        $options = '<option value = "">Không xác định</option>';
         $cvalue = $request->input('cvalue'); 
         $where = $request->except('cvalue');
         $where['act'] = 1;

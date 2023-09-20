@@ -1,0 +1,1 @@
+<?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/view_search/group_product.blade.php ENDPATH**/ ?>
