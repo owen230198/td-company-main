@@ -506,6 +506,59 @@ var passwordChangeInput = function()
     });
 }
 
+var rangeFieldModule = function() {
+    $('#value-range-submit').hide();
+    $("#min_value,#max_value").on('change', function () {
+        $('#value-range-submit').show();
+        var min_value_range = parseInt($("#min_value").val());
+        var max_value_range = parseInt($("#max_value").val());
+        if (min_value_range > max_value_range) {
+        $('#max_value').val(min_value_range);
+        }
+        $("#slider-range").slider({
+        values: [min_value_range, max_value_range]
+        }); 
+    });
+    $("#min_value,#max_value").on("paste keyup", function () {
+        $('#value-range-submit').show();
+        var min_value_range = parseInt($("#min_value").val());
+        var max_value_range = parseInt($("#max_value").val());
+        if(min_value_range == max_value_range){
+            max_value_range = min_value_range + 100;
+            $("#min_value").val(min_value_range);		
+            $("#max_value").val(max_value_range);
+        }
+        $("#slider-range").slider({
+        values: [min_value_range, max_value_range]
+        });
+    });
+    $(function () {
+        $(".filter-range").each(function () {
+            console.log($(this));
+            $(this).slider({
+                range: true,
+                orientation: "horizontal",
+                min: 0,
+                max: 10000,
+                values: [0, 10000],
+                step: 100,
+        
+                slide: function (event, ui) {
+                    if (ui.values[0] == ui.values[1]) {
+                        return false;
+                    }
+                    
+                    $("#min_value").val(ui.values[0]);
+                    $("#max_value").val(ui.values[1]);
+                }
+                });
+        
+                $("#min_value").val($(".filter-range").slider("values", 0));
+                $("#max_value").val($(".filter-range").slider("values", 1));
+        });
+    });
+}
+
 $(function () {
     submitActionAjaxForm();
     confirmRemoveData();
@@ -530,4 +583,5 @@ $(function () {
     selectTypeSuppWarehouse();
     selectTypeWorker();
     passwordChangeInput();
+    rangeFieldModule();
 });
