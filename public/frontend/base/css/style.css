@@ -294,7 +294,7 @@ input[type=time]{
   width: 330px;
 }
 
-.config_content .form-control.short_input{
+.form-control.short_input{
   max-width: 102px;
   min-width: 102px;
   width: 102px   

@@ -19,9 +19,11 @@
     $ext_pro_feild_file = \App\Models\Product::getFeildFileByStage(@$stage, $product);
 @endphp
 
-@foreach ($ext_pro_fields_inf as $ext_pro_field)
-    @include('view_update.view', $ext_pro_field)     
-@endforeach
+@if (\GroupUser::isAdmin() || \GroupUser::isSale())
+    @foreach ($ext_pro_fields_inf as $ext_pro_field)
+        @include('view_update.view', $ext_pro_field)     
+    @endforeach
+@endif
 
 @foreach ($ext_pro_feild_file as $key => $ext_feild_file)
     @php

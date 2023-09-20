@@ -141,7 +141,7 @@ a:hover{
     text-transform: capitalize;
     transition: all .2s;
     background: #ffffff;
-    margin-left: 30px;
+    margin-left: 20px;
     border-radius: 10px 0 0 10px;
     margin-bottom: 2px;
 }
@@ -293,7 +293,7 @@ a.device_supp_item {
 }
 
 .base_table_form_search .form-control, .base_table_form_search .select2-container{
-    max-width: 294px;   
+    max-width: 350px;   
 }
 
 .handle_stage_item{

@@ -364,7 +364,7 @@ class AdminController extends Controller
 
     public function getListOptionAjax(Request $request, $table)
     {
-        $options = '<option value = "">Không xác định</option>';
+        $options = '';
         $cvalue = $request->input('cvalue'); 
         $where = $request->except('cvalue');
         $where['act'] = 1;
@@ -374,11 +374,14 @@ class AdminController extends Controller
         }else{
             $data = $data->orderBy('name', 'asc')->get();    
         }
-        foreach ($data as $item) {
-            if (@$item->id == $cvalue) {
-                $options .= '<option value = "'.@$item->id.'" selected>'.@$item->name.'</option>';
-            }else{
-                $options .= '<option value = "'.@$item->id.'">'.@$item->name.'</option>';
+        if (!$data->isEmpty()) {
+            $options = '<option value = "">Không xác định</option>';
+            foreach ($data as $item) {
+                if (@$item->id == $cvalue) {
+                    $options .= '<option value = "'.@$item->id.'" selected>'.@$item->name.'</option>';
+                }else{
+                    $options .= '<option value = "'.@$item->id.'">'.@$item->name.'</option>';
+                }
             }
         }
         echo $options;

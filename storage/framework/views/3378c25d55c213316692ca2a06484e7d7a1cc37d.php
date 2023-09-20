@@ -46,7 +46,7 @@
             <?php echo e(@$attr['readonly'] == 1 ? 'readonly' : ''); ?>
 
             >
-        <option value="0">Chọn</option>
+        <option value=""><?php echo e(@$attr['placeholder'] ?? 'Chọn'); ?></option>
         <?php $__currentLoopData = $list_options; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <option value="<?php echo e($item->$field_value); ?>" <?php echo e($item->$field_value == @$value ? 'selected' : ''); ?>>
                 <?php echo e($item->$field_title); ?>

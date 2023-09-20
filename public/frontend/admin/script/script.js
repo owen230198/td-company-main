@@ -488,6 +488,37 @@ var selectTypeWorker = function()
     })
 }
 
+var moduleSelectStyleProduct = function()
+{
+    $(document).on('change', '.__select_product_category', function(event) {
+        event.preventDefault();
+        let parent = $(this).parent();
+        let category = $(this).val();
+        let select_style = parent.find('select.__select_product_style');
+        let url = 'get-list-option-ajax/product_styles?category=' + category;
+        $('#loader').fadeIn(200);
+        $.ajax({
+            url: getBaseRoute(url),
+            type: 'GET'
+        })
+        .done(function(data){
+            if (typeof data === 'object' && data.code == 100) {
+            swal('Không thành công', data.message, 'error');
+            }else{
+                if (!empty(data)) {
+                    select_style.html(data);
+                    select_style.attr('disabled', false);
+                    select_style.parent().fadeIn();   
+                }else{
+                    select_style.attr('disabled', true);
+                    select_style.parent().fadeOut();
+                }
+            }
+            $('#loader').delay(200).fadeOut(500); 
+        })
+    });
+}
+
 var passwordChangeInput = function()
 {
     $(document).on('click', 'button.__pass_change', function(event){
@@ -530,4 +561,5 @@ $(function () {
     selectTypeSuppWarehouse();
     selectTypeWorker();
     passwordChangeInput();
+    moduleSelectStyleProduct();
 });

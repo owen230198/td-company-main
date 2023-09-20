@@ -42,7 +42,7 @@
             {{ @$attr['disable_field'] == 1 ? 'disabled' : '' }}
             {{ @$attr['readonly'] == 1 ? 'readonly' : '' }}
             >
-        <option value="0">Chọn</option>
+        <option value="">{{ @$attr['placeholder'] ?? 'Chọn' }}</option>
         @foreach ($list_options as $item)
             <option value="{{ $item->$field_value }}" {{ $item->$field_value == @$value ? 'selected' : '' }}>
                 {{ $item->$field_title }}

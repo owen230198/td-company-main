@@ -142,12 +142,35 @@ class AdminService extends BaseService
                     $tmp = ['key' => $name, 'compare' => 'like', 'value' => '%'.$value.'%'];
                     $where[] = $tmp;
                 }elseif($type == 'child_linking'){
-                $other_data = json_decode($field['other_data'], true);
-                $linking_data = @$other_data['data'] ?? [];
-                $field_title = @$linking_data['field_title'] ?? 'name';
-                $field_query = @$linking_data['field_query'];
-                $arr_id = \DB::table($linking_data['table'])->where('act', 1)->where($field_title, 'like', '%'.$value.'%')->pluck($field_query)->all();
-                $where[] = ['key' => 'id', 'compare' => 'in', 'value' => array_unique($arr_id)];
+                    $other_data = json_decode($field['other_data'], true);
+                    $linking_data = @$other_data['data'] ?? [];
+                    $field_title = @$linking_data['field_title'] ?? 'name';
+                    $field_query = @$linking_data['field_query'];
+                    $arr_id = \DB::table($linking_data['table'])->where('act', 1)->where($field_title, 'like', '%'.$value.'%')->pluck($field_query)->all();
+                    $where[] = ['key' => 'id', 'compare' => 'in', 'value' => array_unique($arr_id)];
+                }elseif ($type == 'group_product') {
+                    if (!empty($value['group'])) {
+                        $product_obj = \DB::table('products')->where(['status' => \StatusConst::SUBMITED, 'category' => $value['group']]);
+                        if (!empty($value['style'])) {
+                            $product_obj->where('product_style', $value['style']);
+                        }
+                        $arr_id = $product_obj->pluck('quote_id')->all();
+                        dd($arr_id);
+                        $where[] = ['key' => 'id', 'compare' => 'in', 'value' => array_unique($arr_id)];
+                    }
+                }elseif ($type == 'product_size') {
+                    $product_obj = \DB::table('products');
+                    if (!empty($value['length'])) {
+                        $product_obj->where('length', $value['length']);
+                    }
+                    if (!empty($value['width'])) {
+                        $product_obj->where('width', $value['width']);
+                    }
+                    if (!empty($value['height'])) {
+                        $product_obj->where('height', $value['height']);
+                    }
+                    $arr_id = $product_obj->pluck('quote_id')->all();
+                    $where[] = ['key' => 'id', 'compare' => 'in', 'value' => array_unique($arr_id)];
                 }elseif ($type == 'datetime') {
                     $date_range = explode(' - ', $value);
                     if (is_array($date_range)){
@@ -163,7 +186,7 @@ class AdminService extends BaseService
                     $where[] = ['key' => $field_name, 'value' => $value];
                 }
             }
-            return $where;
+            return @$where ?? [];
         }
     }
 

@@ -59,6 +59,11 @@ class NGroupUser extends Model
             'link' => 'config-device-price/supply_types?type=materals', 
             'group' => 'quote_price_config'
         ],
+        'product_category' => [
+            'name' => 'Danh mục sản phẩm', 
+            'link' => 'view/product_categories', 
+            'group' => 'quote_price_config'
+        ],
         'quote_config' => [
             'name' => 'Các thông số khác', 
             'link' => 'view/quote_configs', 
