@@ -315,5 +315,19 @@ class QuoteController extends Controller
         }
         echo $html;
     }
+
+    public function suggestProductSubmitedBySize(Request $request)
+    {
+        $category = !empty($request->input('category')) ? $request->input('category') : '';
+        $style = !empty($request->input('style')) ? $request->input('style') : '';
+        $length = !empty($request->input('length')) ? $request->input('length') : 0;
+        $width = !empty($request->input('width')) ? $request->input('width') : 0;
+        $height = !empty($request->input('height')) ? $request->input('height') : 0;
+        $obj = \DB::table('products')->where(['status' => \StatusConst::SUBMITED, 'category' => $category, 'length' => $length, 'width' => $width, 'height' => $height]);
+        if ($style != '') {
+            $obj->where('style', $style);
+        }
+        return view('quotes.products.suggest_product_submited', ['list_data' => $obj->take(5)]);
+    }
 }
 

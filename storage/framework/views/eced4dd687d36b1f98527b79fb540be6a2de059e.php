@@ -44,7 +44,7 @@
                             'type' => 'linking',
                             'note' => 'Kiểu hộp',
                             'attr' => ['required' => 1 , 
-                                'inject_class' => 'select_quote_procategory __select_product_style __style_product',
+                                'inject_class' => '__select_product_style __style_product',
                                 'disable_field' => 1
                             ],
                             'other_data' => ['data' => ['table' => 'product_styles']],

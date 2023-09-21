@@ -221,29 +221,6 @@ var selectExtNamePaperModule = function()
   });
 }
 
-var autoComputePaperAjax = function()
-{
-  $(document).on('click', 'button.auto_computed_btn', function(event){
-    event.preventDefault();
-    let data = $(this).closest('.quote_product_structure').find('.struture_pro_input').serialize();
-    let paper_name = $(this).closest('.section_quote_print_paper').find('input.quote_receive_paper_name_main').val();
-    let proindex = $(this).data('proindex');
-    let paperindex = $(this).data('paperindex');
-    let section = $(this).closest('.quote_paper_item');
-    $('#loader').fadeIn(200);
-    $.ajax({
-      url: getBaseRoute('compute-paper-size?paper_name='+paper_name+'&proindex='+proindex+'paperindex='+paperindex),
-      type: 'GET',
-      data: data
-    })
-    .done(function(html){
-      section.html(html);
-      initInputModuleAfterAjax(section);
-      $('#loader').delay(200).fadeOut(500); 
-    })
-  });
-}
-
 var selectProductCategory = function()
 {
   $(document).on('change', 'select.select_quote_procategory', function(event){
@@ -361,9 +338,11 @@ var modulePaperExceptHandle = function()
   });
 }
 
-var suggestShapeFileBySize = function() {
-  $(document).on('change', '.__size_suggest_input', function(event){
+var suggestShapeFileBySize = function() 
+{
+  $(document).on('change', 'input.__size_suggest_input', function(event){
     event.preventDefault();
+    console.log(1);
     let module = $(this).closest('.config_handle_paper_pro');
     let category = module.find('select.__category_product').val();
     let style = module.find('select.__style_product').val();
@@ -395,6 +374,5 @@ $(function(){
   showHandleDetail();
   hoverDetailSupplyCost();
   modulePaperExceptHandle();
-  // autoComputePaperAjax();
   suggestShapeFileBySize();
 });

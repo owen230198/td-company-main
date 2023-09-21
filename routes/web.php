@@ -59,6 +59,7 @@ Route::middleware(['check_login'])->group(function () {
 	Route::any('send-quote/{id}', [QuoteController::class, 'sendQuote']);
 	Route::any('apply-quote/{id}', [QuoteController::class, 'applyQuote']);
 	Route::get('get-after-print-view', [QuoteController::class, 'getAfterPrintView']);
+	Route::get('suggest-product-submited-by-size', [QuoteController::class, 'suggestProductSubmitedBySize']);
 
 	//orders routes
 	Route::post('apply-order/{stage}/{type}/{id}', [OrderController::class, 'applyOrder']);
