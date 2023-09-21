@@ -20,30 +20,47 @@
                                 'value' => @$product['qty']
                             ],
                             [
-                                'name' => $pro_base_name_input.'[category]',
-                                'type' => 'linking',
-                                'note' => 'Nhóm sản phẩm',
-                                'attr' => ['required' => 1 , 
-                                    'inject_class' => 'select_quote_procategory', 
-                                    'inject_attr' => 'proindex='.$pro_index,
-                                    'readonly' => !empty($product['category']) ? 1 : 0
-                                ],
-                                'other_data' => ['data' => ['table' => 'product_categories']],
-                                'value' => @$product['category']
-                            ],
-                            [
                                 'name' => $pro_base_name_input.'[design]',
                                 'note' => 'thiết kế',
                                 'type' => 'linking',
                                 'other_data' => ['data' => ['table' => 'design_types', 'select' => ['id', 'name']]],
                                 'value' => @$product['design']
                             ]
-                        ]
+                        ];
+                        $category_product_field = [
+                            'name' => $pro_base_name_input.'[category]',
+                            'type' => 'linking',
+                            'note' => 'Nhóm sản phẩm',
+                            'attr' => ['required' => 1 , 
+                                'inject_class' => 'select_quote_procategory __select_product_category __category_product', 
+                                'inject_attr' => 'proindex='.$pro_index,
+                                'readonly' => !empty($product['category']) ? 1 : 0
+                            ],
+                            'other_data' => ['data' => ['table' => 'product_categories']],
+                            'value' => @$product['category']
+                        ];
+                        $style_product_field = [
+                            'name' => $pro_base_name_input.'[style]',
+                            'type' => 'linking',
+                            'note' => 'Kiểu hộp',
+                            'attr' => ['required' => 1 , 
+                                'inject_class' => 'select_quote_procategory __select_product_style __style_product',
+                                'disable_field' => 1
+                            ],
+                            'other_data' => ['data' => ['table' => 'product_styles']],
+                            'value' => @$product['product_style']
+                        ];
                     ?>
 
                     <?php $__currentLoopData = $arr_pro_field; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $field): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <?php echo $__env->make('view_update.view', $field, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    <div class="__style_product_select_module">
+                        <?php echo $__env->make('view_update.view', $category_product_field, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                        <div class="__style_select mt-2" style="display: <?php echo e(!empty($data_value['group']) ? 'block' : 'none'); ?>">
+                            <?php echo $__env->make('view_update.view', $style_product_field, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                        </div>
+                    </div>
                     <?php if(\GroupUser::isSale() || \GroupUser::isTechApply() || \GroupUser::isAdmin()): ?>
                         <?php echo $__env->make('view_update.view', [
                             'name' => $pro_base_name_input.'[sale_shape_file]',

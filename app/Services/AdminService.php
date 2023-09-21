@@ -149,13 +149,13 @@ class AdminService extends BaseService
                     $arr_id = \DB::table($linking_data['table'])->where('act', 1)->where($field_title, 'like', '%'.$value.'%')->pluck($field_query)->all();
                     $where[] = ['key' => 'id', 'compare' => 'in', 'value' => array_unique($arr_id)];
                 }elseif ($type == 'group_product') {
+                    dd($value);
                     if (!empty($value['group'])) {
-                        $product_obj = \DB::table('products')->where(['status' => \StatusConst::SUBMITED, 'category' => $value['group']]);
+                        $product_obj = \DB::table('products')->where(['category' => $value['group']]);
                         if (!empty($value['style'])) {
                             $product_obj->where('product_style', $value['style']);
                         }
                         $arr_id = $product_obj->pluck('quote_id')->all();
-                        dd($arr_id);
                         $where[] = ['key' => 'id', 'compare' => 'in', 'value' => array_unique($arr_id)];
                     }
                 }elseif ($type == 'product_size') {

@@ -111,7 +111,7 @@ class NGroupUser extends Model
         ],
         'handle_process' => [
             'name' => 'Theo dõi sản xuất', 
-            'link' => 'view/orders', 
+            'link' => 'view/products?default_data={"order_created":1}', 
             'group' => 
             'order_handle'
         ],

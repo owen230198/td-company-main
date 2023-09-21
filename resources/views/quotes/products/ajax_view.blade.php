@@ -20,30 +20,47 @@
                                 'value' => @$product['qty']
                             ],
                             [
-                                'name' => $pro_base_name_input.'[category]',
-                                'type' => 'linking',
-                                'note' => 'Nhóm sản phẩm',
-                                'attr' => ['required' => 1 , 
-                                    'inject_class' => 'select_quote_procategory', 
-                                    'inject_attr' => 'proindex='.$pro_index,
-                                    'readonly' => !empty($product['category']) ? 1 : 0
-                                ],
-                                'other_data' => ['data' => ['table' => 'product_categories']],
-                                'value' => @$product['category']
-                            ],
-                            [
                                 'name' => $pro_base_name_input.'[design]',
                                 'note' => 'thiết kế',
                                 'type' => 'linking',
                                 'other_data' => ['data' => ['table' => 'design_types', 'select' => ['id', 'name']]],
                                 'value' => @$product['design']
                             ]
-                        ]
+                        ];
+                        $category_product_field = [
+                            'name' => $pro_base_name_input.'[category]',
+                            'type' => 'linking',
+                            'note' => 'Nhóm sản phẩm',
+                            'attr' => ['required' => 1 , 
+                                'inject_class' => 'select_quote_procategory __select_product_category __category_product', 
+                                'inject_attr' => 'proindex='.$pro_index,
+                                'readonly' => !empty($product['category']) ? 1 : 0
+                            ],
+                            'other_data' => ['data' => ['table' => 'product_categories']],
+                            'value' => @$product['category']
+                        ];
+                        $style_product_field = [
+                            'name' => $pro_base_name_input.'[style]',
+                            'type' => 'linking',
+                            'note' => 'Kiểu hộp',
+                            'attr' => ['required' => 1 , 
+                                'inject_class' => '__select_product_style __style_product',
+                                'disable_field' => 1
+                            ],
+                            'other_data' => ['data' => ['table' => 'product_styles']],
+                            'value' => @$product['product_style']
+                        ];
                     @endphp
 
                     @foreach ($arr_pro_field as $field)
                         @include('view_update.view', $field)
                     @endforeach
+                    <div class="__style_product_select_module">
+                        @include('view_update.view', $category_product_field)
+                        <div class="__style_select mt-2" style="display: {{ !empty($data_value['group']) ? 'block' : 'none' }}">
+                            @include('view_update.view', $style_product_field)
+                        </div>
+                    </div>
                     @if (\GroupUser::isSale() || \GroupUser::isTechApply() || \GroupUser::isAdmin())
                         @include('view_update.view', [
                             'name' => $pro_base_name_input.'[sale_shape_file]',

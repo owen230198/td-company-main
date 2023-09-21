@@ -67,6 +67,7 @@ class OrderService extends BaseService
             $data_update['code'] =  $order['code'].getCharaterByNum($key);
             $data_update['status'] = $order['status'];
             $data_update['order'] = $order['id'];
+            $data_update['order_created'] = 1;
             Product::where('id', $product['id'])->update($data_update);   
         }  
     }

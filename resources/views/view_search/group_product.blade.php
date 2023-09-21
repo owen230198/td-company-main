@@ -22,7 +22,7 @@
 @endphp
 <div class="w-100 __style_product_select_module">
     @include('view_update.linking', $field_category)
-    <div class="__style_select mt-2" style="display: {{ !empty($data_search['category']['group']) ? 'block' : 'none' }}">
+    <div class="__style_select mt-2" style="display: {{ !empty($data_value['group']) ? 'block' : 'none' }}">
         @include('view_update.linking', $field_style)
     </div>
 </div>

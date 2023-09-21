@@ -22,7 +22,7 @@
 ?>
 <div class="w-100 __style_product_select_module">
     <?php echo $__env->make('view_update.linking', $field_category, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-    <div class="__style_select mt-2" style="display: <?php echo e(!empty($data_search['category']['group']) ? 'block' : 'none'); ?>">
+    <div class="__style_select mt-2" style="display: <?php echo e(!empty($data_value['group']) ? 'block' : 'none'); ?>">
         <?php echo $__env->make('view_update.linking', $field_style, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     </div>
 </div><?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/view_search/group_product.blade.php ENDPATH**/ ?>

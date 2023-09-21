@@ -19,9 +19,11 @@
     $ext_pro_feild_file = \App\Models\Product::getFeildFileByStage(@$stage, $product);
 ?>
 
-<?php $__currentLoopData = $ext_pro_fields_inf; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ext_pro_field): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-    <?php echo $__env->make('view_update.view', $ext_pro_field, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>     
-<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+<?php if(\GroupUser::isAdmin() || \GroupUser::isSale()): ?>
+    <?php $__currentLoopData = $ext_pro_fields_inf; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ext_pro_field): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <?php echo $__env->make('view_update.view', $ext_pro_field, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>     
+    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+<?php endif; ?>
 
 <?php $__currentLoopData = $ext_pro_feild_file; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $ext_feild_file): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
     <?php

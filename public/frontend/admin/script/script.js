@@ -492,7 +492,7 @@ var moduleSelectStyleProduct = function()
 {
     $(document).on('change', '.__select_product_category', function(event) {
         event.preventDefault();
-        let parent = $(this).parent();
+        let parent = $(this).closest('.__style_product_select_module');
         let category = $(this).val();
         let select_style = parent.find('select.__select_product_style');
         let url = 'get-list-option-ajax/product_styles?category=' + category;
@@ -508,10 +508,10 @@ var moduleSelectStyleProduct = function()
                 if (!empty(data)) {
                     select_style.html(data);
                     select_style.attr('disabled', false);
-                    select_style.parent().fadeIn();   
+                    select_style.closest('.__style_select').fadeIn();   
                 }else{
                     select_style.attr('disabled', true);
-                    select_style.parent().fadeOut();
+                    select_style.closest('.__style_select').fadeOut();
                 }
             }
             $('#loader').delay(200).fadeOut(500); 

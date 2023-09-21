@@ -361,6 +361,21 @@ var modulePaperExceptHandle = function()
   });
 }
 
+var suggestShapeFileBySize = function() {
+  $(document).on('change', '.__size_suggest_input', function(event){
+    event.preventDefault();
+    let module = $(this).closest('.config_handle_paper_pro');
+    let category = module.find('select.__category_product').val();
+    let style = module.find('select.__style_product').val();
+    let length = module.find('input.__length_input').val();
+    let width = module.find('input.__width_input').val();
+    let height = module.find('input.__height_input').val();
+    let url = 'suggest-product-submited-by-size?category=' + category + '&style=' + style + '&length=' + length + '&width=' + width + '&height=' + height;
+    let suggest_section = module.find('.__suggest_product_submited_ajax');
+    ajaxViewTarget(url, suggest_section, suggest_section);
+  }); 
+}
+
 $(function(){
 	changQtyInput();
   moduleSelectOtherPaper();
@@ -381,4 +396,5 @@ $(function(){
   hoverDetailSupplyCost();
   modulePaperExceptHandle();
   // autoComputePaperAjax();
+  suggestShapeFileBySize();
 });
