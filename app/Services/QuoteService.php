@@ -17,12 +17,13 @@ class QuoteService extends BaseService
 	}
     public function dataActionCustomer($customer_id, $data_customer)
     {
-        $this->configBaseDataAction($data_customer);
         $data_quote = $data_customer;
         if (empty($customer_id)) {
+            $this->configBaseDataAction($data_customer);
             $data_customer['code'] = Customer::getInsertCode();
             $data_customer['status'] = 0;
             $customer_id = Customer::insertGetId($data_customer);
+            logActionUserData('insert', 'customers', $customer_id);
         }
         $data_quote['seri'] = 'BG-'.getCodeInsertTable('quotes');
         $data_quote['customer_id'] = $customer_id;
@@ -117,6 +118,9 @@ class QuoteService extends BaseService
         }
         if (!empty($data['category'])) {
             $data_action['category'] = $data['category'];
+        }
+        if (!empty($data['product_style'])) {
+            $data_action['product_style'] = $data['product_style'];
         }
         if (!empty($data['design'])) {
             $data_action['design'] = $data['design'];
@@ -217,12 +221,18 @@ class QuoteService extends BaseService
         $customer_id = $request->input('customer_id');
         $data_quote = $this->dataActionCustomer($customer_id, $data_customer);
         if (!empty($id)) {
-            Quote::where('id', $id)->update($data_quote);
+            $quote_obj = \DB::table('quotes')->where('id', $id);
+            $quote_item = $quote_obj->get()->first();
+            $quote_obj->timestamps = false;
+            $quote_obj->update($data_quote);
+            logActionUserData('update_customer', 'quotes', $id, $quote_item);
         }else{
             $data_quote['status'] = StatusConstant::NOT_ACCEPTED;
-            $insert_id = Quote::insertGetId($data_quote);
+            (new \BaseService)->configBaseDataAction($data_quote);
+            $insert_id = \DB::table('quotes')->insertGetId($data_quote);
+            logActionUserData('insert_customer', 'quotes', $insert_id, $data_quote);
         }
-        $redr = !empty($insert_id) ? 'insert/quotes?step=handle_config&id='.$insert_id : 'update/quotes/'.$id.'?step=handle_config';
+        $redr = !empty($insert_id) && !empty($log_id) ? 'insert/quotes?step=handle_config&id='.$insert_id : 'update/quotes/'.$id.'?step=handle_config';
         return returnMessageAjax(200, '', asset($redr));
     }
 

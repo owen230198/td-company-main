@@ -133,10 +133,10 @@ if (!function_exists('getlabelLinking')) {
     function getLabelLinking($data, $label, $ext_info = false)
     {
         $ret = @$data->{$label};
-        if (!empty($data->code)) {
+        if (!empty($data->code) && $ext_info) {
             $ret .= ' - Mã: '.$data->code;
         }
-        if (!empty($data->seri)) {
+        if (!empty($data->seri) && $ext_info) {
             $ret .= ' - Seri: '.$data->seri;
         }
         if (!empty($data->qty) && $ext_info) {
@@ -185,5 +185,34 @@ if (!function_exists('removeFileData')) {
                 unlink($full_path);
             }
         }
+    }
+}
+
+if (!function_exists('logActionUserData')) {
+    function logActionUserData($action, $table, $id, $data_item = new \stdClass(),  $parent = 0)
+    {
+        $data_log = [   'table_map' => $table, 
+                        'action' => $action, 
+                        'target' => $id,  
+                        'user' => \User::getCurrent('id'),
+                        'act' => 1,
+                        'parent' => $parent,
+                        'created_at' => \Carbon\Carbon::now(),
+                        'updated_at' => \Carbon\Carbon::now()];
+        if (in_array($action, ['update', 'update_customer', 'apply']) && !empty($data_item)) {
+            $data_target = \DB::table($table)->find($id);
+            foreach ($data_target as $key => $value) {
+                $old_value = @$data_item->{$key};
+                if (!in_array($key, ['updated_at', 'created_at']) && $value != $old_value) {
+                    $detail_data[$key] = ['old' => $old_value, 'new' => $value];
+                }    
+            }
+        }else{
+            $detail_data = $data_item;
+        }
+        if (!empty($detail_data)) {
+            $data_log['detail_data'] = json_encode($detail_data);
+            return \App\Models\NLogAction::insertGetId($data_log);
+        }           
     }
 }

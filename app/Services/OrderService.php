@@ -6,7 +6,6 @@ use App\Models\Quote;
 use App\Models\Product;
 use \App\Models\CDesign;
 use \App\Models\CSupply;
-use App\Models\Paper;
 use App\Models\PrintWarehouse;
 use App\Models\Supply;
 use App\Models\SupplyWarehouse;

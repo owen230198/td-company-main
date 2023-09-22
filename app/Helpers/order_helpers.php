@@ -66,7 +66,11 @@
     if (!function_exists('getSizeTitleProduct')) {
         function getSizeTitleProduct($product)
         {
-            return @$product['length'].' x '. @$product['width'].' x '.@$product['height'];
+            $size = $product->length;
+            if (!empty($product->width)) {
+                $size .= ' x '.$product->width;
+            }
+            return $size.' x '.$product->height;
         }
     }
 
@@ -164,8 +168,8 @@
         }
     }
 
-    if (!function_exists('checkUpdateeOrderStatus')) {
-        function checkUpdateeOrderStatus($id, $status)
+    if (!function_exists('checkUpdateOrderStatus')) {
+        function checkUpdateOrderStatus($id, $status)
         {
             $a = getCountDataTable('products', ['order' => $id]);
             $b = getCountDataTable('products', ['order' => $id, 'status' => $status]);

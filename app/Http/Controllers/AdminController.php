@@ -175,7 +175,7 @@ class AdminController extends Controller
                 $status = $this->admins->doInsertTable($table, $param);
                 if ($status['code'] == 200) {
                     $back_routes = @session()->get('back_url') ?? url('view/'.$table);
-                    $this->admins->logActionUserData(__FUNCTION__, $table, $status['id']);
+                    logActionUserData(__FUNCTION__, $table, $status['id'], $param);
                     return returnMessageAjax(200, 'Thêm dữ liệu thành công!', $back_routes);
                 }else {
                     return returnMessageAjax(100, $status['message']);
@@ -210,7 +210,7 @@ class AdminController extends Controller
                 $status = $this->admins->doUpdateTable($id, $table, $param);
                 if ($status['code'] == 200) {
                     $back_routes = @session()->get('back_url') ?? url('view/'.$table);
-                    $this->admins->logActionUserData(__FUNCTION__, $table, $id, $dataItem);
+                    logActionUserData(__FUNCTION__, $table, $id, $dataItem);
                     return returnMessageAjax(200, 'Cập nhật dữ liệu thành công!', $back_routes);
                 }else {
                     return returnMessageAjax(100, $status['message']);
@@ -253,7 +253,6 @@ class AdminController extends Controller
         $role = $this->admins->checkPermissionAction($table, __FUNCTION__);
         $is_ajax = (boolean) $request->input('ajax');
         if (empty($role['allow'])) {
-            $this->admins->logActionUserData(__FUNCTION__, $table, $id, $dataItem);
             return customReturnMessage(false, $is_ajax, ['message' => 'Không có quyền thao tác !']);
         }
         $success = $this->admins->removeDataTable($table, $id);

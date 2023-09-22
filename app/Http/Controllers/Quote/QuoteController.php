@@ -48,7 +48,9 @@ class QuoteController extends Controller
                     $data['parent_url'] = ['link' => @session()->get('back_url'), 'note' => 'Danh sách báo giá'];
                 }else{
                     $data['data_quote'] = $quote;
-                    $data['products'] = Product::where(['act' => 1, 'quote_id' => $id])->get();
+                    $products = Product::where(['act' => 1, 'quote_id' => $id])->get();
+                    dd($products->pluck('id')->all());
+                    $data['products'] = $products;
                     $data['product_qty'] = count($data['products']);
                     $data['parent_url'] = ['link' => 'update/quotes/'.$id, 'note' => 'Chọn khách hàng khác'];
                 }
@@ -56,7 +58,6 @@ class QuoteController extends Controller
                 $data['link_action'] = url('update/quotes/'.$id.'?step='.$step);
                 return view('quotes.'.$step, $data);
             }
-            
         }else{
             return redirect(url('/'))->with('error', 'Dữ liệu báo giá không tồn tại !');
         } 
@@ -72,6 +73,8 @@ class QuoteController extends Controller
         $data_quote['seri'] = 'BG-'.getCodeInsertTable('quotes');
         $data_quote['status'] = \StatusConst::NOT_ACCEPTED;
         $quote_id = Quote::insertGetId($data_quote);
+        //log insert quote
+        $log_quote_id = logActionUserData('insert', 'quotes', $quote_id, $data_quote);
         $child_tables = Product::$childTable;
         if ($quote_id) {
             foreach ($data_products as $product) {
@@ -80,6 +83,8 @@ class QuoteController extends Controller
                 unset($product['id'], $product['code'], $product['status']);
                 $this->services->configBaseDataAction($product);
                 $product_id = Product::insertGetId($product);
+                //log insert product
+                $log_product_id = logActionUserData('insert', 'products', $product_id, $product, $log_quote_id);
                 if ($product_id) {
                     foreach ($child_tables as $table) {
                         $model = getModelByTable($table);
@@ -88,7 +93,8 @@ class QuoteController extends Controller
                             unset($supply['id'], $supply['code'], $supply['status']);
                             $this->services->configBaseDataAction($supply);
                             $supply['product'] = $product_id;
-                            $model->insert($supply);
+                            $supp_id = $model::insertGetId($supply);
+                            logActionUserData('insert', $table, $supp_id, $supply, $log_product_id);
                         }
                     }
                 }
@@ -258,7 +264,7 @@ class QuoteController extends Controller
             return redirect(url(''))->with('error', 'Không tìm thấy dữ liệu báo giá !');
         }
         $data_customer = Customer::find($arr_quote['customer_id']);
-        $data_products = Product::where(['act' => 1, 'quote_id' => $id])->get()->toArray();
+        $data_products = Product::where(['act' => 1, 'quote_id' => $id])->get();
         $step = $request->input('step') ?? 'review';
         if ($step == 'review') {
             $data['title'] = 'Quản lí file báo giá - '. $arr_quote['seri'];
@@ -325,9 +331,9 @@ class QuoteController extends Controller
         $height = !empty($request->input('height')) ? $request->input('height') : 0;
         $obj = \DB::table('products')->where(['status' => \StatusConst::SUBMITED, 'category' => $category, 'length' => $length, 'width' => $width, 'height' => $height]);
         if ($style != '') {
-            $obj->where('style', $style);
+            $obj->where('product_style', $style);
         }
-        return view('quotes.products.suggest_product_submited', ['list_data' => $obj->take(5)]);
+        return view('quotes.products.suggest_product_submited', ['list_data' => $obj->get()->take(5)]);
     }
 }
 

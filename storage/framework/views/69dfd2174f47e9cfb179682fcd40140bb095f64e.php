@@ -1,5 +1,5 @@
 <?php
-    $base_name = !empty($pro_index) ? 'product[' . $pro_index . ']' : 'product';
+    $base_name = 'product['. $pro_index .']';
 ?>
 <div class="d-flex align-items-center">
     <div class="size_item_pro_structure">

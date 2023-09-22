@@ -40,7 +40,7 @@
                             'value' => @$product['category']
                         ];
                         $style_product_field = [
-                            'name' => $pro_base_name_input.'[style]',
+                            'name' => $pro_base_name_input.'[product_style]',
                             'type' => 'linking',
                             'note' => 'Kiểu hộp',
                             'attr' => ['required' => 1 , 
@@ -57,7 +57,7 @@
                     @endforeach
                     <div class="__style_product_select_module">
                         @include('view_update.view', $category_product_field)
-                        <div class="__style_select mt-2" style="display: {{ !empty($data_value['group']) ? 'block' : 'none' }}">
+                        <div class="__style_select mt-2" style="display: {{ !empty($product['product_style']) ? 'block' : 'none' }}">
                             @include('view_update.view', $style_product_field)
                         </div>
                     </div>

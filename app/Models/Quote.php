@@ -2,7 +2,6 @@
 
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Order;
 class Quote extends Model
 {
     /**
@@ -47,12 +46,7 @@ class Quote extends Model
                     removeFileData($product[$key]);
                 }
             }
-            $remove_pro = Product::where('id', $product['id'])->delete();
-            if ($remove_pro) {
-                foreach ($childs as $table) {
-                    \DB::table($table)->where('product', $product['id'])->delete();
-                }
-            }        
+            (new \App\Services\AdminService)->removeDataTable('products', $product['id']);       
         }
     } 
 }

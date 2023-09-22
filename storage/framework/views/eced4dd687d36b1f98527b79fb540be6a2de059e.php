@@ -40,7 +40,7 @@
                             'value' => @$product['category']
                         ];
                         $style_product_field = [
-                            'name' => $pro_base_name_input.'[style]',
+                            'name' => $pro_base_name_input.'[product_style]',
                             'type' => 'linking',
                             'note' => 'Kiểu hộp',
                             'attr' => ['required' => 1 , 
@@ -57,7 +57,7 @@
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     <div class="__style_product_select_module">
                         <?php echo $__env->make('view_update.view', $category_product_field, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                        <div class="__style_select mt-2" style="display: <?php echo e(!empty($data_value['group']) ? 'block' : 'none'); ?>">
+                        <div class="__style_select mt-2" style="display: <?php echo e(!empty($product['product_style']) ? 'block' : 'none'); ?>">
                             <?php echo $__env->make('view_update.view', $style_product_field, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                         </div>
                     </div>

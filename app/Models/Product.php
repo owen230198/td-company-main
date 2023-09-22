@@ -119,7 +119,10 @@
         {
             $childs = self::$childTable;
             foreach ($childs as $table) {
-                \DB::table($table)->where('product', $id)->delete();
+                $list = \DB::table($table)->where('product', $id)->get();
+                foreach ($list as $obj) {
+                    (new \App\Services\AdminService)->removeDataTable($table, $obj->id);
+                }
             }
         }
         
@@ -192,8 +195,8 @@
                 $update = Product::where('id', $id)->update(['status' => $status]);
                 if ($update) {
                     $data_product = Product::find($id);
-                    if (checkUpdateeOrderStatus($data_product->order, $status)) {
-                        Order::where('product', $data_product->order)->update(['status' => $status]);
+                    if (checkUpdateOrderStatus($data_product->order, $status)) {
+                        Order::where('id', $data_product->order)->update(['status' => $status]);
                     }
                 }
             }

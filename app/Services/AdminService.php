@@ -2,8 +2,8 @@
 namespace App\Services;
 use App\Services\BaseService;
 use App\Models\NDetailTable;
-use App\Models\NTable;
 use App\Models\NLogAction;
+use App\Models\NTable;
 class AdminService extends BaseService
 {
     function __construct()
@@ -14,7 +14,7 @@ class AdminService extends BaseService
 
     public function checkPermissionAction($table, $action, $data = new \stdClass())
     {
-        if($this->group_user::isAdmin()){
+        if(\GroupUser::isAdmin()){
             return ['allow' => true];   
         }
         $model = getModelByTable($table);
@@ -33,33 +33,6 @@ class AdminService extends BaseService
             }
         }
         
-    }
-
-    public function logActionUserData($action, $table, $id, $data_item = new \stdClass())
-    {
-        $data_log = [   'table_map' => $table, 
-                        'action' => $action, 
-                        'target' => $id,  
-                        'user' => \User::getCurrent('id'),
-                        'act' => 1,
-                        'created_at' => \Carbon\Carbon::now(),
-                        'updated_at' => \Carbon\Carbon::now(),
-                    ];
-        if ($action == 'update' && !empty($data_item)) {
-            $data_target = \DB::table($table)->find($id);
-            foreach ($data_target as $key => $value) {
-                $old_value = @$data_item->{$key};
-                if ($key != 'updated_at' && $value != $old_value) {
-                    $detail_data[$key] = ['old' => $old_value, 'new' => $value];
-                }    
-            }
-        }elseif ($action == 'remove') {
-            $detail_data = $data_item;
-        }
-        if (!empty($detail_data)) {
-            $data_log['detail_data'] = json_encode($detail_data);
-        }
-        return NLogAction::insertGetId($data_log);            
     }
 
     public function getTableItem($table)
@@ -226,6 +199,7 @@ class AdminService extends BaseService
             }
         }
         $remove = \DB::table($table)->where('id', $id)->delete();
+        NLogAction::where('target', $id)->delete();
         if ($remove && $except_remove) {
             $objModel = getModelByTable($table);
             if (method_exists($objModel, 'afterRemove')) {

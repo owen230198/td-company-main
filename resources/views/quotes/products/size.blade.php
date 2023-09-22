@@ -3,7 +3,7 @@
     <label class="mb-0 min_210 fs-13 text-capitalize justify-content-end mr-3 d-flex align-items-center">
         Nhập kích thước {{ !isNotBox(@$cate) ? ' hộp' : '' }}
     </label>
-    @include('products.duo_size')
+    @include('products.duo_size', ['pro_index' => @$pro_index])
 </div>
 @else
     <div class="form-group d-flex mb-2">

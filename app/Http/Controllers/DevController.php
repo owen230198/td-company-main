@@ -41,9 +41,25 @@ class DevController extends Controller
         die();
         $arrTables = NTable::select('name')->where('insert', 1)->get()->toArray();
         foreach ($arrTables as $item) {
-            Schema::table($item['name'], function($table){
-                $table->integer('created_by')->before('created_at');
-            });
+            if (!Schema::hasColumn($item['name'], 'create_time')) {
+                Schema::table($item['name'], function($table){
+                    $table->datetime('create_time')->before('created_at');
+                });
+            }
+        }
+    }
+
+    public function moveData()
+    {
+        die();
+        $arrTables = NTable::select('name')->where('insert', 1)->get()->toArray();
+        foreach ($arrTables as $item) {
+            $data = \DB::table($item['name'])->get();
+            foreach ($data as $key => $value) {
+                if (!empty($value->id)) {
+                    \DB::table($item['name'])->where('id', $value->id)->update(['create_time' => $value->created_at]);
+                }
+            }
         }
     }
 

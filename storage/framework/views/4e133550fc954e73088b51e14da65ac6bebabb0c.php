@@ -4,7 +4,7 @@
         Nhập kích thước <?php echo e(!isNotBox(@$cate) ? ' hộp' : ''); ?>
 
     </label>
-    <?php echo $__env->make('products.duo_size', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php echo $__env->make('products.duo_size', ['pro_index' => @$pro_index], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 </div>
 <?php else: ?>
     <div class="form-group d-flex mb-2">
