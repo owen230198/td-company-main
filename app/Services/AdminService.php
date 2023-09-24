@@ -165,6 +165,10 @@ class AdminService extends BaseService
 
     public function doInsertTable($table, $data)
     {
+        $model = getModelByTable($table);
+        if (method_exists($model, 'getInsertCode')) {
+            $data['code'] = $model::getInsertCode();
+        }
         $process = $this->processDataBefore($data, $table);
         if (@$process['code'] == 100) {
             return $process;

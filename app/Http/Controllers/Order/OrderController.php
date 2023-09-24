@@ -122,7 +122,7 @@ class OrderController extends Controller
             foreach ($data['product'] as $product) {
                 Product::where('id', $product['id'])->update($arr_update);
             }
-            if (checkUpdateeOrderStatus($base_order_id, Order::TECH_SUBMITED)) {
+            if (checkUpdateOrderStatus($base_order_id, Order::TECH_SUBMITED)) {
                 Order::where('id', $base_order_id)->update($arr_update);
             }
             return returnMessageAjax(200, 'Đã gửi yêu cầu thành công tới P. Kế hoạch SX cho đơn '.$arr_order->code.' !', getBackUrl()); 
@@ -164,7 +164,7 @@ class OrderController extends Controller
             if ($process) {
                 $arr_status = ['status' => $model::PROCESSING];
                 Product::where('id', $command['product'])->update($arr_status);
-                if (checkUpdateeOrderStatus($command['id'], $model::PROCESSING)) {
+                if (checkUpdateOrderStatus($command['id'], $model::PROCESSING)) {
                     Order::where('id', $command['order'])->update($arr_status);
                 }
                 return returnMessageAjax(200, 'Đã tiếp nhận lệnh, vui lòng truy cập danh sách lệnh của bạn!', \StatusConst::RELOAD);
@@ -334,7 +334,7 @@ class OrderController extends Controller
             if (!empty($update)) {
                 $arr_update = ['status' => Order::MAKING_PROCESS];
                 $table_data->update($arr_update);
-                if (checkUpdateeOrderStatus($obj_order->order, Order::MAKING_PROCESS)) {
+                if (checkUpdateOrderStatus($obj_order->order, Order::MAKING_PROCESS)) {
                     Order::where('id', $obj_order->order)->update($arr_update);
                 }
                 return returnMessageAjax(200, 'Đã gửi lệnh sản xuất xuống xưởng !', getBackUrl());

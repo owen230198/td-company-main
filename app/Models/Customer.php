@@ -31,7 +31,7 @@ class Customer extends Model
 
     static function getInsertCode()
     {
-        return 'KHM-'.getCodeInsertTable('customers');
+        return 'KH-'.getCodeInsertTable('customers');
     }
 
     static function getDataJsonLinking($customers, $q)
