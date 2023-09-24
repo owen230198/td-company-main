@@ -19,22 +19,22 @@
     $need_qty = [
         'name' => '',
         'type' => 'text',
-        'note' => 'Cần xuất : ',
-        'attr' => ['type_input' => 'number', 'inject_class' => '__qty_supp_plan __supp_plan_qty_change'],
-        'value' => 0
+        'note' => 'Tổng SL vật tư : ',
+        'attr' => ['type_input' => 'number', 'disable_field' => 1,'inject_class' => '__qty_supp_plan __supp_plan_qty_change'],
+        'value' => @$supply_obj->supp_qty ?? 0
     ];
     $nqty_supp = [
         'name' => '',
         'type' => 'text',
-        'note' => 'Số bát/khổ in : ',
+        'note' => 'Chia số bát/khổ tồn : ',
         'attr' => ['type_input' => 'number', 'inject_class' => '__nqty_supp_plan __supp_plan_qty_change'],
         'value' => 0
     ];
     $total_qty_supp = [
         'name' => 'c_supply['.$key_supp.']['.$index .'][qty]',
         'type' => 'text',
-        'note' => 'Tổng số lượng : ',
-        'attr' => ['type_input' => 'number', 'inject_class' => '__total_qty_supp_plan', 'readonly' => 1],
+        'note' => 'Yêu cầu xuất kho : ',
+        'attr' => ['type_input' => 'number', 'inject_class' => '__total_qty_supp_plan plan_input_supp_qty', 'readonly' => 1],
         'value' => 0
     ]
 @endphp

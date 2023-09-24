@@ -21,7 +21,8 @@ trait QuoteTrait
         static::$base_qty_pro = !empty($data['qty']) ? (int) $data['qty'] : 0;
         static::$qty_pro = ceil(calValuePercentPlus(self::$base_qty_pro, self::$base_qty_pro, $plus_compen_perc)); 
         static::$nqty = !empty($data['nqty']) ? (int) $data['nqty'] : 1;
-        static::$base_supp_qty = !empty($data['supp_qty']) ? (int) $data['supp_qty'] : 0;
+        static::$base_supp_qty = !empty($data['base_supp_qty']) ? (int) $data['base_supp_qty'] : 0;
+        static::$supp_qty = !empty($data['supp_qty']) ? (int) $data['supp_qty'] : 0;
         $length = !empty($data['size']['length']) ? $data['size']['length'] : 0;
         $width = !empty($data['size']['width']) ? $data['size']['width'] : 0;
         convertCmToMeter($length, $width);

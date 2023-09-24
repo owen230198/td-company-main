@@ -3,7 +3,7 @@
     @php
         $key_supp = \TDConst::DECAL;
         $decal_divide = \TDConst::DECAL_SIZE_DIVIDE;
-        $decal_compen_percent = (float) getDataConfig('QuoteConfig', 'CARTON_COMPEN_PERCENT');
+        $decal_compen_percent = (float) getDataConfig('QuoteConfig', 'DECAL_COMPEN_PERCENT');
         $decal_plus = \TDConst::DECAL_SIZE_PLUS;
         $pro_decal_supply = [
             'name' => '',

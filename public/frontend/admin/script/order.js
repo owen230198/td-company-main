@@ -203,21 +203,25 @@ var planHandleSupplyQty = function()
         let parent = $(this).closest('.__handle_supply_item');
         let need_qty = getEmptyDefault(parent.find('input.__qty_supp_plan').val(), 0, 'float');
         let nqty = getEmptyDefault(parent.find('input.__nqty_supp_plan').val(), 0, 'float');
-        let takeout = need_qty;
-        parent.find('input.__total_qty_supp_plan').val(need_qty*nqty);
-        let inhouse = getEmptyDefault(parent.find('.__inhouse').text(), 0, 'float');
-        if (takeout > inhouse) {
-            parent.find('.__rest').text(0);
-            let lack = takeout - inhouse;
-            parent.find("input[name*='lack']").val( lack);
-            parent.find('.__lack').text(lack);
-            parent.find('.__lack').parent().fadeIn();     
-        }else{
-            parent.find('.__rest').text(inhouse - takeout);
-            parent.find('.__lack').text(0);
-            parent.find('.__lack').parent().fadeOut();  
+        if (nqty > 0) {
+            let takeout = need_qty;
+            let total_supp = Math.ceil(need_qty/nqty);
+            parent.find('input.__total_qty_supp_plan').val(total_supp);
+            let inhouse = getEmptyDefault(parent.find('.__inhouse').text(), 0, 'float');
+            if (takeout > inhouse) {
+                parent.find('.__rest').text(0);
+                let lack = total_supp - inhouse;
+                parent.find("input[name*='lack']").val( lack);
+                parent.find('.__lack').text(lack);
+                parent.find('.__lack').parent().fadeIn();     
+            }else{
+                parent.find('.__rest').text(inhouse - total_supp);
+                parent.find('.__lack').text(0);
+                parent.find('.__lack').parent().fadeOut();  
+            }
+            parent.data('take', total_supp);
+            updateHandleWareHouse($(this));
         }
-        parent.data('take', )
     });
 }
 

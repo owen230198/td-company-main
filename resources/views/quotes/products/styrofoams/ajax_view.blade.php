@@ -1,7 +1,7 @@
 <div class="quote_supp_item {{ $supp_index > 0 ? ' mt-4 border_green p-3 radius_5' : '' }}" data-index={{ @$supp_index ?? 0 }}>
     @php
         $key_supp = \TDConst::STYRO;
-        $styro_compen_percent = (float) getDataConfig('QuoteConfig', 'CARTON_COMPEN_PERCENT');
+        $styro_compen_percent = (float) getDataConfig('QuoteConfig', 'STYRO_COMPEN_PERCENT');
         $styro_divide = \TDConst::STYRO_SIZE_DIVIDE;
         $styro_plus = \TDConst::STYRO_SIZE_PLUS;
         $key_device_elevate = \TDConst::ELEVATE;

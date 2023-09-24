@@ -1,7 +1,7 @@
 <div class="quote_supp_item <?php echo e($supp_index > 0 ? ' mt-4 border_green p-3 radius_5' : ''); ?>" data-index=<?php echo e(@$supp_index ?? 0); ?>>
     <?php
         $key_supp = \TDConst::RUBBER;
-        $rubber_compen_percent = (float) getDataConfig('QuoteConfig', 'CARTON_COMPEN_PERCENT');
+        $rubber_compen_percent = (float) getDataConfig('QuoteConfig', 'RUBBER_COMPEN_PERCENT');
         $rubber_divide = \TDConst::RUBBER_SIZE_DIVIDE;
         $rubber_plus = \TDConst::RUBBER_SIZE_PLUS; 
         $key_device_elevate = \TDConst::ELEVATE;

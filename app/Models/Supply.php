@@ -25,6 +25,9 @@ class Supply extends Model
             $data_process['name'] = @$supply['name'];
             $data_process['product_qty'] = $supply['qty'];
             $data_process['nqty'] = $supply['nqty'];
+            $data_process['base_supp_qty'] = $supply['base_supp_qty'];
+            $data_process['compent_percent'] = $supply['compent_percent'];
+            $data_process['compent_plus'] = $supply['compent_plus'];
             $data_process['supp_qty'] = $supply['supp_qty'];
             $data_process['type'] = $type;
             $data_process['product'] = $product_id;

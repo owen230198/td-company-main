@@ -5,9 +5,7 @@ trait QSupplyTrait{
 
    public function getDataActionSupply($data, $type)
    {
-      $this->newObjectSetProperty($data);
-      $hard_compen_perc = (float) getDataConfig('QuoteConfig', 'CARTON_COMPEN_PERCENT');
-      static::$supp_qty = ceil(calValuePercentPlus(self::$base_supp_qty, self::$base_supp_qty, $hard_compen_perc)); 
+      $this->newObjectSetProperty($data); 
       
       if (!empty($data['size'])) {
          $data_action['size'] = $this->configDataSupplySize($data['size'], $type);

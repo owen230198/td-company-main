@@ -122,8 +122,6 @@ trait QPaperTrait
     private function getDataActionPaper($data)
     {
         $this->newObjectSetProperty($data);
-        $plus_compen_perc = (float) getDataConfig('QuoteConfig', 'COMPEN_PERCENT');
-        static::$supp_qty = ceil(calValuePercentPlus(self::$base_supp_qty, self::$base_supp_qty, $plus_compen_perc)); 
         if (!empty($data['size'])) {
             $data_action['size'] = $this->configDataSizePaper($data['size']);
         }

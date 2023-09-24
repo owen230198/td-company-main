@@ -50,8 +50,12 @@ class AdminController extends Controller
         if (empty($data)) {
             return back()->with('error', 'Giao diện chưa hỗ trợ !');
         }
+        $order = 'id';
+        $order_by = 'desc';
         if($data['view_type'] == 'config'){
-            $data['action_url'] = url('do-config-data/'.$table);   
+            $data['action_url'] = url('do-config-data/'.$table);
+            $order = 'ord';
+            $order_by = 'asc';   
         }else{
             $default_data = $request->input('default_data');
             if (!empty($default_data)) {
@@ -73,7 +77,7 @@ class AdminController extends Controller
                 static::$view_where[] = $role['where'];
             }
         }
-        $data['data_tables'] = getDataTable($table, self::$view_where, ['paginate' => $data['page_item']]);
+        $data['data_tables'] = getDataTable($table, self::$view_where, ['paginate' => $data['page_item'], 'order' => $order, 'order_by' => $order_by]);
         session()->put('back_url', url()->full());    
         return view('table.'.$data['view_type'], $data);
     }

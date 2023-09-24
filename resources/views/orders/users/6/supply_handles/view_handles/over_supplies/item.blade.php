@@ -2,29 +2,23 @@
     $wh_name = 'over_supply['.$index.']';
     $field_warehouses = [
         [
-            'name' => $wh_name.'[name]',
-            'note' => 'Tên',
-            'type' => 'text',
-            'value' => '',
-        ],
-        [
             'name' => $wh_name.'[length]',
             'note' => 'Khổ chiều dài',
-            'attr' => ['type_input' => 'number'],
+            'attr' => ['type_input' => 'number', 'inject_class' => 'plan_input_warehouse_size'],
             'type' => 'text',
             'value' => 0,
         ],
         [
             'name' => $wh_name.'[width]',
             'note' => 'Khổ chiều rộng',
-            'attr' => ['type_input' => 'number'],
+            'attr' => ['type_input' => 'number', 'inject_class' => 'plan_input_warehouse_size'],
             'type' => 'text',
             'value' => 0,
         ],
         [
             'name' => $wh_name.'[qty]',
             'note' => 'SL nhập kho',
-            'attr' => [ 'type_input' => 'number'],
+            'attr' => [ 'type_input' => 'number', 'inject_class' => 'plan_input_warehouse_qty', 'readonly' => 1],
             'type' => 'text',
             'value' => 0,
         ],

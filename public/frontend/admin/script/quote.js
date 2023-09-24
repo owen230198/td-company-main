@@ -1,14 +1,15 @@
 var changQtyInput = function(){
-  $(document).on('keyup change','input.paper_qty_modul_input',function(e){
+  $(document).on('keyup change','input.supp_qty_modul_input',function(e){
     e.preventDefault();
-    let parent = $(this).closest('.quantity_paper_module');
+    let parent = $(this).closest('.quantity_supp_module');
     let qty_pro = parseInt(parent.find('input.pro_qty_input').val());
     let nqty = parseInt(parent.find('input.pro_nqty_input').val());
-    let qty_paper = Math.ceil(qty_pro/nqty)
+    let qty_supp = Math.ceil(qty_pro/nqty)
     let compen_percent = parent.data('percent');
-    let compen_num = parent.data('num');
-    let addqty = Math.ceil(qty_paper*compen_percent/100) + compen_num;
-    parent.find('input.paper_qty_input').val(qty_paper);
+    let compen_plus = parseInt(parent.find('input.pro_compent_plus_input').val());
+    let addqty = Math.ceil(qty_supp*compen_percent/100) + compen_plus;
+    parent.find('input.supp_qty_input').val(qty_supp);
+    parent.find('input.total_supp_qty_input').val(qty_supp+addqty);
     let plan_qty = parent.find('input.plan_input_supp_qty');
     if (plan_qty.length>0) {
       plan_qty.trigger('change');

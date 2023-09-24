@@ -91,7 +91,7 @@ class AdminService extends BaseService
         if (!empty($data['tableItem'])) {
             $data['page_item'] = @$data['tableItem']['admin_paginate'] ?? 10;
             $data['view_type'] = @$data['tableItem']['view_type'] ?? 'view';
-            $name = @$data['view_type'] == 'config' ? 'Cài đặt':$name;
+            $name = @$data['view_type'] == 'config' ? 'Cài đặt' : $name;
             $data['title'] = $name.' '.$data['tableItem']['note'];
             if ($data['view_type']=='config') {
                 $data['regions'] = $this->regions->getRegionOfConfig($table);

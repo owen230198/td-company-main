@@ -3,7 +3,7 @@
         <span>Xuất vật tư theo yêu cầu</span>
     </h3>
     <div class="plan_handle_supply_module">
-        <div class="module_hanle_supply_plan quantity_paper_module plan_handle_elevate_module" data-percent = <?php echo e($compen_percent); ?>>
+        <div class="module_hanle_supply_plan quantity_supp_module plan_handle_elevate_module" data-percent = <?php echo e($compen_percent); ?>>
             <?php
                 $c_name = 'c_supply';
                 $where_size_type = !empty($where_size_supp) ? $where_size_supp : 
@@ -38,13 +38,13 @@
                     [
                         'name' => $c_name.'[command][nqty]',
                         'note' => 'Số sản phẩm/tờ to',
-                        'attr' => ['inject_class' => 'pro_nqty_input paper_qty_modul_input', 'type_input' => 'number'],
+                        'attr' => ['inject_class' => 'pro_nqty_input supp_qty_modul_input', 'type_input' => 'number'],
                         'value' => 0,
                     ],
                     [
                         'name' => $c_name.'[command][qty]',
                         'note' => 'Số vật tư cần xuất + '.$compen_percent.'%',
-                        'attr' => ['inject_class' => 'paper_qty_input plan_input_supp_qty input_elevate_change', 'type_input' => 'number', 'readonly' => 1],
+                        'attr' => ['inject_class' => 'supp_qty_input plan_input_supp_qty input_elevate_change', 'type_input' => 'number', 'readonly' => 1],
                         'value' => 0,
                     ],
                     [
@@ -63,10 +63,6 @@
 
                 $wh_name = 'over_supply';
                 $field_warehouses = [
-                    [
-                        'name' => $wh_name.'[name]',
-                        'note' => 'Tên',
-                    ],
                     [
                         'name' => $wh_name.'[length]',
                         'note' => 'Khổ chiều dài',

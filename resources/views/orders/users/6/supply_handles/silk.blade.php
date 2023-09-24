@@ -3,7 +3,7 @@
     @php
         $key_supp = \TDConst::SILK;
         $silk_divide = \TDConst::SILK_SIZE_DIVIDE;
-        $silk_compen_percent = (float) getDataConfig('QuoteConfig', 'CARTON_COMPEN_PERCENT');
+        $silk_compen_percent = (float) getDataConfig('QuoteConfig', 'SILK_COMPEN_PERCENT');
         $silk_plus = \TDConst::SILK_SIZE_PLUS;
         $pro_silk_supply = [
             'name' => '',

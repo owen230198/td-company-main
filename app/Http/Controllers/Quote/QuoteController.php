@@ -49,7 +49,6 @@ class QuoteController extends Controller
                 }else{
                     $data['data_quote'] = $quote;
                     $products = Product::where(['act' => 1, 'quote_id' => $id])->get();
-                    dd($products->pluck('id')->all());
                     $data['products'] = $products;
                     $data['product_qty'] = count($data['products']);
                     $data['parent_url'] = ['link' => 'update/quotes/'.$id, 'note' => 'Chọn khách hàng khác'];

@@ -2,7 +2,7 @@
     <?php
         $key_supp = \TDConst::MICA;
         $mica_divide = \TDConst::MICA_SIZE_DIVIDE;
-        $mica_compen_percent = 0;
+        $mica_compen_percent = (float) getDataConfig('QuoteConfig', 'MICA_COMPEN_PERCENT');
         $mica_plus = \TDConst::MICA_SIZE_PLUS;
         $key_device_elevate = \TDConst::ELEVATE;
         $key_device_peel = \TDConst::PEEL;
