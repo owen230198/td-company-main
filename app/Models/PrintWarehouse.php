@@ -6,7 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 class PrintWarehouse extends Model
 {
     protected $table = 'print_warehouses';
-    protected $protectFields = false;  
+    protected $protectFields = false; 
+
+    static function getRole()
+    {
+        $role = [
+            \GroupUser::WAREHOUSE => [
+                'insert' => 1,
+                'view' => 1,
+                'update' => 1
+            ]
+        ];
+        return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];
+    } 
     
     static function insertOverSupply($data, $supply, $size)
     {
@@ -41,5 +53,10 @@ class PrintWarehouse extends Model
     static function getStructForPlan($param)
     {
         return ['code' => 200, 'data' => ['inhouse' => $param['supply']->qty]];
+    }
+
+    public function afterRemove($id)
+    {
+        return WarehouseHistory::removeData('print_warehouses', $id);
     }
 }

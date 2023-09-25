@@ -84,7 +84,7 @@ class AdminController extends Controller
 
     public function configDevicePrice(Request $request, $step){
         if (!$request->isMethod('POST')) {
-            if (!$this->group_users::isAdmin()) {
+            if (!\GroupUser::isAdmin()) {
                 return back()->with('error', 'Không có quyền truy cập !');
             }
             if ($step == 'supply_types') {
@@ -106,7 +106,7 @@ class AdminController extends Controller
 
     public function warehouseManagement()
     {
-        if (\GroupUser::isAdmin()) {
+        if (\GroupUser::isAdmin() || \GroupUser::isWarehouse()) {
             $data['title'] = 'Quản lí vật tư trong kho';
             $data['supply_list'] = [
                 ['note' => 'Giấy in', 'table' => 'print_warehouses', 'type' => \TDConst::PAPER],

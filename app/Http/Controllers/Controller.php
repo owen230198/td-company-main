@@ -14,7 +14,6 @@ class Controller extends BaseController
 	public function __construct()
 	{
         $this->admins = new \App\Services\AdminService;
-        $this->group_users = new \App\Models\NGroupUser;
 	}
 }
 

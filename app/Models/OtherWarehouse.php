@@ -6,5 +6,22 @@ use Illuminate\Database\Eloquent\Model;
 class OtherWarehouse extends Model
 {
     protected $table = 'other_warehouses';
-    protected $protectFields = false;    
+    protected $protectFields = false;
+    
+    static function getRole()
+    {
+        $role = [
+            \GroupUser::WAREHOUSE => [
+                'insert' => 1,
+                'view' => 1,
+                'update' => 1
+            ]
+        ];
+        return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];
+    } 
+
+    public function afterRemove($id)
+    {
+        return WarehouseHistory::removeData('other_warehouses', $id);
+    }    
 }

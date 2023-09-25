@@ -32,11 +32,13 @@ class Supply extends Model
             $data_process['type'] = $type;
             $data_process['product'] = $product_id;
             $data_process['note'] = @$supply['note'];
-            (new BaseService)->configBaseDataAction($data_process);
-            if (!empty($supply['id'])) {
-                $process = $this->where('id', $supply['id'])->update($data_process);   
-            }else{
-                $process = $this->insert($data_process);
+            if ($data_process['supp_qty'] > 0) {
+                (new BaseService)->configBaseDataAction($data_process);
+                if (!empty($supply['id'])) {
+                    $process = $this->where('id', $supply['id'])->update($data_process);   
+                }else{
+                    $process = $this->insert($data_process);
+                }
             }
         }
         return !empty($process);

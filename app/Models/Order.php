@@ -74,6 +74,11 @@
                 removeFileData($order['rest_bill']);
             }
         }
+
+        public function afterRemove($id)
+        {
+            Product::removeData(['order' => $id]);    
+        }
     }
     
 ?>

@@ -155,6 +155,11 @@ class NGroupUser extends Model
             'link' => 'warehouse-management', 
             'group' => 'warehouse'
         ],
+        'warehouse_provider' => [
+            'name' => 'Nhà cung cấp vật tư', 
+            'link' => 'view/warehouse_providers', 
+            'group' => 'warehouse'
+        ],
         'ex_supply' => [
             'name' => 'Yêu cầu xuất vật tư', 
             'link' => 'view/c_supplies?default_data={"status":"handling"}', 

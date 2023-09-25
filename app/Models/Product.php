@@ -115,13 +115,38 @@
             return $ext_pro_feild_file;
         }
 
+        static function removeData($where)
+        {
+            $products = Product::where($where)->get();
+            if (!$products->isEmpty()) {
+                $admin = new \App\Services\AdminService;
+                foreach ($products as $product) {
+                    Quote::where('id', $product->quote_id)->delete();
+                    Order::where('id', $product->order)->delete();
+                    $admin->removeDataTable('products', $product['id']);       
+                }
+            }
+        }
+
+        public function beforeRemove($id)
+        {
+            $product = Product::find($id);
+            $feild_file = Product::FEILD_FILE;
+            foreach ($feild_file as $key => $feild_file) {
+                if (!empty($product[$key])) {
+                    removeFileData($product[$key]);
+                }
+            }
+        }
+
         public function afterRemove($id)
         {
             $childs = self::$childTable;
             foreach ($childs as $table) {
                 $list = \DB::table($table)->where('product', $id)->get();
+                $admin = (new \App\Services\AdminService);
                 foreach ($list as $obj) {
-                    (new \App\Services\AdminService)->removeDataTable($table, $obj->id);
+                    $admin->removeDataTable($table, $obj->id);
                 }
             }
         }

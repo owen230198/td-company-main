@@ -8,6 +8,18 @@ class SquareWarehouse extends Model
     protected $table = 'square_warehouses';
     protected $protectFields = false;
 
+    static function getRole()
+    {
+        $role = [
+            \GroupUser::WAREHOUSE => [
+                'insert' => 1,
+                'view' => 1,
+                'update' => 1
+            ]
+        ];
+        return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];
+    } 
+
     static function getDataJsonLinking($warehouse, $q)
     {
         if (!empty($q)) {
@@ -20,7 +32,7 @@ class SquareWarehouse extends Model
         $arr = array_map(function($item){
             return [
                 'id' => @$item->id, 
-                'label' => $item->name. ' / KT Khổ : '.$item->width.' / Còn lại : '.$item->square.'m'];
+                'label' => $item->name. ' / KT Khổ : '.$item->width.' / Còn lại : '.$item->qty.'m'];
         }, $data);
         return json_encode($arr);
     }
@@ -29,7 +41,7 @@ class SquareWarehouse extends Model
     {
         $supply = $param['supply'];
         $need = $param['need'];
-        $inhouse = (float) $supply->square;
+        $inhouse = (float) $supply->qty;
         if ($need > $inhouse) {
             $takeout = $inhouse;
             $rest = 0;
@@ -40,5 +52,10 @@ class SquareWarehouse extends Model
             $lack = 0;
         }
         return ['code' => 200, 'data' => ['inhouse' => $inhouse, 'takeout' => $takeout, 'rest' => $rest, 'lack' => $lack]];
+    }
+
+    public function afterRemove($id)
+    {
+        return WarehouseHistory::removeData('square_warehouses', $id);
     }
 }

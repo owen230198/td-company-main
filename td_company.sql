@@ -5,13 +5,13 @@
  Source Server Type    : MySQL
  Source Server Version : 100428
  Source Host           : localhost:3306
- Source Schema         : td_company
+ Source Schema         : td_producttion
 
  Target Server Type    : MySQL
  Target Server Version : 100428
  File Encoding         : 65001
 
- Date: 24/09/2023 23:39:03
+ Date: 25/09/2023 23:32:19
 */
 
 SET NAMES utf8mb4;
@@ -13270,7 +13270,7 @@ CREATE TABLE `n_detail_tables`  (
   INDEX `map_insert`(`table_map`, `insert`) USING BTREE,
   INDEX `map_update`(`table_map`, `update`) USING BTREE,
   INDEX `map_search`(`table_map`, `search`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 245 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 251 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of n_detail_tables
@@ -13403,7 +13403,7 @@ INSERT INTO `n_detail_tables` VALUES (136, 'name', '{\"required\":1}', 'Tên v�
 INSERT INTO `n_detail_tables` VALUES (137, 'length', '{\"required\":1}', 'KT dài', 'text', 'print_warehouse', 1, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2023-08-12 11:10:07');
 INSERT INTO `n_detail_tables` VALUES (138, 'width', '{\"required\":1}', 'KT rộng', 'text', 'print_warehouse', 1, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2023-08-12 11:10:07');
 INSERT INTO `n_detail_tables` VALUES (139, 'qty', '{\"type_input\":\"number\",\"required\":1}', 'Số lượng', 'text', 'print_warehouse', 1, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-30 11:00:22', '2023-08-12 11:10:07');
-INSERT INTO `n_detail_tables` VALUES (140, 'name', '{\"required\":1}', 'Tên vật tư', 'text', 'print_warehouses', 1, 1, 1, 1, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2023-08-16 14:47:29');
+INSERT INTO `n_detail_tables` VALUES (140, 'name', '{\"required\":1}', 'Tên vật tư', 'text', 'print_warehouses', 1, 1, 1, 1, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2023-09-25 08:45:22');
 INSERT INTO `n_detail_tables` VALUES (141, 'length', '{\"required\":1}', 'KT dài', 'text', 'print_warehouses', 1, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2023-08-16 14:47:29');
 INSERT INTO `n_detail_tables` VALUES (142, 'width', '{\"required\":1}', 'KT rộng', 'text', 'print_warehouses', 1, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2023-08-16 14:52:47');
 INSERT INTO `n_detail_tables` VALUES (143, 'qty', '{\"type_input\":\"number\",\"required\":1}', 'Số lượng', 'text', 'print_warehouses', 1, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-30 11:00:22', '2023-08-16 14:47:29');
@@ -13414,10 +13414,10 @@ INSERT INTO `n_detail_tables` VALUES (147, 'supp_price', '{\"required\":1}', 'Lo
 INSERT INTO `n_detail_tables` VALUES (148, 'group_supply', '', 'Dạng vật tư', 'group', 'c_supplies', 1, 1, 1, 1, 0, '{\r\n	\"group_class\":\"__module_select_type_warehouse\",\r\n	\"width\":\"8\",\r\n	\"width_child\":\"6\"\r\n}', 1, 0, 1, '2023-05-23 14:41:40', '2023-08-17 03:13:39');
 INSERT INTO `n_detail_tables` VALUES (149, 'supp_type', '{\"required\":1,\"inject_class\":\"__wh_select_type\"}', 'Loại vật tư', 'select', 'c_supplies', 1, 0, 0, 0, 148, '{\r\n	\"config\":{\r\n		\"searchbox\":1\r\n	},\r\n	\"data\":{\r\n		\"options\":{\r\n			\"0\":\"Chọn loại vật tư\",\r\n			\"paper\":\"Giấy in\", \r\n			\"nilon\":\"Màng nilon\", \r\n			\"metalai\":\"Màng metalai\",\r\n			\"cover\":\"Màng phủ trên\",\r\n			\"carton\":\"Carton\",\r\n			\"rubber\":\"Cao su\",\r\n			\"styrofoam\":\"Mút phẳng\",\r\n			\"decal\":\"Nhung\",\r\n			\"silk\":\"Vải lụa\",\r\n			\"mica\":\"Mi ca\",\r\n			\"magnet\":\"Nam châm\"\r\n		}\r\n	}\r\n}', 1, 0, 1, '2023-05-11 11:18:58', '2023-08-17 03:16:06');
 INSERT INTO `n_detail_tables` VALUES (150, 'name', '{\"required\":1}', 'Tên vật tư', 'text', 'square_warehouses', 1, 1, 1, 1, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2023-08-17 15:56:46');
-INSERT INTO `n_detail_tables` VALUES (151, 'square', '{\"type_input\":\"number\",\"required\":1}', 'Còn lại (m)', 'text', 'square_warehouses', 1, 1, 1, 0, 0, '', 1, 1, 1, '2023-04-30 11:00:22', '2023-08-26 00:39:37');
+INSERT INTO `n_detail_tables` VALUES (151, 'qty', '{\"type_input\":\"number\",\"required\":1}', 'Còn lại (m)', 'text', 'square_warehouses', 1, 1, 1, 0, 0, '', 1, 1, 1, '2023-04-30 11:00:22', '2023-09-25 22:15:30');
 INSERT INTO `n_detail_tables` VALUES (152, 'supp_price', '{\"required\":1}', 'Loại vật tư', 'linking', 'square_warehouses', 1, 1, 1, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"materals\",\r\n		\"where_default\":{\"type\":\"type\"}\r\n	}\r\n}', 1, 1, 1, '2023-05-11 11:18:58', '2023-08-26 00:39:38');
-INSERT INTO `n_detail_tables` VALUES (153, 'created_by', NULL, 'Người thêm', 'linking', 'other_warehouses', 1, 1, 1, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', 1, 0, 1, '2023-04-08 00:08:00', '2023-08-17 15:56:04');
-INSERT INTO `n_detail_tables` VALUES (154, 'created_at', NULL, 'Ngày thêm', 'datetime', 'other_warehouses', 1, 1, 1, 1, 0, '', 1, 0, 1, '2023-04-08 00:08:00', '2023-08-17 15:56:04');
+INSERT INTO `n_detail_tables` VALUES (153, 'created_by', NULL, 'Người thêm', 'linking', 'other_warehouses', 1, 0, 0, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', 1, 0, 1, '2023-04-08 00:08:00', '2023-09-25 23:04:34');
+INSERT INTO `n_detail_tables` VALUES (154, 'created_at', NULL, 'Ngày thêm', 'datetime', 'other_warehouses', 1, 0, 0, 1, 0, '', 1, 0, 1, '2023-04-08 00:08:00', '2023-09-25 23:04:40');
 INSERT INTO `n_detail_tables` VALUES (155, 'created_by', NULL, 'Người thêm', 'linking', 'square_warehouses', 1, 0, 0, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', 1, 1, 1, '2023-04-08 00:08:00', '2023-08-26 00:39:38');
 INSERT INTO `n_detail_tables` VALUES (156, 'created_at', NULL, 'Ngày thêm', 'datetime', 'square_warehouses', 1, 1, 1, 1, 0, '', 1, 1, 1, '2023-04-08 00:08:00', '2023-08-26 00:39:40');
 INSERT INTO `n_detail_tables` VALUES (157, 'order', NULL, 'Đơn hàng', 'linking', 'products', 1, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"orders\",\r\n		\"field_title\":\"code\"\r\n	}\r\n}', 1, 0, 1, '2023-08-22 03:54:31', '2023-09-24 08:48:22');
@@ -13504,6 +13504,12 @@ INSERT INTO `n_detail_tables` VALUES (241, 'act', '', 'Kích hoạt', 'checkbox'
 INSERT INTO `n_detail_tables` VALUES (242, 'status', '', 'Trạng thái', 'select', 'products', 1, 0, 1, 0, 0, '{\"data\":{\r\n		\"options\":{\r\n			\"not_accepted\":\"Chưa duyệt\", \r\n			\"accepted\":\"Đã duyệt thiết kế\", \r\n			\"to_design\":\"Chờ thiết kế nhận lệnh\",\r\n			\"designing\":\"Đang thiết kế\",\r\n			\"design_submited\":\"Đã xong thiết kế\",\r\n			\"tech_submited\":\"Kế hoạch đang xử lí\",\r\n			\"making_process\":\"Đang gia công\",\r\n			\"submited\":\"Hoàn tất gia công\"\r\n		}\r\n	}\r\n}', 1, 0, 1, '2023-05-26 03:19:12', '2023-09-22 00:39:04');
 INSERT INTO `n_detail_tables` VALUES (243, 'category', NULL, 'Nhóm sản phẩm', 'group_product', 'products', 0, 0, 0, 1, 0, '{\r\n	\"table_target\":\"quotes\"\r\n}', 1, 0, 1, '2023-04-30 11:17:52', '2023-09-21 11:32:54');
 INSERT INTO `n_detail_tables` VALUES (244, 'size', NULL, 'Kích thước', 'product_size', 'products', 0, 0, 0, 1, 0, '{\r\n	\"table_target\":\"quotes\"\r\n}', 1, 0, 1, '2023-04-30 11:17:52', '2023-09-21 11:32:56');
+INSERT INTO `n_detail_tables` VALUES (245, 'name', '{\"required\":1}', 'Tên vật tư', 'text', 'warehouse_providers', 1, 1, 1, 1, 0, '', 1, 0, 1, '2023-04-28 11:43:12', '2023-09-25 20:52:35');
+INSERT INTO `n_detail_tables` VALUES (246, 'act', '', 'Kích hoạt', 'checkbox', 'warehouse_providers', 1, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-28 11:43:12', '2023-09-25 20:52:35');
+INSERT INTO `n_detail_tables` VALUES (247, 'note', '', 'Ghi chú', 'textarea', 'warehouse_providers', 0, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-28 11:43:12', '2023-09-25 20:52:35');
+INSERT INTO `n_detail_tables` VALUES (248, 'created_at', '', 'Ngày tạo', 'datetime', 'warehouse_providers', 1, 1, 1, 1, 0, '', 1, 0, 1, '2023-04-28 11:43:12', '2023-09-25 20:52:35');
+INSERT INTO `n_detail_tables` VALUES (249, 'updated_at', '', 'Ngày sửa', 'datetime', 'warehouse_providers', 0, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-28 11:43:12', '2023-09-25 20:52:35');
+INSERT INTO `n_detail_tables` VALUES (250, 'ord', '{\"type_input\":\"number\"}', 'Sắp xếp', 'text', 'warehouse_providers', 1, 1, 1, 0, 0, '', 1, 3, 1, '2023-04-30 11:00:22', '2023-09-25 20:52:35');
 
 -- ----------------------------
 -- Table structure for n_group_users
@@ -13549,7 +13555,7 @@ CREATE TABLE `n_log_actions`  (
   `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 47 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 49 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of n_log_actions
@@ -13580,6 +13586,8 @@ INSERT INTO `n_log_actions` VALUES (43, 'square_warehouses', 'insert', 2, 1, 0, 
 INSERT INTO `n_log_actions` VALUES (44, 'square_warehouses', 'update', 2, 1, 0, '{\"square\":{\"old\":\"50000\",\"new\":\"100000\"}}', 1, '2023-09-24 16:08:46', '2023-09-24 16:08:46');
 INSERT INTO `n_log_actions` VALUES (45, 'supply_warehouses', 'insert', 32, 1, 0, '{\"type\":\"carton\",\"status\":\"imported\",\"name\":\"Carton nh\\u00e1p\",\"length\":\"100\",\"width\":\"120\",\"qty\":\"14560\",\"supp_type\":\"21\",\"supp_price\":\"117\"}', 1, '2023-09-24 16:11:07', '2023-09-24 16:11:07');
 INSERT INTO `n_log_actions` VALUES (46, 'quotes', 'update_customer', 9, 10, 0, '{\"seri\":{\"old\":\"BG-000011\",\"new\":\"BG-000023\"}}', 1, '2023-09-24 22:42:24', '2023-09-24 22:42:24');
+INSERT INTO `n_log_actions` VALUES (47, 'quotes', 'insert_customer', 23, 2, 0, '{\"name\":\"CTY CP IN & S\\u1ea2N XU\\u1ea4T BAO B\\u00cc TU\\u1ea4N DUNG\",\"contacter\":\"Mr Tu\\u1ea5n\",\"phone\":\"0963303999\",\"telephone\":\"02438303888\",\"email\":\"kd1.intuandung@gmail.com\",\"address\":\"L\\u00f4 D5-16 C\\u1ee5m L\\u00e0ng Ngh\\u1ec1 Tri\\u1ec1u kh\\u00fac - T\\u00e2n Tri\\u1ec1u - HN\",\"city\":\"351\",\"seri\":\"BG-000023\",\"customer_id\":\"9\",\"company_name\":\"CTY CP IN & S\\u1ea2N XU\\u1ea4T BAO B\\u00cc TU\\u1ea4N DUNG\",\"status\":\"not_accepted\",\"created_by\":2,\"created_at\":\"2023-09-25 07:50:34\",\"act\":1,\"updated_at\":\"2023-09-25 07:50:34\"}', 1, '2023-09-25 07:50:34', '2023-09-25 07:50:34');
+INSERT INTO `n_log_actions` VALUES (48, 'quotes', 'update_customer', 23, 2, 0, '{\"seri\":{\"old\":\"BG-000023\",\"new\":\"BG-000024\"}}', 1, '2023-09-25 08:09:34', '2023-09-25 08:09:34');
 
 -- ----------------------------
 -- Table structure for n_modules
@@ -13768,7 +13776,7 @@ CREATE TABLE `n_tables`  (
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `indx`(`id`, `name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 38 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 39 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of n_tables
@@ -13788,7 +13796,7 @@ INSERT INTO `n_tables` VALUES (13, 'supply_types', 'Vật tư tham gia sx', NULL
 INSERT INTO `n_tables` VALUES (14, 'supply_prices', 'Đơn giá vật tư', NULL, 20, 'view', NULL, '1', '1', '1', '1', '2023-04-28 10:33:01', '2023-08-16 19:42:34');
 INSERT INTO `n_tables` VALUES (18, 'orders', 'Đơn hàng', NULL, 20, 'view', '[\r\n	{\r\n	\"icon\":\"list-ul\",\r\n	\"note\":\"DS sản phẩm\", \r\n	\"link\":\"view/products?default_data={%22order%22:%22<id>%22}\"\r\n	}\r\n]', '0', '1', '1', '1', '2023-06-21 13:22:33', '2023-09-15 21:19:43');
 INSERT INTO `n_tables` VALUES (19, 'p_substances', 'Chất liệu giấy in', NULL, 20, 'view', NULL, '1', '1', '1', '1', '2023-04-23 11:30:46', '2023-08-16 19:42:34');
-INSERT INTO `n_tables` VALUES (20, 'product_categories', 'Nhóm sản phẩm', 'product_categories', 20, 'view', '[\r\n	{\r\n	\"icon\":\"list-ul\",\r\n	\"note\":\"Kiểu hộp\", \r\n	\"link\":\"view/product_styles?default_data={%22category%22:%22<id>%22}\"\r\n	}\r\n]', '0', '1', '0', '0', '2023-04-23 11:30:46', '2023-09-20 14:56:53');
+INSERT INTO `n_tables` VALUES (20, 'product_categories', 'Nhóm sản phẩm', '', 20, 'view', '[\r\n	{\r\n	\"icon\":\"list-ul\",\r\n	\"note\":\"Kiểu hộp\", \r\n	\"link\":\"view/product_styles?default_data={%22category%22:%22<id>%22}\"\r\n	}\r\n]', '0', '1', '0', '0', '2023-04-23 11:30:46', '2023-09-25 20:54:00');
 INSERT INTO `n_tables` VALUES (21, 'products', 'Đơn sản phẩm', NULL, 20, 'view', '[\r\n	{\r\n	\"icon\":\"spinner\",\r\n	\"note\":\"Vật tư sản xuất\", \r\n	\"link\":\"list-supply-process?product=\"\r\n	}\r\n]', '0', '1', '0', '1', '2023-04-23 11:30:46', '2023-09-21 10:54:38');
 INSERT INTO `n_tables` VALUES (22, 'c_designs', 'Lệnh thiết kế', NULL, 20, 'view', '[\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"level-down\",\"note\":\"Nhận lệnh\", \r\n		\"class\":\"__receive_command\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"not_accepted\"}\r\n		]\r\n	}\r\n]', '0', '1', '1', '0', '2023-06-30 17:43:12', '2023-08-16 19:42:34');
 INSERT INTO `n_tables` VALUES (23, 'c_supplies', 'Yêu cầu Xuất vật tư', NULL, 20, 'view', '[\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"share\",\"note\":\"Xác nhận xuất vật tư\", \r\n		\"class\":\"__confirm_ex_supp\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"handling\"}\r\n		]\r\n	}\r\n]', '0', '0', '1', '0', '2023-07-14 03:17:55', '2023-08-16 19:42:34');
@@ -13805,6 +13813,7 @@ INSERT INTO `n_tables` VALUES (34, 'papers', 'Vật tư giấy', NULL, 20, 'view
 INSERT INTO `n_tables` VALUES (35, 'supplies', 'Vật tư hộp cứng', NULL, 20, 'view', '', '0', '1', '0', '0', '2023-06-21 13:22:33', '2023-09-15 21:19:43');
 INSERT INTO `n_tables` VALUES (36, 'fill_finishes', 'Bồi & hoàn thiện', NULL, 20, 'view', '', '0', '1', '0', '0', '2023-06-21 13:22:33', '2023-09-17 10:54:34');
 INSERT INTO `n_tables` VALUES (37, 'product_styles', 'Kiểu hộp', '{\r\n	\"link\":\"view/product_categories\", \r\n	\"note\":\"Nhóm sản phẩm\"\r\n}', 20, 'view', '', '1', '1', '1', '1', '2023-06-21 13:22:33', '2023-09-20 15:05:49');
+INSERT INTO `n_tables` VALUES (38, 'warehouse_providers', 'Nhà cung cấp vật tư', NULL, 10, 'view', '', '1', '1', '1', '1', '2023-07-17 19:30:41', '2023-08-16 19:42:34');
 
 -- ----------------------------
 -- Table structure for n_users
@@ -13837,8 +13846,8 @@ INSERT INTO `n_users` VALUES (3, 'thietke', 'e10adc3949ba59abbe56e057f20f883e', 
 INSERT INTO `n_users` VALUES (4, 'kythuatduyetlenh1', 'e10adc3949ba59abbe56e057f20f883e', 'kythuatduyetlenh - Mr Dũng', 'sanxuatitd@gmail.com', '0234567912', 3, 0, NULL, 'Technical apply order group tests', 1, '2023-07-14 02:02:00', '2023-09-23 15:13:04', 1);
 INSERT INTO `n_users` VALUES (5, 'kythuatsx1', 'e10adc3949ba59abbe56e057f20f883e', 'kythuatsx - Mr Dũng', 'techhanle@gmail.com', '0123456789', 5, 0, NULL, NULL, 1, '2023-07-14 02:02:00', '2023-09-23 15:14:06', 1);
 INSERT INTO `n_users` VALUES (6, 'kehoach1', 'e10adc3949ba59abbe56e057f20f883e', 'kehoach - Ms Hường', 'baobituandung@intuandung.vn', '0234567819', 6, 0, NULL, 'Test ke hoach san xuat', 1, '2023-07-14 02:02:00', '2023-09-23 15:15:54', 1);
-INSERT INTO `n_users` VALUES (7, 'warehouse', 'e10adc3949ba59abbe56e057f20f883e', 'Test kho vật tư', 'khovattu', '2345098123', 7, 0, NULL, 'test', 1, '2023-07-14 02:02:00', '2023-08-14 17:09:28', 1);
-INSERT INTO `n_users` VALUES (10, 'HoangDung', 'e10adc3949ba59abbe56e057f20f883e', 'Hoàng Dung', 'intuandung2000@gmail.com', '0969303888', 1, 0, NULL, NULL, 0, '2023-09-23 14:24:46', '2023-09-24 15:26:11', 1);
+INSERT INTO `n_users` VALUES (7, 'khovattu', 'e10adc3949ba59abbe56e057f20f883e', 'Test kho vật tư', 'khovattu', '2345098123', 7, 0, NULL, 'test', 1, '2023-07-14 02:02:00', '2023-09-25 16:24:03', 1);
+INSERT INTO `n_users` VALUES (10, 'HoangDung', 'e10adc3949ba59abbe56e057f20f883e', 'Hoàng Dung', 'intuandung2000@gmail.com', '0969303888', 1, 0, NULL, NULL, 0, '2023-09-23 14:24:46', '2023-09-25 16:32:09', 1);
 INSERT INTO `n_users` VALUES (11, 'kythuatduyetlenh2', 'e10adc3949ba59abbe56e057f20f883e', 'kythuatduyetlenh - Mr Thông', 'sanxuatitd@gmail.com', '0234567912', 3, 0, NULL, 'Technical apply order group tests', 1, '2023-09-23 15:13:27', '2023-09-23 15:13:27', 10);
 INSERT INTO `n_users` VALUES (12, 'kythuatsx2', 'e10adc3949ba59abbe56e057f20f883e', 'kythuatsx - Mr Thông', 'techhanle@gmail.com', '0123456789', 5, 0, NULL, NULL, 1, '2023-09-23 15:14:41', '2023-09-23 15:14:41', 10);
 
@@ -14099,7 +14108,7 @@ CREATE TABLE `print_warehouses`  (
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `created_by` int(10) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 68 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 69 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of print_warehouses
@@ -14122,6 +14131,7 @@ INSERT INTO `print_warehouses` VALUES (64, 'C', '51', '48.5', '120', '60000', 'p
 INSERT INTO `print_warehouses` VALUES (65, 'C', '50.3', '55.5', '150', '66000', 'paper', 12, 'imported', NULL, NULL, 1, '2023-09-24 15:39:19', '2023-09-24 15:39:37', 1);
 INSERT INTO `print_warehouses` VALUES (66, 'C', '50.3', '51', '150', '46500', 'paper', 12, 'imported', NULL, NULL, 1, '2023-09-24 15:39:59', '2023-09-24 15:39:59', 1);
 INSERT INTO `print_warehouses` VALUES (67, 'C đã gọi', '50', '72', '120', '10000', 'paper', 12, 'imported', NULL, NULL, 1, '2023-09-24 16:06:39', '2023-09-24 16:06:39', 1);
+INSERT INTO `print_warehouses` VALUES (68, 'Giay in test', '11', '11', '11', '11', 'paper', 13, 'imported', NULL, NULL, 1, '2023-09-25 23:28:15', '2023-09-25 23:28:15', 7);
 
 -- ----------------------------
 -- Table structure for printers
@@ -14345,7 +14355,7 @@ CREATE TABLE `quotes`  (
   `created_by` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `_index`(`seri`, `name`, `customer_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of quotes
@@ -14359,6 +14369,7 @@ INSERT INTO `quotes` VALUES (10, 'BG-000011', 'order_created', 'CÔNG TY DỆT M
 INSERT INTO `quotes` VALUES (19, 'BG-000019', 'order_created', 'CTY DƯỢC PHẨM DIAMOND PHÁP', NULL, 5, 'CTY DƯỢC PHẨM DIAMOND PHÁP', 'Ms Hải', 'KCN Đồng Văn - Hà Nam', 'zalo', '0917129458', '0917129458', 9047, '2', '0', '9967435.532', '10166784.24264', NULL, 1, NULL, '2023-09-24 10:44:13', '2023-09-24 10:51:41', 1);
 INSERT INTO `quotes` VALUES (20, 'BG-000020', 'accepted', 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', NULL, 1, 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 'Ms Thảo', 'Tòa R2 TTTM Royal City, 72A Nguyễn Trãi - Thanh Xuân - HN', 'zalo', '0325544040', '0325544040', 351, '2', '500000', '10168435.532', '10381804.24264', NULL, 1, NULL, '2023-09-24 10:51:58', '2023-09-24 10:54:55', 1);
 INSERT INTO `quotes` VALUES (21, 'BG-000021', 'order_created', 'CTY TNHH IN & SẢN XUẤT BAO BÌ NGHỆ AN', NULL, 6, 'CTY TNHH IN & SẢN XUẤT BAO BÌ NGHỆ AN', 'Mr Dũng', 'TP Vinh - Nghệ An', 'zalo', '0912188628', '0912188628', 4230, '0', '0', '48959906.75', '48959906.75', NULL, 1, NULL, '2023-09-24 15:49:44', '2023-09-24 15:52:28', 1);
+INSERT INTO `quotes` VALUES (23, 'BG-000024', 'not_accepted', 'CTY CP IN & SẢN XUẤT BAO BÌ TUẤN DUNG', NULL, 9, 'CTY CP IN & SẢN XUẤT BAO BÌ TUẤN DUNG', 'Mr Tuấn', 'Lô D5-16 Cụm Làng Nghề Triều khúc - Tân Triều - HN', 'kd1.intuandung@gmail.com', '0963303999', '02438303888', 351, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-09-25 07:50:34', '2023-09-25 08:09:34', 2);
 
 -- ----------------------------
 -- Table structure for square_warehouses
@@ -14368,7 +14379,7 @@ CREATE TABLE `square_warehouses`  (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `width` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `square` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `qty` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `supp_price` int(10) NULL DEFAULT NULL,
   `status` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
@@ -14788,5 +14799,58 @@ INSERT INTO `w_users` VALUES (32, 'hoanthien', 'e10adc3949ba59abbe56e057f20f883e
 INSERT INTO `w_users` VALUES (33, 'maybebtd2', 'e10adc3949ba59abbe56e057f20f883e', 'Mr Đức', '0101', 'elevate', 'semi_auto', NULL, 1, '2023-09-15 00:49:13', '2023-09-15 00:49:13', 1);
 INSERT INTO `w_users` VALUES (34, 'mayphay', 'e10adc3949ba59abbe56e057f20f883e', 'Mr ĐẠI', '123', 'mill', 'auto', NULL, 1, '2023-09-15 01:45:12', '2023-09-15 01:45:12', 1);
 INSERT INTO `w_users` VALUES (35, 'boitd', 'e10adc3949ba59abbe56e057f20f883e', 'Boi Td', '11', 'fill', 'auto', NULL, 1, '2023-09-15 23:12:08', '2023-09-15 23:12:08', 1);
+
+-- ----------------------------
+-- Table structure for warehouse_histories
+-- ----------------------------
+DROP TABLE IF EXISTS `warehouse_histories`;
+CREATE TABLE `warehouse_histories`  (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `action` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `table` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `target` int(10) NULL DEFAULT NULL,
+  `qty` bigint(20) NULL DEFAULT NULL,
+  `provider` int(10) NULL DEFAULT NULL,
+  `price` decimal(10, 2) NULL DEFAULT NULL,
+  `bill` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `created_by` int(10) NULL DEFAULT NULL,
+  `act` tinyint(4) NULL DEFAULT NULL,
+  `created_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 60 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of warehouse_histories
+-- ----------------------------
+INSERT INTO `warehouse_histories` VALUES (59, 'insert', 'print_warehouses', 'paper', 68, 11, 50, 11.00, '{\"path\":\"uploads/files/Screenshot_1.png\",\"name\":\"Screenshot_1.png\"}', 7, NULL, '2023-09-25 23:28:15', NULL);
+
+-- ----------------------------
+-- Table structure for warehouse_providers
+-- ----------------------------
+DROP TABLE IF EXISTS `warehouse_providers`;
+CREATE TABLE `warehouse_providers`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Mã nhóm',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Tên nhóm',
+  `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Cha',
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Ghi chú',
+  `act` tinyint(4) NULL DEFAULT NULL,
+  `ord` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `created_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `created_by` int(11) NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `name_index`(`name`) USING BTREE,
+  INDEX `type_index`(`type`) USING BTREE,
+  INDEX `act_indx`(`act`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 52 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of warehouse_providers
+-- ----------------------------
+INSERT INTO `warehouse_providers` VALUES (49, 'Nhà cung cấp 1', NULL, NULL, 1, NULL, '2023-09-25 20:55:27', '2023-09-25 20:55:40', 10);
+INSERT INTO `warehouse_providers` VALUES (50, 'Nhà cung cấp 2', NULL, NULL, 1, NULL, '2023-09-25 20:55:48', '2023-09-25 20:55:48', 10);
+INSERT INTO `warehouse_providers` VALUES (51, 'Nhà cung cấp 3', NULL, NULL, 1, NULL, '2023-09-25 20:55:57', '2023-09-25 20:55:57', 10);
 
 SET FOREIGN_KEY_CHECKS = 1;

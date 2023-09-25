@@ -25,10 +25,12 @@ class FillFinish extends Model
         $data_process['product_qty'] = $product['qty'];
         $data_process['product'] = $product_id;
         (new BaseService)->configBaseDataAction($data_process);
-        if (!empty($data['id'])) {
-            $process = $this->where('id', $data['id'])->update($data_process);   
-        }else{
-            $process = $this->insert($data_process);
+        if ($data_process['product_qty'] > 0) {
+            if (!empty($data['id'])) {
+                $process = $this->where('id', $data['id'])->update($data_process);   
+            }else{
+                $process = $this->insert($data_process);
+            }
         }
         return !empty($process);
     }

@@ -232,7 +232,7 @@ class QuoteService extends BaseService
             $insert_id = \DB::table('quotes')->insertGetId($data_quote);
             logActionUserData('insert_customer', 'quotes', $insert_id, $data_quote);
         }
-        $redr = !empty($insert_id) && !empty($log_id) ? 'insert/quotes?step=handle_config&id='.$insert_id : 'update/quotes/'.$id.'?step=handle_config';
+        $redr = !empty($insert_id) ? 'insert/quotes?step=handle_config&id='.$insert_id : 'update/quotes/'.$id.'?step=handle_config';
         return returnMessageAjax(200, '', asset($redr));
     }
 

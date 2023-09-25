@@ -37,16 +37,6 @@ class Quote extends Model
     }
     public function afterRemove($id)
     {
-        $products = Product::where('quote_id', $id)->get();
-        $childs = Product::$childTable;
-        foreach ($products as $product) {
-            $feild_file = Product::FEILD_FILE;
-            foreach ($feild_file as $key => $feild_file) {
-                if (!empty($product[$key])) {
-                    removeFileData($product[$key]);
-                }
-            }
-            (new \App\Services\AdminService)->removeDataTable('products', $product['id']);       
-        }
+        Product::removeData(['quote_id' => $id]);
     } 
 }

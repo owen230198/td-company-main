@@ -6,8 +6,10 @@ var changQtyInput = function(){
     let nqty = parseInt(parent.find('input.pro_nqty_input').val());
     let qty_supp = Math.ceil(qty_pro/nqty)
     let compen_percent = parent.data('percent');
+    let per_to_num = Math.ceil(qty_supp*compen_percent/100);
+    parent.find('input.compent_percent_input').val(per_to_num);
     let compen_plus = parseInt(parent.find('input.pro_compent_plus_input').val());
-    let addqty = Math.ceil(qty_supp*compen_percent/100) + compen_plus;
+    let addqty = per_to_num + compen_plus;
     parent.find('input.supp_qty_input').val(qty_supp);
     parent.find('input.total_supp_qty_input').val(qty_supp+addqty);
     let plan_qty = parent.find('input.plan_input_supp_qty');

@@ -26,8 +26,8 @@
         [
             'name' => $base_qty_field_name.'[compent_percent]',
             'note' => 'Bù hao',
-            'attr' => ['type_input' => 'number', 'readonly' => 1],
-            'value' => @$supply_obj->compent_percent ?? $compen_percent
+            'attr' => ['type_input' => 'number', 'readonly' => 1, 'inject_class' => 'compent_percent_input'],
+            'value' => @$supply_obj->compent_percent ?? 0
         ],
         [
             'name' => $base_qty_field_name.'[compent_plus]',

@@ -16,6 +16,18 @@ class SupplyWarehouse extends Model
     const BUY = 1;
     const OVER = 2;
     
+    static function getRole()
+    {
+        $role = [
+            \GroupUser::WAREHOUSE => [
+                'insert' => 1,
+                'view' => 1,
+                'update' => 1
+            ]
+        ];
+        return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];
+    } 
+
     public static function insertOverSupply($data, $supply, $size){
         $data_whouse = $data;
         $data_whouse['type'] = $supply->type;
@@ -25,5 +37,10 @@ class SupplyWarehouse extends Model
         $data_whouse['source'] = self::OVER;
         (new \BaseService)->configBaseDataAction($data_whouse);
         SupplyWarehouse::insert($data_whouse);
+    }
+
+    public function afterRemove($id)
+    {
+        return WarehouseHistory::removeData('supply_warehouses', $id);
     }
 }
