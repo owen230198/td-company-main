@@ -2,7 +2,7 @@
     <?php echo $__env->make('quotes.products.papers.supply_print', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <div class="paper_ajax_after_print" style="display: <?php echo e(@$supply_obj->except_handle == 1 ? 'none' : ''); ?>">
         <?php if(@$supp_index == 0 || !empty($supply_obj)): ?>
-            <?php echo $__env->make('quotes.products.papers.after_print', ['data_paper' => $supply_obj], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>    
+            <?php echo $__env->make('quotes.products.papers.after_print', ['data_paper' => @$supply_obj], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>    
         <?php endif; ?>
     </div>
 </div>

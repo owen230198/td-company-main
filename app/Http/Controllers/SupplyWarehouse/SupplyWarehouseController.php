@@ -9,32 +9,55 @@ class SupplyWarehouseController extends Controller
     function __construct()
     {
         parent::__construct();
-        $this->services = new \App\Services\WarehouseService;
+        $this->services = new \App\Services\WarehouseService('supply_warehouses');
     }
-    public function insert($request)
+
+    private function validateData($data, $insert = true)
     {
-        $table = 'supply_warehouses';
-        if ($request->isMethod('GET')) {
-            $param = $request->except('_token');
-            return $this->services->insert($table, $param);
-        }else{
-            $data_warehouse = $request->input('warehouse');
-            if (empty($data_warehouse['length'])) {
-                return returnMessageAjax(100, 'Vui lòng nhập kích thước khổ chiều dài !');
-            }
+        if (empty($data['length'])) {
+            return returnMessageAjax(100, 'Vui lòng nhập kích thước khổ chiều dài !');
+        }
 
-            if (empty($data_warehouse['width'])) {
-                return returnMessageAjax(100, 'Vui lòng nhập kích thước khổ chiều rộng !');
-            }
+        if (empty($data['width'])) {
+            return returnMessageAjax(100, 'Vui lòng nhập kích thước khổ chiều rộng !');
+        }
 
-            if (empty($data_warehouse['supp_type'])) {
-                return returnMessageAjax(100, 'Vui lòng chọn loại vật tư !');
-            }
+        if (empty($data['supp_type'])) {
+            return returnMessageAjax(100, 'Vui lòng chọn loại vật tư !');
+        }
 
-            if (empty($data_warehouse['supp_price'])) {
+        if ($insert) {
+            if (empty($data['supp_price'])) {
                 return returnMessageAjax(100, 'Vui lòng chọn định lượng !');
             }
-            return $this->services->doInsert($table, $request->all());
+        }
+    }
+
+    public function insert($request)
+    {
+        $param = $request->except('_token');
+        if ($request->isMethod('GET')) {
+            return $this->services->insert($param);
+        }else{
+            $validate = $this->validateData($request->input('warehouse'));
+            if (@$validate['code'] == 100) {
+                return $validate;
+            }
+            return $this->services->insert($param, 1);
+        }
+    }
+
+    public function update($request, $id)
+    {
+        $param = $request->except('_token');
+        if (!$request->isMethod('POST')) {
+            return $this->services->update($param, $id);
+        }else{
+            $validate = $this->validateData($request->input('warehouse'), false);
+            if (@$validate['code'] == 100) {
+                return $validate;
+            }
+            return $this->services->update($param, $id, 1);
         }
     }
 }

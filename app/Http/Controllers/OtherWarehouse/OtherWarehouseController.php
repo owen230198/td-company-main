@@ -9,24 +9,33 @@ class OtherWarehouseController extends Controller
     function __construct()
     {
         parent::__construct();
-        $this->services = new \App\Services\WarehouseService;
+        $this->services = new \App\Services\WarehouseService('other_warehouses');
     }
     public function insert($request)
     {
-        $table = 'other_warehouses';
+        $param = $request->except('_token');
         if ($request->isMethod('GET')) {
-            $param = $request->except('_token');
-            return $this->services->insert($table, $param);
+            return $this->services->insert($param);
         }else{
-            $data_warehouse = $request->input('warehouse');
-            if (empty($data_warehouse['qty'])) {
-                return returnMessageAjax(100, 'Vui lòng nhập số lượng nhập kho !');
-            }
-
-            if (empty($data_warehouse['supp_price'])) {
+            $data = @$param['warehouse'] ?? [];
+            if (empty($data['supp_price'])) {
                 return returnMessageAjax(100, 'Vui lòng chọn loại vật tư !');
             }
-            return $this->services->doInsert($table, $request->all());
+            return $this->services->insert($param, 1);
+        }
+    }
+
+    public function update($request, $id)
+    {
+        $param = $request->except('_token');
+        if (!$request->isMethod('POST')) {
+            return $this->services->update($param, $id);
+        }else{
+            $data = @$param['warehouse'] ?? [];
+            if (empty($data['supp_price'])) {
+                return returnMessageAjax(100, 'Vui lòng chọn loại vật tư !');
+            }
+            return $this->services->update($param, $id, 1);
         }
     }
 }

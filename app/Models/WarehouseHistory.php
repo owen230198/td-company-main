@@ -30,6 +30,14 @@ class WarehouseHistory extends Model
     ];
 
     const FIELD_INSERT = [
+        self::FIELD_QTY,
+        self::FIELD_PROVIDER,
+        self::FIELD_PRICE,
+        self::FIELD_BILL           
+    ];
+
+    const FIELD_UPDATE = [
+        self::FIELD_QTY,
         self::FIELD_PROVIDER,
         self::FIELD_PRICE,
         self::FIELD_BILL           

@@ -96,7 +96,7 @@
 
 	if (!function_exists('getDataProExportFile')) {
 		function getDataProExportFile($product){
-			$main_paper = \App\Models\Paper::where(['act' => 1, 'main' => 1, 'product' => $product['id']])->first()->toArray();
+			$main_paper = \App\Models\Paper::where(['act' => 1, 'main' => 1, 'product' => $product['id']])->first();
             $ret['size'] = !empty($main_paper['size']) ? json_decode($main_paper['size'], true) : [];
             $ret['print'] = !empty($main_paper['print']) ? json_decode($main_paper['print'], true) : []; 
             $ret['nilon'] = !empty($main_paper['nilon']) ? json_decode($main_paper['nilon'], true) : [];

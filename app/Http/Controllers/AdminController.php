@@ -201,7 +201,7 @@ class AdminController extends Controller
             if (method_exists($controller, __FUNCTION__)) {
                 return $controller->update($request, $id);
             }else{
-                return customReturnMessage(false, $request->isMethod('POST'), ['message' => 'Thao tác không hỗ trợ !']);
+                return customReturnMessage(false, $request->isMethod('POST'), ['message' => 'Thao tác không được hỗ trợ !']);
             }
         }else{
             $param = $request->except('_token');

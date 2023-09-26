@@ -8,32 +8,52 @@ class PrintWarehouseController extends Controller
     function __construct()
     {
         parent::__construct();
-        $this->services = new \App\Services\WarehouseService;
+        $this->services = new \App\Services\WarehouseService('print_warehouses');
     }
+    
+    public function validateData($data){ 
+        if (empty($data['length'])) {
+            return returnMessageAjax(100, 'Vui lòng nhập kích thước khổ chiều dài !');
+        }
+
+        if (empty($data['width'])) {
+            return returnMessageAjax(100, 'Vui lòng nhập kích thước khổ chiều rộng !');
+        }
+
+        if (empty($data['supp_price'])) {
+            return returnMessageAjax(100, 'Vui lòng chọn loại vật tư !');
+        }
+
+        if ($data['qtv'] == '') {
+            return returnMessageAjax(100, 'Vui lòng nhập định lượng !');
+        }
+    }
+
     public function insert($request)
     {
-        $table = 'print_warehouses';
+        $param = $request->except('_token');
         if ($request->isMethod('GET')) {
-            $param = $request->except('_token');
-            return $this->services->insert($table, $param);
+            return $this->services->insert($param);
         }else{
-            $data_warehouse = $request->input('warehouse');
-            if (empty($data_warehouse['length'])) {
-                return returnMessageAjax(100, 'Vui lòng nhập kích thước khổ chiều dài !');
+            $validate = $this->validateData($request->input('warehouse'));
+            if (@$validate['code'] == 100) {
+                return $validate;
             }
+            return $this->services->insert($param, 1);
+        }
+    }
 
-            if (empty($data_warehouse['width'])) {
-                return returnMessageAjax(100, 'Vui lòng nhập kích thước khổ chiều rộng !');
+    public function update($request, $id)
+    {
+        $param = $request->except('_token');
+        if (!$request->isMethod('POST')) {
+            return $this->services->update($param, $id);
+        }else{
+            $validate = $this->validateData($request->input('warehouse'));
+            if (@$validate['code'] == 100) {
+                return $validate;
             }
-
-            if (empty($data_warehouse['supp_price'])) {
-                return returnMessageAjax(100, 'Vui lòng chọn loại vật tư !');
-            }
-
-            if ($data_warehouse['qtv'] == '') {
-                return returnMessageAjax(100, 'Vui lòng nhập định lượng !');
-            }
-            return $this->services->doInsert($table, $request->all());
+            return $this->services->update($param, $id, 1);
         }
     }
 }
