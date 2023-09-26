@@ -157,7 +157,7 @@ class OrderService extends BaseService
                 $over_supply['qty'] = $command['qty'];
                 SupplyWarehouse::insertOverSupply($over_supply, $supply, $size);       
             }
-            return returnMessageAjax(200, 'Đã gửi yêu cầu xử lí vật tư thành công!', url('update/orders/'.$supply->order));
+            return returnMessageAjax(200, 'Đã gửi yêu cầu xử lí vật tư thành công!', url('update/products/'.$supply->product));
         }     
     }
 

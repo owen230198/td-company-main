@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 25, 2023 at 11:07 PM
+-- Generation Time: Sep 26, 2023 at 08:34 PM
 -- Server version: 10.3.38-MariaDB
 -- PHP Version: 7.4.33
 
@@ -12214,7 +12214,11 @@ INSERT INTO `customers` (`id`, `code`, `name`, `contacter`, `manager`, `phone`, 
 (6, 'KH-000006', 'CTY TNHH IN & SẢN XUẤT BAO BÌ NGHỆ AN', 'Mr Dũng', NULL, '0912188628', '0912188628', 'zalo', 'TP Vinh - Nghệ An', '4230', NULL, NULL, '1', 1, '2023-09-23 14:18:56', '2023-09-24 08:40:12', 1),
 (7, 'KH-000007', 'CÔNG TY DƯỢC PHẨM NOVA PHÁP', 'Mr Hải', NULL, '0914755299', '0914755299', 'zalo', 'TP Nam Định', '7474', NULL, NULL, '1', 1, '2023-09-23 14:22:24', '2023-09-24 08:40:12', 1),
 (8, 'KH-000008', 'CTY HATACHI', 'Mr Phúc', NULL, '0358866868', '0358866868', 'zalo', 'Trung Kính - HN', '351', NULL, NULL, '1', 1, '2023-09-23 14:32:18', '2023-09-24 08:40:12', 1),
-(9, 'KH-000009', 'CTY CP IN & SẢN XUẤT BAO BÌ TUẤN DUNG', 'Mr Tuấn', NULL, '0963303999', '02438303888', 'kd1.intuandung@gmail.com', 'Lô D5-16 Cụm Làng Nghề Triều khúc - Tân Triều - HN', '351', NULL, NULL, '1', 1, '2023-09-23 14:34:33', '2023-09-24 08:40:12', 1);
+(9, 'KH-000009', 'CTY CP IN & SẢN XUẤT BAO BÌ TUẤN DUNG', 'Mr Tuấn', NULL, '0963303999', '02438303888', 'kd1.intuandung@gmail.com', 'Lô D5-16 Cụm Làng Nghề Triều khúc - Tân Triều - HN', '351', NULL, NULL, '1', 1, '2023-09-23 14:34:33', '2023-09-24 08:40:12', 1),
+(10, 'KH-000010', 'Công ty TNHH phát triển y tế USA', 'Ms Dịu', NULL, '0983 580 635', '0983 580 635', 'chưa có', 'NV1 Số 38 Tổng Cục V Tân Triều Thanh Trì TP.Hà Nội', '351', NULL, NULL, '1', 1, '2023-09-26 14:37:54', '2023-09-26 14:37:54', 10),
+(11, 'KH-000011', 'CÔNG TY TNHH ĐẦU TƯ XUẤT NHẬP KHẨU VÀ THƯƠNG MẠI THÀNH ĐỨC', 'Anh Cương', NULL, '0988373219', '0988373219', 'zalo', 'Số 3B, Ngách 144/4, Phố Quan Nhân, Phường Nhân Chính, Quận Thanh Xuân, Thành phố Hà Nội', '7474', NULL, 'TP Ninh bình 0988373219', '1', 1, '2023-09-26 16:14:25', '2023-09-26 16:14:25', 10),
+(12, 'KH-000012', 'CÔNG TY DƯỢC PHẨM HADIPHACO', 'Mr Hải', NULL, '0968 754 654', '0968 754 654', 'duocphamhadiphaco@gmail.com', 'Số 65 ngõ 173/192 Lê Trọng Tấn, Định Công, Hoàng Mai, HN', '351', NULL, NULL, '1', 1, '2023-09-26 16:51:54', '2023-09-26 16:51:54', 10),
+(13, 'KH-000013', 'Công ty TNHH dược phẩm Blue pharma', 'Mr Hải', NULL, '0968754654', '0968754654', 'zalo', 'Số nhà 22, ngách 50/37 Đường Khuyến Lương, Trần phú', '351', NULL, NULL, '1', 1, '2023-09-26 16:59:34', '2023-09-26 16:59:34', 10);
 
 -- --------------------------------------------------------
 
@@ -13238,7 +13242,8 @@ INSERT INTO `fill_finishes` (`id`, `code`, `product_qty`, `fill`, `finish`, `mag
 (3, NULL, '5000', '{\"stage\":[{\"length\":null,\"width\":null,\"machine\":null,\"qttv_price\":0,\"cost\":0}],\"ext_price\":\"5000\",\"qty_pro\":5000,\"handle_qty\":5000,\"fill_cost\":0,\"act\":1,\"total\":25000000}', '{\"stage\":[{\"materal\":\"53\",\"qttv_price\":500,\"cost\":2500000}],\"ext_price\":\"1000\",\"qty_pro\":5000,\"handle_qty\":5000,\"finish_cost\":2500000,\"act\":1,\"total\":7500000}', '{\"type\":null,\"qty\":null,\"qttv_price\":0,\"magnet_perc\":1.5,\"qty_pro\":5000,\"act\":0,\"total\":0}', NULL, NULL, 32500000, '2023-09-23 19:05:28', '2023-09-23 19:05:28', 7, 1, 1),
 (4, NULL, '5000', '{\"stage\":[{\"length\":null,\"width\":null,\"machine\":null,\"qttv_price\":0,\"cost\":0}],\"ext_price\":\"5000\",\"qty_pro\":5000,\"handle_qty\":5000,\"fill_cost\":0,\"act\":1,\"total\":25000000}', '{\"stage\":[{\"materal\":\"53\",\"qttv_price\":500,\"cost\":2500000}],\"ext_price\":\"1000\",\"qty_pro\":5000,\"handle_qty\":5000,\"finish_cost\":2500000,\"act\":1,\"total\":7500000}', '{\"type\":null,\"qty\":null,\"qttv_price\":0,\"magnet_perc\":1.5,\"qty_pro\":5000,\"act\":0,\"total\":0}', NULL, NULL, 32500000, '2023-09-24 22:46:18', '2023-09-24 22:46:18', 8, 1, 10),
 (5, NULL, '5000', '{\"stage\":[{\"length\":null,\"width\":null,\"machine\":null,\"qttv_price\":0,\"cost\":0}],\"ext_price\":\"5000\",\"qty_pro\":5000,\"handle_qty\":5000,\"fill_cost\":0,\"act\":1,\"total\":25000000}', '{\"stage\":[{\"materal\":\"53\",\"qttv_price\":500,\"cost\":2500000}],\"ext_price\":\"1000\",\"qty_pro\":5000,\"handle_qty\":5000,\"finish_cost\":2500000,\"act\":1,\"total\":7500000}', '{\"type\":null,\"qty\":null,\"qttv_price\":0,\"magnet_perc\":1.5,\"qty_pro\":5000,\"act\":0,\"total\":0}', NULL, NULL, 32500000, '2023-09-23 19:06:18', '2023-09-23 19:06:18', 9, 1, 1),
-(6, NULL, '10000', '{\"stage\":[{\"length\":null,\"width\":null,\"machine\":null,\"qttv_price\":0,\"cost\":0}],\"ext_price\":\"0\",\"qty_pro\":10000,\"handle_qty\":10000,\"fill_cost\":0,\"act\":0,\"total\":0}', '{\"ext_price\":\"0\",\"qty_pro\":10000,\"handle_qty\":10000,\"finish_cost\":0,\"act\":0,\"total\":0}', '{\"type\":null,\"qty\":null,\"qttv_price\":0,\"magnet_perc\":1.5,\"qty_pro\":10000,\"act\":0,\"total\":0}', NULL, NULL, 0, '2023-09-24 15:52:01', '2023-09-24 15:52:01', 13, 1, 1);
+(6, NULL, '10000', '{\"stage\":[{\"length\":null,\"width\":null,\"machine\":null,\"qttv_price\":0,\"cost\":0}],\"ext_price\":\"0\",\"qty_pro\":10000,\"handle_qty\":10000,\"fill_cost\":0,\"act\":0,\"total\":0}', '{\"ext_price\":\"0\",\"qty_pro\":10000,\"handle_qty\":10000,\"finish_cost\":0,\"act\":0,\"total\":0}', '{\"type\":null,\"qty\":null,\"qttv_price\":0,\"magnet_perc\":1.5,\"qty_pro\":10000,\"act\":0,\"total\":0}', NULL, NULL, 0, '2023-09-24 15:52:01', '2023-09-24 15:52:01', 13, 1, 1),
+(7, NULL, '5000', '{\"stage\":[{\"length\":\"53\",\"width\":\"11.2\",\"materal\":\"19\",\"machine\":\"48\",\"qttv_price\":0.3,\"cost\":3190399.9999999995,\"work_price\":400,\"shape_price\":300000},{\"length\":\"38\",\"width\":\"19\",\"materal\":\"20\",\"machine\":\"48\",\"qttv_price\":0.3,\"cost\":3383000,\"work_price\":400,\"shape_price\":300000},{\"length\":\"15\",\"width\":\"19\",\"materal\":\"21\",\"machine\":\"48\",\"qttv_price\":0.3,\"cost\":2727500,\"work_price\":400,\"shape_price\":300000}],\"ext_price\":\"500\",\"qty_pro\":5000,\"handle_qty\":5000,\"fill_cost\":9300900,\"act\":1,\"total\":11800900}', '{\"stage\":[{\"materal\":\"53\",\"qttv_price\":500,\"cost\":2500000},{\"materal\":\"54\",\"qttv_price\":150,\"cost\":750000},{\"materal\":\"55\",\"qttv_price\":150,\"cost\":750000}],\"ext_price\":\"200\",\"qty_pro\":5000,\"handle_qty\":5000,\"finish_cost\":4000000,\"act\":1,\"total\":5000000}', '{\"type\":\"17\",\"qty\":\"1\",\"qttv_price\":\"500\",\"magnet_perc\":1.5,\"qty_pro\":5000,\"act\":1,\"total\":3750000}', NULL, NULL, 20550900, '2023-09-26 17:42:44', '2023-09-26 17:42:44', 19, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -13292,7 +13297,8 @@ INSERT INTO `materals` (`id`, `name`, `price`, `type`, `default`, `note`, `act`,
 (30, 'PHỦ BÓNG GỐC DẦU - CTY NHẬT SƠN', '1.5', 'cover', 1, '1.5 = 1500đ/m2', 1, '2023-09-16 02:00:33', '2023-09-16 02:00:33', 1, NULL),
 (31, 'Nam châm nhỡ', '800', 'magnet', 0, '0', 1, '2023-09-16 02:54:18', '2023-09-16 02:54:18', 1, NULL),
 (32, 'Nam châm to', '1200', 'magnet', 0, '0', 1, '2023-09-16 02:54:37', '2023-09-16 02:54:37', 1, NULL),
-(33, 'GIẤY MỸ THUẬT ĐEN', '0.005', 'paper', 0, '0.005 = 50 triệu/ tấn', 1, '2023-09-19 01:14:55', '2023-09-19 01:27:48', 1, NULL);
+(33, 'GIẤY MỸ THUẬT ĐEN', '0.005', 'paper', 0, '0.005 = 50 triệu/ tấn', 1, '2023-09-19 01:14:55', '2023-09-19 01:27:48', 1, NULL),
+(34, 'ĐỀ CAN GIẤY', '0.0032', 'paper', 0, '0.0032 = 32 triệu/ tấn', 1, '2023-09-26 18:05:21', '2023-09-26 18:05:21', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -13357,7 +13363,7 @@ INSERT INTO `n_detail_tables` (`id`, `name`, `attr`, `note`, `type`, `table_map`
 (30, 'profit', '{\"required\":1, \"type_input\":\"price\"}', 'Lợi nhuận', 'text', 'quotes', 1, 1, 1, 0, 0, '', 1, 3, 1, '2023-04-30 11:00:22', '2023-08-16 17:01:46'),
 (31, 'ship_price', '{\"required\":1, \"type_input\":\"price\"}', 'Phí Ship', 'text', 'quotes', 1, 1, 1, 0, 0, '', 1, 2, 1, '2023-04-30 11:00:13', '2023-08-16 17:01:32'),
 (32, 'total_amount', '{\"required\":1, \"type_input\":\"price\"}', 'Giá trị BG', 'text', 'quotes', 1, 1, 1, 0, 0, '', 1, 4, 1, '2023-04-30 11:00:33', '2023-08-16 17:01:39'),
-(33, 'status', '{\"required\":1}', 'Trạng thái', 'select', 'quotes', 1, 1, 1, 1, 0, '{\"data\":{\r\n		\"options\":{\"\":\"Trạng thái\", \"not_accepted\":\"Chưa duyệt\", \"accepted\":\"Đã duyệt\"}\r\n	}\r\n}', 1, 5, 1, '2023-05-11 11:19:48', '2023-09-16 04:43:01'),
+(33, 'status', '{\"required\":1}', 'Trạng thái', 'select', 'quotes', 1, 1, 1, 1, 0, '{\"data\":{\r\n		\"options\":{\"\":\"Trạng thái\", \"not_accepted\":\"Chưa duyệt\", \"accepted\":\"Đã duyệt\", \"order_created\":\"Đã tạo đơn\"}\r\n	}\r\n}', 1, 5, 1, '2023-05-11 11:19:48', '2023-09-26 16:50:57'),
 (34, 'created_by', NULL, 'Phụ trách', 'linking', 'quotes', 1, 1, 1, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', 1, 0, 1, '2023-04-08 00:08:00', '2023-04-08 00:08:00'),
 (35, 'created_at', NULL, 'Ngày tạo', 'datetime', 'quotes', 1, 1, 1, 1, 0, '', 1, 6, 1, '2023-04-30 11:00:43', '2023-04-30 11:00:43'),
 (36, 'updated_at', NULL, 'Ngày sửa', 'datetime', 'quotes', 0, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-08 00:12:15', '2023-04-08 00:12:15'),
@@ -13453,7 +13459,7 @@ INSERT INTO `n_detail_tables` (`id`, `name`, `attr`, `note`, `type`, `table_map`
 (137, 'length', '{\"required\":1}', 'KT dài', 'text', 'print_warehouse', 1, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2023-08-12 11:10:07'),
 (138, 'width', '{\"required\":1}', 'KT rộng', 'text', 'print_warehouse', 1, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2023-08-12 11:10:07'),
 (139, 'qty', '{\"type_input\":\"number\",\"required\":1}', 'Số lượng', 'text', 'print_warehouse', 1, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-30 11:00:22', '2023-08-12 11:10:07'),
-(140, 'name', '{\"required\":1}', 'Tên vật tư', 'text', 'print_warehouses', 1, 1, 1, 1, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2023-08-16 14:47:29'),
+(140, 'name', '{\"required\":1}', 'Tên vật tư', 'text', 'print_warehouses', 1, 1, 1, 1, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2023-09-25 08:45:22'),
 (141, 'length', '{\"required\":1}', 'KT dài', 'text', 'print_warehouses', 1, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2023-08-16 14:47:29'),
 (142, 'width', '{\"required\":1}', 'KT rộng', 'text', 'print_warehouses', 1, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2023-08-16 14:52:47'),
 (143, 'qty', '{\"type_input\":\"number\",\"required\":1}', 'Số lượng', 'text', 'print_warehouses', 1, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-30 11:00:22', '2023-08-16 14:47:29'),
@@ -13464,10 +13470,10 @@ INSERT INTO `n_detail_tables` (`id`, `name`, `attr`, `note`, `type`, `table_map`
 (148, 'group_supply', '', 'Dạng vật tư', 'group', 'c_supplies', 1, 1, 1, 1, 0, '{\r\n	\"group_class\":\"__module_select_type_warehouse\",\r\n	\"width\":\"8\",\r\n	\"width_child\":\"6\"\r\n}', 1, 0, 1, '2023-05-23 14:41:40', '2023-08-17 03:13:39'),
 (149, 'supp_type', '{\"required\":1,\"inject_class\":\"__wh_select_type\"}', 'Loại vật tư', 'select', 'c_supplies', 1, 0, 0, 0, 148, '{\r\n	\"config\":{\r\n		\"searchbox\":1\r\n	},\r\n	\"data\":{\r\n		\"options\":{\r\n			\"0\":\"Chọn loại vật tư\",\r\n			\"paper\":\"Giấy in\", \r\n			\"nilon\":\"Màng nilon\", \r\n			\"metalai\":\"Màng metalai\",\r\n			\"cover\":\"Màng phủ trên\",\r\n			\"carton\":\"Carton\",\r\n			\"rubber\":\"Cao su\",\r\n			\"styrofoam\":\"Mút phẳng\",\r\n			\"decal\":\"Nhung\",\r\n			\"silk\":\"Vải lụa\",\r\n			\"mica\":\"Mi ca\",\r\n			\"magnet\":\"Nam châm\"\r\n		}\r\n	}\r\n}', 1, 0, 1, '2023-05-11 11:18:58', '2023-08-17 03:16:06'),
 (150, 'name', '{\"required\":1}', 'Tên vật tư', 'text', 'square_warehouses', 1, 1, 1, 1, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2023-08-17 15:56:46'),
-(151, 'square', '{\"type_input\":\"number\",\"required\":1}', 'Còn lại (m)', 'text', 'square_warehouses', 1, 1, 1, 0, 0, '', 1, 1, 1, '2023-04-30 11:00:22', '2023-08-26 00:39:37'),
+(151, 'qty', '{\"type_input\":\"number\",\"required\":1}', 'Còn lại (m)', 'text', 'square_warehouses', 1, 1, 1, 0, 0, '', 1, 1, 1, '2023-04-30 11:00:22', '2023-09-25 22:15:30'),
 (152, 'supp_price', '{\"required\":1}', 'Loại vật tư', 'linking', 'square_warehouses', 1, 1, 1, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"materals\",\r\n		\"where_default\":{\"type\":\"type\"}\r\n	}\r\n}', 1, 1, 1, '2023-05-11 11:18:58', '2023-08-26 00:39:38'),
-(153, 'created_by', NULL, 'Người thêm', 'linking', 'other_warehouses', 1, 1, 1, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', 1, 0, 1, '2023-04-08 00:08:00', '2023-08-17 15:56:04'),
-(154, 'created_at', NULL, 'Ngày thêm', 'datetime', 'other_warehouses', 1, 1, 1, 1, 0, '', 1, 0, 1, '2023-04-08 00:08:00', '2023-08-17 15:56:04'),
+(153, 'created_by', NULL, 'Người thêm', 'linking', 'other_warehouses', 1, 0, 0, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', 1, 0, 1, '2023-04-08 00:08:00', '2023-09-25 23:04:34'),
+(154, 'created_at', NULL, 'Ngày thêm', 'datetime', 'other_warehouses', 1, 0, 0, 1, 0, '', 1, 0, 1, '2023-04-08 00:08:00', '2023-09-25 23:04:40'),
 (155, 'created_by', NULL, 'Người thêm', 'linking', 'square_warehouses', 1, 0, 0, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', 1, 1, 1, '2023-04-08 00:08:00', '2023-08-26 00:39:38'),
 (156, 'created_at', NULL, 'Ngày thêm', 'datetime', 'square_warehouses', 1, 1, 1, 1, 0, '', 1, 1, 1, '2023-04-08 00:08:00', '2023-08-26 00:39:40'),
 (157, 'order', NULL, 'Đơn hàng', 'linking', 'products', 1, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"orders\",\r\n		\"field_title\":\"code\"\r\n	}\r\n}', 1, 0, 1, '2023-08-22 03:54:31', '2023-09-24 08:48:22'),
@@ -13553,7 +13559,13 @@ INSERT INTO `n_detail_tables` (`id`, `name`, `attr`, `note`, `type`, `table_map`
 (241, 'act', '', 'Kích hoạt', 'checkbox', 'product_styles', 1, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-08 00:05:47', '2023-09-20 14:52:50'),
 (242, 'status', '', 'Trạng thái', 'select', 'products', 1, 0, 1, 0, 0, '{\"data\":{\r\n		\"options\":{\r\n			\"not_accepted\":\"Chưa duyệt\", \r\n			\"accepted\":\"Đã duyệt thiết kế\", \r\n			\"to_design\":\"Chờ thiết kế nhận lệnh\",\r\n			\"designing\":\"Đang thiết kế\",\r\n			\"design_submited\":\"Đã xong thiết kế\",\r\n			\"tech_submited\":\"Kế hoạch đang xử lí\",\r\n			\"making_process\":\"Đang gia công\",\r\n			\"submited\":\"Hoàn tất gia công\"\r\n		}\r\n	}\r\n}', 1, 0, 1, '2023-05-26 03:19:12', '2023-09-22 00:39:04'),
 (243, 'category', NULL, 'Nhóm sản phẩm', 'group_product', 'products', 0, 0, 0, 1, 0, '{\r\n	\"table_target\":\"quotes\"\r\n}', 1, 0, 1, '2023-04-30 11:17:52', '2023-09-21 11:32:54'),
-(244, 'size', NULL, 'Kích thước', 'product_size', 'products', 0, 0, 0, 1, 0, '{\r\n	\"table_target\":\"quotes\"\r\n}', 1, 0, 1, '2023-04-30 11:17:52', '2023-09-21 11:32:56');
+(244, 'size', NULL, 'Kích thước', 'product_size', 'products', 0, 0, 0, 1, 0, '{\r\n	\"table_target\":\"quotes\"\r\n}', 1, 0, 1, '2023-04-30 11:17:52', '2023-09-21 11:32:56'),
+(245, 'name', '{\"required\":1}', 'Tên vật tư', 'text', 'warehouse_providers', 1, 1, 1, 1, 0, '', 1, 0, 1, '2023-04-28 11:43:12', '2023-09-25 20:52:35'),
+(246, 'act', '', 'Kích hoạt', 'checkbox', 'warehouse_providers', 1, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-28 11:43:12', '2023-09-25 20:52:35'),
+(247, 'note', '', 'Ghi chú', 'textarea', 'warehouse_providers', 0, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-28 11:43:12', '2023-09-25 20:52:35'),
+(248, 'created_at', '', 'Ngày tạo', 'datetime', 'warehouse_providers', 1, 1, 1, 1, 0, '', 1, 0, 1, '2023-04-28 11:43:12', '2023-09-25 20:52:35'),
+(249, 'updated_at', '', 'Ngày sửa', 'datetime', 'warehouse_providers', 0, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-28 11:43:12', '2023-09-25 20:52:35'),
+(250, 'ord', '{\"type_input\":\"number\"}', 'Sắp xếp', 'text', 'warehouse_providers', 1, 1, 1, 0, 0, '', 1, 3, 1, '2023-04-30 11:00:22', '2023-09-25 20:52:35');
 
 -- --------------------------------------------------------
 
@@ -13627,7 +13639,6 @@ INSERT INTO `n_log_actions` (`id`, `table_map`, `action`, `target`, `user`, `par
 (34, 'print_warehouses', 'insert', 66, 1, 0, '{\"type\":\"paper\",\"status\":\"imported\",\"name\":\"C\",\"length\":\"50.3\",\"width\":\"51\",\"qty\":\"46500\",\"supp_price\":\"12\",\"qtv\":\"150\"}', 1, '2023-09-24 15:39:59', '2023-09-24 15:39:59'),
 (35, 'supply_warehouses', 'update', 1, 1, 0, '{\"name\":{\"old\":\"Carton th\\u00e0nh \\u0110L 0.8mm KT 50 x 40\",\"new\":\"Carton\"},\"length\":{\"old\":\"50\",\"new\":\"90.6\"},\"width\":{\"old\":\"40\",\"new\":\"51.5\"},\"qty\":{\"old\":\"1000000\",\"new\":\"20636\"},\"supp_type\":{\"old\":\"5\",\"new\":\"21\"},\"supp_price\":{\"old\":\"125\",\"new\":\"121\"}}', 1, '2023-09-24 15:45:21', '2023-09-24 15:45:21'),
 (36, 'supply_warehouses', 'insert', 29, 1, 0, '{\"type\":\"carton\",\"status\":\"imported\",\"name\":\"Carton\",\"length\":\"90.6\",\"width\":\"52.5\",\"qty\":\"4000\",\"supp_type\":\"21\"}', 1, '2023-09-24 15:45:53', '2023-09-24 15:45:53'),
-(37, 'supply_warehouses', 'insert', 30, 1, 0, '{\"type\":\"carton\",\"status\":\"imported\",\"name\":\"Carton\",\"length\":\"90.6\",\"width\":\"46.5\",\"qty\":\"50360\",\"supp_type\":\"21\",\"supp_price\":\"121\"}', 1, '2023-09-24 15:46:41', '2023-09-24 15:46:41'),
 (38, 'supply_warehouses', 'update', 29, 1, 0, '{\"supp_price\":{\"old\":null,\"new\":\"121\"}}', 1, '2023-09-24 15:47:05', '2023-09-24 15:47:05'),
 (39, 'supply_warehouses', 'insert', 31, 1, 0, '{\"type\":\"carton\",\"status\":\"imported\",\"name\":\"Carton\",\"length\":\"48\",\"width\":\"77.5\",\"qty\":\"14560\",\"supp_type\":\"21\",\"supp_price\":\"121\"}', 1, '2023-09-24 15:48:15', '2023-09-24 15:48:15'),
 (40, 'quotes', 'insert_customer', 21, 1, 0, '{\"name\":\"CTY TNHH IN & S\\u1ea2N XU\\u1ea4T BAO B\\u00cc NGH\\u1ec6 AN\",\"contacter\":\"Mr D\\u0169ng\",\"phone\":\"0912188628\",\"telephone\":\"0912188628\",\"email\":\"zalo\",\"address\":\"TP Vinh - Ngh\\u1ec7 An\",\"city\":\"4230\",\"seri\":\"BG-000021\",\"customer_id\":\"6\",\"company_name\":\"CTY TNHH IN & S\\u1ea2N XU\\u1ea4T BAO B\\u00cc NGH\\u1ec6 AN\",\"status\":\"not_accepted\",\"created_by\":1,\"created_at\":\"2023-09-24 15:49:44\",\"act\":1,\"updated_at\":\"2023-09-24 15:49:44\"}', 1, '2023-09-24 15:49:44', '2023-09-24 15:49:44'),
@@ -13637,7 +13648,25 @@ INSERT INTO `n_log_actions` (`id`, `table_map`, `action`, `target`, `user`, `par
 (45, 'supply_warehouses', 'insert', 32, 1, 0, '{\"type\":\"carton\",\"status\":\"imported\",\"name\":\"Carton nh\\u00e1p\",\"length\":\"100\",\"width\":\"120\",\"qty\":\"14560\",\"supp_type\":\"21\",\"supp_price\":\"117\"}', 1, '2023-09-24 16:11:07', '2023-09-24 16:11:07'),
 (46, 'quotes', 'update_customer', 9, 10, 0, '{\"seri\":{\"old\":\"BG-000011\",\"new\":\"BG-000023\"}}', 1, '2023-09-24 22:42:24', '2023-09-24 22:42:24'),
 (47, 'quotes', 'insert_customer', 23, 2, 0, '{\"name\":\"CTY CP IN & S\\u1ea2N XU\\u1ea4T BAO B\\u00cc TU\\u1ea4N DUNG\",\"contacter\":\"Mr Tu\\u1ea5n\",\"phone\":\"0963303999\",\"telephone\":\"02438303888\",\"email\":\"kd1.intuandung@gmail.com\",\"address\":\"L\\u00f4 D5-16 C\\u1ee5m L\\u00e0ng Ngh\\u1ec1 Tri\\u1ec1u kh\\u00fac - T\\u00e2n Tri\\u1ec1u - HN\",\"city\":\"351\",\"seri\":\"BG-000023\",\"customer_id\":\"9\",\"company_name\":\"CTY CP IN & S\\u1ea2N XU\\u1ea4T BAO B\\u00cc TU\\u1ea4N DUNG\",\"status\":\"not_accepted\",\"created_by\":2,\"created_at\":\"2023-09-25 07:50:34\",\"act\":1,\"updated_at\":\"2023-09-25 07:50:34\"}', 1, '2023-09-25 07:50:34', '2023-09-25 07:50:34'),
-(48, 'quotes', 'update_customer', 23, 2, 0, '{\"seri\":{\"old\":\"BG-000023\",\"new\":\"BG-000024\"}}', 1, '2023-09-25 08:09:34', '2023-09-25 08:09:34');
+(48, 'quotes', 'update_customer', 23, 2, 0, '{\"seri\":{\"old\":\"BG-000023\",\"new\":\"BG-000024\"}}', 1, '2023-09-25 08:09:34', '2023-09-25 08:09:34'),
+(49, 'n_users', 'update', 10, 1, 0, '{\"act\":{\"old\":\"0\",\"new\":\"1\"}}', 1, '2023-09-26 10:00:49', '2023-09-26 10:00:49'),
+(50, 'customers', 'insert', 10, 10, 0, '{\"name\":\"C\\u00f4ng ty TNHH ph\\u00e1t tri\\u1ec3n y t\\u1ebf USA\",\"contacter\":\"Ms D\\u1ecbu\",\"phone\":\"0983 580 635\",\"telephone\":\"0983 580 635\",\"email\":\"ch\\u01b0a c\\u00f3\",\"address\":\"NV1 S\\u1ed1 38 T\\u1ed5ng C\\u1ee5c V T\\u00e2n Tri\\u1ec1u Thanh Tr\\u00ec TP.H\\u00e0 N\\u1ed9i\",\"city\":\"351\",\"tax_code\":null,\"status\":\"1\",\"note\":null,\"act\":\"1\",\"created_by\":\"1\",\"created_at\":\"26\\/09\\/2023 14:35\",\"updated_at\":\"26\\/09\\/2023 14:35\"}', 1, '2023-09-26 14:37:54', '2023-09-26 14:37:54'),
+(53, 'quotes', 'insert_customer', 26, 10, 0, '{\"name\":\"C\\u00f4ng ty TNHH ph\\u00e1t tri\\u1ec3n y t\\u1ebf USA\",\"contacter\":\"Ms D\\u1ecbu\",\"phone\":\"0983 580 635\",\"telephone\":\"0983 580 635\",\"email\":\"ch\\u01b0a c\\u00f3\",\"address\":\"NV1 S\\u1ed1 38 T\\u1ed5ng C\\u1ee5c V T\\u00e2n Tri\\u1ec1u Thanh Tr\\u00ec TP.H\\u00e0 N\\u1ed9i\",\"city\":\"351\",\"seri\":\"BG-000026\",\"customer_id\":\"10\",\"company_name\":\"C\\u00f4ng ty TNHH ph\\u00e1t tri\\u1ec3n y t\\u1ebf USA\",\"status\":\"not_accepted\",\"created_by\":10,\"created_at\":\"2023-09-26 14:46:54\",\"act\":1,\"updated_at\":\"2023-09-26 14:46:54\"}', 1, '2023-09-26 14:46:54', '2023-09-26 14:46:54'),
+(54, 'quotes', 'update_customer', 6, 10, 0, '{\"seri\":{\"old\":\"BG-000007\",\"new\":\"BG-000027\"}}', 1, '2023-09-26 14:53:56', '2023-09-26 14:53:56'),
+(55, 'quotes', 'update_customer', 26, 10, 0, '{\"seri\":{\"old\":\"BG-000026\",\"new\":\"BG-000027\"}}', 1, '2023-09-26 15:13:56', '2023-09-26 15:13:56'),
+(57, 'customers', 'insert', 11, 10, 0, '{\"name\":\"C\\u00d4NG TY TNHH \\u0110\\u1ea6U T\\u01af XU\\u1ea4T NH\\u1eacP KH\\u1ea8U V\\u00c0 TH\\u01af\\u01a0NG M\\u1ea0I TH\\u00c0NH \\u0110\\u1ee8C\",\"contacter\":\"Anh C\\u01b0\\u01a1ng\",\"phone\":\"0988373219\",\"telephone\":\"0988373219\",\"email\":\"zalo\",\"address\":\"S\\u1ed1 3B, Ng\\u00e1ch 144\\/4, Ph\\u1ed1 Quan Nh\\u00e2n, Ph\\u01b0\\u1eddng Nh\\u00e2n Ch\\u00ednh, Qu\\u1eadn Thanh Xu\\u00e2n, Th\\u00e0nh ph\\u1ed1 H\\u00e0 N\\u1ed9i\",\"city\":\"7474\",\"tax_code\":null,\"status\":\"1\",\"note\":\"TP Ninh b\\u00ecnh 0988373219\",\"act\":null,\"created_by\":\"10\",\"created_at\":\"26\\/09\\/2023 16:01\",\"updated_at\":\"26\\/09\\/2023 16:01\"}', 1, '2023-09-26 16:14:25', '2023-09-26 16:14:25'),
+(58, 'quotes', 'insert_customer', 27, 10, 0, '{\"name\":\"C\\u00d4NG TY TNHH \\u0110\\u1ea6U T\\u01af XU\\u1ea4T NH\\u1eacP KH\\u1ea8U V\\u00c0 TH\\u01af\\u01a0NG M\\u1ea0I TH\\u00c0NH \\u0110\\u1ee8C\",\"contacter\":\"Anh C\\u01b0\\u01a1ng\",\"phone\":\"0988373219\",\"telephone\":\"0988373219\",\"email\":\"zalo\",\"address\":\"S\\u1ed1 3B, Ng\\u00e1ch 144\\/4, Ph\\u1ed1 Quan Nh\\u00e2n, Ph\\u01b0\\u1eddng Nh\\u00e2n Ch\\u00ednh, Qu\\u1eadn Thanh Xu\\u00e2n, Th\\u00e0nh ph\\u1ed1 H\\u00e0 N\\u1ed9i\",\"city\":\"7474\",\"seri\":\"BG-000027\",\"customer_id\":\"11\",\"company_name\":\"C\\u00d4NG TY TNHH \\u0110\\u1ea6U T\\u01af XU\\u1ea4T NH\\u1eacP KH\\u1ea8U V\\u00c0 TH\\u01af\\u01a0NG M\\u1ea0I TH\\u00c0NH \\u0110\\u1ee8C\",\"status\":\"not_accepted\",\"created_by\":10,\"created_at\":\"2023-09-26 16:14:37\",\"act\":1,\"updated_at\":\"2023-09-26 16:14:37\"}', 1, '2023-09-26 16:14:37', '2023-09-26 16:14:37'),
+(59, 'quotes', 'update_customer', 27, 10, 0, '{\"seri\":{\"old\":\"BG-000027\",\"new\":\"BG-000028\"}}', 1, '2023-09-26 16:38:43', '2023-09-26 16:38:43'),
+(60, 'customers', 'insert', 12, 10, 0, '{\"name\":\"C\\u00d4NG TY D\\u01af\\u1ee2C PH\\u1ea8M HADIPHACO\",\"contacter\":\"Mr H\\u1ea3i\",\"phone\":\"0968 754 654\",\"telephone\":\"0968 754 654\",\"email\":\"duocphamhadiphaco@gmail.com\",\"address\":\"S\\u1ed1 65 ng\\u00f5 173\\/192 L\\u00ea Tr\\u1ecdng T\\u1ea5n, \\u0110\\u1ecbnh C\\u00f4ng, Ho\\u00e0ng Mai, HN\",\"city\":\"351\",\"tax_code\":null,\"status\":\"1\",\"note\":null,\"act\":\"1\",\"created_by\":\"10\",\"created_at\":\"26\\/09\\/2023 16:50\",\"updated_at\":\"26\\/09\\/2023 16:50\"}', 1, '2023-09-26 16:51:54', '2023-09-26 16:51:54'),
+(61, 'quotes', 'insert_customer', 28, 10, 0, '{\"name\":\"C\\u00d4NG TY D\\u01af\\u1ee2C PH\\u1ea8M HADIPHACO\",\"contacter\":\"Mr H\\u1ea3i\",\"phone\":\"0968 754 654\",\"telephone\":\"0968 754 654\",\"email\":\"duocphamhadiphaco@gmail.com\",\"address\":\"S\\u1ed1 65 ng\\u00f5 173\\/192 L\\u00ea Tr\\u1ecdng T\\u1ea5n, \\u0110\\u1ecbnh C\\u00f4ng, Ho\\u00e0ng Mai, HN\",\"city\":\"351\",\"seri\":\"BG-000028\",\"customer_id\":\"12\",\"company_name\":\"C\\u00d4NG TY D\\u01af\\u1ee2C PH\\u1ea8M HADIPHACO\",\"status\":\"not_accepted\",\"created_by\":10,\"created_at\":\"2023-09-26 16:52:12\",\"act\":1,\"updated_at\":\"2023-09-26 16:52:12\"}', 1, '2023-09-26 16:52:12', '2023-09-26 16:52:12'),
+(62, 'customers', 'insert', 13, 10, 0, '{\"name\":\"C\\u00f4ng ty TNHH d\\u01b0\\u1ee3c ph\\u1ea9m Blue pharma\",\"contacter\":\"Mr H\\u1ea3i\",\"phone\":\"0968754654\",\"telephone\":\"0968754654\",\"email\":\"zalo\",\"address\":\"S\\u1ed1 nh\\u00e0 22, ng\\u00e1ch 50\\/37 \\u0110\\u01b0\\u1eddng Khuy\\u1ebfn L\\u01b0\\u01a1ng, Tr\\u1ea7n ph\\u00fa\",\"city\":\"351\",\"tax_code\":null,\"status\":\"1\",\"note\":null,\"act\":null,\"created_by\":\"10\",\"created_at\":\"26\\/09\\/2023 16:54\",\"updated_at\":\"26\\/09\\/2023 16:54\"}', 1, '2023-09-26 16:59:34', '2023-09-26 16:59:34'),
+(63, 'quotes', 'insert_customer', 29, 10, 0, '{\"name\":\"C\\u00f4ng ty TNHH d\\u01b0\\u1ee3c ph\\u1ea9m Blue pharma\",\"contacter\":\"Mr H\\u1ea3i\",\"phone\":\"0968754654\",\"telephone\":\"0968754654\",\"email\":\"zalo\",\"address\":\"S\\u1ed1 nh\\u00e0 22, ng\\u00e1ch 50\\/37 \\u0110\\u01b0\\u1eddng Khuy\\u1ebfn L\\u01b0\\u01a1ng, Tr\\u1ea7n ph\\u00fa\",\"city\":\"351\",\"seri\":\"BG-000029\",\"customer_id\":\"13\",\"company_name\":\"C\\u00f4ng ty TNHH d\\u01b0\\u1ee3c ph\\u1ea9m Blue pharma\",\"status\":\"not_accepted\",\"created_by\":10,\"created_at\":\"2023-09-26 16:59:56\",\"act\":1,\"updated_at\":\"2023-09-26 16:59:56\"}', 1, '2023-09-26 16:59:56', '2023-09-26 16:59:56'),
+(64, 'quotes', 'update_customer', 29, 10, 0, '{\"seri\":{\"old\":\"BG-000029\",\"new\":\"BG-000030\"}}', 1, '2023-09-26 17:12:35', '2023-09-26 17:12:35'),
+(66, 'quotes', 'update_customer', 29, 10, 0, '{\"seri\":{\"old\":\"BG-000030\",\"new\":\"BG-000031\"}}', 1, '2023-09-26 17:24:36', '2023-09-26 17:24:36'),
+(67, 'quotes', 'insert_customer', 31, 1, 0, '{\"name\":\"CTY CP TH\\u01af\\u01a0NG M\\u1ea0I D\\u01af\\u1ee2C PH\\u1ea8M BIGFAM\",\"contacter\":\"Ms Th\\u1ea3o\",\"phone\":\"0325544040\",\"telephone\":\"0325544040\",\"email\":\"zalo\",\"address\":\"T\\u00f2a R2 TTTM Royal City, 72A Nguy\\u1ec5n Tr\\u00e3i - Thanh Xu\\u00e2n - HN\",\"city\":\"351\",\"seri\":\"BG-000031\",\"customer_id\":\"1\",\"company_name\":\"CTY CP TH\\u01af\\u01a0NG M\\u1ea0I D\\u01af\\u1ee2C PH\\u1ea8M BIGFAM\",\"status\":\"not_accepted\",\"created_by\":1,\"created_at\":\"2023-09-26 17:24:54\",\"act\":1,\"updated_at\":\"2023-09-26 17:24:54\"}', 1, '2023-09-26 17:24:54', '2023-09-26 17:24:54'),
+(68, 'quotes', 'update_customer', 29, 10, 0, '{\"seri\":{\"old\":\"BG-000031\",\"new\":\"BG-000032\"}}', 1, '2023-09-26 17:36:19', '2023-09-26 17:36:19'),
+(69, 'materals', 'insert', 34, 1, 0, '{\"type\":\"paper\",\"name\":\"\\u0110\\u1ec0 CAN GI\\u1ea4Y\",\"price\":\"0.0032\",\"default\":\"0\",\"act\":\"1\",\"note\":\"0.0032 = 32 tri\\u1ec7u\\/ t\\u1ea5n\",\"created_at\":\"19\\/09\\/2023 1:14\",\"updated_at\":\"19\\/09\\/2023 1:27\",\"ord\":null}', 1, '2023-09-26 18:05:21', '2023-09-26 18:05:21'),
+(70, 'quotes', 'insert_customer', 32, 1, 0, '{\"name\":\"VIETBANRD\",\"contacter\":\"Ph\\u01b0\\u01a1ng\",\"phone\":\"000\",\"telephone\":\"000\",\"email\":\"zalo\",\"address\":\"H\\u00e0 Nam\",\"city\":\"9047\",\"seri\":\"BG-000032\",\"customer_id\":\"4\",\"company_name\":\"VIETBANRD\",\"status\":\"not_accepted\",\"created_by\":1,\"created_at\":\"2023-09-26 18:05:31\",\"act\":1,\"updated_at\":\"2023-09-26 18:05:31\"}', 1, '2023-09-26 18:05:31', '2023-09-26 18:05:31');
 
 -- --------------------------------------------------------
 
@@ -13854,7 +13883,7 @@ INSERT INTO `n_tables` (`id`, `name`, `note`, `parent`, `admin_paginate`, `view_
 (14, 'supply_prices', 'Đơn giá vật tư', NULL, 20, 'view', NULL, '1', '1', '1', '1', '2023-04-28 10:33:01', '2023-08-16 19:42:34'),
 (18, 'orders', 'Đơn hàng', NULL, 20, 'view', '[\r\n	{\r\n	\"icon\":\"list-ul\",\r\n	\"note\":\"DS sản phẩm\", \r\n	\"link\":\"view/products?default_data={%22order%22:%22<id>%22}\"\r\n	}\r\n]', '0', '1', '1', '1', '2023-06-21 13:22:33', '2023-09-15 21:19:43'),
 (19, 'p_substances', 'Chất liệu giấy in', NULL, 20, 'view', NULL, '1', '1', '1', '1', '2023-04-23 11:30:46', '2023-08-16 19:42:34'),
-(20, 'product_categories', 'Nhóm sản phẩm', 'product_categories', 20, 'view', '[\r\n	{\r\n	\"icon\":\"list-ul\",\r\n	\"note\":\"Kiểu hộp\", \r\n	\"link\":\"view/product_styles?default_data={%22category%22:%22<id>%22}\"\r\n	}\r\n]', '0', '1', '0', '0', '2023-04-23 11:30:46', '2023-09-20 14:56:53'),
+(20, 'product_categories', 'Nhóm sản phẩm', '', 20, 'view', '[\r\n	{\r\n	\"icon\":\"list-ul\",\r\n	\"note\":\"Kiểu hộp\", \r\n	\"link\":\"view/product_styles?default_data={%22category%22:%22<id>%22}\"\r\n	}\r\n]', '0', '1', '0', '0', '2023-04-23 11:30:46', '2023-09-25 20:54:00'),
 (21, 'products', 'Đơn sản phẩm', NULL, 20, 'view', '[\r\n	{\r\n	\"icon\":\"spinner\",\r\n	\"note\":\"Vật tư sản xuất\", \r\n	\"link\":\"list-supply-process?product=\"\r\n	}\r\n]', '0', '1', '0', '1', '2023-04-23 11:30:46', '2023-09-21 10:54:38'),
 (22, 'c_designs', 'Lệnh thiết kế', NULL, 20, 'view', '[\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"level-down\",\"note\":\"Nhận lệnh\", \r\n		\"class\":\"__receive_command\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"not_accepted\"}\r\n		]\r\n	}\r\n]', '0', '1', '1', '0', '2023-06-30 17:43:12', '2023-08-16 19:42:34'),
 (23, 'c_supplies', 'Yêu cầu Xuất vật tư', NULL, 20, 'view', '[\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"share\",\"note\":\"Xác nhận xuất vật tư\", \r\n		\"class\":\"__confirm_ex_supp\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"handling\"}\r\n		]\r\n	}\r\n]', '0', '0', '1', '0', '2023-07-14 03:17:55', '2023-08-16 19:42:34'),
@@ -13870,7 +13899,8 @@ INSERT INTO `n_tables` (`id`, `name`, `note`, `parent`, `admin_paginate`, `view_
 (34, 'papers', 'Vật tư giấy', NULL, 20, 'view', '', '0', '1', '0', '0', '2023-06-21 13:22:33', '2023-09-16 05:48:43'),
 (35, 'supplies', 'Vật tư hộp cứng', NULL, 20, 'view', '', '0', '1', '0', '0', '2023-06-21 13:22:33', '2023-09-15 21:19:43'),
 (36, 'fill_finishes', 'Bồi & hoàn thiện', NULL, 20, 'view', '', '0', '1', '0', '0', '2023-06-21 13:22:33', '2023-09-17 10:54:34'),
-(37, 'product_styles', 'Kiểu hộp', '{\r\n	\"link\":\"view/product_categories\", \r\n	\"note\":\"Nhóm sản phẩm\"\r\n}', 20, 'view', '', '1', '1', '1', '1', '2023-06-21 13:22:33', '2023-09-20 15:05:49');
+(37, 'product_styles', 'Kiểu hộp', '{\r\n	\"link\":\"view/product_categories\", \r\n	\"note\":\"Nhóm sản phẩm\"\r\n}', 20, 'view', '', '1', '1', '1', '1', '2023-06-21 13:22:33', '2023-09-20 15:05:49'),
+(38, 'warehouse_providers', 'Nhà cung cấp vật tư', NULL, 10, 'view', '', '1', '1', '1', '1', '2023-07-17 19:30:41', '2023-08-16 19:42:34');
 
 -- --------------------------------------------------------
 
@@ -13906,8 +13936,8 @@ INSERT INTO `n_users` (`id`, `username`, `password`, `name`, `email`, `phone`, `
 (4, 'kythuatduyetlenh1', 'e10adc3949ba59abbe56e057f20f883e', 'kythuatduyetlenh - Mr Dũng', 'sanxuatitd@gmail.com', '0234567912', 3, 0, NULL, 'Technical apply order group tests', 1, '2023-07-14 02:02:00', '2023-09-23 15:13:04', 1),
 (5, 'kythuatsx1', 'e10adc3949ba59abbe56e057f20f883e', 'kythuatsx - Mr Dũng', 'techhanle@gmail.com', '0123456789', 5, 0, NULL, NULL, 1, '2023-07-14 02:02:00', '2023-09-23 15:14:06', 1),
 (6, 'kehoach1', 'e10adc3949ba59abbe56e057f20f883e', 'kehoach - Ms Hường', 'baobituandung@intuandung.vn', '0234567819', 6, 0, NULL, 'Test ke hoach san xuat', 1, '2023-07-14 02:02:00', '2023-09-23 15:15:54', 1),
-(7, 'warehouse', 'e10adc3949ba59abbe56e057f20f883e', 'Test kho vật tư', 'khovattu', '2345098123', 7, 0, NULL, 'test', 1, '2023-07-14 02:02:00', '2023-08-14 17:09:28', 1),
-(10, 'HoangDung', 'e10adc3949ba59abbe56e057f20f883e', 'Hoàng Dung', 'intuandung2000@gmail.com', '0969303888', 1, 0, NULL, NULL, 0, '2023-09-23 14:24:46', '2023-09-24 15:26:11', 1),
+(7, 'khovattu', 'e10adc3949ba59abbe56e057f20f883e', 'Test kho vật tư', 'khovattu', '2345098123', 7, 0, NULL, 'test', 1, '2023-07-14 02:02:00', '2023-09-25 16:24:03', 1),
+(10, 'HoangDung', 'e10adc3949ba59abbe56e057f20f883e', 'Hoàng Dung', 'intuandung2000@gmail.com', '0969303888', 1, 0, NULL, NULL, 1, '2023-09-23 14:24:46', '2023-09-26 10:00:49', 1),
 (11, 'kythuatduyetlenh2', 'e10adc3949ba59abbe56e057f20f883e', 'kythuatduyetlenh - Mr Thông', 'sanxuatitd@gmail.com', '0234567912', 3, 0, NULL, 'Technical apply order group tests', 1, '2023-09-23 15:13:27', '2023-09-23 15:13:27', 10),
 (12, 'kythuatsx2', 'e10adc3949ba59abbe56e057f20f883e', 'kythuatsx - Mr Thông', 'techhanle@gmail.com', '0123456789', 5, 0, NULL, NULL, 1, '2023-09-23 15:14:41', '2023-09-23 15:14:41', 10);
 
@@ -13948,7 +13978,9 @@ INSERT INTO `orders` (`id`, `code`, `name`, `customer`, `vat`, `total_amount`, `
 (4, 'DH-000004', NULL, 3, 0, '69047699', '0', '69047699', NULL, 'tech_submited', NULL, NULL, NULL, 1, '2023-09-23 19:08:13', '2023-09-24 08:58:17', 1),
 (5, 'DH-000005', NULL, 3, 0, '69047699', '0', '69047699', NULL, 'design_submited', NULL, NULL, NULL, 1, '2023-09-24 08:44:45', '2023-09-24 08:47:08', 1),
 (6, 'DH-000006', NULL, 5, 0, '10166784', '0', '10166784', NULL, 'not_accepted', NULL, NULL, NULL, 1, '2023-09-24 10:51:41', '2023-09-24 10:51:41', 1),
-(7, 'DH-000007', NULL, 6, 0, '48959907', '0', '48959907', NULL, 'tech_submited', NULL, NULL, NULL, 1, '2023-09-24 15:52:28', '2023-09-24 15:57:49', 1);
+(7, 'DH-000007', NULL, 6, 0, '48959907', '0', '48959907', NULL, 'tech_submited', NULL, NULL, NULL, 1, '2023-09-24 15:52:28', '2023-09-24 15:57:49', 1),
+(8, 'DH-000008', NULL, 10, 0, '24202206', '0', '24202206', NULL, 'not_accepted', NULL, NULL, NULL, 1, '2023-09-26 15:40:46', '2023-09-26 15:40:46', 10),
+(9, 'DH-000009', NULL, 11, 0, '5181796', '0', '5181796', NULL, 'not_accepted', NULL, NULL, NULL, 1, '2023-09-26 16:33:35', '2023-09-26 16:33:35', 10);
 
 -- --------------------------------------------------------
 
@@ -14040,7 +14072,14 @@ INSERT INTO `papers` (`id`, `code`, `name`, `product_qty`, `nqty`, `base_supp_qt
 (24, NULL, 'jegl.je;gtjkp;', 6700, 3, NULL, NULL, NULL, 2234, '{\"materal\":\"13\",\"qttv\":\"400\",\"length\":\"30\",\"width\":\"69\",\"materal_price\":0.0019,\"supp_qty\":2357,\"act\":1,\"total\":3708032.4}', '{\"type\":\"1\",\"color\":\"4\",\"machine\":\"1\",\"note\":null,\"supp_qty\":1284,\"handle_qty\":2257,\"model_price\":66000,\"work_price\":35,\"shape_price\":110000,\"printer\":3,\"act\":1,\"total\":883760}', '{\"materal\":\"9\",\"face\":\"1\",\"machine\":\"8\",\"note\":null,\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":2257,\"handle_qty\":2257,\"materal_price\":0.25,\"act\":1,\"total\":1217997.5}', '{\"act\":0}', '{\"price\":\"0\",\"shape_price\":\"0\",\"machine\":null,\"note\":null,\"qty_pro\":6767,\"handle_qty\":2257,\"nqty\":3,\"act\":0,\"total\":0}', '{\"act\":0}', '{\"ext_price\":\"0\",\"machine\":\"4\",\"float\":{\"price\":\"50\",\"shape_price\":\"0\",\"qty_pro\":6767,\"nqty\":3,\"float_cost\":338350},\"note\":null,\"model_price\":150,\"work_price\":150,\"shape_price\":100000,\"supp_qty\":2257,\"handle_qty\":2257,\"cost\":749050,\"act\":1,\"total\":1087400}', NULL, '{\"machine\":\"12\",\"nqty\":3,\"note\":null,\"model_price\":0,\"work_price\":10,\"shape_price\":30000,\"qty_pro\":6767,\"handle_qty\":6767,\"act\":1,\"total\":233010}', NULL, NULL, '{\"machine\":\"6\",\"note\":null,\"model_price\":0,\"work_price\":50,\"shape_price\":100000,\"qty_pro\":6767,\"handle_qty\":6767,\"act\":1,\"total\":438350}', NULL, 2, '{\"temp_price\":\"0\",\"prescript_price\":\"0\",\"supp_price\":\"150\",\"note\":null,\"qty_pro\":6700,\"act\":1,\"total\":1005000}', 0, NULL, '8573549.9', 12, NULL, 1, 1, NULL, '2023-09-24 10:54:05', '2023-09-24 10:54:05', 1),
 (25, NULL, 'jegl.je;gtjkp; ( TOA IN GHÉP )', 6700, 4, NULL, NULL, NULL, 1675, '{\"materal\":\"12\",\"qttv\":\"80\",\"length\":\"43\",\"width\":\"62\",\"materal_price\":0.00195,\"supp_qty\":1792,\"act\":1,\"total\":745285.632}', '{\"type\":\"2\",\"color\":\"4\",\"machine\":\"1\",\"note\":null,\"supp_qty\":725,\"handle_qty\":1692,\"model_price\":66000,\"work_price\":32,\"shape_price\":100000,\"printer\":2,\"act\":1,\"total\":849600}', '{\"act\":0}', '{\"act\":0}', '{\"price\":\"0\",\"shape_price\":\"0\",\"machine\":null,\"note\":null,\"qty_pro\":6767,\"handle_qty\":1692,\"nqty\":4,\"act\":0,\"total\":0}', '{\"act\":0}', '{\"act\":0}', NULL, '{\"act\":0}', NULL, '{\"act\":0}', NULL, NULL, 6, '{\"temp_price\":\"0\",\"prescript_price\":\"0\",\"supp_price\":\"0\",\"note\":null,\"qty_pro\":6700,\"act\":0,\"total\":0}', 0, NULL, '1594885.632', 12, NULL, 0, 1, NULL, '2023-09-24 10:54:05', '2023-09-24 10:54:05', 1),
 (26, NULL, 'jegl.je;gtjkp; ( TOA IN GHÉP )', 6700, 1, NULL, NULL, NULL, 6700, '{\"materal\":\"12\",\"qttv\":\"80\",\"length\":\"0\",\"width\":\"0\",\"materal_price\":0.00195,\"supp_qty\":6867,\"act\":0,\"total\":0}', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 6, NULL, 1, NULL, '0', 12, NULL, 0, 1, NULL, '2023-09-24 10:54:05', '2023-09-24 10:54:05', 1),
-(27, NULL, 'Tests 24-9 test nhiều quá', 10000, 1, NULL, NULL, NULL, 10000, '{\"materal\":\"12\",\"qttv\":\"120\",\"length\":\"50\",\"width\":\"72\",\"materal_price\":0.00195,\"supp_qty\":10200,\"act\":1,\"total\":8592480}', '{\"type\":\"1\",\"color\":\"4\",\"machine\":\"1\",\"note\":null,\"supp_qty\":9050,\"handle_qty\":10100,\"model_price\":66000,\"work_price\":35,\"shape_price\":110000,\"printer\":3,\"act\":1,\"total\":1971000}', '{\"materal\":\"9\",\"face\":\"1\",\"machine\":\"8\",\"note\":null,\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":10100,\"handle_qty\":10100,\"materal_price\":0.25,\"act\":1,\"total\":9140000}', '{\"act\":0}', '{\"price\":\"0\",\"shape_price\":\"0\",\"machine\":null,\"note\":null,\"qty_pro\":10100,\"handle_qty\":10100,\"nqty\":1,\"act\":0,\"total\":0}', '{\"act\":0}', '{\"act\":0}', '{\"price\":\"0\",\"shape_price\":\"0\",\"machine\":null,\"note\":null,\"qty_pro\":10100,\"handle_qty\":10100,\"nqty\":1,\"act\":0,\"total\":0}', '{\"act\":0}', NULL, NULL, NULL, NULL, 1, '{\"temp_price\":\"0\",\"prescript_price\":\"0\",\"supp_price\":\"0\",\"note\":null,\"qty_pro\":10000,\"act\":0,\"total\":0}', 0, NULL, '19703480', 13, NULL, 1, 1, NULL, '2023-09-24 15:52:01', '2023-09-24 15:52:01', 1);
+(27, NULL, 'Tests 24-9 test nhiều quá', 10000, 1, NULL, NULL, NULL, 10000, '{\"materal\":\"12\",\"qttv\":\"120\",\"length\":\"50\",\"width\":\"72\",\"materal_price\":0.00195,\"supp_qty\":10200,\"act\":1,\"total\":8592480}', '{\"type\":\"1\",\"color\":\"4\",\"machine\":\"1\",\"note\":null,\"supp_qty\":9050,\"handle_qty\":10100,\"model_price\":66000,\"work_price\":35,\"shape_price\":110000,\"printer\":3,\"act\":1,\"total\":1971000}', '{\"materal\":\"9\",\"face\":\"1\",\"machine\":\"8\",\"note\":null,\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":10100,\"handle_qty\":10100,\"materal_price\":0.25,\"act\":1,\"total\":9140000}', '{\"act\":0}', '{\"price\":\"0\",\"shape_price\":\"0\",\"machine\":null,\"note\":null,\"qty_pro\":10100,\"handle_qty\":10100,\"nqty\":1,\"act\":0,\"total\":0}', '{\"act\":0}', '{\"act\":0}', '{\"price\":\"0\",\"shape_price\":\"0\",\"machine\":null,\"note\":null,\"qty_pro\":10100,\"handle_qty\":10100,\"nqty\":1,\"act\":0,\"total\":0}', '{\"act\":0}', NULL, NULL, NULL, NULL, 1, '{\"temp_price\":\"0\",\"prescript_price\":\"0\",\"supp_price\":\"0\",\"note\":null,\"qty_pro\":10000,\"act\":0,\"total\":0}', 0, NULL, '19703480', 13, NULL, 1, 1, NULL, '2023-09-24 15:52:01', '2023-09-24 15:52:01', 1),
+(28, NULL, 'Hộp Coo Newcare/110*88*123 mm', 10500, 4, 2625, '27', 200, 2852, '{\"materal\":\"13\",\"qttv\":\"400\",\"length\":\"39.5\",\"width\":\"57\",\"materal_price\":0.0019,\"supp_qty\":2952,\"act\":1,\"total\":5051285.28}', '{\"type\":\"1\",\"color\":\"4\",\"machine\":\"1\",\"note\":null,\"supp_qty\":1675,\"handle_qty\":2852,\"model_price\":66000,\"work_price\":32,\"shape_price\":100000,\"printer\":2,\"act\":1,\"total\":878400}', '{\"materal\":\"9\",\"face\":\"1\",\"machine\":\"8\",\"note\":null,\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":2852,\"handle_qty\":2852,\"materal_price\":0.25,\"act\":1,\"total\":1655319.5}', '{\"act\":0}', '{\"price\":\"0\",\"shape_price\":\"0\",\"machine\":null,\"note\":null,\"qty_pro\":10605,\"handle_qty\":2852,\"nqty\":4,\"act\":0,\"total\":0}', '{\"act\":0}', '{\"ext_price\":\"0\",\"machine\":\"4\",\"float\":{\"price\":\"50\",\"shape_price\":\"60000\",\"qty_pro\":10605,\"nqty\":4,\"float_cost\":770250},\"note\":null,\"model_price\":150,\"work_price\":150,\"shape_price\":100000,\"supp_qty\":2852,\"handle_qty\":2852,\"cost\":865525,\"act\":1,\"total\":1635775}', NULL, '{\"machine\":\"12\",\"nqty\":4,\"note\":null,\"model_price\":0,\"work_price\":10,\"shape_price\":30000,\"qty_pro\":10605,\"handle_qty\":10605,\"act\":1,\"total\":454200}', NULL, NULL, '{\"machine\":\"6\",\"note\":null,\"model_price\":0,\"work_price\":50,\"shape_price\":100000,\"qty_pro\":10605,\"handle_qty\":10605,\"act\":1,\"total\":630250}', NULL, 2, '{\"temp_price\":\"0\",\"prescript_price\":\"0\",\"supp_price\":\"0\",\"note\":null,\"qty_pro\":10500,\"act\":0,\"total\":0}', 0, NULL, '10305229.78', 14, NULL, 1, 1, NULL, '2023-09-26 15:41:19', '2023-09-26 15:41:19', 10),
+(29, NULL, 'Phong bao Coo Newcare', 10500, 8, 1313, '14', 200, 1527, '{\"materal\":\"12\",\"qttv\":\"120\",\"length\":\"48\",\"width\":\"70\",\"materal_price\":0.00195,\"supp_qty\":1627,\"act\":1,\"total\":1279212.48}', '{\"type\":\"1\",\"color\":\"4\",\"machine\":\"1\",\"note\":null,\"supp_qty\":363,\"handle_qty\":1527,\"model_price\":66000,\"work_price\":35,\"shape_price\":110000,\"printer\":3,\"act\":1,\"total\":754820}', '{\"materal\":\"9\",\"face\":\"1\",\"machine\":\"8\",\"note\":null,\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":1527,\"handle_qty\":1527,\"materal_price\":0.25,\"act\":1,\"total\":1332680}', '{\"act\":0}', '{\"price\":\"0\",\"shape_price\":\"0\",\"machine\":null,\"note\":null,\"qty_pro\":10605,\"handle_qty\":1527,\"nqty\":8,\"act\":0,\"total\":0}', '{\"act\":0}', '{\"ext_price\":\"0\",\"machine\":\"4\",\"note\":null,\"model_price\":150,\"work_price\":150,\"shape_price\":100000,\"supp_qty\":1527,\"handle_qty\":1527,\"cost\":833050,\"act\":1,\"total\":833050}', NULL, '{\"machine\":\"12\",\"nqty\":8,\"note\":null,\"model_price\":0,\"work_price\":10,\"shape_price\":30000,\"qty_pro\":10605,\"handle_qty\":10605,\"act\":1,\"total\":878400}', NULL, NULL, NULL, '{\"act\":0}', 3, '{\"temp_price\":\"0\",\"prescript_price\":\"0\",\"supp_price\":\"500\",\"note\":null,\"qty_pro\":10500,\"act\":1,\"total\":5250000}', 0, NULL, '10328162.48', 15, NULL, 1, 1, NULL, '2023-09-26 15:41:19', '2023-09-26 15:41:19', 10),
+(30, NULL, 'Tem phụ Coo Newcare', 10500, 60, 175, '2', 150, 327, '{\"materal\":\"other\",\"note\":\"\\u0111\\u1ec1 can gi\\u1ea5y\",\"qttv\":\"1\",\"length\":\"32\",\"width\":\"43\",\"unit_price\":\"0.31\",\"materal_price\":0.31,\"supp_qty\":427,\"act\":1,\"total\":182141.12}', '{\"type\":\"1\",\"color\":\"4\",\"machine\":\"1\",\"note\":null,\"supp_qty\":-775,\"handle_qty\":327,\"model_price\":66000,\"work_price\":30,\"shape_price\":100000,\"printer\":1,\"act\":1,\"total\":571000}', '{\"materal\":\"8\",\"face\":\"1\",\"machine\":\"46\",\"note\":null,\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":327,\"handle_qty\":327,\"materal_price\":0.23,\"act\":1,\"total\":153488.96000000002}', NULL, '{\"price\":\"0\",\"shape_price\":\"0\",\"machine\":null,\"note\":null,\"qty_pro\":10605,\"handle_qty\":327,\"nqty\":60,\"act\":0,\"total\":0}', NULL, '{\"ext_price\":\"0\",\"machine\":\"4\",\"note\":null,\"model_price\":150,\"work_price\":150,\"shape_price\":100000,\"supp_qty\":327,\"handle_qty\":327,\"cost\":355450,\"act\":1,\"total\":355450}', NULL, NULL, '{\"act\":0}', NULL, NULL, NULL, 4, '{\"temp_price\":\"0\",\"prescript_price\":\"0\",\"supp_price\":\"0\",\"note\":null,\"qty_pro\":10500,\"act\":0,\"total\":0}', 0, NULL, '1262080.08', 16, NULL, 1, 1, NULL, '2023-09-26 15:41:19', '2023-09-26 15:41:19', 10),
+(31, NULL, 'Bio Enter Clausii', 1500, 2, 750, '8', 150, 908, '{\"materal\":\"13\",\"qttv\":\"400\",\"length\":\"36\",\"width\":\"39\",\"materal_price\":0.0019,\"supp_qty\":1008,\"act\":1,\"total\":1075576.32}', '{\"type\":\"1\",\"color\":\"4\",\"machine\":\"1\",\"note\":null,\"supp_qty\":-200,\"handle_qty\":908,\"model_price\":66000,\"work_price\":30,\"shape_price\":100000,\"printer\":1,\"act\":1,\"total\":640000}', '{\"materal\":\"8\",\"face\":\"1\",\"machine\":\"8\",\"note\":null,\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":908,\"handle_qty\":908,\"materal_price\":0.23,\"act\":1,\"total\":343211.36}', '{\"act\":0}', '{\"price\":\"0\",\"shape_price\":\"0\",\"machine\":null,\"note\":null,\"qty_pro\":1515,\"handle_qty\":908,\"nqty\":2,\"act\":0,\"total\":0}', '{\"act\":0}', '{\"ext_price\":\"0\",\"machine\":\"4\",\"float\":{\"price\":\"50\",\"shape_price\":\"100000\",\"qty_pro\":1515,\"nqty\":2,\"float_cost\":275750},\"note\":null,\"model_price\":150,\"work_price\":150,\"shape_price\":100000,\"supp_qty\":908,\"handle_qty\":908,\"cost\":446800,\"act\":1,\"total\":722550}', NULL, '{\"machine\":\"12\",\"nqty\":2,\"note\":null,\"model_price\":0,\"work_price\":10,\"shape_price\":30000,\"qty_pro\":1515,\"handle_qty\":1515,\"act\":1,\"total\":60300}', NULL, NULL, '{\"machine\":\"6\",\"note\":null,\"model_price\":0,\"work_price\":50,\"shape_price\":100000,\"qty_pro\":1515,\"handle_qty\":1515,\"act\":1,\"total\":175750}', NULL, 2, '{\"temp_price\":\"1000\",\"prescript_price\":\"400\",\"supp_price\":\"0\",\"note\":null,\"qty_pro\":1500,\"act\":1,\"total\":2100000}', 0, NULL, '5117387.68', 17, NULL, 1, 1, NULL, '2023-09-26 16:31:59', '2023-09-26 16:31:59', 10),
+(32, NULL, 'Hộp cứng Tét TUẤN 25-9', 5000, 1, 5000, '50', 0, 5050, '{\"materal\":\"12\",\"qttv\":\"120\",\"length\":\"32.5\",\"width\":\"54.5\",\"materal_price\":0.00195,\"supp_qty\":5150,\"act\":1,\"total\":2134533.375}', '{\"type\":\"1\",\"color\":\"4\",\"machine\":\"1\",\"note\":null,\"supp_qty\":4050,\"handle_qty\":5050,\"model_price\":66000,\"work_price\":32,\"shape_price\":100000,\"printer\":2,\"act\":1,\"total\":1182400}', '{\"materal\":\"9\",\"face\":\"1\",\"machine\":\"8\",\"note\":null,\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":5050,\"handle_qty\":5050,\"materal_price\":0.25,\"act\":1,\"total\":2286203.125}', '{\"act\":0}', '{\"price\":\"200\",\"shape_price\":\"100000\",\"machine\":\"2\",\"note\":null,\"qty_pro\":5050,\"handle_qty\":5050,\"nqty\":1,\"act\":1,\"total\":1110000}', '{\"act\":0}', '{\"ext_price\":\"0\",\"machine\":\"4\",\"note\":null,\"model_price\":150,\"work_price\":150,\"shape_price\":100000,\"supp_qty\":5050,\"handle_qty\":5050,\"cost\":1123187.5,\"act\":1,\"total\":1123187.5}', '{\"price\":\"0\",\"shape_price\":\"0\",\"machine\":null,\"note\":null,\"qty_pro\":5050,\"handle_qty\":5050,\"nqty\":1,\"act\":0,\"total\":0}', '{\"machine\":\"12\",\"nqty\":3,\"note\":null,\"model_price\":0,\"work_price\":10,\"shape_price\":30000,\"qty_pro\":5050,\"handle_qty\":5050,\"act\":1,\"total\":181500}', NULL, NULL, NULL, NULL, 1, '{\"temp_price\":\"0\",\"prescript_price\":\"0\",\"supp_price\":\"620\",\"note\":null,\"qty_pro\":5000,\"act\":1,\"total\":3100000}', 0, NULL, '11117824', 19, NULL, 1, 1, NULL, '2023-09-26 17:42:44', '2023-09-26 17:42:44', 1),
+(33, NULL, 'Hộp cứng Tét TUẤN 25-9 ( TOA IN GHÉP )', 5000, 1, 5000, '50', 0, 5050, '{\"materal\":\"12\",\"qttv\":\"80\",\"length\":\"0\",\"width\":\"0\",\"materal_price\":0.00195,\"supp_qty\":5150,\"act\":0,\"total\":0}', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 6, NULL, 1, NULL, '0', 19, NULL, 0, 1, NULL, '2023-09-26 17:42:44', '2023-09-26 17:42:44', 1),
+(34, NULL, 'Hộp cứng Tét TUẤN 25-9 ( TEM CUỘN )', 5000, 1, 5000, '50', 0, 5050, '{\"materal\":\"12\",\"qttv\":\"0\",\"length\":\"0\",\"width\":\"0\",\"materal_price\":0.00195,\"supp_qty\":5150,\"act\":0,\"total\":0}', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4, NULL, 1, NULL, '0', 19, NULL, 0, 1, NULL, '2023-09-26 17:42:44', '2023-09-26 17:42:44', 1);
 
 -- --------------------------------------------------------
 
@@ -14230,7 +14269,8 @@ INSERT INTO `print_warehouses` (`id`, `name`, `length`, `width`, `qtv`, `qty`, `
 (64, 'C', '51', '48.5', '120', '60000', 'paper', 12, 'imported', NULL, NULL, 1, '2023-09-24 15:38:40', '2023-09-24 15:38:40', 1),
 (65, 'C', '50.3', '55.5', '150', '66000', 'paper', 12, 'imported', NULL, NULL, 1, '2023-09-24 15:39:19', '2023-09-24 15:39:37', 1),
 (66, 'C', '50.3', '51', '150', '46500', 'paper', 12, 'imported', NULL, NULL, 1, '2023-09-24 15:39:59', '2023-09-24 15:39:59', 1),
-(67, 'C đã gọi', '50', '72', '120', '10000', 'paper', 12, 'imported', NULL, NULL, 1, '2023-09-24 16:06:39', '2023-09-24 16:06:39', 1);
+(67, 'C đã gọi', '50', '72', '120', '10000', 'paper', 12, 'imported', NULL, NULL, 1, '2023-09-24 16:06:39', '2023-09-24 16:06:39', 1),
+(68, 'Giay in test', '11', '11', '11', '11', 'paper', 13, 'imported', NULL, NULL, 1, '2023-09-25 23:28:15', '2023-09-25 23:28:15', 7);
 
 -- --------------------------------------------------------
 
@@ -14274,14 +14314,20 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`id`, `code`, `name`, `category`, `product_style`, `qty`, `design`, `length`, `width`, `height`, `quote_id`, `order`, `total_cost`, `total_amount`, `custom_design_file`, `sale_shape_file`, `tech_shape_file`, `design_file`, `design_shape_file`, `handle_shape_file`, `note`, `status`, `act`, `created_at`, `updated_at`, `created_by`, `order_created`) VALUES
 (1, NULL, 'Hộp giấy INSUVA + Toa + Tích điểm + Cẩm nang', 2, 13, '6700', 1, '16', '10.5', '3.3', 1, NULL, '10468435.532', '10683804.24264', NULL, '{\"path\":\"uploads/files/INSUVA.cdr\",\"name\":\"INSUVA.cdr\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-09-24 10:29:00', '2023-09-24 10:29:00', 10, NULL),
-(5, NULL, 'Hộp cứng CRUSTAL SERUM', 1, 10, '3000', 1, '11', '7', '4', 6, NULL, '17083727.9', '17083727.9', NULL, '{\"path\":\"uploads/files/dŨNG NGHE AN.cdr\",\"name\":\"dŨNG NGHE AN.cdr\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-09-23 16:58:51', '2023-09-23 16:58:51', 1, NULL),
+(5, NULL, 'Hộp cứng CRUSTAL SERUM', 1, 10, '3000', 1, '11', '7', '4', 6, NULL, '17083727.9', '17083727.9', NULL, '{\"path\":\"uploads/files/dŨNG NGHE AN.cdr\",\"name\":\"dŨNG NGHE AN.cdr\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-09-26 14:53:58', '2023-09-26 14:53:58', 10, NULL),
 (6, 'DH-000004A', 'Dũng test báo giá 1', 1, 10, '5000', 1, '5', '10', '15', 7, 4, '62766090.3125', '69047699.34375', NULL, NULL, '{\"path\":\"uploads/files/2.cdr\",\"name\":\"2.cdr\"}', '{\"path\":\"uploads/files/3.cdr\",\"name\":\"3.cdr\"}', '{\"path\":\"uploads/files/4.cdr\",\"name\":\"4.cdr\"}', '{\"path\":\"uploads/files/4.cdr\",\"name\":\"4.cdr\"}', NULL, 'tech_submited', 1, '2023-09-24 08:58:17', '2023-09-24 08:58:17', 5, 1),
 (7, NULL, 'Dũng test báo giá 3', 1, 10, '5000', 1, '5', '10', '15', 8, NULL, '62766090.3125', '62766090.3125', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-09-23 19:06:59', '2023-09-23 19:06:59', 1, NULL),
 (8, NULL, 'Dũng test báo giá 6', 1, 10, '5000', 1, '5', '10', '15', 9, NULL, '64728504.0625', '71206354.46875', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-09-24 22:46:17', '2023-09-24 22:46:17', 10, NULL),
 (9, 'DH-000005A', 'Dũng test báo giá 4', 1, 10, '5000', 1, '5', '10', '15', 10, 5, '62766090.3125', '62766090.3125', NULL, NULL, '{\"path\":\"uploads/files/6.cdr\",\"name\":\"6.cdr\"}', '{\"path\":\"uploads/files/7.cdr\",\"name\":\"7.cdr\"}', '{\"path\":\"uploads/files/8.cdr\",\"name\":\"8.cdr\"}', '{\"path\":\"uploads/files/8.cdr\",\"name\":\"8.cdr\"}', '{\"print\":null,\"handle\":null}', 'tech_submited', 1, '2023-09-24 08:50:31', '2023-09-24 08:50:31', 1, 1),
 (11, 'DH-000006A', 'Hộp Tét 23-9', 2, 13, '6700', 1, '16', '10.5', '3.3', 19, 6, '9967435.532', '10166784.24264', NULL, '{\"path\":\"uploads/files/10.cdr\",\"name\":\"10.cdr\"}', NULL, NULL, NULL, NULL, NULL, 'not_accepted', 1, '2023-09-24 10:51:41', '2023-09-24 10:51:41', 1, 1),
 (12, NULL, 'jegl.je;gtjkp;', 2, 13, '6700', 1, '16', '10.5', '3.3', 20, NULL, '10168435.532', '10168435.532', NULL, '{\"path\":\"uploads/files/11.cdr\",\"name\":\"11.cdr\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-09-24 10:54:04', '2023-09-24 10:54:04', 1, NULL),
-(13, 'DH-000007A', 'Tests 24-9 test nhiều quá', 1, 10, '10000', 1, '10', '5', '8', 21, 7, '48959906.75', '48959906.75', NULL, NULL, '{\"path\":\"uploads/files/09-23-2023_BG-000006_Hộp cứng CRUSTAL SERUM_CTY TNHH IN & SẢN XUẤT BAO BÌ NGHỆ AN.docx\",\"name\":\"09-23-2023_BG-000006_Hộp cứng CRUSTAL SERUM_CTY TNHH IN & SẢN XUẤT BAO BÌ NGHỆ AN.docx\"}', '{\"path\":\"uploads/files/5.jpg\",\"name\":\"5.jpg\"}', '{\"path\":\"uploads/files/6.jpg\",\"name\":\"6.jpg\"}', '{\"path\":\"uploads/files/6.jpg\",\"name\":\"6.jpg\"}', NULL, 'tech_submited', 1, '2023-09-24 15:57:49', '2023-09-24 15:57:49', 5, 1);
+(13, 'DH-000007A', 'Tests 24-9 test nhiều quá', 1, 10, '10000', 1, '10', '5', '8', 21, 7, '48959906.75', '48959906.75', NULL, NULL, '{\"path\":\"uploads/files/09-23-2023_BG-000006_Hộp cứng CRUSTAL SERUM_CTY TNHH IN & SẢN XUẤT BAO BÌ NGHỆ AN.docx\",\"name\":\"09-23-2023_BG-000006_Hộp cứng CRUSTAL SERUM_CTY TNHH IN & SẢN XUẤT BAO BÌ NGHỆ AN.docx\"}', '{\"path\":\"uploads/files/5.jpg\",\"name\":\"5.jpg\"}', '{\"path\":\"uploads/files/6.jpg\",\"name\":\"6.jpg\"}', '{\"path\":\"uploads/files/6.jpg\",\"name\":\"6.jpg\"}', NULL, 'tech_submited', 1, '2023-09-24 15:57:49', '2023-09-24 15:57:49', 5, 1),
+(14, 'DH-000008A', 'Hộp Coo Newcare/110*88*123 mm', 2, NULL, '10500', 3, NULL, NULL, NULL, 26, 8, '10305229.78', '11418168.44734', NULL, '{\"path\":\"uploads/files/FileKhuon_00032401A_Bộ Hộp giấy Coon%0d%0a ewcare + Tem + PHONG BAO_.pdf\",\"name\":\"FileKhuon_00032401A_Bộ Hộp giấy Coon%0d%0a ewcare + Tem + PHONG BAO_.pdf\"}', NULL, NULL, NULL, NULL, NULL, 'not_accepted', 1, '2023-09-26 15:41:19', '2023-09-26 15:41:19', 10, 1),
+(15, 'DH-000008B', 'Phong bao Coo Newcare/80*30*125 dán như túi giấy', 3, NULL, '10500', 4, '8', '3', '125', 26, 8, '10328162.48', '11443463.21544', NULL, '{\"path\":\"uploads/files/khuôn bế 31347  Phong bao Coonewcare.pdf\",\"name\":\"khuôn bế 31347  Phong bao Coonewcare.pdf\"}', NULL, NULL, NULL, NULL, NULL, 'not_accepted', 1, '2023-09-26 15:41:19', '2023-09-26 15:41:19', 10, 1),
+(16, 'DH-000008C', 'Tem phụ Coo Newcare', 4, NULL, '10500', 4, NULL, NULL, NULL, 26, 8, '1262080.08', '1443574.32824', NULL, '{\"path\":\"uploads/files/FileKhuon_00032400A_Vỏ hộp Coonewcare %0d%0a 110 x 88 x 123mm( Loại To)_.pdf\",\"name\":\"FileKhuon_00032400A_Vỏ hộp Coonewcare %0d%0a 110 x 88 x 123mm( Loại To)_.pdf\"}', NULL, NULL, NULL, NULL, NULL, 'not_accepted', 1, '2023-09-26 15:41:19', '2023-09-26 15:41:19', 10, 1),
+(17, 'DH-000009A', 'Bộ ( Hộp+tem+toa) Bio Enter Clausii', 2, NULL, '1500', 3, '14', '4.5', '10', 27, 9, '5117387.68', '5177502.422016', NULL, '{\"path\":\"uploads/files/khuôn.cdr\",\"name\":\"khuôn.cdr\"}', NULL, NULL, NULL, NULL, NULL, 'not_accepted', 1, '2023-09-26 16:39:19', '2023-09-26 16:39:19', 10, 1),
+(18, NULL, 'Túi Eva Estrogen', 3, NULL, '2000', 4, '24.5', '8', '17', 29, NULL, NULL, NULL, NULL, '{\"path\":\"uploads/files/FileKhuon_00030633A_Túi Eva Estrogen_.pd%0d%0a f\",\"name\":\"FileKhuon_00030633A_Túi Eva Estrogen_.pd%0d%0a f\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-09-26 18:00:27', '2023-09-26 18:00:27', 10, NULL),
+(19, NULL, 'Hộp cứng Tét TUẤN 25-9', 1, 12, '5000', 1, '15', '10.5', '6.5', 31, NULL, '52485208.88', '52485208.88', NULL, '{\"path\":\"uploads/files/Tinh gia TEST.cdr\",\"name\":\"Tinh gia TEST.cdr\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-09-26 17:42:44', '2023-09-26 17:42:44', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -14392,7 +14438,7 @@ CREATE TABLE `quotes` (
 
 INSERT INTO `quotes` (`id`, `seri`, `status`, `name`, `product_qty`, `customer_id`, `company_name`, `contacter`, `address`, `email`, `phone`, `telephone`, `city`, `profit`, `ship_price`, `total_cost`, `total_amount`, `note`, `act`, `src`, `created_at`, `updated_at`, `created_by`) VALUES
 (1, 'BG-000020', 'accepted', 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', NULL, 1, 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 'Ms Thảo', 'Tòa R2 TTTM Royal City, 72A Nguyễn Trãi - Thanh Xuân - HN', 'zalo', '0325544040', '0325544040', 351, '2', '300000', '10468435.532', '10683804.24264', NULL, 1, NULL, '2023-09-23 11:39:36', '2023-09-24 10:44:48', 1),
-(6, 'BG-000007', 'not_accepted', 'CTY TNHH IN & SẢN XUẤT BAO BÌ NGHỆ AN', NULL, 6, 'CTY TNHH IN & SẢN XUẤT BAO BÌ NGHỆ AN', 'Mr Dũng', 'TP Vinh - Nghệ An', 'zalo', '0912188628', '0912188628', 4230, '20', '500000', '17083727.9', '20600473.48', NULL, 1, NULL, '2023-09-23 16:58:49', '2023-09-23 16:58:49', 1),
+(6, 'BG-000027', 'not_accepted', 'CTY TNHH IN & SẢN XUẤT BAO BÌ NGHỆ AN', NULL, 6, 'CTY TNHH IN & SẢN XUẤT BAO BÌ NGHỆ AN', 'Mr Dũng', 'TP Vinh - Nghệ An', 'zalo', '0912188628', '0912188628', 4230, '20', '500000', '17083727.9', '20600473.48', NULL, 1, NULL, '2023-09-23 16:58:49', '2023-09-26 14:54:03', 1),
 (7, 'BG-000007', 'order_created', 'CÔNG TY DỆT MAY THÀNH VƯỢNG', NULL, 3, 'CÔNG TY DỆT MAY THÀNH VƯỢNG', 'Ms Hằng', 'Hoa sơn - Ứng hòa - Hà nội', 'zalo', '0979359387', '0979359387', 351, '9.9204025596766', '50000', '62766090.3125', '69047699.34375', NULL, 1, NULL, '2023-09-23 18:20:57', '2023-09-23 19:10:26', 1),
 (8, 'BG-000011', 'not_accepted', 'CÔNG TY DỆT MAY THÀNH VƯỢNG', NULL, 3, 'CÔNG TY DỆT MAY THÀNH VƯỢNG', 'Ms Hằng', 'Hoa sơn - Ứng hòa - Hà nội', 'zalo', '0979359387', '0979359387', 351, '10', '50000', '62766090.3125', '69047699.34375', NULL, 1, NULL, '2023-09-23 19:06:55', '2023-09-23 19:07:04', 1),
 (9, 'BG-000023', 'not_accepted', 'CÔNG TY DỆT MAY THÀNH VƯỢNG', NULL, 3, 'CÔNG TY DỆT MAY THÀNH VƯỢNG', 'Ms Hằng', 'Hoa sơn - Ứng hòa - Hà nội', 'zalo', '0979359387', '0979359387', 351, '10', '50000', '64728504.0625', '71206354.46875', NULL, 1, NULL, '2023-09-23 19:07:30', '2023-09-24 22:46:18', 1),
@@ -14400,7 +14446,13 @@ INSERT INTO `quotes` (`id`, `seri`, `status`, `name`, `product_qty`, `customer_i
 (19, 'BG-000019', 'order_created', 'CTY DƯỢC PHẨM DIAMOND PHÁP', NULL, 5, 'CTY DƯỢC PHẨM DIAMOND PHÁP', 'Ms Hải', 'KCN Đồng Văn - Hà Nam', 'zalo', '0917129458', '0917129458', 9047, '2', '0', '9967435.532', '10166784.24264', NULL, 1, NULL, '2023-09-24 10:44:13', '2023-09-24 10:51:41', 1),
 (20, 'BG-000020', 'accepted', 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', NULL, 1, 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 'Ms Thảo', 'Tòa R2 TTTM Royal City, 72A Nguyễn Trãi - Thanh Xuân - HN', 'zalo', '0325544040', '0325544040', 351, '2', '500000', '10168435.532', '10381804.24264', NULL, 1, NULL, '2023-09-24 10:51:58', '2023-09-24 10:54:55', 1),
 (21, 'BG-000021', 'order_created', 'CTY TNHH IN & SẢN XUẤT BAO BÌ NGHỆ AN', NULL, 6, 'CTY TNHH IN & SẢN XUẤT BAO BÌ NGHỆ AN', 'Mr Dũng', 'TP Vinh - Nghệ An', 'zalo', '0912188628', '0912188628', 4230, '0', '0', '48959906.75', '48959906.75', NULL, 1, NULL, '2023-09-24 15:49:44', '2023-09-24 15:52:28', 1),
-(23, 'BG-000024', 'not_accepted', 'CTY CP IN & SẢN XUẤT BAO BÌ TUẤN DUNG', NULL, 9, 'CTY CP IN & SẢN XUẤT BAO BÌ TUẤN DUNG', 'Mr Tuấn', 'Lô D5-16 Cụm Làng Nghề Triều khúc - Tân Triều - HN', 'kd1.intuandung@gmail.com', '0963303999', '02438303888', 351, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-09-25 07:50:34', '2023-09-25 08:09:34', 2);
+(23, 'BG-000024', 'not_accepted', 'CTY CP IN & SẢN XUẤT BAO BÌ TUẤN DUNG', NULL, 9, 'CTY CP IN & SẢN XUẤT BAO BÌ TUẤN DUNG', 'Mr Tuấn', 'Lô D5-16 Cụm Làng Nghề Triều khúc - Tân Triều - HN', 'kd1.intuandung@gmail.com', '0963303999', '02438303888', 351, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-09-25 07:50:34', '2023-09-25 08:09:34', 2),
+(26, 'BG-000027', 'order_created', 'Công ty TNHH phát triển y tế USA', NULL, 10, 'Công ty TNHH phát triển y tế USA', 'Ms Dịu', 'NV1 Số 38 Tổng Cục V Tân Triều Thanh Trì TP.Hà Nội', 'chưa có', '0983 580 635', '0983 580 635', 351, '10.3', '500000', '21895472.34', '24202205.99102', NULL, 1, NULL, '2023-09-26 14:46:54', '2023-09-26 15:41:28', 10),
+(27, 'BG-000028', 'order_created', 'CÔNG TY TNHH ĐẦU TƯ XUẤT NHẬP KHẨU VÀ THƯƠNG MẠI THÀNH ĐỨC', NULL, 11, 'CÔNG TY TNHH ĐẦU TƯ XUẤT NHẬP KHẨU VÀ THƯƠNG MẠI THÀNH ĐỨC', 'Anh Cương', 'Số 3B, Ngách 144/4, Phố Quan Nhân, Phường Nhân Chính, Quận Thanh Xuân, Thành phố Hà Nội', 'zalo', '0988373219', '0988373219', 7474, '1.2', '250000', '5117387.68', '5181796.33216', NULL, 1, NULL, '2023-09-26 16:14:37', '2023-09-26 16:38:43', 10),
+(28, 'BG-000028', 'not_accepted', 'CÔNG TY DƯỢC PHẨM HADIPHACO', NULL, 12, 'CÔNG TY DƯỢC PHẨM HADIPHACO', 'Mr Hải', 'Số 65 ngõ 173/192 Lê Trọng Tấn, Định Công, Hoàng Mai, HN', 'duocphamhadiphaco@gmail.com', '0968 754 654', '0968 754 654', 351, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-09-26 16:52:12', '2023-09-26 16:52:12', 10),
+(29, 'BG-000032', 'not_accepted', 'Công ty TNHH dược phẩm Blue pharma', NULL, 13, 'Công ty TNHH dược phẩm Blue pharma', 'Mr Hải', 'Số nhà 22, ngách 50/37 Đường Khuyến Lương, Trần phú', 'zalo', '0968754654', '0968754654', 351, '15', '300000', NULL, '45000', NULL, 1, NULL, '2023-09-26 16:59:56', '2023-09-26 17:39:50', 10),
+(31, 'BG-000031', 'not_accepted', 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', NULL, 1, 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 'Ms Thảo', 'Tòa R2 TTTM Royal City, 72A Nguyễn Trãi - Thanh Xuân - HN', 'zalo', '0325544040', '0325544040', 351, '0', '500000', '52485208.88', '52485208.88', NULL, 1, NULL, '2023-09-26 17:24:54', '2023-09-26 17:48:47', 1),
+(32, 'BG-000032', 'not_accepted', 'VIETBANRD', NULL, 4, 'VIETBANRD', 'Phương', 'Hà Nam', 'zalo', '000', '000', 9047, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-09-26 18:05:31', '2023-09-26 18:05:31', 1);
 
 -- --------------------------------------------------------
 
@@ -14468,7 +14520,7 @@ CREATE TABLE `square_warehouses` (
   `id` int(10) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `width` varchar(20) DEFAULT NULL,
-  `square` varchar(20) DEFAULT NULL,
+  `qty` varchar(20) DEFAULT NULL,
   `type` varchar(20) DEFAULT NULL,
   `supp_price` int(10) DEFAULT NULL,
   `status` varchar(20) DEFAULT NULL,
@@ -14483,9 +14535,10 @@ CREATE TABLE `square_warehouses` (
 -- Dumping data for table `square_warehouses`
 --
 
-INSERT INTO `square_warehouses` (`id`, `name`, `width`, `square`, `type`, `supp_price`, `status`, `note`, `act`, `created_at`, `updated_at`, `created_by`) VALUES
+INSERT INTO `square_warehouses` (`id`, `name`, `width`, `qty`, `type`, `supp_price`, `status`, `note`, `act`, `created_at`, `updated_at`, `created_by`) VALUES
 (1, 'Màng nilon mờ', '70', '50000', 'nilon', 9, 'imported', NULL, 1, '2023-09-23 16:18:36', '2023-09-24 11:03:54', 1),
-(2, 'Nilon mờ ( đã gọi )', '71.5', '100000', 'nilon', 9, 'imported', NULL, 1, '2023-09-24 16:08:00', '2023-09-24 16:08:46', 1);
+(2, 'Nilon mờ ( đã gọi )', '71.5', '100000', 'nilon', 9, 'imported', NULL, 1, '2023-09-24 16:08:00', '2023-09-24 16:08:46', 1),
+(3, 'mang nilon test', '11', '1111', 'nilon', 9, 'imported', NULL, 1, '2023-09-25 23:37:00', '2023-09-25 23:37:00', 7);
 
 -- --------------------------------------------------------
 
@@ -14561,7 +14614,12 @@ INSERT INTO `supplies` (`id`, `code`, `name`, `product_qty`, `nqty`, `base_supp_
 (34, NULL, NULL, 10000, NULL, NULL, NULL, NULL, NULL, '{\"length\":null,\"width\":null,\"supply_price\":\"0\",\"qttv_price\":0,\"supp_qty\":0,\"act\":0,\"total\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', NULL, NULL, NULL, 'styrofoam', NULL, 13, '0', 1, '2023-09-24 15:52:01', '2023-09-24 15:52:01', 1),
 (35, NULL, NULL, 10000, NULL, NULL, NULL, NULL, NULL, '{\"length\":null,\"width\":null,\"qttv_price\":0,\"supp_qty\":0,\"act\":0,\"total\":0}', '{\"act\":0}', NULL, NULL, NULL, NULL, NULL, 'decal', NULL, 13, '0', 1, '2023-09-24 15:52:01', '2023-09-24 15:52:01', 1),
 (36, NULL, NULL, 10000, NULL, NULL, NULL, NULL, NULL, '{\"length\":null,\"width\":null,\"prescript_price\":\"0\",\"qttv_price\":0,\"supp_qty\":0,\"act\":0,\"total\":0}', '{\"act\":0}', NULL, NULL, NULL, NULL, NULL, 'silk', NULL, 13, '0', 1, '2023-09-24 15:52:01', '2023-09-24 15:52:01', 1),
-(37, NULL, NULL, 10000, NULL, NULL, NULL, NULL, NULL, '{\"length\":null,\"width\":null,\"supply_price\":\"0\",\"qttv_price\":0,\"supp_qty\":0,\"act\":0,\"total\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', NULL, NULL, NULL, 'mica', NULL, 13, '0', 1, '2023-09-24 15:52:01', '2023-09-24 15:52:01', 1);
+(37, NULL, NULL, 10000, NULL, NULL, NULL, NULL, NULL, '{\"length\":null,\"width\":null,\"supply_price\":\"0\",\"qttv_price\":0,\"supp_qty\":0,\"act\":0,\"total\":0}', '{\"act\":0}', '{\"act\":0}', '{\"act\":0}', NULL, NULL, NULL, 'mica', NULL, 13, '0', 1, '2023-09-24 15:52:01', '2023-09-24 15:52:01', 1),
+(38, NULL, 49, 5000, '3', 1667, '17', 0, 1684, '{\"length\":\"35\",\"width\":\"46\",\"supply_type\":\"21\",\"supply_price\":\"118\",\"qttv_price\":1.386,\"supp_qty\":1684,\"act\":1,\"total\":3757778.64}', '{\"machine\":\"18\",\"model_price\":0,\"work_price\":80,\"shape_price\":100000,\"supp_qty\":1684,\"handle_qty\":1684,\"act\":1,\"total\":234720}', '{\"machine\":\"20\",\"model_price\":150,\"work_price\":120,\"shape_price\":150000,\"supp_qty\":1684,\"handle_qty\":1684,\"cost\":593580,\"act\":1,\"total\":593580}', '{\"machine\":\"39\",\"model_price\":0,\"work_price\":20,\"shape_price\":20000,\"qty_pro\":5050,\"handle_qty\":5050,\"act\":1,\"total\":121000}', '{\"machine\":\"7\",\"model_price\":0,\"work_price\":150,\"shape_price\":100000,\"qty_pro\":5050,\"factor\":\"1\",\"handle_qty\":5050,\"act\":1,\"total\":857500}', NULL, NULL, 'carton', NULL, 19, '5564578.64', 1, '2023-09-26 17:42:44', '2023-09-26 17:42:44', 1),
+(39, NULL, 50, 5000, '4', 1250, '13', 0, 1263, '{\"length\":\"52\",\"width\":\"35\",\"supply_type\":\"21\",\"supply_price\":\"118\",\"qttv_price\":1.386,\"supp_qty\":1263,\"act\":1,\"total\":3185942.76}', '{\"machine\":\"18\",\"model_price\":0,\"work_price\":80,\"shape_price\":100000,\"supp_qty\":1263,\"handle_qty\":1263,\"act\":1,\"total\":201040}', '{\"machine\":\"21\",\"model_price\":150,\"work_price\":150,\"shape_price\":100000,\"supp_qty\":1263,\"handle_qty\":1263,\"cost\":562450,\"act\":1,\"total\":562450}', '{\"machine\":\"39\",\"model_price\":0,\"work_price\":20,\"shape_price\":20000,\"qty_pro\":5050,\"handle_qty\":5050,\"act\":1,\"total\":121000}', '{\"machine\":\"7\",\"model_price\":0,\"work_price\":150,\"shape_price\":100000,\"qty_pro\":5050,\"factor\":\"2\",\"handle_qty\":5050,\"act\":1,\"total\":1615000}', NULL, NULL, 'carton', NULL, 19, '5685432.76', 1, '2023-09-26 17:42:44', '2023-09-26 17:42:44', 1),
+(40, NULL, 54, 5000, '4', 1250, '13', 0, 1263, '{\"length\":\"44\",\"width\":\"35\",\"supply_type\":\"21\",\"supply_price\":\"116\",\"qttv_price\":0.924,\"supp_qty\":1263,\"act\":1,\"total\":1797198.48}', '{\"machine\":\"18\",\"model_price\":0,\"work_price\":80,\"shape_price\":100000,\"supp_qty\":1263,\"handle_qty\":1263,\"act\":1,\"total\":201040}', '{\"machine\":\"20\",\"model_price\":150,\"work_price\":120,\"shape_price\":150000,\"supp_qty\":1263,\"handle_qty\":1263,\"cost\":532560,\"act\":1,\"total\":532560}', '{\"machine\":\"39\",\"model_price\":0,\"work_price\":20,\"shape_price\":20000,\"qty_pro\":5050,\"handle_qty\":5050,\"act\":1,\"total\":121000}', '{\"act\":0}', NULL, NULL, 'carton', NULL, 19, '2651798.48', 1, '2023-09-26 17:42:44', '2023-09-26 17:42:44', 1),
+(41, NULL, NULL, 5000, '10', 500, '5', 0, 505, '{\"length\":\"55\",\"width\":\"32\",\"supply_type\":\"29\",\"supply_price\":\"160\",\"qttv_price\":4,\"supp_qty\":505,\"act\":1,\"total\":3555200}', '{\"machine\":\"29\",\"model_price\":0,\"work_price\":200,\"shape_price\":100000,\"supp_qty\":505,\"handle_qty\":505,\"act\":1,\"total\":201000}', '{\"machine\":\"23\",\"model_price\":150,\"work_price\":1000,\"shape_price\":100000,\"supp_qty\":505,\"handle_qty\":505,\"cost\":869000,\"act\":1,\"total\":869000}', '{\"machine\":\"41\",\"model_price\":0,\"work_price\":30,\"shape_price\":20000,\"qty_pro\":5050,\"handle_qty\":5050,\"act\":1,\"total\":171500}', NULL, NULL, NULL, 'rubber', NULL, 19, '4796700', 1, '2023-09-26 17:42:44', '2023-09-26 17:42:44', 1),
+(42, NULL, NULL, 5000, '10', 500, '5', 0, 505, '{\"length\":\"45\",\"width\":\"35\",\"supply_price\":\"25\",\"qttv_price\":2.6,\"supp_qty\":505,\"act\":1,\"total\":2067975}', '{\"machine\":\"31\",\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":505,\"handle_qty\":505,\"act\":1,\"total\":50000}', NULL, NULL, NULL, NULL, NULL, 'decal', NULL, 19, '2117975', 1, '2023-09-26 17:42:44', '2023-09-26 17:42:44', 1);
 
 -- --------------------------------------------------------
 
@@ -14804,6 +14862,63 @@ INSERT INTO `supply_warehouses` (`id`, `name`, `length`, `width`, `qty`, `type`,
 (30, 'Carton', '90.6', '46.5', '50360', 'carton', 21, 121, 'imported', NULL, NULL, 1, '2023-09-24 15:46:41', '2023-09-24 15:46:41', NULL, 1, NULL),
 (31, 'Carton', '48', '77.5', '14560', 'carton', 21, 121, 'imported', NULL, NULL, 1, '2023-09-24 15:48:15', '2023-09-24 15:48:15', NULL, 1, NULL),
 (32, 'Carton nháp', '100', '120', '14560', 'carton', 21, 117, 'imported', NULL, NULL, 1, '2023-09-24 16:11:07', '2023-09-24 16:11:07', NULL, 1, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `warehouse_histories`
+--
+
+CREATE TABLE `warehouse_histories` (
+  `id` int(10) NOT NULL,
+  `action` varchar(50) DEFAULT NULL,
+  `table` varchar(50) DEFAULT NULL,
+  `type` varchar(20) DEFAULT NULL,
+  `target` int(10) DEFAULT NULL,
+  `qty` bigint(20) DEFAULT NULL,
+  `provider` int(10) DEFAULT NULL,
+  `price` decimal(10,2) DEFAULT NULL,
+  `bill` text DEFAULT NULL,
+  `created_by` int(10) DEFAULT NULL,
+  `act` tinyint(4) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `warehouse_histories`
+--
+
+INSERT INTO `warehouse_histories` (`id`, `action`, `table`, `type`, `target`, `qty`, `provider`, `price`, `bill`, `created_by`, `act`, `created_at`, `updated_at`) VALUES
+(59, 'insert', 'print_warehouses', 'paper', 68, 11, 50, '11.00', '{\"path\":\"uploads/files/Screenshot_1.png\",\"name\":\"Screenshot_1.png\"}', 7, NULL, '2023-09-25 23:28:15', NULL),
+(60, 'insert', 'square_warehouses', 'nilon', 3, 1111, 50, '110.00', '{\"path\":\"uploads/files/td_company.sql\",\"name\":\"td_company.sql\"}', 7, NULL, '2023-09-25 23:37:00', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `warehouse_providers`
+--
+
+CREATE TABLE `warehouse_providers` (
+  `id` int(11) NOT NULL COMMENT 'Mã nhóm',
+  `name` varchar(255) DEFAULT NULL COMMENT 'Tên nhóm',
+  `type` varchar(20) DEFAULT NULL COMMENT 'Cha',
+  `note` varchar(255) DEFAULT NULL COMMENT 'Ghi chú',
+  `act` tinyint(4) DEFAULT NULL,
+  `ord` varchar(20) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL ON UPDATE current_timestamp(),
+  `created_by` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `warehouse_providers`
+--
+
+INSERT INTO `warehouse_providers` (`id`, `name`, `type`, `note`, `act`, `ord`, `created_at`, `updated_at`, `created_by`) VALUES
+(49, 'Nhà cung cấp 1', NULL, NULL, 1, NULL, '2023-09-25 20:55:27', '2023-09-25 20:55:40', 10),
+(50, 'Nhà cung cấp 2', NULL, NULL, 1, NULL, '2023-09-25 20:55:48', '2023-09-25 20:55:48', 10),
+(51, 'Nhà cung cấp 3', NULL, NULL, 1, NULL, '2023-09-25 20:55:57', '2023-09-25 20:55:57', 10);
 
 -- --------------------------------------------------------
 
@@ -15198,6 +15313,21 @@ ALTER TABLE `supply_warehouses`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
+-- Indexes for table `warehouse_histories`
+--
+ALTER TABLE `warehouse_histories`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `warehouse_providers`
+--
+ALTER TABLE `warehouse_providers`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `name_index` (`name`) USING BTREE,
+  ADD KEY `type_index` (`type`) USING BTREE,
+  ADD KEY `act_indx` (`act`) USING BTREE;
+
+--
 -- Indexes for table `w_salaries`
 --
 ALTER TABLE `w_salaries`
@@ -15229,7 +15359,7 @@ ALTER TABLE `configs`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `customer_user`
@@ -15277,19 +15407,19 @@ ALTER TABLE `districts`
 -- AUTO_INCREMENT for table `fill_finishes`
 --
 ALTER TABLE `fill_finishes`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `materals`
 --
 ALTER TABLE `materals`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Mã nhóm', AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Mã nhóm', AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `n_detail_tables`
 --
 ALTER TABLE `n_detail_tables`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=245;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=251;
 
 --
 -- AUTO_INCREMENT for table `n_group_users`
@@ -15301,7 +15431,7 @@ ALTER TABLE `n_group_users`
 -- AUTO_INCREMENT for table `n_log_actions`
 --
 ALTER TABLE `n_log_actions`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT for table `n_modules`
@@ -15325,7 +15455,7 @@ ALTER TABLE `n_roles`
 -- AUTO_INCREMENT for table `n_tables`
 --
 ALTER TABLE `n_tables`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `n_users`
@@ -15337,7 +15467,7 @@ ALTER TABLE `n_users`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `other_warehouses`
@@ -15349,7 +15479,7 @@ ALTER TABLE `other_warehouses`
 -- AUTO_INCREMENT for table `papers`
 --
 ALTER TABLE `papers`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `paper_extends`
@@ -15385,13 +15515,13 @@ ALTER TABLE `print_techs`
 -- AUTO_INCREMENT for table `print_warehouses`
 --
 ALTER TABLE `print_warehouses`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `product_categories`
@@ -15415,7 +15545,7 @@ ALTER TABLE `p_substances`
 -- AUTO_INCREMENT for table `quotes`
 --
 ALTER TABLE `quotes`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `quote_configs`
@@ -15427,13 +15557,13 @@ ALTER TABLE `quote_configs`
 -- AUTO_INCREMENT for table `square_warehouses`
 --
 ALTER TABLE `square_warehouses`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `supplies`
 --
 ALTER TABLE `supplies`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `supply_names`
@@ -15458,6 +15588,18 @@ ALTER TABLE `supply_types`
 --
 ALTER TABLE `supply_warehouses`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
+-- AUTO_INCREMENT for table `warehouse_histories`
+--
+ALTER TABLE `warehouse_histories`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+
+--
+-- AUTO_INCREMENT for table `warehouse_providers`
+--
+ALTER TABLE `warehouse_providers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Mã nhóm', AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `w_salaries`

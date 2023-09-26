@@ -58,4 +58,9 @@ class SquareWarehouse extends Model
     {
         return WarehouseHistory::removeData('square_warehouses', $id);
     }
+
+    static function getLabelLinking($data)
+    {
+        return getFieldDataById('name', 'materals', $data->supp_price).' - Khổ : '.$data->width;
+    }
 }

@@ -142,9 +142,6 @@ if (!function_exists('getlabelLinking')) {
         if (!empty($data->qty) && $ext_info) {
             $ret .= ' - Số lượng: '.$data->qty;
         }
-        if (!empty($data->square) && $ext_info) {
-            $ret .= ' - Diện tích (m2): '.$data->square;
-        }
         return $ret;
     }
 }

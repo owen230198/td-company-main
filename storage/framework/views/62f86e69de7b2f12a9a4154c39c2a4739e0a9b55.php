@@ -3,7 +3,7 @@
     <?php
         $key_supp = \TDConst::RUBBER;
         $rubber_divide = \TDConst::RUBBER_SIZE_DIVIDE;
-        $rubber_compen_percent = (float) getDataConfig('QuoteConfig', 'CARTON_COMPEN_PERCENT');
+        $rubber_compen_percent = (float) getDataConfig('QuoteConfig', 'RUBBER_COMPEN_PERCENT');
         $rubber_plus = \TDConst::RUBBER_SIZE_PLUS;
     ?>
     <?php echo $__env->make('quotes.products.supplies.title_config', ['divide' => $rubber_divide, 'name' => 'Cao su'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
