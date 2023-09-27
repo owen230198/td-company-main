@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 26, 2023 at 08:34 PM
+-- Generation Time: Sep 27, 2023 at 09:55 PM
 -- Server version: 10.3.38-MariaDB
 -- PHP Version: 7.4.33
 
@@ -13363,7 +13363,7 @@ INSERT INTO `n_detail_tables` (`id`, `name`, `attr`, `note`, `type`, `table_map`
 (30, 'profit', '{\"required\":1, \"type_input\":\"price\"}', 'Lợi nhuận', 'text', 'quotes', 1, 1, 1, 0, 0, '', 1, 3, 1, '2023-04-30 11:00:22', '2023-08-16 17:01:46'),
 (31, 'ship_price', '{\"required\":1, \"type_input\":\"price\"}', 'Phí Ship', 'text', 'quotes', 1, 1, 1, 0, 0, '', 1, 2, 1, '2023-04-30 11:00:13', '2023-08-16 17:01:32'),
 (32, 'total_amount', '{\"required\":1, \"type_input\":\"price\"}', 'Giá trị BG', 'text', 'quotes', 1, 1, 1, 0, 0, '', 1, 4, 1, '2023-04-30 11:00:33', '2023-08-16 17:01:39'),
-(33, 'status', '{\"required\":1}', 'Trạng thái', 'select', 'quotes', 1, 1, 1, 1, 0, '{\"data\":{\r\n		\"options\":{\"\":\"Trạng thái\", \"not_accepted\":\"Chưa duyệt\", \"accepted\":\"Đã duyệt\", \"order_created\":\"Đã tạo đơn\"}\r\n	}\r\n}', 1, 5, 1, '2023-05-11 11:19:48', '2023-09-26 16:50:57'),
+(33, 'status', '{\"required\":1}', 'Trạng thái', 'select', 'quotes', 1, 1, 1, 1, 0, '{\"data\":{\r\n		\"options\":{\"\":\"Trạng thái\", \"not_accepted\":\"Chưa duyệt\", \"accepted\":\"Đã duyệt\", \"order_created\":\"Đã tạo đơn\"}\r\n	}\r\n}', 1, 5, 1, '2023-05-11 11:19:48', '2023-09-26 16:58:12'),
 (34, 'created_by', NULL, 'Phụ trách', 'linking', 'quotes', 1, 1, 1, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', 1, 0, 1, '2023-04-08 00:08:00', '2023-04-08 00:08:00'),
 (35, 'created_at', NULL, 'Ngày tạo', 'datetime', 'quotes', 1, 1, 1, 1, 0, '', 1, 6, 1, '2023-04-30 11:00:43', '2023-04-30 11:00:43'),
 (36, 'updated_at', NULL, 'Ngày sửa', 'datetime', 'quotes', 0, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-08 00:12:15', '2023-04-08 00:12:15'),
@@ -13412,10 +13412,10 @@ INSERT INTO `n_detail_tables` (`id`, `name`, `attr`, `note`, `type`, `table_map`
 (89, 'created_by', '', 'Tạo bởi', 'linking', 'c_designs', 1, 0, 1, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', 1, 0, 1, '2023-06-15 06:55:51', '2023-06-15 06:55:51'),
 (90, 'assign_by', '', 'Nhận bởi', 'linking', 'c_designs', 1, 0, 1, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', 1, 0, 1, '2023-06-15 10:42:46', '2023-06-15 10:42:46'),
 (91, 'code', '{\"disable_field\":1,\"required\":1}', 'Mã Lệnh', 'text', 'c_supplies', 1, 0, 1, 1, 0, '', 1, 0, 1, '2023-07-14 02:55:30', '2023-08-17 02:17:59'),
-(92, 'size_type', '{\"required\":1,\"disable_field\":1,\"inject_class\":\"__wh_select_size\"}', 'Khổ vật tư', 'linking', 'c_supplies', 1, 0, 0, 0, 148, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":{\r\n			\"getFunc\":\"getTableWarehouseByType\"\r\n		}\r\n	}\r\n}', 1, 1, 1, '2023-07-14 02:55:31', '2023-08-17 03:37:42'),
-(93, 'qty', '{\"required\":1, \"type_input\":\"number\"}', 'SL cần xuất (khổ, cm2, kg)', 'text', 'c_supplies', 1, 1, 1, 0, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":{\r\n			\"getFunc\":\"getTableWarehouseByType\",\r\n		}\r\n	}\r\n}', 1, 1, 1, '2023-07-14 02:55:32', '2023-08-20 11:44:26'),
+(92, 'size_type', '{\"required\":1,\"disable_field\":1,\"inject_class\":\"__wh_select_size\"}', 'Loại vật tư', 'linking', 'c_supplies', 1, 0, 0, 0, 148, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":{\r\n			\"getFunc\":\"getTableWarehouseByType\"\r\n		}\r\n	}\r\n}', 1, 1, 1, '2023-07-14 02:55:31', '2023-09-26 20:18:58'),
+(93, 'qty', '{\"required\":1, \"type_input\":\"number\"}', 'SL cần xuất cả bù hao', 'text', 'c_supplies', 1, 1, 1, 0, 0, '', 1, 1, 1, '2023-07-14 02:55:32', '2023-09-26 18:21:52'),
 (94, 'order', '', 'Xuất cho đơn', 'linking', 'c_supplies', 1, 1, 1, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"orders\"\r\n	}\r\n}', 1, 1, 0, '2023-07-14 02:56:31', '2023-08-30 02:20:09'),
-(95, 'product', '', 'Sản phẩm', 'linking', 'c_supplies', 1, 1, 1, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"products\"\r\n	}\r\n}', 1, 1, 1, '2023-07-14 03:16:25', '2023-08-30 02:20:06'),
+(95, 'product', '', 'Sản phẩm', 'linking', 'c_supplies', 1, 1, 1, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"products\"\r\n	}\r\n}', 1, 0, 1, '2023-07-14 03:16:25', '2023-09-26 20:03:43'),
 (96, 'status', '', 'Trạng thái', 'select', 'c_supplies', 1, 0, 1, 0, 0, '{\r\n		\"data\":{\r\n				\"options\":{\"\":\"Chưa gửi yêu cầu xuất\", \"handling\":\"Đang chờ xuất kho\", \"handled\":\"Đã xuất kho\"}\r\n		}\r\n}', 1, 1, 1, '2023-07-14 02:50:55', '2023-08-17 02:08:07'),
 (97, 'created_by', '', 'Người tạo', 'linking', 'c_supplies', 1, 0, 0, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', 1, 1, 1, '2023-07-14 03:11:41', '2023-08-17 02:08:07'),
 (98, 'assign_by', '', 'Phụ trách', 'linking', 'c_supplies', 1, 0, 0, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', 1, 1, 1, '2023-07-14 03:11:21', '2023-08-29 23:57:47'),
@@ -13451,7 +13451,7 @@ INSERT INTO `n_detail_tables` (`id`, `name`, `attr`, `note`, `type`, `table_map`
 (129, 'name', '{\"required\":1}', 'Tên vật tư', 'text', 'supply_warehouses', 1, 1, 1, 1, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2023-08-03 12:01:18'),
 (130, 'length', '{\"required\":1}', 'KT dài', 'text', 'supply_warehouses', 1, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2023-08-03 12:01:18'),
 (131, 'width', '{\"required\":1}', 'KT rộng', 'text', 'supply_warehouses', 1, 1, 1, NULL, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2023-08-03 12:01:18'),
-(132, 'qty', '{\"type_input\":\"number\",\"required\":1}', 'Số lượng', 'text', 'supply_warehouses', 1, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-30 11:00:22', '2023-08-03 12:01:39'),
+(132, 'qty', '{\"type_input\":\"number\",\"disable_field\":1}', 'Số lượng', 'text', 'supply_warehouses', 1, 0, 1, 0, 0, '', 1, 0, 1, '2023-04-30 11:00:22', '2023-09-26 10:19:25'),
 (133, 'supp_type', '{\"required\":1,\"inject_class\":\"__select_parent\"}', 'Loại vật tư', 'linking', 'supply_warehouses', 1, 0, 0, 0, 135, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"supply_types\",\r\n		\"where\":{\"is_name\":0},\r\n		\"where_default\":{\"type\":\"type\"}\r\n	}\r\n}', 1, 0, 1, '2023-05-11 11:18:58', '2023-08-17 01:50:38'),
 (134, 'supp_price', '{\"required\":1,\"disable_field\":1,\"inject_class\":\"__select_child\"}', 'Định lượng', 'linking', 'supply_warehouses', 1, 0, 0, 0, 135, '{\r\n	\"config\":{\r\n		\"searchbox\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"supply_prices\"\r\n	}\r\n}', 1, 0, 1, '2023-05-11 11:18:58', '2023-08-17 01:50:40'),
 (135, 'group_supply', '', 'Dạng vật tư', 'group', 'supply_warehouses', 1, 1, 1, 1, 0, '{\r\n	\"group_class\":\"__module_select_ajax_value_child\",\r\n	\"inject_attr\":\"link=option-ajax-child/supply_prices/supply_id\",\r\n	\"width\":\"8\",\r\n	\"width_child\":\"6\"\r\n}', 1, 0, 1, '2023-05-23 14:41:40', '2023-08-07 16:38:46'),
@@ -13462,15 +13462,15 @@ INSERT INTO `n_detail_tables` (`id`, `name`, `attr`, `note`, `type`, `table_map`
 (140, 'name', '{\"required\":1}', 'Tên vật tư', 'text', 'print_warehouses', 1, 1, 1, 1, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2023-09-25 08:45:22'),
 (141, 'length', '{\"required\":1}', 'KT dài', 'text', 'print_warehouses', 1, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2023-08-16 14:47:29'),
 (142, 'width', '{\"required\":1}', 'KT rộng', 'text', 'print_warehouses', 1, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2023-08-16 14:52:47'),
-(143, 'qty', '{\"type_input\":\"number\",\"required\":1}', 'Số lượng', 'text', 'print_warehouses', 1, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-30 11:00:22', '2023-08-16 14:47:29'),
+(143, 'qty', '{\"type_input\":\"number\",\"disable_field\":1}', 'Số lượng', 'text', 'print_warehouses', 1, 0, 1, 0, 0, '', 1, 0, 1, '2023-04-30 11:00:22', '2023-09-26 10:19:25'),
 (144, 'supp_price', '{\"required\":1}', 'Loại vật tư', 'linking', 'print_warehouses', 1, 1, 1, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"materals\",\r\n		\"where_default\":{\"type\":\"type\"}\r\n	}\r\n}', 1, 0, 1, '2023-05-11 11:18:58', '2023-08-16 14:52:45'),
 (145, 'name', '{\"required\":1}', 'Tên vật tư', 'text', 'other_warehouses', 1, 1, 1, 1, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2023-08-16 15:29:54'),
-(146, 'qty', '{\"type_input\":\"number\",\"required\":1}', 'Số lượng', 'text', 'other_warehouses', 1, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-30 11:00:22', '2023-08-16 15:29:54'),
+(146, 'qty', '{\"type_input\":\"number\",\"disable_field\":1}', 'Số lượng', 'text', 'other_warehouses', 1, 0, 1, 0, 0, '', 1, 0, 1, '2023-04-30 11:00:22', '2023-09-26 10:19:25'),
 (147, 'supp_price', '{\"required\":1}', 'Loại vật tư', 'linking', 'other_warehouses', 1, 1, 1, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"materals\",\r\n		\"where_default\":{\"type\":\"type\"}\r\n	}\r\n}', 1, 0, 1, '2023-05-11 11:18:58', '2023-08-16 15:29:54'),
 (148, 'group_supply', '', 'Dạng vật tư', 'group', 'c_supplies', 1, 1, 1, 1, 0, '{\r\n	\"group_class\":\"__module_select_type_warehouse\",\r\n	\"width\":\"8\",\r\n	\"width_child\":\"6\"\r\n}', 1, 0, 1, '2023-05-23 14:41:40', '2023-08-17 03:13:39'),
 (149, 'supp_type', '{\"required\":1,\"inject_class\":\"__wh_select_type\"}', 'Loại vật tư', 'select', 'c_supplies', 1, 0, 0, 0, 148, '{\r\n	\"config\":{\r\n		\"searchbox\":1\r\n	},\r\n	\"data\":{\r\n		\"options\":{\r\n			\"0\":\"Chọn loại vật tư\",\r\n			\"paper\":\"Giấy in\", \r\n			\"nilon\":\"Màng nilon\", \r\n			\"metalai\":\"Màng metalai\",\r\n			\"cover\":\"Màng phủ trên\",\r\n			\"carton\":\"Carton\",\r\n			\"rubber\":\"Cao su\",\r\n			\"styrofoam\":\"Mút phẳng\",\r\n			\"decal\":\"Nhung\",\r\n			\"silk\":\"Vải lụa\",\r\n			\"mica\":\"Mi ca\",\r\n			\"magnet\":\"Nam châm\"\r\n		}\r\n	}\r\n}', 1, 0, 1, '2023-05-11 11:18:58', '2023-08-17 03:16:06'),
 (150, 'name', '{\"required\":1}', 'Tên vật tư', 'text', 'square_warehouses', 1, 1, 1, 1, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2023-08-17 15:56:46'),
-(151, 'qty', '{\"type_input\":\"number\",\"required\":1}', 'Còn lại (m)', 'text', 'square_warehouses', 1, 1, 1, 0, 0, '', 1, 1, 1, '2023-04-30 11:00:22', '2023-09-25 22:15:30'),
+(151, 'qty', '{\"type_input\":\"number\",\"disable_field\":1}', 'Còn lại (m)', 'text', 'square_warehouses', 1, 0, 1, 0, 0, '', 1, 1, 1, '2023-04-30 11:00:22', '2023-09-26 10:19:25'),
 (152, 'supp_price', '{\"required\":1}', 'Loại vật tư', 'linking', 'square_warehouses', 1, 1, 1, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"materals\",\r\n		\"where_default\":{\"type\":\"type\"}\r\n	}\r\n}', 1, 1, 1, '2023-05-11 11:18:58', '2023-08-26 00:39:38'),
 (153, 'created_by', NULL, 'Người thêm', 'linking', 'other_warehouses', 1, 0, 0, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', 1, 0, 1, '2023-04-08 00:08:00', '2023-09-25 23:04:34'),
 (154, 'created_at', NULL, 'Ngày thêm', 'datetime', 'other_warehouses', 1, 0, 0, 1, 0, '', 1, 0, 1, '2023-04-08 00:08:00', '2023-09-25 23:04:40'),
@@ -14270,7 +14270,7 @@ INSERT INTO `print_warehouses` (`id`, `name`, `length`, `width`, `qtv`, `qty`, `
 (65, 'C', '50.3', '55.5', '150', '66000', 'paper', 12, 'imported', NULL, NULL, 1, '2023-09-24 15:39:19', '2023-09-24 15:39:37', 1),
 (66, 'C', '50.3', '51', '150', '46500', 'paper', 12, 'imported', NULL, NULL, 1, '2023-09-24 15:39:59', '2023-09-24 15:39:59', 1),
 (67, 'C đã gọi', '50', '72', '120', '10000', 'paper', 12, 'imported', NULL, NULL, 1, '2023-09-24 16:06:39', '2023-09-24 16:06:39', 1),
-(68, 'Giay in test', '11', '11', '11', '11', 'paper', 13, 'imported', NULL, NULL, 1, '2023-09-25 23:28:15', '2023-09-25 23:28:15', 7);
+(68, 'Giay in test', '11', '11', '11', '111', 'paper', 13, 'imported', NULL, NULL, 1, '2023-09-26 20:40:12', '2023-09-26 20:40:12', 7);
 
 -- --------------------------------------------------------
 
@@ -14879,6 +14879,8 @@ CREATE TABLE `warehouse_histories` (
   `provider` int(10) DEFAULT NULL,
   `price` decimal(10,2) DEFAULT NULL,
   `bill` text DEFAULT NULL,
+  `old_qty` bigint(20) DEFAULT NULL,
+  `new_qty` bigint(20) DEFAULT NULL,
   `created_by` int(10) DEFAULT NULL,
   `act` tinyint(4) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
@@ -14889,9 +14891,8 @@ CREATE TABLE `warehouse_histories` (
 -- Dumping data for table `warehouse_histories`
 --
 
-INSERT INTO `warehouse_histories` (`id`, `action`, `table`, `type`, `target`, `qty`, `provider`, `price`, `bill`, `created_by`, `act`, `created_at`, `updated_at`) VALUES
-(59, 'insert', 'print_warehouses', 'paper', 68, 11, 50, '11.00', '{\"path\":\"uploads/files/Screenshot_1.png\",\"name\":\"Screenshot_1.png\"}', 7, NULL, '2023-09-25 23:28:15', NULL),
-(60, 'insert', 'square_warehouses', 'nilon', 3, 1111, 50, '110.00', '{\"path\":\"uploads/files/td_company.sql\",\"name\":\"td_company.sql\"}', 7, NULL, '2023-09-25 23:37:00', NULL);
+INSERT INTO `warehouse_histories` (`id`, `action`, `table`, `type`, `target`, `qty`, `provider`, `price`, `bill`, `old_qty`, `new_qty`, `created_by`, `act`, `created_at`, `updated_at`) VALUES
+(1, 'update', 'print_warehouses', 'paper', 68, 100, 50, '200.00', '{\"path\":\"uploads/files/c_designs_icon.png\",\"name\":\"c_designs_icon.png\"}', 11, 111, 7, NULL, '2023-09-26 20:40:12', NULL);
 
 -- --------------------------------------------------------
 
@@ -15593,7 +15594,7 @@ ALTER TABLE `supply_warehouses`
 -- AUTO_INCREMENT for table `warehouse_histories`
 --
 ALTER TABLE `warehouse_histories`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `warehouse_providers`

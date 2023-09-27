@@ -49,36 +49,48 @@
 
         const CLONE_FIELD = ['name', 'category', 'qty', 'design', 'length', 'width', 'height', 'total_amount'];
 
+        const SALE_SHAPE_FILE_FIELD = [
+            'note' => 'Khuôn kinh doanh tính giá',
+            'type' => 'file',
+            'other_data' => ['role_update' => [\GroupUser::SALE], 'field_name' => 'sale_shape_file'],
+            'table_map' => 'products',
+        ];
+
         const FEILD_FILE = [
             'custom_design_file' =>
             [
                 'note' => 'File thiết kế khách gửi',
                 'type' => 'file',
-                'other_data' => ['role_update' => [\GroupUser::SALE]] 
+                'table_map' => 'products',
+                'other_data' => ['role_update' => [\GroupUser::SALE], 'field_name' => 'custom_design_file'] 
             ],
             'tech_shape_file' =>
             [
                 'note' => 'Khuôn sản xuất (Kỹ thuật)',
                 'type' => 'file',
-                'other_data' => ['role_update' => [\GroupUser::TECH_APPLY]]
+                'table_map' => 'products',
+                'other_data' => ['role_update' => [\GroupUser::TECH_APPLY], 'field_name' => 'tech_shape_file']
             ],
             'design_file' =>
             [
                 'note' => 'File gốc (P. Thiết kế)',
                 'type' => 'file',
-                'other_data' => ['role_update' => [\GroupUser::DESIGN]]
+                'table_map' => 'products',
+                'other_data' => ['role_update' => [\GroupUser::DESIGN], 'field_name' => 'design_file']
             ],
             'design_shape_file' =>
             [
                 'note' => 'File bình theo khuôn (P. Thiết kế)',
                 'type' => 'file',
-                'other_data' => ['role_update' => [\GroupUser::DESIGN]]
+                'table_map' => 'products',
+                'other_data' => ['role_update' => [\GroupUser::DESIGN], 'field_name' => 'design_shape_file']
             ],
             'handle_shape_file' =>
             [
                 'note' => 'Khuôn ép nhũ, thúc nổi, in UV',
                 'type' => 'file',
-                'other_data' => ['role_update' => [\GroupUser::TECH_HANDLE]]
+                'table_map' => 'products',
+                'other_data' => ['role_update' => [\GroupUser::TECH_HANDLE], 'field_name' => 'handle_shape_file']
             ]
         ];
         
@@ -124,17 +136,6 @@
                     Quote::where('id', $product->quote_id)->delete();
                     Order::where('id', $product->order)->delete();
                     $admin->removeDataTable('products', $product['id']);       
-                }
-            }
-        }
-
-        public function beforeRemove($id)
-        {
-            $product = Product::find($id);
-            $feild_file = Product::FEILD_FILE;
-            foreach ($feild_file as $key => $feild_file) {
-                if (!empty($product[$key])) {
-                    removeFileData($product[$key]);
                 }
             }
         }

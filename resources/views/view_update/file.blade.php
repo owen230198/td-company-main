@@ -11,9 +11,8 @@
                 <i class="fa fa-upload mr-2 fs-14" aria-hidden="true"></i>Chọn file
             </button>
             <input type="file" class="upload_input __file_upload_input" 
-            data-table={{ @$table_map }} 
-            data-field = {{ @$other_data['field_name'] ?? @$name }}
-            data-obj = {{ @$other_data['obj_id'] }}>
+            data-table="{{ @$table_map }}"
+            data-field = "{{ @$other_data['field_name'] ?? @$name }}">
         </div>
     @endif
 </div>

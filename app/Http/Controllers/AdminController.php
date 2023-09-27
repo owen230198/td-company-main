@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Models\NTable;
+use App\Models\File;
 use Illuminate\Support\Facades\Schema;
 class AdminController extends Controller
 {
@@ -396,25 +397,38 @@ class AdminController extends Controller
         $data['code'] = 100;
         $data['message'] = 'Không thể xử lí file !';
         if (!empty($file)) {
-            $name = $file->getClientOriginalName();
-            $path = 'uploads/files';
-            $full_path = getFullPathFileUpload($path.'/'.$name);
-            if (file_exists($full_path)) {
-                $data['message'] = 'Tên file đã tồn tại, vui lòng đổi tên trước !';
-            }else{
-                $status = $file->move($path ,$name);
-                if ($status) {
-                    $data['code'] = 200;
-                    $data['path'] = $path.'/'.$name;
-                    $data['name'] = $name;
-                    $table = $request->input('table');
-                    $field = $request->input('field');
-                    $obj_id = $request->input('obj');
-                    if (!empty($table) && !empty($field) && !empty($obj_id)) {
-                        \DB::table($table)->where('id', $obj_id)
-                        ->update([$field => json_encode(['path' => $data['path'], 'name' => $data['name']])]);
-                    }
-                }
+            $file_name = pathinfo($file->getClientOriginalName());
+            $name = @$file_name['filename'];
+            $file_ext = @$file_name['extension'];
+            $dir = 'uploads/files';
+            $table = $request->input('table');
+            if (!empty($table)) {
+                $dir .= '/'.$table;
+            }
+            $field = $request->input('field');
+            if (!empty($field)) {
+                $dir .= '/'.$field;
+            }
+            $file_obj = File::where(['dir' =>$dir, 'name' => $name, 'ext_file' => $file_ext])->first();
+            if (!empty($file_obj)) {
+                $count = (int) $file_obj->count + 1;
+                $name = $name.'_'.$count;
+                $file_obj->count = $count;
+                $file_obj->save();
+            }
+            $name_upload = $name.'.'.$file_ext;
+            $status = $file->move($dir ,$name_upload);
+            $data['dir'] = $dir;
+            $data['path'] = $dir.'/'.$name_upload;
+            $data['name'] = $name;
+            $data['ext_file'] = $file_ext;
+            $data_insert = $data;
+            unset($data_insert['code'], $data_insert['message']);
+            $this->admins->configBaseDataAction($data_insert);
+            $insert_id = File::insertGetId($data_insert);
+            if ($status && $insert_id) {
+                $data['code'] = 200;
+                $data['id'] = $insert_id;
             }
         }
         return response()->json($data);

@@ -86,11 +86,13 @@
 	if (!function_exists('refreshQuoteProfit')) {
 		function refreshQuoteProfit($arr_quote)
 		{
-			$update_quote['total_cost'] = getProductTotalCost($arr_quote, 'total_cost');
-			$quote_total = $update_quote['total_cost'] + (float) @$arr_quote['ship_price'];
+			$update_quote = getProductTotalCost($arr_quote, 'total_cost');
+			$quote_total = $update_quote['total_cost'];
 			$quote_amount = (float) @$arr_quote['total_amount'];
-			$update_quote['profit'] = (($quote_amount - $quote_total) / $quote_total) * 100;
-			\DB::table('quotes')->where('id', $arr_quote['id'])->update($update_quote);
+			if ($quote_total > 0) {
+				$update_quote['profit'] = (($quote_amount - $quote_total) / $quote_total) * 100;
+				\DB::table('quotes')->where('id', $arr_quote['id'])->update($update_quote);
+			}
 		}
 	}
 

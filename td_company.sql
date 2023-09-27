@@ -5,13 +5,13 @@
  Source Server Type    : MySQL
  Source Server Version : 100428
  Source Host           : localhost:3306
- Source Schema         : td_production
+ Source Schema         : td_company
 
  Target Server Type    : MySQL
  Target Server Version : 100428
  File Encoding         : 65001
 
- Date: 26/09/2023 20:40:59
+ Date: 27/09/2023 22:03:02
 */
 
 SET NAMES utf8mb4;
@@ -13162,6 +13162,25 @@ CREATE TABLE `domains`  (
 INSERT INTO `domains` VALUES (1, 'Miền bắc', NULL, 1, 1, '2022-06-21 14:54:02', '2022-06-21 14:54:02', '21.0205873', '105.8081512');
 INSERT INTO `domains` VALUES (2, 'Miền trung', NULL, 2, 1, '2022-06-21 14:54:02', '2022-06-21 14:54:02', '16.4322431', '107.3452953');
 INSERT INTO `domains` VALUES (3, 'Miền nam', NULL, 3, 1, '2022-06-21 14:54:02', '2022-06-21 14:54:02', '11.5844862', '106.9994653');
+
+-- ----------------------------
+-- Table structure for files
+-- ----------------------------
+DROP TABLE IF EXISTS `files`;
+CREATE TABLE `files`  (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `base_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `dir` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `path` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `count` bigint(20) NULL DEFAULT NULL,
+  `ext_file` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `act` tinyint(4) NULL DEFAULT NULL,
+  `created_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL,
+  `created_by` int(10) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for fill_finishes

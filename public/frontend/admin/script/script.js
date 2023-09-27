@@ -319,16 +319,12 @@ var fileProcessModule = function() {
             let form_data = new FormData();
             form_data.append('file', files[0]);
             let table = $(this).data('table');
-            if (!empty('table')) {
+            if (!empty(table)) {
                 form_data.append('table', table);
             }
             let field = $(this).data('field');
-            if (!empty('field')) {
+            if (!empty(field)) {
                 form_data.append('field', field);
-            }
-            let obj = $(this).data('obj');
-            if (!empty('obj')) {
-                form_data.append('obj', obj);
             }
             let parent = $(this).closest('.__module_upload_file');
             let input_value = parent.find('input.__file_value');
@@ -345,7 +341,7 @@ var fileProcessModule = function() {
                 if (data.code == 100) {
                     swal('Không thành công', data.message, 'error');
                 }else{
-                    let value = '{"path":"'+data.path+'","name":"'+data.name+'"}'
+                    let value = '{"id":"'+data.id+'","dir":"'+data.dir+'","path":"'+data.path+'","name":"'+data.name+'"}'
                     input_value.val(value);
                     parent.find('.__file_preview').fadeIn(200);
                     if (data.name.length > 18) {

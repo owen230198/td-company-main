@@ -45,6 +45,7 @@
                 'type' => 'file',
                 'table_map' => 'orders',
                 'field_name' => 'rest_bill',
+                'other_data' => ['role_update' => [\GroupUser::SALE], 'field_name' => 'rest_bill'],
                 'value' => @$data_order['rest_bill']
             ],
             [

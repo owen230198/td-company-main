@@ -11,10 +11,8 @@
                 <i class="fa fa-upload mr-2 fs-14" aria-hidden="true"></i>Chọn file
             </button>
             <input type="file" class="upload_input __file_upload_input" 
-            data-table=<?php echo e(@$table_map); ?> 
-            data-field = <?php echo e(@$other_data['field_name'] ?? @$name); ?>
-
-            data-obj = <?php echo e(@$other_data['obj_id']); ?>>
+            data-table="<?php echo e(@$table_map); ?>"
+            data-field = "<?php echo e(@$other_data['field_name'] ?? @$name); ?>">
         </div>
     <?php endif; ?>
 </div><?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/view_update/file.blade.php ENDPATH**/ ?>

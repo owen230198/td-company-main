@@ -65,14 +65,6 @@
                 ],
             ];
             return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];
-        } 
-
-        public function beforeRemove($id)
-        {
-            $order = Order::find($id);
-            if (!empty($order['rest_bill'])) {
-                removeFileData($order['rest_bill']);
-            }
         }
 
         public function afterRemove($id)

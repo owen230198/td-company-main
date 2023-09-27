@@ -62,13 +62,12 @@
                         </div>
                     </div>
                     @if (\GroupUser::isSale() || \GroupUser::isTechApply() || \GroupUser::isAdmin())
-                        @include('view_update.view', [
-                            'name' => $pro_base_name_input.'[sale_shape_file]',
-                            'note' => 'Khuôn kinh doanh tính giá',
-                            'type' => 'file',
-                            'other_data' => ['role_update' => [\GroupUser::SALE]],
-                            'value' => @$product['sale_shape_file'] 
-                        ])
+                        @php
+                            $sale_shape_file = \App\Models\Product::SALE_SHAPE_FILE_FIELD;
+                            $sale_shape_file['name'] = $pro_base_name_input.'[sale_shape_file]';
+                            $sale_shape_file['value'] = @$product['sale_shape_file']; 
+                        @endphp
+                        @include('view_update.view', $sale_shape_file)
                     @endif
                     @if (!empty($order_get))
                         @include('orders.products.extend_info')   
