@@ -1,6 +1,8 @@
 @php
     $key_supp = \TDConst::PAPER;
     $paper_compen_percent = getDataConfig('QuoteConfig', 'COMPEN_PERCENT');
+    $paper_plus_direct = (int) getDataConfig('QuoteConfig', 'PLUS_DIRECT');
+    $paper_plus_to_per = (int) getDataConfig('QuoteConfig', 'PLUS_TO_PERCENT');
     $pro_paper_name = [
         'name' => 'product['.$pro_index.']['.$key_supp.']['.$supp_index.'][name]',
         'note' => 'Tên sản phẩm',
@@ -79,7 +81,7 @@
     @include('view_update.view', $pro_paper_name)
     
     @include('quotes.products.supplies.quantity_config', 
-    ['compen_percent' => $paper_compen_percent])
+    ['compen_percent' => $paper_compen_percent, 'plus_direct' => $paper_plus_direct, 'per_plus' =>$paper_plus_to_per])
     
     <div class="materal_paper_module">
         @include('view_update.view', $pro_paper_materals)

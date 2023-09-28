@@ -1,6 +1,8 @@
 <?php
     $key_supp = \TDConst::PAPER;
     $paper_compen_percent = getDataConfig('QuoteConfig', 'COMPEN_PERCENT');
+    $paper_plus_direct = (int) getDataConfig('QuoteConfig', 'PLUS_DIRECT');
+    $paper_plus_to_per = (int) getDataConfig('QuoteConfig', 'PLUS_TO_PERCENT');
     $pro_paper_name = [
         'name' => 'product['.$pro_index.']['.$key_supp.']['.$supp_index.'][name]',
         'note' => 'Tên sản phẩm',
@@ -79,7 +81,7 @@
     <?php echo $__env->make('view_update.view', $pro_paper_name, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     
     <?php echo $__env->make('quotes.products.supplies.quantity_config', 
-    ['compen_percent' => $paper_compen_percent], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    ['compen_percent' => $paper_compen_percent, 'plus_direct' => $paper_plus_direct, 'per_plus' =>$paper_plus_to_per], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     
     <div class="materal_paper_module">
         <?php echo $__env->make('view_update.view', $pro_paper_materals, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>

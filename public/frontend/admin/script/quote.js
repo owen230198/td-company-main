@@ -4,13 +4,15 @@ var changQtyInput = function(){
     let parent = $(this).closest('.quantity_supp_module');
     let qty_pro = parseInt(parent.find('input.pro_qty_input').val());
     let nqty = parseInt(parent.find('input.pro_nqty_input').val());
-    let qty_supp = Math.ceil(qty_pro/nqty)
+    let plus_direct = parent.data('direct');
+    let qty_supp = Math.ceil(qty_pro/nqty);
     let compen_percent = parent.data('percent');
-    let per_to_num = Math.ceil(qty_supp*compen_percent/100);
+    let plus_to_per = parent.data('perplus');
+    let per_to_num = Math.ceil(qty_supp*compen_percent/100) + plus_to_per;
     parent.find('input.compent_percent_input').val(per_to_num);
     let compen_plus = parseInt(parent.find('input.pro_compent_plus_input').val());
-    let addqty = per_to_num + compen_plus;
-    parent.find('input.supp_qty_input').val(qty_supp);
+    let addqty = per_to_num + compen_plus + plus_direct;
+    parent.find('input.supp_qty_input').val(qty_supp + plus_direct);
     parent.find('input.total_supp_qty_input').val(qty_supp+addqty);
     let plan_qty = parent.find('input.plan_input_supp_qty');
     if (plan_qty.length>0) {

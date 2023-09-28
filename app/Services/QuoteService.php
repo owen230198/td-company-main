@@ -180,7 +180,7 @@ class QuoteService extends BaseService
         }
         $data_product = $data['product'];
         foreach ($data_product as $key => $product) {
-            if (!empty($arr_quote)) {
+            if (!empty($arr_quote['id'])) {
                 $product['quote_id'] = $arr_quote['id'];
             }
             $product_process = $this->processProduct($product, $step, $key);

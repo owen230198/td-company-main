@@ -289,60 +289,56 @@ class OrderController extends Controller
     {
         $table_data = \DB::table($table)->where('id', $id);
         $obj_order = $table_data->first();
-        if (\GroupUser::isPlanHandle()) {
-            if ($obj_order->status != Order::TECH_SUBMITED) {
-                return returnMessageAjax(110, 'DỮ liệu trạng thái đơn hàng không hợp lệ !');
-            }
-            $elements = getProductElementData($obj_order->category, $obj_order->id, true);
-            $count = -1;
-            foreach ($elements as $element) {
-                if (!empty($element['data'])) {
-                    foreach ($element['data'] as $supply) {
-                        $table_supply = $element['table'];
-                        $data_command = getStageActiveStartHandle($table_supply, $supply->id);
-                        $type = $data_command['type'];
-                        $data_update['status'] = $type;
-                        if (!empty($data_update)) {
-                            $count++;
-                            $code =  $obj_order->code.getCharaterByNum($count);
-                            $update = getModelByTable($table_supply)->where('id', $supply->id)->update($data_update);
-                            $update = true;
-                            $data_handle = !empty($data_command['handle']) ? $data_command['handle'] : [];
-                            if ($type != \StatusConst::SUBMITED && $update && (int) @$data_handle['handle_qty'] > 0) {
-                                if ($type == \TDConst::FILL && !empty($data_handle['stage'])) {
-                                    $data_command['qty'] = $data_handle['handle_qty'];
-                                    foreach ($data_handle['stage'] as $fillkey => $stage) {
-                                        $data_command['name'] = $obj_order->name.'('.getFieldDataById('name', 'materals', @$stage['materal']).')';
-                                        $data_command['fill_handle'] = json_encode($stage);
-                                        $data_command['handle'] = $stage;
-                                        $data_command['machine_type'] = getFieldDataById('type', 'devices', $stage['machine']);
-                                        $data_command['fill_materal'] = $stage['materal'];
-                                        $fill_code = $code.''.getCharaterByNum($fillkey);
-                                        WSalary::commandStarted($fill_code, $data_command, $table_supply, $supply);
-                                    }
-                                }else{
-                                    if (!empty($data_handle['machine'])) {
-                                        $data_command['name'] = getNameCommandWorker($supply, $obj_order->name);
-                                        WSalary::CommandStarted($code, $data_command, $table_supply, $supply); 
-                                    }   
-                                }
+        if (!\GroupUser::isPlanHandle()) {
+            return returnMessageAjax(110, 'Bạn không có quyền duyệt sản xuất !');     
+        }
+        if ($obj_order->status != Order::TECH_SUBMITED) {
+            return returnMessageAjax(110, 'Dữ liệu không hợp lệ !');
+        }
+        $elements = getProductElementData($obj_order->category, $obj_order->id, true);
+        $count = -1;
+        foreach ($elements as $element) {
+            if (!empty($element['data'])) {
+                foreach ($element['data'] as $supply) {
+                    $table_supply = $element['table'];
+                    $data_command = getStageActiveStartHandle($table_supply, $supply->id);
+                    $type = $data_command['type'];
+                    $data_update['status'] = $type;
+                    $count++;
+                    $code =  $obj_order->code.getCharaterByNum($count);
+                    $update = getModelByTable($table_supply)->where('id', $supply->id)->update($data_update);
+                    $data_handle = !empty($data_command['handle']) ? $data_command['handle'] : [];
+                    if ($type != \StatusConst::SUBMITED && $update && (int) @$data_handle['handle_qty'] > 0) {
+                        if ($type == \TDConst::FILL && !empty($data_handle['stage'])) {
+                            $data_command['qty'] = $data_handle['handle_qty'];
+                            foreach ($data_handle['stage'] as $fillkey => $stage) {
+                                $data_command['name'] = $obj_order->name.'('.getFieldDataById('name', 'materals', @$stage['materal']).')';
+                                $data_command['fill_handle'] = json_encode($stage);
+                                $data_command['handle'] = $stage;
+                                $data_command['machine_type'] = getFieldDataById('type', 'devices', $stage['machine']);
+                                $data_command['fill_materal'] = $stage['materal'];
+                                $fill_code = $code.''.getCharaterByNum($fillkey);
+                                WSalary::commandStarted($fill_code, $data_command, $table_supply, $supply);
                             }
+                        }else{
+                            if (!empty($data_handle['machine'])) {
+                                $data_command['name'] = getNameCommandWorker($supply, $obj_order->name);
+                                WSalary::CommandStarted($code, $data_command, $table_supply, $supply); 
+                            }   
                         }
                     }
                 }
             }
-            if (!empty($update)) {
-                $arr_update = ['status' => Order::MAKING_PROCESS];
-                $table_data->update($arr_update);
-                if (checkUpdateOrderStatus($obj_order->order, Order::MAKING_PROCESS)) {
-                    Order::where('id', $obj_order->order)->update($arr_update);
-                }
-                return returnMessageAjax(200, 'Đã gửi lệnh sản xuất xuống xưởng !', getBackUrl());
-            }else{
-                return returnMessageAjax(100, 'Đã có lỗi xảy ra, vui lòng thử lại !');
+        }
+        if (!empty($update)) {
+            $arr_update = ['status' => Order::MAKING_PROCESS];
+            $table_data->update($arr_update);
+            if (checkUpdateOrderStatus($obj_order->order, Order::MAKING_PROCESS)) {
+                Order::where('id', $obj_order->order)->update($arr_update);
             }
+            return returnMessageAjax(200, 'Đã gửi lệnh sản xuất xuống xưởng !', getBackUrl());
         }else{
-            return returnMessageAjax(110, 'Bạn không có quyền duyệt sản xuất !');    
+            return returnMessageAjax(100, 'Đã có lỗi xảy ra, vui lòng thử lại !');
         } 
     }
 }

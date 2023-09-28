@@ -10,7 +10,7 @@ trait QPaperTrait
         $qttv = !empty($paper['qttv']) ? (float) $paper['qttv'] : 0;
         $price = !empty($paper['materal']) && $paper['materal'] != 'other' ? ((float) getFieldDataById('price', 'materals', $paper['materal'])) : 
                 (!empty($paper['unit_price']) ? (float) $paper['unit_price'] : 0);
-        $plus_paper = (float) getDataConfig('QuoteConfig', 'PLUS_PAPER');
+        $plus_paper = getPluspaperNumber();;
         $supp_qty = self::$supp_qty + $plus_paper;
         // Công thức tính chi phí khổ in : dài x rộng x định lượng x (số tờ in + 100) x ĐG
         $total = self::$length * self::$width * $qttv * $supp_qty * $price;
@@ -121,6 +121,7 @@ trait QPaperTrait
 
     private function getDataActionPaper($data)
     {
+        $data['supp_qty'] = !empty($data['supp_qty']) ? (int) $data['supp_qty'] - getPlusPaperNumber() : 0;
         $this->newObjectSetProperty($data);
         if (!empty($data['size'])) {
             $data_action['size'] = $this->configDataSizePaper($data['size']);

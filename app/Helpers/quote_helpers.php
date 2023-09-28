@@ -128,3 +128,10 @@
 			}
 		}
 	}
+
+	if (!function_exists('getPlusPaperNumber')) {
+		function getPlusPaperNumber()
+		{
+			return (int) getDataConfig('QuoteConfig', 'PLUS_DIRECT') + (int) getDataConfig('QuoteConfig', 'PLUS_TO_PERCENT');
+		}
+	}

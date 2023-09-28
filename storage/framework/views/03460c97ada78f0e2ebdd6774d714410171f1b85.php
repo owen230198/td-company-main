@@ -4,63 +4,65 @@
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
     <div class="position-relative">
-        <div class="quote_table_stage mb-4">
-            <table class="table table-bordered mb-1 quote_table_profit">
-                <thead>
-                    <tr>
-                        <th class="w_50">#</th>
-                        <th>Sản phẩm</th>
-                        <?php $__currentLoopData = $supply_fields; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $th): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <th><?php echo e(@$th['note']); ?></th>
-                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <?php if(\GroupUser::isAdmin()): ?>
+            <div class="quote_table_stage mb-4">
+                <table class="table table-bordered mb-1 quote_table_profit">
+                    <thead>
                         <tr>
-                            <td class="w_50"><?php echo e($key + 1); ?></td>
-                            <td><?php echo e($product['name']); ?></td>
-                            <?php
-                                $supply_product = \TDConst::HARD_ELEMENT;
-                            ?>
-                            <?php $__currentLoopData = $supply_product; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $supply): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <td>
-                                    <?php
-                                        $where = ['act' => 1, 'product' => $product['id']];
-                                        if ($supply['table'] == 'supplies') {
-                                            $where['type'] = $supply['pro_field'];
-                                        }
-                                        $data_supply = \DB::table($supply['table'])
-                                            ->where($where)
-                                            ->get()
-                                            ->toArray();
-                                        if (!empty($supply['device'])) {
-                                            $insert_device = ['size' => 'Vật tư'];
-                                            if ($supply['table'] == 'papers') {
-                                                $insert_device['print'] = 'Máy in';
-                                                $supply['device'] = $insert_device + $supply['device'];
-                                                $supply['device']['ext_price'] = 'Phát sinh';
-                                            }
-                                            if ($supply['table'] == 'supplies') {
-                                                $supply['device'] = $insert_device + $supply['device'];
-                                            }
-                                            if ($supply['table'] == 'fill_finishes') {
-                                                $supply['device'] = \TDConst::FILL_FINISH_STAGE;
-                                            }
-                                        }
-                                    ?>
-                                    <ul class="list_supplies">
-                                        <?php $__currentLoopData = $data_supply; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key_supp => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <?php echo $__env->make('quotes.profits.item', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                    </ul>
-                                </td>
+                            <th class="w_50">#</th>
+                            <th>Sản phẩm</th>
+                            <?php $__currentLoopData = $supply_fields; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $th): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <th><?php echo e(@$th['note']); ?></th>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </tr>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                </tbody>
-            </table>
-        </div>
+                    </thead>
+                    <tbody>
+                        <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <tr>
+                                <td class="w_50"><?php echo e($key + 1); ?></td>
+                                <td><?php echo e($product['name']); ?></td>
+                                <?php
+                                    $supply_product = \TDConst::HARD_ELEMENT;
+                                ?>
+                                <?php $__currentLoopData = $supply_product; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $supply): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <td>
+                                        <?php
+                                            $where = ['act' => 1, 'product' => $product['id']];
+                                            if ($supply['table'] == 'supplies') {
+                                                $where['type'] = $supply['pro_field'];
+                                            }
+                                            $data_supply = \DB::table($supply['table'])
+                                                ->where($where)
+                                                ->get()
+                                                ->toArray();
+                                            if (!empty($supply['device'])) {
+                                                $insert_device = ['size' => 'Vật tư'];
+                                                if ($supply['table'] == 'papers') {
+                                                    $insert_device['print'] = 'Máy in';
+                                                    $supply['device'] = $insert_device + $supply['device'];
+                                                    $supply['device']['ext_price'] = 'Phát sinh';
+                                                }
+                                                if ($supply['table'] == 'supplies') {
+                                                    $supply['device'] = $insert_device + $supply['device'];
+                                                }
+                                                if ($supply['table'] == 'fill_finishes') {
+                                                    $supply['device'] = \TDConst::FILL_FINISH_STAGE;
+                                                }
+                                            }
+                                        ?>
+                                        <ul class="list_supplies">
+                                            <?php $__currentLoopData = $data_supply; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key_supp => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <?php echo $__env->make('quotes.profits.item', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        </ul>
+                                    </td>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </tr>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    </tbody>
+                </table>
+            </div>
+        <?php endif; ?>
         <form action="<?php echo e(asset('profit-config-quote?quote_id=' . $data_quote['id'])); ?>" method="POST"
             class="baseAjaxForm config_content" enctype="multipart/form-data">
             <?php echo csrf_field(); ?>

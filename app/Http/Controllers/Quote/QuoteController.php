@@ -118,6 +118,9 @@ class QuoteController extends Controller
             }
         }else{
             $arr_quote = Quote::find($request->input('id'));
+            if (empty($arr_quote)) {
+                return customReturnMessage(false, $request->isMethod('POST'), ['message' => 'Báo giá không tồn tại hoặc đã bị xóa !']);
+            }
             if (!$request->isMethod('POST')) {
                 $data['title'] = 'Tạo mới báo giá - Chi tiết sản phẩm và sản xuất';
                 $data['data_quote'] = $arr_quote;
