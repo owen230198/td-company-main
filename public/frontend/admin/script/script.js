@@ -405,7 +405,7 @@ var confirmTakeOutSupply = function()
     });
 }
 
-var confirmTakeOutSupply = function()
+var confirmImportSupply = function()
 {
     $(document).on('click', '.__confirm_im_supp', function(event){
         event.preventDefault();

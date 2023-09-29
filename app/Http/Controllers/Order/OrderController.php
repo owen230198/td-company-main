@@ -251,14 +251,35 @@ class OrderController extends Controller
             $command = \DB::table('c_supplies');
             $data_command = $command->find($id);
             if (@$data_command->status != CSupply::HANDLING) {
-                return returnMessageAjax(110, 'Dữ liệu không hợp lệ!');
+                return returnMessageAjax(110, 'Dữ liệu không hợp lệ !');
             } 
-            $data_update = ['status' => CSupply::HANDLED, 
-                            'assign_by' => \User::getCurrent('id'), 
-                            'confirm_at' => \Carbon\Carbon::now()];
+            $table_warehouse = getTableWarehouseByType($data_command);
+            $ware_house_id = $data_command->size_type;
+            $data_warehouse = getModelByTable($table_warehouse)->find($data_command->size_type);
+            if (empty($data_warehouse)) {
+                return returnMessageAjax(110, 'Vật tư không có trong kho hoặc đã bị xóa !');    
+            }
+            $cr_qty = (int) $data_warehouse->qty;
+            $take_qty = (int) $data_command->qty;
+            if ($cr_qty < $take_qty) {
+                return returnMessageAjax(110, 'Vật tư trong kho không đủ để xuất ra, lên hệ gọi thêm vật tư để xử lí đơn này!');
+            }
+            $data_warehouse->qty = $cr_qty- $take_qty;
+            $data_warehouse->save();
+            $data_log['action'] = 'take_out';
+            $data_log['qty'] = $take_qty;
+            $data_log['target'] = $ware_house_id;
+            $data_log['old_qty'] = $cr_qty;
+            $data_log['new_qty'] = $data_warehouse->qty;
+            $data_log['table'] = $table_warehouse;
+            $data_log['product'] = $data_command->product;
+            $data_log['created_by'] = \User::getCurrent('id');
+            $data_log['created_at'] = date('Y-m-d H:i:s', Time()); 
+            \DB::table('warehouse_histories')->insert($data_log);
+            $data_update = ['status' => CSupply::HANDLED];
             $update = $command->where('id' , $id)->update($data_update);
             if ($update) {
-                return returnMessageAjax(200, 'Bạn đã xác nhận xuất vật tư!', \StatusConst::RELOAD);
+                return returnMessageAjax(200, 'Bạn đã xác nhận xuất '.$take_qty.' vật tư!', \StatusConst::RELOAD);
             }  
         }else{
             return returnMessageAjax(110, 'Bạn không có quyền duyệt xuất vật tư!');
