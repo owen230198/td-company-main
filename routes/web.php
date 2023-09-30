@@ -44,6 +44,7 @@ Route::middleware(['check_login'])->group(function () {
 	Route::get('get-device-by-type', [QuoteController::class, 'getDeviceByType']);
 	Route::get('warehouse-management', [AdminController::class, 'warehouseManagement']);
 	Route::get('get-all-supply-product', [AdminController::class, 'getAllSupplyProduct']);
+	Route::post('upload-chunnked-file', [AdminController::class, 'uploadChunnkedFile']);
 
 	//quotes routes
 	Route::any('create-quote', [QuoteController::class, 'createQuote']);

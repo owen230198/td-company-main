@@ -51,7 +51,7 @@
 
         const SALE_SHAPE_FILE_FIELD = [
             'note' => 'Khuôn kinh doanh tính giá',
-            'type' => 'file',
+            'type' => 'filev2',
             'other_data' => ['role_update' => [\GroupUser::SALE], 'field_name' => 'sale_shape_file'],
             'table_map' => 'products',
         ];
@@ -60,7 +60,7 @@
             'custom_design_file' =>
             [
                 'note' => 'File thiết kế khách gửi',
-                'type' => 'file',
+                'type' => 'filev2',
                 'table_map' => 'products',
                 'other_data' => ['role_update' => [\GroupUser::SALE], 'field_name' => 'custom_design_file'] 
             ],
@@ -157,10 +157,7 @@
             $role = [
                 \GroupUser::SALE => [
                     'insert' => 1,
-                    'view' => 
-                        [
-                            'with' => ['key' => 'created_by', 'value' => \User::getCurrent('id')],
-                        ],
+                    'view' => 1,
                     'clone' => 1
                 ],
                 \GroupUser::TECH_APPLY => [

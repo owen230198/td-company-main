@@ -75,6 +75,7 @@
     <script src="{{ asset('frontend/base/script/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('frontend/base/daterangepickers/moment.min.js') }}"></script>
     <script src="{{ asset('frontend/base/daterangepickers/daterangepicker.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/resumablejs@1.1.0/resumable.min.js"></script>
     <script src="{{ asset('frontend/admin/script/loading.js') }}"></script>
     <script src="{{ asset('frontend/base/script/script.js') }}"></script>
     <script src="{{ asset('frontend/admin/script/script.js') }}"></script>

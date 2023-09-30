@@ -1,8 +1,12 @@
 $.ajaxSetup({
 	headers: {
 		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-	}
-});
+}});
+
+var getCsrfToken = function()
+{
+	return $('meta[name="csrf-token"]').attr('content');
+}
 
 var getBaseRoute = function(route)
 {

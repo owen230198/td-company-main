@@ -5,6 +5,9 @@ use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Models\NTable;
 use App\Models\File;
+use Illuminate\Support\Facades\Storage;
+use Pion\Laravel\ChunkUpload\Handler\HandlerFactory;
+use Pion\Laravel\ChunkUpload\Receiver\FileReceiver;
 use Illuminate\Support\Facades\Schema;
 class AdminController extends Controller
 {
@@ -409,14 +412,7 @@ class AdminController extends Controller
             if (!empty($field)) {
                 $dir .= '/'.$field;
             }
-            $file_obj = File::where(['dir' =>$dir, 'name' => $name, 'ext_file' => $file_ext])->first();
-            if (!empty($file_obj)) {
-                $count = (int) $file_obj->count + 1;
-                $name = $name.'_'.$count;
-                $file_obj->count = $count;
-                $file_obj->save();
-            }
-            $name_upload = $name.'.'.$file_ext;
+            $name_upload = $this->admins->getNameFileUpload($dir, $name, $file_ext);
             $status = $file->move($dir ,$name_upload);
             $data['dir'] = $dir;
             $data['path'] = $dir.'/'.$name_upload;
@@ -432,6 +428,40 @@ class AdminController extends Controller
             }
         }
         return response()->json($data);
+    }
+
+    public function uploadChunnkedFile(Request $request)
+    {
+        $receiver = new FileReceiver('file', $request, HandlerFactory::classFromRequest($request));
+
+        if (!$receiver->isUploaded()) {
+            return returnMessageAjax(100, 'Không tìm thấy file upload!');
+        }
+        $fileReceived = $receiver->receive();
+        if ($fileReceived->isFinished()) {
+            $file = $fileReceived->getFile();
+            $file_ext = $file->getClientOriginalExtension();
+            $name = str_replace('.'.$file_ext, '', $file->getClientOriginalName());
+            $dir = 'storages/uploads';
+            $name_upload = $this->admins->getNameFileUpload($dir, $name, $file_ext, false);
+            $disk = Storage::disk(config('filesystems.default'));
+            $path = $disk->putFileAs('uploads', $file, $name_upload);
+            unlink($file->getPathname());
+            $data['dir'] = $dir;
+            $data['path'] = 'storage/' . $path;
+            $data['name'] = $name_upload;
+            $data['ext_file'] = $file_ext;
+            $this->admins->configBaseDataAction($data);
+            $insert_id = File::insertGetId($data);
+            $data['id'] = $insert_id;
+            return $data;
+        }
+        // otherwise return percentage informatoin
+        $handler = $fileReceived->handler();
+        return [
+            'done' => $handler->getPercentageDone(),
+            'status' => true
+        ];
     }
 
     

@@ -308,6 +308,7 @@ var initInputModuleAfterAjax = function(section)
     selectAjaxModule(section);
     multipleSelectModule(section);
     selectConfig(section);
+    fileProcessV2Module(section)
 }
 
 var fileProcessModule = function() {
@@ -533,6 +534,69 @@ var passwordChangeInput = function()
     });
 }
 
+var fileProcessV2Module = function(section = $('.base_content'))
+{
+    let file_uplaod_v2 = section.find('.__browse_file_v2_button');
+    if (file_uplaod_v2.length > 0) {
+        file_uplaod_v2.each(function(){
+            let browseFile = $(this);
+            let resumable = new Resumable({
+                target: getBaseRoute('upload-chunnked-file'),
+                query:{_token:getCsrfToken()} ,// CSRF token
+                headers: {
+                    'Accept' : 'application/json'
+                },
+                testChunks: false,
+                throttleProgressCallbacks: 1,
+            });
+    
+            resumable.assignBrowse(browseFile[0]);
+    
+            resumable.on('fileAdded', function (file) { // trigger when file picked
+                showProgress();
+                resumable.upload() // to actually start uploading.
+            });
+    
+            resumable.on('fileProgress', function (file) { // trigger when file progress update
+                updateProgress(Math.floor(file.progress() * 100));
+            });
+
+            let parent = $(this).closest('.file_upload_v2_module');
+            let progress = parent.find('.progress');
+
+            resumable.on('fileSuccess', function (file, response) { // trigger when file upload complete
+                data = JSON.parse(response);
+                let value = '{"id":"'+data.id+'","dir":"'+data.dir+'","path":"'+data.path+'","name":"'+data.name+'"}'
+                let input_value = parent.find('input.__file_value');
+                input_value.val(value);
+                parent.find('.__file_preview').fadeIn(200);
+                if (data.name.length > 18) {
+                    parent.find('.__file_name').text(data.name.substr(0,18)+'...  ');
+                }else{
+                    parent.find('.__file_name').text(data.name);
+                } 
+                progress.hide();
+            });
+    
+            resumable.on('fileError', function (file, response) { // trigger when there is any error
+                swal('Không thành công', 'Lỗi không thể upload file', 'error');
+            });
+    
+            function showProgress() {
+                progress.find('.progress-bar').css('width', '0%');
+                progress.find('.progress-bar').html('0%');
+                progress.find('.progress-bar').removeClass('bg-success');
+                progress.show();
+            }
+    
+            function updateProgress(value) {
+                progress.find('.progress-bar').css('width', `${value}%`)
+                progress.find('.progress-bar').html(`${value}%`)
+            }
+        })
+    }
+}
+
 $(function () {
     submitActionAjaxForm();
     confirmRemoveData();
@@ -558,4 +622,5 @@ $(function () {
     selectTypeWorker();
     passwordChangeInput();
     moduleSelectStyleProduct();
+    fileProcessV2Module();
 });

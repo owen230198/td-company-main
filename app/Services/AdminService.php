@@ -163,6 +163,21 @@ class AdminService extends BaseService
         }
     }
 
+    public function getNameFileUpload($dir, $name, $file_ext, $get_ext = false)
+    {
+        $file_obj = \App\Models\File::where(['dir' =>$dir, 'name' => $name, 'ext_file' => $file_ext])->first();
+        if (!empty($file_obj)) {
+            $count = (int) $file_obj->count + 1;
+            $name .= '('.$count.')';
+            $file_obj->count = $count;
+            $file_obj->save();
+        }
+        if ($get_ext) {
+            $name .= '.'.$file_ext;
+        }
+        return $name;
+    }
+
     public function doInsertTable($table, $data)
     {
         $model = getModelByTable($table);

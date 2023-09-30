@@ -50,10 +50,13 @@
                                 ['key' => 'assign_by', 'value' => \User::getCurrent('id')]
                             ]
                     ]
+                ],
+                \GroupUser::TECH_APPLY => [
+                    'view' => 1
                 ]
             ];
             return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];
-        }    
+        }      
     }
     
 ?>
