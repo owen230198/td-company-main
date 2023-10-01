@@ -43,7 +43,7 @@
                             [
                                 'name' => $pro_base_name_input.'[sale_shape_file]',
                                 'note' => 'Khuôn kinh doanh tính giá',
-                                'type' => 'file',
+                                'type' => 'filev2',
                                 'other_data' => ['role_update' => [\GroupUser::SALE]],
                                 'value' => @$product['sale_shape_file'] 
                             ],

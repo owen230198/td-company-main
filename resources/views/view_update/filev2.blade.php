@@ -1,4 +1,4 @@
-<div class="form-control file_upload_v2_module">
+<div class="file_upload_v2_module">
     <div id="upload-container" class="text-center d-flex align-items-center">
         <input type="hidden" name="{{ @$name }}" value="{{ @$value }}" class="__file_value">
         @include('view_table.file')

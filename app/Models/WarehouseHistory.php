@@ -26,7 +26,7 @@ class WarehouseHistory extends Model
     const FIELD_BILL = [
         'name' => 'bill',
         'note' => 'Hóa đơn thanh toán',
-        'type' => 'file',
+        'type' => 'filev2',
     ];
 
     const FIELD_INSERT = [

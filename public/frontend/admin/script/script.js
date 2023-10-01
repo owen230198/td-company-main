@@ -549,7 +549,6 @@ var fileProcessV2Module = function(section = $('.base_content'))
                 testChunks: false,
                 throttleProgressCallbacks: 1,
             });
-    
             resumable.assignBrowse(browseFile[0]);
     
             resumable.on('fileAdded', function (file) { // trigger when file picked

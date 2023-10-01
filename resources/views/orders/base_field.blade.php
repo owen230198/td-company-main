@@ -42,7 +42,7 @@
             [
                 'name' => 'order[rest_bill]',
                 'note' => 'File bill tạm ứng',
-                'type' => 'file',
+                'type' => 'filev2',
                 'table_map' => 'orders',
                 'field_name' => 'rest_bill',
                 'other_data' => ['role_update' => [\GroupUser::SALE], 'field_name' => 'rest_bill'],

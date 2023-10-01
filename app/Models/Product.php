@@ -67,28 +67,28 @@
             'tech_shape_file' =>
             [
                 'note' => 'Khuôn sản xuất (Kỹ thuật)',
-                'type' => 'file',
+                'type' => 'filev2',
                 'table_map' => 'products',
                 'other_data' => ['role_update' => [\GroupUser::TECH_APPLY], 'field_name' => 'tech_shape_file']
             ],
             'design_file' =>
             [
                 'note' => 'File gốc (P. Thiết kế)',
-                'type' => 'file',
+                'type' => 'filev2',
                 'table_map' => 'products',
                 'other_data' => ['role_update' => [\GroupUser::DESIGN], 'field_name' => 'design_file']
             ],
             'design_shape_file' =>
             [
                 'note' => 'File bình theo khuôn (P. Thiết kế)',
-                'type' => 'file',
+                'type' => 'filev2',
                 'table_map' => 'products',
                 'other_data' => ['role_update' => [\GroupUser::DESIGN], 'field_name' => 'design_shape_file']
             ],
             'handle_shape_file' =>
             [
                 'note' => 'Khuôn ép nhũ, thúc nổi, in UV',
-                'type' => 'file',
+                'type' => 'filev2',
                 'table_map' => 'products',
                 'other_data' => ['role_update' => [\GroupUser::TECH_HANDLE], 'field_name' => 'handle_shape_file']
             ]

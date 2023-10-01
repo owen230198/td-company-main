@@ -325,7 +325,7 @@ a.device_supp_item {
 }
 
 .file_upload_v2_module{
-    padding: 0;
+    min-width: 330px;
 }
 
 .__browse_file_v2_button{

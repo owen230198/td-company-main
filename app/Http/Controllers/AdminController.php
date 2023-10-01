@@ -412,7 +412,7 @@ class AdminController extends Controller
             if (!empty($field)) {
                 $dir .= '/'.$field;
             }
-            $name_upload = $this->admins->getNameFileUpload($dir, $name, $file_ext);
+            $name_upload = getNameFileUpload($dir, $name, $file_ext, true, false);
             $status = $file->move($dir ,$name_upload);
             $data['dir'] = $dir;
             $data['path'] = $dir.'/'.$name_upload;
@@ -442,14 +442,14 @@ class AdminController extends Controller
             $file = $fileReceived->getFile();
             $file_ext = $file->getClientOriginalExtension();
             $name = str_replace('.'.$file_ext, '', $file->getClientOriginalName());
-            $dir = 'storages/uploads';
-            $name_upload = $this->admins->getNameFileUpload($dir, $name, $file_ext, false);
+            $dir = File::STORAGE_DIR;
+            $name = getNameFileUpload($dir, $name, $file_ext, true);
             $disk = Storage::disk(config('filesystems.default'));
-            $path = $disk->putFileAs('uploads', $file, $name_upload);
+            $path = $disk->putFileAs('uploads', $file, $name);
             unlink($file->getPathname());
             $data['dir'] = $dir;
             $data['path'] = 'storage/' . $path;
-            $data['name'] = $name_upload;
+            $data['name'] = $name;
             $data['ext_file'] = $file_ext;
             $this->admins->configBaseDataAction($data);
             $insert_id = File::insertGetId($data);

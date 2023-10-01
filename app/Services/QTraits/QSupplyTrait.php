@@ -91,6 +91,7 @@ trait QSupplyTrait{
       $magnet['qttv_price'] = $qttv_price;
       $magnet['magnet_perc'] = $magnet_perc;
       $qty = !empty($magnet['qty']) ? $magnet['qty'] : 0; 
+      //CT tính chi phí nam châm: (SL sản phẩm x ĐG nam châm) x (Số viên nam châm x 1.5);
       $total = (self::$base_qty_pro * $qttv_price) * (($qty * $magnet_perc));
       $magnet['qty_pro'] = self::$base_qty_pro;
       return $this->getObjectConfig($magnet, $total);

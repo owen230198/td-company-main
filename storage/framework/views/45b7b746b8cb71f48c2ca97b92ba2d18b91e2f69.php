@@ -35,7 +35,7 @@
             [
                 'name' => 'order[rest_bill]',
                 'note' => 'File bill tạm ứng',
-                'type' => 'file',
+                'type' => 'filev2',
                 'table_map' => 'orders',
                 'field_name' => 'rest_bill',
                 'value' => @$data_order['rest_bill']

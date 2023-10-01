@@ -213,3 +213,22 @@ if (!function_exists('logActionUserData')) {
         }           
     }
 }
+
+if (!function_exists('getNameFileUpload')) {
+    function getNameFileUpload($dir, $name, $file_ext, $update_count = false, $get_ext = false)
+    {
+        $file_obj = \App\Models\File::where(['dir' =>$dir, 'name' => $name, 'ext_file' => $file_ext])->first();
+        if (!empty($file_obj)) {
+            $count = $update_count ? (int) $file_obj->count + 1 : (int) $file_obj->count;
+            $name .= '('.$count.')';
+            if ($update_count) {
+                $file_obj->count = $count;
+                $file_obj->save();
+            }
+        }
+        if ($get_ext) {
+            $name .= '.'.$file_ext;
+        }
+        return $name;
+    }
+}
