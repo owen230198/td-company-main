@@ -553,6 +553,7 @@ var fileProcessV2Module = function(section = $('.base_content'))
     
             resumable.on('fileAdded', function (file) { // trigger when file picked
                 showProgress();
+                $('#loader').fadeIn(200);
                 resumable.upload() // to actually start uploading.
             });
     
@@ -569,6 +570,7 @@ var fileProcessV2Module = function(section = $('.base_content'))
                 let input_value = parent.find('input.__file_value');
                 input_value.val(value);
                 parent.find('.__file_preview').fadeIn(200);
+                $('#loader').delay(200).fadeOut(500); 
                 if (data.name.length > 18) {
                     parent.find('.__file_name').text(data.name.substr(0,18)+'...  ');
                 }else{
