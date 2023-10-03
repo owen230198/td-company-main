@@ -448,7 +448,7 @@ class AdminController extends Controller
             $path = $disk->putFileAs('uploads', $file, $name);
             unlink($file->getPathname());
             $data['dir'] = $dir;
-            $data['path'] = 'storage/' . $path;
+            $data['path'] = 'storage/app/public/' . $path;
             $data['name'] = $name;
             $data['ext_file'] = $file_ext;
             $this->admins->configBaseDataAction($data);

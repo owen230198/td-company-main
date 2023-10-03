@@ -1,0 +1,1 @@
+<?php /**PATH /home/dell/Desktop/code/td-company-app/resources/views/quotes/profits/papers/ext_price.blade.php ENDPATH**/ ?>

@@ -1,0 +1,2 @@
+<textarea class="form-control<?php echo e(@$attr['inject_class'] ? ' '.$attr['inject_class'] : ''); ?>" 
+name="<?php echo e($name); ?>" <?php echo e(@$attr['disable_field'] == 1 ? 'disabled' : ''); ?>><?php echo e(@$value); ?></textarea><?php /**PATH /home/dell/Desktop/code/td-company-app/resources/views/view_update/textarea.blade.php ENDPATH**/ ?>

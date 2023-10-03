@@ -5,7 +5,7 @@
 <div class="d-flex align-items-center justify-content-center">
     <div class="__file_preview m-2 p-2 border_main text-center radius_5" style="display:{{ $file_exists ? 'block' : 'none' }}">
         <i class="fa fa-file-archive-o fs-30" aria-hidden="true"></i>
-        <p class="fs-13 font_bold __file_name">{{ mb_strimwidth(@$file['name'], 0, 18, '...') }}</p>
+        <p class="fs-13 font_bold __file_name">{{ @$file['name'] }}</p>
     </div>
     @if ($file_exists)
         <a href="{{ url('file-download?path='.@$file['path']) }}" title = "{{ @$file['name'] }}"
