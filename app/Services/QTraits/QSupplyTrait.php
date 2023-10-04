@@ -35,7 +35,7 @@ trait QSupplyTrait{
    private function configDataFill($fill)
    {
       $fill['qty_pro'] = self::$base_qty_pro;
-      $fill['handle_qty'] = self::$base_qty_pro;
+      $fill['handle_qty'] = self::$handle_product;
       $fill_cost = 0;
       $stage = !empty($fill['stage']) ? $fill['stage'] : [];
       foreach ($stage as $key => $item) {
@@ -77,7 +77,7 @@ trait QSupplyTrait{
       $ext_price = !empty($finish['ext_price']) ? (float) $finish['ext_price'] : 0;
       $total = $finish_cost + ($ext_price *self::$base_qty_pro);
       $finish['qty_pro'] = self::$base_qty_pro;
-      $finish['handle_qty'] = self::$base_qty_pro;
+      $finish['handle_qty'] = self::$handle_product;
       $finish['finish_cost'] = $finish_cost;
       return $this->getObjectConfig($finish, $total);
    }

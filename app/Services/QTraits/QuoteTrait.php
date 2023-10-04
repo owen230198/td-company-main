@@ -12,6 +12,8 @@ trait QuoteTrait
     static $qty_paper = 0;
     static $base_supp_qty = 0;
     static $supp_qty = 0;
+    static $handle_qty = 0;
+    static $handle_product = 0;
     static $length = 0;
     static $width = 0;
 
@@ -19,10 +21,13 @@ trait QuoteTrait
     {
         $plus_compen_perc = (float) getDataConfig('QuoteConfig', 'COMPEN_PERCENT_PRO');
         static::$base_qty_pro = !empty($data['qty']) ? (int) $data['qty'] : 0;
-        static::$qty_pro = ceil(calValuePercentPlus(self::$base_qty_pro, self::$base_qty_pro, $plus_compen_perc)); 
+        static::$qty_pro = ceil(calValuePercentPlus(self::$base_qty_pro, self::$base_qty_pro, $plus_compen_perc));
         static::$nqty = !empty($data['nqty']) ? (int) $data['nqty'] : 1;
         static::$base_supp_qty = !empty($data['base_supp_qty']) ? (int) $data['base_supp_qty'] : 0;
         static::$supp_qty = !empty($data['supp_qty']) ? (int) $data['supp_qty'] : 0;
+        $plus_to_worker = (int) getDataConfig('QuoteConfig', 'PLUS_TO_DEVICE_WORKER');
+        static::$handle_qty = self::$base_supp_qty + $plus_to_worker;
+        static::$handle_product =  self::$base_qty_pro + $plus_to_worker;
         $length = !empty($data['size']['length']) ? $data['size']['length'] : 0;
         $width = !empty($data['size']['width']) ? $data['size']['width'] : 0;
         convertCmToMeter($length, $width);
@@ -58,7 +63,7 @@ trait QuoteTrait
             unset($elevate['float']);
         }
         $elevate['supp_qty'] = self::$supp_qty;
-        $elevate['handle_qty'] = self::$supp_qty;
+        $elevate['handle_qty'] = self::$handle_qty;
         $elevate['cost'] = $cost;
         $total = $cost + $float_cost + $ext_price;
         return $this->getObjectConfig($elevate, $total);
@@ -68,7 +73,7 @@ trait QuoteTrait
    {
       $total = $this->getBaseTotalStage(self::$supp_qty, $model_price, $work_price, $shape_price);
       $cut['supp_qty'] = self::$supp_qty;
-      $cut['handle_qty'] = self::$supp_qty;
+      $cut['handle_qty'] = self::$handle_qty;
       return $this->getObjectConfig($cut, $total);
    }
 
@@ -76,7 +81,7 @@ trait QuoteTrait
     {
         $nqty = !empty($data['nqty']) ? (int) $data['nqty'] : 1;
         $data['qty_pro'] = self::$qty_pro;
-        $data['handle_qty'] = self::$qty_pro;
+        $data['handle_qty'] = self::$handle_product;
         if ($nqty > 1) {
             $data['nqty'] = $nqty;
         }
@@ -146,7 +151,7 @@ trait QuoteTrait
       $factor = !empty($supp_name->factor) ? $supp_name->factor : 1;
       $data['qty_pro'] = self::$qty_pro;
       $data['factor'] = $factor; 
-      $data['handle_qty'] = self::$qty_pro;
+      $data['handle_qty'] = self::$handle_product;
       $total = $this->getBaseTotalStage(self::$qty_pro, $model_price, $work_price, $shape_price, 0, $factor);
       return $this->getObjectConfig($data, $total);
     }

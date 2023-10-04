@@ -46,7 +46,7 @@ trait QPaperTrait
             $total = Paper::getPrintFormula($type, $supp_qty, (int) $color, $work_price, $shape_price, $model_price);
         }
         $print['supp_qty'] = $supp_qty;
-        $print['handle_qty'] = self::$supp_qty;
+        $print['handle_qty'] = self::$handle_qty;
         $print['model_price'] = $model_price;
         $print['work_price'] = $work_price;
         $print['shape_price'] = $shape_price;
@@ -62,7 +62,7 @@ trait QPaperTrait
         $total = $this->getBaseTotalStage(self::$supp_qty, $model_price, $work_price, $shape_price, $materal_cost, $num_face);
         // $total = $length*$width*$materal_cost*$supp_qty*$num_face+$shape_price;
         $uv_nilon['supp_qty'] = self::$supp_qty;
-        $uv_nilon['handle_qty'] = self::$supp_qty;
+        $uv_nilon['handle_qty'] = self::$handle_qty;
         $uv_nilon['materal_price'] = $materal_cost;
         return $this->getObjectConfig($uv_nilon, $total);
     }
@@ -77,7 +77,7 @@ trait QPaperTrait
         $total_metalai = $this->getBaseTotalStage($supp_qty, $model_price, $work_price, $shape_price, $materal_cost, 
         $num_face);
         $metalai['supp_qty'] = $supp_qty;
-        $metalai['handle_qty'] = self::$supp_qty;
+        $metalai['handle_qty'] = self::$handle_qty;
         $metalai['cover_supp_qty'] = $supp_qty;
         $metalai['materal_price'] = $materal_cost;
         $metalai['metalai_price'] = $total_metalai;
@@ -102,7 +102,7 @@ trait QPaperTrait
         // Công thức tính chi phí ép nhũ - thúc nổi : chi phí cán metalai + chi phí cán phủ trên
         $total = (self::$qty_pro * $price) + (self::$nqty * $shape_price);
         $compress_float['qty_pro'] = self::$qty_pro;
-        $compress_float['handle_qty'] = self::$supp_qty;
+        $compress_float['handle_qty'] = self::$handle_qty;
         $compress_float['nqty'] = self::$nqty;
         return !empty($get_total) ? $total : $this->getObjectConfig($compress_float, $total);
     }
@@ -122,6 +122,7 @@ trait QPaperTrait
     private function getDataActionPaper($data)
     {
         $data['supp_qty'] = !empty($data['supp_qty']) ? (int) $data['supp_qty'] - getPlusPaperNumber() : 0;
+        $data['base_supp_qty'] = !empty($data['base_supp_qty']) ? (int) $data['base_supp_qty'] - (int) getDataConfig('QuoteConfig', 'PLUS_TO_DEVICE_WORKER') : 0;
         $this->newObjectSetProperty($data);
         if (!empty($data['size'])) {
             $data_action['size'] = $this->configDataSizePaper($data['size']);
