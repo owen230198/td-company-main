@@ -45,6 +45,8 @@ Route::middleware(['check_login'])->group(function () {
 	Route::get('warehouse-management', [AdminController::class, 'warehouseManagement']);
 	Route::get('get-all-supply-product', [AdminController::class, 'getAllSupplyProduct']);
 	Route::post('upload-chunnked-file', [AdminController::class, 'uploadChunnkedFile']);
+	Route::any('change-password', [AuthController::class, 'changePassword']);
+	Route::any('account-detail', [AuthController::class, 'accountDetail']);
 
 	//quotes routes
 	Route::any('create-quote', [QuoteController::class, 'createQuote']);

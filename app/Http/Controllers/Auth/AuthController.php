@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Constants\StatusConstant;
 class AuthController extends Controller
 {
     /**
@@ -30,6 +29,37 @@ class AuthController extends Controller
     public function logout ()
     {
         return $this->services->baseLogout();
+    }
+
+    public function changePassword(Request $request){
+        return $this->services->baseChangePassword($request);
+    }
+
+    public function accountDetail(Request $request)
+    {
+        $current_user = \User::getCurrent();
+        $data_user = \User::find($current_user['id']);
+        if (!$request->isMethod('POST')) {
+            $data['title'] = 'Thông tin tài khoản của bạn';
+            $data['profile'] = $data_user;
+            return view('acount_detail', $data);
+        }else{
+            $email = $request->input('email');
+            $phone = $request->input('phone');
+            if (empty($email)) {
+                return returnMessageAjax(100, 'Bạn chưa nhập thông tin email!');
+            }
+
+            if (empty($phone)) {
+                return returnMessageAjax(100, 'Bạn chưa nhập thông tin Số điện thoại của bạn !');
+            }
+            $data_user->email = $email;
+            $data_user->phone = $phone;
+            $update = $data_user->save();
+            if ($update) {
+                return returnMessageAjax(200, 'Cập nhật thông tin thành công !');
+            }
+        }
     }
 }
 
