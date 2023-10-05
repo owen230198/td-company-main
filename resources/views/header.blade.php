@@ -11,7 +11,7 @@
         </p>
         <ul class="header_menu_user_list" style="display:none">
             <li>
-                <a href="{{ asset('profile') }}">Profile</a>
+                <a href="{{ asset('account-detail') }}">Profile</a>
             </li>
             <li>
                 <a href="{{ asset('logout') }}">Đăng xuất</a>

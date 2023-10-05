@@ -11,7 +11,7 @@
         </p>
         <ul class="header_menu_user_list" style="display:none">
             <li>
-                <a href="<?php echo e(asset('profile')); ?>">Profile</a>
+                <a href="<?php echo e(asset('account-detail')); ?>">Profile</a>
             </li>
             <li>
                 <a href="<?php echo e(asset('logout')); ?>">Đăng xuất</a>
