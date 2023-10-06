@@ -9,7 +9,7 @@ var orderLastSixMonthChart = function()
     var bar_chart = new Chart(bar_ctx, {
         type: 'bar',
         data: {
-            labels: ["Th 12", "Th 11", "th 10", "Th 9", "th 8", "th 7", "Th 6", "Th 5", "Th 4", "Th 3", "Th 2", "Th 1"],
+            labels: ["Th 1", "Th 2", "th 3", "Th 4", "th 5", "th 6", "Th 7", "Th 8", "Th 9", "Th 10", "Th 11", "Th 12"],
             datasets: [{
                 label: 'Số lượng đơn',
                 data: [200, 155, 180, 230, 70, 50, 340, 210, 110, 211, 40, 35],
