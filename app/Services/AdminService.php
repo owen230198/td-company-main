@@ -141,8 +141,10 @@ class AdminService extends BaseService
                     if (!empty($value['height'])) {
                         $product_obj->where('height', $value['height']);
                     }
-                    $arr_id = $product_obj->pluck('quote_id')->all();
-                    $where[] = ['key' => 'id', 'compare' => 'in', 'value' => array_unique($arr_id)];
+                    if (!empty($value['length']) || !empty($value['width']) || !empty($value['height'])) {
+                        $arr_id = $product_obj->pluck('quote_id')->all();
+                        $where[] = ['key' => 'id', 'compare' => 'in', 'value' => array_unique($arr_id)];
+                    }
                 }elseif ($type == 'datetime') {
                     $date_range = explode(' - ', $value);
                     if (is_array($date_range)){
