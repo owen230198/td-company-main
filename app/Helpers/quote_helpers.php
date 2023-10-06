@@ -86,7 +86,7 @@
 	if (!function_exists('refreshQuoteProfit')) {
 		function refreshQuoteProfit($arr_quote)
 		{
-			$update_quote = getProductTotalCost($arr_quote, 'total_cost');
+			$update_quote = getProductTotalCost($arr_quote);
 			$quote_total = $update_quote['total_cost'];
 			$quote_amount = (float) @$arr_quote['total_amount'];
 			if ($quote_total > 0) {
