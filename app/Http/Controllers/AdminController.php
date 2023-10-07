@@ -443,7 +443,7 @@ class AdminController extends Controller
             $file_ext = $file->getClientOriginalExtension();
             $name = str_replace('.'.$file_ext, '', $file->getClientOriginalName());
             $dir = File::STORAGE_DIR;
-            $name = getNameFileUpload($dir, $name, $file_ext, true);
+            $name = getNameFileUpload($dir, $name, $file_ext, true, true);
             $disk = Storage::disk(config('filesystems.default'));
             $path = $disk->putFileAs('uploads', $file, $name);
             unlink($file->getPathname());
