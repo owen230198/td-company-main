@@ -443,16 +443,18 @@ class AdminController extends Controller
             $file_ext = $file->getClientOriginalExtension();
             $name = str_replace('.'.$file_ext, '', $file->getClientOriginalName());
             $dir = File::STORAGE_DIR;
-            $name = getNameFileUpload($dir, $name, $file_ext, true, true);
+            $name_upload = getNameFileUpload($dir, $name, $file_ext, true, true);
             $disk = Storage::disk(config('filesystems.default'));
-            $path = $disk->putFileAs('uploads', $file, $name);
+            $path = $disk->putFileAs('uploads', $file, $name_upload);
             unlink($file->getPathname());
             $data['dir'] = $dir;
             $data['path'] = 'storage/app/public/' . $path;
-            $data['name'] = $name;
+            $data['name'] = $name_upload;
             $data['ext_file'] = $file_ext;
             $this->admins->configBaseDataAction($data);
-            $insert_id = File::insertGetId($data);
+            $data_insert = $data;
+            $data_insert['name'] = $name;
+            $insert_id = File::insertGetId($data_insert);
             $data['id'] = $insert_id;
             return $data;
         }
