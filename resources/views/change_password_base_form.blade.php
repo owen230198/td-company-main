@@ -14,7 +14,7 @@
             ],
             [
                 'name' => 'confirm_pass',
-                'note' => 'Xác nhận mật hẩu mới',
+                'note' => 'Xác nhận mật khẩu mới',
                 'attr' => ['type_input' => 'password']
             ],
         ]

@@ -356,7 +356,7 @@ class AdminController extends Controller
         }
         $label = $request->input('field_search');
         if (!empty($q)) {
-            $data = $data->where($label, 'like', $q);
+            $data = $data->where($label, 'like', '%'.$q.'%');
         }
         if (\Schema::hasColumn($table, 'ord')) {
             $data = $data->orderBy('ord', 'asc');

@@ -75,8 +75,11 @@
         ?>
         <?php echo $__env->make('view_update.view', $pro_paper_extend_name, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <?php endif; ?>
-    <h3 class="fs-14 text-uppercase border_top_eb pt-3 mt-3 text-center handle_title">
-        <span><?php echo e($supp_index == 0 ? 'Phần giấy in' : 'Lệnh in thêm thứ '.$supp_index); ?></span>
+    <h3 class="fs-14 text-uppercase border_top_eb pt-3 mt-3 mb-4 text-center handle_title d-flex align-items-center justify-content-center">
+        <span class="mr-2"><?php echo e($supp_index == 0 ? 'Phần giấy in' : 'Lệnh in thêm thứ '.$supp_index); ?></span>
+        <a href="<?php echo e(url('print-data/'.$supp_view.'/'.$supply_obj->id)); ?>" class="main_button color_white bg_green border_green radius_5 font_bold sooth">
+            <i class="fa fa-print mr-2 fs-14" aria-hidden="true"></i> In lệnh sản xuất
+        </a>
     </h3>
     <?php echo $__env->make('view_update.view', $pro_paper_name, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     
