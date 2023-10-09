@@ -79,7 +79,7 @@ class QuoteController extends Controller
             foreach ($data_products as $product) {
                 $product['quote_id'] = $quote_id;
                 $old_product_id = $product['id'];
-                unset($product['id'], $product['code'], $product['status']);
+                unset($product['id'], $product['code'], $product['status'], $product['order'], $product['order_created']);
                 $this->services->configBaseDataAction($product);
                 $product_id = Product::insertGetId($product);
                 //log insert product
