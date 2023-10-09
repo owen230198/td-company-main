@@ -75,12 +75,14 @@
         @endphp
         @include('view_update.view', $pro_paper_extend_name)
     @endif
-    <h3 class="fs-14 text-uppercase border_top_eb pt-3 mt-3 mb-4 text-center handle_title d-flex align-items-center justify-content-center">
-        <span class="mr-2">{{ $supp_index == 0 ? 'Phần giấy in' : 'Lệnh in thêm thứ '.$supp_index }}</span>
-        <a href="{{ url('print-data/'.$supp_view.'/'.$supply_obj->id) }}" target="_blank" class="main_button color_white bg_green border_green radius_5 font_bold sooth">
-            <i class="fa fa-print mr-2 fs-14" aria-hidden="true"></i> In lệnh sản xuất
-        </a>
-    </h3>
+    @if (!empty($supply_obj->id))
+        <h3 class="fs-14 text-uppercase border_top_eb pt-3 mt-3 mb-4 text-center handle_title d-flex align-items-center justify-content-center">
+            <span class="mr-2">{{ $supp_index == 0 ? 'Phần giấy in' : 'Lệnh in thêm thứ '.$supp_index }}</span>
+            <a href="{{ url('print-data/'.$supp_view.'/'.$supply_obj->id) }}" target="_blank" class="main_button color_white bg_green border_green radius_5 font_bold sooth">
+                <i class="fa fa-print mr-2 fs-14" aria-hidden="true"></i> In lệnh sản xuất
+            </a>
+        </h3>  
+    @endif
     @include('view_update.view', $pro_paper_name)
     
     @include('quotes.products.supplies.quantity_config', 
