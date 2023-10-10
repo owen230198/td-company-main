@@ -152,7 +152,9 @@ class QuoteService extends BaseService
             $data_action['note'] = json_encode($data['note']);
         }
         $data_action['detail'] = @$data['detail'];
-        
+        if (!empty($data['id'])) {
+            $data_action['id'] = $data['id'];
+        }
         $this->configBaseDataAction($data_action);
         return $data_action;
     }
