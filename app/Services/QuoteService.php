@@ -151,9 +151,7 @@ class QuoteService extends BaseService
         if (!empty($data['note'])) {
             $data_action['note'] = json_encode($data['note']);
         }
-        if (!empty($data['detail'])) {
-            $data_action['detail'] = $data['detail'];
-        }
+        $data_action['detail'] = @$data['detail'];
         
         $this->configBaseDataAction($data_action);
         return $data_action;
