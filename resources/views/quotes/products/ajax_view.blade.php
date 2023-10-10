@@ -50,6 +50,12 @@
                             'other_data' => ['data' => ['table' => 'product_styles']],
                             'value' => @$product['product_style']
                         ];
+                        $note_product_field = [
+                            'name' => $pro_base_name_input.'[detail]',
+                            'type' => 'textarea',
+                            'note' => 'Ghi chú',
+                            'value' => @$product['detail']
+                        ];
                     @endphp
 
                     @foreach ($arr_pro_field as $field)
@@ -69,6 +75,7 @@
                         @endphp
                         @include('view_update.view', $sale_shape_file)
                     @endif
+                    @include('view_update.view', $note_product_field)
                     @if (!empty($order_get))
                         @include('orders.products.extend_info')   
                     @endif

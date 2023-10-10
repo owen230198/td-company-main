@@ -2,7 +2,6 @@
 namespace App\Services;
 use App\Services\BaseService;
 use App\Models\Customer;
-use App\Models\Quote;
 use App\Models\Product;
 use App\Constants\StatusConstant;
 use App\Constants\TDConstant;
@@ -152,6 +151,9 @@ class QuoteService extends BaseService
         if (!empty($data['note'])) {
             $data_action['note'] = json_encode($data['note']);
         }
+        if (!empty($data['detail'])) {
+            $data_action['detail'] = $data['detail'];
+        }
         
         $this->configBaseDataAction($data_action);
         return $data_action;
@@ -257,23 +259,8 @@ class QuoteService extends BaseService
         if (!empty($main_paper['print'])) {
             $arr['paper_print_tech'] = getTextdataPaperStage(\TDConst::PRINT, @$main_paper['print']['machine']);
         }
-        $finish = '';
-        if (@$main_paper['nilon']['act'] == 1) {
-            $finish .= "+ Cán nilon: ".getTextdataPaperStage(\TDConst::NILON, $main_paper['nilon']);
-        }
-
-        if (@$main_paper['compress']['act'] == 1) {
-            $finish .= "+ ép nhũ theo maket";
-        }
-
-        if (@$main_paper['uv']['act'] == 1) {
-            $finish .= "+ in lưới UV ".mb_strtolower(getTextdataPaperStage(\TDConst::UV, $main_paper['uv']))." theo maket";
-        }
-
-        if (@$main_paper['float']['act'] == 1) {
-            $finish .= "+ thúc nổi sản phẩm";
-        }
-        $arr['paper_finish'] = $finish;
+        $arr['paper_finish'] = getTextQuoteFinish($main_paper);
+        $arr['product_detail'] = $product['detail'];
         $arr['pro_qty'] = @$product['qty'];
         $pro_cost = (int) $product['total_cost'] + (float) $arr_quote['ship_price'];
         $pro_total = calValuePercentPlus($product['total_cost'], $pro_cost, $arr_quote['profit']);
@@ -307,7 +294,8 @@ class QuoteService extends BaseService
         $user = getDetailDataByID('NUser', @$arr_quote['created_by']);
         $templateProcessor->setValue('user_name', @$user['name']);
         $templateProcessor->setValue('user_phone', @$user['phone']);
-        $fileName = date('m-d-Y', Time()).'_'.$arr_quote['seri'].'_'.getFieldDataById('name', 'products', $products[0]['id']).'_'.$arr_quote['name'].".docx";
+        // $fileName = date('m-d-Y', Time()).'_'.$arr_quote['seri'].'_'.getFieldDataById('name', 'products', $products[0]['id']).'_'.$arr_quote['name'].".docx";
+        $fileName = date('m-d-Y', Time()).'_'.$arr_quote['seri'].".docx";
         $fileStorage = public_path($fileName);
         $templateProcessor->saveAs($fileStorage);
         return response()->download($fileStorage);

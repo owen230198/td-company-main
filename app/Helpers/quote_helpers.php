@@ -135,3 +135,26 @@
 			return (int) getDataConfig('QuoteConfig', 'PLUS_DIRECT') + (int) getDataConfig('QuoteConfig', 'PLUS_TO_PERCENT');
 		}
 	}
+
+	if (!function_exists('getTextQuoteFinish')) {
+		function getTextQuoteFinish($data)
+		{
+			$text = '';
+			if (@$data['nilon']['act'] == 1) {
+				$text .= "+ Cán nilon: ".getTextdataPaperStage(\TDConst::NILON, $data['nilon']);
+			}
+
+			if (@$data['compress']['act'] == 1) {
+				$text .= "+ ép nhũ theo maket";
+			}
+
+			if (@$data['uv']['act'] == 1) {
+				$text .= "+ in lưới UV ".mb_strtolower(getTextdataPaperStage(\TDConst::UV, $data['uv']))." theo maket";
+			}
+
+			if (@$data['float']['act'] == 1) {
+				$text .= "+ thúc nổi sản phẩm";
+			}
+			return $text;
+		}
+	}

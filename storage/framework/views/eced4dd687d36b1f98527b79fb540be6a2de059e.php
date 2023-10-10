@@ -50,6 +50,12 @@
                             'other_data' => ['data' => ['table' => 'product_styles']],
                             'value' => @$product['product_style']
                         ];
+                        $note_product_field = [
+                            'name' => $pro_base_name_input.'[detail]',
+                            'type' => 'textarea',
+                            'note' => 'Ghi chú',
+                            'value' => @$product['detail']
+                        ];
                     ?>
 
                     <?php $__currentLoopData = $arr_pro_field; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $field): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -69,6 +75,7 @@
                         ?>
                         <?php echo $__env->make('view_update.view', $sale_shape_file, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                     <?php endif; ?>
+                    <?php echo $__env->make('view_update.view', $note_product_field, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                     <?php if(!empty($order_get)): ?>
                         <?php echo $__env->make('orders.products.extend_info', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>   
                     <?php endif; ?>

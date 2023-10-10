@@ -43,31 +43,22 @@
                             </span>
                         </p>    
                     @endif
-                    <p class="mb-1">
-                        <span class="font_bold mr-1"><i class="dot"></i> Hoàn thiện: </span>
-                        <span class="font-italic">
-                            @if (@$main_paper['nilon']['act'] == 1)
-                                + Cán nilon: {{ getFieldDataById('name', 'materals', @$main_paper['nilon']['materal']).' '. $main_paper['nilon']['face'] . ' mặt ' }} 
-                            @endif
-
-                            @if (@$main_paper['compress']['act'] == 1)
-                                + ép nhũ theo maket
-                            @endif
-                            
-                            @if (@$main_paper['uv']['act'] == 1)
-                                + in lưới UV {{ mb_strtolower(getFieldDataById('name', 'materals', $main_paper['uv']['materal'])) }} theo maket   
-                            @endif
-
-                            @if (!empty($main_paper['float']))
-                                + thúc nổi sản phẩm
-                            @endif
-                        </span>
-                    </p>
-                    @if (!empty($main_paper['main_paper']['note']))
+                    @php
+                        $finish_info = getTextQuoteFinish($main_paper)
+                    @endphp
+                    @if (!empty($finish_info))
+                        <p class="mb-1">
+                            <span class="font_bold mr-1"><i class="dot"></i> Hoàn thiện: </span>
+                            <span class="font-italic">
+                                {{ $finish_info }}    
+                            </span>
+                        </p>
+                    @endif
+                    @if (!empty($product['detail']))
                         <p class="mb-1">
                             <span class="font_bold mr-1"><i class="dot"></i> Ghi chú: </span>
                             <span class="font-italic">
-                                {{ $main_paper['main_paper']['note'] }}
+                                {{ $product['detail'] }}
                             </span>
                         </p>
                     @endif
