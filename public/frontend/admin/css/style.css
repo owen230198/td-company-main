@@ -343,6 +343,15 @@ a.device_supp_item {
     background-color: #459300;
 }
 
+/* print data style  */
+.header_printdata_logo img{
+    max-width: 220px;
+}
+
+.w_60{
+    width: 60px;
+}
+
 @page {
     size: A4;
     margin: 1cm;

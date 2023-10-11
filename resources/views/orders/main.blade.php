@@ -28,9 +28,11 @@
                     {{ $stage_button }}
                 </button> 
             @endif
-            <button type="button" class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-2">
-                <i class="fa fa-print mr-2 fs-14" aria-hidden="true"></i>In đơn
-            </button>
+            @if (!empty($data_order['id']))
+                <a href="{{ url('print-data/orders/'.$data_order['id']) }}" target="_blank" class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-2">
+                    <i class="fa fa-print mr-2 fs-14" aria-hidden="true"></i>In đơn
+                </a>
+            @endif
             <a href="{{ url('') }}" class="main_button bg_red color_white radius_5 font_bold smooth red_btn">
               <i class="fa fa-times mr-2 fs-14" aria-hidden="true"></i>Hủy
             </a>

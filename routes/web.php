@@ -74,6 +74,7 @@ Route::middleware(['check_login'])->group(function () {
 	Route::get('select-supply-warehouse/{table}', [OrderController::class, 'selectSupplyWarehouse']);
 	Route::get('add-select-supply-handle', [OrderController::class, 'addSelectSupplyHandle']);
 	Route::get('list-supply-process', [ProductController::class, 'listSupplyProcess']);
+	Route::get('print-data/{table}/{id}', [OrderController::class, 'printData']);
 });
 $modules_path = dirname(__DIR__) . '/app/Modules/';
 if (is_dir($modules_path)) {
