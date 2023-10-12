@@ -352,6 +352,10 @@ a.device_supp_item {
     width: 60px;
 }
 
+.bg_pink{
+    background: #ffc5cf;
+}
+
 @page {
     size: A4;
     margin: 1cm;

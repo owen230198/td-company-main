@@ -262,11 +262,9 @@ class QuoteService extends BaseService
         $arr['paper_finish'] = getTextQuoteFinish($main_paper);
         $arr['product_detail'] = $product['detail'];
         $arr['pro_qty'] = @$product['qty'];
-        $pro_cost = (int) $product['total_cost'] + (float) $arr_quote['ship_price'];
-        $pro_total = calValuePercentPlus($product['total_cost'], $pro_cost, $arr_quote['profit']);
-        $each_price = $pro_total / (int) @$product['qty'];
+        $each_price = $product['total_amount'] / (int) @$product['qty'];
         $arr['pro_price'] = number_format($each_price);
-        $arr['pro_total'] = number_format(round($pro_total, -3));
+        $arr['pro_total'] = number_format(round($product['total_amount'], -3));
         return $arr;
     }
 

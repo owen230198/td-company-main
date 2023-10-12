@@ -66,12 +66,10 @@
                 <td data-label="DVT" class="text-center table_style">Sản phẩm</td>
                 <td data-label="SL" class="text-center table_style">{{ @$product['qty'] }}</td>
                 @php
-                    $price = (int) $product['total_cost']+(float)$data_quote['ship_price'];
-                    $total_cost = calValuePercentPlus($product['total_cost'], $price, (float)$data_quote['profit']);
-                    $each_price = $total_cost / (int) @$product['qty'];
+                    $each_price = (int) $product['total_amount'] / (int) @$product['qty']
                 @endphp
                 <td data-label="ĐG" class="text-center table_style">{{ number_format($each_price) }} đ</td>
-                <td data-label="T.Tiền(VNĐ)" class="text-center table_style">{{ number_format(round((int)$total_cost, -3)) }} đ</td>
+                <td data-label="T.Tiền(VNĐ)" class="text-center table_style">{{ number_format(round($product['total_amount'], -3)) }} đ</td>
             </tr>
         @endforeach
     </tbody>
