@@ -150,6 +150,7 @@
                     $admin->removeDataTable($table, $obj->id);
                 }
             }
+            WSalary::where('status', '!=', \StatusConst::SUBMITED)->where('product', $id)->delete();
         }
         
         static function getRole()

@@ -327,6 +327,7 @@
                         $data_update['status'] = $type;
                         $count++;
                         $code =  $obj_order->code.getCharaterByNum($count);
+                        $data_update['code'] = $code;
                         $update = getModelByTable($table_supply)->where('id', $supply->id)->update($data_update);
                         $data_handle = !empty($data_command['handle']) ? $data_command['handle'] : [];
                         if ($type != \StatusConst::SUBMITED && $update && (int) @$data_handle['handle_qty'] > 0) {
