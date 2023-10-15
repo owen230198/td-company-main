@@ -133,8 +133,6 @@
             if (!$products->isEmpty()) {
                 $admin = new \App\Services\AdminService;
                 foreach ($products as $product) {
-                    Quote::where('id', $product->quote_id)->delete();
-                    Order::where('id', $product->order)->delete();
                     $admin->removeDataTable('products', $product['id']);       
                 }
             }

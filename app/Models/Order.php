@@ -69,7 +69,13 @@
 
         public function afterRemove($id)
         {
-            Product::removeData(['order' => $id]);    
+            $products = Product::where(['order' => $id])->get();
+            if (!$products->isEmpty()) {
+                foreach ($products as $product) {
+                    Product::where('id', $product->id)->update(['code' => '', 'order' => '', 'status' => '', 'order_created' => 0]); 
+                    WSalary::where('status', '!=', \StatusConst::SUBMITED)->where('product', $product->id)->delete();
+                }
+            }
         }
     }
     
