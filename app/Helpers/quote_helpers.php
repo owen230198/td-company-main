@@ -120,10 +120,18 @@
 					break;
 				case \TDConst::NILON:
 					return getFieldDataById('name', 'materals', @$value['materal']).' '. @$value['face'] . ' mặt ';
+				case \TDConst::METALAI:
+					$ret = getFieldDataById('name', 'materals', @$value['materal']).' '. @$value['face'] . ' mặt ';
+					if (!empty($value['cover_materal']) && $value['cover_face']) {
+						$ret .= ' - Phủ trên : '.getFieldDataById('name', 'materals', @$value['cover_materal']).' '. @$value['cover_face'] . ' mặt ';
+					}
+					return $ret;
+				case \TDConst::NILON:
+					return getFieldDataById('name', 'materals', @$value['materal']).' '. @$value['face'] . ' mặt ';
 				case \TDConst::UV:
-					return getFieldDataById('name', 'materals', @$value['materal']);
+					return getFieldDataById('name', 'materals', @$value['materal']).' '. @$value['face'] . ' mặt ';
 				default:
-					return '';
+					return getFieldDataById('name', 'devices', @$value['machine']);
 					break;
 			}
 		}

@@ -3,4 +3,9 @@
     @if (!empty($divide))
         <p class="mb-1">Kích thước tấm {{ @$name }} là {{ $divide[0] }} x {{ $divide[1] }}cm</p>
     @endif
+    @if (!empty($supply_obj->id))
+        <a href="{{ url('print-data/supplies/'.$supply_obj->id) }}" target="_blank" class="main_button color_white bg_green border_green radius_5 font_bold sooth">
+            <i class="fa fa-print mr-2 fs-14" aria-hidden="true"></i> In lệnh
+        </a>
+    @endif
 </h3>

@@ -43,7 +43,14 @@
         'attr' => ['type_input' => 'number']
     ]
 @endphp
-
+<h3 class="fs-14 text-uppercase border_top_eb pt-3 mt-3 mb-4 text-center handle_title d-flex align-items-center justify-content-center">
+    <span class="mr-2">Bồi hộp & hoàn thiện cuối</span>
+    @if (!empty($supply_obj->id))
+        <a href="{{ url('print-data/fill_finishes/'.$supply_obj->id) }}" target="_blank" class="main_button color_white bg_green border_green radius_5 font_bold sooth">
+            <i class="fa fa-print mr-2 fs-14" aria-hidden="true"></i> In lệnh
+        </a>
+    @endif
+</h3>
 @if (!empty($supply_obj->id))
     <input type="hidden" name="product[{{ $pro_index }}][fill_finish][id]" value="{{ $supply_obj->id }}">
 @endif

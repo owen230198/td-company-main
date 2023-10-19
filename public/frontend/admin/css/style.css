@@ -356,6 +356,18 @@ a.device_supp_item {
     background: #ffc5cf;
 }
 
+.w_80{
+    width: 80px;
+}
+
+.w_100{
+    width: 100px;
+}
+
+.border_top_dashed{
+    border-top: 1px dashed #333;
+}
+
 @page {
     size: A4;
     margin: 1cm;
