@@ -197,14 +197,18 @@ class AdminService extends BaseService
     public function removeDataTable($table, $id)
     {
         $except_remove = in_array($table, NTable::$specific['remove']);
+        $dataItem = \DB::table($table)->find($id);
         if ($except_remove) {
             $objModel = getModelByTable($table);
             if (method_exists($objModel, 'beforeRemove')) {
-                $objModel->beforeRemove($id);
+                $objModel->beforeRemove($id, $dataItem);
             }
         }
         $remove = \DB::table($table)->where('id', $id)->delete();
         NLogAction::where('target', $id)->delete();
+        if ($remove) {
+            logActionUserData(__FUNCTION__, $table, $id, $dataItem);
+        }
         if ($remove && $except_remove) {
             $objModel = getModelByTable($table);
             if (method_exists($objModel, 'afterRemove')) {

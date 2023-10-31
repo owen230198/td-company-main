@@ -35,8 +35,10 @@ class Quote extends Model
         ];
         return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];
     }
-    public function afterRemove($id)
+    public function beforeRemove($id, $obj)
     {
-        Product::removeData(['quote_id' => $id]);
+        if (@$obj->status != self::ORDER_CREATED) {
+            Product::removeData(['quote_id' => $id]);
+        }
     } 
 }

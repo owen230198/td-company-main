@@ -257,7 +257,6 @@ class AdminController extends Controller
         $data = $request->all();
         $id = $data['remove_id'];
         $table = $data['table'];
-        $dataItem = \DB::table($table)->find($id);
         $role = $this->admins->checkPermissionAction($table, __FUNCTION__);
         $is_ajax = (boolean) $request->input('ajax');
         if (empty($role['allow'])) {

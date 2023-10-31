@@ -6,7 +6,7 @@
     {
         protected $table = 'products';
         protected $protectFields = false;
-        static $childTable = ['papers', 'supplies', 'fill_finishes'];
+        static $childTable = ['papers', 'supplies', 'fill_finishes', 'c_designs', 'c_supplies'];
         const SUPPLY_FIELDS = [
             // [
             //     'name' => 'name',
