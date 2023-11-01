@@ -141,9 +141,9 @@
         public function afterRemove($id)
         {
             $childs = self::$childTable;
+            $admin = new \App\Services\AdminService;
             foreach ($childs as $table) {
                 $list = \DB::table($table)->where('product', $id)->get();
-                $admin = (new \App\Services\AdminService);
                 foreach ($list as $obj) {
                     $admin->removeDataTable($table, $obj->id);
                 }
