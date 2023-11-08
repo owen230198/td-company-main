@@ -179,6 +179,7 @@ class OrderService extends BaseService
     {
         if (empty($c_supply['supp_price'])) {
             return returnMessageAjax(100, 'Bạn chưa chọn vật tư trong kho !');
+            return $this->supply_handle_carton($supply, $size, $c_supply, $over_supply);
         } 
     }
 }

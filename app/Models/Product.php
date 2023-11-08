@@ -96,35 +96,32 @@
         
         static function getFeildFileByStage($stage, $data)
         {
-            $ext_pro_feild_file = self::FEILD_FILE;
+            $arr_fields = self::FEILD_FILE;
             if ((\GroupUser::isSale() && @$stage == Order::NOT_ACCEPTED) || empty($stage)) {
                 return @$data['design'] == 5 ? [
-                    'custom_design_file' => $ext_pro_feild_file['custom_design_file']
+                    'custom_design_file' => $arr_fields['custom_design_file']
                 ] : [];   
             }elseif (@$stage == Order::NOT_ACCEPTED) {
                 return [
-                    'tech_shape_file' => $ext_pro_feild_file['tech_shape_file'],
+                    'tech_shape_file' => $arr_fields['tech_shape_file'],
                 ];   
-            }elseif ((@$stage == Order::TO_DESIGN 
-            || @$stage == Order::DESIGNING 
-            || @$stage == Order::DESIGN_SUBMITED)
-            && \GroupUser::isDesign()) {
+            }elseif (in_array(@$stage, [Order::TO_DESIGN, Order::DESIGNING, Order::DESIGN_SUBMITED]) && \GroupUser::isDesign()) {
                 $ret = [];
                 if (@$data['design'] == 5) {
-                    $ret['custom_design_file'] = $ext_pro_feild_file['custom_design_file'];
+                    $ret['custom_design_file'] = $arr_fields['custom_design_file'];
                 } 
-                $ret['tech_shape_file'] = $ext_pro_feild_file['tech_shape_file'];
-                $ret['design_file'] = $ext_pro_feild_file['design_file'];
-                $ret['design_shape_file'] = $ext_pro_feild_file['design_shape_file'];
+                $ret['tech_shape_file'] = $arr_fields['tech_shape_file'];
+                $ret['design_file'] = $arr_fields['design_file'];
+                $ret['design_shape_file'] = $arr_fields['design_shape_file'];
                 return $ret;   
             }elseif(@$stage == Order::DESIGN_SUBMITED){
                 return [
-                    'tech_shape_file' => $ext_pro_feild_file['tech_shape_file'],
-                    'design_shape_file' => $ext_pro_feild_file['design_shape_file'],
-                    'handle_shape_file' => $ext_pro_feild_file['handle_shape_file']
+                    'tech_shape_file' => $arr_fields['tech_shape_file'],
+                    'design_shape_file' => $arr_fields['design_shape_file'],
+                    'handle_shape_file' => $arr_fields['handle_shape_file']
                 ]; 
             };
-            return $ext_pro_feild_file;
+            return $arr_fields;
         }
 
         static function removeData($where)
