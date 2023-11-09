@@ -6,7 +6,7 @@
     {
         protected $table = 'products';
         protected $protectFields = false;
-        static $childTable = ['papers', 'supplies', 'fill_finishes', 'c_designs', 'c_supplies'];
+        static $childTable = ['papers', 'supplies', 'fill_finishes'];
         const SUPPLY_FIELDS = [
             // [
             //     'name' => 'name',
@@ -47,7 +47,7 @@
             ],
         ];
 
-        const CLONE_FIELD = ['name', 'category', 'qty', 'design', 'length', 'width', 'height', 'total_amount'];
+        const CLONE_FIELD = ['name', 'category', 'qty', 'design', 'length', 'width', 'height', 'total_amount', 'act'];
 
         const SALE_SHAPE_FILE_FIELD = [
             'note' => 'Khuôn kinh doanh tính giá',
@@ -135,6 +135,13 @@
             }
         }
 
+        static function removeCommand($product_id)
+        {
+            WSalary::where('status', '!=', \StatusConst::SUBMITED)->where('product', $product_id)->delete();
+            CDesign::where('status', '!=', \StatusConst::SUBMITED)->where('product', $product_id)->delete();
+            CSupply::where('status', '!=', \StatusConst::SUBMITED)->where('product', $product_id)->delete();
+        }
+
         public function afterRemove($id)
         {
             $childs = self::$childTable;
@@ -145,7 +152,7 @@
                     $admin->removeDataTable($table, $obj->id);
                 }
             }
-            WSalary::where('status', '!=', \StatusConst::SUBMITED)->where('product', $id)->delete();
+            self::removeCommand($id);
         }
         
         static function getRole()

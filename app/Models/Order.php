@@ -69,15 +69,18 @@
 
         public function beforeRemove($id, $obj)
         {
-            $products = Product::where(['order' => $id])->get();
-            if (!empty($obj->quote) && Quote::find($obj->quote)->isNotEmpty()) {
-                if (!$products->isEmpty()) {
-                    foreach ($products as $product) {
-                        Product::where('id', $product->id)->update(['code' => '', 'order' => '', 'status' => '', 'order_created' => 0]); 
-                        CDesign::where('status', '!=', \StatusConst::SUBMITED)->where('product', $product->id)->delete();
-                        CSupply::where('status', '!=', \StatusConst::SUBMITED)->where('product', $product->id)->delete();
-                        WSalary::where('status', '!=', \StatusConst::SUBMITED)->where('product', $product->id)->delete();
-                    }
+            if (!empty($obj->quote)) {
+                $quote_obj = Quote::find($obj->quote);
+                if (!empty($quote_obj)) {
+                    $quote_obj->status = \StatusConst::ACCEPTED;
+                    $quote_obj->save();
+                    $products = Product::where(['order' => $id])->get();
+                    if (!$products->isEmpty()) {
+                        foreach ($products as $product) {
+                            Product::where('id', $product->id)->update(['code' => '', 'order' => '', 'status' => '', 'order_created' => 0]); 
+                            Product::removeCommand($product->id);
+                        }
+                    }    
                 }
             }else{
                 Product::removeData(['order' => $id]);

@@ -64,7 +64,7 @@
                 $data['link_action'] = url('insert/orders');
                 $data['order_type'] = \OrderConst::INCLUDE;
                 $data['title'] = 'Sao chép đơn sản phẩm - '.$arr_product['name'];
-                $blade_to = 'orders.users.'.\User::getCurrent('id').'.view';
+                $blade_to = 'orders.users.'.\GroupUser::getCurrent().'.view';
                 if (view()->exists($blade_to)) {
                     return view($blade_to, $data);
                 }else{
