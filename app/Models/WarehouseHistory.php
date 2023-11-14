@@ -9,6 +9,7 @@ class WarehouseHistory extends Model
     protected $protectField = false;
     const FIELD_QTY = [
         'name' => 'qty',
+        'type' => 'text',
         'note' => 'Thêm số lượng',
         'attr' => ['type_input' => 'number']
     ];
@@ -20,6 +21,7 @@ class WarehouseHistory extends Model
     ];
     const FIELD_PRICE = [
         'name' => 'price',
+        'type' => 'text',
         'note' => 'Giá vật tư',
         'attr' => ['type_input' => 'number']
     ];

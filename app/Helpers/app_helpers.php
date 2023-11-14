@@ -255,7 +255,7 @@ if (!function_exists('getInsertNextId')) {
 }
 
 if (!function_exists('getCodeInsertTable')) {
-    function getCodeInsertTable($table, $num = '06')
+    function getCodeInsertTable($table, $num = '08')
     {
         return sprintf("%".$num."s", getInsertNextId($table));
     }

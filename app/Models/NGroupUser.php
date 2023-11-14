@@ -29,6 +29,7 @@ class NGroupUser extends Model
         'customer_quote' => 'Báo giá & Khách hàng',
         'design_module' => 'Thiết kế',
         'order_handle' => 'Đơn hàng & sản xuất',
+        'supply_buying' => 'Mua vật tư',
         'profit' => '% Hoa hồng',
         'report' => 'Báo cáo',
         'available_order' => 'Đơn hàng bán sẵn',
@@ -51,7 +52,7 @@ class NGroupUser extends Model
         ],
         'worker_salary' =>[
             'name' => 'Bảng lương công nhân',
-            'link' => 'view/w_salaries?default_data={"status":"submited"}',
+            'link' => 'view/w_salaries?default_data=%7B"status"%3A"submited"%7D',
             'group' => 'factory'
         ],
         'price_materal' => [
@@ -81,32 +82,32 @@ class NGroupUser extends Model
         ],
         'quote_not_accepted' => [
             'name' => 'DS báo giá (chưa duyệt)', 
-            'link' => 'view/quotes?default_data={"status":"not_accepted"}', 
+            'link' => 'view/quotes?default_data=%7B"status"%3A"not_accepted"%7D', 
             'group' => 'customer_quote'
         ],
         'quote_accepted' => [
             'name' => 'DS báo giá (đã duyệt)', 
-            'link' => 'view/quotes?default_data={"status":"accepted"}', 
+            'link' => 'view/quotes?default_data=%7B"status"%3A"accepted"%7D', 
             'group' => 'customer_quote'
         ],
         'quote_order_created' => [
             'name' => 'DS báo giá (đã tạo đơn)', 
-            'link' => 'view/quotes?default_data={"status":"order_created"}', 
+            'link' => 'view/quotes?default_data=%7B"status"%3A"order_created"%7D', 
             'group' => 'customer_quote'
         ],
         'design_not_accepted' => [
             'name' => 'DS lệnh TK chưa duyệt', 
-            'link' => 'view/c_designs?default_data={"status":"not_accepted"}', 
+            'link' => 'view/c_designs?default_data=%7B"status"%3A"not_accepted"%7D', 
             'group' => 'design_module'
         ],
         'designing_command' => [
             'name' => 'DS lệnh TK đang nhận', 
-            'link' => 'view/c_designs?default_data={"status":"designing"}', 
+            'link' => 'view/c_designs?default_data=%7B"status"%3A"designing"%7D', 
             'group' => 'design_module'
         ],
         'design_submited' => [
             'name' => 'DS lệnh TK đã xong', 
-            'link' => 'view/c_designs?default_data={"status":"design_submited"}', 
+            'link' => 'view/c_designs?default_data=%7B"status"%3A"design_submited"%7D', 
             'group' => 'design_module'
         ],
         'order_process' => [
@@ -116,8 +117,13 @@ class NGroupUser extends Model
         ],
         'handle_process' => [
             'name' => 'Theo dõi sản xuất', 
-            'link' => 'view/products?default_data={"order_created":1}', 
+            'link' => 'view/products?default_data=%7B"order_created":"1"%7D', 
             'group' => 'order_handle'
+        ],
+        'supp_bying_req' => [
+            'name' => 'Yêu cầu mua vật tư', 
+            'link' => 'view/supply_buyings', 
+            'group' => 'supply_buying'
         ],
         'profit' => [
             'name' => 'Lợi nhuận của tôi', 
@@ -166,12 +172,12 @@ class NGroupUser extends Model
         ],
         'ex_supply' => [
             'name' => 'Yêu cầu xuất vật tư', 
-            'link' => 'view/c_supplies?default_data={"status":"handling"}', 
+            'link' => 'view/c_supplies?default_data=%7B"status"%3A"handling"%7D', 
             'group' => 'handle_supply'
         ],
         'im_supply' => [
             'name' => 'Yêu cầu nhập kho băng lề', 
-            'link' => 'view/supply_warehouses?default_data={"status":"waiting"}', 
+            'link' => 'view/supply_warehouses?default_data=%7B"status"%3A"waiting"%7D', 
             'group' => 'handle_supply'
         ],
         'shipping_process' => [
@@ -238,6 +244,7 @@ class NGroupUser extends Model
         ],
         self::PLAN_HANDLE => [
             self::MODULE['handle_process'],
+            self::MODULE['supp_bying_req'],
             self::MODULE['profit'],
             self::MODULE['create_available_order'],
             self::MODULE['account'],

@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Quote\QuoteController;
 use App\Http\Controllers\Order\OrderController;
 use App\Http\Controllers\Product\ProductController;
+use App\Http\Controllers\SupplyBuying\SupplyBuyingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,6 +76,9 @@ Route::middleware(['check_login'])->group(function () {
 	Route::get('add-select-supply-handle', [OrderController::class, 'addSelectSupplyHandle']);
 	Route::get('list-supply-process', [ProductController::class, 'listSupplyProcess']);
 	Route::get('print-data/{table}/{id}', [OrderController::class, 'printData']);
+
+	//supply warehouse
+	Route::get('add-supply-buying', [SupplyBuyingController::class, 'addSupplyBuying']);
 });
 $modules_path = dirname(__DIR__) . '/app/Modules/';
 if (is_dir($modules_path)) {

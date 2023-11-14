@@ -14,9 +14,46 @@ class NTable extends Model
     protected $table = 'n_tables';
     protected $protectFields = false;
     static $specific = [
-                        'insert' => ['quotes', 'orders', 'products', 'print_warehouses', 'square_warehouses', 'supply_warehouses', 'other_warehouses'],
-                        'update' => ['quotes', 'orders', 'products', 'c_designs', 'print_warehouses', 'square_warehouses', 'supply_warehouses', 'other_warehouses'],
-                        'copy' => ['quotes', 'orders', 'products', 'print_warehouses', 'square_warehouses', 'supply_warehouses', 'other_warehouses'],
-                        'remove' => ['quotes', 'orders', 'products', 'supply_types', 'print_warehouses', 'square_warehouses', 'supply_warehouses', 'other_warehouses']
+                        'insert' => [
+                            'quotes', 
+                            'orders', 
+                            'products', 
+                            'print_warehouses', 
+                            'square_warehouses', 
+                            'supply_warehouses', 
+                            'other_warehouses', 
+                            'supply_buyings'
+                        ],
+                        'update' => [
+                            'quotes', 
+                            'orders', 
+                            'products', 
+                            'c_designs', 
+                            'print_warehouses', 
+                            'square_warehouses', 
+                            'supply_warehouses', 
+                            'other_warehouses', 
+                            'supply_buyings'
+                        ],
+                        'copy' => [
+                            'quotes', 
+                            'orders', 
+                            'products', 
+                            'print_warehouses', 
+                            'square_warehouses', 
+                            'supply_warehouses', 
+                            'other_warehouses', 
+                            'supply_buyings'
+                        ],
+                        'remove' => [
+                            'quotes', 
+                            'orders', 
+                            'products', 
+                            'supply_types', 
+                            'print_warehouses', 
+                            'square_warehouses', 
+                            'supply_warehouses', 
+                            'other_warehouses'
+                        ]
                     ];
 }

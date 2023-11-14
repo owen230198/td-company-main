@@ -368,6 +368,16 @@ a.device_supp_item {
     border-top: 1px dashed #333;
 }
 
+.border_bot_main{
+    border-bottom: 1px solid #333;
+}
+
+.remove_parent_element_button{
+    position: absolute;
+    font-size: 18px;
+    cursor: pointer;
+}
+
 @page {
     size: A4;
     margin: 1cm;

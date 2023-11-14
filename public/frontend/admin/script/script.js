@@ -446,7 +446,7 @@ var getUrlLinkingWarehouseSize = function(type)
     }else{
         wh_table = 'square_warehouses';
     }
-    return getBaseRoute('get-data-json-linking?table='+wh_table+'&field_search=name&type='+type);
+    return getBaseRoute('get-data-json-linking?except_linking=1&table='+wh_table+'&field_search=name&type='+type);
 }
 
 var selectTypeSuppWarehouse = function()
@@ -458,6 +458,7 @@ var selectTypeSuppWarehouse = function()
         let url =  getUrlLinkingWarehouseSize(value);
         let select_size = parent.find('select.__wh_select_size');
         select_size.data('url', url);
+        console.log(select_size.data('url'));
         initInputModuleAfterAjax(parent);
         if (!empty(value)) {
             select_size.attr('disabled', false);    
@@ -597,6 +598,25 @@ var fileProcessV2Module = function(section = $('.base_content'))
         })
     }
 }
+var addSuppBuyModule = function()
+{
+  $(document).on('click', 'button.add_supp_buy_button', function(event){
+    event.preventDefault();
+    let list_section = $(this).closest('.json_supply_buy').find('.list_supply_buy');
+    let item = list_section.find('.item_supp_buy');
+    let index = parseInt(item.last().data('index')) + 1;
+    let url = 'add-supply-buying?index='+index;
+    ajaxViewTarget(url, list_section, list_section, 2);
+  });
+}
+
+var removeParentElement = function()
+{
+    $(document).on('click', '.remove_parent_element_button', function(event){
+        event.preventDefault();
+        $(this).parent().remove();
+      });
+}
 
 $(function () {
     submitActionAjaxForm();
@@ -624,4 +644,6 @@ $(function () {
     passwordChangeInput();
     moduleSelectStyleProduct();
     fileProcessV2Module();
+    addSuppBuyModule();
+    removeParentElement();
 });

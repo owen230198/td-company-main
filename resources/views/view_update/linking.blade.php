@@ -3,7 +3,7 @@
     $select_data = !empty($other_data['data']) ? $other_data['data'] : [];
     $field_title = @$select_data['field_title'] ?? 'name';
     $field_value = @$select_data['field_value'] ?? 'id';
-    $table_linking = getTableLinkingWithData([], $select_data['table']);
+    $table_linking = getTableLinkingWithData(@$dataItem, $select_data['table']);
     $except_linking = !empty($select_config['except_linking']) ? $select_config['except_linking'] : 0;
 @endphp
 
@@ -24,7 +24,9 @@
         }
         if (!empty($value)) {
             $data_id = $value;
-            $data_label = getFieldDataById($field_title, $table_linking, [$field_value => $value]);
+            $linking_model = getModelByTable($table_linking);
+            $linking_value = \DB::table($table_linking)->find($data_id);
+            $data_label = method_exists($linking_model, 'getLabelLinking') ? $linking_model::getLabelLinking($linking_value) : @$linking_value->field_title;
         }
     @endphp
     <select name="{{ $name }}" class="form-control select_ajax {{ @$attr['inject_class'] ? ' '.$attr['inject_class'] : '' }}"

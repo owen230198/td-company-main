@@ -45,7 +45,7 @@ class PrintWarehouse extends Model
         $arr = array_map(function($item){
             return [
                 'id' => @$item->id, 
-                'label' => $item->name. ' / KT khổ : '.$item->width.' x '.$item->length.' / Còn lại : '.$item->qty.' tờ'];
+                'label' => self::getLabelLinking($item)];
         }, $data);
         return json_encode($arr);
     }

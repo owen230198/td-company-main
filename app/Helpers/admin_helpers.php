@@ -149,7 +149,7 @@ if (!function_exists('getlabelLinking')) {
 if (!function_exists('getTableLinkingWithData')) {
     function getTableLinkingWithData($data, $linking_table)
     {
-        return !empty($linking_table['getFunc']) ? $linking_table['getFunc']($data) : $linking_table;
+        return !empty($linking_table['getFunc']) ? $linking_table['getFunc']((object) $data) : $linking_table;
     }
 }
 
