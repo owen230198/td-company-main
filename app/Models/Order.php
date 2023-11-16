@@ -30,11 +30,13 @@
                         ],
                     'update' => 
                         [
-                            'with' => 
-                                [
+                            'with' => [
+                                'type' => 'group',
+                                'query' => [
                                     ['key' => 'created_by', 'value' => \User::getCurrent('id')],
-                                    ['con'=> 'or', 'key' => 'status', 'value' => self::NOT_ACCEPTED]
+                                    ['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED]
                                 ]
+                            ]
                         ]
                 ],
                 \GroupUser::TECH_APPLY => [
@@ -44,7 +46,7 @@
                         ],
                     'update' => 
                         [
-                            'with' => [['key' => 'status', 'value' => self::NOT_ACCEPTED]]
+                            'with' => ['key' => 'status', 'value' => self::NOT_ACCEPTED]
                         ]
                 ],
                 \GroupUser::TECH_HANDLE => [
@@ -54,7 +56,7 @@
                         ],
                     'update' => 
                         [
-                            'with' => [['key' => 'status', 'value' => self::DESIGN_SUBMITED]]
+                            'with' => ['key' => 'status', 'value' => self::DESIGN_SUBMITED]
                         ]
                 ],
                 \GroupUser::PLAN_HANDLE => [

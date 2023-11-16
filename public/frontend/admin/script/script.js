@@ -238,37 +238,34 @@ var selectAjaxModule = function(section = $('.page_content '))
     if (select_ajax.length > 0) {
         select_ajax.each(function(){
             let url = $(this).data('url');
-            if ($(this).val() == null) {
-                $(this).select2({
-                    allowClear: true,
-                    placeholder: '',
-                    ajax: {
-                        url: url,
-                        dataType: 'json',
-                        data: (params) => {
-                            return {
-                            q: params.term,
-                            }
-                        },
-                        processResults: (data) => {
-                            const results = data.map(item => {
-                            return {
-                                id: item.id,
-                                text: item.label,
-                            };
-                            });
-                            return {
-                            results: results,
-                            }
-                        },
+            $(this).select2({
+                allowClear: true,
+                placeholder: '',
+                ajax: {
+                    url: url,
+                    dataType: 'json',
+                    data: (params) => {
+                        return {
+                        q: params.term,
+                        }
                     },
-                });
-                if ($(this).data('id') !== '' && $(this).data('label') !== '') {
-                    var newOption = new Option($(this).data('label'), $(this).data('id'), true, true);
-                    $(this).append(newOption).trigger('change');
-                }
+                    processResults: (data) => {
+                        const results = data.map(item => {
+                        return {
+                            id: item.id,
+                            text: item.label,
+                        };
+                        });
+                        return {
+                        results: results,
+                        }
+                    },
+                },
+            });
+            if ($(this).data('id') !== '' && $(this).data('label') !== '') {
+                var newOption = new Option($(this).data('label'), $(this).data('id'), true, true);
+                $(this).append(newOption).trigger('change');
             }
-            
         })
     }
 
@@ -457,13 +454,15 @@ var selectTypeSuppWarehouse = function()
         let value = $(this).val();
         let url =  getUrlLinkingWarehouseSize(value);
         let select_size = parent.find('select.__wh_select_size');
+        select_size.val('');
+        select_size.data('id', '');
+        select_size.data('label', '');
         select_size.data('url', url);
-        console.log(select_size.data('url'));
         initInputModuleAfterAjax(parent);
         if (!empty(value)) {
-            select_size.attr('disabled', false);    
+            select_size.attr('readonly', false);    
         }else{
-            select_size.attr('disabled', true);   
+            select_size.attr('readonly', true);   
         }
     })
 }
@@ -478,9 +477,9 @@ var selectTypeWorker = function()
         let select_worker = parent.find('select.__worker_select_worker');
         select_worker.data('url', url);
         if (!empty(value)) {
-            select_worker.attr('disabled', false);    
+            select_worker.attr('readonly', false);    
         }else{
-            select_worker.attr('disabled', true);   
+            select_worker.attr('readonly', true);   
         }
         initInputModuleAfterAjax(parent);
     })
@@ -618,6 +617,54 @@ var removeParentElement = function()
       });
 }
 
+var confirmBuying = function()
+{
+    $(document).on('click', 'button.__confirm_buying', function(event){
+        event.preventDefault();
+        let id = $(this).data('id');
+        ajaxBaseCall({
+            url: getBaseRoute('confirm-supply-buy/'+id),
+            type: 'POST'
+        });
+    });
+}
+
+var changeInputPriceBuying = function()
+{
+    $(document).on('change keyup', 'input.__buying_change_input', function(event){
+        event.preventDefault();
+        let _this = $(this);
+        let item = _this.closest('.item_supp_buy');
+        let price = getEmptyDefault(item.find('input.__buying_price_input').val(), 0, 'float');
+        let qty = getEmptyDefault(item.find('input.__buying_qty_input').val(), 0, 'number');
+        item.find('.__buying_total_input').val(price*qty);
+        let parent = _this.closest('.json_supply_buy');
+        let list_item = parent.find('.item_supp_buy');
+        let buying_total = 0;
+        list_item.each(function(){
+            let total_item_buy = getEmptyDefault($(this).find('input.__buying_total_input').val(), 0, 'number');
+            buying_total += total_item_buy;
+        });
+        parent.find('input.__buying_total_amount_input').val(buying_total);
+    });
+}
+
+var confirmBought = function()
+{
+    $(document).on('click', 'button.__confirm_bought', function(e) {
+        e.preventDefault();
+        let _this = $(this);
+        id = _this.data('id');
+        let form = _this.closest('form');
+        ajaxBaseCall({
+            url: getBaseRoute('confirm-supply-bought/'+id),
+            type: 'POST',
+            data: form.serialize()
+        })
+
+    });
+}
+
 $(function () {
     submitActionAjaxForm();
     confirmRemoveData();
@@ -646,4 +693,7 @@ $(function () {
     fileProcessV2Module();
     addSuppBuyModule();
     removeParentElement();
+    confirmBuying();
+    changeInputPriceBuying();
+    confirmBought();
 });

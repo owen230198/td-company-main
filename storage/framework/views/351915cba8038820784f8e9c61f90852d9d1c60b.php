@@ -18,4 +18,27 @@
         </button>
     </div>
     <?php endif; ?>
+    <?php if(\GroupUser::isAdmin() || \GroupUser::isDoBuying() || \GroupUser::isWarehouse()): ?>
+        <?php
+            $do_buy_fields = [
+                [
+                    'name' => 'total',
+                    'type' => 'text',
+                    'note' => 'Tổng tiền mua hàng',
+                    'attr' => ['type_input' => 'number', 'readonly' => 1, 'inject_class' => '__buying_total_amount_input'],
+                    'value' => @$dataItem['total'] ?? 0
+                ],
+                [
+                    'name' => 'bill',
+                    'note' => 'Hóa đơn mua hàng',
+                    'type' => 'filev2',
+                    'other_data' => ['role_update' => [\GroupUser::DO_BUYING], 'field_name' => 'bill'],
+                    'value' => @$dataItem['bill']
+                ]
+            ]  
+        ?>
+        <?php $__currentLoopData = $do_buy_fields; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $do_buy_field): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <?php echo $__env->make('view_update.view', $do_buy_field, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?> 
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+    <?php endif; ?>  
 </div><?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/view_update/json_supply.blade.php ENDPATH**/ ?>

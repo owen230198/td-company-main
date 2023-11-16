@@ -15,7 +15,7 @@
                     <div class="row row-7">
                         <?php $__currentLoopData = $not_accepted_table; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $command): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="col-lg-6 mb-3">
-                            <a href=<?php echo e(asset('view/'.$command['table'].'?default_data={"status":"'.@$command['status'].'"}')); ?> 
+                            <a href=<?php echo e(asset('view/'.$command['table'].'?default_data=%7B"status"%3A"'.@$command['status'].'"%7D')); ?> 
                             class="main_item_command h-100 smooth d-flex align-items-center position-relative h-100">
                                 <img src="<?php echo e(asset('frontend/admin/images/'.$command['icon'].'_icon.png')); ?>" alt="order-icon" 
                                 class="command_icon smooth">

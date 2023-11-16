@@ -4,12 +4,14 @@
  	?>
 	<?php if(!empty($ext_action)): ?>
 		<?php $__currentLoopData = $ext_action; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $button): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-			<?php if(!empty($button['condition'])): ?>
-				<?php if(getBoolByCondArr($button['condition'], (array) $data)): ?>
-					<?php echo $__env->make('table.ext_func_btn', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>	
-				<?php endif; ?>
-			<?php else: ?>
-				<?php echo $__env->make('table.ext_func_btn', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>		
+			<?php if(empty($button['detailonly'])): ?>
+				<?php if(!empty($button['condition'])): ?>
+					<?php if(getBoolByCondArr($button['condition'], (array) $data)): ?>
+						<?php echo $__env->make('table.ext_func_btn', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>	
+					<?php endif; ?>
+				<?php else: ?>
+					<?php echo $__env->make('table.ext_func_btn', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>		
+				<?php endif; ?>		
 			<?php endif; ?>
 		<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 	<?php endif; ?>

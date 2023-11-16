@@ -7,8 +7,10 @@ class SupplyBuying extends Model
 {
     protected $table = 'supply_buyings';
     protected $protectFields = false;
+    const BOUGHT = 'bought';
     static function getFeildSupplyJson($index, $value = [])
     {
+        $base_name = 'supply['.$index.']';
         $field_supp_type = [
             'name' => 'group_supply', 
             'note' => 'Dạng vật tư',
@@ -16,8 +18,8 @@ class SupplyBuying extends Model
             'other_data' => ['group_class' => '__module_select_type_warehouse'],
             'child' => [
                 [
-                    'name' => 'supply['.$index.'][supp_type]',
-                    'attr' => '{"required":1,"inject_class":"__wh_select_type"}',
+                    'name' => $base_name.'[supp_type]',
+                    'attr' => '{"required":1,"inject_class":"__wh_select_type","readonly":'.!\GroupUser::isPlanHandle().'}',
                     'type' => 'select',
                     'value' => !empty($value['supp_type']) ? $value['supp_type'] : '',
                     'other_data' => '{
@@ -43,8 +45,8 @@ class SupplyBuying extends Model
                     }'
                 ],
                 [
-                    'name' => 'supply['.$index.'][size_type]',
-                    'attr' => '{"required":1,"disable_field":1,"inject_class":"__wh_select_size"}',
+                    'name' => $base_name.'[size_type]',
+                    'attr' => '{"required":1,"readonly":1,"inject_class":"__wh_select_size"}',
                     'type' => 'linking',
                     'value' => !empty($value['size_type']) ? $value['size_type'] : '',
                     'other_data' => '{
@@ -61,11 +63,48 @@ class SupplyBuying extends Model
                 ]
             ] 
         ];
+        $field_qty = [
+            'name' => 'qty',
+            'type' => 'text',
+            'note' => 'Số lượng',
+            'attr' => ['type_input' => 'number', 'inject_class' => '__buying_qty_input __buying_change_input', 'readonly' => !\GroupUser::isPlanHandle()]
+        ];
+        $field_price = [
+            'name' => 'price',
+            'type' => 'text',
+            'note' => 'Đơn giá vật tư',
+            'attr' => ['type_input' => 'number', 'inject_class' => '__buying_price_input __buying_change_input', 'readonly' => !\GroupUser::isDoBuying()],
+        ];
+        $field_total = [
+            'name' => 'total',
+            'type' => 'text',
+            'note' => 'Thành tiền',
+            'attr' => ['type_input' => 'number', 'readonly' => 1, 'inject_class' => '__buying_total_input']
+        ];
         if (\GroupUser::isPlanHandle()) {
             return [
                 $field_supp_type,
-                WarehouseHistory::FIELD_QTY
+                $field_qty
             ];
+        }elseif(\GroupUser::isApplyBuying()){
+            return [
+                $field_supp_type,
+                $field_qty
+            ];    
+        }elseif(\GroupUser::isDoBuying()){
+            return [
+                $field_supp_type,
+                $field_qty,
+                $field_price,
+                $field_total
+            ];     
+        }elseif (\GroupUser::isWarehouse()) {
+            return [
+                $field_supp_type,
+                $field_qty,
+                $field_price,
+                $field_total
+            ]; 
         }      
     }
     static function getRole()
@@ -75,18 +114,34 @@ class SupplyBuying extends Model
                 'insert' => 1,
                 'view' => 
                     [
-                        'with' => ['key' => 'created_by', 'value' => \User::getCurrent('id')],
-                        ['con'=> 'or', 'key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED]
+                        'with' => [
+                            'type' => 'group',
+                            'query' => [
+                                ['key' => 'created_by', 'value' => \User::getCurrent('id')],
+                                ['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED]
+                            ]
+                        ]
                     ],
                 'update' => 
                     [
-                        'with' => 
-                            [
+                        'with' => [
+                            'type' => 'group',
+                            'query' => [
                                 ['key' => 'created_by', 'value' => \User::getCurrent('id')],
-                                ['con'=> 'or', 'key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED]
+                                ['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED]
                             ]
-                    ],
-                'clone' => 1
+                        ]
+                    ]
+            ],
+            \GroupUser::APPLY_BUYING => [
+                'view' => ['with' => ['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED]],
+                'update' => ['with' => ['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED]]
+            ],
+            \GroupUser::DO_BUYING => [
+                'view' => ['with' => ['key' => 'status', 'value' => \StatusConst::ACCEPTED]]
+            ],
+            \GroupUser::WAREHOUSE => [
+                'view' => ['with' => ['key' => 'status', 'value' => self::BOUGHT]]
             ]
         ];
         return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];

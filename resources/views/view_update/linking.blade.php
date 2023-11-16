@@ -26,7 +26,7 @@
             $data_id = $value;
             $linking_model = getModelByTable($table_linking);
             $linking_value = \DB::table($table_linking)->find($data_id);
-            $data_label = method_exists($linking_model, 'getLabelLinking') ? $linking_model::getLabelLinking($linking_value) : @$linking_value->field_title;
+            $data_label = method_exists($linking_model, 'getLabelLinking') ? $linking_model::getLabelLinking($linking_value) : @$linking_value->{$field_title};
         }
     @endphp
     <select name="{{ $name }}" class="form-control select_ajax {{ @$attr['inject_class'] ? ' '.$attr['inject_class'] : '' }}"

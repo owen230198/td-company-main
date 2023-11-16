@@ -79,6 +79,8 @@ Route::middleware(['check_login'])->group(function () {
 
 	//supply warehouse
 	Route::get('add-supply-buying', [SupplyBuyingController::class, 'addSupplyBuying']);
+	Route::post('confirm-supply-buy/{id}', [SupplyBuyingController::class, 'confirmSupplyBuy']);
+	Route::post('confirm-supply-bought/{id}', [SupplyBuyingController::class, 'confirmSupplyBought']);
 });
 $modules_path = dirname(__DIR__) . '/app/Modules/';
 if (is_dir($modules_path)) {

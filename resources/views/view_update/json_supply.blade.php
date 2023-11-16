@@ -18,4 +18,27 @@
         </button>
     </div>
     @endif
+    @if (\GroupUser::isAdmin() || \GroupUser::isDoBuying() || \GroupUser::isWarehouse())
+        @php
+            $do_buy_fields = [
+                [
+                    'name' => 'total',
+                    'type' => 'text',
+                    'note' => 'Tổng tiền mua hàng',
+                    'attr' => ['type_input' => 'number', 'readonly' => 1, 'inject_class' => '__buying_total_amount_input'],
+                    'value' => @$dataItem['total'] ?? 0
+                ],
+                [
+                    'name' => 'bill',
+                    'note' => 'Hóa đơn mua hàng',
+                    'type' => 'filev2',
+                    'other_data' => ['role_update' => [\GroupUser::DO_BUYING], 'field_name' => 'bill'],
+                    'value' => @$dataItem['bill']
+                ]
+            ]  
+        @endphp
+        @foreach ($do_buy_fields as $do_buy_field)
+            @include('view_update.view', $do_buy_field) 
+        @endforeach
+    @endif  
 </div>

@@ -37,11 +37,25 @@
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>
             <div class="group_btn_action_form text-center">
-                <button type="submit" class="main_button color_white bg_green border_green radius_5 font_bold smooth">
+                <button type="submit" class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-3">
                     <i class="fa fa-check mr-2 fs-14" aria-hidden="true"></i>Hoàn tất
                 </button>
+                <?php
+                    $ext_action = !empty($tableItem['ext_action']) ? json_decode($tableItem['ext_action'], true) : []
+                ?>
+                <?php if(!empty($ext_action)): ?>
+                    <?php $__currentLoopData = $ext_action; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $button): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <?php if(!empty($button['condition'])): ?>
+                            <?php if(getBoolByCondArr($button['condition'], $dataItem->toArray())): ?>
+                                <?php echo $__env->make('action.ext_func_btn', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>	
+                            <?php endif; ?>
+                        <?php else: ?>
+                            <?php echo $__env->make('action.ext_func_btn', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>		
+                        <?php endif; ?>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                <?php endif; ?>
                 <a href="<?php echo e(getBackUrl()); ?>"
-                    class="main_button color_white bg_green radius_5 font_bold smooth mx-3">
+                    class="main_button color_white bg_green radius_5 font_bold smooth mr-3">
                     <i class="fa fa-angle-double-left mr-2 fs-14" aria-hidden="true"></i>Trở về
                 </a>
                 <a href="<?php echo e(url('')); ?>" class="main_button bg_red color_white radius_5 font_bold smooth red_btn">

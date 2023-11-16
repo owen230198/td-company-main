@@ -69,4 +69,61 @@ class SupplyBuyingController extends Controller
     {
         return view('supply_buyings.supply_item', ['index' => (int) $request->input('index')]);
     }
+
+    public function confirmSupplyBuy(Request $request, $id)
+    {
+        if (\GroupUser::isAdmin() || \GroupUser::isApplyBuying()) {
+            $supp_buying = SupplyBuying::find($id);
+            if (@$supp_buying->status != \StatusConst::NOT_ACCEPTED) {
+                return returnMessageAjax(100, 'Dữ liệu không hợp lệ !');
+            }
+            $supp_buying->status = \StatusConst::ACCEPTED;
+            $supp_buying->applied_by = \User::getCurrent('id');
+            $supp_buying->save();
+            return returnMessageAjax(200, 'Đã duyệt mua thành công cho yêu cầu mua '. $supp_buying->code.' !', 'view/supply_buyings?default_data=%7B"status"%3A"'.\StatusConst::NOT_ACCEPTED.'"%7D');
+        }else{
+            return returnMessageAjax(100, 'Không có quyền thực hiện thao tác này !');
+        }
+    }
+
+    public function confirmSupplyBought(Request $request, $id)
+    {
+        if (\GroupUser::isAdmin() || \GroupUser::isDoBuying()) {
+            $supp_buying = SupplyBuying::find($id);
+            if ($supp_buying->status != \StatusConst::ACCEPTED) {
+                return returnMessageAjax(100, 'Yêu cầu chưa được phòng mua duyệt !');
+            }
+            $list_supp = !empty($supp_buying->supply) ? json_decode($supp_buying->supply, true) : [];
+            $data = $request->except('_token');
+            $data_supply = !empty($data['supply']) ? $data['supply'] :[];
+            if (count($list_supp) > 0 && count($list_supp) == count($data_supply)) {
+                if (empty($data['bill'])) {
+                    return returnMessageAjax(100, 'Bạn cần upload Hóa đơn mua hàng !');
+                }
+                $buying_total = 0;
+                foreach ($list_supp as $key => $supply) {
+                    if (!empty($data_supply[$key]['price'])) {
+                        $price = (float) $data_supply[$key]['price'];
+                        $list_supp[$key]['price'] = $price;
+                        $supp_total = $price * (int) @$supply['qty'];
+                        $list_supp[$key]['total'] = $supp_total;
+                        $buying_total += $supp_total;
+                    }else{
+                        return returnMessageAjax(100, 'Bạn cần nhập đầy đủ thông tin đơn giá mua !');
+                    }
+                }
+                $supp_buying->supply = json_encode($list_supp);
+                $supp_buying->total = $buying_total;
+                $supp_buying->bill = $data['bill'];
+                $supp_buying->status = SupplyBuying::BOUGHT;
+                $supp_buying->bought_by = \User::getCurrent('id');
+                $supp_buying->save();
+                return returnMessageAjax(200, 'Đã xác nhận mua thành công cho yêu cầu mua '. $supp_buying->code.' !', 'view/supply_buyings?default_data=%7B"status"%3A"'.\StatusConst::ACCEPTED.'"%7D');
+            }else{
+                return returnMessageAjax(100, 'Dữ liệu mua hàng không hợp lệ !');
+            }
+        }else{
+            return returnMessageAjax(100, 'Không có quyền thực hiện thao tác này !');
+        }
+    }
 }

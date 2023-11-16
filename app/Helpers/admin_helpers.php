@@ -167,7 +167,8 @@ if (!function_exists('getFullPathFileUpload')) {
     function getFullPathFileUpload($path)
     {
         if (!empty($path)) {
-            return isLocal() ? public_path($path) : base_path($path);
+            return base_path($path);
+            // return isLocal() ? public_path($path) : base_path($path);
         }
     }
 }

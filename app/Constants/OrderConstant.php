@@ -2,6 +2,7 @@
 namespace App\Constants;
 use \App\Models\Order;
 use \App\Models\CSupply;
+use App\Models\SupplyBuying;
 use App\Models\SupplyWarehouse;
 
 class OrderConstant
@@ -50,6 +51,21 @@ class OrderConstant
         'table' => 'print_warehouses', 
         'text' => 'Yêu cầu nhập kho băng lề giấy in',
         'status' => SupplyWarehouse::WAITING
+        ],
+        ['icon' => 'apply_buy', 
+        'table' => 'supply_buyings', 
+        'text' => 'Yêu cầu duyệt mua vật tư',
+        'status' => \StatusConst::NOT_ACCEPTED
+        ],
+        ['icon' => 'buy', 
+        'table' => 'supply_buyings', 
+        'text' => 'Yêu cầu mua vật tư',
+        'status' => \StatusConst::ACCEPTED
+        ],
+        ['icon' => 'submit_buy', 
+        'table' => 'supply_buyings', 
+        'text' => 'Yêu cầu nhập kho vật tư đã mua',
+        'status' => SupplyBuying::BOUGHT
         ],
     ];
 

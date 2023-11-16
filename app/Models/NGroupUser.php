@@ -20,6 +20,8 @@ class NGroupUser extends Model
     const TECH_HANDLE = 5;
     const PLAN_HANDLE = 6;
     const WAREHOUSE = 7;
+    const APPLY_BUYING = 8;
+    const DO_BUYING = 10;
 
     //group modules
     const GROUP_MODULE = [
@@ -256,6 +258,22 @@ class NGroupUser extends Model
             self::MODULE['im_supply'],
             self::MODULE['account'],
             self::MODULE['change_password'],
+        ],
+        self::APPLY_BUYING => [
+            self::MODULE['supp_bying_req'],
+            self::MODULE['warehouse_management'],
+            self::MODULE['ex_supply'],
+            self::MODULE['im_supply'],
+            self::MODULE['account'],
+            self::MODULE['change_password'],
+        ],
+        self::DO_BUYING => [
+            self::MODULE['supp_bying_req'],
+            self::MODULE['warehouse_management'],
+            self::MODULE['ex_supply'],
+            self::MODULE['im_supply'],
+            self::MODULE['account'],
+            self::MODULE['change_password'],
         ]
     ];
 
@@ -329,5 +347,15 @@ class NGroupUser extends Model
     {
         $group_user = !empty($group_user) ? $group_user : self::getCurrent();
         return $group_user == self::WAREHOUSE;
+    }
+    static function isApplyBuying($group_user = 0)
+    {
+        $group_user = !empty($group_user) ? $group_user : self::getCurrent();
+        return $group_user == self::APPLY_BUYING;
+    }
+    static function isDoBuying($group_user = 0)
+    {
+        $group_user = !empty($group_user) ? $group_user : self::getCurrent();
+        return $group_user == self::DO_BUYING;
     }
 }

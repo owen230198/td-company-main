@@ -4,12 +4,14 @@
  	@endphp
 	@if (!empty($ext_action))
 		@foreach ($ext_action as $button)
-			@if (!empty($button['condition']))
-				@if (getBoolByCondArr($button['condition'], (array) $data))
-					@include('table.ext_func_btn')	
-				@endif
-			@else
-				@include('table.ext_func_btn')		
+			@if (empty($button['detailonly']))
+				@if (!empty($button['condition']))
+					@if (getBoolByCondArr($button['condition'], (array) $data))
+						@include('table.ext_func_btn')	
+					@endif
+				@else
+					@include('table.ext_func_btn')		
+				@endif		
 			@endif
 		@endforeach
 	@endif

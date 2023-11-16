@@ -11,7 +11,7 @@
  Target Server Version : 100425
  File Encoding         : 65001
 
- Date: 15/11/2023 06:08:41
+ Date: 16/11/2023 07:56:07
 */
 
 SET NAMES utf8mb4;
@@ -13180,7 +13180,7 @@ CREATE TABLE `files`  (
   `updated_at` datetime(0) NULL DEFAULT NULL,
   `created_by` int(10) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 133 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 135 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of files
@@ -13300,6 +13300,8 @@ INSERT INTO `files` VALUES (129, '1 TÚI QUÀ TẾT KT chuẩn 2024 3 loại CHU
 INSERT INTO `files` VALUES (130, '1 TÚI QUÀ TẾT KT chuẩn 2024 3 loại CHUẨN NHẤT 9999', NULL, 'storages/uploads', 'storage/app/public/uploads/1 TÚI QUÀ TẾT KT chuẩn 2024 3 loại CHUẨN NHẤT 9999(7).cdr', NULL, 'cdr', 1, '2023-10-21 08:08:02', '2023-10-21 08:08:02', 1);
 INSERT INTO `files` VALUES (131, 'Hộp cứng Bigfam', NULL, 'storages/uploads', 'storage/app/public/uploads/Hộp cứng Bigfam.cdr', NULL, 'cdr', 1, '2023-10-21 14:30:41', '2023-10-21 14:30:41', 1);
 INSERT INTO `files` VALUES (132, 'khăn mat', NULL, 'storages/uploads', 'storage/app/public/uploads/khăn mat.pdf', NULL, 'pdf', 1, '2023-10-25 08:48:52', '2023-10-25 08:48:52', 1);
+INSERT INTO `files` VALUES (133, '_Liverpool_Steven_Gerrard_048843_', NULL, 'storages/uploads', 'storage/app/public/uploads/_Liverpool_Steven_Gerrard_048843_.jpg', NULL, 'jpg', 1, '2023-11-16 06:37:56', '2023-11-16 06:37:56', 18);
+INSERT INTO `files` VALUES (134, 'chi-tiet-don-hang', NULL, 'storages/uploads', 'storage/app/public/uploads/chi-tiet-don-hang.php', NULL, 'php', 1, '2023-11-16 06:45:54', '2023-11-16 06:45:54', 18);
 
 -- ----------------------------
 -- Table structure for fill_finishes
@@ -13669,7 +13671,7 @@ INSERT INTO `n_detail_tables` VALUES (258, 'created_at', '', 'Ngày tạo', 'dat
 INSERT INTO `n_detail_tables` VALUES (259, 'updated_at', '', 'Ngày sửa', 'datetime', 'supply_buyings', 0, 0, 0, 0, 0, '', 1, 8, 1, '2023-04-28 11:43:12', '2023-11-14 23:54:00');
 INSERT INTO `n_detail_tables` VALUES (260, 'created_by', NULL, 'Người thêm', 'linking', 'supply_buyings', 1, 0, 0, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', 1, 9, 1, '2023-04-08 00:08:00', '2023-11-14 23:54:01');
 INSERT INTO `n_detail_tables` VALUES (261, 'applied_by', NULL, 'Người duyệt mua', 'linking', 'supply_buyings', 1, 0, 0, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', 1, 10, 1, '2023-04-08 00:08:00', '2023-11-14 23:54:03');
-INSERT INTO `n_detail_tables` VALUES (262, 'bought_buy', NULL, 'Người mua', 'linking', 'supply_buyings', 1, 0, 0, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', 1, 11, 1, '2023-04-08 00:08:00', '2023-11-14 23:54:04');
+INSERT INTO `n_detail_tables` VALUES (262, 'bought_by', NULL, 'Người mua', 'linking', 'supply_buyings', 1, 0, 0, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', 1, 11, 1, '2023-04-08 00:08:00', '2023-11-16 07:50:44');
 
 -- ----------------------------
 -- Table structure for n_group_users
@@ -13696,8 +13698,9 @@ INSERT INTO `n_group_users` VALUES (4, 'Phòng thiết kế', 'Phòng thiết k�
 INSERT INTO `n_group_users` VALUES (5, 'Phòng Kỹ thuật sản xuất', 'Phòng Kỹ thuật sản xuất', 1, '2023-05-23 14:44:18', '2023-05-23 14:44:18', 1);
 INSERT INTO `n_group_users` VALUES (6, 'Phòng Kế hoạch', 'Phòng Kế hoạch', 1, '2023-05-23 14:44:18', '2023-05-23 14:44:18', 1);
 INSERT INTO `n_group_users` VALUES (7, 'Kho vật tư xuất - nhập', 'Kho vật tư xuất - nhập', 1, '2023-05-23 14:44:18', '2023-05-23 14:44:18', 1);
-INSERT INTO `n_group_users` VALUES (8, 'Phòng mua hàng', 'Phòng mua hàng', 1, '2023-05-23 14:44:18', '2023-05-23 14:44:18', 1);
-INSERT INTO `n_group_users` VALUES (9, 'Khuôn mẫu', 'Khuôn mẫu', 1, '2023-05-23 14:44:18', '2023-05-23 14:44:18', 1);
+INSERT INTO `n_group_users` VALUES (8, 'Phòng duyệt mua', 'Phòng duyệt mua', 1, '2023-05-23 14:44:18', '2023-11-16 01:11:53', 1);
+INSERT INTO `n_group_users` VALUES (9, 'Phòng khuôn mẫu', 'Khuôn mẫu', 1, '2023-05-23 14:44:18', '2023-11-16 03:39:45', 1);
+INSERT INTO `n_group_users` VALUES (10, 'Phòng mua hàng', 'Phòng mua hàng', 1, '2023-05-23 14:44:18', '2023-11-16 03:40:13', 1);
 
 -- ----------------------------
 -- Table structure for n_log_actions
@@ -13715,7 +13718,7 @@ CREATE TABLE `n_log_actions`  (
   `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 597 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 605 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of n_log_actions
@@ -13810,6 +13813,14 @@ INSERT INTO `n_log_actions` VALUES (593, 'supply_buyings', 'insert', 1, 6, 0, '{
 INSERT INTO `n_log_actions` VALUES (594, 'supply_buyings', 'update', 15, 6, 0, '{\"code\":{\"old\":\"CT-00000015\",\"new\":\"CT-00000017\"},\"supply\":{\"old\":\"[{\\\"supp_type\\\":\\\"paper\\\",\\\"size_type\\\":\\\"47\\\",\\\"qty\\\":\\\"10000\\\"},{\\\"supp_type\\\":\\\"nilon\\\",\\\"size_type\\\":\\\"2\\\",\\\"qty\\\":\\\"20000\\\"}]\",\"new\":\"[{\\\"supp_type\\\":\\\"paper\\\",\\\"qty\\\":\\\"10000\\\"},{\\\"supp_type\\\":\\\"paper\\\",\\\"size_type\\\":\\\"46\\\",\\\"qty\\\":\\\"20000\\\"}]\"}}', 1, '2023-11-15 05:56:28', '2023-11-15 05:56:28');
 INSERT INTO `n_log_actions` VALUES (595, 'supply_buyings', 'update', 16, 6, 0, '{\"code\":{\"old\":\"CT-00000016\",\"new\":\"CT-00000017\"},\"provider\":{\"old\":null,\"new\":50},\"supply\":{\"old\":\"[{\\\"supp_type\\\":\\\"paper\\\",\\\"qty\\\":\\\"10000\\\"},{\\\"supp_type\\\":\\\"paper\\\",\\\"size_type\\\":\\\"46\\\",\\\"qty\\\":\\\"20000\\\"}]\",\"new\":\"[{\\\"supp_type\\\":\\\"paper\\\",\\\"size_type\\\":\\\"53\\\",\\\"qty\\\":\\\"10000\\\"},{\\\"supp_type\\\":\\\"paper\\\",\\\"qty\\\":\\\"20000\\\"}]\"}}', 1, '2023-11-15 05:57:06', '2023-11-15 05:57:06');
 INSERT INTO `n_log_actions` VALUES (596, 'supply_buyings', 'update', 14, 6, 0, '{\"code\":{\"old\":\"CT-00000014\",\"new\":\"CT-00000017\"},\"provider\":{\"old\":50,\"new\":54},\"supply\":{\"old\":\"[{\\\"supp_type\\\":\\\"paper\\\",\\\"size_type\\\":\\\"47\\\",\\\"qty\\\":\\\"10000\\\"},{\\\"supp_type\\\":\\\"nilon\\\",\\\"size_type\\\":\\\"2\\\",\\\"qty\\\":\\\"20000\\\"}]\",\"new\":\"[{\\\"supp_type\\\":\\\"paper\\\",\\\"qty\\\":\\\"10000\\\"},{\\\"supp_type\\\":\\\"nilon\\\",\\\"qty\\\":\\\"20000\\\"}]\"}}', 1, '2023-11-15 06:08:11', '2023-11-15 06:08:11');
+INSERT INTO `n_log_actions` VALUES (597, 'supply_buyings', 'update', 16, 6, 0, '{\"supply\":{\"old\":\"[{\\\"supp_type\\\":\\\"paper\\\",\\\"size_type\\\":\\\"53\\\",\\\"qty\\\":\\\"10000\\\"},{\\\"supp_type\\\":\\\"paper\\\",\\\"qty\\\":\\\"20000\\\"}]\",\"new\":\"[{\\\"supp_type\\\":\\\"paper\\\",\\\"qty\\\":\\\"10000\\\"},{\\\"supp_type\\\":\\\"paper\\\",\\\"size_type\\\":\\\"45\\\",\\\"qty\\\":\\\"20000\\\"}]\"}}', 1, '2023-11-15 20:18:51', '2023-11-15 20:18:51');
+INSERT INTO `n_log_actions` VALUES (598, 'supply_buyings', 'update', 16, 6, 0, '{\"supply\":{\"old\":\"[{\\\"supp_type\\\":\\\"paper\\\",\\\"qty\\\":\\\"10000\\\"},{\\\"supp_type\\\":\\\"paper\\\",\\\"size_type\\\":\\\"45\\\",\\\"qty\\\":\\\"20000\\\"}]\",\"new\":\"[{\\\"supp_type\\\":\\\"paper\\\",\\\"size_type\\\":\\\"47\\\",\\\"qty\\\":\\\"10000\\\"},{\\\"supp_type\\\":\\\"paper\\\",\\\"qty\\\":\\\"20000\\\"}]\"}}', 1, '2023-11-15 20:20:03', '2023-11-15 20:20:03');
+INSERT INTO `n_log_actions` VALUES (599, 'supply_buyings', 'update', 16, 6, 0, '{\"supply\":{\"old\":\"[{\\\"supp_type\\\":\\\"paper\\\",\\\"size_type\\\":\\\"47\\\",\\\"qty\\\":\\\"10000\\\"},{\\\"supp_type\\\":\\\"paper\\\",\\\"qty\\\":\\\"20000\\\"}]\",\"new\":\"[{\\\"supp_type\\\":\\\"paper\\\",\\\"qty\\\":\\\"10000\\\"},{\\\"supp_type\\\":\\\"nilon\\\",\\\"size_type\\\":\\\"3\\\",\\\"qty\\\":\\\"20000\\\"}]\"}}', 1, '2023-11-15 20:20:54', '2023-11-15 20:20:54');
+INSERT INTO `n_log_actions` VALUES (600, 'supply_buyings', 'update', 16, 6, 0, '{\"supply\":{\"old\":\"[{\\\"supp_type\\\":\\\"paper\\\",\\\"qty\\\":\\\"10000\\\"},{\\\"supp_type\\\":\\\"nilon\\\",\\\"size_type\\\":\\\"3\\\",\\\"qty\\\":\\\"20000\\\"}]\",\"new\":\"[{\\\"supp_type\\\":\\\"paper\\\",\\\"size_type\\\":\\\"45\\\",\\\"qty\\\":\\\"10000\\\"},{\\\"supp_type\\\":\\\"paper\\\",\\\"size_type\\\":\\\"46\\\",\\\"qty\\\":\\\"20000\\\"}]\"}}', 1, '2023-11-15 22:06:31', '2023-11-15 22:06:31');
+INSERT INTO `n_log_actions` VALUES (601, 'supply_buyings', 'update', 16, 6, 0, '{\"supply\":{\"old\":\"[{\\\"supp_type\\\":\\\"paper\\\",\\\"size_type\\\":\\\"45\\\",\\\"qty\\\":\\\"10000\\\"},{\\\"supp_type\\\":\\\"paper\\\",\\\"size_type\\\":\\\"46\\\",\\\"qty\\\":\\\"20000\\\"}]\",\"new\":\"[{\\\"supp_type\\\":\\\"paper\\\",\\\"size_type\\\":\\\"45\\\",\\\"qty\\\":\\\"10000\\\"},{\\\"supp_type\\\":\\\"paper\\\",\\\"size_type\\\":\\\"46\\\",\\\"qty\\\":\\\"20000\\\"},{\\\"supp_type\\\":\\\"nilon\\\",\\\"size_type\\\":\\\"5\\\",\\\"qty\\\":\\\"3000\\\"}]\"}}', 1, '2023-11-15 22:10:37', '2023-11-15 22:10:37');
+INSERT INTO `n_log_actions` VALUES (602, 'n_users', 'update', 16, 16, 0, '{\"email\":{\"old\":\"\",\"new\":\"sadsadsa\"}}', 1, '2023-11-16 01:15:18', '2023-11-16 01:15:18');
+INSERT INTO `n_log_actions` VALUES (603, 'n_users', 'insert', 17, 16, 0, '{\"name\":\"Duy\\u1ec7t Mua\",\"email\":\"duyetmua\",\"phone\":\"0123456789\",\"created_at\":\"16\\/11\\/2023 1:19\",\"note\":\"Duy\\u1ec7t y\\u00eau c\\u1ea7u mua h\\u00e0ng\",\"username\":\"duyetmua\",\"password\":\"123456\",\"group_user\":\"8\",\"act\":\"1\"}', 1, '2023-11-16 01:20:31', '2023-11-16 01:20:31');
+INSERT INTO `n_log_actions` VALUES (604, 'n_users', 'insert', 18, 16, 0, '{\"name\":\"Mua h\\u00e0ng\",\"email\":\"muahang\",\"phone\":\"0987\",\"created_at\":\"16\\/11\\/2023 3:40\",\"note\":\"Ph\\u00f2ng mua v\\u1eadt t\\u01b0\",\"username\":\"muahang\",\"password\":\"123456\",\"group_user\":\"10\",\"act\":\"1\"}', 1, '2023-11-16 03:40:59', '2023-11-16 03:40:59');
 
 -- ----------------------------
 -- Table structure for n_modules
@@ -14026,7 +14037,7 @@ INSERT INTO `n_tables` VALUES (24, 'n_log_actions', 'Lịch sử thao tác', NUL
 INSERT INTO `n_tables` VALUES (25, 'w_users', 'Công nhân', '{\r\n	\"link\":\"list-worker-by-device/machine\", \r\n	\"note\":\"DS tổ máy\"\r\n}', 10, 'view', '', '1', '1', '1', '1', '2023-05-23 14:43:41', '2023-09-11 11:17:39');
 INSERT INTO `n_tables` VALUES (26, 'paper_extends', 'Tên phụ giấy in', NULL, 10, 'view', '', '1', '1', '1', '1', '2023-07-17 19:30:41', '2023-08-16 19:42:34');
 INSERT INTO `n_tables` VALUES (27, 'supply_warehouses', 'Kho vật tư (carton, cao su, mút xốp, mica,...)', '{\r\n	\"link\":\"warehouse-management\", \r\n	\"note\":\"Quản lí kho vật tư\"\r\n}', 10, 'view', '[\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"undo\",\"note\":\"Xác nhận nhập kho vật tư\", \r\n		\"class\":\"__confirm_im_supp\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"waiting\"}\r\n		]\r\n	}\r\n]', '1', '1', '1', '1', '2023-07-14 03:17:55', '2023-08-16 19:43:11');
-INSERT INTO `n_tables` VALUES (28, 'print_warehouses', 'Kho vật tư (giấy in)', '{\r\n	\"link\":\"warehouse-management\", \r\n	\"note\":\"Quản lí kho vật tư\"\r\n}', 10, 'view', '[\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"undo\",\"note\":\"Xác nhận nhập kho vật tư\", \r\n		\"class\":\"__confirm_im_supp\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"waiting\"}\r\n		]\r\n	}\r\n]', '1', '1', '1', '1', '2023-07-14 03:17:55', '2023-08-17 16:35:54');
+INSERT INTO `n_tables` VALUES (28, 'print_warehouses', 'Kho vật tư (giấy in)', '{\r\n	\"link\":\"warehouse-management\", \r\n	\"note\":\"Quản lí kho vật tư\"\r\n}', 10, 'view', '[\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"undo\",\"note\":\"Xác nhận nhập kho vật tư\", \r\n		\"class\":\"__confirm_im_supp\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"waiting\"}\r\n		]\r\n	}\r\n]', '1', '1', '1', '1', '2023-07-14 03:17:55', '2023-11-16 00:44:11');
 INSERT INTO `n_tables` VALUES (29, 'other_warehouses', 'Kho vật tư (nam châm)', '{\r\n	\"link\":\"warehouse-management\", \r\n	\"note\":\"Quản lí kho vật tư\"\r\n}', 10, 'view', '', '1', '1', '1', '1', '2023-07-14 03:17:55', '2023-09-11 11:17:42');
 INSERT INTO `n_tables` VALUES (30, 'square_warehouses', 'Kho vật tư (vật tư màng, nhung, vải lụa)', '{\r\n	\"link\":\"warehouse-management\", \r\n	\"note\":\"Quản lí kho vật tư\"\r\n}', 10, 'view', '', '1', '1', '1', '1', '2023-07-14 03:17:55', '2023-09-11 18:44:57');
 INSERT INTO `n_tables` VALUES (32, 'w_salaries', 'Bảng chấm công - công nhân', '', 10, 'view', '', '0', '0', '1', '0', '2023-07-14 03:17:55', '2023-08-17 16:35:47');
@@ -14036,7 +14047,7 @@ INSERT INTO `n_tables` VALUES (35, 'supplies', 'Vật tư hộp cứng', NULL, 2
 INSERT INTO `n_tables` VALUES (36, 'fill_finishes', 'Bồi & hoàn thiện', NULL, 20, 'view', '', '0', '1', '0', '0', '2023-06-21 13:22:33', '2023-09-17 10:54:34');
 INSERT INTO `n_tables` VALUES (37, 'product_styles', 'Kiểu hộp', '{\r\n	\"link\":\"view/product_categories\", \r\n	\"note\":\"Nhóm sản phẩm\"\r\n}', 20, 'view', '', '1', '1', '1', '1', '2023-06-21 13:22:33', '2023-09-20 15:05:49');
 INSERT INTO `n_tables` VALUES (38, 'warehouse_providers', 'Nhà cung cấp vật tư', NULL, 10, 'view', '', '1', '1', '1', '1', '2023-07-17 19:30:41', '2023-08-16 19:42:34');
-INSERT INTO `n_tables` VALUES (39, 'supply_buyings', 'Yêu cầu mua vật tư', NULL, 10, 'view', '', '1', '1', '1', '1', '2023-07-17 19:30:41', '2023-11-14 21:01:14');
+INSERT INTO `n_tables` VALUES (39, 'supply_buyings', 'Yêu cầu mua vật tư', NULL, 10, 'view', '[\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"check-circle-o\",\"note\":\"Duyệt mua vật tư\", \r\n		\"class\":\"__confirm_buying\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"not_accepted\"}\r\n		]\r\n	},\r\n	{\r\n		\"type\":2,\r\n		\"detailonly\":1,\r\n		\"icon\":\"check-square-o\",\"note\":\"Xác nhận đã mua\", \r\n		\"class\":\"__confirm_bought\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"accepted\"}\r\n		]\r\n	}\r\n]', '1', '1', '1', '1', '2023-07-17 19:30:41', '2023-11-16 05:38:43');
 
 -- ----------------------------
 -- Table structure for n_users
@@ -14058,7 +14069,7 @@ CREATE TABLE `n_users`  (
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `created_by` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of n_users
@@ -14076,7 +14087,9 @@ INSERT INTO `n_users` VALUES (12, 'kythuatsx2', 'e10adc3949ba59abbe56e057f20f883
 INSERT INTO `n_users` VALUES (13, 'khovattu2', 'e10adc3949ba59abbe56e057f20f883e', 'KHO VẬT TƯ - Ms MAI', 'kd1.intuandung@gmail.com', '0963303999', 7, 0, NULL, NULL, 1, '2023-09-29 15:18:49', '2023-09-29 15:18:49', 1);
 INSERT INTO `n_users` VALUES (14, 'phongmuahang', 'e10adc3949ba59abbe56e057f20f883e', 'PHÒNG MUA HÀNG - Ms HUYỀN', 'kd1.intuandung@gmail.com', '0963303999', 8, 0, NULL, NULL, 1, '2023-09-29 15:20:35', '2023-09-29 15:20:35', 1);
 INSERT INTO `n_users` VALUES (15, 'phongkhuonmau', 'e10adc3949ba59abbe56e057f20f883e', 'PHÒNG KHUÔN MẪU', 'in88.vn@gmail.com', '0963303999', 9, 0, NULL, NULL, 1, '2023-09-29 15:21:33', '2023-10-06 06:50:57', 1);
-INSERT INTO `n_users` VALUES (16, 'dev', 'e10adc3949ba59abbe56e057f20f883e', 'khanh', '', '0123456789', 1, 0, NULL, 'khanh', 1, '2023-07-14 02:02:00', '2023-10-07 09:24:47', 1);
+INSERT INTO `n_users` VALUES (16, 'dev', 'e10adc3949ba59abbe56e057f20f883e', 'khanh', '', '0123456789', 1, 0, NULL, 'khanh', 1, '2023-07-14 02:02:00', '2023-11-16 01:15:52', 1);
+INSERT INTO `n_users` VALUES (17, 'duyetmua', 'e10adc3949ba59abbe56e057f20f883e', 'Duyệt Mua', 'duyetmua', '0123456789', 8, 0, NULL, 'Duyệt yêu cầu mua hàng', 1, '2023-11-16 01:20:31', '2023-11-16 01:20:31', 16);
+INSERT INTO `n_users` VALUES (18, 'muahang', 'e10adc3949ba59abbe56e057f20f883e', 'Mua hàng', 'muahang', '0987', 10, 0, NULL, 'Phòng mua vật tư', 1, '2023-11-16 03:40:59', '2023-11-16 03:40:59', 16);
 
 -- ----------------------------
 -- Table structure for orders
@@ -14748,6 +14761,8 @@ CREATE TABLE `supply_buyings`  (
   `supply` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   `status` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `payment_status` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `total` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `bill` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `act` tinyint(4) NULL DEFAULT NULL,
   `created_by` int(10) NULL DEFAULT NULL,
@@ -14761,9 +14776,9 @@ CREATE TABLE `supply_buyings`  (
 -- ----------------------------
 -- Records of supply_buyings
 -- ----------------------------
-INSERT INTO `supply_buyings` VALUES (14, 'CT-00000017', 'Yêu cầu mua vật tư 1', 54, '[{\"supp_type\":\"paper\",\"qty\":\"10000\"},{\"supp_type\":\"nilon\",\"qty\":\"20000\"}]', 'not_accepted', 'not_payment', 'Mua bổ xung cho đơn hàng 1', 1, 6, NULL, NULL, '2023-11-15 06:08:11', '2023-11-15 06:08:11');
-INSERT INTO `supply_buyings` VALUES (15, 'CT-00000017', 'Yêu cầu mua vật tư 1', 50, '[{\"supp_type\":\"paper\",\"qty\":\"10000\"},{\"supp_type\":\"paper\",\"size_type\":\"46\",\"qty\":\"20000\"}]', 'not_accepted', 'not_payment', 'Mua bổ xung cho đơn hàng 1', 1, 6, NULL, NULL, '2023-11-15 05:56:28', '2023-11-15 05:56:28');
-INSERT INTO `supply_buyings` VALUES (16, 'CT-00000017', 'Yêu cầu mua vật tư 1', 50, '[{\"supp_type\":\"paper\",\"size_type\":\"53\",\"qty\":\"10000\"},{\"supp_type\":\"paper\",\"qty\":\"20000\"}]', 'not_accepted', 'not_payment', 'Mua bổ xung cho đơn hàng 1', 1, 6, NULL, NULL, '2023-11-15 05:57:06', '2023-11-15 05:57:06');
+INSERT INTO `supply_buyings` VALUES (14, 'CT-00000017', 'Yêu cầu mua vật tư 1', 54, '[{\"supp_type\":\"paper\",\"qty\":\"10000\"},{\"supp_type\":\"nilon\",\"qty\":\"20000\"}]', 'accepted', 'not_payment', NULL, NULL, 'Mua bổ xung cho đơn hàng 1', 1, 6, 17, NULL, '2023-11-15 06:08:11', '2023-11-16 03:15:44');
+INSERT INTO `supply_buyings` VALUES (15, 'CT-00000017', 'Yêu cầu mua vật tư 1', 50, '[{\"supp_type\":\"paper\",\"qty\":\"10000\"},{\"supp_type\":\"paper\",\"size_type\":\"46\",\"qty\":\"20000\"}]', 'accepted', 'not_payment', NULL, NULL, 'Mua bổ xung cho đơn hàng 1', 1, 6, 17, NULL, '2023-11-15 05:56:28', '2023-11-16 03:15:40');
+INSERT INTO `supply_buyings` VALUES (16, 'CT-00000017', 'Yêu cầu mua vật tư 1', 50, '[{\"supp_type\":\"paper\",\"size_type\":\"45\",\"qty\":\"10000\",\"total\":1000000,\"price\":100},{\"supp_type\":\"paper\",\"size_type\":\"46\",\"qty\":\"20000\",\"total\":4000000,\"price\":200},{\"supp_type\":\"nilon\",\"size_type\":\"5\",\"qty\":\"3000\",\"total\":900000,\"price\":300}]', 'bought', 'not_payment', '5900000', '{\"id\":\"134\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/chi-tiet-don-hang.php\",\"name\":\"chi-tiet-don-hang.php\"}', 'Mua bổ xung cho đơn hàng 1', 1, 6, 17, 18, '2023-11-15 22:10:37', '2023-11-16 06:52:30');
 
 -- ----------------------------
 -- Table structure for supply_names

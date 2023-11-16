@@ -9,7 +9,9 @@
 	<?php echo e(@$attr['inject_class'] ? ' '.$attr['inject_class'] : ''); ?>" 
 	<?php echo e(@$attr['disable_field'] == 1 ? 'disabled' : ''); ?>
 
-	<?php echo e(@$attr['placeholder'] ? 'placehoder='.$attr['placeholder'] : ''); ?> <?php echo e(@$attr['inject_attr'] ?? ''); ?>>
+	<?php echo e(@$attr['placeholder'] ? 'placehoder='.$attr['placeholder'] : ''); ?> <?php echo e(@$attr['inject_attr'] ?? ''); ?>
+
+	<?php echo e(@$attr['readonly'] == 1 ? 'readonly' : ''); ?>>
 		<?php $__currentLoopData = $list_options; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $option): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 			<option value="<?php echo e($key); ?>" <?php echo e(@$value == $key ? 'selected' : ''); ?>>
 				<?php echo e($option); ?>

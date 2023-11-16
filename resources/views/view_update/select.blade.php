@@ -7,7 +7,8 @@
 	<select name="{{ $name }}" class="form-control{{ @$select_config['searchbox'] == 1 ? ' select_config' : '' }}
 	{{ @$attr['inject_class'] ? ' '.$attr['inject_class'] : '' }}" 
 	{{ @$attr['disable_field'] == 1 ? 'disabled' : '' }}
-	{{ @$attr['placeholder'] ? 'placehoder='.$attr['placeholder'] : '' }} {{ @$attr['inject_attr'] ?? '' }}>
+	{{ @$attr['placeholder'] ? 'placehoder='.$attr['placeholder'] : '' }} {{ @$attr['inject_attr'] ?? '' }}
+	{{ @$attr['readonly'] == 1 ? 'readonly' : '' }}>
 		@foreach ($list_options as $key => $option)
 			<option value="{{ $key }}" {{ @$value == $key ? 'selected' : '' }}>
 				{{ $option }}

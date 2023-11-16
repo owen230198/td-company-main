@@ -80,11 +80,11 @@ var ajaxViewTarget = function(url, target_ajax, section_class, type = 1)
 
 var empty = function(value)
 {
-	return value === '' || value == 'undefined' || value == null || value == undefined || value == 0;
+	return value === '' || value == 'undefined' || value == null || value == undefined || value == 0 || !value;
 }
 
 var getEmptyDefault = function(value, deflt = '', type = 'string'){
-	if (value === '' || value == 'undefined' || value == null) {
+	if (empty(value)) {
 		if (type == 'float') {
 			return !Number.isNaN(parseFloat(value)) ? parseFloat(value) : deflt;	
 		}else if(type == 'number'){
@@ -96,7 +96,7 @@ var getEmptyDefault = function(value, deflt = '', type = 'string'){
 		if (type == 'float') {
 			return parseFloat(value);
 		}else if (type == 'number') {
-			return parseInt($value);	
+			return parseInt(value);	
 		}else{
 			return value;
 		}
