@@ -11,7 +11,7 @@ nhân viên: <span class="color_main font_bold"><?php echo e(getFieldDataById('n
     $file_bill = !empty($bill) ? json_decode($bill, true) : [];
 ?>
 <?php if(!empty($file_bill['path'])): ?>
-    tải về file hóa đơn nhập vật tư <a href="<?php echo e($file_bill['path']); ?>" target="_blank" class="color_green font_bold">tại đây</a>.
+    tải về file hóa đơn nhập vật tư <a href="<?php echo e(url('file-download?path='.@$file_bill['path'])); ?>" target="_blank" class="color_green font_bold">tại đây</a>.
 <?php endif; ?>
 <?php endif; ?>
 số lượng vật tư đã thay đổi từ <span class="color_red font_bold"><?php echo e($old_qty); ?></span> thành <span class="color_red font_bold"><?php echo e($new_qty); ?></span>,

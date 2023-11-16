@@ -253,6 +253,7 @@ class NGroupUser extends Model
             self::MODULE['change_password'],
         ],
         self::WAREHOUSE => [
+            self::MODULE['supp_bying_req'],
             self::MODULE['warehouse_management'],
             self::MODULE['ex_supply'],
             self::MODULE['im_supply'],

@@ -81,6 +81,8 @@ Route::middleware(['check_login'])->group(function () {
 	Route::get('add-supply-buying', [SupplyBuyingController::class, 'addSupplyBuying']);
 	Route::post('confirm-supply-buy/{id}', [SupplyBuyingController::class, 'confirmSupplyBuy']);
 	Route::post('confirm-supply-bought/{id}', [SupplyBuyingController::class, 'confirmSupplyBought']);
+	Route::post('confirm-warehouse-imported/{id}', [SupplyBuyingController::class, 'confirmWarehouseImported']);
+	Route::get('list-supply-buying/{id}', [SupplyBuyingController::class, 'listSupplyBuying']);
 });
 $modules_path = dirname(__DIR__) . '/app/Modules/';
 if (is_dir($modules_path)) {

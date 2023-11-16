@@ -35,7 +35,10 @@
                     'other_data' => ['role_update' => [\GroupUser::DO_BUYING], 'field_name' => 'bill'],
                     'value' => @$dataItem['bill']
                 ]
-            ]  
+            ];
+            if (\GroupUser::isWarehouse()) {
+                unset($do_buy_fields[0]);
+            } 
         @endphp
         @foreach ($do_buy_fields as $do_buy_field)
             @include('view_update.view', $do_buy_field) 

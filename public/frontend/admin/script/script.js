@@ -96,10 +96,10 @@ var getValueMuliCheckbox = function () {
 var loadDataPopup = function () {
     $(document).on("click", ".load_view_popup", function (event) {
         event.preventDefault();
-        var src = $(this).data("src");
+        let src = $(this).data("src");
         $(".modalAction").find("iframe").attr("src", src);
     });
-    $('.modalAction').on('hidden.bs.modal', function (e) {
+    $('.modalAction').on('hidden.bs.modal', function () {
         location.reload();
       })
 };
@@ -660,8 +660,19 @@ var confirmBought = function()
             url: getBaseRoute('confirm-supply-bought/'+id),
             type: 'POST',
             data: form.serialize()
-        })
+        });
+    });
+}
 
+var confirmImportSupplyBuy = function()
+{
+    $(document).on('click', 'button.__confirm_warehouse_imported', function(event) {
+        event.preventDefault();
+        let id = $(this).data('id');
+        ajaxBaseCall({
+            url: 'confirm-warehouse-imported/'+id,
+            type: 'POST'
+        });
     });
 }
 
@@ -696,4 +707,5 @@ $(function () {
     confirmBuying();
     changeInputPriceBuying();
     confirmBought();
+    confirmImportSupplyBuy();
 });

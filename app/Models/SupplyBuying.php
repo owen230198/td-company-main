@@ -101,10 +101,15 @@ class SupplyBuying extends Model
         }elseif (\GroupUser::isWarehouse()) {
             return [
                 $field_supp_type,
+                $field_qty
+            ]; 
+        }elseif (\GroupUser::isAdmin()) {
+            return [
+                $field_supp_type,
                 $field_qty,
                 $field_price,
                 $field_total
-            ]; 
+            ];
         }      
     }
     static function getRole()

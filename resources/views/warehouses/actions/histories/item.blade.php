@@ -11,7 +11,7 @@ nhân viên: <span class="color_main font_bold">{{ getFieldDataById('name', 'n_u
     $file_bill = !empty($bill) ? json_decode($bill, true) : [];
 @endphp
 @if (!empty($file_bill['path']))
-    tải về file hóa đơn nhập vật tư <a href="{{ $file_bill['path'] }}" target="_blank" class="color_green font_bold">tại đây</a>.
+    tải về file hóa đơn nhập vật tư <a href="{{ url('file-download?path='.@$file_bill['path']) }}" target="_blank" class="color_green font_bold">tại đây</a>.
 @endif
 @endif
 số lượng vật tư đã thay đổi từ <span class="color_red font_bold">{{ $old_qty }}</span> thành <span class="color_red font_bold">{{ $new_qty }}</span>,

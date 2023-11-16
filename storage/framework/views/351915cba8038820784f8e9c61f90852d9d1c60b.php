@@ -35,7 +35,10 @@
                     'other_data' => ['role_update' => [\GroupUser::DO_BUYING], 'field_name' => 'bill'],
                     'value' => @$dataItem['bill']
                 ]
-            ]  
+            ];
+            if (\GroupUser::isWarehouse()) {
+                unset($do_buy_fields[0]);
+            } 
         ?>
         <?php $__currentLoopData = $do_buy_fields; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $do_buy_field): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <?php echo $__env->make('view_update.view', $do_buy_field, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?> 

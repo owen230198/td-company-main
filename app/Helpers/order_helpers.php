@@ -149,7 +149,7 @@
     }
 
     if (!function_exists('getTableWarehouseByType')) {
-        function getTableWarehouseByType($param = []){
+        function getTableWarehouseByType($param = new \stdClass()){
             $type = !empty($param->supp_type) ? $param->supp_type : '';
             switch ($type) {
                 case in_array($type, [\TDConst::CARTON, \TDConst::RUBBER, \TDConst::STYRO, \TDConst::MICA]):
@@ -242,6 +242,18 @@
     if (!function_exists('getSupplyNameByKey')) {
         function getSupplyNameByKey($key) {
             switch ($key) {
+                case \TDConst::PAPER:
+                    return 'Giấy in';
+                    break;
+                case \TDConst::NILON:
+                    return 'Màng nilon';
+                    break;
+                case \TDConst::METALAI:
+                    return 'Màng metalai';
+                    break;
+                case \TDConst::COVER:
+                    return 'Màng phủ trên';
+                    break;
                 case \TDConst::CARTON:
                     return 'Vật tư carton';
                     break;
@@ -259,6 +271,9 @@
                     break;
                 case \TDConst::MICA:
                     return 'Vật tư mica';
+                    break;
+                case \TDConst::MAGNET:
+                    return 'Nam châm';
                     break;
                 default:
                     return "";

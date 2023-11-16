@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\SupplyBuying;
 use App\Http\Controllers\Controller;
 use App\Models\SupplyBuying;
+use App\Services\WarehouseService;
 use Illuminate\Http\Request;
 
 class SupplyBuyingController extends Controller
@@ -125,5 +126,51 @@ class SupplyBuyingController extends Controller
         }else{
             return returnMessageAjax(100, 'Không có quyền thực hiện thao tác này !');
         }
+    }
+
+    public function confirmWarehouseImported($id)
+    {
+        if (\GroupUser::isAdmin() || \GroupUser::isWarehouse()) {
+            $supp_buying = SupplyBuying::find($id);
+            if (@$supp_buying->status != SupplyBuying::BOUGHT) {
+                return returnMessageAjax(100, 'Vật tư chưa được xác nhận mua về !');
+            }
+            if (empty($supp_buying->bill)) {
+                return returnMessageAjax(100, 'Hóa đơn mua hàng chưa được upload !');
+            }
+            $data_supply = !empty($supp_buying->supply) ? json_decode($supp_buying->supply, true) : [];
+            if (count($data_supply) == 0) {
+                return returnMessageAjax(100, 'Dữ liệu vật tư không tồn tại !');
+            }
+            foreach ($data_supply as $supply) {
+                $table_supply = getTableWarehouseByType((object) $supply);
+                $data['log']['qty'] = (int) $supply['qty'];
+                $data['log']['provider'] = @$supp_buying->provider;
+                $data['log']['price'] = @$supply['price'];
+                $data['log']['bill'] = @$supp_buying->bill;
+                $warehouse_service = new WarehouseService($table_supply);
+                $status = $warehouse_service->update($data, $supply['size_type'], 1);
+                if (@$status['code'] == 100) {
+                    return $status;
+                    break;
+                }
+            }
+            $supp_buying->status = \StatusConst::SUBMITED;
+            $supp_buying->submited_by = \User::getCurrent('id');
+            $supp_buying->save();
+            return returnMessageAjax(200, 'Xác nhận nhập kho thành công !', 'view/supply_buyings?default_data=%7B"status"%3A"'.SupplyBuying::BOUGHT.'"%7D');
+        }else{
+            return returnMessageAjax(100, 'Không có quyền thực hiện thao tác này !');
+        }
+    }
+
+    public function listSupplyBuying($id)
+    {
+        $supply_buying = SupplyBuying::find($id);
+        $data['data_buying'] = $supply_buying;
+        $data['nosidebar'] = true;
+        $data['title'] = 'Danh sách vật tư cần mua của chứng từ '.@$supply_buying->code;
+        $data['list_data'] = !empty($supply_buying->supply) ? json_decode($supply_buying->supply) : new \stdClass();
+        return view('supply_buyings.list_supply', $data);
     }
 }

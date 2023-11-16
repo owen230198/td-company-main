@@ -3,7 +3,7 @@
 <div class="base_content_view">
     <div class="supply_list">
         @foreach ($supply_list as $supply)
-            <a href="{{ url('view/'.$supply['table'].'?default_data={"type":"'.$supply['type'].'","status":"imported"}') }}" class="device_supp_item">
+            <a href="{{ url('view/'.$supply['table'].'?default_data=%7B"type"%3A"'.$supply['type'].'","status":"imported"%7D') }}" class="device_supp_item">
                 {{ @$supply['note'] }}
             </a>    
         @endforeach
