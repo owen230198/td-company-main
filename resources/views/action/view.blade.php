@@ -43,7 +43,7 @@
                 @php
                     $ext_action = !empty($tableItem['ext_action']) ? json_decode($tableItem['ext_action'], true) : []
                 @endphp
-                @if (!empty($ext_action))
+                @if (!empty($ext_action) && !empty($dataItem))
                     @foreach ($ext_action as $button)
                         @if (!empty($button['condition']))
                             @if (getBoolByCondArr($button['condition'], $dataItem->toArray()))
