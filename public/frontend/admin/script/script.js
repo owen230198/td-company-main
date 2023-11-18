@@ -460,6 +460,7 @@ var selectTypeSuppWarehouse = function()
         select_size.data('url', url);
         initInputModuleAfterAjax(parent);
         if (!empty(value)) {
+            console.log(value);
             select_size.attr('readonly', false);    
         }else{
             select_size.attr('readonly', true);   

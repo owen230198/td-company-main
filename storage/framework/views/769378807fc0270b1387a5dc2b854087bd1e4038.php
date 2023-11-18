@@ -43,7 +43,7 @@
                 <?php
                     $ext_action = !empty($tableItem['ext_action']) ? json_decode($tableItem['ext_action'], true) : []
                 ?>
-                <?php if(!empty($ext_action)): ?>
+                <?php if(!empty($ext_action) && !empty($dataItem)): ?>
                     <?php $__currentLoopData = $ext_action; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $button): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <?php if(!empty($button['condition'])): ?>
                             <?php if(getBoolByCondArr($button['condition'], $dataItem->toArray())): ?>

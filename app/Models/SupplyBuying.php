@@ -19,7 +19,7 @@ class SupplyBuying extends Model
             'child' => [
                 [
                     'name' => $base_name.'[supp_type]',
-                    'attr' => '{"required":1,"inject_class":"__wh_select_type","readonly":'.!\GroupUser::isPlanHandle().'}',
+                    'attr' => '{"required":1,"inject_class":"__wh_select_type","readonly":"'.!\GroupUser::isPlanHandle().'"}',
                     'type' => 'select',
                     'value' => !empty($value['supp_type']) ? $value['supp_type'] : '',
                     'other_data' => '{
