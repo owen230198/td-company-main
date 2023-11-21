@@ -15,6 +15,9 @@ class OtherWarehouse extends Model
                 'insert' => 1,
                 'view' => 1,
                 'update' => 1
+            ],
+            \GroupUser::PLAN_HANDLE => [
+                'view' => 1
             ]
         ];
         return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];

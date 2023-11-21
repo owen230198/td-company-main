@@ -211,6 +211,7 @@ class NGroupUser extends Model
             self::MODULE['quote_not_accepted'],
             self::MODULE['quote_accepted'],
             self::MODULE['handle_process'],
+            self::MODULE['warehouse_management'],
             self::MODULE['profit'],
             self::MODULE['rpt_quote_not_accepted'],
             self::MODULE['rpt_quote_accepted'],
@@ -247,6 +248,7 @@ class NGroupUser extends Model
         self::PLAN_HANDLE => [
             self::MODULE['handle_process'],
             self::MODULE['supp_bying_req'],
+            self::MODULE['warehouse_management'],
             self::MODULE['profit'],
             self::MODULE['create_available_order'],
             self::MODULE['account'],
