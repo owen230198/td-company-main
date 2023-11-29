@@ -15,7 +15,10 @@
                     <div class="row row-7">
                         @foreach ($not_accepted_table as $command)
                         <div class="col-lg-6 mb-3">
-                            <a href={{ asset('view/'.$command['table'].'?default_data=%7B"status"%3A"'.@$command['status'].'"%7D') }} 
+                            @php
+                                $command_count = getCountDataTable($command['table'], $command['condition']);
+                            @endphp
+                            <a href={{ asset($command['link']) }} 
                             class="main_item_command h-100 smooth d-flex align-items-center position-relative h-100">
                                 <img src="{{ asset('frontend/admin/images/'.$command['icon'].'_icon.png') }}" alt="order-icon" 
                                 class="command_icon smooth">
@@ -23,9 +26,6 @@
                                     <p class="command_detail_tiltle text-uppercase font_bold color_main">
                                         {{ $command['text'] }}
                                     </p>
-                                    @php
-                                        $command_count = getCountDataTable($command['table'], ['status' => @$command['status']]);
-                                    @endphp
                                     @if ($command_count > 0)
                                         <p class="fs-18 font_bold notify_style">
                                             {{ $command_count }}
