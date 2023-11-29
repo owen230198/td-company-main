@@ -1,0 +1,1 @@
+<input type="text" autocomplete="off" name="<?php echo e($name); ?>" class="form-control dateRangeInput" placeholder="Chọn thời gian" value = "<?php echo e(@$data_search[$name]); ?>"/><?php /**PATH /var/www/html/td-company-app/resources/views/view_search/datetime.blade.php ENDPATH**/ ?>
