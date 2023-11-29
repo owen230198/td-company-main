@@ -1,9 +1,9 @@
 /node_modules
 /public/hot
 /public/storage
-storage
-storage/framework/views/*
-vendor
+/storage/*
+!/storage/.gitkeep
+/vendor
 .env
 .env.backup
 .phpunit.result.cache
