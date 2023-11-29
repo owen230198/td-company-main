@@ -1,1 +1,0 @@
-<p class="mb-0 limit_line_1 text-center color_red w_max_content"><?php echo e(number_format((int)$value)); ?> đ</p><?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/view_table/money.blade.php ENDPATH**/ ?>

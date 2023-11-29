@@ -1,3 +1,0 @@
-<button type="button" data-src="<?php echo e(url('list-supply-buying/'.$data->id)); ?>" class="radius_5 box_shadow_3 text-center color_green font_bold load_view_popup w_120" data-toggle="modal" data-target="#actionModal">
-    <i class="fa fa-eye mr-2 fs-15" aria-hidden="true"></i>Xem Ds vật tư
-</button><?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/view_table/json_supply.blade.php ENDPATH**/ ?>

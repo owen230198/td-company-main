@@ -1,1 +1,0 @@
-<?php echo $__env->make('quotes.profits.papers.box_paste', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/quotes/profits/papers/bag_paste.blade.php ENDPATH**/ ?>

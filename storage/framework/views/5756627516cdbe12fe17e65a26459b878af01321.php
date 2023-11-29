@@ -1,1 +1,0 @@
-<?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/view_update/editor.blade.php ENDPATH**/ ?>

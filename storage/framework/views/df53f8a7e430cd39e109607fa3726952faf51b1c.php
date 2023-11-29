@@ -1,1 +1,0 @@
-<?php dd($value); ?><?php /**PATH C:\xampp\htdocs\td-company-app\resources\views/view_table/view.blade.php ENDPATH**/ ?>

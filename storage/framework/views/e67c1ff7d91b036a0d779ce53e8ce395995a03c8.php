@@ -1,1 +1,0 @@
-<?php /**PATH C:\xampp\htdocs\td-app\td-company-app\resources\views/quotes/profits/papers/ext_price.blade.php ENDPATH**/ ?>
