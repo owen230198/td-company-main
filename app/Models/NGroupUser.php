@@ -22,6 +22,8 @@ class NGroupUser extends Model
     const WAREHOUSE = 7;
     const APPLY_BUYING = 8;
     const DO_BUYING = 10;
+    const KCS = 11;
+    const PRODUCT_WAREHOUSE = 12;
 
     //group modules
     const GROUP_MODULE = [
@@ -54,7 +56,7 @@ class NGroupUser extends Model
         ],
         'worker_salary' =>[
             'name' => 'Bảng lương công nhân',
-            'link' => 'view/w_salaries?default_data=%7B"status"%3A"submited"%7D',
+            'link' => 'view/w_salaries?default_data=%7B"status"%3A"last_submited"%7D',
             'group' => 'factory'
         ],
         'price_materal' => [
@@ -120,6 +122,21 @@ class NGroupUser extends Model
         'handle_process' => [
             'name' => 'Theo dõi sản xuất', 
             'link' => 'view/products?default_data=%7B"order_created":"1"%7D', 
+            'group' => 'order_handle'
+        ],
+        'submited_product' => [
+            'name' => 'SP chờ duyệt bởi KCS', 
+            'link' => 'view/products?default_data=%7B"status":"submited"%7D', 
+            'group' => 'order_handle'
+        ],
+        'kcs_submited_product' => [
+            'name' => 'SP chờ nhập kho', 
+            'link' => 'view/products?default_data=%7B"status":"kcs_submited"%7D', 
+            'group' => 'order_handle'
+        ],
+        'last_submited_product' => [
+            'name' => 'SP trong kho', 
+            'link' => 'view/products?default_data=%7B"status":"last_submited"%7D', 
             'group' => 'order_handle'
         ],
         'supp_bying_req' => [
@@ -277,7 +294,19 @@ class NGroupUser extends Model
             self::MODULE['im_supply'],
             self::MODULE['account'],
             self::MODULE['change_password'],
-        ]
+        ],
+        self::KCS => [
+            self::MODULE['handle_process'],
+            self::MODULE['profit'],
+            self::MODULE['account'],
+            self::MODULE['change_password'],
+        ],
+        self::PRODUCT_WAREHOUSE => [
+            self::MODULE['handle_process'],
+            self::MODULE['profit'],
+            self::MODULE['account'],
+            self::MODULE['change_password'],
+        ],
     ];
 
     //check method
@@ -360,5 +389,15 @@ class NGroupUser extends Model
     {
         $group_user = !empty($group_user) ? $group_user : self::getCurrent();
         return $group_user == self::DO_BUYING;
+    }
+    static function isKCS($group_user = 0)
+    {
+        $group_user = !empty($group_user) ? $group_user : self::getCurrent();
+        return $group_user == self::KCS;
+    }
+    static function isDoProductWarehouse($group_user = 0)
+    {
+        $group_user = !empty($group_user) ? $group_user : self::getCurrent();
+        return $group_user == self::PRODUCT_WAREHOUSE;
     }
 }

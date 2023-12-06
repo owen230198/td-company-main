@@ -66,7 +66,7 @@
                 ['key' => 'submited_at','compare' => 'month', 'value' => 'this_month']
             ];
             $data['list_data'] = getDataTable($table, $where);
-            $data['summary'] = \DB::table($table)->where(['worker' => $worker, 'status' => \StatusConst::SUBMITED])
+            $data['summary'] = \DB::table($table)->where(['worker' => $worker, 'status' => \StatusConst::LAST_SUBMITED])
             ->whereMonth('submited_at', \Carbon\Carbon::now()->month)->sum('total');
             return view('Worker::salaries.view', $data);
         }
