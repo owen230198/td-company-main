@@ -106,7 +106,7 @@
                 <p class="text-uppercase">khách hàng</p>
                 <p>(Ký rõ họ tên)</p>
             </div>
-            <div class="col-6 text-center">
+            <div class="col-6 text-center" style="padding-bottom: 100px">
                 <p>HN, ngày {{ \Carbon\Carbon::now()->day }} tháng {{ \Carbon\Carbon::now()->month }} năm {{ \Carbon\Carbon::now()->year }}</p>
                 <p class="text-uppercase">người viết biên nhận</p>
                 <p>(Ký rõ họ tên)</p>

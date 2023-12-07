@@ -197,8 +197,10 @@ a.device_supp_item {
     transition: all .3s;
 }
 
-.command_icon:hover{
-    transform: rotate(360deg);
+.main_item_command:hover{
+    transform: scale(1.01);
+    background-color: #f1f4f9;
+    transition: all 2s;
 }
 
 .list_table_func>a, .list_table_func>button{
@@ -309,13 +311,14 @@ a.device_supp_item {
 .notify_style{
     text-align: center;
     background: #d50202;
-    min-width: 25px;
+    min-width: 22px;
     margin: auto;
     -webkit-text-fill-color: #ffffff;
     border-radius: 50%;
     position: absolute;
-    right: 35%;
-    top: 5px;
+    right: -10px;
+    top: -5px;
+    padding: 2px;
 }
 
 .breadcrumb-item+.breadcrumb-item::before {

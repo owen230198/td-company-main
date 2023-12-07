@@ -15,7 +15,7 @@ class OrderConstant
         [
             'icon' => 'orders', 
             'table' => 'products', 
-            'text' => 'Đơn chờ duyệt thiết kế', 
+            'text' => 'Duyệt thiết kế', 
             'condition' => ['status' => Order::NOT_ACCEPTED],
             'link' => 'view/products?default_data=%7B"status"%3A"'.Order::NOT_ACCEPTED.'"%7D' 
         ], 
@@ -29,21 +29,21 @@ class OrderConstant
         [
             'icon' => 'tech', 
             'table' => 'products', 
-            'text' => 'Đơn cần xử lí kỹ thuật', 
+            'text' => 'Xử lí kỹ thuật', 
             'condition' => ['status' => Order::DESIGN_SUBMITED],
             'link' => 'view/products?default_data=%7B"status"%3A"'.Order::DESIGN_SUBMITED.'"%7D' 
         ],
         [
             'icon' => 'c_processes', 
             'table' => 'products', 
-            'text' => 'Đơn cần duyệt sản xuất', 
+            'text' => 'Duyệt sản xuất', 
             'condition' => ['status' => Order::TECH_SUBMITED],
             'link' => 'view/products?default_data=%7B"status"%3A"'.Order::TECH_SUBMITED.'"%7D' 
         ],
         [
             'icon' => 'exsupp', 
             'table' => 'c_supplies', 
-            'text' => 'Yêu cầu xuất vật tư',
+            'text' => 'Xuất vật tư',
             'condition' => ['status' => CSupply::HANDLING],
             'link' => 'view/products?default_data=%7B"status"%3A"'.Order::TECH_SUBMITED.'"%7D' 
         ],
@@ -55,49 +55,49 @@ class OrderConstant
         [
             'icon' => 'imbox', 
             'table' => 'supply_warehouses', 
-            'text' => 'Yêu cầu nhập kho băng lề vật tư',
+            'text' => 'Băng lề vật tư',
             'condition' => ['status' => SupplyWarehouse::WAITING],
             'link' => 'view/supply_warehouses?default_data=%7B"status"%3A"'.SupplyWarehouse::WAITING.'"%7D' 
         ],
         [
             'icon' => 'imsupp', 
             'table' => 'print_warehouses', 
-            'text' => 'Yêu cầu nhập kho băng lề giấy in',
+            'text' => 'Băng lề giấy in',
             'condition' => ['status' => SupplyWarehouse::WAITING],
             'link' => 'view/print_warehouses?default_data=%7B"status"%3A"'.SupplyWarehouse::WAITING.'"%7D' 
         ],
         [
             'icon' => 'apply_buy', 
             'table' => 'supply_buyings', 
-            'text' => 'Yêu cầu duyệt mua vật tư',
+            'text' => 'Duyệt mua vật tư',
             'condition' => ['status' => \StatusConst::NOT_ACCEPTED],
             'link' => 'view/supply_buyings?default_data=%7B"status"%3A"'.\StatusConst::NOT_ACCEPTED.'"%7D' 
         ],
         [
             'icon' => 'buy', 
             'table' => 'supply_buyings', 
-            'text' => 'Yêu cầu mua vật tư',
+            'text' => 'Mua vật tư',
             'condition' => ['status' => \StatusConst::ACCEPTED],
             'link' => 'view/supply_buyings?default_data=%7B"status"%3A"'.\StatusConst::ACCEPTED.'"%7D' 
         ],
         [
             'icon' => 'submit_buy', 
             'table' => 'supply_buyings', 
-            'text' => 'Yêu cầu nhập kho vật tư đã mua',
+            'text' => 'Nhập kho vật tư đã mua',
             'condition' => ['status' => SupplyBuying::BOUGHT],
             'link' => 'view/supply_buyings?default_data=%7B"status"%3A"'.SupplyBuying::BOUGHT.'"%7D' 
         ],
         [
             'icon' => 'kcs', 
             'table' => 'products', 
-            'text' => 'Sản phẩm chờ duyệt bởi KCS',
+            'text' => 'Thẩm định sản phẩm',
             'condition' => ['status' => \StatusConst::SUBMITED],
             'link' => 'view/supply_buyings?default_data=%7B"status"%3A"'.\StatusConst::SUBMITED.'"%7D' 
         ],
         [
             'icon' => 'product_waiting', 
             'table' => 'products', 
-            'text' => 'Sản phẩm chờ duyệt nhập kho',
+            'text' => 'Duyệt nhập kho sản phẩm',
             'condition' => ['status' => \StatusConst::LAST_SUBMITED],
             'link' => 'view/supply_buyings?default_data=%7B"status"%3A"'.\StatusConst::LAST_SUBMITED.'"%7D' 
         ],

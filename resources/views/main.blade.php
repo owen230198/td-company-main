@@ -8,25 +8,26 @@
             @if (!empty($not_accepted_table) && is_array($not_accepted_table))
                 <div class="col-12 my-4">
                     <h2 class="fs-15 text-uppercase font_bold pb-1 mb-3 border_bot_eb">Thông báo & Yêu cầu công việc</h2>
-                    <div class="row row-7">
+                    <div class="row row-5">
                         @foreach ($not_accepted_table as $command)
-                        <div class="col_lg_5 mb-3 text-center">
+                        <div class="col-lg-2 col-md-6 mb_10 text-center">
                             @php
                                 $command_count = getCountDataTable($command['table'], $command['condition']);
                             @endphp
                             <a href={{ asset($command['link']) }} 
-                            class="main_item_command h-100 smooth box_shadow_3 radius_5 w-100 p-2 position-relative h-100">
-                                <img src="{{ asset('frontend/admin/images/'.$command['icon'].'_icon.png') }}" alt="order-icon" 
-                                class="command_icon smooth">
+                            class="main_item_command h-100 smooth box_shadow_3 radius_5 w-100 p-2 h-100">
+                                <div class="position-relative d-inline-block">
+                                    <img src="{{ asset('frontend/admin/images/'.$command['icon'].'_icon.png') }}" alt="order-icon" class="command_icon smooth">
+                                    @if ($command_count > 0)
+                                        <p class="font_bold notify_style">
+                                            {{ $command_count > 99 ? '99+' : $command_count }}
+                                        </p>
+                                    @endif
+                                </div>
                                 <div class="command_detail ml-2">
                                     <p class="command_detail_tiltle font_bold color_main">
                                         {{ $command['text'] }}
                                     </p>
-                                    @if ($command_count > 0)
-                                        <p class="fs-15 font_bold notify_style">
-                                            {{ $command_count }}
-                                        </p>
-                                    @endif
                                 </div>
                             </a>
                         </div>     

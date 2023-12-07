@@ -712,6 +712,14 @@ input[type="checkbox"].toggle:disabled::after {
     min-width: 150px;
 }
 
+.mb_10{
+    margin-bottom: 10px;
+}
+
+.font_auto{
+    font-family: auto;
+}
+
 @media (min-width: 992px) {
     .col_lg_5 {
         -webkit-box-flex: 0;
