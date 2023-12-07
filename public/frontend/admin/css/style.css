@@ -307,15 +307,15 @@ a.device_supp_item {
 }
 
 .notify_style{
-    animation-name: tada;
-    animation-duration: 1s;
-    animation-iteration-count: infinite;
     text-align: center;
     background: #d50202;
-    width: 35px;
+    min-width: 25px;
     margin: auto;
     -webkit-text-fill-color: #ffffff;
     border-radius: 50%;
+    position: absolute;
+    right: 35%;
+    top: 5px;
 }
 
 .breadcrumb-item+.breadcrumb-item::before {

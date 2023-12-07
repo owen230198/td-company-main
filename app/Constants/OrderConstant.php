@@ -87,6 +87,20 @@ class OrderConstant
             'condition' => ['status' => SupplyBuying::BOUGHT],
             'link' => 'view/supply_buyings?default_data=%7B"status"%3A"'.SupplyBuying::BOUGHT.'"%7D' 
         ],
+        [
+            'icon' => 'kcs', 
+            'table' => 'products', 
+            'text' => 'Sản phẩm chờ duyệt bởi KCS',
+            'condition' => ['status' => \StatusConst::SUBMITED],
+            'link' => 'view/supply_buyings?default_data=%7B"status"%3A"'.\StatusConst::SUBMITED.'"%7D' 
+        ],
+        [
+            'icon' => 'product_waiting', 
+            'table' => 'products', 
+            'text' => 'Sản phẩm chờ duyệt nhập kho',
+            'condition' => ['status' => \StatusConst::LAST_SUBMITED],
+            'link' => 'view/supply_buyings?default_data=%7B"status"%3A"'.\StatusConst::LAST_SUBMITED.'"%7D' 
+        ],
     ];
 
     //Kiểu đơn
