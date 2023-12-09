@@ -203,6 +203,7 @@
                         $data['pro_index'] = 0;
                         $data['supp_index'] = 0;
                         $data['table'] = $table;
+                        $data['supp_view'] = $table;
                         $data['supply_size'] = $supp_size;
                         if (view()->exists('orders.users.6.supply_handles.'.$prefix)) {
                             return view('orders.users.6.supply_handles.'.$prefix, $data); 
@@ -313,7 +314,7 @@
             if (!\GroupUser::isPlanHandle()) {
                 return returnMessageAjax(110, 'Bạn không có quyền duyệt sản xuất !');     
             }
-            if ($obj_order->status != Order::TECH_SUBMITED) {
+            if (@$obj_order->status != Order::TECH_SUBMITED) {
                 return returnMessageAjax(110, 'Dữ liệu không hợp lệ !');
             }
             $elements = getProductElementData($obj_order->category, $obj_order->id, true);

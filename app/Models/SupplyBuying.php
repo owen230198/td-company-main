@@ -140,7 +140,7 @@ class SupplyBuying extends Model
             ],
             \GroupUser::APPLY_BUYING => [
                 'view' => ['with' => ['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED]],
-                'update' => ['with' => ['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED]]
+                'update' => ['with' => [['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED]]]
             ],
             \GroupUser::DO_BUYING => [
                 'view' => ['with' => ['key' => 'status', 'value' => \StatusConst::ACCEPTED]]

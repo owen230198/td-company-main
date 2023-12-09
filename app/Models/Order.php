@@ -46,7 +46,7 @@
                         ],
                     'update' => 
                         [
-                            'with' => ['key' => 'status', 'value' => self::NOT_ACCEPTED]
+                            'with' => [['key' => 'status', 'value' => self::NOT_ACCEPTED]]
                         ]
                 ],
                 \GroupUser::TECH_HANDLE => [
@@ -56,7 +56,7 @@
                         ],
                     'update' => 
                         [
-                            'with' => ['key' => 'status', 'value' => self::DESIGN_SUBMITED]
+                            'with' => [['key' => 'status', 'value' => self::DESIGN_SUBMITED]]
                         ]
                 ],
                 \GroupUser::PLAN_HANDLE => [

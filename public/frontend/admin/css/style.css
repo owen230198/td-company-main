@@ -197,9 +197,14 @@ a.device_supp_item {
     transition: all .3s;
 }
 
+.main_item_command{
+    background-color: #ffffff;
+    transition: all 2s;
+}
+
 .main_item_command:hover{
     transform: scale(1.01);
-    background-color: #f1f4f9;
+    background-color: #95bdff;
     transition: all 2s;
 }
 
@@ -407,6 +412,11 @@ a.device_supp_item {
 
 .min_210{
     min-width: 210px;
+}
+
+.home_index{
+    max-width: 1400px;
+    margin: auto;
 }
 
 @media (max-width: 1400px) {

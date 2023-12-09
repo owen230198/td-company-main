@@ -64,6 +64,6 @@ class SquareWarehouse extends Model
 
     static function getLabelLinking($data)
     {
-        return getFieldDataById('name', 'materals', $data->supp_price).' - Khổ : '.$data->width;
+        return !empty($data) ? getFieldDataById('name', 'materals', $data->supp_price).' - Khổ : '.$data->width : '';
     }
 }

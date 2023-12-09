@@ -39,9 +39,10 @@ class PrintWarehouse extends Model
     {
         if (!empty($q)) {
             $warehouse->where(function ($warehouse) use ($q) {
-                $warehouse->orWhere('name', 'like', '%'.trim($q).'%')
-                            ->orWhere('width', '>=', (float)$q - 1)
-                            ->orWhere('length', '>=', (float)$q - 1);
+                $warehouse->orWhere('name', 'like', '%'.trim($q).'%');
+                if (is_float($q)) {
+                    $warehouse->orWhere('width', '>=', $q - 1)->orWhere('length', '>=', $q - 1);
+                }
             });
         }
         $data = $warehouse->paginate(50)->all();
