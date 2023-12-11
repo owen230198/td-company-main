@@ -44,7 +44,7 @@
                     [
                         'name' => $c_name.'[command][qty]',
                         'note' => 'Số vật tư cần xuất + '.$compen_percent.'%',
-                        'attr' => ['inject_class' => 'supp_qty_input plan_input_supp_qty input_elevate_change', 'type_input' => 'number', 'readonly' => 1],
+                        'attr' => ['inject_class' => 'total_supp_qty_input plan_input_supp_qty input_elevate_change', 'type_input' => 'number', 'readonly' => 1],
                         'value' => 0,
                     ],
                     [
