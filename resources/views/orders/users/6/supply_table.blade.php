@@ -1,5 +1,6 @@
 @php
-    $field_shows = \App\Models\Product::SUPPLY_FIELDS;
+    $model = getModelByTable($element['table']);
+    $field_shows = $model::SUPPLY_FIELDS;
 @endphp
 <div class="table_base_view position-relative">
     <table class="table table-bordered mb-2 table_main">

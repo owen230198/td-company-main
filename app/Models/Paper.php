@@ -16,6 +16,39 @@ class Paper extends Model
     protected $table = 'papers';
     protected $protectFields = false;
     use QPaperTrait, QuoteTrait;
+    const SUPPLY_FIELDS = [
+        [
+            'name' => 'name',
+            'note' => 'Tên',
+            'type' => 'text' 
+        ],
+        [
+            'name' => 'supp_qty',
+            'note' => 'Số lượng vật tư cần xuất',
+            'type' => 'text', 
+            
+        ],
+        [
+            'name' => 'created_by',
+            'note' => 'Tạo bởi',
+            'type' => 'linking', 
+            'other_data' => '{
+                "config":{
+                    "search":1
+                },
+                "data":{
+                    "table":"n_users"
+                }
+            }'
+            
+        ], 
+        [
+            'name' => 'created_at',
+            'note' => 'Tạo lúc',
+            'type' => 'datetime', 
+            
+        ],
+    ];
     public function processData($product_id, $product, $type)
     {
         $data = $product[$type];

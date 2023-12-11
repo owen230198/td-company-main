@@ -322,7 +322,13 @@
             $count = -1;
             foreach ($elements as $element) {
                 if (!empty($element['data'])) {
-                    foreach ($element['data'] as $supply) {
+                    $el_data = $element['data'];
+                    foreach ($el_data as $supply_check) {
+                        if (getHandleSupplyStatus($supply_check->product, $supply_check->id, @$element['pro_field']) != CSupply::HANDLED) {
+                            return returnMessageAjax(100, 'Vật tư '.getSupplyNameByKey($element['pro_field']).' vẫn chưa được kế toán duyệt xuất !');
+                        }
+                    }
+                    foreach ($el_data as $supply) {
                         $table_supply = $element['table'];
                         $data_command = getStageActiveStartHandle($table_supply, $supply->id);
                         $type = $data_command['type'];
