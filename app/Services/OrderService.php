@@ -147,6 +147,7 @@ class OrderService extends BaseService
         if (@$valid['code'] == 100) {
             return returnMessageAjax(100, $valid['message']);
         }
+        unset($command['nqty']);
         $insert_command = CSupply::insertCommand($command, $supply);
         if (!$insert_command) {
             return returnMessageAjax(110, 'Không thể tạo yêu cầu xuất vật tư, vui lòng thử lại!');
@@ -179,8 +180,25 @@ class OrderService extends BaseService
     {
         if (empty($c_supply['supp_price'])) {
             return returnMessageAjax(100, 'Bạn chưa chọn vật tư trong kho !');
-            return $this->supply_handle_carton($supply, $size, $c_supply, $over_supply);
         } 
+    }
+
+    public function supply_handle_fill_finish($supply, $size, $c_supply, $over_supply)
+    {
+        if (empty($c_supply['supp_price'])) {
+            return returnMessageAjax(100, 'Bạn chưa chọn vật tư trong kho !');
+        }  
+        $insert_command = CSupply::insertCommand($command, $supply);
+        if (!$insert_command) {
+            return returnMessageAjax(110, 'Không thể tạo yêu cầu xuất vật tư, vui lòng thử lại!');
+        }else{
+            Supply::where('id', $supply->product)->update(['handle_elevate' => json_encode($elevate)]);
+            if (!empty($over_supply['qty'])) {
+                $over_supply['qty'] = $command['qty'];
+                SupplyWarehouse::insertOverSupply($over_supply, $supply, $size);       
+            }
+            return returnMessageAjax(200, 'Đã gửi yêu cầu xử lí vật tư thành công!', url('update/products/'.$supply->product));
+        }   
     }
 }
 

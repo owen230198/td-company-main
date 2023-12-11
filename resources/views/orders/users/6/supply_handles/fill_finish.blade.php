@@ -13,17 +13,18 @@
             'name' => '',
             'type' => 'linking',
             'value' => @$data_magnet['type'],
-            'note' => 'Vật tư nam châm'
+            'note' => 'Vật tư nam châm',
+            'attr' => ['disable_field' => 1]
         ];
 
         $data_magnet_qty = [
-            'name' => '',
+            'name' => 'magnet_number',
             'note' => 'Số viên nam châm/hộp',
             'value' => @$data_magnet['qty'],
             'attr' => ['type_input' => 'number']
         ];
         $magnet_chose_supp = [
-            'name' => 'c_supply[supp_price]',
+            'name' => 'supp_price',
             'type' => 'linking',
             'note' => 'Chọn nam châm trong kho',
             'other_data' => [

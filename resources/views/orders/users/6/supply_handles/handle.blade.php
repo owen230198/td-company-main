@@ -30,7 +30,7 @@
                         ]
                     ],
                     [
-                        'name' => $c_name.'[command][product_qty]',
+                        'name' => '',
                         'note' => 'Số lượng sản phẩm',
                         'attr' => ['inject_class' => 'pro_qty_input', 'type_input' => 'number', 'readonly' => 1],
                         'value' => @$supply_obj->product_qty,
