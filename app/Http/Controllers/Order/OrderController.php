@@ -318,7 +318,7 @@
             if (@$obj_order->status != Order::TECH_SUBMITED) {
                 return returnMessageAjax(110, 'Dữ liệu không hợp lệ !');
             }
-            $elements = getProductElementData($obj_order->category, $obj_order->id, true);
+            $elements = getProductElementData($obj_order->category, $obj_order->id, true, true);
             $count = -1;
             foreach ($elements as $element) {
                 if (!empty($element['data'])) {

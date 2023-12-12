@@ -63,6 +63,7 @@
             $worker = \Worker::getCurrent('id');
             $where = [
                 ['key' => 'worker', 'value' => $worker],
+                ['key' => 'status', 'value' => \StatusConst::LAST_SUBMITED],
                 ['key' => 'submited_at','compare' => 'month', 'value' => 'this_month']
             ];
             $data['list_data'] = getDataTable($table, $where);

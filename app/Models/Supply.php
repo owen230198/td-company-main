@@ -20,7 +20,7 @@ class Supply extends Model
     const SUPPLY_FIELDS = [
         [
             'name' => 'supp_qty',
-            'note' => 'Số lượng vật tư cần xuất',
+            'note' => 'SL vật tư dự tính  xuất',
             'type' => 'text', 
             
         ],

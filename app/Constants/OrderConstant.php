@@ -45,7 +45,7 @@ class OrderConstant
             'table' => 'c_supplies', 
             'text' => 'Xuất vật tư',
             'condition' => ['status' => CSupply::HANDLING],
-            'link' => 'view/products?default_data=%7B"status"%3A"'.Order::TECH_SUBMITED.'"%7D' 
+            'link' => 'view/c_supplies?default_data=%7B"status"%3A"'.CSupply::HANDLING.'"%7D' 
         ],
         // [
         //     'icon' => 'export', 

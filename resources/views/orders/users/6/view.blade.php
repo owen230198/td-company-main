@@ -52,7 +52,7 @@
                         <span>Danh sách yêu cầu xử lí vật tư</span>
                     </h3>
                     @php
-                        $elements = getProductElementData($product['category'], $product['id'], true);
+                        $elements = getProductElementData($product['category'], $product['id'], true, true);
                     @endphp
                     @if (count($elements) > 0)
                         <ul class="nav nav-pills mb-3 quote_pro_strct_nav_link" id="quote-pro-{{ $pro_index }}-struct-tab" role="tablist">

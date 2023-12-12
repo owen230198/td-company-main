@@ -21,7 +21,7 @@ class FillFinish extends Model
     const SUPPLY_FIELDS = [
         [
             'name' => 'product_qty',
-            'note' => 'Số lượng vật tư cần xuất',
+            'note' => 'SL vật tư dự tính  xuất',
             'type' => 'text', 
             
         ],

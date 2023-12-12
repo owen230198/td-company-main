@@ -236,6 +236,7 @@ a.device_supp_item {
     padding: 5px 10px;
     vertical-align: middle;
     border: 1px solid #dee2e6;
+    min-width: 85px;
 }
 
 .handle_title{
