@@ -152,7 +152,7 @@ class OrderService extends BaseService
         if (!$insert_command) {
             return returnMessageAjax(110, 'Không thể tạo yêu cầu xuất vật tư, vui lòng thử lại!');
         }else{
-            Supply::where('id', $supply->product)->update(['handle_elevate' => json_encode($elevate)]);
+            Supply::where('id', $supply->id)->update(['handle_elevate' => json_encode($elevate)]);
             if (!empty($over_supply['qty'])) {
                 $over_supply['qty'] = $command['qty'];
                 SupplyWarehouse::insertOverSupply($over_supply, $supply, $size);       
