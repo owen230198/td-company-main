@@ -185,11 +185,19 @@ class WSalary extends Model
             }
         }
         if ($bool) {
-            $supply_obj = \DB::table($table)->where('id', $id);
+            $supply_obj = getModelByTable($table)->where('id', $id);
             $update_supply = $supply_obj->update(['status' => $status]);
             if ($update_supply) {
                 $data_supply = $supply_obj->first();
-                Product::checkStatusUpdate($data_supply->id, $status);
+                if (!empty($data_supply->product) && WSalary::where('product', $data_supply->id)->where('status', '!=', $status)->count() == 0) {
+                    $update = Product::where('id', $data_supply->product)->update(['status' => $status]);
+                    if ($update) {
+                        $data_product = Product::find($data_supply->product);
+                        if (checkUpdateOrderStatus($data_product->order, $status)) {
+                            Order::where('id', $data_product->order)->update(['status' => $status]);
+                        }
+                    }
+                }
             }
         }
         return true;

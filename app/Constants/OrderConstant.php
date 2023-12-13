@@ -92,14 +92,14 @@ class OrderConstant
             'table' => 'products', 
             'text' => 'Thẩm định sản phẩm',
             'condition' => ['status' => \StatusConst::SUBMITED],
-            'link' => 'view/supply_buyings?default_data=%7B"status"%3A"'.\StatusConst::SUBMITED.'"%7D' 
+            'link' => 'view/products?default_data=%7B"status"%3A"'.\StatusConst::SUBMITED.'"%7D' 
         ],
         [
             'icon' => 'product_waiting', 
             'table' => 'products', 
             'text' => 'Duyệt nhập kho sản phẩm',
             'condition' => ['status' => \StatusConst::LAST_SUBMITED],
-            'link' => 'view/supply_buyings?default_data=%7B"status"%3A"'.\StatusConst::LAST_SUBMITED.'"%7D' 
+            'link' => 'view/products?default_data=%7B"status"%3A"'.\StatusConst::LAST_SUBMITED.'"%7D' 
         ],
     ];
 

@@ -149,6 +149,12 @@
                             'with' => ['key' => 'status', 'value' => Order::TECH_SUBMITED],
                         ]
                 ],
+                \GroupUser::KCS => [
+                    'view' => 
+                        [
+                            'with' => ['key' => 'status', 'value' => \StatusConst::SUBMITED],
+                        ]
+                ],
             ];
             return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];
         }
