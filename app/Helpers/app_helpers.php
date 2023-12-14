@@ -224,7 +224,7 @@ if (!function_exists('getTimeStamp')) {
 
 if (!function_exists('getDataDateTime')) {
     function getDataDateTime($time){
-        $timstamp = getTimeStamp($time);
+        $timstamp = getTimeStamp((string) $time);
         return date('Y-m-d H:i:s', @$timstamp);    
     }
 }

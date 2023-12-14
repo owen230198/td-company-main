@@ -677,6 +677,17 @@ var confirmImportSupplyBuy = function()
     });
 }
 
+var KCSTakeInReqLoadView = function()
+{
+    $(document).on("click", "button.__product_takein_req", function (event) {
+        event.preventDefault();
+        let modal = $("#actionModal");
+        let id = $(this).data("id");
+        modal.find("iframe").attr("src", getBaseRoute('kcs-take-in-req/'+id));
+        modal.modal('show');
+    });
+}
+
 $(function () {
     submitActionAjaxForm();
     confirmRemoveData();
@@ -709,4 +720,5 @@ $(function () {
     changeInputPriceBuying();
     confirmBought();
     confirmImportSupplyBuy();
+    KCSTakeInReqLoadView();
 });

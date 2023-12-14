@@ -83,6 +83,9 @@ Route::middleware(['check_login'])->group(function () {
 	Route::post('confirm-supply-bought/{id}', [SupplyBuyingController::class, 'confirmSupplyBought']);
 	Route::post('confirm-warehouse-imported/{id}', [SupplyBuyingController::class, 'confirmWarehouseImported']);
 	Route::get('list-supply-buying/{id}', [SupplyBuyingController::class, 'listSupplyBuying']);
+
+	//KCS route
+	Route::any('kcs-take-in-req/{id}', [ProductController::class, 'KCSTakeInRequirement']);
 });
 $modules_path = dirname(__DIR__) . '/app/Modules/';
 if (is_dir($modules_path)) {

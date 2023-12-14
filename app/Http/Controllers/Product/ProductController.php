@@ -87,5 +87,22 @@
             $data['elements'] = getProductElementData($data_product['category'], $product_id);
             return view('products.view', $data);
         }
+
+        public function KCSTakeInRequirement(Request $request, $id)
+        {
+            $is_post = $request->isMethod('POST');
+            if (\GroupUser::isAdmin() || \GroupUser::isKCS()) {
+                $data_obj = Product::find($id);
+                if (empty($data_obj)) {
+                    return customReturnMessage(false, $is_post, ['message' => 'Dữ liệu không hợp lệ !']);
+                }
+                $data['title'] = 'Thẩm định sau sản xuất sản phẩm '.$data_obj->name;
+                $data['nosidebar'] = true;
+                $data['data_product'] = $data_obj;
+                return view('kcs.requrirements.view', $data);
+            }else{
+                return customReturnMessage(false, $is_post, ['message' => 'Bạn không có quyền thực hiện thao tác này !']);
+            }
+        }
     }
 ?>

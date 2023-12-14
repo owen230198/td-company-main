@@ -186,15 +186,16 @@ class WSalary extends Model
         }
         if ($bool) {
             $supply_obj = getModelByTable($table)->where('id', $id);
-            $update_supply = $supply_obj->update(['status' => $status]);
+            $arr_update = ['status' => $status, 'updated_at' => date('Y-m-d H:i:s', Time())];
+            $update_supply = $supply_obj->update($arr_update);
             if ($update_supply) {
                 $data_supply = $supply_obj->first();
                 if (!empty($data_supply->product) && WSalary::where('product', $data_supply->id)->where('status', '!=', $status)->count() == 0) {
-                    $update = Product::where('id', $data_supply->product)->update(['status' => $status]);
+                    $update = Product::where('id', $data_supply->product)->update($arr_update);
                     if ($update) {
                         $data_product = Product::find($data_supply->product);
                         if (checkUpdateOrderStatus($data_product->order, $status)) {
-                            Order::where('id', $data_product->order)->update(['status' => $status]);
+                            Order::where('id', $data_product->order)->update($arr_update);
                         }
                     }
                 }

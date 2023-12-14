@@ -11,6 +11,7 @@
     ];
     $fill_device_select = [
         'name' => $base.'[machine]',
+        'attr' => ['inject_class' => 'medium_input'],
         'type' => 'linking',
         'note' => 'Thiết bị máy bồi',
         'value' => @$fill_data['machine'] ?? getDeviceId(['key_device' => 'fill', 'supply' => 'fill_finish', 'default_device' => 1]),
