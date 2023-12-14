@@ -1,6 +1,7 @@
 <?php
     namespace App\Http\Controllers\Product;
     use App\Http\Controllers\Controller;
+    use App\Models\CExpertise;
     use App\Models\Product;
     use App\Models\Quote;
     use Illuminate\Http\Request;
@@ -99,6 +100,7 @@
                 $data['title'] = 'Thẩm định sau sản xuất sản phẩm '.$data_obj->name;
                 $data['nosidebar'] = true;
                 $data['data_product'] = $data_obj;
+                $data['status_exper_option'] = [CExpertise::FULL => 'Nhập kho đủ', CExpertise::PROBLEM => 'Nhập kho thiếu do lỗi kỹ thuật'];
                 return view('kcs.requrirements.view', $data);
             }else{
                 return customReturnMessage(false, $is_post, ['message' => 'Bạn không có quyền thực hiện thao tác này !']);

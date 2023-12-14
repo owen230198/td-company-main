@@ -11,7 +11,7 @@
  Target Server Version : 100425
  File Encoding         : 65001
 
- Date: 13/12/2023 22:55:01
+ Date: 14/12/2023 19:03:00
 */
 
 SET NAMES utf8mb4;
@@ -60,6 +60,27 @@ INSERT INTO `c_designs` VALUES (17, 'TK-DH-000021A', NULL, 21, 52, NULL, NULL, N
 INSERT INTO `c_designs` VALUES (18, 'TK-DH-000020A', NULL, 20, 53, NULL, NULL, NULL, NULL, 'design_submited', 1, 4, 3, '2023-10-07 08:07:45', '2023-10-07 08:12:16');
 INSERT INTO `c_designs` VALUES (19, 'TK-DH-000019A', NULL, 19, 54, NULL, NULL, NULL, NULL, 'design_submited', 1, 4, 3, '2023-10-07 08:08:48', '2023-10-07 08:11:49');
 INSERT INTO `c_designs` VALUES (20, 'TK-DH-00000024A', NULL, 24, 94, NULL, NULL, NULL, NULL, 'design_submited', 1, 4, 3, '2023-12-09 09:43:51', '2023-12-09 09:44:49');
+
+-- ----------------------------
+-- Table structure for c_expertises
+-- ----------------------------
+DROP TABLE IF EXISTS `c_expertises`;
+CREATE TABLE `c_expertises`  (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `size_type` int(10) NULL DEFAULT NULL,
+  `qty` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `product` int(10) NULL DEFAULT NULL,
+  `supply` int(10) NULL DEFAULT NULL,
+  `supp_type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `act` tinyint(4) NULL DEFAULT NULL,
+  `created_by` int(10) NULL DEFAULT NULL,
+  `created_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for c_processes
@@ -2095,7 +2116,7 @@ INSERT INTO `n_tables` VALUES (14, 'supply_prices', 'Đơn giá vật tư', NULL
 INSERT INTO `n_tables` VALUES (18, 'orders', 'Đơn hàng', NULL, 20, 'view', '[\r\n	{\r\n	\"icon\":\"list-ul\",\r\n	\"note\":\"DS sản phẩm\", \r\n	\"link\":\"view/products?default_data={%22order%22:%22<id>%22}\"\r\n	}\r\n]', '0', '1', '1', '1', '2023-06-21 13:22:33', '2023-09-15 21:19:43');
 INSERT INTO `n_tables` VALUES (19, 'p_substances', 'Chất liệu giấy in', NULL, 20, 'view', NULL, '1', '1', '1', '1', '2023-04-23 11:30:46', '2023-08-16 19:42:34');
 INSERT INTO `n_tables` VALUES (20, 'product_categories', 'Nhóm sản phẩm', '', 20, 'view', '[\r\n	{\r\n	\"icon\":\"list-ul\",\r\n	\"note\":\"Kiểu hộp\", \r\n	\"link\":\"view/product_styles?default_data={%22category%22:%22<id>%22}\"\r\n	}\r\n]', '0', '1', '0', '0', '2023-04-23 11:30:46', '2023-09-25 20:54:00');
-INSERT INTO `n_tables` VALUES (21, 'products', 'Đơn sản phẩm', NULL, 20, 'view', '[\r\n	{\r\n	\"icon\":\"spinner\",\r\n	\"note\":\"Vật tư sản xuất\", \r\n	\"link\":\"list-supply-process?product=\"\r\n	}\r\n]', '0', '1', '0', '1', '2023-04-23 11:30:46', '2023-09-21 10:54:38');
+INSERT INTO `n_tables` VALUES (21, 'products', 'Đơn sản phẩm', NULL, 20, 'view', '[\r\n	{\r\n	\"icon\":\"spinner\",\r\n	\"note\":\"Vật tư sản xuất\", \r\n	\"link\":\"list-supply-process?product=\"\r\n	},\r\n	{\r\n	\"type\":2,\r\n	\"icon\":\"calendar-check-o\",\r\n	\"note\":\"Yêu cầu nhập kho\",\r\n	\"class\":\"__product_takein_req\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"submited\"}\r\n		]\r\n	}\r\n]', '0', '1', '0', '1', '2023-04-23 11:30:46', '2023-12-14 09:58:07');
 INSERT INTO `n_tables` VALUES (22, 'c_designs', 'Lệnh thiết kế', NULL, 20, 'view', '[\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"level-down\",\"note\":\"Nhận lệnh\", \r\n		\"class\":\"__receive_command\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"not_accepted\"}\r\n		]\r\n	}\r\n]', '0', '1', '1', '0', '2023-06-30 17:43:12', '2023-08-16 19:42:34');
 INSERT INTO `n_tables` VALUES (23, 'c_supplies', 'Yêu cầu Xuất vật tư', NULL, 20, 'view', '[\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"share\",\"note\":\"Xác nhận xuất vật tư\", \r\n		\"class\":\"__confirm_ex_supp\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"handling\"}\r\n		]\r\n	}\r\n]', '0', '0', '1', '0', '2023-07-14 03:17:55', '2023-08-16 19:42:34');
 INSERT INTO `n_tables` VALUES (24, 'n_log_actions', 'Lịch sử thao tác', NULL, 10, 'history', NULL, '', '', '1', '', '2023-05-23 14:43:41', '2023-08-16 19:42:34');
