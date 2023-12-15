@@ -44,6 +44,11 @@
                     'type' => 'select',
                     'attr' => ['inject_class' => '__expertise_status_select'],
                     'other_data' => ['data' => ['options' => $status_exper_option]]
+                ],
+                [
+                    'name' => 'note',
+                    'note' => 'Ghi chú',
+                    'type' => 'textarea'
                 ]
             ];
             $expertise_qty = [
