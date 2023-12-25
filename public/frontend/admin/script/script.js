@@ -101,8 +101,17 @@ var loadDataPopup = function () {
     });
     $('.modalAction').on('hidden.bs.modal', function () {
         location.reload();
-      })
+    })
 };
+
+var closeModalAction = function()
+{
+    $(document).on('click', '.__close_modal_action', function(event){
+        event.preventDefault();
+        console.log($(window.parent.document).find('#actionModal'));
+        $(window.parent.document).find('#actionModal').find('.close_action_popup').trigger('click');
+    });
+}
 
 var selectConfig = function (section = $('.base_content')) {
     let list_select2 = section.find("select.select_config");
@@ -721,4 +730,5 @@ $(function () {
     confirmBought();
     confirmImportSupplyBuy();
     KCSTakeInReqLoadView();
+    closeModalAction();
 });
