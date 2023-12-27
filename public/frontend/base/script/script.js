@@ -37,8 +37,11 @@ var ajaxBaseCall = function(param)
 		if (!empty(data.message)) {
 			swal(title, data.message, key).then(function() {
 				if (data.url != null) {
-					if (data.url == 'f5') {
+					if (data.url == RELOAD) {
 						window.location.reload();	
+					}else if(data.url == CLOSE_POPUP){
+						closeDataPopup();
+						window.parent.location.reload();
 					}else{
 						window.location = data.url;
 					}
@@ -46,10 +49,13 @@ var ajaxBaseCall = function(param)
 				}
 			});
 		}else{
-			if (data.url == 'f5') {
+			if (data.url == RELOAD) {
 				window.location.reload();	
+			}else if(data.url == CLOSE_POPUP){
+				closeDataPopup();
+				window.parent.location.reload();
 			}else{
-				window.location = data.url;
+				swal(title, 'Lỗi không xác định !', key);
 			}
 		}
 		$('#loader').delay(200).fadeOut(500); 

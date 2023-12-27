@@ -83,6 +83,7 @@
             if (empty($data_product)) {
                 return back()->with('error', 'Không tìm thấy dữ liệu sản phẩm !');
             }
+            $data['nosidebar'] = true;
             $data['title'] = 'Thông tin sản xuất - '.$data_product['name'];
             $data['parent_url'] = ['link' => @session()->get('back_url'), 'note' => 'Danh sách đơn sản phẩm'];
             $data['elements'] = getProductElementData($data_product['category'], $product_id);
@@ -93,15 +94,34 @@
         {
             $is_post = $request->isMethod('POST');
             if (\GroupUser::isAdmin() || \GroupUser::isKCS()) {
-                $data_obj = Product::find($id);
-                if (empty($data_obj)) {
+                $product_obj = Product::find($id);
+                if (empty($product_obj)) {
                     return customReturnMessage(false, $is_post, ['message' => 'Dữ liệu không hợp lệ !']);
                 }
-                $data['title'] = 'Thẩm định sau sản xuất sản phẩm '.$data_obj->name;
-                $data['nosidebar'] = true;
-                $data['data_product'] = $data_obj;
-                $data['status_exper_option'] = [CExpertise::FULL => 'Nhập kho đủ', CExpertise::PROBLEM => 'Nhập kho thiếu do lỗi kỹ thuật'];
-                return view('kcs.requrirements.view', $data);
+                if (!$is_post) {
+                    $data['title'] = 'Thẩm định sau sản xuất sản phẩm '.$product_obj->name;
+                    $data['nosidebar'] = true;
+                    $data['data_product'] = $product_obj;
+                    $data['status_exper_option'] = [CExpertise::FULL => 'Nhập kho đủ ('.$product_obj->outside_qty.' sản phẩm)', CExpertise::PROBLEM => 'Nhập kho thiếu do lỗi kỹ thuật'];
+                    $data['prob_handle_option'] = [CExpertise::NOT_REWORK => 'Kông sản xuất lại', CExpertise::PROBLEM => 'Sản xuất lại'];
+                    return view('kcs.requrirements.view', $data);
+                }else{
+                    $data = $request->except('_token');
+                    if (empty($data['note'])) {
+                        return returnMessageAjax(100, 'Bạn chưa nhập ghi chú yêu cầu nhập kho !');
+                    }
+                    if (empty($data['status'])) {
+                        return returnMessageAjax(100, 'Bạn chưa chọn trạng thái nhập kho !');
+                    }
+                    if ($data['status'] == CExpertise::PROBLEM) {
+                        if (empty($data['qty'])) {
+                            return returnMessageAjax(100, 'Bạn chưa nhập số lượng đủ điều kiện nhập kho !');
+                        }
+                        if (empty($data['handle_problem'])) {
+                            return returnMessageAjax(100, 'Bạn chưa chọn giải pháp xử lí sản phẩm lỗi !');
+                        }
+                    }
+                }
             }else{
                 return customReturnMessage(false, $is_post, ['message' => 'Bạn không có quyền thực hiện thao tác này !']);
             }

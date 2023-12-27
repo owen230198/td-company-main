@@ -27,7 +27,7 @@ trait QuoteTrait
         static::$supp_qty = !empty($data['supp_qty']) ? (int) $data['supp_qty'] : 0;
         $plus_to_worker = (int) getDataConfig('QuoteConfig', 'PLUS_TO_DEVICE_WORKER');
         static::$handle_qty = self::$base_supp_qty + $plus_to_worker;
-        static::$handle_product =  self::$base_qty_pro + $plus_to_worker;
+        static::$handle_product =  self::$handle_qty * self::$nqty;
         $length = !empty($data['size']['length']) ? $data['size']['length'] : 0;
         $width = !empty($data['size']['width']) ? $data['size']['width'] : 0;
         convertCmToMeter($length, $width);

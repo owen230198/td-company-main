@@ -9,6 +9,9 @@
             <p class="m-2">Số lượng: <strong class="ml-1 color_green">
                 {{ $data_product->qty }},
             </strong></p>
+            <p class="m-2">Chưa nhập kho: <strong class="ml-1 color_green">
+                {{ $data_product->outside_qty }},
+            </strong></p>
             <p class="m-2">Nhóm sản phẩm: <strong class="ml-1 color_green">
                 {{ getFieldDataById('name', 'product_categories', $data_product->category) }},
             </strong></p>
@@ -21,7 +24,7 @@
         </div>
     </div>
     @include('base_title', ['text' => '2. Yêu cầu kế toán nhập kho'])
-    <div class="p-3  radius_5 box_shadow_3 mb-4">
+    <div class="p-3  radius_5 box_shadow_3 mb-4 pb-5">
         @php
             $arr_fields = [
                 [
@@ -33,14 +36,14 @@
                 ],
                 [
                     'name' => '',
-                    'note' => 'Số lượng đã sản xuất',
+                    'note' => 'Số lượng chưa nhập kho',
                     'type' => 'text',
                     'attr' => ['disable_field' => 1],
-                    'value' => $data_product->qty
+                    'value' => $data_product->outside_qty
                 ],
                 [
                     'name' => 'status',
-                    'note' => 'Tình trạng nhập kho',
+                    'note' => 'Trạng thái nhập kho',
                     'type' => 'select',
                     'attr' => ['inject_class' => '__expertise_status_select'],
                     'other_data' => ['data' => ['options' => $status_exper_option]]
@@ -51,12 +54,20 @@
                     'type' => 'textarea'
                 ]
             ];
-            $expertise_qty = [
-                'name' => 'qty',
-                'note' => 'Số lượng yêu cầu nhập kho',
-                'type' => 'text',
-                'attr' => ['type_input' => 'number'],
-                'value' => $data_product->qty
+            $problem_handle_fields = [
+                [
+                    'name' => 'qty',
+                    'note' => 'SL đủ tiêu chuẩn nhập kho',
+                    'type' => 'text',
+                    'attr' => ['type_input' => 'number', 'inject_class' => '__expertise_qty']
+                ],
+                [
+                    'name' => 'haandle_problem',
+                    'note' => 'Xử lí sản phẩm lỗi',
+                    'type' => 'select',
+                    'attr' => ['inject_class' => '__expertise_status_select'],
+                    'other_data' => ['data' => ['options' => $prob_handle_option]]
+                ]
             ]
         @endphp
         <form action="{{ url('kcs-take-in-req/'.$data_product->id) }}" method="POST" class="config_content baseAjaxForm" enctype="multipart/form-data">
@@ -64,11 +75,15 @@
             @foreach ($arr_fields as $field)
                 @include('view_update.view', $field)
             @endforeach
-            <div class="group_btn_action_form text-center">
+            <div class="problerm_module" style="display:{{ @$data_command->status == \App\Models\Cexpertise::PROBLEM ? 'block' : 'none' }}">
+                @foreach ($problem_handle_fields as $p_field)
+                    @include('view_update.view', $p_field)
+                @endforeach
+            </div>
+            <div class="group_btn_action_form text-center w-100">
                 <button type="submit" class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-3">
                     <i class="fa fa-check mr-2 fs-14" aria-hidden="true"></i>Hoàn tất
                 </button>
-                
                 <button class="main_button bg_red color_white radius_5 font_bold smooth red_btn __close_modal_action">
                     <i class="fa fa-times mr-2 fs-14" aria-hidden="true"></i>Hủy
                 </button>

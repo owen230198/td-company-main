@@ -62,7 +62,7 @@ var passwordInputPrevent = function () {
 var checkMultiRecordModule = function () {
     $(document).on("change", "input.c_one_remove", function (event) {
         event.preventDefault();
-        getValueMuliCheckbox();
+        getValueMultipleCheckbox();
     });
 
     $(document).on("change", "input.c_all_remove", function (event) {
@@ -75,14 +75,13 @@ var checkMultiRecordModule = function () {
         } else {
             $(".c_one_remove").prop("checked", true);
         }
-        getValueMuliCheckbox();
+        getValueMultipleCheckbox();
     });
 };
 
-var getValueMuliCheckbox = function () {
+var getValueMultipleCheckbox = function () {
     var arr = $("input.c_one_remove:checked");
     var str = "";
-    console.log(arr.length);
     for (var i = 0; i < arr.length; i++) {
         var item = arr[i];
         str += $(item).data("id");
@@ -96,20 +95,25 @@ var getValueMuliCheckbox = function () {
 var loadDataPopup = function () {
     $(document).on("click", ".load_view_popup", function (event) {
         event.preventDefault();
+        $('#loader').fadeIn(200);
         let src = $(this).data("src");
         $(".modalAction").find("iframe").attr("src", src);
     });
     $('.modalAction').on('hidden.bs.modal', function () {
-        location.reload();
+        $(window.parent.document).find('#actionModal').find('iframe').attr("src",'');
     })
 };
+
+var closeDataPopup = function()
+{
+    $(window.parent.document).find('#actionModal').find('.close_action_popup').trigger('click');
+}
 
 var closeModalAction = function()
 {
     $(document).on('click', '.__close_modal_action', function(event){
         event.preventDefault();
-        console.log($(window.parent.document).find('#actionModal'));
-        $(window.parent.document).find('#actionModal').find('.close_action_popup').trigger('click');
+        closeDataPopup();
     });
 }
 
@@ -697,6 +701,17 @@ var KCSTakeInReqLoadView = function()
     });
 }
 
+var poroductListSupplyProcess = function()
+{
+    $(document).on("click", "button.__product_list_supp_process", function (event) {
+        event.preventDefault();
+        let modal = $("#actionModal");
+        let id = $(this).data("id");
+        modal.find("iframe").attr("src", getBaseRoute('list-supply-process?product='+id));
+        modal.modal('show');
+    });
+}
+
 $(function () {
     submitActionAjaxForm();
     confirmRemoveData();
@@ -731,4 +746,5 @@ $(function () {
     confirmImportSupplyBuy();
     KCSTakeInReqLoadView();
     closeModalAction();
+    poroductListSupplyProcess();
 });

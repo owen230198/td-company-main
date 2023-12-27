@@ -225,6 +225,20 @@ var planHandleSupplyQty = function()
     });
 }
 
+var KCSRequireToWarehouse = function()
+{
+    $(document).on('change', '.__expertise_status_select', function(event) {
+        event.preventDefault();
+        let _this = $(this);
+        let prob_module = _this.closest('form').find('.problerm_module');
+        if (_this.val() == EXP_STT_PROBLEM) {
+            prob_module.fadeIn();
+        }else{
+            prob_module.fadeOut();
+        }
+    });
+}
+
 $(function(){
     setAdvanceCostOrder(); 
     moduleVATOrder();
@@ -234,4 +248,5 @@ $(function(){
     planAddSupplyHandle();
     planRemoveSupplyHandle();
     planHandleSupplyQty();
+    KCSRequireToWarehouse();
 });

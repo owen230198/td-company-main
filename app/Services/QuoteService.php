@@ -105,6 +105,7 @@ class QuoteService extends BaseService
         }
         if (!empty($data['qty'])) {
             $data_action['qty'] = $data['qty'];
+            $data_action['outside_qty'] = $data['qty'];
         }
         if (!empty($data['length'])) {
             $data_action['length'] = $data['length'];

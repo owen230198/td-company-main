@@ -8,6 +8,7 @@ class StatusConstant
     const SUCCESS_MSG = 'success_msg';
     const ERR_MSG = 'err_msg';
     const RELOAD = 'f5';
+    const CLOSE_POPUP = 'close_popup';
 
     const NOT_ACCEPTED = 'not_accepted';
     const ACCEPTED = 'accepted';

@@ -339,8 +339,8 @@
                         $update = getModelByTable($table_supply)->where('id', $supply->id)->update($data_update);
                         $data_handle = !empty($data_command['handle']) ? $data_command['handle'] : [];
                         if ($type != \StatusConst::SUBMITED && $update && (int) @$data_handle['handle_qty'] > 0) {
+                            $data_command['qty'] = $data_handle['handle_qty'];
                             if ($type == \TDConst::FILL && !empty($data_handle['stage'])) {
-                                $data_command['qty'] = $data_handle['handle_qty'];
                                 foreach ($data_handle['stage'] as $fillkey => $stage) {
                                     $data_command['name'] = $obj_order->name.'('.getFieldDataById('name', 'materals', @$stage['materal']).')';
                                     $data_command['fill_handle'] = json_encode($stage);

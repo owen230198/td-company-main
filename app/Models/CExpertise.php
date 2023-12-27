@@ -10,4 +10,7 @@ class CExpertise extends Model
     //Status Expertise
     const FULL = 'full';
     const PROBLEM = 'prob';
+    //Handle problem product
+    const REWORK = 'rework';
+    const NOT_REWORK = 'not_rework';
 }
