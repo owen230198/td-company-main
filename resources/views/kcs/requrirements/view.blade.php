@@ -42,7 +42,7 @@
                     'value' => $data_product->outside_qty
                 ],
                 [
-                    'name' => 'status',
+                    'name' => 'take_status',
                     'note' => 'Trạng thái nhập kho',
                     'type' => 'select',
                     'attr' => ['inject_class' => '__expertise_status_select'],
@@ -62,13 +62,13 @@
                     'attr' => ['type_input' => 'number', 'inject_class' => '__expertise_qty']
                 ],
                 [
-                    'name' => 'haandle_problem',
+                    'name' => 'handle_problem',
                     'note' => 'Xử lí sản phẩm lỗi',
                     'type' => 'select',
                     'attr' => ['inject_class' => '__expertise_status_select'],
                     'other_data' => ['data' => ['options' => $prob_handle_option]]
                 ]
-            ]
+            ];
         @endphp
         <form action="{{ url('kcs-take-in-req/'.$data_product->id) }}" method="POST" class="config_content baseAjaxForm" enctype="multipart/form-data">
             @csrf

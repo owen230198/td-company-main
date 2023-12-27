@@ -99,7 +99,7 @@ class OrderConstant
             'table' => 'products', 
             'text' => 'Duyệt nhập kho sản phẩm',
             'condition' => ['status' => \StatusConst::LAST_SUBMITED],
-            'link' => 'view/products?default_data=%7B"status"%3A"'.\StatusConst::LAST_SUBMITED.'"%7D' 
+            'link' => 'view/c_expertises?default_data=%7B"status"%3A"'.\StatusConst::NOT_ACCEPTED.'"%7D' 
         ],
     ];
 

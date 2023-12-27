@@ -95,31 +95,54 @@
             $is_post = $request->isMethod('POST');
             if (\GroupUser::isAdmin() || \GroupUser::isKCS()) {
                 $product_obj = Product::find($id);
-                if (empty($product_obj)) {
+                if (empty($product_obj) || @$product_obj->status != \StatusConst::SUBMITED) {
                     return customReturnMessage(false, $is_post, ['message' => 'Dữ liệu không hợp lệ !']);
+                }
+                $outside_qty = (int) $product_obj->outside_qty;
+                if ($outside_qty <= 0) {
+                    return customReturnMessage(false, $is_post, ['message' => 'Sản phẩm đã được nhập kho hết !']);
                 }
                 if (!$is_post) {
                     $data['title'] = 'Thẩm định sau sản xuất sản phẩm '.$product_obj->name;
                     $data['nosidebar'] = true;
                     $data['data_product'] = $product_obj;
                     $data['status_exper_option'] = [CExpertise::FULL => 'Nhập kho đủ ('.$product_obj->outside_qty.' sản phẩm)', CExpertise::PROBLEM => 'Nhập kho thiếu do lỗi kỹ thuật'];
-                    $data['prob_handle_option'] = [CExpertise::NOT_REWORK => 'Kông sản xuất lại', CExpertise::PROBLEM => 'Sản xuất lại'];
+                    $data['prob_handle_option'] = ['' => 'Xử lí sản phẩm lỗi',CExpertise::NOT_REWORK => 'Kông sản xuất lại', CExpertise::PROBLEM => 'Sản xuất lại'];
                     return view('kcs.requrirements.view', $data);
                 }else{
                     $data = $request->except('_token');
                     if (empty($data['note'])) {
                         return returnMessageAjax(100, 'Bạn chưa nhập ghi chú yêu cầu nhập kho !');
                     }
-                    if (empty($data['status'])) {
+                    if (empty($data['take_status'])) {
                         return returnMessageAjax(100, 'Bạn chưa chọn trạng thái nhập kho !');
                     }
-                    if ($data['status'] == CExpertise::PROBLEM) {
+                    $is_problem = $data['take_status'] == CExpertise::PROBLEM;
+                    if ($is_problem) {
                         if (empty($data['qty'])) {
                             return returnMessageAjax(100, 'Bạn chưa nhập số lượng đủ điều kiện nhập kho !');
+                        }
+                        if ((int) $data['qty'] >= $outside_qty) {
+                            return returnMessageAjax(100, 'Số lượng nhập kho không hợp lệ !');
                         }
                         if (empty($data['handle_problem'])) {
                             return returnMessageAjax(100, 'Bạn chưa chọn giải pháp xử lí sản phẩm lỗi !');
                         }
+                    }else{
+                        $data['qty'] = (int) $outside_qty;
+                    }
+                    $data['status'] = \StatusConst::NOT_ACCEPTED;
+                    $data['code'] = 'KCS-'.getCodeInsertTable('c_expertises');
+                    $data['name'] = \User::getCurrent('name').' đã thẩm định xong sảm phẩm'.' '.$product_obj->name;
+                    $this->services->configBaseDataAction($data);
+                    $insert = CExpertise::insertGetId($data);
+                    if ($insert) {
+                        $product_obj->status = $is_problem ? \StatusConst::SUBMITED : \StatusConst::LAST_SUBMITED;
+                        $product_obj->out_side = $is_problem ? $outside_qty - (int) $data['qty'] : 0;
+                        $product_obj->save();
+                        return returnMessageAjax(200, 'Yêu cầu nhập kho sản phẩm thành công !', \StatusConst::CLOSE_POPUP);
+                    }else{
+                        return returnMessageAjax(100, 'Lỗi không xác định !');
                     }
                 }
             }else{
