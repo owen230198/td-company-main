@@ -45,7 +45,6 @@ var ajaxBaseCall = function(param)
 					}else{
 						window.location = data.url;
 					}
-					
 				}
 			});
 		}else{
@@ -55,7 +54,7 @@ var ajaxBaseCall = function(param)
 				closeDataPopup();
 				window.parent.location.reload();
 			}else{
-				swal(title, 'Lỗi không xác định !', key);
+				window.location = data.url;
 			}
 		}
 		$('#loader').delay(200).fadeOut(500); 

@@ -2,6 +2,7 @@
 namespace App\Constants;
 use \App\Models\Order;
 use \App\Models\CSupply;
+use App\Models\Product;
 use App\Models\SupplyBuying;
 use App\Models\SupplyWarehouse;
 
@@ -95,10 +96,17 @@ class OrderConstant
             'link' => 'view/products?default_data=%7B"status"%3A"'.\StatusConst::SUBMITED.'"%7D' 
         ],
         [
-            'icon' => 'product_waiting', 
+            'icon' => 'rework', 
             'table' => 'products', 
+            'text' => 'Sản xuất lại sản phẩm',
+            'condition' => ['status' => Product::NEED_REWORK],
+            'link' => 'view/products?default_data=%7B"status"%3A"'.Product::NEED_REWORK.'"%7D' 
+        ],
+        [
+            'icon' => 'product_waiting', 
+            'table' => 'c_expertises', 
             'text' => 'Duyệt nhập kho sản phẩm',
-            'condition' => ['status' => \StatusConst::LAST_SUBMITED],
+            'condition' => ['status' => \StatusConst::NOT_ACCEPTED],
             'link' => 'view/c_expertises?default_data=%7B"status"%3A"'.\StatusConst::NOT_ACCEPTED.'"%7D' 
         ],
     ];

@@ -7,6 +7,9 @@
         protected $table = 'products';
         protected $protectFields = false;
         static $childTable = ['papers', 'supplies', 'fill_finishes'];
+        const NO_REWORK = 'no_rework';
+        const NEED_REWORK = 'need_rework';
+        const REWORKED = 'reworked';
         const CLONE_FIELD = ['name', 'category', 'qty', 'design', 'length', 'width', 'height', 'total_amount', 'act'];
 
         const SALE_SHAPE_FILE_FIELD = [
@@ -152,7 +155,13 @@
                 \GroupUser::KCS => [
                     'view' => 
                         [
-                            'with' => ['key' => 'status', 'value' => \StatusConst::SUBMITED],
+                            'with' => [
+                                'type' => 'group',
+                                'query' => [
+                                    ['key' => 'status', 'value' => \StatusConst::SUBMITED],
+                                    ['con' => 'or', 'key' => 'status', 'value' => self::NEED_REWORK]
+                                ]
+                            ],
                         ]
                 ],
             ];

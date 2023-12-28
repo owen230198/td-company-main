@@ -65,7 +65,6 @@
                     'name' => 'handle_problem',
                     'note' => 'Xử lí sản phẩm lỗi',
                     'type' => 'select',
-                    'attr' => ['inject_class' => '__expertise_status_select'],
                     'other_data' => ['data' => ['options' => $prob_handle_option]]
                 ]
             ];

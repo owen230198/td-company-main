@@ -50,7 +50,7 @@
             $product_id = Product::insertGetId($arr_product);
             foreach (Product::$childTable as $table) {
                 $model = getModelByTable($table);
-                $list_data = $model::where('product', $id)->get()->makeHidden(['id', 'product', 'handle_elevate'])->toArray();
+                $list_data = $model::where('product', $id)->get()->makeHidden(['id', 'product', 'handle_elevate', 'status'])->toArray();
                 foreach ($list_data as $data_insert) {
                     $data_insert['product'] = $product_id;
                     (new \BaseService)->configBaseDataAction($data_insert);  
@@ -107,7 +107,7 @@
                     $data['nosidebar'] = true;
                     $data['data_product'] = $product_obj;
                     $data['status_exper_option'] = [CExpertise::FULL => 'Nhập kho đủ ('.$product_obj->outside_qty.' sản phẩm)', CExpertise::PROBLEM => 'Nhập kho thiếu do lỗi kỹ thuật'];
-                    $data['prob_handle_option'] = ['' => 'Xử lí sản phẩm lỗi',CExpertise::NOT_REWORK => 'Kông sản xuất lại', CExpertise::PROBLEM => 'Sản xuất lại'];
+                    $data['prob_handle_option'] = ['' => 'Xử lí sản phẩm lỗi',CExpertise::NOT_REWORK => 'Không sản xuất lại', CExpertise::REWORK => 'Sản xuất lại'];
                     return view('kcs.requrirements.view', $data);
                 }else{
                     $data = $request->except('_token');
@@ -137,8 +137,10 @@
                     $this->services->configBaseDataAction($data);
                     $insert = CExpertise::insertGetId($data);
                     if ($insert) {
-                        $product_obj->status = $is_problem ? \StatusConst::SUBMITED : \StatusConst::LAST_SUBMITED;
-                        $product_obj->out_side = $is_problem ? $outside_qty - (int) $data['qty'] : 0;
+                        $is_rework = $data['handle_problem'] == CExpertise::REWORK;
+                        $product_obj->status = $is_problem ? ($is_rework ? Product::NEED_REWORK : \StatusConst::SUBMITED) : \StatusConst::LAST_SUBMITED;
+                        $product_obj->rework_status = $is_rework ? Product::NEED_REWORK : Product::NO_REWORK;
+                        $product_obj->outside_qty = $is_problem ? $outside_qty - (int) $data['qty'] : 0;
                         $product_obj->save();
                         return returnMessageAjax(200, 'Yêu cầu nhập kho sản phẩm thành công !', \StatusConst::CLOSE_POPUP);
                     }else{
