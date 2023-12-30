@@ -20,7 +20,7 @@
     }
 
     if (!function_exists('getProductElementData')) {
-        function getProductElementData($category, $id, $exc_paper = false, $check_magnet = false)
+        function getProductElementData($category, $id, $exc_paper = false, $check_magnet = false, $empty_data_obj = false, $clone_data = false)
         {
             $ret = isHardBox($category) ? \TDConst::HARD_ELEMENT : \TDConst::PAPER_ELEMENT;
             $where = ['act' => 1, 'product' => $id];
@@ -31,7 +31,7 @@
                 if ($exc_paper && $item['table'] =='papers') {
                     $where['except_handle'] = 0;
                 }
-                $data_obj = \DB::table($item['table'])->where($where)->get()->toArray();
+                $data_obj = getModelByTable($item['table'])->where($where)->get();
                 if ($check_magnet && $item['table'] =='fill_finishes') {
                     $magnet_compent = (float) getDataConfig('QuoteConfig', 'MAGNET_COMPEN_PERCENT');
                     foreach ($data_obj as $key_magnet => $magnet) {
@@ -43,10 +43,19 @@
                         }
                     }
                 }else{
+                    if ($clone_data) {
+                        foreach ($data_obj as $key => $value) {
+                            unset($value['id']);
+                        }
+                    }
                     $ret[$key]['data'] = $data_obj;
+                }
+                if ($empty_data_obj && empty($data_obj)) {
+                    unset($ret[$key]);
                 }
                 unset($where['type'], $where['except_handle']);
             }
+            dd($ret);
             return $ret;
         }
     }

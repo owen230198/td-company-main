@@ -86,6 +86,7 @@ Route::middleware(['check_login'])->group(function () {
 
 	//KCS route
 	Route::any('kcs-take-in-req/{id}', [ProductController::class, 'KCSTakeInRequirement']);
+	Route::any('product-require-rework/{id}', [ProductController::class, 'productRequireRework']);
 });
 $modules_path = dirname(__DIR__) . '/app/Modules/';
 if (is_dir($modules_path)) {

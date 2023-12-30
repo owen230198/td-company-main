@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : owen
+ Source Server         : localhost
  Source Server Type    : MySQL
- Source Server Version : 100425
+ Source Server Version : 100432
  Source Host           : localhost:3306
  Source Schema         : td_company
 
  Target Server Type    : MySQL
- Target Server Version : 100425
+ Target Server Version : 100432
  File Encoding         : 65001
 
- Date: 29/12/2023 00:23:41
+ Date: 31/12/2023 04:21:52
 */
 
 SET NAMES utf8mb4;
@@ -2123,7 +2123,7 @@ INSERT INTO `n_tables` VALUES (14, 'supply_prices', 'Đơn giá vật tư', NULL
 INSERT INTO `n_tables` VALUES (18, 'orders', 'Đơn hàng', NULL, 20, 'view', '[\r\n	{\r\n	\"icon\":\"list-ul\",\r\n	\"note\":\"DS sản phẩm\", \r\n	\"link\":\"view/products?default_data={%22order%22:%22<id>%22}\"\r\n	}\r\n]', '0', '1', '1', '1', '2023-06-21 13:22:33', '2023-09-15 21:19:43');
 INSERT INTO `n_tables` VALUES (19, 'p_substances', 'Chất liệu giấy in', NULL, 20, 'view', NULL, '1', '1', '1', '1', '2023-04-23 11:30:46', '2023-08-16 19:42:34');
 INSERT INTO `n_tables` VALUES (20, 'product_categories', 'Nhóm sản phẩm', '', 20, 'view', '[\r\n	{\r\n	\"icon\":\"list-ul\",\r\n	\"note\":\"Kiểu hộp\", \r\n	\"link\":\"view/product_styles?default_data={%22category%22:%22<id>%22}\"\r\n	}\r\n]', '0', '1', '0', '0', '2023-04-23 11:30:46', '2023-09-25 20:54:00');
-INSERT INTO `n_tables` VALUES (21, 'products', 'Đơn sản phẩm', NULL, 20, 'view', '[\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"spinner\",\r\n		\"note\":\"Vật tư sản xuất\", \r\n		\"class\":\"__product_list_supp_process\"\r\n	},\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"calendar-check-o\",\r\n		\"note\":\"Yêu cầu nhập kho\",\r\n		\"class\":\"__product_takein_req\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"submited\"}\r\n		]\r\n	},\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"recycle\",\r\n		\"note\":\"Yêu cầu sản xuất lại\",\r\n		\"class\":\"__product_rework_req\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"need_rework\"}\r\n		]\r\n	}\r\n]', '0', '1', '0', '1', '2023-04-23 11:30:46', '2023-12-29 00:21:25');
+INSERT INTO `n_tables` VALUES (21, 'products', 'Đơn sản phẩm', NULL, 20, 'view', '[\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"spinner\",\r\n		\"note\":\"Vật tư sản xuất\", \r\n		\"class\":\"__product_list_supp_process\"\r\n	},\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"calendar-check-o\",\r\n		\"note\":\"Yêu cầu nhập kho\",\r\n		\"class\":\"__product_takein_req\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"submited\"}\r\n		]\r\n	},\r\n	{\r\n		\"icon\":\"recycle\",\r\n		\"note\":\"Yêu cầu sản xuất lại\",\r\n		\"link\":\"product-require-rework/<id>\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"need_rework\"}\r\n		]\r\n	}\r\n]', '0', '1', '0', '1', '2023-04-23 11:30:46', '2023-12-31 00:58:26');
 INSERT INTO `n_tables` VALUES (22, 'c_designs', 'Lệnh thiết kế', NULL, 20, 'view', '[\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"level-down\",\"note\":\"Nhận lệnh\", \r\n		\"class\":\"__receive_command\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"not_accepted\"}\r\n		]\r\n	}\r\n]', '0', '1', '1', '0', '2023-06-30 17:43:12', '2023-08-16 19:42:34');
 INSERT INTO `n_tables` VALUES (23, 'c_supplies', 'Yêu cầu Xuất vật tư', NULL, 20, 'view', '[\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"share\",\"note\":\"Xác nhận xuất vật tư\", \r\n		\"class\":\"__confirm_ex_supp\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"handling\"}\r\n		]\r\n	}\r\n]', '0', '0', '1', '0', '2023-07-14 03:17:55', '2023-08-16 19:42:34');
 INSERT INTO `n_tables` VALUES (24, 'n_log_actions', 'Lịch sử thao tác', NULL, 10, 'history', NULL, '', '', '1', '', '2023-05-23 14:43:41', '2023-08-16 19:42:34');

@@ -151,5 +151,29 @@
                 return customReturnMessage(false, $is_post, ['message' => 'Bạn không có quyền thực hiện thao tác này !']);
             }
         }
+
+        public function productRequireRework(Request $request, $id)
+        {
+            $is_post = $request->isMethod('POST');
+            if (\GroupUser::isAdmin() || \GroupUser::isKcs()) {
+                $product_obj = Product::find($id);
+                if (empty($product_obj) || @$product_obj->status != Product::NEED_REWORK) {
+                    return customReturnMessage(false, $is_post, ['message' => 'Dữ liệu không hợp lệ !']);
+                }
+                if ($product_obj->outside_qty <= 0) {
+                    return customReturnMessage(false, $is_post, ['message' => 'Số lượng cần sản phẩm cần sản xuất lại không hợp lệ !']);
+                }
+                if (!$is_post) {
+                    $data['title'] = 'Yêu cầu sản xuất lại '.$product_obj->outside_qty.' sản phẩm '.$product_obj->name;
+                    $data['parent_url'] = ['link' => session()->get('back_url'), 'note' => 'Danh sách sản phẩm cần sản xuất lại'];
+                    $data['product'] = $product_obj;
+                    $data['cate'] = $product_obj->category;
+                    $data['elements'] = getProductElementData($data['cate'], $id, false, false, true, true);
+                    return view('kcs.reworks.view', $data);
+                }
+            }else{
+                return customReturnMessage(false, $is_post, ['message' => 'Bạn không có quyền thực hiện thao tác này !']);    
+            }
+        }
     }
 ?>
