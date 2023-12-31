@@ -50,12 +50,11 @@
                     }
                     $ret[$key]['data'] = $data_obj;
                 }
-                if ($empty_data_obj && empty($data_obj)) {
+                if ($empty_data_obj && $data_obj->isEmpty()) {
                     unset($ret[$key]);
                 }
                 unset($where['type'], $where['except_handle']);
             }
-            dd($ret);
             return $ret;
         }
     }
