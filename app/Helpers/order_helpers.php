@@ -19,8 +19,24 @@
         }
     }
 
+    if (!function_exists('configCloneDataElementObj')) {
+        function configCloneDataElementObj(&$data_obj, $table){
+            foreach ($data_obj as $value) {
+                unset($value['id']);
+                if ($table == 'papers') {
+                    $value['name'] = $value['name'].' (Sản xuất lại do lỗi kỹ thuật)';
+                }
+                $value['product_qty'] = 0;
+                $value['base_supp_qty'] = 0;
+                $value['compent_percent'] = 0;
+                $value['compent_plus'] = 0;
+                $value['supp_qty'] = 0;
+            }
+        }
+    }
+
     if (!function_exists('getProductElementData')) {
-        function getProductElementData($category, $id, $exc_paper = false, $check_magnet = false, $empty_data_obj = false, $clone_data = false)
+        function getProductElementData($category, $id, $exc_paper = false, $check_magnet = false, $empty_obj = false, $clone_data = false)
         {
             $ret = isHardBox($category) ? \TDConst::HARD_ELEMENT : \TDConst::PAPER_ELEMENT;
             $where = ['act' => 1, 'product' => $id];
@@ -44,14 +60,12 @@
                     }
                 }else{
                     if ($clone_data) {
-                        foreach ($data_obj as $key => $value) {
-                            unset($value['id']);
-                        }
+                        configCloneDataElementObj($data_obj, $item['table']);
                     }
                     $ret[$key]['data'] = $data_obj;
-                }
-                if ($empty_data_obj && $data_obj->isEmpty()) {
-                    unset($ret[$key]);
+                    if ($empty_obj && $data_obj->isEmpty()) {
+                        unset($ret[$key]);
+                    }
                 }
                 unset($where['type'], $where['except_handle']);
             }

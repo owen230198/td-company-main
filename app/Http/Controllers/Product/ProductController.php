@@ -152,24 +152,59 @@
             }
         }
 
+        public function validateSupply($data, $outside_qty)
+        {
+            $arr[\TDConst::PAPER] = 'Giấy in';
+            $arr = $arr + \TDConst::ALL_SUPPLY;
+            $arr[\TDConst::FILL_FINISH] = 'Hoàn thiện cuối';
+            foreach ($arr as $key => $name) {
+                if (!empty($data[$key])) {
+                    foreach ($data[$key] as $supply) {
+                        if ((int) @$supply['qty'] < $outside_qty) {
+                            $supp_name = $key == \TDConst::PAPER ? $supply['name'] : $name;
+                            return returnMessageAjax(100, 'Số lượng sản phẩm '.$supp_name.' không hợp lệ');
+                        }
+                    }
+                }
+            }   
+        }
+
         public function productRequireRework(Request $request, $id)
         {
             $is_post = $request->isMethod('POST');
             if (\GroupUser::isAdmin() || \GroupUser::isKcs()) {
                 $product_obj = Product::find($id);
+                $pro_outside_qty = (int) $product_obj->outside_qty;
                 if (empty($product_obj) || @$product_obj->status != Product::NEED_REWORK) {
                     return customReturnMessage(false, $is_post, ['message' => 'Dữ liệu không hợp lệ !']);
                 }
-                if ($product_obj->outside_qty <= 0) {
+                if ($pro_outside_qty <= 0) {
                     return customReturnMessage(false, $is_post, ['message' => 'Số lượng cần sản phẩm cần sản xuất lại không hợp lệ !']);
                 }
                 if (!$is_post) {
-                    $data['title'] = 'Yêu cầu sản xuất lại '.$product_obj->outside_qty.' sản phẩm '.$product_obj->name;
+                    $data['title'] = 'Yêu cầu sản xuất lại '.$pro_outside_qty.' sản phẩm '.$product_obj->name;
                     $data['parent_url'] = ['link' => session()->get('back_url'), 'note' => 'Danh sách sản phẩm cần sản xuất lại'];
+                    $product_obj->name = $product_obj->name.' (Sản xuất lại do lỗi kỹ thuật)';
+                    $product_obj->qty = $pro_outside_qty;
+                    $product_obj->design = 4;
                     $data['product'] = $product_obj;
                     $data['cate'] = $product_obj->category;
                     $data['elements'] = getProductElementData($data['cate'], $id, false, false, true, true);
                     return view('kcs.reworks.view', $data);
+                }else{
+                    $data = $request->except('_token');
+                    $data_product = !empty($data['product'][0]) ? $data['product'][0] : [];
+                    if (empty($data_product)) {
+                        return returnMessageAjax(100, 'Không tìm thấy dữ liệu sản phẩm !');
+                    }
+                    if ((int) $data_product['qty'] < $pro_outside_qty) {
+                        return returnMessageAjax(100, 'Số lượng sản phẩm sản xuất lại không hợp lệ !');
+                    }
+                    $validate = $this->validateSupply($data_product, $pro_outside_qty);
+                    if (@$validate['code'] != 200) {
+                        return $validate;
+                    }
+                    $validate_product = $this->quote_services->processDataProduct($data, [], \TDConst::ORDER_ACTION_FLOW);
                 }
             }else{
                 return customReturnMessage(false, $is_post, ['message' => 'Bạn không có quyền thực hiện thao tác này !']);    

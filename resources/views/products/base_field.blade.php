@@ -5,7 +5,7 @@
             [
                 'name' => $pro_base_name_input.'[name]',
                 'note' => 'Tên sản phẩm',
-                'attr' => ['required' => 1, 'inject_class' => 'quote_set_product_name length_input', 'placeholder' => 'Nhập tên'],
+                'attr' => ['required' => 1, 'inject_class' => 'quote_set_product_name length_input', 'placeholder' => 'Nhập tên', 'readonly' => !empty($rework)],
                 'value' => !empty($product['id']) ? @$product['name'] : ''
             ],
             [
@@ -17,6 +17,7 @@
             [
                 'name' => $pro_base_name_input.'[design]',
                 'note' => 'thiết kế',
+                'attr' => ['readonly' => !empty($rework)],
                 'type' => 'linking',
                 'other_data' => ['data' => ['table' => 'design_types', 'select' => ['id', 'name']]],
                 'value' => @$product['design']
@@ -56,7 +57,7 @@
     @foreach ($arr_pro_field as $field)
         @include('view_update.view', $field)
     @endforeach
-    <div class="__style_product_select_module">
+    <div class="__style_product_select_module {{ !empty($rework) ? 'd-none' : '' }}">
         @include('view_update.view', $category_product_field)
         <div class="__style_select mt-2" style="display: {{ !empty($product['product_style']) ? 'block' : 'none' }}">
             @include('view_update.view', $style_product_field)

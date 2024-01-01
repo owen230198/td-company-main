@@ -5,13 +5,13 @@
                 @php
                     $supply->size = !empty($supply->size) ? json_decode($supply->size, true) : [];
                 @endphp
-                @include('quotes.products.'.$supp_view.'.ajax_view', ['supp_index' => $supp_index, 'supply_obj' => $supply, 'supply_size' => $supply->size])  
+                @include('quotes.products.'.$supp_view.'.ajax_view', ['supp_index' => $supp_index, 'supply_obj' => $supply, 'supply_size' => $supply->size, 'rework' => $rework])  
             @endforeach
         @else
-            @include('quotes.products.'.$supp_view.'.ajax_view', ['supp_index' => 0])  
+            @include('quotes.products.'.$supp_view.'.ajax_view', ['supp_index' => 0, 'rework' => $rework])  
         @endif
     </div>
-    @if ($supp_view != 'fill_finishes')
+    @if ($supp_view != 'fill_finishes' && empty($rework))
         <div class="text-center my-3">
             <button type="button" data-product="{{ $pro_index }}" data-key={{ $supp_view }}
             class="main_button color_white bg_green border_green radius_5 font_bold sooth add_supp_quote_button">

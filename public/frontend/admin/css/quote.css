@@ -217,6 +217,10 @@ ul.supply_info li.supply_item_inf>.detail_quote_supply_item.hover{
     vertical-align: top;
 }
 
+.top_95{
+    top: 95px;
+}
+
 @page {
     size: A4;
     margin: 1cm;

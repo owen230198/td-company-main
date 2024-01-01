@@ -21,24 +21,28 @@
         $key_device_cut = \TDConst::CUT;
         $data_cut = !empty($supply_obj->cut) ? json_decode($supply_obj->cut, true) : []; 
     @endphp
-    @include('quotes.products.supplies.check_index_data')
+    @if (empty($rework))
+        @include('quotes.products.supplies.check_index_data')
+    @endif
     
     @include('quotes.products.supplies.title_config', ['divide' => $silk_divide, 'name' => 'vải lụa'])
 
     @include('quotes.products.supplies.quantity_config', 
     ['compen_percent' => $silk_compen_percent])
 
-    @include('quotes.products.supplies.size_config', ['plus' => $silk_plus, 'divide' => $silk_divide])
+    <div class="{{ !empty($rework) ? 'd-none' : '' }}">
+        @include('quotes.products.supplies.size_config', ['plus' => $silk_plus, 'divide' => $silk_divide])
 
-    @include('view_update.view', $pro_silk_supply)
+        @include('view_update.view', $pro_silk_supply)
 
-    <div class="d-flex align-items-center">
-        @include('view_update.view', $pro_silk_ext_price)
-        <span class="ml-1 color_gray">Giá cho 1 sản phẩm</span>
-    </div> 
+        <div class="d-flex align-items-center">
+            @include('view_update.view', $pro_silk_ext_price)
+            <span class="ml-1 color_gray">Giá cho 1 sản phẩm</span>
+        </div> 
 
-    @include('quotes.products.select_device', 
-    ['key_device' => $key_device_cut, 'note' => 'Máy xén', 
-    'value' => !empty($supply_obj->id) ? @$data_cut['machine'] : getDeviceId(['key_device' => $key_device_cut, 'supply' => $key_supp, 'default_device' => 1]), 'element' => $key_supp])
-    @include('quotes.products.note_field', ['key_supp' => $key_supp])
+        @include('quotes.products.select_device', 
+        ['key_device' => $key_device_cut, 'note' => 'Máy xén', 
+        'value' => !empty($supply_obj->id) ? @$data_cut['machine'] : getDeviceId(['key_device' => $key_device_cut, 'supply' => $key_supp, 'default_device' => 1]), 'element' => $key_supp])
+        @include('quotes.products.note_field', ['key_supp' => $key_supp])
+    </div>
 </div>

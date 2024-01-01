@@ -51,57 +51,61 @@
         </a>
     @endif
 </h3>
-@if (!empty($supply_obj->id))
+@if (empty($rework))
+    @if (!empty($supply_obj->id))
     <input type="hidden" name="product[{{ $pro_index }}][fill_finish][id]" value="{{ $supply_obj->id }}">
+    @endif
 @endif
 @include('view_update.view', $pro_fill_finish_qty)
 
-<div class="module_fill_quote pb-2 mb-2 border_bot_eb section_quote_fill_finish">
-    <div class="list_item_fill_finish">
-        <div class="ajax_fill_quote ajax_ff_quote">
-            @if (!empty($data_fill['stage']))
-                @foreach ($data_fill['stage'] as $findex => $item)
-                    @include('quotes.products.fill_finishes.ajax_fill', ['fill_data' => $item])
-                @endforeach
-            @else
-                @include('quotes.products.fill_finishes.ajax_fill', ['findex' => 0])
-            @endif
+<div class="{{ !empty($rework) ? 'd-none' : '' }}">
+    <div class="module_fill_quote pb-2 mb-2 border_bot_eb section_quote_fill_finish">
+        <div class="list_item_fill_finish">
+            <div class="ajax_fill_quote ajax_ff_quote">
+                @if (!empty($data_fill['stage']))
+                    @foreach ($data_fill['stage'] as $findex => $item)
+                        @include('quotes.products.fill_finishes.ajax_fill', ['fill_data' => $item])
+                    @endforeach
+                @else
+                    @include('quotes.products.fill_finishes.ajax_fill', ['findex' => 0])
+                @endif
+            </div>
+            <div class="text-center my-2 py-2 border_bot_eb">
+                <button type="button" data-product="{{ $pro_index }}" data-view="ajax_fill"
+                        class="main_button color_white bg_green border_green radius_5 font_bold sooth quote_add_fill_item add_fill_finish_quote_button">
+                <i class="fa fa-plus mr-2 fs-14" aria-hidden="true"></i> Thêm chi tiết
+            </button>
+            </div>
         </div>
-        <div class="text-center my-2 py-2 border_bot_eb">
-            <button type="button" data-product="{{ $pro_index }}" data-view="ajax_fill"
-                    class="main_button color_white bg_green border_green radius_5 font_bold sooth quote_add_fill_item add_fill_finish_quote_button">
-            <i class="fa fa-plus mr-2 fs-14" aria-hidden="true"></i> Thêm chi tiết
-        </button>
+        <div class="d-flex align-items-center">
+            @include('view_update.view', $pro_fill_ext)
+            <span class="fs-12 color_red font-italic ml-2">Đơn giá/1 sản phẩm</span>
         </div>
     </div>
-    <div class="d-flex align-items-center">
-        @include('view_update.view', $pro_fill_ext)
-        <span class="fs-12 color_red font-italic ml-2">Đơn giá/1 sản phẩm</span>
+    
+    <div class="module_finish_quote pb-2 mb-2 border_bot_eb section_quote_fill_finish">
+        <div class="d-flex align-items-end list_item_fill_finish">
+            <div class="ajax_fill_quote ajax_ff_quote">
+                @if (!empty($data_finish['stage']))
+                    @foreach ($data_finish['stage'] as $findex => $item)
+                        @include('quotes.products.fill_finishes.ajax_finish', ['finish_data' => $item])
+                    @endforeach
+                @else
+                    @include('quotes.products.fill_finishes.ajax_finish', ['findex' => 0])
+                @endif
+            </div>
+            <button type="button" data-product="{{ $pro_index }}" data-view="ajax_finish" 
+            class="main_button color_white bg_green border_green radius_5 font_bold sooth quote_add_finish_item ml-5 mb-2 add_fill_finish_quote_button">
+                <i class="fa fa-plus mr-2 fs-14" aria-hidden="true"></i> Thêm chi tiết
+            </button>
+        </div>
+        <div class="d-flex align-items-center">
+            @include('view_update.view', $pro_finish_ext)
+            <span class="fs-12 color_red font-italic ml-2">ĐG/1 sản phẩm</span>
+        </div>
     </div>
+    
+    @include('view_update.view', $data_select_magnet)
+    
+    @include('view_update.view', $data_magnet_qty)
 </div>
-
-<div class="module_finish_quote pb-2 mb-2 border_bot_eb section_quote_fill_finish">
-    <div class="d-flex align-items-end list_item_fill_finish">
-        <div class="ajax_fill_quote ajax_ff_quote">
-            @if (!empty($data_finish['stage']))
-                @foreach ($data_finish['stage'] as $findex => $item)
-                    @include('quotes.products.fill_finishes.ajax_finish', ['finish_data' => $item])
-                @endforeach
-            @else
-                @include('quotes.products.fill_finishes.ajax_finish', ['findex' => 0])
-            @endif
-        </div>
-        <button type="button" data-product="{{ $pro_index }}" data-view="ajax_finish" 
-        class="main_button color_white bg_green border_green radius_5 font_bold sooth quote_add_finish_item ml-5 mb-2 add_fill_finish_quote_button">
-            <i class="fa fa-plus mr-2 fs-14" aria-hidden="true"></i> Thêm chi tiết
-        </button>
-    </div>
-    <div class="d-flex align-items-center">
-        @include('view_update.view', $pro_finish_ext)
-        <span class="fs-12 color_red font-italic ml-2">ĐG/1 sản phẩm</span>
-    </div>
-</div>
-
-@include('view_update.view', $data_select_magnet)
-
-@include('view_update.view', $data_magnet_qty)

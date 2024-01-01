@@ -9,7 +9,8 @@
         'attr' => ['required' => 1, 
                     'inject_class' => $supp_index == 0 ? 'length_input quote_receive_paper_name_main' 
                     : 'length_input quote_receive_paper_name_ext',
-                'disable_field' => !empty($disable_all) || in_array('size_name', @$arr_disable ?? []) ? 1 : 0],
+                'disable_field' => !empty($disable_all) || in_array('size_name', @$arr_disable ?? []) ? 1 : 0,
+            'readonly' => !empty($rework)],
         'value' => @$supply_obj->name ?? @$supp_name
     ];
     $pro_paper_materals = [
@@ -48,12 +49,14 @@
         'value' => @$supply_size['note']
     ];
 @endphp
-@include('quotes.products.supplies.check_index_data')
+@if (empty($rework))
+    @include('quotes.products.supplies.check_index_data')
+@endif
 @if ($supp_index == 0 || @$supply_obj->main == 1)
     <input type="hidden" value="1" name="product[{{ $pro_index }}][{{ $key_supp }}][{{ $supp_index }}][main]">   
 @endif
 <div class="mb-2 paper_product_config">
-    @if ($supp_index > 0)
+    @if ($supp_index > 0 && empty($rework))
         @php
             $pro_paper_extend_name = [
                 'name' => '',
@@ -89,7 +92,7 @@
     @include('quotes.products.supplies.quantity_config', 
     ['compen_percent' => $paper_compen_percent, 'plus_direct' => $paper_plus_direct, 'per_plus' => $paper_plus_to_per])
     
-    <div class="materal_paper_module">
+    <div class="materal_paper_module {{ !empty($rework) ? 'd-none' : '' }}">
         @include('view_update.view', $pro_paper_materals)
         <div class="__module_paper_materal_note" style="display:{{ @$supply_size['materal'] != 'other' ? 'none' : 'block' }}">
             @include('view_update.view', $paper_note_materal)
@@ -98,6 +101,8 @@
         @include('quotes.products.papers.size')
     </div>
     @if (empty($no_exc))
-        @include('view_update.view', $pro_paper_except)
+        <div class="{{ !empty($rework) ? 'd-none' : '' }}">
+            @include('view_update.view', $pro_paper_except)
+        </div>
     @endif
 </div>
