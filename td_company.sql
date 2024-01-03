@@ -11,7 +11,7 @@
  Target Server Version : 100425
  File Encoding         : 65001
 
- Date: 03/01/2024 09:48:47
+ Date: 03/01/2024 23:48:17
 */
 
 SET NAMES utf8mb4;
@@ -81,11 +81,6 @@ CREATE TABLE `c_expertises`  (
   `updated_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of c_expertises
--- ----------------------------
-INSERT INTO `c_expertises` VALUES (1, 'KCS-00000001', 'khanh đã thẩm định xong sảm phẩm Hộp cứng cao cấp SONA + Túi giấy', '0', 94, 'prob', 'rework', 'loi 1000 sp', 'accepted', 1, 16, '2024-01-03 06:03:20', '2024-01-03 09:47:37');
 
 -- ----------------------------
 -- Table structure for c_processes
@@ -1471,7 +1466,7 @@ CREATE TABLE `n_detail_tables`  (
   INDEX `map_insert`(`table_map`, `insert`) USING BTREE,
   INDEX `map_update`(`table_map`, `update`) USING BTREE,
   INDEX `map_search`(`table_map`, `search`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 273 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 290 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of n_detail_tables
@@ -1724,7 +1719,7 @@ INSERT INTO `n_detail_tables` VALUES (260, 'created_by', NULL, 'Người thêm',
 INSERT INTO `n_detail_tables` VALUES (261, 'applied_by', NULL, 'Người duyệt mua', 'linking', 'supply_buyings', 1, 0, 0, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', 1, 10, 1, '2023-04-08 00:08:00', '2023-11-14 23:54:03');
 INSERT INTO `n_detail_tables` VALUES (262, 'bought_by', NULL, 'Người mua', 'linking', 'supply_buyings', 1, 0, 0, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', 1, 11, 1, '2023-04-08 00:08:00', '2023-11-16 07:50:44');
 INSERT INTO `n_detail_tables` VALUES (263, 'submited_by', NULL, 'Nhập kho bởi', 'linking', 'supply_buyings', 1, 0, 0, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', 1, 11, 1, '2023-04-08 00:08:00', '2023-11-16 07:50:44');
-INSERT INTO `n_detail_tables` VALUES (264, 'warehouse_qty', '{\"type_input\":\"number\",\"required\":1}', 'Còn trong kho', 'text', 'products', 1, 1, 1, 0, 0, '', 1, 2, 1, '2023-04-30 11:00:22', '2024-01-03 09:44:29');
+INSERT INTO `n_detail_tables` VALUES (264, 'outside_qty', '{\"type_input\":\"number\",\"required\":1}', 'Sản phẩm lỗi', 'text', 'products', 1, 1, 1, 0, 0, '', 1, 2, 0, '2023-04-30 11:00:22', '2024-01-03 22:31:05');
 INSERT INTO `n_detail_tables` VALUES (265, 'code', '{\"disable_field\":1}', 'Mã lệnh', 'text', 'c_expertises', 1, 0, 1, 1, 0, '', 1, 0, 1, '2023-06-15 06:55:51', '2024-01-03 03:56:01');
 INSERT INTO `n_detail_tables` VALUES (266, 'name', '{\"disable_field\":1}', 'Tiêu đề', 'text', 'c_expertises', 1, 0, 1, 1, 0, '', 1, 0, 1, '2023-06-15 06:55:51', '2024-01-03 03:56:01');
 INSERT INTO `n_detail_tables` VALUES (267, 'qty', '{\"required\":1, \"type_input\":\"number\"}', 'SL nhập kho', 'text', 'c_expertises', 1, 1, 1, 0, 0, '', 1, 0, 1, '2023-07-14 02:55:32', '2024-01-03 06:14:05');
@@ -1733,6 +1728,15 @@ INSERT INTO `n_detail_tables` VALUES (269, 'take_status', '', 'Kiểu nhập kho
 INSERT INTO `n_detail_tables` VALUES (270, 'handle_problem', '', 'Sản xuất lại', 'select', 'c_expertises', 1, 0, 1, 0, 0, '{\"data\":{\r\n		\"options\":{\"not_rework\":\"Không sản xuất lại\", \"rework\":\"Yêu cầu sản xuất lại\", \"reworked\":\"Đã sản xuất lại\"}\r\n	}\r\n}', 1, 0, 1, '2023-06-15 06:55:51', '2024-01-03 03:56:01');
 INSERT INTO `n_detail_tables` VALUES (271, 'created_at', '', 'Ngày tạo', 'datetime', 'c_expertises', 1, 0, 1, 1, 0, '', 1, 0, 1, '2023-06-15 06:55:51', '2024-01-03 03:56:01');
 INSERT INTO `n_detail_tables` VALUES (272, 'created_by', '', 'Tạo bởi', 'linking', 'c_expertises', 1, 0, 1, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', 1, 0, 1, '2023-06-15 06:55:51', '2024-01-03 03:56:01');
+INSERT INTO `n_detail_tables` VALUES (281, 'code', '{\"disable_field\":1,\"required\":1}', 'Mã sản phẩm', 'text', 'product_warehouses', 1, 0, 1, 1, 0, '', 1, 0, 1, '2023-05-26 03:19:12', '2024-01-03 22:58:05');
+INSERT INTO `n_detail_tables` VALUES (282, 'name', '', 'Tên', 'text', 'product_warehouses', 1, 0, 1, 1, 0, '', 1, 1, 1, '2023-05-26 03:19:12', '2024-01-03 22:58:05');
+INSERT INTO `n_detail_tables` VALUES (283, 'qty', '{\"type_input\":\"number\",\"required\":1}', 'Số lượng', 'text', 'product_warehouses', 1, 1, 1, 0, 0, '', 1, 2, 1, '2023-04-30 11:00:22', '2024-01-03 22:58:05');
+INSERT INTO `n_detail_tables` VALUES (284, 'price', '{\"type_input\":\"price\"}', 'Giá', 'text', 'product_warehouses', 1, 0, 1, 0, 0, '', 1, 6, 1, '2023-05-26 03:19:12', '2024-01-03 22:58:05');
+INSERT INTO `n_detail_tables` VALUES (285, 'category', NULL, 'Nhóm sản phẩm', 'linking', 'product_warehouses', 0, NULL, NULL, 0, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"product_categories\"\r\n	}\r\n}', 1, 0, 0, '2023-08-22 03:54:31', '2024-01-03 22:58:05');
+INSERT INTO `n_detail_tables` VALUES (286, 'category', NULL, 'Nhóm sản phẩm', 'group_product', 'product_warehouses', 0, 0, 0, 1, 0, '{\r\n	\"table_target\":\"quotes\"\r\n}', 1, 0, 1, '2023-04-30 11:17:52', '2024-01-03 22:58:05');
+INSERT INTO `n_detail_tables` VALUES (287, 'size', NULL, 'Kích thước', 'product_size', 'product_warehouses', 0, 0, 0, 1, 0, '{\r\n	\"table_target\":\"quotes\"\r\n}', 1, 0, 1, '2023-04-30 11:17:52', '2024-01-03 22:58:05');
+INSERT INTO `n_detail_tables` VALUES (288, 'created_by', NULL, 'Người thêm', 'linking', 'product_warehouses', 1, 0, 0, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', 1, 3, 1, '2023-04-08 00:08:00', '2024-01-03 09:44:35');
+INSERT INTO `n_detail_tables` VALUES (289, 'created_at', NULL, 'Ngày thêm', 'datetime', 'product_warehouses', 1, 1, 1, 1, 0, '', 1, 4, 1, '2023-04-08 00:08:00', '2024-01-03 09:45:01');
 
 -- ----------------------------
 -- Table structure for n_group_users
@@ -2115,7 +2119,7 @@ CREATE TABLE `n_tables`  (
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `indx`(`id`, `name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 41 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 42 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of n_tables
@@ -2136,7 +2140,7 @@ INSERT INTO `n_tables` VALUES (14, 'supply_prices', 'Đơn giá vật tư', NULL
 INSERT INTO `n_tables` VALUES (18, 'orders', 'Đơn hàng', NULL, 20, 'view', '[\r\n	{\r\n	\"icon\":\"list-ul\",\r\n	\"note\":\"DS sản phẩm\", \r\n	\"link\":\"view/products?default_data={%22order%22:%22<id>%22}\"\r\n	}\r\n]', '0', '1', '1', '1', '2023-06-21 13:22:33', '2023-09-15 21:19:43');
 INSERT INTO `n_tables` VALUES (19, 'p_substances', 'Chất liệu giấy in', NULL, 20, 'view', NULL, '1', '1', '1', '1', '2023-04-23 11:30:46', '2023-08-16 19:42:34');
 INSERT INTO `n_tables` VALUES (20, 'product_categories', 'Nhóm sản phẩm', '', 20, 'view', '[\r\n	{\r\n	\"icon\":\"list-ul\",\r\n	\"note\":\"Kiểu hộp\", \r\n	\"link\":\"view/product_styles?default_data={%22category%22:%22<id>%22}\"\r\n	}\r\n]', '0', '1', '0', '0', '2023-04-23 11:30:46', '2023-09-25 20:54:00');
-INSERT INTO `n_tables` VALUES (21, 'products', 'Sản phẩm', NULL, 20, 'view', '[\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"spinner\",\r\n		\"note\":\"Vật tư sản xuất\", \r\n		\"class\":\"__product_list_supp_process\"\r\n	},\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"calendar-check-o\",\r\n		\"note\":\"Yêu cầu nhập kho\",\r\n		\"class\":\"__product_takein_req\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"submited\"}\r\n		]\r\n	},\r\n	{\r\n		\"icon\":\"recycle\",\r\n		\"note\":\"Yêu cầu sản xuất lại\",\r\n		\"link\":\"product-require-rework/<id>\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"need_rework\"}\r\n		]\r\n	}\r\n]', '0', '1', '0', '1', '2023-04-23 11:30:46', '2024-01-03 09:42:12');
+INSERT INTO `n_tables` VALUES (21, 'products', 'Sản xuất sản phẩm', NULL, 20, 'view', '[\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"spinner\",\r\n		\"note\":\"Vật tư sản xuất\", \r\n		\"class\":\"__product_list_supp_process\"\r\n	},\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"calendar-check-o\",\r\n		\"note\":\"Yêu cầu nhập kho\",\r\n		\"class\":\"__product_takein_req\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"submited\"}\r\n		]\r\n	},\r\n	{\r\n		\"icon\":\"recycle\",\r\n		\"note\":\"Yêu cầu sản xuất lại\",\r\n		\"link\":\"product-require-rework/<id>\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"need_rework\"}\r\n		]\r\n	}\r\n]', '0', '1', '0', '1', '2023-04-23 11:30:46', '2024-01-03 22:38:41');
 INSERT INTO `n_tables` VALUES (22, 'c_designs', 'Lệnh thiết kế', NULL, 20, 'view', '[\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"level-down\",\"note\":\"Nhận lệnh\", \r\n		\"class\":\"__receive_command\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"not_accepted\"}\r\n		]\r\n	}\r\n]', '0', '1', '1', '0', '2023-06-30 17:43:12', '2023-08-16 19:42:34');
 INSERT INTO `n_tables` VALUES (23, 'c_supplies', 'Yêu cầu Xuất vật tư', NULL, 20, 'view', '[\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"share\",\"note\":\"Xác nhận xuất vật tư\", \r\n		\"class\":\"__confirm_ex_supp\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"handling\"}\r\n		]\r\n	}\r\n]', '0', '0', '1', '0', '2023-07-14 03:17:55', '2023-08-16 19:42:34');
 INSERT INTO `n_tables` VALUES (24, 'n_log_actions', 'Lịch sử thao tác', NULL, 10, 'history', NULL, '', '', '1', '', '2023-05-23 14:43:41', '2023-08-16 19:42:34');
@@ -2155,6 +2159,7 @@ INSERT INTO `n_tables` VALUES (37, 'product_styles', 'Kiểu hộp', '{\r\n	\"li
 INSERT INTO `n_tables` VALUES (38, 'warehouse_providers', 'Nhà cung cấp vật tư', NULL, 10, 'view', '', '1', '1', '1', '1', '2023-07-17 19:30:41', '2023-08-16 19:42:34');
 INSERT INTO `n_tables` VALUES (39, 'supply_buyings', 'Yêu cầu mua vật tư', NULL, 10, 'view', '[\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"check-circle-o\",\r\n		\"note\":\"Duyệt mua vật tư\", \r\n		\"class\":\"__confirm_buying\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"not_accepted\"}\r\n		]\r\n	},\r\n	{\r\n		\"type\":2,\r\n		\"detailonly\":1,\r\n		\"icon\":\"check-square-o\",\"note\":\"Xác nhận đã mua\", \r\n		\"class\":\"__confirm_bought\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"accepted\"}\r\n		]\r\n	},\r\n	{\r\n		\"type\":2,\r\n		\"detailonly\":1,\r\n		\"icon\":\"check-square\",\"note\":\"Xác nhận nhập kho\", \r\n		\"class\":\"__confirm_warehouse_imported\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"bought\"}\r\n		]\r\n	}\r\n]', '1', '1', '1', '1', '2023-07-17 19:30:41', '2023-11-17 00:17:48');
 INSERT INTO `n_tables` VALUES (40, 'c_expertises', 'Yêu cầu nhập kho thành phẩm', NULL, 10, 'view', '[\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"share\",\r\n		\"note\":\"Duyệt nhập kho sản phẩm\", \r\n		\"class\":\"__confirm_product_warehouse\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"not_accepted\"}\r\n		]\r\n	}\r\n]', '0', '0', '1', '0', '2023-07-17 19:30:41', '2024-01-03 06:55:06');
+INSERT INTO `n_tables` VALUES (41, 'product_warehouses', 'Kho thành phẩm', NULL, 20, 'view', '[\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"history\",\r\n		\"note\":\"Lịch sử xuất nhập\", \r\n		\"class\":\"__product_warehouse_history\"\r\n	}\r\n]', '0', '1', '0', '1', '2023-04-23 11:30:46', '2024-01-03 23:20:48');
 
 -- ----------------------------
 -- Table structure for n_users
@@ -2625,14 +2630,7 @@ CREATE TABLE `product_histories`  (
   `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 44 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of product_histories
--- ----------------------------
-INSERT INTO `product_histories` VALUES (41, 'import', 0, 0, 3000, 1, 94, 20, '2024-01-03 09:36:11', '2024-01-03 09:36:11');
-INSERT INTO `product_histories` VALUES (42, 'import', 0, 0, 3000, 1, 94, 20, '2024-01-03 09:46:31', '2024-01-03 09:46:31');
-INSERT INTO `product_histories` VALUES (43, 'import', 2000, 0, 3000, 1, 94, 20, '2024-01-03 09:47:37', '2024-01-03 09:47:37');
+) ENGINE = InnoDB AUTO_INCREMENT = 45 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for product_styles
@@ -2668,24 +2666,26 @@ INSERT INTO `product_styles` VALUES (17, 'KHAY GỖ MDF', 1, 1, 1, '2023-10-05 2
 DROP TABLE IF EXISTS `product_warehouses`;
 CREATE TABLE `product_warehouses`  (
   `id` int(10) NOT NULL AUTO_INCREMENT,
+  `code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `category` int(10) NULL DEFAULT NULL,
+  `product_style` int(10) NULL DEFAULT NULL,
+  `qty` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `design` int(10) NULL DEFAULT NULL,
   `length` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `width` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `qty` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `supp_type` int(10) NULL DEFAULT NULL,
-  `supp_price` int(10) NULL DEFAULT NULL,
+  `height` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `price` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `note` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   `status` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `source` tinyint(4) NULL DEFAULT NULL,
-  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `specification` int(10) NULL DEFAULT NULL,
   `act` tinyint(4) NULL DEFAULT NULL,
   `created_at` datetime(0) NULL DEFAULT NULL,
-  `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
-  `confirm_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL,
   `created_by` int(10) NULL DEFAULT NULL,
-  `confirm_by` int(10) NULL DEFAULT NULL,
+  `expertise_id` int(10) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 37 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for products
@@ -2720,7 +2720,6 @@ CREATE TABLE `products`  (
   `created_by` int(10) NULL DEFAULT NULL,
   `order_created` tinyint(4) NULL DEFAULT NULL,
   `detail` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `warehouse_qty` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `outside_qty` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `rework_status` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `expertise_id` int(10) NULL DEFAULT NULL,
@@ -2730,56 +2729,31 @@ CREATE TABLE `products`  (
 -- ----------------------------
 -- Records of products
 -- ----------------------------
-INSERT INTO `products` VALUES (61, NULL, 'Bộ (hộp+tem+toa) Olymcouta', 2, NULL, '5000', 3, '6', '5.5', '13', NULL, NULL, NULL, '9459746.1238', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL);
-INSERT INTO `products` VALUES (62, NULL, 'Bộ ( Hộp + tem+toa) Thymo glucan', 2, NULL, '3500', 3, '13', '65', '11', NULL, NULL, NULL, '8220614.984', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL);
-INSERT INTO `products` VALUES (63, NULL, 'Hộp giấy INSUVA + Toa + Tích điểm + Cẩm nang', 2, NULL, '6700', 1, '16', '10.5', '3.3', NULL, NULL, NULL, '10516572.456', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL);
-INSERT INTO `products` VALUES (73, NULL, '2024 BG khay thuyền phổ thông', 1, 16, '10000', 1, '15', '26', '15', 101, NULL, '109118785.5', '109118785.5', NULL, '{\"id\":\"121\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/Nền màu xanh.jpg\",\"name\":\"Nền màu xanh.jpg\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-10-18 06:13:46', '2023-10-19 14:44:00', 1, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `products` VALUES (74, NULL, '2024 Trụ tròn đường kính 32 x cao12cm', 6, NULL, '10000', 1, NULL, NULL, NULL, 102, NULL, '121663106.25', '121663106.25', NULL, '{\"id\":\"122\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/Nền màu xanh(1).jpg\",\"name\":\"Nền màu xanh(1).jpg\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-10-18 06:54:41', '2023-10-18 06:54:41', 1, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `products` VALUES (75, NULL, '2024 PHỤ KIỆN ĐÁY CHAI RƯỢU + CỔ CHAI', 1, 10, '100000', 1, '1', '1', '1', 106, NULL, '139662235.15', '139662235.15', NULL, '{\"id\":\"123\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/Nền màu xanh(2).jpg\",\"name\":\"Nền màu xanh(2).jpg\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-10-18 07:12:16', '2023-10-18 07:12:54', 1, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `products` VALUES (76, NULL, 'Hộp cứng A502770 PARAMOUNT', 1, 10, '13000', 1, '78', '80', '58', 110, NULL, '46588845.9', '51347730.49', NULL, '{\"id\":\"125\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/A5-A9.cdr\",\"name\":\"A5-A9.cdr\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-10-21 06:38:56', '2023-10-21 07:07:19', 1, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `products` VALUES (77, NULL, 'Hộp cứng A742791 PARAMOUNT', 1, 10, '3500', 1, '23.8', '6', '3', 111, NULL, '14050807.72', '17060969.264', NULL, '{\"id\":\"126\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/A5-A9(1).cdr\",\"name\":\"A5-A9(1).cdr\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-10-21 06:53:49', '2023-10-21 07:00:30', 1, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `products` VALUES (78, NULL, 'Tính giá CỔ CHAI RƯỢU HQT 2024', 6, NULL, '100000', 1, '58', NULL, '62', 112, NULL, '43440712.32', '43440712.32', NULL, '{\"id\":\"127\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/1 TÚI QUÀ TẾT KT chuẩn 2024 3 loại CHUẨN NHẤT 9999(4).cdr\",\"name\":\"1 TÚI QUÀ TẾT KT chuẩn 2024 3 loại CHUẨN NHẤT 9999(4).cdr\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-10-21 07:45:42', '2023-10-21 07:50:51', 1, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `products` VALUES (79, NULL, 'Tính giá ĐÁY CHAI RƯỢU HQT 2024', 1, 10, '100000', 1, '1', '1', '1', 113, NULL, '100476981.2', '100476981.2', NULL, '{\"id\":\"128\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/1 TÚI QUÀ TẾT KT chuẩn 2024 3 loại CHUẨN NHẤT 9999(5).cdr\",\"name\":\"1 TÚI QUÀ TẾT KT chuẩn 2024 3 loại CHUẨN NHẤT 9999(5).cdr\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-10-21 07:56:21', '2023-10-21 07:56:21', 1, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `products` VALUES (80, NULL, 'Tính giá VÁCH CHUNG NGĂN CHAI RƯỢU HQT 2024', 1, 10, '100000', 1, '1', '1', '1', 114, NULL, '320790947.2', '320790947.2', NULL, '{\"id\":\"129\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/1 TÚI QUÀ TẾT KT chuẩn 2024 3 loại CHUẨN NHẤT 9999(6).cdr\",\"name\":\"1 TÚI QUÀ TẾT KT chuẩn 2024 3 loại CHUẨN NHẤT 9999(6).cdr\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-10-21 08:01:37', '2023-10-21 08:04:30', 1, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `products` VALUES (81, NULL, 'Tính giá Mã A HQT 2024', 1, 11, '10000', 1, '36', '42', '10', 115, NULL, '421298807.5', '421298807.5', NULL, '{\"id\":\"130\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/1 TÚI QUÀ TẾT KT chuẩn 2024 3 loại CHUẨN NHẤT 9999(7).cdr\",\"name\":\"1 TÚI QUÀ TẾT KT chuẩn 2024 3 loại CHUẨN NHẤT 9999(7).cdr\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-10-21 08:18:05', '2023-10-21 08:24:17', 1, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `products` VALUES (82, NULL, 'Tính giá Mã A HQT 2024 ( Sửa metailai về 2800đ/m )', 1, 11, '10000', 1, '36', '42', '10', 116, NULL, '432406447.5', '432406447.5', NULL, '{\"id\":\"130\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/1 TÚI QUÀ TẾT KT chuẩn 2024 3 loại CHUẨN NHẤT 9999(7).cdr\",\"name\":\"1 TÚI QUÀ TẾT KT chuẩn 2024 3 loại CHUẨN NHẤT 9999(7).cdr\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-10-21 08:31:07', '2023-10-21 08:45:29', 1, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `products` VALUES (83, NULL, 'Tính giá Mã B HQT 2024 ( Sửa metailai về 2800đ/m )', 1, 11, '10000', 1, '36', '36', '10', 117, NULL, '403826147.5', '403826147.5', NULL, '{\"id\":\"130\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/1 TÚI QUÀ TẾT KT chuẩn 2024 3 loại CHUẨN NHẤT 9999(7).cdr\",\"name\":\"1 TÚI QUÀ TẾT KT chuẩn 2024 3 loại CHUẨN NHẤT 9999(7).cdr\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-10-21 08:39:17', '2023-10-21 08:49:17', 1, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `products` VALUES (84, NULL, 'Tính giá Mã C HQT 2024 ( Sửa metailai về 2800đ/m )', 1, 11, '10000', 1, '36', '36', '10', 118, NULL, '363475020', '363475020', NULL, '{\"id\":\"130\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/1 TÚI QUÀ TẾT KT chuẩn 2024 3 loại CHUẨN NHẤT 9999(7).cdr\",\"name\":\"1 TÚI QUÀ TẾT KT chuẩn 2024 3 loại CHUẨN NHẤT 9999(7).cdr\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-10-21 08:49:37', '2023-10-21 08:55:53', 1, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `products` VALUES (85, NULL, 'Hộp cứng SILYMARIN X7 + Cẩm nang + Toa', 1, 12, '5000', 1, '18.5', '14.5', '5.5', 119, NULL, '54263679.751', '62628231.71365', NULL, '{\"id\":\"131\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/Hộp cứng Bigfam.cdr\",\"name\":\"Hộp cứng Bigfam.cdr\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-10-21 14:41:39', '2023-10-31 18:51:48', 1, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `products` VALUES (86, NULL, 'HDSD Tiếng hàn quốc', 6, NULL, '10200', 1, '14.5', NULL, '20.5', 120, NULL, '1554613.2', '1885535.84', NULL, '{\"id\":\"132\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/khăn mat.pdf\",\"name\":\"khăn mat.pdf\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-10-25 08:50:39', '2023-10-25 10:37:02', 1, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `products` VALUES (88, NULL, 'Bao giá hộp kay + zales 9.5 x 6.9 x 2.7cm', 1, 10, '309330', 1, '9.5', '6.9', '2.7', 123, NULL, '924320083.596', '999065690.28368', NULL, '{\"id\":\"134\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/Tinh giá.cdr\",\"name\":\"Tinh giá.cdr\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-10-31 09:37:38', '2023-10-31 09:45:39', 1, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `products` VALUES (89, NULL, 'Bao giá hộp kay + zales 9.5 x 6.9 x 2.7cm', 1, 10, '309330', 1, '9.5', '6.9', '2.7', 124, NULL, '924320083.596', '999065690.28368', NULL, '{\"id\":\"134\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/Tinh giá.cdr\",\"name\":\"Tinh giá.cdr\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-10-31 09:51:08', '2023-10-31 09:51:23', 1, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `products` VALUES (90, NULL, 'Hộp 29 X 36 X 10.5cm Cắt CNC', 1, 12, '3000', 1, '29', '36', '10.5', 126, NULL, '156692249.64', '161692249.64', NULL, '{\"id\":\"135\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/HQT cặp xách 2024.cdr\",\"name\":\"HQT cặp xách 2024.cdr\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-11-01 16:22:02', '2023-11-01 16:39:53', 1, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `products` VALUES (91, NULL, 'Hộp 36 X 36 X 10.5cm Cắt CNC', 1, 12, '3000', 1, '29', '36', '10.5', 127, NULL, '160229329.58', '165229329.58', NULL, '{\"id\":\"136\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/HQT 36x36 cao cấp 2024(2).cdr\",\"name\":\"HQT 36x36 cao cấp 2024(2).cdr\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-11-01 16:27:03', '2023-11-01 16:38:57', 1, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `products` VALUES (92, NULL, 'Hộp 42 X 36 X 10.5cm Cắt CNC', 1, 12, '3000', 1, '29', '36', '10.5', 128, NULL, '168237577.18', '173237577.18', NULL, '{\"id\":\"137\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/HQT 36x42 cao cấp 2024.cdr\",\"name\":\"HQT 36x42 cao cấp 2024.cdr\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-11-01 16:41:10', '2023-11-01 16:46:30', 1, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `products` VALUES (93, NULL, '3 Loại Hộp giấy 10.5 x 15 x 4.5cm ( 3 x 10.000 = 30.000 sp )', 2, 13, '30000', 1, '10.5', '4.5', '15', 129, NULL, '25733091.25', '29668054.9375', NULL, '{\"id\":\"138\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/Khuôn ĐỨC HNA.cdr\",\"name\":\"Khuôn ĐỨC HNA.cdr\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-11-02 08:44:18', '2023-11-02 08:45:08', 1, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `products` VALUES (94, 'DH-00000024A', 'Hộp cứng cao cấp SONA + Túi giấy', 1, 12, '3000', 1, '40', '34', '10', 130, 24, '259808495.24', '390918086.86', NULL, '{\"id\":\"144\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/Screenshot (1).png\",\"name\":\"Screenshot (1).png\"}', '{\"id\":\"145\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/Screenshot (1)(1).png\",\"name\":\"Screenshot (1)(1).png\"}', '{\"id\":\"146\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/Screenshot (1)(2).png\",\"name\":\"Screenshot (1)(2).png\"}', '{\"id\":\"147\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/Screenshot (2).png\",\"name\":\"Screenshot (2).png\"}', '{\"id\":\"147\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/Screenshot (2).png\",\"name\":\"Screenshot (2).png\"}', NULL, 'last_submited', 1, '2023-11-24 09:43:17', '2024-01-03 09:47:37', 1, 1, NULL, '2000', '1000', 'reworked', 1);
-INSERT INTO `products` VALUES (106, 'DH-00000107', 'Hộp cứng cao cấp SONA + Túi giấy (Sản xuất lại do lỗi kỹ thuật)', 1, NULL, '1000', 4, '40', '34', '10', NULL, NULL, '93276797.28', '93276797.28', NULL, '{\"id\":\"144\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/Screenshot (1).png\",\"name\":\"Screenshot (1).png\"}', NULL, NULL, NULL, NULL, NULL, 'tech_submited', 1, '2024-01-03 06:04:27', '2024-01-03 06:04:27', 16, 1, NULL, NULL, '1000', NULL, 1);
-
--- ----------------------------
--- Table structure for products_warehouses
--- ----------------------------
-DROP TABLE IF EXISTS `products_warehouses`;
-CREATE TABLE `products_warehouses`  (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `category` int(10) NULL DEFAULT NULL,
-  `product_style` int(10) NULL DEFAULT NULL,
-  `qty` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `design` int(10) NULL DEFAULT NULL,
-  `length` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `width` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `height` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `note` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
-  `status` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `act` tinyint(4) NULL DEFAULT NULL,
-  `created_at` datetime(0) NULL DEFAULT NULL,
-  `updated_at` datetime(0) NULL DEFAULT NULL,
-  `created_by` int(10) NULL DEFAULT NULL,
-  `expertise_id` int(10) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 107 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+INSERT INTO `products` VALUES (61, NULL, 'Bộ (hộp+tem+toa) Olymcouta', 2, NULL, '5000', 3, '6', '5.5', '13', NULL, NULL, NULL, '9459746.1238', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL);
+INSERT INTO `products` VALUES (62, NULL, 'Bộ ( Hộp + tem+toa) Thymo glucan', 2, NULL, '3500', 3, '13', '65', '11', NULL, NULL, NULL, '8220614.984', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL);
+INSERT INTO `products` VALUES (63, NULL, 'Hộp giấy INSUVA + Toa + Tích điểm + Cẩm nang', 2, NULL, '6700', 1, '16', '10.5', '3.3', NULL, NULL, NULL, '10516572.456', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL);
+INSERT INTO `products` VALUES (73, NULL, '2024 BG khay thuyền phổ thông', 1, 16, '10000', 1, '15', '26', '15', 101, NULL, '109118785.5', '109118785.5', NULL, '{\"id\":\"121\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/Nền màu xanh.jpg\",\"name\":\"Nền màu xanh.jpg\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-10-18 06:13:46', '2023-10-19 14:44:00', 1, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `products` VALUES (74, NULL, '2024 Trụ tròn đường kính 32 x cao12cm', 6, NULL, '10000', 1, NULL, NULL, NULL, 102, NULL, '121663106.25', '121663106.25', NULL, '{\"id\":\"122\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/Nền màu xanh(1).jpg\",\"name\":\"Nền màu xanh(1).jpg\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-10-18 06:54:41', '2023-10-18 06:54:41', 1, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `products` VALUES (75, NULL, '2024 PHỤ KIỆN ĐÁY CHAI RƯỢU + CỔ CHAI', 1, 10, '100000', 1, '1', '1', '1', 106, NULL, '139662235.15', '139662235.15', NULL, '{\"id\":\"123\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/Nền màu xanh(2).jpg\",\"name\":\"Nền màu xanh(2).jpg\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-10-18 07:12:16', '2023-10-18 07:12:54', 1, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `products` VALUES (76, NULL, 'Hộp cứng A502770 PARAMOUNT', 1, 10, '13000', 1, '78', '80', '58', 110, NULL, '46588845.9', '51347730.49', NULL, '{\"id\":\"125\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/A5-A9.cdr\",\"name\":\"A5-A9.cdr\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-10-21 06:38:56', '2023-10-21 07:07:19', 1, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `products` VALUES (77, NULL, 'Hộp cứng A742791 PARAMOUNT', 1, 10, '3500', 1, '23.8', '6', '3', 111, NULL, '14050807.72', '17060969.264', NULL, '{\"id\":\"126\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/A5-A9(1).cdr\",\"name\":\"A5-A9(1).cdr\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-10-21 06:53:49', '2023-10-21 07:00:30', 1, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `products` VALUES (78, NULL, 'Tính giá CỔ CHAI RƯỢU HQT 2024', 6, NULL, '100000', 1, '58', NULL, '62', 112, NULL, '43440712.32', '43440712.32', NULL, '{\"id\":\"127\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/1 TÚI QUÀ TẾT KT chuẩn 2024 3 loại CHUẨN NHẤT 9999(4).cdr\",\"name\":\"1 TÚI QUÀ TẾT KT chuẩn 2024 3 loại CHUẨN NHẤT 9999(4).cdr\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-10-21 07:45:42', '2023-10-21 07:50:51', 1, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `products` VALUES (79, NULL, 'Tính giá ĐÁY CHAI RƯỢU HQT 2024', 1, 10, '100000', 1, '1', '1', '1', 113, NULL, '100476981.2', '100476981.2', NULL, '{\"id\":\"128\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/1 TÚI QUÀ TẾT KT chuẩn 2024 3 loại CHUẨN NHẤT 9999(5).cdr\",\"name\":\"1 TÚI QUÀ TẾT KT chuẩn 2024 3 loại CHUẨN NHẤT 9999(5).cdr\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-10-21 07:56:21', '2023-10-21 07:56:21', 1, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `products` VALUES (80, NULL, 'Tính giá VÁCH CHUNG NGĂN CHAI RƯỢU HQT 2024', 1, 10, '100000', 1, '1', '1', '1', 114, NULL, '320790947.2', '320790947.2', NULL, '{\"id\":\"129\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/1 TÚI QUÀ TẾT KT chuẩn 2024 3 loại CHUẨN NHẤT 9999(6).cdr\",\"name\":\"1 TÚI QUÀ TẾT KT chuẩn 2024 3 loại CHUẨN NHẤT 9999(6).cdr\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-10-21 08:01:37', '2023-10-21 08:04:30', 1, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `products` VALUES (81, NULL, 'Tính giá Mã A HQT 2024', 1, 11, '10000', 1, '36', '42', '10', 115, NULL, '421298807.5', '421298807.5', NULL, '{\"id\":\"130\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/1 TÚI QUÀ TẾT KT chuẩn 2024 3 loại CHUẨN NHẤT 9999(7).cdr\",\"name\":\"1 TÚI QUÀ TẾT KT chuẩn 2024 3 loại CHUẨN NHẤT 9999(7).cdr\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-10-21 08:18:05', '2023-10-21 08:24:17', 1, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `products` VALUES (82, NULL, 'Tính giá Mã A HQT 2024 ( Sửa metailai về 2800đ/m )', 1, 11, '10000', 1, '36', '42', '10', 116, NULL, '432406447.5', '432406447.5', NULL, '{\"id\":\"130\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/1 TÚI QUÀ TẾT KT chuẩn 2024 3 loại CHUẨN NHẤT 9999(7).cdr\",\"name\":\"1 TÚI QUÀ TẾT KT chuẩn 2024 3 loại CHUẨN NHẤT 9999(7).cdr\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-10-21 08:31:07', '2023-10-21 08:45:29', 1, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `products` VALUES (83, NULL, 'Tính giá Mã B HQT 2024 ( Sửa metailai về 2800đ/m )', 1, 11, '10000', 1, '36', '36', '10', 117, NULL, '403826147.5', '403826147.5', NULL, '{\"id\":\"130\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/1 TÚI QUÀ TẾT KT chuẩn 2024 3 loại CHUẨN NHẤT 9999(7).cdr\",\"name\":\"1 TÚI QUÀ TẾT KT chuẩn 2024 3 loại CHUẨN NHẤT 9999(7).cdr\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-10-21 08:39:17', '2023-10-21 08:49:17', 1, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `products` VALUES (84, NULL, 'Tính giá Mã C HQT 2024 ( Sửa metailai về 2800đ/m )', 1, 11, '10000', 1, '36', '36', '10', 118, NULL, '363475020', '363475020', NULL, '{\"id\":\"130\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/1 TÚI QUÀ TẾT KT chuẩn 2024 3 loại CHUẨN NHẤT 9999(7).cdr\",\"name\":\"1 TÚI QUÀ TẾT KT chuẩn 2024 3 loại CHUẨN NHẤT 9999(7).cdr\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-10-21 08:49:37', '2023-10-21 08:55:53', 1, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `products` VALUES (85, NULL, 'Hộp cứng SILYMARIN X7 + Cẩm nang + Toa', 1, 12, '5000', 1, '18.5', '14.5', '5.5', 119, NULL, '54263679.751', '62628231.71365', NULL, '{\"id\":\"131\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/Hộp cứng Bigfam.cdr\",\"name\":\"Hộp cứng Bigfam.cdr\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-10-21 14:41:39', '2023-10-31 18:51:48', 1, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `products` VALUES (86, NULL, 'HDSD Tiếng hàn quốc', 6, NULL, '10200', 1, '14.5', NULL, '20.5', 120, NULL, '1554613.2', '1885535.84', NULL, '{\"id\":\"132\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/khăn mat.pdf\",\"name\":\"khăn mat.pdf\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-10-25 08:50:39', '2023-10-25 10:37:02', 1, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `products` VALUES (88, NULL, 'Bao giá hộp kay + zales 9.5 x 6.9 x 2.7cm', 1, 10, '309330', 1, '9.5', '6.9', '2.7', 123, NULL, '924320083.596', '999065690.28368', NULL, '{\"id\":\"134\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/Tinh giá.cdr\",\"name\":\"Tinh giá.cdr\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-10-31 09:37:38', '2023-10-31 09:45:39', 1, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `products` VALUES (89, NULL, 'Bao giá hộp kay + zales 9.5 x 6.9 x 2.7cm', 1, 10, '309330', 1, '9.5', '6.9', '2.7', 124, NULL, '924320083.596', '999065690.28368', NULL, '{\"id\":\"134\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/Tinh giá.cdr\",\"name\":\"Tinh giá.cdr\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-10-31 09:51:08', '2023-10-31 09:51:23', 1, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `products` VALUES (90, NULL, 'Hộp 29 X 36 X 10.5cm Cắt CNC', 1, 12, '3000', 1, '29', '36', '10.5', 126, NULL, '156692249.64', '161692249.64', NULL, '{\"id\":\"135\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/HQT cặp xách 2024.cdr\",\"name\":\"HQT cặp xách 2024.cdr\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-11-01 16:22:02', '2023-11-01 16:39:53', 1, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `products` VALUES (91, NULL, 'Hộp 36 X 36 X 10.5cm Cắt CNC', 1, 12, '3000', 1, '29', '36', '10.5', 127, NULL, '160229329.58', '165229329.58', NULL, '{\"id\":\"136\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/HQT 36x36 cao cấp 2024(2).cdr\",\"name\":\"HQT 36x36 cao cấp 2024(2).cdr\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-11-01 16:27:03', '2023-11-01 16:38:57', 1, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `products` VALUES (92, NULL, 'Hộp 42 X 36 X 10.5cm Cắt CNC', 1, 12, '3000', 1, '29', '36', '10.5', 128, NULL, '168237577.18', '173237577.18', NULL, '{\"id\":\"137\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/HQT 36x42 cao cấp 2024.cdr\",\"name\":\"HQT 36x42 cao cấp 2024.cdr\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-11-01 16:41:10', '2023-11-01 16:46:30', 1, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `products` VALUES (93, NULL, '3 Loại Hộp giấy 10.5 x 15 x 4.5cm ( 3 x 10.000 = 30.000 sp )', 2, 13, '30000', 1, '10.5', '4.5', '15', 129, NULL, '25733091.25', '29668054.9375', NULL, '{\"id\":\"138\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/Khuôn ĐỨC HNA.cdr\",\"name\":\"Khuôn ĐỨC HNA.cdr\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-11-02 08:44:18', '2023-11-02 08:45:08', 1, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `products` VALUES (94, 'DH-00000024A', 'Hộp cứng cao cấp SONA + Túi giấy', 1, 12, '3000', 1, '40', '34', '10', 130, 24, '259808495.24', '390918086.86', NULL, '{\"id\":\"144\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/Screenshot (1).png\",\"name\":\"Screenshot (1).png\"}', '{\"id\":\"145\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/Screenshot (1)(1).png\",\"name\":\"Screenshot (1)(1).png\"}', '{\"id\":\"146\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/Screenshot (1)(2).png\",\"name\":\"Screenshot (1)(2).png\"}', '{\"id\":\"147\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/Screenshot (2).png\",\"name\":\"Screenshot (2).png\"}', '{\"id\":\"147\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/Screenshot (2).png\",\"name\":\"Screenshot (2).png\"}', NULL, 'submited', 1, '2023-11-24 09:43:17', '2024-01-03 23:17:54', 1, 1, NULL, '3000', '', NULL);
+INSERT INTO `products` VALUES (106, 'DH-00000107', 'Hộp cứng cao cấp SONA + Túi giấy (Sản xuất lại do lỗi kỹ thuật)', 1, NULL, '1000', 4, '40', '34', '10', NULL, NULL, '93276797.28', '93276797.28', NULL, '{\"id\":\"144\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/Screenshot (1).png\",\"name\":\"Screenshot (1).png\"}', NULL, NULL, NULL, NULL, NULL, 'tech_submited', 1, '2024-01-03 06:04:27', '2024-01-03 06:04:27', 16, 1, NULL, '1000', NULL, 1);
 
 -- ----------------------------
 -- Table structure for quote_configs

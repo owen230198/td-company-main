@@ -91,6 +91,7 @@ Route::middleware(['check_login'])->group(function () {
 
 	//product warehouse route
 	Route::post('confirm-product-warehouse/{id}', [CExpertiseController::class, 'confirmProductWarehouse']);
+	Route::get('product-warehouse-history/{product_id}', [CExpertiseController::class, 'productWarehouseHistory']);
 });
 $modules_path = dirname(__DIR__) . '/app/Modules/';
 if (is_dir($modules_path)) {

@@ -202,7 +202,7 @@ class NGroupUser extends Model
         ],
         'product_management' => [
             'name' => 'Kho thành phẩm', 
-            'link' => 'view/products?default_data=%7B"status"%3A"last_submited"%7D', 
+            'link' => 'view/product_warehouses', 
             'group' => 'product_warehouse'
         ],
         'expertise' => [

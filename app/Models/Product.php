@@ -12,6 +12,7 @@
         const REWORKED = 'reworked';
         const WAITING_WAREHOUSE = 'waiting_warehouse';
         const CLONE_FIELD = ['name', 'category', 'qty', 'design', 'length', 'width', 'height', 'total_amount', 'act'];
+        const FIELD_WAREHOUSE = ['name', 'category', 'product_style', 'length', 'width', 'height'];
 
         const SALE_SHAPE_FILE_FIELD = [
             'note' => 'Khuôn kinh doanh tính giá',

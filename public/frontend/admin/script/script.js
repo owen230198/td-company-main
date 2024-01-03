@@ -706,7 +706,7 @@ var KCSTakeInReqLoadView = function()
     });
 }
 
-var poroductListSupplyProcess = function()
+var productListSupplyProcess = function()
 {
     $(document).on("click", "button.__product_list_supp_process", function (event) {
         event.preventDefault();
@@ -726,6 +726,17 @@ var confirmImportProductWarehouse = function()
             url: 'confirm-product-warehouse/'+id,
             type: 'POST'
         });
+    });
+}
+
+var productWarehouseHistory = function()
+{
+    $(document).on("click", "button.__product_warehouse_history", function (event) {
+        event.preventDefault();
+        let modal = $("#actionModal");
+        let id = $(this).data("id");
+        modal.find("iframe").attr("src", getBaseRoute('product-warehouse-history/'+id));
+        modal.modal('show');
     });
 }
 
@@ -764,6 +775,7 @@ $(function () {
     confirmImportSupplyBuy();
     KCSTakeInReqLoadView();
     closeModalAction();
-    poroductListSupplyProcess();
+    productListSupplyProcess();
     confirmImportProductWarehouse();
+    productWarehouseHistory();
 });
