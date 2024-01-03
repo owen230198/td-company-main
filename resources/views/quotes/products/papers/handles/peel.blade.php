@@ -10,7 +10,7 @@
 
 @include('quotes.products.papers.handles.select_device', 
 ['key_device' => $key_stage, 
-'value' => !empty($data_paper->id) ? @$data_handle['machine'] : getDeviceId(['key_device' => $key_stage, 'supply' => 'paper', 'default_device' => 1])])
+'value' => @$data_handle['machine'] ?? getDeviceId(['key_device' => $key_stage, 'supply' => 'paper', 'default_device' => 1])])
 <div class="d-flex align-items-center">
     @include('view_update.view', $paper_nqty_peel)
     <span class="ml-1 color_red font-italic">Trường hợp hộp cứng ghép bát</span>

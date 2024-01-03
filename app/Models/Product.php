@@ -10,6 +10,7 @@
         const NO_REWORK = 'no_rework';
         const NEED_REWORK = 'need_rework';
         const REWORKED = 'reworked';
+        const WAITING_WAREHOUSE = 'waiting_warehouse';
         const CLONE_FIELD = ['name', 'category', 'qty', 'design', 'length', 'width', 'height', 'total_amount', 'act'];
 
         const SALE_SHAPE_FILE_FIELD = [
@@ -160,6 +161,17 @@
                                 'query' => [
                                     ['key' => 'status', 'value' => \StatusConst::SUBMITED],
                                     ['con' => 'or', 'key' => 'status', 'value' => self::NEED_REWORK]
+                                ]
+                            ],
+                        ]
+                ],
+                \GroupUser::PRODUCT_WAREHOUSE => [
+                    'view' => 
+                        [
+                            'with' => [
+                                'type' => 'group',
+                                'query' => [
+                                    ['key' => 'status', 'value' => \StatusConst::LAST_SUBMITED],
                                 ]
                             ],
                         ]

@@ -28,7 +28,6 @@
     
     @include('quotes.products.supplies.quantity_config', 
     ['compen_percent' => $carton_compen_percent])
-
     <div class="{{ !empty($rework) ? 'd-none' : '' }}">
         @include('quotes.products.supplies.size_config', ['plus' => $carton_plus, 'divide' => $carton_divide])
 
@@ -42,20 +41,20 @@
         @endphp
         @include('quotes.products.select_device', 
         ['key_device' => $key_device_cut, 'note' => 'Máy xén', 
-        'value' => !empty($supply_obj->id) ? @$data_cut['machine'] : getDeviceId(['key_device' => $key_device_cut, 'supply' => $key_supp, 'default_device' => 1]), 
+        'value' => @$data_cut['machine'] ?? getDeviceId(['key_device' => $key_device_cut, 'supply' => $key_supp, 'default_device' => 1]), 
         'element' => $key_supp])
 
         @include('quotes.products.select_device', 
         ['key_device' => $key_device_elevate, 'note' => 'Máy bế', 
-        'value' => !empty($supply_obj->id) ? @$data_elevate['machine'] : getDeviceId(['key_device' => $key_device_elevate, 'supply' => $key_supp, 'default_device' => 1]), 'element' => $key_supp])
+        'value' => @$data_elevate['machine'] ?? getDeviceId(['key_device' => $key_device_elevate, 'supply' => $key_supp, 'default_device' => 1]), 'element' => $key_supp])
 
         @include('quotes.products.select_device', 
         ['key_device' => $key_device_mill, 'note' => 'Máy phay', 
-        'value' => !empty($supply_obj->id) ? @$data_mill['machine'] : getDeviceId(['key_device' => $key_device_mill, 'supply' => $key_supp, 'default_device' => 1]), 'element' => $key_supp])
+        'value' => @$data_mill['machine'] ?? getDeviceId(['key_device' => $key_device_mill, 'supply' => $key_supp, 'default_device' => 1]), 'element' => $key_supp])
 
         @include('quotes.products.select_device', 
         ['key_device' => $key_device_peel, 'note' => 'Máy bóc lề', 
-        'value' => !empty($supply_obj->id) ? @$data_peel['machine'] : getDeviceId(['key_device' => $key_device_peel, 'supply' => $key_supp, 'default_device' => 1]), 'element' => $key_supp])
+        'value' => @$data_peel['machine'] ?? getDeviceId(['key_device' => $key_device_peel, 'supply' => $key_supp, 'default_device' => 1]), 'element' => $key_supp])
 
         @include('quotes.products.note_field')
     </div>

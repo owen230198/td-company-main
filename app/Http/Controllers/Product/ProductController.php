@@ -2,6 +2,7 @@
     namespace App\Http\Controllers\Product;
     use App\Http\Controllers\Controller;
     use App\Models\CExpertise;
+    use App\Models\Order;
     use App\Models\Product;
     use App\Models\Quote;
     use Illuminate\Http\Request;
@@ -131,16 +132,19 @@
                     }else{
                         $data['qty'] = (int) $outside_qty;
                     }
+                    $data['handle_problem'] = @$data['handle_problem'] ?? CExpertise::REWORK;
                     $data['status'] = \StatusConst::NOT_ACCEPTED;
                     $data['code'] = 'KCS-'.getCodeInsertTable('c_expertises');
                     $data['name'] = \User::getCurrent('name').' đã thẩm định xong sảm phẩm'.' '.$product_obj->name;
+                    $data['product'] = $id;
                     $this->services->configBaseDataAction($data);
-                    $insert = CExpertise::insertGetId($data);
-                    if ($insert) {
+                    $insert_id = CExpertise::insertGetId($data);
+                    if ($insert_id) {
                         $is_rework = $data['handle_problem'] == CExpertise::REWORK;
-                        $product_obj->status = $is_problem ? ($is_rework ? Product::NEED_REWORK : \StatusConst::SUBMITED) : \StatusConst::LAST_SUBMITED;
+                        $product_obj->status = $is_problem ? ($is_rework ? Product::NEED_REWORK : Product::WAITING_WAREHOUSE) : Product::WAITING_WAREHOUSE;
                         $product_obj->rework_status = $is_rework ? Product::NEED_REWORK : Product::NO_REWORK;
                         $product_obj->outside_qty = $is_problem ? $outside_qty - (int) $data['qty'] : 0;
+                        $product_obj->expertise_id = $insert_id;
                         $product_obj->save();
                         return returnMessageAjax(200, 'Yêu cầu nhập kho sản phẩm thành công !', \StatusConst::CLOSE_POPUP);
                     }else{
@@ -156,17 +160,22 @@
         {
             $arr[\TDConst::PAPER] = 'Giấy in';
             $arr = $arr + \TDConst::ALL_SUPPLY;
-            $arr[\TDConst::FILL_FINISH] = 'Hoàn thiện cuối';
             foreach ($arr as $key => $name) {
                 if (!empty($data[$key])) {
                     foreach ($data[$key] as $supply) {
                         if ((int) @$supply['qty'] < $outside_qty) {
                             $supp_name = $key == \TDConst::PAPER ? $supply['name'] : $name;
-                            return returnMessageAjax(100, 'Số lượng sản phẩm '.$supp_name.' không hợp lệ');
+                            return returnMessageAjax(100, 'Số lượng sản xuất lại cho vật tư '.$supp_name.' không hợp lệ !');
                         }
                     }
                 }
-            }   
+            }
+            if (!empty($data[\TDConst::FILL_FINISH])) {
+                if ((int) @$data[\TDConst::FILL_FINISH]['qty'] <$outside_qty) {
+                    return returnMessageAjax(100, 'Số lượng sản xuất lại cho khâu hoàn thiện cuối không hợp lệ !');
+                }
+            }
+            return ['code' => 200];   
         }
 
         public function productRequireRework(Request $request, $id)
@@ -204,7 +213,21 @@
                     if (@$validate['code'] != 200) {
                         return $validate;
                     }
-                    $validate_product = $this->quote_services->processDataProduct($data, [], \TDConst::ORDER_ACTION_FLOW);
+                    $product_id = $this->quote_services->processProduct($data_product, \StatusConst::NO_VALIDATE);
+                    $process = $this->quote_services->processSupply($product_id, $data_product);
+                    if ($process) {
+                        $product_data = Product::find($product_id);
+                        $arr_update = getTotalProductByArr([$product_data]);
+                        $arr_update['code'] = 'DH-'.getCodeInsertTable('products');
+                        $arr_update['status'] = Order::TECH_SUBMITED;
+                        $arr_update['order_created'] = 1;
+                        $arr_update['expertise_id'] = $product_obj->expertise_id;
+                        Product::where('id', $product_id)->update($arr_update);
+                        Product::where('id', $id)->update(['status'=> Product::WAITING_WAREHOUSE, 'rework_status' => Product::REWORKED]);
+                        return returnMessageAjax(200, 'Đã gửi yêu cầu sản xuất lại sản phẩm '.$data_product['name'], getBackUrl());
+                    }else{
+                        return returnMessageAjax(100, 'Đã có lỗi xảy ra, vui lòng thử lại !');
+                    }
                 }
             }else{
                 return customReturnMessage(false, $is_post, ['message' => 'Bạn không có quyền thực hiện thao tác này !']);    

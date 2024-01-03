@@ -7,12 +7,10 @@
     <form action="{{ url('apply-to-worker-handle/products/'.$id) }}" method="POST" class="config_content baseAjaxForm" enctype="multipart/form-data" 
     onkeydown="return event.key != 'Enter'">
         @csrf
-        @if (count($products) > 1)
-            <h3 class="fs-14 text-uppercase mt-3 text-center handle_title">
-                <span>Danh sách sản phẩm</span>
-            </h3>
-            @include('quotes.products.list_tab')
-        @endif
+        <h3 class="fs-14 text-uppercase mt-3 text-center handle_title">
+            <span>Danh sách sản phẩm</span>
+        </h3>
+        @include('quotes.products.list_tab')
         <div class="tab-content" id="quote-pro-tabContent">
             @foreach ($products as $pro_index => $product)
                 <div class="tab-pane fade{{ $pro_index == 0 ? ' show active' : '' }} tab_pane_quote_pro" id="quote-pro-{{ $pro_index }}" role="tabpanel" aria-labelledby="quote-pro-{{ $pro_index }}-tab">
@@ -52,7 +50,7 @@
                         <span>Danh sách yêu cầu xử lí vật tư</span>
                     </h3>
                     @php
-                        $elements = getProductElementData($product['category'], $product['id'], true, true);
+                        $elements = getProductElementData($product['category'], $product['id'], true, true, true);
                     @endphp
                     @if (count($elements) > 0)
                         <ul class="nav nav-pills mb-3 quote_pro_strct_nav_link" id="quote-pro-{{ $pro_index }}-struct-tab" role="tablist">

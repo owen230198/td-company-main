@@ -82,7 +82,7 @@
                 if (!empty($request['order']['status'])) {
                     return returnMessageAjax(100, 'Dữ liệu không hợp lệ !');
                 }
-                $request['order']['id'] = $id;
+                // $request['order']['id'] = $id;
                 return $this->services->processDataOrder($request, $arr_quote);           
             }
         }

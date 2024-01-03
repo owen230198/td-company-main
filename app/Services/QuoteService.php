@@ -162,18 +162,31 @@ class QuoteService extends BaseService
 
     public function processProduct($data, $step, $key = 0)
     {
-        $product_valid = $this->productValidate($data, $key, $step);
-        if (@$product_valid['code'] == 100) {
-            return $product_valid;    
-        }else{
-            $data_process = $this->getDataActionProduct($data);
-            if (!empty($data['id'])) {
-                Product::where('id', $data['id'])->update($data_process);
-                return $data['id'];
-            }else{
-                return Product::insertGetId($data_process);
+        if ($step != \StatusConst::NO_VALIDATE) {
+            $product_valid = $this->productValidate($data, $key, $step);
+            if (@$product_valid['code'] == 100) {
+                return $product_valid;    
             }
         }
+        $data_process = $this->getDataActionProduct($data);
+        if (!empty($data['id'])) {
+            Product::where('id', $data['id'])->update($data_process);
+            return $data['id'];
+        }else{
+            return Product::insertGetId($data_process);
+        }
+    }
+
+    public function processSupply($product_id, $data_product)
+    {
+        $elements = TDConstant::HARD_ELEMENT;
+        foreach ($elements as $element) {
+            if (!empty($data_product[$element['pro_field']])) {
+                $model = getModelByTable($element['table']);
+                $process = $model->processData($product_id, $data_product, $element['pro_field']);
+            }
+        }
+        return !empty($process);
     }
 
     public function processDataProduct($data, $arr_quote = [], $step = TDConstant::QUOTE_FLOW)
@@ -191,13 +204,7 @@ class QuoteService extends BaseService
                 return $product_process;
                 break;
             }else{
-                $elements = TDConstant::HARD_ELEMENT;
-                foreach ($elements as $el) {
-                    if (!empty($product[$el['pro_field']])) {
-                        $model = getModelByTable($el['table']);
-                        $process = $model->processData($product_process, $product, $el['pro_field']);
-                    }
-                }
+                $process = $this->processSupply($product_process, $product);
             }
         }
         if (!empty($process) && !empty($arr_quote)) {
@@ -207,7 +214,7 @@ class QuoteService extends BaseService
                 refreshQuoteProfit($arr_quote);
             }
         }else{
-            return !empty($product_id);
+            return !empty($product_id) ? $product_id : false;
         }
     }
 

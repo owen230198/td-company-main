@@ -4,7 +4,7 @@
         'name' => 'product['.$pro_index.'][paper]['.$supp_index.']['.$key_stage.'][machine]',
         'type' => 'linking',
         'note' => 'thiết bị',
-        'value' => !empty($data_paper->id) ? @$data_handle['machine'] : getDeviceId(['key_device' => $key_stage, 'supply' => 'paper', 'default_device' => 1]),
+        'value' => @$data_handle['machine'] ?? getDeviceId(['key_device' => $key_stage, 'supply' => 'paper', 'default_device' => 1]),
         'other_data' => ['data' => ['table' => 'devices', 'where' => ['key_device' => $key_stage], 'select' => ['id', 'name']]]
     ] 
 @endphp

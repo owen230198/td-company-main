@@ -11,7 +11,7 @@
         'name' => 'product['.$pro_index.'][paper]['.$supp_index.']['.$key_stage.'][color]',
         'type' => 'select',
         'note' => 'số màu in',
-        'value' => !empty($data_paper->id) ? @$data_handle['color'] : 4,
+        'value' => @$data_handle['color'] ?? 4,
         'other_data' => ['data' => ['options' => \TDConst::PRINT_COLOR]]
     ];
     $paper_print_tech = [

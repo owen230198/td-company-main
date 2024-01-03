@@ -1,3 +1,8 @@
+var loadingPage = function(){
+    $(document).ready(function(){
+        $('.lds-ring').remove();
+    });
+}
 var submitActionAjaxForm = function () {
     $(".adminAjaxForm").submit(function (event) {
         event.preventDefault();
@@ -712,7 +717,20 @@ var poroductListSupplyProcess = function()
     });
 }
 
+var confirmImportProductWarehouse = function()
+{
+    $(document).on('click', 'button.__confirm_product_warehouse', function(event) {
+        event.preventDefault();
+        let id = $(this).data('id');
+        ajaxBaseCall({
+            url: 'confirm-product-warehouse/'+id,
+            type: 'POST'
+        });
+    });
+}
+
 $(function () {
+    // loadingPage();
     submitActionAjaxForm();
     confirmRemoveData();
     checkBoxModule();
@@ -747,4 +765,5 @@ $(function () {
     KCSTakeInReqLoadView();
     closeModalAction();
     poroductListSupplyProcess();
+    confirmImportProductWarehouse();
 });

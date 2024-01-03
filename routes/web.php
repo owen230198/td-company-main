@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DevController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\CExpertise\CExpertiseController;
 use App\Http\Controllers\Quote\QuoteController;
 use App\Http\Controllers\Order\OrderController;
 use App\Http\Controllers\Product\ProductController;
@@ -87,6 +88,9 @@ Route::middleware(['check_login'])->group(function () {
 	//KCS route
 	Route::any('kcs-take-in-req/{id}', [ProductController::class, 'KCSTakeInRequirement']);
 	Route::any('product-require-rework/{id}', [ProductController::class, 'productRequireRework']);
+
+	//product warehouse route
+	Route::post('confirm-product-warehouse/{id}', [CExpertiseController::class, 'confirmProductWarehouse']);
 });
 $modules_path = dirname(__DIR__) . '/app/Modules/';
 if (is_dir($modules_path)) {

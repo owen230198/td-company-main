@@ -114,6 +114,8 @@ class OrderService extends BaseService
             }
             if ($paper['qty'] > 0) {
                 $insert_command = CSupply::insertCommand($paper, $supply);
+            }else{
+                return returnMessageAjax(100, 'Số lượng vật tư cần xuất không hợp lệ !');
             }
         }
         $squares = @$c_supply['square'] ?? [];
@@ -125,13 +127,15 @@ class OrderService extends BaseService
                 }
             }
         }
-        if (!$insert_command) {
+        if (empty($insert_command)) {
             return returnMessageAjax(110, 'Không thể tạo yêu cầu xuất vật tư, vui lòng thử lại!');
         }else{
-            foreach ($over_supply as $over_supp) {
-                if ($over_supp['qty'] > 0) {
-                    $supply->type = \TDConst::PAPER;
-                    PrintWarehouse::insertOverSupply($over_supp, $supply, $size);       
+            if (!empty($over_supp)) {
+                foreach ($over_supply as $over_supp) {
+                    if ($over_supp['qty'] > 0) {
+                        $supply->type = \TDConst::PAPER;
+                        PrintWarehouse::insertOverSupply($over_supp, $supply, $size);       
+                    }
                 }
             }
             return returnMessageAjax(200, 'Đã gửi yêu cầu xử lí vật tư thành công!', url('update/products/'.$supply->product));

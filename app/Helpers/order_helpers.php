@@ -206,6 +206,9 @@
     if (!function_exists('checkUpdateOrderStatus')) {
         function checkUpdateOrderStatus($id, $status)
         {
+            if (empty($id)) {
+                return false;
+            }
             $a = getCountDataTable('products', ['order' => $id]);
             $b = getCountDataTable('products', ['order' => $id, 'status' => $status]);
             return $a == $b;

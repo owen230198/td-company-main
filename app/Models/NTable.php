@@ -22,7 +22,8 @@ class NTable extends Model
                             'square_warehouses', 
                             'supply_warehouses', 
                             'other_warehouses', 
-                            'supply_buyings'
+                            'supply_buyings',
+                            'c_expertises'
                         ],
                         'update' => [
                             'quotes', 
@@ -33,7 +34,8 @@ class NTable extends Model
                             'square_warehouses', 
                             'supply_warehouses', 
                             'other_warehouses', 
-                            'supply_buyings'
+                            'supply_buyings',
+                            'c_expertises'
                         ],
                         'copy' => [
                             'quotes', 
@@ -43,7 +45,8 @@ class NTable extends Model
                             'square_warehouses', 
                             'supply_warehouses', 
                             'other_warehouses', 
-                            'supply_buyings'
+                            'supply_buyings',
+                            'c_expertises'
                         ],
                         'remove' => [
                             'quotes', 
@@ -53,7 +56,8 @@ class NTable extends Model
                             'print_warehouses', 
                             'square_warehouses', 
                             'supply_warehouses', 
-                            'other_warehouses'
+                            'other_warehouses',
+                            'c_expertises'
                         ]
                     ];
 }

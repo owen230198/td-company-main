@@ -8,7 +8,7 @@
         'other_data' => ['config' => ['search' => 1], 'data' => ['table' => 'supply_types', 'where' => ['type' => $key_supp, 'is_name' => 0]]]
     ];
     $option_supp_price = !empty($supply_size['supply_price']) ? 
-    ['supply_price' => getFieldDataById('name', 'supply_prices', $supply_size['supply_price'])] : ['Chọn vật tư'];
+    [$supply_size['supply_price'] => getFieldDataById('name', 'supply_prices', $supply_size['supply_price'])] : ['Chọn vật tư'];
     $pro_supp_price = [
         'name' => 'product['.$pro_index.']['.$key_supp.']['.$supp_index.'][size][supply_price]',
         'type' => 'select',

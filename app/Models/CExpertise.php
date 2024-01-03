@@ -13,4 +13,28 @@ class CExpertise extends Model
     //Handle problem product
     const REWORK = 'rework';
     const NOT_REWORK = 'not_rework';
+
+    static function getRole()
+    {
+        $role = [
+            \GroupUser::KCS => [
+                'view' => 
+                    [
+                        'with' => [
+                            'type' => 'group',
+                            'query' => [
+                                ['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED],
+                                ['key' => 'created_by', 'value' => \User::getCurrent()]
+                            ]
+                        ]
+                    ]
+            ],
+            \GroupUser::PRODUCT_WAREHOUSE => [
+                'view' => [
+                    'with' => ['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED]
+                ]
+            ]
+        ];
+        return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];
+    }
 }

@@ -38,6 +38,7 @@ class NGroupUser extends Model
         'report' => 'Báo cáo',
         'available_order' => 'Đơn hàng bán sẵn',
         'warehouse' => 'Kho vật tư',
+        'product_warehouse' => 'Kho thành phẩm',
         'handle_supply' => 'Lệnh xử lí vật tư',
         'account' => 'Thông tin tài khoản'
     ];
@@ -199,10 +200,25 @@ class NGroupUser extends Model
             'link' => 'view/supply_warehouses?default_data=%7B"status"%3A"waiting"%7D', 
             'group' => 'handle_supply'
         ],
-        'shipping_process' => [
-            'name' => 'Lộ trình xuất - giao hàng', 
-            'link' => 'shipping-process', 
-            'group' => 'available_order'
+        'product_management' => [
+            'name' => 'Kho thành phẩm', 
+            'link' => 'view/products?default_data=%7B"status"%3A"last_submited"%7D', 
+            'group' => 'product_warehouse'
+        ],
+        'expertise' => [
+            'name' => 'Yêu cầu nhập kho', 
+            'link' => 'view/c_expertises?default_data=%7B"status"%3A"not_accepted"%7D', 
+            'group' => 'product_warehouse'
+        ],
+        'product_history' => [
+            'name' => 'Lịch sử xuất nhập kho', 
+            'link' => 'view/c_expertises?default_data=%7B"status"%3A"not_accepted"%7D', 
+            'group' => 'product_warehouse'
+        ],
+        'order_ready' => [
+            'name' => 'Quản lí đơn hàng', 
+            'link' => 'view/orders?default_data=%7B"status"%3A"last_submited"%7D', 
+            'group' => 'product_warehouse'
         ],
         'user' => [
             'name' => 'Danh sách nhân viên', 
@@ -235,15 +251,12 @@ class NGroupUser extends Model
             self::MODULE['rpt_debt'],
             self::MODULE['rpt_categories_revenue'],
             self::MODULE['rpt_location_revenue'],
-            self::MODULE['create_available_order'],
-            self::MODULE['shipping_process'],
             self::MODULE['account'],
             self::MODULE['change_password'],
         ],
         self::TECH_APPLY => [
             self::MODULE['handle_process'],
             self::MODULE['profit'],
-            self::MODULE['create_available_order'],
             self::MODULE['account'],
             self::MODULE['change_password'],
         ],
@@ -258,7 +271,6 @@ class NGroupUser extends Model
         self::TECH_HANDLE => [
             self::MODULE['handle_process'],
             self::MODULE['profit'],
-            self::MODULE['create_available_order'],
             self::MODULE['account'],
             self::MODULE['change_password'],
         ],
@@ -267,7 +279,6 @@ class NGroupUser extends Model
             self::MODULE['supp_bying_req'],
             self::MODULE['warehouse_management'],
             self::MODULE['profit'],
-            self::MODULE['create_available_order'],
             self::MODULE['account'],
             self::MODULE['change_password'],
         ],
@@ -304,6 +315,10 @@ class NGroupUser extends Model
         self::PRODUCT_WAREHOUSE => [
             self::MODULE['handle_process'],
             self::MODULE['profit'],
+            self::MODULE['product_management'],
+            self::MODULE['expertise'],
+            self::MODULE['product_history'],
+            self::MODULE['order_ready'],
             self::MODULE['account'],
             self::MODULE['change_password'],
         ],
@@ -395,7 +410,7 @@ class NGroupUser extends Model
         $group_user = !empty($group_user) ? $group_user : self::getCurrent();
         return $group_user == self::KCS;
     }
-    static function isDoProductWarehouse($group_user = 0)
+    static function isProductWarehouse($group_user = 0)
     {
         $group_user = !empty($group_user) ? $group_user : self::getCurrent();
         return $group_user == self::PRODUCT_WAREHOUSE;
