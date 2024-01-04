@@ -100,7 +100,6 @@ var getValueMultipleCheckbox = function () {
 var loadDataPopup = function () {
     $(document).on("click", ".load_view_popup", function (event) {
         event.preventDefault();
-        $('#loader').fadeIn(200);
         let src = $(this).data("src");
         $(".modalAction").find("iframe").attr("src", src);
     });
