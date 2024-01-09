@@ -3,7 +3,6 @@ namespace App\Services;
 use App\Services\BaseService;
 use App\Models\Customer;
 use App\Models\Product;
-use App\Constants\StatusConstant;
 use App\Constants\TDConstant;
 use App\Models\NGroupUser;
 use PhpOffice\PhpWord\TemplateProcessor;
@@ -231,16 +230,17 @@ class QuoteService extends BaseService
         $customer_id = $request->input('customer_id');
         $data_quote = $this->dataActionCustomer($customer_id, $data_customer);
         if (!empty($id)) {
-            $quote_obj = \DB::table('quotes')->where('id', $id);
-            $quote_item = $quote_obj->get()->first();
-            $quote_obj->timestamps = false;
-            $quote_obj->update($data_quote);
-            logActionUserData('update_customer', 'quotes', $id, $quote_item);
+            $update = \DB::table('quotes')->where('id', $id)->update($data_quote);
+            if ($update) {
+                logActionUserData('update_customer', 'quotes', $id, $data_customer);
+            }
         }else{
-            $data_quote['status'] = StatusConstant::NOT_ACCEPTED;
+            $data_quote['status'] = \StatusConst::NOT_ACCEPTED;
             (new \BaseService)->configBaseDataAction($data_quote);
             $insert_id = \DB::table('quotes')->insertGetId($data_quote);
-            logActionUserData('insert_customer', 'quotes', $insert_id, $data_quote);
+            if ($insert_id) {
+                logActionUserData('insert_customer', 'quotes', $insert_id, $data_customer);
+            }
         }
         $redr = !empty($insert_id) ? 'insert/quotes?step=handle_config&id='.$insert_id : 'update/quotes/'.$id.'?step=handle_config';
         return returnMessageAjax(200, '', asset($redr));

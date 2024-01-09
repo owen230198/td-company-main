@@ -69,25 +69,25 @@
             return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];
         }
 
-        public function beforeRemove($id, $obj)
-        {
-            if (!empty($obj->quote)) {
-                $quote_obj = Quote::find($obj->quote);
-                if (!empty($quote_obj)) {
-                    $quote_obj->status = \StatusConst::ACCEPTED;
-                    $quote_obj->save();
-                    $products = Product::where(['order' => $id])->get();
-                    if (!$products->isEmpty()) {
-                        foreach ($products as $product) {
-                            Product::where('id', $product->id)->update(['code' => '', 'order' => '', 'status' => '', 'order_created' => 0]); 
-                            Product::removeCommand($product->id);
-                        }
-                    }    
-                }
-            }else{
-                Product::removeData(['order' => $id]);
-            }
-        }
+        // public function beforeRemove($id, $obj)
+        // {
+        //     if (!empty($obj->quote)) {
+        //         $quote_obj = Quote::find($obj->quote);
+        //         if (!empty($quote_obj)) {
+        //             $quote_obj->status = \StatusConst::ACCEPTED;
+        //             $quote_obj->save();
+        //             $products = Product::where(['order' => $id])->get();
+        //             if (!$products->isEmpty()) {
+        //                 foreach ($products as $product) {
+        //                     Product::where('id', $product->id)->update(['code' => '', 'order' => '', 'status' => '', 'order_created' => 0]); 
+        //                     Product::removeCommand($product->id);
+        //                 }
+        //             }    
+        //         }
+        //     }else{
+        //         Product::removeData(['order' => $id]);
+        //     }
+        // }
     }
     
 ?>

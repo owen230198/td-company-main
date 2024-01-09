@@ -1,6 +1,5 @@
 <?php
 namespace App\Services;
-use App\Constants\StatusConstant;
 use App\Services\BaseService;
 class AuthService extends BaseService
 {
@@ -56,14 +55,14 @@ class AuthService extends BaseService
     {
         if ($code == 200) {
             return [
-                'status'=>StatusConstant::SUCCESS_CODE,
-                'messageCode'=>StatusConstant::SUCCESS_MSG,
+                'status'=>\StatusConst::SUCCESS_CODE,
+                'messageCode'=>\StatusConst::SUCCESS_MSG,
                 'errorMessage'=>['sucess'=>$mess]
             ];
         }else{
             return [
-                'status'=>StatusConstant::ERR_CODE,
-                'messageCode'=>StatusConstant::ERR_MSG,
+                'status'=>\StatusConst::ERR_CODE,
+                'messageCode'=>\StatusConst::ERR_MSG,
                 'errorMessage'=> $mess
             ];
         }
@@ -77,7 +76,7 @@ class AuthService extends BaseService
             return view('auth.login', $data);
         }
         $result = $this->hasLogin($request);
-        if ($result['status'] === StatusConstant::SUCCESS_CODE) {
+        if ($result['status'] === \StatusConst::SUCCESS_CODE) {
             return redirect($this->prefix)->with('message','Đăng nhập thành công!');
         }
         return back()->withInput()->with($result['messageCode'], $result['errorMessage']);
