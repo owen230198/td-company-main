@@ -328,12 +328,13 @@ class QuoteController extends Controller
 
     public function suggestProductSubmitedBySize(Request $request)
     {
-        $category = !empty($request->input('category')) ? $request->input('category') : '';
-        $style = !empty($request->input('style')) ? $request->input('style') : '';
-        $length = !empty($request->input('length')) ? $request->input('length') : 0;
-        $width = !empty($request->input('width')) ? $request->input('width') : 0;
-        $height = !empty($request->input('height')) ? $request->input('height') : 0;
-        $obj = \DB::table('products')->where(['status' => \StatusConst::SUBMITED, 'category' => $category, 'length' => $length, 'width' => $width, 'height' => $height]);
+        $arr_where['status'] = \StatusConst::SUBMITED;
+        $arr_where['category'] = !empty($request->input('category')) ? $request->input('category') : '';
+        $arr_where['length'] = !empty($request->input('length')) ? $request->input('length') : 0;
+        $arr_where['width'] = !empty($request->input('width')) ? $request->input('width') : 0;
+        $arr_where['height'] = !empty($request->input('height')) ? $request->input('height') : 0;
+        $obj = \DB::table('products')->where($arr_where);
+        $style = @$request->input('style');
         if ($style != '') {
             $obj->where('product_style', $style);
         }

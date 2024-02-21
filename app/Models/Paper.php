@@ -57,6 +57,7 @@ class Paper extends Model
             $data_process['name'] = $paper['name'];
             $data_process['product_qty'] = $paper['qty'];
             $data_process['nqty'] = $paper['nqty'];
+            $data_process['double'] = $paper['double'];
             $data_process['base_supp_qty'] = $paper['base_supp_qty'];
             $data_process['compent_percent'] = $paper['compent_percent'];
             $data_process['compent_plus'] = $paper['compent_plus'];

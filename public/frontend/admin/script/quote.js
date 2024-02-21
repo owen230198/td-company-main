@@ -5,7 +5,9 @@ var changQtyInput = function(){
     let qty_pro = parseInt(parent.find('input.pro_qty_input').val());
     let nqty = parseInt(parent.find('input.pro_nqty_input').val());
     let plus_direct = getEmptyDefault(parent.data('direct'), 0, 'int');
-    let qty_supp = Math.ceil(qty_pro/nqty);
+    let double_supp = parseInt(parent.find('input.double_supp_input').val()) == 1 ? 2 : 1;
+    console.log(double_supp);
+    let qty_supp = Math.ceil(qty_pro/nqty) * double_supp;
     let compen_percent = parent.data('percent');
     let plus_to_per = getEmptyDefault(parent.data('perplus'), 0, 'float');
     let per_to_num = Math.ceil(qty_supp*compen_percent/100) + plus_to_per;

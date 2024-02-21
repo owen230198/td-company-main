@@ -17,6 +17,13 @@
             'value' => @$supply_obj->nqty
         ],
         [
+            'name' => $base_qty_field_name.'[double]',
+            'type' => 'checkbox',
+            'note' => 'x2 số tờ',
+            'attr' => ['type_input' => 'checkbox', 'inject_class' => 'double_supp_input supp_qty_modul_input'],
+            'value' => @$supply_obj->double
+        ],
+        [
             'name' => $base_qty_field_name.'[base_supp_qty]',
             'note' => 'Số lượng vật tư',
             'value' => @$supply_obj->base_supp_qty,
