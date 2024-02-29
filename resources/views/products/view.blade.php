@@ -17,12 +17,12 @@
             </div>
             <div class="tab-content" id="element-tabContent">
                 @foreach ($elements as $key => $element)
-                    @php
-                        $admins = new \App\Services\AdminService;
-                        $table_arr = $admins->getBaseTable($element['table']);
-                        $table_arr['data_tables'] = $element['data'];
-                    @endphp
                     @if (!empty($element['data']))
+                        @php
+                            $admins = new \App\Services\AdminService;
+                            $table_arr = $admins->getBaseTable($element['table']);
+                            $table_arr['data_tables'] = $element['data'];
+                        @endphp
                         <div class="tab-pane fade{{ $key == 0 ? ' show active' : '' }} tab_pane_quote_pro" id="element-{{ $element['key'] }}" role="tabpanel" aria-labelledby="element-{{ $element['key'] }}-tab">
                             @include('table.table_base_view', $table_arr)    
                         </div>
