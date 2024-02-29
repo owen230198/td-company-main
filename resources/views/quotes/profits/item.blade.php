@@ -3,7 +3,7 @@
         <ul class="supply_info">
             <li class="supply_item_inf">
                 <span class="font_bold mr-1">Tên vật tư: </span>
-                <span>{{ @$supply['pro_field'] == 'carton' ? getFieldDataById('name', 'supply_types', @$item->name) : (@$item->name ?? @$supply['note']) }}</span>
+                <span>{{ @$supply['pro_field'] == 'carton' ? getFieldDataById('name', 'supply_names', @$item->name) : (@$item->name ?? @$supply['note']) }}</span>
             </li>
             @foreach ($supply['device'] as $key => $device)
                 @php
