@@ -56,12 +56,13 @@
 				$fill_finish_total = \DB::table('fill_finishes')->select('total_cost')->where($pwhere)->sum('total_cost');
 				$total_cost = (string) ($paper_total + $supply_total + $fill_finish_total);
 				$update_product['total_cost'] = $total_cost;
-				$get_perc = (float) $total_cost + (float) @$arr_quote['ship_price'];
+				$get_perc = (float) $total_cost;
 				$update_product['total_amount'] = (float) @$arr_quote['profit'] > 0 ? (string) calValuePercentPlus($total_cost, $get_perc,  @$arr_quote['profit']) : $get_perc;
 				\DB::table('products')->where('id', $product->id)->update($update_product);
 				$ret['total_cost'] += $update_product['total_cost'];
 				$ret['total_amount'] += $update_product['total_amount'];  
 			}
+			$ret['total_amount'] = $ret['total_amount'] +  (float) @$arr_quote['ship_price'];
 			return !empty($get) && !empty($ret[$get]) ? $ret[$get] : $ret;
 		}
 	}
