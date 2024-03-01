@@ -13,20 +13,13 @@
             'other_data' => ['config' => ['search' => 1],
             'data' => ['table' => 'materals', 'where' => ['type' => $key_supp]]]
         ];
-        $silk_chose_supp = [
-            'name' => 'c_supply[supp_price]',
-            'type' => 'linking',
-            'note' => 'Chọn lụa trong kho',
-            'value' => '',
-            'other_data' => [
-                'config' => ['search' => 1], 
-                'data' => [
-                    'table' => 'square_warehouses', 
-                    'where' => ['type' => $key_supp,
-                                'supp_price' => @$supply_size['supply_price'],
-                                'status' => 'imported']
-                ]
-            ]
+        $base_need = getBaseNeedQtySquareSupply($supply_obj->supp_qty, $supply_size);
+        $arr_items = [
+            'key_supp' => $key_supp,
+            'note' => 'Đề can nhung',
+            'supp_price' => @$supply_size['supply_price'],
+            'base_need' => $base_need,
+            'index' => 0
         ]
     @endphp
     
@@ -42,6 +35,8 @@
         <span>Xuất vật tư nhung theo yêu cầu</span>
     </h3>
 
-    @include('view_update.view', $silk_chose_supp)
+    <div class="__supply_handle_list" data-table = 'square_warehouses' data-need ="{{ @$base_need ?? 0 }}">
+        @include('orders.users.6.supply_handles.view_handles.square_warehouses.item', $arr_items)
+    </div>
 
 @endsection

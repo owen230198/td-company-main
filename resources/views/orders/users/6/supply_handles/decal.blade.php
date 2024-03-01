@@ -13,24 +13,7 @@
             'other_data' => ['config' => ['search' => 1],
             'data' => ['table' => 'materals', 'where' => ['type' => $key_supp]]]
         ];
-        $decal_chose_supp = [
-            'name' => 'c_supply[supp_price]',
-            'type' => 'linking',
-            'note' => 'Chọn nhung trong kho',
-            'value' => '',
-            'other_data' => [
-                'config' => ['search' => 1], 
-                'data' => [
-                    'table' => 'square_warehouses', 
-                    'where' => ['type' => $key_supp,
-                                'supp_price' => @$supply_size['supply_price'],
-                                'status' => 'imported']
-                ]
-            ]
-        ];
-        $base_supp_qty = $supply_obj->supp_qty;
-        $data_length = @$supply_size['width'] < @$supply_size['length'] ? @$supply_size['width'] : @$supply_size['length'];
-        $base_need = $base_supp_qty * ($data_length/10);
+        $base_need = getBaseNeedQtySquareSupply($supply_obj->supp_qty, $supply_size);
         $arr_items = [
             'key_supp' => $key_supp,
             'note' => 'Đề can nhung',

@@ -39,6 +39,32 @@
                             $arr['obj_id'] = $data->id;
                             $arr['value'] = @$data->{$field['name']};
                             $arr['other_data'] = !empty($field['other_data']) ? json_decode($field['other_data'], true) : [];
+
+                            if ($element['table'] == 'fill_finishes') {
+                                $magnet = !empty($data->magnet) ? json_decode($data->magnet, true) : [];
+                                if ($field['name'] == 'name') {
+                                    $arr['value'] = !empty($magnet['type']) ? getFieldDataById('name', 'materals', $magnet['type']) : 'Nam châm';
+                                }
+
+                                if ($field['name'] == 'product_qty') {
+                                    $arr['value'] = (int) @$magnet['qty'] * $data->product_qty;
+                                }
+                            }elseif ($element['table'] == 'supplies') {
+                                $supp_size = !empty($data->size) ? json_decode($data->size, true) : [];
+                                if (in_array(@$data->type, [\TDConst::DECAL, \TDConst::SILK])) {
+                                    if ($field['name'] == 'name') {
+                                        $arr['value'] = !empty($supp_size['supply_price']) ? getFieldDataById('name', 'materals', $supp_size['supply_price']) : 'Không xác định';
+                                    }
+                                    if ($field['name'] == 'supp_qty') {
+                                        $arr['value'] = getBaseNeedQtySquareSupply($data->supp_qty, $supp_size);
+                                    }
+                                }else{
+                                    if ($field['name'] == 'name') {
+                                        $arr['value'] = !empty($supp_size['supply_price']) && !empty($supp_size['supply_type']) 
+                                        ? getFieldDataById('name', 'supply_types', $supp_size['supply_type']) .' - '. getFieldDataById('name', 'supply_prices', $supp_size['supply_price']) : 'Không xác định';
+                                    }
+                                }
+                            }
                         @endphp
                         @include('view_table.'.$field['type'], $arr)
                     </td>

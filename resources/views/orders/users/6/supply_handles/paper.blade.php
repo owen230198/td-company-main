@@ -5,8 +5,7 @@
         $nilon = json_decode($supply_obj->nilon, true);
         $metalai = json_decode($supply_obj->metalai, true);
         $base_supp_qty = $supply_obj->supp_qty;
-        $data_length = @$supply_size['width'] < @$supply_size['length'] ? @$supply_size['width'] : @$supply_size['length'];
-        $base_need = $base_supp_qty*($data_length/10);
+        $base_need = getBaseNeedQtySquareSupply($base_supp_qty, $supply_size);
     @endphp
     @if (!empty($nilon['materal']))
         @include('orders.users.6.supply_handles.view_handles.multiple', 

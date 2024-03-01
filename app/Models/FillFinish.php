@@ -20,6 +20,12 @@ class FillFinish extends Model
     use QuoteTrait, QSupplyTrait;
     const SUPPLY_FIELDS = [
         [
+            'name' => 'name',
+            'note' => 'Tên vật tư',
+            'type' => 'text', 
+            
+        ],
+        [
             'name' => 'product_qty',
             'note' => 'SL vật tư dự tính  xuất',
             'type' => 'text', 

@@ -258,6 +258,11 @@ var selectAjaxModule = function(section = $('.page_content '))
             $(this).select2({
                 allowClear: true,
                 placeholder: '',
+                language: {
+                    noResults: function() {
+                        return "Không có dữ liệu được tìm thấy !";
+                    }
+                },
                 ajax: {
                     url: url,
                     dataType: 'json',

@@ -180,11 +180,35 @@ class OrderService extends BaseService
         return $this->supply_handle_carton($supply, $size, $c_supply, $over_supply);
     }
 
-    public function supply_handle_decal($supply, $size, $c_supply, $over_supply)
+    private function baseHandleSquareSupply($supply, $c_supply, $supp_key)
     {
-        if (empty($c_supply['supp_price'])) {
+        $squares = @$c_supply['square'] ?? [];
+        $supply->type = $supp_key;
+        if (!empty($squares[$supply->type])) {
+            $decal = !empty($squares[$supply->type][0]) ? $squares[$supply->type][0] : [];
+            if (empty($decal['size_type']) || empty($decal['qty'])) {
+                return returnMessageAjax(100, 'Bạn chưa chọn vật tư trong kho !');
+            }else{
+                $insert = CSupply::insertCommand($decal, $supply);
+                if ($insert) {
+                    return returnMessageAjax(200, 'Đã gửi yêu cầu xử lí vật tư thành công!', url('update/products/'.$supply->product));
+                }else{
+                    return returnMessageAjax(100, 'Lỗi không xác định !');
+                }
+            }
+        }else{
             return returnMessageAjax(100, 'Bạn chưa chọn vật tư trong kho !');
         } 
+    }
+
+    public function supply_handle_decal($supply, $size, $c_supply, $over_supply)
+    {
+        return $this->baseHandleSquareSupply($supply, $c_supply, \TDConst::DECAL);
+    }
+
+    public function supply_handle_silk($supply, $size, $c_supply, $over_supply)
+    {
+        return $this->baseHandleSquareSupply($supply, $c_supply, \TDConst::SILK);
     }
 
     public function supply_handle_fill_finish($supply, $size, $c_supply, $over_supply)

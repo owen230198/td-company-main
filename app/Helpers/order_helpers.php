@@ -369,3 +369,11 @@
             return @\TDConst::ALL_SUPPLY[$type];
         }
     }
+
+    if (!function_exists('getBaseNeedQtySquareSupply')) {
+		function getBaseNeedQtySquareSupply($base_supp_qty, $supply_size)
+		{
+			$data_length = (float) @$supply_size['width'] < (float) @$supply_size['length'] ? (float) @$supply_size['width'] : (float) @$supply_size['length'];
+			return $base_supp_qty * ($data_length/10);
+		}
+	}
