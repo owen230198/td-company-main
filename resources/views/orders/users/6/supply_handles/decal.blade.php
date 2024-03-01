@@ -27,6 +27,16 @@
                                 'status' => 'imported']
                 ]
             ]
+        ];
+        $base_supp_qty = $supply_obj->supp_qty;
+        $data_length = @$supply_size['width'] < @$supply_size['length'] ? @$supply_size['width'] : @$supply_size['length'];
+        $base_need = $base_supp_qty * ($data_length/10);
+        $arr_items = [
+            'key_supp' => $key_supp,
+            'note' => 'Đề can nhung',
+            'supp_price' => @$supply_size['supply_price'],
+            'base_need' => $base_need,
+            'index' => 0
         ]
     @endphp
     @include('quotes.products.supplies.title_config', ['divide' => $decal_divide, 'name' => 'đề can nhung'])
@@ -41,5 +51,7 @@
         <span>Xuất vật tư nhung theo yêu cầu</span>
     </h3>
 
-    @include('view_update.view', $decal_chose_supp)
+    <div class="__supply_handle_list" data-table = 'square_warehouses' data-need ="{{ @$base_need ?? 0 }}">
+        @include('orders.users.6.supply_handles.view_handles.square_warehouses.item', $arr_items)
+    </div>
 @endsection
