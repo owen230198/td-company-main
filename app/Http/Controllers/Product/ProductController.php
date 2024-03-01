@@ -87,7 +87,7 @@
             $data['nosidebar'] = true;
             $data['title'] = 'Thông tin sản xuất - '.$data_product['name'];
             $data['parent_url'] = ['link' => @session()->get('back_url'), 'note' => 'Danh sách đơn sản phẩm'];
-            $data['elements'] = getProductElementData($data_product['category'], $product_id);
+            $data['elements'] = getProductElementData($data_product['category'], $product_id, true, true, true);
             return view('products.view', $data);
         }
 
