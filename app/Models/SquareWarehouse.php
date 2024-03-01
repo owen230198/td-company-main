@@ -35,7 +35,7 @@ class SquareWarehouse extends Model
         $arr = array_map(function($item){
             return [
                 'id' => @$item->id, 
-                'label' => $item->name. ' / KT Khổ : '.$item->width.' / Còn lại : '.$item->qty.'m'];
+                'label' => $item->name. ' / KT Khổ : '.$item->width.' / Còn lại : '.$item->qty.'cm'];
         }, $data);
         return json_encode($arr);
     }
