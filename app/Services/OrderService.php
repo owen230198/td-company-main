@@ -138,7 +138,7 @@ class OrderService extends BaseService
                     }
                 }
             }
-            return returnMessageAjax(200, 'Đã gửi yêu cầu xử lí vật tư thành công!', url('update/products/'.$supply->product));
+            return returnMessageAjax(200, 'Đã gửi yêu cầu xử lí vật tư thành công!', getBackUrl());
         }
     }
 
@@ -161,7 +161,7 @@ class OrderService extends BaseService
                 $over_supply['qty'] = $command['qty'];
                 SupplyWarehouse::insertOverSupply($over_supply, $supply, $size);       
             }
-            return returnMessageAjax(200, 'Đã gửi yêu cầu xử lí vật tư thành công!', url('update/products/'.$supply->product));
+            return returnMessageAjax(200, 'Đã gửi yêu cầu xử lí vật tư thành công!', getBackUrl());
         }     
     }
 
@@ -191,7 +191,7 @@ class OrderService extends BaseService
             }else{
                 $insert = CSupply::insertCommand($decal, $supply);
                 if ($insert) {
-                    return returnMessageAjax(200, 'Đã gửi yêu cầu xử lí vật tư thành công!', url('update/products/'.$supply->product));
+                    return returnMessageAjax(200, 'Đã gửi yêu cầu xử lí vật tư thành công!', getBackUrl());
                 }else{
                     return returnMessageAjax(100, 'Lỗi không xác định !');
                 }
@@ -225,7 +225,7 @@ class OrderService extends BaseService
                 $over_supply['qty'] = $command['qty'];
                 SupplyWarehouse::insertOverSupply($over_supply, $supply, $size);       
             }
-            return returnMessageAjax(200, 'Đã gửi yêu cầu xử lí vật tư thành công!', url('update/products/'.$supply->product));
+            return returnMessageAjax(200, 'Đã gửi yêu cầu xử lí vật tư thành công!', getBackUrl());
         }   
     }
 }

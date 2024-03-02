@@ -28,8 +28,14 @@
                 $data['link_action'] = url('update/products/'.$id);
                 $data['id'] = $id;
                 $data['stage'] = $product['status'];
-                if (view()->exists('orders.users.'.\GroupUser::getCurrent().'.view')) {
-                    return view('orders.users.'.\GroupUser::getCurrent().'.view', $data);
+                $group_user = \GroupUser::getCurrent();
+                if ($group_user == \GroupUser::PLAN_HANDLE) {
+                    $data['key_supply'] = !empty($request->get('key_supply')) ? $request->get('key_supply') : \TDConst::PAPER;
+                    $data['elements'] = getProductElementData($product['category'], $product['id'], true, true, true);
+                    session()->put('back_url', url()->full());
+                }
+                if (view()->exists('orders.users.'.$group_user.'.view')) {
+                    return view('orders.users.'.$group_user.'.view', $data);
                 }else{
                     return back()->with('error', 'Bạn không có quyền truy cập giao diện này !');
                 }

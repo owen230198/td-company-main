@@ -184,7 +184,8 @@
     }
 
     if (!function_exists('getTableWarehouseByType')) {
-        function getTableWarehouseByType($param = new \stdClass()){
+        function getTableWarehouseByType($param = new \stdClass())
+        {
             $type = !empty($param->supp_type) ? $param->supp_type : '';
             switch ($type) {
                 case in_array($type, [\TDConst::CARTON, \TDConst::RUBBER, \TDConst::STYRO, \TDConst::MICA]):
@@ -209,9 +210,7 @@
             if (empty($id)) {
                 return false;
             }
-            $a = getCountDataTable('products', ['order' => $id]);
-            $b = getCountDataTable('products', ['order' => $id, 'status' => $status]);
-            return $a == $b;
+            return getCountDataTable('products', ['order' => $id]) == getCountDataTable('products', ['order' => $id, 'status' => $status]);
         }
     }
 

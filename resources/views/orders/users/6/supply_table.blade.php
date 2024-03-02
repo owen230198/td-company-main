@@ -47,7 +47,7 @@
                                 }
 
                                 if ($field['name'] == 'product_qty') {
-                                    $arr['value'] = (int) @$magnet['qty'] * $data->product_qty;
+                                    $arr['value'] = (int) @$magnet['qty'] * $data->product_qty.' (cái)';
                                 }
                             }elseif ($element['table'] == 'supplies') {
                                 $supp_size = !empty($data->size) ? json_decode($data->size, true) : [];
@@ -56,14 +56,22 @@
                                         $arr['value'] = !empty($supp_size['supply_price']) ? getFieldDataById('name', 'materals', $supp_size['supply_price']) : 'Không xác định';
                                     }
                                     if ($field['name'] == 'supp_qty') {
-                                        $arr['value'] = getBaseNeedQtySquareSupply($data->supp_qty, $supp_size);
+                                        $arr['value'] = getBaseNeedQtySquareSupply($data->supp_qty, $supp_size). '( cm)';
                                     }
                                 }else{
                                     if ($field['name'] == 'name') {
                                         $arr['value'] = !empty($supp_size['supply_price']) && !empty($supp_size['supply_type']) 
                                         ? getFieldDataById('name', 'supply_types', $supp_size['supply_type']) .' - '. getFieldDataById('name', 'supply_prices', $supp_size['supply_price']) : 'Không xác định';
                                     }
+
+                                    if ($field['name'] == 'supp_qty') {
+                                        $arr['value'] = @$data->supp_qty.' (tấm)';  
+                                    }
                                 }
+                            }else{
+                                if ($field['name'] == 'supp_qty') {
+                                    $arr['value'] = @$data->supp_qty.' (tờ)';
+                                }  
                             }
                         @endphp
                         @include('view_table.'.$field['type'], $arr)
