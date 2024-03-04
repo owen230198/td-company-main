@@ -66,6 +66,6 @@ class PrintWarehouse extends Model
 
     static function getLabelLinking($data)
     {
-        return !empty($data->supp_price) ? getFieldDataById('name', 'materals', $data->supp_price).' - '.$data->qtv.' - '.$data->length.'x'.$data->width : '';
+        return !empty($data->supp_price) ? getFieldDataById('name', 'materals', $data->supp_price).' - '.$data->qtv.' - '.$data->length.'x'.$data->width.' / Còn lại : '.$data->qty.' tờ' : '';
     }
 }

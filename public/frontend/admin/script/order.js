@@ -140,8 +140,9 @@ var afterPlanSelectSupply = function(table, data, target, item, parent, reset = 
         item.data('take', 0);
         target.find('.__rest').text(0);
         target.find("input[name*='lack']").val(0);
+        target.find('input.__nqty_supp_plan').val(0)
         target.find('.__lack').parent().fadeOut();
-        target.find('.__lack').parent().text(0);    
+        target.find('.__lack').text(0); 
     }else{
         if (table == 'square_warehouses') {
             target.find("input[name*='qty']").val(data.takeout);
@@ -203,7 +204,7 @@ var planHandleSupplyQty = function()
         let parent = $(this).closest('.__handle_supply_item');
         let need_qty = getEmptyDefault(parent.find('input.__qty_supp_plan').val(), 0, 'float');
         let nqty = getEmptyDefault(parent.find('input.__nqty_supp_plan').val(), 0, 'float');
-        if (nqty > 0) {
+        if (!empty(nqty)) {
             let takeout = need_qty;
             let total_supp = Math.ceil(need_qty/nqty);
             parent.find('input.__total_qty_supp_plan').val(total_supp);

@@ -46,6 +46,7 @@
     @endif
     @include('view_update.view', $chose_supp)
     <div class="__handle_supply_detail_ajax color_green" style="display:none">
+        <input type="hidden" name="c_supply[{{ $key_supp }}][{{ $index }}][lack]" value="">
         <div class="d-flex align-items-center mb-2 fs-13">
             <label class="mb-0 min_210 text-capitalize text-right mr-3">Còn lại trong kho : </label>
             <p class="font_bold __inhouse"></p>

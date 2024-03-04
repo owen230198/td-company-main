@@ -12,9 +12,9 @@
     <div class="__supply_handle_list" data-table = {{ $type }} data-need ="{{ @$base_need ?? 0 }}">
         @include('orders.users.6.supply_handles.view_handles.'.$type.'.item', $arr_items)
     </div>
-    <button type="button" 
-    class="main_button color_white bg_green border_green radius_5 font_bold smooth __supply_handle_button_add" 
-    data-param = '{{ $param }}'>
+    @if ($type != 'print_warehouses')
+    <button type="button" class="main_button color_white bg_green border_green radius_5 font_bold smooth __supply_handle_button_add" data-param = '{{ $param }}'>
        <i class="fa fa-plus mr-2 fs-14"></i>Thêm
-    </button>
+    </button>  
+    @endif
 </div>

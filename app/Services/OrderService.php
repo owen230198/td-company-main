@@ -105,26 +105,50 @@ class OrderService extends BaseService
         }
     }
 
+    private function checkLackSupplyHandle($arr_supply)
+    {
+        foreach ($arr_supply as $supply) {
+            if ((int) @$supply['lack'] == 0) {
+                return true;
+                break;
+            }
+        }
+    }
+
     public function supply_handle_paper($supply, $size, $c_supply, $over_supply)
     {
+        $squares = @$c_supply['square'] ?? [];
+        foreach ($squares as $key => $supp_qsuare) {
+            if (!$this->checkLackSupplyHandle($supp_qsuare)) {
+                return returnMessageAjax(100, 'Vật tư '.getSupplyNameByKey($key).' chưa đủ để sản xuất!');
+            }
+            foreach ($supp_qsuare as $square) {
+                if (@$square['qty'] == 0) {
+                    return returnMessageAjax(100, 'Số lượng vật tư '.getSupplyNameByKey($key).' Không hợp lệ !');
+                }
+            }
+        }
         $papers = @$c_supply['paper'] ?? [];
+        if (!$this->checkLackSupplyHandle($papers)) {
+            return returnMessageAjax(100, 'Vật tư giấy in chưa đủ để sản xuất!');
+        }
         foreach ($papers as $key => $paper) {
             if (empty($paper['size_type'])) {
                 return returnMessageAjax(100, 'bạn chưa chọn vật tư giấy in trong  kho !');
             }
-            if ($paper['qty'] > 0) {
-                $insert_command = CSupply::insertCommand($paper, $supply);
-            }else{
+            if ($paper['qty'] == 0) {
                 return returnMessageAjax(100, 'Số lượng vật tư cần xuất không hợp lệ !');
             }
         }
-        $squares = @$c_supply['square'] ?? [];
+        foreach ($papers as $key => $paper) {
+            unset($paper['lack']);
+            $insert_command = CSupply::insertCommand($paper, $supply);
+        }
         foreach ($squares as $key => $supp_qsuare) {
             foreach ($supp_qsuare as $square) {
-                if (@$square['qty'] > 0) {
-                    $supply->type = $key;
-                    CSupply::insertCommand($square, $supply);
-                }
+                $supply->type = $key;
+                unset($square['lack']);
+                CSupply::insertCommand($square, $supply);
             }
         }
         if (empty($insert_command)) {
