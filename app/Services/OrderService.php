@@ -175,6 +175,10 @@ class OrderService extends BaseService
         if (@$valid['code'] == 100) {
             return returnMessageAjax(100, $valid['message']);
         }
+        $supply_obj = SupplyWarehouse::find($command['size_type']);
+        if (@$supply_obj->qty < $command['qty']) {
+            return returnMessageAjax(100, 'Vật tư trong kho không đủ để sản xuất đơn này !');
+        }
         unset($command['nqty']);
         $insert_command = CSupply::insertCommand($command, $supply);
         if (!$insert_command) {
@@ -212,13 +216,16 @@ class OrderService extends BaseService
             $decal = !empty($squares[$supply->type][0]) ? $squares[$supply->type][0] : [];
             if (empty($decal['size_type']) || empty($decal['qty'])) {
                 return returnMessageAjax(100, 'Bạn chưa chọn vật tư trong kho !');
+            }
+            if (!$this->checkLackSupplyHandle($squares[$supply->type])) {
+                return returnMessageAjax(100, 'Vật tư '.getSupplyNameByKey($supply->type).' chưa đủ để sản xuất!');
+            }
+            unset($decal['lack']);
+            $insert = CSupply::insertCommand($decal, $supply);
+            if ($insert) {
+                return returnMessageAjax(200, 'Đã gửi yêu cầu xử lí vật tư thành công!', getBackUrl());
             }else{
-                $insert = CSupply::insertCommand($decal, $supply);
-                if ($insert) {
-                    return returnMessageAjax(200, 'Đã gửi yêu cầu xử lí vật tư thành công!', getBackUrl());
-                }else{
-                    return returnMessageAjax(100, 'Lỗi không xác định !');
-                }
+                return returnMessageAjax(100, 'Lỗi không xác định !');
             }
         }else{
             return returnMessageAjax(100, 'Bạn chưa chọn vật tư trong kho !');

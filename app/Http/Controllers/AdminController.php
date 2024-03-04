@@ -347,8 +347,8 @@ class AdminController extends Controller
         }
         $q = $request->input('q');
         $except_linking = $request->input('except_linking') == 1;
+        $model = getModelByTable($table);
         if ($except_linking) {
-            $model = getModelByTable($table);
             if (method_exists($model, 'getDataJsonLinking')) {
                 return $model::getDataJsonLinking($data, $q);
             }
@@ -361,8 +361,8 @@ class AdminController extends Controller
             $data = $data->orderBy('ord', 'asc');
         }
         $data = $data->paginate(50)->all();
-        $arr = array_map(function($item) use($label){
-            $item_label = getlabelLinking($item, $label, true);
+        $arr = array_map(function($item) use($label, $model){
+            $item_label = method_exists($model, 'getLabelLinking') ? $model::getLabelLinking($item) : getlabelLinking($item, $label, true);
             return ['id' => @$item->id, 'label' => $item_label];
         }, $data);
         return json_encode($arr);
