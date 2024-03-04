@@ -199,7 +199,7 @@
                     if ($request->isMethod('GET')) {
                         $data['supply_obj'] = $data_supply;
                         $data['title'] = 'Xử lí vật tư sản xuất sản phẩm '.getFieldDataById('name', 'products', $data_supply->product);
-                        $data['parent_url'] = ['link' => 'update/products/'.$data_supply->product, 'note' => 'Danh sách vật tư cần xử lí'];
+                        $data['parent_url'] = ['link' => getBackUrl(), 'note' => 'Danh sách vật tư cần xử lí'];
                         $prefix = !empty($data_supply->type) ? $data_supply->type : $table;
                         $data['pro_index'] = 0;
                         $data['supp_index'] = 0;

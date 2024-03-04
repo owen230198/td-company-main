@@ -120,7 +120,7 @@ class OrderService extends BaseService
         $squares = @$c_supply['square'] ?? [];
         foreach ($squares as $key => $supp_qsuare) {
             if (!$this->checkLackSupplyHandle($supp_qsuare)) {
-                return returnMessageAjax(100, 'Vật tư '.getSupplyNameByKey($key).' không đủ trong kho để sản xuất!');
+                return returnMessageAjax(100, 'Vật tư '.getSupplyNameByKey($key).' không đủ trong kho để sản xuất, Vui lòng gửi yêu cầu đến phòng mua !');
             }
             foreach ($supp_qsuare as $square) {
                 if (@$square['qty'] == 0) {
@@ -130,7 +130,7 @@ class OrderService extends BaseService
         }
         $papers = @$c_supply['paper'] ?? [];
         if (!$this->checkLackSupplyHandle($papers)) {
-            return returnMessageAjax(100, 'Vật tư giấy in không đủ trong kho để sản xuất!');
+            return returnMessageAjax(100, 'Vật tư giấy in không đủ trong kho để sản xuất, Vui lòng gửi yêu cầu đến phòng mua !');
         }
         foreach ($papers as $key => $paper) {
             if (empty($paper['size_type'])) {
@@ -218,7 +218,7 @@ class OrderService extends BaseService
                 return returnMessageAjax(100, 'Bạn chưa chọn vật tư trong kho !');
             }
             if (!$this->checkLackSupplyHandle($squares[$supply->type])) {
-                return returnMessageAjax(100, 'Vật tư '.getSupplyNameByKey($supply->type).' không đủ trong kho để sản xuất!');
+                return returnMessageAjax(100, 'Vật tư '.getSupplyNameByKey($supply->type).' không đủ trong kho để sản xuất, Vui lòng gửi yêu cầu đến phòng mua !');
             }
             unset($decal['lack']);
             $insert = CSupply::insertCommand($decal, $supply);
