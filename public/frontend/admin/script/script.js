@@ -457,7 +457,7 @@ var moduleSelectAjaxChild = function()
 var getUrlLinkingWarehouseSize = function(type)
 {
     if (['carton', 'rubber', 'styrofoam', 'mica'].includes(type)) {
-        wh_table = 'square_warehouses';   
+        wh_table = 'supply_warehouses';   
     }else if(['magnet'].includes(type)){
         wh_table = 'other_warehouses';
     }else if(['paper'].includes(type)){
@@ -481,9 +481,9 @@ var selectTypeSuppWarehouse = function()
         select_size.data('label', '');
         select_size.data('url', url);
         if (!empty(value)) {
-            select_size.attr('disabled', false);    
+            select_size.attr('readonly', false);    
         }else{
-            select_size.attr('disabled', true);   
+            select_size.attr('readonly', true);   
         }
         initInputModuleAfterAjax(parent);
     })

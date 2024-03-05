@@ -23,6 +23,7 @@
             @yield('content')
         </div>
         @include('Worker::footer')
+        @include('index_script_const')
         <script src="{{ asset('frontend/base/script/jquery.min.js') }}"></script>
         <script src="{{ asset('frontend/base/script/bootstrap.min.js') }}"></script>
         <script src="{{ asset('frontend/base/script/swal.min.js') }}"></script>

@@ -39,7 +39,7 @@ class Quote extends Model
     }
     public function beforeRemove($id, $obj)
     {
-        if (@$obj->status != self::ORDER_CREATED) {
+        if (in_array(@$obj->status, [\StatusConst::NOT_ACCEPTED, \StatusConst::ACCEPTED])) {
             Product::removeData(['quote_id' => $id]);
         }
     } 

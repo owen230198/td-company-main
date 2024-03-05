@@ -79,10 +79,13 @@
                     $products = Product::where(['order' => $id])->get();
                     if (!$products->isEmpty()) {    
                         foreach ($products as $product) {
+                            //update trạng thái sản phẩm về lúc chưa tạo đơn để không ảnh hưởng đến báo giá
                             Product::where('id', $product->id)->update(['code' => '', 'order' => '', 'status' => '', 'order_created' => 0]); 
                             Product::removeCommand($product->id);
                         }
                     }    
+                }else{
+                    Product::removeData(['order' => $id]);
                 }
             }else{
                 Product::removeData(['order' => $id]);

@@ -80,6 +80,7 @@ class OrderService extends BaseService
         foreach ($products as $key => $product) {
             $h = $key > 0 ? $key.'.' : '';
             $data_insert['code'] = 'TK-'.$h.''.$code;
+            $data_insert['name'] = $product['name'];
             $data_insert['product'] = $product['id'];
             $insert = CDesign::insert($data_insert);
             if ($insert) {
