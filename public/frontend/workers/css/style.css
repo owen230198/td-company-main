@@ -104,6 +104,11 @@
     text-transform: uppercase;
 }
 
+.command_item_info{
+    height: 195px;
+    overflow-y: auto;
+}
+
 @media screen and (max-width: 600px) {
     .min_210{
         min-width: 140px;
