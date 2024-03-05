@@ -19,7 +19,7 @@
                         <span>Danh sách yêu cầu xử lí vật tư</span>
                     </h3>
                     @if (count($elements) > 0)
-                        <ul class="nav nav-pills mb-3 quote_pro_strct_nav_link">
+                        <ul class="nav nav-pills mb-3 quote_pro_strct_nav_link" style="top: 95px">
                             @foreach ($elements as $key => $element)
                                 @if (!empty($element['data']))
                                     <li class="_nav-item">

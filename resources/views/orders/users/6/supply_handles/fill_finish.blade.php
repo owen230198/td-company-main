@@ -24,7 +24,7 @@
             'attr' => ['type_input' => 'number']
         ];
         $magnet_chose_supp = [
-            'name' => 'supp_price',
+            'name' => 'c_supply[supp_price]',
             'type' => 'linking',
             'note' => 'Chọn nam châm trong kho',
             'other_data' => [

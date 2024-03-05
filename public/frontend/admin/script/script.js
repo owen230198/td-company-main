@@ -480,13 +480,12 @@ var selectTypeSuppWarehouse = function()
         select_size.data('id', '');
         select_size.data('label', '');
         select_size.data('url', url);
-        initInputModuleAfterAjax(parent);
         if (!empty(value)) {
-            console.log(value);
-            select_size.attr('readonly', false);    
+            select_size.attr('disabled', false);    
         }else{
-            select_size.attr('readonly', true);   
+            select_size.attr('disabled', true);   
         }
+        initInputModuleAfterAjax(parent);
     })
 }
 

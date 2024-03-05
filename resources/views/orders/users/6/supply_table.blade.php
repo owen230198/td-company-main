@@ -45,10 +45,6 @@
                                 if ($field['name'] == 'name') {
                                     $arr['value'] = !empty($magnet['type']) ? getFieldDataById('name', 'materals', $magnet['type']) : 'Nam châm';
                                 }
-
-                                if ($field['name'] == 'product_qty') {
-                                    $arr['value'] = (int) @$magnet['qty'] * $data->product_qty.' (cái)';
-                                }
                             }elseif ($element['table'] == 'supplies') {
                                 $supp_size = !empty($data->size) ? json_decode($data->size, true) : [];
                                 if (in_array(@$data->type, [\TDConst::DECAL, \TDConst::SILK])) {

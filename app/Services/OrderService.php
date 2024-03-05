@@ -6,6 +6,7 @@ use App\Models\Quote;
 use App\Models\Product;
 use \App\Models\CDesign;
 use \App\Models\CSupply;
+use App\Models\OtherWarehouse;
 use App\Models\PrintWarehouse;
 use App\Models\Supply;
 use App\Models\SupplyWarehouse;
@@ -120,7 +121,7 @@ class OrderService extends BaseService
         $squares = @$c_supply['square'] ?? [];
         foreach ($squares as $key => $supp_qsuare) {
             if (!$this->checkLackSupplyHandle($supp_qsuare)) {
-                return returnMessageAjax(100, 'Vật tư '.getSupplyNameByKey($key).' không đủ trong kho để sản xuất, Vui lòng gửi yêu cầu đến phòng mua !');
+                return returnMessageAjax(100, 'Vật tư '.getSupplyNameByKey($key).' trong kho không đủ để sản xuất, Vui lòng gửi yêu cầu đến phòng mua !');
             }
             foreach ($supp_qsuare as $square) {
                 if (@$square['qty'] == 0) {
@@ -130,7 +131,7 @@ class OrderService extends BaseService
         }
         $papers = @$c_supply['paper'] ?? [];
         if (!$this->checkLackSupplyHandle($papers)) {
-            return returnMessageAjax(100, 'Vật tư giấy in không đủ trong kho để sản xuất, Vui lòng gửi yêu cầu đến phòng mua !');
+            return returnMessageAjax(100, 'Vật tư giấy in trong kho không đủ để sản xuất, Vui lòng gửi yêu cầu đến phòng mua !');
         }
         foreach ($papers as $key => $paper) {
             if (empty($paper['size_type'])) {
@@ -177,7 +178,7 @@ class OrderService extends BaseService
         }
         $supply_obj = SupplyWarehouse::find($command['size_type']);
         if (@$supply_obj->qty < $command['qty']) {
-            return returnMessageAjax(100, 'Vật tư trong kho không đủ để sản xuất đơn này !');
+            return returnMessageAjax(100, 'Vật tư trong kho không đủ để sản xuất đơn này, Vui lòng gửi yêu cầu đến phòng mua !');
         }
         unset($command['nqty']);
         $insert_command = CSupply::insertCommand($command, $supply);
@@ -218,7 +219,7 @@ class OrderService extends BaseService
                 return returnMessageAjax(100, 'Bạn chưa chọn vật tư trong kho !');
             }
             if (!$this->checkLackSupplyHandle($squares[$supply->type])) {
-                return returnMessageAjax(100, 'Vật tư '.getSupplyNameByKey($supply->type).' không đủ trong kho để sản xuất, Vui lòng gửi yêu cầu đến phòng mua !');
+                return returnMessageAjax(100, 'Vật tư '.getSupplyNameByKey($supply->type).' trong kho không đủ để sản xuất, Vui lòng gửi yêu cầu đến phòng mua !');
             }
             unset($decal['lack']);
             $insert = CSupply::insertCommand($decal, $supply);
@@ -247,15 +248,24 @@ class OrderService extends BaseService
         if (empty($c_supply['supp_price'])) {
             return returnMessageAjax(100, 'Bạn chưa chọn vật tư trong kho !');
         }  
+        
+        $data_magnet = !empty($supply->magnet) ? json_decode($supply->magnet, true) : [];
+        $temp_qty = (int) @$data_magnet['qty'] * @$supply->product_qty;
+        $take_qty = calValuePercentPlus($temp_qty, $temp_qty, getDataConfig('QuoteConfig', 'MAGNET_COMPEN_PERCENT'));
+        if ($take_qty == 0) {
+            return returnMessageAjax(100, 'Số lượng vật tư không hợp lệ !');
+        }
+        $warehouse = OtherWarehouse::find($c_supply['supp_price']);
+        if (@$warehouse->qty < $take_qty) {
+            return returnMessageAjax(100, 'Số lượng vật tư nam châm trong kho không đủ để sản xuất, vui lòng gửi yêu cầu đến phòng mua !');
+        }
+        $command['size_type'] = $c_supply['supp_price'];
+        $command['qty'] = $take_qty;
+        $supply->type = \TDConst::MAGNET;
         $insert_command = CSupply::insertCommand($command, $supply);
         if (!$insert_command) {
             return returnMessageAjax(110, 'Không thể tạo yêu cầu xuất vật tư, vui lòng thử lại!');
         }else{
-            Supply::where('id', $supply->product)->update(['handle_elevate' => json_encode($elevate)]);
-            if (!empty($over_supply['qty'])) {
-                $over_supply['qty'] = $command['qty'];
-                SupplyWarehouse::insertOverSupply($over_supply, $supply, $size);       
-            }
             return returnMessageAjax(200, 'Đã gửi yêu cầu xử lí vật tư thành công!', getBackUrl());
         }   
     }
