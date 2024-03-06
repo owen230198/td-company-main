@@ -29,7 +29,7 @@ class NGroupUser extends Model
     const GROUP_MODULE = [
         'quote_price_config' => 'Cài đặt đơn giá SX',
         'factory' => 'Quản lí nhà xưởng',
-        'customer' => 'Khách hàng',
+        'customer' => 'Khách hàng & đối tác sx',
         'customer_quote' => 'Báo giá & Khách hàng',
         'design_module' => 'Thiết kế',
         'order_handle' => 'Đơn hàng & sản xuất',
@@ -78,6 +78,11 @@ class NGroupUser extends Model
         'customer_list' => [
             'name' => 'DS khách hàng', 
             'link' => 'view/customers', 
+            'group' => 'customer'
+        ],
+        'partner_list' => [
+            'name' => 'DS đối tác sx', 
+            'link' => 'view/partners', 
             'group' => 'customer'
         ],
         'create_quote' => [

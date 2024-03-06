@@ -11,7 +11,7 @@
  Target Server Version : 100432
  File Encoding         : 65001
 
- Date: 05/03/2024 22:08:14
+ Date: 06/03/2024 23:09:17
 */
 
 SET NAMES utf8mb4;
@@ -314,17 +314,6 @@ INSERT INTO `configs` VALUES (4, 'mail_port', 'MAIL_PORT', '587', 1, 'text', 'Ma
 INSERT INTO `configs` VALUES (5, 'mail_encryption', 'MAIL_ENCRYPTION', 'tls', 1, 'text', 'Giao thức gửi mail', 0, NULL, NULL, '1', '2023-05-16 23:44:05', '2023-05-16 23:44:05');
 INSERT INTO `configs` VALUES (6, 'mail_username', 'MAIL_USERNAME', 'nguyenduykhanh2323@gmail.com', 1, 'text', 'Mail gửi', 0, NULL, NULL, '1', '2023-05-16 23:42:40', '2023-05-16 23:42:40');
 INSERT INTO `configs` VALUES (7, 'mail_password', 'MAIL_PASSWORD', 'pass23', 1, 'text', 'Mail gửi', 0, NULL, NULL, '1', '2023-05-16 23:42:38', '2023-05-16 23:42:38');
-
--- ----------------------------
--- Table structure for customer_user
--- ----------------------------
-DROP TABLE IF EXISTS `customer_user`;
-CREATE TABLE `customer_user`  (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `customer_id` int(10) NOT NULL,
-  `user_id` int(10) NOT NULL,
-  PRIMARY KEY (`id`, `customer_id`, `user_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for customers
@@ -1679,7 +1668,7 @@ CREATE TABLE `n_detail_tables`  (
   INDEX `map_insert`(`table_map`, `insert`) USING BTREE,
   INDEX `map_update`(`table_map`, `update`) USING BTREE,
   INDEX `map_search`(`table_map`, `search`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 290 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 305 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of n_detail_tables
@@ -1950,6 +1939,21 @@ INSERT INTO `n_detail_tables` VALUES (286, 'category', NULL, 'Nhóm sản phẩm
 INSERT INTO `n_detail_tables` VALUES (287, 'size', NULL, 'Kích thước', 'product_size', 'product_warehouses', 0, 0, 0, 1, 0, '{\r\n	\"table_target\":\"quotes\"\r\n}', 1, 0, 1, '2023-04-30 11:17:52', '2024-01-03 22:58:05');
 INSERT INTO `n_detail_tables` VALUES (288, 'created_by', NULL, 'Người thêm', 'linking', 'product_warehouses', 1, 0, 0, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', 1, 3, 1, '2023-04-08 00:08:00', '2024-01-03 09:44:35');
 INSERT INTO `n_detail_tables` VALUES (289, 'created_at', NULL, 'Ngày thêm', 'datetime', 'product_warehouses', 1, 1, 1, 1, 0, '', 1, 4, 1, '2023-04-08 00:08:00', '2024-01-03 09:45:01');
+INSERT INTO `n_detail_tables` VALUES (290, 'code', '{\"disable_field\":1,\"required\":1}', 'Mã đối tác', 'text', 'partners', 1, 0, 1, 1, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2024-03-06 23:02:44');
+INSERT INTO `n_detail_tables` VALUES (291, 'name', '{\"required\":1}', 'Tên KH/Cty', 'text', 'partners', 1, 1, 1, 1, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2024-03-06 23:02:44');
+INSERT INTO `n_detail_tables` VALUES (292, 'contacter', '{\"required\":1}', 'Người liên hệ', 'text', 'partners', 1, 1, 1, 1, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2024-03-06 23:02:44');
+INSERT INTO `n_detail_tables` VALUES (293, 'phone', '{\"required\":1}', 'SĐT di động', 'text', 'partners', 1, 1, 1, 1, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2024-03-06 23:02:44');
+INSERT INTO `n_detail_tables` VALUES (294, 'telephone', '', 'SĐT cố định', 'text', 'partners', 1, 1, 1, 1, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2024-03-06 23:02:44');
+INSERT INTO `n_detail_tables` VALUES (295, 'email', '{\"required\":1}', 'Email', 'text', 'partners', 1, 1, 1, 1, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2024-03-06 23:02:44');
+INSERT INTO `n_detail_tables` VALUES (296, 'address', '{\"required\":1}', 'Địa chỉ', 'text', 'partners', 1, 1, 1, 1, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2024-03-06 23:02:44');
+INSERT INTO `n_detail_tables` VALUES (297, 'city', '{\"required\":1}', 'Tỉnh/TP', 'linking', 'partners', 1, 1, 1, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"citys\",\r\n		\"where\":{\"parent\":0}\r\n	}\r\n}', 1, 0, 1, '2023-04-07 23:41:47', '2024-03-06 23:02:44');
+INSERT INTO `n_detail_tables` VALUES (298, 'tax_code', '', 'Mã số thuế', 'text', 'partners', 0, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-07 23:45:08', '2024-03-06 23:02:44');
+INSERT INTO `n_detail_tables` VALUES (299, 'type', '{\"required\":1}', 'Phân loại', 'select', 'partners', 1, 1, 1, 1, 0, '{\"data\":{\r\n		\"options\":{\"\":\"Phân loại đối tác\", \"2\":\"Đối tác thương mại\", \"1\":\"Tính giá sản xuất\"}\r\n	}\r\n}', 1, 0, 1, '2023-05-11 11:18:58', '2024-03-06 23:04:20');
+INSERT INTO `n_detail_tables` VALUES (300, 'note', '', 'Ghi chú', 'textarea', 'partners', 0, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-08 00:05:12', '2024-03-06 23:02:44');
+INSERT INTO `n_detail_tables` VALUES (301, 'act', '', 'Kích hoạt', 'checkbox', 'partners', 0, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-08 00:05:47', '2024-03-06 23:02:44');
+INSERT INTO `n_detail_tables` VALUES (302, 'created_by', NULL, 'Phụ trách', 'linking', 'partners', 1, 1, 1, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', 1, 0, 1, '2023-04-08 00:08:00', '2024-03-06 23:02:44');
+INSERT INTO `n_detail_tables` VALUES (303, 'created_at', NULL, 'Ngày tạo', 'datetime', 'partners', 1, 1, 1, 1, 0, '', 1, 0, 1, '2023-04-08 00:08:00', '2024-03-06 23:02:44');
+INSERT INTO `n_detail_tables` VALUES (304, 'updated_at', NULL, 'Ngày sửa', 'datetime', 'partners', 0, 1, 1, 0, 0, '', 1, 0, 1, '2023-04-08 00:12:15', '2024-03-06 23:02:44');
 
 -- ----------------------------
 -- Table structure for n_group_users
@@ -1998,7 +2002,7 @@ CREATE TABLE `n_log_actions`  (
   `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1320 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1321 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of n_log_actions
@@ -2596,6 +2600,7 @@ INSERT INTO `n_log_actions` VALUES (1316, 'w_users', 'update', 29, 1, 0, '{\"nam
 INSERT INTO `n_log_actions` VALUES (1317, 'w_users', 'update', 35, 1, 0, '{\"name\":{\"old\":\"Boi Td\",\"new\":\"Mr  Tu\\u1ea5n - Mr Long\"},\"phone\":{\"old\":\"11\",\"new\":\"0963303999\"}}', 1, '2024-03-01 13:40:09', '2024-03-01 13:40:09');
 INSERT INTO `n_log_actions` VALUES (1318, 'w_users', 'update', 25, 1, 0, '{\"username\":{\"old\":\"maynuoc\",\"new\":\"mangnuoc\"}}', 1, '2024-03-01 14:27:09', '2024-03-01 14:27:09');
 INSERT INTO `n_log_actions` VALUES (1319, 'quotes', 'insert_customer', 196, 1, 0, '{\"name\":\"C\\u00d4NG TY D\\u1ec6T MAY TH\\u00c0NH V\\u01af\\u1ee2NG\",\"contacter\":\"Ms H\\u1eb1ng\",\"phone\":\"0979359387\",\"telephone\":\"0979359387\",\"email\":\"zalo\",\"address\":\"Hoa s\\u01a1n - \\u1ee8ng h\\u00f2a - H\\u00e0 n\\u1ed9i\",\"city\":\"351\"}', 1, '2024-03-01 15:44:13', '2024-03-01 15:44:13');
+INSERT INTO `n_log_actions` VALUES (1320, 'quotes', 'insert_customer', 197, 23, 0, '{\"name\":\"C\\u00d4NG TY D\\u1ec6T MAY TH\\u00c0NH V\\u01af\\u1ee2NG\",\"contacter\":\"Ms H\\u1eb1ng\",\"phone\":\"0979359387\",\"telephone\":\"0979359387\",\"email\":\"zalo\",\"address\":\"Hoa s\\u01a1n - \\u1ee8ng h\\u00f2a - H\\u00e0 n\\u1ed9i\",\"city\":\"351\"}', 1, '2024-03-06 20:27:37', '2024-03-06 20:27:37');
 
 -- ----------------------------
 -- Table structure for n_modules
@@ -2784,7 +2789,7 @@ CREATE TABLE `n_tables`  (
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `indx`(`id`, `name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 42 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 43 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of n_tables
@@ -2825,6 +2830,7 @@ INSERT INTO `n_tables` VALUES (38, 'warehouse_providers', 'Nhà cung cấp vật
 INSERT INTO `n_tables` VALUES (39, 'supply_buyings', 'Yêu cầu mua vật tư', NULL, 10, 'view', '[\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"check-circle-o\",\r\n		\"note\":\"Duyệt mua vật tư\", \r\n		\"class\":\"__confirm_buying\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"not_accepted\"}\r\n		]\r\n	},\r\n	{\r\n		\"type\":2,\r\n		\"detailonly\":1,\r\n		\"icon\":\"check-square-o\",\"note\":\"Xác nhận đã mua\", \r\n		\"class\":\"__confirm_bought\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"accepted\"}\r\n		]\r\n	},\r\n	{\r\n		\"type\":2,\r\n		\"detailonly\":1,\r\n		\"icon\":\"check-square\",\"note\":\"Xác nhận nhập kho\", \r\n		\"class\":\"__confirm_warehouse_imported\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"bought\"}\r\n		]\r\n	}\r\n]', '1', '1', '1', '1', '2023-07-17 19:30:41', '2023-11-17 00:17:48');
 INSERT INTO `n_tables` VALUES (40, 'c_expertises', 'Yêu cầu nhập kho thành phẩm', NULL, 10, 'view', '[\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"share\",\r\n		\"note\":\"Duyệt nhập kho sản phẩm\", \r\n		\"class\":\"__confirm_product_warehouse\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"not_accepted\"}\r\n		]\r\n	}\r\n]', '0', '0', '1', '0', '2023-07-17 19:30:41', '2024-01-03 06:55:06');
 INSERT INTO `n_tables` VALUES (41, 'product_warehouses', 'Kho thành phẩm', NULL, 20, 'view', '[\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"history\",\r\n		\"note\":\"Lịch sử xuất nhập\", \r\n		\"class\":\"__product_warehouse_history\"\r\n	}\r\n]', '0', '1', '0', '1', '2023-04-23 11:30:46', '2024-01-03 23:20:48');
+INSERT INTO `n_tables` VALUES (42, 'partners', 'Đối tác sản xuất', NULL, 10, 'view', NULL, '1', '1', '1', '1', '2023-04-23 11:30:46', '2023-08-16 19:42:33');
 
 -- ----------------------------
 -- Table structure for n_users
@@ -3091,7 +3097,7 @@ INSERT INTO `papers` VALUES (263, 'DH-00000033AA', 'TÚI HOA QUẢ SỐ 3 - Mã 
 INSERT INTO `papers` VALUES (264, 'DH-00000032AA', 'TÚI HOA QUẢ SỐ 3 - Mã B', 5000, 1, NULL, 5050, 150, 0, 5200, '{\"materal\":\"13\",\"qttv\":\"300\",\"length\":\"62\",\"width\":\"74.5\",\"materal_price\":0.00195,\"supp_qty\":5200,\"act\":1,\"total\":14050998}', '{\"type\":\"1\",\"color\":\"4\",\"machine\":\"1\",\"note\":null,\"supp_qty\":4050,\"handle_qty\":0,\"model_price\":123600,\"work_price\":80,\"shape_price\":220000,\"printer\":5,\"act\":2,\"total\":2670400}', '{\"materal\":\"8\",\"face\":\"1\",\"machine\":\"46\",\"note\":null,\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":5100,\"handle_qty\":5000,\"materal_price\":0.23,\"act\":1,\"total\":5468087.000000001}', '{\"act\":0}', '{\"price\":\"0\",\"shape_price\":\"0\",\"machine\":null,\"note\":null,\"qty_pro\":5050,\"handle_qty\":5000,\"nqty\":1,\"act\":0,\"total\":0}', '{\"act\":0}', '{\"ext_price\":\"0\",\"machine\":\"69\",\"note\":null,\"model_price\":150,\"work_price\":150,\"shape_price\":100000,\"supp_qty\":5100,\"handle_qty\":5000,\"cost\":1557850,\"act\":1,\"total\":1557850}', NULL, '{\"act\":0}', NULL, NULL, NULL, '{\"machine\":\"51\",\"note\":null,\"model_price\":0,\"work_price\":2000,\"shape_price\":100000,\"qty_pro\":5050,\"handle_qty\":5000,\"act\":1,\"total\":10200000}', 3, '{\"temp_price\":\"0\",\"prescript_price\":\"0\",\"supp_price\":\"0\",\"note\":null,\"qty_pro\":5000,\"act\":0,\"total\":0}', 0, NULL, '33947335', 130, NULL, 1, 1, 'print', '2024-02-29 10:32:21', '2024-03-05 22:06:11', 4);
 INSERT INTO `papers` VALUES (265, 'DH-00000031AA', 'TÚI HOA QUẢ SỐ 3 - Mã C', 10000, 1, 0, 10050, 250, 0, 10300, '{\"materal\":\"13\",\"qttv\":\"300\",\"length\":\"62\",\"width\":\"74.5\",\"materal_price\":0.00195,\"supp_qty\":10300,\"act\":1,\"total\":27831784.5}', '{\"type\":\"1\",\"color\":\"4\",\"machine\":\"1\",\"note\":null,\"supp_qty\":9050,\"handle_qty\":0,\"model_price\":123600,\"work_price\":80,\"shape_price\":220000,\"printer\":5,\"act\":2,\"total\":4270400}', '{\"materal\":\"9\",\"face\":\"1\",\"machine\":\"46\",\"note\":null,\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":10200,\"handle_qty\":10000,\"materal_price\":0.25,\"act\":1,\"total\":11828450}', '{\"act\":0}', '{\"price\":\"0\",\"shape_price\":\"0\",\"machine\":null,\"note\":null,\"qty_pro\":10100,\"handle_qty\":10000,\"nqty\":1,\"act\":0,\"total\":0}', '{\"act\":0}', '{\"ext_price\":\"0\",\"machine\":\"69\",\"note\":null,\"model_price\":150,\"work_price\":150,\"shape_price\":100000,\"supp_qty\":10200,\"handle_qty\":10000,\"cost\":2322850,\"act\":1,\"total\":2322850}', NULL, '{\"act\":0}', NULL, NULL, NULL, '{\"machine\":\"51\",\"note\":null,\"model_price\":0,\"work_price\":2000,\"shape_price\":100000,\"qty_pro\":10100,\"handle_qty\":10000,\"act\":1,\"total\":20300000}', 3, '{\"temp_price\":\"0\",\"prescript_price\":\"0\",\"supp_price\":\"0\",\"note\":null,\"qty_pro\":10000,\"act\":0,\"total\":0}', 0, NULL, '66553484.5', 131, NULL, 1, 1, 'print', '2024-02-29 10:31:26', '2024-03-01 14:58:38', 4);
 INSERT INTO `papers` VALUES (266, 'DH-00000030AA', 'TÚI HOA QUẢ SỐ 4 - Mã A', 15000, 1, NULL, 15050, 350, 0, 15400, '{\"materal\":\"13\",\"qttv\":\"300\",\"length\":\"37.5\",\"width\":\"102\",\"materal_price\":0.00195,\"supp_qty\":15400,\"act\":1,\"total\":34459425}', '{\"type\":\"1\",\"color\":\"4\",\"machine\":\"1\",\"note\":null,\"supp_qty\":14050,\"handle_qty\":0,\"model_price\":123600,\"work_price\":80,\"shape_price\":220000,\"printer\":5,\"act\":2,\"total\":5870400}', '{\"materal\":\"8\",\"face\":\"1\",\"machine\":\"46\",\"note\":null,\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":15300,\"handle_qty\":15000,\"materal_price\":0.23,\"act\":1,\"total\":13510175}', '{\"act\":0}', '{\"price\":\"0\",\"shape_price\":\"0\",\"machine\":null,\"note\":null,\"qty_pro\":15150,\"handle_qty\":15000,\"nqty\":1,\"act\":0,\"total\":0}', '{\"act\":0}', '{\"ext_price\":\"0\",\"machine\":\"69\",\"note\":null,\"model_price\":150,\"work_price\":150,\"shape_price\":100000,\"supp_qty\":15300,\"handle_qty\":15000,\"cost\":2968750,\"act\":1,\"total\":2968750}', NULL, '{\"act\":0}', NULL, NULL, NULL, '{\"machine\":\"51\",\"note\":null,\"model_price\":0,\"work_price\":2000,\"shape_price\":100000,\"qty_pro\":15150,\"handle_qty\":15000,\"act\":1,\"total\":30400000}', 3, '{\"temp_price\":\"0\",\"prescript_price\":\"0\",\"supp_price\":\"0\",\"note\":null,\"qty_pro\":15000,\"act\":0,\"total\":0}', 0, NULL, '87208750', 132, NULL, 1, 1, 'print', '2024-02-29 10:28:29', '2024-03-01 14:30:54', 4);
-INSERT INTO `papers` VALUES (267, 'DH-00000029AA', 'TÚI HOA QUẢ SỐ 4 - Mã B', 5000, 1, NULL, 5050, 150, 0, 5200, '{\"materal\":\"13\",\"qttv\":\"300\",\"length\":\"37.5\",\"width\":\"102\",\"materal_price\":0.00195,\"supp_qty\":5200,\"act\":1,\"total\":11635650}', '{\"type\":\"1\",\"color\":\"4\",\"machine\":\"1\",\"note\":null,\"supp_qty\":4050,\"handle_qty\":5000,\"model_price\":123600,\"work_price\":80,\"shape_price\":220000,\"printer\":5,\"act\":1,\"total\":2670400}', '{\"materal\":\"8\",\"face\":\"1\",\"machine\":\"46\",\"note\":null,\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":5100,\"handle_qty\":5000,\"materal_price\":0.23,\"act\":1,\"total\":4536725}', '{\"act\":0}', '{\"price\":\"0\",\"shape_price\":\"0\",\"machine\":null,\"note\":null,\"qty_pro\":5050,\"handle_qty\":5000,\"nqty\":1,\"act\":0,\"total\":0}', '{\"act\":0}', '{\"ext_price\":\"0\",\"machine\":\"69\",\"note\":null,\"model_price\":150,\"work_price\":150,\"shape_price\":100000,\"supp_qty\":5100,\"handle_qty\":5000,\"cost\":1438750,\"act\":1,\"total\":1438750}', NULL, '{\"act\":0}', NULL, NULL, NULL, '{\"machine\":\"51\",\"note\":null,\"model_price\":0,\"work_price\":2000,\"shape_price\":100000,\"qty_pro\":5050,\"handle_qty\":5000,\"act\":1,\"total\":10200000}', 3, '{\"temp_price\":\"0\",\"prescript_price\":\"0\",\"supp_price\":\"0\",\"note\":null,\"qty_pro\":5000,\"act\":0,\"total\":0}', 0, NULL, '30481525', 133, NULL, 1, 1, 'print', '2024-02-29 10:27:25', '2024-03-01 14:48:01', 4);
+INSERT INTO `papers` VALUES (267, 'DH-00000029AA', 'TÚI HOA QUẢ SỐ 4 - Mã B', 5000, 1, NULL, 5050, 150, 0, 5200, '{\"materal\":\"13\",\"qttv\":\"300\",\"length\":\"37.5\",\"width\":\"102\",\"materal_price\":0.00195,\"supp_qty\":5200,\"act\":1,\"total\":11635650}', '{\"type\":\"1\",\"color\":\"4\",\"machine\":\"1\",\"note\":null,\"supp_qty\":4050,\"handle_qty\":0,\"model_price\":123600,\"work_price\":80,\"shape_price\":220000,\"printer\":5,\"act\":2,\"total\":2670400}', '{\"materal\":\"8\",\"face\":\"1\",\"machine\":\"46\",\"note\":null,\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":5100,\"handle_qty\":5000,\"materal_price\":0.23,\"act\":1,\"total\":4536725}', '{\"act\":0}', '{\"price\":\"0\",\"shape_price\":\"0\",\"machine\":null,\"note\":null,\"qty_pro\":5050,\"handle_qty\":5000,\"nqty\":1,\"act\":0,\"total\":0}', '{\"act\":0}', '{\"ext_price\":\"0\",\"machine\":\"69\",\"note\":null,\"model_price\":150,\"work_price\":150,\"shape_price\":100000,\"supp_qty\":5100,\"handle_qty\":5000,\"cost\":1438750,\"act\":1,\"total\":1438750}', NULL, '{\"act\":0}', NULL, NULL, NULL, '{\"machine\":\"51\",\"note\":null,\"model_price\":0,\"work_price\":2000,\"shape_price\":100000,\"qty_pro\":5050,\"handle_qty\":5000,\"act\":1,\"total\":10200000}', 3, '{\"temp_price\":\"0\",\"prescript_price\":\"0\",\"supp_price\":\"0\",\"note\":null,\"qty_pro\":5000,\"act\":0,\"total\":0}', 0, NULL, '30481525', 133, NULL, 1, 1, 'print', '2024-02-29 10:27:25', '2024-03-05 22:21:07', 4);
 INSERT INTO `papers` VALUES (268, 'DH-00000028AA', 'TÚI HOA QUẢ SỐ 4 - Mã C', 10000, 1, NULL, 10050, 250, 0, 10300, '{\"materal\":\"13\",\"qttv\":\"300\",\"length\":\"37.5\",\"width\":\"102\",\"materal_price\":0.00195,\"supp_qty\":10300,\"act\":1,\"total\":23047537.5}', '{\"type\":\"1\",\"color\":\"4\",\"machine\":\"1\",\"note\":null,\"supp_qty\":9050,\"handle_qty\":0,\"model_price\":123600,\"work_price\":80,\"shape_price\":220000,\"printer\":5,\"act\":2,\"total\":4270400}', '{\"materal\":\"9\",\"face\":\"1\",\"machine\":\"46\",\"note\":null,\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":10200,\"handle_qty\":10000,\"materal_price\":0.25,\"act\":1,\"total\":9803750}', '{\"act\":0}', '{\"price\":\"0\",\"shape_price\":\"0\",\"machine\":null,\"note\":null,\"qty_pro\":10100,\"handle_qty\":10000,\"nqty\":1,\"act\":0,\"total\":0}', '{\"act\":0}', '{\"ext_price\":\"0\",\"machine\":\"69\",\"note\":null,\"model_price\":150,\"work_price\":150,\"shape_price\":100000,\"supp_qty\":10200,\"handle_qty\":10000,\"cost\":2203750,\"act\":1,\"total\":2203750}', NULL, '{\"act\":0}', NULL, NULL, NULL, '{\"machine\":\"51\",\"note\":null,\"model_price\":0,\"work_price\":2000,\"shape_price\":100000,\"qty_pro\":10100,\"handle_qty\":10000,\"act\":1,\"total\":20300000}', 3, '{\"temp_price\":\"0\",\"prescript_price\":\"0\",\"supp_price\":\"0\",\"note\":null,\"qty_pro\":10000,\"act\":0,\"total\":0}', 0, NULL, '59625437.5', 134, NULL, 1, 1, 'print', '2024-02-29 10:26:51', '2024-03-05 21:59:17', 4);
 INSERT INTO `papers` VALUES (269, 'DH-00000027AA', 'TÚI HOA QUẢ SỐ 5 - Mã A', 15000, 2, NULL, 7550, 200, 0, 7750, '{\"materal\":\"13\",\"qttv\":\"300\",\"length\":\"65\",\"width\":\"94.5\",\"materal_price\":0.00195,\"supp_qty\":7750,\"act\":1,\"total\":27848559.375}', '{\"type\":\"1\",\"color\":\"4\",\"machine\":\"1\",\"note\":null,\"supp_qty\":6550,\"handle_qty\":0,\"model_price\":123600,\"work_price\":80,\"shape_price\":220000,\"printer\":5,\"act\":2,\"total\":3470400}', '{\"materal\":\"8\",\"face\":\"1\",\"machine\":\"46\",\"note\":null,\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":7650,\"handle_qty\":0,\"materal_price\":0.23,\"act\":2,\"total\":10857728.75}', '{\"act\":0}', '{\"price\":\"0\",\"shape_price\":\"0\",\"machine\":null,\"note\":null,\"qty_pro\":15150,\"handle_qty\":7500,\"nqty\":2,\"act\":0,\"total\":0}', '{\"act\":0}', '{\"ext_price\":\"0\",\"machine\":\"69\",\"note\":null,\"model_price\":150,\"work_price\":150,\"shape_price\":100000,\"supp_qty\":7650,\"handle_qty\":7500,\"cost\":2168875,\"act\":1,\"total\":2168875}', NULL, '{\"act\":0}', NULL, NULL, NULL, '{\"machine\":\"51\",\"note\":null,\"model_price\":0,\"work_price\":2000,\"shape_price\":100000,\"qty_pro\":15150,\"handle_qty\":15000,\"act\":1,\"total\":30400000}', 3, '{\"temp_price\":\"0\",\"prescript_price\":\"0\",\"supp_price\":\"0\",\"note\":null,\"qty_pro\":15000,\"act\":0,\"total\":0}', 0, NULL, '74745563.125', 135, NULL, 1, 1, 'print', '2024-02-29 10:26:06', '2024-03-01 14:32:10', 4);
 INSERT INTO `papers` VALUES (270, 'DH-00000026AA', 'TÚI HOA QUẢ SỐ 5 - Mã B', 5000, 1, NULL, 5050, 150, 0, 5200, '{\"materal\":\"13\",\"qttv\":\"300\",\"length\":\"65\",\"width\":\"94.5\",\"materal_price\":0.00195,\"supp_qty\":5200,\"act\":1,\"total\":18685485}', '{\"type\":\"1\",\"color\":\"4\",\"machine\":\"1\",\"note\":null,\"supp_qty\":4050,\"handle_qty\":0,\"model_price\":123600,\"work_price\":80,\"shape_price\":220000,\"printer\":5,\"act\":2,\"total\":2670400}', '{\"materal\":\"8\",\"face\":\"1\",\"machine\":\"46\",\"note\":null,\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":5100,\"handle_qty\":5000,\"materal_price\":0.23,\"act\":1,\"total\":7255152.5}', '{\"act\":0}', '{\"price\":\"0\",\"shape_price\":\"0\",\"machine\":null,\"note\":null,\"qty_pro\":5050,\"handle_qty\":5000,\"nqty\":1,\"act\":0,\"total\":0}', '{\"act\":0}', '{\"ext_price\":\"0\",\"machine\":\"69\",\"note\":null,\"model_price\":150,\"work_price\":150,\"shape_price\":100000,\"supp_qty\":5100,\"handle_qty\":5000,\"cost\":1786375,\"act\":1,\"total\":1786375}', NULL, '{\"act\":0}', NULL, NULL, NULL, '{\"machine\":\"51\",\"note\":null,\"model_price\":0,\"work_price\":1700,\"shape_price\":100000,\"qty_pro\":5050,\"handle_qty\":5000,\"act\":1,\"total\":8685000}', 3, '{\"temp_price\":\"0\",\"prescript_price\":\"0\",\"supp_price\":\"0\",\"note\":null,\"qty_pro\":5000,\"act\":0,\"total\":0}', 0, NULL, '39082412.5', 136, NULL, 1, 1, 'print', '2024-02-21 17:49:09', '2024-03-05 22:06:31', 1);
@@ -3177,6 +3183,39 @@ INSERT INTO `papers` VALUES (355, NULL, 'Bộ (hộp+toa) Hồng nhan phấn/ qu
 INSERT INTO `papers` VALUES (356, NULL, 'Bộ (hộp+toa) Hồng nhan phấn/ quai xách ( KHAY GIẤY ĐỊNH HÌNH )', 2000, 2, 0, 1050, 70, 0, 1120, '{\"materal\":\"13\",\"qttv\":\"350\",\"length\":\"39\",\"width\":\"54\",\"materal_price\":0.00195,\"supp_qty\":1120,\"act\":1,\"total\":1609826.4}', '{\"type\":\"1\",\"color\":\"4\",\"machine\":\"1\",\"note\":null,\"supp_qty\":50,\"handle_qty\":1000,\"model_price\":66000,\"work_price\":32,\"shape_price\":100000,\"printer\":2,\"act\":1,\"total\":670400}', '{\"materal\":\"9\",\"face\":\"1\",\"machine\":\"8\",\"note\":null,\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":1020,\"handle_qty\":1000,\"materal_price\":0.25,\"act\":1,\"total\":587030}', '{\"act\":0}', '{\"price\":\"0\",\"shape_price\":\"0\",\"machine\":null,\"note\":null,\"qty_pro\":2020,\"handle_qty\":1000,\"nqty\":2,\"act\":0,\"total\":0}', '{\"act\":0}', '{\"ext_price\":\"0\",\"machine\":\"4\",\"note\":null,\"model_price\":150,\"work_price\":150,\"shape_price\":100000,\"supp_qty\":1020,\"handle_qty\":1000,\"cost\":568900,\"act\":1,\"total\":568900}', NULL, '{\"act\":0}', NULL, NULL, '{\"act\":0}', NULL, 2, '{\"temp_price\":\"0\",\"prescript_price\":\"0\",\"supp_price\":\"0\",\"note\":null,\"qty_pro\":2000,\"act\":0,\"total\":0}', 0, NULL, '3436156.4', 167, NULL, 0, 1, NULL, '2024-03-01 14:12:25', '2024-03-01 14:12:25', 4);
 INSERT INTO `papers` VALUES (357, NULL, 'Bộ (hộp toa) Bibo mena Q7chai xịt', 3000, 2, NULL, 1550, 80, 0, 1630, '{\"materal\":\"12\",\"qttv\":\"120\",\"length\":\"43\",\"width\":\"49\",\"materal_price\":0.00213,\"supp_qty\":1630,\"act\":1,\"total\":877835.196}', '{\"type\":\"0\",\"color\":\"4\",\"machine\":\"0\",\"note\":null,\"supp_qty\":550,\"handle_qty\":1500,\"model_price\":0,\"work_price\":0,\"shape_price\":0,\"printer\":0,\"act\":0,\"total\":0}', '{\"materal\":\"9\",\"face\":\"1\",\"machine\":\"8\",\"note\":null,\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"supp_qty\":1530,\"handle_qty\":1500,\"materal_price\":0.25,\"act\":1,\"total\":855927.5}', '{\"act\":0}', '{\"price\":\"300\",\"shape_price\":\"100000\",\"machine\":\"2\",\"note\":null,\"qty_pro\":3030,\"handle_qty\":1500,\"nqty\":2,\"act\":1,\"total\":1109000}', '{\"act\":0}', '{\"ext_price\":\"0\",\"machine\":\"4\",\"note\":null,\"model_price\":150,\"work_price\":150,\"shape_price\":100000,\"supp_qty\":1530,\"handle_qty\":1500,\"cost\":645550,\"act\":1,\"total\":645550}', '{\"price\":\"0\",\"shape_price\":\"0\",\"machine\":null,\"note\":null,\"qty_pro\":3030,\"handle_qty\":1500,\"nqty\":2,\"act\":0,\"total\":0}', '{\"machine\":\"12\",\"nqty\":2,\"note\":null,\"model_price\":0,\"work_price\":10,\"shape_price\":30000,\"qty_pro\":3030,\"handle_qty\":3000,\"act\":1,\"total\":90600}', NULL, NULL, NULL, NULL, 1, '{\"temp_price\":\"0\",\"prescript_price\":\"0\",\"supp_price\":\"0\",\"note\":null,\"qty_pro\":3000,\"act\":0,\"total\":0}', 0, NULL, '3578912.696', 169, NULL, 1, 1, NULL, '2024-02-29 14:55:54', '2024-02-29 14:55:54', 10);
 INSERT INTO `papers` VALUES (358, NULL, 'TEM MADE IN VIET NAM', 300004, 336, NULL, 943, 68, 0, 1011, '{\"materal\":\"34\",\"qttv\":\"120\",\"length\":\"22\",\"width\":\"39\",\"materal_price\":0.0033,\"supp_qty\":1011,\"act\":1,\"total\":343505.448}', '{\"type\":\"1\",\"color\":\"1\",\"machine\":\"3\",\"note\":\"IN LABEL T\\u1ea0I NH\\u00c0 H\\u1ed2NG\",\"supp_qty\":-57,\"handle_qty\":893,\"model_price\":0,\"work_price\":0,\"shape_price\":0,\"printer\":0,\"act\":0,\"total\":0}', '{\"act\":0}', NULL, '{\"price\":\"0\",\"shape_price\":\"0\",\"machine\":null,\"note\":null,\"qty_pro\":303005,\"handle_qty\":893,\"nqty\":336,\"act\":0,\"total\":0}', NULL, '{\"ext_price\":\"0\",\"machine\":\"4\",\"note\":null,\"model_price\":150,\"work_price\":150,\"shape_price\":100000,\"supp_qty\":911,\"handle_qty\":893,\"cost\":365350,\"act\":1,\"total\":365350}', NULL, NULL, '{\"act\":0}', NULL, NULL, NULL, 4, '{\"temp_price\":\"0\",\"prescript_price\":\"0\",\"supp_price\":\"0\",\"note\":null,\"qty_pro\":300004,\"act\":0,\"total\":0}', 0, NULL, '708855.448', 170, NULL, 1, 1, NULL, '2024-02-29 15:27:57', '2024-02-29 15:27:57', 1);
+
+-- ----------------------------
+-- Table structure for partners
+-- ----------------------------
+DROP TABLE IF EXISTS `partners`;
+CREATE TABLE `partners`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `contacter` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `manager` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `telephone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `city` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `tax_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `type` tinyint(4) NULL DEFAULT NULL,
+  `act` int(11) NULL DEFAULT NULL,
+  `created_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `created_by` int(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `name_index`(`name`) USING BTREE,
+  INDEX `infor_index`(`address`, `email`, `phone`) USING BTREE,
+  INDEX `conttacter_index`(`contacter`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of partners
+-- ----------------------------
+INSERT INTO `partners` VALUES (1, 'DTSX-000001', 'CTY CP IN & SẢN XUẤT BAO BÌ TUẤN DUNG', 'Mr Tuấn', NULL, '0963303999', '02438303888', 'kd1.intuandung@gmail.com', 'Lô D5-16 Cụm Làng Nghề Triều khúc - Tân Triều - HN', '351', NULL, NULL, 1, 1, '2023-09-23 14:34:33', '2024-03-06 23:08:41', 1);
 
 -- ----------------------------
 -- Table structure for print_notes
@@ -3609,7 +3648,7 @@ CREATE TABLE `quotes`  (
   `created_by` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `_index`(`seri`, `name`, `customer_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 197 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 198 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of quotes
@@ -3665,6 +3704,7 @@ INSERT INTO `quotes` VALUES (193, 'BG-00000193', 'not_accepted', 'CÔNG TY TNHH 
 INSERT INTO `quotes` VALUES (194, 'BG-00000195', 'not_accepted', 'CTY TNHH IN & SẢN XUẤT BAO BÌ NGHỆ AN', NULL, 6, 'CTY TNHH IN & SẢN XUẤT BAO BÌ NGHỆ AN', 'Mr Dũng', 'TP Vinh - Nghệ An', 'zalo', '0912188628', '0912188628', 4230, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2024-03-01 09:39:15', '2024-03-01 09:54:54', 1);
 INSERT INTO `quotes` VALUES (195, 'BG-00000195', 'not_accepted', 'CÔNG TY DỆT MAY THÀNH VƯỢNG', NULL, 3, 'CÔNG TY DỆT MAY THÀNH VƯỢNG', 'Ms Hằng', 'Hoa sơn - Ứng hòa - Hà nội', 'zalo', '0979359387', '0979359387', 351, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2024-03-01 11:49:58', '2024-03-01 11:49:58', 1);
 INSERT INTO `quotes` VALUES (196, 'BG-00000196', 'not_accepted', 'CÔNG TY DỆT MAY THÀNH VƯỢNG', NULL, 3, 'CÔNG TY DỆT MAY THÀNH VƯỢNG', 'Ms Hằng', 'Hoa sơn - Ứng hòa - Hà nội', 'zalo', '0979359387', '0979359387', 351, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2024-03-01 15:44:13', '2024-03-01 15:44:13', 1);
+INSERT INTO `quotes` VALUES (197, 'BG-00000197', 'not_accepted', 'CÔNG TY DỆT MAY THÀNH VƯỢNG', NULL, 3, 'CÔNG TY DỆT MAY THÀNH VƯỢNG', 'Ms Hằng', 'Hoa sơn - Ứng hòa - Hà nội', 'zalo', '0979359387', '0979359387', 351, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2024-03-06 20:27:37', '2024-03-06 20:27:37', 23);
 
 -- ----------------------------
 -- Table structure for square_warehouses
@@ -4133,7 +4173,7 @@ CREATE TABLE `w_salaries`  (
   `fill_materal` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `fill_handle` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 106 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 107 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of w_salaries
@@ -4213,7 +4253,7 @@ INSERT INTO `w_salaries` VALUES (90, 'TÚI HOA QUẢ SỐ 5 - Mã C', 'DH-000000
 INSERT INTO `w_salaries` VALUES (91, 'TÚI HOA QUẢ SỐ 4 - Mã A', 'DH-00000030AA', 132, 'papers', 266, '15000', '1', NULL, NULL, '[{\"name\":\"Ch\\u1ea5t li\\u1ec7u c\\u00e1n\",\"value\":\"C\\u00e1n b\\u00f3ng\"},{\"name\":\"S\\u1ed1 m\\u1eb7t c\\u00e1n\",\"value\":\"1\"},{\"name\":\"M\\u00e1y c\\u00e1n\",\"value\":\"M\\u00c1Y C\\u00c1N N\\u01af\\u1edaC ( \\u01b0u ti\\u00ean )\"}]', NULL, 'nilon', 'auto', NULL, 'not_accepted', NULL, 1, NULL, '2024-03-01 14:30:54', '2024-03-01 14:30:54', NULL, NULL, NULL);
 INSERT INTO `w_salaries` VALUES (92, 'TÚI HOA QUẢ SỐ 5 - Mã A', 'DH-00000027AA', 135, 'papers', 269, '7500', '1', NULL, NULL, '[{\"name\":\"Thi\\u1ebft b\\u1ecb m\\u00e1y\",\"value\":\"T\\u1ef0 \\u0110\\u1ed8NG\"}]', NULL, 'elevate', 'auto', NULL, 'not_accepted', NULL, 1, NULL, '2024-03-01 14:32:10', '2024-03-01 14:32:10', NULL, NULL, NULL);
 INSERT INTO `w_salaries` VALUES (93, 'TÚI HOA QUẢ SỐ 5 - Mã B', 'DH-00000026AA', 136, 'papers', 270, '5000', '1', '30', '40000', '[{\"name\":\"ki\\u1ec3u in\",\"value\":\"In 1 m\\u1eb7t\"},{\"name\":\"m\\u00e0u in\",\"value\":4},{\"name\":\"C\\u00f4ng ngh\\u1ec7 in\",\"value\":\"In offset\"}]', '620000', 'print', '1', 10, 'submited', NULL, 1, '2024-03-05 22:06:31', '2024-03-01 14:47:57', '2024-03-05 22:06:31', 6, NULL, NULL);
-INSERT INTO `w_salaries` VALUES (94, 'TÚI HOA QUẢ SỐ 4 - Mã B', 'DH-00000029AA', 133, 'papers', 267, '5000', '1', NULL, NULL, '[{\"name\":\"ki\\u1ec3u in\",\"value\":\"In 1 m\\u1eb7t\"},{\"name\":\"m\\u00e0u in\",\"value\":4},{\"name\":\"C\\u00f4ng ngh\\u1ec7 in\",\"value\":\"In offset\"}]', NULL, 'print', '1', NULL, 'not_accepted', NULL, 1, NULL, '2024-03-01 14:48:01', '2024-03-01 14:48:01', 6, NULL, NULL);
+INSERT INTO `w_salaries` VALUES (94, 'TÚI HOA QUẢ SỐ 4 - Mã B', 'DH-00000029AA', 133, 'papers', 267, '5000', '1', '30', '40000', '[{\"name\":\"ki\\u1ec3u in\",\"value\":\"In 1 m\\u1eb7t\"},{\"name\":\"m\\u00e0u in\",\"value\":4},{\"name\":\"C\\u00f4ng ngh\\u1ec7 in\",\"value\":\"In offset\"}]', '620000', 'print', '1', 10, 'submited', NULL, 1, '2024-03-05 22:21:07', '2024-03-01 14:48:01', '2024-03-05 22:21:07', 6, NULL, NULL);
 INSERT INTO `w_salaries` VALUES (95, 'TÚI HOA QUẢ SỐ 3 - Mã A', 'DH-00000033AA', 129, 'papers', 263, '15000', '1', NULL, NULL, '[{\"name\":\"ki\\u1ec3u in\",\"value\":\"In 1 m\\u1eb7t\"},{\"name\":\"m\\u00e0u in\",\"value\":4},{\"name\":\"C\\u00f4ng ngh\\u1ec7 in\",\"value\":\"In offset\"}]', NULL, 'print', '1', NULL, 'not_accepted', NULL, 1, NULL, '2024-03-01 14:48:05', '2024-03-01 14:48:05', 6, NULL, NULL);
 INSERT INTO `w_salaries` VALUES (96, 'TÚI HOA QUẢ CHỮ A - ( Mã A-03 )', 'DH-00000034AA', 128, 'papers', 262, '10000', '1', NULL, NULL, '[{\"name\":\"ki\\u1ec3u in\",\"value\":\"In 1 m\\u1eb7t\"},{\"name\":\"m\\u00e0u in\",\"value\":4},{\"name\":\"C\\u00f4ng ngh\\u1ec7 in\",\"value\":\"In offset\"}]', NULL, 'print', '1', NULL, 'not_accepted', NULL, 1, NULL, '2024-03-01 14:48:09', '2024-03-01 14:48:09', 6, NULL, NULL);
 INSERT INTO `w_salaries` VALUES (97, 'TÚI HOA QUẢ CHỮ A - Mã A 01', 'DH-00000036AA', 126, 'papers', 260, '15000', '1', NULL, NULL, '[{\"name\":\"ki\\u1ec3u in\",\"value\":\"In 1 m\\u1eb7t\"},{\"name\":\"m\\u00e0u in\",\"value\":4},{\"name\":\"C\\u00f4ng ngh\\u1ec7 in\",\"value\":\"In offset\"}]', NULL, 'print', '1', NULL, 'not_accepted', NULL, 1, NULL, '2024-03-01 14:54:05', '2024-03-01 14:54:05', 6, NULL, NULL);
@@ -4225,6 +4265,7 @@ INSERT INTO `w_salaries` VALUES (102, 'TÚI HOA QUẢ SỐ 3 - Mã C', 'DH-00000
 INSERT INTO `w_salaries` VALUES (103, 'TÚI HOA QUẢ SỐ 4 - Mã C', 'DH-00000028AA', 134, 'papers', 268, '10000', '1', NULL, NULL, '[{\"name\":\"Ch\\u1ea5t li\\u1ec7u c\\u00e1n\",\"value\":\"C\\u00e1n m\\u1edd\"},{\"name\":\"S\\u1ed1 m\\u1eb7t c\\u00e1n\",\"value\":\"1\"},{\"name\":\"M\\u00e1y c\\u00e1n\",\"value\":\"M\\u00c1Y C\\u00c1N N\\u01af\\u1edaC ( \\u01b0u ti\\u00ean )\"}]', NULL, 'nilon', 'auto', NULL, 'not_accepted', NULL, 1, NULL, '2024-03-05 21:59:17', '2024-03-05 21:59:17', 6, NULL, NULL);
 INSERT INTO `w_salaries` VALUES (104, 'TÚI HOA QUẢ SỐ 3 - Mã B', 'DH-00000032AA', 130, 'papers', 264, '5000', '1', NULL, NULL, '[{\"name\":\"Ch\\u1ea5t li\\u1ec7u c\\u00e1n\",\"value\":\"C\\u00e1n b\\u00f3ng\"},{\"name\":\"S\\u1ed1 m\\u1eb7t c\\u00e1n\",\"value\":\"1\"},{\"name\":\"M\\u00e1y c\\u00e1n\",\"value\":\"M\\u00c1Y C\\u00c1N N\\u01af\\u1edaC ( \\u01b0u ti\\u00ean )\"}]', NULL, 'nilon', 'auto', NULL, 'not_accepted', NULL, 1, NULL, '2024-03-05 22:06:11', '2024-03-05 22:06:11', 6, NULL, NULL);
 INSERT INTO `w_salaries` VALUES (105, 'TÚI HOA QUẢ SỐ 5 - Mã B', 'DH-00000026AA', 136, 'papers', 270, '5000', '1', NULL, NULL, '[{\"name\":\"Ch\\u1ea5t li\\u1ec7u c\\u00e1n\",\"value\":\"C\\u00e1n b\\u00f3ng\"},{\"name\":\"S\\u1ed1 m\\u1eb7t c\\u00e1n\",\"value\":\"1\"},{\"name\":\"M\\u00e1y c\\u00e1n\",\"value\":\"M\\u00c1Y C\\u00c1N N\\u01af\\u1edaC ( \\u01b0u ti\\u00ean )\"}]', NULL, 'nilon', 'auto', NULL, 'not_accepted', NULL, 1, NULL, '2024-03-05 22:06:31', '2024-03-05 22:06:31', 6, NULL, NULL);
+INSERT INTO `w_salaries` VALUES (106, 'TÚI HOA QUẢ SỐ 4 - Mã B', 'DH-00000029AA', 133, 'papers', 267, '5000', '1', NULL, NULL, '[{\"name\":\"Ch\\u1ea5t li\\u1ec7u c\\u00e1n\",\"value\":\"C\\u00e1n b\\u00f3ng\"},{\"name\":\"S\\u1ed1 m\\u1eb7t c\\u00e1n\",\"value\":\"1\"},{\"name\":\"M\\u00e1y c\\u00e1n\",\"value\":\"M\\u00c1Y C\\u00c1N N\\u01af\\u1edaC ( \\u01b0u ti\\u00ean )\"}]', NULL, 'nilon', 'auto', NULL, 'not_accepted', NULL, 1, NULL, '2024-03-05 22:21:07', '2024-03-05 22:21:07', 6, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for w_users
