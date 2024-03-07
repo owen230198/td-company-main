@@ -196,18 +196,12 @@ class QuoteController extends Controller
         $cate = $request->input('category');
         if (!empty($cate)) {
             $data['pro_index'] = (int) $request->input('proindex');
-            $arr['name'] = $request->input('paper_name');
+            $arr['name'] = !empty($request->input('paper_name')) ? $request->input('paper_name') : 'Sản phẩm '. $data['pro_index'] + 1;
             $arr['product_qty'] = (int) $request->input('pro_qty');
             $data['cate'] = $cate;
             $data['elements'] = isHardBox($cate) ? TDConstant::HARD_ELEMENT : TDConstant::PAPER_ELEMENT;
             foreach ($data['elements'] as $key => $item) {
                 $data['elements'][$key]['data'] = [(object) $arr];
-            }
-            if (empty($arr['name'])) {
-                return returnMessageAjax(100, 'Bạn chưa nhập tên sản phẩm!');
-            }
-            if (empty($arr['product_qty'])) {
-                return returnMessageAjax(100, 'Bạn chưa nhập số lượng sản phẩm!');
             }
             return view('quotes.products.structure', $data);
         }
@@ -339,6 +333,20 @@ class QuoteController extends Controller
             $obj->where('product_style', $style);
         }
         return view('quotes.products.suggest_product_submited', ['list_data' => $obj->get()->take(5)]);
+    }
+    
+    public function getViewMadeByProduct(Request $request)
+    {
+        $made_by = (int) $request->input('made_by');
+        $pro_index = $request->input('pro_index');
+        if (empty($made_by)) {
+            return '';
+        }
+        if ($made_by == \TDConst::MADE_BY_OWN) {
+            return view('products.made_by_own',['pro_index' => $pro_index]);
+        }else{
+            return view('products.made_by_partner',['pro_index' => $pro_index]); 
+        }
     }
 }
 

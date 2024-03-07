@@ -300,6 +300,10 @@
         const ORDER_ACTION_FLOW = 2;
         const ORDER_APLLY_FLOW = 3;
         const ORDER_DESIGN_FLOW = 4;
+        
+        //ĐƠn vị sản xuất sản phẩm
+        const MADE_BY_OWN = 1;
+        const MADE_BY_PARTNER = 2;
     }
     
 ?>

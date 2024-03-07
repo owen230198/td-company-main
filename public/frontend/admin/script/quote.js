@@ -362,6 +362,32 @@ var suggestShapeFileBySize = function()
   }); 
 }
 
+var selectProductMadeBy = function()
+{
+  $(document).on('change', 'select.__select_pro_made_by', function(event){
+    event.preventDefault();
+    let parent = $(this).closest('.base_product_config')
+    let ajax_made_by_content = parent.find('.ajax_made_by_content');
+    let made_by = $(this).val();
+    if (empty(made_by)) {
+      $('.ajax_product_view_by_category').html('');
+    }
+    ajaxViewTarget('get-view-made-by-product?made_by=' + made_by + '&pro_index=' + $(this).attr('pro_index'), ajax_made_by_content, ajax_made_by_content);
+  })
+}
+
+var moduleMadeByPartnerPrice = function(){
+  $(document).on('change keyup', 'input.__input_module_made_by_partner', function(event){
+    event.preventDefault();
+    let parent = $(this).closest('.base_product_config');
+    let qty = parseInt(parent.find('input.input_pro_qty').val());
+    let made_by_partner_module = parent.find('.made_by_partner_module');
+    let price = parseInt(made_by_partner_module.find('input.input_pro_price').val());
+    console.log(price, qty);
+    made_by_partner_module.find('input.input_pro_total_amount').val(price * qty);
+  })
+}
+
 $(function(){
 	changQtyInput();
   moduleSelectOtherPaper();
@@ -382,4 +408,6 @@ $(function(){
   hoverDetailSupplyCost();
   modulePaperExceptHandle();
   suggestShapeFileBySize();
+  selectProductMadeBy();
+  moduleMadeByPartnerPrice();
 });
