@@ -63,11 +63,12 @@ class OrderService extends BaseService
     public function handleProductAfter($data, $order)
     {
         foreach ($data as $key => $product) {
-            $data_update['code'] =  $order['code'].getCharaterByNum($key);
-            $data_update['status'] = $order['status'];
+            $is_made_own = @$product['made_by'] == \TDConst::MADE_BY_OWN;
+            $data_update['code'] =  $is_made_own ? $order['code'].getCharaterByNum($key) : '';
+            $data_update['status'] = $is_made_own ? $order['status'] : \StatusConst::LAST_SUBMITED;
             $data_update['order'] = $order['id'];
             $data_update['order_created'] = 1;
-            Product::where('id', $product['id'])->update($data_update);   
+            Product::where('id', $product['id'])->update($data_update);  
         }  
     }
 

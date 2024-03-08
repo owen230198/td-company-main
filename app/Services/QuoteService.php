@@ -84,11 +84,9 @@ class QuoteService extends BaseService
                     if (NGroupUser::isSale() && empty($data['custom_design_file']) && $data['design'] == 5) {
                         return returnMessageAjax(100, 'Bạn chưa upload file thiết kế của khách hàng cho sản phẩm '. $data['name']);
                     }
-                    
                     if (NGroupUser::isTechApply() && empty($data['tech_shape_file'])) {
                         return returnMessageAjax(100, 'Bạn chưa upload file sản xuất giá cho sản phẩm '. $data['name']);
                     }
-    
                     if (NGroupUser::isDesign()) {
                         if (empty($data['design_file'])) {
                             return returnMessageAjax(100, 'Bạn chưa upload file thiết kế cho sản phẩm '. $data['name']);
@@ -102,7 +100,7 @@ class QuoteService extends BaseService
                     }
                 }
             }else{
-                if ($data['price'] == '') {
+                if ($data['total_amount'] == '') {
                     return returnMessageAjax(100, 'Bạn chưa nhập đơn giá cho sản phẩm '. $data['name']);
                 }
             }
@@ -222,11 +220,11 @@ class QuoteService extends BaseService
                 break;
             }else{
                 if (@$product['made_by'] == \TDConst::MADE_BY_OWN) {
-                    $process = $this->processSupply($product_process, $product);
+                    $this->processSupply($product_process, $product);
                 }
             }
         }
-        if (!empty($process) && !empty($arr_quote)) {
+        if (!empty($arr_quote)) {
             if ($step == TDConstant::QUOTE_FLOW) {
                 RefreshQuotePrice($arr_quote);
             }else{

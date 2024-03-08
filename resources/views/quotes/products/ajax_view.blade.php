@@ -9,7 +9,7 @@
                 </div>
                 @if (!empty($product['id']))
                     <input type="hidden" name="product[{{ $pro_index }}][id]" value="{{ $product['id'] }}">
-                    @if (empty($not_detail))
+                    @if (empty($not_detail) &&  @$product['made_by'] == \TDConst::MADE_BY_OWN)
                         <div class="text-center">
                             <button type="button" 
                             class="main_button color_white bg_green border_green radius_5 font_bold smooth show_config_handle_quote"

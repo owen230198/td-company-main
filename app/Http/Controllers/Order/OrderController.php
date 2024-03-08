@@ -89,13 +89,18 @@
 
         public function applyToDesign($data, $arr_order, $base_order_id, $quote_id)
         {
-            if (\GroupUser::isTechApply()) {
+            if (\GroupUser::isTechApply() || \GroupUser::isAdmin()) {
                 if (@$arr_order->status != \StatusConst::NOT_ACCEPTED) {
                     return returnMessageAjax(100, 'Lỗi không xác định !');
                 }
                 
                 $arr_quote = Quote::find($quote_id);
                 $product_process = $this->quote_services->processDataProduct($data, $arr_quote, \TDConst::ORDER_ACTION_FLOW);
+                if (@$arr_quote['profit'] < getDataConfig('QuoteConfig', 'QUOTE_PERCENT', 0)) {
+                    if (!\GroupUser::isAdmin()) {
+                        return returnMessageAjax(100, 'Lợi nhuận cho đơn hàng này là '.(int) $arr_quote['profit'].'%, Vui lòng liên hệ Admin cấp cao để được duyệt đơn !');
+                    }
+                }
                 if (!empty($product_process['code']) && $product_process['code'] == 100) {
                     return returnMessageAjax(100, $product_process['message']);  
                 }

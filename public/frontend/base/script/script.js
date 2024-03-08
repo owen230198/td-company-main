@@ -48,7 +48,6 @@ var ajaxBaseCall = function(param)
 				}
 			});
 		}else{
-			console.log(data);
 			if (data.url == RELOAD) {
 				window.location.reload();	
 			}else if(data.url == CLOSE_POPUP){
