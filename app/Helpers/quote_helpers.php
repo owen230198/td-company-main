@@ -60,13 +60,13 @@
 					$total_cost = $product->total_cost;
 				}
 				$update_product['total_cost'] = $total_cost;
-				$get_perc = (float) $total_cost;
+				$get_perc = (float) $total_cost + (float) @$arr_quote['ship_price'];
 				$update_product['total_amount'] = (float) @$arr_quote['profit'] > 0 ? (string) calValuePercentPlus($total_cost, $get_perc,  @$arr_quote['profit']) : $get_perc;
 				\DB::table('products')->where('id', $product->id)->update($update_product);
 				$ret['total_cost'] += $update_product['total_cost'];
 				$ret['total_amount'] += $update_product['total_amount']; 
 			}
-			$ret['total_amount'] = $ret['total_amount'] +  (float) @$arr_quote['ship_price'];
+			$ret['total_amount'] = $ret['total_amount'];
 			return !empty($get) && !empty($ret[$get]) ? $ret[$get] : $ret;
 		}
 	}
