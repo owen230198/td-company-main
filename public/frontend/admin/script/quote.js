@@ -383,7 +383,6 @@ var moduleMadeByPartnerPrice = function(){
     let qty = parseInt(parent.find('input.input_pro_qty').val());
     let made_by_partner_module = parent.find('.made_by_partner_module');
     let price = parseInt(made_by_partner_module.find('input.input_pro_price').val());
-    console.log(price, qty);
     made_by_partner_module.find('input.input_pro_total_amount').val(price * qty);
   })
 }
