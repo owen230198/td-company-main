@@ -61,7 +61,7 @@
 				}
 				$update_product['total_cost'] = $total_cost;
 				$get_perc = (float) $total_cost + (float) @$arr_quote['ship_price'];
-				$update_product['total_amount'] = (float) @$arr_quote['profit'] > 0 ? (string) calValuePercentPlus($total_cost, $get_perc,  @$arr_quote['profit']) : $get_perc;
+				$update_product['total_amount'] = (float) @$arr_quote['profit'] > 0 ? (string) ($get_perc * ((100 + (float) @$arr_quote['profit'])/100)) : $get_perc;
 				\DB::table('products')->where('id', $product->id)->update($update_product);
 				$ret['total_cost'] += $update_product['total_cost'];
 				$ret['total_amount'] += $update_product['total_amount']; 
@@ -94,10 +94,8 @@
 			$update_quote['total_cost'] = getProductTotalCost($arr_quote,'total_cost');
 			$quote_total = $update_quote['total_cost'];
 			$quote_amount = (float) @$arr_quote['total_amount'];
-			if ($quote_total > 0) {
-				$update_quote['profit'] = (($quote_amount - ($quote_total + (float) @$arr_quote['ship_price'])) * 100) /  $quote_total;
-				\DB::table('quotes')->where('id', $arr_quote['id'])->update($update_quote);
-			}
+			$update_quote['profit'] = (($quote_amount - ($quote_total + (float) @$arr_quote['ship_price'])) * 100) - 100;
+			\DB::table('quotes')->where('id', $arr_quote['id'])->update($update_quote);
 		}
 	}
 
