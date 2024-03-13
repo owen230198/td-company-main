@@ -333,7 +333,7 @@ class AdminController extends Controller
     public function getDataJsonLinking(Request $request)
     {
         $table = $request->input('table');
-        $where = $request->except('table', 'q', 'field_search', 'except_linking', 'except_value');
+        $where = $request->except('table', 'q', 'field_search', 'except_linking', 'except_value', 'field_value');
         if (Schema::hasColumn($table, 'act')) {
             $where['act'] = 1;
         }
@@ -361,9 +361,10 @@ class AdminController extends Controller
             $data = $data->orderBy('ord', 'asc');
         }
         $data = $data->paginate(50)->all();
-        $arr = array_map(function($item) use($label, $model){
+        $field_value = !empty($request->input('field_value')) ? $request->input('field_value') : 'id';
+        $arr = array_map(function($item) use($label, $model, $field_value){
             $item_label = method_exists($model, 'getLabelLinking') ? $model::getLabelLinking($item) : getlabelLinking($item, $label, true);
-            return ['id' => @$item->id, 'label' => $item_label];
+            return ['id' => @$item->{$field_value}, 'label' => $item_label];
         }, $data);
         return json_encode($arr);
     }

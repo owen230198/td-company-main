@@ -9,7 +9,7 @@
 
 @if (@$select_config['search'] == 1)
     @php
-        $url = asset('get-data-json-linking?table='.$table_linking.'&field_search='.$field_title.'&except_linking='.$except_linking);
+        $url = asset('get-data-json-linking?table='.$table_linking.'&field_search='.$field_title.'&field_value='.$field_value.'&except_linking='.$except_linking);
         if (!empty($select_data['where'])) {
             foreach ($select_data['where'] as $key => $val) {
                 $url .= '&'.$key.'='.$val;

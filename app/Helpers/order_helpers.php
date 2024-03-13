@@ -204,6 +204,25 @@
         }
     }
 
+    if (!function_exists('getUnitSupply')) {
+        function getUnitSupply($type) {
+            switch ($type) {
+                case in_array($type, [\TDConst::CARTON, \TDConst::RUBBER, \TDConst::STYRO, \TDConst::MICA]):
+                    return 'plate';
+                    break;
+                case in_array($type, [\TDConst::PAPER]):
+                    return 'sheet';
+                    break;
+                case in_array($type, [\TDConst::MAGNET]):
+                    return 'unit';
+                    break;
+                default:
+                    return 'square';
+                    break;
+            }    
+        }
+    }
+
     if (!function_exists('checkUpdateOrderStatus')) {
         function checkUpdateOrderStatus($id, $status)
         {

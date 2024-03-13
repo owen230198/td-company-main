@@ -189,14 +189,20 @@ class DevController extends Controller
     }
 
     public function testData(){
-        $table_salary = 'w_salaries';
-        $handle_materal = [20, 19, 21];
-        $where = ['type' => \TDConst::FILL, 'table_supply' => 'fill_finishes','supply' => 61, 'status' => \StatusConst::SUBMITED];
-        $arr_qty = [];
-        foreach ($handle_materal as $materal_id) {
-            $arr_qty[] = \DB::table($table_salary)->Where($where)->where('fill_materal', $materal_id)->sum('qty');
+        $query = \DB::table('warehouse_histories');
+        $list = $query->get();
+        foreach ($list as $key => $item) {
+            $obj = \DB::table('warehouse_histories')->where(['id' => $item->id]);
+            if (!empty($item->type)) {
+                $data['unit'] = getUnitSupply($item->type);
+                $obj->update($data);
+                dump($item->type, $data['unit']);
+            }else{
+                $remove = $obj->delete();
+                dump('remove', $remove);
+            }
         }
-        dd(collect($arr_qty)->min());
+        dd($data);
     }
 }
 
