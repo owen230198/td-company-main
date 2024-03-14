@@ -469,8 +469,12 @@ class AdminController extends Controller
     
     public function fileDownload(Request $request)
     {
-        $path = $request->input('path');
-        $full_path = getFullPathFileUpload($path);
+        $id = $request->input('id');
+        $file = File::find($id);
+        if (empty($file) || empty($file->path)) {
+            return back()->with('error', 'Không tìm thấy file !');
+        }
+        $full_path = getFullPathFileUpload($file->path);
         if (file_exists($full_path)) {
             return response()->download($full_path);  
         }else{

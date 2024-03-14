@@ -8,7 +8,7 @@
         <p class="fs-13 font_bold __file_name">{{ strlen(@$file['name']) > 18 ? substr(@$file['name'], 0, 18) . '...' : @$file['name'] }}</p>
     </div>
     @if ($file_exists)
-        <a href="{{ url('file-download?path='.@$file['path']) }}" title = "{{ @$file['name'] }}"
+        <a href="{{ url('file-download?id='.@$file['id']) }}" title = "{{ @$file['name'] }}"
         class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-2">
             <i class="fa fa-download mr-2 fs-14" aria-hidden="true"></i>Download
         </a>   
