@@ -33,8 +33,15 @@
                                             }
                                             $data_supply = \DB::table($supply['table'])
                                                 ->where($where)
-                                                ->get()
-                                                ->toArray();
+                                                ->get();
+                                                if ($supply['table'] == 'papers') {
+                                                    $outside_products = \DB::table('products')->where('parent', $product['id'])->get();
+                                                    if ($outside_products->isNotEmpty()) {
+                                                        $data_supply = $data_supply->concat($outside_products)->toArray();
+                                                    }else{
+                                                        $data_supply = $data_supply->toArray();
+                                                    }
+                                                }
                                             if (!empty($supply['device'])) {
                                                 $insert_device = ['size' => 'Vật tư'];
                                                 if ($supply['table'] == 'papers') {

@@ -14,15 +14,6 @@
                 'attr' => ['type_input' => 'number', 'required' => 1, 'inject_class' => 'input_pro_qty __input_module_made_by_partner', 'placeholder' => 'Nhập số lượng'],
                 'value' => @$product['qty']
             ],
-            // [
-            //     'name' => $pro_base_name_input.'[made_by]',
-            //     'note' => 'Đơn vị sản xuất',
-            //     'type' => 'linking',
-            //     'attr' => ['required' => 1, 'inject_class' => '__select_pro_made_by', 'inject_attr' => 'pro_index='.$pro_index],
-            //     'other_data' => ['config' => ['search' => 1], 
-            //         'data' => ['table' => 'partners', 'select' => ['id', 'name', 'type'], 'field_value' => 'type']],
-            //     'value' => @$product['made_by']
-            // ]
         ];
 
         $note_product_field = [

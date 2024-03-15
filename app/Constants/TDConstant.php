@@ -301,9 +301,10 @@
         const ORDER_APLLY_FLOW = 3;
         const ORDER_DESIGN_FLOW = 4;
         
-        //ĐƠn vị sản xuất sản phẩm
+        //Hình thức sản xuất sản phẩm
         const MADE_BY_OWN = 1;
-        const MADE_BY_PARTNER = 2;
+        const JOIN_HANDLE = 2;
+        const MADE_BY_PARTNER = 3;
     }
     
 ?>

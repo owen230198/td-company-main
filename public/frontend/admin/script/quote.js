@@ -6,7 +6,6 @@ var changQtyInput = function(){
     let nqty = parseInt(parent.find('input.pro_nqty_input').val());
     let plus_direct = getEmptyDefault(parent.data('direct'), 0, 'int');
     let double_supp = parseInt(parent.find('input.double_supp_input').val()) == 1 ? 2 : 1;
-    console.log(double_supp);
     let qty_supp = Math.ceil(qty_pro/nqty) * double_supp;
     let compen_percent = parent.data('percent');
     let plus_to_per = getEmptyDefault(parent.data('perplus'), 0, 'float');
@@ -103,7 +102,6 @@ var selectCustomerQuote = function()
       type: 'GET'
     })
     .done(function(html){
-      console.log($(this).parent());
       $('.customer_info_quote').html(html);
       selectAjaxModule($('.customer_info_quote'));
     });
@@ -276,7 +274,6 @@ var calcSizeSupply = function()
     let value = getEmptyDefault($(this).val(), 0, 'float');
     let otm_input = parent.find('input.otm_size_length');
     let nqty = Math.floor(divide/(value+plus));
-    console.log(divide/(value+plus), nqty);
     if (value > 0 && nqty > 0) {
       otm_input.attr('readonly', true);
       otm_input.val(divide/nqty);
@@ -349,7 +346,6 @@ var suggestShapeFileBySize = function()
 {
   $(document).on('change', 'input.__size_suggest_input', function(event){
     event.preventDefault();
-    console.log(1);
     let module = $(this).closest('.config_handle_paper_pro');
     let category = module.find('select.__category_product').val();
     let style = module.find('select.__style_product').val();
@@ -366,24 +362,27 @@ var selectProductMadeBy = function()
 {
   $(document).on('change', 'select.__select_pro_made_by', function(event){
     event.preventDefault();
-    let parent = $(this).closest('.base_product_config')
+    let parent = $(this).closest('.paper_product_config')
     let ajax_made_by_content = parent.find('.ajax_made_by_content');
     let made_by = $(this).val();
     if (empty(made_by)) {
       $('.ajax_product_view_by_category').html('');
     }
-    ajaxViewTarget('get-view-made-by-product?made_by=' + made_by + '&pro_index=' + $(this).attr('pro_index'), ajax_made_by_content, ajax_made_by_content);
+    ajaxViewTarget('get-view-made-by-product?made_by=' + made_by + '&pro_index=' + $(this).attr('pro_index') + '&supp_index=' + $(this).attr('supp_index'), ajax_made_by_content, ajax_made_by_content);
   })
 }
 
 var moduleMadeByPartnerPrice = function(){
   $(document).on('change keyup', 'input.__input_module_made_by_partner', function(event){
     event.preventDefault();
-    let parent = $(this).closest('.base_product_config');
-    let qty = parseInt(parent.find('input.input_pro_qty').val());
+    let parent = $(this).closest('.paper_product_config');
+    let qty = parseInt(parent.find('input.input_paper_qty').val());
     let made_by_partner_module = parent.find('.made_by_partner_module');
-    let price = parseInt(made_by_partner_module.find('input.input_pro_price').val());
-    made_by_partner_module.find('input.input_pro_total_amount').val(price * qty);
+    let price = parseInt(made_by_partner_module.find('input.input_paper_price').val());
+    let total = price * qty;
+    made_by_partner_module.find('input.input_paper_price').val(price);
+    made_by_partner_module.find('input.input_paper_total_cost').val(total);
+    made_by_partner_module.find('input.input_paper_total_amount').val(total);
   })
 }
 

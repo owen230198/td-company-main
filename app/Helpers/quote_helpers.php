@@ -50,7 +50,7 @@
 		{
 			$ret = ['total_cost' => 0, 'total_amount' => 0];
 			foreach ($products as $product) {
-				if ($product->made_by == \TDConst::MADE_BY_OWN) {
+				if (empty($product->parent)) {
 					$pwhere = ['act' => 1, 'product' => $product->id];
 					$paper_total = \DB::table('papers')->select('total_cost')->where($pwhere)->sum('total_cost');
 					$supply_total = \DB::table('supplies')->select('total_cost')->where($pwhere)->sum('total_cost');
@@ -63,8 +63,10 @@
 				$get_perc = (float) $total_cost + (float) @$arr_quote['ship_price'];
 				$update_product['total_amount'] = (float) @$arr_quote['profit'] > 0 ? (string) ($get_perc * ((100 + (float) @$arr_quote['profit'])/100)) : $get_perc;
 				\DB::table('products')->where('id', $product->id)->update($update_product);
-				$ret['total_cost'] += $update_product['total_cost'];
-				$ret['total_amount'] += $update_product['total_amount']; 
+				$outside_products = \DB::table('products')->where('parent', $product->id)->get();
+				$total_outside = getTotalProductByArr($outside_products, $arr_quote);
+				$ret['total_cost'] += $update_product['total_cost'] + $total_outside['total_cost'];
+				$ret['total_amount'] += $update_product['total_amount'] + $total_outside['total_amount']; 
 			}
 			$ret['total_amount'] = $ret['total_amount'];
 			return !empty($get) && !empty($ret[$get]) ? $ret[$get] : $ret;

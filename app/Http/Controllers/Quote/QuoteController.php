@@ -338,14 +338,15 @@ class QuoteController extends Controller
     public function getViewMadeByProduct(Request $request)
     {
         $made_by = (int) $request->input('made_by');
-        $pro_index = $request->input('pro_index');
-        if (empty($made_by)) {
-            return '';
+        $data['pro_index'] = $request->input('pro_index');
+        $data['supp_index'] = $request->input('supp_index');
+        if ($made_by == \TDConst::JOIN_HANDLE) {
+            return view('quotes.products.papers.handle_types.join_handle', $data);
         }
-        if ($made_by == \TDConst::MADE_BY_OWN) {
-            return view('products.made_by_own',['pro_index' => $pro_index]);
+        if ($made_by == \TDConst::MADE_BY_PARTNER) {
+            return view('quotes.products.papers.handle_types.made_by_partner', $data);
         }else{
-            return view('products.made_by_partner',['pro_index' => $pro_index]); 
+            return view('quotes.products.papers.handle_types.own_handle', $data); 
         }
     }
 }

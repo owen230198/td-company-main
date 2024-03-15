@@ -1,4 +1,7 @@
 <?php
+
+use App\Models\Product;
+
     if (!function_exists('getOrderNameStageByKey')) {
         function getOrderNameStageByKey($key)
         {
@@ -45,7 +48,7 @@
                     $where['type'] = $item['pro_field'];
                 }
                 if ($exc_paper && $item['table'] =='papers') {
-                    $where['except_handle'] = 0;
+                    $where['handle_type'] = \TDConst::MADE_BY_OWN;
                 }
                 $data_obj = getModelByTable($item['table'])->where($where)->get();
                 if ($check_magnet && $item['table'] =='fill_finishes') {
@@ -62,7 +65,12 @@
                     if ($clone_data) {
                         configCloneDataElementObj($data_obj, $item['table']);
                     }
-                    $ret[$key]['data'] = $data_obj;
+                    if (!$exc_paper && $item['table'] =='papers') {
+                        $product_outside = \DB::table('products')->where('parent', $id)->get();
+                        $ret[$key]['data'] = $product_outside->isNotEmpty() ? $data_obj->concat($product_outside) : $data_obj;
+                    }else{
+                        $ret[$key]['data'] = $data_obj;
+                    }
                     if ($empty_obj && $data_obj->isEmpty()) {
                         unset($ret[$key]);
                     }

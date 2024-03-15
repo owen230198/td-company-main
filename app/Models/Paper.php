@@ -53,24 +53,35 @@ class Paper extends Model
     {
         $data = $product[$type];
         foreach ($data as $paper) {
-            $data_process = $this->getDataActionPaper($paper);
-            $data_process['name'] = $paper['name'];
-            $data_process['product_qty'] = $paper['qty'];
-            $data_process['nqty'] = $paper['nqty'];
-            $data_process['double'] = $paper['double'];
-            $data_process['base_supp_qty'] = $paper['base_supp_qty'];
-            $data_process['compent_percent'] = $paper['compent_percent'];
-            $data_process['compent_plus'] = $paper['compent_plus'];
-            $data_process['supp_qty'] = $paper['supp_qty'];
-            $data_process['product'] = $product_id;
-            $data_process['main'] = !empty($paper['main']) ? $paper['main'] : 0;
-            $data_process['ext_cate'] = $paper['ext_cate'];
-            (new BaseService)->configBaseDataAction($data_process);
-            if (@$data_process['supp_qty'] > 0) {
+            if (@$paper['handle_type'] == \TDConst::MADE_BY_PARTNER) {
+                $process_product['name'] = $paper['name'];
+                $process_product['qty'] = $paper['qty'];
+                $process_product['made_by'] = @$paper['made_by'];
+                $process_product['total_cost'] = @$paper['total_cost'];
+                $process_product['total_amount'] = @$paper['total_amount'];
+                $process_product['detail'] = @$paper['detail'];
+                $process_product['parent'] = $product_id;
+                (new BaseService)->configBaseDataAction($process_product);
                 if (!empty($paper['id'])) {
-                    $process = $this->where('id', $paper['id'])->update($data_process);   
+                    $process = Product::where('id', $paper['id'])->update($process_product);   
                 }else{
-                    $process = $this->insert($data_process);
+                    $process = Product::insert($process_product);
+                }
+            }else{
+                $data_process = $this->getDataActionPaper($paper);
+                $data_process['name'] = $paper['name'];
+                $data_process['product_qty'] = $paper['qty'];
+                $data_process['product'] = $product_id;
+                $data_process['main'] = !empty($paper['main']) ? $paper['main'] : 0;
+                $data_process['ext_cate'] = @$paper['ext_cate'];
+                $data_process['note'] = @$paper['note'];
+                (new BaseService)->configBaseDataAction($data_process);
+                if (@$paper['supp_qty'] > 0 || @$paper['handle_type'] == \TDConst::JOIN_HANDLE) {
+                    if (!empty($paper['id'])) {
+                        $process = $this->where('id', $paper['id'])->update($data_process);
+                    }else{
+                        $process = $this->insert($data_process);
+                    }
                 }
             }
         }

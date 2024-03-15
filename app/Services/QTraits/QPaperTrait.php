@@ -128,9 +128,16 @@ trait QPaperTrait
             $data_action['size'] = $this->configDataSizePaper($data['size']);
         }
 
-        $except_handle = (int) @$data['except_handle'];
-        $data_action['except_handle'] = $except_handle;
-        if ($except_handle == 0) {
+        $handle_type = (int) @$data['handle_type'];
+        $data_action['handle_type'] = $handle_type;
+        $data_action['note'] = @$data['note'];
+        if ($handle_type == \TDConst::MADE_BY_OWN) {
+            $data_action['nqty'] = $data['nqty'];
+            $data_process['double'] = $data['double'];
+            $data_process['base_supp_qty'] = $data['base_supp_qty'];
+            $data_process['compent_percent'] = $data['compent_percent'];
+            $data_process['compent_plus'] = $data['compent_plus'];
+            $data_process['supp_qty'] = $data['supp_qty'];
             if (!empty($data['print'])) {
                 $data_action['print'] = $this->configDataPrint($data['print']);
             }

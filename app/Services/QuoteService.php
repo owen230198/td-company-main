@@ -204,9 +204,7 @@ class QuoteService extends BaseService
                 return $product_process;
                 break;
             }else{
-                if (@$product['made_by'] == \TDConst::MADE_BY_OWN) {
-                    $this->processSupply($product_process, $product);
-                }
+                $this->processSupply($product_process, $product);
             }
         }
         if (!empty($arr_quote)) {
