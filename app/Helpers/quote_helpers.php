@@ -59,16 +59,18 @@
 				}else{
 					$total_cost = $product->total_cost;
 				}
-				$update_product['total_cost'] = $total_cost;
-				$get_perc = (float) $total_cost + (float) @$arr_quote['ship_price'];
-				$update_product['total_amount'] = (float) @$arr_quote['profit'] > 0 ? (string) ($get_perc * ((100 + (float) @$arr_quote['profit'])/100)) : $get_perc;
-				\DB::table('products')->where('id', $product->id)->update($update_product);
 				$outside_products = \DB::table('products')->where('parent', $product->id)->get();
 				$total_outside = getTotalProductByArr($outside_products, $arr_quote);
-				$ret['total_cost'] += $update_product['total_cost'] + $total_outside['total_cost'];
-				$ret['total_amount'] += $update_product['total_amount'] + $total_outside['total_amount']; 
+				$update_product['total_cost'] = $total_cost + $total_outside['total_cost'];
+				$get_perc = (float) $update_product['total_cost'] + (float) @$arr_quote['ship_price'];
+				$update_product['total_amount'] = (float) @$arr_quote['profit'] > 0 ? (string) ($get_perc * ((100 + (float) @$arr_quote['profit'])/100)) : $get_perc;
+				\DB::table('products')->where('id', $product->id)->update($update_product);
+				$ret['total_cost'] += $update_product['total_cost'];
+				// $ret['total_amount'] += $update_product['total_amount']; 
 			}
-			$ret['total_amount'] = $ret['total_amount'];
+			$ret['total_amount'] = (float) @$arr_quote['profit'] > 0 ? 
+			(string) (($ret['total_cost'] + (float) @$arr_quote['ship_price']) * ((100 + (float) @$arr_quote['profit'])/100)) : 
+			$ret['total_cost'] + (float) @$arr_quote['ship_price'];
 			return !empty($get) && !empty($ret[$get]) ? $ret[$get] : $ret;
 		}
 	}
@@ -93,10 +95,10 @@
 	if (!function_exists('refreshQuoteProfit')) {
 		function refreshQuoteProfit($arr_quote)
 		{
-			$update_quote['total_cost'] = getProductTotalCost($arr_quote,'total_cost');
+			$update_quote = getProductTotalCost($arr_quote);
 			$quote_total = $update_quote['total_cost'];
 			$quote_amount = (float) @$arr_quote['total_amount'];
-			$update_quote['profit'] = (($quote_amount / ($quote_total + (float) @$arr_quote['ship_price'])) * 100) - 100;
+			$update_quote['profit'] = ($quote_amount / ($quote_total + (float) @$arr_quote['ship_price']) * 100) - 100;
 			\DB::table('quotes')->where('id', $arr_quote['id'])->update($update_quote);
 		}
 	}

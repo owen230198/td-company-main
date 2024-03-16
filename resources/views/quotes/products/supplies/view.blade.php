@@ -1,6 +1,6 @@
 <div class="module_quote_supp_config">
     <div class="list_supp_item">
-        @if (!empty($data_supply) && $data_supply->isNotEmpty())
+        @if (!empty($data_supply))
             @foreach ($data_supply as $supp_index => $supply)
                 @php
                     $supply->size = !empty($supply->size) ? json_decode($supply->size, true) : [];
