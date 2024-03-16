@@ -211,10 +211,10 @@ class DevController extends Controller
         $list = $query->get();
         foreach ($list as $key => $item) {
             $obj = \DB::table('papers')->where(['id' => $item->id]);
-            if (!empty($item->handle_type)) {
+            if (empty($item->handle_type)) {
                 $data['handle_type'] = 1;
                 $obj->update($data);
-                dump($item->type, $data['handle_type']);
+                dump($data['handle_type']);
             }
         }
         dd($data);
