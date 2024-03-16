@@ -131,7 +131,13 @@
                 \GroupUser::TECH_APPLY => [
                     'view' => 
                         [
-                            'with' => ['key' => 'status', 'value' => Order::NOT_ACCEPTED],
+                            'with' => [
+                                'type' => 'group',
+                                'query' => [
+                                    ['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED],
+                                    ['con' => 'or', 'key' => 'order_created', 'value' => 1]
+                                ]
+                            ],
                         ],
                     'update' => 
                         [
