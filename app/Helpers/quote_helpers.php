@@ -96,7 +96,7 @@
 			$update_quote['total_cost'] = getProductTotalCost($arr_quote,'total_cost');
 			$quote_total = $update_quote['total_cost'];
 			$quote_amount = (float) @$arr_quote['total_amount'];
-			$update_quote['profit'] = (($quote_amount - ($quote_total + (float) @$arr_quote['ship_price'])) * 100) - 100;
+			$update_quote['profit'] = (($quote_amount / ($quote_total + (float) @$arr_quote['ship_price'])) * 100) - 100;
 			\DB::table('quotes')->where('id', $arr_quote['id'])->update($update_quote);
 		}
 	}
