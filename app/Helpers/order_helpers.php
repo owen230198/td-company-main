@@ -42,8 +42,9 @@ use App\Models\Product;
         function getProductElementData($category, $id, $exc_paper = false, $check_magnet = false, $empty_obj = false, $clone_data = false)
         {
             $ret = isHardBox($category) ? \TDConst::HARD_ELEMENT : \TDConst::PAPER_ELEMENT;
-            $where = ['act' => 1, 'product' => $id];
+            $where = [];
             foreach ($ret as $key => $item) {
+                $where = ['act' => 1, 'product' => $id];
                 if ($item['table'] == 'supplies') {
                     $where['type'] = $item['pro_field'];
                 }
