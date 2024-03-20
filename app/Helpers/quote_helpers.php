@@ -91,6 +91,7 @@
 	if (!function_exists('RefreshQuotePrice')) {
 		function RefreshQuotePrice($arr_quote){
 			$update_quote = getProductTotalCost($arr_quote);
+			unset($update_quote['factor']);
 			\DB::table('quotes')->where('id', $arr_quote['id'])->update($update_quote);
 		}
 	}
