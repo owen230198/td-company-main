@@ -253,7 +253,7 @@
                         'config' => ['search' => 1, 'multiple' => 1], 
                         'data' => [
                             'table' => 'papers', 
-                            'where' => []
+                            'where' => ['handle_type' => \TDConst::JOIN_HANDLE, 'status' => null]
                         ]
                     ]
                 ],
