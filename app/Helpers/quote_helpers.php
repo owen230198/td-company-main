@@ -105,7 +105,7 @@
 			$total_cost = $quote_total['total_cost'];
 			$factor = (float) $quote_total['factor'];
 			$update_quote['total_cost'] = $total_cost;
-			$update_quote['profit'] = ($quote_amount / ($total_cost + ($ship_price * $factor)) * 100) - 100;
+			$update_quote['profit'] = ($quote_total['total_amount'] / ($total_cost + ($ship_price * $factor)) * 100) - 100;
 			\DB::table('quotes')->where('id', $arr_quote['id'])->update($update_quote);
 		}
 	}
