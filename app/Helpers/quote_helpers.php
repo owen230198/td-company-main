@@ -49,6 +49,7 @@
 		function getTotalProductByArr($products, $arr_quote = [], $get = '')
 		{
 			$ret = ['total_cost' => 0, 'total_amount' => 0];
+			$factor = 0;
 			foreach ($products as $product) {
 				if (empty($product->parent)) {
 					$pwhere = ['act' => 1, 'product' => $product->id];
@@ -66,11 +67,13 @@
 				$update_product['total_amount'] = (float) @$arr_quote['profit'] > 0 ? (string) ($get_perc * ((100 + (float) @$arr_quote['profit'])/100)) : $get_perc;
 				\DB::table('products')->where('id', $product->id)->update($update_product);
 				$ret['total_cost'] += $update_product['total_cost'];
-				// $ret['total_amount'] += $update_product['total_amount']; 
+				$factor ++;
+				$ret['total_amount'] += $update_product['total_amount']; 
 			}
-			$ret['total_amount'] = (float) @$arr_quote['profit'] > 0 ? 
-			(string) (($ret['total_cost'] + (float) @$arr_quote['ship_price']) * ((100 + (float) @$arr_quote['profit'])/100)) : 
-			$ret['total_cost'] + (float) @$arr_quote['ship_price'];
+			// $ret['total_amount'] = (float) @$arr_quote['profit'] > 0 ? 
+			// (string) (($ret['total_cost'] + ((float) @$arr_quote['ship_price'] * $factor)) * ((100 + (float) @$arr_quote['profit'])/100)) : 
+			// $ret['total_cost'] + (float) @$arr_quote['ship_price'];
+			$ret['factor'] = $factor;
 			return !empty($get) && !empty($ret[$get]) ? $ret[$get] : $ret;
 		}
 	}
@@ -95,10 +98,13 @@
 	if (!function_exists('refreshQuoteProfit')) {
 		function refreshQuoteProfit($arr_quote)
 		{
-			$update_quote = getProductTotalCost($arr_quote);
-			$quote_total = $update_quote['total_cost'];
+			$quote_total = getProductTotalCost($arr_quote);
 			$quote_amount = (float) @$arr_quote['total_amount'];
-			$update_quote['profit'] = ($quote_amount / ($quote_total + (float) @$arr_quote['ship_price']) * 100) - 100;
+			$ship_price = (float) @$arr_quote['ship_price'];
+			$total_cost = $quote_total['total_cost'];
+			$factor = (float) $quote_total['factor'];
+			$update_quote['total_cost'] = $total_cost;
+			$update_quote['profit'] = ($quote_amount / ($total_cost + ($ship_price * $factor)) * 100) - 100;
 			\DB::table('quotes')->where('id', $arr_quote['id'])->update($update_quote);
 		}
 	}
