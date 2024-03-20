@@ -1,0 +1,1 @@
+<select class="__multiple_select" multiple="multiple" note="{{ @$note }}" url={{ url('get-data-json-linking?table=papers') }}> </select>

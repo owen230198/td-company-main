@@ -1,5 +1,5 @@
 @php
-    $base_qty_field_name = 'product['.$pro_index.']['.$key_supp.']['.$supp_index.']';
+    $base_qty_field_name = @$base_name_input ?? 'product['.$pro_index.']['.$key_supp.']['.$supp_index.']';
     $arr_disable_field = @$arr_disable ?? [];
     $module_fld_supp_qty = [
         [

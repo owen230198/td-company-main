@@ -386,6 +386,26 @@ var moduleMadeByPartnerPrice = function(){
   })
 }
 
+var elevateFloatChangeModule = function()
+{
+  $(document).on("change", ".__elevate_float_checkbox", function (event) {
+    event.preventDefault();
+    let parent = $(this).closest(".__paper_elevate_float_handle");
+    let float_module = parent.find(".__float_base_config");
+    if (float_module.length > 0) {
+      let inputs = float_module.find('input.__config_float_price_input');
+      if ($(this).val() == 1) {
+        float_module.fadeIn();
+      }else{
+        float_module.fadeOut();
+        inputs.each(function(){
+          $(this).val(0);
+        });
+      }
+    }
+  });
+}
+
 $(function(){
 	changQtyInput();
   moduleSelectOtherPaper();
@@ -408,4 +428,5 @@ $(function(){
   suggestShapeFileBySize();
   selectProductMadeBy();
   moduleMadeByPartnerPrice();
+  elevateFloatChangeModule();
 });

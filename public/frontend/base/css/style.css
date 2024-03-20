@@ -343,6 +343,34 @@ input[type=time] {
     width: 330px;
 }
 
+.select2-container--default .select2-selection--multiple .select2-selection__choice{
+    padding: 5px 10px;
+    font-size: 12px;
+    background: #419512;
+    color: #fff;
+    white-space: normal;
+    border: 1px solid #ffffff;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__clear{
+    font-size: 15px;
+    background: #fa5049;
+    color: #ffffff;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove{
+    color: #ffa0a0;
+    font-size: 13px;
+    margin-right: 5px;
+}
+
 .form-control.short_input {
     max-width: 102px;
     min-width: 102px;

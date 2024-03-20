@@ -1,7 +1,7 @@
 @php
     $key_stage = \TDConst::PEEL;
     $paper_nqty_peel = [
-        'name' => 'product['.$pro_index.'][paper]['.$supp_index.']['.$key_stage.'][nqty]',
+        'name' => $paper_hd_base_name.'['.$key_stage.'][nqty]',
         'note' => 'Số bát lề',
         'attr' => ['type_input' => 'number'],
         'value' => @$data_handle['nqty'] ?? 1

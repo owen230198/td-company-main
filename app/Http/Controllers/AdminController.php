@@ -333,7 +333,7 @@ class AdminController extends Controller
     public function getDataJsonLinking(Request $request)
     {
         $table = $request->input('table');
-        $where = $request->except('table', 'q', 'field_search', 'except_linking', 'except_value', 'field_value');
+        $where = $request->except('table', 'q', 'field_search', 'except_linking', 'except_value', 'field_value', '_type');
         if (Schema::hasColumn($table, 'act')) {
             $where['act'] = 1;
         }

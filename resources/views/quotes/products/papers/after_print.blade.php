@@ -4,6 +4,7 @@
     </h3>
 @php
     $cate = !empty($data_paper->ext_cate) ? $data_paper->ext_cate : @$cate;
+    $paper_hd_base_name = @$paper_hd_base_name ?? 'product['.$pro_index.'][paper]['.$supp_index.']';
     $handle_stage =  getAfterPrintStageByCate(@$cate);
 @endphp
     <div class="quote_after_print_tab">

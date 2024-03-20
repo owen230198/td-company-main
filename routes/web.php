@@ -78,6 +78,7 @@ Route::middleware(['check_login'])->group(function () {
 	Route::get('add-select-supply-handle', [OrderController::class, 'addSelectSupplyHandle']);
 	Route::get('list-supply-process', [ProductController::class, 'listSupplyProcess']);
 	Route::get('print-data/{table}/{id}', [OrderController::class, 'printData']);
+	Route::any('join-print-command', [ProductController::class, 'joinPrintCommand']);
 
 	//supply warehouse
 	Route::get('add-supply-buying', [SupplyBuyingController::class, 'addSupplyBuying']);

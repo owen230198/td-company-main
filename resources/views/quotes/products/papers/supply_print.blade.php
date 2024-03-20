@@ -17,7 +17,8 @@
             'name' => $base_name.'[handle_type]',
             'note' => 'Hình thức sản xuất',
             'type' => 'select',
-            'attr' => ['required' => 1, 'inject_class' => "__select_pro_made_by", 'inject_attr' => 'pro_index='.$pro_index.' supp_index='.$supp_index],
+            'attr' => ['required' => 1, 'inject_class' => "__select_pro_made_by", 'inject_attr' => 'pro_index='.$pro_index.' supp_index='.$supp_index, 
+            'disable_field' => !empty($disable_all) || in_array('size_name', @$arr_disable ?? []) ? 1 : 0],
             'value' => $is_from_partner ? \TDConst::MADE_BY_PARTNER : @$supply_obj->handle_type,
             'other_data' => ['data' => [
                 'options' => [

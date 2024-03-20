@@ -1,14 +1,14 @@
 @php
     $key_stage = \TDConst::METALAI;
     $paper_metalai_materal = [
-        'name' => 'product['.$pro_index.'][paper]['.$supp_index.']['.$key_stage.'][materal]',
+        'name' => $paper_hd_base_name.'['.$key_stage.'][materal]',
         'type' => 'linking',
         'note' => 'chất liệu',
         'value' =>  @$data_handle['materal'],
         'other_data' => ['data' => ['table' => 'materals', 'where' => ['type' => $key_stage], 'select' => ['id', 'name']]]
     ]; 
     $paper_metalai_face = [
-        'name' => 'product['.$pro_index.'][paper]['.$supp_index.']['.$key_stage.'][face]',
+        'name' => $paper_hd_base_name.'['.$key_stage.'][face]',
         'type' => 'select',
         'note' => 'Số mặt',
         'value' =>  @$data_handle['face'],
@@ -16,14 +16,14 @@
     ];
     
     $paper_cover_materal = [
-        'name' => 'product['.$pro_index.'][paper]['.$supp_index.']['.$key_stage.'][cover_materal]',
+        'name' => $paper_hd_base_name.'['.$key_stage.'][cover_materal]',
         'type' => 'linking',
         'note' => 'chất liệu cán phủ trên',
         'value' =>  @$data_handle['cover_materal'],
         'other_data' => ['data' => ['table' => 'materals', 'where' => ['type' => 'cover'], 'select' => ['id', 'name']]]
     ]; 
     $paper_cover_face = [
-        'name' => 'product['.$pro_index.'][paper]['.$supp_index.']['.$key_stage.'][cover_face]',
+        'name' => $paper_hd_base_name.'['.$key_stage.'][cover_face]',
         'type' => 'select',
         'note' => 'Số mặt cán phủ trên',
         'value' =>  @$data_handle['cover_face'],

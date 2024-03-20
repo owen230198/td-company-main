@@ -239,5 +239,55 @@
                 return customReturnMessage(false, $is_post, ['message' => 'Bạn không có quyền thực hiện thao tác này !']);    
             }
         }
+        
+        public function joinPrintCommand(Request $request)
+        {
+            $data['title'] = 'Tạo lệnh in ghép';
+            $data['arr_fields'] = [
+                [
+                    'name' => 'paper[]',
+                    'type' => 'linking',
+                    'note' => 'Chọn giấy in ghép',
+                    'attr' => ['required' => 1],
+                    'other_data' => [
+                        'config' => ['search' => 1, 'multiple' => 1], 
+                        'data' => [
+                            'table' => 'papers', 
+                            'where' => []
+                        ]
+                    ]
+                ],
+                [
+                    'name' => 'name',
+                    'type' =>'text',
+                    'note' => 'Tên lệnh',
+                    'attr' => ['required' => 1],
+                ],
+                [
+                    'name' => 'qty',
+                    'note' => 'Số lượng tờ in',
+                    'attr' => ['type_input' => 'number', 'required' => 1]
+                ],
+                [
+                    'name' => 'materal',
+                    'type' => 'linking',
+                    'note' => 'Chọn chất liệu giấy',
+                    'attr' => ['required' => 1],
+                    'other_data' => ['data' => ['table' => 'materals','where' => ['type' => \TDConst::PAPER]]]
+                ],
+                [
+                    'name' => 'qttv',
+                    'note' => 'Định lượng',
+                    'attr' => ['type_input' => 'number', 'required' => 1]
+                ],
+                [
+                    'name' => 'note',
+                    'note' => 'Ghi chú',
+                    'type' => 'textarea',
+                    'attr' => ['type_input' => 'number', 'required' => 1]
+                ],
+            ];
+            return view('orders.commands.join_prints.view', $data);
+        }
     }
 ?>

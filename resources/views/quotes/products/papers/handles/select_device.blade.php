@@ -1,6 +1,6 @@
 @php
     $paper_device = [
-        'name' => 'product['.$pro_index.'][paper]['.$supp_index.']['.$key_device.'][machine]',
+        'name' => $paper_hd_base_name.'['.$key_device.'][machine]',
         'type' => 'linking',
         'note' => 'thiết bị',
         'value' => @$value ?? 0,

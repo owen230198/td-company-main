@@ -1,7 +1,7 @@
 @php
     $key_stage = \TDConst::BOX_PASTE;
     $paper_box_device = [
-        'name' => 'product['.$pro_index.'][paper]['.$supp_index.']['.$key_stage.'][machine]',
+        'name' => $paper_hd_base_name.'['.$key_stage.'][machine]',
         'type' => 'linking',
         'note' => 'thiết bị',
         'value' => @$data_handle['machine'] ?? getDeviceId(['key_device' => $key_stage, 'supply' => 'paper', 'default_device' => 1]),

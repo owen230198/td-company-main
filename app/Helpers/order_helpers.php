@@ -131,6 +131,9 @@ use App\Models\Product;
     if (!function_exists('getAfterPrintStageByCate')) {
         function getAfterPrintStageByCate($category)
         {
+            if (empty($category)) {
+                return \TDConst::BASE_HANDLE_STAGE;
+            }
             switch ($category) {
                 case \App\Models\ProductCategory::PAPER_BOX:
                     return \TDConst::HANDLE_STAGE;

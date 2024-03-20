@@ -62,6 +62,19 @@
         const CUT = 'cut';
         const BAG_PASTE = 'bag_paste';
         const FOLD = 'fold';
+
+        const BASE_HANDLE_STAGE = [
+            ['key' => self::PRINT, 'note' => 'Quy cách - kiểu in', 'color' => 'normal'],
+            ['key' => self::NILON, 'note' => 'Cán nilon', 'color' => 'normal'],
+            ['key' => self::METALAI, 'note' => 'Cán metalai', 'color' => 'red'],
+            ['key' => self::COMPRESS, 'note' => 'Ép nhũ', 'color' => 'red'],
+            ['key' => self::UV, 'note' => 'In lưới UV', 'color' => 'red'],
+            ['key' => self::ELEVATE, 'note' => 'Máy bế', 'color' => 'normal'],
+            ['key' => self::PEEL, 'note' => 'Máy bóc lề', 'color' => 'normal'],
+            ['key' => self::CUT, 'note' => 'Máy xén', 'color' => 'normal'],
+            ['key' => self::FOLD, 'note' => 'Máy gấp vạch', 'color' => 'normal']
+        ];
+
         const HANDLE_STAGE = [
             ['key' => self::PRINT, 'note' => 'Quy cách - kiểu in', 'color' => 'normal'],
             ['key' => self::NILON, 'note' => 'Cán nilon', 'color' => 'normal'],

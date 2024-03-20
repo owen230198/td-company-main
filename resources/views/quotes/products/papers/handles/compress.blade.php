@@ -1,13 +1,13 @@
 @php
     $key_stage = \TDConst::COMPRESS;
     $paper_compress_price = [
-        'name' => 'product['.$pro_index.'][paper]['.$supp_index.']['.$key_stage.'][price]',
+        'name' => $paper_hd_base_name.'['.$key_stage.'][price]',
         'note' => 'Giá ép nhũ/1 bát sản phẩm',
         'attr' => ['type_input' => 'number'],
         'value' => @$data_handle['price'] ?? 0
     ];
     $paper_compress_shape_price = [
-        'name' => 'product['.$pro_index.'][paper]['.$supp_index.']['.$key_stage.'][shape_price]',
+        'name' => $paper_hd_base_name.'['.$key_stage.'][shape_price]',
         'note' => 'TIỀN KHUÔN/1 BÁT SẢN PHẨM',
         'attr' => ['type_input' => 'number'],
         'value' => @$data_handle['shape_price'] ?? 0

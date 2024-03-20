@@ -306,18 +306,30 @@ var phoneInputPrevent = function () {
 
 var multipleSelectModule = function(section = $('.base_content'))
 {
-    let select_multiple = section.find('select.multiple_select');
+    let select_multiple = section.find('select.__multiple_select');
     if (select_multiple.length > 0) {
         select_multiple.each(function(){
-            let note = $(this).data('note')
-            $(this).multiselect(
-                {
-                    nonSelectedText: 'Chọn '+note,
-                    nSelectedText: note + ' đã được chọn',
-                    allSelectedText: 'Đã chọn hết ' + note,
-                    dropRight: true,
+            let note = $(this).attr('note');
+            let url = $(this).attr('url');
+            $(this).select2({
+                placeholder: note,
+                ajax: {
+                    url: url,
+                    dataType: 'json',
+                    delay: 250,
+                    processResults: function(data) {
+                        return {
+                            results: $.map(data.options, function(option) {
+                                return {
+                                    id: option.value,
+                                    label: option.label
+                                };
+                            })
+                        };
+                    },
+                    cache: true
                 }
-            );
+            });
         });
     }
 }

@@ -2,8 +2,9 @@
     $_compen_percent = getDataConfig('QuoteConfig', 'COMPEN_PERCENT');
     $_plus_direct = (int) getDataConfig('QuoteConfig', 'PLUS_DIRECT');
     $_plus_to_per = (int) getDataConfig('QuoteConfig', 'PLUS_TO_PERCENT');
+    $paper_hd_base_name = 'product['.$pro_index.'][paper]['.$supp_index.']';
     $pro_paper_materals = [
-        'name' => 'product['.$pro_index.']['.$key_supp.']['.$supp_index.'][size][materal]',
+        'name' => $paper_hd_base_name.'[size][materal]',
         'type' => 'linking',
         'note' => 'Chọn chất liệu giấy',
         'attr' => ['required' => 1, 'inject_class' => 'select_paper_materal', 
@@ -12,14 +13,14 @@
         'value' => @$supply_size['materal']
     ];
     $pro_paper_qttv = [
-        'name' => 'product['.$pro_index.']['.$key_supp.']['.$supp_index.'][size][qttv]',
+        'name' => $paper_hd_base_name.'[size][qttv]',
         'note' => 'Định lượng',
         'attr' => ['type_input' => 'number', 'required' => 1,
         'disable_field' => !empty($disable_all) || in_array('size_qttv', @$arr_disable ?? []) ? 1 : 0],
         'value' => @$supply_size['qttv']
     ];
     $_note_materal = [
-        'name' => 'product['.$pro_index.'][paper]['.$supp_index.'][size][note]',
+        'name' => $paper_hd_base_name.'[size][note]',
         'note' => 'Ghi chú giấy in',
         'type' => 'textarea',
         'attr' => [
@@ -41,7 +42,7 @@
     @include('quotes.products.papers.size')
 </div>
 <div class="paper_ajax_after_print">
-    @if (@$supp_index == 0 || !empty($supply_obj))
-        @include('quotes.products.papers.after_print', ['data_paper' => @$supply_obj])    
+    @if ((@$supp_index == 0 || !empty($supply_obj)) && empty($no_exc))
+        @include('quotes.products.papers.after_print', ['data_paper' => @$supply_obj, ])    
     @endif
 </div>

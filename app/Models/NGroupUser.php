@@ -125,6 +125,11 @@ class NGroupUser extends Model
             'link' => 'view/orders', 
             'group' => 'order_handle'
         ],
+        'join_print' => [
+            'name' => 'Lệnh in ghép', 
+            'link' => 'join-print-command', 
+            'group' => 'order_handle'
+        ],
         'handle_process' => [
             'name' => 'Theo dõi sản xuất', 
             'link' => 'view/products?default_data=%7B"order_created":"1"%7D', 
