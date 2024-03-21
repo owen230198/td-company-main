@@ -65,6 +65,19 @@
                             'with' => ['key' => 'status', 'value' => self::TECH_SUBMITED],
                         ]
                 ],
+                \GroupUser::TECH_APPLY => [
+                    'view' => 
+                        [
+                            'with' => ['key' => 'status', 'value' => self::NOT_ACCEPTED],
+                        ],
+                    'update' => 
+                        [
+                            'with' => [['key' => 'status', 'value' => self::NOT_ACCEPTED]]
+                        ]
+                ],
+                \GroupUser::ACCOUNTING => [
+                    'view' => 1
+                ],
             ];
             return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];
         }

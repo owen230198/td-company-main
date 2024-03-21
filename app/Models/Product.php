@@ -183,6 +183,18 @@
                             ],
                         ]
                 ],
+                \GroupUser::ACCOUNTING => [
+                    'view' => 
+                    [
+                        'with' => [
+                            'type' => 'group',
+                            'query' => [
+                                ['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED],
+                                ['con' => 'or', 'key' => 'order_created', 'value' => 1]
+                            ]
+                        ],
+                    ],
+                ],
             ];
             return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];
         }
