@@ -24,6 +24,7 @@ class NGroupUser extends Model
     const DO_BUYING = 10;
     const KCS = 11;
     const PRODUCT_WAREHOUSE = 12;
+    const ACCOUNTING = 13;
 
     //group modules
     const GROUP_MODULE = [
@@ -332,6 +333,15 @@ class NGroupUser extends Model
             self::MODULE['account'],
             self::MODULE['change_password'],
         ],
+        
+        self::ACCOUNTING => [
+            self::MODULE['order_process'],
+            self::MODULE['handle_process'],
+            self::MODULE['warehouse_management'],
+            self::MODULE['profit'],
+            self::MODULE['account'],
+            self::MODULE['change_password'],
+        ],
     ];
 
     //check method
@@ -424,5 +434,11 @@ class NGroupUser extends Model
     {
         $group_user = !empty($group_user) ? $group_user : self::getCurrent();
         return $group_user == self::PRODUCT_WAREHOUSE;
+    }
+
+    static function isAccounting($group_user = 0)
+    {
+        $group_user == !empty($group_user) ? $group_user : self::getCurrent();
+        return $group_user == self::ACCOUNTING;
     }
 }
