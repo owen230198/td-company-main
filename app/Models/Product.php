@@ -125,7 +125,17 @@
             $role = [
                 \GroupUser::SALE => [
                     'insert' => 1,
-                    'view' => 1,
+                    'view' => ['with' => ['key' => 'created_by', 'value' => \User::getCurrent('id')]],
+                    'update' => 
+                    [
+                        'with' => [
+                            'type' => 'group',
+                            'query' => [
+                                ['key' => 'created_by', 'value' => \User::getCurrent('id')],
+                                ['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED]
+                            ]
+                        ]
+                    ],
                     'clone' => 1
                 ],
                 \GroupUser::TECH_APPLY => [
