@@ -128,13 +128,13 @@
                     'view' => ['with' => ['key' => 'created_by', 'value' => \User::getCurrent('id')]],
                     'update' => 
                     [
-                        'with' => [
+                        'with' => [[
                             'type' => 'group',
                             'query' => [
                                 ['key' => 'created_by', 'value' => \User::getCurrent('id')],
                                 ['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED]
                             ]
-                        ]
+                        ]]
                     ],
                     'clone' => 1
                 ],
@@ -151,13 +151,13 @@
                         ],
                     'update' => 
                         [
-                            'with' =>[
+                            'with' => [[
                                 'type' => 'group',
                                 'query' => [
                                     ['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED],
                                     ['con' => 'or', 'key' => 'order_created', 'value' => 1]
                                 ]
-                            ]
+                            ]]
                         ]
                 ],
                 \GroupUser::TECH_HANDLE => [

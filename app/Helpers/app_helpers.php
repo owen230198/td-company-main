@@ -173,7 +173,6 @@ if (!function_exists('getDataTable')) {
 if (!function_exists('getBoolByCondArr')) {
     function getBoolByCondArr($arr, $data)
     {
-        $ret = true;
         foreach ($arr as $cond) {
             if (!empty($cond['type']) && $cond['type'] == 'group') {
                 $ret = getBoolByCondArr($cond['query'], $data);

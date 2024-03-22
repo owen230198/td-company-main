@@ -30,13 +30,13 @@
                         ],
                     'update' => 
                         [
-                            'with' => [
+                            'with' => [[
                                 'type' => 'group',
                                 'query' => [
                                     ['key' => 'created_by', 'value' => \User::getCurrent('id')],
                                     ['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED]
                                 ]
-                            ]
+                            ]]
                         ]
                 ],
                 \GroupUser::TECH_APPLY => [
