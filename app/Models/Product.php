@@ -48,14 +48,14 @@
                 'note' => 'File bình theo khuôn (P. Thiết kế)',
                 'type' => 'filev2',
                 'table_map' => 'products',
-                'other_data' => ['role_update' => [\GroupUser::DESIGN], 'field_name' => 'design_shape_file']
+                'other_data' => ['role_update' => [\GroupUser::DESIGN, \GroupUser::TECH_APPLY], 'field_name' => 'design_shape_file']
             ],
             'handle_shape_file' =>
             [
                 'note' => 'Khuôn ép nhũ, thúc nổi, in UV',
                 'type' => 'filev2',
                 'table_map' => 'products',
-                'other_data' => ['role_update' => [\GroupUser::TECH_HANDLE], 'field_name' => 'handle_shape_file']
+                'other_data' => ['role_update' => [\GroupUser::TECH_HANDLE, \GroupUser::TECH_APPLY], 'field_name' => 'handle_shape_file']
             ]
         ];
         
@@ -151,7 +151,13 @@
                         ],
                     'update' => 
                         [
-                            'with' => [['key' => 'status', 'value' => Order::NOT_ACCEPTED]]
+                            'with' =>[
+                                'type' => 'group',
+                                'query' => [
+                                    ['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED],
+                                    ['con' => 'or', 'key' => 'order_created', 'value' => 1]
+                                ]
+                            ]
                         ]
                 ],
                 \GroupUser::TECH_HANDLE => [
