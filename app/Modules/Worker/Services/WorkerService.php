@@ -81,6 +81,7 @@ class WorkerService extends BaseService
         }else{
             $handle_config = $type == \TDConst::FILL ? json_decode($data_command->fill_handle, true) : $data_handle;
             $obj_salary = new WSalary($supply, $handle_config, $worker);
+            //Tính lương công nhân
             switch ($type) {
                 case \TDConst::PRINT:
                     $data_update = $obj_salary->getPrintSalary($qty);
@@ -111,20 +112,23 @@ class WorkerService extends BaseService
             $data_update['submited_at'] = \Carbon\Carbon::now();
         }
         $update = $obj->update($data_update);
-        $update = true;
         if ($update) {
             $qty_check_update = (int) @$data_handle['handle_qty'];
             $table_supply = $data_command->table_supply;
             $next_data = getStageActiveStartHandle($table_supply, $data_command->supply, $type);
             if ($next_data['type'] != \StatusConst::SUBMITED) {
+                //Nếu không phải là bước hoàn tất của sản lệnh
                 if (isQtyFormulaBySupply($type) && !isQtyFormulaBySupply($next_data['type'])) {
+                    //nếu CT lương của lệnh hiện tại tính bằng SL vật tư và CT lương của bước tiếp theo tính bằng sl sản phẩm
                     $next_qty = $qty * $supply->nqty;
                 }elseif (!isQtyFormulaBySupply($type) && isQtyFormulaBySupply($next_data['type'])) {
+                    //nếu CT lương của lệnh hiện tại tính bằng SL sản phẩm và CT lương của bước tiếp theo tính bằng sl vật tư
                     $next_qty = ceil($qty / $supply->nqty);
                 }else{
                     $next_qty = $qty;
                 }
                 if ($type == \TDConst::FILL) {
+                    //Nếu là bước bồi thì cần phải hoàn tất cả các công đoạn bồi mới được xuống bước hoàn thiện cuối
                     $fill_next = checkFillToFinish($supply, $data_handle, $next_data['type']);
                     $is_next = $fill_next['bool'];
                     if ($is_next && !empty($fill_next['count_handle'])) {
@@ -135,6 +139,7 @@ class WorkerService extends BaseService
                     $is_next = true;
                 }
                 if ($is_next) {
+                    //thêm lệnh cho công đoạn tiếp theo
                     $where = ['table_supply' =>$table_supply, 'supply' => $supply->id, 'type' => $next_data['type'], 'status' => \StatusConst::NOT_ACCEPTED];
                     $exist_command = WSalary::where($where)->first();
                     if (empty($exist_command)) {
@@ -144,12 +149,14 @@ class WorkerService extends BaseService
                         $next_data['name'] = getNameCommandWorker($supply, $product_name);
                         WSalary::commandStarted($data_command->command, $next_data, $table_supply, $supply);
                     }else{
+                        // nếu lệnh tiếp theo có tồn tại mà chưa được ai nhận thì chỉ update thêm số lượng
                         $exist_command->qty = (int) $exist_command->qty + $next_qty;
                         $exist_command->save();
                     }
                 }
             }
             if ($qty != 0 && $qty < $handle_qty) {
+                //nếu chỉ chấm công số lượng không hết thì thêm lệnh mới treo ở ngoài
                 $re_insert['type'] = $type;
                 $re_insert['machine_type'] = $data_command->machine_type;
                 $re_insert['qty'] = $handle_qty - $qty;
@@ -162,11 +169,13 @@ class WorkerService extends BaseService
                 }
                 WSalary::commandStarted($data_command->command, $re_insert, $table_supply, $supply);
             }
+            //kiểm xem đã hoàn thành tất cả các công đoạn chưa thì update trạng thái của vật tư
             WSalary::checkStatusUpdate($table_supply, $supply->id, \StatusConst::SUBMITED);
+            //kiểm tra và update trạng thái hoàn tất công đoạn trong vật tư
             $arr_where = ['table_supply' =>$table_supply, 'supply' => $supply->id, 'type' => $type, 'status' => \StatusConst::SUBMITED];
             $submited_qty = \DB::table('w_salaries')->select('qty')->where($arr_where)->sum('qty');
             $data_handle['handle_qty'] = $handle_qty - $qty;
-            if ($submited_qty == (int) $qty_check_update) {
+            if ($submited_qty >= (int) $qty_check_update) {
                 $data_handle['act'] = 2;
                 \DB::table($table_supply)->where('id', $supply->id)->update([$type => json_encode($data_handle)]);
             }

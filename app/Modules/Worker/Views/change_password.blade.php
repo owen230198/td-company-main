@@ -21,7 +21,7 @@
                 Tổ máy : {{ getDeviceGroupName(\Worker::getCurrent('type'), \Worker::getCurrent('device')) }}
             </p> 
             <div class="mt-lg-4 mt-3">
-                @include('change_password_base_form'['action_url' => url('Worker/change-password')])
+                @include('change_password_base_form',['action_url' => url('Worker/change-password')])
             </div>
         </div>
     </div>
