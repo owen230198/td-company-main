@@ -89,9 +89,16 @@ class OrderConstant
             'link' => 'view/supply_buyings?default_data=%7B"status"%3A"'.SupplyBuying::BOUGHT.'"%7D' 
         ],
         [
+            'icon' => 'after_print', 
+            'table' => 'after_prints', 
+            'text' => 'KCS sau in',
+            'condition' => ['status' => \StatusConst::PROCESSING],
+            'link' => 'view/after_prints?default_data=%7B"status"%3A"'.\StatusConst::PROCESSING.'"%7D' 
+        ],
+        [
             'icon' => 'kcs', 
             'table' => 'products', 
-            'text' => 'Thẩm định sản phẩm',
+            'text' => 'KCS thành phẩm',
             'condition' => ['status' => \StatusConst::SUBMITED],
             'link' => 'view/products?default_data=%7B"status"%3A"'.\StatusConst::SUBMITED.'"%7D' 
         ],

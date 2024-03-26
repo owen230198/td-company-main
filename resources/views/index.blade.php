@@ -83,7 +83,11 @@
         @endif
 
         @if (Session::has('error'))
-            swal('Không thành công', "{{ session('error') }}", 'error');
+            swal('Không thành công', "{{ session('error') }}", 'error').then(() => {
+                if ( $(window.parent.document).find('#actionModal').hasClass('show')) {
+                    closeDataPopup(true); 
+                }	
+            });
         @endif
     </script>
 </body>

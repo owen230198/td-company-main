@@ -108,9 +108,12 @@ var loadDataPopup = function () {
     })
 };
 
-var closeDataPopup = function()
+var closeDataPopup = function(reload = false)
 {
     $(window.parent.document).find('#actionModal').find('.close_action_popup').trigger('click');
+    if (reload) {
+        window.parent.location.reload();
+    }
 }
 
 var closeModalAction = function()
@@ -755,6 +758,58 @@ var productWarehouseHistory = function()
     });
 }
 
+var kscAfterPrintModule = function()
+{
+    $(document).on("click", 'button.__confirm_worker_salary', function(event) {
+        event.preventDefault();
+        let qty = $(this).data("qty");
+        let name = $(this).data("name");
+        swal({
+            title: "KCS in gia công",
+            text:"Vui lòng nhập số tờ in "+name+" đã đạt yêu cầu để thợ in được xác nhận lương.",
+            content: {
+                element: "input",
+                attributes: {
+                    placeholder: "Nhập số lượng đạt yêu cầu",
+                    type: "text"
+                },
+            },
+            buttons: ["Hủy", "Xác nhận"],
+        }).then((value) => {
+            if (value === null) {
+                return; 
+            }
+            if (value === "" || parseInt(value) > qty) {
+                swal('Không thành công', "Số lượng bạn nhập không hợp lệ !", 'error');
+            }else{
+                let txt = "Bạn sẽ xác nhận chấm công cho thợ "+qty+" tờ in "+name.toLowerCase()+" đã in đạt yêu cầu. ";
+                if (qty - parseInt(value) > 0) {
+                    txt += " "+qty - parseInt(value)+" tờ in chưa đạt yêu cầu sẽ được gửi yêu cầu sản xuất lại.";
+                }
+                swal({
+                    title: "Chắc chắn rằng "+qty+" tờ in đã đạt yêu cầu ?",
+                    text: txt,
+                    icon: 'info',
+                    buttons: true,
+                    dangerMode: true,
+                    confirmButtonColor: "#459300",
+                    buttons: ['Hủy', 'Xác nhận chấm công']
+                }).then((value) => {
+                    if (value) {
+                        ajaxBaseCall({
+                            url:getBaseRoute('after-print-kcs/1'), 
+                            type:'POST', 
+                            data:{qty:qty}
+                        });
+                    } else {
+                      swal("Đã hủy", "Bạn vừa hủy xác nhận chấm công !", "error");
+                    }
+                });
+            }
+        });
+    })
+}
+
 $(function () {
     // loadingPage();
     submitActionAjaxForm();
@@ -793,4 +848,5 @@ $(function () {
     productListSupplyProcess();
     confirmImportProductWarehouse();
     productWarehouseHistory();
+    kscAfterPrintModule();
 });

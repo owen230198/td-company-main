@@ -40,8 +40,7 @@ var ajaxBaseCall = function(param)
 					if (data.url == RELOAD) {
 						window.location.reload();	
 					}else if(data.url == CLOSE_POPUP){
-						closeDataPopup();
-						window.parent.location.reload();
+						closeDataPopup(true);		
 					}else{
 						window.location = data.url;
 					}
@@ -51,8 +50,7 @@ var ajaxBaseCall = function(param)
 			if (data.url == RELOAD) {
 				window.location.reload();	
 			}else if(data.url == CLOSE_POPUP){
-				closeDataPopup();
-				window.parent.location.reload();
+				closeDataPopup(true);
 			}else{
 				window.location = data.url;
 			}

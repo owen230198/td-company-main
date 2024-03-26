@@ -63,58 +63,41 @@ class WorkerService extends BaseService
         return view('Worker::commands.view', $data);
     }
 
-    public function submitCommand($obj, $data_command, $worker, $supply, $qty){
-        if ($data_command->worker != $worker['id']) {
-            return returnMessageAjax(100, 'Chấm công không thành công, Lệnh này không phải của bạn !');
+    public function checkInWorkerSalary($data_command, $type, $qty, $supply, $data_handle, $worker, $obj, $table_supply)
+    {
+        $handle_config = $type == \TDConst::FILL ? json_decode($data_command->fill_handle, true) : $data_handle;
+        $obj_salary = new WSalary($supply, $handle_config, $worker);
+        switch ($type) {
+            case \TDConst::PRINT:
+                $data_update = $obj_salary->getPrintSalary($qty);
+                break;
+            case \TDConst::NILON:
+                $data_update = $obj_salary->getNilonSalary($qty);
+                break;
+            case \TDConst::METALAI:
+                $data_update = $obj_salary->getMetalaiSalary($qty);
+                break;
+            case \TDConst::FINISH:
+                $data_update = $obj_salary->getFinishSalary($qty);
+                break;
+            case \TDConst::ELEVATE:
+                $handle_elevate = !empty($supply->handle_elevate) ? json_decode($supply->handle_elevate, true) : [];
+                $elevate_num = !empty($handle_elevate['num']) ? (int) $handle_elevate['num'] : 1;
+                $data_update = $obj_salary->getBaseSalaryPaper($qty * $elevate_num);
+                break;
+            case !isQtyFormulaBySupply($type):
+                $data_update = $obj_salary->getBaseSalaryProduct($qty);
+                break;
+            default:
+                $data_update = $obj_salary->getBaseSalaryPaper($qty);
+                break;
         }
-        if($data_command->status != \StatusConst::PROCESSING){
-            return returnMessageAjax(100, 'Dữ liệu không hợp lệ !');
-        }
-        $type = $worker['type'];
-        $data_handle = !empty($supply->{$type}) ? json_decode($supply->{$type}, true) : [];
-        $handle_qty = @$data_command->qty ?? 0;
-        if ($qty > $handle_qty) {
-            return returnMessageAjax(100, 'Số lượng chấm công không hợp lệ !');
-        }elseif ((int) $qty == 0) {
-            $data_update['status'] = \StatusConst::NOT_ACCEPTED;
-            $data_update['worker'] = 0;
-        }else{
-            $handle_config = $type == \TDConst::FILL ? json_decode($data_command->fill_handle, true) : $data_handle;
-            $obj_salary = new WSalary($supply, $handle_config, $worker);
-            //Tính lương công nhân
-            switch ($type) {
-                case \TDConst::PRINT:
-                    $data_update = $obj_salary->getPrintSalary($qty);
-                    break;
-                case \TDConst::NILON:
-                    $data_update = $obj_salary->getNilonSalary($qty);
-                    break;
-                case \TDConst::METALAI:
-                    $data_update = $obj_salary->getMetalaiSalary($qty);
-                    break;
-                case \TDConst::FINISH:
-                    $data_update = $obj_salary->getFinishSalary($qty);
-                    break;
-                case \TDConst::ELEVATE:
-                    $handle_elevate = !empty($supply->handle_elevate) ? json_decode($supply->handle_elevate, true) : [];
-                    $elevate_num = !empty($handle_elevate['num']) ? (int) $handle_elevate['num'] : 1;
-                    $data_update = $obj_salary->getBaseSalaryPaper($qty * $elevate_num);
-                    break;
-                case !isQtyFormulaBySupply($type):
-                    $data_update = $obj_salary->getBaseSalaryProduct($qty);
-                    break;
-                default:
-                    $data_update = $obj_salary->getBaseSalaryPaper($qty);
-                    break;
-            }
-            $data_update['status'] = \StatusConst::SUBMITED;
-            $data_update['qty'] = $qty;
-            $data_update['submited_at'] = \Carbon\Carbon::now();
-        }
+        $data_update['status'] = \StatusConst::SUBMITED;
+        $data_update['qty'] = $qty;
+        $data_update['submited_at'] = \Carbon\Carbon::now();
         $update = $obj->update($data_update);
         if ($update) {
             $qty_check_update = (int) @$data_handle['handle_qty'];
-            $table_supply = $data_command->table_supply;
             $next_data = getStageActiveStartHandle($table_supply, $data_command->supply, $type);
             if ($next_data['type'] != \StatusConst::SUBMITED) {
                 //Nếu không phải là bước hoàn tất của sản lệnh
@@ -155,8 +138,42 @@ class WorkerService extends BaseService
                     }
                 }
             }
-            if ($qty != 0 && $qty < $handle_qty) {
-                //nếu chỉ chấm công số lượng không hết thì thêm lệnh mới treo ở ngoài
+            
+            //kiểm xem đã hoàn thành tất cả các công đoạn chưa thì update trạng thái của vật tư
+            WSalary::checkStatusUpdate($table_supply, $supply->id, \StatusConst::SUBMITED);
+            //kiểm tra và update trạng thái hoàn tất công đoạn trong vật tư
+            $arr_where = ['table_supply' =>$table_supply, 'supply' => $supply->id, 'type' => $type, 'status' => \StatusConst::SUBMITED];
+            $submited_qty = \DB::table('w_salaries')->select('qty')->where($arr_where)->sum('qty');
+            $data_handle['handle_qty'] = $handle_qty - $qty;
+            if ($submited_qty >= (int) $qty_check_update) {
+                $data_handle['act'] = 2;
+                \DB::table($table_supply)->where('id', $supply->id)->update([$type => json_encode($data_handle)]);
+            }
+            return $update;
+        }else{
+            return false;
+        }
+    }
+
+    public function submitCommand($obj, $data_command, $worker, $supply, $qty){
+        if ($data_command->worker != $worker['id']) {
+            return returnMessageAjax(100, 'Chấm công không thành công, Lệnh này không phải của bạn !');
+        }
+        if($data_command->status != \StatusConst::PROCESSING){
+            return returnMessageAjax(100, 'Dữ liệu không hợp lệ !');
+        }
+        $type = $worker['type'];
+        $data_handle = !empty($supply->{$type}) ? json_decode($supply->{$type}, true) : [];
+        $handle_qty = @$data_command->qty ?? 0;
+        $table_supply = $data_command->table_supply;
+        if ($qty > $handle_qty) {
+            return returnMessageAjax(100, 'Số lượng chấm công không hợp lệ !');
+        }elseif ((int) $qty == 0) {
+            $data_update['status'] = \StatusConst::NOT_ACCEPTED;
+            $data_update['worker'] = 0;
+        }else{
+            //nếu chấm công với số lượng không hết thì thêm lệnh mới treo ở ngoài
+            if ($qty < $handle_qty) {
                 $re_insert['type'] = $type;
                 $re_insert['machine_type'] = $data_command->machine_type;
                 $re_insert['qty'] = $handle_qty - $qty;
@@ -169,19 +186,29 @@ class WorkerService extends BaseService
                 }
                 WSalary::commandStarted($data_command->command, $re_insert, $table_supply, $supply);
             }
-            //kiểm xem đã hoàn thành tất cả các công đoạn chưa thì update trạng thái của vật tư
-            WSalary::checkStatusUpdate($table_supply, $supply->id, \StatusConst::SUBMITED);
-            //kiểm tra và update trạng thái hoàn tất công đoạn trong vật tư
-            $arr_where = ['table_supply' =>$table_supply, 'supply' => $supply->id, 'type' => $type, 'status' => \StatusConst::SUBMITED];
-            $submited_qty = \DB::table('w_salaries')->select('qty')->where($arr_where)->sum('qty');
-            $data_handle['handle_qty'] = $handle_qty - $qty;
-            if ($submited_qty >= (int) $qty_check_update) {
-                $data_handle['act'] = 2;
-                \DB::table($table_supply)->where('id', $supply->id)->update([$type => json_encode($data_handle)]);
+            if ($type == \TDConst::PRINT) {
+                $table_after_print = 'after_prints';
+                $after_print['code'] = 'QC-'.getCodeInsertTable($table_after_print);
+                $after_print['name'] = $supply->name;
+                $after_print['w_salary'] = $data_command->id;
+                $after_print['worker'] = $worker['id'];
+                $after_print['qty'] = $qty;
+                $after_print['status'] = \StatusConst::PROCESSING;
+                $after_print['created_by'] = $worker['id'];
+                (new \BaseService)->configBaseDataAction($after_print, 'worker_login');
+                $insert = \DB::table($table_after_print)->insert($after_print);
+                $update = $obj->update(['status' => \StatusConst::CHECKING]);
+                if ($insert) {
+                    return returnMessageAjax(200, 'Đã gửi yêu cầu duyệt chấm công đến bộ phận KCS sau in !', url('Worker'));
+                } 
             }
-            return returnMessageAjax(200, 'Bạn đã chấm công thành công với số lượng : '.$qty.' !', url('Worker'));  
-        }else{
-            return returnMessageAjax(100, 'Có lỗi xảy ra, vui lòng thử chấm công lại !'); 
+            //Tính lương công nhân & lưu bảng lương
+            $update = $this->checkInWorkerSalary($data_command, $type, $qty, $supply, $data_handle, $worker, $obj, $table_supply);
+            if (!empty($update)) {
+                return returnMessageAjax(200, 'Bạn đã chấm công thành công với số lượng : '.$qty.' !', url('Worker'));  
+            }else{
+                return returnMessageAjax(100, 'Có lỗi xảy ra, vui lòng thử chấm công lại !'); 
+            }
         }
     }
 }

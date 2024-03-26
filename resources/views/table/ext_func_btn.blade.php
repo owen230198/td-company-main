@@ -1,5 +1,13 @@
 @if (@$button['type'] == 2)
-    <button type="button" class="table-btn mr-2 mb-2 {{ @$button['class'] }}" title="{{ @$button['note'] }}" data-table="{{ $tableItem['name'] }}" data-id="{{ $data->id }}">
+    <button type="button" class="table-btn mr-2 mb-2 {{ @$button['class'] }}" title="{{ @$button['note'] }}" data-table="{{ $tableItem['name'] }}" data-id="{{ $data->id }}"
+        @if (!empty($button['datas']))
+            @foreach ($button['datas'] as $dt)
+                @if (!empty($data->{$dt}))
+                    {!! "data-".$dt."='".$data->$dt."'"  !!}
+                @endif
+            @endforeach
+        @endif
+        >
         <i class="fa fa-{{ $button['icon'] }} fs-14" aria-hidden="true"></i>
     </button>
 @else

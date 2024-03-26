@@ -100,6 +100,7 @@
         public function KCSTakeInRequirement(Request $request, $id)
         {
             $is_post = $request->isMethod('POST');
+            return customReturnMessage(false, $is_post, ['message' => 'Dữ liệu không hợp lệ !'], \StatusConst::CLOSE_POPUP);
             if (\GroupUser::isAdmin() || \GroupUser::isKCS()) {
                 $product_obj = Product::find($id);
                 if (empty($product_obj) || @$product_obj->status != \StatusConst::SUBMITED) {
@@ -288,6 +289,11 @@
                 ],
             ];
             return view('orders.commands.join_prints.view', $data);
+        }
+
+        public function afterPrintKcs(Request $request, $id)
+        {
+            return returnMessageAjax(100, "DMM");
         }
     }
 ?>

@@ -24,7 +24,7 @@ if (!function_exists('workerCommandIsProcessing')) {
 if (!function_exists('getDataWorkerCommand')) {
     function getDataWorkerCommand($where = [], $get_obj = false, $get_count = false, $paginate = 50)
     {
-        $obj = \DB::table('w_salaries')->where($where);
+        $obj = \DB::table('w_salaries')->where($where)->orderBy('id', 'DESC');
         if ($get_obj) {
             return $obj;
         }
