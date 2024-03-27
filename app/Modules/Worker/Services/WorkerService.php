@@ -171,6 +171,10 @@ class WorkerService extends BaseService
         }elseif ((int) $qty == 0) {
             $data_update['status'] = \StatusConst::NOT_ACCEPTED;
             $data_update['worker'] = 0;
+            $ret = $obj->update($data_update);
+            if ($ret) {
+                return returnMessageAjax(200, 'Bạn đã trả lệnh thành công !', url('Worker'));
+            }
         }else{
             //nếu chấm công với số lượng không hết thì thêm lệnh mới treo ở ngoài
             if ($qty < $handle_qty) {

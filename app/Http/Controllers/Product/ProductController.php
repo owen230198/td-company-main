@@ -1,11 +1,13 @@
 <?php
     namespace App\Http\Controllers\Product;
     use App\Http\Controllers\Controller;
+    use App\Models\AfterPrint;
     use App\Models\CExpertise;
     use App\Models\Order;
     use App\Models\Product;
     use App\Models\Quote;
-    use Illuminate\Http\Request;
+use App\Models\WUser;
+use Illuminate\Http\Request;
     class ProductController extends Controller
     {
         function __construct()
@@ -293,7 +295,35 @@
 
         public function afterPrintKcs(Request $request, $id)
         {
-            return returnMessageAjax(100, "DMM");
+            if (\GroupUser::isKCS() || \GroupUser::isAdmin()) {
+                $obj = AfterPrint::find($id);
+                if (empty($obj) || @$obj->status != \StatusConst::PROCESSING) {
+                    return returnMessageAjax(100, 'Dữ liệu không hợp lệ !');
+                }
+                $qty = (int) $request->input('qty');
+                $obj_qty = (int) $obj->qty;
+                if ($qty > $obj_qty) {
+                    return returnMessageAjax(100, 'Số lượng bạn nhập không hợp lệ !');
+                }
+                $obj_salary = \DB::table('w_salaries')->where('id', $obj->w_salary);
+                $data_salary = $obj_salary->find($obj->w_salary);
+                if (empty($obj_salary)) {
+                    return returnMessageAjax(100, 'Lệnh sản xuất không tồn tại hoặc đã bị xóa');
+                }
+                $supply = \DB::table(@$data_salary->table_supply)->find(@$data_salary->supply);
+                if ($supply->isEmpty()) {
+                    return returnMessageAjax(100, 'Dữ liệu đơn hàng không tồn tại hoặc đã bị xóa');
+                }
+                $worker = WUser::find($obj->worker);
+                if (!empty($worker)) {
+                    return returnMessageAjax(100, 'Dữ liệu công nhân không tồn tại hoặc đã bị xóa !');
+                }
+                if (@$data_salary->status != \StatusConst::CHECKING) {
+                    return returnMessageAjax(100, 'Dữ liệu không hợp lệ!');
+                }
+            }else{
+                return returnMessageAjax(100, 'Bạn không có quyền thực hiện tao tác KCS sau in !');
+            }
         }
     }
 ?>

@@ -63,11 +63,11 @@
             $worker = \Worker::getCurrent('id');
             $where = [
                 ['key' => 'worker', 'value' => $worker],
-                ['key' => 'status', 'value' => \StatusConst::LAST_SUBMITED],
+                ['key' => 'status', 'value' => \StatusConst::SUBMITED],
                 ['key' => 'submited_at','compare' => 'month', 'value' => 'this_month']
             ];
             $data['list_data'] = getDataTable($table, $where);
-            $data['summary'] = \DB::table($table)->where(['worker' => $worker, 'status' => \StatusConst::LAST_SUBMITED])
+            $data['summary'] = \DB::table($table)->where(['worker' => $worker, 'status' => \StatusConst::SUBMITED])
             ->whereMonth('submited_at', \Carbon\Carbon::now()->month)->sum('total');
             return view('Worker::salaries.view', $data);
         }
