@@ -310,7 +310,11 @@ use Illuminate\Http\Request;
                 if (empty($obj_salary)) {
                     return returnMessageAjax(100, 'Lệnh sản xuất không tồn tại hoặc đã bị xóa');
                 }
-                $supply = \DB::table(@$data_salary->table_supply)->find(@$data_salary->supply);
+                if (@$data_salary->status != \StatusConst::CHECKING) {
+                    return returnMessageAjax(100, 'Dữ liệu không hợp lệ!');
+                }
+                $table_supply = @$data_salary->table_supply;
+                $supply = \DB::table($table_supply)->find(@$data_salary->supply);
                 if ($supply->isEmpty()) {
                     return returnMessageAjax(100, 'Dữ liệu đơn hàng không tồn tại hoặc đã bị xóa');
                 }
@@ -318,9 +322,13 @@ use Illuminate\Http\Request;
                 if (!empty($worker)) {
                     return returnMessageAjax(100, 'Dữ liệu công nhân không tồn tại hoặc đã bị xóa !');
                 }
-                if (@$data_salary->status != \StatusConst::CHECKING) {
-                    return returnMessageAjax(100, 'Dữ liệu không hợp lệ!');
-                }
+                $type = $worker['type'];
+                $data_handle = !empty($supply->{$type}) ? json_decode($supply->{$type}, true) : [];
+                $handle_qty = @$data_salary->qty ?? 0;
+                $confirm = (new \App\Modules\Worker\Services\WorkerService)->checkInWorkerSalary($data_salary, $type, $qty, $supply, $data_handle, $worker, $obj, $table_supply, $handle_qty);
+                if ($confirm) {
+                    # code...
+                } 
             }else{
                 return returnMessageAjax(100, 'Bạn không có quyền thực hiện tao tác KCS sau in !');
             }

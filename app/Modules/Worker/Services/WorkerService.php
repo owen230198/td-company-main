@@ -63,7 +63,7 @@ class WorkerService extends BaseService
         return view('Worker::commands.view', $data);
     }
 
-    public function checkInWorkerSalary($data_command, $type, $qty, $supply, $data_handle, $worker, $obj, $table_supply)
+    public function checkInWorkerSalary($data_command, $type, $qty, $supply, $data_handle, $worker, $obj, $table_supply, $handle_qty)
     {
         $handle_config = $type == \TDConst::FILL ? json_decode($data_command->fill_handle, true) : $data_handle;
         $obj_salary = new WSalary($supply, $handle_config, $worker);
@@ -204,10 +204,12 @@ class WorkerService extends BaseService
                 $update = $obj->update(['status' => \StatusConst::CHECKING]);
                 if ($insert) {
                     return returnMessageAjax(200, 'Đã gửi yêu cầu duyệt chấm công đến bộ phận KCS sau in !', url('Worker'));
+                }else{
+                    return returnMessageAjax(100, 'Có lỗi xảy ra, vui lòng thử chấm công lại !'); 
                 } 
             }
             //Tính lương công nhân & lưu bảng lương
-            $update = $this->checkInWorkerSalary($data_command, $type, $qty, $supply, $data_handle, $worker, $obj, $table_supply);
+            $update = $this->checkInWorkerSalary($data_command, $type, $qty, $supply, $data_handle, $worker, $obj, $table_supply, $handle_qty);
             if (!empty($update)) {
                 return returnMessageAjax(200, 'Bạn đã chấm công thành công với số lượng : '.$qty.' !', url('Worker'));  
             }else{
