@@ -68,8 +68,8 @@
                 @php
                     $each_price = (int) $product['total_amount'] / (int) @$product['qty']
                 @endphp
-                <td data-label="ĐG" class="text-center table_style">{{ number_format($each_price) }} đ</td>
-                <td data-label="T.Tiền(VNĐ)" class="text-center table_style">{{ number_format(round($product['total_amount'], -4)) }} đ</td>
+                <td data-label="ĐG" class="text-center table_style">{{ number_format($each_price, 3) }} đ</td>
+                <td data-label="T.Tiền(VNĐ)" class="text-center table_style">{{ number_format(round($product['total_amount'], -3)) }} đ</td>
             </tr>
         @endforeach
     </tbody>
