@@ -56,16 +56,16 @@
 					$paper_total = \DB::table('papers')->select('total_cost')->where($pwhere)->sum('total_cost');
 					$supply_total = \DB::table('supplies')->select('total_cost')->where($pwhere)->sum('total_cost');
 					$fill_finish_total = \DB::table('fill_finishes')->select('total_cost')->where($pwhere)->sum('total_cost');
-					$total_cost = (string) ($paper_total + $supply_total + $fill_finish_total);
+					$cost = (string) ($paper_total + $supply_total + $fill_finish_total);
 				}else{
-					$total_cost = $product->total_cost;
+					$cost = $product->total_cost;
 				}
+				$total_cost = round($cost / $product->qty) * $product->qty;
 				$outside_products = \DB::table('products')->where('parent', $product->id)->get();
 				$total_outside = getTotalProductByArr($outside_products, $arr_quote);
 				$update_product['total_cost'] = $total_cost + $total_outside['total_cost'];
 				$get_perc = (float) $update_product['total_cost'] + (float) @$arr_quote['ship_price'];
-				$toal_amount = (float) @$arr_quote['profit'] > 0 ? (string) ($get_perc * ((100 + (float) @$arr_quote['profit'])/100)) : $get_perc;
-				$update_product['total_amount'] = round($toal_amount / $product->qty) * $product->qty;
+				$update_product['total_amount'] = @$arr_quote['profit'] > 0 ? (string) ($get_perc * ((100 + (float) @$arr_quote['profit'])/100)) : $get_perc;
 				\DB::table('products')->where('id', $product->id)->update($update_product);
 				$ret['total_cost'] += $update_product['total_cost'];
 				$factor ++;
@@ -106,7 +106,7 @@
 			$total_cost = $quote_total['total_cost'];
 			$factor = (float) $quote_total['factor'];
 			$update_quote['total_cost'] = $total_cost;
-			$update_quote['profit'] = ($quote_total['total_amount'] / ($total_cost + ($ship_price * $factor)) * 100) - 100;
+			$update_quote['profit'] = ($quote_amount / ($total_cost + ($ship_price * $factor)) * 100) - 100;
 			\DB::table('quotes')->where('id', $arr_quote['id'])->update($update_quote);
 		}
 	}
