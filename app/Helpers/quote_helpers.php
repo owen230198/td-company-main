@@ -64,7 +64,8 @@
 				$total_outside = getTotalProductByArr($outside_products, $arr_quote);
 				$update_product['total_cost'] = $total_cost + $total_outside['total_cost'];
 				$get_perc = (float) $update_product['total_cost'] + (float) @$arr_quote['ship_price'];
-				$update_product['total_amount'] = (float) @$arr_quote['profit'] > 0 ? (string) ($get_perc * ((100 + (float) @$arr_quote['profit'])/100)) : $get_perc;
+				$toal_amount = (float) @$arr_quote['profit'] > 0 ? (string) ($get_perc * ((100 + (float) @$arr_quote['profit'])/100)) : $get_perc;
+				$update_product['total_amount'] = round($toal_amount / $product->qty) * $product->qty;
 				\DB::table('products')->where('id', $product->id)->update($update_product);
 				$ret['total_cost'] += $update_product['total_cost'];
 				$factor ++;

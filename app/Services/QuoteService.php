@@ -272,8 +272,8 @@ class QuoteService extends BaseService
         $arr['product_detail'] = $product['detail'];
         $arr['pro_qty'] = @$product['qty'];
         $each_price = $product['total_amount'] / (int) @$product['qty'];
-        $arr['pro_price'] = number_format($each_price, 3);
-        $arr['pro_total'] = number_format(round($product['total_amount'], -3));
+        $arr['pro_price'] = number_format($each_price);
+        $arr['pro_total'] = number_format($product['total_amount']);
         return $arr;
     }
 
