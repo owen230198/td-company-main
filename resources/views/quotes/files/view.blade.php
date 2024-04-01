@@ -44,7 +44,7 @@
                     @include('quotes.files.table')
     
                     <div class="text-center p-2 border_grey">
-                        <p class="fs-23 color_red font_bold mb-1">TỔNG GIÁ : 	{{ number_format(ceil($each_price * @$product['qty'])) }} VNĐ</p>
+                        <p class="fs-23 color_red font_bold mb-1">TỔNG GIÁ : 	{{ number_format(round((int)$data_quote['total_amount'], -4)) }} VNĐ</p>
                         <p class="fs-18 font-italic">(Tổng cộng chưa VAT 10%)</p>
                     </div>
                 </div>
