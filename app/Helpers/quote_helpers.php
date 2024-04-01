@@ -60,12 +60,14 @@
 				}else{
 					$cost = $product->total_cost;
 				}
-				$total_cost = round($cost / $product->qty) * $product->qty;
+				$round_number = $product->qty;
+				$total_cost = round($cost / $round_number) * $round_number;
 				$outside_products = \DB::table('products')->where('parent', $product->id)->get();
 				$total_outside = getTotalProductByArr($outside_products, $arr_quote);
 				$update_product['total_cost'] = $total_cost + $total_outside['total_cost'];
 				$get_perc = (float) $update_product['total_cost'] + (float) @$arr_quote['ship_price'];
-				$update_product['total_amount'] = @$arr_quote['profit'] > 0 ? (string) ($get_perc * ((100 + (float) @$arr_quote['profit'])/100)) : $get_perc;
+				$total_amount = @$arr_quote['profit'] > 0 ? (string) ($get_perc * ((100 + (float) @$arr_quote['profit'])/100)) : $get_perc;
+				$update_product['total_amount'] = round($total_amount / $round_number) * $round_number;
 				\DB::table('products')->where('id', $product->id)->update($update_product);
 				$ret['total_cost'] += $update_product['total_cost'];
 				$factor ++;

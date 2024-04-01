@@ -297,7 +297,7 @@ class QuoteService extends BaseService
         if (count($list_pro) > 0) {
             $templateProcessor->cloneRowAndSetValues('pro_num', $list_pro);
         }
-        $templateProcessor->setValue('quote_total', number_format(round((int) @$arr_quote['total_amount'], -3)));
+        $templateProcessor->setValue('quote_total', number_format($arr_quote['total_amount']));
         $user = getDetailDataByID('NUser', @$arr_quote['created_by']);
         $templateProcessor->setValue('user_name', @$user['name']);
         $templateProcessor->setValue('user_phone', @$user['phone']);
