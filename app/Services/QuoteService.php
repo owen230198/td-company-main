@@ -271,7 +271,7 @@ class QuoteService extends BaseService
         $arr['paper_finish'] = getTextQuoteFinish($main_paper);
         $arr['product_detail'] = $product['detail'];
         $arr['pro_qty'] = @$product['qty'];
-        $pro_total_amount = round($product['total_amount'], -3);
+        $pro_total_amount = round($product['total_amount'], -4);
         $each_price = $pro_total_amount / (int) @$product['qty'];
         $arr['pro_price'] = number_format($each_price);
         $arr['pro_total'] = number_format($pro_total_amount);
