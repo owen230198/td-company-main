@@ -66,10 +66,11 @@
                 <td data-label="DVT" class="text-center table_style">Sản phẩm</td>
                 <td data-label="SL" class="text-center table_style">{{ @$product['qty'] }}</td>
                 @php
-                    $each_price = (int) $product['total_amount'] / (int) @$product['qty']
+                    $pro_total_amount = round($product['total_amount'], -3);
+                    $each_price = $pro_total_amount / (int) @$product['qty']
                 @endphp
                 <td data-label="ĐG" class="text-center table_style">{{ number_format($each_price) }} đ</td>
-                <td data-label="T.Tiền(VNĐ)" class="text-center table_style">{{ number_format(round($product['total_amount'], -3)) }} đ</td>
+                <td data-label="T.Tiền(VNĐ)" class="text-center table_style">{{ $pro_total_amount }} đ</td>
             </tr>
         @endforeach
     </tbody>
