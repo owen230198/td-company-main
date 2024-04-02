@@ -182,9 +182,9 @@ class WorkerService extends BaseService
                 $re_insert['machine_type'] = $data_command->machine_type;
                 $re_insert['qty'] = $handle_qty - $qty;
                 $re_insert['created_by'] = $data_command->created_by;
+                $re_insert['name'] = $data_command->name;
                 if ($type == \TDConst::FILL) {
                     $re_insert['fill_materal'] = $data_command->fill_materal;
-                    $re_insert['name'] = $data_command->name;
                     $re_insert['fill_handle'] = $data_command->fill_handle;
                     $re_insert['handle'] = $data_command->handle;
                 }

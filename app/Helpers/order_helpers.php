@@ -307,6 +307,13 @@ use App\Models\Product;
         }
     }
 
+    if (!function_exists('isQtyFormulaBySupply')) {
+        function isQtyFormulaBySupply($key)
+        {
+            return in_array($key, [\TDConst::PRINT, \TDConst::NILON, \TDConst::METALAI, \TDConst::COMPRESS, \TDConst::UV, \TDConst::ELEVATE, \TDConst::FLOAT, \TDConst::CUT]);
+        }
+    }
+
     if (!function_exists('getSupplyNameByKey')) {
         function getSupplyNameByKey($key) {
             switch ($key) {

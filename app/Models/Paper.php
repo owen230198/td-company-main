@@ -75,6 +75,10 @@ class Paper extends Model
                 $data_process['main'] = !empty($paper['main']) ? $paper['main'] : 0;
                 $data_process['ext_cate'] = @$paper['ext_cate'];
                 $data_process['note'] = @$paper['note'];
+                if (@$paper['handle_type'] == \TDConst::MADE_BY_OWN) {
+                    $data_process['supp_qty'] = $paper['supp_qty'];
+                    $data_process['base_supp_qty'] = $paper['base_supp_qty'];
+                }
                 (new BaseService)->configBaseDataAction($data_process);
                 if (@$paper['supp_qty'] > 0 || @$paper['handle_type'] == \TDConst::JOIN_HANDLE) {
                     if (!empty($paper['id'])) {

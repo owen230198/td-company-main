@@ -8,7 +8,7 @@
             @if (!empty($not_accepted_table) && is_array($not_accepted_table))
                 <div class="col-12 my-4">
                     <h2 class="fs-15 text-uppercase font_bold pb-1 mb-3 border_bot_eb">Yêu xử lý công việc</h2>
-                    <div class="row row-5">
+                    <div class="row row-5 justify-content-center">
                         @foreach ($not_accepted_table as $command)
                         <div class="col-lg-2 col-md-6 mb_10 text-center">
                             @php

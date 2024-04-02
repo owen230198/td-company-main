@@ -134,10 +134,8 @@ trait QPaperTrait
         if ($handle_type == \TDConst::MADE_BY_OWN) {
             $data_action['nqty'] = $data['nqty'];
             $data_action['double'] = $data['double'];
-            $data_action['base_supp_qty'] = $data['base_supp_qty'];
             $data_action['compent_percent'] = $data['compent_percent'];
             $data_action['compent_plus'] = $data['compent_plus'];
-            $data_action['supp_qty'] = $data['supp_qty'];
             if (!empty($data['print'])) {
                 $data_action['print'] = $this->configDataPrint($data['print']);
             }

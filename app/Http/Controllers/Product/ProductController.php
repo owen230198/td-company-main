@@ -315,19 +315,37 @@ use Illuminate\Http\Request;
                 }
                 $table_supply = @$data_salary->table_supply;
                 $supply = \DB::table($table_supply)->find(@$data_salary->supply);
-                if ($supply->isEmpty()) {
+                if (empty($supply)) {
                     return returnMessageAjax(100, 'Dữ liệu đơn hàng không tồn tại hoặc đã bị xóa');
                 }
                 $worker = WUser::find($obj->worker);
-                if (!empty($worker)) {
+                if (empty($worker)) {
                     return returnMessageAjax(100, 'Dữ liệu công nhân không tồn tại hoặc đã bị xóa !');
                 }
                 $type = $worker['type'];
                 $data_handle = !empty($supply->{$type}) ? json_decode($supply->{$type}, true) : [];
                 $handle_qty = @$data_salary->qty ?? 0;
-                $confirm = (new \App\Modules\Worker\Services\WorkerService)->checkInWorkerSalary($data_salary, $type, $qty, $supply, $data_handle, $worker, $obj, $table_supply, $handle_qty);
+                $confirm = (new \App\Modules\Worker\Services\WorkerService)->checkInWorkerSalary($data_salary, $type, $qty, $supply, $data_handle, $worker, $obj_salary, $table_supply, $handle_qty);
                 if ($confirm) {
-                    # code...
+                    $bad_qty = $obj_qty - $qty;
+                    if ($bad_qty > 0) {
+                        $rework_table = 'c_reworks';
+                        $data_rework['code'] = 'RW-'.getCodeInsertTable($rework_table);
+                        $data_rework['name'] = $data_salary->name;
+                        $data_rework['product'] = $data_salary->product;
+                        $data_rework['type'] = $type;
+                        $data_rework['worker'] = $worker['id'];
+                        $data_rework['qty'] = $bad_qty; 
+                        $data_rework['status'] = \StatusConst::NOT_ACCEPTED;
+                        (new \BaseService)->configBaseDataAction($data_rework);
+                        \DB::table('c_reworks')->insert($data_rework);
+                    }
+                    $obj_salary->update(['qty' => $bad_qty]);
+                    $obj->status = \StatusConst::SUBMITED;
+                    $obj->save();
+                    return returnMessageAjax(200, "Đã xử lý KCS lệnh in ".$data_salary->name." thành công cho công nhân ". $worker['name'], \StatusConst::RELOAD);
+                }else{
+                    return returnMessageAjax(100, "Đã có lỗi xảy ra, vui lòng thử lại !");
                 } 
             }else{
                 return returnMessageAjax(100, 'Bạn không có quyền thực hiện tao tác KCS sau in !');
