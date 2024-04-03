@@ -337,6 +337,7 @@ use Illuminate\Http\Request;
                         $data_rework['worker'] = $worker['id'];
                         $data_rework['qty'] = $bad_qty; 
                         $data_rework['status'] = \StatusConst::NOT_ACCEPTED;
+                        $data_rework['rework_status'] = Product::NEED_REWORK;
                         (new \BaseService)->configBaseDataAction($data_rework);
                         \DB::table('c_reworks')->insert($data_rework);
                     }
