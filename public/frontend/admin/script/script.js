@@ -837,6 +837,17 @@ var kscAfterPrintModule = function()
     })
 }
 
+var reworkButtonModule = function()
+{
+    $(document).on("click", "button.__confirm_rework", function (event) {
+        event.preventDefault();
+        let modal = $("#actionModal");
+        let id = $(this).data("id");
+        modal.find("iframe").attr("src", getBaseRoute('product-require-rework/'+id));
+        modal.modal('show');
+    });
+}
+
 $(function () {
     // loadingPage();
     submitActionAjaxForm();
@@ -876,4 +887,5 @@ $(function () {
     confirmImportProductWarehouse();
     productWarehouseHistory();
     kscAfterPrintModule();
+    reworkButtonModule();
 });

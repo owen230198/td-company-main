@@ -340,6 +340,7 @@ class QuoteController extends Controller
         $made_by = (int) $request->input('made_by');
         $data['pro_index'] = $request->input('pro_index');
         $data['supp_index'] = $request->input('supp_index');
+        $data['rework'] = $request->input('rework');
         if ($made_by == \TDConst::JOIN_HANDLE) {
             return view('quotes.products.papers.handle_types.join_handle', $data);
         }

@@ -3,7 +3,8 @@
     use App\Http\Controllers\Controller;
     use App\Models\AfterPrint;
     use App\Models\CExpertise;
-    use App\Models\Order;
+use App\Models\CRework;
+use App\Models\Order;
     use App\Models\Product;
     use App\Models\Quote;
 use App\Models\WUser;
@@ -190,24 +191,29 @@ use Illuminate\Http\Request;
         public function productRequireRework(Request $request, $id)
         {
             $is_post = $request->isMethod('POST');
-            if (\GroupUser::isAdmin() || \GroupUser::isKcs()) {
-                $product_obj = Product::find($id);
-                $pro_outside_qty = (int) $product_obj->outside_qty;
-                if (empty($product_obj) || @$product_obj->status != Product::NEED_REWORK) {
+            if (\GroupUser::isAdmin() || \GroupUser::Sale()) {
+                $obj = CRework::find($id);
+                if (empty($obj) || @$obj->status != \StatusConst::NOT_ACCEPTED || @$obj->rework_status != Product::NEED_REWORK) {
                     return customReturnMessage(false, $is_post, ['message' => 'Dữ liệu không hợp lệ !']);
                 }
-                if ($pro_outside_qty <= 0) {
+                $qty = (int) @$obj->qty;
+                if ($qty<= 0) {
                     return customReturnMessage(false, $is_post, ['message' => 'Số lượng cần sản phẩm cần sản xuất lại không hợp lệ !']);
                 }
+                $product_obj = Product::find($obj->product);
+                if (empty($product_obj)) {
+                    return customReturnMessage(false, $is_post, ['message' => 'Không tìm thấy dữ liệu sản phẩm !']);
+                }
                 if (!$is_post) {
-                    $data['title'] = 'Yêu cầu sản xuất lại '.$pro_outside_qty.' sản phẩm '.$product_obj->name;
-                    $data['parent_url'] = ['link' => session()->get('back_url'), 'note' => 'Danh sách sản phẩm cần sản xuất lại'];
+                    $data['nosidebar'] = true;
+                    $data['title'] = 'Yêu cầu sản xuất lại '.$qty.' sản phẩm '.$product_obj->name;
+                    $data['parent_url'] = ['link' => session()->get('back_url'), 'note' => 'Yêu cầu sản xuất lại'];
                     $product_obj->name = $product_obj->name.' (Sản xuất lại do lỗi kỹ thuật)';
-                    $product_obj->qty = $pro_outside_qty;
+                    $product_obj->qty = '';
                     $product_obj->design = 4;
                     $data['product'] = $product_obj;
                     $data['cate'] = $product_obj->category;
-                    $data['elements'] = getProductElementData($data['cate'], $id, false, false, true, true);
+                    $data['elements'] = getProductElementData($data['cate'], $product_obj->$id, false, false, true, true);
                     return view('kcs.reworks.view', $data);
                 }else{
                     $data = $request->except('_token');

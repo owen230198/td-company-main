@@ -1,4 +1,5 @@
 @php
+    $key_supp = \TDConst::PAPER;
     $_compen_percent = getDataConfig('QuoteConfig', 'COMPEN_PERCENT');
     $_plus_direct = (int) getDataConfig('QuoteConfig', 'PLUS_DIRECT');
     $_plus_to_per = (int) getDataConfig('QuoteConfig', 'PLUS_TO_PERCENT');
