@@ -42,7 +42,7 @@
     @include('view_update.view', $pro_paper_qttv)
     @include('quotes.products.papers.size')
 </div>
-<div class="paper_ajax_after_print">
+<div class="paper_ajax_after_print {{ !empty($rework) ? 'd-none' : '' }}">
     @if ((@$supp_index == 0 || !empty($supply_obj)) && empty($no_exc))
         @include('quotes.products.papers.after_print', ['data_paper' => @$supply_obj, ])    
     @endif

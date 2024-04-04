@@ -6,7 +6,7 @@
 @section('content')
     @include('title_base_page')
     <div class="dashborad_content pb-5">
-        <form action="{{ url('product-require-rework/'.$product->id) }}" method="POST" class="config_content baseAjaxForm" enctype="multipart/form-data">
+        <form action="{{ url('product-require-rework/'.$data_rework->id) }}" method="POST" class="config_content baseAjaxForm" enctype="multipart/form-data">
             @csrf
             <div class="tab_pane_quote_pro">
                 <div class="config_handle_paper_pro">

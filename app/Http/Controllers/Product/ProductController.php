@@ -166,14 +166,14 @@ use Illuminate\Http\Request;
             }
         }
 
-        public function validateSupply($data, $outside_qty)
+        public function validateSupply($data, $req_qty)
         {
             $arr[\TDConst::PAPER] = 'Giấy in';
             $arr = $arr + \TDConst::ALL_SUPPLY;
             foreach ($arr as $key => $name) {
                 if (!empty($data[$key])) {
                     foreach ($data[$key] as $supply) {
-                        if ((int) @$supply['qty'] < $outside_qty) {
+                        if ((int) @$supply['qty'] < $req_qty) {
                             $supp_name = $key == \TDConst::PAPER ? $supply['name'] : $name;
                             return returnMessageAjax(100, 'Số lượng sản xuất lại cho vật tư '.$supp_name.' không hợp lệ !');
                         }
@@ -181,7 +181,7 @@ use Illuminate\Http\Request;
                 }
             }
             if (!empty($data[\TDConst::FILL_FINISH])) {
-                if ((int) @$data[\TDConst::FILL_FINISH]['qty'] <$outside_qty) {
+                if ((int) @$data[\TDConst::FILL_FINISH]['qty'] < $req_qty) {
                     return returnMessageAjax(100, 'Số lượng sản xuất lại cho khâu hoàn thiện cuối không hợp lệ !');
                 }
             }
@@ -196,8 +196,8 @@ use Illuminate\Http\Request;
                 if (empty($obj) || @$obj->status != \StatusConst::NOT_ACCEPTED || @$obj->rework_status != Product::NEED_REWORK) {
                     return customReturnMessage(false, $is_post, ['message' => 'Dữ liệu không hợp lệ !']);
                 }
-                $qty = (int) @$obj->qty;
-                if ($qty<= 0) {
+                $req_qty = (int) @$obj->qty;
+                if ($req_qty<= 0) {
                     return customReturnMessage(false, $is_post, ['message' => 'Số lượng cần sản phẩm cần sản xuất lại không hợp lệ !']);
                 }
                 $product_obj = Product::find($obj->product);
@@ -206,14 +206,15 @@ use Illuminate\Http\Request;
                 }
                 if (!$is_post) {
                     $data['nosidebar'] = true;
-                    $data['title'] = 'Yêu cầu sản xuất lại '.$qty.' sản phẩm '.$product_obj->name;
+                    $data['title'] = 'Yêu cầu sản xuất lại '.$req_qty.' sản phẩm '.$product_obj->name;
                     $data['parent_url'] = ['link' => session()->get('back_url'), 'note' => 'Yêu cầu sản xuất lại'];
                     $product_obj->name = $product_obj->name.' (Sản xuất lại do lỗi kỹ thuật)';
                     $product_obj->qty = '';
                     $product_obj->design = 4;
                     $data['product'] = $product_obj;
+                    $data['data_rework'] = $obj;
                     $data['cate'] = $product_obj->category;
-                    $data['elements'] = getProductElementData($data['cate'], $product_obj->$id, false, false, true, true);
+                    $data['elements'] = getProductElementData($data['cate'], $product_obj->id, false, false, true, true);
                     return view('kcs.reworks.view', $data);
                 }else{
                     $data = $request->except('_token');
@@ -221,10 +222,10 @@ use Illuminate\Http\Request;
                     if (empty($data_product)) {
                         return returnMessageAjax(100, 'Không tìm thấy dữ liệu sản phẩm !');
                     }
-                    if ((int) $data_product['qty'] < $pro_outside_qty) {
+                    if ((int) $data_product['qty'] < $req_qty) {
                         return returnMessageAjax(100, 'Số lượng sản phẩm sản xuất lại không hợp lệ !');
                     }
-                    $validate = $this->validateSupply($data_product, $pro_outside_qty);
+                    $validate = $this->validateSupply($data_product, $req_qty);
                     if (@$validate['code'] != 200) {
                         return $validate;
                     }
@@ -234,9 +235,14 @@ use Illuminate\Http\Request;
                         $product_data = Product::find($product_id);
                         $arr_update = getTotalProductByArr([$product_data]);
                         $arr_update['code'] = 'DH-'.getCodeInsertTable('products');
-                        $arr_update['status'] = Order::TECH_SUBMITED;
+                        $arr_update['status'] = Order::DESIGN_SUBMITED;
                         $arr_update['order_created'] = 1;
                         $arr_update['expertise_id'] = $product_obj->expertise_id;
+                        foreach (Product::FEILD_FILE as $key => $file) {
+                            if ($key != 'handle_shape_file') {
+                                $arr_update[$key] = $product_obj->{$key};
+                            }
+                        } 
                         Product::where('id', $product_id)->update($arr_update);
                         Product::where('id', $id)->update(['status'=> Product::WAITING_WAREHOUSE, 'rework_status' => Product::REWORKED]);
                         return returnMessageAjax(200, 'Đã gửi yêu cầu sản xuất lại sản phẩm '.$data_product['name'], getBackUrl());

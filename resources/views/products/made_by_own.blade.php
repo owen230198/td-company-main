@@ -39,7 +39,7 @@
         @include('view_update.view', $style_product_field)
     </div>
 </div>
-@if (\GroupUser::isSale() || \GroupUser::isTechApply() || \GroupUser::isAdmin())
+@if ((\GroupUser::isSale() || \GroupUser::isTechApply() || \GroupUser::isAdmin()) && empty($rework))
     @php
         $sale_shape_file = \App\Models\Product::SALE_SHAPE_FILE_FIELD;
         $sale_shape_file['name'] = $pro_base_name_input.'[sale_shape_file]';
