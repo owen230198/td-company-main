@@ -8,11 +8,11 @@
         {{ @$button['note'] }}
     </button>
 @else
-    @php
+    {{-- @php
         $link = $button['link'];
         if (str_contains($link, '<id>') || str_contains($link, '<table>')) {
             if (str_contains($link, '<id>')) {
-            $link = str_replace('<id>', $data->id, $link);
+                $link = str_replace('<id>', $data->id, $link);
             }
             if (str_contains($link, '<table>')) {
                 $link = str_replace('<table>', $tableItem['name'], $link);
@@ -23,5 +23,5 @@
     @endphp
     <a href="{{ url(@$link) }}" class="table-btn mr-2 mb-2" title="{{ @$button['note'] }}">
         <i class="fa fa-{{ $button['icon'] }} fs-14" aria-hidden="true"></i>
-    </a>
+    </a> --}}
 @endif
