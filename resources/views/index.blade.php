@@ -21,7 +21,7 @@
 
 <body>
     @if (@$nosidebar)
-        <div class="page_content container-fluid h-100">
+        <div class="page_content container-fluid pb-3">
             @yield('content')
         </div>
     @else

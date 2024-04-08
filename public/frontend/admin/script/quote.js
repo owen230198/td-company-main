@@ -368,7 +368,7 @@ var selectProductMadeBy = function()
     if (empty(made_by)) {
       $('.ajax_product_view_by_category').html('');
     }
-    ajaxViewTarget('get-view-made-by-product?made_by=' + made_by + '&pro_index=' + $(this).attr('pro_index') + '&supp_index=' + $(this).attr('supp_index'), ajax_made_by_content, ajax_made_by_content);
+    ajaxViewTarget('get-view-made-by-product?made_by=' + made_by + '&pro_index=' + $(this).attr('pro_index') + '&supp_index=' + $(this).attr('supp_index')+ '&rework=' + $(this).attr('rework'), ajax_made_by_content, ajax_made_by_content);
   })
 }
 

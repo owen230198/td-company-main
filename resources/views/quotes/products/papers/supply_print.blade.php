@@ -2,6 +2,12 @@
     $key_supp = \TDConst::PAPER;
     $base_name = 'product['.$pro_index.']['.$key_supp.']['.$supp_index.']';
     $is_from_partner = !empty(@$supply_obj->parent);
+    $handle_type_options = [\TDConst::MADE_BY_OWN => 'Tuấn Dung gia công ngay', 
+                            \TDConst::JOIN_HANDLE => 'Tạo lệnh in ghép với sản phẩm khác', 
+                            \TDConst::MADE_BY_PARTNER => 'Mua từ đơn vị khác'];
+    if (!empty($rework)) {
+        unset($handle_type_options[\TDConst::MADE_BY_PARTNER]);
+    }
     $paper_base_fields = [
         [
             'name' => 'product['.$pro_index.']['.$key_supp.']['.$supp_index.'][name]',
@@ -17,15 +23,11 @@
             'name' => $base_name.'[handle_type]',
             'note' => 'Hình thức sản xuất',
             'type' => 'select',
-            'attr' => ['required' => 1, 'inject_class' => "__select_pro_made_by", 'inject_attr' => 'pro_index='.$pro_index.' supp_index='.$supp_index, 
+            'attr' => ['required' => 1, 'inject_class' => "__select_pro_made_by", 'inject_attr' => 'pro_index='.$pro_index.' supp_index='.$supp_index.' rework='.@$rework ?? 0 , 
             'disable_field' => !empty($disable_all) || in_array('size_name', @$arr_disable ?? []) ? 1 : 0],
             'value' => $is_from_partner ? \TDConst::MADE_BY_PARTNER : @$supply_obj->handle_type,
             'other_data' => ['data' => [
-                'options' => [
-                        \TDConst::MADE_BY_OWN => 'Tuấn Dung gia công ngay', 
-                        \TDConst::JOIN_HANDLE => 'Tạo lệnh in ghép với sản phẩm khác', 
-                        \TDConst::MADE_BY_PARTNER => 'Mua từ đơn vị khác'
-                    ]
+                'options' => $handle_type_options,
                 ]
             ]
         ]

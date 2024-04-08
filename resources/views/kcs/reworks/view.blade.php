@@ -4,14 +4,15 @@
     <link rel="stylesheet" href="{{ asset('frontend/admin/css/order.css') }}">
 @endsection
 @section('content')
-    <div class="dashborad_content position-relative">
-        <form action="{{ url('product-require-rework/'.$product->id) }}" method="POST" class="config_content baseAjaxForm" enctype="multipart/form-data">
+    @include('title_base_page')
+    <div class="dashborad_content pb-5">
+        <form action="{{ url('product-require-rework/'.$data_rework->id) }}" method="POST" class="config_content baseAjaxForm" enctype="multipart/form-data">
             @csrf
             <div class="tab_pane_quote_pro">
                 <div class="config_handle_paper_pro">
                     @include('products.base_field', ['pro_index' => 0, 'rework' => true])
                     @include('quotes.products.structure', ['pro_index' => 0, 'pos_tab_0' => true, 'rework' => true])
-                    <div class="group_btn_action_form text-center">
+                    <div class="group_btn_action_form text-center w-100">
                         <button type="submit" class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-3">
                             <i class="fa fa-check mr-2 fs-14" aria-hidden="true"></i>Hoàn tất
                         </button>

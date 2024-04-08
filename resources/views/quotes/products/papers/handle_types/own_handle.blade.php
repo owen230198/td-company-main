@@ -1,4 +1,5 @@
 @php
+    $key_supp = \TDConst::PAPER;
     $_compen_percent = getDataConfig('QuoteConfig', 'COMPEN_PERCENT');
     $_plus_direct = (int) getDataConfig('QuoteConfig', 'PLUS_DIRECT');
     $_plus_to_per = (int) getDataConfig('QuoteConfig', 'PLUS_TO_PERCENT');
@@ -41,7 +42,7 @@
     @include('view_update.view', $pro_paper_qttv)
     @include('quotes.products.papers.size')
 </div>
-<div class="paper_ajax_after_print">
+<div class="paper_ajax_after_print {{ !empty($rework) ? 'd-none' : '' }}">
     @if ((@$supp_index == 0 || !empty($supply_obj)) && empty($no_exc))
         @include('quotes.products.papers.after_print', ['data_paper' => @$supply_obj, ])    
     @endif
