@@ -151,7 +151,7 @@ class QuoteService extends BaseService
             $data_action['design_shape_file'] = $data['design_shape_file'];
         }
         if (!empty($data['handle_shape_file'])) {
-            $data_action['handle_shape_file'] = $data['design_shape_file'];
+            $data_action['handle_shape_file'] = $data['handle_shape_file'];
         }
         if (!empty($data['note'])) {
             $data_action['note'] = json_encode($data['note']);
