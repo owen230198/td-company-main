@@ -143,12 +143,9 @@ class WorkerService extends BaseService
             WSalary::checkStatusUpdate($table_supply, $supply->id, \StatusConst::SUBMITED);
             //kiểm tra và update trạng thái hoàn tất công đoạn trong vật tư
             $arr_where = ['table_supply' =>$table_supply, 'supply' => $supply->id, 'type' => $type, 'status' => \StatusConst::SUBMITED];
-            $submited_qty = \DB::table('w_salaries')->select('qty')->where($arr_where)->sum('qty');
             $data_handle['handle_qty'] = $handle_qty - $qty;
-            if ($submited_qty >= (int) $qty_check_update) {
-                $data_handle['act'] = 2;
-                \DB::table($table_supply)->where('id', $supply->id)->update([$type => json_encode($data_handle)]);
-            }
+            $data_handle['act'] = 2;
+            \DB::table($table_supply)->where('id', $supply->id)->update([$type => json_encode($data_handle)]);
             return $update;
         }else{
             return false;

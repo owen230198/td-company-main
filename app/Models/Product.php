@@ -9,6 +9,7 @@
         static $childTable = ['papers', 'supplies', 'fill_finishes'];
         const NO_REWORK = 'no_rework';
         const NEED_REWORK = 'need_rework';
+        const REWORKING = 'reworking';
         const REWORKED = 'reworked';
         const WAITING_WAREHOUSE = 'waiting_warehouse';
         const CLONE_FIELD = ['name', 'category', 'qty', 'design', 'length', 'width', 'height', 'total_amount', 'act'];

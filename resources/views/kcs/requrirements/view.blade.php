@@ -9,9 +9,6 @@
             <p class="m-2">Số lượng: <strong class="ml-1 color_green">
                 {{ $data_product->qty }},
             </strong></p>
-            <p class="m-2">Chưa nhập kho: <strong class="ml-1 color_green">
-                {{ $data_product->outside_qty }},
-            </strong></p>
             <p class="m-2">Nhóm sản phẩm: <strong class="ml-1 color_green">
                 {{ getFieldDataById('name', 'product_categories', $data_product->category) }},
             </strong></p>
@@ -33,13 +30,6 @@
                     'type' => 'text',
                     'attr' => ['disable_field' => 1],
                     'value' => $data_product->name
-                ],
-                [
-                    'name' => '',
-                    'note' => 'Số lượng chưa nhập kho',
-                    'type' => 'text',
-                    'attr' => ['disable_field' => 1],
-                    'value' => $data_product->outside_qty
                 ],
                 [
                     'name' => 'take_status',

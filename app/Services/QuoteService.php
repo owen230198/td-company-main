@@ -108,7 +108,6 @@ class QuoteService extends BaseService
         }
         if (!empty($data['qty'])) {
             $data_action['qty'] = $data['qty'];
-            $data_action['outside_qty'] = $data['qty'];
         }
         $data_action['detail'] = @$data['detail'];
         if (!empty($data['id'])) {

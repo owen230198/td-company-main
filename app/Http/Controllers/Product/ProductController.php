@@ -215,6 +215,7 @@ use Illuminate\Http\Request;
                     $data['data_rework'] = $obj;
                     $data['cate'] = $product_obj->category;
                     $data['elements'] = getProductElementData($data['cate'], $product_obj->id, false, false, true, true);
+                    dd($data['elements']);
                     return view('kcs.reworks.view', $data);
                 }else{
                     $data = $request->except('_token');
@@ -234,18 +235,32 @@ use Illuminate\Http\Request;
                     if ($process) {
                         $product_data = Product::find($product_id);
                         $arr_update = getTotalProductByArr([$product_data]);
+                        unset($arr_update['factor']);
                         $arr_update['code'] = 'DH-'.getCodeInsertTable('products');
                         $arr_update['status'] = Order::DESIGN_SUBMITED;
                         $arr_update['order_created'] = 1;
                         $arr_update['expertise_id'] = $product_obj->expertise_id;
+                        $arr_update['rework_from'] = $product_obj->id;
                         foreach (Product::FEILD_FILE as $key => $file) {
                             if ($key != 'handle_shape_file') {
                                 $arr_update[$key] = $product_obj->{$key};
                             }
-                        } 
+                        }
                         Product::where('id', $product_id)->update($arr_update);
-                        Product::where('id', $id)->update(['status'=> Product::WAITING_WAREHOUSE, 'rework_status' => Product::REWORKED]);
-                        return returnMessageAjax(200, 'Đã gửi yêu cầu sản xuất lại sản phẩm '.$data_product['name'], getBackUrl());
+
+                        //Đánh dấu sản phẩm này đã từng được sản xuất lại
+                        $product_obj->rework = 1;
+                        $product_obj->save();
+
+                        //update trạng thái lệnh yêu cầu sx lại đã đc xử lí
+                        $obj->status = \StatusConst::SUBMITED;
+                        $obj->rework_status = Product::REWORKING;
+                        $status = $obj->save();
+                        if ($status) {
+                            return returnMessageAjax(200, 'Đã gửi yêu cầu sản xuất lại sản phẩm '.$data_product['name'], \StatusConst::CLOSE_POPUP);
+                        }else{
+                            return returnMessageAjax(100, 'Có lỗi xảy ra, vui lòng thử lại !', \StatusConst::CLOSE_POPUP);
+                        }
                     }else{
                         return returnMessageAjax(100, 'Đã có lỗi xảy ra, vui lòng thử lại !');
                     }
