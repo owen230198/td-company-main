@@ -761,11 +761,11 @@ var productWarehouseHistory = function()
 var showKcsAfterPrintPopup = function(id, qty, name){
     swal({
         title: "KCS sản phẩm sau in",
-        text:"Nhập " + "số tờ in "+name+" đã đạt yêu cầu để thợ in được xác nhận lương.",
+        // text:"Nhập " + "số tờ in "+name+" đã đạt yêu cầu để thợ in được xác nhận lương.",
         content: {
             element: "input",
             attributes: {
-                placeholder: !is_reworks ? text : "Nhập số lượng đạt yêu cầu (tối đa: "+qty+")",
+                placeholder: "Nhập số lượng đạt yêu cầu (tối đa: "+qty+")",
             },
         },
         buttons: ["Hủy", "Xác nhận"],
@@ -852,7 +852,7 @@ var showConfirmNoReworkPopup = function(id, qty, name){
     console.log(pro_name);
     swal({
         title: "Sản xuất lại sản phẩm",
-        text:"Nhập " + "Xác nhận không sản xuất lại sản phẩm " + pro_name,
+        // text:"Nhập " + "Xác nhận không sản xuất lại sản phẩm " + pro_name,
         content: {
             element: "textarea",
             attributes: {
