@@ -758,15 +758,18 @@ var productWarehouseHistory = function()
     });
 }
 
-var showKcsAfterPrintPopup = function(id, qty, name){
+var showKcsAfterPrintPopup = function(id, qty, name, type = 'confirm'){
+    let is_reworks = type == 'confirm';
+    let text = !is_reworks ? 'lí do không sản xuất lại sản phẩm ' + name : "số tờ in "+name+" đã đạt yêu cầu để thợ in được xác nhận lương.";
+    let type_Input = !is_reworks ? 'textarea' : 'input';
     swal({
-        title: "KCS in gia công",
-        text:"Vui lòng nhập số tờ in "+name+" đã đạt yêu cầu để thợ in được xác nhận lương.",
+        title: "KCS sản phẩm sau in",
+        text:"Nhập " + text,
         content: {
-            element: "input",
+            element: 'input',
             attributes: {
-                placeholder: "Nhập số lượng đạt yêu cầu (tối đa: "+qty+")",
-                type: "text"
+                placeholder: !is_reworks ? text : "Nhập số lượng đạt yêu cầu (tối đa: "+qty+")",
+                type: 'text'
             },
         },
         buttons: ["Hủy", "Xác nhận"],
@@ -834,6 +837,14 @@ var kscAfterPrintModule = function()
         let name = $(this).data("name");
         let id = $(this).data("id");
         showKcsAfterPrintPopup(id, qty, name);
+    });
+
+    $(document).on('click', 'button.__not_need_rework', function(event){
+        event.preventDefault();
+        let qty = $(this).data("qty");
+        let name = $(this).data("name");
+        let id = $(this).data("id");
+        showKcsAfterPrintPopup(id, qty, name, 'not_need');
     })
 }
 
