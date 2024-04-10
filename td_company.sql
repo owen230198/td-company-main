@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : owen
+ Source Server         : localhost
  Source Server Type    : MySQL
- Source Server Version : 100425
+ Source Server Version : 100432
  Source Host           : localhost:3306
  Source Schema         : td_company
 
  Target Server Type    : MySQL
- Target Server Version : 100425
+ Target Server Version : 100432
  File Encoding         : 65001
 
- Date: 10/04/2024 03:33:10
+ Date: 11/04/2024 00:20:40
 */
 
 SET NAMES utf8mb4;
@@ -2973,7 +2973,7 @@ INSERT INTO `n_tables` VALUES (40, 'c_expertises', 'Yêu cầu nhập kho thành
 INSERT INTO `n_tables` VALUES (41, 'product_warehouses', 'Kho thành phẩm', NULL, 20, 'view', '[\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"history\",\r\n		\"note\":\"Lịch sử xuất nhập\", \r\n		\"class\":\"__product_warehouse_history\"\r\n	}\r\n]', '0', '1', '0', '1', '2023-04-23 11:30:46', '2024-01-03 23:20:48');
 INSERT INTO `n_tables` VALUES (42, 'partners', 'Đối tác sản xuất', NULL, 10, 'view', NULL, '1', '1', '1', '1', '2023-04-23 11:30:46', '2023-08-16 19:42:33');
 INSERT INTO `n_tables` VALUES (43, 'after_prints', 'KCS sau in', NULL, 10, 'view', '[\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"check-square-o\",\r\n		\"note\":\"Duyệt chấm công cho công nhân\", \r\n		\"class\":\"__confirm_worker_salary\",\r\n		\"datas\":[\"qty\", \"name\"],\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"processing\"}\r\n		]\r\n	}\r\n]', '0', '0', '1', '0', '2023-07-17 19:30:41', '2024-03-26 23:24:47');
-INSERT INTO `n_tables` VALUES (44, 'c_reworks', 'Yêu cầu sản xuất lại', NULL, 10, 'view', '[\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"check-square-o\",\r\n		\"note\":\"Khởi tạo lại đơn\", \r\n		\"class\":\"__confirm_rework\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"not_accepted\"}\r\n		]\r\n	},\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"circle-thin\",\r\n		\"note\":\"Không cần thiết sản xuất lại\", \r\n		\"class\":\"__not_need_rework\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"not_accepted\"}\r\n		]\r\n	}\r\n]', '0', '0', '1', '0', '2023-07-17 19:30:41', '2024-04-02 20:22:37');
+INSERT INTO `n_tables` VALUES (44, 'c_reworks', 'Yêu cầu sản xuất lại', NULL, 10, 'view', '[\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"check-square-o\",\r\n		\"note\":\"Khởi tạo lại đơn\", \r\n		\"class\":\"__confirm_rework\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"not_accepted\"}\r\n		]\r\n	},\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"circle-thin\",\r\n		\"note\":\"Không cần thiết sản xuất lại\", \r\n		\"class\":\"__not_need_rework\",\r\n		\"datas\":[\"name\", \"qty\"],\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"not_accepted\"}\r\n		]\r\n	}\r\n]', '0', '0', '1', '0', '2023-07-17 19:30:41', '2024-04-10 23:43:53');
 
 -- ----------------------------
 -- Table structure for n_users
