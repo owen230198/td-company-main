@@ -73,18 +73,24 @@
                     </tr>    
                 @endforeach
                 @php
-                        $order_total = round($data_item->total_amount, -3);
+                        $order_total = (float) @$data_item->advance > 0 ? @$data_item->rest : $data_item->total_amount;
                         $vat_cost = calValuePercentPlus(0, $order_total, $data_item->vat);
                         $order_cost = $order_total - $vat_cost;
                 @endphp
                 <tr class="bg_pink">
                     <td colspan="5"><p class="text-right mr-3">Tiền hàng</p></td>
-                    <td class="text-right"><span class="font_bold">{{ number_format($order_cost) }} vnđ</span></td>
+                    <td class="text-right"><span class="font_bold">{{ number_format($data_item->total_amount) }} vnđ</span></td>
                 </tr>
                 <tr class="bg_pink">
                     <td colspan="5"><p class="text-right mr-3">Tiền VAT</p></td>
                     <td class="text-right"><span class="font_bold">{{ number_format($vat_cost) }} vnđ</span></td>
                 </tr>
+                @if ((float) @$data_item->advance > 0)
+                    <tr class="bg_pink">
+                        <td colspan="5"><p class="text-right mr-3">Tạm ứng</p></td>
+                        <td class="text-right"><span class="font_bold">{{ number_format(@$data_item->advance) }} vnđ</span></td>
+                    </tr>   
+                @endif
                 <tr class="bg_pink">
                     <td colspan="5"><p class="text-right mr-3">Thành tiền bằng số</p></td>
                     <td class="text-right"><span class="font_bold">{{ number_format($order_total) }} vnđ</span></td>

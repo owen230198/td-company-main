@@ -52,6 +52,7 @@
 			$factor = 0;
 			foreach ($products as $product) {
 				if (empty($product->parent)) {
+					$product = (object) $product;
 					$pwhere = ['act' => 1, 'product' => $product->id];
 					$paper_total = \DB::table('papers')->select('total_cost')->where($pwhere)->sum('total_cost');
 					$supply_total = \DB::table('supplies')->select('total_cost')->where($pwhere)->sum('total_cost');
