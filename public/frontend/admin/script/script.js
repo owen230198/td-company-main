@@ -760,13 +760,12 @@ var productWarehouseHistory = function()
 
 var showKcsAfterPrintPopup = function(id, qty, name){
     swal({
-        title: "KCS in gia công",
-        text:"Vui lòng nhập số tờ in "+name+" đã đạt yêu cầu để thợ in được xác nhận lương.",
+        title: "KCS sản phẩm sau in",
+        // text:"Nhập " + "số tờ in "+name+" đã đạt yêu cầu để thợ in được xác nhận lương.",
         content: {
             element: "input",
             attributes: {
                 placeholder: "Nhập số lượng đạt yêu cầu (tối đa: "+qty+")",
-                type: "text"
             },
         },
         buttons: ["Hủy", "Xác nhận"],
@@ -834,7 +833,7 @@ var kscAfterPrintModule = function()
         let name = $(this).data("name");
         let id = $(this).data("id");
         showKcsAfterPrintPopup(id, qty, name);
-    })
+    });
 }
 
 var reworkButtonModule = function()
@@ -846,6 +845,81 @@ var reworkButtonModule = function()
         modal.find("iframe").attr("src", getBaseRoute('product-require-rework/'+id));
         modal.modal('show');
     });
+}
+
+var showConfirmNoReworkPopup = function(id, qty, name){
+    let pro_name = name.toLowerCase();
+    console.log(pro_name);
+    swal({
+        title: "Sản xuất lại sản phẩm",
+        // text:"Nhập " + "Xác nhận không sản xuất lại sản phẩm " + pro_name,
+        content: {
+            element: "textarea",
+            attributes: {
+                placeholder: "Nhập lí do không sản xuất lại (Ví dụ: Khách hàng đồng ý " + qty + " sản phẩm sẽ nhận ở lần đặt sau)",
+            },
+        },
+        buttons: ["Hủy", "Xác nhận"],
+    }).then((value) => {
+        if (!value) throw null;
+        let note = value = document.querySelector(".swal-content__textarea").value;
+        if (note == "") {
+            swal('Không thành công', "Bạn chưa nhập lí do không sản xuất lại sản phẩm !", 'error').then(() => {
+                showConfirmNoReworkPopup(id, qty, name);
+            });;
+           
+        }else{
+            swal({
+                title: "Xác nhận không sản xuất lại " + qty + " sản phẩm",
+                text: "Bạn có chắc chắn không sản xuất lại sản phẩm " + pro_name + " vì: " + note,
+                icon: 'info',
+                buttons: true,
+                dangerMode: true,
+                confirmButtonColor: "#459300",
+                buttons: ['Hủy', 'Xác nhận']
+            }).then((value_conf) => {
+                if (value_conf) {
+                    $('#loader').fadeIn(200);
+                    $.ajax({
+                        url: 'product-require-rework/'+id,
+                        type: 'POST',
+                        data: {status:"not_need_rework"},
+                    })
+                    .done(function(data) {
+                        let title = data.code == 200 ? 'Thành công' : 'Không thành công';
+                        let key = data.code == 200 ? 'success' : 'error';
+                        if (!empty(data.message)) {
+                            swal(title, data.message, key).then(function() {
+                                if (data.code == 200) {
+                                    window.location.reload();
+                                }else{
+                                    showConfirmNoReworkPopup(id, qty, name);   
+                                }
+                            });
+                        }else{
+                            window.location.reload();	
+                        }
+                        $('#loader').delay(200).fadeOut(500); 
+                    })
+                } else {
+                    swal("Đã hủy", "Đã hủy xác nhận không sản xuất lại!", "error").then(() => {
+                        showConfirmNoReworkPopup(id, qty, name);
+                    });
+                }
+            });
+        }
+    });
+}
+
+var noReworkButtonModule = function()
+{
+    $(document).on('click', 'button.__not_need_rework', function(event){
+        event.preventDefault();
+        let qty = $(this).data("qty");
+        let name = $(this).data("name");
+        let id = $(this).data("id");
+        showConfirmNoReworkPopup(id, qty, name);
+    })
 }
 
 $(function () {
@@ -888,4 +962,5 @@ $(function () {
     productWarehouseHistory();
     kscAfterPrintModule();
     reworkButtonModule();
+    noReworkButtonModule();
 });

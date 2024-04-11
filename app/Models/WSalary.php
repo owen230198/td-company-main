@@ -175,6 +175,33 @@ class WSalary extends Model
         return WSalary::insert($insert_command);  
     }
 
+    static function checkSubmitedProduct($product_id)
+    {
+        $status = \StatusConst::SUBMITED;
+        $c_reworks = CRework::where('product', '!=', \StatusConst::SUBMITED)->get();
+        $bool = true;
+        foreach ($c_reworks as $c_rework) {
+            if ($c_rework->status != \StatusConst::SUBMITED) {
+                $bool = false;
+            }
+        }
+        if ($bool) {
+            $arr_update = ['status' => $status, 'updated_at' => date('Y-m-d H:i:s', Time())];
+            $update = Product::where('id', $product_id)->update($arr_update);
+            if ($update) {
+                $data_product = Product::find($product_id);
+                if (!empty($data_product->rework_from)) {
+                    self::checkSubmitedProduct($data_product->rework_from);
+                }
+                if (!empty($data_product->order)) {
+                    if (checkUpdateOrderStatus($data_product->order, $status)) {
+                        Order::where('id', $data_product->order)->update($arr_update);
+                    }
+                }
+            }
+        }
+    }
+
     static function checkStatusUpdate($table, $id, $status)
     {
         $list_command = WSalary::where(['table_supply' => $table, 'supply' => $id])->get();
@@ -191,14 +218,9 @@ class WSalary extends Model
             $update_supply = $supply_obj->update($arr_update);
             if ($update_supply) {
                 $data_supply = $supply_obj->first();
-                if (!empty($data_supply->product) && WSalary::where('product', $data_supply->id)->where('status', '!=', $status)->count() == 0) {
-                    $update = Product::where('id', $data_supply->product)->update($arr_update);
-                    if ($update) {
-                        $data_product = Product::find($data_supply->product);
-                        if (checkUpdateOrderStatus($data_product->order, $status)) {
-                            Order::where('id', $data_product->order)->update($arr_update);
-                        }
-                    }
+                if (!empty($data_supply) && WSalary::where('product', $data_supply->id)->where('status', '!=', $status)->count() == 0) 
+                {
+                    self::checkSubmitedProduct($data_supply->id);    
                 }
             }
         }
