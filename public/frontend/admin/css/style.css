@@ -276,14 +276,6 @@ a.device_supp_item {
     color: #459300;
 }
 
-.base_label_input{
-    width: 220px;
-}
-
-.config_content .form-control{
-    height: max-content;
-}
-
 .page_content .table.table_main tr td:last-child,
 .page_content .table.table_main tr th.parentth:last-child {
     min-width: auto;

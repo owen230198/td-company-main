@@ -235,7 +235,6 @@ use Illuminate\Http\Request;
                     if ($process) {
                         $product_data = Product::find($product_id);
                         $arr_update = getTotalProductByArr([$product_data]);
-                        unset($arr_update['factor']);
                         $arr_update['code'] = 'DH-'.getCodeInsertTable('products');
                         $arr_update['status'] = Order::DESIGN_SUBMITED;
                         $arr_update['order_created'] = 1;

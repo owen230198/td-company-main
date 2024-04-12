@@ -49,7 +49,7 @@
 		function getTotalProductByArr($products, $arr_quote = [], $get = '')
 		{
 			$ret = ['total_cost' => 0, 'total_amount' => 0];
-			$factor = 0;
+			$profit_bool = $get == 'profit';
 			foreach ($products as $product) {
 				if (empty($product->parent)) {
 					$product = (object) $product;
@@ -67,15 +67,19 @@
 				$total_ex = getTotalProductByArr($ex_products, $arr_quote);
 				$update['total_cost'] = $total_cost + $total_ex['total_cost'];
 				$get_perc = (float) $update['total_cost'] + (float) @$product->ship_price;
-				$profit = (float) $product->profit;
-				$total_amount = $profit > 0 ? ($get_perc * ((100 + $profit) / 100)) : $get_perc;
-				$update['total_amount'] = round($total_amount / $round_number) * $round_number;
-				\DB::table('products')->where('id', $product->id)->update($update);
-				$ret['total_cost'] += $update['total_cost'];
-				$ret['total_amount'] += $update['total_amount']; 
-				$factor ++;
+				if ($profit_bool) {
+					$current_total = $product->base_total;
+					$ret['profit'] = (($current_total/$get_perc) * 100) -100;
+				}else{
+					$profit = (float) $product->profit;
+					$total_amount = $profit > 0 ? ($get_perc * ((100 + $profit) / 100)) : $get_perc;
+					$update['base_total'] = $total_amount;
+					$update['total_amount'] = round($total_amount / $round_number) * $round_number;
+					\DB::table('products')->where('id', $product->id)->update($update);
+					$ret['total_cost'] += $update['total_cost'];
+					$ret['total_amount'] += $update['total_amount']; 
+				}
 			}
-			$ret['factor'] = $factor;
 			return !empty($get) && !empty($ret[$get]) ? $ret[$get] : $ret;
 		}
 	}
@@ -93,22 +97,18 @@
 	if (!function_exists('RefreshQuotePrice')) {
 		function RefreshQuotePrice($arr_quote){
 			$update_quote = getProductTotalCost($arr_quote);
-			unset($update_quote['factor']);
 			\DB::table('quotes')->where('id', $arr_quote['id'])->update($update_quote);
 		}
 	}
 
-	if (!function_exists('refreshQuoteProfit')) {
-		function refreshQuoteProfit($arr_quote)
+	if (!function_exists('refreshProfit')) {
+		function refreshProfit($arr_product)
 		{
-			$quote_total = getProductTotalCost($arr_quote);
-			$quote_amount = (float) @$arr_quote['total_amount'];
-			$ship_price = (float) @$arr_quote['ship_price'];
-			$total_cost = $quote_total['total_cost'];
-			$factor = (float) $quote_total['factor'];
-			$update_quote['total_cost'] = $total_cost;
-			$update_quote['profit'] = ($quote_amount / ($total_cost + ($ship_price * $factor)) * 100) - 100;
-			\DB::table('quotes')->where('id', $arr_quote['id'])->update($update_quote);
+			foreach ($arr_product as $product) {
+				$product_obj = \DB::table('products')->where('id', $product['id'])->get();
+				$profit = getTotalProductByArr($product_obj, [], 'profit');
+				\DB::table('products')->where('id', $product['id'])->update(['profit' => $profit]);
+			}
 		}
 	}
 
