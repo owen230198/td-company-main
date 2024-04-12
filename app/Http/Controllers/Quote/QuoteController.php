@@ -223,35 +223,39 @@ class QuoteController extends Controller
     public function profitConfigQuote(Request $request)
     {
         $id = $request->input('quote_id');
+        $is_post = $request->isMethod('POST');
+        if (empty($id)) {
+            return customReturnMessage(false, $is_post, ['message' => 'Không tìm thấy thông tin báo giá !']);
+        }
         $arr_quote = Quote::find($id);
-        if (!$request->isMethod('POST')) {
-            if (empty($arr_quote)) {
-                return redirect(url(''))->with('error', 'Báo giá không tồn tại !');
-            }
+        if (empty($arr_quote)) {
+            return customReturnMessage(false, $is_post, ['message' => 'Dữ liệu báo giá không tồn tại hoặc đã bị xóa !']);
+        }
+        if (!\GroupUser::isAdmin() || (!\GroupUser::isAdmin() && !\GroupUser::isSale()) || (\GroupUser::isSale() && \User::getCurrent('id') != $arr_quote->created_by)) {
+            return customReturnMessage(false, $is_post, ['message' => 'Bạn không có quyền cấu hình lợi nhuận cho báo giá này !']);
+        }
+        if (!$is_post) {
             $data['data_quote'] = $arr_quote;
             $data['title'] = 'Lợi nhuận báo giá mã - '.@$data['data_quote']['seri'];
             $data['products'] = Product::where(['act' => 1, 'quote_id' => $id])->get();
             $data['supply_fields'] = TDConstant::HARD_ELEMENT;
             return view('quotes.profits.view', $data);
         }else{
-            $data = $request->except('_token', 'quote_id');
-            if (empty($id)) {
-                return returnMessageAjax(100, 'Không tìm thấy thông tin báo giá !');
+            $products = $request->input('product');
+            foreach ($products as $product_id => $cost) {
+                if ($cost['ship_price'] == null) {
+                    return returnMessageAjax(100, 'Vui lòng nhập phí vận chuyển cho sản phẩm '.getFieldDataById('name', 'products', $product_id).' !');
+                }
+                if ($cost['profit'] == null) {
+                    return returnMessageAjax(100, 'Vui lòng nhập lợi nhuận báo giá cho sản phẩm '.getFieldDataById('name', 'products', $product_id).' !');
+                }
             }
-            if ($data['ship_price'] == null) {
-                return returnMessageAjax(100, 'Vui lòng nhập phí vận chuyển !');
+            foreach ($products as $prouct_id => $cost) {
+                Product::where('id', $prouct_id)->update(['ship_price' => $cost['ship_price'], 'profit' => $cost['profit']]);
             }
-            if ($data['profit'] == null) {
-                return returnMessageAjax(100, 'Vui lòng nhập lợi nhuận báo giá !');
-            }
-            // $get_perc = (float) $arr_quote['total_cost'] + (float) $data['ship_price'];
-            // $data['total_amount'] = (float) $data['profit'] > 0 ? calValuePercentPlus($arr_quote['total_cost'], $get_perc,  $data['profit']) : $get_perc;
-            $update = Quote::where('id', $id)->update($data);
-            if ($update) {
-                $arr_quote = Quote::find($id);
-                RefreshQuotePrice($arr_quote);
-                return returnMessageAjax(200, 'Cập nhật lợi nhuận báo giá thành công !', url('quote-file-export/'.$id));
-            }
+            $arr_quote = Quote::find($id);
+            RefreshQuotePrice($arr_quote);
+            return returnMessageAjax(200, 'Cập nhật lợi nhuận báo giá thành công !', url('quote-file-export/'.$id));
         }
     }
 

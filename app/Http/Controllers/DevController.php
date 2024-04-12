@@ -205,19 +205,16 @@ class DevController extends Controller
         }
         dd($data);
     }
-    public function paperUpdate(){
-        die();
-        $query = \DB::table('papers');
-        $list = $query->get();
-        foreach ($list as $key => $item) {
-            $obj = \DB::table('papers')->where(['id' => $item->id]);
-            if (empty($item->handle_type)) {
-                $data['handle_type'] = 1;
-                $obj->update($data);
-                dump($data['handle_type']);
+    public function profitData(){
+        $quotes = \DB::table('quotes')->get();
+        foreach ($quotes as $quote) {
+            $products = \DB::table('products')->where('quote_id', $quote->id)->get();
+            foreach ($products as $product) {
+                \DB::table('products')->where('id', $product->id)->update(['profit' => $quote->profit, 'ship_price' => $quote->ship_price]);
+                dump($quote->profit);
             }
         }
-        dd($data);
+        dd(1);
     }
 }
 
