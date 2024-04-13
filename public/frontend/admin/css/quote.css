@@ -65,7 +65,7 @@ ul.supply_info li.supply_item_inf:last-child{
 }
 
 .quote_table_stage{
-    overflow: auto;
+    overflow-x: auto;
     /* max-height: calc(100vh - 350px); */
 }
 

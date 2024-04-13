@@ -3,7 +3,7 @@
     <thead class="font_bold">
         <tr>
             <th class="w_50">STT</th>
-            <th>Sản phẩm</th>
+            <th style="min-width: 210px">Sản phẩm</th>
             <th>Chi phí vận chuyển</th>
             <th>Lợi nhuận %</th>
         </tr>
@@ -15,15 +15,15 @@
             @endphp
             <tr>
                 <td class="w_50">{{ $key + 1 }}</td>
-                <td>{{ $product['name'] }}</td>
+                <td style="min-width: 210px">{{ $product['name'] }}</td>
                 <td>
                     <div class="form-group d-flex mb-2 align-items-center">
-                        <input type="number" step="any" class="form-control" name="{{ $base_name }}[ship_price]" value="{{ @$product->ship_price }}" placeholder="Nhập chi phí vận chuyển (VNĐ)">
+                        <input type="number" step="any" class="form-control medium_input" name="{{ $base_name }}[ship_price]" value="{{ @$product->ship_price }}" placeholder="Nhập chi phí vận chuyển (VNĐ)">
                     </div>
                 </td>
                 <td>
                     <div class="form-group d-flex mb-2 align-items-center">
-                        <input type="number" step="any" class="form-control" name="{{ $base_name }}[profit]" value="{{ @$product->profit }}" placeholder="Nhập lợi nhuận sản phẩm (%)">
+                        <input type="number" step="any" class="form-control medium_input" name="{{ $base_name }}[profit]" value="{{ @$product->profit }}" placeholder="Nhập lợi nhuận sản phẩm (%)">
                     </div>
                 </td>
             </tr>
