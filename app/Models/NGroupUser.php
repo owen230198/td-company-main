@@ -58,7 +58,7 @@ class NGroupUser extends Model
         ],
         'worker_salary' =>[
             'name' => 'Bảng lương công nhân',
-            'link' => 'view/w_salaries?default_data=%7B"status"%3A"last_submited"%7D',
+            'link' => 'view/w_salaries?default_data=%7B%22status%22%3A%22last_submited%22%7D',
             'group' => 'factory'
         ],
         'price_materal' => [
@@ -93,32 +93,32 @@ class NGroupUser extends Model
         ],
         'quote_not_accepted' => [
             'name' => 'DS báo giá (chưa duyệt)', 
-            'link' => 'view/quotes?default_data=%7B"status"%3A"not_accepted"%7D', 
+            'link' => 'view/quotes?default_data=%7B%22status%22%3A%22not_accepted%22%7D', 
             'group' => 'customer_quote'
         ],
         'quote_accepted' => [
             'name' => 'DS báo giá (đã duyệt)', 
-            'link' => 'view/quotes?default_data=%7B"status"%3A"accepted"%7D', 
+            'link' => 'view/quotes?default_data=%7B%22status%22%3A%22accepted%22%7D', 
             'group' => 'customer_quote'
         ],
         'quote_order_created' => [
             'name' => 'DS báo giá (đã tạo đơn)', 
-            'link' => 'view/quotes?default_data=%7B"status"%3A"order_created"%7D', 
+            'link' => 'view/quotes?default_data=%7B%22status%22%3A%22order_created%22%7D', 
             'group' => 'customer_quote'
         ],
         'design_not_accepted' => [
             'name' => 'DS lệnh TK chưa duyệt', 
-            'link' => 'view/c_designs?default_data=%7B"status"%3A"not_accepted"%7D', 
+            'link' => 'view/c_designs?default_data=%7B%22status%22%3A%22not_accepted%22%7D', 
             'group' => 'design_module'
         ],
         'designing_command' => [
             'name' => 'DS lệnh TK đang nhận', 
-            'link' => 'view/c_designs?default_data=%7B"status"%3A"designing"%7D', 
+            'link' => 'view/c_designs?default_data=%7B%22status%22%3A%22designing%22%7D', 
             'group' => 'design_module'
         ],
         'design_submited' => [
             'name' => 'DS lệnh TK đã xong', 
-            'link' => 'view/c_designs?default_data=%7B"status"%3A"design_submited"%7D', 
+            'link' => 'view/c_designs?default_data=%7B%22status%22%3A%22design_submited%22%7D', 
             'group' => 'design_module'
         ],
         'order_process' => [
@@ -133,22 +133,22 @@ class NGroupUser extends Model
         ],
         'handle_process' => [
             'name' => 'Theo dõi sản xuất', 
-            'link' => 'view/products?default_data=%7B"order_created":"1"%7D', 
+            'link' => 'view/products?default_data=%7B%22order_created":"1%22%7D', 
             'group' => 'order_handle'
         ],
         'submited_product' => [
             'name' => 'SP chờ duyệt bởi KCS', 
-            'link' => 'view/products?default_data=%7B"status":"submited"%7D', 
+            'link' => 'view/products?default_data=%7B%22status":"submited%22%7D', 
             'group' => 'order_handle'
         ],
         'kcs_submited_product' => [
             'name' => 'SP chờ nhập kho', 
-            'link' => 'view/products?default_data=%7B"status":"kcs_submited"%7D', 
+            'link' => 'view/products?default_data=%7B%22status":"kcs_submited%22%7D', 
             'group' => 'order_handle'
         ],
         'last_submited_product' => [
             'name' => 'SP trong kho', 
-            'link' => 'view/products?default_data=%7B"status":"last_submited"%7D', 
+            'link' => 'view/products?default_data=%7B%22status":"last_submited%22%7D', 
             'group' => 'order_handle'
         ],
         'supp_bying_req' => [
@@ -208,12 +208,12 @@ class NGroupUser extends Model
         ],
         'ex_supply' => [
             'name' => 'Yêu cầu xuất vật tư', 
-            'link' => 'view/c_supplies?default_data=%7B"status"%3A"handling"%7D', 
+            'link' => 'view/c_supplies?default_data=%7B%22status%22%3A%22handling%22%7D', 
             'group' => 'handle_supply'
         ],
         'im_supply' => [
             'name' => 'Yêu cầu nhập kho băng lề', 
-            'link' => 'view/supply_warehouses?default_data=%7B"status"%3A"waiting"%7D', 
+            'link' => 'view/supply_warehouses?default_data=%7B%22status%22%3A%22waiting%22%7D', 
             'group' => 'handle_supply'
         ],
         'product_management' => [
@@ -223,17 +223,17 @@ class NGroupUser extends Model
         ],
         'expertise' => [
             'name' => 'Yêu cầu nhập kho', 
-            'link' => 'view/c_expertises?default_data=%7B"status"%3A"not_accepted"%7D', 
+            'link' => 'view/c_expertises?default_data=%7B%22status%22%3A%22not_accepted%22%7D', 
             'group' => 'product_warehouse'
         ],
         'product_history' => [
             'name' => 'Xuất, nhập, tồn', 
-            'link' => 'view/c_expertises?default_data=%7B"status"%3A"not_accepted"%7D', 
+            'link' => 'view/c_expertises?default_data=%7B%22status%22%3A%22not_accepted%22%7D', 
             'group' => 'product_warehouse'
         ],
         'order_ready' => [
             'name' => 'Quản lí đơn hàng', 
-            'link' => 'view/orders?default_data=%7B"status"%3A"last_submited"%7D', 
+            'link' => 'view/orders?default_data=%7B%22status%22%3A%22last_submited%22%7D', 
             'group' => 'product_warehouse'
         ],
         'user' => [
