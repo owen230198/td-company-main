@@ -49,7 +49,7 @@ class QuoteService extends BaseService
         $data['optimal_width'] = $temp_height / 1000;
     }
 
-    private function productValidate($data, $key, $step){
+    public function productValidate($data, $key, $step){
         $num = $key + 1;
         if (empty($data['name'])) {
             return returnMessageAjax(100, 'Bạn chưa nhập tên cho sản phẩm '. $num);
@@ -190,9 +190,6 @@ class QuoteService extends BaseService
 
     public function processDataProduct($data, $arr_quote = [], $step = TDConstant::QUOTE_FLOW)
     {
-        if (empty($data['product'])) {
-            return returnMessageAjax(100, 'Bạn chưa có thông tin sản phẩm nào !');
-        }
         $data_product = $data['product'];
         foreach ($data_product as $key => $product) {
             if (!empty($arr_quote['id'])) {
@@ -212,6 +209,7 @@ class QuoteService extends BaseService
             }else{
                 refreshProfit($data_product);
             }
+            return true;
         }else{
             return !empty($product_id) ? $product_id : false;
         }
@@ -234,15 +232,8 @@ class QuoteService extends BaseService
             if ($update) {
                 logActionUserData('update_customer', 'quotes', $id, $data_customer);
             }
-        }else{
-            $data_quote['status'] = \StatusConst::NOT_ACCEPTED;
-            (new \BaseService)->configBaseDataAction($data_quote);
-            $insert_id = \DB::table('quotes')->insertGetId($data_quote);
-            if ($insert_id) {
-                logActionUserData('insert_customer', 'quotes', $insert_id, $data_customer);
-            }
         }
-        $redr = !empty($insert_id) ? 'insert/quotes?step=handle_config&id='.$insert_id : 'update/quotes/'.$id.'?step=handle_config';
+        $redr = !empty($id) ? 'update/quotes/'.$id.'?step=handle_config' : 'insert/quotes?step=handle_config&customer='.$data_quote['customer_id'];
         return returnMessageAjax(200, '', asset($redr));
     }
 

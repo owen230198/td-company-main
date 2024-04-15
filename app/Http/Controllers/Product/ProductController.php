@@ -26,7 +26,7 @@ use Illuminate\Http\Request;
             }
             if ($request->isMethod('GET')) {
                 $data['products'][0] = $product;
-                $data['parent_url'] = ['link' => @session()->get('back_url'), 'note' => 'Danh sách đơn sản phẩm'];
+                $data['parent_url'] = ['link' => getBackUrl(), 'note' => 'Danh sách đơn sản phẩm'];
                 $data['title'] = 'Cập nhật & Xác nhận đơn sản phẩm - '.$product['code'];
                 $data['link_action'] = url('update/products/'.$id);
                 $data['id'] = $id;
@@ -68,7 +68,7 @@ use Illuminate\Http\Request;
                 }
             }
             if ($request->isMethod('GET')) {
-                $data['parent_url'] = ['link' => session()->get('back_url'), 'note' => 'Danh sách đơn sản phẩm'];
+                $data['parent_url'] = ['link' => getBackUrl(), 'note' => 'Danh sách đơn sản phẩm'];
                 $data['order_cost'] = $arr_product['total_amount'];
                 $data['products'] = Product::where('id', $product_id)->get();
                 $data['product_qty'] = 1;
@@ -95,7 +95,7 @@ use Illuminate\Http\Request;
             }
             $data['nosidebar'] = true;
             $data['title'] = 'Thông tin sản xuất - '.$data_product['name'];
-            $data['parent_url'] = ['link' => @session()->get('back_url'), 'note' => 'Danh sách đơn sản phẩm'];
+            $data['parent_url'] = ['link' => getBackUrl(), 'note' => 'Danh sách đơn sản phẩm'];
             $data['elements'] = getProductElementData($data_product['category'], $product_id, true, true, true);
             return view('products.view', $data);
         }
@@ -207,7 +207,7 @@ use Illuminate\Http\Request;
                 if (!$is_post) {
                     $data['nosidebar'] = true;
                     $data['title'] = 'Yêu cầu sản xuất lại '.$req_qty.' sản phẩm '.$product_obj->name;
-                    $data['parent_url'] = ['link' => session()->get('back_url'), 'note' => 'Yêu cầu sản xuất lại'];
+                    $data['parent_url'] = ['link' => getBackUrl(), 'note' => 'Yêu cầu sản xuất lại'];
                     $product_obj->name = $product_obj->name.' (Sản xuất lại do lỗi kỹ thuật)';
                     $product_obj->qty = '';
                     $product_obj->design = 4;

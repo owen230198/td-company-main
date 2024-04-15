@@ -31,7 +31,7 @@
                 if ($command_list->count() == $command_list->where($arr_where)->count()) {
                     Order::where('id', $command['order'])->update($arr_where);
                 }
-                return returnMessageAjax(200, 'Cập nhật thành công lệnh thiết kế!', session()->get('back_url'));  
+                return returnMessageAjax(200, 'Cập nhật thành công lệnh thiết kế!', getBackUrl());  
             }
         }
     }

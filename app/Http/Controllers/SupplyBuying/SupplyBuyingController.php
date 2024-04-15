@@ -33,7 +33,7 @@ class SupplyBuyingController extends Controller
             $this->admins->configBaseDataAction($data);
             $insert = SupplyBuying::insert($data);
             if ($insert) {
-                $back_routes = @session()->get('back_url') ?? url('view/'.$table);
+                $back_routes = getBackUrl() ?? url('view/'.$table);
                 logActionUserData(__FUNCTION__, $table, $insert, $data);
                 return returnMessageAjax(200, 'Thêm dữ liệu thành công!', $back_routes);
             }else {
@@ -57,7 +57,7 @@ class SupplyBuyingController extends Controller
             $this->admins->configBaseDataAction($data);
             $update = SupplyBuying::where('id', $id)->update($data);
             if ($update) {
-                $back_routes = @session()->get('back_url') ?? url('view/'.$table);
+                $back_routes = getBackUrl() ?? url('view/'.$table);
                 logActionUserData(__FUNCTION__, $table, $id, $dataItem);
                 return returnMessageAjax(200, 'Cập nhật dữ liệu thành công!', $back_routes);
             }else {

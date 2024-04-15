@@ -182,7 +182,7 @@ class AdminController extends Controller
             }else{
                 $status = $this->admins->doInsertTable($table, $param);
                 if ($status['code'] == 200) {
-                    $back_routes = @session()->get('back_url') ?? url('view/'.$table);
+                    $back_routes = getBackUrl() ?? url('view/'.$table);
                     logActionUserData(__FUNCTION__, $table, $status['id'], $param);
                     return returnMessageAjax(200, 'Thêm dữ liệu thành công!', $back_routes);
                 }else {
@@ -217,7 +217,7 @@ class AdminController extends Controller
             }else{
                 $status = $this->admins->doUpdateTable($id, $table, $param);
                 if ($status['code'] == 200) {
-                    $back_routes = @session()->get('back_url') ?? url('view/'.$table);
+                    $back_routes = getBackUrl() ?? url('view/'.$table);
                     logActionUserData(__FUNCTION__, $table, $id, $dataItem);
                     return returnMessageAjax(200, 'Cập nhật dữ liệu thành công!', $back_routes);
                 }else {

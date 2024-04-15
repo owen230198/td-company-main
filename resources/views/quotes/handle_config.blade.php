@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="{{ asset('frontend/base/css/bootstrap-multiselect.min.css') }}">
 @endsection
 @section('content')
-    <form action="{{ !empty($link_action) ? $link_action : asset('insert/quotes?step=handle_config&id='.$data_quote['id']) }}" method="POST" 
+    <form action="{{ !empty($link_action) ? $link_action : asset('insert/quotes?step=handle_config&customer='.$data_quote['id']) }}" method="POST" 
     class="config_handle_form config_content baseAjaxForm" enctype="multipart/form-data" onkeydown="return event.key != 'Enter'">
         @csrf
         @include('quotes.head_information')

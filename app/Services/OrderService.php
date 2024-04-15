@@ -21,7 +21,7 @@ class OrderService extends BaseService
 
     public function getBaseDataAction()
     {
-        $data['parent_url'] = ['link' => @session()->get('back_url'), 'note' => 'Danh sách đơn hàng'];
+        $data['parent_url'] = ['link' => getBackUrl(), 'note' => 'Danh sách đơn hàng'];
         return $data;
     }
 

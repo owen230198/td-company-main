@@ -20,7 +20,7 @@ use App\Models\Product;
         public function update(Request $request, $id){
             $arr_command = CDesign::find($id);
             if (!$request->isMethod('POST')) {
-                $data['parent_url'] = ['link' => @session()->get('back_url'), 'note' => 'Danh sách lệnh thiết kế'];
+                $data['parent_url'] = ['link' => getBackUrl(), 'note' => 'Danh sách lệnh thiết kế'];
                 $data['data_order'] = Order::find($arr_command['order']);
                 $product = Product::where('id', $arr_command['product'])->first();
                 $data['products'][0] = $product;

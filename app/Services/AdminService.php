@@ -69,7 +69,7 @@ class AdminService extends BaseService
     {
         $data['tableItem'] = $this->getTableItem($table);
         $data['title'] = $action_name.' '.$data['tableItem']['note'];
-        $data['parent_url'] = ['link' => @session()->get('back_url'), 'note' => $data['tableItem']['note']];
+        $data['parent_url'] = ['link' => getBackUrl(), 'note' => $data['tableItem']['note']];
         $data['field_list'] = $this->getFieldAction($table, $action);
         $data['action_name'] = $action_name;
         $data['default_field'] = $param;

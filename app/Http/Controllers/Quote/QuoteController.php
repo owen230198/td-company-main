@@ -45,7 +45,7 @@ class QuoteController extends Controller
             }else{
                 if ($step == 'chose_customer') {
                     $data = $this->services->getCustomerSelectDataView($quote['customer_id']);
-                    $data['parent_url'] = ['link' => @session()->get('back_url'), 'note' => 'Danh sách báo giá'];
+                    $data['parent_url'] = ['link' => getBackUrl(), 'note' => 'Danh sách báo giá'];
                 }else{
                     $data['data_quote'] = $quote;
                     $products = Product::where(['act' => 1, 'quote_id' => $id])->get();
@@ -110,31 +110,54 @@ class QuoteController extends Controller
         $step = $request->input('step') ?? 'chose_customer';
         if ($step == 'chose_customer') {
             if (!$request->isMethod('POST')) {
-                $data['parent_url'] = ['link' => @session()->get('back_url'), 'note' => 'Danh sách báo giá'];
+                $data['parent_url'] = ['link' => getBackUrl(), 'note' => 'Danh sách báo giá'];
                 $data['title'] = 'Tạo mới báo giá - ' .getStepCreateQuote($step);
                 return view('quotes.'.$step, $data);
             }else{
                 return $this->services->selectCustomerUpdateQuote($request);
             }
         }else{
-            $arr_quote = Quote::find($request->input('id'));
-            if (empty($arr_quote)) {
-                return customReturnMessage(false, $request->isMethod('POST'), ['message' => 'Báo giá không tồn tại hoặc đã bị xóa !']);
+            $arr_customer = Customer::find($request->input('customer'));
+            if (empty($arr_customer)) {
+                return customReturnMessage(false, $request->isMethod('POST'), ['message' => 'Khách hàng không tồn tại hoặc đã bị xóa !']);
             }
             if (!$request->isMethod('POST')) {
                 $data['title'] = 'Tạo mới báo giá - Chi tiết sản phẩm và sản xuất';
-                $data['data_quote'] = $arr_quote;
+                $data['data_quote'] = $arr_customer;
                 if (!empty($data['data_quote'])) {
                     return view('quotes.'.$step, $data);
                 }else{
                     return redirect(url('/'))->with('error', 'Dữ liệu báo giá không tồn tại !');
                 }
             }else{
-                $process = $this->services->processDataQuote($request, $arr_quote);
-                if (!empty($process['code']) && $process['code'] == 100) {
-                    return $process;
+                $products = $request->input('product');
+                if (empty($products)) {
+                    return returnMessageAjax(100, 'Bạn chưa có dữ liệu sản phẩm !');
                 }
-                return returnMessageAjax(200, 'Cập nhật dữ liệu thành công !', url('/profit-config-quote?quote_id='.$arr_quote['id']));
+                foreach ($products as $key => $product) {
+                    $valid = $this->services->productValidate($product, $key, TDConstant::QUOTE_FLOW);
+                    if (!empty($valid['code']) && $valid['code'] == 100) {
+                        return $valid;
+                    }
+                }
+                foreach (Customer::FIELD_UPDATE as $field) {
+                    $key_name = $field['name'];
+                    $data[$key_name] = $arr_customer[$key_name];
+                }
+                $data['customer_id'] = $arr_customer['id']; 
+                $data['seri'] = 'BG-'.getCodeInsertTable('quotes');
+                $data['company_name'] = $arr_customer['name'];
+                $data['status'] = \StatusConst::NOT_ACCEPTED;
+                (new \BaseService)->configBaseDataAction($data);
+                $insert_id = Quote::insertGetId($data);
+                if ($insert_id) {
+                    logActionUserData('insert_customer', 'quotes', $insert_id);
+                }
+                $arr_quote = Quote::find($insert_id);
+                $process = $this->services->processDataQuote($request, $arr_quote);
+                if ($process) {
+                    return returnMessageAjax(200, 'Cập nhật dữ liệu thành công !', url('/profit-config-quote?quote_id='.$arr_quote['id']));
+                }
             }   
         }
     }
