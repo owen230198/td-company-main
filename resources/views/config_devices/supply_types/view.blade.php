@@ -34,7 +34,7 @@
                                 @foreach ($item['device'] as $key_device => $device)
                                     @php
                                         $link = $key_device == \TDConst::PRINT ? 'config-device-price/print_techs' 
-                                        : 'view/devices?default_data={"supply":"'.$item['pro_field'].'","key_device":"'.$key_device.'"}';
+                                        : 'view/devices?default_data=%7B"supply"%3A"'.$item['pro_field'].'","key_device":"'.$key_device.'"%7D';
                                     @endphp
                                     <a href="{{ url($link) }}" class="device_supp_item">{{ $device }}</a>    
                                 @endforeach 
@@ -50,11 +50,11 @@
                             @foreach ($materal_supplies as $materal_supply)
                                 @php
                                     if ($materal_supply['table'] == 'supply_types') {
-                                        $default = 'default_data={"type":"'.$materal_supply['key'].'","is_name":"'.@$materal_supply['is_name'].'"}';
+                                        $default = 'default_data=%7B"type"%3A"'.$materal_supply['key'].'","is_name":"'.@$materal_supply['is_name'].'"%7D';
                                     }elseif ($materal_supply['table'] == 'paper_extends') {
                                         $default = '';
                                     }else{
-                                        $default = 'default_data={"type":"'.$materal_supply['key'].'"}';   
+                                        $default = 'default_data=%7B"type"%3A"'.$materal_supply['key'].'"%7D';   
                                     }
                                 @endphp
                                 <a href="{{ url('view/'.$materal_supply['table'].'?'.$default) }}"

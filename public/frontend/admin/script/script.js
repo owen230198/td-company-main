@@ -417,7 +417,7 @@ var receiveCommand = function()
               }).then((value) => {
                 switch (value) {
                   case "received":
-                    window.location = getBaseRoute('view/c_designs?default_data={"status":"designing"}');
+                    window.location = getBaseRoute('view/c_designs?default_data=%7B"status"%3A"designing"%7D');
                     break;
                   default:
                     window.location.reload();	

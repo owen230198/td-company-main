@@ -20,7 +20,7 @@
                     <i class="fa fa-trash mr-2 fs-15" aria-hidden="true"></i>Xóa
                 </button>
             @endif
-            <button type="button" data-src = "{{ url('view/n_log_actions?default_data={"table_map":"'.$tableItem['name'].'"}&nosidebar=1') }}" 
+            <button type="button" data-src = "{{ url('view/n_log_actions?default_data=%7B"table_map"%3A"'.$tableItem['name'].'"%7D&nosidebar=1') }}" 
             class="btn btn-primary main_button bg_main color_white smooth bg_green border_green radius_5 font_bold smooth ml-2 load_view_popup" 
             data-toggle="modal" data-target="#actionModal">
                 <i class="fa fa-history mr-2 fs-15" aria-hidden="true"></i>Lịch sử

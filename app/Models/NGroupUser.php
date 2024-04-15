@@ -196,6 +196,11 @@ class NGroupUser extends Model
             'link' => 'warehouse-management', 
             'group' => 'warehouse'
         ],
+        'supply_history' => [
+            'name' => 'Xuất, nhập, tồn', 
+            'link' => 'warehouse-management', 
+            'group' => 'warehouse'
+        ],
         'warehouse_provider' => [
             'name' => 'Nhà cung cấp vật tư', 
             'link' => 'view/warehouse_providers', 
@@ -222,7 +227,7 @@ class NGroupUser extends Model
             'group' => 'product_warehouse'
         ],
         'product_history' => [
-            'name' => 'Lịch sử xuất nhập kho', 
+            'name' => 'Xuất, nhập, tồn', 
             'link' => 'view/c_expertises?default_data=%7B"status"%3A"not_accepted"%7D', 
             'group' => 'product_warehouse'
         ],

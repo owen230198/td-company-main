@@ -9,7 +9,7 @@
                         if (@$step == 'machine') {
                             $link = 'list-worker-by-device/device?type='.$key;
                         }else{
-                            $link = 'view/w_users?default_data={"type":"'.@$type.'","device":"'.$key.'"}';
+                            $link = 'view/w_users?default_data=%7B"type"%3A"'.@$type.'","device":"'.$key.'"%7D';
                         }
                     @endphp
                     <a href="{{ url($link) }}" class="device_supp_item">
