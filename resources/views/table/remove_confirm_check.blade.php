@@ -14,7 +14,7 @@
           Bạn sẽ xóa vĩnh viễn các <span class="text-lowercase">{{ $tableItem['note'] }}</span> đã chọn ?
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-danger confirm_btn">Xóa</button>
+          <button type="submit" disabled class="btn btn-danger confirm_btn">Xóa</button>
           <button type="button" class="btn ml-2" data-dismiss="modal">Hủy</button>
         </div>
       </form>

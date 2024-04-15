@@ -13,7 +13,7 @@
                     @include('products.base_field', ['pro_index' => 0, 'rework' => true])
                     @include('quotes.products.structure', ['pro_index' => 0, 'pos_tab_0' => true, 'rework' => true])
                     <div class="group_btn_action_form text-center w-100">
-                        <button type="submit" class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-3">
+                        <button type="submit" disabled class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-3">
                             <i class="fa fa-check mr-2 fs-14" aria-hidden="true"></i>Hoàn tất
                         </button>
                         <a href="{{ getBackUrl() }}" class="main_button color_white bg_green radius_5 font_bold smooth mr-3">

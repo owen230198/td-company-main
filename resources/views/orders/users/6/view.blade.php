@@ -44,7 +44,7 @@
             @endforeach
         </div>
         <div class="group_btn_action_form text-center">
-            <button type="submit" class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-2">
+            <button type="submit" disabled class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-2">
               <i class="fa fa-check mr-2 fs-14" aria-hidden="true"></i>Xác nhận xuống xưởng SX
             </button>
             <a href="{{ url('') }}" class="main_button bg_red color_white radius_5 font_bold smooth red_btn">

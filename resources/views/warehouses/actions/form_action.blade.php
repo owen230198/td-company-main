@@ -45,7 +45,7 @@
             @endforeach
         </div>
         <div class="group_btn_action_form text-center">
-            <button type="submit" class="main_button color_white bg_green border_green radius_5 font_bold smooth">
+            <button type="submit" disabled class="main_button color_white bg_green border_green radius_5 font_bold smooth">
                 <i class="fa fa-check mr-2 fs-14" aria-hidden="true"></i>Hoàn tất
             </button>
             <a href="{{ getBackUrl() }}"

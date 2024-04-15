@@ -124,7 +124,15 @@ var setCssInlineChildrenRecursively = function(element)
 		setCssInlineChildrenRecursively($(this));   
 	});
 }
-
+var enableButtonSubmit = function () {
+	let buttons = $('button[type=submit]');
+	buttons.each(function () {
+		$(this).prop('disabled', false);
+	});
+}
 $(function(){
+	$(document).ready(function() {
+		enableButtonSubmit();	
+	});
 	baseAjaxForm();
 });

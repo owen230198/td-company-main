@@ -43,7 +43,7 @@
                         @include('view_update.view', $field)  
                     @endforeach
                     <div class="mt-lg-4 mt-3 text-right">
-                        <button type="submit" class="radius_5 box_shadow_3 main_button smooth mr-2 font_bold text-center bg_green color_white">
+                        <button type="submit" disabled class="radius_5 box_shadow_3 main_button smooth mr-2 font_bold text-center bg_green color_white">
                             <i class="fa fa-check fs-14 mr-1" aria-hidden="true"></i> Hoàn tất
                         </button>  
                     </div>

@@ -21,7 +21,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                    <button type="submit" class="btn btn-primary bg_green color_white main_btn">Chấm công</button>
+                    <button type="submit" disabled class="btn btn-primary bg_green color_white main_btn">Chấm công</button>
                 </div>
             </div>
         </form>

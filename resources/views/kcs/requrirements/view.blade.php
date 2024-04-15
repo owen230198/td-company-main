@@ -70,7 +70,7 @@
                 @endforeach
             </div>
             <div class="group_btn_action_form text-center w-100">
-                <button type="submit" class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-3">
+                <button type="submit" disabled class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-3">
                     <i class="fa fa-check mr-2 fs-14" aria-hidden="true"></i>Hoàn tất
                 </button>
                 <button class="main_button bg_red color_white radius_5 font_bold smooth red_btn __close_modal_action">
