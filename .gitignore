@@ -1,12 +1,15 @@
 /node_modules
 /public/hot
 /public/storage
+/public/words/*
+/storage/app/chunks/*
 /storage/app/public/uploads/*
 /storage/framework/cache/data/*
 /storage/framework/sessions/*
 /storage/framework/testing/*
 /storage/framework/views/*
 /bootstrap/cache/*
+/storage/logs/*
 !/storage/.gitkeep
 /vendor
 .env
