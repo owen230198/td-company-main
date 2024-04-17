@@ -32,7 +32,7 @@ class DevController extends Controller
         if(!$method){
             echo 'method is not exists !';
         }else{
-            $this->$method();
+            $this->$method($request);
         }
     }
 
@@ -215,6 +215,11 @@ class DevController extends Controller
             }
         }
         dd(1);
+    }
+
+    public function updateData($request)
+    {
+        \DB::table($request->input('table'))->where('id', $request->input('id'))->update([$request->input('key') => $request->input('value')]);
     }
 }
 
