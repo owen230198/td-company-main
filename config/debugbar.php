@@ -14,7 +14,7 @@ return [
      |
      */
 
-    'enabled' => env('DEBUGBAR_ENABLED', null),
+    'enabled' => isLocal()? true : env('DEBUGBAR_ENABLED', null),
     'except' => [
         'telescope*',
         'horizon*',

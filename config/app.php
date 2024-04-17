@@ -41,7 +41,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', true),
+    'debug' => isLocal() ? true :(bool) env('APP_DEBUG', true),
 
     /*
     |--------------------------------------------------------------------------
