@@ -342,7 +342,8 @@ var initInputModuleAfterAjax = function(section)
     selectAjaxModule(section);
     multipleSelectModule(section);
     selectConfig(section);
-    fileProcessV2Module(section)
+    fileProcessV2Module(section);
+    enableButtonSubmit();
 }
 
 var fileProcessModule = function() {

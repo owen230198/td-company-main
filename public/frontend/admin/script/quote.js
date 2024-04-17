@@ -104,6 +104,7 @@ var selectCustomerQuote = function()
     .done(function(html){
       $('.customer_info_quote').html(html);
       selectAjaxModule($('.customer_info_quote'));
+      enableButtonSubmit();
     });
   })
 }
