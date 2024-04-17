@@ -1,7 +1,4 @@
 <?php
-
-use App\Models\Product;
-
     if (!function_exists('getOrderNameStageByKey')) {
         function getOrderNameStageByKey($key)
         {
@@ -19,6 +16,33 @@ use App\Models\Product;
                     return '';
                     break;
             }    
+        }
+    }
+
+    if (!function_exists('isNoQuantativeSupply')) {
+        function isNoQuantativeSupply($type)
+        {
+            return in_array($type, [\TDConst::DECAL, \TDConst::SILK]);
+        }
+    }
+
+    if (!function_exists('getTitleSupplyByType')) {
+        function getTitleSupplyByType($type, $item){
+            $size = !empty($item->size) ? json_decode($item->size, true) : [];
+            switch ($type) {
+                case $type == \TDConst::CARTON :
+                    return getFieldDataById('name', 'supply_names', @$item->name). ' - ' .getFieldDataById('name', 'supply_types', @$size['supply_type']);
+                    break;
+                case isNoQuantativeSupply($type) :
+                    return getFieldDataById('name', 'materals', @$size['supply_price']);
+                    break;
+                case $type == \TDConst::PAPER :
+                    return @$item->name;
+                    break;
+                default:
+                    return getFieldDataById('name', 'supply_types', @$size['supply_type']);
+                    break;
+            }
         }
     }
 

@@ -9,14 +9,18 @@
     @if (!empty($stage['supply_type']))
         <li>
             <span>Loại vật tư: </span>
-            <strong class="color_red">{{ getFieldDataById('name', 'supplies', $stage['supply_type']) }}</strong>
+            <strong class="color_red">{{ getFieldDataById('name', 'supply_types', $stage['supply_type']) }}</strong>
         </li>
     @endif
 
     @if (!empty($stage['supply_price']))
         <li>
-            <span>Vật tư định lượng: </span>
-            <strong class="color_red">{{ getFieldDataById('name', 'supply_prices', $stage['supply_price']) }}</strong>
+            @php
+                $title = isNoQuantativeSupply(@$supply['pro_field']) ? 'Loại vật tư' : 'Vật tư định lượng';
+                $table_get = isNoQuantativeSupply(@$supply['pro_field']) ? 'materals' : 'supply_prices';
+            @endphp
+            <span>{{ $title }}: </span>
+            <strong class="color_red">{{  getFieldDataById('name', $table_get, $stage['supply_price']) }}</strong>
         </li>
     @endif
 

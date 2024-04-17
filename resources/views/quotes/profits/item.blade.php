@@ -1,10 +1,12 @@
 <li class="supply_item">
     @if (!empty($supply['device']))
         <ul class="supply_info">
-            <li class="supply_item_inf">
-                <span class="font_bold mr-1">Tên vật tư: </span>
-                <span>{{ @$supply['pro_field'] == 'carton' ? getFieldDataById('name', 'supply_names', @$item->name) : (@$item->name ?? @$supply['note']) }}</span>
-            </li>
+            @if ($supply['pro_field'] != \TDConst::FILL_FINISH)
+                <li class="supply_item_inf">
+                    <span class="font_bold mr-1">Tên vật tư: </span>
+                    <span>{{ getTitleSupplyByType($supply['pro_field'],$item) }}</span>
+                </li>   
+            @endif
             @foreach ($supply['device'] as $key => $device)
                 @php
                     $stage = !empty($item->{$key}) ? json_decode($item->{$key}, true) : [];
