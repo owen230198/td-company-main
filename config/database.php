@@ -49,7 +49,7 @@ return [
             'port' => env('DB_PORT', '3306'),
             'database' => env('DB_DATABASE', 'td_company'),
             'username' => isLocal() ? 'root' : env('DB_USERNAME', 'td_company'),
-            'password' => isLocal() ? '' : env('DB_PASSWORD', 'iEy5phdNycZX33FJ'),
+            'password' => isLocal() ? '' : env('DB_PASSWORD', 'tuandung123'),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',

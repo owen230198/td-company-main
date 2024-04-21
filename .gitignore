@@ -8,6 +8,7 @@
 /storage/framework/sessions/*
 /storage/framework/testing/*
 /storage/framework/views/*
+/storage/debugbar/*
 /bootstrap/cache/*
 /storage/logs/*
 !/storage/.gitkeep
