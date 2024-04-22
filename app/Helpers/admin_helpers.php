@@ -125,7 +125,7 @@ if (!function_exists('getOptionDataField')) {
 if (!function_exists('getBackUrl')) {
     function getBackUrl()
     {
-        return !empty(session()->get('back_url')) ? session()->get('back_url') : url(); 
+        return !empty(session()->get('back_url')) ? session()->get('back_url') : url('/'); 
     }
 }
 
