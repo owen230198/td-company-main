@@ -305,7 +305,7 @@ if (!function_exists('subStringLimit')) {
 if (!function_exists('isLocal')) {
     function isLocal()
     {
-        return @$_SERVER['SERVER_ADDR'] == '127.0.0.1';
+        return @$_ENV['APP_ENV'] == 'local';
     }
 }
 
