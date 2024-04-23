@@ -216,6 +216,15 @@ class DevController extends Controller
         }
     }
 
+    public function updateCodeQuote(){
+        $list = \DB::table('quotes')->get();
+        foreach ($list as $item) {
+            $code = 'BG-'.sprintf("%08s", $item->id);
+            $update = \DB::table('quotes')->where('id', $item->id)->update(['seri' => $code]);
+            dump($update);
+        }
+    }
+
     public function profitData(){
         $quotes = \DB::table('quotes')->get();
         foreach ($quotes as $quote) {
