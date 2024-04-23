@@ -57,6 +57,7 @@ use Illuminate\Http\Request;
         public function clone($request, $id)
         {
             $arr_product = Product::where('id', $id)->get(Product::CLONE_FIELD)->first()->toArray();
+            (new \BaseService)->configBaseDataAction($arr_product);  
             $product_id = Product::insertGetId($arr_product);
             foreach (Product::$childTable as $table) {
                 $model = getModelByTable($table);

@@ -1,0 +1,1 @@
+@include('view_update.linking', ['value' => @$data_search[$name]])

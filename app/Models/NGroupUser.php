@@ -198,7 +198,7 @@ class NGroupUser extends Model
         ],
         'supply_history' => [
             'name' => 'Xuất, nhập, tồn', 
-            'link' => 'warehouse-management', 
+            'link' => 'view/warehouse_histories', 
             'group' => 'warehouse'
         ],
         'warehouse_provider' => [

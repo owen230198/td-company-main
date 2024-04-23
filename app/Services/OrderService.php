@@ -44,15 +44,18 @@ class OrderService extends BaseService
             }
             $this->configBaseDataAction($arr_order);
             if (!empty($arr_order['id'])) {
+                $arr_order['code'] = sprintf("%08s", $arr_order['id']);
                 Order::where('id', $arr_order['id'])->update($arr_order);
+                $this->handleProductAfter($data['product'], $arr_order);
             }else{
                 if (!empty($arr_quote['id'])) {
                     Quote::where('id', $arr_quote['id'])->update(['status' => Quote::ORDER_CREATED]);
                     $arr_order['quote'] = $arr_quote['id'];
                 }
-                $arr_order['code'] = 'DH-'.getCodeInsertTable('orders');
                 $arr_order['status'] = \StatusConst::NOT_ACCEPTED;
                 $arr_order['id'] = Order::insertGetId($arr_order);
+                $arr_order['code'] = sprintf("%08s", $arr_order['id']);
+                Order::where('id', $arr_order['id'])->update($arr_order);
                 $this->handleProductAfter($data['product'], $arr_order);
                 
             }
@@ -64,7 +67,9 @@ class OrderService extends BaseService
     {
         foreach ($data as $key => $product) {
             $data_update['code'] =  $order['code'].getCharaterByNum($key);
-            $data_update['status'] = $order['status'];
+            if (!empty($order['status'])) {
+                $data_update['status'] = $order['status'];
+            }
             $data_update['order'] = $order['id'];
             $data_update['order_created'] = 1;
             Product::where('id', $product['id'])->update($data_update);  

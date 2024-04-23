@@ -32,10 +32,10 @@ class AdminController extends Controller
         return view('404');
     }
 
-    public function injectViewWhereParam($table, $arr)
+    public function injectViewWhereParam($table, $array)
     {
-        foreach ($arr as $key => $value) {
-            $conditions = $this->admins->getConditionTable($table, $key, $value);
+        foreach ($array as $field_name => $field_value) {
+            $conditions = $this->admins->getConditionTable($table, $field_name, $field_value);
             if (!empty($conditions)) {
                 foreach ($conditions as $condition) {
                     static::$view_where[] = $condition;

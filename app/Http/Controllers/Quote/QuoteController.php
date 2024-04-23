@@ -72,6 +72,7 @@ class QuoteController extends Controller
         $data_quote['seri'] = 'BG-'.getCodeInsertTable('quotes');
         $data_quote['status'] = \StatusConst::NOT_ACCEPTED;
         $quote_id = Quote::insertGetId($data_quote);
+        Quote::where('id', $quote_id)->update(['seri' => 'BG-'.sprintf("%08s", $quote_id)]);
         //log insert quote
         $log_quote_id = logActionUserData('insert', 'quotes', $quote_id, $data_quote);
         $child_tables = Product::$childTable;
@@ -144,8 +145,7 @@ class QuoteController extends Controller
                     $key_name = $field['name'];
                     $data[$key_name] = $arr_customer[$key_name];
                 }
-                $data['customer_id'] = $arr_customer['id']; 
-                $data['seri'] = 'BG-'.getCodeInsertTable('quotes');
+                $data['customer_id'] = $arr_customer['id'];
                 $data['company_name'] = $arr_customer['name'];
                 $data['status'] = \StatusConst::NOT_ACCEPTED;
                 (new \BaseService)->configBaseDataAction($data);

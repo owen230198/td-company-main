@@ -7,6 +7,10 @@ class WarehouseHistory extends Model
 {
     protected $table = 'warehouse_histories';
     protected $protectField = false;
+    //warehouse type
+    const SUPPLY = 1;
+    const PRODUCT = 2;
+
     const FIELD_QTY = [
         'name' => 'qty',
         'type' => 'text',

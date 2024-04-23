@@ -205,6 +205,17 @@ class DevController extends Controller
         }
         dd($data);
     }
+
+    public function warehouseDataProcess(){
+        $query = \DB::table('warehouse_histories');
+        $list = $query->get();
+        foreach ($list as $item) {
+            $name = getFieldDataById('name', $item->table, $item->target).' - '.getFieldDataById('name', 'warehouse_providers', $item->provider);
+            $update = \DB::table('warehouse_histories')->where('id', $item->id)->update(['name' => $name]);
+            dump($update);
+        }
+    }
+
     public function profitData(){
         $quotes = \DB::table('quotes')->get();
         foreach ($quotes as $quote) {
@@ -215,6 +226,11 @@ class DevController extends Controller
             }
         }
         dd(1);
+    }
+
+    public function updateCDesign($request){
+        $obj = \DB::find($request->input('id'));
+        \DB::table($request->input('table'))->where('id', $request->input('id'))->update([$request->input('key') => $obj->order]);
     }
 
     public function updateData($request)

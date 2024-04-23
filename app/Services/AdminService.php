@@ -105,29 +105,44 @@ class AdminService extends BaseService
     public function getConditionTable($table, $field_name, $value)
     {
         if (isset($value)) {
-            $field = NDetailTable::select('id', 'name', 'type', 'other_data')->where(['act' => 1, 'table_map' => $table, 'name' =>$field_name])->first();
+            $field = NDetailTable::select('id', 'attr', 'name', 'type', 'other_data')->where(['act' => 1, 'table_map' => $table, 'name' =>$field_name])->first();
             if (empty($field)) {
                 $where[] = ['key' => $field_name, 'value' => $value];
             }else{
+                $other_data = !empty($field['other_data']) ? json_decode($field['other_data'], true) : [];
+                $attr = !empty($field['attr']) ? json_decode($field['attr'], true) : [];
+                $type_input = @$attr['type_input'] ?? 'text';
                 $name = $field['name'];
                 $type = $field['type'];
                 if ($type == 'text') {
-                    $tmp = ['key' => $name, 'compare' => 'like', 'value' => '%'.$value.'%'];
-                    $where[] = $tmp;
+                    if (in_array($type_input, ['price', 'number'])) {
+                        if (!empty($value['from'])) {
+                            $from = (float) $value['from'];
+                            $tmp = ['key' => $name, 'compare' => '>=', 'value' => $from];
+                            $where[] = $tmp;
+                        }
+                        if (!empty($value['to'])) {
+                            $to = (float) $value['to'];
+                            $tmp = ['key' => $name, 'compare' => '<=', 'value' => $to];
+                            $where[] = $tmp;
+                        }
+                    }else{
+                        $tmp = ['key' => $name, 'compare' => 'like', 'value' => '%'.$value.'%'];
+                        $where[] = $tmp;
+                    }
                 }elseif($type == 'child_linking'){
-                    $other_data = json_decode($field['other_data'], true);
                     $linking_data = @$other_data['data'] ?? [];
                     $field_title = @$linking_data['field_title'] ?? 'name';
                     $field_query = @$linking_data['field_query'];
                     $arr_id = \DB::table($linking_data['table'])->where('act', 1)->where($field_title, 'like', '%'.$value.'%')->pluck($field_query)->all();
                     $where[] = ['key' => 'id', 'compare' => 'in', 'value' => array_unique($arr_id)];
-                }elseif ($type == 'group_product') {
+                }elseif ($type == 'group_product' && !empty($other_data['field_pluck'])) {
                     if (!empty($value['group'])) {
                         $product_obj = \DB::table('products')->where(['category' => $value['group']]);
                         if (!empty($value['style'])) {
                             $product_obj->where('product_style', $value['style']);
                         }
-                        $arr_id = $product_obj->pluck('quote_id')->all();
+                        $arr_id = $product_obj->pluck($other_data['field_pluck'])->all();
                         $where[] = ['key' => 'id', 'compare' => 'in', 'value' => array_unique($arr_id)];
                     }
                 }elseif ($type == 'product_size') {
@@ -145,6 +160,13 @@ class AdminService extends BaseService
                         $arr_id = $product_obj->pluck('quote_id')->all();
                         $where[] = ['key' => 'id', 'compare' => 'in', 'value' => array_unique($arr_id)];
                     }
+                }elseif ($type == 'customer_city') {
+                    if (!empty($value)) {
+                        $customers = \DB::table('customers')->where('city', $value);
+                        $arr_id = $customers->pluck('id')->all();
+                        $where[] = ['key' => 'customer', 'compare' => 'in', 'value' => array_unique($arr_id)];
+                    }
+                    
                 }elseif ($type == 'datetime') {
                     $date_range = explode(' - ', $value);
                     if (is_array($date_range)){

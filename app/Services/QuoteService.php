@@ -243,6 +243,8 @@ class QuoteService extends BaseService
         if (empty($data['product'])) {
             return returnMessageAjax(100, 'Không tìm thấy sản phẩm !');
         }else{
+            $arr_quote->seri = 'BG-'.sprintf("%08s", $arr_quote->id);
+            $arr_quote->save();
             $status = $this->processDataProduct($data, $arr_quote);
             return $status;
         }

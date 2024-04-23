@@ -62,16 +62,17 @@
 					$cost = $product->total_cost;
 				}
 				$round_number = $product->qty;
+				$profit = (float) getFieldDataById('profit', 'products', $product->id);
+				$ship_price = (float) getFieldDataById('ship_price', 'products', $product->id);
 				$total_cost = round($cost / $round_number) * $round_number;
 				$ex_products = \DB::table('products')->where('parent', $product->id)->get();
 				$total_ex = getTotalProductByArr($ex_products, $arr_quote);
 				$update['total_cost'] = $total_cost + $total_ex['total_cost'];
-				$get_perc = (float) $update['total_cost'] + (float) @$product->ship_price;
+				$get_perc = (float) $update['total_cost'] + $ship_price;
 				if ($profit_bool) {
 					$current_total = $product->base_total;
 					$ret['profit'] = (($current_total/$get_perc) * 100) -100;
 				}else{
-					$profit = (float) $product->profit;
 					$total_amount = $profit > 0 ? ($get_perc * ((100 + $profit) / 100)) : $get_perc;
 					$update['base_total'] = $total_amount;
 					$update['total_amount'] = round($total_amount / $round_number) * $round_number;
