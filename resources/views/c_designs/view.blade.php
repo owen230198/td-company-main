@@ -4,7 +4,7 @@
         <span>Chi tiết lệnh {{ @$data_command['code'] }}</span>
     </h3>
     <div class="order_list_product">
-        @include('quotes.products.ajax_view', ['order_get' => true, 'not_detail' => true])
+        @include('quotes.products.ajax_view', ['order_get' => true, 'not_detail' => true, 'readonly_base' => !empty($readonly_base)])
         <div class="design_paper_info">
             @include('c_designs.paper_table')
         </div>

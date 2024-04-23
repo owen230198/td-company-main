@@ -1,2 +1,2 @@
 <textarea class="form-control{{ @$attr['inject_class'] ? ' '.$attr['inject_class'] : '' }}" 
-name="{{ $name }}" {{ @$attr['disable_field'] == 1 ? 'disabled' : '' }}>{{ @$value }}</textarea>
+name="{{ $name }}" {{ @$attr['disable_field'] == 1 ? 'disabled' : '' }} {{ @$attr['readonly'] == 1 ? 'readonly' : '' }}>{{ @$value }}</textarea>

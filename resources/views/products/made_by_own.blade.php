@@ -3,7 +3,7 @@
     $design_product_field = [
         'name' => $pro_base_name_input.'[design]',
         'note' => 'thiết kế',
-        'attr' => ['readonly' => !empty($rework)],
+        'attr' => ['readonly' => !empty($rework) || !empty($readonly_base)],
         'type' => 'linking',
         'other_data' => ['data' => ['table' => 'design_types', 'select' => ['id', 'name']]],
         'value' => @$product['design']

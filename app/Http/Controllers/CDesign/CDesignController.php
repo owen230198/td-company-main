@@ -30,6 +30,8 @@ use App\Models\Product;
                 $data['title'] = 'Cập nhật & Xác nhận lệnh - '.$arr_command['code'];
                 $data['link_action'] = url('update/c_designs/'.$id);
                 $data['stage'] = @$arr_command['status'];
+                $data['is_design'] = true;
+                $data['readonly_base'] = true;
                 return view('c_designs.view', $data);
             }else{
                 if ($arr_command['status'] != CDesign::PROCESSING || $arr_command['assign_by'] != \User::getCurrent('id')) {

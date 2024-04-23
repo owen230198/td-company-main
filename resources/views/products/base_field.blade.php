@@ -5,19 +5,20 @@
             [
                 'name' => $pro_base_name_input.'[name]',
                 'note' => 'Tên sản phẩm',
-                'attr' => ['required' => 1, 'inject_class' => 'quote_set_product_name length_input', 'placeholder' => 'Nhập tên', 'readonly' => !empty($rework)],
+                'attr' => ['required' => 1, 'inject_class' => 'quote_set_product_name length_input', 'placeholder' => 'Nhập tên', 'readonly' => !empty($rework) || !empty($readonly_base)],
                 'value' => !empty($product['id']) ? @$product['name'] : ''
             ],
             [
                 'name' => $pro_base_name_input.'[qty]',
                 'note' => 'Số lượng sản phẩm',
-                'attr' => ['type_input' => 'number', 'required' => 1, 'inject_class' => 'input_pro_qty __input_module_made_by_partner', 'placeholder' => 'Nhập số lượng'],
+                'attr' => ['type_input' => 'number', 'required' => 1, 'inject_class' => 'input_pro_qty __input_module_made_by_partner', 'placeholder' => 'Nhập số lượng', 'readonly' => !empty($rework) || !empty($readonly_base)],
                 'value' => @$product['qty']
             ],
         ];
 
         $note_product_field = [
             'name' => $pro_base_name_input.'[detail]',
+            'attr' => ['readonly' => !empty($rework) || !empty($readonly_base)],
             'type' => 'textarea',
             'note' => 'Ghi chú',
             'value' => @$product['detail']

@@ -29,6 +29,17 @@
                 }
                 $command_list = CDesign::where('order', $command['order']);
                 if ($command_list->count() == $command_list->where($arr_where)->count()) {
+                    $order_obj = Order::find($command['order']);
+                    $add_day = 0;
+                    foreach ($command_list->get() as $command) {
+                        $product = Product::find($command->product);
+                        if ($product->category == 1) {
+                            $add_day += 12;
+                        }else{
+                            $add_day += 8;    
+                        }
+                    }
+                    $arr_where['return_time'] = $order_obj->created_at->addDays($add_day);
                     Order::where('id', $command['order'])->update($arr_where);
                 }
                 return returnMessageAjax(200, 'Cập nhật thành công lệnh thiết kế!', getBackUrl());  

@@ -5,6 +5,9 @@ use Illuminate\Http\Request;
 use App\Models\NTable;
 use Illuminate\Support\Facades\Schema;
 use App\Constants\VariableConstant;
+use App\Models\CDesign;
+use App\Models\Order;
+use App\Models\Product;
 
 class DevController extends Controller
 {
@@ -241,6 +244,26 @@ class DevController extends Controller
         $obj = \DB::table('c_designs')->find($request->input('id'));
         $value = str_replace($request->input('key'), $obj->order,  $obj->code);
         \DB::table('c_designs')->where('id', $request->input('id'))->update(['code' => $value]);
+    }
+
+    public function updateOrderReturnTime(){
+        $orders = Order::get();
+        foreach ($orders as $order) {
+            $command_list = CDesign::where('order', $order->id);
+            if ($command_list->count() == $command_list->where(['status' => Order::DESIGN_SUBMITED])->count()) {
+                $add_day = 0;
+                foreach ($command_list->get() as $command) {
+                    $product = Product::find($command->product);
+                    if ($product->category == 1) {
+                        $add_day += 12;
+                    }else{
+                        $add_day += 8;    
+                    }
+                }
+                $arr_where['return_time'] = $order->created_at->addDays($add_day);
+                Order::where('id', $command['order'])->update($arr_where);
+            }
+        }
     }
 
     public function updateData($request)

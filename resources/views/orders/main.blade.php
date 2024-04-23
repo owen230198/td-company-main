@@ -21,14 +21,14 @@
             @php
                 $stage_button = getOrderNameStageByKey(@$stage)
             @endphp
-            @if (!empty($stage_button))
+            @if (!empty($stage_button) && empty($is_design))
                 <button type="button" class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-2 __apply_order" 
                 data-id={{ $id }} data-stage="{{ $stage }}" data-type = {{ @$order_type ?? \OrderConst::SINGLE }}>
                     <i class="fa fa-thumbs-o-up mr-2 fs-14" aria-hidden="true"></i>
                     {{ $stage_button }}
                 </button> 
             @endif
-            @if (!empty($data_order['id']))
+            @if (!empty($data_order['id']) && empty($is_design))
                 <a href="{{ url('print-data/orders/'.$data_order['id']) }}" target="_blank" class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-2">
                     <i class="fa fa-print mr-2 fs-14" aria-hidden="true"></i>In đơn
                 </a>
