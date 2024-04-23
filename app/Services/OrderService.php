@@ -44,7 +44,7 @@ class OrderService extends BaseService
             }
             $this->configBaseDataAction($arr_order);
             if (!empty($arr_order['id'])) {
-                $arr_order['code'] = sprintf("%08s", $arr_order['id']);
+                $arr_order['code'] = 'DH-'.sprintf("%08s", $arr_order['id']);
                 Order::where('id', $arr_order['id'])->update($arr_order);
                 $this->handleProductAfter($data['product'], $arr_order);
             }else{
@@ -54,7 +54,7 @@ class OrderService extends BaseService
                 }
                 $arr_order['status'] = \StatusConst::NOT_ACCEPTED;
                 $arr_order['id'] = Order::insertGetId($arr_order);
-                $arr_order['code'] = sprintf("%08s", $arr_order['id']);
+                $arr_order['code'] = 'DH-'.sprintf("%08s", $arr_order['id']);
                 Order::where('id', $arr_order['id'])->update($arr_order);
                 $this->handleProductAfter($data['product'], $arr_order);
                 

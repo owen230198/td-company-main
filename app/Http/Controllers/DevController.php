@@ -229,8 +229,9 @@ class DevController extends Controller
     }
 
     public function updateCDesign($request){
-        $obj = \DB::find($request->input('id'));
-        \DB::table($request->input('table'))->where('id', $request->input('id'))->update([$request->input('key') => $obj->order]);
+        $obj = \DB::table('c_designs')->find($request->input('id'));
+        $value = str_replace($request->input('key'), $obj->order,  $obj->code);
+        \DB::table('c_designs')->where('id', $request->input('id'))->update(['code' => $value]);
     }
 
     public function updateData($request)
