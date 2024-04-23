@@ -386,7 +386,7 @@
         {
             switch ($status) {
                 case 1:
-                    return ['icon' => 'spinner', 'color' => 'main'];
+                    return ['icon' => 'spinner', 'color' => 'orange'];
                     break;
                 case 2:
                     return ['icon' => 'check', 'color' => 'green'];

@@ -10,6 +10,10 @@ a:hover {
     color: #459300;
 }
 
+.bg_orange{
+    background: #f9a100;
+}
+
 .header {
     height: 55px;
     padding: 5px;
