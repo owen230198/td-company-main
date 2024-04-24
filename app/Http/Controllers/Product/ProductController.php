@@ -292,11 +292,11 @@ use Illuminate\Http\Request;
                     return returnMessageAjax(100, 'Số lượng tạo lệnh in ghép không hợp lệ !');
                 }
 
-                if (empty($join_paper['materal'])) {
+                if (empty($join_paper['size']['materal'])) {
                     return returnMessageAjax(100, 'Bạn chưa chọn chất liệu giấy !');
                 }
 
-                if (empty($join_paper['qttv'])) {
+                if (empty($join_paper['size']['qttv'])) {
                     return returnMessageAjax(100, 'Bạn chưa nhập định lượng giấy !');
                 }
 
@@ -351,14 +351,14 @@ use Illuminate\Http\Request;
                         'attr' => ['type_input' => 'number', 'required' => 1]
                     ],
                     [
-                        'name' => 'join_paper[materal]',
+                        'name' => 'join_paper[size][materal]',
                         'type' => 'linking',
                         'note' => 'Chọn chất liệu giấy',
                         'attr' => ['required' => 1],
                         'other_data' => ['data' => ['table' => 'materals','where' => ['type' => \TDConst::PAPER]]]
                     ],
                     [
-                        'name' => 'join_paper[qttv]',
+                        'name' => 'join_paper[size][qttv]',
                         'note' => 'Định lượng',
                         'attr' => ['type_input' => 'number', 'required' => 1]
                     ],

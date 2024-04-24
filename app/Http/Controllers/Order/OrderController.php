@@ -390,9 +390,6 @@
         public function printData($table, $id)
         {
             $data['data_item'] = \DB::table($table)->find($id);
-            if (empty($data['data_item']->customer)) {
-                return back()->with('error','Chưa có khách hàng được chọn !');
-            }
             if (empty($data['data_item'])) {
                 return back()->with('error', 'Dữ liệu không tồn tại hoặc đã bị xóa !');    
             }

@@ -156,13 +156,15 @@
             <p class="d-flex align-items-center mb-1 pb-1 border_bot_eb">
                 <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
                 <span class="w_120 d-block">Ghi chú</span> 
-                <span class="ml-1">: {{ $print['note'] }}</span>
-            </p>  
-            <p class="d-flex align-items-center mb-1 pb-1 border_bot_eb">
-                <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
-                <span class="w_120 d-block">Chất liệu giấy</span> 
-                <span class="ml-1">: {{ getFieldDataById('name', 'materals', $size['materal']) }}</span>
-            </p>   
+                <span class="ml-1">: {{ @$print['note'] }}</span>
+            </p> 
+            @if (!empty($size['materal']))
+                <p class="d-flex align-items-center mb-1 pb-1 border_bot_eb">
+                    <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
+                    <span class="w_120 d-block">Chất liệu giấy</span> 
+                    <span class="ml-1">: {{ getFieldDataById('name', 'materals', $size['materal']) }}</span>
+                </p> 
+            @endif 
             <p class="d-flex align-items-center mb-1 pb-1 border_bot_eb">
                 <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
                 <span class="w_120 d-block">Định lượng</span> 

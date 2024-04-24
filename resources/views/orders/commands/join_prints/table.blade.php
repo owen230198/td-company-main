@@ -10,8 +10,8 @@
                     </div>
                 </th>
                 <th class="font-bold fs-13">Mã lệnh</th>
+                <th class="font-bold fs-13">Tên lệnh</th>
                 <th class="font-bold fs-13">Các sản phẩm được in ghép trong cùng lệnh in</th>
-                <th class="font-bold fs-13 ">Chức năng</th>
             </tr>
             <tbody>
                 @foreach ($data_tables as $key => $data)
@@ -22,15 +22,28 @@
                             </div>
                         </td>
                         <td>
-                            
+                            <span>{{ $data->code }}</span>    
                         </td>
                         <td>
-                            
+                            <span>{{ $data->name }}</span>      
                         </td>
                         <td>
-                            <div class="func_btn_module text-center position-relative">
-                                @include('table.func_btn')
-                            </div>
+                            <div class="list_child_print_join">
+                                @php
+                                    $arrwher = ['handle_type' => \TDConst::JOIN_HANDLE, 'parent' => $data->id];
+                                    $childs = \DB::table('papers')->where($arrwher)->get();
+                                @endphp
+                                @foreach ($childs as $item)
+                                    <div class="d-flex align-items-center child_print_join justify-content-between mb-2">
+                                        <p class="mr-2">{{ $item->code.' - '.$item->name }}</p>
+                                        <div>
+                                            <a href="{{ url('print-data/papers/'.$data->id) }}" target="_blank" class="main_button color_white bg_green border_green radius_5 font_bold sooth">
+                                                <i class="fa fa-print mr-2 fs-14" aria-hidden="true"></i> In lệnh
+                                            </a>
+                                        </div>
+                                    </div>   
+                                @endforeach
+                            </div>     
                         </td>
                     </tr>
                 @endforeach
