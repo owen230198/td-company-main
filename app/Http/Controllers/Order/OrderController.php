@@ -127,6 +127,19 @@
                 $arr_update = ['status' => Order::TECH_SUBMITED];
                 foreach ($data['product'] as $product) {
                     Product::where('id', $product['id'])->update($arr_update);
+                    $product_obj = Product::find($product['id']);
+                    if (!empty($product_obj)) {
+                        $elements = getProductElementData($product_obj['category'], $product_obj['id'], true, true);
+                        foreach ($elements as $element) {
+                            if (!empty($element['data'])) {
+                                $el_data = $element['data'];
+                                foreach ($el_data as $supply) {
+                                    $table_supply = $element['table'];
+                                    getModelByTable($table_supply)->where('id', $supply->id)->update($arr_update);
+                                }
+                            }
+                        }
+                    }
                 }
                 if (checkUpdateOrderStatus($base_order_id, Order::TECH_SUBMITED)) {
                     Order::where('id', $base_order_id)->update($arr_update);
@@ -324,7 +337,6 @@
                 return returnMessageAjax(110, 'Dữ liệu không hợp lệ !');
             }
             $elements = getProductElementData($obj_order->category, $obj_order->id, true, true);
-            $count = -1;
             foreach ($elements as $element) {
                 if (!empty($element['data'])) {
                     $el_data = $element['data'];
@@ -338,13 +350,11 @@
                         $data_command = getStageActiveStartHandle($table_supply, $supply->id);
                         $type = $data_command['type'];
                         $data_update['status'] = $type;
-                        $count++;
-                        $code =  $obj_order->code.getCharaterByNum($count);
-                        $data_update['code'] = $code;
                         $update = getModelByTable($table_supply)->where('id', $supply->id)->update($data_update);
                         $data_handle = !empty($data_command['handle']) ? $data_command['handle'] : [];
                         if ($type != \StatusConst::SUBMITED && $update && (int) @$data_handle['handle_qty'] > 0) {
                             $data_command['qty'] = $data_handle['handle_qty'];
+                            $code = $supply->code;
                             if ($type == \TDConst::FILL && !empty($data_handle['stage'])) {
                                 foreach ($data_handle['stage'] as $fillkey => $stage) {
                                     $data_command['name'] = $obj_order->name.'('.getFieldDataById('name', 'materals', @$stage['materal']).')';

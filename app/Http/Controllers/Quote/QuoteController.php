@@ -64,7 +64,7 @@ class QuoteController extends Controller
 
     public function clone($request, $id)
     {
-        $hidden_clone_field = ['created_by', 'created_at', 'updated_at'];
+        $hidden_clone_field = ['code', 'created_by', 'created_at', 'updated_at'];
         $data_quote = Quote::find($id)->makeHidden($hidden_clone_field)->toArray();
         $data_products = Product::where('quote_id', $id)->get()->makeHidden($hidden_clone_field)->toArray();
         unset($data_quote['id']);
@@ -83,6 +83,13 @@ class QuoteController extends Controller
                 unset($product['id'], $product['code'], $product['status'], $product['order'], $product['order_created']);
                 $this->services->configBaseDataAction($product);
                 $product_id = Product::insertGetId($product);
+                $childs = Product::where('parent', $old_product_id)->get()->makeHidden($hidden_clone_field)->toArray();
+                foreach ($childs as $child) {
+                    $child['parent'] = $product_id;
+                    unset($child['id'], $child['code'], $child['status'], $child['order'], $child['order_created']);
+                    $this->services->configBaseDataAction($child);
+                    Product::insertGetId($child);
+                }
                 //log insert product
                 $log_product_id = logActionUserData('insert', 'products', $product_id, $product, $log_quote_id);
                 if ($product_id) {
@@ -243,6 +250,17 @@ class QuoteController extends Controller
 
     }
 
+    public function recursiveProduct($products, &$ret)
+    {
+        foreach ($products as $product) {
+            $ret[] = $product;
+            $childs = Product::where('parent', $product['id'])->get();
+            if (!empty($childs)) {
+                $this->recursiveProduct($childs, $ret);
+            }
+        }
+    }
+
     public function profitConfigQuote(Request $request)
     {
         $id = $request->input('quote_id');
@@ -260,7 +278,9 @@ class QuoteController extends Controller
         if (!$is_post) {
             $data['data_quote'] = $arr_quote;
             $data['title'] = 'Lợi nhuận báo giá mã - '.@$data['data_quote']['seri'];
-            $data['products'] = Product::where(['act' => 1, 'quote_id' => $id])->get();
+            $product_parent = Product::where(['act' => 1, 'quote_id' => $id])->get();
+            $data['products'] = array();
+            $this->recursiveProduct($product_parent, $data['products']);
             $data['supply_fields'] = TDConstant::HARD_ELEMENT;
             return view('quotes.profits.view', $data);
         }else{

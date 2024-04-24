@@ -7,6 +7,7 @@ use App\Models\Product;
 use \App\Models\CDesign;
 use \App\Models\CSupply;
 use App\Models\OtherWarehouse;
+use App\Models\Paper;
 use App\Models\PrintWarehouse;
 use App\Models\Supply;
 use App\Models\SupplyWarehouse;
@@ -44,9 +45,7 @@ class OrderService extends BaseService
             }
             $this->configBaseDataAction($arr_order);
             if (!empty($arr_order['id'])) {
-                $arr_order['code'] = 'DH-'.sprintf("%08s", $arr_order['id']);
                 Order::where('id', $arr_order['id'])->update($arr_order);
-                $this->handleProductAfter($data['product'], $arr_order);
             }else{
                 if (!empty($arr_quote['id'])) {
                     Quote::where('id', $arr_quote['id'])->update(['status' => Quote::ORDER_CREATED]);
@@ -72,8 +71,28 @@ class OrderService extends BaseService
             }
             $data_update['order'] = $order['id'];
             $data_update['order_created'] = 1;
-            Product::where('id', $product['id'])->update($data_update);  
+            Product::where('id', $product['id'])->update($data_update);
+            $this->handleCommandCode($product, $data_update['code']); 
         }  
+    }
+
+    public function handleCommandCode($product, $code)
+    {
+        $elements = getProductElementData($product['category'], $product['id'], false, true);
+        $count = -1;
+        foreach ($elements as $element) {
+            if (!empty($element['data'])) {
+                $el_data = $element['data'];
+                foreach ($el_data as $supply) {
+                    $table_supply = $element['table'];
+                    $data_update['status'] = \StatusConst::NOT_ACCEPTED;
+                    $count++;
+                    $code =  $code.getCharaterByNum($count);
+                    $data_update['code'] = $code;
+                    getModelByTable($table_supply)->where('id', $supply->id)->update($data_update);
+                }
+            }
+        }
     }
 
     public function insertDesignCommand($products, $order_id, $code)

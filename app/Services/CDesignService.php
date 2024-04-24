@@ -26,6 +26,20 @@
                 $update = CDesign::where('id', $command['id'])->update($arr_where);
                 if ($update) {
                     Product::where('id', $command['product'])->update($arr_where);
+                    $product_obj = Product::find($command['product']);
+                    if (!empty($product_obj)) {
+                        $elements = getProductElementData($product_obj['category'], $product_obj['id'], false, true);
+                        foreach ($elements as $element) {
+                            if (!empty($element['data'])) {
+                                $el_data = $element['data'];
+                                foreach ($el_data as $supply) {
+                                    $table_supply = $element['table'];
+                                    $data_update['status'] = @$supply->handle_type == \TDConst::JOIN_HANDLE ? Order::WAITING_JOIN : Order::DESIGN_SUBMITED;
+                                    getModelByTable($table_supply)->where('id', $supply->id)->update($data_update);
+                                }
+                            }
+                        }
+                    }
                 }
                 $command_list = CDesign::where('order', $command['order']);
                 if ($command_list->count() == $command_list->where($arr_where)->count()) {

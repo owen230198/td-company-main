@@ -9,6 +9,7 @@
         //Status
         const NOT_ACCEPTED = \StatusConst::NOT_ACCEPTED;
         const TO_DESIGN = 'to_design';
+        const WAITING_JOIN = 'waiting_join';
         const DESIGNING = 'designing';
         const DESIGN_SUBMITED = 'design_submited';
         const TECH_SUBMITED = 'tech_submited';

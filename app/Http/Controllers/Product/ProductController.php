@@ -3,11 +3,11 @@
     use App\Http\Controllers\Controller;
     use App\Models\AfterPrint;
     use App\Models\CExpertise;
-use App\Models\CRework;
-use App\Models\Order;
+    use App\Models\CRework;
+    use App\Models\Order;
     use App\Models\Product;
     use App\Models\Quote;
-use App\Models\WUser;
+    use App\Models\WUser;
 use Illuminate\Http\Request;
     class ProductController extends Controller
     {
@@ -272,52 +272,85 @@ use Illuminate\Http\Request;
         
         public function joinPrintCommand(Request $request)
         {
-            $data['title'] = 'Tạo lệnh in ghép';
-            $data['arr_fields'] = [
-                [
-                    'name' => 'paper[]',
-                    'type' => 'linking',
-                    'note' => 'Chọn giấy in ghép',
-                    'attr' => ['required' => 1],
-                    'other_data' => [
-                        'config' => ['search' => 1, 'multiple' => 1], 
-                        'data' => [
-                            'table' => 'papers', 
-                            'where' => ['handle_type' => \TDConst::JOIN_HANDLE, 'status' => null]
+            $is_post = $request->isMethod('POST');
+            if (!\GroupUser::isTechApply() && !\GroupUser::isAdmin()) {
+                return customReturnMessage(false, $is_post, ['message' => 'Bạn không có quyền tạo lệnh in ghép !']);
+            }
+            if ($is_post) {
+                $join_paper = $request->input('join_paper');
+                $papers = $request->input('paper');
+                if (empty($papers)) {
+                    return returnMessageAjax(100, 'Bạn chưa chọn lệnh ghép nào !');
+                }
+
+                if (empty($join_paper['name'])) {
+                    return returnMessageAjax(100, 'Bạn chưa nhập tên cho lệnh in ghép !');
+                }
+                
+                if (empty($join_paper['qty'])) {
+                    return returnMessageAjax(100, 'Số lượng tạo lệnh in ghép không hợp lệ !');
+                }
+
+                if (empty($join_paper['materal'])) {
+                    return returnMessageAjax(100, 'Bạn chưa chọn chất liệu giấy !');
+                }
+
+                if (empty($join_paper['qttv'])) {
+                    return returnMessageAjax(100, 'Bạn chưa nhập định lượng giấy !');
+                }
+                
+            }else{
+                $data['title'] = 'Tạo lệnh in ghép';
+                $paper_join = \DB::table('papers')->where(['handle_type' => \TDConst::JOIN_HANDLE, 'status' => Order::WAITING_JOIN])->get();
+                $options = [];
+                foreach ($paper_join as $paper) {
+                    $options[$paper->id] = $paper->code.' - '.$paper->name;
+                }
+                $data['arr_fields'] = [
+                    [
+                        'name' => 'paper[]',
+                        'type' => 'select',
+                        'note' => 'Danh sách lệnh ghép cần bình',
+                        'attr' => ['required' => 1],
+                        'other_data' => [
+                            'config' => ['search' => 1, 'multiple' => 1], 
+                            'data' => [
+                                'options' => $options
+                            ]
                         ]
-                    ]
-                ],
-                [
-                    'name' => 'name',
-                    'type' =>'text',
-                    'note' => 'Tên lệnh',
-                    'attr' => ['required' => 1],
-                ],
-                [
-                    'name' => 'qty',
-                    'note' => 'Số lượng tờ in',
-                    'attr' => ['type_input' => 'number', 'required' => 1]
-                ],
-                [
-                    'name' => 'materal',
-                    'type' => 'linking',
-                    'note' => 'Chọn chất liệu giấy',
-                    'attr' => ['required' => 1],
-                    'other_data' => ['data' => ['table' => 'materals','where' => ['type' => \TDConst::PAPER]]]
-                ],
-                [
-                    'name' => 'qttv',
-                    'note' => 'Định lượng',
-                    'attr' => ['type_input' => 'number', 'required' => 1]
-                ],
-                [
-                    'name' => 'note',
-                    'note' => 'Ghi chú',
-                    'type' => 'textarea',
-                    'attr' => ['type_input' => 'number', 'required' => 1]
-                ],
-            ];
-            return view('orders.commands.join_prints.view', $data);
+                    ],
+                    [
+                        'name' => 'join_paper[name]',
+                        'type' =>'text',
+                        'note' => 'Tên lệnh',
+                        'attr' => ['required' => 1],
+                    ],
+                    [
+                        'name' => 'join_paper[qty]',
+                        'note' => 'Số lượng tờ in',
+                        'attr' => ['type_input' => 'number', 'required' => 1]
+                    ],
+                    [
+                        'name' => 'join_paper[materal]',
+                        'type' => 'linking',
+                        'note' => 'Chọn chất liệu giấy',
+                        'attr' => ['required' => 1],
+                        'other_data' => ['data' => ['table' => 'materals','where' => ['type' => \TDConst::PAPER]]]
+                    ],
+                    [
+                        'name' => 'join_paper[qttv]',
+                        'note' => 'Định lượng',
+                        'attr' => ['type_input' => 'number', 'required' => 1]
+                    ],
+                    [
+                        'name' => 'join_paper[note]',
+                        'note' => 'Ghi chú',
+                        'type' => 'textarea',
+                        'attr' => ['type_input' => 'number', 'required' => 1]
+                    ],
+                ];
+                return view('orders.commands.join_prints.view', $data);
+            }
         }
 
         public function afterPrintKcs(Request $request, $id)
