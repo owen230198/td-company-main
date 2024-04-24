@@ -259,6 +259,7 @@ class NGroupUser extends Model
             self::MODULE['create_quote'],
             self::MODULE['quote_not_accepted'],
             self::MODULE['quote_accepted'],
+            self::MODULE['order_process'],
             self::MODULE['handle_process'],
             self::MODULE['warehouse_management'],
             self::MODULE['profit'],
