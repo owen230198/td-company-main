@@ -13,6 +13,7 @@
         @foreach ($arr_fields as $key => $field)
             @include('view_update.view', $field)
         @endforeach
+        @include('quotes.products.papers.size', ['base_name' => 'join_paper'])
         @include('quotes.products.papers.after_print', ['pro_index' => 0, 'supp_index' => 0, 'paper_hd_base_name' => 'join_paper'])    
         <div class="group_btn_action_form text-center">
             <button type="submit" disabled class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-2">

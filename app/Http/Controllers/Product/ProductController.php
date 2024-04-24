@@ -5,7 +5,8 @@
     use App\Models\CExpertise;
     use App\Models\CRework;
     use App\Models\Order;
-    use App\Models\Product;
+use App\Models\Paper;
+use App\Models\Product;
     use App\Models\Quote;
     use App\Models\WUser;
 use Illuminate\Http\Request;
@@ -287,7 +288,7 @@ use Illuminate\Http\Request;
                     return returnMessageAjax(100, 'Bạn chưa nhập tên cho lệnh in ghép !');
                 }
                 
-                if (empty($join_paper['qty'])) {
+                if (empty($join_paper['supp_qty'])) {
                     return returnMessageAjax(100, 'Số lượng tạo lệnh in ghép không hợp lệ !');
                 }
 
@@ -298,10 +299,29 @@ use Illuminate\Http\Request;
                 if (empty($join_paper['qttv'])) {
                     return returnMessageAjax(100, 'Bạn chưa nhập định lượng giấy !');
                 }
-                
+
+                if (empty($join_paper['size']['length']) || empty($join_paper['size']['width'])) {
+                    return returnMessageAjax(100, 'Kích thước khổ giấy không hợp lệ !');
+                }
+                $join_paper['qty'] = 0;
+                $join_paper['base_supp_qty'] = $join_paper['supp_qty'];
+                $join_paper['nqty'] = 1;
+                $join_paper['handle_type'] = \TDConst::MADE_BY_OWN;
+                $type_key = \TDConst::PAPER;
+                $data[$type_key][] = $join_paper;
+                $parent_id = (new Paper())->processData(0, $data, $type_key);
+                $code = 'G-'.sprintf("%08s", $parent_id);
+                $arr_update = ['status' => Order::TECH_SUBMITED, 'code' => $code, 'is_join' => 1];
+                $update = Paper::where('id', $parent_id)->update($arr_update);  
+                foreach ($papers as $paper_id) {
+                    Paper::where('id', $paper_id)->update(['parent' => $parent_id, 'status' => Order::TECH_SUBMITED]);
+                }
+                if ($update) {
+                    return returnMessageAjax(200, 'Đã tạo lệnh in ghép thành công, Mã lệnh: '.$code.'Tên lệnh: '.$join_paper['name'], \StatusConst::RELOAD);
+                }
             }else{
                 $data['title'] = 'Tạo lệnh in ghép';
-                $paper_join = \DB::table('papers')->where(['handle_type' => \TDConst::JOIN_HANDLE, 'status' => Order::WAITING_JOIN])->get();
+                $paper_join = Paper::where(['handle_type' => \TDConst::JOIN_HANDLE, 'status' => Order::WAITING_JOIN])->get();
                 $options = [];
                 foreach ($paper_join as $paper) {
                     $options[$paper->id] = $paper->code.' - '.$paper->name;
@@ -326,7 +346,7 @@ use Illuminate\Http\Request;
                         'attr' => ['required' => 1],
                     ],
                     [
-                        'name' => 'join_paper[qty]',
+                        'name' => 'join_paper[supp_qty]',
                         'note' => 'Số lượng tờ in',
                         'attr' => ['type_input' => 'number', 'required' => 1]
                     ],
@@ -351,6 +371,18 @@ use Illuminate\Http\Request;
                 ];
                 return view('orders.commands.join_prints.view', $data);
             }
+        }
+
+        public function listPrintJoined(Request $request)
+        {
+            if (!\GroupUser::isTechApply() && !\GroupUser::isAdmin()) {
+                return back()->with('error', 'Bạn không có quyền xem lệnh in ghép đã bình !');
+            }
+            $table = 'papers';
+            $data = $this->admins->getDataBaseView($table, 'Danh sách');
+            $data['title'] = 'Danh sách lệnh in đã bình';
+            $data['data_tables'] = Paper::where(['is_join' => 1, 'parent' => 0, 'status' => Order::TECH_SUBMITED])->paginate(10);
+            return view('orders.commands.join_prints.table', $data);
         }
 
         public function afterPrintKcs(Request $request, $id)

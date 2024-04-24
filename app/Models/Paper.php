@@ -84,12 +84,12 @@ class Paper extends Model
                     if (!empty($paper['id'])) {
                         $process = $this->where('id', $paper['id'])->update($data_process);
                     }else{
-                        $process = $this->insert($data_process);
+                        $process = $this->insertGetId($data_process);
                     }
                 }
             }
         }
-        return !empty($process);
+        return !empty($process) ? $process : false;
     }
 
     static function getNilonMetalaiFormula($paper_qty, $work_price, $face_num, $shape_price)

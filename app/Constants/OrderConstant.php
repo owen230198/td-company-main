@@ -34,6 +34,13 @@
                 'link' => 'view/products?default_data=%7B"status"%3A"'.Order::DESIGN_SUBMITED.'"%7D' 
             ],
             [
+                'icon' => 'print_join', 
+                'table' => 'papers', 
+                'text' => 'Lệnh in ghép', 
+                'condition' => ['status' => Order::TECH_SUBMITED, 'is_join' => 1],
+                'link' => 'view/papers?default_data=%7B"status"%3A"'.Order::TECH_SUBMITED.'"%2C"is_join"%3A1%7D' 
+            ],
+            [
                 'icon' => 'c_processes', 
                 'table' => 'products', 
                 'text' => 'Duyệt sản xuất', 
