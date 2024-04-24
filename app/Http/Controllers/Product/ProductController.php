@@ -311,7 +311,7 @@ use Illuminate\Http\Request;
                 $data[$type_key][] = $join_paper;
                 $parent_id = (new Paper())->processData(0, $data, $type_key);
                 $code = 'G-'.sprintf("%08s", $parent_id);
-                $arr_update = ['status' => Order::TECH_SUBMITED, 'code' => $code, 'is_join' => 1];
+                $arr_update = ['status' => Order::TECH_SUBMITED, 'code' => $code, 'is_join' => 1, 'parent' => 0];
                 $update = Paper::where('id', $parent_id)->update($arr_update);  
                 foreach ($papers as $paper_id) {
                     Paper::where('id', $paper_id)->update(['parent' => $parent_id, 'status' => Order::TECH_SUBMITED]);
