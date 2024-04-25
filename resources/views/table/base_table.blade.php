@@ -1,7 +1,11 @@
 @extends('index')
 @section('content')
     <div class="dashborad_content">
-        @include('table.form_search')
+        @if (!empty($tableItem['search_view']))
+            @include('table.'.$tableItem['search_view'])
+        @else
+            @include('table.form_search')
+        @endif
         <div class="d-flex align-center justify-content-end my-3">
             <button type="submit"
                 class="main_button bg_main color_white smooth bg_green border_green radius_5 font_bold smooth mr-2"
@@ -30,13 +34,7 @@
             </a>
         </div>
         @if (count($data_tables) > 0)
-            <div class="paginate_view d-flex align-center justify-content-between mb-3">
-                {!! $data_tables->appends(request()->input())->links('pagination::bootstrap-4') !!}
-            </div>
-                @yield('type')
-            <div class="paginate_view d-flex align-center justify-content-between mt-3">
-                {!! $data_tables->appends(request()->input())->links('pagination::bootstrap-4') !!}
-            </div>
+            @yield('type')
         @else
             <p class="fs-15 font-italic color_red">Chưa có dữ liệu {{ @$title }} !</p>
         @endif

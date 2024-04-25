@@ -77,6 +77,7 @@
     <script src="{{ asset('frontend/base/script/script.js') }}"></script>
     <script src="{{ asset('frontend/admin/script/script.js') }}"></script>
     @yield('script')
+    @stack('bottom-scripts')
     <script>
         @if (Session::has('message'))
             swal('Thành công', "{{ session('message') }}", 'success');

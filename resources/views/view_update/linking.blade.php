@@ -29,7 +29,9 @@
             $data_label = method_exists($linking_model, 'getLabelLinking') ? $linking_model::getLabelLinking($linking_value) : @$linking_value->{$field_title};
         }
     @endphp
-    <select name="{{ $name }}" {{ !empty($select_config['multiple']) ? 'multiple' : '' }} class="form-control select_ajax {{ @$attr['inject_class'] ? ' '.$attr['inject_class'] : '' }}"
+    <select name="{{ $name }}" {{ !empty($select_config['multiple']) ? 'multiple' : '' }} 
+    class="form-control select_ajax {{ @$attr['inject_class'] ? ' '.$attr['inject_class'] : '' }} 
+    {{ @$attr['class_on_search'] ? ' '.$attr['class_on_search'] : '' }}"
     data-url="{{ $url }}" data-id="{{ @$data_id }}", data-label = "{{ @$data_label }}" {{ @$attr['inject_attr'] ?? '' }} 
     {{ @$attr['disable_field'] == 1 ? 'disabled' : '' }}
     {{ @$attr['readonly'] == 1 ? 'readonly' : '' }}>

@@ -164,7 +164,13 @@
                 \GroupUser::TECH_HANDLE => [
                     'view' => 
                         [
-                            'with' => ['key' => 'status', 'value' => Order::DESIGN_SUBMITED],
+                            'with' => [
+                                'type' => 'group',
+                                'query' => [
+                                    ['key' => 'status', 'value' => Order::DESIGN_SUBMITED],
+                                    ['con' => 'or', 'key' => 'order_created', 'value' => 1]
+                                ]
+                            ],
                         ],
                     'update' => 
                         [

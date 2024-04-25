@@ -50,19 +50,8 @@ class AdminService extends BaseService
     public function getFieldAction($table, $action = 'view')
     {
         $list = NDetailTable::where(['act' => 1, 'table_map'=> $table, $action => 1])->orderBy('ord', 'asc')->get()->toArray();
-        $rowspan = 1;
-        foreach ($list as $key => $field) {
-            if($field['parent'] == 0 && $field['type'] == 'group'){
-                $rowspan = 2;
-                $list[$key]['child'] = NDetailTable::where(['act' => 1, 'parent' => $field['id']])->orderBy('ord', 'asc')->get()->toArray();
-                $list[$key]['colspan'] = !empty($list[$key]['child']) ? count($list[$key]['child']) : 1;
-            }
-        }
-        if ($action == 'view') {
-            return ['rowspan' => $rowspan, 'field_shows' => $list];
-        }else{
-            return $list;
-        }
+        NDetailTable::handleField($list, $action);
+        return $list;
     }
 
     public function getDataActionView($table, $action, $action_name, $param = [])

@@ -46,6 +46,7 @@ class OrderService extends BaseService
             $this->configBaseDataAction($arr_order);
             if (!empty($arr_order['id'])) {
                 Order::where('id', $arr_order['id'])->update($arr_order);
+                $arr_order['code'] = 'DH-'.sprintf("%08s", $arr_order['id']);
             }else{
                 if (!empty($arr_quote['id'])) {
                     Quote::where('id', $arr_quote['id'])->update(['status' => Quote::ORDER_CREATED]);
@@ -55,9 +56,8 @@ class OrderService extends BaseService
                 $arr_order['id'] = Order::insertGetId($arr_order);
                 $arr_order['code'] = 'DH-'.sprintf("%08s", $arr_order['id']);
                 Order::where('id', $arr_order['id'])->update($arr_order);
-                $this->handleProductAfter($data['product'], $arr_order);
-                
             }
+            $this->handleProductAfter($data['product'], $arr_order);
             return returnMessageAjax(200, 'Cập nhật dữ liệu thành công!', getBackUrl());     
         }
     }

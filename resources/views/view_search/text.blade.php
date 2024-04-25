@@ -1,4 +1,4 @@
-@if (@$attr['type_input'] == 'price')
+@if (@$attr['type_input'] == 'price' || @$attr['type_input'] == 'number')
     @php
         $value_from = !empty($data_search[$name]['from']) ? $data_search[$name]['from'] : '';
         $value_to = !empty($data_search[$name]['to']) ? $data_search[$name]['to'] : '';
