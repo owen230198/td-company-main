@@ -59,14 +59,15 @@ var ajaxBaseCall = function(param)
 	})
 }
 
-var ajaxViewTarget = function(url, target_ajax, section_class, type = 1, data = '')
+var ajaxViewTarget = function(url, target_ajax, section_class, type = 1, data = '', full_url = true)
 {
 	$('#loader').fadeIn(200);
-	$.ajax({
-		url: getBaseRoute(url),
-		type: 'GET',
-		data: data,
-	})
+	let link = full_url == true ? getBaseRoute(url) : url
+	let ajax_conf = {url: link,type: 'GET'};
+	if (!empty(data)) {
+		ajax_conf.data = data;
+	}
+	$.ajax(ajax_conf)
 	.done(function(data){
 		if (typeof data === 'object' && data.code == 100) {
 		  swal('Không thành công', data.message, 'error');

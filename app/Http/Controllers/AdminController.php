@@ -82,6 +82,7 @@ class AdminController extends Controller
             }
         }
         $data['data_tables'] = getDataTable($table, self::$view_where, ['paginate' => $data['page_item'], 'order' => $order, 'order_by' => $order_by]);
+        // dd($request->all());
         if (!empty($request->input('get_table_view_ajax'))) {
             return view('table.'.$request->input('get_table_view_ajax'), $data);
         }else{

@@ -245,9 +245,14 @@ var searchIngredient = function ()
 	$('.form_search_ingredient .base_table_form_search form').submit(function(event) {
 		event.preventDefault();
         let target = $('.ajax_data_ingredient');
-        console.log($(this).serialize());
 		ajaxViewTarget('search-table/print_warehouses', target, target, 1, $(this).serialize());
 	});
+    $(document).on('click', '.ajax_data_ingredient .page-link', function(event){
+        event.preventDefault();
+        let url = $(this).attr('href');
+        let target = $('.ajax_data_ingredient');
+        ajaxViewTarget(url + '&get_table_view_ajax=table_base_view', target, target, 1, '', false);
+    })
 }
 
 $(function(){
