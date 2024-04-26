@@ -17,8 +17,8 @@ class PrintWarehouse extends Model
             "width_child":"6"
         }';
 
-        $fields[0]['child'][0]['attr'] = '{"required":1,"inject_class":"__select_parent"}'; 
-        $fields[0]['child'][1]['attr'] = '{"required":1,"disable_field":1,"inject_class":"__select_child"}';
+        $fields[0]['child'][0]['attr'] = '{"required":1,"inject_class":"__select_parent change_submit"}'; 
+        $fields[0]['child'][1]['attr'] = '{"required":1, "inject_class":"__select_child change_submit"}';
         $fields[0]['child'][1]['type'] = 'select'; 
         $fields[0]['child'][1]['other_data'] = '{"config":{"searchbox":1},"data":{"options":{"":"Chọn định lượng"}}}';
         return $fields;

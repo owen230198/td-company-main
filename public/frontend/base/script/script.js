@@ -59,12 +59,13 @@ var ajaxBaseCall = function(param)
 	})
 }
 
-var ajaxViewTarget = function(url, target_ajax, section_class, type = 1)
+var ajaxViewTarget = function(url, target_ajax, section_class, type = 1, data = '')
 {
 	$('#loader').fadeIn(200);
 	$.ajax({
 		url: getBaseRoute(url),
-		type: 'GET'
+		type: 'GET',
+		data: data,
 	})
 	.done(function(data){
 		if (typeof data === 'object' && data.code == 100) {

@@ -72,7 +72,7 @@ class AdminController extends Controller
             if ($request->input('nosidebar') == 1) {
                 $data['nosidebar'] = 1;
             }
-            $param =  $request->except('default_data', 'page', 'nosidebar');
+            $param =  $request->except('default_data', 'page', 'nosidebar', 'get_table_view_ajax');
             if (!empty($param)) {
                 $data['data_search'] = $param;
                 $this->injectViewWhereParam($table, $param);
@@ -82,8 +82,12 @@ class AdminController extends Controller
             }
         }
         $data['data_tables'] = getDataTable($table, self::$view_where, ['paginate' => $data['page_item'], 'order' => $order, 'order_by' => $order_by]);
-        session()->put('back_url', url()->full());    
-        return view('table.'.$data['view_type'], $data);
+        if (!empty($request->input('get_table_view_ajax'))) {
+            return view('table.'.$request->input('get_table_view_ajax'), $data);
+        }else{
+            session()->put('back_url', url()->full());
+            return view('table.'.$data['view_type'], $data);
+        } 
     }
 
     public function configDevicePrice(Request $request, $step){
