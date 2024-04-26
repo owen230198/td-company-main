@@ -7,66 +7,20 @@ class PrintWarehouse extends Model
 {
     protected $table = 'print_warehouses';
     protected $protectFields = false;
-    const FIELD_SEARCH = [
-        [
-            'name' => 'supp_price',
-            'note' => 'Loại giấy',
-            'type' => 'linking',
-            'attr' => '{"class_on_search":"__supp_price_warehouse_search __search_input_warehouse"}',
-            'other_data' => '{
-                "config":{
-                    "search":1
-                },
-                "data":{
-                    "table":"materals",
-                    "where_default":{"type":"type"}
-                }
-            }',
-            'parent' => 'group_paper'
-        ],
-        [
-            'name' => 'qtv',
-            'note' => 'Định lượng',
-            'type' => 'select',
-            'attr' => '{"class_on_search":"__qtv_warehouse_search __search_input_warehouse","disable_field":"1"}',
-            'other_data' => '{
-                "config":{
-                    "search":1
-                },
-                "data":{
-                    "options":{"":"Chọn định lượng"}
-                }
-            }',
-            'parent' => 'group_paper'
-        ],
-        [
-            'id' => 'group_paper',
-            'type' => 'group',
-            'other_data' => '{
-                "group_class":"__module_select_ajax_value_child",
-                "inject_attr":"get-list-quantative-paper",
-                "width":"8",
-                "width_child":"6"
-            }'
-        ],
-        [
-            'name' => 'length',
-            'note' => 'KT dài',
-            'type' => 'text',
-            'attr' => '{"class_on_search":"__search_input_warehouse"}',
-        ],
-        [
-            'name' => 'width',
-            'note' => 'KT rộng',
-            'type' => 'text',
-            'attr' => '{"class_on_search":"__search_input_warehouse"}',
-        ]
-    ];
-
-    public function getFieldSearch()
+    static function getFieldSearch()
     {
-        $fields = self::FIELD_SEARCH;
-        NDetailTable::handleField($fields, 'search');
+        $fields = (new \App\Services\AdminService())->getFieldAction('print_warehouses', 'search');
+        $fields[0]['other_data'] = '{
+            "group_class":"__module_select_ajax_value_child",
+            "inject_attr":"link=get-quantitative-inpaper",
+            "width":"8",
+            "width_child":"6"
+        }';
+
+        $fields[0]['child'][0]['attr'] = '{"required":1,"inject_class":"__select_parent"}'; 
+        $fields[0]['child'][1]['attr'] = '{"required":1,"disable_field":1,"inject_class":"__select_child"}';
+        $fields[0]['child'][1]['type'] = 'select'; 
+        $fields[0]['child'][1]['other_data'] = '{"config":{"searchbox":1},"data":{"options":{"":"Chọn định lượng"}}}';
         return $fields;
     }
 

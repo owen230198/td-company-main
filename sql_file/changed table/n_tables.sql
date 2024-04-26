@@ -1,7 +1,7 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : owen
+ Source Server         : localhost
  Source Server Type    : MySQL
  Source Server Version : 80030
  Source Host           : localhost:3306
@@ -11,7 +11,7 @@
  Target Server Version : 80030
  File Encoding         : 65001
 
- Date: 25/04/2024 18:06:11
+ Date: 26/04/2024 10:29:18
 */
 
 SET NAMES utf8mb4;
@@ -45,7 +45,7 @@ CREATE TABLE `n_tables`  (
 -- ----------------------------
 INSERT INTO `n_tables` VALUES (1, 'n_users', 'Nhân viên', NULL, 10, 'view', NULL, NULL, '1', '1', '1', '1', '2023-05-23 14:43:41', '2023-08-16 19:42:33');
 INSERT INTO `n_tables` VALUES (2, 'n_group_users', 'Nhóm quyền', NULL, 10, 'view', NULL, NULL, '1', '1', '1', '1', '2023-04-23 11:30:46', '2023-08-16 19:42:33');
-INSERT INTO `n_tables` VALUES (3, 'n_roles', 'Phân quyền', NULL, 10, 'view', 'ingredients.print_warehouses.form_search', NULL, '1', '1', '1', '1', '2023-04-23 11:30:46', '2024-04-25 14:46:49');
+INSERT INTO `n_tables` VALUES (3, 'n_roles', 'Phân quyền', NULL, 10, 'view', '', NULL, '1', '1', '1', '1', '2023-04-23 11:30:46', '2024-04-26 05:36:37');
 INSERT INTO `n_tables` VALUES (4, 'files', 'Kho Lưu trữ', NULL, 24, 'media', NULL, NULL, '1', '1', '1', '1', '2023-04-23 11:30:46', '2023-08-16 19:42:33');
 INSERT INTO `n_tables` VALUES (5, 'quote_configs', 'Thông tin chung & Giá thành', NULL, 100, 'config', NULL, NULL, '1', '1', '1', '1', '2023-05-09 16:15:02', '2023-08-16 19:42:33');
 INSERT INTO `n_tables` VALUES (6, 'customers', 'Khách hàng', NULL, 10, 'view', NULL, NULL, '1', '1', '1', '1', '2023-04-23 11:30:46', '2023-08-16 19:42:33');
@@ -66,7 +66,7 @@ INSERT INTO `n_tables` VALUES (24, 'n_log_actions', 'Lịch sử thao tác', NUL
 INSERT INTO `n_tables` VALUES (25, 'w_users', 'Công nhân', '{\r\n	\"link\":\"list-worker-by-device/machine\", \r\n	\"note\":\"DS tổ máy\"\r\n}', 10, 'view', NULL, '', '1', '1', '1', '1', '2023-05-23 14:43:41', '2023-09-11 11:17:39');
 INSERT INTO `n_tables` VALUES (26, 'paper_extends', 'Tên phụ giấy in', NULL, 10, 'view', NULL, '', '1', '1', '1', '1', '2023-07-17 19:30:41', '2023-08-16 19:42:34');
 INSERT INTO `n_tables` VALUES (27, 'supply_warehouses', 'Kho vật tư (carton, cao su, mút xốp, mica,...)', '{\r\n	\"link\":\"warehouse-management\", \r\n	\"note\":\"Quản lí kho vật tư\"\r\n}', 10, 'view', NULL, '[\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"undo\",\"note\":\"Xác nhận nhập kho vật tư\", \r\n		\"class\":\"__confirm_im_supp\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"waiting\"}\r\n		]\r\n	}\r\n]', '1', '1', '1', '1', '2023-07-14 03:17:55', '2023-08-16 19:43:11');
-INSERT INTO `n_tables` VALUES (28, 'print_warehouses', 'Kho vật tư (giấy in)', '{\r\n	\"link\":\"warehouse-management\", \r\n	\"note\":\"Quản lí kho vật tư\"\r\n}', 10, 'ingredients.print_warehouses.view', '', '[\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"undo\",\"note\":\"Xác nhận nhập kho vật tư\", \r\n		\"class\":\"__confirm_im_supp\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"waiting\"}\r\n		]\r\n	}\r\n]', '1', '1', '1', '1', '2023-07-14 03:17:55', '2024-04-25 17:33:43');
+INSERT INTO `n_tables` VALUES (28, 'print_warehouses', 'Kho vật tư (giấy in)', '{\r\n	\"link\":\"warehouse-management\", \r\n	\"note\":\"Quản lí kho vật tư\"\r\n}', 10, 'ingredients.print_warehouses.view', 'ingredients.print_warehouses.form_search', '[\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"undo\",\"note\":\"Xác nhận nhập kho vật tư\", \r\n		\"class\":\"__confirm_im_supp\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"waiting\"}\r\n		]\r\n	}\r\n]', '1', '1', '1', '1', '2023-07-14 03:17:55', '2024-04-26 05:36:43');
 INSERT INTO `n_tables` VALUES (29, 'other_warehouses', 'Kho vật tư (nam châm)', '{\r\n	\"link\":\"warehouse-management\", \r\n	\"note\":\"Quản lí kho vật tư\"\r\n}', 10, 'view', NULL, '', '1', '1', '1', '1', '2023-07-14 03:17:55', '2023-09-11 11:17:42');
 INSERT INTO `n_tables` VALUES (30, 'square_warehouses', 'Kho vật tư (vật tư màng, nhung, vải lụa)', '{\r\n	\"link\":\"warehouse-management\", \r\n	\"note\":\"Quản lí kho vật tư\"\r\n}', 10, 'view', NULL, '', '1', '1', '1', '1', '2023-07-14 03:17:55', '2023-09-11 18:44:57');
 INSERT INTO `n_tables` VALUES (32, 'w_salaries', 'Bảng chấm công - công nhân', '', 10, 'view', NULL, '', '0', '0', '1', '0', '2023-07-14 03:17:55', '2023-08-17 16:35:47');

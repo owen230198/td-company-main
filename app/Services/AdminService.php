@@ -116,8 +116,18 @@ class AdminService extends BaseService
                             $where[] = $tmp;
                         }
                     }else{
-                        $tmp = ['key' => $name, 'compare' => 'like', 'value' => '%'.$value.'%'];
-                        $where[] = $tmp;
+                        if ($name == 'width' || $name == 'length') {
+                            $from_size = (float) $value - 2; 
+                            $tmp = ['key' => $name, 'compare' => '>=', 'value' => $from_size];
+                            $where[] = $tmp; 
+
+                            $to_size = (float) $value + 3;
+                            $tmp = ['key' => $name, 'compare' => '<=', 'value' => $to_size];
+                            $where[] = $tmp;   
+                        }else{
+                            $tmp = ['key' => $name, 'compare' => 'like', 'value' => '%'.$value.'%'];
+                            $where[] = $tmp;
+                        }
                     }
                 }elseif($type == 'child_linking'){
                     $linking_data = @$other_data['data'] ?? [];

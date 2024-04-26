@@ -87,6 +87,7 @@ Route::middleware(['check_login'])->group(function () {
 	Route::post('confirm-supply-bought/{id}', [SupplyBuyingController::class, 'confirmSupplyBought']);
 	Route::post('confirm-warehouse-imported/{id}', [SupplyBuyingController::class, 'confirmWarehouseImported']);
 	Route::get('list-supply-buying/{id}', [SupplyBuyingController::class, 'listSupplyBuying']);
+	Route::get('get-quantitative-inpaper', [SupplyBuyingController::class, 'getQuantitativeInPaper']);
 
 	//KCS route
 	Route::post('after-print-kcs/{id}',[ProductController::class, 'afterPrintKcs']);

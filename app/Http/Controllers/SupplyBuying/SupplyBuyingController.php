@@ -173,4 +173,20 @@ class SupplyBuyingController extends Controller
         $data['list_data'] = !empty($supply_buying->supply) ? json_decode($supply_buying->supply) : new \stdClass();
         return view('supply_buyings.list_supply', $data);
     }
+
+    public function getQuantitativeInPaper(Request $request)
+    {
+        $html = '<option value="">Danh sách định lượng</option>';
+        $id = $request->input('param');
+        if (!empty($id)) {
+            $data = \DB::table('print_warehouses')->select('qtv')->where(['supp_price' => $id])->get();
+            if (!$data->isEmpty()) {
+                $papers = $data->unique('qtv');
+                foreach ($papers as $paper) {
+                    $html .= '<option value="'.@$paper->qtv.'">Định lượng: '.@$paper->qtv.'</option>';
+                }
+            }
+        }
+        echo $html;
+    }
 }
