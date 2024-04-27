@@ -233,8 +233,9 @@ class DevController extends Controller
         foreach ($quotes as $quote) {
             $products = \DB::table('products')->where('quote_id', $quote->id)->get();
             foreach ($products as $product) {
-                \DB::table('products')->where('id', $product->id)->update(['profit' => $quote->profit, 'ship_price' => $quote->ship_price]);
-                dump($quote->profit);
+                if ((float) $product->profit != 0 || (float) $product->ship_price != 0) {
+                    \DB::table('quotes')->where('id', $quote->id)->update(['profit' => $product->profit, 'ship_price' => $product->ship_price]);
+                }
             }
         }
         dd(1);

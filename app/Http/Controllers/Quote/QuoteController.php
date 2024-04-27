@@ -278,25 +278,23 @@ class QuoteController extends Controller
         if (!$is_post) {
             $data['data_quote'] = $arr_quote;
             $data['title'] = 'Lợi nhuận báo giá mã - '.@$data['data_quote']['seri'];
-            $product_parent = Product::where(['act' => 1, 'quote_id' => $id])->get();
-            $data['products'] = array();
-            $this->recursiveProduct($product_parent, $data['products']);
+            $data['products'] = Product::where(['act' => 1, 'quote_id' => $id])->get();
             $data['supply_fields'] = TDConstant::HARD_ELEMENT;
             return view('quotes.profits.view', $data);
         }else{
-            $products = $request->input('product');
-            foreach ($products as $product_id => $cost) {
-                if ($cost['ship_price'] == null) {
-                    return returnMessageAjax(100, 'Vui lòng nhập phí vận chuyển cho sản phẩm '.getFieldDataById('name', 'products', $product_id).' !');
-                }
-                if ($cost['profit'] == null) {
-                    return returnMessageAjax(100, 'Vui lòng nhập lợi nhuận báo giá cho sản phẩm '.getFieldDataById('name', 'products', $product_id).' !');
-                }
-            }
-            foreach ($products as $prouct_id => $cost) {
-                Product::where('id', $prouct_id)->update(['ship_price' => $cost['ship_price'], 'profit' => $cost['profit']]);
-            }
             $arr_quote = Quote::find($id);
+            $ship_price = $request->input('ship_price');
+            $profit = $request->input('profit');
+            if ($ship_price == '') {
+                return returnMessageAjax(100, 'Vui lòng nhập phí vận chuyển !');
+            }
+            if ($profit == '') {
+                return returnMessageAjax(100, 'Vui lòng nhập lợi nhuận báo giá !');
+            }
+            $data_update = ['ship_price' => $ship_price, 'profit' => $profit];
+            $arr_quote->ship_price = $ship_price;
+            $arr_quote->profit = $profit;
+            $arr_quote->save();
             RefreshQuotePrice($arr_quote);
             return returnMessageAjax(200, 'Cập nhật lợi nhuận báo giá thành công !', url('quote-file-export/'.$id));
         }

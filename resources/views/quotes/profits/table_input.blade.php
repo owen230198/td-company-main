@@ -2,31 +2,24 @@
 <table class="table table-bordered mb-1 quote_table_profit my-4">
     <thead class="font_bold">
         <tr>
-            <th class="w_50">STT</th>
-            <th style="min-width: 210px">Sản phẩm</th>
+            <th class="text-center">Mã báo giá</th>
             <th>Chi phí vận chuyển</th>
             <th>Lợi nhuận %</th>
         </tr>
     </thead>
     <tbody>
-        @foreach ($products as $key => $product)
-            @php
-                $base_name = 'product['.$product->id.']';
-            @endphp
-            <tr>
-                <td class="w_50">{{ $key + 1 }}</td>
-                <td style="min-width: 210px">{{ $product['name'] }}</td>
-                <td>
-                    <div class="form-group d-flex mb-2 align-items-center">
-                        <input type="number" step="any" class="form-control medium_input" name="{{ $base_name }}[ship_price]" value="{{ @$product->ship_price }}" placeholder="Nhập chi phí vận chuyển (VNĐ)">
-                    </div>
-                </td>
-                <td>
-                    <div class="form-group d-flex mb-2 align-items-center">
-                        <input type="number" step="any" class="form-control medium_input" name="{{ $base_name }}[profit]" value="{{ @$product->profit }}" placeholder="Nhập lợi nhuận sản phẩm (%)">
-                    </div>
-                </td>
-            </tr>
-        @endforeach
+        <tr>
+            <td class="text-center align-middle font_bold color_green">{{ $data_quote->seri }}</td>
+            <td class="align-middle">
+                <div class="form-group d-flex align-items-center justify-content-center mb-0">
+                    <input type="number" step="any" class="form-control" name="ship_price" value="{{ @$data_quote->ship_price }}" placeholder="Nhập chi phí vận chuyển (VNĐ)">
+                </div>
+            </td>
+            <td class="align-middle">
+                <div class="form-group d-flex align-items-center justify-content-center mb-0">
+                    <input type="number" step="any" class="form-control" name="profit" value="{{ @$data_quote->profit }}" placeholder="Nhập lợi nhuận sản phẩm (%)">
+                </div>
+            </td>
+        </tr>
     </tbody>
 </table>

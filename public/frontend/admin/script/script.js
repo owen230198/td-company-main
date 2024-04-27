@@ -850,7 +850,6 @@ var reworkButtonModule = function()
 
 var showConfirmNoReworkPopup = function(id, qty, name){
     let pro_name = name.toLowerCase();
-    console.log(pro_name);
     swal({
         title: "Sản xuất lại sản phẩm",
         // text:"Nhập " + "Xác nhận không sản xuất lại sản phẩm " + pro_name,

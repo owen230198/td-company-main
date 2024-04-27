@@ -98,10 +98,10 @@
                 if (!empty($product_process['code']) && $product_process['code'] == 100) {
                     return returnMessageAjax(100, $product_process['message']);  
                 }
-                $obj_product = Product::find($data['product'][0]['id']);
-                if (@$obj_product['profit'] < getDataConfig('QuoteConfig', 'QUOTE_PERCENT', 0)) {
+                $arr_quote = Quote::find($quote_id);
+                if (@$arr_quote['profit'] < getDataConfig('QuoteConfig', 'QUOTE_PERCENT', 0)) {
                     if (!\GroupUser::isAdmin()) {
-                        return returnMessageAjax(100, 'Lợi nhuận cho đơn hàng này là '.(int) $obj_product['profit'].'%, Vui lòng liên hệ Admin cấp cao để được duyệt đơn !');
+                        return returnMessageAjax(100, 'Lợi nhuận cho đơn hàng này là '.(int) $arr_quote['profit'].'%, Vui lòng liên hệ Admin cấp cao để được duyệt đơn !');
                     }
                 }
                 $status = $this->services->insertDesignCommand($data['product'], $base_order_id, $arr_order->code);

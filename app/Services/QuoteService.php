@@ -207,7 +207,7 @@ class QuoteService extends BaseService
             if ($step == TDConstant::QUOTE_FLOW) {
                 RefreshQuotePrice($arr_quote);
             }else{
-                refreshProfit($data_product);
+                refreshProfit($arr_quote);
             }
             return true;
         }else{
