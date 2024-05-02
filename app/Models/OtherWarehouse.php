@@ -21,7 +21,12 @@ class OtherWarehouse extends Model
             ]
         ];
         return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];
-    } 
+    }
+    
+    static function getName($data)
+    {
+        return getFieldDataById('name', 'materals', $data['supp_price']);
+    }
 
     public function afterRemove($id)
     {

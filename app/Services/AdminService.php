@@ -188,14 +188,14 @@ class AdminService extends BaseService
     public function doInsertTable($table, $data)
     {
         $model = getModelByTable($table);
-        if (method_exists($model, 'getInsertCode')) {
-            $data['code'] = $model::getInsertCode();
-        }
         $process = $this->processDataBefore($data, $table);
         if (@$process['code'] == 100) {
             return $process;
         }
         $id = \DB::table($table)->insertGetId($process['data']);
+        if (method_exists($model, 'getInsertCode')) {
+            $model::getInsertCode($id);
+        }
         return ['code' =>  200, 'id' => $id];
     }
 

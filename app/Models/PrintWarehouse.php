@@ -79,6 +79,11 @@ class PrintWarehouse extends Model
     {
         return WarehouseHistory::removeData('print_warehouses', $id);
     }
+    
+    static function getName($data)
+    {
+        return getFieldDataById('name', 'materals', $data['supp_price']).' - '.$data['qtv'].' - '.$data['length'].'x'.$data['width'];
+    }
 
     static function getLabelLinking($data)
     {

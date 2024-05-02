@@ -29,9 +29,9 @@ class Customer extends Model
         ]
     ];
 
-    static function getInsertCode()
+    static function getInsertCode($id)
     {
-        return 'KH-'.getCodeInsertTable('customers');
+        Customer::where(['id' => $id])->update(['code' => 'KH'.sprintf("%08s", $id)]);
     }
 
     static function getDataJsonLinking($customers, $q)

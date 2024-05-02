@@ -7,8 +7,8 @@ class Partner extends Model
     protected $table = 'partners';
     protected $protectFields = false;
 
-    static function getInsertCode()
+    static function getInsertCode($id)
     {
-        return 'DTSX-'.getCodeInsertTable('partners');
-    } 
+        Partner::where(['id' => $id])->update(['code' => 'DTSX-'.sprintf("%08s", $id)]);
+    }
 }

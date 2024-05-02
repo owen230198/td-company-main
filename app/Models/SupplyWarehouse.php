@@ -47,6 +47,11 @@ class SupplyWarehouse extends Model
         return WarehouseHistory::removeData('supply_warehouses', $id);
     }
 
+    static function getname($data)
+    {
+        return getFieldDataById('name', 'supply_types', $data['supp_type']).' - '.getFieldDataById('name', 'supply_prices', $data['supp_price']).' - '.$data['length'].'x'.$data['width'];
+    }
+
     static function getLabelLinking($data)
     {
         return getFieldDataById('name', 'supply_types', $data->supp_type).' - '.$data->length.'x'.$data->width.' - ĐL : '.getFieldDataById('name', 'supply_prices', $data->supp_price).' / Còn lại : '.$data->qty.' tấm';

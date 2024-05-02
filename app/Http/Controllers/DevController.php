@@ -28,10 +28,10 @@ class DevController extends Controller
      */
     public function index(Request $request, $method)
     {
-        // if(!@getSessionUser('user')['dev']){
-        //    echo 'method is only developers !';
-        //    return false;
-        // }
+        if(\User::getCurrent('dev') != 1){
+           echo 'method is only developers !';
+           return false;
+        }
         if(!$method){
             echo 'method is not exists !';
         }else{
@@ -191,8 +191,7 @@ class DevController extends Controller
         ];
     }
 
-    public function testData(){
-        die();
+    public function addUnitWarehouse(){
         $query = \DB::table('warehouse_histories');
         $list = $query->get();
         foreach ($list as $key => $item) {
@@ -213,9 +212,22 @@ class DevController extends Controller
         $query = \DB::table('warehouse_histories');
         $list = $query->get();
         foreach ($list as $item) {
-            $name = getFieldDataById('name', $item->table, $item->target).' - '.getFieldDataById('name', 'warehouse_providers', $item->provider);
+            $name = 'NCC: '.getFieldDataById('name', 'warehouse_providers', $item->provider).' - '.getFieldDataById('name', $item->table, $item->target);
             $update = \DB::table('warehouse_histories')->where('id', $item->id)->update(['name' => $name]);
-            dump($update);
+            dump($update, $name);
+        }
+    }
+
+    public function warehouseTableName(){
+        $tables = ['print_warehouses', 'supply_warehouses', 'square_warehouses', 'other_warehouses'];
+        foreach ($tables as $table) {
+            $model = getModelByTable($table);
+            $list = $model::all()->toArray();
+            foreach ($list as $item) {
+                $name = $model::getName($item);
+                $update = $model::where('id', $item['id'])->update(['name' => $name]);
+                dump($update, $name);
+            }
         }
     }
 

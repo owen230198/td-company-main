@@ -18,9 +18,9 @@ class QuoteService extends BaseService
         $data_quote = $data_customer;
         if (empty($customer_id)) {
             $this->configBaseDataAction($data_customer);
-            $data_customer['code'] = Customer::getInsertCode();
             $data_customer['status'] = 0;
             $customer_id = Customer::insertGetId($data_customer);
+            Customer::getInsertCode($customer_id);
             logActionUserData('insert', 'customers', $customer_id);
         }
         $data_quote['seri'] = 'BG-'.getCodeInsertTable('quotes');
