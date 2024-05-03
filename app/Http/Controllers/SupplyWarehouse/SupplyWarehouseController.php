@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\SupplyWarehouse;
 
 use App\Http\Controllers\Controller;
+use App\Models\SupplyWarehouse;
 
 class SupplyWarehouseController extends Controller
 {
@@ -31,6 +32,10 @@ class SupplyWarehouseController extends Controller
                 return returnMessageAjax(100, 'Vui lòng chọn định lượng !');
             }
         }
+        $count = SupplyWarehouse::where($data)->count();
+        if ($count > 0) {
+            return returnMessageAjax(100, 'Vật tư '.SupplyWarehouse::getName($data).' Đã có trong kho !');
+        }
     }
 
     public function insert($request)
@@ -53,7 +58,7 @@ class SupplyWarehouseController extends Controller
         if (!$request->isMethod('POST')) {
             return $this->services->update($param, $id);
         }else{
-            $validate = $this->validateData($request->input('warehouse'), false);
+            // $validate = $this->validateData($request->input('warehouse'), false);
             if (@$validate['code'] == 100) {
                 return $validate;
             }

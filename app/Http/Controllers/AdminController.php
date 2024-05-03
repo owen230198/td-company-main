@@ -217,6 +217,7 @@ class AdminController extends Controller
             if ($request->isMethod('GET')) {
                 $data = $this->admins->getDataActionView($table, 'update', 'Chi tiết', $param);
                 $data['dataItem'] = $dataItem;
+                $data['title'] = !empty($dataItem['name']) ? 'Chi tiết '.@$dataItem['name'] : @$data['title'];
                 $data['action_url'] = url('update/'.$table.'/'.$id);
                 return view('action.view', $data);
             }else{

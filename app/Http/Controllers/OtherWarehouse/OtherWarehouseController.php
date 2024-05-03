@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\OtherWarehouse;
 
 use App\Http\Controllers\Controller;
+use App\Models\OtherWarehouse;
 
 class OtherWarehouseController extends Controller
 {
@@ -21,6 +22,9 @@ class OtherWarehouseController extends Controller
             if (empty($data['supp_price'])) {
                 return returnMessageAjax(100, 'Vui lòng chọn loại vật tư !');
             }
+            if (OtherWarehouse::where($data)->count() > 0) {
+                return returnMessageAjax(100, 'Vật tư '.OtherWarehouse::getName($data).' đã có trong kho !');
+            }
             return $this->services->insert($param, 1);
         }
     }
@@ -32,9 +36,6 @@ class OtherWarehouseController extends Controller
             return $this->services->update($param, $id);
         }else{
             $data = @$param['warehouse'] ?? [];
-            if (empty($data['supp_price'])) {
-                return returnMessageAjax(100, 'Vui lòng chọn loại vật tư !');
-            }
             return $this->services->update($param, $id, 1);
         }
     }

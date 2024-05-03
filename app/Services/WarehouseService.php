@@ -80,9 +80,13 @@
                     return $validate;
                 }
                 $data_warehouse['qty'] = (int) $dataItem['qty'] + (int) $data_log['qty'];
+                $model = getModelByTable($this->table);
+                $name = $model::getName($dataItem);
+                $data_warehouse['name'] = $name;
                 $this->configBaseDataAction($data_warehouse);
-                $update = \DB::table($this->table)->where('id', $id)->update($data_warehouse);
+                $update = $model::where('id', $id)->update($data_warehouse);
                 if ($update) {
+                    $data_log['name'] = 'NCC: '.getFieldDataById('name', 'warehouse_providers', $data_log['provider']).' - '.$name;
                     $data_log['action'] = 'update';
                     $data_log['target'] = $id;
                     $data_log['old_qty'] = $dataItem['qty'];
@@ -93,6 +97,7 @@
                 }   
             }else{
                 $data = (new AdminService)->getDataActionView($this->table, 'update', 'Chi tiết', $param);
+                $data['title'] = !empty($dataItem['name']) ? 'Chi tiết '.@$dataItem['name'] : @$data['title'];
                 $data['action_url'] = url('update/'.$this->table.'/'.$id);
                 $data['field_logs'] = WarehouseHistory::FIELD_UPDATE;
                 $data['type_supp'] = $param['type'];

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\PrintWarehouse;
 use App\Http\Controllers\Controller;
+use App\Models\PrintWarehouse;
 
 class PrintWarehouseController extends Controller
 {
@@ -27,6 +28,10 @@ class PrintWarehouseController extends Controller
         if ($data['qtv'] == '') {
             return returnMessageAjax(100, 'Vui lòng nhập định lượng !');
         }
+        $count = PrintWarehouse::where($data)->count();
+        if ($count > 0) {
+            return returnMessageAjax(100, 'Vật tư '.PrintWarehouse::getName($data).' Đã có trong kho !');
+        }
     }
 
     public function insert($request)
@@ -49,7 +54,7 @@ class PrintWarehouseController extends Controller
         if (!$request->isMethod('POST')) {
             return $this->services->update($param, $id);
         }else{
-            $validate = $this->validateData($request->input('warehouse'));
+            // $validate = $this->validateData($request->input('warehouse'));
             if (@$validate['code'] == 100) {
                 return $validate;
             }
