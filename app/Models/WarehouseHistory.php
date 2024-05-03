@@ -49,6 +49,16 @@ class WarehouseHistory extends Model
         self::FIELD_BILL           
     ];
 
+    static function getRole()
+    {
+        $role = [
+            \GroupUser::ACCOUNTING => [
+                'view' => 1
+            ]
+        ];
+        return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];
+    } 
+
     static function removeData($table, $id)
     {
         $data_logs = WarehouseHistory::where(['table' => $table, 'target' => $id]);
