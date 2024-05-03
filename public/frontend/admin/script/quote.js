@@ -25,10 +25,12 @@ var changQtyInput = function(){
     event.preventDefault();
     let parent = $(this).closest('.tab_pane_quote_pro');
     let product_qty = parseInt($(this).val());
-    supp_product_qty = parent.find('.pro_qty_input');
+    let supp_product_qty = parent.find('.pro_qty_input');
     if (supp_product_qty.length > 0) {
-      supp_product_qty.val(product_qty);
-      supp_product_qty.trigger('change');
+      supp_product_qty.each(function () {
+        $(this).val(product_qty);
+        $(this).trigger('change');
+      })
     }
   });
 }

@@ -7,6 +7,7 @@
     ];
     $qty_input = [
         'name' => 'product['.$pro_index.'][paper]['.$supp_index.']'.'[qty]',
+        'attr' => ['required' => 1, 'inject_class' => 'pro_qty_input'],
         'note' => 'Số lượng',
         'type' => 'text',
         'value' => @$supply_obj->product_qty

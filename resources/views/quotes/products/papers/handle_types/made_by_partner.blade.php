@@ -15,7 +15,7 @@
             'name' => $base_name .'[qty]',
             'note' => 'Số lượng sản phẩm',
             'value' => @$supply_obj->qty ?? @$pro_qty,
-            'attr' => ['type_input' => 'number', 'required' => 1, 'inject_class' => 'input_paper_qty supp_qty_modul_input __input_module_made_by_partner',
+            'attr' => ['type_input' => 'number', 'required' => 1, 'inject_class' => 'input_paper_qty pro_qty_input supp_qty_modul_input __input_module_made_by_partner',
             'disable_field' => !empty($disable_all) || in_array('qty', @$arr_disable ?? []) ? 1 : 0]
         ],
         [
