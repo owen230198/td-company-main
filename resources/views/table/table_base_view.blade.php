@@ -1,6 +1,8 @@
-<div class="paginate_view d-flex align-center justify-content-between mb-3">
-    {!! $data_tables->appends(request()->input())->links('pagination::bootstrap-4') !!}
-</div>
+@if (method_exists($data_tables, 'appends'))
+    <div class="paginate_view d-flex align-center justify-content-between mb-3">
+        {!! $data_tables->appends(request()->input())->links('pagination::bootstrap-4') !!}
+    </div>
+@endif
     <div class="table_base_view position-relative">
         <table class="table table-bordered mb-2 table_main">
             <theader>
@@ -71,6 +73,8 @@
             </tbody>
         </table>
     </div>
-<div class="paginate_view d-flex align-center justify-content-between mt-3">
-    {!! $data_tables->appends(request()->input())->links('pagination::bootstrap-4') !!}
-</div>
+@if (method_exists($data_tables, 'appends'))
+    <div class="paginate_view d-flex align-center justify-content-between mb-3">
+        {!! $data_tables->appends(request()->input())->links('pagination::bootstrap-4') !!}
+    </div>
+@endif
