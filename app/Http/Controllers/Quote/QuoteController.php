@@ -250,17 +250,6 @@ class QuoteController extends Controller
 
     }
 
-    public function recursiveProduct($products, &$ret)
-    {
-        foreach ($products as $product) {
-            $ret[] = $product;
-            $childs = Product::where('parent', $product['id'])->get();
-            if (!empty($childs)) {
-                $this->recursiveProduct($childs, $ret);
-            }
-        }
-    }
-
     public function profitConfigQuote(Request $request)
     {
         $id = $request->input('quote_id');

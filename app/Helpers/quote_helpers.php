@@ -114,6 +114,19 @@
 			\DB::table('quotes')->where('id', $arr_quote['id'])->update($update_quote);
 		}
 	}
+	
+	if (!function_exists('recursiveProduct')) {
+		function recursiveProduct($products, &$ret)
+		{
+			foreach ($products as $product) {
+				$ret[] = $product;
+				$childs = \DB::table('products')->where('parent', $product->id)->get();
+				if (!$childs->isEmpty()) {
+					recursiveProduct($childs, $ret);
+				}
+			}
+		}
+	}
 
 	if (!function_exists('getDataProExportFile')) {
 		function getDataProExportFile($product){

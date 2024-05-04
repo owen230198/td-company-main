@@ -7,7 +7,6 @@ use App\Models\Product;
 use \App\Models\CDesign;
 use \App\Models\CSupply;
 use App\Models\OtherWarehouse;
-use App\Models\Paper;
 use App\Models\PrintWarehouse;
 use App\Models\Supply;
 use App\Models\SupplyWarehouse;
@@ -37,7 +36,7 @@ class OrderService extends BaseService
         if (!empty($product_process['code']) && $product_process['code'] == 100) {
             return returnMessageAjax(100, $product_process['message']);  
         }else{
-            if (!empty($arr_order['advance'])) {
+            if (empty($arr_order['advance'])) {
                 $amount = getTotalProductByArr($data['product'], $arr_quote, 'total_amount');
                 $arr_order['total_amount'] = @$arr_order['vat'] == 1 ? 
                 calValuePercentPlus($amount, $amount, (float) getDataConfig('QuoteConfig', 'VAT_PERC', 0)) : $amount;

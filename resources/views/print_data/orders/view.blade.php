@@ -21,9 +21,9 @@
                     <li class="d-flex align-items-center"><span class="w_60 d-block">Website</span>  : {{ getDataConfig('QuoteConfig', 'SITE') }}</li>
                 </ul>
             </div>
-            <div class="col-7 mb-2">
+            <div class="col-7 my-3">
                 <div class="col-6">
-                    <p class="text-uppercase fs-18 font_bold color_green text-right">đơn đặt hàng</p>
+                    <p class="text-uppercase fs-20 font_bold color_green text-right">đơn đặt hàng</p>
                 </div>
             </div>
             <div class="col-5 mb-2">
