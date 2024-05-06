@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\SupplyBuying;
 use App\Http\Controllers\Controller;
 use App\Models\SupplyBuying;
+use App\Models\WarehouseHistory;
 use App\Services\WarehouseService;
 use Illuminate\Http\Request;
 
@@ -188,5 +189,55 @@ class SupplyBuyingController extends Controller
             }
         }
         echo $html;
+    }
+
+    public function inventoryAggregate(Request $request)
+    {
+        if (!$request->input('is_ajax') == 1) {
+            $data['title'] = 'Tổng hợp tồn kho';
+            $data['fields'] = [
+                [
+                    'name' => 'created_at',
+                    'note' => 'Khoảng thời gian',
+                    'type' => 'datetime'
+                ],
+                [
+                    'name' => 'name',
+                    'note' => 'Tên hàng',
+                    'type' => 'text'
+                ],
+            ];
+            return view('inventories.view', $data);
+        }else{
+            if (empty($request->input('created_at'))) {
+                return returnMessageAjax(100, 'Bạn chưa chọn khoảng thời gian !');
+            }
+            $date_range = explode(' - ', $request->input('created_at'));
+            foreach ($date_range as $key => $str) {
+                $timstamp = strtotime(str_replace('/', '-', $str));
+                $date_range[$key] = date('Y-m-d H:i:s', $timstamp);
+            }
+            $warehouse_history = WarehouseHistory::whereBetween('created_at', $date_range);
+            if (!empty($request->input('name'))) {
+                $name = '%'.$request->input('name').'%';
+                $warehouse_history->whereLike('name', 'like', $name);
+            }
+            $warehouse_histories = $warehouse_history->get()->groupBy('target');
+            $data = $warehouse_histories->map(function($item){
+                $ret = [];
+                $item = $item->sortBy(['created_at', 'desc']);
+                $first = $item->first();
+                $last = $item->last();
+                $ret['name'] = $first->name;
+                $ret['unit'] = $first->unit;
+                $ret['old_qty'] = $last->old_qty;
+                $ret['imported'] = $item->sum('qty');
+                $ret['exported'] = $item->sum('qty');
+                $ret['new_qty'] = $first->new_qty;
+                $ret['childs'] = $item->toArray();
+                return $ret;
+            }); 
+            dd($data); 
+        }     
     }
 }

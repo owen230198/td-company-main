@@ -212,7 +212,7 @@ class DevController extends Controller
         $query = \DB::table('warehouse_histories');
         $list = $query->get();
         foreach ($list as $item) {
-            $name = 'NCC: '.getFieldDataById('name', 'warehouse_providers', $item->provider).' - '.getFieldDataById('name', $item->table, $item->target);
+            $name = getFieldDataById('name', $item->table, $item->target);
             $update = \DB::table('warehouse_histories')->where('id', $item->id)->update(['name' => $name]);
             dump($update, $name);
         }
