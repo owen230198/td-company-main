@@ -259,6 +259,25 @@
         }
     }
 
+    if (!function_exists('getUnitWarehouseItem')) {
+        function getUnitWarehouseItem($unit) {
+            switch ($unit) {
+                case 'plate':
+                    return 'Tấm';
+                    break;
+                case 'sheet':
+                    return 'Tờ';
+                    break;
+                case 'unit':
+                    return 'Cái';
+                    break;
+                default:
+                    return 'Cm';
+                    break;
+            }    
+        }
+    }
+
     if (!function_exists('checkUpdateOrderStatus')) {
         function checkUpdateOrderStatus($id, $status)
         {

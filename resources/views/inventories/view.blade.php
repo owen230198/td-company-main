@@ -1,4 +1,7 @@
 @extends('index')
+@section('css')
+    <link rel="stylesheet" href="{{ asset('frontend/admin/css/quote.css') }}">
+@endsection
 @section('content')
     <div class="dashborad_content">
         <form action="{{ url('inventory-aggregate') }}" method="GET" class="mb-0 base_table_form_search" id="form-search">
@@ -18,8 +21,11 @@
             </a>
         </div>
         <div class="ajax_data_inventory">
-
+            
         </div>
     </div>
     @include('table/action_popup')
+@endsection
+@section('script')
+    <script src="{{ asset('frontend/admin/script/order.js') }}"></script>
 @endsection

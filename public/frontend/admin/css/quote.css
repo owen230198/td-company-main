@@ -221,6 +221,23 @@ ul.supply_info li.supply_item_inf>.detail_quote_supply_item.hover{
     top: 95px;
 }
 
+.table_inventory{
+    height: calc(100vh - 220px);
+    overflow-y: auto;
+}
+
+.table_inventory thead{
+    position: sticky;
+    top: 0;
+    background: #ebebeb;
+}
+
+.table_inventory tfoot{
+    position: sticky;
+    bottom: -1px;
+    background: #ebebeb;
+}
+
 @page {
     size: A4;
     margin: 1cm;
