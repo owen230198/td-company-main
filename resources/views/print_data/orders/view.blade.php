@@ -69,7 +69,7 @@
                         <td>{{ $product->name }}</td>
                         <td>{{ $product->qty }}</td>
                         <td class="text-right">{{ number_format($product->total_amount/$product->qty) }} vnđ</td>
-                        <td class="text-right">{{ number_format(round($product->total_amount, -3)) }} vnđ</td>
+                        <td class="text-right">{{ number_format($product->total_amount) }} vnđ</td>
                     </tr>    
                 @endforeach
                 @php
