@@ -66,13 +66,13 @@
                         {{ $data['price'] }}đ
                     </td>
                     <td>
-                        {{ $data['imported'] }}
+                        {{ (int) $data['imported'] }}
                     </td>
                     <td>
-                        {{ $data['exported'] }}
+                        {{ (int) $data['exported'] }}
                     </td>
                     <td>
-                        {{ $data['inventory'] }}
+                        {{ (int) $data['inventory'] }}
                     </td>
                     <td>
                         {{ getFieldDataById('name', 'products', $data['product']) }}
