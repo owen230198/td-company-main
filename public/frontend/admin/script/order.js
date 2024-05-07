@@ -255,6 +255,15 @@ var searchIngredient = function ()
     })
 }
 
+var inventoryAjaxForm = function ()
+{ 
+	$('form.inventoryFormAjax').submit(function(event) {
+		event.preventDefault();
+        let target = $('.ajax_data_inventory');
+		ajaxViewTarget($(this).attr('action'), target, target, 1, $(this).serialize(), false);
+	});
+}
+
 $(function(){
     setAdvanceCostOrder(); 
     moduleVATOrder();
@@ -266,4 +275,5 @@ $(function(){
     planHandleSupplyQty();
     KCSRequireToWarehouse();
     searchIngredient();
+    inventoryAjaxForm();
 });

@@ -1,4 +1,7 @@
-@if (method_exists($data_tables, 'appends'))
+@php
+    $paginate = is_object($data_tables) && method_exists($data_tables, 'appends');
+@endphp
+@if ($paginate)
     <div class="paginate_view d-flex align-center justify-content-between mb-3">
         {!! $data_tables->appends(request()->input())->links('pagination::bootstrap-4') !!}
     </div>
@@ -73,7 +76,7 @@
             </tbody>
         </table>
     </div>
-@if (method_exists($data_tables, 'appends'))
+@if ($paginate)
     <div class="paginate_view d-flex align-center justify-content-between mb-3">
         {!! $data_tables->appends(request()->input())->links('pagination::bootstrap-4') !!}
     </div>

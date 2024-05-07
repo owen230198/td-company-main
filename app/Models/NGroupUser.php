@@ -47,8 +47,8 @@ class NGroupUser extends Model
     //modules
     const MODULE = [
         'price_device' => [
-            'name' => 'Đơn giá thiết bị máy', 
-            'link' => 'config-device-price/supply_types?type=devices', 
+            'name' => 'Đơn giá thiết bị máy',
+            'link' => 'config-device-price/supply_types?type=devices',
             'group' => 'quote_price_config'
         ],
         'worker' =>[
@@ -62,193 +62,193 @@ class NGroupUser extends Model
             'group' => 'factory'
         ],
         'price_materal' => [
-            'name' => 'Đơn giá vật tư sx', 
-            'link' => 'config-device-price/supply_types?type=materals', 
+            'name' => 'Đơn giá vật tư sx',
+            'link' => 'config-device-price/supply_types?type=materals',
             'group' => 'quote_price_config'
         ],
         'product_category' => [
-            'name' => 'Danh mục sản phẩm', 
-            'link' => 'view/product_categories', 
+            'name' => 'Danh mục sản phẩm',
+            'link' => 'view/product_categories',
             'group' => 'quote_price_config'
         ],
         'quote_config' => [
-            'name' => 'Các thông số khác', 
-            'link' => 'view/quote_configs', 
+            'name' => 'Các thông số khác',
+            'link' => 'view/quote_configs',
             'group' => 'quote_price_config'
         ],
         'customer_list' => [
-            'name' => 'DS khách hàng', 
-            'link' => 'view/customers', 
+            'name' => 'DS khách hàng',
+            'link' => 'view/customers',
             'group' => 'customer'
         ],
         'partner_list' => [
-            'name' => 'DS đối tác sx', 
-            'link' => 'view/partners', 
+            'name' => 'DS đối tác sx',
+            'link' => 'view/partners',
             'group' => 'customer'
         ],
         'create_quote' => [
-            'name' => 'Tính giá', 
-            'link' => 'insert/quotes', 
+            'name' => 'Tính giá',
+            'link' => 'insert/quotes',
             'group' => 'customer_quote'
         ],
         'quote_not_accepted' => [
-            'name' => 'DS báo giá (chưa duyệt)', 
-            'link' => 'view/quotes?default_data=%7B%22status%22%3A%22not_accepted%22%7D', 
+            'name' => 'DS báo giá (chưa duyệt)',
+            'link' => 'view/quotes?default_data=%7B%22status%22%3A%22not_accepted%22%7D',
             'group' => 'customer_quote'
         ],
         'quote_accepted' => [
-            'name' => 'DS báo giá (đã duyệt)', 
-            'link' => 'view/quotes?default_data=%7B%22status%22%3A%22accepted%22%7D', 
+            'name' => 'DS báo giá (đã duyệt)',
+            'link' => 'view/quotes?default_data=%7B%22status%22%3A%22accepted%22%7D',
             'group' => 'customer_quote'
         ],
         'quote_order_created' => [
-            'name' => 'DS báo giá (đã tạo đơn)', 
-            'link' => 'view/quotes?default_data=%7B%22status%22%3A%22order_created%22%7D', 
+            'name' => 'DS báo giá (đã tạo đơn)',
+            'link' => 'view/quotes?default_data=%7B%22status%22%3A%22order_created%22%7D',
             'group' => 'customer_quote'
         ],
         'design_not_accepted' => [
-            'name' => 'DS lệnh TK chưa duyệt', 
-            'link' => 'view/c_designs?default_data=%7B%22status%22%3A%22not_accepted%22%7D', 
+            'name' => 'DS lệnh TK chưa duyệt',
+            'link' => 'view/c_designs?default_data=%7B%22status%22%3A%22not_accepted%22%7D',
             'group' => 'design_module'
         ],
         'designing_command' => [
-            'name' => 'DS lệnh TK đang nhận', 
-            'link' => 'view/c_designs?default_data=%7B%22status%22%3A%22designing%22%7D', 
+            'name' => 'DS lệnh TK đang nhận',
+            'link' => 'view/c_designs?default_data=%7B%22status%22%3A%22designing%22%7D',
             'group' => 'design_module'
         ],
         'design_submited' => [
-            'name' => 'DS lệnh TK đã xong', 
-            'link' => 'view/c_designs?default_data=%7B%22status%22%3A%22design_submited%22%7D', 
+            'name' => 'DS lệnh TK đã xong',
+            'link' => 'view/c_designs?default_data=%7B%22status%22%3A%22design_submited%22%7D',
             'group' => 'design_module'
         ],
         'order_process' => [
-            'name' => 'DS đơn hàng', 
-            'link' => 'view/orders', 
+            'name' => 'DS đơn hàng',
+            'link' => 'view/orders',
             'group' => 'order_handle'
         ],
         'join_print' => [
-            'name' => 'Lệnh in ghép', 
-            'link' => 'join-print-command', 
+            'name' => 'Lệnh in ghép',
+            'link' => 'join-print-command',
             'group' => 'order_handle'
         ],
         'handle_process' => [
-            'name' => 'Theo dõi sản xuất', 
-            'link' => 'view/products?default_data=%7B%22order_created":"1%22%7D', 
+            'name' => 'Theo dõi sản xuất',
+            'link' => 'view/products?default_data=%7B%22order_created":"1%22%7D',
             'group' => 'order_handle'
         ],
         'submited_product' => [
-            'name' => 'SP chờ duyệt bởi KCS', 
-            'link' => 'view/products?default_data=%7B%22status":"submited%22%7D', 
+            'name' => 'SP chờ duyệt bởi KCS',
+            'link' => 'view/products?default_data=%7B%22status":"submited%22%7D',
             'group' => 'order_handle'
         ],
         'kcs_submited_product' => [
-            'name' => 'SP chờ nhập kho', 
-            'link' => 'view/products?default_data=%7B%22status":"kcs_submited%22%7D', 
+            'name' => 'SP chờ nhập kho',
+            'link' => 'view/products?default_data=%7B%22status":"kcs_submited%22%7D',
             'group' => 'order_handle'
         ],
         'last_submited_product' => [
-            'name' => 'SP trong kho', 
-            'link' => 'view/products?default_data=%7B%22status":"last_submited%22%7D', 
+            'name' => 'SP trong kho',
+            'link' => 'view/products?default_data=%7B%22status":"last_submited%22%7D',
             'group' => 'order_handle'
         ],
         'supp_bying_req' => [
-            'name' => 'Yêu cầu mua vật tư', 
-            'link' => 'view/supply_buyings', 
+            'name' => 'Yêu cầu mua vật tư',
+            'link' => 'view/supply_buyings',
             'group' => 'supply_buying'
         ],
         'profit' => [
-            'name' => 'Lợi nhuận của tôi', 
-            'link' => 'myprofit', 
+            'name' => 'Lợi nhuận của tôi',
+            'link' => 'myprofit',
             'group' => 'profit'
         ],
         'rpt_quote_not_accepted' => [
-            'name' => 'Báo giá chưa duyệt', 
-            'link' => 'report/status=not_accepted', 
+            'name' => 'Báo giá chưa duyệt',
+            'link' => 'report/status=not_accepted',
             'group' => 'report'
         ],
         'rpt_quote_accepted' => [
-            'name' => 'Báo giá đã duyệt', 
-            'link' => 'report/quotes?status=accepted', 
+            'name' => 'Báo giá đã duyệt',
+            'link' => 'report/quotes?status=accepted',
             'group' => 'report'
         ],
         'rpt_debt' => [
-            'name' => 'Báo cáo công nợ', 
-            'link' => 'report/quotes?status=accepted', 
+            'name' => 'Báo cáo công nợ',
+            'link' => 'report/quotes?status=accepted',
             'group' => 'report'
         ],
         'rpt_categories_revenue' => [
-            'name' => 'Doanh thu theo nhóm SP', 
-            'link' => 'report/revenue?type=category', 
+            'name' => 'Doanh thu theo nhóm SP',
+            'link' => 'report/revenue?type=category',
             'group' => 'report'
         ],
         'rpt_location_revenue' => [
-            'name' => 'Doanh thu theo tỉnh/TP', 
-            'link' => 'report/revenue?type=location', 
+            'name' => 'Doanh thu theo tỉnh/TP',
+            'link' => 'report/revenue?type=location',
             'group' => 'report'
         ],
         'create_available_order' => [
-            'name' => 'Đơn hàng bán sẵn', 
-            'link' => 'view/available_orders', 
+            'name' => 'Đơn hàng bán sẵn',
+            'link' => 'view/available_orders',
             'group' => 'available_order'
         ],
         'warehouse_management' => [
-            'name' => 'Kho vật tư', 
-            'link' => 'warehouse-management', 
+            'name' => 'Kho vật tư',
+            'link' => 'warehouse-management',
             'group' => 'warehouse'
         ],
         'supply_history' => [
-            'name' => 'Xuất, nhập, tồn', 
-            'link' => 'view/warehouse_histories', 
+            'name' => 'Xuất,nhập,tồn',
+            'link' => 'inventory-aggregate',
             'group' => 'warehouse'
         ],
         'warehouse_provider' => [
-            'name' => 'Nhà cung cấp vật tư', 
-            'link' => 'view/warehouse_providers', 
+            'name' => 'Nhà cung cấp vật tư',
+            'link' => 'view/warehouse_providers',
             'group' => 'warehouse'
         ],
         'ex_supply' => [
-            'name' => 'Yêu cầu xuất vật tư', 
-            'link' => 'view/c_supplies?default_data=%7B%22status%22%3A%22handling%22%7D', 
+            'name' => 'Yêu cầu xuất vật tư',
+            'link' => 'view/c_supplies?default_data=%7B%22status%22%3A%22handling%22%7D',
             'group' => 'handle_supply'
         ],
         'im_supply' => [
-            'name' => 'Yêu cầu nhập kho băng lề', 
-            'link' => 'view/supply_warehouses?default_data=%7B%22status%22%3A%22waiting%22%7D', 
+            'name' => 'Yêu cầu nhập kho băng lề',
+            'link' => 'view/supply_warehouses?default_data=%7B%22status%22%3A%22waiting%22%7D',
             'group' => 'handle_supply'
         ],
         'product_management' => [
-            'name' => 'Kho thành phẩm', 
-            'link' => 'view/product_warehouses', 
+            'name' => 'Kho thành phẩm',
+            'link' => 'view/product_warehouses',
             'group' => 'product_warehouse'
         ],
         'expertise' => [
-            'name' => 'Yêu cầu nhập kho', 
-            'link' => 'view/c_expertises?default_data=%7B%22status%22%3A%22not_accepted%22%7D', 
+            'name' => 'Yêu cầu nhập kho',
+            'link' => 'view/c_expertises?default_data=%7B%22status%22%3A%22not_accepted%22%7D',
             'group' => 'product_warehouse'
         ],
         'product_history' => [
-            'name' => 'Xuất, nhập, tồn', 
-            'link' => 'view/c_expertises?default_data=%7B%22status%22%3A%22not_accepted%22%7D', 
+            'name' => 'Xuất, nhập, tồn',
+            'link' => 'view/c_expertises?default_data=%7B%22status%22%3A%22not_accepted%22%7D',
             'group' => 'product_warehouse'
         ],
         'order_ready' => [
-            'name' => 'Quản lí đơn hàng', 
-            'link' => 'view/orders?default_data=%7B%22status%22%3A%22last_submited%22%7D', 
+            'name' => 'Quản lí đơn hàng',
+            'link' => 'view/orders?default_data=%7B%22status%22%3A%22last_submited%22%7D',
             'group' => 'product_warehouse'
         ],
         'user' => [
-            'name' => 'Danh sách nhân viên', 
-            'link' => 'view/n_users', 
+            'name' => 'Danh sách nhân viên',
+            'link' => 'view/n_users',
             'group' => 'account'
         ],
         'account' => [
-            'name' => 'Thông tin tài khoản', 
-            'link' => 'account-detail', 
+            'name' => 'Thông tin tài khoản',
+            'link' => 'account-detail',
             'group' => 'account'
         ],
         'change_password' => [
-            'name' => 'Thay đổi mật khẩu', 
-            'link' => 'change-password', 
+            'name' => 'Thay đổi mật khẩu',
+            'link' => 'change-password',
             'group' => 'account'
         ]
     ];

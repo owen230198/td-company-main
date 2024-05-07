@@ -222,6 +222,18 @@ if (!function_exists('getTimeStamp')) {
     }
 }
 
+if (!function_exists('getDateRangeToQuery')) {
+    function getDateRangeToQuery($date_range)
+    {
+        $arr_date = explode(' - ', $date_range);
+        foreach ($arr_date as $key => $str) {
+            $timstamp = strtotime(str_replace('/', '-', $str));
+            $arr_date[$key] = date('Y-m-d H:i:s', $timstamp);
+        }
+        return $arr_date;
+    }
+}
+
 if (!function_exists('getDataDateTime')) {
     function getDataDateTime($time){
         $timstamp = getTimeStamp((string) $time);

@@ -145,7 +145,7 @@ class SupplyBuyingController extends Controller
             }
             foreach ($data_supply as $supply) {
                 $table_supply = getTableWarehouseByType((object) $supply);
-                $data['log']['qty'] = (int) $supply['qty'];
+                $data['log']['exported'] = (int) $supply['qty'];
                 $data['log']['provider'] = @$supp_buying->provider;
                 $data['log']['price'] = @$supply['price'];
                 $data['log']['bill'] = @$supp_buying->bill;
@@ -191,18 +191,34 @@ class SupplyBuyingController extends Controller
         echo $html;
     }
 
+    private function configDataAggregate($collection, &$data)
+    {
+        $data['count'] = $collection->count();
+        $data['ex_inventory'] = $collection->sum('ex_inventory');
+        $data['imported'] = $collection->sum('imported');
+        $data['exported'] = $collection->sum('exported');
+        $data['inventory'] = $collection->sum('inventory');
+    }
+
     public function inventoryAggregate(Request $request)
     {
-        if (!$request->input('is_ajax') == 1) {
-            $data['title'] = 'Tổng hợp tồn kho';
+        $is_ajax = $request->input('is_ajax') == 1;
+        if (!\GroupUser::isAdmin() && !\GroupUser::isAccounting()) {
+            return customReturnMessage(false, $is_ajax, ['message' => 'Bạn không có quyền truy cập !']);
+        }
+        $data['title'] = 'Tổng hợp tồn kho';
+        $data['link_search'] = url('inventory-aggregate');
+        if (!$is_ajax) {
             $data['fields'] = [
                 [
                     'name' => 'created_at',
+                    'attr' => '{"class_on_search":"change_submit"}',
                     'note' => 'Khoảng thời gian',
                     'type' => 'datetime'
                 ],
                 [
                     'name' => 'name',
+                    'attr' => '{"class_on_search":"change_submit"}',
                     'note' => 'Tên hàng',
                     'type' => 'text'
                 ],
@@ -212,15 +228,11 @@ class SupplyBuyingController extends Controller
             if (empty($request->input('created_at'))) {
                 return returnMessageAjax(100, 'Bạn chưa chọn khoảng thời gian !');
             }
-            $date_range = explode(' - ', $request->input('created_at'));
-            foreach ($date_range as $key => $str) {
-                $timstamp = strtotime(str_replace('/', '-', $str));
-                $date_range[$key] = date('Y-m-d H:i:s', $timstamp);
-            }
+            $date_range = getDateRangeToQuery($request->input('created_at'));
             $warehouse_history = WarehouseHistory::whereBetween('created_at', $date_range);
             if (!empty($request->input('name'))) {
                 $name = '%'.$request->input('name').'%';
-                $warehouse_history->whereLike('name', 'like', $name);
+                $warehouse_history->where('name', 'like', $name);
             }
             $warehouse_histories = $warehouse_history->get()->groupBy('target');
             $list_data = $warehouse_histories->map(function($item){
@@ -232,6 +244,9 @@ class SupplyBuyingController extends Controller
                 $first = $item->first();
                 $last = $item->last();
                 $ret['name'] = $first->name;
+                $ret['table'] = $first->table;
+                $ret['type'] = $first->type;
+                $ret['target'] = $first->target;
                 $ret['unit'] = $first->unit;
                 $ret['ex_inventory'] = $last->ex_inventory;
                 $ret['imported'] = $item->sum('imported');
@@ -242,13 +257,65 @@ class SupplyBuyingController extends Controller
             });
             $collection_data = collect($list_data);
             $data['list_data'] = $list_data;
-            $data['time'] = $date_range;
-            $data['count'] = $collection_data->count();
-            $data['ex_inventory'] = $collection_data->sum('ex_inventory');
-            $data['imported'] = $collection_data->sum('imported');
-            $data['exported'] = $collection_data->sum('exported');
-            $data['inventory'] = $collection_data->sum('inventory');
+            $data['range_time'] = $request->input('created_at');
+            $this->configDataAggregate($collection_data, $data);
             return view('inventories.table', $data);
         }     
+    }
+
+    public function inventoryDetail(Request $request) {
+        $is_ajax = $request->input('is_ajax') == 1;
+        if (!\GroupUser::isAdmin() && !\GroupUser::isAccounting()) {
+            return customReturnMessage(false, $is_ajax, ['message' => 'Bạn không có quyền truy cập !']);
+        }
+        if (empty($request->input('table')) || empty($request->input('type')) || empty($request->input('target')) || empty($request->input('created_at'))) {
+            return customReturnMessage(false, $is_ajax, ['message' => 'Dữ liệu không hợp lệ !']);
+        }
+        $where = $request->except('is_ajax', 'created_at');
+        $where_time = getDateRangeToQuery($request->input('created_at'));
+        $obj = WarehouseHistory::where($where)->whereBetween('created_at', $where_time);
+        $data['title'] = 'Sổ chi tiết vật tư hàng hóa';
+        $data['is_detail'] = true;
+        if (!$is_ajax) {
+            $data['fields'] = [
+                [
+                    'name' => 'name',
+                    'attr' => '{"class_on_search":"change_submit"}',
+                    'note' => 'Tên hàng',
+                    'type' => 'text'
+                ],
+                [
+                    'name' => 'created_at',
+                    'note' => 'Ngày chứng từ',
+                    'type' => 'datetime',
+                ],
+                [
+                    'name' => 'provider',
+                    'note' => 'Nhà cung cấp',
+                    'type' => 'linking',
+                    'other_data' => '{
+                        "config":{
+                            "search":1
+                        },
+                        "data":{
+                            "table":"warehouse_providers"
+                        }
+                    }'
+                ],
+                [
+                    'name' => 'price',
+                    'attr' => '{"type_input":"number"}',
+                    'note' => 'Đơn giá',
+                    'type' => 'text'
+                ]
+            ];
+            $data['data_item'] = $request->except('is_ajax');
+            $data['link_search'] = url('inventory-detail');
+            $data['nosidebar'] = true;
+            $list_data = $obj->get();
+            $data['list_data'] = $list_data;
+        }
+        $this->configDataAggregate($list_data, $data);
+        return view('inventories.view', $data);
     }
 }

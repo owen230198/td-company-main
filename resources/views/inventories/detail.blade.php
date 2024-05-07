@@ -1,12 +1,13 @@
 @php
     $num = 1;
-    $arr_time = explode("-", $range_time);
+    $arr_time = explode("-", $data_item['created_at']);
 @endphp
-<div class="text-center mb-4">
-    <h3 class="fs-14 text-uppercase border_top_eb text-center font_bold">
+<div class="text-center my-4">
+    <h3 class="fs-14 text-uppercase text-center font_bold">
         <strong>{{ $title }}</strong>
     </h3>
     <p class="font_bold font-italic">
+        Mặt hàng : <strong class="color_red">{{ getFieldDataById('name', $data_item['table'], $data_item['target']) }}</strong>,
         Từ ngày : <strong class="color_red">{{ $arr_time[0] }}</strong>
         Đến ngày : <strong class="color_red">{{ $arr_time[1] }}</strong>
     </p>
@@ -21,15 +22,18 @@
                     </div>
                 </th>
                 <th class="font-bold fs-13" rowspan="2">Tên hàng</th>
+                <th class="font-bold fs-13" rowspan="2">NCC</th>
+                <th class="font-bold fs-13" rowspan="2">Ngày chứng từ</th>
+                <th class="font-bold fs-13" rowspan="2">Diễn giải</th>
                 <th class="font-bold fs-13" rowspan="2">ĐVT</th>
-                <th class="font-bold fs-13" rowspan="1" colspan="1">Đầu kỳ</th>
-                <th class="font-bold fs-13" rowspan="1" colspan="1">Nhập kho</th>
-                <th class="font-bold fs-13" rowspan="1" colspan="1">Xuất kho</th>
-                <th class="font-bold fs-13" rowspan="1" colspan="1">Cuối kỳ</th>
-                <th class="font-bold fs-13" rowspan="2">Xem</th>
+                <th class="font-bold fs-13" rowspan="2">Đơn giá</th>
+                <th class="font-bold fs-13" rowspan="1" colspan="1">Nhập</th>
+                <th class="font-bold fs-13" rowspan="1" colspan="1">Xuất</th>
+                <th class="font-bold fs-13" rowspan="1" colspan="1">Tồn</th>
+                <th class="font-bold fs-13" rowspan="2">Đối tượng THCP</th>
+                <th class="font-bold fs-13" rowspan="2">Phụ trách</th>
             </tr>
             <tr>
-                <th class="font-bold fs-13">Số lượng</th>
                 <th class="font-bold fs-13">Số lượng</th>
                 <th class="font-bold fs-13">Số lượng</th>
                 <th class="font-bold fs-13">Số lượng</th>
@@ -47,10 +51,19 @@
                         {{ $data['name'] }}
                     </td>
                     <td>
+                        {{ getFieldDataById('name', 'warehouse_providers', $data['provider']) }}
+                    </td>
+                    <td>
+                        @include('view_table.datetime', ['value' => $data['created_at']])
+                    </td>
+                    <td>
+                        {{ $data['note'] }}
+                    </td>
+                    <td>
                         {{ getUnitWarehouseItem($data['unit']) }}
                     </td>
                     <td>
-                        {{ $data['ex_inventory'] }}
+                        {{ $data['price'] }}đ
                     </td>
                     <td>
                         {{ $data['imported'] }}
@@ -62,12 +75,10 @@
                         {{ $data['inventory'] }}
                     </td>
                     <td>
-                        <div class="list_table_func justify-content-center d-flex">
-                            <button class="table-btn load_view_popup" data-toggle="modal" data-target="#actionModal" 
-                            data-src="{{ url('inventory-detail?table='.$data['table'].'&type='.$data['type'].'&target='.$data['target'].'&created_at='.$range_time) }}">
-                                <i class="fa fa-eye" aria-hidden="true"></i>
-                            </button>
-                        </div>
+                        {{ getFieldDataById('name', 'products', $data['product']) }}
+                    </td>
+                    <td>
+                        {{ getFieldDataById('name', 'n_users', $data['created_by']) }}
                     </td>
                 </tr>
             @endforeach
@@ -77,15 +88,12 @@
                 <td class="text-center">
                     Số dòng {{ $count }}
                 </td>   
-                <td>
-                    
-                </td> 
-                <td>
-                    
-                </td> 
-                <td class="color_red font_bold">
-                    {{ $ex_inventory }}
-                </td> 
+                <td></td> 
+                <td></td> 
+                <td></td> 
+                <td></td> 
+                <td></td> 
+                <td></td>
                 <td class="color_red font_bold">
                     {{ $imported }}
                 </td> 
@@ -95,9 +103,8 @@
                 <td class="color_red font_bold">
                     {{ $inventory }}
                 </td>
-                <td>
-                    
-                </td>  
+                <td></td>  
+                <td></td>  
             </tr>
         </tfoot>
     </table>

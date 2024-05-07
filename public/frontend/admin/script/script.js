@@ -101,6 +101,7 @@ var loadDataPopup = function () {
     $(document).on("click", ".load_view_popup", function (event) {
         event.preventDefault();
         let src = $(this).data("src");
+        console.log( $(".modalAction"));
         $(".modalAction").find("iframe").attr("src", src);
     });
     $('.modalAction').on('hidden.bs.modal', function () {

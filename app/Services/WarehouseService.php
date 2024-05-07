@@ -50,7 +50,7 @@
                 $this->configBaseDataAction($data_warehouse);
                 $insert_id = $model::insertGetId($data_warehouse);
                 if ($insert_id) {
-                    $data_log['name'] = 'NCC: '.getFieldDataById('name', 'warehouse_providers', $data_log['provider']).' - '.$name;
+                    $data_log['name'] = $name;
                     $data_log['target'] = $insert_id;
                     $data_log['ex_inventory'] = 0;
                     $data_log['imported'] = $data_log['qty'];

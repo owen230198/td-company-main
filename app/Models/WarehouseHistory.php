@@ -35,18 +35,26 @@ class WarehouseHistory extends Model
         'type' => 'filev2',
     ];
 
+    const FIELD_NOTE = [
+        'name' => 'note',
+        'note' => 'Diễn giải',
+        'type' => 'textarea',
+    ];
+
     const FIELD_INSERT = [
         self::FIELD_QTY,
         self::FIELD_PROVIDER,
         self::FIELD_PRICE,
-        self::FIELD_BILL           
+        self::FIELD_BILL,
+        self::FIELD_NOTE             
     ];
 
     const FIELD_UPDATE = [
         self::FIELD_QTY,
         self::FIELD_PROVIDER,
         self::FIELD_PRICE,
-        self::FIELD_BILL           
+        self::FIELD_BILL,
+        self::FIELD_NOTE             
     ];
 
     static function getRole()
