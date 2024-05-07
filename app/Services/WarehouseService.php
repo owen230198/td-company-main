@@ -51,11 +51,13 @@
                 $insert_id = $model::insertGetId($data_warehouse);
                 if ($insert_id) {
                     $data_log['name'] = 'NCC: '.getFieldDataById('name', 'warehouse_providers', $data_log['provider']).' - '.$name;
-                    $data_log['action'] = 'insert';
                     $data_log['target'] = $insert_id;
-                    $data_log['old_qty'] = 0;
-                    $data_log['new_qty'] = $data_log['qty'];
+                    $data_log['ex_inventory'] = 0;
+                    $data_log['imported'] = $data_log['qty'];
+                    $data_log['exported'] = 0;
+                    $data_log['inventory'] = $data_log['qty'];
                     $this->getDataLogAction($data_log);
+                    unset($data_log['qty']);
                     \DB::table('warehouse_histories')->insert($data_log);
                     return returnMessageAjax(200, 'Đã nhập vật tư thành công !', getBackUrl());
                 }else{
@@ -86,14 +88,16 @@
                 $this->configBaseDataAction($data_warehouse);
                 $update = $model::where('id', $id)->update($data_warehouse);
                 if ($update) {
-                    $data_log['name'] = 'NCC: '.getFieldDataById('name', 'warehouse_providers', $data_log['provider']).' - '.$name;
-                    $data_log['action'] = 'update';
+                    $data_log['name'] = $name;
                     $data_log['target'] = $id;
-                    $data_log['old_qty'] = $dataItem['qty'];
-                    $data_log['new_qty'] = $data_warehouse['qty'];
+                    $data_log['exported'] = 0;
+                    $data_log['imported'] = $data_log['qty'];
+                    $data_log['ex_inventory'] = $dataItem['qty'];
+                    $data_log['inventory'] = $data_warehouse['qty'];
                     $this->getDataLogAction($data_log);
+                    unset($data_log['qty']);
                     \DB::table('warehouse_histories')->insert($data_log);
-                    return returnMessageAjax(200, 'Đã nhập thêm thành công '.$data_log['qty'].' vật tư !', getBackUrl());
+                    return returnMessageAjax(200, 'Đã nhập thêm thành công '.$data_log['imported'].' vật tư !', getBackUrl());
                 }   
             }else{
                 $data = (new AdminService)->getDataActionView($this->table, 'update', 'Chi tiết', $param);

@@ -223,21 +223,32 @@ class SupplyBuyingController extends Controller
                 $warehouse_history->whereLike('name', 'like', $name);
             }
             $warehouse_histories = $warehouse_history->get()->groupBy('target');
-            $data = $warehouse_histories->map(function($item){
+            $list_data = $warehouse_histories->map(function($item){
                 $ret = [];
-                $item = $item->sortBy(['created_at', 'desc']);
+                $item = $item->sortBy([
+                    ['created_at', 'desc'],
+                    ['id', 'desc'],
+                ]);
                 $first = $item->first();
                 $last = $item->last();
                 $ret['name'] = $first->name;
                 $ret['unit'] = $first->unit;
-                $ret['old_qty'] = $last->old_qty;
-                $ret['imported'] = $item->sum('qty');
-                $ret['exported'] = $item->sum('qty');
-                $ret['new_qty'] = $first->new_qty;
-                $ret['childs'] = $item->toArray();
+                $ret['ex_inventory'] = $last->ex_inventory;
+                $ret['imported'] = $item->sum('imported');
+                $ret['exported'] = $item->sum('exported');
+                $ret['inventory'] = $first->inventory;
+                $ret['histores'] = $item->toArray();
                 return $ret;
-            }); 
-            dd($data); 
+            });
+            $collection_data = collect($list_data);
+            $data['list_data'] = $list_data;
+            $data['time'] = $date_range;
+            $data['count'] = $collection_data->count();
+            $data['ex_inventory'] = $collection_data->sum('ex_inventory');
+            $data['imported'] = $collection_data->sum('imported');
+            $data['exported'] = $collection_data->sum('exported');
+            $data['inventory'] = $collection_data->sum('inventory');
+            return view('inventories.table', $data);
         }     
     }
 }
