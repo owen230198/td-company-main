@@ -203,9 +203,9 @@ class SupplyBuyingController extends Controller
     public function inventoryAggregate(Request $request)
     {
         $is_ajax = $request->input('is_ajax') == 1;
-        if (!\GroupUser::isAdmin() && !\GroupUser::isAccounting()) {
-            return customReturnMessage(false, $is_ajax, ['message' => 'Bạn không có quyền truy cập !']);
-        }
+        // if (!\GroupUser::isAdmin() && !\GroupUser::isAccounting()) {
+        //     return customReturnMessage(false, $is_ajax, ['message' => 'Bạn không có quyền truy cập !']);
+        // }
         $data['title'] = 'Tổng hợp tồn kho';
         $data['link_search'] = url('inventory-aggregate');
         if (!$is_ajax) {
@@ -265,9 +265,9 @@ class SupplyBuyingController extends Controller
 
     public function inventoryDetail(Request $request) {
         $is_ajax = $request->input('is_ajax') == 1;
-        if (!\GroupUser::isAdmin() && !\GroupUser::isAccounting()) {
-            return customReturnMessage(false, $is_ajax, ['message' => 'Bạn không có quyền truy cập !']);
-        }
+        // if (!\GroupUser::isAdmin() && !\GroupUser::isAccounting()) {
+        //     return customReturnMessage(false, $is_ajax, ['message' => 'Bạn không có quyền truy cập !']);
+        // }
         if (empty($request->input('table')) || empty($request->input('type')) || empty($request->input('target')) || empty($request->input('created_at'))) {
             return customReturnMessage(false, $is_ajax, ['message' => 'Dữ liệu không hợp lệ !']);
         }

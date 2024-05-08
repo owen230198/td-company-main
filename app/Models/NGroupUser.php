@@ -197,7 +197,7 @@ class NGroupUser extends Model
             'group' => 'warehouse'
         ],
         'supply_history' => [
-            'name' => 'Xuất,nhập,tồn',
+            'name' => 'Tổng hợp tồn kho',
             'link' => 'inventory-aggregate',
             'group' => 'warehouse'
         ],
