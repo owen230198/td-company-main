@@ -226,44 +226,40 @@ class SupplyBuyingController extends Controller
             ];
             return view('inventories.view', $data);
         }else{
-            // if (empty($request->input('created_at'))) {
-            //     return returnMessageAjax(100, 'Bạn chưa chọn khoảng thời gian !');
-            // }
-            $date_range = getDateRangeToQuery($request->input('created_at'));
-            $warehouse_history = WarehouseHistory::whereBetween('created_at', $date_range);
+            if (empty($request->input('created_at'))) {
+                return returnMessageAjax(100, 'Bạn chưa chọn khoảng thời gian !');
+            }
             $where = [['status', '=', SupplyWarehouse::IMPORTED]];
             if (!empty($request->input('name'))) {
                 $name = '%'.$request->input('name').'%';
-                $warehouse_history->where('name', 'like', $name);
                 $where[] = ['name', 'like', $name];
             }
-            $inventory_list =  WarehouseHistory::getInventoryAllTable($where); 
-            dd($inventory_list->paginate(20));
-            $warehouse_histories = $warehouse_history->get()->groupBy('target');
-            $list_data = $warehouse_histories->map(function($item){
+            $inventory_list =  WarehouseHistory::getInventoryAllTable($where);
+            $get_list = $inventory_list->paginate(50);
+            $list_data = $get_list->map(function($data){
                 $ret = [];
+                $item = WarehouseHistory::where(['table' => $data->table_name, 'target' => $data->id, 'type' => $data->type])->get();
                 $item = $item->sortBy([
                     ['created_at', 'desc'],
                     ['id', 'desc'],
                 ]);
                 $first = $item->first();
                 $last = $item->last();
-                $ret['name'] = $first->name;
-                $ret['table'] = $first->table;
-                $ret['type'] = $first->type;
-                $ret['target'] = $first->target;
-                $ret['unit'] = $first->unit;
-                $ret['ex_inventory'] = $last->ex_inventory;
+                $ret['name'] = $data->name;
+                $ret['table'] = $data->table_name;
+                $ret['type'] = $data->type;
+                $ret['target'] = $data->id;
+                $ret['unit'] = getUnitSupply($data->type);
+                $ret['ex_inventory'] = !empty($last->ex_inventory) ? $last->ex_inventory : 0; 
                 $ret['imported'] = $item->sum('imported');
                 $ret['exported'] = $item->sum('exported');
-                $ret['inventory'] = $first->inventory;
+                $ret['inventory'] = !empty($first->inventory) ? $first->inventory : 0;
                 $ret['histores'] = $item->toArray();
                 return $ret;
             });
-            $collection_data = collect($list_data);
             $data['list_data'] = $list_data;
             $data['range_time'] = $request->input('created_at');
-            $this->configDataAggregate($collection_data, $data);
+            $this->configDataAggregate($list_data, $data);
             return view('inventories.table', $data);
         }     
     }
