@@ -443,7 +443,7 @@ class NGroupUser extends Model
 
     static function isAccounting($group_user = 0)
     {
-        $group_user == !empty($group_user) ? $group_user : self::getCurrent();
+        $group_user = !empty($group_user) ? $group_user : self::getCurrent();
         return $group_user == self::ACCOUNTING;
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\SupplyBuying;
 use App\Http\Controllers\Controller;
 use App\Models\SupplyBuying;
+use App\Models\SupplyWarehouse;
 use App\Models\WarehouseHistory;
 use App\Services\WarehouseService;
 use Illuminate\Http\Request;
@@ -203,9 +204,9 @@ class SupplyBuyingController extends Controller
     public function inventoryAggregate(Request $request)
     {
         $is_ajax = $request->input('is_ajax') == 1;
-        // if (!\GroupUser::isAdmin() && !\GroupUser::isAccounting()) {
-        //     return customReturnMessage(false, $is_ajax, ['message' => 'Bạn không có quyền truy cập !']);
-        // }
+        if (!\GroupUser::isAdmin() && !\GroupUser::isAccounting()) {
+            return customReturnMessage(false, $is_ajax, ['message' => 'Bạn không có quyền truy cập !']);
+        }
         $data['title'] = 'Tổng hợp tồn kho';
         $data['link_search'] = url('inventory-aggregate');
         if (!$is_ajax) {
@@ -225,15 +226,19 @@ class SupplyBuyingController extends Controller
             ];
             return view('inventories.view', $data);
         }else{
-            if (empty($request->input('created_at'))) {
-                return returnMessageAjax(100, 'Bạn chưa chọn khoảng thời gian !');
-            }
+            // if (empty($request->input('created_at'))) {
+            //     return returnMessageAjax(100, 'Bạn chưa chọn khoảng thời gian !');
+            // }
             $date_range = getDateRangeToQuery($request->input('created_at'));
             $warehouse_history = WarehouseHistory::whereBetween('created_at', $date_range);
+            $where = [['status', '=', SupplyWarehouse::IMPORTED]];
             if (!empty($request->input('name'))) {
                 $name = '%'.$request->input('name').'%';
                 $warehouse_history->where('name', 'like', $name);
+                $where[] = ['name', 'like', $name];
             }
+            $inventory_list =  WarehouseHistory::getInventoryAllTable($where); 
+            dd($inventory_list->paginate(20));
             $warehouse_histories = $warehouse_history->get()->groupBy('target');
             $list_data = $warehouse_histories->map(function($item){
                 $ret = [];
@@ -265,9 +270,9 @@ class SupplyBuyingController extends Controller
 
     public function inventoryDetail(Request $request) {
         $is_ajax = $request->input('is_ajax') == 1;
-        // if (!\GroupUser::isAdmin() && !\GroupUser::isAccounting()) {
-        //     return customReturnMessage(false, $is_ajax, ['message' => 'Bạn không có quyền truy cập !']);
-        // }
+        if (!\GroupUser::isAdmin() && !\GroupUser::isAccounting()) {
+            return customReturnMessage(false, $is_ajax, ['message' => 'Bạn không có quyền truy cập !']);
+        }
         if (empty($request->input('table')) || empty($request->input('type')) || empty($request->input('target')) || empty($request->input('created_at'))) {
             return customReturnMessage(false, $is_ajax, ['message' => 'Dữ liệu không hợp lệ !']);
         }
