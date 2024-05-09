@@ -222,6 +222,9 @@ class SupplyBuyingController extends Controller
             ];
             return view('inventories.view', $data);
         }else{
+            if (empty($request->input('created_at'))) {
+                return returnMessageAjax(100, 'Bạn chưa chọn khoảng thời gian !');
+            }
             $where = [['status', '=', SupplyWarehouse::IMPORTED]];
             if (!empty($request->input('name'))) {
                 $name = '%'.$request->input('name').'%';

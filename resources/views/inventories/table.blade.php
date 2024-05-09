@@ -44,7 +44,14 @@
         <tbody>
             @foreach ($list_data as $data)
                 @php
-                    $item = \DB::table('warehouse_histories')->where(['table' => $data->table_name, 'target' => $data->id, 'type' => $data->type])->get()->sortBy([['created_at', 'desc'],['id', 'desc']]);
+                    $obj_item = \DB::table('warehouse_histories')->where(['table' => $data->table_name, 'target' => $data->id, 'type' => $data->type]);
+                    $link_detail = url('inventory-detail?table='.$data->table_name.'&type='.$data->type.'&target='.$data->id);
+                    if (!empty($range_time)) {
+                        $link_detail .= '&created_at='.$range_time;
+                        $where_time = getDateRangeToQuery($range_time);
+                        $obj_item = $obj_item->whereBetween('created_at', $where_time);
+                    }
+                    $item = $obj_item->get()->sortBy([['created_at', 'desc'],['id', 'desc']]);
                     $first = $item->first();
                     $last = $item->last();
                     $data_ex_inventory = !empty($last->ex_inventory) ? $last->ex_inventory : 0;
@@ -55,6 +62,9 @@
                     $exported += $data_exported;
                     $data_inventory = !empty($first->inventory) ? $first->inventory : 0;
                     $inventory += $data_inventory;
+                    // if ($data_inventory == 0) {
+                    //     \DB::table($data->table_name)->where('id', $data->id)->delete();
+                    // }
                 @endphp
                 <tr>
                     <td class="text-center">
@@ -66,7 +76,7 @@
                         {{ $data->name }}
                     </td>
                     <td>
-                        {{ getUnitSupply($data->type) }}
+                        {{ getUnitWarehouseItem(getUnitSupply($data->type)) }}
                     </td>
                     <td>
                         {{ $data_ex_inventory }}
@@ -83,7 +93,7 @@
                     <td>
                         <div class="list_table_func justify-content-center d-flex">
                             <button class="table-btn load_view_popup" data-toggle="modal" data-target="#actionModal" 
-                            data-src="{{ url('inventory-detail?table='.$data->table_name.'&type='.$data->type.'&target='.$data->id.'&created_at='.$range_time) }}">
+                            data-src="{{ $link_detail }}">
                                 <i class="fa fa-eye" aria-hidden="true"></i>
                             </button>
                         </div>
