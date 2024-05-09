@@ -1,15 +1,21 @@
 @php
     $num = 1;
     $arr_time = explode("-", $range_time);
+    $ex_inventory = 0;
+    $imported = 0;
+    $exported = 0;
+    $inventory = 0;
 @endphp
 <div class="text-center mb-4">
     <h3 class="fs-14 text-uppercase border_top_eb text-center font_bold">
         <strong>{{ $title }}</strong>
     </h3>
-    <p class="font_bold font-italic">
-        Từ ngày : <strong class="color_red">{{ $arr_time[0] }}</strong>
-        Đến ngày : <strong class="color_red">{{ $arr_time[1] }}</strong>
-    </p>
+    @if (!empty($arr_time[0]) && !empty($arr_time[1]))
+        <p class="font_bold font-italic">
+            Từ ngày : <strong class="color_red">{{ $arr_time[0] }}</strong>
+            Đến ngày : <strong class="color_red">{{ $arr_time[1] }}</strong>
+        </p>
+    @endif
 </div>
 <div class="position-relative table_inventory">
     <table class="table table-bordered mb-2 ">
@@ -37,6 +43,19 @@
         </thead>
         <tbody>
             @foreach ($list_data as $data)
+                @php
+                    $item = \DB::table('warehouse_histories')->where(['table' => $data->table_name, 'target' => $data->id, 'type' => $data->type])->get()->sortBy([['created_at', 'desc'],['id', 'desc']]);
+                    $first = $item->first();
+                    $last = $item->last();
+                    $data_ex_inventory = !empty($last->ex_inventory) ? $last->ex_inventory : 0;
+                    $ex_inventory += $data_ex_inventory;
+                    $data_imported = $item->sum('imported');
+                    $imported += $data_imported;
+                    $data_exported = $item->sum('exported');
+                    $exported += $data_exported;
+                    $data_inventory = !empty($first->inventory) ? $first->inventory : 0;
+                    $inventory += $data_inventory;
+                @endphp
                 <tr>
                     <td class="text-center">
                         <div class="d-flex align-items-center justify-content-center">
@@ -44,27 +63,27 @@
                         </div>
                     </td>
                     <td>
-                        {{ $data['name'] }}
+                        {{ $data->name }}
                     </td>
                     <td>
-                        {{ getUnitWarehouseItem($data['unit']) }}
+                        {{ getUnitSupply($data->type) }}
                     </td>
                     <td>
-                        {{ $data['ex_inventory'] }}
+                        {{ $data_ex_inventory }}
                     </td>
                     <td>
-                        {{ $data['imported'] }}
+                        {{ $data_imported }}
                     </td>
                     <td>
-                        {{ $data['exported'] }}
+                        {{ $data_exported }}
                     </td>
                     <td>
-                        {{ $data['inventory'] }}
+                        {{ $data_inventory }}
                     </td>
                     <td>
                         <div class="list_table_func justify-content-center d-flex">
                             <button class="table-btn load_view_popup" data-toggle="modal" data-target="#actionModal" 
-                            data-src="{{ url('inventory-detail?table='.$data['table'].'&type='.$data['type'].'&target='.$data['target'].'&created_at='.$range_time) }}">
+                            data-src="{{ url('inventory-detail?table='.$data->table_name.'&type='.$data->type.'&target='.$data->id.'&created_at='.$range_time) }}">
                                 <i class="fa fa-eye" aria-hidden="true"></i>
                             </button>
                         </div>

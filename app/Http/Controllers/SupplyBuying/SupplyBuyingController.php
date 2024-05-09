@@ -194,11 +194,7 @@ class SupplyBuyingController extends Controller
 
     private function configDataAggregate($collection, &$data)
     {
-        $data['count'] = $collection->count();
-        $data['ex_inventory'] = $collection->sum('ex_inventory');
-        $data['imported'] = $collection->sum('imported');
-        $data['exported'] = $collection->sum('exported');
-        $data['inventory'] = $collection->sum('inventory');
+        
     }
 
     public function inventoryAggregate(Request $request)
@@ -226,40 +222,15 @@ class SupplyBuyingController extends Controller
             ];
             return view('inventories.view', $data);
         }else{
-            if (empty($request->input('created_at'))) {
-                return returnMessageAjax(100, 'Bạn chưa chọn khoảng thời gian !');
-            }
             $where = [['status', '=', SupplyWarehouse::IMPORTED]];
             if (!empty($request->input('name'))) {
                 $name = '%'.$request->input('name').'%';
                 $where[] = ['name', 'like', $name];
             }
-            $inventory_list =  WarehouseHistory::getInventoryAllTable($where);
-            $get_list = $inventory_list->paginate(50);
-            $list_data = $get_list->map(function($data){
-                $ret = [];
-                $item = WarehouseHistory::where(['table' => $data->table_name, 'target' => $data->id, 'type' => $data->type])->get();
-                $item = $item->sortBy([
-                    ['created_at', 'desc'],
-                    ['id', 'desc'],
-                ]);
-                $first = $item->first();
-                $last = $item->last();
-                $ret['name'] = $data->name;
-                $ret['table'] = $data->table_name;
-                $ret['type'] = $data->type;
-                $ret['target'] = $data->id;
-                $ret['unit'] = getUnitSupply($data->type);
-                $ret['ex_inventory'] = !empty($last->ex_inventory) ? $last->ex_inventory : 0; 
-                $ret['imported'] = $item->sum('imported');
-                $ret['exported'] = $item->sum('exported');
-                $ret['inventory'] = !empty($first->inventory) ? $first->inventory : 0;
-                $ret['histores'] = $item->toArray();
-                return $ret;
-            });
+            $list_data =  WarehouseHistory::getInventoryAllTable($where)->paginate(1000);
             $data['list_data'] = $list_data;
             $data['range_time'] = $request->input('created_at');
-            $this->configDataAggregate($list_data, $data);
+            $data['count'] = $list_data->count();
             return view('inventories.table', $data);
         }     
     }

@@ -77,13 +77,18 @@ class WarehouseHistory extends Model
         }
         $data_logs->delete();
     }
+    
+    static function getInventoryAggrenate($table, $where)
+    {
+        return \DB::table($table)->select('id', 'name', 'type', 'updated_at', \DB::raw("'$table' as table_name"))->where($where);
+    }
 
     static function getInventoryAllTable($where)
     {
-        $print = \DB::table('print_warehouses')->select('id', 'name', 'type', \DB::raw("'print_warehouses' as table_name"))->where($where);
-        $square = \DB::table('square_warehouses')->select('id', 'name', 'type', \DB::raw("'square_warehouses' as table_name"))->where($where);
-        $supply = \DB::table('supply_warehouses')->select('id', 'name', 'type', \DB::raw("'supply_warehouses' as table_name"))->where($where);
-        $other = \DB::table('other_warehouses')->select('id', 'name', 'type', \DB::raw("'other_warehouses' as table_name"))->where($where);
+        $print = self::getInventoryAggrenate('print_warehouses', $where);
+        $square = self::getInventoryAggrenate('square_warehouses', $where);
+        $supply = self::getInventoryAggrenate('supply_warehouses', $where);
+        $other = self::getInventoryAggrenate('other_warehouses', $where);
         return $print->union($square)->union($supply)->union($other);
 
     }
