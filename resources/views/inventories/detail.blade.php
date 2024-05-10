@@ -8,8 +8,10 @@
     </h3>
     <p class="font_bold font-italic">
         Mặt hàng : <strong class="color_red">{{ getFieldDataById('name', $data_item['table'], $data_item['target']) }}</strong>,
-        Từ ngày : <strong class="color_red">{{ $arr_time[0] }}</strong>
-        Đến ngày : <strong class="color_red">{{ $arr_time[1] }}</strong>
+        @if (!empty($arr_time[0]) && !empty($arr_time[1]))
+            Từ ngày : <strong class="color_red">{{ $arr_time[0] }}</strong>
+            Đến ngày : <strong class="color_red">{{ $arr_time[1] }}</strong>
+        @endif
     </p>
 </div>
 <div class="position-relative table_inventory">

@@ -8,6 +8,12 @@
             <input type="hidden" name="is_ajax" value="1">
             <div class="row align-items-end my-3 justify-content-between">
                 <div class="inventory_form_search col-6">
+                    @if (!empty($is_detail) && !empty($data_item))
+                        <input type="hidden" name="is_ajax" value="1">
+                        @foreach ($data_item as $key => $value)
+                            <input type="hidden" name="{{ $key }}" value="{{ $value }}">    
+                        @endforeach
+                    @endif
                     @foreach ($fields as $field)
                         @include('view_search.view', ['field' => $field])
                     @endforeach
