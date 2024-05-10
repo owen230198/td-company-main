@@ -1,3 +1,8 @@
+<style>
+    .title{
+        font-size: 50pt;
+    }
+</style>
 @php
     $num = 1;
     $arr_time = explode("-", $range_time);
@@ -6,20 +11,22 @@
     $exported = 0;
     $inventory = 0;
 @endphp
-<div class="text-center mb-4">
-    <h3 class="fs-14 text-uppercase border_top_eb text-center font_bold">
-        <strong>{{ $title }}</strong>
-    </h3>
-    @if (!empty($arr_time[0]) && !empty($arr_time[1]))
-        <p class="font_bold font-italic">
-            Từ ngày : <strong class="color_red">{{ $arr_time[0] }}</strong>
-            Đến ngày : <strong class="color_red">{{ $arr_time[1] }}</strong>
-        </p>
-    @endif
-</div>
 <div class="position-relative table_inventory">
     <table class="table table-bordered mb-2 ">
         <thead class="theader">
+            <tr class="mb-4">
+                <th>
+                    <h3 class="fs-14 text-uppercase border_top_eb text-center font_bold title" style="text-align: center">
+                        <strong>{{ $title }}</strong>
+                    </h3>
+                    @if (!empty($arr_time[0]) && !empty($arr_time[1]))
+                        <p class="font_bold font-italic">
+                            Từ ngày : <strong class="color_red">{{ $arr_time[0] }}</strong>
+                            Đến ngày : <strong class="color_red">{{ $arr_time[1] }}</strong>
+                        </p>
+                    @endif
+                </th>
+            </tr>
             <tr>
                 <th class="font-bold fs-13 text-center" rowspan = "2">
                     <div class="d-flex align-items-center justify-content-center">

@@ -199,8 +199,8 @@ class SupplyBuyingController extends Controller
             return customReturnMessage(false, $is_ajax, ['message' => 'Bạn không có quyền truy cập !']);
         }
         $data['title'] = 'Tổng hợp tồn kho';
-        $data['link_search'] = url('inventory-aggregate');
         if (!$is_ajax) {
+            $data['link_search'] = url('inventory-aggregate');
             $data['fields'] = [
                 [
                     'name' => 'created_at',
@@ -220,17 +220,22 @@ class SupplyBuyingController extends Controller
             if (empty($request->input('created_at'))) {
                 return returnMessageAjax(100, 'Bạn chưa chọn khoảng thời gian !');
             }
-            $where = [['status', '=', SupplyWarehouse::IMPORTED]];
-            if (!empty($request->input('name'))) {
-                $name = '%'.$request->input('name').'%';
-                $where[] = ['name', 'like', $name];
-            }
-            $list_data =  WarehouseHistory::getInventoryAllTable($where)->paginate(1000);
-            $data['list_data'] = $list_data;
-            $data['range_time'] = $request->input('created_at');
-            $data['count'] = $list_data->count();
+            $this->tableDataInventoryAggregate($request, $data);
             return view('inventories.table', $data);
         }     
+    }
+
+    private function tableDataInventoryAggregate($request, &$data)
+    {
+        $where = [['status', '=', SupplyWarehouse::IMPORTED]];
+        if (!empty($request->input('name'))) {
+            $name = '%'.$request->input('name').'%';
+            $where[] = ['name', 'like', $name];
+        }
+        $list_data =  WarehouseHistory::getInventoryAllTable($where)->cursor();
+        $data['list_data'] = $list_data;
+        $data['range_time'] = $request->input('created_at');
+        $data['count'] = $list_data->count();
     }
 
     private function getViewDataDetailInventory(&$data)
@@ -298,8 +303,6 @@ class SupplyBuyingController extends Controller
             }
             $data['is_detail'] = true;
             $this->getViewDataDetailInventory($data);
-        }else{
-
         }
         $data['data_item'] = $wheres;
         $list_data = $obj->get();
@@ -311,5 +314,18 @@ class SupplyBuyingController extends Controller
         $data['list_data'] = $list_data;
         $view_return = !$is_ajax ? 'view' : 'detail';
         return view('inventories.'.$view_return, $data);
+    }
+
+    public function inventoryExport(Request $request)
+    {
+        if (!\GroupUser::isAdmin() && !\GroupUser::isAccounting()) {
+            return returnMessageAjax(100, 'Bạn không có quyền export dữ liệu này !');
+        }
+        $data['title'] = 'Tổng hợp tồn kho';
+        $this->tableDataInventoryAggregate($request, $data);
+        return \Maatwebsite\Excel\Facades\Excel::download(new \App\Services\ExportExcel\ExportExcelService($data, 'inventories.table'), 'inventories.xlsx',
+        \Maatwebsite\Excel\Excel::XLSX, [
+            'autoSize' => true
+        ]);
     }
 }
