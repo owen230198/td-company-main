@@ -222,13 +222,13 @@ ul.supply_info li.supply_item_inf>.detail_quote_supply_item.hover{
 }
 
 .table_inventory{
-    height: calc(100vh - 375px);
+    height: calc(100vh - 285px);
     overflow-y: auto;
 }
 
 .table_inventory thead{
     position: sticky;
-    top: 0;
+    top: -1px;
     background: #ebebeb;
 }
 

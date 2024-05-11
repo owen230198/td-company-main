@@ -23,7 +23,7 @@
                         form="form-search" value="submit">
                         <i class="fa fa-filter mr-2 fs-15" aria-hidden="true"></i>Hoàn tất
                     </button>
-                    <a href="javascript:void(0)" class="main_button bg_main color_white smooth bg_green border_green radius_5 font_bold smooth ml-2">
+                    <a href="javascript:void(0)" class="main_button bg_main color_white smooth bg_green border_green radius_5 font_bold smooth inventory_export_excel">
                         <i class="fa fa-file-excel-o mr-2 fs-15" aria-hidden="true"></i>Export excel
                     </a>
                 </div>

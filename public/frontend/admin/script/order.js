@@ -264,6 +264,17 @@ var inventoryAjaxForm = function ()
 	});
 }
 
+var inventoryExportExcel = function ()
+{
+    $(document).on('click', '.inventory_export_excel', function(event){
+        event.preventDefault();
+        let form = $(this).closest('form.inventoryFormAjax');
+        let param = form.serialize();
+        let url = getBaseRoute('inventory-export?' + param);
+        window.location = url;
+    })
+}
+
 $(function(){
     setAdvanceCostOrder(); 
     moduleVATOrder();
@@ -276,4 +287,5 @@ $(function(){
     KCSRequireToWarehouse();
     searchIngredient();
     inventoryAjaxForm();
+    inventoryExportExcel();
 });
