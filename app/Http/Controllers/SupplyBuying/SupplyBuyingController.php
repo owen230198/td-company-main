@@ -321,11 +321,8 @@ class SupplyBuyingController extends Controller
         if (!\GroupUser::isAdmin() && !\GroupUser::isAccounting()) {
             return returnMessageAjax(100, 'Bạn không có quyền export dữ liệu này !');
         }
-        $data['title'] = 'Tổng hợp tồn kho';
+        $data['title'] = 'TỔNG HỢP TỒN KHO';
         $this->tableDataInventoryAggregate($request, $data);
-        return \Maatwebsite\Excel\Facades\Excel::download(new \App\Services\ExportExcel\ExportExcelService($data, 'inventories.table'), 'inventories.xlsx',
-        \Maatwebsite\Excel\Excel::XLSX, [
-            'autoSize' => true
-        ]);
+        return \Maatwebsite\Excel\Facades\Excel::download(new \App\Services\ExportExcel\ExportExcelService($data, 'inventories.table'), 'inventories.xlsx');
     }
 }

@@ -22,23 +22,33 @@ class ExportExcelService implements FromView, WithTitle, ShouldAutoSize, WithSty
     }
     public function view(): View
     {
-        return view($this->template, $this->data)->with('title', $this->data['title']);;
+        return view($this->template, $this->data)->with('title', $this->data['title']);
     }
     
     public function styles(Worksheet $sheet)
     {
         return [
+            '*' => [
+                'alignment' => [
+                    'vertical' => Alignment::VERTICAL_CENTER,
+                ],
+                'height' => 30,
+                'wrapText' => true,
+            ],
             'A1' => [
                 'alignment' => [
                     'horizontal' => Alignment::HORIZONTAL_CENTER,
                     'vertical' => Alignment::VERTICAL_CENTER,
                 ],
+                'font' => ['bold' => true, 'size' => 14, 'name' => 'Times New Roman']
             ],
-            // Style the first row as bold text.
-            1    => ['font' => ['bold' => true]],
-
-            // Styling a specific cell by coordinate.
-            'B2' => ['font' => ['italic' => true]],
+            'A2' => [
+                'alignment' => [
+                    'horizontal' => Alignment::HORIZONTAL_CENTER,
+                    'vertical' => Alignment::VERTICAL_CENTER,
+                ],
+                'font' => ['size' => 11, 'name' => 'Times New Roman', 'bold' => true]
+            ],
 
             // Styling an entire column.
             'C'  => ['font' => ['size' => 8]],
