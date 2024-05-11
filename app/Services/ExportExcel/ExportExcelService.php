@@ -4,10 +4,10 @@ use Maatwebsite\Excel\Concerns\FromView;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\WithTitle;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
-use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
-use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
-class ExportExcelService implements FromView, WithTitle, ShouldAutoSize, WithStyles
+use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Events\AfterSheet;
+class ExportExcelService implements FromView, WithTitle, ShouldAutoSize, WithEvents
 {
     protected $data;
     protected $template;
@@ -24,34 +24,51 @@ class ExportExcelService implements FromView, WithTitle, ShouldAutoSize, WithSty
     {
         return view($this->template, $this->data)->with('title', $this->data['title']);
     }
-    
-    public function styles(Worksheet $sheet)
+
+    public function registerEvents(): array
     {
         return [
-            '*' => [
-                'alignment' => [
-                    'vertical' => Alignment::VERTICAL_CENTER,
-                ],
-                'height' => 30,
-                'wrapText' => true,
-            ],
-            'A1' => [
-                'alignment' => [
-                    'horizontal' => Alignment::HORIZONTAL_CENTER,
-                    'vertical' => Alignment::VERTICAL_CENTER,
-                ],
-                'font' => ['bold' => true, 'size' => 14, 'name' => 'Times New Roman']
-            ],
-            'A2' => [
-                'alignment' => [
-                    'horizontal' => Alignment::HORIZONTAL_CENTER,
-                    'vertical' => Alignment::VERTICAL_CENTER,
-                ],
-                'font' => ['size' => 11, 'name' => 'Times New Roman', 'bold' => true]
-            ],
+            AfterSheet::class    => function(AfterSheet $event) {
+                $event->sheet->getDelegate()->getDefaultRowDimension()->setRowHeight(15);
+                $event->sheet->getStyle('A:X')->applyFromArray([
+                    'font' => [
+                        'size' => 8, 
+                    ],
+                ]);
+                $event->sheet->getStyle('1:2')->applyFromArray([
+                    'font' => [
+                        'bold' => true,
+                        'name' => 'Times New Roman',
+                    ],
+                    'alignment' => [
+                        'horizontal' => Alignment::HORIZONTAL_CENTER,
+                        'vertical' => Alignment::VERTICAL_CENTER,
+                    ],
+                ]);
 
-            // Styling an entire column.
-            'C'  => ['font' => ['size' => 8]],
+                $event->sheet->getStyle('3:4')->applyFromArray([
+                    'font' => [
+                        'bold' => true,
+                    ],
+                    'alignment' => [
+                        'horizontal' => Alignment::HORIZONTAL_CENTER,
+                        'vertical' => Alignment::VERTICAL_CENTER,
+                    ],
+                ]);
+
+                $event->sheet->getStyle('1')->applyFromArray([
+                    'font' => [
+                        'size' => 14,
+                    ],
+                ]);
+                $event->sheet->getStyle('2')->applyFromArray([
+                    'font' => [
+                        'size' => 11,
+                    ],
+                ]);
+     
+            },
         ];
     }
+    
 }
