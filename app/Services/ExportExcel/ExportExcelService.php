@@ -29,7 +29,7 @@ class ExportExcelService implements FromView, WithTitle, ShouldAutoSize, WithEve
     public function registerEvents(): array
     {
         return [
-            AfterSheet::class    => function(AfterSheet $event) {
+            AfterSheet::class => function(AfterSheet $event) {
                 $event->sheet->getDelegate()->getDefaultRowDimension()->setRowHeight(19);
                 $event->sheet->getStyle('A:X')->applyFromArray([
                     'font' => [
@@ -71,7 +71,10 @@ class ExportExcelService implements FromView, WithTitle, ShouldAutoSize, WithEve
                         'size' => 11,
                     ],
                 ]);
-     
+                $event->sheet->setAutoFilter('B3:K3');
+                foreach(range('A', $event->sheet->getHighestDataColumn()) as $columnID) {
+                    $event->sheet->getDelegate()->getColumnDimension($columnID)->setAutoSize(true);
+                }
             },
         ];
     }
