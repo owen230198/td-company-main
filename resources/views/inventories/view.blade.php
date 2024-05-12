@@ -10,6 +10,7 @@
                 <div class="inventory_form_search col-6">
                     @if (!empty($is_detail) && !empty($data_item))
                         <input type="hidden" name="is_ajax" value="1">
+                        <input type="hidden" name="is_detail" value="1">
                         @foreach ($data_item as $key => $value)
                             <input type="hidden" name="{{ $key }}" value="{{ $value }}">    
                         @endforeach

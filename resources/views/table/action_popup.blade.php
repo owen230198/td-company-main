@@ -5,7 +5,7 @@
                 <span aria-hidden="true">&times;</span>
             </button>
             <div class="modal-body">
-                <iframe class="iframe_action_view" src="" width="100%" frameborder="0" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-top-navigation" allowtransparency="true">
+                <iframe class="iframe_action_view" src="" width="100%" frameborder="0" allowtransparency="true" allow-modals>
                 
                 </iframe>
             </div>

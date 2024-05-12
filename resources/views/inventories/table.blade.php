@@ -5,26 +5,27 @@
     $imported = 0;
     $exported = 0;
     $inventory = 0;
+    $table_export = !empty($table_export);
 @endphp
 <div class="position-relative table_inventory">
     <table class="table table-bordered mb-2 ">
         <thead class="theader">
             <tr>
-                <th colspan="8">
+                <th colspan="{{ $table_export ? 7 : 8 }}">
                     <h3 class="fs-14 text-uppercase border_top_eb text-center font_bold title" style="text-align: center">
                        {{ $title}}
                     </h3>
                 </th>
             </tr>
             <tr>
-                <th colspan="8">
+                <th colspan="{{ $table_export ? 7 : 8 }}">
                     Từ ngày : {{ $arr_time[0] }} đến ngày : {{ $arr_time[1] }}
                 </th> 
             </tr>
             <tr>
                 <th class="font-bold fs-13 text-center" rowspan = "2">
                     <div class="d-flex align-items-center justify-content-center">
-                        <span>#</span>
+                        <span>STT</span>
                     </div>
                 </th>
                 <th class="font-bold fs-13" rowspan="2">Tên hàng</th>
@@ -33,7 +34,9 @@
                 <th class="font-bold fs-13" rowspan="1" colspan="1">Nhập kho</th>
                 <th class="font-bold fs-13" rowspan="1" colspan="1">Xuất kho</th>
                 <th class="font-bold fs-13" rowspan="1" colspan="1">Cuối kỳ</th>
-                <th class="font-bold fs-13" rowspan="2">Xem</th>
+                @if (!$table_export)
+                    <th class="font-bold fs-13" rowspan="2">Xem</th>  
+                @endif
             </tr>
             <tr>
                 <th class="font-bold fs-13">Số lượng</th>
@@ -91,21 +94,25 @@
                     <td>
                         {{ $data_inventory }}
                     </td>
-                    <td>
-                        <div class="list_table_func justify-content-center d-flex">
-                            <button class="table-btn load_view_popup" data-toggle="modal" data-target="#actionModal" 
-                            data-src="{{ $link_detail }}">
-                                <i class="fa fa-eye" aria-hidden="true"></i>
-                            </button>
-                        </div>
-                    </td>
+                    @if (!$table_export)
+                        <td>
+                            <div class="list_table_func justify-content-center d-flex">
+                                <button class="table-btn load_view_popup" data-toggle="modal" data-target="#actionModal" 
+                                data-src="{{ $link_detail }}">
+                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                </button>
+                            </div>    
+                        </td>   
+                    @endif
                 </tr>
             @endforeach
         </tbody>
         <tfoot>
             <tr>
                 <td class="text-center">
-                    Số dòng {{ $count }}
+                    @if (!$table_export)
+                        Số dòng {{ $count }}
+                    @endif
                 </td>   
                 <td>
                     
@@ -125,9 +132,11 @@
                 <td class="color_red font_bold">
                     {{ $inventory }}
                 </td>
-                <td>
-                    
-                </td>  
+                @if (!$table_export)
+                    <td>
+                        
+                    </td>
+                @endif  
             </tr>
         </tfoot>
     </table>

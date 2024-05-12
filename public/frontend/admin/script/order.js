@@ -256,7 +256,7 @@ var searchIngredient = function ()
 }
 
 var inventoryAjaxForm = function ()
-{ 
+{
 	$('form.inventoryFormAjax').submit(function(event) {
 		event.preventDefault();
         let target = $('.ajax_data_inventory');
@@ -266,12 +266,12 @@ var inventoryAjaxForm = function ()
 
 var inventoryExportExcel = function ()
 {
-    $(document).on('click', '.inventory_export_excel', function(event){
+    $('.inventory_export_excel').click(function(event){
         event.preventDefault();
         let form = $(this).closest('form.inventoryFormAjax');
         let param = form.serialize();
         let url = getBaseRoute('inventory-export?' + param);
-        window.location = url;
+        window.parent.location.href = url;
     })
 }
 

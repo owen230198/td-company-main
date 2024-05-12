@@ -1,28 +1,37 @@
 @php
     $num = 1;
     $arr_time = explode("-", $data_item['created_at']);
+    $table_export = !empty($table_export);
 @endphp
-<div class="text-center my-4">
-    <h3 class="fs-14 text-uppercase text-center font_bold">
-        <strong>{{ $title }}</strong>
-    </h3>
-    <p class="font_bold font-italic">
-        Mặt hàng : <strong class="color_red">{{ getFieldDataById('name', $data_item['table'], $data_item['target']) }}</strong>,
-        @if (!empty($arr_time[0]) && !empty($arr_time[1]))
-            Từ ngày : <strong class="color_red">{{ $arr_time[0] }}</strong>
-            Đến ngày : <strong class="color_red">{{ $arr_time[1] }}</strong>
-        @endif
-    </p>
-</div>
 <div class="position-relative table_inventory">
     <table class="table table-bordered mb-2 ">
         <thead class="theader">
             <tr>
-                <th class="font-bold fs-13 text-center" rowspan = "2">
-                    <div class="d-flex align-items-center justify-content-center">
-                        <span>#</span>
-                    </div>
+                <th colspan="11">
+                    <h3 class="fs-14 text-uppercase text-center font_bold">
+                        <strong>{{ $title }}</strong> 
+                    </h3>   
+                </th>    
+            </tr>
+            <tr>
+                <th colspan="11">
+                    <p class="font_bold font-italic">
+                        Mặt hàng : <strong class="color_red">{{ getFieldDataById('name', $data_item['table'], $data_item['target']) }}</strong>,
+                        @if (!empty($arr_time[0]) && !empty($arr_time[1]))
+                            Từ ngày : <strong class="color_red">{{ $arr_time[0] }}</strong>
+                            Đến ngày : <strong class="color_red">{{ $arr_time[1] }}</strong>
+                        @endif
+                    </p>
                 </th>
+            </tr>
+            <tr>
+                @if (!$table_export)
+                    <th class="font-bold fs-13 text-center" rowspan = "2">
+                        <div class="d-flex align-items-center justify-content-center">
+                            <span>#</span>
+                        </div>
+                    </th>    
+                @endif
                 <th class="font-bold fs-13" rowspan="2">Tên hàng</th>
                 <th class="font-bold fs-13" rowspan="2">NCC</th>
                 <th class="font-bold fs-13" rowspan="2">Ngày chứng từ</th>
@@ -44,11 +53,13 @@
         <tbody>
             @foreach ($list_data as $data)
                 <tr>
-                    <td class="text-center">
-                        <div class="d-flex align-items-center justify-content-center">
-                            <span>{{ $num ++ }}</span>
-                        </div>
-                    </td>
+                    @if (!$table_export)
+                        <td class="text-center">
+                            <div class="d-flex align-items-center justify-content-center">
+                                <span>{{ $num ++ }}</span>
+                            </div>
+                        </td>
+                    @endif
                     <td>
                         {{ $data['name'] }}
                     </td>
@@ -87,15 +98,19 @@
         </tbody>
         <tfoot>
             <tr>
-                <td class="text-center">
-                    Số dòng {{ $count }}
-                </td>   
+                @if (!$table_export)
+                    <td class="text-center">
+                        Số dòng {{ $count }}
+                    </td>
+                @endif   
                 <td></td> 
                 <td></td> 
                 <td></td> 
                 <td></td> 
                 <td></td> 
-                <td></td>
+                <td class="color_red font_bold">
+                    {{ number_format($price, (int) strpos(strrev($price), ".")) }}đ 
+                </td>
                 <td class="color_red font_bold">
                     {{ $imported }}
                 </td> 

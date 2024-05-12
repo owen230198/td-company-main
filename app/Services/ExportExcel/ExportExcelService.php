@@ -22,6 +22,7 @@ class ExportExcelService implements FromView, WithTitle, ShouldAutoSize, WithEve
     }
     public function view(): View
     {
+        $this->data['table_export'] = 1;
         return view($this->template, $this->data)->with('title', $this->data['title']);
     }
 
@@ -29,10 +30,14 @@ class ExportExcelService implements FromView, WithTitle, ShouldAutoSize, WithEve
     {
         return [
             AfterSheet::class    => function(AfterSheet $event) {
-                $event->sheet->getDelegate()->getDefaultRowDimension()->setRowHeight(15);
+                $event->sheet->getDelegate()->getDefaultRowDimension()->setRowHeight(19);
                 $event->sheet->getStyle('A:X')->applyFromArray([
                     'font' => [
-                        'size' => 8, 
+                        'size' => 8,
+                        'name' => 'Microsoft Sans Serif', 
+                    ],
+                    'alignment' => [
+                        'vertical' => Alignment::VERTICAL_TOP,
                     ],
                 ]);
                 $event->sheet->getStyle('1:2')->applyFromArray([

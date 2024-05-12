@@ -7,6 +7,8 @@ use App\Models\SupplyWarehouse;
 use App\Models\WarehouseHistory;
 use App\Services\WarehouseService;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Services\ExportExcel\ExportExcelService;
 
 class SupplyBuyingController extends Controller
 {
@@ -232,7 +234,7 @@ class SupplyBuyingController extends Controller
             $name = '%'.$request->input('name').'%';
             $where[] = ['name', 'like', $name];
         }
-        $list_data =  WarehouseHistory::getInventoryAllTable($where)->cursor();
+        $list_data =  WarehouseHistory::getInventoryAllTable($where)->get();
         $data['list_data'] = $list_data;
         $data['range_time'] = $request->input('created_at');
         $data['count'] = $list_data->count();
@@ -270,12 +272,9 @@ class SupplyBuyingController extends Controller
         $data['nosidebar'] = true;
     }
 
-    public function inventoryDetail(Request $request) {
-        $is_ajax = $request->input('is_ajax') == 1;
-        if (!\GroupUser::isAdmin() && !\GroupUser::isAccounting()) {
-            return customReturnMessage(false, $is_ajax, ['message' => 'Bạn không có quyền truy cập !']);
-        }
-        $wheres = $request->except('is_ajax');
+    private function tableDataInventoryDetail($request, &$data)
+    {
+        $wheres = $request->except('is_ajax', 'is_detail');
         $where = [];
         foreach ($wheres as $key => $value) {
             if (!empty($value)) {
@@ -296,33 +295,62 @@ class SupplyBuyingController extends Controller
             }
         }
         $obj = WarehouseHistory::where($where);
-        $data['title'] = 'Sổ chi tiết vật tư hàng hóa';
-        if (!$is_ajax) {
-            if (empty($request->input('table')) || empty($request->input('type')) || empty($request->input('target')) || empty($request->input('created_at'))) {
-                return customReturnMessage(false, $is_ajax, ['message' => 'Dữ liệu không hợp lệ !']);
-            }
-            $data['is_detail'] = true;
-            $this->getViewDataDetailInventory($data);
-        }
         $data['data_item'] = $wheres;
         $list_data = $obj->get();
         $data['count'] = $list_data->count();
-        $data['ex_inventory'] = $list_data->sum('ex_inventory');
+        $data['price'] = $list_data->sum('price');
         $data['imported'] = $list_data->sum('imported');
         $data['exported'] = $list_data->sum('exported');
         $data['inventory'] = $list_data->sum('inventory');
         $data['list_data'] = $list_data;
+    }
+
+    public function inventoryDetail(Request $request) {
+        $is_ajax = $request->input('is_ajax') == 1;
+        if (!\GroupUser::isAdmin() && !\GroupUser::isAccounting()) {
+            return customReturnMessage(false, $is_ajax, ['message' => 'Bạn không có quyền truy cập !']);
+        }
+        $data['title'] = 'SỔ CHI TIẾT VẬT TƯ HÀNG HÓA';
+        if (!$is_ajax) {
+            if (empty($request->input('table')) || empty($request->input('type')) || empty($request->input('target')) || empty($request->input('created_at'))) {
+                return back()->with('error', 'Dữ liệu không hợp lệ !');
+            }
+            $data['is_detail'] = true;
+            $this->getViewDataDetailInventory($data);
+        }
+        $this->tableDataInventoryDetail($request, $data);
         $view_return = !$is_ajax ? 'view' : 'detail';
         return view('inventories.'.$view_return, $data);
+    }
+
+    private function exportInventoryAggregate($request)
+    {
+        if (empty($request->input('created_at'))) {
+            return back()->with('error', 'Bạn chưa chọn khoảng thời gian!');
+        }
+        $data['title'] = 'TỔNG HỢP TỒN KHO';
+        $this->tableDataInventoryAggregate($request, $data);
+        $list_data = $data['list_data'];
+        return Excel::download(new ExportExcelService($data, 'inventories.table'), 'TONG_HOP_TON_KHO.xlsx');
+    }
+
+    private function exportInventoryDetail($request)
+    {
+        $data['title'] = 'SỔ CHI TIẾT VẬT TƯ HÀNG HÓA';
+        $this->tableDataInventoryDetail($request, $data);
+        $list_data = $data['list_data'];
+        return Excel::download(new ExportExcelService($data,  'inventories.detail'), 'SO_CHI_TIET_VAT_TU_HANG_HOA.xlsx');
     }
 
     public function inventoryExport(Request $request)
     {
         if (!\GroupUser::isAdmin() && !\GroupUser::isAccounting()) {
-            return returnMessageAjax(100, 'Bạn không có quyền export dữ liệu này !');
+            return back()->with('error', 'Bạn không có quyền export dữ liệu này !');
         }
-        $data['title'] = 'TỔNG HỢP TỒN KHO';
-        $this->tableDataInventoryAggregate($request, $data);
-        return \Maatwebsite\Excel\Facades\Excel::download(new \App\Services\ExportExcel\ExportExcelService($data, 'inventories.table'), 'inventories.xlsx');
+        if (!empty($request->input('is_detail'))) {
+            return $this->exportInventoryDetail($request);
+        }else{
+            return $this->exportInventoryAggregate($request);    
+        }
     }
 }
