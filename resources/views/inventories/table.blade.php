@@ -66,9 +66,6 @@
                     $exported += $data_exported;
                     $data_inventory = !empty($first->inventory) ? $first->inventory : 0;
                     $inventory += $data_inventory;
-                    // if ($data_inventory == 0) {
-                    //     \DB::table($data->table_name)->where('id', $data->id)->update(['qty' => 0]);
-                    // }
                 @endphp
                 <tr>
                     <td class="text-center">
