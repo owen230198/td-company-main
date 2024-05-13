@@ -1,5 +1,6 @@
 @if ((!empty($supply_obj->id)) || $supp_index > 0)
-    <span class="remove_ext_element_quote d-flex bg_red color_white red_btn smooth" data-id = "{{ @$supply_obj->id }}" data-table="{{ @$supp_table }}">
+    <span class="remove_ext_element_quote d-flex bg_red color_white red_btn smooth" data-id = "{{ @$supply_obj->id }}" 
+        data-table="{{ @$supply_obj->made_by == \TDConst::MADE_BY_PARTNER ? 'products' : @$supp_table }}">
         <i class="fa fa-times" aria-hidden="true"></i>
     </span>   
 @endif
