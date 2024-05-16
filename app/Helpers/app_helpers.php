@@ -273,6 +273,13 @@ if (!function_exists('getCodeInsertTable')) {
     }
 }
 
+if (!function_exists('formatCodeInsert')) {
+    function formatCodeInsert($id, $num = '08')
+    {
+        return sprintf("%".$num."s", $id);
+    }
+}
+
 if (!function_exists('getParamUrlByArray')) {
     function getParamUrlByArray($arr){
         $param = '';

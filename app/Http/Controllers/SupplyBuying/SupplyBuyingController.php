@@ -19,7 +19,6 @@ class SupplyBuyingController extends Controller
 
     public function ProcessData(&$data)
     {
-        $data['code'] = 'CT-'.getCodeInsertTable('supply_buyings');
         $data['status'] = \StatusConst::NOT_ACCEPTED;
         $data['supply'] = json_encode($data['supply']);
     }
@@ -35,10 +34,11 @@ class SupplyBuyingController extends Controller
             $data = $request->except('_token');
             $this->processData($data);
             $this->admins->configBaseDataAction($data);
-            $insert = SupplyBuying::insert($data);
-            if ($insert) {
+            $insert_id = SupplyBuying::insertGetId($data);
+            if ($insert_id) {
+                SupplyBuying::where('id', $insert_id)->update(['code' => 'CT-'.formatCodeInsert($insert_id)]);
                 $back_routes = getBackUrl() ?? url('view/'.$table);
-                logActionUserData(__FUNCTION__, $table, $insert, $data);
+                logActionUserData(__FUNCTION__, $table, $insert_id, $data);
                 return returnMessageAjax(200, 'Thêm dữ liệu thành công!', $back_routes);
             }else {
                 return returnMessageAjax(100, 'Lỗi không xác định !');
@@ -148,7 +148,8 @@ class SupplyBuyingController extends Controller
             }
             foreach ($data_supply as $supply) {
                 $table_supply = getTableWarehouseByType((object) $supply);
-                $data['log']['exported'] = (int) $supply['qty'];
+                $data['log']['type'] = @$supply['supp_type'];
+                $data['log']['qty'] = (int) $supply['qty'];
                 $data['log']['provider'] = @$supp_buying->provider;
                 $data['log']['price'] = @$supply['price'];
                 $data['log']['bill'] = @$supp_buying->bill;
