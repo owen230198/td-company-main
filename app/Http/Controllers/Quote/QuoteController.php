@@ -36,6 +36,9 @@ class QuoteController extends Controller
                 if ($step == 'chose_customer') {
                     return $this->services->selectCustomerUpdateQuote($request, $id);
                 }else{
+                    if (@$quote->status != \StatusConst::NOT_ACCEPTED) {
+                        return returnMessageAjax(100, 'Không thể chỉnh sửa báo giá đã được khách duyệt giá !');
+                    }
                     $process = $this->services->processDataQuote($request, $quote);
                     if (!empty($process['code']) && $process['code'] == 100) {
                         return $process;
@@ -64,7 +67,10 @@ class QuoteController extends Controller
 
     public function clone($request, $id)
     {
-        $hidden_clone_field = ['code', 'created_by', 'created_at', 'updated_at'];
+        if (!$request->isMethod('GET')) {
+            return back()->with('error', 'Yêu cầu không hợp lệ !');
+        }
+        $hidden_clone_field = Quote::HIDDEN_CLONE_FIELD;
         $data_quote = Quote::find($id)->makeHidden($hidden_clone_field)->toArray();
         $data_products = Product::where('quote_id', $id)->get()->makeHidden($hidden_clone_field)->toArray();
         unset($data_quote['id']);

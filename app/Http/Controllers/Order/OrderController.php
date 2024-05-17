@@ -87,6 +87,11 @@
             }
         }
 
+        public function clone(Request $request)
+        {
+            dd(12);
+        }
+
         public function applyToDesign($data, $arr_order, $base_order_id, $quote_id)
         {
             if (\GroupUser::isTechApply() || \GroupUser::isAdmin()) {
