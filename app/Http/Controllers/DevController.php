@@ -231,11 +231,12 @@ class DevController extends Controller
         }
     }
 
-    public function updateCodeQuote(){
-        $list = \DB::table('quotes')->get();
+    public function updateCodeTable($request){
+        $table = $request->input('table');
+        $list = \DB::table($table)->get();
         foreach ($list as $item) {
-            $code = 'BG-'.sprintf("%08s", $item->id);
-            $update = \DB::table('quotes')->where('id', $item->id)->update(['seri' => $code]);
+            $code = $request->get('prefix').'-'.sprintf("%08s", $item->id);
+            $update = \DB::table($table)->where('id', $item->id)->update([$request->input('name') => $code]);
             dump($update);
         }
     }
