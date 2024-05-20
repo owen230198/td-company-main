@@ -70,7 +70,7 @@
 				$update['total_cost'] = $total_cost + $total_ex['total_cost'];
 				$get_perc = (float) $update['total_cost'] + $ship_price;
 				$total_amount = $profit > 0 ? ($get_perc * ((100 + $profit) / 100)) : $get_perc;
-				$update['total_amount'] = round($total_amount / $round_number) * $round_number;
+				$update['total_amount'] = $round_number > 0 ? round($total_amount / $round_number) * $round_number : $total_amount;
 				\DB::table('products')->where('id', $product->id)->update($update);
 				// $ret['base_amount'] += $total_amount;
 				$ret['total_cost'] += $update['total_cost'];
