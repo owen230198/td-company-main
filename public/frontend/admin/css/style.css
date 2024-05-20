@@ -23,6 +23,15 @@ select.muptiple_select option {
     font-size: 12.5px;
 }
 
+.page-item.active .page-link{
+    background-color :#419512;
+    border-color: #419512;
+}
+
+.page-link{
+    color: #419512;
+}
+
 .header {
     height: 55px;
     padding: 5px;

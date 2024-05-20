@@ -99,7 +99,7 @@ trait QPaperTrait
     {
         $price = !empty($compress_float['price']) ? (float)$compress_float['price'] : 0;
         $shape_price = !empty($compress_float['shape_price']) ? (float) $compress_float['shape_price'] : 0;
-        // Công thức tính chi phí ép nhũ - thúc nổi : chi phí cán metalai + chi phí cán phủ trên
+        // Công thức tính chi phí ép nhũ - thúc nổi : SL sản phẩm x giá tiền sx 1 sản phẩm + số bát x chi phí khuôn
         $total = (self::$qty_pro * $price) + (self::$nqty * $shape_price);
         $compress_float['qty_pro'] = self::$qty_pro;
         $compress_float['handle_qty'] = self::$handle_qty;

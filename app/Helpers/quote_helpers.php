@@ -64,7 +64,7 @@
 				$round_number = $product->qty;
 				$profit = (float) @$arr_quote['profit'];
 				$ship_price = (float) @$arr_quote['ship_price'];
-				$total_cost = round($cost / $round_number) * $round_number;
+				$total_cost = $round_number > 0 ? round($cost / $round_number) * $round_number : $cost;
 				$ex_products = \DB::table('products')->where('parent', $product->id)->get();
 				$total_ex = getTotalProductByArr($ex_products, $arr_quote);
 				$update['total_cost'] = $total_cost + $total_ex['total_cost'];

@@ -77,7 +77,7 @@
         </table>
     </div>
 @if ($paginate)
-    <div class="paginate_view d-flex align-center justify-content-between mb-3">
+    <div class="paginate_view d-flex align-center justify-content-between mt-3">
         {!! $data_tables->appends(request()->input())->links('pagination::bootstrap-4') !!}
     </div>
 @endif
