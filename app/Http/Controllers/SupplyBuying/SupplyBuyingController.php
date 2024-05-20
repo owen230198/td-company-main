@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\SupplyBuying;
 use App\Http\Controllers\Controller;
+use App\Models\PrintWarehouse;
 use App\Models\SupplyBuying;
 use App\Models\SupplyWarehouse;
 use App\Models\WarehouseHistory;
@@ -212,10 +213,31 @@ class SupplyBuyingController extends Controller
                     'type' => 'datetime'
                 ],
                 [
-                    'name' => 'name',
-                    'attr' => '{"class_on_search":"change_submit"}',
-                    'note' => 'Tên hàng',
-                    'type' => 'text'
+                    'name' => 'type',
+                    'attr' => '{"class_on_search":"__select_type_supply_search_history"}',
+                    'note' => 'Loại hàng',
+                    'type' => 'select',
+                    'other_data' => '{
+                        "config":{
+                            "searchbox":1
+                        },
+                        "data":{
+                            "options":{
+                                "":"Chọn loại hàng",
+                                "paper":"Giấy in", 
+                                "nilon":"Màng nilon", 
+                                "metalai":"Màng metalai",
+                                "cover":"Màng phủ trên",
+                                "carton":"Carton",
+                                "rubber":"Cao su",
+                                "styrofoam":"Mút phẳng",
+                                "decal":"Nhung",
+                                "silk":"Vải lụa",
+                                "mica":"Mi ca",
+                                "magnet":"Nam châm"
+                            }
+                        }
+                    }'
                 ],
             ];
             return view('inventories.view', $data);
@@ -317,6 +339,7 @@ class SupplyBuyingController extends Controller
                 return back()->with('error', 'Dữ liệu không hợp lệ !');
             }
             $data['is_detail'] = true;
+            $data['data_search']['created_at'] = $request->input('created_at');
             $this->getViewDataDetailInventory($data);
         }
         $this->tableDataInventoryDetail($request, $data);
@@ -331,7 +354,6 @@ class SupplyBuyingController extends Controller
         }
         $data['title'] = 'TỔNG HỢP TỒN KHO';
         $this->tableDataInventoryAggregate($request, $data);
-        $list_data = $data['list_data'];
         return Excel::download(new ExportExcelService($data, 'inventories.table'), 'TONG_HOP_TON_KHO.xlsx');
     }
 
@@ -339,7 +361,6 @@ class SupplyBuyingController extends Controller
     {
         $data['title'] = 'SỔ CHI TIẾT VẬT TƯ HÀNG HÓA';
         $this->tableDataInventoryDetail($request, $data);
-        $list_data = $data['list_data'];
         return Excel::download(new ExportExcelService($data,  'inventories.detail'), 'SO_CHI_TIET_VAT_TU_HANG_HOA.xlsx');
     }
 
@@ -353,5 +374,17 @@ class SupplyBuyingController extends Controller
         }else{
             return $this->exportInventoryAggregate($request);    
         }
+    }
+
+    public function fieldSearchHistory(Request $request)
+    {
+        $type = $request->input('type');
+        if (empty($type)) {
+            return false;
+        }
+        $table = tableWarehouseByType($type);
+        $data['fields'] = $table == 'print_warehouses' ? PrintWarehouse::getFieldSearch() : (new \App\Services\AdminService())->getFieldAction($table, 'search');
+        $data['default_field']['type'] = $type;
+        return view('inventories.field_search', $data);
     }
 }

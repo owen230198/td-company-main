@@ -279,10 +279,10 @@
                     return returnMessageAjax(110, 'Dữ liệu không hợp lệ !');
                 } 
                 $table_warehouse = getTableWarehouseByType($data_command);
-                $ware_house_id = $data_command->size_type;
-                $data_warehouse = getModelByTable($table_warehouse)->find($data_command->size_type);
+                $warehouse_model = getModelByTable($table_warehouse);
+                $data_warehouse = $warehouse_model->find($data_command->size_type);
                 if (empty($data_warehouse)) {
-                    return returnMessageAjax(110, 'Vật tư không có trong kho hoặc đã bị xóa !');    
+                    return returnMessageAjax(110, 'Vật tư không có trong kho !');    
                 }
                 $cr_qty = (int) $data_warehouse->qty;
                 $take_qty = (int) $data_command->qty;
@@ -291,15 +291,16 @@
                 }
                 $data_warehouse->qty = $cr_qty- $take_qty;
                 $data_warehouse->save();
-                $data_log['action'] = 'take_out';
-                $data_log['qty'] = $take_qty;
-                $data_log['target'] = $ware_house_id;
-                $data_log['old_qty'] = $cr_qty;
-                $data_log['new_qty'] = $data_warehouse->qty;
+                $data_log['name'] = $data_warehouse->name;
                 $data_log['table'] = $table_warehouse;
+                $data_log['type'] = $data_warehouse->type;
+                $data_log['target'] = $data_warehouse->id;
+                $data_log['exported'] = $take_qty;
+                $data_log['ex_inventory'] = $cr_qty;
+                $data_log['inventory'] = $data_warehouse->qty;
                 $data_log['product'] = $data_command->product;
-                $data_log['created_by'] = \User::getCurrent('id');
-                $data_log['created_at'] = date('Y-m-d H:i:s', Time()); 
+                $data_log['c_supply'] = $id;
+                (new \BaseService)->configBaseDataAction($data_log);
                 \DB::table('warehouse_histories')->insert($data_log);
                 $data_update = ['status' => CSupply::HANDLED];
                 $update = $command->where('id' , $id)->update($data_update);

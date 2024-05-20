@@ -219,24 +219,25 @@
         }
     }
 
+    if (!function_exists('tableWarehouseByType')) {
+        function tableWarehouseByType($type) {
+            if (in_array($type, [\TDConst::CARTON, \TDConst::RUBBER, \TDConst::STYRO, \TDConst::MICA])) {
+                return 'supply_warehouses';
+            }elseif(in_array($type, [\TDConst::PAPER])){
+                return 'print_warehouses';
+            }elseif (in_array($type, [\TDConst::MAGNET])) {
+                return 'other_warehouses';
+            }else{
+                return 'square_warehouses';
+            }
+        }
+    }
+
     if (!function_exists('getTableWarehouseByType')) {
         function getTableWarehouseByType($param = new \stdClass())
         {
             $type = !empty($param->supp_type) ? $param->supp_type : '';
-            switch ($type) {
-                case in_array($type, [\TDConst::CARTON, \TDConst::RUBBER, \TDConst::STYRO, \TDConst::MICA]):
-                    return 'supply_warehouses';
-                    break;
-                case in_array($type, [\TDConst::PAPER]):
-                    return 'print_warehouses';
-                    break;
-                case in_array($type, [\TDConst::MAGNET]):
-                    return 'other_warehouses';
-                    break;
-                default:
-                    return 'square_warehouses';
-                    break;
-            }
+            return tableWarehouseByType($type);
         }
     }
 

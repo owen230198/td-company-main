@@ -31,7 +31,7 @@ class Customer extends Model
 
     static function getInsertCode($id)
     {
-        Customer::where(['id' => $id])->update(['code' => 'KH'.sprintf("%08s", $id)]);
+        Customer::where(['id' => $id])->update(['code' => 'KH-'.sprintf("%08s", $id)]);
     }
 
     static function getDataJsonLinking($customers, $q)

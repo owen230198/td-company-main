@@ -9,5 +9,5 @@
         <input type="text" name="{{ $name }}[to]" class="form-control" placeholder="đến" value = "{{ $value_to }}"/>
     </div>
 @else
-    <input type="text" name="{{ $name }}" class="form-control {{ @$attr['class_on_search'] ? ' '.$attr['class_on_search'] : '' }}" placeholder="Nhập thông tin {{ $note }}" value = "{{ @$data_search[$name] }}"/>
+    <input type="text" name="{{ $name }}" class="form-control {{ @$attr['class_on_search'] ? ' '.$attr['class_on_search'] : '' }}" placeholder="Nhập thông tin {{ $note }}" value = "{{ @$data_search[$name] }}"/ autocomplete="off">
 @endif

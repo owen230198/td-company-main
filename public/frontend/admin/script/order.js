@@ -157,8 +157,10 @@ var afterPlanSelectSupply = function(table, data, target, item, parent, reset = 
                 target.find('.__lack').parent().fadeIn();    
             }
         }else if (table == 'print_warehouses') {
-            target.find('.__rest').text(data.inhouse);  
-            target.find('.__lack').parent().fadeOut();   
+            let nqty_input = target.find('input.__nqty_supp_plan');
+            nqty_input.trigger('change');
+            // target.find('.__rest').text(data.inhouse);  
+            // target.find('.__lack').parent().fadeOut();   
         }
     }
 }
@@ -204,24 +206,29 @@ var planHandleSupplyQty = function()
         let parent = $(this).closest('.__handle_supply_item');
         let need_qty = getEmptyDefault(parent.find('input.__qty_supp_plan').val(), 0, 'float');
         let nqty = getEmptyDefault(parent.find('input.__nqty_supp_plan').val(), 0, 'float');
-        if (!empty(nqty)) {
-            let takeout = need_qty;
-            let total_supp = Math.ceil(need_qty/nqty);
-            parent.find('input.__total_qty_supp_plan').val(total_supp);
-            let inhouse = getEmptyDefault(parent.find('.__inhouse').text(), 0, 'float');
+        let takeout = need_qty;
+        let total_supp = !empty(nqty) ? Math.ceil(need_qty/nqty) : 0;
+        parent.find('input.__total_qty_supp_plan').val(total_supp);
+        let inhouse = getEmptyDefault(parent.find('.__inhouse').text(), 0, 'float');
+        if (total_supp > 0) {
+            parent.find('.__rest').parent().fadeIn();  
             if (takeout > inhouse) {
                 parent.find('.__rest').text(0);
                 let lack = total_supp - inhouse;
-                parent.find("input[name*='lack']").val( lack);
+                parent.find("input[name*='lack']").val(lack);
                 parent.find('.__lack').text(lack);
                 parent.find('.__lack').parent().fadeIn();     
             }else{
                 parent.find('.__rest').text(inhouse - total_supp);
+                parent.find("input[name*='lack']").val(0);
                 parent.find('.__lack').text(0);
                 parent.find('.__lack').parent().fadeOut();  
             }
             parent.data('take', total_supp);
             updateHandleWareHouse($(this));
+        }else{
+            parent.find('.__rest').parent().fadeOut();  
+            parent.find('.__lack').parent().fadeOut();    
         }
     });
 }
@@ -262,6 +269,18 @@ var inventoryAjaxForm = function ()
         let target = $('.ajax_data_inventory');
 		ajaxViewTarget($(this).attr('action'), target, target, 1, $(this).serialize(), false);
 	});
+
+    $(document).on('change', '.__select_type_supply_search_history', function(event){
+        event.preventDefault();
+        let type = $(this).val();
+        let url = 'field-search-supply-history?type=' + type;
+        let target = $(this).closest('form').find('.inventory_ajax_field_search');
+        if (!empty(type)) {
+            ajaxViewTarget(url, target, target);
+        }else{
+            target.html('');
+        }
+    });
 }
 
 var inventoryExportExcel = function ()

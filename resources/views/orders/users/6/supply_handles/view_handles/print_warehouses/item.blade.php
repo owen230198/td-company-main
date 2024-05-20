@@ -54,7 +54,7 @@
         @include('view_update.view', $need_qty)
         @include('view_update.view', $nqty_supp)
         @include('view_update.view', $total_qty_supp)
-        <div class="d-flex align-items-center mb-2 fs-13">
+        <div class="align-items-center mb-2 fs-13" style="display: flex">
             <label class="mb-0 min_210 text-capitalize text-right mr-3">Còn lại : </label>
             <p class="font_bold __rest"></p>
         </div>

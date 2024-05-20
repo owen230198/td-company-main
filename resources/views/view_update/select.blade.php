@@ -8,7 +8,8 @@
 	<select name="{{ $name }}" class="form-control 
 	{{ $multiple ? 'length_input muptiple_select' : '' }}
 	{{ @$select_config['searchbox'] == 1 ? ' select_config' : '' }}
-	{{ @$attr['inject_class'] ? ' '.$attr['inject_class'] : '' }}" 
+	{{ @$attr['inject_class'] ? ' '.$attr['inject_class'] : '' }}
+	{{ @$attr['class_on_search'] ? ' '.$attr['class_on_search'] : '' }}" 
 	{{ @$attr['disable_field'] == 1 ? 'disabled' : '' }}
 	{{ @$attr['placeholder'] ? 'placehoder='.$attr['placeholder'] : '' }} {{ @$attr['inject_attr'] ?? '' }}
 	{{ @$attr['readonly'] == 1 ? 'readonly' : '' }}
