@@ -281,6 +281,15 @@ var inventoryAjaxForm = function ()
             target.html('');
         }
     });
+
+    $(document).on('click', '.__inventory_undo_search', function(event) {
+        event.preventDefault();
+        let form = $(this).closest('form');
+        let select_type = form.find('.__select_type_supply_search_history');
+        select_type.val('');
+        select_type.trigger('change');
+        initInputModuleAfterAjax(form);
+    })
 }
 
 var inventoryExportExcel = function ()

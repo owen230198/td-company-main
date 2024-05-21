@@ -253,11 +253,22 @@ class SupplyBuyingController extends Controller
     private function tableDataInventoryAggregate($request, &$data)
     {
         $where = [['status', '=', SupplyWarehouse::IMPORTED]];
-        if (!empty($request->input('name'))) {
-            $name = '%'.$request->input('name').'%';
-            $where[] = ['name', 'like', $name];
+        $where_table = [];
+        if (!empty($request->input('type'))) {
+            $where[] = ['type', '=', $request->input('type')];
+            $table = tableWarehouseByType($request->input('type'));
+            $names = $request->except(['is_ajax', 'created_at', 'type']);
+            foreach ($names as $key => $value) {
+                $conditions = (new \App\Services\AdminService)->getConditionTable($table, $key, $value);
+                if (!empty($conditions)) {
+                    foreach ($conditions as $cond) {
+                        $compare = @$cond['compare'] ?? '=';
+                        $where_table[$table][] = [$cond['key'], $compare, $cond['value']];
+                    }
+                }
+            }
         }
-        $list_data =  WarehouseHistory::getInventoryAllTable($where)->get();
+        $list_data =  WarehouseHistory::getInventoryAllTable($where, $where_table)->get();
         $data['list_data'] = $list_data;
         $data['range_time'] = $request->input('created_at');
         $data['count'] = $list_data->count();

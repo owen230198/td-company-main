@@ -29,9 +29,14 @@
                         form="form-search" value="submit">
                         <i class="fa fa-filter mr-2 fs-15" aria-hidden="true"></i>Hoàn tất
                     </button>
-                    <a href="javascript:void(0)" class="main_button bg_main color_white smooth bg_green border_green radius_5 font_bold smooth inventory_export_excel">
+                    <a href="javascript:void(0)" class="main_button bg_main color_white smooth bg_green border_green radius_5 font_bold smooth inventory_export_excel mr-2">
                         <i class="fa fa-file-excel-o mr-2 fs-15" aria-hidden="true"></i>Export excel
                     </a>
+                    @if (empty($is_detail))
+                    <button type="button" class="main_button bg_main color_white smooth bg_green border_green radius_5 font_bold smooth mr-2 __inventory_undo_search">
+                        <i class="fa fa-undo fs-15 mr-2" aria-hidden="true"></i>Reset tìm kiếm
+                    </button>    
+                    @endif
                 </div>
             </div>
         </form>

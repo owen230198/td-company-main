@@ -139,7 +139,7 @@ if (!function_exists('handleQueryCondition')) {
 }
 
 if (!function_exists('getDataTable')) {
-    function getDataTable($table, $where = [], $param = [], $last_query = false)
+    function getDataTable($table, $where = [], $param = [], $get_obj = false, $last_query = false)
     {
         if ($last_query) {
             \DB::enableQueryLog();
@@ -153,6 +153,9 @@ if (!function_exists('getDataTable')) {
         $query = \DB::table($table)->select($select);
         if (!empty($where)) {
             handleQueryCondition($query, $where);
+        }
+        if ($get_obj) {
+            return $query;
         }
         if ($paginate>0) {
             $data = $query->orderBy($order, $order_by)->paginate($paginate);
