@@ -35,7 +35,7 @@
                 'note' => 'Khuôn sản xuất (Kỹ thuật)',
                 'type' => 'filev2',
                 'table_map' => 'products',
-                'other_data' => ['role_update' => [\GroupUser::TECH_APPLY], 'field_name' => 'tech_shape_file']
+                'other_data' => ['role_update' => [\GroupUser::TECH_APPLY, \GroupUser::TECH_HANDLE], 'field_name' => 'tech_shape_file']
             ],
             'design_file' =>
             [
@@ -49,7 +49,7 @@
                 'note' => 'File bình theo khuôn (P. Thiết kế)',
                 'type' => 'filev2',
                 'table_map' => 'products',
-                'other_data' => ['role_update' => [\GroupUser::DESIGN, \GroupUser::TECH_APPLY], 'field_name' => 'design_shape_file']
+                'other_data' => ['role_update' => [\GroupUser::DESIGN, \GroupUser::TECH_APPLY, \GroupUser::TECH_HANDLE], 'field_name' => 'design_shape_file']
             ],
             'handle_shape_file' =>
             [
@@ -83,6 +83,7 @@
             }elseif(@$stage == Order::DESIGN_SUBMITED){
                 return [
                     'tech_shape_file' => $arr_fields['tech_shape_file'],
+                    'design_file' => $arr_fields['design_file'],
                     'design_shape_file' => $arr_fields['design_shape_file'],
                     'handle_shape_file' => $arr_fields['handle_shape_file']
                 ]; 
