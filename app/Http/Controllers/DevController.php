@@ -255,9 +255,9 @@ class DevController extends Controller
         dd(1);
     }
 
-    public function handleJoinPrint()
+    public function handleJoinPrint($request)
     {
-        $paper = Paper::find(587);
+        $paper = Paper::find($request->input('id'));
         $insert_product['name'] = $paper->name; 
         $insert_product['qty'] = $paper->supp_qty; 
         $insert_product['made_by'] = \TDConst::MADE_BY_OWN;
