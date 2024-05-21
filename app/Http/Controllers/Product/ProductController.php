@@ -274,7 +274,7 @@ use Illuminate\Http\Request;
         public function joinPrintCommand(Request $request)
         {
             $is_post = $request->isMethod('POST');
-            if (!\GroupUser::isTechApply() && !\GroupUser::isAdmin()) {
+            if (!\GroupUser::isTechApply() && !\GroupUser::isAdmin() && !\GroupUser::isTechHandle()) {
                 return customReturnMessage(false, $is_post, ['message' => 'Bạn không có quyền tạo lệnh in ghép !']);
             }
             if ($is_post) {
@@ -307,15 +307,24 @@ use Illuminate\Http\Request;
                 $join_paper['base_supp_qty'] = $join_paper['supp_qty'];
                 $join_paper['nqty'] = 1;
                 $join_paper['handle_type'] = \TDConst::MADE_BY_OWN;
+                $insert_product['name'] = $join_paper['name']; 
+                $insert_product['qty'] = $join_paper['supp_qty']; 
+                $insert_product['made_by'] = \TDConst::MADE_BY_OWN;
+                $insert_product['category'] = 7;
+                $insert_product['design'] = 4;
+                (new \BaseService)->configBaseDataAction($insert_product);
+                $product_id = Product::insertGetId($insert_product);
                 $type_key = \TDConst::PAPER;
                 $data[$type_key][] = $join_paper;
                 $parent_id = (new Paper())->processData(0, $data, $type_key);
                 $code = 'G-'.sprintf("%08s", $parent_id);
-                $arr_update = ['status' => Order::TECH_SUBMITED, 'code' => $code, 'is_join' => 1, 'parent' => 0];
+                $arr_update = ['status' => Order::TECH_SUBMITED, 'code' => $code, 'is_join' => 1, 'parent' => 0, 'product' => $product_id];
                 $update = Paper::where('id', $parent_id)->update($arr_update);  
                 foreach ($papers as $paper_id) {
                     Paper::where('id', $paper_id)->update(['parent' => $parent_id, 'status' => Order::TECH_SUBMITED]);
                 }
+                $paper_obj = Paper::find($parent_id);
+                Product::where('id', $product_id)->update(['code' => 'G-'.sprintf("%08s", $product_id), 'total_cost' => $paper_obj->total_cost, 'total_amount' => $paper_obj->total_cost, 'status' => Order::TECH_SUBMITED, 'order_created' => 1]);
                 if ($update) {
                     return returnMessageAjax(200, 'Đã tạo lệnh in ghép thành công, Mã lệnh: '.$code.'Tên lệnh: '.$join_paper['name'], \StatusConst::RELOAD);
                 }
@@ -375,7 +384,7 @@ use Illuminate\Http\Request;
 
         public function listPrintJoined(Request $request)
         {
-            if (!\GroupUser::isTechApply() && !\GroupUser::isAdmin()) {
+            if (!\GroupUser::isTechApply() && !\GroupUser::isAdmin() && !\GroupUser::isTechHandle()) {
                 return back()->with('error', 'Bạn không có quyền xem lệnh in ghép đã bình !');
             }
             $table = 'papers';

@@ -22,7 +22,7 @@
                             </div>
                         </td>
                         <td>
-                            <span>{{ $data->code }}</span>    
+                            <span>{{ getFieldDataById('code', 'products', $data->product) }}</span>    
                         </td>
                         <td>
                             <span>{{ $data->name }}</span>      

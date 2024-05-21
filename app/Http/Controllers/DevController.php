@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Schema;
 use App\Constants\VariableConstant;
 use App\Models\CDesign;
 use App\Models\Order;
+use App\Models\Paper;
 use App\Models\Product;
 
 class DevController extends Controller
@@ -251,6 +252,22 @@ class DevController extends Controller
                 }
             }
         }
+        dd(1);
+    }
+
+    public function handleJoinPrint()
+    {
+        $paper = Paper::find(587);
+        $insert_product['name'] = $paper->name; 
+        $insert_product['qty'] = $paper->supp_qty; 
+        $insert_product['made_by'] = \TDConst::MADE_BY_OWN;
+        $insert_product['category'] = 7;
+        $insert_product['design'] = 4;
+        (new \BaseService)->configBaseDataAction($insert_product);
+        $product_id = Product::insertGetId($insert_product);
+        $paper->product = $product_id;
+        $paper->save();
+        Product::where('id', $product_id)->update(['code' => 'G-'.sprintf("%08s", $product_id), 'total_cost' => $paper->total_cost, 'total_amount' => $paper->total_cost, 'status' => Order::TECH_SUBMITED, 'order_created' => 1]);
         dd(1);
     }
 

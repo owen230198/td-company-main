@@ -285,6 +285,7 @@ class NGroupUser extends Model
         ],
         self::TECH_HANDLE => [
             self::MODULE['handle_process'],
+            self::MODULE['join_print'],
             self::MODULE['account'],
             self::MODULE['change_password'],
         ],
