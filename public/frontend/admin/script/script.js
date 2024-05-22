@@ -954,6 +954,7 @@ $(function () {
     confirmBuying();
     changeInputPriceBuying();
     confirmBought();
+    confirmImportSupply();
     confirmImportSupplyBuy();
     KCSTakeInReqLoadView();
     closeModalAction();
