@@ -91,9 +91,6 @@ class QuoteService extends BaseService
                         return returnMessageAjax(100, 'Bạn chưa upload file thiết kế đã bình cho sản phẩm '. $data['name']);
                     }
                 }
-                if (NGroupUser::isTechHandle() && empty($data['handle_shape_file'])) {
-                    return returnMessageAjax(100, 'Bạn chưa upload khuôn ép nhũ, thúc nổi, in UV cho sản phẩm '. $data['name']);
-                }
             }
         }
         return returnMessageAjax(200, 'Cập nhật thành công dữ liệu !');
