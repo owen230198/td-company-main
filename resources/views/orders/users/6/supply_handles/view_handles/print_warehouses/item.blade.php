@@ -19,7 +19,7 @@
     $need_qty = [
         'name' => '',
         'type' => 'text',
-        'note' => 'Tổng SL vật tư : ',
+        'note' => 'Tổng SL vật tư cần xuất : ',
         'attr' => ['type_input' => 'number', 'disable_field' => 1,'inject_class' => '__qty_supp_plan __supp_plan_qty_change'],
         'value' => @$supply_obj->supp_qty ?? 0
     ];
@@ -31,10 +31,17 @@
         'value' => 0
     ];
     $total_qty_supp = [
-        'name' => 'c_supply['.$key_supp.']['.$index .'][qty]',
+        'name' => '',
         'type' => 'text',
         'note' => 'Yêu cầu xuất kho : ',
-        'attr' => ['type_input' => 'number', 'inject_class' => '__total_qty_supp_plan plan_input_supp_qty', 'readonly' => 1],
+        'attr' => ['type_input' => 'number', 'inject_class' => '__total_qty_supp_plan', 'readonly' => 1],
+        'value' => 0
+    ];
+    $qty_supp_available = [
+        'name' => 'c_supply['.$key_supp.']['.$index .'][qty]',
+        'type' => 'text',
+        'note' => 'Có thể xuất : ',
+        'attr' => ['type_input' => 'number', 'inject_class' => '__avaliable_qty_supp_plan plan_input_supp_qty', 'readonly' => 1],
         'value' => 0
     ]
 @endphp
@@ -54,6 +61,11 @@
         @include('view_update.view', $need_qty)
         @include('view_update.view', $nqty_supp)
         @include('view_update.view', $total_qty_supp)
+        @include('view_update.view', $qty_supp_available)
+        <div class="align-items-center mb-2 fs-13" style="display: flex">
+            <label class="mb-0 min_210 text-capitalize text-right mr-3">Xuất cho lệnh này : </label>
+            <p class="font_bold __takeout"></p>
+        </div>
         <div class="align-items-center mb-2 fs-13" style="display: flex">
             <label class="mb-0 min_210 text-capitalize text-right mr-3">Còn lại : </label>
             <p class="font_bold __rest"></p>

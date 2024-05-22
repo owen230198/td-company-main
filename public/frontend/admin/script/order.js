@@ -91,6 +91,7 @@ var planGetNeddSupply= function(parent)
     parent.find('.__handle_supply_item').each(function(){
         take += $(this).data('take');
     });
+    console.log({'base': base, 'take':take});
     return base - take;
 }
 
@@ -121,6 +122,9 @@ var planChoseSupplyModule = function()
                     target.fadeIn();
                     target.find('.__inhouse').text(data.inhouse);
                     afterPlanSelectSupply(table, data, target, item, parent);
+                    if (table == 'print_warehouses') {
+                        item.find('input.__qty_supp_plan').val(need);       
+                    }
                 }
                 $('#loader').delay(200).fadeOut(500); 
             })
@@ -159,8 +163,6 @@ var afterPlanSelectSupply = function(table, data, target, item, parent, reset = 
         }else if (table == 'print_warehouses') {
             let nqty_input = target.find('input.__nqty_supp_plan');
             nqty_input.trigger('change');
-            // target.find('.__rest').text(data.inhouse);  
-            // target.find('.__lack').parent().fadeOut();   
         }
     }
 }
@@ -179,6 +181,10 @@ var planAddSupplyHandle = function()
             let select_supply = $(this).find('select.__select_in_warehouse');
             select_supply.attr('readonly', true);
             except_value += ''+select_supply.val()+',';
+            let nqty_input = $(this).find('input.__nqty_supp_plan');
+            if (nqty_input.length > 0) {
+                nqty_input.attr('readonly', true);
+            }
         })
         let url = 'add-select-supply-handle?index='+index+''+param+'&except_value='+except_value;
         ajaxViewTarget(url, ajax_target, ajax_target, 2);
@@ -193,6 +199,10 @@ var planRemoveSupplyHandle = function()
         if (items.length  == 2) {
             items.each(function(){
                 $(this).find('select.__select_in_warehouse').attr('readonly', false);
+                let nqty_input = $(this).find('input.__nqty_supp_plan');
+                if (nqty_input.length > 0) {
+                    nqty_input.attr('readonly', false);
+                }
             })
         }
         $(this).parent().remove();
@@ -211,22 +221,29 @@ var planHandleSupplyQty = function()
         parent.find('input.__total_qty_supp_plan').val(total_supp);
         let inhouse = getEmptyDefault(parent.find('.__inhouse').text(), 0, 'float');
         if (total_supp > 0) {
-            parent.find('.__rest').parent().fadeIn();  
-            if (takeout > inhouse) {
+            parent.find('.__rest').parent().fadeIn();
+            parent.find('.__takeout').parent().fadeIn(); 
+            console.log(total_supp, inhouse);   
+            if (total_supp > inhouse) {
                 parent.find('.__rest').text(0);
                 let lack = total_supp - inhouse;
                 parent.find("input[name*='lack']").val(lack);
+                parent.find('.__takeout').text(inhouse);
+                parent.find('input.__avaliable_qty_supp_plan').val(inhouse);
                 parent.find('.__lack').text(lack);
                 parent.find('.__lack').parent().fadeIn();     
             }else{
-                parent.find('.__rest').text(inhouse - total_supp);
                 parent.find("input[name*='lack']").val(0);
+                parent.find('.__rest').text(inhouse - total_supp);
+                parent.find('.__takeout').text(takeout);
+                parent.find('input.__avaliable_qty_supp_plan').val(takeout);
                 parent.find('.__lack').text(0);
                 parent.find('.__lack').parent().fadeOut();  
             }
             parent.data('take', total_supp);
             updateHandleWareHouse($(this));
         }else{
+            parent.find('.__takeout').parent().fadeOut();
             parent.find('.__rest').parent().fadeOut();  
             parent.find('.__lack').parent().fadeOut();    
         }
