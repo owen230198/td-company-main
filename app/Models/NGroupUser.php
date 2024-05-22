@@ -293,6 +293,7 @@ class NGroupUser extends Model
             self::MODULE['handle_process'],
             self::MODULE['supp_bying_req'],
             self::MODULE['warehouse_management'],
+            self::MODULE['warehouse_provider'],
             self::MODULE['account'],
             self::MODULE['change_password'],
         ],
