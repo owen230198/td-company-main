@@ -21,8 +21,16 @@
             'name' => 'magnet_number',
             'note' => 'Số viên nam châm/hộp',
             'value' => @$data_magnet['qty'],
-            'attr' => ['type_input' => 'number']
+            'attr' => ['type_input' => 'number', 'readonly' => 1]
         ];
+
+        $data_product_qty = [
+            'name' => '',
+            'note' => 'Số lượng sản phẩm',
+            'value' => @$supply_obj->product_qty,
+            'attr' => ['type_input' => 'number', 'disable_field' => 1]
+        ];
+
         $magnet_chose_supp = [
             'name' => 'c_supply[supp_price]',
             'type' => 'linking',
@@ -41,6 +49,9 @@
     @include('view_update.view', $data_select_magnet)
 
     @include('view_update.view', $data_magnet_qty)
+
+    @include('view_update.view', $data_product_qty)
+
     <h3 class="fs-14 text-uppercase border_top_eb pt-3 mt-3 text-center handle_title">
         <span>Xuất vật tư nam châm theo yêu cầu</span>
     </h3>

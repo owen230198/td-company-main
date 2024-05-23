@@ -109,6 +109,7 @@
     if (!function_exists('getHandleSupplyStatus')) {
         function getHandleSupplyStatus($product, $supply, $type)
         {
+            $type = $type == \TDConst::FILL_FINISH ? \TDConst::MAGNET : $type;
             if ($type == \TDConst::PAPER) {
                 $arr_supp_key = [\TDConst::PAPER, \TDConst::NILON, \TDConst::METALAI, \TDConst::COVER];
                 $commands = \DB::table('c_supplies')

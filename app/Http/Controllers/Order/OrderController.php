@@ -387,7 +387,7 @@
                 if (checkUpdateOrderStatus($obj_order->order, Order::MAKING_PROCESS)) {
                     Order::where('id', $obj_order->order)->update($arr_update);
                 }
-                return returnMessageAjax(200, 'Đã gửi lệnh sản xuất xuống xưởng !', getBackUrl());
+                return returnMessageAjax(200, 'Đã gửi lệnh sản xuất xuống xưởng !', url('view/products?default_data=%7B"status"%3A"tech_submited"%7D'));
             }else{
                 return returnMessageAjax(100, 'Đã có lỗi xảy ra, vui lòng thử lại !');
             } 
