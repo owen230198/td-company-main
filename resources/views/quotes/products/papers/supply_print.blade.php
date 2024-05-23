@@ -13,8 +13,8 @@
             'name' => 'product['.$pro_index.']['.$key_supp.']['.$supp_index.'][name]',
             'note' => 'Tên sản phẩm',
             'attr' => ['required' => 1, 
-                        'inject_class' => $supp_index == 0 ? 'length_input quote_receive_paper_name_main' 
-                        : 'length_input quote_receive_paper_name_ext',
+                        'inject_class' => $supp_index == 0 ? 'length_input quote_receive_paper_name_main __quote_receive_name' 
+                        : 'length_input quote_receive_paper_name_ext __quote_receive_name',
                     'disable_field' => !empty($disable_all) || in_array('size_name', @$arr_disable ?? []) ? 1 : 0,
                 'readonly' => !empty($rework)],
             'value' => @$supply_obj->name ?? @$supp_name
