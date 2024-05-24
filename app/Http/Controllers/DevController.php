@@ -297,6 +297,15 @@ class DevController extends Controller
         }
     }
 
+    public function updateCodeSupply()
+    {
+        $products = Product::where('code', '!=', null)->get();
+        foreach ($products as $product) {
+            (new \App\Services\OrderService())->handleCommandCode($product, $product->code);
+        }
+        dd(1);
+    }
+
     public function updateData($request)
     {
         \DB::table($request->input('table'))->where('id', $request->input('id'))->update([$request->input('key') => $request->input('value')]);

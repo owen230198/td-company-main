@@ -50,7 +50,7 @@ use Illuminate\Http\Request;
                 if (!empty($process['code']) && $process['code'] == 100) {
                     return returnMessageAjax(100, $process['message']);  
                 }else{
-                    return returnMessageAjax(200, 'Cập nhật dữ liệu thành công!');       
+                    return returnMessageAjax(200, 'Cập nhật dữ liệu thành công!', getBackUrl());       
                 }
             } 
         }

@@ -75,7 +75,7 @@ class OrderService extends BaseService
 
     public function handleCommandCode($product, $code)
     {
-        $elements = getProductElementData($product['category'], $product['id'], false, true);
+        $elements = getProductElementData($product['category'], $product['id'], false);
         $count = -1;
         foreach ($elements as $element) {
             if (!empty($element['data'])) {
