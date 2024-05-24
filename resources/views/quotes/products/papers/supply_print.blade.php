@@ -65,7 +65,7 @@
     
     <h3 class="fs-14 text-uppercase border_top_eb pt-3 mt-3 mb-4 text-center handle_title d-flex align-items-center justify-content-center">
         <span class="mr-2">{{ $is_from_partner ? ($supp_index == 0 ? 'Sản phẩm mua ngoài' : 'Sản phẩm mua ngoài thứ '.$supp_index + 1 ) : ($supp_index == 0 ? 'Phần giấy in' : 'Lệnh in thêm thứ '.$supp_index )}}</span>
-        @if (!empty($supply_obj->id))
+        @if (!empty($supply_obj->id) && @$supply_obj->handle_type == \TDConst::MADE_BY_OWN)
             <a href="{{ url('print-data/'.$supp_view.'/'.$supply_obj->id) }}" target="_blank" class="main_button color_white bg_green border_green radius_5 font_bold sooth">
                 <i class="fa fa-print mr-2 fs-14" aria-hidden="true"></i> In lệnh
             </a>

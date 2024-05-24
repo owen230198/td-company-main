@@ -5,6 +5,7 @@
         $carton_divide = \TDConst::CARTON_SIZE_DIVIDE;
         $carton_compen_percent = (float) getDataConfig('QuoteConfig', 'CARTON_COMPEN_PERCENT');
         $carton_plus = \TDConst::CARTON_SIZE_PLUS;
+        $disable_all = true;
     @endphp
     @include('quotes.products.supplies.title_config', ['divide' => $carton_divide, 'name' => $key_supp])
 

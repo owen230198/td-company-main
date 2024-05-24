@@ -104,6 +104,7 @@ var planChoseSupplyModule = function()
         let item = $(this).closest('.__handle_supply_item');
         item.data('take', 0);
         let need = planGetNeddSupply(parent);
+        console.log(need);
         let table = parent.data('table');
         let target = item.find('.__handle_supply_detail_ajax');
         let value = $(this).val();
@@ -231,16 +232,17 @@ var planHandleSupplyQty = function()
                 parent.find('.__takeout').text(inhouse);
                 parent.find('input.__avaliable_qty_supp_plan').val(inhouse);
                 parent.find('.__lack').text(lack);
-                parent.find('.__lack').parent().fadeIn();     
+                parent.find('.__lack').parent().fadeIn();
+                parent.data('take', inhouse);     
             }else{
                 parent.find("input[name*='lack']").val(0);
                 parent.find('.__rest').text(inhouse - total_supp);
                 parent.find('.__takeout').text(takeout);
                 parent.find('input.__avaliable_qty_supp_plan').val(takeout);
                 parent.find('.__lack').text(0);
-                parent.find('.__lack').parent().fadeOut();  
+                parent.find('.__lack').parent().fadeOut();
+                parent.data('take', total_supp);  
             }
-            parent.data('take', total_supp);
             updateHandleWareHouse($(this));
         }else{
             parent.find('.__takeout').parent().fadeOut();
