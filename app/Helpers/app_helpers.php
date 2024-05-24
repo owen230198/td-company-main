@@ -350,13 +350,13 @@ if (!function_exists('currentModule')) {
 if (!function_exists('getCharacter')) {
     function getCharaterByNum($num)
     {
-        $alpha = "";
+        $result = '';
         while ($num >= 0) {
-            $rem = $num % 26;
-            $alpha = chr($rem + 65) . $alpha;
-            $num = floor($num / 26) - 1;
+            $remainder = $num % 26;
+            $result = chr(65 + $remainder) . $result;
+            $num = intdiv($num, 26) - 1;
         }
-        return $alpha;
+        return $result;
     }
 }
 

@@ -32,6 +32,11 @@ select.muptiple_select option {
     color: #419512;
 }
 
+.w_220{
+    width: 140px;
+    text-transform: lowercase;
+}
+
 .header {
     height: 55px;
     padding: 5px;

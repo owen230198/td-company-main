@@ -7,7 +7,6 @@ use App\Models\Product;
 use \App\Models\CDesign;
 use \App\Models\CSupply;
 use App\Models\OtherWarehouse;
-use App\Models\Paper;
 use App\Models\PrintWarehouse;
 use App\Models\Supply;
 use App\Models\SupplyWarehouse;
@@ -85,8 +84,8 @@ class OrderService extends BaseService
                     $table_supply = $element['table'];
                     $data_update['status'] = \StatusConst::NOT_ACCEPTED;
                     $count++;
-                    $code =  $code.getCharaterByNum($count);
-                    $data_update['code'] = $code;
+                    $_code =  $code.getCharaterByNum($count);
+                    $data_update['code'] = $_code;
                     getModelByTable($table_supply)->where('id', $supply->id)->update($data_update);
                 }
             }

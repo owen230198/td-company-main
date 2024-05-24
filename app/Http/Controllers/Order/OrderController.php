@@ -387,7 +387,7 @@
                 if (checkUpdateOrderStatus($obj_order->order, Order::MAKING_PROCESS)) {
                     Order::where('id', $obj_order->order)->update($arr_update);
                 }
-                return returnMessageAjax(200, 'Đã gửi lệnh sản xuất xuống xưởng !', url('view/products?default_data=%7B"status"%3A"tech_submited"%7D'));
+                return returnMessageAjax(200, 'Đã gửi lệnh sản xuất xuống xưởng !', url('view/products?default_data=%7B"status"%3A"'.Order::TECH_SUBMITED.'"%7D'));
             }else{
                 return returnMessageAjax(100, 'Đã có lỗi xảy ra, vui lòng thử lại !');
             } 
@@ -395,9 +395,22 @@
 
         public function printData($table, $id)
         {
-            $data['data_item'] = \DB::table($table)->find($id);
+            $data_item = \DB::table($table)->find($id);
+            $data['data_item'] = $data_item;
             if (empty($data['data_item'])) {
                 return back()->with('error', 'Dữ liệu không tồn tại hoặc đã bị xóa !');    
+            }
+            if ($table == 'products') {
+                if (!empty($data_item->made_by)) {
+                    return back()->with('error', 'Sản phẩm này sản xuất từ đơn vị khác !');
+                }
+                $data['data_table']['papers'] = \DB::table('papers')->where(['product' => $id, 'handle_type' => \TDConst::MADE_BY_OWN])->get();
+                $data['data_table']['supplies'] = \DB::table('supplies')->where('product', $id)->get();
+                $data['data_table']['fill_finishes'] = \DB::table('fill_finishes')->where('product', $id)->get();
+                $data['return_time'] = getFieldDataById('return_time', 'orders', $data_item->order);
+            }else{
+                $data_product = \DB::table('products')->find($data_item->product);
+                $data['return_time'] = getFieldDataById('return_time', 'orders', $data_product->order);
             }
             $view_path = 'print_data.'.$table.'.view';
             if (!view()->exists($view_path)) {

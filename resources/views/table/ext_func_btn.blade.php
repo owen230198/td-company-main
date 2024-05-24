@@ -24,7 +24,7 @@
             $link = $link.''.$data->id;    
         }
     @endphp
-    <a href="{{ url(@$link) }}" class="table-btn mr-2 mb-2" title="{{ @$button['note'] }}">
+    <a href="{{ url(@$link) }}" class="table-btn mr-2 mb-2" title="{{ @$button['note'] }}" {{ !empty($button['blank']) ? 'target=blank' : '' }}>
         <i class="fa fa-{{ $button['icon'] }} fs-14" aria-hidden="true"></i>
     </a>
 @endif
