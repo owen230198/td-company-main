@@ -409,8 +409,10 @@
                 $data['data_table']['fill_finishes'] = \DB::table('fill_finishes')->where('product', $id)->get();
                 $data['return_time'] = getFieldDataById('return_time', 'orders', $data_item->order);
             }else{
-                $data_product = \DB::table('products')->find($data_item->product);
-                $data['return_time'] = getFieldDataById('return_time', 'orders', $data_product->order);
+                if (!empty($data_item->product)) {
+                    $data_product = \DB::table('products')->find($data_item->product);
+                    $data['return_time'] = getFieldDataById('return_time', 'orders', $data_product->order);
+                }
             }
             $view_path = 'print_data.'.$table.'.view';
             if (!view()->exists($view_path)) {
