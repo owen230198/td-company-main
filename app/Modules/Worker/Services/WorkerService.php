@@ -139,9 +139,9 @@ class WorkerService extends BaseService
                 }
             }
             
-            //kiểm xem đã hoàn thành tất cả các công đoạn chưa thì update trạng thái của vật tư
+            //kiểm tra xem đã hoàn thành tất cả các công đoạn chưa thì update trạng thái của lệnh
             WSalary::checkStatusUpdate($table_supply, $supply->id, \StatusConst::SUBMITED);
-            //kiểm tra và update trạng thái hoàn tất công đoạn trong vật tư
+            //kiểm tra và update trạng thái hoàn tất công đoạn trong lệnh
             $arr_where = ['table_supply' =>$table_supply, 'supply' => $supply->id, 'type' => $type, 'status' => \StatusConst::SUBMITED];
             $data_handle['handle_qty'] = $handle_qty - $qty;
             $data_handle['act'] = 2;
@@ -166,6 +166,7 @@ class WorkerService extends BaseService
         if ($qty > $handle_qty) {
             return returnMessageAjax(100, 'Số lượng chấm công không hợp lệ !');
         }elseif ((int) $qty == 0) {
+            //Trả lại trạng thái treo lệnh nếu nhập số lượng hoàn thành là 0
             $data_update['status'] = \StatusConst::NOT_ACCEPTED;
             $data_update['worker'] = 0;
             $ret = $obj->update($data_update);
@@ -189,7 +190,6 @@ class WorkerService extends BaseService
             }
             if ($type == \TDConst::PRINT) {
                 $table_after_print = 'after_prints';
-                $after_print['code'] = 'QC-'.getCodeInsertTable($table_after_print);
                 $after_print['name'] = $supply->name;
                 $after_print['w_salary'] = $data_command->id;
                 $after_print['worker'] = $worker['id'];
@@ -197,9 +197,11 @@ class WorkerService extends BaseService
                 $after_print['status'] = \StatusConst::PROCESSING;
                 $after_print['created_by'] = $worker['id'];
                 (new \BaseService)->configBaseDataAction($after_print, 'worker_login');
-                $insert = \DB::table($table_after_print)->insert($after_print);
+                $after_prints = \DB::table($table_after_print);
+                $insert_id = $after_prints->insertGetId($after_print);
                 $update = $obj->update(['status' => \StatusConst::CHECKING]);
-                if ($insert) {
+                if ($insert_id) {
+                    $after_prints->where('id', $insert_id)->update(['code' => 'QC-'.sprintf("%08s", $insert_id)]);
                     return returnMessageAjax(200, 'Đã gửi yêu cầu duyệt chấm công đến bộ phận KCS sau in !', url('Worker'));
                 }else{
                     return returnMessageAjax(100, 'Có lỗi xảy ra, vui lòng thử chấm công lại !'); 

@@ -23,7 +23,6 @@ class QuoteService extends BaseService
             Customer::getInsertCode($customer_id);
             logActionUserData('insert', 'customers', $customer_id);
         }
-        $data_quote['seri'] = 'BG-'.getCodeInsertTable('quotes');
         $data_quote['customer_id'] = $customer_id;
         $data_quote['company_name'] = $data_customer['name'];
         return $data_quote;

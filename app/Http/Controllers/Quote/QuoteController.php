@@ -75,7 +75,6 @@ class QuoteController extends Controller
         $data_products = Product::where('quote_id', $id)->get()->makeHidden($hidden_clone_field)->toArray();
         unset($data_quote['id']);
         $this->services->configBaseDataAction($data_quote);
-        $data_quote['seri'] = 'BG-'.getCodeInsertTable('quotes');
         $data_quote['status'] = \StatusConst::NOT_ACCEPTED;
         $quote_id = Quote::insertGetId($data_quote);
         Quote::where('id', $quote_id)->update(['seri' => 'BG-'.sprintf("%08s", $quote_id)]);
