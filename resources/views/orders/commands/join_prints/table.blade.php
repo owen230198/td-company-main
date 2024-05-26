@@ -11,10 +11,16 @@
                 </th>
                 <th class="font-bold fs-13">Mã lệnh</th>
                 <th class="font-bold fs-13">Tên lệnh</th>
+                <th class="font-bold fs-13">Số lượng</th>
+                <th class="font-bold fs-13">Người tạo</th>
+                <th class="font-bold fs-13">Trạng thái</th>
                 <th class="font-bold fs-13">Các sản phẩm được in ghép trong cùng lệnh in</th>
             </tr>
             <tbody>
                 @foreach ($data_tables as $key => $data)
+                    @php
+                        $product = \DB::table('products')->find($data->product);
+                    @endphp
                     <tr>
                         <td class="text-center">
                             <div class="d-flex align-items-center justify-content-center">
@@ -22,10 +28,19 @@
                             </div>
                         </td>
                         <td>
-                            <span>{{ getFieldDataById('code', 'products', $data->product) }}</span>    
+                            <span>{{ @$product->code }}</span>    
                         </td>
                         <td>
                             <span>{{ $data->name }}</span>      
+                        </td>
+                        <td>
+                            <span>{{ $data->supp_qty }}</span>      
+                        </td>
+                        <td>
+                            <span>{{ getFieldDataByID('name', 'n_users', $data->created_by) }}</span>      
+                        </td>
+                        <td class="text-center">
+                            <span>{{ \App\Models\Order::getNameStatus($product->status) }}</span>    
                         </td>
                         <td>
                             <div class="list_child_print_join">
@@ -45,6 +60,7 @@
                                 @endforeach
                             </div>     
                         </td>
+                        
                     </tr>
                 @endforeach
             </tbody>

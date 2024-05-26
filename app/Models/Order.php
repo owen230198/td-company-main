@@ -19,6 +19,21 @@
         const NEW_SRC = 1;
         const CLONE_SRC = 2;
 
+        static function getNameStatus($key)
+        {
+            switch ($key) {
+                case self::TECH_SUBMITED:
+                    return 'Chờ kế hoạch xử lí';
+                    break;
+                case self::MAKING_PROCESS:
+                    return 'Đang sản xuất';
+                    break;
+                default:
+                    return 'Không xác định';
+                    break;
+            }
+        }
+
         // Role
         static function getRole()
         {
