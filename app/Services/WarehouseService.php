@@ -31,7 +31,7 @@
         {
             $data_log['table'] = $this->table;
             $data_log['created_by'] = \User::getCurrent('id');
-            $data_log['created_at'] = date('Y-m-d H:i:s', Time()); 
+            $data_log['created_at'] = \Carbon\Carbon::now(); 
         }
 
         public function insert($param, $type_request = 0)

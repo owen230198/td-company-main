@@ -10,10 +10,10 @@ class BaseService
 	{
 		if (empty($data['id'])) {
 			$data['created_by'] = @getSessionUser($key_login)['id'];
-			$data['created_at'] = date('Y-m-d H:i:s', Time());
+			$data['created_at'] = \Carbon\Carbon::now();
 			$data['act'] = isset($data['act']) ? $data['act'] : 1;
 		}
-		$data['updated_at'] = date('Y-m-d H:i:s', Time());
+		$data['updated_at'] = \Carbon\Carbon::now();
 	}
 
 	public function validateDataTable($field, $attr, $value, $data)

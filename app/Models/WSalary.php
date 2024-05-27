@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Models;
+
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class WSalary extends Model
@@ -183,10 +185,11 @@ class WSalary extends Model
         foreach ($c_reworks as $c_rework) {
             if ($c_rework->status != \StatusConst::SUBMITED) {
                 $bool = false;
+                break;
             }
         }
         if ($bool) {
-            $arr_update = ['status' => $status, 'updated_at' => date('Y-m-d H:i:s', Time())];
+            $arr_update = ['status' => $status, 'updated_at' => \Carbon\Carbon::now()];
             $update = Product::where('id', $product_id)->update($arr_update);
             if ($update) {
                 $data_product = Product::find($product_id);
@@ -202,9 +205,10 @@ class WSalary extends Model
         }
     }
 
-    static function checkStatusUpdate($table, $id, $status)
+    static function checkStatusUpdate($table, $supply_id, $status)
     {
-        $list_command = WSalary::where(['table_supply' => $table, 'supply' => $id])->get();
+        $supply_obj = getModelByTable($table)->find($supply_id);
+        $list_command = WSalary::where(['table_supply' => $table, 'supply' => $supply_id])->get();
         $bool = true;
         foreach ($list_command as $command) {
             if (@$command->status != $status) {
@@ -212,16 +216,26 @@ class WSalary extends Model
                 break;
             }
         }
-        if ($bool) {
-            $supply_obj = getModelByTable($table)->where('id', $id);
-            $arr_update = ['status' => $status, 'updated_at' => date('Y-m-d H:i:s', Time())];
-            $update_supply = $supply_obj->update($arr_update);
-            if ($update_supply) {
-                $data_supply = $supply_obj->first();
-                if (!empty($data_supply) && WSalary::where('product', $data_supply->id)->where('status', '!=', $status)->count() == 0) 
-                {
-                    self::checkSubmitedProduct($data_supply->id);    
+        if ($bool && !empty($supply_obj)) {
+            $supply_obj->status = $status;
+            $supply_obj->updated_at = \Carbon\Carbon::now();
+            $supply_obj->save();
+            if ($table =='papers' && @$supply_obj->is_join == 1) {
+                $paper_childs = Paper::where('parent', $supply_id)->get();   
+                foreach ($paper_childs as $paper_child) {
+                    self::checkStatusUpdate('papers', $paper_child->id, $status);
                 }
+            }
+            $product_bool = true;
+            $product_id =  $supply_obj->product;
+            foreach (Product::$childTable as $table) {
+                if (getModelByTable($table)::where('product', $product_id)->where('status', '!=', $status)->count() > 0) {
+                    $product_bool = false;
+                    break;
+                }
+            }
+            if ($product_bool) {
+                self::checkSubmitedProduct($supply_id);
             }
         }
         return true;

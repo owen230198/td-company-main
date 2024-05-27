@@ -59,6 +59,18 @@
                 'other_data' => ['role_update' => [\GroupUser::TECH_HANDLE, \GroupUser::TECH_APPLY], 'field_name' => 'handle_shape_file']
             ]
         ];
+
+        static function getAllSupplyWhere($where)
+        {
+            $ret = [];
+            if (!empty($where)) {
+                foreach (self::$childTable as $table) {
+                    $data = getModelByTable($table)::where($where)->get()->toArray();
+                    $ret = array_merge($ret, $data);
+                }
+            }    
+            return $ret;
+        }
         
         static function getFeildFileByStage($stage, $data)
         {
@@ -86,7 +98,7 @@
                     'design_file' => $arr_fields['design_file'],
                     'design_shape_file' => $arr_fields['design_shape_file'],
                     'handle_shape_file' => $arr_fields['handle_shape_file']
-                ]; 
+                ];
             };
             return $arr_fields;
         }

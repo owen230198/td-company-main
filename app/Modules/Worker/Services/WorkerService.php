@@ -92,7 +92,7 @@ class WorkerService extends BaseService
                 $data_update = $obj_salary->getBaseSalaryPaper($qty);
                 break;
         }
-        $data_update['status'] = \StatusConst::SUBMITED;
+        // $data_update['status'] = \StatusConst::SUBMITED;
         $data_update['qty'] = $qty;
         $data_update['submited_at'] = \Carbon\Carbon::now();
         $update = $obj->update($data_update);
@@ -141,9 +141,9 @@ class WorkerService extends BaseService
             
             //kiểm tra xem đã hoàn thành tất cả các công đoạn chưa thì update trạng thái của lệnh
             WSalary::checkStatusUpdate($table_supply, $supply->id, \StatusConst::SUBMITED);
-            //kiểm tra và update trạng thái hoàn tất công đoạn trong lệnh
-            $arr_where = ['table_supply' =>$table_supply, 'supply' => $supply->id, 'type' => $type, 'status' => \StatusConst::SUBMITED];
+            dd($data_handle['handle_qty']);
             $data_handle['handle_qty'] = $handle_qty - $qty;
+            dd($data_handle['handle_qty']);
             $data_handle['act'] = 2;
             \DB::table($table_supply)->where('id', $supply->id)->update([$type => json_encode($data_handle)]);
             return $update;
