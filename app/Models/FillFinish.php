@@ -55,7 +55,8 @@ class FillFinish extends Model
     public function processData($product_id, $product, $type)
     {
         $data = $product[$type];
-        $data_process = $this->getDataActionFillFinish($data);
+        $dataItem = !empty($data['id']) ? FillFinish::find($data['id']) : '';
+        $data_process = $this->getDataActionFillFinish($data, $dataItem);
         $data_process['product_qty'] = $product['qty'];
         $data_process['product'] = $product_id;
         (new BaseService)->configBaseDataAction($data_process);

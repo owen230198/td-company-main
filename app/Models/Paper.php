@@ -68,7 +68,8 @@ class Paper extends Model
                     $process = Product::insert($process_product);
                 }
             }else{
-                $data_process = $this->getDataActionPaper($paper);
+                $dataItem = !empty($paper['id']) ? Paper::find($paper['id']) : '';
+                $data_process = $this->getDataActionPaper($paper, $dataItem);
                 $data_process['name'] = $paper['name'];
                 $data_process['product_qty'] = $paper['qty'];
                 $data_process['product'] = $product_id;

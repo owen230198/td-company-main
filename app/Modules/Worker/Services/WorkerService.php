@@ -143,7 +143,6 @@ class WorkerService extends BaseService
             WSalary::checkStatusUpdate($table_supply, $supply->id, \StatusConst::SUBMITED);
             dd($data_handle['handle_qty']);
             $data_handle['handle_qty'] = $handle_qty - $qty;
-            dd($data_handle['handle_qty']);
             $data_handle['act'] = 2;
             \DB::table($table_supply)->where('id', $supply->id)->update([$type => json_encode($data_handle)]);
             return $update;

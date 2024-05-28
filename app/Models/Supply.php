@@ -55,7 +55,8 @@ class Supply extends Model
     {
         $data = $product[$type];
         foreach ($data as $supply) {
-            $data_process = $this->getDataActionSupply($supply, $type);
+            $dataItem = !empty($supply['id']) ? Supply::find($supply['id']) : '';
+            $data_process = $this->getDataActionSupply($supply, $type, $dataItem);
             $data_process['name'] = @$supply['name'];
             $data_process['product_qty'] = $supply['qty'];
             $data_process['nqty'] = $supply['nqty'];

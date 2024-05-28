@@ -339,18 +339,24 @@
             if (!\GroupUser::isPlanHandle()) {
                 return returnMessageAjax(110, 'Bạn không có quyền duyệt sản xuất !');     
             }
-            if (@$obj_order->status != Order::TECH_SUBMITED) {
-                return returnMessageAjax(110, 'Dữ liệu không hợp lệ !');
+            // if (@$obj_order->status != Order::TECH_SUBMITED) {
+            //     return returnMessageAjax(110, 'Dữ liệu không hợp lệ !');
+            // }
+            $elenemt_checks = $elements = getProductElementData($obj_order->category, $obj_order->id, true, true);
+            foreach ($elenemt_checks as $elenemt_check) {
+                if (!empty($elenemt_check['data'])) {
+                    $check_data = $elenemt_check['data'];
+                    foreach ($check_data as $supply_check) {
+                        if (getHandleSupplyStatus($supply_check->product, $supply_check->id, @$elenemt_check['pro_field']) != CSupply::HANDLED) {
+                            return returnMessageAjax(100, 'Vật tư '.getSupplyNameByKey($elenemt_check['pro_field']).' vẫn chưa được kế toán duyệt xuất !');
+                        }
+                    }
+                }
             }
-            $elements = getProductElementData($obj_order->category, $obj_order->id, true, true);
+            $elements = getProductElementData($obj_order->category, $obj_order->id, true, false);
             foreach ($elements as $element) {
                 if (!empty($element['data'])) {
                     $el_data = $element['data'];
-                    foreach ($el_data as $supply_check) {
-                        if (getHandleSupplyStatus($supply_check->product, $supply_check->id, @$element['pro_field']) != CSupply::HANDLED) {
-                            return returnMessageAjax(100, 'Vật tư '.getSupplyNameByKey($element['pro_field']).' vẫn chưa được kế toán duyệt xuất !');
-                        }
-                    }
                     foreach ($el_data as $supply) {
                         $table_supply = $element['table'];
                         $data_command = getStageActiveStartHandle($table_supply, $supply->id);
@@ -361,6 +367,7 @@
                         if ($type != \StatusConst::SUBMITED && $update && (int) @$data_handle['handle_qty'] > 0) {
                             $data_command['qty'] = $data_handle['handle_qty'];
                             $code = $supply->code;
+                            
                             if ($type == \TDConst::FILL && !empty($data_handle['stage'])) {
                                 foreach ($data_handle['stage'] as $fillkey => $stage) {
                                     $data_command['name'] = $obj_order->name.'('.getFieldDataById('name', 'materals', @$stage['materal']).')';

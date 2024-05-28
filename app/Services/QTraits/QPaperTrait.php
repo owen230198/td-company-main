@@ -119,15 +119,11 @@ trait QPaperTrait
         return $obj;
     }
 
-    private function getDataActionPaper($data)
+    private function getDataActionPaper($data, $dataItem)
     {
         $data['supp_qty'] = !empty($data['supp_qty']) ? (int) $data['supp_qty'] - getPlusPaperNumber() : 0;
         $data['base_supp_qty'] = !empty($data['base_supp_qty']) ? (int) $data['base_supp_qty'] - (int) getDataConfig('QuoteConfig', 'PLUS_TO_DEVICE_WORKER') : 0;
         $this->newObjectSetProperty($data);
-        if (!empty($data['size'])) {
-            $data_action['size'] = $this->configDataSizePaper($data['size']);
-        }
-
         $handle_type = (int) @$data['handle_type'];
         $data_action['handle_type'] = $handle_type;
         $data_action['note'] = @$data['note'];
@@ -136,9 +132,14 @@ trait QPaperTrait
             $data_action['double'] = !empty($data['double']) ? 1 : 0;
             $data_action['compent_percent'] = @$data['compent_percent'] ?? 0;
             $data_action['compent_plus'] = @$data['compent_plus'] ?? 0;
+            if (!empty($data['size'])) {
+                $data_action['size'] = $this->configDataSizePaper($data['size']);
+            }
             $handle_arr = getArrHandleField('papers');
             foreach ($handle_arr as $stage) {
                 if (!empty($data[$stage])) {
+                    $item_stage = !empty($dataItem[$stage]) ? json_decode($dataItem[$stage],true) : []; 
+                    $data[$stage]['handled_qty'] = @$item_stage['handled_qty'] ?? 0;
                     if ($stage == \TDConst::PRINT) {
                         $data_action[$stage] = $this->configDataPrint($data[$stage]);
                     }elseif (in_array($stage, [\TDConst::COMPRESS, \TDConst::FLOAT])) {

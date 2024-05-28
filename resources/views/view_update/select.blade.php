@@ -11,8 +11,9 @@
 	{{ @$attr['inject_class'] ? ' '.$attr['inject_class'] : '' }}
 	{{ @$attr['class_on_search'] ? ' '.$attr['class_on_search'] : '' }}" 
 	{{ @$attr['disable_field'] == 1 ? 'disabled' : '' }}
-	{{ @$attr['placeholder'] ? 'placehoder='.$attr['placeholder'] : '' }} {{ @$attr['inject_attr'] ?? '' }}
 	{{ @$attr['readonly'] == 1 ? 'readonly' : '' }}
+	{{ @$attr['placeholder'] ? 'placehoder='.$attr['placeholder'] : '' }} 
+	{{ @$attr['inject_attr'] ?? '' }}
 	{{ $multiple ? 'multiple' : '' }}>
 		@foreach ($list_options as $key => $option)
 			<option value="{{ $key }}" {{ @$value == $key ? 'selected' : '' }}>
