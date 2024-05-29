@@ -339,9 +339,9 @@
             if (!\GroupUser::isPlanHandle()) {
                 return returnMessageAjax(110, 'Bạn không có quyền duyệt sản xuất !');     
             }
-            // if (@$obj_order->status != Order::TECH_SUBMITED) {
-            //     return returnMessageAjax(110, 'Dữ liệu không hợp lệ !');
-            // }
+            if (@$obj_order->status != Order::TECH_SUBMITED) {
+                return returnMessageAjax(110, 'Dữ liệu không hợp lệ !');
+            }
             $elenemt_checks = $elements = getProductElementData($obj_order->category, $obj_order->id, true, true);
             foreach ($elenemt_checks as $elenemt_check) {
                 if (!empty($elenemt_check['data'])) {
@@ -354,6 +354,7 @@
                 }
             }
             $elements = getProductElementData($obj_order->category, $obj_order->id, true, false);
+            
             foreach ($elements as $element) {
                 if (!empty($element['data'])) {
                     $el_data = $element['data'];
@@ -367,7 +368,6 @@
                         if ($type != \StatusConst::SUBMITED && $update && (int) @$data_handle['handle_qty'] > 0) {
                             $data_command['qty'] = $data_handle['handle_qty'];
                             $code = $supply->code;
-                            
                             if ($type == \TDConst::FILL && !empty($data_handle['stage'])) {
                                 foreach ($data_handle['stage'] as $fillkey => $stage) {
                                     $data_command['name'] = $obj_order->name.'('.getFieldDataById('name', 'materals', @$stage['materal']).')';

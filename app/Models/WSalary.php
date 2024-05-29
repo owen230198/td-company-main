@@ -221,7 +221,7 @@ class WSalary extends Model
             $supply_obj->updated_at = \Carbon\Carbon::now();
             $supply_obj->save();
             if ($table =='papers' && @$supply_obj->is_join == 1) {
-                $paper_childs = Paper::where('parent', $supply_id)->get();   
+                $paper_childs = Paper::where('parent', $supply_id)->get();
                 foreach ($paper_childs as $paper_child) {
                     self::checkStatusUpdate('papers', $paper_child->id, $status);
                 }
@@ -235,7 +235,7 @@ class WSalary extends Model
                 }
             }
             if ($product_bool) {
-                self::checkSubmitedProduct($supply_id);
+                self::checkSubmitedProduct($product_id);
             }
         }
         return true;

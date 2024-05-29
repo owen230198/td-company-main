@@ -95,7 +95,7 @@ trait QSupplyTrait
    public function getDataActionFillFinish($data, $dataItem)
    {
       $this->newObjectSetProperty($data);
-      $handle_arr = getArrHandleField('supplies');
+      $handle_arr = getArrHandleField('fill_finishes');
       foreach ($handle_arr as $stage) {
          if (!empty($data[$stage])) {
             $item_stage = !empty($dataItem[$stage]) ? json_decode($dataItem[$stage], true) : [];
