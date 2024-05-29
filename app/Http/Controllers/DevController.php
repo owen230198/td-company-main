@@ -306,6 +306,15 @@ class DevController extends Controller
         dd(1);
     }
 
+    public function reApplyToWorkerProduct()
+    {
+        $products = Product::where('status', Order::MAKING_PROCESS)->get();
+        foreach ($products as $product) {
+            (new \App\Services\OrderService())->createWorkerCommand($product);
+        }
+        dd(1);
+    }
+
     public function updateData($request)
     {
         \DB::table($request->input('table'))->where('id', $request->input('id'))->update([$request->input('key') => $request->input('value')]);

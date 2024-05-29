@@ -342,7 +342,7 @@
             if (@$obj_order->status != Order::TECH_SUBMITED) {
                 return returnMessageAjax(110, 'Dữ liệu không hợp lệ !');
             }
-            $elenemt_checks = $elements = getProductElementData($obj_order->category, $obj_order->id, true, true);
+            $elenemt_checks = getProductElementData($obj_order->category, $obj_order->id, true, true);
             foreach ($elenemt_checks as $elenemt_check) {
                 if (!empty($elenemt_check['data'])) {
                     $check_data = $elenemt_check['data'];
@@ -353,42 +353,8 @@
                     }
                 }
             }
-            $elements = getProductElementData($obj_order->category, $obj_order->id, true, false);
-            
-            foreach ($elements as $element) {
-                if (!empty($element['data'])) {
-                    $el_data = $element['data'];
-                    foreach ($el_data as $supply) {
-                        $table_supply = $element['table'];
-                        $data_command = getStageActiveStartHandle($table_supply, $supply->id);
-                        $type = $data_command['type'];
-                        $data_update['status'] = $type;
-                        $update = getModelByTable($table_supply)->where('id', $supply->id)->update($data_update);
-                        $data_handle = !empty($data_command['handle']) ? $data_command['handle'] : [];
-                        if ($type != \StatusConst::SUBMITED && $update && (int) @$data_handle['handle_qty'] > 0) {
-                            $data_command['qty'] = $data_handle['handle_qty'];
-                            $code = $supply->code;
-                            if ($type == \TDConst::FILL && !empty($data_handle['stage'])) {
-                                foreach ($data_handle['stage'] as $fillkey => $stage) {
-                                    $data_command['name'] = $obj_order->name.'('.getFieldDataById('name', 'materals', @$stage['materal']).')';
-                                    $data_command['fill_handle'] = json_encode($stage);
-                                    $data_command['handle'] = $stage;
-                                    $data_command['machine_type'] = getFieldDataById('type', 'devices', $stage['machine']);
-                                    $data_command['fill_materal'] = $stage['materal'];
-                                    $fill_code = $code.''.getCharaterByNum($fillkey);
-                                    WSalary::commandStarted($fill_code, $data_command, $table_supply, $supply);
-                                }
-                            }else{
-                                if (!empty($data_handle['machine'])) {
-                                    $data_command['name'] = getNameCommandWorker($supply, $obj_order->name);
-                                    WSalary::CommandStarted($code, $data_command, $table_supply, $supply); 
-                                }   
-                            }
-                        }
-                    }
-                }
-            }
-            if (!empty($update)) {
+            $process = $this->services->createWorkerCommand($obj_order);
+            if ($process) {
                 $arr_update = ['status' => Order::MAKING_PROCESS];
                 $table_data->update($arr_update);
                 if (checkUpdateOrderStatus($obj_order->order, Order::MAKING_PROCESS)) {
