@@ -442,8 +442,8 @@ use Illuminate\Http\Request;
                         (new \BaseService)->configBaseDataAction($data_rework);
                         \DB::table('c_reworks')->insert($data_rework);
                     }
-                    // $obj_salary->update(['qty' => $bad_qty]);
-                    // $obj->status = \StatusConst::SUBMITED;
+                    $obj_salary->update(['bad_qty' => $bad_qty, 'status' => \StatusConst::SUBMITED]);
+                    $obj->status = \StatusConst::SUBMITED;
                     $obj->save();
                     return returnMessageAjax(200, "Đã xử lý KCS lệnh in ".$data_salary->name." thành công cho công nhân ". $worker['name'], \StatusConst::RELOAD);
                 }else{

@@ -92,7 +92,7 @@ class WorkerService extends BaseService
                 $data_update = $obj_salary->getBaseSalaryPaper($qty);
                 break;
         }
-        // $data_update['status'] = \StatusConst::SUBMITED;
+        $data_update['status'] = \StatusConst::SUBMITED;
         $data_update['qty'] = $qty;
         $data_update['submited_at'] = \Carbon\Carbon::now();
         $update = $obj->update($data_update);
@@ -141,10 +141,16 @@ class WorkerService extends BaseService
             
             //kiểm tra xem đã hoàn thành tất cả các công đoạn chưa thì update trạng thái của lệnh
             WSalary::checkStatusUpdate($table_supply, $supply->id, \StatusConst::SUBMITED);
-            dd($data_handle['handle_qty']);
-            $data_handle['handle_qty'] = $handle_qty - $qty;
-            $data_handle['act'] = 2;
-            \DB::table($table_supply)->where('id', $supply->id)->update([$type => json_encode($data_handle)]);
+            $data_handled = !empty($data_handle['handled']) ? $data_handle['handled'] : 0;
+            $data_handle['handled'] = $data_handled + $qty;
+            $update_supply[$type] = $data_handle;
+            $supply_obj = getModelByTable($table_supply)->find($supply->id);
+            if ($data_handle['handled'] >= $handle_qty) {
+                $data_handle['act'] = 2;
+                $supply_obj->status = @$next_data['type'];
+            }
+            $supply_obj->{$type} = json_encode($data_handle);
+            $supply_obj->save();
             return $update;
         }else{
             return false;

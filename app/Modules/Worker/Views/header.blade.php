@@ -30,7 +30,7 @@
             <ul class="d-flex justify-content-end">
                 <li class="d-inline-block color_green mr-2 pr-2 border_right">
                     <i class="fa fa-user fs-15" aria-hidden="true"></i>
-                    <a href="{{ url('change-password/w_users') }}" class="color_green">{{ $worker_login['name'] }}</a>
+                    <a href="{{ url('Worker/change-password') }}" class="color_green">{{ $worker_login['name'] }}</a>
                 </li>
                 <li class="d-inline-block color_green">
                     <i class="fa fa-sign-out fs-15" aria-hidden="true"></i>
