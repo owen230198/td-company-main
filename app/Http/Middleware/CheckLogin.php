@@ -17,6 +17,7 @@ class CheckLogin
     public function handle(Request $request, Closure $next)
     {
         if (!session()->exists('user_login')) {
+            session()->put('before_login_url', url()->full());
             return redirect(asset('login'));
         }
         return $next($request);

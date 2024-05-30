@@ -249,6 +249,20 @@ class QuoteService extends BaseService
         }
     }
 
+    public function resetHandledQty($table, $model, $supp_id)
+    {
+        $handle_arr = getArrHandleField($table);
+        $dataItem = $model::find($supp_id);
+        foreach ($handle_arr as $stage) {
+            if (!empty($dataItem[$stage])) {
+                $item_stage = json_decode($dataItem[$stage], true);
+                $item_stage['handled_qty'] = 0;
+                $dataItem->{$stage} = json_encode($item_stage);
+            }
+        }
+        $dataItem->save();
+    }
+
     private function getArrValueExportQuote($product, $main_paper, $arr_quote, $num = 1)
     {
         $arr['pro_num'] = $num;

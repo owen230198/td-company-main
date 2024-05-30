@@ -106,6 +106,7 @@ class QuoteController extends Controller
                             $this->services->configBaseDataAction($supply);
                             $supply['product'] = $product_id;
                             $supp_id = $model::insertGetId($supply);
+                            $this->services->resetHandledQty($table, $model, $supp_id);
                             logActionUserData('insert', $table, $supp_id, $supply, $log_product_id);
                         }
                     }

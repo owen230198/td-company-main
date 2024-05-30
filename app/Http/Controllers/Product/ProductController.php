@@ -5,11 +5,11 @@
     use App\Models\CExpertise;
     use App\Models\CRework;
     use App\Models\Order;
-use App\Models\Paper;
-use App\Models\Product;
+    use App\Models\Paper;
+    use App\Models\Product;
     use App\Models\Quote;
     use App\Models\WUser;
-use Illuminate\Http\Request;
+    use Illuminate\Http\Request;
     class ProductController extends Controller
     {
         function __construct()
@@ -62,13 +62,16 @@ use Illuminate\Http\Request;
             $product_id = Product::insertGetId($arr_product);
             foreach (Product::$childTable as $table) {
                 $model = getModelByTable($table);
-                $list_data = $model::where('product', $id)->get()->makeHidden(['id', 'product', 'handle_elevate', 'status'])->toArray();
+                $list_data = $model::where('product', $id)->get()->makeHidden(['id', 'product', 'handle_elevate', 'status', 'parent'])->toArray();
                 foreach ($list_data as $data_insert) {
                     $data_insert['product'] = $product_id;
                     (new \BaseService)->configBaseDataAction($data_insert);  
-                    $model::insert($data_insert);   
+                    $supp_id = $model::insertGetId($data_insert);
+                    $this->quote_services->resetHandledQty($table, $model, $supp_id);
+
                 }
             }
+            
             if ($request->isMethod('GET')) {
                 $data['parent_url'] = ['link' => getBackUrl(), 'note' => 'Danh sách đơn sản phẩm'];
                 $data['order_cost'] = $arr_product['total_amount'];

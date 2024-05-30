@@ -77,7 +77,9 @@ class AuthService extends BaseService
         }
         $result = $this->hasLogin($request);
         if ($result['status'] === \StatusConst::SUCCESS_CODE) {
-            return redirect($this->prefix)->with('message','Đăng nhập thành công!');
+            $red_url = !empty(session()->get('before_login_url')) ? session()->get('before_login_url') : $this->prefix;
+            session()->forget('before_login_url');
+            return redirect($red_url)->with('message','Đăng nhập thành công!');
         }
         return back()->withInput()->with($result['messageCode'], $result['errorMessage']);
     }
