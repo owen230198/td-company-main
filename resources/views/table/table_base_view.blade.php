@@ -7,8 +7,8 @@
     </div>
 @endif
     <div class="table_base_view position-relative">
-        <table class="table table-bordered mb-2 table_main">
-            <theader>
+        <table class="table table-bordered mb-2 table_main table_responsive">
+            <thead>
                 <tr>
                     <th class="font-bold fs-13 text-center parentth" rowspan="{{ @$rowspan }}">
                         <div class="d-flex align-items-center justify-content-center">
@@ -40,7 +40,7 @@
                         @endforeach
                     </tr>
                 @endif
-            </theader>
+            </thead>
             <tbody>
                 @foreach ($data_tables as $key => $data)
                     <tr>
@@ -54,7 +54,7 @@
                         </td>
                         @foreach ($field_shows as $field)
                             @if ($field['type'] != 'group')
-                                <td>
+                                <td data-label = "{{ $field['note'] }}">
                                     @php
                                         $arr = $field;
                                         $arr['obj_id'] = $data->id;

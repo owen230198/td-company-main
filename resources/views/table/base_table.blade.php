@@ -19,7 +19,7 @@
                 </a>
             @endif
             @if ($tableItem['remove'])
-                <button class="main_button bg_red color_white smooth radius_5 font_bold smooth red_btn" data-toggle="modal"
+                <button class="main_button bg_red color_white smooth radius_5 font_bold smooth red_btn d-lg-block d-none" data-toggle="modal"
                     data-target="#multiDeleteModal">
                     <i class="fa fa-trash mr-2 fs-15" aria-hidden="true"></i>Xóa
                 </button>
@@ -29,7 +29,7 @@
             data-toggle="modal" data-target="#actionModal">
                 <i class="fa fa-history mr-2 fs-15" aria-hidden="true"></i>Lịch sử
             </button>
-            <a href="javascript:void(0)" class="main_button bg_main color_white smooth bg_green border_green radius_5 font_bold smooth ml-2">
+            <a href="javascript:void(0)" class="main_button bg_main color_white smooth bg_green border_green radius_5 font_bold smooth ml-2 d-lg-block d-none">
                 <i class="fa fa-book mr-2 fs-15" aria-hidden="true"></i>Trợ giúp
             </a>
         </div>
