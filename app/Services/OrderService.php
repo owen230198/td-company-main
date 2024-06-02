@@ -37,7 +37,7 @@ class OrderService extends BaseService
         if (!empty($product_process['code']) && $product_process['code'] == 100) {
             return returnMessageAjax(100, $product_process['message']);  
         }else{
-            $amount = getTotalProductByArr($data['product'], $arr_quote, 'total_amount');
+            $amount = getTotalProductByArr($data['product'], 'total_amount');
             $arr_order['total_amount'] = @$arr_order['vat'] == 1 ? 
             calValuePercentPlus($amount, $amount, (float) getDataConfig('QuoteConfig', 'VAT_PERC', 0)) : $amount;
             $arr_order['rest'] = $arr_order['total_amount'] - (float) $arr_order['advance'];
@@ -47,8 +47,12 @@ class OrderService extends BaseService
                 $arr_order['code'] = 'DH-'.sprintf("%08s", $arr_order['id']);
             }else{
                 if (!empty($arr_quote['id'])) {
-                    Quote::where('id', $arr_quote['id'])->update(['status' => Quote::ORDER_CREATED]);
-                    $arr_order['quote'] = $arr_quote['id'];
+                    $quote_obj = Quote::find($arr_quote['id']);
+                    $quote_obj->status = Quote::ORDER_CREATED;
+                    $quote_obj->save();
+                    $arr_order['quote'] = $quote_obj['id'];
+                    $arr_order['profit'] = $quote_obj['profit'];
+                    $arr_order['ship_price'] = $quote_obj['ship_price'];
                 }
                 $arr_order['status'] = \StatusConst::NOT_ACCEPTED;
                 $arr_order['id'] = Order::insertGetId($arr_order);
