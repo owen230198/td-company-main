@@ -187,13 +187,10 @@ class QuoteService extends BaseService
         return !empty($process);
     }
 
-    public function processDataProduct($data, $arr_quote = [], $step = TDConstant::QUOTE_FLOW)
+    public function processDataProduct($data, $obj_refesh, $step = TDConstant::QUOTE_FLOW)
     {
         $data_product = $data['product'];
         foreach ($data_product as $key => $product) {
-            if (!empty($arr_quote['id'])) {
-                $product['quote_id'] = $arr_quote['id'];
-            }
             $product_process = $this->processProduct($product, $step, $key);
             if (!empty($product_process['code']) && $product_process['code'] == 100) {
                 return $product_process;
@@ -202,11 +199,11 @@ class QuoteService extends BaseService
                 $this->processSupply($product_process, $product);
             }
         }
-        if (!empty($arr_quote)) {
+        if (!empty($obj_refesh)) {
             if ($step == TDConstant::QUOTE_FLOW) {
-                RefreshQuotePrice($arr_quote);
+                RefreshQuotePrice($obj_refesh);
             }else{
-                refreshProfit($arr_quote);
+                refreshProfit($obj_refesh);
             }
             return true;
         }else{
@@ -241,12 +238,14 @@ class QuoteService extends BaseService
         $data = $request->except('_token', 'step');
         if (empty($data['product'])) {
             return returnMessageAjax(100, 'Không tìm thấy sản phẩm !');
-        }else{
-            $arr_quote->seri = 'BG-'.sprintf("%08s", $arr_quote->id);
+        }
+        $arr_quote->seri = 'BG-'.sprintf("%08s", $arr_quote->id);
             $arr_quote->save();
+            $data['product'] = array_map(function($product) use ($arr_quote) {
+                $product['quote_id'] = $arr_quote->id;
+            }, $data['product']);
             $status = $this->processDataProduct($data, $arr_quote);
             return $status;
-        }
     }
 
     public function resetHandledQty($table, $model, $supp_id)
