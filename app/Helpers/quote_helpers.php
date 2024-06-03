@@ -62,8 +62,8 @@
 					$cost = $product->total_cost;
 				}
 				$round_number = $product->qty;
-				$profit = (float) @$product['profit'];
-				$ship_price = (float) @$product['ship_price'];
+				$profit = (float) @$product->profit;
+				$ship_price = (float) @$product->ship_price;
 				$total_cost = $round_number > 0 ? round($cost / $round_number) * $round_number : $cost;
 				$ex_products = \DB::table('products')->where('parent', $product->id)->get();
 				$total_ex = getTotalProductByArr($ex_products);
@@ -94,9 +94,16 @@
 	}
 
 	if (!function_exists('RefreshQuotePrice')) {
-		function RefreshQuotePrice($arr_quote){
-			$update_quote = getProductTotalCost($arr_quote);
-			\DB::table('quotes')->where('id', $arr_quote['id'])->update($update_quote);
+		function RefreshQuotePrice($obj_refresh){
+			$is_quotes = $obj_refresh->getTable() == 'quotes';
+			$key_quuery = $is_quotes ? 'quote_id' : 'order';
+			$products = \DB::table('products')->where($key_quuery, $obj_refresh->id)->get();
+			$arr_update = getTotalProductByArr($products, '', false);
+			$obj_refresh->total_cost = $arr_update['total_cost'];
+			$obj_refresh->total_amount = $arr_update['total_amount'];
+			$obj_refresh->save();
+			$obj_related = $is_quotes ? \App\Models\Order::where('quote', $obj_refresh->id) : \App\Models\Quote::where('id', $obj_refresh->quote);
+			$obj_related->update($arr_update);
 		}
 	}
 

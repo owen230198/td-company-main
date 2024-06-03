@@ -290,6 +290,7 @@ class QuoteController extends Controller
             $arr_quote->ship_price = $ship_price;
             $arr_quote->profit = $profit;
             $arr_quote->save();
+            Product::where('quote_id', $id)->update($data_update);
             RefreshQuotePrice($arr_quote);
             return returnMessageAjax(200, 'Cập nhật lợi nhuận báo giá thành công !', url('quote-file-export/'.$id));
         }

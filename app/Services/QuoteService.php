@@ -243,6 +243,7 @@ class QuoteService extends BaseService
             $arr_quote->save();
             $data['product'] = array_map(function($product) use ($arr_quote) {
                 $product['quote_id'] = $arr_quote->id;
+                return $product;
             }, $data['product']);
             $status = $this->processDataProduct($data, $arr_quote);
             return $status;
