@@ -307,8 +307,8 @@ class QuoteService extends BaseService
         $user = getDetailDataByID('NUser', @$arr_quote['created_by']);
         $templateProcessor->setValue('user_name', @$user['name']);
         $templateProcessor->setValue('user_phone', @$user['phone']);
-        // $fileName = date('m-d-Y', Time()).'_'.$arr_quote['seri'].'_'.getFieldDataById('name', 'products', $products[0]['id']).'_'.$arr_quote['name'].".docx";
-        $fileName = date('m-d-Y', Time()).'_'.$arr_quote['seri'].".docx";
+        $fileName = preg_replace('/[^a-zA-Z0-9\s\p{L}\.\-_]/u', '', date('m-d-Y', Time()).'_'.getFieldDataById('name', 'products', $products[0]['id']).'_'.$arr_quote['name'].".docx");
+        
         $fileStorage = public_path('words/quotes/'.$fileName);
         $templateProcessor->saveAs($fileStorage);
         return response()->download($fileStorage);
