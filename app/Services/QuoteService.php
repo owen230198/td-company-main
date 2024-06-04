@@ -204,6 +204,7 @@ class QuoteService extends BaseService
                 RefreshQuotePrice($obj_refesh);
             }else{
                 refreshProfit($obj_refesh);
+                RefreshQuotePrice($obj_refesh);
             }
             return true;
         }else{
@@ -233,19 +234,19 @@ class QuoteService extends BaseService
         return returnMessageAjax(200, '', asset($redr));
     }
 
-    public function processDataQuote($request, $arr_quote)
+    public function processDataQuote($request, $quote_obj)
     {
         $data = $request->except('_token', 'step');
         if (empty($data['product'])) {
             return returnMessageAjax(100, 'Không tìm thấy sản phẩm !');
         }
-        $arr_quote->seri = 'BG-'.sprintf("%08s", $arr_quote->id);
-            $arr_quote->save();
-            $data['product'] = array_map(function($product) use ($arr_quote) {
-                $product['quote_id'] = $arr_quote->id;
+        $quote_obj->seri = 'BG-'.sprintf("%08s", $quote_obj->id);
+            $quote_obj->save();
+            $data['product'] = array_map(function($product) use ($quote_obj) {
+                $product['quote_id'] = $quote_obj->id;
                 return $product;
             }, $data['product']);
-            $status = $this->processDataProduct($data, $arr_quote);
+            $status = $this->processDataProduct($data, $quote_obj);
             return $status;
     }
 

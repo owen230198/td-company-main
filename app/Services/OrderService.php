@@ -26,18 +26,20 @@ class OrderService extends BaseService
         return $data;
     }
 
-    public function processDataOrder($request, $arr_quote = [])
+    public function processDataOrder($request, $base_obj = null)
     {
         $data = $request->except('_token');
         $arr_order = !empty($data['order']) ? $data['order'] : [];
         if ((int) @$arr_order['advance'] > 0 && empty($arr_order['rest_bill'])) {
             return ['code' => 100, 'message' => 'Bạn cần upload bill tạm ứng cho đơn này !'];
         }
-        $product_process = $this->quote_services->processDataProduct($data, $arr_quote, \TDConst::ORDER_ACTION_FLOW);
+        $product_process = $this->quote_services->processDataProduct($data, $base_obj, \TDConst::ORDER_ACTION_FLOW);
         if (!empty($product_process['code']) && $product_process['code'] == 100) {
             return returnMessageAjax(100, $product_process['message']);  
         }else{
-            $amount = getTotalProductByArr($data['product'], 'total_amount');
+            $arr_total = getTotalProductByArr($data['product']);
+            $amount = $arr_total['total_amount'];
+            $arr_order['total_cost'] = $arr_total['total_cost'];
             $arr_order['total_amount'] = @$arr_order['vat'] == 1 ? 
             calValuePercentPlus($amount, $amount, (float) getDataConfig('QuoteConfig', 'VAT_PERC', 0)) : $amount;
             $arr_order['rest'] = $arr_order['total_amount'] - (float) $arr_order['advance'];
@@ -46,13 +48,13 @@ class OrderService extends BaseService
                 Order::where('id', $arr_order['id'])->update($arr_order);
                 $arr_order['code'] = 'DH-'.sprintf("%08s", $arr_order['id']);
             }else{
-                if (!empty($arr_quote['id'])) {
-                    $quote_obj = Quote::find($arr_quote['id']);
+                if (!empty($base_obj) && $base_obj->getTable() == 'quotes') {
+                    $quote_obj = Quote::find($base_obj->id);
                     $quote_obj->status = Quote::ORDER_CREATED;
                     $quote_obj->save();
-                    $arr_order['quote'] = $quote_obj['id'];
-                    $arr_order['profit'] = $quote_obj['profit'];
-                    $arr_order['ship_price'] = $quote_obj['ship_price'];
+                    $arr_order['quote'] = $quote_obj->id;
+                    $arr_order['profit'] = $quote_obj->profit;
+                    $arr_order['ship_price'] = $quote_obj->ship_price;
                 }
                 $arr_order['status'] = \StatusConst::NOT_ACCEPTED;
                 $arr_order['id'] = Order::insertGetId($arr_order);

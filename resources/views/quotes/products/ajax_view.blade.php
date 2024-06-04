@@ -9,6 +9,8 @@
                 </div>
                 @if (!empty($product['id']))
                     <input type="hidden" name="product[{{ $pro_index }}][id]" value="{{ $product['id'] }}">
+                    <input type="hidden" name="product[{{ $pro_index }}][ship_price]" value="{{ $product['ship_price'] }}">
+                    <input type="hidden" name="product[{{ $pro_index }}][profit]" value="{{ $product['profit'] }}">
                     @if (empty($not_detail))
                         <div class="text-center">
                             <button type="button" 

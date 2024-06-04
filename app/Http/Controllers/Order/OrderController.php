@@ -21,28 +21,28 @@
         public function insertByQuote($request)
         {
             $quote_id = $request->input('quote');
-            $arr_quote = Quote::find($quote_id);
+            $quote_obj = Quote::find($quote_id);
             if (!$request->isMethod('POST')) {
-                if (empty($arr_quote) || @$arr_quote['status'] == \StatusConst::NOT_ACCEPTED) {
+                if (empty($quote_obj) || @$quote_obj['status'] == \StatusConst::NOT_ACCEPTED) {
                     return back()->with('error', 'Dữ liệu báo giá không hợp lệ!');
                 }
-                if ($arr_quote['status'] == Quote::ORDER_CREATED) {
+                if ($quote_obj['status'] == Quote::ORDER_CREATED) {
                     return back()->with('error', 'Bạn đã tạo đơn hàng cho báo giá này rồi !');
                 }
                 $data = $this->services->getBaseDataAction();
-                $data['data_order']['customer'] = $arr_quote['customer_id'];
-                $data['order_cost'] = @$arr_quote['total_amount'];
+                $data['data_order']['customer'] = $quote_obj['customer_id'];
+                $data['order_cost'] = @$quote_obj['total_amount'];
                 $data['products'] = Product::where(['act' => 1, 'quote_id' => $quote_id])->get();
                 $data['product_qty'] = count($data['products']);
                 $data['order_type'] = \OrderConst::INCLUDE;
-                $data['title'] = 'Thêm đơn hàng - Mã báo giá : '.$arr_quote['seri'];
+                $data['title'] = 'Thêm đơn hàng - Mã báo giá : '.$quote_obj['seri'];
                 $data['link_action'] = url('insert/orders?quote='.$quote_id);
                 return view('orders.view', $data);
             }else{
                 if (!empty($request['order']['status'])) {
                     return returnMessageAjax(100, 'Dữ liệu không hợp lệ !');
                 }
-                return $this->services->processDataOrder($request, $arr_quote); 
+                return $this->services->processDataOrder($request, $quote_obj); 
             } 
         }
 
@@ -56,22 +56,21 @@
         }
 
         public function update(Request $request, $id){
-            $arr_order = Order::find($id);
-            $arr_quote = Quote::find($arr_order['quote']);
+            $order_obj = Order::find($id);
             if (!$request->isMethod('POST')) {
-                if (empty($arr_order)) {
+                if (empty($order_obj)) {
                     return back()->with('error', 'Dữ liệu Đơn hàng không hợp lệ!');
                 }
                 $data = $this->services->getBaseDataAction();
-                $data['order_cost'] = @$arr_order['total_amount'];
+                $data['order_cost'] = @$order_obj['total_amount'];
                 $data['products'] = Product::where(['act' => 1, 'order' => $id])->get();
                 $data['product_qty'] = count($data['products']);
-                $data['data_order'] = $arr_order;
+                $data['data_order'] = $order_obj;
                 $data['order_type'] = \OrderConst::INCLUDE;
-                $data['title'] = 'Cập nhật & Xác nhận đơn - '.$arr_order['code'];
+                $data['title'] = 'Cập nhật & Xác nhận đơn - '.$order_obj['code'];
                 $data['link_action'] = url('update/orders/'.$id);
                 $data['id'] = $id;
-                $data['stage'] = $arr_order['status'];
+                $data['stage'] = $order_obj['status'];
                 $blade_to = 'orders.users.'.\GroupUser::getCurrent().'.view';
                 if (view()->exists($blade_to)) {
                     return view($blade_to, $data);
@@ -82,8 +81,7 @@
                 if (!empty($request['order']['status'])) {
                     return returnMessageAjax(100, 'Dữ liệu không hợp lệ !');
                 }
-                // $request['order']['id'] = $id;
-                return $this->services->processDataOrder($request, $arr_quote);           
+                return $this->services->processDataOrder($request, $order_obj);           
             }
         }
 
@@ -92,40 +90,37 @@
             dd(11);
         }
 
-        public function applyToDesign($data, $arr_order, $base_order_id, $quote_id)
+        public function applyToDesign($data, $base_obj, $order_obj)
         {
             if (\GroupUser::isTechApply() || \GroupUser::isAdmin()) {
-                if (@$arr_order->status != \StatusConst::NOT_ACCEPTED) {
+                if (@$base_obj->status != \StatusConst::NOT_ACCEPTED) {
                     return returnMessageAjax(100, 'Lỗi không xác định !');
                 }
-                $arr_quote = Quote::find($quote_id);
-                $product_process = $this->quote_services->processDataProduct($data, $arr_quote, \TDConst::ORDER_ACTION_FLOW);
+                $product_process = $this->quote_services->processDataProduct($data, $order_obj, \TDConst::ORDER_ACTION_FLOW);
                 if (!empty($product_process['code']) && $product_process['code'] == 100) {
                     return returnMessageAjax(100, $product_process['message']);  
                 }
-                $arr_quote = Quote::find($quote_id);
                 if (@$arr_quote['profit'] < getDataConfig('QuoteConfig', 'QUOTE_PERCENT', 0)) {
                     if (!\GroupUser::isAdmin()) {
-                        return returnMessageAjax(100, 'Lợi nhuận cho đơn hàng này là '.(int) $arr_quote['profit'].'%, Vui lòng liên hệ Admin cấp cao để được duyệt đơn !');
+                        return returnMessageAjax(100, 'Lợi nhuận cho đơn hàng này là: '.(float) getFieldDataById('profit', 'orders', $order_obj->id).'%, Vui lòng liên hệ Admin cấp cao để được duyệt đơn !');
                     }
                 }
-                $status = $this->services->insertDesignCommand($data['product'], $base_order_id, $arr_order->code);
+                $status = $this->services->insertDesignCommand($data['product'], $order_obj->id, $base_obj->code);
                 if ($status) {
-                    return returnMessageAjax(200, 'Đã thêm lệnh thiết kế cho đơn hàng '.$arr_order->code.' !', getBackUrl());
+                    return returnMessageAjax(200, 'Đã thêm lệnh thiết kế cho đơn hàng '.$base_obj->code.' !', getBackUrl());
                 }    
             }else{
                 return returnMessageAjax(100, 'Bạn không có quyền duyệt sản xuất!');
             }
         }
 
-        public function applyToHandlePlan($data, $arr_order, $base_order_id, $quote_id)
+        public function applyToHandlePlan($data, $base_obj, $order_obj)
         {
             if (\GroupUser::isTechHandle()) {
-                if (@$arr_order->status != Order::DESIGN_SUBMITED) {
+                if (@$base_obj->status != Order::DESIGN_SUBMITED) {
                     returnMessageAjax(100, 'Dữ liệu không hợp lệ !');
                 }
-                $arr_quote = Quote::find($quote_id);
-                $product_process = $this->quote_services->processDataProduct($data, $arr_quote, \TDConst::ORDER_ACTION_FLOW);
+                $product_process = $this->quote_services->processDataProduct($data, $order_obj, \TDConst::ORDER_ACTION_FLOW);
                 if (!empty($product_process['code']) && $product_process['code'] == 100) {
                     return returnMessageAjax(100, $product_process['message']);  
                 }
@@ -146,10 +141,10 @@
                         }
                     }
                 }
-                if (checkUpdateOrderStatus($base_order_id, Order::TECH_SUBMITED)) {
-                    Order::where('id', $base_order_id)->update($arr_update);
+                if (checkUpdateOrderStatus($order_obj->id, Order::TECH_SUBMITED)) {
+                    Order::where('id', $order_obj->id)->update($arr_update);
                 }
-                return returnMessageAjax(200, 'Đã gửi yêu cầu thành công tới P. Kế hoạch SX cho đơn '.$arr_order->code.' !', getBackUrl()); 
+                return returnMessageAjax(200, 'Đã gửi yêu cầu thành công tới P. Kế hoạch SX cho đơn '.$base_obj->code.' !', getBackUrl()); 
             }else{
                 return returnMessageAjax(100, 'Bạn không có quyền duyệt sản xuất!');
             }
@@ -159,14 +154,15 @@
         {
             $data = $request->except('_token');
             $table = $type == \OrderConst::INCLUDE ? 'orders' : 'products';
-            $arr_order = \DB::table($table)->find($id);
-            $quote_id = $type == \OrderConst::INCLUDE ? @$arr_order->quote : @$arr_order->quote_id;
-            $base_order_id = $type == \OrderConst::INCLUDE ? @$arr_order->id : @$arr_order->order;
+            $base_obj = \DB::table($table)->find($id);
+            $quote_id = $type == \OrderConst::INCLUDE ? @$base_obj->quote : @$base_obj->quote_id;
+            $order_id = $type == \OrderConst::INCLUDE ? @$base_obj->id : @$base_obj->order;
+            $order_obj = Order::find($order_id);
             switch ($stage) {
                 case Order::NOT_ACCEPTED:
-                    return $this->applyToDesign($data, $arr_order, $base_order_id, $quote_id);
+                    return $this->applyToDesign($data, $base_obj, $order_obj);
                 case Order::DESIGN_SUBMITED:
-                    return $this->applyToHandlePlan($data, $arr_order, $base_order_id, $quote_id);   
+                    return $this->applyToHandlePlan($data, $base_obj, $order_obj);   
                 default:
                     return returnMessageAjax(100, 'Lỗi không xác định !');
             }

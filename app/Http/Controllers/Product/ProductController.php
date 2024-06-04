@@ -45,8 +45,8 @@
                 }
             }else{
                 $data = $request->except('_token');
-                $arr_quote = Quote::find($product->quote_id);
-                $process = $this->quote_services->processDataProduct($data, $arr_quote, \TDConst::ORDER_ACTION_FLOW);
+                $order_obj = Order::find($product->order);
+                $process = $this->quote_services->processDataProduct($data, $order_obj, \TDConst::ORDER_ACTION_FLOW);
                 if (!empty($process['code']) && $process['code'] == 100) {
                     return returnMessageAjax(100, $process['message']);  
                 }else{

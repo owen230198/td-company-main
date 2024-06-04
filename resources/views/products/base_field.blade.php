@@ -15,7 +15,6 @@
                 'value' => @$product['qty']
             ],
         ];
-
         $note_product_field = [
             'name' => $pro_base_name_input.'[detail]',
             'attr' => ['readonly' => !empty($rework) || !empty($readonly_base)],

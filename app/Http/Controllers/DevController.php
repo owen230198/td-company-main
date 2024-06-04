@@ -243,14 +243,11 @@ class DevController extends Controller
     }
 
     public function profitData(){
-        $quotes = \DB::table('quotes')->get();
+        $quotes = \App\Models\Quote::orderBy('id', 'DESC')->get();
         foreach ($quotes as $quote) {
-            $products = \DB::table('products')->where('quote_id', $quote->id)->get();
-            foreach ($products as $product) {
-                if ((float) $product->profit != 0 || (float) $product->ship_price != 0) {
-                    \DB::table('quotes')->where('id', $quote->id)->update(['profit' => $product->profit, 'ship_price' => $product->ship_price]);
-                }
-            }
+            \DB::table('products')->where('quote_id', $quote->id)->update(['ship_price' => $quote->ship_price, 'profit' => $quote->profit]);
+            \DB::table('orders')->where('quote', $quote->id)->update(['ship_price' => $quote->ship_price, 'profit' => $quote->profit, 'total_cost' => $quote->total_cost]);
+            RefreshQuotePrice($quote);
         }
         dd(1);
     }
