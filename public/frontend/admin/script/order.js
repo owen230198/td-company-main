@@ -25,6 +25,49 @@ var moduleVATOrder = function()
     });
 }
 
+var confirmTypeRefresh = function(link, form_data)
+{
+    swal({
+        title: "Chọn thông số cập nhật",
+        text: "Thay đổi này sẽ cập nhật chi phí đơn hàng hoặc lợi nhuận đơn hàng ?",
+        icon: "warning",
+        buttons: {
+            1: {
+                text: "Chi phí đơn hàng",
+                value: "1",
+            },
+            2: {
+                text: "% lợi nhuận đơn",
+                value: "2",
+            },
+            cancel: {
+                text: "Hủy bỏ",
+                value: null,
+                visible: true,
+            }
+        },
+    }).then((value) => {
+        switch (value) {
+            case "1":
+                ajaxBaseCall({
+                    url:link + '?type_refresh=1', 
+                    type:'POST', 
+                    data:form_data
+                });
+                break;
+            case "2":
+                ajaxBaseCall({
+                    url:link +'?type_refresh=2', 
+                    type:'POST', 
+                    data:form_data
+                });
+                break;
+            default:
+                swal.close();
+        }
+    });
+}
+
 var applyOrderStep = function()
 {
     $(document).on('click', '.__apply_order', function(event){
@@ -34,12 +77,18 @@ var applyOrderStep = function()
         let type = $(this).data('type');
         let form_data = form.serialize();
         let id = $(this).data('id');
-        ajaxBaseCall({
-            url:getBaseRoute('apply-order/'+stage+'/'+type+'/'+id), 
-            type:'POST', 
-            data:form_data
-        });
+        let link = getBaseRoute('apply-order/'+stage+'/'+type+'/'+id);
+        return confirmTypeRefresh(link, form_data);
     })
+}
+
+var submitOrderForm = function() {
+    $('form.__form_order').submit(function(event) {
+        event.preventDefault();
+        let link = $(this).attr('action');
+        let form_data = $(this).serialize();
+        return confirmTypeRefresh(link, form_data);
+    });
 }
 
 var planHandleElevateModule = function()
@@ -326,6 +375,7 @@ $(function(){
     setAdvanceCostOrder(); 
     moduleVATOrder();
     applyOrderStep();
+    submitOrderForm();
     planHandleElevateModule();
     planChoseSupplyModule();
     planAddSupplyHandle();

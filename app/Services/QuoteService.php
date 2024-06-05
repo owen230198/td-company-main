@@ -169,14 +169,15 @@ class QuoteService extends BaseService
         }
         $data_process = $this->getDataActionProduct($data);
         if (!empty($data['id'])) {
-            $data_item = Product::find($data['id']);
-            Product::where('id', $data['id'])->update($data_process);
-            $log = logActionUserData('update', 'products', $data['id'], $data_item);
+            $product_id = $data['id'];
+            $data_item = Product::find($product_id);
+            Product::where('id', $product_id)->update($data_process);
+            logActionUserData('update', 'products', $product_id, $data_item);
         }else{
-            $id =  Product::insertGetId($data_process);
-            $log = logActionUserData('update', 'products', $id);
+            $product_id =  Product::insertGetId($data_process);
+            logActionUserData('update', 'products', $product_id);
         }
-        return $log;
+        return $product_id;
     }
 
     public function processSupply($product_id, $data_product)
@@ -195,12 +196,12 @@ class QuoteService extends BaseService
     {
         $data_product = $data['product'];
         foreach ($data_product as $key => $product) {
-            $product_process = $this->processProduct($product, $step, $key);
-            if (!empty($product_process['code']) && $product_process['code'] == 100) {
-                return $product_process;
+            $process = $this->processProduct($product, $step, $key);
+            if (!empty($process['code']) && $process['code'] == 100) {
+                return $process;
                 break;
             }else{
-                $this->processSupply($product_process, $product);
+                $this->processSupply($process, $product);
             }
         }
         if (!empty($obj_refesh)) {

@@ -63,8 +63,10 @@ class FillFinish extends Model
         if ($data_process['product_qty'] > 0) {
             if (!empty($data['id'])) {
                 $process = $this->where('id', $data['id'])->update($data_process);   
+                logActionUserData('update', 'fill_finishes', $data['id'], FillFinish::find($data['id']));    
             }else{
-                $process = $this->insert($data_process);
+                $process = $this->insertGetId($data_process);
+                logActionUserData('insert', 'fill_finishes', $process);
             }
         }
         return !empty($process);

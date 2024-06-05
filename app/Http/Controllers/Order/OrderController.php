@@ -90,13 +90,13 @@
             dd(11);
         }
 
-        public function applyToDesign($data, $base_obj, $order_obj)
+        public function applyToDesign($data, $base_obj, $order_obj, $type_ref)
         {
             if (\GroupUser::isTechApply() || \GroupUser::isAdmin()) {
                 if (@$base_obj->status != \StatusConst::NOT_ACCEPTED) {
                     return returnMessageAjax(100, 'Lỗi không xác định !');
                 }
-                $product_process = $this->quote_services->processDataProduct($data, $order_obj, \TDConst::ORDER_ACTION_FLOW);
+                $product_process = $this->quote_services->processDataProduct($data, $order_obj, $type_ref);
                 if (!empty($product_process['code']) && $product_process['code'] == 100) {
                     return returnMessageAjax(100, $product_process['message']);  
                 }
@@ -114,13 +114,13 @@
             }
         }
 
-        public function applyToHandlePlan($data, $base_obj, $order_obj)
+        public function applyToHandlePlan($data, $base_obj, $order_obj, $type_ref)
         {
             if (\GroupUser::isTechHandle()) {
                 if (@$base_obj->status != Order::DESIGN_SUBMITED) {
                     returnMessageAjax(100, 'Dữ liệu không hợp lệ !');
                 }
-                $product_process = $this->quote_services->processDataProduct($data, $order_obj, \TDConst::ORDER_ACTION_FLOW);
+                $product_process = $this->quote_services->processDataProduct($data, $order_obj, $type_ref);
                 if (!empty($product_process['code']) && $product_process['code'] == 100) {
                     return returnMessageAjax(100, $product_process['message']);  
                 }
@@ -155,14 +155,14 @@
             $data = $request->except('_token');
             $table = $type == \OrderConst::INCLUDE ? 'orders' : 'products';
             $base_obj = \DB::table($table)->find($id);
-            $quote_id = $type == \OrderConst::INCLUDE ? @$base_obj->quote : @$base_obj->quote_id;
             $order_id = $type == \OrderConst::INCLUDE ? @$base_obj->id : @$base_obj->order;
             $order_obj = Order::find($order_id);
+            $type_refresh = !empty($data['type_refresh']) ? $data['type_refresh'] : 2;
             switch ($stage) {
                 case Order::NOT_ACCEPTED:
-                    return $this->applyToDesign($data, $base_obj, $order_obj);
+                    return $this->applyToDesign($data, $base_obj, $order_obj, $type_refresh);
                 case Order::DESIGN_SUBMITED:
-                    return $this->applyToHandlePlan($data, $base_obj, $order_obj);   
+                    return $this->applyToHandlePlan($data, $base_obj, $order_obj, $type_refresh);   
                 default:
                     return returnMessageAjax(100, 'Lỗi không xác định !');
             }

@@ -71,9 +71,11 @@ class Supply extends Model
             if ($data_process['supp_qty'] > 0) {
                 (new BaseService)->configBaseDataAction($data_process);
                 if (!empty($supply['id'])) {
-                    $process = $this->where('id', $supply['id'])->update($data_process);   
+                    $process = $this->where('id', $supply['id'])->update($data_process); 
+                    logActionUserData('update', 'supplies', $supply['id'], Supply::find($supply['id']));    
                 }else{
-                    $process = $this->insert($data_process);
+                    $process = $this->insertGetId($data_process);
+                    logActionUserData('insert', 'supplies', $process);
                 }
             }
         }

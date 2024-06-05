@@ -95,9 +95,21 @@
 			$arr_update = getTotalProductByArr($products);
 			$obj_refresh->total_cost = $arr_update['total_cost'];
 			$obj_refresh->base_total = $arr_update['base_total'];
-			$obj_refresh->total_amount = $arr_update['total_amount'];
-			$obj_refresh->save();
+			$amount = $arr_update['total_amount'];
 			$obj_related = $is_quotes ? \App\Models\Order::where('quote', $obj_refresh->id) : \App\Models\Quote::where('id', $obj_refresh->quote);
+			if ($is_quotes) {
+				$obj_refresh->total_amount = $amount;
+				$obj_order = $obj_related->first();
+				dd($obj_order);
+				$order_amount = @$obj_order->vat == 1 ? calValuePercentPlus($amount, $amount, (float) getDataConfig('QuoteConfig', 'VAT_PERC', 0)) : $amount;
+				$arr_update['total_amount'] = $order_amount;
+            	$arr_update['rest'] = $order_amount - (float) @$obj_order->advance;
+			}else{
+				$order_amount = @$obj_refresh->vat == 1 ? calValuePercentPlus($amount, $amount, (float) getDataConfig('QuoteConfig', 'VAT_PERC', 0)) : $amount;
+				$obj_refresh->total_amount = $order_amount;
+				$obj_refresh->rest = $order_amount - (float) @$obj_refresh->advance;	
+			}
+			$obj_refresh->save();
 			$obj_related->update($arr_update);
 		}
 	}
