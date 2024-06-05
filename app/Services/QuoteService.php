@@ -5,6 +5,7 @@ use App\Models\Customer;
 use App\Models\Product;
 use App\Constants\TDConstant;
 use App\Models\NGroupUser;
+use App\Models\NLogAction;
 use PhpOffice\PhpWord\TemplateProcessor;
 
 class QuoteService extends BaseService
@@ -168,11 +169,14 @@ class QuoteService extends BaseService
         }
         $data_process = $this->getDataActionProduct($data);
         if (!empty($data['id'])) {
+            $data_item = Product::find($data['id']);
             Product::where('id', $data['id'])->update($data_process);
-            return $data['id'];
+            $log = logActionUserData('update', 'products', $data['id'], $data_item);
         }else{
-            return Product::insertGetId($data_process);
+            $id =  Product::insertGetId($data_process);
+            $log = logActionUserData('update', 'products', $id);
         }
+        return $log;
     }
 
     public function processSupply($product_id, $data_product)

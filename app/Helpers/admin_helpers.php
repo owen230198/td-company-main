@@ -211,6 +211,8 @@ if (!function_exists('logActionUserData')) {
         if (!empty($detail_data)) {
             $data_log['detail_data'] = json_encode($detail_data);
             return \App\Models\NLogAction::insertGetId($data_log);
+        }else{
+            return false;
         }           
     }
 }
