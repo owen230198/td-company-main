@@ -100,7 +100,6 @@
 			if ($is_quotes) {
 				$obj_refresh->total_amount = $amount;
 				$obj_order = $obj_related->first();
-				dd($obj_order);
 				$order_amount = @$obj_order->vat == 1 ? calValuePercentPlus($amount, $amount, (float) getDataConfig('QuoteConfig', 'VAT_PERC', 0)) : $amount;
 				$arr_update['total_amount'] = $order_amount;
             	$arr_update['rest'] = $order_amount - (float) @$obj_order->advance;
