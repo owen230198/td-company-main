@@ -100,7 +100,8 @@
                 if (!empty($product_process['code']) && $product_process['code'] == 100) {
                     return returnMessageAjax(100, $product_process['message']);  
                 }
-                if (@$arr_quote['profit'] < getDataConfig('QuoteConfig', 'QUOTE_PERCENT', 0)) {
+                $n_order = Order::find($order_obj->id);
+                if (@$n_order->profit < getDataConfig('QuoteConfig', 'QUOTE_PERCENT', 0)) {
                     if (!\GroupUser::isAdmin()) {
                         return returnMessageAjax(100, 'Lợi nhuận cho đơn hàng này là: '.(float) getFieldDataById('profit', 'orders', $order_obj->id).'%, Vui lòng liên hệ Admin cấp cao để được duyệt đơn !');
                     }
