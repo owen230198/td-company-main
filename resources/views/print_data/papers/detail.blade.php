@@ -139,7 +139,7 @@
             <p class="d-flex align-items-center mb-1 pb-1 border_bot_eb">
                 <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
                 <span class="w_220 d-block">Kiểu in</span> 
-                <span class="ml-1 text-lowercase">: {{ @\TDConst::PRINT_TECH[$print['type']] }}</span>
+                <span class="ml-1 text-lowercase">: {{ @\TDConst::PRINT_TYPE[$print['type']] }}</span>
             </p>  
             <p class="d-flex align-items-center mb-1 pb-1 border_bot_eb">
                 <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
@@ -149,7 +149,7 @@
             <p class="d-flex align-items-center mb-1 pb-1 border_bot_eb">
                 <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
                 <span class="w_220 d-block">Công nghệ in</span> 
-                <span class="ml-1 text-lowercase">: {{ @\TDConst::PRINT_COLOR[$print['machine']] }}</span>
+                <span class="ml-1 text-lowercase">: {{ @\TDConst::PRINT_TECH[$print['machine']] }}</span>
             </p>  
             @if (!empty(@$print['note']))
                 <p class="d-flex align-items-center mb-1 pb-1 border_bot_eb">

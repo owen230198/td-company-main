@@ -54,7 +54,7 @@ class AdminController extends Controller
         if (empty($data)) {
             return back()->with('error', 'Giao diện chưa hỗ trợ !');
         }
-        $order = 'id';
+        $order = 'updated_at';
         $order_by = 'desc';
         if($data['view_type'] == 'config'){
             $data['action_url'] = url('do-config-data/'.$table);
