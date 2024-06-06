@@ -133,7 +133,7 @@ class NGroupUser extends Model
         ],
         'handle_process' => [
             'name' => 'Theo dõi sản xuất',
-            'link' => 'view/products?default_data=%7B%22order_created":"1%22%7D',
+            'link' => 'view/products?default_data=%7B%22order_created":"1%22%7D&order_by=order,desc',
             'group' => 'order_handle'
         ],
         'submited_product' => [

@@ -54,8 +54,9 @@ class AdminController extends Controller
         if (empty($data)) {
             return back()->with('error', 'Giao diện chưa hỗ trợ !');
         }
-        $order = 'updated_at';
-        $order_by = 'desc';
+        $order_arr = !empty($request->input('order_by')) ? explode(',', $request->input('order_by')) : array('id', 'desc');
+        $order = $order_arr[0];
+        $order_by = $order_arr[1];
         if($data['view_type'] == 'config'){
             $data['action_url'] = url('do-config-data/'.$table);
             $order = 'ord';
@@ -72,7 +73,7 @@ class AdminController extends Controller
             if ($request->input('nosidebar') == 1) {
                 $data['nosidebar'] = 1;
             }
-            $param =  $request->except('default_data', 'page', 'nosidebar', 'get_table_view_ajax');
+            $param =  $request->except('default_data', 'page', 'nosidebar', 'get_table_view_ajax', 'order_by');
             if (!empty($param)) {
                 $data['data_search'] = $param;
                 $this->injectViewWhereParam($table, $param);
