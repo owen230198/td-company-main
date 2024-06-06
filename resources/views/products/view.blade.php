@@ -24,6 +24,11 @@
                             $table_arr['data_tables'] = $element['data'];
                         @endphp
                         <div class="tab-pane fade{{ $key == 0 ? ' show active' : '' }} tab_pane_quote_pro" id="element-{{ $element['key'] }}" role="tabpanel" aria-labelledby="element-{{ $element['key'] }}-tab">
+                            <div class="text-center mb-3">
+                                <a href="{{ url('print-data/products/'.$product_id.'?table='.$element['table'].'&type='.$element['pro_field']) }}" target="_blank" class="main_button bg_main color_white smooth bg_green border_green radius_5 font_bold smooth ml-2">
+                                    <i class="fa fa-book mr-2 fs-15" aria-hidden="true"></i>In lệnh
+                                </a>
+                            </div>
                             @include('table.table_base_view', $table_arr)    
                         </div>
                     @endif

@@ -363,7 +363,7 @@
             } 
         }
 
-        public function printData($table, $id)
+        public function printData(Request $request, $table, $id)
         {
             $data_item = \DB::table($table)->find($id);
             $data['data_item'] = $data_item;
@@ -374,9 +374,18 @@
                 if (!empty($data_item->made_by)) {
                     return back()->with('error', 'Sản phẩm này sản xuất từ đơn vị khác !');
                 }
-                $data['data_table']['papers'] = \DB::table('papers')->where(['product' => $id, 'handle_type' => \TDConst::MADE_BY_OWN])->get();
-                $data['data_table']['supplies'] = \DB::table('supplies')->where('product', $id)->get();
-                $data['data_table']['fill_finishes'] = \DB::table('fill_finishes')->where('product', $id)->get();
+                $data['arr_tables'] = !empty($request->input('table')) ? array($request->input('table')) : ['papers', 'supplies', 'fill_finishes'];
+                foreach ($data['arr_tables'] as $table_supp) {
+                    $where = ['product' => $id];
+                    $req_table = !empty($request->input('table')) ? $request->input('table') : '';
+                    if ($req_table == 'supplies' && !empty($request->input('type'))) {
+                        $where['type'] = $request->input('type');
+                    }
+                    if ($table_supp == 'papers') {
+                        $where['handle_type'] = \TDConst::MADE_BY_OWN;
+                    }
+                    $data['data_table'][$table_supp] = \DB::table($table_supp)->where($where)->get();
+                }
                 $data['return_time'] = getFieldDataById('return_time', 'orders', $data_item->order);
             }else{
                 if (!empty($data_item->product)) {
