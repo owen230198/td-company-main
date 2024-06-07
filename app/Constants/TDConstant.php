@@ -72,7 +72,29 @@
             ['key' => self::ELEVATE, 'note' => 'Máy bế', 'color' => 'normal'],
             ['key' => self::PEEL, 'note' => 'Máy bóc lề', 'color' => 'normal'],
             ['key' => self::CUT, 'note' => 'Máy xén', 'color' => 'normal'],
-            ['key' => self::FOLD, 'note' => 'Máy gấp vạch', 'color' => 'normal']
+            ['key' => self::FOLD, 'note' => 'Máy gấp vạch', 'color' => 'normal'],
+        ];
+
+        const COMMAND_STAGE = [
+            ['key' => self::NILON, 'note' => 'Cán nilon'],
+            ['key' => self::METALAI, 'note' => 'Cán metalai'],
+            ['key' => self::COVER, 'note' => 'Cán phủ trên'],
+            ['key' => self::COMPRESS, 'note' => 'Ép nhũ'],
+            ['key' => self::UV, 'note' => 'In lưới UV'],
+            ['key' => self::ELEVATE, 'note' => 'Máy bế'],
+            ['key' => self::FLOAT, 'note' => 'Thúc nổi'],
+            ['key' => self::PEEL, 'note' => 'Bóc lề'],
+            ['key' => self::CUT, 'note' => 'Xén'],
+            ['key' => self::FOLD, 'note' => 'Gấp vạch'],
+            ['key' => self::BOX_PASTE, 'note' => 'Dán hộp'],
+            ['key' => self::BAG_PASTE, 'note' => 'Dán túi'],
+        ];
+
+        const COMMAND_STAGE_SUPPLY = [
+            ['key' => self::CUT, 'note' => 'Xén'],
+            ['key' => self::ELEVATE, 'note' => 'Bế'],
+            ['key' => self::MILL, 'note' => 'Phay'],
+            ['key' => self::PEEL, 'note' => 'Bóc lề']
         ];
 
         const HANDLE_STAGE = [

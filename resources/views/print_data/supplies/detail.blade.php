@@ -5,57 +5,14 @@
             <span class="font_bold ml-1">: {{ getFieldDataById('name', 'products', $data_item->product) }}</span>
         </p>   
     </div>
-    <div class="mt-3">
+    <div class="mt-3 row row-10">
         @php
-            $cut = !empty($data_item->cut) ? json_decode($data_item->cut, true) : [];
+            $stages = \TDConst::COMMAND_STAGE_SUPPLY;
         @endphp
-        @if (!empty($cut['act']))
-            <p class="d-flex align-items-center mb-1 pb-1 border_bot_eb">
-                <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
-                <span class="w_220 d-block">Xén</span> 
-                <span class="ml-1 text-lowercase">: {{ getTextdataPaperStage(\TDConst::CUT, $cut) }}</span>
-            </p>     
-        @endif
-
-        @php
-            $elevate = !empty($data_item->elevate) ? json_decode($data_item->elevate, true) : [];
-        @endphp
-        @if (!empty($elevate['act']))
-            <p class="d-flex align-items-center mb-1 pb-1 border_bot_eb">
-                <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
-                <span class="w_220 d-block">Bế</span> 
-                <span class="ml-1 text-lowercase">: {{ getTextdataPaperStage(\TDConst::ELEVATE, $elevate) }}</span>
-            </p>     
-        @endif
-        
-        @php
-            $mill = !empty($data_item->mill) ? json_decode($data_item->mill, true) : [];
-        @endphp
-        @if (!empty($mill['act']))
-            <p class="d-flex align-items-center mb-1 pb-1 border_bot_eb">
-                <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
-                <span class="w_220 d-block">Phay</span> 
-                <span class="ml-1 text-lowercase">: {{ getTextdataPaperStage(\TDConst::CUT, $mill) }}</span>
-            </p>     
-        @endif
-
-        @php
-            $peel = !empty($data_item->peel) ? json_decode($data_item->peel, true) : [];
-        @endphp
-        @if (!empty($peel['act']))
-            <p class="d-flex align-items-center mb-1 pb-1 border_bot_eb">
-                <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
-                <span class="w_220 d-block">Bóc lề</span> 
-                <span class="ml-1 text-lowercase">: {{ getTextdataPaperStage(\TDConst::PEEL, $peel) }}</span>
-            </p>     
-        @endif
+        @include('print_data.list_stage', ['stages' => $stages, 'data_item' => $data_item])
 
         @if (!empty($data_item->note))
-            <p class="d-flex align-items-center mb-1 pb-1 border_bot_eb">
-                <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
-                <span class="w_220 d-block">Ghi chú</span> 
-                <span class="ml-1 text-lowercase">: {{ $data_item->note }}</span>
-            </p> 
+            @include('print_data.info_item', ['name' => 'Ghi chú', 'info' =>  $data_item->note])
         @endif 
         @php
             $size = !empty($data_item->size) ? json_decode($data_item->size, true) : [];
@@ -67,19 +24,10 @@
                 $supp_name .= getFieldDataById('name', 'materals', $size['supply_price']);
             }
         @endphp
-        <p class="d-flex align-items-center mb-1 pb-1 border_bot_eb">
-            <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
-            <span class="w_220 d-block">Loại vật tư</span> 
-            <span class="ml-1 text-lowercase">: {{ $supp_name }}</span>
-        </p>  
-        <p class="d-flex align-items-center mb-1 pb-1 border_bot_eb">
-            <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
-            <span class="w_220 d-block">Khổ giấy</span> 
-            <span class="ml-1 text-lowercase">: {{ $size['length'] .' x ' . $size['width'] }}</span>
-        </p> 
-        <p class="d-flex align-items-center mb-1 pb-1 border_bot_eb">
-            <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
-            <span class="w_220 d-block">Số lượng cần lấy</span> 
-            <span class="ml-1 text-lowercase">: {{ $data_item->supp_qty }}</span>
-        </p> 
+
+        @include('print_data.info_item', ['name' => 'Loại vật tư', 'info' => $supp_name])
+
+        @include('print_data.info_item', ['name' => 'Khổ vật tư', 'info' => $size['length'] .' x ' . $size['width']])
+
+        @include('print_data.info_item', ['name' => 'Số lượng cần lấy', 'info' => $data_item->supp_qty])
     </div>

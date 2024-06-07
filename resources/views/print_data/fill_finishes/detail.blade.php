@@ -5,18 +5,16 @@
             <span class="font_bold ml-1">: {{ getFieldDataById('name', 'products', $data_item->product) }}</span>
         </p>   
     </div>
-    <div class="mt-3">
+    <div class="mt-3 row row-10">
         @php
             $fill = !empty($data_item->fill) ? json_decode($data_item->fill, true) : [];
         @endphp
         
         @if (!empty($fill['stage']) && is_array($fill['stage']))
             @foreach ($fill['stage'] as $fill_stage)
-                <p class="d-flex align-items-center mb-1 pb-1 border_bot_eb">
-                    <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
-                    <span class="w_220 d-block">{{ str_replace('CHI PHÍ', '', getFieldDataById('name', 'materals', $fill_stage['materal'])) }}</span> 
-                    <span class="ml-1 text-lowercase">: {{ getFieldDataById('name', 'devices', $fill_stage['machine']) }} - KT : {{ $fill_stage['length'] .' x '.  $fill_stage['width'] }}</span>
-                </p> 
+                @include('print_data.info_item', 
+                ['name' => str_replace('CHI PHÍ', '', getFieldDataById('name', 'materals', $fill_stage['materal'])), 
+                'info' =>  getFieldDataById('name', 'devices', $fill_stage['machine']). '- KT :' .$fill_stage['length'] .' x '.  $fill_stage['width']])
             @endforeach   
         @endif
     </div>
@@ -29,24 +27,16 @@
                 <span class="font_bold ml-1">: {{ getFieldDataById('name', 'products', $data_item->product) }}</span>
             </p>   
         </div>
-        <div class="mt-3">
+        <div class="mt-3 row row-10">
             @php
                 $finish = !empty($data_item->finish) ? json_decode($data_item->finish, true) : [];
             @endphp
             
             @if (!empty($finish['stage']) && is_array($finish['stage']))
                 @foreach ($finish['stage'] as $finish_stage)
-                    <p class="d-flex align-items-center mb-1 pb-1 border_bot_eb">
-                        <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
-                        <span class="w_220 d-block">{{ getFieldDataById('name', 'devices', $finish_stage['materal']) }}</span> 
-                        <span class="ml-1 text-lowercase">: Có </span>
-                    </p> 
+                    @include('print_data.info_item', ['name' => getFieldDataById('name', 'devices', $finish_stage['materal']), 'info' => 'Có'])
                 @endforeach   
             @endif
-            <p class="d-flex align-items-center mb-1 pb-1 border_bot_eb">
-                <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
-                <span class="w_220 d-block">SL sản phẩm</span> 
-                <span class="ml-1 text-lowercase">: {{ $data_item->product_qty }} </span>
-            </p> 
+            @include('print_data.info_item', ['name' => 'SL thành phẩm', 'info' => $data_item->product_qty])
         </div>
     </div>
