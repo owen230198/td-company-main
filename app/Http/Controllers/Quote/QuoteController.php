@@ -267,33 +267,35 @@ class QuoteController extends Controller
         if (empty($arr_quote)) {
             return customReturnMessage(false, $is_post, ['message' => 'Dữ liệu báo giá không tồn tại hoặc đã bị xóa !']);
         }
-        if (!\GroupUser::isAdmin() || (!\GroupUser::isAdmin() && !\GroupUser::isSale()) || (\GroupUser::isSale() && \User::getCurrent('id') != $arr_quote->created_by)) {
+        if (\GroupUser::isAdmin() || (\GroupUser::isSale() && \User::getCurrent('id') == $arr_quote->created_by)) {
+            if (!$is_post) {
+                $data['data_quote'] = $arr_quote;
+                $data['title'] = 'Lợi nhuận báo giá mã - '.@$data['data_quote']['seri'];
+                $data['products'] = Product::where(['act' => 1, 'quote_id' => $id])->get();
+                $data['supply_fields'] = TDConstant::HARD_ELEMENT;
+                return view('quotes.profits.view', $data);
+            }else{
+                $arr_quote = Quote::find($id);
+                $ship_price = $request->input('ship_price');
+                $profit = $request->input('profit');
+                if ($ship_price == '') {
+                    return returnMessageAjax(100, 'Vui lòng nhập phí vận chuyển !');
+                }
+                if ($profit == '') {
+                    return returnMessageAjax(100, 'Vui lòng nhập lợi nhuận báo giá !');
+                }
+                $data_update = ['ship_price' => $ship_price, 'profit' => $profit];
+                $arr_quote->ship_price = $ship_price;
+                $arr_quote->profit = $profit;
+                $arr_quote->save();
+                Product::where('quote_id', $id)->update($data_update);
+                RefreshQuotePrice($arr_quote);
+                return returnMessageAjax(200, 'Cập nhật lợi nhuận báo giá thành công !', url('quote-file-export/'.$id));
+            }   
+        }else{
             return customReturnMessage(false, $is_post, ['message' => 'Bạn không có quyền cấu hình lợi nhuận cho báo giá này !']);
         }
-        if (!$is_post) {
-            $data['data_quote'] = $arr_quote;
-            $data['title'] = 'Lợi nhuận báo giá mã - '.@$data['data_quote']['seri'];
-            $data['products'] = Product::where(['act' => 1, 'quote_id' => $id])->get();
-            $data['supply_fields'] = TDConstant::HARD_ELEMENT;
-            return view('quotes.profits.view', $data);
-        }else{
-            $arr_quote = Quote::find($id);
-            $ship_price = $request->input('ship_price');
-            $profit = $request->input('profit');
-            if ($ship_price == '') {
-                return returnMessageAjax(100, 'Vui lòng nhập phí vận chuyển !');
-            }
-            if ($profit == '') {
-                return returnMessageAjax(100, 'Vui lòng nhập lợi nhuận báo giá !');
-            }
-            $data_update = ['ship_price' => $ship_price, 'profit' => $profit];
-            $arr_quote->ship_price = $ship_price;
-            $arr_quote->profit = $profit;
-            $arr_quote->save();
-            Product::where('quote_id', $id)->update($data_update);
-            RefreshQuotePrice($arr_quote);
-            return returnMessageAjax(200, 'Cập nhật lợi nhuận báo giá thành công !', url('quote-file-export/'.$id));
-        }
+        
     }
 
     public function quoteFileExport(Request $request, $id)
