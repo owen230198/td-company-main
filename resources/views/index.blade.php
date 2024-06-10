@@ -65,6 +65,7 @@
             </div>
         </div>
     @endif
+    @include('table/action_popup')
     @include('index_script_const')
     <script src="{{ asset('frontend/base/script/jquery.min.js') }}"></script>
     <script src="{{ asset('frontend/base/script/bootstrap.min.js') }}"></script>

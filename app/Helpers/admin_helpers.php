@@ -217,6 +217,23 @@ if (!function_exists('logActionUserData')) {
     }
 }
 
+if (!function_exists('getActionHistory')) {
+    function getActionHistory($action)
+    {
+        switch ($action) {
+            case 'insert':
+                return 'Thêm mới';
+                break;
+            case 'update':
+                return 'Cập nhật';
+                break;
+            default:
+                return 'Cập nhật';
+                break;
+        }
+    }
+}
+
 if (!function_exists('getNameFileUpload')) {
     function getNameFileUpload($dir, $name, $file_ext, $update_count = false, $get_ext = false)
     {

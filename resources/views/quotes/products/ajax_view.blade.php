@@ -23,6 +23,33 @@
                     @endif
                 @endif
             </div>
+            @if (!empty($product['id']))
+                @php
+                    $histories = \DB::table('n_log_actions')->where(['table_map' => 'products', 'target' => $product['id']])->get();
+                @endphp
+                @if (!empty($histories))
+                    <div class="history_product">
+                        <h3 class="fs-14 text-uppercase border_bot_eb py-3 my-3 text-center">
+                            <i class="fa fa-history mr-2 fs-14" aria-hidden="true"></i> Lịch sử đơn hàng
+                        </h3>
+                        @foreach ($histories as $history)
+                            @php
+                                $user = getDetailDataByID('NUser', $history->user)
+                            @endphp
+                            <li class=" mb-2 pb-2 border_bot_eb">
+                                Thời gian: <span class="color_green font_bold">{{ date('d/m/Y H:i', strtotime($history->created_at)) }}</span>,
+                                {{ getFieldDataById('name', 'n_group_users', $user->group_user).' : ' }}<span class="color_green font_bold">{{ @$user->name }}</span>
+                                đã {{ getActionHistory($history->action) }} sản phẩm <strong class="ml-1 color_green">{{ $product['name'] }}</strong>, 
+                                <button type="button" 
+                                class="btn btn-primary main_button bg_main color_white smooth bg_green border_green radius_5 font_bold smooth ml-2 load_view_popup" 
+                                data-toggle="modal" data-target="#actionModal">
+                                    <i class="fa fa-info-circle mr-2 fs-15" aria-hidden="true"></i>Xem hi tiết thay đổi dữ liệu
+                                </button>
+                            </li>
+                        @endforeach    
+                    </div>
+                @endif
+            @endif
         </div>
     @endforeach
 </div>

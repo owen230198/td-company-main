@@ -41,5 +41,4 @@
     </div>
     @include('table.remove_confirm', ['table_name' => $tableItem['name'], 'table_note' => $tableItem['note']])
     @include('table.remove_confirm_check')
-    @include('table/action_popup')
 @endsection
