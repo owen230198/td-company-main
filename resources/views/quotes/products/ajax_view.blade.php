@@ -25,7 +25,7 @@
             </div>
             @if (!empty($product['id']))
                 @php
-                    $histories = \DB::table('n_log_actions')->where(['table_map' => 'products', 'target' => $product['id']])->get();
+                    $histories = \DB::table('n_log_actions')->where(['table_map' => 'products', 'target' => $product['id']])->orderBy('id', 'desc')->get();
                 @endphp
                 @if (!empty($histories))
                     <div class="history_product">
@@ -36,15 +36,17 @@
                             @php
                                 $user = getDetailDataByID('NUser', $history->user)
                             @endphp
-                            <li class=" mb-2 pb-2 border_bot_eb">
-                                Thời gian: <span class="color_green font_bold">{{ date('d/m/Y H:i', strtotime($history->created_at)) }}</span>,
+                            <li class=" mb-2 pb-2 border_bot_eb d-flex justify-content-between">
+                                <div class="history_content">Thời gian: <span class="color_green font_bold">{{ date('d/m/Y H:i', strtotime($history->created_at)) }}</span>,
                                 {{ getFieldDataById('name', 'n_group_users', $user->group_user).' : ' }}<span class="color_green font_bold">{{ @$user->name }}</span>
-                                đã {{ getActionHistory($history->action) }} sản phẩm <strong class="ml-1 color_green">{{ $product['name'] }}</strong>, 
-                                <button type="button" 
-                                class="btn btn-primary main_button bg_main color_white smooth bg_green border_green radius_5 font_bold smooth ml-2 load_view_popup" 
-                                data-toggle="modal" data-target="#actionModal">
-                                    <i class="fa fa-info-circle mr-2 fs-15" aria-hidden="true"></i>Xem hi tiết thay đổi dữ liệu
+                                đã {{ getActionHistory($history->action) }} sản phẩm <strong class="ml-1 color_green">{{ $product['name'] }}</strong></div> 
+                                <div class="history_detail">
+                                    <button type="button" 
+                                            class="btn btn-primary main_button bg_main color_white smooth bg_green border_green radius_5 font_bold smooth ml-3 load_view_popup" 
+                                            data-toggle="modal" data-target="#actionModal">
+                                    <i class="fa fa-info-circle mr-2 fs-15" aria-hidden="true"></i>Xem chi tiết thay đổi dữ liệu
                                 </button>
+                                </div>
                             </li>
                         @endforeach    
                     </div>

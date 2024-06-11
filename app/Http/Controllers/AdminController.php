@@ -5,6 +5,7 @@ use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Models\NTable;
 use App\Models\File;
+use App\Models\NLogAction;
 use Illuminate\Support\Facades\Storage;
 use Pion\Laravel\ChunkUpload\Handler\HandlerFactory;
 use Pion\Laravel\ChunkUpload\Receiver\FileReceiver;
@@ -486,6 +487,18 @@ class AdminController extends Controller
         }else{
             return back()->with('error', 'Không tìm thấy file !');
         } 
+    }
+
+    public function historyDetail(Request $request, $id)
+    {
+        $data_log = NLogAction::find($id);
+        if (empty($data_log)) {
+            return back()->with('error', 'Dữ liệu không hợp lệ !', \StautusConst::CLOSE_POPUP);   
+        }
+        $role = $this->admins->checkPermissionAction($data_log->table_map, 'view');
+        if (!@$role['allow']) {
+            return back()->with('error', 'Không có quyền truy cập !', \StautusConst::CLOSE_POPUP);   
+        }
     }
 }
 

@@ -49,6 +49,7 @@ Route::middleware(['check_login'])->group(function () {
 	Route::post('upload-chunnked-file', [AdminController::class, 'uploadChunnkedFile']);
 	Route::any('change-password', [AuthController::class, 'changePassword']);
 	Route::any('account-detail', [AuthController::class, 'accountDetail']);
+	Route::get('history-detail/{id}', [AdminController::class, 'historyDetail']);
 
 	//quotes routes
 	Route::any('create-quote', [QuoteController::class, 'createQuote']);
