@@ -213,7 +213,7 @@ if (!function_exists('logActionUserData')) {
                 }    
             }
         }else{
-            $detail_data = $data_item;
+            $detail_data = \DB::table($table)->find($id);
         }
         if (!empty($detail_data)) {
             $data_log['detail_data'] = json_encode($detail_data);

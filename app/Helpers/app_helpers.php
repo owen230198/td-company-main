@@ -293,6 +293,14 @@ if (!function_exists('getParamUrlByArray')) {
     }
 }
 
+if (!function_exists('getFieldDataByWhere')) {
+    function getFieldDataByWhere($field, $table, $where)
+    {
+        $obj = \DB::table($table)->where($where)->first();
+        return @$obj->{$field};
+    }
+}
+
 if (!function_exists('limitStr')) {
     function limitStr($str, $limit, $offset = 0)
     {

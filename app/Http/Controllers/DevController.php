@@ -140,6 +140,24 @@ class DevController extends Controller
         dd($ret);
     }
 
+    public function handleDataHistory()
+    {
+        $data_histories = \DB::table('n_log_actions')->get();
+        foreach ($data_histories as $history) {
+            $obj = \DB::table($history->table_map)->find($history->target);
+            if (empty($obj)) {
+                \DB::table('n_log_actions')->where('id', $history->id)->delete();
+            }else{
+                $update['name'] = @$obj->name ?? @$obj->code;
+                if ($history->action == 'insert') {
+                    $update['detail_data'] = json_encode($obj);
+                }
+                \DB::table('n_log_actions')->where('id', $history->id)->update($update);
+            }
+        }
+        echo 'dm';
+    }
+
     public function testQuery()
     {
         \DB::enableQueryLog();

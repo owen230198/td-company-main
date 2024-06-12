@@ -50,11 +50,5 @@
                 @endforeach
             </tbody>
         </table>
-        <button type="button" 
-                    class="btn btn-primary main_button bg_main color_white smooth bg_green border_green radius_5 font_bold smooth ml-3 load_view_popup" 
-                    data-toggle="modal" data-target="#actionModal"
-                    data-src={{ url('history-detail/'.$data_log->id) }}>
-            <i class="fa fa-info-circle mr-2 fs-15" aria-hidden="true"></i>Xem chi tiết thay đổi dữ liệu
-        </button>
     </div>
 @endsection

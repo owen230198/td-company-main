@@ -507,13 +507,30 @@ class AdminController extends Controller
         if (empty($obj)) {
             return back()->with('error', 'Dữ liệu lịch sử của đối tượng không tồn tại hoặc đã bị xóa !', \StautusConst::CLOSE_POPUP);
         }
-        $data = $this->admins->getTableItem($table);
         $data['nosidebar'] = true;
         $data['title'] = 'Chi tiết chỉnh sửa '. $obj->name .' Ngày '. getDateTimeFormat($data_log->created_at);
         $data['detail_data'] = json_decode($data_log->detail_data, true);
         $data['data_log'] = $data_log;
         $data['obj_target'] = $obj;
         return view('histories.detail_data.view', $data);
+    }
+
+    public function historyTable(Request $request, $table)
+    {
+        if (!$request->isMethod('GET')) {
+            return back()->with('error', 'Yêu cầu không hợp lệ !', \StautusConst::CLOSE_POPUP); 
+        }
+        $where = ['table_map' => $table];
+        if (!empty($request->input('target'))) {
+            $where['target'] = $request->input('target');
+        }    
+        $data['nosidebar'] = true;
+        $data['title'] = 'Lịch sử chỉnh sửa '. getFieldDataByWhere('note', 'n_tables', ['name' => $table]);
+        if (!empty($request->input('target'))) {
+            $data['title'] .= ' '.getFieldDataById('name', $table, $request->input('target'));
+        }
+        $data['list_data'] = NLogAction::where($where)->cursor();
+        return view('histories.view', $data);
     }
 }
 
