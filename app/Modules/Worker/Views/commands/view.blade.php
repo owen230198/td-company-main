@@ -18,7 +18,7 @@
                 </p>
                 <p class="d-flex align-items-center color_green mb-2">
                     <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
-                    Ngày đặt : <strong class="color_main ml-1">{{ date('d/m/Y H:i', strtotime($data_product->created_at)) }}.</strong>
+                    Ngày đặt : <strong class="color_main ml-1">{{ getDateTimeFormat($data_product->created_at) }}.</strong>
                 </p>
             </div>
         </div>

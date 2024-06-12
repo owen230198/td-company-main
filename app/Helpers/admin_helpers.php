@@ -129,6 +129,13 @@ if (!function_exists('getBackUrl')) {
     }
 }
 
+if (!function_exists('getDateTimeFormat')) {
+    function getDateTimeFormat($time)
+    {
+        return date('d/m/Y H:i', strtotime($time));
+    }
+}
+
 if (!function_exists('getlabelLinking')) {
     function getLabelLinking($data, $label, $ext_info = false)
     {

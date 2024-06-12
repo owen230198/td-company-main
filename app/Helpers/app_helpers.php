@@ -293,6 +293,13 @@ if (!function_exists('getParamUrlByArray')) {
     }
 }
 
+if (!function_exists('limitStr')) {
+    function limitStr($str, $limit, $offset = 0)
+    {
+        return strlen($str) > $limit ? substr($str, $offset, $limit) . '...' : $str;
+    }
+}
+
 if (!function_exists('subStringLimit')) {
     function subStringLimit($str, $limit, $type = 'char') {
         if ($type == 'char') {

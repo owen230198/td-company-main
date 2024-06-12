@@ -491,14 +491,29 @@ class AdminController extends Controller
 
     public function historyDetail(Request $request, $id)
     {
+        if (!$request->isMethod('GET')) {
+            return back()->with('error', 'Yêu cầu không hợp lệ !', \StautusConst::CLOSE_POPUP); 
+        }
         $data_log = NLogAction::find($id);
-        if (empty($data_log)) {
+        if (empty($data_log) || empty($data_log['detail_data'])) {
             return back()->with('error', 'Dữ liệu không hợp lệ !', \StautusConst::CLOSE_POPUP);   
         }
+        $table = $data_log->table_map;
         $role = $this->admins->checkPermissionAction($data_log->table_map, 'view');
         if (!@$role['allow']) {
             return back()->with('error', 'Không có quyền truy cập !', \StautusConst::CLOSE_POPUP);   
         }
+        $obj = \DB::table($table)->find($data_log->target);
+        if (empty($obj)) {
+            return back()->with('error', 'Dữ liệu lịch sử của đối tượng không tồn tại hoặc đã bị xóa !', \StautusConst::CLOSE_POPUP);
+        }
+        $data = $this->admins->getTableItem($table);
+        $data['nosidebar'] = true;
+        $data['title'] = 'Chi tiết chỉnh sửa '. $obj->name .' Ngày '. getDateTimeFormat($data_log->created_at);
+        $data['detail_data'] = json_decode($data_log->detail_data, true);
+        $data['data_log'] = $data_log;
+        $data['obj_target'] = $obj;
+        return view('histories.detail_data.view', $data);
     }
 }
 

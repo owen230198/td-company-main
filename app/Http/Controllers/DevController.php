@@ -134,6 +134,12 @@ class DevController extends Controller
         }
     }
 
+    public function test()
+    {
+        $ret = \DB::table('products')->where([['status', '!=', 'making_process'], ['act', '=', 1]])->get();
+        dd($ret);
+    }
+
     public function testQuery()
     {
         \DB::enableQueryLog();

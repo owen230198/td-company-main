@@ -131,9 +131,6 @@ class QuoteService extends BaseService
         if (!empty($data['design'])) {
             $data_action['design'] = $data['design'];
         }
-        if (!empty($data['size'])) {
-            $data_action['size'] = json_encode($data['size']);
-        }
         if (!empty($data['custom_design_file'])) {
             $data_action['custom_design_file'] = $data['custom_design_file'];
         }
@@ -152,9 +149,7 @@ class QuoteService extends BaseService
         if (!empty($data['handle_shape_file'])) {
             $data_action['handle_shape_file'] = $data['handle_shape_file'];
         }
-        if (!empty($data['note'])) {
-            $data_action['note'] = json_encode($data['note']);
-        }  
+        $data_action['note'] = json_encode(@$data['note']); 
         $this->configBaseDataAction($data_action);
         return $data_action;
     }

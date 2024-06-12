@@ -1,4 +1,4 @@
-Thời gian: <span class="color_green font_bold">{{ date('d/m/Y H:i', strtotime($created_at)) }}</span>, 
+Thời gian: <span class="color_green font_bold">{{getDateTimeFormat($created_at) }}</span>, 
 nhân viên: <span class="color_main font_bold">{{ getFieldDataById('name', 'n_users', $created_by) }}</span>
 @if (@$exported > 0)
     đã xác nhận xuất <span class="color_red font_bold">{{ $exported }}</span> vật tư,

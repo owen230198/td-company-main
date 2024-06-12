@@ -16,7 +16,7 @@
                 {{ getFieldDataById('name', 'n_users', $data_product->created_by) }},
             </strong></p>
             <p class="m-2">Hoàn thành SX: <strong class="ml-1 color_green">
-                {{ date('d/m/Y H:i', strtotime($data_product->updated_at)) }}
+                {{ getDateTimeFormat($data_product->updated_at) }}
             </strong></p>
         </div>
     </div>

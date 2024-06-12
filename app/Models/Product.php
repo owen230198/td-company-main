@@ -116,22 +116,26 @@
 
         static function removeCommand($product_id)
         {
-            WSalary::where('status', '!=', \StatusConst::SUBMITED)->where('product', $product_id)->delete();
-            CDesign::where('status', '!=', \StatusConst::SUBMITED)->where('product', $product_id)->delete();
-            CSupply::where('status', '!=', \StatusConst::SUBMITED)->where('product', $product_id)->delete();
+            $commands = ['w_salaries', 'c_designes', 'c_supplies'];
+            self::removeDataChildTable($commands, [['product', '=', $product_id], ['status', '!=', \StatusConst::SUBMITED]]);
         }
 
         public function afterRemove($id)
         {
             $childs = self::$childTable;
+            self::removeDataChildTable($childs, ['product' => $id]);
+            self::removeCommand($id);
+        }
+
+        static function removeDataChildTable($arr_tables, $where)
+        {
             $admin = new \App\Services\AdminService;
-            foreach ($childs as $table) {
-                $list = \DB::table($table)->where('product', $id)->get();
+            foreach ($arr_tables as $table) {
+                $list = \DB::table($table)->where($where)->get();
                 foreach ($list as $obj) {
                     $admin->removeDataTable($table, $obj->id);
                 }
             }
-            self::removeCommand($id);
         }
         
         static function getRole()

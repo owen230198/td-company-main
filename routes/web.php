@@ -50,6 +50,7 @@ Route::middleware(['check_login'])->group(function () {
 	Route::any('change-password', [AuthController::class, 'changePassword']);
 	Route::any('account-detail', [AuthController::class, 'accountDetail']);
 	Route::get('history-detail/{id}', [AdminController::class, 'historyDetail']);
+	Route::get('data-history-table/{table}', [AdminController::class, 'dataHistoryTable']);
 
 	//quotes routes
 	Route::any('create-quote', [QuoteController::class, 'createQuote']);

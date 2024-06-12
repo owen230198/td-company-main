@@ -37,13 +37,14 @@
                                 $user = getDetailDataByID('NUser', $history->user)
                             @endphp
                             <li class=" mb-2 pb-2 border_bot_eb d-flex justify-content-between">
-                                <div class="history_content">Thời gian: <span class="color_green font_bold">{{ date('d/m/Y H:i', strtotime($history->created_at)) }}</span>,
+                                <div class="history_content">Thời gian: <span class="color_green font_bold">{{ getDateTimeFormat($history->created_at) }}</span>,
                                 {{ getFieldDataById('name', 'n_group_users', $user->group_user).' : ' }}<span class="color_green font_bold">{{ @$user->name }}</span>
                                 đã {{ getActionHistory($history->action) }} sản phẩm <strong class="ml-1 color_green">{{ $product['name'] }}</strong></div> 
                                 <div class="history_detail">
                                     <button type="button" 
                                             class="btn btn-primary main_button bg_main color_white smooth bg_green border_green radius_5 font_bold smooth ml-3 load_view_popup" 
-                                            data-toggle="modal" data-target="#actionModal">
+                                            data-toggle="modal" data-target="#actionModal"
+                                            data-src={{ url('history-detail/'.$history->id) }}>
                                     <i class="fa fa-info-circle mr-2 fs-15" aria-hidden="true"></i>Xem chi tiết thay đổi dữ liệu
                                 </button>
                                 </div>
