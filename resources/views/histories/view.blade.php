@@ -2,7 +2,7 @@
 @section('content')
     <div class="dashborad_content">
         @foreach ($list_data as $data)
-            @dump($data->toArray());
+            @include('histories.item',  ['history' => $data, 'type_detail' => 'collapse'])
         @endforeach
     </div>
 @endsection

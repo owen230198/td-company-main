@@ -145,6 +145,7 @@ class DevController extends Controller
         $data_histories = \DB::table('n_log_actions')->get();
         foreach ($data_histories as $history) {
             $obj = \DB::table($history->table_map)->find($history->target);
+            $update = [];
             if (empty($obj)) {
                 \DB::table('n_log_actions')->where('id', $history->id)->delete();
             }else{
@@ -152,6 +153,9 @@ class DevController extends Controller
                 if ($history->action == 'insert') {
                     $update['detail_data'] = json_encode($obj);
                 }
+                // if ($history->id == 2971) {
+                //     dd($obj, $update);
+                // }
                 \DB::table('n_log_actions')->where('id', $history->id)->update($update);
             }
         }

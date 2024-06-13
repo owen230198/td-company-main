@@ -203,18 +203,21 @@ if (!function_exists('logActionUserData')) {
                         'act' => 1,
                         'parent' => $parent,
                         'created_at' => \Carbon\Carbon::now(),
-                        'updated_at' => \Carbon\Carbon::now()];
+                        'updated_at' => \Carbon\Carbon::now()
+                    ];
+        $data_target = \DB::table($table)->find($id);
         if (in_array($action, ['update', 'update_customer', 'apply']) && !empty($data_item)) {
-            $data_target = \DB::table($table)->find($id);
             foreach ($data_target as $key => $value) {
                 $old_value = @$data_item->{$key};
+                dump($key, $value, $old_value);
                 if (!in_array($key, ['updated_at', 'created_at']) && $value != $old_value) {
                     $detail_data[$key] = ['old' => $old_value, 'new' => $value];
                 }    
             }
         }else{
-            $detail_data = \DB::table($table)->find($id);
+            $detail_data = $data_target;
         }
+        dd(1);
         if (!empty($detail_data)) {
             $data_log['detail_data'] = json_encode($detail_data);
             return \App\Models\NLogAction::insertGetId($data_log);
@@ -257,5 +260,13 @@ if (!function_exists('getNameFileUpload')) {
             $name .= '.'.$file_ext;
         }
         return $name;
+    }
+}
+
+if (!function_exists('getDetailTableField')) {
+    function getDetailTableField($where)
+    {
+        $field_data = \App\Models\NDetailTable::where($where)->first();
+        return !empty($field_data) ? processArrField($field_data->toArray()) : [];
     }
 }

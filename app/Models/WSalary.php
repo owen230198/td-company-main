@@ -16,10 +16,17 @@ class WSalary extends Model
         $this->worker = $worker;
     }
 
-    static function getHandleDataJson($type, $handle, $get_array = false)
+    static function getHandleDataJson($type, $handle, $get_array = false, $get_note = false)
     {
         $arr = [];
         switch ($type) {
+            case \TDConst::SIZE:
+                $arr =  [
+                    ['name' => 'Chất liệu giấy', 'value' => getFieldDataById('name', 'materals', @$handle['materal'])],
+                    ['name' => 'Định lượng', 'value' => @$handle['qttv']],
+                    ['name' => 'KT khổ giấy', 'value' => @$handle['length'] . ' x '.$handle['width']]
+                ];
+                 break;
             case \TDConst::PRINT:
                 $data_print_handle = getPrintInfo($handle['type'], @$handle['color'], $handle['machine']);
                 $arr =  [
@@ -66,6 +73,9 @@ class WSalary extends Model
             default:
                 $arr =  @$handle['machine'] ? [['name' => 'Thiết bị máy', 'value' => getFieldDataById('name', 'devices', $handle['machine'])]] : [];
                 break;
+        }
+        if ($get_note && !empty($handle['note'])) {
+            $arr[] = ['name' => 'Ghi chún', 'value' => $handle['note']];
         }
         return $get_array ? $arr : json_encode($arr);
     }
