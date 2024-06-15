@@ -11,7 +11,7 @@
  Target Server Version : 80030
  File Encoding         : 65001
 
- Date: 12/06/2024 15:29:00
+ Date: 16/06/2024 00:21:00
 */
 
 SET NAMES utf8mb4;
@@ -45,7 +45,7 @@ CREATE TABLE `n_detail_tables`  (
   INDEX `map_insert`(`table_map`, `insert`) USING BTREE,
   INDEX `map_update`(`table_map`, `update`) USING BTREE,
   INDEX `map_search`(`table_map`, `search`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 338 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 350 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of n_detail_tables
@@ -252,8 +252,8 @@ INSERT INTO `n_detail_tables` VALUES (214, 'peel', '', 'Bóc lề', 'handle_stag
 INSERT INTO `n_detail_tables` VALUES (215, 'fold', '', 'Gấp vạch', 'handle_stage', 'papers', 1, 0, 0, 0, 1, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2024-06-12 13:21:36');
 INSERT INTO `n_detail_tables` VALUES (216, 'box_paste', '', 'Dán hộp', 'handle_stage', 'papers', 1, 0, 0, 0, 1, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2024-06-12 13:21:36');
 INSERT INTO `n_detail_tables` VALUES (217, 'bag_paste', '', 'Dán túi', 'handle_stage', 'papers', 1, 0, 0, 0, 1, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2024-06-12 13:21:36');
-INSERT INTO `n_detail_tables` VALUES (218, 'status', '', 'Trạng thái', 'text', 'papers', 1, 0, 0, 0, 1, 0, '', 1, 0, 0, '2023-04-07 23:41:47', '2024-06-12 13:21:36');
-INSERT INTO `n_detail_tables` VALUES (219, 'name', '', 'Tên vật tư', 'text', 'supplies', 0, 0, 0, 0, 1, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2024-06-12 13:21:36');
+INSERT INTO `n_detail_tables` VALUES (218, 'status', '', 'Trạng thái', 'text', 'papers', 0, 0, 0, 0, 0, 0, '', 1, 0, 0, '2023-04-07 23:41:47', '2024-06-13 14:37:56');
+INSERT INTO `n_detail_tables` VALUES (219, 'name', '', 'Tên vật tư', 'linking', 'supplies', 0, 0, 0, 0, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"supply_names\"\r\n	}\r\n}', 1, 0, 1, '2023-04-07 23:41:47', '2024-06-15 23:12:57');
 INSERT INTO `n_detail_tables` VALUES (220, 'product_qty', '', 'SL sản phẩm', 'text', 'supplies', 1, 0, 0, 0, 1, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2024-06-12 13:21:36');
 INSERT INTO `n_detail_tables` VALUES (221, 'nqty', '', 'Số bát', 'text', 'supplies', 1, 0, 0, 0, 1, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2024-06-12 13:21:36');
 INSERT INTO `n_detail_tables` VALUES (222, 'supp_qty', '', 'Số L vật tư', 'text', 'supplies', 1, 0, 0, 0, 1, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2024-06-12 13:21:36');
@@ -261,7 +261,7 @@ INSERT INTO `n_detail_tables` VALUES (223, 'cut', '', 'Xén', 'handle_stage', 's
 INSERT INTO `n_detail_tables` VALUES (224, 'elavate', '', 'Bế', 'handle_stage', 'supplies', 1, 0, 0, 0, 1, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2024-06-12 13:21:36');
 INSERT INTO `n_detail_tables` VALUES (225, 'peel', '', 'Bóc lề', 'handle_stage', 'supplies', 1, 0, 0, 0, 1, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2024-06-12 13:21:36');
 INSERT INTO `n_detail_tables` VALUES (226, 'mill', '', 'Phay', 'handle_stage', 'supplies', 1, 0, 0, 0, 1, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2024-06-12 13:21:36');
-INSERT INTO `n_detail_tables` VALUES (227, 'status', '', 'Trạng thái', 'text', 'supplies', 1, 0, 0, 0, 1, 0, '', 1, 0, 0, '2023-04-07 23:41:47', '2024-06-12 13:21:36');
+INSERT INTO `n_detail_tables` VALUES (227, 'status', '', 'Trạng thái', 'text', 'supplies', 0, 0, 0, 0, 0, 0, '', 1, 0, 0, '2023-04-07 23:41:47', '2024-06-15 23:37:10');
 INSERT INTO `n_detail_tables` VALUES (228, 'product_qty', '', 'SL sản phẩm', 'text', 'fill_finishes', 1, 0, 0, 0, 1, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2024-06-12 13:21:36');
 INSERT INTO `n_detail_tables` VALUES (229, 'fill', '', 'Bồi', 'handle_stage', 'fill_finishes', 1, 0, 0, 0, 1, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2024-06-12 13:21:36');
 INSERT INTO `n_detail_tables` VALUES (230, 'finish', '', 'Hoàn thiện cuối', 'handle_stage', 'fill_finishes', 1, 0, 0, 0, 1, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2024-06-12 13:21:36');
@@ -374,5 +374,7 @@ INSERT INTO `n_detail_tables` VALUES (346, 'tech_design_file', '', 'File bình t
 INSERT INTO `n_detail_tables` VALUES (347, 'handle_shape_file', '', 'Khuôn Ép Nhũ, Thúc Nổi, In UV', 'filev2', 'products', 0, 0, 0, 0, 1, 0, '', 1, 0, 1, '2023-06-15 06:55:51', '2024-06-12 07:10:07');
 INSERT INTO `n_detail_tables` VALUES (348, 'detail', '', 'Ghi chú', 'textarea', 'products', 0, 0, 0, 0, 1, 0, '', 1, 1, 1, '2023-05-26 03:19:12', '2024-06-12 13:21:36');
 INSERT INTO `n_detail_tables` VALUES (349, 'note', '', 'Ghi chú Gia công', 'pro_note_handle', 'products', 0, 0, 0, 0, 1, 0, '', 1, 1, 1, '2023-05-26 03:19:12', '2024-06-12 13:21:36');
+INSERT INTO `n_detail_tables` VALUES (350, 'size', '', 'Vật liệu giấy', 'handle_stage', 'papers', 0, 0, 0, 0, 1, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2024-06-12 13:21:36');
+INSERT INTO `n_detail_tables` VALUES (351, 'ext_price', '', 'Chi phí phát sinh', 'handle_stage', 'papers', 0, 0, 0, 0, 1, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2024-06-12 13:21:36');
 
 SET FOREIGN_KEY_CHECKS = 1;

@@ -49,6 +49,12 @@
         <a href="{{ url('print-data/fill_finishes/'.$supply_obj->id) }}" target="_blank" class="main_button color_white bg_green border_green radius_5 font_bold sooth">
             <i class="fa fa-print mr-2 fs-14" aria-hidden="true"></i> In lệnh
         </a>
+        <button type="button" 
+            class="ml-2 btn btn-primary main_button bg_main color_white smooth bg_green border_green radius_5 font_bold smooth ml-3 load_view_popup" 
+            data-toggle="modal" data-target="#actionModal"
+            data-src={{ url('history-table/'.$supp_table.'?target='.$supply_obj->id) }}>
+            <i class="fa fa-history mr-2 fs-15" aria-hidden="true"></i>Lịch sử chỉnh sửa
+        </button>
     @endif
 </h3>
 @if (empty($rework))

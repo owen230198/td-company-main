@@ -38,11 +38,12 @@
                     <div class="card card-body bg_eb">
                         @php
                             $view_action = $data->action == 'insert' ? 'insert' : 'update';
+                            $data_field = [
+                                'table_map' => $data->table_map,
+                                'arr_detail' => json_decode($data->detail_data, true)
+                            ];
                         @endphp
-                        @include('histories.' . $view_action, [
-                            'detail_data' => $data->detail_data,
-                            'table_map' => $data->table_map,
-                        ])
+                        @include('histories.' . $view_action, $data_field)
                     </div>
                 </div>
             </div>

@@ -10,6 +10,6 @@
         $label = getLabelLinking($linking_item, $field_title);
     }
 @endphp
-<p class="color_main py-1 radius_5 mb-0 text-center linking_table">
+<p class="color_main py-1 radius_5 mb-0 text-center {{ empty($history_view) ? 'linking_table' : '' }}">
 	{{ $label }}
 </p>

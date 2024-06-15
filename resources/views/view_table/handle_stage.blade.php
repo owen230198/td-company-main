@@ -5,7 +5,6 @@
 @if ($history_view)
     @php
         $data_stages = \App\Models\WSalary::getHandleDataJson($name, $stage, true, true);
-        dump($stage);
     @endphp
     @if (!empty($data_stages))
         <div class="p-2 box_shadow_3 radius_5">

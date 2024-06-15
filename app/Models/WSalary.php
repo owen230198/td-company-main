@@ -16,7 +16,7 @@ class WSalary extends Model
         $this->worker = $worker;
     }
 
-    static function getHandleDataJson($type, $handle, $get_array = false, $get_note = false)
+    static function getHandleDataJson($type, $handle, $get_array = false, $get_extra = false)
     {
         $arr = [];
         switch ($type) {
@@ -55,12 +55,61 @@ class WSalary extends Model
                 }
                 $arr[] = ['name' => 'Máy cán metalai', 'value' => getFieldDataById('name', 'devices', @$handle['machine'])];
                 break;
+            case \TDConst::COMPRESS:
+                $arr = [
+                    ['name' => 'Giá Ép Nhũ/1 Sản Phẩm', 'value' => @$handle['price']],
+                ];
+                if ($get_extra) {
+                    $arr[] = ['name' => 'Tiền khuôn/1bats sản phẩm', 'value' => @$handle['shape_price']];
+                    $arr[] = ['name' => 'Máy ép nhũ', 'value' => getFieldDataById('name', 'devices', @$handle['machine'])];
+                }
+                break;
             case \TDConst::UV:
                 $arr = [
                     ['name' => 'Mực in', 'value' => getFieldDataById('name', 'materals', @$handle['materal'])],
                     ['name' => 'Số mặt in', 'value' => @$handle['face']],
                     ['name' => 'Máy in', 'value' => getFieldDataById('name', 'devices', @$handle['machine'])]
                 ];
+                break;
+            case \TDConst::ELEVATE:
+                $arr = [
+                    ['name' => 'Thêm Giá Cho Khuôn Phức Tạp', 'value' => @$handle['ext_price']],
+                    ['name' => 'Máy bế', 'value' => getFieldDataById('name', 'devices', @$handle['machine'])]
+                ];
+                if (!empty($handle['float']['act'])) {
+                    $arr[] = ['name' => 'Thúc Nổi', 'value' => 'Có'];
+                    if ($get_extra) {
+                        $arr[] = ['name' => 'Giá Tiền Thúc Nổi 1 Sp', 'value' => @$handle['ext_price']];
+                        $arr[] = ['name' => 'Tiền khuôn/ bát sản phẩm', 'value' => @$handle['shape_price']];
+                    }
+                }
+                break;
+            case \TDConst::PEEL:
+                $arr = [
+                    ['name' => 'Số bát lề', 'value' => @$handle['nqty']],
+                    ['name' => 'bóc lề', 'value' => getFieldDataById('name', 'devices', @$handle['machine'])]
+                ];
+                break;
+            case \TDConst::EXT_PRICE:
+                $arr = [
+                    ['name' => 'Chi phí tem', 'value' => @$handle['temp_price']],
+                    ['name' => 'Chi phí toa', 'value' => @$handle['prescript_price']],
+                    ['name' => 'Chi phí vật tư khác', 'value' => @$handle['supp_price']],
+                ];
+                break;
+            case \TDConst::FILL:
+                if (!empty($handle['stage'])) {
+                    foreach ($handle['stage'] as $key => $stage) {
+                        $num = (int) $key + 1;
+                        $arr[] = ['name' => 'Công đoạn bồi hộp '.$num, 
+                        'value' => 'KT: '.$stage['length'] . ' x ' . $stage['width'] 
+                        .', CL: '.getFieldDataById('name', 'materals', @$stage['materal'])
+                        .', TB: '.getFieldDataById('name', 'devices', @$stage['machine'])];   
+                    }
+                }
+                if ($get_extra) {
+                    $arr[] = ['name' => 'Phát sinh chi tiết bồi khó', 'value' => @$handle['ext_price']];
+                }
                 break;
             case \TDConst::FINISH:
                 if (!empty($handle['stage'])) {
@@ -74,8 +123,8 @@ class WSalary extends Model
                 $arr =  @$handle['machine'] ? [['name' => 'Thiết bị máy', 'value' => getFieldDataById('name', 'devices', $handle['machine'])]] : [];
                 break;
         }
-        if ($get_note && !empty($handle['note'])) {
-            $arr[] = ['name' => 'Ghi chún', 'value' => $handle['note']];
+        if ($get_extra && !empty($handle['note'])) {
+            $arr[] = ['name' => 'Ghi chú', 'value' => $handle['note']];
         }
         return $get_array ? $arr : json_encode($arr);
     }

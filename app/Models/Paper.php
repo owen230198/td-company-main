@@ -63,8 +63,9 @@ class Paper extends Model
                 $process_product['parent'] = $product_id;
                 (new BaseService)->configBaseDataAction($process_product);
                 if (!empty($paper['id'])) {
+                    $dataItem = Product::find($paper['id']);
                     $process = Product::where('id', $paper['id'])->update($process_product); 
-                    logActionUserData('update', 'products', $paper['id'], Product::find($paper['id']));  
+                    logActionUserData('update', 'products', $paper['id'], $dataItem);  
                 }else{
                     $process = Product::insertGetId($process_product);
                     logActionUserData('insert', 'products', $process);
@@ -86,7 +87,7 @@ class Paper extends Model
                 if (@$paper['supp_qty'] > 0 || @$paper['handle_type'] == \TDConst::JOIN_HANDLE) {
                     if (!empty($paper['id'])) {
                         $process = $this->where('id', $paper['id'])->update($data_process);
-                        logActionUserData('update', 'papers', $paper['id'], Paper::find($paper['id']));  
+                        logActionUserData('update', 'papers', $paper['id'], $dataItem);  
                     }else{
                         $process = $this->insertGetId($data_process);
                         logActionUserData('insert', 'papers', $process);

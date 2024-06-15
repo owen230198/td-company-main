@@ -526,9 +526,9 @@ class AdminController extends Controller
         }    
         $data['nosidebar'] = true;
         $data['title'] = 'Lịch sử chỉnh sửa '. getFieldDataByWhere('note', 'n_tables', ['name' => $table]);
-        if (!empty($request->input('target'))) {
-            $data['title'] .= ' '.getFieldDataById('name', $table, $request->input('target'));
-        }
+        // if (!empty($request->input('target'))) {
+        //     $data['title'] .= ' '.getFieldDataById('name', $table, $request->input('target'));
+        // }
         $data['list_data'] = NLogAction::where($where)->cursor();
         return view('histories.view', $data);
     }

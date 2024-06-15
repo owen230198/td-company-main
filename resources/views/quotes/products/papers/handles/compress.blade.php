@@ -2,7 +2,7 @@
     $key_stage = \TDConst::COMPRESS;
     $paper_compress_price = [
         'name' => $paper_hd_base_name.'['.$key_stage.'][price]',
-        'note' => 'Giá ép nhũ/1 bát sản phẩm',
+        'note' => 'Giá ép nhũ/1 sản phẩm',
         'attr' => ['type_input' => 'number'],
         'value' => @$data_handle['price'] ?? 0
     ];

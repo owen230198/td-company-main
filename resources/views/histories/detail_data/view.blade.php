@@ -20,20 +20,19 @@
                 @endphp
                 @foreach ($detail_data as $key => $data)
                     @php
-                        $where = ['table_map' => $data_log->table_map, 'name' => $key, 'history' => 1];
-                        $field_data = \App\Models\NDetailTable::where($where)->first();
+                        $field_data = getDetailTableField(['table_map' => $table_map, 'name' => $key, 'history' => 1]);
                         $arr_field = processArrField($field_data);
                     @endphp
                     @if (!empty($field_data))
                         <tr>
                             <th scope="row">{{ $count++ }}</th>
-                            <td>{{ $field_data->note }}</td>
+                            <td>{{ $field_data['note'] }}</td>
                             <td>
                                 @php
                                     $data_old = $arr_field;
                                     $data_old['value'] = $data['old'];
                                 @endphp
-                                @include('view_table.'.$field_data->type, $data_old)
+                                @include('view_table.'.$field_data['type'], $data_old)
                             </td>
                             <td class="text-center">
                                 <i class="fa fa-long-arrow-right fs-18" aria-hidden="true"></i>
@@ -43,7 +42,7 @@
                                     $data_new = $arr_field;
                                     $data_new['value'] = $data['new'];
                                 @endphp
-                                @include('view_table.'.$field_data->type, $data_new)
+                                @include('view_table.'.$field_data['type'], $data_new)
                             </td>
                         </tr>
                     @endif
