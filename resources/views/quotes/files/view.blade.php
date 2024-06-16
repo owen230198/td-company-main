@@ -73,9 +73,9 @@
     <button type="button" class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-2 print_quotes" data-seri="{{ @$data_quote['seri'] }}">
       <i class="fa fa-file-pdf-o mr-2 fs-14" aria-hidden="true"></i>Xuất file PDF
     </button>
-    <button class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-2 send_mail_quote">
+    {{-- <button class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-2 send_mail_quote">
         <i class="fa fa-paper-plane-o mr-2 fs-14" aria-hidden="true"></i>Gửi báo giá
-    </button>
+    </button> --}}
     <a href="{{ url('quote-file-export/'.$data_quote['id'].'?step=file_docx') }}" class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-2">
         <i class="fa fa-file-word-o mr-2 fs-14" aria-hidden="true"></i>Xuất file words
     </a>

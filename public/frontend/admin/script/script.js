@@ -316,16 +316,24 @@ var multipleSelectModule = function(section = $('.base_content'))
             let url = $(this).attr('url');
             $(this).select2({
                 placeholder: note,
+                language: {
+                    noResults: function() {
+                        return "Không có dữ liệu được tìm thấy !";
+                    }
+                },
+                data: {
+                    ids: $(this).attr('value'),
+                },
                 ajax: {
                     url: url,
                     dataType: 'json',
                     delay: 250,
                     processResults: function(data) {
                         return {
-                            results: $.map(data.options, function(option) {
+                            results: data.map(function(option) {
                                 return {
-                                    id: option.value,
-                                    label: option.label
+                                    id: option.id,
+                                    text: option.label
                                 };
                             })
                         };
@@ -333,6 +341,14 @@ var multipleSelectModule = function(section = $('.base_content'))
                     cache: true
                 }
             });
+            let initialValues = $(this).attr('value');
+            let select = $(this);
+            if (initialValues.length > 0) {
+                JSON.parse(initialValues).forEach(function(item) {
+                    let newOption = new Option(item.label, item.id, true, true);
+                    select.append(newOption).trigger('change');
+                });
+            }
         });
     }
 }

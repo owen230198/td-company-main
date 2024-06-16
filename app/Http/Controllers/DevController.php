@@ -344,5 +344,27 @@ class DevController extends Controller
     {
         \DB::table($request->input('table'))->where('id', $request->input('id'))->update([$request->input('key') => $request->input('value')]);
     }
+
+    public function customerToRepresent()
+    {
+        dd(1);
+        $customsers = \DB::table('customers')->get();
+        foreach ($customsers as $customer) {
+            $represent = [];
+            $represent['name'] = $customer->contacter;
+            $represent['phone'] = $customer->phone;
+            $represent['telephone'] = $customer->telephone;
+            $represent['email'] = $customer->email;
+            $represent['customer'] = $customer->id;
+            $represent['sale'] = json_encode([$customer->created_by]);
+            $represent['note'] = $customer->note;
+            $represent['act'] = $customer->act;
+            $represent['created_at'] = $customer->created_at;
+            $represent['updated_at'] = $customer->updated_at;
+            $represent['created_by'] = $customer->created_by;
+            $id = \DB::table('represents')->insertGetId($represent);
+            dump($id = \DB::table('represents')->find($id));
+        }
+    }
 }
 

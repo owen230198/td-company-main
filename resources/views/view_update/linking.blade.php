@@ -9,19 +9,7 @@
 
 @if (@$select_config['search'] == 1)
     @php
-        $url = asset('get-data-json-linking?table='.$table_linking.'&field_search='.$field_title.'&field_value='.$field_value.'&except_linking='.$except_linking);
-        if (!empty($select_data['where'])) {
-            foreach ($select_data['where'] as $key => $val) {
-                $url .= '&'.$key.'='.$val;
-            }
-        }
-        if (!empty($select_data['where_default'])) {
-            foreach ($select_data['where_default'] as $key => $val) {
-                if (!empty($default_field[$val])) {
-                    $url .= '&'.$key.'='.$default_field[$val];
-                }
-            }
-        }
+        $url = getLinkingUrl($select_data, @$datItem);
         if (!empty($value)) {
             $data_id = $value;
             $linking_model = getModelByTable($table_linking);

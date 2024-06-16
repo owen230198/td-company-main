@@ -270,3 +270,38 @@ if (!function_exists('getDetailTableField')) {
         return !empty($field_data) ? processArrField($field_data->toArray()) : [];
     }
 }
+
+if (!function_exists('getLinkingUrl')) {
+    function getLinkingUrl($select_data, $dataItem)
+    {
+        $field_title = @$select_data['field_title'] ?? 'name';
+        $field_value = @$select_data['field_value'] ?? 'id';
+        $except_linking = !empty($select_config['except_linking']) ? $select_config['except_linking'] : 0;
+        $table_linking = getTableLinkingWithData(@$dataItem, $select_data['table']);
+        $url = asset('get-data-json-linking?table='.$table_linking.'&field_search='.$field_title.'&field_value='.$field_value.'&except_linking='.$except_linking);
+        if (!empty($select_data['where'])) {
+            foreach ($select_data['where'] as $key => $val) {
+                $url .= '&'.$key.'='.$val;
+            }
+        }
+        if (!empty($select_data['where_default'])) {
+            foreach ($select_data['where_default'] as $key => $val) {
+                if (!empty($default_field[$val])) {
+                    $url .= '&'.$key.'='.$default_field[$val];
+                }
+            }
+        }
+        return $url;
+    }
+
+    if (!function_exists('getJsonMultipleValue')) {
+        function getJsonMultipleValue($data, $model, $label, $field_value)
+        {
+            $arr = array_map(function($item) use($label, $model, $field_value){
+                $item_label = method_exists($model, 'getLabelLinking') ? $model::getLabelLinking($item) : getlabelLinking($item, $label, true);
+                return ['id' => @$item->{$field_value}, 'label' => $item_label];
+            }, $data);
+            return json_encode($arr);
+        }
+    }
+}

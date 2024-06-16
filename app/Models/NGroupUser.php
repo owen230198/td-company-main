@@ -81,6 +81,11 @@ class NGroupUser extends Model
             'link' => 'view/customers',
             'group' => 'customer'
         ],
+        'represent_list' => [
+            'name' => 'DS người đại diện',
+            'link' => 'view/represents',
+            'group' => 'customer'
+        ],
         'partner_list' => [
             'name' => 'DS đối tác sx',
             'link' => 'view/partners',
