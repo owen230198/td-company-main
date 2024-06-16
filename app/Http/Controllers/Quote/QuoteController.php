@@ -328,14 +328,18 @@ class QuoteController extends Controller
 
     public function applyQuote($id)
     {
-        if (\GroupUser::isAdmin() || \GroupUser::isSale()) {
-            $quote_obj = \DB::table('quotes')->where('id', $id);
-            $quote = $quote_obj->first();
+        $quote = Quote::find($id);
+        if (empty($quote)) {
+            return back()->with('error', 'Dữ liệu không hợp lệ !');
+        }
+        if (\GroupUser::isAdmin() || (\GroupUser::isSale() && $quote->created_by == \User::getCurrent('id'))) {
             if (@$quote->status != \StatusConst::NOT_ACCEPTED) {
                 return back()->with('error', 'Dữ liệu không hợp lệ !');
             }
-            $update = $quote_obj->update(['status' => \StatusConst::ACCEPTED]);
+            $quote->status = \StatusConst::ACCEPTED;
+            $update = $quote->save();
             if ($update) {
+                logActionUserData('apply', 'papers', $id, $quote);  
                 return back()->with('message', 'Báo giá đã được duyệt và sẵn sàng tạo đơn !');
             }
         }else{

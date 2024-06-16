@@ -7,7 +7,6 @@
     use App\Models\Quote;
     use App\Models\SupplyWarehouse;
     use App\Models\Product;
-    use App\Models\WSalary;
 
     class OrderController extends Controller
     {
