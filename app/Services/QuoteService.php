@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Constants\TDConstant;
 use App\Models\NGroupUser;
 use App\Models\NLogAction;
+use App\Models\Represent;
 use PhpOffice\PhpWord\TemplateProcessor;
 
 class QuoteService extends BaseService
@@ -14,18 +15,18 @@ class QuoteService extends BaseService
 	{
 		parent::__construct();
 	}
-    public function dataActionCustomer($customer_id, $data_customer)
+    public function dataActionCustomer($data_customer)
     {
         $data_quote = $data_customer;
-        if (empty($customer_id)) {
-            $this->configBaseDataAction($data_customer);
-            $data_customer['status'] = 0;
-            $customer_id = Customer::insertGetId($data_customer);
-            Customer::getInsertCode($customer_id);
-            logActionUserData('insert', 'customers', $customer_id);
-        }
-        $data_quote['customer_id'] = $customer_id;
-        $data_quote['company_name'] = $data_customer['name'];
+        // if (empty($customer_id)) {
+        //     $this->configBaseDataAction($data_customer);
+        //     $data_customer['status'] = 0;
+        //     $customer_id = Customer::insertGetId($data_customer);
+        //     Customer::getInsertCode($customer_id);
+        //     logActionUserData('insert', 'customers', $customer_id);
+        // }
+        // $data_quote['customer_id'] = $customer_id;
+        // $data_quote['company_name'] = $data_customer['name'];
         return $data_quote;
     }
 
@@ -214,23 +215,23 @@ class QuoteService extends BaseService
 
     public function getCustomerSelectDataView($id)
     {
-        $data['data_customer'] = Customer::find($id);
-        $data['fields'] = Customer::FIELD_UPDATE;
+        $data['represents'] = Represent::where('customer', $id)->get();
+        $data['customer_fields'] = Customer::FIELD_UPDATE;
+        $data['customer'] = Customer::find($id);
         return $data;
     }
 
     public function selectCustomerUpdateQuote($request, $id = 0)
     {
-        $data_customer = $request->except('_token', 'step', 'customer_id');
-        $customer_id = $request->input('customer_id');
-        $data_quote = $this->dataActionCustomer($customer_id, $data_customer);
+        $data_customer = $request->except('_token', 'step');
+        $data_quote = $this->dataActionCustomer($data_customer);
         if (!empty($id)) {
             $update = \DB::table('quotes')->where('id', $id)->update($data_quote);
             if ($update) {
-                logActionUserData('update_customer', 'quotes', $id, $data_customer);
+                logActionUserData('update_represents', 'quotes', $id, $data_customer);
             }
         }
-        $redr = !empty($id) ? 'update/quotes/'.$id.'?step=handle_config' : 'insert/quotes?step=handle_config&customer='.$data_quote['customer_id'];
+        $redr = !empty($id) ? 'update/quotes/'.$id.'?step=handle_config' : 'insert/quotes?step=handle_config&represent='.$data_quote['represent'];
         return returnMessageAjax(200, '', asset($redr));
     }
 
@@ -241,13 +242,13 @@ class QuoteService extends BaseService
             return returnMessageAjax(100, 'Không tìm thấy sản phẩm !');
         }
         $quote_obj->seri = 'BG-'.sprintf("%08s", $quote_obj->id);
-            $quote_obj->save();
-            $data['product'] = array_map(function($product) use ($quote_obj) {
-                $product['quote_id'] = $quote_obj->id;
-                return $product;
-            }, $data['product']);
-            $status = $this->processDataProduct($data, $quote_obj);
-            return $status;
+        $quote_obj->save();
+        $data['product'] = array_map(function($product) use ($quote_obj) {
+            $product['quote_id'] = $quote_obj->id;
+            return $product;
+        }, $data['product']);
+        $status = $this->processDataProduct($data, $quote_obj);
+        return $status;
     }
 
     public function resetHandledQty($table, $model, $supp_id)

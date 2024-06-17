@@ -6,6 +6,7 @@ use App\Models\Quote;
 use App\Constants\TDConstant;
 use App\Models\Product;
 use \App\Models\Customer;
+use App\Models\Represent;
 
 class QuoteController extends Controller
 {
@@ -32,7 +33,16 @@ class QuoteController extends Controller
         $step = $request->input('step') ?? 'chose_customer';
         $quote = Quote::find($id);
         if (!empty($quote)) {
-            if($request->isMethod('POST')){
+            $represent = Represent::find($quote->represent);
+            $is_post = $request->isMethod('POST');
+            if (empty($represent)) {
+                return customReturnMessage(false, $is_post, ['message' => 'Người liên hệ không tồn tại hoặc đã bị xóa !']);
+            }
+            $customer = Customer::find($represent->customer);
+            if (empty($customer)) {
+                return customReturnMessage(false, $is_post, ['message' => 'Coong ty không tồn tại hoặc đã bị xóa !']);
+            }
+            if($is_post){
                 if ($step == 'chose_customer') {
                     return $this->services->selectCustomerUpdateQuote($request, $id);
                 }else{
@@ -47,16 +57,20 @@ class QuoteController extends Controller
                 }
             }else{
                 if ($step == 'chose_customer') {
-                    $data = $this->services->getCustomerSelectDataView($quote['customer_id']);
+                    $data = $this->services->getCustomerSelectDataView($quote->represent);
+                    $data['represent_fields'] = Represent::FIELD_UPDATE;
+                    $data['dataItem'] = $quote;
                     $data['parent_url'] = ['link' => getBackUrl(), 'note' => 'Danh sách báo giá'];
                 }else{
-                    $data['data_quote'] = $quote;
+                    $data['represent'] = $represent;
+                    $data['customer'] = $customer;
+                    $data['dataItem'] = $quote;
                     $products = Product::where(['act' => 1, 'quote_id' => $id])->get();
                     $data['products'] = $products;
                     $data['product_qty'] = count($data['products']);
                     $data['parent_url'] = ['link' => 'update/quotes/'.$id, 'note' => 'Chọn khách hàng khác'];
                 }
-                $data['title'] = 'Chỉnh sửa báo giá - '.$quote['seri'].' - '.getStepCreateQuote($step);
+                $data['title'] = 'Chỉnh sửa báo giá - '.$quote->seri.' - '.getStepCreateQuote($step);
                 $data['link_action'] = url('update/quotes/'.$id.'?step='.$step);
                 return view('quotes.'.$step, $data);
             }
@@ -131,18 +145,19 @@ class QuoteController extends Controller
                 return $this->services->selectCustomerUpdateQuote($request);
             }
         }else{
-            $arr_customer = Customer::find($request->input('customer'));
-            if (empty($arr_customer)) {
+            $represent = Represent::find($request->input('represent'));
+            if (empty($represent)) {
+                return customReturnMessage(false, $request->isMethod('POST'), ['message' => 'Người liên hệ không tồn tại hoặc đã bị xóa !']);
+            }
+            $customer = Customer::find($represent->customer);
+            if (empty($customer)) {
                 return customReturnMessage(false, $request->isMethod('POST'), ['message' => 'Khách hàng không tồn tại hoặc đã bị xóa !']);
             }
             if (!$request->isMethod('POST')) {
                 $data['title'] = 'Tạo mới báo giá - Chi tiết sản phẩm và sản xuất';
-                $data['data_quote'] = $arr_customer;
-                if (!empty($data['data_quote'])) {
-                    return view('quotes.'.$step, $data);
-                }else{
-                    return redirect(url('/'))->with('error', 'Dữ liệu báo giá không tồn tại !');
-                }
+                $data['represent'] = $represent;
+                $data['customer'] = $customer;
+                return view('quotes.'.$step, $data);
             }else{
                 $products = $request->input('product');
                 if (empty($products)) {
@@ -154,20 +169,16 @@ class QuoteController extends Controller
                         return $valid;
                     }
                 }
-                foreach (Customer::FIELD_UPDATE as $field) {
-                    $key_name = $field['name'];
-                    $data[$key_name] = $arr_customer[$key_name];
-                }
-                $data['customer_id'] = $arr_customer['id'];
-                $data['company_name'] = $arr_customer['name'];
+                $data['represent'] = $represent->id;
+                $data['name'] = $customer->name;
                 $data['status'] = \StatusConst::NOT_ACCEPTED;
                 (new \BaseService)->configBaseDataAction($data);
                 $insert_id = Quote::insertGetId($data);
-                if ($insert_id) {
-                    logActionUserData('insert_customer', 'quotes', $insert_id);
-                }
                 $arr_quote = Quote::find($insert_id);
                 $process = $this->services->processDataQuote($request, $arr_quote);
+                if ($insert_id) {
+                    logActionUserData('insert', 'quotes', $insert_id);
+                }
                 if ($process) {
                     return returnMessageAjax(200, 'Cập nhật dữ liệu thành công !', url('/profit-config-quote?quote_id='.$arr_quote['id']));
                 }
@@ -179,8 +190,27 @@ class QuoteController extends Controller
     public function getViewCustomerData(Request $request)
     {
         $id = (int) $request->input('id');
-        $data = $this->services->getCustomerSelectDataView($id);
-        return view('quotes.customer_info', $data);
+        if (empty($id)) {
+            echo '';
+        }
+        if ($request->input('type') == 'represent') {
+            $represent = Represent::find($id);
+            if (empty($represent)) {
+                return returnMessageAjax(100, 'Người liên hệ không tồn tại hoặc đã bị xóa !');
+            }
+            $sales = json_decode($represent->sale);
+            $current_sale_id = \User::getCurrent('id');
+            if (in_array($current_sale_id, $sales) || $current_sale_id == $represent->created_by || \GroupUser::isAdmin()) {
+                $data['represent_fields'] = Represent::FIELD_UPDATE;
+                $data['represent'] = $represent;
+                return view('quotes.represent_info', $data);    
+            }else{
+                return returnMessageAjax(100, 'Người liên hệ này không phải do bạn phụ trách, vui lòng liên hệ Admin !');
+            }
+        }else{
+            $data = $this->services->getCustomerSelectDataView($id);
+            return view('quotes.customer_info', $data);
+        }
     }
 
     public function getViewProductQuantity(Request $request)

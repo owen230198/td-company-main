@@ -100,13 +100,27 @@ var selectCustomerQuote = function () {
         $.ajax({
             url: getBaseRoute('get-view-customer-data?id=' + $(this).val()),
             type: 'GET'
-        })
-            .done(function (html) {
-                $('.customer_info_quote').html(html);
-                selectAjaxModule($('.customer_info_quote'));
-                enableButtonSubmit();
-            });
+        }).done(function (html) {
+            $('.customer_info_quote').html(html);
+            selectAjaxModule($('.customer_info_quote'));
+            enableButtonSubmit();
+        });
     })
+}
+
+var chooseRepresentQuote = function() {
+    $(document).on('click', 'li.__choose_represent', function(event) {
+        event.preventDefault();
+        let _this = $(this);
+        let parent = _this.parent();
+        parent.find('li.__choose_represent').each(function(){
+            $(this).removeClass('active');
+        })
+        _this.toggleClass('active');
+        let id = _this.data('id');
+        let url  = 'get-view-customer-data?type=represent&id=' + id;
+        ajaxViewTarget(url, $('.__ajax_represent_info'), $('.__ajax_represent_info'));
+    });
 }
 
 var selectPaperMateralModule = function () {
@@ -343,17 +357,21 @@ var modulePaperExceptHandle = function () {
 }
 
 var suggestShapeFileBySize = function () {
-    $(document).on('change', 'input.__size_suggest_input', function (event) {
+    let timeout;
+    $(document).on('keyup', 'input.__size_suggest_input', function (event) {
         event.preventDefault();
-        let module = $(this).closest('.config_handle_paper_pro');
-        let category = module.find('select.__category_product').val();
-        let style = module.find('select.__style_product').val();
-        let length = module.find('input.__length_input').val();
-        let width = module.find('input.__width_input').val();
-        let height = module.find('input.__height_input').val();
-        let url = 'suggest-product-submited-by-size?category=' + category + '&style=' + style + '&length=' + length + '&width=' + width + '&height=' + height;
-        let suggest_section = module.find('.__suggest_product_submited_ajax');
-        ajaxViewTarget(url, suggest_section, suggest_section);
+        clearTimeout(timeout);
+        timeout = setTimeout(function () {
+            let module = $(this).closest('.config_handle_paper_pro');
+            let category = module.find('select.__category_product').val();
+            let style = module.find('select.__style_product').val();
+            let length = module.find('input.__length_input').val();
+            let width = module.find('input.__width_input').val();
+            let height = module.find('input.__height_input').val();
+            let url = 'suggest-product-submited-by-size?category=' + category + '&style=' + style + '&length=' + length + '&width=' + width + '&height=' + height;
+            let suggest_section = module.find('.__suggest_product_submited_ajax');
+            ajaxViewTarget(url, suggest_section, suggest_section);
+        }, 500)
     });
 }
 
@@ -408,6 +426,7 @@ $(function () {
     moduleSelectOtherPaper();
     PrintQuote();
     selectCustomerQuote();
+    chooseRepresentQuote();
     selectPaperMateralModule();
     moduleInputQuantityProduct();
     addSuppModule();

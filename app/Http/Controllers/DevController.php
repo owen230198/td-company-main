@@ -363,6 +363,8 @@ class DevController extends Controller
             $represent['updated_at'] = $customer->updated_at;
             $represent['created_by'] = $customer->created_by;
             $id = \DB::table('represents')->insertGetId($represent);
+            \DB::table('quotes')->where('represent', $customer->id)->update(['represent' => $id]);
+            \DB::table('orders')->where('represent', $customer->id)->update(['represent' => $id]);
             dump($id = \DB::table('represents')->find($id));
         }
     }

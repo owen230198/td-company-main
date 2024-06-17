@@ -205,6 +205,17 @@ ul.supply_info li.supply_item_inf>.detail_quote_supply_item.hover{
     transform:translateY(-50%);
 }
 
+.represent_item {
+    background: none;
+    border: 1px solid #459300;
+    cursor: pointer;
+}
+
+.represent_item:hover, .represent_item.active{
+    background: #459300;
+    color: #ffffff;
+}
+
 .footer_quote {
     padding-bottom: 400px;
 }
@@ -236,6 +247,16 @@ ul.supply_info li.supply_item_inf>.detail_quote_supply_item.hover{
     position: sticky;
     bottom: -1px;
     background: #dee2e6;
+}
+.chose_customer_form  
+.select2.select2-container.select2-container--default, 
+.chose_customer_form  .form-control, 
+.chose_customer_form  .btn-group, 
+.btn-group-vertical, 
+.chose_customer_form  .multiselect-container{
+    width: 440px;
+    max-width: 440px;
+    min-width: 440px;
 }
 
 @page {

@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="{{ asset('frontend/base/css/bootstrap-multiselect.min.css') }}">
 @endsection
 @section('content')
-    <form action="{{ !empty($link_action) ? $link_action : asset('insert/quotes?step=handle_config&customer='.$data_quote['id']) }}" method="POST" 
+    <form action="{{ !empty($link_action) ? $link_action : asset('insert/quotes?step=handle_config&represent='.$represent->id) }}" method="POST" 
     class="config_handle_form config_content baseAjaxForm" enctype="multipart/form-data" onkeydown="return event.key != 'Enter'">
         @csrf
         @include('quotes.head_information')
@@ -30,12 +30,14 @@
             </div>
         </div>
         <div class="group_btn_action_form text-center">
-            <button type="submit" disabled class="main_button color_white bg_green border_green radius_5 font_bold smooth">
+            <button type="submit" disabled class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-3">
               <i class="fa fa-check mr-2 fs-14" aria-hidden="true"></i>Hoàn tất
             </button>
-            <a href="{{ url('update/quotes/'.$data_quote['id']) }}" class="main_button color_white bg_green radius_5 font_bold smooth mx-3">
-                <i class="fa fa-angle-double-left mr-2 fs-14" aria-hidden="true"></i>Chọn khách hàng khác
-            </a>
+            @if (!empty($dataItem->id))
+                <a href="{{ url('update/quotes/'.$dataItem->id) }}" class="main_button color_white bg_green radius_5 font_bold smooth mr-3">
+                    <i class="fa fa-angle-double-left mr-2 fs-14" aria-hidden="true"></i>Chọn khách hàng khác
+                </a>
+            @endif
             <a href="{{ url('') }}" class="main_button bg_red color_white radius_5 font_bold smooth red_btn">
               <i class="fa fa-times mr-2 fs-14" aria-hidden="true"></i>Hủy
             </a>

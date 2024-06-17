@@ -51,6 +51,8 @@ class BaseService
 			}
 			if (@$field['type'] == 'datetime') {
 				$data[$key] = getDataDateTime($item);
+			}elseif (@$field['type'] == 'multiplelinking') {
+				$data[$key] = json_encode($item);
 			}elseif (@$attr['type_input'] == 'password') {
 				$data[$key] = md5($data['password']);
 			} 
