@@ -339,17 +339,19 @@ class QuoteController extends Controller
         if (empty($arr_quote)) {
             return redirect(url(''))->with('error', 'Không tìm thấy dữ liệu báo giá !');
         }
-        $data_customer = Customer::find($arr_quote['customer_id']);
+        $represent = Represent::find($arr_quote->represent);
+        $data_customer = Customer::find($represent->customer);
         $data_products = Product::where(['act' => 1, 'quote_id' => $id])->get();
         $step = $request->input('step') ?? 'review';
         if ($step == 'review') {
             $data['title'] = 'Quản lí file báo giá - '. $arr_quote['seri'];
             $data['data_quote'] = $arr_quote;
+            $data['data_represent'] = $represent;
             $data['data_customer'] = $data_customer;
             $data['data_products'] = $data_products;
             return view('quotes.files.view', $data);
         }else{
-            return $this->services->export($arr_quote, $data_customer, $data_products);   
+            return $this->services->export($arr_quote, $data_customer, $represent, $data_products);   
         }
     }
     

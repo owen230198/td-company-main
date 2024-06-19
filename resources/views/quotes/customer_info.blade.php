@@ -5,7 +5,7 @@
         <ul>
             @foreach ($represents as $represent)
                 <li class="represent_item __choose_represent p-1 mb-1 radius_5 smooth {{ $represent->id == @$dataItem->represent ? 'active' : '' }}" data-id = {{ $represent->id }}>
-                    <p class="font_bold"><i class="fa fa-user-circle mr-1 mb-1" aria-hidden="true"></i>Đại diện: {{ $represent->name }}</p> 
+                    <p class="font_bold"><i class="fa fa-user-circle mr-1 mb-1" aria-hidden="true"></i>Người liên hệ: {{ $represent->name }}</p> 
                     <p>
                         <i class="fa fa-users mr-1 mb-1" aria-hidden="true"></i>
                         @php

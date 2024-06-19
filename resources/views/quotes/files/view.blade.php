@@ -33,11 +33,11 @@
         <div class="px-lg-5 position-relative quote_content">
             <div class="quote_bg_content">
                 <h1 class="text-uppercase fs-39 font_bold text-center mb-3">bảng báo giá</h1>
-                <p class="fs-17 ml-lg-5 ml-md-3 mb-1">Kính gửi : <span class="font-italic"><span class="company">{{ @$data_customer['name'] }}</span></span></p>
-                <p class="fs-17 ml-lg-5 ml-md-3 mb-1">Người liên hệ : <span class="font-italic">{{ @$data_customer['contacter'] }}</span></p>
-                <p class="fs-17 ml-lg-5 ml-md-3 mb-1">Địa chỉ : <span class="font-italic">{{ @$data_customer['address'] }}</span></p>
-                <p class="fs-17 ml-lg-5 ml-md-3 mb-1">Tel : <span class="font-italic">{{ @$data_customer['phone'] }}</span></p>
-                <p class="fs-17 ml-lg-5 ml-md-3 mb-1">Email : {{ @$data_customer['email'] }}</p>
+                <p class="fs-17 ml-lg-5 ml-md-3 mb-1">Kính gửi : <span class="font-italic"><span class="company">{{ @$data_customer->name }}</span></span></p>
+                <p class="fs-17 ml-lg-5 ml-md-3 mb-1">Người liên hệ : <span class="font-italic">{{ @$data_represent->name }}</span></p>
+                <p class="fs-17 ml-lg-5 ml-md-3 mb-1">Địa chỉ : <span class="font-italic">{{ @$data_customer->address }}</span></p>
+                <p class="fs-17 ml-lg-5 ml-md-3 mb-1">Tel : <span class="font-italic">{{ @$data_represent->phone }}</span></p>
+                <p class="fs-17 ml-lg-5 ml-md-3 mb-1">Email : {{ @$data_represent->email }}</p>
                 <p class="fs-21 text-center font-italic"></span><?= getDataConfig('QuoteConfig', 'QUOTE_WISH') ?></p>
     
                 <div class="table_quote my-lg-4 my-3">

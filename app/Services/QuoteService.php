@@ -286,15 +286,15 @@ class QuoteService extends BaseService
         return $arr;
     }
 
-    public function export($arr_quote, $customer, $products)
+    public function export($arr_quote, $customer, $represent, $products)
     {
         $templateProcessor = new TemplateProcessor(base_path('public/frontend/admin/templates/words/quote_template.docx'));
         \PhpOffice\PhpWord\Settings::setOutputEscapingEnabled(true);
         $templateProcessor->setValue('customer_name', @$customer['name']);
-        $templateProcessor->setValue('customer_contacter', @$customer['contacter']);
-        $templateProcessor->setValue('customer_phone', @$customer['phone']);
+        $templateProcessor->setValue('customer_contacter', @$represent['name']);
+        $templateProcessor->setValue('customer_phone', @$represent['phone']);
         $templateProcessor->setValue('customer_address', @$customer['address']);
-        $templateProcessor->setValue('customer_email', @$customer['email']);
+        $templateProcessor->setValue('customer_email', @$represent['email']);
 
         $list_pro = [];
         foreach ($products as $key => $product) {

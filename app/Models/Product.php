@@ -117,7 +117,7 @@
 
         static function removeCommand($product_id)
         {
-            $commands = ['w_salaries', 'c_designes', 'c_supplies'];
+            $commands = ['w_salaries', 'c_designs', 'c_supplies'];
             self::removeDataChildTable($commands, [['product', '=', $product_id], ['status', '!=', \StatusConst::SUBMITED]]);
         }
 
