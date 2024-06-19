@@ -6,6 +6,7 @@
     {
         protected $table = 'c_designs';
         protected $protectFields = false;
+        protected $guarded = [];
         const PROCESSING = Order::DESIGNING;
         const GR_USER = \GroupUser::DESIGN;
         static function getRole()

@@ -5,7 +5,7 @@
     {
         protected $table = 'orders';
         protected $protectFields = false;
-
+        protected $guarded = [];
         //Status
         const NOT_ACCEPTED = \StatusConst::NOT_ACCEPTED;
         const TO_DESIGN = 'to_design';

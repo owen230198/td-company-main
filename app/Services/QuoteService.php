@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Constants\TDConstant;
 use App\Models\NGroupUser;
 use App\Models\NLogAction;
+use App\Models\Quote;
 use App\Models\Represent;
 use PhpOffice\PhpWord\TemplateProcessor;
 
@@ -228,7 +229,7 @@ class QuoteService extends BaseService
         if (!empty($id)) {
             $update = \DB::table('quotes')->where('id', $id)->update($data_quote);
             if ($update) {
-                logActionUserData('update_represents', 'quotes', $id, $data_customer);
+                logActionUserData('update_represents', 'quotes', $id, Quote::find($id));
             }
         }
         $redr = !empty($id) ? 'update/quotes/'.$id.'?step=handle_config' : 'insert/quotes?step=handle_config&represent='.$data_quote['represent'];

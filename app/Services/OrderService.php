@@ -47,19 +47,23 @@ class OrderService extends BaseService
             $arr_order['rest'] = $arr_order['total_amount'] - (float) $arr_order['advance'];
             $this->configBaseDataAction($arr_order);
             if (!empty($arr_order['id'])) {
+                $dataItem = Order::find($arr_order['id']);
                 Order::where('id', $arr_order['id'])->update($arr_order);
+                logActionUserData('update', 'orders', $arr_order['id'], $dataItem);
                 $arr_order['code'] = 'DH-'.sprintf("%08s", $arr_order['id']);
             }else{
                 if (!empty($base_obj) && $base_obj->getTable() == 'quotes') {
                     $quote_obj = Quote::find($base_obj->id);
                     $quote_obj->status = Quote::ORDER_CREATED;
                     $quote_obj->save();
+                    $arr_order['name'] = $quote_obj->name;
                     $arr_order['quote'] = $quote_obj->id;
                     $arr_order['profit'] = $quote_obj->profit;
                     $arr_order['ship_price'] = $quote_obj->ship_price;
                 }
                 $arr_order['status'] = \StatusConst::NOT_ACCEPTED;
                 $arr_order['id'] = Order::insertGetId($arr_order);
+                logActionUserData('insert', 'orders', $arr_order['id']);
                 $arr_order['code'] = 'DH-'.sprintf("%08s", $arr_order['id']);
                 Order::where('id', $arr_order['id'])->update($arr_order);
             }
@@ -105,21 +109,22 @@ class OrderService extends BaseService
     {
         $data_insert['order'] = $order_id;
         $data_insert['status'] = \StatusConst::NOT_ACCEPTED;
-        $arr_order_action = ['status' => Order::TO_DESIGN];
+        $dg_status = Order::TO_DESIGN;
         $this->configBaseDataAction($data_insert);
         foreach ($products as $key => $product) {
             $h = $key > 0 ? $key.'.' : '';
             $data_insert['code'] = 'TK-'.$h.''.$code;
             $data_insert['name'] = $product['name'];
             $data_insert['product'] = $product['id'];
-            $insert = CDesign::insert($data_insert);
-            if ($insert) {
-                Product::where('id', $product['id'])->update($arr_order_action);
+            $design_id = CDesign::insertGetId($data_insert);
+            logActionUserData('insert', 'c_designs', $design_id);
+            if ($design_id) {
+                logActionDataById('products', $product['id'], ['status' => $dg_status], $dg_status);
             }
         }
         $arr_count = ['act' => 1, 'order' => $order_id];
         if (getCountDataTable('products', $arr_count) == getCountDataTable('c_designs', $arr_count)) {
-            Order::where('id', $order_id)->update($arr_order_action);
+            logActionDataById('orders', $order_id, ['status' => $dg_status], $dg_status);
         }
         return 1;
     }

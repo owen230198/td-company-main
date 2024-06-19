@@ -2,7 +2,7 @@
     $stage = !empty($value) ? json_decode($value, true) : [];
     $icon = getIconByStageHandle(@$stage['act']);
 @endphp
-@if ($history_view)
+@if (!empty($history_view))
     @php
         $data_stages = \App\Models\WSalary::getHandleDataJson($name, $stage, true, true);
     @endphp

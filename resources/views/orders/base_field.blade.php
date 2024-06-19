@@ -2,11 +2,20 @@
     @php
         $order_field_update = [
             [
-                'name' => 'order[customer]',
+                'name' => '',
+                'attr' => ['readonly' => 1],
                 'note' => 'Khách hàng',
                 'type' => 'linking',
                 'other_data' => ['config' => ['search' => 1], 'data'=> ['table' => 'customers']],
-                'value' => @$data_order['customer'] ?? 0
+                'value' => !empty($data_order['represent']) ? \App\Models\Represent::getCustomer($data_order['represent'], 'id') : ''
+            ],
+            [
+                'name' => 'order[represent]',
+                'attr' => ['readonly' => 1],
+                'note' => 'Người liên hệ',
+                'type' => 'linking',
+                'other_data' => ['config' => ['search' => 1], 'data'=> ['table' => 'represents']],
+                'value' => @$data_order['represent']
             ],
             [
                 'name' => '',

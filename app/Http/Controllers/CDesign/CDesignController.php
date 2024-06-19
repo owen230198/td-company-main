@@ -4,8 +4,8 @@
     use Illuminate\Http\Request;
     use App\Models\CDesign;
     use App\Models\Order;
-use App\Models\Paper;
-use App\Models\Product;
+    use App\Models\Paper;
+    use App\Models\Product;
 
     class CDesignController extends Controller
     {

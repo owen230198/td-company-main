@@ -49,10 +49,12 @@ class QuoteController extends Controller
                     if (@$quote->status != \StatusConst::NOT_ACCEPTED) {
                         return returnMessageAjax(100, 'Không thể chỉnh sửa báo giá đã được khách duyệt giá !');
                     }
+                    $dataItem = $quote->replicate();
                     $process = $this->services->processDataQuote($request, $quote);
                     if (!empty($process['code']) && $process['code'] == 100) {
                         return $process;
                     }
+                    logActionUserData('update', 'quotes', $id, $dataItem);
                     return returnMessageAjax(200, 'Cập nhật dữ liệu thành công !', url('/profit-config-quote?quote_id='.$quote['id']));
                 }
             }else{

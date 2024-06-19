@@ -152,10 +152,9 @@ class DevController extends Controller
                 $update['name'] = @$obj->name ?? @$obj->code;
                 if ($history->action == 'insert') {
                     $update['detail_data'] = json_encode($obj);
+                }elseif ($history->action == 'removeDataTable') {
+                    $update['action'] = 'remove';
                 }
-                // if ($history->id == 2971) {
-                //     dd($obj, $update);
-                // }
                 \DB::table('n_log_actions')->where('id', $history->id)->update($update);
             }
         }
@@ -347,7 +346,6 @@ class DevController extends Controller
 
     public function customerToRepresent()
     {
-        dd(1);
         $customsers = \DB::table('customers')->get();
         foreach ($customsers as $customer) {
             $represent = [];

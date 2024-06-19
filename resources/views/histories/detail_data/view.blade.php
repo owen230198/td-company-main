@@ -20,17 +20,19 @@
                 @endphp
                 @foreach ($detail_data as $key => $data)
                     @php
-                        $field_data = getDetailTableField(['table_map' => $table_map, 'name' => $key, 'history' => 1]);
-                        $arr_field = processArrField($field_data);
+                        $field_data = getDetailTableField(['table_map' => $data_log->table_map, 'name' => $key, 'history' => 1]);
                     @endphp
                     @if (!empty($field_data))
+                        @php
+                            $field_data['history_view'] = true;
+                        @endphp
                         <tr>
                             <th scope="row">{{ $count++ }}</th>
                             <td>{{ $field_data['note'] }}</td>
                             <td>
                                 @php
-                                    $data_old = $arr_field;
-                                    $data_old['value'] = $data['old'];
+                                    $data_old = $field_data;
+                                    $data_old['value'] = !empty($data['old']) ? $data['old'] : '';
                                 @endphp
                                 @include('view_table.'.$field_data['type'], $data_old)
                             </td>
@@ -39,8 +41,8 @@
                             </td>
                             <td>
                                 @php
-                                    $data_new = $arr_field;
-                                    $data_new['value'] = $data['new'];
+                                    $data_new = $field_data;
+                                    $data_new['value'] = !empty($data['new']) ? $data['new'] : '';
                                 @endphp
                                 @include('view_table.'.$field_data['type'], $data_new)
                             </td>

@@ -89,6 +89,18 @@ if (!function_exists('getActionByKey')) {
             case 'remove':
                 return 'Xóa';
                 break;
+            case 'insert_customer':
+                return 'Thêm mới khách hàng';
+                break;
+            case 'update_customer':
+                return 'Cập nhật khách hàng';
+                break;
+            case 'to_design':
+                return 'Duyệt thiết kế';
+                break;
+            case 'designing':
+                return 'Nhận lệnh thiết kế thiết kế';
+                break;
             default:
                 return '';
                 break;
@@ -163,6 +175,9 @@ if (!function_exists('getTableLinkingWithData')) {
 if (!function_exists('processArrField')) {
     function processArrField($field)
     {
+        if (empty($field)) {
+            return false;
+        }
         $arr = $field;
         $arr['attr'] = !empty($field['attr']) ? json_decode($field['attr'], true) : [];
         $arr['other_data'] = !empty($field['other_data']) ? json_decode($field['other_data'], true) : [];
@@ -208,7 +223,7 @@ if (!function_exists('logActionUserData')) {
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now()
         ];
-        if (in_array($action, ['update', 'update_customer', 'apply']) && !empty($data_item)) {
+        if (!in_array($action, ['insert', 'remove']) && !empty($data_item)) {
             foreach ($data_target as $key => $value) {
                 $old_value = @$data_item->{$key};
                 if (!in_array($key, ['updated_at', 'created_at']) && $value != $old_value) {
@@ -224,23 +239,6 @@ if (!function_exists('logActionUserData')) {
         }else{
             return false;
         }           
-    }
-}
-
-if (!function_exists('getActionHistory')) {
-    function getActionHistory($action)
-    {
-        switch ($action) {
-            case 'insert':
-                return 'Thêm mới';
-                break;
-            case 'update':
-                return 'Cập nhật';
-                break;
-            default:
-                return 'Cập nhật';
-                break;
-        }
     }
 }
 
@@ -302,6 +300,19 @@ if (!function_exists('getLinkingUrl')) {
                 return ['id' => @$item->{$field_value}, 'label' => $item_label];
             }, $data);
             return json_encode($arr);
+        }
+    }
+
+    if (!function_exists('logActionDataById')) {
+        function logActionDataById($table, $id, $arr_update, $action)
+        {
+            $obj = getModelByTable($table)::find($id);
+            if (!empty($obj)) {
+                $dataItem = $obj->replicate();
+                $obj->update($arr_update);
+                $obj->save();
+                logActionUserData($action, 'products', $id, $dataItem);
+            }
         }
     }
 }

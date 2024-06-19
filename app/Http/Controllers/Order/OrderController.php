@@ -29,7 +29,7 @@
                     return back()->with('error', 'Bạn đã tạo đơn hàng cho báo giá này rồi !');
                 }
                 $data = $this->services->getBaseDataAction();
-                $data['data_order']['customer'] = $quote_obj['customer_id'];
+                $data['data_order']['represent'] = $quote_obj['represent'];
                 $data['order_cost'] = @$quote_obj['total_amount'];
                 $data['products'] = Product::where(['act' => 1, 'quote_id' => $quote_id])->get();
                 $data['product_qty'] = count($data['products']);
@@ -180,12 +180,15 @@
                 return returnMessageAjax(100, $msg.' !');
             }
             if (\GroupUser::isAdmin() || \GroupUser::getCurrent() == $model::GR_USER) {
-                $process = $model::where('id', $id)->update(['assign_by' => \User::getCurrent('id'), 'status' => $model::PROCESSING]);
+                $processing_status = $model::PROCESSING;
+                $itemLog = $command->replicate();
+                $process = $command->update(['assign_by' => \User::getCurrent('id'), 'status' => $processing_status]);
+                logActionUserData($processing_status, $table, $id, $itemLog);
                 if ($process) {
-                    $arr_status = ['status' => $model::PROCESSING];
-                    Product::where('id', $command['product'])->update($arr_status);
-                    if (checkUpdateOrderStatus($command['id'], $model::PROCESSING)) {
-                        Order::where('id', $command['order'])->update($arr_status);
+                    $arr_status = ['status' => $processing_status];
+                    logActionDataById('products', $command['product'], $arr_status, $processing_status);
+                    if (checkUpdateOrderStatus($command['id'], $processing_status)) {
+                        logActionDataById('orders', $command['order'], $arr_status, $processing_status);
                     }
                     return returnMessageAjax(200, 'Đã tiếp nhận lệnh, vui lòng truy cập danh sách lệnh của bạn!', \StatusConst::RELOAD);
                 }else{

@@ -6,6 +6,7 @@
     {
         protected $table = 'products';
         protected $protectFields = false;
+        protected $guarded = [];
         static $childTable = ['papers', 'supplies', 'fill_finishes'];
         const NO_REWORK = 'no_rework';
         const NEED_REWORK = 'need_rework';

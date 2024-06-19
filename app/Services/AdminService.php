@@ -228,7 +228,7 @@ class AdminService extends BaseService
         $remove = \DB::table($table)->where('id', $id)->delete();
         NLogAction::where('target', $id)->delete();
         if ($remove) {
-            logActionUserData(__FUNCTION__, $table, $id, $dataItem);
+            logActionUserData('remove', $table, $id, $dataItem);
         }
         if ($remove && $except_remove) {
             $objModel = getModelByTable($table);
