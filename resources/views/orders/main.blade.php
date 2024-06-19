@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="{{ asset('frontend/admin/css/order.css') }}">
 @endsection
 @section('content')
-    <form action="{{ @$link_action }}" method="POST" class="config_content __form_order" enctype="multipart/form-data" 
+    <form action="{{ @$link_action }}" method="POST" class="config_content {{ empty($is_design) ? '__form_order' : 'baseAjaxForm' }}" enctype="multipart/form-data" 
     onkeydown="return event.key != 'Enter'">
         @csrf
         @if (!empty($data_quote['id']))

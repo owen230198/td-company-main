@@ -22,10 +22,12 @@
             if (!empty($process_product['code']) && $process_product['code'] == 100) {
                 return $process_product;
             }else{
-                $arr_where = ['status' => Order::DESIGN_SUBMITED];
+                $design_submited = Order::DESIGN_SUBMITED;
+                $arr_where = ['status' => $design_submited];
                 $update = CDesign::where('id', $command['id'])->update($arr_where);
+                logActionUserData($design_submited, 'c_designs', $command['id'], $command);
                 if ($update) {
-                    Product::where('id', $command['product'])->update($arr_where);
+                    logActionDataById('products', $command['product'], $arr_where, $design_submited);
                     $product_obj = Product::find($command['product']);
                     if (!empty($product_obj)) {
                         $elements = getProductElementData($product_obj['category'], $product_obj['id'], false, true);
@@ -34,7 +36,7 @@
                                 $el_data = $element['data'];
                                 foreach ($el_data as $supply) {
                                     $table_supply = $element['table'];
-                                    $data_update['status'] = @$supply->handle_type == \TDConst::JOIN_HANDLE ? Order::WAITING_JOIN : Order::DESIGN_SUBMITED;
+                                    $data_update['status'] = @$supply->handle_type == \TDConst::JOIN_HANDLE ? Order::WAITING_JOIN : $design_submited;
                                     getModelByTable($table_supply)->where('id', $supply->id)->update($data_update);
                                 }
                             }
@@ -54,7 +56,7 @@
                         }
                     }
                     $arr_where['return_time'] = $order_obj->created_at->addDays($add_day);
-                    Order::where('id', $command['order'])->update($arr_where);
+                    logActionDataById('orders', $command['order'], $arr_where, $design_submited);
                 }
                 return returnMessageAjax(200, 'Cập nhật thành công lệnh thiết kế!', getBackUrl());  
             }

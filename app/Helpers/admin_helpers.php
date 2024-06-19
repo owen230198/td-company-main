@@ -99,7 +99,16 @@ if (!function_exists('getActionByKey')) {
                 return 'Duyệt thiết kế';
                 break;
             case 'designing':
-                return 'Nhận lệnh thiết kế thiết kế';
+                return 'Nhận lệnh thiết kế';
+                break;
+            case 'design_submited':
+                return 'Hoàn thành lệnh thiết kế';
+                break;
+            case 'tech_submited':
+                return 'Hoàn thành xử lí khuôn kỹ thuật';
+                break;
+            case 'making_process':
+                return 'Duyệt xuống nhà máy sản xuất';
                 break;
             default:
                 return '';
@@ -311,7 +320,7 @@ if (!function_exists('getLinkingUrl')) {
                 $dataItem = $obj->replicate();
                 $obj->update($arr_update);
                 $obj->save();
-                logActionUserData($action, 'products', $id, $dataItem);
+                logActionUserData($action, $table, $id, $dataItem);
             }
         }
     }

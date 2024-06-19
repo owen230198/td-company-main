@@ -116,7 +116,7 @@
 
         public function applyToHandlePlan($data, $base_obj, $order_obj, $type_ref)
         {
-            if (\GroupUser::isTechHandle()) {
+            if (\GroupUser::isTechHandle() || \GroupUser::isAdmin()) {
                 if (@$base_obj->status != Order::DESIGN_SUBMITED) {
                     returnMessageAjax(100, 'Dữ liệu không hợp lệ !');
                 }
@@ -124,9 +124,10 @@
                 if (!empty($product_process['code']) && $product_process['code'] == 100) {
                     return returnMessageAjax(100, $product_process['message']);  
                 }
-                $arr_update = ['status' => Order::TECH_SUBMITED];
+                $tech_submited_status = Order::TECH_SUBMITED;
+                $arr_update = ['status' => $tech_submited_status];
                 foreach ($data['product'] as $product) {
-                    Product::where('id', $product['id'])->update($arr_update);
+                    logActionDataById('products', $product['id'], $arr_update, $tech_submited_status);
                     $product_obj = Product::find($product['id']);
                     if (!empty($product_obj)) {
                         $elements = getProductElementData($product_obj['category'], $product_obj['id'], true, true);
@@ -142,7 +143,7 @@
                     }
                 }
                 if (checkUpdateOrderStatus($order_obj->id, Order::TECH_SUBMITED)) {
-                    Order::where('id', $order_obj->id)->update($arr_update);
+                    logActionDataById('orders', $order_obj->id, $arr_update, $tech_submited_status);
                 }
                 return returnMessageAjax(200, 'Đã gửi yêu cầu thành công tới P. Kế hoạch SX cho đơn '.$base_obj->code.' !', getBackUrl()); 
             }else{
@@ -354,10 +355,12 @@
             }
             $process = $this->services->createWorkerCommand($obj_order);
             if ($process) {
-                $arr_update = ['status' => Order::MAKING_PROCESS];
+                $making_process_status = Order::MAKING_PROCESS;
+                $arr_update = ['status' => $making_process_status];
                 $table_data->update($arr_update);
+                logActionUserData($making_process_status, $table, $id, $obj_order);
                 if (checkUpdateOrderStatus($obj_order->order, Order::MAKING_PROCESS)) {
-                    Order::where('id', $obj_order->order)->update($arr_update);
+                    logActionDataById('orders', $obj_order->order, $arr_update, $making_process_status);
                 }
                 return returnMessageAjax(200, 'Đã gửi lệnh sản xuất xuống xưởng !', url('view/products?default_data=%7B"status"%3A"'.Order::TECH_SUBMITED.'"%7D'));
             }else{
