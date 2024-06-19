@@ -279,7 +279,7 @@ if (!function_exists('getDetailTableField')) {
 }
 
 if (!function_exists('getLinkingUrl')) {
-    function getLinkingUrl($select_data, $dataItem)
+    function getLinkingUrl($select_data, $select_config, $dataItem)
     {
         $field_title = @$select_data['field_title'] ?? 'name';
         $field_value = @$select_data['field_value'] ?? 'id';

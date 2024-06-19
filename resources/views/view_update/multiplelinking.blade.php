@@ -1,7 +1,7 @@
 @php
     $select_config = !empty($other_data['config']) ? $other_data['config'] : [];
     $select_data = !empty($other_data['data']) ? $other_data['data'] : [];
-    $url = getLinkingUrl($select_data, @$dataItem);
+    $url = getLinkingUrl($select_data, $select_config, @$dataItem);
     $field_title = @$select_data['field_title'] ?? 'name';
     $field_value = @$select_data['field_value'] ?? 'id';
     $table_linking = getTableLinkingWithData(@$dataItem, $select_data['table']);

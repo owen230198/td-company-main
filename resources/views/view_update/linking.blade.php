@@ -9,7 +9,7 @@
 
 @if (@$select_config['search'] == 1)
     @php
-        $url = getLinkingUrl($select_data, @$datItem);
+        $url = getLinkingUrl($select_data, $select_config, @$datItem);
         if (!empty($value)) {
             $data_id = $value;
             $linking_model = getModelByTable($table_linking);
