@@ -59,7 +59,10 @@ class QuoteController extends Controller
                 }
             }else{
                 if ($step == 'chose_customer') {
-                    $data = $this->services->getCustomerSelectDataView($quote->represent);
+                    $data['represent'] = $represent;
+                    $data['represents'] = Represent::where('customer', $customer->id)->get();
+                    $data['customer_fields'] = Customer::FIELD_UPDATE;
+                    $data['customer'] = $customer;
                     $data['represent_fields'] = Represent::FIELD_UPDATE;
                     $data['dataItem'] = $quote;
                     $data['parent_url'] = ['link' => getBackUrl(), 'note' => 'Danh sách báo giá'];
