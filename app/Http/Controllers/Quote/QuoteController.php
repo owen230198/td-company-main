@@ -342,6 +342,9 @@ class QuoteController extends Controller
         $represent = Represent::find($arr_quote->represent);
         $data_customer = Customer::find($represent->customer);
         $data_products = Product::where(['act' => 1, 'quote_id' => $id])->get();
+        if (empty($data_products)) {
+            return redirect(url(''))->with('error', 'Không tìm thấy sản phẩm nào trong báo giá !');
+        }
         $step = $request->input('step') ?? 'review';
         if ($step == 'review') {
             $data['title'] = 'Quản lí file báo giá - '. $arr_quote['seri'];
