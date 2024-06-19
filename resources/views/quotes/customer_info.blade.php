@@ -9,7 +9,7 @@
                     <p>
                         <i class="fa fa-users mr-1 mb-1" aria-hidden="true"></i>
                         @php
-                            $sales = json_decode($represent->sale);
+                            $sales = !empty($represent->sale) ? json_decode($represent->sale) : [$represent->created_by];
                             $users = '';
                             $txt = '';
                             foreach ($sales as $key => $sale_id) {

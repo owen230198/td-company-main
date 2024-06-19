@@ -205,7 +205,7 @@ class QuoteController extends Controller
             }
             $sales = json_decode($represent->sale);
             $current_sale_id = \User::getCurrent('id');
-            if (in_array($current_sale_id, $sales) || $current_sale_id == $represent->created_by || \GroupUser::isAdmin()) {
+            if ((!empty($sales) && in_array($current_sale_id, $sales)) || $current_sale_id == $represent->created_by || \GroupUser::isAdmin()) {
                 $data['represent_fields'] = Represent::FIELD_UPDATE;
                 $data['represent'] = $represent;
                 return view('quotes.represent_info', $data);    

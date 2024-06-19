@@ -261,6 +261,8 @@ class NGroupUser extends Model
     //role modules
     static $role_module = [
         self::SALE => [
+            self::MODULE['customer_list'],
+            self::MODULE['represent_list'],
             self::MODULE['create_quote'],
             self::MODULE['quote_not_accepted'],
             self::MODULE['quote_accepted'],

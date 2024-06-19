@@ -3,7 +3,8 @@
     $field_title = @$select_data['field_title'] ?? 'name';
     $field_linking = @$select_data['field_linking'] ?? 'id';
     $table = getTableLinkingWithData($data, $select_data['table']);
-    $linking_items = \DB::table($table)->whereIn($field_linking, json_decode($value))->get();
+    $arr_value = json_decode($value, true);
+    $linking_items = !empty($arr_value) ? \DB::table($table)->whereIn($field_linking, $arr_value)->get() : [];
     $model = getModelByTable($table);
 @endphp
 @foreach ($linking_items as $item)

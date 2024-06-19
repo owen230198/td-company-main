@@ -46,4 +46,27 @@ class Customer extends Model
         }, $data);
         return json_encode($arr);
     }
+
+    static function getRole()
+    {
+        $role = [
+            \GroupUser::SALE => [
+                'insert' => 1,
+                'view' => 
+                    [
+                        'with' => ['key' => 'created_by', 'value' => \User::getCurrent('id')],
+                    ],
+                'update' => 
+                    [
+                        'with' => [[
+                            'type' => 'group',
+                            'query' => [
+                                ['key' => 'created_by', 'value' => \User::getCurrent('id')]
+                            ]
+                        ]]
+                    ]
+            ],
+        ];
+        return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];
+    }
 }
