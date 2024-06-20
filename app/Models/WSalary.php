@@ -16,6 +16,22 @@ class WSalary extends Model
         $this->worker = $worker;
     }
 
+    static function getRole()
+    {
+        $role = [
+            \GroupUser::TECH_APPLY => [
+                'view' => 1,
+            ],
+            \GroupUser::PLAN_HANDLE => [
+                'view' => 1
+            ],
+            \GroupUser::ACCOUNTING => [
+                'view' => 1,
+            ]
+        ];
+        return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];
+    } 
+
     static function getHandleDataJson($type, $handle, $get_array = false, $get_extra = false)
     {
         $arr = [];

@@ -58,7 +58,7 @@ class NGroupUser extends Model
         ],
         'worker_salary' =>[
             'name' => 'Bảng lương công nhân',
-            'link' => 'view/w_salaries?default_data=%7B%22status%22%3A%22last_submited%22%7D',
+            'link' => 'view/w_salaries?default_data=%7B%22status%22%3A%22submited%22%7D',
             'group' => 'factory'
         ],
         'price_materal' => [
@@ -278,6 +278,7 @@ class NGroupUser extends Model
             self::MODULE['change_password'],
         ],
         self::TECH_APPLY => [
+            self::MODULE['worker_salary'],
             self::MODULE['handle_process'],
             self::MODULE['join_print'],
             self::MODULE['account'],
@@ -291,12 +292,14 @@ class NGroupUser extends Model
             self::MODULE['change_password'],
         ],
         self::TECH_HANDLE => [
+            self::MODULE['worker_salary'],
             self::MODULE['handle_process'],
             self::MODULE['join_print'],
             self::MODULE['account'],
             self::MODULE['change_password'],
         ],
         self::PLAN_HANDLE => [
+            self::MODULE['worker_salary'],
             self::MODULE['handle_process'],
             self::MODULE['supp_bying_req'],
             self::MODULE['warehouse_management'],
@@ -344,6 +347,7 @@ class NGroupUser extends Model
         ],
         
         self::ACCOUNTING => [
+            self::MODULE['worker_salary'],
             self::MODULE['order_process'],
             self::MODULE['handle_process'],
             self::MODULE['warehouse_management'],
