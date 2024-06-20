@@ -52,10 +52,7 @@ class Customer extends Model
         $role = [
             \GroupUser::SALE => [
                 'insert' => 1,
-                'view' => 
-                    [
-                        'with' => ['key' => 'created_by', 'value' => \User::getCurrent('id')],
-                    ],
+                'view' => 1,
                 'update' => 
                     [
                         'with' => [[
