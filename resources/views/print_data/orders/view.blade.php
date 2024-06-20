@@ -75,12 +75,11 @@
                 @endforeach
                 @php
                         $order_total = (float) @$data_item->advance > 0 ? @$data_item->rest : $data_item->total_amount;
-                        $vat_cost = calValuePercentPlus(0, $order_total, $data_item->vat);
-                        $order_cost = $order_total - $vat_cost;
+                        $vat_cost = !empty($data_item->vat) ? calValuePercentPlus(0, $data_item->amount, (float) getDataConfig('QuoteConfig', 'VAT_PERC', 0)) : 0;
                 @endphp
                 <tr class="bg_pink">
                     <td colspan="5"><p class="text-right mr-3">Tiền hàng</p></td>
-                    <td class="text-right"><span class="font_bold">{{ number_format($data_item->total_amount) }} vnđ</span></td>
+                    <td class="text-right"><span class="font_bold">{{ number_format($data_item->amount) }} vnđ</span></td>
                 </tr>
                 <tr class="bg_pink">
                     <td colspan="5"><p class="text-right mr-3">Tiền VAT</p></td>

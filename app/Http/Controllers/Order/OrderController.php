@@ -61,7 +61,7 @@
                     return back()->with('error', 'Dữ liệu Đơn hàng không hợp lệ!');
                 }
                 $data = $this->services->getBaseDataAction();
-                $data['order_cost'] = @$order_obj['total_amount'];
+                $data['order_cost'] = @$order_obj['base_total'];
                 $data['products'] = Product::where(['act' => 1, 'order' => $id])->get();
                 $data['product_qty'] = count($data['products']);
                 $data['data_order'] = $order_obj;

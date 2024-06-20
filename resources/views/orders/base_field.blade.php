@@ -21,7 +21,7 @@
                 'name' => '',
                 'note' => 'Tổng tiền (chưa bao gồm VAT)',
                 'attr' => ['disable_field' => 1, 'inject_class' => '__quote_total_input'],
-                'value' => round(@$order_cost)
+                'value' => @$data_order['amount'] ?? @$order_cost
             ],
             [
                 'name' => 'order[vat]',

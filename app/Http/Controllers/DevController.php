@@ -378,5 +378,16 @@ class DevController extends Controller
             dump($salary->id);
         }
     }
+
+    public function updateAmountFieldOrder()
+    {
+        $orders = Order::all();
+        foreach ($orders as $order) {
+            $products = Product::where('order', $order->id)->get();
+            $arr_total = getTotalProductByArr($products);
+            $update['amount'] = $arr_total['total_amount'];
+            Order::where('id', $order->id)->update($update);
+        }
+    }
 }
 

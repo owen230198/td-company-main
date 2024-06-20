@@ -41,6 +41,7 @@ class OrderService extends BaseService
             $arr_total = getTotalProductByArr($data['product']);
             $amount = $arr_total['total_amount'];
             $arr_order['total_cost'] = $arr_total['total_cost'];
+            $arr_order['amount'] = $amount;
             $arr_order['base_total'] = $arr_total['base_total'];
             $arr_order['total_amount'] = @$arr_order['vat'] == 1 ? 
             calValuePercentPlus($amount, $amount, (float) getDataConfig('QuoteConfig', 'VAT_PERC', 0)) : $amount;
