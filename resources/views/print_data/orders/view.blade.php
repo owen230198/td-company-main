@@ -1,7 +1,8 @@
 @extends('print_data.index')
 @section('content')
     @php
-        $data_customer = getDetailDataById('Customer', $data_item->customer);    
+        $data_represent = getDetailDataById('Represent', $data_item->represent);  
+        $data_customer = getDetailDataById('Represent', $data_represent->customer);     
     @endphp
     <div class="_print_order_header">
         <div class="row">
@@ -30,7 +31,7 @@
                 <p class="d-flex align-items-center"><span class="w_60 d-block">Số seri</span>  : <span class="fs-18 color_red ml-1 font_bold">{{ $data_item->code }}</span></p>
             </div>
             <div class="col-7">
-                <p><span class="mr-1">Tên Khách hàng/Công ty :</span> {{ $data_customer['name'].' ('.$data_customer['contacter'].')' }}</p>
+                <p><span class="mr-1">Tên Khách hàng/Công ty :</span> {{ $data_customer['name'].' ('.$data_represent['name'].')' }}</p>
             </div>
             <div class="col-5">
                 <p class="d-flex align-items-center">
@@ -42,7 +43,7 @@
                 <p><span class="mr-1">Địa chỉ :</span> {{ $data_customer['address'] }}</p>
             </div>
             <div class="col-5">
-                <p class="d-flex"><span class="mr-1">Tel :</span> {{ $data_customer['phone'].' - '.$data_customer['telephone'] }}</p>
+                <p class="d-flex"><span class="mr-1">Tel :</span> {{ $data_represent['phone'].' - '.$data_represent['telephone'] }}</p>
             </div>
         </div>
     </div>

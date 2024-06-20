@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Storage;
 use Pion\Laravel\ChunkUpload\Handler\HandlerFactory;
 use Pion\Laravel\ChunkUpload\Receiver\FileReceiver;
 use Illuminate\Support\Facades\Schema;
+use Maatwebsite\Excel\Facades\Excel;
+
 class AdminController extends Controller
 {
     static $view_where = array();
@@ -45,6 +47,29 @@ class AdminController extends Controller
         }
     }
 
+    public function handleViewWhereVariable($request, $table)
+    {
+        $default_data = $request->input('default_data');
+        if (!empty($default_data)) {
+            $param_default = json_decode($default_data, true);
+            $this->injectViewWhereParam($table, $param_default);
+            $data['param_default'] = $default_data;
+            $data['default_field'] = $param_default;
+            $data['param_action'] = getParamUrlByArray($param_default);
+        }
+        $param =  $request->except('default_data', 'page', 'nosidebar', 'get_table_view_ajax', 'order_by');
+        if (!empty($param)) {
+            $data['data_search'] = $param;
+            $this->injectViewWhereParam($table, $param);
+        }
+        if(!empty($role['where'])){
+            static::$view_where[] = $role['where'];
+        }
+        if ($request->input('nosidebar') == 1) {
+            $data['nosidebar'] = 1;
+        }
+    }
+
     public function view(Request $request, $table)
     {
         $role = $this->admins->checkPermissionAction($table, __FUNCTION__);
@@ -63,25 +88,7 @@ class AdminController extends Controller
             $order = 'ord';
             $order_by = 'asc';   
         }else{
-            $default_data = $request->input('default_data');
-            if (!empty($default_data)) {
-                $param_default = json_decode($default_data, true);
-                $this->injectViewWhereParam($table, $param_default);
-                $data['param_default'] = $default_data;
-                $data['default_field'] = $param_default;
-                $data['param_action'] = getParamUrlByArray($param_default);
-            }
-            if ($request->input('nosidebar') == 1) {
-                $data['nosidebar'] = 1;
-            }
-            $param =  $request->except('default_data', 'page', 'nosidebar', 'get_table_view_ajax', 'order_by');
-            if (!empty($param)) {
-                $data['data_search'] = $param;
-                $this->injectViewWhereParam($table, $param);
-            }
-            if(!empty($role['where'])){
-                static::$view_where[] = $role['where'];
-            }
+            $this->handleViewWhereVariable($request, $table);
         }
         $data['data_tables'] = getDataTable($table, self::$view_where, ['paginate' => $data['page_item'], 'order' => $order, 'order_by' => $order_by]);
         if (!empty($request->input('get_table_view_ajax'))) {
@@ -90,6 +97,19 @@ class AdminController extends Controller
             session()->put('back_url', url()->full());
             return view('table.'.$data['view_type'], $data);
         } 
+    }
+
+    public function exportTable(Request $request, $table)
+    {
+        $role = $this->admins->checkPermissionAction($table, 'view');
+        if (!@$role['allow']) {
+            return back()->with('error', 'Bạn không có quyền truy cập!');
+        }
+        $data = $this->admins->getDataBaseView($table, 'Danh sách');
+        $this->handleViewWhereVariable($request, $table);
+        $data['data_tables'] = getDataTable($table, self::$view_where);
+        $data['is_export'];
+        return Excel::download(new \App\Services\ExportExcel\ExportExcelService($data, 'table.table_base_view'), $data['title'].'.xlsx');
     }
 
     public function configDevicePrice(Request $request, $step){

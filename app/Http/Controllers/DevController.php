@@ -371,7 +371,7 @@ class DevController extends Controller
 
     public function checkSubmitedSalaryWorker()
     {
-        $salaries = WSalary::whereNull('created_by')->update(['created_by' => 6]);
+        $salaries = WSalary::where('created_by', 23)->update(['created_by' => 6]);
         dd($salaries);
         foreach ($salaries as $salary) {
             WSalary::checkStatusUpdate($salary->table_supply, $salary->supply, \StatusConst::SUBMITED);

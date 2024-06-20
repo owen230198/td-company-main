@@ -26,6 +26,8 @@ Route::any('logout', [AuthController::class, 'logout']);
 Route::any('dev/{method}',[DevController::class, 'index']);
 Route::get('permission-error', [AdminController::class, 'permissionError']);
 Route::middleware(['check_login'])->group(function () {
+
+	//Admin route
 	Route::get('/',[HomeController::class, 'index']);
 	Route::get('view/{table}', [AdminController::class, 'view']);
 	Route::any('insert/{table}', [AdminController::class, 'insert']);
@@ -51,6 +53,7 @@ Route::middleware(['check_login'])->group(function () {
 	Route::any('account-detail', [AuthController::class, 'accountDetail']);
 	Route::get('history-detail/{id}', [AdminController::class, 'historyDetail']);
 	Route::get('history-table/{table}', [AdminController::class, 'historyTable']);
+	Route::get('export/{table}', [AdminController::class, 'exportTable']);
 
 	//quotes routes
 	Route::any('create-quote', [QuoteController::class, 'createQuote']);

@@ -938,6 +938,15 @@ var noReworkButtonModule = function()
     })
 }
 
+var baseExportTable = function (){
+    $(document).on('click', '.__base_export_btn', function(event) {
+        event.preventDefault();
+        let param = $('#form-search').serialize();
+        let table = $(this).data('table');
+        window.parent.location.href = getBaseRoute('export/' + table + '?' + param);
+    });
+}
+
 $(function () {
     // loadingPage();
     submitActionAjaxForm();
@@ -980,4 +989,5 @@ $(function () {
     kscAfterPrintModule();
     reworkButtonModule();
     noReworkButtonModule();
+    baseExportTable();
 });

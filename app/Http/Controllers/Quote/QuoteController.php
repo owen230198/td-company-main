@@ -376,10 +376,10 @@ class QuoteController extends Controller
             if (@$quote->status != \StatusConst::NOT_ACCEPTED) {
                 return back()->with('error', 'Dữ liệu không hợp lệ !');
             }
-            $quote->status = \StatusConst::ACCEPTED;
+            // $quote->status = \StatusConst::ACCEPTED;
             $update = $quote->save();
             if ($update) {
-                logActionUserData('apply', 'papers', $id, $quote);  
+                logActionUserData('apply', 'quotes', $id, $quote);  
                 return back()->with('message', 'Báo giá đã được duyệt và sẵn sàng tạo đơn !');
             }
         }else{
