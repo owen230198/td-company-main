@@ -239,12 +239,14 @@ class WSalary extends Model
     static function checkSubmitedProduct($product_id)
     {
         $status = \StatusConst::SUBMITED;
-        $c_reworks = CRework::where('product', '!=', \StatusConst::SUBMITED)->get();
+        $c_reworks = CRework::where('product', $product_id)->get();
         $bool = true;
-        foreach ($c_reworks as $c_rework) {
-            if ($c_rework->status != \StatusConst::SUBMITED) {
-                $bool = false;
-                break;
+        if (!$c_reworks->isEmpty()) {
+            foreach ($c_reworks as $c_rework) {
+                if ($c_rework->status != \StatusConst::SUBMITED) {
+                    $bool = false;
+                    break;
+                }
             }
         }
         if ($bool) {

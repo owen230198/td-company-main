@@ -9,6 +9,7 @@ use App\Models\CDesign;
 use App\Models\Order;
 use App\Models\Paper;
 use App\Models\Product;
+use App\Models\WSalary;
 
 class DevController extends Controller
 {
@@ -364,6 +365,15 @@ class DevController extends Controller
             \DB::table('quotes')->where('represent', $customer->id)->update(['represent' => $id]);
             \DB::table('orders')->where('represent', $customer->id)->update(['represent' => $id]);
             dump($id = \DB::table('represents')->find($id));
+        }
+    }
+
+    public function checkSubmitedSalaryWorker()
+    {
+        $salaries = WSalary::where('status', 'submited')->get();
+        foreach ($salaries as $salary) {
+            WSalary::checkStatusUpdate($salary->table_supply, $salary->supply, \StatusConst::SUBMITED);
+            dump($salary->id);
         }
     }
 }
