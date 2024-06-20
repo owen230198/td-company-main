@@ -137,8 +137,9 @@ class DevController extends Controller
 
     public function test()
     {
-        $ret = \DB::table('products')->where([['status', '!=', 'making_process'], ['act', '=', 1]])->get();
-        dd($ret);
+        dd(\DB::table('supplies')->where(['created_by' => 23])->get());
+        $data = \DB::table('supplies')->where(['created_by' => 23])->update(['created_by' => 1]);
+        dd($data);
     }
 
     public function handleDataHistory()
@@ -370,7 +371,8 @@ class DevController extends Controller
 
     public function checkSubmitedSalaryWorker()
     {
-        $salaries = WSalary::where('status', 'submited')->get();
+        $salaries = WSalary::whereNull('created_by')->update(['created_by' => 6]);
+        dd($salaries);
         foreach ($salaries as $salary) {
             WSalary::checkStatusUpdate($salary->table_supply, $salary->supply, \StatusConst::SUBMITED);
             dump($salary->id);
