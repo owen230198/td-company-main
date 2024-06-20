@@ -47,7 +47,7 @@ class AdminController extends Controller
         }
     }
 
-    public function handleViewWhereVariable($request, $table)
+    public function handleViewWhereVariable($request, $table, &$data)
     {
         $default_data = $request->input('default_data');
         if (!empty($default_data)) {
@@ -88,7 +88,7 @@ class AdminController extends Controller
             $order = 'ord';
             $order_by = 'asc';   
         }else{
-            $this->handleViewWhereVariable($request, $table);
+            $this->handleViewWhereVariable($request, $table, $data);
         }
         $data['data_tables'] = getDataTable($table, self::$view_where, ['paginate' => $data['page_item'], 'order' => $order, 'order_by' => $order_by]);
         if (!empty($request->input('get_table_view_ajax'))) {
@@ -106,9 +106,9 @@ class AdminController extends Controller
             return back()->with('error', 'Bạn không có quyền truy cập!');
         }
         $data = $this->admins->getDataBaseView($table, 'Danh sách');
-        $this->handleViewWhereVariable($request, $table);
+        $this->handleViewWhereVariable($request, $table, $data);
         $data['data_tables'] = getDataTable($table, self::$view_where);
-        $data['is_export'];
+        $data['is_export'] = 1;
         return Excel::download(new \App\Services\ExportExcel\ExportExcelService($data, 'table.table_base_view'), $data['title'].'.xlsx');
     }
 
