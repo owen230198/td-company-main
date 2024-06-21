@@ -342,7 +342,7 @@ class AdminController extends Controller
         $html = '<option value="">Danh sách chọn</option>';
         $parent = $request->input('param');
         if (!empty($parent)) {
-            $data = \DB::table($table)->where(['act' => 1, $field => $parent])->orderBy('ord', 'asc')->get();
+            $data = \DB::table($table)->where(['act' => 1, $field => $parent])->get();
             foreach ($data as $item) {
                 $html .= '<option value="'.@$item->id.'">'.@$item->name.'</option>';
             }

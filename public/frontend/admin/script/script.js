@@ -478,11 +478,11 @@ var moduleSelectAjaxChild = function()
         let url =  parent.attr('link')+'?param='+value;
         let ajax_target = parent.find('select.__select_child');
         ajaxViewTarget(url, ajax_target, ajax_target);
-        if (!empty(value)) {
-            ajax_target.attr('disabled', false);    
-        }else{
-            ajax_target.attr('disabled', true);   
-        }
+        // if (!empty(value)) {
+        //     ajax_target.attr('disabled', false);    
+        // }else{
+        //     ajax_target.attr('disabled', true);   
+        // }
     })
 }
 
