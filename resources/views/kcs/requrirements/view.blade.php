@@ -28,7 +28,7 @@
                     'name' => '',
                     'note' => 'Sản phẩm',
                     'type' => 'text',
-                    'attr' => ['disable_field' => 1],
+                    'attr' => ['disable_field' => 1, 'inject_class' => 'length_input'],
                     'value' => $data_product->name
                 ],
                 [

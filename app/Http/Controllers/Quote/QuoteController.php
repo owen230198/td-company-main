@@ -38,9 +38,9 @@ class QuoteController extends Controller
             if (empty($represent)) {
                 return customReturnMessage(false, $is_post, ['message' => 'Người liên hệ không tồn tại hoặc đã bị xóa !']);
             }
-            $customer = Customer::find($represent->customer);
+            $customer = Customer::find($quote->customer);
             if (empty($customer)) {
-                return customReturnMessage(false, $is_post, ['message' => 'Coong ty không tồn tại hoặc đã bị xóa !']);
+                return customReturnMessage(false, $is_post, ['message' => 'Công ty không tồn tại hoặc đã bị xóa !']);
             }
             if($is_post){
                 if ($step == 'chose_customer') {
@@ -154,7 +154,7 @@ class QuoteController extends Controller
             if (empty($represent)) {
                 return customReturnMessage(false, $request->isMethod('POST'), ['message' => 'Người liên hệ không tồn tại hoặc đã bị xóa !']);
             }
-            $customer = Customer::find($represent->customer);
+            $customer = Customer::find($request->input('customer'));
             if (empty($customer)) {
                 return customReturnMessage(false, $request->isMethod('POST'), ['message' => 'Khách hàng không tồn tại hoặc đã bị xóa !']);
             }
@@ -174,6 +174,7 @@ class QuoteController extends Controller
                         return $valid;
                     }
                 }
+                $data['customer'] = $customer->id;
                 $data['represent'] = $represent->id;
                 $data['name'] = $customer->name;
                 $data['status'] = \StatusConst::NOT_ACCEPTED;
@@ -340,7 +341,7 @@ class QuoteController extends Controller
             return redirect(url(''))->with('error', 'Không tìm thấy dữ liệu báo giá !');
         }
         $represent = Represent::find($arr_quote->represent);
-        $data_customer = Customer::find($represent->customer);
+        $data_customer = Customer::find($arr_quote->customer);
         $data_products = Product::where(['act' => 1, 'quote_id' => $id])->get();
         if ($data_products->isEmpty()) {
             return back()->with('error', 'Không tìm thấy sản phẩm nào trong báo giá !');
@@ -376,10 +377,11 @@ class QuoteController extends Controller
             if (@$quote->status != \StatusConst::NOT_ACCEPTED) {
                 return back()->with('error', 'Dữ liệu không hợp lệ !');
             }
-            // $quote->status = \StatusConst::ACCEPTED;
+            $dataItem = $quote->replicate();
+            $quote->status = \StatusConst::ACCEPTED;
             $update = $quote->save();
             if ($update) {
-                logActionUserData('apply', 'quotes', $id, $quote);  
+                logActionUserData('apply', 'quotes', $id, $dataItem);  
                 return back()->with('message', 'Báo giá đã được duyệt và sẵn sàng tạo đơn !');
             }
         }else{

@@ -110,21 +110,16 @@
         public function KCSTakeInRequirement(Request $request, $id)
         {
             $is_post = $request->isMethod('POST');
-            return customReturnMessage(false, $is_post, ['message' => 'Dữ liệu không hợp lệ !'], \StatusConst::CLOSE_POPUP);
             if (\GroupUser::isAdmin() || \GroupUser::isKCS()) {
                 $product_obj = Product::find($id);
                 if (empty($product_obj) || @$product_obj->status != \StatusConst::SUBMITED) {
                     return customReturnMessage(false, $is_post, ['message' => 'Dữ liệu không hợp lệ !']);
                 }
-                $outside_qty = (int) $product_obj->outside_qty;
-                if ($outside_qty <= 0) {
-                    return customReturnMessage(false, $is_post, ['message' => 'Sản phẩm đã được nhập kho hết !']);
-                }
                 if (!$is_post) {
                     $data['title'] = 'Thẩm định sau sản xuất sản phẩm '.$product_obj->name;
                     $data['nosidebar'] = true;
                     $data['data_product'] = $product_obj;
-                    $data['status_exper_option'] = [CExpertise::FULL => 'Nhập kho đủ ('.$product_obj->outside_qty.' sản phẩm)', CExpertise::PROBLEM => 'Nhập kho thiếu do lỗi kỹ thuật'];
+                    $data['status_exper_option'] = [CExpertise::FULL => 'Nhập kho đủ ('.$product_obj->qty.' sản phẩm)', CExpertise::PROBLEM => 'Nhập kho thiếu do lỗi kỹ thuật'];
                     $data['prob_handle_option'] = ['' => 'Xử lí sản phẩm lỗi',CExpertise::NOT_REWORK => 'Không sản xuất lại', CExpertise::REWORK => 'Sản xuất lại'];
                     return view('kcs.requrirements.view', $data);
                 }else{
@@ -140,19 +135,14 @@
                         if (empty($data['qty'])) {
                             return returnMessageAjax(100, 'Bạn chưa nhập số lượng đủ điều kiện nhập kho !');
                         }
-                        if ((int) $data['qty'] >= $outside_qty) {
-                            return returnMessageAjax(100, 'Số lượng nhập kho không hợp lệ !');
-                        }
                         if (empty($data['handle_problem'])) {
                             return returnMessageAjax(100, 'Bạn chưa chọn giải pháp xử lí sản phẩm lỗi !');
                         }
-                    }else{
-                        $data['qty'] = (int) $outside_qty;
                     }
                     $data['handle_problem'] = @$data['handle_problem'] ?? CExpertise::REWORK;
                     $data['status'] = \StatusConst::NOT_ACCEPTED;
                     $data['code'] = 'KCS-'.getCodeInsertTable('c_expertises');
-                    $data['name'] = \User::getCurrent('name').' đã thẩm định xong sảm phẩm'.' '.$product_obj->name;
+                    $data['name'] = 'KCS'.' '.$product_obj->name;
                     $data['product'] = $id;
                     $this->services->configBaseDataAction($data);
                     $insert_id = CExpertise::insertGetId($data);
@@ -160,7 +150,6 @@
                         $is_rework = $data['handle_problem'] == CExpertise::REWORK;
                         $product_obj->status = $is_problem ? ($is_rework ? Product::NEED_REWORK : Product::WAITING_WAREHOUSE) : Product::WAITING_WAREHOUSE;
                         $product_obj->rework_status = $is_rework ? Product::NEED_REWORK : Product::NO_REWORK;
-                        $product_obj->outside_qty = $is_problem ? $outside_qty - (int) $data['qty'] : 0;
                         $product_obj->expertise_id = $insert_id;
                         $product_obj->save();
                         return returnMessageAjax(200, 'Yêu cầu nhập kho sản phẩm thành công !', \StatusConst::CLOSE_POPUP);

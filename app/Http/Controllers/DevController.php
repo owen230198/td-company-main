@@ -9,6 +9,7 @@ use App\Models\CDesign;
 use App\Models\Order;
 use App\Models\Paper;
 use App\Models\Product;
+use App\Models\Represent;
 use App\Models\WSalary;
 
 class DevController extends Controller
@@ -367,6 +368,17 @@ class DevController extends Controller
             \DB::table('orders')->where('represent', $customer->id)->update(['represent' => $id]);
             dump($id = \DB::table('represents')->find($id));
         }
+    }
+
+    public function addCustomerQuoteOrder($request)
+    {
+        $table = $request->input(('table'));
+        $data = \DB::table($table)->get();
+        foreach ($data as $item) {
+            $update['customer'] = Represent::getCustomer($item->represent, 'id');
+            \DB::table($table)->where('id', $item->id)->update($update);
+        }
+            
     }
 
     public function checkSubmitedSalaryWorker()

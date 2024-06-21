@@ -9,7 +9,7 @@
             @csrf
             <div class="form-group d-flex">
                 <label class="mb-0 min_210 fs-13 text-capitalize justify-content-end mr-3 d-flex align-items-center">Tìm kiếm Khách hàng</label>
-                <select class="form-control select_ajax select_customer_quote" 
+                <select name="customer" class="form-control select_ajax select_customer_quote" 
                 data-url = {{asset('get-data-json-customer?status=1')}} data-id={{ @$customer->id }} 
                 data-label='{{ @$customer->code.'-'.@$customer->name }}'></select>
             </div>

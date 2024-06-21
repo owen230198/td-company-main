@@ -226,13 +226,16 @@ class QuoteService extends BaseService
     {
         $data_customer = $request->except('_token', 'step');
         $data_quote = $this->dataActionCustomer($data_customer);
-        if (!empty($id)) {
-            $update = \DB::table('quotes')->where('id', $id)->update($data_quote);
-            if ($update) {
-                logActionUserData('update_represents', 'quotes', $id, Quote::find($id));
-            }
+        if (empty($data_quote['customer'])) {
+            return returnMessageAjax(100, 'Bạn chưa chọn khách hàng !');
         }
-        $redr = !empty($id) ? 'update/quotes/'.$id.'?step=handle_config' : 'insert/quotes?step=handle_config&represent='.$data_quote['represent'];
+        if (empty($data_quote['represent'])) {
+            return returnMessageAjax(100, 'Bạn chưa chọn người liên hệ !');
+        }
+        if (!empty($id)) {
+            logActionDataById('quotes', $id, $data_quote, 'update_represents');
+        }
+        $redr = !empty($id) ? 'update/quotes/'.$id.'?step=handle_config' : 'insert/quotes?step=handle_config&customer='.$data_quote['customer'].'&represent='.$data_quote['represent'];
         return returnMessageAjax(200, '', asset($redr));
     }
 

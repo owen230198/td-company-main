@@ -30,6 +30,7 @@
                 }
                 $data = $this->services->getBaseDataAction();
                 $data['data_order']['represent'] = $quote_obj['represent'];
+                $data['data_order']['customer'] = $quote_obj['customer'];
                 $data['order_cost'] = @$quote_obj['total_amount'];
                 $data['products'] = Product::where(['act' => 1, 'quote_id' => $quote_id])->get();
                 $data['product_qty'] = count($data['products']);

@@ -2,12 +2,12 @@
     @php
         $order_field_update = [
             [
-                'name' => '',
+                'name' => 'order[customer]',
                 'attr' => ['readonly' => 1],
                 'note' => 'Khách hàng',
                 'type' => 'linking',
                 'other_data' => ['config' => ['search' => 1], 'data'=> ['table' => 'customers']],
-                'value' => !empty($data_order['represent']) ? \App\Models\Represent::getCustomer($data_order['represent'], 'id') : ''
+                'value' => @$data_order['customer']
             ],
             [
                 'name' => 'order[represent]',

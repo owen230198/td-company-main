@@ -110,6 +110,12 @@ if (!function_exists('getActionByKey')) {
             case 'making_process':
                 return 'Duyệt xuống nhà máy sản xuất';
                 break;
+            case 'apply':
+                return 'Duyệt';
+                break;
+            case 'update_represents':
+                return 'Thay đổi khách hàng';
+                break;
             default:
                 return '';
                 break;
