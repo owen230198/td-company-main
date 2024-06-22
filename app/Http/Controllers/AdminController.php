@@ -47,7 +47,7 @@ class AdminController extends Controller
         }
     }
 
-    public function handleViewWhereVariable($request, $table, &$data)
+    public function handleViewWhereVariable($request, $table, $role, &$data)
     {
         $default_data = $request->input('default_data');
         if (!empty($default_data)) {
@@ -88,7 +88,7 @@ class AdminController extends Controller
             $order = 'ord';
             $order_by = 'asc';   
         }else{
-            $this->handleViewWhereVariable($request, $table, $data);
+            $this->handleViewWhereVariable($request, $table,  $role, $data);
         }
         $data['data_tables'] = getDataTable($table, self::$view_where, ['paginate' => $data['page_item'], 'order' => $order, 'order_by' => $order_by]);
         if (!empty($request->input('get_table_view_ajax'))) {
@@ -99,6 +99,31 @@ class AdminController extends Controller
         } 
     }
 
+    public function importExcel(Request $request, $table)
+    {
+        $role = $this->admins->checkPermissionAction($table, 'view');
+        if (!@$role['allow']) {
+            return back()->with('error', 'Bạn không có quyền truy cập!');
+        }
+        $file_obj = $request->file('file');
+        if (empty($file_obj)) {
+            return returnMessageAjax(100, 'Không tìm thấy file excel !');
+        }
+        $arr_file = pathinfo($file_obj->getClientOriginalName());
+        $file_ext = @$arr_file['extension']; 
+        if (!in_array($file_ext, ['xls', 'xlsx'])) {
+            return returnMessageAjax(100, 'Định dạng file không hợp lệ !');
+        }
+        if (in_array($table, NTable::$specific['import'])) {
+            $controller = getObjectByTable($table);
+            if (method_exists($controller, 'import')) {
+                return $controller->import($file_obj);
+            }else{
+                return returnMessageAjax(100, 'Thao tác không hỗ trợ !');
+            }
+        }
+    }
+
     public function exportTable(Request $request, $table)
     {
         $role = $this->admins->checkPermissionAction($table, 'view');
@@ -106,7 +131,7 @@ class AdminController extends Controller
             return back()->with('error', 'Bạn không có quyền truy cập!');
         }
         $data = $this->admins->getDataBaseView($table, 'Danh sách');
-        $this->handleViewWhereVariable($request, $table, $data);
+        $this->handleViewWhereVariable($request, $table, $role, $data);
         $data['data_tables'] = getDataTable($table, self::$view_where);
         $data['is_export'] = 1;
         return Excel::download(new \App\Services\ExportExcel\ExportExcelService($data, 'table.table_base_view'), $data['title'].'.xlsx');
@@ -342,9 +367,11 @@ class AdminController extends Controller
         $html = '<option value="">Danh sách chọn</option>';
         $parent = $request->input('param');
         if (!empty($parent)) {
+            $selected = $request->input('selected');
             $data = \DB::table($table)->where(['act' => 1, $field => $parent])->get();
             foreach ($data as $item) {
-                $html .= '<option value="'.@$item->id.'">'.@$item->name.'</option>';
+                $selected_attr = $selected == $item->id ? ' selected' : '';
+                $html .= '<option value="'.@$item->id.'"'.$selected_attr.'>'.@$item->name.'</option>';
             }
         }
         echo $html;
@@ -546,9 +573,6 @@ class AdminController extends Controller
         }    
         $data['nosidebar'] = true;
         $data['title'] = 'Lịch sử chỉnh sửa '. getFieldDataByWhere('note', 'n_tables', ['name' => $table]);
-        // if (!empty($request->input('target'))) {
-        //     $data['title'] .= ' '.getFieldDataById('name', $table, $request->input('target'));
-        // }
         $data['list_data'] = NLogAction::where($where)->cursor();
         return view('histories.view', $data);
     }

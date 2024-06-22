@@ -478,5 +478,19 @@ if (!function_exists('convertNumerToText')) {
 
 		return $string;
 	}
+
+    if (!function_exists('getStringAfterSlash')) {
+        function getStringAfterSlash($str)
+        {
+            preg_match('/[A-Za-z]+(\d+(\.\d+)?x\d+(\.\d+)?)/', $str, $matches);
+            dd($matches);
+            if (!empty($matches[1])) {
+                $ret = $matches[1];
+            } else {
+                $ret = null;
+            }
+            return $ret;
+        }
+    }
 }
 

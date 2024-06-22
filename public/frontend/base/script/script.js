@@ -25,11 +25,7 @@ var baseAjaxForm = function () {
 
 var ajaxBaseCall = function (param) {
 	$('#loader').fadeIn(200);
-	$.ajax({
-		url: param.url,
-		type: param.type,
-		data: param.data,
-	})
+	$.ajax(param)
 		.done(function (data) {
 			let title = data.code == 200 ? 'Thành công' : 'Không thành công';
 			let key = data.code == 200 ? 'success' : 'error';
@@ -58,8 +54,10 @@ var ajaxBaseCall = function (param) {
 		})
 }
 
-var ajaxViewTarget = function (url, target_ajax, section_class, type = 1, data = '', full_url = true) {
-	$('#loader').fadeIn(200);
+var ajaxViewTarget = function (url, target_ajax, section_class, type = 1, data = '', full_url = true, loading = true) {
+	if (loading) {
+		$('#loader').fadeIn(200);
+	}
 	let link = full_url == true ? getBaseRoute(url) : url
 	let ajax_conf = { url: link, type: 'GET' };
 	if (!empty(data)) {
@@ -78,7 +76,9 @@ var ajaxViewTarget = function (url, target_ajax, section_class, type = 1, data =
 				}
 				initInputModuleAfterAjax(section_class);
 			}
-			$('#loader').delay(200).fadeOut(500);
+			if (loading) {
+				$('#loader').delay(200).fadeOut(500);
+			}
 		})
 }
 

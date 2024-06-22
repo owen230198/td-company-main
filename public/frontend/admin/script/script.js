@@ -478,12 +478,22 @@ var moduleSelectAjaxChild = function()
         let url =  parent.attr('link')+'?param='+value;
         let ajax_target = parent.find('select.__select_child');
         ajaxViewTarget(url, ajax_target, ajax_target);
-        // if (!empty(value)) {
-        //     ajax_target.attr('disabled', false);    
-        // }else{
-        //     ajax_target.attr('disabled', true);   
-        // }
     })
+
+    let select_parent = $('select.__select_parent');
+    if (select_parent.length > 0) {
+        select_parent.each(function(){
+            __this = $(this);
+            let value  = __this.val();
+            let parent = __this.closest('.__module_select_ajax_value_child');
+            let ajax_target = parent.find('select.__select_child');
+            let selected = ajax_target.val();
+            let url = parent.attr('link')+'?param='+value+'&selected='+selected;
+            if (!empty(value) && parent.length > 0 && ajax_target.length > 0) {
+                ajaxViewTarget(url, ajax_target, ajax_target, 1, '', true, false);
+            }
+        })
+    }
 }
 
 var getUrlLinkingWarehouseSize = function(type)
@@ -947,6 +957,27 @@ var baseExportTable = function (){
     });
 }
 
+var baseTriggerEvent = function(event_e, parent_e, trigger_e, event_name = 'click', trigger_name = 'click'){
+    $(document).on(event_name, event_e, function(event){
+        event.preventDefault();
+        let parent = $(this).closest(parent_e);
+        parent.find(trigger_e).trigger(trigger_name);
+    });
+}
+
+var ModuleImportExcel = function(){
+    baseTriggerEvent('.__import_button_btn', '.__import_excel_module', '.__import_table_input');
+    $(document).on('change', '.__import_table_input', function(event) {
+        event.preventDefault();
+        let table = $(this).data('table');
+        let files = $(this)[0].files;
+        let url = 'import-excel/' + table;
+        let data = new FormData();
+        data.append('file', files[0]);
+        ajaxBaseCall({url:url, type:'POST', data:data, contentType: false, processData: false, dataType: 'json'});
+    });
+}
+
 $(function () {
     // loadingPage();
     submitActionAjaxForm();
@@ -990,4 +1021,5 @@ $(function () {
     reworkButtonModule();
     noReworkButtonModule();
     baseExportTable();
+    ModuleImportExcel();
 });

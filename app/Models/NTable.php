@@ -58,6 +58,9 @@ class NTable extends Model
                             'supply_warehouses', 
                             'other_warehouses',
                             'c_expertises'
+                        ],
+                        'import' => [
+                            'print_warehouses',
                         ]
                     ];
 }

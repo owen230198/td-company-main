@@ -4,6 +4,7 @@
 /public/words/*
 /storage/app/chunks/*
 /storage/app/public/uploads/*
+/storage/app/public/files/*
 /storage/framework/cache/data/*
 /storage/framework/cache/laravel-excel/*
 /storage/framework/sessions/*

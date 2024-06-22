@@ -112,7 +112,7 @@ class NGroupUser extends Model
             'group' => 'customer_quote'
         ],
         'design_not_accepted' => [
-            'name' => 'DS lệnh TK chưa duyệt',
+            'name' => 'DS lệnh TK mới',
             'link' => 'view/c_designs?default_data=%7B%22status%22%3A%22not_accepted%22%7D',
             'group' => 'design_module'
         ],

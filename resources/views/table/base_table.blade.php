@@ -18,6 +18,14 @@
                     <i class="fa fa-file-excel-o mr-2 fs-15" aria-hidden="true"></i>Export Excel
                 </button>
             @endif
+            @if ($tableItem['import'] == 1)
+                <div class="__import_excel_module possition-relative">
+                    <input type="file" name="file" class="__import_table_input d-none" data-table = {{ $tableItem['name'] }}>
+                    <button class="main_button bg_main color_white smooth bg_green border_green radius_5 font_bold smooth mr-2 __import_button_btn">
+                        <i class="fa fa-upload mr-2 fs-15" aria-hidden="true"></i>Import Excel
+                    </button>
+                </div>
+            @endif
             @if ($tableItem['insert'] == 1)
                 <a href="{{ url('insert/' . $tableItem['name'].''.@$param_action) }}"
                     class="main_button bg_main color_white smooth bg_green border_green radius_5 font_bold smooth mr-2">

@@ -7,6 +7,7 @@ class PrintWarehouse extends Model
 {
     protected $table = 'print_warehouses';
     protected $protectFields = false;
+    protected $guarded = [];
     static function getFieldSearch()
     {
         $fields = (new \App\Services\AdminService())->getFieldAction('print_warehouses', 'search');

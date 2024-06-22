@@ -138,9 +138,7 @@ class DevController extends Controller
 
     public function test()
     {
-        dd(\DB::table('supplies')->where(['created_by' => 23])->get());
-        $data = \DB::table('supplies')->where(['created_by' => 23])->update(['created_by' => 1]);
-        dd($data);
+        dd(getStringAfterSlash('ALSE/38x64'));
     }
 
     public function handleDataHistory()
