@@ -47,6 +47,7 @@ class SupplyBuying extends Model
                 [
                     'name' => $base_name.'[size_type]',
                     'attr' => '{"required":1,"readonly":1,"inject_class":"__wh_select_size"}',
+                    'note' => 'Vật tư',
                     'type' => 'linking',
                     'value' => !empty($value['size_type']) ? $value['size_type'] : '',
                     'other_data' => '{

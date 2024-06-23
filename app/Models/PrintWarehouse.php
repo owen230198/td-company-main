@@ -29,16 +29,13 @@ class PrintWarehouse extends Model
     {
         $role = [
             \GroupUser::WAREHOUSE => [
-                'insert' => 1,
                 'view' => 1,
-                'update' => 1
             ],
             \GroupUser::PLAN_HANDLE => [
                 'view' => 1
             ],
             \GroupUser::ACCOUNTING => [
                 'view' => 1,
-                'update' => 1
             ]
         ];
         return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];
