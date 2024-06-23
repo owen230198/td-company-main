@@ -497,7 +497,7 @@ if (!function_exists('convertNumerToText')) {
         function getQtvByCodeMisa($code, $type)
         {
             $arr = explode('_', $code);
-            return str_replace($type, '', $arr[1]);   
+            return str_replace($type, '', $arr[0]);   
         }
     }
 }

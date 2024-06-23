@@ -36,15 +36,15 @@ class ImportPrintWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows
             'source' => 1,
             'note' => 'Nhập từ Misa',
             'act' => 1,
-            'created_at' => \Carbon\Carbon::now(),
-            'updated_at' => \Carbon\Carbon::now(),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
             'created_by' => 25
         ];
         if ($type == 'decal') {
             $ret['qtv'] = 300;
             $ret['supp_price'] = 34;
         }elseif ($type == 'couches'){
-            $ret['qtv'] = getQtvByCodeMisa($row['mam_hang'], 'C');
+            $ret['qtv'] = getQtvByCodeMisa($row['ma_hang'], 'C');
             $ret['supp_price'] = 12;
         }
         elseif ($type == 'ivory'){
