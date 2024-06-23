@@ -479,16 +479,13 @@ if (!function_exists('convertNumerToText')) {
 		return $string;
 	}
 
-    if (!function_exists('getStringAfterSlash')) {
-        function getStringAfterSlash($str)
+    if (!function_exists('getSizeByCodeMisa')) {
+        function getSizeByCodeMisa($str)
         {
-            preg_match('/[A-Za-z]+(\d+(\.\d+)?x\d+(\.\d+)?)/', $str, $matches);
-            dd($matches);
-            if (!empty($matches[1])) {
-                $ret = $matches[1];
-            } else {
-                $ret = null;
-            }
+            $arr = explode('_', $str);
+            $arr_size = explode('x', $arr[1]);
+            $ret['length'] = $arr_size[0] > $arr_size[1] ? $arr_size[0] : $arr_size[1];
+            $ret['width'] = $arr_size[0] > $arr_size[1] ? $arr_size[1] : $arr_size[0];
             return $ret;
         }
     }

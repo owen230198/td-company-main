@@ -6,10 +6,8 @@ use App\Models\PrintWarehouse;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\SkipsEmptyRows;
-
-use function PHPUnit\Framework\stringContains;
-
-class ImportPrintWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows
+use Maatwebsite\Excel\Concerns\WithMappedCells;
+class ImportPrintWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows, WithMappedCells
 {
     /**
      * @param array $row
@@ -21,16 +19,29 @@ class ImportPrintWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows
         if ($this->isHeaderRow($row) || $row['cuoi_ky'] <= 0) {
             return null;
         }
-        $name = str_contains($row['ma_hang'], 'ALSE') ? 'Đề can ALSE' : 'Đề can giấy';
-        $size = getStringAfterSlash($row['ma_hang']);
-        $arr_size = explode('x', $size);
-        $length = $arr_size[0] > $arr_size[1] ? $arr_size[0] : $arr_size[1];
-        $width = $arr_size[0] > $arr_size[1] ? $arr_size[1] : $arr_size[0];
+        dd($row);
         return new PrintWarehouse([
-            'name' => $name,
-            'length' => $length,
-            'width' => $width,
+            'name' => $row['name'],
+            'length' => @$row['length'],
+            'width' => @$row['width'],
         ]);
+    }
+
+    public function map($row): array
+    {
+        $size = getSizeByCodeMisa($row['ma_hang']);
+        $row['name'] = str_contains($row['ma_hang'], 'ALSE') ? 'Đề can ALSE' : 'Đề can giấy';
+        $row['length'] = @$size['length'];
+        $row['width'] = @$size['width'];
+        dd($row);
+        return $row;
+    }
+
+    public function mapping(): array
+    {
+        return [
+            
+        ];
     }
 
     private function isHeaderRow($row)

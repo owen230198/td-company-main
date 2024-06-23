@@ -96,6 +96,11 @@ class NGroupUser extends Model
             'link' => 'insert/quotes',
             'group' => 'customer_quote'
         ],
+        'quote_management' => [
+            'name' => 'DS báo giá',
+            'link' => 'view/quotes',
+            'group' => 'customer_quote'
+        ],
         'quote_not_accepted' => [
             'name' => 'DS báo giá (chưa duyệt)',
             'link' => 'view/quotes?default_data=%7B%22status%22%3A%22not_accepted%22%7D',
@@ -264,6 +269,7 @@ class NGroupUser extends Model
             self::MODULE['customer_list'],
             self::MODULE['represent_list'],
             self::MODULE['create_quote'],
+            self::MODULE['quote_management'],
             self::MODULE['quote_not_accepted'],
             self::MODULE['quote_accepted'],
             self::MODULE['order_process'],
