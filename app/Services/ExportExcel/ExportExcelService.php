@@ -71,7 +71,7 @@ class ExportExcelService implements FromView, WithTitle, ShouldAutoSize, WithEve
                         'size' => 11,
                     ],
                 ]);
-                $event->sheet->setAutoFilter('B3:K3');
+                // $event->sheet->setAutoFilter('B3:K3');
                 foreach(range('A', $event->sheet->getHighestDataColumn()) as $columnID) {
                     $event->sheet->getDelegate()->getColumnDimension($columnID)->setAutoSize(true);
                 }
