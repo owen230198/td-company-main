@@ -101,7 +101,7 @@ class AdminController extends Controller
 
     public function importExcel(Request $request, $table)
     {
-        $role = $this->admins->checkPermissionAction($table, 'view');
+        $role = $this->admins->checkPermissionAction($table, 'insert');
         if (!@$role['allow']) {
             return back()->with('error', 'Bạn không có quyền truy cập!');
         }
