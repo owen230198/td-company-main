@@ -3,45 +3,55 @@
 namespace App\Imports;
 
 use App\Models\PrintWarehouse;
+use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\SkipsEmptyRows;
-use Maatwebsite\Excel\Concerns\WithMappedCells;
-class ImportPrintWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows, WithMappedCells
+class ImportPrintWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows
 {
-    /**
-     * @param array $row
-     *
-     * @return \Illuminate\Database\Eloquent\Model|null
-     */
+    static $type = '';
+    function __construct($type)
+    {
+        self::$type = $type;
+    }
+
     public function model(array $row)
     {
-        if ($this->isHeaderRow($row) || $row['cuoi_ky'] <= 0) {
+        if ($this->isHeaderRow($row) || $row['cuoi_ky'] <= 0 || empty ($row['ma_hang'])) {
             return null;
         }
-        dd($row);
-        return new PrintWarehouse([
-            'name' => $row['name'],
-            'length' => @$row['length'],
-            'width' => @$row['width'],
-        ]);
+        $data = $this->getDataImport(self::$type, $row);
+        return new PrintWarehouse($data);
     }
 
-    public function map($row): array
+    private function getDataImport($type, $row)
     {
-        $size = getSizeByCodeMisa($row['ma_hang']);
-        $row['name'] = str_contains($row['ma_hang'], 'ALSE') ? 'Đề can ALSE' : 'Đề can giấy';
-        $row['length'] = @$size['length'];
-        $row['width'] = @$size['width'];
-        dd($row);
-        return $row;
-    }
-
-    public function mapping(): array
-    {
-        return [
-            
+        $ret =[
+            'name' => '',
+            'length' => getSizeByCodeMisa($row['ma_hang'], 'length'),
+            'width' => getSizeByCodeMisa($row['ma_hang'], 'width'),
+            'qty' => $row['cuoi_ky'],
+            'type' => 'paper',
+            'status' => 'imported',
+            'source' => 1,
+            'note' => 'Nhập từ Misa',
+            'act' => 1,
+            'created_at' => \Carbon\Carbon::now(),
+            'updated_at' => \Carbon\Carbon::now(),
+            'created_by' => 25
         ];
+        if ($type == 'decal') {
+            $ret['qtv'] = 300;
+            $ret['supp_price'] = 34;
+        }elseif ($type == 'couches'){
+            $ret['qtv'] = getQtvByCodeMisa($row['mam_hang'], 'C');
+            $ret['supp_price'] = 12;
+        }
+        elseif ($type == 'ivory'){
+            $ret['qtv'] = getQtvByCodeMisa($row['mam_hang'], 'i');
+            $ret['supp_price'] = 13;
+        }
+        return $ret;
     }
 
     private function isHeaderRow($row)

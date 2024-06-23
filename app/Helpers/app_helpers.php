@@ -480,13 +480,24 @@ if (!function_exists('convertNumerToText')) {
 	}
 
     if (!function_exists('getSizeByCodeMisa')) {
-        function getSizeByCodeMisa($str)
+        function getSizeByCodeMisa($str, $get)
         {
             $arr = explode('_', $str);
             $arr_size = explode('x', $arr[1]);
-            $ret['length'] = $arr_size[0] > $arr_size[1] ? $arr_size[0] : $arr_size[1];
-            $ret['width'] = $arr_size[0] > $arr_size[1] ? $arr_size[1] : $arr_size[0];
+            if ($get == 'length') {
+                $ret = $arr_size[0] > $arr_size[1] ? $arr_size[0] : $arr_size[1];
+            }else{
+                $ret = $ret['width'] = $arr_size[0] > $arr_size[1] ? $arr_size[1] : $arr_size[0];
+            }
             return $ret;
+        }
+    }
+
+    if (!function_exists('getQtvByCodeMisa')) {
+        function getQtvByCodeMisa($code, $type)
+        {
+            $arr = explode('_', $code);
+            return str_replace($type, '', $arr[1]);   
         }
     }
 }

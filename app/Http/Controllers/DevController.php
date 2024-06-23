@@ -138,7 +138,7 @@ class DevController extends Controller
 
     public function test()
     {
-        dd(getStringAfterSlash('ALSE/38x64'));
+        dd(getSizeByCodeMisa('ALSE_34x53'));
     }
 
     public function handleDataHistory()

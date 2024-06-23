@@ -65,7 +65,8 @@ class PrintWarehouseController extends Controller
     }
 
     public function import($file){
-        Excel::import(new ImportPrintWarehouse, $file);
-        return returnMessageAjax(200, 'Đã thêm vật tư giấy thành công !');
+        $arr_file = pathinfo($file->getClientOriginalName());
+        Excel::import(new ImportPrintWarehouse($arr_file['filename']), $file);
+        return returnMessageAjax(200, 'Đã thêm vật tư giấy thành công !', \StatusConst::RELOAD);
     }
 }
