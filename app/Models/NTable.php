@@ -15,6 +15,7 @@ class NTable extends Model
     protected $protectFields = false;
     static $specific = [
                         'insert' => [
+                            'customers',
                             'quotes', 
                             'orders', 
                             'products', 
@@ -26,6 +27,7 @@ class NTable extends Model
                             'c_expertises'
                         ],
                         'update' => [
+                            'customers',
                             'quotes', 
                             'orders', 
                             'products', 
@@ -49,6 +51,7 @@ class NTable extends Model
                             'c_expertises'
                         ],
                         'remove' => [
+                            'customers',
                             'quotes', 
                             'orders', 
                             'products', 

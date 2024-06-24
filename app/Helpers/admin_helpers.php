@@ -132,6 +132,13 @@ if (! function_exists('getSessionUser')) {
     }
 }
 
+if (!function_exists('isDataOwn')) {
+    function isDataOwn($data)
+    {
+        return @$data->created_by == \User::getCurrent('id');
+    }
+}
+
 if (!function_exists('getOptionDataField')) {
     function getOptionDataField($param)
     {

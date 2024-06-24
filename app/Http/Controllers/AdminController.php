@@ -576,5 +576,14 @@ class AdminController extends Controller
         $data['list_data'] = NLogAction::where($where)->cursor();
         return view('histories.view', $data);
     }
+
+    public function addLinkingData(Request $request)
+    {
+        if (\GroupUser::isAdmin() || \GroupUser::isSale()) {
+            return view('customers.item_represent', ['index' => (int) $request->input('index')]);
+        }else{
+            return returnMessageAjax(100, 'Bạn không có quyền thao tác !');
+        }
+    }
 }
 

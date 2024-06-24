@@ -337,6 +337,15 @@ a.device_supp_item {
     max-width: 350px;
 }
 
+.list_linking_view_update {
+    width: 100%;
+}
+
+.remove_data_linking_button{
+    right: 5px;
+    top: 5px;
+}
+
 .handle_stage_item {
     display: flex;
     width: 25px;

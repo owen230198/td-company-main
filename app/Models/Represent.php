@@ -47,4 +47,32 @@ class Represent extends Model
         ];
         return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];
     }
+
+    static function getFieldUpdateLinking()
+    {
+        return [
+            [
+                'name' => 'name',
+                'attr' => ['required' => 1],
+                'note' => 'Tên người đại diện',
+                'type' => 'text'
+            ],
+            [
+                'name' => 'phone',
+                'attr' => ['required' => 1], 
+                'note' => 'SĐT',
+                'type' => 'text'
+            ],
+            [
+                'name' => 'telephone', 
+                'note' => 'SĐT cố định',
+                'type' => 'text'
+            ],
+            [
+                'name' => 'email', 
+                'note' => 'Email',
+                'type' => 'text'
+            ]
+        ];
+    }
 }

@@ -55,6 +55,7 @@ Route::middleware(['check_login'])->group(function () {
 	Route::get('history-table/{table}', [AdminController::class, 'historyTable']);
 	Route::get('export/{table}', [AdminController::class, 'exportTable']);
 	Route::post('import-excel/{table}', [AdminController::class, 'importExcel']);
+	Route::get('add-linking-data', [AdminController::class, 'addLinkingData']);
 
 	//quotes routes
 	Route::any('create-quote', [QuoteController::class, 'createQuote']);

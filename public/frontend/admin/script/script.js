@@ -673,6 +673,18 @@ var addSuppBuyModule = function()
   });
 }
 
+var addDataLinkingModule = function()
+{
+  $(document).on('click', 'button.add_data_linking_button', function(event){
+    event.preventDefault();
+    let list_section = $(this).closest('.list_linking_view_update').find('.list_linking_data');
+    let item = list_section.find('.item_data_linking');
+    let index = parseInt(item.last().data('index')) + 1;
+    let url = 'add-linking-data?index='+index;
+    ajaxViewTarget(url, list_section, list_section, 2);
+  });
+}
+
 var removeParentElement = function()
 {
     $(document).on('click', '.remove_parent_element_button', function(event){
@@ -1006,6 +1018,7 @@ $(function () {
     moduleSelectStyleProduct();
     fileProcessV2Module();
     addSuppBuyModule();
+    addDataLinkingModule();
     removeParentElement();
     confirmBuying();
     changeInputPriceBuying();
