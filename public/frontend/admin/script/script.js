@@ -690,7 +690,26 @@ var removeParentElement = function()
     $(document).on('click', '.remove_parent_element_button', function(event){
         event.preventDefault();
         $(this).parent().remove();
-      });
+        let id = $(this).data('id');
+        let table = $(this).data('table');
+        if (!empty(id)) {
+            ajaxBaseCall({
+                url: getBaseRoute('remove?ajax=1'),
+                type: 'DELETE',
+                data: { remove_id: id, table: table }
+            });
+        }
+    });
+}
+
+var submitOnlylinkingData = function()
+{
+    $(document).on('click', 'button.__submit_only_linking_data', function(event) {
+        event.preventDefault();
+        let customer = $(this).data('customer');
+        let parent = $(this).closest('.list_linking_view_update');
+        ajaxBaseCall({url:getBaseRoute('process-data-represent/'+customer), type: 'POST', data: parent.find('.form-control').serialize()});
+    })
 }
 
 var confirmBuying = function()
@@ -1020,6 +1039,7 @@ $(function () {
     addSuppBuyModule();
     addDataLinkingModule();
     removeParentElement();
+    submitOnlylinkingData();
     confirmBuying();
     changeInputPriceBuying();
     confirmBought();

@@ -10,6 +10,7 @@ use App\Http\Controllers\Quote\QuoteController;
 use App\Http\Controllers\Order\OrderController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\SupplyBuying\SupplyBuyingController;
+use App\Http\Controllers\Customer\CustomerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,6 +74,7 @@ Route::middleware(['check_login'])->group(function () {
 	Route::get('get-after-print-view', [QuoteController::class, 'getAfterPrintView']);
 	Route::get('suggest-product-submited-by-size', [QuoteController::class, 'suggestProductSubmitedBySize']);
 	Route::get('get-view-made-by-product', [QuoteController::class, 'getViewMadeByProduct']);
+	Route::post('process-data-represent/{customer}', [CustomerController::class, 'processDataRepresent']);
 
 	//orders routes
 	Route::post('apply-order/{stage}/{type}/{id}', [OrderController::class, 'applyOrder']);

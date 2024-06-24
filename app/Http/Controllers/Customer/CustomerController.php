@@ -1,7 +1,9 @@
 <?php
     namespace App\Http\Controllers\Customer;
     use App\Http\Controllers\Controller;
+use App\Models\Customer;
 use App\Models\Represent;
+    use Illuminate\Http\Request;
 
     class CustomerController extends Controller
     {
@@ -11,7 +13,18 @@ use App\Models\Represent;
             $this->table = 'customers';
         }
 
-        function processRepresent($represents, $cusomer_id)
+        public function processDataRepresent(Request $request, $customer){
+            $data_customer = Customer::find($customer);
+            if (empty($data_customer)) {
+                return returnMessageAjax(100, 'Khách hàng không tồn tại hoặc đã bị xóa !');
+            }
+            $data = $request->all();
+            $represents = @$data['represent'] ?? [];
+            $this->processRepresent($represents, $customer);
+            return returnMessageAjax(200, 'Đã cập nhật dữ liệu Người liên hệ cho khách hàng '. $data_customer->name, \StatusConst::RELOAD);
+        }
+
+        private function processRepresent($represents, $cusomer_id)
         {
             $table = 'represents';
             foreach ($represents as $key => $represent) {
@@ -30,8 +43,10 @@ use App\Models\Represent;
                 }else{
                     $represent_id = $represent['id'];
                     $dataItem = Represent::find($represent_id);
-                    $this->admins->doUpdateTable($represent_id, $table, $represent);
-                    logActionUserData('update', $table, $represent_id, $dataItem);
+                    if (\GroupUser::isAdmin() || isDataOwn($dataItem)) {
+                        $this->admins->doUpdateTable($represent_id, $table, $represent);
+                        logActionUserData('update', $table, $represent_id, $dataItem);
+                    }
                 }
             }
         }
@@ -41,7 +56,7 @@ use App\Models\Represent;
             $data['field_list'][] = [
                 'name' => 'represent', 
                 'type' => 'represent', 
-                'note' => 'Người đại diện',
+                'note' => 'Người Liên hệ',
                 'region' => 1
             ];
         }
