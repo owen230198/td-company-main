@@ -1,11 +1,8 @@
 @php
-    $table_get = $other_data['data']['table']; 
+    $table_get = $other_data['data']['table_get']; 
     $field_get = !empty($other_data['data']['field_get']) ? $other_data['data']['field_get'] : 'name'; 
     $field_data = $other_data['data']['field_data'];
-    $table_query = $other_data['data']['table_query'];
-    $field_query = $other_data['data']['field_query'];
-    $data_query = \DB::table($table_query)->find($data->{$field_query});
-    $data_get = \DB::table($table_get)->find(@$data_query->{$field_data});
+    $data_get = \DB::table($table_get)->select($field_get)->find(@$data->{$field_data});
     $arr_field = \App\Models\NDetailTable::where(['act' => 1, 'table_map' => $table_get, 'name' => $field_get])->first();
 @endphp
 @if (!empty($arr_field))

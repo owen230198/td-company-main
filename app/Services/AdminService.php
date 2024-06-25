@@ -135,6 +135,13 @@ class AdminService extends BaseService
                     $field_query = @$linking_data['field_query'];
                     $arr_id = \DB::table($linking_data['table'])->where('act', 1)->where($field_title, 'like', '%'.$value.'%')->pluck($field_query)->all();
                     $where[] = ['key' => 'id', 'compare' => 'in', 'value' => array_unique($arr_id)];
+                }elseif($type == 'link_data'){
+                    $link_data = @$other_data['data'] ?? [];
+                    $link_table = $link_data['table_get'];
+                    $condition = $this->getConditionTable($link_table, $link_data['field_get'], $value);
+                    $link_obj = getDataTable($link_table, $condition, [], true);
+                    $arr_id = $link_obj->pluck('id')->all();
+                    $where[] = ['key' => $link_data['field_data'], 'compare' => 'in', 'value' => array_unique($arr_id)];
                 }elseif ($type == 'group_product' && !empty($other_data['field_pluck'])) {
                     if (!empty($value['group'])) {
                         $product_obj = \DB::table('products')->where(['category' => $value['group']]);
@@ -156,7 +163,8 @@ class AdminService extends BaseService
                         $product_obj->where('height', $value['height']);
                     }
                     if (!empty($value['length']) || !empty($value['width']) || !empty($value['height'])) {
-                        $arr_id = $product_obj->pluck('quote_id')->all();
+                        $key_pluck = !empty($other_data['data']['key_pluck']) ? $other_data['data']['key_pluck'] : 'quote_id';
+                        $arr_id = $product_obj->pluck($key_pluck)->all();
                         $where[] = ['key' => 'id', 'compare' => 'in', 'value' => array_unique($arr_id)];
                     }
                 }elseif ($type == 'customer_city') {
