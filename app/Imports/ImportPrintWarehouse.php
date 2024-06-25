@@ -48,7 +48,7 @@ class ImportPrintWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows
             $ret['supp_price'] = 12;
         }
         elseif ($type == 'ivory'){
-            $ret['qtv'] = getQtvByCodeMisa($row['mam_hang'], 'i');
+            $ret['qtv'] = getQtvByCodeMisa($row['ma_hang'], 'i');
             $ret['supp_price'] = 13;
         }
         return $ret;
