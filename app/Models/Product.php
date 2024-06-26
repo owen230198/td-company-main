@@ -13,8 +13,9 @@
         const REWORKING = 'reworking';
         const REWORKED = 'reworked';
         const WAITING_WAREHOUSE = 'waiting_warehouse';
-        const CLONE_FIELD = ['name', 'category', 'qty', 'design', 'length', 'width', 'height', 'total_amount', 'act'];
+        const CLONE_FIELD = ['name', 'category', 'qty', 'design', 'length', 'width', 'height', 'profit', 'ship_price', 'total_amount', 'act'];
         const FIELD_WAREHOUSE = ['name', 'category', 'product_style', 'length', 'width', 'height'];
+        const HIDDEN_CLONE_FIELD = ['id', 'product', 'handle_elevate', 'status', 'parent'];
 
         const SALE_SHAPE_FILE_FIELD = [
             'note' => 'Khuôn kinh doanh tính giá',

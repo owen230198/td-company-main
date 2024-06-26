@@ -3,7 +3,7 @@
         $order_field_update = [
             [
                 'name' => 'order[customer]',
-                'attr' => ['readonly' => 1],
+                'attr' => ['readonly' => !empty($data_order['customer'])],
                 'note' => 'Khách hàng',
                 'type' => 'linking',
                 'other_data' => ['config' => ['search' => 1], 'data'=> ['table' => 'customers']],
@@ -11,7 +11,7 @@
             ],
             [
                 'name' => 'order[represent]',
-                'attr' => ['readonly' => 1],
+                'attr' => ['readonly' => !empty($data_order['represent'])],
                 'note' => 'Người liên hệ',
                 'type' => 'linking',
                 'other_data' => ['config' => ['search' => 1], 'data'=> ['table' => 'represents']],

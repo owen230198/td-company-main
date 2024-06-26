@@ -51,19 +51,30 @@
                 if (!empty($process['code']) && $process['code'] == 100) {
                     return returnMessageAjax(100, $process['message']);  
                 }else{
-                    return returnMessageAjax(200, 'Cập nhật dữ liệu thành công!', getBackUrl());       
+                    $ret_url = !\GroupUser::isAdmin() ? getBackUrl() : url('/profit-config-quote');
+                    return returnMessageAjax(200, 'Cập nhật dữ liệu thành công!', $ret_url);       
                 }
             } 
         }
         
         public function clone($request, $id)
         {
+            $data_product = Product::where('id', $id)->get();
+            if (empty($data_product)) {
+                return back()->with('error', 'Sản phẩm không tồn tại hoặc đã bị xóa !');
+            }
+            $product_obj = $data_product->first();
+            $data_order = Order::find($product_obj['order']);
+            if (empty($data_order)) {
+                return back()->with('error', 'Đơn hàng không tồn tại hoặc đã bị xóa !');
+            }
+            $arr_order = $data_order->makeHidden(Quote::HIDDEN_CLONE_FIELD)->toArray();
             $arr_product = Product::where('id', $id)->get(Product::CLONE_FIELD)->first()->toArray();
             (new \BaseService)->configBaseDataAction($arr_product);  
             $product_id = Product::insertGetId($arr_product);
             foreach (Product::$childTable as $table) {
                 $model = getModelByTable($table);
-                $list_data = $model::where('product', $id)->get()->makeHidden(['id', 'product', 'handle_elevate', 'status', 'parent'])->toArray();
+                $list_data = $model::where('product', $id)->get()->makeHidden(Product::HIDDEN_CLONE_FIELD)->toArray();
                 foreach ($list_data as $data_insert) {
                     $data_insert['product'] = $product_id;
                     (new \BaseService)->configBaseDataAction($data_insert);  
@@ -72,15 +83,15 @@
 
                 }
             }
-            
             if ($request->isMethod('GET')) {
                 $data['parent_url'] = ['link' => getBackUrl(), 'note' => 'Danh sách đơn sản phẩm'];
-                $data['order_cost'] = $arr_product['total_amount'];
-                $data['products'] = Product::where('id', $product_id)->get();
+                $data['data_order'] = $data_order;
+                $data['order_cost'] = $product_obj['total_amount'];
+                $data['products'] = $data_product;
                 $data['product_qty'] = 1;
-                $data['link_action'] = url('insert/orders');
+                $data['link_action'] = url('update/orders/'.$order_id);
                 $data['order_type'] = \OrderConst::INCLUDE;
-                $data['title'] = 'Sao chép đơn sản phẩm - '.$arr_product['name'];
+                $data['title'] = 'Sao chép đơn hàng - sản phẩm - '.$product_obj['name'];
                 $blade_to = 'orders.users.'.\GroupUser::getCurrent().'.view';
                 if (view()->exists($blade_to)) {
                     return view($blade_to, $data);
@@ -88,7 +99,7 @@
                     return back()->with('error', 'Giao diện không được hỗ trợ !');
                 }               
             }else{
-                return back()->with('error', 'Phương thức không hợp lệ !');
+                return back()->with('error', 'Yêu cầu không hợp lệ !'); 
             }
         }
 

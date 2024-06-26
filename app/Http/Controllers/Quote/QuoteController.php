@@ -89,53 +89,7 @@ class QuoteController extends Controller
         if (!$request->isMethod('GET')) {
             return back()->with('error', 'Yêu cầu không hợp lệ !');
         }
-        $hidden_clone_field = Quote::HIDDEN_CLONE_FIELD;
-        $data_quote = Quote::find($id)->makeHidden($hidden_clone_field)->toArray();
-        $data_products = Product::where('quote_id', $id)->get()->makeHidden($hidden_clone_field)->toArray();
-        unset($data_quote['id']);
-        $this->services->configBaseDataAction($data_quote);
-        $data_quote['status'] = \StatusConst::NOT_ACCEPTED;
-        $quote_id = Quote::insertGetId($data_quote);
-        Quote::where('id', $quote_id)->update(['seri' => 'BG-'.sprintf("%08s", $quote_id)]);
-        //log insert quote
-        $log_quote_id = logActionUserData('insert', 'quotes', $quote_id, $data_quote);
-        $child_tables = Product::$childTable;
-        if ($quote_id) {
-            foreach ($data_products as $product) {
-                $product['quote_id'] = $quote_id;
-                $old_product_id = $product['id'];
-                unset($product['id'], $product['code'], $product['status'], $product['order'], $product['order_created']);
-                $this->services->configBaseDataAction($product);
-                $product_id = Product::insertGetId($product);
-                $childs = Product::where('parent', $old_product_id)->get()->makeHidden($hidden_clone_field)->toArray();
-                foreach ($childs as $child) {
-                    $child['parent'] = $product_id;
-                    unset($child['id'], $child['code'], $child['status'], $child['order'], $child['order_created']);
-                    $this->services->configBaseDataAction($child);
-                    Product::insertGetId($child);
-                }
-                //log insert product
-                $log_product_id = logActionUserData('insert', 'products', $product_id, $product, $log_quote_id);
-                if ($product_id) {
-                    foreach ($child_tables as $table) {
-                        $model = getModelByTable($table);
-                        $data_supplies = $model->where('product', $old_product_id)->get()->makeHidden($hidden_clone_field)->toArray();
-                        foreach ($data_supplies as $supply) {
-                            unset($supply['id'], $supply['code'], $supply['status']);
-                            $this->services->configBaseDataAction($supply);
-                            $supply['product'] = $product_id;
-                            $supp_id = $model::insertGetId($supply);
-                            $this->services->resetHandledQty($table, $model, $supp_id);
-                            logActionUserData('insert', $table, $supp_id, $supply, $log_product_id);
-                        }
-                    }
-                }
-            }
-            return redirect('update/quotes/'.$quote_id)->with('message', 'Sao chép báo giá thành công !');
-        }else{
-            return back()->with('error', 'Đã xảy ra lỗi khi thực hiện sao chép !');
-        }
-
+        return $this->services->cloneBaseFlow('quotes', $id, 'quote_id');
     }
 
     public function createQuote(Request $request)

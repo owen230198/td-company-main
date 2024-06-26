@@ -404,11 +404,13 @@ class DevController extends Controller
 
     public function updateCustomerOrderByQuote()
     {
-        $products = Product::where('order_created', 1)->get();
+        $products = Product::where(['order_created' => 1])->get();
         foreach ($products as $product) {
             $quote = Quote::find($product->quote_id);
             if (!empty($quote->customer) && !empty($quote->represent)) {
                 Order::where('id', $product->order)->update(['customer' => $quote->customer, 'represent'=> $quote->represent]);
+            }else{
+                dump(Order::find($product->order));
             }
         }
     }

@@ -319,4 +319,56 @@ class QuoteService extends BaseService
         $templateProcessor->saveAs($fileStorage);
         return response()->download($fileStorage);
     }
+
+    public function cloneBaseFlow($table, $id, $field_parent)
+    {
+        $hidden_fields = Quote::HIDDEN_CLONE_FIELD;
+        $model = getModelByTable($table);
+        $data_table = $model::find($id)->makeHidden($hidden_fields)->toArray();
+        $data_products = Product::where($field_parent, $id)->get()->makeHidden($hidden_fields)->toArray();
+        unset($data_table['id']);
+        $this->configBaseDataAction($data_table);
+        $data_table['status'] = \StatusConst::NOT_ACCEPTED;
+        $ret_id = $model::insertGetId($data_table);
+        $ret_update = $table == 'quotes' ? ['seri' => 'BG-'.sprintf("%08s", $ret_id)] : ['code' => 'DH-'.sprintf("%08s", $ret_id)];
+        $model::where('id', $ret_id)->update($ret_update);
+        //log insert table
+        logActionUserData('insert', $table, $ret_id, $data_table);
+        $child_tables = Product::$childTable;
+        if ($ret_id) {
+            foreach ($data_products as $product) {
+                $product[$field_parent] = $ret_id;
+                $old_product_id = $product['id'];
+                unset($product['id']);
+                $this->configBaseDataAction($product);
+                $product_id = Product::insertGetId($product);
+                $childs = Product::where('parent', $old_product_id)->get()->makeHidden($hidden_fields)->toArray();
+                foreach ($childs as $child) {
+                    $child['parent'] = $product_id;
+                    unset($child['id']);
+                    $this->configBaseDataAction($child);
+                    Product::insertGetId($child);
+                }
+                //log insert product
+                logActionUserData('insert', 'products', $product_id, $product);
+                if ($product_id) {
+                    foreach ($child_tables as $table__supply) {
+                        $model = getModelByTable($table__supply);
+                        $data_supplies = $model->where('product', $old_product_id)->get()->makeHidden($hidden_fields)->toArray();
+                        foreach ($data_supplies as $supply) {
+                            unset($supply['id']);
+                            $this->configBaseDataAction($supply);
+                            $supply['product'] = $product_id;
+                            $supp_id = $model::insertGetId($supply);
+                            $this->resetHandledQty($table__supply, $model, $supp_id);
+                            logActionUserData('insert', $table__supply, $supp_id, $supply);
+                        }
+                    }
+                }
+            }
+            return redirect('update/'.$table.'/'.$ret_id)->with('message', 'Sao chép dữ liệu thành công !');
+        }else{
+            return back()->with('error', 'Đã xảy ra lỗi khi thực hiện sao chép !');
+        }
+    }
 }
