@@ -304,13 +304,6 @@ if (!function_exists('getLinkingUrl')) {
                 $url .= '&'.$key.'='.$val;
             }
         }
-        if (!empty($select_data['where_default'])) {
-            foreach ($select_data['where_default'] as $key => $val) {
-                if (!empty($default_field[$val])) {
-                    $url .= '&'.$key.'='.$default_field[$val];
-                }
-            }
-        }
         return $url;
     }
 
