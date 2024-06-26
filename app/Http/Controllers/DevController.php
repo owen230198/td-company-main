@@ -9,6 +9,7 @@ use App\Models\CDesign;
 use App\Models\Order;
 use App\Models\Paper;
 use App\Models\Product;
+use App\Models\Quote;
 use App\Models\Represent;
 use App\Models\WSalary;
 
@@ -347,6 +348,7 @@ class DevController extends Controller
 
     public function customerToRepresent()
     {
+        dd(1);
         $customsers = \DB::table('customers')->get();
         foreach ($customsers as $customer) {
             $represent = [];
@@ -397,6 +399,17 @@ class DevController extends Controller
             $arr_total = getTotalProductByArr($products);
             $update['amount'] = $arr_total['total_amount'];
             Order::where('id', $order->id)->update($update);
+        }
+    }
+
+    public function updateCustomerOrderByQuote()
+    {
+        $products = Product::where('order_created', 1)->get();
+        foreach ($products as $product) {
+            $quote = Quote::find($product->quote_id);
+            if (!empty($quote->customer) && !empty($quote->represent)) {
+                Order::where('id', $product->order)->update(['customer' => $quote->customer, 'represent'=> $quote->represent]);
+            }
         }
     }
 }
