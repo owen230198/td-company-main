@@ -276,6 +276,99 @@
             }
             return true;    
         }
+
+        static function handleProductAfter($data, $order)
+        {
+            foreach ($data as $key => $product) {
+                $data_update['code'] =  $order['code'].getCharaterByNum($key);
+                if (!empty($order['status'])) {
+                    $data_update['status'] = $order['status'];
+                }
+                $data_update['order'] = $order['id'];
+                $data_update['order_created'] = 1;
+                Product::where('id', $product['id'])->update($data_update);
+                self::handleCommandCode($product, $data_update['code']); 
+            }  
+        }
+
+        static function handleCommandCode($product, $code)
+        {
+            $elements = getProductElementData($product['category'], $product['id'], false);
+            $count = -1;
+            foreach ($elements as $element) {
+                if (!empty($element['data'])) {
+                    $el_data = $element['data'];
+                    foreach ($el_data as $supply) {
+                        $table_supply = $element['table'];
+                        $data_update['status'] = \StatusConst::NOT_ACCEPTED;
+                        $count++;
+                        $_code =  $code.getCharaterByNum($count);
+                        $data_update['code'] = $_code;
+                        getModelByTable($table_supply)->where('id', $supply->id)->update($data_update);
+                    }
+                }
+            }
+        }
+
+        static function resetHandledQty($table, $model, $supp_id)
+        {
+            $handle_arr = getArrHandleField($table);
+            $dataItem = $model::find($supp_id);
+            foreach ($handle_arr as $stage) {
+                if (!empty($dataItem[$stage])) {
+                    $item_stage = json_decode($dataItem[$stage], true);
+                    $item_stage['handled_qty'] = 0;
+                    $dataItem->{$stage} = json_encode($item_stage);
+                }
+            }
+            $dataItem->save();
+        }
+
+        static function handleCloneData($data, $obj_id, $obj_field, $handle_code)
+        {
+
+            $hidden_fields = \StatusConst::HIDDEN_CLONE_FIELD;
+            $base_service = new \BaseService();
+            $child_tables = self::$childTable;
+            foreach ($data as $product) {
+                $product[$obj_field] = $obj_id;
+                $old_product_id = $product['id'];
+                unset($product['id']);
+                if ($handle_code) {
+                    $product['status'] = \StatusConst::NOT_ACCEPTED;
+                }
+                $base_service->configBaseDataAction($product);
+                $product_id = Product::insertGetId($product);
+                $childs = Product::where('parent', $old_product_id)->get()->makeHidden($hidden_fields)->toArray();
+                foreach ($childs as $child) {
+                    $child['parent'] = $product_id;
+                    unset($child['id']);
+                    $base_service->configBaseDataAction($child);
+                    Product::insertGetId($child);
+                }
+                //log insert product
+                logActionUserData('insert', 'products', $product_id, $product);
+                if ($product_id) {
+                    foreach ($child_tables as $table_supply) {
+                        $model = getModelByTable($table_supply);
+                        $data_supplies = $model->where('product', $old_product_id)->get()->makeHidden($hidden_fields)->toArray();
+                        foreach ($data_supplies as $supply) {
+                            unset($supply['id']);
+                            $base_service->configBaseDataAction($supply);
+                            $supply['product'] = $product_id;
+                            $supp_id = $model::insertGetId($supply);
+                            self::resetHandledQty($table_supply, $model, $supp_id);
+                            logActionUserData('insert', $table_supply, $supp_id, $supply);
+                        }
+                    }
+                }
+            }
+            if ($handle_code) {
+                $products = Product::where('order', $obj_id)->get();
+                $order = Order::find($obj_id);
+                self::handleProductAfter($products, $order);
+            }
+        }
     }
 
 ?>

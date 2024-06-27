@@ -85,9 +85,12 @@
             }
         }
 
-        public function clone(Request $request)
+        public function clone(Request $request, $id)
         {
-            dd(11);
+            if (!$request->isMethod('GET')) {
+                return back()->with('error', 'Yêu cầu không hợp lệ !');
+            }
+            return (new \App\Services\OrderService)->cloneBaseFlow('orders', $id, 'order');
         }
 
         public function applyToDesign($data, $base_obj, $order_obj, $type_ref)

@@ -9,6 +9,7 @@ class StatusConstant
     const ERR_MSG = 'err_msg';
     const RELOAD = 'f5';
     const CLOSE_POPUP = 'close_popup';
+    const HIDDEN_CLONE_FIELD = ['code', 'created_by', 'created_at', 'updated_at'];
 
     //Status constants
     const NOT_ACCEPTED = 'not_accepted';

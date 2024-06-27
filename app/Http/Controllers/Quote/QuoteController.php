@@ -89,7 +89,7 @@ class QuoteController extends Controller
         if (!$request->isMethod('GET')) {
             return back()->with('error', 'Yêu cầu không hợp lệ !');
         }
-        return $this->services->cloneBaseFlow('quotes', $id, 'quote_id');
+        return (new \App\Services\OrderService)->cloneBaseFlow('quotes', $id, 'quote_id');
     }
 
     public function createQuote(Request $request)

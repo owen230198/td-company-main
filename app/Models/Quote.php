@@ -14,7 +14,7 @@ class Quote extends Model
     protected $guarded = [];
     const ORDER_CREATED = 'order_created';
     static $tableChild = ['q_papers', 'q_cartons', 'q_foams', 'q_silks', 'q_finishes'];
-    const HIDDEN_CLONE_FIELD = ['code', 'created_by', 'created_at', 'updated_at'];
+    const HIDDEN_CLONE_FIELD = \StatusConst::HIDDEN_CLONE_FIELD;
     static function getRole()
     {
         $role = [

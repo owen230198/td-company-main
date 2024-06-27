@@ -68,41 +68,31 @@ class OrderService extends BaseService
                 $arr_order['code'] = 'DH-'.sprintf("%08s", $arr_order['id']);
                 Order::where('id', $arr_order['id'])->update($arr_order);
             }
-            $this->handleProductAfter($data['product'], $arr_order);
+            Product::handleProductAfter($data['product'], $arr_order);
             return returnMessageAjax(200, 'Cập nhật dữ liệu thành công!', getBackUrl());     
         }
     }
 
-    public function handleProductAfter($data, $order)
+    public function cloneBaseFlow($table, $id, $field_parent)
     {
-        foreach ($data as $key => $product) {
-            $data_update['code'] =  $order['code'].getCharaterByNum($key);
-            if (!empty($order['status'])) {
-                $data_update['status'] = $order['status'];
-            }
-            $data_update['order'] = $order['id'];
-            $data_update['order_created'] = 1;
-            Product::where('id', $product['id'])->update($data_update);
-            $this->handleCommandCode($product, $data_update['code']); 
-        }  
-    }
-
-    public function handleCommandCode($product, $code)
-    {
-        $elements = getProductElementData($product['category'], $product['id'], false);
-        $count = -1;
-        foreach ($elements as $element) {
-            if (!empty($element['data'])) {
-                $el_data = $element['data'];
-                foreach ($el_data as $supply) {
-                    $table_supply = $element['table'];
-                    $data_update['status'] = \StatusConst::NOT_ACCEPTED;
-                    $count++;
-                    $_code =  $code.getCharaterByNum($count);
-                    $data_update['code'] = $_code;
-                    getModelByTable($table_supply)->where('id', $supply->id)->update($data_update);
-                }
-            }
+        $hidden_fields = Quote::HIDDEN_CLONE_FIELD;
+        $model = getModelByTable($table);
+        $data_table = $model::find($id)->makeHidden($hidden_fields)->toArray();
+        $data_products = Product::where($field_parent, $id)->get()->makeHidden($hidden_fields)->toArray();
+        unset($data_table['id']);
+        $this->configBaseDataAction($data_table);
+        $data_table['status'] = \StatusConst::NOT_ACCEPTED;
+        $ret_id = $model::insertGetId($data_table);
+        $is_quote = $table == 'quotes';
+        $ret_update = $is_quote ? ['seri' => 'BG-'.sprintf("%08s", $ret_id)] : ['code' => 'DH-'.sprintf("%08s", $ret_id)];
+        $model::where('id', $ret_id)->update($ret_update);
+        //log insert table
+        logActionUserData('insert', $table, $ret_id, $data_table);
+        if ($ret_id) {
+            Product::handleCloneData($data_products, $ret_id, $field_parent, !$is_quote);
+            return redirect('update/'.$table.'/'.$ret_id)->with('message', 'Sao chép dữ liệu thành công !');
+        }else{
+            return back()->with('error', 'Đã xảy ra lỗi khi thực hiện sao chép !');
         }
     }
 

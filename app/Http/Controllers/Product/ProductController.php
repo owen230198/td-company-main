@@ -59,6 +59,9 @@
         
         public function clone($request, $id)
         {
+            if (!$request->isMethod('GET')) {
+                return back()->with('error', 'Yêu cầu không hợp lệ !');
+            }
             $data_product = Product::where('id', $id)->get();
             if (empty($data_product)) {
                 return back()->with('error', 'Sản phẩm không tồn tại hoặc đã bị xóa !');
@@ -68,39 +71,25 @@
             if (empty($data_order)) {
                 return back()->with('error', 'Đơn hàng không tồn tại hoặc đã bị xóa !');
             }
-            $arr_order = $data_order->makeHidden(Quote::HIDDEN_CLONE_FIELD)->toArray();
-            $arr_product = Product::where('id', $id)->get(Product::CLONE_FIELD)->first()->toArray();
-            (new \BaseService)->configBaseDataAction($arr_product);  
-            $product_id = Product::insertGetId($arr_product);
-            foreach (Product::$childTable as $table) {
-                $model = getModelByTable($table);
-                $list_data = $model::where('product', $id)->get()->makeHidden(Product::HIDDEN_CLONE_FIELD)->toArray();
-                foreach ($list_data as $data_insert) {
-                    $data_insert['product'] = $product_id;
-                    (new \BaseService)->configBaseDataAction($data_insert);  
-                    $supp_id = $model::insertGetId($data_insert);
-                    $this->quote_services->resetHandledQty($table, $model, $supp_id);
-
-                }
-            }
-            if ($request->isMethod('GET')) {
-                $data['parent_url'] = ['link' => getBackUrl(), 'note' => 'Danh sách đơn sản phẩm'];
-                $data['data_order'] = $data_order;
-                $data['order_cost'] = $product_obj['total_amount'];
-                $data['products'] = $data_product;
-                $data['product_qty'] = 1;
-                $data['link_action'] = url('update/orders/'.$order_id);
-                $data['order_type'] = \OrderConst::INCLUDE;
-                $data['title'] = 'Sao chép đơn hàng - sản phẩm - '.$product_obj['name'];
-                $blade_to = 'orders.users.'.\GroupUser::getCurrent().'.view';
-                if (view()->exists($blade_to)) {
-                    return view($blade_to, $data);
-                }else{
-                    return back()->with('error', 'Giao diện không được hỗ trợ !');
-                }               
+            $hidden_fields = \StatusConst::HIDDEN_CLONE_FIELD;
+            $data_products = $data_product->makeHidden($hidden_fields)->toArray();
+            $hidden_fields['return_time'] = '';
+            $arr_order = $data_order->makeHidden($hidden_fields)->toArray();
+            unset($arr_order['id']);
+            (new \BaseService())->configBaseDataAction($arr_order);
+            $arr_order['status'] = \StatusConst::NOT_ACCEPTED;
+            $order_id = Order::insertGetId($arr_order);
+            $order_update = ['code' => 'DH-'.sprintf("%08s", $order_id)];
+            Order::where('id', $order_id)->update($order_update);
+            //log insert table
+            logActionUserData('insert', 'orders', $order_id, $arr_order);
+            if ($order_id) {
+                Product::handleCloneData($data_products, $order_id, 'order', true);
+                return redirect('update/orders/'.$order_id)->with('message', 'Sao chép dữ liệu thành công !');
             }else{
-                return back()->with('error', 'Yêu cầu không hợp lệ !'); 
-            }
+                return back()->with('error', 'Đã xảy ra lỗi khi thực hiện sao chép !');
+            } 
+            
         }
 
         public function listSupplyProcess(Request $request)
