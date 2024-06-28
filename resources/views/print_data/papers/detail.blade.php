@@ -1,6 +1,6 @@
 @include('print_data.header', ['title' => 'Lệnh sản xuất - Giấy in'])
     <div class="handle_content_print mt-4">
-        <p class="d-flex align-items-center mb-2"><span class="w_60 d-block">Tên hàng</span> <span class="font_bold ml-1">: {{ $data_item->name }}</span></p>   
+        <p class="d-flex align-items-center mb-2"><span class="w_66 d-block">Tên hàng</span> <span class="font_bold ml-1">: {{ $data_item->name }}</span></p>   
     </div>
     <div class="mt-3 row row-10">
         @php
@@ -12,7 +12,7 @@
     <div class="print_print_data_content mt-4 pt-4 border_top_dashed">
         @include('print_data.header', ['title' => 'lệnh In - vật tư giấy'])
         <div class="handle_content_print mt-4">
-            <p class="d-flex align-items-center mb-2"><span class="w_60 d-block">Tên hàng</span> <span class="font_bold ml-1">: {{ $data_item->name }}</span></p>   
+            <p class="d-flex align-items-center mb-2"><span class="w_66 d-block">Tên hàng</span> <span class="font_bold ml-1">: {{ $data_item->name }}</span></p>   
         </div>
         <div class="mt-3 row row-10">
             @php
@@ -34,8 +34,10 @@
 
             @include('print_data.info_item', ['name' => 'Khổ giấy', 'info' => $size['length'] .' x ' . $size['width']])
 
-            @include('print_data.info_item', ['name' => 'Ghi chú', 'info' => $print['note']])
-
             @include('print_data.info_item', ['name' => 'Số lượng cần lấy', 'info' => $data_item->supp_qty])
+
+            @if (!empty($print['note']))
+                @include('print_data.note', ['note' => $print['note']])
+            @endif
         </div>
     </div>

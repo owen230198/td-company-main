@@ -44,7 +44,7 @@
                 'note' => 'File gốc (P. Thiết kế)',
                 'type' => 'filev2',
                 'table_map' => 'products',
-                'other_data' => ['role_update' => [\GroupUser::DESIGN], 'field_name' => 'design_file']
+                'other_data' => ['role_update' => [\GroupUser::DESIGN, \GroupUser::TECH_APPLY], 'field_name' => 'design_file']
             ],
             'design_shape_file' =>
             [

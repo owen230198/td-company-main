@@ -1,7 +1,7 @@
 @include('print_data.header', ['title' => 'Lệnh sản xuất - '. getTextSupply($data_item->type)])
     <div class="handle_content_print mt-4">
         <p class="d-flex align-items-center mb-2">
-            <span class="w_60 d-block">Tên hàng</span> 
+            <span class="w_66 d-block">Tên hàng</span> 
             <span class="font_bold ml-1">: {{ getFieldDataById('name', 'products', $data_item->product) }}</span>
         </p>   
     </div>

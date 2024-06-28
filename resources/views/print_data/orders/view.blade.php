@@ -16,10 +16,10 @@
             </div>
             <div class="col-5">
                 <ul class="header_print_data_info">
-                    <li class="d-flex align-items-center"><span class="w_60 d-block">VPGD</span>     : {{ getDataConfig('QuoteConfig', 'OFFICE_ADD') }}</li>
-                    <li class="d-flex align-items-center"><span class="w_60 d-block">Tel</span>      : {{ getDataConfig('QuoteConfig', 'OFFICE_PHONE') }}</li>
-                    <li class="d-flex align-items-center"><span class="w_60 d-block">Email</span>    : {{ getDataConfig('QuoteConfig', 'OFFICE_EMAIL') }}</li>
-                    <li class="d-flex align-items-center"><span class="w_60 d-block">Website</span>  : {{ getDataConfig('QuoteConfig', 'SITE') }}</li>
+                    <li class="d-flex align-items-center"><span class="w_66 d-block">VPGD</span>     : {{ getDataConfig('QuoteConfig', 'OFFICE_ADD') }}</li>
+                    <li class="d-flex align-items-center"><span class="w_66 d-block">Tel</span>      : {{ getDataConfig('QuoteConfig', 'OFFICE_PHONE') }}</li>
+                    <li class="d-flex align-items-center"><span class="w_66 d-block">Email</span>    : {{ getDataConfig('QuoteConfig', 'OFFICE_EMAIL') }}</li>
+                    <li class="d-flex align-items-center"><span class="w_66 d-block">Website</span>  : {{ getDataConfig('QuoteConfig', 'SITE') }}</li>
                 </ul>
             </div>
             <div class="col-7 my-3">
@@ -28,14 +28,14 @@
                 </div>
             </div>
             <div class="col-5 mb-2">
-                <p class="d-flex align-items-center"><span class="w_60 d-block">Số seri</span>  : <span class="fs-18 color_red ml-1 font_bold">{{ $data_item->code }}</span></p>
+                <p class="d-flex align-items-center"><span class="w_66 d-block">Số seri</span>  : <span class="fs-18 color_red ml-1 font_bold">{{ $data_item->code }}</span></p>
             </div>
             <div class="col-7">
                 <p><span class="mr-1">Tên Khách hàng/Công ty :</span> {{ $data_customer['name'].' ('.$data_represent['name'].')' }}</p>
             </div>
             <div class="col-5">
                 <p class="d-flex align-items-center">
-                    <span class="w_60 d-block">Tỉnh/TP</span>  : 
+                    <span class="w_66 d-block">Tỉnh/TP</span>  : 
                     <span class="fs-18 color_red ml-1 font_bold">{{ getFieldDataById('name', 'citys', $data_customer['city']) }}</span>
                 </p>   
             </div>

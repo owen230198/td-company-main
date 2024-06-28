@@ -19,7 +19,7 @@
     <body>
         <div class="print_data_section bg_eb font_auto">
             <div class="container py-5">
-                <div class="bg_white p-4 fs-14">
+                <div class="bg_white p-4 fs-15">
                     @yield('content')
                 </div>
             </div>
