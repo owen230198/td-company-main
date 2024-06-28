@@ -21,16 +21,24 @@
                             <tr>
                                 <td class="text-center"><span>{{ $key + 1 }}</span></td>
                                 <td>
-                                    @include('view_table.text', ['value' => getSupplyNameByKey(@$data->supp_type)])
+                                    @include('view_table.text', ['value' => getSupplyNameByKey(@$data->type)])
                                 </td>
                                 <td>
                                     @php
-                                        $table_supply = getTableWarehouseByType($data);
-                                        $model = getModelByTable($table_supply);
-                                        $linking_value = \DB::table($table_supply)->find(@$data->size_type);
-                                        $data_label = method_exists($model, 'getLabelLinking') ? $model::getLabelLinking($linking_value) : @$linking_value->{$field_title};
+                                        $table_supply = tableWarehouseByType(@$data->type);
+                                        $fields = (new \App\Services\AdminService)->getFieldAction($table_supply, 'get_other');
                                     @endphp
-                                    @include('view_table.text', ['value' => $data_label])
+                                    @foreach ($fields as $field)
+                                        @php
+                                            $field = processArrField($field);
+                                            $field['value'] = $data->{$field['name']};
+                                            $field['history_view'] = true;
+                                        @endphp
+                                        <div class="mb-1 d-flex align-item-center">
+                                            <label class="mr-1">{{ $field['note'] }}: </label>
+                                            @include('view_table.'.$field['type'], $field)
+                                        </div>
+                                    @endforeach
                                 </td>
                                 <td>
                                     @include('view_table.text', ['value' => @$data->qty])

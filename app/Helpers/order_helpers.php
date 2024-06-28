@@ -459,3 +459,14 @@
 			return $base_supp_qty * ($data_length);
 		}
 	}
+
+    if (!function_exists('getViewSuppluBuyingByType')) {
+        function getViewSuppluBuyingByType($type, $index)
+        {   
+            $table = tableWarehouseByType($type);
+            $data['fields'] = (new \App\Services\AdminService)->getFieldAction($table, 'get_other');
+            $data['index'] = $index;
+            $data['type'] = $type;
+            return $data;
+        }
+    }

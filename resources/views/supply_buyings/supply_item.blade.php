@@ -11,7 +11,17 @@
             $item['value'] = @$value[$jname]; 
             $item['name'] = 'supply['.$index.']['.$jname.']';
             $item['dataItem'] = @$value;
+            $item['min_label'] = 115;
         @endphp
         @include('view_update.view', $item)   
-    @endforeach                
+    @endforeach
+    <div class="ajax_supply_buying_data">
+        @if (!empty($value['type']))
+            @php
+                $arr_view = getViewSuppluBuyingByType($value['type'], $index);
+                $arr_view['group_value'] = $value;
+            @endphp
+            @include('supply_buyings.field_buying', $arr_view)
+        @endif     
+    </div>                
 </div>

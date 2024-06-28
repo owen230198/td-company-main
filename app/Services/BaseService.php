@@ -55,6 +55,8 @@ class BaseService
 				$data[$key] = json_encode($item);
 			}elseif (@$attr['type_input'] == 'password') {
 				$data[$key] = md5($data['password']);
+			}else{
+				$data[$key] = $item;	
 			} 
         }
 		$this->configBaseDataAction($data);

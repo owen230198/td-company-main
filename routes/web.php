@@ -102,6 +102,7 @@ Route::middleware(['check_login'])->group(function () {
 	Route::get('inventory-detail', [SupplyBuyingController::class, 'inventoryDetail']);
 	Route::get('inventory-export', [SupplyBuyingController::class, 'inventoryExport']);
 	Route::get('field-search-supply-history', [SupplyBuyingController::class, 'fieldSearchHistory']);
+	Route::get('get-view-buying-supply-type', [SupplyBuyingController::class, 'getViewBuyingSupplyType']);
 
 	//KCS route
 	Route::post('after-print-kcs/{id}',[ProductController::class, 'afterPrintKcs']);

@@ -398,4 +398,15 @@ class SupplyBuyingController extends Controller
         $data['default_field']['type'] = $type;
         return view('inventories.field_search', $data);
     }
+
+    public function getViewBuyingSupplyType(Request $request)
+    {
+        $type = $request->input('type');
+        if (empty($type)) {
+            return '';
+        }
+        $index = $request->input('index');
+        $data = getViewSuppluBuyingByType($type, $index);
+        return view('supply_buyings.field_buying', $data);
+    }
 }

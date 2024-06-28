@@ -10,59 +10,34 @@ class SupplyBuying extends Model
     const BOUGHT = 'bought';
     static function getFeildSupplyJson($index, $value = [])
     {
-        $base_name = 'supply['.$index.']';
         $field_supp_type = [
-            'name' => 'group_supply', 
-            'note' => 'Dạng vật tư',
-            'type' => 'group',
-            'other_data' => ['group_class' => '__module_select_type_warehouse'],
-            'child' => [
-                [
-                    'name' => $base_name.'[supp_type]',
-                    'attr' => '{"required":1,"inject_class":"__wh_select_type","readonly":"'.!\GroupUser::isPlanHandle().'"}',
-                    'type' => 'select',
-                    'value' => !empty($value['supp_type']) ? $value['supp_type'] : '',
-                    'other_data' => '{
-                        "config":{
-                            "searchbox":1
-                        },
-                        "data":{
-                            "options":{
-                                "0":"Chọn loại vật tư",
-                                "paper":"Giấy in", 
-                                "nilon":"Màng nilon", 
-                                "metalai":"Màng metalai",
-                                "cover":"Màng phủ trên",
-                                "carton":"Carton",
-                                "rubber":"Cao su",
-                                "styrofoam":"Mút phẳng",
-                                "decal":"Nhung",
-                                "silk":"Vải lụa",
-                                "mica":"Mi ca",
-                                "magnet":"Nam châm"
-                            }
-                        }
-                    }'
-                ],
-                [
-                    'name' => $base_name.'[size_type]',
-                    'attr' => '{"required":1,"readonly":1,"inject_class":"__wh_select_size"}',
-                    'note' => 'Vật tư',
-                    'type' => 'linking',
-                    'value' => !empty($value['size_type']) ? $value['size_type'] : '',
-                    'other_data' => '{
-                        "config":{
-                            "search":1,
-                            "except_linking":"1"
-                        },
-                        "data":{
-                            "table":{
-                                "getFunc":"getTableWarehouseByType"
-                            }
-                        }
-                    }'
+            'name' => 'type',
+            'note' => 'Loại vật tư',
+            'attr' => [
+                "required" => 1, 
+                "inject_class" => "__select_supp_type_buying", 
+                "readonly" => !\GroupUser::isPlanHandle()],
+            'type' => 'select',
+            'value' => !empty($value['supp_type']) ? $value['supp_type'] : '',
+            'other_data' => [
+                "config" => [ "searchbox"=> 1],
+                "data" => [
+                    "options" => [
+                        "0" => "Chọn loại vật tư",
+                        "paper" => "Giấy in", 
+                        "nilon" => "Màng nilon", 
+                        "metalai" => "Màng metalai",
+                        "cover" => "Màng phủ trên",
+                        "carton" => "Carton",
+                        "rubber" => "Cao su",
+                        "styrofoam" => "Mút phẳng",
+                        "decal" => "Nhung",
+                        "silk" => "Vải lụa",
+                        "mica" => "Mi ca",
+                        "magnet" => "Nam châm"
+                    ]
                 ]
-            ] 
+            ]
         ];
         $field_qty = [
             'name' => 'qty',
@@ -130,14 +105,14 @@ class SupplyBuying extends Model
                     ],
                 'update' => 
                     [
-                        'with' => [
+                        'with' => [[
                             'type' => 'group',
                             'query' => [
                                 ['key' => 'created_by', 'value' => \User::getCurrent('id')],
                                 ['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED]
                             ]
-                        ]
-                    ]
+                        ]]
+                    ],
             ],
             \GroupUser::APPLY_BUYING => [
                 'view' => ['with' => ['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED]],
