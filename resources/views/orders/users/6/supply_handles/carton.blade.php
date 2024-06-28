@@ -14,5 +14,6 @@
     @include('quotes.products.supplies.size_config', ['plus' => $carton_plus, 'divide' => $carton_divide])
 
     @include('quotes.products.supplies.select_supply_type')
+    
     @include('orders.users.6.supply_handles.handle', ['compen_percent' => $carton_compen_percent])
 @endsection

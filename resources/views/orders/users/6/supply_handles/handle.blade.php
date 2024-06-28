@@ -92,6 +92,13 @@
                 @include('view_update.view', $field_handle)     
             @endforeach
         </div>
+        @include('orders.users.6.supply_handles.view_handles.multiple', 
+            ['arr_items' => ['key_supp' => \TDConst::CARTON, 
+            'note' => 'Carton', 
+            'supp_price' => $supply_size['materal'],
+            'qtv' => $supply_size['qttv'],
+            'base_need' => $supply_obj->supp_qty],
+            'type' => 'print_warehouses'])
         <div class="enter_warehouse_module">
             <h3 class="fs-14 text-uppercase border_top_eb pt-3 mt-3 text-center handle_title">
                 <span>Nhập kho băng lề</span>

@@ -7,7 +7,6 @@
     use App\Models\Order;
     use App\Models\Paper;
     use App\Models\Product;
-    use App\Models\Quote;
     use App\Models\WUser;
     use Illuminate\Http\Request;
     class ProductController extends Controller
@@ -46,12 +45,15 @@
             }else{
                 $data = $request->except('_token');
                 $order_obj = Order::find($product->order);
+                if (empty($order_obj)) {
+                    return returnMessageAjax(100, 'Đơn hàng không tồn tại hoặc đã bị xóa !');
+                }
                 $type_refresh = !empty($data['type_refresh']) ? $data['type_refresh'] : 2;
                 $process = $this->quote_services->processDataProduct($data, $order_obj, $type_refresh);
                 if (!empty($process['code']) && $process['code'] == 100) {
                     return returnMessageAjax(100, $process['message']);  
                 }else{
-                    $ret_url = !\GroupUser::isAdmin() ? getBackUrl() : url('/profit-config-quote');
+                    $ret_url = !\GroupUser::isAdmin() ? getBackUrl() : url('/profit-config-data?table=orders&id='.$order_obj->id);
                     return returnMessageAjax(200, 'Cập nhật dữ liệu thành công!', $ret_url);       
                 }
             } 

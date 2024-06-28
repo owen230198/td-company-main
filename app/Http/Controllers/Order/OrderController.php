@@ -408,5 +408,31 @@
             }
             return view($view_path, $data);
         }
+
+        public function profitConfigData(Request $request)
+        {
+            $is_post = $request->isMethod('POST');	
+            if (!\GroupUser::isAdmin()) {
+                return customReturnMessage(false, $is_post, ['message' => 'Bạn không có quyền xem chi tiết công thức !']);
+            }
+            $table = $request->input('table');
+            if (!in_array($table, ['quotes', 'orders'])) {
+                return customReturnMessage(false, $is_post, ['message' => 'Dữ liệu không hợp lệ !']);
+            }
+            if ($table == 'quotes') {
+                return (new \App\Http\Controllers\Quote\QuoteController)->profitConfigQuote($request);
+            }else{
+                $id = $request->input('id');
+                $order = Order::find($id);
+                if (empty($order)) {
+                    return back()->with('error', 'Đơn hàng không tồ tại hoặc đã bị xóa !');
+                }
+                $data['data_item'] = $order;
+                $data['title'] = 'Chi tiết chi phí - '.$order['code'];
+                $data['products'] = Product::where(['act' => 1, 'order' => $id])->get();
+                $data['supply_fields'] = \TDConst::HARD_ELEMENT;
+                return view('orders.profits.view', $data);
+            }
+        }
     }
 ?>
