@@ -2,7 +2,7 @@
 @section('content')
     @php
         $data_represent = getDetailDataById('Represent', $data_item->represent);  
-        $data_customer = getDetailDataById('Represent', $data_represent->customer);     
+        $data_customer = getDetailDataById('Customer', $data_item->customer);     
     @endphp
     <div class="_print_order_header">
         <div class="row">
