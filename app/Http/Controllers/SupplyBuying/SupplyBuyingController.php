@@ -78,15 +78,20 @@ class SupplyBuyingController extends Controller
 
     public function confirmSupplyBuy(Request $request, $id)
     {
+        if (!$request->isMethod('POST')) {
+            return back()->with('error', 'Yêu cầu không hợp lệ !');
+        }
         if (\GroupUser::isAdmin() || \GroupUser::isApplyBuying()) {
             $supp_buying = SupplyBuying::find($id);
+            $dataItem = $supp_buying->replicate();
             if (@$supp_buying->status != \StatusConst::NOT_ACCEPTED) {
                 return returnMessageAjax(100, 'Dữ liệu không hợp lệ !');
             }
             $supp_buying->status = \StatusConst::ACCEPTED;
             $supp_buying->applied_by = \User::getCurrent('id');
             $supp_buying->save();
-            return returnMessageAjax(200, 'Đã duyệt mua thành công cho yêu cầu mua '. $supp_buying->code.' !', 'view/supply_buyings?default_data=%7B"status"%3A"'.\StatusConst::NOT_ACCEPTED.'"%7D');
+            logActionUserData('apply', 'supply_buyings', $id, $dataItem);
+            return returnMessageAjax(200, 'Đã duyệt mua thành công cho yêu cầu mua '. $supp_buying->code.' !', getBackUrl());
         }else{
             return returnMessageAjax(100, 'Không có quyền thực hiện thao tác này !');
         }
@@ -124,7 +129,7 @@ class SupplyBuyingController extends Controller
                 $supp_buying->status = SupplyBuying::BOUGHT;
                 $supp_buying->bought_by = \User::getCurrent('id');
                 $supp_buying->save();
-                return returnMessageAjax(200, 'Đã xác nhận mua thành công cho yêu cầu mua '. $supp_buying->code.' !', 'view/supply_buyings?default_data=%7B"status"%3A"'.\StatusConst::ACCEPTED.'"%7D');
+                return returnMessageAjax(200, 'Đã xác nhận mua thành công cho yêu cầu mua '. $supp_buying->code.' !', getBackUrl());
             }else{
                 return returnMessageAjax(100, 'Dữ liệu mua hàng không hợp lệ !');
             }
@@ -148,14 +153,25 @@ class SupplyBuyingController extends Controller
                 return returnMessageAjax(100, 'Dữ liệu vật tư không tồn tại !');
             }
             foreach ($data_supply as $supply) {
-                $table_supply = getTableWarehouseByType((object) $supply);
+                $table_supply = tableWarehouseByType($supply['type']);
                 $data['log']['type'] = @$supply['supp_type'];
                 $data['log']['qty'] = (int) $supply['qty'];
                 $data['log']['provider'] = @$supp_buying->provider;
                 $data['log']['price'] = @$supply['price'];
                 $data['log']['bill'] = @$supp_buying->bill;
                 $warehouse_service = new WarehouseService($table_supply);
-                $status = $warehouse_service->update($data, $supply['size_type'], 1);
+                $where = $supply;
+                unset($where['qty'], $where['price'], $where['total']);
+                $where['status'] = SupplyWarehouse::IMPORTED;
+                if (getCountDataTable($table_supply, $where) == 0) {
+                    $data['warehouse'] = $where;
+                    $status = $warehouse_service->insert($data, 1);
+                }else{
+                    $data_supply = \DB::table($table_supply)->where($where)->first();
+                    if (!empty($data_supply)) {
+                        $status = $warehouse_service->update($data, $data_supply->id, 1);
+                    }
+                }
                 if (@$status['code'] == 100) {
                     return $status;
                     break;
