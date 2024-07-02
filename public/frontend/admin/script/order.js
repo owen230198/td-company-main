@@ -97,6 +97,29 @@ var planHandleElevateModule = function()
         event.preventDefault();
         let parent = $(this).closest('.plan_handle_elevate_module');
         let supp_qty = parseInt(parent.find('input.plan_input_supp_qty').val());
+        let inhouse = getEmptyDefault(parent.find('.__inhouse').text(), 0, 'float');
+        if (supp_qty > 0) {
+            parent.find('.__rest').parent().fadeIn();
+            parent.find('.__takeout').parent().fadeIn(); 
+            if (supp_qty > inhouse) {
+                parent.find('.__rest').text(0);
+                let lack = supp_qty - inhouse;
+                parent.find("input[name*='lack']").val(lack);
+                parent.find('.__takeout').text(inhouse);
+                parent.find('.__lack').text(lack);
+                parent.find('.__lack').parent().fadeIn();     
+            }else{
+                parent.find("input[name*='lack']").val(0);
+                parent.find('.__rest').text(inhouse - supp_qty);
+                parent.find('.__takeout').text(supp_qty);
+                parent.find('.__lack').text(0);
+                parent.find('.__lack').parent().fadeOut();
+            }
+        }else{
+            parent.find('.__takeout').parent().fadeOut();
+            parent.find('.__rest').parent().fadeOut();  
+            parent.find('.__lack').parent().fadeOut();    
+        }
         let elevate = parseInt(parent.find('input.plan_input_elevate').val());
         let total_elevate = supp_qty*elevate;
         let input_total_elevate = parent.find('input.plan_input_total_elevate')
@@ -140,7 +163,6 @@ var planGetNeddSupply= function(parent)
     parent.find('.__handle_supply_item').each(function(){
         take += $(this).data('take');
     });
-    console.log({'base': base, 'take':take});
     return base - take;
 }
 
@@ -153,9 +175,12 @@ var planChoseSupplyModule = function()
         let item = $(this).closest('.__handle_supply_item');
         item.data('take', 0);
         let need = planGetNeddSupply(parent);
-        console.log(need);
         let table = parent.data('table');
         let target = item.find('.__handle_supply_detail_ajax');
+        let over_supply = item.find('.__over_supply');
+        if (over_supply.length > 0) {
+            over_supply.fadeIn();
+        }
         let value = $(this).val();
         let url = 'select-supply-warehouse/'+table+'?supply='+value+'&need='+need;
         if (!empty(value)) {
@@ -213,6 +238,8 @@ var afterPlanSelectSupply = function(table, data, target, item, parent, reset = 
         }else if (table == 'print_warehouses') {
             let nqty_input = target.find('input.__nqty_supp_plan');
             nqty_input.trigger('change');
+        }else if(table == 'supplies_warehouses') {
+            target.find('input.plan_input_supp_qty').trigger('change');
         }
     }
 }
@@ -266,14 +293,12 @@ var planHandleSupplyQty = function()
         let parent = $(this).closest('.__handle_supply_item');
         let need_qty = getEmptyDefault(parent.find('input.__qty_supp_plan').val(), 0, 'float');
         let nqty = getEmptyDefault(parent.find('input.__nqty_supp_plan').val(), 0, 'float');
-        let takeout = need_qty;
         let total_supp = !empty(nqty) ? Math.ceil(need_qty/nqty) : 0;
         parent.find('input.__total_qty_supp_plan').val(total_supp);
         let inhouse = getEmptyDefault(parent.find('.__inhouse').text(), 0, 'float');
         if (total_supp > 0) {
             parent.find('.__rest').parent().fadeIn();
             parent.find('.__takeout').parent().fadeIn(); 
-            console.log(total_supp, inhouse);   
             if (total_supp > inhouse) {
                 parent.find('.__rest').text(0);
                 let lack = total_supp - inhouse;
@@ -286,8 +311,8 @@ var planHandleSupplyQty = function()
             }else{
                 parent.find("input[name*='lack']").val(0);
                 parent.find('.__rest').text(inhouse - total_supp);
-                parent.find('.__takeout').text(takeout);
-                parent.find('input.__avaliable_qty_supp_plan').val(takeout);
+                parent.find('.__takeout').text(total_supp);
+                parent.find('input.__avaliable_qty_supp_plan').val(total_supp);
                 parent.find('.__lack').text(0);
                 parent.find('.__lack').parent().fadeOut();
                 parent.data('take', total_supp);  

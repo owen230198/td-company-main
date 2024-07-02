@@ -3,14 +3,14 @@
     $field_warehouses = [
         [
             'name' => $wh_name.'[length]',
-            'note' => 'Khổ chiều dài',
+            'note' => 'Băng lề chiều dài',
             'attr' => ['type_input' => 'number', 'inject_class' => 'plan_input_warehouse_size'],
             'type' => 'text',
             'value' => 0,
         ],
         [
             'name' => $wh_name.'[width]',
-            'note' => 'Khổ chiều rộng',
+            'note' => 'Băng lề chiều rộng',
             'attr' => ['type_input' => 'number', 'inject_class' => 'plan_input_warehouse_size'],
             'type' => 'text',
             'value' => 0,
@@ -30,13 +30,6 @@
         ]
     ]    
 @endphp
-<div class="__handle_supply_item position-relative {{ $index > 0 ? 'mt-3 pt-3 border_top_eb' : '' }}" data-take = "0">
-    @if ($index > 0)
-        <button type="button" class="remove_ext_element_quote d-flex bg_red color_white red_btn smooth __supply_handle_btn_remove">
-            <i class="fa fa-times" aria-hidden="true"></i>
-        </button> 
-    @endif
-    @foreach ($field_warehouses as $field_warehouse)
-        @include('view_update.view', $field_warehouse)     
-    @endforeach
-</div>
+@foreach ($field_warehouses as $field_warehouse)
+    @include('view_update.view', $field_warehouse)     
+@endforeach

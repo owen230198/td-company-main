@@ -56,4 +56,9 @@ class SupplyWarehouse extends Model
     {
         return getFieldDataById('name', 'supply_types', $data->supp_type).' - '.$data->length.'x'.$data->width.' - ĐL : '.getFieldDataById('name', 'supply_prices', $data->supp_price).' / Còn lại : '.$data->qty.' tấm';
     }
+
+    static function getStructForPlan($param)
+    {
+        return ['code' => 200, 'data' => ['inhouse' => $param['supply']->qty]];
+    }
 }

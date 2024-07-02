@@ -53,7 +53,6 @@
     @endif
     @include('view_update.view', $chose_supp)
     <div class="__handle_supply_detail_ajax color_green" style="display:none">
-        <input type="hidden" name="c_supply[{{ $key_supp }}][{{ $index }}][lack]" value="">
         <div class="d-flex align-items-center mb-2 fs-13">
             <label class="mb-0 min_210 text-capitalize text-right mr-3">Còn lại trong kho : </label>
             <p class="font_bold __inhouse"></p>
@@ -62,17 +61,6 @@
         @include('view_update.view', $nqty_supp)
         @include('view_update.view', $total_qty_supp)
         @include('view_update.view', $qty_supp_available)
-        <div class="align-items-center mb-2 fs-13" style="display: flex">
-            <label class="mb-0 min_210 text-capitalize text-right mr-3">Xuất cho lệnh này : </label>
-            <p class="font_bold __takeout"></p>
-        </div>
-        <div class="align-items-center mb-2 fs-13" style="display: flex">
-            <label class="mb-0 min_210 text-capitalize text-right mr-3">Còn lại : </label>
-            <p class="font_bold __rest"></p>
-        </div>
-        <div class="align-items-center mb-2 fs-13" style="display: flex">
-            <label class="mb-0 min_210 text-capitalize text-right mr-3">Vật tư thiếu : </label>
-            <p class="color_red font_bold __lack"></p>
-        </div>
+        @include('orders.users.6.supply_handles.view_handles.after_select')
     </div>
 </div>

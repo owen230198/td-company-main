@@ -394,6 +394,10 @@ a.device_supp_item {
     background-color: #459300;
 }
 
+.border_left_eb{
+    border-left: 1px solid #ebebeb;
+}
+
 /* print data style  */
 .header_printdata_logo img {
     max-width: 220px;
