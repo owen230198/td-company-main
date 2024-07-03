@@ -51,16 +51,23 @@
             <i class="fa fa-times" aria-hidden="true"></i>
         </button> 
     @endif
-    @include('view_update.view', $chose_supp)
-    <div class="__handle_supply_detail_ajax color_green" style="display:none">
-        <div class="d-flex align-items-center mb-2 fs-13">
-            <label class="mb-0 min_210 text-capitalize text-right mr-3">Còn lại trong kho : </label>
-            <p class="font_bold __inhouse"></p>
+    <div class="row">
+        <div class="col-6">
+            @include('view_update.view', $chose_supp)
+            <div class="__handle_supply_detail_ajax color_green" style="display:none">
+                <div class="d-flex align-items-center mb-2 fs-13">
+                    <label class="mb-0 min_210 text-capitalize text-right mr-3">Còn lại trong kho : </label>
+                    <p class="font_bold __inhouse"></p>
+                </div>
+                @include('view_update.view', $need_qty)
+                @include('view_update.view', $nqty_supp)
+                @include('view_update.view', $total_qty_supp)
+                @include('view_update.view', $qty_supp_available)
+                @include('orders.users.6.supply_handles.view_handles.after_select')
+            </div>
         </div>
-        @include('view_update.view', $need_qty)
-        @include('view_update.view', $nqty_supp)
-        @include('view_update.view', $total_qty_supp)
-        @include('view_update.view', $qty_supp_available)
-        @include('orders.users.6.supply_handles.view_handles.after_select')
+        <div class="col-6 border_left_eb __over_supply" style="display:none">
+            @include('orders.users.6.supply_handles.view_handles.over_supplies.item', ['key_supp' => $key_supp])      
+        </div> 
     </div>
 </div>

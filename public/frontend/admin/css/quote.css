@@ -24,6 +24,7 @@
     right: 10px;
     top: 10px;
     cursor: pointer;
+    z-index: 1;
 }
 
 .quote_fill_finish_item {

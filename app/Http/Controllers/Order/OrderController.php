@@ -240,10 +240,9 @@
                         } 
                     }else{
                         $data_command = $request->input('c_supply');
-                        $data_over_supp = $request->input('over_supply');
                         $method_handle_name = 'supply_handle_'.$data_supply->type;
                         if (method_exists($this->services, $method_handle_name)) {
-                            return $this->services->{$method_handle_name}($data_supply, $supp_size, $data_command, $data_over_supp);
+                            return $this->services->{$method_handle_name}($data_supply, $supp_size, $data_command);
                         }else{
                             return returnMessageAjax(100, 'Không thể xử lí vật tư !');
                         } 

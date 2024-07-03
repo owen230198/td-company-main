@@ -98,34 +98,42 @@ var planHandleElevateModule = function()
         let parent = $(this).closest('.plan_handle_elevate_module');
         let supp_qty = parseInt(parent.find('input.plan_input_supp_qty').val());
         let inhouse = getEmptyDefault(parent.find('.__inhouse').text(), 0, 'float');
+        let elevate = parseInt(parent.find('input.plan_input_elevate').val());
+        let nqty = parseInt(parent.find('input.pro_nqty_input').val());
         if (supp_qty > 0) {
             parent.find('.__rest').parent().fadeIn();
             parent.find('.__takeout').parent().fadeIn(); 
+            let total_elevate = 0;
+            let product_qty = 0;
             if (supp_qty > inhouse) {
                 parent.find('.__rest').text(0);
                 let lack = supp_qty - inhouse;
                 parent.find("input[name*='lack']").val(lack);
                 parent.find('.__takeout').text(inhouse);
+                parent.find('input.__avaliable_qty_supp_plan').val(inhouse);
                 parent.find('.__lack').text(lack);
-                parent.find('.__lack').parent().fadeIn();     
+                parent.find('.__lack').parent().fadeIn(); 
+                total_elevate = inhouse*elevate; 
+                product_qty = inhouse*nqty;   
             }else{
                 parent.find("input[name*='lack']").val(0);
                 parent.find('.__rest').text(inhouse - supp_qty);
                 parent.find('.__takeout').text(supp_qty);
+                parent.find('input.__avaliable_qty_supp_plan').val(supp_qty);
                 parent.find('.__lack').text(0);
                 parent.find('.__lack').parent().fadeOut();
+                total_elevate = supp_qty*elevate; 
+                product_qty = supp_qty*nqty;  
             }
+            parent.data('take', product_qty)
+            let input_total_elevate = parent.find('input.plan_input_total_elevate')
+            input_total_elevate.val(total_elevate);
+            input_total_elevate.trigger('change');
         }else{
             parent.find('.__takeout').parent().fadeOut();
             parent.find('.__rest').parent().fadeOut();  
             parent.find('.__lack').parent().fadeOut();    
         }
-        let elevate = parseInt(parent.find('input.plan_input_elevate').val());
-        let total_elevate = supp_qty*elevate;
-        let input_total_elevate = parent.find('input.plan_input_total_elevate')
-        input_total_elevate.val(total_elevate);
-        input_total_elevate.trigger('change');
-        
     });
 
     $(document).on('change', 'input.plan_input_total_elevate', function(event){
@@ -142,7 +150,7 @@ var planHandleElevateModule = function()
 
 var updateHandleWareHouse = function(obj)
 {
-    let parent = obj.closest('.plan_handle_supply_module');
+    let parent = obj.closest('.__handle_supply_item');
     let size = parent.find('input.plan_input_warehouse_size');
     let bool = true;
     size.each(function(){
@@ -151,7 +159,7 @@ var updateHandleWareHouse = function(obj)
         }
     });
     if (bool == true) {
-        let supp_qty = parseInt(parent.find('input.plan_input_supp_qty').val());
+        let supp_qty = parseInt(parent.find('input.__avaliable_qty_supp_plan').val());
         parent.find('input.plan_input_warehouse_qty').val(supp_qty);    
     }
 }
@@ -199,6 +207,8 @@ var planChoseSupplyModule = function()
                     afterPlanSelectSupply(table, data, target, item, parent);
                     if (table == 'print_warehouses') {
                         item.find('input.__qty_supp_plan').val(need);       
+                    }else if (table == 'supply_warehouses'){
+                        item.find('input.pro_qty_input').val(need);           
                     }
                 }
                 $('#loader').delay(200).fadeOut(500); 
@@ -238,8 +248,8 @@ var afterPlanSelectSupply = function(table, data, target, item, parent, reset = 
         }else if (table == 'print_warehouses') {
             let nqty_input = target.find('input.__nqty_supp_plan');
             nqty_input.trigger('change');
-        }else if(table == 'supplies_warehouses') {
-            target.find('input.plan_input_supp_qty').trigger('change');
+        }else if(table == 'supply_warehouses') {
+            target.find('input.input_elevate_change').trigger('change');
         }
     }
 }

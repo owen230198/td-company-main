@@ -1,5 +1,5 @@
 @php
-    $wh_name = 'over_supply['.$index.']';
+    $wh_name = 'c_supply['.$key_supp.']['.$index.'][over_supply]';
     $field_warehouses = [
         [
             'name' => $wh_name.'[length]',

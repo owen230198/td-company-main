@@ -119,17 +119,24 @@ class OrderService extends BaseService
         }
         return 1;
     }
-    public function validateElevatehandle($command, $elevate){
-        if (empty($command['size_type'])) {
-            return returnMessageAjax(100, 'Bạn chưa chọn khổ vật tư trong kho !');
-        }
+    public function validateElevatehandle($data){
+        foreach ($data as $c_supply) {
+            if (empty($c_supply['command']['size_type'])) {
+                return returnMessageAjax(100, 'Bạn chưa chọn khổ vật tư trong kho !');
+            }
+            $supply_name = getFieldDataById('name', 'supply_warehouses', $c_supply['command']['size_type']);
+    
+            if (empty($c_supply['command']['nqty'])) {
+                return returnMessageAjax(100, 'Bạn chưa nhập số lượng sản phẩm/tờ to cho '.$supply_name.' !');
+            }
 
-        if (empty($command['nqty'])) {
-            return returnMessageAjax(100, 'Bạn chưa nhập số lượng sản phẩm/tờ to !');
-        }
-
-        if (empty($elevate['num'])) {
-            return returnMessageAjax(100, 'Bạn chưa nhập số lượt bế !');
+            if (empty($c_supply['command']['qty'])) {
+                return returnMessageAjax(100, 'Số lượng vật tư '.$supply_name.' có thể xuất kho không hợp lệ !');
+            }
+    
+            if (empty($c_supply['elevate']['num'])) {
+                return returnMessageAjax(100, 'Bạn chưa nhập số lượt bế cho vật tư '.$supply_name.' !');
+            }
         }
     }
 
@@ -143,7 +150,7 @@ class OrderService extends BaseService
         }
     }
 
-    public function supply_handle_paper($supply, $size, $c_supply, $over_supply)
+    public function supply_handle_paper($supply, $size, $c_supply)
     {
         $squares = @$c_supply['square'] ?? [];
         foreach ($squares as $key => $supp_qsuare) {
@@ -169,37 +176,29 @@ class OrderService extends BaseService
             }
         }
         foreach ($papers as $key => $paper) {
-            unset($paper['lack']);
             $insert_command = CSupply::insertCommand($paper, $supply);
+            if (!empty($paper['over_supply']['qty'])) {
+                $supply->type = \TDConst::PAPER;
+                PrintWarehouse::insertOverSupply($paper['over_supply'], $supply, $size);
+            }
         }
         foreach ($squares as $key => $supp_qsuare) {
             foreach ($supp_qsuare as $square) {
                 $supply->type = $key;
-                unset($square['lack']);
                 CSupply::insertCommand($square, $supply);
             }
         }
         if (empty($insert_command)) {
             return returnMessageAjax(110, 'Không thể tạo yêu cầu xuất vật tư, vui lòng thử lại!');
         }else{
-            if (!empty($over_supp)) {
-                foreach ($over_supply as $over_supp) {
-                    if ($over_supp['qty'] > 0) {
-                        $supply->type = \TDConst::PAPER;
-                        PrintWarehouse::insertOverSupply($over_supp, $supply, $size);       
-                    }
-                }
-            }
             return returnMessageAjax(200, 'Đã gửi yêu cầu xử lí vật tư thành công!', getBackUrl());
         }
     }
 
-    public function supply_handle_carton($supply, $size, $c_supply, $over_supply)
+    public function supply_handle_carton($supply, $size, $c_supply)
     {
-        $command = @$c_supply['command'] ?? [];
-        $elevate = @$c_supply['elevate'] ?? [];
-        $command['qty'] = calValuePercentPlus($command['qty'], $command['qty'], getDataConfig('QuoteConfig', 'CARTON_COMPEN_PERCENT'), 0, true);
-        $valid = $this->validateElevatehandle($command, $elevate);
+        $data = @$c_supply[$supply->type];
+        $valid = $this->validateElevatehandle($data);
         if (@$valid['code'] == 100) {
             return returnMessageAjax(100, $valid['message']);
         }
@@ -207,7 +206,6 @@ class OrderService extends BaseService
         if (@$supply_obj->qty < $command['qty']) {
             return returnMessageAjax(100, 'Vật tư trong kho không đủ để sản xuất đơn này, Vui lòng gửi yêu cầu đến phòng mua !');
         }
-        unset($command['nqty']);
         $insert_command = CSupply::insertCommand($command, $supply);
         if (!$insert_command) {
             return returnMessageAjax(110, 'Không thể tạo yêu cầu xuất vật tư, vui lòng thử lại!');
@@ -221,19 +219,19 @@ class OrderService extends BaseService
         }     
     }
 
-    public function supply_handle_rubber($supply, $size, $c_supply, $over_supply)
+    public function supply_handle_rubber($supply, $size, $c_supply)
     {
-        return $this->supply_handle_carton($supply, $size, $c_supply, $over_supply);
+        return $this->supply_handle_carton($supply, $size, $c_supply);
     }
 
-    public function supply_handle_styrofoam($supply, $size, $c_supply, $over_supply)
+    public function supply_handle_styrofoam($supply, $size, $c_supply)
     {
-        return $this->supply_handle_carton($supply, $size, $c_supply, $over_supply);
+        return $this->supply_handle_carton($supply, $size, $c_supply);
     }
 
-    public function supply_handle_mica($supply, $size, $c_supply, $over_supply)
+    public function supply_handle_mica($supply, $size, $c_supply)
     {
-        return $this->supply_handle_carton($supply, $size, $c_supply, $over_supply);
+        return $this->supply_handle_carton($supply, $size, $c_supply);
     }
 
     private function baseHandleSquareSupply($supply, $c_supply, $supp_key)
@@ -260,17 +258,17 @@ class OrderService extends BaseService
         } 
     }
 
-    public function supply_handle_decal($supply, $size, $c_supply, $over_supply)
+    public function supply_handle_decal($supply, $size, $c_supply)
     {
         return $this->baseHandleSquareSupply($supply, $c_supply, \TDConst::DECAL);
     }
 
-    public function supply_handle_silk($supply, $size, $c_supply, $over_supply)
+    public function supply_handle_silk($supply, $size, $c_supply)
     {
         return $this->baseHandleSquareSupply($supply, $c_supply, \TDConst::SILK);
     }
 
-    public function supply_handle_fill_finish($supply, $size, $c_supply, $over_supply)
+    public function supply_handle_fill_finish($supply, $size, $c_supply)
     {
         if (empty($c_supply['supp_price'])) {
             return returnMessageAjax(100, 'Bạn chưa chọn vật tư trong kho !');

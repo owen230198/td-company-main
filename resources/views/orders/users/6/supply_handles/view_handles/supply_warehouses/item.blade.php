@@ -1,12 +1,13 @@
 @php
     $compen_percent = (float) getDataConfig('QuoteConfig', strtoupper($key_supp).'_COMPEN_PERCENT');
-    $c_name = 'c_supply['.$index.']';
+    $c_name = 'c_supply['.$key_supp.']['.$index.']';
     $where_size_type = !empty($where_size_supp) ? $where_size_supp : 
     [
         'type' => $key_supp, 
-        'supp_type' => @$supply_size['supply_type'],
-        'supp_price' => @$supply_size['supply_price'],
-        'status' => 'imported'
+        'supp_type' => @$supply_type,
+        'supp_price' => @$supp_price,
+        'status' => 'imported',
+        'except_value' => '{"field" :"id","value":"'.@$except_value.'"}'
     ];
 
     $field_select =  [
@@ -30,7 +31,7 @@
             'type' => 'text',
             'note' => 'Số lượng sản phẩm',
             'attr' => ['inject_class' => 'pro_qty_input', 'type_input' => 'number', 'readonly' => 1],
-            'value' => @$supply_obj->product_qty,
+            'value' => @$product_qty,
         ],
         [
             'name' => $c_name.'[command][nqty]',
@@ -40,10 +41,17 @@
             'value' => 0,
         ],
         [
-            'name' => $c_name.'[command][qty]',
+            'name' => '',
             'type' => 'text',
             'note' => 'Số vật tư cần xuất + '.$compen_percent.'%',
             'attr' => ['inject_class' => 'total_supp_qty_input plan_input_supp_qty input_elevate_change', 'type_input' => 'number', 'readonly' => 1],
+            'value' => 0,
+        ],
+        [
+            'name' => $c_name.'[command][qty]',
+            'type' => 'text',
+            'note' => 'Số vật tư có thể xuất',
+            'attr' => ['inject_class' => '__avaliable_qty_supp_plan plan_input_supp_qty input_elevate_change', 'type_input' => 'number', 'readonly' => 1],
             'value' => 0,
         ],
         [
@@ -62,7 +70,12 @@
         ]
     ]; 
 @endphp
-<div class="module_hanle_supply_plan quantity_supp_module plan_handle_elevate_module __handle_supply_item {{ $index > 0 ? 'mt-3 pt-3 border_top_eb' : '' }}" data-percent = {{ $compen_percent }}>
+<div class="module_hanle_supply_plan quantity_supp_module plan_handle_elevate_module position-relative __handle_supply_item {{ $index > 0 ? 'mt-3 pt-3 border_top_eb' : '' }}" data-percent = {{ $compen_percent }} data-take = "0">
+    @if ($index > 0)
+        <button type="button" class="remove_ext_element_quote d-flex bg_red color_white red_btn smooth __supply_handle_btn_remove">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </button> 
+    @endif
     <div class="row">
         <div class="col-6">
             @include('view_update.view', $field_select) 
@@ -78,7 +91,7 @@
             </div>
         </div>
         <div class="col-6 border_left_eb __over_supply" style="display:none">
-            @include('orders.users.6.supply_handles.view_handles.over_supplies.item')      
+            @include('orders.users.6.supply_handles.view_handles.over_supplies.item', ['key_supp' => $key_supp])      
         </div>  
     </div>
 </div>
