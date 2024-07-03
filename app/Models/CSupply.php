@@ -37,7 +37,8 @@ class CSupply extends Model
 
     static function insertCommand($data, $supply)
     {
-        $data_command['name'] = $supply->name; 
+        $table = tableWarehouseByType($supply->type);
+        $data_command['name'] = getFieldDataById('name', $table, $data['size_type']); 
         $data_command['size_type'] = $data['size_type']; 
         $data_command['qty'] = $data['qty']; 
         $data_command['product'] = $supply->product;

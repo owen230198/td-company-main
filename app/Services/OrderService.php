@@ -197,23 +197,31 @@ class OrderService extends BaseService
 
     public function supply_handle_carton($supply, $size, $c_supply)
     {
-        $data = @$c_supply[$supply->type];
-        $valid = $this->validateElevatehandle($data);
+        $supply_type = $supply->type;
+        $data_supply = @$c_supply[$supply_type];
+        $valid = $this->validateElevatehandle($data_supply);
         if (@$valid['code'] == 100) {
             return returnMessageAjax(100, $valid['message']);
         }
-        $supply_obj = SupplyWarehouse::find($command['size_type']);
-        if (@$supply_obj->qty < $command['qty']) {
-            return returnMessageAjax(100, 'Vật tư trong kho không đủ để sản xuất đơn này, Vui lòng gửi yêu cầu đến phòng mua !');
+        if (!$this->checkLackSupplyHandle($data_supply)) {
+            return returnMessageAjax(100, 'Vật tư '.getSupplyNameByKey($supply_type).' trong kho không đủ để sản xuất, Vui lòng gửi yêu cầu đến phòng mua !');
         }
-        $insert_command = CSupply::insertCommand($command, $supply);
+        $elevate = ['num' => 0, 'total' => 0];
+        foreach ($data_supply as $supp) {
+            $command = $supp['command'];
+            $data_elevate = $supp['elevate'];
+            $insert_command = CSupply::insertCommand($command, $supply);
+            if (!empty($supp['over_supply']['qty'])) {
+                SupplyWarehouse::insertOverSupply($supp['over_supply'], $supply, $size);  
+            }
+            $elevate['num'] = $data_elevate['num'] > $elevate['num'] ? $data_elevate['num'] : $elevate['num'];
+            $elevate['total'] += $data_elevate['total'];
+        }
         if (!$insert_command) {
             return returnMessageAjax(110, 'Không thể tạo yêu cầu xuất vật tư, vui lòng thử lại!');
         }else{
-            Supply::where('id', $supply->id)->update(['handle_elevate' => json_encode($elevate)]);
-            if (!empty($over_supply['qty'])) {
-                $over_supply['qty'] = $command['qty'];
-                SupplyWarehouse::insertOverSupply($over_supply, $supply, $size);       
+            if (!empty($elevate)) {
+                Supply::where('id', $supply->id)->update(['handle_elevate' => json_encode($elevate)]);
             }
             return returnMessageAjax(200, 'Đã gửi yêu cầu xử lí vật tư thành công!', getBackUrl());
         }     

@@ -5,6 +5,7 @@
         $rubber_divide = \TDConst::RUBBER_SIZE_DIVIDE;
         $rubber_compen_percent = (float) getDataConfig('QuoteConfig', 'RUBBER_COMPEN_PERCENT');
         $rubber_plus = \TDConst::RUBBER_SIZE_PLUS;
+        $disable_all = true;
     @endphp
     @include('quotes.products.supplies.title_config', ['divide' => $rubber_divide, 'name' => 'Cao su'])
 

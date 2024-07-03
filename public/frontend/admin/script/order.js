@@ -272,6 +272,11 @@ var planAddSupplyHandle = function()
             if (nqty_input.length > 0) {
                 nqty_input.attr('readonly', true);
             }
+
+            let nqty_supp = $(this).find('input.pro_nqty_input ');
+            if (nqty_supp.length > 0) {
+                nqty_supp.attr('readonly', true);
+            }
         })
         let url = 'add-select-supply-handle?index='+index+''+param+'&except_value='+except_value;
         ajaxViewTarget(url, ajax_target, ajax_target, 2);
@@ -289,6 +294,10 @@ var planRemoveSupplyHandle = function()
                 let nqty_input = $(this).find('input.__nqty_supp_plan');
                 if (nqty_input.length > 0) {
                     nqty_input.attr('readonly', false);
+                }
+                let nqty_supp = $(this).find('input.pro_nqty_input ');
+                if (nqty_supp.length > 0) {
+                    nqty_supp.attr('readonly', false);
                 }
             })
         }
