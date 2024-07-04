@@ -1,6 +1,5 @@
 @extends('index')
 @section('content')
-    @include('title_base_page')
     <div class="dashborad_content">
         @include('base_title', ['text' => '1. Thông tin sản phẩm'])
         <div class="d-flex justify-content-center flex-wrap p-1  radius_5 box_shadow_3 mb-4">
@@ -54,8 +53,24 @@
                 [
                     'name' => 'handle_problem',
                     'note' => 'Xử lí sản phẩm lỗi',
+                    'attr' => ['inject_class' => '__expertise_select_handle'],
                     'type' => 'select',
                     'other_data' => ['data' => ['options' => $prob_handle_option]]
+                ]
+            ];
+
+            $reworks_fields = [
+                $field_group_user,
+                [
+                    'name' => 'qty',
+                    'note' => 'SL đủ tiêu chuẩn nhập kho',
+                    'type' => 'text',
+                    'attr' => ['type_input' => 'number', 'inject_class' => '__expertise_qty']
+                ],
+                [
+                    'name' => 'rework_note',
+                    'note' => 'Ghi chú sản xuất lại',
+                    'type' => 'textarea'
                 ]
             ];
         @endphp
@@ -68,6 +83,11 @@
                 @foreach ($problem_handle_fields as $p_field)
                     @include('view_update.view', $p_field)
                 @endforeach
+                <div class="problerm_module">
+                    @foreach ($reworks_fields as $r_field)
+                        @include('view_update.view', $r_field)
+                    @endforeach
+                </div>
             </div>
             <div class="group_btn_action_form text-center w-100">
                 <button type="submit" disabled class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-3">

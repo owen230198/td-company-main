@@ -13,4 +13,12 @@ class WUser extends Model
         $user_login = !empty(session('worker_login')['user']) ? session('worker_login')['user'] : [];
         return !empty($field) && !empty($user_login[$field]) ? $user_login[$field] : $user_login;
     }
+
+    static function getGroupUserFields()
+    {
+        $data = NDetailTable::where(['table_map' => 'w_salaries', 'name' => 'group_user'])->get();
+        NDetailTable::handleField($data, 'insert');
+        $ret = processArrField($data->first());
+        return $ret;
+    }
 }

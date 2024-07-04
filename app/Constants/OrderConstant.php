@@ -103,13 +103,13 @@
                 'condition' => ['status' => \StatusConst::SUBMITED],
                 'link' => 'view/products?default_data=%7B"status"%3A"'.\StatusConst::SUBMITED.'"%7D' 
             ],
-            // [
-            //     'icon' => 'rework', 
-            //     'table' => 'c_reworks', 
-            //     'text' => 'Sản xuất lại sản phẩm',
-            //     'condition' => ['status' => \StatusConst::NOT_ACCEPTED],
-            //     'link' => 'view/c_reworks?default_data=%7B"status"%3A"'.\StatusConst::NOT_ACCEPTED.'"%7D' 
-            // ],
+            [
+                'icon' => 'rework', 
+                'table' => 'c_reworks', 
+                'text' => 'Sản xuất lại sản phẩm',
+                'condition' => ['status' => \StatusConst::NOT_ACCEPTED],
+                'link' => 'view/c_reworks?default_data=%7B"status"%3A"'.\StatusConst::NOT_ACCEPTED.'"%7D' 
+            ],
             [
                 'icon' => 'product_waiting', 
                 'table' => 'c_expertises', 
