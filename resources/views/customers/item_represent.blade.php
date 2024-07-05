@@ -14,7 +14,7 @@
             $item['value'] = @$value[$key_name]; 
             $item['name'] = 'represent['.$index.']['.$key_name.']';
             $item['dataItem'] = @$value;
-            $item['min_label'] = 115;
+            $item['min_label'] = 150;
             $not_update = !\GroupUser::isAdmin() && (!empty($value) && !isDataOwn($value));
             if ($not_update) {
                 $item['attr']['disable_field'] = true;

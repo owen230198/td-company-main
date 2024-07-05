@@ -295,10 +295,31 @@ var selectAjaxModule = function (section = $('.page_content ')) {
 var phoneInputPrevent = function () {
     $(document).on('keypress paste keydown', 'input[name*=phone]', function (event) {
         let key = event.charCode ? event.charCode : event.keyCode;
-        if (key !== 8 && (key === 32 || key < 48 || (key > 57 && key < 65) || (key > 90 && key < 97) || key > 122)) {
+
+        // Cho phép các phím điều khiển như backspace (8), delete (46), và các phím mũi tên (37-40)
+        if (event.ctrlKey || event.metaKey || key === 8 || key === 46 || (key >= 37 && key <= 40)) {
+            return true;
+        }
+
+        // Cho phép các phím số (48-57) và phím số trên bàn phím số (96-105)
+        if ((key >= 48 && key <= 57) || (key >= 96 && key <= 105)) {
+            return true;
+        }
+        
+        // chặn dấu "."
+        if (key === 110) {
             event.preventDefault();
             return false;
         }
+
+        // Cho phép chữ cái (a-z và A-Z)
+        if ((key >= 65 && key <= 90) || (key >= 97 && key <= 122)) {
+            return true;
+        }
+
+        // Ngăn chặn các ký tự khác, bao gồm cả dấu chấm trên bàn phím số (110)
+        event.preventDefault();
+        return false;
     });
 };
 
