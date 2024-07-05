@@ -62,12 +62,6 @@
             $reworks_fields = [
                 $field_group_user,
                 [
-                    'name' => 'qty',
-                    'note' => 'SL đủ tiêu chuẩn nhập kho',
-                    'type' => 'text',
-                    'attr' => ['type_input' => 'number', 'inject_class' => '__expertise_qty']
-                ],
-                [
                     'name' => 'rework_note',
                     'note' => 'Ghi chú sản xuất lại',
                     'type' => 'textarea'
@@ -79,11 +73,11 @@
             @foreach ($arr_fields as $field)
                 @include('view_update.view', $field)
             @endforeach
-            <div class="problerm_module" style="display:{{ @$data_command->status == \App\Models\Cexpertise::PROBLEM ? 'block' : 'none' }}">
+            <div class="problerm_module" style="display:none">
                 @foreach ($problem_handle_fields as $p_field)
                     @include('view_update.view', $p_field)
                 @endforeach
-                <div class="problerm_module">
+                <div class="__rework_module" style="display:none">
                     @foreach ($reworks_fields as $r_field)
                         @include('view_update.view', $r_field)
                     @endforeach
@@ -101,5 +95,5 @@
     </div>
 @endsection
 @section('script')
-    <script src="{{ asset('frontend/admin/script/order.js') }}"></script>
+    <script src="{{ asset('frontend/admin/script/order.js?v='.Time()) }}"></script>
 @endsection

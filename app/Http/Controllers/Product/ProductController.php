@@ -146,20 +146,37 @@ use App\Models\Order;
                         if (empty($data['handle_problem'])) {
                             return returnMessageAjax(100, 'Bạn chưa chọn phương án xử lí sản phẩm lỗi !');
                         }
-                        if ($is_rework && empty($data['defect_stage'])) {
+                        if ($is_rework && empty($data['type'])) {
                             return returnMessageAjax(100, 'Bạn chưa chọn khâu sản xuất sản phẩm lỗi !');
                         }
                         
-                        if ($is_rework && empty($data['defect_worker'])) {
+                        if ($is_rework && empty($data['worker'])) {
                             return returnMessageAjax(100, 'Bạn chưa chọn công nhân sản xuất sản phẩm lỗi !');
                         }
                     }
-                    $data['handle_problem'] = $data['handle_problem'];
-                    $data['status'] = \StatusConst::NOT_ACCEPTED;
-                    $data['name'] = 'KCS'.' '.$product_obj->name;
-                    $data['product'] = $id;
-                    $this->services->configBaseDataAction($data);
-                    $insert_id = CExpertise::insertGetId($data);
+                    $data_insert['name'] = 'KCS'.' '.$product_obj->name;
+                    $data_insert['qty'] = $data['qty'];
+                    $data_insert['product'] = $id;
+                    $data_insert['take_status'] = $data['take_status'];
+                    $data_insert['handle_problem'] = $data['handle_problem'];
+                    $data_insert['note'] = $data['note'];
+                    $data_insert['status'] = \StatusConst::NOT_ACCEPTED;
+                    $this->services->configBaseDataAction($data_insert);
+                    $insert_id = CExpertise::insertGetId($data_insert);
+
+                    if ($is_rework) {
+                        $data_rework['name'] = 'Sản xuất lại '.$product_obj->name;
+                        $data_rework['product'] = $id;
+                        $data_rework['type'] = $data['type'];
+                        $data_rework['worker'] = $data['worker'];
+                        $data_rework['qty'] = $product_obj->qty - $data['qty']; 
+                        $data_rework['status'] = \StatusConst::NOT_ACCEPTED;
+                        $data_rework['rework_status'] = Product::NEED_REWORK;
+                        (new \BaseService)->configBaseDataAction($data_rework);
+                        $rework_id = CRework::insertGetId($data_rework);
+                        CRework::where('id', $rework_id)->update(['code' => 'RW-'.formatCodeInsert($rework_id)]);
+                        logActionUserData('insert', 'c_reworks', $rework_id);
+                    }
                     
                     if ($insert_id) {
                         CExpertise::where('id', $insert_id)->update(['code' => 'NK-'.formatCodeInsert($insert_id)]);

@@ -357,6 +357,18 @@ var KCSRequireToWarehouse = function()
             prob_module.fadeOut();
         }
     });
+
+    $(document).on('change', '.__expertise_select_handle', function(event){
+        event.preventDefault();
+        let _this = $(this);
+        let rework_module = _this.closest('.problerm_module').find('.__rework_module');
+        console.log(rework_module);
+        if (_this.val() == 'rework') {
+            rework_module.fadeIn();
+        }else{
+            rework_module.fadeOut();
+        }
+    });
 }
 
 var searchIngredient = function ()

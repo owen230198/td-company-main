@@ -255,28 +255,13 @@ class WSalary extends Model
     static function checkSubmitedProduct($product_id)
     {
         $status = \StatusConst::SUBMITED;
-        $c_reworks = CRework::where('product', $product_id)->get();
-        $bool = true;
-        if (!$c_reworks->isEmpty()) {
-            foreach ($c_reworks as $c_rework) {
-                if ($c_rework->status != \StatusConst::SUBMITED) {
-                    $bool = false;
-                    break;
-                }
-            }
-        }
-        if ($bool) {
-            $arr_update = ['status' => $status, 'updated_at' => \Carbon\Carbon::now()];
-            $update = Product::where('id', $product_id)->update($arr_update);
-            if ($update) {
-                $data_product = Product::find($product_id);
-                if (!empty($data_product->rework_from)) {
-                    self::checkSubmitedProduct($data_product->rework_from);
-                }
-                if (!empty($data_product->order)) {
-                    if (checkUpdateOrderStatus($data_product->order, $status)) {
-                        Order::where('id', $data_product->order)->update($arr_update);
-                    }
+        $arr_update = ['status' => $status, 'updated_at' => \Carbon\Carbon::now()];
+        $update = Product::where('id', $product_id)->update($arr_update);
+        if ($update) {
+            $data_product = Product::find($product_id);
+            if (!empty($data_product->order)) {
+                if (checkUpdateOrderStatus($data_product->order, $status)) {
+                    Order::where('id', $data_product->order)->update($arr_update);
                 }
             }
         }

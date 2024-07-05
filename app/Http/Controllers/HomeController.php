@@ -23,11 +23,11 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $data['title'] = 'Báo cáo & Thống kê';
-        $data['not_accepted_table'] = \App\Constants\OrderConstant::ACCEPT_REQURIRED_TABLE;
-        if (\GroupUser::isDesign()) {
-            unset($data['not_accepted_table']['orders']);
+        if (!$request->isMethod('GET')) {
+            return 'Yêu cầu không hợp lệ !';
         }
+        $data['title'] = 'phần mềm doanh nghiệp '. getDataConfig('QuoteConfig', 'COMPANY_NAME');
+        $data['not_accepted_table'] = \App\Constants\OrderConstant::ACCEPT_REQURIRED_TABLE;
         return view('main', $data); 
     }
 }
