@@ -51,7 +51,7 @@
             foreach ($data_obj as $value) {
                 unset($value['id']);
                 if ($table == 'papers') {
-                    $value['name'] = $value['name'].' (Sản xuất lại do lỗi kỹ thuật)';
+                    $value['name'] = $value['name'];
                 }
                 $value['product_qty'] = 0;
                 $value['base_supp_qty'] = 0;
@@ -309,10 +309,10 @@
                             \TDConst::FOLD];
                     break;
                 case 'supplies':
-                    return [\TDConst::MILL,
+                    return [\TDConst::CUT,
                             \TDConst::ELEVATE, 
                             \TDConst::PEEL, 
-                            \TDConst::CUT];
+                            \TDConst::MILL];
                     break;
                 case 'fill_finishes':
                     return [\TDConst::FILL, 
@@ -334,6 +334,9 @@
             }
             $ret['type'] = \StatusConst::SUBMITED;
             $data = !empty($arr_select) ? \DB::table($table)->select($arr_select)->find($id) : [];
+            if ($table == 'supplies' && $id == 287) {
+                dd($data);
+            }
             if (!empty($data)) {
                 foreach ($data as $key => $value) {
                     $data_value = json_decode($value, true);

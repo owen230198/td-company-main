@@ -2,7 +2,6 @@
 @section('content')
     <div class="base_page h-100">
         <div class="page_content">
-            @include('title_base_page')
             <div class="dashborad_content p-3">
                 <ul class="nav nav-pills mb-3 quote_pro_strct_nav_link" id="element-tab" role="tablist">
                     @foreach ($elements as $key => $element)

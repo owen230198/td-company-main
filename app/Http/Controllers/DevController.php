@@ -414,5 +414,14 @@ class DevController extends Controller
             }
         }
     }
+
+    public function testToWorkerProduct()
+    {
+        $products = Product::where('id', 219)->get();
+        foreach ($products as $product) {
+            (new \App\Services\OrderService())->createWorkerCommand($product);
+        }
+        dd(1);
+    }
 }
 

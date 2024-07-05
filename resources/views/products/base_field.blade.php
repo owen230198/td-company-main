@@ -11,7 +11,7 @@
             [
                 'name' => $pro_base_name_input.'[qty]',
                 'note' => 'Số lượng sản phẩm',
-                'attr' => ['type_input' => 'number', 'required' => 1, 'inject_class' => 'input_pro_qty __input_module_made_by_partner', 'placeholder' => 'Nhập số lượng', 'readonly' => !empty($rework) || !empty($readonly_base)],
+                'attr' => ['type_input' => 'number', 'required' => 1, 'inject_class' => 'input_pro_qty __input_module_made_by_partner', 'placeholder' => 'Nhập số lượng', 'readonly' => !empty($readonly_base)],
                 'value' => @$product['qty']
             ],
         ];

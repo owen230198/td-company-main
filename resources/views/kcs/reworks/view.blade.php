@@ -4,7 +4,6 @@
     <link rel="stylesheet" href="{{ asset('frontend/admin/css/order.css') }}">
 @endsection
 @section('content')
-    @include('title_base_page')
     <div class="dashborad_content pb-5">
         <form action="{{ url('product-require-rework/'.$data_rework->id) }}" method="POST" class="config_content baseAjaxForm" enctype="multipart/form-data">
             @csrf

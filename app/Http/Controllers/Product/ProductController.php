@@ -229,7 +229,7 @@ use App\Models\Order;
                     return customReturnMessage(false, $is_post, ['message' => 'Dữ liệu không hợp lệ !']);
                 }
                 $req_qty = (int) @$obj->qty;
-                if ($req_qty<= 0) {
+                if ($req_qty <= 0) {
                     return customReturnMessage(false, $is_post, ['message' => 'Số lượng cần sản phẩm cần sản xuất lại không hợp lệ !']);
                 }
                 $product_obj = Product::find($obj->product);
@@ -240,14 +240,13 @@ use App\Models\Order;
                     $data['nosidebar'] = true;
                     $data['title'] = 'Yêu cầu sản xuất lại '.$req_qty.' sản phẩm '.$product_obj->name;
                     $data['parent_url'] = ['link' => getBackUrl(), 'note' => 'Yêu cầu sản xuất lại'];
-                    $product_obj->name = $product_obj->name.' (Sản xuất lại do lỗi kỹ thuật)';
+                    $product_obj->name = $product_obj->name;
                     $product_obj->qty = '';
                     $product_obj->design = 4;
                     $data['product'] = $product_obj;
                     $data['data_rework'] = $obj;
                     $data['cate'] = $product_obj->category;
                     $data['elements'] = getProductElementData($data['cate'], $product_obj->id, false, false, true, true);
-                    dd($data['elements']);
                     return view('kcs.reworks.view', $data);
                 }else{
                     $data = $request->except('_token');

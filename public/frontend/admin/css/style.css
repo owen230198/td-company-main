@@ -329,7 +329,7 @@ a.device_supp_item {
 
 .table_base_view {
     overflow: auto;
-    height: calc(100vh - 180px);
+    max-height: calc(100vh - 180px);
     box-shadow: 1px 1px 10px #888888;
 }
 

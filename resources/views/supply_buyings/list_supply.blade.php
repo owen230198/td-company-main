@@ -5,7 +5,7 @@
             <div class="table_base_view position-relative">
                 <h3 class="fs-14 text-uppercase pt-4 mt-4 text-center font_bold text-center color_green">{{ $title }}</h3>
                 <h3 class="fs-14 text-uppercase py-2 my-2 text-center font_bold text-center color_green">
-                    THông tin nhà cung cấp: {{ getFieldDataById('name', 'warehouse_providers', $data_buying->provider) }}
+                    Thông tin nhà cung cấp: {{ getFieldDataById('name', 'warehouse_providers', $data_buying->provider) }}
                 </h3>
                 <table class="table table-bordered mb-2 table_main">
                     <tr>

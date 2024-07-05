@@ -1,6 +1,5 @@
 @extends('index')
 @section('content')
-    @include('title_base_page')
     <div class="dashborad_content">
         @if (!empty($list_data))
             <ul>
