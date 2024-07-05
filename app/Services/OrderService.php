@@ -303,6 +303,35 @@ class OrderService extends BaseService
         }   
     }
 
+    public function createWorkerCommandForSupply($table_supply, $supply)
+    {
+        $data_command = getStageActiveStartHandle($table_supply, $supply->id);
+        $type = $data_command['type'];
+        $data_update['status'] = $type;
+        $update = getModelByTable($table_supply)->where('id', $supply->id)->update($data_update);
+        $data_handle = !empty($data_command['handle']) ? $data_command['handle'] : [];
+        if ($type != \StatusConst::SUBMITED && $update && (int) @$data_handle['handle_qty'] > 0) {
+            $data_command['qty'] = $data_handle['handle_qty'];
+            $code = $supply->code;
+            if ($type == \TDConst::FILL && !empty($data_handle['stage'])) {
+                foreach ($data_handle['stage'] as $fillkey => $stage) {
+                    $data_command['name'] = getFieldDataById('name', 'products', $supply->product).'('.getFieldDataById('name', 'materals', @$stage['materal']).')';
+                    $data_command['fill_handle'] = json_encode($stage);
+                    $data_command['handle'] = $stage;
+                    $data_command['machine_type'] = getFieldDataById('type', 'devices', $stage['machine']);
+                    $data_command['fill_materal'] = $stage['materal'];
+                    $fill_code = $code.''.getCharaterByNum($fillkey);
+                    WSalary::commandStarted($fill_code, $data_command, $table_supply, $supply);
+                }
+            }else{
+                if (!empty($data_handle['machine'])) {
+                    $data_command['name'] = getNameCommandWorker($supply, getFieldDataById('name', 'products', $supply->product));
+                    WSalary::CommandStarted($code, $data_command, $table_supply, $supply); 
+                }   
+            }
+        }
+    }
+
     public function createWorkerCommand($obj_order)
     {
         $elements = getProductElementData($obj_order->category, $obj_order->id, true, false); 
@@ -310,32 +339,7 @@ class OrderService extends BaseService
             if (!empty($element['data'])) {
                 $el_data = $element['data'];
                 foreach ($el_data as $supply) {
-                    $table_supply = $element['table'];
-                    $data_command = getStageActiveStartHandle($table_supply, $supply->id);
-                    $type = $data_command['type'];
-                    $data_update['status'] = $type;
-                    $update = getModelByTable($table_supply)->where('id', $supply->id)->update($data_update);
-                    $data_handle = !empty($data_command['handle']) ? $data_command['handle'] : [];
-                    if ($type != \StatusConst::SUBMITED && $update && (int) @$data_handle['handle_qty'] > 0) {
-                        $data_command['qty'] = $data_handle['handle_qty'];
-                        $code = $supply->code;
-                        if ($type == \TDConst::FILL && !empty($data_handle['stage'])) {
-                            foreach ($data_handle['stage'] as $fillkey => $stage) {
-                                $data_command['name'] = $obj_order->name.'('.getFieldDataById('name', 'materals', @$stage['materal']).')';
-                                $data_command['fill_handle'] = json_encode($stage);
-                                $data_command['handle'] = $stage;
-                                $data_command['machine_type'] = getFieldDataById('type', 'devices', $stage['machine']);
-                                $data_command['fill_materal'] = $stage['materal'];
-                                $fill_code = $code.''.getCharaterByNum($fillkey);
-                                WSalary::commandStarted($fill_code, $data_command, $table_supply, $supply);
-                            }
-                        }else{
-                            if (!empty($data_handle['machine'])) {
-                                $data_command['name'] = getNameCommandWorker($supply, $obj_order->name);
-                                WSalary::CommandStarted($code, $data_command, $table_supply, $supply); 
-                            }   
-                        }
-                    }
+                    $this->createWorkerCommandForSupply($element['table'], $supply);
                 }
             }
         }

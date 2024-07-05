@@ -415,13 +415,20 @@ class DevController extends Controller
         }
     }
 
-    public function testToWorkerProduct()
+    public function removeCommandProductI()
     {
-        $products = Product::where('id', 219)->get();
+        $products = Product::where(['category' => 1, 'status' => Order::MAKING_PROCESS])->get();
+        foreach ($products as $product) {
+            WSalary::where('product', $product->id)->delete();
+        }
+    }
+
+    public function reCreateCommandProductI()
+    {
+        $products = Product::where(['category' => 1, 'status' => Order::MAKING_PROCESS])->get();
         foreach ($products as $product) {
             (new \App\Services\OrderService())->createWorkerCommand($product);
         }
-        dd(1);
     }
 }
 

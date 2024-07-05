@@ -334,9 +334,6 @@
             }
             $ret['type'] = \StatusConst::SUBMITED;
             $data = !empty($arr_select) ? \DB::table($table)->select($arr_select)->find($id) : [];
-            if ($table == 'supplies' && $id == 287) {
-                dd($data);
-            }
             if (!empty($data)) {
                 foreach ($data as $key => $value) {
                     $data_value = json_decode($value, true);
