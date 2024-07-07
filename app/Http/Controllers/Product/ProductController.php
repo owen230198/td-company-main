@@ -54,6 +54,7 @@ use App\Models\Order;
                 if (!empty($process['code']) && $process['code'] == 100) {
                     return returnMessageAjax(100, $process['message']);  
                 }else{
+                    Product::handleCommandCode($product, $product->code);
                     $ret_url = !\GroupUser::isAdmin() ? getBackUrl() : url('/profit-config-data?table=orders&id='.$order_obj->id);
                     return returnMessageAjax(200, 'Cập nhật dữ liệu thành công!', $ret_url);       
                 }

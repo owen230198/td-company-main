@@ -417,6 +417,7 @@ class DevController extends Controller
 
     public function removeCommandProductI()
     {
+        die();
         $products = Product::where(['category' => 1, 'status' => Order::MAKING_PROCESS])->get();
         foreach ($products as $product) {
             WSalary::where('product', $product->id)->delete();
@@ -425,6 +426,7 @@ class DevController extends Controller
 
     public function reCreateCommandProductI()
     {
+        die();
         $products = Product::where(['category' => 1, 'status' => Order::MAKING_PROCESS])->get();
         foreach ($products as $product) {
             (new \App\Services\OrderService())->createWorkerCommand($product);
