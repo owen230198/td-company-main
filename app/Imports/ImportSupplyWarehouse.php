@@ -2,12 +2,12 @@
 
 namespace App\Imports;
 
-use App\Models\PrintWarehouse;
+use App\Models\SupplyWarehouse;
 use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\SkipsEmptyRows;
-class ImportPrintWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows
+class ImportSupplyWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows
 {
     static $type = '';
     function __construct($type)
@@ -17,11 +17,8 @@ class ImportPrintWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows
 
     public function model(array $row)
     {
-        if ($this->isHeaderRow($row) || $row['cuoi_ky'] <= 0 || empty ($row['ma_hang'])) {
-            return null;
-        }
         $data = $this->getDataImport(self::$type, $row);
-        return new PrintWarehouse($data);
+        return new SupplyWarehouse($data);
     }
 
     private function getDataImport($type, $row)
@@ -31,7 +28,9 @@ class ImportPrintWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows
             'length' => getSizeByCodeMisa($row['ma_hang'], 'length'),
             'width' => getSizeByCodeMisa($row['ma_hang'], 'width'),
             'qty' => $row['cuoi_ky'],
-            'type' => 'paper',
+            'type' => $type,
+            'supply_type' => $this->getTypeSupply($row['ma_hang']),
+            'supp_price' => $this->getSuppPrice($row['ma_hang']),
             'status' => 'imported',
             'source' => 1,
             'note' => 'Nhập từ Misa',
@@ -54,9 +53,36 @@ class ImportPrintWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows
         return $ret;
     }
 
-    private function isHeaderRow($row)
+    static function isMN($code)
     {
-        return @$row['tong_hop_ton_kho'] === 'Kho: Kho NVL; Từ ngày 01/6/2024 đến ngày 18/6/2024';
+        return str_contains($code, 'BM') || str_contains($code, 'BN');
+    }
+    
+
+    public function getTypeSupply($code)
+    {
+        if (str_contains($code, 'BM') || str_contains($code, 'BN')) {
+            return 21;
+        }elseif(str_contains($code, 'BT')){
+            return 5;
+        }
+    }
+
+    public function getSuppPrice($code)
+    {
+        if (self::isMN($code)) {
+            if (str_contains($code, '1.6') || str_contains($code, '1.5')) {
+                return 117;
+            }elseif (str_contains($code, '0.8')){
+                return 105;
+            }elseif (str_contains($code, '1_')){
+                return 115;
+            }elseif (str_contains($code, '1.2')){
+                return 116;
+            }elseif (str_contains($code, '1.8')){
+                return 118;
+            }
+        }
     }
 }
 

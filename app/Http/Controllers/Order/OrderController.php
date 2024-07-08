@@ -424,7 +424,7 @@
                 $id = $request->input('id');
                 $order = Order::find($id);
                 if (empty($order)) {
-                    return back()->with('error', 'Đơn hàng không tồ tại hoặc đã bị xóa !');
+                    return back()->with('error', 'Đơn hàng không tồn tại hoặc đã bị xóa !');
                 }
                 $data['data_item'] = $order;
                 $data['title'] = 'Chi tiết chi phí - '.$order['code'];

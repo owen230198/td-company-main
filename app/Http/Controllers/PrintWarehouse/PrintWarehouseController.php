@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers\PrintWarehouse;
 use App\Http\Controllers\Controller;
-use App\Imports\ImportPrintWarehouse;
 use App\Models\PrintWarehouse;
-use Maatwebsite\Excel\Facades\Excel;
 
 class PrintWarehouseController extends Controller
 {
@@ -65,8 +63,6 @@ class PrintWarehouseController extends Controller
     }
 
     public function import($file){
-        $arr_file = pathinfo($file->getClientOriginalName());
-        Excel::import(new ImportPrintWarehouse($arr_file['filename']), $file);
-        return returnMessageAjax(200, 'Đã thêm vật tư giấy thành công !', \StatusConst::RELOAD);
+        return $this->services->import($file);
     }
 }

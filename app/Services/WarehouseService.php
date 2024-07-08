@@ -5,6 +5,8 @@ use App\Models\SupplyWarehouse;
 use App\Services\BaseService;
     use App\Services\AdminService;
     use App\Models\WarehouseHistory;
+use Maatwebsite\Excel\Facades\Excel;
+
     class WarehouseService extends BaseService
     {
         function __construct($table)
@@ -18,15 +20,15 @@ use App\Services\BaseService;
             if (empty($data['qty'])) {
                 return returnMessageAjax(100, 'Vui lòng nhập số lượng mua thêm !');
             }
-            // if (empty($data['provider'])) {
-            //     return returnMessageAjax(100, 'Vui lòng chọn nhà cung cấp vật tư !');
-            // }
-            // if (empty($data['price'])) {
-            //     return returnMessageAjax(100, 'Vui lòng nhập giá mua vật tư !');
-            // }
-            // if (empty($data['bill'])) {
-            //     return returnMessageAjax(100, 'Vui lòng upload file hóa đơn mua vật tư !');
-            // }
+            if (empty($data['provider'])) {
+                return returnMessageAjax(100, 'Vui lòng chọn nhà cung cấp vật tư !');
+            }
+            if (empty($data['price'])) {
+                return returnMessageAjax(100, 'Vui lòng nhập giá mua vật tư !');
+            }
+            if (empty($data['bill'])) {
+                return returnMessageAjax(100, 'Vui lòng upload file hóa đơn mua vật tư !');
+            }
         }
 
         private function getDataLogAction(&$data_log)
@@ -114,6 +116,15 @@ use App\Services\BaseService;
                 $data['data_item_log'] = WarehouseHistory::where(['table' => $this->table, 'target' => $id])->orderBy('created_at', 'desc')->paginate(20);
                 return view('warehouses.actions.view', $data);
             }
+        }
+
+        public function import($file)
+        {
+            $arr_file = pathinfo($file->getClientOriginalName());
+            $name_space = '\App\Imports\Import'.getClassByTable($this->table);
+            $obj = new $name_space($arr_file['filename']);
+            Excel::import($obj, $file);
+            return returnMessageAjax(200, 'Đã thêm vật tư thành công !', \StatusConst::RELOAD);
         }
     }
     
