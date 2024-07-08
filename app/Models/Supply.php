@@ -1,8 +1,6 @@
 <?php
  
 namespace App\Models;
-
-use App\Constants\TDConstant;
 use Illuminate\Database\Eloquent\Model;
 use App\Services\QTraits\QuoteTrait;
 use App\Services\QTraits\QSupplyTrait;

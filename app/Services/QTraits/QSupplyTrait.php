@@ -18,7 +18,11 @@ trait QSupplyTrait
          if (!empty($data[$stage])) {
             $item_stage = !empty($dataItem[$stage]) ? json_decode($dataItem[$stage], true) : [];
             $data[$stage]['handled_qty'] = @$item_stage['handled_qty'] ?? 0;
-            $data_action[$stage] = $this->configDataStage($data[$stage]);
+            $param = $data[$stage];
+            if ($stage == \TDConst::MILL) {
+               $param['factor'] = !empty($data['name']) ? ((int) getFieldDataById('factor', 'supply_names', $data['name']) > 0 ? getFieldDataById('factor', 'supply_names', $data['name']) : 1) : 1;
+            }
+            $data_action[$stage] = $this->configDataStage($param);
          }
       }
 
