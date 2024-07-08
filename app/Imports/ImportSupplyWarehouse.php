@@ -39,17 +39,6 @@ class ImportSupplyWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows
             'updated_at' => Carbon::now(),
             'created_by' => 25
         ];
-        if ($type == 'decal') {
-            $ret['qtv'] = 300;
-            $ret['supp_price'] = 34;
-        }elseif ($type == 'couches'){
-            $ret['qtv'] = getQtvByCodeMisa($row['ma_hang'], 'C');
-            $ret['supp_price'] = 12;
-        }
-        elseif ($type == 'ivory'){
-            $ret['qtv'] = getQtvByCodeMisa($row['ma_hang'], 'I');
-            $ret['supp_price'] = 13;
-        }
         return $ret;
     }
 
@@ -81,7 +70,35 @@ class ImportSupplyWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows
                 return 116;
             }elseif (str_contains($code, '1.8')){
                 return 118;
+            }elseif (str_contains($code, '2_')){
+                return 119;
+            }elseif (str_contains($code, '2.2')){
+                return 120;
+            }elseif (str_contains($code, '2.5')){
+                return 121;
+            }elseif (str_contains($code, '3_')){
+                return 122;
             }
+        }else{
+            if (str_contains($code, '1.6') || str_contains($code, '1.5')) {
+                return 125;
+            }elseif (str_contains($code, '0.8')){
+                return 106;
+            }elseif (str_contains($code, '1_')){
+                return 123;
+            }elseif (str_contains($code, '1.2')){
+                return 124;
+            }elseif (str_contains($code, '1.8')){
+                return 126;
+            }elseif (str_contains($code, '2_')){
+                return 127;
+            }elseif (str_contains($code, '2.2')){
+                return 128;
+            }elseif (str_contains($code, '2.5')){
+                return 129;
+            }elseif (str_contains($code, '3_')){
+                return 131;
+            }  
         }
     }
 }
