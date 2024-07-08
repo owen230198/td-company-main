@@ -17,6 +17,9 @@ class ImportSupplyWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows
 
     public function model(array $row)
     {
+        if ($row['cuoi_ky'] <= 0 || empty ($row['ma_hang']) || str_contains('_', $row['ma_hang'])) {
+            return null;
+        }
         $data = $this->getDataImport(self::$type, $row);
         return new SupplyWarehouse($data);
     }
@@ -29,7 +32,7 @@ class ImportSupplyWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows
             'width' => getSizeByCodeMisa($row['ma_hang'], 'width'),
             'qty' => $row['cuoi_ky'],
             'type' => $type,
-            'supply_type' => $this->getTypeSupply($row['ma_hang']),
+            'supp_type' => $this->getTypeSupply($row['ma_hang']),
             'supp_price' => $this->getSuppPrice($row['ma_hang']),
             'status' => 'imported',
             'source' => 1,
@@ -62,15 +65,15 @@ class ImportSupplyWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows
         if (self::isMN($code)) {
             if (str_contains($code, '1.6') || str_contains($code, '1.5')) {
                 return 117;
-            }elseif (str_contains($code, '0.8')){
+            }elseif (str_contains($code, '0.8') || str_contains($code, '0.9')){
                 return 105;
-            }elseif (str_contains($code, '1_')){
+            }elseif (str_contains($code, '1_') || str_contains($code, '1.0')){
                 return 115;
             }elseif (str_contains($code, '1.2')){
                 return 116;
             }elseif (str_contains($code, '1.8')){
                 return 118;
-            }elseif (str_contains($code, '2_')){
+            }elseif (str_contains($code, '2_') || str_contains($code, '2.0')){
                 return 119;
             }elseif (str_contains($code, '2.2')){
                 return 120;
@@ -78,19 +81,21 @@ class ImportSupplyWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows
                 return 121;
             }elseif (str_contains($code, '3_')){
                 return 122;
+            }else{
+                dd($code);
             }
         }else{
             if (str_contains($code, '1.6') || str_contains($code, '1.5')) {
                 return 125;
-            }elseif (str_contains($code, '0.8')){
+            }elseif (str_contains($code, '0.8') || str_contains($code, '0.9')){
                 return 106;
-            }elseif (str_contains($code, '1_')){
+            }elseif (str_contains($code, '1_') || str_contains($code, '1.0')){
                 return 123;
             }elseif (str_contains($code, '1.2')){
                 return 124;
             }elseif (str_contains($code, '1.8')){
                 return 126;
-            }elseif (str_contains($code, '2_')){
+            }elseif (str_contains($code, '2_') || str_contains($code, '2.0')){
                 return 127;
             }elseif (str_contains($code, '2.2')){
                 return 128;
@@ -98,6 +103,8 @@ class ImportSupplyWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows
                 return 129;
             }elseif (str_contains($code, '3_')){
                 return 131;
+            }else{
+                dd($code);
             }  
         }
     }

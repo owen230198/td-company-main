@@ -483,11 +483,19 @@ if (!function_exists('convertNumerToText')) {
         function getSizeByCodeMisa($str, $get)
         {
             $arr = explode('_', $str);
-            $arr_size = explode('x', $arr[1]);
+            if (count($arr) < 2) {
+                return $str;   
+            }
+            $arr_size = preg_split('/x/i', $arr[1]);
+            if (count($arr_size) < 2) {
+                return $str;   
+            }
+            $size_0 = (int) $arr_size[0];
+            $size_1 = (int) $arr_size[1];
             if ($get == 'length') {
-                $ret = $arr_size[0] > $arr_size[1] ? $arr_size[0] : $arr_size[1];
+                $ret = $size_0 > $size_1 ? $size_0 : $size_1;
             }else{
-                $ret = $ret['width'] = $arr_size[0] > $arr_size[1] ? $arr_size[1] : $arr_size[0];
+                $ret = $size_0 > $size_1 ? $size_1 : $size_0;
             }
             return $ret;
         }

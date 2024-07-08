@@ -8,6 +8,7 @@ class SupplyWarehouse extends Model
 {
     protected $table = 'supply_warehouses';
     protected $protectFields = false;
+    protected $guarded = [];
     //status
     const WAITING = 'waiting';
     const IMPORTED = 'imported';
