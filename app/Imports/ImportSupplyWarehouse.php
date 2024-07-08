@@ -32,8 +32,8 @@ class ImportSupplyWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows
             'width' => getSizeByCodeMisa($row['ma_hang'], 'width'),
             'qty' => $row['cuoi_ky'],
             'type' => $type,
-            'supp_type' => $this->getTypeSupply($row['ma_hang']),
-            'supp_price' => $this->getSuppPrice($row['ma_hang']),
+            'supp_type' => $this->getTypeSupply($type, $row['ma_hang']),
+            'supp_price' => $this->getSuppPrice($type, $row['ma_hang']),
             'status' => 'imported',
             'source' => 1,
             'note' => 'Nhập từ Misa',
@@ -51,16 +51,26 @@ class ImportSupplyWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows
     }
     
 
-    public function getTypeSupply($code)
+    public function getTypeSupply($type, $code)
     {
-        if (str_contains($code, 'BM') || str_contains($code, 'BN')) {
-            return 21;
-        }elseif(str_contains($code, 'BT')){
-            return 5;
+        switch ($type) {
+            case 'carton':
+                if (self::isMN($code)) {
+                    return 21;
+                }elseif(str_contains($code, 'BT')){
+                    return 5;
+                }
+                break;
+            case 'rubber':
+                
+                break;
+            default:
+                
+                break;
         }
     }
 
-    public function getSuppPrice($code)
+    static function get_supp_price_carton($code)
     {
         if (self::isMN($code)) {
             if (str_contains($code, '1.6') || str_contains($code, '1.5')) {
@@ -107,6 +117,12 @@ class ImportSupplyWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows
                 dd($code);
             }  
         }
+    }
+
+    public function getSuppPrice($type, $code)
+    {
+        $method = "get_supp_price_$type";
+        return self::$method($code);
     }
 }
 
