@@ -50,24 +50,19 @@ class ImportSupplyWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows
         return str_contains($code, 'BM') || str_contains($code, 'BN');
     }
     
+    static function get_type_supply_carton($code)
+    {
+        if (self::isMN($code)) {
+            return 21;
+        }elseif(str_contains($code, 'BT')){
+            return 5;
+        }
+    }
 
     public function getTypeSupply($type, $code)
     {
-        switch ($type) {
-            case 'carton':
-                if (self::isMN($code)) {
-                    return 21;
-                }elseif(str_contains($code, 'BT')){
-                    return 5;
-                }
-                break;
-            case 'rubber':
-                
-                break;
-            default:
-                
-                break;
-        }
+        $method = "get_type_supply_$type";
+        return self::$method($code);
     }
 
     static function get_supp_price_carton($code)
