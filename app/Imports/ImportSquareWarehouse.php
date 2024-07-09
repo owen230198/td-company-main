@@ -17,7 +17,7 @@ class ImportSquareWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows
 
     public function model(array $row)
     {
-        $type = $this->getTypeByName($row['ten_hang']);
+        $type = $this->getSuppPrice($row['ten_hang'], true);
         if ($row['so_luong_kiem_thuc'] <= 0 || empty ($row['ma_hang'])) {
             return null;
         }
@@ -33,7 +33,7 @@ class ImportSquareWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows
             'qty' => $this->getQtyByType($type, $row['so_luong_kiem_thuc']),
             'convert_unit' => $this->getConvertUnit($type),
             'type' => $type,
-            'supp_price' => $this->getSuppPrice($type, $row['ten_hang']),
+            'supp_price' => $this->getSuppPrice($row['ten_hang']),
             'status' => 'imported',
             'note' => 'Nhập từ Misa',
             'act' => 1,
@@ -43,5 +43,29 @@ class ImportSquareWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows
         ];
         return $ret;
     }
+
+    private function getSuppPrice($name, $get_type = false)
+    {
+        if (stripos('Màng bóng', $name)) {
+            return $get_type ? 'nilon' : 8;
+        }elseif (stripos('Màng mờ', $name)){
+            return $get_type ? 'nilon' : 9;
+        }elseif(stripos('Màng metalai', $name)){
+            return $get_type ? 'metalai' : 36;
+        }
+    }
+
+    private function getWidthByName($name)
+    {
+        $arr_width = preg_split('/khổ/i', $name);
+        return $arr_width[1];
+    }
+
+    private function getQtyByType($type, $qty)
+    {
+        $factor = $this->getConvertUnit($type);
+    }
+
+    
 }
 
