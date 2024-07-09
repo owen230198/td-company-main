@@ -17,7 +17,7 @@ class ImportPrintWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows
 
     public function model(array $row)
     {
-        if ($this->isHeaderRow($row) || $row['cuoi_ky'] <= 0 || empty ($row['ma_hang'])) {
+        if ($this->isHeaderRow($row) || $row['so_luong_kiem_thuc'] <= 0 || empty ($row['ma_hang'])) {
             return null;
         }
         $data = $this->getDataImport(self::$type, $row);
@@ -30,7 +30,7 @@ class ImportPrintWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows
             'name' => '',
             'length' => getSizeByCodeMisa($row['ma_hang'], 'length'),
             'width' => getSizeByCodeMisa($row['ma_hang'], 'width'),
-            'qty' => $row['cuoi_ky'],
+            'qty' => $row['so_luong_kiem_thuc'],
             'type' => 'paper',
             'status' => 'imported',
             'source' => 1,

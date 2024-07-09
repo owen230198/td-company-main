@@ -17,7 +17,7 @@ class ImportSupplyWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows
 
     public function model(array $row)
     {
-        if ($row['cuoi_ky'] <= 0 || empty ($row['ma_hang']) || str_contains('_', $row['ma_hang'])) {
+        if ($row['so_luong_kiem_thuc'] <= 0 || empty ($row['ma_hang']) || str_contains('_', $row['ma_hang'])) {
             return null;
         }
         $data = $this->getDataImport(self::$type, $row);
@@ -30,7 +30,7 @@ class ImportSupplyWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows
             'name' => '',
             'length' => getSizeByCodeMisa($row['ma_hang'], 'length'),
             'width' => getSizeByCodeMisa($row['ma_hang'], 'width'),
-            'qty' => $row['cuoi_ky'],
+            'qty' => $row['so_luong_kiem_thuc'],
             'type' => $type,
             'supp_type' => $this->getTypeSupply($type, $row['ma_hang']),
             'supp_price' => $this->getSuppPrice($type, $row['ma_hang']),
