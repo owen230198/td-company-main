@@ -84,7 +84,8 @@ class PrintWarehouse extends Model
     
     static function getName($data)
     {
-        return getFieldDataById('name', 'materals', $data['supp_price']).' - '.$data['qtv'].' - '.$data['length'].'x'.$data['width'];
+        $length = !empty($data['length']) ? $data['length'].'x' : 'Lô ';
+        return getFieldDataById('name', 'materals', $data['supp_price']).' - '.$data['qtv'].' - '.$length.$data['width'];
     }
 
     static function getLabelLinking($data)
