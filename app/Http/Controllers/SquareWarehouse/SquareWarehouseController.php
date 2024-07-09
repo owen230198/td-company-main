@@ -54,4 +54,8 @@ class SquareWarehouseController extends Controller
             return $this->services->update($param, $id, 1);
         }
     }
+
+    public function import($file){
+        return $this->services->import($file);
+    }
 }

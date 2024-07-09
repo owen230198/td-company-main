@@ -65,6 +65,7 @@ class NTable extends Model
                         'import' => [
                             'print_warehouses',
                             'supply_warehouses',
+                            'square_warehouses',
                         ]
                     ];
 }
