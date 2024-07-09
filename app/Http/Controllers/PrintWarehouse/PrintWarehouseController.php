@@ -13,9 +13,9 @@ class PrintWarehouseController extends Controller
     }
     
     public function validateData($data){ 
-        if (empty($data['length'])) {
-            return returnMessageAjax(100, 'Vui lòng nhập kích thước khổ chiều dài !');
-        }
+        // if (empty($data['length'])) {
+        //     return returnMessageAjax(100, 'Vui lòng nhập kích thước khổ chiều dài !');
+        // }
 
         if (empty($data['width'])) {
             return returnMessageAjax(100, 'Vui lòng nhập kích thước khổ chiều rộng !');
