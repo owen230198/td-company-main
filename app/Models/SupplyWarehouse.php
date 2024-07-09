@@ -21,9 +21,7 @@ class SupplyWarehouse extends Model
     {
         $role = [
             \GroupUser::WAREHOUSE => [
-                'insert' => 1,
                 'view' => 1,
-                'update' => 1
             ],
             \GroupUser::PLAN_HANDLE => [
                 'view' => 1

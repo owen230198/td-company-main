@@ -30,7 +30,6 @@ class PrintWarehouse extends Model
         $role = [
             \GroupUser::WAREHOUSE => [
                 'view' => 1,
-                'insert' => 1,
             ],
             \GroupUser::PLAN_HANDLE => [
                 'view' => 1

@@ -227,7 +227,7 @@ class DevController extends Controller
         foreach ($list as $key => $item) {
             $obj = \DB::table('warehouse_histories')->where(['id' => $item->id]);
             if (!empty($item->type)) {
-                $data['unit'] = getUnitSupply($item->type);
+                $data['unit'] = getUnitSupply($item->type, $item);
                 $obj->update($data);
                 dump($item->type, $data['unit']);
             }else{
@@ -430,6 +430,29 @@ class DevController extends Controller
         $products = Product::where(['category' => 1, 'status' => Order::MAKING_PROCESS])->get();
         foreach ($products as $product) {
             (new \App\Services\OrderService())->createWorkerCommand($product);
+        }
+    }
+    
+    public function warehouseLogCreate(){
+        $tables = ['print_warehouses', 'supply_warehouses', 'square_warehouses', 'other_warehouses'];
+        foreach ($tables as $table) {
+            $model = getModelByTable($table);
+            $list = $model::all();
+            foreach ($list as $item) {
+                $data_log['table'] = $table;
+                $data_log['type'] = $item['type'];
+                $data_log['note'] = 'Nhập từ Misa';
+                $data_log['created_by'] = $item['created_by'];
+                $data_log['created_at'] = $item['created_at'];
+                $data_log['unit'] = getUnitSupply($item['type'], $item);
+                $data_log['name'] = $model::getName($item);
+                $data_log['target'] = $item['id'];
+                $data_log['ex_inventory'] = 0;
+                $data_log['imported'] = $item['qty'];
+                $data_log['exported'] = 0;
+                $data_log['inventory'] = $item['qty'];
+                \DB::table('warehouse_histories')->insert($data_log);
+            }
         }
     }
 }

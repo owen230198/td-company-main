@@ -243,7 +243,10 @@
     }
 
     if (!function_exists('getUnitSupply')) {
-        function getUnitSupply($type) {
+        function getUnitSupply($type, $data) {
+            if (!empty($data->unit)) {
+                return $data->unit;
+            }
             switch ($type) {
                 case in_array($type, [\TDConst::CARTON, \TDConst::RUBBER, \TDConst::STYRO, \TDConst::MICA]):
                     return 'plate';
@@ -272,6 +275,9 @@
                     break;
                 case 'unit':
                     return 'Cái';
+                    break;
+                case 'kg':
+                    return 'Kg';
                     break;
                 default:
                     return 'Cm';

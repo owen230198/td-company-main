@@ -77,7 +77,7 @@
                         {{ $data->name }}
                     </td>
                     <td>
-                        {{ getUnitWarehouseItem(getUnitSupply($data->type)) }}
+                        {{ getUnitWarehouseItem(getUnitSupply($data->type, $data)) }}
                     </td>
                     <td>
                         {{ $data_ex_inventory }}

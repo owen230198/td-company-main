@@ -17,18 +17,18 @@ use Maatwebsite\Excel\Facades\Excel;
 
         private function validateDataWarehouse($data)
         {
-            // if (empty($data['qty'])) {
-            //     return returnMessageAjax(100, 'Vui lòng nhập số lượng mua thêm !');
-            // }
-            // if (empty($data['provider'])) {
-            //     return returnMessageAjax(100, 'Vui lòng chọn nhà cung cấp vật tư !');
-            // }
-            // if (empty($data['price'])) {
-            //     return returnMessageAjax(100, 'Vui lòng nhập giá mua vật tư !');
-            // }
-            // if (empty($data['bill'])) {
-            //     return returnMessageAjax(100, 'Vui lòng upload file hóa đơn mua vật tư !');
-            // }
+            if (empty($data['qty'])) {
+                return returnMessageAjax(100, 'Vui lòng nhập số lượng mua thêm !');
+            }
+            if (empty($data['provider'])) {
+                return returnMessageAjax(100, 'Vui lòng chọn nhà cung cấp vật tư !');
+            }
+            if (empty($data['price'])) {
+                return returnMessageAjax(100, 'Vui lòng nhập giá mua vật tư !');
+            }
+            if (empty($data['bill'])) {
+                return returnMessageAjax(100, 'Vui lòng upload file hóa đơn mua vật tư !');
+            }
         }
 
         private function getDataLogAction(&$data_log)
@@ -62,7 +62,7 @@ use Maatwebsite\Excel\Facades\Excel;
                     $data_log['inventory'] = $data_log['qty'];
                     $this->getDataLogAction($data_log);
                     unset($data_log['qty']);
-                    // \DB::table('warehouse_histories')->insert($data_log);
+                    \DB::table('warehouse_histories')->insert($data_log);
                     return returnMessageAjax(200, 'Đã nhập vật tư thành công !', getBackUrl());
                 }else{
                     return returnMessageAjax(100, 'Không thể thêm vật tư vào kho !');
