@@ -21,19 +21,20 @@ class ImportSquareWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows
         if ($row['so_luong_kiem_thuc'] <= 0 || empty ($row['ma_hang'])) {
             return null;
         }
-        $data = $this->getDataImport($type, $row);
+        $width = $this->getWidthByName($row['ten_hang']);
+        $data = $this->getDataImport($type, $width, $row);
         return new SquareWarehouse($data);
     }
 
-    private function getDataImport($type, $row)
+    private function getDataImport($type, $width, $row)
     {
         $ret =[
             'name' => '',
-            'width' => $this->getWidthByName($row['ten_hang']),
-            'qty' => $this->getQtyByType($type, $row['so_luong_kiem_thuc']),
+            'width' => $width,
+            'qty' => $this->getQtyByType($row['ten_hang'], $row['so_luong_kiem_thuc'], $width),
             'convert_unit' => $this->getConvertUnit($type),
             'type' => $type,
-            'supp_price' => $this->getSuppPrice($row['ten_hang']),
+            'supp_price' => self::getSuppPrice($row['ten_hang']),
             'status' => 'imported',
             'note' => 'Nhập từ Misa',
             'act' => 1,
@@ -44,13 +45,13 @@ class ImportSquareWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows
         return $ret;
     }
 
-    private function getSuppPrice($name, $get_type = false)
+    static function getSuppPrice($name, $get_type = false)
     {
-        if (stripos('Màng bóng', $name)) {
+        if (stripos($name, 'Màng bóng') !== false) {
             return $get_type ? 'nilon' : 8;
-        }elseif (stripos('Màng mờ', $name)){
+        }elseif (stripos($name, 'Màng mờ') !== false){
             return $get_type ? 'nilon' : 9;
-        }elseif(stripos('Màng metalai', $name)){
+        }elseif(stripos($name, 'Màng metalai') !== false){
             return $get_type ? 'metalai' : 36;
         }
     }
@@ -61,11 +62,19 @@ class ImportSquareWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows
         return $arr_width[1];
     }
 
-    private function getQtyByType($type, $qty)
+    private function getQtyByType($name, $qty, $width)
     {
-        $factor = $this->getConvertUnit($type);
+        $factor = $this->getConvertUnit($name);
+        return ($factor * $qty)/$width;
     }
 
-    
+    private function getConvertUnit($name)
+    {
+        if (self::getSuppPrice($name) == 8) {
+            return 757600;
+        }else{
+            return 735300;
+        }
+    }    
 }
 
