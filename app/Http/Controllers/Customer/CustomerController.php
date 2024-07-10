@@ -35,10 +35,16 @@ use App\Models\Represent;
                 if (empty($represent['phone'])) {
                     return returnMessageAjax(100, 'Bạn chưa nhập SĐT cho '.$represent['name'].' !');
                 }
+                if (empty($represent['email'])) {
+                    return returnMessageAjax(100, 'Bạn chưa nhập Email cho '.$represent['name'].' !');
+                }
                 if (empty($represent['id'])) {
                     $represent['customer'] = $cusomer_id;
                     $represent['act'] = 1;
                     $process = $this->admins->doInsertTable($table, $represent);
+                    if (@$process['code'] == 100) {
+                        return $process;
+                    }
                     logActionUserData('insert', $table, $process['id'], $represent);
                 }else{
                     $represent_id = $represent['id'];
