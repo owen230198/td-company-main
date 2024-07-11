@@ -174,7 +174,8 @@ class AdminController extends Controller
                 ['note' => 'Vật tư đề can nhung', 'table' => 'square_warehouses', 'type' => \TDConst::DECAL],
                 ['note' => 'Vật tư vải lụa', 'table' => 'square_warehouses', 'type' => \TDConst::SILK],
                 ['note' => 'Vật tư mica', 'table' => 'supply_warehouses', 'type' => \TDConst::MICA],
-                ['note' => 'Vật tư nam châm', 'table' => 'other_warehouses', 'type' => \TDConst::MAGNET]
+                ['note' => 'Vật tư nam châm', 'table' => 'other_warehouses', 'type' => \TDConst::MAGNET],
+                ['note' => 'Vật tư khác', 'table' => 'extend_warehouses']
             ];
             return view('warehouses.view', $data); 
         }else{

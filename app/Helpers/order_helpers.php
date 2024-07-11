@@ -226,10 +226,12 @@
                 return 'supply_warehouses';
             }elseif(in_array($type, [\TDConst::PAPER])){
                 return 'print_warehouses';
+            }elseif (in_array($type, [\TDConst::NILON, \TDConst::METALAI, \TDConst::COVER, \TDConst::DECAL, \TDConst::SILK])) {
+                return 'square_warehouses';
             }elseif (in_array($type, [\TDConst::MAGNET])) {
                 return 'other_warehouses';
             }else{
-                return 'square_warehouses';
+                return 'extend_warehouses';
             }
         }
     }

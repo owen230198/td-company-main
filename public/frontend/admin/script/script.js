@@ -513,8 +513,10 @@ var getUrlLinkingWarehouseSize = function (type) {
         wh_table = 'other_warehouses';
     } else if (['paper'].includes(type)) {
         wh_table = 'print_warehouses';
-    } else {
+    }else if (['nilon', 'metalai', 'cover', 'decal', 'silk'].includes(type)) {
         wh_table = 'square_warehouses';
+    } else {
+        wh_table = 'extend_warehouses';
     }
     return getBaseRoute('get-data-json-linking?except_linking=1&table=' + wh_table + '&field_search=name&type=' + type);
 }

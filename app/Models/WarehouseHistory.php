@@ -105,6 +105,11 @@ class WarehouseHistory extends Model
         if (!empty($ext_where['other_warehouses'])) {
             return $other;
         }
+
+        $other = self::getInventoryAggrenate('extend_warehouses', $where, $ext_where);
+        if (!empty($ext_where['extend_warehouses'])) {
+            return $other;
+        }
         return $print->union($square)->union($supply)->union($other);
 
     }

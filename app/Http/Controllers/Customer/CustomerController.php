@@ -29,7 +29,9 @@ use App\Models\Represent;
             $table = 'represents';
             foreach ($represents as $key => $represent) {
                 if (empty($represent['name'])) {
-                    return returnMessageAjax(100, 'Bạn chưa nhập tên người liên hệ !');
+                    $num = (int) $key + 1;
+                    $num = $num == 1 ? 'nhất' : $num;
+                    return returnMessageAjax(100, 'Bạn chưa nhập tên người liên hệ thứ '.$num.' !');
                 }
 
                 if (empty($represent['phone'])) {

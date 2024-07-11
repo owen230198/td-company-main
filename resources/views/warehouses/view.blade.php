@@ -3,7 +3,11 @@
 <div class="base_content_view">
     <div class="supply_list">
         @foreach ($supply_list as $supply)
-            <a href="{{ url('view/'.$supply['table'].'?default_data=%7B"type"%3A"'.$supply['type'].'","status":"imported"%7D') }}" class="device_supp_item">
+            @php
+                $param = !empty($supply['type']) ? '%7B"type"%3A"'.$supply['type'].'","status":"imported"%7D' : '%7B"status":"imported"%7D';
+                $url = 'view/'.$supply['table'].'?default_data='.$param;
+            @endphp
+            <a href="{{ url($url) }}" class="device_supp_item">
                 {{ @$supply['note'] }}
             </a>    
         @endforeach
