@@ -1,7 +1,7 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : owen
+ Source Server         : localhost
  Source Server Type    : MySQL
  Source Server Version : 80030
  Source Host           : localhost:3306
@@ -11,7 +11,7 @@
  Target Server Version : 80030
  File Encoding         : 65001
 
- Date: 29/06/2024 15:45:15
+ Date: 11/07/2024 22:23:32
 */
 
 SET NAMES utf8mb4;
@@ -22,31 +22,31 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `n_detail_tables`;
 CREATE TABLE `n_detail_tables`  (
-  `id` int(0) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `attr` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   `note` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `table_map` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `view` tinyint(0) NULL DEFAULT NULL,
-  `insert` tinyint(0) NULL DEFAULT NULL,
-  `update` tinyint(0) NULL DEFAULT NULL,
-  `search` tinyint(0) NULL DEFAULT NULL,
-  `get_other` tinyint(0) NULL DEFAULT NULL,
-  `history` tinyint(0) NULL DEFAULT NULL,
-  `parent` int(0) NULL DEFAULT NULL,
+  `view` tinyint NULL DEFAULT NULL,
+  `insert` tinyint NULL DEFAULT NULL,
+  `update` tinyint NULL DEFAULT NULL,
+  `search` tinyint NULL DEFAULT NULL,
+  `get_other` tinyint NULL DEFAULT NULL,
+  `history` tinyint NULL DEFAULT NULL,
+  `parent` int NULL DEFAULT NULL,
   `other_data` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
-  `region` int(0) NULL DEFAULT NULL,
-  `ord` int(0) NULL DEFAULT NULL,
-  `act` tinyint(0) NULL DEFAULT NULL,
-  `created_at` datetime(0) NULL DEFAULT NULL,
-  `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `region` int NULL DEFAULT NULL,
+  `ord` int NULL DEFAULT NULL,
+  `act` tinyint NULL DEFAULT NULL,
+  `created_at` datetime NULL DEFAULT NULL,
+  `updated_at` datetime NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `map_view`(`table_map`, `view`) USING BTREE,
-  INDEX `map_insert`(`table_map`, `insert`) USING BTREE,
-  INDEX `map_update`(`table_map`, `update`) USING BTREE,
-  INDEX `map_search`(`table_map`, `search`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 368 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+  INDEX `map_view`(`table_map` ASC, `view` ASC) USING BTREE,
+  INDEX `map_insert`(`table_map` ASC, `insert` ASC) USING BTREE,
+  INDEX `map_update`(`table_map` ASC, `update` ASC) USING BTREE,
+  INDEX `map_search`(`table_map` ASC, `search` ASC) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 370 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of n_detail_tables
@@ -134,7 +134,7 @@ INSERT INTO `n_detail_tables` VALUES (91, 'code', '{\"disable_field\":1,\"requir
 INSERT INTO `n_detail_tables` VALUES (92, 'size_type', '{\"required\":1,\"readonly\":1,\"inject_class\":\"__wh_select_size\"}', 'Tên vật tư', 'linking', 'c_supplies', 1, 0, 0, 0, NULL, 1, 148, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":{\r\n			\"getFunc\":\"getTableWarehouseByType\"\r\n		}\r\n	}\r\n}', 1, 1, 1, '2023-07-14 02:55:31', '2024-06-12 13:21:35');
 INSERT INTO `n_detail_tables` VALUES (93, 'qty', '{\"required\":1, \"type_input\":\"number\"}', 'SL cần xuất', 'text', 'c_supplies', 1, 1, 1, 0, NULL, 1, 0, '', 1, 1, 1, '2023-07-14 02:55:32', '2024-06-12 13:21:35');
 INSERT INTO `n_detail_tables` VALUES (94, 'order', '', 'Xuất cho đơn', 'linking', 'c_supplies', 1, 1, 1, 1, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"orders\"\r\n	}\r\n}', 1, 1, 0, '2023-07-14 02:56:31', '2024-06-12 13:21:35');
-INSERT INTO `n_detail_tables` VALUES (95, 'name', '', 'Sản phẩm', 'text', 'c_supplies', 1, 1, 1, 1, NULL, 1, 0, '', 1, 0, 1, '2023-07-14 03:16:25', '2024-06-12 13:21:35');
+INSERT INTO `n_detail_tables` VALUES (95, 'name', '', 'Vật tư', 'text', 'c_supplies', 1, 1, 1, 1, NULL, 1, 0, '', 1, 0, 0, '2023-07-14 03:16:25', '2024-07-03 22:26:01');
 INSERT INTO `n_detail_tables` VALUES (96, 'status', '', 'Trạng thái', 'select', 'c_supplies', 0, 0, 1, 0, NULL, 1, 0, '{\r\n		\"data\":{\r\n				\"options\":{\"\":\"Chưa gửi yêu cầu xuất\", \"handling\":\"Đang chờ xuất kho\", \"handled\":\"Đã xuất kho\"}\r\n		}\r\n}', 1, 1, 1, '2023-07-14 02:50:55', '2024-06-12 13:21:35');
 INSERT INTO `n_detail_tables` VALUES (97, 'created_by', '', 'Người tạo', 'linking', 'c_supplies', 1, 0, 0, 1, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', 1, 1, 1, '2023-07-14 03:11:41', '2024-06-12 13:21:35');
 INSERT INTO `n_detail_tables` VALUES (98, 'assign_by', '', 'Phụ trách', 'linking', 'c_supplies', 1, 0, 0, 1, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', 1, 1, 1, '2023-07-14 03:11:21', '2024-06-12 13:21:35');
@@ -392,5 +392,11 @@ INSERT INTO `n_detail_tables` VALUES (364, 'customer_name', '', 'Tên công ty',
 INSERT INTO `n_detail_tables` VALUES (365, 'customer_address', '', 'Địa chỉ', 'link_data', 'orders', 0, 0, 0, 1, NULL, 0, 0, '{\r\n	\"data\":{\r\n		\"table_get\":\"customers\",\r\n		\"field_get\":\"address\",\r\n		\"field_data\":\"customer\"\r\n	}\r\n}', 1, 2, 1, '2023-05-23 14:41:40', '2024-06-25 19:39:04');
 INSERT INTO `n_detail_tables` VALUES (366, 'represent_phone', '', 'SĐT', 'link_data', 'orders', 0, 0, 0, 1, NULL, 0, 0, '{\r\n	\"data\":{\r\n		\"table_get\":\"represents\",\r\n		\"field_get\":\"phone\",\r\n		\"field_data\":\"represent\"\r\n	}\r\n}', 1, 4, 1, '2023-05-23 14:41:40', '2024-06-25 19:39:04');
 INSERT INTO `n_detail_tables` VALUES (367, 'size', NULL, 'Kích thước khuôn', 'product_size', 'orders', 0, 0, 0, 1, NULL, 1, 0, '{\"data\":{\r\n		\"key_pluck\":\"order\"\r\n	}\r\n}', 1, 7, 1, '2023-04-30 11:17:52', '2024-06-25 19:52:13');
+INSERT INTO `n_detail_tables` VALUES (368, 'convert_unit', '{\"required\":1}', 'Hệ số quy đổi', 'text', 'square_warehouses', 1, 1, 0, 0, 0, 0, 0, '', 1, 1, 1, '2023-04-30 11:00:22', '2024-06-28 23:48:53');
+INSERT INTO `n_detail_tables` VALUES (369, 'unit', '{\"required\":1}', 'ĐVT', 'select', 'print_warehouses', 1, 1, 0, 0, NULL, 0, 0, '{\"data\":{\r\n		\"options\":{\"\":\"ĐVT\", \"sheet\":\"Tờ\", \"plate\":\"Tấm\", \"square\":\"Cm\", \"kg\":\"Kg\", \"hank\":\"Cuộn\"}\r\n	}\r\n}', 1, 5, 1, '2023-05-11 11:18:58', '2024-07-09 17:19:21');
+INSERT INTO `n_detail_tables` VALUES (370, 'name', '{\"required\":1}', 'Tên loại vật tư', 'text', 'supply_extends', 1, 1, 1, 1, NULL, 1, 0, '', 1, 0, 1, '2023-04-07 23:41:47', '2024-07-11 22:15:22');
+INSERT INTO `n_detail_tables` VALUES (371, 'note', '', 'Ghi chú', 'textarea', 'supply_extends', 0, 1, 1, 0, NULL, 1, 0, '', 1, 4, 1, '2023-04-08 00:05:12', '2024-07-11 22:15:22');
+INSERT INTO `n_detail_tables` VALUES (372, 'created_by', '', 'Người thêm', 'linking', 'supply_extends', 1, 0, 0, 1, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', 1, 7, 1, '2023-04-08 00:08:00', '2024-07-11 22:15:22');
+INSERT INTO `n_detail_tables` VALUES (373, 'created_at', '', 'Ngày tạo', 'datetime', 'supply_extends', 1, 0, 0, 1, NULL, 1, 0, '', 1, 8, 1, '2023-04-08 00:08:00', '2024-07-11 22:15:22');
 
 SET FOREIGN_KEY_CHECKS = 1;

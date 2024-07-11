@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Models;
+
+use App\Services\WarehouseService;
 use Illuminate\Database\Eloquent\Model;
 
 class PrintWarehouse extends Model
@@ -27,17 +29,7 @@ class PrintWarehouse extends Model
 
     static function getRole()
     {
-        $role = [
-            \GroupUser::WAREHOUSE => [
-                'view' => 1,
-            ],
-            \GroupUser::PLAN_HANDLE => [
-                'view' => 1
-            ],
-            \GroupUser::ACCOUNTING => [
-                'view' => 1,
-            ]
-        ];
+        $role = WarehouseService::ROLE;
         return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];
     } 
     

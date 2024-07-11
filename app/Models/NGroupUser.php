@@ -71,6 +71,11 @@ class NGroupUser extends Model
             'link' => 'view/product_categories',
             'group' => 'quote_price_config'
         ],
+        'supply_extend' => [
+            'name' => 'Các loại vật tư khác',
+            'link' => 'view/supply_extends',
+            'group' => 'quote_price_config'
+        ],
         'quote_config' => [
             'name' => 'Các thông số khác',
             'link' => 'view/quote_configs',
