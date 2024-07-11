@@ -59,7 +59,7 @@
                 $data_warehouse = $param['warehouse'];
                 $data_warehouse['qty'] = $data_log['qty'];
                 $model = getModelByTable($this->table);
-                $name = $model::getName($data_warehouse);
+                $name = @$data_warehouse['name'] ?? $model::getName($data_warehouse);
                 $data_warehouse['name'] = $name;
                 $this->configBaseDataAction($data_warehouse);
                 $insert_id = $model::insertGetId($data_warehouse);
