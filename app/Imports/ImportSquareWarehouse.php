@@ -29,9 +29,9 @@ class ImportSquareWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows
     private function getDataImport($type, $width, $row)
     {
         $ret =[
-            'name' => '',
+            'name' => $row['ten_hang'],
             'width' => $width,
-            'qty' => $this->getQtyByType($row['ten_hang'], $row['so_luong_kiem_thuc'], $width),
+            'qty' => (int) $this->getQtyByType($row['ten_hang'], $row['so_luong_kiem_thuc'], $width),
             'convert_unit' => $this->getConvertUnit($type),
             'type' => $type,
             'supp_price' => self::getSuppPrice($row['ten_hang']),
@@ -72,8 +72,10 @@ class ImportSquareWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows
     {
         if (self::getSuppPrice($name) == 8) {
             return 757600;
-        }else{
+        }elseif (self::getSuppPrice($name) == 9) {
             return 735300;
+        }else{
+            return 400000;  
         }
     }    
 }

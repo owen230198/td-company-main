@@ -27,7 +27,7 @@ class ImportSupplyWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows
     private function getDataImport($type, $row)
     {
         $ret =[
-            'name' => '',
+            'name' => $row['ten_hang'],
             'length' => getSizeByCodeMisa($row['ma_hang'], 'length'),
             'width' => getSizeByCodeMisa($row['ma_hang'], 'width'),
             'qty' => $row['so_luong_kiem_thuc'],
