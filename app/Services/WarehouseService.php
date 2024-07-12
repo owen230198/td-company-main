@@ -16,8 +16,8 @@
         const ROLE = [
             \GroupUser::WAREHOUSE => [
                 'view' => 1,
-                'insert' => 1,
-                'update' => 1,
+                // 'insert' => 1,
+                // 'update' => 1,
             ],
             \GroupUser::PLAN_HANDLE => [
                 'view' => 1
@@ -31,15 +31,15 @@
             if (empty($data['qty'])) {
                 return returnMessageAjax(100, 'Vui lòng nhập số lượng mua thêm !');
             }
-            // if (empty($data['provider'])) {
-            //     return returnMessageAjax(100, 'Vui lòng chọn nhà cung cấp vật tư !');
-            // }
-            // if (empty($data['price'])) {
-            //     return returnMessageAjax(100, 'Vui lòng nhập giá mua vật tư !');
-            // }
-            // if (empty($data['bill'])) {
-            //     return returnMessageAjax(100, 'Vui lòng upload file hóa đơn mua vật tư !');
-            // }
+            if (empty($data['provider'])) {
+                return returnMessageAjax(100, 'Vui lòng chọn nhà cung cấp vật tư !');
+            }
+            if (empty($data['price'])) {
+                return returnMessageAjax(100, 'Vui lòng nhập giá mua vật tư !');
+            }
+            if (empty($data['bill'])) {
+                return returnMessageAjax(100, 'Vui lòng upload file hóa đơn mua vật tư !');
+            }
         }
 
         private function getDataLogAction(&$data_log)
