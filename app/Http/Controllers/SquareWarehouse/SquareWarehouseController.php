@@ -21,7 +21,7 @@ class SquareWarehouseController extends Controller
         if (empty($data['supp_price'])) {
             return returnMessageAjax(100, 'Vui lòng chọn loại vật tư !');
         }
-        $count = SquareWarehouse::where(['supp_price' => $data['supp_price'], 'width' => $data['width']])->count();
+        $count = SquareWarehouse::where(['name' => $data['name'], 'supp_price' => $data['supp_price'], 'width' => $data['width']])->count();
         if ($count > 0) {
             return returnMessageAjax(100, 'Vật tư '.getFieldDataById('name', 'materals', $data['supp_price']).' Khổ '.$data['width'].' Đã có trong kho !');
         }
