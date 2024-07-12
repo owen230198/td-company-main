@@ -249,7 +249,7 @@ class DevController extends Controller
     }
 
     public function warehouseTableName(){
-        $tables = ['print_warehouses', 'supply_warehouses', 'square_warehouses', 'other_warehouses'];
+        $tables = ['print_warehouses'];
         foreach ($tables as $table) {
             $model = getModelByTable($table);
             $list = $model::all()->toArray();
@@ -434,7 +434,7 @@ class DevController extends Controller
     }
     
     public function warehouseLogCreate(){
-        $tables = ['print_warehouses', 'supply_warehouses', 'square_warehouses', 'other_warehouses'];
+        $tables = ['print_warehouses', 'supply_warehouses', 'square_warehouses', 'other_warehouses', 'extend_warehouses'];
         foreach ($tables as $table) {
             $model = getModelByTable($table);
             $list = $model::all();
@@ -445,7 +445,7 @@ class DevController extends Controller
                 $data_log['created_by'] = $item['created_by'];
                 $data_log['created_at'] = $item['created_at'];
                 $data_log['unit'] = getUnitSupply($item['type'], $item);
-                $data_log['name'] = $model::getName($item);
+                $data_log['name'] = $item['name'];
                 $data_log['target'] = $item['id'];
                 $data_log['ex_inventory'] = 0;
                 $data_log['imported'] = $item['qty'];

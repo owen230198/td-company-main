@@ -17,6 +17,7 @@
             \GroupUser::WAREHOUSE => [
                 'view' => 1,
                 'insert' => 1,
+                'update' => 1,
             ],
             \GroupUser::PLAN_HANDLE => [
                 'view' => 1
@@ -81,7 +82,9 @@
                 $data = (new AdminService)->getDataActionView($this->table, __FUNCTION__, 'Thêm mới', $param);
                 $data['action_url'] = url('insert/'.$this->table);
                 $data['field_logs'] = WarehouseHistory::FIELD_INSERT;
-                $data['type_supp'] = $param['type'];
+                if (!empty($param['type'])) {
+                    $data['type_supp'] = $param['type'];
+                }
                 return view('warehouses.actions.view', $data);
             }
         }
@@ -121,7 +124,9 @@
                 $data['title'] = !empty($dataItem['name']) ? 'Chi tiết '.@$dataItem['name'] : @$data['title'];
                 $data['action_url'] = url('update/'.$this->table.'/'.$id);
                 $data['field_logs'] = WarehouseHistory::FIELD_UPDATE;
-                $data['type_supp'] = $param['type'];
+                if (!empty($param['type'])) {
+                    $data['type_supp'] = $param['type'];
+                }
                 $data['dataItem'] = $dataItem;
                 $data['data_item_log'] = WarehouseHistory::where(['table' => $this->table, 'target' => $id])->orderBy('created_at', 'desc')->paginate(20);
                 return view('warehouses.actions.view', $data);

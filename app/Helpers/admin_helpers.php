@@ -248,7 +248,7 @@ if (!function_exists('logActionUserData')) {
         if (!in_array($action, ['insert', 'remove']) && !empty($data_item)) {
             foreach ($data_target as $key => $value) {
                 $old_value = @$data_item->{$key};
-                if (!in_array($key, ['updated_at', 'created_at']) && $value != $old_value) {
+                if (!in_array($key, ['id', 'updated_at', 'created_at']) && $value != $old_value) {
                     $detail_data[$key] = ['old' => $old_value, 'new' => $value];
                 }    
             }

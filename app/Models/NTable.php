@@ -22,7 +22,8 @@ class NTable extends Model
                             'print_warehouses', 
                             'square_warehouses', 
                             'supply_warehouses', 
-                            'other_warehouses', 
+                            'other_warehouses',
+                            'extend_warehouses', 
                             'supply_buyings',
                             'c_expertises'
                         ],
@@ -35,7 +36,8 @@ class NTable extends Model
                             'print_warehouses', 
                             'square_warehouses', 
                             'supply_warehouses', 
-                            'other_warehouses', 
+                            'other_warehouses',
+                            'extend_warehouses', 
                             'supply_buyings',
                             'c_expertises'
                         ],
@@ -46,7 +48,8 @@ class NTable extends Model
                             'print_warehouses', 
                             'square_warehouses', 
                             'supply_warehouses', 
-                            'other_warehouses', 
+                            'other_warehouses',
+                            'extend_warehouses', 
                             'supply_buyings',
                             'c_expertises'
                         ],
@@ -60,12 +63,14 @@ class NTable extends Model
                             'square_warehouses', 
                             'supply_warehouses', 
                             'other_warehouses',
+                            'extend_warehouses',
                             'c_expertises'
                         ],
                         'import' => [
                             'print_warehouses',
                             'supply_warehouses',
                             'square_warehouses',
+                            'extend_warehouses',
                         ]
                     ];
 }

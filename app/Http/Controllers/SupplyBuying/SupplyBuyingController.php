@@ -250,7 +250,8 @@ class SupplyBuyingController extends Controller
                                 "decal":"Nhung",
                                 "silk":"Vải lụa",
                                 "mica":"Mi ca",
-                                "magnet":"Nam châm"
+                                "magnet":"Nam châm",
+                                "other":"Vật tư khác"
                             }
                         }
                     }'
@@ -271,7 +272,9 @@ class SupplyBuyingController extends Controller
         $where = [['status', '=', SupplyWarehouse::IMPORTED]];
         $where_table = [];
         if (!empty($request->input('type'))) {
-            $where[] = ['type', '=', $request->input('type')];
+            if ($request->input('type') != 'other') {
+                $where[] = ['type', '=', $request->input('type')];
+            }
             $table = tableWarehouseByType($request->input('type'));
             $names = $request->except(['is_ajax', 'created_at', 'type']);
             foreach ($names as $key => $value) {

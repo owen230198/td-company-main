@@ -62,7 +62,7 @@ class AdminService extends BaseService
         $data['field_list'] = $this->getFieldAction($table, $action);
         $data['action_name'] = $action_name;
         $data['default_field'] = $param;
-        $data['regions'] = $this->regions->getRegionOfTable($table);
+        $data['regions'] = $this->regions->getRegionOfTable($table, $action);
         return $data;
     }
 

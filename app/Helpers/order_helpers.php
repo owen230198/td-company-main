@@ -281,8 +281,67 @@
                 case 'kg':
                     return 'Kg';
                     break;
+                case 'hank':
+                    return 'Cuộn';
+                    break;
+                case 'duo':
+                    return 'Đôi';
+                    break;
+                case 'bag':
+                    return 'Tải';
+                    break;
+                case 'bottle':
+                    return 'Hộp';
+                    break;
+                case 'box':
+                    return 'Thùng';
+                    break;
+                case 'tree':
+                    return 'Cây';
+                    break;
                 default:
                     return 'Cm';
+                    break;
+            }    
+        }
+    }
+
+    if (!function_exists('getKeyUnitKeyWarehouse')) {
+        function getKeyUnitKeyWarehouse($unit) {
+            $unit = strtolower(trim($unit));
+            switch ($unit) {
+                case 'tấm':
+                    return 'plate';
+                    break;
+                case 'tờ':
+                    return 'sheet';
+                    break;
+                case 'cái':
+                    return 'unit';
+                    break;
+                case 'kg':
+                    return 'kg';
+                    break;
+                case 'cuộn':
+                    return 'hank';
+                    break;
+                case 'Đôi':
+                    return 'duo';
+                    break;
+                case 'tải':
+                    return 'bag';
+                    break;
+                case 'hộp':
+                    return 'bottle';
+                    break;
+                case 'thùng':
+                    return 'box';
+                    break;
+                case 'cây':
+                    return 'tree';
+                    break;
+                default:
+                    return 'cm';
                     break;
             }    
         }

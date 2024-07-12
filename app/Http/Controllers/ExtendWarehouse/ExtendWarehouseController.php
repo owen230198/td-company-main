@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\OtherWarehouse;
+namespace App\Http\Controllers\ExtendWarehouse;
 
 use App\Http\Controllers\Controller;
-use App\Models\OtherWarehouse;
+use App\Models\ExtendWarehouse;
 
-class OtherWarehouseController extends Controller
+class ExtendWarehouseController extends Controller
 {
     function __construct()
     {
         parent::__construct();
-        $this->services = new \App\Services\WarehouseService('other_warehouses');
+        $this->services = new \App\Services\WarehouseService('extend_warehouses');
     }
     public function insert($request)
     {
@@ -25,7 +25,10 @@ class OtherWarehouseController extends Controller
             if (empty($data['name'])) {
                 return returnMessageAjax(100, 'Vui lòng nhập tên vật tư !');
             }
-            if (OtherWarehouse::where($data)->count() > 0) {
+            if (empty($data['unit'])) {
+                return returnMessageAjax(100, 'Vui lòng nhập đơn vị tính của vật tư !');
+            }
+            if (ExtendWarehouse::where($data)->count() > 0) {
                 return returnMessageAjax(100, 'Vật tư '.$data['name'].' đã có trong kho !');
             }
             return $this->services->insert($param, 1);
@@ -38,8 +41,11 @@ class OtherWarehouseController extends Controller
         if (!$request->isMethod('POST')) {
             return $this->services->update($param, $id);
         }else{
-            $data = @$param['warehouse'] ?? [];
             return $this->services->update($param, $id, 1);
         }
+    }
+
+    public function import($file){
+        return $this->services->import($file);
     }
 }

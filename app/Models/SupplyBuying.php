@@ -34,7 +34,8 @@ class SupplyBuying extends Model
                         "decal" => "Nhung",
                         "silk" => "Vải lụa",
                         "mica" => "Mi ca",
-                        "magnet" => "Nam châm"
+                        "magnet" => "Nam châm",
+                        "other" => "Vật tư khác"
                     ]
                 ]
             ]

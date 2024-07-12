@@ -34,8 +34,8 @@
                                             $field['value'] = $data->{$field['name']};
                                             $field['history_view'] = true;
                                         @endphp
-                                        <div class="mb-1 d-flex align-item-center">
-                                            <label class="mr-1">{{ $field['note'] }}: </label>
+                                        <div class="mb-1 d-flex align-items-center">
+                                            <label class="mr-2 mb-0 font_bold">- {{ $field['note'] }}: </label>
                                             @include('view_table.'.$field['type'], $field)
                                         </div>
                                     @endforeach

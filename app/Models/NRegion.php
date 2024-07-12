@@ -14,12 +14,12 @@ class NRegion extends Model
     protected $table = 'n_regions';
     protected $protectFields = false;
 
-    public function getRegionOfTable($table)
+    public function getRegionOfTable($table, $action = 'update')
     {
         $data = $this->select('n_regions.id', 'n_regions.name')->join('n_detail_tables', 'n_regions.id', '=', 'n_detail_tables.region')
         ->where('n_detail_tables.table_map', $table)
         ->where('n_detail_tables.act', 1)
-        ->where('n_detail_tables.update', 1)
+        ->where('n_detail_tables.'.$action, 1)
         ->groupBy('n_regions.id')
         ->get()->toArray();
         return $data;
