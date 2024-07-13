@@ -74,7 +74,7 @@ class ImportSquareWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows
             return 757600;
         }elseif (self::getSuppPrice($name) == 9) {
             return 735300;
-        }else{
+        }elseif (self::getSuppPrice($name) == 36){
             return 400000;  
         }
     }    

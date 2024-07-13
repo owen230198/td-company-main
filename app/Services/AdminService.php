@@ -47,10 +47,10 @@ class AdminService extends BaseService
         return $data;
     }
 
-    public function getFieldAction($table, $action = 'view')
+    public function getFieldAction($table, $action = 'view', $where = [])
     {
         $list = NDetailTable::where(['act' => 1, 'table_map'=> $table, $action => 1])->orderBy('ord', 'asc')->get()->toArray();
-        NDetailTable::handleField($list, $action);
+        NDetailTable::handleField($list, $action, $where);
         return $list;
     }
 
@@ -66,17 +66,17 @@ class AdminService extends BaseService
         return $data;
     }
 
-    public function getBaseTable($table)
+    public function getBaseTable($table, $where = [])
     {
-        $data = $this->getFieldAction($table);
+        $data = $this->getFieldAction($table, 'view', $where);
     	$data['tableItem'] = $this->getTableItem($table);
         $data['parent_url'] = !empty($data['tableItem']['parent']) ? json_decode($data['tableItem']['parent'], true) : [];
         return $data;
     }
 
-    public function getDataBaseView($table, $name='')
+    public function getDataBaseView($table, $name='', $where = [])
     {
-        $data = $this->getBaseTable($table);
+        $data = $this->getBaseTable($table, $where);
         if (!empty($data['tableItem'])) {
             $data['page_item'] = @$data['tableItem']['admin_paginate'] ?? 10;
             $data['view_type'] = @$data['tableItem']['view_type'] ?? 'view';
