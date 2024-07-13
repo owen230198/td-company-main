@@ -17,21 +17,26 @@ class NDetailTable extends Model
     static function handleField(&$data, $action, $where = [])
     {
         $rowspan = 1;
-        foreach ($data as $key => $field) {
+        $fields = [];
+        foreach ($data as $field) {
             if($field['parent'] == 0 && $field['type'] == 'group'){
                 $rowspan = 2;
-                $data[$key]['child'] = NDetailTable::where(['act' => 1, 'parent' => $field['id']])->orderBy('ord', 'asc')->get()->toArray();
-                $data[$key]['colspan'] = !empty($data[$key]['child']) ? count($data[$key]['child']) : 1;
+                $childs = NDetailTable::where(['act' => 1, 'parent' => $field['id']])->orderBy('ord', 'asc')->get()->toArray();
+                $field['child'] = $childs;
+                $field['colspan'] = !empty($childs) ? count($childs) : 1;
             }
             $conditions = !empty($field['condition']) ? json_decode($field['condition'], true) : [];
             if (!empty($where) && !empty($conditions)) {
                 foreach ($conditions as $condition) {
-                    if (!in_array($condition, $where)) {
-                        unset($data[$key]);
+                    if (in_array($condition, $where)) {
+                        $fields[] = $field;
+                        break;
                     }
                 }
+            }else{
+                $fields[] = $field;    
             }
         }
-        $data = $action == 'view' ? ['rowspan' => $rowspan, 'field_shows' => $data] : $data;
+        $data = $action == 'view' ? ['rowspan' => $rowspan, 'field_shows' => $fields] : $fields;
     }
 }

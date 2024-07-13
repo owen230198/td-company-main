@@ -3,15 +3,15 @@
 
  Source Server         : localhost
  Source Server Type    : MySQL
- Source Server Version : 80030
+ Source Server Version : 80030 (8.0.30)
  Source Host           : localhost:3306
  Source Schema         : td_company
 
  Target Server Type    : MySQL
- Target Server Version : 80030
+ Target Server Version : 80030 (8.0.30)
  File Encoding         : 65001
 
- Date: 13/07/2024 18:44:50
+ Date: 14/07/2024 00:02:44
 */
 
 SET NAMES utf8mb4;
@@ -47,7 +47,7 @@ CREATE TABLE `n_detail_tables`  (
   INDEX `map_insert`(`table_map` ASC, `insert` ASC) USING BTREE,
   INDEX `map_update`(`table_map` ASC, `update` ASC) USING BTREE,
   INDEX `map_search`(`table_map` ASC, `search` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 380 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 382 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of n_detail_tables
@@ -406,6 +406,6 @@ INSERT INTO `n_detail_tables` VALUES (377, 'unit', '{\"required\":1}', 'ĐVT', '
 INSERT INTO `n_detail_tables` VALUES (378, 'created_by', NULL, 'Người thêm', 'linking', 'extend_warehouses', 0, 1, 0, 0, 0, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', NULL, 1, 1, '2023-04-08 00:08:00', '2024-07-12 22:29:10');
 INSERT INTO `n_detail_tables` VALUES (379, 'created_at', NULL, 'Ngày thêm', 'datetime', 'extend_warehouses', 0, 1, 0, 0, 0, NULL, 1, 0, '', NULL, 1, 1, '2023-04-08 00:08:00', '2024-07-12 22:29:10');
 INSERT INTO `n_detail_tables` VALUES (380, 'convert_unit', '{\"required\":1}', 'Hệ số quy đổi', 'text', 'square_warehouses', 3, 1, 1, 0, 0, 0, 0, 0, '', NULL, 1, 1, '2023-04-30 11:00:22', '2024-07-11 22:38:44');
-INSERT INTO `n_detail_tables` VALUES (381, 'factor', '{\"required\":1,\"type_input\":\"number\"}', 'Hệ số đổi', 'text', 'materals', 2, 1, 1, 1, 0, NULL, 1, 0, '', '{\r\n	\"condition\":[\r\n		{\"key\":\"type\", \"value\":\"nilon\"},\r\n		{\"key\":\"type\", \"value\":\"metalai\"}\r\n	]\r\n}', 1, 0, '2023-04-28 11:32:02', '2024-07-13 18:27:30');
+INSERT INTO `n_detail_tables` VALUES (381, 'factor', '{\"required\":1,\"type_input\":\"number\"}', 'Hệ số đổi', 'text', 'materals', 2, 1, 1, 1, 0, NULL, 1, 0, '', '[\r\n	{\"key\":\"type\", \"value\":\"nilon\"},\r\n	{\"key\":\"type\", \"value\":\"metalai\"}\r\n]', 1, 1, '2023-04-28 11:32:02', '2024-07-13 23:57:33');
 
 SET FOREIGN_KEY_CHECKS = 1;

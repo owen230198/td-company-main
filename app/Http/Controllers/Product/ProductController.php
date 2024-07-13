@@ -419,6 +419,7 @@ use App\Models\Order;
             }
             $table = 'papers';
             $data = $this->admins->getDataBaseView($table, 'Danh sách');
+            $this->admins->handleFieldView($data, $table);
             $data['title'] = 'Danh sách lệnh in đã bình';
             $data['data_tables'] = Paper::where(['is_join' => 1, 'parent' => 0, 'status' => Order::TECH_SUBMITED])->paginate(10);
             return view('orders.commands.join_prints.table', $data);

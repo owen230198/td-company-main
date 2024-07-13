@@ -90,6 +90,7 @@ class AdminController extends Controller
         }else{
             $this->handleViewWhereVariable($request, $table,  $role, $data);
         }
+        $this->admins->handleFieldView($data, $table, self::$view_where);
         $data['data_tables'] = getDataTable($table, self::$view_where, ['paginate' => $data['page_item'], 'order' => $order, 'order_by' => $order_by]);
         if (!empty($request->input('get_table_view_ajax'))) {
             return view('table.'.$request->input('get_table_view_ajax'), $data);
@@ -228,7 +229,8 @@ class AdminController extends Controller
         }else{
             $param = $request->except('_token');
             if ($request->isMethod('GET')) {
-                $data = $this->admins->getDataActionView($table, __FUNCTION__, 'Thêm mới', $param);
+                $this->injectViewWhereParam($table, $param);
+                $data = $this->admins->getDataActionView($table, __FUNCTION__, 'Thêm mới', $param, self::$view_where);
                 $data['action_url'] = url('insert/'.$table);
                 return view('action.view', $data);
             }else{
@@ -262,7 +264,8 @@ class AdminController extends Controller
         }else{
             $param = $request->except('_token');
             if ($request->isMethod('GET')) {
-                $data = $this->admins->getDataActionView($table, 'update', 'Chi tiết', $param);
+                $this->injectViewWhereParam($table, $param);
+                $data = $this->admins->getDataActionView($table, 'update', 'Chi tiết', $param, self::$view_where);
                 $data['dataItem'] = $dataItem;
                 $data['title'] = !empty($dataItem['name']) ? 'Chi tiết '.@$dataItem['name'] : @$data['title'];
                 $data['action_url'] = url('update/'.$table.'/'.$id);

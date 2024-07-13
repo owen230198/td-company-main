@@ -19,8 +19,12 @@
                     @if (!empty($element['data']))
                         @php
                             $admins = new \App\Services\AdminService;
-                            $table_arr = $admins->getBaseTable($element['table']);
+                            $element_table = $element['table'];
+                            $table_arr = $admins->getBaseTable($element_table);
                             $table_arr['data_tables'] = $element['data'];
+                            $arr_field = $admins->getFieldAction($element_table);
+                            $table_arr['rowspan'] = $arr_field['rowspan'];
+                            $table_arr['field_shows'] = $arr_field['field_shows'];
                         @endphp
                         <div class="tab-pane fade{{ $key == 0 ? ' show active' : '' }} tab_pane_quote_pro" id="element-{{ $element['key'] }}" role="tabpanel" aria-labelledby="element-{{ $element['key'] }}-tab">
                             <div class="text-center mb-3">

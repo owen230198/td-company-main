@@ -54,29 +54,28 @@ class AdminService extends BaseService
         return $list;
     }
 
-    public function getDataActionView($table, $action, $action_name, $param = [])
+    public function getDataActionView($table, $action, $action_name, $param = [], $where = [])
     {
         $data['tableItem'] = $this->getTableItem($table);
         $data['title'] = $action_name.' '.$data['tableItem']['note'];
         $data['parent_url'] = ['link' => getBackUrl(), 'note' => $data['tableItem']['note']];
-        $data['field_list'] = $this->getFieldAction($table, $action);
+        $data['field_list'] = $this->getFieldAction($table, $action, $where);
         $data['action_name'] = $action_name;
         $data['default_field'] = $param;
         $data['regions'] = $this->regions->getRegionOfTable($table, $action);
         return $data;
     }
 
-    public function getBaseTable($table, $where = [])
+    public function getBaseTable($table)
     {
-        $data = $this->getFieldAction($table, 'view', $where);
     	$data['tableItem'] = $this->getTableItem($table);
         $data['parent_url'] = !empty($data['tableItem']['parent']) ? json_decode($data['tableItem']['parent'], true) : [];
         return $data;
     }
 
-    public function getDataBaseView($table, $name='', $where = [])
+    public function getDataBaseView($table, $name='')
     {
-        $data = $this->getBaseTable($table, $where);
+        $data = $this->getBaseTable($table);
         if (!empty($data['tableItem'])) {
             $data['page_item'] = @$data['tableItem']['admin_paginate'] ?? 10;
             $data['view_type'] = @$data['tableItem']['view_type'] ?? 'view';
@@ -84,11 +83,16 @@ class AdminService extends BaseService
             $data['title'] = $name.' '.$data['tableItem']['note'];
             if ($data['view_type']=='config') {
                 $data['regions'] = $this->regions->getRegionOfConfig($table);
-            }else{
-                $data['field_searchs'] = $this->getFieldAction($table, 'search');
             }
             return $data;
         }
+    }
+
+    public function handleFieldView(&$data, $table, $where = [])
+    {
+        $data_field = $this->getFieldAction($table, 'view', $where);
+        $data = $data + $data_field;
+        $data['field_searchs'] = $this->getFieldAction($table, 'search', $where);
     }
 
     public function getConditionTable($table, $field_name, $value)
