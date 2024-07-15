@@ -17,24 +17,27 @@ class ImportSquareWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows
 
     public function model(array $row)
     {
-        $type = $this->getSuppPrice($row['ten_hang'], true);
-        if ($row['so_luong_kiem_thuc'] <= 0 || empty ($row['ma_hang'])) {
+        if ($row['so_luong'] <= 0) {
             return null;
         }
-        $width = $this->getWidthByName($row['ten_hang']);
-        $data = $this->getDataImport($type, $width, $row);
+        $data = $this->getDataImport($row, self::$type);
         return new SquareWarehouse($data);
     }
 
-    private function getDataImport($type, $width, $row)
+    private function getDataImport($row, $type)
     {
+        $name = $row['ten_vat_tu'];
+        $membrane = getDataByWhere('materals', [['type', '=', $type], ['name', 'like', '%'.$name.'%']]);
+        $weight = $row['so_luong'];
+        $width = $row['kho_mang'];
         $ret =[
-            'name' => $row['ten_hang'],
+            'device' => getIdByFeildValue('SupplyName', [['type', '=', $type], ['name', 'like', '%'.$row['loai_mang'].'%']]),
+            'name' => $membrane->name,
             'width' => $width,
-            'qty' => (int) $this->getQtyByType($row['ten_hang'], $row['so_luong_kiem_thuc'], $width),
-            'convert_unit' => $this->getConvertUnit($type),
+            'qty' => $this->getQtyByType($membrane->factor, $weight, $width),
+            'weight' => $weight,
             'type' => $type,
-            'supp_price' => self::getSuppPrice($row['ten_hang']),
+            'supp_price' => $membrane->id,
             'status' => 'imported',
             'note' => 'Nhập từ Misa',
             'act' => 1,
@@ -45,38 +48,9 @@ class ImportSquareWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows
         return $ret;
     }
 
-    static function getSuppPrice($name, $get_type = false)
+    private function getQtyByType($factor, $qty, $width)
     {
-        if (stripos($name, 'Màng bóng') !== false) {
-            return $get_type ? 'nilon' : 8;
-        }elseif (stripos($name, 'Màng mờ') !== false){
-            return $get_type ? 'nilon' : 9;
-        }elseif(stripos($name, 'Màng metalai') !== false){
-            return $get_type ? 'metalai' : 36;
-        }
-    }
-
-    private function getWidthByName($name)
-    {
-        $arr_width = preg_split('/khổ/i', $name);
-        return $arr_width[1];
-    }
-
-    private function getQtyByType($name, $qty, $width)
-    {
-        $factor = $this->getConvertUnit($name);
-        return ($factor * $qty)/$width;
-    }
-
-    private function getConvertUnit($name)
-    {
-        if (self::getSuppPrice($name) == 8) {
-            return 757600;
-        }elseif (self::getSuppPrice($name) == 9) {
-            return 735300;
-        }elseif (self::getSuppPrice($name) == 36){
-            return 400000;  
-        }
-    }    
+        return (int)(($factor * $qty)/$width);
+    } 
 }
 

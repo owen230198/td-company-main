@@ -11,7 +11,7 @@
  Target Server Version : 80030
  File Encoding         : 65001
 
- Date: 14/07/2024 22:40:37
+ Date: 15/07/2024 17:35:29
 */
 
 SET NAMES utf8mb4;
@@ -48,7 +48,9 @@ INSERT INTO `supply_names` VALUES (52, 'CARTON ĐÁY', 'carton', 2, 'chỉ là t
 INSERT INTO `supply_names` VALUES (53, 'CARTON GHÉP NẮP + ĐÁY', 'carton', 4, 'chỉ là tên vật tư cho lệnh sản xuất', 1, NULL, '2023-07-20 10:21:00', '2023-09-15 04:25:31', 1);
 INSERT INTO `supply_names` VALUES (54, 'CARTON KHAY ĐỊNH HÌNH', 'carton', 2, 'chỉ là tên vật tư cho lệnh sản xuất', 1, NULL, '2023-07-20 10:21:00', '2023-09-15 04:25:10', 1);
 INSERT INTO `supply_names` VALUES (55, 'SÓNG E 3 lớp', 'carton', 2, 'chỉ là tên vật tư cho lệnh sản xuất', 1, NULL, '2023-10-06 08:09:30', '2023-10-06 08:09:30', 1);
-INSERT INTO `supply_names` VALUES (56, 'Màng nhiệt', 'nilon', 1, 'chỉ là tên vật tư cho lệnh sản xuất', 1, NULL, '2023-10-06 08:09:30', '2024-07-14 22:34:44', 1);
-INSERT INTO `supply_names` VALUES (57, 'Màng nước', 'nilon', 1, 'chỉ là tên vật tư cho lệnh sản xuất', 1, NULL, '2023-10-06 08:09:30', '2023-10-06 08:09:30', 1);
+INSERT INTO `supply_names` VALUES (56, 'Màng nhiệt', 'nilon', 1, 'chỉ là tên vật tư cho lệnh sản xuất', 1, NULL, '2023-10-06 08:09:30', '2024-07-15 17:34:28', 10);
+INSERT INTO `supply_names` VALUES (57, 'Màng nước', 'nilon', 1, '', 1, NULL, '2023-10-06 08:09:30', '2024-07-15 17:34:29', 10);
+INSERT INTO `supply_names` VALUES (58, 'Màng nhiệt', 'metalai', 1, '', 1, NULL, '2023-10-06 08:09:30', '2024-07-15 17:34:30', 10);
+INSERT INTO `supply_names` VALUES (59, 'Màng nước', 'metalai', 1, '', 1, NULL, '2023-10-06 08:09:30', '2024-07-15 17:34:33', 10);
 
 SET FOREIGN_KEY_CHECKS = 1;

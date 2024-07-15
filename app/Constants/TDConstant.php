@@ -288,9 +288,11 @@
                 ['key' => self::PAPER, 'name' => 'Tên phụ giấy in', 'table' => 'paper_extends'],
                 ['key' => self::PAPER, 'name' => 'Chất liệu giấy', 'table' => 'materals'],
                 ['key' => self::NILON, 'name' => 'Chất liệu cán nilon', 'table' => 'materals'],
+                ['key' => self::NILON, 'name' => 'Loại màng nilon', 'table' => 'supply_names'],   
                 ['key' => self::METALAI, 'name' => 'Chất liệu cán metalai', 'table' => 'materals'],
+                ['key' => self::METALAI, 'name' => 'Loại màng metalai', 'table' => 'supply_names'],
                 ['key' => self::COVER, 'name' => 'Chất liệu cán phủ trên', 'table' => 'materals'],
-                ['key' => self::UV, 'name' => 'Mực in UV', 'table' => 'materals']
+                ['key' => self::UV, 'name' => 'Mực in UV', 'table' => 'materals'],
             ],
             self::CARTON => [
                 ['key' => self::CARTON, 'name' => 'Loại vật tư carton', 'table' => 'supply_types', 'is_name' => 0],

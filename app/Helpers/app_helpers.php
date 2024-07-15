@@ -301,6 +301,14 @@ if (!function_exists('getFieldDataByWhere')) {
     }
 }
 
+if (!function_exists('getDataByWhere')) {
+    function getDataByWhere($table, $where)
+    {
+        $obj = \DB::table($table)->where($where)->first();
+        return @$obj;
+    }
+}
+
 if (!function_exists('limitStr')) {
     function limitStr($str, $limit, $offset = 0)
     {
