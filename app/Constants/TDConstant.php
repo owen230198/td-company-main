@@ -203,6 +203,7 @@
         const FILL = 'fill';
         const FINISH = 'finish';
         const MAGNET = 'magnet';
+        const EMULSION = 'emulsion';
 
         const ALL_SUPPLY = [
             self::CARTON => 'Carton',
@@ -293,6 +294,7 @@
                 ['key' => self::METALAI, 'name' => 'Loại màng metalai', 'table' => 'supply_names'],
                 ['key' => self::COVER, 'name' => 'Chất liệu cán phủ trên', 'table' => 'materals'],
                 ['key' => self::UV, 'name' => 'Mực in UV', 'table' => 'materals'],
+                ['key' => self::EMULSION, 'name' => 'Loại nhũ', 'table' => 'supply_names'],
             ],
             self::CARTON => [
                 ['key' => self::CARTON, 'name' => 'Loại vật tư carton', 'table' => 'supply_types', 'is_name' => 0],
