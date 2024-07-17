@@ -76,7 +76,7 @@ class WSalary extends Model
                     ['name' => 'Giá Ép Nhũ/1 Sản Phẩm', 'value' => @$handle['price']],
                 ];
                 if ($get_extra) {
-                    $arr[] = ['name' => 'Tiền khuôn/1bats sản phẩm', 'value' => @$handle['shape_price']];
+                    $arr[] = ['name' => 'Tiền khuôn/bát sản phẩm', 'value' => @$handle['shape_price']];
                     $arr[] = ['name' => 'Máy ép nhũ', 'value' => getFieldDataById('name', 'devices', @$handle['machine'])];
                 }
                 break;

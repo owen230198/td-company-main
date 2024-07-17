@@ -54,6 +54,7 @@ class Paper extends Model
         $data = $product[$type];
         foreach ($data as $paper) {
             if (@$paper['handle_type'] == \TDConst::MADE_BY_PARTNER) {
+                $process_product['id'] = !empty($paper['id']) ? $paper['id'] : 0;
                 $process_product['name'] = $paper['name'];
                 $process_product['qty'] = $paper['qty'];
                 $process_product['made_by'] = @$paper['made_by'];
@@ -73,6 +74,7 @@ class Paper extends Model
             }else{
                 $dataItem = !empty($paper['id']) ? Paper::find($paper['id']) : '';
                 $data_process = $this->getDataActionPaper($paper, $dataItem);
+                $data_process['id'] = !empty($paper['id']) ? $paper['id'] : 0;
                 $data_process['name'] = $paper['name'];
                 $data_process['product_qty'] = $paper['qty'];
                 $data_process['product'] = $product_id;

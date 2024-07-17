@@ -1,4 +1,3 @@
-@dump($arr_detail)
 @foreach ($arr_detail as $key => $detail)
     @php
         $arr_field = getDetailTableField(['table_map' => $table_map, 'name' => $key, 'history' => 1]);
