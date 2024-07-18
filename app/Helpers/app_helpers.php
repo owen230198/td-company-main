@@ -84,6 +84,14 @@ if (!function_exists('getIdByFeildValue')) {
     }
 }
 
+if (!function_exists('insertGetIdData')) {
+    function insertGetIdData($table, $data)
+    {
+        (new \BaseService)->configBaseDataAction($data);
+        return \DB::table($table)->insertGetId($data);
+    }
+}
+
 if (!function_exists('handleQueryCondition')) {
     function handleQueryCondition(&$query, $where){
         foreach ($where as $w) {

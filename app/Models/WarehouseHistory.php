@@ -65,7 +65,10 @@ class WarehouseHistory extends Model
                 $ret = self::HANK_WEIGHT;
                 break;
             case in_array($type, [\TDConst::NILON, \TDConst::METALAI, \TDConst::COVER, \TDConst::DECAL, \TDConst::SILK, \TDconst::EMULSION]):
-                $ret = $field_qty + self::HANK_WEIGHT;
+                $ret = [$field_qty];
+                foreach (self::HANK_WEIGHT as $hank_weight) {
+                    $ret[] = $hank_weight;
+                }
                 break;
             default:
                 $ret[] = $field_qty;

@@ -260,7 +260,7 @@
                     return 'unit';
                     break;
                 default:
-                    return 'cm';
+                    return 'square';
                     break;
             }    
         }
@@ -288,10 +288,13 @@
                     return 'Đôi';
                     break;
                 case 'bag':
-                    return 'Tải';
+                    return 'Túi';
                     break;
                 case 'bottle':
                     return 'Hộp';
+                    break;
+                case 'bottle':
+                    return 'Lọ';
                     break;
                 case 'box':
                     return 'Thùng';
@@ -331,11 +334,14 @@
                 case 'Đôi':
                     return 'duo';
                     break;
-                case 'tải':
+                case 'túi':
                     return 'bag';
                     break;
                 case 'hộp':
                     return 'bottle';
+                    break;
+                case 'lọ':
+                    return 'jar';
                     break;
                 case 'thùng':
                     return 'box';
@@ -534,7 +540,7 @@
         function getViewSuppluBuyingByType($type, $index)
         {   
             $table = tableWarehouseByType($type);
-            $data['fields'] = (new \App\Services\AdminService)->getFieldAction($table, 'get_other');
+            $data['fields'] = (new \App\Services\AdminService)->getFieldAction($table, 'get_other', [['key' => 'type', 'value' => $type]]);
             $data['index'] = $index;
             $data['type'] = $type;
             return $data;

@@ -57,10 +57,14 @@
                 }
                 if (!empty($data_log['weight'])) {
                     $data_warehouse['weight'] = @$data_log['weight'];
-                    $data_log['qty'] = @$data_log['weight'];
+                    if (empty($data_log['qty'])) {
+                        $data_log['qty'] = @$data_log['weight'];
+                    }
                     unset($data_log['weight']);
                 }
-                $data_warehouse['qty'] = @$data_log['qty'];
+                if ($data_warehouse['type'] != \TDConst::SKRINK) {
+                    $data_warehouse['qty'] = @$data_log['qty'];
+                }
                 $validate = $this->validateDataWarehouse($data_log);
                 if (@$validate['code'] == 100) {
                     return $validate;
@@ -104,13 +108,28 @@
             }
             if ($type_request == 1) {
                 $data_log = $param['log'];
+                $data_warehouse = $param['warehouse'];
+                if (!empty($data_log['hank'])) {
+                    $data_warehouse['hank'] = (float) $dataItem['hank'] + (float) $data_log['hank'];
+                    unset($data_log['hank']);
+                }
+                if (!empty($data_log['weight'])) {
+                    $data_warehouse['weight'] = @(float) $dataItem['weight'] + (float) $data_log['weight'];
+                    if (empty($data_log['qty'])) {
+                        $data_log['qty'] = $data_log['weight'];
+                    }
+                    unset($data_log['weight']);
+                }
+                $is_skrink = $data_warehouse['type'] != \TDConst::SKRINK;
+                if ($is_skrink) {
+                    $data_warehouse['qty'] = (float) $dataItem['qty'] + (float) $data_log['qty'];
+                }
                 $validate = $this->validateDataWarehouse($data_log);
                 if (@$validate['code'] == 100) {
                     return $validate;
                 }
-                $data_warehouse['qty'] = (int) $dataItem['qty'] + (int) $data_log['qty'];
                 $model = getModelByTable($this->table);
-                $name = $model::getName($dataItem);
+                $name = @$dataItem['name'] ?? $model::getName($dataItem);
                 $data_warehouse['name'] = $name;
                 $this->configBaseDataAction($data_warehouse);
                 $update = $model::where('id', $id)->update($data_warehouse);
@@ -118,9 +137,9 @@
                     $data_log['name'] = $name;
                     $data_log['target'] = $id;
                     $data_log['exported'] = 0;
-                    $data_log['imported'] = $data_log['qty'];
-                    $data_log['ex_inventory'] = $dataItem['qty'];
-                    $data_log['inventory'] = $data_warehouse['qty'];
+                    $data_log['imported'] = @$data_log['weight'] ?? $data_log['qty'];
+                    $data_log['ex_inventory'] = @$dataItem['weight'] ?? $dataItem['qty'];
+                    $data_log['inventory'] = @$data_warehouse['weight'] ?? @$data_warehouse['qty'];
                     $this->getDataLogAction($data_log);
                     unset($data_log['qty']);
                     \DB::table('warehouse_histories')->insert($data_log);

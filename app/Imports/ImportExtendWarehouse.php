@@ -3,6 +3,7 @@
 namespace App\Imports;
 
 use App\Models\ExtendWarehouse;
+use App\Models\SupplyExtend;
 use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
@@ -17,7 +18,7 @@ class ImportExtendWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows
 
     public function model(array $row)
     {
-        if ($row['so_luong_kiem_thuc'] <= 0 || empty ($row['ten_hang'])) {
+        if ($row['so_luong'] <= 0 || empty ($row['ten'])) {
             return null;
         }
         $data = $this->getDataImport(self::$type, $row);
@@ -26,10 +27,14 @@ class ImportExtendWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows
 
     private function getDataImport($type, $row)
     {
+        $type_data = $row['loai'];
+        $supp_extend = SupplyExtend::where('name', $type_data)->get()->first();
+        $type = !empty($supp_extend->id) ? $supp_extend->id : insertGetIdData('supply_extends', ['name' => $type_data]);
         $ret =[
             'type' => $type,
-            'name' => $row['ten_hang'],
-            'qty' => $row['so_luong_kiem_thuc'],
+            'name' => $row['ten'],
+            'ver' => $row['ban'],
+            'qty' => $row['so_luong'],
             'unit' => getKeyUnitKeyWarehouse($row['dvt']),
             'status' => 'imported',
             'note' => 'Nhập từ Misa',
