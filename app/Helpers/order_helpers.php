@@ -226,7 +226,7 @@
                 return 'supply_warehouses';
             }elseif(in_array($type, [\TDConst::PAPER])){
                 return 'print_warehouses';
-            }elseif (in_array($type, [\TDConst::NILON, \TDConst::METALAI, \TDConst::COVER, \TDConst::DECAL, \TDConst::SILK])) {
+            }elseif (in_array($type, [\TDConst::NILON, \TDConst::METALAI, \TDConst::COVER, \TDConst::DECAL, \TDConst::SILK, \TDConst::EMULSION, \TDConst::SKRINK])) {
                 return 'square_warehouses';
             }elseif (in_array($type, [\TDConst::MAGNET])) {
                 return 'other_warehouses';
@@ -245,7 +245,7 @@
     }
 
     if (!function_exists('getUnitSupply')) {
-        function getUnitSupply($type, $data) {
+        function getUnitSupply($type, $data = new \stdClass()) {
             if (!empty($data->unit)) {
                 return $data->unit;
             }
@@ -260,7 +260,7 @@
                     return 'unit';
                     break;
                 default:
-                    return 'square';
+                    return 'cm';
                     break;
             }    
         }
@@ -299,8 +299,11 @@
                 case 'tree':
                     return 'Cây';
                     break;
-                default:
+                case 'square':
                     return 'Cm';
+                    break;    
+                default:
+                    return 'vật tư';
                     break;
             }    
         }

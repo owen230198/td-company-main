@@ -513,7 +513,7 @@ var getUrlLinkingWarehouseSize = function (type) {
         wh_table = 'other_warehouses';
     } else if (['paper'].includes(type)) {
         wh_table = 'print_warehouses';
-    }else if (['nilon', 'metalai', 'cover', 'decal', 'silk'].includes(type)) {
+    }else if (['nilon', 'metalai', 'cover', 'decal', 'silk', 'emulsion', 'skrink'].includes(type)) {
         wh_table = 'square_warehouses';
     } else {
         wh_table = 'extend_warehouses';

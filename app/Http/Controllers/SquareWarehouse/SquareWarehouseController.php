@@ -18,12 +18,12 @@ class SquareWarehouseController extends Controller
             return returnMessageAjax(100, 'Vui lòng nhập kích thước khổ vật tư !');
         }
 
-        if (empty($data['supp_price'])) {
-            return returnMessageAjax(100, 'Vui lòng chọn loại vật tư !');
-        }
-        $count = SquareWarehouse::where(['name' => $data['name'], 'supp_price' => $data['supp_price'], 'width' => $data['width']])->count();
+        // if (empty($data['supp_price'])) {
+        //     return returnMessageAjax(100, 'Vui lòng chọn loại vật tư !');
+        // }
+        $count = SquareWarehouse::where($data)->count();
         if ($count > 0) {
-            return returnMessageAjax(100, 'Vật tư '.getFieldDataById('name', 'materals', $data['supp_price']).' Khổ '.$data['width'].' Đã có trong kho !');
+            return returnMessageAjax(100, 'Vật tư '.$data['name'].' Đã có trong kho !');
         }
     }
 

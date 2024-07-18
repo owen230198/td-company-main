@@ -28,9 +28,6 @@
         ];
         private function validateDataWarehouse($data)
         {
-            if (empty($data['qty'])) {
-                return returnMessageAjax(100, 'Vui lòng nhập số lượng mua thêm !');
-            }
             if (empty($data['provider'])) {
                 return returnMessageAjax(100, 'Vui lòng chọn nhà cung cấp vật tư !');
             }
@@ -53,12 +50,21 @@
         {
             if ($type_request == 1) {
                 $data_log = $param['log'];
+                $data_warehouse = $param['warehouse'];
+                if (!empty($data_log['hank'])) {
+                    $data_warehouse['hank'] = @$data_log['hank'];
+                    unset($data_log['hank']);
+                }
+                if (!empty($data_log['weight'])) {
+                    $data_warehouse['weight'] = @$data_log['weight'];
+                    $data_log['qty'] = @$data_log['weight'];
+                    unset($data_log['weight']);
+                }
+                $data_warehouse['qty'] = @$data_log['qty'];
                 $validate = $this->validateDataWarehouse($data_log);
                 if (@$validate['code'] == 100) {
                     return $validate;
                 }
-                $data_warehouse = $param['warehouse'];
-                $data_warehouse['qty'] = $data_log['qty'];
                 $model = getModelByTable($this->table);
                 $name = @$data_warehouse['name'] ?? $model::getName($data_warehouse);
                 $data_warehouse['name'] = $name;
@@ -79,9 +85,10 @@
                     return returnMessageAjax(100, 'Không thể thêm vật tư vào kho !');
                 }
             }else{
-                $data = (new AdminService)->getDataActionView($this->table, __FUNCTION__, 'Thêm mới', $param);
+                $where = !empty($param['type']) ? [['key' => 'type', 'value' => $param['type']]] : [];
+                $data = (new AdminService)->getDataActionView($this->table, __FUNCTION__, 'Thêm mới', $param, $where);
                 $data['action_url'] = url('insert/'.$this->table);
-                $data['field_logs'] = WarehouseHistory::FIELD_INSERT;
+                $data['field_logs'] = WarehouseHistory::getFieldAction(@$param['type']);
                 if (!empty($param['type'])) {
                     $data['type_supp'] = $param['type'];
                 }
@@ -120,10 +127,11 @@
                     return returnMessageAjax(200, 'Đã nhập thêm thành công '.$data_log['imported'].' vật tư !', getBackUrl());
                 }   
             }else{
-                $data = (new AdminService)->getDataActionView($this->table, 'update', 'Chi tiết', $param);
+                $where = !empty($param['type']) ? [['key' => 'type', 'value' => $param['type']]] : [];
+                $data = (new AdminService)->getDataActionView($this->table, 'update', 'Chi tiết', $param, $where);
                 $data['title'] = !empty($dataItem['name']) ? 'Chi tiết '.@$dataItem['name'] : @$data['title'];
                 $data['action_url'] = url('update/'.$this->table.'/'.$id);
-                $data['field_logs'] = WarehouseHistory::FIELD_UPDATE;
+                $data['field_logs'] = WarehouseHistory::getFieldAction(@$param['type']);;
                 if (!empty($param['type'])) {
                     $data['type_supp'] = $param['type'];
                 }

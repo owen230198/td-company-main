@@ -80,7 +80,7 @@ if (!function_exists('getIdByFeildValue')) {
     {
         $models = getModelByClass($class);
         $data = $models::select('id')->where($where)->first();
-        return @$data['id']?$data['id']:0;
+        return @$data['id'] ? $data['id']:0;
     }
 }
 

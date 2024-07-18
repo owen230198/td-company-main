@@ -204,8 +204,18 @@
         const FINISH = 'finish';
         const MAGNET = 'magnet';
         const EMULSION = 'emulsion';
+        const SKRINK = 'skrink';
 
         const ALL_SUPPLY = [
+            self::CARTON => 'Carton',
+            self::RUBBER => 'Cao su non',
+            self::DECAL => 'Đề can nhung',
+            self::SILK => 'Vải lụa',
+            self::STYRO => 'Mút xốp',
+            self::MICA => 'Mica'
+        ];
+
+        const ALL_HANDLE_SUPPLY = [
             self::CARTON => 'Carton',
             self::RUBBER => 'Cao su non',
             self::DECAL => 'Đề can nhung',
@@ -295,6 +305,7 @@
                 ['key' => self::COVER, 'name' => 'Chất liệu cán phủ trên', 'table' => 'materals'],
                 ['key' => self::UV, 'name' => 'Mực in UV', 'table' => 'materals'],
                 ['key' => self::EMULSION, 'name' => 'Loại nhũ', 'table' => 'supply_names'],
+                ['key' => self::SKRINK, 'name' => 'Loại màng co', 'table' => 'supply_names'],
             ],
             self::CARTON => [
                 ['key' => self::CARTON, 'name' => 'Loại vật tư carton', 'table' => 'supply_types', 'is_name' => 0],

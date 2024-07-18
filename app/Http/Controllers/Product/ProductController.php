@@ -202,7 +202,7 @@ use App\Models\Order;
         public function validateSupply($data, $req_qty)
         {
             $arr[\TDConst::PAPER] = 'Giấy in';
-            $arr = $arr + \TDConst::ALL_SUPPLY;
+            $arr = $arr + \TDConst::ALL_HANDLE_SUPPLY;
             foreach ($arr as $key => $name) {
                 if (!empty($data[$key])) {
                     foreach ($data[$key] as $supply) {

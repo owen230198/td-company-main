@@ -17,6 +17,20 @@ class WarehouseHistory extends Model
         'note' => 'Thêm số lượng',
         'attr' => ['type_input' => 'number']
     ];
+    const HANK_WEIGHT =[
+        [
+            'name' => 'hank',
+            'type' => 'text',
+            'note' => 'Số cuộn mua thêm',
+            'attr' => ['type_input' => 'number']
+        ],
+        [
+            'name' => 'weight',
+            'type' => 'text',
+            'note' => 'Số kg mua thêm',
+            'attr' => ['type_input' => 'number']
+        ],
+    ];
     const FIELD_PROVIDER = [
         'name' => 'provider',
         'note' => 'Nhà cung cấp',
@@ -41,16 +55,29 @@ class WarehouseHistory extends Model
         'type' => 'textarea',
     ];
 
-    const FIELD_INSERT = [
-        self::FIELD_QTY,
-        self::FIELD_PROVIDER,
-        self::FIELD_PRICE,
-        self::FIELD_BILL,
-        self::FIELD_NOTE             
-    ];
+    static function getFieldAction($type){
+        $key_unit = getUnitSupply($type);
+        $field_qty = self::FIELD_QTY;
+        $field_qty['note'] = 'Số '.getUnitWarehouseItem($key_unit).' mua thêm';
+        $ret = [];
+        switch ($type) {
+            case in_array($type, [\TDconst::SKRINK]):
+                $ret = self::HANK_WEIGHT;
+                break;
+            case in_array($type, [\TDConst::NILON, \TDConst::METALAI, \TDConst::COVER, \TDConst::DECAL, \TDConst::SILK, \TDconst::EMULSION]):
+                $ret = $field_qty + self::HANK_WEIGHT;
+                break;
+            default:
+                $ret[] = $field_qty;
+                break;
+        }
+        foreach (self::FIELDS as $field) {
+            $ret[] = $field;
+        }
+        return $ret; 
+    }
 
-    const FIELD_UPDATE = [
-        self::FIELD_QTY,
+    const FIELDS = [
         self::FIELD_PROVIDER,
         self::FIELD_PRICE,
         self::FIELD_BILL,

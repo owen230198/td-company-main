@@ -251,6 +251,8 @@ class SupplyBuyingController extends Controller
                                 "silk":"Vải lụa",
                                 "mica":"Mi ca",
                                 "magnet":"Nam châm",
+                                "emulsion":"Nhũ",
+                                "skrink":"Màng co",
                                 "other":"Vật tư khác"
                             }
                         }

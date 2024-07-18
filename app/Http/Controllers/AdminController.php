@@ -169,6 +169,7 @@ class AdminController extends Controller
                 ['note' => 'Màng nilon', 'table' => 'square_warehouses', 'type' => \TDConst::NILON],
                 ['note' => 'Màng metalai', 'table' => 'square_warehouses', 'type' => \TDConst::METALAI],
                 ['note' => 'Màng phủ metalai', 'table' => 'square_warehouses', 'type' => \TDConst::COVER],
+                ['note' => 'Màng co', 'table' => 'square_warehouses', 'type' => \TDConst::SKRINK],
                 ['note' => 'Vật tư carton', 'table' => 'supply_warehouses', 'type' => \TDConst::CARTON],
                 ['note' => 'Vật tư cao su non', 'table' => 'supply_warehouses', 'type' => \TDConst::RUBBER],
                 ['note' => 'Vật tư mút phẳng', 'table' => 'supply_warehouses', 'type' => \TDConst::STYRO],
@@ -299,7 +300,8 @@ class AdminController extends Controller
             }
         }else{
             $param = $request->except('_token');
-            $data = $this->admins->getDataActionView($table, 'insert', 'Sao chép', $param);
+            $this->injectViewWhereParam($table, $param);
+            $data = $this->admins->getDataActionView($table, 'insert', 'Sao chép', $param, self::$view_where);
             $data['dataItem'] = getModelByTable($table)->find($id);
             unset($data['dataItem']['id']);
             if (!empty($data['dataItem']['password'])) {

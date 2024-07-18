@@ -30,14 +30,16 @@ class ImportSquareWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows
         $membrane = getDataByWhere('materals', [['type', '=', $type], ['name', 'like', '%'.$name.'%']]);
         $weight = $row['so_luong'];
         $width = $row['kho_mang'];
+        $is_emulsion = $type == 'emulsion';
         $ret =[
             'device' => getIdByFeildValue('SupplyName', [['type', '=', $type], ['name', 'like', '%'.$row['loai_mang'].'%']]),
-            'name' => $membrane->name,
-            'width' => $width,
-            'qty' => $this->getQtyByType($membrane->factor, $weight, $width),
+            'name' => $is_emulsion ? $name : $membrane->name,
+            'width' => $is_emulsion ? 64 : $width,
+            'qty' => $is_emulsion ? 120 : $this->getQtyByType($membrane->factor, $weight, $width),
+            'hank' => $row['so_cuon'],
             'weight' => $weight,
             'type' => $type,
-            'supp_price' => $membrane->id,
+            'supp_price' => $is_emulsion ? '' : $membrane->id,
             'status' => 'imported',
             'note' => 'Nhập từ Misa',
             'act' => 1,
