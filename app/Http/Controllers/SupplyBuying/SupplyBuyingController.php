@@ -23,7 +23,31 @@ class SupplyBuyingController extends Controller
         $data['status'] = \StatusConst::NOT_ACCEPTED;
         $data['supply'] = json_encode($data['supply']);
     }
-    
+
+    private function validateData($data)
+    {
+        if (empty($data['name'])) {
+            return returnMessageAjax(100, 'Bạn chưa nhập tên lệnh mua !');   
+        }
+        if (empty($data['provider'])) {
+            return returnMessageAjax(100, 'Bạn chưa chọn nhà cung cấp !');   
+        }
+        if (empty($data['supply'])) {
+            return returnMessageAjax(100, 'Bạn chưa có vật tư cần mua !');   
+        }
+        foreach ($data['supply'] as $key => $supply) {
+            if (empty($supply['type'])) {
+                return returnMessageAjax(100, 'Bạn chưa chọn loại vật tư thứ '.($key+1).'!');
+                break;
+            }
+
+            if (empty($supply['qty'])) {
+                return returnMessageAjax(100, 'Bạn chưa nhập số lượng mua thêm cho vật tư thứ '.($key+1).'!');
+                break;
+            }
+        }
+        
+    }    
     public function insert($request)
     {
         $table = 'supply_buyings';
@@ -33,6 +57,10 @@ class SupplyBuyingController extends Controller
             return view('action.view', $data);
         }else{
             $data = $request->except('_token');
+            $vaildate = $this->validateData($data);
+            if (@$vaildate['code'] == 100) {
+                return $vaildate;    
+            }
             $this->processData($data);
             $this->admins->configBaseDataAction($data);
             $insert_id = SupplyBuying::insertGetId($data);
@@ -58,6 +86,10 @@ class SupplyBuyingController extends Controller
             return view('action.view', $data);
         }else{
             $data = $request->except('_token');
+            $vaildate = $this->validateData($data);
+            if (@$vaildate['code'] == 100) {
+                return $vaildate;    
+            }
             $this->processData($data);
             $this->admins->configBaseDataAction($data);
             $update = SupplyBuying::where('id', $id)->update($data);
@@ -156,15 +188,27 @@ class SupplyBuyingController extends Controller
                 $table_supply = tableWarehouseByType($supply['type']);
                 $data['log']['type'] = @$supply['supp_type'];
                 $data['log']['qty'] = (int) $supply['qty'];
+                if (!empty($supply['hank'])) {
+                    $data['log']['hank'] = (int) $supply['hank'];
+                }
+                if (!empty($supply['weight'])) {
+                    $data['log']['weight'] = (int) $supply['weight'];
+                }
                 $data['log']['provider'] = @$supp_buying->provider;
                 $data['log']['price'] = @$supply['price'];
                 $data['log']['bill'] = @$supp_buying->bill;
                 $warehouse_service = new WarehouseService($table_supply);
                 $where = $supply;
                 unset($where['qty'], $where['price'], $where['total']);
+                if (!empty($where['hank'])) {
+                    unset($where['hank']);
+                }
+                if (!empty($where['weight'])) {
+                    unset($where['weight']);
+                }
                 $where['status'] = SupplyWarehouse::IMPORTED;
+                $data['warehouse'] = $where;
                 if (getCountDataTable($table_supply, $where) == 0) {
-                    $data['warehouse'] = $where;
                     $status = $warehouse_service->insert($data, 1);
                 }else{
                     $data_supply = \DB::table($table_supply)->where($where)->first();
@@ -415,7 +459,7 @@ class SupplyBuyingController extends Controller
             return false;
         }
         $table = tableWarehouseByType($type);
-        $data['fields'] = $table == 'print_warehouses' ? PrintWarehouse::getFieldSearch() : (new \App\Services\AdminService())->getFieldAction($table, 'search');
+        $data['fields'] = $table == 'print_warehouses' ? PrintWarehouse::getFieldSearch() : (new \App\Services\AdminService())->getFieldAction($table, 'search', [['key' => 'type', 'value' => $type]]);
         $data['default_field']['type'] = $type;
         return view('inventories.field_search', $data);
     }

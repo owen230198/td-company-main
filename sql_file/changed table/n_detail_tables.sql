@@ -11,7 +11,7 @@
  Target Server Version : 80030
  File Encoding         : 65001
 
- Date: 19/07/2024 02:55:11
+ Date: 19/07/2024 23:12:56
 */
 
 SET NAMES utf8mb4;
@@ -47,7 +47,7 @@ CREATE TABLE `n_detail_tables`  (
   INDEX `map_insert`(`table_map` ASC, `insert` ASC) USING BTREE,
   INDEX `map_update`(`table_map` ASC, `update` ASC) USING BTREE,
   INDEX `map_search`(`table_map` ASC, `search` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 384 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 385 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of n_detail_tables
@@ -195,7 +195,7 @@ INSERT INTO `n_detail_tables` VALUES (152, 'supp_price', '{\"required\":1}', 'V�
 INSERT INTO `n_detail_tables` VALUES (153, 'created_by', NULL, 'Người thêm', 'linking', 'other_warehouses', 2, 1, 0, 0, 0, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', NULL, 1, 1, '2023-04-08 00:08:00', '2024-06-12 13:21:36');
 INSERT INTO `n_detail_tables` VALUES (154, 'created_at', NULL, 'Ngày thêm', 'datetime', 'other_warehouses', 3, 1, 0, 0, 0, NULL, 1, 0, '', NULL, 1, 1, '2023-04-08 00:08:00', '2024-06-12 13:21:36');
 INSERT INTO `n_detail_tables` VALUES (155, 'created_by', NULL, 'Người thêm', 'linking', 'square_warehouses', 7, 1, 0, 0, 0, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', NULL, 1, 1, '2023-04-08 00:08:00', '2024-07-18 09:37:50');
-INSERT INTO `n_detail_tables` VALUES (156, 'created_at', NULL, 'Ngày thêm', 'datetime', 'square_warehouses', 8, 1, 0, 0, 1, NULL, 1, 0, '', NULL, 1, 1, '2023-04-08 00:08:00', '2024-07-18 09:37:52');
+INSERT INTO `n_detail_tables` VALUES (156, 'created_at', NULL, 'Ngày thêm', 'datetime', 'square_warehouses', 8, 1, 0, 0, 0, NULL, 1, 0, '', NULL, 1, 1, '2023-04-08 00:08:00', '2024-07-19 03:23:52');
 INSERT INTO `n_detail_tables` VALUES (157, 'order', NULL, 'Đơn hàng', 'linking', 'products', 0, 0, NULL, NULL, 1, NULL, 0, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"orders\",\r\n		\"field_title\":\"code\"\r\n	}\r\n}', NULL, 1, 1, '2023-08-22 03:54:31', '2024-06-12 06:23:59');
 INSERT INTO `n_detail_tables` VALUES (158, 'code', '{\"disable_field\":1,\"required\":1}', 'Mã', 'text', 'products', 0, 1, 0, 1, 1, NULL, 0, 0, '', NULL, 1, 1, '2023-05-26 03:19:12', '2024-06-12 06:25:52');
 INSERT INTO `n_detail_tables` VALUES (159, 'name', '', 'Tên', 'text', 'products', 1, 1, 0, 1, 1, NULL, 1, 0, '', NULL, 1, 1, '2023-05-26 03:19:12', '2024-06-12 13:21:36');
@@ -407,7 +407,7 @@ INSERT INTO `n_detail_tables` VALUES (379, 'created_at', NULL, 'Ngày thêm', 'd
 INSERT INTO `n_detail_tables` VALUES (380, 'weight', '', 'Số kg', 'text', 'square_warehouses', 6, 1, 0, 0, 0, 1, 0, 0, '', '[\r\n	{\"key\":\"type\", \"value\":\"nilon\"},\r\n	{\"key\":\"type\", \"value\":\"metalai\"},\r\n	{\"key\":\"type\", \"value\":\"emulsion\"},\r\n	{\"key\":\"type\", \"value\":\"skrink\"}\r\n]', 1, 1, '2023-04-30 11:00:22', '2024-07-19 02:52:38');
 INSERT INTO `n_detail_tables` VALUES (381, 'factor', '{\"type_input\":\"number\"}', 'Hệ số đổi', 'text', 'materals', 2, 1, 1, 1, 0, NULL, 1, 0, '', '[\r\n	{\"key\":\"type\", \"value\":\"nilon\"},\r\n	{\"key\":\"type\", \"value\":\"metalai\"}\r\n]', 1, 1, '2023-04-28 11:32:02', '2024-07-15 17:21:58');
 INSERT INTO `n_detail_tables` VALUES (382, 'device', '', 'Loại', 'linking', 'square_warehouses', 0, 1, 1, 0, 1, 1, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"supply_names\",\r\n		\"where_default\":{\"type\":\"type\"}\r\n	}\r\n}', '[\r\n	{\"key\":\"type\", \"value\":\"nilon\"},\r\n	{\"key\":\"type\", \"value\":\"metalai\"},\r\n	{\"key\":\"type\", \"value\":\"emulsion\"},\r\n	{\"key\":\"type\", \"value\":\"skrink\"}\r\n]', 1, 1, '2023-05-11 11:18:58', '2024-07-18 14:45:01');
-INSERT INTO `n_detail_tables` VALUES (383, 'hank', '', 'Số cuộn', 'text', 'square_warehouses', 5, 1, 0, 0, 1, 1, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"supply_names\",\r\n		\"where_default\":{\"type\":\"type\"}\r\n	}\r\n}', '[\r\n	{\"key\":\"type\", \"value\":\"nilon\"},\r\n	{\"key\":\"type\", \"value\":\"metalai\"},\r\n	{\"key\":\"type\", \"value\":\"emulsion\"},\r\n	{\"key\":\"type\", \"value\":\"skrink\"}\r\n]', 1, 1, '2023-05-11 11:18:58', '2024-07-19 02:49:00');
+INSERT INTO `n_detail_tables` VALUES (383, 'hank', '', 'Số cuộn', 'text', 'square_warehouses', 5, 1, 0, 0, 0, 0, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"supply_names\",\r\n		\"where_default\":{\"type\":\"type\"}\r\n	}\r\n}', '[\r\n	{\"key\":\"type\", \"value\":\"nilon\"},\r\n	{\"key\":\"type\", \"value\":\"metalai\"},\r\n	{\"key\":\"type\", \"value\":\"emulsion\"},\r\n	{\"key\":\"type\", \"value\":\"skrink\"}\r\n]', 1, 1, '2023-05-11 11:18:58', '2024-07-19 16:11:46');
 INSERT INTO `n_detail_tables` VALUES (384, 'ver', '', 'Bản', 'text', 'extend_warehouses', 1, 1, 1, 0, 1, 1, 1, 0, '', NULL, 1, 1, '2023-04-07 23:41:47', '2024-07-18 13:57:11');
 
 SET FOREIGN_KEY_CHECKS = 1;

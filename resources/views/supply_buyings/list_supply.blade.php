@@ -26,7 +26,7 @@
                                 <td>
                                     @php
                                         $table_supply = tableWarehouseByType(@$data->type);
-                                        $fields = (new \App\Services\AdminService)->getFieldAction($table_supply, 'get_other');
+                                        $fields = (new \App\Services\AdminService)->getFieldAction($table_supply, 'get_other', [['key' => 'type', 'value' => $data->type]]);
                                     @endphp
                                     @foreach ($fields as $field)
                                         @php

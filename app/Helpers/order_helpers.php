@@ -468,11 +468,17 @@
                 case \TDConst::MICA:
                     return 'Vật tư mica';
                     break;
+                case \TDConst::EMULSION:
+                    return 'Vật tư nhũ';
+                    break;
+                case \TDConst::SKRINK:
+                    return 'Vật tư màng co';
+                    break;
                 case \TDConst::MAGNET:
                     return 'Nam châm';
                     break;
                 default:
-                    return "";
+                    return "Vật tư khác";
                     break;
             }
         }
