@@ -287,7 +287,8 @@
                 if (empty($data_warehouse)) {
                     return returnMessageAjax(110, 'Vật tư không có trong kho !');    
                 }
-                $cr_qty = (int) $data_warehouse->qty;
+                $qty_field = isWeightSupply($data_command->supp_type) ? 'weight' : 'qty';
+                $cr_qty = (int) $data_warehouse->{$qty_field};
                 $take_qty = (int) $data_command->qty;
                 if ($cr_qty < $take_qty) {
                     return returnMessageAjax(110, 'Vật tư trong kho không đủ để xuất ra, lên hệ gọi thêm vật tư để xử lí đơn này!');
@@ -300,7 +301,7 @@
                 $data_log['target'] = $data_warehouse->id;
                 $data_log['exported'] = $take_qty;
                 $data_log['ex_inventory'] = $cr_qty;
-                $data_log['inventory'] = $data_warehouse->qty;
+                $data_log['inventory'] = $data_warehouse->{$qty_field};
                 $data_log['product'] = $data_command->product;
                 $data_log['c_supply'] = $id;
                 (new \BaseService)->configBaseDataAction($data_log);

@@ -239,8 +239,18 @@
     if (!function_exists('getTableWarehouseByType')) {
         function getTableWarehouseByType($param = new \stdClass())
         {
+            if (empty($param->supp_type)) {
+                return '';
+            }
             $type = !empty($param->supp_type) ? $param->supp_type : '';
             return tableWarehouseByType($type);
+        }
+    }
+
+    if (!function_exists('chekIsWeightSupply')) {
+        function isWeightSupply($type)
+        {
+            return in_array(@$type, [\TDConst::EMULSION, \TDConst::SKRINK]);
         }
     }
 

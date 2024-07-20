@@ -518,7 +518,11 @@ var getUrlLinkingWarehouseSize = function (type) {
     } else {
         wh_table = 'extend_warehouses';
     }
-    return getBaseRoute('get-data-json-linking?except_linking=1&table=' + wh_table + '&field_search=name&type=' + type);
+    url = getBaseRoute('get-data-json-linking?except_linking=1&table=' + wh_table + '&field_search=name');
+    if (wh_table != 'extend_warehouses') {
+        url += '&type=' + type;    
+    }
+    return url;
 }
 
 var selectTypeSuppWarehouse = function () {
@@ -532,11 +536,11 @@ var selectTypeSuppWarehouse = function () {
         select_size.data('id', '');
         select_size.data('label', '');
         select_size.data('url', url);
-        if (!empty(value)) {
-            select_size.attr('readonly', false);
-        } else {
-            select_size.attr('readonly', true);
-        }
+        // if (!empty(value)) {
+        //     select_size.attr('readonly', false);
+        // } else {
+        //     select_size.attr('readonly', true);
+        // }
         initInputModuleAfterAjax(parent);
     })
 }
