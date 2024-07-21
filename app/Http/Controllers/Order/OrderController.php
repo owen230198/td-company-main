@@ -7,6 +7,7 @@
     use App\Models\Quote;
     use App\Models\SupplyWarehouse;
     use App\Models\Product;
+use App\Models\SquareWarehouse;
 
     class OrderController extends Controller
     {
@@ -287,7 +288,7 @@
                 if (empty($data_warehouse)) {
                     return returnMessageAjax(110, 'Vật tư không có trong kho !');    
                 }
-                $qty_field = isWeightSupply($data_command->supp_type) ? 'weight' : 'qty';
+                $qty_field = SquareWarehouse::isWeightSupply($data_command->supp_type) ? 'weight' : 'qty';
                 $cr_qty = (int) $data_warehouse->{$qty_field};
                 $take_qty = (int) $data_command->qty;
                 if ($cr_qty < $take_qty) {

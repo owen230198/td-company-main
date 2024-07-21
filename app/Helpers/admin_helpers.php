@@ -113,7 +113,16 @@ if (!function_exists('getActionByKey')) {
             case 'apply':
                 return 'Duyệt';
                 break;
+            case 'contact_confirm':
+                return 'Liên hệ nhà cung cấp';
+                break;
+            case 'confirm_bought':
+                return 'Xác nhận đã mua';
+                break;
             case 'update_represents':
+                return 'Thay đổi khách hàng';
+                break;
+            case 'confirm_import':
                 return 'Thay đổi khách hàng';
                 break;
             default:

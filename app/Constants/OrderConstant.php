@@ -69,6 +69,13 @@
                 'link' => 'view/print_warehouses?default_data=%7B"status"%3A"'.SupplyWarehouse::WAITING.'"%7D' 
             ],
             [
+                'icon' => 'contact', 
+                'table' => 'supply_buyings', 
+                'text' => 'Liên hệ NCC vật tư',
+                'condition' => ['status' => \StatusConst::PROCESSING],
+                'link' => 'view/supply_buyings?default_data=%7B"status"%3A"'.\StatusConst::PROCESSING.'"%7D' 
+            ],
+            [
                 'icon' => 'apply_buy', 
                 'table' => 'supply_buyings', 
                 'text' => 'Duyệt mua vật tư',

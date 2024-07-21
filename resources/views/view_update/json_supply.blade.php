@@ -11,28 +11,29 @@
             @include('supply_buyings.supply_item', ['index' => 0])   
         @endif
     </div>
-    @if (\GroupUser::isPlanHandle())
+    @if (\GroupUser::isPlanHandle() && empty($dataItem->status))
     <div class="text-center">
         <button type="button" class="main_button color_white bg_green border_green radius_5 font_bold sooth add_supp_buy_button">
             <i class="fa fa-plus mr-2 fs-14" aria-hidden="true"></i> Thêm vật tư
         </button>
     </div>
     @endif
-    @if (\GroupUser::isAdmin() || \GroupUser::isDoBuying() || \GroupUser::isWarehouse())
+    @if (\GroupUser::isDoBuying() || \GroupUser::isWarehouse())
         @php
+            $readonly_price = \App\Models\SupplyBuying::checkReadOnlyInputPrice(@$dataItem->status);
             $do_buy_fields = [
                 [
                     'name' => 'ship_price',
                     'type' => 'text',
                     'note' => 'Chi phí vận chuyển',
-                    'attr' => ['type_input' => 'number', 'readonly' => 1, 'inject_class' => '__buying_ship_price __buying_change_input'],
+                    'attr' => ['type_input' => 'number', 'readonly' => $readonly_price , 'inject_class' => '__buying_ship_price __buying_change_total_input'],
                     'value' => @$dataItem['ship_price'] ?? 0
                 ],
                 [
                     'name' => 'other_price',
                     'type' => 'text',
                     'note' => 'Chi phí khác',
-                    'attr' => ['type_input' => 'number', 'readonly' => 1, 'inject_class' => '__buying_other_price __buying_change_input'],
+                    'attr' => ['type_input' => 'number', 'readonly' => $readonly_price , 'inject_class' => '__buying_other_price __buying_change_total_input'],
                     'value' => @$dataItem['other_price'] ?? 0
                 ],
                 [

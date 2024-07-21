@@ -247,13 +247,6 @@
         }
     }
 
-    if (!function_exists('chekIsWeightSupply')) {
-        function isWeightSupply($type)
-        {
-            return in_array(@$type, [\TDConst::EMULSION, \TDConst::SKRINK]);
-        }
-    }
-
     if (!function_exists('getUnitSupply')) {
         function getUnitSupply($type, $data = new \stdClass()) {
             if (!empty($data->unit)) {

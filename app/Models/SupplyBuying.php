@@ -8,7 +8,12 @@ class SupplyBuying extends Model
     protected $table = 'supply_buyings';
     protected $protectFields = false;
     const BOUGHT = 'bought';
-    static function getFeildSupplyJson($value = [])
+
+    static function checkReadOnlyInputPrice($status)
+    {
+        return \GroupUser::isAdmin() ? 0 : (\GroupUser::isDoBuying() && @$status == \StatusConst::PROCESSING ? 0 : 1);
+    }
+    static function getFeildSupplyJson($value = [], $status)
     {
         $field_supp_type = [
             'name' => 'type',
@@ -52,7 +57,11 @@ class SupplyBuying extends Model
             'name' => 'price',
             'type' => 'text',
             'note' => 'Đơn giá vật tư',
-            'attr' => ['type_input' => 'number', 'inject_class' => '__buying_price_input __buying_change_input', 'readonly' => !\GroupUser::isDoBuying()],
+            'attr' => [
+                'type_input' => 'number', 
+                'inject_class' => '__buying_price_input __buying_change_input', 
+                'readonly' => self::checkReadOnlyInputPrice($status)
+            ],
         ];
         $field_total = [
             'name' => 'total',
@@ -60,6 +69,14 @@ class SupplyBuying extends Model
             'note' => 'Thành tiền',
             'attr' => ['type_input' => 'number', 'readonly' => 1, 'inject_class' => '__buying_total_input']
         ];
+        if (\GroupUser::isAdmin()) {
+            return [
+                $field_supp_type,
+                $field_qty,
+                $field_price,
+                $field_total
+            ];
+        }
         if (\GroupUser::isPlanHandle()) {
             return [
                 $field_supp_type,
@@ -82,14 +99,7 @@ class SupplyBuying extends Model
                 $field_supp_type,
                 $field_qty
             ]; 
-        }elseif (\GroupUser::isAdmin()) {
-            return [
-                $field_supp_type,
-                $field_qty,
-                $field_price,
-                $field_total
-            ];
-        }      
+        }    
     }
     static function getRole()
     {
@@ -102,7 +112,7 @@ class SupplyBuying extends Model
                             'type' => 'group',
                             'query' => [
                                 ['key' => 'created_by', 'value' => \User::getCurrent('id')],
-                                ['key' => 'status', 'value' => \StatusConst::ACCEPTED]
+                                ['key' => 'status', 'value' => \StatusConst::PROCESSING]
                             ]
                         ]
                     ],
@@ -112,7 +122,7 @@ class SupplyBuying extends Model
                             'type' => 'group',
                             'query' => [
                                 ['key' => 'created_by', 'value' => \User::getCurrent('id')],
-                                ['key' => 'status', 'value' => \StatusConst::ACCEPTED]
+                                ['key' => 'status', 'value' => \StatusConst::PROCESSING]
                             ]
                         ]]
                     ],
@@ -122,7 +132,26 @@ class SupplyBuying extends Model
                 'update' => ['with' => [['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED]]]
             ],
             \GroupUser::DO_BUYING => [
-                'view' => ['with' => ['key' => 'status', 'value' => \StatusConst::ACCEPTED]]
+                'view' => [
+                    'with' => [
+                                'type' => 'group',
+                                'query' => [
+                                    ['key' => 'status', 'value' => \StatusConst::PROCESSING],
+                                    ['con' => 'or', 'key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED],
+                                    ['con' => 'or', 'key' => 'status', 'value' => \StatusConst::ACCEPTED]
+                                ]
+                            ],
+                ],
+                'update' => 
+                        [
+                            'with' => [[
+                                'type' => 'group',
+                                'query' => [
+                                    ['key' => 'status', 'value' => \StatusConst::PROCESSING],
+                                    ['con' => 'or', 'key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED]
+                                ]
+                            ]]
+                        ]
             ],
             \GroupUser::WAREHOUSE => [
                 'view' => ['with' => ['key' => 'status', 'value' => self::BOUGHT]]

@@ -1,9 +1,17 @@
 @if (@$button['type'] == 2)
     <button type="button" 
-    class="main_button color_white bg_green border_green radius_5 mr-3 font_bold smooth {{ @$button['class'] }}" 
-    title="{{ @$button['note'] }}" 
-    data-table="{{ $tableItem['name'] }}" 
-    data-id="{{ @$dataItem['id'] }}">
+        class="main_button color_white bg_green border_green radius_5 mr-3 font_bold smooth {{ @$button['class'] }}" 
+        title="{{ @$button['note'] }}" 
+        data-table="{{ $tableItem['name'] }}" 
+        data-id="{{ @$dataItem['id'] }}"
+        @if (!empty($button['datas']))
+            @foreach ($button['datas'] as $dt)
+                @if (!empty($dataItem->{$dt}))
+                    {!! "data-".$dt."='".$dataItem->{$dt}."'"  !!}
+                @endif
+            @endforeach
+        @endif
+    >
         <i class="fa fa-{{ $button['icon'] }} mr-2 fs-14" aria-hidden="true"></i>
         {{ @$button['note'] }}
     </button>

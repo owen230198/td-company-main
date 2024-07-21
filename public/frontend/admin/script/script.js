@@ -738,6 +738,28 @@ var confirmBuying = function () {
     });
 }
 
+var calcTotalSupplyBuying = function(json_supp_module)
+{
+    let list_item = json_supp_module.find('.item_supp_buy');
+    let buying_total = 0;
+    list_item.each(function () {
+        let total_item_buy = getEmptyDefault(json_supp_module.find('input.__buying_total_input').val(), 0, 'float');
+        buying_total += total_item_buy;
+    });
+    let ship_price = getEmptyDefault(json_supp_module.find('input.__buying_ship_price').val(), 0, 'float');
+    let other_price = getEmptyDefault(json_supp_module.find('input.__buying_other_price').val(), 0, 'float');
+    json_supp_module.find('input.__buying_total_amount_input').val(buying_total + ship_price + other_price);
+}
+
+var totalSupplyBuyingInput = function()
+{
+    $(document).on('change keyup paste', 'input.__buying_change_total_input', function(event){
+        event.preventDefault();
+        let parent = $(this).closest('.json_supply_buy');
+        calcTotalSupplyBuying(parent);
+    });
+}
+
 var changeInputPriceBuying = function () {
     $(document).on('change keyup', 'input.__buying_change_input', function (event) {
         event.preventDefault();
@@ -745,15 +767,18 @@ var changeInputPriceBuying = function () {
         let item = _this.closest('.item_supp_buy');
         let price = getEmptyDefault(item.find('input.__buying_price_input').val(), 0, 'float');
         let qty = getEmptyDefault(item.find('input.__buying_qty_input').val(), 0, 'number');
-        item.find('.__buying_total_input').val(price * qty);
+        let type_supp = item.find('select.__select_supp_type_buying').val();
+        let total_input = item.find('.__buying_total_input');
+        if (type_supp == 'paper') {
+            let length = getEmptyDefault(item.find('input.__paper_length_input').val(), 1, 'number');
+            let width = getEmptyDefault(item.find('input.__paper_width_input').val(), 1, 'number');
+            let qtv = getEmptyDefault(item.find('input.__paper_qtv_input').val(), 1, 'number');
+            total_input.val(length * width * qtv * price * qty);
+        }else{
+            total_input.val(price * qty);
+        }
         let parent = _this.closest('.json_supply_buy');
-        let list_item = parent.find('.item_supp_buy');
-        let buying_total = 0;
-        list_item.each(function () {
-            let total_item_buy = getEmptyDefault($(this).find('input.__buying_total_input').val(), 0, 'number');
-            buying_total += total_item_buy;
-        });
-        parent.find('input.__buying_total_amount_input').val(buying_total);
+        calcTotalSupplyBuying(parent);
     });
 }
 
@@ -761,10 +786,11 @@ var confirmBought = function () {
     $(document).on('click', 'button.__confirm_bought', function (e) {
         e.preventDefault();
         let _this = $(this);
-        id = _this.data('id');
+        let id = _this.data('id');
+        let status = _this.data('status');
         let form = _this.closest('form');
         ajaxBaseCall({
-            url: getBaseRoute('confirm-supply-bought/' + id),
+            url: getBaseRoute('confirm-supply-bought/' + status + '/' + id),
             type: 'POST',
             data: form.serialize()
         });
@@ -775,9 +801,11 @@ var confirmImportSupplyBuy = function () {
     $(document).on('click', 'button.__confirm_warehouse_imported', function (event) {
         event.preventDefault();
         let id = $(this).data('id');
+        let form = $(this).closest('form');
         ajaxBaseCall({
             url: 'confirm-warehouse-imported/' + id,
-            type: 'POST'
+            type: 'POST',
+            data: form.serialize()
         });
     });
 }
@@ -1046,6 +1074,7 @@ $(function () {
     submitOnlylinkingData();
     confirmBuying();
     changeInputPriceBuying();
+    totalSupplyBuyingInput();
     confirmBought();
     confirmImportSupply();
     confirmImportSupplyBuy();

@@ -15,7 +15,12 @@ class SquareWarehouse extends Model
     {
         $role = WarehouseService::ROLE;
         return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];
-    } 
+    }
+    
+    static function isWeightSupply($type)
+    {
+        return in_array(@$type, [\TDConst::EMULSION, \TDConst::SKRINK]);
+    }
 
     static function getDataJsonLinking($warehouse, $q)
     {
@@ -27,7 +32,7 @@ class SquareWarehouse extends Model
         }
         $data = $warehouse->paginate(50)->all();
         $arr = array_map(function($item){
-            $qty = isWeightSupply($item->type) ? $item->weight.' kg' : $item->qty. ' cm';
+            $qty = self::isWeightSupply($item->type) ? $item->weight.' kg' : $item->qty. ' cm';
             return [
                 'id' => @$item->id, 
                 'label' => $item->name. ' / KT Khổ : '.$item->width.' / Còn lại : '.$qty];
@@ -64,6 +69,6 @@ class SquareWarehouse extends Model
 
     static function getLabelLinking($data)
     {   
-        return isWeightSupply($data->type) ? $data->name : getFieldDataById('name', 'materals', $data->supp_price).' - Khổ : '.$data->width;
+        return self::isWeightSupply($data->type) ? $data->name : getFieldDataById('name', 'materals', $data->supp_price).' - Khổ : '.$data->width;
     }
 }
