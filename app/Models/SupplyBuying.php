@@ -102,7 +102,7 @@ class SupplyBuying extends Model
                             'type' => 'group',
                             'query' => [
                                 ['key' => 'created_by', 'value' => \User::getCurrent('id')],
-                                ['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED]
+                                ['key' => 'status', 'value' => \StatusConst::ACCEPTED]
                             ]
                         ]
                     ],
@@ -112,7 +112,7 @@ class SupplyBuying extends Model
                             'type' => 'group',
                             'query' => [
                                 ['key' => 'created_by', 'value' => \User::getCurrent('id')],
-                                ['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED]
+                                ['key' => 'status', 'value' => \StatusConst::ACCEPTED]
                             ]
                         ]]
                     ],

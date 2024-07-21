@@ -11,7 +11,7 @@
             $item['value'] = @$value[$jname]; 
             $item['name'] = 'supply['.$index.']['.$jname.']';
             $item['dataItem'] = @$value;
-            $item['min_label'] = 115;
+            $item['min_label'] = 150;
         @endphp
         @include('view_update.view', $item)   
     @endforeach

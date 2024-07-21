@@ -29,9 +29,6 @@ class SupplyBuyingController extends Controller
         if (empty($data['name'])) {
             return returnMessageAjax(100, 'Bạn chưa nhập tên lệnh mua !');   
         }
-        if (empty($data['provider'])) {
-            return returnMessageAjax(100, 'Bạn chưa chọn nhà cung cấp !');   
-        }
         if (empty($data['supply'])) {
             return returnMessageAjax(100, 'Bạn chưa có vật tư cần mua !');   
         }
@@ -90,6 +87,9 @@ class SupplyBuyingController extends Controller
             if (@$vaildate['code'] == 100) {
                 return $vaildate;    
             }
+            if (!empty($data['provider'])) {
+                return returnMessageAjax(100, 'Bạn chưa chọn nhà cung cấp vật tư !');
+            }
             $this->processData($data);
             $this->admins->configBaseDataAction($data);
             $update = SupplyBuying::where('id', $id)->update($data);
@@ -140,8 +140,8 @@ class SupplyBuyingController extends Controller
             $data = $request->except('_token');
             $data_supply = !empty($data['supply']) ? $data['supply'] :[];
             if (count($list_supp) > 0 && count($list_supp) == count($data_supply)) {
-                if (empty($data['bill'])) {
-                    return returnMessageAjax(100, 'Bạn cần upload Hóa đơn mua hàng !');
+                if (empty($data['provider'])) {
+                    return returnMessageAjax(100, 'Bạn cần chọn nhà cung cấp vật tư !');
                 }
                 $buying_total = 0;
                 foreach ($list_supp as $key => $supply) {

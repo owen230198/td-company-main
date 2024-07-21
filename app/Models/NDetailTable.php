@@ -26,7 +26,12 @@ class NDetailTable extends Model
                 $field['colspan'] = !empty($childs) ? count($childs) : 1;
             }
             $conditions = !empty($field['condition']) ? json_decode($field['condition'], true) : [];
-            if (!empty($where) && !empty($conditions)) {
+            if(!empty($field['group_user'])){
+                $arr_group = explode(',', $field['group_user']);
+                if (in_array(\GroupUser::getCurrent(), $arr_group)) {
+                    $fields[] = $field;       
+                }
+            }elseif (!empty($where) && !empty($conditions)) {
                 foreach ($conditions as $condition) {
                     if (in_array($condition, $where)) {
                         $fields[] = $field;

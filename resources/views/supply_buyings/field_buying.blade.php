@@ -3,7 +3,7 @@
         $name = $field['name'];
         $field['name'] = 'supply['.$index.']['.$name.']';
         $arr = processArrField($field);
-        $arr['min_label'] = 115;
+        $arr['min_label'] = 150;
         $arr['default_field']['type'] = $type;
         $arr['value'] = @$group_value[$name];
         if (!GroupUser::isPlanHandle()) {

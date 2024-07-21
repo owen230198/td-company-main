@@ -22,6 +22,20 @@
         @php
             $do_buy_fields = [
                 [
+                    'name' => 'ship_price',
+                    'type' => 'text',
+                    'note' => 'Chi phí vận chuyển',
+                    'attr' => ['type_input' => 'number', 'readonly' => 1, 'inject_class' => '__buying_ship_price __buying_change_input'],
+                    'value' => @$dataItem['ship_price'] ?? 0
+                ],
+                [
+                    'name' => 'other_price',
+                    'type' => 'text',
+                    'note' => 'Chi phí khác',
+                    'attr' => ['type_input' => 'number', 'readonly' => 1, 'inject_class' => '__buying_other_price __buying_change_input'],
+                    'value' => @$dataItem['other_price'] ?? 0
+                ],
+                [
                     'name' => 'total',
                     'type' => 'text',
                     'note' => 'Tổng tiền mua hàng',
@@ -32,15 +46,18 @@
                     'name' => 'bill',
                     'note' => 'Hóa đơn mua hàng',
                     'type' => 'filev2',
-                    'other_data' => ['role_update' => [\GroupUser::DO_BUYING], 'field_name' => 'bill'],
+                    'other_data' => ['role_update' => [\GroupUser::WAREHOUSE], 'field_name' => 'bill'],
                     'value' => @$dataItem['bill']
                 ]
             ];
-            if (\GroupUser::isWarehouse()) {
-                unset($do_buy_fields[0]);
+            if (\GroupUser::isDoBuying()) {
+                unset($do_buy_fields[3]);
             } 
         @endphp
         @foreach ($do_buy_fields as $do_buy_field)
+            @php
+                $do_buy_field['min_label'] = 150;
+            @endphp
             @include('view_update.view', $do_buy_field) 
         @endforeach
     @endif  
