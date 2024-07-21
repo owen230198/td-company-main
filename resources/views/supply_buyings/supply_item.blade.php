@@ -1,5 +1,5 @@
 @php
-    $field_supply_type = \App\Models\SupplyBuying::getFeildSupplyJson($index, @$value);
+    $field_supply_type = \App\Models\SupplyBuying::getFeildSupplyJson(@$value);
 @endphp
 <div class="item_supp_buy mb-3 pb-3 border_bot_main position-relative" data-index = {{ $index }}>
     @if (\GroupUser::isPlanHandle() || \GroupUser::isApplyBuying())

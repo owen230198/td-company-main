@@ -20,7 +20,7 @@ class SupplyBuyingController extends Controller
 
     public function ProcessData(&$data)
     {
-        $data['status'] = \StatusConst::NOT_ACCEPTED;
+        $data['status'] = \StatusConst::ACCEPTED;
         $data['supply'] = json_encode($data['supply']);
     }
 

@@ -412,61 +412,94 @@ class NGroupUser extends Model
 
     static function isSale($group_user = 0)
     {
+        if (self::isAdmin()) {
+            return true;
+        }
         $group_user = !empty($group_user) ? $group_user : self::getCurrent();
         return $group_user == self::SALE;
     }
 
     static function isTechApply($group_user = 0)
     {
+        if (self::isAdmin()) {
+            return true;
+        }
         $group_user = !empty($group_user) ? $group_user : self::getCurrent();
         return $group_user == self::TECH_APPLY;
     }
 
     static function isDesign($group_user = 0)
     {
+        if (self::isAdmin()) {
+            return true;
+        }
         $group_user = !empty($group_user) ? $group_user : self::getCurrent();
         return $group_user == self::DESIGN;
     }
 
     static function isTechHandle($group_user = 0)
     {
+        if (self::isAdmin()) {
+            return true;
+        }
         $group_user = !empty($group_user) ? $group_user : self::getCurrent();
         return $group_user == self::TECH_HANDLE;
     }
 
     static function isPlanHandle($group_user = 0)
     {
+        if (self::isAdmin()) {
+            return true;
+        }
         $group_user = !empty($group_user) ? $group_user : self::getCurrent();
         return $group_user == self::PLAN_HANDLE;
     }
     static function isWarehouse($group_user = 0)
     {
+        if (self::isAdmin()) {
+            return true;
+        }
         $group_user = !empty($group_user) ? $group_user : self::getCurrent();
         return $group_user == self::WAREHOUSE;
     }
     static function isApplyBuying($group_user = 0)
     {
+        if (self::isAdmin()) {
+            return true;
+        }
         $group_user = !empty($group_user) ? $group_user : self::getCurrent();
         return $group_user == self::APPLY_BUYING;
     }
     static function isDoBuying($group_user = 0)
     {
+        if (self::isAdmin()) {
+            return true;
+        }
         $group_user = !empty($group_user) ? $group_user : self::getCurrent();
         return $group_user == self::DO_BUYING;
     }
     static function isKCS($group_user = 0)
     {
+        if (self::isAdmin()) {
+            return true;
+        }
         $group_user = !empty($group_user) ? $group_user : self::getCurrent();
         return $group_user == self::KCS;
     }
     static function isProductWarehouse($group_user = 0)
     {
+        if (self::isAdmin()) {
+            return true;
+        }
         $group_user = !empty($group_user) ? $group_user : self::getCurrent();
         return $group_user == self::PRODUCT_WAREHOUSE;
     }
 
     static function isAccounting($group_user = 0)
     {
+        if (self::isAdmin()) {
+            return true;
+        }
         $group_user = !empty($group_user) ? $group_user : self::getCurrent();
         return $group_user == self::ACCOUNTING;
     }

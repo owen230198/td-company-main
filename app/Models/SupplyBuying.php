@@ -8,7 +8,7 @@ class SupplyBuying extends Model
     protected $table = 'supply_buyings';
     protected $protectFields = false;
     const BOUGHT = 'bought';
-    static function getFeildSupplyJson($index, $value = [])
+    static function getFeildSupplyJson($value = [])
     {
         $field_supp_type = [
             'name' => 'type',
