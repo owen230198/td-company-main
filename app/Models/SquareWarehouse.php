@@ -68,7 +68,10 @@ class SquareWarehouse extends Model
     }
 
     static function getLabelLinking($data)
-    {   
+    {
+        if (empty($data)) {
+            return '';
+        }
         return self::isWeightSupply($data->type) ? $data->name : getFieldDataById('name', 'materals', $data->supp_price).' - Khổ : '.$data->width;
     }
 }
