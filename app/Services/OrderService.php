@@ -85,6 +85,9 @@ class OrderService extends BaseService
         $ret_id = $model::insertGetId($data_table);
         $is_quote = $table == 'quotes';
         $ret_update = $is_quote ? ['seri' => 'BG-'.sprintf("%08s", $ret_id)] : ['code' => 'DH-'.sprintf("%08s", $ret_id), 'return_time' => ''];
+        if (!$is_quote) {
+            $ret_update['quote'] = '';
+        }
         $model::where('id', $ret_id)->update($ret_update);
         //log insert table
         logActionUserData('insert', $table, $ret_id, $data_table);

@@ -337,6 +337,11 @@
                 if ($handle_code) {
                     $product['status'] = \StatusConst::NOT_ACCEPTED;
                 }
+                if ($handle_code) {
+                    $product['quote_id'] = '';
+                }else{
+                    $product['order'] = '';
+                }
                 $base_service->configBaseDataAction($product);
                 $product_id = Product::insertGetId($product);
                 $childs = Product::where('parent', $old_product_id)->get()->makeHidden($hidden_fields)->toArray();
