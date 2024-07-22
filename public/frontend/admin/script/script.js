@@ -770,12 +770,13 @@ var changeInputPriceBuying = function () {
         let type_supp = item.find('select.__select_supp_type_buying').val();
         let total_input = item.find('.__buying_total_input');
         if (type_supp == 'paper') {
-            let length = getEmptyDefault(item.find('input.__paper_length_input').val(), 1, 'number');
-            let width = getEmptyDefault(item.find('input.__paper_width_input').val(), 1, 'number');
-            let qtv = getEmptyDefault(item.find('input.__paper_qtv_input').val(), 1, 'number');
-            total_input.val(length * width * qtv * price * qty);
+            let length = getEmptyDefault(item.find('input.__paper_length_input').val(), 1, 'float')/100;
+            let width = getEmptyDefault(item.find('input.__paper_width_input').val(), 1, 'float')/100;
+            let qtv = getEmptyDefault(item.find('input.__paper_qtv_input').val(), 1, 'float')/100;
+            let total = parseInt(length * width * qtv * price * qty);
+            total_input.val(total);
         }else{
-            total_input.val(price * qty);
+            total_input.val(parseInt(price * qty));
         }
         let parent = _this.closest('.json_supply_buy');
         calcTotalSupplyBuying(parent);

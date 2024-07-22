@@ -119,6 +119,7 @@
                 if (@$supp_buying->status != \StatusConst::NOT_ACCEPTED) {
                     return returnMessageAjax(100, 'Dữ liệu không hợp lệ !');
                 }
+                dd($request->all());
                 $supp_buying->status = \StatusConst::ACCEPTED;
                 $supp_buying->applied_by = \User::getCurrent('id');
                 $supp_buying->save();
