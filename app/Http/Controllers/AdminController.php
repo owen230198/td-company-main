@@ -135,6 +135,7 @@ class AdminController extends Controller
         $this->handleViewWhereVariable($request, $table, $role, $data);
         $data['data_tables'] = getDataTable($table, self::$view_where);
         $data['is_export'] = 1;
+        $this->admins->handleFieldView($data, $table, self::$view_where);
         return Excel::download(new \App\Services\ExportExcel\ExportExcelService($data, 'table.table_base_view'), $data['title'].'.xlsx');
     }
 

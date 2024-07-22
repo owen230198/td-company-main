@@ -348,16 +348,16 @@ use App\Models\SquareWarehouse;
                 return returnMessageAjax(110, 'Dữ liệu không hợp lệ !');
             }
             $elenemt_checks = getProductElementData($obj_order->category, $obj_order->id, true, true);
-            foreach ($elenemt_checks as $elenemt_check) {
-                if (!empty($elenemt_check['data'])) {
-                    $check_data = $elenemt_check['data'];
-                    foreach ($check_data as $supply_check) {
-                        if (getHandleSupplyStatus($supply_check->product, $supply_check->id, @$elenemt_check['pro_field']) != CSupply::HANDLED) {
-                            return returnMessageAjax(100, 'Vật tư '.getSupplyNameByKey($elenemt_check['pro_field']).' vẫn chưa được kế toán duyệt xuất !');
-                        }
-                    }
-                }
-            }
+            // foreach ($elenemt_checks as $elenemt_check) {
+            //     if (!empty($elenemt_check['data'])) {
+            //         $check_data = $elenemt_check['data'];
+            //         foreach ($check_data as $supply_check) {
+            //             if (getHandleSupplyStatus($supply_check->product, $supply_check->id, @$elenemt_check['pro_field']) != CSupply::HANDLED) {
+            //                 return returnMessageAjax(100, 'Vật tư '.getSupplyNameByKey($elenemt_check['pro_field']).' vẫn chưa được kế toán duyệt xuất !');
+            //             }
+            //         }
+            //     }
+            // }
             $process = $this->services->createWorkerCommand($obj_order);
             if ($process) {
                 $making_process_status = Order::MAKING_PROCESS;
