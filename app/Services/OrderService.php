@@ -315,13 +315,15 @@ class OrderService extends BaseService
             $code = $supply->code;
             if ($type == \TDConst::FILL && !empty($data_handle['stage'])) {
                 foreach ($data_handle['stage'] as $fillkey => $stage) {
-                    $data_command['name'] = getFieldDataById('name', 'products', $supply->product).'('.getFieldDataById('name', 'materals', @$stage['materal']).')';
-                    $data_command['fill_handle'] = json_encode($stage);
-                    $data_command['handle'] = $stage;
-                    $data_command['machine_type'] = getFieldDataById('type', 'devices', $stage['machine']);
-                    $data_command['fill_materal'] = $stage['materal'];
-                    $fill_code = $code.''.getCharaterByNum($fillkey);
-                    WSalary::commandStarted($fill_code, $data_command, $table_supply, $supply);
+                    if (!empty($stage['cost'])) {
+                        $data_command['name'] = getFieldDataById('name', 'products', $supply->product).'('.getFieldDataById('name', 'materals', @$stage['materal']).')';
+                        $data_command['fill_handle'] = json_encode($stage);
+                        $data_command['handle'] = $stage;
+                        $data_command['machine_type'] = getFieldDataById('type', 'devices', $stage['machine']);
+                        $data_command['fill_materal'] = $stage['materal'];
+                        $fill_code = $code.''.getCharaterByNum($fillkey);
+                        WSalary::commandStarted($fill_code, $data_command, $table_supply, $supply);
+                    }
                 }
             }else{
                 if (!empty($data_handle['machine'])) {
