@@ -9,7 +9,7 @@
         if (!\GroupUser::isPlanHandle()) {
             $arr['attr']['readonly'] = 1;
         }
-        if (\GroupUser::isDoBuying() && in_array(@$dataItem['status'], [\StatusConst::PROCESSING, \StatusConst::NOT_ACCEPTED]) && in_array($name, ['width', 'length'])) {
+        if ((\GroupUser::isDoBuying() || \GroupUser::isAdmin()) && in_array(@$dataItem['status'], [\StatusConst::PROCESSING, \StatusConst::NOT_ACCEPTED]) && in_array($name, ['width', 'length'])) {
             $arr['attr']['readonly'] = 0;
         }
     @endphp

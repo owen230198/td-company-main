@@ -113,7 +113,7 @@
             if (!$request->isMethod('POST')) {
                 return back()->with('error', 'Yêu cầu không hợp lệ !');
             }
-            if (\GroupUser::isApplyBuying()) {
+            if (\GroupUser::isApplyBuying() || \GroupUser::isAdmin()) {
                 $supp_buying = SupplyBuying::find($id);
                 $dataItem = $supp_buying->replicate();
                 if (@$supp_buying->status != \StatusConst::NOT_ACCEPTED) {
@@ -198,7 +198,7 @@
 
         public function confirmWarehouseImported(Request $request, $id)
         {
-            if (\GroupUser::isWarehouse()) {
+            if (\GroupUser::isWarehouse() || \GroupUser::isAdmin()) {
                 $supp_buying = SupplyBuying::find($id);
                 if (@$supp_buying->status != SupplyBuying::BOUGHT) {
                     return returnMessageAjax(100, 'Vật tư chưa được xác nhận mua về !');

@@ -18,7 +18,7 @@
         </button>
     </div>
     @endif
-    @if (\GroupUser::isDoBuying() || \GroupUser::isWarehouse())
+    @if (\GroupUser::isAdmin() || \GroupUser::isDoBuying() || \GroupUser::isWarehouse())
         @php
             $readonly_price = \App\Models\SupplyBuying::checkReadOnlyInputPrice(@$dataItem->status);
             $do_buy_fields = [
