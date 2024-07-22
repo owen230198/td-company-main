@@ -772,7 +772,7 @@ var changeInputPriceBuying = function () {
         if (type_supp == 'paper') {
             let length = getEmptyDefault(item.find('input.__paper_length_input').val(), 1, 'float')/100;
             let width = getEmptyDefault(item.find('input.__paper_width_input').val(), 1, 'float')/100;
-            let qtv = getEmptyDefault(item.find('input.__paper_qtv_input').val(), 1, 'float')/100;
+            let qtv = getEmptyDefault(item.find('input.__paper_qtv_input').val(), 1, 'float')/1000;
             let total = parseInt(length * width * qtv * price * qty);
             total_input.val(total);
         }else{
