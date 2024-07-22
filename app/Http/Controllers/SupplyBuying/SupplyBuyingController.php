@@ -159,6 +159,7 @@
             $supp_buying->ship_price = $ship_price;
             $supp_buying->other_price = $other_price;
             $supp_buying->total = $buying_total;
+            $supp_buying->provider = @$data['provider'];
             $supp_buying->status = \StatusConst::NOT_ACCEPTED;
             $supp_buying->contact_by = \User::getCurrent('id');
             $supp_buying->save();
