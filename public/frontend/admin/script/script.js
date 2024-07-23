@@ -727,17 +727,6 @@ var submitOnlylinkingData = function () {
     })
 }
 
-var confirmBuying = function () {
-    $(document).on('click', 'button.__confirm_buying', function (event) {
-        event.preventDefault();
-        let id = $(this).data('id');
-        ajaxBaseCall({
-            url: getBaseRoute('confirm-supply-buy/' + id),
-            type: 'POST'
-        });
-    });
-}
-
 var calcTotalSupplyBuying = function(json_supp_module)
 {
     let list_item = json_supp_module.find('.item_supp_buy');
@@ -1073,7 +1062,6 @@ $(function () {
     addDataLinkingModule();
     removeParentElement();
     submitOnlylinkingData();
-    confirmBuying();
     changeInputPriceBuying();
     totalSupplyBuyingInput();
     confirmBought();

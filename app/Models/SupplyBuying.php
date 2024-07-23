@@ -51,7 +51,11 @@ class SupplyBuying extends Model
             'name' => 'qty',
             'type' => 'text',
             'note' => 'Số lượng',
-            'attr' => ['type_input' => 'number', 'inject_class' => '__buying_qty_input __buying_change_input', 'readonly' => !\GroupUser::isPlanHandle()]
+            'attr' => [
+                'type_input' => 'number', 
+                'inject_class' => '__buying_qty_input __buying_change_input', 
+                'readonly' => self::checkReadOnlyInputPrice($status) == 0 || \GroupUser::isPlanHandle() ? 0 : 1
+            ]
         ];
         $field_price = [
             'name' => 'price',

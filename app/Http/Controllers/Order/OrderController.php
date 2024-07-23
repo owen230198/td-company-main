@@ -207,7 +207,7 @@ use App\Models\SquareWarehouse;
 
         public function supplyHandle(Request $request)
         {
-            if (\GroupUser::isAdmin() || \GroupUser::isPlanHandle()) {
+            if (\GroupUser::isPlanHandle()) {
                 $table = $request->input('table');
                 $id = $request->input('id');
                 $data_supply = \DB::table($table)->find($id);
@@ -234,6 +234,7 @@ use App\Models\SquareWarehouse;
                         $data['table'] = $table;
                         $data['supp_view'] = $table;
                         $data['supply_size'] = $supp_size;
+                        $data['product'] = Product::find($data_supply->product); 
                         if (view()->exists('orders.users.6.supply_handles.'.$prefix)) {
                             return view('orders.users.6.supply_handles.'.$prefix, $data); 
                         }else{

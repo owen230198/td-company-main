@@ -45,13 +45,22 @@
         }    
         public function insert($request)
         {
+            $nosidebar = !empty($request->input('nosidebar'));
             $table = 'supply_buyings';
             if (!$request->isMethod('POST')) {
                 $data = $this->admins->getDataActionView($table, __FUNCTION__, 'Thêm mới');
                 $data['action_url'] = url('insert/'.$table);
+                if (!empty($request->input('name'))) {
+                    if ($nosidebar) {
+                        $data['action_url'] .= '?nosidebar=1';
+                    }
+                    $dataItem['name'] = $request->input('name');
+                    $dataItem['note'] = 'Mua vật tư cho đơn hàng: '.$request->input('name');
+                    $data['dataItem'] = collect($dataItem);
+                }
                 return view('action.view', $data);
             }else{
-                $data = $request->except('_token');
+                $data = $request->except(['_token', 'nosidebar']);
                 $vaildate = $this->validateData($data);
                 if (@$vaildate['code'] == 100) {
                     return $vaildate;    
@@ -62,7 +71,7 @@
                 $insert_id = SupplyBuying::insertGetId($data);
                 if ($insert_id) {
                     SupplyBuying::where('id', $insert_id)->update(['code' => 'CT-'.formatCodeInsert($insert_id)]);
-                    $back_routes = getBackUrl() ?? url('view/'.$table);
+                    $back_routes = $nosidebar ? \StatusConst::CLOSE_POPUP_NO_RELOAD : (getBackUrl() ?? url('view/'.$table));
                     logActionUserData(__FUNCTION__, $table, $insert_id, $data);
                     return returnMessageAjax(200, 'Thêm dữ liệu thành công!', $back_routes);
                 }else {
@@ -108,28 +117,7 @@
             return view('supply_buyings.supply_item', ['index' => (int) $request->input('index')]);
         }
 
-        public function confirmSupplyBuy(Request $request, $id)
-        {
-            if (!$request->isMethod('POST')) {
-                return back()->with('error', 'Yêu cầu không hợp lệ !');
-            }
-            if (\GroupUser::isApplyBuying() || \GroupUser::isAdmin()) {
-                $supp_buying = SupplyBuying::find($id);
-                $dataItem = $supp_buying->replicate();
-                if (@$supp_buying->status != \StatusConst::NOT_ACCEPTED) {
-                    return returnMessageAjax(100, 'Dữ liệu không hợp lệ !');
-                }
-                $supp_buying->status = \StatusConst::ACCEPTED;
-                $supp_buying->applied_by = \User::getCurrent('id');
-                $supp_buying->save();
-                logActionUserData('apply', 'supply_buyings', $id, $dataItem);
-                return returnMessageAjax(200, 'Đã duyệt mua thành công cho chứng từ mua hàng '. $supp_buying->code.' !', getBackUrl());
-            }else{
-                return returnMessageAjax(100, 'Không có quyền thực hiện thao tác này !');
-            }
-        }
-
-        private function confirmContact($list_supp, $data_supply, $supp_buying, $data)
+        private function handleConfirmData($list_supp, $data_supply, $supp_buying, $data, $is_processing)
         {
             $buying_total = 0;
             foreach ($list_supp as $key => $supply) {
@@ -146,6 +134,7 @@
                         $supp_total = $price * $qty;
                     }
                     $list_supp[$key]['total'] = $supp_total;
+                    $list_supp[$key]['qty'] = $qty;
                     $buying_total += $supp_total;
                 }else{
                     return returnMessageAjax(100, 'Bạn cần nhập đầy đủ thông tin đơn giá mua !');
@@ -159,11 +148,16 @@
             $supp_buying->other_price = $other_price;
             $supp_buying->total = $buying_total;
             $supp_buying->provider = @$data['provider'];
-            $supp_buying->status = \StatusConst::NOT_ACCEPTED;
-            $supp_buying->contact_by = \User::getCurrent('id');
+            $supp_buying->payment_status = @$data['payment_status'];
+            $supp_buying->note = @$data['note'];
+            $supp_buying->status = $is_processing ? \StatusConst::NOT_ACCEPTED : \StatusConst::ACCEPTED;
+            $user_key = $is_processing ? 'contact_by' : 'applied_by';
+            $supp_buying->{$user_key} = \User::getCurrent('id');
             $supp_buying->save();
-            logActionUserData('contact_confirm', 'supply_buyings', $supp_buying->id, $dataItem);
-            return returnMessageAjax(200, 'Đã liên hệ với NCC cho chứng từ mua hàng '. $supp_buying->code.' !', getBackUrl());
+            $action_log = $is_processing ? 'contact_confirm' : 'apply';
+            logActionUserData($action_log, 'supply_buyings', $supp_buying->id, $dataItem);
+            $success_mess = $is_processing ? 'Đã liên hệ với NCC '  : 'Đã duyệt mua thành công ';
+            return returnMessageAjax(200, $success_mess.' cho chứng từ mua hàng '. $supp_buying->code.' !', getBackUrl());
         }
 
         public function confirmSupplyBought(Request $request, $status, $id)
@@ -182,15 +176,15 @@
                 if ($supp_buying->status != $status) {
                     return returnMessageAjax(100, 'Dữ liệu không hợp lệ !');
                 }
-                if ($status == \StatusConst::PROCESSING) {
-                    return $this->confirmContact($list_supp, $data_supply, $supp_buying, $data);
-                }else{
+                if ($status == \StatusConst::ACCEPTED) {
                     $dataItem = $supp_buying->replicate();
                     $supp_buying->status = SupplyBuying::BOUGHT;
                     $supp_buying->bought_by = \User::getCurrent('id');
                     $supp_buying->save();
                     logActionUserData('confirm_bought', 'supply_buyings', $id, $dataItem);
                     return returnMessageAjax(200, 'Đã xác nhận mua vật tư thành công cho chứng từ mua hàng '. $supp_buying->code.' !', getBackUrl());
+                }else{
+                    return $this->handleConfirmData($list_supp, $data_supply, $supp_buying, $data, $status == \StatusConst::PROCESSING);   
                 }
             }else{
                 return returnMessageAjax(100, 'Không có quyền thực hiện thao tác này !');

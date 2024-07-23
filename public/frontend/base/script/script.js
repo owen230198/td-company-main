@@ -36,6 +36,8 @@ var ajaxBaseCall = function (param) {
 							window.location.reload();
 						} else if (data.url == CLOSE_POPUP) {
 							closeDataPopup(true);
+						}else if (data.url == 'close_popup_no_reload') {
+							closeDataPopup();
 						} else {
 							window.location = data.url;
 						}
