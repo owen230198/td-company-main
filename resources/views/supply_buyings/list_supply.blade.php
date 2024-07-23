@@ -31,13 +31,20 @@
                                     @foreach ($fields as $field)
                                         @php
                                             $field = processArrField($field);
-                                            $field['value'] = $data->{$field['name']};
+                                            $field_type = $field['type'];
+                                            if ($field_type != 'group') {
+                                                $field['value'] = $data->{$field['name']};
+                                            }
                                             $field['history_view'] = true;
                                         @endphp
-                                        <div class="mb-1 d-flex align-items-center">
-                                            <label class="mr-2 mb-0 font_bold">- {{ $field['note'] }}: </label>
-                                            @include('view_table.'.$field['type'], $field)
-                                        </div>
+                                        @if ($field_type == 'group')
+                                            @include('view_table.group', $field)
+                                        @else
+                                            <div class="mb-1 d-flex align-items-center">
+                                                <label class="mr-2 mb-0 font_bold">- {{ $field['note'] }}: </label>
+                                                @include('view_table.'.$field_type, $field)
+                                            </div>
+                                        @endif
                                     @endforeach
                                 </td>
                                 <td>
