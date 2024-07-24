@@ -13,12 +13,41 @@ class WarehouseProvider extends Model
             \GroupUser::WAREHOUSE => [
                 'insert' => 1,
                 'view' => 1,
-                'update' => 1
+                'update' => 
+                [
+                    'with' => [[
+                        'type' => 'group',
+                        'query' => [
+                            ['key' => 'created_by', 'value' => \User::getCurrent('id')]
+                        ]
+                    ]]
+                ]
             ],
             \GroupUser::PLAN_HANDLE => [
                 'insert' => 1,
                 'view' => 1,
-                'update' => 1
+                'update' => 
+                [
+                    'with' => [[
+                        'type' => 'group',
+                        'query' => [
+                            ['key' => 'created_by', 'value' => \User::getCurrent('id')]
+                        ]
+                    ]]
+                ]
+            ],
+            \GroupUser::DO_BUYING => [
+                'insert' => 1,
+                'view' => 1,
+                'update' => 
+                [
+                    'with' => [[
+                        'type' => 'group',
+                        'query' => [
+                            ['key' => 'created_by', 'value' => \User::getCurrent('id')]
+                        ]
+                    ]]
+                ]
             ],
         ];
         return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];
