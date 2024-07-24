@@ -116,4 +116,14 @@ class Paper extends Model
             return ($supp_qty * $work_color * 2 * $work_price + ($shape_price * $color_num) + ($model_price * $color_num)) * $factor;
         }
     }
+
+    static function getRole()
+    {
+        $role = [
+            \GroupUser::TECH_APPLY => [
+                'remove' => 1
+            ]
+        ];
+        return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];
+    }
 }
