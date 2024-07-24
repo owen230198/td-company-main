@@ -33,7 +33,7 @@ class ImportExtendWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows
         $ret =[
             'type' => $type,
             'name' => $row['ten'],
-            'ver' => $row['ban'],
+            'ver' => @$row['ban'],
             'qty' => $row['so_luong'],
             'unit' => getKeyUnitKeyWarehouse($row['dvt']),
             'status' => 'imported',

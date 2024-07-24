@@ -21,6 +21,7 @@
                     'view' => ['with' => ['key' => 'status', 'value' => self::HANDLING]]
                 ],
                 \GroupUser::PLAN_HANDLE => [
+                    'insert' => 1,
                     'view' => ['with' => 
                         [
                             'type' => 'group',
