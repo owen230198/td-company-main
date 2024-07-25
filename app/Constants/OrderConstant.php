@@ -4,6 +4,7 @@
     use \App\Models\CSupply;
     use App\Models\SupplyBuying;
     use App\Models\SupplyWarehouse;
+use PhpParser\Node\Stmt\GroupUse;
 
     class OrderConstant
     {
@@ -17,112 +18,128 @@
                 'table' => 'products', 
                 'text' => 'Duyệt thiết kế', 
                 'condition' => ['status' => Order::NOT_ACCEPTED],
-                'link' => 'view/products?default_data=%7B"status"%3A"'.Order::NOT_ACCEPTED.'"%7D' 
+                'link' => 'view/products?default_data=%7B"status"%3A"'.Order::NOT_ACCEPTED.'"%7D',
+                'group_user' => [\GroupUser::ADMIN, \GroupUser::SALE, \GroupUser::TECH_APPLY, \GroupUser::DESIGN] 
             ], 
             [
                 'icon' => 'c_designs', 
                 'table' => 'c_designs', 
                 'text' => 'Lệnh thiết kế', 
                 'condition' => ['status' => Order::NOT_ACCEPTED],
-                'link' => 'view/c_designs?default_data=%7B"status"%3A"'.Order::NOT_ACCEPTED.'"%7D'  
+                'link' => 'view/c_designs?default_data=%7B"status"%3A"'.Order::NOT_ACCEPTED.'"%7D',
+                'group_user' => [\GroupUser::ADMIN, \GroupUser::SALE, \GroupUser::TECH_APPLY, \GroupUser::DESIGN]
             ],
             [
                 'icon' => 'tech', 
                 'table' => 'products', 
                 'text' => 'Xử lí kỹ thuật', 
                 'condition' => ['status' => Order::DESIGN_SUBMITED],
-                'link' => 'view/products?default_data=%7B"status"%3A"'.Order::DESIGN_SUBMITED.'"%7D' 
+                'link' => 'view/products?default_data=%7B"status"%3A"'.Order::DESIGN_SUBMITED.'"%7D',
+                'group_user' => [\GroupUser::ADMIN, \GroupUser::SALE, \GroupUser::TECH_APPLY, \GroupUser::DESIGN, \GroupUser::TECH_HANDLE]  
             ],
             [
                 'icon' => 'print_join', 
                 'table' => 'papers', 
                 'text' => 'Lệnh in ghép', 
                 'condition' => ['status' => Order::TECH_SUBMITED, 'is_join' => 1],
-                'link' => 'list-print-joined' 
+                'link' => 'list-print-joined',
+                'group_user' => [\GroupUser::ADMIN, \GroupUser::TECH_APPLY, \GroupUser::DESIGN, \GroupUser::TECH_HANDLE]   
             ],
             [
                 'icon' => 'c_processes', 
                 'table' => 'products', 
                 'text' => 'Duyệt sản xuất', 
                 'condition' => ['status' => Order::TECH_SUBMITED],
-                'link' => 'view/products?default_data=%7B"status"%3A"'.Order::TECH_SUBMITED.'"%7D' 
+                'link' => 'view/products?default_data=%7B"status"%3A"'.Order::TECH_SUBMITED.'"%7D',
+                'group_user' => [\GroupUser::ADMIN, \GroupUser::TECH_APPLY, \GroupUser::TECH_HANDLE, \GroupUser::PLAN_HANDLE]   
             ],
             [
                 'icon' => 'exsupp', 
                 'table' => 'c_supplies', 
                 'text' => 'Xuất vật tư',
                 'condition' => ['status' => CSupply::HANDLING],
-                'link' => 'view/c_supplies?default_data=%7B"status"%3A"'.CSupply::HANDLING.'"%7D' 
+                'link' => 'view/c_supplies?default_data=%7B"status"%3A"'.CSupply::HANDLING.'"%7D',
+                'group_user' => [\GroupUser::ADMIN, \GroupUser::PLAN_HANDLE, \GroupUser::WAREHOUSE]  
             ],
             [
                 'icon' => 'imbox', 
                 'table' => 'supply_warehouses', 
                 'text' => 'Băng lề vật tư',
                 'condition' => ['status' => SupplyWarehouse::WAITING],
-                'link' => 'view/supply_warehouses?default_data=%7B"status"%3A"'.SupplyWarehouse::WAITING.'"%7D' 
+                'link' => 'view/supply_warehouses?default_data=%7B"status"%3A"'.SupplyWarehouse::WAITING.'"%7D',
+                'group_user' => [\GroupUser::ADMIN, \GroupUser::TECH_HANDLE, \GroupUser::PLAN_HANDLE, \GroupUser::WAREHOUSE, \GroupUser::ACCOUNTING]  
             ],
             [
                 'icon' => 'imsupp', 
                 'table' => 'print_warehouses', 
                 'text' => 'Băng lề giấy in',
                 'condition' => ['status' => SupplyWarehouse::WAITING],
-                'link' => 'view/print_warehouses?default_data=%7B"status"%3A"'.SupplyWarehouse::WAITING.'"%7D' 
+                'link' => 'view/print_warehouses?default_data=%7B"status"%3A"'.SupplyWarehouse::WAITING.'"%7D',
+                'group_user' => [\GroupUser::ADMIN, \GroupUser::TECH_HANDLE, \GroupUser::PLAN_HANDLE, \GroupUser::WAREHOUSE, \GroupUser::ACCOUNTING]  
             ],
             [
                 'icon' => 'contact', 
                 'table' => 'supply_buyings', 
                 'text' => 'Liên hệ NCC vật tư',
                 'condition' => ['status' => \StatusConst::PROCESSING],
-                'link' => 'view/supply_buyings?default_data=%7B"status"%3A"'.\StatusConst::PROCESSING.'"%7D' 
+                'link' => 'view/supply_buyings?default_data=%7B"status"%3A"'.\StatusConst::PROCESSING.'"%7D',
+                'group_user' => [\GroupUser::ADMIN, \GroupUser::PLAN_HANDLE, \GroupUser::APPLY_BUYING, \GroupUser::DO_BUYING]  
             ],
             [
                 'icon' => 'apply_buy', 
                 'table' => 'supply_buyings', 
                 'text' => 'Duyệt mua vật tư',
                 'condition' => ['status' => \StatusConst::NOT_ACCEPTED],
-                'link' => 'view/supply_buyings?default_data=%7B"status"%3A"'.\StatusConst::NOT_ACCEPTED.'"%7D' 
+                'link' => 'view/supply_buyings?default_data=%7B"status"%3A"'.\StatusConst::NOT_ACCEPTED.'"%7D',
+                'group_user' => [\GroupUser::ADMIN, \GroupUser::PLAN_HANDLE, \GroupUser::APPLY_BUYING, \GroupUser::DO_BUYING]  
             ],
             [
                 'icon' => 'buy', 
                 'table' => 'supply_buyings', 
                 'text' => 'Mua vật tư',
                 'condition' => ['status' => \StatusConst::ACCEPTED],
-                'link' => 'view/supply_buyings?default_data=%7B"status"%3A"'.\StatusConst::ACCEPTED.'"%7D' 
+                'link' => 'view/supply_buyings?default_data=%7B"status"%3A"'.\StatusConst::ACCEPTED.'"%7D',
+                'group_user' => [\GroupUser::ADMIN, \GroupUser::PLAN_HANDLE, \GroupUser::APPLY_BUYING, \GroupUser::DO_BUYING]  
             ],
             [
                 'icon' => 'submit_buy', 
                 'table' => 'supply_buyings', 
                 'text' => 'Nhập kho vật tư đã mua',
                 'condition' => ['status' => SupplyBuying::BOUGHT],
-                'link' => 'view/supply_buyings?default_data=%7B"status"%3A"'.SupplyBuying::BOUGHT.'"%7D' 
+                'link' => 'view/supply_buyings?default_data=%7B"status"%3A"'.SupplyBuying::BOUGHT.'"%7D',
+                'group_user' => [\GroupUser::ADMIN, \GroupUser::PLAN_HANDLE, \GroupUser::WAREHOUSE, \GroupUser::APPLY_BUYING, \GroupUser::DO_BUYING, \GroupUser::ACCOUNTING]  
             ],
             [
                 'icon' => 'after_print', 
                 'table' => 'after_prints', 
                 'text' => 'KCS sau in',
                 'condition' => ['status' => \StatusConst::PROCESSING],
-                'link' => 'view/after_prints?default_data=%7B"status"%3A"'.\StatusConst::PROCESSING.'"%7D' 
+                'link' => 'view/after_prints?default_data=%7B"status"%3A"'.\StatusConst::PROCESSING.'"%7D',
+                'group_user' => [\GroupUser::ADMIN, \GroupUser::KCS]  
             ],
             [
                 'icon' => 'kcs', 
                 'table' => 'products', 
                 'text' => 'KCS thành phẩm',
                 'condition' => ['status' => \StatusConst::SUBMITED],
-                'link' => 'view/products?default_data=%7B"status"%3A"'.\StatusConst::SUBMITED.'"%7D' 
+                'link' => 'view/products?default_data=%7B"status"%3A"'.\StatusConst::SUBMITED.'"%7D',
+                'group_user' => [\GroupUser::ADMIN, \GroupUser::SALE, \GroupUser::KCS, \GroupUser::PRODUCT_WAREHOUSE]  
             ],
             [
                 'icon' => 'rework', 
                 'table' => 'c_reworks', 
                 'text' => 'Sản xuất lại sản phẩm',
                 'condition' => ['status' => \StatusConst::NOT_ACCEPTED],
-                'link' => 'view/c_reworks?default_data=%7B"status"%3A"'.\StatusConst::NOT_ACCEPTED.'"%7D' 
+                'link' => 'view/c_reworks?default_data=%7B"status"%3A"'.\StatusConst::NOT_ACCEPTED.'"%7D',
+                'group_user' => [\GroupUser::ADMIN, \GroupUser::SALE]  
             ],
             [
                 'icon' => 'product_waiting', 
                 'table' => 'c_expertises', 
                 'text' => 'Duyệt nhập kho sản phẩm',
                 'condition' => ['status' => \StatusConst::NOT_ACCEPTED],
-                'link' => 'view/c_expertises?default_data=%7B"status"%3A"'.\StatusConst::NOT_ACCEPTED.'"%7D' 
+                'link' => 'view/c_expertises?default_data=%7B"status"%3A"'.\StatusConst::NOT_ACCEPTED.'"%7D',
+                'group_user' => [\GroupUser::ADMIN, \GroupUser::KCS, \GroupUser::PRODUCT_WAREHOUSE]  
             ],
         ];
 
