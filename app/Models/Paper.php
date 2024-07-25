@@ -110,10 +110,10 @@ class Paper extends Model
         $work_color = $is_worker ? 1 : $color_num;
         if ($type == \TDConst::ONE_PRINT_TYPE) {
             // Công thức tính chi phí in một mặt: (SL tờ in + tờ cộng thêm khi in) x số màu x DG lượt + (ĐG chỉnh máy x số màu) + (ĐG khuôn mẫu x số màu)
-            return ($supp_qty * $work_color * $work_price + ($shape_price * $color_num) + ($model_price * $color_num)) * $factor;
+            return ($supp_qty * $work_color * $work_price + ($shape_price * $work_color) + ($model_price * $work_color)) * $factor;
         }else{
             // Công thức tính chi phí các kiểu in còn lại: (SL tờ in + tờ cộng thêm khi in) x số màu x 2 x DG lượt + ĐG chỉnh máy + ĐG khuôn mẫu
-            return ($supp_qty * $work_color * 2 * $work_price + ($shape_price * $color_num) + ($model_price * $color_num)) * $factor;
+            return ($supp_qty * $work_color * 2 * $work_price + ($shape_price * $work_color) + ($model_price * $work_color)) * $factor;
         }
     }
 }

@@ -176,6 +176,7 @@ class WSalary extends Model
         $data['work_price'] = $work_price;
         $data['shape_price'] = $shape_price;
         $factor = $this->handle['color'] > 2 && $this->handle['color'] < 5 && @$data_printer['print_length'] == 72 ? 2 : 1;
+        $data['factor'] = $factor;
         $data['total'] = Paper::getPrintFormula(@$this->handle['type'], $paper_qty, $this->handle['color'], $work_price, $shape_price, 0, true, $factor);
         return $data;
     }
