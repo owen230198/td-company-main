@@ -20,6 +20,7 @@
                     <th scope="col">Hệ số</th>
                     <th scope="col">Thành tiền</th>
                     <th scope="col">Thời gian</th>
+                    <th scope="col">Chi tiết</th>
                 </tr>
             </thead>
             <tbody>
@@ -49,6 +50,11 @@
                         <td data-label="Thời gian">
                             <div>
                                 @include('view_table.datetime', ['value' => $item->submited_at])
+                            </div>
+                        </td>
+                        <td data-label="Chi tiết">
+                            <div>
+                                @include('view_table.json_name', ['value' => $item->handle])
                             </div>
                         </td>
                     </tr>
