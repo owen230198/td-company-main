@@ -22,6 +22,27 @@ class SquareWarehouse extends Model
         return in_array(@$type, [\TDConst::EMULSION, \TDConst::SKRINK]);
     }
 
+    static function countPriceByWeight($type)
+    {
+        return in_array($type, [\TDConst::METALAI, \TDConst::NILON, \TDConst::COVER]); 
+    }
+
+    static function countPriceByHank($type)
+    {
+        return in_array($type, [\TDConst::EMULSION, \TDConst::SKRINK]);
+    }
+
+    static function countPriceBySquare($type)
+    {
+        return in_array($type, [\TDConst::DECAL, \TDConst::SILK]);
+    }
+
+    static function getLengthByWeight($materal_id, $weight, $width)
+    {
+        $factor = (float) getFieldDataById('factor', 'materals', $materal_id);
+        return $factor * $weight / $width;   
+    }
+
     static function getDataJsonLinking($warehouse, $q)
     {
         if (!empty($q)) {

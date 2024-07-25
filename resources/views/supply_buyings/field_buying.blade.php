@@ -1,17 +1,33 @@
+@php
+    $supplyBuying = new \App\Models\SupplyBuying;
+    $status = !empty($dataItem->status) ? $dataItem->status : '';
+    $field_qtys = $supplyBuying::getFieldQtyArr($type, $status);
+    $group_name = 'supply['.$index.']';
+@endphp
+@foreach ($field_qtys as $field_qty)
+    @php
+         $name = $field_qty['name'];
+         $field['name'] = $group_name.'['.$name.']';
+         $arr['min_label'] = 150;
+         $arr['value'] = @$group_value[$name];
+    @endphp
+    @include('view_update.view', $field_qty)    
+@endforeach
 @foreach ($fields as $field)
     @php
-        $goup_name = 'supply['.$index.']';
         $name = $field['name'];
-        $field['name'] = $goup_name.'['.$name.']';
+        $field['name'] = $group_name.'['.$name.']';
         $arr = processArrField($field);
         $arr['min_label'] = 150;
         $arr['default_field']['type'] = $type;
         $arr['value'] = @$group_value[$name];
-        $arr['group_name'] = $goup_name;
-        if (!\GroupUser::isPlanHandle()) {
-            $arr['attr']['readonly'] = 1;
+        $arr['group_name'] = $group_name;
+        if (\GroupUser::isPlanHandle() || \GroupUser::isAdmin()) {
+            $arr['attr']['readonly'] = 0;
+        }else{
+            $arr['attr']['readonly'] = 1;    
         }
-        if ((\GroupUser::isDoBuying() || \GroupUser::isAdmin()) && in_array(@$dataItem['status'], [\StatusConst::PROCESSING, \StatusConst::NOT_ACCEPTED]) && in_array($name, ['width', 'length'])) {
+        if (!$supplyBuying::checkReadOnlyInputPrice($status) && in_array($name, ['width', 'length'])) {
             $arr['attr']['readonly'] = 0;
         }
     @endphp

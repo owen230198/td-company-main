@@ -21,7 +21,7 @@ class SupplyBuying extends Model
             'attr' => [
                 "required" => 1, 
                 "inject_class" => "__select_supp_type_buying", 
-                "readonly" => !\GroupUser::isPlanHandle()],
+                "readonly" => \GroupUser::isAdmin() || \GroupUser::isPlanHandle() ? 0 : 1],
             'type' => 'select',
             'value' => !empty($value['supp_type']) ? $value['supp_type'] : '',
             'other_data' => [
@@ -47,16 +47,6 @@ class SupplyBuying extends Model
                 ]
             ]
         ];
-        $field_qty = [
-            'name' => 'qty',
-            'type' => 'text',
-            'note' => 'Số lượng',
-            'attr' => [
-                'type_input' => 'number', 
-                'inject_class' => '__buying_qty_input __buying_change_input', 
-                'readonly' => self::checkReadOnlyInputPrice($status) == 0 || \GroupUser::isPlanHandle() ? 0 : 1
-            ]
-        ];
         $field_price = [
             'name' => 'price',
             'type' => 'text',
@@ -76,7 +66,6 @@ class SupplyBuying extends Model
         if (\GroupUser::isAdmin()) {
             return [
                 $field_supp_type,
-                $field_qty,
                 $field_price,
                 $field_total
             ];
@@ -84,27 +73,68 @@ class SupplyBuying extends Model
         if (\GroupUser::isPlanHandle()) {
             return [
                 $field_supp_type,
-                $field_qty
             ];
         }elseif(\GroupUser::isApplyBuying()){
             return [
                 $field_supp_type,
-                $field_qty
             ];    
         }elseif(\GroupUser::isDoBuying()){
             return [
                 $field_supp_type,
-                $field_qty,
                 $field_price,
                 $field_total
             ];     
         }elseif (\GroupUser::isWarehouse()) {
             return [
                 $field_supp_type,
-                $field_qty
             ]; 
         }    
     }
+
+    static function getFieldQtyArr($type, $status = '')
+    {
+        $admin_dobuying = self::checkReadOnlyInputPrice($status) == 0  ? 0 : 1;
+        $unit = !empty(getUnitNameByType($type)) ? ' ('.getUnitNameByType($type).')' : '';
+        $field_qty = [
+            'name' => 'qty',
+            'type' => 'text',
+            'note' => 'Số lượng'. $unit,
+            'attr' => [
+                'type_input' => 'number', 
+                'inject_class' => '__buying_qty_input __buying_change_input', 
+                'readonly' => !$admin_dobuying || \GroupUser::isPlanHandle() ? 0 : 1
+            ],
+            'min_label' => 150
+        ];
+        $field_hank = [
+            'name' => 'hank',
+            'type' => 'text',
+            'note' => 'Số cuộn',
+            'attr' => [
+                'type_input' => 'number',
+                'readonly' => !$admin_dobuying || \GroupUser::isPlanHandle() ? 0 : 1
+            ],
+            'min_label' => 150
+        ];
+        $field_weight = [
+            'name' => 'weight',
+            'type' => 'text',
+            'note' => 'Số kg',
+            'attr' => [
+                'type_input' => 'number',
+                'readonly' => !$admin_dobuying || \GroupUser::isPlanHandle() ? 0 : 1
+            ],
+            'min_label' => 150
+        ];
+        if (SquareWarehouse::countPriceByWeight($type)) {
+            return [$field_qty, $field_hank];
+        }elseif (SquareWarehouse::countPriceByHank($type)) {
+            return [$field_qty, $field_weight];
+        }else{
+            return [$field_qty];
+        }
+    }
+
     static function getRole()
     {
         $role = [

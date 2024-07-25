@@ -2,7 +2,8 @@
     namespace App\Http\Controllers\SupplyBuying;
     use App\Http\Controllers\Controller;
     use App\Models\PrintWarehouse;
-    use App\Models\SupplyBuying;
+use App\Models\SquareWarehouse;
+use App\Models\SupplyBuying;
     use App\Models\SupplyWarehouse;
     use App\Models\WarehouseHistory;
     use App\Services\WarehouseService;
@@ -207,14 +208,23 @@
                 }
                 $bill = $request->input('bill');
                 foreach ($data_supply as $supply) {
-                    $table_supply = tableWarehouseByType($supply['type']);
+                    $type = $supply['type'];
+                    $table_supply = tableWarehouseByType($type);
                     $data['log']['type'] = @$supply['supp_type'];
-                    $data['log']['qty'] = (int) $supply['qty'];
-                    if (!empty($supply['hank'])) {
+                    $supply_qty = (int) $supply['qty'];
+                    if (SquareWarehouse::countPriceByWeight($type) && !empty($supply['width'])) {
+                        $data['log']['qty'] = SquareWarehouse::getLengthByWeight($supply['supp_price'], $supply_qty, $supply['width']);
                         $data['log']['hank'] = (int) $supply['hank'];
-                    }
-                    if (!empty($supply['weight'])) {
+                        $data['log']['weight'] = (int) $supply_qty;
+                    }elseif(SquareWarehouse::countPriceByHank($type)){
+                        $data['log']['qty'] = $supply_qty;
+                        $data['log']['hank'] = $supply_qty;
+                        if (empty($supply['weight'])) {
+                            return returnMessageAjax(100, 'Bạn chưa nhập số kg cho vật tư '. @$supply['name'].' !');
+                        }
                         $data['log']['weight'] = (int) $supply['weight'];
+                    }else{
+                        $data['log']['qty'] = $supply_qty;
                     }
                     $data['log']['provider'] = @$supp_buying->provider;
                     $data['log']['price'] = @$supply['price'];

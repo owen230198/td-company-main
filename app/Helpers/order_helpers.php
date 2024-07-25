@@ -249,6 +249,7 @@
 
     if (!function_exists('getUnitSupply')) {
         function getUnitSupply($type, $data = new \stdClass()) {
+            
             if (!empty($data->unit)) {
                 return $data->unit;
             }
@@ -262,8 +263,17 @@
                 case in_array($type, [\TDConst::MAGNET]):
                     return 'unit';
                     break;
-                default:
+                case \App\Models\SquareWarehouse::countPriceByWeight($type):
+                    return 'kg';
+                    break;
+                case \App\Models\SquareWarehouse::countPriceByHank($type):
+                    return 'hank';
+                    break;
+                case \App\Models\SquareWarehouse::countPriceBySquare($type):
                     return 'square';
+                    break;
+                default:
+                    return '';
                     break;
             }    
         }
@@ -309,9 +319,15 @@
                     return 'Cm';
                     break;    
                 default:
-                    return 'vật tư';
+                    return 'Cái';
                     break;
             }    
+        }
+    }
+
+    if(!function_exists('getUnitNameByType')){
+        function getUnitNameByType($type){
+            return getUnitWarehouseItem(getUnitSupply($type));
         }
     }
 
