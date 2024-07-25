@@ -168,7 +168,7 @@ class WSalary extends Model
     
     public function getPrintSalary($paper_qty)
     {
-        $printer = !empty($this->handle['printer']) ? $this->handle['printer'] : [];
+        $printer = !empty($this->handle['printer']) ? $this->handle['printer'] : 0;
         $data_printer = Printer::find($printer);
         $work_price = !empty($data_printer['w_work_price']) ? (float) $data_printer['w_work_price'] : 0;
         $shape_price = !empty($data_printer['w_shape_price']) ? (float) $data_printer['w_shape_price'] : 0;

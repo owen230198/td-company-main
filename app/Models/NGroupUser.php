@@ -310,6 +310,7 @@ class NGroupUser extends Model
             self::MODULE['change_password'],
         ],
         self::PLAN_HANDLE => [
+            self::MODULE['supply_extend'],
             self::MODULE['worker_salary'],
             self::MODULE['handle_process'],
             self::MODULE['supp_bying_req'],
