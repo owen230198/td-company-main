@@ -64,7 +64,7 @@ class SquareWarehouse extends Model
 
     static function getName($data)
     {
-        return getFieldDataById('name', 'materals', $data['supp_price']).' - '.$data['width'];
+        return getFieldDataById('name', 'supply_names', $data['device']).' - '.getFieldDataById('name', 'materals', $data['supp_price']).' - '.$data['width'];
     }
 
     static function getLabelLinking($data)

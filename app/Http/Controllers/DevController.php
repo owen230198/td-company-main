@@ -249,12 +249,13 @@ class DevController extends Controller
     }
 
     public function warehouseTableName(){
-        $tables = ['print_warehouses'];
+        $tables = ['square_warehouses'];
         foreach ($tables as $table) {
             $model = getModelByTable($table);
-            $list = $model::all()->toArray();
+            $list = $model::whereIn('type', ['nilon', 'metalai'])->get()->toArray();
             foreach ($list as $item) {
                 $name = $model::getName($item);
+                $name = str_replace('( THUÊ NGOÀI )', '', $name);
                 $update = $model::where('id', $item['id'])->update(['name' => $name]);
                 dump($update, $name);
             }
