@@ -1,6 +1,9 @@
 @include('print_data.header', ['title' => 'Lệnh sản xuất - Giấy in'])
     <div class="handle_content_print mt-4">
-        <p class="d-flex align-items-center mb-2"><span class="w_66 d-block">Tên hàng</span> <span class="font_bold ml-1">: {{ $data_item->name }}</span></p>   
+        <p class="d-flex align-items-center mb-2"><span class="w_66 d-block">Tên hàng</span> 
+            <span class="font_bold ml-1">: 
+            {{ $data_item->name }}</span>
+        </p>   
     </div>
     <div class="mt-3 row row-10">
         @php
@@ -34,7 +37,18 @@
 
             @include('print_data.info_item', ['name' => 'Khổ giấy', 'info' => $size['length'] .' x ' . $size['width']])
 
-            @include('print_data.info_item', ['name' => 'Số lượng cần lấy', 'info' => $data_item->supp_qty])
+            @php
+                $supply_qty = $data_item->base_supp_qty;
+                if (!empty($data_item->compent_percent)) {
+                    $supply_qty .= ' + '.$data_item->compent_percent.' Bù hao'; 
+                }
+
+                if (!empty($data_item->compent_plus)) {
+                    $supply_qty .= ' + '.$data_item->compent_plus.' Bù hao thêm'; 
+                }
+            @endphp
+
+            @include('print_data.info_item', ['name' => 'Số lượng cần lấy', 'info' => $supply_qty])
 
             @if (!empty($print['note']))
                 @include('print_data.note', ['note' => $print['note']])
