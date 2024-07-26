@@ -226,9 +226,19 @@ class NGroupUser extends Model
             'link' => 'view/c_supplies?default_data=%7B%22status%22%3A%22handling%22%7D',
             'group' => 'handle_supply'
         ],
+        'c_supply_all' => [
+            'name' => 'Phiếu xuất vật tư',
+            'link' => 'view/c_supplies',
+            'group' => 'handle_supply'
+        ],
         'im_supply' => [
-            'name' => 'Yêu cầu nhập kho băng lề',
+            'name' => 'Băng lề vật tư',
             'link' => 'view/supply_warehouses?default_data=%7B%22status%22%3A%22waiting%22%7D',
+            'group' => 'handle_supply'
+        ],
+        'im_paper' => [
+            'name' => 'Băng lề giấy in',
+            'link' => 'view/print_warehouses?default_data=%7B%22status%22%3A%22waiting%22%7D',
             'group' => 'handle_supply'
         ],
         'product_management' => [
@@ -313,6 +323,9 @@ class NGroupUser extends Model
             self::MODULE['supply_extend'],
             self::MODULE['worker_salary'],
             self::MODULE['handle_process'],
+            self::MODULE['c_supply_all'],
+            self::MODULE['im_paper'],
+            self::MODULE['im_supply'],
             self::MODULE['supp_bying_req'],
             self::MODULE['warehouse_management'],
             self::MODULE['warehouse_provider'],
@@ -323,6 +336,7 @@ class NGroupUser extends Model
             self::MODULE['supp_bying_req'],
             self::MODULE['warehouse_management'],
             self::MODULE['ex_supply'],
+            self::MODULE['im_paper'],
             self::MODULE['im_supply'],
             self::MODULE['warehouse_provider'],
             self::MODULE['account'],
@@ -332,6 +346,7 @@ class NGroupUser extends Model
             self::MODULE['supp_bying_req'],
             self::MODULE['warehouse_management'],
             self::MODULE['ex_supply'],
+            self::MODULE['im_paper'],
             self::MODULE['im_supply'],
             self::MODULE['warehouse_provider'],
             self::MODULE['account'],
@@ -341,6 +356,7 @@ class NGroupUser extends Model
             self::MODULE['supp_bying_req'],
             self::MODULE['warehouse_management'],
             self::MODULE['ex_supply'],
+            self::MODULE['im_paper'],
             self::MODULE['im_supply'],
             self::MODULE['warehouse_provider'],
             self::MODULE['account'],
@@ -368,6 +384,7 @@ class NGroupUser extends Model
             self::MODULE['warehouse_management'],
             self::MODULE['supply_history'],
             self::MODULE['ex_supply'],
+            self::MODULE['im_paper'],
             self::MODULE['im_supply'],
             self::MODULE['product_management'],
             self::MODULE['expertise'],

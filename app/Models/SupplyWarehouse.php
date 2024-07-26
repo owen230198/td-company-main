@@ -47,7 +47,23 @@ class SupplyWarehouse extends Model
 
     static function getLabelLinking($data)
     {
-        return getFieldDataById('name', 'supply_types', $data->supp_type).' - '.$data->length.'x'.$data->width.' - ĐL : '.getFieldDataById('name', 'supply_prices', $data->supp_price).' / Còn lại : '.$data->qty.' tấm';
+        $ret = '';
+        if (!empty($data->supp_type)) {
+            $ret.= getFieldDataById('name', 'supply_types', $data->supp_type);
+        }
+        if (!empty($data->length) && empty($data->width)) {
+            $ret .= ' - '.$data->length.'x'.$data->width;
+        }
+        if (!empty($data->supp_price)) {
+            $ret .= ' - ĐL : '.getFieldDataById('name', 'supply_prices', $data->supp_price);
+        }
+        if (!empty($data->qty)) {
+            $ret .= ' / Còn lại : '.$data->qty.' tấm';
+        }else{
+            $ret .= ' (đã hết)';
+        }
+        
+        return $ret;
     }
 
     static function getStructForPlan($param)

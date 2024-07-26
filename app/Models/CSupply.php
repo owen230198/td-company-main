@@ -26,7 +26,6 @@
                         [
                             'type' => 'group',
                             'query' => [
-                                ['key' => 'status', 'value' => self::HANDLING],
                                 ['key' => 'created_by', 'value' => \User::getCurrent('id')]
                             ]
                         ],
