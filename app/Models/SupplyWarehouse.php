@@ -51,7 +51,7 @@ class SupplyWarehouse extends Model
         if (!empty($data->supp_type)) {
             $ret.= getFieldDataById('name', 'supply_types', $data->supp_type);
         }
-        if (!empty($data->length) && empty($data->width)) {
+        if (!empty($data->length) && !empty($data->width)) {
             $ret .= ' - '.$data->length.'x'.$data->width;
         }
         if (!empty($data->supp_price)) {
