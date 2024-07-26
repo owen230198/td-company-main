@@ -1,40 +1,64 @@
 <?php
-    namespace App\Http\Controllers\Customer;
+    namespace App\Http\Controllers\CSupply;
     use App\Http\Controllers\Controller;
-use App\Models\Customer;
-use App\Models\Represent;
+    use App\Models\CSupply;
     use Illuminate\Http\Request;
 
-    class CustomerController extends Controller
+    class CSupplyController extends Controller
     {
         function __construct()
         {
             parent::__construct();
-            $this->table = 'customers';
+            $this->table = 'c_supplies';
+        }
+
+        public function qtyBySupplyType(Request $request)
+        {
+            $type = $request->get('type');
+            if (empty($type)) {
+                return '';
+            }
+            $data['type'] = $type;
+            return view('view_update.c_supply_qty', $data);
+        }
+
+        private function getDataView($action)
+        {
+            $data = $this->admins->getDataActionView($this->table, $action, 'Thêm mới');
+            $field_list = $data['field_list'];
+            $data['field_type'] = array_slice($field_list, 0, 1);
+            $data['field_action'] = array_slice($field_list, 1);
+            return $data;
+        }
+
+        private function processData(&$data)
+        {
+            $data['qty'] = json_encode($data['qty']);
+            $table_supply = tableWarehouseByType($data['supp_type']);
+            $data['name'] = getFieldDataById('name', $table_supply, $data['size_type']);
         }
 
         public function insert($request)
         {
             $table = $this->table;
             if (!$request->isMethod('POST')) {
-                $data = $this->admins->getDataActionView($table, __FUNCTION__, 'Thêm mới');
-                $data['action_url'] = url('insert/'.$table);
-                $this->processField($data);
-                return view('action.view', $data);
+                $data = $this->getDataView(__FUNCTION__);
+                $data['action_url'] = url('insert/'.$this->table);
+                return view('c_supplies.view', $data);
             }else{
-                $data_customer = $request->except(['_token', 'represent']);
-                $proceess_customer = $this->admins->doInsertTable($table, $data_customer);
-                if ($proceess_customer['code'] == 200) {
-                    logActionUserData(__FUNCTION__, $table, $proceess_customer['id'], $data_customer);
+                $data = $request->except(['_token']);
+                if (empty($data['qty']['qty'])) {
+                    return returnMessageAjax(100, 'Bạn chưa nhập số lượng cần xuất !');
+                }
+                $this->processData($data);
+                $data['status'] = CSupply::HANDLING;
+                $proceess= $this->admins->doInsertTable($table, $data);
+                if ($proceess['code'] == 200) {
+                    logActionUserData(__FUNCTION__, $table, $proceess['id'], $data);
                 }else {
-                    return returnMessageAjax(100, $proceess_customer['message']);
+                    return returnMessageAjax(100, $proceess['message']);
                 }
-                $data_represents = $request->input('represent');
-                $process_reprecent = $this->processRepresent($data_represents, $proceess_customer['id']);
-                if (@$process_reprecent['code'] == 100) {
-                    return returnMessageAjax(100, $process_reprecent['message']);
-                }
-                return returnMessageAjax(200, 'Thêm mới dữ liệu khách hàng thành công !', getBackUrl());
+                return returnMessageAjax(200, 'Thêm phiếu xuất xuất vật tư thành công !', getBackUrl());
             }
         }
 
@@ -43,27 +67,23 @@ use App\Models\Represent;
             $table = $this->table;
             $dataItem = getModelByTable($table)->find($id);
             if (!$request->isMethod('POST')) {
-                $data = $this->admins->getDataActionView($table, 'update', 'Chi tiết');
-                $this->processField($data);
-                $dataItem['represent'] = Represent::where('customer', $id)->get();
+                $data = $this->getDataView(__FUNCTION__);
                 $data['dataItem'] = $dataItem;
                 $data['action_url'] = url('update/'.$table.'/'.$id);
-                return view('action.view', $data);
+                return view('c_supplies.view', $data);
             }else{
-                $data_customer = $request->except(['_token', 'represent']);
-                $proceess_customer = $this->admins->doUpdateTable($id, $table, $data_customer);
-                if ($proceess_customer['code'] == 200) {
-                    unset($dataItem['represent']);
+                $data = $request->except(['_token']);
+                if (empty($data['qty']['qty'])) {
+                    return returnMessageAjax(100, 'Bạn chưa nhập số lượng cần xuất !');
+                }
+                $this->processData($data);
+                $process = $this->admins->doUpdateTable($id, $table, $data);
+                if ($process['code'] == 200) {
                     logActionUserData(__FUNCTION__, $table, $id, $dataItem);
                 }else {
-                    return returnMessageAjax(100, $proceess_customer['message']);
+                    return returnMessageAjax(100, $process['message']);
                 }
-                $data_represents = $request->input('represent');
-                $process_reprecent = $this->processRepresent($data_represents, $id);
-                if (@$process_reprecent['code'] == 100) {
-                    return returnMessageAjax(100, $process_reprecent['message']);
-                }
-                return returnMessageAjax(200, 'Thêm mới dữ liệu khách hàng thành công !', getBackUrl());   
+                return returnMessageAjax(200, 'Cập nhật dữ liệu phiếu xuất vật tư thành công !', getBackUrl());   
             }
         }
     }

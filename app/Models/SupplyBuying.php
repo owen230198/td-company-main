@@ -103,8 +103,7 @@ class SupplyBuying extends Model
                 'type_input' => 'number', 
                 'inject_class' => '__buying_qty_input __buying_change_input', 
                 'readonly' => !$admin_dobuying || \GroupUser::isPlanHandle() ? 0 : 1
-            ],
-            'min_label' => 150
+            ]
         ];
         $field_hank = [
             'name' => 'hank',
@@ -113,8 +112,7 @@ class SupplyBuying extends Model
             'attr' => [
                 'type_input' => 'number',
                 'readonly' => !$admin_dobuying || \GroupUser::isPlanHandle() ? 0 : 1
-            ],
-            'min_label' => 150
+            ]
         ];
         $field_weight = [
             'name' => 'weight',
@@ -123,8 +121,7 @@ class SupplyBuying extends Model
             'attr' => [
                 'type_input' => 'number',
                 'readonly' => !$admin_dobuying || \GroupUser::isPlanHandle() ? 0 : 1
-            ],
-            'min_label' => 150
+            ]
         ];
         if (SquareWarehouse::countPriceByWeight($type)) {
             return [$field_qty, $field_hank];

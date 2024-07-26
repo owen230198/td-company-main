@@ -8,6 +8,7 @@ use \App\Models\CDesign;
 use \App\Models\CSupply;
 use App\Models\OtherWarehouse;
 use App\Models\PrintWarehouse;
+use App\Models\SquareWarehouse;
 use App\Models\Supply;
 use App\Models\SupplyWarehouse;
 use App\Models\WSalary;
@@ -191,7 +192,12 @@ class OrderService extends BaseService
             foreach ($supp_qsuare as $square) {
                 if (!empty($square['size_type'])) {
                     $supply->type = $key;
-                    CSupply::insertCommand($square, $supply);
+                    $data_sq = $square;
+                    if (SquareWarehouse::countPriceByWeight($key)) {
+                        $length = $square['qty'];
+                        $data_sq['qty'] = SquareWarehouse::getWeightByLength($square['size_type'], $length);
+                    }
+                    CSupply::insertCommand($data_sq, $supply);
                 }
             }
         }

@@ -39,8 +39,8 @@
         {
             $table = tableWarehouseByType($supply->type);
             $data_command['name'] = getFieldDataById('name', $table, $data['size_type']); 
-            $data_command['size_type'] = $data['size_type']; 
-            $data_command['qty'] = $data['qty']; 
+            $data_command['size_type'] = $data['size_type'];
+            $data_command['qty'] = json_encode(['qty' => $data['qty']]); 
             $data_command['product'] = $supply->product;
             $data_command['supply'] = $supply->id;
             $data_command['supp_type'] = $supply->type;

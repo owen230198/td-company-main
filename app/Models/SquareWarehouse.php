@@ -22,6 +22,11 @@ class SquareWarehouse extends Model
         return in_array(@$type, [\TDConst::EMULSION, \TDConst::SKRINK]);
     }
 
+    static function isHasDeviceSupply($type)
+    {
+        return in_array(@$type, [\TDConst::NILON, \TDConst::METALAI]);
+    }
+
     static function countPriceByWeight($type)
     {
         return in_array($type, [\TDConst::METALAI, \TDConst::NILON, \TDConst::COVER]); 
@@ -41,6 +46,13 @@ class SquareWarehouse extends Model
     {
         $factor = (float) getFieldDataById('factor', 'materals', $materal_id);
         return $factor * $weight / $width;   
+    }
+    
+    static function getWeightByLength($supply_id, $length)
+    {
+        $supply = getDetailDataByID('SquareWarehouse', $supply_id);
+        $factor = (float) getFieldDataById('factor', 'materals', $supply->supp_price);
+        return ($length * $supply->width) / $factor;   
     }
 
     static function getDataJsonLinking($warehouse, $q)
@@ -92,7 +104,12 @@ class SquareWarehouse extends Model
     {
         if (empty($data)) {
             return '';
+        }elseif (self::isWeightSupply($data->type)) {
+            return $data->name; 
+        }elseif (self::isHasDeviceSupply($data->type)) {
+           return getFieldDataById('name', 'supply_names', $data->device).' - '.getFieldDataById('name', 'materals', $data->supp_price).' - Khổ : '.$data->width;
+        }else{
+            return  getFieldDataById('name', 'materals', $data->supp_price).' - Khổ : '.$data->width;
         }
-        return self::isWeightSupply($data->type) ? $data->name : getFieldDataById('name', 'materals', $data->supp_price).' - Khổ : '.$data->width;
     }
 }

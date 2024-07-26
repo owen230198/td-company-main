@@ -277,6 +277,7 @@ use App\Models\SquareWarehouse;
 
         public function takeOutSupply($id)
         {
+            return returnMessageAjax(100, 'Chức năng đang phát triển thêm thông tin upload phiếu xuất !');
             if (\GroupUser::isAdmin() || \GroupUser::isWarehouse()) {
                 $command = \DB::table('c_supplies');
                 $data_command = $command->find($id);

@@ -1,8 +1,8 @@
 <?php
     namespace App\Http\Controllers\Customer;
     use App\Http\Controllers\Controller;
-use App\Models\Customer;
-use App\Models\Represent;
+    use App\Models\Customer;
+    use App\Models\Represent;
     use Illuminate\Http\Request;
 
     class CustomerController extends Controller
@@ -119,7 +119,7 @@ use App\Models\Represent;
                 if (@$process_reprecent['code'] == 100) {
                     return returnMessageAjax(100, $process_reprecent['message']);
                 }
-                return returnMessageAjax(200, 'Thêm mới dữ liệu khách hàng thành công !', getBackUrl());   
+                return returnMessageAjax(200, 'Cập nhật dữ liệu khách hàng thành công !', getBackUrl());   
             }
         }
     }

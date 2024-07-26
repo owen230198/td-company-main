@@ -6,6 +6,7 @@ use App\Http\Controllers\DevController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\CExpertise\CExpertiseController;
+use App\Http\Controllers\CSupply\CSupplyController;
 use App\Http\Controllers\Quote\QuoteController;
 use App\Http\Controllers\Order\OrderController;
 use App\Http\Controllers\Product\ProductController;
@@ -102,6 +103,7 @@ Route::middleware(['check_login'])->group(function () {
 	Route::get('inventory-export', [SupplyBuyingController::class, 'inventoryExport']);
 	Route::get('field-search-supply-history', [SupplyBuyingController::class, 'fieldSearchHistory']);
 	Route::get('get-view-buying-supply-type', [SupplyBuyingController::class, 'getViewBuyingSupplyType']);
+	Route::get('qty-by-supply-type', [CSupplyController::class, 'qtyBySupplyType']);
 
 	//KCS route
 	Route::post('after-print-kcs/{id}',[ProductController::class, 'afterPrintKcs']);

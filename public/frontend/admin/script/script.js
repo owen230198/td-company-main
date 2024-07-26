@@ -536,11 +536,12 @@ var selectTypeSuppWarehouse = function () {
         select_size.data('id', '');
         select_size.data('label', '');
         select_size.data('url', url);
-        // if (!empty(value)) {
-        //     select_size.attr('readonly', false);
-        // } else {
-        //     select_size.attr('readonly', true);
-        // }
+        
+        let module_qty = parent.closest('.__c_supply_warehouse').find('.__ajax_qty_type');
+        if (module_qty.length > 0) {
+            let url_get_qty = 'qty-by-supply-type?type=' + value;
+            ajaxViewTarget(url_get_qty, module_qty, module_qty);
+        }
         initInputModuleAfterAjax(parent);
     })
 }

@@ -6,11 +6,13 @@ use App\Models\NTable;
 use Illuminate\Support\Facades\Schema;
 use App\Constants\VariableConstant;
 use App\Models\CDesign;
+use App\Models\CSupply;
 use App\Models\Order;
 use App\Models\Paper;
 use App\Models\Product;
 use App\Models\Quote;
 use App\Models\Represent;
+use App\Models\SquareWarehouse;
 use App\Models\WSalary;
 
 class DevController extends Controller
@@ -465,6 +467,21 @@ class DevController extends Controller
             $print = json_decode($supply->print, true);
             $update['total'] = Paper::getPrintFormula($print['type'], $salary['qty'], $print['color'], $salary['work_price'], $salary['shape_price'], 0, true);
             \DB::table('w_salaries')->where('id', $salary['id'])->update($update);
+        }
+    }
+
+    public function updateQtyCSupply()
+    {
+        $data = CSupply::all();
+        foreach ($data as $c_supply) {
+            $qty = $c_supply['qty'];
+            if (SquareWarehouse::countPriceByWeight($c_supply['supp_type'])) {
+                $arr['qty'] = SquareWarehouse::getWeightByLength($c_supply['size_type'], $qty);
+            }else{
+                $arr['qty'] = $qty;
+            }
+            Csupply::where('id', $c_supply['id'])->update(['qty' => json_encode($arr)]);
+            dump(json_encode($arr));
         }
     }
 }
