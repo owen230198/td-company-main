@@ -472,6 +472,7 @@ class DevController extends Controller
 
     public function updateQtyCSupply()
     {
+        die();
         $data = CSupply::all();
         foreach ($data as $c_supply) {
             $qty = $c_supply['qty'];
