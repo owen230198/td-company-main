@@ -36,7 +36,6 @@ use App\Models\SupplyBuying;
                     return returnMessageAjax(100, 'Bạn chưa chọn loại vật tư thứ '.($key+1).'!');
                     break;
                 }
-
                 if (empty($supply['qty'])) {
                     return returnMessageAjax(100, 'Bạn chưa nhập số lượng mua thêm cho vật tư thứ '.($key+1).'!');
                     break;
@@ -130,7 +129,7 @@ use App\Models\SupplyBuying;
                         $length = !empty($supply['length']) ? (float) $supply['length'] : 1; 
                         $width = !empty($supply['width']) ? (float) $supply['width'] : 1; 
                         $qtv = !empty($supply['qtv']) ? (float) $supply['qtv'] : 1; 
-                        $supp_total = $price * $length * $width * $qtv * $qty;
+                        $supp_total = $price * ($length / 100) * ($width / 100) * ($qtv / 1000) * $qty;
                     }else{
                         $supp_total = $price * $qty;
                     }
@@ -207,13 +206,16 @@ use App\Models\SupplyBuying;
                     return returnMessageAjax(100, 'Dữ liệu vật tư không tồn tại !');
                 }
                 $bill = $request->input('bill');
-                foreach ($data_supply as $supply) {
+                $update_supply = $data_supply;
+                $where = [];
+                foreach ($data_supply as $key => $supply) {
                     $type = $supply['type'];
                     $table_supply = tableWarehouseByType($type);
+                    $data['log'] = [];
                     $data['log']['type'] = @$supply['supp_type'];
                     $supply_qty = (int) $supply['qty'];
                     if (SquareWarehouse::countPriceByWeight($type) && !empty($supply['width'])) {
-                        $data['log']['qty'] = SquareWarehouse::getLengthByWeight($supply['supp_price'], $supply_qty, $supply['width']);
+                        $data['log']['qty'] = (int) SquareWarehouse::getLengthByWeight($supply['supp_price'], $supply_qty, $supply['width']);
                         $data['log']['hank'] = (int) $supply['hank'];
                         $data['log']['weight'] = (int) $supply_qty;
                     }elseif(SquareWarehouse::countPriceByHank($type)){
@@ -223,6 +225,7 @@ use App\Models\SupplyBuying;
                             return returnMessageAjax(100, 'Bạn chưa nhập số kg cho vật tư '. @$supply['name'].' !');
                         }
                         $data['log']['weight'] = (int) $supply['weight'];
+                        $update_supply[$key]['weight'] = $supply['weight'];
                     }else{
                         $data['log']['qty'] = $supply_qty;
                     }
@@ -257,6 +260,7 @@ use App\Models\SupplyBuying;
                 $supp_buying->status = \StatusConst::SUBMITED;
                 $supp_buying->submited_by = \User::getCurrent('id');
                 $supp_buying->bill = $bill;
+                $supp_buying->supply = json_encode($update_supply);
                 $supp_buying->save();
                 logActionUserData('confirm_import', 'supply_buyings', $id, $dataItem);
                 return returnMessageAjax(200, 'Xác nhận nhập kho thành công !', 'view/supply_buyings?default_data=%7B"status"%3A"'.SupplyBuying::BOUGHT.'"%7D');

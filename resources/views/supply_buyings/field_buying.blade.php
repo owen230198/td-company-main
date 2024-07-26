@@ -7,9 +7,9 @@
 @foreach ($field_qtys as $field_qty)
     @php
          $name = $field_qty['name'];
-         $field['name'] = $group_name.'['.$name.']';
-         $arr['min_label'] = 150;
-         $arr['value'] = @$group_value[$name];
+         $field_qty['name'] = $group_name.'['.$name.']';
+         $field_qty['min_label'] = 150;
+         $field_qty['value'] = @$group_value[$name];
     @endphp
     @include('view_update.view', $field_qty)    
 @endforeach

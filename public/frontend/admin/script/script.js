@@ -732,7 +732,7 @@ var calcTotalSupplyBuying = function(json_supp_module)
     let list_item = json_supp_module.find('.item_supp_buy');
     let buying_total = 0;
     list_item.each(function () {
-        let total_item_buy = getEmptyDefault(json_supp_module.find('input.__buying_total_input').val(), 0, 'float');
+        let total_item_buy = getEmptyDefault($(this).find('input.__buying_total_input').val(), 0, 'float');
         buying_total += total_item_buy;
     });
     let ship_price = getEmptyDefault(json_supp_module.find('input.__buying_ship_price').val(), 0, 'float');
