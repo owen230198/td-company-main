@@ -145,8 +145,7 @@ class SupplyBuying extends Model
                         'with' => [
                             'type' => 'group',
                             'query' => [
-                                ['key' => 'created_by', 'value' => \User::getCurrent('id')],
-                                ['key' => 'status', 'value' => \StatusConst::PROCESSING]
+                                ['key' => 'created_by', 'value' => \User::getCurrent('id')]
                             ]
                         ]
                     ],
@@ -162,7 +161,16 @@ class SupplyBuying extends Model
                     ],
             ],
             \GroupUser::APPLY_BUYING => [
-                'view' => ['with' => ['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED]],
+                'view' => 
+                    [
+                        'with' => [
+                            'type' => 'group',
+                            'query' => [
+                                ['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED],
+                                ['cond' => 'or', 'key' => 'created_by', 'value' => \User::getCurrent('id')]
+                            ]
+                        ]
+                    ],
                 'update' => ['with' => [['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED]]]
             ],
             \GroupUser::DO_BUYING => [
