@@ -275,50 +275,6 @@ use App\Models\SquareWarehouse;
             return view('orders.users.6.supply_handles.view_handles.'.$data['type'].'.item', $data);
         }
 
-        public function takeOutSupply($id)
-        {
-            return returnMessageAjax(100, 'Chức năng đang phát triển thêm thông tin upload phiếu xuất !');
-            if (\GroupUser::isAdmin() || \GroupUser::isWarehouse()) {
-                $command = \DB::table('c_supplies');
-                $data_command = $command->find($id);
-                if (@$data_command->status != CSupply::HANDLING) {
-                    return returnMessageAjax(110, 'Dữ liệu không hợp lệ !');
-                } 
-                $table_warehouse = getTableWarehouseByType($data_command);
-                $warehouse_model = getModelByTable($table_warehouse);
-                $data_warehouse = $warehouse_model->find($data_command->size_type);
-                if (empty($data_warehouse)) {
-                    return returnMessageAjax(110, 'Vật tư không có trong kho !');    
-                }
-                $qty_field = SquareWarehouse::isWeightSupply($data_command->supp_type) ? 'weight' : 'qty';
-                $cr_qty = (int) $data_warehouse->{$qty_field};
-                $take_qty = (int) $data_command->qty;
-                if ($cr_qty < $take_qty) {
-                    return returnMessageAjax(110, 'Vật tư trong kho không đủ để xuất ra, lên hệ gọi thêm vật tư để xử lí đơn này!');
-                }
-                $data_warehouse->qty = $cr_qty- $take_qty;
-                $data_warehouse->save();
-                $data_log['name'] = $data_warehouse->name;
-                $data_log['table'] = $table_warehouse;
-                $data_log['type'] = $data_warehouse->type;
-                $data_log['target'] = $data_warehouse->id;
-                $data_log['exported'] = $take_qty;
-                $data_log['ex_inventory'] = $cr_qty;
-                $data_log['inventory'] = $data_warehouse->{$qty_field};
-                $data_log['product'] = $data_command->product;
-                $data_log['c_supply'] = $id;
-                (new \BaseService)->configBaseDataAction($data_log);
-                \DB::table('warehouse_histories')->insert($data_log);
-                $data_update = ['status' => CSupply::HANDLED];
-                $update = $command->where('id' , $id)->update($data_update);
-                if ($update) {
-                    return returnMessageAjax(200, 'Bạn đã xác nhận xuất '.$take_qty.' vật tư!', \StatusConst::RELOAD);
-                }  
-            }else{
-                return returnMessageAjax(110, 'Bạn không có quyền duyệt xuất vật tư!');
-            }
-        }
-
         public function takeInSupply($id)
         {
             if (\GroupUser::isAdmin() || \GroupUser::isWarehouse()) {

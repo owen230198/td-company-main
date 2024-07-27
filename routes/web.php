@@ -81,7 +81,6 @@ Route::middleware(['check_login'])->group(function () {
 	Route::post('apply-order/{stage}/{type}/{id}', [OrderController::class, 'applyOrder']);
 	Route::post('receive-command/{table}/{id}', [OrderController::class, 'receiveCommand']);
 	Route::any('supply-handle', [OrderController::class, 'supplyHandle']);
-	Route::post('take-out-supply/{id}', [OrderController::class, 'takeOutSupply']);
 	Route::post('take-in-supply/{id}', [OrderController::class, 'takeInSupply']);
 	Route::post('apply-to-worker-handle/{table}/{id}', [OrderController::class, 'applyToWorkerHandle']);
 	Route::get('select-supply-warehouse/{table}', [OrderController::class, 'selectSupplyWarehouse']);
@@ -104,6 +103,7 @@ Route::middleware(['check_login'])->group(function () {
 	Route::get('field-search-supply-history', [SupplyBuyingController::class, 'fieldSearchHistory']);
 	Route::get('get-view-buying-supply-type', [SupplyBuyingController::class, 'getViewBuyingSupplyType']);
 	Route::get('qty-by-supply-type', [CSupplyController::class, 'qtyBySupplyType']);
+	Route::post('take-out-supply/{id}', [CSupplyController::class, 'takeOutSupply']);
 
 	//KCS route
 	Route::post('after-print-kcs/{id}',[ProductController::class, 'afterPrintKcs']);

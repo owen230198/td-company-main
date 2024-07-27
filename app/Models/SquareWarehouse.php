@@ -27,6 +27,11 @@ class SquareWarehouse extends Model
         return in_array(@$type, [\TDConst::NILON, \TDConst::METALAI]);
     }
 
+    static function isWeightLogWarehouse($type)
+    {
+        return self::isWeightLogWarehouse($type) || self::isHasDeviceSupply($type);
+    }
+
     static function countPriceByWeight($type)
     {
         return in_array($type, [\TDConst::METALAI, \TDConst::NILON, \TDConst::COVER]); 
@@ -65,10 +70,11 @@ class SquareWarehouse extends Model
         }
         $data = $warehouse->paginate(50)->all();
         $arr = array_map(function($item){
-            $qty = self::isWeightSupply($item->type) ? $item->weight.' kg' : $item->qty. ' cm';
+            $base_unit = $item->hank.' cuộn - '.$item->weight.' kg';
+            $qty = self::isWeightSupply($item->type) ? $base_unit : $item->qty. ' cm'. ' - '. $base_unit;
             return [
                 'id' => @$item->id, 
-                'label' => $item->name. ' / KT Khổ : '.$item->width.' / Còn lại : '.$qty];
+                'label' => $item->name. ' / Khổ : '.$item->width.' / Còn lại : '.$qty];
         }, $data);
         return json_encode($arr);
     }

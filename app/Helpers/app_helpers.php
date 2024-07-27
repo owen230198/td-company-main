@@ -59,6 +59,14 @@ if (! function_exists('getDetailDataByID')) {
     }
 }
 
+if (! function_exists('getDetailData')) {
+    function getDetailDataObject($table, $id)
+    {
+        $data = \DB::table($table)->find($id);
+        return $data;
+    }
+}
+
 
 if(!function_exists('getFieldDataById')){
     function getFieldDataById($feild, $table, $id){
@@ -358,7 +366,7 @@ if (!function_exists('subStringLimit')) {
 if (!function_exists('isLocal')) {
     function isLocal()
     {
-        return @$_ENV['APP_ENV'] == 'local';
+        return @$_ENV['APP_ENV'] == 'localhost';
     }
 }
 

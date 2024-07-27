@@ -28,18 +28,18 @@
                     @include('view_update.view', $arr)
                 @endforeach
             </div>
-            <div class="group_btn_action_form text-center">
-                <button type="submit" disabled class="main_button color_white bg_green border_green radius_5 font_bold smooth">
-                    <i class="fa fa-check mr-2 fs-14" aria-hidden="true"></i>Hoàn tất
-                </button>
-                <a href="{{ getBackUrl() }}"
-                    class="main_button color_white bg_green radius_5 font_bold smooth mx-3">
-                    <i class="fa fa-angle-double-left mr-2 fs-14" aria-hidden="true"></i>Trở về
-                </a>
-                <a href="{{ url('') }}" class="main_button bg_red color_white radius_5 font_bold smooth red_btn">
-                    <i class="fa fa-times mr-2 fs-14" aria-hidden="true"></i>Hủy
-                </a>
-            </div>
+            @if (!empty($dataItem))
+                @php
+                    $bill_field = [
+                        'note' => 'Phiếu xuất kho',
+                        'type' => 'filev2',
+                        'name' => 'bill',
+                        'other_data' => ['role_update' => [\GroupUser::WAREHOUSE]] 
+                    ]
+                @endphp
+                @include('view_update.view', $bill_field)
+            @endif
+            @include('action.list_button')
         </form>
     </div>
 @endsection

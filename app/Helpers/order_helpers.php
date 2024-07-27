@@ -279,6 +279,34 @@
         }
     }
 
+    if (!function_exists('getUnitSupplyLogWarehouse')) {
+        function getUnitSupplyLogWarehouse($type, $data = new \stdClass()) {
+            if (!empty($data->unit)) {
+                return $data->unit;
+            }
+            switch ($type) {
+                case in_array($type, [\TDConst::CARTON, \TDConst::RUBBER, \TDConst::STYRO, \TDConst::MICA]):
+                    return 'plate';
+                    break;
+                case in_array($type, [\TDConst::PAPER]):
+                    return 'sheet';
+                    break;
+                case in_array($type, [\TDConst::MAGNET]):
+                    return 'unit';
+                    break;
+                case \App\Models\SquareWarehouse::isWeightLogWarehouse($type):
+                    return 'kg';
+                    break;
+                case \App\Models\SquareWarehouse::countPriceBySquare($type):
+                    return 'square';
+                    break;
+                default:
+                    return '';
+                    break;
+            }    
+        }
+    }
+
     if (!function_exists('getUnitWarehouseItem')) {
         function getUnitWarehouseItem($unit) {
             switch ($unit) {

@@ -461,10 +461,14 @@ var receiveCommand = function () {
 var confirmTakeOutSupply = function () {
     $(document).on('click', '.__confirm_ex_supp', function (event) {
         event.preventDefault();
-        let id = $(this).data('id');
+        let _this = $(this);
+        let id = _this.data('id');
+        let form = _this.closest('form');
+        console.log(form.serialize());
         ajaxBaseCall({
             url: getBaseRoute('take-out-supply/' + id),
-            type: 'POST'
+            type: 'POST',
+            'data': form.serialize(),
         });
     });
 }
