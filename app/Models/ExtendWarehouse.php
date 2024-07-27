@@ -19,7 +19,7 @@ class ExtendWarehouse extends Model
     
     static function getName($data)
     {
-        return $data['name'];
+        return !empty($data['name']) ? $data['name'] : getFieldDataById('name', 'supply_extends', $data['type']);
     }
 
     public function afterRemove($id)

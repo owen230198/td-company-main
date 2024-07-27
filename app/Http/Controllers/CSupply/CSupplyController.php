@@ -44,8 +44,8 @@ use Illuminate\Http\Request;
                 return returnMessageAjax(100, 'Số lượng vật tư cần xuất không hợp lệ !');
             }
             $type = $data['supp_type'];
-            $table_supply = tableWarehouseByType($type);
-            $supply = getDetailDataObject($table_supply, $data['size_type']);
+            $table_warehouse = tableWarehouseByType($type);
+            $supply = getDetailDataObject($table_warehouse, $data['size_type']);
             if (empty($supply)) {
                 return returnMessageAjax(100, 'Dữ liệu vật tư không tồn tại!');
             }
@@ -148,14 +148,14 @@ use Illuminate\Http\Request;
                 if (empty($dataItem->supp_type)) {
                     return returnMessageAjax(100, 'Bạn chưa chọn loại vật tư !');
                 }
-                $table_supply = tableWarehouseByType($dataItem->supp_type);
+                $table_warehouse = tableWarehouseByType($dataItem->supp_type);
                 if (empty($dataItem->supp_type)) {
                     return returnMessageAjax(100, 'Bạn chưa chọn loại vật tư !');
                 }
                 if (empty($dataItem->size_type)) {
                     return returnMessageAjax(100, 'Bạn chưa chọn vật tư trong kho !');
                 }
-                $supply = getDetailDataObject($table_supply, $dataItem->size_type);
+                $supply = getDetailDataObject($table_warehouse, $dataItem->size_type);
                 if (empty($supply)) {
                     return returnMessageAjax(110, 'Vật tư không có trong kho !');    
                 }
@@ -164,14 +164,19 @@ use Illuminate\Http\Request;
                     return returnMessageAjax(100, 'Bạn chưa nhập số lượng cần xuất !');
                 }
                 $type = $dataItem->supp_type;
+                if ($type == \TDConst::EMULSION) {
+                      
+                }
+                $supply_id = $supply->id;
                 $data_log['name'] = $supply->name;
-                $data_log['table'] = $table_supply;
+                $data_log['table'] = $table_warehouse;
                 $data_log['type'] = $type;
-                $data_log['target'] = $supply->id;
+                $data_log['target'] = $supply_id;
                 $data_log['exported'] = $qty['qty'];
                 $qty_export = SquareWarehouse::isWeightLogWarehouse($type) ? $qty['weight'] : $qty['qty'];
                 $data_log['ex_inventory'] = $qty_export;
-                $data_log['inventory'] = SquareWarehouse::isWeightLogWarehouse($type) ? $supply->weight : $supply->qty;
+                $field_get = SquareWarehouse::isWeightLogWarehouse($type) ? 'weight' : 'qty';
+                $data_log['inventory'] = getFieldDataById($field_get, $table_warehouse, $supply_id);
                 $unit = getUnitSupplyLogWarehouse($type, $supply);
                 $data_log['unit'] = $unit;
                 $data_log['product'] = $dataItem->product;

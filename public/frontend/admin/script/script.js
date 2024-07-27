@@ -464,7 +464,10 @@ var confirmTakeOutSupply = function () {
         let _this = $(this);
         let id = _this.data('id');
         let form = _this.closest('form');
-        console.log(form.serialize());
+        let status = _this.data('status');
+        if (status == 'emulsion') {
+            
+        }
         ajaxBaseCall({
             url: getBaseRoute('take-out-supply/' + id),
             type: 'POST',
