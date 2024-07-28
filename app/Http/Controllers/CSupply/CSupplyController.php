@@ -3,6 +3,7 @@
     use App\Http\Controllers\Controller;
     use App\Models\CSupply;
 use App\Models\SquareWarehouse;
+use App\Models\WarehouseHistory;
 use Illuminate\Http\Request;
 
     class CSupplyController extends Controller
@@ -50,14 +51,6 @@ use Illuminate\Http\Request;
                 return returnMessageAjax(100, 'Dữ liệu vật tư không tồn tại!');
             }
             if (SquareWarehouse::countPriceByHank($type)) {
-                if ($type == \TDConst::EMULSION) {
-                    if (empty($data['qty']['width'])) {
-                        return returnMessageAjax(100, 'Số cm chiều rộng cần cắt đi của cuộn nhũ không hợp lệ !');
-                    }
-                    if ($data['qty']['width'] > $supply->width) {
-                        return returnMessageAjax(100, 'Số cm chiều rộng cần cắt đi của cuộn nhũ vượt quá chiều rộng của vật tư!');
-                    }
-                }
                 if (empty($data['qty']['weight'])) {
                     return returnMessageAjax(100, 'Số kg cần xuất không hợp lệ!');
                 }
@@ -135,6 +128,7 @@ use Illuminate\Http\Request;
 
         public function takeOutSupply(Request $request, $id)
         {
+            return returnMessageAjax(200, '', getBackUrl());
             if (\GroupUser::isAdmin() || \GroupUser::isWarehouse()) {
                 $data = $request->except('_token');
                 $proceess = $this->processData($data);
@@ -142,54 +136,105 @@ use Illuminate\Http\Request;
                     return $proceess;
                 }
                 $dataItem = CSupply::find($id);
+                
+                if (!empty($data['bill'])) {
+                    return returnMessageAjax(100, 'Bạn chưa upload phiếu xuất kho (file giấy) !');
+                }
                 if (@$dataItem->status != CSupply::HANDLING) {
-                    return returnMessageAjax(110, 'Dữ liệu không hợp lệ !');
+                    return returnMessageAjax(100, 'Dữ liệu không hợp lệ !');
                 } 
                 if (empty($dataItem->supp_type)) {
                     return returnMessageAjax(100, 'Bạn chưa chọn loại vật tư !');
                 }
                 $table_warehouse = tableWarehouseByType($dataItem->supp_type);
-                if (empty($dataItem->supp_type)) {
-                    return returnMessageAjax(100, 'Bạn chưa chọn loại vật tư !');
-                }
                 if (empty($dataItem->size_type)) {
                     return returnMessageAjax(100, 'Bạn chưa chọn vật tư trong kho !');
                 }
                 $supply = getDetailDataObject($table_warehouse, $dataItem->size_type);
                 if (empty($supply)) {
-                    return returnMessageAjax(110, 'Vật tư không có trong kho !');    
+                    return returnMessageAjax(100, 'Vật tư không có trong kho !');    
                 }
                 $qty = json_decode($dataItem->qty, true);
                 if (empty($qty['qty'])) {
                     return returnMessageAjax(100, 'Bạn chưa nhập số lượng cần xuất !');
                 }
                 $type = $dataItem->supp_type;
-                if ($type == \TDConst::EMULSION) {
-                      
+                if (SquareWarehouse::isHasDeviceSupply($type)) {
+                    $update_supply = [
+                        'qty' => $supply->qty - SquareWarehouse::getLengthByWeight($supply->supp_price, $qty['weight'], $supply->width),
+                        'hank' => $supply->hank - $qty['hank'],
+                        'weight' => $supply->weight
+                    ];     
+                }elseif (SquareWarehouse::isWeightSupply($type)) {
+                    $update_supply = [
+                        'hank' => $supply->hank - $qty['hank'],
+                        'weight' => $supply->weight
+                    ];  
+                }else{
+                    $update_supply = ['qty' => $supply->qty - $qty['qty']];
                 }
-                $supply_id = $supply->id;
-                $data_log['name'] = $supply->name;
-                $data_log['table'] = $table_warehouse;
-                $data_log['type'] = $type;
-                $data_log['target'] = $supply_id;
-                $data_log['exported'] = $qty['qty'];
+                \DB::table($table_warehouse)->where('id', $id)->update($update_supply);
                 $qty_export = SquareWarehouse::isWeightLogWarehouse($type) ? $qty['weight'] : $qty['qty'];
-                $data_log['ex_inventory'] = $qty_export;
-                $field_get = SquareWarehouse::isWeightLogWarehouse($type) ? 'weight' : 'qty';
-                $data_log['inventory'] = getFieldDataById($field_get, $table_warehouse, $supply_id);
-                $unit = getUnitSupplyLogWarehouse($type, $supply);
-                $data_log['unit'] = $unit;
-                $data_log['product'] = $dataItem->product;
-                $data_log['c_supply'] = $id;
-                (new \BaseService)->configBaseDataAction($data_log);
-                \DB::table('warehouse_histories')->insert($data_log);
-                $data_update = ['status' => CSupply::HANDLED];
-                // $update = $command->where('id' , $id)->update($data_update);
-                if ($update) {
-                    return returnMessageAjax(200, 'Bạn đã xác nhận xuất '.$qty_export.' ('.$unit.') vật tư!', \StatusConst::RELOAD);
-                }  
+                $field_qty = SquareWarehouse::isWeightLogWarehouse($type) ? 'weight' : 'qty';
+                WarehouseHistory::doLogWarehouse($type, $supply->id, 0, $qty_export, $supply->{$field_qty}, $dataItem->note, $dataItem->product);
+                $data_update = ['status' => CSupply::HANDLED, 'bill' => $data['bill']];
+                CSupply::where('id', $id)->update($data_update);
+                logActionUserData('apply_import', 'c_supplies', $id, $dataItem);
+                return returnMessageAjax(200, 'Bạn đã xác nhận xuất vật tư thành công!', getBackUrl());
             }else{
-                return returnMessageAjax(110, 'Bạn không có quyền duyệt xuất vật tư!');
+                return returnMessageAjax(100, 'Bạn không có quyền duyệt xuất vật tư!');
+            }
+        }
+
+        public function reImportEmulsion(Request $request, $id)
+        {
+            if (\GroupUser::isAdmin() || \GroupUser::isWarehouse()) {
+                $data = $request->except('_token');
+                if (empty($data['width'])) {
+                    return returnMessageAjax(100, 'Bạn chưa nhập chiều rộng cuộn nhũ!');
+                }
+                if (empty($data['weight'])) {
+                    return returnMessageAjax(100, 'Bạn chưa nhập số kg nhũ!');
+                }
+                $dataItem = CSupply::find($id);
+                if (empty($dataItem->supp_type) || empty($dataItem->size_type)) {
+                    return returnMessageAjax(100, 'Dữ liệu vật tư không hợp lệ !');
+                }
+                if ($dataItem->supp_type != \TDConst::EMULSION) {
+                    return returnMessageAjax(100, 'Dữ liệu vật tư không hợp lệ !');
+                }
+                $table_warehouse = tableWarehouseByType($dataItem->supp_type);
+                $supply = getDetailDataObject($table_warehouse, $dataItem->size_type);
+                if (empty($supply)) {
+                    return returnMessageAjax(100, 'Vật tư nhũ không có trong kho !');    
+                }
+                $data_process = [];
+                foreach ($supply as $key => $value) {
+                    if (!in_array($key, ['id', 'qty', 'note', 'created_at', 'updated_at', 'created_by'])) {
+                        $data_process[$key] = $value;
+                    }
+                }
+                $data_process['width'] = $data['width'];
+                $where = $data_process;
+                $exist_data = SquareWarehouse::where($where)->first();
+                $data_process['note'] = 'Nhập lại cuộn nhũ đã cắt để dùng cho đơn '.getFieldDataById('name', 'products', $dataItem->product);
+                $data_process['weight'] = $data['weight'];
+                $data_process['hank'] = 1;
+                $this->admins->configBaseDataAction($data_process);
+                if (!empty($exist_data)) {
+                    $supply_id = $exist_data->id;
+                    SquareWarehouse::where('id', $supply_id)->update($data_process);
+                }else{
+                    $supply_id = SquareWarehouse::insertGetId($data_process);    
+                }
+                if ($supply_id) {
+                    WarehouseHistory::doLogWarehouse($dataItem->supp_type, $supply_id, 1, 0, 0, $data_process['note']);
+                    return returnMessageAjax(200, 'Bạn đã nhập lại kho thành công cuộn nhũ đã cắt !', getBackUrl());
+                }else{
+                    return returnMessageAjax(100, 'Đã có lỗi xảy ra, vui lòng thử lại !');
+                }
+            }else{
+                return returnMessageAjax(100, 'Bạn không có quyền thao tác!');
             }
         }
     }

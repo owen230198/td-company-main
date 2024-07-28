@@ -29,7 +29,7 @@ class SquareWarehouse extends Model
 
     static function isWeightLogWarehouse($type)
     {
-        return self::isWeightLogWarehouse($type) || self::isHasDeviceSupply($type);
+        return self::isWeightSupply($type) || self::isHasDeviceSupply($type);
     }
 
     static function countPriceByWeight($type)

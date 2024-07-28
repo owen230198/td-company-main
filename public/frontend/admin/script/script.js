@@ -402,8 +402,7 @@ var fileProcessModule = function () {
                 contentType: false,
                 processData: false,
                 dataType: 'json'
-            })
-                .done(function (data) {
+            }).done(function (data) {
                     if (data.code == 100) {
                         swal('Không thành công', data.message, 'error');
                     } else {
@@ -458,6 +457,60 @@ var receiveCommand = function () {
     });
 }
 
+var reImportEmulsion = function(id, back_url) {
+    swal({
+        title: "Nhập lại kho cuộn nhũ đã cắt còn thừa",
+        content: {
+            element: "div",
+            attributes: {
+                innerHTML: `<div class="__re--import_emlulsion">
+                    <input name="width" class="swal-content__input mb-1" placeholder="Nhập khổ chiều rộng">
+                    <input name="weight" class="swal-content__input mb-1" placeholder="Nhập số kg còn lại">
+                    </div>`
+            },
+        },
+        buttons: {
+            cancel: {
+                text: "Hủy",
+                value: "cancel",
+                visible: true
+            },
+            complete: {
+                text: "Hoàn tất",
+                value: "complete",
+                visible: true
+            }
+        },
+    }).then((value) => {
+        switch(value) {
+            case "cancel":
+                break;
+            case "complete":
+                let parent = $('.__re--import_emlulsion');
+                let width = parent.find('input[name="width"]').val();
+                let weight = parent.find('input[name="weight"]').val();
+                if (empty(width) || empty(weight)) {
+                    swal('error', "Bạn cần nhập nhập thông tin khổ chiều rộng và số kg nhập kho !", 'error').then(function () {
+                        reImportEmulsion(id, back_url);
+                        return;
+                    }); 
+                }else{
+                    ajaxBaseCall({
+                        url: getBaseRoute('re-import-emulsion/' + id),
+                        type: 'POST',
+                        'data': {_token: getCsrfToken(), width: width, weight:weight},
+                    });
+                }
+                break;
+            case "skip":
+                window.location = back_url;
+                break;
+            default:
+                window.location = back_url;
+        }
+    }); 
+}
+
 var confirmTakeOutSupply = function () {
     $(document).on('click', '.__confirm_ex_supp', function (event) {
         event.preventDefault();
@@ -465,61 +518,45 @@ var confirmTakeOutSupply = function () {
         let id = _this.data('id');
         let form = _this.closest('form');
         let supp_type = _this.data('supp_type');
-        if (supp_type == 'emulsion') {
-            swal({
-                title: "Nhập lại kho cuộn nhũ",
-                content: {
-                    element: "div",
-                    attributes: {
-                        innerHTML: `<div class="__re--import_emlulsion">
-                            <input name="width" class="swal-content__input __re_import_emul_width mb-1" placeholder="Nhập khổ chiều rộng">
-                            <input name="weight" class="swal-content__input __re_import_emul_weight mb-1" placeholder="Nhập số kg còn lại">
-                            </div>`
-                    },
-                },
-                buttons: {
-                    cancel: {
-                        text: "Hủy",
-                        value: "cancel",
-                        visible: true
-                    },
-                    skip: {
-                        text: "Bỏ qua",
-                        value: "skip",
-                        visible: true
-                    },
-                    complete: {
-                        text: "Hoàn tất",
-                        value: "complete",
-                        visible: true
-                    }
-                },
-            }).then((value) => {
-                switch(value) {
-                    case "cancel":
-                        break;
-                    case "complete":
-                        let parent = $('.__re--import_emlulsion');
-                        let width = parent.find('input[name="width"]').val();
-                        let weight = parent.find('input[name="weight"]').val();
-                        break;
-                    case "skip":
-                        ajaxBaseCall({
-                            url: getBaseRoute('take-out-supply/' + id),
-                            type: 'POST',
-                            'data': form.serialize(),
-                        });
-                        break;
-                    default:
+        $('#loader').fadeIn(200);
+        $.ajax({
+            url: getBaseRoute('take-out-supply/' + id),
+            type: 'POST',
+            data: form.serialize(),
+        }).done(function (data) {
+            if (supp_type == 'emulsion') {
+                if (data.code == 200) {
+                    swal({
+                        title: "Nhập lại kho cuộn nhũ đã cắt ?",
+                        text: 'Nếu cắt cuộn nhũ còn thừa buộc phải nhập lại kho, nếu không vui lòng bỏ qua',
+                        icon: 'info',
+                        buttons: true,
+                        confirmButtonColor: "#459300",
+                        buttons: ['Bỏ qua', 'Nhập lại kho']
+                    }).then((action) => {
+                        if (action) {
+                            reImportEmulsion(id, data.url);    
+                        } else {
+                            window.location = data.url;
+                        }
+                    });   
+                }else{
+                    swal('Không thành công !', data.message, 'error');
                 }
-            });   
-        }else{
-            ajaxBaseCall({
-                url: getBaseRoute('take-out-supply/' + id),
-                type: 'POST',
-                'data': form.serialize(),
-            });
-        }
+            }else{
+                let title = data.code == 200 ? 'Thành công' : 'Không thành công';
+                let key = data.code == 200 ? 'success' : 'error';
+                if (!empty(data.message)) {
+                    swal(title, data.message, key).then(function () {
+                        window.location = data.url;
+                    });
+                } else {
+                    swal('Lỗi không xác định !', data.message, 'error');
+                }
+                $('#loader').delay(200).fadeOut(500);
+            }
+        })
+        $('#loader').delay(200).fadeOut(500);
         
     });
 }

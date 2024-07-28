@@ -104,6 +104,7 @@ Route::middleware(['check_login'])->group(function () {
 	Route::get('get-view-buying-supply-type', [SupplyBuyingController::class, 'getViewBuyingSupplyType']);
 	Route::get('qty-by-supply-type', [CSupplyController::class, 'qtyBySupplyType']);
 	Route::post('take-out-supply/{id}', [CSupplyController::class, 'takeOutSupply']);
+	Route::post('re-import-emulsion/{id}', [CSupplyController::class, 'reImportEmulsion']);
 
 	//KCS route
 	Route::post('after-print-kcs/{id}',[ProductController::class, 'afterPrintKcs']);

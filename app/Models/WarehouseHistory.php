@@ -117,6 +117,27 @@ class WarehouseHistory extends Model
         return $ret;
     }
 
+    static function doLogWarehouse($type, $supply_id, $qty_import, $qty_export, $ex_inventory, $note, $product_id = 0){
+        $table = tableWarehouseByType($type);
+        $supply = getDetailDataObject($table, $supply_id);
+        $type = $supply->type;
+        $data_log['name'] = $supply->name;
+        $data_log['table'] = $table;
+        $data_log['type'] = $type;
+        $data_log['target'] = $supply_id;
+        $data_log['imported'] = $qty_import;
+        $data_log['exported'] = $qty_export;
+        $data_log['ex_inventory'] = $ex_inventory;
+        $field_qty = SquareWarehouse::isWeightLogWarehouse($type) ? 'weight' : 'qty';
+        $data_log['inventory'] = getFieldDataById($field_qty, $table, $supply_id);
+        $unit = getUnitSupplyLogWarehouse($type, $supply);
+        $data_log['unit'] = $unit;
+        $data_log['product'] = $product_id;
+        $data_log['note'] = $note;
+        (new \BaseService)->configBaseDataAction($data_log);
+        \DB::table('warehouse_histories')->insert($data_log);
+    }
+
     static function getInventoryAllTable($where, $ext_where)
     {
         $print = self::getInventoryAggrenate('print_warehouses', $where, $ext_where);
@@ -141,6 +162,5 @@ class WarehouseHistory extends Model
             return $other;
         }
         return $print->union($square)->union($supply)->union($other);
-
     }
 }
