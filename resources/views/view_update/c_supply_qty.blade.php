@@ -7,6 +7,7 @@
          $name = $field_qty['name'];
          $field_qty['name'] = 'qty'.'['.$name.']';
          $field_qty['value'] = @$value_qty[$name] ?? 0;
+         $field_qty['attr']['readonly'] = 0;
     @endphp
     @include('view_update.view', $field_qty)    
 @endforeach

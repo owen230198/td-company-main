@@ -547,9 +547,13 @@ var confirmTakeOutSupply = function () {
                 let title = data.code == 200 ? 'Thành công' : 'Không thành công';
                 let key = data.code == 200 ? 'success' : 'error';
                 if (!empty(data.message)) {
-                    swal(title, data.message, key).then(function () {
-                        window.location = data.url;
-                    });
+                    if (!empty(data.url)) {
+                        swal(title, data.message, key).then(function () {
+                            window.location = data.url;
+                        });
+                    }else{
+                        swal(title, data.message, key);
+                    }
                 } else {
                     swal('Lỗi không xác định !', data.message, 'error');
                 }

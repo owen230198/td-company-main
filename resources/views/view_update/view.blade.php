@@ -2,7 +2,7 @@
     $type = !empty($type) ? $type : 'text';
 @endphp
 @if ($type == 'group')
-    @include('view_update.'.$type)
+    @include('view_update.'.$type, ['attr_parent' => @$attr])
 @else
     <div class="form-group d-flex mb-2">
         <label 

@@ -128,7 +128,6 @@ use Illuminate\Http\Request;
 
         public function takeOutSupply(Request $request, $id)
         {
-            return returnMessageAjax(200, '', getBackUrl());
             if (\GroupUser::isAdmin() || \GroupUser::isWarehouse()) {
                 $data = $request->except('_token');
                 $proceess = $this->processData($data);
@@ -136,8 +135,8 @@ use Illuminate\Http\Request;
                     return $proceess;
                 }
                 $dataItem = CSupply::find($id);
-                
-                if (!empty($data['bill'])) {
+                $dataItem->qty = $data['qty'];
+                if (empty($data['bill'])) {
                     return returnMessageAjax(100, 'Bạn chưa upload phiếu xuất kho (file giấy) !');
                 }
                 if (@$dataItem->status != CSupply::HANDLING) {
@@ -160,21 +159,26 @@ use Illuminate\Http\Request;
                 }
                 $type = $dataItem->supp_type;
                 if (SquareWarehouse::isHasDeviceSupply($type)) {
+                    $length = $supply->qty - SquareWarehouse::getLengthByWeight($supply->supp_price, $qty['qty'], $supply->width);
                     $update_supply = [
-                        'qty' => $supply->qty - SquareWarehouse::getLengthByWeight($supply->supp_price, $qty['weight'], $supply->width),
-                        'hank' => $supply->hank - $qty['hank'],
-                        'weight' => $supply->weight
+                        'qty' => $length > 0 ? $length : 0,
+                        'hank' => $supply->hank - (int) @$qty['hank'],
+                        'weight' => $supply->weight - $qty['qty'],
                     ];     
                 }elseif (SquareWarehouse::isWeightSupply($type)) {
                     $update_supply = [
-                        'hank' => $supply->hank - $qty['hank'],
-                        'weight' => $supply->weight
+                        'hank' => $supply->hank - $qty['qty'],
+                        'weight' => $supply->weight - $qty['weight'],
                     ];  
                 }else{
                     $update_supply = ['qty' => $supply->qty - $qty['qty']];
                 }
-                \DB::table($table_warehouse)->where('id', $id)->update($update_supply);
-                $qty_export = SquareWarehouse::isWeightLogWarehouse($type) ? $qty['weight'] : $qty['qty'];
+                \DB::table($table_warehouse)->where('id', $supply->id)->update($update_supply);
+                if (SquareWarehouse::isWeightSupply($type)) {
+                    $qty_export = $qty['weight'];    
+                }else{
+                    $qty_export = $qty['qty']; 
+                }
                 $field_qty = SquareWarehouse::isWeightLogWarehouse($type) ? 'weight' : 'qty';
                 WarehouseHistory::doLogWarehouse($type, $supply->id, 0, $qty_export, $supply->{$field_qty}, $dataItem->note, $dataItem->product);
                 $data_update = ['status' => CSupply::HANDLED, 'bill' => $data['bill']];

@@ -7,6 +7,7 @@
             if (!empty($group_name)) {
                 $arr['name'] = $group_name.'['.$field_child_name.']';
             }
+            $arr['attr'] = !empty($attr_parent) ? $attr_parent : @$arr['attr'];
         @endphp
         @include('view_update.view', $arr)
     @endforeach   

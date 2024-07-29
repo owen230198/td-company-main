@@ -10,6 +10,7 @@
                             $name = $field['name'];
                             $arr = processArrField($field);
                             $arr['value'] = @$dataItem[$name];
+                            $arr['attr']['readonly'] = \GroupUser::isAdmin() || \GroupUser::isPlanHandle() ? 0 : 1;
                         @endphp
                         @include('view_update.view', $arr)
                     @endforeach
@@ -24,6 +25,7 @@
                         $name = $action['name'];
                         $arr = processArrField($action);
                         $arr['value'] = @$dataItem[$name];
+                        $arr['attr']['readonly'] = \GroupUser::isAdmin() || \GroupUser::isPlanHandle() ? 0 : 1;
                     @endphp
                     @include('view_update.view', $arr)
                 @endforeach
@@ -34,6 +36,7 @@
                         'note' => 'Phiếu xuất kho',
                         'type' => 'filev2',
                         'name' => 'bill',
+                        'value' => @$dataItem['bill'],
                         'other_data' => ['role_update' => [\GroupUser::WAREHOUSE]] 
                     ]
                 @endphp
