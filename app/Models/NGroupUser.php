@@ -201,11 +201,6 @@ class NGroupUser extends Model
             'link' => 'report/revenue?type=location',
             'group' => 'report'
         ],
-        'create_available_order' => [
-            'name' => 'Đơn hàng bán sẵn',
-            'link' => 'view/available_orders',
-            'group' => 'available_order'
-        ],
         'warehouse_management' => [
             'name' => 'Kho vật tư',
             'link' => 'warehouse-management',
@@ -219,6 +214,11 @@ class NGroupUser extends Model
         'warehouse_provider' => [
             'name' => 'Nhà cung cấp vật tư',
             'link' => 'view/warehouse_providers',
+            'group' => 'warehouse'
+        ],
+        'supply_role' => [
+            'name' => 'Quyền quản lí vật tư',
+            'link' => 'view/n_users?default_data=%7B%22group_user%22%3A%22'.self::WAREHOUSE.'%22%7D',
             'group' => 'warehouse'
         ],
         'ex_supply' => [

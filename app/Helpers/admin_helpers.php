@@ -212,6 +212,7 @@ if (!function_exists('processArrField')) {
         $arr = $field;
         $arr['attr'] = !empty($field['attr']) ? json_decode($field['attr'], true) : [];
         $arr['other_data'] = !empty($field['other_data']) ? json_decode($field['other_data'], true) : [];
+        $arr['condition'] = !empty($field['condition']) ? json_decode($field['condition'], true) : [];
         return $arr;
     }
 }

@@ -104,10 +104,10 @@ class AdminService extends BaseService
             }else{
                 $other_data = !empty($field['other_data']) ? json_decode($field['other_data'], true) : [];
                 $attr = !empty($field['attr']) ? json_decode($field['attr'], true) : [];
-                $type_input = @$attr['type_input'] ?? 'text';
                 $name = $field['name'];
                 $type = $field['type'];
                 if ($type == 'text') {
+                    $type_input = @$attr['type_input'] ?? 'text';
                     if (in_array($type_input, ['price', 'number'])) {
                         if (!empty($value['from'])) {
                             $from = (float) $value['from'];

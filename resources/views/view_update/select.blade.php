@@ -5,7 +5,7 @@
 	$multiple = @$select_config['multiple'] == 1;
 @endphp
 <div class="d-flex align-items-center w-100">
-	<select name="{{ $name }}" class="form-control 
+	<select name="{{ $multiple ? $name.'[]' : $name }}" class="form-control 
 	{{ $multiple ? 'length_input muptiple_select' : '' }}
 	{{ @$select_config['searchbox'] == 1 ? ' select_config' : '' }}
 	{{ @$attr['inject_class'] ? ' '.$attr['inject_class'] : '' }}
@@ -16,9 +16,18 @@
 	{{ @$attr['inject_attr'] ?? '' }}
 	{{ $multiple ? 'multiple' : '' }}>
 		@foreach ($list_options as $key => $option)
-			<option value="{{ $key }}" {{ @$value == $key ? 'selected' : '' }}>
-				{{ $option }}
-			</option>
+			@if ($multiple)
+				@php
+					$arr_value = !empty($value) ? json_decode($value, true) : [];
+				@endphp
+				<option value="{{ $key }}" {{ in_array($key, $arr_value) == $key ? 'selected' : '' }}>
+					{{ $option }}
+				</option>
+			@else
+				<option value="{{ $key }}" {{ @$value == $key ? 'selected' : '' }}>
+					{{ $option }}
+				</option>
+			@endif
 		@endforeach
 	</select>
 </div>

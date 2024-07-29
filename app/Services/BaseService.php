@@ -42,8 +42,9 @@ class BaseService
 	{
 		unset($data['created_at'], $data['updated_at']);
 		foreach ($data as $key => $item) {
-            $field = \App\Models\NDetailTable::select(['type', 'attr', 'note', 'name', 'table_map'])->where(['table_map'=>$table, 'name'=>$key])->first();
+            $field = \App\Models\NDetailTable::select(['type', 'attr', 'note', 'name', 'table_map', 'other_data'])->where(['table_map'=>$table, 'name'=>$key])->first();
 			$attr = !empty($field['attr']) ? json_decode($field['attr'], true) : [];
+			$other_data = !empty($field['other_data']) ? json_decode($field['other_data'], true) : [];
 			$validation = $this->validateDataTable($field, $attr, $item, $data);
 			if ($validation['code'] == 100) {
 				return $validation;
@@ -51,6 +52,8 @@ class BaseService
 			}
 			if (@$field['type'] == 'datetime') {
 				$data[$key] = getDataDateTime($item);
+			}elseif (@$field['type'] == 'select' && !empty($other_data['config']['multiple'])) {
+				$data[$key] = json_encode($item);
 			}elseif (@$field['type'] == 'multiplelinking') {
 				$data[$key] = json_encode($item);
 			}elseif (@$attr['type_input'] == 'password') {

@@ -29,8 +29,20 @@
                                     @php
                                         $arr = processArrField($field);
                                         $arr['value'] = @$config_view == 1 ? @$field['value'] : @$dataItem[$field['name']];
+                                        $show = true;
+                                        if (!empty($arr['condition'])) {
+                                            foreach ($arr['condition'] as $condtion) {
+                                                $cond_name = $condtion['key'];
+                                                $cond_value = $condtion['value'];
+                                                if (@$dataItem->{$cond_name} != $cond_value || @$default_field[$cond_name] != $cond_value) {
+                                                    $show = false;
+                                                }
+                                            }
+                                        }
                                     @endphp
-                                    @include('view_update.view', $arr)
+                                    @if ($show)
+                                        @include('view_update.view', $arr)
+                                    @endif
                                 @endif
                             @endforeach
                         </div>
