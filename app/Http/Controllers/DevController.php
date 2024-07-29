@@ -476,8 +476,12 @@ class DevController extends Controller
         foreach ($data as $salary) {
             $supply = Paper::find($salary['supply']);
             $elevate = json_decode($supply->elevate, true);
-            $update['total'] = Paper::getPrintFormula($print['type'], $salary['qty'], $print['color'], $salary['work_price'], $salary['shape_price'], 0, true);
-            \DB::table('w_salaries')->where('id', $salary['id'])->update($update);
+            if (!empty($elevate['float']['act'])) {
+                dump($salary->total);
+                $update['total'] = $salary->total + 30000;
+                dump($update['total']);
+                \DB::table('w_salaries')->where('id', $salary['id'])->update($update);
+            }
         }
     }
 
