@@ -470,6 +470,17 @@ class DevController extends Controller
         }
     }
 
+    public function updateTotalSalaryElevate()
+    {
+        $data = WSalary::where(['type' => 'elevate', 'status' => 'submited'])->get();
+        foreach ($data as $salary) {
+            $supply = Paper::find($salary['supply']);
+            $elevate = json_decode($supply->elevate, true);
+            $update['total'] = Paper::getPrintFormula($print['type'], $salary['qty'], $print['color'], $salary['work_price'], $salary['shape_price'], 0, true);
+            \DB::table('w_salaries')->where('id', $salary['id'])->update($update);
+        }
+    }
+
     public function updateQtyCSupply()
     {
         die();
