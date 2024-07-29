@@ -626,7 +626,6 @@ var selectTypeSuppWarehouse = function () {
         event.preventDefault();
         let parent = $(this).closest('.__module_select_type_warehouse');
         let value = $(this).val();
-        console.log(value);
         let url = getUrlLinkingWarehouseSize(value);
         let select_size = parent.find('select.__wh_select_size');
         select_size.val('');
