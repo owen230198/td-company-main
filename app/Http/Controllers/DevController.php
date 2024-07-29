@@ -472,6 +472,7 @@ class DevController extends Controller
 
     public function updateTotalSalaryElevate()
     {
+        die();
         $data = WSalary::where(['type' => 'elevate', 'status' => 'submited'])->get();
         foreach ($data as $salary) {
             $supply = Paper::find($salary['supply']);
