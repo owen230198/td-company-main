@@ -3,7 +3,7 @@
     $field_supply_type = \App\Models\SupplyBuying::getFeildSupplyJson(@$value, $status);
 @endphp
 <div class="item_supp_buy mb-3 pb-3 border_bot_main position-relative" data-index = {{ $index }}>
-    @if (\GroupUser::isPlanHandle() || \GroupUser::isApplyBuying())
+    @if (\GroupUser::isAdmin() || \GroupUser::isPlanHandle() || \GroupUser::isApplyBuying())
         <span class="d-flex color_red smooth remove_parent_element_button"><i class="fa fa-times" aria-hidden="true"></i></span> 
     @endif
     @foreach ($field_supply_type as $item)
