@@ -29,7 +29,7 @@ class PrintWarehouse extends Model
 
     static function getRole()
     {
-        $role = WarehouseService::ROLE;
+        $role = WarehouseService::getRole();
         return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];
     } 
     

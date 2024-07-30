@@ -13,19 +13,28 @@
             parent::__construct();
             $this->table = $table;
         }
-        const ROLE = [
-            \GroupUser::WAREHOUSE => [
-                'view' => 1,
-                // 'insert' => 1,
-                // 'update' => 1,
-            ],
-            \GroupUser::PLAN_HANDLE => [
-                'view' => 1
-            ],
-            \GroupUser::ACCOUNTING => [
-                'view' => 1,
-            ]
-        ];
+        static function getRole() {
+            return [
+                \GroupUser::WAREHOUSE => [
+                    'view' => ['with' => 
+                            [
+                                'type' => 'group',
+                                'query' => [
+                                    ['key' => 'type', 'compare' => 'in', 'value' => \User::getSupplyRole()],
+                                ]
+                            ],
+                        ]
+                    // 'insert' => 1,
+                    // 'update' => 1,
+                ],
+                \GroupUser::PLAN_HANDLE => [
+                    'view' => 1
+                ],
+                \GroupUser::ACCOUNTING => [
+                    'view' => 1,
+                ]
+            ];
+        } 
         private function validateDataWarehouse($data)
         {
             if (empty($data['provider'])) {

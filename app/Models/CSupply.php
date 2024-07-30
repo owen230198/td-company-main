@@ -18,7 +18,15 @@
         {
             $role = [
                 \GroupUser::WAREHOUSE => [
-                    'view' => ['with' => ['key' => 'status', 'value' => self::HANDLING]]
+                    'view' => ['with' => 
+                        [
+                            'type' => 'group',
+                            'query' => [
+                                ['key' => 'supp_type', 'compare' => 'in', 'value' => \User::getSupplyRole()],
+                                ['key' => 'status', 'value' => self::HANDLING]
+                            ]
+                        ],
+                    ]
                 ],
                 \GroupUser::PLAN_HANDLE => [
                     'insert' => 1,
