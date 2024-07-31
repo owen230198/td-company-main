@@ -28,6 +28,7 @@
                     // 'update' => 1,
                 ],
                 \GroupUser::PLAN_HANDLE => [
+                    'insert' => 1,
                     'view' => 1
                 ],
                 \GroupUser::ACCOUNTING => [
@@ -37,15 +38,15 @@
         } 
         private function validateDataWarehouse($data)
         {
-            if (empty($data['provider'])) {
-                return returnMessageAjax(100, 'Vui lòng chọn nhà cung cấp vật tư !');
-            }
-            if (empty($data['price'])) {
-                return returnMessageAjax(100, 'Vui lòng nhập giá mua vật tư !');
-            }
-            if (empty($data['bill'])) {
-                return returnMessageAjax(100, 'Vui lòng upload file hóa đơn mua vật tư !');
-            }
+            // if (empty($data['provider'])) {
+            //     return returnMessageAjax(100, 'Vui lòng chọn nhà cung cấp vật tư !');
+            // }
+            // if (empty($data['price'])) {
+            //     return returnMessageAjax(100, 'Vui lòng nhập giá mua vật tư !');
+            // }
+            // if (empty($data['bill'])) {
+            //     return returnMessageAjax(100, 'Vui lòng upload file hóa đơn mua vật tư !');
+            // }
         }
 
         private function getDataLogAction(&$data_log)
