@@ -14,14 +14,31 @@ class SquareWarehouseController extends Controller
     }
 
     public function validateData($data){ 
-        if (empty($data['width'])) {
+        $warehouse = $data['warehouse'];
+        $log = $data['log'];
+        if (empty($warehouse['type'])) {
+            return returnMessageAjax(100, 'Dữ liệu vật tư không hợp lệ !');
+        }
+        if (empty($warehouse['width'])) {
             return returnMessageAjax(100, 'Vui lòng nhập kích thước khổ vật tư !');
         }
+        $type = $warehouse['type'];
+        if (SquareWarehouse::isWeightLogWarehouse($type)) {
+            if (empty($warehouse['device'])) {
+                return returnMessageAjax(100, 'Vui lòng chọn loại vật tư !');
+            }
+            if ($type == \TDConst::EMULSION && empty($warehouse['name'])) {
+                return returnMessageAjax(100, 'Vui lòng nhập mã màu nhũ !');
+            }
+        }
 
-        // if (empty($data['supp_price'])) {
-        //     return returnMessageAjax(100, 'Vui lòng chọn loại vật tư !');
-        // }
-        $count = SquareWarehouse::where($data)->count();
+        if (SquareWarehouse::countPriceByWeight($type) || SquareWarehouse::countPriceBySquare($type)) {
+            if (empty($warehouse['supp_price'])) {
+                return returnMessageAjax(100, 'Vui lòng chọn loại màng !');
+            }
+        }
+
+        $count = SquareWarehouse::where($warehouse)->count();
         if ($count > 0) {
             return returnMessageAjax(100, 'Vật tư '.$data['name'].' Đã có trong kho !');
         }
@@ -33,7 +50,7 @@ class SquareWarehouseController extends Controller
         if ($request->isMethod('GET')) {
             return $this->services->insert($param);
         }else{
-            $validate = $this->validateData($request->input('warehouse'));
+            $validate = $this->validateData($param);
             if (@$validate['code'] == 100) {
                 return $validate;
             }

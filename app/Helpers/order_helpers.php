@@ -294,7 +294,10 @@
                 case in_array($type, [\TDConst::MAGNET]):
                     return 'unit';
                     break;
-                case \App\Models\SquareWarehouse::isWeightLogWarehouse($type):
+                case  \App\Models\SquareWarehouse::countPriceByHank($type):
+                    return 'hank';
+                    break;
+                case \App\Models\SquareWarehouse::countPriceByWeight($type):
                     return 'kg';
                     break;
                 case \App\Models\SquareWarehouse::countPriceBySquare($type):

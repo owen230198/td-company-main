@@ -17,19 +17,25 @@ class WarehouseHistory extends Model
         'note' => 'Thêm số lượng',
         'attr' => ['type_input' => 'number']
     ];
-    const HANK_WEIGHT =[
-        [
-            'name' => 'hank',
-            'type' => 'text',
-            'note' => 'Số cuộn mua thêm',
-            'attr' => ['type_input' => 'number']
-        ],
-        [
-            'name' => 'weight',
-            'type' => 'text',
-            'note' => 'Số kg mua thêm',
-            'attr' => ['type_input' => 'number']
-        ],
+
+    const FIELD_LENGTH = [
+        'name' => 'length',
+        'type' => 'text',
+        'note' => 'Số cm mua thêm',
+        'attr' => ['type_input' => 'number']
+    ];
+
+    const FIELD_HANK = [
+        'name' => 'hank',
+        'type' => 'text',
+        'note' => 'Số cuộn mua thêm',
+        'attr' => ['type_input' => 'number']
+    ];
+    const FIELD_WEIGHT = [
+        'name' => 'weight',
+        'type' => 'text',
+        'note' => 'Số kg mua thêm',
+        'attr' => ['type_input' => 'number']
     ];
     const FIELD_PROVIDER = [
         'name' => 'provider',
@@ -56,18 +62,20 @@ class WarehouseHistory extends Model
     ];
 
     static function getFieldAction($type){
-        $key_unit = getUnitSupply($type);
+        $key_unit = getUnitSupplyLogWarehouse($type);
         $field_qty = self::FIELD_QTY;
         $field_qty['note'] = 'Số '.getUnitWarehouseItem($key_unit).' mua thêm';
         $ret = [];
         switch ($type) {
-            case in_array($type, [\TDconst::SKRINK]):
-                $ret = self::HANK_WEIGHT;
+            case SquareWarehouse::countPriceByWeight($type):
+                $ret = [$field_qty, self::FIELD_HANK];
                 break;
-            case in_array($type, [\TDConst::NILON, \TDConst::METALAI, \TDConst::COVER, \TDConst::DECAL, \TDConst::SILK, \TDconst::EMULSION]):
+            case SquareWarehouse::countPriceByHank($type):
                 $ret = [$field_qty];
-                foreach (self::HANK_WEIGHT as $hank_weight) {
-                    $ret[] = $hank_weight;
+                if ($type == \TDConst::DECAL) {
+                    $ret[] = self::FIELD_LENGTH;
+                }else{
+                    $ret[] = self::FIELD_WEIGHT;
                 }
                 break;
             default:
