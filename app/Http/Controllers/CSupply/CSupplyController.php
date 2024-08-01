@@ -180,7 +180,7 @@ use Illuminate\Http\Request;
                     $qty_export = $qty['qty']; 
                 }
                 $field_qty = SquareWarehouse::isWeightLogWarehouse($type) ? 'weight' : 'qty';
-                WarehouseHistory::doLogWarehouse($type, $supply->id, 0, $qty_export, $supply->{$field_qty}, $dataItem->note, $dataItem->product);
+                WarehouseHistory::doLogWarehouse($type, $supply->id, 0, $qty_export, $supply->{$field_qty}, $dataItem->product, ['note' => $dataItem->note]);
                 $data_update = ['status' => CSupply::HANDLED, 'bill' => $data['bill']];
                 CSupply::where('id', $id)->update($data_update);
                 logActionUserData('apply_import', 'c_supplies', $id, $dataItem);
@@ -232,7 +232,7 @@ use Illuminate\Http\Request;
                     $supply_id = SquareWarehouse::insertGetId($data_process);    
                 }
                 if ($supply_id) {
-                    WarehouseHistory::doLogWarehouse($dataItem->supp_type, $supply_id, 1, 0, 0, $data_process['note']);
+                    WarehouseHistory::doLogWarehouse($dataItem->supp_type, $supply_id, 1, 0, 0, 0, 0, ['note' => $data_process['note']]);
                     return returnMessageAjax(200, 'Bạn đã nhập lại kho thành công cuộn nhũ đã cắt !', getBackUrl());
                 }else{
                     return returnMessageAjax(100, 'Đã có lỗi xảy ra, vui lòng thử lại !');

@@ -28,7 +28,7 @@
     class="form-control select_ajax {{ @$attr['inject_class'] ? ' '.$attr['inject_class'] : '' }}"
     data-url="{{ $url }}" data-id="{{ @$data_id }}", data-label = "{{ @$data_label }}" {{ @$attr['inject_attr'] ?? '' }} 
     {{ @$attr['disable_field'] == 1 ? 'disabled' : '' }}
-    {{ @$attr['readonly'] == 1 ? 'readonly' : '' }}>
+    {{ @$attr['readonly'] == 1 || (@$attr['readonly'] == 2 && !empty($value) && empty($is_search)) ? 'readonly' : '' }}>
     </select>
 @else
     @php
@@ -38,7 +38,7 @@
             class="form-control {{ @$select_config['searchbox'] == 1 ? ' select_config' : '' }} {{ @$attr['inject_class'] }}" 
             {{ @$attr['inject_attr'] ?? '' }}
             {{ @$attr['disable_field'] == 1 ? 'disabled' : '' }}
-            {{ @$attr['readonly'] == 1 ? 'readonly' : '' }}
+            {{ @$attr['readonly'] == 1 || (@$attr['readonly'] == 2 && !empty($value) && empty($is_search)) ? 'readonly' : '' }}
             >
         <option value="">{{ @$attr['placeholder'] ?? 'Chọn' }}</option>
         @foreach ($list_options as $item)

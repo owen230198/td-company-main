@@ -81,7 +81,7 @@ class WarehouseHistory extends Model
         return $ret;
     }
 
-    static function doLogWarehouse($type, $supply_id, $qty_import, $qty_export, $ex_inventory, $note, $product_id = 0){
+    static function doLogWarehouse($type, $supply_id, $qty_import, $qty_export, $ex_inventory, $product_id = 0, $arr = []){
         $table = tableWarehouseByType($type);
         $supply = getDetailDataObject($table, $supply_id);
         $type = $supply->type;
@@ -94,10 +94,14 @@ class WarehouseHistory extends Model
         $data_log['ex_inventory'] = $ex_inventory;
         $action = $qty_import > 0 ? 'import' : 'export';
         $field_qty = getUnitSupplyLogWarehouse($type, $action, true);
-        $data_log['inventory'] = getFieldDataById($field_qty, $table, $supply_id);
-        $data_log['unit'] = getUnitSupplyLogWarehouse($type, $action, $supply);
+        $data_log['inventory'] = $supply->{$field_qty};
+        $data_log['unit'] = getUnitSupplyLogWarehouse($type, $action, false, $supply);
         $data_log['product'] = $product_id;
-        $data_log['note'] = $note;
+        if (!empty($arr)) {
+            foreach ($arr as $key => $value) {
+                $data_log[$key] = $value;
+            }
+        }
         (new \BaseService)->configBaseDataAction($data_log);
         \DB::table('warehouse_histories')->insert($data_log);
     }

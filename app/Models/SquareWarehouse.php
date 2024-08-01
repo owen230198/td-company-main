@@ -103,7 +103,14 @@ class SquareWarehouse extends Model
 
     static function getName($data)
     {
-        return getFieldDataById('name', 'supply_names', $data['device']).' - '.getFieldDataById('name', 'materals', $data['supp_price']).' - '.$data['width'];
+        $name = '';
+        if (self::isWeightLogWarehouse($data['type'])) {
+            $name .= getFieldDataById('name', 'supply_names', $data['device']).' - ';
+        }
+        if (!empty($data['supp_price'])) {
+            $name .= getFieldDataById('name', 'materals', $data['supp_price']).' - ';
+        }
+        return $name .= $data['width'];
     }
 
     static function getLabelLinking($data)

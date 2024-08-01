@@ -1,8 +1,8 @@
 <?php
     namespace App\Services;
 
-use App\Models\SquareWarehouse;
-use App\Models\SupplyWarehouse;
+    use App\Models\SquareWarehouse;
+    use App\Models\SupplyWarehouse;
     use App\Services\BaseService;
     use App\Services\AdminService;
     use App\Models\WarehouseHistory;
@@ -45,7 +45,7 @@ use App\Models\SupplyWarehouse;
             $field_qty = [
                 'name' => 'qty',
                 'type' => 'text',
-                'note' => 'Số lượng'. $unit,
+                'note' => 'Số lượng nhập thêm'. $unit,
                 'attr' => [
                     'type_input' => 'number', 
                     'inject_class' => '__buying_qty_input __buying_change_input', 
@@ -55,7 +55,7 @@ use App\Models\SupplyWarehouse;
             $field_hank = [
                 'name' => 'hank',
                 'type' => 'text',
-                'note' => 'Số cuộn',
+                'note' => 'Số cuộn nhập thêm',
                 'attr' => [
                     'type_input' => 'number',
                     'readonly' => $readonly
@@ -64,17 +64,7 @@ use App\Models\SupplyWarehouse;
             $field_weight = [
                 'name' => 'weight',
                 'type' => 'text',
-                'note' => 'Số kg',
-                'attr' => [
-                    'type_input' => 'number',
-                    'readonly' => $readonly
-                ]
-            ];
-
-            $field_weight = [
-                'name' => 'weight',
-                'type' => 'text',
-                'note' => 'Số kg',
+                'note' => 'Số kg nhập thêm',
                 'attr' => [
                     'type_input' => 'number',
                     'readonly' => $readonly
@@ -84,7 +74,7 @@ use App\Models\SupplyWarehouse;
             $field_length = [
                 'name' => 'square',
                 'type' => 'text',
-                'note' => 'Số cm',
+                'note' => 'Số cm nhập thêm',
                 'attr' => [
                     'type_input' => 'number',
                     'readonly' => $readonly
@@ -105,8 +95,16 @@ use App\Models\SupplyWarehouse;
                 return [$field_qty];
             }
         }
-        private function validateDataWarehouse($data)
+        private function validateDataWarehouse($data, $type)
         {
+            $arr_field_qty = self::getQtyFieldByType($type);
+            foreach ($arr_field_qty as $field_qty) {
+                $name = $field_qty['name'];
+                $note = strtolower($field_qty['note']);
+                if (empty($data[$name])) {
+                    return returnMessageAjax(100, 'Dữ liệu '.$note.' không được để trống !');
+                }
+            }
             // if (empty($data['provider'])) {
             //     return returnMessageAjax(100, 'Vui lòng chọn nhà cung cấp vật tư !');
             // }
@@ -116,61 +114,79 @@ use App\Models\SupplyWarehouse;
             // if (empty($data['bill'])) {
             //     return returnMessageAjax(100, 'Vui lòng upload file hóa đơn mua vật tư !');
             // }
+            return $arr_field_qty;
         }
 
         private function getDataLogAction(&$data_log)
         {
-            $data_log['table'] = $this->table;
-            $data_log['created_by'] = \User::getCurrent('id');
-            $data_log['created_at'] = \Carbon\Carbon::now(); 
+            $import_qty = $data_log['qty'];
+            unset($data_log['qty']);
+            if (!empty($data_log['hank'])) {
+                unset($data_log['hank']);
+            }
+            if (!empty($data_log['weight'])) {
+                unset($data_log['weight']);
+            }
+            if (!empty($data_log['square'])) {
+                unset($data_log['square']);
+            }
+            return $import_qty;
+        }
+
+        private function processQtyWarehouse($type, $dataItem, $data_log, $action = 'insert'){
+            $log_qty = $data_log['qty'];
+            if (SquareWarehouse::countPriceByWeight($type) && !empty($dataItem->width)) {
+                $ret['qty'] = (int) SquareWarehouse::getLengthByWeight($dataItem->supp_price, $log_qty, $dataItem->width);
+                $ret['hank'] = (int) $data_log['hank'];
+                $ret['weight'] = $log_qty;
+            }elseif(SquareWarehouse::countPriceByHank($type)){
+                $ret['hank'] = $log_qty;
+                if ($type == \TDConst::DECAL) {
+                    $ret['qty'] = $data_log['square'];
+                }else{
+                    $ret['weight'] = (int) $data_log['weight'];
+                }
+            }else{
+                $ret['qty'] = $log_qty;
+            }
+            if ($action == 'update') {
+                foreach ($ret as $key => $value) {
+                    $ret[$key] = $value + (float) $dataItem->{$key};
+                }
+            }
+            return $ret;
         }
 
         public function insert($param, $type_request = 0)
         {
+            $table = $this->table;
             if ($type_request == 1) {
                 $data_log = $param['log'];
                 $data_warehouse = $param['warehouse'];
-                if (!empty($data_log['hank'])) {
-                    $data_warehouse['hank'] = @$data_log['hank'];
-                    unset($data_log['hank']);
+                $type = $data_warehouse['type'];
+                $arr_log = $this->validateDataWarehouse($data_log, $type);
+                if (@$arr_log['code'] == 100) {
+                    return $arr_log;
                 }
-                if (!empty($data_log['weight'])) {
-                    $data_warehouse['weight'] = @$data_log['weight'];
-                    if (empty($data_log['qty'])) {
-                        $data_log['qty'] = @$data_log['weight'];
-                    }
-                    unset($data_log['weight']);
-                }
-                if ($data_warehouse['type'] != \TDConst::SKRINK) {
-                    $data_warehouse['qty'] = @$data_log['qty'];
-                }
-                $validate = $this->validateDataWarehouse($data_log);
-                if (@$validate['code'] == 100) {
-                    return $validate;
-                }
-                $model = getModelByTable($this->table);
+                $model = getModelByTable($table);
                 $name = @$data_warehouse['name'] ?? $model::getName($data_warehouse);
                 $data_warehouse['name'] = $name;
                 $this->configBaseDataAction($data_warehouse);
                 $insert_id = $model::insertGetId($data_warehouse);
                 if ($insert_id) {
-                    $data_log['name'] = $name;
-                    $data_log['target'] = $insert_id;
-                    $data_log['ex_inventory'] = 0;
-                    $data_log['imported'] = $data_log['qty'];
-                    $data_log['exported'] = 0;
-                    $data_log['inventory'] = $data_log['qty'];
-                    $this->getDataLogAction($data_log);
-                    unset($data_log['qty']);
-                    \DB::table('warehouse_histories')->insert($data_log);
+                    $dataItem = $model::find($insert_id);
+                    $update_qty = $this->processQtyWarehouse($type, $dataItem, $data_log);
+                    \DB::table($table)->where('id', $insert_id)->update($update_qty);
+                    $import_qty = $this->getDataLogAction($data_log);
+                    WarehouseHistory::doLogWarehouse($type, $insert_id, $import_qty, 0, 0, 0, $data_log);
                     return returnMessageAjax(200, 'Đã nhập vật tư thành công !', getBackUrl());
                 }else{
                     return returnMessageAjax(100, 'Không thể thêm vật tư vào kho !');
                 }
             }else{
                 $where = !empty($param['type']) ? [['key' => 'type', 'value' => $param['type']]] : [];
-                $data = (new AdminService)->getDataActionView($this->table, __FUNCTION__, 'Thêm mới', $param, $where);
-                $data['action_url'] = url('insert/'.$this->table);
+                $data = (new AdminService)->getDataActionView($table, __FUNCTION__, 'Thêm mới', $param, $where);
+                $data['action_url'] = url('insert/'.$table);
                 $data['field_logs'] = WarehouseHistory::getFieldAction(@$param['type']);
                 if (!empty($param['type'])) {
                     $data['type_supp'] = $param['type'];
@@ -185,56 +201,35 @@ use App\Models\SupplyWarehouse;
             if (@$dataItem->status != SupplyWarehouse::IMPORTED) {
                 return customReturnMessage(false, $type_request == 1, ['message' => 'Không thể cập nhật số lượng cho vật tư này !']);
             }
+            $table = $this->table;
             if ($type_request == 1) {
                 $data_log = $param['log'];
                 $data_warehouse = $param['warehouse'];
-                if (!empty($data_log['hank'])) {
-                    $data_warehouse['hank'] = (float) $dataItem['hank'] + (float) $data_log['hank'];
-                    unset($data_log['hank']);
+                $type = $data_warehouse['type'];
+                $arr_log = $this->validateDataWarehouse($data_log, $type);
+                if (@$arr_log['code'] == 100) {
+                    return $arr_log;
                 }
-                if (!empty($data_log['weight'])) {
-                    $data_warehouse['weight'] = @(float) $dataItem['weight'] + (float) $data_log['weight'];
-                    if (empty($data_log['qty'])) {
-                        $data_log['qty'] = $data_log['weight'];
-                    }
-                    unset($data_log['weight']);
-                }
-                $is_skrink = $data_warehouse['type'] != \TDConst::SKRINK;
-                if ($is_skrink) {
-                    $data_warehouse['qty'] = (float) $dataItem['qty'] + (float) $data_log['qty'];
-                }
-                $validate = $this->validateDataWarehouse($data_log);
-                if (@$validate['code'] == 100) {
-                    return $validate;
-                }
-                $model = getModelByTable($this->table);
-                $name = @$dataItem['name'] ?? $model::getName($dataItem);
-                $data_warehouse['name'] = $name;
                 $this->configBaseDataAction($data_warehouse);
-                $update = $model::where('id', $id)->update($data_warehouse);
+                $update_qty = $this->processQtyWarehouse($type, $dataItem, $data_log, 'update');
+                $update = \DB::table($table)->where('id', $id)->update($update_qty);
                 if ($update) {
-                    $data_log['name'] = $name;
-                    $data_log['target'] = $id;
-                    $data_log['exported'] = 0;
-                    $data_log['imported'] = @$data_log['weight'] ?? $data_log['qty'];
-                    $data_log['ex_inventory'] = @$dataItem['weight'] ?? $dataItem['qty'];
-                    $data_log['inventory'] = @$data_warehouse['weight'] ?? @$data_warehouse['qty'];
-                    $this->getDataLogAction($data_log);
-                    unset($data_log['qty']);
-                    \DB::table('warehouse_histories')->insert($data_log);
-                    return returnMessageAjax(200, 'Đã nhập thêm thành công '.$data_log['imported'].' vật tư !', getBackUrl());
+                    $import_qty = $this->getDataLogAction($data_log);
+                    $feild_log = getUnitSupplyLogWarehouse($type, 'import', true);
+                    WarehouseHistory::doLogWarehouse($type, $id, $import_qty, 0, $dataItem->{$feild_log}, 0, $data_log);
+                    return returnMessageAjax(200, 'Đã nhập thêm thành công '.$import_qty.' vật tư !', getBackUrl());
                 }   
             }else{
                 $where = !empty($param['type']) ? [['key' => 'type', 'value' => $param['type']]] : [];
-                $data = (new AdminService)->getDataActionView($this->table, 'update', 'Chi tiết', $param, $where);
+                $data = (new AdminService)->getDataActionView($table, 'update', 'Chi tiết', $param, $where);
                 $data['title'] = !empty($dataItem['name']) ? 'Chi tiết '.@$dataItem['name'] : @$data['title'];
-                $data['action_url'] = url('update/'.$this->table.'/'.$id);
+                $data['action_url'] = url('update/'.$table.'/'.$id);
                 $data['field_logs'] = WarehouseHistory::getFieldAction(@$param['type']);;
                 if (!empty($param['type'])) {
                     $data['type_supp'] = $param['type'];
                 }
                 $data['dataItem'] = $dataItem;
-                $data['data_item_log'] = WarehouseHistory::where(['table' => $this->table, 'target' => $id])->orderBy('created_at', 'desc')->paginate(20);
+                $data['data_item_log'] = WarehouseHistory::where(['table' => $table, 'target' => $id])->orderBy('created_at', 'desc')->paginate(20);
                 return view('warehouses.actions.view', $data);
             }
         }

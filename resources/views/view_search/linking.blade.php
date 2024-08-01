@@ -1,1 +1,1 @@
-@include('view_update.linking', ['value' => @$data_search[$name]])
+@include('view_update.linking', ['value' => @$data_search[$name], 'is_search' => 1])
