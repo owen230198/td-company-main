@@ -11,7 +11,7 @@
  Target Server Version : 80030
  File Encoding         : 65001
 
- Date: 02/08/2024 00:04:47
+ Date: 02/08/2024 00:53:55
 */
 
 SET NAMES utf8mb4;
@@ -394,7 +394,7 @@ INSERT INTO `n_detail_tables` VALUES (364, 'customer_name', '', 'Tên công ty',
 INSERT INTO `n_detail_tables` VALUES (365, 'customer_address', '', 'Địa chỉ', 'link_data', 'orders', 2, 0, 0, 0, 1, NULL, 0, 0, '{\r\n	\"data\":{\r\n		\"table_get\":\"customers\",\r\n		\"field_get\":\"address\",\r\n		\"field_data\":\"customer\"\r\n	}\r\n}', NULL, NULL, 1, 1, '2023-05-23 14:41:40', '2024-06-25 19:39:04');
 INSERT INTO `n_detail_tables` VALUES (366, 'represent_phone', '', 'SĐT', 'link_data', 'orders', 4, 0, 0, 0, 1, NULL, 0, 0, '{\r\n	\"data\":{\r\n		\"table_get\":\"represents\",\r\n		\"field_get\":\"phone\",\r\n		\"field_data\":\"represent\"\r\n	}\r\n}', NULL, NULL, 1, 1, '2023-05-23 14:41:40', '2024-06-25 19:39:04');
 INSERT INTO `n_detail_tables` VALUES (367, 'size', NULL, 'Kích thước khuôn', 'product_size', 'orders', 7, 0, 0, 0, 1, NULL, 1, 0, '{\"data\":{\r\n		\"key_pluck\":\"order\"\r\n	}\r\n}', NULL, NULL, 1, 1, '2023-04-30 11:17:52', '2024-06-25 19:52:13');
-INSERT INTO `n_detail_tables` VALUES (369, 'unit', '{\"required\":1, \"readonly\":2}', 'ĐVT', 'select', 'print_warehouses', 5, 1, 1, 1, 0, NULL, 0, 0, '{\"data\":{\r\n		\"options\":{\"\":\"ĐVT\", \"sheet\":\"Tờ\", \"weight\":\"Kg\"}\r\n	}\r\n}', NULL, NULL, 1, 1, '2023-05-11 11:18:58', '2024-08-01 18:56:29');
+INSERT INTO `n_detail_tables` VALUES (369, 'unit', '{\"required\":1, \"readonly\":2}', 'ĐVT', 'select', 'print_warehouses', 5, 1, 1, 1, 0, 1, 0, 0, '{\"data\":{\r\n		\"options\":{\"\":\"ĐVT\", \"sheet\":\"Tờ\", \"weight\":\"Kg\"}\r\n	}\r\n}', NULL, NULL, 1, 1, '2023-05-11 11:18:58', '2024-08-02 00:34:20');
 INSERT INTO `n_detail_tables` VALUES (370, 'name', '{\"required\":1}', 'Tên loại vật tư', 'text', 'supply_extends', 0, 1, 1, 1, 1, NULL, 1, 0, '', NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-07-11 22:15:22');
 INSERT INTO `n_detail_tables` VALUES (371, 'note', '', 'Ghi chú', 'textarea', 'supply_extends', 4, 0, 1, 1, 0, NULL, 1, 0, '', NULL, NULL, 1, 1, '2023-04-08 00:05:12', '2024-07-11 22:15:22');
 INSERT INTO `n_detail_tables` VALUES (372, 'created_by', '', 'Người thêm', 'linking', 'supply_extends', 7, 1, 0, 0, 1, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-07-11 22:15:22');

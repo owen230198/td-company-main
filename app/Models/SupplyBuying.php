@@ -160,7 +160,15 @@ class SupplyBuying extends Model
                         ]
             ],
             \GroupUser::WAREHOUSE => [
-                'view' => ['with' => ['key' => 'status', 'value' => self::BOUGHT]]
+                'view' => ['with' => 
+                    [
+                        'type' => 'group',
+                        'query' => [
+                            ['key' => 'type', 'compare' => 'in', 'value' => \User::getSupplyRole()],
+                            ['key' => 'status', 'value' => self::BOUGHT]
+                        ]
+                    ],
+                ]
             ]
         ];
         return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];

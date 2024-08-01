@@ -213,19 +213,21 @@ use App\Models\SupplyBuying;
                     $table_supply = tableWarehouseByType($type);
                     $data['log'] = [];
                     $data['log']['type'] = @$supply['supp_type'];
-                    $supply_qty = (int) $supply['qty'];
+                    $supply_qty = (float) $supply['qty'];
                     if (SquareWarehouse::countPriceByWeight($type) && !empty($supply['width'])) {
-                        $data['log']['qty'] = (int) SquareWarehouse::getLengthByWeight($supply['supp_price'], $supply_qty, $supply['width']);
+                        $data['log']['qty'] = $supply_qty;
                         $data['log']['hank'] = (int) $supply['hank'];
-                        $data['log']['weight'] = (int) $supply_qty;
+                        $data['log']['weight'] = $supply_qty;
                     }elseif(SquareWarehouse::countPriceByHank($type)){
                         $data['log']['qty'] = $supply_qty;
                         $data['log']['hank'] = $supply_qty;
-                        if (empty($supply['weight'])) {
-                            return returnMessageAjax(100, 'Bạn chưa nhập số kg cho vật tư '. @$supply['name'].' !');
+                        if (SquareWarehouse::isWeightSupply($type)) {
+                            if (empty($supply['weight'])) {
+                                return returnMessageAjax(100, 'Bạn chưa nhập số kg cho vật tư '. @$supply['name'].' !');
+                            }
+                            $data['log']['weight'] = (int) $supply['weight'];
+                            $update_supply[$key]['weight'] = $supply['weight'];
                         }
-                        $data['log']['weight'] = (int) $supply['weight'];
-                        $update_supply[$key]['weight'] = $supply['weight'];
                     }else{
                         $data['log']['qty'] = $supply_qty;
                     }
