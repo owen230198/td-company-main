@@ -604,7 +604,7 @@
             $table = tableWarehouseByType($type);
             $data['fields'] = (new \App\Services\AdminService)->getFieldAction($table, 'get_other', [['key' => 'type', 'value' => $type]]);
             $data['index'] = $index;
-            $data['type'] = $type;
+            $data['supp_type'] = $type;
             return $data;
         }
     }

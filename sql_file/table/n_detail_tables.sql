@@ -11,7 +11,7 @@
  Target Server Version : 80030
  File Encoding         : 65001
 
- Date: 01/08/2024 18:59:34
+ Date: 02/08/2024 00:04:47
 */
 
 SET NAMES utf8mb4;
@@ -48,7 +48,7 @@ CREATE TABLE `n_detail_tables`  (
   INDEX `map_insert`(`table_map` ASC, `insert` ASC) USING BTREE,
   INDEX `map_update`(`table_map` ASC, `update` ASC) USING BTREE,
   INDEX `map_search`(`table_map` ASC, `search` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 390 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 392 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of n_detail_tables
@@ -415,5 +415,6 @@ INSERT INTO `n_detail_tables` VALUES (386, 'note', '{\"required\":1}', 'Ghi chú
 INSERT INTO `n_detail_tables` VALUES (387, 'contact_by', NULL, 'Liên hệ NCC', 'linking', 'supply_buyings', 9, 1, 0, 0, 1, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-07-22 05:32:17');
 INSERT INTO `n_detail_tables` VALUES (388, 'factor', '', 'Hệ số', 'text', 'w_salaries', 5, 1, 0, 0, 0, NULL, 1, 0, '', NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-07-22 17:35:41');
 INSERT INTO `n_detail_tables` VALUES (389, 'supply_role', '', 'Quyền kho vật tư', 'select', 'n_users', 7, 0, 1, 1, 0, NULL, 1, 0, '{\n	\"config\":{\n		\"searchbox\":1,\n		\"multiple\":1\n	},\n	\"data\":{\n		\"options\":{\n			\"paper\":\"Giấy in\", \n			\"nilon\":\"Màng nilon\", \n			\"metalai\":\"Màng metalai\",\n			\"cover\":\"Màng phủ trên\",\n			\"carton\":\"Carton\",\n			\"rubber\":\"Cao su\",\n			\"styrofoam\":\"Mút phẳng\",\n			\"decal\":\"Nhung\",\n			\"silk\":\"Vải lụa\",\n			\"mica\":\"Mi ca\",\n			\"emulsion\":\"Nhũ\",\n			\"skrink\":\"Màng co\",\n			\"magnet\":\"Nam châm\",\n			\"other\":\"Vật tư khác\"\n		}\n	}\n}', NULL, '[\r\n	{\"key\":\"group_user\", \"value\":7}\r\n]', 1, 1, '2023-05-23 14:38:05', '2024-07-29 17:54:34');
+INSERT INTO `n_detail_tables` VALUES (391, 'type', '{\"required\":1,\"inject_class\":\"__supply_buying_select_type\"}', 'Loại vật tư', 'select', 'supply_buyings', 1, 1, 1, 1, 0, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"searchbox\":1\r\n	},\r\n	\"data\":{\r\n		\"options\":{\r\n			\"\":\"Chọn loại vật tư\",\r\n			\"paper\":\"Giấy in\", \r\n			\"nilon\":\"Màng nilon\", \r\n			\"metalai\":\"Màng metalai\",\r\n			\"cover\":\"Màng phủ trên\",\r\n			\"carton\":\"Carton\",\r\n			\"rubber\":\"Cao su\",\r\n			\"styrofoam\":\"Mút phẳng\",\r\n			\"decal\":\"Nhung\",\r\n			\"silk\":\"Vải lụa\",\r\n			\"mica\":\"Mi ca\",\r\n			\"emulsion\":\"Nhũ\",\r\n			\"skrink\":\"Màng co\",\r\n			\"magnet\":\"Nam châm\",\r\n			\"other\":\"Vật tư khác\"\r\n		}\r\n	}\r\n}', NULL, NULL, 1, 1, '2023-05-11 11:18:58', '2024-08-01 22:36:34');
 
 SET FOREIGN_KEY_CHECKS = 1;

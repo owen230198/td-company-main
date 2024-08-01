@@ -1,14 +1,14 @@
 @php
     $arr_value = !empty($value) ? json_decode($value, true) : [];
 @endphp
-<div class="json_supply_buy p-2 radius_5 box_shadow_3">
+<div class="json_supply_buy p-2 radius_5 box_shadow_3 form-control length_input">
     <div class="list_supply_buy">
         @if (count($arr_value) > 0)
             @foreach ($arr_value as $key => $supp_val)
                 @include('supply_buyings.supply_item', ['index' => $key, 'value' => $supp_val])
             @endforeach
-        @else
-            @include('supply_buyings.supply_item', ['index' => 0])   
+            @else
+                @include('supply_buyings.supply_item', ['index' => 0])   
         @endif
     </div>
     @if (\GroupUser::isPlanHandle() && empty($dataItem->status))

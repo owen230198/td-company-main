@@ -96,7 +96,7 @@ class SupplyBuying extends Model
     static function getFieldQtyArr($type, $status = '')
     {
         $admin_dobuying = self::checkReadOnlyInputPrice($status) == 0  ? 0 : 1;
-        WarehouseService::getQtyFieldByType($type, !$admin_dobuying || \GroupUser::isPlanHandle() ? 0 : 1);
+        return WarehouseService::getQtyFieldByType($type, !$admin_dobuying || \GroupUser::isPlanHandle() ? 0 : 1);
     }
 
     static function getRole()

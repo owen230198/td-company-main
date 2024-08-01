@@ -773,20 +773,42 @@ var addSuppBuyModule = function () {
         event.preventDefault();
         let list_section = $(this).closest('.json_supply_buy').find('.list_supply_buy');
         let item = list_section.find('.item_supp_buy');
-        let index = parseInt(item.last().data('index')) + 1;
-        let url = 'add-supply-buying?index=' + index;
-        ajaxViewTarget(url, list_section, list_section, 2);
+        let index = getEmptyDefault(item.last().data('index'), 0, 'number') + 1;
+        let type = list_section.closest('form').find('.__supply_buying_select_type').val();
+        if (empty(type)) {
+            swal('Không thành công', "Bạn cần chọn loại vật tư trước", 'error')
+        }else{
+            let url = 'add-supply-buying?index=' + index + '&supp_type=' + type;
+            ajaxViewTarget(url, list_section, list_section, 2);
+        }
+       
     });
 
     $(document).on('change', 'select.__select_supp_type_buying', function (event) {
         event.preventDefault();
         let parent = $(this).closest('.item_supp_buy');
         let index = parent.data('index');
-        let url = 'get-view-buying-supply-type?index=' + index + '&type=' +$(this).val();
+        let url = 'get-view-buying-supply-type?index=' + index + '&supp_type=' +$(this).val();
         let view_target = parent.find('.ajax_supply_buying_data');
         ajaxViewTarget(url, view_target, view_target);
     });
 }
+
+var selectTypeSupplyBuying = function()
+    {
+        $(document).on('change', 'select.__supply_buying_select_type', function(event){
+            event.preventDefault();
+            let parent = $(this).closest('form');
+            let selects = parent.find('select.__select_supp_type_buying');
+            let type = $(this).val();
+            if (selects.length > 0) {
+                selects.each(function(){
+                    $(this).val(type);
+                    $(this).trigger('change');   
+                });
+            }
+        })
+    }
 
 var addDataLinkingModule = function () {
     $(document).on('click', 'button.add_data_linking_button', function (event) {
@@ -1156,6 +1178,7 @@ $(function () {
     moduleSelectStyleProduct();
     fileProcessV2Module();
     addSuppBuyModule();
+    selectTypeSupplyBuying();
     addDataLinkingModule();
     removeParentElement();
     submitOnlylinkingData();

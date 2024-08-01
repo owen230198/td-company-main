@@ -114,7 +114,7 @@ use App\Models\SupplyBuying;
 
         public function addSupplyBuying(Request $request)
         {
-            return view('supply_buyings.supply_item', ['index' => (int) $request->input('index')]);
+            return view('supply_buyings.supply_item', $request->all());
         }
 
         private function handleConfirmData($list_supp, $data_supply, $supp_buying, $data, $is_processing)
@@ -505,7 +505,7 @@ use App\Models\SupplyBuying;
 
         public function getViewBuyingSupplyType(Request $request)
         {
-            $type = $request->input('type');
+            $type = $request->input('supp_type');
             if (empty($type)) {
                 return '';
             }

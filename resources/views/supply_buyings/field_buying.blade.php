@@ -1,7 +1,7 @@
 @php
     $supplyBuying = new \App\Models\SupplyBuying;
     $status = !empty($dataItem->status) ? $dataItem->status : '';
-    $field_qtys = $supplyBuying::getFieldQtyArr($type, $status);
+    $field_qtys = $supplyBuying::getFieldQtyArr($supp_type, $status);
     $group_name = 'supply['.$index.']';
 @endphp
 @foreach ($field_qtys as $field_qty)
@@ -19,7 +19,7 @@
         $field['name'] = $group_name.'['.$name.']';
         $arr = processArrField($field);
         $arr['min_label'] = 150;
-        $arr['default_field']['type'] = $type;
+        $arr['default_field']['type'] = $supp_type;
         $arr['value'] = @$group_value[$name];
         $arr['group_name'] = $group_name;
         if (\GroupUser::isPlanHandle() || \GroupUser::isAdmin()) {
