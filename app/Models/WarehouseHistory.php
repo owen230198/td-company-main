@@ -62,7 +62,7 @@ class WarehouseHistory extends Model
     ];
 
     static function getFieldAction($type){
-        $key_unit = getUnitSupplyLogWarehouse($type);
+        $key_unit = getUnitSupplyLogWarehouse($type, 'import');
         $field_qty = self::FIELD_QTY;
         $field_qty['note'] = 'Số '.getUnitWarehouseItem($key_unit).' mua thêm';
         $ret = [];
@@ -136,10 +136,10 @@ class WarehouseHistory extends Model
         $data_log['imported'] = $qty_import;
         $data_log['exported'] = $qty_export;
         $data_log['ex_inventory'] = $ex_inventory;
-        $field_qty = SquareWarehouse::isWeightLogWarehouse($type) ? 'weight' : 'qty';
+        $action = $qty_import > 0 ? 'import' : 'export';
+        $field_qty = getUnitSupplyLogWarehouse($type, $action, true);
         $data_log['inventory'] = getFieldDataById($field_qty, $table, $supply_id);
-        $unit = getUnitSupplyLogWarehouse($type, $supply);
-        $data_log['unit'] = $unit;
+        $data_log['unit'] = getUnitSupplyLogWarehouse($type, $action, $supply);
         $data_log['product'] = $product_id;
         $data_log['note'] = $note;
         (new \BaseService)->configBaseDataAction($data_log);

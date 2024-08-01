@@ -257,14 +257,14 @@
                 case in_array($type, [\TDConst::CARTON, \TDConst::RUBBER, \TDConst::STYRO, \TDConst::MICA]):
                     return 'plate';
                     break;
-                case in_array($type, [\TDConst::PAPER]):
-                    return 'sheet';
-                    break;
+                // case in_array($type, [\TDConst::PAPER]):
+                //     return 'sheet';
+                //     break;
                 case in_array($type, [\TDConst::MAGNET]):
                     return 'unit';
                     break;
                 case \App\Models\SquareWarehouse::countPriceByWeight($type):
-                    return 'kg';
+                    return 'weight';
                     break;
                 case \App\Models\SquareWarehouse::countPriceByHank($type):
                     return 'hank';
@@ -280,31 +280,31 @@
     }
 
     if (!function_exists('getUnitSupplyLogWarehouse')) {
-        function getUnitSupplyLogWarehouse($type, $data = new \stdClass()) {
+        function getUnitSupplyLogWarehouse($type, $action = 'import', $get_feild = false, $data = new \stdClass()) {
             if (!empty($data->unit)) {
                 return $data->unit;
             }
             switch ($type) {
                 case in_array($type, [\TDConst::CARTON, \TDConst::RUBBER, \TDConst::STYRO, \TDConst::MICA]):
-                    return 'plate';
-                    break;
-                case in_array($type, [\TDConst::PAPER]):
-                    return 'sheet';
+                    return $get_feild ? 'qty' : 'plate';
                     break;
                 case in_array($type, [\TDConst::MAGNET]):
-                    return 'unit';
+                    return $get_feild ? 'qty' : 'unit';
                     break;
-                case  \App\Models\SquareWarehouse::countPriceByHank($type):
+                case  \App\Models\SquareWarehouse::countPriceByHank($type) && $action == 'import':
                     return 'hank';
                     break;
-                case \App\Models\SquareWarehouse::countPriceByWeight($type):
-                    return 'kg';
+                case \App\Models\SquareWarehouse::countPriceByWeight($type) && $action == 'import':
+                    return 'weight';
+                    break;
+                case  \App\Models\SquareWarehouse::isWeightLogWarehouse($type) && $action == 'export':
+                    return 'weight';
                     break;
                 case \App\Models\SquareWarehouse::countPriceBySquare($type):
-                    return 'square';
+                    return $get_feild ? 'qty' : 'square';
                     break;
                 default:
-                    return '';
+                    return $get_feild ? 'qty' : '';
                     break;
             }    
         }
@@ -322,7 +322,7 @@
                 case 'unit':
                     return 'Cái';
                     break;
-                case 'kg':
+                case 'weight':
                     return 'Kg';
                     break;
                 case 'hank':
@@ -350,7 +350,7 @@
                     return 'Cm';
                     break;    
                 default:
-                    return 'Cái';
+                    return '';
                     break;
             }    
         }
@@ -376,7 +376,7 @@
                     return 'unit';
                     break;
                 case 'kg':
-                    return 'kg';
+                    return 'weight';
                     break;
                 case 'cuộn':
                     return 'hank';
@@ -399,8 +399,11 @@
                 case 'cây':
                     return 'tree';
                     break;
+                case 'cm':
+                    return 'square';
+                    break;
                 default:
-                    return 'cm';
+                    return '';
                     break;
             }    
         }
