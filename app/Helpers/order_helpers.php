@@ -253,6 +253,9 @@
             if (!empty($data->unit)) {
                 return $data->unit;
             }
+            if (empty($type)) {
+                return '';
+            }
             switch ($type) {
                 case in_array($type, [\TDConst::CARTON, \TDConst::RUBBER, \TDConst::STYRO, \TDConst::MICA]):
                     return 'plate';

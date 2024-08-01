@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Models;
+
+use App\Services\WarehouseService;
 use Illuminate\Database\Eloquent\Model;
 
 class WarehouseHistory extends Model
@@ -10,33 +12,6 @@ class WarehouseHistory extends Model
     //warehouse type
     const SUPPLY = 1;
     const PRODUCT = 2;
-
-    const FIELD_QTY = [
-        'name' => 'qty',
-        'type' => 'text',
-        'note' => 'Thêm số lượng',
-        'attr' => ['type_input' => 'number']
-    ];
-
-    const FIELD_LENGTH = [
-        'name' => 'length',
-        'type' => 'text',
-        'note' => 'Số cm mua thêm',
-        'attr' => ['type_input' => 'number']
-    ];
-
-    const FIELD_HANK = [
-        'name' => 'hank',
-        'type' => 'text',
-        'note' => 'Số cuộn mua thêm',
-        'attr' => ['type_input' => 'number']
-    ];
-    const FIELD_WEIGHT = [
-        'name' => 'weight',
-        'type' => 'text',
-        'note' => 'Số kg mua thêm',
-        'attr' => ['type_input' => 'number']
-    ];
     const FIELD_PROVIDER = [
         'name' => 'provider',
         'note' => 'Nhà cung cấp',
@@ -62,26 +37,7 @@ class WarehouseHistory extends Model
     ];
 
     static function getFieldAction($type){
-        $key_unit = getUnitSupplyLogWarehouse($type, 'import');
-        $field_qty = self::FIELD_QTY;
-        $field_qty['note'] = 'Số '.getUnitWarehouseItem($key_unit).' mua thêm';
-        $ret = [];
-        switch ($type) {
-            case SquareWarehouse::countPriceByWeight($type):
-                $ret = [$field_qty, self::FIELD_HANK];
-                break;
-            case SquareWarehouse::countPriceByHank($type):
-                $ret = [$field_qty];
-                if ($type == \TDConst::DECAL) {
-                    $ret[] = self::FIELD_LENGTH;
-                }else{
-                    $ret[] = self::FIELD_WEIGHT;
-                }
-                break;
-            default:
-                $ret[] = $field_qty;
-                break;
-        }
+        $ret = WarehouseService::getQtyFieldByType($type);
         foreach (self::FIELDS as $field) {
             $ret[] = $field;
         }

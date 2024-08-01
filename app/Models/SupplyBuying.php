@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Models;
+
+use App\Services\WarehouseService;
 use Illuminate\Database\Eloquent\Model;
 
 class SupplyBuying extends Model
@@ -94,42 +96,7 @@ class SupplyBuying extends Model
     static function getFieldQtyArr($type, $status = '')
     {
         $admin_dobuying = self::checkReadOnlyInputPrice($status) == 0  ? 0 : 1;
-        $unit = !empty(getUnitNameByType($type)) ? ' ('.getUnitNameByType($type).')' : '';
-        $field_qty = [
-            'name' => 'qty',
-            'type' => 'text',
-            'note' => 'Số lượng'. $unit,
-            'attr' => [
-                'type_input' => 'number', 
-                'inject_class' => '__buying_qty_input __buying_change_input', 
-                'readonly' => !$admin_dobuying || \GroupUser::isPlanHandle() ? 0 : 1
-            ]
-        ];
-        $field_hank = [
-            'name' => 'hank',
-            'type' => 'text',
-            'note' => 'Số cuộn',
-            'attr' => [
-                'type_input' => 'number',
-                'readonly' => !$admin_dobuying || \GroupUser::isPlanHandle() ? 0 : 1
-            ]
-        ];
-        $field_weight = [
-            'name' => 'weight',
-            'type' => 'text',
-            'note' => 'Số kg',
-            'attr' => [
-                'type_input' => 'number',
-                'readonly' => !$admin_dobuying || \GroupUser::isPlanHandle() ? 0 : 1
-            ]
-        ];
-        if (SquareWarehouse::countPriceByWeight($type)) {
-            return [$field_qty, $field_hank];
-        }elseif (SquareWarehouse::countPriceByHank($type)) {
-            return [$field_qty, $field_weight];
-        }else{
-            return [$field_qty];
-        }
+        WarehouseService::getQtyFieldByType($type, !$admin_dobuying || \GroupUser::isPlanHandle() ? 0 : 1);
     }
 
     static function getRole()

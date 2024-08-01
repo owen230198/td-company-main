@@ -1,6 +1,8 @@
 <?php
     namespace App\Services;
-    use App\Models\SupplyWarehouse;
+
+use App\Models\SquareWarehouse;
+use App\Models\SupplyWarehouse;
     use App\Services\BaseService;
     use App\Services\AdminService;
     use App\Models\WarehouseHistory;
@@ -36,6 +38,73 @@
                 ]
             ];
         } 
+
+        static function getQtyFieldByType($type, $readonly = false)
+        {
+            $unit = !empty(getUnitNameByType($type)) ? ' ('.getUnitNameByType($type).')' : '';
+            $field_qty = [
+                'name' => 'qty',
+                'type' => 'text',
+                'note' => 'Số lượng'. $unit,
+                'attr' => [
+                    'type_input' => 'number', 
+                    'inject_class' => '__buying_qty_input __buying_change_input', 
+                    'readonly' => $readonly
+                ]
+            ];
+            $field_hank = [
+                'name' => 'hank',
+                'type' => 'text',
+                'note' => 'Số cuộn',
+                'attr' => [
+                    'type_input' => 'number',
+                    'readonly' => $readonly
+                ]
+            ];
+            $field_weight = [
+                'name' => 'weight',
+                'type' => 'text',
+                'note' => 'Số kg',
+                'attr' => [
+                    'type_input' => 'number',
+                    'readonly' => $readonly
+                ]
+            ];
+
+            $field_weight = [
+                'name' => 'weight',
+                'type' => 'text',
+                'note' => 'Số kg',
+                'attr' => [
+                    'type_input' => 'number',
+                    'readonly' => $readonly
+                ]
+            ];
+
+            $field_length = [
+                'name' => 'square',
+                'type' => 'text',
+                'note' => 'Số cm',
+                'attr' => [
+                    'type_input' => 'number',
+                    'readonly' => $readonly
+                ]
+            ];
+            
+            if (SquareWarehouse::countPriceByWeight($type)) {
+                return [$field_qty, $field_hank];
+            }elseif (SquareWarehouse::countPriceByHank($type)) {
+                $ret =  [$field_qty];
+                if ($type == \TDConst::DECAL) {
+                    $ret[] = $field_length;
+                }else{
+                    $ret[] = $field_weight;
+                }
+                return $ret;
+            }else{
+                return [$field_qty];
+            }
+        }
         private function validateDataWarehouse($data)
         {
             // if (empty($data['provider'])) {

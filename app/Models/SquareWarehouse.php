@@ -34,7 +34,7 @@ class SquareWarehouse extends Model
 
     static function countPriceByWeight($type)
     {
-        return in_array($type, [\TDConst::METALAI, \TDConst::NILON, \TDConst::COVER]); 
+        return in_array($type, [\TDConst::METALAI, \TDConst::NILON]); 
     }
 
     static function countPriceByHank($type)
@@ -44,7 +44,7 @@ class SquareWarehouse extends Model
 
     static function countPriceBySquare($type)
     {
-        return in_array($type, [\TDConst::SILK]);
+        return in_array($type, [\TDConst::SILK, \TDConst::COVER]);
     }
 
     static function getLengthByWeight($materal_id, $weight, $width)
