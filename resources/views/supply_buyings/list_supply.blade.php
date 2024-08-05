@@ -33,7 +33,7 @@
                                             $field = processArrField($field);
                                             $field_type = $field['type'];
                                             if ($field_type != 'group') {
-                                                $field['value'] = $data->{$field['name']};
+                                                $field['value'] = @$data->{$field['name']};
                                             }
                                             $field['history_view'] = true;
                                         @endphp

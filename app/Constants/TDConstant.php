@@ -206,6 +206,19 @@
         const EMULSION = 'emulsion';
         const SKRINK = 'skrink';
 
+        const ARR_ALL_SUPPLY = [
+            self::PAPER,
+            self::CARTON,
+            self::RUBBER,
+            self::DECAL,
+            self::SILK,
+            self::STYRO,
+            self::MICA,
+            self::MAGNET,
+            self::EMULSION,
+            self::SKRINK,
+        ];
+
         const ALL_SUPPLY = [
             self::CARTON => 'Carton',
             self::RUBBER => 'Cao su non',

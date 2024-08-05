@@ -13,6 +13,7 @@ use App\Models\Product;
 use App\Models\Quote;
 use App\Models\Represent;
 use App\Models\SquareWarehouse;
+use App\Models\SupplyBuying;
 use App\Models\WSalary;
 
 class DevController extends Controller
@@ -504,16 +505,12 @@ class DevController extends Controller
 
     public function updateTypeBuying()
     {
-        $data = CSupply::all();
-        foreach ($data as $c_supply) {
-            $qty = $c_supply['qty'];
-            if (SquareWarehouse::countPriceByWeight($c_supply['supp_type'])) {
-                $arr['qty'] = SquareWarehouse::getWeightByLength($c_supply['size_type'], $qty);
-            }else{
-                $arr['qty'] = $qty;
-            }
-            Csupply::where('id', $c_supply['id'])->update(['qty' => json_encode($arr)]);
-            dump(json_encode($arr));
+        $data = SupplyBuying::where([['status', '!=', 'submited']])->get();
+        foreach ($data as $buying) {
+            $supply = json_decode($buying->supply, true);
+            $supply_item = reset($supply);
+            $type = in_array($supply_item['type'], \TDConst::ARR_ALL_SUPPLY) ? $supply_item['type'] : 'other';
+            SupplyBuying::where('id', $buying->id)->update(['type' => $type]);
         }
     }
 }
