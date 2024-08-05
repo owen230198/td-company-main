@@ -501,5 +501,20 @@ class DevController extends Controller
             dump(json_encode($arr));
         }
     }
+
+    public function updateTypeBuying()
+    {
+        $data = CSupply::all();
+        foreach ($data as $c_supply) {
+            $qty = $c_supply['qty'];
+            if (SquareWarehouse::countPriceByWeight($c_supply['supp_type'])) {
+                $arr['qty'] = SquareWarehouse::getWeightByLength($c_supply['size_type'], $qty);
+            }else{
+                $arr['qty'] = $qty;
+            }
+            Csupply::where('id', $c_supply['id'])->update(['qty' => json_encode($arr)]);
+            dump(json_encode($arr));
+        }
+    }
 }
 

@@ -66,6 +66,8 @@
                     $exported += $data_exported;
                     $data_inventory = !empty($first->inventory) ? $first->inventory : 0;
                     $inventory += $data_inventory;
+                    $supply_model = getModelByTable($data->table_name);
+                    $data_supply = $supply_model->find($data->id);
                 @endphp
                 <tr>
                     <td class="text-center">
@@ -74,7 +76,7 @@
                         </div>
                     </td>
                     <td>
-                        {{ $data->name }}
+                        {{ method_exists($supply_model, 'getName') ? $supply_model::getName($data_supply) : $data->name }}
                     </td>
                     <td>
                         
