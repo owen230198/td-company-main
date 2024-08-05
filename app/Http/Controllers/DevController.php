@@ -513,5 +513,13 @@ class DevController extends Controller
             SupplyBuying::where('id', $buying->id)->update(['type' => $type]);
         }
     }
+
+    public function updateMetalaiSupply()
+    {
+        $data = SquareWarehouse::where(['type' => 'metalai', 'supp_price' => 1])->get();
+        foreach ($data as $square) {
+            SquareWarehouse::where('id', $square->id)->update(['supp_price' => 36]);
+        }
+    }
 }
 
