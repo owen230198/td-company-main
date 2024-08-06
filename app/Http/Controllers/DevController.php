@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Schema;
 use App\Constants\VariableConstant;
 use App\Models\CDesign;
 use App\Models\CSupply;
+use App\Models\Device;
 use App\Models\Order;
 use App\Models\Paper;
 use App\Models\Product;
@@ -471,19 +472,15 @@ class DevController extends Controller
         }
     }
 
-    public function updateTotalSalaryElevate()
+    public function updateTotalSalaryFill()
     {
-        die();
-        $data = WSalary::where(['type' => 'elevate', 'status' => 'submited'])->get();
+        $data = WSalary::where(['type' => 'fill', 'status' => 'submited'])->get();
         foreach ($data as $salary) {
-            $supply = Paper::find($salary['supply']);
-            $elevate = json_decode($supply->elevate, true);
-            if (!empty($elevate['float']['act'])) {
-                dump($salary->total);
-                $update['total'] = $salary->total + 30000;
-                dump($update['total']);
-                \DB::table('w_salaries')->where('id', $salary['id'])->update($update);
-            }
+            $fill_handle = json_decode($salary->fill_handle);
+            $data_device = Device::find($fill_handle->machine); 
+            $total = $salary->qty * $data_device->w_work_price + $data_device->w_shape_price;
+            WSalary::where('id', $salary->id)->update(['total' => $total]);
+            dump($total, $salary->total);
         }
     }
 

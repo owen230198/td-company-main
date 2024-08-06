@@ -130,8 +130,7 @@ class SupplyBuying extends Model
                         'with' => [
                             'type' => 'group',
                             'query' => [
-                                ['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED],
-                                ['cond' => 'or', 'key' => 'created_by', 'value' => \User::getCurrent('id')]
+                                ['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED]
                             ]
                         ]
                     ],
@@ -142,7 +141,7 @@ class SupplyBuying extends Model
                     'with' => [
                                 'type' => 'group',
                                 'query' => [
-                                    ['key' => 'status', 'value' => \StatusConst::PROCESSING],
+                                    ['con' => 'or', 'key' => 'status', 'value' => \StatusConst::PROCESSING],
                                     ['con' => 'or', 'key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED],
                                     ['con' => 'or', 'key' => 'status', 'value' => \StatusConst::ACCEPTED]
                                 ]
@@ -153,8 +152,8 @@ class SupplyBuying extends Model
                             'with' => [[
                                 'type' => 'group',
                                 'query' => [
-                                    ['key' => 'status', 'value' => \StatusConst::PROCESSING],
-                                    ['con' => 'or', 'key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED]
+                                    ['key' => 'contact_by', 'value' => \User::getCurrent('id')],
+                                    ['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED]
                                 ]
                             ]]
                         ]
