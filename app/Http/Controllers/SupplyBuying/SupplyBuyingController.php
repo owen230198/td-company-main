@@ -119,6 +119,9 @@ use App\Models\SupplyBuying;
 
         private function handleConfirmData($list_supp, $data_supply, $supp_buying, $data, $is_processing)
         {
+            if (!$is_processing && !\GroupUser::isAdmin()) {
+                return returnMessageAjax(100, 'Bạn không có quyền duyệt mua !');
+            }
             $buying_total = 0;
             foreach ($list_supp as $key => $supply) {
                 if (!empty($data_supply[$key]['price'])) {
