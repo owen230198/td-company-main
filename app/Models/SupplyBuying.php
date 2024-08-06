@@ -13,7 +13,7 @@ class SupplyBuying extends Model
 
     static function checkReadOnlyInputPrice($status)
     {
-        return \GroupUser::isAdmin() ? 0 : (\GroupUser::isDoBuying() && @$status == \StatusConst::PROCESSING ? 0 : 1);
+        return \GroupUser::isAdmin() ? 0 : (\GroupUser::isDoBuying() && ($status == \StatusConst::PROCESSING || $status == \StatusConst::NOT_ACCEPTED) ? 0 : 1);
     }
     static function getFeildSupplyJson($value = [], $status)
     {
