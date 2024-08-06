@@ -102,9 +102,12 @@ class AdminController extends Controller
 
     public function importExcel(Request $request, $table)
     {
+        if (\User::getCurrent('dev') != 1) {
+            return returnMessageAjax(100, 'Bạn không có quyền thực hiện thao tác này!');
+        }
         $role = $this->admins->checkPermissionAction($table, 'insert');
         if (!@$role['allow']) {
-            return back()->with('error', 'Bạn không có quyền truy cập!');
+            return returnMessageAjax(100, 'Bạn không có quyền thực hiện thao tác này!');
         }
         $file_obj = $request->file('file');
         if (empty($file_obj)) {
@@ -122,6 +125,8 @@ class AdminController extends Controller
             }else{
                 return returnMessageAjax(100, 'Thao tác không hỗ trợ !');
             }
+        }else{
+            return returnMessageAjax(100, 'Thao tác không hỗ trợ !');
         }
     }
 

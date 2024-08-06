@@ -25,6 +25,7 @@ class NGroupUser extends Model
     const KCS = 11;
     const PRODUCT_WAREHOUSE = 12;
     const ACCOUNTING = 13;
+    const PRODUCTION_MANAGER = 14;
 
     //group modules
     const GROUP_MODULE = [
@@ -37,7 +38,6 @@ class NGroupUser extends Model
         'supply_buying' => 'Mua vật tư',
         'profit' => '% Hoa hồng',
         'report' => 'Báo cáo',
-        'available_order' => 'Đơn hàng bán sẵn',
         'warehouse' => 'Kho vật tư',
         'product_warehouse' => 'Kho thành phẩm',
         'handle_supply' => 'Lệnh xử lí vật tư',
@@ -392,6 +392,13 @@ class NGroupUser extends Model
             self::MODULE['account'],
             self::MODULE['change_password'],
         ],
+        self::PRODUCTION_MANAGER => [
+            self::MODULE['worker_salary'],
+            self::MODULE['handle_process'],
+            self::MODULE['join_print'],
+            self::MODULE['account'],
+            self::MODULE['change_password'],
+        ],
     ];
 
     //check method
@@ -490,5 +497,11 @@ class NGroupUser extends Model
     {
         $group_user = !empty($group_user) ? $group_user : self::getCurrent();
         return $group_user == self::ACCOUNTING;
+    }
+
+    static function isProManager($group_user = 0)
+    {
+        $group_user = !empty($group_user) ? $group_user : self::getCurrent();
+        return $group_user == self::PRODUCTION_MANAGER;
     }
 }

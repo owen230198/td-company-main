@@ -1,13 +1,16 @@
 <?php
     namespace App\Http\Controllers\Order;
     use App\Http\Controllers\Controller;
-    use App\Models\CSupply;
+use App\Imports\ImportOrder;
+use App\Models\CSupply;
     use Illuminate\Http\Request;
     use App\Models\Order;
     use App\Models\Quote;
     use App\Models\SupplyWarehouse;
     use App\Models\Product;
 use App\Models\SquareWarehouse;
+use App\Models\WSalary;
+use Maatwebsite\Excel\Facades\Excel;
 
     class OrderController extends Controller
     {
@@ -392,6 +395,22 @@ use App\Models\SquareWarehouse;
                 $data['supply_fields'] = \TDConst::HARD_ELEMENT;
                 return view('orders.profits.view', $data);
             }
+        }
+        public function import($file)
+        {
+            $arr_file = pathinfo($file->getClientOriginalName());
+            $obj = new ImportOrder($arr_file['filename']);
+            $data = Excel::toArray($obj, $file);
+            $codes = array_map(function($item) {
+                return $item['code'];
+            }, $data[0]);
+            $query = WSalary::whereMonth('created_at', 7)
+                  ->whereYear('created_at', 2024);
+            foreach ($codes as $command) {
+                $query->where('command', 'NOT LIKE', '%' . $command . '%');
+            }
+            dd($query->update(['submited_at' => '2024-01-01']));
+            return returnMessageAjax(200, 'Đã thêm vật tư thành công !', \StatusConst::RELOAD);
         }
     }
 ?>

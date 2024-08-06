@@ -73,6 +73,7 @@ class NTable extends Model
                             'supply_warehouses',
                             'square_warehouses',
                             'extend_warehouses',
+                            'orders',
                         ]
                     ];
 }

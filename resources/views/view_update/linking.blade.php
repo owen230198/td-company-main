@@ -9,11 +9,14 @@
 
 @if (@$select_config['search'] == 1)
     @php
-        $url = getLinkingUrl($select_data, $select_config, @$datItem);
+        $url = getLinkingUrl($select_data, $select_config, @$dataItem);
         if (!empty($select_data['where_default'])) {
             foreach ($select_data['where_default'] as $key => $val) {
                 if (!empty($default_field[$val])) {
                     $url .= '&'.$key.'='.$default_field[$val];
+                }
+                if (!empty($dataItem[$val])) {
+                    $url .= '&'.$key.'='.$dataItem[$val];
                 }
             }
         }

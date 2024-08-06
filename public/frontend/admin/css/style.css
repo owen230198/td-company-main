@@ -313,6 +313,10 @@ a.device_supp_item {
     min-width: 98px;
 }
 
+.border_right {
+    border-right: 1px solid #333;
+}
+
 .border_right_green {
     border-right: 1px solid #459300;
 }
@@ -376,6 +380,7 @@ a.device_supp_item {
     right: -10px;
     top: -5px;
     padding: 2px;
+    z-index: 1;
 }
 
 .breadcrumb-item+.breadcrumb-item::before {
@@ -478,6 +483,16 @@ a.device_supp_item {
     margin: auto;
 }
 
+.__noftify_bell_icon .__bell_icon{
+    transform: rotate(20deg);
+}
+
+.tada_animate{
+    animation: tada;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
 /* table responsive */
 
 @media screen and (max-width: 600px) {
@@ -551,7 +566,7 @@ a.device_supp_item {
     .table_responsive .linking_table{
         width: 100%;
         max-width: 100%;
-        text-align: right !im;
+        text-align: right;
     }
 
     

@@ -81,9 +81,9 @@ class WorkerService extends BaseService
                 $data_update = $obj_salary->getFinishSalary($qty);
                 break;
             case \TDConst::ELEVATE:
-                $handle_elevate = !empty($supply->handle_elevate) ? json_decode($supply->handle_elevate, true) : [];
-                $elevate_num = !empty($handle_elevate['num']) ? (int) $handle_elevate['num'] : 1;
-                $data_update = $obj_salary->getBaseSalaryPaper($qty * $elevate_num);
+                // $handle_elevate = !empty($supply->handle_elevate) ? json_decode($supply->handle_elevate, true) : [];
+                // $elevate_num = !empty($handle_elevate['num']) ? (int) $handle_elevate['num'] : 1;
+                $data_update = $obj_salary->getBaseSalaryPaper($qty);
                 if (!empty($data_handle['float']['act'])) {
                     $data_update['total'] += (float) getDataConfig('QuoteConfig', 'ELEV_FLOAT_PRICE');
                 }
