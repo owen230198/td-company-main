@@ -310,6 +310,7 @@ a.device_supp_item {
     right: -1px;
     background: #f1f4f9;
     color: #459300;
+    min-width: 98px;
 }
 
 .border_right_green {
