@@ -95,9 +95,9 @@ use App\Models\SupplyBuying;
                 if (@$vaildate['code'] == 100) {
                     return $vaildate;    
                 }
-                if (empty($data['provider'])) {
-                    return returnMessageAjax(100, 'Bạn chưa chọn nhà cung cấp vật tư !');
-                }
+                // if (empty($data['provider'])) {
+                //     return returnMessageAjax(100, 'Bạn chưa chọn nhà cung cấp vật tư !');
+                // }
                 $this->processData($data);
                 $data['id'] = $id;
                 $this->admins->configBaseDataAction($data);
