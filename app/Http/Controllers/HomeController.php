@@ -27,7 +27,7 @@ class HomeController extends Controller
             return 'Yêu cầu không hợp lệ !';
         }
         $data['title'] = 'phần mềm doanh nghiệp '. getDataConfig('QuoteConfig', 'COMPANY_NAME');
-        $data['noftify_count'] = 0;
+        $data['noftify_count'] = 2;
         $data['not_accepted_table'] = \App\Constants\OrderConstant::ACCEPT_REQURIRED_TABLE;
         return view('main', $data); 
     }

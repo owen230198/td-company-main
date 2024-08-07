@@ -402,14 +402,15 @@ use Maatwebsite\Excel\Facades\Excel;
             $obj = new ImportOrder($arr_file['filename']);
             $data = Excel::toArray($obj, $file);
             $codes = array_map(function($item) {
-                return $item['code'];
+                return trim($item['code']);
             }, $data[0]);
+            $commands = array_unique($codes);
             $query = WSalary::whereMonth('created_at', 7)
                   ->whereYear('created_at', 2024);
-            foreach ($codes as $command) {
-                $query->where('command', 'NOT LIKE', '%' . $command . '%');
+            foreach ($commands as $command) {
+                $query->where('command', 'NOT LIKE', '%' . trim($command) . '%');
             }
-            dd($query->update(['submited_at' => '2024-01-01']));
+            $query->update(['status' => 'old_salary']);
             return returnMessageAjax(200, 'Đã thêm vật tư thành công !', \StatusConst::RELOAD);
         }
     }

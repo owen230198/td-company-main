@@ -9,7 +9,7 @@
             <div class="header_menu_user d-flex align-items-center position-relative cursor_pointer mr-3 pr-3 border_right_green color_green">
                 <div class="user_name __noftify_bell_icon mr-1 font_bold position-relative">
                     <p class="__noftify_count notify_style">{{ $noftify_count }}</p>
-                    <i class="fa fa-bell fs-40 __bell_icon {{ $noftify_count > 0 ? 'tada_animate' : '' }}" aria-hidden="true"></i>
+                    <i class="fa fa-bell fs-40 __bell_icon {{ $noftify_count > 0 ? 'swing_animate' : '' }}" aria-hidden="true"></i>
                 </div>
                 <ul class="header_menu_user_list" style="display:none">
                     <li>
