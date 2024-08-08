@@ -49,6 +49,11 @@ class Paper extends Model
             
         ],
     ];
+
+    public function getDataHandle($paper, $dataItem)
+    {
+        return $this->getDataActionPaper($paper, $dataItem);
+    }
     public function processData($product_id, $product, $type)
     {
         $data = $product[$type];
@@ -73,7 +78,7 @@ class Paper extends Model
                 }
             }else{
                 $dataItem = !empty($paper['id']) ? Paper::find($paper['id']) : '';
-                $data_process = $this->getDataActionPaper($paper, $dataItem);
+                $data_process = $this->getDataHandle($paper, $dataItem);
                 $data_process['id'] = !empty($paper['id']) ? $paper['id'] : 0;
                 $data_process['name'] = $paper['name'];
                 $data_process['product_qty'] = $paper['qty'];
@@ -100,9 +105,9 @@ class Paper extends Model
         return !empty($process) ? $process : false;
     }
 
-    static function getNilonMetalaiFormula($paper_qty, $work_price, $face_num, $shape_price)
+    static function getNilonMetalaiFormula($paper_qty, $work_price, $face_num, $shape_price, $factor = 1)
     {
-        return $paper_qty * $work_price * $face_num + $shape_price;
+        return $paper_qty * $work_price * $face_num * $factor + $shape_price;
     }
 
     static function getPrintFormula($type, $supp_qty, $color_num, $work_price, $shape_price, $model_price = 0, $is_worker = false, $factor = 1)

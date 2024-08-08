@@ -1150,6 +1150,28 @@ var ModuleImportExcel = function () {
     });
 }
 
+var removeNotifyButton = function () {
+    $(document).on('click', 'button.remove_notify_button', function (event) {
+        event.preventDefault();
+        let id = $(this).data('id');
+        if (!empty(id)) {
+            $('#loader').fadeIn(200);
+            $.ajax({
+                url: getBaseRoute('remove?ajax=1'),
+                type: 'DELETE',
+                data: { remove_id: id, table: 'notifies' }
+            }).done(function (data) {
+                let title = data.code == 200 ? 'Thành công' : 'Không thành công';
+                let key = data.code == 200 ? 'success' : 'error';
+                swal(title, data.message, key).then(() => {
+                    window.location = getBaseRoute('');
+                });
+            })
+            $('#loader').delay(200).fadeOut(500);
+        }
+    });
+}
+
 $(function () {
     // loadingPage();
     submitActionAjaxForm();
@@ -1197,4 +1219,5 @@ $(function () {
     noReworkButtonModule();
     baseExportTable();
     ModuleImportExcel();
+    removeNotifyButton();
 });

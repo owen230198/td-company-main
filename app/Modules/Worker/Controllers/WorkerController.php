@@ -51,7 +51,7 @@
                     return $this->services->submitCommand($obj_command, $data_command, $worker, $supply, (int) $request->input('qty'));
                     break;
                 case 'feedback':
-                    return $this->services->feebBack($data_command, $worker, $request->except('_token'));
+                    return $this->services->workerfeedBack($data_command, $worker, $request->except('_token'));
                     break;
                 default:
                     return customReturnMessage(false, $is_ajax, ['message' => 'Thao tác không hợp lệ !']);

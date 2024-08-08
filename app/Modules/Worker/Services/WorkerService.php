@@ -34,7 +34,7 @@ class WorkerService extends BaseService
             'description' =>'Công nhân: '.$worker['name'].' '.getDeviceGroupName($worker['type'], $worker['device']).' đã yêu cầu quản đốc cập nhật lệnh sản xuất '.$command->name,
             'group_user' => \GroupUser::PRODUCTION_MANAGER,
             'user' => 0,
-            'handle_method' => 'feedBack',
+            'handle_method' => 'workerFeedBack',
             'param' => json_encode($data),
             'act' => 1,
             'table_created' => 'w_users',
@@ -95,34 +95,7 @@ class WorkerService extends BaseService
     {
         $handle_config = $type == \TDConst::FILL ? json_decode($data_command->fill_handle, true) : $data_handle;
         $obj_salary = new WSalary($supply, $handle_config, $worker);
-        switch ($type) {
-            case \TDConst::PRINT:
-                $data_update = $obj_salary->getPrintSalary($qty);
-                break;
-            case \TDConst::NILON:
-                $data_update = $obj_salary->getNilonSalary($qty);
-                break;
-            case \TDConst::METALAI:
-                $data_update = $obj_salary->getMetalaiSalary($qty);
-                break;
-            case \TDConst::FINISH:
-                $data_update = $obj_salary->getFinishSalary($qty);
-                break;
-            case \TDConst::ELEVATE:
-                // $handle_elevate = !empty($supply->handle_elevate) ? json_decode($supply->handle_elevate, true) : [];
-                // $elevate_num = !empty($handle_elevate['num']) ? (int) $handle_elevate['num'] : 1;
-                $data_update = $obj_salary->getBaseSalaryPaper($qty);
-                if (!empty($data_handle['float']['act'])) {
-                    $data_update['total'] += (float) getDataConfig('QuoteConfig', 'ELEV_FLOAT_PRICE');
-                }
-                break;
-            case !isQtyFormulaBySupply($type):
-                $data_update = $obj_salary->getBaseSalaryProduct($qty);
-                break;
-            default:
-                $data_update = $obj_salary->getBaseSalaryPaper($qty);
-                break;
-        }
+        $data_update = $obj_salary->totalhandle($qty, $type);
         $data_update['status'] = \StatusConst::SUBMITED;
         $data_update['qty'] = $qty;
         $data_update['submited_at'] = \Carbon\Carbon::now();

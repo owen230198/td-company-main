@@ -527,6 +527,12 @@ a.device_supp_item {
     table.table_responsive {
       border: 0;
     }
+
+    .__header_notify_list{
+        position: fixed;
+        top: 55px;
+        right: 20px;
+    }
   
     table.table_responsive thead {
       border: none;

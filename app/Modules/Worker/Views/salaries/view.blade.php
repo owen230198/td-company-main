@@ -21,41 +21,50 @@
                     <th scope="col">Thành tiền</th>
                     <th scope="col">Thời gian</th>
                     <th scope="col">Chi tiết</th>
+                    <th scope="col">Phản hồi</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($list_data as $item)
                     <tr>
-                        <td data-label="Mã lệnh">
+                        <td data-label="Mã lệnh:">
                             {{ $item->command }}
                         </td>
-                        <td data-label="Tên lệnh">
+                        <td data-label="Tên lệnh:">
                             {{ $item->name }}
                         </td>
-                        <td data-label="Số lượng">
+                        <td data-label="Số lượng:">
                             {{ $item->qty }}
                         </td>
-                        <td data-label="ĐG lượt">
+                        <td data-label="ĐG lượt:">
                             {{ number_format($item->work_price) }}đ
                         </td>
-                        <td data-label="ĐG lên khuôn">
+                        <td data-label="ĐG lên khuôn:">
                             {{ number_format($item->shape_price) }}đ
                         </td>
-                        <td data-label="Hệ số">
+                        <td data-label="Hệ số:">
                             {{ $item->factor }}
                         </td>
-                        <td data-label="Thành tiền">
+                        <td data-label="Thành tiền:">
                             {{ number_format($item->total) }}đ
                         </td>
-                        <td data-label="Thời gian">
+                        <td data-label="Thời gian:">
                             <div>
                                 @include('view_table.datetime', ['value' => $item->submited_at])
                             </div>
                         </td>
-                        <td data-label="Chi tiết">
+                        <td data-label="Chi tiết:">
                             <div>
                                 @include('view_table.json_name', ['value' => $item->handle])
                             </div>
+                        </td>
+                        <td data-label="Phản hồi:">
+                            <button 
+                            type="button" data-toggle="modal" data-target="#worker-feedback-{{ $item->id }}-modal" class="radius_5 box_shadow_3 btn btn-primary main_button smooth  font_bold text-center bg_green color_white __worker_feedback_btn" 
+                            data-id={{ $item->id }}>
+                                <i class="fa fa-quote-right fs-14 mr-1" aria-hidden="true"></i> Phản hồi
+                            </button>
+                            @include('Worker::commands.submit_modal', ['form' => 'form_feedback', 'm_name' => 'feedback-'.$item->id, 'data_command' => $item])
                         </td>
                     </tr>
                 @endforeach

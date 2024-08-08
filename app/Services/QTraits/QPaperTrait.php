@@ -153,7 +153,6 @@ trait QPaperTrait
             if (!empty($data['ext_price'])) {
                 $data_action['ext_price'] = $this->configDataExtPrice($data['ext_price']);
             }
-            
             $data_action['total_cost'] = $this->priceCaculatedByArray($data_action);    
         }else{
             $data_action['total_cost'] = 0;    

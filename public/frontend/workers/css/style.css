@@ -151,6 +151,8 @@
         float: left;
         font-weight: bold;
         text-transform: uppercase;
+        width: 100px;
+        text-align: left;
     }
 
     .worker_salary_table table td:last-child {

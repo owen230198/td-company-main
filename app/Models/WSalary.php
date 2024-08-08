@@ -16,6 +16,39 @@ class WSalary extends Model
         $this->worker = $worker;
     }
 
+    public function totalhandle($qty, $type)
+    {
+        switch ($type) {
+            case \TDConst::PRINT:
+                $data_update = $this->getPrintSalary($qty);
+                break;
+            case \TDConst::NILON:
+                $data_update = $this->getNilonSalary($qty);
+                break;
+            case \TDConst::METALAI:
+                $data_update = $this->getMetalaiSalary($qty);
+                break;
+            case \TDConst::FINISH:
+                $data_update = $this->getFinishSalary($qty);
+                break;
+            case \TDConst::ELEVATE:
+                // $handle_elevate = !empty($supply->handle_elevate) ? json_decode($supply->handle_elevate, true) : [];
+                // $elevate_num = !empty($handle_elevate['num']) ? (int) $handle_elevate['num'] : 1;
+                $data_update = $this->getBaseSalaryPaper($qty);
+                if (!empty($data_handle['float']['act'])) {
+                    $data_update['total'] += (float) getDataConfig('QuoteConfig', 'ELEV_FLOAT_PRICE');
+                }
+                break;
+            case !isQtyFormulaBySupply($type):
+                $data_update = $this->getBaseSalaryProduct($qty);
+                break;
+            default:
+                $data_update = $this->getBaseSalaryPaper($qty);
+                break;
+        }
+        return $data_update;
+    }
+
     static function getRole()
     {
         $role = [
@@ -175,7 +208,7 @@ class WSalary extends Model
         $data = $this->getBaseData();
         $data['work_price'] = $work_price;
         $data['shape_price'] = $shape_price;
-        $factor = $this->handle['color'] > 2 && $this->handle['color'] < 5 && @$data_printer['print_length'] == 72 ? 2 : 1;
+        $factor = !empty($this->handle['factor']) ? $this->handle['factor'] : ($this->handle['color'] > 2 && $this->handle['color'] < 5 && @$data_printer['print_length'] == 72 ? 2 : 1);
         $data['factor'] = $factor;
         $data['total'] = Paper::getPrintFormula(@$this->handle['type'], $paper_qty, $this->handle['color'], $work_price, $shape_price, 0, true, $factor);
         return $data;
@@ -185,7 +218,8 @@ class WSalary extends Model
     {
         $data = $this->getBaseDatDevice();
         $face_num = (int) @$this->handle['face'];
-        $data['total'] = Paper::getNilonMetalaiFormula($paper_qty, $data['work_price'], $face_num, $data['shape_price']);
+        $factor = @$data['factor'] ?? 1;
+        $data['total'] = Paper::getNilonMetalaiFormula($paper_qty, $data['work_price'], $face_num, $data['shape_price'], $factor);
         return $data;
     }
     public function getMetalaiSalary($paper_qty)
@@ -193,8 +227,8 @@ class WSalary extends Model
         $data = $this->getBaseDatDevice();
         $face_num = (int) @$this->handle['face'];
         $cover_face_num = (int) @$this->handle['cover_face'];
-        $metalai = Paper::getNilonMetalaiFormula($paper_qty, $data['work_price'], $face_num, $data['shape_price']);
-        $cover = Paper::getNilonMetalaiFormula($paper_qty, $data['work_price'], $cover_face_num, $data['shape_price']);
+        $metalai = Paper::getNilonMetalaiFormula($paper_qty, $data['work_price'], $face_num, $data['shape_price'], $data['factor']);
+        $cover = Paper::getNilonMetalaiFormula($paper_qty, $data['work_price'], $cover_face_num, $data['shape_price'], $data['factor']);
         $data['total'] = $metalai + $cover;
         return $data;
     }
@@ -202,7 +236,7 @@ class WSalary extends Model
     public function getBaseSalaryPaper($qty_paper)
     {
         $data = $this->getBaseDatDevice();
-        $data['total'] = $qty_paper * $data['work_price'] + $data['shape_price'];
+        $data['total'] = $qty_paper * $data['work_price'] * $data['factor'] + $data['shape_price'];
         return $data;
     }
 
@@ -220,6 +254,7 @@ class WSalary extends Model
         $data['handle'] = self::getHandleDataJson($this->worker['type'], $this->handle);
         $data['total'] = 0;
         $stages = !empty($this->handle['stage']) ? $this->handle['stage'] : [];
+        $factor = @$this->handle['stage'] ?? 1;
         if (!empty($this->handle['stage'])) {
             foreach ($stages as $stage) {
                 $device = !empty($stage['materal']) ? $stage['materal'] : 0;
@@ -228,7 +263,7 @@ class WSalary extends Model
                 $shape_price = !empty($data_device['w_shape_price']) ? (float) $data_device['w_shape_price'] : 0;
                 $data['work_price'] += $work_price;
                 $data['shape_price'] += $shape_price;
-                $data['total'] += $product_qty * $work_price + $shape_price;
+                $data['total'] += $product_qty * $work_price * $factor + $shape_price;
             }
         }
         return $data;

@@ -125,6 +125,9 @@ if (!function_exists('getActionByKey')) {
             case 'confirm_import':
                 return 'Thay đổi khách hàng';
                 break;
+            case 'handle_feedback':
+                return 'Xử lý phản hồi';
+                break;
             default:
                 return '';
                 break;
