@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Notify;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -27,7 +28,12 @@ class HomeController extends Controller
             return 'Yêu cầu không hợp lệ !';
         }
         $data['title'] = 'phần mềm doanh nghiệp '. getDataConfig('QuoteConfig', 'COMPANY_NAME');
-        $data['noftify_count'] = 2;
+        $notify_obj = Notify::where(['act' => 1]);
+        if (!\GroupUser::isAdmin()) {
+            $notify_obj->where('group_user', \GroupUser::getCurrent())->orWhere('user', \User::getCurrent('id'));
+        }
+        $data['noftify_count'] = $notify_obj->count();
+        $data['notify_list'] = $notify_obj->get()->take(10);
         $data['not_accepted_table'] = \App\Constants\OrderConstant::ACCEPT_REQURIRED_TABLE;
         return view('main', $data); 
     }

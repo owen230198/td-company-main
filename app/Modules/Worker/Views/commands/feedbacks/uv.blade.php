@@ -4,6 +4,7 @@
         'type' => 'select',
         'note' => 'số mặt in đúng',
         'min_label' => 150,
+        'value' => @$value['face'],
         'other_data' => ['data' => ['options' => [1 => 1, 2 => 2]]]
     ];
 @endphp

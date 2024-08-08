@@ -29,7 +29,36 @@ class ExtendWarehouse extends Model
     
     static function getName($data)
     {
-        return !empty($data['name']) ? $data['name'] : getFieldDataById('name', 'supply_extends', $data['type']);
+        $name = !empty($data['name']) ? $data['name'] : getFieldDataById('name', 'supply_extends', $data['type']);
+        if (!empty($data['ver'])) {
+            $name .= ' Bản '.$data['ver'];
+        }
+        return $name;
+    }
+
+    static function getLabelLinking($data)
+    {
+        $label = '';
+        if (empty($data)) {
+            return '';
+        }
+
+        if (!empty($data->type)) {
+            $label .= getFieldDataById('name', 'supply_extends', $data->type);
+        }
+
+        if (!empty($data->name)) {
+            $label .= '-'. $data->name;
+        }
+
+        if (!empty($data->ver)) {
+            $label .= ' - '.$data->ver;
+        }
+
+        if (!empty($data->qty)) {
+            $label .= ' - còn lại: '.$data->qty.' '.getUnitWarehouseItem($data->unit);
+        }
+        return $label;
     }
 
     public function afterRemove($id)

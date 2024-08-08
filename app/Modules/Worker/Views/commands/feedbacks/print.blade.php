@@ -4,6 +4,7 @@
         'type' => 'select',
         'note' => 'số màu in đúng',
         'min_label' => 150,
+        'value' => @$value['color'],
         'other_data' => ['data' => ['options' => \TDConst::PRINT_COLOR]]
     ];
 @endphp

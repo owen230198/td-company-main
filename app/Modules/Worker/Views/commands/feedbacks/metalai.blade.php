@@ -4,6 +4,7 @@
         'type' => 'select',
         'note' => 'số mặt cán đúng',
         'min_label' => 150,
+        'value' => @$value['face'],
         'other_data' => ['data' => ['options' => [1 => 1, 2 => 2]]]
     ];
 @endphp
@@ -15,6 +16,7 @@
         'type' => 'select',
         'note' => 'số mặt cán phủ đúng',
         'min_label' => 150,
+        'value' => @$value['cover_face'],
         'other_data' => ['data' => ['options' => [1 => 1, 2 => 2]]]
     ];
 @endphp

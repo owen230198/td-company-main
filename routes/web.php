@@ -12,6 +12,7 @@ use App\Http\Controllers\Order\OrderController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\SupplyBuying\SupplyBuyingController;
 use App\Http\Controllers\Customer\CustomerController;
+use App\Http\Controllers\NotifyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -90,6 +91,7 @@ Route::middleware(['check_login'])->group(function () {
 	Route::any('join-print-command', [ProductController::class, 'joinPrintCommand']);
 	Route::any('list-print-joined', [ProductController::class, 'listPrintJoined']);
 	Route::get('profit-config-data', [OrderController::class, 'profitConfigData']);
+	Route::get('notify-process/{id}', [NotifyController::class, 'notifyProcess']);
 
 	//supply warehouse
 	Route::get('add-supply-buying', [SupplyBuyingController::class, 'addSupplyBuying']);

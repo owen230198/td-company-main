@@ -483,8 +483,9 @@ a.device_supp_item {
     margin: auto;
 }
 
-.__noftify_bell_icon .__bell_icon{
-    transform: rotate(20deg);
+.__header_notify_list{
+    right: 0;
+    width: 300px;
 }
 
 .tada_animate{
@@ -497,6 +498,25 @@ a.device_supp_item {
     animation: swing;
     animation-duration: 2s;
     animation-iteration-count: infinite;
+}
+
+.__header_notify_list{
+    max-height: calc(100vh - 200px);
+    overflow: auto;
+}
+
+.__header_notify_list li a{
+    background: #ebebeb;
+    color: #333;
+}
+
+.ntf_des{
+    color: #666;
+    overflow: hidden;
+   display: -webkit-box;
+   -webkit-line-clamp: 3; /* number of lines to show */
+           line-clamp: 3; 
+   -webkit-box-orient: vertical
 }
 /* table responsive */
 

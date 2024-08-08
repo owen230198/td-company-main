@@ -59,7 +59,7 @@ if (! function_exists('getDetailDataByID')) {
     }
 }
 
-if (! function_exists('getDetailData')) {
+if (! function_exists('getDetailDataObject')) {
     function getDetailDataObject($table, $id)
     {
         $data = \DB::table($table)->find($id);

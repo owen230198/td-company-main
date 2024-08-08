@@ -8,7 +8,7 @@
     @php
          $name = $field_qty['name'];
          $field_qty['name'] = $group_name.'['.$name.']';
-         $field_qty['min_label'] = 150;
+         $field_qty['min_label'] = 175;
          $field_qty['value'] = @$group_value[$name];
     @endphp
     @include('view_update.view', $field_qty)    
@@ -18,7 +18,7 @@
         $name = $field['name'];
         $field['name'] = $group_name.'['.$name.']';
         $arr = processArrField($field);
-        $arr['min_label'] = 150;
+        $arr['min_label'] = 175;
         $arr['default_field']['type'] = $supp_type;
         $arr['value'] = @$group_value[$name];
         $arr['group_name'] = $group_name;

@@ -1,5 +1,7 @@
 <?php
 namespace App\Modules\Worker\Services;
+
+use App\Models\Notify;
 use App\Services\BaseService;
 use App\Models\WSalary;
 
@@ -19,6 +21,32 @@ class WorkerService extends BaseService
             $where['machine_type'] = @$worker['device'];
         }
         return getDataWorkerCommand($where, true);
+    }
+
+    public function feebBack($command, $worker, $data)
+    {
+        if ($worker['type'] != $command->type) {
+            return returnMessageAjax(100, 'Bạn không có quyền phản hồi lệnh !');
+        }
+
+        $data_insert = [
+            'name' => 'Yêu cầu cập nhật lệnh sản xuất',
+            'description' =>'Công nhân: '.$worker['name'].' '.getDeviceGroupName($worker['type'], $worker['device']).' đã yêu cầu quản đốc cập nhật lệnh sản xuất '.$command->name,
+            'group_user' => \GroupUser::PRODUCTION_MANAGER,
+            'user' => 0,
+            'handle_method' => 'feedBack',
+            'param' => json_encode($data),
+            'act' => 1,
+            'table_created' => 'w_users',
+            'created_by' => $worker['id'],
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ];
+        $insert = Notify::insert($data_insert);
+        if (!$insert) {
+            return returnMessageAjax(100, 'Đã có lỗi xảy ra, vui lòng thử lại !');
+        }
+        return returnMessageAjax(200, 'Đã gửi yêu cầu đến quả đốc, vui lòng chờ xác nhận !');
     }
 
     public function receiveCommad($obj, $data_command, $worker)

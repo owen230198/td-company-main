@@ -2,11 +2,11 @@
 @section('content')
     <div class="row my-4 pb-3">
         <div class="col-lg-6 border_right_green mb-lg-0 mb-3">
-            <div class="bg_eb radius_5 box_shadow_3 h-100 p-3 text-center">
+            <div class="bg_eb radius_5 box_shadow_3 h-100 p-lg-3 p-2">
                 <h3 class="fs-14 text-uppercase border_bot pb-1 mb-3 text-center handle_title color_green mx-auto">Thông tin đơn</h3>   
                 <p class="d-flex align-items-center color_green mb-2">
                     <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
-                    Mã đơn : <strong class="color_main ml-1">{{ @$data_product->code }}.</strong>
+                    <span>Mã đơn</span> : <strong class="color_main ml-1">{{ @$data_product->code }}.</strong>
                 </p>  
                 <p class="d-flex align-items-center color_green mb-2">
                     <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
@@ -23,7 +23,7 @@
             </div>
         </div>
         <div class="col-lg-6">
-            <div class="bg_eb radius_5 box_shadow_3 h-100 p-3 text-center">
+            <div class="bg_eb radius_5 box_shadow_3 h-100 p-lg-3 p-2">
                 <h3 class="fs-14 text-uppercase border_bot pb-1 mb-3 text-center handle_title color_green mx-auto">Thông tin sản xuất</h3>
                 @include('Worker::commands.base_command_info')
                 <p class="d-flex align-items-center color_green mb-2">

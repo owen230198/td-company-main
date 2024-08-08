@@ -57,7 +57,7 @@
         @endphp
         @foreach ($do_buy_fields as $do_buy_field)
             @php
-                $do_buy_field['min_label'] = 150;
+                $do_buy_field['min_label'] = 175;
             @endphp
             @include('view_update.view', $do_buy_field) 
         @endforeach
