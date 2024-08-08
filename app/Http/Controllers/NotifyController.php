@@ -29,6 +29,12 @@ class NotifyController extends Controller
 
     public function workerfeedBack($is_ajax, $notify_id, $param)
     {
-        
+        if (\GroupUser::isAdmin() || \GroupUser::isProManager()) {
+            $data['dataItem'] = $param;
+            $data['title'] = 'Xử lí phản hồi công nhân';
+            return view('managers.worker_feedbacks.view', $data);
+        }else{
+            return customReturnMessage(false, $is_ajax, ['message' => 'Bạn không có quyền xử lí phản hồi công nhân !']);
+        }
     }
 }
