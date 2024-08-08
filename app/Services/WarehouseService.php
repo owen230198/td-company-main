@@ -58,7 +58,6 @@
                 'note' => 'Số cuộn nhập thêm',
                 'attr' => [
                     'type_input' => 'number',
-                    'readonly' => $readonly
                 ]
             ];
             $field_weight = [
@@ -67,7 +66,6 @@
                 'note' => 'Số kg nhập thêm',
                 'attr' => [
                     'type_input' => 'number',
-                    'readonly' => $readonly
                 ]
             ];
 

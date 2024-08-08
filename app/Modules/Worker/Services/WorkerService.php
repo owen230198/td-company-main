@@ -23,7 +23,7 @@ class WorkerService extends BaseService
         return getDataWorkerCommand($where, true);
     }
 
-    public function feebBack($command, $worker, $data)
+    public function workerfeedBack($command, $worker, $data)
     {
         if ($worker['type'] != $command->type) {
             return returnMessageAjax(100, 'Bạn không có quyền phản hồi lệnh !');

@@ -210,6 +210,7 @@ use App\Models\SupplyBuying;
                 if (count($data_supply) == 0) {
                     return returnMessageAjax(100, 'Dữ liệu vật tư không tồn tại !');
                 }
+                $supply_list = $request->input('supply');
                 $bill = $request->input('bill');
                 $update_supply = $data_supply;
                 $where = [];
@@ -227,11 +228,12 @@ use App\Models\SupplyBuying;
                         $data['log']['qty'] = $supply_qty;
                         $data['log']['hank'] = $supply_qty;
                         if (SquareWarehouse::isWeightSupply($type)) {
-                            if (empty($supply['weight'])) {
+                            if (empty($supply_list[$key]['weight'])) {
                                 return returnMessageAjax(100, 'Bạn chưa nhập số kg cho vật tư '. @$supply['name'].' !');
                             }
-                            $data['log']['weight'] = (int) $supply['weight'];
-                            $update_supply[$key]['weight'] = $supply['weight'];
+                            $weight = $supply_list[$key]['weight'];
+                            $data['log']['weight'] = $weight;
+                            $update_supply[$key]['weight'] = $weight;
                         }
                     }else{
                         $data['log']['qty'] = $supply_qty;

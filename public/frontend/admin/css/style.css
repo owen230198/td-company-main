@@ -502,7 +502,10 @@ a.device_supp_item {
 
 .__header_notify_list{
     max-height: calc(100vh - 200px);
-    overflow: auto;
+    overflow: hidden;
+    overflow-y: auto;
+    border-radius: 5px;
+    box-shadow: 3px 3px 5px #111;
 }
 
 .__header_notify_list li a{
