@@ -33,7 +33,7 @@ class HomeController extends Controller
             $notify_obj->where('group_user', \GroupUser::getCurrent())->orWhere('user', \User::getCurrent('id'));
         }
         $data['noftify_count'] = $notify_obj->count();
-        $data['notify_list'] = $notify_obj->get()->take(10);
+        $data['notify_list'] = $notify_obj->orderBy('id', 'DESC')->get()->take(10);
         $data['not_accepted_table'] = \App\Constants\OrderConstant::ACCEPT_REQURIRED_TABLE;
         return view('main', $data); 
     }
