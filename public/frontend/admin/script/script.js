@@ -1192,6 +1192,9 @@ var moduleAuthentication = function()
                 if (!empty(password)) {
                     password_input.val(password);
                     parent.find('input.__login_remembered_input').val(1);   
+                }else{
+                    password_input.val('');
+                    password_input.trigger('keyup');    
                 }   
             })
             $('#loader').delay(200).fadeOut(500);
