@@ -1,6 +1,8 @@
 <?php
 namespace App\Services;
 use App\Services\BaseService;
+use Illuminate\Support\Facades\Cookie;
+
 class AuthService extends BaseService
 {
     function __construct($prefix = '', $auth_key = 'user_login', $table_user = 'n_users')
@@ -19,11 +21,29 @@ class AuthService extends BaseService
         if (!$user) {
             return $this->returnMessage(100, ['messages'=>'Không tìm thấy tài khoản trên hệ thống!']);
         }
-        $password = md5($request['password']);
+        $password = empty($request['remembered']) ? md5($request['password']) : $request['password'];
         if ($password != $user['password']) {
             return $this->returnMessage(100, ['messages'=>'Thông tin mật khẩu không chính xác!']);
         }
         unset($user['password']);
+        $auth_key = $this->auth_key;
+        $current_cookies = getCookieArr($auth_key);
+        $user_name = $user->username;
+        $lifetime = 525600;
+        if (!empty($request['remember'])) {
+            $current_cookies[$user_name] = $password;
+            $cookie = Cookie::make($auth_key, serialize($current_cookies), $lifetime);
+        }else{
+            if (!empty($current_cookies[$user_name])) {
+                unset($current_cookies[$user_name]);
+            }
+            if (empty($current_cookies)) {
+                $cookie = Cookie::forget($auth_key);  
+            }else{
+                $cookie = Cookie::make($auth_key, serialize($current_cookies), $lifetime);
+            }  
+        }
+        Cookie::queue($cookie);
         $table_group = !empty($this->table_user::$table_group) ? $this->table_user::$table_group : '';
         if ($table_group != '') {
             $group_obj = getModelByTable($table_group);
@@ -32,7 +52,7 @@ class AuthService extends BaseService
             }
         }
         $arr['user'] = $user->toArray();
-        session()->put($this->auth_key, $arr);
+        session()->put($auth_key, $arr);
         return $this->returnMessage(200, ['messages'=>'Đăng nhập thành công!']);
     }
 
@@ -73,6 +93,10 @@ class AuthService extends BaseService
     {
         if (!$request->isMethod('post')) {
             $data['nosidebar'] = true;
+            $auth_key = $this->auth_key;
+            $arr_remember = getCookieArr($auth_key);
+            $data['data_remember'] = !empty($arr_remember) ? ['password' => end($arr_remember), 'username' => key($arr_remember) ] : [];
+            $data['auth_key'] = $auth_key;
             return view('auth.login', $data);
         }
         $result = $this->hasLogin($request);

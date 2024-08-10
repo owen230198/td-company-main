@@ -189,6 +189,14 @@ if (!function_exists('getDataTable')) {
     }
 }
 
+if (!function_exists('getCookieArr')) {
+    function getCookieArr($name)
+    {
+        $cookie = \Illuminate\Support\Facades\Cookie::get($name);
+        return !empty($cookie) ? unserialize($cookie) : [];
+    }
+}
+
 if (!function_exists('getBoolByCondArr')) {
     function getBoolByCondArr($arr, $data)
     {

@@ -1172,6 +1172,41 @@ var removeNotifyButton = function () {
     });
 }
 
+var moduleAuthentication = function()
+{
+    $(document).on('change', 'input.__login_username_input', function(event){
+        event.preventDefault();
+        let _this = $(this);
+        let parent = _this.closest('.__base_login_module');
+        let password_input = parent.find('input.__login_password_input');
+        password_input.val('');
+        password_input.trigger('keyup');
+        let username = _this.val();
+        let auth_key = parent.data('auth_key');
+        if (!empty(username) && !empty(auth_key)) {
+            $('#loader').fadeIn(200);
+            $.ajax({
+                url: getBaseRoute('get-password-remembered?auth_key=' +auth_key+ '&username=' + username),
+                type: 'GET',
+            }).done(function (password) {
+                if (!empty(password)) {
+                    password_input.val(password);
+                    parent.find('input.__login_remembered_input').val(1);   
+                }   
+            })
+            $('#loader').delay(200).fadeOut(500);
+        }
+    })
+    $(document).on('keyup', 'input.__login_password_input', function(event){
+        event.preventDefault();
+        let parent = $(this).closest('.__base_login_module');
+        let remembered_input = parent.find('input.__login_remembered_input');
+        if (remembered_input.length > 0) {
+            remembered_input.val(0);
+        }
+    });
+}
+
 $(function () {
     // loadingPage();
     submitActionAjaxForm();
@@ -1220,4 +1255,5 @@ $(function () {
     baseExportTable();
     ModuleImportExcel();
     removeNotifyButton();
+    moduleAuthentication();
 });

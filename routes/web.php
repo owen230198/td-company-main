@@ -24,10 +24,15 @@ use App\Http\Controllers\NotifyController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+//Auth route
+Route::get('permission-error', [AdminController::class, 'permissionError']);
 Route::any('login', [AuthController::class, 'login']);
 Route::any('logout', [AuthController::class, 'logout']);
+Route::get('get-password-remembered', [AdminController::class, 'getPasswordRemembered']);
+
+//dev route
 Route::any('dev/{method}',[DevController::class, 'index']);
-Route::get('permission-error', [AdminController::class, 'permissionError']);
 Route::middleware(['check_login'])->group(function () {
 
 	//Admin route

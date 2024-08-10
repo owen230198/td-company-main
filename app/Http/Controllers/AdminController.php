@@ -601,5 +601,15 @@ class AdminController extends Controller
             return returnMessageAjax(100, 'Bạn không có quyền thao tác !');
         }
     }
+
+    public function getPasswordRemembered(Request $request)
+    {
+        if (empty($request->input('username')) || empty($request->input('auth_key'))) {
+            return '';
+        }
+        $arr_cookie = getCookieArr($request->input('auth_key'));
+        $username = $request->input('username');
+        return !empty($arr_cookie[$username]) ? $arr_cookie[$username] : '';
+    }
 }
 
