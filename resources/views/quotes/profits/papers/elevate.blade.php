@@ -117,7 +117,7 @@
     <p class="fs-15 font_bold">Tổng chi phí cho máy bế: (1) + (2) + (3) + (4) + Giá thêm cho khuôn phức tạp (nếu có) = {{ number_format($stage['cost']) }}đ</p>       
 </div>
 
-@if (!empty($float))
+@if (!empty($float['act']))
     <div class="mt-2 pt-2 border_top_thin formula_tab">
         <p class="fs-15 color_green mb-2 font_bold">Công Thức Tính Chi Phí Thúc Nổi</p>
         <div class="formula_item d-flex align-items-center color_brown mb-1">
