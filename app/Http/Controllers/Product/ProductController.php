@@ -4,8 +4,7 @@
     use App\Models\AfterPrint;
     use App\Models\CExpertise;
     use App\Models\CRework;
-use App\Models\NDetailTable;
-use App\Models\Order;
+    use App\Models\Order;
     use App\Models\Paper;
     use App\Models\Product;
     use App\Models\WUser;
@@ -137,11 +136,12 @@ use App\Models\Order;
                     }
                     $is_problem = $data['take_status'] == CExpertise::PROBLEM;
                     $is_rework = $is_problem && @$data['handle_problem'] == CExpertise::REWORK;
+                    $product_qty = $product_obj->qty;
                     if ($is_problem) {
                         if (empty($data['qty'])) {
                             return returnMessageAjax(100, 'Bạn chưa nhập số lượng đủ điều kiện nhập kho !');
                         }
-                        if ($data['qty'] >= $product_obj->qty) {
+                        if ($data['qty'] >= $product_qty) {
                             return returnMessageAjax(100, 'Số lượng nhập kho không hợp lệ !');
                         }
                         if (empty($data['handle_problem'])) {
@@ -156,10 +156,10 @@ use App\Models\Order;
                         }
                     }
                     $data_insert['name'] = 'KCS'.' '.$product_obj->name;
-                    $data_insert['qty'] = $data['qty'];
+                    $data_insert['qty'] = @$data['qty'] ?? $product_qty;
                     $data_insert['product'] = $id;
-                    $data_insert['take_status'] = $data['take_status'];
-                    $data_insert['handle_problem'] = $data['handle_problem'];
+                    $data_insert['take_status'] = @$data['take_status'] ?? CExpertise::FULL;
+                    $data_insert['handle_problem'] = @$data['handle_problem'] ?? CExpertise::NOT_REWORK;
                     $data_insert['note'] = $data['note'];
                     $data_insert['status'] = \StatusConst::NOT_ACCEPTED;
                     $this->services->configBaseDataAction($data_insert);

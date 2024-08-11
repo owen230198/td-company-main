@@ -12,8 +12,26 @@
             parent::__construct();      
         }
 
+        public function update($request, $id)
+        {
+            $table = 'c_expertises';
+            $param = $request->all();
+            $dataItem = getModelByTable($table)->find($id);
+            if (!$request->isMethod('POST')) {
+                $data = $this->admins->getDataActionView($table, 'update', 'Nhập kho thành phẩm', $param);
+                $data['title'] = 'Nhập kho thành phẩm: '.@$dataItem['name'];
+                $data['action_url'] = url('update/'.$table.'/'.$id);
+                $data['field_logs'] = [];
+                $data['dataItem'] = $dataItem;
+                return view('warehouses.actions.view', $data);   
+            }else{
+                
+                
+            }
+        }
         public function confirmProductWarehouse(Request $request, $id)
         {
+            return returnMessageAjax(100, 'Chức năng đang phát triển !');
             if (!$request->isMethod('POST')) {
                 return returnMessageAjax(100, 'Yêu cầu không hợp lệ !');
             }

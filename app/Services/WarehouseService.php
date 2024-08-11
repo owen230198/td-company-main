@@ -195,11 +195,11 @@
         
         public function update($param, $id, $type_request = 0)
         {
-            $dataItem = getModelByTable($this->table)->find($id);
+            $table = $this->table;
+            $dataItem = getModelByTable($table)->find($id);
             if (@$dataItem->status != SupplyWarehouse::IMPORTED) {
                 return customReturnMessage(false, $type_request == 1, ['message' => 'Không thể cập nhật số lượng cho vật tư này !']);
             }
-            $table = $this->table;
             if ($type_request == 1) {
                 $data_log = $param['log'];
                 $data_warehouse = $param['warehouse'];

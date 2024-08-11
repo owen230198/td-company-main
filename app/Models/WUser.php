@@ -18,7 +18,7 @@ class WUser extends Model
     {
         $data = NDetailTable::where(['table_map' => 'w_salaries', 'name' => 'group_user'])->get();
         NDetailTable::handleField($data, 'insert');
-        $ret = processArrField($data->first());
+        $ret = processArrField($data[0]);
         return $ret;
     }
 }
