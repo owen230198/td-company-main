@@ -254,8 +254,8 @@ class WSalary extends Model
         $data['handle'] = self::getHandleDataJson($this->worker['type'], $this->handle);
         $data['total'] = 0;
         $stages = !empty($this->handle['stage']) ? $this->handle['stage'] : [];
-        $factor = @$this->handle['stage'] ?? 1;
-        if (!empty($this->handle['stage'])) {
+        $factor = @$this->handle['factor'] ?? 1;
+        if (!empty($this->handle['factor'])) {
             foreach ($stages as $stage) {
                 $device = !empty($stage['materal']) ? $stage['materal'] : 0;
                 $data_device = Device::find($device);
