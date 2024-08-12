@@ -35,6 +35,7 @@
                 ],
                 \GroupUser::ACCOUNTING => [
                     'view' => 1,
+                    'insert' => 1,
                 ]
             ];
         } 
