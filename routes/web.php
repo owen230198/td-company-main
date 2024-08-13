@@ -119,7 +119,7 @@ Route::middleware(['check_login'])->group(function () {
 	Route::any('product-require-rework/{id}', [ProductController::class, 'productRequireRework']);
 
 	//product warehouse route
-	Route::post('confirm-product-warehouse/{id}', [CExpertiseController::class, 'confirmProductWarehouse']);
+	Route::any('confirm-product-warehouse/{id}', [CExpertiseController::class, 'confirmProductWarehouse']);
 	Route::get('product-warehouse-history/{product_id}', [CExpertiseController::class, 'productWarehouseHistory']);
 });
 $modules_path = dirname(__DIR__) . '/app/Modules/';

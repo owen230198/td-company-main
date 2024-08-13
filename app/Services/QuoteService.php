@@ -150,6 +150,7 @@ class QuoteService extends BaseService
         if (!empty($data['handle_shape_file'])) {
             $data_action['handle_shape_file'] = $data['handle_shape_file'];
         }
+        $data_action['made_by'] = !@$data['made_by'] ?? 1;
         $data_action['note'] = json_encode(@$data['note']); 
         $this->configBaseDataAction($data_action);
         return $data_action;

@@ -942,11 +942,10 @@ var productListSupplyProcess = function () {
 var confirmImportProductWarehouse = function () {
     $(document).on('click', 'button.__confirm_product_warehouse', function (event) {
         event.preventDefault();
-        let id = $(this).data('id');
-        ajaxBaseCall({
-            url: 'confirm-product-warehouse/' + id,
-            type: 'POST'
-        });
+        let modal = $("#actionModal");
+        let id = $(this).data("id");
+        modal.find("iframe").attr("src", getBaseRoute('confirm-product-warehouse/' + id));
+        modal.modal('show');
     });
 }
 

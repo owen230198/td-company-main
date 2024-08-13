@@ -93,7 +93,7 @@ class NGroupUser extends Model
         ],
         'partner_list' => [
             'name' => 'DS đối tác sx',
-            'link' => 'view/partners',
+            'link' => 'view/partnersdefault_data=%7B%22internal%22%3A%221%22%7D',
             'group' => 'customer'
         ],
         'create_quote' => [
@@ -252,7 +252,7 @@ class NGroupUser extends Model
             'group' => 'product_warehouse'
         ],
         'product_history' => [
-            'name' => 'Xuất, nhập, tồn',
+            'name' => 'Tổng hợp tồn kho',
             'link' => 'view/c_expertises?default_data=%7B%22status%22%3A%22not_accepted%22%7D',
             'group' => 'product_warehouse'
         ],
