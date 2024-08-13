@@ -210,7 +210,7 @@ class WorkerService extends BaseService
                 $insert_id = $after_prints->insertGetId($after_print);
                 $update = $obj->update(['status' => \StatusConst::CHECKING]);
                 if ($insert_id) {
-                    $after_prints->where('id', $insert_id)->update(['code' => 'QC-'.sprintf("%08s", $insert_id)]);
+                    $after_prints->where('id', $insert_id)->update(['code' => 'QC-'.formatCodeInsert($insert_id)]);
                     return returnMessageAjax(200, 'Đã gửi yêu cầu duyệt chấm công đến bộ phận KCS sau in !', url('Worker'));
                 }else{
                     return returnMessageAjax(100, 'Có lỗi xảy ra, vui lòng thử chấm công lại !'); 

@@ -15,6 +15,9 @@
             parent::__construct();
             $this->table = $table;
         }
+        //source
+        const BUY = 1;
+        const OVER = 2;
         static function getRole() {
             return [
                 \GroupUser::WAREHOUSE => [
@@ -198,7 +201,7 @@
         {
             $table = $this->table;
             $dataItem = getModelByTable($table)->find($id);
-            if (@$dataItem->status != SupplyWarehouse::IMPORTED) {
+            if (@$dataItem->status != \StatusConst::IMPORTED) {
                 return customReturnMessage(false, $type_request == 1, ['message' => 'Không thể cập nhật số lượng cho vật tư này !']);
             }
             if ($type_request == 1) {

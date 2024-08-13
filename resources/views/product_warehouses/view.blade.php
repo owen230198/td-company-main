@@ -3,8 +3,8 @@
     <link rel="stylesheet" href="{{ asset('frontend/admin/css/quote.css') }}">
 @endsection
 @section('content')
-    <div class="dashborad_content config_content ">
-        <form action="" method="GET" class="mb-0 baseAjaxForm">
+    <div class="dashborad_content config_content base_content">
+        <form action="{{ url('confirm-product-warehouse/'.$data_expertise->id) }}" method="POST" class="mb-0 baseAjaxForm __import_product_warehouse_form">
             @foreach ($info_fields as $iField)
                 @php
                     $iField['attr']['readonly'] = 1;
@@ -15,13 +15,19 @@
                 @endif
             @endforeach
             @include('view_update.view', $field_chose_type)
-            <div class="ajax_data_inventory">
+            <div class="ajax_data_field_import_product">
                 
             </div>
             @include('view_update.view', $receipt_field)
+            @include('view_update.view', $field_note)
+            <div class="group_btn_action_form text-center w-100">
+                <button type="submit" disabled class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-2">
+                    <i class="fa fa-check mr-2 fs-14" aria-hidden="true"></i>Hoàn tất
+                </button>
+                <button type="button" class="main_button bg_red color_white radius_5 font_bold smooth red_btn close_action_popup">
+                    <i class="fa fa-times mr-2 fs-14" aria-hidden="true"></i>Hủy
+                </button>
+            </div>
         </form>  
     </div>
-@endsection
-@section('script')
-    <script src="{{ asset('frontend/admin/script/order.js') }}"></script>
 @endsection

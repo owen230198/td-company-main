@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DevController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AjaxResponeController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\CExpertise\CExpertiseController;
 use App\Http\Controllers\CSupply\CSupplyController;
@@ -64,6 +65,7 @@ Route::middleware(['check_login'])->group(function () {
 	Route::get('export/{table}', [AdminController::class, 'exportTable']);
 	Route::post('import-excel/{table}', [AdminController::class, 'importExcel']);
 	Route::get('add-linking-data', [AdminController::class, 'addLinkingData']);
+	Route::any('ajax-respone/{method}', [AjaxResponeController::class, 'index']);
 
 	//quotes routes
 	Route::any('create-quote', [QuoteController::class, 'createQuote']);

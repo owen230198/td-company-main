@@ -10,13 +10,6 @@ class SupplyWarehouse extends Model
     protected $table = 'supply_warehouses';
     protected $protectFields = false;
     protected $guarded = [];
-    //status
-    const WAITING = 'waiting';
-    const IMPORTED = 'imported';
-
-    //source
-    const BUY = 1;
-    const OVER = 2;
     
     static function getRole()
     {

@@ -19,6 +19,8 @@ class StatusConstant
     const LAST_SUBMITED = 'last_submited';
     const PROCESSING = 'processing';
     const CHECKING = 'checking';
+    const WAITING = 'waiting';
+    const IMPORTED = 'imported';
 
     //Other Constants
     const NO_VALIDATE = 'no_validate';

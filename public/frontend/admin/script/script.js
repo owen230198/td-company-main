@@ -1209,6 +1209,17 @@ var moduleAuthentication = function()
     });
 }
 
+var selectImportProductMethod = function () {
+    $(document).on('change', '.__select_import_product_warehouse_method', function(event){
+        event.preventDefault();
+        let _this = $(this);
+        let action = _this.val();
+        let module = _this.closest('form.__import_product_warehouse_form').find('.ajax_data_field_import_product');
+        let url = 'ajax-respone/ajaxFieldImportProductByAction?action=' + action;
+        ajaxViewTarget(url, module, module);
+    });
+}
+
 $(function () {
     // loadingPage();
     submitActionAjaxForm();
@@ -1258,4 +1269,5 @@ $(function () {
     ModuleImportExcel();
     removeNotifyButton();
     moduleAuthentication();
+    selectImportProductMethod();
 });

@@ -220,12 +220,6 @@ var setNameProductQuote = function () {
             let current_text = $(this).val();
             if (current_text === '') {
                 $(this).val(text);
-            } else {
-                let regex = /^(.*?)(\(.*?\))?$/;
-                let new_name = current_text.replace(regex, function (match, p1, p2) {
-                    return text + ' ' + (p2 || '');
-                });
-                $(this).val(new_name);
             }
         });
         tabpane.data('pname', text);

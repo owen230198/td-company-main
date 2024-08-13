@@ -250,7 +250,7 @@ use App\Models\SupplyBuying;
                     if (!empty($where['weight'])) {
                         unset($where['weight']);
                     }
-                    $where['status'] = SupplyWarehouse::IMPORTED;
+                    $where['status'] = \StatusConst::IMPORTED;
                     $data['warehouse'] = $where;
                     if (getCountDataTable($table_supply, $where) == 0) {
                         $status = $warehouse_service->insert($data, 1);
@@ -363,7 +363,7 @@ use App\Models\SupplyBuying;
 
         private function tableDataInventoryAggregate($request, &$data)
         {
-            $where = [['status', '=', SupplyWarehouse::IMPORTED]];
+            $where = [['status', '=', \StatusConst::IMPORTED]];
             $where_table = [];
             if (!empty($request->input('type'))) {
                 if ($request->input('type') != 'other') {

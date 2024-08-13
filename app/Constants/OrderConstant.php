@@ -64,16 +64,16 @@
                 'icon' => 'imbox', 
                 'table' => 'supply_warehouses', 
                 'text' => 'Băng lề vật tư',
-                'condition' => ['status' => SupplyWarehouse::WAITING],
-                'link' => 'view/supply_warehouses?default_data=%7B"status"%3A"'.SupplyWarehouse::WAITING.'"%7D',
+                'condition' => ['status' => \StatusConst::WAITING],
+                'link' => 'view/supply_warehouses?default_data=%7B"status"%3A"'.\StatusConst::WAITING.'"%7D',
                 'group_user' => [\GroupUser::ADMIN, \GroupUser::TECH_HANDLE, \GroupUser::PLAN_HANDLE, \GroupUser::WAREHOUSE, \GroupUser::ACCOUNTING]  
             ],
             [
                 'icon' => 'imsupp', 
                 'table' => 'print_warehouses', 
                 'text' => 'Băng lề giấy in',
-                'condition' => ['status' => SupplyWarehouse::WAITING],
-                'link' => 'view/print_warehouses?default_data=%7B"status"%3A"'.SupplyWarehouse::WAITING.'"%7D',
+                'condition' => ['status' => \StatusConst::WAITING],
+                'link' => 'view/print_warehouses?default_data=%7B"status"%3A"'.\StatusConst::WAITING.'"%7D',
                 'group_user' => [\GroupUser::ADMIN, \GroupUser::TECH_HANDLE, \GroupUser::PLAN_HANDLE, \GroupUser::WAREHOUSE, \GroupUser::ACCOUNTING]  
             ],
             [

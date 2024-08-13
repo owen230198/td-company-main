@@ -283,10 +283,10 @@ use Maatwebsite\Excel\Facades\Excel;
             if (\GroupUser::isAdmin() || \GroupUser::isWarehouse()) {
                 $warehouse_table = \DB::table('supply_warehouses');
                 $warehouse = $warehouse_table->find($id);
-                if (@$warehouse->status != SupplyWarehouse::WAITING) {
+                if (@$warehouse->status != \StatusConst::WAITING) {
                     return returnMessageAjax(110, 'Dữ liệu không hợp lệ!');
                 } 
-                $data_update = ['status' => SupplyWarehouse::IMPORTED, 
+                $data_update = ['status' => \StatusConst::IMPORTED, 
                                 'confirm_by' => \User::getCurrent('id'), 
                                 'confirm_at' => \Carbon\Carbon::now()];
                 $update = $warehouse_table->where('id' , $id)->update($data_update);
