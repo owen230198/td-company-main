@@ -135,9 +135,17 @@
             [
                 'icon' => 'product_waiting', 
                 'table' => 'c_expertises', 
-                'text' => 'Duyệt nhập kho sản phẩm',
+                'text' => 'Duyệt nhập kho thành phẩm',
                 'condition' => ['status' => \StatusConst::NOT_ACCEPTED],
                 'link' => 'view/c_expertises?default_data=%7B"status"%3A"'.\StatusConst::NOT_ACCEPTED.'"%7D',
+                'group_user' => [\GroupUser::ADMIN, \GroupUser::KCS, \GroupUser::PRODUCT_WAREHOUSE]  
+            ],
+            [
+                'icon' => 'product_export', 
+                'table' => 'c_products', 
+                'text' => 'Duyệt xuất thành phẩm',
+                'condition' => ['status' => \StatusConst::NOT_ACCEPTED],
+                'link' => 'view/c_products?default_data=%7B"status"%3A"'.\StatusConst::NOT_ACCEPTED.'"%7D',
                 'group_user' => [\GroupUser::ADMIN, \GroupUser::KCS, \GroupUser::PRODUCT_WAREHOUSE]  
             ],
         ];
