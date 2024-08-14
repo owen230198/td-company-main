@@ -11,7 +11,7 @@
  Target Server Version : 80030
  File Encoding         : 65001
 
- Date: 14/08/2024 09:47:08
+ Date: 15/08/2024 02:12:05
 */
 
 SET NAMES utf8mb4;
@@ -418,5 +418,11 @@ INSERT INTO `n_detail_tables` VALUES (389, 'supply_role', '', 'Quyền kho vật
 INSERT INTO `n_detail_tables` VALUES (391, 'type', '{\"required\":1,\"inject_class\":\"__supply_buying_select_type\"}', 'Loại vật tư', 'select', 'supply_buyings', 1, 1, 1, 1, 0, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"searchbox\":1\r\n	},\r\n	\"data\":{\r\n		\"options\":{\r\n			\"\":\"Chọn loại vật tư\",\r\n			\"paper\":\"Giấy in\", \r\n			\"nilon\":\"Màng nilon\", \r\n			\"metalai\":\"Màng metalai\",\r\n			\"cover\":\"Màng phủ trên\",\r\n			\"carton\":\"Carton\",\r\n			\"rubber\":\"Cao su\",\r\n			\"styrofoam\":\"Mút phẳng\",\r\n			\"decal\":\"Nhung\",\r\n			\"silk\":\"Vải lụa\",\r\n			\"mica\":\"Mi ca\",\r\n			\"emulsion\":\"Nhũ\",\r\n			\"skrink\":\"Màng co\",\r\n			\"magnet\":\"Nam châm\",\r\n			\"other\":\"Vật tư khác\"\r\n		}\r\n	}\r\n}', NULL, NULL, 1, 1, '2023-05-11 11:18:58', '2024-08-01 22:36:34');
 INSERT INTO `n_detail_tables` VALUES (392, 'unit', '{\"required\":1, \"readonly\":2}', 'ĐVT', 'select', 'product_warehouses', 6, 1, 1, 1, 0, 1, 0, 0, '{\r\n	\"data\":{\r\n		\"options\":{\"\":\"ĐVT\", \r\n			\"combo\":\"Bộ\", \r\n			\"box\":\"Hộp\", \r\n			\"unit\":\"Chiếc\"}\r\n		}\r\n}', NULL, NULL, 1, 1, '2023-05-11 11:18:58', '2024-08-14 02:41:20');
 INSERT INTO `n_detail_tables` VALUES (393, 'made_by', NULL, 'Đơn vị sản xuất', 'linking', 'product_warehouses', 4, 1, 0, 1, 1, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"partners\"\r\n	}\r\n}', NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-08-14 02:41:13');
+INSERT INTO `n_detail_tables` VALUES (394, 'code', '{\"disable_field\":1,\"required\":1}', 'Mã', 'text', 'c_orders', 0, 1, 0, 1, 1, NULL, 1, 0, '', NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-08-15 01:48:32');
+INSERT INTO `n_detail_tables` VALUES (395, 'name', '{\"required\":1,\"inject_class\":\"length_input\"}', 'Tên', 'text', 'c_orders', 1, 1, 1, 1, 1, NULL, 1, 0, '', NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-08-15 01:48:32');
+INSERT INTO `n_detail_tables` VALUES (396, 'type', '', 'Phân loại', 'select', 'c_orders', 2, 1, 1, 0, 1, NULL, 1, 0, '{\"data\":{\r\n		\"options\":{\r\n			\"\":\"Phân loại\",\r\n			\"order\":\"Hàng đặt\",\r\n			\"sell\":\"Hàng bán sẵn\"\r\n		}\r\n	}\r\n}', NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-08-15 01:49:51');
+INSERT INTO `n_detail_tables` VALUES (397, 'customer', '{\"required\":1,\"inject_class\":\"__select_parent\"}', 'Công ty', 'linking', 'c_orders', 0, 1, 0, 0, 0, NULL, 1, 360, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"customers\"\r\n	}\r\n}', NULL, NULL, 1, 1, '2023-05-11 11:18:58', '2024-08-15 02:06:44');
+INSERT INTO `n_detail_tables` VALUES (398, 'represent', '{\"required\":1,\"inject_class\":\"__select_child\"}', 'Người liên hệ', 'linking', 'c_orders', 3, 1, 0, 0, 0, NULL, 1, 360, '{\r\n	\"config\":{\r\n		\"searchbox\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"represents\"\r\n	}\r\n}', NULL, NULL, 1, 1, '2023-05-11 11:18:58', '2024-08-15 02:06:44');
+INSERT INTO `n_detail_tables` VALUES (399, 'group_customer', '', 'Khách hàng', 'group', 'c_orders', 0, 1, 0, 0, 1, NULL, 0, 0, '{\r\n	\"group_class\":\"__module_select_ajax_value_child\",\r\n	\"inject_attr\":\"link=option-ajax-child/represents/customer\",\r\n	\"width\":\"8\",\r\n	\"width_child\":\"6\"\r\n}', NULL, NULL, 1, 1, '2023-05-23 14:41:40', '2024-08-15 02:06:44');
 
 SET FOREIGN_KEY_CHECKS = 1;

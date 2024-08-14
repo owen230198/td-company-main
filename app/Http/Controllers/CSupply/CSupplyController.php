@@ -2,9 +2,9 @@
     namespace App\Http\Controllers\CSupply;
     use App\Http\Controllers\Controller;
     use App\Models\CSupply;
-use App\Models\SquareWarehouse;
-use App\Models\WarehouseHistory;
-use Illuminate\Http\Request;
+    use App\Models\SquareWarehouse;
+    use App\Models\WarehouseHistory;
+    use Illuminate\Http\Request;
 
     class CSupplyController extends Controller
     {
@@ -26,7 +26,7 @@ use Illuminate\Http\Request;
 
         private function getDataView($action)
         {
-            $data = $this->admins->getDataActionView($this->table, $action, 'Thêm mới');
+            $data = $this->admins->getDataActionView($this->table, $action, $action == 'insert' ? 'Thêm mới' : 'Chi tiết');
             $field_list = $data['field_list'];
             $data['field_type'] = array_slice($field_list, 0, 1);
             $data['field_action'] = array_slice($field_list, 1);

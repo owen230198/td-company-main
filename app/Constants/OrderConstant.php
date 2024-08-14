@@ -142,10 +142,10 @@
             ],
             [
                 'icon' => 'product_export', 
-                'table' => 'c_products', 
+                'table' => 'c_orders', 
                 'text' => 'Duyệt xuất thành phẩm',
                 'condition' => ['status' => \StatusConst::NOT_ACCEPTED],
-                'link' => 'view/c_products?default_data=%7B"status"%3A"'.\StatusConst::NOT_ACCEPTED.'"%7D',
+                'link' => 'view/c_orders?default_data=%7B"status"%3A"'.\StatusConst::NOT_ACCEPTED.'"%7D',
                 'group_user' => [\GroupUser::ADMIN, \GroupUser::KCS, \GroupUser::PRODUCT_WAREHOUSE]  
             ],
         ];

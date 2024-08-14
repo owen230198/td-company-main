@@ -25,7 +25,8 @@ class NTable extends Model
                             'other_warehouses',
                             'extend_warehouses', 
                             'supply_buyings',
-                            'c_supplies'
+                            'c_supplies',
+                            'c_orders'
                         ],
                         'update' => [
                             'customers',
@@ -39,7 +40,8 @@ class NTable extends Model
                             'other_warehouses',
                             'extend_warehouses', 
                             'supply_buyings',
-                            'c_supplies'
+                            'c_supplies',
+                            'c_orders'
                         ],
                         'copy' => [
                             'quotes', 
@@ -51,7 +53,8 @@ class NTable extends Model
                             'other_warehouses',
                             'extend_warehouses', 
                             'supply_buyings',
-                            'c_expertises'
+                            'c_expertises',
+                            'c_orders'
                         ],
                         'remove' => [
                             'customers',
@@ -63,8 +66,7 @@ class NTable extends Model
                             'square_warehouses', 
                             'supply_warehouses', 
                             'other_warehouses',
-                            'extend_warehouses',
-                            'c_expertises'
+                            'extend_warehouses'
                         ],
                         'import' => [
                             'print_warehouses',

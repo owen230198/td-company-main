@@ -11,7 +11,7 @@
  Target Server Version : 80030
  File Encoding         : 65001
 
- Date: 14/08/2024 11:01:59
+ Date: 15/08/2024 02:11:43
 */
 
 SET NAMES utf8mb4;
@@ -33,6 +33,8 @@ CREATE TABLE `c_orders`  (
   `profit` float NULL DEFAULT NULL,
   `other_price` float NULL DEFAULT NULL,
   `total` float NULL DEFAULT NULL,
+  `advance` float NULL DEFAULT NULL,
+  `rest` float NULL DEFAULT NULL,
   `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `act` tinyint NULL DEFAULT NULL,
