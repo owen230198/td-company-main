@@ -199,7 +199,7 @@
                 \GroupUser::PLAN_HANDLE => [
                     'view' => 
                         [
-                            'with' => ['key' => 'status', 'value' => Order::TECH_SUBMITED],
+                            'with' => ['key' => 'order_created', 'value' => 1],
                         ]
                 ],
                 \GroupUser::KCS => [

@@ -253,7 +253,7 @@ class NGroupUser extends Model
         ],
         'product_history' => [
             'name' => 'Tổng hợp tồn kho',
-            'link' => 'view/c_expertises?default_data=%7B%22status%22%3A%22not_accepted%22%7D',
+            'link' => 'inventory-aggregate',
             'group' => 'product_warehouse'
         ],
         'order_ready' => [
