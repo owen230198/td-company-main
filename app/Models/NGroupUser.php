@@ -372,7 +372,6 @@ class NGroupUser extends Model
             self::MODULE['product_management'],
             self::MODULE['expertise'],
             self::MODULE['product_history'],
-            self::MODULE['order_ready'],
             self::MODULE['account'],
             self::MODULE['change_password'],
         ],

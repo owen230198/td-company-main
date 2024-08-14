@@ -215,15 +215,9 @@
                         ]
                 ],
                 \GroupUser::PRODUCT_WAREHOUSE => [
-                    'view' => 
-                        [
-                            'with' => [
-                                'type' => 'group',
-                                'query' => [
-                                    ['key' => 'status', 'value' => \StatusConst::LAST_SUBMITED],
-                                ]
-                            ],
-                        ]
+                    'view' => [
+                        'with' => ['key' => 'order_created', 'value' => 1],
+                    ]
                 ],
                 \GroupUser::ACCOUNTING => [
                     'view' => 

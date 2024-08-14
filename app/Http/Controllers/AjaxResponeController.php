@@ -47,7 +47,7 @@ class AjaxResponeController extends Controller
                 'name' => 'data[target]',
                 'note' => 'Đối tượng cập nhật',
                 'type' => 'linking',
-                'other_data' => ['config' => ['search' => 1], 'data' => ['table' => 'product_warehouses']],
+                'other_data' => ['config' => ['search' => 1, 'except_linking' => 1], 'data' => ['table' => 'product_warehouses']],
             ];
         }
         return view('view_update.view', $field);
