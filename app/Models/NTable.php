@@ -66,7 +66,8 @@ class NTable extends Model
                             'square_warehouses', 
                             'supply_warehouses', 
                             'other_warehouses',
-                            'extend_warehouses'
+                            'extend_warehouses',
+                            'customers'
                         ],
                         'import' => [
                             'print_warehouses',

@@ -16,7 +16,13 @@
                     @endforeach
                 </div>
                 <div class="__ajax_field_c_order_field">
-                     
+                    @if (!empty($dataItem->order))
+                        @php
+                            $field_ordered = \App\Models\COrder::getFieldOrdered($dataItem);
+                            $field_ordered['value'] = $dataItem->order; 
+                        @endphp
+                        @include('view_update.view', $field_ordered)   
+                    @endif    
                 </div>
                 <div class="__cost_c_order_module">
                     @foreach ($field_costs as $fieldnd)

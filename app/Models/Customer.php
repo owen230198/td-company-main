@@ -66,4 +66,8 @@ class Customer extends Model
         ];
         return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];
     }
+    public function afterRemove($id)
+    {
+        Represent::where('customer', $id)->delete();    
+    }
 }

@@ -62,29 +62,8 @@ class AjaxResponeController extends Controller
         if ($type != COrder::ORDER){
             return '';
         }
-        $where = ['status' => \StatusConst::IMPORTED];
-        if (!empty($request->input('customer'))) {
-            $where['customer'] = $request->input('customer');
-        }
-
-        if (!empty($request->input('represent'))) {
-            $where['represent'] = $request->input('represent');
-        }
-
-        $field = [
-            'name' => 'order',
-            'note' => 'Chọn đơn khách đã đặt',
-            'attr' => ['inject_class' => '__select_order_for_selling'],
-            'type' => 'linking',
-            'other_data' => [
-                'config' => ['search' => 1], 
-                'data' => [
-                    'table' => 'orders',
-                    'where' => $where,
-                    'field_title' => 'code'
-                ]
-            ],
-        ];
+        $data = $request->all();
+        $field = COrder::getFieldOrdered($data);
         return view('view_update.view', $field);
     }
 

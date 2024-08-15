@@ -11,7 +11,7 @@
  Target Server Version : 80030
  File Encoding         : 65001
 
- Date: 15/08/2024 02:11:43
+ Date: 16/08/2024 06:05:12
 */
 
 SET NAMES utf8mb4;
@@ -27,6 +27,7 @@ CREATE TABLE `c_orders`  (
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `customer` int NULL DEFAULT NULL,
+  `represent` int NULL DEFAULT NULL,
   `order` int NULL DEFAULT NULL,
   `object` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   `receipt` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
@@ -38,15 +39,11 @@ CREATE TABLE `c_orders`  (
   `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `act` tinyint NULL DEFAULT NULL,
-  `confirm_by` int NULL DEFAULT NULL,
+  `confirm_warehouse` int NULL DEFAULT NULL,
   `created_by` int NULL DEFAULT NULL,
   `created_at` datetime NULL DEFAULT NULL,
   `updated_at` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of c_orders
--- ----------------------------
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 SET FOREIGN_KEY_CHECKS = 1;

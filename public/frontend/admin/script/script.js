@@ -1238,7 +1238,7 @@ var selectTypeCOrder = function()
             url += '&represent=' + represent    
         }
         let target = module.find('.__ajax_field_c_order_field');
-        ajaxViewTarget(url, target, module);
+        ajaxViewTarget(url, target, target);
         rest_input = module.find('input.__selling_advance_input');
         rest_input.val('0');
         rest_input.trigger('keyup');
@@ -1283,6 +1283,13 @@ var addItemJsonModule = function () {
         let table = _this.data('table');
         let url = 'ajax-respone/returnItemJson?table=' + table + '&index=' + index;
         ajaxViewTarget(url, list_section, list_section, 2);
+    });
+    
+    $(document).on('click', 'span.__remove_object_json_item', function (event) {
+        event.preventDefault();
+        let _this = $(this);
+        _this.parent().remove();
+        calcTotalProductSelling($('.__cost_c_order_module'));
     });
 }
 

@@ -16,7 +16,7 @@ class COrder extends Model
     {
         $check_readonly = \GroupUser::isAdmin() || \GroupUser::isSale() ? 0 : 1;
         $field_obj = [
-            'name' => 'type',
+            'name' => 'id',
             'note' => 'Chọn thành phẩm',
             'attr' => [
                 "required" => 1, 
@@ -65,6 +65,33 @@ class COrder extends Model
         ];   
     }
 
+    static function getFieldOrdered($data)
+    {
+        $where = ['status' => \StatusConst::IMPORTED];
+        if (!empty($data['customer'])) {
+            $where['customer'] = $data['customer'];
+        }
+
+        if (!empty($data['represent'])) {
+            $where['represent'] = $data['represent'];
+        }
+
+        return [
+            'name' => 'order',
+            'note' => 'Chọn đơn khách đã đặt sản xuất',
+            'attr' => ['inject_class' => '__select_order_for_selling'],
+            'type' => 'linking',
+            'other_data' => [
+                'config' => ['search' => 1], 
+                'data' => [
+                    'table' => 'orders',
+                    'where' => $where,
+                    'field_title' => 'code'
+                ]
+            ],
+        ];
+    }
+
     static function getRole()
     {
         $role = [
@@ -99,5 +126,9 @@ class COrder extends Model
             ],
         ];
         return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];
+    }
+    static function getInsertCode($id)
+    {
+        COrder::where(['id' => $id])->update(['code' => 'BH-'.sprintf("%08s", $id)]);
     }
 }
