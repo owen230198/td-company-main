@@ -52,6 +52,7 @@ class AuthService extends BaseService
             }
         }
         $arr['user'] = $user->toArray();
+        $arr['icon'] = rand(1, 6);
         session()->put($auth_key, $arr);
         return $this->returnMessage(200, ['messages'=>'Đăng nhập thành công!']);
     }

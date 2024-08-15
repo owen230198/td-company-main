@@ -16,8 +16,8 @@
         {
             $data = $this->admins->getDataActionView($this->table, $action, $action == 'insert' ? 'Thêm mới' : 'Chi tiết');
             $field_list = $data['field_list'];
-            $data['field_type'] = array_slice($field_list, 0, 3);
-            $data['field_action'] = array_slice($field_list, 2);
+            $data['field_customers'] = array_slice($field_list, 0, 2);
+            $data['field_costs'] = array_slice($field_list, 2);
             return $data;
         }
 
@@ -27,6 +27,7 @@
             if (!$request->isMethod('POST')) {
                 $data = $this->getDataView(__FUNCTION__);
                 $data['action_url'] = url('insert/'.$table);
+                $data['check_readonly'] = \GroupUser::isAdmin() || \GroupUser::isSale() ? 0 : 1;
                 return view('c_orders.view', $data);
             }
         }

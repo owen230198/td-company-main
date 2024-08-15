@@ -130,6 +130,11 @@ var enableButtonSubmit = function () {
 		$(this).prop('disabled', false);
 	});
 }
+
+var getValueByPercent = function(value, percent) {
+	return (value * percent) / 100;
+}
+
 $(function () {
 	$(document).ready(function () {
 		enableButtonSubmit();

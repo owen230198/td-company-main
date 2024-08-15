@@ -333,7 +333,7 @@ input[type=time] {
 }
 
 /* style base content */
-.config_content .select2.select2-container.select2-container--default,
+/* .config_content .select2.select2-container.select2-container--default, */
 .config_content .form-control,
 .config_content .btn-group,
 .btn-group-vertical,
@@ -455,9 +455,9 @@ html {
     height: 31.5px;
 }
 
-.select2.select2-container.select2-container--default {
+/* .select2.select2-container.select2-container--default {
     width: 100% !important;
-}
+} */
 
 ::-webkit-scrollbar {
     width: 8px;

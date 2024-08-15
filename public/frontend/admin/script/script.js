@@ -1220,6 +1220,170 @@ var selectImportProductMethod = function () {
     });
 }
 
+var selectTypeCOrder = function()
+{
+    $(document).on('change', 'select.__select_type_c_order', function(event){
+        event.preventDefault();
+        let _this = $(this);
+        let type = _this.val();
+        let module = _this.closest('.__c_order_action');
+        let url = 'ajax-respone/ajaxFieldCOrderByType?type=' + type;
+        let where_module = module.find('.__type_c_order_select');
+        let customer = where_module.find('select.__select_customer_c_order').val();
+        if (!empty(customer)) {
+            url += '&customer=' + customer    
+        }
+        let represent = where_module.find('select.__select_represent_c_order').val();
+        if (!empty(represent)) {
+            url += '&represent=' + represent    
+        }
+        let target = module.find('.__ajax_field_c_order_field');
+        ajaxViewTarget(url, target, module);
+        rest_input = module.find('input.__selling_advance_input');
+        rest_input.val('0');
+        rest_input.trigger('keyup');
+    });
+
+    $(document).on('change', 'select.__select_customer_c_order', function(event){
+        event.preventDefault();
+        let parent = $(this).closest('.__c_order_action'); 
+        parent.find('select.__select_type_c_order').trigger('change');
+    });
+
+    $(document).on('change', 'select.__select_represent_c_order', function(event){
+        event.preventDefault();
+        let _this = $(this);
+        let parent = _this.closest('.__c_order_action');
+        let represent = _this.val(); 
+        let url = 'ajax-respone/checkRepreSentPermission?represent=' + represent;
+        $.ajax({
+            url: url,
+            type: 'GET',
+        })
+		.done(function (data) {
+            if (data.code == 100) {
+                swal('Không thành công', 'Bạn không có quyền chọn người đại diện, vui lòng liên hệ Admin để được cấp quyền !', 'error').then(function () {
+                    _this.val('');
+                    parent.find('select.__select_type_c_order').trigger('change');
+				});
+            }else{
+                parent.find('select.__select_type_c_order').trigger('change');
+            }
+		})
+    });
+}
+
+var addItemJsonModule = function () {
+    $(document).on('click', 'button.add_item_json_button', function (event) {
+        event.preventDefault();
+        let _this = $(this);
+        let list_section = _this.closest('.__json_data_module').find('.__list_item_json');
+        let item = list_section.find('.__item_json');
+        let index = getEmptyDefault(item.last().data('index'), 0, 'number') + 1;
+        let table = _this.data('table');
+        let url = 'ajax-respone/returnItemJson?table=' + table + '&index=' + index;
+        ajaxViewTarget(url, list_section, list_section, 2);
+    });
+}
+
+var selectProductSellingModule = function(){
+    $(document).on('change', 'select.__select_product_sell', function(event){
+        event.preventDefault();
+        let _this = $(this);
+        let parent = _this.closest('.__item_json');
+        let id = _this.val();
+        let qty = getEmptyDefault(parent.find('input.__selling_qty_input_item').val(), 0, 'float');
+        let url = 'ajax-respone/getPriceProductWarehouse?id=' + id + '&qty=' + qty;
+        let target = parent.find('input.__selling_price_input_item');
+        $.ajax({
+            url: url,
+            type: 'GET',
+        })
+		.done(function (data) {
+            if (data.code == 100) {
+                swal('Không thành công', data.message, 'error').then(function () {
+                    _this.val('');
+                    target.val('');  
+				});
+            }else{
+                target.val(data);
+            }
+            target.trigger('keyup');
+		});
+    });
+
+    $(document).on('change', 'input.__selling_qty_input_item', function(event) {
+        let _this = $(this);
+        let parent = _this.closest('.__item_json');
+        let qty = _this.val();
+        let id = getEmptyDefault(parent.find('select.__select_product_sell').val(), 0, 'float');
+        let url = 'ajax-respone/getPriceProductWarehouse?id=' + id + '&qty=' + qty + '&check_qty=1';
+        if (!empty(id) && !empty(qty)) {
+            $.ajax({
+                url: url,
+                type: 'GET',
+            })
+            .done(function (data) {
+                if (data.code == 100) {
+                    swal('Không thành công', data.message, 'error')
+                }
+            });  
+        }     
+    });
+}
+
+var calcTotalProductSelling = function(json_selling_module)
+{
+    let list_item = json_selling_module.find('.__item_json');
+    let selling_total = 0;
+    list_item.each(function () {
+        let total_item = getEmptyDefault($(this).find('input.__selling_total_item_input').val(), 0, 'float');
+        selling_total += total_item;
+    });
+    let other_price = getEmptyDefault(json_selling_module.find('input.__selling_other_price_input').val(), 0, 'float');
+    let profit = getEmptyDefault(json_selling_module.find('input.__selling_profit_input').val(), 0, 'float');
+    let profit_price = getValueByPercent(selling_total, profit);
+    let total = selling_total + other_price + profit_price;
+    let advance = getEmptyDefault(json_selling_module.find('input.__selling_advance_input').val(), 0, 'float');
+    json_selling_module.find('input.__selling_total_input').val(total);
+    json_selling_module.find('input.__selling_rest_input').val(total - advance);
+}
+
+var countPriceSellingModule = function() {
+    $(document).on('change keyup', 'input.__selling_input_count_item', function(event) {
+        event.preventDefault();
+        let parent = $(this).closest('.__item_json');
+        let qty = getEmptyDefault(parent.find('input.__selling_qty_input_item').val(), 0, 'float'); 
+        let price = getEmptyDefault(parent.find('input.__selling_price_input_item').val(), 0, 'float'); 
+        parent.find('input.__selling_total_item_input').val(price*qty);
+        calcTotalProductSelling(parent.closest('.__cost_c_order_module'))
+    });
+
+    $(document).on('change keyup', 'input.__selling_input_count', function(event) {
+        event.preventDefault();
+        calcTotalProductSelling($(this).closest('.__cost_c_order_module'))
+    });
+}
+
+var selectOrderForSelling = function(){
+    $(document).on('change', 'select.__select_order_for_selling', function(event){
+        event.preventDefault();
+        let _this = $(this);
+        let parent = _this.closest('.__c_order_action');
+        let id = _this.val();
+        let url = 'ajax-respone/getAdvanceOrder?id=' + id;
+        let target = parent.find('input.__selling_advance_input');
+        $.ajax({
+            url: url,
+            type: 'GET',
+        })
+		.done(function (data) {
+            target.val(data);
+            target.trigger('keyup');
+		});
+    })
+}
+
 $(function () {
     // loadingPage();
     submitActionAjaxForm();
@@ -1270,4 +1434,9 @@ $(function () {
     removeNotifyButton();
     moduleAuthentication();
     selectImportProductMethod();
+    selectTypeCOrder();
+    addItemJsonModule();
+    selectProductSellingModule();
+    countPriceSellingModule();
+    selectOrderForSelling();
 });

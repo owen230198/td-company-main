@@ -38,7 +38,10 @@
                 </li>
             </ul>
             <span class="header_menu_user_avatar">
-                <img src="{{ asset('frontend/admin/images/avatar.png') }}" />
+                @php
+                    $avatar_path = !empty($user_login['icon']) ? 'users/'.$user_login['icon'] : 'avatar'
+                @endphp
+                <img src="{{ asset('frontend/admin/images/'.$avatar_path.'.png') }}" />
             </span>
         </div>
     </div>

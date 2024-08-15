@@ -9,6 +9,62 @@ class COrder extends Model
     protected $protectFields = false;
     protected $guarded = [];
 
+    const ORDER = 'order';
+    const SELL = 'sell';
+
+    static function getFeildProductJson($value)
+    {
+        $check_readonly = \GroupUser::isAdmin() || \GroupUser::isSale() ? 0 : 1;
+        $field_obj = [
+            'name' => 'type',
+            'note' => 'Chọn thành phẩm',
+            'attr' => [
+                "required" => 1, 
+                "inject_class" => "__select_product_sell", 
+                "readonly" => $check_readonly],
+            'type' => 'linking',
+            'value' => !empty($value['product']) ? $value['product'] : '',
+            'other_data' => [
+                "config" => [ "search"=> 1],
+                "data" => [
+                    "table" => 'product_warehouses'
+                ]
+            ]
+        ];
+        $field_qty = [
+            'name' => 'qty',
+            'type' => 'text',
+            'note' => 'Số lượng',
+            'attr' => [
+                'type_input' => 'number', 
+                'inject_class' => '__selling_input_count_item __selling_qty_input_item', 
+                'readonly' => $check_readonly
+            ],
+        ];
+        $field_price = [
+            'name' => 'price',
+            'type' => 'text',
+            'note' => 'Đơn giá',
+            'attr' => [
+                'type_input' => 'number', 
+                'inject_class' => '__selling_input_count_item __selling_price_input_item', 
+                'readonly' => $check_readonly
+            ],
+        ];
+        $field_total = [
+            'name' => 'total',
+            'type' => 'text',
+            'note' => 'Thành tiền',
+            'attr' => ['type_input' => 'number', 'readonly' => 1, 'inject_class' => '__selling_total_item_input']
+        ];
+        return [
+            $field_obj,
+            $field_qty,
+            $field_price,
+            $field_total
+        ];   
+    }
+
     static function getRole()
     {
         $role = [
