@@ -37,7 +37,6 @@ class NGroupUser extends Model
         'order_handle' => 'Đơn hàng & sản xuất',
         'supply_buying' => 'Mua vật tư',
         'profit' => '% Hoa hồng',
-        'report' => 'Báo cáo',
         'warehouse' => 'Kho vật tư',
         'product_warehouse' => 'Kho thành phẩm',
         'handle_supply' => 'Lệnh xử lí vật tư',
@@ -73,7 +72,7 @@ class NGroupUser extends Model
         ],
         'supply_extend' => [
             'name' => 'Các loại vật tư khác',
-            'link' => 'view/supply_extends',
+            'link' => 'view/supply_extends?default_data=%7B%22type%22%3A%22warehouse%22%7D',
             'group' => 'quote_price_config'
         ],
         'quote_config' => [
@@ -93,7 +92,7 @@ class NGroupUser extends Model
         ],
         'partner_list' => [
             'name' => 'DS đối tác sx',
-            'link' => 'view/partnersdefault_data=%7B%22internal%22%3A%221%22%7D',
+            'link' => 'view/partners?default_data=%7B%22internal%22%3A%220%22%7D',
             'group' => 'customer'
         ],
         'create_quote' => [
@@ -176,31 +175,6 @@ class NGroupUser extends Model
             'link' => 'myprofit',
             'group' => 'profit'
         ],
-        'rpt_quote_not_accepted' => [
-            'name' => 'Báo giá chưa duyệt',
-            'link' => 'report/status=not_accepted',
-            'group' => 'report'
-        ],
-        'rpt_quote_accepted' => [
-            'name' => 'Báo giá đã duyệt',
-            'link' => 'report/quotes?status=accepted',
-            'group' => 'report'
-        ],
-        'rpt_debt' => [
-            'name' => 'Báo cáo công nợ',
-            'link' => 'report/quotes?status=accepted',
-            'group' => 'report'
-        ],
-        'rpt_categories_revenue' => [
-            'name' => 'Doanh thu theo nhóm SP',
-            'link' => 'report/revenue?type=category',
-            'group' => 'report'
-        ],
-        'rpt_location_revenue' => [
-            'name' => 'Doanh thu theo tỉnh/TP',
-            'link' => 'report/revenue?type=location',
-            'group' => 'report'
-        ],
         'warehouse_management' => [
             'name' => 'Kho vật tư',
             'link' => 'warehouse-management',
@@ -257,8 +231,13 @@ class NGroupUser extends Model
             'group' => 'product_warehouse'
         ],
         'order_ready' => [
-            'name' => 'Quản lí đơn hàng',
-            'link' => 'view/orders?default_data=%7B%22status%22%3A%22last_submited%22%7D',
+            'name' => 'Quản lí bán hàng',
+            'link' => 'view/c_orders',
+            'group' => 'product_warehouse'
+        ],
+        'warehouse_type' => [
+            'name' => 'Quản lý kho lưu',
+            'link' => 'view/supply_extends?default_data=%7B%22type%22%3A%22warehouse_type%22%7D',
             'group' => 'product_warehouse'
         ],
         'user' => [
@@ -290,11 +269,7 @@ class NGroupUser extends Model
             self::MODULE['order_process'],
             self::MODULE['handle_process'],
             self::MODULE['warehouse_management'],
-            self::MODULE['rpt_quote_not_accepted'],
-            self::MODULE['rpt_quote_accepted'],
-            self::MODULE['rpt_debt'],
-            self::MODULE['rpt_categories_revenue'],
-            self::MODULE['rpt_location_revenue'],
+            self::MODULE['order_ready'],
             self::MODULE['account'],
             self::MODULE['change_password'],
         ],
