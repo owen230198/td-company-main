@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\COrder;
 use App\Models\Order;
+use App\Models\ProductHistory;
 use App\Models\ProductWarehouse;
 use App\Models\Represent;
 use Illuminate\Http\Request;
@@ -107,6 +108,50 @@ class AjaxResponeController extends Controller
         $id = @$request->input('id') ?? 0;
         $order = Order::find($id);
         return !empty($order->advance) ? $order->advance : 0;    
+    }
+
+    public function confirmTakeSelling($request)
+    {
+        if (\GroupUser::isAdmin() || \GroupUser::isProductWarehouse()) {
+            $id = @$request->input('id') ?? 0;
+            $c_order = COrder::find($id);
+            if (@$c_order->status != \StatusConst::NOT_ACCEPTED) {
+                return returnMessageAjax(100, 'Dữ liệu không hợp lệ !');
+            }
+            if (empty($request->input('receipt'))) {
+                return returnMessageAjax(100, 'Bạn chưa upload phiếu xuất kho !');
+            }
+            $arr_products = !empty($c_order->object) ? json_decode($c_order->object, true) : [];
+            if (empty($arr_products)) {
+                return returnMessageAjax(100, 'Dữ liệu thành phẩm trống !');
+            }
+            foreach ($arr_products as $key => $object) {
+                $temp_name = 'mặt hàng '.$key + 1;
+                $validate = COrder::validateArrObject($object, $temp_name);
+                if (@$validate['code'] == 100) {
+                    return $validate;
+                }
+                $arr_products[$key]['obj'] = $validate;
+            }
+            $receipt = $request->input('receipt');
+            foreach ($arr_products as $product) {
+                $obj = $product['obj'];
+                $inventory = (int) $obj->qty;
+                $ex_qty = (int) $product['qty'];
+                $new_qty = $inventory - $ex_qty;
+                $product_id = $product['id'];
+                ProductWarehouse::where('id', $product_id)->update(['qty' => $new_qty]);
+                $arr_log = ['c_order' => $id, 'receipt' => $receipt, 'price' => $product['price']];
+                ProductHistory::doLogWarehouse($product_id, 0, $ex_qty, $inventory, 0, $arr_log);  
+            }
+            $c_order->receipt = $receipt;
+            $c_order->status = \StatusConst::ACCEPTED;
+            $c_order->save();
+            return returnMessageAjax(200, 'Đã xác nhận xuất kho thành công!', getBackUrl());
+        }else{
+            return returnMessageAjax(100, 'Bạn không có quyền xác nhận xuất kho !');
+        }
+        
     }
 }
 

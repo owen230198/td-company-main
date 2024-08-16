@@ -65,6 +65,24 @@ class COrder extends Model
         ];   
     }
 
+    static function validateArrObject($object, $temp_name){
+        if (empty($object['id'])) {
+            return returnMessageAjax(100, 'Bạn chưa chọn thành phẩm cho '.$temp_name.' !');
+        }
+        $product = ProductWarehouse::find($object['id']);
+        if (empty($product)) {
+            return returnMessageAjax(100, 'Dữ liệu '.$temp_name.' Không tồn tại hoặc đã bị xóa !');
+        }
+        $name = !empty($product->name) ? $product->name : $temp_name;
+        if (empty($object['qty'])) {
+            return returnMessageAjax(100, 'Bạn chưa nhập số lượng cho '.$name.' !');
+        }
+        if ((int) $object['qty'] > (int) $product->qty) {
+            return returnMessageAjax(100, 'Tồn kho'.$name.' không đủ để xuất cho đơn này !');
+        }
+        return $product;
+    }
+
     static function getFieldOrdered($data)
     {
         $where = ['status' => \StatusConst::IMPORTED];

@@ -693,6 +693,7 @@ var passwordChangeInput = function () {
     $(document).on('click', 'button.__pass_change', function (event) {
         event.preventDefault();
         let pass_input = $(this).parent().find('input[type=password]');
+        let val = pass_input.val();
         let i = $(this).find('i')
         if (pass_input.attr('disabled') == 'disabled') {
             i.toggleClass('fa-times');
@@ -1391,6 +1392,17 @@ var selectOrderForSelling = function(){
     })
 }
 
+var confirmTakeOutSelling = function () {
+    $(document).on('click', 'button.__confirm_ex_selling', function (event) {
+        event.preventDefault();
+        let _this = $(this);
+        id = _this.data('id');
+        let url = 'ajax-respone/confirmTakeSelling?id=' + id;
+        let form = _this.closest('form');
+        ajaxBaseCall({url:url, type: 'POST', data: form.serialize()});
+    });
+}
+
 $(function () {
     // loadingPage();
     submitActionAjaxForm();
@@ -1446,4 +1458,5 @@ $(function () {
     selectProductSellingModule();
     countPriceSellingModule();
     selectOrderForSelling();
+    confirmTakeOutSelling();
 });

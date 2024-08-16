@@ -11,7 +11,7 @@
  Target Server Version : 80030
  File Encoding         : 65001
 
- Date: 15/08/2024 02:11:55
+ Date: 16/08/2024 08:02:17
 */
 
 SET NAMES utf8mb4;
@@ -88,6 +88,6 @@ INSERT INTO `n_tables` VALUES (45, 'warehouse_histories', 'Nguyên vật liệu 
 INSERT INTO `n_tables` VALUES (46, 'represents', 'Người liên hệ', NULL, 10, 'view', NULL, NULL, '1', '1', '1', '1', NULL, NULL, '2023-04-23 11:30:46', '2024-06-17 12:06:36');
 INSERT INTO `n_tables` VALUES (47, 'extend_warehouses', 'Vật tư khác', '{\r\n	\"link\":\"warehouse-management\", \r\n	\"note\":\"Quản lí kho vật tư\"\r\n}', 10, 'view', NULL, '', '1', '1', '1', '1', 1, 1, '2023-07-14 03:17:55', '2024-07-10 00:01:58');
 INSERT INTO `n_tables` VALUES (48, 'supply_extends', 'Các loại vật tư khác', '', 10, 'view', NULL, '', '1', '1', '1', '1', 0, 1, '2023-07-14 03:17:55', '2024-07-11 22:15:43');
-INSERT INTO `n_tables` VALUES (49, 'c_orders', 'Chứng từ bán hàng', '', 10, 'view', '', '[\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"undo\",\"note\":\"Xác nhận nhập kho vật tư\", \r\n		\"class\":\"__confirm_im_supp\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"waiting\"}\r\n		]\r\n	}\r\n]', '1', '1', '1', '1', 0, 1, '2023-07-14 03:17:55', '2024-08-15 01:27:46');
+INSERT INTO `n_tables` VALUES (49, 'c_orders', 'Chứng từ bán hàng', '', 10, 'view', '', '[\r\n	{\r\n		\"type\":2,\r\n		\"detailonly\":1,\r\n		\"icon\":\"hand-o-right\",\r\n		\"note\":\"Xác nhận xuất hàng\", \r\n		\"class\":\"__confirm_ex_selling\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"not_accepted\"}\r\n		]\r\n	},\r\n	{\r\n		\"type\":2,\r\n		\"detailonly\":1,\r\n		\"icon\":\"credit-card-alt\",\r\n		\"note\":\"Xác nhận thanh toán\", \r\n		\"class\":\"__confirm_payment_selling\"\r\n	}\r\n]', '1', '1', '1', '1', 0, 1, '2023-07-14 03:17:55', '2024-08-16 06:33:26');
 
 SET FOREIGN_KEY_CHECKS = 1;
