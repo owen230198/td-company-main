@@ -14,6 +14,10 @@
                     // 'insert' => 1,
                     // 'update' => 1,
                 ],
+                \GroupUser::PRODUCT_WAREHOUSE => [
+                    'view' => 1,
+                    'insert' => 1,
+                ],
                 \GroupUser::PLAN_HANDLE => [
                     'insert' => 1,
                     'update' => 1,
