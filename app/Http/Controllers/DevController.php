@@ -11,6 +11,8 @@ use App\Models\Device;
 use App\Models\Order;
 use App\Models\Paper;
 use App\Models\Product;
+use App\Models\ProductHistory;
+use App\Models\ProductWarehouse;
 use App\Models\Quote;
 use App\Models\Represent;
 use App\Models\SquareWarehouse;
@@ -517,6 +519,13 @@ class DevController extends Controller
         foreach ($data as $square) {
             SquareWarehouse::where('id', $square->id)->update(['supp_price' => 36]);
         }
+    }
+
+    public function productWarehouseLog(){
+        $list = ProductWarehouse::where('warehouse_type', 31)->get();
+            foreach ($list as $item) {
+                ProductHistory::doLogWarehouse($item->id, $item->qty, 0, 0, 0, ['price' => $item->price, 'note' => 'Kiểm kho thành phẩm dưới nhà máy']);
+            }
     }
 }
 

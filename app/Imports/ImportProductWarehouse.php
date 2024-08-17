@@ -1,0 +1,48 @@
+<?php
+
+namespace App\Imports;
+
+use App\Models\ProductHistory;
+use App\Models\ProductWarehouse;
+use Carbon\Carbon;
+use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\SkipsEmptyRows;
+class ImportProductWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows
+{
+    static $warehouse_tye = '';
+    function __construct($warehouse_tye)
+    {
+        self::$warehouse_tye = $warehouse_tye;
+    }
+
+    public function model(array $row)
+    {
+        if ($this->isHeaderRow($row) || $row['qty'] <= 0 || empty ($row['name'])) {
+            return null;
+        }
+        $data = $this->getDataImport(self::$warehouse_tye, $row);
+        return new ProductWarehouse($data);
+    }
+
+    private function getDataImport($type, $row)
+    {
+        $ret =$row;
+        $ret['warehouse_type'] = $type;
+        $ret['category'] = str_contains('Hộp cứng', $row['name']) ? 1 : 2;
+        $ret['unit'] = 'box';
+        $ret['note'] = 'kiểm kho thực tế';
+        $ret['made_by'] = 1;
+        $ret['act'] = 1;
+        $ret['created_at'] = Carbon::now();
+        $ret['updated_at'] = Carbon::now();
+        $ret['created_by'] = 22;
+        return $ret;
+    }
+
+    private function isHeaderRow($row)
+    {
+        
+    }
+}
+

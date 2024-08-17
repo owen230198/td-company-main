@@ -7,6 +7,7 @@ class ProductWarehouse extends Model
 {
     protected $table = 'product_warehouses';
     protected $protectFields = false;
+    protected $guarded = [];
     static function getRole()
     {
         $role = [
