@@ -1265,6 +1265,7 @@ var selectTypeCOrder = function()
             if (data.code == 100) {
                 swal('Không thành công', 'Bạn không có quyền chọn người đại diện, vui lòng liên hệ Admin để được cấp quyền !', 'error').then(function () {
                     _this.val('');
+                    selectConfig(_this.parent());
                     parent.find('select.__select_type_c_order').trigger('change');
 				});
             }else{

@@ -134,7 +134,7 @@ class COrder extends Model
                         'type' => 'group',
                         'query' =>[
                             ['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED],
-                            ['con' => 'or', 'key' => 'confirm_by', 'value' => \StatusConst::NOT_ACCEPTED]
+                            ['con' => 'or', 'key' => 'confirm_warehouse', 'value' => \StatusConst::NOT_ACCEPTED]
                         ],
                     ],
                 ],

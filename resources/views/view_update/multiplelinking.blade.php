@@ -12,6 +12,6 @@
         $json_value = getJsonMultipleValue($data_value, $model, $field_title, $field_value);
     }
 @endphp
-<select class="__multiple_select" multiple="multiple" note="{{ @$note }}" url={{ $url }} name="{{ $name }}[]" value="{{ @$json_value }}">
+<select class="__multiple_select form-control" multiple="multiple" note="{{ @$note }}" url={{ $url }} name="{{ $name }}[]" value="{{ @$json_value }}">
     
 </select>
