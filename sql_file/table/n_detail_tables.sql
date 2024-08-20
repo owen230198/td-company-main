@@ -11,7 +11,7 @@
  Target Server Version : 80030
  File Encoding         : 65001
 
- Date: 20/08/2024 12:06:56
+ Date: 20/08/2024 18:49:36
 */
 
 SET NAMES utf8mb4;
@@ -120,7 +120,7 @@ INSERT INTO `n_detail_tables` VALUES (75, 'password', '{\"required\":1,\"type_in
 INSERT INTO `n_detail_tables` VALUES (76, 'group_user', '', 'Vai trò', 'linking', 'n_users', 6, 1, 1, 1, 1, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_group_users\"\r\n	}\r\n}', NULL, NULL, 4, 1, '2023-05-23 14:41:40', '2024-07-25 20:16:16');
 INSERT INTO `n_detail_tables` VALUES (77, 'code', '{\"disable_field\":1,\"required\":1}', 'Mã đơn', 'text', 'orders', 0, 1, 0, 1, 1, NULL, 1, 0, '', NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-06-19 08:19:22');
 INSERT INTO `n_detail_tables` VALUES (78, 'list_product', '', 'Tên sản phẩm', 'child_linking', 'orders', 6, 1, 0, 1, 1, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"products\",\r\n		\"field_query\":\"order\"\r\n	}\r\n}', NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-06-25 19:40:48');
-INSERT INTO `n_detail_tables` VALUES (79, 'status', '', 'Trạng thái', 'select', 'orders', 10, 1, 0, 1, 1, NULL, 1, 0, '{\"data\":{\r\n		\"options\":{\r\n			\"\":\"Trạng thái đơn\", \r\n			\"not_accepted\":\"Chưa duyệt\", \r\n			\"accepted\":\"Đã duyệt thiết kế\", \r\n			\"to_design\":\"Chờ thiết kế nhận lệnh\",\r\n			\"designing\":\"Đang thiết kế\",\r\n			\"design_submited\":\"Đã xong thiết kế\",\r\n			\"tech_submited\":\"Kế hoạch đang xử lí\",\r\n			\"making_process\":\"Đang gia công\",\r\n			\"submited\":\"hoàn thành gia công\",\r\n			\"finished\":\"Đã thu tiền\"\r\n		}\r\n	}\r\n}', NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-06-19 08:20:16');
+INSERT INTO `n_detail_tables` VALUES (79, 'status', '', 'Trạng thái', 'select', 'orders', 10, 1, 0, 1, 1, NULL, 1, 0, '	{\"data\":{\r\n				\"options\":{\r\n					\"\":\"Trạng thái đơn\", \r\n					\"not_accepted\":\"Chưa duyệt\", \r\n					\"accepted\":\"Đã duyệt thiết kế\", \r\n					\"to_design\":\"Chờ thiết kế nhận lệnh\",\r\n					\"designing\":\"Đang thiết kế\",\r\n					\"design_submited\":\"Đã xong thiết kế\",\r\n					\"tech_submited\":\"Kế hoạch đang xử lí\",\r\n					\"making_process\":\"Đang gia công\",\r\n					\"submited\":\"hoàn thành gia công\",\r\n					\"waiting_warehouse\":\"Chờ nhập kho\",\r\n					\"imported\":\"Đã nhập kho\"\r\n				}\r\n			}\r\n		}', NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-08-20 16:21:51');
 INSERT INTO `n_detail_tables` VALUES (80, 'advance', '{\"type_input\":\"price\"}', 'Tạm ứng', 'text', 'orders', 5, 0, 0, 1, 0, NULL, 1, 0, '', NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-06-25 19:45:15');
 INSERT INTO `n_detail_tables` VALUES (81, 'rest', '{\"type_input\":\"price\"}', 'Tổng tiền', 'text', 'orders', 6, 1, 0, 1, 0, NULL, 1, 0, '', NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-06-19 08:19:51');
 INSERT INTO `n_detail_tables` VALUES (82, 'created_at', '', 'Ngày nhận hàng', 'datetime', 'orders', 8, 1, 0, 1, 1, NULL, 1, 0, '', NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-06-25 19:42:30');

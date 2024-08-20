@@ -10,7 +10,7 @@
         @if (!empty($data_quote['id']))
             <input type="hidden" name="quote" value="{{ $data_quote['id'] }}">
         @endif
-        @if (!empty($data_order['id']))
+        @if (!empty($data_order->id))
             <input type="hidden" name="order[id]" value="{{ $data_order['id'] }}">     
         @endif
         @yield('main')
@@ -28,8 +28,14 @@
                     {{ $stage_button }}
                 </button> 
             @endif
-            @if (!empty($data_order['id']) && empty($is_design))
-                <a href="{{ url('print-data/orders/'.$data_order['id']) }}" target="_blank" class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-2">
+            @if (!empty($data_order->id) && empty($is_design))
+                <button type="button" 
+                    data-toggle="modal" data-target="#actionModal"
+                    data-src="{{ url('order-delivery/'.$data_order->id) }}"
+                    class="load_view_popup main_button color_white bg_green border_green radius_5 font_bold smooth mr-2">
+                    <i class="fa fa-plane mr-2 fs-14" aria-hidden="true"></i>Trả hàng
+                </button> 
+                <a href="{{ url('print-data/orders/'.$data_order->id) }}" target="_blank" class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-2">
                     <i class="fa fa-print mr-2 fs-14" aria-hidden="true"></i>In đơn
                 </a>
             @endif
