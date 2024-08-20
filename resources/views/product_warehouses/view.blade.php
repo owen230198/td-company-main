@@ -3,14 +3,16 @@
     <link rel="stylesheet" href="{{ asset('frontend/admin/css/quote.css') }}">
 @endsection
 @section('content')
-    <div class="dashborad_content config_content base_content">
+    <div class="dashborad_content config_content base_content p-0">
         <form action="{{ url('confirm-product-warehouse/'.$data_expertise->id) }}" method="POST" class="mb-0 baseAjaxForm __import_product_warehouse_form">
-            @foreach ($info_fields as $iField)
+            @foreach ($info_fields as $key => $iField)
                 @php
-                    $iField['attr']['readonly'] = 1;
+                    $is_last = $key == 7;
+                    $iField['attr']['readonly'] = $is_last ? 0 : 1;
                     $iField['name'] = 'warehouse['.$iField['name'].']';
+                    $is_show = !empty($iField['value']) || $is_last;
                 @endphp
-                @if (!empty($iField['value']))
+                @if ($is_show)
                     @include('view_update.view', $iField)
                 @endif
             @endforeach

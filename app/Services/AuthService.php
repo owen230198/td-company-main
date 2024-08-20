@@ -48,7 +48,7 @@ class AuthService extends BaseService
         if ($table_group != '') {
             $group_obj = getModelByTable($table_group);
             if (method_exists($group_obj, 'getMenuModule')) {
-                $arr = $group_obj::getMenuModule($user['group_user']);
+                $arr = $group_obj::getMenuModule($user);
             }
         }
         $arr['user'] = $user->toArray();

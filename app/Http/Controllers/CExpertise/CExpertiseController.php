@@ -51,6 +51,7 @@
                 if (!empty($product_obj->length) && !empty($product_obj->width) && !empty($product_obj->height)) {
                     $size = $product_obj->length.' x '.$product_obj->width.' x ' . $product_obj->height;
                 }
+                $price = (int) $product_obj->total_amount/$product_obj->qty;
                 $info_fields = [
                     [
                         'name' => 'name',
@@ -88,7 +89,7 @@
                     [
                         'name' => 'price',
                         'note' => 'Đơn giá',
-                        'value' => $product_obj->total_amount/$product_obj->qty,
+                        'value' => $price,
                         'attr' => ['required' => 1]
                     ],
                     [
@@ -98,6 +99,19 @@
                         'value' => 1,
                         'other_data' => ['data' => ['table' => 'partners']],
                         'attr' => ['required' => 1]
+                    ],
+                    [
+                        'name' => 'warehouse_type',
+                        'attr' => ['required' => 1],
+                        'note' => 'Chọn kho',
+                        'type' => 'linking',
+                        'other_data' => [
+                            'config' => ['search' => 1],
+                            'data' => [
+                                'table' => 'supply_extends', 
+                                'where' => ['type' => 'warehouse_type']
+                                ]
+                            ],
                     ]
                 ];
                 if ($is_post) {
@@ -117,10 +131,12 @@
                         return returnMessageAjax(100, 'Bạn cần upload phiếu nhập kho !');
                     }
                     $qty = (int) $data_expertise->qty;
+                    $produce_price = (int) $product_obj->total_cost/$product_obj->qty;
                     if ($log['action'] == 'insert') {
                         if (empty($warehouse['unit'])) {
                             return returnMessageAjax(100, 'Bạn cần chọn đơn vị cho sản phẩm '.$warehouse['name'].' !');
                         }
+                        $warehouse['produce_price'] = $produce_price;
                         $warehouse['length'] = $product_obj->length;
                         $warehouse['width'] = $product_obj->width;
                         $warehouse['height'] = $product_obj->height;
@@ -140,6 +156,8 @@
                             return returnMessageAjax(100, 'Sản phẩm nhập thêm không tồn tại hoặc đã bị xóa !');
                         }
                         $obj_qty = (int) $obj->qty;
+                        $obj->price = $price;
+                        $obj->produce_price = $produce_price;
                         $obj->qty = $obj_qty + $qty;
                         $process = $obj->save();
                     }
@@ -147,6 +165,7 @@
                     if (!empty($process)) {
                         $status = \StatusConst::IMPORTED;
                         $product_obj->status = $status;
+                        $product_obj->product_warehouse = $warehouse_id;
                         $product_obj->save();
                         if (checkUpdateOrderStatus($product_obj->order, $status)) {
                             Order::where('id', $product_obj->order)->update(['status' => $status]);

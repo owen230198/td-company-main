@@ -3,15 +3,15 @@
 
  Source Server         : localhost
  Source Server Type    : MySQL
- Source Server Version : 80030 (8.0.30)
+ Source Server Version : 80030
  Source Host           : localhost:3306
  Source Schema         : td_company
 
  Target Server Type    : MySQL
- Target Server Version : 80030 (8.0.30)
+ Target Server Version : 80030
  File Encoding         : 65001
 
- Date: 17/08/2024 12:10:56
+ Date: 20/08/2024 12:06:56
 */
 
 SET NAMES utf8mb4;
@@ -312,7 +312,7 @@ INSERT INTO `n_detail_tables` VALUES (272, 'created_by', '', 'Tạo bởi', 'lin
 INSERT INTO `n_detail_tables` VALUES (281, 'code', '{\"disable_field\":1,\"required\":1}', 'Mã sản phẩm', 'text', 'product_warehouses', 0, 1, 0, 1, 1, NULL, 1, 0, '', NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-06-12 13:21:36');
 INSERT INTO `n_detail_tables` VALUES (282, 'name', '', 'Tên', 'text', 'product_warehouses', 1, 1, 0, 1, 1, NULL, 1, 0, '', NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-06-12 13:21:36');
 INSERT INTO `n_detail_tables` VALUES (283, 'qty', '{\"type_input\":\"number\",\"required\":1}', 'Số lượng', 'text', 'product_warehouses', 5, 1, 1, 1, 0, NULL, 1, 0, '', NULL, NULL, 1, 1, '2023-04-30 11:00:22', '2024-08-14 02:41:17');
-INSERT INTO `n_detail_tables` VALUES (284, 'price', '{\"type_input\":\"price\"}', 'Giá', 'text', 'product_warehouses', 7, 1, 0, 1, 0, NULL, 1, 0, '', NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-08-14 02:41:26');
+INSERT INTO `n_detail_tables` VALUES (284, 'price', '{\"type_input\":\"price\"}', 'Giá bán', 'text', 'product_warehouses', 7, 1, 0, 1, 0, NULL, 1, 0, '', NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-08-20 11:57:25');
 INSERT INTO `n_detail_tables` VALUES (285, 'category', NULL, 'Nhóm sản phẩm', 'linking', 'product_warehouses', 2, 1, NULL, NULL, 0, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"product_categories\"\r\n	}\r\n}', NULL, NULL, 1, 1, '2023-08-22 03:54:31', '2024-08-14 02:40:48');
 INSERT INTO `n_detail_tables` VALUES (286, 'category', NULL, 'Nhóm sản phẩm', 'group_product', 'product_warehouses', 2, 0, 0, 0, 1, NULL, 1, 0, '{\r\n	\"table_target\":\"quotes\"\r\n}', NULL, NULL, 1, 1, '2023-04-30 11:17:52', '2024-08-14 02:40:50');
 INSERT INTO `n_detail_tables` VALUES (287, 'size', NULL, 'Kích thước', 'product_size', 'product_warehouses', 3, 0, 0, 0, 1, NULL, 1, 0, '{\r\n	\"table_target\":\"quotes\"\r\n}', NULL, NULL, 1, 1, '2023-04-30 11:17:52', '2024-08-14 02:40:55');
@@ -435,5 +435,7 @@ INSERT INTO `n_detail_tables` VALUES (407, 'created_by', '', 'Người thêm', '
 INSERT INTO `n_detail_tables` VALUES (408, 'confirm_warehouse', '', 'người xuất kho', 'linking', 'c_orders', 13, 1, 0, 0, 1, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-08-16 04:15:46');
 INSERT INTO `n_detail_tables` VALUES (410, 'created_at', '', 'Ngày tạo', 'datetime', 'c_orders', 14, 1, 0, 0, 1, NULL, 1, 0, '', NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-08-16 03:08:45');
 INSERT INTO `n_detail_tables` VALUES (411, 'warehouse_type', '{\"required\":1, \"readonly\":2}', 'Địa điểm kho', 'linking', 'product_warehouses', 7, 1, 1, 1, 1, 1, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"supply_extends\",\r\n		\"where\":{\"type\":\"warehouse_type\"}\r\n	}\r\n}', NULL, NULL, 1, 1, '2023-05-11 11:18:58', '2024-08-17 12:10:03');
+INSERT INTO `n_detail_tables` VALUES (412, 'produce_price', '{\"type_input\":\"price\"}', 'Giá sản xuất', 'text', 'product_warehouses', 6, 1, 0, 1, 0, NULL, 1, 0, '', '1', NULL, 1, 1, '2023-05-26 03:19:12', '2024-08-20 11:58:11');
+INSERT INTO `n_detail_tables` VALUES (413, 'add_on', '{\"type_input\":\"price\"}', 'Chi phí thêm', 'text', 'product_warehouses', 6, 1, 0, 1, 0, NULL, 1, 0, '', '1', NULL, 1, 1, '2023-05-26 03:19:12', '2024-08-20 11:58:13');
 
 SET FOREIGN_KEY_CHECKS = 1;

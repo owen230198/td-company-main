@@ -184,7 +184,6 @@
                         logActionUserData('insert', 'c_expertises', $insert_id);
                         $product_status = Product::WAITING_WAREHOUSE;
                         $product_obj->status = $product_status;
-                        $product_obj->expertise_id = $insert_id;
                         $product_obj->save();
                         if (checkUpdateOrderStatus($product_obj->order, $product_status)) {
                             Order::where('id', $product_obj->order)->update(['status' => $product_status]);
@@ -270,7 +269,6 @@
                         $arr_update['code'] = 'DH-'.getCodeInsertTable('products');
                         $arr_update['status'] = Order::DESIGN_SUBMITED;
                         $arr_update['order_created'] = 1;
-                        $arr_update['expertise_id'] = $product_obj->expertise_id;
                         $arr_update['rework_from'] = $product_obj->id;
                         foreach (Product::FEILD_FILE as $key => $file) {
                             if ($key != 'handle_shape_file') {

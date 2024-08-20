@@ -101,6 +101,7 @@ class SupplyBuying extends Model
 
     static function getRole()
     {
+        $current_user = \User::getCurrent('id');
         $role = [
             \GroupUser::PLAN_HANDLE => [
                 'insert' => 1,
@@ -109,7 +110,7 @@ class SupplyBuying extends Model
                         'with' => [
                             'type' => 'group',
                             'query' => [
-                                ['key' => 'created_by', 'value' => \User::getCurrent('id')]
+                                ['key' => 'created_by', 'value' => $current_user]
                             ]
                         ]
                     ],
@@ -118,7 +119,7 @@ class SupplyBuying extends Model
                         'with' => [[
                             'type' => 'group',
                             'query' => [
-                                ['key' => 'created_by', 'value' => \User::getCurrent('id')],
+                                ['key' => 'created_by', 'value' => $current_user],
                                 ['key' => 'status', 'value' => \StatusConst::PROCESSING]
                             ]
                         ]]
@@ -143,20 +144,22 @@ class SupplyBuying extends Model
                                 'query' => [
                                     ['con' => 'or', 'key' => 'status', 'value' => \StatusConst::PROCESSING],
                                     ['con' => 'or', 'key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED],
-                                    ['con' => 'or', 'key' => 'status', 'value' => \StatusConst::ACCEPTED]
+                                    ['con' => 'or', 'key' => 'status', 'value' => \StatusConst::ACCEPTED],
+                                    ['con' => 'or', 'key' => 'contact_by', 'value' => $current_user],
+                                    ['con' => 'or', 'key' => 'bought_by', 'value' => $current_user]
                                 ]
                             ],
                 ],
                 'update' => 
-                        [
-                            'with' => [[
-                                'type' => 'group',
-                                'query' => [
-                                    ['key' => 'contact_by', 'value' => \User::getCurrent('id')],
-                                    ['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED]
-                                ]
-                            ]]
+                [
+                    'with' => [[
+                        'type' => 'group',
+                        'query' => [
+                            ['key' => 'contact_by', 'value' => $current_user],
+                            ['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED]
                         ]
+                    ]]
+                ]
             ],
             \GroupUser::WAREHOUSE => [
                 'view' => ['with' => 

@@ -258,123 +258,137 @@ class NGroupUser extends Model
     ];
 
     //role modules
-    static $role_module = [
-        self::SALE => [
-            self::MODULE['customer_list'],
-            self::MODULE['represent_list'],
-            self::MODULE['create_quote'],
-            self::MODULE['quote_management'],
-            self::MODULE['quote_not_accepted'],
-            self::MODULE['quote_accepted'],
-            self::MODULE['order_process'],
-            self::MODULE['handle_process'],
-            self::MODULE['warehouse_management'],
-            self::MODULE['order_ready'],
-            self::MODULE['account'],
-            self::MODULE['change_password'],
-        ],
-        self::TECH_APPLY => [
-            self::MODULE['worker_salary'],
-            self::MODULE['handle_process'],
-            self::MODULE['join_print'],
-            self::MODULE['account'],
-            self::MODULE['change_password'],
-        ],
-        self::DESIGN => [
-            self::MODULE['design_not_accepted'],
-            self::MODULE['designing_command'],
-            self::MODULE['design_submited'],
-            self::MODULE['account'],
-            self::MODULE['change_password'],
-        ],
-        self::TECH_HANDLE => [
-            self::MODULE['worker_salary'],
-            self::MODULE['handle_process'],
-            self::MODULE['join_print'],
-            self::MODULE['account'],
-            self::MODULE['change_password'],
-        ],
-        self::PLAN_HANDLE => [
-            self::MODULE['supply_extend'],
-            self::MODULE['worker_salary'],
-            self::MODULE['handle_process'],
-            self::MODULE['c_supply_all'],
-            self::MODULE['im_paper'],
-            self::MODULE['im_supply'],
-            self::MODULE['supp_bying_req'],
-            self::MODULE['warehouse_management'],
-            self::MODULE['warehouse_provider'],
-            self::MODULE['account'],
-            self::MODULE['change_password'],
-        ],
-        self::WAREHOUSE => [
-            self::MODULE['supp_bying_req'],
-            self::MODULE['warehouse_management'],
-            self::MODULE['ex_supply'],
-            self::MODULE['im_paper'],
-            self::MODULE['im_supply'],
-            self::MODULE['warehouse_provider'],
-            self::MODULE['account'],
-            self::MODULE['change_password'],
-        ],
-        self::APPLY_BUYING => [
-            self::MODULE['supp_bying_req'],
-            self::MODULE['warehouse_management'],
-            self::MODULE['ex_supply'],
-            self::MODULE['im_paper'],
-            self::MODULE['im_supply'],
-            self::MODULE['warehouse_provider'],
-            self::MODULE['account'],
-            self::MODULE['change_password'],
-        ],
-        self::DO_BUYING => [
-            self::MODULE['supp_bying_req'],
-            self::MODULE['warehouse_management'],
-            self::MODULE['ex_supply'],
-            self::MODULE['im_paper'],
-            self::MODULE['im_supply'],
-            self::MODULE['warehouse_provider'],
-            self::MODULE['account'],
-            self::MODULE['change_password'],
-        ],
-        self::KCS => [
-            self::MODULE['handle_process'],
-            self::MODULE['account'],
-            self::MODULE['change_password'],
-        ],
-        self::PRODUCT_WAREHOUSE => [
-            self::MODULE['handle_process'],
-            self::MODULE['product_management'],
-            self::MODULE['expertise'],
-            self::MODULE['product_history'],
-            self::MODULE['account'],
-            self::MODULE['change_password'],
-        ],
-        
-        self::ACCOUNTING => [
-            self::MODULE['worker_salary'],
-            self::MODULE['order_process'],
-            self::MODULE['handle_process'],
-            self::MODULE['warehouse_management'],
-            self::MODULE['supply_history'],
-            self::MODULE['ex_supply'],
-            self::MODULE['im_paper'],
-            self::MODULE['im_supply'],
-            self::MODULE['product_management'],
-            self::MODULE['expertise'],
-            self::MODULE['product_history'],
-            self::MODULE['account'],
-            self::MODULE['change_password'],
-        ],
-        self::PRODUCTION_MANAGER => [
-            self::MODULE['worker_salary'],
-            self::MODULE['handle_process'],
-            self::MODULE['join_print'],
-            self::MODULE['account'],
-            self::MODULE['change_password'],
-        ],
-    ];
-
+    static function getModuleGroupUser($user){
+        $group = $user['group_user'];
+        $current_user = $user['id'];
+        $role_module = [
+            self::SALE => [
+                self::MODULE['customer_list'],
+                self::MODULE['represent_list'],
+                self::MODULE['create_quote'],
+                self::MODULE['quote_management'],
+                self::MODULE['quote_not_accepted'],
+                self::MODULE['quote_accepted'],
+                self::MODULE['order_process'],
+                self::MODULE['handle_process'],
+                self::MODULE['warehouse_management'],
+                self::MODULE['order_ready'],
+                self::MODULE['account'],
+                self::MODULE['change_password'],
+            ],
+            self::TECH_APPLY => [
+                self::MODULE['worker_salary'],
+                self::MODULE['handle_process'],
+                self::MODULE['join_print'],
+                self::MODULE['account'],
+                self::MODULE['change_password'],
+            ],
+            self::DESIGN => [
+                self::MODULE['design_not_accepted'],
+                self::MODULE['designing_command'],
+                self::MODULE['design_submited'],
+                self::MODULE['account'],
+                self::MODULE['change_password'],
+            ],
+            self::TECH_HANDLE => [
+                self::MODULE['worker_salary'],
+                self::MODULE['handle_process'],
+                self::MODULE['join_print'],
+                self::MODULE['account'],
+                self::MODULE['change_password'],
+            ],
+            self::PLAN_HANDLE => [
+                self::MODULE['supply_extend'],
+                self::MODULE['worker_salary'],
+                self::MODULE['handle_process'],
+                self::MODULE['c_supply_all'],
+                self::MODULE['im_paper'],
+                self::MODULE['im_supply'],
+                self::MODULE['supp_bying_req'],
+                self::MODULE['warehouse_management'],
+                self::MODULE['warehouse_provider'],
+                self::MODULE['account'],
+                self::MODULE['change_password'],
+            ],
+            self::WAREHOUSE => [
+                self::MODULE['supp_bying_req'],
+                self::MODULE['warehouse_management'],
+                self::MODULE['ex_supply'],
+                self::MODULE['im_paper'],
+                self::MODULE['im_supply'],
+                self::MODULE['warehouse_provider'],
+                self::MODULE['account'],
+                self::MODULE['change_password'],
+            ],
+            self::APPLY_BUYING => [
+                self::MODULE['supp_bying_req'],
+                self::MODULE['warehouse_management'],
+                self::MODULE['ex_supply'],
+                self::MODULE['im_paper'],
+                self::MODULE['im_supply'],
+                self::MODULE['warehouse_provider'],
+                self::MODULE['account'],
+                self::MODULE['change_password'],
+            ],
+            self::DO_BUYING => [
+                self::MODULE['supp_bying_req'],
+                [
+                    'name' => 'Yêu cầu bạn đã liên hệ mua',
+                    'link' => 'view/supply_buyings?default_data=%7B%22contact_by":"'.$current_user.'%22%7D',
+                    'group' => 'supply_buying'
+                ],
+                [
+                    'name' => 'Yêu cầu bạn đã xử lí mua',
+                    'link' => 'view/supply_buyings?default_data=%7B%22bought_by":"'.$current_user.'%22%7D',
+                    'group' => 'supply_buying'
+                ],
+                self::MODULE['warehouse_management'],
+                self::MODULE['ex_supply'],
+                self::MODULE['im_paper'],
+                self::MODULE['im_supply'],
+                self::MODULE['warehouse_provider'],
+                self::MODULE['account'],
+                self::MODULE['change_password'],
+            ],
+            self::KCS => [
+                self::MODULE['handle_process'],
+                self::MODULE['account'],
+                self::MODULE['change_password'],
+            ],
+            self::PRODUCT_WAREHOUSE => [
+                self::MODULE['handle_process'],
+                self::MODULE['product_management'],
+                self::MODULE['expertise'],
+                self::MODULE['product_history'],
+                self::MODULE['account'],
+                self::MODULE['change_password'],
+            ],
+            
+            self::ACCOUNTING => [
+                self::MODULE['worker_salary'],
+                self::MODULE['order_process'],
+                self::MODULE['handle_process'],
+                self::MODULE['warehouse_management'],
+                self::MODULE['supply_history'],
+                self::MODULE['ex_supply'],
+                self::MODULE['im_paper'],
+                self::MODULE['im_supply'],
+                self::MODULE['product_management'],
+                self::MODULE['expertise'],
+                self::MODULE['product_history'],
+                self::MODULE['account'],
+                self::MODULE['change_password'],
+            ],
+            self::PRODUCTION_MANAGER => [
+                self::MODULE['worker_salary'],
+                self::MODULE['handle_process'],
+                self::MODULE['join_print'],
+                self::MODULE['account'],
+                self::MODULE['change_password'],
+            ],
+        ];
+        return $role_module[$group];
+    }
     //check method
     static function getGroupByModule($modules)
     {
@@ -389,12 +403,12 @@ class NGroupUser extends Model
         return $ret;
     }
 
-    static function getMenuModule($group_user)
+    static function getMenuModule($user)
     {
-        if ($group_user == self::ADMIN) {
+        if ($user['group_user'] == self::ADMIN) {
             return ['group_modules' => self::GROUP_MODULE, 'modules' => self::MODULE];
         }else{
-            $modules = self::$role_module[$group_user];
+            $modules = self::getModuleGroupUser($user);
             return ['group_modules' => self::getGroupByModule($modules), 'modules' => $modules];
         }
         
