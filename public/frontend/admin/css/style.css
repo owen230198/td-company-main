@@ -437,6 +437,10 @@ a.device_supp_item {
     border-top: 1px dashed #333;
 }
 
+.border_bot_eb_dashed {
+    border-bottom: 1px dashed #ebebeb;
+}
+
 .border_bot_main {
     border-bottom: 1px solid #333;
 }

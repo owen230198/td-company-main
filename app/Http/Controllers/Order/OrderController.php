@@ -1,16 +1,16 @@
 <?php
     namespace App\Http\Controllers\Order;
     use App\Http\Controllers\Controller;
-use App\Imports\ImportOrder;
-use App\Models\CSupply;
-    use Illuminate\Http\Request;
+    use App\Imports\ImportOrder;
+    use App\Models\CSupply;
+use App\Models\Customer;
+use Illuminate\Http\Request;
     use App\Models\Order;
     use App\Models\Quote;
-    use App\Models\SupplyWarehouse;
     use App\Models\Product;
-use App\Models\SquareWarehouse;
+use App\Models\Represent;
 use App\Models\WSalary;
-use Maatwebsite\Excel\Facades\Excel;
+    use Maatwebsite\Excel\Facades\Excel;
 
     class OrderController extends Controller
     {
@@ -394,6 +394,81 @@ use Maatwebsite\Excel\Facades\Excel;
                 $data['products'] = Product::where(['act' => 1, 'order' => $id])->get();
                 $data['supply_fields'] = \TDConst::HARD_ELEMENT;
                 return view('orders.profits.view', $data);
+            }
+        }
+
+        public function orderDelivery(Request $request, $id)
+        {
+            $is_post = $request->isMethod('POST');
+            if (\GroupUser::isAdmin() || \GroupUser::isAccounting()) {
+                $order = Order::find($id);
+                if (empty($order)) {
+                    return customReturnMessage(false, $is_post, ['message' => 'Dữ liệu đơn hàng không tồn tại hoặc đã bị xóa !']);
+                }
+                if (!$is_post) {
+                    $data['title'] = 'Xác nhận giao hàng - '.$order->code;
+                    $data['order'] = $order;
+                    $data['products'] = Product::where('order', $id)->get();
+                    $data['nosidebar'] = true;
+                    $data['field_note'] = [
+                        'min_label' => 120,
+                        'name' => 'log[note]',
+                        'note' => 'Ghi chú',
+                        'type' => 'textarea'
+                    ];
+                    $customer = Customer::find($order->customer);
+                    $represent = Represent::find($order->represent);
+                    $data['customer'] = $customer;
+                    $data['represent'] = $represent;
+                    $phone = $represent->phone;
+                    if (!empty($represent->telephone)) {
+                        $phone .= ' - '.$represent->telephone;
+                    } 
+                    $data['customer_infos'] = [
+                        [
+                            'name' => 'Tên Khách hàng/Công ty',
+                            'value' => $customer->name.' ('.$represent->name.')'
+                        ],
+                        [
+                            'name' => 'Địa chỉ',
+                            'value' => $customer->address
+                        ],
+                        [
+                            'name' => 'tel',
+                            'value' => $phone
+                        ],
+                        [
+                            'name' => 'NV bán hàng',
+                            'value' => getFieldDataById('name', 'n_users', $order->created_by)
+                        ]
+                    ];
+                    $data['document_infos'] = [
+                        [
+                            'min_label' => 120,
+                            'name' => 'Số chứng từ',
+                            'value' => 'BH'.formatCodeInsert($order->id)
+                        ],
+                        [
+                            'min_label' => 120,
+                            'name' => 'Ngày hạch toán',
+                            'value' => date('d/m/Y', Time())
+                        ],
+                        [
+                            'min_label' => 120,
+                            'name' => 'Ngày chứng từ',
+                            'value' => date('d/m/Y', Time())
+                        ],
+                        [
+                            'min_label' => 120,
+                            'name' => 'Người lập',
+                            'value' => \User::getCurrent('name')
+                        ]
+                    ];
+                    $data['deliver_total'] = 0;
+                    return view('orders.deliveries.view', $data);
+                }
+            }else{
+                return customReturnMessage(false, $is_post, ['message' => 'Bạn không có quyền xác nhận giao hàng cho đơn hàng này !']);
             }
         }
         public function import($file)

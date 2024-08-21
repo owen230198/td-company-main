@@ -66,6 +66,7 @@ Route::middleware(['check_login'])->group(function () {
 	Route::post('import-excel/{table}', [AdminController::class, 'importExcel']);
 	Route::get('add-linking-data', [AdminController::class, 'addLinkingData']);
 	Route::any('ajax-respone/{method}', [AjaxResponeController::class, 'index']);
+	Route::any('notify-process/{id}', [NotifyController::class, 'notifyProcess']);
 
 	//quotes routes
 	Route::any('create-quote', [QuoteController::class, 'createQuote']);
@@ -98,7 +99,7 @@ Route::middleware(['check_login'])->group(function () {
 	Route::any('join-print-command', [ProductController::class, 'joinPrintCommand']);
 	Route::any('list-print-joined', [ProductController::class, 'listPrintJoined']);
 	Route::get('profit-config-data', [OrderController::class, 'profitConfigData']);
-	Route::any('notify-process/{id}', [NotifyController::class, 'notifyProcess']);
+	Route::any('order-delivery/{id}', [OrderController::class, 'orderDelivery']);
 
 	//supply warehouse
 	Route::get('add-supply-buying', [SupplyBuyingController::class, 'addSupplyBuying']);

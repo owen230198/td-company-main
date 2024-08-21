@@ -353,6 +353,13 @@ class DevController extends Controller
         \DB::table($request->input('table'))->where('id', $request->input('id'))->update([$request->input('key') => $request->input('value')]);
     }
 
+    public function updateDeliverProduct(){
+        $products = Product::where('parent', 0)->get();
+        foreach ($products as $product) {
+            Product::where('id', $product->id)->update(['deliver' => $product->qty]);
+        }
+    }
+
     public function customerToRepresent()
     {
         dd(1);
