@@ -41,7 +41,7 @@
                                     $product_warehouse = getDetailDataObject('product_warehouses', $product->product_warehouse);
                                     $obj_name = "object[$key]";
                                     $price = @$product_warehouse->price ?? $product->total_amount/$product->qty;
-                                    $product_amount = $price*$product->deliver;
+                                    $product_amount = $price*$product->delivery;
                                     $deliver_total += $product_amount;
                                 @endphp
                                 <th scope="row">{{ $key + 1 }}</th>
@@ -51,7 +51,7 @@
                                 </td>
                                 <td>{{ $product->qty }}</td>
                                 <td class="text-center">
-                                    <input type="number" name="{{ $obj_name.'[qty]' }}" class="form-control border-none price_input mx-auto radius_5" placeholder="SL còn phải xuất" value="{{ $product->deliver }}">
+                                    <input type="number" name="{{ $obj_name.'[qty]' }}" class="form-control border-none price_input mx-auto radius_5" placeholder="SL còn phải xuất" value="{{ $product->delivery }}">
                                 </td>
                                 <td class="text-center">
                                     <input type="number" name="{{ $obj_name.'[price]' }}"class="form-control border-none price_input mx-auto radius_5" placeholder="Đơn giá" value="{{ $price }}">
