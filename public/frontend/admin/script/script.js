@@ -104,7 +104,7 @@ var loadDataPopup = function () {
         $(".modalAction").find("iframe").attr("src", src);
     });
     $('.modalAction').on('hidden.bs.modal', function () {
-        $(window.parent.document).find('#actionModal').find('iframe').attr("src", '');
+        $(this).find('iframe').attr("src", '');
     })
 };
 

@@ -1,5 +1,7 @@
 <?php
 namespace App\Services;
+
+use App\Models\COrder;
 use App\Services\BaseService;
 use App\Models\NDetailTable;
 use App\Models\NLogAction;
@@ -249,5 +251,38 @@ class AdminService extends BaseService
             }
         }
         return $remove;
+    }
+
+    public function getDataDebt($where, $type)
+    {
+        $data = $this->getBaseTable('c_orders');
+        $data['field_searchs'] = [];
+        if (in_array($type, [COrder::ADVANCE, COrder::ORDER, COrder::SELL])) {
+            $data['field_searchs'][] = NDetailTable::where(['table_map' => 'c_orders', 'name' => 'group_customer'])->get()->first();
+        }else {
+            $data['field_searchs'][] = NDetailTable::where(['table_map' => 'c_orders', 'name' => 'customer'])->get()->first(); 
+        }
+        $data['field_searchs'][] =  [
+            'name' => 'created_at',
+            'attr' => '{"class_on_search":"change_submit"}',
+            'note' => 'Ngày chứng từ',
+            'type' => 'datetime',
+            'parent' => 0
+        ];
+        $data['field_searchs'][] = [
+            'name' => 'created_by',
+            'attr' => '{"class_on_search":"change_submit"}',
+            'note' => 'Người lập ',
+            'type' => 'linking',
+            'other_data' => '{"config":{"search":1},"data":{"table":"n_users"}}',
+            'parent' => 0
+        ];
+        NDetailTable::handleField($data['field_searchs'], 'search');
+        $obj = COrder::where($where);
+        $data['total_amount'] = $obj->sum('total');
+        $data['total_advance'] = $obj->sum('advance');
+        $data['total_rest'] = $data['total_amount'] - $data['total_advance'];
+        $data['data_tables'] = $obj->get();
+        return $data;
     }
 }

@@ -100,7 +100,7 @@ Route::middleware(['check_login'])->group(function () {
 	Route::any('list-print-joined', [ProductController::class, 'listPrintJoined']);
 	Route::get('profit-config-data', [OrderController::class, 'profitConfigData']);
 	Route::any('order-delivery/{id}', [OrderController::class, 'orderDelivery']);
-	Route::any('order-debt/{id}', [OrderController::class, 'orderDebt']);
+	Route::any('order-debt', [OrderController::class, 'orderDebt']);
 
 	//supply warehouse
 	Route::get('add-supply-buying', [SupplyBuyingController::class, 'addSupplyBuying']);

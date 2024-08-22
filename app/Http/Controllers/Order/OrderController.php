@@ -2,7 +2,8 @@
     namespace App\Http\Controllers\Order;
     use App\Http\Controllers\Controller;
     use App\Imports\ImportOrder;
-    use App\Models\CSupply;
+use App\Models\COrder;
+use App\Models\CSupply;
 use App\Models\Customer;
 use Illuminate\Http\Request;
     use App\Models\Order;
@@ -474,19 +475,22 @@ use App\Models\WSalary;
             }
         }
 
-        public function orderDebt(Request $request, $id)
+        public function orderDebt(Request $request)
         {
-            $order = Order::find($id);
-            if (!empty($order)) {
-                return back()->with('error', 'Dữ liệu đơn hàng không tồn tại hoặc đã bị xóa !', \StatusConst::CLOSE_POPUP);
+            if (!empty($request->input('order'))) {
+                $order = Order::find($request->input('order'));
+                $my_order = @$order->created_by == \User::getCurrent('id');
             }
-            if (\GroupUser::isAdmin() || \GroupUser::isAccounting() || @$order->created_by == \User::getCurrent('id')) {
-                $data['list_data'] = $this->admins->getDataDebt($where);
-                $data['title'] = 'Chi tiết công nợ - '.$order->code;
-                $data['nosidebar'] = 1;
-                return view('orders.debts.view', $data);
+            if (\GroupUser::isAdmin() || \GroupUser::isAccounting() || !empty($my_order)) {
+                $where = $request->except('nosidebar');
+                $data = $this->admins->getDataDebt($where, COrder::ORDER);
+                $data['title'] = 'Chi tiết công nợ';
+                $data['link_search'] = 'order-debt';
+                $data['data_search'] = $where;
+                $data['nosidebar'] = $request->input('nosidebar');
+                return view('debts.view', $data);
             }else{
-                return back()->with('error', 'Bạn không có quyền xem chi tiết công nợ cho đơn này !', \StatusConst::CLOSE_POPUP);
+                return back()->with('error', 'Bạn không có quyền xem chi tiết công nợ !', \StatusConst::CLOSE_POPUP);
             }
         }
 

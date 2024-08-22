@@ -57,6 +57,7 @@
                 $data = $this->getDataView(__FUNCTION__);
                 $data['action_url'] = url('insert/'.$table);
                 $data['check_readonly'] = \GroupUser::isAdmin() || \GroupUser::isSale() ? 0 : 1;
+                $data['nosidebar'] = $request->input('nosidebar');
                 return view('c_orders.view', $data);
             }else{
                 $data = $request->except(['_token']);

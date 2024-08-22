@@ -1,5 +1,5 @@
 <div class="base_table_form_search">
-    <form action="{{ asset('search-table/'.$tableItem['name']) }}" method="GET" class="mb-0" id="form-search">
+    <form action="{{ @$link_search ?? asset('search-table/'.$tableItem['name']) }}" method="GET" class="mb-0" id="form-search">
         @if (!empty($param_default))
             <input type="hidden" name="default_data" value='{{ $param_default }}'>
         @endif
@@ -12,7 +12,7 @@
             @endforeach
         @endif
         @php
-            $data_search = @$data_search?$data_search:array()
+            $data_search = @$data_search ?? [];
         @endphp
         @foreach ($field_searchs as $field)
             @if (@$field['type'] == 'group')
