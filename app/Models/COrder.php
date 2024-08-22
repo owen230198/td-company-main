@@ -9,8 +9,10 @@ class COrder extends Model
     protected $protectFields = false;
     protected $guarded = [];
 
+    const ADVANCE = 'advance';
     const ORDER = 'order';
     const SELL = 'sell';
+    const ORTHER = 'other';
 
     static function getFeildProductJson($value)
     {
@@ -147,6 +149,6 @@ class COrder extends Model
     }
     static function getInsertCode($id)
     {
-        COrder::where(['id' => $id])->update(['code' => 'BH-'.sprintf("%08s", $id)]);
+        COrder::where(['id' => $id])->update(['code' => 'PH-'.sprintf("%08s", $id)]);
     }
 }

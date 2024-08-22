@@ -5,6 +5,7 @@ use App\Models\Order;
 use App\Models\Quote;
 use App\Models\Product;
 use \App\Models\CDesign;
+use App\Models\COrder;
 use \App\Models\CSupply;
 use App\Models\OtherWarehouse;
 use App\Models\PrintWarehouse;
@@ -31,7 +32,8 @@ class OrderService extends BaseService
     {
         $data = $request->except('_token');
         $arr_order = !empty($data['order']) ? $data['order'] : [];
-        if ((int) @$arr_order['advance'] > 0 && empty($arr_order['rest_bill'])) {
+        $c_order = !empty($data['c_order']) ? $data['c_order'] : [];
+        if ((float) @$c_order['advance'] > 0 && empty($c_order['receipt'])) {
             return ['code' => 100, 'message' => 'Bạn cần upload bill tạm ứng cho đơn này !'];
         }
         $type_refresh = !empty($data['type_refresh']) ? $data['type_refresh'] : 2;
@@ -46,7 +48,7 @@ class OrderService extends BaseService
             $arr_order['base_total'] = $arr_total['base_total'];
             $arr_order['total_amount'] = @$arr_order['vat'] == 1 ? 
             calValuePercentPlus($amount, $amount, (float) getDataConfig('QuoteConfig', 'VAT_PERC', 0)) : $amount;
-            $arr_order['rest'] = $arr_order['total_amount'] - (float) $arr_order['advance'];
+            $arr_order['rest'] = $arr_order['total_amount'] - (float) $c_order['advance'];
             $this->configBaseDataAction($arr_order);
             if (!empty($arr_order['id'])) {
                 $dataItem = Order::find($arr_order['id']);
@@ -68,6 +70,19 @@ class OrderService extends BaseService
                 logActionUserData('insert', 'orders', $arr_order['id']);
                 $arr_order['code'] = 'DH-'.sprintf("%08s", $arr_order['id']);
                 Order::where('id', $arr_order['id'])->update($arr_order);
+                if (!empty($c_order['advance'])) {
+                    //Tạo phiếu tạm ứng nếu có tạm ứng
+                    $c_order['name'] = getFieldDataById('name', 'customers', $arr_order['customer']).' tạm ứng '. $arr_order['code'];
+                    $c_order['type'] = COrder::ADVANCE;
+                    $c_order['customer'] = $arr_order['customer'];
+                    $c_order['represent'] = $arr_order['represent'];
+                    $c_order['order'] = $arr_order['id'];
+                    $c_order['status'] = \StatusConst::ACCEPTED;
+                    $c_order['rest'] = 0;
+                    $this->configBaseDataAction($c_order);
+                    $c_id = COrder::insertGetId($c_order);
+                    COrder::getInsertCode($c_id);
+                }
             }
             Product::handleProductAfter($data['product'], $arr_order);
             return returnMessageAjax(200, 'Cập nhật dữ liệu thành công!', getBackUrl());     

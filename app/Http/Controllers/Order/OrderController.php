@@ -41,6 +41,7 @@ use App\Models\WSalary;
                 $data['order_type'] = \OrderConst::INCLUDE;
                 $data['title'] = 'Thêm đơn hàng - Mã báo giá : '.$quote_obj['seri'];
                 $data['link_action'] = url('insert/orders?quote='.$quote_id);
+                $data['action'] = 'insert';
                 return view('orders.view', $data);
             }else{
                 if (!empty($request['order']['status'])) {
@@ -75,6 +76,7 @@ use App\Models\WSalary;
                 $data['link_action'] = url('update/orders/'.$id);
                 $data['id'] = $id;
                 $data['stage'] = $order_obj['status'];
+                $data['action'] = 'update';
                 $blade_to = 'orders.users.'.\GroupUser::getCurrent().'.view';
                 if (view()->exists($blade_to)) {
                     return view($blade_to, $data);
@@ -471,6 +473,23 @@ use App\Models\WSalary;
                 return customReturnMessage(false, $is_post, ['message' => 'Bạn không có quyền xác nhận giao hàng cho đơn hàng này !']);
             }
         }
+
+        public function orderDebt(Request $request, $id)
+        {
+            $order = Order::find($id);
+            if (!empty($order)) {
+                return back()->with('error', 'Dữ liệu đơn hàng không tồn tại hoặc đã bị xóa !', \StatusConst::CLOSE_POPUP);
+            }
+            if (\GroupUser::isAdmin() || \GroupUser::isAccounting() || @$order->created_by == \User::getCurrent('id')) {
+                $data['list_data'] = $this->admins->getDataDebt($where);
+                $data['title'] = 'Chi tiết công nợ - '.$order->code;
+                $data['nosidebar'] = 1;
+                return view('orders.debts.view', $data);
+            }else{
+                return back()->with('error', 'Bạn không có quyền xem chi tiết công nợ cho đơn này !', \StatusConst::CLOSE_POPUP);
+            }
+        }
+
         public function import($file)
         {
             $arr_file = pathinfo($file->getClientOriginalName());

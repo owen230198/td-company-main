@@ -35,43 +35,49 @@
                 'note' => 'Tổng tiền đơn hàng',
                 'attr' => ['readonly' => 1, 'inject_class' => '__order_total_input'],
                 'value' => round(@$data_order['total_amount'] ?? @$order_cost)
-            ],
+            ]
+        ];
+        $c_order_fields = [
             [
-                'name' => 'order[advance]',
+                'name' => 'c_order[advance]',
                 'note' => 'Tạm ứng đơn hàng',
                 'attr' => ['type_input' => 'number', 'inject_class' => '__order_advance_input'],
-                'value' => @$data_order['advance'] ?? 0
+                'value' => 0
             ],
             [
-                'name' => 'order[rest]',
+                'name' => 'c_order[rest]',
                 'note' => 'Chi phí còn lại',
                 'attr' => ['readonly' => 1, 'inject_class' => '__order_rest_input'],
-                'value' => round(@$data_order['rest'] ?? @$order_cost)
+                'value' => @$order_cost
             ],
             [
-                'name' => 'order[rest_bill]',
+                'name' => 'c_order[receipt]',
                 'note' => 'File bill tạm ứng',
                 'type' => 'filev2',
                 'table_map' => 'orders',
-                'field_name' => 'rest_bill',
-                'other_data' => ['role_update' => [\GroupUser::SALE], 'field_name' => 'rest_bill'],
-                'value' => @$data_order['rest_bill']
+                'field_name' => 'receipt',
+                'other_data' => ['role_update' => [\GroupUser::SALE], 'field_name' => 'rest_bill']
             ],
             [
-                'name' => 'order[rest_note]',
+                'name' => 'c_order[note]',
                 'note' => 'Ghi chú công nợ',
-                'type' => 'textarea',
-                'value' => @$data_order['rest_note']
-            ],
-            [
-                'name' => 'order[ship_note]',
-                'note' => 'Ghi chú giao hàng',
-                'type' => 'textarea',
-                'value' => @$data_order['ship_note']
+                'type' => 'textarea'
             ]
-        ]
+        ];
     @endphp
     @foreach ($order_field_update as $order_field)
         @include('view_update.view', $order_field)    
     @endforeach
+    @if (@$action == 'insert')
+        @foreach ($c_order_fields as $c_order_field)
+            @include('view_update.view', $c_order_field)    
+        @endforeach    
+    @endif
+    @include('view_update.view', 
+    [
+        'name' => 'order[ship_note]',
+        'note' => 'Ghi chú giao hàng',
+        'type' => 'textarea',
+        'value' => @$data_order['ship_note']
+    ])
 </div>

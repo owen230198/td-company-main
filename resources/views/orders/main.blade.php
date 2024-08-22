@@ -31,6 +31,12 @@
             @if (!empty($data_order->id) && empty($is_design))
                 <button type="button" 
                     data-toggle="modal" data-target="#actionModal"
+                    data-src="{{ url('order-debt/'.$data_order->id) }}"
+                    class="load_view_popup main_button color_white bg_green border_green radius_5 font_bold smooth mr-2">
+                    <i class="fa fa-usd mr-2 fs-14" aria-hidden="true"></i>Công nợ
+                </button> 
+                <button type="button" 
+                    data-toggle="modal" data-target="#actionModal"
                     data-src="{{ url('order-delivery/'.$data_order->id) }}"
                     class="load_view_popup main_button color_white bg_green border_green radius_5 font_bold smooth mr-2">
                     <i class="fa fa-plane mr-2 fs-14" aria-hidden="true"></i>Trả hàng
