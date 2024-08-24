@@ -18,6 +18,7 @@ use App\Models\Represent;
 use App\Models\SquareWarehouse;
 use App\Models\SupplyBuying;
 use App\Models\WSalary;
+use Illuminate\Support\Facades\File;
 
 class DevController extends Controller
 {
@@ -38,6 +39,7 @@ class DevController extends Controller
      */
     public function index(Request $request, $method)
     {
+        // $this->$method($request);
         if(\User::getCurrent('dev') != 1){
            echo 'method is only developers !';
            return false;
@@ -533,6 +535,29 @@ class DevController extends Controller
             foreach ($list as $item) {
                 ProductHistory::doLogWarehouse($item->id, $item->qty, 0, 0, 0, ['price' => $item->price, 'note' => 'Kiểm kho thành phẩm dưới nhà máy']);
             }
+    }
+
+    public function createDirInStorage()
+    {
+        $directories = [
+            'app/chunks',
+            'app/public/uploads',
+            'framework/cache/data',
+            'framework/cache/laravel-excel',
+            'framework/sessions',
+            'framework/testing',
+            'framework/views'
+        ];
+        
+        foreach ($directories as $directory) {
+            $directory = storage_path($directory);
+            if (!File::exists($directory)) {
+                File::makeDirectory($directory, 0755, true);
+                echo "Directory '$directory' created successfully!<br>";
+            } else {
+                echo "Directory '$directory' already exists.<br>";
+            }
+        }
     }
 }
 
