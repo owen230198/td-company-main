@@ -48,7 +48,7 @@ class OrderService extends BaseService
             $arr_order['base_total'] = $arr_total['base_total'];
             $arr_order['total_amount'] = @$arr_order['vat'] == 1 ? 
             calValuePercentPlus($amount, $amount, (float) getDataConfig('QuoteConfig', 'VAT_PERC', 0)) : $amount;
-            $arr_order['rest'] = $arr_order['total_amount'] - (float) $c_order['advance'];
+            $arr_order['rest'] = $arr_order['total_amount'] - (float) @$c_order['advance'];
             $this->configBaseDataAction($arr_order);
             if (!empty($arr_order['id'])) {
                 $dataItem = Order::find($arr_order['id']);
