@@ -176,7 +176,7 @@ class QuoteController extends Controller
     public function getViewProductQuantity(Request $request)
     {
         $quantity = (int) $request->input('quantity');
-        if (empty($quantity) || $quantity > 10) {
+        if (empty($quantity) || $quantity > 1) {
             return returnMessageAjax(100, 'Số lượng sản phẩm không hợp lệ!');
         }
         $data['products'] = [];
