@@ -499,7 +499,7 @@ class DevController extends Controller
     {
         $data = WSalary::where(['type' => 'mill', 'status' => 'submited'])->get();
         foreach ($data as $salary) {
-            $total = $salary->qty * 25 + 35000;
+            $total = $salary->qty * 25 * $salary->factor + 35000;
             WSalary::where('id', $salary->id)->update(['total' => $total, 'work_price' => 25, 'shape_price' => 35000]);
             dump($total, $salary->total);
         }
