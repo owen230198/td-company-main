@@ -88,7 +88,7 @@ class WSalary extends Model
                 $arr = [
                     ['name' => 'Chất liệu cán', 'value' => getFieldDataById('name', 'materals', @$handle['materal'])],
                     ['name' => 'Số mặt cán', 'value' => @$handle['face']],
-                    ['name' => 'Máy cán', 'value' => getFieldDataById('name', 'devices', @$handle['machine'])]
+                    ['id' => @$handle['machine'], 'name' => 'Máy cán', 'value' => getFieldDataById('name', 'devices', @$handle['machine'])]
                 ];
                 break;
             case \TDConst::METALAI:
@@ -102,7 +102,7 @@ class WSalary extends Model
                 if (!empty($handle['cover_face'])) {
                     $arr[] = ['name' => 'Số mặt cán phủ trên', 'value' => @$handle['cover_face']];
                 }
-                $arr[] = ['name' => 'Máy cán metalai', 'value' => getFieldDataById('name', 'devices', @$handle['machine'])];
+                $arr[] = ['id' => @$handle['machine'], 'name' => 'Máy cán metalai', 'value' => getFieldDataById('name', 'devices', @$handle['machine'])];
                 break;
             case \TDConst::COMPRESS:
                 $arr = [
@@ -110,20 +110,20 @@ class WSalary extends Model
                 ];
                 if ($get_extra) {
                     $arr[] = ['name' => 'Tiền khuôn/bát sản phẩm', 'value' => @$handle['shape_price']];
-                    $arr[] = ['name' => 'Máy ép nhũ', 'value' => getFieldDataById('name', 'devices', @$handle['machine'])];
+                    $arr[] = ['id' => @$handle['machine'], 'name' => 'Máy ép nhũ', 'value' => getFieldDataById('name', 'devices', @$handle['machine'])];
                 }
                 break;
             case \TDConst::UV:
                 $arr = [
                     ['name' => 'Mực in', 'value' => getFieldDataById('name', 'materals', @$handle['materal'])],
                     ['name' => 'Số mặt in', 'value' => @$handle['face']],
-                    ['name' => 'Máy in', 'value' => getFieldDataById('name', 'devices', @$handle['machine'])]
+                    ['id' => @$handle['machine'], 'name' => 'Máy in', 'value' => getFieldDataById('name', 'devices', @$handle['machine'])]
                 ];
                 break;
             case \TDConst::ELEVATE:
                 $arr = [
                     ['name' => 'Thêm Giá Cho Khuôn Phức Tạp', 'value' => @$handle['ext_price']],
-                    ['name' => 'Máy bế', 'value' => getFieldDataById('name', 'devices', @$handle['machine'])]
+                    ['id' => @$handle['machine'], 'name' => 'Máy bế', 'value' => getFieldDataById('name', 'devices', @$handle['machine'])]
                 ];
                 if (!empty($handle['float']['act'])) {
                     $arr[] = ['name' => 'Thúc Nổi', 'value' => 'Có'];
@@ -136,7 +136,7 @@ class WSalary extends Model
             case \TDConst::PEEL:
                 $arr = [
                     ['name' => 'Số bát lề', 'value' => @$handle['nqty']],
-                    ['name' => 'bóc lề', 'value' => getFieldDataById('name', 'devices', @$handle['machine'])]
+                    ['id' => @$handle['machine'], 'name' => 'máy bóc lề', 'value' => getFieldDataById('name', 'devices', @$handle['machine'])]
                 ];
                 break;
             case \TDConst::EXT_PRICE:
@@ -150,10 +150,13 @@ class WSalary extends Model
                 if (!empty($handle['stage'])) {
                     foreach ($handle['stage'] as $key => $stage) {
                         $num = (int) $key + 1;
-                        $arr[] = ['name' => 'Công đoạn bồi hộp '.$num, 
-                        'value' => 'KT: '.$stage['length'] . ' x ' . $stage['width'] 
-                        .', CL: '.getFieldDataById('name', 'materals', @$stage['materal'])
-                        .', TB: '.getFieldDataById('name', 'devices', @$stage['machine'])];   
+                        $arr[] = [
+                            'id' => @$stage['machine'], 
+                            'name' => 'Công đoạn bồi hộp '.$num, 
+                            'value' => 'KT: '.$stage['length'] . ' x ' . $stage['width'] 
+                            .', CL: '.getFieldDataById('name', 'materals', @$stage['materal'])
+                            .', TB: '.getFieldDataById('name', 'devices', @$stage['machine'])
+                        ];   
                     }
                 }
                 if ($get_extra) {
@@ -169,7 +172,7 @@ class WSalary extends Model
                 }
                 break;
             default:
-                $arr =  @$handle['machine'] ? [['name' => 'Thiết bị máy', 'value' => getFieldDataById('name', 'devices', $handle['machine'])]] : [];
+                $arr =  @$handle['machine'] ? [['id' => $handle['machine'], 'name' => 'Thiết bị máy', 'value' => getFieldDataById('name', 'devices', @$handle['machine'])]] : [];
                 break;
         }
         if ($get_extra && !empty($handle['note'])) {
