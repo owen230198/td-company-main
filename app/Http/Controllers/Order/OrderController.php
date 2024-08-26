@@ -345,9 +345,9 @@ use App\Models\WSalary;
                 return back()->with('error', 'Dữ liệu không tồn tại hoặc đã bị xóa !');    
             }
             if ($table == 'products') {
-                if (!empty($data_item->made_by)) {
-                    return back()->with('error', 'Sản phẩm này sản xuất từ đơn vị khác !');
-                }
+                // if (!empty($data_item->made_by) && getFieldDataById('internal', 'partners', $data_item->made_by) == 0) {
+                //     return back()->with('error', 'Sản phẩm này sản xuất từ đơn vị khác !');
+                // }
                 $data['arr_tables'] = !empty($request->input('table')) ? array($request->input('table')) : ['papers', 'supplies', 'fill_finishes'];
                 foreach ($data['arr_tables'] as $table_supp) {
                     $where = ['product' => $id];

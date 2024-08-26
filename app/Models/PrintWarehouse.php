@@ -41,6 +41,7 @@ class PrintWarehouse extends Model
         $data_whouse['qtv'] = @$size['qttv'];
         $data_whouse['status'] = \StatusConst::WAITING;
         $data_whouse['source'] = WarehouseService::OVER;
+        $data_whouse['name'] = self::getName($data_whouse);
         (new \BaseService)->configBaseDataAction($data_whouse);
         PrintWarehouse::insert($data_whouse);
     }
