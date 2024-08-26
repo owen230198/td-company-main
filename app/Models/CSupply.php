@@ -37,6 +37,16 @@
                                 ['key' => 'created_by', 'value' => \User::getCurrent('id')]
                             ]
                         ],
+                    ],
+                    'update' => 
+                    [
+                        'with' => [[
+                            'type' => 'group',
+                            'query' => [
+                                ['key' => 'created_by', 'value' => \User::getCurrent('id')],
+                                ['key' => 'status', 'value' => self::HANDLING]
+                            ]
+                        ]]
                     ]
                 ]
             ];

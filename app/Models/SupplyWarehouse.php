@@ -22,8 +22,8 @@ class SupplyWarehouse extends Model
         $data_whouse['type'] = $supply->type;
         $data_whouse['supp_type'] = @$size['supply_type'];
         $data_whouse['supp_price'] = @$size['supply_price'];
-        $data_whouse['status'] = self::WAITING;
-        $data_whouse['source'] = self::OVER;
+        $data_whouse['status'] = \StatusConst::WAITING;
+        $data_whouse['source'] = WarehouseService::OVER;
         (new \BaseService)->configBaseDataAction($data_whouse);
         SupplyWarehouse::insert($data_whouse);
     }

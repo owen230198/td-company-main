@@ -41,7 +41,7 @@
             if (empty($data['size_type'])) {
                 return returnMessageAjax(100, 'Bạn chưa chọn vật tư trong kho !');
             }
-            if (empty($data['qty']['qty'])) {
+            if ($data['qty']['qty'] == '') {
                 return returnMessageAjax(100, 'Số lượng vật tư cần xuất không hợp lệ !');
             }
             $type = $data['supp_type'];
@@ -51,12 +51,23 @@
                 return returnMessageAjax(100, 'Dữ liệu vật tư không tồn tại!');
             }
             if (SquareWarehouse::countPriceByHank($type)) {
-                if (empty($data['qty']['weight'])) {
-                    return returnMessageAjax(100, 'Số kg cần xuất không hợp lệ!');
+                if (SquareWarehouse::isWeightSupply($type)) {
+                    if (empty($data['qty']['weight'])) {
+                        return returnMessageAjax(100, 'Số kg cần xuất không hợp lệ!');
+                    }
+    
+                    if ($data['qty']['weight'] > $supply->weight) {
+                        return returnMessageAjax(100, 'Số kg cần xuất vượt quá tồn kho !');
+                    }
                 }
-
-                if ($data['qty']['weight'] > $supply->weight) {
-                    return returnMessageAjax(100, 'Số kg cần xuất vượt quá tồn kho !');
+                if ($type == \TDConst::DECAL) {
+                    if (empty($data['qty']['square'])) {
+                        return returnMessageAjax(100, 'Số cm cần xuất không hợp lệ!');
+                    }
+    
+                    if ($data['qty']['square'] > $supply->qty) {
+                        return returnMessageAjax(100, 'Số cm cần xuất vượt quá tồn kho !');
+                    }
                 }
                 $supp_qty = $supply->hank;
             }elseif (SquareWarehouse::countPriceByWeight($type)) {
@@ -67,7 +78,7 @@
             }else{
                 $supp_qty = $supply->qty;
             }
-            if ($data['qty']['qty'] > $supp_qty) {
+            if ($data['qty']['qty'] > (float) $supp_qty) {
                 return returnMessageAjax(100, 'Số lượng vật tư cần xuất vượt quá số lượng tồn kho!');
             }
             $data['qty'] = json_encode($data['qty']);
@@ -109,9 +120,6 @@
                 return view('c_supplies.view', $data);
             }else{
                 $data = $request->except(['_token']);
-                if (empty($data['qty']['qty'])) {
-                    return returnMessageAjax(100, 'Bạn chưa nhập số lượng cần xuất !');
-                }
                 $process_data = $this->processData($data);
                 if (@$process_data['code'] == 100) {
                     return $process_data;

@@ -2,7 +2,6 @@
     namespace App\Services;
 
     use App\Models\SquareWarehouse;
-    use App\Models\SupplyWarehouse;
     use App\Services\BaseService;
     use App\Services\AdminService;
     use App\Models\WarehouseHistory;
