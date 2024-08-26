@@ -1352,10 +1352,17 @@ var calcTotalProductSelling = function(json_selling_module)
     let other_price = getEmptyDefault(json_selling_module.find('input.__selling_other_price_input').val(), 0, 'float');
     let profit = getEmptyDefault(json_selling_module.find('input.__selling_profit_input').val(), 0, 'float');
     let profit_price = getValueByPercent(selling_total, profit);
+    console.log(other_price);
+    
     let total = selling_total + other_price + profit_price;
+    
     let advance = getEmptyDefault(json_selling_module.find('input.__selling_advance_input').val(), 0, 'float');
-    json_selling_module.find('input.__selling_total_input').val(total);
-    json_selling_module.find('input.__selling_rest_input').val(total - advance);
+    let total_input = json_selling_module.find('input.__selling_total_input');
+    total_input.val(price_format(total));
+    total_input.trigger('change');
+    let rest_input = json_selling_module.find('input.__selling_rest_input');
+    rest_input.val(price_format(total - advance));
+    rest_input.trigger('change');
 }
 
 var countPriceSellingModule = function() {
@@ -1364,7 +1371,10 @@ var countPriceSellingModule = function() {
         let parent = $(this).closest('.__item_json');
         let qty = getEmptyDefault(parent.find('input.__selling_qty_input_item').val(), 0, 'float'); 
         let price = getEmptyDefault(parent.find('input.__selling_price_input_item').val(), 0, 'float'); 
-        parent.find('input.__selling_total_item_input').val(price*qty);
+        let total_input = parent.find('input.__selling_total_item_input');
+        let number_format = price_format(qty*price);
+        total_input.val(number_format);
+        total_input.trigger('change');
         calcTotalProductSelling(parent.closest('.__cost_c_order_module'))
     });
 
@@ -1401,6 +1411,19 @@ var confirmTakeOutSelling = function () {
         let url = 'ajax-respone/confirmTakeSelling?id=' + id;
         let form = _this.closest('form');
         ajaxBaseCall({url:url, type: 'POST', data: form.serialize()});
+    });
+}
+
+var priceInputModule = function(){
+    $(document).on('change keyup', '.price_input_module input.price_input_label', function(event){
+        event.preventDefault();
+        let _this = $(this);
+        let parent = _this.closest('.price_input_module');
+        let number = _this.val().replace(/[^0-9.]/g, '');
+        let number_format =  price_format(number);
+        _this.val(number_format);
+        parent.find('input.price_input_value').val(number);
+        
     });
 }
 
@@ -1460,4 +1483,5 @@ $(function () {
     countPriceSellingModule();
     selectOrderForSelling();
     confirmTakeOutSelling();
+    priceInputModule();
 });

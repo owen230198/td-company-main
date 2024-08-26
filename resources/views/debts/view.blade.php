@@ -21,6 +21,9 @@
             </buton>
         </div>
     </div>
+    <div class="table_debt_module">
+        @include('debts.table')
+    </div>
     @include('table/action_popup')
 @endsection
 @section('script')

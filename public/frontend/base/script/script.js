@@ -99,14 +99,20 @@ var getEmptyDefault = function (value, deflt = '', type = 'string') {
 		}
 	} else {
 		if (type == 'float') {
-			return parseFloat(value);
+			let ex_value = value.replace(/[^0-9.]/g, '');
+			return parseFloat(ex_value);
 		} else if (type == 'number') {
-			return parseInt(value);
+			let ex_value = value.replace(/[^0-9.]/g, '');
+			return parseInt(ex_value);
 		} else {
 			return value;
 		}
 
 	}
+}
+
+var price_format = function(value){
+	return new Intl.NumberFormat().format(value);
 }
 
 var getCssAndSetInlineCss = function (element) {

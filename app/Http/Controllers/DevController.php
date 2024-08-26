@@ -6,6 +6,7 @@ use App\Models\NTable;
 use Illuminate\Support\Facades\Schema;
 use App\Constants\VariableConstant;
 use App\Models\CDesign;
+use App\Models\COrder;
 use App\Models\CSupply;
 use App\Models\Device;
 use App\Models\Order;
@@ -545,6 +546,27 @@ class DevController extends Controller
             foreach ($list as $item) {
                 ProductHistory::doLogWarehouse($item->id, $item->qty, 0, 0, 0, ['price' => $item->price, 'note' => 'Kiểm kho thành phẩm dưới nhà máy']);
             }
+    }
+    
+    public function createdCOrderForAdvanceOrder(){
+        $data = Order::where('advance', '>', 0)->get();
+        $insert = [];
+        foreach ($data as $order) {
+            $insert['advance'] = $order['advance'];
+            $insert['receipt'] = $order['rest_bill'];
+            $insert['name'] = getFieldDataById('name', 'customers', $order['customer']).' tạm ứng '. $order['code'];
+            $insert['type'] = COrder::ADVANCE;
+            $insert['customer'] = $order['customer'];
+            $insert['represent'] = $order['represent'];
+            $insert['order'] = $order['id'];
+            $insert['status'] = \StatusConst::ACCEPTED;
+            $insert['rest'] = 0;
+            $insert['act'] = 1;
+            $insert['created_by'] = $order['created_by'];
+            $insert['created_at'] = $order['created_at'];
+            $c_id = COrder::insertGetId($insert);
+            COrder::getInsertCode($c_id);
+        }
     }
 
     public function createDirInStorage()

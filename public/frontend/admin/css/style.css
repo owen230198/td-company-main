@@ -345,6 +345,10 @@ a.device_supp_item {
     z-index: 1;
 }
 
+.min_width_auto{
+    min-width: auto;
+}
+
 .base_table_form_search .form-control,
 .base_table_form_search .select2-container {
     max-width: 350px;

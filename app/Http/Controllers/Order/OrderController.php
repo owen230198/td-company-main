@@ -448,11 +448,6 @@ use App\Models\WSalary;
                     $data['document_infos'] = [
                         [
                             'min_label' => 120,
-                            'name' => 'Số chứng từ',
-                            'value' => 'BH'.formatCodeInsert($order->id)
-                        ],
-                        [
-                            'min_label' => 120,
                             'name' => 'Ngày hạch toán',
                             'value' => date('d/m/Y', Time())
                         ],

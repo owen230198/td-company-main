@@ -38,7 +38,7 @@ class COrder extends Model
             'type' => 'text',
             'note' => 'Số lượng',
             'attr' => [
-                'type_input' => 'number', 
+                'type_input' => 'price', 
                 'inject_class' => '__selling_input_count_item __selling_qty_input_item', 
                 'readonly' => $check_readonly
             ],
@@ -48,7 +48,7 @@ class COrder extends Model
             'type' => 'text',
             'note' => 'Đơn giá',
             'attr' => [
-                'type_input' => 'number', 
+                'type_input' => 'price', 
                 'inject_class' => '__selling_input_count_item __selling_price_input_item', 
                 'readonly' => $check_readonly
             ],
@@ -57,7 +57,7 @@ class COrder extends Model
             'name' => 'total',
             'type' => 'text',
             'note' => 'Thành tiền',
-            'attr' => ['type_input' => 'number', 'readonly' => 1, 'inject_class' => '__selling_total_item_input']
+            'attr' => ['type_input' => 'price', 'readonly' => 1, 'inject_class' => '__selling_total_item_input']
         ];
         return [
             $field_obj,
