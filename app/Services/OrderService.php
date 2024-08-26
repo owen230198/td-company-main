@@ -271,15 +271,15 @@ class OrderService extends BaseService
         $squares = @$c_supply['square'] ?? [];
         $supply->type = $supp_key;
         if (!empty($squares[$supply->type])) {
-            $decal = !empty($squares[$supply->type][0]) ? $squares[$supply->type][0] : [];
-            if (empty($decal['size_type']) || empty($decal['qty'])) {
+            $square = !empty($squares[$supply->type][0]) ? $squares[$supply->type][0] : [];
+            if (empty($square['size_type']) || empty($square['qty'])) {
                 return returnMessageAjax(100, 'Bạn chưa chọn vật tư trong kho !');
             }
             if (!$this->checkLackSupplyHandle($squares[$supply->type])) {
                 return returnMessageAjax(100, 'Vật tư '.getSupplyNameByKey($supply->type).' trong kho không đủ để sản xuất, Vui lòng gửi yêu cầu đến phòng mua !');
             }
-            unset($decal['lack']);
-            $insert = CSupply::insertCommand($decal, $supply);
+            unset($square['lack']);
+            $insert = CSupply::insertCommand($square, $supply);
             if ($insert) {
                 return returnMessageAjax(200, 'Đã gửi yêu cầu xử lí vật tư thành công!', getBackUrl());
             }else{

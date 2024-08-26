@@ -23,3 +23,10 @@
         Số kg : {{ $value_qty['weight'] }}.
     </p> 
 @endif
+
+@if (!empty($value_qty['square']))
+    <p class="d-flex align-items-center color_green mb-1 w_max_content">
+        <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
+        Số cm : {{ $value_qty['square'] }}.
+    </p> 
+@endif

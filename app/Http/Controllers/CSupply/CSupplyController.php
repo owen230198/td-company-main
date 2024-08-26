@@ -78,7 +78,7 @@
             }else{
                 $supp_qty = $supply->qty;
             }
-            if ($data['qty']['qty'] > (float) $supp_qty) {
+            if (@$data['qty']['qty'] > (float) $supp_qty) {
                 return returnMessageAjax(100, 'Số lượng vật tư cần xuất vượt quá số lượng tồn kho!');
             }
             $data['qty'] = json_encode($data['qty']);
@@ -162,7 +162,7 @@
                     return returnMessageAjax(100, 'Vật tư không có trong kho !');    
                 }
                 $qty = json_decode($dataItem->qty, true);
-                if (empty($qty['qty'])) {
+                if (@$qty['qty'] == '') {
                     return returnMessageAjax(100, 'Bạn chưa nhập số lượng cần xuất !');
                 }
                 $type = $dataItem->supp_type;
@@ -177,6 +177,11 @@
                     $update_supply = [
                         'hank' => $supply->hank - $qty['qty'],
                         'weight' => $supply->weight - $qty['weight'],
+                    ];  
+                }elseif ($type == \TDConst::DECAL) {
+                    $update_supply = [
+                        'hank' => $supply->hank - $qty['qty'],
+                        'qty' => $supply->qty - $qty['square'],
                     ];  
                 }else{
                     $update_supply = ['qty' => $supply->qty - $qty['qty']];
