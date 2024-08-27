@@ -3,7 +3,7 @@
     <link rel="stylesheet" href="{{ asset('frontend/admin/css/quote.css') }}">
 @endsection
 @section('content')
-    <div class="dashborad_content config_content base_content p-0">
+    <div class="dashborad_content config_content base_content p-0 pb-5">
         <form action="{{ url('confirm-product-warehouse/'.$data_expertise->id) }}" method="POST" class="mb-0 baseAjaxForm __import_product_warehouse_form">
             @foreach ($info_fields as $key => $iField)
                 @php

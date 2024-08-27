@@ -138,9 +138,9 @@ use App\Models\SupplyBuying;
                     }else{
                         $supp_total = $price * $qty;
                     }
-                    $list_supp[$key]['total'] = $supp_total;
+                    $list_supp[$key]['total'] = (int) $supp_total;
                     $list_supp[$key]['qty'] = $qty;
-                    $buying_total += $supp_total;
+                    $buying_total += (int) $supp_total;
                 }else{
                     return returnMessageAjax(100, 'Bạn cần nhập đầy đủ thông tin đơn giá mua !');
                 }

@@ -136,13 +136,7 @@ class AjaxResponeController extends Controller
             $receipt = $request->input('receipt');
             foreach ($arr_products as $product) {
                 $obj = $product['obj'];
-                $inventory = (int) $obj->qty;
-                $ex_qty = (int) $product['qty'];
-                $new_qty = $inventory - $ex_qty;
-                $product_id = $product['id'];
-                ProductWarehouse::where('id', $product_id)->update(['qty' => $new_qty]);
-                $arr_log = ['c_order' => $id, 'receipt' => $receipt, 'price' => $product['price']];
-                ProductHistory::doLogWarehouse($product_id, 0, $ex_qty, $inventory, 0, $arr_log);  
+                ProductWarehouse::takeOut($obj, $product, $id, $receipt);  
             }
             $c_order->receipt = $receipt;
             $c_order->status = \StatusConst::ACCEPTED;

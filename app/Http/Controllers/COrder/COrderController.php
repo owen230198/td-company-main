@@ -2,7 +2,6 @@
     namespace App\Http\Controllers\COrder;
     use App\Http\Controllers\Controller;
     use App\Models\COrder;
-    use App\Models\ProductWarehouse;
 
     class COrderController extends Controller
     {

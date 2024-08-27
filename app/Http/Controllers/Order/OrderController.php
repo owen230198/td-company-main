@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
     use App\Models\Order;
     use App\Models\Quote;
     use App\Models\Product;
+use App\Models\ProductWarehouse;
 use App\Models\Represent;
 use App\Models\WSalary;
     use Maatwebsite\Excel\Facades\Excel;
@@ -408,6 +409,9 @@ use App\Models\WSalary;
                 if (empty($order)) {
                     return customReturnMessage(false, $is_post, ['message' => 'Dữ liệu đơn hàng không tồn tại hoặc đã bị xóa !']);
                 }
+                $customer = Customer::find($order->customer);
+                $represent = Represent::find($order->represent);
+                $customer_title = $customer->name.' ('.$represent->name.')';
                 if (!$is_post) {
                     $data['title'] = 'Xác nhận giao hàng - '.$order->code;
                     $data['order'] = $order;
@@ -415,22 +419,21 @@ use App\Models\WSalary;
                     $data['nosidebar'] = true;
                     $data['field_note'] = [
                         'min_label' => 120,
-                        'name' => 'log[note]',
+                        'name' => 'note',
                         'note' => 'Ghi chú',
                         'type' => 'textarea'
                     ];
-                    $customer = Customer::find($order->customer);
-                    $represent = Represent::find($order->represent);
                     $data['customer'] = $customer;
                     $data['represent'] = $represent;
                     $phone = $represent->phone;
                     if (!empty($represent->telephone)) {
                         $phone .= ' - '.$represent->telephone;
                     } 
+                    
                     $data['customer_infos'] = [
                         [
                             'name' => 'Tên Khách hàng/Công ty',
-                            'value' => $customer->name.' ('.$represent->name.')'
+                            'value' => $customer_title
                         ],
                         [
                             'name' => 'Địa chỉ',
@@ -464,6 +467,42 @@ use App\Models\WSalary;
                     ];
                     $data['deliver_total'] = 0;
                     return view('orders.deliveries.view', $data);
+                }else{
+                    $data = $request->except('_token');
+                    $objects = !empty($data['object']) ? $data['object'] : [];
+                    foreach ($objects as $key => $object) {
+                        $obj_qty = (int) @$object['qty'];
+                        $obj_name = @$object['name'];
+                        if (empty($object['id']) && @$obj_qty > 0) {
+                            return returnMessageAjax(100, 'Sản phẩm '.$obj_name.' chưa có trong kho !');
+                        }
+                        $product_warehouse = ProductWarehouse::find($object['id']);
+                        if ((int) @$product_warehouse->qty < $obj_qty) {
+                            return returnMessageAjax(100, 'Sản phẩm '.$obj_name.' không đủ để trả hàng !');
+                        }
+                        $objects[$key]['obj'] = $product_warehouse;
+                    }
+                } 
+                $data['name'] = 'Trả hàng cho: '.$customer_title.' - Mã đơn: '.$order->code;
+                $data['type'] = COrder::ORDER;
+                $data['customer'] = $customer;
+                $data['represent'] = $represent;
+                $data['order'] = $id;
+                $data['object'] = json_encode($data['object']);
+                $data['rest'] = 0;
+                $data['status'] = \StatusConst::ACCEPTED;
+                $this->services->configBaseDataAction($data);
+                $c_id = COrder::insertGetId($data);
+                if ($c_id) {
+                    foreach ($objects as $pro_wahouse) {
+                        if (!empty($object['id']) && $pro_wahouse['qty'] > 0) {
+                            $obj = $pro_wahouse['obj'];
+                            ProductWarehouse::takeOut($obj, $pro_wahouse, $c_id, $data['receipt']);  
+                        }
+                    }
+                    return returnMessageAjax(200, 'Đã tạo thành công phiếu xuất sản phẩm !', \StatusConst::CLOSE_POPUP);
+                }else{
+                    return returnMessageAjax(100, 'Đã có lỗi xảy ra, vui lòng thử lại !');
                 }
             }else{
                 return customReturnMessage(false, $is_post, ['message' => 'Bạn không có quyền xác nhận giao hàng cho đơn hàng này !']);

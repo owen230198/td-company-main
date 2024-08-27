@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\ProductWarehouse;
 use App\Http\Controllers\Controller;
-use App\Imports\ImportPrintWarehouse;
 use App\Imports\ImportProductWarehouse;
 use Maatwebsite\Excel\Facades\Excel;
 
