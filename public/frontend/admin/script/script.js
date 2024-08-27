@@ -1242,7 +1242,7 @@ var selectTypeCOrder = function()
         if (!empty(represent)) {
             url += '&represent=' + represent    
         }
-        let target = module.find('.__ajax_field_c_order_field');
+        let target = module.find('.__ajax_view_c_order_by_type');
         ajaxViewTarget(url, target, target);
         rest_input = module.find('input.__selling_advance_input');
         rest_input.val('0');
@@ -1359,7 +1359,6 @@ var calcTotalProductSelling = function(json_selling_module)
     let other_price = getEmptyDefault(json_selling_module.find('input.__selling_other_price_input').val(), 0, 'float');
     let profit = getEmptyDefault(json_selling_module.find('input.__selling_profit_input').val(), 0, 'float');
     let profit_price = getValueByPercent(selling_total, profit);
-    console.log(other_price);
     
     let total = selling_total + other_price + profit_price;
     
@@ -1368,6 +1367,9 @@ var calcTotalProductSelling = function(json_selling_module)
     total_input.val(price_format(total));
     total_input.trigger('change');
     let rest_input = json_selling_module.find('input.__selling_rest_input');
+    console.log(price_format(total - advance));
+    
+    
     rest_input.val(price_format(total - advance));
     rest_input.trigger('change');
 }
@@ -1426,7 +1428,8 @@ var priceInputModule = function(){
         event.preventDefault();
         let _this = $(this);
         let parent = _this.closest('.price_input_module');
-        let number = _this.val().replace(/[^0-9.]/g, '');
+        let number =  getExactNumber(_this.val());
+        console.log(price_format(number));
         let number_format = price_format(number);
         _this.val(number_format);
         parent.find('input.price_input_value').val(number);

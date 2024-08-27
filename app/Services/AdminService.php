@@ -259,6 +259,9 @@ class AdminService extends BaseService
         $data['field_searchs'] = [];
         if (in_array($type, [COrder::ADVANCE, COrder::ORDER, COrder::SELL])) {
             $data['field_searchs'][] = NDetailTable::where(['table_map' => 'c_orders', 'name' => 'group_customer'])->get()->first();
+            if ($type == COrder::ORDER) {
+                $data['field_searchs'][] = NDetailTable::where(['table_map' => 'c_orders', 'name' => 'order'])->get()->first();
+            }
         }else {
             $data['field_searchs'][] = NDetailTable::where(['table_map' => 'c_orders', 'name' => 'customer'])->get()->first(); 
         }
@@ -278,7 +281,7 @@ class AdminService extends BaseService
             'parent' => 0
         ];
         NDetailTable::handleField($data['field_searchs'], 'search');
-        $obj = COrder::where($where);
+        $obj = COrder::where($where)->where('status', \StatusConst::ACCEPTED);
         $data['total_amount'] = $obj->sum('total');
         $data['total_advance'] = $obj->sum('advance');
         $data['total_rest'] = $data['total_amount'] - $data['total_advance'];

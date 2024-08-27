@@ -485,19 +485,20 @@ use App\Models\WSalary;
                 } 
                 $data['name'] = 'Trả hàng cho: '.$customer_title.' - Mã đơn: '.$order->code;
                 $data['type'] = COrder::ORDER;
-                $data['customer'] = $customer;
-                $data['represent'] = $represent;
+                $data['customer'] = $order->customer;
+                $data['represent'] = $order->represent;
                 $data['order'] = $id;
                 $data['object'] = json_encode($data['object']);
                 $data['rest'] = 0;
                 $data['status'] = \StatusConst::ACCEPTED;
                 $this->services->configBaseDataAction($data);
                 $c_id = COrder::insertGetId($data);
+                COrder::getInsertCode($c_id);
                 if ($c_id) {
                     foreach ($objects as $pro_wahouse) {
                         if (!empty($object['id']) && $pro_wahouse['qty'] > 0) {
                             $obj = $pro_wahouse['obj'];
-                            ProductWarehouse::takeOut($obj, $pro_wahouse, $c_id, $data['receipt']);  
+                            ProductWarehouse::takeOut($obj, $pro_wahouse, $c_id, @$data['receipt']);  
                         }
                     }
                     return returnMessageAjax(200, 'Đã tạo thành công phiếu xuất sản phẩm !', \StatusConst::CLOSE_POPUP);

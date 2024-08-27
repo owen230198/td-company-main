@@ -25,26 +25,38 @@
             if (empty($data['type'])) {
                 return returnMessageAjax(100, 'Bạn chưa chọn loại hàng (hàng đặt hoặc hàng bán sẵn) !');
             }
+            $type = $data['type'];
             if (empty($data['customer'])) {
                 return returnMessageAjax(100, 'Bạn chưa chọn khách hàng - công ty !');
             }
             if (empty($data['represent'])) {
                 return returnMessageAjax(100, 'Bạn chưa chọn người đại diện công ty !');
             }
-            if ($data['type'] == COrder::ORDER && empty($data['order'])) {
+            if ($type == COrder::ORDER && empty($data['order'])) {
                 return returnMessageAjax(100, 'Bạn chưa chọn đơn khách hàng đã đặt sản xuất !');
             }
-            if (empty($data['object'])) {
-                return returnMessageAjax(100, 'Bạn cần thêm thành phẩm cho chứng từ !');
-            }
-            foreach ($data['object'] as $key => $object) {
-                $temp_name = 'mặt hàng '.$key + 1;
-                $validate = COrder::validateArrObject($object, $temp_name);
-                if (@$validate['code'] == 100) {
-                    return $validate;
+            if (in_array($type, [COrder::ORDER, COrder::SELL])) {
+                if (empty($data['object'])) {
+                    return returnMessageAjax(100, 'Bạn cần thêm thành phẩm cho chứng từ !');
                 }
+                foreach ($data['object'] as $key => $object) {
+                    $temp_name = 'mặt hàng '.$key + 1;
+                    $validate = COrder::validateArrObject($object, $temp_name);
+                    if (@$validate['code'] == 100) {
+                        return $validate;
+                    }
+                }
+                $data['object'] = json_encode($data['object']);
             }
-            $data['object'] = json_encode($data['object']);
+            if ($type == COrder::ADVANCE && empty($data['advance'])) {
+                return returnMessageAjax(100, 'Bạn chưa nhập tiền tạm ứng cho phiếu này !');
+            }
+
+            if ($type == COrder::OTHER && empty($data['other_price'])) {
+                return returnMessageAjax(100, 'Bạn chưa nhập chi phí khác cho phiếu này !');
+            }
+
+            
             $data['name'] = getFieldDataById('name', 'customers', $data['customer']);
             $data['order'] = !empty($data['order']) ? $data['order'] : 0;
         }
@@ -64,7 +76,7 @@
                 if (@$process_data['code'] == 100) {
                     return $process_data;
                 }
-                $data['status'] = \StatusConst::NOT_ACCEPTED;
+                $data['status'] = @$data['type'] == COrder::SELL ? \StatusConst::NOT_ACCEPTED : \StatusConst::ACCEPTED;
                 $proceess= $this->admins->doInsertTable($table, $data);
                 if ($proceess['code'] == 200) {
                     logActionUserData(__FUNCTION__, $table, $proceess['id'], $data);

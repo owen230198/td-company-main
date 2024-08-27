@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\COrder;
+use App\Models\NDetailTable;
 use App\Models\Order;
 use App\Models\ProductHistory;
 use App\Models\ProductWarehouse;
@@ -60,12 +61,15 @@ class AjaxResponeController extends Controller
 
     public function ajaxFieldCOrderByType($request){
         $type = $request->input('type');
-        if ($type != COrder::ORDER){
+        if (empty($type)) {
             return '';
         }
-        $data = $request->all();
-        $field = COrder::getFieldOrdered($data);
-        return view('view_update.view', $field);
+        $where = $request->all();
+        $data['fields'] = COrder::getFieldAjaxByType($type, $where);
+        if (empty($data['fields'])) {
+            return '';
+        }
+        return view('c_orders.view_types.ajax', $data);
     }
 
     public function checkRepreSentPermission($request)

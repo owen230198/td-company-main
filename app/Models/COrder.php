@@ -12,7 +12,7 @@ class COrder extends Model
     const ADVANCE = 'advance';
     const ORDER = 'order';
     const SELL = 'sell';
-    const ORTHER = 'other';
+    const OTHER = 'other';
 
     static function getFeildProductJson($value)
     {
@@ -99,17 +99,52 @@ class COrder extends Model
         return [
             'name' => 'order',
             'note' => 'Chọn đơn khách đã đặt sản xuất',
-            'attr' => ['inject_class' => '__select_order_for_selling'],
+            'attr' => json_encode(['inject_class' => '__select_order_for_selling']),
             'type' => 'linking',
-            'other_data' => [
+            'other_data' => json_encode([
                 'config' => ['search' => 1], 
                 'data' => [
                     'table' => 'orders',
                     'where' => $where,
                     'field_title' => 'code'
                 ]
-            ],
+            ]),
         ];
+    }
+
+    static function getFieldAjaxByType($type, $where)
+    {
+        $order_field = self::getFieldOrdered($where);
+        $list =  NDetailTable::where(['act' => 1, 'table_map'=> 'c_orders', 'get_other' => 1])->orderBy('ord', 'asc')->get();
+        $fields = $list->pluck(null, 'name')->toArray();
+        switch ($type) {
+            case self::ORDER:
+                return $list->prepend($order_field)->toArray();
+                break;
+            case self::SELL:
+                return $fields;
+                break;
+            case self::ADVANCE:
+                return [
+                    $order_field,
+                    $fields['advance'],
+                    $fields['rest'],
+                    $fields['note'],
+                ];
+                break;
+            case self::OTHER:
+                return [
+                    $order_field,
+                    $fields['other_price'],
+                    $fields['total'],
+                    $fields['rest'],
+                    $fields['note'],
+                ];
+                break;
+            default:
+                return [];
+                break;
+        }
     }
 
     static function getRole()

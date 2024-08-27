@@ -43,6 +43,7 @@ class ProductWarehouse extends Model
         $ex_qty = (int) $warehouse['qty'];
         $product_id = $warehouse['id'];
         $obj->qty -= $ex_qty;
+        $obj->save();
         $arr_log = ['price' => $warehouse['price']];
         if (!empty($c_order_id)) {
             $arr_log['c_order'] = $c_order_id;

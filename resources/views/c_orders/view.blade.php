@@ -15,24 +15,10 @@
                         @include('view_update.view', $arr)
                     @endforeach
                 </div>
-                <div class="__ajax_field_c_order_field">
-                    @if (!empty($dataItem->order))
-                        @php
-                            $field_ordered = \App\Models\COrder::getFieldOrdered($dataItem);
-                            $field_ordered['value'] = $dataItem->order; 
-                        @endphp
-                        @include('view_update.view', $field_ordered)   
-                    @endif    
-                </div>
-                <div class="__cost_c_order_module">
-                    @foreach ($field_costs as $fieldnd)
-                        @php
-                            $name = $fieldnd['name'];
-                            $arr = processArrField($fieldnd);
-                            $arr['value'] = @$dataItem[$name];
-                        @endphp
-                        @include('view_update.view', $arr)
-                    @endforeach  
+                <div class="__ajax_view_c_order_by_type">
+                    @if (!empty($dataItem->type))
+                        @include('corders.view_update.'.$dataItem->type)
+                    @endif
                 </div>
             </div>
             @if (!empty($dataItem))

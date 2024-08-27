@@ -99,10 +99,10 @@ var getEmptyDefault = function (value, deflt = '', type = 'string') {
 		}
 	} else {
 		if (type == 'float') {
-			let ex_value = value.replace(/[^0-9.]/g, '');
+			let ex_value = getExactNumber(value);
 			return parseFloat(ex_value);
 		} else if (type == 'number') {
-			let ex_value = value.replace(/[^0-9.]/g, '');
+			let ex_value = getExactNumber(value);
 			return parseInt(ex_value);
 		} else {
 			return value;
@@ -112,7 +112,7 @@ var getEmptyDefault = function (value, deflt = '', type = 'string') {
 }
 
 var price_format = function(number){
-	if (isNaN(number) || number === '') return '';
+	// if (isNaN(number) || number === '') return '';
     let parts = number.toString().split('.');
     let integerPart = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     let formattedNumber = integerPart;
@@ -121,6 +121,15 @@ var price_format = function(number){
     }
     return formattedNumber;
 
+}
+
+var getExactNumber = function(number)
+{
+	let ret = number.replace(/[^0-9.-]/g, '');
+	if (ret.indexOf('-') > 0) {
+        ret = ret.replace(/-/g, '');
+    }
+	return ret;
 }
 
 var getCssAndSetInlineCss = function (element) {
