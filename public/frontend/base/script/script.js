@@ -111,8 +111,16 @@ var getEmptyDefault = function (value, deflt = '', type = 'string') {
 	}
 }
 
-var price_format = function(value){
-	return new Intl.NumberFormat().format(value);
+var price_format = function(number){
+	if (isNaN(number) || number === '') return '';
+    let parts = number.toString().split('.');
+    let integerPart = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    let formattedNumber = integerPart;
+    if (parts[1] !== undefined) {
+        formattedNumber += '.' + parts[1];
+    }
+    return formattedNumber;
+
 }
 
 var getCssAndSetInlineCss = function (element) {

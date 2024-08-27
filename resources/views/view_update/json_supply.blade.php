@@ -26,21 +26,21 @@
                     'name' => 'ship_price',
                     'type' => 'text',
                     'note' => 'Chi phí vận chuyển',
-                    'attr' => ['type_input' => 'number', 'readonly' => $readonly_price , 'inject_class' => '__buying_ship_price __buying_change_total_input'],
+                    'attr' => ['type_input' => 'price', 'readonly' => $readonly_price , 'inject_class' => '__buying_ship_price __buying_change_total_input'],
                     'value' => @$dataItem['ship_price'] ?? 0
                 ],
                 [
                     'name' => 'other_price',
                     'type' => 'text',
                     'note' => 'Chi phí khác',
-                    'attr' => ['type_input' => 'number', 'readonly' => $readonly_price , 'inject_class' => '__buying_other_price __buying_change_total_input'],
+                    'attr' => ['type_input' => 'price', 'readonly' => $readonly_price , 'inject_class' => '__buying_other_price __buying_change_total_input'],
                     'value' => @$dataItem['other_price'] ?? 0
                 ],
                 [
                     'name' => 'total',
                     'type' => 'text',
                     'note' => 'Tổng tiền mua hàng',
-                    'attr' => ['type_input' => 'number', 'readonly' => 1, 'inject_class' => '__buying_total_amount_input'],
+                    'attr' => ['type_input' => 'price', 'readonly' => 1, 'inject_class' => '__buying_total_amount_input'],
                     'value' => @$dataItem['total'] ?? 0
                 ],
                 [

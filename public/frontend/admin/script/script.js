@@ -857,7 +857,10 @@ var calcTotalSupplyBuying = function(json_supp_module)
     });
     let ship_price = getEmptyDefault(json_supp_module.find('input.__buying_ship_price').val(), 0, 'float');
     let other_price = getEmptyDefault(json_supp_module.find('input.__buying_other_price').val(), 0, 'float');
-    json_supp_module.find('input.__buying_total_amount_input').val(buying_total + ship_price + other_price);
+    let total_input = json_supp_module.find('input.__buying_total_amount_input');
+    let total_amount = buying_total + ship_price + other_price;
+    total_input.val(price_format(total_amount));
+    total_input.trigger('change');
 }
 
 var totalSupplyBuyingInput = function()
@@ -883,10 +886,11 @@ var changeInputPriceBuying = function () {
             let width = getEmptyDefault(item.find('input.__paper_width_input').val(), 1, 'float')/100;
             let qtv = getEmptyDefault(item.find('input.__paper_qtv_input').val(), 1, 'float')/1000;
             let total = parseInt(length * width * qtv * price * qty);
-            total_input.val(total);
+            total_input.val(price_format(total));
         }else{
-            total_input.val(parseInt(price * qty));
+            total_input.val(price_format(parseInt(price * qty)));
         }
+        total_input.trigger('change');
         let parent = _this.closest('.json_supply_buy');
         calcTotalSupplyBuying(parent);
     });
@@ -1324,7 +1328,7 @@ var selectProductSellingModule = function(){
     $(document).on('change', 'input.__selling_qty_input_item', function(event) {
         let _this = $(this);
         let parent = _this.closest('.__item_json');
-        let qty = _this.val();
+        let qty = getEmptyDefault(_this.val(), 0, 'float');
         let id = getEmptyDefault(parent.find('select.__select_product_sell').val(), 0, 'float');
         let url = 'ajax-respone/getPriceProductWarehouse?id=' + id + '&qty=' + qty + '&check_qty=1';
         if (!empty(id) && !empty(qty)) {
@@ -1334,7 +1338,10 @@ var selectProductSellingModule = function(){
             })
             .done(function (data) {
                 if (data.code == 100) {
-                    swal('Không thành công', data.message, 'error')
+                    swal('Không thành công', data.message, 'error').then(function(){
+                        _this.val(0);
+                        _this.trigger('change');
+                    });
                 }
             });  
         }     
@@ -1420,7 +1427,7 @@ var priceInputModule = function(){
         let _this = $(this);
         let parent = _this.closest('.price_input_module');
         let number = _this.val().replace(/[^0-9.]/g, '');
-        let number_format =  price_format(number);
+        let number_format = price_format(number);
         _this.val(number_format);
         parent.find('input.price_input_value').val(number);
         

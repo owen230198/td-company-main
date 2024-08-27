@@ -540,5 +540,14 @@ if (!function_exists('convertNumerToText')) {
             return str_ireplace($type, '', $arr[0]);   
         }
     }
+    
+    if (!function_exists('price_format')) {
+        function price_format($number) {
+            if (!is_numeric($number)) {
+                return '';
+            }
+            return number_format($number, strlen(substr(strrchr($number, "."), 1)), '.', ',');
+        }
+    }
 }
 

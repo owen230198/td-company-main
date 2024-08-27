@@ -54,7 +54,7 @@ class SupplyBuying extends Model
             'type' => 'text',
             'note' => 'Đơn giá vật tư',
             'attr' => [
-                'type_input' => 'number', 
+                'type_input' => 'price', 
                 'inject_class' => '__buying_price_input __buying_change_input', 
                 'readonly' => self::checkReadOnlyInputPrice($status)
             ],
@@ -63,7 +63,7 @@ class SupplyBuying extends Model
             'name' => 'total',
             'type' => 'text',
             'note' => 'Thành tiền',
-            'attr' => ['type_input' => 'number', 'readonly' => 1, 'inject_class' => '__buying_total_input']
+            'attr' => ['type_input' => 'price', 'readonly' => 1, 'inject_class' => '__buying_total_input']
         ];
         if (\GroupUser::isAdmin()) {
             return [
