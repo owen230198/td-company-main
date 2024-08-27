@@ -547,6 +547,13 @@ class DevController extends Controller
                 ProductHistory::doLogWarehouse($item->id, $item->qty, 0, 0, 0, ['price' => $item->price, 'note' => 'Kiểm kho thành phẩm dưới nhà máy']);
             }
     }
+
+    public function productDeliveryUpdate(){
+        $list = Product::all();
+            foreach ($list as $item) {
+                Product::where('id', $item->id)->update(['delivery' => $item->qty]);
+            }
+    }
     
     public function createdCOrderForAdvanceOrder(){
         $data = Order::where('advance', '>', 0)->get();

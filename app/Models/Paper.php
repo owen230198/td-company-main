@@ -62,6 +62,7 @@ class Paper extends Model
                 $process_product['id'] = !empty($paper['id']) ? $paper['id'] : 0;
                 $process_product['name'] = $paper['name'];
                 $process_product['qty'] = $paper['qty'];
+                $process_product['delivery'] = $paper['qty'];
                 $process_product['made_by'] = @$paper['made_by'];
                 $process_product['total_cost'] = @$paper['total_cost'];
                 $process_product['total_amount'] = @$paper['total_amount'];
