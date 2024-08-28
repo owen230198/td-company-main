@@ -125,7 +125,7 @@ var price_format = function(number){
 
 var getExactNumber = function(number)
 {
-	let ret = number.replace(/[^0-9.-]/g, '');
+	let ret = number.toString().replace(/[^0-9.-]/g, '');
 	if (ret.indexOf('-') > 0) {
         ret = ret.replace(/-/g, '');
     }
