@@ -39,7 +39,7 @@
                     <td>
                         <div class="d-flex align-items-center list_table_func justify-content-center">
                             <button type="button" title="Sửa" 
-                            data-src="{{ url('update/c_orders/'.$data->id.''.getParamUrlByArray($data_search).'&nosidebar=1') }}" 
+                            data-src="{{ url('update/c_orders/'.$data->id.'?nosidebar=1') }}" 
                             class="load_view_popup btn btn-primary mr-2 mb-2 table-btn" data-toggle="modal" data-target="#actionModal">
                                 <i class="fa fa-pencil-square-o fs-14" aria-hidden="true"></i>
                             </button>
