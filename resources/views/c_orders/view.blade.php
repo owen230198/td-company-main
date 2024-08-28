@@ -1,23 +1,28 @@
 @extends('index')
 @section('content')
-    <div class="dashborad_content position-relative">
+    <div class="dashborad_content position-relative pb-5">
         <form action="{{ $action_url }}" method="POST" class="config_content baseAjaxForm" enctype="multipart/form-data">
             @csrf
+            <input type="hidden" name="nosidebar" value="{{ !empty($nosidebar) }}">
             <div class="__c_order_action">
                 <div class="__type_c_order_select">
                     @foreach ($field_customers as $fieldst)
                         @php
                             $name = $fieldst['name'];
                             $arr = processArrField($fieldst);
-                            $arr['value'] = @$dataItem[$name];
-                            $arr['attr']['readonly'] = $check_readonly;
+                            $value = @$dataItem[$name];
+                            $arr['value'] = $value;
+                            $arr['attr']['readonly'] = $name == 'type' && !empty($value)  ? 1 : $check_readonly;
                         @endphp
                         @include('view_update.view', $arr)
                     @endforeach
                 </div>
                 <div class="__ajax_view_c_order_by_type">
                     @if (!empty($dataItem->type))
-                        @include('corders.view_update.'.$dataItem->type)
+                        @php
+                            $fiels = \App\Models\COrder::getFieldAjaxByType($dataItem->type, $dataItem)
+                        @endphp
+                        @include('c_orders.view_types.ajax',['fields' => $fiels])
                     @endif
                 </div>
             </div>

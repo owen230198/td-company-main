@@ -69,9 +69,10 @@
                 $data['action_url'] = url('insert/'.$table);
                 $data['check_readonly'] = \GroupUser::isAdmin() || \GroupUser::isSale() ? 0 : 1;
                 $data['nosidebar'] = $request->input('nosidebar');
+                $data['dataItem'] = $request->except(['nosidebar']);
                 return view('c_orders.view', $data);
             }else{
-                $data = $request->except(['_token']);
+                $data = $request->except(['_token', 'nosidebar']);
                 $process_data = $this->processData($data);
                 if (@$process_data['code'] == 100) {
                     return $process_data;
@@ -83,7 +84,7 @@
                 }else {
                     return returnMessageAjax(100, $proceess['message']);
                 }
-                return returnMessageAjax(200, 'Thêm chứng từ bán hàng thành công !', getBackUrl());
+                return returnMessageAjax(200, 'Thêm chứng từ bán hàng thành công !', !empty($request->input('nosidebar')) ? \StatusConst::CLOSE_POPUP : getBackUrl());
             }
         }
         public function update($request, $id)
@@ -95,9 +96,10 @@
                 $data['dataItem'] = $dataItem;
                 $data['action_url'] = url('update/'.$table.'/'.$id);
                 $data['check_readonly'] = \GroupUser::isAdmin() || \GroupUser::isSale() ? 0 : 1;
+                $data['nosidebar'] = $request->input('nosidebar');
                 return view('c_orders.view', $data);
             }else{
-                $data = $request->except(['_token']);
+                $data = $request->except(['_token', 'nosidebar']);
                 $process_data = $this->processData($data);
                 if (@$process_data['code'] == 100) {
                     return $process_data;
@@ -108,7 +110,7 @@
                 }else {
                     return returnMessageAjax(100, $process['message']);
                 }
-                return returnMessageAjax(200, 'Cập nhật dữ liệu phiếu xuất vật tư thành công !', getBackUrl());   
+                return returnMessageAjax(200, 'Cập nhật dữ liệu phiếu xuất vật tư thành công !', !empty($request->input('nosidebar')) ? \StatusConst::CLOSE_POPUP : getBackUrl());   
             }
         }
     }

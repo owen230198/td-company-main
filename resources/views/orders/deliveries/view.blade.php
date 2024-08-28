@@ -31,7 +31,7 @@
                     'type' => 'filev2',
                     'name' => 'receipt',
                     'min_label' => 120,
-                    'other_data' => ['role_update' => [\GroupUser::PRODUCT_WAREHOUSE]] 
+                    'other_data' => ['role_update' => [\GroupUser::PRODUCT_WAREHOUSE, \GroupUser::ACCOUNTING]] 
                 ]
             @endphp
             @include('view_update.view', $bill_field)

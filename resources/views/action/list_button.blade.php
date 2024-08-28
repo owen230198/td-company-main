@@ -8,7 +8,10 @@
     @if (!empty($ext_action) && !empty($dataItem))
         @foreach ($ext_action as $button)
             @if (!empty($button['condition']))
-                @if (getBoolByCondArr($button['condition'], $dataItem->toArray()))
+                @php
+                    $check_arr = is_array($dataItem) ? $dataItem : $dataItem->toArray();
+                @endphp
+                @if (getBoolByCondArr($button['condition'], $check_arr))
                     @include('action.ext_func_btn')	
                 @endif
             @else

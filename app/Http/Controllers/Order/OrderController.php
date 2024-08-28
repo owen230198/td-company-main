@@ -489,7 +489,6 @@ use App\Models\WSalary;
                 $data['represent'] = $order->represent;
                 $data['order'] = $id;
                 $data['object'] = json_encode($data['object']);
-                $data['rest'] = 0;
                 $data['status'] = \StatusConst::ACCEPTED;
                 $this->services->configBaseDataAction($data);
                 $c_id = COrder::insertGetId($data);

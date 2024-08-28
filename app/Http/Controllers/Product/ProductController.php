@@ -3,7 +3,8 @@
     use App\Http\Controllers\Controller;
     use App\Models\AfterPrint;
     use App\Models\CExpertise;
-    use App\Models\CRework;
+use App\Models\COrder;
+use App\Models\CRework;
     use App\Models\Order;
     use App\Models\Paper;
     use App\Models\Product;
@@ -481,6 +482,21 @@
             }else{
                 return returnMessageAjax(100, 'Bạn không có quyền thực hiện tao tác KCS sau in !');
             }
+        }
+
+        public function listProductWaehouse(Request $request, $id){
+            if (!$request->isMethod('GET')) {
+                return redirect('')->with('error', 'Yêu cầu không hợp lệ !');
+            }
+            $obj = COrder::find($id);
+            $data['list_data'] = !empty($obj->object) ? json_decode($obj->object) : [];
+            if (empty($data['list_data'])) {
+                return redirect('')->with('error', 'Không có thông tin thành phẩm cho loại phiếu này !');
+            }
+            $data['dataItem'] = $obj;
+            $data['nosidebar'] = true;
+            $data['title'] = 'Danh sách thành phẩm - Chứng từ mua hàng mã: '.@$obj->code;
+            return view('c_orders.list_product', $data);
         }
     }
 ?>
