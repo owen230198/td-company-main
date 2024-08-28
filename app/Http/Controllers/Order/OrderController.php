@@ -499,6 +499,9 @@ use App\Models\WSalary;
                         if (!empty($object['id']) && $pro_wahouse['qty'] > 0) {
                             $obj = $pro_wahouse['obj'];
                             ProductWarehouse::takeOut($obj, $pro_wahouse, $c_id, @$data['receipt']);  
+                            $product = Product::find($pro_wahouse['product']);
+                            $product->delivery -= $pro_wahouse['qty'];
+                            $product->save();
                         }
                     }
                     return returnMessageAjax(200, 'Đã tạo thành công phiếu xuất sản phẩm !', \StatusConst::CLOSE_POPUP);

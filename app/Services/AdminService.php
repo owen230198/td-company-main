@@ -281,7 +281,16 @@ class AdminService extends BaseService
             'parent' => 0
         ];
         NDetailTable::handleField($data['field_searchs'], 'search');
-        $obj = COrder::where($where)->where('status', \StatusConst::ACCEPTED);
+        $condition = [];
+        foreach ($where as $key => $value) {
+            if (!empty($value)) {
+                $condition[$key] = $value;
+            } 
+        }
+        $obj = COrder::where('status', \StatusConst::ACCEPTED);
+        if (!empty($condition)) {
+            $obj = $obj->where($condition);
+        }
         $data['total_amount'] = $obj->sum('total');
         $data['total_advance'] = $obj->sum('advance');
         $data['total_rest'] = $data['total_amount'] - $data['total_advance'];

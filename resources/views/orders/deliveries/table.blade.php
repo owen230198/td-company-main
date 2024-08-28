@@ -4,7 +4,7 @@
             <th scope="col">STT</th>
             <th scope="col">Tên Sản phẩm</th>
             <th scope="col">SL đặt</th>
-            <th scope="col">Còn phải xuất</th>
+            <th scope="col">Số lượng xuất</th>
             <th scope="col">Đơn giá</th>
             <th scope="col">Thành tiền</th>
         </tr>
@@ -23,6 +23,7 @@
                 <td scope="row">{{ $key + 1 }}</td>
                 <td>
                     <input type="hidden" name="{{ $obj_name.'[id]' }}" value="{{ @$product_warehouse->id }}">
+                    <input type="hidden" name="{{ $obj_name.'[product]' }}" value="{{ @$product->id }}">
                     <input type="hidden" name="{{ $obj_name.'[name]' }}" value="{{ @$product_name }}">
                     {{ $product_name }}
                 </td>
