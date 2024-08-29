@@ -129,6 +129,9 @@ class Paper extends Model
         $role = [
             \GroupUser::TECH_APPLY => [
                 'remove' => 1
+            ],
+            \GroupUser::SALE => [
+                'remove' => 1
             ]
         ];
         return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];

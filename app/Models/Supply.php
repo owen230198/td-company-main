@@ -81,8 +81,17 @@ class Supply extends Model
         return !empty($process);
     }
 
-    public static function getDataWithOrder($id)
+    static function getRole()
     {
-        
+        $role = [
+            \GroupUser::TECH_APPLY => [
+                'remove' => 1
+            ],
+            \GroupUser::SALE => [
+                'remove' => 1
+            ]
+        ];
+        return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];
     }
+
 }
