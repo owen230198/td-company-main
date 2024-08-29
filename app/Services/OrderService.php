@@ -70,6 +70,7 @@ class OrderService extends BaseService
                 logActionUserData('insert', 'orders', $arr_order['id']);
                 $arr_order['code'] = 'DH-'.sprintf("%08s", $arr_order['id']);
                 Order::where('id', $arr_order['id'])->update($arr_order);
+                Product::handleProductAfter($data['product'], $arr_order);
                 if (!empty($c_order['advance'])) {
                     //Tạo phiếu tạm ứng nếu có tạm ứng
                     $c_order['name'] = getFieldDataById('name', 'customers', $arr_order['customer']).' tạm ứng '. $arr_order['code'];
@@ -84,7 +85,6 @@ class OrderService extends BaseService
                     COrder::getInsertCode($c_id);
                 }
             }
-            Product::handleProductAfter($data['product'], $arr_order);
             return returnMessageAjax(200, 'Cập nhật dữ liệu thành công!', getBackUrl());     
         }
     }

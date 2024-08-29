@@ -2,7 +2,7 @@
     @php
         $arr_field = getDetailTableField(['table_map' => $table_map, 'name' => $key, 'history' => 1]);
     @endphp 
-    @if (!empty($arr_field))
+    @if (!empty($arr_field) && !empty($detail))
         <div class="d-flex mb-2 align-items-center">
             <label class="mb-0 text-capitalize mr-3 d-flex min_150">
                 {{ $arr_field['note'] }} :
