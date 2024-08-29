@@ -106,7 +106,7 @@ use App\Models\CRework;
             $data['nosidebar'] = true;
             $data['title'] = 'Thông tin sản xuất - '.$data_product['name'];
             $data['parent_url'] = ['link' => getBackUrl(), 'note' => 'Danh sách đơn sản phẩm'];
-            $data['elements'] = getProductElementData($data_product['category'], $product_id, true, true, true);
+            $data['elements'] = getProductElementData($data_product['category'], $product_id, true, false, true);
             $data['product_id'] = $product_id;
             return view('products.view', $data);
         }
