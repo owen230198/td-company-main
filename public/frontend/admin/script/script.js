@@ -457,6 +457,29 @@ var receiveCommand = function () {
     });
 }
 
+var confirmCLoneDataTable = function()
+{
+    $(document).on('click', '.__clone_item_confirm', function(event){
+        event.preventDefault();
+        let _this = $(this);
+        let url = _this.attr('href');
+        let title = _this.attr('title');
+        let name = _this.data('name');
+        swal({
+            title: 'Sao chép ' + title,
+            text: 'Bạn chắc chắn muốn sao chép dữ liệu của ' + title + ' ' + name + ' ?',
+            icon: 'info',
+            buttons: true,
+            confirmButtonColor: "#459300",
+            buttons: ['Hủy', 'Sao chép']
+        }).then((action) => {
+            if (action) {
+                window.location = url;   
+            }
+        }); 
+    });
+}
+
 var reImportEmulsion = function(id, back_url) {
     swal({
         title: "Nhập lại kho cuộn nhũ đã cắt còn thừa",
@@ -1494,4 +1517,5 @@ $(function () {
     selectOrderForSelling();
     confirmTakeOutSelling();
     priceInputModule();
+    confirmCLoneDataTable();
 });
