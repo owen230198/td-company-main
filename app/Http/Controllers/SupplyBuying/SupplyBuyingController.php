@@ -129,10 +129,14 @@ use App\Models\SupplyBuying;
                     $list_supp[$key]['price'] = $price;
                     $qty = (int) $data_supply[$key]['qty'];
                     if (@$supply['type'] == \TDConst::PAPER) {
+                        $qtv = !empty($supply['qtv']) ? (float) $supply['qtv'] : 1; 
                         $length = !empty($data_supply[$key]['length']) ? (float) $data_supply[$key]['length'] : 1; 
                         $width = !empty($data_supply[$key]['width']) ? (float) $data_supply[$key]['width'] : 1; 
-                        $qtv = !empty($supply['qtv']) ? (float) $supply['qtv'] : 1; 
-                        $supp_total = $price * ($length / 100) * ($width / 100) * ($qtv / 1000) * $qty;
+                        if ($qtv > 1) {
+                            $supp_total = $price * ($length / 100) * ($width / 100) * ($qtv / 1000) * $qty;
+                        }else{
+                            $supp_total = $price * $qty;   
+                        }
                         $list_supp[$key]['length'] = $length;
                         $list_supp[$key]['width'] = $width;
                     }else{

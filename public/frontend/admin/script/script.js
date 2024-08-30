@@ -905,10 +905,14 @@ var changeInputPriceBuying = function () {
         let type_supp = item.find('select.__select_supp_type_buying').val();
         let total_input = item.find('.__buying_total_input');
         if (type_supp == 'paper') {
-            let length = getEmptyDefault(item.find('input.__paper_length_input').val(), 1, 'float')/100;
-            let width = getEmptyDefault(item.find('input.__paper_width_input').val(), 1, 'float')/100;
-            let qtv = getEmptyDefault(item.find('input.__paper_qtv_input').val(), 1, 'float')/1000;
-            let total = parseInt(length * width * qtv * price * qty);
+            let qtv_input = getEmptyDefault(item.find('input.__paper_qtv_input').val(), 1, 'float');
+            let total = price * qty;
+            if (qtv_input > 1) {
+                let qtv = qtv_input/1000
+                let length = getEmptyDefault(item.find('input.__paper_length_input').val(), 1, 'float')/100;
+                let width = getEmptyDefault(item.find('input.__paper_width_input').val(), 1, 'float')/100;
+                total = parseInt(length * width * qtv * price * qty);
+            }
             total_input.val(price_format(total));
         }else{
             total_input.val(price_format(parseInt(price * qty)));
@@ -1452,7 +1456,6 @@ var priceInputModule = function(){
         let _this = $(this);
         let parent = _this.closest('.price_input_module');
         let number =  getExactNumber(_this.val());
-        console.log(price_format(number));
         let number_format = price_format(number);
         _this.val(number_format);
         parent.find('input.price_input_value').val(number);
