@@ -253,6 +253,19 @@ class AdminService extends BaseService
         return $remove;
     }
 
+    public function arrayToCondition($table, $array, &$where)
+    {
+        foreach ($array as $field_name => $field_value) {
+            $conditions = $this->getConditionTable($table, $field_name, $field_value);
+            if (!empty($conditions)) {
+                foreach ($conditions as $condition) {
+                    $where[] = $condition;
+                }
+            }
+        }
+        return $where;
+    }
+
     public function getDataDebt($where, $type)
     {
         $data = $this->getBaseTable('c_orders');

@@ -2,9 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\COrder;
-use App\Models\NDetailTable;
 use App\Models\Order;
-use App\Models\ProductHistory;
 use App\Models\ProductWarehouse;
 use App\Models\Represent;
 use Illuminate\Http\Request;

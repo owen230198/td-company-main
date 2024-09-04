@@ -39,7 +39,7 @@ class NGroupUser extends Model
         'profit' => '% Hoa hồng',
         'warehouse' => 'Kho vật tư',
         'product_warehouse' => 'Kho thành phẩm',
-        'rpt_debt' => 'Tổng hợp công nợ',
+        'report' => 'Báo cáo & thống kê',
         'handle_supply' => 'Lệnh xử lí vật tư',
         'account' => 'Thông tin tài khoản'
     ];
@@ -244,7 +244,12 @@ class NGroupUser extends Model
         'order_debt' => [
             'name' => 'Công nợ bán hàng',
             'link' => 'order-debt',
-            'group' => 'rpt_debt'
+            'group' => 'report'
+        ],
+        'order_sales' => [
+            'name' => 'Doanh số đơn hàng',
+            'link' => 'report/orderSale?status=not_accepted',
+            'group' => 'report'
         ],
         'user' => [
             'name' => 'Danh sách nhân viên',

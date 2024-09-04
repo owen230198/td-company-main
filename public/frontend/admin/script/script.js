@@ -1463,6 +1463,20 @@ var priceInputModule = function(){
     });
 }
 
+var viewChartBtn = function () {
+    $(document).on('click', 'button.__view_chart_buton', function (event) {
+        event.preventDefault();
+        let param = $('#form-search').serialize();
+        let table = $(this).data('table');
+        let field = $(this).data('field');
+        let field_by = $(this).data('field_by');
+        let url = getBaseRoute('report/viewChart?table=' + table + '&field=' + field + '&field_by=' + field_by + '&nosidebar=1&' + param);
+        let modal = $("#actionModal");
+        modal.find("iframe").attr("src", url);
+        modal.modal('show');
+    });
+}
+
 $(function () {
     // loadingPage();
     submitActionAjaxForm();
@@ -1521,4 +1535,5 @@ $(function () {
     confirmTakeOutSelling();
     priceInputModule();
     confirmCLoneDataTable();
+    viewChartBtn();
 });

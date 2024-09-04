@@ -14,6 +14,7 @@ use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\SupplyBuying\SupplyBuyingController;
 use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\NotifyController;
+use App\Http\Controllers\ReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,6 +68,7 @@ Route::middleware(['check_login'])->group(function () {
 	Route::get('add-linking-data', [AdminController::class, 'addLinkingData']);
 	Route::any('ajax-respone/{method}', [AjaxResponeController::class, 'index']);
 	Route::any('notify-process/{id}', [NotifyController::class, 'notifyProcess']);
+	Route::any('report/{method}', [ReportController::class, 'index']);
 
 	//quotes routes
 	Route::any('create-quote', [QuoteController::class, 'createQuote']);

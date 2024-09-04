@@ -42,6 +42,6 @@ class NDetailTable extends Model
                 $fields[] = $field;    
             }
         }
-        $data = $action == 'view' ? ['rowspan' => $rowspan, 'field_shows' => $fields] : $fields;
+        $data = in_array($action, ['view', 'rp_view']) ? ['rowspan' => $rowspan, 'field_shows' => $fields] : $fields;
     }
 }

@@ -345,6 +345,13 @@ a.device_supp_item {
     z-index: 1;
 }
 
+.table_base_view table tfoot{
+    position: sticky;
+    bottom: -3px;
+    background: #f1f4f9;
+    z-index: 1;
+}
+
 .min_width_auto{
     min-width: auto;
 }
