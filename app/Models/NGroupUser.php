@@ -248,7 +248,7 @@ class NGroupUser extends Model
         ],
         'order_sales' => [
             'name' => 'Doanh số đơn hàng',
-            'link' => 'report/orderSale?status=not_accepted',
+            'link' => 'report/orderSale',
             'group' => 'report'
         ],
         'user' => [
