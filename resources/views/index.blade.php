@@ -79,7 +79,7 @@
     <script src="{{ asset('frontend/base/script/resumable.min.js') }}"></script>
     <script src="{{ asset('frontend/admin/script/loading.js') }}"></script>
     <script src="{{ asset('frontend/base/script/script.js') }}"></script>
-    <script src="{{ asset('frontend/admin/script/script.js?v=2') }}"></script>
+    <script src="{{ asset('frontend/admin/script/script.js?v=3') }}"></script>
     @yield('script')
     @stack('bottom-scripts')
     <script>
