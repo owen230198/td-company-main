@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{{ asset('frontend/base/css/jquery-ui.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/base/daterangepickers/daterangepicker.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/base/css/style.css') }}" />
-    <link rel="stylesheet" href="{{ asset('frontend/admin/css/style.css') }}" />
+    <link rel="stylesheet" href="{{ asset('frontend/admin/css/style.css?v=3') }}" />
     @yield('css')
 </head>
 
