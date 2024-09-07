@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\PaperExtend;
+
 	if (!function_exists('getStepCreateQuote')) {
 		function getStepCreateQuote($key){
 			switch($key){
@@ -10,6 +12,13 @@
 					return 'Chi tiết sản xuất';
 			};
 		}
+	}
+
+	if (!function_exists('getJsonExtNamePaper')) {
+		function getJsonExtNamePaper()
+        {
+			return PaperExtend::all()->pluck('name');
+        }
 	}
 
 	if (!function_exists('getDeviceId')) {

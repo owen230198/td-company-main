@@ -6,4 +6,5 @@
     //base status const
     const RELOAD = "{{ \StatusConst::RELOAD }}";
     const CLOSE_POPUP = "{{ \StatusConst::CLOSE_POPUP }}";
+    const EXT_NAME_PAPER = @json(getJsonExtNamePaper());
 </script>

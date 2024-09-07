@@ -210,7 +210,7 @@ var removeItemAddedModule = function () {
 }
 
 var setNameProductQuote = function () {
-    $(document).on('change keyup', 'input.quote_set_product_name', function (event) {
+    $(document).on('change', 'input.quote_set_product_name', function (event) {
         event.preventDefault();
         let text = $(this).val() != '' ? $(this).val() : 'Chưa có tên';
         let tabpane = $(this).closest('.tab-pane.tab_pane_quote_pro');
@@ -218,9 +218,13 @@ var setNameProductQuote = function () {
         $('a#' + li_id + '-tab').text(text);
         $(this).closest('.config_handle_paper_pro').find('input.__quote_receive_name').each(function () {
             let current_text = $(this).val();
-            if (current_text === '') {
-                $(this).val(text);
+            let match = current_text.match(/\(([^)]+)\)$/);
+            if (!empty(match)) {
+                if (EXT_NAME_PAPER.includes(match[1].trim())) {
+                    text += ' (' + match[1] + ')';     
+                }
             }
+            $(this).val(text);
         });
         tabpane.data('pname', text);
     })
