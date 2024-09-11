@@ -114,7 +114,7 @@ class AjaxResponeController extends Controller
 
     public function confirmTakeSelling($request)
     {
-        if (\GroupUser::isAdmin() || \GroupUser::isProductWarehouse()) {
+        if (\GroupUser::isAdmin() || \GroupUser::isAccounting()) {
             $id = @$request->input('id') ?? 0;
             $c_order = COrder::find($id);
             if (@$c_order->status != \StatusConst::NOT_ACCEPTED) {
