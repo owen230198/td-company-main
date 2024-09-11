@@ -340,7 +340,7 @@ a.device_supp_item {
 
 .table_base_view table thead{
     position: sticky;
-    top: 0;
+    top: -1px;
     background: #f1f4f9;
     z-index: 1;
 }

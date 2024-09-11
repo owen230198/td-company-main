@@ -127,9 +127,9 @@
                     if (empty($log['action'])) {
                         return returnMessageAjax(100, 'Bạn cần chọn phương thức nhập kho !');
                     }
-                    if (empty($log['receipt'])) {
-                        return returnMessageAjax(100, 'Bạn cần upload phiếu nhập kho !');
-                    }
+                    // if (empty($log['receipt'])) {
+                    //     return returnMessageAjax(100, 'Bạn cần upload phiếu nhập kho !');
+                    // }
                     $qty = (int) $data_expertise->qty;
                     $produce_price = (int) $product_obj->total_cost/$product_obj->qty;
                     if ($log['action'] == 'insert') {
