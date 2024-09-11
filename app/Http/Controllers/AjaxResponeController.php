@@ -44,7 +44,7 @@ class AjaxResponeController extends Controller
                'name' => 'warehouse[unit]',
                'note' => 'ĐVT',
                'type' => 'select',
-               'other_data' => ['data' => ['options' => ['' => 'Chọn ĐVT', 'combo' => 'Bộ', 'box' => 'Hộp', 'unit' => 'Chiếc']]]
+               'other_data' => ['data' => ['options' => ['' => 'Chọn ĐVT', 'combo' => 'Bộ', 'box' => 'Hộp', 'sheet' => 'Tờ', 'unit' => 'Chiếc']]]
             ];
         }else{
             $field = [
