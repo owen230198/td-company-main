@@ -592,8 +592,9 @@ var confirmImportSupply = function () {
     $(document).on('click', '.__confirm_im_supp', function (event) {
         event.preventDefault();
         let id = $(this).data('id');
+        let table = $(this).data('table');
         ajaxBaseCall({
-            url: getBaseRoute('take-in-supply/' + id),
+            url: getBaseRoute('take-in-supply/' + id + '?table=' + table),
             type: 'POST'
         });
     });

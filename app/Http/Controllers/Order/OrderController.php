@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
     use App\Models\Product;
 use App\Models\ProductWarehouse;
 use App\Models\Represent;
+use App\Models\WarehouseHistory;
 use App\Models\WSalary;
     use Maatwebsite\Excel\Facades\Excel;
 
@@ -282,17 +283,16 @@ use App\Models\WSalary;
             return view('orders.users.6.supply_handles.view_handles.'.$data['type'].'.item', $data);
         }
 
-        public function takeInSupply($id)
+        public function takeInSupply(Request $request, $id)
         {
             if (\GroupUser::isAdmin() || \GroupUser::isWarehouse()) {
-                $warehouse_table = \DB::table('supply_warehouses');
+                $warehouse_table = \DB::table($request->input('table'));
                 $warehouse = $warehouse_table->find($id);
                 if (@$warehouse->status != \StatusConst::WAITING) {
                     return returnMessageAjax(110, 'Dữ liệu không hợp lệ!');
                 } 
-                $data_update = ['status' => \StatusConst::IMPORTED, 
-                                'confirm_by' => \User::getCurrent('id'), 
-                                'confirm_at' => \Carbon\Carbon::now()];
+                $data_update = ['status' => \StatusConst::IMPORTED];
+                WarehouseHistory::doLogWarehouse($warehouse->type, $id, $warehouse->qty, 0, 0, 0, 0, ['note' => 'Nhập kho băng lề']);
                 $update = $warehouse_table->where('id' , $id)->update($data_update);
                 if ($update) {
                     return returnMessageAjax(200, 'Bạn đã xác nhận nhập kho vật tư !', \StatusConst::RELOAD);
