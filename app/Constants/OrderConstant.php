@@ -138,7 +138,7 @@
                 'text' => 'Duyệt nhập kho thành phẩm',
                 'condition' => ['status' => \StatusConst::NOT_ACCEPTED],
                 'link' => 'view/c_expertises?default_data=%7B"status"%3A"'.\StatusConst::NOT_ACCEPTED.'"%7D',
-                'group_user' => [\GroupUser::ADMIN, \GroupUser::KCS, \GroupUser::PRODUCT_WAREHOUSE]  
+                'group_user' => [\GroupUser::ADMIN, \GroupUser::KCS, \GroupUser::PRODUCT_WAREHOUSE, \GroupUser::ACCOUNTING]  
             ],
             [
                 'icon' => 'product_export', 
@@ -146,7 +146,7 @@
                 'text' => 'Duyệt xuất thành phẩm',
                 'condition' => ['status' => \StatusConst::NOT_ACCEPTED],
                 'link' => 'view/c_orders?default_data=%7B"status"%3A"'.\StatusConst::NOT_ACCEPTED.'"%7D',
-                'group_user' => [\GroupUser::ADMIN, \GroupUser::KCS, \GroupUser::PRODUCT_WAREHOUSE]  
+                'group_user' => [\GroupUser::ADMIN, \GroupUser::KCS, \GroupUser::PRODUCT_WAREHOUSE, \GroupUser::ACCOUNTING]  
             ],
         ];
 

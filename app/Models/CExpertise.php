@@ -33,7 +33,12 @@ class CExpertise extends Model
                 'view' => [
                     'with' => ['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED]
                 ]
-            ]
+                ],
+                \GroupUser::ACCOUNTING => [
+                    'view' => [
+                        'with' => ['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED]
+                    ]
+                ]
         ];
         return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];
     }

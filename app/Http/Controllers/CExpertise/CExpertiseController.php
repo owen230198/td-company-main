@@ -34,7 +34,7 @@
         public function confirmProductWarehouse(Request $request, $id)
         {
             $is_post = $request->isMethod('POST');
-            if (\GroupUser::isAdmin() || \GroupUser::isProductWarehouse()) {
+            if (\GroupUser::isAdmin() || \GroupUser::isProductWarehouse() || \GroupUser::isAccounting()) {
                 $data_expertise = CExpertise::find($id);
                 if (@$data_expertise->status != \StatusConst::NOT_ACCEPTED) {
                     return customReturnMessage(false, $is_post, ['message' => 'Dữ liệu không hợp lệ !']);
@@ -191,7 +191,7 @@
                         'note' => 'Phiếu nhập kho',
                         'type' => 'filev2',
                         'table_map' => 'warehouse_histories',
-                        'other_data' => ['role_update' => [\GroupUser::PRODUCT_WAREHOUSE]] 
+                        'other_data' => ['role_update' => [\GroupUser::PRODUCT_WAREHOUSE, \GroupUser::ACCOUNTING]] 
                     ];
                     $data['field_chose_type'] = [
                         'name' => 'log[action]',
