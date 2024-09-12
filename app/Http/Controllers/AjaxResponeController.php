@@ -82,7 +82,8 @@ class AjaxResponeController extends Controller
         }
         $represent = Represent::find($represent);
         $arr_sale = !empty($represent->sale) ? json_decode($represent->sale, true) : array();
-        $code = in_array(\User::getCurrent('id'), $arr_sale) ? 200 : 100;
+        $cur_user = \User::getCurrent('id');
+        $code = in_array($cur_user, $arr_sale) || $cur_user == $represent->created_by  ? 200 : 100;
         return ['code' => $code];
     }
 
