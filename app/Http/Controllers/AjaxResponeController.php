@@ -121,9 +121,9 @@ class AjaxResponeController extends Controller
             if (@$c_order->status != \StatusConst::NOT_ACCEPTED) {
                 return returnMessageAjax(100, 'Dữ liệu không hợp lệ !');
             }
-            if (empty($request->input('receipt'))) {
-                return returnMessageAjax(100, 'Bạn chưa upload phiếu xuất kho !');
-            }
+            // if (empty($request->input('receipt'))) {
+            //     return returnMessageAjax(100, 'Bạn chưa upload phiếu xuất kho !');
+            // }
             $arr_products = !empty($c_order->object) ? json_decode($c_order->object, true) : [];
             if (empty($arr_products)) {
                 return returnMessageAjax(100, 'Dữ liệu thành phẩm trống !');
