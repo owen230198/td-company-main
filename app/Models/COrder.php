@@ -12,7 +12,10 @@ class COrder extends Model
     const ADVANCE = 'advance';
     const ORDER = 'order';
     const SELL = 'sell';
+    const BOUGHT = 'bought';
+    const PAYMENT = 'payment';
     const OTHER = 'other';
+    const TYPE_PAYMENT = [self::ORDER, self::SELL];
 
     static function getFeildProductJson($value)
     {
@@ -65,6 +68,30 @@ class COrder extends Model
             $field_price,
             $field_total
         ];   
+    }
+
+    static function getTextTypeCOrder($key_type)
+    {
+        switch ($key_type) {
+            case self::ORDER:
+                return 'Phiếu trả hàng đặt';
+                break;
+            case self::SELL:
+                return 'Phiếu bán hàng bán sẵn';
+                break;
+            case self::ADVANCE:
+                return 'Phiếu tạm ứng';
+                break;
+            case self::BOUGHT:
+                return 'Phiếu mua hàng';
+                break;
+            case self::PAYMENT:
+                return 'Phiếu thanh toán';
+                break;
+            default:
+                return 'Phiếu khác';
+                break;
+        }
     }
 
     static function validateArrObject($object, $temp_name){
@@ -141,6 +168,12 @@ class COrder extends Model
                     $fields['note'],
                 ];
                 break;
+            case self::PAYMENT:
+                return [
+                    $fields['advance'],
+                    $fields['note'],
+                ];
+                break;
             default:
                 return [];
                 break;
@@ -178,6 +211,7 @@ class COrder extends Model
             ],
             \GroupUser::ACCOUNTING => [
                 'view' => 1,
+                'insert' => 1,
             ],
         ];
         return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];
@@ -185,5 +219,10 @@ class COrder extends Model
     static function getInsertCode($id)
     {
         COrder::where(['id' => $id])->update(['code' => 'PH-'.sprintf("%08s", $id)]);
+    }
+
+    static function canHandle()
+    {
+        return \GroupUser::isAdmin() || \GroupUser::isSale() || \GroupUser::isAccounting();
     }
 }

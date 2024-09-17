@@ -266,17 +266,19 @@ class AdminService extends BaseService
         return $where;
     }
 
-    public function getDataDebt($where, $type)
+    public function getDataDebt($table, $where, $status, $type = '')
     {
-        $data = $this->getBaseTable('c_orders');
+        $data = $this->getBaseTable($table);
         $data['field_searchs'] = [];
-        if (in_array($type, [COrder::ADVANCE, COrder::ORDER, COrder::SELL])) {
-            $data['field_searchs'][] = NDetailTable::where(['table_map' => 'c_orders', 'name' => 'group_customer'])->get()->first();
-            if ($type == COrder::ORDER) {
-                $data['field_searchs'][] = NDetailTable::where(['table_map' => 'c_orders', 'name' => 'order'])->get()->first();
+        if ($table == 'c_orders') {
+            if (in_array($type, [COrder::ADVANCE, COrder::ORDER, COrder::SELL])) {
+                $data['field_searchs'][] = NDetailTable::where(['table_map' => $table, 'name' => 'group_customer'])->get()->first();
+                if ($type == COrder::ORDER) {
+                    $data['field_searchs'][] = NDetailTable::where(['table_map' => $table, 'name' => 'order'])->get()->first();
+                }
+            }else {
+                $data['field_searchs'][] = NDetailTable::where(['table_map' => $table, 'name' => 'customer'])->get()->first(); 
             }
-        }else {
-            $data['field_searchs'][] = NDetailTable::where(['table_map' => 'c_orders', 'name' => 'customer'])->get()->first(); 
         }
         $data['field_searchs'][] =  [
             'name' => 'created_at',
@@ -300,14 +302,14 @@ class AdminService extends BaseService
                 $condition[$key] = $value;
             } 
         }
-        $obj = COrder::where('status', \StatusConst::ACCEPTED);
+        $obj = getModelByTable($table)::where('status', $status);
         if (!empty($condition)) {
             $obj = $obj->where($condition);
         }
         $data['total_amount'] = $obj->sum('total');
         $data['total_advance'] = $obj->sum('advance');
         $data['total_rest'] = $data['total_amount'] - $data['total_advance'];
-        $data['data_tables'] = $obj->get();
+        $data['data_tables'] = $obj->orderBy('id', 'DESC')->take(50)->get();
         return $data;
     }
 }

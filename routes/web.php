@@ -119,6 +119,7 @@ Route::middleware(['check_login'])->group(function () {
 	Route::post('take-out-supply/{id}', [CSupplyController::class, 'takeOutSupply']);
 	Route::post('re-import-emulsion/{id}', [CSupplyController::class, 'reImportEmulsion']);
 	Route::get('list-product-warehouse/{id}', [ProductController::class, 'listProductWaehouse']);
+	Route::any('supply-debt', [SupplyBuyingController::class, 'supplyDebt']);
 
 	//KCS route
 	Route::post('after-print-kcs/{id}',[ProductController::class, 'afterPrintKcs']);

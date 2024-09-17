@@ -526,4 +526,19 @@ use App\Models\SupplyBuying;
             $data = getViewSuppluBuyingByType($type, $index);
             return view('supply_buyings.field_buying', $data);
         }
+
+        public function supplyDebt(Request $request)
+        {
+            if (\GroupUser::isAdmin() || \GroupUser::isAccounting()) {
+                $where = $request->except('nosidebar');
+                $data = $this->admins->getDataDebt('supply_buyings', $where, \StatusConst::SUBMITED);
+                $data['title'] = 'Chi tiết công nợ';
+                $data['link_search'] = 'order-debt';
+                $data['data_search'] = $where;
+                $data['nosidebar'] = $request->input('nosidebar');
+                return view('debts.view', $data);
+            }else{
+                return back()->with('error', 'Bạn không có quyền xem chi tiết công nợ !', \StatusConst::CLOSE_POPUP);
+            }
+        }
     }

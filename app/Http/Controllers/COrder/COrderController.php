@@ -11,7 +11,7 @@
             $this->table = 'c_orders';
         }
 
-        private function getDataView($action)
+        public function getDataView($action)
         {
             $data = $this->admins->getDataActionView($this->table, $action, $action == 'insert' ? 'Thêm mới' : 'Chi tiết');
             $field_list = $data['field_list'];
@@ -20,7 +20,7 @@
             return $data;
         }
 
-        private function processData(&$data)
+        public function processData(&$data)
         {
             if (empty($data['type'])) {
                 return returnMessageAjax(100, 'Bạn chưa chọn loại hàng (hàng đặt hoặc hàng bán sẵn) !');
@@ -67,7 +67,7 @@
             if (!$request->isMethod('POST')) {
                 $data = $this->getDataView(__FUNCTION__);
                 $data['action_url'] = url('insert/'.$table);
-                $data['check_readonly'] = \GroupUser::isAdmin() || \GroupUser::isSale() ? 0 : 1;
+                $data['check_readonly'] = COrder::canHandle() ? 0 : 1;
                 $data['nosidebar'] = $request->input('nosidebar');
                 $data['dataItem'] = $request->except(['nosidebar']);
                 return view('c_orders.view', $data);
@@ -95,7 +95,7 @@
                 $data = $this->getDataView(__FUNCTION__);
                 $data['dataItem'] = $dataItem;
                 $data['action_url'] = url('update/'.$table.'/'.$id);
-                $data['check_readonly'] = \GroupUser::isAdmin() || \GroupUser::isSale() ? 0 : 1;
+                $data['check_readonly'] = COrder::canHandle() ? 0 : 1;
                 $data['nosidebar'] = $request->input('nosidebar');
                 return view('c_orders.view', $data);
             }else{

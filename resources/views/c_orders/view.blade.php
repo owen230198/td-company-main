@@ -10,7 +10,7 @@
                         @php
                             $name = $fieldst['name'];
                             $arr = processArrField($fieldst);
-                            $value = @$dataItem[$name];
+                            $value = @$dataItem->{$name};
                             $arr['value'] = $value;
                             $arr['attr']['readonly'] = $name == 'type' && !empty($value)  ? 1 : $check_readonly;
                         @endphp
@@ -29,7 +29,7 @@
             @if (!empty($dataItem))
                 @php
                     $bill_field = [
-                        'note' => 'Phiếu xuất kho',
+                        'note' => 'Phiếu giao dịch',
                         'type' => 'filev2',
                         'name' => 'receipt',
                         'value' => @$dataItem['receipt'],

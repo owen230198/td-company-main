@@ -77,7 +77,7 @@ class AjaxResponeController extends Controller
         if (empty($represent)) {
             return $ret_true;
         }
-        if (\GroupUser::isAdmin()) {
+        if (\GroupUser::isAdmin() || \GroupUser::isAccounting()) {
             return $ret_true;
         }
         $represent = Represent::find($represent);
@@ -121,9 +121,6 @@ class AjaxResponeController extends Controller
             if (@$c_order->status != \StatusConst::NOT_ACCEPTED) {
                 return returnMessageAjax(100, 'Dữ liệu không hợp lệ !');
             }
-            // if (empty($request->input('receipt'))) {
-            //     return returnMessageAjax(100, 'Bạn chưa upload phiếu xuất kho !');
-            // }
             $arr_products = !empty($c_order->object) ? json_decode($c_order->object, true) : [];
             if (empty($arr_products)) {
                 return returnMessageAjax(100, 'Dữ liệu thành phẩm trống !');
@@ -148,7 +145,34 @@ class AjaxResponeController extends Controller
         }else{
             return returnMessageAjax(100, 'Bạn không có quyền xác nhận xuất kho !');
         }
-        
+    }
+
+    public function confirmPaymentSelling($request)
+    {
+        if (\GroupUser::isAdmin() || \GroupUser::isAccounting()) {
+            $id = @$request->input('id') ?? 0;
+            $c_order = COrder::find($id);
+            if (!in_array(@$c_order->type, COrder::TYPE_PAYMENT) && @$c_order->rest > 0) {
+                return returnMessageAjax(100, 'Dữ liệu không hợp lệ !', \StatusConst::CLOSE_POPUP);
+            }
+            $is_post = $request->isMethod('POST');
+            $c_controller = new \App\Http\Controllers\COrder\COrderController();
+            if (!$is_post) {
+                $data = $c_controller->getDataView('insert');
+                $data['title'] = $c_order->name.' Thanh toán tiền hàng ';
+                $data['action_url'] = url('insert/c_orders');
+                $data['check_readonly'] = 1;
+                $data['nosidebar'] = $request->input('nosidebar');
+                $c_order->type = COrder::PAYMENT;
+                $c_order->advance = $c_order->rest;
+                $c_order->note = 'Thanh toán công nợ cho phiếu '.$c_order->code.' của ngày '.getDateTimeFormat($c_order->created_at);
+                $c_order->status = '';
+                $data['dataItem'] = $c_order;
+                return view('c_orders.view', $data);
+            }
+        }else{
+            return returnMessageAjax(100, 'Bạn không có quyền xác nhận thanh toán !');
+        }
     }
 }
 
