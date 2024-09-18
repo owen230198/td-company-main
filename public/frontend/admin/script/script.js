@@ -107,7 +107,8 @@ var loadDataPopup = function () {
         modal.find("iframe").attr("src", src);
     });
     $('.modalAction').on('hidden.bs.modal', function () {
-        $(this).find('iframe').attr("src", '');
+        let modal = $(this);
+        modal.find('iframe').attr("src", '');
         modal.parent().attr("class", '');
     })
 };
