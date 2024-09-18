@@ -576,6 +576,13 @@ class DevController extends Controller
         }
     }
 
+    public function handleSuppBuyingDebt(){
+        $data = SupplyBuying::where(['status' => 'submited'])->get();
+        foreach ($data as $buying) {
+            SupplyBuying::where('id', $buying->id)->update(['advance' => $buying->total]);
+        }
+    }
+
     public function createDirInStorage()
     {
         $directories = [
@@ -598,5 +605,6 @@ class DevController extends Controller
             }
         }
     }
+    
 }
 

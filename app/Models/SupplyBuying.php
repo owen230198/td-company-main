@@ -65,7 +65,7 @@ class SupplyBuying extends Model
             'note' => 'Thành tiền',
             'attr' => ['type_input' => 'price', 'readonly' => 1, 'inject_class' => '__buying_total_input']
         ];
-        if (\GroupUser::isAdmin()) {
+        if (self::canHandle()) {
             return [
                 $field_supp_type,
                 $field_price,
@@ -91,6 +91,11 @@ class SupplyBuying extends Model
                 $field_supp_type,
             ]; 
         }    
+    }
+
+    static function canHandle()
+    {
+        return \GroupUser::isAdmin() || \GroupUser::isAccounting();
     }
 
     static function getFieldQtyArr($type, $status = '')
@@ -171,7 +176,17 @@ class SupplyBuying extends Model
                         ]
                     ],
                 ]
-            ]
+                ],
+                \GroupUser::ACCOUNTING => [
+                    'view' => ['with' => 
+                        [
+                            'type' => 'group',
+                            'query' => [
+                                ['key' => 'status', 'value' => \StatusConst::SUBMITED]
+                            ]
+                        ],
+                    ]
+                ]
         ];
         return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];
     } 

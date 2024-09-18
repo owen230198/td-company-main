@@ -49,6 +49,7 @@ use App\Models\SupplyBuying;
             $table = 'supply_buyings';
             if (!$request->isMethod('POST')) {
                 $data = $this->admins->getDataActionView($table, __FUNCTION__, 'Thêm mới');
+                $data['nosidebar'] = $request->input('nosidebar');
                 $data['action_url'] = url('insert/'.$table);
                 if (!empty($request->input('name'))) {
                     if ($nosidebar) {
@@ -86,6 +87,7 @@ use App\Models\SupplyBuying;
             $dataItem = getModelByTable($table)->find($id);
             if (!$request->isMethod('POST')) {
                 $data = $this->admins->getDataActionView($table, __FUNCTION__, 'Chi tiết');
+                $data['nosidebar'] = $request->input('nosidebar');
                 $data['dataItem'] = $dataItem;
                 $data['action_url'] = url('update/'.$table.'/'.$id);
                 return view('action.view', $data);
@@ -533,7 +535,9 @@ use App\Models\SupplyBuying;
                 $where = $request->except('nosidebar');
                 $data = $this->admins->getDataDebt('supply_buyings', $where, \StatusConst::SUBMITED);
                 $data['title'] = 'Chi tiết công nợ';
-                $data['link_search'] = 'order-debt';
+                $data['link_search'] = 'supply-debt';
+                $data['link_insert'] = 'ajax-respone/insertSupplyPayment';
+                $data['size_popup'] = 'medium_popup';
                 $data['data_search'] = $where;
                 $data['nosidebar'] = $request->input('nosidebar');
                 return view('debts.view', $data);

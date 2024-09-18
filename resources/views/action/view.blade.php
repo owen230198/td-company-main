@@ -1,6 +1,6 @@
 @extends('index')
     @section('content')
-        <div class="dashborad_content position-relative">
+        <div class="dashborad_content position-relative pb-5">
             <form action="{{ $action_url }}" method="POST" class="config_content baseAjaxForm" enctype="multipart/form-data">
                 @csrf
                 <ul class="nav nav-tabs" id="myTab" role="tablist">

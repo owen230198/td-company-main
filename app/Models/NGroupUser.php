@@ -246,6 +246,11 @@ class NGroupUser extends Model
             'link' => 'order-debt',
             'group' => 'report'
         ],
+        'supply_debt' => [
+            'name' => 'Công nợ mua vật tư',
+            'link' => 'supply-debt',
+            'group' => 'report'
+        ],
         'order_sales' => [
             'name' => 'Doanh số đơn hàng',
             'link' => 'report/orderSale',
@@ -388,6 +393,7 @@ class NGroupUser extends Model
                 self::MODULE['expertise'],
                 self::MODULE['product_history'],
                 self::MODULE['order_debt'],
+                self::MODULE['supply_debt'],
                 self::MODULE['account'],
                 self::MODULE['change_password'],
             ],

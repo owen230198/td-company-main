@@ -5,6 +5,7 @@ use App\Models\COrder;
 use App\Models\Order;
 use App\Models\ProductWarehouse;
 use App\Models\Represent;
+use App\Models\SupplyBuying;
 use Illuminate\Http\Request;
 
 class AjaxResponeController extends Controller
@@ -173,6 +174,71 @@ class AjaxResponeController extends Controller
         }else{
             return returnMessageAjax(100, 'Bạn không có quyền xác nhận thanh toán !');
         }
+    }
+
+    public function insertSupplyPayment($request)
+    {
+        if (\GroupUser::isAdmin() || \GroupUser::isAccounting()) {
+            if (!$request->isMethod('POST')) {
+                $data['title'] = 'Thêm Phiếu Thanh toán tiền vật tư ';
+                $data['action_url'] = url('ajax-respone/insertSupplyPayment');
+                $data['check_readonly'] = 1;
+                $data['nosidebar'] = $request->input('nosidebar');
+                if (!empty($request->input('provider'))) {
+                    $dataItem['provider'] = $request->input('provider');
+                }
+                $dataItem['note'] = 'Thanh toán tiền vật tư';
+                $data['fields'] = [
+                    [
+                        'name' => 'provider',
+                        'note' => 'Nhà cung cấp',
+                        'type' => 'linking',
+                        'other_data' => ['config' => ['search' => 1], 'data'=> ['table' => 'warehouse_providers']],
+                        'value' => @$request->input('provider')
+                    ],
+                    [
+                        'name' => 'advance',
+                        'type' => 'text',
+                        'note' => 'Số tiền thanh toán',
+                        'attr' => ['type_input' => 'price']
+                    ],
+                    [
+                        'name' => 'bill',
+                        'note' => 'Phiếu chuyển tiền',
+                        'type' => 'filev2',
+                        'table_map' => 'supply_buyings',
+                        'other_data' => ['role_update' => [\GroupUser::ADMIN, \GroupUser::ACCOUNTING], 'field_name' => 'bill']
+                    ],
+                    [
+                        'name' => 'note',
+                        'type' => 'textarea',
+                        'note' => 'Ghi chú',
+                    ],
+                ];
+                return view('supply_buyings.payment', $data);
+            }else{
+                $data = $request->except('_token');
+                if (empty($data['provider'])) {
+                    return returnMessageAjax(100, 'Bạn chưa chọn nhà cung cấp cần thanh toán !');
+                }
+                if (empty($data['bill'])) {
+                    return returnMessageAjax(100, 'Bạn chưa upload phiếu chuyển tiền !');
+                }
+                $data['payment_type'] = 1;
+                $data['status'] = \StatusConst::SUBMITED;
+                $data['name'] = 'Thanh toán công nợ - NCC : '.getFieldDataById('name', 'warehouse_providers', $data['provider']);
+                (new \BaseService())->configBaseDataAction($data);
+                $id = SupplyBuying::insertGetId($data);
+                if ($id) {
+                    SupplyBuying::where('id', $id)->update(['code' => 'CT-'.formatCodeInsert($id)]);
+                    return returnMessageAjax(200, 'Thêm dữ liệu thành công!', \StatusConst::CLOSE_POPUP);
+                }else {
+                    return returnMessageAjax(100, 'Lỗi không xác định !');
+                }
+            }
+        }else{
+            return returnMessageAjax(100, 'Bạn không có quyền xác nhận thanh toán !');
+        }  
     }
 }
 

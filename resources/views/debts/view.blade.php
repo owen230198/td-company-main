@@ -19,14 +19,15 @@
                     $param = getParamUrlByArray($data_search);
                     $param .= empty($param) ? '?nosidebar=1' : '&nosidebar=1';
                 @endphp
-                data-src="{{ url('insert/c_orders'.$param) }}" 
+                data-src="{{ url($link_insert.''.$param) }}" 
+                data-size="{{ @$size_popup }}"
                 class="load_view_popup main_button bg_main color_white smooth bg_green border_green radius_5 font_bold smooth mr-2">
                 <i class="fa fa-plus mr-2 fs-15" aria-hidden="true"></i>Thêm mới
             </button>
         </div>
     </div>
     <div class="table_debt_module">
-        @include('debts.table')
+        @include($table.'.table_debt')
     </div>
     @include('table/action_popup')
 @endsection

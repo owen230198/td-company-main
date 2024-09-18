@@ -269,6 +269,7 @@ class AdminService extends BaseService
     public function getDataDebt($table, $where, $status, $type = '')
     {
         $data = $this->getBaseTable($table);
+        $data['table'] = $table;
         $data['field_searchs'] = [];
         if ($table == 'c_orders') {
             if (in_array($type, [COrder::ADVANCE, COrder::ORDER, COrder::SELL])) {
@@ -279,6 +280,8 @@ class AdminService extends BaseService
             }else {
                 $data['field_searchs'][] = NDetailTable::where(['table_map' => $table, 'name' => 'customer'])->get()->first(); 
             }
+        }else{
+            $data['field_searchs'][] = NDetailTable::where(['table_map' => $table, 'name' => 'provider'])->get()->first();
         }
         $data['field_searchs'][] =  [
             'name' => 'created_at',
