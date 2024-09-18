@@ -4,6 +4,7 @@
             <tr>
                 <th class="font-bold fs-13">Ngày chứng từ</th>
                 <th class="font-bold fs-13">Số CT</th>
+                <th class="font-bold fs-13">NCC</th>
                 <th class="font-bold fs-13">Diễn giải</th>
                 <th class="font-bold fs-13">Hàng hóa</th>
                 <th class="font-bold fs-13">Tiền hàng</th>
@@ -19,6 +20,9 @@
                     </td>
                     <td>
                         {{ $data->code }}
+                    </td>
+                    <td>
+                        {{ getFieldDataById('name', 'warehouse_providers', $data->provider) }}
                     </td>
                     <td>
                         {{ $data->name }}

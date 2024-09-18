@@ -168,7 +168,7 @@ class NGroupUser extends Model
         ],
         'supp_bying_req' => [
             'name' => 'Yêu cầu mua vật tư',
-            'link' => 'view/supply_buyings',
+            'link' => 'view/supply_buyings?default_data=%7B%22payment_type":"0%22%7D',
             'group' => 'supply_buying'
         ],
         'profit' => [
