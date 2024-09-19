@@ -977,16 +977,6 @@ var productListSupplyProcess = function () {
     });
 }
 
-var productListSupplyProcess = function () {
-    $(document).on("click", "button.__confirm_payment_selling", function (event) {
-        event.preventDefault();
-        let modal = $("#actionModal");
-        let id = $(this).data("id");
-        modal.find("iframe").attr("src", getBaseRoute('ajax-respone/confirmPaymentSelling?id=' + id + '&nosidebar=1'));
-        modal.modal('show');
-    });
-}
-
 var confirmImportProductWarehouse = function () {
     $(document).on('click', 'button.__confirm_product_warehouse', function (event) {
         event.preventDefault();
