@@ -1500,7 +1500,7 @@ $(function () {
     menuSidebar();
     selectAjaxModule();
     multipleSelectModule();
-    // phoneInputPrevent();
+    phoneInputPrevent();
     fileProcessModule();
     receiveCommand();
     confirmTakeOutSupply();
