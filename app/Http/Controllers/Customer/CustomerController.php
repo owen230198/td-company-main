@@ -20,7 +20,10 @@
             }
             $data = $request->all();
             $represents = @$data['represent'] ?? [];
-            $this->processRepresent($represents, $customer);
+            $process = $this->processRepresent($represents, $customer);
+            if (@$process['code'] == 100) {
+                return $process;
+            }
             return returnMessageAjax(200, 'Đã cập nhật dữ liệu Người liên hệ cho khách hàng '. $data_customer->name, \StatusConst::RELOAD);
         }
 
