@@ -75,6 +75,7 @@ class NTable extends Model
                             'square_warehouses',
                             'extend_warehouses',
                             'orders',
+                            'c_orders',
                             'product_warehouses',
                         ]
                     ];

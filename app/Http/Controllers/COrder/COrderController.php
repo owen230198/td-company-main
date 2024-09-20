@@ -1,7 +1,11 @@
 <?php
     namespace App\Http\Controllers\COrder;
     use App\Http\Controllers\Controller;
+    use App\Imports\ImportCOrder;
     use App\Models\COrder;
+use App\Models\Customer;
+use App\Models\Represent;
+use Maatwebsite\Excel\Facades\Excel;
 
     class COrderController extends Controller
     {
@@ -112,6 +116,72 @@
                 }
                 return returnMessageAjax(200, 'Cập nhật dữ liệu phiếu xuất vật tư thành công !', !empty($request->input('nosidebar')) ? \StatusConst::CLOSE_POPUP : getBackUrl());   
             }
+        }
+
+        public function import($file)
+        {
+            $arr_file = pathinfo($file->getClientOriginalName());
+            $obj = new ImportCOrder($arr_file['filename']);
+            $data = Excel::toArray($obj, $file);
+            $none_customer = 0;
+            $has_customer = 0;
+            $data_insert = [
+                'type' => COrder::OTHER,
+                'advance' => 0,
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now(),
+                'status' => \StatusConst::ACCEPTED,
+                'created_by' => 25,
+                'note' => 'Lấy dữ liệu công nợ tháng 9 từ phần mềm Misa'
+            ];
+            foreach ($data[0] as $value) {
+                $name = $value['name'];
+                $arr_name = explode(':', $name);
+                $s_name = preg_replace('/\s*\(.*\)$/', '', $arr_name[0]);
+                $customer = Customer::where('name', 'like', '%'.trim($s_name).'%')->first();
+                if (!empty($customer)) {
+                    $customer_id = $customer->id;
+                    preg_match('/\(([^)]+)\)[^()]*$/', $arr_name[0], $matches);
+                    $represent_name = !empty($matches[1]) ? $matches[1] : '';
+                    if (!empty($represent_name)) {
+                        $represent = Represent::where('name', 'like', '%'.trim($represent_name).'%')->first();
+                    }else{
+                        $represent = Represent::where('customer', $customer->id)->first();
+                    }
+                    $represent_id = @$represent->id;
+                }else{
+                    $insert_customer = [
+                        'name' => $s_name,
+                        'note' => 'Khách nợ lấy từ Misa',
+                        'act' => 1,
+                        'created_at' => \Carbon\Carbon::now(),
+                        'updated_at' => \Carbon\Carbon::now(),
+                        'created_by' => 25
+                    ];
+                    $customer_id = Customer::insertGetId($insert_customer);
+                    Customer::getInsertCode($customer_id);
+                    $insert_represent = [
+                        'name' => $s_name,
+                        'note' => 'Khách nợ lấy từ Misa',
+                        'customer' => $customer_id,
+                        'act' => 1,
+                        'created_at' => \Carbon\Carbon::now(),
+                        'updated_at' => \Carbon\Carbon::now(),
+                        'created_by' => 25
+                    ];
+                    $represent_id = Represent::insertGetId($insert_represent);
+                }
+                $data_insert['customer'] = $customer_id;
+                $data_insert['represent'] = $represent_id;
+                $total = $value['total'];
+                $data_insert['other_price'] = $total;
+                $data_insert['total'] = $total;
+                $data_insert['rest'] = $total;
+                $data_insert['name'] = 'Công nợ tháng 9 - '.getFieldDataById('name', 'customers', $customer_id);
+                $id = COrder::insertGetId($data_insert);
+                COrder::getInsertCode($id);
+            }
+            return returnMessageAjax(200, 'Thành công !', \StatusConst::RELOAD);
         }
     }
 ?>
