@@ -44,6 +44,11 @@ class Represent extends Model
                         ]]
                     ]
             ],
+            \GroupUser::ACCOUNTING => [
+                'insert' => 1,
+                'view' => 1,
+                'update' => 1
+            ],
         ];
         return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];
     }

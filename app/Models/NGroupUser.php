@@ -382,6 +382,7 @@ class NGroupUser extends Model
             
             self::ACCOUNTING => [
                 self::MODULE['worker_salary'],
+                self::MODULE['customer_list'],
                 self::MODULE['order_process'],
                 self::MODULE['handle_process'],
                 self::MODULE['warehouse_management'],
