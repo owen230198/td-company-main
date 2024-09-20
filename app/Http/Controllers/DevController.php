@@ -612,6 +612,19 @@ class DevController extends Controller
             }
         }
     }
+
+    public function updateOrderProductOldExpertise(){
+        $data = Order::where('created_at', '<=', \Carbon\Carbon::create(2024, 7, 13)->endOfDay())->whereIn('status', [\StatusConst::IMPORTED, Order::DELIVERIED])->get();
+        foreach ($data as $order) {
+            $products = Product::where('product_warehouse', '!=', NULL)->where('order', $order->id)->get();
+            foreach ($products as $product) {
+                $history = ProductHistory::where('product', $product->id)->first();
+                $pro_warehouse = ProductWarehouse::find($history->target);
+                Product::where('id', $product->id)->update(['product_warehouse' => $pro_warehouse->id]);
+            }
+
+        }
+    }
     
 }
 

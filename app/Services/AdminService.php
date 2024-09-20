@@ -148,14 +148,22 @@ class AdminService extends BaseService
                     $link_obj = getDataTable($link_table, $condition, [], true);
                     $arr_id = $link_obj->pluck('id')->all();
                     $where[] = ['key' => $link_data['field_data'], 'compare' => 'in', 'value' => array_unique($arr_id)];
-                }elseif ($type == 'group_product' && !empty($other_data['field_pluck'])) {
+                }elseif ($type == 'group_product') {
                     if (!empty($value['group'])) {
-                        $product_obj = \DB::table('products')->where(['category' => $value['group']]);
-                        if (!empty($value['style'])) {
-                            $product_obj->where('product_style', $value['style']);
+                        if (!empty($other_data['field_pluck'])) {
+                            $product_obj = \DB::table('products')->where(['category' => $value['group']]);
+                            if (!empty($value['style'])) {
+                                $product_obj->where('product_style', $value['style']);
+                            }
+                            $arr_id = $product_obj->pluck($other_data['field_pluck'])->all();
+                            $where[] = ['key' => 'id', 'compare' => 'in', 'value' => array_unique($arr_id)];
+                        }else{
+                            $where[] = ['key' => 'category', 'value' => $value['group']];
+                            if (!empty($value['style'])) {
+                                $where[] = ['key' => 'style', 'value' => $value['style']];
+                            }
                         }
-                        $arr_id = $product_obj->pluck($other_data['field_pluck'])->all();
-                        $where[] = ['key' => 'id', 'compare' => 'in', 'value' => array_unique($arr_id)];
+                        
                     }
                 }elseif ($type == 'product_size') {
                     $product_obj = \DB::table('products');
