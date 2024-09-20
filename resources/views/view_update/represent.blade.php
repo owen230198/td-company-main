@@ -8,7 +8,7 @@
             @include('customers.item_represent', ['index' => 0])   
         @endif
     </div>
-    @if (\GroupUser::isSale() || \GroupUSer::isAdmin())
+    @if (\GroupUser::isSale() || \GroupUSer::isAdmin() || \GroupUSer::isAccounting())
         <div class="d-flex justify-content-center">
             <button type="button" class="mr-2 main_button color_white bg_green border_green radius_5 font_bold sooth __submit_only_linking_data" data-customer={{ @$dataItem['id'] }}>
                 <i class="fa fa-pencil mr-2 fs-14" aria-hidden="true"></i> Chỉnh sửa
