@@ -35,7 +35,7 @@ class WSalary extends Model
                 // $handle_elevate = !empty($supply->handle_elevate) ? json_decode($supply->handle_elevate, true) : [];
                 // $elevate_num = !empty($handle_elevate['num']) ? (int) $handle_elevate['num'] : 1;
                 $data_update = $this->getBaseSalaryPaper($qty);
-                if (!empty($data_handle['float']['act'])) {
+                if (!empty($this->handle['float']['act'])) {
                     $data_update['total'] += (float) getDataConfig('QuoteConfig', 'ELEV_FLOAT_PRICE');
                 }
                 break;
