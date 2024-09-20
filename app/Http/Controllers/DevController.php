@@ -576,6 +576,13 @@ class DevController extends Controller
         }
     }
 
+    public function updateDeliveryStatusOrder(){
+        $data = COrder::where(['type' => COrder::ORDER])->get();
+        foreach ($data as $c_order) {
+            Order::where('id', $c_order->order)->update(['status' => Order::DELIVERIED]);
+        }
+    }
+
     public function handleSuppBuyingDebt(){
         $data = SupplyBuying::where(['status' => 'submited'])->get();
         foreach ($data as $buying) {

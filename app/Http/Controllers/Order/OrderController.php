@@ -503,6 +503,8 @@ use App\Models\WSalary;
                             $product->save();
                         }
                     }
+                    $order->status = Order::DELIVERIED;
+                    $order->save();
                     return returnMessageAjax(200, 'Đã tạo thành công phiếu xuất sản phẩm !', \StatusConst::CLOSE_POPUP);
                 }else{
                     return returnMessageAjax(100, 'Đã có lỗi xảy ra, vui lòng thử lại !');

@@ -14,6 +14,7 @@
         const DESIGN_SUBMITED = 'design_submited';
         const TECH_SUBMITED = 'tech_submited';
         const MAKING_PROCESS = 'making_process';
+        const DELIVERIED = 'deliveried';
 
         // Insert sourc new or clone
         const NEW_SRC = 1;
