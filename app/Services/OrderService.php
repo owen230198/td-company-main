@@ -98,6 +98,10 @@ class OrderService extends BaseService
         unset($data_table['id']);
         $this->configBaseDataAction($data_table);
         $data_table['status'] = \StatusConst::NOT_ACCEPTED;
+        if ($table == 'orders') {
+            $data_table['advance'] = 0;
+            $data_table['rest_bill'] = '';
+        }
         $ret_id = $model::insertGetId($data_table);
         $is_quote = $table == 'quotes';
         $ret_update = $is_quote ? ['seri' => 'BG-'.sprintf("%08s", $ret_id)] : ['code' => 'DH-'.sprintf("%08s", $ret_id), 'return_time' => ''];

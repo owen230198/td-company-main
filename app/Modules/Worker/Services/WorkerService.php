@@ -2,6 +2,8 @@
 namespace App\Modules\Worker\Services;
 
 use App\Models\Notify;
+use App\Models\Paper;
+use App\Models\Product;
 use App\Services\BaseService;
 use App\Models\WSalary;
 
@@ -100,12 +102,14 @@ class WorkerService extends BaseService
         $data_update['qty'] = $qty;
         $data_update['submited_at'] = \Carbon\Carbon::now();
         $update = $obj->update($data_update);
+        $this_qty = $qty;
+        $need_multiply = isQtyFormulaBySupply($type) && !isQtyFormulaBySupply($next_data['type']);
         if ($update) {
             $qty_check_update = (int) @$data_handle['handle_qty'];
             $next_data = getStageActiveStartHandle($table_supply, $data_command->supply, $type);
             if ($next_data['type'] != \StatusConst::SUBMITED) {
                 //Nếu không phải là bước hoàn tất của sản lệnh
-                if (isQtyFormulaBySupply($type) && !isQtyFormulaBySupply($next_data['type'])) {
+                if ($need_multiply) {
                     //nếu CT lương của lệnh hiện tại tính bằng SL vật tư và CT lương của bước tiếp theo tính bằng sl sản phẩm
                     $next_qty = $qty * $supply->nqty;
                 }elseif (!isQtyFormulaBySupply($type) && isQtyFormulaBySupply($next_data['type'])) {
@@ -119,8 +123,11 @@ class WorkerService extends BaseService
                     $fill_next = checkFillToFinish($supply, $data_handle, $next_data['type']);
                     $is_next = $fill_next['bool'];
                     if ($is_next && !empty($fill_next['count_handle'])) {
-                        $next_qty = (int) $fill_next['min_command'];
+                        $next_qty = (int) $fill_next['next_qty'];
                         $qty_check_update = $qty_check_update * $fill_next['count_handle'];
+                        $this_qty = $fill_next['min_command'];
+                    }else{
+                        $this_qty = 0;
                     }
                 }else{
                     $is_next = true;
@@ -144,17 +151,38 @@ class WorkerService extends BaseService
             }
             
             //kiểm tra xem đã hoàn thành tất cả các công đoạn chưa thì update trạng thái của lệnh
-            WSalary::checkStatusUpdate($table_supply, $supply->id, \StatusConst::SUBMITED);
             $data_handled = !empty($data_handle['handled']) ? $data_handle['handled'] : 0;
-            $data_handle['handled'] = $data_handled + $qty;
+            $handled = $data_handled + $this_qty;
+            $data_handle['handled'] = $handled;
             $update_supply[$type] = $data_handle;
-            $supply_obj = getModelByTable($table_supply)->find($supply->id);
-            if ($data_handle['handled'] >= $handle_qty) {
+            $supply_id = $supply->id;
+            $supply_obj = getModelByTable($table_supply)->find($supply_id);
+            if ($handled >= $qty_check_update) {
                 $data_handle['act'] = 2;
                 $supply_obj->status = @$next_data['type'];
             }
+            $submited_stt = \StatusConst::SUBMITED;
+            if (@$next_data['type'] == $submited_stt) {
+                $n_qty = !empty($supply_obj->n_qty) ? (int) $supply_obj->n_qty : 1;
+                $handled_pro = !isQtyFormulaBySupply($type) ? $handled : $handled * $n_qty;
+                $supply_obj->handled = $handled_pro;
+                $supply_obj->save();
+                if ($table_supply == 'papers') {
+                    $p_childs = Paper::where('parent', $supply_id)->get();
+                    foreach ($p_childs as $p_child) {
+                        Paper::where('id', $p_child->id)->update(['handled' => $handled_pro]);
+                        if (!empty($p_child->product)) {
+                            Product::createCProduct($p_child->product);
+                        }
+                    }
+                }
+                if (!empty($supply_obj->product)) {
+                    Product::createCProduct($supply_obj->product);
+                }
+            }
             $supply_obj->{$type} = json_encode($data_handle);
             $supply_obj->save();
+            WSalary::checkStatusUpdate($table_supply, $supply_id, $submited_stt);
             return $update;
         }else{
             return false;

@@ -9,6 +9,7 @@ use App\Models\CDesign;
 use App\Models\COrder;
 use App\Models\CSupply;
 use App\Models\Device;
+use App\Models\FillFinish;
 use App\Models\Order;
 use App\Models\Paper;
 use App\Models\Product;
@@ -623,6 +624,46 @@ class DevController extends Controller
                 Product::where('id', $product->id)->update(['product_warehouse' => $pro_warehouse->id]);
             }
 
+        }
+    }
+
+    public function productDataHandingFill(){
+        $products = Product::where(['category' => 1, 'status' => 'making_process'])->get();
+        foreach ($products as $product) {
+            $fill_finishs = FillFinish::where('product', $product->id)->get();
+            foreach ($fill_finishs as $fill_finish) {
+                $handle = json_decode($fill_finish->fill, true);
+                if (!empty($handle['handled'])) {
+                    $fill_next = checkFillToFinish($fill_finish, $handle, 'finish');
+                    dump($product->code, $handle['handled'], $handle['handle_qty']);
+                    dump('____________');
+                    $handle['handled'] = $fill_next['min_command'];
+                    FillFinish::where('id', $fill_finish->id)->update(['fill' => json_encode($handle)]);
+                }
+            }
+        }
+    }
+
+    public function productDataHanding(){
+        $products = Product::where(['status' => 'making_process'])->get();
+        foreach ($products as $product) {
+            $childs = Product::$childTable;
+            foreach ($childs as $table) {
+                $supps = \DB::table($table)->where('product', $product->id)->get();
+                foreach ($supps as $supp) {
+                    $arr = [];
+                    foreach ($supp as $type => $json_handle) {
+                        $handle = json_decode($json_handle, true);
+                        $arr_select = getArrHandleField($table);
+                        if (in_array($type, $arr_select) && in_array(@$handle['act'], [1, 2])) {
+                            $n_qty = !empty($supp->nqty) ? $supp->nqty : 1;
+                            $handled = @$handle['handled'] ?? 0;
+                            $arr[] = !isQtyFormulaBySupply($type) ? $handled : $handled * $n_qty;
+                        }
+                    }
+                    \DB::table($table)->where('id', $supp->id)->update(['handled' => collect($arr)->min()]);
+                }
+            }
         }
     }
     

@@ -302,7 +302,7 @@
                 }
                 $data_update['order'] = $order['id'];
                 $data_update['order_created'] = 1;
-                Product::where('id', $product['id'])->update($data_update);
+                $update = Product::where('id', $product['id'])->update($data_update);
                 self::handleCommandCode($product, $data_update['code']); 
             }  
         }
@@ -334,15 +334,16 @@
                 if (!empty($dataItem[$stage])) {
                     $item_stage = json_decode($dataItem[$stage], true);
                     $item_stage['handled_qty'] = 0;
+                    $item_stage['handled'] = 0;
                     $dataItem->{$stage} = json_encode($item_stage);
                 }
             }
+            $dataItem->handled = 0;
             $dataItem->save();
         }
 
         static function handleCloneData($data, $obj_id, $obj_field, $handle_code)
         {
-
             $hidden_fields = \StatusConst::HIDDEN_CLONE_FIELD;
             $base_service = new \BaseService();
             $child_tables = self::$childTable;
@@ -387,9 +388,20 @@
             if ($handle_code) {
                 $products = Product::where('order', $obj_id)->get();
                 $order = Order::find($obj_id);
+                RefreshQuotePrice($order);
                 self::handleProductAfter($products, $order);
             }
         }
+
+        static function createCProduct($id)
+        {
+            $child_tables = self::$childTable;
+            $arr_qty = [];
+            foreach ($child_tables as $table) {
+                $arr_qty[] = \DB::table($table)->where('product', $id)->min('handled');
+            }
+            $min_qty = collect($arr_qty)->min();
+        } 
     }
 
 ?>
