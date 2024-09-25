@@ -4,7 +4,8 @@
     use App\Models\AfterPrint;
     use App\Models\CExpertise;
     use App\Models\COrder;
-    use App\Models\CRework;
+use App\Models\CProduct;
+use App\Models\CRework;
     use App\Models\Order;
     use App\Models\Paper;
     use App\Models\Product;
@@ -115,15 +116,16 @@
         {
             $is_post = $request->isMethod('POST');
             if (\GroupUser::isAdmin() || \GroupUser::isKCS()) {
-                $product_obj = Product::find($id);
-                if (empty($product_obj) || @$product_obj->status != \StatusConst::SUBMITED) {
+                $obj = CProduct::find($id);
+                $product_obj = Product::find($obj->product);
+                if (empty($obj) || empty($obj) || @$obj->status != \StatusConst::PROCESSING) {
                     return customReturnMessage(false, $is_post, ['message' => 'Dữ liệu không hợp lệ !']);
                 }
                 if (!$is_post) {
                     $data['title'] = 'Thẩm định sau sản xuất sản phẩm '.$product_obj->name;
                     $data['nosidebar'] = true;
-                    $data['data_product'] = $product_obj;
-                    $data['status_exper_option'] = [CExpertise::FULL => 'Nhập kho đủ ('.$product_obj->qty.' sản phẩm)', CExpertise::PROBLEM => 'Nhập kho thiếu do lỗi kỹ thuật'];
+                    $data['data_product'] = $obj;
+                    $data['status_exper_option'] = [CExpertise::FULL => 'Nhập kho toàn bộ lệnh ('.$obj->qty.' sản phẩm)', CExpertise::PROBLEM => 'Nhập kho thiếu do lỗi kỹ thuật'];
                     $data['prob_handle_option'] = ['' => 'Xử lí sản phẩm lỗi',CExpertise::NOT_REWORK => 'Không sản xuất lại', CExpertise::REWORK => 'Sản xuất lại'];
                     $data['field_group_user'] = WUser::getGroupUserFields();
                     return view('kcs.requrirements.view', $data);
@@ -137,12 +139,12 @@
                     }
                     $is_problem = $data['take_status'] == CExpertise::PROBLEM;
                     $is_rework = $is_problem && @$data['handle_problem'] == CExpertise::REWORK;
-                    $product_qty = $product_obj->qty;
+                    $product_qty = $obj->qty;
                     if ($is_problem) {
                         if (empty($data['qty'])) {
                             return returnMessageAjax(100, 'Bạn chưa nhập số lượng đủ điều kiện nhập kho !');
                         }
-                        if ($data['qty'] >= $product_qty) {
+                        if (empty($data['qty']) || $data['qty'] >= $product_qty) {
                             return returnMessageAjax(100, 'Số lượng nhập kho không hợp lệ !');
                         }
                         if (empty($data['handle_problem'])) {
@@ -156,9 +158,13 @@
                             return returnMessageAjax(100, 'Bạn chưa chọn công nhân sản xuất sản phẩm lỗi !');
                         }
                     }
-                    $data_insert['name'] = 'KCS'.' '.$product_obj->name;
+                    $count_exist = CExpertise::where('product', $product_obj->id)->count();
+                    $data_insert['name'] = 'Nhập kho '.' '.$product_obj->name;
+                    if ((int) $count_exist > 0) {
+                        $data_insert['name'] .= ' (đợt '.$count_exist.')';  
+                    }
                     $data_insert['qty'] = @$data['qty'] ?? $product_qty;
-                    $data_insert['product'] = $id;
+                    $data_insert['product'] = $product_obj->id;
                     $data_insert['take_status'] = @$data['take_status'] ?? CExpertise::FULL;
                     $data_insert['handle_problem'] = @$data['handle_problem'] ?? CExpertise::NOT_REWORK;
                     $data_insert['note'] = $data['note'];
@@ -168,10 +174,10 @@
 
                     if ($is_rework) {
                         $data_rework['name'] = 'Sản xuất lại '.$product_obj->name;
-                        $data_rework['product'] = $id;
+                        $data_rework['product'] = $product_obj->id;
                         $data_rework['type'] = $data['type'];
                         $data_rework['worker'] = $data['worker'];
-                        $data_rework['qty'] = $product_obj->qty - $data['qty']; 
+                        $data_rework['qty'] = $product_qty - $data['qty']; 
                         $data_rework['status'] = \StatusConst::NOT_ACCEPTED;
                         $data_rework['rework_status'] = Product::NEED_REWORK;
                         (new \BaseService)->configBaseDataAction($data_rework);
@@ -183,12 +189,8 @@
                     if ($insert_id) {
                         CExpertise::where('id', $insert_id)->update(['code' => 'NK-'.formatCodeInsert($insert_id)]);
                         logActionUserData('insert', 'c_expertises', $insert_id);
-                        $product_status = Product::WAITING_WAREHOUSE;
-                        $product_obj->status = $product_status;
-                        $product_obj->save();
-                        if (checkUpdateOrderStatus($product_obj->order, $product_status)) {
-                            Order::where('id', $product_obj->order)->update(['status' => $product_status]);
-                        }
+                        $obj->status = \StatusConst::SUBMITED;
+                        $obj->save();
                         return returnMessageAjax(200, 'Yêu cầu nhập kho sản phẩm thành công !', \StatusConst::CLOSE_POPUP);
                     }else{
                         return returnMessageAjax(100, 'Lỗi không xác định !');

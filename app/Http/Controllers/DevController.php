@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Schema;
 use App\Constants\VariableConstant;
 use App\Models\CDesign;
 use App\Models\COrder;
+use App\Models\CProduct;
 use App\Models\CSupply;
 use App\Models\Device;
 use App\Models\FillFinish;
@@ -664,6 +665,23 @@ class DevController extends Controller
                     \DB::table($table)->where('id', $supp->id)->update(['handled' => collect($arr)->min()]);
                 }
             }
+        }
+    }
+
+    public function createCProductForSubmitedProduct(){
+        $products = Product::where(['status' => 'submited'])->get();
+        foreach ($products as $product) {
+            $data_insert = [
+                'name' => 'KCS Thành phẩm - '.$product->name,
+                'product' => $product->id,
+                'qty' => $product->qty,
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now(),
+                'act' => 1,
+               'status' => \StatusConst::PROCESSING
+            ];
+            $c_id = CProduct::insertGetId($data_insert);
+            CProduct::getInsertCode($c_id);
         }
     }
     

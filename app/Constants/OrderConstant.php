@@ -118,10 +118,10 @@
             ],
             [
                 'icon' => 'kcs', 
-                'table' => 'products', 
+                'table' => 'c_products', 
                 'text' => 'KCS thành phẩm',
-                'condition' => ['status' => \StatusConst::SUBMITED],
-                'link' => 'view/products?default_data=%7B"status"%3A"'.\StatusConst::SUBMITED.'"%7D',
+                'condition' => ['status' => \StatusConst::PROCESSING],
+                'link' => 'view/c_products?default_data=%7B"status"%3A"'.\StatusConst::PROCESSING.'"%7D',
                 'group_user' => [\GroupUser::ADMIN, \GroupUser::SALE, \GroupUser::KCS, \GroupUser::PRODUCT_WAREHOUSE]  
             ],
             [
