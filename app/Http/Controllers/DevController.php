@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Models\NTable;
 use Illuminate\Support\Facades\Schema;
 use App\Constants\VariableConstant;
+use App\Models\AfterPrint;
 use App\Models\CDesign;
 use App\Models\COrder;
 use App\Models\CProduct;
@@ -682,6 +683,13 @@ class DevController extends Controller
             ];
             $c_id = CProduct::insertGetId($data_insert);
             CProduct::getInsertCode($c_id);
+        }
+    }
+
+    public function handleAfterPrintCheckedWithBug(){
+        $afterPrints = AfterPrint::where('status', 'processing')->get();
+        foreach ($afterPrints as $after_print) {
+            WSalary::where('id', $after_print->w_salary)->update(['status' => 'checking']);
         }
     }
     

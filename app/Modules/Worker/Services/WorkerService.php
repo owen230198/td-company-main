@@ -103,12 +103,13 @@ class WorkerService extends BaseService
         $data_update['submited_at'] = \Carbon\Carbon::now();
         $update = $obj->update($data_update);
         $this_qty = $qty;
-        $need_multiply = isQtyFormulaBySupply($type) && !isQtyFormulaBySupply($next_data['type']);
+        
         if ($update) {
             $qty_check_update = (int) @$data_handle['handle_qty'];
             $next_data = getStageActiveStartHandle($table_supply, $data_command->supply, $type);
             if ($next_data['type'] != \StatusConst::SUBMITED) {
                 //Nếu không phải là bước hoàn tất của sản lệnh
+                $need_multiply = isQtyFormulaBySupply($type) && !isQtyFormulaBySupply($next_data['type']);
                 if ($need_multiply) {
                     //nếu CT lương của lệnh hiện tại tính bằng SL vật tư và CT lương của bước tiếp theo tính bằng sl sản phẩm
                     $next_qty = $qty * $supply->nqty;
