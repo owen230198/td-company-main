@@ -1,9 +1,9 @@
 <div class="order_field_update __order_field_module mt- pt-3 border_top_eb">
     @php
-        $order_field_update = [
+        $select_customers = [
             [
                 'name' => 'order[customer]',
-                'attr' => ['readonly' => !empty($data_order['customer'])],
+                'attr' => ['inject_class' => '__select_parent'],
                 'note' => 'Khách hàng',
                 'type' => 'linking',
                 'other_data' => ['config' => ['search' => 1], 'data'=> ['table' => 'customers']],
@@ -11,12 +11,15 @@
             ],
             [
                 'name' => 'order[represent]',
-                'attr' => ['readonly' => !empty($data_order['represent'])],
+                'attr' => ['inject_class' => '__select_child'],
                 'note' => 'Người liên hệ',
                 'type' => 'linking',
-                'other_data' => ['config' => ['search' => 1], 'data'=> ['table' => 'represents']],
+                'other_data' => ['config' => ['searchbox' => 1], 'data'=> ['table' => 'represents']],
                 'value' => @$data_order['represent']
             ],
+        ];
+        
+        $order_field_update = [
             [
                 'name' => '',
                 'note' => 'Tổng tiền (chưa bao gồm VAT)',
@@ -65,6 +68,11 @@
             ]
         ];
     @endphp
+    <div class="group_class_view __module_select_ajax_value_child" link="option-ajax-child/represents/customer">
+        @foreach ($select_customers as $select_customer)
+            @include('view_update.view', $select_customer)    
+        @endforeach    
+    </div>
     @foreach ($order_field_update as $order_field)
         @include('view_update.view', $order_field)    
     @endforeach
