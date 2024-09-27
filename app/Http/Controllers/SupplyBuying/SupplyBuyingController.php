@@ -241,6 +241,10 @@ use App\Models\SupplyBuying;
                             $data['log']['weight'] = $weight;
                             $update_supply[$key]['weight'] = $weight;
                         }
+                        if ($type == \TDConst::DECAL) {
+                            $data['log']['qty'] = $supply['square'];
+                            $data['log']['square'] = $supply['square'];
+                        }
                     }else{
                         $data['log']['qty'] = $supply_qty;
                     }
@@ -255,6 +259,9 @@ use App\Models\SupplyBuying;
                     }
                     if (!empty($where['weight'])) {
                         unset($where['weight']);
+                    }
+                    if (!empty($where['square'])) {
+                        unset($where['square']);
                     }
                     $where['status'] = \StatusConst::IMPORTED;
                     $data['warehouse'] = $where;
