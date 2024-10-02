@@ -17,7 +17,28 @@
                     @endforeach
                 </div>
                 <div class="col-3">
-                    @foreach ($document_infos as $infor)
+                    @php
+                        $time_fields = [
+                            [
+                                'name' => 'created_at',
+                                'attr' => ['inject_class' => 'price_input'],
+                                'min_label' => 120,
+                                'note' => 'Ngày hạch toán',
+                                'type' => 'datetime',
+                            ],
+                            [
+                                'name' => 'created_at',
+                                'attr' => ['inject_class' => 'price_input'],
+                                'min_label' => 120,
+                                'note' => 'Ngày chứng từ',
+                                'type' => 'datetime',
+                            ],
+                        ]
+                    @endphp
+                    @foreach ($time_fields as $time_field)
+                        @include('view_update.view', $time_field)    
+                    @endforeach
+                    @foreach ($document_infos as $key => $infor)
                         @include('view_info', $infor)     
                     @endforeach
                 </div>

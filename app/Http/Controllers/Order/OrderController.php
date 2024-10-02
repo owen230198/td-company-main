@@ -13,7 +13,8 @@ use App\Models\ProductWarehouse;
 use App\Models\Represent;
 use App\Models\WarehouseHistory;
 use App\Models\WSalary;
-    use Maatwebsite\Excel\Facades\Excel;
+use Carbon\Carbon;
+use Maatwebsite\Excel\Facades\Excel;
 
     class OrderController extends Controller
     {
@@ -451,17 +452,7 @@ use App\Models\WSalary;
                     $data['document_infos'] = [
                         [
                             'min_label' => 120,
-                            'name' => 'Ngày hạch toán',
-                            'value' => date('d/m/Y', Time())
-                        ],
-                        [
-                            'min_label' => 120,
-                            'name' => 'Ngày chứng từ',
-                            'value' => date('d/m/Y', Time())
-                        ],
-                        [
-                            'min_label' => 120,
-                            'name' => 'Người lập',
+                            'name' => 'Người lập CT',
                             'value' => \User::getCurrent('name')
                         ]
                     ];
@@ -483,14 +474,16 @@ use App\Models\WSalary;
                         $objects[$key]['obj'] = $product_warehouse;
                     }
                 } 
-                $data['name'] = 'Trả hàng cho: '.$customer_title.' - Mã đơn: '.$order->code;
+                $data['name'] = 'Trả hàng : '.$customer_title.' - Mã đơn: '.$order->code;
                 $data['type'] = COrder::ORDER;
                 $data['customer'] = $order->customer;
                 $data['represent'] = $order->represent;
                 $data['order'] = $id;
                 $data['object'] = json_encode($data['object']);
                 $data['status'] = \StatusConst::ACCEPTED;
+                $created_at = !empty($data['created_at']) ? getDataDateTime($data['created_at']) : \Carbon\Carbon::now();
                 $this->services->configBaseDataAction($data);
+                $data['created_at'] = $created_at;
                 $c_id = COrder::insertGetId($data);
                 COrder::getInsertCode($c_id);
                 if ($c_id) {
