@@ -515,7 +515,7 @@ use Maatwebsite\Excel\Facades\Excel;
             }
             if (\GroupUser::isAdmin() || \GroupUser::isAccounting() || !empty($my_order)) {
                 $where = $request->except('nosidebar');
-                $data = $this->admins->getDataDebt('c_orders', $where, \StatusConst::ACCEPTED, COrder::ORDER);
+                $data = $this->admins->getDataDebt('c_orders', $where, \StatusConst::ACCEPTED, 'customer', COrder::ORDER);
                 $data['title'] = 'Chi tiết công nợ';
                 $data['link_search'] = 'order-debt';
                 $data['link_insert'] = 'insert/c_orders';

@@ -274,7 +274,7 @@ class AdminService extends BaseService
         return $where;
     }
 
-    public function getDataDebt($table, $where, $status, $type = '')
+    public function getDataDebt($table, $where, $status, $field_target, $type = '')
     {
         $data = $this->getBaseTable($table);
         $data['table'] = $table;
@@ -307,10 +307,20 @@ class AdminService extends BaseService
             'parent' => 0
         ];
         NDetailTable::handleField($data['field_searchs'], 'search');
+        if (!empty($where['group'])) {
+            $group_target = $where['group'];
+            unset($where['group']);
+        }
         $condition = [];
         foreach ($where as $key => $value) {
             if (!empty($value)) {
-                $condition[$key] = $value;
+                if($key == 'created_at'){
+                    $arr_time = getDateRangeToQuery($value); 
+                    $condition[] = [$key, '>=', $arr_time[0]];
+                    $condition[] = [$key, '<=', $arr_time[1]];   
+                }else{
+                    $condition[] = [$key, '=', $value];
+                }
             } 
         }
         $obj = getModelByTable($table)::where('status', $status);
@@ -320,7 +330,22 @@ class AdminService extends BaseService
         $data['total_amount'] = $obj->sum('total');
         $data['total_advance'] = $obj->sum('advance');
         $data['total_rest'] = $data['total_amount'] - $data['total_advance'];
-        $data['data_tables'] = $obj->orderBy('id', 'DESC')->take(50)->get();
+        $data_tables = $obj->orderBy('id', 'DESC')->take(100);
+        if (!empty($group_target)) {
+            $data['data_tables'] = $data_tables->groupBy($field_target)->get()->map(
+                function($data_table) use ($table, $status, $condition, $field_target){
+                    $obj_with_target = getModelByTable($table)::where('status', $status)
+                    ->where($condition)->where($field_target, $data_table->{$field_target});
+                    $data_table->total = $obj_with_target->sum('total');
+                    $data_table->advance = $obj_with_target->sum('advance');
+                    return $data_table;
+                }
+            );
+            $data['range_time'] = !empty($where['created_at']) ? $where['created_at'] : 'Toàn bộ thời gian'; 
+            $data['group_target'] = true; 
+        }else{
+            $data['data_tables'] = $data_tables->get();
+        }
         return $data;
     }
 }

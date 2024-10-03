@@ -123,8 +123,6 @@ use Maatwebsite\Excel\Facades\Excel;
             $arr_file = pathinfo($file->getClientOriginalName());
             $obj = new ImportCOrder($arr_file['filename']);
             $data = Excel::toArray($obj, $file);
-            $none_customer = 0;
-            $has_customer = 0;
             $data_insert = [
                 'type' => COrder::OTHER,
                 'advance' => 0,
