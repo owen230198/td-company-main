@@ -468,6 +468,9 @@ use Maatwebsite\Excel\Facades\Excel;
                             return returnMessageAjax(100, 'Sản phẩm '.$obj_name.' chưa có trong kho !');
                         }
                         $product_warehouse = ProductWarehouse::find($object['id']);
+                        if ($obj_qty == 0) {
+                            return returnMessageAjax(100, 'SL sản phẩm '.$obj_name.' không hợp lệ !');
+                        }
                         if ((int) @$product_warehouse->qty < $obj_qty) {
                             return returnMessageAjax(100, 'Sản phẩm '.$obj_name.' không đủ để trả hàng !');
                         }

@@ -36,7 +36,7 @@
                 </td>
                 <td class="text-center">
                     <div class="price_input_module">
-                        <input type="hidden" class="price_input_value" value="0" name="{{ $obj_name.'[price]' }}">
+                        <input type="hidden" class="price_input_value" value="{{ $price }}" name="{{ $obj_name.'[price]' }}">
                         <input class="form-control font_bold price_input_label border-none price_input price_input_label ml-auto __selling_input_count_item __selling_price_input_item" 
                             type="text" value="{{ number_format($price) }}"> 
                     </div>

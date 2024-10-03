@@ -2,41 +2,55 @@
     <table class="table table-bordered mb-2 ">
         <thead class="theader">
             <tr>
-                <th class="font-bold fs-13">Loại phiếu</th>
-                <th class="font-bold fs-13">Ngày chứng từ</th>
-                <th class="font-bold fs-13">Số CT</th>
-                <th class="font-bold fs-13">Diễn giải</th>
-                <th class="font-bold fs-13">Hàng hóa</th>
-                <th class="font-bold fs-13">Tiền hàng</th>
-                <th class="font-bold fs-13">Thanh toán</th> 
-                <th class="font-bold fs-13">Chức năng</th>   
+                {{-- <th class="font-bold fs-13" rowspan="2">Loại phiếu</th> --}}
+                <th class="font-bold fs-13" rowspan="2">Ngày chứng từ</th>
+                <th class="font-bold fs-13" rowspan="2">Số CT</th>
+                <th class="font-bold fs-13" rowspan="2">Khách hàng</th>
+                <th class="font-bold fs-13" rowspan="1" colspan="4">Hàng hóa</th>
+                <th class="font-bold fs-13" rowspan="2">Tiền hàng</th>
+                <th class="font-bold fs-13" rowspan="2">Thanh toán</th> 
+                <th class="font-bold fs-13" rowspan="2">Chức năng</th>   
+            </tr>
+            <tr>
+                <th class="font-bold fs-13">Tên hàng</th> 
+                <th class="font-bold fs-13">SL</th> 
+                <th class="font-bold fs-13">ĐG</th>  
+                <th class="font-bold fs-13">TT</th>    
             </tr>
         </thead>
         <tbody>
             @foreach ($data_tables as $key => $data)
+                @php
+                    $objects = !empty($data->object) ? json_decode($data->object, true) : [];
+                    $rowspan = count($objects) > 0 ? count($objects) : 1;     
+                @endphp
                 <tr>
-                    <td>
-                        {{ \App\Models\COrder::getTextTypeCOrder($data->type) }}
-                    </td>
-                    <td>
+                    {{-- <td>{{ \App\Models\COrder::getTextTypeCOrder($data->type) }}</td> --}}
+                    <td rowspan="{{ $rowspan }}" class="ver_align_top">
                         @include('view_table.datetime', ['value' => $data->created_at])
                     </td>
-                    <td>
+                    <td rowspan="{{ $rowspan }}" class="ver_align_top">
                         {{ $data->code }}
                     </td>
-                    <td>
-                        {{ $data->name }}
+                    <td rowspan="{{ $rowspan }}" class="ver_align_top">
+                        {{ getFieldDataById('name', 'customers', $data->customer) }}
                     </td>
-                    <td class="text-center">
-                        @include('view_table.json_product')
-                    </td>
-                    <td>
+                    @if (count($objects) > 0)
+                        @php $first_obj = array_shift($objects); @endphp
+                        <td>{{ $first_obj['name'] }}</td>
+                        <td>{{ $first_obj['qty'] }}</td>
+                        <td>{{ number_format($first_obj['price']) }}đ</td>
+                        <td>{{ number_format($first_obj['total']) }}đ</td>
+                    @else
+                        <td colspan="4" class="text-center">Không có hàng hóa</td>
+                    @endif
+                    <td rowspan="{{ $rowspan }}" class="ver_align_top">
                         {{ number_format($data->total) }}đ
                     </td>
-                    <td>
+                    <td rowspan="{{ $rowspan }}" class="ver_align_top">
                         {{ number_format($data->advance) }}đ
                     </td>
-                    <td>
+                    <td rowspan="{{ $rowspan }}" class="ver_align_top">
                         <div class="d-flex align-items-center list_table_func justify-content-center">
                             @if (in_array(@$data->type, \App\Models\COrder::TYPE_PAYMENT) && @$data->rest > 0)
                                 <button type="button" title="Thanh toán" 
@@ -54,22 +68,30 @@
                         </div>
                     </td>
                 </tr>
+                @foreach ($objects as $index => $object)
+                    <tr>
+                        <td>{{ $object['name'] }}</td>
+                        <td>{{ $object['qty'] }}</td>
+                        <td>{{ number_format($object['price']) }}đ</td>
+                        <td>{{ number_format($object['total']) }}đ</td>
+                    </tr>
+                @endforeach
             @endforeach
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="5">
+                <td colspan="8">
                     <p class="font_bold color_green">Tổng tiền hàng đã lấy & tiền đã thanh toán</p>
                 </td>   
                 <td>
                     {{ number_format($total_amount) }}đ
                 </td>
-                <td colspan="3">
+                <td colspan="6">
                     {{ number_format($total_advance) }}đ
                 </td>
             </tr>
             <tr>
-                <td colspan="5">
+                <td colspan="8">
                     <p class="font_bold color_red">{{ $total_rest > 0 ? 'Khách hàng đang nợ' : 'Đang nợ khách ' }}</p>
                 </td>
                 <td colspan="3">

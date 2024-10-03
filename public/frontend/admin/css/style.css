@@ -361,8 +361,20 @@ a.device_supp_item {
     max-width: 350px;
 }
 
+.flex_wrap{
+    flex-wrap: wrap;
+}
+
+.flex_nowrap{
+    flex-wrap: nowrap;
+}
+
 .list_linking_view_update {
     width: 100%;
+}
+
+.ver_align_top{
+    vertical-align: top !important;
 }
 
 .remove_data_linking_button{

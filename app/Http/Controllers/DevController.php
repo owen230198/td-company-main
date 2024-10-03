@@ -692,6 +692,20 @@ class DevController extends Controller
             WSalary::where('id', $after_print->w_salary)->update(['status' => 'checking']);
         }
     }
+
+    public function handlePriceDelivery(){
+        $data = COrder::whereNotNull('object')->get();
+        foreach ($data as $c_order) {
+            $objects = json_decode($c_order->object, true);
+            foreach ($objects as $key => $object) {
+                if ($object['price'] == 0) {
+                    $object_qty = !empty($object['qty']) ? $object['qty'] : 1;
+                    $objects[$key]['price'] = (int)($object['total']/$object_qty);
+                }
+            }
+            COrder::where('id', $c_order->id)->update(['object' => json_encode($objects)]);
+        }
+    }
     
 }
 
