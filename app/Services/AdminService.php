@@ -285,6 +285,7 @@ class AdminService extends BaseService
                 if ($type == COrder::ORDER) {
                     $data['field_searchs'][] = NDetailTable::where(['table_map' => $table, 'name' => 'order'])->get()->first();
                 }
+                $data['field_searchs'][] = NDetailTable::where(['table_map' => 'orders', 'name' => 'list_product'])->get()->first();
             }else {
                 $data['field_searchs'][] = NDetailTable::where(['table_map' => $table, 'name' => 'customer'])->get()->first(); 
             }
@@ -311,6 +312,11 @@ class AdminService extends BaseService
             $group_target = $where['group'];
             unset($where['group']);
         }
+        $this->processDataDebt($table, $where, $status, $field_target, $data);
+        return $data;
+    }
+
+    public function processDataDebt($table, $where, $status, $field_target, &$data){
         $condition = [];
         foreach ($where as $key => $value) {
             if (!empty($value)) {
@@ -330,7 +336,7 @@ class AdminService extends BaseService
         $data['total_amount'] = $obj->sum('total');
         $data['total_advance'] = $obj->sum('advance');
         $data['total_rest'] = $data['total_amount'] - $data['total_advance'];
-        $data_tables = $obj->orderBy('id', 'DESC')->take(100);
+        $data_tables = $obj->orderBy('id', 'DESC')->take(200);
         if (!empty($group_target)) {
             $data['data_tables'] = $data_tables->groupBy($field_target)->get()->map(
                 function($data_table) use ($table, $status, $condition, $field_target){
@@ -346,6 +352,5 @@ class AdminService extends BaseService
         }else{
             $data['data_tables'] = $data_tables->get();
         }
-        return $data;
     }
 }

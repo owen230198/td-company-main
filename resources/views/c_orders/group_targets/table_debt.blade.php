@@ -7,6 +7,7 @@
                 <th class="font-bold fs-13">Người đại diện</th>
                 <th class="font-bold fs-13">Tiền hàng</th>
                 <th class="font-bold fs-13">Thanh toán</th> 
+                <th class="font-bold fs-13">Tổng nợ</th> 
             </tr>
         </thead>
         <tbody>
@@ -21,18 +22,26 @@
                     <td>
                         {{ getFieldDataById('name', 'represents', $data->represent) }}
                     </td>
+                    @php
+                        $total = (float) $data->total;
+                        $advance = (float) $data->advance;
+                        $rest = $total - $advance;
+                    @endphp
                     <td>
-                        {{ number_format($data->total) }}đ
+                        {{ number_format($total) }}đ
                     </td>
                     <td>
-                        {{ number_format($data->advance) }}đ
+                        {{ number_format($advance) }}đ
+                    </td>
+                    <td>
+                        {{ number_format($rest) }}đ
                     </td>
                 </tr>
             @endforeach
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="3">
+                <td colspan="4">
                     <p class="font_bold color_green">Tổng tiền hàng đã lấy & tiền đã thanh toán</p>
                 </td>   
                 <td>
@@ -43,7 +52,7 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="3">
+                <td colspan="4">
                     <p class="font_bold color_red">{{ $total_rest > 0 ? 'Khách hàng đang nợ' : 'Đang nợ khách ' }}</p>
                 </td>
                 <td colspan="2">

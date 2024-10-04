@@ -26,14 +26,20 @@
                 @endphp
                 <tr>
                     {{-- <td>{{ \App\Models\COrder::getTextTypeCOrder($data->type) }}</td> --}}
-                    <td rowspan="{{ $rowspan }}" class="ver_align_top">
+                    <td rowspan="{{ $rowspan }}">
                         @include('view_table.datetime', ['value' => $data->created_at])
                     </td>
-                    <td rowspan="{{ $rowspan }}" class="ver_align_top">
+                    <td rowspan="{{ $rowspan }}">
                         {{ $data->code }}
                     </td>
-                    <td rowspan="{{ $rowspan }}" class="ver_align_top">
-                        {{ getFieldDataById('name', 'customers', $data->customer) }}
+                    <td rowspan="{{ $rowspan }}">
+                        @php
+                            $customer_name = getFieldDataById('name', 'customers', $data->customer);
+                            $represent = getDetailDataObject('represents', $data->represent);
+                        @endphp
+                        <p class="mb-1">- {{ $customer_name }}</p>
+                        <p class="mb-1">- {{ $represent->name }}</p>
+                        <p class="mb-1">- {{ $represent->phone }}</p>
                     </td>
                     @if (count($objects) > 0)
                         @php $first_obj = array_shift($objects); @endphp
@@ -44,13 +50,13 @@
                     @else
                         <td colspan="4" class="text-center">Không có hàng hóa</td>
                     @endif
-                    <td rowspan="{{ $rowspan }}" class="ver_align_top">
+                    <td rowspan="{{ $rowspan }}">
                         {{ number_format($data->total) }}đ
                     </td>
-                    <td rowspan="{{ $rowspan }}" class="ver_align_top">
+                    <td rowspan="{{ $rowspan }}">
                         {{ number_format($data->advance) }}đ
                     </td>
-                    <td rowspan="{{ $rowspan }}" class="ver_align_top">
+                    <td rowspan="{{ $rowspan }}">
                         <div class="d-flex align-items-center list_table_func justify-content-center">
                             @if (in_array(@$data->type, \App\Models\COrder::TYPE_PAYMENT) && @$data->rest > 0)
                                 <button type="button" title="Thanh toán" 
