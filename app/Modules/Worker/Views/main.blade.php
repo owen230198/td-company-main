@@ -28,7 +28,7 @@
                                 $supply = \DB::table($item->table_supply)->find($item->supply);
                                 $data_handle = !empty($supply->{$worker['type']}) ? json_decode($supply->{$worker['type']}, true) : [];
                             @endphp
-                            @if (!empty($data_handle))
+                            @if (!empty($data_handle) || @$worker['dev'] == 1)
                                 <div class="col-lg-6 mb_20">
                                     @include('Worker::commands.items.base', 
                                     ['supply' => $supply, 'handle' => $data_handle, 'key_type' => $worker['type'], 'command' => $item])
