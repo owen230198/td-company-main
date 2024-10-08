@@ -226,11 +226,11 @@ class NGroupUser extends Model
             'link' => 'view/c_expertises?default_data=%7B%22status%22%3A%22not_accepted%22%7D',
             'group' => 'product_warehouse'
         ],
-        'product_history' => [
-            'name' => 'Tổng hợp tồn kho',
-            'link' => 'inventory-aggregate',
-            'group' => 'product_warehouse'
-        ],
+        // 'product_history' => [
+        //     'name' => 'Tổng hợp tồn kho',
+        //     'link' => 'inventory-aggregate',
+        //     'group' => 'product_warehouse'
+        // ],
         'order_ready' => [
             'name' => 'Quản lí bán hàng',
             'link' => 'view/c_orders',
@@ -375,7 +375,7 @@ class NGroupUser extends Model
                 self::MODULE['handle_process'],
                 self::MODULE['product_management'],
                 self::MODULE['expertise'],
-                self::MODULE['product_history'],
+                // self::MODULE['product_history'],
                 self::MODULE['account'],
                 self::MODULE['change_password'],
             ],
@@ -392,7 +392,7 @@ class NGroupUser extends Model
                 self::MODULE['im_supply'],
                 self::MODULE['product_management'],
                 self::MODULE['expertise'],
-                self::MODULE['product_history'],
+                // self::MODULE['product_history'],
                 self::MODULE['order_debt'],
                 self::MODULE['supply_debt'],
                 self::MODULE['account'],
