@@ -33,7 +33,8 @@
                 ],
                 \GroupUser::PLAN_HANDLE => [
                     'insert' => 1,
-                    'view' => 1
+                    'update' => 1,
+                    'view' => 1,
                 ],
                 \GroupUser::ACCOUNTING => [
                     'view' => 1,
