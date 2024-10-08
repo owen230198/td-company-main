@@ -25,7 +25,8 @@
                     <input type="hidden" name="{{ $obj_name.'[id]' }}" value="{{ @$product_warehouse->id }}">
                     <input type="hidden" name="{{ $obj_name.'[product]' }}" value="{{ @$product->id }}">
                     <input type="hidden" name="{{ $obj_name.'[name]' }}" value="{{ @$product_name }}">
-                    {{ $product_name }}
+                    <p>- Tên sản phẩm: {{ $product_name }}</p>
+                    <p class="mt-1">- Đang Tồn kho: {{ @$product_warehouse->qty ?? 0 }}</p>
                 </td>
                 <td>{{ $product->qty }}</td>
                 <td class="text-center">

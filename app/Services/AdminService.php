@@ -6,6 +6,8 @@ use App\Services\BaseService;
 use App\Models\NDetailTable;
 use App\Models\NLogAction;
 use App\Models\NTable;
+use App\Models\ProductWarehouse;
+
 class AdminService extends BaseService
 {
     function __construct()
@@ -273,33 +275,30 @@ class AdminService extends BaseService
         }
         return $where;
     }
-
-    public function getDataDebt($table, $where, $status, $field_target, $type = '')
+    private function getFieldSearchDebt($table, $type, $group_target)
     {
-        $data = $this->getBaseTable($table);
-        $data['table'] = $table;
-        $data['field_searchs'] = [];
+        $ret = [];
         if ($table == 'c_orders') {
             if (in_array($type, [COrder::ADVANCE, COrder::ORDER, COrder::SELL])) {
-                $data['field_searchs'][] = NDetailTable::where(['table_map' => $table, 'name' => 'group_customer'])->get()->first();
-                if ($type == COrder::ORDER) {
-                    $data['field_searchs'][] = NDetailTable::where(['table_map' => $table, 'name' => 'order'])->get()->first();
+                $ret[] = NDetailTable::where(['table_map' => $table, 'name' => 'group_customer'])->get()->first();
+                if ($type == COrder::ORDER && !$group_target) {
+                    $ret[] = NDetailTable::where(['table_map' => $table, 'name' => 'order'])->get()->first();
+                    $ret[] = NDetailTable::where(['table_map' => 'orders', 'name' => 'list_product'])->get()->first();
                 }
-                $data['field_searchs'][] = NDetailTable::where(['table_map' => 'orders', 'name' => 'list_product'])->get()->first();
             }else {
-                $data['field_searchs'][] = NDetailTable::where(['table_map' => $table, 'name' => 'customer'])->get()->first(); 
+                $ret[] = NDetailTable::where(['table_map' => $table, 'name' => 'customer'])->get()->first(); 
             }
         }else{
-            $data['field_searchs'][] = NDetailTable::where(['table_map' => $table, 'name' => 'provider'])->get()->first();
+            $ret[] = NDetailTable::where(['table_map' => $table, 'name' => 'provider'])->get()->first();
         }
-        $data['field_searchs'][] =  [
+        $ret[] =  [
             'name' => 'created_at',
             'attr' => '{"class_on_search":"change_submit"}',
             'note' => 'Ngày chứng từ',
             'type' => 'datetime',
             'parent' => 0
         ];
-        $data['field_searchs'][] = [
+        $ret[] = [
             'name' => 'created_by',
             'attr' => '{"class_on_search":"change_submit"}',
             'note' => 'Người lập ',
@@ -307,33 +306,45 @@ class AdminService extends BaseService
             'other_data' => '{"config":{"search":1},"data":{"table":"n_users"}}',
             'parent' => 0
         ];
-        NDetailTable::handleField($data['field_searchs'], 'search');
-        if (!empty($where['group'])) {
-            $group_target = $where['group'];
-            unset($where['group']);
-        }else{
-            $group_target = false;
-        }
-        $this->processDataDebt($table, $where, $status, $field_target, $group_target, $data);
+        NDetailTable::handleField($ret, 'search');
+        return $ret;
+    }
+    public function getDataDebt($table, $where, $status, $field_target, $type = '')
+    {
+        $data = $this->getBaseTable($table);
+        $data['table'] = $table;
+        $data['field_searchs'] = $this->getFieldSearchDebt($table, $type, !empty($where['group']));
+        $this->processDataDebt($table, $where, $status, $field_target, $data);
         return $data;
     }
 
-    public function processDataDebt($table, $where, $status, $field_target, $group_target, &$data){
-        $condition = [];
-        foreach ($where as $key => $value) {
-            if (!empty($value)) {
-                if($key == 'created_at'){
-                    $arr_time = getDateRangeToQuery($value); 
-                    $condition[] = [$key, '>=', $arr_time[0]];
-                    $condition[] = [$key, '<=', $arr_time[1]];   
-                }else{
-                    $condition[] = [$key, '=', $value];
-                }
-            } 
+    public function processDataDebt($table, $where, $status, $field_target, &$data){
+        if (!empty($where['group'])) {
+            $group_target = $where['group'];
+            unset($where['group']);
+            if (!empty($where['order'])) {
+                unset($where['order']);
+            }
+        }else{
+            $group_target = false;
         }
+        if (!empty($where['list_product'])) {
+            $product_sname = $where['list_product'];
+            unset($where['list_product']);
+        }
+        $condition = $this->handleDebtCondition($where);
         $obj = getModelByTable($table)::where('status', $status);
         if (!empty($condition)) {
             $obj = $obj->where($condition);
+        }
+        if (!empty($product_sname) && !$group_target) {
+            $q_product = trim($product_sname);
+            $arr_pid = ProductWarehouse::where('name', 'like', '%'.$q_product.'%')->pluck('id')->toArray();
+            $obj->where(function ($query) use ($arr_pid) {
+                foreach ($arr_pid as $id) {
+                    $query->orWhereJsonContains('object', ['id' => (string) $id]);
+                }
+            });
         }
         $data['total_amount'] = $obj->sum('total');
         $data['total_advance'] = $obj->sum('advance');
@@ -354,5 +365,22 @@ class AdminService extends BaseService
         }else{
             $data['data_tables'] = $data_tables->get();
         }
+    }
+
+    private function handleDebtCondition($where)
+    {
+        $condition = [];
+        foreach ($where as $key => $value) {
+            if (!empty($value)) {
+                if($key == 'created_at'){
+                    $arr_time = getDateRangeToQuery($value); 
+                    $condition[] = [$key, '>=', $arr_time[0]];
+                    $condition[] = [$key, '<=', $arr_time[1]];   
+                }else{
+                    $condition[] = [$key, '=', $value];
+                }
+            } 
+        }
+        return $condition;
     }
 }
