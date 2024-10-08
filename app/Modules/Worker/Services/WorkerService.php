@@ -170,16 +170,16 @@ class WorkerService extends BaseService
                 $handled_pro = !isQtyFormulaBySupply($type) ? $handled : $handled * $n_qty;
                 $supply_obj->handled = $handled_pro;
                 $supply_obj->save();
-                if ($table_supply == 'papers') {
-                    $p_childs = Paper::where('parent', $supply_id)->get();
-                    foreach ($p_childs as $p_child) {
-                        Paper::where('id', $p_child->id)->update(['handled' => $handled_pro]);
-                        if (!empty($p_child->product)) {
-                            Product::createCProduct($p_child->product);
-                        }
-                    }
-                }
-                if (!empty($supply_obj->product)) {
+                // if ($table_supply == 'papers') {
+                //     $p_childs = Paper::where('parent', $supply_id)->get();
+                //     foreach ($p_childs as $p_child) {
+                //         Paper::where('id', $p_child->id)->update(['handled' => $handled_pro]);
+                //         if (!empty($p_child->product)) {
+                //             Product::createCProduct($p_child->product);
+                //         }
+                //     }
+                // }
+                if (!empty($supply_obj->product) && empty($supply_obj->is_join)) {
                     Product::createCProduct($supply_obj->product);
                 }
             }

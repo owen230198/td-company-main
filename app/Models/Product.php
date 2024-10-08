@@ -397,8 +397,13 @@
         {
             $child_tables = self::$childTable;
             $arr_qty = [];
+           
             foreach ($child_tables as $table) {
-                $arr_qty[] = \DB::table($table)->where('product', $id)->min('handled');
+                $where = ['product' => $id];
+                if ($table == 'papers') {
+                    $where['parent'] = 0;
+                }
+                $arr_qty[] = \DB::table($table)->where($where)->min('handled');
             }
             $min_qty = collect($arr_qty)->min();
             if ($min_qty > 0) {
