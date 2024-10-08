@@ -16,11 +16,13 @@ class WorkerService extends BaseService
 
     public function getListDataHome($worker, $where = [])
     {
-        $type = @$worker['type'];
-        $where['type'] = $type; 
-        $where['status'] = \StatusConst::NOT_ACCEPTED;
-        if (!in_array($type, [\TDConst::FINISH])) {
-            $where['machine_type'] = @$worker['device'];
+        if (empty($worker['dev'])) {
+            $type = @$worker['type'];
+            $where['type'] = $type; 
+            $where['status'] = \StatusConst::NOT_ACCEPTED;
+            if (!in_array($type, [\TDConst::FINISH])) {
+                $where['machine_type'] = @$worker['device'];
+            }
         }
         return getDataWorkerCommand($where, true);
     }
@@ -164,7 +166,7 @@ class WorkerService extends BaseService
             }
             $submited_stt = \StatusConst::SUBMITED;
             if (@$next_data['type'] == $submited_stt) {
-                $n_qty = !empty($supply_obj->n_qty) ? (int) $supply_obj->n_qty : 1;
+                $n_qty = !empty($supply_obj->nqty) ? (int) $supply_obj->nqty : 1;
                 $handled_pro = !isQtyFormulaBySupply($type) ? $handled : $handled * $n_qty;
                 $supply_obj->handled = $handled_pro;
                 $supply_obj->save();
