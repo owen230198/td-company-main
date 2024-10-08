@@ -311,12 +311,14 @@ class AdminService extends BaseService
         if (!empty($where['group'])) {
             $group_target = $where['group'];
             unset($where['group']);
+        }else{
+            $group_target = false;
         }
-        $this->processDataDebt($table, $where, $status, $field_target, $data);
+        $this->processDataDebt($table, $where, $status, $field_target, $group_target, $data);
         return $data;
     }
 
-    public function processDataDebt($table, $where, $status, $field_target, &$data){
+    public function processDataDebt($table, $where, $status, $field_target, $group_target, &$data){
         $condition = [];
         foreach ($where as $key => $value) {
             if (!empty($value)) {

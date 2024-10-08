@@ -1461,7 +1461,7 @@ var viewDebtGroup = function () {
         event.preventDefault();
         let form = $(this).closest('.__debt_base_view').find('#form-search');
         let params = form.serialize();
-        let url = form.attr('action') + '?' + params + '&group=false';
+        let url = form.attr('action') + '?' + params + '&group=true';
         window.parent.location.href = url;
     });
 }

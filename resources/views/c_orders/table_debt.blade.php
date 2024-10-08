@@ -48,7 +48,7 @@
                         <td>{{ number_format($first_obj['price']) }}đ</td>
                         <td>{{ number_format($first_obj['total']) }}đ</td>
                     @else
-                        <td colspan="4" class="text-center">Không có hàng hóa</td>
+                        <td colspan="4" class="text-center">{{ $data->note }}</td>
                     @endif
                     <td rowspan="{{ $rowspan }}">
                         {{ number_format($data->total) }}đ
