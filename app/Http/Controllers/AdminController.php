@@ -322,7 +322,8 @@ class AdminController extends Controller
         $data = $request->all();
         $id = $data['remove_id'];
         $table = $data['table'];
-        $role = $this->admins->checkPermissionAction($table, __FUNCTION__);
+        $dataItem = getModelByTable($table)->find($id);
+        $role = $this->admins->checkPermissionAction($table, __FUNCTION__, $dataItem);
         $is_ajax = (boolean) $request->input('ajax');
         if (empty($role['allow'])) {
             return customReturnMessage(false, $is_ajax, ['message' => 'Không có quyền thao tác !']);

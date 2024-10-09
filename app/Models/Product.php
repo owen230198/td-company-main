@@ -156,7 +156,17 @@
                             ]
                         ]]
                     ],
-                    'clone' => 1
+                    'clone' => 1,
+                    'remove' => 
+                    [
+                        'with' => [[
+                            'type' => 'group',
+                            'query' => [
+                                ['key' => 'created_by', 'value' => \User::getCurrent('id')],
+                                ['key' => 'status', 'value' => null]
+                            ]
+                        ]]
+                    ],
                 ],
                 \GroupUser::TECH_APPLY => [
                     'view' => 
