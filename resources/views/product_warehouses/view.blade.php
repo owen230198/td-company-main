@@ -8,7 +8,6 @@
             @foreach ($info_fields as $key => $iField)
                 @php
                     $is_last = $key == 7;
-                    $iField['attr']['readonly'] = $is_last ? 0 : 1;
                     $iField['name'] = 'warehouse['.$iField['name'].']';
                     $is_show = !empty($iField['value']) || $is_last;
                 @endphp

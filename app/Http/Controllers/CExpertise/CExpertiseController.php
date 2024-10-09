@@ -55,7 +55,7 @@
                 $info_fields = [
                     [
                         'name' => 'name',
-                        'attr' => ['inject_class' => 'length_input', 'required' => 1],
+                        'attr' => ['inject_class' => 'length_input', 'required' => 1, 'readonly' => 1],
                         'note' => 'Tên sản phẩm',
                         'value' => $product_obj->name
                     ],
@@ -68,6 +68,7 @@
                     [
                         'name' => 'category',
                         'note' => 'Nhóm sản phẩm',
+                        'attr' => ['readonly' => 1],
                         'type' => 'linking',
                         'other_data' => ['data' => ['table' => 'product_categories']],
                         'value' => $product_obj->category
@@ -75,13 +76,14 @@
                     [
                         'name' => 'style',
                         'type' => 'linking',
+                        'attr' => ['readonly' => 1],
                         'note' => 'Kiểu dáng',
                         'other_data' => ['data' => ['table' => 'product_styles']],
                         'value' => $product_obj->product_style
                     ],
                     [
                         'name' => '',
-                        'attr' => ['disable_field' => 1],
+                        'attr' => ['disable_field' => 1, 'readonly' => 1],
                         'note' => 'Kích thước',
                         'other_data' => ['data' => ['table' => 'product_styles']],
                         'value' => $size,
@@ -90,7 +92,7 @@
                         'name' => 'price',
                         'note' => 'Đơn giá',
                         'value' => $price,
-                        'attr' => ['required' => 1]
+                        'attr' => ['required' => 1, 'readonly' => 1]
                     ],
                     [
                         'name' => 'made_by',
@@ -98,7 +100,7 @@
                         'type' => 'linking',
                         'value' => 1,
                         'other_data' => ['data' => ['table' => 'partners']],
-                        'attr' => ['required' => 1]
+                        'attr' => ['required' => 1, 'readonly' => 1]
                     ],
                     [
                         'name' => 'warehouse_type',
@@ -131,6 +133,10 @@
                     //     return returnMessageAjax(100, 'Bạn cần upload phiếu nhập kho !');
                     // }
                     $qty = (int) $data_expertise->qty;
+                    $ex_qty = (int) $warehouse['qty'];
+                    if ($ex_qty > $qty) {
+                        return returnMessageAjax(100, 'Lệnh chỉ yêu cầu nhập kho '.$qty.' thành phẩm !');  
+                    }
                     $produce_price = (int) $product_obj->total_cost/$product_obj->qty;
                     if ($log['action'] == 'insert') {
                         if (empty($warehouse['unit'])) {
@@ -158,7 +164,7 @@
                         $obj_qty = (int) $obj->qty;
                         $obj->price = $price;
                         $obj->produce_price = $produce_price;
-                        $obj->qty = $obj_qty + $qty;
+                        $obj->qty = $obj_qty + $ex_qty;
                         $process = $obj->save();
                     }
 
@@ -176,8 +182,19 @@
 
                         //log 
                         $arr_log = ['receipt' => $log['receipt'], 'note' => $log['note']];
-                        ProductHistory::doLogWarehouse($warehouse_id, $qty, 0, 0, $product_id, $arr_log);
-                        return returnMessageAjax(200, 'Đã nhập kho '.$qty.' sản phẩm'.$product_obj->name, \StatusConst::CLOSE_POPUP);
+                        ProductHistory::doLogWarehouse($warehouse_id, $ex_qty, 0, 0, $product_id, $arr_log);
+                        if ($ex_qty < $qty) {
+                            $re_insert = $data_expertise->toArray();
+                            $re_insert['name'] = $data_expertise->name.' (Còn lại của lệnh)'.$data_expertise->code;
+                            $re_insert['qty'] = $qty - $ex_qty;
+                            $re_insert['status'] = \StatusConst::NOT_ACCEPTED;
+                            unset($re_insert['id']);
+                            (new \BaseService)->configBaseDataAction($re_insert);
+                            $reInsertId = CExpertise::insertGetId($re_insert);
+                            CExpertise::where('id', $reInsertId)->update(['code' => 'NK-'.formatCodeInsert($reInsertId)]);
+                            logActionUserData('insert', 'c_expertises', $reInsertId);
+                        }
+                        return returnMessageAjax(200, 'Đã nhập kho '.$ex_qty.' sản phẩm'.$product_obj->name, \StatusConst::CLOSE_POPUP);
                     }else{
                         return returnMessageAjax(100, 'Đã có lỗi xảy ra, vui lòng thử lại !');
                     }
