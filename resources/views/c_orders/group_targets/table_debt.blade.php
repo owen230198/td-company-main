@@ -17,7 +17,7 @@
                         {{ $range_time }}
                     </td>
                     <td>
-                        {{ getFieldDataById('name', 'customers', $data->customer) }}
+                        <a href="{{ url()->full().'&customer='.$data->customer }}">{{ getFieldDataById('name', 'customers', $data->customer) }}</a>
                     </td>
                     <td>
                         {{ getFieldDataById('name', 'represents', $data->represent) }}
@@ -53,10 +53,10 @@
             </tr>
             <tr>
                 <td colspan="4">
-                    <p class="font_bold color_red">{{ $total_rest > 0 ? 'Khách hàng đang nợ' : 'Đang nợ khách ' }}</p>
+                    <p class="font_bold color_red">Số tiền còn nợ</p>
                 </td>
                 <td colspan="2">
-                    <p class="font_bold color_red text-center">{{ number_format(abs($total_rest)) }}đ</p>
+                    <p class="font_bold color_red text-center">{{ number_format($total_rest) }}đ</p>
                 </td>
             </tr>
         </tfoot>

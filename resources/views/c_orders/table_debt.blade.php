@@ -37,9 +37,10 @@
                             $customer_name = getFieldDataById('name', 'customers', $data->customer);
                             $represent = getDetailDataObject('represents', $data->represent);
                         @endphp
-                        <p class="mb-1">- {{ $customer_name }}</p>
-                        <p class="mb-1">- {{ $represent->name }}</p>
-                        <p class="mb-1">- {{ $represent->phone }}</p>
+                        <a class="d-block" href="{{ url()->full().'&customer='.$data->customer }}">
+                            - {{ $customer_name }}
+                        </a>
+                        <p class="mt-1">- {{ $represent->name .' - '.$represent->phone }}</p>
                     </td>
                     @if (count($objects) > 0)
                         @php $first_obj = array_shift($objects); @endphp
@@ -98,10 +99,10 @@
             </tr>
             <tr>
                 <td colspan="8">
-                    <p class="font_bold color_red">{{ $total_rest > 0 ? 'Khách hàng đang nợ' : 'Đang nợ khách ' }}</p>
+                    <p class="font_bold color_red">Số tiền còn nợ</p>
                 </td>
                 <td colspan="3">
-                    <p class="font_bold color_red text-center">{{ number_format(abs($total_rest)) }}đ</p>
+                    <p class="font_bold color_red text-center">{{ number_format($total_rest) }}đ</p>
                 </td>
             </tr>
         </tfoot>

@@ -243,7 +243,7 @@ class NGroupUser extends Model
         ],
         'order_debt' => [
             'name' => 'Công nợ bán hàng',
-            'link' => 'order-debt',
+            'link' => 'order-debt?group=0',
             'group' => 'report'
         ],
         'supply_debt' => [
