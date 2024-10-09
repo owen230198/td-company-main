@@ -427,6 +427,26 @@ var inventoryExportExcel = function ()
     })
 }
 
+var viewDebtGroup = function () {
+    $(document).on('click', 'button.__view_debt_goup_btn', function (event) {
+        event.preventDefault();
+        let form = $(this).closest('.__debt_base_view').find('#form-search');
+        let params = form.serialize();
+        let url = form.attr('action') + '?' + params + '&group=true';
+        window.parent.location.href = url;
+    });
+}
+
+var viewDebtGroup = function () {
+    $(document).on('click', 'button.__export_data_debt', function (event) {
+        event.preventDefault();
+        let form = $(this).closest('.__debt_base_view').find('#form-search');
+        let params = form.serialize();
+        let url = getBaseRoute('export-data-debt') + '?' + params + '&group=true';
+        window.location.href = url;
+    });
+}
+
 $(function(){
     setAdvanceCostOrder(); 
     moduleVATOrder();
@@ -441,4 +461,5 @@ $(function(){
     searchIngredient();
     inventoryAjaxForm();
     inventoryExportExcel();
+    viewDebtGroup();
 });

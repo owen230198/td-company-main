@@ -1456,15 +1456,7 @@ var confirmTakeOutSelling = function () {
     });
 }
 
-var viewDebtGroup = function () {
-    $(document).on('click', 'button.__view_debt_goup_btn', function (event) {
-        event.preventDefault();
-        let form = $(this).closest('.__debt_base_view').find('#form-search');
-        let params = form.serialize();
-        let url = form.attr('action') + '?' + params + '&group=true';
-        window.parent.location.href = url;
-    });
-}
+
 
 var priceInputModule = function(){
     $(document).on('change keyup', '.price_input_module input.price_input_label', function(event){
@@ -1549,7 +1541,6 @@ $(function () {
     countPriceSellingModule();
     selectOrderForSelling();
     confirmTakeOutSelling();
-    viewDebtGroup();
     priceInputModule();
     confirmCLoneDataTable();
     viewChartBtn();
