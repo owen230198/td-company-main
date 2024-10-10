@@ -69,6 +69,7 @@ Route::middleware(['check_login'])->group(function () {
 	Route::any('ajax-respone/{method}', [AjaxResponeController::class, 'index']);
 	Route::any('notify-process/{id}', [NotifyController::class, 'notifyProcess']);
 	Route::any('report/{method}', [ReportController::class, 'index']);
+	Route::get('export-data-debt/{table}', [AdminController::class, 'exportDataDebt']);
 
 	//quotes routes
 	Route::any('create-quote', [QuoteController::class, 'createQuote']);

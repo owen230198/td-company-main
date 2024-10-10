@@ -440,9 +440,12 @@ var viewDebtGroup = function () {
 var viewDebtGroup = function () {
     $(document).on('click', 'button.__export_data_debt', function (event) {
         event.preventDefault();
-        let form = $(this).closest('.__debt_base_view').find('#form-search');
+        let _this = $(this);
+        let form = _this.closest('.__debt_base_view').find('#form-search');
         let params = form.serialize();
-        let url = getBaseRoute('export-data-debt') + '?' + params + '&group=true';
+        let table = _this.data('table');
+        let group = _this.data('group');;
+        let url = getBaseRoute('export-data-debt/') + table + '?group=' + group + '&' + params;
         window.location.href = url;
     });
 }

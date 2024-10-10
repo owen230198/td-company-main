@@ -540,7 +540,7 @@ use App\Models\SupplyBuying;
         {
             if (\GroupUser::isAdmin() || \GroupUser::isAccounting()) {
                 $where = $request->except('nosidebar');
-                $data = $this->admins->getDataDebt('supply_buyings', $where, \StatusConst::SUBMITED, 'provider');
+                $data = $this->admins->getDataDebt('supply_buyings', $where);
                 $data['title'] = 'Chi tiết công nợ';
                 $data['link_search'] = 'supply-debt';
                 $data['link_insert'] = 'ajax-respone/insertSupplyPayment';

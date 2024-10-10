@@ -612,5 +612,20 @@ class AdminController extends Controller
         $username = $request->input('username');
         return !empty($arr_cookie[$username]) ? $arr_cookie[$username] : '';
     }
+
+    public function exportDataDebt(Request $request, $table)
+    {
+        $role = $this->admins->checkPermissionAction($table, 'view');
+        if (!@$role['allow']) {
+            return back()->with('error', 'Bạn không có quyền thao tác!');
+        }  
+        $where = $request->except('nosidebar');;
+        $data['is_export'] = 1;
+        $data['table'] = $table;
+        $data['title'] = getTitleDebtByTable($table);
+        $this->admins->processDataDebt($table, $where, $data);
+        $prefix = !empty($where['group']) ? 'group_targets.' : '';
+        return Excel::download(new \App\Services\ExportExcel\ExportExcelService($data, $table.'.'.$prefix.'table_debt'), $data['title'].'.xlsx');
+    }
 }
 

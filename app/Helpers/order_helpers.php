@@ -634,3 +634,19 @@
             return ['bool' => $bool, 'min_command' => $min_command, 'count_handle' => count($handle_materal), 'next_qty' => $min_command - $exist_next];
         }
     }
+
+    if (!function_exists('getTitleDebtByTable')) {
+        function getTitleDebtByTable($table){
+            switch ($table) {
+                case 'c_orders':
+                    return 'công nợ bán hàng';
+                    break;
+                case 'c_orders':
+                    return 'công nợ mua vật tư';
+                    break;
+                default:
+                    return '';
+                    break;
+            }
+        }
+    }

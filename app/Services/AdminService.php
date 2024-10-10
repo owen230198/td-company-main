@@ -309,16 +309,16 @@ class AdminService extends BaseService
         NDetailTable::handleField($ret, 'search');
         return $ret;
     }
-    public function getDataDebt($table, $where, $status, $field_target, $type = '')
+    public function getDataDebt($table, $where, $type = '')
     {
         $data = $this->getBaseTable($table);
         $data['table'] = $table;
         $data['field_searchs'] = $this->getFieldSearchDebt($table, $type, !empty($where['group']));
-        $this->processDataDebt($table, $where, $status, $field_target, $data);
+        $this->processDataDebt($table, $where, $data);
         return $data;
     }
 
-    public function processDataDebt($table, $where, $status, $field_target, &$data){
+    public function processDataDebt($table, $where, &$data){
         if (!empty($where['group'])) {
             $group_target = $where['group'];
             unset($where['group']);
@@ -331,6 +331,13 @@ class AdminService extends BaseService
         if (!empty($where['list_product'])) {
             $product_sname = $where['list_product'];
             unset($where['list_product']);
+        }
+        if ($table == 'supply_buyings') {
+            $status = \StatusConst::SUBMITED;
+            $field_target = 'provicer';
+        }else{
+            $status = \StatusConst::ACCEPTED;
+            $field_target = 'customer';
         }
         $condition = $this->handleDebtCondition($where);
         $obj = getModelByTable($table)::where('status', $status);
