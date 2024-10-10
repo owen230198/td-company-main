@@ -1,6 +1,18 @@
 <div class="position-relative table_base_view">
     <table class="table table-bordered mb-2 ">
         <thead class="theader">
+            @if (!empty($is_export))
+                <tr>
+                    <th colspan="6">
+                        <h3>{{ $title}}</h3>
+                    </th>
+                </tr>
+                <tr>
+                    <th colspan="6">
+                        Người xuất : {{ \User::getCurrent('name') }}
+                    </th>
+                </tr>
+            @endif
             <tr>
                 <th class="font-bold fs-13">Ngày chứng từ</th>
                 <th class="font-bold fs-13">Khách hàng</th>
@@ -17,10 +29,19 @@
                         {{ $range_time }}
                     </td>
                     <td>
-                        <a href="{{ url()->full().'&customer='.$data->customer }}">{{ getFieldDataById('name', 'customers', $data->customer) }}</a>
+                        @if (!empty($is_export))
+                            <p>{{ getFieldDataById('name', 'customers', $data->customer) }}</p>
+                        @else
+                            <a href="{{ url()->full().'&customer='.$data->customer }}">
+                                {{ getFieldDataById('name', 'customers', $data->customer) }}
+                            </a>
+                        @endif
                     </td>
                     <td>
-                        {{ getFieldDataById('name', 'represents', $data->represent) }}
+                        @php
+                            $represent = getDetailDataObject('represents', $data->represent);
+                        @endphp
+                        {{ $represent->name . ' - ' . $represent->phone }}
                     </td>
                     @php
                         $total = (float) $data->total;
@@ -42,7 +63,7 @@
         <tfoot>
             <tr>
                 <td colspan="4">
-                    <p class="font_bold color_green">Tổng tiền hàng đã lấy & tiền đã thanh toán</p>
+                    <p class="font_bold color_green">{{ 'Tổng tiền hàng đã lấy & tiền đã thanh toán' }}</p>
                 </td>   
                 <td>
                     {{ number_format($total_amount) }}đ

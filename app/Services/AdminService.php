@@ -325,6 +325,7 @@ class AdminService extends BaseService
             if (!empty($where['order'])) {
                 unset($where['order']);
             }
+            $data['title_rows'] = '3';
         }else{
             $group_target = false;
         }
@@ -334,7 +335,7 @@ class AdminService extends BaseService
         }
         if ($table == 'supply_buyings') {
             $status = \StatusConst::SUBMITED;
-            $field_target = 'provicer';
+            $field_target = 'provider';
         }else{
             $status = \StatusConst::ACCEPTED;
             $field_target = 'customer';

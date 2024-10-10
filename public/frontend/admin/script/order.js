@@ -437,7 +437,7 @@ var viewDebtGroup = function () {
     });
 }
 
-var viewDebtGroup = function () {
+var debtExport = function () {
     $(document).on('click', 'button.__export_data_debt', function (event) {
         event.preventDefault();
         let _this = $(this);
@@ -465,4 +465,5 @@ $(function(){
     inventoryAjaxForm();
     inventoryExportExcel();
     viewDebtGroup();
+    debtExport();
 });

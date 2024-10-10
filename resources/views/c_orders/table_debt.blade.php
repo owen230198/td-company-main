@@ -26,9 +26,9 @@
             </tr>
             <tr>
                 <th class="font-bold fs-13">Tên hàng</th> 
-                <th class="font-bold fs-13">SL</th> 
-                <th class="font-bold fs-13">ĐG</th>  
-                <th class="font-bold fs-13">TT</th>    
+                <th class="font-bold fs-13">Số lượng</th> 
+                <th class="font-bold fs-13">Đơn giá</th>  
+                <th class="font-bold fs-13">Thành tiền</th>    
             </tr>
         </thead>
         <tbody>
@@ -49,11 +49,10 @@
                             $customer_name = getFieldDataById('name', 'customers', $data->customer);
                             $represent = getDetailDataObject('represents', $data->represent);
                         @endphp
-                        @if ($is_export)
+                        @if (!empty($is_export))
                             <p>- {{ $customer_name }}</p>
                         @else
-                        <a class="d-block" href="{{ url()->full().'&customer='.$data->customer }}">
-                        </a>
+                            <a class="d-block" href="{{ url()->full().'&customer='.$data->customer }}">- {{ $customer_name }}</a>
                         @endif
                         <p class="mt-1">- {{ $represent->name .' - '.$represent->phone }}</p>
                     </td>

@@ -1,6 +1,18 @@
 <div class="position-relative table_base_view">
     <table class="table table-bordered mb-2 ">
         <thead class="theader">
+            @if (!empty($is_export))
+                <tr>
+                    <th colspan="4">
+                        <h3>{{ $title}}</h3>
+                    </th>
+                </tr>
+                <tr>
+                    <th colspan="4">
+                        Người xuất : {{ \User::getCurrent('name') }}
+                    </th>
+                </tr>
+            @endif
             <tr>
                 <th class="font-bold fs-13">Ngày chứng từ</th>
                 <th class="font-bold fs-13">Nhà cung cấp</th>
@@ -29,7 +41,7 @@
         <tfoot>
             <tr>
                 <td colspan="2">
-                    <p class="font_bold color_green">Tổng tiền hàng đã lấy & tiền đã thanh toán</p>
+                    <p class="font_bold color_green">{{ 'Tổng tiền hàng đã lấy & tiền đã thanh toán' }}</p>
                 </td>   
                 <td>
                     {{ number_format($total_amount) }}đ
@@ -40,7 +52,7 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <p class="font_bold color_red">{{ $total_rest > 0 ? 'Đang nợ nhà cung cấp ' : 'Đang dư nợ nhà cung cấp' }}</p>
+                    <p class="font_bold color_red">Số tiền còn nợ</p>
                 </td>
                 <td colspan="2">
                     <p class="font_bold color_red text-center">{{ number_format(abs($total_rest)) }}đ</p>

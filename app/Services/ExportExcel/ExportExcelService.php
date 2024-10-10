@@ -28,8 +28,9 @@ class ExportExcelService implements FromView, WithTitle, ShouldAutoSize, WithEve
 
     public function registerEvents(): array
     {
+        $title_rows = !empty($this->data['title_rows']) ? $this->data['title_rows'] : '3:4';
         return [
-            AfterSheet::class => function(AfterSheet $event) {
+            AfterSheet::class => function(AfterSheet $event) use ($title_rows) {
                 $event->sheet->getDelegate()->getDefaultRowDimension()->setRowHeight(19);
                 $event->sheet->getStyle('A:X')->applyFromArray([
                     'font' => [
@@ -51,7 +52,7 @@ class ExportExcelService implements FromView, WithTitle, ShouldAutoSize, WithEve
                     ],
                 ]);
 
-                $event->sheet->getStyle('3:4')->applyFromArray([
+                $event->sheet->getStyle($title_rows)->applyFromArray([
                     'font' => [
                         'bold' => true,
                     ],

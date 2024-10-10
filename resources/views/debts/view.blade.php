@@ -38,5 +38,5 @@
     @include('table/action_popup')
 @endsection
 @section('script')
-    <script src="{{ asset('frontend/admin/script/order.js') }}"></script>
+    <script src="{{ asset('frontend/admin/script/order.js?v=1') }}"></script>
 @endsection
