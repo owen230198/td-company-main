@@ -518,11 +518,10 @@ use Maatwebsite\Excel\Facades\Excel;
             }
             if (\GroupUser::isAdmin() || \GroupUser::isAccounting() || !empty($my_order)) {
                 $where = $request->except('nosidebar');
-                $data = $this->admins->getDataDebt('c_orders', $where);
-                $data['title'] = 'Chi tiết công nợ';
+                $data = $this->admins->getDataDebt('c_orders', $where, COrder::ORDER);
+                $data['title'] = 'Bảng kê chi tiết công nợ';
                 $data['link_search'] = 'order-debt';
                 $data['link_insert'] = 'insert/c_orders';
-                $data['data_search'] = $where;
                 $data['nosidebar'] = $request->input('nosidebar');
                 return view('debts.view', $data);
             }else{

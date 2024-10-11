@@ -38,7 +38,7 @@ class ExportExcelService implements FromView, WithTitle, ShouldAutoSize, WithEve
                         'name' => 'Microsoft Sans Serif', 
                     ],
                     'alignment' => [
-                        'vertical' => Alignment::VERTICAL_TOP,
+                        'vertical' => Alignment::VERTICAL_BOTTOM,
                     ],
                 ]);
                 $event->sheet->getStyle('1:2')->applyFromArray([

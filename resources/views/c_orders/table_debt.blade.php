@@ -103,21 +103,21 @@
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="8">
+                <td colspan="7">
                     <p class="font_bold color_green">{{ 'Tổng tiền hàng đã lấy & tiền đã thanh toán' }}</p>
                 </td>   
                 <td>
                     {{ number_format($total_amount) }}đ
                 </td>
-                <td colspan="6">
+                <td>
                     {{ number_format($total_advance) }}đ
                 </td>
             </tr>
             <tr>
-                <td colspan="8">
+                <td colspan="7">
                     <p class="font_bold color_red">Số tiền còn nợ</p>
                 </td>
-                <td colspan="3">
+                <td colspan="2">
                     <p class="font_bold color_red text-center">{{ number_format($total_rest) }}đ</p>
                 </td>
             </tr>

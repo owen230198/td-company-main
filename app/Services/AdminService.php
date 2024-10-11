@@ -285,8 +285,6 @@ class AdminService extends BaseService
                     $ret[] = NDetailTable::where(['table_map' => $table, 'name' => 'order'])->get()->first();
                     $ret[] = NDetailTable::where(['table_map' => 'orders', 'name' => 'list_product'])->get()->first();
                 }
-            }else {
-                $ret[] = NDetailTable::where(['table_map' => $table, 'name' => 'customer'])->get()->first(); 
             }
         }else{
             $ret[] = NDetailTable::where(['table_map' => $table, 'name' => 'provider'])->get()->first();
@@ -313,6 +311,7 @@ class AdminService extends BaseService
     {
         $data = $this->getBaseTable($table);
         $data['table'] = $table;
+        $data['data_search'] = $where;
         $data['field_searchs'] = $this->getFieldSearchDebt($table, $type, !empty($where['group']));
         $this->processDataDebt($table, $where, $data);
         return $data;
@@ -339,6 +338,9 @@ class AdminService extends BaseService
         }else{
             $status = \StatusConst::ACCEPTED;
             $field_target = 'customer';
+        }
+        if (!empty($where[$field_target])) {
+            $data['table_template'] = $table . '.template_excel';
         }
         $condition = $this->handleDebtCondition($where);
         $obj = getModelByTable($table)::where('status', $status);

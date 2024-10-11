@@ -545,7 +545,6 @@ use App\Models\SupplyBuying;
                 $data['link_search'] = 'supply-debt';
                 $data['link_insert'] = 'ajax-respone/insertSupplyPayment';
                 $data['size_popup'] = 'medium_popup';
-                $data['data_search'] = $where;
                 $data['nosidebar'] = $request->input('nosidebar');
                 return view('debts.view', $data);
             }else{
