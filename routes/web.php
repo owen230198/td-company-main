@@ -14,6 +14,7 @@ use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\SupplyBuying\SupplyBuyingController;
 use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\NotifyController;
+use App\Http\Controllers\ProductWarehouse\ProductWarehouseController;
 use App\Http\Controllers\ReportController;
 
 /*
@@ -130,6 +131,7 @@ Route::middleware(['check_login'])->group(function () {
 	//product warehouse route
 	Route::any('confirm-product-warehouse/{id}', [CExpertiseController::class, 'confirmProductWarehouse']);
 	Route::get('product-warehouse-history/{product_id}', [CExpertiseController::class, 'productWarehouseHistory']);
+	Route::get('product-warehouse-inventory', [ProductWarehouseController::class, 'inventory']);
 });
 $modules_path = dirname(__DIR__) . '/app/Modules/';
 if (is_dir($modules_path)) {
