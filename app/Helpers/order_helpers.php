@@ -639,7 +639,7 @@
         function getTitleDebtByTable($table){
             switch ($table) {
                 case 'c_orders':
-                    return 'công nợ bán hàng';
+                    return 'Bảng kê chi tiết công nợ';
                     break;
                 case 'supply_buyings':
                     return 'công nợ mua vật tư';

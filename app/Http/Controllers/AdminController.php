@@ -627,7 +627,7 @@ class AdminController extends Controller
         $prefix = !empty($where['group']) ? 'group_targets.' : '';
         $template = !empty($data['table_template']) && view()->exists($data['table_template']) ? $data['table_template'] 
         : $table.'.'.$prefix.'table_debt';
-        return Excel::download(new \App\Services\ExportExcel\ExportExcelService($data, $template), $data['title'].'.xlsx');
+        return Excel::download(new \App\Services\ExportExcel\ExportExcelDebt($data, $template), $data['title'].'.xlsx');
     }
 }
 

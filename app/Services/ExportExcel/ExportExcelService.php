@@ -28,9 +28,8 @@ class ExportExcelService implements FromView, WithTitle, ShouldAutoSize, WithEve
 
     public function registerEvents(): array
     {
-        $title_rows = !empty($this->data['title_rows']) ? $this->data['title_rows'] : '3:4';
         return [
-            AfterSheet::class => function(AfterSheet $event) use ($title_rows) {
+            AfterSheet::class => function(AfterSheet $event) {
                 $event->sheet->getDelegate()->getDefaultRowDimension()->setRowHeight(19);
                 $event->sheet->getStyle('A:X')->applyFromArray([
                     'font' => [
@@ -38,7 +37,7 @@ class ExportExcelService implements FromView, WithTitle, ShouldAutoSize, WithEve
                         'name' => 'Microsoft Sans Serif', 
                     ],
                     'alignment' => [
-                        'vertical' => Alignment::VERTICAL_BOTTOM,
+                        'vertical' => Alignment::VERTICAL_CENTER,
                     ],
                 ]);
                 $event->sheet->getStyle('1:2')->applyFromArray([
@@ -50,26 +49,18 @@ class ExportExcelService implements FromView, WithTitle, ShouldAutoSize, WithEve
                         'horizontal' => Alignment::HORIZONTAL_CENTER,
                         'vertical' => Alignment::VERTICAL_CENTER,
                     ],
+                    'font' => [
+                        'size' => 14,
+                    ]
                 ]);
 
-                $event->sheet->getStyle($title_rows)->applyFromArray([
+                $event->sheet->getStyle('3:4')->applyFromArray([
                     'font' => [
                         'bold' => true,
                     ],
                     'alignment' => [
                         'horizontal' => Alignment::HORIZONTAL_CENTER,
                         'vertical' => Alignment::VERTICAL_CENTER,
-                    ],
-                ]);
-
-                $event->sheet->getStyle('1')->applyFromArray([
-                    'font' => [
-                        'size' => 14,
-                    ],
-                ]);
-                $event->sheet->getStyle('2')->applyFromArray([
-                    'font' => [
-                        'size' => 11,
                     ],
                 ]);
                 // $event->sheet->setAutoFilter('B3:K3');

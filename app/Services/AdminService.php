@@ -311,13 +311,13 @@ class AdminService extends BaseService
     {
         $data = $this->getBaseTable($table);
         $data['table'] = $table;
-        $data['data_search'] = $where;
         $data['field_searchs'] = $this->getFieldSearchDebt($table, $type, !empty($where['group']));
         $this->processDataDebt($table, $where, $data);
         return $data;
     }
 
     public function processDataDebt($table, $where, &$data){
+        $data['data_search'] = $where;
         if (!empty($where['group'])) {
             $group_target = $where['group'];
             unset($where['group']);
@@ -341,6 +341,7 @@ class AdminService extends BaseService
         }
         if (!empty($where[$field_target])) {
             $data['table_template'] = $table . '.template_excel';
+            $data['title_rows'] = '3';
         }
         $condition = $this->handleDebtCondition($where);
         $obj = getModelByTable($table)::where('status', $status);
