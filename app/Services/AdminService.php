@@ -343,6 +343,10 @@ class AdminService extends BaseService
             $data['table_template'] = $table . '.template_excel';
             $data['title_rows'] = '3';
         }
+        if (!empty($where['created_at'])) {
+            $created_at = $where['created_at'];
+            unset($where['created_at']);
+        }
         $condition = $this->handleDebtCondition($where);
         $obj = getModelByTable($table)::where('status', $status);
         if (!empty($condition)) {
@@ -358,9 +362,21 @@ class AdminService extends BaseService
             });
             $obj->orWhere('note', 'like', '%'.$q_product.'%');
         }
-        $data['total_amount'] = $obj->sum('total');
-        $data['total_advance'] = $obj->sum('advance');
-        $data['total_rest'] = $data['total_amount'] - $data['total_advance'];
+        if (!empty($created_at)) {
+            $arr_time = getDateRangeToQuery($created_at);
+            $obj = $obj->whereBetween('created_at', $arr_time);
+            $old_obj = getModelByTable($table)::where('status', $status)->where($condition)->where('created_at', '<', $arr_time[0]);
+            $old_total = $old_obj->sum('total');
+            $old_advance = $old_obj->sum('advance');
+            $old_rest = $old_total - $old_advance;
+        }else{
+            $old_total = $old_advance = $old_rest = 0;     
+        }
+        $data['old_total'] = $old_total;
+        $data['old_advance'] = $old_advance;
+        $data['total_amount'] = $obj->sum('total') + $old_total;
+        $data['total_advance'] = $obj->sum('advance') + $old_advance;
+        $data['total_rest'] = ($data['total_amount'] - $data['total_advance']);
         $data_tables = $obj->orderBy('id', 'DESC')->take(200);
         if (!empty($group_target)) {
             $data['data_tables'] = $data_tables->groupBy($field_target)->get()->map(
@@ -372,7 +388,7 @@ class AdminService extends BaseService
                     return $data_table;
                 }
             );
-            $data['range_time'] = !empty($where['created_at']) ? $where['created_at'] : 'Toàn bộ thời gian'; 
+            $data['range_time'] = !empty($created_at) ? $created_at : 'Toàn bộ thời gian'; 
             $data['group_target'] = true; 
         }else{
             $data['data_tables'] = $data_tables->get();
@@ -384,13 +400,7 @@ class AdminService extends BaseService
         $condition = [];
         foreach ($where as $key => $value) {
             if (!empty($value)) {
-                if($key == 'created_at'){
-                    $arr_time = getDateRangeToQuery($value); 
-                    $condition[] = [$key, '>=', $arr_time[0]];
-                    $condition[] = [$key, '<=', $arr_time[1]];   
-                }else{
-                    $condition[] = [$key, '=', $value];
-                }
+                $condition[] = [$key, '=', $value];
             } 
         }
         return $condition;

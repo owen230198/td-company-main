@@ -32,6 +32,17 @@
             </tr>
         </thead>
         <tbody>
+            <tr>
+                <td colspan="7">
+                    <strong>Nợ cũ</strong>
+                </td>
+                <td>
+                    {{ !empty($is_export) ? (float) $old_total : number_format($old_total) }}
+                </td>
+                <td>
+                    {{ !empty($is_export) ? (float) $old_advance : number_format($old_advance) }}
+                </td>
+            </tr>
             @foreach ($data_tables as $key => $data)
                 @php
                     $objects = !empty($data->object) ? json_decode($data->object, true) : [];
@@ -60,16 +71,16 @@
                         @php $first_obj = array_shift($objects); @endphp
                         <td>{{ $first_obj['name'] }}</td>
                         <td>{{ $first_obj['qty'] }}</td>
-                        <td>{{ number_format($first_obj['price']) }}đ</td>
-                        <td>{{ number_format($first_obj['total']) }}đ</td>
+                        <td>{{ !empty($is_export) ? (float) $first_obj['price'] : number_format($first_obj['price']) }}</td>
+                        <td>{{ !empty($is_export) ? (float) $first_obj['total'] : number_format($first_obj['total']) }}</td>
                     @else
                         <td colspan="4">{{ $data->note }}</td>
                     @endif
                     <td rowspan="{{ $rowspan }}">
-                        {{ number_format($data->total) }}đ
+                        {{ !empty($is_export) ? (float) $data->total : number_format($data->total) }}
                     </td>
                     <td rowspan="{{ $rowspan }}">
-                        {{ number_format($data->advance) }}đ
+                        {{ !empty($is_export) ? (float) $data->advance : number_format($data->advance) }}
                     </td>
                     @if (empty($is_export))
                         <td rowspan="{{ $rowspan }}">
@@ -95,8 +106,8 @@
                     <tr>
                         <td>{{ $object['name'] }}</td>
                         <td>{{ $object['qty'] }}</td>
-                        <td>{{ number_format($object['price']) }}đ</td>
-                        <td>{{ number_format($object['total']) }}đ</td>
+                        <td>{{ !empty($is_export) ? (float) $obj['price'] : number_format($object['price']) }}</td>
+                        <td>{{ !empty($is_export) ? (float) $obj['total'] : number_format($object['total']) }}</td>
                     </tr>
                 @endforeach
             @endforeach
@@ -107,10 +118,10 @@
                     <p class="font_bold color_green">{{ 'Tổng tiền hàng đã lấy & tiền đã thanh toán' }}</p>
                 </td>   
                 <td>
-                    {{ number_format($total_amount) }}đ
+                    {{ !empty($is_export) ? (float) $total_amount : number_format($total_amount) }}
                 </td>
                 <td>
-                    {{ number_format($total_advance) }}đ
+                    {{ !empty($is_export) ? (float) $total_advance : number_format($total_advance) }}
                 </td>
             </tr>
             <tr>
@@ -118,7 +129,7 @@
                     <p class="font_bold color_red">Số tiền còn nợ</p>
                 </td>
                 <td colspan="2">
-                    <p class="font_bold color_red text-center">{{ number_format($total_rest) }}đ</p>
+                    <p class="font_bold color_red text-center">{{ !empty($is_export) ? (float) $total_rest : number_format($total_rest) }}</p>
                 </td>
             </tr>
         </tfoot>

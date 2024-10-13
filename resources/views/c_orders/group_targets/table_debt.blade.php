@@ -23,6 +23,23 @@
             </tr>
         </thead>
         <tbody>
+            <tr>
+                <td colspan="3">
+                    <strong>Nợ cũ</strong>
+                </td>
+                <td>
+                    {{ !empty($is_export) ? (float) $old_total : number_format($old_total) }}
+                </td>
+                <td>
+                    {{ !empty($is_export) ? (float) $old_advance : number_format($old_advance) }}
+                </td>
+                <td>
+                    @php
+                        $old_rest = $old_total - $old_advance;
+                    @endphp
+                    {{ !empty($is_export) ? (float) $old_rest : number_format($old_rest) }}
+                </td>
+            </tr>
             @foreach ($data_tables as $key => $data)
                 <tr>
                     <td>
@@ -49,13 +66,13 @@
                         $rest = $total - $advance;
                     @endphp
                     <td>
-                        {{ number_format($total) }}đ
+                        {{ number_format($total) }}
                     </td>
                     <td>
-                        {{ number_format($advance) }}đ
+                        {{ number_format($advance) }}
                     </td>
                     <td>
-                        {{ number_format($rest) }}đ
+                        {{ number_format($rest) }}
                     </td>
                 </tr>
             @endforeach
@@ -66,10 +83,10 @@
                     <p class="font_bold color_green">{{ 'Tổng tiền hàng đã lấy & tiền đã thanh toán' }}</p>
                 </td>   
                 <td>
-                    {{ number_format($total_amount) }}đ
+                    {{ number_format($total_amount) }}
                 </td>
                 <td colspan="1">
-                    {{ number_format($total_advance) }}đ
+                    {{ number_format($total_advance) }}
                 </td>
             </tr>
             <tr>
@@ -77,7 +94,7 @@
                     <p class="font_bold color_red">Số tiền còn nợ</p>
                 </td>
                 <td colspan="2">
-                    <p class="font_bold color_red text-center">{{ number_format($total_rest) }}đ</p>
+                    <p class="font_bold color_red text-center">{{ number_format($total_rest) }}</p>
                 </td>
             </tr>
         </tfoot>
