@@ -356,6 +356,7 @@ class AdminService extends BaseService
                     $query->orWhereJsonContains('object', ['id' => (string) $id]);
                 }
             });
+            $obj->orWhere('note', 'like', '%'.$q_product.'%');
         }
         $data['total_amount'] = $obj->sum('total');
         $data['total_advance'] = $obj->sum('advance');
