@@ -67,6 +67,13 @@ if (! function_exists('getDetailDataObject')) {
     }
 }
 
+if (! function_exists('getObjectDataByWhere')) {
+    function getObjectDataByWhere($table, $where)
+    {
+        return \DB::table($table)->where($where);
+    }
+}
+
 
 if(!function_exists('getFieldDataById')){
     function getFieldDataById($feild, $table, $id){

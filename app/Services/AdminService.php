@@ -394,4 +394,37 @@ class AdminService extends BaseService
         }
         return $condition;
     }
+
+    public function tableDataInventoryDetail($request, $table, &$data)
+    {
+        $wheres = $request->except('is_ajax', 'is_detail');
+        $where = [];
+        foreach ($wheres as $key => $value) {
+            if (!empty($value)) {
+                if ($key == 'price'){
+                    if (!empty($value['from'])) {
+                        $where[] = [$key, '>=', $value['from']];
+                    }
+                    if (!empty($value['to'])) {
+                        $where[] = [$key, '<=', $value['to']];
+                    }
+                }elseif($key == 'created_at'){
+                    $arr_time = getDateRangeToQuery($request->input('created_at')); 
+                    $where[] = [$key, '>=', $arr_time[0]];
+                    $where[] = [$key, '<=', $arr_time[1]];   
+                }else{
+                    $where[] = [$key, '=', $value];
+                }
+            }
+        }
+        $obj = getModelByTable($table)::where($where);
+        $data['data_item'] = $wheres;
+        $list_data = $obj->orderBy('id', 'DESC')->get();
+        $data['count'] = $list_data->count();
+        $data['price'] = $list_data->sum('price');
+        $data['imported'] = $list_data->sum('imported');
+        $data['exported'] = $list_data->sum('exported');
+        $data['inventory'] = $list_data->sum('inventory');
+        $data['list_data'] = $list_data;
+    }
 }

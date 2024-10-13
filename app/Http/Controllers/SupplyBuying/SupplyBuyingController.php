@@ -2,9 +2,8 @@
     namespace App\Http\Controllers\SupplyBuying;
     use App\Http\Controllers\Controller;
     use App\Models\PrintWarehouse;
-use App\Models\SquareWarehouse;
-use App\Models\SupplyBuying;
-    use App\Models\SupplyWarehouse;
+    use App\Models\SquareWarehouse;
+    use App\Models\SupplyBuying;
     use App\Models\WarehouseHistory;
     use App\Services\WarehouseService;
     use Illuminate\Http\Request;
@@ -364,6 +363,7 @@ use App\Models\SupplyBuying;
                         }'
                     ],
                 ];
+                $data['is_supply'] = 1;
                 return view('inventories.view', $data);
             }else{
                 if (empty($request->input('created_at'))) {
@@ -432,39 +432,6 @@ use App\Models\SupplyBuying;
             $data['nosidebar'] = true;
         }
 
-        private function tableDataInventoryDetail($request, &$data)
-        {
-            $wheres = $request->except('is_ajax', 'is_detail');
-            $where = [];
-            foreach ($wheres as $key => $value) {
-                if (!empty($value)) {
-                    if ($key == 'price'){
-                        if (!empty($value['from'])) {
-                            $where[] = [$key, '>=', $value['from']];
-                        }
-                        if (!empty($value['to'])) {
-                            $where[] = [$key, '<=', $value['to']];
-                        }
-                    }elseif($key == 'created_at'){
-                        $arr_time = getDateRangeToQuery($request->input('created_at')); 
-                        $where[] = [$key, '>=', $arr_time[0]];
-                        $where[] = [$key, '<=', $arr_time[1]];   
-                    }else{
-                        $where[] = [$key, '=', $value];
-                    }
-                }
-            }
-            $obj = WarehouseHistory::where($where);
-            $data['data_item'] = $wheres;
-            $list_data = $obj->get();
-            $data['count'] = $list_data->count();
-            $data['price'] = $list_data->sum('price');
-            $data['imported'] = $list_data->sum('imported');
-            $data['exported'] = $list_data->sum('exported');
-            $data['inventory'] = $list_data->sum('inventory');
-            $data['list_data'] = $list_data;
-        }
-
         public function inventoryDetail(Request $request) {
             $is_ajax = $request->input('is_ajax') == 1;
             if (!\GroupUser::isAdmin() && !\GroupUser::isAccounting()) {
@@ -479,7 +446,7 @@ use App\Models\SupplyBuying;
                 $data['data_search']['created_at'] = $request->input('created_at');
                 $this->getViewDataDetailInventory($data);
             }
-            $this->tableDataInventoryDetail($request, $data);
+            $this->admins->tableDataInventoryDetail($request, 'warehouse_histories', $data);
             $view_return = !$is_ajax ? 'view' : 'detail';
             return view('inventories.'.$view_return, $data);
         }
@@ -497,7 +464,7 @@ use App\Models\SupplyBuying;
         private function exportInventoryDetail($request)
         {
             $data['title'] = 'SỔ CHI TIẾT VẬT TƯ HÀNG HÓA';
-            $this->tableDataInventoryDetail($request, $data);
+            $this->admins->tableDataInventoryDetail($request, 'warehouse_histories', $data);
             return Excel::download(new ExportExcelService($data,  'inventories.detail'), 'SO_CHI_TIET_VAT_TU_HANG_HOA.xlsx');
         }
 

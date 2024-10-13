@@ -422,7 +422,8 @@ var inventoryExportExcel = function ()
         event.preventDefault();
         let form = $(this).closest('form.inventoryFormAjax');
         let param = form.serialize();
-        let url = getBaseRoute('inventory-export?' + param);
+        let export_route = $(this).data('route');
+        let url = getBaseRoute(export_route + '?' + param);
         window.parent.location.href = url;
     })
 }

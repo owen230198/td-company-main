@@ -358,6 +358,28 @@
             }    
         }
     }
+    
+    if (!function_exists('getUnitProductWarehouse')) {
+        function getUnitProductWarehouse($unit) {
+            switch ($unit) {
+                case 'combo':
+                    return 'bộ';
+                    break;
+                case 'box':
+                    return 'hộp';
+                    break;
+                case 'unit':
+                    return 'chiếc';
+                    break;
+                case 'sheet':
+                    return 'Tờ';
+                    break;  
+                default:
+                    return '';
+                    break;
+            }    
+        }
+    }
 
     if(!function_exists('getUnitNameByType')){
         function getUnitNameByType($type){

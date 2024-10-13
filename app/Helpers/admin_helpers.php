@@ -319,28 +319,28 @@ if (!function_exists('getLinkingUrl')) {
         }
         return $url;
     }
+}
 
-    if (!function_exists('getJsonMultipleValue')) {
-        function getJsonMultipleValue($data, $model, $label, $field_value)
-        {
-            $arr = array_map(function($item) use($label, $model, $field_value){
-                $item_label = method_exists($model, 'getLabelLinking') ? $model::getLabelLinking($item) : getlabelLinking($item, $label, true);
-                return ['id' => @$item->{$field_value}, 'label' => $item_label];
-            }, $data);
-            return json_encode($arr);
-        }
+if (!function_exists('getJsonMultipleValue')) {
+    function getJsonMultipleValue($data, $model, $label, $field_value)
+    {
+        $arr = array_map(function($item) use($label, $model, $field_value){
+            $item_label = method_exists($model, 'getLabelLinking') ? $model::getLabelLinking($item) : getlabelLinking($item, $label, true);
+            return ['id' => @$item->{$field_value}, 'label' => $item_label];
+        }, $data);
+        return json_encode($arr);
     }
+}
 
-    if (!function_exists('logActionDataById')) {
-        function logActionDataById($table, $id, $arr_update, $action)
-        {
-            $obj = getModelByTable($table)::find($id);
-            if (!empty($obj)) {
-                $dataItem = $obj->replicate();
-                $obj->update($arr_update);
-                $obj->save();
-                logActionUserData($action, $table, $id, $dataItem);
-            }
+if (!function_exists('logActionDataById')) {
+    function logActionDataById($table, $id, $arr_update, $action)
+    {
+        $obj = getModelByTable($table)::find($id);
+        if (!empty($obj)) {
+            $dataItem = $obj->replicate();
+            $obj->update($arr_update);
+            $obj->save();
+            logActionUserData($action, $table, $id, $dataItem);
         }
     }
 }

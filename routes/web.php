@@ -132,6 +132,8 @@ Route::middleware(['check_login'])->group(function () {
 	Route::any('confirm-product-warehouse/{id}', [CExpertiseController::class, 'confirmProductWarehouse']);
 	Route::get('product-warehouse-history/{product_id}', [CExpertiseController::class, 'productWarehouseHistory']);
 	Route::get('product-warehouse-inventory', [ProductWarehouseController::class, 'inventory']);
+	Route::get('product-inventory-detail', [ProductWarehouseController::class, 'inventoryDetail']);
+	Route::get('product-warehouses-export-inventory', [ProductWarehouseController::class, 'inventoryExport']);
 });
 $modules_path = dirname(__DIR__) . '/app/Modules/';
 if (is_dir($modules_path)) {
