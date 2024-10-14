@@ -39,6 +39,9 @@
                 \GroupUser::ACCOUNTING => [
                     'view' => 1,
                     'insert' => 1,
+                ],
+                \GroupUser::DO_BUYING => [
+                    'view' => 1,
                 ]
             ];
         } 

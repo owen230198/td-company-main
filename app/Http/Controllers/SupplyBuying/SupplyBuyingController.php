@@ -319,7 +319,7 @@
         public function inventoryAggregate(Request $request)
         {
             $is_ajax = $request->input('is_ajax') == 1;
-            if (!\GroupUser::isAdmin() && !\GroupUser::isAccounting()) {
+            if (!\GroupUser::isAdmin() && !\GroupUser::isAccounting() && !\GroupUser::isDoBuying()) {
                 return customReturnMessage(false, $is_ajax, ['message' => 'Bạn không có quyền truy cập !']);
             }
             $data['title'] = 'Tổng hợp tồn kho';
@@ -434,7 +434,7 @@
 
         public function inventoryDetail(Request $request) {
             $is_ajax = $request->input('is_ajax') == 1;
-            if (!\GroupUser::isAdmin() && !\GroupUser::isAccounting()) {
+            if (!\GroupUser::isAdmin() && !\GroupUser::isAccounting() && !\GroupUser::isDoBuying()) {
                 return customReturnMessage(false, $is_ajax, ['message' => 'Bạn không có quyền truy cập !']);
             }
             $data['title'] = 'SỔ CHI TIẾT VẬT TƯ HÀNG HÓA';
@@ -470,7 +470,7 @@
 
         public function inventoryExport(Request $request)
         {
-            if (!\GroupUser::isAdmin() && !\GroupUser::isAccounting()) {
+            if (!\GroupUser::isAdmin() && !\GroupUser::isAccounting() && !\GroupUser::isDoBuying()) {
                 return back()->with('error', 'Bạn không có quyền export dữ liệu này !');
             }
             if (!empty($request->input('is_detail'))) {

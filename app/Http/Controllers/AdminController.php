@@ -168,7 +168,7 @@ class AdminController extends Controller
 
     public function warehouseManagement()
     {
-        if (\GroupUser::isAdmin() || \GroupUser::isWarehouse() || \GroupUser::isPlanHandle() || \GroupUser::isAccounting()) {
+        if (\GroupUser::isAdmin() || \GroupUser::isWarehouse() || \GroupUser::isPlanHandle() || \GroupUser::isAccounting() || \GroupUser::isDoBuying()) {
             $data['title'] = 'Quản lí vật tư trong kho';
             $data['supply_list'] = [
                 ['note' => 'Giấy in', 'table' => 'print_warehouses', 'type' => \TDConst::PAPER],

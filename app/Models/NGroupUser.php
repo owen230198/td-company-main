@@ -358,10 +358,11 @@ class NGroupUser extends Model
                     'link' => 'view/supply_buyings?default_data=%7B%22bought_by":"'.$current_user.'%22%7D',
                     'group' => 'supply_buying'
                 ],
-                self::MODULE['warehouse_management'],
                 self::MODULE['ex_supply'],
                 self::MODULE['im_paper'],
                 self::MODULE['im_supply'],
+                self::MODULE['warehouse_management'],
+                self::MODULE['supply_history'],
                 self::MODULE['warehouse_provider'],
                 self::MODULE['account'],
                 self::MODULE['change_password'],
