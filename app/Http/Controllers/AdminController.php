@@ -293,7 +293,7 @@ class AdminController extends Controller
 
     public function clone(Request $request, $table, $id)
     {
-        $role = $this->admins->checkPermissionAction($table, __FUNCTION__);
+        $role = $this->admins->checkPermissionAction($table, 'insert');
         if (empty($role['allow'])) {
             return customReturnMessage(false, $request->isMethod('POST'), ['message' => 'Không có quyền thao tác !']);
         }
