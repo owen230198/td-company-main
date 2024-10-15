@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Imports;
-
-use App\Models\ProductHistory;
 use App\Models\ProductWarehouse;
 use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\ToModel;
@@ -29,8 +27,8 @@ class ImportProductWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows
     {
         $ret =$row;
         $ret['warehouse_type'] = $type;
-        $ret['category'] = str_contains('Hộp cứng', $row['name']) ? 1 : 2;
-        $ret['unit'] = 'box';
+        $ret['category'] = getIdByFeildValue('ProductCategory', ['name' => $row['category']]);
+        $ret['style'] = getIdByFeildValue('ProductStyle', ['name' => $row['style']]);
         $ret['note'] = 'kiểm kho thực tế';
         $ret['made_by'] = 1;
         $ret['act'] = 1;

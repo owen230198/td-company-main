@@ -7,7 +7,13 @@
     <p class="d-flex align-items-center"><span class="w_66 d-block">Số seri</span>  : <span class="fs-18 color_red ml-1 font_bold">{{ $data_item->code }}</span></p>
 </div>
 <div class="col-7">
-    <p><span class="mr-1">Tên Khách hàng/Công ty :</span> {{ $data_customer['name'].' ('.$data_represent['name'].')' }}</p>
+    @php
+        $customer_name = $data_customer['name'];
+        if (!empty($data_represent['name'])) {
+            $customer_name .= ' ('.$data_represent['name'].')';
+        }
+    @endphp
+    <p><span class="mr-1">Tên Khách hàng/Công ty :</span> {{ $customer_name }}</p>
 </div>
 <div class="col-5">
     <p class="d-flex align-items-center">
@@ -18,6 +24,14 @@
 <div class="col-7">
     <p><span class="mr-1">Địa chỉ :</span> {{ $data_customer['address'] }}</p>
 </div>
+@php
+    $phone = @$data_represent['phone'];
+    if (!empty($data_represent['telephone']) && $data_represent['telephone'] != $phone) {
+        $phone .= ' - '.$data_represent['telephone'];
+    }
+@endphp
+@if (!empty($phone))
 <div class="col-5">
-    <p class="d-flex"><span class="mr-1">Tel :</span> {{ $data_represent['phone'].' - '.$data_represent['telephone'] }}</p>
-</div>
+    <p class="d-flex"><span class="mr-1">Tel :</span> {{ $phone }}</p>
+</div>   
+@endif
