@@ -17,7 +17,7 @@ class ProductWarehouseController extends Controller
 
     public function import($file)
     {
-        Excel::import(new ImportProductWarehouse(32), $file);
+        Excel::import(new ImportProductWarehouse(31), $file);
         return returnMessageAjax(200, 'Đã thêm vật tư thành công !', \StatusConst::RELOAD);
     }
 

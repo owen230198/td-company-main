@@ -26,4 +26,15 @@ class ProductHistory extends Model
         (new \BaseService)->configBaseDataAction($data_log);
         \DB::table('product_histories')->insert($data_log);
     }
+
+    static function removeData($id)
+    {
+        $data_logs = ProductHistory::where(['target' => $id]);
+        foreach ($data_logs->get() as $data_log) {
+            if (!empty($data_log['receipt'])) {
+                removeFileData($data_log['receipt']);
+            }
+        }
+        $data_logs->delete();
+    }
 }

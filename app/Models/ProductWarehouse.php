@@ -53,4 +53,9 @@ class ProductWarehouse extends Model
         }
         ProductHistory::doLogWarehouse($product_id, 0, $ex_qty, $inventory, 0, $arr_log);
     }
+
+    public function afterRemove($id)
+    {
+        return ProductHistory::removeData($id);
+    }
 }
