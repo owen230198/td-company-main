@@ -545,10 +545,10 @@ class DevController extends Controller
     }
 
     public function productWarehouseLog(){
-        $list = ProductWarehouse::where('warehouse_type', 31)->get();
-            foreach ($list as $item) {
-                ProductHistory::doLogWarehouse($item->id, $item->qty, 0, 0, 0, ['price' => $item->price, 'note' => 'Kiểm kho thành phẩm dưới nhà máy']);
-            }
+        $list = ProductWarehouse::where('warehouse_type', 32)->get();
+        foreach ($list as $item) {
+            ProductHistory::doLogWarehouse($item->id, $item->qty, 0, 0, 0, ['price' => $item->price, 'note' => 'Kiểm kho thành phẩm dưới nhà máy']);
+        }
     }
 
     public function productDeliveryUpdate(){
