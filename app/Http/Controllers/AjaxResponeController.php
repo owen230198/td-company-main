@@ -352,5 +352,14 @@ class AjaxResponeController extends Controller
             return customReturnMessage(false, $is_post, ['Message' => 'Bạn không có quyền chuyển kho !']);
         }
     }
+
+    public function AjaxFieldSellByWarehouseType($request)
+    {
+        if (empty($request->input('id')) || $request->input('index') == '') {
+            return '';
+        }
+        $data = ['index' => $request->input('index'), 'value' => ['warehouse_type' => $request->input('id')]];
+        return view('product_warehouses.filed_json_item', $data);
+    }
 }
 

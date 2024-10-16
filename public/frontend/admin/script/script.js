@@ -1333,6 +1333,24 @@ var addItemJsonModule = function () {
 }
 
 var selectProductSellingModule = function(){
+    $(document).on('change', 'select.__select_warehouse_type', function(event){
+        event.preventDefault();
+        let _this = $(this);
+        let parent = _this.closest('.__item_json');
+        let id = _this.val();
+        let index = parent.data('index');
+        $.ajax({ 
+            url: getBaseRoute('ajax-respone/AjaxFieldSellByWarehouseType?id=' + id + '&index=' + index), 
+            type: 'GET' 
+        }).done(function (data) {
+            let target = parent.find('.__ajax_field_sell_pro');
+            target.html(data);
+            calcTotalProductSelling(_this.closest('.__cost_c_order_module'));
+            initInputModuleAfterAjax(target);
+            
+        })
+    });
+
     $(document).on('change', 'select.__select_product_sell', function(event){
         event.preventDefault();
         let _this = $(this);
@@ -1387,6 +1405,8 @@ var calcTotalProductSelling = function(json_selling_module)
     let selling_total = 0;
     list_item.each(function () {
         let total_item = getEmptyDefault($(this).find('input.__selling_total_item_input').val(), 0, 'float');
+        console.log(total_item);
+        
         selling_total += total_item;
     });
     let other_price = getEmptyDefault(json_selling_module.find('input.__selling_other_price_input').val(), 0, 'float');
@@ -1400,9 +1420,6 @@ var calcTotalProductSelling = function(json_selling_module)
     total_input.val(price_format(total));
     total_input.trigger('change');
     let rest_input = json_selling_module.find('input.__selling_rest_input');
-    console.log(price_format(total - advance));
-    
-    
     rest_input.val(price_format(total - advance));
     rest_input.trigger('change');
 }
@@ -1422,7 +1439,7 @@ var countPriceSellingModule = function() {
 
     $(document).on('change keyup', 'input.__selling_input_count', function(event) {
         event.preventDefault();
-        calcTotalProductSelling($(this).closest('.__cost_c_order_module'))
+        calcTotalProductSelling($(this).closest('.__cost_c_order_module'));
     });
 }
 
