@@ -11,7 +11,7 @@
                 @include('product_warehouses.json_item', ['index' => 0])   
         @endif
     </div>
-    @if ((\GroupUser::isAdmin() || \GroupUser::isSale()))
+    @if (\App\Models\COrder::canHandle())
     <div class="text-center">
         <button type="button" class="main_button color_white bg_green border_green radius_5 font_bold sooth add_item_json_button" data-table="product_warehouses">
             <i class="fa fa-plus mr-2 fs-14" aria-hidden="true"></i> Thêm thành phẩm

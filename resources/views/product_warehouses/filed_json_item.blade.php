@@ -54,7 +54,9 @@
         $item['name'] = 'object['.$index.']['.$jname.']';
         $item['dataItem'] = @$value;
         $item['min_label'] = 175;
-        $item['attr']['readonly'] = \GroupUser::isAdmin() || \GroupUser::isSale() ? 0 : 1;
+        if (empty($item['attr']['readonly'])) {
+            $item['attr']['readonly'] = \App\Models\COrder::canHandle() ? 0 : 1;
+        }
     @endphp
     @include('view_update.view', $item) 
 @endforeach   
