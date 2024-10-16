@@ -25,7 +25,10 @@
         @if (!empty($link_ext_btn))
             {!! "data-src=$link_ext_btn" !!} 
             data-toggle="modal" 
-            data-target="#actionModal"
+            data-target="#actionModal" 
+            @if (!empty($button['size_popup']))
+                data-size="{{ $button['size_popup'] }}"
+            @endif
         @endif
         >
         <i class="fa fa-{{ $button['icon'] }} fs-14" aria-hidden="true"></i>

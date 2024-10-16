@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\COrder;
 use App\Models\Order;
+use App\Models\ProductHistory;
 use App\Models\ProductWarehouse;
 use App\Models\Represent;
 use App\Models\SupplyBuying;
@@ -239,6 +240,117 @@ class AjaxResponeController extends Controller
         }else{
             return returnMessageAjax(100, 'Bạn không có quyền xác nhận thanh toán !');
         }  
+    }
+
+    public function productMoveWarehouse($request)
+    {
+        $is_post = !$request->isMethod('GET');
+        if (\GroupUser::isAdmin() || \GroupUser::isAccounting()) {
+            $id = @$request->input('id') ?? 0;
+            $product = ProductWarehouse::find($id);
+            if (empty($product)) {
+                return customReturnMessage(false, $is_post, ['Message' => 'Dữ liệu thành phẩm không tồn tại, hoặc đã bị xóa !']);
+            }
+            if (!$is_post) {
+                $data['title'] = 'Chuyển kho thành phẩm '.$product->name;
+                $data['action_url'] = url('ajax-respone/productMoveWarehouse');
+                $data['nosidebar'] = 1;
+                $data['fields'] = [
+                    [
+                        'name' => 'id',
+                        'note' => 'Thành phẩm',
+                        'type' => 'linking',
+                        'other_data' => ['config' => ['search' => 1], 'data'=> ['table' => 'product_warehouses']],
+                        'attr' => ['readonly' => 1],
+                        'value' => $id
+                    ],
+                    [
+                        'name' => 'qty',
+                        'note' => 'Số lượng chuyển kho',
+                        'type' => 'text',
+                        'attr' => ['type_input' => 'number'],
+                        'value' => $product->qty
+                    ],
+                    [
+                        'name' => 'warehouse_type',
+                        'note' => 'Kho vật tư',
+                        'type' => 'linking',
+                        'other_data' => [
+                            'config' => ['search' => 1], 
+                            'data'=> [
+                                'table' => 'supply_extends',
+                                'where' => ['type' => 'warehouse_type']
+                            ]
+                        ],
+                        'value' => $product->warehouse_type
+                    ],
+                    [
+                        'name' => 'note',
+                        'note' => 'Ghi chú',
+                        'type' => 'textarea',
+                        'value' => 'Chuyển kho thành phẩm'
+                    ],
+                    [
+                        'name' => 'receipt',
+                        'note' => 'Phiếu chuyển kho',
+                        'type' => 'filev2',
+                        'other_data' => ['role_update' => [\GroupUser::ACCOUNTING]] 
+                    ]
+                ];
+                return view('product_warehouses.move_warehouse', $data);
+            }else{
+                $data = $request->except('_token');
+                $qty = (int) @$data['qty'];
+                $product_qty = (int) @$product->qty;
+                if (empty($qty) || $qty > $product_qty) {
+                    return returnMessageAjax(100, 'Số lượng nhập kho không hợp lệ !');    
+                }
+                if (empty($data['warehouse_type'])) {
+                    return returnMessageAjax(100, 'Bạn chưa chọn kho vật tư chuyển đến !');
+                }
+                $warehouse_type = $data['warehouse_type'];
+                if ($warehouse_type == @$product->warehouse_type) {
+                    return returnMessageAjax(100, 'Vui lòng chọn kho khác để chuyển đến !');
+                }
+                //Lấy hàng từ kho cũ
+                $product->qty -= $qty;
+                $export = $product->save();
+                if (!$export) {
+                    return returnMessageAjax(100, 'Đã có lỗi khi lấy hàng chuyển kho, vui lòng thử lại !');
+                }
+                $arr_log = ['receipt' => @$data['receipt'], 'note' => @$data['note']];
+                ProductHistory::doLogWarehouse($id, 0, $qty, $product_qty, 0, $arr_log);
+                //Đưa hàng vào kho mới
+                $arr_keys = ['name', 'category', 'style', 'length', 'width', 'height', 'unit', 'made_by', 'produce_price', 'add_on', 'price'];
+                foreach ($arr_keys as $key_name) {
+                    $where[$key_name] = $product->{$key_name};
+                }
+                $where['warehouse_type'] = $warehouse_type;
+                $exist_data = ProductWarehouse::where($where)->first();
+                if (!empty($exist_data->id)) {
+                    $exist_data->qty += $qty;
+                    $import = $exist_data->save();
+                    if ($import) {
+                        $log_imp_id = @$exist_data->id;
+                        $ex_inventory = (int) @$exist_data->qty;
+                    }
+                }else{
+                    $data_insert = $where;
+                    $data_insert['qty'] = $qty;
+                    (new \BaseService())->configBaseDataAction($data_insert);
+                    $log_imp_id = ProductWarehouse::insertGetId($data_insert);
+                    $ex_inventory = 0;
+                }
+                if (!empty($log_imp_id)) {
+                    ProductHistory::doLogWarehouse($log_imp_id, $qty, 0, $ex_inventory, 0, $arr_log);
+                    return returnMessageAjax(200, 'Đã chuyển kho thành công !', \StatusConst::CLOSE_POPUP);
+                }else{
+                    return returnMessageAjax(100, 'Đã có lỗi xảy ra khi chuyển kho, vui lòng thử lại !');
+                }
+            }
+        }else{
+            return customReturnMessage(false, $is_post, ['Message' => 'Bạn không có quyền chuyển kho !']);
+        }
     }
 }
 
