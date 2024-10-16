@@ -106,8 +106,8 @@
                     <tr>
                         <td>{{ getFieldDataById('name', 'product_warehouses', @$object['id']) }}</td>
                         <td>{{ $object['qty'] }}</td>
-                        <td>{{ !empty($is_export) ? (float) $obj['price'] : number_format($object['price']) }}</td>
-                        <td>{{ !empty($is_export) ? (float) $obj['total'] : number_format($object['total']) }}</td>
+                        <td>{{ !empty($is_export) ? (float) $object['price'] : number_format($object['price']) }}</td>
+                        <td>{{ !empty($is_export) ? (float) $object['total'] : number_format($object['total']) }}</td>
                     </tr>
                 @endforeach
             @endforeach
