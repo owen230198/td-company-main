@@ -21,10 +21,14 @@ class ProductWarehouseController extends Controller
         return returnMessageAjax(200, 'Đã thêm vật tư thành công !', \StatusConst::RELOAD);
     }
 
+    static function rolePreventInventory(){
+        return !\GroupUser::isAdmin() && !\GroupUser::isAccounting() && !\GroupUser::isSale();
+    }
+
     public function inventory(Request $request)
     {
         $is_ajax = $request->input('is_ajax') == 1;
-        if (!\GroupUser::isAdmin() && !\GroupUser::isAccounting()) {
+        if (self::rolePreventInventory()) {
             return customReturnMessage(false, $is_ajax, ['message' => 'Bạn không có quyền truy cập !']);
         }
         $table = 'product_warehouses';
@@ -68,7 +72,7 @@ class ProductWarehouseController extends Controller
     public function inventoryDetail(Request $request)
     {
         $is_ajax = $request->input('is_ajax') == 1;
-        if (!\GroupUser::isAdmin() && !\GroupUser::isAccounting()) {
+        if (self::rolePreventInventory()) {
             return customReturnMessage(false, $is_ajax, ['message' => 'Bạn không có quyền truy cập !']);
         }
         $data['title'] = 'SỔ CHI TIẾT HÀNG HÓA THÀNH PHẨM';
@@ -125,7 +129,7 @@ class ProductWarehouseController extends Controller
 
     public function inventoryExport(Request $request)
     {
-        if (!\GroupUser::isAdmin() && !\GroupUser::isAccounting()) {
+        if (self::rolePreventInventory()) {
             return back()->with('error', 'Bạn không có quyền export dữ liệu này !');
         }
         if (!empty($request->input('is_detail'))) {

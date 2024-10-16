@@ -11,6 +11,9 @@ class ProductWarehouse extends Model
     static function getRole()
     {
         $role = [
+            \GroupUser::SALE => [
+                'view' => 1
+            ],
             \GroupUser::PRODUCT_WAREHOUSE => [
                 'view' => 1
             ],
