@@ -55,7 +55,7 @@
                 $info_fields = [
                     [
                         'name' => 'name',
-                        'attr' => ['inject_class' => 'length_input', 'required' => 1, 'readonly' => 1],
+                        'attr' => ['inject_class' => 'length_input', 'required' => 1],
                         'note' => 'Tên sản phẩm',
                         'value' => $product_obj->name
                     ],

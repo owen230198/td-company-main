@@ -273,7 +273,7 @@ class AjaxResponeController extends Controller
                     ],
                     [
                         'name' => 'warehouse_type',
-                        'note' => 'Kho vật tư',
+                        'note' => 'Kho vật tư đến',
                         'type' => 'linking',
                         'other_data' => [
                             'config' => ['search' => 1], 
