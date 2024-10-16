@@ -155,6 +155,7 @@ class COrder extends Model
                 return [
                     $order_field,
                     $fields['advance'],
+                    $fields['payment_type'],
                     $fields['rest'],
                     $fields['note'],
                 ];
@@ -171,6 +172,7 @@ class COrder extends Model
             case self::PAYMENT:
                 return [
                     $fields['advance'],
+                    $fields['payment_type'],
                     $fields['note'],
                 ];
                 break;
@@ -212,6 +214,16 @@ class COrder extends Model
             \GroupUser::ACCOUNTING => [
                 'view' => 1,
                 'insert' => 1,
+                'update' => 
+                [
+                    'with' => [[
+                        'type' => 'group',
+                        'query' => [
+                            ['key' => 'created_by', 'value' => \User::getCurrent('id')],
+                            ['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED]
+                        ]
+                    ]]
+                ],
             ],
         ];
         return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];
