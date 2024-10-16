@@ -38,7 +38,8 @@ class AjaxResponeController extends Controller
     public function ajaxFieldImportProductByAction($request)
     {
         $action = $request->input('action');
-        if (empty($action)){
+        $warehouse_type = $request->input('warehouse_type');
+        if (empty($action) || empty($warehouse_type)){
             return '';
         }
         if ($action == 'insert') {
@@ -51,9 +52,16 @@ class AjaxResponeController extends Controller
         }else{
             $field = [
                 'name' => 'data[target]',
-                'note' => 'Đối tượng cập nhật',
+                'note' => 'Thành phẩm cập nhật SL',
                 'type' => 'linking',
-                'other_data' => ['config' => ['search' => 1, 'except_linking' => 1], 'data' => ['table' => 'product_warehouses']],
+                'other_data' => [
+                    'config' => ['search' => 1, 
+                    'except_linking' => 1], 
+                    'data' => [
+                        'table' => 'product_warehouses',
+                        'where' => !empty($warehouse_type) ? ['warehouse_type' => $warehouse_type] : []
+                    ]
+                ],
             ];
         }
         return view('view_update.view', $field);

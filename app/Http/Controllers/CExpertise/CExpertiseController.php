@@ -104,7 +104,7 @@
                     ],
                     [
                         'name' => 'warehouse_type',
-                        'attr' => ['required' => 1],
+                        'attr' => ['required' => 1, 'inject_class' => '__expertise_select_warehouse_type'],
                         'note' => 'Chọn kho',
                         'type' => 'linking',
                         'other_data' => [

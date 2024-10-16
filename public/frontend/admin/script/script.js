@@ -1252,10 +1252,19 @@ var selectImportProductMethod = function () {
         event.preventDefault();
         let _this = $(this);
         let action = _this.val();
-        let module = _this.closest('form.__import_product_warehouse_form').find('.ajax_data_field_import_product');
-        let url = 'ajax-respone/ajaxFieldImportProductByAction?action=' + action;
+        let parent = _this.closest('form.__import_product_warehouse_form');
+        let module = parent.find('.ajax_data_field_import_product');
+        let warehouse_type = getEmptyDefault(parent.find('.__expertise_select_warehouse_type').val(), '');
+        let url = 'ajax-respone/ajaxFieldImportProductByAction?action=' + action + '&warehouse_type=' + warehouse_type;
         ajaxViewTarget(url, module, module);
     });
+
+    $(document).on('change', '.__expertise_select_warehouse_type', function (e) {
+        e.preventDefault();
+        let parent = $(this).closest('form.__import_product_warehouse_form');
+        let select_method = parent.find('.__select_import_product_warehouse_method');
+        select_method.trigger('change');
+    })
 }
 
 var selectTypeCOrder = function()

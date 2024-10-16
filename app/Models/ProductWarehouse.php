@@ -35,7 +35,7 @@ class ProductWarehouse extends Model
         }
         $data = $products->paginate(50)->all();
         $arr = array_map(function($item){
-            return ['id' => @$item->id, 'label' => $item->code.' - '.$item->name];
+            return ['id' => @$item->id, 'label' => getFieldDataById('name', 'supply_extends', $item->warehouse_type).' - '.$item->code.' - '.$item->name];
         }, $data);
         return json_encode($arr);
     }
