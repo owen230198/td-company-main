@@ -69,7 +69,7 @@
                     </td>
                     @if (count($objects) > 0)
                         @php $first_obj = array_shift($objects); @endphp
-                        <td>{{ $first_obj['name'] }}</td>
+                        <td>{{ getFieldDataById('name', 'product_warehouses', @$first_obj['id']) }}</td>
                         <td>{{ $first_obj['qty'] }}</td>
                         <td>{{ !empty($is_export) ? (float) $first_obj['price'] : number_format($first_obj['price']) }}</td>
                         <td>{{ !empty($is_export) ? (float) $first_obj['total'] : number_format($first_obj['total']) }}</td>
@@ -104,7 +104,7 @@
                 </tr>
                 @foreach ($objects as $index => $object)
                     <tr>
-                        <td>{{ $object['name'] }}</td>
+                        <td>{{ getFieldDataById('name', 'product_warehouses', @$object['id']) }}</td>
                         <td>{{ $object['qty'] }}</td>
                         <td>{{ !empty($is_export) ? (float) $obj['price'] : number_format($object['price']) }}</td>
                         <td>{{ !empty($is_export) ? (float) $obj['total'] : number_format($object['total']) }}</td>
