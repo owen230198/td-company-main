@@ -413,28 +413,30 @@
                 if ($table == 'papers') {
                     $where['parent'] = 0;
                 }
-                $arr_qty[] = \DB::table($table)->where($where)->min('handled');
+                $arr_qty[] = (int) \DB::table($table)->where($where)->min('handled');
             }
             $min_qty = collect($arr_qty)->min();
             if ($min_qty > 0) {
                 $qty_created = CProduct::where(['product' => $id])->sum('qty');
                 $exist_data = CProduct::where(['product' => $id, 'status' => \StatusConst::PROCESSING])->first();
                 $data_qty = $min_qty - $qty_created;
-                if (!empty($exist_data)) {
-                    $exist_data->qty += $data_qty;
-                    $exist_data->save();
-                }else{
-                    $data_insert = [
-                        'name' => 'KCS Thành phẩm - '.getFieldDataById('name', 'products', $id),
-                        'product' => $id,
-                        'qty' => $data_qty,
-                        'created_at' => \Carbon\Carbon::now(),
-                        'updated_at' => \Carbon\Carbon::now(),
-                        'act' => 1,
-                       'status' => \StatusConst::PROCESSING
-                    ];
-                    $c_id = CProduct::insertGetId($data_insert);
-                    CProduct::getInsertCode($c_id);
+                if ($data_qty > 0) {
+                    if (!empty($exist_data)) {
+                        $exist_data->qty += $data_qty;
+                        $exist_data->save();
+                    }else{
+                        $data_insert = [
+                            'name' => 'KCS Thành phẩm - '.getFieldDataById('name', 'products', $id),
+                            'product' => $id,
+                            'qty' => $data_qty,
+                            'created_at' => \Carbon\Carbon::now(),
+                            'updated_at' => \Carbon\Carbon::now(),
+                            'act' => 1,
+                           'status' => \StatusConst::PROCESSING
+                        ];
+                        $c_id = CProduct::insertGetId($data_insert);
+                        CProduct::getInsertCode($c_id);
+                    }
                 }
             }
         } 

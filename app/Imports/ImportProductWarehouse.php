@@ -42,5 +42,10 @@ class ImportProductWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows
     {
         
     }
+
+    public function array(array $array)
+    {
+        return $array[0];
+    }
 }
 
