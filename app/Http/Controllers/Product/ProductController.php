@@ -269,10 +269,9 @@ use App\Models\CRework;
                     if ($process) {
                         $product_data = Product::find($product_id);
                         $arr_update = getTotalProductByArr([$product_data]);
-                        $arr_update['code'] = 'DH-'.getCodeInsertTable('products');
+                        $arr_update['code'] = 'DH-'.formatCodeInsert($product_id);
                         $arr_update['status'] = Order::DESIGN_SUBMITED;
                         $arr_update['order_created'] = 1;
-                        $arr_update['rework_from'] = $product_obj->id;
                         foreach (Product::FEILD_FILE as $key => $file) {
                             if ($key != 'handle_shape_file') {
                                 $arr_update[$key] = $product_obj->{$key};
@@ -281,7 +280,6 @@ use App\Models\CRework;
                         Product::where('id', $product_id)->update($arr_update);
 
                         //Đánh dấu sản phẩm này đã từng được sản xuất lại
-                        $product_obj->rework = 1;
                         $product_obj->save();
 
                         //update trạng thái lệnh yêu cầu sx lại đã đc xử lí
