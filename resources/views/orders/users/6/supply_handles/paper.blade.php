@@ -37,13 +37,21 @@
     @endif 
     <div class="plan_handle_supply_module">
         <div class="process_paper_plan">
+            @php
+                $arr_items = [
+                    'key_supp' => \TDConst::PAPER, 
+                    'note' => 'giấy in', 
+                    'base_need' => $supply_obj->supp_qty
+                ];
+                if (!empty($supply_size['materal']) && $supply_size['materal'] != 'other') {
+                    $arr_items['supp_price'] = $supply_size['materal'];
+                }
+                if (!empty($supply_size['qttv'])) {
+                    $arr_items['qtv'] = $supply_size['qttv'];
+                }
+            @endphp
             @include('orders.users.6.supply_handles.view_handles.multiple', 
-            ['arr_items' => ['key_supp' => \TDConst::PAPER, 
-            'note' => 'giấy in', 
-            'supp_price' => $supply_size['materal'],
-            'qtv' => $supply_size['qttv'],
-            'base_need' => $supply_obj->supp_qty],
-            'type' => 'print_warehouses'])
+            ['arr_items' => $arr_items, 'type' => 'print_warehouses'])
         </div> 
     </div>
 @endsection

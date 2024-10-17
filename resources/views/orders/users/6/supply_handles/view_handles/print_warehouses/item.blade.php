@@ -1,18 +1,27 @@
 @php
+    $where_chose = [
+        'type' => $key_supp,
+        'except_value' => '{"field" :"id","value":"'.@$except_value.'"}',
+        'status' => 'imported'
+    ];
+    if (!empty($supp_price)) {
+        $where_chose['supp_price'] = $supp_price;
+    }
+
+    if (!empty($qtv)) {
+        $where_chose['qtv'] = $qtv;
+    }
     $chose_supp = [
         'name' => 'c_supply['.$key_supp.']['.$index.'][size_type]',
         'type' => 'linking',
         'note' => 'Tìm và chọn khổ giấy in',
         'attr' => ['inject_class' => '__select_in_warehouse'],
+        'value' => '',
         'other_data' => [
             'config' => ['search' => 1, 'except_linking' => 1], 
             'data' => [
                 'table' => 'print_warehouses', 
-                'where' => ['type' => $key_supp,
-                            'supp_price' => $supp_price,
-                            'qtv' => $qtv,
-                            'except_value' => '{"field" :"id","value":"'.@$except_value.'"}',
-                            'status' => 'imported']
+                'where' => $where_chose
             ]
         ]
     ];
