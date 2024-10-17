@@ -6,7 +6,8 @@ use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\SkipsEmptyRows;
-class ImportProductWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows
+use Maatwebsite\Excel\Concerns\ToArray;
+class ImportProductWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows, ToArray
 {
     static $warehouse_tye = '';
     function __construct($warehouse_tye)
@@ -19,8 +20,8 @@ class ImportProductWarehouse implements ToModel, WithHeadingRow, SkipsEmptyRows
         if ($this->isHeaderRow($row) || $row['qty'] <= 0 || empty ($row['name'])) {
             return null;
         }
-        $data = $this->getDataImport(self::$warehouse_tye, $row);
-        return new ProductWarehouse($data);
+        // $data = $this->getDataImport(self::$warehouse_tye, $row);
+        // return new ProductWarehouse($data);
     }
 
     private function getDataImport($type, $row)

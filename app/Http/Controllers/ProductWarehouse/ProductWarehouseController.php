@@ -17,7 +17,17 @@ class ProductWarehouseController extends Controller
 
     public function import($file)
     {
-        Excel::import(new ImportProductWarehouse(31), $file);
+        $obj = new ImportProductWarehouse(31);
+        $arr_file = pathinfo($file->getClientOriginalName());
+        if (strpos($arr_file['filename'], 'refs') !== false) {
+            $data = Excel::toArray($obj, $file);
+            foreach ($data[0] as $item) {
+                $obj = ProductWarehouse::where('name', 'like', '%'.$item['name'].'%')->get()->toArray();
+                dump($obj);
+            }
+        }else{
+            Excel::import($obj, $file);
+        }
         return returnMessageAjax(200, 'Đã thêm vật tư thành công !', \StatusConst::RELOAD);
     }
 
