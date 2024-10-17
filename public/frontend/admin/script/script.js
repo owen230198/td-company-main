@@ -1119,7 +1119,7 @@ var showConfirmNoReworkPopup = function (id, qty, name) {
                     $.ajax({
                         url: 'product-require-rework/' + id,
                         type: 'POST',
-                        data: { status: "not_need_rework" },
+                        data: { status: "not_need_rework", note: note },
                     })
                         .done(function (data) {
                             let title = data.code == 200 ? 'Thành công' : 'Không thành công';

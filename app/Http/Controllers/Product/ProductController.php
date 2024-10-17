@@ -253,6 +253,13 @@ use App\Models\CRework;
                     return view('kcs.reworks.view', $data);
                 }else{
                     $data = $request->except('_token');
+                    if (@$data['status'] == 'not_need_rework') {
+                        $obj->status = \StatusConst::SUBMITED;
+                        $obj->rework_status = Product::NO_REWORK;
+                        $obj->note = @$data['note'];
+                        $status = $obj->save();   
+                        return returnMessageAjax(200, 'Đã xác nhận không cần sản xuất lại lí do: '.$data['note']);
+                    }
                     $data_product = !empty($data['product'][0]) ? $data['product'][0] : [];
                     if (empty($data_product)) {
                         return returnMessageAjax(100, 'Không tìm thấy dữ liệu sản phẩm !');
