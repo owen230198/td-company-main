@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\ProductWarehouse;
 use App\Http\Controllers\Controller;
 use App\Imports\ImportProductWarehouse;
+use App\Models\ProductHistory;
 use App\Models\ProductWarehouse;
 use App\Services\ExportExcel\ExportExcelService;
 use Illuminate\Http\Request;
@@ -22,13 +23,16 @@ class ProductWarehouseController extends Controller
         if (strpos($arr_file['filename'], 'refs') !== false) {
             $data = Excel::toArray($obj, $file);
             foreach ($data[0] as $item) {
-                $obj = ProductWarehouse::where('name', 'like', '%'.$item['name'].'%')->get()->toArray();
-                dump($obj);
+                $obj = ProductWarehouse::where('name', 'like', '%'.$item['name'].'%')->where('warehouse_type', 32)->get()->first();
+                $qty = $item['qty'];
+                $obj->qty = $qty;
+                $obj->save();
+                ProductHistory::doLogWarehouse($obj->id, $qty, 0, $qty, 0, ['note' => 'Điều chỉnh lại số lượng kho']);
             }
         }else{
             Excel::import($obj, $file);
         }
-        return returnMessageAjax(200, 'Đã thêm vật tư thành công !', \StatusConst::RELOAD);
+        return returnMessageAjax(200, 'Thành công !', \StatusConst::RELOAD);
     }
 
     static function rolePreventInventory(){
