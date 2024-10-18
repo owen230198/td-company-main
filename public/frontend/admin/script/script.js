@@ -650,29 +650,35 @@ var getUrlLinkingWarehouseSize = function (type) {
     return url;
 }
 
-var selectTypeSuppWarehouse = function () {
-    let select_type_c_supp = $('select.__wh_select_type');
-    $(document).on('change', 'select.__wh_select_type', function (event) {
-        event.preventDefault();
-        let parent = $(this).closest('.__module_select_type_warehouse');
-        let value = $(this).val();
-        let url = getUrlLinkingWarehouseSize(value);
-        let select_size = parent.find('select.__wh_select_size');
+var changeSelectTypeTrigger = function(select, reset_input = 0)
+{
+    let parent = select.closest('.__module_select_type_warehouse');
+    let value = select.val();
+    let url = getUrlLinkingWarehouseSize(value);
+    let select_size = parent.find('select.__wh_select_size');
+    select_size.data('url', url);
+    if (reset_input == 1) {
         select_size.val('');
         select_size.data('id', '');
         select_size.data('label', '');
-        select_size.data('url', url);
-        
         let module_qty = parent.closest('.__c_supply_warehouse').find('.__ajax_qty_type');
         if (module_qty.length > 0) {
             let url_get_qty = 'qty-by-supply-type?type=' + value;
             ajaxViewTarget(url_get_qty, module_qty, module_qty);
         }
-        initInputModuleAfterAjax(parent);
+    }
+    initInputModuleAfterAjax(parent);
+}
+
+var selectTypeSuppWarehouse = function () {
+    let select_type_c_supp = $('select.__wh_select_type');
+    $(document).on('change', 'select.__wh_select_type', function (event) {
+        event.preventDefault();
+        changeSelectTypeTrigger($(this), 1)
     });
     if (select_type_c_supp.length > 0) {
         select_type_c_supp.each(function () {
-            $(this).trigger('change');   
+            changeSelectTypeTrigger($(this))   
         })
     }
 }
