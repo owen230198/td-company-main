@@ -1,7 +1,8 @@
 <?php
     namespace App\Http\Controllers\Order;
     use App\Http\Controllers\Controller;
-    use App\Imports\ImportOrder;
+use App\Http\Controllers\CSupply\CSupplyController;
+use App\Imports\ImportOrder;
 use App\Models\COrder;
 use App\Models\CSupply;
 use App\Models\Customer;
@@ -258,6 +259,39 @@ use Maatwebsite\Excel\Facades\Excel;
                             return returnMessageAjax(100, 'Không thể xử lí vật tư !');
                         } 
                     } 
+                }else{
+                    return customReturnMessage(false, $request->isMethod('POST'), ['message' => 'Dữ liệu không hợp lệ']);
+                }      
+            }else{
+                return customReturnMessage(false, $request->isMethod('POST'), ['message' => 'Bạn không có quyền thực hiện hành động!']);
+            }
+        }
+
+        public function supplyHandMade(Request $request)
+        {
+            if (\GroupUser::isPlanHandle()) {
+                $table = $request->input('table');
+                $id = $request->input('id');
+                $data_supply = \DB::table($table)->find($id);
+                if (empty($data_supply)) {
+                    return back()->with('error', 'Dữ liệu không hợp lệ !');
+                }
+                if ($table == 'papers') {
+                    $data_supply->type = \TDConst::PAPER;    
+                }elseif ($table == 'fill_finishes') {
+                    $data_supply->type = \TDConst::FILL_FINISH; 
+                }
+                $supp_size = !empty($data_supply->size) ? json_decode($data_supply->size, true) : [];
+                if (!empty($data_supply)) {
+                    $data = $this->admins->CSupplyInsertView('insert');
+                    $data['action_url'] = url('insert/c_supplies');
+                    $dataItem['supp_type'] = $data_supply->type;
+                    $dataItem['product'] = $data_supply->product;
+                    $dataItem['supply'] = $data_supply->id;
+                    $dataItem['note'] = 'Xuất vật tư cho lệnh '.$data_supply->code;
+                    $dataItem['qty'] = 0;
+                    $data['dataItem'] = collect($dataItem);
+                    return view('c_supplies.view', $data);
                 }else{
                     return customReturnMessage(false, $request->isMethod('POST'), ['message' => 'Dữ liệu không hợp lệ']);
                 }      

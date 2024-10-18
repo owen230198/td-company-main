@@ -24,15 +24,6 @@
             return view('view_update.c_supply_qty', $data);
         }
 
-        private function getDataView($action)
-        {
-            $data = $this->admins->getDataActionView($this->table, $action, $action == 'insert' ? 'Thêm mới' : 'Chi tiết');
-            $field_list = $data['field_list'];
-            $data['field_type'] = array_slice($field_list, 0, 1);
-            $data['field_action'] = array_slice($field_list, 1);
-            return $data;
-        }
-
         private function processData(&$data)
         {
             if (empty($data['supp_type'])) {
@@ -89,7 +80,7 @@
         {
             $table = $this->table;
             if (!$request->isMethod('POST')) {
-                $data = $this->getDataView(__FUNCTION__);
+                $data = $this->admins->CSupplyInsertView(__FUNCTION__);
                 $data['action_url'] = url('insert/'.$this->table);
                 return view('c_supplies.view', $data);
             }else{
@@ -114,7 +105,7 @@
             $table = $this->table;
             $dataItem = getModelByTable($table)->find($id);
             if (!$request->isMethod('POST')) {
-                $data = $this->getDataView(__FUNCTION__);
+                $data = $this->admins->CSupplyInsertView(__FUNCTION__);
                 $data['dataItem'] = $dataItem;
                 $data['action_url'] = url('update/'.$table.'/'.$id);
                 return view('c_supplies.view', $data);

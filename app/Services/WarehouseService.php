@@ -52,7 +52,7 @@
             $field_qty = [
                 'name' => 'qty',
                 'type' => 'text',
-                'note' => 'Số lượng nhập thêm'. $unit,
+                'note' => 'Số lượng'. $unit,
                 'attr' => [
                     'type_input' => 'number', 
                     'inject_class' => '__buying_qty_input __buying_change_input', 
@@ -62,7 +62,7 @@
             $field_hank = [
                 'name' => 'hank',
                 'type' => 'text',
-                'note' => 'Số cuộn nhập thêm',
+                'note' => 'Số cuộn',
                 'attr' => [
                     'type_input' => 'number',
                 ]
@@ -70,7 +70,7 @@
             $field_weight = [
                 'name' => 'weight',
                 'type' => 'text',
-                'note' => 'Số kg nhập thêm',
+                'note' => 'Số kg',
                 'attr' => [
                     'type_input' => 'number',
                 ]
@@ -79,7 +79,7 @@
             $field_length = [
                 'name' => 'square',
                 'type' => 'text',
-                'note' => 'Số cm nhập thêm',
+                'note' => 'Số cm',
                 'attr' => [
                     'type_input' => 'number',
                     'readonly' => $readonly

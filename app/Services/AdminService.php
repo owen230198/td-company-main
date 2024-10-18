@@ -438,4 +438,13 @@ class AdminService extends BaseService
         $data['inventory'] = $list_data->sum('inventory');
         $data['list_data'] = $list_data;
     }
+
+    public function CSupplyInsertView($action)
+    {
+        $data = $this->getDataActionView('c_supplies', $action, $action == 'insert' ? 'Thêm mới' : 'Chi tiết');
+        $field_list = $data['field_list'];
+        $data['field_type'] = array_slice($field_list, 0, 1);
+        $data['field_action'] = array_slice($field_list, 1);
+        return $data;
+    }
 }

@@ -651,6 +651,7 @@ var getUrlLinkingWarehouseSize = function (type) {
 }
 
 var selectTypeSuppWarehouse = function () {
+    let select_type_c_supp = $('select.__wh_select_type');
     $(document).on('change', 'select.__wh_select_type', function (event) {
         event.preventDefault();
         let parent = $(this).closest('.__module_select_type_warehouse');
@@ -668,7 +669,12 @@ var selectTypeSuppWarehouse = function () {
             ajaxViewTarget(url_get_qty, module_qty, module_qty);
         }
         initInputModuleAfterAjax(parent);
-    })
+    });
+    if (select_type_c_supp.length > 0) {
+        select_type_c_supp.each(function () {
+            $(this).trigger('change');   
+        })
+    }
 }
 
 var selectTypeWorker = function () {

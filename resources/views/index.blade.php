@@ -14,8 +14,8 @@
     <link rel="stylesheet" href="{{ asset('frontend/base/css/select2.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/base/css/jquery-ui.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/base/daterangepickers/daterangepicker.css') }}" />
-    <link rel="stylesheet" href="{{ asset('frontend/base/css/style.css?v=15') }}" />
-    <link rel="stylesheet" href="{{ asset('frontend/admin/css/style.css?v=15') }}" />
+    <link rel="stylesheet" href="{{ asset('frontend/base/css/style.css?v=16') }}" />
+    <link rel="stylesheet" href="{{ asset('frontend/admin/css/style.css?v=16') }}" />
     @yield('css')
 </head>
 
@@ -79,7 +79,7 @@
     <script src="{{ asset('frontend/base/script/resumable.min.js') }}"></script>
     <script src="{{ asset('frontend/admin/script/loading.js') }}"></script>
     <script src="{{ asset('frontend/base/script/script.js') }}"></script>
-    <script src="{{ asset('frontend/admin/script/script.js?v=15') }}"></script>
+    <script src="{{ asset('frontend/admin/script/script.js?v=16') }}"></script>
     @yield('script')
     @stack('bottom-scripts')
     <script>

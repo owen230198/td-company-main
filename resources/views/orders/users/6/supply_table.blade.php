@@ -74,10 +74,17 @@
                     </td>
                     @endforeach
                     <td>
-                        <div class="func_btn_module text-center">
-                            <a href="{{ url('supply-handle?table='.$element['table'].'&id='.$data->id) }}">
-                                <i class="fa fa-paper-plane-o mr-1" aria-hidden="true"></i> Yêu cầu xuất vật tư
-                            </a>   
+                        <div class="list_table_func d-flex align-items-center justify-content-center">
+                            <a class="table-btn mr-2 mb-2" 
+                                href="{{ url('supply-handle?table='.$element['table'].'&id='.$data->id) }}"
+                                title="Yêu cầu xuất vật tư">
+                                <i class="fa fa-paper-plane-o mr-1" aria-hidden="true"></i> 
+                            </a> 
+                            <a class="table-btn mr-2 mb-2" 
+                                href="{{ url('supply-handmade?table='.$element['table'].'&id='.$data->id) }}"
+                                title="Tính vật tư thủ công">
+                                <i class="fa fa-plus" aria-hidden="true"></i> 
+                            </a>  
                         </div>
                     </td>
                 </tr>
