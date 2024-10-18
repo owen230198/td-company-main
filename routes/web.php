@@ -94,6 +94,7 @@ Route::middleware(['check_login'])->group(function () {
 	Route::post('apply-order/{stage}/{type}/{id}', [OrderController::class, 'applyOrder']);
 	Route::post('receive-command/{table}/{id}', [OrderController::class, 'receiveCommand']);
 	Route::any('supply-handle', [OrderController::class, 'supplyHandle']);
+	Route::any('supply-handmade', [OrderController::class, 'supplyHandMade']);
 	Route::post('take-in-supply/{id}', [OrderController::class, 'takeInSupply']);
 	Route::post('apply-to-worker-handle/{table}/{id}', [OrderController::class, 'applyToWorkerHandle']);
 	Route::get('select-supply-warehouse/{table}', [OrderController::class, 'selectSupplyWarehouse']);
