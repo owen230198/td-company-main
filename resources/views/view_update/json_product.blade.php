@@ -6,9 +6,7 @@
         @if (count($arr_value) > 0)
             @foreach ($arr_value as $key => $product_value)
                 @include('product_warehouses.json_item', ['index' => $key, 'value' => $product_value])
-            @endforeach
-            @else
-                @include('product_warehouses.json_item', ['index' => 0])   
+            @endforeach 
         @endif
     </div>
     @if (\App\Models\COrder::canHandle())

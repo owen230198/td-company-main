@@ -113,7 +113,7 @@ class AjaxResponeController extends Controller
         if ((int) @$product->qty < $rqty) {
             return returnMessageAjax(100, 'Sản phẩm trong kho không đủ để xuất !');
         }
-        return !empty($request->input('check_qty')) ? true : $product->price;
+        return !empty($request->input('check_qty')) ? true : ['price' => $product->price, 'name' => $product->name];
     }
 
     public function getAdvanceOrder($request)
@@ -125,9 +125,12 @@ class AjaxResponeController extends Controller
 
     public function confirmTakeSelling($request)
     {
-        if (\GroupUser::isAdmin() || \GroupUser::isAccounting()) {
-            $id = @$request->input('id') ?? 0;
-            $c_order = COrder::find($id);
+        $id = @$request->input('id') ?? 0;
+        $c_order = COrder::find($id);
+        $warehouse_type = @$c_order->warehouse_type;
+        if (\GroupUser::isAdmin() || 
+        (\GroupUser::isAccounting() && $warehouse_type == COrder::WH_OFFICE) ||
+        (\GroupUser::isProductWarehouse() && $warehouse_type == COrder::WH_FACTORY)) {
             if (@$c_order->status != \StatusConst::NOT_ACCEPTED) {
                 return returnMessageAjax(100, 'Dữ liệu không hợp lệ !');
             }

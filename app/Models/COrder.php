@@ -16,6 +16,8 @@ class COrder extends Model
     const PAYMENT = 'payment';
     const OTHER = 'other';
     const TYPE_PAYMENT = [self::ORDER, self::SELL];
+    const WH_FACTORY = 31;
+    const WH_OFFICE = 32;
 
     static function getFeildProductJson($value)
     {
@@ -206,13 +208,20 @@ class COrder extends Model
                         'type' => 'group',
                         'query' =>[
                             ['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED],
-                            ['con' => 'or', 'key' => 'confirm_warehouse', 'value' => \StatusConst::NOT_ACCEPTED]
+                            ['key' => 'warehouse_type', 'value' => self::WH_FACTORY]
                         ],
                     ],
                 ],
             ],
             \GroupUser::ACCOUNTING => [
-                'view' => 1,
+                'view' => [
+                    'with' => [
+                        'type' => 'group',
+                        'query' =>[
+                            ['key' => 'warehouse_type', 'value' => self::WH_OFFICE]
+                        ],
+                    ],
+                ],
                 'insert' => 1,
                 'update' => 
                 [

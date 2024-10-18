@@ -716,6 +716,25 @@ class DevController extends Controller
             COrder::where('id', $c_order->id)->update(['object' => json_encode($objects)]);
         }
     }
+
+    public function handleWarehouseTypeCOrderSell()
+    {
+        $c_orders = COrder::where('type', COrder::SELL)->get();
+        foreach ($c_orders as $c_order) {
+            $object = !empty($c_order->object) ? json_decode($c_order->object, true) : [];
+            if (!empty($object[0]['warehouse_type'])) {
+                COrder::where('id', $c_order->id)->update(['warehouse_type' => $object[0]['warehouse_type']]);
+            }
+        }
+    }
+
+    public function insertCodeProductWarehouse()
+    {
+        $data = ProductWarehouse::get();
+        foreach ($data as $product) {
+            ProductWarehouse::where('id', $product->id)->update(['code' => 'SP-'.formatCodeInsert($product->id)]);
+        }
+    }
     
 }
 

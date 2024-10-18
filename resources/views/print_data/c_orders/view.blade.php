@@ -52,7 +52,7 @@
                         @endphp
                         <th scope="row">{{ $num }}</th>
                         <td>{{ $obj->code }}</td>
-                        <td>{{ $obj->name }}</td>
+                        <td>{{ @$product->name ?? $obj->name }}</td>
                         <td>{{ $product->qty }}</td>
                         <td class="text-right">{{ number_format($product->price) }} vnđ</td>
                         <td class="text-right">{{ number_format($product->total) }} vnđ</td>

@@ -1337,12 +1337,26 @@ var addItemJsonModule = function () {
     $(document).on('click', 'button.add_item_json_button', function (event) {
         event.preventDefault();
         let _this = $(this);
-        let list_section = _this.closest('.__json_data_module').find('.__list_item_json');
-        let item = list_section.find('.__item_json');
-        let index = getEmptyDefault(item.last().data('index'), 0, 'number') + 1;
-        let table = _this.data('table');
-        let url = 'ajax-respone/returnItemJson?table=' + table + '&index=' + index;
-        ajaxViewTarget(url, list_section, list_section, 2);
+        let type = _this.closest('.__cost_c_order_module').find('.__select_warehouse_type').val();
+        if (empty(type)) {
+            swal('Không thành công', "Bạn cần chọn địa điểm kho trước !", 'error')
+        }else{
+            let list_section = _this.closest('.__json_data_module').find('.__list_item_json');
+            let item = list_section.find('.__item_json');
+            let index = getEmptyDefault(item.last().data('index'), 0, 'number') + 1;
+            let table = _this.data('table');
+            let url = 'ajax-respone/returnItemJson?table=' + table + '&index=' + index + '&wareshouse_type=' + type;
+            $('#loader').fadeIn(200);
+            $.ajax({ 
+                url: url, 
+                type: 'GET' 
+            }).done(function (html) {
+                list_section.append(html);
+                let section_class = list_section.find('.__item_json').last();
+                initInputModuleAfterAjax(section_class);
+                $('#loader').delay(200).fadeOut(500);
+            })
+        }
     });
     
     $(document).on('click', 'span.__remove_object_json_item', function (event) {
@@ -1357,19 +1371,9 @@ var selectProductSellingModule = function(){
     $(document).on('change', 'select.__select_warehouse_type', function(event){
         event.preventDefault();
         let _this = $(this);
-        let parent = _this.closest('.__item_json');
-        let id = _this.val();
-        let index = parent.data('index');
-        $.ajax({ 
-            url: getBaseRoute('ajax-respone/AjaxFieldSellByWarehouseType?id=' + id + '&index=' + index), 
-            type: 'GET' 
-        }).done(function (data) {
-            let target = parent.find('.__ajax_field_sell_pro');
-            target.html(data);
-            calcTotalProductSelling(_this.closest('.__cost_c_order_module'));
-            initInputModuleAfterAjax(target);
-            
-        })
+        let parent = _this.closest('.__cost_c_order_module');
+        parent.find('.__list_item_json').html('');
+        calcTotalProductSelling(parent);
     });
 
     $(document).on('change', 'select.__select_product_sell', function(event){
@@ -1377,9 +1381,16 @@ var selectProductSellingModule = function(){
         let _this = $(this);
         let parent = _this.closest('.__item_json');
         let id = _this.val();
+        let target = parent.find('input.__selling_price_input_item');
+        let name_input = parent.find('input.__selling_input_product_name');
+        if (empty(id)) {
+            name_input.val('');
+            target.val('');
+            target.trigger('keyup'); 
+            return false;     
+        }
         let qty = getEmptyDefault(parent.find('input.__selling_qty_input_item').val(), 0, 'float');
         let url = 'ajax-respone/getPriceProductWarehouse?id=' + id + '&qty=' + qty;
-        let target = parent.find('input.__selling_price_input_item');
         $.ajax({
             url: url,
             type: 'GET',
@@ -1388,12 +1399,15 @@ var selectProductSellingModule = function(){
             if (data.code == 100) {
                 swal('Không thành công', data.message, 'error').then(function () {
                     _this.val('');
-                    target.val('');  
+                    target.val(''); 
+                    name_input.val('');
+                    target.trigger('keyup'); 
 				});
             }else{
-                target.val(data);
+                name_input.val(data.name);
+                target.val(data.price);
+                target.trigger('keyup');
             }
-            target.trigger('keyup');
 		});
     });
 
@@ -1426,8 +1440,6 @@ var calcTotalProductSelling = function(json_selling_module)
     let selling_total = 0;
     list_item.each(function () {
         let total_item = getEmptyDefault($(this).find('input.__selling_total_item_input').val(), 0, 'float');
-        console.log(total_item);
-        
         selling_total += total_item;
     });
     let other_price = getEmptyDefault(json_selling_module.find('input.__selling_other_price_input').val(), 0, 'float');

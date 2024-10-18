@@ -3,9 +3,9 @@
     use App\Http\Controllers\Controller;
     use App\Imports\ImportCOrder;
     use App\Models\COrder;
-use App\Models\Customer;
-use App\Models\Represent;
-use Maatwebsite\Excel\Facades\Excel;
+    use App\Models\Customer;
+    use App\Models\Represent;
+    use Maatwebsite\Excel\Facades\Excel;
 
     class COrderController extends Controller
     {
