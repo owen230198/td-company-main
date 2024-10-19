@@ -49,7 +49,8 @@
         <tbody>
             @foreach ($list_data as $data)
                 @php
-                    $obj_item = getObjectDataByWhere('product_histories', ['target' => $data->id]);
+                    $where = ['target' => $data->id];
+                    $obj_item = getObjectDataByWhere('product_histories', $where);
                     $link_detail = url('product-inventory-detail?target='.$data->id);
                     if (!empty($range_time)) {
                         $link_detail .= '&created_at='.$range_time;
@@ -57,8 +58,12 @@
                         $obj_item = $obj_item->whereBetween('created_at', $where_time);
                     }
                     $item = $obj_item->get()->sortBy([['created_at', 'desc'],['id', 'desc']]);
-                    $first = $item->first();
-                    $last = $item->last();
+                    if ($item->isEmpty()) {
+                        $first = $last = getObjectDataByWhere('product_histories', $where)->latest('created_at')->first();
+                    }else{
+                        $first = $item->first();
+                        $last = $item->last();
+                    }
                     $data_ex_inventory = !empty($last->ex_inventory) ? $last->ex_inventory : 0;
                     $ex_inventory += $data_ex_inventory;
                     $data_imported = $item->sum('imported');

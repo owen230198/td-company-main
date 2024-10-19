@@ -6,6 +6,7 @@
     $exported = 0;
     $inventory = 0;
     $table_export = !empty($table_export);
+    $table_history = 'warshouse_histories';
 @endphp
 <div class="position-relative table_inventory">
     <table class="table table-bordered mb-2 ">
@@ -48,7 +49,8 @@
         <tbody>
             @foreach ($list_data as $data)
                 @php
-                    $obj_item = \DB::table('warehouse_histories')->where(['table' => $data->table_name, 'target' => $data->id, 'type' => $data->type]);
+                    $where = ['table' => $data->table_name, 'target' => $data->id];
+                    $obj_item = \DB::table($table_history)->where($where);
                     $link_detail = url('inventory-detail?table='.$data->table_name.'&type='.$data->type.'&target='.$data->id);
                     if (!empty($range_time)) {
                         $link_detail .= '&created_at='.$range_time;
@@ -56,8 +58,12 @@
                         $obj_item = $obj_item->whereBetween('created_at', $where_time);
                     }
                     $item = $obj_item->get()->sortBy([['created_at', 'desc'],['id', 'desc']]);
-                    $first = $item->first();
-                    $last = $item->last();
+                    if ($item->isEmpty()) {
+                        $first = $last = \DB::table($table_history)->where($where)->latest('created_at')->first();
+                    }else{
+                        $first = $item->first();
+                        $last = $item->last();
+                    }
                     $data_ex_inventory = !empty($last->ex_inventory) ? $last->ex_inventory : 0;
                     $ex_inventory += $data_ex_inventory;
                     $data_imported = $item->sum('imported');
