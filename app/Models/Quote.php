@@ -26,13 +26,23 @@ class Quote extends Model
                     ],
                 'update' => 
                     [
-                        'with' => [[
-                            'type' => 'group',
-                            'query' => [
-                                ['key' => 'created_by', 'value' => \User::getCurrent('id')],
-                                ['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED]
-                            ]
-                        ]]
+                        'with' => [
+                            [
+                                'type' => 'group',
+                                'query' => [
+                                    ['key' => 'created_by', 'value' => \User::getCurrent('id')],
+                                    ['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED]
+                                ]
+                            ],
+                            [
+                                'type' => 'group',
+                                'con' => 'or',
+                                'query' => [
+                                    ['key' => 'created_by', 'value' => \User::getCurrent('id')],
+                                    ['key' => 'status', 'value' => \StatusConst::ACCEPTED]
+                                ]
+                            ],
+                        ]
                     ],
                 'clone' => 1
             ]

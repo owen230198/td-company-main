@@ -46,7 +46,7 @@ class QuoteController extends Controller
                 if ($step == 'chose_customer') {
                     return $this->services->selectCustomerUpdateQuote($request, $id);
                 }else{
-                    if (@$quote->status != \StatusConst::NOT_ACCEPTED) {
+                    if (!in_array($quote->status, [\StatusConst::NOT_ACCEPTED, \StatusConst::ACCEPTED])) {
                         return returnMessageAjax(100, 'Không thể chỉnh sửa báo giá đã được khách duyệt giá !');
                     }
                     $dataItem = $quote->replicate();
