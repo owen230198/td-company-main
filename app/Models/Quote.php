@@ -29,6 +29,7 @@ class Quote extends Model
                         'with' => [
                             [
                                 'type' => 'group',
+                                'con' => 'or',
                                 'query' => [
                                     ['key' => 'created_by', 'value' => \User::getCurrent('id')],
                                     ['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED]
