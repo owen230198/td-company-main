@@ -19,7 +19,7 @@
                     @endforeach
                 </div>
                 <div class="__ajax_qty_type">
-                    @if ($dataItem['qty'] != '' && !empty($dataItem['supp_type']))
+                    @if (!empty($dataItem['supp_type']) && $dataItem['qty'] != '')
                         @include('view_update.c_supply_qty', ['type' => $dataItem['supp_type'], 'value' => $dataItem['qty']])
                     @endif
                 </div>
