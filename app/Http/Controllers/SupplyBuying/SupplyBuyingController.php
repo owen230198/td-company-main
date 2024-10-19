@@ -431,6 +431,16 @@
             $data['link_search'] = url('inventory-detail');
             $data['nosidebar'] = true;
         }
+        
+        private function handleWhereInventory($request)
+        {
+            $wheres = $request->except('is_ajax', 'is_detail');
+            if (!empty($wheres['type'])) {
+                $wheres['table'] = tableWarehouseByType($wheres['type']);
+                unset($wheres['type']);
+            }
+            return $wheres;
+        }
 
         public function inventoryDetail(Request $request) {
             $is_ajax = $request->input('is_ajax') == 1;
@@ -446,7 +456,8 @@
                 $data['data_search']['created_at'] = $request->input('created_at');
                 $this->getViewDataDetailInventory($data);
             }
-            $this->admins->tableDataInventoryDetail($request, 'warehouse_histories', $data);
+            $wheres = $this->handleWhereInventory($request);
+            $this->admins->tableDataInventoryDetail($wheres, 'warehouse_histories', $data);
             $view_return = !$is_ajax ? 'view' : 'detail';
             return view('inventories.'.$view_return, $data);
         }
@@ -464,7 +475,8 @@
         private function exportInventoryDetail($request)
         {
             $data['title'] = 'SỔ CHI TIẾT VẬT TƯ HÀNG HÓA';
-            $this->admins->tableDataInventoryDetail($request, 'warehouse_histories', $data);
+            $wheres = $this->handleWhereInventory($request);
+            $this->admins->tableDataInventoryDetail($wheres, 'warehouse_histories', $data);
             return Excel::download(new ExportExcelService($data,  'inventories.detail'), 'SO_CHI_TIET_VAT_TU_HANG_HOA.xlsx');
         }
 

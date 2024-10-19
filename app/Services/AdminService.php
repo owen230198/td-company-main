@@ -406,9 +406,8 @@ class AdminService extends BaseService
         return $condition;
     }
 
-    public function tableDataInventoryDetail($request, $table, &$data)
+    public function tableDataInventoryDetail($wheres, $table, &$data)
     {
-        $wheres = $request->except('is_ajax', 'is_detail');
         $where = [];
         foreach ($wheres as $key => $value) {
             if (!empty($value)) {
@@ -420,7 +419,7 @@ class AdminService extends BaseService
                         $where[] = [$key, '<=', $value['to']];
                     }
                 }elseif($key == 'created_at'){
-                    $arr_time = getDateRangeToQuery($request->input('created_at')); 
+                    $arr_time = getDateRangeToQuery($value); 
                     $where[] = [$key, '>=', $arr_time[0]];
                     $where[] = [$key, '<=', $arr_time[1]];   
                 }else{

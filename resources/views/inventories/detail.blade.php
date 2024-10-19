@@ -79,13 +79,13 @@
                         {{ $data['price'] }}đ
                     </td>
                     <td>
-                        {{ (int) $data['imported'] }}
+                        {{ round($data['imported'], 2) }}
                     </td>
                     <td>
-                        {{ (int) $data['exported'] }}
+                        {{ round($data['exported'], 2) }}
                     </td>
                     <td>
-                        {{ (int) $data['inventory'] }}
+                        {{ round($data['inventory'], 2) }}
                     </td>
                     <td>
                         {{ getFieldDataById('name', 'products', $data['product']) }}
@@ -112,13 +112,13 @@
                     {{ number_format($price, (int) strpos(strrev($price), ".")) }}đ 
                 </td>
                 <td class="color_red font_bold">
-                    {{ $imported }}
+                    {{ round($imported, 2) }}
                 </td> 
                 <td class="color_red font_bold">
-                    {{ $exported }}
+                    {{ round($exported, 2) }}
                 </td> 
                 <td class="color_red font_bold">
-                    {{ $inventory }}
+                    {{ round($inventory, 2) }}
                 </td>
                 <td></td>  
                 <td></td>  

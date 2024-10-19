@@ -83,16 +83,16 @@
                         {{ getUnitWarehouseItem(@$data->unit ?? getUnitSupply($data->type, getDetailDataByID(getClassByTable($data->table_name), $data->id))) }}
                     </td>
                     <td>
-                        {{ $data_ex_inventory }}
+                        {{ round($data_ex_inventory , 2) }}
                     </td>
                     <td>
-                        {{ $data_imported }}
+                        {{ round($data_imported, 2) }}
                     </td>
                     <td>
-                        {{ $data_exported }}
+                        {{ round($data_exported, 2) }}
                     </td>
                     <td>
-                        {{ $data_inventory }}
+                        {{ round($data_inventory, 2) }}
                     </td>
                     @if (!$table_export)
                         <td>
@@ -121,16 +121,16 @@
                     
                 </td> 
                 <td class="color_red font_bold">
-                    {{ $ex_inventory }}
+                    {{ round($ex_inventory, 2) }}
                 </td> 
                 <td class="color_red font_bold">
-                    {{ $imported }}
+                    {{ round($imported, 2) }}
                 </td> 
                 <td class="color_red font_bold">
-                    {{ $exported }}
+                    {{ round($exported, 2) }}
                 </td> 
                 <td class="color_red font_bold">
-                    {{ $inventory }}
+                    {{ round($inventory, 2) }}
                 </td>
                 @if (!$table_export)
                     <td>

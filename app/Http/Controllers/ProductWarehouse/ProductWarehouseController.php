@@ -99,7 +99,8 @@ class ProductWarehouseController extends Controller
             $data['data_search']['created_at'] = $request->input('created_at');
             $this->getViewDataDetailInventory($data);
         }
-        $this->admins->tableDataInventoryDetail($request, 'product_histories', $data);
+        $wheres = $request->except('is_ajax', 'is_detail');
+        $this->admins->tableDataInventoryDetail($wheres, 'product_histories', $data);
         $data['export_route'] = 'product-warehouses-export-inventory';
         $view_return = !$is_ajax ? 'inventories.view' : $data['view_table'];
         return view($view_return, $data);
@@ -137,7 +138,8 @@ class ProductWarehouseController extends Controller
     private function exportInventoryDetail($request)
     {
         $data['title'] = 'SỔ CHI TIẾT VẬT TƯ HÀNG HÓA';
-        $this->admins->tableDataInventoryDetail($request, 'product_histories', $data);
+        $wheres = $request->except('is_ajax', 'is_detail');
+        $this->admins->tableDataInventoryDetail($wheres, 'product_histories', $data);
         return Excel::download(new ExportExcelService($data,  'product_warehouses.inventory_detail'), 'SO_CHI_TIET_VAT_TU_HANG_HOA.xlsx');
     }
 
