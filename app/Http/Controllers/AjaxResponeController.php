@@ -153,6 +153,7 @@ class AjaxResponeController extends Controller
             }
             $c_order->receipt = $receipt;
             $c_order->status = \StatusConst::ACCEPTED;
+            $c_order->confirm_warehouse = \User::getCurrent('id');
             $c_order->save();
             return returnMessageAjax(200, 'Đã xác nhận xuất kho thành công!', getBackUrl());
         }else{

@@ -735,6 +735,15 @@ class DevController extends Controller
             ProductWarehouse::where('id', $product->id)->update(['code' => 'SP-'.formatCodeInsert($product->id)]);
         }
     }
+
+    public function COrderLogTakeSellUser()
+    {
+        $data = COrder::whereIn('type', [COrder::SELL, COrder::ORDER])->where('status', \StatusConst::ACCEPTED)->get();
+        foreach ($data as $order) {
+            $confirm_warehouse = $order->warehouse_type == COrder::WH_FACTORY ? 22 : 25;
+            COrder::where('id', $order->id)->update(['confirm_warehouse' => $confirm_warehouse]);
+        }
+    }
     
 }
 

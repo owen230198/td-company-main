@@ -518,6 +518,7 @@ use Maatwebsite\Excel\Facades\Excel;
                 $data['order'] = $id;
                 $data['object'] = json_encode($data['object']);
                 $data['status'] = \StatusConst::ACCEPTED;
+                $data['confirm_warehouse'] = \User::getCurrent('id');
                 $created_at = !empty($data['created_at']) ? getDataDateTime($data['created_at']) : \Carbon\Carbon::now();
                 $this->services->configBaseDataAction($data);
                 $data['created_at'] = $created_at;

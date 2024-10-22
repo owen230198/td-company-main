@@ -214,21 +214,13 @@ class COrder extends Model
                 ],
             ],
             \GroupUser::ACCOUNTING => [
-                'view' => [
-                    'with' => [
-                        'type' => 'group',
-                        'query' =>[
-                            ['key' => 'warehouse_type', 'value' => self::WH_OFFICE]
-                        ],
-                    ],
-                ],
+                'view' => 1,
                 'insert' => 1,
                 'update' => 
                 [
                     'with' => [[
                         'type' => 'group',
                         'query' => [
-                            ['key' => 'created_by', 'value' => \User::getCurrent('id')],
                             ['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED]
                         ]
                     ]]

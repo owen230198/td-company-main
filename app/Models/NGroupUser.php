@@ -233,7 +233,7 @@ class NGroupUser extends Model
         ],
         'order_ready' => [
             'name' => 'Quản lí bán hàng',
-            'link' => 'view/c_orders',
+            'link' => 'view/c_orders?type='.COrder::SELL,
             'group' => 'product_warehouse'
         ],
         'warehouse_type' => [
