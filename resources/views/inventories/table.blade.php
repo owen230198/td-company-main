@@ -6,7 +6,7 @@
     $exported = 0;
     $inventory = 0;
     $table_export = !empty($table_export);
-    $table_history = 'warshouse_histories';
+    $table_history = 'warehouse_histories';
 @endphp
 <div class="position-relative table_inventory">
     <table class="table table-bordered mb-2 ">
