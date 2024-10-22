@@ -312,7 +312,7 @@
                 }
                 $data_update['order'] = $order['id'];
                 $data_update['order_created'] = 1;
-                $update = Product::where('id', $product['id'])->update($data_update);
+                Product::where('id', $product['id'])->update($data_update);
                 self::handleCommandCode($product, $data_update['code']); 
             }  
         }
@@ -362,17 +362,23 @@
                 $old_product_id = $product['id'];
                 unset($product['id']);
                 if ($handle_code) {
-                    $product['status'] = \StatusConst::NOT_ACCEPTED;
-                }
-                if ($handle_code) {
                     $product['quote_id'] = '';
+                    $product['status'] = \StatusConst::NOT_ACCEPTED;
+                    $product['order_created'] = 1;
                 }else{
                     $product['order'] = '';
+                    $product['status'] = ''; 
+                    $product['order_created'] = 0;  
                 }
                 $base_service->configBaseDataAction($product);
                 $product_id = Product::insertGetId($product);
                 $childs = Product::where('parent', $old_product_id)->get()->makeHidden($hidden_fields)->toArray();
                 foreach ($childs as $child) {
+                    if ($handle_code) {
+                        $child['status'] = \StatusConst::NOT_ACCEPTED;
+                    }else{
+                        $child['status'] = ''; 
+                    }
                     $child['parent'] = $product_id;
                     unset($child['id']);
                     $base_service->configBaseDataAction($child);
@@ -388,6 +394,11 @@
                             unset($supply['id']);
                             $base_service->configBaseDataAction($supply);
                             $supply['product'] = $product_id;
+                            if ($handle_code) {
+                                $supply['status'] = \StatusConst::NOT_ACCEPTED;
+                            }else{
+                                $supply['status'] = ''; 
+                            }
                             $supp_id = $model::insertGetId($supply);
                             self::resetHandledQty($table_supply, $model, $supp_id);
                             logActionUserData('insert', $table_supply, $supp_id, $supply);

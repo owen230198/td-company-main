@@ -273,19 +273,19 @@ class AjaxResponeController extends Controller
                         'note' => 'Thành phẩm',
                         'type' => 'linking',
                         'other_data' => ['config' => ['search' => 1], 'data'=> ['table' => 'product_warehouses']],
-                        'attr' => ['readonly' => 1],
-                        'value' => $id
+                        'attr' => ['readonly' => @$product->id ? 1 : 0],
+                        'value' => @$product->id
                     ],
                     [
                         'name' => 'qty',
                         'note' => 'Số lượng chuyển kho',
                         'type' => 'text',
                         'attr' => ['type_input' => 'number'],
-                        'value' => $product->qty
+                        'value' => @$product->qty
                     ],
                     [
                         'name' => 'warehouse_type',
-                        'note' => 'Kho vật tư đến',
+                        'note' => 'Nhập tại kho',
                         'type' => 'linking',
                         'other_data' => [
                             'config' => ['search' => 1], 
@@ -294,13 +294,13 @@ class AjaxResponeController extends Controller
                                 'where' => ['type' => 'warehouse_type']
                             ]
                         ],
-                        'value' => $product->warehouse_type
+                        'value' => @$product->warehouse_type
                     ],
                     [
                         'name' => 'note',
                         'note' => 'Ghi chú',
                         'type' => 'textarea',
-                        'value' => 'Chuyển kho thành phẩm'
+                        'value' => 'Chuyển thành phẩm '.@$product->name
                     ],
                     [
                         'name' => 'receipt',
@@ -318,7 +318,7 @@ class AjaxResponeController extends Controller
                     return returnMessageAjax(100, 'Số lượng nhập kho không hợp lệ !');    
                 }
                 if (empty($data['warehouse_type'])) {
-                    return returnMessageAjax(100, 'Bạn chưa chọn kho vật tư chuyển đến !');
+                    return returnMessageAjax(100, 'Bạn chưa chọn kho chuyển đến !');
                 }
                 $warehouse_type = $data['warehouse_type'];
                 if ($warehouse_type == @$product->warehouse_type) {
@@ -362,6 +362,20 @@ class AjaxResponeController extends Controller
             }
         }else{
             return customReturnMessage(false, $is_post, ['Message' => 'Bạn không có quyền chuyển kho !']);
+        }
+    }
+
+    public function multipleProductMoveWarehouse($request)
+    {
+        $is_post = $request->isMethod('POST');
+        if (!(\GroupUser::isAdmin() || \GroupUser::isAccounting())) {
+            return customReturnMessage(false, $is_post, 'Bạn không có quyền chuyển kho !');
+        }
+        $data['title'] = 'Chuyển kho thành phẩm';
+        $data['nosidebar'] = 1;
+        $data['action_url'] = 'ajax-response/multipleProductMoveWarehouse';
+        if (!$is_post) {
+            return view('product_warehouses.move_multiples.view', $data);
         }
     }
 

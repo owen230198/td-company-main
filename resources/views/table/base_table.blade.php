@@ -43,6 +43,18 @@
             data-toggle="modal" data-target="#actionModal">
                 <i class="fa fa-history mr-2 fs-15" aria-hidden="true"></i>Lịch sử
             </button>
+            @if (!empty($tableItem['ext_fucn']))
+                @php
+                    $arr_action_btns = json_decode($tableItem['ext_fucn'], true);
+                @endphp
+                @foreach ($arr_action_btns as $action_btn)
+                    <button type="button" data-src = "{{ url($action_btn['link']) }}" data-size="{{ @$action_btn['size_popup']  }}"
+                    class="btn btn-primary main_button bg_main color_white smooth bg_green border_green radius_5 font_bold smooth ml-2 load_view_popup" 
+                    data-toggle="modal" data-target="#actionModal">
+                        <i class="fa fa-{{ $action_btn['icon'] }} mr-2 fs-15" aria-hidden="true"></i>{{ $action_btn['note'] }}
+                    </button>  
+                @endforeach
+            @endif
             <a href="javascript:void(0)" class="main_button bg_main color_white smooth bg_green border_green radius_5 font_bold smooth ml-2 d-lg-block d-none">
                 <i class="fa fa-book mr-2 fs-15" aria-hidden="true"></i>Trợ giúp
             </a>
