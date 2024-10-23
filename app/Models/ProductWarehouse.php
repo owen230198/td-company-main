@@ -61,4 +61,60 @@ class ProductWarehouse extends Model
     {
         return ProductHistory::removeData($id);
     }
+
+    static function getFieldMove($product = new \stdClass())
+    {
+        return [
+            [
+                'name' => 'warehouse_take',
+                'note' => 'Xuất tại kho',
+                'type' => 'linking',
+                'other_data' => [
+                    'config' => ['search' => 1], 
+                    'data'=> [
+                        'table' => 'supply_extends',
+                        'where' => ['type' => 'warehouse_type']
+                    ]
+                ],
+                'attr' => ['readonly' => @$product->warehouse_type ? 1 : 0, 'inject_class' => empty($product->id) ? 'tiny_input __move_warehouse_select_take' : ''],
+                'value' => @$product->warehouse_type
+            ],
+            [
+                'name' => 'id',
+                'note' => 'Thành phẩm',
+                'type' => 'linking',
+                'other_data' => ['config' => ['search' => 1], 'data'=> ['table' => 'product_warehouses']],
+                'attr' => ['readonly' => @$product->id ? 1 : 0, 'inject_class' => '__move_warehouse_select_product'],
+                'value' => @$product->id
+            ],
+            [
+                'name' => 'qty',
+                'note' => 'Số lượng',
+                'type' => 'text',
+                'attr' => ['type_input' => 'number', 'inject_class' => 'tiny_input __move_warehouse_qty'],
+                'value' => @$product->qty
+            ],
+            [
+                'name' => 'warehouse_to',
+                'note' => 'Nhập tại kho',
+                'type' => 'linking',
+                'other_data' => [
+                    'config' => ['search' => 1], 
+                    'data'=> [
+                        'table' => 'supply_extends',
+                        'where' => ['type' => 'warehouse_type']
+                    ]
+                ],
+                'attr' => ['inject_class' => empty($product->id) ? 'tiny_input __move_warehouse_to' : ''],
+                'value' => @$product->warehouse_type
+            ],
+            [
+                'name' => 'note',
+                'note' => 'Ghi chú',
+                'type' => 'textarea',
+                'attr' => ['inject_class' => empty($product->id) ? 'short_field __move_warehouse_note' : ''],
+                'value' => 'Chuyển thành phẩm '.@$product->name
+            ]
+        ];
+    }
 }

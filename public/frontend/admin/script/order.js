@@ -451,6 +451,82 @@ var debtExport = function () {
     });
 }
 
+var addItemMoveWarehouse = function ()
+{
+    $(document).on('click', 'button.__add_item_move_warehouse', function (event) {
+        event.preventDefault();
+        let _this = $(this);
+        let list_section = _this.closest('.__multiple_product_warehouse_module').find('.__list_product_move_warehouse');
+        let item = list_section.find('.__item_move_warehouse');
+        let index = getEmptyDefault(item.last().data('index'), 0, 'number') + 1;
+        let view = 'product_warehouses.move_multiples';
+        let url = 'ajax-respone/returnItemJson?view_return=' + view + '&index=' + index;
+        $('#loader').fadeIn(200);
+        $.ajax({ 
+            url: url, 
+            type: 'GET' 
+        }).done(function (html) {
+            list_section.append(html);
+            let section_class = list_section.find('.__item_move_warehouse').last();
+            initInputModuleAfterAjax(section_class);
+            $('#loader').delay(200).fadeOut(500);
+        })
+    });
+
+    $(document).on('click', '.__remove_move_warehouse_item', function (event) {
+        event.preventDefault();
+        let _this = $(this);
+        let item = _this.closest('.__item_move_warehouse');
+        item.remove();
+    });
+}
+
+var moduleSelectDataMoveWarehouse = function()
+{
+    $(document).on('change', 'select.__move_warehouse_select_take', function(event){
+        event.preventDefault();
+        let _this = $(this);
+        let parent = _this.closest('.__item_move_warehouse');
+        let form_control = parent.find('.__data_move_field');
+        let take = _this.val();
+        form_control.each(function(){
+            $(this).val('');
+            $(this).data('id', '');
+            $(this).data('label', '');
+        });
+        let select_product = parent.find('.__move_warehouse_select_product');
+        let url = 'get-data-json-linking?table=product_warehouses&field_search=name&field_value=id&except_linking=0&warehouse_type=' + take;
+        select_product.data('url', getBaseRoute(url));
+        initInputModuleAfterAjax(parent);
+    });
+
+    $(document).on('change', '.__move_warehouse_select_product', function (e) {
+        e.preventDefault();
+        let _this = $(this);
+        let parent = _this.closest('.__item_move_warehouse');
+        let id = _this.val();
+        let url = 'ajax-respone/getDataProductMoveWarehouse?id=' + id;
+        let select_to = parent.find('.__move_warehouse_to');
+        $.ajax({
+            url: getBaseRoute(url),
+            type: 'GET',
+        })
+		.done(function (data) {
+            if (data.code == 100) {
+                swal('Không thành công', data.message, 'error');
+            }
+            let warehouse_id = data.warehouse_type;
+            let warehouse_label = data.warehouse_label;
+            parent.find('.__move_warehouse_qty').val(data.qty);
+            select_to.val(warehouse_id);
+            select_to.data('id', warehouse_id);
+            select_to.data('label', warehouse_label);
+            parent.find('.__move_warehouse_note').val(data.note);
+            selectAjaxModule(select_to.parent());
+		});
+    });
+}
+
 $(function(){
     setAdvanceCostOrder(); 
     moduleVATOrder();
@@ -467,4 +543,6 @@ $(function(){
     inventoryExportExcel();
     viewDebtGroup();
     debtExport();
+    addItemMoveWarehouse();
+    moduleSelectDataMoveWarehouse();
 });

@@ -394,6 +394,21 @@ input[type=time] {
     width: 102px
 }
 
+.text-center > .form-control{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+textarea.form-control.short_field{
+    min-height: 55px;
+}
+
+.form-control.tiny_input {
+    max-width: 180px;
+    min-width: 180px;
+    width: 180px
+}
+
 .form-control.price_input {
     max-width: 150px;
     min-width: 150px;
@@ -773,6 +788,12 @@ input[type="checkbox"].toggle:disabled::after {
 
 .font_auto{
     font-family: auto;
+}
+
+.__tiny_btn{
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
 }
 
 @media (min-width: 992px) {
