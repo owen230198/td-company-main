@@ -744,6 +744,14 @@ class DevController extends Controller
             COrder::where('id', $order->id)->update(['confirm_warehouse' => $confirm_warehouse]);
         }
     }
+
+    public function createCProduct()
+    {
+        $products = Product::whereIn('status', [Order::MAKING_PROCESS, \StatusConst::SUBMITED])->get();
+        foreach ($products as $product) {
+            Product::createCProduct($product->id);
+        }
+    }
     
 }
 

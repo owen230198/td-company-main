@@ -424,7 +424,10 @@
                 if ($table == 'papers') {
                     $where['parent'] = 0;
                 }
-                $arr_qty[] = (int) \DB::table($table)->where($where)->min('handled');
+                $obj = \DB::table($table)->where($where);
+                if ($obj->count() > 0) {
+                    $arr_qty[] = (int) $obj->min('handled');
+                }
             }
             $min_qty = collect($arr_qty)->min();
             if ($min_qty > 0) {
