@@ -1306,7 +1306,11 @@ var selectTypeCOrder = function()
     $(document).on('change', 'select.__select_customer_c_order', function(event){
         event.preventDefault();
         let parent = $(this).closest('.__c_order_action'); 
-        parent.find('select.__select_type_c_order').trigger('change');
+        let select_represent = parent.find('select.__select_represent_c_order');
+        select_represent.val('');
+        select_represent.data('id', '');
+        select_represent.data('label', '');
+        selectConfig(select_represent.parent());
     });
 
     $(document).on('change', 'select.__select_represent_c_order', function(event){
@@ -1323,11 +1327,10 @@ var selectTypeCOrder = function()
             if (data.code == 100) {
                 swal('Không thành công', 'Bạn không có quyền chọn người đại diện, vui lòng liên hệ Admin để được cấp quyền !', 'error').then(function () {
                     _this.val('');
+                    _this.data('label', '');
+                    _this.data('id', '');
                     selectConfig(_this.parent());
-                    parent.find('select.__select_type_c_order').trigger('change');
 				});
-            }else{
-                parent.find('select.__select_type_c_order').trigger('change');
             }
 		})
     });
