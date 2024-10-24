@@ -20,6 +20,14 @@
                         <tbody class="__list_product_move_warehouse">
                             @include('product_warehouses.move_multiples.json_item')
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <td>Phiếu chuyển kho</td>
+                                <td colspan="5" class="text-center">
+                                    @include('view_update.'.$receipt_field['type'], $receipt_field)
+                                </td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
                 <div class="text-center my-3">

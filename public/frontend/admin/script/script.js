@@ -1348,7 +1348,7 @@ var addItemJsonModule = function () {
             let item = list_section.find('.__item_json');
             let index = getEmptyDefault(item.last().data('index'), 0, 'number') + 1;
             let table = _this.data('table');
-            let url = 'ajax-respone/returnItemJson?view_return=' + table + '&index=' + index + '&wareshouse_type=' + type;
+            let url = 'ajax-respone/returnItemJson?view_return=' + table + '&index=' + index + '&warehouse_type=' + type;
             $('#loader').fadeIn(200);
             $.ajax({ 
                 url: url, 

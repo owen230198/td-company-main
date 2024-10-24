@@ -4,7 +4,7 @@
 @endphp
 <tr class="__item_move_warehouse" data-index="{{ $index }}">
    
-    @foreach ($fields as $key => $field)
+    @foreach ($fields['fields'] as $key => $field)
         @php
             $name = $field['name'];
             $field['name'] = 'move_warehouse['.$index.']['.$name.']';

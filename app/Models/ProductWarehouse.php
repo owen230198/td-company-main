@@ -64,7 +64,7 @@ class ProductWarehouse extends Model
 
     static function getFieldMove($product = new \stdClass())
     {
-        return [
+        $fields['fields'] = [
             [
                 'name' => 'warehouse_take',
                 'note' => 'Xuất tại kho',
@@ -116,5 +116,17 @@ class ProductWarehouse extends Model
                 'value' => 'Chuyển thành phẩm '.@$product->name
             ]
         ];
+        $fields['receipt'] = [
+            'name' => 'receipt',
+            'note' => 'Phiếu chuyển kho',
+            'type' => 'filev2',
+            'other_data' => ['role_update' => [\GroupUser::ACCOUNTING]] 
+        ];
+        return $fields;
+    }
+
+    static function getInsertCode($id)
+    {
+        ProductWarehouse::where(['id' => $id])->update(['code' => 'SP-'.formatCodeInsert($id)]);
     }
 }
