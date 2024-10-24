@@ -48,5 +48,5 @@
     </div>
 @endsection
 @push('bottom-scripts')
-    <script src="{{ asset('frontend/admin/script/order.js') }}"></script>
+    <script src="{{ asset('frontend/admin/script/order.js?v=1') }}"></script>
 @endpush
