@@ -374,6 +374,7 @@ class AdminService extends BaseService
         }
         $data['old_total'] = $old_total;
         $data['old_advance'] = $old_advance;
+        $data['old_rest'] = $old_rest;
         $data['total_amount'] = $obj->sum('total') + $old_total;
         $data['total_advance'] = $obj->sum('advance') + $old_advance;
         $data['total_rest'] = ($data['total_amount'] - $data['total_advance']);

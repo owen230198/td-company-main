@@ -36,11 +36,8 @@
                 <td colspan="7">
                     <strong>Nợ cũ</strong>
                 </td>
-                <td>
-                    {{ !empty($is_export) ? (float) $old_total : number_format($old_total) }}
-                </td>
-                <td>
-                    {{ !empty($is_export) ? (float) $old_advance : number_format($old_advance) }}
+                <td colspan="2">
+                    {{ !empty($is_export) ? (float) $old_rest : number_format($old_rest) }}
                 </td>
             </tr>
             @foreach ($data_tables as $key => $data)
