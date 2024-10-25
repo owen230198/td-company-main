@@ -168,6 +168,9 @@ class WorkerService extends BaseService
             if (@$next_data['type'] == $submited_stt) {
                 $n_qty = !empty($supply_obj->nqty) ? (int) $supply_obj->nqty : 1;
                 $handled_pro = !isQtyFormulaBySupply($type) ? $handled : $handled * $n_qty;
+                if ($table_supply == 'papers' && !empty($supply_obj->double)) {
+                    $handled_pro = $handled_pro/2;
+                }
                 $supply_obj->handled = $handled_pro;
                 $supply_obj->save();
                 // if ($table_supply == 'papers') {
