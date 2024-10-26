@@ -364,12 +364,60 @@ use Maatwebsite\Excel\Facades\Excel;
                 $arr_update = ['status' => $making_process_status];
                 $table_data->update($arr_update);
                 logActionUserData($making_process_status, $table, $id, $obj_order);
-                if (checkUpdateOrderStatus($obj_order->order, Order::MAKING_PROCESS)) {
+                if (checkUpdateOrderStatus($obj_order->order, $making_process_status)) {
                     logActionDataById('orders', $obj_order->order, $arr_update, $making_process_status);
                 }
                 return returnMessageAjax(200, 'Đã gửi lệnh sản xuất xuống xưởng !', url('view/products?default_data=%7B"status"%3A"'.Order::TECH_SUBMITED.'"%7D'));
             }else{
                 return returnMessageAjax(100, 'Đã có lỗi xảy ra, vui lòng thử lại !');
+            } 
+        }
+
+        public function applySupplyToWorker(Request $request)
+        {
+            if (!\GroupUser::isPlanHandle()) {
+                return back()->with('error', 'Bạn không có quyền duyệt sản xuất !');     
+            }
+            if (empty($request->table) || empty($request->id)) {
+                return back()->with('error', 'Dữ liệu không hợp lệ');
+            }
+            $table = $request->table;
+            $id = $request->id;
+            $supply = \DB::table($table)->find($id);
+            $product_id = $supply->product;
+            // if (!in_array($table, ['papers', 'supplies', 'fill_finishes']) || empty($supply)) {
+            //     return back()->with('error', 'Dữ liệu không hợp lệ');
+            // }
+            // if (@$supply->status != Order::TECH_SUBMITED) {
+            //     return back()->with('error', 'Dữ liệu không hợp lệ !');
+            // }
+            // $type = getTypeSupplyByObj($table, $supply);
+            // if (getHandleSupplyStatus($product_id, $id, $type) != CSupply::HANDLED) {
+            //     return back()->with('error', 'Vật tư vẫn chưa được kế toán duyệt xuất !');
+            // }
+            $process = $this->services->createWorkerCommandForSupply($table, $supply);
+            if ($process) {
+                $all_supply = Product::getAllSupply($product_id, ['id', 'status']);
+                $check_update = true;
+                foreach ($all_supply as $supp) {
+                    if (@$supp->status == Order::TECH_SUBMITED) {
+                        $check_update = false;
+                    }
+                }
+                if ($check_update) {
+                    $making_process_status = Order::MAKING_PROCESS;
+                    $product_obj = Product::find($product_id);
+                    $product_obj->status = $making_process_status;
+                    $product_obj->save();
+                    logActionUserData($making_process_status, 'products', $product_id, $product_obj);
+                    $order_id = $product_obj->order;
+                    if (checkUpdateOrderStatus($order_id, $making_process_status)) {
+                        logActionDataById('orders', $order_id, ['status' => $making_process_status], $making_process_status);
+                    }
+                }
+                return back()->with('message', 'Đã gửi lệnh sản xuất xuống xưởng !');
+            }else{
+                return back()->with('error', 'Đã có lỗi xảy ra, vui lòng thử lại !');
             } 
         }
 

@@ -23,14 +23,19 @@
                         <span>{{ $key+1 }}</span>
                     </td>
                     @php
-                        $supp_handle_status = getHandleSupplyStatus($data->product, $data->id, @$element['pro_field']);
-                        $bg_color = @$supp_handle_status == 'handled' ? 'stt_bg_green' : 
-                                    (@$supp_handle_status == 'handling' ? 'stt_bg_blue' : 'stt_bg_red');
-                        $stt_title = @$supp_handle_status == 'handled' ? 'Kế toán kho đã xử lí' : 
-                                    (@$supp_handle_status == 'handling' ? 'Kế toán kho đang xử lí' : 'Cần xử lí ngay');
+                        if ($data->status == \App\Models\Order::TECH_SUBMITED) {
+                            $supp_handle_status = getHandleSupplyStatus($data->product, $data->id, @$element['pro_field']);
+                            $bg_color = @$supp_handle_status == 'handled' ? 'stt_bg_green' : 
+                                        (@$supp_handle_status == 'handling' ? 'stt_bg_blue' : 'stt_bg_red');
+                            $stt_title = @$supp_handle_status == 'handled' ? 'Kế toán kho đã xử lí' : 
+                                        (@$supp_handle_status == 'handling' ? 'Kế toán kho đang xử lí' : 'Cần xử lí ngay');
+                        }else{
+                            $bg_color = 'bg_none';
+                            $stt_title = 'Đã duyệt sản xuất';
+                        }
                     @endphp 
                     <td class="text-center {{ $bg_color }}">
-                        <span class="color_white font_bold">{{ $stt_title }}</span>
+                        <span class="color_white {{ $bg_color == 'bg_none' ? 'color_green' : 'color_white' }}">{{ $stt_title }}</span>
                     </td>
                     @foreach ($field_shows as $field)
                     <td>
@@ -84,7 +89,14 @@
                                 href="{{ url('supply-handmade?table='.$element['table'].'&id='.$data->id) }}"
                                 title="Tính vật tư thủ công">
                                 <i class="fa fa-plus" aria-hidden="true"></i> 
-                            </a>  
+                            </a> 
+                            @if ($bg_color != 'bg_none' && $supp_handle_status == 'handled')
+                                <a class="table-btn mr-2 mb-2" 
+                                    href="{{ url('apply-supply-to-worker?table='.$element['table'].'&id='.$data->id) }}"
+                                    title="Duyệt xuống xưởng SX">
+                                    <i class="fa fa-check" aria-hidden="true"></i> 
+                                </a>    
+                            @endif
                         </div>
                     </td>
                 </tr>

@@ -454,6 +454,14 @@
                 }
             }
         } 
+
+        static function getAllSupply($id, $select)
+        {
+            $papers = Paper::select($select)->where('product', $id);
+            $supplies = Supply::select($select)->where('product', $id);
+            $fill_finishes = FillFinish::select($select)->where('product', $id);
+            return $papers->union($supplies)->union($fill_finishes)->get();
+        }
     }
 
 ?>

@@ -143,6 +143,19 @@
         }
     }
 
+    if (!function_exists('getTypeSupplyByObj')) {
+        function getTypeSupplyByObj($table, $obj)
+        {
+            if ($table == 'papers') {
+                return \TDConst::PAPER;
+            }elseif($table == 'fill_finishes'){
+                return \TDConst::FILL_FINISH;
+            }else{
+                return @$obj->type;   
+            }
+        }
+    }
+
     if (!function_exists('getCeilSupplyQuantity')) {
         function getCeilSupplyQuantity($product_qty, $nqty)
         {

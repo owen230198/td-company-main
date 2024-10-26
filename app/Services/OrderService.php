@@ -360,6 +360,7 @@ class OrderService extends BaseService
                 }   
             }
         }
+        return true;
     }
 
     public function createWorkerCommand($obj_order)
