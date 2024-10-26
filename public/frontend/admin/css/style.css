@@ -238,6 +238,11 @@ a.device_supp_item {
     transition: all 2s;
 }
 
+.table_base_view.not_set_height{
+    max-height: 100%;
+    overflow: unset;
+}
+
 .list_table_func>a,
 .list_table_func>button {
     color: #ffffff;

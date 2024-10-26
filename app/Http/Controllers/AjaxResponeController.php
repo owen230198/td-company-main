@@ -343,7 +343,7 @@ class AjaxResponeController extends Controller
             $ex_inventory = 0;
         }
         ProductHistory::doLogWarehouse($log_imp_id, $qty, 0, $ex_inventory, 0, $arr_log);
-        MoveWarehouse::doLogAction($product, $qty, $warehouse_to, @$data['receipt'], @$data['note']);
+        MoveWarehouse::doLogAction($product, $qty, $warehouse_to, @$data['receipt_code'], @$data['receipt'], @$data['note']);
         return true;
     }
 
@@ -359,6 +359,11 @@ class AjaxResponeController extends Controller
         $fields = ProductWarehouse::getFieldMove();
         $data['fields'] = $fields['fields'];
         $data['receipt_field'] = $fields['receipt'];
+        $data['receipt_code'] = [
+            'name' => 'receipt_code',
+            'note' => 'Mã phiếu',
+            'type' => 'text',
+        ];
         if (!$is_post) {
             return view('product_warehouses.move_multiples.view', $data);
         }else{
@@ -391,6 +396,7 @@ class AjaxResponeController extends Controller
                 }
                 $move_warehouses[$key]['product'] = $product;
                 $move_warehouses[$key]['receipt'] = @$data['receipt'];
+                $move_warehouses[$key]['receipt_code'] = @$data['receipt_code'];
             }
 
             foreach ($move_warehouses as $move_warehouse) {

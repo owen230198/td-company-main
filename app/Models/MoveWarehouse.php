@@ -7,7 +7,7 @@ class MoveWarehouse extends Model
     protected $table ='move_warehouses';
     protected $protectFields = false;
 
-    static function doLogAction($product, $qty, $warehouse_to, $receipt, $note){
+    static function doLogAction($product, $qty, $warehouse_to, $receipt_code, $receipt, $note){
         $data = [
             'name' => $product->name,
             'product_warehouse' => $product->id,
@@ -17,7 +17,8 @@ class MoveWarehouse extends Model
             'unit' => $product->unit,
             'price' => $product->price,
             'receipt' => $receipt,
-            'note' => $note
+            'note' => $note,
+            'receipt_code' => $receipt_code
         ];
         (new \BaseService)->configBaseDataAction($data);
         $id = MoveWarehouse::insertGetId($data);

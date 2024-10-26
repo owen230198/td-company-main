@@ -3,7 +3,7 @@
     <div class="dashborad_content config_content base_content p-0 pb-5">
         <form action="{{ url($action_url) }}" method="POST" class="mb-0 baseAjaxForm">
             <div class="__multiple_product_warehouse_module py-3">
-                <div class="table_base_view position-relative">
+                <div class="table_base_view position-relative not_set_height">
                     <table class="table table-bordered mb-2 table_responsive">
                         <thead>
                             <tr>
@@ -21,6 +21,12 @@
                             @include('product_warehouses.move_multiples.json_item')
                         </tbody>
                         <tfoot>
+                            <tr>
+                                <td>Mã phiếu</td>
+                                <td colspan="5">
+                                    @include('view_update.'.$receipt_code['type'], $receipt_code)
+                                </td>
+                            </tr>
                             <tr>
                                 <td>Phiếu chuyển kho</td>
                                 <td colspan="5" class="text-center">
