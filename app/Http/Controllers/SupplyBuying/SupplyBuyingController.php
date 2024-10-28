@@ -264,17 +264,28 @@
                     }
                     $where['status'] = \StatusConst::IMPORTED;
                     $data['warehouse'] = $where;
-                    if (getCountDataTable($table_supply, $where) == 0) {
-                        $status = $warehouse_service->insert($data, 1);
+                    $where['width'] = round($where['width'], 1);
+                    $exist_obj = \DB::table($table_supply);
+                    if (!empty($where['width'])) {
+                        $width = (float) $where['width'];
+                        $exist_obj->whereBetween('width', [$width - 0.1, $width + 0.1]);
+                        unset($where['width']);
+                    }
+                    if (!empty($where['length'])) {
+                        $length = (float) $where['length'];
+                        $exist_obj->whereBetween('length', [$length - 0.1, $length + 0.1]);
+                        unset($where['length']);
+                    }
+                    $exist_obj->where($where);
+                    $exist_supply = $exist_obj->first();
+                    if (!empty($exist_supply)) {
+                        $status = $warehouse_service->update($data, $exist_supply->id, 1);
+                        
                     }else{
-                        $data_supply = \DB::table($table_supply)->where($where)->first();
-                        if (!empty($data_supply)) {
-                            $status = $warehouse_service->update($data, $data_supply->id, 1);
-                        }
+                        $status = $warehouse_service->insert($data, 1);
                     }
                     if (@$status['code'] == 100) {
                         return $status;
-                        break;
                     }
                 }
                 $dataItem = $supp_buying->replicate();

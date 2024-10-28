@@ -114,12 +114,12 @@ class AdminService extends BaseService
                     $type_input = @$attr['type_input'] ?? 'text';
                     if (in_array($type_input, ['price', 'number'])) {
                         if (!empty($value['from'])) {
-                            $from = (float) $value['from'];
+                            $from = (float) $value['from'] - 0.1;
                             $tmp = ['key' => $name, 'compare' => '>=', 'value' => $from];
                             $where[] = $tmp;
                         }
                         if (!empty($value['to'])) {
-                            $to = (float) $value['to'];
+                            $to = (float) $value['to'] + 0.1;
                             $tmp = ['key' => $name, 'compare' => '<=', 'value' => $to];
                             $where[] = $tmp;
                         }
