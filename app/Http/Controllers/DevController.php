@@ -21,6 +21,7 @@ use App\Models\Quote;
 use App\Models\Represent;
 use App\Models\SquareWarehouse;
 use App\Models\SupplyBuying;
+use App\Models\SupplyPrice;
 use App\Models\WSalary;
 use Illuminate\Support\Facades\File;
 
@@ -750,6 +751,19 @@ class DevController extends Controller
         $products = Product::whereIn('status', [Order::MAKING_PROCESS, \StatusConst::SUBMITED])->get();
         foreach ($products as $product) {
             Product::createCProduct($product->id);
+        }
+    }
+
+    public function cloneCartonQuantative()
+    {
+        $arr_supply_ids = [51, 52, 53];
+        $clone_qtvs = SupplyPrice::where('supply_id', 29)->get()->toArray();
+        foreach ($arr_supply_ids as $supply_id) {
+            foreach ($clone_qtvs as $qtv) {
+                unset($qtv['id']);
+                $qtv['supply_id'] = $supply_id;
+                SupplyPrice::insert($qtv);
+            }
         }
     }
     
