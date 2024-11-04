@@ -264,7 +264,6 @@
                     }
                     $where['status'] = \StatusConst::IMPORTED;
                     $data['warehouse'] = $where;
-                    $where['width'] = round($where['width'], 1);
                     $exist_obj = \DB::table($table_supply);
                     if (!empty($where['width'])) {
                         $width = (float) $where['width'];
