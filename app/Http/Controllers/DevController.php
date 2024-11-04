@@ -6,12 +6,14 @@ use App\Models\NTable;
 use Illuminate\Support\Facades\Schema;
 use App\Constants\VariableConstant;
 use App\Models\AfterPrint;
+use App\Models\BaseReceipt;
 use App\Models\CDesign;
 use App\Models\COrder;
 use App\Models\CProduct;
 use App\Models\CSupply;
 use App\Models\Device;
 use App\Models\FillFinish;
+use App\Models\MoveWarehouse;
 use App\Models\Order;
 use App\Models\Paper;
 use App\Models\Product;
@@ -764,6 +766,28 @@ class DevController extends Controller
                 $qtv['supply_id'] = $supply_id;
                 SupplyPrice::insert($qtv);
             }
+        }
+    }
+
+    public function moveWarehouseWithBaseReceipt()
+    {
+        $data = MoveWarehouse::get()->groupBy(function ($item) {
+            return $item->created_at->format('Y-m-d H:i');
+        });
+        foreach ($data as $date => $move_warehouse) {
+            $receipt['name'] = 'Chuyển kho thành phẩm: '.getDateTimeFormat($date); 
+            $receipt['note'] = $receipt['name'];
+            $obj = $move_warehouse->first();
+            $receipt['hard_code'] = $obj->receipt_code;
+            $receipt['hard_file'] = $obj->receipt;
+            (new \BaseService())->configBaseDataAction($receipt);
+            $receipt['created_by'] = 25;
+            $id = BaseReceipt::insertGetId($receipt);
+            BaseReceipt::getInsertCode($id);
+            foreach ($move_warehouse as $item) {
+                $item->parent = $id;
+                $item->save();
+            }     
         }
     }
     

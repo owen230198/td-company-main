@@ -176,9 +176,9 @@ if (!function_exists('getBackUrl')) {
 }
 
 if (!function_exists('getDateTimeFormat')) {
-    function getDateTimeFormat($time)
+    function getDateTimeFormat($time, $format = 'd/m/Y H:i')
     {
-        return date('d/m/Y H:i', strtotime($time));
+        return date($format, strtotime($time));
     }
 }
 

@@ -7,7 +7,7 @@ class MoveWarehouse extends Model
     protected $table ='move_warehouses';
     protected $protectFields = false;
 
-    static function doLogAction($product, $qty, $warehouse_to, $receipt_code, $receipt, $note){
+    static function doLogAction($product, $qty, $warehouse_to, $parent, $note){
         $data = [
             'name' => $product->name,
             'product_warehouse' => $product->id,
@@ -16,13 +16,22 @@ class MoveWarehouse extends Model
             'qty' => $qty,
             'unit' => $product->unit,
             'price' => $product->price,
-            'receipt' => $receipt,
+            'parent' => $parent,
             'note' => $note,
-            'receipt_code' => $receipt_code
         ];
         (new \BaseService)->configBaseDataAction($data);
         $id = MoveWarehouse::insertGetId($data);
         self::getInsertCode($id);
+    }
+
+    static function getRole()
+    {
+        $role = [
+            \GroupUser::ACCOUNTING => [
+                'view' => 1,
+            ],
+        ];
+        return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];
     }
 
     static function getInsertCode($id)

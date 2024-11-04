@@ -231,6 +231,11 @@ class NGroupUser extends Model
             'link' => 'product-warehouse-inventory',
             'group' => 'product_warehouse'
         ],
+        'move_warehouse' => [
+            'name' => 'Phiếu chuyển kho',
+            'link' => 'view/base_receipts',
+            'group' => 'product_warehouse'
+        ],
         'order_ready' => [
             'name' => 'Quản lí bán hàng',
             'link' => 'view/c_orders?type='.COrder::SELL,
@@ -393,6 +398,7 @@ class NGroupUser extends Model
                 self::MODULE['im_paper'],
                 self::MODULE['im_supply'],
                 self::MODULE['product_management'],
+                self::MODULE['move_warehouse'],
                 self::MODULE['expertise'],
                 self::MODULE['product_history'],
                 self::MODULE['order_ready'],

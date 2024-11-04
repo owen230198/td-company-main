@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\BaseReceipt;
 use App\Models\COrder;
 use App\Models\MoveWarehouse;
 use App\Models\Order;
@@ -297,7 +298,8 @@ class AjaxResponeController extends Controller
                 if (@$validate['code'] == 100) {
                     return $validate;
                 }
-                $process = $this->processMoveWarehouse($product, $data);
+                $receipt_id = BaseReceipt::insertWithHardData('', @$data['receipt']);
+                $process = $this->processMoveWarehouse($product, $data, $receipt_id);
                 if ($process) {
                     return returnMessageAjax(200, 'Đã chuyển kho thành công !', \StatusConst::CLOSE_POPUP);
                 }else{
@@ -309,7 +311,7 @@ class AjaxResponeController extends Controller
         }
     }
 
-    private function processMoveWarehouse($product, $data)
+    private function processMoveWarehouse($product, $data, $parent)
     {
         //Lấy hàng từ kho cũ
         $id = $data['id'];
@@ -343,7 +345,7 @@ class AjaxResponeController extends Controller
             $ex_inventory = 0;
         }
         ProductHistory::doLogWarehouse($log_imp_id, $qty, 0, $ex_inventory, 0, $arr_log);
-        MoveWarehouse::doLogAction($product, $qty, $warehouse_to, @$data['receipt_code'], @$data['receipt'], @$data['note']);
+        MoveWarehouse::doLogAction($product, $qty, $warehouse_to, $parent, @$data['note']);
         return true;
     }
 
@@ -372,6 +374,8 @@ class AjaxResponeController extends Controller
                 return returnMessageAjax(100, 'Vui lòng thêm 1 sản phẩm để chuyển kho !');
             }
             $move_warehouses = $data['move_warehouse'];
+            $hard_receipt_code = $data['receipt_code'];
+            $hard_receipt_file = $data['receipt'];
             $check_douplicate = [];
             foreach ($move_warehouses as $key => $move_warehouse) {
                 $num = $key + 1;
@@ -395,12 +399,12 @@ class AjaxResponeController extends Controller
                     return $validate;
                 }
                 $move_warehouses[$key]['product'] = $product;
-                $move_warehouses[$key]['receipt'] = @$data['receipt'];
-                $move_warehouses[$key]['receipt_code'] = @$data['receipt_code'];
+                $move_warehouses[$key]['receipt'] = $hard_receipt_file;
+                $move_warehouses[$key]['receipt_code'] = $hard_receipt_code;
             }
-
+            $receipt_id = BaseReceipt::insertWithHardData($hard_receipt_code, $hard_receipt_file);
             foreach ($move_warehouses as $move_warehouse) {
-                $process = $this->processMoveWarehouse($move_warehouse['product'], $move_warehouse);
+                $process = $this->processMoveWarehouse($move_warehouse['product'], $move_warehouse, $receipt_id);
             }
             if (!empty($process)) {
                 return returnMessageAjax(200, 'Đã chuyển kho thành công', \StatusConst::CLOSE_POPUP);
