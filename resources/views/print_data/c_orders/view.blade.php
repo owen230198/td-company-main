@@ -62,15 +62,9 @@
                     <td colspan="5"><p class="text-right mr-3">Tiền hàng</p></td>
                     <td class="text-right"><span class="font_bold">{{ number_format($product_cost) }} vnđ</span></td>
                 </tr>
-                @if ((float) @$data_item->ship_price > 0)
+                @if ((float) @$data_item->other_price != 0)
                     <tr class="bg_pink">
-                        <td colspan="5"><p class="text-right mr-3">Chi phí vận chuyển</p></td>
-                        <td class="text-right"><span class="font_bold">{{ number_format(@$data_item->ship_price) }} vnđ</span></td>
-                    </tr>   
-                @endif
-                @if ((float) @$data_item->other_price > 0)
-                    <tr class="bg_pink">
-                        <td colspan="5"><p class="text-right mr-3">Chi phí vận chuyển</p></td>
+                        <td colspan="5"><p class="text-right mr-3">Vận chuyển</p></td>
                         <td class="text-right"><span class="font_bold">{{ number_format(@$data_item->other_price) }} vnđ</span></td>
                     </tr>   
                 @endif
