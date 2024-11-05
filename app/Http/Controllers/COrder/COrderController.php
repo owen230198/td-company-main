@@ -127,6 +127,18 @@
             }
         }
 
+        public function clone($request, $id)
+        {
+            $table = $this->table;
+            $dataItem = getModelByTable($table)->find($id);
+            $data = $this->getDataView('insert');
+            $data['action_url'] = url('insert/'.$table);
+            $data['check_readonly'] = COrder::canHandle() ? 0 : 1;
+            $data['nosidebar'] = $request->input('nosidebar');
+            $data['dataItem'] = $dataItem;
+            return view('c_orders.view', $data);
+        }
+
         public function import($file)
         {
             $arr_file = pathinfo($file->getClientOriginalName());
