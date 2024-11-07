@@ -385,16 +385,16 @@ use Maatwebsite\Excel\Facades\Excel;
             $id = $request->id;
             $supply = \DB::table($table)->find($id);
             $product_id = $supply->product;
-            // if (!in_array($table, ['papers', 'supplies', 'fill_finishes']) || empty($supply)) {
-            //     return back()->with('error', 'Dữ liệu không hợp lệ');
-            // }
-            // if (@$supply->status != Order::TECH_SUBMITED) {
-            //     return back()->with('error', 'Dữ liệu không hợp lệ !');
-            // }
-            // $type = getTypeSupplyByObj($table, $supply);
-            // if (getHandleSupplyStatus($product_id, $id, $type) != CSupply::HANDLED) {
-            //     return back()->with('error', 'Vật tư vẫn chưa được kế toán duyệt xuất !');
-            // }
+            if (!in_array($table, ['papers', 'supplies', 'fill_finishes']) || empty($supply)) {
+                return back()->with('error', 'Dữ liệu không hợp lệ');
+            }
+            if (@$supply->status != Order::TECH_SUBMITED) {
+                return back()->with('error', 'Dữ liệu không hợp lệ !');
+            }
+            $type = getTypeSupplyByObj($table, $supply);
+            if (getHandleSupplyStatus($product_id, $id, $type) != CSupply::HANDLED) {
+                return back()->with('error', 'Vật tư vẫn chưa được kế toán duyệt xuất !');
+            }
             $process = $this->services->createWorkerCommandForSupply($table, $supply);
             if ($process) {
                 $all_supply = Product::getAllSupply($product_id, ['id', 'status']);

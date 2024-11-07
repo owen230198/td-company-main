@@ -370,7 +370,9 @@ class OrderService extends BaseService
             if (!empty($element['data'])) {
                 $el_data = $element['data'];
                 foreach ($el_data as $supply) {
-                    $this->createWorkerCommandForSupply($element['table'], $supply);
+                    if ($supply->status == Order::TECH_SUBMITED) {
+                        $this->createWorkerCommandForSupply($element['table'], $supply);
+                    }
                 }
             }
         }
