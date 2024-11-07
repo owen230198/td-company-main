@@ -90,11 +90,13 @@
                                 title="Tính vật tư thủ công">
                                 <i class="fa fa-plus" aria-hidden="true"></i> 
                             </a> 
-                            <a class="table-btn mr-2 mb-2" 
-                                href="{{ url('apply-supply-to-worker?table='.$element['table'].'&id='.$data->id) }}"
-                                title="Duyệt xuống xưởng SX">
-                                <i class="fa fa-check" aria-hidden="true"></i> 
-                            </a>    
+                            @if ($bg_color != 'bg_none' && $supp_handle_status == 'handled')
+                                <a class="table-btn mr-2 mb-2" 
+                                    href="{{ url('apply-supply-to-worker?table='.$element['table'].'&id='.$data->id) }}"
+                                    title="Duyệt xuống xưởng SX">
+                                    <i class="fa fa-check" aria-hidden="true"></i> 
+                                </a>    
+                            @endif
                         </div>
                     </td>
                 </tr>
