@@ -57,6 +57,7 @@ class Paper extends Model
     public function processData($product_id, $product, $type)
     {
         $data = $product[$type];
+        $data_product = Product::find($product_id);
         foreach ($data as $paper) {
             if (@$paper['handle_type'] == \TDConst::MADE_BY_PARTNER) {
                 $process_product['id'] = !empty($paper['id']) ? $paper['id'] : 0;
