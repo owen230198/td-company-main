@@ -368,6 +368,15 @@
         const MADE_BY_OWN = 1;
         const JOIN_HANDLE = 2;
         const MADE_BY_PARTNER = 3;
+
+        //Loại hàng
+        const ORDER_PRODUCT = 1;
+        const INTERNAL_PRODUCT = 2;
+        const TYPE_PRODUCT_OPTIONS = [
+            '' => 'Chọn loại hàng',
+            self::ORDER_PRODUCT => 'Hàng đặt',
+            self::INTERNAL_PRODUCT => 'Hàng Cty Tuấn Dung',
+        ];
     }
     
 ?>

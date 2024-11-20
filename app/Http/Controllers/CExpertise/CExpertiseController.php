@@ -55,9 +55,19 @@
                 $info_fields = [
                     [
                         'name' => 'name',
-                        'attr' => ['inject_class' => 'length_input', 'required' => 1],
+                        'attr' => ['inject_class' => 'length_input', 'required' => 1, 'readonly' => 1],
                         'note' => 'Tên sản phẩm',
                         'value' => $product_obj->name
+                    ],
+                    [
+                        'name' => 'type',
+                        'note' => 'Loại hàng',
+                        'type' => 'select',
+                        'attr' => ['required' => 1, 'readonly' => 1],
+                        'other_data' => [
+                            'data' => ['options' => \TDConst::TYPE_PRODUCT_OPTIONS]
+                        ],
+                        'value' => $product_obj->type
                     ],
                     [
                         'name' => 'qty',

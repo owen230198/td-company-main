@@ -790,6 +790,24 @@ class DevController extends Controller
             }     
         }
     }
+
+    public function updateProductTypeByOrder()
+    {
+        $data = Order::get();
+        foreach ($data as $order) {
+            $type_product = $order->customer != 9 ? \TDConst::ORDER_PRODUCT : \TDConst::INTERNAL_PRODUCT;
+            Product::where(['order' => $order->id])->update(['type' => $type_product]);    
+        }
+    }
+
+    public function updateProductTypeByQuote()
+    {
+        $data = Quote::get();
+        foreach ($data as $order) {
+            $type_product = $order->customer != 9 ? \TDConst::ORDER_PRODUCT : \TDConst::INTERNAL_PRODUCT;
+            Product::where(['quote_id' => $order->id])->update(['type' => $type_product]);    
+        }
+    }
     
 }
 

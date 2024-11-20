@@ -107,6 +107,9 @@ class QuoteService extends BaseService
         if (!empty($data['name'])) {
             $data_action['name'] = $data['name'];
         }
+        if (!empty($data['type'])) {
+            $data_action['type'] = $data['type'];
+        }
         if (!empty($data['qty'])) {
             $data_action['qty'] = $data['qty'];
             $data_action['delivery'] = $data['qty'];

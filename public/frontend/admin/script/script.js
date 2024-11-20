@@ -1340,7 +1340,9 @@ var addItemJsonModule = function () {
     $(document).on('click', 'button.add_item_json_button', function (event) {
         event.preventDefault();
         let _this = $(this);
-        let type = _this.closest('.__cost_c_order_module').find('.__select_warehouse_type').val();
+        let parent = _this.closest('.__cost_c_order_module');
+        let type = parent.find('.__select_warehouse_type').val();
+        let item_type = parent.find('.__select_type_c_order').val();
         if (empty(type)) {
             swal('Không thành công', "Bạn cần chọn địa điểm kho trước !", 'error')
         }else{
@@ -1348,7 +1350,7 @@ var addItemJsonModule = function () {
             let item = list_section.find('.__item_json');
             let index = getEmptyDefault(item.last().data('index'), 0, 'number') + 1;
             let table = _this.data('table');
-            let url = 'ajax-respone/returnItemJson?view_return=' + table + '&index=' + index + '&warehouse_type=' + type;
+            let url = 'ajax-respone/returnItemJson?view_return=' + table + '&index=' + index + '&warehouse_type=' + type + '&item_type=' + item_type;
             $('#loader').fadeIn(200);
             $.ajax({ 
                 url: url, 

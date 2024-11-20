@@ -7,7 +7,7 @@
         <form action="{{ url('confirm-product-warehouse/'.$data_expertise->id) }}" method="POST" class="mb-0 baseAjaxForm __import_product_warehouse_form">
             @foreach ($info_fields as $key => $iField)
                 @php
-                    $is_last = $key == 7;
+                    $is_last = $key == 8;
                     $iField['name'] = 'warehouse['.$iField['name'].']';
                     $is_show = !empty($iField['value']) || $is_last;
                 @endphp

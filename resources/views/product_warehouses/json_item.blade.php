@@ -1,9 +1,19 @@
+@php
+    $corder_model = new \App\Models\COrder;
+@endphp
 <div class="__item_json mb-3 pb-3 border_bot_main position-relative" data-index = {{ $index }}>
-    @if (\App\Models\COrder::canHandle() && $index > 0)
+    @if ($corder_model::canHandle() && $index > 0)
         <span class="d-flex color_red smooth fs-15 __remove_object_json_item"><i class="fa fa-times" aria-hidden="true"></i></span> 
     @endif
     @php
+        $where_product = [];
         $warehouse_type = @$dataItem['warehouse_type'] ?? @$warehouse_type;
+        if (!empty($warehouse_type)) {
+            $where_product['warehouse_type'] = $warehouse_type;
+        }
+        if (!empty($item_type)) {
+            $where_product['type'] = $item_type == $corder_model::SELL ? \TDConst::INTERNAL_PRODUCT : \TDConst::ORDER_PRODUCT;
+        }
         $field_obj = [
             'name' => 'id',
             'note' => 'Chọn thành phẩm',
@@ -17,7 +27,7 @@
                 "config" => [ "search"=> 1],
                 "data" => [
                     "table" => 'product_warehouses',
-                    'where' => !empty($warehouse_type) ? ['warehouse_type' => $warehouse_type] : [] 
+                    'where' => $where_product 
                 ]
             ]
         ];

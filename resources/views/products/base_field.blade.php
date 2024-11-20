@@ -9,6 +9,16 @@
                 'value' => !empty($product['id']) ? @$product['name'] : ''
             ],
             [
+                'name' => $pro_base_name_input.'[type]',
+                'note' => 'Loại hàng',
+                'type' => 'select',
+                'attr' => ['required' => 1, 'readonly' => !empty($rework) || !empty($readonly_base)],
+                'other_data' => [
+                    'data' => ['options' => \TDConst::TYPE_PRODUCT_OPTIONS]
+                ],
+                'value' => !empty($product['id']) ? @$product['type'] : \TDConst::ORDER_PRODUCT
+            ],
+            [
                 'name' => $pro_base_name_input.'[qty]',
                 'note' => 'Số lượng sản phẩm',
                 'attr' => ['type_input' => 'number', 'required' => 1, 'inject_class' => 'input_pro_qty __input_module_made_by_partner', 'placeholder' => 'Nhập số lượng', 'readonly' => !empty($readonly_base)],

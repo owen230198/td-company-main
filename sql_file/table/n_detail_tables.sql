@@ -11,7 +11,7 @@
  Target Server Version : 80030
  File Encoding         : 65001
 
- Date: 05/11/2024 00:12:39
+ Date: 20/11/2024 23:51:45
 */
 
 SET NAMES utf8mb4;
@@ -50,7 +50,7 @@ CREATE TABLE `n_detail_tables`  (
   INDEX `map_insert`(`table_map` ASC, `insert` ASC) USING BTREE,
   INDEX `map_update`(`table_map` ASC, `update` ASC) USING BTREE,
   INDEX `map_search`(`table_map` ASC, `search` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 424 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 437 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of n_detail_tables
@@ -462,5 +462,7 @@ INSERT INTO `n_detail_tables` VALUES (433, 'warehouse_to', '', 'Nhập tại kho
 INSERT INTO `n_detail_tables` VALUES (434, 'qty', '', 'Số lượng', 'text', 'move_warehouses', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-11-04 17:10:53');
 INSERT INTO `n_detail_tables` VALUES (435, 'unit', '{\"required\":1, \"readonly\":2}', 'ĐVT', 'select', 'move_warehouses', 0, 1, 0, 0, 0, NULL, NULL, 1, 0, 0, '{\n	\"data\":{\n		\"options\":{\"\":\"ĐVT\", \n			\"combo\":\"Bộ\", \n			\"box\":\"Hộp\", \n			\"sheet\":\"Tờ\",\n			\"unit\":\"Chiếc\"}\n		}\n}', NULL, NULL, 1, 1, '2023-05-11 11:18:58', '2024-11-04 17:10:53');
 INSERT INTO `n_detail_tables` VALUES (436, 'price', '{\"type_input\":\"price\"}', 'Giá', 'text', 'move_warehouses', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-11-04 17:10:53');
+INSERT INTO `n_detail_tables` VALUES (437, 'type', NULL, 'Loại hàng', 'select', 'products', 0, 0, 0, 0, 0, NULL, NULL, NULL, 1, 0, '{\r\n	\"data\":{\r\n		\"options\":{\r\n			\"\":\"Chưa chọn loại hàng\",\r\n			\"1\":\"Hàng đặt\",\r\n			\"2\":\"Hàng Cty Tuấn Dung\"\r\n		}\r\n	}\r\n}', NULL, NULL, 1, 1, '2023-08-22 03:54:31', '2024-11-20 15:39:49');
+INSERT INTO `n_detail_tables` VALUES (438, 'type', '', 'Loại hàng', 'select', 'product_warehouses', 1, 1, 0, 1, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"data\":{\r\n		\"options\":{\r\n			\"\":\"Chưa chọn loại hàng\",\r\n			\"1\":\"Hàng đặt\",\r\n			\"2\":\"Hàng Cty Tuấn Dung\"\r\n		}\r\n	}\r\n}', NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-11-20 23:11:16');
 
 SET FOREIGN_KEY_CHECKS = 1;
