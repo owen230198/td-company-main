@@ -824,6 +824,23 @@ class DevController extends Controller
             }
         }
     }
+
+    public function typeIsJoinProduct()
+    {
+        $data = Product::where('code', 'like', 'G-%')->get();
+        foreach ($data as $join_product) {
+            $paper = Paper::where('product', $join_product->id)->get();
+            dump($paper);
+        }
+    }
+
+    public function updateProductPack()
+    {
+        $data = Product::where('name', 'like', '2025 Túi%')->get();
+        foreach ($data as $pack_pro) {
+            Product::where('id', $pack_pro->id)->update(['type' => '']);
+        }
+    }
     
 }
 
