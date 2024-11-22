@@ -1342,7 +1342,7 @@ var addItemJsonModule = function () {
         let _this = $(this);
         let parent = _this.closest('.__cost_c_order_module');
         let type = parent.find('.__select_warehouse_type').val();
-        let item_type = parent.find('.__select_type_c_order').val();
+        let item_type = parent.closest('.__c_order_action').find('.__select_type_c_order').val();
         if (empty(type)) {
             swal('Không thành công', "Bạn cần chọn địa điểm kho trước !", 'error')
         }else{
