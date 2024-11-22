@@ -808,6 +808,22 @@ class DevController extends Controller
             Product::where(['quote_id' => $order->id])->update(['type' => $type_product]);    
         }
     }
+
+    public function updateProductWarehouseBuyProduct()
+    {
+        $data = ProductWarehouse::get();
+        $count = 0;
+        foreach ($data as $product_warehouse) {
+            $pro_warehouse_id = $product_warehouse->id;
+            $first_history = ProductHistory::where('product', '!=', 0)->where('target', $pro_warehouse_id)->first();
+            if(!empty($first_history->product)){
+                $product = Product::find($first_history->product);
+                $count++;
+                ProductWarehouse::where('id', $pro_warehouse_id)->update(['type' => $product->type, 'name' => $product->name]);
+                ProductHistory::where('product', '!=', 0)->where('target', $pro_warehouse_id)->update(['name' => $product->name]);
+            }
+        }
+    }
     
 }
 
