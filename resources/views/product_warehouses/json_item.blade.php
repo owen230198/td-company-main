@@ -11,7 +11,6 @@
         if (!empty($warehouse_type)) {
             $where_product['warehouse_type'] = $warehouse_type;
         }
-        dump($item_type);
         if (!empty($item_type)) {
             $where_product['type'] = $item_type == $corder_model::SELL ? \TDConst::INTERNAL_PRODUCT : \TDConst::ORDER_PRODUCT;
         }
