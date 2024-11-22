@@ -113,6 +113,7 @@
                 return view('c_orders.view', $data);
             }else{
                 $data = $request->except(['_token', 'nosidebar']);
+                dd($data);
                 $process_data = $this->processData($data);
                 if (@$process_data['code'] == 100) {
                     return $process_data;

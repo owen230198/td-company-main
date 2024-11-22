@@ -55,6 +55,34 @@
                 'inject_class' => '__selling_input_count_item __selling_price_input_item'
             ],
         ];
+        $field_other_price = [
+            'name' => 'other_price',
+            'type' => 'json_fields',
+            'note' => 'Chi phí khác',
+            'other_data' => [
+                [
+                    'name' => 'name',
+                    'type' => 'text',
+                    'note' => 'Tên chi phí',
+                    'min_label' => 75,
+                    'attr' => [
+                        'width' => 6,
+                    ]
+                ],
+                [
+                    'name' => 'price',
+                    'type' => 'text',
+                    'note' => 'Đơn giá',
+                    'min_label' => 75,
+                    'attr' => [
+                        'width' => 6,
+                        'type_input' => 'price', 
+                        'inject_class' => '__selling_input_count_item __selling_other_price_input_item'
+                    ]
+                ]
+            ],
+            'inject_class' => '__item_product_warehouse_other_price'
+        ];
         $field_total = [
             'name' => 'total',
             'type' => 'text',
@@ -66,6 +94,7 @@
             $field_name,
             $field_qty,
             $field_price,
+            $field_other_price,
             $field_total
         ];
     @endphp
