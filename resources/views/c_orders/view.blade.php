@@ -10,7 +10,7 @@
                         @php
                             $name = $fieldst['name'];
                             $arr = processArrField($fieldst);
-                            $value = @$dataItem->{$name};
+                            $value = @$dataItem[$name];
                             $arr['value'] = $value;
                             $arr['attr']['readonly'] = $name == 'type' && !empty($value)  ? 1 : $check_readonly;
                         @endphp
@@ -18,9 +18,9 @@
                     @endforeach
                 </div>
                 <div class="__ajax_view_c_order_by_type">
-                    @if (!empty($dataItem->type))
+                    @if (!empty($dataItem['type']))
                         @php
-                            $fiels = \App\Models\COrder::getFieldAjaxByType($dataItem->type, $dataItem)
+                            $fiels = \App\Models\COrder::getFieldAjaxByType($dataItem['type'], $dataItem)
                         @endphp
                         @include('c_orders.view_types.ajax',['fields' => $fiels])
                     @endif

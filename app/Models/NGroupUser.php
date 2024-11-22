@@ -39,6 +39,7 @@ class NGroupUser extends Model
         'profit' => '% Hoa hồng',
         'warehouse' => 'Kho vật tư',
         'product_warehouse' => 'Kho thành phẩm',
+        'c_orders' => 'Bán hàng Cty có sẵn',
         'report' => 'Báo cáo & thống kê',
         'handle_supply' => 'Lệnh xử lí vật tư',
         'account' => 'Thông tin tài khoản'
@@ -237,9 +238,14 @@ class NGroupUser extends Model
             'group' => 'product_warehouse'
         ],
         'order_ready' => [
-            'name' => 'Quản lí bán hàng',
+            'name' => 'Phiếu bán hàng',
             'link' => 'view/c_orders?type='.COrder::SELL,
-            'group' => 'product_warehouse'
+            'group' => 'c_orders'
+        ],
+        'insert_corder' => [
+            'name' => 'Tạo phiếu bán hàng',
+            'link' => 'insert/c_orders?type='.COrder::SELL,
+            'group' => 'c_orders'
         ],
         'warehouse_type' => [
             'name' => 'Quản lý kho lưu',
@@ -294,6 +300,7 @@ class NGroupUser extends Model
                 self::MODULE['handle_process'],
                 self::MODULE['product_management'],
                 self::MODULE['product_history'],
+                self::MODULE['insert_corder'],
                 self::MODULE['order_ready'],
                 self::MODULE['account'],
                 self::MODULE['change_password'],
@@ -401,6 +408,7 @@ class NGroupUser extends Model
                 self::MODULE['move_warehouse'],
                 self::MODULE['expertise'],
                 self::MODULE['product_history'],
+                self::MODULE['insert_corder'],
                 self::MODULE['order_ready'],
                 self::MODULE['order_debt'],
                 self::MODULE['supply_debt'],
