@@ -1380,7 +1380,10 @@ var addItemJsonFieldModule = function () {
         let list_section = parent.find('.__list_item_field');
         let item = list_section.find('.__json_field_item');
         let index = getEmptyDefault(item.last().data('index'), 0, 'number') + 1;
-        let url = 'ajax-respone/returnItemJson?view_return=json_fields&index=' + index;
+        let json = parent.data('json');
+        let name = parent.data('name');
+        let jsonString = encodeURIComponent(JSON.stringify(json));
+        let url = `ajax-respone/returnItemJson?view_return=json_fields&name=`+name+`&jindex=${index}&json=${jsonString}`;
         $('#loader').fadeIn(200);
         $.ajax({ 
             url: url, 
@@ -1391,13 +1394,6 @@ var addItemJsonFieldModule = function () {
             initInputModuleAfterAjax(section_class);
             $('#loader').delay(200).fadeOut(500);
         })
-    });
-    
-    $(document).on('click', 'span.__remove_object_json_item', function (event) {
-        event.preventDefault();
-        let _this = $(this);
-        _this.parent().remove();
-        calcTotalProductSelling($('.__cost_c_order_module'));
     });
 }
 
@@ -1498,7 +1494,14 @@ var countPriceSellingModule = function() {
         let qty = getEmptyDefault(parent.find('input.__selling_qty_input_item').val(), 0, 'float'); 
         let price = getEmptyDefault(parent.find('input.__selling_price_input_item').val(), 0, 'float'); 
         let total_input = parent.find('input.__selling_total_item_input');
-        let number_format = price_format(qty*price);
+        let total = qty * price;
+        let other_price = 0;
+        oth_price_module = parent.find('.__item_product_warehouse_other_price');
+        let oth_price_input = oth_price_module.find('.__selling_other_price_input_item');
+        oth_price_input.each(function(){
+            other_price += getEmptyDefault($(this).val(), 0, 'float') * qty;    
+        });
+        let number_format = price_format(total + other_price);
         total_input.val(number_format);
         total_input.trigger('change');
         calcTotalProductSelling(parent.closest('.__cost_c_order_module'))

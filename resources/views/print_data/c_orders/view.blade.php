@@ -9,7 +9,7 @@
             <div class="col-6">
                 <div class="col-6">
                     <a href="{{ url('') }}" class="header_printdata_logo d-block text-right">
-                        <img src="{{ url('frontend/admin/images/logo.jpg') }}" alt="logo">   
+                        <img src="{{ url('frontend/admin/images/td_logo.png') }}" alt="logo">   
                     </a>
                 </div>
 
@@ -52,7 +52,18 @@
                         @endphp
                         <th scope="row">{{ $num }}</th>
                         <td>{{ $obj->code }}</td>
-                        <td>{{ @$product->name ?? $obj->name }}</td>
+                        <td>
+                            <p>{{ @$product->name ?? $obj->name }}</p>
+                            @if (!empty($product->other_price))
+                                @foreach ($product->other_price as $other_price)
+                                    <p class="d-flex align-items-center mb-2 fs-12 color_red font_weight_initial">
+                                        <span class="d-block w_max_content text-nowrap">
+                                            <i class="fa fa-circle mr-1 color_yellow fs-8" aria-hidden="true"></i>{{ $other_price->name }}</span>
+                                        <span class="ml-1 text-lowercase">: {{ $other_price->price }}</span>
+                                    </p> 
+                                @endforeach    
+                            @endif
+                        </td>
                         <td>{{ $product->qty }}</td>
                         <td class="text-right">{{ number_format($product->price) }} vnđ</td>
                         <td class="text-right">{{ number_format($product->total) }} vnđ</td>
@@ -70,12 +81,12 @@
                 @endif
                 @if ((float) @$data_item->advance > 0)
                     <tr class="bg_pink">
-                        <td colspan="5"><p class="text-right mr-3">Tạm ứng</p></td>
+                        <td colspan="5"><p class="text-right mr-3">Chuyển khoản</p></td>
                         <td class="text-right"><span class="font_bold">{{ number_format(@$data_item->advance) }} vnđ</span></td>
                     </tr>   
                 @endif
                 <tr class="bg_pink">
-                    <td colspan="5"><p class="text-right mr-3">Thành tiền bằng số</p></td>
+                    <td colspan="5"><p class="text-right mr-3">Công nợ còn lại</p></td>
                     <td class="text-right"><span class="font_bold">{{ number_format(@$data_item->rest) }} vnđ</span></td>
                 </tr>
             </tbody>
@@ -84,12 +95,10 @@
     </div>
     <div class="print_order_footer mt-4">
         <div class="row">
-            <div class="col-6 mb-4">
-                <p class="d-flex align-items-center">Ngày đặt hàng : {{ date('d/m/Y', strtotime($data_item->created_at)) }}</p>     
-            </div>
-            <div class="col-6 mb-4">
-                <p class="d-flex align-items-center">Ngày trả hàng : </p>    
-                <p class="d-flex align-items-center">GHI CHÚ : khách hàng lấy VAT không ? <input type="checkbox" class="ml-2"></p>     
+            <div class="col-12 mb-3">
+                <p class="d-flex align-items-center">Ngày đặt hàng : {{ date('d/m/Y', strtotime($data_item->created_at)) }}</p>
+                <p class="d-flex align-items-center">Ngày trả hàng : {{ date('d/m/Y', Time()) }}</p>    
+                <p class="d-flex align-items-center">Ghi chú : trả hàng thu tiền ngay</p>        
             </div>
             <div class="col-6 text-center">
                 <p class="text-uppercase">khách hàng</p>

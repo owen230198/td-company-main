@@ -102,7 +102,11 @@ class AjaxResponeController extends Controller
 
     public function returnItemJson(Request $request)
     {
-        return view($request->view_return.'.json_item', $request->all());
+        $data = $request->all();
+        if (!empty($data['json'])) {
+            $data['other_data'] = json_decode($data['json'], true);
+        }
+        return view($request->view_return.'.json_item', $data);
     }
 
     public function getPriceProductWarehouse($request)
