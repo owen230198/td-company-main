@@ -1372,6 +1372,35 @@ var addItemJsonModule = function () {
     });
 }
 
+var addItemJsonFieldModule = function () {
+    $(document).on('click', 'button.__json_field_button_add', function (event) {
+        event.preventDefault();
+        let _this = $(this);
+        let parent = _this.closest('.__json_field_module');
+        let list_section = parent.find('.__list_item_field');
+        let item = list_section.find('.__json_field_item');
+        let index = getEmptyDefault(item.last().data('index'), 0, 'number') + 1;
+        let url = 'ajax-respone/returnItemJson?view_return=json_fields&index=' + index;
+        $('#loader').fadeIn(200);
+        $.ajax({ 
+            url: url, 
+            type: 'GET' 
+        }).done(function (html) {
+            list_section.append(html);
+            let section_class = list_section.find('.__json_field_item').last();
+            initInputModuleAfterAjax(section_class);
+            $('#loader').delay(200).fadeOut(500);
+        })
+    });
+    
+    $(document).on('click', 'span.__remove_object_json_item', function (event) {
+        event.preventDefault();
+        let _this = $(this);
+        _this.parent().remove();
+        calcTotalProductSelling($('.__cost_c_order_module'));
+    });
+}
+
 var selectProductSellingModule = function(){
     $(document).on('change', 'select.__select_warehouse_type', function(event){
         event.preventDefault();
@@ -1599,4 +1628,5 @@ $(function () {
     priceInputModule();
     confirmCLoneDataTable();
     viewChartBtn();
+    addItemJsonFieldModule();
 });

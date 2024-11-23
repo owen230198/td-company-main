@@ -1,14 +1,13 @@
 @php
     $jindex = !empty($jindex) ? $jindex : 0;
 @endphp
-<div class="json_field_module">
-    <div class="{{ @$attr['inject_class'] }} row ">
-        @foreach ($other_data as $field_json)
-            @php
-                $jname = $field_json['name'];
-                $field_json['name'] = $name.'['.$jindex.']['.$jname.']';
-            @endphp
-            @include('view_update.view', $field_json)
-        @endforeach   
+<div class="__json_field_module">
+    <div class="__list_item_field">
+        
+    </div>
+    <div class="__json_field_button_module text-center">
+        <button type="button" class="main_button color_white bg_green border_green radius_5 fs-10 sooth __json_field_button_add">
+            Thêm {{ $note }}
+        </button>
     </div>
 </div>

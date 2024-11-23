@@ -479,6 +479,26 @@ a.device_supp_item {
     cursor: pointer;
 }
 
+.__json_field_module{
+    padding: 5px;
+    background: #ebebeb;
+}
+.config_content .form-control.length_input_155{
+    max-width: 155px;
+    min-width: 155px;
+    width: 155px;
+}
+
+.__json_field_item{
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #888;
+}
+
+.__json_field_button_add{
+    padding: 3px 5px;
+}
+
 @page {
     size: A4;
     margin: 1cm;
@@ -636,7 +656,7 @@ a.device_supp_item {
     }
 
     
-  }
+}
 
 /* end table responsive  */
 
