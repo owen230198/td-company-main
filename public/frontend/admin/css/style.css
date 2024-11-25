@@ -550,14 +550,14 @@ a.device_supp_item {
         height: 297mm;
         position: relative;
         color: #333333 !important;
-        border-width: 5px;
+        border-width: 1px;
     }
     .print_data_section .table thead th {
-        border: 1.1px solid #333333 !important;
+        border: 1px solid #333 !important;
     }
     
     .print_data_section .table-bordered td, .print_data_section .table-bordered th{
-        border: 1.1px solid #333333 !important;
+        border: 1px solid #333 !important;
     }
 }
 

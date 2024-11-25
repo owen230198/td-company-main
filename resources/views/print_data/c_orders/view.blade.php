@@ -34,7 +34,7 @@
         @endphp
         <div class="print_product_table mt-3">
             <table class="table table-bordered mb-1">
-                <thead>
+                <thead class="text-center">
                     <tr>
                         <th scope="col" class="num_td">STT</th>
                         <th scope="col" class="code_td">Mã SP</th>
@@ -45,7 +45,6 @@
                     </tr>
                 </thead>
                 <tbody>
-
                     @foreach ($products as $key => $product)
                         <tr>
                             @php
