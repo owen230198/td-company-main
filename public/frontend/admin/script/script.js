@@ -1474,9 +1474,10 @@ var calcTotalProductSelling = function(json_selling_module)
     });
     let other_price = getEmptyDefault(json_selling_module.find('input.__selling_other_price_input').val(), 0, 'float');
     let profit = getEmptyDefault(json_selling_module.find('input.__selling_profit_input').val(), 0, 'float');
-    let profit_price = getValueByPercent(selling_total, profit);
+    let temp_total = selling_total + other_price;
+    let profit_price = getValueByPercent(temp_total, profit);
     
-    let total = selling_total + other_price + profit_price;
+    let total = temp_total + profit_price;
     
     let advance = getEmptyDefault(json_selling_module.find('input.__selling_advance_input').val(), 0, 'float');
     let total_input = json_selling_module.find('input.__selling_total_input');

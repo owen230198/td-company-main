@@ -685,3 +685,12 @@
             }
         }
     }
+
+    if (!function_exists('getNamePaymentMethod')) {
+        function getNamePaymentMethod($payment_method){
+            if (empty($payment_method)) {
+                return '';
+            }
+            return $payment_method == 1 ? 'Tiền mặt' : 'chuyển khoản';
+        }
+    }

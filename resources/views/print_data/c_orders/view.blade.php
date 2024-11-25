@@ -74,10 +74,10 @@
                                         {{ $product_qty }}
                                     </td>
                                     <td class="text-right">
-                                        {{ $other_price->price }}
+                                        {{ number_format($other_price->price) }}
                                     </td>
                                     <td class="text-right">
-                                        {{ $product_qty * $other_price->price }}
+                                        {{ number_format($product_qty * $other_price->price) }}
                                     </td>
                                 </tr>
                             @endif
@@ -100,7 +100,7 @@
                         <td class="text-right"><span class="font_bold">{{ @$data_item->profit }} %</span></td>
                     </tr>   
                 @endif
-                @if ((float) @$data_item->total != 0)
+                @if ((float) @$data_item->profit != 0 || (float) @$data_item->other_price != 0)
                     <tr class="bg_pink">
                         <td colspan="5"><p class="text-right mr-3">Tổng chi phí</p></td>
                         <td class="text-right"><span class="font_bold">{{ number_format($data_item->total) }} vnđ</span></td>
@@ -108,7 +108,10 @@
                 @endif
                 @if ((float) @$data_item->advance > 0)
                     <tr class="bg_pink">
-                        <td colspan="5"><p class="text-right mr-3">Tạm ứng - Thanh toán</p></td>
+                        @php
+                            $payment_method = getNamePaymentMethod(@$data_item->payment_type);
+                        @endphp
+                        <td colspan="5"><p class="text-right mr-3">Tạm ứng - Thanh toán {{ !empty($payment_method) ? '('.$payment_method.')' : ''  }}</p></td>
                         <td class="text-right"><span class="font_bold">{{ number_format(@$data_item->advance) }} vnđ</span></td>
                     </tr>   
                 @endif
