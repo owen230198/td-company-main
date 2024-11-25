@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -11,8 +10,8 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('frontend/admin/images/logo.png') }}">
         <link rel="stylesheet" href="{{ asset('frontend/base/css/bootstrap.min.css') }}" />
         <link rel="stylesheet" href="{{ asset('frontend/base/css/font-awesome.min.css') }}" />
-        <link rel="stylesheet" href="{{ asset('frontend/base/css/style.css?v=2') }}" />
-        <link rel="stylesheet" href="{{ asset('frontend/admin/css/style.css?v=2') }}" />
+        <link rel="stylesheet" href="{{ asset('frontend/base/css/style.css?v=3') }}" />
+        <link rel="stylesheet" href="{{ asset('frontend/admin/css/style.css?v=3') }}" />
         @yield('css')
     </head>
 

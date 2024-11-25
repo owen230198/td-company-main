@@ -513,6 +513,10 @@ a.device_supp_item {
     border-color: black;
 }
 
+.print_data_section .table td, .print_data_section .table th{
+    padding: 3px;
+}
+
 .num_td{
     max-width: 50px;
     width: 50px;
