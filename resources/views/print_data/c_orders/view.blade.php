@@ -33,12 +33,12 @@
         <table class="table table-bordered mb-1">
             <thead>
                 <tr>
-                    <th scope="col">STT</th>
-                    <th scope="col">Mã SP</th>
+                    <th scope="col" class="num_td">STT</th>
+                    <th scope="col" class="code_td">Mã SP</th>
                     <th scope="col">Tên Sản phẩm</th>
-                    <th scope="col">Số lượng</th>
-                    <th scope="col">Đơn giá (vnđ)</th>
-                    <th scope="col">Thành tiền</th>
+                    <th scope="col" class="qty_td">Số lượng</th>
+                    <th scope="col" class="qty_td">Đơn giá (vnđ)</th>
+                    <th scope="col" class="code_td">Thành tiền</th>
                 </tr>
             </thead>
             <tbody>
@@ -54,14 +54,14 @@
                             $product_qty = $product->qty;
                             $other_price_total = $other_price * $product_qty;
                         @endphp
-                        <td scope="row">{{ $num }}</td>
-                        <td>{{ $obj->code }}</td>
+                        <td scope="row" class="num_td">{{ $num }}</td>
+                        <td class="code_td">{{ $obj->code }}</td>
                         <td>
-                            <p>{{ @$product->name ?? $obj->name }}</p>
+                            <p class="product_name_td">{{ @$product->name ?? $obj->name }}</p>
                         </td>
-                        <td>{{ $product_qty }}</td>
-                        <td class="text-right">{{ number_format($product->price) }}</td>
-                        <td class="text-right">{{ number_format($product->total - $other_price_total) }}</td>
+                        <td class="qty_td">{{ $product_qty }}</td>
+                        <td class="text-right qty_td">{{ number_format($product->price) }}</td>
+                        <td class="text-right code_td">{{ number_format($product->total - $other_price_total) }}</td>
                     </tr> 
                     @if (!empty($product->other_price))
                         @foreach ($product->other_price as $other_price)

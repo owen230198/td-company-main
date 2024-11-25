@@ -506,11 +506,26 @@ a.device_supp_item {
 }
 
 .print_data_section .table thead th {
-    border-color: #333;
+    border-color: black;
 }
 
 .print_data_section .table-bordered td, .print_data_section .table-bordered th{
-    border-color: #333;
+    border-color: black;
+}
+
+.num_td{
+    max-width: 50px;
+    width: 50px;
+}
+
+.code_td{
+    max-width: 120px;
+    width: 120px;
+}
+
+.qty_td{
+    max-width: 100px;
+    width: 100px;
 }
 
 @page {
@@ -526,6 +541,8 @@ a.device_supp_item {
         width: 210mm;
         height: 297mm;
         position: relative;
+        border-color: #000000;
+        border-width: 5px;
     }
 }
 
