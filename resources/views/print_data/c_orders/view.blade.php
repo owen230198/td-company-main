@@ -59,8 +59,8 @@
                         <td>
                             <p>{{ @$product->name ?? $obj->name }}</p>
                         </td>
-                        <td>{{ $product->qty }}</td>
-                        <td class="text-right">{{ number_format($product_qty) }}</td>
+                        <td>{{ $product_qty }}</td>
+                        <td class="text-right">{{ number_format($product->price) }}</td>
                         <td class="text-right">{{ number_format($product->total - $other_price_total) }}</td>
                     </tr> 
                     @if (!empty($product->other_price))
