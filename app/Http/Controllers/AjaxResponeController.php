@@ -326,7 +326,7 @@ class AjaxResponeController extends Controller
         $arr_log = ['receipt' => @$data['receipt'], 'note' => @$data['note']];
         ProductHistory::doLogWarehouse($id, 0, $qty, $product_qty, 0, $arr_log);
         //Đưa hàng vào kho mới
-        $arr_keys = ['name', 'category', 'style', 'length', 'width', 'height', 'unit', 'made_by', 'produce_price', 'add_on', 'price'];
+        $arr_keys = ['name', 'type', 'category', 'style', 'length', 'width', 'height', 'unit', 'made_by', 'produce_price', 'add_on', 'price'];
         foreach ($arr_keys as $key_name) {
             $where[$key_name] = $product->{$key_name};
         }
