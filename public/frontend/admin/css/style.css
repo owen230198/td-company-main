@@ -506,7 +506,11 @@ a.device_supp_item {
 }
 
 .print_data_section .table thead th {
-    border-bottom: initial;
+    border-color: #333;
+}
+
+.print_data_section .table-bordered td, .print_data_section .table-bordered th{
+    border-color: #333;
 }
 
 @page {
