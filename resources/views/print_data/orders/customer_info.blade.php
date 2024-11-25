@@ -1,8 +1,3 @@
-<div class="col-9 my-3">
-    <div class="col-6">
-        <p class="text-uppercase fs-20 font_bold color_green text-right">đơn đặt hàng</p>
-    </div>
-</div>
 <div class="col-3 mb-2">
     <p class="d-flex align-items-center"><span class="w_66 d-block">Số seri</span>  : <span class="fs-18 color_red ml-1 font_bold">{{ $data_item->code }}</span></p>
 </div>

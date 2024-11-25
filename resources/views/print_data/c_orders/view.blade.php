@@ -8,10 +8,13 @@
         <div class="_print_order_header">
             <div class="row">
                 <div class="col-6">
-                    <div class="col-6">
-                        <a href="{{ url('') }}" class="header_printdata_logo d-block text-right">
-                            <img src="{{ url('frontend/admin/images/td_logo.png') }}" alt="logo">   
-                        </a>
+                    <div class="col-7">
+                        <div class="text-center">
+                            <a href="{{ url('') }}" class="header_printdata_logo d-block text-right">
+                                <img src="{{ url('frontend/admin/images/td_logo.png') }}" alt="logo">   
+                            </a>
+                            <p class="text-uppercase fs-22 font_bold">đơn đặt hàng</p>
+                        </div>
                     </div>
                 </div>
                 <div class="col-6">
@@ -126,13 +129,13 @@
         <div class="print_order_footer mt-1">
             <div class="row">
                 <div class="col-6">
+                    <p class="d-flex align-items-center">Ghi chú : {{ @$data_item->note ?? 'trả hàng thu tiền ngay'  }} </p>        
+                </div>
+                <div class="col-6">
                     <div class="d-flex justify-content-between align-items-center">
                         <p class="d-flex align-items-center">Ngày đặt hàng : {{ date('d/m/Y', strtotime($data_item->created_at)) }}</p>
                         <p class="d-flex align-items-center">Ngày trả hàng : {{ date('d/m/Y', strtotime($data_item->return_date)) }}</p>    
                     </div>
-                </div>
-                <div class="col-8 mb-1">
-                    <p class="d-flex align-items-center">Ghi chú : {{ @$data_item->note ?? 'trả hàng thu tiền ngay'  }} </p>        
                 </div>
                 <div class="col-6 text-center">
                     <p class="text-uppercase">khách hàng</p>

@@ -510,15 +510,15 @@ a.device_supp_item {
 }
 
 .print_data_section .table thead th {
-    border-color: black;
+    border-color: #000;
 }
 
 .print_data_section .table-bordered td, .print_data_section .table-bordered th{
-    border-color: black;
+    border-color: #000;
 }
 
 .print_data_section .table td, .print_data_section .table th{
-    padding: 3px;
+    padding: 0 5px;
 }
 
 .num_td{
@@ -549,8 +549,15 @@ a.device_supp_item {
         width: 210mm;
         height: 297mm;
         position: relative;
-        border-color: #000000;
+        color: #000000 !important;
         border-width: 5px;
+    }
+    .print_data_section .table thead th {
+        border: 2px solid #000000 !important;
+    }
+    
+    .print_data_section .table-bordered td, .print_data_section .table-bordered th{
+        border: 2px solid #000000 !important;
     }
 }
 

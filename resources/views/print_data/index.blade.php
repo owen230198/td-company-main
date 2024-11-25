@@ -10,8 +10,8 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('frontend/admin/images/logo.png') }}">
         <link rel="stylesheet" href="{{ asset('frontend/base/css/bootstrap.min.css') }}" />
         <link rel="stylesheet" href="{{ asset('frontend/base/css/font-awesome.min.css') }}" />
-        <link rel="stylesheet" href="{{ asset('frontend/base/css/style.css?v=4') }}" />
-        <link rel="stylesheet" href="{{ asset('frontend/admin/css/style.css?v=4') }}" />
+        <link rel="stylesheet" href="{{ asset('frontend/base/css/style.css?v=5') }}" />
+        <link rel="stylesheet" href="{{ asset('frontend/admin/css/style.css?v=5') }}" />
         @yield('css')
     </head>
 
