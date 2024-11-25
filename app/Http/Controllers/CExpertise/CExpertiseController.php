@@ -63,7 +63,7 @@
                         'name' => 'type',
                         'note' => 'Loại hàng',
                         'type' => 'select',
-                        'attr' => ['required' => 1, 'readonly' => 1],
+                        'attr' => ['readonly' => 1],
                         'other_data' => [
                             'data' => ['options' => \TDConst::TYPE_PRODUCT_OPTIONS]
                         ],
