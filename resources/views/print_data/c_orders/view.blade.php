@@ -31,6 +31,7 @@
         @php
             $products = json_decode($data_item->object);
             $product_cost = 0;
+            $count = 1;
         @endphp
         <div class="print_product_table mt-3">
             <table class="table table-bordered mb-1">
@@ -48,7 +49,6 @@
                     @foreach ($products as $key => $product)
                         <tr>
                             @php
-                                $num = $key + 1;
                                 $obj = getDetailDataById('ProductWarehouse', $product->id);
                                 $product_cost += $product->total;
                                 $other_price_obj = !empty($product->other_price) ? collect($product->other_price) : collect(new \stdClass());
@@ -56,7 +56,7 @@
                                 $product_qty = $product->qty;
                                 $other_price_total = $other_price * $product_qty;
                             @endphp
-                            <td scope="row" class="num_td">{{ $num }}</td>
+                            <td scope="row" class="num_td text-center">{{ $count++ }}</td>
                             <td class="code_td">{{ $obj->code }}</td>
                             <td>
                                 <p class="product_name_td">{{ @$product->name ?? $obj->name }}</p>
