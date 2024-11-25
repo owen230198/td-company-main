@@ -13,9 +13,8 @@
                             <img src="{{ url('frontend/admin/images/td_logo.png') }}" alt="logo">   
                         </a>
                     </div>
-
                 </div>
-                <div class="col-5">
+                <div class="col-6">
                     <ul class="header_print_data_info">
                         <li class="d-flex align-items-center"><span class="w_66 d-block">VPGD</span>     : {{ getDataConfig('QuoteConfig', 'OFFICE_ADD') }}</li>
                         <li class="d-flex align-items-center"><span class="w_66 d-block">Tel</span>      : {{ getDataConfig('QuoteConfig', 'OFFICE_PHONE') }}</li>
@@ -124,11 +123,15 @@
             </table>
             <p class="d-flex align-items-center">Thành tiền bằng chữ : <span class="ml-1 font_bold">{{ convertNumerToText($data_item->rest) }} đồng chẵn</span></p>
         </div>
-        <div class="print_order_footer mt-4">
+        <div class="print_order_footer mt-1">
             <div class="row">
-                <div class="col-12 mb-3">
-                    <p class="d-flex align-items-center">Ngày đặt hàng : {{ date('d/m/Y', strtotime($data_item->created_at)) }}</p>
-                    <p class="d-flex align-items-center">Ngày trả hàng : {{ date('d/m/Y', strtotime($data_item->return_date)) }}</p>    
+                <div class="col-6">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <p class="d-flex align-items-center">Ngày đặt hàng : {{ date('d/m/Y', strtotime($data_item->created_at)) }}</p>
+                        <p class="d-flex align-items-center">Ngày trả hàng : {{ date('d/m/Y', strtotime($data_item->return_date)) }}</p>    
+                    </div>
+                </div>
+                <div class="col-8 mb-1">
                     <p class="d-flex align-items-center">Ghi chú : {{ @$data_item->note ?? 'trả hàng thu tiền ngay'  }} </p>        
                 </div>
                 <div class="col-6 text-center">
