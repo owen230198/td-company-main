@@ -38,7 +38,7 @@
                         <th scope="col" class="code_td">Mã SP</th>
                         <th scope="col">Tên Sản phẩm</th>
                         <th scope="col" class="qty_td">Số lượng</th>
-                        <th scope="col" class="code_td">Đơn giá (vnđ)</th>
+                        <th scope="col" class="code_td">Đơn giá</th>
                         <th scope="col" class="code_td">Thành tiền</th>
                     </tr>
                 </thead>
@@ -87,12 +87,12 @@
                     @endforeach
                     <tr class="bg_pink">
                         <td colspan="5"><p class="text-right mr-3">Thành tiền</p></td>
-                        <td class="text-right"><span class="font_bold">{{ number_format($product_cost) }} vnđ</span></td>
+                        <td class="text-right"><span class="font_bold">{{ number_format($product_cost) }}</span></td>
                     </tr>
                     @if ((float) @$data_item->other_price != 0)
                         <tr class="bg_pink">
                             <td colspan="5"><p class="text-right mr-3">Vận chuyển</p></td>
-                            <td class="text-right"><span class="font_bold">{{ number_format(@$data_item->other_price) }} vnđ</span></td>
+                            <td class="text-right"><span class="font_bold">{{ number_format(@$data_item->other_price) }}</span></td>
                         </tr>   
                     @endif
                     @if ((float) @$data_item->profit != 0)
@@ -104,7 +104,7 @@
                     @if ((float) @$data_item->profit != 0 || (float) @$data_item->other_price != 0)
                         <tr class="bg_pink">
                             <td colspan="5"><p class="text-right mr-3">Tổng chi phí</p></td>
-                            <td class="text-right"><span class="font_bold">{{ number_format($data_item->total) }} vnđ</span></td>
+                            <td class="text-right"><span class="font_bold">{{ number_format($data_item->total) }}</span></td>
                         </tr>   
                     @endif
                     @if ((float) @$data_item->advance > 0)
@@ -113,12 +113,12 @@
                                 $payment_method = getNamePaymentMethod(@$data_item->payment_type);
                             @endphp
                             <td colspan="5"><p class="text-right mr-3">Tạm ứng - Thanh toán {{ !empty($payment_method) ? '('.$payment_method.')' : ''  }}</p></td>
-                            <td class="text-right"><span class="font_bold">{{ number_format(@$data_item->advance) }} vnđ</span></td>
+                            <td class="text-right"><span class="font_bold">{{ number_format(@$data_item->advance) }}</span></td>
                         </tr>   
                     @endif
                     <tr class="bg_pink">
                         <td colspan="5"><p class="text-right mr-3">Công nợ còn lại</p></td>
-                        <td class="text-right"><span class="font_bold">{{ number_format(@$data_item->rest) }} vnđ</span></td>
+                        <td class="text-right"><span class="font_bold">{{ number_format(@$data_item->rest) }}</span></td>
                     </tr>
                 </tbody>
             </table>
