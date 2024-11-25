@@ -151,6 +151,7 @@ class COrder extends Model
                 return $list->prepend($order_field)->toArray();
                 break;
             case self::SELL:
+                $fields['other_price']['note'] = 'Vận chuyển';
                 return $fields;
                 break;
             case self::ADVANCE:

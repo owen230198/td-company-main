@@ -37,7 +37,7 @@
                     <th scope="col">Mã SP</th>
                     <th scope="col">Tên Sản phẩm</th>
                     <th scope="col">Số lượng</th>
-                    <th scope="col">Đơn giá</th>
+                    <th scope="col">Đơn giá (vnđ)</th>
                     <th scope="col">Thành tiền</th>
                 </tr>
             </thead>
@@ -49,28 +49,43 @@
                             $num = $key + 1;
                             $obj = getDetailDataById('ProductWarehouse', $product->id);
                             $product_cost += $product->total;
+                            $other_price_obj = !empty($product->other_price) ? collect($product->other_price) : collect(new \stdClass());
+                            $other_price = $other_price_obj->sum('price');
+                            $product_qty = $product->qty;
+                            $other_price_total = $other_price * $product_qty;
                         @endphp
-                        <th scope="row">{{ $num }}</th>
+                        <td scope="row">{{ $num }}</td>
                         <td>{{ $obj->code }}</td>
                         <td>
                             <p>{{ @$product->name ?? $obj->name }}</p>
-                            @if (!empty($product->other_price))
-                                @foreach ($product->other_price as $other_price)
-                                    <p class="d-flex align-items-center mb-2 fs-12 color_red font_weight_initial">
-                                        <span class="d-block w_max_content text-nowrap">
-                                            <i class="fa fa-circle mr-1 color_yellow fs-8" aria-hidden="true"></i>{{ $other_price->name }}</span>
-                                        <span class="ml-1 text-lowercase">: {{ $other_price->price }}</span>
-                                    </p> 
-                                @endforeach    
-                            @endif
                         </td>
                         <td>{{ $product->qty }}</td>
-                        <td class="text-right">{{ number_format($product->price) }} vnđ</td>
-                        <td class="text-right">{{ number_format($product->total) }} vnđ</td>
-                    </tr>    
+                        <td class="text-right">{{ number_format($product_qty) }}</td>
+                        <td class="text-right">{{ number_format($product->total - $other_price_total) }}</td>
+                    </tr> 
+                    @if (!empty($product->other_price))
+                        @foreach ($product->other_price as $other_price)
+                            @if (!empty($other_price->name) && !empty($other_price->price))
+                                <tr>
+                                    <td colspan="3" class="text-center">
+                                        {{ $other_price->name }}
+                                    </td>
+                                    <td>
+                                        {{ $product_qty }}
+                                    </td>
+                                    <td class="text-right">
+                                        {{ $other_price->price }}
+                                    </td>
+                                    <td class="text-right">
+                                        {{ $product_qty * $other_price->price }}
+                                    </td>
+                                </tr>
+                            @endif
+                        @endforeach    
+                    @endif   
                 @endforeach
                 <tr class="bg_pink">
-                    <td colspan="5"><p class="text-right mr-3">Tiền hàng</p></td>
+                    <td colspan="5"><p class="text-right mr-3">Thành tiền</p></td>
                     <td class="text-right"><span class="font_bold">{{ number_format($product_cost) }} vnđ</span></td>
                 </tr>
                 @if ((float) @$data_item->other_price != 0)
@@ -79,9 +94,21 @@
                         <td class="text-right"><span class="font_bold">{{ number_format(@$data_item->other_price) }} vnđ</span></td>
                     </tr>   
                 @endif
+                @if ((float) @$data_item->profit != 0)
+                    <tr class="bg_pink">
+                        <td colspan="5"><p class="text-right mr-3">VAT</p></td>
+                        <td class="text-right"><span class="font_bold">{{ @$data_item->profit }} %</span></td>
+                    </tr>   
+                @endif
+                @if ((float) @$data_item->total != 0)
+                    <tr class="bg_pink">
+                        <td colspan="5"><p class="text-right mr-3">Tổng chi phí</p></td>
+                        <td class="text-right"><span class="font_bold">{{ number_format($data_item->total) }} vnđ</span></td>
+                    </tr>   
+                @endif
                 @if ((float) @$data_item->advance > 0)
                     <tr class="bg_pink">
-                        <td colspan="5"><p class="text-right mr-3">Chuyển khoản</p></td>
+                        <td colspan="5"><p class="text-right mr-3">Tạm ứng - Thanh toán</p></td>
                         <td class="text-right"><span class="font_bold">{{ number_format(@$data_item->advance) }} vnđ</span></td>
                     </tr>   
                 @endif
@@ -97,8 +124,8 @@
         <div class="row">
             <div class="col-12 mb-3">
                 <p class="d-flex align-items-center">Ngày đặt hàng : {{ date('d/m/Y', strtotime($data_item->created_at)) }}</p>
-                <p class="d-flex align-items-center">Ngày trả hàng : {{ date('d/m/Y', Time()) }}</p>    
-                <p class="d-flex align-items-center">Ghi chú : trả hàng thu tiền ngay</p>        
+                <p class="d-flex align-items-center">Ngày trả hàng : {{ date('d/m/Y', strtotime($data_item->return_date)) }}</p>    
+                <p class="d-flex align-items-center">Ghi chú : {{ @$data_item->note ?? 'trả hàng thu tiền ngay'  }} </p>        
             </div>
             <div class="col-6 text-center">
                 <p class="text-uppercase">khách hàng</p>
