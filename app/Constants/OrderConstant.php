@@ -1,6 +1,8 @@
 <?php
     namespace App\Constants;
-    use \App\Models\Order;
+
+use App\Models\COrder;
+use \App\Models\Order;
     use \App\Models\CSupply;
     use App\Models\SupplyBuying;
     use App\Models\SupplyWarehouse;
@@ -145,7 +147,7 @@
                 'table' => 'c_orders', 
                 'text' => 'Duyệt xuất thành phẩm',
                 'condition' => ['status' => \StatusConst::NOT_ACCEPTED],
-                'link' => 'view/c_orders?default_data=%7B"status"%3A"'.\StatusConst::NOT_ACCEPTED.'"%7D',
+                'link' => 'view/c_orders?default_data=%7B"status"%3A"'.\StatusConst::NOT_ACCEPTED.'","type"%3A"'.COrder::SELL.'"%7D',
                 'group_user' => [\GroupUser::ADMIN, \GroupUser::KCS, \GroupUser::PRODUCT_WAREHOUSE, \GroupUser::ACCOUNTING]  
             ],
         ];
