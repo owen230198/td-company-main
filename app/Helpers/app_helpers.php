@@ -285,6 +285,13 @@ if (!function_exists('getCountDataTable')) {
     }
 }
 
+if (!function_exists('getCleanString')) {
+    function getCleanString($str)
+    {
+        return preg_replace('/[\x00-\x1F\x7F\xA0\xAD\x{200B}\x{FEFF}]/u', '',$str);
+    }
+}
+
 if (!function_exists('isHome')) {
     function isHome($module = '')
     {
