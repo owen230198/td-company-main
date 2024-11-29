@@ -1,7 +1,7 @@
 @php
     $key_supp = \TDConst::PAPER;
     $base_name = 'product['.$pro_index.']['.$key_supp.']['.$supp_index.']';
-    $is_from_partner = $supply_obj->getTable() == 'products' && !empty(@$supply_obj->parent);
+    $is_from_partner = method_exists($supply_obj, 'getTable') && $supply_obj->getTable() == 'products' && !empty(@$supply_obj->parent);
     $handle_type_options = [\TDConst::MADE_BY_OWN => 'Tuấn Dung gia công ngay', 
                             \TDConst::JOIN_HANDLE => 'Tạo lệnh in ghép với sản phẩm khác', 
                             \TDConst::MADE_BY_PARTNER => 'Mua từ đơn vị khác'];

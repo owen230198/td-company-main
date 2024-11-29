@@ -10,8 +10,8 @@
 @section('script')
     <script src="{{ asset('frontend/admin/script/chart.js') }}"></script>
     <script>
-        var ctx = document.getElementById('orderChart').getContext('2d');
-        var orderChart = new Chart(ctx, {
+        let ctx = document.getElementById('orderChart').getContext('2d');
+        let orderChart = new Chart(ctx, {
             type: 'pie',
             data: {
                 labels: @json($labels),
@@ -48,14 +48,34 @@
             },
             options: {
                 responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                    title: {
-                        display: true,
-                        text: 'Tỷ lệ phần trăm giá trị đơn hàng theo người tạo'
+                legend: {
+                    display: true,
+                    position: 'right',
+                    labels: {
+                        fontSize: 15,
+                        boxWidth: 10, // Kích thước hộp màu trong legend
+                        padding: 15, // Khoảng cách giữa các item
+                        generateLabels: function(chart) {
+                            return chart.data.labels.map(function(label, i) {
+                                // Lấy giá trị của phần
+                                let value = chart.data.datasets[0].data[i];
+                                // Tính phần trăm của giá trị
+                                let total = chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                                let percentage = ((value / total) * 100).toFixed(2);
+
+                                // Trả về cấu trúc tùy chỉnh, sử dụng \n để xuống dòng
+                                return {
+                                    text: `${label} - Doanh số: ${value}đ - Chiếm: ${percentage}%`, // Hiển thị 1 lần
+                                    fillStyle: chart.data.datasets[0].backgroundColor[i],
+                                    hidden: chart.getDatasetMeta(0).data[i].hidden,
+                                    index: i
+                                };
+                            });
+                        }
                     }
+                },
+                title: {
+                    display: false,
                 }
             }
         });

@@ -55,7 +55,7 @@
                         @php 
                             $first_obj = array_shift($objects); 
                         @endphp
-                        @include('c_orders.view_types.product_td', ['object' => $first_obj, 'is_export' => true]);
+                        @include('c_orders.view_types.product_td', ['object' => $first_obj, 'is_export' => true])
                     @else
                         <td colspan="1">{{ $data->note }}</td>
                         <td colspan="3"></td>
@@ -69,7 +69,7 @@
                 </tr>
                 @foreach ($objects as $index => $object)
                     <tr>
-                        @include('c_orders.view_types.product_td', ['object' => $object, 'is_export' => true]);
+                        @include('c_orders.view_types.product_td', ['object' => $object, 'is_export' => true])
                     </tr>
                 @endforeach
             @endforeach

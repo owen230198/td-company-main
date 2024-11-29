@@ -74,16 +74,18 @@ class ReportController extends Controller
                 }
             )->map(function ($obj) use ($totalValue, $field, $table_map, $label, $value_label) {
                 $percent =  round(($obj->total_value / $totalValue) * 100, 5);
-                $obj->name = $obj->{$field} == 'other' ? 'Các '.$label.' khác' : getFieldDataById('name', $table_map, $obj->{$field});
-                $obj->name .= ' - '.$value_label.': '.number_format($obj->total_value).' Chiếm: '.$percent.'%';
+                $obj->sale_name = $obj->{$field} == 'other' ? 'Các '.$label.' khác' : getFieldDataById('name', $table_map, $obj->{$field});
+                $obj->percent = $percent;
+                $obj->name = $obj->sale_name.' - '.$value_label.': '.number_format($obj->total_value).' Chiếm: '.$percent.'%';
                 $obj->total_value = $obj->total_value;
                 return $obj;
             });
             $data['value_label'] = $value_label;
             $data['totalValue'] = number_format($totalValue);
             $data['nosidebar'] = 1;
-            $data['labels'] = $list_data->pluck('name')->toArray();
+            $data['labels'] = $list_data->pluck('sale_name')->toArray();
             $data['values'] = $list_data->pluck('total_value')->toArray();
+            $data['list_data'] = $list_data;
             return view('reports.charts.view', $data);
         }else{
             return customReturnMessage(false, $is_ajax, ['message' => 'Bạn không có quyền truy cập dữ liệu !']);
