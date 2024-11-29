@@ -2,7 +2,7 @@
   <ul class="sidebar_menu">
     <li>
       <a href="{{url('')}}">
-        Trang chủ
+        TRANG CHỦ
       </a>
     </li>
     @foreach ($group_modules as $key_group => $group)

@@ -29,18 +29,18 @@ class NGroupUser extends Model
 
     //group modules
     const GROUP_MODULE = [
-        'quote_price_config' => 'CÀI ĐẶT ĐƠN GIÁ',
-        'factory' => 'QUẢN LÝ NHÀ MÁY',
         'customer' => 'KHÁCH HÀNG',
         'customer_quote' => 'BÁO GIÁ - DUYỆT GIÁ',
-        'design_module' => 'LỆNH THIẾT KẾ',
         'order_handle' => 'ĐƠN HÀNG - TIẾN ĐỘ',
-        'supply_buying' => 'MUA VẬT TƯ',
+        'quote_price_config' => 'CÀI ĐẶT ĐƠN GIÁ',
+        'design_module' => 'LỆNH THIẾT KẾ',
         'profit' => '% HOA HỒNG',
+        'report' => 'BÁO CÁO - THỐNG KÊ',
+        'c_orders' => 'HÀNG SẴN CÔNG TY',
+        'factory' => 'QUẢN LÝ NHÀ MÁY',
+        'supply_buying' => 'MUA VẬT TƯ',
         'warehouse' => 'KHO VẬT TƯ',
         'product_warehouse' => 'KHO THÀNH PHẨM',
-        'c_orders' => 'HÀNG SẴN CÔNG TY',
-        'report' => 'BÁO CÁO - THỐNG KÊ',
         'handle_supply' => 'LỆNH XỬ LÝ VẬT TƯ',
         'account' => 'THÔNG TIN TÀI KHOẢN'
     ];
