@@ -67,6 +67,7 @@ class ReportController extends Controller
             $totalValue = $list_data->sum('total_value');
             $table_map = $field == 'created_by' ? 'n_users' : 'customers';
             $label = $field == 'created_by' ? 'kinh doanh' : 'khách hàng';
+            $data['title_object'] = $label;
             $value_label = $field == 'created_by' ? 'Doanh số' : 'Tổng đơn';
             $list_data = $list_data->filter(
                 function ($obj) {
@@ -74,16 +75,16 @@ class ReportController extends Controller
                 }
             )->map(function ($obj) use ($totalValue, $field, $table_map, $label, $value_label) {
                 $percent =  round(($obj->total_value / $totalValue) * 100, 5);
-                $obj->sale_name = $obj->{$field} == 'other' ? 'Các '.$label.' khác' : getFieldDataById('name', $table_map, $obj->{$field});
+                $obj->obj_name = $obj->{$field} == 'other' ? 'Các '.$label.' khác' : getFieldDataById('name', $table_map, $obj->{$field});
                 $obj->percent = $percent;
-                $obj->name = $obj->sale_name.' - '.$value_label.': '.number_format($obj->total_value).' Chiếm: '.$percent.'%';
+                $obj->name = $obj->obj_name.' - '.$value_label.': '.number_format($obj->total_value).' Chiếm: '.$percent.'%';
                 $obj->total_value = $obj->total_value;
                 return $obj;
             });
             $data['value_label'] = $value_label;
             $data['totalValue'] = number_format($totalValue);
             $data['nosidebar'] = 1;
-            $data['labels'] = $list_data->pluck('sale_name')->toArray();
+            $data['labels'] = $list_data->pluck('obj_name')->toArray();
             $data['values'] = $list_data->pluck('total_value')->toArray();
             $data['list_data'] = $list_data;
             return view('reports.charts.view', $data);

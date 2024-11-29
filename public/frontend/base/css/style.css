@@ -584,6 +584,10 @@ input[type="checkbox"].toggle {
     width: 44px;
 }
 
+.border_eb {
+    border: 1px solid #ebebeb;
+}
+
 .border_bot_eb {
     border-bottom: 1px solid #ebebeb;
 }

@@ -1,9 +1,39 @@
 @extends('index')
 @section('content')
     <div class="dashborad_content">
-        <div style="width: 75%; margin: auto;">
-            <p class="mb-4 text-center color_red font_bold fs-16">Tổng {{ $value_label. ': '. $totalValue }}đ</p>
-            <canvas id="orderChart"></canvas>
+        <div style="max-width:850px; margin: auto;">
+            <div class="p-2 border_eb radius_5 my-3">
+                <canvas id="orderChart"></canvas>
+            </div>
+            <div class="table_char">
+                <p class="fs-15 font_bold mb-3">Thời điểm tính toán thống kê: {{ date('d/m/Y', Time()) }}</p>
+                <table class="table table-bordered">
+                    <thead class="bg_green color_white">
+                        <tr>
+                            <th class="font_bold text-center">STT</th>
+                            <th class="font_bold text-center">Tên {{ $title_object }}</th>
+                            <th class="font_bold text-right">Doanh thu (VNĐ)</th>
+                            <th class="font_bold text-right">Tỉ lệ (%)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($list_data as $key => $item)
+                            <tr>
+                                <td>{{ $key + 1 }}</td>
+                                <td>{{ $item->obj_name }}</td>
+                                <td class="text-right">{{ number_format($item->total_value) }}</td>
+                                <td class="text-right">{{ number_format($item->percent) }}</td>
+                            </tr>   
+                        @endforeach
+                    </tbody>
+                    <tfoot>
+                        <tr class="bg_red color_white font_bold">
+                            <td colspan="3" class="text-right font_bold fs-16">{{ $totalValue }}</td>
+                            <td class="text-right">100</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
         </div>
     </div>
 @endsection
@@ -18,32 +48,19 @@
                 datasets: [{
                     data: @json($values),
                     backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)',
-                        'rgba(199, 199, 199, 0.2)',
-                        'rgba(83, 102, 255, 0.2)',
-                        'rgba(173, 255, 47, 0.2)',
-                        'rgba(138, 43, 226, 0.2)',
-                        'rgba(255, 165, 0, 0.2)'
+                        '#df0000',
+                        '#505093',
+                        '#f77f03',
+                        '#dddd00',
+                        'df5555',
+                        '506000',
+                        'f77f99',
+                        'dddd99',
+                        'df9999',
+                        '#ad00ad',
+                        '#02af02'
                     ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)',
-                        'rgba(199, 199, 199, 1)',
-                        'rgba(83, 102, 255, 1)',
-                        'rgba(173, 255, 47, 1)',
-                        'rgba(138, 43, 226, 1)',
-                        'rgba(255, 165, 0, 1)'
-                    ],
-                    borderWidth: 1
+                    borderWidth: 0
                 }]
             },
             options: {
@@ -52,7 +69,7 @@
                     display: true,
                     position: 'right',
                     labels: {
-                        fontSize: 15,
+                        fontSize: 12,
                         boxWidth: 10, // Kích thước hộp màu trong legend
                         padding: 15, // Khoảng cách giữa các item
                         generateLabels: function(chart) {
@@ -62,7 +79,6 @@
                                 // Tính phần trăm của giá trị
                                 let total = chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
                                 let percentage = ((value / total) * 100).toFixed(2);
-
                                 // Trả về cấu trúc tùy chỉnh, sử dụng \n để xuống dòng
                                 return {
                                     text: `${label} - Doanh số: ${value}đ - Chiếm: ${percentage}%`, // Hiển thị 1 lần
