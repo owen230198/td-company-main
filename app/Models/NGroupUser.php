@@ -29,20 +29,20 @@ class NGroupUser extends Model
 
     //group modules
     const GROUP_MODULE = [
-        'quote_price_config' => 'Cài đặt đơn giá SX',
-        'factory' => 'Quản lí nhà xưởng',
-        'customer' => 'Khách hàng & đối tác sx',
-        'customer_quote' => 'Báo giá & Khách hàng',
-        'design_module' => 'Thiết kế',
-        'order_handle' => 'Đơn hàng & sản xuất',
-        'supply_buying' => 'Mua vật tư',
-        'profit' => '% Hoa hồng',
-        'warehouse' => 'Kho vật tư',
-        'product_warehouse' => 'Kho thành phẩm',
-        'c_orders' => 'Bán hàng Cty có sẵn',
-        'report' => 'Báo cáo & thống kê',
-        'handle_supply' => 'Lệnh xử lí vật tư',
-        'account' => 'Thông tin tài khoản'
+        'quote_price_config' => 'CÀI ĐẶT ĐƠN GIÁ',
+        'factory' => 'QUẢN LÝ NHÀ MÁY',
+        'customer' => 'KHÁCH HÀNG',
+        'customer_quote' => 'BÁO GIÁ - DUYỆT GIÁ',
+        'design_module' => 'LỆNH THIẾT KẾ',
+        'order_handle' => 'ĐƠN HÀNG - TIẾN ĐỘ',
+        'supply_buying' => 'MUA VẬT TƯ',
+        'profit' => '% HOA HỒNG',
+        'warehouse' => 'KHO VẬT TƯ',
+        'product_warehouse' => 'KHO THÀNH PHẨM',
+        'c_orders' => 'HÀNG SẴN CÔNG TY',
+        'report' => 'BÁO CÁO - THỐNG KÊ',
+        'handle_supply' => 'LỆNH XỬ LÝ VẬT TƯ',
+        'account' => 'THÔNG TIN TÀI KHOẢN'
     ];
 
     //modules
