@@ -344,7 +344,8 @@ use Maatwebsite\Excel\Facades\Excel;
             if (!\GroupUser::isPlanHandle()) {
                 return returnMessageAjax(110, 'Bạn không có quyền duyệt sản xuất !');     
             }
-            if (@$obj_order->status != Order::TECH_SUBMITED) {
+            $ex_status = Order::TECH_SUBMITED;
+            if (@$obj_order->status != $ex_status) {
                 return returnMessageAjax(110, 'Dữ liệu không hợp lệ !');
             }
             $elenemt_checks = getProductElementData($obj_order->category, $obj_order->id, true, true);
@@ -352,7 +353,8 @@ use Maatwebsite\Excel\Facades\Excel;
                 if (!empty($elenemt_check['data'])) {
                     $check_data = $elenemt_check['data'];
                     foreach ($check_data as $supply_check) {
-                        if (getHandleSupplyStatus($supply_check->product, $supply_check->id, @$elenemt_check['pro_field']) != CSupply::HANDLED) {
+                        $c_status = getHandleSupplyStatus($supply_check->product, $supply_check->id, @$elenemt_check['pro_field']);
+                        if ($c_status != CSupply::HANDLED && $supply_check->status == $ex_status) {
                             return returnMessageAjax(100, 'Vật tư '.getSupplyNameByKey($elenemt_check['pro_field']).' vẫn chưa được kế toán duyệt xuất !');
                         }
                     }
@@ -397,7 +399,7 @@ use Maatwebsite\Excel\Facades\Excel;
             }
             $process = $this->services->createWorkerCommandForSupply($table, $supply);
             if ($process) {
-                $all_supply = Product::getAllSupply($product_id, ['id', 'status']);
+                $all_supply = Product::getAllSupply($product_id, ['id', 'status'], true);
                 $check_update = true;
                 foreach ($all_supply as $supp) {
                     if (@$supp->status == Order::TECH_SUBMITED) {

@@ -455,9 +455,12 @@
             }
         } 
 
-        static function getAllSupply($id, $select)
+        static function getAllSupply($id, $select, $check_handle_type = false)
         {
             $papers = Paper::select($select)->where('product', $id);
+            if ($check_handle_type) {
+                $papers->where('handle_type', \TDConst::MADE_BY_OWN);
+            }
             $supplies = Supply::select($select)->where('product', $id);
             $fill_finishes = FillFinish::select($select)->where('product', $id);
             return $papers->union($supplies)->union($fill_finishes)->get();

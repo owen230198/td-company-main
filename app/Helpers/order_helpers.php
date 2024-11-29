@@ -1,4 +1,7 @@
 <?php
+
+use App\Models\Product;
+
     if (!function_exists('getOrderNameStageByKey')) {
         function getOrderNameStageByKey($key)
         {
@@ -91,7 +94,7 @@
                         configCloneDataElementObj($data_obj, $item['table']);
                     }
                     if (!$exc_paper && $item['table'] =='papers') {
-                        $product_outside = \DB::table('products')->where('parent', $id)->get();
+                        $product_outside = Product::where('parent', $id)->get();
                         $ret[$key]['data'] = $product_outside->isNotEmpty() ? $data_obj->concat($product_outside) : $data_obj;
                     }else{
                         $ret[$key]['data'] = $data_obj;
