@@ -220,7 +220,7 @@ use Maatwebsite\Excel\Facades\Excel;
             if (\GroupUser::isPlanHandle()) {
                 $table = $request->input('table');
                 $id = $request->input('id');
-                $data_supply = \DB::table($table)->find($id);
+                $data_supply = getModelByTable($table)->find($id);
                 if (empty($data_supply)) {
                     return back()->with('error', 'Dữ liệu không hợp lệ !');
                 }
