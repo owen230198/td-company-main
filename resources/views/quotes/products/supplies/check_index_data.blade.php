@@ -1,6 +1,6 @@
 @if ((!empty($supply_obj->id)) || $supp_index > 0)
     @php
-        $supp_table = @!empty($supply_obj->getTable()) ? 'products' : @$supp_table;
+        $supp_table = !empty($supply_obj) && method_exists($supply_obj, 'getTable') && !empty($supply_obj->getTable()) ? $supply_obj->getTable() : @$supp_table;
     @endphp
     <span class="remove_ext_element_quote d-flex bg_red color_white red_btn smooth" data-id = "{{ @$supply_obj->id }}" 
         data-table="{{ $supp_table }}">
