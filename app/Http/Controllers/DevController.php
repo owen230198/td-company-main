@@ -841,6 +841,12 @@ class DevController extends Controller
             Product::where('id', $pack_pro->id)->update(['type' => '']);
         }
     }
+
+    public function orderInCOrderData($request)
+    {
+        $id = $request->id;
+        $order = Order::find($id);
+    }
     
 }
 

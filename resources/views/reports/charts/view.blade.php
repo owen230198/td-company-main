@@ -48,12 +48,12 @@
                 datasets: [{
                     data: @json($values),
                     backgroundColor: [
-                        '#df0000',
                         '#505093',
                         '#f77f03',
                         '#dddd00',
+                        '#df0000',
                         'df5555',
-                        '506000',
+                        '505555',
                         'f77f99',
                         'dddd99',
                         'df9999',
