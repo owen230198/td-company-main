@@ -27,6 +27,29 @@
             return returnMessageAjax(200, 'Đã cập nhật dữ liệu Người liên hệ cho khách hàng '. $data_customer->name, \StatusConst::RELOAD);
         }
 
+        private function validateRepresent($represents)
+        {
+            $table = 'represents';
+            foreach ($represents as $key => $represent) {
+                if (empty($represent['name'])) {
+                    $num = (int) $key + 1;
+                    $num = $num == 1 ? 'nhất' : $num;
+                    return returnMessageAjax(100, 'Bạn chưa nhập tên người liên hệ thứ '.$num.' !');
+                }
+
+                if (empty($represent['phone'])) {
+                    return returnMessageAjax(100, 'Bạn chưa nhập SĐT cho '.$represent['name'].' !');
+                }
+                if (empty($represent['email'])) {
+                    return returnMessageAjax(100, 'Bạn chưa nhập Email cho '.$represent['name'].' !');
+                }
+                $process = (new \BaseService())->processDataBefore($represent, $table);
+                if (@$process['code'] == 100) {
+                    return $process;
+                }
+            }
+        }
+
         private function processRepresent($represents, $cusomer_id)
         {
             $table = 'represents';
@@ -82,13 +105,17 @@
                 return view('action.view', $data);
             }else{
                 $data_customer = $request->except(['_token', 'represent']);
+                $data_represents = $request->input('represent');
+                $validate_represent = $this->validateRepresent($data_represents);
+                if (@$validate_represent['code'] == 100) {
+                    return returnMessageAjax(100, $validate_represent['message']);   
+                }
                 $proceess_customer = $this->admins->doInsertTable($table, $data_customer);
                 if ($proceess_customer['code'] == 200) {
                     logActionUserData(__FUNCTION__, $table, $proceess_customer['id'], $data_customer);
                 }else {
                     return returnMessageAjax(100, $proceess_customer['message']);
                 }
-                $data_represents = $request->input('represent');
                 $process_reprecent = $this->processRepresent($data_represents, $proceess_customer['id']);
                 if (@$process_reprecent['code'] == 100) {
                     return returnMessageAjax(100, $process_reprecent['message']);

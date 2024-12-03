@@ -298,7 +298,7 @@ var selectAjaxModule = function (section = $('.page_content ')) {
 }
 
 var phoneInputPrevent = function () {
-    $(document).on('keypress paste keydown', 'input[name*=phone]', function (event) {
+    $(document).on('keypress keydown', 'input[name*=phone]', function (event) {
         let key = event.charCode ? event.charCode : event.keyCode;
 
         // Cho phép các phím điều khiển như backspace (8), delete (46), và các phím mũi tên (37-40)
@@ -325,6 +325,20 @@ var phoneInputPrevent = function () {
         // Ngăn chặn các ký tự khác, bao gồm cả dấu chấm trên bàn phím số (110)
         event.preventDefault();
         return false;
+    });
+
+    $(document).on('paste', 'input[name*=phone]', function (event) {
+        event.preventDefault();
+        let clipboardData = event.originalEvent.clipboardData || window.clipboardData;
+        let pastedData = clipboardData.getData('text');
+        if (/^[a-zA-Z0-9]*$/.test(pastedData)) {
+            $(this).val(function (_, currentVal) {
+                return currentVal + pastedData;
+            });
+        } else {
+            swal('Số điện thoại không được phép chứa ký tự đặc biệt', data.message, 'error');
+            return false;
+        }
     });
 };
 

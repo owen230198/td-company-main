@@ -1,18 +1,24 @@
 <div class="mb-2 base_product_config">
     @php
         $pro_base_name_input = 'product['.$pro_index.']';
+        $read_only_by_status = !empty($product->status) && $product->status != \StatusConst::NOT_ACCEPTED;
+        $check_readonly = !empty($rework) || !empty($readonly_base) || $read_only_by_status;
         $arr_pro_field = [
             [
                 'name' => $pro_base_name_input.'[name]',
                 'note' => 'Tên sản phẩm',
-                'attr' => ['required' => 1, 'inject_class' => 'quote_set_product_name length_input', 'placeholder' => 'Nhập tên', 'readonly' => !empty($rework) || !empty($readonly_base)],
+                'attr' => [
+                    'required' => 1, 
+                    'inject_class' => 'quote_set_product_name length_input', 
+                    'placeholder' => 'Nhập tên', 'readonly' => $check_readonly
+                ],
                 'value' => !empty($product['id']) ? @$product['name'] : ''
             ],
             [
                 'name' => $pro_base_name_input.'[type]',
                 'note' => 'Loại hàng',
                 'type' => 'select',
-                'attr' => ['required' => 1, 'readonly' => !empty($rework) || !empty($readonly_base)],
+                'attr' => ['required' => 1, 'readonly' => $check_readonly],
                 'other_data' => [
                     'data' => ['options' => \TDConst::TYPE_PRODUCT_OPTIONS]
                 ],
@@ -21,13 +27,19 @@
             [
                 'name' => $pro_base_name_input.'[qty]',
                 'note' => 'Số lượng sản phẩm',
-                'attr' => ['type_input' => 'number', 'required' => 1, 'inject_class' => 'input_pro_qty __input_module_made_by_partner', 'placeholder' => 'Nhập số lượng', 'readonly' => !empty($readonly_base)],
+                'attr' => [
+                    'type_input' => 'number', 
+                    'required' => 1, 
+                    'inject_class' => 'input_pro_qty __input_module_made_by_partner', 
+                    'placeholder' => 'Nhập số lượng', 
+                    'readonly' => !empty($readonly_base) || $read_only_by_status
+                ],
                 'value' => @$product['qty']
             ],
         ];
         $note_product_field = [
             'name' => $pro_base_name_input.'[detail]',
-            'attr' => ['readonly' => !empty($rework) || !empty($readonly_base)],
+            'attr' => ['readonly' => $check_readonly],
             'type' => 'textarea',
             'note' => 'Ghi chú',
             'value' => @$product['detail']

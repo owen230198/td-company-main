@@ -40,6 +40,7 @@ class NGroupUser extends Model
         'factory' => 'QUẢN LÝ NHÀ MÁY',
         'supply_buying' => 'MUA VẬT TƯ',
         'warehouse' => 'KHO VẬT TƯ',
+        'receipt' => 'PHIẾU THU - CHI',
         'product_warehouse' => 'KHO THÀNH PHẨM',
         'handle_supply' => 'LỆNH XỬ LÝ VẬT TƯ',
         'account' => 'THÔNG TIN TÀI KHOẢN'
@@ -237,14 +238,19 @@ class NGroupUser extends Model
             'link' => 'view/base_receipts',
             'group' => 'product_warehouse'
         ],
-        'order_ready' => [
-            'name' => 'Phiếu bán hàng',
-            'link' => 'view/c_orders?type='.COrder::SELL,
-            'group' => 'c_orders'
+        'move_warehouse' => [
+            'name' => 'Đề xuất chi',
+            'link' => 'view/c_payments',
+            'group' => 'receipt'
         ],
         'insert_corder' => [
             'name' => 'Tạo phiếu bán hàng',
             'link' => 'insert/c_orders?type='.COrder::SELL,
+            'group' => 'c_orders'
+        ],
+        'order_ready' => [
+            'name' => 'Phiếu bán hàng',
+            'link' => 'view/c_orders?type='.COrder::SELL,
             'group' => 'c_orders'
         ],
         'warehouse_type' => [
