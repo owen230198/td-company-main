@@ -192,7 +192,7 @@
                         ProductHistory::doLogWarehouse($warehouse_id, $ex_qty, 0, 0, $product_id, $arr_log);
                         if ($ex_qty < $qty) {
                             $re_insert = $data_expertise->toArray();
-                            $re_insert['name'] = $data_expertise->name.' (Còn lại của lệnh)'.$data_expertise->code;
+                            $re_insert['name'] = $data_expertise->name;
                             $re_insert['qty'] = $qty - $ex_qty;
                             $re_insert['status'] = \StatusConst::NOT_ACCEPTED;
                             unset($re_insert['id']);
