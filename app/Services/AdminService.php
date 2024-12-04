@@ -179,7 +179,7 @@ class AdminService extends BaseService
                         $product_obj->where('height', $value['height']);
                     }
                     if (!empty($value['length']) || !empty($value['width']) || !empty($value['height'])) {
-                        $key_pluck = !empty($other_data['data']['key_pluck']) ? $other_data['data']['key_pluck'] : 'quote_id';
+                        $key_pluck = !empty($other_data['data']['key_pluck']) ? $other_data['data']['key_pluck'] : 'id';
                         $arr_id = $product_obj->pluck($key_pluck)->all();
                         $where[] = ['key' => 'id', 'compare' => 'in', 'value' => array_unique($arr_id)];
                     }
