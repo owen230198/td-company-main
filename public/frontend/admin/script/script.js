@@ -336,7 +336,7 @@ var phoneInputPrevent = function () {
                 return currentVal + pastedData;
             });
         } else {
-            swal('Số điện thoại không được phép chứa ký tự đặc biệt', data.message, 'error');
+            swal('Không thành công', 'Số điện thoại không được phép chứa ký tự đặc biệt', 'error');
             return false;
         }
     });
