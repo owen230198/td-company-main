@@ -330,7 +330,7 @@ var phoneInputPrevent = function () {
     $(document).on('paste', 'input[name*=phone]', function (event) {
         event.preventDefault();
         let clipboardData = event.originalEvent.clipboardData || window.clipboardData;
-        let pastedData = clipboardData.getData('text');
+        let pastedData = clipboardData.getData('text').trim();
         if (/^[a-zA-Z0-9]*$/.test(pastedData)) {
             $(this).val(function (_, currentVal) {
                 return currentVal + pastedData;
