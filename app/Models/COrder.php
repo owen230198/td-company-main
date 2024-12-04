@@ -216,7 +216,6 @@ class COrder extends Model
             ],
             \GroupUser::ACCOUNTING => [
                 'view' => 1,
-                'insert' => 1,
                 'update' => 
                 [
                     'with' => [[

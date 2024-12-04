@@ -216,7 +216,13 @@ if (!function_exists('getBoolByCondArr')) {
                     break;
                 }
             }else{
-                if (@$cond['con'] == 'or' && @$data[$cond['key']] == $cond['value']) {
+                $compare = @$cond['compare'] ?? 'equal';
+                if ($compare == 'equal') {
+                    $bool_cmp = @$data[$cond['key']] == $cond['value'];
+                }else{
+                    $bool_cmp = @$data[$cond['key']] != $cond['value'];    
+                }
+                if (@$cond['con'] == 'or' && $bool_cmp) {
                     return true;
                     break;   
                 }

@@ -697,6 +697,51 @@ var selectTypeSuppWarehouse = function () {
     }
 }
 
+var getUrlLinkingCPaymentObject = function (type) {
+    if (empty(type)) {
+        return '';
+    }
+    let table = '';
+    if (type == 'order') {
+        table = 'customers';
+    } else if (type == 'supplier') {
+        table = 'warehouse_providers';
+    } else if (type == 'partner') {
+        table = 'partners';
+    }
+    url = getBaseRoute('get-data-json-linking?&table=' + table + '&field_search=name');
+    return url;
+}
+
+var changeSelectTypePaymentReqTrigger = function(select, reset_input = 0)
+{
+    let parent = select.closest('.__module_select_type_payment_require');
+    let value = select.val();
+    let url = getUrlLinkingCPaymentObject(value);
+    let select_size = parent.find('select.__pm_select_object');
+    select_size.data('url', url);
+    if (reset_input == 1) {
+        select_size.val('');
+        select_size.data('id', '');
+        select_size.data('label', '');
+    }
+    initInputModuleAfterAjax(parent);
+}
+
+var selectTypePaymentRequire = function () {
+    let select_type_c_supp = $('select.__select_type_c_payment');
+    $(document).on('change', 'select.__select_type_c_payment', function (event) {
+        event.preventDefault();
+        changeSelectTypePaymentReqTrigger($(this), 1)
+    });
+
+    if (select_type_c_supp.length > 0) {
+        select_type_c_supp.each(function () {
+            changeSelectTypePaymentReqTrigger($(this))   
+        })
+    }
+}
+
 var selectTypeWorker = function () {
     $(document).on('change', 'select.__worker_select_type', function (event) {
         event.preventDefault();
@@ -1610,6 +1655,7 @@ $(function () {
     confirmTakeOutSupply();
     moduleSelectAjaxChild();
     selectTypeSuppWarehouse();
+    selectTypePaymentRequire();
     selectTypeWorker();
     passwordChangeInput();
     moduleSelectStyleProduct();

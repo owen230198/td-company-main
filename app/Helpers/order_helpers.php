@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\CPayment;
+use App\Models\Customer;
 use App\Models\Product;
 
     if (!function_exists('getOrderNameStageByKey')) {
@@ -260,6 +262,29 @@ use App\Models\Product;
             }
             $type = !empty($param->supp_type) ? $param->supp_type : '';
             return tableWarehouseByType($type);
+        }
+    }
+
+    if (!function_exists('getTablePaymentByReceiptType')) {
+        function getTablePaymentByReceiptType($param = new \stdClass)
+        {
+            if (empty($param->type)) {
+                return '';
+            }
+            switch ($param->type) {
+                case CPayment::ORDER:
+                    return 'customers';
+                    break;
+                case CPayment::SUPPLIER:
+                    return 'warehouse_providers';
+                    break;
+                case CPayment::PARTNER:
+                    return 'partners';
+                    break;
+                default:
+                    return '';
+                    break;
+            }
         }
     }
 

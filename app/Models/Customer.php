@@ -64,7 +64,6 @@ class Customer extends Model
                     ]
             ],
             \GroupUser::ACCOUNTING => [
-                'insert' => 1,
                 'view' => 1,
             ],
         ];

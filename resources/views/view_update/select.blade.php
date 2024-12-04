@@ -10,7 +10,7 @@
 	{{ @$select_config['searchbox'] == 1 ? ' select_config' : '' }}
 	{{ @$attr['inject_class'] ? ' '.$attr['inject_class'] : '' }}
 	{{ @$attr['class_on_search'] ? ' '.$attr['class_on_search'] : '' }}" 
-	{{ @$attr['disable_field'] == 1 ? 'disabled' : '' }}
+	{{ @$attr['disable_field'] == 1 && empty($is_search) ? 'disabled' : '' }}
 	{{ @$attr['readonly'] == 1 || (@$attr['readonly'] == 2 && !empty($value) && empty($is_search)) ? 'readonly' : '' }}
 	{{ @$attr['placeholder'] ? 'placehoder='.$attr['placeholder'] : '' }} 
 	{{ @$attr['inject_attr'] ?? '' }}

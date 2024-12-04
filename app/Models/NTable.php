@@ -27,7 +27,6 @@ class NTable extends Model
                             'supply_buyings',
                             'c_supplies',
                             'c_orders',
-                            'c_payments'
                         ],
                         'update' => [
                             'customers',
@@ -43,7 +42,6 @@ class NTable extends Model
                             'supply_buyings',
                             'c_supplies',
                             'c_orders',
-                            'c_payments'
                         ],
                         'copy' => [
                             'quotes', 
@@ -57,7 +55,6 @@ class NTable extends Model
                             'supply_buyings',
                             'c_expertises',
                             'c_orders',
-                            'c_payments'
                         ],
                         'remove' => [
                             'customers',
