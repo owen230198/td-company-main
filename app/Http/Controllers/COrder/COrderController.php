@@ -43,17 +43,11 @@
                 if (empty($data['object'])) {
                     return returnMessageAjax(100, 'Bạn cần thêm thành phẩm cho chứng từ !');
                 }
-                $check_douplicate = [];
                 foreach ($data['object'] as $key => $object) {
                     $temp_name = 'mặt hàng '.$key + 1;
                     if (empty($object['id'])) {
                         return returnMessageAjax(100, 'Bạn chưa chọn thành phẩm cho '.$temp_name.' !');
                     }
-                    $obj_id = $object['id'];
-                    if (in_array($obj_id, $check_douplicate)) {
-                        return returnMessageAjax(100, getFieldDataById('name', 'product_warehouses', $obj_id).' đã được chọn trước đó !');
-                    }
-                    $check_douplicate[] = $obj_id;
                     $validate = COrder::validateArrObject($object, $temp_name);
                     if (@$validate['code'] == 100) {
                         return $validate;

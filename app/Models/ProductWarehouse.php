@@ -24,6 +24,24 @@ class ProductWarehouse extends Model
         return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];
     }
 
+    static function getLabelLinking($data)
+    {
+        $ret = '';
+        // if (!empty($data->warehouse_type)) {
+        //     $ret.= getFieldDataById('name', 'supply_extends', $data->warehouse_type);
+        // }
+        if (!empty($data->name)) {
+            $ret .= ' - '.$data->name;
+        }
+        if (!empty($data->qty)) {
+            $ret .= ' - Tồn kho : '.$data->qty;
+        }else{
+            $ret .= ' (đã hết)';
+        }
+        
+        return $ret;
+    }
+
     static function getDataJsonLinking($products, $q)
     {
         if (!empty($q)) {
