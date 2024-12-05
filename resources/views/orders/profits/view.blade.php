@@ -4,10 +4,8 @@
 @endsection
 @section('content')
     <div class="position-relative">
-        @if (\GroupUser::isAdmin())
-            <h3 class="fs-14 text-uppercase mb-3 handle_title">I. Chi tiết chi phí sản xuất</h3>
-            @include('quotes.profits.cost_detail')
-        @endif
+        <h3 class="fs-14 text-uppercase mb-3 handle_title">I. Chi tiết chi phí sản xuất</h3>
+        @include('quotes.profits.cost_detail')
         <form class="config_content">
             <h3 class="fs-14 text-uppercase border_top_eb pt-3 mt-3 handle_title">II. Chi phí vận chuyển & lợi nhuận sản phẩm</h3>
             <table class="table table-bordered mb-1 quote_table_profit my-4">

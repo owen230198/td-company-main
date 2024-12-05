@@ -4,10 +4,8 @@
 @endsection
 @section('content')
     <div class="position-relative">
-        @if (\GroupUser::isAdmin())
-            <h3 class="fs-14 text-uppercase mb-3 handle_title">I. Chi tiết chi phí sản xuất</h3>
-            @include('quotes.profits.cost_detail')
-        @endif
+        <h3 class="fs-14 text-uppercase mb-3 handle_title">I. Chi tiết chi phí sản xuất</h3>
+        @include('quotes.profits.cost_detail')
         <form action="{{ asset('profit-config-quote?quote_id=' . $data_quote['id']) }}" method="POST"
             class="baseAjaxForm config_content" enctype="multipart/form-data">
             @csrf

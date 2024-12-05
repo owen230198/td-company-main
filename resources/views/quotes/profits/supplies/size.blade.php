@@ -43,16 +43,18 @@
     @php
         convertCmToMeter($size['length'], $size['width'])
     @endphp
-    <p class="fs-15 color_green mb-2 font_bold">Công Thức Tính</p>
-    <div class="formula_item d-flex align-items-center color_brown mb-1">
-        <p class="formula_name font_bold">Chi phí vật tư:</p>
-        <div class="formula_content d-flex align-items-center">
-            <p class="formula_param mx-2">
-                Dài x Rộng x ĐG x (SL vật tư + BH) {{ !empty($size['prescript_price']) ? ' + (Phát sinh vật tư cao cấp x SL vật tư)' : '' }}
-            </p>
-            <p class="font_bold formula_result mr-2"> = {{ $size['length'] }} x {{ $size['width'] }} x {{ $stage['qttv_price'] }} x {{ $stage['supp_qty'] }} {{ !empty($size['prescript_price']) ? ' + ('.$stage['prescript_price'].' x '. $stage['supp_qty'].')' : '' }}</p>
-            <p class="font_bold formula_result"> = {{ number_format($stage['total']) }}đ</p>
+    @if (\GroupUser::isAdmin())
+        <p class="fs-15 color_green mb-2 font_bold">Công Thức Tính</p>
+        <div class="formula_item d-flex align-items-center color_brown mb-1">
+            <p class="formula_name font_bold">Chi phí vật tư:</p>
+            <div class="formula_content d-flex align-items-center">
+                <p class="formula_param mx-2">
+                    Dài x Rộng x ĐG x (SL vật tư + BH) {{ !empty($size['prescript_price']) ? ' + (Phát sinh vật tư cao cấp x SL vật tư)' : '' }}
+                </p>
+                <p class="font_bold formula_result mr-2"> = {{ $size['length'] }} x {{ $size['width'] }} x {{ $stage['qttv_price'] }} x {{ $stage['supp_qty'] }} {{ !empty($size['prescript_price']) ? ' + ('.$stage['prescript_price'].' x '. $stage['supp_qty'].')' : '' }}</p>
+                <p class="font_bold formula_result"> = {{ number_format($stage['total']) }}đ</p>
+            </div>
         </div>
-    </div>
+    @endif
     <p class="fs-15 color_red font_bold">Tổng chi phí cho vật tư: {{ number_format($stage['total']) }}đ</p>       
 </div>
