@@ -153,12 +153,20 @@ class AdminService extends BaseService
                 }elseif ($type == 'group_product') {
                     if (!empty($value['group'])) {
                         if (!empty($other_data['field_pluck'])) {
-                            $product_obj = \DB::table('products')->where(['category' => $value['group']]);
-                            if (!empty($value['style'])) {
-                                $product_obj->where('product_style', $value['style']);
+                            $field_pluck = $other_data['field_pluck'];
+                            if ($field_pluck == 'id') {
+                                $where[] = ['key' => 'category', 'value' => $value['group']];
+                                if (!empty($value['style'])) {
+                                    $where[] = ['key' => 'product_style', 'value' => $value['style']];
+                                }   
+                            }else{
+                                $product_obj = \DB::table('products')->where(['category' => $value['group']]);
+                                if (!empty($value['style'])) {
+                                    $product_obj->where('product_style', $value['style']);
+                                }
+                                $arr_id = $product_obj->pluck($field_pluck)->all();
+                                $where[] = ['key' => 'id', 'compare' => 'in', 'value' => array_unique($arr_id)];
                             }
-                            $arr_id = $product_obj->pluck($other_data['field_pluck'])->all();
-                            $where[] = ['key' => 'id', 'compare' => 'in', 'value' => array_unique($arr_id)];
                         }else{
                             $where[] = ['key' => 'category', 'value' => $value['group']];
                             if (!empty($value['style'])) {

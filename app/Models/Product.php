@@ -77,7 +77,7 @@
         static function getFeildFileByStage($stage, $data)
         {
             $arr_fields = self::FEILD_FILE;
-            if ((\GroupUser::isSale() && @$stage == Order::NOT_ACCEPTED) || empty($stage)) {
+            if ((\GroupUser::isSale() && (@$stage == Order::NOT_ACCEPTED) || empty($stage))) {
                 return @$data['design'] == 5 ? [
                     'custom_design_file' => $arr_fields['custom_design_file']
                 ] : [];   

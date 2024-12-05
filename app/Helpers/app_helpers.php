@@ -73,7 +73,7 @@ if (! function_exists('getDetailDataObject')) {
 if (! function_exists('getObjectDataByWhere')) {
     function getObjectDataByWhere($table, $where)
     {
-        return \DB::table($table)->where($where);
+        return getModelByTable($table)->where($where);
     }
 }
 

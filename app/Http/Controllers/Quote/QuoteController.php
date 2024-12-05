@@ -6,6 +6,7 @@ use App\Models\Quote;
 use App\Constants\TDConstant;
 use App\Models\Product;
 use \App\Models\Customer;
+use App\Models\Order;
 use App\Models\Represent;
 
 class QuoteController extends Controller
@@ -361,6 +362,32 @@ class QuoteController extends Controller
             $html .= '<option value="'.$value.'">'.$note.'</option>';
         }
         echo $html;
+    }
+
+    public function searchPattern(Request $request)
+    {
+        if (\GroupUser::isAdmin() 
+        || \GroupUser::isSale() 
+        || \GroupUser::isTechApply() 
+        || \GroupUser::isDesign() 
+        || \GroupUSer::isTechHandle()) {
+            $data = $this->services->getBaseTableSearchPattern();
+            $request = $request->all();
+            $arr = $request;
+            $data['data_search'] = $request;
+            $where = [];
+            foreach ($arr as $field_name => $field_value) {
+                $conditions = $this->admins->getConditionTable('products', $field_name, $field_value);
+                if (!empty($conditions)) {
+                    foreach ($conditions as $condition) {
+                        $where[] = $condition;
+                    }
+                }
+            }
+            $where[] = ['key' => 'status', 'compare' => '!=', 'value' => NULL];
+            $data['list_data'] = getDataTable('products', $where, ['paginate' => 10, 'order' => 'width', 'order_by' => 'desc']);
+            return view('patterns.view', $data);
+        }
     }
 
     public function suggestProductSubmitedBySize(Request $request)

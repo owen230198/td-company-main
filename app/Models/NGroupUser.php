@@ -30,6 +30,7 @@ class NGroupUser extends Model
     //group modules
     const GROUP_MODULE = [
         'customer' => 'KHÁCH HÀNG',
+        'shape_file' => 'KHUÔN SẢN PHẨM',
         'customer_quote' => 'BÁO GIÁ - DUYỆT GIÁ',
         'order_handle' => 'ĐƠN HÀNG - TIẾN ĐỘ',
         'quote_price_config' => 'CÀI ĐẶT ĐƠN GIÁ',
@@ -97,6 +98,11 @@ class NGroupUser extends Model
             'name' => 'DS đối tác sx',
             'link' => 'view/partners?default_data=%7B%22internal%22%3A%220%22%7D',
             'group' => 'customer'
+        ],
+        'find_shape' => [
+            'name' => 'Tìm khuôn sx',
+            'link' => 'search-pattern',
+            'group' => 'shape_file'
         ],
         'create_quote' => [
             'name' => 'Tính giá',
@@ -298,6 +304,7 @@ class NGroupUser extends Model
             self::SALE => [
                 self::MODULE['customer_list'],
                 self::MODULE['represent_list'],
+                self::MODULE['find_shape'],
                 self::MODULE['create_quote'],
                 self::MODULE['quote_management'],
                 self::MODULE['quote_not_accepted'],

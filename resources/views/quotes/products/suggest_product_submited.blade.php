@@ -1,4 +1,4 @@
-@if ($list_data->isEmpty())
+@if (empty($list_data))
     <p class="fs-15 font-italic color_red text-center mb-3">Chưa có sản phẩm cùng kích thước khuôn đã sản xuất !</p>
 @else
     <div class="table_base_view position-relative mb-3">
@@ -11,7 +11,10 @@
                     <th class="font-bold fs-13">Kích thước</th>  
                     <th class="font-bold fs-13">Phụ trách</th> 
                     <th class="font-bold fs-13">File khuôn (kinh doanh)</th> 
-                    <th class="font-bold fs-13">File khuôn (kỹ thuật)</th>     
+                    <th class="font-bold fs-13">File khuôn (kỹ thuật)</th> 
+                    @if (\App\Models\Product::canViewFile())
+                        
+                    @endif    
                 </tr>
             </theader>
             <tbody>

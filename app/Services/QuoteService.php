@@ -4,7 +4,9 @@ use App\Services\BaseService;
 use App\Models\Customer;
 use App\Models\Product;
 use App\Constants\TDConstant;
+use App\Models\NDetailTable;
 use App\Models\NGroupUser;
+use App\Models\Order;
 use App\Models\Quote;
 use App\Models\Represent;
 use PhpOffice\PhpWord\TemplateProcessor;
@@ -308,5 +310,38 @@ class QuoteService extends BaseService
         $fileStorage = public_path('words/quotes/'.$fileName);
         $templateProcessor->saveAs($fileStorage);
         return response()->download($fileStorage);
+    }
+
+    public function getBaseTableSearchPattern()
+    {
+        $list =  NDetailTable::where(['act' => 1, 'table_map'=> 'products'])->orderBy('ord', 'asc')->get()->pluck(NULL, 'name');
+        $list_search = [
+            $list['category'],
+            $list['size'],
+            $list['name'],
+            $list['created_by'],
+        ];
+        NDetailTable::handleField($list_search,'search');
+        $other_data_stt_field = [
+            'data' => [
+                'options' => [
+                    '' => 'Chọn trạng thái',
+                    \StatusConst::ACCEPTED => 'Đã có khuôn kỹ thuật',
+                    Order::DESIGN_SUBMITED => 'Đã có file thiết kế',
+                    Order::TECH_SUBMITED => 'Đã có đủ khuôn'
+                ]
+            ]
+        ];
+        $field_status = [
+            'name' => 'status',
+            'note' => 'Trạng thái',
+            'type' => 'select',
+            'other_data' => json_encode($other_data_stt_field)
+        ];
+        // $list_search[] = $field_status;
+        $data['field_searchs'] = $list_search;
+        $data['title'] = 'Tìm kiếm khuôn sản xuất';
+        $data['link_search'] = url('search-pattern');
+        return $data;
     }
 }
