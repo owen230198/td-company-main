@@ -62,6 +62,9 @@ if (! function_exists('getDetailDataByID')) {
 if (! function_exists('getDetailDataObject')) {
     function getDetailDataObject($table, $id)
     {
+        if (empty($id)) {
+            return null;
+        }
         $data = \DB::table($table)->find($id);
         return $data;
     }

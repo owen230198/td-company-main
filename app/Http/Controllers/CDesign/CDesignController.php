@@ -24,6 +24,7 @@
                 $data['data_order'] = Order::find($arr_command['order']);
                 $product = Product::where('id', $arr_command['product'])->first();
                 $data['products'][0] = $product;
+                $data['product_obj'] = $product;
                 $data['data_paper'] = Paper::where(['product' => $product['id']])->get();
                 $data['data_command'] = $arr_command;
                 $data['id'] = $id;

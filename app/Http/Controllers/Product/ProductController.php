@@ -4,8 +4,8 @@
     use App\Models\AfterPrint;
     use App\Models\CExpertise;
     use App\Models\COrder;
-use App\Models\CProduct;
-use App\Models\CRework;
+    use App\Models\CProduct;
+    use App\Models\CRework;
     use App\Models\Order;
     use App\Models\Paper;
     use App\Models\Product;
@@ -33,6 +33,7 @@ use App\Models\CRework;
                 $data['link_action'] = url('update/products/'.$id);
                 $data['id'] = $id;
                 $data['stage'] = $product['status'];
+                $data['product_obj'] = $product;
                 $group_user = \GroupUser::getCurrent();
                 if ($group_user == \GroupUser::PLAN_HANDLE) {
                     $data['elements'] = getProductElementData($product['category'], $product['id'], true, true, true);
