@@ -365,10 +365,12 @@ class QuoteController extends Controller
 
     public function suggestProductSubmitedBySize(Request $request)
     {
-        $arr_where['status'] = \StatusConst::SUBMITED;
+        $arr_where['status'] = \StatusConst::IMPORTED;
         $arr_where['category'] = !empty($request->input('category')) ? $request->input('category') : '';
         $arr_where['length'] = !empty($request->input('length')) ? $request->input('length') : 0;
-        $arr_where['width'] = !empty($request->input('width')) ? $request->input('width') : 0;
+        if (!empty($request->input('width'))) {
+            $arr_where['width'] = $request->input('width');
+        }
         $arr_where['height'] = !empty($request->input('height')) ? $request->input('height') : 0;
         $obj = \DB::table('products')->where($arr_where);
         $style = @$request->input('style');

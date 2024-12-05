@@ -358,9 +358,9 @@ var suggestShapeFileBySize = function () {
     let timeout;
     $(document).on('keyup', 'input.__size_suggest_input', function (event) {
         event.preventDefault();
+        let module = $(this).closest('.config_handle_paper_pro');
         clearTimeout(timeout);
         timeout = setTimeout(function () {
-            let module = $(this).closest('.config_handle_paper_pro');
             let category = module.find('select.__category_product').val();
             let style = module.find('select.__style_product').val();
             let length = module.find('input.__length_input').val();
