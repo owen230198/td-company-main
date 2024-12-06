@@ -1,4 +1,4 @@
-@if (empty($list_data))
+@if ($list_data->isEmpty())
     <p class="fs-15 font-italic color_red text-center mb-3">Chưa có sản phẩm cùng kích thước khuôn đã sản xuất !</p>
 @else
     @php
