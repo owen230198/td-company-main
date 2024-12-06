@@ -319,7 +319,6 @@ class NGroupUser extends Model
                 self::MODULE['change_password'],
             ],
             self::TECH_APPLY => [
-                self::MODULE['worker_salary'],
                 self::MODULE['handle_process'],
                 self::MODULE['join_print'],
                 self::MODULE['account'],
@@ -333,7 +332,6 @@ class NGroupUser extends Model
                 self::MODULE['change_password'],
             ],
             self::TECH_HANDLE => [
-                self::MODULE['worker_salary'],
                 self::MODULE['handle_process'],
                 self::MODULE['join_print'],
                 self::MODULE['account'],

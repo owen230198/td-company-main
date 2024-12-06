@@ -12,7 +12,7 @@
                     <th class="font-bold fs-13">Phụ trách</th> 
                     <th class="font-bold fs-13">File khuôn (kinh doanh)</th> 
                     <th class="font-bold fs-13">File khuôn (kỹ thuật)</th> 
-                    @if (\App\Models\Product::canViewFile())
+                    @if (\App\Models\Product::canViewTechFile())
                         
                     @endif    
                 </tr>

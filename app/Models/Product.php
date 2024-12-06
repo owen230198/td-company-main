@@ -139,6 +139,11 @@
                 }
             }
         }
+
+        static function canViewTechFile()
+        {
+            return \GroupUser::isTecAdmin() || \GroupUser::isDesigner(); \GroupUser::isTechApply() || \GroupUser::isTechHandle();
+        }
         
         static function getRole()
         {
