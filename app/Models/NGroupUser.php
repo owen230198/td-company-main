@@ -319,6 +319,7 @@ class NGroupUser extends Model
                 self::MODULE['change_password'],
             ],
             self::TECH_APPLY => [
+                self::MODULE['find_shape'],
                 self::MODULE['handle_process'],
                 self::MODULE['join_print'],
                 self::MODULE['account'],
