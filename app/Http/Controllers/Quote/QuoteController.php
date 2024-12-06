@@ -36,13 +36,13 @@ class QuoteController extends Controller
         if (!empty($quote)) {
             $represent = Represent::find($quote->represent);
             $is_post = $request->isMethod('POST');
-            if (empty($represent)) {
-                return customReturnMessage(false, $is_post, ['message' => 'Người liên hệ không tồn tại hoặc đã bị xóa !']);
-            }
+            // if (empty($represent)) {
+            //     return customReturnMessage(false, $is_post, ['message' => 'Người liên hệ không tồn tại hoặc đã bị xóa !']);
+            // }
             $customer = Customer::find($quote->customer);
-            if (empty($customer)) {
-                return customReturnMessage(false, $is_post, ['message' => 'Công ty không tồn tại hoặc đã bị xóa !']);
-            }
+            // if (empty($customer)) {
+            //     return customReturnMessage(false, $is_post, ['message' => 'Công ty không tồn tại hoặc đã bị xóa !']);
+            // }
             if($is_post){
                 if ($step == 'chose_customer') {
                     return $this->services->selectCustomerUpdateQuote($request, $id);
@@ -61,7 +61,7 @@ class QuoteController extends Controller
             }else{
                 if ($step == 'chose_customer') {
                     $data['represent'] = $represent;
-                    $data['represents'] = Represent::where('customer', $customer->id)->get();
+                    $data['represents'] = Represent::where('customer', @$customer->id)->get();
                     $data['customer_fields'] = Customer::FIELD_UPDATE;
                     $data['customer'] = $customer;
                     $data['represent_fields'] = Represent::FIELD_UPDATE;
@@ -147,6 +147,32 @@ class QuoteController extends Controller
         }
     }
 
+    public function createByProduct(Request $request)
+    {
+        $product_id = (int) $request->input('id');
+        $data_product = Product::where('id', $product_id)->get();
+        $hidden_fields = \StatusConst::HIDDEN_CLONE_FIELD;
+        $data_products = $data_product->makeHidden($hidden_fields)->toArray();
+        if (empty($data_product)) {
+            return back()->with('error', 'Sản phẩm không tồn tại hoặc đã bị xóa !');
+        }
+        $product_obj = $data_product->first();
+        $insert_quote = [
+            'status' => \StatusConst::NOT_ACCEPTED,
+            'ship_price' => $product_obj->ship_price,
+            'profit' => $product_obj->profit,
+            'total_cost' => $product_obj->total_cost,
+            'base_total' => $product_obj->base_total,
+            'total_amount' => $product_obj->total_amount
+        ];
+        (new \BaseService)->configBaseDataAction($insert_quote);
+        $quote_id = Quote::insertGetId($insert_quote);
+        logActionUserData('insert', 'quotes', $quote_id);
+        Quote::where('id', $quote_id)->update(['seri' => 'BG-'.sprintf("%08s", $quote_id)]);
+        Product::handleCloneData($data_products, $quote_id, 'quote_id', false);
+        return redirect('update/quotes/'.$quote_id)->with('message', 'Sao chép dữ liệu thành công !');
+        
+    }
 
     public function getViewCustomerData(Request $request)
     {
@@ -372,7 +398,7 @@ class QuoteController extends Controller
         || \GroupUser::isDesign() 
         || \GroupUSer::isTechHandle()) {
             $data = $this->services->getBaseTableSearchPattern();
-            $request = $request->all();
+            $request = $request->except('page');
             $arr = $request;
             $data['data_search'] = $request;
             $where = [];
@@ -385,6 +411,7 @@ class QuoteController extends Controller
                 }
             }
             $where[] = ['key' => 'status', 'compare' => '!=', 'value' => NULL];
+            $where[] = ['key' => 'status', 'compare' => '!=', 'value' => ''];
             $data['list_data'] = getDataTable('products', $where, ['paginate' => 10, 'order' => 'width', 'order_by' => 'desc']);
             return view('patterns.view', $data);
         }

@@ -142,7 +142,7 @@
 
         static function canViewTechFile()
         {
-            return \GroupUser::isTecAdmin() || \GroupUser::isDesigner(); \GroupUser::isTechApply() || \GroupUser::isTechHandle();
+            return \GroupUser::isAdmin() || \GroupUser::isDesign(); \GroupUser::isTechApply() || \GroupUser::isTechHandle();
         }
         
         static function getRole()

@@ -148,10 +148,12 @@ if (!function_exists('handleQueryCondition')) {
                             $value = \Carbon\Carbon::now()->year;
                             break;
                         default:
-                            $value = @$w['value'];
+                            $value = @$value;
                             break;
                     }
                     $query->whereMonth($w['key'], $value);
+                }elseif (@$w['compare'] == 'between') {
+                    $query->whereBetween($w['key'], $value);
                 }else{
                     if (@$w['con'] == 'or') {
                         $query->orWhere($w['key'], $compare, $value);

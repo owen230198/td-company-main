@@ -1,11 +1,10 @@
 <?php
     namespace App\Constants;
 
-use App\Models\COrder;
-use \App\Models\Order;
+    use App\Models\COrder;
+    use \App\Models\Order;
     use \App\Models\CSupply;
     use App\Models\SupplyBuying;
-    use App\Models\SupplyWarehouse;
 
     class OrderConstant
     {
@@ -68,7 +67,7 @@ use \App\Models\Order;
                 'text' => 'Băng lề vật tư',
                 'condition' => ['status' => \StatusConst::WAITING],
                 'link' => 'view/supply_warehouses?default_data=%7B"status"%3A"'.\StatusConst::WAITING.'"%7D',
-                'group_user' => [\GroupUser::ADMIN, \GroupUser::TECH_HANDLE, \GroupUser::PLAN_HANDLE, \GroupUser::WAREHOUSE, \GroupUser::ACCOUNTING]  
+                'group_user' => [\GroupUser::ADMIN, \GroupUser::PLAN_HANDLE, \GroupUser::WAREHOUSE, \GroupUser::ACCOUNTING]  
             ],
             [
                 'icon' => 'imsupp', 
@@ -76,7 +75,7 @@ use \App\Models\Order;
                 'text' => 'Băng lề giấy in',
                 'condition' => ['status' => \StatusConst::WAITING],
                 'link' => 'view/print_warehouses?default_data=%7B"status"%3A"'.\StatusConst::WAITING.'"%7D',
-                'group_user' => [\GroupUser::ADMIN, \GroupUser::TECH_HANDLE, \GroupUser::PLAN_HANDLE, \GroupUser::WAREHOUSE, \GroupUser::ACCOUNTING]  
+                'group_user' => [\GroupUser::ADMIN, \GroupUser::PLAN_HANDLE, \GroupUser::WAREHOUSE, \GroupUser::ACCOUNTING]  
             ],
             [
                 'icon' => 'contact', 

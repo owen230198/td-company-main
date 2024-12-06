@@ -176,18 +176,37 @@ class AdminService extends BaseService
                         
                     }
                 }elseif ($type == 'product_size') {
+                    $key_pluck = !empty($other_data['data']['key_pluck']) ? $other_data['data']['key_pluck'] : 'id';
+                    $pluck_id = $key_pluck == 'id';
                     $product_obj = \DB::table('products');
                     if (!empty($value['length'])) {
-                        $product_obj->where('length', $value['length']);
+                        $length = (float) $value['length'];
+                        $arr_bw = [$length - 3, $length + 3];
+                        if ($pluck_id) {
+                            $where[] = ['key' => 'length', 'compare' => 'between', 'value' => $arr_bw];   
+                        }else{
+                            $product_obj->whereBetween('length', $arr_bw);
+                        }
                     }
                     if (!empty($value['width'])) {
-                        $product_obj->where('width', $value['width']);
+                        $width = (float) $value['width'];
+                        $arr_bw = [$width - 3, $width + 3];
+                        if ($pluck_id) {
+                            $where[] = ['key' => 'width', 'compare' => 'between', 'value' => $arr_bw];   
+                        }else{
+                            $product_obj->whereBetween('width', $arr_bw);
+                        }
                     }
                     if (!empty($value['height'])) {
-                        $product_obj->where('height', $value['height']);
+                        $height = (float) $value['height'];
+                        $arr_bw = [$height - 3, $height + 3];
+                        if ($pluck_id) {
+                            $where[] = ['key' => 'height', 'compare' => 'between', 'value' => $arr_bw];   
+                        }else{
+                            $product_obj->whereBetween('height', $arr_bw);
+                        }
                     }
-                    if (!empty($value['length']) || !empty($value['width']) || !empty($value['height'])) {
-                        $key_pluck = !empty($other_data['data']['key_pluck']) ? $other_data['data']['key_pluck'] : 'id';
+                    if ((!empty($value['length']) || !empty($value['width']) || !empty($value['height'])) && !$pluck_id) {
                         $arr_id = $product_obj->pluck($key_pluck)->all();
                         $where[] = ['key' => 'id', 'compare' => 'in', 'value' => array_unique($arr_id)];
                     }

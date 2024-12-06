@@ -73,7 +73,8 @@ Route::middleware(['check_login'])->group(function () {
 	Route::get('export-data-debt/{table}', [AdminController::class, 'exportDataDebt']);
 
 	//quotes routes
-	Route::any('search-pattern', [QuoteController::class, 'searchPattern']);
+	Route::get('search-pattern', [QuoteController::class, 'searchPattern']);
+	Route::get('create-quote-by-products', [QuoteController::class, 'createByProduct']);
 	Route::any('create-quote', [QuoteController::class, 'createQuote']);
 	Route::get('get-view-customer-data', [QuoteController::class, 'getViewCustomerData']);
 	Route::get('get-view-product-quantity', [QuoteController::class, 'getViewProductQuantity']);
