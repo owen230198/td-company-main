@@ -27,7 +27,7 @@
                 'text' => 'Lệnh thiết kế', 
                 'condition' => ['status' => Order::NOT_ACCEPTED],
                 'link' => 'view/c_designs?default_data=%7B"status"%3A"'.Order::NOT_ACCEPTED.'"%7D',
-                'group_user' => [\GroupUser::ADMIN, \GroupUser::SALE, \GroupUser::TECH_APPLY, \GroupUser::DESIGN]
+                'group_user' => [\GroupUser::ADMIN, \GroupUser::TECH_APPLY, \GroupUser::DESIGN]
             ],
             [
                 'icon' => 'tech', 
@@ -35,7 +35,7 @@
                 'text' => 'Xử lí kỹ thuật', 
                 'condition' => ['status' => Order::DESIGN_SUBMITED],
                 'link' => 'view/products?default_data=%7B"status"%3A"'.Order::DESIGN_SUBMITED.'"%7D',
-                'group_user' => [\GroupUser::ADMIN, \GroupUser::SALE, \GroupUser::TECH_APPLY, \GroupUser::DESIGN, \GroupUser::TECH_HANDLE]  
+                'group_user' => [\GroupUser::ADMIN, \GroupUser::TECH_APPLY, \GroupUser::DESIGN, \GroupUser::TECH_HANDLE]  
             ],
             [
                 'icon' => 'print_join', 
@@ -123,7 +123,7 @@
                 'text' => 'KCS thành phẩm',
                 'condition' => ['status' => \StatusConst::PROCESSING],
                 'link' => 'view/c_products?default_data=%7B"status"%3A"'.\StatusConst::PROCESSING.'"%7D',
-                'group_user' => [\GroupUser::ADMIN, \GroupUser::SALE, \GroupUser::KCS, \GroupUser::PRODUCT_WAREHOUSE]  
+                'group_user' => [\GroupUser::ADMIN, \GroupUser::KCS, \GroupUser::PRODUCT_WAREHOUSE]  
             ],
             [
                 'icon' => 'rework', 
