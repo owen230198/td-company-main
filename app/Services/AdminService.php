@@ -181,7 +181,7 @@ class AdminService extends BaseService
                     $product_obj = \DB::table('products');
                     if (!empty($value['length'])) {
                         $length = (float) $value['length'];
-                        $arr_bw = [$length - 3, $length + 3];
+                        $arr_bw = [$length - 0.4, $length + 0.4];
                         if ($pluck_id) {
                             $where[] = ['key' => 'length', 'compare' => 'between', 'value' => $arr_bw];   
                         }else{
@@ -190,7 +190,7 @@ class AdminService extends BaseService
                     }
                     if (!empty($value['width'])) {
                         $width = (float) $value['width'];
-                        $arr_bw = [$width - 3, $width + 3];
+                        $arr_bw = [$width - 0.4, $width + 0.4];
                         if ($pluck_id) {
                             $where[] = ['key' => 'width', 'compare' => 'between', 'value' => $arr_bw];   
                         }else{
@@ -199,7 +199,7 @@ class AdminService extends BaseService
                     }
                     if (!empty($value['height'])) {
                         $height = (float) $value['height'];
-                        $arr_bw = [$height - 3, $height + 3];
+                        $arr_bw = [$height - 0.4, $height + 0.4];
                         if ($pluck_id) {
                             $where[] = ['key' => 'height', 'compare' => 'between', 'value' => $arr_bw];   
                         }else{
