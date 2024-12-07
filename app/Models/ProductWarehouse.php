@@ -31,14 +31,13 @@ class ProductWarehouse extends Model
         //     $ret.= getFieldDataById('name', 'supply_extends', $data->warehouse_type);
         // }
         if (!empty($data->name)) {
-            $ret .= ' - '.$data->name;
+            $ret .= $data->name;
         }
         if (!empty($data->qty)) {
             $ret .= ' - Tồn kho : '.$data->qty;
         }else{
             $ret .= ' (đã hết)';
         }
-        
         return $ret;
     }
 
@@ -53,7 +52,7 @@ class ProductWarehouse extends Model
         }
         $data = $products->paginate(50)->all();
         $arr = array_map(function($item){
-            return ['id' => @$item->id, 'label' => getFieldDataById('name', 'supply_extends', $item->warehouse_type).' - '.$item->name];
+            return ['id' => @$item->id, 'label' => getFieldDataById('name', 'supply_extends', $item->warehouse_type).' - '.self::getLabelLinking($item)];
         }, $data);
         return json_encode($arr);
     }
