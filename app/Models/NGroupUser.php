@@ -115,7 +115,7 @@ class NGroupUser extends Model
             'link' => 'view/products?default_data=%7B%22status%22%3A%22'.\StatusConst::NOT_ACCEPTED.'%22%7D',
             'group' => 'tech_module'
         ],
-        'tech_need_adesign' => [
+        'tech_need_design' => [
             'name' => 'DS thiết kế',
             'link' => 'view/c_designs?default_data=%7B%22status%22%3A%22'.\StatusConst::NOT_ACCEPTED.'%22%7D',
             'group' => 'tech_module'
