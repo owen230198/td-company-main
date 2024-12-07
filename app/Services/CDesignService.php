@@ -18,6 +18,7 @@
             if (count($data) == 0) {
                 return returnMessageAjax(100, 'Không có dữ liệu đc cập nhật!');
             }
+            $data[0]['status'] = Order::DESIGNING;
             $process_product = $this->quote_services->processProduct($data[0], \TDConst::ORDER_ACTION_FLOW);
             if (!empty($process_product['code']) && $process_product['code'] == 100) {
                 return $process_product;
