@@ -10,6 +10,7 @@
             <theader>
                 <tr>
                     <th class="font-bold fs-13 text-center parentth">#</th>
+                    <th class="font-bold fs-13 text-center parentth">Khách hàng</th>
                     <th class="font-bold fs-13 text-center parentth">Tên</th>
                     <th class="font-bold fs-13 text-center parentth">Nhóm sản phẩm</th> 
                     <th class="font-bold fs-13 text-center parentth">Kích thước</th> 
@@ -29,6 +30,10 @@
                 @foreach ($list_data as $key => $data)
                     <tr>
                         <td>{{ $key + 1 }}</td>
+                        @php
+                            $order = getDetailDataObject('orders', $data->order);
+                        @endphp
+                        <td>{{ getFieldDataById('name', 'customers', @$order->customer) }}</td>
                         <td>{{ $data->name }}</td>
                         <td>
                             {{ getFieldDataById('name', 'product_categories', $data->category) . ' - ' .  getFieldDataById('name', 'product_styles', $data->product_style) }}
