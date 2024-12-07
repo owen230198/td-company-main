@@ -14,6 +14,11 @@ class NUser extends Model
     protected $table = 'n_users';
     protected $protectFields = false;
     static $table_group = 'n_group_users';
+
+    const ROLE_TECH_APPLY = 'apply_design';
+    const ROLE_TECH_DESIGN = 'design';
+    const ROLE_TECH_HANDLE = 'tech_handle';
+
     static function getCurrent($field = '')
     {
         $user_login = !empty(session('user_login')['user']) ? session('user_login')['user'] : [];
@@ -23,5 +28,10 @@ class NUser extends Model
     static function getSupplyRole(){
         $user = getDetailDataByID('NUser', self::getCurrent('id'));
         return !empty($user['supply_role']) ? json_decode($user['supply_role'], true) : [];
+    }
+
+    static function getExtRole(){
+        $user = getDetailDataByID('NUser', self::getCurrent('id'));
+        return !empty($user['ext_role']) ? json_decode($user['ext_role'], true) : [];
     }
 }

@@ -33,6 +33,7 @@ class NGroupUser extends Model
         'shape_file' => 'KHUÔN SẢN PHẨM',
         'customer_quote' => 'BÁO GIÁ - DUYỆT GIÁ',
         'order_handle' => 'ĐƠN HÀNG - TIẾN ĐỘ',
+        'tech_module' => 'KỸ THUẬT - SẢN XUẤT',
         'quote_price_config' => 'CÀI ĐẶT ĐƠN GIÁ',
         'design_module' => 'LỆNH THIẾT KẾ',
         'profit' => '% HOA HỒNG',
@@ -103,6 +104,26 @@ class NGroupUser extends Model
             'name' => 'Tìm khuôn sx',
             'link' => 'search-pattern',
             'group' => 'shape_file'
+        ],
+        'role_tech' => [
+            'name' => 'Phân quyền kỹ thuật',
+            'link' => 'view/n_users?default_data=%7B%22group_user%22%3A%22'.self::TECH_APPLY.'%22%7D',
+            'group' => 'tech_module'
+        ],
+        'tech_need_accp' => [
+            'name' => 'DS duyệt thiết kế',
+            'link' => 'view/products?default_data=%7B%22status%22%3A%22'.\StatusConst::NOT_ACCEPTED.'%22%7D',
+            'group' => 'tech_module'
+        ],
+        'tech_need_adesign' => [
+            'name' => 'DS thiết kế',
+            'link' => 'view/c_designs?default_data=%7B%22status%22%3A%22'.\StatusConst::NOT_ACCEPTED.'%22%7D',
+            'group' => 'tech_module'
+        ],
+        'tech_need_handle' => [
+            'name' => 'DS xử lí kỹ thuật',
+            'link' => 'view/products?default_data=%7B%22status%22%3A%22'.Order::DESIGN_SUBMITED.'%22%7D',
+            'group' => 'tech_module'
         ],
         'create_quote' => [
             'name' => 'Tính giá',
@@ -305,6 +326,9 @@ class NGroupUser extends Model
                 self::MODULE['customer_list'],
                 self::MODULE['represent_list'],
                 self::MODULE['find_shape'],
+                self::MODULE['tech_need_accp'],
+                self::MODULE['tech_need_design'],
+                self::MODULE['tech_need_handle'],
                 self::MODULE['create_quote'],
                 self::MODULE['quote_management'],
                 self::MODULE['quote_not_accepted'],
@@ -321,6 +345,9 @@ class NGroupUser extends Model
             self::TECH_APPLY => [
                 self::MODULE['find_shape'],
                 self::MODULE['handle_process'],
+                self::MODULE['design_not_accepted'],
+                self::MODULE['designing_command'],
+                self::MODULE['design_submited'],
                 self::MODULE['join_print'],
                 self::MODULE['account'],
                 self::MODULE['change_password'],
@@ -466,6 +493,13 @@ class NGroupUser extends Model
     {
         $user = \App\Models\NUser::getCurrent();
         return @$user['group_user'];
+    }
+
+    static function checkExtRoleAction($action){
+        if (self::isAdmin()) {
+            return true;
+        }
+        return self::isTechApply() && in_array($action, \User::getExtRole());
     }
 
     static function isAdmin($group_user = 0)

@@ -83,10 +83,10 @@ class QuoteService extends BaseService
                 if (NGroupUser::isSale() && empty($data['custom_design_file']) && $data['design'] == 5) {
                     return returnMessageAjax(100, 'Bạn chưa upload file thiết kế của khách hàng cho sản phẩm '. $data['name']);
                 }
-                if (NGroupUser::isTechApply() && empty($data['tech_shape_file'])) {
+                if (\GroupUser::checkExtRoleAction(\User::ROLE_TECH_DESIGN) && empty($data['tech_shape_file'])) {
                     return returnMessageAjax(100, 'Bạn chưa upload file khuôn sản xuất cho sản phẩm '. $data['name']);
                 }
-                if (NGroupUser::isDesign()) {
+                if (\GroupUser::checkExtRoleAction(\User::ROLE_TECH_DESIGN) || NGroupUser::isDesign()) {
                     if (empty($data['design_file'])) {
                         return returnMessageAjax(100, 'Bạn chưa upload file thiết kế cho sản phẩm '. $data['name']);
                     }

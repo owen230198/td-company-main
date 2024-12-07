@@ -184,16 +184,7 @@
                                 ]
                             ],
                         ],
-                    'update' => 
-                        [
-                            'with' => [[
-                                'type' => 'group',
-                                'query' => [
-                                    ['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED],
-                                    ['con' => 'or', 'key' => 'order_created', 'value' => 1]
-                                ]
-                            ]]
-                        ]
+                    'update' => \GroupUser::checkExtRoleAction(\User::ROLE_TECH_APPLY) || \GroupUser::checkExtRoleAction(\User::ROLE_TECH_HANDLE) ? 1 : 0,
                 ],
                 \GroupUser::TECH_HANDLE => [
                     'view' => 

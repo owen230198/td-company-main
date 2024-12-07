@@ -9,12 +9,11 @@
         protected $guarded = [];
         const PROCESSING = Order::DESIGNING;
         const GR_USER = \GroupUser::DESIGN;
-        static function getRole()
-        {
-            $role = [
-                \GroupUser::DESIGN => [
-                    'view' => 
-                    [
+
+        static function getRoleForGroupDesign($action){
+            switch ($action) {
+                case 'view':
+                    return [
                         'with' => [
                             'type' => 'group',
                             'query' => 
@@ -43,17 +42,32 @@
                                 ]
                             ]
                         ]
-                    ],
-                    'update' => [
+                    ];
+                    break;
+                case 'update':
+                    return [
                         'with' => 
-                            [
-                                ['key' => 'status', 'value' => Order::DESIGNING],
-                                ['key' => 'assign_by', 'value' => \User::getCurrent('id')]
-                            ]
-                    ]
+                        [
+                            ['key' => 'status', 'value' => Order::DESIGNING],
+                            ['key' => 'assign_by', 'value' => \User::getCurrent('id')]
+                        ]
+                    ];
+                    break;
+                default:
+                    return [];
+                    break;
+            }    
+        }
+        static function getRole()
+        {
+            $role = [
+                \GroupUser::DESIGN => [
+                    'view' =>  self::getRoleForGroupDesign('view'),
+                    'update' => self::getRoleForGroupDesign('update'),
                 ],
                 \GroupUser::TECH_APPLY => [
-                    'view' => 1
+                    'view' => \GroupUser::checkExtRoleAction(\User::ROLE_TECH_DESIGN) ? self::getRoleForGroupDesign('view') : 0,
+                    'update' => \GroupUser::checkExtRoleAction(\User::ROLE_TECH_DESIGN) ? self::getRoleForGroupDesign('update') : 0,
                 ]
             ];
             return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];

@@ -1,21 +1,19 @@
 <?php
     namespace App\Http\Controllers\Order;
     use App\Http\Controllers\Controller;
-use App\Http\Controllers\CSupply\CSupplyController;
-use App\Imports\ImportOrder;
-use App\Models\COrder;
-use App\Models\CSupply;
-use App\Models\Customer;
-use Illuminate\Http\Request;
+    use App\Imports\ImportOrder;
+    use App\Models\COrder;
+    use App\Models\CSupply;
+    use App\Models\Customer;
+    use Illuminate\Http\Request;
     use App\Models\Order;
     use App\Models\Quote;
     use App\Models\Product;
-use App\Models\ProductWarehouse;
-use App\Models\Represent;
-use App\Models\WarehouseHistory;
-use App\Models\WSalary;
-use Carbon\Carbon;
-use Maatwebsite\Excel\Facades\Excel;
+    use App\Models\ProductWarehouse;
+    use App\Models\Represent;
+    use App\Models\WarehouseHistory;
+    use App\Models\WSalary;
+    use Maatwebsite\Excel\Facades\Excel;
 
     class OrderController extends Controller
     {
@@ -106,7 +104,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
         public function applyToDesign($data, $base_obj, $order_obj, $type_ref)
         {
-            if (\GroupUser::isTechApply() || \GroupUser::isAdmin()) {
+            if (\GroupUser::checkExtRoleAction(\User::ROLE_TECH_APPLY)) {
                 if (@$base_obj->status != \StatusConst::NOT_ACCEPTED) {
                     return returnMessageAjax(100, 'Lỗi không xác định !');
                 }
@@ -131,7 +129,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
         public function applyToHandlePlan($data, $base_obj, $order_obj, $type_ref)
         {
-            if (\GroupUser::isTechHandle() || \GroupUser::isAdmin()) {
+            if (\GroupUser::checkExtRoleAction(\User::ROLE_TECH_HANDLE)) {
                 if (@$base_obj->status != Order::DESIGN_SUBMITED) {
                     returnMessageAjax(100, 'Dữ liệu không hợp lệ !');
                 }
@@ -195,7 +193,7 @@ use Maatwebsite\Excel\Facades\Excel;
                 }
                 return returnMessageAjax(100, $msg.' !');
             }
-            if (\GroupUser::isAdmin() || \GroupUser::getCurrent() == $model::GR_USER) {
+            if (\GroupUser::checkExtRoleAction(\User::ROLE_TECH_DESIGN)) {
                 $processing_status = $model::PROCESSING;
                 $itemLog = $command->replicate();
                 $process = $command->update(['assign_by' => \User::getCurrent('id'), 'status' => $processing_status]);
