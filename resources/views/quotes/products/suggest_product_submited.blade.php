@@ -14,6 +14,9 @@
                     <th class="font-bold fs-13 text-center parentth">Tên</th>
                     <th class="font-bold fs-13 text-center parentth">Nhóm sản phẩm</th> 
                     <th class="font-bold fs-13 text-center parentth">Kích thước</th> 
+                    @if ($isSale)
+                        <th class="font-bold fs-13 text-center parentth">Số lượng</th> 
+                    @endif
                     <th class="font-bold fs-13 text-center parentth">File khuôn (kinh doanh)</th> 
                     <th class="font-bold fs-13 text-center parentth">File khuôn (kỹ thuật)</th> 
                     @if ($viewTechFile)
@@ -39,6 +42,7 @@
                             {{ getFieldDataById('name', 'product_categories', $data->category) . ' - ' .  getFieldDataById('name', 'product_styles', $data->product_style) }}
                         </td>
                         <td>{{ getSizeTitleProduct($data) }}</td>
+                        <td>{{ $data->qty }}</td>
                         <td>
                             @include('view_table.file', ['value' => $data->sale_shape_file])
                         </td>

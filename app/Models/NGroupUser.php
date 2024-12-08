@@ -30,7 +30,7 @@ class NGroupUser extends Model
     //group modules
     const GROUP_MODULE = [
         'customer' => 'KHÁCH HÀNG',
-        'shape_file' => 'KHUÔN SẢN PHẨM',
+        'shape_file' => 'TÌM KHUÔN SẢN PHẨM',
         'customer_quote' => 'BÁO GIÁ - DUYỆT GIÁ',
         'order_handle' => 'ĐƠN HÀNG - TIẾN ĐỘ',
         'tech_module' => 'KỸ THUẬT - SẢN XUẤT',
@@ -101,7 +101,7 @@ class NGroupUser extends Model
             'group' => 'customer'
         ],
         'find_shape' => [
-            'name' => 'Tìm khuôn sx',
+            'name' => 'Tìm khuôn đã sản xuất',
             'link' => 'search-pattern',
             'group' => 'shape_file'
         ],
