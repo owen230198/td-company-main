@@ -30,7 +30,7 @@ class NGroupUser extends Model
     //group modules
     const GROUP_MODULE = [
         'customer' => 'KHÁCH HÀNG',
-        'shape_file' => 'KHUÔN SẢN PHẨM',
+        'shape_file' => 'TÌM KHUÔN SẢN PHẨM',
         'customer_quote' => 'BÁO GIÁ - DUYỆT GIÁ',
         'order_handle' => 'ĐƠN HÀNG - TIẾN ĐỘ',
         'tech_module' => 'KỸ THUẬT - SẢN XUẤT',
@@ -101,7 +101,7 @@ class NGroupUser extends Model
             'group' => 'customer'
         ],
         'find_shape' => [
-            'name' => 'Tìm khuôn sx',
+            'name' => 'Tìm khuôn đã sản xuất',
             'link' => 'search-pattern',
             'group' => 'shape_file'
         ],
@@ -325,14 +325,11 @@ class NGroupUser extends Model
             self::SALE => [
                 self::MODULE['customer_list'],
                 self::MODULE['represent_list'],
-                self::MODULE['find_shape'],
-                self::MODULE['tech_need_accp'],
-                self::MODULE['tech_need_design'],
-                self::MODULE['tech_need_handle'],
                 self::MODULE['create_quote'],
                 self::MODULE['quote_management'],
                 self::MODULE['quote_not_accepted'],
                 self::MODULE['quote_accepted'],
+                self::MODULE['find_shape'],
                 self::MODULE['order_process'],
                 self::MODULE['handle_process'],
                 self::MODULE['product_management'],
@@ -344,6 +341,9 @@ class NGroupUser extends Model
             ],
             self::TECH_APPLY => [
                 self::MODULE['find_shape'],
+                self::MODULE['tech_need_accp'],
+                self::MODULE['tech_need_design'],
+                self::MODULE['tech_need_handle'],
                 self::MODULE['handle_process'],
                 self::MODULE['design_not_accepted'],
                 self::MODULE['designing_command'],

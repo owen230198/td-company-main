@@ -229,7 +229,7 @@
         public function productRequireRework(Request $request, $id)
         {
             $is_post = $request->isMethod('POST');
-            if (\GroupUser::isAdmin() || \GroupUser::Sale()) {
+            if (\GroupUser::isAdmin() || \GroupUser::isSale()) {
                 $obj = CRework::find($id);
                 if (empty($obj) || @$obj->status != \StatusConst::NOT_ACCEPTED || @$obj->rework_status != Product::NEED_REWORK) {
                     return customReturnMessage(false, $is_post, ['message' => 'Dữ liệu không hợp lệ !']);
@@ -249,6 +249,7 @@
                     $product_obj->name = $product_obj->name;
                     $product_obj->qty = '';
                     $product_obj->design = 4;
+                    $product_obj->status = '';
                     $data['product'] = $product_obj;
                     $data['data_rework'] = $obj;
                     $data['cate'] = $product_obj->category;

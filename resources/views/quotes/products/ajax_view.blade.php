@@ -3,16 +3,12 @@
     @foreach ($products as $pro_index => $product)
         <div class="tab-pane fade{{ $pro_index == 0 ? ' show active' : '' }} tab_pane_quote_pro" id="quote-pro-{{ $pro_index }}" role="tabpanel" aria-labelledby="quote-pro-{{ $pro_index }}-tab">
             <div class="config_handle_paper_pro">
-                @include('products.base_field')
-                <div class="ajax_product_view_by_category">
-                    
-                </div>
                 @if (!empty($product['id']))
                     <input type="hidden" name="product[{{ $pro_index }}][id]" value="{{ $product['id'] }}">
                     <input type="hidden" name="product[{{ $pro_index }}][ship_price]" value="{{ $product['ship_price'] }}">
                     <input type="hidden" name="product[{{ $pro_index }}][profit]" value="{{ $product['profit'] }}">
                     @if (empty($not_detail))
-                        <div class="text-center">
+                        <div class="mb-3">
                             <button type="button" 
                             class="main_button color_white bg_green border_green radius_5 font_bold smooth show_config_handle_quote"
                             proindex = {{ $pro_index }} data-proid = {{ $product['id'] }} data-category = {{ @$product['category'] }}>
@@ -22,6 +18,11 @@
                         </div>    
                     @endif
                 @endif
+                @include('products.base_field')
+                <div class="ajax_product_view_by_category">
+                    
+                </div>
+                
             </div>
             @if (!empty($product['id']))
                 @php
