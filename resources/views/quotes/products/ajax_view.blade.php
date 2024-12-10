@@ -8,9 +8,9 @@
                     <input type="hidden" name="product[{{ $pro_index }}][ship_price]" value="{{ $product['ship_price'] }}">
                     <input type="hidden" name="product[{{ $pro_index }}][profit]" value="{{ $product['profit'] }}">
                     @if (empty($not_detail))
-                        <div class="mb-3">
+                        <div class="mb-3 text-center">
                             <button type="button" 
-                            class="main_button color_white bg_green border_green radius_5 font_bold smooth show_config_handle_quote"
+                            class="main_button color_white bg_red border_red red_btn radius_5 font_bold smooth show_config_handle_quote"
                             proindex = {{ $pro_index }} data-proid = {{ $product['id'] }} data-category = {{ @$product['category'] }}>
                                 <i class="fa fa-angle-double-down fs-14 mr-2" aria-hidden="true"></i>
                                 <span>Xem chi tiết sản xuất</span>

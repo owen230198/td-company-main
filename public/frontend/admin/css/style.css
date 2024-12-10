@@ -142,6 +142,10 @@ select.muptiple_select option {
     border: 1px solid #459300;
 }
 
+.border_red {
+    border: 1px solid #ff0000;
+}
+
 .sidebar>ul>li.active>a,
 .sidebar li>ul>li.active>a {
     background: #65d303;
