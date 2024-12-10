@@ -13,10 +13,12 @@
             @php
                 $icon = getIconByStageHandle(@$data_stage['act']);
             @endphp
-            <li class="px-3 py-2 mr-2 mb-2 bg_white color_main color_{{ $icon['color'] }} box_shadow_3 radius_5">
-                <i class="fa fa-{{ $icon['icon'] }} mr-1" aria-hidden="true"></i>
-                {{ $device }}    
-            </li>   
+            @if (@$icon['color'] != 'red')
+                <li class="px-3 py-2 mr-2 mb-2 bg_white color_main color_{{ $icon['color'] }} box_shadow_3 radius_5">
+                    <i class="fa fa-{{ $icon['icon'] }} mr-1" aria-hidden="true"></i>
+                    {{ $device }}    
+                </li>    
+            @endif
         @endif
     @endforeach 
 </ul> 

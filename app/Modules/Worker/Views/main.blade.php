@@ -9,7 +9,7 @@
                 </h3>   
             </div> 
             <form action="{{ url()->current() }}" method="GET" class="mt-3 mb-4 form_search position-relative">
-                <input type="text" name="q" value={{ @$q }}>
+                <input type="text" name="q" value="{{ @$q }}" placeholder="Nhập mã lệnh hoặc tên sản phẩm">
                 <button type="submit" disabled class="main_button color_white bg_green border_green radius_5 font_bold smooth">
                     <i class="fa fa-search fs-14" aria-hidden="true"></i>
                 </button>

@@ -18,7 +18,9 @@
             $obj = $this->services->getListDataHome($worker);
             $q = trim($request->input('q'));
             if ($q != '') {
-                $obj = $obj->where('command', 'like', '%'.$q.'%');
+                $obj->where(function ($obj) use ($q) {
+                    $obj->orWhere('name', 'like', '%'.$q.'%')->orWhere('command', 'like', '%'.$q.'%');
+                });
                 $data['q'] = $q;
             }
             $data['list_data'] = $obj->paginate(20);
