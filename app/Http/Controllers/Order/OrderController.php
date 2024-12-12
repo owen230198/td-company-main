@@ -108,6 +108,7 @@
                 if (@$base_obj->status != \StatusConst::NOT_ACCEPTED) {
                     return returnMessageAjax(100, 'Lỗi không xác định !');
                 }
+                $data['product'][0]['status'] = \StatusConst::NOT_ACCEPTED;
                 $product_process = $this->quote_services->processDataProduct($data, $order_obj, $type_ref);
                 if (!empty($product_process['code']) && $product_process['code'] == 100) {
                     return returnMessageAjax(100, $product_process['message']);  
