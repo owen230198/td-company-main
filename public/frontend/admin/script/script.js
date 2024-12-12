@@ -1355,6 +1355,10 @@ var selectTypeCOrder = function()
         if (!empty(represent)) {
             url += '&represent=' + represent    
         }
+        let order = where_module.find('input.__hidden_order').val();
+        if (!empty(order)) {
+            url += '&order=' + order    
+        }
         let target = module.find('.__ajax_view_c_order_by_type');
         ajaxViewTarget(url, target, target);
         rest_input = module.find('input.__selling_advance_input');

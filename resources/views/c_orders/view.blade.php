@@ -15,6 +15,9 @@
                             $arr['attr']['readonly'] = $name == 'type' && !empty($value)  ? 1 : $check_readonly;
                         @endphp
                         @include('view_update.view', $arr)
+                        @if (!empty($dataItem['order']))
+                            <input type="hidden" value="{{ $dataItem['order'] }}" class="__hidden_order">
+                        @endif
                     @endforeach
                 </div>
                 <div class="__ajax_view_c_order_by_type">

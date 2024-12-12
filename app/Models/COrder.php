@@ -114,9 +114,9 @@ class COrder extends Model
         return $product;
     }
 
-    static function getFieldOrdered($data)
+    static function getFieldOrdered($data, $no_cond = false)
     {
-        $where = ['status' => \StatusConst::IMPORTED];
+        $where = [];
         if (!empty($data['customer'])) {
             $where['customer'] = $data['customer'];
         }
@@ -124,7 +124,9 @@ class COrder extends Model
         if (!empty($data['represent'])) {
             $where['represent'] = $data['represent'];
         }
-
+        if (!$no_cond) {
+            $where['status'] = \StatusConst::IMPORTED;
+        }
         return [
             'name' => 'order',
             'note' => 'Chọn đơn khách đã đặt sản xuất',
@@ -155,6 +157,8 @@ class COrder extends Model
                 return $fields;
                 break;
             case self::ADVANCE:
+                $order_field = self::getFieldOrdered($where, true);
+                $order_field['note'] = 'Đơn hàng tạm ứng';
                 return [
                     $order_field,
                     $fields['advance'],

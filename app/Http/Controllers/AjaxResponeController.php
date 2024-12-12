@@ -80,6 +80,9 @@ class AjaxResponeController extends Controller
         if (empty($data['fields'])) {
             return '';
         }
+        if (!empty($where['order'])) {
+            $data['dataItem']['order'] = $where['order'];
+        }
         return view('c_orders.view_types.ajax', $data);
     }
 
