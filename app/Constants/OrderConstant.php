@@ -149,6 +149,14 @@
                 'link' => 'view/c_orders?default_data=%7B"status"%3A"'.\StatusConst::NOT_ACCEPTED.'","type"%3A"'.COrder::SELL.'"%7D',
                 'group_user' => [\GroupUser::ADMIN, \GroupUser::KCS, \GroupUser::PRODUCT_WAREHOUSE, \GroupUser::ACCOUNTING]  
             ],
+            [
+                'icon' => 'c_payment', 
+                'table' => 'c_payments', 
+                'text' => 'Đề xuất chi',
+                'condition' => ['status' => \StatusConst::PROCESSING],
+                'link' => 'view/c_payments?default_data=%7B"status"%3A"'.\StatusConst::PROCESSING.'"%7D',
+                'group_user' => [\GroupUser::ADMIN, \GroupUser::ACCOUNTING]  
+            ]
         ];
 
         //Kiểu đơn

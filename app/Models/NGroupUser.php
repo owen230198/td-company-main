@@ -42,7 +42,7 @@ class NGroupUser extends Model
         'factory' => 'QUẢN LÝ NHÀ MÁY',
         'supply_buying' => 'MUA VẬT TƯ',
         'warehouse' => 'KHO VẬT TƯ',
-        'receipt' => 'PHIẾU THU - CHI',
+        'receipt' => 'ĐỀ XUẤT CHI',
         'product_warehouse' => 'KHO THÀNH PHẨM',
         'handle_supply' => 'LỆNH XỬ LÝ VẬT TƯ',
         'account' => 'THÔNG TIN TÀI KHOẢN'
@@ -266,7 +266,7 @@ class NGroupUser extends Model
             'group' => 'product_warehouse'
         ],
         'move_warehouse' => [
-            'name' => 'Đề xuất chi',
+            'name' => 'DS đề xuất chi',
             'link' => 'view/c_payments',
             'group' => 'receipt'
         ],

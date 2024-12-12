@@ -15,6 +15,11 @@ class CPayment extends Model
 
     static function getInsertCode($id)
     {
-        Customer::where(['id' => $id])->update(['code' => 'PCH-'.sprintf("%08s", $id)]);
+        CPayment::where(['id' => $id])->update(['code' => 'CK-'.sprintf("%08s", $id)]);
+    }
+
+    static function beforeInsert(&$data)
+    {
+        $data['status'] = \StatusConst::PROCESSING;
     }
 }
