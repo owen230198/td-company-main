@@ -404,7 +404,7 @@ class AdminController extends Controller
         if (empty($table)) {
             return [];
         }
-        $where = $request->except('table', 'q', 'field_search', 'except_linking', 'except_value', 'field_value', '_type');
+        $where = $request->except('table', 'q', 'term', 'field_search', 'except_linking', 'except_value', 'field_value', '_type');
         if (Schema::hasColumn($table, 'act')) {
             $where['act'] = 1;
         }
