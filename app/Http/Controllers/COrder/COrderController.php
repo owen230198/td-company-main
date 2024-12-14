@@ -48,7 +48,7 @@
                     if (empty($object['id'])) {
                         return returnMessageAjax(100, 'Bạn chưa chọn thành phẩm cho '.$temp_name.' !');
                     }
-                    $validate = COrder::validateArrObject($object, $temp_name);
+                    $validate = COrder::validateArrObject($object, $temp_name, false);
                     if (@$validate['code'] == 100) {
                         return $validate;
                     }

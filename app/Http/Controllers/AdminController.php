@@ -619,7 +619,7 @@ class AdminController extends Controller
         if (!@$role['allow']) {
             return back()->with('error', 'Bạn không có quyền thao tác!');
         }  
-        $where = $request->except('nosidebar');;
+        $where = $request->except('nosidebar');
         $data['is_export'] = 1;
         $data['table'] = $table;
         $data['title'] = getTitleDebtByTable($table);

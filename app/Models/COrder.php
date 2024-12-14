@@ -96,7 +96,7 @@ class COrder extends Model
         }
     }
 
-    static function validateArrObject($object, $temp_name){
+    static function validateArrObject($object, $temp_name, $check_qty = true){
         if (empty($object['id'])) {
             return returnMessageAjax(100, 'Bạn chưa chọn thành phẩm cho '.$temp_name.' !');
         }
@@ -108,8 +108,10 @@ class COrder extends Model
         if (empty($object['qty'])) {
             return returnMessageAjax(100, 'Bạn chưa nhập số lượng cho '.$name.' !');
         }
-        if ((int) $object['qty'] > (int) $product->qty) {
-            return returnMessageAjax(100, 'Tồn kho'.$name.' không đủ để xuất cho đơn này !');
+        if ($check_qty) {
+            if ((int) $object['qty'] > (int) $product->qty) {
+                return returnMessageAjax(100, 'Tồn kho'.$name.' không đủ để xuất cho đơn này !');
+            }
         }
         return $product;
     }

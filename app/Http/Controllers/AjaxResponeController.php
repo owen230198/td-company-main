@@ -119,10 +119,6 @@ class AjaxResponeController extends Controller
         if (empty($product)) {
             return returnMessageAjax(100, 'Sản phẩm trong kho không tồn tại hoặc đã bị xóa !');
         }
-        $rqty = $request->input('qty');
-        if ((int) @$product->qty < $rqty) {
-            return returnMessageAjax(100, 'Sản phẩm trong kho không đủ để xuất !');
-        }
         return !empty($request->input('check_qty')) ? true : ['price' => $product->price, 'name' => $product->name];
     }
 
