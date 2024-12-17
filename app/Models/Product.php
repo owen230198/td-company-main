@@ -461,6 +461,14 @@
             $fill_finishes = FillFinish::select($select)->where('product', $id);
             return $papers->union($supplies)->union($fill_finishes)->get();
         }
+
+        static function canUpdateQty($obj)
+        {
+            if (empty($obj->status)) {
+                return true;
+            }
+            return \GroupUser::isAdmin() || (\GroupUser::isSale() && @$obj->status == \StatusConst::NOT_ACCEPTED);
+        }
     }
 
 ?>

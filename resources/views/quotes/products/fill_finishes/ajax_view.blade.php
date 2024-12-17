@@ -3,7 +3,13 @@
         'name' => 'product['.$pro_index.'][fill_finish][qty]',
         'note' => 'Số lượng',
         'value' => @$supply_obj->product_qty,
-        'attr' => ['type_input' => 'number', 'required' => 1, 'inject_class' => 'pro_qty_input']
+        'attr' => [
+            'type_input' => 'number', 
+            'required' => 1, 
+            'inject_class' => 'pro_qty_input',
+            'readonly' => \App\Models\Product::canUpdateQty(@$supply_obj) ? 0 : 1
+        ],
+        
     ];
 
     $data_fill = !empty($supply_obj->fill) ? json_decode($supply->fill, true) : [];

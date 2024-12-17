@@ -1,8 +1,9 @@
 <div class="mb-2 base_product_config">
     @php
         $pro_base_name_input = 'product['.$pro_index.']';
-        $read_only_by_status = !empty($product->status) && $product->status != \StatusConst::NOT_ACCEPTED;
-        $check_readonly = !empty($rework) || !empty($readonly_base) || $read_only_by_status;
+        $read_only_by_status = !empty($product->status);
+        $read_only_by_rework = !empty($rework) || !empty($readonly_base);
+        $check_readonly = $read_only_by_rework || $read_only_by_status;
         $arr_pro_field = [
             [
                 'name' => $pro_base_name_input.'[name]',
@@ -32,14 +33,14 @@
                     'required' => 1, 
                     'inject_class' => 'input_pro_qty __input_module_made_by_partner', 
                     'placeholder' => 'Nhập số lượng', 
-                    'readonly' => !empty($readonly_base) || $read_only_by_status
+                    'readonly' => \App\Models\Product::canUpdateQty(@$product) ? 0 : (!empty($readonly_base) || $read_only_by_status)
                 ],
                 'value' => @$product['qty']
             ],
         ];
         $note_product_field = [
             'name' => $pro_base_name_input.'[detail]',
-            'attr' => ['readonly' => $check_readonly],
+            'attr' => ['readonly' => $read_only_by_rework],
             'type' => 'textarea',
             'note' => 'Ghi chú',
             'value' => @$product['detail']

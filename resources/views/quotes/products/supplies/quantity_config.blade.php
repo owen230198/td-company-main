@@ -11,7 +11,7 @@
                 'required' => 1, 
                 'inject_class' => 'pro_qty_input supp_qty_modul_input',
                 'disable_field' => !empty($disable_all) || in_array('qty', $arr_disable_field) ? 1 : 0,
-                'readonly' => !empty($supply_obj->status) && $supply_obj->status != \StatusConst::NOT_ACCEPTED
+                'readonly' => \App\Models\Product::canUpdateQty(@$supply_obj) ? 0 : 1
             ],
         ],
         [
