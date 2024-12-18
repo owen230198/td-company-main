@@ -7,7 +7,7 @@
     <div class="d-flex justify-content-between align-items-center">
         <div class="history_content">
             <span class="color_green font_bold">{{ getDateTimeFormat($history->created_at) }}</span>,
-            {{ getFieldDataById('name', 'n_group_users', $user->group_user) . ' : ' }}
+            {{ getFieldDataById('name', 'n_group_users', @$user->group_user) . ' : ' }}
             <span class="color_green font_bold">{{ @$user->name }}</span>
             đã {{ getActionByKey($history->action) }}
             <strong class="ml-1 color_green">{{ $history->name }}</strong>

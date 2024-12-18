@@ -469,6 +469,12 @@
             }
             return \GroupUser::isAdmin() || (\GroupUser::isSale() && @$obj->status == \StatusConst::NOT_ACCEPTED);
         }
+
+        static function isJoinProduct($product)
+        {
+            $paper = Paper::where('product', $product->id)->first();
+            return !empty($paper->is_join);
+        }
     }
 
 ?>

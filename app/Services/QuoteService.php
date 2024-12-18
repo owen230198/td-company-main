@@ -163,12 +163,14 @@ class QuoteService extends BaseService
         return $data_action;
     }
 
-    public function processProduct($data, $step, $key = 0)
+    public function processProduct($data, $step, $key = 0, $pro_valid = true)
     {
-        if ($step != \StatusConst::NO_VALIDATE) {
-            $product_valid = $this->productValidate($data, $key, $step);
-            if (@$product_valid['code'] == 100) {
-                return $product_valid;    
+        if ($pro_valid) {
+            if ($step != \StatusConst::NO_VALIDATE) {
+                $product_valid = $this->productValidate($data, $key, $step);
+                if (@$product_valid['code'] == 100) {
+                    return $product_valid;    
+                }
             }
         }
         $data_process = $this->getDataActionProduct($data);
@@ -196,11 +198,11 @@ class QuoteService extends BaseService
         return !empty($process);
     }
 
-    public function processDataProduct($data, $obj_refesh, $step = TDConstant::QUOTE_FLOW)
+    public function processDataProduct($data, $obj_refesh, $step = TDConstant::QUOTE_FLOW, $pro_valid = true)
     {
         $data_product = $data['product'];
         foreach ($data_product as $key => $product) {
-            $process = $this->processProduct($product, $step, $key);
+            $process = $this->processProduct($product, $step, $key, $pro_valid);
             if (!empty($process['code']) && $process['code'] == 100) {
                 return $process;
                 break;
