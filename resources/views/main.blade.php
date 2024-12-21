@@ -39,7 +39,11 @@
             @endif
             <div class="col-lg-6 text-center">
                 <h2 class="fs-15 text-uppercase font_bold pb-1 mb-3 border_bot_eb">thống kê đơn hàng trong năm</h2>
-                <canvas id="bar-chart" width="400" height="300" class="bg_white radius_5 p-2 mb-3 box_shadow_3"></canvas>
+                <canvas id="order-chart" width="400" height="300" class="bg_white radius_5 p-2 mb-3 box_shadow_3"></canvas>
+            </div>
+            <div class="col-lg-6 text-center">
+                <h2 class="fs-15 text-uppercase font_bold pb-1 mb-3 border_bot_eb">thống kê bán hàng trong tuần</h2>
+                <canvas id="selling-chart" width="400" height="300" class="bg_white radius_5 p-2 mb-3 box_shadow_3"></canvas>
             </div>
         </div>
     </div>
@@ -48,7 +52,8 @@
 @section('script')
     <script src="{{ asset('frontend/admin/script/chart.js') }}"></script>
     <script>
-        let bar_ctx = document.getElementById('bar-chart').getContext('2d');
+        //order chart
+        let bar_ctx = document.getElementById('order-chart').getContext('2d');
         let purple_orange_gradient = bar_ctx.createLinearGradient(0, 100, 200, 500);
         purple_orange_gradient.addColorStop(0, '#459300');
         purple_orange_gradient.addColorStop(1, '#6be102');
@@ -58,7 +63,7 @@
             data: {
                 labels: ["Th 1", "Th 2", "th 3", "Th 4", "th 5", "th 6", "Th 7", "Th 8", "Th 9", "Th 10", "Th 11", "Th 12"],
                 datasets: [{
-                    label: 'Số lượng đơn',
+                    label: 'Số lượng đơn đã tạo trong tháng',
                     data:  Object.values(chat_data),
                     backgroundColor: purple_orange_gradient,
                     hoverBackgroundColor: purple_orange_gradient,
@@ -73,6 +78,34 @@
                             beginAtZero:true
                         }
                     }]
+                }
+            }
+        });
+
+        //selling chart
+        let selling_chat = @json($selling_chat);
+        let labels = selling_chat.map(item => item.sale_name);
+        let data = selling_chat.map(item => item.count);
+
+        let ctx = document.getElementById('selling-chart').getContext('2d');
+        let topUsersChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Số đơn hàng bán sẵn đã tạo trong tuần',
+                    data: data,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
                 }
             }
         });
