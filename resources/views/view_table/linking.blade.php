@@ -15,7 +15,7 @@
         }
     @endphp
     <button data-src="{{ url('update/'.$table.'/'.$value.'?nosidebar=1') }}" 
-    class="color_main py-1 radius_5 mb-0 text-center {{ empty($history_view) ? 'linking_table load_view_popup' : '' }} "
+    class="color_main py-1 radius_5 mb-0 text-center {{ empty($history_view) ? 'linking_table load_view_popup' : '' }} d-block"
     data-toggle="modal" data-target="#actionModal">
         {{ $label }}
     </button>
