@@ -134,6 +134,7 @@
                 $dataItem['represent'] = Represent::where('customer', $id)->get();
                 $data['dataItem'] = $dataItem;
                 $data['action_url'] = url('update/'.$table.'/'.$id);
+                $data['nosidebar'] = !empty($request->input('nosidebar'));
                 return view('action.view', $data);
             }else{
                 $data_customer = $request->except(['_token', 'represent']);

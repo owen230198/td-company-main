@@ -14,7 +14,9 @@
             $label = getLabelLinking($linking_item, $field_title);
         }
     @endphp
-    <p class="color_main py-1 radius_5 mb-0 text-center {{ empty($history_view) ? 'linking_table' : '' }}">
+    <button data-src="{{ url('update/'.$table.'/'.$value.'?nosidebar=1') }}" 
+    class="color_main py-1 radius_5 mb-0 text-center {{ empty($history_view) ? 'linking_table load_view_popup' : '' }} "
+    data-toggle="modal" data-target="#actionModal">
         {{ $label }}
-    </p>
+    </button>
 @endif

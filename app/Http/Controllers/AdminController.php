@@ -270,13 +270,14 @@ class AdminController extends Controller
                 return customReturnMessage(false, $request->isMethod('POST'), ['message' => 'Thao tác không được hỗ trợ !']);
             }
         }else{
-            $param = $request->except('_token');
+            $param = $request->except(['_token', 'nosidebar']);
             if ($request->isMethod('GET')) {
                 $this->injectViewWhereParam($table, $param);
                 $data = $this->admins->getDataActionView($table, 'update', 'Chi tiết', $param, self::$view_where);
                 $data['dataItem'] = $dataItem;
                 $data['title'] = !empty($dataItem['name']) ? 'Chi tiết '.@$dataItem['name'] : @$data['title'];
                 $data['action_url'] = url('update/'.$table.'/'.$id);
+                $data['nosidebar'] = !empty($request->input('nosidebar'));
                 return view('action.view', $data);
             }else{
                 $status = $this->admins->doUpdateTable($id, $table, $param);
