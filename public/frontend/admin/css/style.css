@@ -188,6 +188,21 @@ select.muptiple_select option {
     display: none;
 }
 
+.supply_cate_menu_item{
+    display: block;
+    padding: 3px 9px;
+    color: #fff;
+    background: #459300;
+    border-bottom: 1px solid #fff;
+    font-weight: 700;
+}
+
+.supply_cate_menu_item:hover{
+    background: none;
+    color: #459300;
+}
+
+
 a.device_supp_item {
     padding: 5px 15px;
     margin: 10px;

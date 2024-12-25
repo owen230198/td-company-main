@@ -377,6 +377,40 @@
             self::ORDER_PRODUCT => 'Hàng đặt',
             self::INTERNAL_PRODUCT => 'Hàng Cty Tuấn Dung',
         ];
+
+        const OTHER_SUPP = 'other_supply';
+
+        const ALL_SUPPLY_CATE = [
+            [
+                'note' => 'Giấy in', 
+                'table' => 'print_warehouses', 
+                'type' => self::PAPER,
+                'table_parent' => 'materals'
+            ],
+            [
+                'note' => 'Màng nilon', 
+                'table' => 'square_warehouses', 
+                'type' => self::NILON,
+                'table_parent' => 'materals'
+            ],
+            [
+                'note' => 'Màng metalai', 
+                'table' => 'square_warehouses', 
+                'type' => self::METALAI,
+                'table_parent' => 'materals'
+            ],
+            ['note' => 'Màng phủ metalai', 'table' => 'square_warehouses', 'type' => self::COVER],
+            ['note' => 'Màng co', 'table' => 'square_warehouses', 'type' => self::SKRINK],
+            ['note' => 'Vật tư carton', 'table' => 'supply_warehouses', 'type' => self::CARTON],
+            ['note' => 'Vật tư cao su non', 'table' => 'supply_warehouses', 'type' => self::RUBBER],
+            ['note' => 'Vật tư mút phẳng', 'table' => 'supply_warehouses', 'type' => self::STYRO],
+            ['note' => 'Vật tư đề can nhung', 'table' => 'square_warehouses', 'type' => self::DECAL],
+            ['note' => 'Vật tư vải lụa', 'table' => 'square_warehouses', 'type' => self::SILK],
+            ['note' => 'Vật tư mica', 'table' => 'supply_warehouses', 'type' => self::MICA],
+            ['note' => 'Vật tư nam châm', 'table' => 'other_warehouses', 'type' => self::MAGNET],
+            ['note' => 'Vật tư nhũ', 'table' => 'square_warehouses', 'type' => self::EMULSION],
+            ['note' => 'Vật tư khác', 'table' => 'extend_warehouses', 'type' => self::OTHER_SUPP]
+        ];
     }
     
 ?>

@@ -3,7 +3,6 @@
     @foreach ($products as $pro_index => $product)
         <div class="tab-pane fade{{ $pro_index == 0 ? ' show active' : '' }} tab_pane_quote_pro" id="quote-pro-{{ $pro_index }}" role="tabpanel" aria-labelledby="quote-pro-{{ $pro_index }}-tab">
             <div class="config_handle_paper_pro">
-                
                 <div class="form-group d-flex mb-2">
                     <label class="min_210 mr-3"></label>
                     @if (!empty($product['id']))

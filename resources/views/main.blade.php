@@ -54,9 +54,9 @@
     <script>
         //order chart
         let bar_ctx = document.getElementById('order-chart').getContext('2d');
-        let purple_orange_gradient = bar_ctx.createLinearGradient(0, 100, 200, 500);
-        purple_orange_gradient.addColorStop(0, '#459300');
-        purple_orange_gradient.addColorStop(1, '#6be102');
+        let bg_chart = bar_ctx.createLinearGradient(0, 100, 200, 500);
+        bg_chart.addColorStop(0, '#459300');
+        bg_chart.addColorStop(1, '#6be102');
         let chat_data = @json($chart_data);
         let bar_chart = new Chart(bar_ctx, {
             type: 'bar',
@@ -65,8 +65,8 @@
                 datasets: [{
                     label: 'Số lượng đơn đã tạo trong tháng',
                     data:  Object.values(chat_data),
-                    backgroundColor: purple_orange_gradient,
-                    hoverBackgroundColor: purple_orange_gradient,
+                    backgroundColor: bg_chart,
+                    hoverBackgroundColor: bg_chart,
                     hoverBorderWidth: 0,
                     hoverBorderColor: 'red'
                 }]
@@ -101,11 +101,12 @@
                 }]
             },
             options: {
-                responsive: true,
                 scales: {
-                    y: {
-                        beginAtZero: true
-                    }
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
                 }
             }
         });

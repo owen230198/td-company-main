@@ -170,26 +170,35 @@ class AdminController extends Controller
     {
         if (\GroupUser::isAdmin() || \GroupUser::isWarehouse() || \GroupUser::isPlanHandle() || \GroupUser::isAccounting() || \GroupUser::isDoBuying()) {
             $data['title'] = 'Quản lí vật tư trong kho';
-            $data['supply_list'] = [
-                ['note' => 'Giấy in', 'table' => 'print_warehouses', 'type' => \TDConst::PAPER],
-                ['note' => 'Màng nilon', 'table' => 'square_warehouses', 'type' => \TDConst::NILON],
-                ['note' => 'Màng metalai', 'table' => 'square_warehouses', 'type' => \TDConst::METALAI],
-                ['note' => 'Màng phủ metalai', 'table' => 'square_warehouses', 'type' => \TDConst::COVER],
-                ['note' => 'Màng co', 'table' => 'square_warehouses', 'type' => \TDConst::SKRINK],
-                ['note' => 'Vật tư carton', 'table' => 'supply_warehouses', 'type' => \TDConst::CARTON],
-                ['note' => 'Vật tư cao su non', 'table' => 'supply_warehouses', 'type' => \TDConst::RUBBER],
-                ['note' => 'Vật tư mút phẳng', 'table' => 'supply_warehouses', 'type' => \TDConst::STYRO],
-                ['note' => 'Vật tư đề can nhung', 'table' => 'square_warehouses', 'type' => \TDConst::DECAL],
-                ['note' => 'Vật tư vải lụa', 'table' => 'square_warehouses', 'type' => \TDConst::SILK],
-                ['note' => 'Vật tư mica', 'table' => 'supply_warehouses', 'type' => \TDConst::MICA],
-                ['note' => 'Vật tư nam châm', 'table' => 'other_warehouses', 'type' => \TDConst::MAGNET],
-                ['note' => 'Vật tư nhũ', 'table' => 'square_warehouses', 'type' => \TDConst::EMULSION],
-                ['note' => 'Vật tư khác', 'table' => 'extend_warehouses']
-            ];
+            $data['supply_list'] = \TDConst::ALL_SUPPLY_CATE;
             return view('warehouses.view', $data); 
         }else{
             return back()->with('error', 'Không có quyền truy cập !');    
         }
+    }
+
+    public function supplyOriginManagement(Request $request)
+    {
+        if (!\GroupUser::isAdmin()) {
+            return back()->with('error', 'Không có quyền truy cập !');    
+        }  
+        $data['title'] = 'Bảng giá vật tư';
+        $data['supply_list'] = \TDConst::ALL_SUPPLY_CATE;
+        if (!empty($request->type)) {
+            $type = $request->type;
+            $arr_supply = searchSupplyCate($type, 'type');
+            $data_supply_cate = @$arr_supply[0];
+            if (empty($data_supply_cate['notes']) || empty($data_supply_cate['table_parent'])) {
+                return back()->with('error', 'Dữ liệu không hợp lệ !');  
+            }
+            $data['title'] .= ' '.$arr_supply['note'];
+            $list_data = \BD::table($data_supply_cate['table_parent'])->where('type', $type);
+            if ($data_supply_cate['condition']) {
+                $list_data->where($data_supply_cate['condition']);    
+            }
+            $data['list_data'] = $list_data->paginate(20);
+        }
+        return view('warehouses.origins.view', $data); 
     }
 
     public function listWorkerByDevice(Request $request, $step)

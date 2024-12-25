@@ -653,6 +653,20 @@ use App\Models\Product;
         }
     }
 
+    if (!function_exists('searchSupplyCate')) {
+        function searchSupplyCate($q, $colunm)
+        {
+            $all_supply_cate = @\TDConst::ALL_SUPPLY_CATE;
+            return array_filter($all_supply_cate, function($item) use($colunm, $q) {
+                if ($colunm == 'type') {
+                    return $item['type'] == $q;
+                }else{
+                    return stripos($item[$colunm], $q) !== false;
+                }
+            });
+        }
+    }
+
     if (!function_exists('getBaseNeedQtySquareSupply')) {
 		function getBaseNeedQtySquareSupply($base_supp_qty, $supply_size)
 		{

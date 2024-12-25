@@ -7,7 +7,7 @@
     @endphp
     <div class="table_base_view position-relative mb-3">
         <table class="table table-bordered table_main table_responsive">
-            <theader>
+            <thead>
                 <tr>
                     <th class="font-bold fs-13 text-center parentth">#</th>
                     <th class="font-bold fs-13 text-center parentth">Khách hàng</th>
@@ -28,7 +28,7 @@
                         <th class="font-bold fs-13 text-center parentth">Chức năng</th>         
                     @endif  
                 </tr>
-            </theader>
+            </thead>
             <tbody>
                 @foreach ($list_data as $key => $data)
                     <tr>

@@ -342,7 +342,7 @@ var phoneInputPrevent = function () {
     });
 };
 
-var multipleSelectModule = function (section = $('.base_content')) {
+var multipleSelectModule = function (section = $('.page_content')) {
     let select_multiple = section.find('select.__multiple_select');
     if (select_multiple.length > 0) {
         select_multiple.each(function () {
