@@ -19,11 +19,7 @@
 		@include('table.btn_update')
 	@endif
 	@if (!empty($tableItem['copy']))
-		<a href="{{ asset('clone/'.$tableItem['name'].'/'.$data->id.''.@$param_action) }}" 
-			class="table-btn mr-2 mb-2 {{ $tableItem['copy'] == 2 ? '__clone_item_confirm' : '' }}" 
-			title="{{ $tableItem['note'] }}" data-name = {{ (@$data->code ?? @$data->seri) ?? @$data->name }}>
-			<i class="fa fa-clone fs-14" aria-hidden="true"></i>
-		</a>	
+		@include('table.btn_copy')
 	@endif
 	@if ($tableItem['remove'] == 1)
 		@include('table.btn_remove')

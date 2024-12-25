@@ -20,7 +20,7 @@
 </head>
 
 <body>
-    @if (request()->has('nosidebar'))
+    @if (hasNoSidebarParam())
         <div class="page_content container-fluid pb-3">
             @if (!isHome())
                 @include('title_base_page')

@@ -197,7 +197,7 @@ select.muptiple_select option {
     font-weight: 700;
 }
 
-.supply_cate_menu_item:hover{
+.supply_cate_menu_item:hover, .supply_cate_menu_item.active{
     background: none;
     color: #459300;
 }

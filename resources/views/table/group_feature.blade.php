@@ -19,10 +19,21 @@
         </div>
     @endif
     @if (@$tableItem['insert'] == 1)
-        <a href="{{ url('insert/' . @$tableItem['name'].''.@$param_action) }}"
+        @php
+            $insert_url = url('insert/' . @$tableItem['name'].''.@$param_action)
+        @endphp
+        @if (hasNoSidebarParam())
+            <button type="button" data-src = "{{ !empty($param_action) ? $insert_url.'&nosidebar=1' : $insert_url.'?nosidebar=1' }}" 
+            class="btn btn-primary main_button bg_main color_white smooth bg_green border_green radius_5 font_bold smooth ml-2 load_view_popup mr-2" 
+            data-toggle="modal" data-target="#actionModal">
+                <i class="fa fa-plus mr-2 fs-15" aria-hidden="true"></i>Thêm mới
+            </button>   
+        @else
+        <a href="{{ $insert_url }}"
             class="main_button bg_main color_white smooth bg_green border_green radius_5 font_bold smooth mr-2">
             <i class="fa fa-plus mr-2 fs-15" aria-hidden="true"></i>Thêm mới
         </a>
+        @endif
     @endif
     @if (@$tableItem['remove'])
         <button class="main_button bg_red color_white smooth radius_5 font_bold smooth red_btn d-lg-block d-none" data-toggle="modal"

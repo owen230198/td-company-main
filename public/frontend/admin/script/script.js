@@ -127,7 +127,7 @@ var closeModalAction = function () {
     });
 }
 
-var selectConfig = function (section = $('.base_content')) {
+var selectConfig = function (section = $('.page_content')) {
     let list_select2 = section.find("select.select_config");
     if (list_select2.length > 0) {
         list_select2.each(function () {
@@ -807,7 +807,7 @@ var passwordChangeInput = function () {
     });
 }
 
-var fileProcessV2Module = function (section = $('.base_content')) {
+var fileProcessV2Module = function (section = $('.page_content')) {
     let file_uplaod_v2 = section.find('.__browse_file_v2_button');
     if (file_uplaod_v2.length > 0) {
         file_uplaod_v2.each(function () {

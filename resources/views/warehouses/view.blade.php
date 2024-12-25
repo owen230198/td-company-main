@@ -4,7 +4,7 @@
     <div class="supply_list">
         @foreach ($supply_list as $supply)
             @php
-                $param = !empty($supply['type']) ? '%7B"type"%3A"'.$supply['type'].'","status":"imported"%7D' : '%7B"status":"imported"%7D';
+                $param = @$supply['type'] != \TDConst::OTHER_SUPPLY ? '%7B"type"%3A"'.$supply['type'].'","status":"imported"%7D' : '%7B"status":"imported"%7D';
                 $url = 'view/'.$supply['table'].'?default_data='.$param;
             @endphp
             <a href="{{ url($url) }}" class="device_supp_item">

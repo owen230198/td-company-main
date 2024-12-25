@@ -378,7 +378,7 @@
             self::INTERNAL_PRODUCT => 'Hàng Cty Tuấn Dung',
         ];
 
-        const OTHER_SUPP = 'other_supply';
+        const OTHER_SUPPLY = 'other_supply';
 
         const ALL_SUPPLY_CATE = [
             [
@@ -399,17 +399,79 @@
                 'type' => self::METALAI,
                 'table_parent' => 'materals'
             ],
-            ['note' => 'Màng phủ metalai', 'table' => 'square_warehouses', 'type' => self::COVER],
-            ['note' => 'Màng co', 'table' => 'square_warehouses', 'type' => self::SKRINK],
-            ['note' => 'Vật tư carton', 'table' => 'supply_warehouses', 'type' => self::CARTON],
-            ['note' => 'Vật tư cao su non', 'table' => 'supply_warehouses', 'type' => self::RUBBER],
-            ['note' => 'Vật tư mút phẳng', 'table' => 'supply_warehouses', 'type' => self::STYRO],
-            ['note' => 'Vật tư đề can nhung', 'table' => 'square_warehouses', 'type' => self::DECAL],
-            ['note' => 'Vật tư vải lụa', 'table' => 'square_warehouses', 'type' => self::SILK],
-            ['note' => 'Vật tư mica', 'table' => 'supply_warehouses', 'type' => self::MICA],
-            ['note' => 'Vật tư nam châm', 'table' => 'other_warehouses', 'type' => self::MAGNET],
-            ['note' => 'Vật tư nhũ', 'table' => 'square_warehouses', 'type' => self::EMULSION],
-            ['note' => 'Vật tư khác', 'table' => 'extend_warehouses', 'type' => self::OTHER_SUPP]
+            [
+                'note' => 'Màng phủ metalai', 
+                'table' => 'square_warehouses', 
+                'type' => self::COVER,
+                'table_parent' => 'materals'
+            ],
+            [
+                'note' => 'Màng co', 
+                'table' => 'square_warehouses', 
+                'type' => self::SKRINK,
+                'table_parent' => 'supply_names'
+                
+            ],
+            [
+                'note' => 'Vật tư carton', 
+                'table' => 'supply_warehouses', 
+                'type' => self::CARTON,
+                'table_parent' => 'supply_types'
+            ],
+            [
+                'note' => 'Vật tư cao su non', 
+                'table' => 'supply_warehouses', 
+                'type' => self::RUBBER,
+                'table_parent' => 'supply_types'
+            ],
+            [
+                'note' => 'Vật tư mút phẳng', 
+                'table' => 'supply_warehouses', 
+                'type' => self::STYRO,
+                'table_parent' => 'supply_types'
+            ],
+            [
+                'note' => 'Vật tư đề can nhung', 
+                'table' => 'square_warehouses', 
+                'type' => self::DECAL,
+                'table_parent' => 'materals'
+            ],
+            [
+                'note' => 'Vật tư vải lụa', 
+                'table' => 'square_warehouses', 
+                'type' => self::SILK,
+                'table_parent' => 'materals'
+            ],
+            [
+                'note' => 'Vật tư mica', 
+                'table' => 'supply_warehouses', 
+                'type' => self::MICA,
+                'table_parent' => 'supply_types'
+            ],
+            [
+                'note' => 'Vật tư nam châm', 
+                'table' => 'other_warehouses', 
+                'type' => self::MAGNET,
+                'table_parent' => 'materals'
+            ],
+            [
+                'note' => 'Vật tư nhũ', 
+                'table' => 'square_warehouses', 
+                'type' => self::EMULSION,
+                'table_parent' => 'supply_names'
+            ],
+            [
+                'note' => 'Vật tư mực in', 
+                'table' => 'square_warehouses', 
+                'type' => self::UV,
+                'table_parent' => 'materals'
+            ],
+            [
+                'note' => 'Vật tư khác', 
+                'table' => 'extend_warehouses',
+                'type' => self::OTHER_SUPPLY,
+                'table_parent' => 'supply_extends'
+            ]
         ];
     }
     

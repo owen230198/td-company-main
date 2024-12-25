@@ -202,7 +202,18 @@ if (!function_exists('getlabelLinking')) {
 if (!function_exists('getTableLinkingWithData')) {
     function getTableLinkingWithData($data, $linking_table)
     {
-        return !empty($linking_table['getFunc']) ? $linking_table['getFunc']((object) $data) : $linking_table;
+        if (!empty($linking_table['getFunc'])) {
+            $dataItem = (object) $data;
+            $getFunc = $linking_table['getFunc'];
+            if (!empty($getFunc['model']) && !empty($getFunc['method'])) {
+                $model = getModelByClass($getFunc['model']);
+                return $model::{$getFunc['method']}($dataItem);
+            }else{
+                return $linking_table['getFunc']($dataItem);
+            }
+        }else{
+            return $linking_table;
+        }
     }
 }
 
@@ -342,5 +353,11 @@ if (!function_exists('logActionDataById')) {
             $obj->save();
             logActionUserData($action, $table, $id, $dataItem);
         }
+    }
+}
+
+if (!function_exists('hasNoSidebarParam')) {
+    function hasNoSidebarParam(){
+        return request()->nosidebar == 1;
     }
 }

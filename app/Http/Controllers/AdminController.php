@@ -187,16 +187,14 @@ class AdminController extends Controller
         if (!empty($request->type)) {
             $type = $request->type;
             $arr_supply = searchSupplyCate($type, 'type');
-            $data_supply_cate = @$arr_supply[0];
-            if (empty($data_supply_cate['notes']) || empty($data_supply_cate['table_parent'])) {
+            $data_supply_cate = reset($arr_supply);
+            if (empty($data_supply_cate['note']) || empty($data_supply_cate['table_parent'])) {
                 return back()->with('error', 'Dữ liệu không hợp lệ !');  
             }
-            $data['title'] .= ' '.$arr_supply['note'];
-            $list_data = \BD::table($data_supply_cate['table_parent'])->where('type', $type);
-            if ($data_supply_cate['condition']) {
-                $list_data->where($data_supply_cate['condition']);    
-            }
-            $data['list_data'] = $list_data->paginate(20);
+            $data['cate_name'] = $data_supply_cate['note'];
+            $data['cate_type'] = $type;
+            $data['title'] .= ' '.$data['cate_name'];
+            $data['list_data'] = \DB::table($data_supply_cate['table_parent'])->where('type', $type)->paginate(20);
         }
         return view('warehouses.origins.view', $data); 
     }
@@ -244,7 +242,7 @@ class AdminController extends Controller
                 return customReturnMessage(false, $request->isMethod('POST'), ['message' => 'Thao tác không hỗ trợ !']);
             }
         }else{
-            $param = $request->except('_token');
+            $param = $request->except(['_token', 'nosidebar']);
             if ($request->isMethod('GET')) {
                 $this->injectViewWhereParam($table, $param);
                 $data = $this->admins->getDataActionView($table, __FUNCTION__, 'Thêm mới', $param, self::$view_where);
@@ -253,7 +251,7 @@ class AdminController extends Controller
             }else{
                 $status = $this->admins->doInsertTable($table, $param);
                 if ($status['code'] == 200) {
-                    $back_routes = getBackUrl() ?? url('view/'.$table);
+                    $back_routes = !empty($request->nosidebar) ? \StatusConst::CLOSE_POPUP : getBackUrl();
                     logActionUserData(__FUNCTION__, $table, $status['id'], $param);
                     return returnMessageAjax(200, 'Thêm dữ liệu thành công!', $back_routes);
                 }else {
@@ -291,7 +289,7 @@ class AdminController extends Controller
             }else{
                 $status = $this->admins->doUpdateTable($id, $table, $param);
                 if ($status['code'] == 200) {
-                    $back_routes = getBackUrl() ?? url('view/'.$table);
+                    $back_routes = !empty($request->nosidebar) ? \StatusConst::CLOSE_POPUP : getBackUrl();
                     logActionUserData(__FUNCTION__, $table, $id, $dataItem);
                     return returnMessageAjax(200, 'Cập nhật dữ liệu thành công!', $back_routes);
                 }else {
