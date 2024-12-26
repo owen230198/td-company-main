@@ -1,9 +1,10 @@
 <div class="modal fade" id="deleteModal">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="{{ asset('remove') }}" method="POST" class="confirmRemoveForm">
+            <form action="{{ asset('remove') }}" method="POST" class="confirmRemoveForm baseAjaxForm">
                 @csrf
                 @method('delete')
+                <input type="hidden" name="ajax" value="1">
                 <input type="hidden" name="remove_id" value="">
                 <input type="hidden" name="table" value="{{ $table_name }}">
                 <div class="modal-header">

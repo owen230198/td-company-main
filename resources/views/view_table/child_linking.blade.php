@@ -3,23 +3,14 @@
     $field_title = @$select_data['field_title'] ?? 'name';
     $field_query = @$select_data['field_query'];
     $field_linking = !empty($select_data['field_linking']) ? $select_data['field_linking'] : 'id';
-    $childs = \DB::table($select_data['table'])->where(['act' => 1, $field_query => $data->{$field_linking}])->get();
-    $child_field = \DB::table('n_detail_tables')->where(['act' => 1, 'table_map' => $select_data['table'], 'name' => $field_title])->first();
+    $model_linking = getModelByTable($select_data['table']);
+    $childs = $model_linking::where(['act' => 1, $field_query => $data->{$field_linking}])->get();
 @endphp
 @foreach ($childs as $child)
-	@if (!empty($child_field))
-        @php
-            $arr = (array) $child_field;
-            $arr['obj_id'] = $child->id;
-            $arr['value'] = @$child->{$field_title};
-            $arr['other_data'] = !empty($child_field->other_data) ? json_decode($child_field->other_data, true) : [];
-        @endphp
-        <div class="mb-1">
-            @include('view_table.'.$child_field->type, $arr)
-        </div>
-    @else
-        <p class="color_main radius_5 mb-2 text-center linking_table">
-            {{ $child->{$field_title} }}
-        </p>
-    @endif
+    @php
+        $label = method_exists($model_linking, 'getLabelLinking') ? $model_linking::getLabelLinking($child) : $child->{$field_title};
+    @endphp
+    <p class="color_main radius_5 mb-2 text-center">
+        {{ $label }}
+    </p>
 @endforeach

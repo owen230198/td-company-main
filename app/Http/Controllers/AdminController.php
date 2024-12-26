@@ -341,7 +341,7 @@ class AdminController extends Controller
         }
         $success = $this->admins->removeDataTable($table, $id);
         if ($success) {
-            return customReturnMessage(true, $is_ajax, ['message' => 'Xoá thành công dữ liệu !']);
+            return customReturnMessage(true, $is_ajax, ['message' => 'Xoá thành công dữ liệu !', 'url' => \StatusConst::RELOAD]);
         }else {
             return customReturnMessage(false, $is_ajax, ['message' => 'Đã có lỗi xảy ra !']);
         }
@@ -351,21 +351,23 @@ class AdminController extends Controller
     {
         $data = $request->all();
         $str_id = @$data['multi_remove_id']?$data['multi_remove_id']:'';
+        $is_ajax = (boolean) $request->input('ajax');
         if ($str_id == '') {
-            return back()->with('error','Chưa có mục được chọn !');
+            return customReturnMessage(false, $is_ajax, ['message' => 'Chưa có mục được chọn !']);
         }
         $table = $data['table'];
         if (!\GroupUser::isAdmin()) {
-            return back()->with('error','Không có quyền thực hiện thao tác này !');
+            return customReturnMessage(false, $is_ajax, ['message' => 'Không có quyền thực hiện thao tác này !']);
         }
         $arr_id = explode(',', $str_id);
         foreach ($arr_id as $id) {
             $delete = $this->admins->removeDataTable($table, $id);
         }
+        
         if ($delete) {
-            return back()->with('message','Xóa dữ liệu thành công !');
+            return customReturnMessage(true, $is_ajax, ['message' => 'Xóa dữ liệu thành công !', 'url' => \StatusConst::RELOAD]);
         }else{
-            return back()->with('error','Đã có lỗi xảy ra !');
+            return customReturnMessage(false, $is_ajax, ['message' => 'Đã có lỗi xảy ra !']);
         }
     }
 

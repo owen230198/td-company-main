@@ -1,9 +1,10 @@
 <div class="modal fade" id="multiDeleteModal">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form action="{{ asset('multiple-remove') }}" method="POST" class="confirmMultiRemoveForm">
+      <form action="{{ asset('multiple-remove') }}" method="POST" class="confirmMultiRemoveForm baseAjaxForm">
         @csrf
         @method('delete')
+        <input type="hidden" name="ajax" value="1">
         <input type="hidden" name="multi_remove_id" value="">
         <input type="hidden" name="table" value="{{ $tableItem['name'] }}">
         <div class="modal-header">

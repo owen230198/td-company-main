@@ -68,10 +68,10 @@ class BaseService
 						return $data_child;
 						break;
 					}
+					$data_child['table'] = $table_child;
+					$data_child['field_parent'] = $data_other['field_query'];
+					$child_linkings[] = $data_child;
 				}
-				$data_child['table'] = $table_child;
-				$data_child['field_parent'] = $data_other['field_query'];
-				$child_linkings[] = $data_child;
 				unset($data[$key]);
 			}else{
 				$data[$key] = $item;	
