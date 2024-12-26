@@ -436,5 +436,11 @@ class AjaxResponeController extends Controller
         $data = ['index' => $request->input('index'), 'value' => ['warehouse_type' => $request->input('id')]];
         return view('product_warehouses.filed_json_item', $data);
     }
+
+    public function insertItemChildLinking($request)
+    {
+        $data = $request->all();
+        return view('view_update.child_linkings.item', $data);     
+    }
 }
 

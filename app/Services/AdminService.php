@@ -236,6 +236,23 @@ class AdminService extends BaseService
         }
     }
 
+    private function handleChildLinking($data, $parent_id)
+    {
+        foreach ($data as $child_data) {
+            $table = $child_data['table'];
+            $model = getModelByTable($table);
+            $data_hanle = $child_data['data'];
+            $field_parent = $child_data['field_parent'];
+            $data_hanle[$field_parent] = $parent_id;
+            if (!empty($data_hanle['id'])) {
+                logActionDataById($table, $data_hanle['id'], $data_hanle, 'update');
+            }else{
+                $child_id = $model::insertGetId($data_hanle);
+                logActionUserData('insert', $table, $child_id);
+            }
+        }
+    }
+
     public function doInsertTable($table, $data)
     {
         $model = getModelByTable($table);
@@ -247,6 +264,9 @@ class AdminService extends BaseService
             return $process;
         }
         $id = \DB::table($table)->insertGetId($process['data']);
+        if (!empty($process['child_linkings'])) {
+            $this->handleChildLinking($process['child_linkings'], $id);
+        }
         if (method_exists($model, 'getInsertCode')) {
             $model::getInsertCode($id);
         }
@@ -262,6 +282,9 @@ class AdminService extends BaseService
         }
         $object = \DB::table($table)->where('id', $id);
         $update = $object->update($process['data']);
+        if (!empty($process['child_linkings'])) {
+            $this->handleChildLinking($process['child_linkings'], $id);
+        }
         if ($update) {
             return returnMessageAjax(200, 'Cập nhật dữ liệu thành công!');
         }else{

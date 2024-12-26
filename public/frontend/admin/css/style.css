@@ -202,6 +202,10 @@ select.muptiple_select option {
     color: #459300;
 }
 
+.list_item_child_linking {
+    width: 100%;
+    max-width: 550px;
+}
 
 a.device_supp_item {
     padding: 5px 15px;

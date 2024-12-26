@@ -33,7 +33,7 @@
                                 <tr>
                                     <td class="w_50">{{ $key + 1 }}</td>
                                     <td>
-                                        <button data-src="{{ url('view/supply_origins?type='.$cate_type.'&parent='.$item->id.'&nosidebar=1') }}" 
+                                        <button data-src="{{ url('view/supply_origins?default_data=%7B"type"%3A"'.$cate_type.'","parent":"'.$item->id.'"%7D&nosidebar=1') }}" 
                                         class="color_main py-1 radius_5 mb-0 text-center load_view_popup d-block" 
                                         data-toggle="modal" data-target="#actionModal">
                                             {{ $item->name }}

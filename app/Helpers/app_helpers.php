@@ -185,12 +185,11 @@ if (!function_exists('getDataTable')) {
         if ($get_obj) {
             return $query;
         }
-        if ($paginate>0) {
+        if ($paginate > 0) {
             $data = $query->orderBy($order, $order_by)->paginate($paginate);
         }elseif($limit > 0){
-            $data = $query->orderBy($order, $order_by)->take($limit, $offset);
-        }
-        else{
+            $data = $query->orderBy($order, $order_by)->take($limit, $offset)->get();
+        }else{
             $data = $query->orderBy($order, $order_by)->get();
         }
         if ($last_query) {

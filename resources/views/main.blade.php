@@ -38,7 +38,7 @@
                 </div>   
             @endif
             <div class="col-lg-6 text-center">
-                <h2 class="fs-15 text-uppercase font_bold pb-1 mb-3 border_bot_eb">thống kê đơn hàng trong năm</h2>
+                <h2 class="fs-15 text-uppercase font_bold pb-1 mb-3 border_bot_eb">thống kê đơn hàng đặt trong năm</h2>
                 <canvas id="order-chart" width="400" height="300" class="bg_white radius_5 p-2 mb-3 box_shadow_3"></canvas>
             </div>
             <div class="col-lg-6 text-center">
@@ -56,14 +56,14 @@
         let bar_ctx = document.getElementById('order-chart').getContext('2d');
         let bg_chart = bar_ctx.createLinearGradient(0, 100, 200, 500);
         bg_chart.addColorStop(0, '#459300');
-        bg_chart.addColorStop(1, '#6be102');
+        bg_chart.addColorStop(1, '#6be10294');
         let chat_data = @json($chart_data);
         let bar_chart = new Chart(bar_ctx, {
             type: 'bar',
             data: {
                 labels: ["Th 1", "Th 2", "th 3", "Th 4", "th 5", "th 6", "Th 7", "Th 8", "Th 9", "Th 10", "Th 11", "Th 12"],
                 datasets: [{
-                    label: 'Số lượng đơn đã tạo trong tháng',
+                    label: 'Số lượng đơn hàng đặt đã tạo trong tháng',
                     data:  Object.values(chat_data),
                     backgroundColor: bg_chart,
                     hoverBackgroundColor: bg_chart,

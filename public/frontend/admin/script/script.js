@@ -922,6 +922,20 @@ var addDataLinkingModule = function () {
     });
 }
 
+var addItemChildLinking = function()
+{
+    $(document).on('click', '.__add_item_child_linking_button', function (event) {
+        event.preventDefault();
+        let _this = $(this);
+        let parent = _this.closest('.list_item_child_linking');
+        let list_module = parent.find('.list_child_linking_data');
+        let items = list_module.find('.item_child_linking');
+        let index = getEmptyDefault(items.last().data('index'), 0, 'float') + 1;
+        let url = 'ajax-respone/insertItemChildLinking?index=' + index + '&table=' + _this.data('table') + '&key_name=' + _this.data('key');
+        ajaxViewTarget(url, list_module, list_module, 2);
+    });
+}
+
 var removeParentElement = function () {
     $(document).on('click', '.remove_parent_element_button', function (event) {
         event.preventDefault();
@@ -929,10 +943,22 @@ var removeParentElement = function () {
         let id = $(this).data('id');
         let table = $(this).data('table');
         if (!empty(id)) {
-            ajaxBaseCall({
-                url: getBaseRoute('remove?ajax=1'),
-                type: 'DELETE',
-                data: { remove_id: id, table: table }
+            swal({
+                title: 'Xóa dữ liệu ',
+                text: 'Bạn chắc chắn muốn Xóa vĩnh viễn dữ liệu dữ này ?',
+                icon: 'info',
+                dangerMode: true,
+                buttons: true,
+                confirmButtonColor: "#459300",
+                buttons: ['Hủy', 'Xóa dữ liệu']
+            }).then((action) => {
+                if (action) {
+                    ajaxBaseCall({
+                        url: getBaseRoute('remove?ajax=1'),
+                        type: 'DELETE',
+                        data: { remove_id: id, table: table }
+                    });
+                }
             });
         }
     });
@@ -1667,6 +1693,7 @@ $(function () {
     addSuppBuyModule();
     selectTypeSupplyBuying();
     addDataLinkingModule();
+    addItemChildLinking();
     removeParentElement();
     submitOnlylinkingData();
     changeInputPriceBuying();

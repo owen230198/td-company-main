@@ -41,6 +41,7 @@ class BaseService
 	public function processDataBefore($data, $table)
 	{
 		unset($data['created_at'], $data['updated_at']);
+		$child_linkings = [];
 		foreach ($data as $key => $item) {
             $field = \App\Models\NDetailTable::select(['type', 'attr', 'note', 'name', 'table_map', 'other_data'])->where(['table_map'=>$table, 'name'=>$key])->first();
 			$attr = !empty($field['attr']) ? json_decode($field['attr'], true) : [];
@@ -56,13 +57,27 @@ class BaseService
 				$data[$key] = json_encode($item);
 			}elseif (@$field['type'] == 'multiplelinking') {
 				$data[$key] = json_encode($item);
-			}elseif (@$attr['type_input'] == 'password') {
+			}elseif (@$field['type'] == 'text' && @$attr['type_input'] == 'password') {
 				$data[$key] = md5($data['password']);
+			}elseif (@$field['type'] == 'child_linking') {
+				$data_other = $other_data['data'];
+				$table_child = $data_other['table'];
+				foreach ($item as $child_data) {
+					$data_child = $this->processDataBefore($child_data, $table_child);
+					if (@$data_child['code'] == 100) {
+						return $data_child;
+						break;
+					}
+				}
+				$data_child['table'] = $table_child;
+				$data_child['field_parent'] = $data_other['field_query'];
+				$child_linkings[] = $data_child;
+				unset($data[$key]);
 			}else{
 				$data[$key] = $item;	
 			} 
         }
 		$this->configBaseDataAction($data);
-		return ['code' => 200, 'data' => $data];
+		return ['code' => 200, 'data' => $data, 'child_linkings' => $child_linkings];
 	}
 }

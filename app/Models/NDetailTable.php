@@ -44,4 +44,11 @@ class NDetailTable extends Model
         }
         $data = in_array($action, ['view', 'rp_view']) ? ['rowspan' => $rowspan, 'field_shows' => $fields] : $fields;
     }
+
+    static function getByAction($table, $action = 'view', $where = [])
+    {
+        $list = NDetailTable::where(['act' => 1, 'table_map'=> $table, $action => 1])->orderBy('ord', 'asc')->get()->toArray();
+        self::handleField($list, $action, $where);
+        return $list;
+    }
 }

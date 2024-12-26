@@ -7,4 +7,5 @@ class ProviderPrice extends Model
 {
     protected $table = 'provider_prices';
     protected $protectFields = false;
+    protected $guarded = [];
 }

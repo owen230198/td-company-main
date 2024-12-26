@@ -246,6 +246,9 @@ class AdminController extends Controller
             if ($request->isMethod('GET')) {
                 $this->injectViewWhereParam($table, $param);
                 $data = $this->admins->getDataActionView($table, __FUNCTION__, 'Thêm mới', $param, self::$view_where);
+                if (!empty($param)) {
+                    $data['dataItem'] = $param;
+                }
                 $data['action_url'] = url('insert/'.$table);
                 return view('action.view', $data);
             }else{
