@@ -48,7 +48,6 @@
             $table = 'supply_buyings';
             if (!$request->isMethod('POST')) {
                 $data = $this->admins->getDataActionView($table, __FUNCTION__, 'Thêm mới');
-                $data['nosidebar'] = $request->input('nosidebar');
                 $data['action_url'] = url('insert/'.$table);
                 if (!empty($request->input('name'))) {
                     if ($nosidebar) {

@@ -573,5 +573,14 @@ if (!function_exists('convertNumerToText')) {
             return number_format($number, strlen(substr(strrchr($number, "."), 1)), '.', ',');
         }
     }
+
+    if (!function_exists('replaceValueParam')) {
+        function replaceValueParam($pattern, $str, $data){
+            return preg_replace_callback($pattern, function ($matches) use ($data) {
+                $key = $matches[1];
+                return isset($data->$key) ? $data->$key : $matches[0];
+            }, $str);
+        }
+    }
 }
 

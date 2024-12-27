@@ -1,13 +1,9 @@
 @php
     $link_ext_btn = @$button['link'];
     if (!empty($link_ext_btn)) {
-        if (str_contains($link_ext_btn, '<id>') || str_contains($link_ext_btn, '<table>')) {
-            if (str_contains($link_ext_btn, '<id>')) {
-            $link_ext_btn = str_replace('<id>', $data->id, $link_ext_btn);
-            }
-            if (str_contains($link_ext_btn, '<table>')) {
-                $link_ext_btn = str_replace('<table>', $tableItem['name'], $link_ext_btn);
-            }
+        $pattern = '/<(\w+)>/';
+        if (preg_match($pattern, $link_ext_btn, $matches)) {
+            $link_ext_btn = replaceValueParam($pattern, $link_ext_btn, $data);
         }else{
             $link_ext_btn = $link_ext_btn.''.$data->id;    
         }

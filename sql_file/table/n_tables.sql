@@ -11,7 +11,7 @@
  Target Server Version : 80030
  File Encoding         : 65001
 
- Date: 25/12/2024 18:20:40
+ Date: 28/12/2024 00:29:32
 */
 
 SET NAMES utf8mb4;
@@ -41,7 +41,7 @@ CREATE TABLE `n_tables`  (
   `updated_at` datetime NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `indx`(`id` ASC, `name` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 53 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 55 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of n_tables
@@ -57,8 +57,8 @@ INSERT INTO `n_tables` VALUES (8, 'q_papers', 'Tờ in', NULL, 10, 'view', NULL,
 INSERT INTO `n_tables` VALUES (9, 'devices', 'Thiết bị & Chi phí', '{\r\n	\"link\":\"config-device-price/supply_types?type=devices\", \r\n	\"note\":\"Danh sách thiết bị máy theo vật tư\"\r\n}', 10, 'view', NULL, NULL, NULL, 1, 1, 1, 1, NULL, NULL, '2023-04-23 11:30:46', '2023-08-30 04:55:37');
 INSERT INTO `n_tables` VALUES (10, 'materals', 'Chất liệu vật tư', NULL, 10, 'view', NULL, NULL, NULL, 1, 1, 1, 1, NULL, NULL, '2023-04-28 10:32:23', '2023-08-16 19:42:33');
 INSERT INTO `n_tables` VALUES (11, 'printers', 'Máy in & chi phí', NULL, 10, 'view', NULL, NULL, NULL, 1, 1, 1, 1, NULL, NULL, '2023-04-28 00:18:55', '2023-08-16 19:42:33');
-INSERT INTO `n_tables` VALUES (13, 'supply_types', 'Vật tư tham gia sx', NULL, 10, 'view', NULL, '[\r\n	{\r\n	\"icon\":\"list-ul\",\r\n	\"note\":\"Đơn giá định lượng\", \r\n	\"link\":\"view/supply_prices?default_data=%7B%22supply_id%22%3A%22<id>%22%7D\",\r\n	\"condition\":[\r\n			{\"key\":\"is_name\", \"value\":\"0\"}\r\n		]\r\n	}\r\n]', NULL, 1, 1, 1, 1, NULL, NULL, '2023-07-17 19:30:41', '2024-04-15 05:52:58');
-INSERT INTO `n_tables` VALUES (14, 'supply_prices', 'Đơn giá vật tư', NULL, 20, 'view', NULL, NULL, NULL, 1, 1, 1, 1, NULL, NULL, '2023-04-28 10:33:01', '2023-08-16 19:42:34');
+INSERT INTO `n_tables` VALUES (13, 'supply_types', 'Vật tư sản xuất', NULL, 10, 'view', NULL, '[\r\n	{\r\n	\"type\":2,\r\n	\"class\":\"load_view_popup\",\r\n	\"icon\":\"list-ul\",\r\n	\"note\":\"Đơn giá định lượng\", \r\n	\"link\":\"view/supply_prices?default_data=%7B%22type%22%3A%22<type>%22%2C%22supply_id%22%3A%22<id>%22%7D&nosidebar=1\",\r\n	\"condition\":[\r\n			{\"key\":\"is_name\", \"value\":\"0\"}\r\n		]\r\n	}\r\n]', NULL, 1, 1, 1, 1, NULL, NULL, '2023-07-17 19:30:41', '2024-12-27 23:47:46');
+INSERT INTO `n_tables` VALUES (14, 'supply_prices', 'Định lượng vật tư', NULL, 20, 'view', NULL, NULL, NULL, 1, 1, 1, 1, NULL, NULL, '2023-04-28 10:33:01', '2024-12-27 23:48:04');
 INSERT INTO `n_tables` VALUES (18, 'orders', 'Đơn hàng', NULL, 20, 'view', NULL, '[\n	{\n	\"type\":2,\n	\"class\":\"load_view_popup\",\n	\"icon\":\"list-ul\",\n	\"note\":\"DS sản phẩm\", \n	\"link\":\"view/products?default_data=%7B%22order%22%3A%22<id>%22%7D&nosidebar=1\"\n	},\n	{\n		\"icon\":\"print\",\n		\"note\":\"In đơn\", \n		\"blank\":1,\n		\"link\":\"print-data/orders/<id>\"\n	}\n]', NULL, 0, 1, 1, 2, 1, 1, '2023-06-21 13:22:33', '2024-12-03 16:11:38');
 INSERT INTO `n_tables` VALUES (19, 'base_receipts', 'Phiếu chuyển kho', NULL, 50, 'view', NULL, '[\r\n	{\r\n	\"type\":2,\r\n	\"class\":\"load_view_popup\",\r\n	\"icon\":\"list-ol\",\r\n	\"note\":\"Danh sách sản phẩm\", \r\n	\"link\":\"view/move_warehouses?default_data=%7B%22parent%22%3A%22<id>%22%7D&nosidebar=1\"\r\n	}\r\n]', NULL, 0, 1, 1, 0, NULL, 1, '2023-04-23 11:30:46', '2024-11-04 16:03:36');
 INSERT INTO `n_tables` VALUES (20, 'product_categories', 'Nhóm sản phẩm', '', 20, 'view', NULL, '[\r\n	{\r\n	\"icon\":\"list-ul\",\r\n	\"note\":\"Kiểu hộp\", \r\n	\"link\":\"view/product_styles?default_data=%7B%22category%22%3A%22<id>%22%7D\"\r\n	}\r\n]', NULL, 0, 1, 0, 0, NULL, NULL, '2023-04-23 11:30:46', '2024-04-15 05:56:48');
@@ -93,7 +93,7 @@ INSERT INTO `n_tables` VALUES (49, 'c_orders', 'Chứng từ bán hàng', '', 10
 INSERT INTO `n_tables` VALUES (50, 'c_products', 'KCS thành phẩm', NULL, 10, 'view', NULL, '[\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"calendar-check-o\",\r\n		\"note\":\"Yêu cầu nhập kho\",\r\n		\"class\":\"__product_takein_req\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"processing\"}\r\n		]\r\n	}\r\n]', NULL, 0, 1, 1, 2, NULL, NULL, '2023-04-23 11:30:46', '2024-09-25 23:12:25');
 INSERT INTO `n_tables` VALUES (51, 'move_warehouses', 'Sản phẩm chuyển kho', NULL, 100, 'view', NULL, '', NULL, 0, 0, 1, 0, NULL, NULL, '2023-07-17 19:30:41', '2024-04-15 05:52:58');
 INSERT INTO `n_tables` VALUES (52, 'c_payments', 'Đề xuất chi', '', 10, 'view', '', '[ 	{ 		\"type\":2, 		\"icon\":\"check\", 		\"note\":\"Xác nhận chi\", 		\"class\":\"__confirm_cpayment\", 		\"condition\":[ 			{\"con\":\"or\",\"key\":\"status\",\"value\":\"processing\"}, 			{\"con\":\"or\",\"key\":\"status\",\"value\":\"not_accepted\"} 		] 	} ]', NULL, 1, 1, 1, 1, 0, 1, '2023-07-14 03:17:55', '2024-12-13 00:17:56');
-INSERT INTO `n_tables` VALUES (53, 'supply_origins', 'Xuất xứ vật tư', '', 50, 'view', '', '', NULL, 1, 1, 1, 1, 0, 1, '2023-07-14 03:17:55', '2024-12-25 16:00:13');
+INSERT INTO `n_tables` VALUES (53, 'supply_origins', 'Xuất xứ vật tư', '', 50, 'view', '', '', NULL, 1, 1, 1, 1, 0, 0, '2023-07-14 03:17:55', '2024-12-25 22:57:07');
 INSERT INTO `n_tables` VALUES (54, 'provider_prices', 'Bảng giá vật tư theo NCC', '', 50, 'view', '', '', NULL, 1, 1, 1, 1, 0, 1, '2023-07-14 03:17:55', '2024-12-13 00:17:56');
 
 SET FOREIGN_KEY_CHECKS = 1;

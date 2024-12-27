@@ -2,6 +2,7 @@
 
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
+use PhpOffice\PhpSpreadsheet\Calculation\Statistical\Distributions\F;
 
 class SupplyOrigin extends Model
 {
@@ -10,10 +11,14 @@ class SupplyOrigin extends Model
     
     static function getTableSupplyParentByType($data)
     {
-        if (empty($data->type)) {
+        return self::getTableParentByType(@$data->type);
+    }
+
+    static function getTableParentByType($type){
+        if (empty($type)) {
             return 'materals';
         }
-        $arr = searchSupplyCate($data->type, 'type');
+        $arr = searchSupplyCate($type, 'type');
         $supply_cate = reset($arr);
         return @$supply_cate['table_parent'] ?? 'materals';
     }

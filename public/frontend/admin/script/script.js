@@ -887,9 +887,10 @@ var addSuppBuyModule = function () {
 
     $(document).on('change', 'select.__select_supp_type_buying', function (event) {
         event.preventDefault();
-        let parent = $(this).closest('.item_supp_buy');
+        let _this = $(this);
+        let parent = _this.closest('.item_supp_buy');
         let index = parent.data('index');
-        let url = 'get-view-buying-supply-type?index=' + index + '&supp_type=' +$(this).val();
+        let url = 'get-view-buying-supply-type?index=' + index + '&supp_type=' + _this.val();
         let view_target = parent.find('.ajax_supply_buying_data');
         ajaxViewTarget(url, view_target, view_target);
     });
@@ -899,9 +900,10 @@ var selectTypeSupplyBuying = function()
     {
         $(document).on('change', 'select.__supply_buying_select_type', function(event){
             event.preventDefault();
-            let parent = $(this).closest('form');
+            let _this = $(this);
+            let parent = _this.closest('form');
             let selects = parent.find('select.__select_supp_type_buying');
-            let type = $(this).val();
+            let type = _this.val();
             if (selects.length > 0) {
                 selects.each(function(){
                     $(this).val(type);

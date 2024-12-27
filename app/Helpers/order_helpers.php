@@ -3,6 +3,7 @@
 use App\Models\CPayment;
 use App\Models\Customer;
 use App\Models\Product;
+use App\Models\SupplyOrigin;
 
     if (!function_exists('getOrderNameStageByKey')) {
         function getOrderNameStageByKey($key)
@@ -677,9 +678,51 @@ use App\Models\Product;
 
     if (!function_exists('getViewSuppluBuyingByType')) {
         function getViewSuppluBuyingByType($type, $index)
-        {   
-            $table = tableWarehouseByType($type);
-            $data['fields'] = (new \App\Services\AdminService)->getFieldAction($table, 'get_other', [['key' => 'type', 'value' => $type]]);
+        {
+            $data['fields'] =[
+                [
+                    'name' => 'target',
+                    'note' => 'Loại vật tư',
+                    'type' => 'linking',
+                    'other_data' => [
+                        'config' => [
+                            'seach_box' => 1
+                        ],
+                        'data' => [
+                            'table' => SupplyOrigin::getTableParentByType($type),
+                            'where' => ['type' => $type]
+                        ]
+                    ]
+                ],
+                [
+                    'name' => 'origin',
+                    'note' => 'Xuất xứ',
+                    'type' => 'linking',
+                    'other_data' => [
+                        'config' => [
+                            'seach_box' => 1
+                        ],
+                        'data' => [
+                            'table' =>'supply_origins',
+                            'where' => ['type' => $type]
+                        ]
+                    ]
+                ],
+                [
+                    'name' => 'qtv',
+                    'note' => 'Định lượng',
+                    'type' => 'linking',
+                    'other_data' => [
+                        'config' => [
+                            'seach_box' => 1
+                        ],
+                        'data' => [
+                            'table' =>'supply_prices',
+                            'where' => ['type' => $type]
+                        ]
+                    ]
+                ]
+            ];
             $data['index'] = $index;
             $data['supp_type'] = $type;
             return $data;
