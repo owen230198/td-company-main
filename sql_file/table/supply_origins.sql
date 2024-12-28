@@ -11,7 +11,7 @@
  Target Server Version : 80030
  File Encoding         : 65001
 
- Date: 25/12/2024 18:21:05
+ Date: 28/12/2024 18:24:08
 */
 
 SET NAMES utf8mb4;
@@ -25,7 +25,7 @@ CREATE TABLE `supply_origins`  (
   `id` int NOT NULL AUTO_INCREMENT COMMENT 'Mã nhóm',
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Tên nhóm',
   `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `parent` int NULL DEFAULT NULL COMMENT 'Cha',
+  `supply_id` int NULL DEFAULT NULL COMMENT 'Cha',
   `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Ghi chú',
   `act` tinyint NULL DEFAULT NULL,
   `ord` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
@@ -34,13 +34,9 @@ CREATE TABLE `supply_origins`  (
   `created_by` int NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `type_index`(`type` ASC) USING BTREE,
-  INDEX `carton_foam_index`(`parent` ASC) USING BTREE,
+  INDEX `carton_foam_index`(`supply_id` ASC) USING BTREE,
   INDEX `name_index`(`name` ASC) USING BTREE,
   INDEX `act_indx`(`act` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of supply_origins
--- ----------------------------
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 SET FOREIGN_KEY_CHECKS = 1;

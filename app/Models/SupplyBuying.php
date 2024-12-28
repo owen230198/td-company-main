@@ -15,6 +15,12 @@ class SupplyBuying extends Model
     {
         return \GroupUser::isAdmin() ? 0 : (\GroupUser::isDoBuying() && ($status == \StatusConst::PROCESSING || $status == \StatusConst::NOT_ACCEPTED) ? 0 : 1);
     }
+    
+    static function canUpdateSuppDataBuyibng()
+    {
+        return \GroupUser::isPlanHandle() || \GroupUser::isAdmin();
+    }
+
     static function getFeildSupplyJson($value = [], $status)
     {
         $field_supp_type = [
@@ -96,12 +102,6 @@ class SupplyBuying extends Model
     static function canHandle()
     {
         return \GroupUser::isAdmin() || \GroupUser::isAccounting();
-    }
-
-    static function getFieldQtyArr($type, $status = '')
-    {
-        $admin_dobuying = self::checkReadOnlyInputPrice($status) == 0  ? 0 : 1;
-        return WarehouseService::getQtyFieldByType($type, !$admin_dobuying || \GroupUser::isPlanHandle() ? 0 : 1);
     }
 
     static function getRole()

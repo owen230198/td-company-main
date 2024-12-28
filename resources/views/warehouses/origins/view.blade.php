@@ -33,7 +33,7 @@
                             </tr>
                             @foreach ($list_data as $key => $item)
                                 @php
-                                    $link_provider = 'view/supply_origins?default_data=%7B"type"%3A"'.$cate_type.'","parent":"'.$item->id.'"%7D&nosidebar=1';
+                                    $link_provider = 'view/supply_origins?default_data=%7B"type"%3A"'.$cate_type.'","supply_id":"'.$item->id.'"%7D&nosidebar=1';
                                 @endphp
                                 <tr>
                                     <td class="w_50">{{ $key + 1 }}</td>

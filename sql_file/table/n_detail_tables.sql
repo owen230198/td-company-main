@@ -11,7 +11,7 @@
  Target Server Version : 80030
  File Encoding         : 65001
 
- Date: 28/12/2024 00:29:18
+ Date: 28/12/2024 18:24:29
 */
 
 SET NAMES utf8mb4;
@@ -51,7 +51,7 @@ CREATE TABLE `n_detail_tables`  (
   INDEX `map_insert`(`table_map` ASC, `insert` ASC) USING BTREE,
   INDEX `map_update`(`table_map` ASC, `update` ASC) USING BTREE,
   INDEX `map_search`(`table_map` ASC, `search` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 466 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 468 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of n_detail_tables
@@ -483,7 +483,7 @@ INSERT INTO `n_detail_tables` VALUES (453, 'ext_role', '', 'Quyền xử lí k�
 INSERT INTO `n_detail_tables` VALUES (454, 'receipt', '', 'Phiếu giao dịch', 'filev2', 'c_payments', 0, 0, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-12-13 00:19:44');
 INSERT INTO `n_detail_tables` VALUES (455, 'group_supply', '', 'Dạng vật tư', 'group', 'supply_origins', 0, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '{\r\n	\"group_class\":\"__module_select_type_warehouse\",\r\n	\"width\":\"8\",\r\n	\"width_child\":\"6\"\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-23 14:41:40', '2024-12-26 21:27:56');
 INSERT INTO `n_detail_tables` VALUES (456, 'type', '{\"required\":1,\"inject_class\":\"__supply_origin_select_type\",\"readonly\":1}', 'Nhóm vật tư', 'select', 'supply_origins', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 455, '{\r\n	\"config\":{\r\n		\"searchbox\":1\r\n	},\r\n	\"data\":{\r\n		\"options\":{\r\n			\"\":\"Chọn loại vật tư\",\r\n			\"paper\":\"Giấy in\", \r\n			\"nilon\":\"Màng nilon\", \r\n			\"metalai\":\"Màng metalai\",\r\n			\"cover\":\"Màng phủ trên\",\r\n			\"carton\":\"Carton\",\r\n			\"rubber\":\"Cao su\",\r\n			\"styrofoam\":\"Mút phẳng\",\r\n			\"decal\":\"Nhung\",\r\n			\"silk\":\"Vải lụa\",\r\n			\"mica\":\"Mi ca\",\r\n			\"emulsion\":\"Nhũ\",\r\n			\"skrink\":\"Màng co\",\r\n			\"magnet\":\"Nam châm\",\r\n			\"uv\":\"Mực in\",\r\n			\"other\":\"Vật tư khác\"\r\n		}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-11 11:18:58', '2024-12-26 21:27:27');
-INSERT INTO `n_detail_tables` VALUES (457, 'parent', '{\"required\":1,\"inject_class\":\"__supply_origin_select_parent\",\"readonly\":1}', 'Vật tư', 'linking', 'supply_origins', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 455, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":{\r\n			\"getFunc\":{\r\n				\"model\":\"SupplyOrigin\",\r\n				\"method\":\"getTableSupplyParentByType\"\r\n			}\r\n		}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-07-14 02:55:31', '2024-12-26 21:27:40');
+INSERT INTO `n_detail_tables` VALUES (457, 'supply_id', '{\"required\":1,\"inject_class\":\"__supply_origin_select_parent\",\"readonly\":1}', 'Vật tư', 'linking', 'supply_origins', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 455, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":{\r\n			\"getFunc\":{\r\n				\"model\":\"SupplyOrigin\",\r\n				\"method\":\"getTableSupplyParentByType\"\r\n			}\r\n		}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-07-14 02:55:31', '2024-12-28 18:07:30');
 INSERT INTO `n_detail_tables` VALUES (458, 'name', '{\"required\":1}', 'Xuất xứ', 'text', 'supply_origins', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-12-26 00:39:42');
 INSERT INTO `n_detail_tables` VALUES (459, 'provider_price', '{\"required\":1}', 'Bảng giá NCC', 'child_linking', 'supply_origins', 0, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '{\r\n	\"data\":{\r\n		\"table\":\"provider_prices\",\r\n		\"field_query\":\"origin\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-12-26 14:07:36');
 INSERT INTO `n_detail_tables` VALUES (460, 'origin', '', 'Xuất xứ', 'linking', 'provider_prices', NULL, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"supply_origins\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-12-26 15:16:34');

@@ -697,6 +697,30 @@ var selectTypeSuppWarehouse = function () {
     }
 }
 
+var selectSupplyToOrigin = function()
+{
+    $(document).on('change', '.__select_supply_to_origin ', function(event){
+        event.preventDefault();
+        let _this = $(this);
+        let parent = _this.closest('.__data_supply_buying_conf');
+        let supply_id = _this.val();
+        let cate = parent.data('cate');
+        let param = '&type=' + cate + '&supply_id=' + supply_id + '&field_search=name';
+        let select_origin = parent.find('.__origin_select');
+        if (select_origin.length > 0) {
+            select_origin.data('url', getBaseRoute('get-data-json-linking?table=supply_origins' + param));
+            select_origin.val('');
+        }
+        let select_qtv = parent.find('.__qtv_select ');
+        if (select_qtv.length > 0) {
+            select_qtv.data('url', getBaseRoute('get-data-json-linking?table=supply_prices' + param));
+            select_qtv.val('');
+        }
+        selectAjaxModule(parent);
+    })
+    
+}
+
 var getUrlLinkingCPaymentObject = function (type) {
     if (empty(type)) {
         return '';
@@ -1688,6 +1712,7 @@ $(function () {
     moduleSelectAjaxChild();
     selectTypeSuppWarehouse();
     selectTypePaymentRequire();
+    selectSupplyToOrigin();
     selectTypeWorker();
     passwordChangeInput();
     moduleSelectStyleProduct();

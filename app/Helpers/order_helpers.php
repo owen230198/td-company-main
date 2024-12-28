@@ -677,48 +677,56 @@ use App\Models\SupplyOrigin;
 	}
 
     if (!function_exists('getViewSuppluBuyingByType')) {
-        function getViewSuppluBuyingByType($type, $index)
+        function getViewSuppluBuyingByType($type, $index, $target = '')
         {
+            $where_type = ['type' => $type]; 
+            $where_child = $where_type;
+            if (!empty($target)) {
+                $where_child['supply_id'] = $target;
+            }
             $data['fields'] =[
                 [
                     'name' => 'target',
                     'note' => 'Loại vật tư',
+                    'attr' => ['inject_class' => '__select_supply_to_origin'],
                     'type' => 'linking',
                     'other_data' => [
                         'config' => [
-                            'seach_box' => 1
+                            'search' => 1
                         ],
                         'data' => [
                             'table' => SupplyOrigin::getTableParentByType($type),
-                            'where' => ['type' => $type]
+                            'where' => $where_type
                         ]
                     ]
                 ],
                 [
                     'name' => 'origin',
                     'note' => 'Xuất xứ',
+                    'attr' => ['inject_class' => '__origin_select'],
                     'type' => 'linking',
                     'other_data' => [
                         'config' => [
-                            'seach_box' => 1
+                            'search' => 1
                         ],
                         'data' => [
                             'table' =>'supply_origins',
-                            'where' => ['type' => $type]
+                            'where' => $where_child
                         ]
                     ]
                 ],
                 [
                     'name' => 'qtv',
                     'note' => 'Định lượng',
+                    'attr' => ['inject_class' => '__qtv_select'],
                     'type' => 'linking',
                     'other_data' => [
                         'config' => [
-                            'seach_box' => 1
+                            'search' => 1
                         ],
                         'data' => [
                             'table' =>'supply_prices',
-                            'where' => ['type' => $type]
+                            'where' => $where_child
                         ]
                     ]
                 ]
