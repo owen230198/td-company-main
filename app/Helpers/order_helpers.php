@@ -726,7 +726,8 @@ use App\Models\SupplyOrigin;
                         ],
                         'data' => [
                             'table' =>'supply_prices',
-                            'where' => $where_child
+                            'where' => $where_child,
+                            'field_value' => 'price_purchase'
                         ]
                     ]
                 ]

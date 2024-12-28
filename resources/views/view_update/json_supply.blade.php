@@ -1,7 +1,7 @@
 @php
     $arr_value = !empty($value) ? json_decode($value, true) : [];
 @endphp
-<div class="json_supply_buy p-2 radius_5 box_shadow_3 form-control length_input">
+<div class="json_supply_buy p-2 radius_5 box_shadow_3">
     <div class="list_supply_buy">
         @if (count($arr_value) > 0)
             @foreach ($arr_value as $key => $supp_val)

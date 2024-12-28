@@ -713,7 +713,7 @@ var selectSupplyToOrigin = function()
         }
         let select_qtv = parent.find('.__qtv_select ');
         if (select_qtv.length > 0) {
-            select_qtv.data('url', getBaseRoute('get-data-json-linking?table=supply_prices' + param));
+            select_qtv.data('url', getBaseRoute('get-data-json-linking?table=supply_prices&field_value=price_purchase' + param));
             select_qtv.val('');
         }
         selectAjaxModule(parent);
@@ -909,7 +909,7 @@ var addSuppBuyModule = function () {
        
     });
 
-    $(document).on('change', 'select.__select_supp_type_buying', function (event) {
+    $(document).on('change', '.__select_supp_type_buying', function (event) {
         event.preventDefault();
         let _this = $(this);
         let parent = _this.closest('.item_supp_buy');
@@ -926,7 +926,7 @@ var selectTypeSupplyBuying = function()
             event.preventDefault();
             let _this = $(this);
             let parent = _this.closest('form');
-            let selects = parent.find('select.__select_supp_type_buying');
+            let selects = parent.find('.__select_supp_type_buying');
             let type = _this.val();
             if (selects.length > 0) {
                 selects.each(function(){
@@ -1031,7 +1031,7 @@ var changeInputPriceBuying = function () {
         let item = _this.closest('.item_supp_buy');
         let price = getEmptyDefault(item.find('input.__buying_price_input').val(), 0, 'float');
         let qty = getEmptyDefault(item.find('input.__buying_qty_input').val(), 0, 'number');
-        let type_supp = item.find('select.__select_supp_type_buying').val();
+        let type_supp = item.find('.__select_supp_type_buying').val();
         let total_input = item.find('.__buying_total_input');
         if (type_supp == 'paper') {
             let qtv_input = getEmptyDefault(item.find('input.__paper_qtv_input').val(), 1, 'float');
