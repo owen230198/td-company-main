@@ -471,7 +471,7 @@ if (!function_exists('convertNumerToText')) {
 		80                  => 'Tám mươi',
 		90                  => 'Chín mươi',
 		100                 => 'trăm',
-		1000                => 'nghàn',
+		1000                => 'ngàn',
 		1000000             => 'triệu',
 		1000000000          => 'tỷ',
 		1000000000000       => 'nghìn tỷ',
