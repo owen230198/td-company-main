@@ -107,7 +107,6 @@ var getEmptyDefault = function (value, deflt = '', type = 'string') {
 		} else {
 			return value;
 		}
-
 	}
 }
 

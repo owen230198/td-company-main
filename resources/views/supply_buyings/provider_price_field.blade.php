@@ -12,7 +12,8 @@
             ],
             'attr' => [
                 'nolabel' => 1,
-                'readonly' => $readonly
+                'readonly' => $readonly,
+                'inject_class' => '__provider_suggest_module'
             ]
         ],
         [
@@ -22,7 +23,8 @@
             'attr' => [
                 'nolabel' => 1,
                 'readonly' => $readonly,
-                'type_input' => 'price'
+                'type_input' => 'price',
+                'inject_class' => '__provider_price_suggest_module __buying_price_input __buying_change_input'
             ]
         ]
     ];

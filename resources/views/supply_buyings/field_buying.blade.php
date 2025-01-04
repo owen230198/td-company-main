@@ -39,8 +39,9 @@
             'name' => $group_name.'[price]',
             'type' => 'text',
             'note' => 'Số lượng',
+            'min_label' =>  175,
             'attr' => [
-                'type_input' => 'price', 
+                'type_input' => 'number', 
                 'inject_class' => '__buying_qty_input __buying_change_input'
             ],
         ];
@@ -48,9 +49,11 @@
             'name' => $group_name.'[total]',
             'type' => 'text',
             'note' => 'Thành tiền',
+            'min_label' =>  175,
             'attr' => ['type_input' => 'price', 'readonly' => 1, 'inject_class' => '__buying_total_input']
         ];
     @endphp
+    @include('view_update.view', $field_qty)
     @include('supply_buyings.provider_price_field',[
         'provider_name' => $group_name.'[sugg_provider]',
         'price_name' => $group_name.'[sugg_price]',
@@ -63,4 +66,5 @@
         'readonly' => 0,
         'note' => 'NCC thực tế'
     ])
+    @include('view_update.view', $field_total)
 </div>

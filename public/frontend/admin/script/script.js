@@ -1029,23 +1029,14 @@ var changeInputPriceBuying = function () {
         event.preventDefault();
         let _this = $(this);
         let item = _this.closest('.item_supp_buy');
+        let length = getEmptyDefault(item.find('input.__buying_length').val(), 1, 'float');
+        let width = getEmptyDefault(item.find('input.__buying_width').val(), 1, 'float');
+        let qtv = getEmptyDefault(item.find('.__qtv_select').val(), 1, 'float');
         let price = getEmptyDefault(item.find('input.__buying_price_input').val(), 0, 'float');
         let qty = getEmptyDefault(item.find('input.__buying_qty_input').val(), 0, 'number');
-        let type_supp = item.find('.__select_supp_type_buying').val();
         let total_input = item.find('.__buying_total_input');
-        if (type_supp == 'paper') {
-            let qtv_input = getEmptyDefault(item.find('input.__paper_qtv_input').val(), 1, 'float');
-            let total = price * qty;
-            if (qtv_input > 1) {
-                let qtv = qtv_input/1000
-                let length = getEmptyDefault(item.find('input.__paper_length_input').val(), 1, 'float')/100;
-                let width = getEmptyDefault(item.find('input.__paper_width_input').val(), 1, 'float')/100;
-                total = parseInt(length * width * qtv * price * qty);
-            }
-            total_input.val(price_format(total));
-        }else{
-            total_input.val(price_format(parseInt(price * qty)));
-        }
+        total_value = length * width * qtv * price * qty;
+        total_input.val(price_format(total_value));
         total_input.trigger('change');
         let parent = _this.closest('.json_supply_buy');
         calcTotalSupplyBuying(parent);
@@ -1688,6 +1679,44 @@ var viewChartBtn = function () {
     });
 }
 
+var suggestOriginModule = function (){
+    $(document).on('change', '.__suggest_supply_provider_price', function(event){
+        event.preventDefault();
+        let _this = $(this);
+        let parent = _this.closest('.item_supp_buy');
+        let origin = getEmptyDefault(parent.find('.__origin_select').val(), 0);
+        let url = 'ajax-respone/getProviderSuggestBuying' + '?origin=' + origin;
+        let select_provider = parent.find('.__provider_suggest_module');
+        let price_input = parent.find('.__provider_price_suggest_module');
+        $.ajax({
+            url: url,
+            type: 'GET',
+        }).done(function (data) {
+            if (!empty(data.provider) && !empty(data.price)) {
+                select_provider.each(function(){
+                    $(this).val(data.provider);
+                    $(this).data('id', data.provider);
+                    $(this).data('label', data.provider_name);
+                });
+                price_input.each(function(){
+                    $(this).val(data.price);
+                });
+                initInputModuleAfterAjax(parent);
+            }else{
+                select_provider.each(function(){
+                    $(this).val('');
+                    $(this).data('id', '');
+                    $(this).data('label', '');
+                });
+                price_input.each(function(){
+                    $(this).val('');
+                });
+                initInputModuleAfterAjax(parent);   
+            }
+		});
+    });
+}
+
 $(function () {
     // loadingPage();
     submitActionAjaxForm();
@@ -1750,5 +1779,6 @@ $(function () {
     priceInputModule();
     confirmCLoneDataTable();
     viewChartBtn();
+    suggestOriginModule();
     addItemJsonFieldModule();
 });

@@ -24,6 +24,7 @@ use App\Models\Represent;
 use App\Models\SquareWarehouse;
 use App\Models\SupplyBuying;
 use App\Models\SupplyPrice;
+use App\Models\SupplyType;
 use App\Models\WSalary;
 use Illuminate\Support\Facades\File;
 
@@ -842,10 +843,15 @@ class DevController extends Controller
         }
     }
 
-    public function orderInCOrderData($request)
+    public function typeSupplyPriceData($request)
     {
-        $id = $request->id;
-        $order = Order::find($id);
+        $supply_prices = SupplyPrice::get();
+        foreach ($supply_prices as $supply_price) {
+            $supply_type = SupplyType::find($supply_price->supply_id);
+            if(!empty($supply_type)){
+                SupplyPrice::where('id', $supply_price->id)->update(['type' => $supply_type->type]);
+            }
+        }
     }
     
 }

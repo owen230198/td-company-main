@@ -65,9 +65,7 @@ class AuthService extends BaseService
         ];
         $messages = [
             'username.required'=> 'Username không được để trống !',
-            'username.min'=> 'Username yêu cầu ít nhất 3 ký tự !',
-            'password.required'=> 'Password không được để trống !',
-            'password.min'=> 'Password yêu cầu ít nhất 6 ký tự !'
+            'password.required'=> 'Password không được để trống !'
         ];
         $request->validate($rule, $messages);
     }

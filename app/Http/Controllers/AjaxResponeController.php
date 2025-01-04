@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductHistory;
 use App\Models\ProductWarehouse;
+use App\Models\ProviderPrice;
 use App\Models\Represent;
 use App\Models\SupplyBuying;
 use Illuminate\Http\Request;
@@ -441,6 +442,18 @@ class AjaxResponeController extends Controller
     {
         $data = $request->all();
         return view('view_update.child_linkings.item', $data);     
+    }
+    public function getProviderSuggestBuying($request)
+    {
+        if (empty($request->origin)) {
+            return [];
+        }
+        $provider_price = ProviderPrice::where('origin', $request->origin)->orderBy('price', 'asc')->first();
+        if (!empty($provider_price)) {
+            return ['provider' => $provider_price->provider, 'provider_name' => getFieldDataById('name', 'warehouse_providers', $provider_price->provider), 'price' => $provider_price->price];
+        }else{
+            return [];
+        }
     }
 }
 

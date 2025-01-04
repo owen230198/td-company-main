@@ -688,7 +688,7 @@ use App\Models\SupplyOrigin;
                 [
                     'name' => 'target',
                     'note' => 'Loại vật tư',
-                    'attr' => ['inject_class' => '__select_supply_to_origin'],
+                    'attr' => ['inject_class' => '__select_supply_to_origin __suggest_supply_provider_price'],
                     'type' => 'linking',
                     'other_data' => [
                         'config' => [
@@ -703,7 +703,7 @@ use App\Models\SupplyOrigin;
                 [
                     'name' => 'origin',
                     'note' => 'Xuất xứ',
-                    'attr' => ['inject_class' => '__origin_select'],
+                    'attr' => ['inject_class' => '__origin_select __suggest_supply_provider_price'],
                     'type' => 'linking',
                     'other_data' => [
                         'config' => [
@@ -718,7 +718,7 @@ use App\Models\SupplyOrigin;
                 [
                     'name' => 'qtv',
                     'note' => 'Định lượng',
-                    'attr' => ['inject_class' => '__qtv_select'],
+                    'attr' => ['inject_class' => '__qtv_select __suggest_supply_provider_price'],
                     'type' => 'linking',
                     'other_data' => [
                         'config' => [
