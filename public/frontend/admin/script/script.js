@@ -921,21 +921,21 @@ var addSuppBuyModule = function () {
 }
 
 var selectTypeSupplyBuying = function()
-    {
-        $(document).on('change', 'select.__supply_buying_select_type', function(event){
-            event.preventDefault();
-            let _this = $(this);
-            let parent = _this.closest('form');
-            let selects = parent.find('.__select_supp_type_buying');
-            let type = _this.val();
-            if (selects.length > 0) {
-                selects.each(function(){
-                    $(this).val(type);
-                    $(this).trigger('change');   
-                });
-            }
-        })
-    }
+{
+    $(document).on('change', 'select.__supply_buying_select_type', function(event){
+        event.preventDefault();
+        let _this = $(this);
+        let parent = _this.closest('form');
+        let selects = parent.find('.__select_supp_type_buying');
+        let type = _this.val();
+        if (selects.length > 0) {
+            selects.each(function(){
+                $(this).val(type);
+                $(this).trigger('change');   
+            });
+        }
+    })
+}
 
 var addDataLinkingModule = function () {
     $(document).on('click', 'button.add_data_linking_button', function (event) {
@@ -1025,7 +1025,7 @@ var totalSupplyBuyingInput = function()
 }
 
 var changeInputPriceBuying = function () {
-    $(document).on('change keyup', 'input.__buying_change_input', function (event) {
+    $(document).on('change keyup', '.__buying_change_input', function (event) {
         event.preventDefault();
         let _this = $(this);
         let item = _this.closest('.item_supp_buy');
@@ -1686,34 +1686,45 @@ var suggestOriginModule = function (){
         let parent = _this.closest('.item_supp_buy');
         let origin = getEmptyDefault(parent.find('.__origin_select').val(), 0);
         let url = 'ajax-respone/getProviderSuggestBuying' + '?origin=' + origin;
-        let select_provider = parent.find('.__provider_suggest_module');
+        let select_providers = parent.find('.__provider_suggest_module');
         let price_input = parent.find('.__provider_price_suggest_module');
+        select_providers.each(function(){
+            $(this).html('');
+        });
+        initInputModuleAfterAjax(parent);
         $.ajax({
             url: url,
             type: 'GET',
         }).done(function (data) {
             if (!empty(data.provider) && !empty(data.price)) {
-                select_provider.each(function(){
-                    $(this).val(data.provider);
-                    $(this).data('id', data.provider);
-                    $(this).data('label', data.provider_name);
+                let arrs = data.arr_providers;
+                select_providers.each(function(){
+                    let select = $(this);
+                    arrs.forEach(function(provider) {
+                        select.append($('<option>', {
+                            value: provider[0],
+                            text: provider[1]
+                        }));
+                    });
+                    
                 });
                 price_input.each(function(){
                     $(this).val(data.price);
+                    $(this).trigger('change');
                 });
                 initInputModuleAfterAjax(parent);
-            }else{
-                select_provider.each(function(){
-                    $(this).val('');
-                    $(this).data('id', '');
-                    $(this).data('label', '');
-                });
-                price_input.each(function(){
-                    $(this).val('');
-                });
-                initInputModuleAfterAjax(parent);   
             }
 		});
+    });
+
+    $(document).on('change', '.__provider_suggest_module', function(event){
+        event.preventDefault();
+        let _this = $(this);
+        let price = _this.val();
+        let parent = _this.closest('.module_sugest_provider_buying');
+        let price_input = parent.find('.__buying_price_input');
+        price_input.val(price);
+        price_input.trigger('change');
     });
 }
 

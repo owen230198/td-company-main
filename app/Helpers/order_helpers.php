@@ -718,7 +718,7 @@ use App\Models\SupplyOrigin;
                 [
                     'name' => 'qtv',
                     'note' => 'Định lượng',
-                    'attr' => ['inject_class' => '__qtv_select __suggest_supply_provider_price'],
+                    'attr' => ['inject_class' => '__qtv_select __suggest_supply_provider_price __buying_change_input'],
                     'type' => 'linking',
                     'other_data' => [
                         'config' => [

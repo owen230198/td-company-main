@@ -448,9 +448,18 @@ class AjaxResponeController extends Controller
         if (empty($request->origin)) {
             return [];
         }
-        $provider_price = ProviderPrice::where('origin', $request->origin)->orderBy('price', 'asc')->first();
-        if (!empty($provider_price)) {
-            return ['provider' => $provider_price->provider, 'provider_name' => getFieldDataById('name', 'warehouse_providers', $provider_price->provider), 'price' => $provider_price->price];
+        $provider_prices = ProviderPrice::where('origin', $request->origin)->orderBy('price', 'asc')->take(10)->get();
+        $sugest_provider = $provider_prices->first();
+        if (!empty($provider_prices)) {
+            $arr_providers = $provider_prices->map(function ($provider) {
+                return [$provider->price, getFieldDataById('name', 'warehouse_providers', $provider->provider)];
+            })->toArray();
+            return [
+                'provider' => $sugest_provider->provider, 
+                'provider_name' => getFieldDataById('name', 'warehouse_providers', $sugest_provider->provider), 
+                'price' => $sugest_provider->price,
+                'arr_providers' => $arr_providers
+            ];
         }else{
             return [];
         }
