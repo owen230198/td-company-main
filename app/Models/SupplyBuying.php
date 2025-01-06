@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Models;
-
-use App\Services\WarehouseService;
 use Illuminate\Database\Eloquent\Model;
 
 class SupplyBuying extends Model

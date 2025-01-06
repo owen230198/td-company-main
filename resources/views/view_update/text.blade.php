@@ -12,6 +12,9 @@
             placeholder="{{ @$attr['placeholder'] ?? 'Nhập '.mb_strtolower($note) }}"> 
     </div>
 @else
+@if (!is_string($value))
+    @dd($value)
+@endif
     <input type="{{ $type_input }}" 
     class="form-control{{ @$attr['inject_class'] ? ' '.$attr['inject_class'] : '' }}" name="{{ $name }}" value="{{ @$value }}"
     {{ @$attr['disable_field'] == 1 || ($check_disabled) ? 'disabled' : '' }}

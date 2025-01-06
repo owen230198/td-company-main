@@ -11,6 +11,14 @@ class ProviderPrice extends Model
 
     static function getLabelLinking($data)
     {
+        if (empty($data)) {
+            return '';
+        }
         return getFieldDataById('name', 'warehouse_providers', $data->provider). ' - ĐG: '.price_format($data->price).'đ';
+    }
+
+    static function afterProcess($id, $data)
+    {
+        ProviderPrice::where('id', $id)->update(['name' => getFieldDataById('name', 'warehouse_providers', $data['provider'])]);
     }
 }

@@ -246,9 +246,14 @@ class AdminService extends BaseService
             $data_hanle[$field_parent] = $parent_id;
             if (!empty($data_hanle['id'])) {
                 logActionDataById($table, $data_hanle['id'], $data_hanle, 'update');
+                $child_id = $data_hanle['id'];
             }else{
                 $child_id = $model::insertGetId($data_hanle);
                 logActionUserData('insert', $table, $child_id);
+            }
+            $model = getModelByTable($table);
+            if (method_exists($model, 'afterProcess')) {
+                $model::afterProcess($child_id, $data_hanle);
             }
         }
     }
@@ -270,6 +275,9 @@ class AdminService extends BaseService
         if (method_exists($model, 'getInsertCode')) {
             $model::getInsertCode($id);
         }
+        if (method_exists($model, 'afterProcess')) {
+            $model::afterProcess($id, $process['data']);
+        }
         return ['code' =>  200, 'id' => $id];
     }
 
@@ -284,6 +292,10 @@ class AdminService extends BaseService
         $update = $object->update($process['data']);
         if (!empty($process['child_linkings'])) {
             $this->handleChildLinking($process['child_linkings'], $id);
+        }
+        $model = getModelByTable($table);
+        if (method_exists($model, 'afterProcess')) {
+            $model::afterProcess($id, $process['data']);
         }
         if ($update) {
             return returnMessageAjax(200, 'Cập nhật dữ liệu thành công!');

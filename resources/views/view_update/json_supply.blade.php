@@ -5,10 +5,10 @@
     <div class="list_supply_buy">
         @if (count($arr_value) > 0)
             @foreach ($arr_value as $key => $supp_val)
-                @include('supply_buyings.supply_item', ['index' => $key, 'value' => $supp_val])
+                @include('supply_buyings.supply_item', ['index' => $key, 'value' => $supp_val, 'supp_type' => @$dataItem->type])
             @endforeach
             @else
-                @include('supply_buyings.supply_item', ['index' => 0])   
+                @include('supply_buyings.supply_item', ['index' => 0, 'supp_type' => @$dataItem->type])   
         @endif
     </div>
     @if (\GroupUser::isPlanHandle() && empty($dataItem->status))

@@ -843,7 +843,7 @@ class DevController extends Controller
         }
     }
 
-    public function typeSupplyPriceData($request)
+    public function typeSupplyPriceData()
     {
         $supply_prices = SupplyPrice::get();
         foreach ($supply_prices as $supply_price) {

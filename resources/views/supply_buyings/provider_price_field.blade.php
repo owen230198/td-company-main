@@ -6,12 +6,14 @@
     $provider_prices = [
         [
             'name' => $provider_name,
-            'type' => 'select',
+            'type' => 'linking',
             'note' => 'Tên NCC',
+            'value' => @$value['provider'],
             'other_data' => [
-                'config' => ['searchbox' => 1],
+                'config' => ['search' => 1],
                 'data' => [
-                    'options' => []
+                    'table' => 'provider_prices',
+                    'where' => !empty($origin) ? ['origin' => $origin] : []
                 ]
             ],
             'attr' => [
@@ -24,6 +26,7 @@
             'name' => $price_name,
             'type' => 'text',
             'note' => 'Đơn giá',
+            'value' => @$value['price'],
             'attr' => [
                 'nolabel' => 1,
                 'readonly' => $readonly,

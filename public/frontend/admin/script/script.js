@@ -1688,10 +1688,6 @@ var suggestOriginModule = function (){
         let url = 'ajax-respone/getProviderSuggestBuying' + '?origin=' + origin;
         let select_providers = parent.find('.__provider_suggest_module');
         let price_input = parent.find('.__provider_price_suggest_module');
-        select_providers.each(function(){
-            $(this).html('');
-        });
-        initInputModuleAfterAjax(parent);
         $.ajax({
             url: url,
             type: 'GET',
