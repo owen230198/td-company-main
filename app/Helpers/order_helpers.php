@@ -677,7 +677,7 @@ use App\Models\SupplyOrigin;
 	}
 
     if (!function_exists('getViewSuppluBuyingByType')) {
-        function getViewSuppluBuyingByType($type, $index, $value = '')
+        function getViewSuppluBuyingByType($type, $index, $value = [])
         {
             $where_type = ['type' => $type]; 
             $where_child = $where_type;

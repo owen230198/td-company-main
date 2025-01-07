@@ -23,6 +23,7 @@ use App\Models\Quote;
 use App\Models\Represent;
 use App\Models\SquareWarehouse;
 use App\Models\SupplyBuying;
+use App\Models\SupplyExtend;
 use App\Models\SupplyPrice;
 use App\Models\SupplyType;
 use App\Models\WSalary;
@@ -852,6 +853,11 @@ class DevController extends Controller
                 SupplyPrice::where('id', $supply_price->id)->update(['type' => $supply_type->type]);
             }
         }
+    }
+
+    public function updateKeyTypeOtherSupp()
+    {
+        SupplyExtend::where('type', 'warehouse')->update(['type' => \TDConst::OTHER_SUPPLY]);
     }
     
 }

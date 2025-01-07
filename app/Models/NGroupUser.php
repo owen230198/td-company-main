@@ -77,7 +77,7 @@ class NGroupUser extends Model
         ],
         'supply_extend' => [
             'name' => 'Các loại vật tư khác',
-            'link' => 'view/supply_extends?default_data=%7B%22type%22%3A%22warehouse%22%7D',
+            'link' => 'view/supply_extends?default_data=%7B%22type%22%3A%22other_supply%22%7D',
             'group' => 'quote_price_config'
         ],
         'quote_config' => [

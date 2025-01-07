@@ -31,12 +31,27 @@
                 return returnMessageAjax(100, 'Bạn chưa có vật tư cần mua !');   
             }
             foreach ($data['supply'] as $key => $supply) {
+                $num = $key + 1;
                 if (empty($supply['type'])) {
-                    return returnMessageAjax(100, 'Bạn chưa chọn loại vật tư thứ '.($key+1).'!');
+                    return returnMessageAjax(100, 'Bạn chưa chọn nhóm vật tư thứ '.$num.'!');
                     break;
                 }
+                if (empty($supply['target'])) {
+                    return returnMessageAjax(100, 'Bạn chưa chọn loại vật tư thứ '.$num.'!');
+                    break;
+                }
+                if (SupplyBuying::hasSizeSupply($supply['type'])) {
+                    if (empty($supply['length'])) {
+                        return returnMessageAjax(100, 'Bạn chưa nhập KT chiều dài cho vật tư thứ '.$num.'!');
+                        break;
+                    }
+                    if (empty($supply['width'])) {
+                        return returnMessageAjax(100, 'Bạn chưa nhập KT chiều rộng cho vật tư thứ '.$num.'!');
+                        break;
+                    }
+                }
                 if (empty($supply['qty'])) {
-                    return returnMessageAjax(100, 'Bạn chưa nhập số lượng mua thêm cho vật tư thứ '.($key+1).'!');
+                    return returnMessageAjax(100, 'Bạn chưa nhập số lượng mua thêm cho vật tư thứ '.$num.'!');
                     break;
                 }
             }
@@ -95,9 +110,6 @@
                 if (@$vaildate['code'] == 100) {
                     return $vaildate;    
                 }
-                // if (empty($data['provider'])) {
-                //     return returnMessageAjax(100, 'Bạn chưa chọn nhà cung cấp vật tư !');
-                // }
                 $this->processData($data);
                 $data['id'] = $id;
                 $this->admins->configBaseDataAction($data);
@@ -128,20 +140,13 @@
                     $price = (float) $data_supply[$key]['price'];
                     $list_supp[$key]['price'] = $price;
                     $qty = (int) $data_supply[$key]['qty'];
-                    if (@$supply['type'] == \TDConst::PAPER) {
-                        $qtv = !empty($supply['qtv']) ? (float) $supply['qtv'] : 1; 
-                        $length = !empty($data_supply[$key]['length']) ? (float) $data_supply[$key]['length'] : 1; 
-                        $width = !empty($data_supply[$key]['width']) ? (float) $data_supply[$key]['width'] : 1; 
-                        if ($qtv > 1) {
-                            $supp_total = $price * ($length / 100) * ($width / 100) * ($qtv / 1000) * $qty;
-                        }else{
-                            $supp_total = $price * $qty;   
-                        }
-                        $list_supp[$key]['length'] = $length;
-                        $list_supp[$key]['width'] = $width;
-                    }else{
-                        $supp_total = $price * $qty;
-                    }
+                    $price_qtv = getFieldDataById('price_purchase', 'supply_prices', @$supply['qtv']);
+                    $qtv = !empty($price_qtv) ? (float) $price_qtv : 1; 
+                    $length = !empty($data_supply[$key]['length']) ? (float) $data_supply[$key]['length'] : 1; 
+                    $width = !empty($data_supply[$key]['width']) ? (float) $data_supply[$key]['width'] : 1; 
+                    $supp_total = $length * $width * $qtv * $price * $qty;
+                    $list_supp[$key]['length'] = $length;
+                    $list_supp[$key]['width'] = $width;
                     $list_supp[$key]['total'] = (int) $supp_total;
                     $list_supp[$key]['qty'] = $qty;
                     $buying_total += (int) $supp_total;
@@ -156,8 +161,6 @@
             $supp_buying->ship_price = $ship_price;
             $supp_buying->other_price = $other_price;
             $supp_buying->total = $buying_total;
-            $supp_buying->provider = @$data['provider'];
-            $supp_buying->payment_status = @$data['payment_status'];
             $supp_buying->note = @$data['note'];
             $supp_buying->status = $is_processing ? \StatusConst::NOT_ACCEPTED : \StatusConst::ACCEPTED;
             $user_key = $is_processing ? 'contact_by' : 'applied_by';
@@ -175,11 +178,8 @@
                 $supp_buying = SupplyBuying::find($id);
                 $list_supp = !empty($supp_buying->supply) ? json_decode($supp_buying->supply, true) : [];
                 $data = $request->except('_token');
-                if (empty($data['provider'])) {
-                    return returnMessageAjax(100, 'Bạn cần chọn nhà cung cấp vật tư !');
-                }
                 $data_supply = !empty($data['supply']) ? $data['supply'] :[];
-                if (count($list_supp) <= 0 && count($list_supp) == count($data_supply)) {
+                if (count($list_supp) <= 0 || count($list_supp) != count($data_supply)) {
                     return returnMessageAjax(100, 'Dữ liệu mua hàng không hợp lệ !');    
                 }
                 if ($supp_buying->status != $status) {
