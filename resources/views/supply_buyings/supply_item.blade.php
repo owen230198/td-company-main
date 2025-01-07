@@ -6,7 +6,7 @@
     <div class="ajax_supply_buying_data">
         @if (!empty($supp_type))
             @php
-                $arr_view = getViewSuppluBuyingByType($supp_type, $index);
+                $arr_view = getViewSuppluBuyingByType($supp_type, $index, @$value);
             @endphp
             @include('supply_buyings.field_buying', $arr_view)
         @endif     

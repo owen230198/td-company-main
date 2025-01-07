@@ -19,7 +19,7 @@
             'attr' => [
                 'nolabel' => 1,
                 'readonly' => $readonly,
-                'inject_class' => '__provider_suggest_module'
+                'inject_class' => '__provider_suggest_module',
             ]
         ],
         [

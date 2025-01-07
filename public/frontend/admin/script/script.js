@@ -711,14 +711,29 @@ var selectSupplyToOrigin = function()
             select_origin.data('url', getBaseRoute('get-data-json-linking?table=supply_origins' + param));
             select_origin.val('');
         }
-        let select_qtv = parent.find('.__qtv_select ');
+        let select_qtv = parent.find('.__qtv_select');
         if (select_qtv.length > 0) {
-            select_qtv.data('url', getBaseRoute('get-data-json-linking?table=supply_prices&field_value=price_purchase' + param));
+            select_qtv.data('url', getBaseRoute('get-data-json-linking?table=supply_prices' + param));
             select_qtv.val('');
         }
         selectAjaxModule(parent);
+    });
+    $('.__qtv_select').change(function(event){
+        event.preventDefault();
+        let _this = $(this);
+        let id = _this.val();
+        let parent = _this.closest('.__data_supply_buying_conf');
+        $.ajax({
+            url: getBaseRoute('ajax-respone/getPricePrurchaseById?id=' + id),
+            type: 'GET'
+        })
+        .done(function (data) {
+            if (!empty(data.price_purchase)) {
+                _this.data('price_purchase', data.price_purchase);
+                parent.find('.__buying_qty_input').trigger('change');
+            }
+        })
     })
-    
 }
 
 var getUrlLinkingCPaymentObject = function (type) {
@@ -795,21 +810,21 @@ var moduleSelectStyleProduct = function () {
             url: getBaseRoute(url),
             type: 'GET'
         })
-            .done(function (data) {
-                if (typeof data === 'object' && data.code == 100) {
-                    swal('Không thành công', data.message, 'error');
+        .done(function (data) {
+            if (typeof data === 'object' && data.code == 100) {
+                swal('Không thành công', data.message, 'error');
+            } else {
+                if (!empty(data)) {
+                    select_style.html(data);
+                    select_style.attr('disabled', false);
+                    select_style.closest('.__style_select').fadeIn();
                 } else {
-                    if (!empty(data)) {
-                        select_style.html(data);
-                        select_style.attr('disabled', false);
-                        select_style.closest('.__style_select').fadeIn();
-                    } else {
-                        select_style.attr('disabled', true);
-                        select_style.closest('.__style_select').fadeOut();
-                    }
+                    select_style.attr('disabled', true);
+                    select_style.closest('.__style_select').fadeOut();
                 }
-                $('#loader').delay(200).fadeOut(500);
-            })
+            }
+            $('#loader').delay(200).fadeOut(500);
+        })
     });
 }
 
@@ -1031,7 +1046,7 @@ var changeInputPriceBuying = function () {
         let item = _this.closest('.item_supp_buy');
         let length = getEmptyDefault(item.find('input.__buying_length').val(), 1, 'float');
         let width = getEmptyDefault(item.find('input.__buying_width').val(), 1, 'float');
-        let qtv = getEmptyDefault(item.find('.__qtv_select').val(), 1, 'float');
+        let qtv = getEmptyDefault(item.find('.__qtv_select').data('price_purchase'), 1, 'float');
         let price = getEmptyDefault(item.find('input.__buying_price_input').val(), 0, 'float');
         let qty = getEmptyDefault(item.find('input.__buying_qty_input').val(), 0, 'number');
         let total_input = item.find('.__buying_total_input');
@@ -1692,23 +1707,20 @@ var suggestOriginModule = function (){
             url: url,
             type: 'GET',
         }).done(function (data) {
-            if (!empty(data.provider) && !empty(data.price)) {
-                let arrs = data.arr_providers;
+            if (!empty(data.id) && !empty(data.price)) {
                 select_providers.each(function(){
-                    let select = $(this);
-                    arrs.forEach(function(provider) {
-                        select.append($('<option>', {
-                            value: provider[0],
-                            text: provider[1]
-                        }));
-                    });
-                    
+                    $(this).val(data.id);
+                    $(this).data('label', data.label);
+                    $(this).data('id', data.id);
+                    $(this).data('price', data.price);
+                    $(this).data('url', getBaseRoute('get-data-json-linking?except_linking=1&table=provider_prices&field_search=name&origin=' + origin));
+                    initInputModuleAfterAjax($(this).closest('.module_sugest_provider_buying'));
                 });
                 price_input.each(function(){
                     $(this).val(data.price);
                     $(this).trigger('change');
                 });
-                initInputModuleAfterAjax(parent);
+                
             }
 		});
     });

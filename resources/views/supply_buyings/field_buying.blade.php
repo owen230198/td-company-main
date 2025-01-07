@@ -8,7 +8,6 @@
             $name = $field['name'];
             $field['name'] = $group_name.'['.$name.']';
             $field['min_label'] = 175;
-            $field['value'] = @$value[$name];
         @endphp
         @include('view_update.view', $field)      
     @endforeach

@@ -677,12 +677,12 @@ use App\Models\SupplyOrigin;
 	}
 
     if (!function_exists('getViewSuppluBuyingByType')) {
-        function getViewSuppluBuyingByType($type, $index, $target = '')
+        function getViewSuppluBuyingByType($type, $index, $value = '')
         {
             $where_type = ['type' => $type]; 
             $where_child = $where_type;
-            if (!empty($target)) {
-                $where_child['supply_id'] = $target;
+            if (!empty($value['target'])) {
+                $where_child['supply_id'] = $value['target'];
             }
             $data['fields'] =[
                 [
@@ -690,6 +690,7 @@ use App\Models\SupplyOrigin;
                     'note' => 'Loại vật tư',
                     'attr' => ['inject_class' => '__select_supply_to_origin __suggest_supply_provider_price'],
                     'type' => 'linking',
+                    'value' => @$value['target'],
                     'other_data' => [
                         'config' => [
                             'search' => 1
@@ -705,6 +706,7 @@ use App\Models\SupplyOrigin;
                     'note' => 'Xuất xứ',
                     'attr' => ['inject_class' => '__origin_select __suggest_supply_provider_price'],
                     'type' => 'linking',
+                    'value' => @$value['origin'],
                     'other_data' => [
                         'config' => [
                             'search' => 1
@@ -718,7 +720,11 @@ use App\Models\SupplyOrigin;
                 [
                     'name' => 'qtv',
                     'note' => 'Định lượng',
-                    'attr' => ['inject_class' => '__qtv_select __suggest_supply_provider_price __buying_change_input'],
+                    'value' => @$value['qtv'],
+                    'attr' => [
+                        'inject_class' => '__qtv_select __buying_change_input',
+                        'inject_attr' => 'data-price_purchase='.getFieldDataById('price_purchase', 'supply_prices', @$value['qtv']),
+                    ],
                     'type' => 'linking',
                     'other_data' => [
                         'config' => [
@@ -726,8 +732,7 @@ use App\Models\SupplyOrigin;
                         ],
                         'data' => [
                             'table' =>'supply_prices',
-                            'where' => $where_child,
-                            'field_value' => 'price_purchase'
+                            'where' => $where_child
                         ]
                     ]
                 ]
