@@ -473,5 +473,18 @@ class AjaxResponeController extends Controller
             return [];
         }
     }
+
+    public function getPriceProviderById($request)
+    {
+        if (empty($request->id)) {
+            return [];
+        }
+        $provider_price = ProviderPrice::find($request->id);
+        if (!empty($provider_price)) {
+            return ['price_purchase' => $provider_price->price];
+        }else{
+            return [];
+        }
+    }
 }
 

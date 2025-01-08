@@ -70,7 +70,7 @@
     @include('supply_buyings.provider_price_field',[
         'provider_name' => $group_name.'[provider]',
         'price_name' => $group_name.'[price]',
-        'readonly' => $supplyBuying::checkReadOnlyInputPrice(@$dataItem->status),
+        'readonly' => 0,
         'note' => 'NCC thực tế',
         'value' => ['provider' => @$value['provider'], 'price' => @$value['price']],
         'origin' => @$value['origin'],

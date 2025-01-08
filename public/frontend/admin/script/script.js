@@ -718,7 +718,7 @@ var selectSupplyToOrigin = function()
         }
         selectAjaxModule(parent);
     });
-    $('.__qtv_select').change(function(event){
+    $(document).on('change', '.__qtv_select', function(event){
         event.preventDefault();
         let _this = $(this);
         let id = _this.val();
@@ -1726,13 +1726,21 @@ var suggestOriginModule = function (){
     });
 
     $(document).on('change', '.__provider_suggest_module', function(event){
-        event.preventDefault();
         let _this = $(this);
-        let price = _this.val();
+        let id = _this.val();
         let parent = _this.closest('.module_sugest_provider_buying');
         let price_input = parent.find('.__buying_price_input');
-        price_input.val(price);
-        price_input.trigger('change');
+        $.ajax({
+            url: getBaseRoute('ajax-respone/getPriceProviderById?id=' + id),
+            type: 'GET'
+        })
+        .done(function (data) {
+            if (!empty(data.price_purchase)) {
+                price_input.val(data.price_purchase);
+                price_input.trigger('change');
+            }
+        })
+        
     });
 }
 

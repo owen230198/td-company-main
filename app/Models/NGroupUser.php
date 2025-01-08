@@ -200,6 +200,11 @@ class NGroupUser extends Model
             'link' => 'view/supply_buyings?default_data=%7B%22payment_type":"0%22%7D',
             'group' => 'supply_buying'
         ],
+        'price_provider' => [
+            'name' => 'Bảng giá theo NCC',
+            'link' => 'supply-origin-management?type=paper',
+            'group' => 'supply_buying'
+        ],
         'profit' => [
             'name' => 'Lợi nhuận của tôi',
             'link' => 'myprofit',
