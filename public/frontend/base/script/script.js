@@ -98,11 +98,10 @@ var getEmptyDefault = function (value, deflt = '', type = 'string') {
 			return deflt;
 		}
 	} else {
+		let ex_value = getExactNumber(value);
 		if (type == 'float') {
-			let ex_value = getExactNumber(value);
 			return parseFloat(ex_value);
 		} else if (type == 'number') {
-			let ex_value = getExactNumber(value);
 			return parseInt(ex_value);
 		} else {
 			return value;

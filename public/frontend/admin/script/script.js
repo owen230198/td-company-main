@@ -1051,7 +1051,7 @@ var changeInputPriceBuying = function () {
         let qty = getEmptyDefault(item.find('input.__buying_qty_input').val(), 0, 'number');
         let total_input = item.find('.__buying_total_input');
         total_value = length * width * qtv * price * qty;
-        total_input.val(price_format(total_value));
+        total_input.val(price_format(total_value.toFixed()));
         total_input.trigger('change');
         let parent = _this.closest('.json_supply_buy');
         calcTotalSupplyBuying(parent);
