@@ -11,7 +11,7 @@
  Target Server Version : 80030
  File Encoding         : 65001
 
- Date: 25/12/2024 18:21:15
+ Date: 10/01/2025 17:04:50
 */
 
 SET NAMES utf8mb4;
@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS `provider_prices`;
 CREATE TABLE `provider_prices`  (
   `id` int NOT NULL AUTO_INCREMENT COMMENT 'Mã nhóm',
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `origin` int NULL DEFAULT NULL,
+  `supp_price` int NULL DEFAULT NULL,
   `provider` int NULL DEFAULT NULL,
   `price` double NULL DEFAULT NULL,
   `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Ghi chú',
@@ -42,5 +42,8 @@ CREATE TABLE `provider_prices`  (
 -- ----------------------------
 -- Records of provider_prices
 -- ----------------------------
+INSERT INTO `provider_prices` VALUES (270, 'GIẤY ANH ĐẠT', 271, 49, 0.0021, NULL, 1, '2025-01-10 16:27:26', '2025-01-10 16:27:26', 23);
+INSERT INTO `provider_prices` VALUES (271, 'GIẤY VẠN PHÚ GIA', 271, 50, 0.0022, NULL, 1, '2025-01-10 16:27:26', '2025-01-10 16:27:26', 23);
+INSERT INTO `provider_prices` VALUES (272, 'GIẤY NGỌC VIỆT', 271, 51, 0.0023, NULL, 1, '2025-01-10 16:27:26', '2025-01-10 16:27:26', 23);
 
 SET FOREIGN_KEY_CHECKS = 1;

@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\CPayment;
-use App\Models\Customer;
 use App\Models\Product;
 use App\Models\SupplyOrigin;
 
@@ -693,27 +692,12 @@ use App\Models\SupplyOrigin;
                     'value' => @$value['target'],
                     'other_data' => [
                         'config' => [
-                            'search' => 1
+                            'search' => 1,
+                            'except_linking' => 1,
                         ],
                         'data' => [
                             'table' => SupplyOrigin::getTableParentByType($type),
                             'where' => $where_type
-                        ]
-                    ]
-                ],
-                [
-                    'name' => 'origin',
-                    'note' => 'Xuất xứ',
-                    'attr' => ['inject_class' => '__origin_select __suggest_supply_provider_price'],
-                    'type' => 'linking',
-                    'value' => @$value['origin'],
-                    'other_data' => [
-                        'config' => [
-                            'search' => 1
-                        ],
-                        'data' => [
-                            'table' =>'supply_origins',
-                            'where' => $where_child
                         ]
                     ]
                 ],

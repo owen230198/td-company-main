@@ -13,21 +13,20 @@
     @endforeach
     @if ($supplyBuying::hasSizeSupply($supp_type))
        @php
-            $field_sizes = [
+            $field_sizes = [[
+                    'name' => $group_name.'[width]',
+                    'note' => 'Rộng - Ngang (cm)',
+                    'type' => 'text',
+                    'value' => @$value['width'],
+                    'attr' => ['inject_class' => '__buying_width __buying_change_input', 'type_input' => 'number']
+                ],
                 [
                     'name' => $group_name.'[length]',
                     'note' => 'Dài (cm)',
                     'type' => 'text',
                     'value' => @$value['length'],
                     'attr' => ['inject_class' => '__buying_length __buying_change_input', 'type_input' => 'number']
-                ],
-                [
-                    'name' => $group_name.'[width]',
-                    'note' => 'Rộng (cm)',
-                    'type' => 'text',
-                    'value' => @$value['width'],
-                    'attr' => ['inject_class' => '__buying_width __buying_change_input', 'type_input' => 'number']
-                ],
+                ]
             ] 
        @endphp
        @foreach ($field_sizes as $field_size)
@@ -76,4 +75,29 @@
         'origin' => @$value['origin'],
     ])
     @include('view_update.view', $field_total)
+    @if ($supplyBuying::hasSizeSupply($supp_type))
+       @php
+            $field_sizes = [[
+                    'name' => $group_name.'[lenth_qty]',
+                    'note' => 'Số m chiều dài',
+                    'type' => 'text',
+                    'value' => @$value['lenth_qty'],
+                    'attr' => ['inject_class' => '__buying_lenth_qty __buying_change_input', 'type_input' => 'number', 'readonly' => 1]
+                ],
+                [
+                    'name' => $group_name.'[weight]',
+                    'note' => 'số kg khối lượng',
+                    'type' => 'text',
+                    'value' => @$value['weight'],
+                    'attr' => ['inject_class' => '__buying_weight __buying_change_input', 'type_input' => 'number', 'readonly' => 1]
+                ]
+            ] 
+       @endphp
+       @foreach ($field_sizes as $field_size)
+            @php
+                $field_size['min_label'] = 175;
+            @endphp
+            @include('view_update.view', $field_size)
+       @endforeach
+    @endif
 </div>

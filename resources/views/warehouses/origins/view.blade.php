@@ -24,7 +24,6 @@
                                 <th scope="col" class="w_50">STT</th>
                                 <th scope="col">Tên vật tư</th>
                                 <th scope="col">DS định lượng</th>
-                                <th scope="col">NCC</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -33,7 +32,7 @@
                             </tr>
                             @foreach ($list_data as $key => $item)
                                 @php
-                                    $link_provider = 'view/supply_origins?default_data=%7B"type"%3A"'.$cate_type.'","supply_id":"'.$item->id.'"%7D&nosidebar=1';
+                                    $link_provider = 'view/supply_prices?default_data=%7B"type"%3A"'.$cate_type.'","supply_id":"'.$item->id.'"%7D&nosidebar=1';
                                 @endphp
                                 <tr>
                                     <td class="w_50">{{ $key + 1 }}</td>
@@ -46,15 +45,8 @@
                                     </td>
                                     <td class="text-center">
                                         @include('action.popupbtn', [
-                                            'url' => 'view/supply_prices?default_data=%7B"type"%3A"'.$cate_type.'","supply_id":"'.$item->id.'"%7D&nosidebar=1', 
-                                            'note' => 'Bảng giá định lượng',
-                                            'icon' => 'list-ul'
-                                            ])
-                                    </td>
-                                    <td class="text-center">
-                                        @include('action.popupbtn', [
                                             'url' => $link_provider, 
-                                            'note' => 'Bảng giá NCC',
+                                            'note' => 'Bảng giá định lượng',
                                             'icon' => 'list-ul'
                                             ])
                                     </td>

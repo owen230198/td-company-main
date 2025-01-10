@@ -54,7 +54,7 @@
             unset($do_buy_fields[3]);
         } 
     @endphp
-    <div class="{{ \GroupUser::isPlanHandle() ? 'd-none' : '' }}">
+    <div class="{{ \GroupUser::isPlanHandle() ? 'd-none' : '' }} mt-2">
         @foreach ($do_buy_fields as $do_buy_field)
             @php
                 $do_buy_field['min_label'] = 175;
