@@ -28,7 +28,7 @@ class Materal extends Model
                 'label' => $item->name
             ];
         }, $data);
-        $arr[] = ['id' => SupplyType::OTHER, 'label' => 'Loại khác'];
+        $arr[] = ['id' => SupplyBuying::OTHER, 'label' => 'Loại khác'];
         return json_encode($arr);
     }
 }

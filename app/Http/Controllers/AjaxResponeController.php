@@ -444,31 +444,30 @@ class AjaxResponeController extends Controller
         $data = $request->all();
         return view('view_update.child_linkings.item', $data);     
     }
+
+    public function getViewQtvByTarget($request)
+    {
+        if (empty($request->supp_type) || empty($request->target)) {
+            return '';
+        }
+        $data['value']['target'] = $request->target;
+        $data['supp_type'] = $request->supp_type;
+        $data['index'] = $request->index;
+        return view('supply_buyings.field_qtv', $data);
+    }
     public function getProviderSuggestBuying($request)
     {
-        if (empty($request->origin)) {
+        if (empty($request->supply_price)) {
             return [];
         }
-        $provider_price = ProviderPrice::where('origin', $request->origin)->orderBy('price', 'asc')->first();
+        $provider_price = ProviderPrice::where(['supp_price' => $request->supply_price])->orderBy('price', 'asc')->first();
         if (!empty($provider_price)) {
             return [
+                'price_purchase' => getFieldDataById('price_purchase', 'supply_prices', $request->supply_price),
                 'id' => $provider_price->id, 
                 'label' => ProviderPrice::getLabelLinking($provider_price), 
                 'price' => $provider_price->price
             ];
-        }else{
-            return [];
-        }
-    }
-
-    public function getPricePrurchaseById($request)
-    {
-        if (empty($request->id)) {
-            return [];
-        }
-        $qtv_price = SupplyPrice::find($request->id);
-        if (!empty($qtv_price)) {
-            return ['price_purchase' => $qtv_price->price_purchase];
         }else{
             return [];
         }

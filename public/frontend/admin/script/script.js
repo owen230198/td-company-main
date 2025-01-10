@@ -702,37 +702,53 @@ var selectSupplyToOrigin = function()
     $(document).on('change', '.__select_supply_to_origin ', function(event){
         event.preventDefault();
         let _this = $(this);
-        let parent = _this.closest('.__data_supply_buying_conf');
+        let parent = _this.closest('.item_supp_buy');
         let supply_id = _this.val();
-        let cate = parent.data('cate');
-        let param = '&type=' + cate + '&supply_id=' + supply_id + '&field_search=name';
-        let select_origin = parent.find('.__origin_select');
-        if (select_origin.length > 0) {
-            select_origin.data('url', getBaseRoute('get-data-json-linking?table=supply_origins' + param));
-            select_origin.val('');
-        }
-        let select_qtv = parent.find('.__qtv_select');
-        if (select_qtv.length > 0) {
-            select_qtv.data('url', getBaseRoute('get-data-json-linking?table=supply_prices' + param));
-            select_qtv.val('');
-        }
-        selectAjaxModule(parent);
+        let cate = parent.find('.__select_supp_type_buying ').val();
+        let index = parent.data('index');
+        let param = '?supp_type=' + cate + '&target=' + supply_id + '&index=' + index;
+        let url = 'ajax-respone/getViewQtvByTarget' + param;
+        let view_target =  parent.find('.__ajax_buying_qtv_field');
+        ajaxViewTarget(url, view_target, view_target);
     });
+
     $(document).on('change', '.__qtv_select', function(event){
         event.preventDefault();
         let _this = $(this);
         let id = _this.val();
         let parent = _this.closest('.__data_supply_buying_conf');
+        let url = 'ajax-respone/getProviderSuggestBuying' + '?supply_price=' + id;
+        let select_providers = parent.find('.__provider_suggest_module');
+        let price_input = parent.find('.__provider_price_suggest_module');
         $.ajax({
-            url: getBaseRoute('ajax-respone/getPricePrurchaseById?id=' + id),
-            type: 'GET'
-        })
-        .done(function (data) {
-            if (!empty(data.price_purchase)) {
+            url: url,
+            type: 'GET',
+        }).done(function (data) {
+            if (!empty(data.id) && !empty(data.price)) {
                 _this.data('price_purchase', data.price_purchase);
-                parent.find('.__buying_qty_input').trigger('change');
+                select_providers.each(function(){
+                    $(this).val(data.id);
+                    $(this).data('label', data.label);
+                    $(this).data('id', data.id);
+                    $(this).data('price', data.price);
+                    $(this).data('url', getBaseRoute('get-data-json-linking?except_linking=1&table=provider_prices&field_search=name&origin=' + origin));
+                    initInputModuleAfterAjax($(this).closest('.module_sugest_provider_buying'));
+                });
+                price_input.each(function(){
+                    $(this).val(data.price);
+                    $(this).trigger('change');
+                });
             }
-        })
+		});
+    })
+    $(document).on('change keyup', '.__qtv_input', function(event){
+        event.preventDefault();
+        let _this = $(this);
+        let qtv = getEmptyDefault(_this.val(), 1, 'float');
+        let parent = _this.closest('.__data_supply_buying_conf');
+        _this.data('price_purchase', qtv);
+        let price_input = parent.find('.__provider_price_suggest_module');
+        price_input.trigger('change');
     })
 }
 
@@ -1046,7 +1062,7 @@ var changeInputPriceBuying = function () {
         let item = _this.closest('.item_supp_buy');
         let length = getEmptyDefault(item.find('input.__buying_length').val(), 1, 'float');
         let width = getEmptyDefault(item.find('input.__buying_width').val(), 1, 'float');
-        let qtv = getEmptyDefault(item.find('.__qtv_select').data('price_purchase'), 1, 'float');
+        let qtv = getEmptyDefault(item.find('.__qtv_buying_field').data('price_purchase'), 1, 'float');
         let price = getEmptyDefault(item.find('input.__buying_price_input').val(), 0, 'float');
         let qty = getEmptyDefault(item.find('input.__buying_qty_input').val(), 0, 'number');
         let total_input = item.find('.__buying_total_input');
@@ -1695,35 +1711,6 @@ var viewChartBtn = function () {
 }
 
 var suggestOriginModule = function (){
-    $(document).on('change', '.__suggest_supply_provider_price', function(event){
-        event.preventDefault();
-        let _this = $(this);
-        let parent = _this.closest('.item_supp_buy');
-        let origin = getEmptyDefault(parent.find('.__origin_select').val(), 0);
-        let url = 'ajax-respone/getProviderSuggestBuying' + '?origin=' + origin;
-        let select_providers = parent.find('.__provider_suggest_module');
-        let price_input = parent.find('.__provider_price_suggest_module');
-        $.ajax({
-            url: url,
-            type: 'GET',
-        }).done(function (data) {
-            if (!empty(data.id) && !empty(data.price)) {
-                select_providers.each(function(){
-                    $(this).val(data.id);
-                    $(this).data('label', data.label);
-                    $(this).data('id', data.id);
-                    $(this).data('price', data.price);
-                    $(this).data('url', getBaseRoute('get-data-json-linking?except_linking=1&table=provider_prices&field_search=name&origin=' + origin));
-                    initInputModuleAfterAjax($(this).closest('.module_sugest_provider_buying'));
-                });
-                price_input.each(function(){
-                    $(this).val(data.price);
-                    $(this).trigger('change');
-                });
-                
-            }
-		});
-    });
 
     $(document).on('change', '.__provider_suggest_module', function(event){
         let _this = $(this);

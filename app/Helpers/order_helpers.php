@@ -687,7 +687,7 @@ use App\Models\SupplyOrigin;
                 [
                     'name' => 'target',
                     'note' => 'Loại vật tư',
-                    'attr' => ['inject_class' => '__select_supply_to_origin __suggest_supply_provider_price'],
+                    'attr' => ['inject_class' => '__select_supply_to_origin'],
                     'type' => 'linking',
                     'value' => @$value['target'],
                     'other_data' => [
@@ -698,25 +698,6 @@ use App\Models\SupplyOrigin;
                         'data' => [
                             'table' => SupplyOrigin::getTableParentByType($type),
                             'where' => $where_type
-                        ]
-                    ]
-                ],
-                [
-                    'name' => 'qtv',
-                    'note' => 'Định lượng',
-                    'value' => @$value['qtv'],
-                    'attr' => [
-                        'inject_class' => '__qtv_select __buying_change_input',
-                        'inject_attr' => 'data-price_purchase='.getFieldDataById('price_purchase', 'supply_prices', @$value['qtv']),
-                    ],
-                    'type' => 'linking',
-                    'other_data' => [
-                        'config' => [
-                            'search' => 1
-                        ],
-                        'data' => [
-                            'table' =>'supply_prices',
-                            'where' => $where_child
                         ]
                     ]
                 ]
