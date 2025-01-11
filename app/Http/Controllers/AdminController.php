@@ -194,6 +194,7 @@ class AdminController extends Controller
             $data['cate_name'] = $data_supply_cate['note'];
             $data['cate_type'] = $type;
             $data['title'] .= ' '.$data['cate_name'];
+            $data['table_parent'] = $data_supply_cate['table_parent'];
             $data['list_data'] = \DB::table($data_supply_cate['table_parent'])->where('type', $type)->paginate(20);
         }
         return view('warehouses.origins.view', $data); 
@@ -324,6 +325,13 @@ class AdminController extends Controller
             if (!empty($data['dataItem']['password'])) {
                 unset($data['dataItem']['password']);
             }
+            foreach ($data['field_list'] as $field) {
+                if ($field['type'] == 'child_linking') {
+                    $other_data = json_decode($field['other_data'], true);
+                    $config_data = $other_data['data'];
+                    $data['dataItem']->{$field['name']} = getModelByTable($config_data['table'])->where($config_data['field_query'], $id)->get()->setHidden(['id'])->toArray();
+                }
+            }
             $data['action_url'] = url('insert/'.$table);
             return view('action.view', $data);
         }  
@@ -417,7 +425,7 @@ class AdminController extends Controller
         if (empty($table)) {
             return [];
         }
-        $where = $request->except('table', 'q', 'term', 'field_search', 'except_linking', 'except_value', 'field_value', '_type');
+        $where = $request->except('table', 'q', 'term', 'field_search', 'except_linking', 'except_value', 'field_value', '_type', 'other_choose');
         if (Schema::hasColumn($table, 'act')) {
             $where['act'] = 1;
         }
@@ -450,6 +458,9 @@ class AdminController extends Controller
             $item_label = method_exists($model, 'getLabelLinking') ? $model::getLabelLinking($item) : getlabelLinking($item, $label, true);
             return ['id' => @$item->{$field_value}, 'label' => $item_label];
         }, $data);
+        if (!empty($request->other_choose)) {
+            $arr[] = ['id' => \StatusConst::OTHER, 'label' => 'Loại khác'];
+        }
         return json_encode($arr);
     }
 

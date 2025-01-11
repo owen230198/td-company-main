@@ -26,6 +26,7 @@ use App\Models\SupplyBuying;
 use App\Models\SupplyExtend;
 use App\Models\SupplyPrice;
 use App\Models\SupplyType;
+use App\Models\WarehouseProvider;
 use App\Models\WSalary;
 use Illuminate\Support\Facades\File;
 
@@ -156,7 +157,8 @@ class DevController extends Controller
 
     public function test()
     {
-        dd(getSizeByCodeMisa('ALSE_34x53'));
+        $data = WarehouseProvider::whereRaw('JSON_CONTAINS(type, \'["carton","paper","a"]\')')->get();
+        dd($data);
     }
 
     public function handleDataHistory()

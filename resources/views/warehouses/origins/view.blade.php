@@ -37,7 +37,7 @@
                                 <tr>
                                     <td class="w_50">{{ $key + 1 }}</td>
                                     <td>
-                                        <button data-src="{{ url($link_provider) }}" 
+                                        <button data-src="{{ url('update/'.$table_parent.'/'.$item->id.'?nosidebar=1') }}" 
                                         class="color_main py-1 radius_5 mb-0 text-center load_view_popup d-block" 
                                         data-toggle="modal" data-target="#actionModal">
                                             {{ $item->name }}

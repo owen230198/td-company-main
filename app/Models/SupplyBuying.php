@@ -9,8 +9,6 @@ class SupplyBuying extends Model
     protected $protectFields = false;
     const BOUGHT = 'bought';
 
-    const OTHER = 'other';
-
     static function checkReadOnlyInputPrice($status)
     {
         return \GroupUser::isAdmin() ? 0 : (\GroupUser::isDoBuying() && ($status == \StatusConst::PROCESSING || $status == \StatusConst::NOT_ACCEPTED) ? 0 : 1);

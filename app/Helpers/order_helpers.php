@@ -693,7 +693,7 @@ use App\Models\SupplyOrigin;
                     'other_data' => [
                         'config' => [
                             'search' => 1,
-                            'except_linking' => 1,
+                            'other_choose' => 1,
                         ],
                         'data' => [
                             'table' => SupplyOrigin::getTableParentByType($type),

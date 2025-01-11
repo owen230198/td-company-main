@@ -2,7 +2,7 @@
 @php
     $supplyBuying = new \App\Models\SupplyBuying;
     $group_name = 'supply['.$index.']';
-    $is_other_target = $value['target'] == $supplyBuying::OTHER;
+    $is_other_target = $value['target'] == \StatusConst::OTHER;
     if (!$is_other_target) {
         $field_qtv = [
             'name' => $group_name.'[qtv]',
@@ -37,9 +37,18 @@
             ],
             'type' => 'text'
         ];
+        $field_name = [
+            'name' => $group_name.'[name]',
+            'type' => 'text',
+            'note' => 'Tên vật tư',
+            'value' => @$value['name'],
+            'min_label' => 175
+        ];
     }
-    
 @endphp
+@if (!empty($field_name))
+    @include('view_update.view', $field_name)
+@endif
 @include('view_update.view', $field_qtv)
 @if ($supplyBuying::hasSizeSupply($supp_type))
     @php

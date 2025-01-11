@@ -17,7 +17,7 @@
             $item['dataItem'] = @$value;
             $item['min_label'] = 150;
         @endphp
-        @if (!empty($value))
+        @if (!empty($value['id']))
             <input type="hidden" name="{{ $key_name.'['.$index.'][id]' }}" value="{{ $value['id'] }}" class="form-control">
         @endif
         @include('view_update.view', $item)   

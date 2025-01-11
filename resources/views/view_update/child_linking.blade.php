@@ -7,6 +7,9 @@
         $whereLinking = [$fieldChildLinking => $dataItem->id];
         $valueLikings = getModelByTable($tableChildLinking)::where($whereLinking)->take(10)->get()->toArray();
     }
+    if (!empty($dataItem->{$name})) {
+        $valueLikings = $dataItem->{$name};
+    }
 @endphp
 <div class="list_item_child_linking p-2 radius_5 box_shadow_3">
     <div class="list_child_linking_data">

@@ -321,8 +321,12 @@ if (!function_exists('getLinkingUrl')) {
         $field_title = @$select_data['field_title'] ?? 'name';
         $field_value = @$select_data['field_value'] ?? 'id';
         $except_linking = !empty($select_config['except_linking']) ? $select_config['except_linking'] : 0;
+        $other_choose = !empty($select_config['other_choose']) ? $select_config['other_choose'] : 0;
         $table_linking = getTableLinkingWithData(@$dataItem, $select_data['table']);
         $url = asset('get-data-json-linking?table='.$table_linking.'&field_search='.$field_title.'&field_value='.$field_value.'&except_linking='.$except_linking);
+        if ($other_choose) {
+            $url .= '&other_choose=1';
+        }
         if (!empty($select_data['where'])) {
             foreach ($select_data['where'] as $key => $val) {
                 $url .= '&'.$key.'='.$val;

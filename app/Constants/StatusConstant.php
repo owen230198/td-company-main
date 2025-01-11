@@ -24,4 +24,6 @@ class StatusConstant
 
     //Other Constants
     const NO_VALIDATE = 'no_validate';
+    
+    const OTHER = 'other';
 }
