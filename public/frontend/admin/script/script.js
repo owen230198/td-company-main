@@ -1067,8 +1067,21 @@ var changeInputPriceBuying = function () {
         let qty = getEmptyDefault(item.find('input.__buying_qty_input').val(), 0, 'number');
         let total_input = item.find('.__buying_total_input');
         total_value = length * width * qtv * price * qty;
-        total_input.val(price_format(total_value.toFixed()));
+        let value_total = total_value.toFixed();
+        total_input.val(price_format(value_total));
         total_input.trigger('change');
+        let length_qty_input = item.find('.__buying_lenth_qty');
+        console.log(length_qty_input);
+        
+        if (length_qty_input.length > 0) {
+            let length_qty = (length * qty) / 100;
+            length_qty_input.val(length_qty);   
+        }
+        let weight_input = item.find('.__buying_weight');
+        if (weight_input.length > 0) {
+            let weight = value_total / (price * 10000000);
+            weight_input.val(weight);   
+        }
         let parent = _this.closest('.json_supply_buy');
         calcTotalSupplyBuying(parent);
     });
