@@ -1,17 +1,17 @@
 /*
- Navicat Premium Dump SQL
+ Navicat Premium Data Transfer
 
  Source Server         : localhost
  Source Server Type    : MySQL
- Source Server Version : 80030 (8.0.30)
+ Source Server Version : 80030
  Source Host           : localhost:3306
  Source Schema         : td_company
 
  Target Server Type    : MySQL
- Target Server Version : 80030 (8.0.30)
+ Target Server Version : 80030
  File Encoding         : 65001
 
- Date: 10/01/2025 23:36:42
+ Date: 15/01/2025 17:49:16
 */
 
 SET NAMES utf8mb4;
@@ -51,7 +51,7 @@ CREATE TABLE `n_detail_tables`  (
   INDEX `map_insert`(`table_map` ASC, `insert` ASC) USING BTREE,
   INDEX `map_update`(`table_map` ASC, `update` ASC) USING BTREE,
   INDEX `map_search`(`table_map` ASC, `search` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 469 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 472 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of n_detail_tables
@@ -284,11 +284,11 @@ INSERT INTO `n_detail_tables` VALUES (241, 'act', '', 'Kích hoạt', 'checkbox'
 INSERT INTO `n_detail_tables` VALUES (242, 'status', '', 'Trạng thái', 'select', 'products', 5, 1, 0, 1, 1, NULL, NULL, NULL, 1, 0, '{\"data\":{\r\n		\"options\":{\r\n			\"\":\"Chọn trạng thái\", \r\n			\"not_accepted\":\"Chưa duyệt\", \r\n			\"accepted\":\"Đã duyệt thiết kế\", \r\n			\"to_design\":\"Chờ thiết kế nhận lệnh\",\r\n			\"designing\":\"Đang thiết kế\",\r\n			\"design_submited\":\"Đã xong thiết kế\",\r\n			\"tech_submited\":\"Kế hoạch đang xử lí\",\r\n			\"making_process\":\"Đang gia công\",\r\n			\"submited\":\"Hoàn tất gia công\",\r\n			\"need_rework\":\"Cần sản xuất lại\",\r\n			\"waiting_warehouse\":\"Chờ nhập kho\",\r\n			\"imported\":\"Đã nhập kho\"\r\n		}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-08-14 02:45:06');
 INSERT INTO `n_detail_tables` VALUES (243, 'category', NULL, 'Nhóm sản phẩm', 'group_product', 'products', 0, 0, 0, 0, 1, NULL, NULL, NULL, 0, 0, '{\n	\"table_target\":\"products\",\n	\"field_pluck\":\"id\"\n}', NULL, NULL, NULL, 1, 1, '2023-04-30 11:17:52', '2024-06-12 06:24:03');
 INSERT INTO `n_detail_tables` VALUES (244, 'size', NULL, 'Kích thước', 'product_size', 'products', 0, 0, 0, 0, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-30 11:17:52', '2024-12-04 17:49:02');
-INSERT INTO `n_detail_tables` VALUES (245, 'name', '{\"required\":1}', 'Tên nhà cung cấp', 'text', 'warehouse_providers', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 11:43:12', '2024-06-12 13:21:36');
+INSERT INTO `n_detail_tables` VALUES (245, 'name', '{\"required\":1, \"unique\":1}', 'Tên nhà cung cấp', 'text', 'warehouse_providers', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 11:43:12', '2025-01-11 16:33:29');
 INSERT INTO `n_detail_tables` VALUES (246, 'act', '', 'Kích hoạt', 'checkbox', 'warehouse_providers', 1, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 11:43:12', '2024-06-12 13:21:36');
 INSERT INTO `n_detail_tables` VALUES (247, 'note', '', 'Ghi chú', 'textarea', 'warehouse_providers', 2, 0, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 11:43:12', '2024-06-12 13:21:36');
-INSERT INTO `n_detail_tables` VALUES (248, 'created_at', '', 'Ngày tạo', 'datetime', 'warehouse_providers', 3, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 11:43:12', '2024-06-12 13:21:36');
-INSERT INTO `n_detail_tables` VALUES (249, 'updated_at', '', 'Ngày sửa', 'datetime', 'warehouse_providers', 4, 0, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 11:43:12', '2024-06-12 13:21:36');
+INSERT INTO `n_detail_tables` VALUES (248, 'created_at', '', 'Ngày tạo', 'datetime', 'warehouse_providers', 3, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 11:43:12', '2025-01-11 16:30:46');
+INSERT INTO `n_detail_tables` VALUES (249, 'updated_at', '', 'Ngày sửa', 'datetime', 'warehouse_providers', 4, 0, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 11:43:12', '2025-01-11 16:30:41');
 INSERT INTO `n_detail_tables` VALUES (250, 'ord', '{\"type_input\":\"number\"}', 'Sắp xếp', 'text', 'warehouse_providers', 5, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-30 11:00:22', '2024-06-12 13:21:36');
 INSERT INTO `n_detail_tables` VALUES (251, 'code', '{\"disable_field\":1,\"required\":1}', 'Mã', 'text', 'supply_buyings', 0, 1, 0, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-06-12 13:21:36');
 INSERT INTO `n_detail_tables` VALUES (252, 'name', '{\"required\":1}', 'Tiêu đề', 'select', 'supply_buyings', 1, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '{\"data\":{\r\n		\"options\":{\r\n			\"\":\"Chọn kiểu mua\",\r\n			\"1\":\"Mua theo đơn\",\r\n			\"2\":\"Mua dự trữ\",\r\n      \"3\":\"Mua theo đơn + dự trữ\"\r\n		}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2025-01-08 21:03:06');
@@ -448,7 +448,7 @@ INSERT INTO `n_detail_tables` VALUES (418, 'created_at', '', 'Ngày gửi', 'dat
 INSERT INTO `n_detail_tables` VALUES (419, 'handled', '', 'Đã SX', 'text', 'papers', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-06-12 13:21:36');
 INSERT INTO `n_detail_tables` VALUES (420, 'handled', '', 'Đã SX', 'text', 'supplies', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-10-08 17:34:16');
 INSERT INTO `n_detail_tables` VALUES (421, 'handled', '', 'Đã SX', 'text', 'fill_finishes', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-10-08 17:35:19');
-INSERT INTO `n_detail_tables` VALUES (422, 'payment_type', '', 'Phương thức thanh toán', 'select', 'c_orders', 10, 0, 1, 1, 1, NULL, NULL, 1, 1, 0, '{\"data\":{\r\n		\"options\":{\r\n			\"\":\"Chọn hình thức thanh toán\",\r\n			\"1\":\"Tiền mặt\",\r\n			\"2\":\"Chuyển khoản\" \r\n		}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2025-01-10 21:41:41');
+INSERT INTO `n_detail_tables` VALUES (422, 'payment_type', '', 'Phương thức thanh toán', 'select', 'c_orders', 10, 0, 1, 1, 0, NULL, NULL, 1, 1, 0, '{\"data\":{\r\n		\"options\":{\r\n			\"\":\"Chọn hình thức thanh toán\",\r\n			\"1\":\"Tiền mặt\",\r\n			\"2\":\"Chuyển khoản\" \r\n		}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-11-25 09:07:10');
 INSERT INTO `n_detail_tables` VALUES (423, 'warehouse_type', '{\"readonly\":\"2\",\"inject_class\":\"__select_warehouse_type\"}', 'Địa điểm kho', 'linking', 'c_orders', 1, 1, 0, 0, 1, NULL, NULL, 1, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"supply_extends\",\r\n		\"where\":{\"type\":\"warehouse_type\"}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-08-16 04:56:57');
 INSERT INTO `n_detail_tables` VALUES (424, 'code', '{\"disable_field\":1,\"required\":1}', 'Mã Phiếu', 'text', 'base_receipts', 0, 1, 0, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-11-04 16:57:11');
 INSERT INTO `n_detail_tables` VALUES (425, 'created_at', '', 'Ngày hạch toán', 'datetime', 'base_receipts', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-11-04 16:57:11');
@@ -487,13 +487,16 @@ INSERT INTO `n_detail_tables` VALUES (457, 'supply_id', '{\"required\":1,\"injec
 INSERT INTO `n_detail_tables` VALUES (458, 'name', '{\"required\":1}', 'Xuất xứ', 'text', 'supply_origins', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"data\":{\r\n		\"table\":\"provider_prices\",\r\n		\"field_query\":\"supp_price\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2025-01-10 08:20:34');
 INSERT INTO `n_detail_tables` VALUES (459, 'provider_price', '{\"required\":1}', 'Bảng giá mua theo NCC', 'child_linking', 'supply_prices', 3, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '{\r\n	\"data\":{\r\n		\"table\":\"provider_prices\",\r\n		\"field_query\":\"supp_price\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2025-01-10 16:27:11');
 INSERT INTO `n_detail_tables` VALUES (460, 'supp_price', '', 'Định lượng', 'linking', 'provider_prices', NULL, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"supply_origins\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2025-01-10 16:26:30');
-INSERT INTO `n_detail_tables` VALUES (461, 'provider', '{\"required\":1}', 'Nhà cung cấp', 'linking', 'provider_prices', NULL, 1, 1, 1, 1, NULL, NULL, 1, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"warehouse_providers\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-12-26 15:16:34');
+INSERT INTO `n_detail_tables` VALUES (461, 'provider', '{\"required\":1}', 'Nhà cung cấp', 'linking', 'provider_prices', NULL, 1, 1, 1, 1, NULL, NULL, 1, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"warehouse_providers\",\r\n		\"where_default\":{\"type\":\"type\"}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2025-01-15 17:28:44');
 INSERT INTO `n_detail_tables` VALUES (462, 'price', '{\"required\":1, \"type_input\":\"price\"}', 'Đơn giá', 'text', 'provider_prices', NULL, 1, 1, 1, 0, NULL, NULL, 1, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-30 11:00:13', '2024-12-26 15:16:34');
 INSERT INTO `n_detail_tables` VALUES (463, 'note', '', 'Ghi chú', 'textarea', 'supply_origins', 4, 0, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-08 00:05:12', '2024-12-26 21:21:10');
 INSERT INTO `n_detail_tables` VALUES (464, 'created_by', '', 'Người tạo', 'linking', 'supply_origins', 7, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-12-26 21:20:51');
 INSERT INTO `n_detail_tables` VALUES (465, 'created_at', '', 'Ngày tạo', 'datetime', 'supply_origins', 8, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-12-26 21:20:46');
 INSERT INTO `n_detail_tables` VALUES (466, 'price_purchase', '{\"required\":1,\"type_input\":\"number\"}', 'Định lượng', 'text', 'supply_prices', 1, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 11:38:57', '2025-01-08 15:49:24');
 INSERT INTO `n_detail_tables` VALUES (467, 'created_by', '', 'Người tạo', 'linking', 'supply_prices', 6, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-12-27 23:53:29');
-INSERT INTO `n_detail_tables` VALUES (468, 'status', '', 'Trạng thái', 'select', 'c_orders', 10, 1, 0, 1, 1, NULL, NULL, 0, 1, 0, '{\"data\":{\r\n		\"options\":{\r\n			\"\":\"Chọn trạng thái\",\r\n			\"not_accepted\":\"Chưa duyệt xuất\",\r\n			\"accpted\":\"Đã duyệt\" \r\n		}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2025-01-10 21:41:41');
+INSERT INTO `n_detail_tables` VALUES (468, 'type', '', 'Nhóm vật tư', 'select', 'warehouse_providers', 1, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '{\n	\"config\":{\n		\"searchbox\":1,\n		\"multiple\":1\n	},\n	\"data\":{\n		\"options\":{\n			\"paper\":\"Giấy in\", \n			\"nilon\":\"Màng nilon\", \n			\"metalai\":\"Màng metalai\",\n			\"cover\":\"Màng phủ trên\",\n			\"carton\":\"Carton\",\n			\"rubber\":\"Cao su\",\n			\"styrofoam\":\"Mút phẳng\",\n			\"decal\":\"Nhung\",\n			\"silk\":\"Vải lụa\",\n			\"mica\":\"Mi ca\",\n			\"emulsion\":\"Nhũ\",\n			\"skrink\":\"Màng co\",\n			\"magnet\":\"Nam châm\",\n			\"other\":\"Vật tư khác\"\n		}\n	}\n}', NULL, NULL, '', 1, 1, '2023-05-23 14:38:05', '2025-01-15 08:28:49');
+INSERT INTO `n_detail_tables` VALUES (469, 'created_by', '', 'Người tạo', 'linking', 'warehouse_providers', 6, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2025-01-11 16:32:43');
+INSERT INTO `n_detail_tables` VALUES (470, 'phone', '{ \"required\":1,\"unique\":1}', 'SĐT di động', 'text', 'warehouse_providers', 1, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2025-01-15 08:31:22');
+INSERT INTO `n_detail_tables` VALUES (471, 'address', '', 'Địa chỉ', 'text', 'warehouse_providers', 1, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2025-01-11 16:41:53');
 
 SET FOREIGN_KEY_CHECKS = 1;

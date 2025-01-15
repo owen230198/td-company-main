@@ -154,6 +154,19 @@ if (!function_exists('handleQueryCondition')) {
                     $query->whereMonth($w['key'], $value);
                 }elseif (@$w['compare'] == 'between') {
                     $query->whereBetween($w['key'], $value);
+                }elseif (@$w['compare'] == 'json_contain') {
+                    $query->where(function($query) use ($value, $w) {
+                        if (!is_array($value)) {
+                            $value = [$value];
+                        }
+                        foreach ($value as $jkey => $jvalue) {
+                            if ($jkey == 0) {
+                                $query->whereJsonContains($w['key'], $jvalue);
+                            }else{
+                                $query->orWhereJsonContains($w['key'], $jvalue);
+                            }
+                        }
+                    })->get();;
                 }else{
                     if (@$w['con'] == 'or') {
                         $query->orWhere($w['key'], $compare, $value);

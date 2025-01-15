@@ -442,6 +442,7 @@ class AjaxResponeController extends Controller
     public function insertItemChildLinking($request)
     {
         $data = $request->all();
+        $data['dataItem'] = $data;
         return view('view_update.child_linkings.item', $data);     
     }
 

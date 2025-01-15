@@ -429,7 +429,8 @@ class AdminController extends Controller
         if (Schema::hasColumn($table, 'act')) {
             $where['act'] = 1;
         }
-        $data = \DB::table($table)->where($where);
+        $this->injectViewWhereParam($table, $where);
+        $data = getDataTable($table, self::$view_where, [], true);;
         if (!empty($request->input('except_value'))) {
             $except_value = json_decode($request->input('except_value'), true);
             $arr_except = !empty($except_value['value']) ? explode(',', $except_value['value']) : [];

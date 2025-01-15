@@ -988,7 +988,9 @@ var addItemChildLinking = function()
         let list_module = parent.find('.list_child_linking_data');
         let items = list_module.find('.item_child_linking');
         let index = getEmptyDefault(items.last().data('index'), 0, 'float') + 1;
-        let url = 'ajax-respone/insertItemChildLinking?index=' + index + '&table=' + _this.data('table') + '&key_name=' + _this.data('key');
+        let param = '?index=' + index + '&table=' + _this.data('table') + '&key_name=' + _this.data('key');
+        param += '&'+_this.closest('form.config_content.baseAjaxForm').serialize();
+        let url = 'ajax-respone/insertItemChildLinking' + param;
         ajaxViewTarget(url, list_module, list_module, 2);
     });
 }

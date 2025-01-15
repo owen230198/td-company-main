@@ -16,6 +16,7 @@
             $item['name'] = $key_name.'['.$index.']['.$c_name.']';
             $item['dataItem'] = @$value;
             $item['min_label'] = 150;
+            $item['dataItem'] = @$dataItem;
         @endphp
         @if (!empty($value['id']))
             <input type="hidden" name="{{ $key_name.'['.$index.'][id]' }}" value="{{ $value['id'] }}" class="form-control">
