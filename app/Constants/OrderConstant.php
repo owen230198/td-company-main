@@ -93,14 +93,14 @@
                 'link' => 'view/supply_buyings?default_data=%7B"status"%3A"'.\StatusConst::NOT_ACCEPTED.'"%7D',
                 'group_user' => [\GroupUser::ADMIN, \GroupUser::PLAN_HANDLE, \GroupUser::APPLY_BUYING, \GroupUser::DO_BUYING]  
             ],
-            [
-                'icon' => 'buy', 
-                'table' => 'supply_buyings', 
-                'text' => 'Mua vật tư',
-                'condition' => ['status' => \StatusConst::ACCEPTED],
-                'link' => 'view/supply_buyings?default_data=%7B"status"%3A"'.\StatusConst::ACCEPTED.'"%7D',
-                'group_user' => [\GroupUser::ADMIN, \GroupUser::PLAN_HANDLE, \GroupUser::APPLY_BUYING, \GroupUser::DO_BUYING]  
-            ],
+            // [
+            //     'icon' => 'buy', 
+            //     'table' => 'supply_buyings', 
+            //     'text' => 'Mua vật tư',
+            //     'condition' => ['status' => \StatusConst::ACCEPTED],
+            //     'link' => 'view/supply_buyings?default_data=%7B"status"%3A"'.\StatusConst::ACCEPTED.'"%7D',
+            //     'group_user' => [\GroupUser::ADMIN, \GroupUser::PLAN_HANDLE, \GroupUser::APPLY_BUYING, \GroupUser::DO_BUYING]  
+            // ],
             [
                 'icon' => 'submit_buy', 
                 'table' => 'supply_buyings', 

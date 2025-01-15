@@ -1,17 +1,25 @@
 @php
     $select_data = !empty($other_data['data']) ? $other_data['data'] : [];
     $list_options = !empty($select_data['options']) ? $select_data['options'] : [];
+    $label  = '';
 @endphp
 @if (!empty($other_data['config']['multiple']))
     @php
         $values = !empty($value) ? json_decode($value, true) : []; 
     @endphp
     @if (!empty($values))
-        @foreach ($values as $value_item)
-            <p class="color_main radius_5 mb-1 pb-1 border_bot_eb text-center linking_table">
-                {{ @$list_options[$value_item] }}
-            </p>
+        @foreach ($values as $key_label => $value_item)
+            @php
+                if ($key_label == 0){
+                    $label .= $list_options[$value_item];
+                }else{
+                    $label .= ' | '.$list_options[$value_item]; 
+                }
+            @endphp
         @endforeach
+        <p class="color_main linking_table">
+            {{ $label }}
+        </p>
     @endif
 @else
     @if (!empty($other_data['config']['direct_show']))

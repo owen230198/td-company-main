@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : localhost
+ Source Server         : tuandung_dev
  Source Server Type    : MySQL
- Source Server Version : 80030
- Source Host           : localhost:3306
- Source Schema         : td_company
+ Source Server Version : 50740
+ Source Host           : 103.173.66.233:3306
+ Source Schema         : sql_tuandung_dev
 
  Target Server Type    : MySQL
- Target Server Version : 80030
+ Target Server Version : 50740
  File Encoding         : 65001
 
- Date: 15/01/2025 17:49:16
+ Date: 15/01/2025 18:16:27
 */
 
 SET NAMES utf8mb4;
@@ -22,36 +22,36 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `n_detail_tables`;
 CREATE TABLE `n_detail_tables`  (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `attr` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   `note` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `table_map` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `ord` int NULL DEFAULT NULL,
-  `view` tinyint NULL DEFAULT NULL,
-  `insert` tinyint NULL DEFAULT NULL,
-  `update` tinyint NULL DEFAULT NULL,
-  `search` tinyint NULL DEFAULT NULL,
-  `rp_search` tinyint NULL DEFAULT NULL,
-  `rp_view` tinyint NULL DEFAULT NULL,
-  `get_other` tinyint NULL DEFAULT NULL,
-  `history` tinyint NULL DEFAULT NULL,
-  `parent` int NULL DEFAULT NULL,
+  `ord` int(11) NULL DEFAULT NULL,
+  `view` tinyint(4) NULL DEFAULT NULL,
+  `insert` tinyint(4) NULL DEFAULT NULL,
+  `update` tinyint(4) NULL DEFAULT NULL,
+  `search` tinyint(4) NULL DEFAULT NULL,
+  `rp_search` tinyint(4) NULL DEFAULT NULL,
+  `rp_view` tinyint(4) NULL DEFAULT NULL,
+  `get_other` tinyint(4) NULL DEFAULT NULL,
+  `history` tinyint(4) NULL DEFAULT NULL,
+  `parent` int(11) NULL DEFAULT NULL,
   `other_data` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   `default_value` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   `group_user` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `condition` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
-  `region` int NULL DEFAULT NULL,
-  `act` tinyint NULL DEFAULT NULL,
+  `region` int(11) NULL DEFAULT NULL,
+  `act` tinyint(4) NULL DEFAULT NULL,
   `created_at` datetime NULL DEFAULT NULL,
   `updated_at` datetime NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `map_view`(`table_map` ASC, `view` ASC) USING BTREE,
-  INDEX `map_insert`(`table_map` ASC, `insert` ASC) USING BTREE,
-  INDEX `map_update`(`table_map` ASC, `update` ASC) USING BTREE,
-  INDEX `map_search`(`table_map` ASC, `search` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 472 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+  INDEX `map_view`(`table_map`, `view`) USING BTREE,
+  INDEX `map_insert`(`table_map`, `insert`) USING BTREE,
+  INDEX `map_update`(`table_map`, `update`) USING BTREE,
+  INDEX `map_search`(`table_map`, `search`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 473 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of n_detail_tables
@@ -498,5 +498,6 @@ INSERT INTO `n_detail_tables` VALUES (468, 'type', '', 'Nhóm vật tư', 'selec
 INSERT INTO `n_detail_tables` VALUES (469, 'created_by', '', 'Người tạo', 'linking', 'warehouse_providers', 6, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2025-01-11 16:32:43');
 INSERT INTO `n_detail_tables` VALUES (470, 'phone', '{ \"required\":1,\"unique\":1}', 'SĐT di động', 'text', 'warehouse_providers', 1, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2025-01-15 08:31:22');
 INSERT INTO `n_detail_tables` VALUES (471, 'address', '', 'Địa chỉ', 'text', 'warehouse_providers', 1, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2025-01-11 16:41:53');
+INSERT INTO `n_detail_tables` VALUES (472, 'contacter', '{\"required\":1}', 'Người liên hệ', 'text', 'warehouse_providers', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 11:43:12', '2025-01-11 16:33:29');
 
 SET FOREIGN_KEY_CHECKS = 1;

@@ -18,7 +18,7 @@
 		@foreach ($list_options as $key => $option)
 			@if ($multiple)
 				@php
-					$arr_value = is_array(@$value) ? $value : json_decode($value, true);
+					$arr_value = is_array(@$value) ? $value : (!empty($value) ? json_decode($value, true) : []);
 				@endphp
 				<option value="{{ $key }}" {{ in_array($key, $arr_value) == $key ? 'selected' : '' }}>
 					{{ $option }}
