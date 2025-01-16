@@ -54,7 +54,7 @@
                                 $supp_size = !empty($data->size) ? json_decode($data->size, true) : [];
                                 if (in_array(@$data->type, [\TDConst::DECAL, \TDConst::SILK])) {
                                     if ($field['name'] == 'name') {
-                                        $arr['value'] = !empty($supp_size['supply_price']) ? getFieldDataById('name', 'materals', $supp_size['supply_price']) : 'Không xác định';
+                                        $arr['value'] = !empty($supp_size['supply_price']) ? getFieldDataById('name', 'materals', $supp_size['supply_price']) : '---';
                                     }
                                     if ($field['name'] == 'supp_qty') {
                                         $arr['value'] = getBaseNeedQtySquareSupply($data->supp_qty, $supp_size). '( cm)';
@@ -62,7 +62,7 @@
                                 }else{
                                     if ($field['name'] == 'name') {
                                         $arr['value'] = !empty($supp_size['supply_price']) && !empty($supp_size['supply_type']) 
-                                        ? getFieldDataById('name', 'supply_types', $supp_size['supply_type']) .' - '. getFieldDataById('name', 'supply_prices', $supp_size['supply_price']) : 'Không xác định';
+                                        ? getFieldDataById('name', 'supply_types', $supp_size['supply_type']) .' - '. getFieldDataById('name', 'supply_prices', $supp_size['supply_price']) : '---';
                                     }
 
                                     if ($field['name'] == 'supp_qty') {

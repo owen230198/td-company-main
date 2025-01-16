@@ -15,7 +15,7 @@
 <div class="d-flex align-items-center w-100">
 	<label class="mr-2 d-block mb-0 min_100"><?= $field['note'] ?>:</label>
 	<select name="<?= $name ?>" class="form-control">
-		<option value="0">Không xác định</option>
+		<option value="0">Chọn</option>
 		<?php foreach ($list_option as $option): ?>
 			<?php if ($parent['table']!=null): ?>
 	    		<option value="<?= $option['id'] ?>" <?= $value==$option['id']?'selected':'' ?>>

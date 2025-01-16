@@ -935,7 +935,16 @@ var addSuppBuyModule = function () {
             swal('Không thành công', "Bạn cần chọn loại vật tư trước", 'error')
         }else{
             let url = 'add-supply-buying?index=' + index + '&supp_type=' + type;
-            ajaxViewTarget(url, list_section, list_section, 2);
+            $('#loader').fadeIn(200);
+            $.ajax({ 
+                url: url, 
+                type: 'GET' 
+            }).done(function (html) {
+                list_section.append(html);
+                let section_class = list_section.find('.item_supp_buy').last();
+                initInputModuleAfterAjax(section_class);
+                $('#loader').delay(200).fadeOut(500);
+            })
         }
        
     });
@@ -995,31 +1004,39 @@ var addItemChildLinking = function()
     });
 }
 
+var removeItemBaseModule = function(button, callback = '')
+{
+    let id = button.data('id');
+    let table = button.data('table');
+    swal({
+        title: 'Xóa dữ liệu ',
+        text: 'Bạn chắc chắn muốn Xóa vĩnh viễn dữ liệu dữ này ?',
+        icon: 'info',
+        dangerMode: true,
+        buttons: true,
+        confirmButtonColor: "#459300",
+        buttons: ['Hủy', 'Xóa dữ liệu']
+    }).then((action) => {
+        button.parent().remove();
+        if (typeof callback == 'function') {
+            callback();   
+        }
+        if (!empty(id)) {
+            if (action) {
+                ajaxBaseCall({
+                    url: getBaseRoute('remove?ajax=1'),
+                    type: 'DELETE',
+                    data: { remove_id: id, table: table }
+                });
+            }
+        }
+    });
+}
+
 var removeParentElement = function () {
     $(document).on('click', '.remove_parent_element_button', function (event) {
         event.preventDefault();
-        $(this).parent().remove();
-        let id = $(this).data('id');
-        let table = $(this).data('table');
-        if (!empty(id)) {
-            swal({
-                title: 'Xóa dữ liệu ',
-                text: 'Bạn chắc chắn muốn Xóa vĩnh viễn dữ liệu dữ này ?',
-                icon: 'info',
-                dangerMode: true,
-                buttons: true,
-                confirmButtonColor: "#459300",
-                buttons: ['Hủy', 'Xóa dữ liệu']
-            }).then((action) => {
-                if (action) {
-                    ajaxBaseCall({
-                        url: getBaseRoute('remove?ajax=1'),
-                        type: 'DELETE',
-                        data: { remove_id: id, table: table }
-                    });
-                }
-            });
-        }
+        removeItemBaseModule($(this));
     });
 }
 

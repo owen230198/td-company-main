@@ -105,4 +105,9 @@ class SupplyBuying extends Model
         ];
         return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];
     } 
+
+    public function afterRemove($id)
+    {
+        BuyingItem::where('parent', $id)->delete();    
+    }
 }

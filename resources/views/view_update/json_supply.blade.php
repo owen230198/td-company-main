@@ -1,5 +1,5 @@
 @php
-    $arr_value = !empty($value) ? json_decode($value, true) : [];
+    $arr_value = !empty($value) ? $value: [];
 @endphp
 <div class="json_supply_buy p-2 radius_5 box_shadow_3">
     <div class="list_supply_buy">
@@ -11,14 +11,7 @@
                 @include('supply_buyings.supply_item', ['index' => 0, 'supp_type' => @$dataItem->type])   
         @endif
     </div>
-    @if ((\GroupUser::isPlanHandle() || \GroupUser::isAdmin()) && empty($dataItem->status))
-    <div class="text-center">
-        <button type="button" class="main_button color_white bg_green border_green radius_5 font_bold sooth add_supp_buy_button">
-            <i class="fa fa-plus mr-2 fs-14" aria-hidden="true"></i> Thêm vật tư
-        </button>
-    </div>
-    @endif
-    @php
+    {{-- @php
         $readonly_price = \App\Models\SupplyBuying::checkReadOnlyInputPrice(@$dataItem->status);
         $do_buy_fields = [
             [
@@ -61,5 +54,12 @@
             @endphp
             @include('view_update.view', $do_buy_field) 
         @endforeach
-    </div>
+    </div> --}}
+    @if ((\GroupUser::isPlanHandle() || \GroupUser::isAdmin()))
+        <div class="text-center">
+            <button type="button" class="main_button color_white bg_green border_green radius_5 font_bold sooth add_supp_buy_button">
+                <i class="fa fa-plus mr-2 fs-14" aria-hidden="true"></i> Thêm vật tư
+            </button>
+        </div>
+    @endif
 </div>

@@ -30,7 +30,7 @@
                     return 'Đang sản xuất';
                     break;
                 default:
-                    return 'Không xác định';
+                    return 'Trạng thái';
                     break;
             }
         }

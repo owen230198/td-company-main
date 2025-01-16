@@ -231,6 +231,8 @@ class AdminService extends BaseService
                 }elseif ($type == 'select') {
                     if (!empty($other_data['config']['multiple'])){
                         $where[] = ['key' => $field_name, 'compare' => 'json_contain', 'value' => $value];    
+                    }else{
+                        $where[] = ['key' => $field_name, 'value' => $value];    
                     }
                 }else {
                     $where[] = ['key' => $field_name, 'value' => $value];

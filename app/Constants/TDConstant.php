@@ -225,7 +225,7 @@
             self::DECAL => 'Đề can nhung',
             self::SILK => 'Vải lụa',
             self::STYRO => 'Mút xốp',
-            self::MICA => 'Mica'
+            self::MICA => 'Màng PET'
         ];
 
         const ALL_HANDLE_SUPPLY = [
@@ -234,7 +234,7 @@
             self::DECAL => 'Đề can nhung',
             self::SILK => 'Vải lụa',
             self::STYRO => 'Mút xốp',
-            self::MICA => 'Mica'
+            self::MICA => 'Màng PET'
         ];
 
         //Thiết bị máy
@@ -354,7 +354,7 @@
             ['key' => 'styrofoams', 'note' => 'Mút phẳng', 'pro_field' => self::STYRO, 'device' => self::STYRO_DEVICE ,'table' => 'supplies'],
             ['key' => 'decals', 'note' => 'Đề can nhung', 'pro_field' => self::DECAL, 'device' => self::DECAL_DEVICE ,'table' => 'supplies'],
             ['key' => 'silks', 'note' => 'Vải lụa', 'pro_field' => self::SILK, 'device' => self::SILK_DEVICE ,'table' => 'supplies'],
-            ['key' => 'micaes', 'note' => 'Me Ka', 'pro_field' => self::MICA, 'device' => self::MICA_DEVICE ,'table' => 'supplies'],
+            ['key' => 'micaes', 'note' => 'Màng PET', 'pro_field' => self::MICA, 'device' => self::MICA_DEVICE ,'table' => 'supplies'],
             ['key' => 'fill_finishes', 'note' => 'Bồi + hoàn thiện', 'pro_field' => self::FILL_FINISH, 'table' => 'fill_finishes', 'device' => self::FILL_DEVICE] 
         ];
 

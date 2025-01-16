@@ -14,7 +14,7 @@ class ProviderPrice extends Model
         if (empty($data)) {
             return '';
         }
-        return getFieldDataById('name', 'warehouse_providers', $data->provider). ' - ĐG: '.price_format($data->price).'đ';
+        return getFieldDataById('name', 'warehouse_providers', $data->provider);
     }
 
     static function afterProcess($id, $data)

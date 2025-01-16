@@ -28,7 +28,7 @@
         </p>
     @else
         <p class="color_main radius_5 mb-0 {{ empty($history_view) ? 'linking_table' : '' }}">
-            {{ !empty($list_options[$value]) ? $list_options[$value] : 'Không xác định' }}
+            {{ !empty($list_options[$value]) ? $list_options[$value] : '---' }}
         </p>
     @endif
 @endif

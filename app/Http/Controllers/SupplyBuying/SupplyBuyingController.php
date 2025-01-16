@@ -1,6 +1,7 @@
 <?php
     namespace App\Http\Controllers\SupplyBuying;
     use App\Http\Controllers\Controller;
+    use App\Models\BuyingItem;
     use App\Models\PrintWarehouse;
     use App\Models\SquareWarehouse;
     use App\Models\SupplyBuying;
@@ -17,15 +18,26 @@
             parent::__construct();
         }
 
-        public function ProcessData(&$data)
+        public function ProcessDataSupply($supplies, $parent)
         {
-            $data['supply'] = json_encode($data['supply']);
+            $table = 'buying_items';
+            foreach ($supplies as $supply) {
+                $supply['parent'] = $parent;
+                $supply['status'] = \StatusConst::PROCESSING;
+                $this->admins->configBaseDataAction($supply);
+                if (!empty($supply['id'])) {
+                    logActionDataById($table, $supply['id'], $supply, 'update');  
+                }else{
+                    $log_id = BuyingItem::insertGetId($supply);
+                    logActionUserData('isert', $table, $log_id);
+                }
+            }
         }
 
         private function validateData($data)
         {
             if (empty($data['name'])) {
-                return returnMessageAjax(100, 'Bạn chưa nhập tên lệnh mua !');   
+                return returnMessageAjax(100, 'Bạn chưa chọn tiêu đề lệnh mua !');   
             }
             if (empty($data['supply'])) {
                 return returnMessageAjax(100, 'Bạn chưa có vật tư cần mua !');   
@@ -55,7 +67,7 @@
                     break;
                 }
             }
-            
+            return ['supply' => $data['supply']];
         }    
         public function insert($request)
         {
@@ -79,11 +91,12 @@
                 if (@$vaildate['code'] == 100) {
                     return $vaildate;    
                 }
-                $this->processData($data);
                 $data['status'] = \StatusConst::PROCESSING;
+                unset($data['supply']);
                 $this->admins->configBaseDataAction($data);
                 $insert_id = SupplyBuying::insertGetId($data);
                 if ($insert_id) {
+                    $this->processDataSupply($vaildate['supply'], $insert_id);
                     SupplyBuying::where('id', $insert_id)->update(['code' => 'CT-'.formatCodeInsert($insert_id)]);
                     $back_routes = $nosidebar ? \StatusConst::CLOSE_POPUP_NO_RELOAD : (getBackUrl() ?? url('view/'.$table));
                     logActionUserData(__FUNCTION__, $table, $insert_id, $data);
@@ -101,6 +114,7 @@
             if (!$request->isMethod('POST')) {
                 $data = $this->admins->getDataActionView($table, __FUNCTION__, 'Chi tiết');
                 $data['nosidebar'] = $request->input('nosidebar');
+                $dataItem['supply'] = BuyingItem::where('parent', $id)->get();
                 $data['dataItem'] = $dataItem;
                 $data['action_url'] = url('update/'.$table.'/'.$id);
                 return view('action.view', $data);
@@ -110,11 +124,12 @@
                 if (@$vaildate['code'] == 100) {
                     return $vaildate;    
                 }
-                $this->processData($data);
                 $data['id'] = $id;
+                unset($data['supply']);
                 $this->admins->configBaseDataAction($data);
                 $update = SupplyBuying::where('id', $id)->update($data);
                 if ($update) {
+                    $this->processDataSupply($vaildate['supply'], $id);
                     $back_routes = getBackUrl() ?? url('view/'.$table);
                     logActionUserData(__FUNCTION__, $table, $id, $dataItem);
                     return returnMessageAjax(200, 'Cập nhật dữ liệu thành công!', $back_routes);

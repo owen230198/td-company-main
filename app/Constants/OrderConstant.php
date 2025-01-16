@@ -79,10 +79,10 @@
             ],
             [
                 'icon' => 'contact', 
-                'table' => 'supply_buyings', 
+                'table' => 'buying_items', 
                 'text' => 'Liên hệ NCC vật tư',
                 'condition' => ['status' => \StatusConst::PROCESSING],
-                'link' => 'view/supply_buyings?default_data=%7B"status"%3A"'.\StatusConst::PROCESSING.'"%7D',
+                'link' => 'view/buying_items?default_data=%7B"status"%3A"'.\StatusConst::PROCESSING.'"%7D',
                 'group_user' => [\GroupUser::ADMIN, \GroupUser::PLAN_HANDLE, \GroupUser::APPLY_BUYING, \GroupUser::DO_BUYING]  
             ],
             [

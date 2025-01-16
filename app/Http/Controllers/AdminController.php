@@ -349,7 +349,7 @@ class AdminController extends Controller
         }
         $success = $this->admins->removeDataTable($table, $id);
         if ($success) {
-            return customReturnMessage(true, $is_ajax, ['message' => 'Xoá thành công dữ liệu !', 'url' => \StatusConst::RELOAD]);
+            return customReturnMessage(true, $is_ajax, ['message' => 'Xoá thành công dữ liệu !', 'url' => $is_ajax ? '' : \StatusConst::RELOAD]);
         }else {
             return customReturnMessage(false, $is_ajax, ['message' => 'Đã có lỗi xảy ra !']);
         }
@@ -478,7 +478,7 @@ class AdminController extends Controller
             $data = $data->orderBy('name', 'asc')->get();    
         }
         if (!$data->isEmpty()) {
-            $options = '<option value = "">Không xác định</option>';
+            $options = '<option value = "">Chọn</option>';
             foreach ($data as $item) {
                 if (@$item->id == $cvalue) {
                     $options .= '<option value = "'.@$item->id.'" selected>'.@$item->name.'</option>';

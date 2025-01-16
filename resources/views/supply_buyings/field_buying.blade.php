@@ -3,6 +3,9 @@
     $group_name = 'supply['.$index.']';
 @endphp
 <div class="__data_supply_buying_conf" data-cate={{ $supp_type }}>
+    @if (!empty($value['id']))
+        <input type="hidden" name="{{ $group_name.'[id]' }}" value="{{ $value['id'] }}">
+    @endif
     @foreach ($fields as $field)
         @php
             $name = $field['name'];
