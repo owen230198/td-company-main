@@ -110,4 +110,11 @@ class SupplyBuying extends Model
     {
         BuyingItem::where('parent', $id)->delete();    
     }
+
+    static function checkUpdateStatus($id, $status)
+    {
+        if (BuyingItem::where(['parent' => $id, 'status' => $status])->count() == BuyingItem::where('parent', $id)->count()) {
+            SupplyBuying::where('id', $id)->update(['status' => $status]);
+        }
+    }
 }

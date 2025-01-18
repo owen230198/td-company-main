@@ -34,7 +34,7 @@
             }
         }
 
-        private function validateData($data)
+        public function validateData($data)
         {
             if (empty($data['name'])) {
                 return returnMessageAjax(100, 'Bạn chưa chọn tiêu đề lệnh mua !');   
@@ -42,30 +42,9 @@
             if (empty($data['supply'])) {
                 return returnMessageAjax(100, 'Bạn chưa có vật tư cần mua !');   
             }
-            foreach ($data['supply'] as $key => $supply) {
-                $num = $key + 1;
-                if (empty($supply['type'])) {
-                    return returnMessageAjax(100, 'Bạn chưa chọn nhóm vật tư thứ '.$num.'!');
-                    break;
-                }
-                if (empty($supply['target'])) {
-                    return returnMessageAjax(100, 'Bạn chưa chọn loại vật tư thứ '.$num.'!');
-                    break;
-                }
-                if (SupplyBuying::hasSizeSupply($supply['type'])) {
-                    if (empty($supply['length'])) {
-                        return returnMessageAjax(100, 'Bạn chưa nhập KT chiều dài cho vật tư thứ '.$num.'!');
-                        break;
-                    }
-                    if (empty($supply['width'])) {
-                        return returnMessageAjax(100, 'Bạn chưa nhập KT chiều rộng cho vật tư thứ '.$num.'!');
-                        break;
-                    }
-                }
-                if (empty($supply['qty'])) {
-                    return returnMessageAjax(100, 'Bạn chưa nhập số lượng mua thêm cho vật tư thứ '.$num.'!');
-                    break;
-                }
+            $validate_supply = BuyingItem::validate($data['supply']);
+            if (@$validate_supply['code'] == 100) {
+                return $validate_supply;
             }
             return ['supply' => $data['supply']];
         }    
@@ -144,40 +123,12 @@
             return view('supply_buyings.supply_item', $request->all());
         }
 
-        private function handleConfirmData($list_supp, $data_supply, $supp_buying, $data, $is_processing)
+        private function handleConfirmData($data_supply, $buyingItem, $data, $is_processing)
         {
             if (!$is_processing && !\GroupUser::isAdmin()) {
                 return returnMessageAjax(100, 'Bạn không có quyền duyệt mua !');
             }
-            $buying_total = 0;
-            foreach ($list_supp as $key => $supply) {
-                if (!empty($data_supply[$key]['price'])) {
-                    $price = (float) $data_supply[$key]['price'];
-                    $list_supp[$key]['price'] = $price;
-                    $qty = (int) $data_supply[$key]['qty'];
-                    $price_qtv = getFieldDataById('price_purchase', 'supply_prices', @$supply['qtv']);
-                    $qtv = !empty($price_qtv) ? (float) $price_qtv : 1; 
-                    $length = !empty($data_supply[$key]['length']) ? (float) $data_supply[$key]['length'] : 1; 
-                    $width = !empty($data_supply[$key]['width']) ? (float) $data_supply[$key]['width'] : 1; 
-                    $supp_total = $length * $width * $qtv * $price * $qty;
-                    $list_supp[$key]['length'] = $length;
-                    $list_supp[$key]['width'] = $width;
-                    $list_supp[$key]['total'] = (int) $supp_total;
-                    $list_supp[$key]['qty'] = $qty;
-                    $buying_total += (int) $supp_total;
-                }else{
-                    return returnMessageAjax(100, 'Bạn cần nhập đầy đủ thông tin đơn giá mua !');
-                }
-            }
-            $ship_price = (float) @$data['ship_price'];
-            $other_price = (float) @$data['other_price'];
-            $dataItem = $supp_buying->replicate();
-            $supp_buying->supply = json_encode($list_supp);
-            $supp_buying->ship_price = $ship_price;
-            $supp_buying->other_price = $other_price;
-            $supp_buying->total = $buying_total;
-            $supp_buying->note = @$data['note'];
-            $supp_buying->status = $is_processing ? \StatusConst::NOT_ACCEPTED : \StatusConst::ACCEPTED;
+            $buyingItem->status = $is_processing ? \StatusConst::NOT_ACCEPTED : \StatusConst::ACCEPTED;
             $user_key = $is_processing ? 'contact_by' : 'applied_by';
             $supp_buying->{$user_key} = \User::getCurrent('id');
             $supp_buying->save();
@@ -190,26 +141,32 @@
         public function confirmSupplyBought(Request $request, $status, $id)
         {
             if (\GroupUser::isAdmin() || \GroupUser::isDoBuying()) {
-                $supp_buying = SupplyBuying::find($id);
-                $list_supp = !empty($supp_buying->supply) ? json_decode($supp_buying->supply, true) : [];
-                $data = $request->except('_token');
-                $data_supply = !empty($data['supply']) ? $data['supply'] :[];
-                if (count($list_supp) <= 0 || count($list_supp) != count($data_supply)) {
-                    return returnMessageAjax(100, 'Dữ liệu mua hàng không hợp lệ !');    
-                }
-                if ($supp_buying->status != $status) {
+                $buyingItem = BuyingItem::find($id);
+                if ($buyingItem->status != $status) {
                     return returnMessageAjax(100, 'Dữ liệu không hợp lệ !');
                 }
-                if ($status == \StatusConst::ACCEPTED) {
-                    $dataItem = $supp_buying->replicate();
-                    $supp_buying->status = SupplyBuying::BOUGHT;
-                    $supp_buying->bought_by = \User::getCurrent('id');
-                    $supp_buying->save();
-                    logActionUserData('confirm_bought', 'supply_buyings', $id, $dataItem);
-                    return returnMessageAjax(200, 'Đã xác nhận mua vật tư thành công cho chứng từ mua hàng '. $supp_buying->code.' !', getBackUrl());
-                }else{
-                    return $this->handleConfirmData($list_supp, $data_supply, $supp_buying, $data, $status == \StatusConst::PROCESSING);   
+                $data = $request->except('_token');
+                $data_supply = !empty($data['supply']) ? $data['supply'] :[];
+                $validate = BuyingItem::validate($data_supply);
+                if (@$validate['code'] == 100) {
+                    return $validate;
                 }
+                $data_update = reset($data['supply']);
+                $data_update['note'] = @$data['note'];
+                BuyingItem::where('id', $id)->update($data_update);
+                $dataItem = $buyingItem->replicate();
+                $is_apply_action = $status == \StatusConst::NOT_ACCEPTED;
+                $buyingItem->status = $is_apply_action ? SupplyBuying::BOUGHT : \StatusConst::NOT_ACCEPTED;
+                $key_log_action = $is_apply_action ? 'applied_by' : 'contact_by';
+                $buyingItem->{$key_log_action} = \User::getCurrent('id');
+                $action_log = $is_apply_action ? 'apply' : 'contact_confirm';
+                $buyingItem->save();
+                logActionUserData($action_log, 'buying_items', $id, $dataItem);
+                $title_mess = $is_apply_action ? 'duyệt mua' : 'hỏi mua';
+                if (!empty($buyingItem->parent)) {
+                    SupplyBuying::checkUpdateStatus($buyingItem->parent, $buyingItem->status);
+                }
+                return returnMessageAjax(200, 'Đã xác nhận '.$title_mess.' vật tư thành công !', getBackUrl());
             }else{
                 return returnMessageAjax(100, 'Không có quyền thực hiện thao tác này !');
             }

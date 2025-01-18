@@ -42,6 +42,7 @@ class NTable extends Model
                             'supply_buyings',
                             'c_supplies',
                             'c_orders',
+                            'buying_items',
                         ],
                         'copy' => [
                             'quotes', 

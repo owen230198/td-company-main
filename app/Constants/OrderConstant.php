@@ -87,26 +87,26 @@
             ],
             [
                 'icon' => 'apply_buy', 
-                'table' => 'supply_buyings', 
+                'table' => 'buying_items', 
                 'text' => 'Duyệt mua vật tư',
                 'condition' => ['status' => \StatusConst::NOT_ACCEPTED],
-                'link' => 'view/supply_buyings?default_data=%7B"status"%3A"'.\StatusConst::NOT_ACCEPTED.'"%7D',
+                'link' => 'view/buying_items?default_data=%7B"status"%3A"'.\StatusConst::NOT_ACCEPTED.'"%7D',
                 'group_user' => [\GroupUser::ADMIN, \GroupUser::PLAN_HANDLE, \GroupUser::APPLY_BUYING, \GroupUser::DO_BUYING]  
             ],
             // [
             //     'icon' => 'buy', 
-            //     'table' => 'supply_buyings', 
+            //     'table' => 'buying_items', 
             //     'text' => 'Mua vật tư',
             //     'condition' => ['status' => \StatusConst::ACCEPTED],
-            //     'link' => 'view/supply_buyings?default_data=%7B"status"%3A"'.\StatusConst::ACCEPTED.'"%7D',
+            //     'link' => 'view/buying_items?default_data=%7B"status"%3A"'.\StatusConst::ACCEPTED.'"%7D',
             //     'group_user' => [\GroupUser::ADMIN, \GroupUser::PLAN_HANDLE, \GroupUser::APPLY_BUYING, \GroupUser::DO_BUYING]  
             // ],
             [
                 'icon' => 'submit_buy', 
-                'table' => 'supply_buyings', 
+                'table' => 'buying_items', 
                 'text' => 'Nhập kho vật tư đã mua',
                 'condition' => ['status' => SupplyBuying::BOUGHT],
-                'link' => 'view/supply_buyings?default_data=%7B"status"%3A"'.SupplyBuying::BOUGHT.'"%7D',
+                'link' => 'view/buying_items?default_data=%7B"status"%3A"'.SupplyBuying::BOUGHT.'"%7D',
                 'group_user' => [\GroupUser::ADMIN, \GroupUser::PLAN_HANDLE, \GroupUser::WAREHOUSE, \GroupUser::APPLY_BUYING, \GroupUser::DO_BUYING, \GroupUser::ACCOUNTING]  
             ],
             [

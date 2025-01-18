@@ -11,7 +11,7 @@
  Target Server Version : 80030
  File Encoding         : 65001
 
- Date: 16/01/2025 18:37:24
+ Date: 18/01/2025 12:41:21
 */
 
 SET NAMES utf8mb4;
@@ -926,6 +926,6 @@ INSERT INTO `supply_buyings` VALUES (921, 'CT-00000921', 'DH-00000769A - bộ (h
 INSERT INTO `supply_buyings` VALUES (922, 'CT-00000922', 'DH-00000770A - Bộ (hộp tem toa) Gincorlife đông trùng hồng /25*14*9.5 cm có quay xách', 'paper', NULL, '[{\"type\":\"paper\",\"qty\":\"1300\",\"supp_price\":\"12\",\"qtv\":\"120\",\"length\":\"72\",\"width\":\"52\",\"unit\":\"sheet\"}]', 'processing', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 6, NULL, NULL, NULL, NULL, '2025-01-12 08:10:20', '2025-01-12 08:10:20');
 INSERT INTO `supply_buyings` VALUES (923, 'CT-00000923', 'DH-00000770A - Bộ (hộp tem toa) Gincorlife đông trùng hồng /25*14*9.5 cm có quay xách', 'paper', NULL, '[{\"type\":\"paper\",\"qty\":\"2390\",\"supp_price\":\"12\",\"qtv\":\"120\",\"length\":\"62\",\"width\":\"39.5\",\"unit\":\"sheet\"}]', 'processing', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 6, NULL, NULL, NULL, NULL, '2025-01-12 08:11:02', '2025-01-12 08:11:02');
 INSERT INTO `supply_buyings` VALUES (924, 'CT-00000924', 'DH-00000787A - bộ (Hộp   toa) Aluthadugel/ 120*50*150 mm/', 'paper', NULL, '[{\"type\":\"paper\",\"qty\":\"1700\",\"supp_price\":\"13\",\"qtv\":\"400\",\"length\":\"46\",\"width\":\"36.3\",\"unit\":\"sheet\"}]', 'processing', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 6, NULL, NULL, NULL, NULL, '2025-01-14 13:56:43', '2025-01-14 13:56:43');
-INSERT INTO `supply_buyings` VALUES (925, 'CT-00000925', '3', 'paper', NULL, NULL, 'processing', NULL, 0, '0', '0', NULL, '1611539', NULL, NULL, NULL, 1, 23, NULL, NULL, NULL, NULL, '2025-01-16 15:06:16', '2025-01-16 17:33:25');
+INSERT INTO `supply_buyings` VALUES (925, 'CT-00000925', '3', 'paper', NULL, NULL, 'bought', NULL, 0, '0', '0', NULL, '1611539', NULL, NULL, NULL, 1, 23, NULL, NULL, NULL, NULL, '2025-01-16 15:06:16', '2025-01-18 12:40:00');
 
 SET FOREIGN_KEY_CHECKS = 1;

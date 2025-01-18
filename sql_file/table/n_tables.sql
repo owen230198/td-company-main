@@ -11,7 +11,7 @@
  Target Server Version : 80030
  File Encoding         : 65001
 
- Date: 16/01/2025 18:40:07
+ Date: 18/01/2025 12:40:55
 */
 
 SET NAMES utf8mb4;
@@ -41,7 +41,7 @@ CREATE TABLE `n_tables`  (
   `updated_at` datetime NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `indx`(`id` ASC, `name` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 53 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 54 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of n_tables
@@ -93,6 +93,6 @@ INSERT INTO `n_tables` VALUES (49, 'c_orders', 'Chứng từ bán hàng', '', 50
 INSERT INTO `n_tables` VALUES (50, 'c_products', 'KCS thành phẩm', NULL, 10, 'view', NULL, '[\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"calendar-check-o\",\r\n		\"note\":\"Yêu cầu nhập kho\",\r\n		\"class\":\"__product_takein_req\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"processing\"}\r\n		]\r\n	}\r\n]', NULL, 0, 1, 1, 2, NULL, NULL, '2023-04-23 11:30:46', '2024-09-25 23:12:25');
 INSERT INTO `n_tables` VALUES (51, 'move_warehouses', 'Sản phẩm chuyển kho', NULL, 100, 'view', NULL, '', NULL, 0, 0, 1, 0, NULL, NULL, '2023-07-17 19:30:41', '2024-04-15 05:52:58');
 INSERT INTO `n_tables` VALUES (52, 'c_payments', 'Đề xuất chi', '', 10, 'view', '', '[ 	{ 		\"type\":2, 		\"icon\":\"check\", 		\"note\":\"Xác nhận chi\", 		\"class\":\"__confirm_cpayment\", 		\"condition\":[ 			{\"con\":\"or\",\"key\":\"status\",\"value\":\"processing\"}, 			{\"con\":\"or\",\"key\":\"status\",\"value\":\"not_accepted\"} 		] 	} ]', NULL, 1, 1, 1, 1, 0, 1, '2023-07-14 03:17:55', '2024-12-13 00:17:56');
-INSERT INTO `n_tables` VALUES (53, 'buying_items', 'Vật tư cần mua', '', 10, 'view', '', '', NULL, 0, 1, 1, 0, 0, 0, '2023-07-14 03:17:55', '2024-12-13 00:17:56');
+INSERT INTO `n_tables` VALUES (53, 'buying_items', 'Vật tư cần mua', '', 10, 'view', '', '[\n	{\n		\"type\":2,\n		\"detailonly\":1,\n		\"icon\":\"check-square-o\",\"note\":\"Xác nhận đã liên hệ NCC\", \n		\"class\":\"__confirm_bought\",\n		\"datas\":[\"status\"],\n		\"condition\":[\n			{\"key\":\"status\", \"value\":\"processing\"}\n		]\n	},\n	{\n		\"type\":2,\n		\"detailonly\":1,\n		\"icon\":\"check-circle-o\",\n		\"note\":\"Duyệt mua vật tư\", \n		\"class\":\"__confirm_bought\",\n		\"datas\":[\"status\"],\n		\"condition\":[\n			{\"key\":\"status\", \"value\":\"not_accepted\"}\n		]\n	},\n	{\n		\"type\":2,\n		\"detailonly\":1,\n		\"icon\":\"check-square-o\",\"note\":\"Xác nhận đã mua\", \n		\"class\":\"__confirm_bought\",\n		\"datas\":[\"status\"],\n		\"condition\":[\n			{\"key\":\"status\", \"value\":\"accepted\"}\n		]\n	},\n	{\n		\"type\":2,\n		\"detailonly\":1,\n		\"icon\":\"check-square\",\"note\":\"Xác nhận nhập kho\", \n		\"class\":\"__confirm_warehouse_imported\",\n		\"condition\":[\n			{\"key\":\"status\", \"value\":\"bought\"}\n		]\n	}\n]', NULL, 0, 1, 1, 0, 0, 0, '2023-07-14 03:17:55', '2025-01-18 09:25:52');
 
 SET FOREIGN_KEY_CHECKS = 1;

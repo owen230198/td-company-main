@@ -12,5 +12,10 @@
             @endphp
             @include('supply_buyings.field_buying', $arr_view)
         @endif     
-    </div>                
+    </div>  
+    @if (!empty($field_injects))
+        @foreach ($field_injects as $field_inject)
+            @include('view_update.view', $field_inject)    
+        @endforeach
+    @endif              
 </div>
