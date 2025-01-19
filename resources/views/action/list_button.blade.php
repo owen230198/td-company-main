@@ -1,4 +1,4 @@
-<div class="group_btn_action_form text-center" style="{{ !empty($nosidebar) ? 'width:100%' : '' }}">
+<div class="group_btn_action_form text-center" style="{{ hasNoSidebarParam() ? 'width:100%' : '' }}">
     <button type="submit" disabled class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-3">
         <i class="fa fa-check mr-2 fs-14" aria-hidden="true"></i>Hoàn tất
     </button>

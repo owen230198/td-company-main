@@ -113,14 +113,16 @@
     @endphp
     @include('view_update.view', $field_price)
 @else
-    @include('supply_buyings.provider_price_field',[
-        'provider_name' => $group_name.'[sugg_provider]',
-        'price_name' => $group_name.'[sugg_price]',
-        'readonly' => 1,
-        'note' => 'NCC đề xuất',
-        'value' => ['provider' => @$value['sugg_provider'], 'price' => @$value['sugg_price']],
-        'origin' => @$value['origin'],
-    ])
+    @if (empty($no_suggest))
+        @include('supply_buyings.provider_price_field',[
+            'provider_name' => $group_name.'[sugg_provider]',
+            'price_name' => $group_name.'[sugg_price]',
+            'readonly' => 1,
+            'note' => 'NCC đề xuất',
+            'value' => ['provider' => @$value['sugg_provider'], 'price' => @$value['sugg_price']],
+            'origin' => @$value['origin'],
+        ])
+    @endif
     @include('supply_buyings.provider_price_field',[
         'provider_name' => $group_name.'[provider]',
         'price_name' => $group_name.'[price]',

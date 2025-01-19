@@ -19,12 +19,14 @@
                 $dataItem['supply'] = BuyingItem::where('parent', $id)->get();
                 $data['dataItem'] = $dataItem;
                 $data['action_url'] = url('update/'.$table.'/'.$id);
-                $data['field_note'] = [
-                    'name' => 'note',
-                    'note' => 'Ghi chú',
-                    'type' => 'textarea',
-                    'min_label' => 175,
-                    'value' => @$dataItem->note
+                $data['field_exts'] = [
+                    [
+                        'name' => 'note',
+                        'note' => 'Ghi chú',
+                        'type' => 'textarea',
+                        'min_label' => 175,
+                        'value' => @$dataItem->note
+                    ]
                 ];
                 return view('buying_items.view', $data);
             }else{

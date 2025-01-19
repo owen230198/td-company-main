@@ -156,6 +156,11 @@ var getValueByPercent = function(value, percent) {
 	return (value * percent) / 100;
 }
 
+function roundNumber(number, decimalPlaces = 2) {
+    const factor = Math.pow(10, decimalPlaces);
+    return Math.round(number * factor) / factor;
+}
+
 $(function () {
 	$(document).ready(function () {
 		enableButtonSubmit();

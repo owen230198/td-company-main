@@ -7,7 +7,8 @@
                 'index' => 0,
                 'supp_type' => $dataItem->type,
                 'value' => $dataItem,
-                'field_injects' => [$field_note]
+                'field_injects' => $field_exts,
+                'no_suggest' => !empty($no_suggest)
             ])
             @include('action.list_button')
         </form>

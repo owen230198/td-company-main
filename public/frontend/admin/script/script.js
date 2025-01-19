@@ -1090,7 +1090,6 @@ var changeInputPriceBuying = function () {
         total_input.val(price_format(value_total));
         total_input.trigger('change');
         let length_qty_input = item.find('.__buying_lenth_qty');
-        console.log(length_qty_input);
         
         if (length_qty_input.length > 0) {
             let length_qty = (length * qty) / 100;
@@ -1099,7 +1098,7 @@ var changeInputPriceBuying = function () {
         let weight_input = item.find('.__buying_weight');
         if (weight_input.length > 0) {
             let weight = value_total / (price * 10000000);
-            weight_input.val(weight);   
+            weight_input.val(roundNumber(weight));   
         }
         let parent = _this.closest('.json_supply_buy');
         calcTotalSupplyBuying(parent);
@@ -1138,7 +1137,7 @@ var confirmImportSupplyBuy = function () {
         event.preventDefault();
         let id = $(this).data('id');
         let form = $(this).closest('form');
-        let url = 'confirm-warehouse-imported/' + id;
+        let url = 'confirm-warehouse-imported/' + id + '?nosidebar=1';
         let modal = $('#actionModal');
         modal.find('iframe').attr('src', getBaseRoute(url));
         modal.modal('show');

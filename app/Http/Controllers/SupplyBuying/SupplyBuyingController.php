@@ -172,8 +172,37 @@
                 }
                 if (!$is_ajax) {
                     $data['title'] = 'Xác nhận nhập kho vật tư ';
-                    $data['dataItem'] = $buyingItem;
-                    return view('supply_buyings.list_supply', $data);    
+                    $dataItem = $buyingItem->replicate();
+                    $dataItem->qty = 0;
+                    $dataItem->lenth_qty = 0;
+                    $dataItem->weight = 0;
+                    $dataItem->total = 0;
+                    $data['dataItem'] = $dataItem;
+                    $data['field_exts'] = [
+                        [
+                            'name' => 'receipt',
+                            'attr' => ['required' => 1],
+                            'note' => 'Phiếu nhập kho',
+                            'type' => 'filev2',
+                            'min_label' => 175,
+                            'value' => '',
+                            'other_data' => ['role_update' => [\GroupUser::WAREHOUSE]] 
+                        ],
+                        [
+                            'name' => 'note',
+                            'note' => 'Ghi chú',
+                            'type' => 'textarea',
+                            'min_label' => 175,
+                            'value' => ''
+                        ]
+                    ];
+                    $data['no_suggest'] = 1;
+                    $data['action_url'] = url('confirm-warehouse-imported/'.$id);
+                    return view('buying_items.view', $data);    
+                }else{
+                    $data = $request->all();
+                    $data_supply = reset($data['supply']);
+                    
                 }
                 $bill = $request->input('bill');
                 $update_supply = $data_supply;
