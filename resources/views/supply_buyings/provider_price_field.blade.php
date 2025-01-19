@@ -13,7 +13,7 @@
                 'config' => ['search' => 1],
                 'data' => [
                     'table' => 'provider_prices',
-                    'where' => !empty($origin) ? ['origin' => $origin] : []
+                    'where' => !empty($dataItem['qtv']) ? ['supp_price' => $dataItem['qtv']] : []
                 ]
             ],
             'attr' => [

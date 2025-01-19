@@ -114,7 +114,7 @@ Route::middleware(['check_login'])->group(function () {
 	//supply warehouse
 	Route::get('add-supply-buying', [SupplyBuyingController::class, 'addSupplyBuying']);
 	Route::post('confirm-supply-bought/{status}/{id}', [SupplyBuyingController::class, 'confirmSupplyBought']);
-	Route::post('confirm-warehouse-imported/{id}', [SupplyBuyingController::class, 'confirmWarehouseImported']);
+	Route::any('confirm-warehouse-imported/{id}', [SupplyBuyingController::class, 'confirmWarehouseImported']);
 	Route::get('list-supply-buying/{id}', [SupplyBuyingController::class, 'listSupplyBuying']);
 	Route::get('get-quantitative-inpaper', [SupplyBuyingController::class, 'getQuantitativeInPaper']);
 	Route::get('inventory-aggregate', [SupplyBuyingController::class, 'inventoryAggregate']);

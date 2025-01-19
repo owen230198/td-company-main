@@ -125,7 +125,8 @@
 
         public function confirmSupplyBought(Request $request, $status, $id)
         {
-            if (\GroupUser::isAdmin() || \GroupUser::isDoBuying()) {
+            $is_apply_action = $status == \StatusConst::NOT_ACCEPTED;
+            if (\GroupUser::isAdmin() || (\GroupUser::isDoBuying() && !$is_apply_action) || (\GroupUser::isApplyBuying() && $is_apply_action)) {
                 $buyingItem = BuyingItem::find($id);
                 if ($buyingItem->status != $status) {
                     return returnMessageAjax(100, 'Dữ liệu không hợp lệ !');
@@ -140,7 +141,6 @@
                 $data_update['note'] = @$data['note'];
                 BuyingItem::where('id', $id)->update($data_update);
                 $dataItem = $buyingItem->replicate();
-                $is_apply_action = $status == \StatusConst::NOT_ACCEPTED;
                 $buyingItem->status = $is_apply_action ? SupplyBuying::BOUGHT : \StatusConst::NOT_ACCEPTED;
                 $key_log_action = $is_apply_action ? 'applied_by' : 'contact_by';
                 $buyingItem->{$key_log_action} = \User::getCurrent('id');
@@ -163,10 +163,17 @@
             if (\GroupUser::isWarehouse() || \GroupUser::isAdmin()) {
                 $buyingItem = BuyingItem::find($id);
                 if (@$buyingItem->status != SupplyBuying::BOUGHT) {
-                    return customReturnMessage(false, $is_ajax, ['message' => 'Vật tư chưa được xác nhận mua về !']);
+                    return customReturnMessage(false, $is_ajax, ['message' => 'Dữ liệu không hợp lệ !']);
                 }
-                if (empty($request->input('bill'))) {
-                    return customReturnMessage(false, $is_ajax, ['message' => 'Bạn chưa upload hóa đơn mua hàng !']);
+                $deliveried = (float)$buyingItem->deliveried;
+                $qty = (float) $buyingItem->qty;
+                if ($deliveried >= $qty) {
+                    return customReturnMessage(false, $is_ajax, ['message' => 'Số lượng đã nhập đã đạt số lượng yêu cầu mua về!']);
+                }
+                if (!$is_ajax) {
+                    $data['title'] = 'Xác nhận nhập kho vật tư ';
+                    $data['dataItem'] = $buyingItem;
+                    return view('supply_buyings.list_supply', $data);    
                 }
                 $bill = $request->input('bill');
                 $update_supply = $data_supply;

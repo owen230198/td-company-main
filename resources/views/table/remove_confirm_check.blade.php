@@ -5,6 +5,7 @@
         @csrf
         @method('delete')
         <input type="hidden" name="ajax" value="1">
+        <input type="hidden" name="reload" value="1">
         <input type="hidden" name="multi_remove_id" value="">
         <input type="hidden" name="table" value="{{ $tableItem['name'] }}">
         <div class="modal-header">

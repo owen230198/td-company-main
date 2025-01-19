@@ -197,15 +197,7 @@ var addFillFinishModule = function () {
 var removeItemAddedModule = function () {
     $(document).on('click', 'span.remove_ext_element_quote', function (event) {
         event.preventDefault();
-        $(this).parent().remove();
-        let id = $(this).data('id');
-        if (!empty(id)) {
-            ajaxBaseCall({
-                url: getBaseRoute('remove?ajax=1'),
-                type: 'DELETE',
-                data: { remove_id: id, table: $(this).data('table') }
-            });
-        }
+        removeItemBaseModule($(this));
     });
 }
 

@@ -1110,13 +1110,25 @@ var confirmBought = function () {
     $(document).on('click', 'button.__confirm_bought', function (e) {
         e.preventDefault();
         let _this = $(this);
-        let id = _this.data('id');
-        let status = _this.data('status');
-        let form = _this.closest('form');
-        ajaxBaseCall({
-            url: getBaseRoute('confirm-supply-bought/' + status + '/' + id),
-            type: 'POST',
-            data: form.serialize()
+        let title = _this.attr('title');
+        swal({
+            title: title,
+            text: 'Bạn chắc chắn muốn xác nhận  ' + title + ' ?' ,
+            icon: 'info',
+            buttons: true,
+            confirmButtonColor: "#459300",
+            buttons: ['Hủy', 'Xác nhận']
+        }).then((action) => {
+            if (action) {
+                let id = _this.data('id');
+                let status = _this.data('status');
+                let form = _this.closest('form');
+                ajaxBaseCall({
+                    url: getBaseRoute('confirm-supply-bought/' + status + '/' + id),
+                    type: 'POST',
+                    data: form.serialize()
+                });
+            }
         });
     });
 }
@@ -1126,11 +1138,10 @@ var confirmImportSupplyBuy = function () {
         event.preventDefault();
         let id = $(this).data('id');
         let form = $(this).closest('form');
-        ajaxBaseCall({
-            url: 'confirm-warehouse-imported/' + id,
-            type: 'POST',
-            data: form.serialize()
-        });
+        let url = 'confirm-warehouse-imported/' + id;
+        let modal = $('#actionModal');
+        modal.find('iframe').attr('src', getBaseRoute(url));
+        modal.modal('show');
     });
 }
 
@@ -1139,7 +1150,7 @@ var KCSTakeInReqLoadView = function () {
         event.preventDefault();
         let modal = $("#actionModal");
         let id = $(this).data("id");
-        modal.find("iframe").attr("src", getBaseRoute('kcs-take-in-req/' + id));
+        modal.find("iframe").attr("src", getBaseRoute('kcs-take-in-req/' + id + '?nosidebar=1'));
         modal.modal('show');
     });
 }

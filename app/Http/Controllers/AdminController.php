@@ -344,12 +344,13 @@ class AdminController extends Controller
         $dataItem = getModelByTable($table)->find($id);
         $role = $this->admins->checkPermissionAction($table, __FUNCTION__, $dataItem);
         $is_ajax = (boolean) $request->input('ajax');
+        $reload = !$is_ajax || ($is_ajax && $request->reload == 1);
         if (empty($role['allow'])) {
             return customReturnMessage(false, $is_ajax, ['message' => 'Không có quyền thao tác !']);
         }
         $success = $this->admins->removeDataTable($table, $id);
         if ($success) {
-            return customReturnMessage(true, $is_ajax, ['message' => 'Xoá thành công dữ liệu !', 'url' => $is_ajax ? '' : \StatusConst::RELOAD]);
+            return customReturnMessage(true, $is_ajax, ['message' => 'Xoá thành công dữ liệu !', 'url' => $reload ? \StatusConst::RELOAD : '']);
         }else {
             return customReturnMessage(false, $is_ajax, ['message' => 'Đã có lỗi xảy ra !']);
         }

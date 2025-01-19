@@ -2,7 +2,6 @@
     namespace App\Http\Controllers\BuyingItem;
     use App\Http\Controllers\Controller;
     use App\Models\BuyingItem;
-    use App\Models\SupplyBuying;
     class BuyingItemController extends Controller
     {
         function __construct()
