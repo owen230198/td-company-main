@@ -123,21 +123,6 @@
             return view('supply_buyings.supply_item', $request->all());
         }
 
-        private function handleConfirmData($data_supply, $buyingItem, $data, $is_processing)
-        {
-            if (!$is_processing && !\GroupUser::isAdmin()) {
-                return returnMessageAjax(100, 'Bạn không có quyền duyệt mua !');
-            }
-            $buyingItem->status = $is_processing ? \StatusConst::NOT_ACCEPTED : \StatusConst::ACCEPTED;
-            $user_key = $is_processing ? 'contact_by' : 'applied_by';
-            $supp_buying->{$user_key} = \User::getCurrent('id');
-            $supp_buying->save();
-            $action_log = $is_processing ? 'contact_confirm' : 'apply';
-            logActionUserData($action_log, 'supply_buyings', $supp_buying->id, $dataItem);
-            $success_mess = $is_processing ? 'Đã liên hệ với NCC '  : 'Đã duyệt mua thành công ';
-            return returnMessageAjax(200, $success_mess.' cho chứng từ mua hàng '. $supp_buying->code.' !', getBackUrl());
-        }
-
         public function confirmSupplyBought(Request $request, $status, $id)
         {
             if (\GroupUser::isAdmin() || \GroupUser::isDoBuying()) {
@@ -174,19 +159,15 @@
 
         public function confirmWarehouseImported(Request $request, $id)
         {
+            $is_ajax = $request->isMethod('POST');
             if (\GroupUser::isWarehouse() || \GroupUser::isAdmin()) {
-                $supp_buying = SupplyBuying::find($id);
-                if (@$supp_buying->status != SupplyBuying::BOUGHT) {
-                    return returnMessageAjax(100, 'Vật tư chưa được xác nhận mua về !');
+                $buyingItem = BuyingItem::find($id);
+                if (@$buyingItem->status != SupplyBuying::BOUGHT) {
+                    return customReturnMessage(false, $is_ajax, ['message' => 'Vật tư chưa được xác nhận mua về !']);
                 }
                 if (empty($request->input('bill'))) {
-                    return returnMessageAjax(100, 'Bạn chưa upload hóa đơn mua hàng !');
+                    return customReturnMessage(false, $is_ajax, ['message' => 'Bạn chưa upload hóa đơn mua hàng !']);
                 }
-                $data_supply = !empty($supp_buying->supply) ? json_decode($supp_buying->supply, true) : [];
-                if (count($data_supply) == 0) {
-                    return returnMessageAjax(100, 'Dữ liệu vật tư không tồn tại !');
-                }
-                $supply_list = $request->input('supply');
                 $bill = $request->input('bill');
                 $update_supply = $data_supply;
                 $where = [];

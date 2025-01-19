@@ -37,5 +37,42 @@ class BuyingItem extends Model
             }
         }
     }
-
+    static function getRole()
+    {
+        $role = [
+            \GroupUser::PLAN_HANDLE => [
+                'view' => 
+                    [
+                        'with' => [
+                            'type' => 'group',
+                            'query' => [
+                                ['key' => 'created_by', 'value' => \User::getCurrent('id')],
+                                ['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED]
+                            ]
+                        ]
+                    ],
+                'update' => 
+                    [
+                        'with' => [
+                            'type' => 'group',
+                            'query' => [
+                                ['key' => 'created_by', 'value' => \User::getCurrent('id')],
+                                ['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED]
+                            ]
+                        ]
+                    ]
+            ],
+            \GroupUser::APPLY_BUYING => [
+                'view' => ['with' => ['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED]],
+                'update' => ['with' => [['key' => 'status', 'value' => \StatusConst::NOT_ACCEPTED]]]
+            ],
+            \GroupUser::DO_BUYING => [
+                'view' => ['with' => ['key' => 'status', 'value' => \StatusConst::PROCESSING]]
+            ],
+            \GroupUser::WAREHOUSE => [
+                'view' => ['with' => ['key' => 'status', 'value' => SupplyBuying::BOUGHT]]
+            ]
+        ];
+        return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];
+    } 
 }
