@@ -227,3 +227,10 @@ use App\Models\PaperExtend;
 			return $text;
 		}
 	}
+
+	if (!function_exists('isSizeSupplyQuote')) {
+		function isSizeSupplyQuote($type)
+		{
+			return in_array($type, [\TDConst::PAPER, \TDConst::CARTON, \TDConst::RUBBER, \TDConst::STYRO, \TDConst::DECAL, \TDConst::SILK, \TDConst::MICA]);
+		}
+	}

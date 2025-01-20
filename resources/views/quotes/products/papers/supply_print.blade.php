@@ -46,9 +46,10 @@
     @if ($supp_index > 0 && empty($rework))
         @php
             $pro_paper_extend_name = [
-                'name' => '',
+                'name' => $base_name['ext_name'],
                 'type' => 'linking',
                 'note' => 'Chọn tên phụ',
+                'value' => $supply_obj->ext_name,
                 'attr' => [
                     'required' => 1, 
                     'inject_class' => 'select_ext_name_paper', 

@@ -456,6 +456,16 @@ class AjaxResponeController extends Controller
         $data['index'] = $request->index;
         return view('supply_buyings.field_qtv', $data);
     }
+
+    public function getViewQtvByMateral($request)
+    {
+        if (empty($request->materal)) {
+            return '';
+        }
+        $data = $request->all();
+        $data['materal'] = $request->materal;
+        return view('quotes.products.field_qtv', $data);
+    }
     public function getProviderSuggestBuying($request)
     {
         if (empty($request->supply_price)) {

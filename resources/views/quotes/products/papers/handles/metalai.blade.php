@@ -1,12 +1,5 @@
 @php
     $key_stage = \TDConst::METALAI;
-    $paper_metalai_materal = [
-        'name' => $paper_hd_base_name.'['.$key_stage.'][materal]',
-        'type' => 'linking',
-        'note' => 'chất liệu',
-        'value' =>  @$data_handle['materal'],
-        'other_data' => ['data' => ['table' => 'materals', 'where' => ['type' => $key_stage], 'select' => ['id', 'name']]]
-    ]; 
     $paper_metalai_face = [
         'name' => $paper_hd_base_name.'['.$key_stage.'][face]',
         'type' => 'select',
@@ -31,11 +24,11 @@
     ]; 
 @endphp
 
-@include('view_update.view', $paper_metalai_materal)
+@include('quotes.products.select_supply_type', ['key_supp' => $key_supp, 'pro_index' => $pro_index, 'supp_index' => $supp_index, 'key_stage' => $key_stage, 'key_type' => $key_stage])
 
 @include('view_update.view', $paper_metalai_face)
 
-@include('view_update.view', $paper_cover_materal)
+@include('quotes.products.select_supply_type', ['key_supp' => $key_supp, 'pro_index' => $pro_index, 'supp_index' => $supp_index, 'key_stage' => \TDConst::COVER, 'key_type' => \TDConst::COVER])
 
 @include('view_update.view', $paper_cover_face)
 

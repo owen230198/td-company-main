@@ -188,14 +188,14 @@ class AdminController extends Controller
             $type = $request->type;
             $arr_supply = searchSupplyCate($type, 'type');
             $data_supply_cate = reset($arr_supply);
-            if (empty($data_supply_cate['note']) || empty($data_supply_cate['table_parent'])) {
+            if (empty($data_supply_cate['note'])) {
                 return back()->with('error', 'Dữ liệu không hợp lệ !');  
             }
             $data['cate_name'] = $data_supply_cate['note'];
             $data['cate_type'] = $type;
             $data['title'] .= ' '.$data['cate_name'];
-            $data['table_parent'] = $data_supply_cate['table_parent'];
-            $data['list_data'] = \DB::table($data_supply_cate['table_parent'])->where('type', $type)->paginate(20);
+            $data['table_parent'] = 'supply_types';
+            $data['list_data'] = \DB::table('supply_types')->where(['type' => $type])->paginate(20);
         }
         return view('warehouses.origins.view', $data); 
     }

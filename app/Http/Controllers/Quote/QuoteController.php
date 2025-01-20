@@ -372,9 +372,9 @@ class QuoteController extends Controller
 
     public function getAfterPrintView(Request $request)
     {
-        $name = $request->input('name');
+        $id = $request->input('id');
         $data = $request->all();
-        $paper_ext = \DB::table('paper_extends')->where('name', $name)->get('category')->first();
+        $paper_ext = \DB::table('paper_extends')->find($id);
         $data['cate'] = @$paper_ext->category;
         return view('quotes.products.papers.after_print', $data);
     }

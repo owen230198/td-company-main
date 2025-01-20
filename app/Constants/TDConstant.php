@@ -220,12 +220,18 @@
         ];
 
         const ALL_SUPPLY = [
+            self::PAPER => 'Giấy in',
+            self::NILON => 'Màng nilon',
+            self::METALAI => 'Màng metalai',
+            self::COVER => 'Phủ trên',
+            self::UV => 'Mực in UV',
             self::CARTON => 'Carton',
             self::RUBBER => 'Cao su non',
             self::DECAL => 'Đề can nhung',
             self::SILK => 'Vải lụa',
             self::STYRO => 'Mút xốp',
-            self::MICA => 'Màng PET'
+            self::MICA => 'Màng PET',
+            self::MAGNET => 'Nam châm',
         ];
 
         const ALL_HANDLE_SUPPLY = [

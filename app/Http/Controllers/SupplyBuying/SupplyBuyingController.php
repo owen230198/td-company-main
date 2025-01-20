@@ -4,7 +4,8 @@
     use App\Models\BuyingItem;
     use App\Models\PrintWarehouse;
     use App\Models\SquareWarehouse;
-    use App\Models\SupplyBuying;
+use App\Models\Supply;
+use App\Models\SupplyBuying;
     use App\Models\WarehouseHistory;
     use App\Services\WarehouseService;
     use Illuminate\Http\Request;
@@ -162,7 +163,7 @@
             $is_ajax = $request->isMethod('POST');
             if (\GroupUser::isWarehouse() || \GroupUser::isAdmin()) {
                 $buyingItem = BuyingItem::find($id);
-                if (@$buyingItem->status != SupplyBuying::BOUGHT) {
+                if (@$buyingItem->status != SupplyBuying::BOUGHT || empty($buyingItem->type)) {
                     return customReturnMessage(false, $is_ajax, ['message' => 'Dữ liệu không hợp lệ !']);
                 }
                 $deliveried = (float)$buyingItem->deliveried;
@@ -202,8 +203,14 @@
                 }else{
                     $data = $request->all();
                     $data_supply = reset($data['supply']);
-                    
+                    if (empty($data_supply['qty'])) {
+                        return returnMessageAjax(100, 'Số lượng nhập kho không hợp lệ !');
+                    }
+                    if (empty($data['receipt'])) {
+                        return returnMessageAjax(100, 'Bạn chưa upload phiếu nhập kho !');
+                    }
                 }
+                $table_warehouse = SupplyBuying::getTableWarehouseByType($buyingItem->type);
                 $bill = $request->input('bill');
                 $update_supply = $data_supply;
                 $where = [];

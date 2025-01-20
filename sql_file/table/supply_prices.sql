@@ -11,7 +11,7 @@
  Target Server Version : 50740
  File Encoding         : 65001
 
- Date: 15/01/2025 15:20:26
+ Date: 20/01/2025 11:35:52
 */
 
 SET NAMES utf8mb4;
@@ -39,7 +39,7 @@ CREATE TABLE `supply_prices`  (
   INDEX `carton_foam_index`(`supply_id`) USING BTREE,
   INDEX `name_index`(`name`) USING BTREE,
   INDEX `act_indx`(`act`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 361 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 431 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of supply_prices
@@ -53,9 +53,6 @@ INSERT INTO `supply_prices` VALUES (14, '3.5cm', '140000', NULL, 'rubber', 6, ''
 INSERT INTO `supply_prices` VALUES (15, '4.0cm', '160000', NULL, 'rubber', 6, '', 1, NULL, '2023-07-20 10:21:00', '2023-07-20 10:21:00', 0);
 INSERT INTO `supply_prices` VALUES (16, '4.5cm', '180000', NULL, 'rubber', 6, '', 1, NULL, '2023-07-20 10:21:00', '2023-07-20 10:21:00', 0);
 INSERT INTO `supply_prices` VALUES (17, '5.0cm', '200000', NULL, 'rubber', 6, '', 1, NULL, '2023-07-20 10:21:00', '2023-07-20 10:21:00', 0);
-INSERT INTO `supply_prices` VALUES (61, 'Mút phẳng K21-0.3cm', '0.44', NULL, 'styrofoam', 10, '1: giá gốc NCC ĐẠI THÀNH là 35k  ( Khổ 1.5 x 1.9m Loại dày 1cm )\r\n2: giá bán cho khách hàng 35k x 1.20% = 42k ( Khổ 1.5 x 1.9m = 2.85m2 ) tăng 20% để bù hao CP khác\r\n( ghi chú: 1m2 = 14.730đ )', 1, NULL, '2023-07-20 10:21:00', '2025-01-06 20:35:51', 0);
-INSERT INTO `supply_prices` VALUES (64, 'Mút phẳng K30-0.3cm', '0.9', NULL, 'styrofoam', 9, 'giá nhà đại thành 25k/1m2/ dầy 1cm ( Nhân thêm 20% phía hao hut )', 1, NULL, '2023-07-20 10:21:00', '2025-01-06 20:35:51', 0);
-INSERT INTO `supply_prices` VALUES (67, 'Mút phẳng K40-0.3cm', '1.14', NULL, 'styrofoam', 8, 'giá nhà đại thành 32k/1m2/ dầy 1cm ( Nhân thêm 20% phía hao hut )', 1, NULL, '2023-07-20 10:21:00', '2025-01-06 20:35:51', 0);
 INSERT INTO `supply_prices` VALUES (68, '0.5cm', '60000', NULL, 'styrofoam', 6, '', 1, NULL, '2023-07-20 10:21:00', '2023-07-20 10:21:00', 0);
 INSERT INTO `supply_prices` VALUES (69, '0.8cm', '60000', NULL, 'styrofoam', 6, '', 1, NULL, '2023-07-20 10:21:00', '2023-07-20 10:21:00', 0);
 INSERT INTO `supply_prices` VALUES (72, '1 cm', '6', NULL, 'styrofoam', 7, '60.000đ/m2 ( Cao su non 35k/m2 + Nhung 25k/m2 )', 1, NULL, '2023-07-20 10:21:00', '2023-07-20 10:21:00', 1);
@@ -63,60 +60,14 @@ INSERT INTO `supply_prices` VALUES (105, 'Carton 0.8ly', '0.01', '560', 'carton'
 INSERT INTO `supply_prices` VALUES (154, 'Cao su non bồi nhung 0.8cm', '1', NULL, 'rubber', 22, NULL, 1, NULL, '2023-07-20 10:21:00', '2025-01-10 17:17:10', 1);
 INSERT INTO `supply_prices` VALUES (155, 'Cao su non bồi nhung 1cm', '14.6', NULL, 'rubber', 23, NULL, 1, NULL, '2023-07-20 10:21:00', '2025-01-10 17:17:14', 1);
 INSERT INTO `supply_prices` VALUES (172, 'PET 0.15', '200', NULL, 'mica', 37, NULL, 1, NULL, '2023-07-20 10:21:00', '2025-01-06 20:35:51', 1);
-INSERT INTO `supply_prices` VALUES (184, 'Mút phẳng K21-0.5cm', '0.73', NULL, 'styrofoam', 10, '1: giá gốc NCC ĐẠI THÀNH là 35k  ( Khổ 1.5 x 1.9m Loại dày 1cm )\r\n2: giá bán cho khách hàng 35k x 1.20% = 42k ( Khổ 1.5 x 1.9m = 2.85m2 ) tăng 20% để bù hao CP khác\r\n( ghi chú: 1m2 = 14.730đ )', 1, NULL, '2023-09-16 02:34:50', '2025-01-06 20:35:51', 1);
-INSERT INTO `supply_prices` VALUES (185, 'Mút phẳng K21-0.8cm', '1.17', NULL, 'styrofoam', 10, '1: giá gốc NCC ĐẠI THÀNH là 35k  ( Khổ 1.5 x 1.9m Loại dày 1cm )\r\n2: giá bán cho khách hàng 35k x 1.20% = 42k ( Khổ 1.5 x 1.9m = 2.85m2 ) tăng 20% để bù hao CP khác\r\n( ghi chú: 1m2 = 14.730đ )', 1, NULL, '2023-09-16 02:35:23', '2025-01-06 20:35:51', 1);
-INSERT INTO `supply_prices` VALUES (186, 'Mút phẳng K21-1cm', '1.473', NULL, 'styrofoam', 10, '1: giá gốc NCC ĐẠI THÀNH là 35k  ( Khổ 1.5 x 1.9m Loại dày 1cm )\r\n2: giá bán cho khách hàng 35k x 1.20% = 42k ( Khổ 1.5 x 1.9m = 2.85m2 ) tăng 20% để bù hao CP khác\r\n( ghi chú: 1m2 = 14.730đ )', 1, NULL, '2023-09-16 02:35:55', '2025-01-06 20:35:51', 1);
-INSERT INTO `supply_prices` VALUES (187, 'Mút phẳng K21-1.2cm', '1.76', NULL, 'styrofoam', 10, '1: giá gốc NCC ĐẠI THÀNH là 35k  ( Khổ 1.5 x 1.9m Loại dày 1cm )\r\n2: giá bán cho khách hàng 35k x 1.20% = 42k ( Khổ 1.5 x 1.9m = 2.85m2 ) tăng 20% để bù hao CP khác\r\n( ghi chú: 1m2 = 14.730đ )', 1, NULL, '2023-09-16 02:36:22', '2025-01-06 20:35:51', 1);
-INSERT INTO `supply_prices` VALUES (188, 'Mút phẳng K21-1.5cm', '2.2', NULL, 'styrofoam', 10, '1: giá gốc NCC ĐẠI THÀNH là 35k  ( Khổ 1.5 x 1.9m Loại dày 1cm )\r\n2: giá bán cho khách hàng 35k x 1.20% = 42k ( Khổ 1.5 x 1.9m = 2.85m2 ) tăng 20% để bù hao CP khác\r\n( ghi chú: 1m2 = 14.730đ ) )', 1, NULL, '2023-09-16 02:36:39', '2025-01-06 20:35:51', 1);
-INSERT INTO `supply_prices` VALUES (190, 'Mút phẳng K21-1.8cm', '2.64', NULL, 'styrofoam', 10, '1: giá gốc NCC ĐẠI THÀNH là 35k  ( Khổ 1.5 x 1.9m Loại dày 1cm )\r\n2: giá bán cho khách hàng 35k x 1.20% = 42k ( Khổ 1.5 x 1.9m = 2.85m2 ) tăng 20% để bù hao CP khác\r\n( ghi chú: 1m2 = 14.730đ )', 1, NULL, '2023-09-16 02:37:14', '2025-01-06 20:35:51', 1);
-INSERT INTO `supply_prices` VALUES (191, 'Mút phẳng K21-2cm', '2.94', NULL, 'styrofoam', 10, 'giá nhà đại thành 18k/1m2/ dầy 1cm ( Nhân thêm 20% phía hao hut )', 1, NULL, '2023-09-16 02:37:31', '2025-01-06 20:35:51', 1);
-INSERT INTO `supply_prices` VALUES (192, 'Mút phẳng K21-2.5cm', '3.675', NULL, 'styrofoam', 10, '1: giá gốc NCC ĐẠI THÀNH là 35k  ( Khổ 1.5 x 1.9m Loại dày 1cm )\r\n2: giá bán cho khách hàng 35k x 1.20% = 42k ( Khổ 1.5 x 1.9m = 2.85m2 ) tăng 20% để bù hao CP khác\r\n( ghi chú: 1m2 = 14.730đ )', 1, NULL, '2023-09-16 02:38:07', '2025-01-06 20:35:51', 1);
-INSERT INTO `supply_prices` VALUES (193, 'Mút phẳng K21-3cm', '4.42', NULL, 'styrofoam', 10, '1: giá gốc NCC ĐẠI THÀNH là 35k  ( Khổ 1.5 x 1.9m Loại dày 1cm )\r\n2: giá bán cho khách hàng 35k x 1.20% = 42k ( Khổ 1.5 x 1.9m = 2.85m2 ) tăng 20% để bù hao CP khác\r\n( ghi chú: 1m2 = 14.730đ )', 1, NULL, '2023-09-16 02:38:21', '2025-01-06 20:35:51', 1);
-INSERT INTO `supply_prices` VALUES (194, 'Mút phẳng K21-3.5cm', '5.15', NULL, 'styrofoam', 10, '1: giá gốc NCC ĐẠI THÀNH là 35k  ( Khổ 1.5 x 1.9m Loại dày 1cm )\r\n2: giá bán cho khách hàng 35k x 1.20% = 42k ( Khổ 1.5 x 1.9m = 2.85m2 ) tăng 20% để bù hao CP khác\r\n( ghi chú: 1m2 = 14.730đ )', 1, NULL, '2023-09-16 02:38:34', '2025-01-06 20:35:51', 1);
-INSERT INTO `supply_prices` VALUES (195, 'Mút phẳng K21-4cm', '5.89', NULL, 'styrofoam', 10, '1: giá gốc NCC ĐẠI THÀNH là 35k  ( Khổ 1.5 x 1.9m Loại dày 1cm )\r\n2: giá bán cho khách hàng 35k x 1.20% = 42k ( Khổ 1.5 x 1.9m = 2.85m2 ) tăng 20% để bù hao CP khác\r\n( ghi chú: 1m2 = 14.730đ )', 1, NULL, '2023-09-16 02:39:09', '2025-01-06 20:35:51', 1);
-INSERT INTO `supply_prices` VALUES (196, 'Mút phẳng K30-0.5cm', '1.5', NULL, 'styrofoam', 9, 'giá nhà đại thành 25k/1m2/ dầy 1cm ( Nhân thêm 20% phía hao hut )', 1, NULL, '2023-09-16 02:43:20', '2025-01-06 20:35:51', 1);
-INSERT INTO `supply_prices` VALUES (197, 'Mút phẳng K30-0.8cm', '2.4', NULL, 'styrofoam', 9, 'giá nhà đại thành 25k/1m2/ dầy 1cm ( Nhân thêm 20% phía hao hut )', 1, NULL, '2023-09-16 02:43:32', '2025-01-06 20:35:51', 1);
-INSERT INTO `supply_prices` VALUES (198, 'Mút phẳng K30-1cm', '3', NULL, 'styrofoam', 9, 'giá nhà đại thành 25k/1m2/ dầy 1cm ( Nhân thêm 20% phía hao hut )', 1, NULL, '2023-09-16 02:43:44', '2025-01-06 20:35:51', 1);
-INSERT INTO `supply_prices` VALUES (199, 'Mút phẳng K30-1.2cm', '3.6', NULL, 'styrofoam', 9, 'giá nhà đại thành 25k/1m2/ dầy 1cm ( Nhân thêm 20% phía hao hut )', 1, NULL, '2023-09-16 02:44:04', '2025-01-06 20:35:51', 1);
-INSERT INTO `supply_prices` VALUES (200, 'Mút phẳng K30-1.5cm', '4.5', NULL, 'styrofoam', 9, 'giá nhà đại thành 25k/1m2/ dầy 1cm ( Nhân thêm 20% phía hao hut )', 1, NULL, '2023-09-16 02:44:22', '2025-01-06 20:35:51', 1);
-INSERT INTO `supply_prices` VALUES (201, 'Mút phẳng K30-1.8cm', '5.4', NULL, 'styrofoam', 9, 'giá nhà đại thành 25k/1m2/ dầy 1cm ( Nhân thêm 20% phía hao hut )', 1, NULL, '2023-09-16 02:44:37', '2025-01-06 20:35:51', 1);
-INSERT INTO `supply_prices` VALUES (202, 'Mút phẳng K30-2cm', '7', NULL, 'styrofoam', 9, 'giá nhà đại thành 25k/1m2/ dầy 1cm ( Nhân thêm 20% phía hao hut )', 1, NULL, '2023-09-16 02:44:51', '2025-01-06 20:35:51', 1);
-INSERT INTO `supply_prices` VALUES (203, 'Mút phẳng K30-2.5cm', '87.5', NULL, 'styrofoam', 9, 'giá nhà đại thành 25k/1m2/ dầy 1cm ( Nhân thêm 20% phía hao hut )', 1, NULL, '2023-09-16 02:45:07', '2025-01-06 20:35:51', 1);
-INSERT INTO `supply_prices` VALUES (204, 'Mút phẳng K30-3cm', '10.05', NULL, 'styrofoam', 9, 'giá nhà đại thành 25k/1m2/ dầy 1cm ( Nhân thêm 20% phía hao hut )', 1, NULL, '2023-09-16 02:45:49', '2025-01-06 20:35:51', 1);
-INSERT INTO `supply_prices` VALUES (205, 'Mút phẳng K30-3.5cm', '12.25', NULL, 'styrofoam', 9, 'giá nhà đại thành 25k/1m2/ dầy 1cm ( Nhân thêm 20% phía hao hut )', 1, NULL, '2023-09-16 02:46:10', '2025-01-06 20:35:51', 1);
-INSERT INTO `supply_prices` VALUES (206, 'Mút phẳng K30-4cm', '14', NULL, 'styrofoam', 9, 'giá nhà đại thành 25k/1m2/ dầy 1cm ( Nhân thêm 20% phía hao hut )', 1, NULL, '2023-09-16 02:46:24', '2025-01-06 20:35:51', 1);
-INSERT INTO `supply_prices` VALUES (207, 'Mút phẳng K40-0.5cm', '19', NULL, 'styrofoam', 8, 'giá nhà đại thành 32k/1m2/ dầy 1cm ( Nhân thêm 20% phía hao hut )', 1, NULL, '2023-09-16 02:48:52', '2025-01-06 20:35:51', 1);
-INSERT INTO `supply_prices` VALUES (208, 'Mút phẳng K40-0.8cm', '3.04', NULL, 'styrofoam', 8, 'giá nhà đại thành 32k/1m2/ dầy 1cm ( Nhân thêm 20% phía hao hut )', 1, NULL, '2023-09-16 02:49:21', '2025-01-06 20:35:51', 1);
-INSERT INTO `supply_prices` VALUES (209, 'Mút phẳng K40-1cm', '3.8', NULL, 'styrofoam', 8, 'giá nhà đại thành 32k/1m2/ dầy 1cm ( Nhân thêm 20% phía hao hut )', 1, NULL, '2023-09-16 02:49:36', '2025-01-06 20:35:51', 1);
-INSERT INTO `supply_prices` VALUES (210, 'Mút phẳng K40-1.2cm', '4.56', NULL, 'styrofoam', 8, 'giá nhà đại thành 32k/1m2/ dầy 1cm ( Nhân thêm 20% phía hao hut )', 1, NULL, '2023-09-16 02:49:55', '2025-01-06 20:35:51', 1);
-INSERT INTO `supply_prices` VALUES (211, 'Mút phẳng K40-1.5cm', '5.7', NULL, 'styrofoam', 8, 'giá nhà đại thành 32k/1m2/ dầy 1cm ( Nhân thêm 20% phía hao hut )', 1, NULL, '2023-09-16 02:50:14', '2025-01-06 20:35:51', 1);
-INSERT INTO `supply_prices` VALUES (212, 'Mút phẳng K40-1.8cm', '6.84', NULL, 'styrofoam', 8, 'giá nhà đại thành 32k/1m2/ dầy 1cm ( Nhân thêm 20% phía hao hut )', 1, NULL, '2023-09-16 02:50:33', '2025-01-06 20:35:51', 1);
-INSERT INTO `supply_prices` VALUES (213, 'Mút phẳng K40-2cm', '8.6', NULL, 'styrofoam', 8, 'giá nhà đại thành 32k/1m2/ dầy 1cm ( Nhân thêm 20% phía hao hut )', 1, NULL, '2023-09-16 02:50:46', '2025-01-06 20:35:51', 1);
-INSERT INTO `supply_prices` VALUES (214, 'Mút phẳng K40-2.5cm', '10.75', NULL, 'styrofoam', 8, 'giá nhà đại thành 32k/1m2/ dầy 1cm ( Nhân thêm 20% phía hao hut )', 1, NULL, '2023-09-16 02:51:00', '2025-01-06 20:35:51', 1);
-INSERT INTO `supply_prices` VALUES (215, 'Mút phẳng K40-3cm', '12.9', NULL, 'styrofoam', 8, 'giá nhà đại thành 32k/1m2/ dầy 1cm ( Nhân thêm 20% phía hao hut )', 1, NULL, '2023-09-16 02:51:13', '2025-01-06 20:35:51', 1);
-INSERT INTO `supply_prices` VALUES (216, 'Mút phẳng K40-3.5cm', '15.05', NULL, 'styrofoam', 8, 'giá nhà đại thành 32k/1m2/ dầy 1cm ( Nhân thêm 20% phía hao hut )', 1, NULL, '2023-09-16 02:51:30', '2025-01-06 20:35:51', 1);
-INSERT INTO `supply_prices` VALUES (217, 'Mút phẳng K40-4cm', '17.2', NULL, 'styrofoam', 8, 'giá nhà đại thành 32k/1m2/ dầy 1cm ( Nhân thêm 20% phía hao hut )', 1, NULL, '2023-09-16 02:51:45', '2025-01-06 20:35:51', 1);
+INSERT INTO `supply_prices` VALUES (197, 'K30-0.3cm ( KT 180 x 200cm )', '0', '300', 'styrofoam', 9, 'Chỉ mua 180 x 200cm, giá 22.22 triệu/ tấn', 1, NULL, '2023-09-16 02:43:32', '2025-01-16 16:22:40', 1);
+INSERT INTO `supply_prices` VALUES (207, 'K40-0.3cm ( KT 180 x 200cm )', '0', '300', 'styrofoam', 8, 'Chỉ mua khổ 180 x 200cm, giá là 29.1666 triệu/ tấn', 1, NULL, '2023-09-16 02:48:52', '2025-01-16 16:35:51', 1);
 INSERT INTO `supply_prices` VALUES (225, 'PET 0.18', '200', NULL, 'mica', 37, NULL, 1, NULL, '2024-01-10 10:13:35', '2025-01-06 20:35:51', 1);
 INSERT INTO `supply_prices` VALUES (226, 'PET 0.2', '200', NULL, 'mica', 37, NULL, 1, NULL, '2024-01-10 10:13:47', '2025-01-06 20:35:51', 1);
 INSERT INTO `supply_prices` VALUES (227, 'PET 0.25', '200', NULL, 'mica', 37, NULL, 1, NULL, '2024-01-10 10:13:53', '2025-01-06 20:35:51', 1);
 INSERT INTO `supply_prices` VALUES (228, 'PET 0.3', '200', NULL, 'mica', 37, NULL, 1, NULL, '2024-01-10 10:14:09', '2025-01-06 20:35:51', 1);
 INSERT INTO `supply_prices` VALUES (229, 'PET 0.4', '200', NULL, 'mica', 37, NULL, 1, NULL, '2024-01-10 10:14:15', '2025-01-06 20:35:51', 1);
 INSERT INTO `supply_prices` VALUES (230, 'PET 0.5', '200', NULL, 'mica', 37, NULL, 1, NULL, '2024-01-10 10:14:23', '2025-01-06 20:35:51', 1);
-INSERT INTO `supply_prices` VALUES (233, 'CAO SU NON 0.3cm', '0', '0.3', 'rubber', 51, NULL, 1, NULL, '2023-07-20 03:21:00', '2025-01-12 15:22:42', 1);
-INSERT INTO `supply_prices` VALUES (234, 'CAO SU NON 0.5cm', '0', '0.5', 'rubber', 51, NULL, 1, NULL, '2023-07-20 03:21:00', '2025-01-12 15:23:15', 1);
-INSERT INTO `supply_prices` VALUES (235, 'CAO SU NON 0.8cm', '0', '0.8', 'rubber', 51, NULL, 1, NULL, '2023-07-20 03:21:00', '2025-01-12 15:23:46', 1);
-INSERT INTO `supply_prices` VALUES (236, 'CAO SU NON 1cm', '0', '1', 'rubber', 51, '1cm = 10', 1, NULL, '2023-07-20 03:21:00', '2025-01-12 15:27:00', 1);
-INSERT INTO `supply_prices` VALUES (237, 'CAO SU NON 1.3cm', '0', '1.3', 'rubber', 51, NULL, 1, NULL, '2023-07-20 03:21:00', '2025-01-12 15:24:11', 1);
-INSERT INTO `supply_prices` VALUES (238, 'CAO SU NON 1.5cm', '0', '1.5', 'rubber', 51, NULL, 1, NULL, '2023-07-20 03:21:00', '2025-01-12 15:24:36', 1);
-INSERT INTO `supply_prices` VALUES (239, 'CAO SU NON 1.8cm', '0', '1.8', 'rubber', 51, NULL, 1, NULL, '2023-07-20 03:21:00', '2025-01-12 15:25:13', 1);
-INSERT INTO `supply_prices` VALUES (240, 'CAO SU NON 2cm', '0', '2', 'rubber', 51, NULL, 1, NULL, '2023-07-20 03:21:00', '2025-01-12 15:25:33', 1);
-INSERT INTO `supply_prices` VALUES (241, 'CAO SU NON 2.5cm', '0', '2.5', 'rubber', 51, NULL, 1, NULL, '2023-07-20 03:21:00', '2025-01-12 15:25:51', 1);
-INSERT INTO `supply_prices` VALUES (242, 'CAO SU NON 3cm', '0', '3', 'rubber', 51, NULL, 1, NULL, '2023-07-20 03:21:00', '2025-01-12 15:26:12', 1);
-INSERT INTO `supply_prices` VALUES (243, 'CAO SU NON 3.5cm', '0', '3.5', 'rubber', 51, NULL, 1, NULL, '2023-07-20 03:21:00', '2025-01-12 15:26:34', 1);
-INSERT INTO `supply_prices` VALUES (244, 'CAO SU NON 4cm', '0', '4', 'rubber', 51, NULL, 1, NULL, '2023-07-20 03:21:00', '2025-01-12 15:26:51', 1);
-INSERT INTO `supply_prices` VALUES (284, 'MÀNG BÓNG NƯỚC 12mic', '0', '0.0011', 'nilon', 8, '0.0011 là định lượng của 12mic màng nước', 1, NULL, '2025-01-10 09:43:46', '2025-01-10 13:50:06', 1);
-INSERT INTO `supply_prices` VALUES (285, 'MÀNG BÓNG NƯỚC 15mic', '0', '0.0014', 'nilon', 8, '0.0014 là định lượng của 15mic màng nước', 1, NULL, '2025-01-10 09:45:05', '2025-01-10 09:48:13', 1);
-INSERT INTO `supply_prices` VALUES (286, 'MÀNG NHIỆT 12mic', '0', '0.00154', 'nilon', 9, '0.00154 Là định lượng của màng nhiệt 12 mic', 1, NULL, '2025-01-10 09:50:02', '2025-01-10 09:50:02', 1);
 INSERT INTO `supply_prices` VALUES (288, 'C80', '0.0023', '80', 'paper', 12, NULL, 1, NULL, '2025-01-10 17:24:34', '2025-01-10 17:29:47', 1);
 INSERT INTO `supply_prices` VALUES (289, 'C100', '0.00213', '100', 'paper', 12, NULL, 1, NULL, '2025-01-10 17:27:03', '2025-01-10 17:29:19', 1);
 INSERT INTO `supply_prices` VALUES (290, 'C120', '0.00213', '120', 'paper', 12, NULL, 1, NULL, '2025-01-10 17:28:34', '2025-01-10 17:29:09', 1);
@@ -178,8 +129,74 @@ INSERT INTO `supply_prices` VALUES (354, 'Carton 1.8ly', '0.01', '1260', 'carton
 INSERT INTO `supply_prices` VALUES (355, 'Carton 2ly', '0.01', '1400', 'carton', 21, '0.01 là 10 triệu 1 tấn', 1, NULL, '2025-01-12 14:26:41', '2025-01-12 14:26:41', 1);
 INSERT INTO `supply_prices` VALUES (356, 'Carton 2.2ly', '0.01', '1540', 'carton', 21, '0.01 là 10 triệu 1 tấn', 1, NULL, '2025-01-12 14:27:09', '2025-01-12 14:27:09', 1);
 INSERT INTO `supply_prices` VALUES (357, 'Carton 2.5ly', '0.01', '1750', 'carton', 21, '0.01 là 10 triệu 1 tấn', 1, NULL, '2025-01-12 14:27:28', '2025-01-12 14:27:28', 1);
-INSERT INTO `supply_prices` VALUES (358, 'SÓNG E 2 lớp', '0', '1', 'carton', 48, 'Quy định sóng E là 1', 1, NULL, '2025-01-12 14:37:58', '2025-01-12 14:46:49', 1);
-INSERT INTO `supply_prices` VALUES (359, 'SÓNG E 3 lớp', '0.1', '1', 'carton', 48, 'Quy định sóng E là 1', 1, NULL, '2025-01-12 14:38:16', '2025-01-12 14:46:58', 1);
-INSERT INTO `supply_prices` VALUES (360, 'LÔNG TRẮNG - Ngắn', '0', '10', 'decal', 48, 'Đối với nhung tính định lượng là 100mgr', 1, NULL, '2025-01-15 06:18:20', '2025-01-15 06:31:31', 1);
+INSERT INTO `supply_prices` VALUES (358, 'SÓNG E 2 lớp - MẶT KPP', '0', '100', 'carton', 48, 'MẶT KPP = 3500/m2', 1, NULL, '2025-01-12 14:37:58', '2025-01-16 17:22:35', 1);
+INSERT INTO `supply_prices` VALUES (361, 'K21-0.3cm ( KT 180 x 200cm )', '0', '300', 'styrofoam', 10, 'Chỉ mua khổ 180 x 200cm, giá là 15.2778 triệu/ tấn', 1, NULL, '2025-01-16 16:05:35', '2025-01-16 16:19:18', 1);
+INSERT INTO `supply_prices` VALUES (362, 'K21-0.5cm ( KT 180 x 200cm )', '0', '500', 'styrofoam', 10, 'Chỉ mua khổ 180 x 200cm, giá là 15.2778 triệu/ tấn', 1, NULL, '2025-01-16 16:06:02', '2025-01-16 16:19:23', 1);
+INSERT INTO `supply_prices` VALUES (363, 'K21-0.8cm ( KT 180 x 200cm )', '0', '800', 'styrofoam', 10, 'Chỉ mua khổ 180 x 200cm, giá là 15.2778 triệu/ tấn', 1, NULL, '2025-01-16 16:06:12', '2025-01-16 16:19:29', 1);
+INSERT INTO `supply_prices` VALUES (364, 'K21-1cm ( KT 180 x 200cm )', '0', '1000', 'styrofoam', 10, 'Chỉ mua khổ 180 x 200cm, giá là 22.2 triệu/ tấn', 1, NULL, '2025-01-16 16:06:29', '2025-01-16 16:17:42', 1);
+INSERT INTO `supply_prices` VALUES (365, 'K21-1.2cm ( KT 180 x 200cm )', '0', '1200', 'styrofoam', 10, 'Chỉ mua khổ 180 x 200cm, giá là 15.2778 triệu/ tấn', 1, NULL, '2025-01-16 16:06:56', '2025-01-16 16:19:34', 1);
+INSERT INTO `supply_prices` VALUES (366, 'K21-1.5cm ( KT 180 x 200cm )', '0', '1500', 'styrofoam', 10, 'Chỉ mua khổ 180 x 200cm, giá là 15.2778 triệu/ tấn', 1, NULL, '2025-01-16 16:07:07', '2025-01-16 16:19:46', 1);
+INSERT INTO `supply_prices` VALUES (367, 'K21-1.8cm ( KT 180 x 200cm )', '0', '1800', 'styrofoam', 10, 'Chỉ mua khổ 180 x 200cm, giá là 22.2 triệu/ tấn', 1, NULL, '2025-01-16 16:07:21', '2025-01-16 16:18:26', 1);
+INSERT INTO `supply_prices` VALUES (368, 'K21-2cm ( KT 180 x 200cm )', '0', '2000', 'styrofoam', 10, 'Chỉ mua khổ 180 x 200cm, giá là 15.2778 triệu/ tấn', 1, NULL, '2025-01-16 16:07:32', '2025-01-16 16:19:53', 1);
+INSERT INTO `supply_prices` VALUES (369, 'K21-2.5cm ( KT 180 x 200cm )', '0', '2500', 'styrofoam', 10, 'Chỉ mua khổ 180 x 200cm, giá là 15.2778 triệu/ tấn', 1, NULL, '2025-01-16 16:07:54', '2025-01-16 16:19:58', 1);
+INSERT INTO `supply_prices` VALUES (370, 'K21-3cm ( KT 180 x 200cm )', '0', '3000', 'styrofoam', 10, 'Chỉ mua khổ 180 x 200cm, giá là 15.2778 triệu/ tấn', 1, NULL, '2025-01-16 16:08:06', '2025-01-16 16:20:04', 1);
+INSERT INTO `supply_prices` VALUES (371, 'K21-3.5cm ( KT 180 x 200cm )', '0', '3500', 'styrofoam', 10, 'Chỉ mua khổ 180 x 200cm, giá là 15.2778 triệu/ tấn', 1, NULL, '2025-01-16 16:08:19', '2025-01-16 16:20:10', 1);
+INSERT INTO `supply_prices` VALUES (372, 'K21-4cm ( KT 180 x 200cm )', '0', '4000', 'styrofoam', 10, 'Chỉ mua khổ 180 x 200cm, giá là 15.2778 triệu/ tấn', 1, NULL, '2025-01-16 16:08:32', '2025-01-16 16:20:16', 1);
+INSERT INTO `supply_prices` VALUES (373, 'K30-0.5cm ( KT 180 x 200cm )', '0', '500', 'styrofoam', 9, 'Chỉ mua 180 x 200cm, giá 22.22 triệu/ tấn', 1, NULL, '2025-01-16 16:23:04', '2025-01-16 16:23:04', 1);
+INSERT INTO `supply_prices` VALUES (374, 'K30-0.8cm ( KT 180 x 200cm )', '0', '800', 'styrofoam', 9, 'Chỉ mua 180 x 200cm, giá 22.22 triệu/ tấn', 1, NULL, '2025-01-16 16:26:08', '2025-01-16 16:26:08', 1);
+INSERT INTO `supply_prices` VALUES (375, 'K30-1cm ( KT 180 x 200cm )', '0', '1000', 'styrofoam', 9, 'Chỉ mua 180 x 200cm, giá 22.22 triệu/ tấn', 1, NULL, '2025-01-16 16:26:23', '2025-01-16 16:27:18', 1);
+INSERT INTO `supply_prices` VALUES (376, 'K30-1.2cm ( KT 180 x 200cm )', '0', '1200', 'styrofoam', 9, 'Chỉ mua 180 x 200cm, giá 22.22 triệu/ tấn', 1, NULL, '2025-01-16 16:27:31', '2025-01-16 16:27:31', 1);
+INSERT INTO `supply_prices` VALUES (377, 'K30-1.5cm ( KT 180 x 200cm )', '0', '1500', 'styrofoam', 9, 'Chỉ mua 180 x 200cm, giá 22.22 triệu/ tấn', 1, NULL, '2025-01-16 16:27:43', '2025-01-16 16:27:43', 1);
+INSERT INTO `supply_prices` VALUES (378, 'K30-1.8cm ( KT 180 x 200cm )', '0', '1800', 'styrofoam', 9, 'Chỉ mua 180 x 200cm, giá 22.22 triệu/ tấn', 1, NULL, '2025-01-16 16:27:54', '2025-01-16 16:27:54', 1);
+INSERT INTO `supply_prices` VALUES (379, 'K30-2cm ( KT 180 x 200cm )', '0', '2000', 'styrofoam', 9, 'Chỉ mua 180 x 200cm, giá 22.22 triệu/ tấn', 1, NULL, '2025-01-16 16:28:10', '2025-01-16 16:28:10', 1);
+INSERT INTO `supply_prices` VALUES (380, 'K30-2.5cm ( KT 180 x 200cm )', '0', '2500', 'styrofoam', 9, 'Chỉ mua 180 x 200cm, giá 22.22 triệu/ tấn', 1, NULL, '2025-01-16 16:28:25', '2025-01-16 16:28:25', 1);
+INSERT INTO `supply_prices` VALUES (381, 'K30-3cm ( KT 180 x 200cm )', '0', '3000', 'styrofoam', 9, 'Chỉ mua 180 x 200cm, giá 22.22 triệu/ tấn', 1, NULL, '2025-01-16 16:28:38', '2025-01-16 16:28:38', 1);
+INSERT INTO `supply_prices` VALUES (382, 'K30-3.5cm ( KT 180 x 200cm )', '0', '3500', 'styrofoam', 9, 'Chỉ mua 180 x 200cm, giá 22.22 triệu/ tấn', 1, NULL, '2025-01-16 16:28:53', '2025-01-16 16:28:53', 1);
+INSERT INTO `supply_prices` VALUES (383, 'K30-4cm ( KT 180 x 200cm )', '0', '4000', 'styrofoam', 9, 'Chỉ mua 180 x 200cm, giá 22.22 triệu/ tấn', 1, NULL, '2025-01-16 16:29:07', '2025-01-16 16:29:07', 1);
+INSERT INTO `supply_prices` VALUES (384, 'K40-0.5cm ( KT 180 x 200cm )', '0', '500', 'styrofoam', 8, 'Chỉ mua khổ 180 x 200cm, giá là 29.1666 triệu/ tấn', 1, NULL, '2025-01-16 16:36:06', '2025-01-16 16:36:06', 1);
+INSERT INTO `supply_prices` VALUES (385, 'K40-0.8cm ( KT 180 x 200cm )', '0', '800', 'styrofoam', 8, 'Chỉ mua khổ 180 x 200cm, giá là 29.1666 triệu/ tấn', 1, NULL, '2025-01-16 16:36:19', '2025-01-16 16:36:19', 1);
+INSERT INTO `supply_prices` VALUES (386, 'K40-1cm ( KT 180 x 200cm )', '0', '1000', 'styrofoam', 8, 'Chỉ mua khổ 180 x 200cm, giá là 29.1666 triệu/ tấn', 1, NULL, '2025-01-16 16:36:31', '2025-01-16 16:36:31', 1);
+INSERT INTO `supply_prices` VALUES (387, 'K40-1.2cm ( KT 180 x 200cm )', '0', '1200', 'styrofoam', 8, 'Chỉ mua khổ 180 x 200cm, giá là 29.1666 triệu/ tấn', 1, NULL, '2025-01-16 16:36:43', '2025-01-16 16:36:43', 1);
+INSERT INTO `supply_prices` VALUES (388, 'K40-1.5cm ( KT 180 x 200cm )', '0', '1500', 'styrofoam', 8, 'Chỉ mua khổ 180 x 200cm, giá là 29.1666 triệu/ tấn', 1, NULL, '2025-01-16 16:36:54', '2025-01-16 16:36:54', 1);
+INSERT INTO `supply_prices` VALUES (389, 'K40-1.8cm ( KT 180 x 200cm )', '0', '1800', 'styrofoam', 8, 'Chỉ mua khổ 180 x 200cm, giá là 29.1666 triệu/ tấn', 1, NULL, '2025-01-16 16:37:16', '2025-01-16 16:37:16', 1);
+INSERT INTO `supply_prices` VALUES (390, 'K40-2cm ( KT 180 x 200cm )', '0', '2000', 'styrofoam', 8, 'Chỉ mua khổ 180 x 200cm, giá là 29.1666 triệu/ tấn', 1, NULL, '2025-01-16 16:37:30', '2025-01-16 16:37:30', 1);
+INSERT INTO `supply_prices` VALUES (391, 'K40-2.5cm ( KT 180 x 200cm )', '0', '2500', 'styrofoam', 8, 'Chỉ mua khổ 180 x 200cm, giá là 29.1666 triệu/ tấn', 1, NULL, '2025-01-16 16:37:41', '2025-01-16 16:37:41', 1);
+INSERT INTO `supply_prices` VALUES (392, 'K40-3cm ( KT 180 x 200cm )', '0', '3000', 'styrofoam', 8, 'Chỉ mua khổ 180 x 200cm, giá là 29.1666 triệu/ tấn', 1, NULL, '2025-01-16 16:37:55', '2025-01-16 16:37:55', 1);
+INSERT INTO `supply_prices` VALUES (393, 'K40-3.5cm ( KT 180 x 200cm )', '0', '3500', 'styrofoam', 8, 'Chỉ mua khổ 180 x 200cm, giá là 29.1666 triệu/ tấn', 1, NULL, '2025-01-16 16:38:06', '2025-01-16 16:38:06', 1);
+INSERT INTO `supply_prices` VALUES (394, 'K40-4cm ( KT 180 x 200cm )', '0', '4000', 'styrofoam', 8, 'Chỉ mua khổ 180 x 200cm, giá là 29.1666 triệu/ tấn', 1, NULL, '2025-01-16 16:38:17', '2025-01-16 16:38:17', 1);
+INSERT INTO `supply_prices` VALUES (395, 'CSN -0.3cm ( KT 125 x 250cm )', '0', '300', 'rubber', 51, 'Chỉ mua KT 125 x 250cm, giá 35.2 triệu/ tấn', 1, NULL, '2025-01-16 16:46:16', '2025-01-16 16:47:30', 1);
+INSERT INTO `supply_prices` VALUES (396, 'CSN -0.5cm ( KT 125 x 250 )', '0', '500', 'rubber', 51, 'Chỉ mua KT 125 x 250cm, giá 35.2 triệu/ tấn', 1, NULL, '2025-01-16 16:46:27', '2025-01-16 16:47:37', 1);
+INSERT INTO `supply_prices` VALUES (397, 'CSN -0.8cm ( KT 125 x 250 )', '0', '800', 'rubber', 51, 'Chỉ mua KT 125 x 250cm, giá 35.2 triệu/ tấn', 1, NULL, '2025-01-16 16:47:48', '2025-01-16 16:47:48', 1);
+INSERT INTO `supply_prices` VALUES (398, 'CSN -1cm ( KT 125 x 250 )', '0', '1000', 'rubber', 51, 'Chỉ mua KT 125 x 250cm, giá 35.2 triệu/ tấn', 1, NULL, '2025-01-16 16:47:59', '2025-01-16 16:47:59', 1);
+INSERT INTO `supply_prices` VALUES (399, 'CSN -1.2cm ( KT 125 x 250 )', '0', '1200', 'rubber', 51, 'Chỉ mua KT 125 x 250cm, giá 35.2 triệu/ tấn', 1, NULL, '2025-01-16 16:48:15', '2025-01-16 16:48:15', 1);
+INSERT INTO `supply_prices` VALUES (400, 'CSN -1.5cm ( KT 125 x 250 )', '0', '1500', 'rubber', 51, 'Chỉ mua KT 125 x 250cm, giá 35.2 triệu/ tấn', 1, NULL, '2025-01-16 16:48:25', '2025-01-16 16:48:25', 1);
+INSERT INTO `supply_prices` VALUES (401, 'CSN -1.8cm ( KT 125 x 250 )', '0', '1800', 'rubber', 51, 'Chỉ mua KT 125 x 250cm, giá 35.2 triệu/ tấn', 1, NULL, '2025-01-16 16:48:38', '2025-01-16 16:48:38', 1);
+INSERT INTO `supply_prices` VALUES (402, 'CSN -2cm ( KT 125 x 250 )', '0', '2000', 'rubber', 51, 'Chỉ mua KT 125 x 250cm, giá 35.2 triệu/ tấn', 1, NULL, '2025-01-16 16:48:51', '2025-01-16 16:48:51', 1);
+INSERT INTO `supply_prices` VALUES (403, 'CSN -2.5cm ( KT 125 x 250 )', '0', '2500', 'rubber', 51, 'Chỉ mua KT 125 x 250cm, giá 35.2 triệu/ tấn', 1, NULL, '2025-01-16 16:49:10', '2025-01-16 16:49:10', 1);
+INSERT INTO `supply_prices` VALUES (404, 'CSN -3cm ( KT 125 x 250 )', '0', '3000', 'rubber', 51, 'Chỉ mua KT 125 x 250cm, giá 35.2 triệu/ tấn', 1, NULL, '2025-01-16 16:49:21', '2025-01-16 16:49:21', 1);
+INSERT INTO `supply_prices` VALUES (405, 'CSN -3.5cm ( KT 125 x 250 )', '0', '3500', 'rubber', 51, 'Chỉ mua KT 125 x 250cm, giá 35.2 triệu/ tấn', 1, NULL, '2025-01-16 16:49:31', '2025-01-16 16:49:31', 1);
+INSERT INTO `supply_prices` VALUES (406, 'CSN -4cm ( KT 125 x 250 )', '0', '4000', 'rubber', 51, 'Chỉ mua KT 125 x 250cm, giá 35.2 triệu/ tấn', 1, NULL, '2025-01-16 16:49:41', '2025-01-16 16:49:41', 1);
+INSERT INTO `supply_prices` VALUES (409, 'MÀU ĐỎ - nhập KT 150 x 9100cm', '0', '100', 'decal', 48, NULL, 1, NULL, '2025-01-16 17:43:49', '2025-01-16 17:49:45', 1);
+INSERT INTO `supply_prices` VALUES (410, 'MÀU XANH - nhập KT 150 x 9100cm', '0', '100', 'decal', 48, NULL, 1, NULL, '2025-01-16 17:45:44', '2025-01-16 17:50:05', 1);
+INSERT INTO `supply_prices` VALUES (411, 'MÀU VÀNG - nhập KT 150 x 9100cm', '0', '100', 'decal', 48, NULL, 1, NULL, '2025-01-16 17:45:56', '2025-01-16 17:50:25', 1);
+INSERT INTO `supply_prices` VALUES (412, 'MÀU TRẮNG - nhập KT 150 x 9100cm', '0', '100', 'decal', 48, NULL, 1, NULL, '2025-01-16 17:46:09', '2025-01-16 17:50:37', 1);
+INSERT INTO `supply_prices` VALUES (413, 'MÀU VÀNG - nhập KT 150 x 9100cm', '0', '10', 'silk', 26, NULL, 1, NULL, '2025-01-16 18:02:18', '2025-01-16 18:03:52', 1);
+INSERT INTO `supply_prices` VALUES (414, 'PHI BÓNG - nhập KT 150 x 9100cm', '0', '10', 'silk', 26, NULL, 1, NULL, '2025-01-16 18:07:22', '2025-01-16 18:07:22', 1);
+INSERT INTO `supply_prices` VALUES (415, 'BĂNG LÔNG NHUNG - nhập KT 150 x 9100cm', '0', '10', 'silk', 26, NULL, 1, NULL, '2025-01-16 18:09:11', '2025-01-16 18:09:11', 1);
+INSERT INTO `supply_prices` VALUES (416, 'BẠC THƯỜNG Mã - KT 65 x 24000cm', '0', '10', 'emulsion', 69, 'công thức đã chuẩn', 1, NULL, '2025-01-16 18:23:39', '2025-01-16 20:19:13', 1);
+INSERT INTO `supply_prices` VALUES (417, 'BẠC 7 MÀU Mã - KT 65 x 24000cm', '0', '10', 'emulsion', 69, 'công thức đã chuẩn', 0, NULL, '2025-01-16 20:19:30', '2025-01-16 20:19:30', 1);
+INSERT INTO `supply_prices` VALUES (418, 'KEO NHIỆT BỒI HỘP Mã 301', '0', '1', 'skrink', 70, NULL, 1, NULL, '2025-01-16 20:57:35', '2025-01-16 21:01:28', 1);
+INSERT INTO `supply_prices` VALUES (419, 'KEO NHIỆT BỒI HỘP - Mã 301', '0', '1', 'other_supply', 39, NULL, 1, NULL, '2025-01-17 01:29:24', '2025-01-17 01:45:46', 1);
+INSERT INTO `supply_prices` VALUES (420, 'KEO NHIỆT BỒI HỘP - Mã 308', '0', '1', 'other_supply', 39, NULL, 1, NULL, '2025-01-17 01:31:34', '2025-01-17 01:45:57', 1);
+INSERT INTO `supply_prices` VALUES (421, 'KEO SỮA', '0', '1', 'other_supply', 39, NULL, 1, NULL, '2025-01-17 01:32:16', '2025-01-17 01:46:12', 1);
+INSERT INTO `supply_prices` VALUES (422, 'MỰC IN OFFSET - C', '0', '1', 'other_supply', 38, NULL, 1, NULL, '2025-01-17 01:35:06', '2025-01-17 01:35:06', 1);
+INSERT INTO `supply_prices` VALUES (423, 'MỰC IN OFFSET - M', '0', '1', 'other_supply', 38, NULL, 1, NULL, '2025-01-17 01:35:24', '2025-01-17 01:35:24', 1);
+INSERT INTO `supply_prices` VALUES (424, 'MỰC IN OFFSET - Y', '0', '1', 'other_supply', 38, NULL, 1, NULL, '2025-01-17 01:35:34', '2025-01-17 01:35:34', 1);
+INSERT INTO `supply_prices` VALUES (425, 'MỰC IN OFFSET - K', '0', '1', 'other_supply', 38, NULL, 1, NULL, '2025-01-17 01:35:45', '2025-01-17 01:35:45', 1);
+INSERT INTO `supply_prices` VALUES (426, 'TAY XÁCH - Mã TD 01', '0', '1', 'other_supply', 40, NULL, 1, NULL, '2025-01-17 01:50:20', '2025-01-17 01:50:20', 1);
+INSERT INTO `supply_prices` VALUES (427, 'TƠ BÓNG 4 - Màu Vàng', '0', '1', 'other_supply', 41, NULL, 1, NULL, '2025-01-17 01:52:34', '2025-01-17 01:52:34', 1);
+INSERT INTO `supply_prices` VALUES (428, 'TƠ BÓNG 5 - Màu Vàng', '0', '1', 'other_supply', 41, NULL, 1, NULL, '2025-01-17 01:52:47', '2025-01-17 01:52:55', 1);
+INSERT INTO `supply_prices` VALUES (429, 'MÀNG CO - Khổ 65', '0', '1', 'other_supply', 42, NULL, 1, NULL, '2025-01-17 01:56:24', '2025-01-17 01:56:24', 1);
+INSERT INTO `supply_prices` VALUES (430, 'Dây CUROA - Bản 1 x 20 x 4550mm', '0', '1', 'other_supply', 43, NULL, 1, NULL, '2025-01-17 02:05:05', '2025-01-17 02:05:05', 1);
 
 SET FOREIGN_KEY_CHECKS = 1;

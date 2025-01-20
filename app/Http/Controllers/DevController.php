@@ -862,5 +862,45 @@ class DevController extends Controller
         SupplyExtend::where('type', 'warehouse')->update(['type' => \TDConst::OTHER_SUPPLY]);
     }
     
+    public function supplyPriceBySupplyType()
+    {
+        $arr_table = ['materals', 'supply_extends', 'supply_names'];
+        foreach ($arr_table as $table) {
+            $q = \DB::table($table);
+            if ($table == 'materals') {
+               $q->where('type', '!=', 'fill');
+            }elseif($table == 'supply_names'){
+                $q->whereIn('type', ['emulsion', 'skrink']);
+            }
+            $data = $q->get();
+            foreach ($data as $item) {
+                $supply_prices = \DB::table('supply_prices')->where(['type' => $item->type, 'supply_id' => $item->id])->get();
+                if (!$supply_prices->isEmpty() || in_array($item->type, ['paper', 'magnet', 'decal', 'uv', 'cover'])) {
+                    $data_insert['name'] = $item->name;
+                    $data_insert['type'] = $item->type;
+                    $data_insert['note'] = $item->note;
+                    $data_insert['act'] = 1;
+                    $data_insert['is_name'] = 0;
+                    $data_insert['created_at'] = $item->created_at;
+                    $data_insert['created_by'] = $item->created_by;
+                    $type_id = SupplyType::insertGetId($data_insert);
+                    if ($supply_prices->isEmpty()) {
+                        $insert_price['type'] = $item->type;
+                        $insert_price['name'] = $item->name;
+                        $insert_price['price'] = $item->price;
+                        $insert_price['note'] = $item->note;
+                        $insert_price['price_purchase'] = 1;
+                        $insert_price['supply_id'] = $type_id;
+                        $data_insert['act'] = 1;
+                        $data_insert['created_at'] = $item->created_at;
+                        $data_insert['created_by'] = $item->created_by;
+                        SupplyPrice::insertGetId($insert_price);
+                    }else{
+                        $supply_prices = \DB::table('supply_prices')->where(['type' => $item->type, 'supply_id' => $item->id])->update(['supply_id' => $type_id]);   
+                    }
+                }
+            }
+        }
+    }
 }
 

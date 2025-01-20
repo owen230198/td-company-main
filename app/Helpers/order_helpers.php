@@ -649,6 +649,9 @@ use App\Models\SupplyOrigin;
     if (!function_exists('getTextSupply')) {
         function getTextSupply($type)
         {
+            if ($type == 'size') {
+                return 'giấy';
+            }
             return @\TDConst::ALL_SUPPLY[$type];
         }
     }
@@ -696,7 +699,7 @@ use App\Models\SupplyOrigin;
                             'other_choose' => 1,
                         ],
                         'data' => [
-                            'table' => SupplyOrigin::getTableParentByType($type),
+                            'table' => 'supply_types',
                             'where' => $where_type
                         ]
                     ]

@@ -123,29 +123,21 @@ var chooseRepresentQuote = function() {
     });
 }
 
-var selectPaperMateralModule = function () {
-    $(document).on('change', 'select.select_paper_materal', function (event) {
+var selectSupplyMateralModule = function () {
+    $(document).on('change', 'select.__supply_materal_select_module', function (event) {
         event.preventDefault();
-        let parent = $(this).closest('.materal_paper_module');
-        let module_size_paper = parent.find('.paper_price_config_input');
-        let price_input = module_size_paper.find('input.price_input_paper');
-        let note_input_module = parent.find('.__module_paper_materal_note');
-        let note_input = note_input_module.find('textarea.__paper_materal_note');
-        if ($(this).val() === 'other') {
-            if (module_size_paper.css('display') === 'none' && price_input.attr('disabled') === 'disabled') {
-                module_size_paper.fadeIn(100);
-                price_input.attr('disabled', false);
-            }
-            if (note_input_module.css('display') === 'none' && note_input.attr('disabled') === 'disabled') {
-                note_input_module.fadeIn();
-                note_input.attr('disabled', false);
-            }
-        } else {
-            module_size_paper.fadeOut(100);
-            price_input.attr('disabled', true);
-            note_input_module.fadeOut(100);
-            note_input.attr('disabled', true);
-        }
+        let _this = $(this);
+        let parent = _this.closest('.__materal_select_supply_module');
+        let materal = _this.val();
+        let key_supp = parent.data('key_supp');
+        let pro_index = parent.data('pro_index');
+        let supp_index = parent.data('supp_index');
+        let key_stage = parent.data('key_stage');
+        let param = '?materal=' + materal + '&key_supp=' + key_supp + '&pro_index=' + pro_index + '&supp_index=' + supp_index + '&key_stage=' + key_stage;
+        let url = 'ajax-respone/getViewQtvByMateral' + param;
+        let view_target =  parent.find('.__materal_ajax_qtv');
+        ajaxViewTarget(url, view_target, view_target);
+        
     });
 }
 
@@ -225,13 +217,8 @@ var setNameProductQuote = function () {
 var selectExtNamePaperModule = function () {
     $(document).on('keyup change', 'select.select_ext_name_paper', function (event) {
         event.preventDefault();
-        text = $(this).val();
-        let main_name = $(this).closest('.config_handle_paper_pro').find('.quote_set_product_name').val();
-        let parent = $(this).closest('.quote_product_structure');
-        parent.find('input.quote_receive_paper_name_ext').val(main_name + ' ( ' + text + ' )');
-        let pro_index = $(this).attr('pro_index');
-        let supp_index = $(this).attr('supp_index');
-        let link_ajax = 'get-after-print-view?pro_index=' + pro_index + '&supp_index=' + supp_index + '&name=' + text;
+        let id = $(this).val();
+        let link_ajax = 'get-after-print-view?pro_index=' + pro_index + '&supp_index=' + supp_index + '&id=' + id;
         let ajax_target = parent.find('.paper_ajax_after_print');
         ajaxViewTarget(link_ajax, ajax_target, ajax_target);
     });
@@ -417,7 +404,7 @@ $(function () {
     PrintQuote();
     selectCustomerQuote();
     chooseRepresentQuote();
-    selectPaperMateralModule();
+    selectSupplyMateralModule();
     moduleInputQuantityProduct();
     addSuppModule();
     addFillFinishModule();
