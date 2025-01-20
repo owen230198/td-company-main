@@ -22,15 +22,19 @@
             </div>
             <div class="tab-content p-3 w-100 bg_eb radius_5" id="after-print-tab-pro{{ $pro_index.'_'.$supp_index }}Content">
                 @foreach ($handle_stage as $tabkey => $tab)
-                    <div class="tab-pane fade show{{ $tabkey == 0 ? ' active' : '' }}" id="v-{{ $tab['key'].'_'.$pro_index.'_'.$supp_index }}" 
-                    role="tabpanel" aria-labelledby="v-{{ $tab['key'].'_'.$pro_index.'_'.$supp_index }}-tab">
-                        @php
-                            $data_handle = !empty($data_paper->{$tab['key']}) ? json_decode($data_paper->{$tab['key']}, true) : [];
-                        @endphp
-                        @include('quotes.products.papers.handles.'.$tab['key'], ['data_handle' => $data_handle])
+                    @php
+                        $tab_key = $tab['key'];
+                        $data_handle = !empty($data_paper->{$tab_key}) ? json_decode($data_paper->{$tab_key}, true) : [];
+                        if ($tab_key == \TDConst::METALAI) {
+                            $data_handle_cover = !empty($data_paper->cover) ? json_decode($data_paper->cover, true) : [];
+                        }
+                    @endphp
+                    <div class="tab-pane fade show{{ $tabkey == 0 ? ' active' : '' }}" id="v-{{ $tab_key.'_'.$pro_index.'_'.$supp_index }}" 
+                    role="tabpanel" aria-labelledby="v-{{ $tab_key.'_'.$pro_index.'_'.$supp_index }}-tab">
+                        @include('quotes.products.papers.handles.'.$tab_key, ['data_handle' => $data_handle, 'data_handle_cover' => @$data_handle_cover])
                         @php
                         $textarea_note = [
-                                'name' => 'product['.$pro_index.'][paper]['.$supp_index.']['.$tab['key'].'][note]',
+                                'name' => 'product['.$pro_index.'][paper]['.$supp_index.']['.$tab_key.'][note]',
                                 'type' => 'textarea',
                                 'note' => 'Ghi chú',
                                 'value' => @$data_handle['note']

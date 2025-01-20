@@ -492,7 +492,8 @@ use App\Models\SupplyOrigin;
                 case 'papers':
                     return [\TDConst::PRINT, 
                             \TDConst::NILON, 
-                            \TDConst::METALAI, 
+                            \TDConst::METALAI,
+                            \TDConst::COVER, 
                             \TDConst::COMPRESS, 
                             \TDConst::UV, 
                             \TDConst::ELEVATE,

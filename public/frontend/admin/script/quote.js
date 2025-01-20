@@ -133,7 +133,8 @@ var selectSupplyMateralModule = function () {
         let pro_index = parent.data('pro_index');
         let supp_index = parent.data('supp_index');
         let key_stage = parent.data('key_stage');
-        let param = '?materal=' + materal + '&key_supp=' + key_supp + '&pro_index=' + pro_index + '&supp_index=' + supp_index + '&key_stage=' + key_stage;
+        let key_type = parent.data('key_type');
+        let param = '?materal=' + materal + '&key_supp=' + key_supp + '&pro_index=' + pro_index + '&supp_index=' + supp_index + '&key_stage=' + key_stage + '&key_type=' + key_type;
         let url = 'ajax-respone/getViewQtvByMateral' + param;
         let view_target =  parent.find('.__materal_ajax_qtv');
         ajaxViewTarget(url, view_target, view_target);

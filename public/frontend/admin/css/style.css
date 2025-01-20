@@ -23,6 +23,12 @@ select.muptiple_select option {
     font-size: 12.5px;
 }
 
+.config_content .form-control.input_155{
+    max-width: 155px;
+    min-width: 155px;
+    width: 155px;
+}
+
 .page-item.active .page-link{
     background-color :#419512;
     border-color: #419512;

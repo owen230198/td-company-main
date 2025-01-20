@@ -290,7 +290,7 @@ var selectAjaxModule = function (section = $('.page_content ')) {
             });
             if ($(this).data('id') !== '' && $(this).data('label') !== '') {
                 var newOption = new Option($(this).data('label'), $(this).data('id'), true, true);
-                $(this).append(newOption).trigger('change');
+                $(this).append(newOption);
             }
         })
     }

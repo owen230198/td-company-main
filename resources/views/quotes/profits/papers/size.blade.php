@@ -8,22 +8,28 @@
 
     @if (!empty($stage['materal']))
         <li>
-            <span>Chất liệu giấy: </span>
-            <strong class="color_red">{{ @$stage['materal'] == 'other' ? 'Giấy khác' : getFieldDataById('name', 'materals', $stage['materal']) }}</strong>
+            <span>Chất liệu vật tư: </span>
+            <strong class="color_red">{{ @$stage['materal'] == \StatusConst::OTHER ? 'vật tư khác' : getFieldDataById('name', 'supply_types', $stage['materal']) }}</strong>
         </li>
     @endif
 
-    @if (!empty($stage['materal_price']))
+    @if (!empty($stage['price']))
         <li>
-            <span>ĐG chất liệu giấy: </span>
-            <strong class="color_red">{{ $stage['materal_price'] }}</strong>
+            <span>ĐG chất liệu vật tư: </span>
+            <strong class="color_red">{{ $stage['price'] }}</strong>
         </li>
     @endif
 
-    @if (!empty($stage['qttv']))
+    @if (!empty($stage['qtv']))
+        <li>
+            <span>Tên định lượng: </span>
+            <strong class="color_red">{{ getFieldDataById('name', 'supply_prices', $stage['qtv']) }}</strong>
+        </li>
+    @endif
+    @if (!empty($stage['qtv_num']))
         <li>
             <span>Định lượng: </span>
-            <strong class="color_red">{{ $stage['qttv'] }}</strong>
+            <strong class="color_red">{{ $stage['qtv_num'] }}</strong>
         </li>
     @endif
 </ul>

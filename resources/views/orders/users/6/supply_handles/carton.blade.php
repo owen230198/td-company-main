@@ -11,9 +11,7 @@
 
     @include('quotes.products.supplies.quantity_config', ['compen_percent' => $carton_compen_percent])
 
-    @include('quotes.products.supplies.size_config', ['plus' => $carton_plus, 'divide' => $carton_divide])
-
-    @include('quotes.products.supplies.select_supply_type')
+   @include('quotes.products.select_supply_type', ['key_supp' => $key_supp, 'pro_index' => $pro_index, 'supp_index' => $supp_index, 'key_stage' => 'size', 'key_type' => $key_supp, 'value' => @$supply_size])
     
     @include('orders.users.6.supply_handles.handle', ['compen_percent' => $carton_compen_percent])
 @endsection

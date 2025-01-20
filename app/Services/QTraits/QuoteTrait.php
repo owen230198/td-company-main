@@ -2,6 +2,7 @@
 namespace App\Services\QTraits;
 
 use App\Constants\TDConstant;
+use App\Models\SupplyPrice;
 
 trait QuoteTrait
 {
@@ -35,17 +36,29 @@ trait QuoteTrait
     }
     private function configDataSupplySize($supply, $type)
     {
-        $qttv_id = !empty($supply['supply_price']) ? $supply['supply_price'] : 0;
-        $model = in_array($type, [\TDConst::DECAL, \TDConst::SILK]) ? 'Materal' : 'SupplyPrice';
-        $qttv = getDetailDataByID($model, $qttv_id);
-        $qttv_price = !empty($qttv['price']) ? (float) $qttv['price'] : 0;
-        //Công thức tính chi phí khổ giấy vật tư hộp cứng: Dài x Rộng x ĐG định lượng x SL vật tư
-        $total = self::$length * self::$width * $qttv_price * self::$supp_qty;
+        if (@$supply['materal'] == \StatusConst::OTHER) {
+            $price = @$supply['unit_price'] ?? 0;
+            $qtv_num = @$supply['qtv'] ?? 1;
+        }else{
+            $qtv_id = @$supply['qtv'] ?? 0;
+            $qtv = getDetailDataByID('SupplyPrice', $qtv_id);
+            $price = @$qtv['price'] ?? 0;
+            $qtv_num = @$qtv['price_purchase'] ?? 1;
+        }
+        if ($type == \TDConst::PAPER) {
+            $plus_paper = getPluspaperNumber();;
+            $supp_qty = self::$supp_qty + $plus_paper;
+        }else{
+            $supp_qty = self::$supp_qty;
+        }
+        //Công thức tính chi phí khổ giấy vật tư hộp cứng: Dài x Rộng x ĐG x định lượng x SL vật tư
+        $total = self::$length * self::$width * $price * $qtv_num * $supp_qty;
         if (!empty($supply['prescript_price'])) {
             $total = $total + ((float) $supply['prescript_price'] * self::$supp_qty);
         }
-        $supply['qttv_price'] = $qttv_price;
-        $supply['supp_qty'] = self::$supp_qty;
+        $supply['qtv_price'] = $price;
+        $supply['qtv_num'] = $qtv_num;
+        $supply['supp_qty'] = $supp_qty;
         return $this->getObjectConfig($supply, $total);
     }
 
@@ -106,25 +119,21 @@ trait QuoteTrait
         return $a + $b + $shape_price + $c;
     }
 
-	private function configDataStage($data){
+	private function configDataStage($data, $key_device){
         $device_id = !empty($data['machine']) ? (int)$data['machine'] : 0;
         $device = getDetailDataByID('Device', $device_id);
         $model_price = !empty($device['model_price']) ? (float) $device['model_price'] : 0;
         $work_price = !empty($device['work_price']) ? (float) $device['work_price'] : 0;
         $shape_price = !empty($device['shape_price']) ? (float) $device['shape_price'] : 0;
-        $key_device = !empty($device['key_device']) ? $device['key_device'] : '';
         $data['model_price'] = $model_price;
         $data['work_price'] = $work_price;
         $data['shape_price'] = $shape_price;
         if (empty($key_device)) {
             return $this->createNonActiveObj();    
         }
-        if (in_array($key_device, [TDConstant::NILON, TDConstant::UV])) {
-            //Tính chi phí cán nilon
-        	$obj = $this->configDataUVNAndNilon($model_price, $work_price, $shape_price, $data);
-        }elseif ($key_device == TDConstant::METALAI){
-            //Tính chi phí cán metalai
-            $obj = $this->configDataMetalai($model_price, $work_price, $shape_price, $data);
+        if (in_array($key_device, [TDConstant::NILON, TDConstant::UV, \TDconst::METALAI, \TDConst::COVER])) {
+            //Tính chi phí cán màng
+        	$obj = $this->configDataMembrane($model_price, $work_price, $shape_price, $data, $key_device);
         }elseif ($key_device == TDConstant::ELEVATE){
             //Tính chi phí máy bế
             $obj = $this->configDataElevate($model_price, $work_price, $shape_price, $data);
@@ -164,10 +173,20 @@ trait QuoteTrait
         return $printer;
     }
 
-    private function getPriceMateralQuote($id)
+    private function getPriceMateralQuote(&$supply)
     {
-        $materal = \App\Models\Materal::find($id);
-        return !empty($materal['price']) ? (float) $materal['price'] : 0;
+        if (@$supply['materal'] == \StatusConst::OTHER) {
+            $price = @$supply['unit_price'] ?? 0;
+            $qtv_num = @$supply['qtv'] ?? 1;
+        }else{
+            $qtv_id = !@$supply['qtv'] ?? 0;
+            $qtv = getDetailDataByID('SupplyPrice', $qtv_id);
+            $price = @$qtv['price'] ?? 0;
+            $qtv_num = @$qtv['price_purchase'] ?? 1;
+        }
+        $supply['qtv_price'] = $price;
+        $supply['qtv_num'] = $qtv_num;
+        return $price * $qtv_num;
     }
 
     private function createNonActiveObj()

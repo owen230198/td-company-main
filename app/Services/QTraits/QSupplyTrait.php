@@ -22,7 +22,7 @@ trait QSupplyTrait
             if ($stage == \TDConst::MILL) {
                $param['factor'] = !empty($data['name']) ? ((int) getFieldDataById('factor', 'supply_names', $data['name']) > 0 ? getFieldDataById('factor', 'supply_names', $data['name']) : 1) : 1;
             }
-            $data_action[$stage] = $this->configDataStage($param);
+            $data_action[$stage] = $this->configDataStage($param, $stage);
          }
       }
 
@@ -84,14 +84,11 @@ trait QSupplyTrait
    private function configDataMagnet($magnet)
    {
       $magnet_perc = (float) getDataConfig('QuoteConfig', 'MAGNET_PERC');
-      $qttv_id = !empty($magnet['type']) ? $magnet['type'] : 0;
-      $qttv = getDetailDataByID('Materal', $qttv_id);
-      $qttv_price = @$qttv['price'] ? $qttv['price'] : 0;
-      $magnet['qttv_price'] = $qttv_price;
+      $materal_cost = $this->getPriceMateralQuote($magnet);
       $magnet['magnet_perc'] = $magnet_perc;
       $qty = !empty($magnet['qty']) ? $magnet['qty'] : 0;
       //CT tính chi phí nam châm: (SL sản phẩm x ĐG nam châm) x (Số viên nam châm x 1.5);
-      $total = (self::$base_qty_pro * $qttv_price) * (($qty * $magnet_perc));
+      $total = (self::$base_qty_pro * $materal_cost) * (($qty * $magnet_perc));
       $magnet['qty_pro'] = self::$base_qty_pro;
       return $this->getObjectConfig($magnet, $total);
    }

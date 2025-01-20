@@ -4,14 +4,6 @@
         $silk_compen_percent = (float) getDataConfig('QuoteConfig', 'SILK_COMPEN_PERCENT');
         $silk_divide = \TDConst::SILK_SIZE_DIVIDE;
         $silk_plus = \TDConst::SILK_SIZE_PLUS; 
-        $pro_silk_supply = [
-            'name' => 'product['.$pro_index.']['.$key_supp.']['.$supp_index.'][size][supply_price]',
-            'type' => 'linking',
-            'note' => 'Chọn vật tư',
-            'value' => @$supply_size['supply_price'],
-            'other_data' => ['config' => ['search' => 1], 
-            'data' => ['table' => 'materals', 'where' => ['type' => $key_supp]]]
-        ];
         $pro_silk_ext_price = [
             'name' => 'product['.$pro_index.']['.$key_supp.']['.$supp_index.'][size][prescript_price]',
             'note' => 'Phát sinh giá lụa cao cấp',
@@ -31,9 +23,7 @@
     ['compen_percent' => $silk_compen_percent])
 
     <div class="{{ !empty($rework) ? 'd-none' : '' }}">
-        @include('quotes.products.supplies.size_config', ['plus' => $silk_plus, 'divide' => $silk_divide])
-
-        @include('view_update.view', $pro_silk_supply)
+       @include('quotes.products.select_supply_type', ['key_supp' => $key_supp, 'pro_index' => $pro_index, 'supp_index' => $supp_index, 'key_stage' => 'size', 'key_type' => $key_supp, 'value' => @$supply_size])
 
         <div class="d-flex align-items-center">
             @include('view_update.view', $pro_silk_ext_price)

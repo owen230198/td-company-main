@@ -25,6 +25,9 @@
             $linking_model = getModelByTable($table_linking);
             $linking_value = \DB::table($table_linking)->find($data_id);
             $data_label = method_exists($linking_model, 'getLabelLinking') ? $linking_model::getLabelLinking($linking_value) : @$linking_value->{$field_title};
+            if (@$value == \StatusConst::OTHER) {
+                $data_label = 'Loại khác';
+            }
         }
     @endphp
     <select name="{{ $name }}" {{ !empty($select_config['multiple']) ? 'multiple' : '' }} 

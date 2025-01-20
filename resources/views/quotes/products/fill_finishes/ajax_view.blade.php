@@ -117,7 +117,7 @@
         </div>
     </div>
     
-    @include('view_update.view', $data_select_magnet)
+    @include('quotes.products.select_supply_type', ['key_supp' => 'fill_finish', 'pro_index' => $pro_index, 'supp_index' => '', 'key_stage' => \TDConst::MAGNET, 'key_type' => \TDConst::MAGNET, 'value' => @$data_magnet])
     
     @include('view_update.view', $data_magnet_qty)
 </div>

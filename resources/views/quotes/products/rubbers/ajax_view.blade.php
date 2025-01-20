@@ -18,9 +18,7 @@
     ['compen_percent' => $rubber_compen_percent])
     
     <div class="{{ !empty($rework) ? 'd-none' : '' }}">
-        @include('quotes.products.supplies.size_config', ['plus' => $rubber_plus, 'divide' => $rubber_divide])
-    
-        @include('quotes.products.supplies.select_supply_type')
+       @include('quotes.products.select_supply_type', ['key_supp' => $key_supp, 'pro_index' => $pro_index, 'supp_index' => $supp_index, 'key_stage' => 'size', 'key_type' => $key_supp, 'value' => @$supply_size])
 
         @php
             $data_cut = !empty($supply_obj->cut) ? json_decode($supply_obj->cut, true) : []; 
