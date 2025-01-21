@@ -16,7 +16,7 @@
     @if (!empty($stage['price']))
         <li>
             <span>ĐG chất liệu vật tư: </span>
-            <strong class="color_red">{{ $stage['price'] }}</strong>
+            <strong class="color_red">{{ $stage['qtv_price'] }}</strong>
         </li>
     @endif
 
@@ -43,8 +43,8 @@
             <p class="formula_name font_bold">Chi phí vật tư giấy in:</p>
             <div class="formula_content d-flex align-items-center">
                 <p class="formula_param mx-2">Dài x Rộng x ĐG giấy in x Định lượng (SL tờ in + BH giấy in) </p>
-                <p class="font_bold formula_result mr-2"> = {{ $size['length'] }} x {{ $size['width'] }} x {{ $stage['materal_price'] }} x {{ $stage['qttv'] }} x {{ $stage['supp_qty'] }}</p>
-                <p class="font_bold formula_result"> = {{ number_format($size['length'] * $size['width'] * $stage['materal_price'] * $stage['qttv'] * $stage['supp_qty']) }}đ</p>
+                <p class="font_bold formula_result mr-2"> = {{ $size['length'] }} x {{ $size['width'] }} x {{ $stage['qtv_price'] }} x {{ $stage['qtv_num'] }} x {{ $stage['supp_qty'] }}</p>
+                <p class="font_bold formula_result"> = {{ number_format($size['length'] * $size['width'] * $stage['qtv_price'] * $stage['qtv_num'] * $stage['supp_qty']) }}đ</p>
             </div>
         </div>
     @endif

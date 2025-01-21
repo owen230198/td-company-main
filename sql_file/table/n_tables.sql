@@ -11,7 +11,7 @@
  Target Server Version : 80030
  File Encoding         : 65001
 
- Date: 18/01/2025 12:40:55
+ Date: 21/01/2025 22:23:17
 */
 
 SET NAMES utf8mb4;
@@ -57,7 +57,7 @@ INSERT INTO `n_tables` VALUES (8, 'q_papers', 'Tờ in', NULL, 10, 'view', NULL,
 INSERT INTO `n_tables` VALUES (9, 'devices', 'Thiết bị & Chi phí', '{\r\n	\"link\":\"config-device-price/supply_types?type=devices\", \r\n	\"note\":\"Danh sách thiết bị máy theo vật tư\"\r\n}', 10, 'view', NULL, NULL, NULL, 1, 1, 1, 1, NULL, NULL, '2023-04-23 11:30:46', '2023-08-30 04:55:37');
 INSERT INTO `n_tables` VALUES (10, 'materals', 'Chất liệu vật tư', NULL, 10, 'view', NULL, NULL, NULL, 1, 1, 1, 1, NULL, NULL, '2023-04-28 10:32:23', '2023-08-16 19:42:33');
 INSERT INTO `n_tables` VALUES (11, 'printers', 'Máy in & chi phí', NULL, 10, 'view', NULL, NULL, NULL, 1, 1, 1, 1, NULL, NULL, '2023-04-28 00:18:55', '2023-08-16 19:42:33');
-INSERT INTO `n_tables` VALUES (13, 'supply_types', 'Vật tư tham gia sx', NULL, 10, 'view', NULL, '[\r\n	{\r\n	\"icon\":\"list-ul\",\r\n	\"note\":\"Đơn giá định lượng\", \r\n	\"link\":\"view/supply_prices?default_data=%7B%22supply_id%22%3A%22<id>%22%7D\",\r\n	\"condition\":[\r\n			{\"key\":\"is_name\", \"value\":\"0\"}\r\n		]\r\n	}\r\n]', NULL, 1, 1, 1, 1, NULL, NULL, '2023-07-17 19:30:41', '2024-04-15 05:52:58');
+INSERT INTO `n_tables` VALUES (13, 'supply_types', 'Vật tư tham gia sx', NULL, 10, 'view', NULL, '[\r\n	{\r\n	\"icon\":\"list-ul\",\r\n	\"note\":\"Đơn giá định lượng\", \r\n	\"link\":\"view/supply_prices?default_data=%7B%22supply_id%22%3A%22<id>%22%7D\"\r\n	}\r\n]', NULL, 1, 1, 1, 1, NULL, NULL, '2023-07-17 19:30:41', '2025-01-21 19:52:29');
 INSERT INTO `n_tables` VALUES (14, 'supply_prices', 'Đơn giá vật tư', NULL, 20, 'view', NULL, NULL, NULL, 1, 1, 1, 1, NULL, NULL, '2023-04-28 10:33:01', '2023-08-16 19:42:34');
 INSERT INTO `n_tables` VALUES (18, 'orders', 'Đơn hàng', NULL, 20, 'view', NULL, '[\n	{\n	\"type\":2,\n	\"class\":\"load_view_popup\",\n	\"icon\":\"list-ul\",\n	\"note\":\"DS sản phẩm\", \n	\"link\":\"view/products?default_data=%7B%22order%22%3A%22<id>%22%7D&nosidebar=1\"\n	},\n	{\n		\"icon\":\"print\",\n		\"note\":\"In đơn\", \n		\"blank\":1,\n		\"link\":\"print-data/orders/<id>\"\n	}\n]', NULL, 0, 1, 1, 2, 1, 1, '2023-06-21 13:22:33', '2024-12-03 16:11:38');
 INSERT INTO `n_tables` VALUES (19, 'base_receipts', 'Phiếu chuyển kho', NULL, 50, 'view', NULL, '[\r\n	{\r\n	\"type\":2,\r\n	\"class\":\"load_view_popup\",\r\n	\"icon\":\"list-ol\",\r\n	\"note\":\"Danh sách sản phẩm\", \r\n	\"link\":\"view/move_warehouses?default_data=%7B%22parent%22%3A%22<id>%22%7D&nosidebar=1\"\r\n	}\r\n]', NULL, 0, 1, 1, 0, NULL, 1, '2023-04-23 11:30:46', '2024-11-04 16:03:36');

@@ -122,6 +122,9 @@ trait QPaperTrait
                     }elseif (in_array($stage, [\TDConst::COMPRESS, \TDConst::FLOAT])) {
                         $data_action[$stage] = $this->configDataCompressFloat($data[$stage]);
                     }else{
+                        if ($stage == \TDConst::COVER && !empty($data[\TDConst::METALAI]['machine'])) {
+                            $data[$stage]['machine'] = $data[\TDConst::METALAI]['machine'];  
+                        }
                         $data_action[$stage] = $this->configDataStage($data[$stage], $stage);
                     }
                 }

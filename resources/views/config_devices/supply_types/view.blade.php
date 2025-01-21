@@ -41,29 +41,29 @@
                             </div>
                         @endif
                     @else
-                    @php
-                        $materal_supplies = !empty(\TDConst::MATERAL_SUPPLY_TYPE[$item['pro_field']]) ? \TDConst::MATERAL_SUPPLY_TYPE[$item['pro_field']] : [];
-                    @endphp
-                    @if (!empty($materal_supplies))
-                        <div class="device_list_by_supply">
-                            {{-- <h3 class="fs-14 text-uppercase border_top_eb pt-3 mt-3 mb-2 text-center">ĐG Chất liệu & vật tư</h3> --}}
-                            @foreach ($materal_supplies as $materal_supply)
-                                @php
-                                    if ($materal_supply['table'] == 'supply_types') {
-                                        $default = 'default_data=%7B"type"%3A"'.$materal_supply['key'].'","is_name":"'.@$materal_supply['is_name'].'"%7D';
-                                    }elseif ($materal_supply['table'] == 'paper_extends') {
-                                        $default = '';
-                                    }else{
-                                        $default = 'default_data=%7B"type"%3A"'.$materal_supply['key'].'"%7D';   
-                                    }
-                                @endphp
-                                <a href="{{ url('view/'.$materal_supply['table'].'?'.$default) }}"
-                                 class="device_supp_item">
-                                    {{ $materal_supply['name'] }}
-                                </a>    
-                            @endforeach 
-                        </div>
-                    @endif
+                        @php
+                            $materal_supplies = !empty(\TDConst::MATERAL_SUPPLY_TYPE[$item['pro_field']]) ? \TDConst::MATERAL_SUPPLY_TYPE[$item['pro_field']] : [];
+                        @endphp
+                        @if (!empty($materal_supplies))
+                            <div class="device_list_by_supply">
+                                {{-- <h3 class="fs-14 text-uppercase border_top_eb pt-3 mt-3 mb-2 text-center">ĐG Chất liệu & vật tư</h3> --}}
+                                @foreach ($materal_supplies as $materal_supply)
+                                    @php
+                                        if ($materal_supply['table'] == 'supply_types') {
+                                            $default = 'default_data=%7B"type"%3A"'.$materal_supply['key'].'"%7D';
+                                        }elseif ($materal_supply['table'] == 'paper_extends') {
+                                            $default = '';
+                                        }else{
+                                            $default = 'default_data=%7B"type"%3A"'.$materal_supply['key'].'"%7D';   
+                                        }
+                                    @endphp
+                                    <a href="{{ url('view/'.$materal_supply['table'].'?'.$default) }}"
+                                    class="device_supp_item">
+                                        {{ $materal_supply['name'] }}
+                                    </a>    
+                                @endforeach 
+                            </div>
+                        @endif
                     @endif
                 </div>
             @endforeach

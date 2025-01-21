@@ -365,3 +365,10 @@ if (!function_exists('hasNoSidebarParam')) {
         return request()->nosidebar == 1;
     }
 }
+
+if (!function_exists('getRangeFloatNumber')) {
+    function getRangeFloatNumber($number, $step = 0.0000000001)
+    {
+        return [$number - $step, $number + $step];
+    }
+}

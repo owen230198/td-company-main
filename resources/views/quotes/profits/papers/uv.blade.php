@@ -9,14 +9,27 @@
     @if (!empty($stage['materal']))
         <li>
             <span>Mực in: </span>
-            <strong class="color_red">{{ getFieldDataById('name', 'materals', $stage['materal']) }}</strong>
+            <strong class="color_red">{{ getFieldDataById('name', 'supply_types', $stage['materal']) }}</strong>
         </li>
     @endif
 
-    @if (!empty($stage['materal_price']))
+    @if (!empty($stage['qtv_price']))
         <li>
             <span>ĐG mực in: </span>
-            <strong class="color_red">{{ number_format((float) $stage['materal_price']) }}đ</strong>
+            <strong class="color_red">{{ number_format((float) $stage['qtv_price']) }}đ</strong>
+        </li>
+    @endif
+
+    @if (!empty($stage['qtv']))
+        <li>
+            <span>Tên định lượng: </span>
+            <strong class="color_red">{{ getFieldDataById('name', 'supply_prices', $stage['qtv']) }}</strong>
+        </li>
+    @endif
+    @if (!empty($stage['qtv_num']))
+        <li>
+            <span>Định lượng: </span>
+            <strong class="color_red">{{ $stage['qtv_num'] }}</strong>
         </li>
     @endif
 
@@ -73,10 +86,10 @@
             <p class="formula_name font_bold">(2) Chi phí vật tư:</p>
             <div class="formula_content d-flex align-items-center">
                 <p class="formula_param mx-2">
-                    Dài ({{ $size['length'] }}) x Rộng x ĐG mực in x SL tờ in cả BH  x Số mặt in
+                    Dài ({{ $size['length'] }}) x Rộng x ĐG mực in x Định lượng x SL tờ in cả BH  x Số mặt in
                 </p>
-                <p class="font_bold formula_result mr-2"> = {{ $size['length'] }} x {{ $size['width'] }} x {{ $stage['materal_price'] }} x {{ $stage['supp_qty'] }} x {{ $stage['face'] }}</p>
-                <p class="font_bold formula_result"> = {{ number_format($size['length'] * $size['width'] * $stage['materal_price'] * $stage['supp_qty'] * $stage['face']) }}đ</p>
+                <p class="font_bold formula_result mr-2"> = {{ $size['length'] }} x {{ $size['width'] }} x {{ $stage['qtv_price'] }} x {{ $stage['qtv_num'] }} x {{ $stage['supp_qty'] }} x {{ $stage['face'] }}</p>
+                <p class="font_bold formula_result"> = {{ number_format($size['length'] * $size['width'] * $stage['qtv_price'] * $stage['qtv_num'] * $stage['supp_qty'] * $stage['face']) }}đ</p>
             </div>
         </div>   
         <div class="formula_item d-flex align-items-center color_brown mb-1">

@@ -498,6 +498,12 @@ a.device_supp_item {
     border-bottom: 1px dashed #ebebeb;
 }
 
+.__target_note_buying{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
 .border_bot_main {
     border-bottom: 1px solid #333;
 }

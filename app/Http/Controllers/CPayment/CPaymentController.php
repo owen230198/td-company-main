@@ -29,8 +29,6 @@ class CPaymentController extends Controller
             $data['action_url'] = url('insert/'.$table);
             $data['dataItem'] = $request->except(['nosidebar']);
             return view('c_payments.view', $data);
-        }else{
-            
         }
     }
 }

@@ -179,7 +179,7 @@ trait QuoteTrait
             $price = @$supply['unit_price'] ?? 0;
             $qtv_num = @$supply['qtv'] ?? 1;
         }else{
-            $qtv_id = !@$supply['qtv'] ?? 0;
+            $qtv_id = @$supply['qtv'] ?? 0;
             $qtv = getDetailDataByID('SupplyPrice', $qtv_id);
             $price = @$qtv['price'] ?? 0;
             $qtv_num = @$qtv['price_purchase'] ?? 1;

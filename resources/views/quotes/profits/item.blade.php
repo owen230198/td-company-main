@@ -10,12 +10,24 @@
             @foreach ($supply['device'] as $key => $device)
                 @php
                     $stage = !empty($item->{$key}) ? json_decode($item->{$key}, true) : [];
+                    $stage_cover = [];
+                    $key_stage_cover = \TDConst::COVER;
+                    $hasCover = $key == \TDConst::METALAI && !empty($item->{$key_stage_cover});
+                    if ($hasCover) {
+                        $stage_cover = json_decode($item->{$key_stage_cover}, true);
+                    }
                     $size = !empty($item->size) ? json_decode($item->size, true) : [];
                     $cost = @$stage['total'] ?? 0;
                 @endphp
                 @if ($cost > 0)
                     <li class="supply_item_inf cursor_pointer position-relative">
                         <div class="supp_cost_name">
+                            @if ($hasCover && !empty($stage_cover['total']))
+                                @php
+                                    $device .= ' & cán phủ trên';
+                                    $cost += $stage_cover['total']; 
+                                @endphp   
+                            @endif
                             <span class="font_bold mr-1">{{ $device }}: </span>
                             <span>{{ number_format($cost) }}đ</span>
                         </div>

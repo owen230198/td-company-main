@@ -23,7 +23,14 @@
                     'where' => ['type' => $supp_type, 'supply_id' => $value['target']]
                 ]
             ]
-        ];    
+        ]; 
+        $note_target_value = getFieldDataById('note', 'supply_types', $value['target']);
+        $note_target = [
+            'name' => '',
+            'type' => 'textarea',
+            'attr' => ['disable_field' => 1, 'inject_class' => '__target_note_buying'],
+            'value' => $note_target_value,
+        ];   
     }else{
         $field_qtv = [
             'name' => $group_name.'[qtv]',
@@ -157,4 +164,7 @@
         @endphp
         @include('view_update.view', $field_size)
     @endforeach
+@endif
+@if (!empty($note_target_value))
+    @include('view_update.'.$note_target['type'], $note_target)  
 @endif

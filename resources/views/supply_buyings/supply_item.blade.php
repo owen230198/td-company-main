@@ -15,6 +15,9 @@
     </div>  
     @if (!empty($field_injects))
         @foreach ($field_injects as $field_inject)
+            @php
+                $field_inject['min_label'] = 175;
+            @endphp
             @include('view_update.view', $field_inject)    
         @endforeach
     @endif              

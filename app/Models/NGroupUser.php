@@ -41,7 +41,7 @@ class NGroupUser extends Model
         'c_orders' => 'HÀNG SẴN CÔNG TY',
         'factory' => 'QUẢN LÝ NHÀ MÁY',
         'supply_buying' => 'MUA VẬT TƯ',
-        'warehouse' => 'KHO VẬT TƯ',
+        'warehouse' => 'KHO VẬT TƯ - NCC',
         'receipt' => 'ĐỀ XUẤT CHI',
         'product_warehouse' => 'KHO THÀNH PHẨM',
         'handle_supply' => 'LỆNH XỬ LÝ VẬT TƯ',
@@ -66,8 +66,13 @@ class NGroupUser extends Model
             'group' => 'factory'
         ],
         'price_materal' => [
-            'name' => 'Đơn giá vật tư sx',
+            'name' => 'Đơn giá vật tư - mục chính',
             'link' => 'config-device-price/supply_types?type=materals',
+            'group' => 'quote_price_config'
+        ],
+        'price_provider' => [
+            'name' => 'Đơn giá vật tư - chi tiết',
+            'link' => 'supply-origin-management?type=paper',
             'group' => 'quote_price_config'
         ],
         'product_category' => [
@@ -200,11 +205,6 @@ class NGroupUser extends Model
             'link' => 'view/supply_buyings?default_data=%7B%22payment_type":"0%22%7D',
             'group' => 'supply_buying'
         ],
-        'price_provider' => [
-            'name' => 'Bảng giá theo NCC',
-            'link' => 'supply-origin-management?type=paper',
-            'group' => 'supply_buying'
-        ],
         'profit' => [
             'name' => 'Lợi nhuận của tôi',
             'link' => 'myprofit',
@@ -223,12 +223,12 @@ class NGroupUser extends Model
         'warehouse_provider' => [
             'name' => 'Nhà cung cấp vật tư',
             'link' => 'view/warehouse_providers',
-            'group' => 'warehouse'
+            'group' => 'quote_price_config'
         ],
         'supply_role' => [
             'name' => 'Quyền quản lí vật tư',
             'link' => 'view/n_users?default_data=%7B%22group_user%22%3A%22'.self::WAREHOUSE.'%22%7D',
-            'group' => 'warehouse'
+            'group' => 'quote_price_config'
         ],
         'ex_supply' => [
             'name' => 'Yêu cầu xuất vật tư',

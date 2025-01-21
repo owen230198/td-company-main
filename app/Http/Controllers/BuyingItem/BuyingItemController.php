@@ -21,6 +21,14 @@
                 $data['action_url'] = url('update/'.$table.'/'.$id);
                 $data['field_exts'] = [
                     [
+                        'name' => 'deliveried',
+                        'note' => 'Đã về kho',
+                        'type' => 'text',
+                        'attr' => ['disable_field' => 1],
+                        'min_label' => 175,
+                        'value' => @$dataItem->deliveried
+                    ],
+                    [
                         'name' => 'note',
                         'note' => 'Ghi chú',
                         'type' => 'textarea',

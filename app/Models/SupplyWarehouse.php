@@ -36,7 +36,14 @@ class SupplyWarehouse extends Model
 
     static function getname($data)
     {
-        return getFieldDataById('name', 'supply_types', $data['supp_type']).' - '.getFieldDataById('name', 'supply_prices', $data['supp_price']).' - '.$data['length'].'x'.$data['width'];
+        $ret = getFieldDataById('name', 'supply_types', $data['target']).' - '.getFieldDataById('name', 'supply_prices', $data['qtv']);
+        if (!empty($data['width'])) {
+            $ret .=' - '.$data['width'];
+        }
+        if (!empty($data['length'])) {
+            $ret .= 'x'.$data['length'];
+        }
+        return $ret;
     }
 
     static function getLabelLinking($data)

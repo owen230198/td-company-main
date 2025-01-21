@@ -166,11 +166,6 @@ use App\Models\SupplyBuying;
                 if (@$buyingItem->status != SupplyBuying::BOUGHT || empty($buyingItem->type)) {
                     return customReturnMessage(false, $is_ajax, ['message' => 'Dữ liệu không hợp lệ !']);
                 }
-                $deliveried = (float)$buyingItem->deliveried;
-                $qty = (float) $buyingItem->qty;
-                if ($deliveried >= $qty) {
-                    return customReturnMessage(false, $is_ajax, ['message' => 'Số lượng đã nhập đã đạt số lượng yêu cầu mua về!']);
-                }
                 if (!$is_ajax) {
                     $data['title'] = 'Xác nhận nhập kho vật tư ';
                     $dataItem = $buyingItem->replicate();
@@ -181,19 +176,26 @@ use App\Models\SupplyBuying;
                     $data['dataItem'] = $dataItem;
                     $data['field_exts'] = [
                         [
+                           'name' => 'other_price',
+                           'note' => 'Chi phí phát sinh',
+                           'attr' => [
+                                'type_input' => 'price',
+                                'inject_class' => '__buying_other_price_input __buying_change_input'
+                            ],
+                           'type' => 'text'
+                        ],
+                        [
                             'name' => 'receipt',
                             'attr' => ['required' => 1],
                             'note' => 'Phiếu nhập kho',
                             'type' => 'filev2',
-                            'min_label' => 175,
                             'value' => '',
                             'other_data' => ['role_update' => [\GroupUser::WAREHOUSE]] 
                         ],
                         [
                             'name' => 'note',
-                            'note' => 'Ghi chú',
+                            'note' => 'Ghi chú thanh toán',
                             'type' => 'textarea',
-                            'min_label' => 175,
                             'value' => ''
                         ]
                     ];
@@ -203,93 +205,66 @@ use App\Models\SupplyBuying;
                 }else{
                     $data = $request->all();
                     $data_supply = reset($data['supply']);
-                    if (empty($data_supply['qty'])) {
-                        return returnMessageAjax(100, 'Số lượng nhập kho không hợp lệ !');
+                    $deliveried = (float)$buyingItem->deliveried;
+                    $data_qty = (float) $data_supply['qty'];
+                    $qty_buy = $deliveried + $data_qty;
+                    $qty = (float) $buyingItem->qty;
+                    if ($qty_buy > $qty) {
+                        return customReturnMessage(false, $is_ajax, ['message' => 'Số lượng đã nhập đã đạt số lượng yêu cầu mua về!']);
                     }
-                    if (empty($data['receipt'])) {
-                        return returnMessageAjax(100, 'Bạn chưa upload phiếu nhập kho !');
+                    $type = $data_supply['type'];
+                    $isSizeSupp = SupplyBuying::hasSizeSupply($type);
+                    $param['log']['qty'] = $data_qty;
+                    if ($isSizeSupp) {
+                        $param['log']['lenth_qty'] = $data_supply['lenth_qty'];
+                        $param['log']['weight'] = $data_supply['weight'];
                     }
-                }
-                $table_warehouse = SupplyBuying::getTableWarehouseByType($buyingItem->type);
-                $bill = $request->input('bill');
-                $update_supply = $data_supply;
-                $where = [];
-                foreach ($data_supply as $key => $supply) {
-                    $type = $supply['type'];
-                    $table_supply = tableWarehouseByType($type);
-                    $data['log'] = [];
-                    $data['log']['type'] = @$supply['supp_type'];
-                    $supply_qty = (float) $supply['qty'];
-                    if (SquareWarehouse::countPriceByWeight($type) && !empty($supply['width'])) {
-                        $data['log']['qty'] = $supply_qty;
-                        $data['log']['hank'] = (int) $supply['hank'];
-                        $data['log']['weight'] = $supply_qty;
-                    }elseif(SquareWarehouse::countPriceByHank($type)){
-                        $data['log']['qty'] = $supply_qty;
-                        $data['log']['hank'] = $supply_qty;
-                        if (SquareWarehouse::isWeightSupply($type)) {
-                            if (empty($supply_list[$key]['weight'])) {
-                                return returnMessageAjax(100, 'Bạn chưa nhập số kg cho vật tư '. @$supply['name'].' !');
-                            }
-                            $weight = $supply_list[$key]['weight'];
-                            $data['log']['weight'] = $weight;
-                            $update_supply[$key]['weight'] = $weight;
-                        }
-                        if ($type == \TDConst::DECAL) {
-                            $data['log']['qty'] = $supply['square'];
-                            $data['log']['square'] = $supply['square'];
-                        }
-                    }else{
-                        $data['log']['qty'] = $supply_qty;
-                    }
-                    $data['log']['provider'] = @$supp_buying->provider;
-                    $data['log']['price'] = @$supply['price'];
-                    $data['log']['bill'] = $bill;
-                    $warehouse_service = new WarehouseService($table_supply);
-                    $where = $supply;
-                    unset($where['qty'], $where['price'], $where['total']);
-                    if (!empty($where['hank'])) {
-                        unset($where['hank']);
-                    }
-                    if (!empty($where['weight'])) {
-                        unset($where['weight']);
-                    }
-                    if (!empty($where['square'])) {
-                        unset($where['square']);
-                    }
+                    $param['log']['provider'] = @$data_supply['provider'];
+                    $param['log']['price'] = @$data_supply['price'];
+                    $param['log']['other_price'] = @$data['other_price'];
+                    $param['log']['total'] = @$data_supply['total'];
+                    $param['log']['bill'] = $data['receipt'];
+                    $param['log']['buying_item'] = $id;
+                    $where = ['type' => $type, 'target' => $data_supply['target'], 'qtv' => $data_supply['qtv']]; 
                     $where['status'] = \StatusConst::IMPORTED;
-                    $data['warehouse'] = $where;
-                    $exist_obj = \DB::table($table_supply);
+                    if (!empty($data_supply['name']) && $data_supply['target'] == \StatusConst::OTHER) {
+                        $where['name'] = $data_supply['name'];
+                    }
+                    if ($isSizeSupp) {
+                        $where['width'] = $data_supply['width'];
+                        $where['length'] = $data_supply['length'];
+                    }
+                    $exist_obj = \DB::table('supply_warehouses');
+                    $param['warehouse'] = $where;
                     if (!empty($where['width'])) {
                         $width = (float) $where['width'];
-                        $exist_obj->whereBetween('width', [$width - 0.1, $width + 0.1]);
+                        $exist_obj->whereBetween('width', getRangeFloatNumber($width));
                         unset($where['width']);
                     }
                     if (!empty($where['length'])) {
                         $length = (float) $where['length'];
-                        $exist_obj->whereBetween('length', [$length - 0.1, $length + 0.1]);
+                        $exist_obj->whereBetween('length', getRangeFloatNumber($length));
                         unset($where['length']);
                     }
                     $exist_obj->where($where);
                     $exist_supply = $exist_obj->first();
+                    $warehouse_service = new WarehouseService('supply_warehouses', $type);
                     if (!empty($exist_supply)) {
-                        $status = $warehouse_service->update($data, $exist_supply->id, 1);
-                        
+                        $status = $warehouse_service->update($param, $exist_supply->id, 1);
                     }else{
-                        $status = $warehouse_service->insert($data, 1);
+                        $status = $warehouse_service->insert($param, 1);
                     }
                     if (@$status['code'] == 100) {
                         return $status;
                     }
                 }
-                $dataItem = $supp_buying->replicate();
-                $supp_buying->status = \StatusConst::SUBMITED;
-                $supp_buying->submited_by = \User::getCurrent('id');
-                $supp_buying->bill = $bill;
-                $supp_buying->supply = json_encode($update_supply);
-                $supp_buying->save();
-                logActionUserData('confirm_import', 'supply_buyings', $id, $dataItem);
-                return returnMessageAjax(200, 'Xác nhận nhập kho thành công !', 'view/supply_buyings?default_data=%7B"status"%3A"'.SupplyBuying::BOUGHT.'"%7D');
+                if ($qty_buy == $qty) {
+                    $buyingItem->status = \StatusConst::SUBMITED;
+                    SupplyBuying::checkUpdateStatus($buyingItem->parent, \StatusConst::SUBMITED);
+                }
+                $buyingItem->deliveried += $data_qty;
+                $buyingItem->save();
+                return returnMessageAjax(200, 'Xác nhận nhập kho thành công !', \StatusConst::CLOSE_POPUP);
             }else{
                 return returnMessageAjax(100, 'Không có quyền thực hiện thao tác này !');
             }

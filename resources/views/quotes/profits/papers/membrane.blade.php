@@ -1,5 +1,4 @@
 <ul>
-    @dd($stage)
     @if (!empty($stage['supp_qty']))
         <li>
             <span>SL tờ in: </span>
@@ -14,14 +13,14 @@
         </li>
     @endif
 
-    @if (!empty($stage['price']))
+    @if (!empty($stage['qtv_price']))
         <li>
             <span>ĐG chất liệu cán {{ $name }}: </span>
-            <strong class="color_red">{{ $stage['price'] }}</strong>
+            <strong class="color_red">{{ $stage['qtv_price'] }}</strong>
         </li>
     @endif
-
-    @if (!empty($stage['qtv']))
+        
+    @if (!empty($stage['qtv']) &&  @$stage['materal'] != \StatusConst::OTHER)
         <li>
             <span>Tên định lượng: </span>
             <strong class="color_red">{{ getFieldDataById('name', 'supply_prices', $stage['qtv']) }}</strong>
@@ -89,8 +88,8 @@
                 <p class="formula_param mx-2">
                     Dài ({{ $size['length'] }}) x Rộng x ĐG chất liệu cán {{ $name }} x Định lượng x (SL tờ in cả BH + BH thiết bị)  x Số mặt cán {{ $name }}
                 </p>
-                <p class="font_bold formula_result mr-2"> = {{ $size['length'] }} x {{ $size['width'] }} x {{ $stage['price'] }} x {{ $stage['qtv_num'] }} x {{ $stage['supp_qty'] }} x {{ $stage['face'] }}</p>
-                <p class="font_bold formula_result"> = {{ number_format($size['length'] * $size['width'] * $stage['price'] * $stage['supp_qty'] * $stage['face']) }}đ</p>
+                <p class="font_bold formula_result mr-2"> = {{ $size['length'] }} x {{ $size['width'] }} x {{ $stage['qtv_price'] }} x {{ $stage['qtv_num'] }} x {{ $stage['supp_qty'] }} x {{ $stage['face'] }}</p>
+                <p class="font_bold formula_result"> = {{ number_format($size['length'] * $size['width'] * $stage['qtv_price'] * $stage['qtv_num'] * $stage['supp_qty'] * $stage['face']) }}đ</p>
             </div>
         </div>   
         <div class="formula_item d-flex align-items-center color_brown mb-1">

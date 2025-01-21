@@ -7,7 +7,7 @@
         <div class="row justify-content-center">
             @if (!empty($not_accepted_table) && is_array($not_accepted_table))
                 <div class="col-12 my-4">
-                    <h2 class="fs-15 text-uppercase font_bold pb-1 mb-3 border_bot_eb">Yêu xử lý công việc</h2>
+                    <h2 class="fs-15 text-uppercase font_bold pb-1 mb-3 border_bot_eb">Yêu cầu xử lý công việc</h2>
                     <div class="row row-5 justify-content-center">
                         @foreach ($not_accepted_table as $command)
                             @if (in_array(\GroupUser::getCurrent(), $command['group_user']))

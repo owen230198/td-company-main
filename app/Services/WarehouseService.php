@@ -1,18 +1,21 @@
 <?php
     namespace App\Services;
 
-    use App\Models\SquareWarehouse;
+use App\Models\ProviderDebt;
+use App\Models\SupplyBuying;
     use App\Services\BaseService;
     use App\Services\AdminService;
     use App\Models\WarehouseHistory;
     use Maatwebsite\Excel\Facades\Excel;
+use NunoMaduro\Collision\Contracts\Provider;
 
     class WarehouseService extends BaseService
     {
-        function __construct($table)
+        function __construct($table, $type)
         {
             parent::__construct();
             $this->table = $table;
+            $this->isSizeSupp = SupplyBuying::hasSizeSupply($type);
         }
         //source
         const BUY = 1;
@@ -44,115 +47,54 @@
                     'view' => 1,
                 ]
             ];
-        } 
-
-        static function getQtyFieldByType($type, $readonly = false)
-        {
-            $unit = !empty(getUnitNameByType($type)) ? ' ('.getUnitNameByType($type).')' : '';
-            $field_qty = [
-                'name' => 'qty',
-                'type' => 'text',
-                'note' => 'Số lượng'. $unit,
-                'attr' => [
-                    'type_input' => 'number', 
-                    'inject_class' => '__buying_qty_input __buying_change_input', 
-                    'readonly' => $readonly
-                ]
-            ];
-            $field_hank = [
-                'name' => 'hank',
-                'type' => 'text',
-                'note' => 'Số cuộn',
-                'attr' => [
-                    'type_input' => 'number',
-                ]
-            ];
-            $field_weight = [
-                'name' => 'weight',
-                'type' => 'text',
-                'note' => 'Số kg',
-                'attr' => [
-                    'type_input' => 'number',
-                ]
-            ];
-
-            $field_length = [
-                'name' => 'square',
-                'type' => 'text',
-                'note' => 'Số cm',
-                'attr' => [
-                    'type_input' => 'number',
-                    'readonly' => $readonly
-                ]
-            ];
-            
-            if (SquareWarehouse::countPriceByWeight($type)) {
-                return [$field_qty, $field_hank];
-            }elseif (SquareWarehouse::countPriceByHank($type)) {
-                $ret =  [$field_qty];
-                if ($type == \TDConst::DECAL) {
-                    $ret[] = $field_length;
-                }else{
-                    $ret[] = $field_weight;
-                }
-                return $ret;
-            }else{
-                return [$field_qty];
-            }
         }
-        private function validateDataWarehouse($data, $type)
+        private function validateDataWarehouse($data, $warehouse, $action)
         {
-            $arr_field_qty = self::getQtyFieldByType($type);
-            foreach ($arr_field_qty as $field_qty) {
-                $name = $field_qty['name'];
-                $note = strtolower($field_qty['note']);
-                if (empty($data[$name])) {
-                    return returnMessageAjax(100, 'Dữ liệu '.$note.' không được để trống !');
+            if ($action == 'insert') {
+                if (empty($warehouse['type']) || empty($warehouse['target']) || empty($warehouse['target'])) {
+                    return returnMessageAjax(100, 'Dữ liệu vật tư nhập kho không hợp lệ !');
+                }
+                if ($this->isSizeSupp) {
+                    if (empty($warehouse['width']) || empty($warehouse['length'])) {
+                        return returnMessageAjax(100, 'Dữ liệu kích thước vật tư không hợp lệ !');
+                    }
                 }
             }
-            // if (empty($data['provider'])) {
-            //     return returnMessageAjax(100, 'Vui lòng chọn nhà cung cấp vật tư !');
-            // }
-            // if (empty($data['price'])) {
-            //     return returnMessageAjax(100, 'Vui lòng nhập giá mua vật tư !');
-            // }
-            // if (empty($data['bill'])) {
-            //     return returnMessageAjax(100, 'Vui lòng upload file hóa đơn mua vật tư !');
-            // }
-            return $arr_field_qty;
+            if ($this->isSizeSupp && (empty($data['lenth_qty']) || empty($data['weight']))) {
+                return returnMessageAjax(100, 'Dữ liệu số lượng nhập kho không hợp lệ !');   
+            }
+            if (empty($data['qty'])) {
+                return returnMessageAjax(100, 'Số lượng nhập kho không hợp lệ !');
+            }
+            if (empty($data['provider'])) {
+                return returnMessageAjax(100, 'Vui lòng chọn nhà cung cấp vật tư !');
+            }
+            if (empty($data['price'])) {
+                return returnMessageAjax(100, 'Vui lòng nhập giá mua vật tư !');
+            }
+            if (empty($data['bill'])) {
+                return returnMessageAjax(100, 'Vui lòng upload file hóa đơn mua vật tư !');
+            }
         }
 
         private function getDataLogAction(&$data_log)
         {
             $import_qty = $data_log['qty'];
             unset($data_log['qty']);
-            if (!empty($data_log['hank'])) {
-                unset($data_log['hank']);
+            if (!empty($data_log['lenth_qty'])) {
+                unset($data_log['lenth_qty']);
             }
             if (!empty($data_log['weight'])) {
                 unset($data_log['weight']);
-            }
-            if (!empty($data_log['square'])) {
-                unset($data_log['square']);
             }
             return $import_qty;
         }
 
         private function processQtyWarehouse($type, $dataItem, $data_log, $action = 'insert'){
-            $log_qty = $data_log['qty'];
-            if (SquareWarehouse::countPriceByWeight($type) && !empty($dataItem->width)) {
-                $ret['qty'] = (int) SquareWarehouse::getLengthByWeight($dataItem->supp_price, $log_qty, $dataItem->width);
-                $ret['hank'] = (int) $data_log['hank'];
-                $ret['weight'] = $log_qty;
-            }elseif(SquareWarehouse::countPriceByHank($type)){
-                $ret['hank'] = $log_qty;
-                if ($type == \TDConst::DECAL) {
-                    $ret['qty'] = $data_log['square'];
-                }else{
-                    $ret['weight'] = (int) $data_log['weight'];
-                }
-            }else{
-                $ret['qty'] = $log_qty;
+            $ret['qty'] = $data_log['qty'];
+            if ($this->isSizeSupp) {
+                $data['lenth_qty'] = $data_log['lenth_qty'];
+                $data['weight'] = $data_log['weight'];
             }
             if ($action == 'update') {
                 foreach ($ret as $key => $value) {
@@ -162,6 +104,19 @@
             return $ret;
         }
 
+        function insertDebt($id, $name, $import_qty, $data_log){
+            $arr_supply = [
+                'supply' => $id, 
+                'price' => $data_log['price'], 
+                'qty' => $import_qty, 
+                'other_price' => $data_log['other_price'], 
+                'total' => $data_log['total'], 
+                'rest' => $data_log['total'], 
+                'bill' => $data_log['bill']
+            ];
+            ProviderDebt::insertData($name, ProviderDebt::DEBT, $data_log['provider'], $arr_supply); 
+        }
+
         public function insert($param, $type_request = 0)
         {
             $table = $this->table;
@@ -169,9 +124,9 @@
                 $data_log = $param['log'];
                 $data_warehouse = $param['warehouse'];
                 $type = $data_warehouse['type'];
-                $arr_log = $this->validateDataWarehouse($data_log, $type);
-                if (@$arr_log['code'] == 100) {
-                    return $arr_log;
+                $validate = $this->validateDataWarehouse($data_log, $data_warehouse, __FUNCTION__);
+                if (@$validate['code'] == 100) {
+                    return $validate;
                 }
                 $model = getModelByTable($table);
                 $name = @$data_warehouse['name'] ?? $model::getName($data_warehouse);
@@ -181,9 +136,12 @@
                 if ($insert_id) {
                     $dataItem = $model::find($insert_id);
                     $update_qty = $this->processQtyWarehouse($type, $dataItem, $data_log);
-                    \DB::table($table)->where('id', $insert_id)->update($update_qty);
+                    $model::where('id', $insert_id)->update($update_qty);
                     $import_qty = $this->getDataLogAction($data_log);
-                    WarehouseHistory::doLogWarehouse($type, $insert_id, $import_qty, 0, 0, 0, $data_log);
+                    WarehouseHistory::doLogWarehouse($insert_id, $import_qty, 0, 0, 0, $data_log);
+                    if (!empty($data_log['total'])) {
+                        $this->insertDebt($insert_id, $name, $import_qty, $data_log);
+                    }
                     return returnMessageAjax(200, 'Đã nhập vật tư thành công !', getBackUrl());
                 }else{
                     return returnMessageAjax(100, 'Không thể thêm vật tư vào kho !');
@@ -211,9 +169,9 @@
                 $data_log = $param['log'];
                 $data_warehouse = $param['warehouse'];
                 $type = $data_warehouse['type'];
-                $arr_log = $this->validateDataWarehouse($data_log, $type);
-                if (@$arr_log['code'] == 100) {
-                    return $arr_log;
+                $validate = $this->validateDataWarehouse($data_log, $data_warehouse, __FUNCTION__);
+                if (@$validate['code'] == 100) {
+                    return $validate;
                 }
                 $this->configBaseDataAction($data_warehouse);
                 $update_qty = $this->processQtyWarehouse($type, $dataItem, $data_log, 'update');
@@ -221,7 +179,10 @@
                 if ($update) {
                     $import_qty = $this->getDataLogAction($data_log);
                     $feild_log = getUnitSupplyLogWarehouse($type, 'import', true);
-                    WarehouseHistory::doLogWarehouse($type, $id, $import_qty, 0, $dataItem->{$feild_log}, 0, $data_log);
+                    WarehouseHistory::doLogWarehouse($id, $import_qty, 0, $dataItem->{$feild_log}, 0, $data_log);
+                    if (!empty($data_log['total'])) {
+                        $this->insertDebt($id, $dataItem->name, $import_qty, $data_log);
+                    }
                     return returnMessageAjax(200, 'Đã nhập thêm thành công '.$import_qty.' vật tư !', getBackUrl());
                 }   
             }else{

@@ -23,4 +23,14 @@
     <span class="ml-2 fs-12 font-italic color_red">không phải tiền khuôn/tờ in</span>
 </div>
 
+@include('quotes.products.select_supply_type', 
+[
+    'key_supp' => $key_supp, 
+    'pro_index' => $pro_index, 
+    'supp_index' => $supp_index, 
+    'key_stage' => $key_stage, 
+    'key_type' => \TDConst::EMULSION,
+    'value' => $data_handle
+])
+
 @include('quotes.products.papers.handles.select_device', ['key_device' => $key_stage, 'value' => @$data_handle['machine']])

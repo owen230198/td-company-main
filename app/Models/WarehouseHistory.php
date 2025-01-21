@@ -12,44 +12,7 @@ class WarehouseHistory extends Model
     //warehouse type
     const SUPPLY = 1;
     const PRODUCT = 2;
-    const FIELD_PROVIDER = [
-        'name' => 'provider',
-        'note' => 'Nhà cung cấp',
-        'type' => 'linking',
-        'other_data' => ['config' => ['search' => 1], 'data' => ['table' => 'warehouse_providers']]
-    ];
-    const FIELD_PRICE = [
-        'name' => 'price',
-        'type' => 'text',
-        'note' => 'Giá vật tư',
-        'attr' => ['type_input' => 'number']
-    ];
-    const FIELD_BILL = [
-        'name' => 'bill',
-        'note' => 'Hóa đơn thanh toán',
-        'type' => 'filev2',
-    ];
 
-    const FIELD_NOTE = [
-        'name' => 'note',
-        'note' => 'Diễn giải',
-        'type' => 'textarea',
-    ];
-
-    static function getFieldAction($type){
-        $ret = WarehouseService::getQtyFieldByType($type);
-        foreach (self::FIELDS as $field) {
-            $ret[] = $field;
-        }
-        return $ret; 
-    }
-
-    const FIELDS = [
-        self::FIELD_PROVIDER,
-        self::FIELD_PRICE,
-        self::FIELD_BILL,
-        self::FIELD_NOTE             
-    ];
 
     static function getRole()
     {
@@ -81,21 +44,14 @@ class WarehouseHistory extends Model
         return $ret;
     }
 
-    static function doLogWarehouse($type, $supply_id, $qty_import, $qty_export, $ex_inventory, $product_id = 0, $arr = []){
-        $table = tableWarehouseByType($type);
-        $supply = getDetailDataObject($table, $supply_id);
-        $type = $supply->type;
+    static function doLogWarehouse($supply_id, $qty_import, $qty_export, $ex_inventory, $product_id = 0, $arr = []){
+        $supply = getDetailDataObject('supply_warehouses', $supply_id);
         $data_log['name'] = $supply->name;
-        $data_log['table'] = $table;
-        $data_log['type'] = $type;
         $data_log['target'] = $supply_id;
         $data_log['imported'] = $qty_import;
         $data_log['exported'] = $qty_export;
         $data_log['ex_inventory'] = $ex_inventory;
-        $action = $qty_import > 0 ? 'import' : 'export';
-        $field_qty = getUnitSupplyLogWarehouse($type, $action, true);
-        $data_log['inventory'] = $supply->{$field_qty};
-        $data_log['unit'] = getUnitSupplyLogWarehouse($type, $action, false, $supply);
+        $data_log['inventory'] = $supply->qtv;
         $data_log['product'] = $product_id;
         if (!empty($arr)) {
             foreach ($arr as $key => $value) {
@@ -103,7 +59,7 @@ class WarehouseHistory extends Model
             }
         }
         (new \BaseService)->configBaseDataAction($data_log);
-        \DB::table('warehouse_histories')->insert($data_log);
+        return \DB::table('warehouse_histories')->insertGetId($data_log);
     }
 
     static function getInventoryAllTable($where, $ext_where)

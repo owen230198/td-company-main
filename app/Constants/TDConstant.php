@@ -224,7 +224,7 @@
             self::NILON => 'Màng nilon',
             self::METALAI => 'Màng metalai',
             self::COVER => 'Phủ trên',
-            self::UV => 'Mực in UV',
+            self::UV => 'Mực in',
             self::CARTON => 'Carton',
             self::RUBBER => 'Cao su non',
             self::DECAL => 'Đề can nhung',
@@ -316,38 +316,35 @@
         const MATERAL_SUPPLY_TYPE = [
             self::PAPER => [
                 ['key' => self::PAPER, 'name' => 'Tên phụ giấy in', 'table' => 'paper_extends'],
-                ['key' => self::PAPER, 'name' => 'Chất liệu giấy', 'table' => 'materals'],
-                ['key' => self::NILON, 'name' => 'Chất liệu cán nilon', 'table' => 'materals'],
-                ['key' => self::NILON, 'name' => 'Loại màng nilon', 'table' => 'supply_names'],   
-                ['key' => self::METALAI, 'name' => 'Chất liệu cán metalai', 'table' => 'materals'],
-                ['key' => self::METALAI, 'name' => 'Loại màng metalai', 'table' => 'supply_names'],
-                ['key' => self::COVER, 'name' => 'Chất liệu cán phủ trên', 'table' => 'materals'],
-                ['key' => self::UV, 'name' => 'Mực in UV', 'table' => 'materals'],
+                ['key' => self::PAPER, 'name' => 'Chất liệu giấy', 'table' => 'supply_types'],
+                ['key' => self::NILON, 'name' => 'Chất liệu cán nilon', 'table' => 'supply_types'],
+                ['key' => self::METALAI, 'name' => 'Chất liệu cán metalai', 'table' => 'supply_types'],
+                ['key' => self::COVER, 'name' => 'Chất liệu cán phủ trên', 'table' => 'supply_types'],
+                ['key' => self::UV, 'name' => 'Mực in', 'table' => 'supply_types'],
                 ['key' => self::EMULSION, 'name' => 'Loại nhũ', 'table' => 'supply_names'],
-                ['key' => self::SKRINK, 'name' => 'Loại màng co', 'table' => 'supply_names'],
             ],
             self::CARTON => [
-                ['key' => self::CARTON, 'name' => 'Loại vật tư carton', 'table' => 'supply_types', 'is_name' => 0],
+                ['key' => self::CARTON, 'name' => 'Loại vật tư carton', 'table' => 'supply_types'],
                 ['key' => self::CARTON, 'name' => 'Tên vật tư carton', 'table' => 'supply_names']    
             ],
             self::RUBBER => [
-                ['key' => self::RUBBER, 'name' => 'DS loại vật tư cao su non', 'table' => 'supply_types', 'is_name' => 0]   
+                ['key' => self::RUBBER, 'name' => 'DS loại vật tư cao su non', 'table' => 'supply_types']   
             ],
             self::STYRO => [
-                ['key' => self::STYRO, 'name' => 'DS loại vật tư mút phẳng', 'table' => 'supply_types', 'is_name' => 0]   
+                ['key' => self::STYRO, 'name' => 'DS loại vật tư mút phẳng', 'table' => 'supply_types']   
             ],
             self::DECAL => [
-                ['key' => self::DECAL, 'name' => 'DS vật tư đề can nhung', 'table' => 'materals', 'is_name' => 0]   
+                ['key' => self::DECAL, 'name' => 'DS vật tư đề can nhung', 'table' => 'supply_types']   
             ],
             self::SILK => [
-                ['key' => self::SILK, 'name' => 'DS vật tư vải lụa', 'table' => 'materals', 'is_name' => 0]   
+                ['key' => self::SILK, 'name' => 'DS vật tư vải lụa', 'table' => 'supply_types']   
             ],
             self::MICA => [
-                ['key' => self::MICA, 'name' => 'DS loại vật tư mica', 'table' => 'supply_types', 'is_name' => 0]   
+                ['key' => self::MICA, 'name' => 'DS loại vật tư mica', 'table' => 'supply_types']   
             ],
             self::FILL_FINISH => [
-                ['key' => self::FILL, 'name' => 'Loại giấy bồi', 'table' => 'materals'],
-                ['key' => self::MAGNET, 'name' => 'Vật tư nam châm', 'table' => 'materals']     
+                ['key' => self::FILL, 'name' => 'Loại giấy bồi', 'table' => 'supply_types'],
+                ['key' => self::MAGNET, 'name' => 'Vật tư nam châm', 'table' => 'supply_types']     
             ]
         ];
 

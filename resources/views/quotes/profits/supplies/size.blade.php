@@ -6,28 +6,30 @@
         </li>
     @endif
 
-    @if (!empty($stage['supply_type']))
+    @if (!empty($stage['materal']))
         <li>
-            <span>Loại vật tư: </span>
-            <strong class="color_red">{{ getFieldDataById('name', 'supply_types', $stage['supply_type']) }}</strong>
+            <span>Chất liệu vật tư: </span>
+            <strong class="color_red">{{ @$stage['materal'] == \StatusConst::OTHER ? 'vật tư khác' : getFieldDataById('name', 'supply_types', $stage['materal']) }}</strong>
         </li>
     @endif
 
-    @if (!empty($stage['supply_price']))
+    @if (!empty($stage['price']))
         <li>
-            @php
-                $title = isNoQuantativeSupply(@$supply['pro_field']) ? 'Loại vật tư' : 'Vật tư định lượng';
-                $table_get = isNoQuantativeSupply(@$supply['pro_field']) ? 'materals' : 'supply_prices';
-            @endphp
-            <span>{{ $title }}: </span>
-            <strong class="color_red">{{  getFieldDataById('name', $table_get, $stage['supply_price']) }}</strong>
+            <span>ĐG chất liệu vật tư: </span>
+            <strong class="color_red">{{ $stage['qtv_price'] }}</strong>
         </li>
     @endif
 
-    @if (!empty($stage['qttv_price']))
+    @if (!empty($stage['qtv']))
         <li>
-            <span>ĐG vật tư: </span>
-            <strong class="color_red">{{ (float) $stage['qttv_price'] }}đ</strong>
+            <span>Tên định lượng: </span>
+            <strong class="color_red">{{ getFieldDataById('name', 'supply_prices', $stage['qtv']) }}</strong>
+        </li>
+    @endif
+    @if (!empty($stage['qtv_num']))
+        <li>
+            <span>Định lượng: </span>
+            <strong class="color_red">{{ $stage['qtv_num'] }}</strong>
         </li>
     @endif
 
@@ -49,9 +51,9 @@
             <p class="formula_name font_bold">Chi phí vật tư:</p>
             <div class="formula_content d-flex align-items-center">
                 <p class="formula_param mx-2">
-                    Dài x Rộng x ĐG x (SL vật tư + BH) {{ !empty($size['prescript_price']) ? ' + (Phát sinh vật tư cao cấp x SL vật tư)' : '' }}
+                    Dài x Rộng x ĐG x ĐL x (SL vật tư + BH) {{ !empty($size['prescript_price']) ? ' + (Phát sinh vật tư cao cấp x SL vật tư)' : '' }}
                 </p>
-                <p class="font_bold formula_result mr-2"> = {{ $size['length'] }} x {{ $size['width'] }} x {{ $stage['qttv_price'] }} x {{ $stage['supp_qty'] }} {{ !empty($size['prescript_price']) ? ' + ('.$stage['prescript_price'].' x '. $stage['supp_qty'].')' : '' }}</p>
+                <p class="font_bold formula_result mr-2"> = {{ $size['length'] }} x {{ $size['width'] }} x {{ $size['qtv_num'] }} x {{ $stage['qtv_price'] }} x {{ $stage['supp_qty'] }} {{ !empty($size['prescript_price']) ? ' + ('.$stage['prescript_price'].' x '. $stage['supp_qty'].')' : '' }}</p>
                 <p class="font_bold formula_result"> = {{ number_format($stage['total']) }}đ</p>
             </div>
         </div>
