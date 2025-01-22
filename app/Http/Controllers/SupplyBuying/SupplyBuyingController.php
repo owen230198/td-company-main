@@ -3,9 +3,7 @@
     use App\Http\Controllers\Controller;
     use App\Models\BuyingItem;
     use App\Models\PrintWarehouse;
-    use App\Models\SquareWarehouse;
-use App\Models\Supply;
-use App\Models\SupplyBuying;
+    use App\Models\SupplyBuying;
     use App\Models\WarehouseHistory;
     use App\Services\WarehouseService;
     use Illuminate\Http\Request;
@@ -21,17 +19,8 @@ use App\Models\SupplyBuying;
 
         public function ProcessDataSupply($supplies, $parent)
         {
-            $table = 'buying_items';
             foreach ($supplies as $supply) {
-                $supply['parent'] = $parent;
-                $supply['status'] = \StatusConst::PROCESSING;
-                $this->admins->configBaseDataAction($supply);
-                if (!empty($supply['id'])) {
-                    logActionDataById($table, $supply['id'], $supply, 'update');  
-                }else{
-                    $log_id = BuyingItem::insertGetId($supply);
-                    logActionUserData('isert', $table, $log_id);
-                }
+                BuyingItem::ProcessData($supply, $parent);
             }
         }
 
@@ -77,9 +66,9 @@ use App\Models\SupplyBuying;
                 $insert_id = SupplyBuying::insertGetId($data);
                 if ($insert_id) {
                     $this->processDataSupply($vaildate['supply'], $insert_id);
-                    SupplyBuying::where('id', $insert_id)->update(['code' => 'CT-'.formatCodeInsert($insert_id)]);
-                    $back_routes = $nosidebar ? \StatusConst::CLOSE_POPUP_NO_RELOAD : (getBackUrl() ?? url('view/'.$table));
+                    SupplyBuying::getInsertCode($insert_id);
                     logActionUserData(__FUNCTION__, $table, $insert_id, $data);
+                    $back_routes = $nosidebar ? \StatusConst::CLOSE_POPUP_NO_RELOAD : (getBackUrl() ?? url('view/'.$table));
                     return returnMessageAjax(200, 'Thêm dữ liệu thành công!', $back_routes);
                 }else {
                     return returnMessageAjax(100, 'Lỗi không xác định !');
@@ -329,14 +318,13 @@ use App\Models\SupplyBuying;
                                     "metalai":"Màng metalai",
                                     "cover":"Màng phủ trên",
                                     "carton":"Carton",
-                                    "rubber":"Cao su",
+                                    "rubber":"Cao su non",
                                     "styrofoam":"Mút phẳng",
                                     "decal":"Nhung",
                                     "silk":"Vải lụa",
                                     "mica":"Mi ca",
                                     "magnet":"Nam châm",
                                     "emulsion":"Nhũ",
-                                    "skrink":"Màng co",
                                     "other":"Vật tư khác"
                                 }
                             }

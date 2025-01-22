@@ -75,4 +75,17 @@ class BuyingItem extends Model
         ];
         return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];
     } 
+
+    static function processData($data, $parent)
+    {
+        $data['parent'] = $parent;
+        $data['status'] = \StatusConst::PROCESSING;
+        (new \BaseService())->configBaseDataAction($data);
+        if (!empty($data['id'])) {
+            logActionDataById('supply_buyings', $data['id'], $data, 'update');  
+        }else{
+            $log_id = BuyingItem::insertGetId($data);
+            logActionUserData('isert', 'supply_buyings', $log_id);
+        }
+    }
 }

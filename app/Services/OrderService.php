@@ -11,6 +11,7 @@ use App\Models\OtherWarehouse;
 use App\Models\PrintWarehouse;
 use App\Models\SquareWarehouse;
 use App\Models\Supply;
+use App\Models\SupplyBuying;
 use App\Models\SupplyWarehouse;
 use App\Models\WSalary;
 
@@ -177,46 +178,38 @@ class OrderService extends BaseService
     {
         $squares = @$c_supply['square'] ?? [];
         foreach ($squares as $key => $supp_qsuare) {
-            if (!$this->checkLackSupplyHandle($supp_qsuare)) {
-                return returnMessageAjax(100, 'Vật tư '.getSupplyNameByKey($key).' trong kho không đủ để sản xuất, Vui lòng gửi yêu cầu đến phòng mua !');
+            foreach ($supp_qsuare as $square) {
+                if (@$square['qty'] == 0) {
+                    return returnMessageAjax(100, 'Số lượng vật tư '.getSupplyNameByKey($key).' Không hợp lệ !');
+                }
             }
-            // foreach ($supp_qsuare as $square) {
-            //     if (@$square['qty'] == 0) {
-            //         return returnMessageAjax(100, 'Số lượng vật tư '.getSupplyNameByKey($key).' Không hợp lệ !');
-            //     }
-            // }
         }
         $papers = @$c_supply['paper'] ?? [];
-        if (!$this->checkLackSupplyHandle($papers)) {
-            return returnMessageAjax(100, 'Vật tư giấy in trong kho không đủ để sản xuất, Vui lòng gửi yêu cầu đến phòng mua !');
-        }
-        // foreach ($papers as $key => $paper) {
-        //     if (empty($paper['size_type'])) {
-        //         return returnMessageAjax(100, 'bạn chưa chọn vật tư giấy in trong  kho !');
-        //     }
-        //     if ($paper['qty'] == 0) {
-        //         return returnMessageAjax(100, 'Số lượng vật tư cần xuất không hợp lệ !');
-        //     }
-        // }
         foreach ($papers as $key => $paper) {
-            if (!empty($paper['size_type'])) {
-                CSupply::insertCommand($paper, $supply);
+            if (empty($paper['size_type'])) {
+                return returnMessageAjax(100, 'bạn chưa chọn vật tư giấy in trong  kho !');
             }
-            if (!empty($paper['over_supply']['qty'])) {
-                $supply->type = \TDConst::PAPER;
-                PrintWarehouse::insertOverSupply($paper['over_supply'], $supply, $size);
+            if ($paper['qty'] == 0) {
+                return returnMessageAjax(100, 'Số lượng vật tư cần xuất không hợp lệ !');
             }
+        }
+        foreach ($papers as $key => $paper) {
+            // if (!empty($paper['size_type'])) {
+            //     CSupply::insertCommand($paper, $supply);
+            // }
+            // if (!empty($paper['over_supply']['qty'])) {
+            //     $supply->type = \TDConst::PAPER;
+            //     PrintWarehouse::insertOverSupply($paper['over_supply'], $supply, $size);
+            // }
         }
         foreach ($squares as $key => $supp_qsuare) {
-            foreach ($supp_qsuare as $square) {
+            foreach ($supp_qsuare as $_key => $square) {
                 if (!empty($square['size_type'])) {
                     $supply->type = $key;
-                    $data_sq = $square;
-                    if (SquareWarehouse::countPriceByWeight($key)) {
-                        $length = $square['qty'];
-                        $data_sq['qty'] = SquareWarehouse::getWeightByLength($square['size_type'], $length);
+                    if (!empty($square['lack']) && !next($supp_qsuare)) {
+                        SupplyBuying::insertBuyExistData($square['size_type'], $square['lack'], SupplyBuying::FOR_ORDER);
                     }
-                    CSupply::insertCommand($data_sq, $supply);
+                    // CSupply::insertCommand($square, $supply);
                 }
             }
         }

@@ -64,14 +64,14 @@
                 'note' => 'Rộng - Ngang (cm)',
                 'type' => 'text',
                 'value' => @$value['width'],
-                'attr' => ['inject_class' => '__buying_width __buying_change_input', 'type_input' => 'number']
+                'attr' => ['inject_class' => '__buying_width __buying_change_input', 'type_input' => 'price']
             ],
             [
                 'name' => $group_name.'[length]',
                 'note' => 'Dài (cm)',
                 'type' => 'text',
                 'value' => @$value['length'],
-                'attr' => ['inject_class' => '__buying_length __buying_change_input', 'type_input' => 'number']
+                'attr' => ['inject_class' => '__buying_length __buying_change_input', 'type_input' => 'price']
             ]
         ] 
     @endphp
@@ -144,10 +144,10 @@
     @php
         $field_sizes = [[
                 'name' => $group_name.'[lenth_qty]',
-                'note' => 'Số m chiều dài',
+                'note' => 'Tổng số chiều dài (cm)',
                 'type' => 'text',
                 'value' => @$value['lenth_qty'],
-                'attr' => ['inject_class' => '__buying_lenth_qty __buying_change_input', 'type_input' => 'number', 'readonly' => 1]
+                'attr' => ['inject_class' => '__buying_lenth_qty __buying_change_input', 'type_input' => 'price', 'readonly' => 1]
             ],
             [
                 'name' => $group_name.'[weight]',

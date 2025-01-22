@@ -179,18 +179,19 @@ var planChoseSupplyModule = function()
     $(document).on('change', 'select.__select_in_warehouse', function(event)
     {
         event.preventDefault();
-        let parent = $(this).closest('.__supply_handle_list');
-        let item = $(this).closest('.__handle_supply_item');
+        let _this = $(this);
+        let parent = _this.closest('.__supply_handle_list');
+        let item = _this.closest('.__handle_supply_item');
         item.data('take', 0);
         let need = planGetNeddSupply(parent);
-        let table = parent.data('table');
+        let type = parent.data('type');
         let target = item.find('.__handle_supply_detail_ajax');
         let over_supply = item.find('.__over_supply');
         if (over_supply.length > 0) {
             over_supply.fadeIn();
         }
-        let value = $(this).val();
-        let url = 'select-supply-warehouse/'+table+'?supply='+value+'&need='+need;
+        let value = _this.val();
+        let url = 'select-supply-warehouse?supply='+value+'&need='+need;
         if (!empty(value)) {
             $('#loader').fadeIn(200);
             $.ajax({
@@ -204,10 +205,10 @@ var planChoseSupplyModule = function()
                     data = obj.data;
                     target.fadeIn();
                     target.find('.__inhouse').text(data.inhouse);
-                    afterPlanSelectSupply(table, data, target, item, parent);
-                    if (table == 'print_warehouses') {
+                    afterPlanSelectSupply(type, data, target, item);
+                    if (type == 'print_warehouses') {
                         item.find('input.__qty_supp_plan').val(need);       
-                    }else if (table == 'supply_warehouses'){
+                    }else if (type == 'supply_warehouses'){
                         item.find('input.pro_qty_input').val(need);           
                     }
                 }
@@ -216,12 +217,12 @@ var planChoseSupplyModule = function()
         }else{
             target.fadeOut();
             target.find('.__inhouse').text(0);
-            afterPlanSelectSupply(table, data, target, item, parent, true);
+            afterPlanSelectSupply(type, data, target, item, true);
         }
     });
 }
 
-var afterPlanSelectSupply = function(table, data, target, item, parent, reset = false) 
+var afterPlanSelectSupply = function(type, data, target, item, reset = false) 
 {
     if (reset) {
         target.find("input[name*='qty']").val(0);
@@ -233,7 +234,7 @@ var afterPlanSelectSupply = function(table, data, target, item, parent, reset = 
         target.find('.__lack').parent().fadeOut();
         target.find('.__lack').text(0); 
     }else{
-        if (table == 'square_warehouses') {
+        if (type == 'hank') {
             target.find("input[name*='qty']").val(data.takeout);
             target.find('.__takeout').text(data.takeout);
             item.data('take', data.takeout);
@@ -245,10 +246,10 @@ var afterPlanSelectSupply = function(table, data, target, item, parent, reset = 
             }else{
                 target.find('.__lack').parent().fadeIn();    
             }
-        }else if (table == 'print_warehouses') {
+        }else if (type == 'plate') {
             let nqty_input = target.find('input.__nqty_supp_plan');
             nqty_input.trigger('change');
-        }else if(table == 'supply_warehouses') {
+        }else if(type == 'supply_warehouses') {
             target.find('input.input_elevate_change').trigger('change');
         }
     }

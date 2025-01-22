@@ -202,7 +202,7 @@ class NGroupUser extends Model
         ],
         'supp_bying_req' => [
             'name' => 'Yêu cầu mua vật tư',
-            'link' => 'view/supply_buyings?default_data=%7B%22payment_type":"0%22%7D',
+            'link' => 'view/supply_buyings',
             'group' => 'supply_buying'
         ],
         'profit' => [
@@ -212,7 +212,7 @@ class NGroupUser extends Model
         ],
         'warehouse_management' => [
             'name' => 'Kho vật tư',
-            'link' => 'warehouse-management',
+            'link' => 'view/supply_warehouses?default_data=%7B%22status%22:%22'.\StatusConst::IMPORTED.'%22%7D',
             'group' => 'warehouse'
         ],
         'supply_history' => [

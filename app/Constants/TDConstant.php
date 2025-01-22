@@ -409,13 +409,6 @@
                 'table_parent' => 'materals'
             ],
             [
-                'note' => 'Màng co', 
-                'table' => 'square_warehouses', 
-                'type' => self::SKRINK,
-                'table_parent' => 'supply_names'
-                
-            ],
-            [
                 'note' => 'Vật tư carton', 
                 'table' => 'supply_warehouses', 
                 'type' => self::CARTON,
@@ -476,6 +469,9 @@
                 'table_parent' => 'supply_extends'
             ]
         ];
+
+        const HANK = 'hank'; //dạng cuộn
+        const PLATE = 'plate'; //dạng tấm;
     }
     
 ?>

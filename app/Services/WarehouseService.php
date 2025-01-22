@@ -90,11 +90,11 @@ use NunoMaduro\Collision\Contracts\Provider;
             return $import_qty;
         }
 
-        private function processQtyWarehouse($type, $dataItem, $data_log, $action = 'insert'){
+        private function processQtyWarehouse($dataItem, $data_log, $action = 'insert'){
             $ret['qty'] = $data_log['qty'];
             if ($this->isSizeSupp) {
-                $data['lenth_qty'] = $data_log['lenth_qty'];
-                $data['weight'] = $data_log['weight'];
+                $ret['lenth_qty'] = $data_log['lenth_qty'];
+                $ret['weight'] = $data_log['weight'];
             }
             if ($action == 'update') {
                 foreach ($ret as $key => $value) {
@@ -135,7 +135,7 @@ use NunoMaduro\Collision\Contracts\Provider;
                 $insert_id = $model::insertGetId($data_warehouse);
                 if ($insert_id) {
                     $dataItem = $model::find($insert_id);
-                    $update_qty = $this->processQtyWarehouse($type, $dataItem, $data_log);
+                    $update_qty = $this->processQtyWarehouse($dataItem, $data_log);
                     $model::where('id', $insert_id)->update($update_qty);
                     $import_qty = $this->getDataLogAction($data_log);
                     WarehouseHistory::doLogWarehouse($insert_id, $import_qty, 0, 0, 0, $data_log);
@@ -174,7 +174,7 @@ use NunoMaduro\Collision\Contracts\Provider;
                     return $validate;
                 }
                 $this->configBaseDataAction($data_warehouse);
-                $update_qty = $this->processQtyWarehouse($type, $dataItem, $data_log, 'update');
+                $update_qty = $this->processQtyWarehouse($dataItem, $data_log, 'update');
                 $update = \DB::table($table)->where('id', $id)->update($update_qty);
                 if ($update) {
                     $import_qty = $this->getDataLogAction($data_log);

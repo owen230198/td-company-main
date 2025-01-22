@@ -128,7 +128,7 @@ var selectSupplyMateralModule = function () {
         event.preventDefault();
         let _this = $(this);
         let parent = _this.closest('.__materal_select_supply_module');
-        let materal = _this.val();
+        let materal = getEmptyDefault(_this.val());
         let key_supp = parent.data('key_supp');
         let pro_index = parent.data('pro_index');
         let supp_index = parent.data('supp_index');
@@ -161,13 +161,15 @@ var moduleInputQuantityProduct = function () {
 var addSuppModule = function () {
     $(document).on('click', 'button.add_supp_quote_button', function (event) {
         event.preventDefault();
-        let list_section = $(this).closest('.module_quote_supp_config').find('.list_supp_item');
+        let _this = $(this);
+        let list_section = _this.closest('.module_quote_supp_config').find('.list_supp_item');
         let item = list_section.find('.quote_supp_item');
-        let pro_index = $(this).data('product');
-        let supp_view = $(this).data('key');
+        let pro_index = _this.data('product');
+        let supp_view = _this.data('key');
         let supp_index = parseInt(item.last().data('index')) + 1;
-        let supp_name = item.first().find('input.quote_receive_paper_name_main').val();
-        let pro_qty = item.first().find('input.pro_qty_input ').first().val();
+        let parent = _this.closest('.config_handle_paper_pro');
+        let supp_name = getEmptyDefault(parent.find('input.quote_set_product_name').val());
+        let pro_qty = getEmptyDefault(parent.find('input.input_pro_qty').val(), 0, 'number');
         let url = 'add-supply-quote?pro_index=' + pro_index + '&supp_index=' + supp_index + '&supp_view=' + supp_view + '&supp_name=' + supp_name + '&pro_qty=' + pro_qty;
         ajaxViewTarget(url, list_section, list_section, 2);
     });
@@ -216,10 +218,14 @@ var setNameProductQuote = function () {
 }
 
 var selectExtNamePaperModule = function () {
-    $(document).on('keyup change', 'select.select_ext_name_paper', function (event) {
+    $(document).on('change', 'select.select_ext_name_paper', function (event) {
         event.preventDefault();
-        let id = $(this).val();
+        let _this = $(this);
+        let id = _this.val();
+        let pro_index = _this.attr('pro_index');
+        let supp_index = _this.attr('supp_index');
         let link_ajax = 'get-after-print-view?pro_index=' + pro_index + '&supp_index=' + supp_index + '&id=' + id;
+        let parent = _this.closest('.quote_product_structure');
         let ajax_target = parent.find('.paper_ajax_after_print');
         ajaxViewTarget(link_ajax, ajax_target, ajax_target);
     });

@@ -4,12 +4,6 @@
         $silk_compen_percent = (float) getDataConfig('QuoteConfig', 'SILK_COMPEN_PERCENT');
         $silk_divide = \TDConst::SILK_SIZE_DIVIDE;
         $silk_plus = \TDConst::SILK_SIZE_PLUS; 
-        $pro_silk_ext_price = [
-            'name' => 'product['.$pro_index.']['.$key_supp.']['.$supp_index.'][size][prescript_price]',
-            'note' => 'Phát sinh giá lụa cao cấp',
-            'attr' => ['type_input' => 'number'],
-            'value' => @$supply_size['prescript_price'] ?? 0
-        ];
         $key_device_cut = \TDConst::CUT;
         $data_cut = !empty($supply_obj->cut) ? json_decode($supply_obj->cut, true) : []; 
     @endphp
@@ -24,11 +18,6 @@
 
     <div class="{{ !empty($rework) ? 'd-none' : '' }}">
        @include('quotes.products.select_supply_type', ['key_supp' => $key_supp, 'pro_index' => $pro_index, 'supp_index' => $supp_index, 'key_stage' => 'size', 'key_type' => $key_supp, 'value' => @$supply_size])
-
-        <div class="d-flex align-items-center">
-            @include('view_update.view', $pro_silk_ext_price)
-            <span class="ml-1 color_gray">Giá cho 1 sản phẩm</span>
-        </div> 
 
         @include('quotes.products.select_device', 
         ['key_device' => $key_device_cut, 'note' => 'Máy xén', 

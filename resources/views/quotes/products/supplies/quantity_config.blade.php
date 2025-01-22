@@ -4,7 +4,7 @@
     $module_fld_supp_qty = [
         [
             'name' => $base_qty_field_name.'[qty]',
-            'note' => 'Số lượng sản phẩm',
+            'note' => 'SL sản phẩm',
             'value' => @$supply_obj->product_qty ?? @$pro_qty,
             'attr' => [
                 'type_input' => 'number', 
@@ -30,7 +30,7 @@
         ],
         [
             'name' => $base_qty_field_name.'[base_supp_qty]',
-            'note' => 'Số lượng vật tư',
+            'note' => 'SL vật tư',
             'value' => @$supply_obj->base_supp_qty,
             'attr' => ['type_input' => 'number', 'inject_class' => 'supp_qty_input', 'readonly' => 1,
             'disable_field' => !empty($disable_all) || in_array('supp_qty', $arr_disable_field) ? 1 : 0]

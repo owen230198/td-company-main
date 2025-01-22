@@ -1093,8 +1093,8 @@ var changeInputPriceBuying = function () {
         let length_qty_input = item.find('.__buying_lenth_qty');
         
         if (length_qty_input.length > 0) {
-            let length_qty = (length * qty) / 100;
-            length_qty_input.val(length_qty);   
+            let length_qty = (length * qty);
+            length_qty_input.val(price_format(length_qty));   
         }
         let weight_input = item.find('.__buying_weight');
         if (weight_input.length > 0) {

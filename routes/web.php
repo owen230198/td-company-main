@@ -101,7 +101,7 @@ Route::middleware(['check_login'])->group(function () {
 	Route::post('take-in-supply/{id}', [OrderController::class, 'takeInSupply']);
 	Route::post('apply-to-worker-handle/{table}/{id}', [OrderController::class, 'applyToWorkerHandle']);
 	Route::any('apply-supply-to-worker', [OrderController::class, 'applySupplyToWorker']);
-	Route::get('select-supply-warehouse/{table}', [OrderController::class, 'selectSupplyWarehouse']);
+	Route::get('select-supply-warehouse', [OrderController::class, 'selectSupplyWarehouse']);
 	Route::get('add-select-supply-handle', [OrderController::class, 'addSelectSupplyHandle']);
 	Route::get('list-supply-process', [ProductController::class, 'listSupplyProcess']);
 	Route::get('print-data/{table}/{id}', [OrderController::class, 'printData']);

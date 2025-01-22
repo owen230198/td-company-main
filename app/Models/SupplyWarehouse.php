@@ -49,17 +49,17 @@ class SupplyWarehouse extends Model
     static function getLabelLinking($data)
     {
         $ret = '';
-        if (!empty($data->supp_type)) {
-            $ret.= getFieldDataById('name', 'supply_types', $data->supp_type);
+        if (!empty($data->target)) {
+            $ret.= getFieldDataById('name', 'supply_types', $data->target);
+        }
+        if (!empty($data->qtv)) {
+            $ret .= ' - ĐL : '.getFieldDataById('name', 'supply_prices', $data->qtv);
         }
         if (!empty($data->length) && !empty($data->width)) {
             $ret .= ' - '.$data->length.'x'.$data->width;
         }
-        if (!empty($data->supp_price)) {
-            $ret .= ' - ĐL : '.getFieldDataById('name', 'supply_prices', $data->supp_price);
-        }
         if (!empty($data->qty)) {
-            $ret .= ' / Còn lại : '.$data->qty.' tấm';
+            $ret .= ' / Còn lại : '.$data->qty;
         }else{
             $ret .= ' (đã hết)';
         }

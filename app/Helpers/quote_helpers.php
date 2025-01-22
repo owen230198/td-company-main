@@ -47,6 +47,13 @@ use App\Models\PaperExtend;
 		}
 	}
 
+	if (!function_exists('devideNumber')) {
+		function devideNumber($num, $devide = 1000){
+
+			return $num / $devide;
+		}
+	}
+
 	if (!function_exists('isHardBox')) {
 		function isHardbox($category)
 		{

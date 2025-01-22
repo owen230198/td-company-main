@@ -8,6 +8,9 @@ class SupplyBuying extends Model
     protected $table = 'supply_buyings';
     protected $protectFields = false;
     const BOUGHT = 'bought';
+    const FOR_ORDER = 1;
+    const FOR_INVENTORY = 2;
+    const FOR_ALL = 3;
 
     static function checkReadOnlyInputPrice($status)
     {
@@ -17,6 +20,19 @@ class SupplyBuying extends Model
     static function hasSizeSupply($type)
     {
         return !in_array($type, [\TDConst::UV, \TDConst::MAGNET, \TDConst::OTHER_SUPPLY]);
+    }
+
+    static function hasOverSupplyWarehouse($type){
+        return in_array($type, [\TDConst::PAPER, \TDConst::CARTON]);
+    }
+
+    static function isHankSupply($type)
+    {
+        return in_array($type, [\TDConst::NILON, \TDConst::METALAI, \TDConst::COVER, \TDConst::DECAL, \TDConst::SILK]);
+    }
+
+    static function isPlateSupply($type){
+        return in_array($type, [\TDConst::PAPER, \TDConst::CARTON, \TDConst::RUBBER, \TDConst::STYRO, \TDConst::MICA]);
     }
 
     static function getRole()
@@ -115,6 +131,34 @@ class SupplyBuying extends Model
     {
         if (BuyingItem::where(['parent' => $id, 'status' => $status])->count() == BuyingItem::where('parent', $id)->count()) {
             SupplyBuying::where('id', $id)->update(['status' => $status]);
+        }
+    }
+
+    static function getInsertCode($id) {
+        SupplyBuying::where('id', $id)->update(['code' => 'MVT-'.formatCodeInsert($id)]);  
+    }
+
+    static function insertBuyExistData($supp_id, $qty, $name)
+    {
+        $supply = SupplyWarehouse::find($supp_id);
+        if (!empty($supply)) {
+            $type = $supply->type;
+            $data['name'] = $name;
+            $data['type'] = $type;
+            $data['status'] = \StatusConst::PROCESSING;
+            $buying_item['type'] = $type;
+                if (self::isHankSupply($type)) {
+                    $data_qty = ceil($qty / $supply->length);
+                    $buying_item['qty'] = $data_qty;
+                    $lenth_qty = $data_qty * $supply->length / 100;   
+                    $buying_item['weight'] = $supply->weight / $supply->lenth_qty * $lenth_qty;
+                    $buying_item['lenth_qty'] = $lenth_qty;
+                }
+            (new \BaseService())->configBaseDataAction($data);
+            $insert_id = BuyingItem::insertGetId($data);
+            if ($insert_id) {
+                
+            }
         }
     }
 }

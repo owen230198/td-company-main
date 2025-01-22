@@ -20,7 +20,7 @@
         ];
         $qtv_materal = [
             'name' => $supp_base_name.'[qtv]',
-            'note' => 'Định lượng',
+            'note' => 'Tên',
             'type' => 'text',
             'attr' => [
                 'type_input' => 'number',
@@ -34,7 +34,7 @@
     @php
         $qtv_materal = [
             'name' => $supp_base_name.'[qtv]',
-            'note' => 'Định lượng',
+            'note' => 'Tên',
             'value' => @$value['qtv'],
             'attr' => [
                 'required' => 1,

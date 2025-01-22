@@ -3,7 +3,7 @@
 @endphp
 <div class="d-flex align-items-center mb-2 fs-13">
     <label class="mb-0 min_210 text-capitalize text-right mr-3">
-        <span class="fs-15 mr-1">*</span>Kích thước khổ {{ getTextSupply($key_type) }}
+        <span class="fs-15 mr-1">*</span>Kích thước sản xuất 
     </label>
     <div class="d-flex justify-content-between align-items-center">
         <input type="number" name = '{{ $base_name }}[length]' placeholder="Chiều dài (cm)" 
