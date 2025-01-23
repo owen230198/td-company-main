@@ -4,9 +4,6 @@
     foreach ($arr_items as $key => $value) {
         $param .= '&'.$key.'='.$value;
     }
-    if (empty($arr_items['qtv'])) {
-        dd($arr_items);
-    }
 @endphp
 <div class="__module_multiple_handle_supply">
     <h3 class="fs-14 text-uppercase border_top_eb pt-3 mt-3 text-center handle_title">

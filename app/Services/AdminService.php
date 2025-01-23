@@ -325,7 +325,7 @@ class AdminService extends BaseService
         if ($remove) {
             logActionUserData('remove', $table, $id, $dataItem);
         }
-        if ($remove && $except_remove) {
+        if ($remove) {
             $objModel = getModelByTable($table);
             if (method_exists($objModel, 'afterRemove')) {
                 $objModel->afterRemove($id);

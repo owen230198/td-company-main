@@ -206,9 +206,9 @@ var planChoseSupplyModule = function()
                     target.fadeIn();
                     target.find('.__inhouse').text(data.inhouse);
                     afterPlanSelectSupply(type, data, target, item);
-                    if (type == 'print_warehouses') {
+                    if (type == 'paper') {
                         item.find('input.__qty_supp_plan').val(need);       
-                    }else if (type == 'supply_warehouses'){
+                    }else if (type == 'plate'){
                         item.find('input.pro_qty_input').val(need);           
                     }
                 }
@@ -246,10 +246,10 @@ var afterPlanSelectSupply = function(type, data, target, item, reset = false)
             }else{
                 target.find('.__lack').parent().fadeIn();    
             }
-        }else if (type == 'plate') {
+        }else if (type == 'paper') {
             let nqty_input = target.find('input.__nqty_supp_plan');
             nqty_input.trigger('change');
-        }else if(type == 'supply_warehouses') {
+        }else if(type == 'plate') {
             target.find('input.input_elevate_change').trigger('change');
         }
     }

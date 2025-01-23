@@ -85,7 +85,7 @@ use App\Models\SupplyOrigin;
                     $magnet_compent = (float) getDataConfig('QuoteConfig', 'MAGNET_COMPEN_PERCENT');
                     foreach ($data_obj as $key_magnet => $magnet) {
                         $data_magnet = !empty($magnet->magnet) ? json_decode($magnet->magnet, true) : [];
-                        if (!empty($data_magnet['type']) && !empty($data_magnet['qty'])) {
+                        if (!empty($data_magnet['materal']) && !empty($data_magnet['qtv']) && !empty($data_magnet['qty'])) {
                             $magnet_qty = (int) $data_magnet['qty'] * (int) $magnet->product_qty;
                             $magnet->product_qty = calValuePercentPlus($magnet_qty, $magnet_qty, $magnet_compent);
                             $ret[$key]['data'][$key_magnet] = $magnet;
@@ -524,6 +524,10 @@ use App\Models\SupplyOrigin;
     if (!function_exists('getStageActiveStartHandle')) {
         function getStageActiveStartHandle($table, $id, $except = ''){
             $arr_select = getArrHandleField($table);
+            $key_cover = array_search(\TDConst::COVER, $arr_select);
+            if ($arr_select !== FALSE) {
+                unset($arr_select[$key_cover]);
+            }
             if (!empty($except)) {
                 $slice = (int) array_search($except, $arr_select) + 1;
                 $arr_select = array_slice($arr_select, $slice);

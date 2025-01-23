@@ -471,7 +471,7 @@ class AjaxResponeController extends Controller
         if (empty($request->supply_price)) {
             return [];
         }
-        $provider_price = ProviderPrice::where(['supp_price' => $request->supply_price])->orderBy('price', 'asc')->first();
+        $provider_price = SupplyBuying::getTheCheapestProvider($request->supply_price);
         if (!empty($provider_price)) {
             return [
                 'price_purchase' => getFieldDataById('price_purchase', 'supply_prices', $request->supply_price),

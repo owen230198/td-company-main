@@ -85,7 +85,7 @@ class BuyingItem extends Model
             logActionDataById('supply_buyings', $data['id'], $data, 'update');  
         }else{
             $log_id = BuyingItem::insertGetId($data);
-            logActionUserData('isert', 'supply_buyings', $log_id);
+            logActionUserData('insert', 'supply_buyings', $log_id, $data);
         }
     }
 }

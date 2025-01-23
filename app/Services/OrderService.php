@@ -163,13 +163,12 @@ class OrderService extends BaseService
             }
         }
     }
-
-    private function checkLackSupplyHandle($arr_supply)
+    
+    private function validateHankSupplyHandle($supp_qsuare, $type)
     {
-        foreach ($arr_supply as $supply) {
-            if ((int) @$supply['lack'] == 0) {
-                return true;
-                break;
+        foreach ($supp_qsuare as $square) {
+            if (@$square['qty'] == 0) {
+                return returnMessageAjax(100, 'Số lượng vật tư '.getSupplyNameByKey($type).' Không hợp lệ !');
             }
         }
     }
@@ -178,10 +177,9 @@ class OrderService extends BaseService
     {
         $squares = @$c_supply['square'] ?? [];
         foreach ($squares as $key => $supp_qsuare) {
-            foreach ($supp_qsuare as $square) {
-                if (@$square['qty'] == 0) {
-                    return returnMessageAjax(100, 'Số lượng vật tư '.getSupplyNameByKey($key).' Không hợp lệ !');
-                }
+            $validate_square = $this->validateHankSupplyHandle($supp_qsuare, $key);
+            if (@$validate_square['code'] == 100) {
+                return $validate_square;
             }
         }
         $papers = @$c_supply['paper'] ?? [];
@@ -194,26 +192,34 @@ class OrderService extends BaseService
             }
         }
         foreach ($papers as $key => $paper) {
-            // if (!empty($paper['size_type'])) {
-            //     CSupply::insertCommand($paper, $supply);
-            // }
-            // if (!empty($paper['over_supply']['qty'])) {
-            //     $supply->type = \TDConst::PAPER;
-            //     PrintWarehouse::insertOverSupply($paper['over_supply'], $supply, $size);
-            // }
-        }
-        foreach ($squares as $key => $supp_qsuare) {
-            foreach ($supp_qsuare as $_key => $square) {
-                if (!empty($square['size_type'])) {
-                    $supply->type = $key;
-                    if (!empty($square['lack']) && !next($supp_qsuare)) {
-                        SupplyBuying::insertBuyExistData($square['size_type'], $square['lack'], SupplyBuying::FOR_ORDER);
-                    }
-                    // CSupply::insertCommand($square, $supply);
+            if (!empty($paper['size_type'])) {
+                CSupply::insertCommand($paper, $supply);
+                if (!empty($paper['over_supply']['qty'])) {
+                    $supply->type = \TDConst::PAPER;
+                    SupplyWarehouse::insertOverSupply($paper['over_supply'], $paper['size_type']);
+                }
+                if (!empty($paper['lack']) && !next($papers)) {
+                    SupplyBuying::insertBuyExistData($paper['size_type'], $paper['lack'], SupplyBuying::FOR_ORDER);
                 }
             }
         }
+        foreach ($squares as $key => $supp_qsuare) {
+            $this->handleHankSupply($supp_qsuare, $supply, $key);
+        }
         return returnMessageAjax(200, 'Đã gửi yêu cầu xử lí vật tư thành công!', getBackUrl());
+    }
+
+    private function handleHankSupply($supp_qsuare, $supply, $type)
+    {
+        foreach ($supp_qsuare as $square) {
+            if (!empty($square['size_type'])) {
+                $supply->type = $type;
+                if (!empty($square['lack']) && !next($supp_qsuare)) {
+                    SupplyBuying::insertBuyExistData($square['size_type'], $square['lack'], SupplyBuying::FOR_ORDER);
+                }
+                CSupply::insertCommand($square, $supply);
+            }
+        }
     }
 
     public function supply_handle_carton($supply, $size, $c_supply)
@@ -224,16 +230,16 @@ class OrderService extends BaseService
         if (@$valid['code'] == 100) {
             return returnMessageAjax(100, $valid['message']);
         }
-        if (!$this->checkLackSupplyHandle($data_supply)) {
-            return returnMessageAjax(100, 'Vật tư '.getSupplyNameByKey($supply_type).' trong kho không đủ để sản xuất, Vui lòng gửi yêu cầu đến phòng mua !');
-        }
         $elevate = ['num' => 0, 'total' => 0];
         foreach ($data_supply as $supp) {
             $command = $supp['command'];
             $data_elevate = $supp['elevate'];
             $insert_command = CSupply::insertCommand($command, $supply);
             if (!empty($supp['over_supply']['qty'])) {
-                SupplyWarehouse::insertOverSupply($supp['over_supply'], $supply, $size);  
+                SupplyWarehouse::insertOverSupply($supp['over_supply'], $command['size_type']);
+            }
+            if (!empty($supp['lack']) && !next($data_supply)) {
+                SupplyBuying::insertBuyExistData($command['size_type'], $supp['lack'], SupplyBuying::FOR_ORDER);
             }
             $elevate['num'] = $data_elevate['num'] > $elevate['num'] ? $data_elevate['num'] : $elevate['num'];
             $elevate['total'] += $data_elevate['total'];
@@ -266,22 +272,14 @@ class OrderService extends BaseService
     private function baseHandleSquareSupply($supply, $c_supply, $supp_key)
     {
         $squares = @$c_supply['square'] ?? [];
-        $supply->type = $supp_key;
-        if (!empty($squares[$supply->type])) {
-            $square = !empty($squares[$supply->type][0]) ? $squares[$supply->type][0] : [];
-            if (empty($square['size_type']) || empty($square['qty'])) {
-                return returnMessageAjax(100, 'Bạn chưa chọn vật tư trong kho !');
+        if (!empty($squares[$supp_key])) {
+            $squares = !empty($squares[$supp_key]) ? $squares[$supp_key] : [];
+            $validate_square = $this->validateHankSupplyHandle($squares, $supp_key);
+            if (@$validate_square['code'] == 100) {
+                return $validate_square;
             }
-            if (!$this->checkLackSupplyHandle($squares[$supply->type])) {
-                return returnMessageAjax(100, 'Vật tư '.getSupplyNameByKey($supply->type).' trong kho không đủ để sản xuất, Vui lòng gửi yêu cầu đến phòng mua !');
-            }
-            unset($square['lack']);
-            $insert = CSupply::insertCommand($square, $supply);
-            if ($insert) {
-                return returnMessageAjax(200, 'Đã gửi yêu cầu xử lí vật tư thành công!', getBackUrl());
-            }else{
-                return returnMessageAjax(100, 'Lỗi không xác định !');
-            }
+            $this->handleHankSupply($squares, $supply, $supp_key);
+            return returnMessageAjax(200, 'Đã gửi yêu cầu xử lí vật tư thành công!', getBackUrl());
         }else{
             return returnMessageAjax(100, 'Bạn chưa chọn vật tư trong kho !');
         } 

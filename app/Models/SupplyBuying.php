@@ -138,6 +138,36 @@ class SupplyBuying extends Model
         SupplyBuying::where('id', $id)->update(['code' => 'MVT-'.formatCodeInsert($id)]);  
     }
 
+    static function getTheCheapestProvider($supply_price)
+    {
+        return ProviderPrice::where(['supp_price' => $supply_price])->orderBy('price', 'asc')->first();
+    }
+
+    static function handleTotalBuyingSupply(&$data, $is_buying = true)
+    {
+        $supp_price_id = $data['qtv'];
+        $provider_price = self::getTheCheapestProvider($supp_price_id);
+        if (!empty($provider_price)) {
+            $price_purchase = getFieldDataById('price_purchase', 'supply_prices', $supp_price_id) ?? 1;
+            $length = !empty($data['length']) ? $data['length'] : 1;
+            $width = !empty($data['width']) ? $data['width'] : 1;
+            $price = $provider_price->price;
+            if ($is_buying) {
+                $data['sugg_provider'] = $provider_price->id;
+                $data['sugg_price'] = $price;
+                $data['provider'] = $provider_price->id;
+                $data['price'] = $price;
+            }
+            $data_qty = $data['qty'];
+            $data['lenth_qty'] = $length * $data_qty;
+            $total = $length * $width * $price * $price_purchase * $data_qty;
+            if ($is_buying) {
+                $data['total'] = $total;
+            }
+            $data['weight'] = $total / ($price * 10000000);
+        }
+    }
+
     static function insertBuyExistData($supp_id, $qty, $name)
     {
         $supply = SupplyWarehouse::find($supp_id);
@@ -146,18 +176,21 @@ class SupplyBuying extends Model
             $data['name'] = $name;
             $data['type'] = $type;
             $data['status'] = \StatusConst::PROCESSING;
-            $buying_item['type'] = $type;
-                if (self::isHankSupply($type)) {
-                    $data_qty = ceil($qty / $supply->length);
-                    $buying_item['qty'] = $data_qty;
-                    $lenth_qty = $data_qty * $supply->length / 100;   
-                    $buying_item['weight'] = $supply->weight / $supply->lenth_qty * $lenth_qty;
-                    $buying_item['lenth_qty'] = $lenth_qty;
-                }
             (new \BaseService())->configBaseDataAction($data);
-            $insert_id = BuyingItem::insertGetId($data);
+            $insert_id = SupplyBuying::insertGetId($data);
+            $length = $supply->length;
+            $width = $supply->width;
             if ($insert_id) {
-                
+                $buying_item = [
+                    'type' => $type,
+                    'target' => $supply->target,
+                    'qtv' => $supply->qtv,
+                    'length' => $length,
+                    'width' => $width
+                ];
+                $buying_item['qty'] = self::isHankSupply($type) ? ceil($qty / $length) : $qty;
+                self::handleTotalBuyingSupply($buying_item);
+                BuyingItem::processData($buying_item, $insert_id);   
             }
         }
     }

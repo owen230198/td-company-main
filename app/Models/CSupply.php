@@ -53,22 +53,22 @@
             return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];
         }
 
+
         static function insertCommand($data, $supply)
         {
             $type = $supply->type;
             $table = tableWarehouseByType($type);
             $data_command['name'] = getFieldDataById('name', $table, $data['size_type']); 
             $data_command['size_type'] = $data['size_type'];
-            $key_qty = $type == \TDConst::DECAL ? 'square' : 'qty';
-            $data_command['qty'] = json_encode([$key_qty => $data['qty']]); 
+            $data_command['qty'] = $data['qty']; 
             $data_command['product'] = $supply->product;
             $data_command['supply'] = $supply->id;
             $data_command['supp_type'] = $type;
             $data_command['status'] = CSupply::HANDLING;
             (new \BaseService)->configBaseDataAction($data_command);
             $id = CSupply::insertGetId($data_command);
-            $update = CSupply::where('id', $id)->update(['code' => 'XVT-'.sprintf("%08s", $id)]);
-            return $update;
+            self::getInsertCode($id);
+            return 1;
         }
 
         static function getInsertCode($id)

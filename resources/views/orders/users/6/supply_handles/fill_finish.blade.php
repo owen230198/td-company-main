@@ -1,21 +1,10 @@
 @extends('orders.users.6.supply_handles.supplies')
 @section('process')
 <div class="plan_handle_supp_inf">
-    <h3 class="fs-14 text-uppercase border_bot_eb pb-3 mb-3 text-center handle_title">
-        <p class="mb-1">Thông tin vật tư nam châm cần xuất</p>
-    </h3>
     @php
         $data_magnet = !empty($supply_obj->magnet) ? json_decode($supply_obj->magnet, true) : [];
-        $data_select_magnet = [
-            'other_data' => [
-                'data' => ['table' => 'materals', 'where' => ['type' => \TDConst::MAGNET]]
-            ],
-            'name' => '',
-            'type' => 'linking',
-            'value' => @$data_magnet['type'],
-            'note' => 'Vật tư nam châm',
-            'attr' => ['disable_field' => 1]
-        ];
+        $materal = $data_magnet['materal'];
+        $qtv = $data_magnet['qtv'];
 
         $data_magnet_qty = [
             'name' => 'magnet_number',
@@ -34,19 +23,28 @@
         $magnet_chose_supp = [
             'name' => 'c_supply[supp_price]',
             'type' => 'linking',
+            'attr' => ['inject_class' => 'length_inpput'],
             'note' => 'Chọn nam châm trong kho',
             'other_data' => [
                 'config' => ['search' => 1], 
                 'data' => [
-                    'table' => 'other_warehouses', 
-                    'where' => ['type' => \TDConst::MAGNET,
-                                'supp_price' => @$data_magnet['type'],
-                                'status' => 'imported']
+                    'table' => 'supply_warehouses', 
+                    'where' => [
+                        'type' => \TDConst::MAGNET,
+                        'target' => $materal,
+                        'qtv' => $qtv,
+                        'status' => 'imported'
+                    ]
                 ]
             ]
         ]
     @endphp
-    @include('view_update.view', $data_select_magnet)
+    <h3 class="fs-14 text-uppercase border_bot_eb pb-3 mb-3 text-center handle_title">
+        <p class="mb-1">
+            Xuất vật tư nam châm - {{ getFieldDataById('name', 'supply_types', $data_magnet['materal']) }}
+            - {{ getFieldDataById('name', 'supply_prices', $data_magnet['qtv']) }}
+        </p>
+    </h3>
 
     @include('view_update.view', $data_magnet_qty)
 

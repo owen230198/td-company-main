@@ -312,18 +312,17 @@ use App\Models\WarehouseHistory;
             $type = $supply->type;
             if (SupplyBuying::isHankSupply($type)) {
                 $inhouse = (float) $supply->lenth_qty;
-                $need_qty = devideNumber($need);
-                if ($need_qty > $inhouse) {
+                if ($need > $inhouse) {
                     $takeout = $inhouse;
                     $rest = 0;
-                    $lack = $need_qty - $inhouse;
+                    $lack = $need - $inhouse;
                 }else{
-                    $takeout = $need_qty;
-                    $rest = $inhouse - $need_qty;
+                    $takeout = $need;
+                    $rest = $inhouse - $need;
                     $lack = 0;
                 }
                 return ['code' => 200, 'data' => ['inhouse' => $inhouse, 'takeout' => $takeout, 'rest' => $rest, 'lack' => $lack]];
-            }elseif ($type == \TDConst::PAPER) {
+            }elseif (SupplyBuying::isPlateSupply($type)) {
                 return ['code' => 200, 'data' => ['inhouse' => $supply->qty]];
             }
         }

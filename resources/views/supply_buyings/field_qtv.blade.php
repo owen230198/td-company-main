@@ -147,7 +147,7 @@
                 'note' => 'Tổng số chiều dài (cm)',
                 'type' => 'text',
                 'value' => @$value['lenth_qty'],
-                'attr' => ['inject_class' => '__buying_lenth_qty __buying_change_input', 'type_input' => 'price', 'readonly' => 1]
+                'attr' => ['inject_class' => '__buying_lenth_qty', 'type_input' => 'price', 'readonly' => 1]
             ],
             [
                 'name' => $group_name.'[weight]',

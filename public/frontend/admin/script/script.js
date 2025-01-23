@@ -1084,9 +1084,8 @@ var changeInputPriceBuying = function () {
         let qtv = getEmptyDefault(item.find('.__qtv_buying_field').data('price_purchase'), 1, 'float');
         let price = getEmptyDefault(item.find('input.__buying_price_input').val(), 0, 'float');
         let qty = getEmptyDefault(item.find('input.__buying_qty_input').val(), 0, 'number');
-        let other_price = getEmptyDefault(item.find('input.__buying_other_price_input').val(), 0, 'float');
         let total_input = item.find('.__buying_total_input');
-        total_value = (length * width * qtv * price * qty) + other_price;
+        total_value = (length * width * qtv * price * qty);
         let value_total = total_value.toFixed();
         total_input.val(price_format(value_total));
         total_input.trigger('change');
@@ -1094,7 +1093,8 @@ var changeInputPriceBuying = function () {
         
         if (length_qty_input.length > 0) {
             let length_qty = (length * qty);
-            length_qty_input.val(price_format(length_qty));   
+            length_qty_input.val(price_format(length_qty));
+            length_qty_input.trigger('change');   
         }
         let weight_input = item.find('.__buying_weight');
         if (weight_input.length > 0) {

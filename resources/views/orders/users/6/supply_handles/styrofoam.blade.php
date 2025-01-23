@@ -12,8 +12,6 @@
     @include('quotes.products.supplies.quantity_config', ['compen_percent' => $styro_compen_percent])
 
     @include('quotes.products.supplies.size_config', ['plus' => $styro_plus, 'divide' => $styro_divide])
-
-    @include('quotes.products.supplies.select_supply_type')
     
     @include('orders.users.6.supply_handles.handle', ['compen_percent' => $styro_compen_percent])
 @endsection
