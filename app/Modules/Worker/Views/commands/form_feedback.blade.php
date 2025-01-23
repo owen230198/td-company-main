@@ -15,10 +15,11 @@
                 $handle = !empty($supply->{$type}) ? json_decode($supply->{$type}, true) : [];
             @endphp
             @include('managers.worker_feedbacks.form_data', ['value' => $handle])
+            <p class="fs-11 color_red font-italic">Chú ý: Khiếu nại phải được xử lí trong vòng 30 phút, nếu quá thời gian, hết quyền khiếu nại.</p>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-            <button type="submit" disabled class="btn btn-primary bg_green color_white main_btn">Gửi phản hồi</button>
+            <button type="submit" disabled class="btn btn-primary bg_green color_white main_btn">Gửi khiếu nại</button>
         </div>
     </div>
 </form>

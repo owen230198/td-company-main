@@ -79,7 +79,4 @@
             </tbody>
         </table>
     </div>
-    <div class="paginate_view d-flex align-center justify-content-between mb-3">
-        {!! $list_data->appends(request()->input())->links('pagination::bootstrap-4') !!}
-    </div>
 @endif

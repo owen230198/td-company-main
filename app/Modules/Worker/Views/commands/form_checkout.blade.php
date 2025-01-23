@@ -15,6 +15,12 @@
                 </label>
                 <input type="number" name="qty" class="form-control" min="1" value="{{ @$data_command->qty }}" placeholder="Hoàn thành hết">
             </div>
+            <div class="form-group d-flex mb-2">
+                <label class="mb-0 min_150 fs-13 text-capitalize justify-content-end mr-3 d-flex mt-1">
+                    Số lượng thừa
+                </label>
+                <input type="number" name="exess" class="form-control" min="1" value="0" >
+            </div>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>

@@ -31,16 +31,15 @@
                 Trạng thái : {{ getStatusWorkerCommand($supply) }}.
             </p>
             <p class="d-flex align-items-center color_red mb-2">
-                <i class="fa fa-asterisk mr-1 fs-14" aria-hidden="true"></i>
-                Chú thích : hoàn thành nhanh nhất.
+                Yêu cầu người thợ : Làm xong phải xác nhận lệnh ngay. nếu công ty phát hiện sai phạm sẽ phạt 500.000d/ Lần, Tiền này sẽ sung vào quỹ phúc lợi của công ty.
             </p>
         </div>
-        <div class="command_group_btn d-flex mt-1 pt-1 border_top">
+        <div class="command_group_btn border_top">
             <a href="{{ url('Worker/action-command/detail?id='.@$command->id) }}" class="d-block button_command p-1 color_green smooth  font_bold smooth text-center">
                 <i class="fa fa-info-circle fs-14 mr-1" aria-hidden="true"></i> Chi tiết
             </a>
             <button 
-                type="button" class="d-block button_command p-1 smooth  font_bold smooth text-center bg_green color_white __worker_receive_btn" data-id={{ $command->id }}>
+                type="button" class="d-block button_command p-1 smooth  font_bold smooth text-center bg_green color_white __worker_receive_btn w-100" data-id={{ $command->id }}>
                     <i class="fa fa-level-down fs-14 mr-1" aria-hidden="true"></i> Nhận lệnh
             </button>   
         </div>     
