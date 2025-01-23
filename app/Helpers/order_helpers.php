@@ -486,11 +486,25 @@ use App\Models\SupplyOrigin;
     }
 
     if (!function_exists('getArrHandleField')) {
-        function getArrHandleField($table)
+        function getArrHandleField($table, $for_worker = false)
         {
             switch ($table) {
                 case 'papers':
-                    return [\TDConst::PRINT, 
+                    return $for_worker ? [
+                        \TDConst::PRINT, 
+                        \TDConst::NILON, 
+                        \TDConst::METALAI,
+                        \TDConst::COMPRESS, 
+                        \TDConst::UV, 
+                        \TDConst::ELEVATE,
+                        \TDConst::FLOAT,
+                        \TDConst::PEEL,
+                        \TDConst::BOX_PASTE,
+                        \TDConst::BAG_PASTE,
+                        \TDConst::CUT,
+                        \TDConst::FOLD
+                        ] : [
+                            \TDConst::PRINT, 
                             \TDConst::NILON, 
                             \TDConst::METALAI,
                             \TDConst::COVER, 
@@ -502,7 +516,8 @@ use App\Models\SupplyOrigin;
                             \TDConst::BOX_PASTE,
                             \TDConst::BAG_PASTE,
                             \TDConst::CUT,
-                            \TDConst::FOLD];
+                            \TDConst::FOLD
+                            ];
                     break;
                 case 'supplies':
                     return [\TDConst::CUT,
@@ -523,7 +538,7 @@ use App\Models\SupplyOrigin;
 
     if (!function_exists('getStageActiveStartHandle')) {
         function getStageActiveStartHandle($table, $id, $except = ''){
-            $arr_select = getArrHandleField($table);
+            $arr_select = getArrHandleField($table, true);
             $key_cover = array_search(\TDConst::COVER, $arr_select);
             if ($arr_select !== FALSE) {
                 unset($arr_select[$key_cover]);
