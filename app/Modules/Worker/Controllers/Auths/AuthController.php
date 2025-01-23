@@ -13,7 +13,7 @@ class AuthController extends Controller
     
     public function login(Request $request)
     {
-        $data['title'] = 'Đăng nhập - công nhân sản xuất';
+        $data['title'] = 'Đăng nhập - nhà máy';
         $data['link_login'] = 'Worker/login';
         return $this->services->baseLogin($request, $data);
     } 

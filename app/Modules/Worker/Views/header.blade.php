@@ -7,7 +7,7 @@
         <img src="{{ url('frontend/admin/images/logo.png') }}" alt="'logo">
     </a>
     <h3 class="fs-14 text-uppercase mb-3 text-center handle_title mx-auto">
-        <p class="mb-1">{{ $title.' - '.$group_worker_name }}</p>
+        <p class="mb-1">{{ $group_worker_name }}</p>
     </h3>
 </div>
 <div class="header_worker_nav p-2 bg_grey">

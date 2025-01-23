@@ -22,7 +22,7 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-        $data['title'] = 'Đăng nhập - Nhân viên văn phòng';
+        $data['title'] = 'Đăng nhập - văn phòng';
     	return $this->services->baseLogin($request, $data);
     }
 
