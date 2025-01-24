@@ -85,7 +85,7 @@ class WorkerService extends BaseService
         }
         $data['supply'] = $supply;
         $data['data_command'] = $data_command;
-        $data['all_devices'] = \TDConst::ALL_DEVICE_KEY;
+        $data['all_devices'] = getArrHandleField($data_command->table_supply);
         $data['title'] = 'Chi tiết lệnh sản xuất '.$data_command->command;
         $worker_type = @$worker['type'];
         $handle = !empty($supply->{$worker_type}) ? json_decode($supply->{$worker_type}, true) : [];
@@ -173,15 +173,6 @@ class WorkerService extends BaseService
                 }
                 $supply_obj->handled = $handled_pro;
                 $supply_obj->save();
-                // if ($table_supply == 'papers') {
-                //     $p_childs = Paper::where('parent', $supply_id)->get();
-                //     foreach ($p_childs as $p_child) {
-                //         Paper::where('id', $p_child->id)->update(['handled' => $handled_pro]);
-                //         if (!empty($p_child->product)) {
-                //             Product::createCProduct($p_child->product);
-                //         }
-                //     }
-                // }
                 if (!empty($supply_obj->product) && empty($supply_obj->is_join)) {
                     Product::createCProduct($supply_obj->product);
                 }

@@ -4,19 +4,25 @@
         {{ $data_command->name }}.
     </strong>
 </p>
+<p class="d-flex align-items-center color_green mb-2">
+    <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
+    loại vật tư  : <strong class="color_main ml-1">
+        {{ getTextSupply($supply->type) }}.
+    </strong>
+</p>
 <ul class="d-flex flex-wrap">
-    @foreach ($all_devices as $key => $device)
+    @foreach ($all_devices as $device)
         @php
-            $data_stage = !empty($supply->{$key}) ? json_decode($supply->{$key}, true) : [];
+            $data_stage = !empty($supply->{$device}) ? json_decode($supply->{$device}, true) : [];
         @endphp
-        @if (!empty($data_stage))
+        @if (!empty($data_stage) && !empty($data_stage['machine']))
             @php
                 $icon = getIconByStageHandle(@$data_stage['act']);
             @endphp
             @if (@$icon['color'] != 'red')
                 <li class="px-3 py-2 mr-2 mb-2 bg_white color_main color_{{ $icon['color'] }} box_shadow_3 radius_5">
                     <i class="fa fa-{{ $icon['icon'] }} mr-1" aria-hidden="true"></i>
-                    {{ $device }}    
+                    {{ getFieldDataById('name', 'devices', $data_stage['machine']) }}    
                 </li>    
             @endif
         @endif

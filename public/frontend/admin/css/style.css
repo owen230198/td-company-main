@@ -757,3 +757,24 @@ a.device_supp_item {
         font-size: 12px;
     }
 }
+
+@media (max-width: 850px) {
+
+    .page_content .form-group {
+        display: block !important;
+    }
+
+    .base_label_input{
+        justify-content: start !important;
+    }
+
+    .config_content .form-control, .config_content .btn-group, .btn-group-vertical, .config_content .multiselect-container {
+        max-width: 100% !important;
+        min-width: 100% !important;
+        width: 100% !important;
+    }
+
+    .group_btn_action_form{
+        width: 100%;
+    }
+}

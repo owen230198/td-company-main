@@ -19,7 +19,7 @@
                 <label class="mb-0 min_150 fs-13 text-capitalize justify-content-end mr-3 d-flex mt-1">
                     Số lượng thừa
                 </label>
-                <input type="number" name="exess" class="form-control" min="1" value="0" >
+                <input type="number" name="exess" class="form-control" min="0" value="0" >
             </div>
         </div>
         <div class="modal-footer">
