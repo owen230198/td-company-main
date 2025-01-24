@@ -37,17 +37,17 @@
     
     {{-- Chọn vật tư cán phủ trên --}}
     @if (!empty($cover['materal']) && !empty($cover['qtv']))
-    @include('orders.users.6.supply_handles.view_handles.multiple', 
-        [
-            'arr_items' => [
-                'key_supp' => \TDConst::COVER, 
-                'note' => 'màng phủ trên ('.$cover['face'].' mặt)', 
-                'supp_price' => $cover['materal'],
-                'base_need' => $base_need_square,
-                'qtv' => $cover['qtv'],
-            ],
-            'type' => \TDConst::HANK
-        ])
+        @include('orders.users.6.supply_handles.view_handles.multiple', 
+            [
+                'arr_items' => [
+                    'key_supp' => \TDConst::COVER, 
+                    'note' => 'màng phủ trên ('.$cover['face'].' mặt)', 
+                    'supp_price' => $cover['materal'],
+                    'base_need' => $base_need_square,
+                    'qtv' => $cover['qtv'],
+                ],
+                'type' => \TDConst::HANK
+            ])
     @endif 
     <div class="plan_handle_supply_module">
         <div class="process_paper_plan">

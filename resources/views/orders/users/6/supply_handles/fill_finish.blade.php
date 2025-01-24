@@ -19,25 +19,8 @@
             'value' => @$supply_obj->product_qty,
             'attr' => ['type_input' => 'number', 'disable_field' => 1]
         ];
-
-        $magnet_chose_supp = [
-            'name' => 'c_supply[supp_price]',
-            'type' => 'linking',
-            'attr' => ['inject_class' => 'length_inpput'],
-            'note' => 'Chọn nam châm trong kho',
-            'other_data' => [
-                'config' => ['search' => 1], 
-                'data' => [
-                    'table' => 'supply_warehouses', 
-                    'where' => [
-                        'type' => \TDConst::MAGNET,
-                        'target' => $materal,
-                        'qtv' => $qtv,
-                        'status' => 'imported'
-                    ]
-                ]
-            ]
-        ]
+        $base_need_supp = @$supply_obj->product_qty * $data_magnet['qty'];
+        $take_need_qty = calValuePercentPlus($base_need_supp, $base_need_supp, getDataConfig('QuoteConfig', 'MAGNET_COMPEN_PERCENT'));
     @endphp
     <h3 class="fs-14 text-uppercase border_bot_eb pb-3 mb-3 text-center handle_title">
         <p class="mb-1">
@@ -54,6 +37,16 @@
         <span>Xuất vật tư nam châm theo yêu cầu</span>
     </h3>
 
-    @include('view_update.view', $magnet_chose_supp)
+    @include('orders.users.6.supply_handles.view_handles.multiple', 
+    [
+        'arr_items' => [
+            'key_supp' => \TDConst::MAGNET, 
+            'note' => 'nam châm', 
+            'supp_price' => $data_magnet['materal'],
+            'base_need' => $take_need_qty,
+            'qtv' => $data_magnet['qtv'],
+        ],
+        'type' => \TDConst::MAGNET
+    ])
 </div>
 @endsection

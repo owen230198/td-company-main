@@ -22,29 +22,32 @@
         ]
     ];
 @endphp
+
 <div class="__handle_supply_item position-relative {{ $index > 0 ? 'mt-3 pt-3 border_top_eb' : '' }}" data-take = "0">
     @if ($index > 0)
         <button type="button" class="remove_ext_element_quote d-flex bg_red color_white red_btn smooth __supply_handle_btn_remove">
             <i class="fa fa-times" aria-hidden="true"></i>
         </button> 
     @endif
-    <div class="row">
-        <div class="col-6">
-            @include('view_update.view', $chose_supp)
-            <div class="__handle_supply_detail_ajax color_green" style="display:none">
-                <div class="d-flex align-items-center mb-2 fs-13">
-                    <label class="mb-0 min_210 text-capitalize text-right mr-3">Còn lại trong kho : </label>
-                    <p class="font_bold __inhouse"></p>
-                </div>
-                @include('view_update.view', $need_qty)
-                @include('view_update.view', $nqty_supp)
-                @include('view_update.view', $total_qty_supp)
-                @include('view_update.view', $qty_supp_available)
-                @include('orders.users.6.supply_handles.view_handles.after_select')
-            </div>
+    @include('view_update.view', $chose_supp)
+    <div class="__handle_supply_detail_ajax color_green" style="display:none">
+        <input type="hidden" name="c_supply[{{ $key_supp }}][{{ $index }}][qty]" value="">
+        <input type="hidden" name="c_supply[{{ $key_supp }}][{{ $index }}][lack]" value="">
+        <div class="d-flex align-items-center mb-2 fs-13">
+            <label class="mb-0 min_210 text-capitalize text-right mr-3">Còn lại trong kho : </label>
+            <span class="font_bold __inhouse"></span>
         </div>
-        <div class="col-6 border_left_eb __over_supply" style="display:none">
-            @include('orders.users.6.supply_handles.view_handles.over_supplies.item', ['key_supp' => $key_supp])      
-        </div> 
+        <div class="d-flex align-items-center mb-2 fs-13">
+            <label class="mb-0 min_210 text-capitalize text-right mr-3">Xuất ra cho lệnh này : </label>
+            <span class="font_bold __takeout"> </span>
+        </div>
+        <div class="d-flex align-items-center mb-2 fs-13">
+            <label class="mb-0 min_210 text-capitalize text-right mr-3">Còn lại : </label>
+            <span class="font_bold __rest"></span>
+        </div>
+        <div class="align-items-center mb-2 fs-13" style="display: flex">
+            <label class="mb-0 min_210 text-capitalize text-right mr-3">Vật tư thiếu : </label>
+            <span class="color_red font_bold __lack"></span>
+        </div>
     </div>
 </div>

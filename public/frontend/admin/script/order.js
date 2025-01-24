@@ -234,7 +234,7 @@ var afterPlanSelectSupply = function(type, data, target, item, reset = false)
         target.find('.__lack').parent().fadeOut();
         target.find('.__lack').text(0); 
     }else{
-        if (type == 'hank') {
+        if (type == 'hank' || type == 'magnet') {
             target.find("input[name*='qty']").val(data.takeout);
             target.find('.__takeout').text(data.takeout);
             item.data('take', data.takeout);

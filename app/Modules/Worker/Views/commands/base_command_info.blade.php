@@ -4,12 +4,14 @@
         {{ $data_command->name }}.
     </strong>
 </p>
-<p class="d-flex align-items-center color_green mb-2">
-    <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
-    loại vật tư  : <strong class="color_main ml-1">
-        {{ getTextSupply($supply->type) }}.
-    </strong>
-</p>
+@if (!empty($supply->type))
+    <p class="d-flex align-items-center color_green mb-2">
+        <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
+        loại vật tư  : <strong class="color_main ml-1">
+            {{ getTextSupply($supply->type) }}.
+        </strong>
+    </p>
+@endif
 <ul class="d-flex flex-wrap">
     @foreach ($all_devices as $device)
         @php

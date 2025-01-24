@@ -159,12 +159,15 @@ class SupplyBuying extends Model
                 $data['price'] = $price;
             }
             $data_qty = $data['qty'];
-            $data['lenth_qty'] = $length * $data_qty;
+            
             $total = $length * $width * $price * $price_purchase * $data_qty;
             if ($is_buying) {
                 $data['total'] = $total;
             }
-            $data['weight'] = $total / ($price * 10000000);
+            if (self::hasSizeSupply($data['type'])) {
+                $data['lenth_qty'] = $length * $data_qty;
+                $data['weight'] = $total / ($price * 10000000);
+            }
         }
     }
 

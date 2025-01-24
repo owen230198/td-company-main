@@ -11,9 +11,9 @@
     use App\Models\Product;
     use App\Models\ProductWarehouse;
     use App\Models\Represent;
-use App\Models\SupplyBuying;
-use App\Models\SupplyWarehouse;
-use App\Models\WarehouseHistory;
+    use App\Models\SupplyBuying;
+    use App\Models\SupplyWarehouse;
+    use App\Models\WarehouseHistory;
     use App\Models\WSalary;
     use Maatwebsite\Excel\Facades\Excel;
 
@@ -310,21 +310,17 @@ use App\Models\WarehouseHistory;
                 return returnMessageAjax(100, 'Vật tư không tồn tại hoặc đã bị xóa !');
             }
             $type = $supply->type;
-            if (SupplyBuying::isHankSupply($type)) {
-                $inhouse = (float) $supply->lenth_qty;
-                if ($need > $inhouse) {
-                    $takeout = $inhouse;
-                    $rest = 0;
-                    $lack = $need - $inhouse;
-                }else{
-                    $takeout = $need;
-                    $rest = $inhouse - $need;
-                    $lack = 0;
-                }
-                return ['code' => 200, 'data' => ['inhouse' => $inhouse, 'takeout' => $takeout, 'rest' => $rest, 'lack' => $lack]];
-            }elseif (SupplyBuying::isPlateSupply($type)) {
-                return ['code' => 200, 'data' => ['inhouse' => $supply->qty]];
+            $inhouse = SupplyBuying::isHankSupply($type) ? (float) $supply->lenth_qty : $supply->qty;
+            if ($need > $inhouse) {
+                $takeout = $inhouse;
+                $rest = 0;
+                $lack = $need - $inhouse;
+            }else{
+                $takeout = $need;
+                $rest = $inhouse - $need;
+                $lack = 0;
             }
+            return ['code' => 200, 'data' => ['inhouse' => $inhouse, 'takeout' => $takeout, 'rest' => $rest, 'lack' => $lack]];
         }
 
         public function addSelectSupplyHandle(Request $request)
