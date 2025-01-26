@@ -148,6 +148,22 @@ var planHandleElevateModule = function()
     });
 }
 
+var fixWidthSupplyChangeInput = function(){
+    $(document).on('change keyup', 'input.__fix_width_supp_handle_input', function(event){
+        event.preventDefault();
+        let parent = $(this).closest('.__handle_supply_item');
+        let width = getEmptyDefault(parent.find('.__sizeFixWidth').text(), 0,'float');
+        let fix_size = getEmptyDefault(parent.find('.fixSizeTakeOutInput').val(), 0, 'float');
+        let nqty = getEmptyDefault(parent.find('.fixNqtytInput').val(), 0, 'float');
+        let pro_qty = getEmptyDefault(parent.find('.fixProQtyInput').val(), 0, 'float');
+        let compent_percent = getEmptyDefault(parent.data('percent'), 0, 'float');
+        let base_total = Math.ceil(pro_qty / nqty);
+        let add_qty = base_total * compent_percent / 100;
+        let total = base_total + add_qty;
+        parent.find('.fixQtyInput').val(total);
+    });
+}
+
 var updateHandleWareHouse = function(obj)
 {
     let parent = obj.closest('.__handle_supply_item');
@@ -210,6 +226,8 @@ var planChoseSupplyModule = function()
                         item.find('input.__qty_supp_plan').val(need);       
                     }else if (type == 'plate'){
                         item.find('input.pro_qty_input').val(need);           
+                    }else if(type == 'fix_width'){
+                        target.find('.__sizeFixWidth').text(data.fix_width);
                     }
                 }
                 $('#loader').delay(200).fadeOut(500); 
@@ -230,7 +248,7 @@ var afterPlanSelectSupply = function(type, data, target, item, reset = false)
         item.data('take', 0);
         target.find('.__rest').text(0);
         target.find("input[name*='lack']").val(0);
-        target.find('input.__nqty_supp_plan').val(0)
+        target.find('input.__nqty_supp_plan').val(0);
         target.find('.__lack').parent().fadeOut();
         target.find('.__lack').text(0); 
     }else{
@@ -274,7 +292,7 @@ var planAddSupplyHandle = function()
                 nqty_input.attr('readonly', true);
             }
 
-            let nqty_supp = $(this).find('input.pro_nqty_input ');
+            let nqty_supp = $(this).find('input.pro_nqty_input');
             if (nqty_supp.length > 0) {
                 nqty_supp.attr('readonly', true);
             }
@@ -296,7 +314,7 @@ var planRemoveSupplyHandle = function()
                 if (nqty_input.length > 0) {
                     nqty_input.attr('readonly', false);
                 }
-                let nqty_supp = $(this).find('input.pro_nqty_input ');
+                let nqty_supp = $(this).find('input.pro_nqty_input');
                 if (nqty_supp.length > 0) {
                     nqty_supp.attr('readonly', false);
                 }
@@ -534,6 +552,7 @@ $(function(){
     applyOrderStep();
     submitOrderForm();
     planHandleElevateModule();
+    fixWidthSupplyChangeInput();
     planChoseSupplyModule();
     planAddSupplyHandle();
     planRemoveSupplyHandle();

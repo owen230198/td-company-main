@@ -282,7 +282,6 @@
                 }elseif ($table == 'fill_finishes') {
                     $data_supply->type = \TDConst::FILL_FINISH; 
                 }
-                $supp_size = !empty($data_supply->size) ? json_decode($data_supply->size, true) : [];
                 if (!empty($data_supply)) {
                     $data = $this->admins->CSupplyInsertView('insert');
                     $data['action_url'] = url('insert/c_supplies');
@@ -320,7 +319,17 @@
                 $rest = $inhouse - $need;
                 $lack = 0;
             }
-            return ['code' => 200, 'data' => ['inhouse' => $inhouse, 'takeout' => $takeout, 'rest' => $rest, 'lack' => $lack]];
+            $width = (float) $supply->width <= (float) $supply->length ? (float) $supply->width : (float) $supply->length;
+            return [
+                'code' => 200, 
+                'data' => [
+                    'inhouse' => $inhouse, 
+                    'takeout' => $takeout, 
+                    'rest' => $rest, 
+                    'lack' => $lack,
+                    'fix_width' => $width
+                ]
+            ];
         }
 
         public function addSelectSupplyHandle(Request $request)
@@ -386,54 +395,6 @@
             } 
         }
 
-        public function applySupplyToWorker(Request $request)
-        {
-            if (!\GroupUser::isPlanHandle()) {
-                return back()->with('error', 'Bạn không có quyền duyệt sản xuất !');     
-            }
-            if (empty($request->table) || empty($request->id)) {
-                return back()->with('error', 'Dữ liệu không hợp lệ');
-            }
-            $table = $request->table;
-            $id = $request->id;
-            $supply = \DB::table($table)->find($id);
-            $product_id = $supply->product;
-            if (!in_array($table, ['papers', 'supplies', 'fill_finishes']) || empty($supply)) {
-                return back()->with('error', 'Dữ liệu không hợp lệ');
-            }
-            if (@$supply->status != Order::TECH_SUBMITED) {
-                return back()->with('error', 'Dữ liệu không hợp lệ !');
-            }
-            $type = getTypeSupplyByObj($table, $supply);
-            if (getHandleSupplyStatus($product_id, $id, $type) != CSupply::HANDLED) {
-                return back()->with('error', 'Vật tư vẫn chưa được kế toán duyệt xuất !');
-            }
-            $process = $this->services->createWorkerCommandForSupply($table, $supply);
-            if ($process) {
-                $all_supply = Product::getAllSupply($product_id, ['id', 'status'], true);
-                $check_update = true;
-                foreach ($all_supply as $supp) {
-                    if (@$supp->status == Order::TECH_SUBMITED) {
-                        $check_update = false;
-                    }
-                }
-                if ($check_update) {
-                    $making_process_status = Order::MAKING_PROCESS;
-                    $product_obj = Product::find($product_id);
-                    $product_obj->status = $making_process_status;
-                    $product_obj->save();
-                    logActionUserData($making_process_status, 'products', $product_id, $product_obj);
-                    $order_id = $product_obj->order;
-                    if (checkUpdateOrderStatus($order_id, $making_process_status)) {
-                        logActionDataById('orders', $order_id, ['status' => $making_process_status], $making_process_status);
-                    }
-                }
-                return back()->with('message', 'Đã gửi lệnh sản xuất xuống xưởng !');
-            }else{
-                return back()->with('error', 'Đã có lỗi xảy ra, vui lòng thử lại !');
-            } 
-        }
-
         public function printData(Request $request, $table, $id)
         {
             $data_item = \DB::table($table)->find($id);
@@ -442,9 +403,6 @@
                 return back()->with('error', 'Dữ liệu không tồn tại hoặc đã bị xóa !');    
             }
             if ($table == 'products') {
-                // if (!empty($data_item->made_by) && getFieldDataById('internal', 'partners', $data_item->made_by) == 0) {
-                //     return back()->with('error', 'Sản phẩm này sản xuất từ đơn vị khác !');
-                // }
                 $data['arr_tables'] = !empty($request->input('table')) ? array($request->input('table')) : ['papers', 'supplies', 'fill_finishes'];
                 foreach ($data['arr_tables'] as $table_supp) {
                     $where = ['product' => $id];

@@ -472,6 +472,7 @@
 
         const HANK = 'hank'; //dạng cuộn
         const PLATE = 'plate'; //dạng tấm;
+        const FIX_WIDTH = 'fix_width'; //dạng khổ cố định
     }
     
 ?>

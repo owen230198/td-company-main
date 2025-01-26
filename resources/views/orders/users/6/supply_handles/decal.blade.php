@@ -27,6 +27,6 @@
                 'base_need' => $base_need,
                 'qtv' => $supply_size['qtv'],
             ],
-            'type' => \TDConst::HANK
+            'type' => \TDConst::FIX_WIDTH
         ])
 @endsection

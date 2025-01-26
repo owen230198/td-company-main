@@ -206,12 +206,13 @@ class OrderService extends BaseService
             }
         }
         foreach ($squares as $key => $supp_qsuare) {
-            $this->planHandleBaseSupply($supp_qsuare, $supply, $key);
+            $this->planHandleBaseSupply($supp_qsuare, $supply, $key, 'papers');
         }
+        $this->applySupplyToWorker('papers', $supply->id);
         return returnMessageAjax(200, 'Đã gửi yêu cầu xử lí vật tư thành công!', getBackUrl());
     }
 
-    private function planHandleBaseSupply($supplies, $supply, $type)
+    private function planHandleBaseSupply($supplies, $supply, $type, $table)
     {
         foreach ($supplies as $data) {
             if (!empty($data['size_type'])) {
@@ -223,6 +224,7 @@ class OrderService extends BaseService
                 CSupply::insertCommand($data, $supply);
             }
         }
+        $this->applySupplyToWorker($table, $supply->id);
     }
 
     public function supply_handle_carton($supply, $size, $c_supply)
@@ -251,6 +253,7 @@ class OrderService extends BaseService
         if (!$insert_command) {
             return returnMessageAjax(110, 'Không thể tạo yêu cầu xuất vật tư, vui lòng thử lại!');
         }else{
+            $this->applySupplyToWorker('supplies', $supply->id);
             if (!empty($elevate)) {
                 Supply::where('id', $supply->id)->update(['handle_elevate' => json_encode($elevate)]);
             }
@@ -273,7 +276,7 @@ class OrderService extends BaseService
         return $this->supply_handle_carton($supply, $size, $c_supply);
     }
 
-    private function baseHandleSquareSupply($supply, $c_supply, $supp_key)
+    private function baseHandleSquareSupply($supply, $c_supply, $supp_key, $table)
     {
         $squares = @$c_supply['square'] ?? [];
         if (!empty($squares[$supp_key])) {
@@ -282,7 +285,7 @@ class OrderService extends BaseService
             if (@$validate_square['code'] == 100) {
                 return $validate_square;
             }
-            $this->planHandleBaseSupply($squares, $supply, $supp_key);
+            $this->planHandleBaseSupply($squares, $supply, $supp_key, $table);
             return returnMessageAjax(200, 'Đã gửi yêu cầu xử lí vật tư thành công!', getBackUrl());
         }else{
             return returnMessageAjax(100, 'Bạn chưa chọn vật tư trong kho !');
@@ -291,12 +294,12 @@ class OrderService extends BaseService
 
     public function supply_handle_decal($supply, $size, $c_supply)
     {
-        return $this->baseHandleSquareSupply($supply, $c_supply, \TDConst::DECAL);
+        return $this->baseHandleSquareSupply($supply, $c_supply, \TDConst::DECAL, 'supplies');
     }
 
     public function supply_handle_silk($supply, $size, $c_supply)
     {
-        return $this->baseHandleSquareSupply($supply, $c_supply, \TDConst::SILK);
+        return $this->baseHandleSquareSupply($supply, $c_supply, \TDConst::SILK, 'supplies');
     }
 
     public function supply_handle_fill_finish($supply, $size, $c_supply)
@@ -308,12 +311,45 @@ class OrderService extends BaseService
             if (@$validate['code'] == 100) {
                 return $validate;
             }
-            $this->planHandleBaseSupply($magnets, $supply, $supp_key);
+            $this->planHandleBaseSupply($magnets, $supply, $supp_key, 'fill_finishes');
             return returnMessageAjax(200, 'Đã gửi yêu cầu xử lí vật tư thành công!', getBackUrl());
             
         }else{
             return returnMessageAjax(100, 'Bạn chưa chọn vật tư trong kho !');
         }
+    }
+
+    public function applySupplyToWorker($table, $id)
+    {
+        $supply = \DB::table($table)->find($id);
+        $product_id = $supply->product;
+        if (@$supply->status != Order::TECH_SUBMITED) {
+            return back()->with('error', 'Dữ liệu không hợp lệ !');
+        }
+        $process = $this->createWorkerCommandForSupply($table, $supply);
+        if ($process) {
+            $all_supply = Product::getAllSupply($product_id, ['id', 'status'], true);
+            $check_update = true;
+            foreach ($all_supply as $supp) {
+                if (@$supp->status == Order::TECH_SUBMITED) {
+                    $check_update = false;
+                }
+            }
+            if ($check_update) {
+                $making_process_status = Order::MAKING_PROCESS;
+                $product_obj = Product::find($product_id);
+                $product_obj->status = $making_process_status;
+                $product_obj->save();
+                logActionUserData($making_process_status, 'products', $product_id, $product_obj);
+                $order_id = $product_obj->order;
+                if (checkUpdateOrderStatus($order_id, $making_process_status)) {
+                    logActionDataById('orders', $order_id, ['status' => $making_process_status], $making_process_status);
+                }
+            }
+            return back()->with('message', 'Đã gửi lệnh sản xuất xuống nhà máy !');
+        }else{
+            return back()->with('error', 'Đã có lỗi xảy ra, vui lòng thử lại !');
+        } 
     }
 
     public function createWorkerCommandForSupply($table_supply, $supply)
