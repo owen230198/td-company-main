@@ -60,28 +60,7 @@ class NotifyController extends Controller
                 $handle['float']['act'] = 0;
             }
         }
-        $arr_stage = getArrHandleField('papers');
-        $arr_stage[] = 'size';
-        $arr_stage[] = 'ext_price';
-        foreach ($supply->toArray() as $key => $value) {
-            $paper[$key] = in_array($key, $arr_stage) || $key == 'size' ? (!empty($value) ? json_decode($value, true) : []) : $value;
-        }
-        $paper[$type] = $handle;
-        $paper['id'] = $supply->id;
-        $paper['qty'] = $supply->product_qty;
-        $data_update = $model->getDataHandle($paper, $supply);
-        $update = $model->where('id', $paper['id'])->update($data_update);
-        if ($update) {
-            $product = Product::find($supply->product);
-            if (!empty($product->order)) {
-                $obj_refesh = Order::find($product->order);
-                if (!empty($obj_refesh)) {
-                    refreshProfit($obj_refesh);
-                    RefreshQuotePrice($obj_refesh);
-                }
-            }
-            logActionUserData('update', 'papers', $paper['id'], $supply);
-        }
+        updatePriceConfigSupply('papers', $type, $handle, $supply);
     }
 
     public function workerfeedBack($request, $notify, $param)

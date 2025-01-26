@@ -11,9 +11,9 @@
     ];
 
     $field_select =  [
-        'name' => $c_name.'[command][size_type]',
+        'name' => $c_name.'[size_type]',
         'type' => 'linking',
-        'note' => 'Chọn vật tư trong kho',
+        'note' => 'Chọn vật tư '.$note,
         'attr' => ['inject_class' => '__select_in_warehouse length_input'],
         'value' => '',
         'other_data' => [
@@ -33,7 +33,7 @@
                 'type_input' => 'number',
                 'readonly' => 1
             ],
-            'value' => @$supply_obj->product_qty,
+            'value' => @$product_qty,
     ];
 
     $field_handles = [
@@ -69,7 +69,7 @@
             'value' => 0,
         ],
         [
-            'name' => $c_name.'[config][cut_width]',
+            'name' => $c_name.'[cut_width]',
             'type' => 'text',
             'note' => 'Xén SP chiều 1',
             'attr' => [
@@ -79,7 +79,7 @@
             'value' => 0,
         ],
         [
-            'name' => $c_name.'[config][cut_length]',
+            'name' => $c_name.'[cut_length]',
             'type' => 'text',
             'note' => 'Xén SP chiều 2',
             'attr' => [
@@ -89,7 +89,7 @@
             'value' => 0,
         ],
         [
-            'name' => $c_name.'[config][total]',
+            'name' => '',
             'type' => 'text',
             'note' => 'Tổng số vật tư cho đơn',
             'attr' => [
@@ -98,7 +98,14 @@
                 'readonly' => 1
             ],
             'value' => 0,
-        ]
+        ],
+        [
+            'name' => $c_name.'[qty]',
+            'type' => 'text',
+            'note' => 'Số vật tư có thể xuất',
+            'attr' => ['inject_class' => '__avaliable_qty_supp_plan plan_input_supp_qty input_elevate_change', 'type_input' => 'number', 'readonly' => 1],
+            'value' => 0,
+        ],
     ]; 
 @endphp
 <div class="module_hanle_supply_plan quantity_fix_width_supp_module position-relative __handle_supply_item {{ $index > 0 ? 'mt-3 pt-3 border_top_eb' : '' }}" data-percent = {{ $compen_percent }} data-take = "0">
@@ -112,6 +119,10 @@
             @include('view_update.view', $field_select) 
             @include('view_update.view', $product_qty_field)
             <div class="__handle_supply_detail_ajax" style="display: none">
+                <div class="d-flex align-items-center mb-2 fs-13">
+                    <label class="mb-0 min_210 text-capitalize text-right mr-3">Tồn kho : </label>
+                    <p class="font_bold __inhouse"></p>
+                </div>
                 <div class="d-flex align-items-center mb-2 fs-13">
                     <label class="mb-0 min_210 text-capitalize text-right mr-3">Kích thước rộng : </label>
                     <p class="font_bold __sizeFixWidth"></p>

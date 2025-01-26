@@ -164,11 +164,14 @@ class OrderService extends BaseService
         }
     }
     
-    private function validateHankSupplyHandle($supp_qsuare, $type)
+    private function validateHankSupplyHandle($supp_qsuare, $type, $update_size = false)
     {
         foreach ($supp_qsuare as $square) {
             if (@$square['qty'] == 0) {
                 return returnMessageAjax(100, 'Số lượng vật tư '.getSupplyNameByKey($type).' Không hợp lệ !');
+            }
+            if ($update_size && (empty($square['cut_width']) || empty($square['cut_length']))) {
+                return returnMessageAjax(100, 'Thông số kích thước xén không hợp lệ !');
             }
         }
     }
@@ -216,7 +219,6 @@ class OrderService extends BaseService
     {
         foreach ($supplies as $data) {
             if (!empty($data['size_type'])) {
-                $supply->type = $type;
                 if (!empty($data['lack']) && !next($supplies)) {
                     SupplyBuying::insertBuyExistData($data['size_type'], $data['lack'], SupplyBuying::FOR_ORDER);
                     $data['qty'] += $data['lack'];
@@ -292,14 +294,31 @@ class OrderService extends BaseService
         } 
     }
 
+    public function handleFixWidthSupply($supply, $c_supply, $supp_key)
+    {
+        if (!empty($c_supply[$supp_key])) {
+            $supplies = !empty($c_supply[$supp_key]) ? $c_supply[$supp_key] : [];
+            $validate_square = $this->validateHankSupplyHandle($supplies, $supp_key, true);
+            if (@$validate_square['code'] == 100) {
+                return $validate_square;
+            }
+            $this->planHandleBaseSupply($supplies, $supply, $supp_key, 'supplies');
+            $supply_size = json_decode($supply->size, true);
+            // updatePriceConfigSupply('supplies', 'size', $supply_size, $supply);
+            return returnMessageAjax(200, 'Đã gửi yêu cầu xử lí vật tư thành công!', getBackUrl());
+        }else{
+            return returnMessageAjax(100, 'Bạn chưa chọn vật tư trong kho !');
+        } 
+    }
+
     public function supply_handle_decal($supply, $size, $c_supply)
     {
-        return $this->baseHandleSquareSupply($supply, $c_supply, \TDConst::DECAL, 'supplies');
+        return $this->handleFixWidthSupply($supply, $c_supply, \TDConst::DECAL);
     }
 
     public function supply_handle_silk($supply, $size, $c_supply)
     {
-        return $this->baseHandleSquareSupply($supply, $c_supply, \TDConst::SILK, 'supplies');
+        return $this->handleFixWidthSupply($supply, $c_supply, \TDConst::SILK);
     }
 
     public function supply_handle_fill_finish($supply, $size, $c_supply)

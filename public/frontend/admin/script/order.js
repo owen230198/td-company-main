@@ -152,15 +152,44 @@ var fixWidthSupplyChangeInput = function(){
     $(document).on('change keyup', 'input.__fix_width_supp_handle_input', function(event){
         event.preventDefault();
         let parent = $(this).closest('.__handle_supply_item');
-        let width = getEmptyDefault(parent.find('.__sizeFixWidth').text(), 0,'float');
         let fix_size = getEmptyDefault(parent.find('.fixSizeTakeOutInput').val(), 0, 'float');
         let nqty = getEmptyDefault(parent.find('.fixNqtytInput').val(), 0, 'float');
         let pro_qty = getEmptyDefault(parent.find('.fixProQtyInput').val(), 0, 'float');
         let compent_percent = getEmptyDefault(parent.data('percent'), 0, 'float');
         let base_total = Math.ceil(pro_qty / nqty);
         let add_qty = base_total * compent_percent / 100;
-        let total = base_total + add_qty;
+        let total = Math.ceil(base_total + add_qty);
         parent.find('.fixQtyInput').val(total);
+        let total_need = total * fix_size;
+        parent.find('input.fixTotalSupplyInput').val(total_need);
+        if (!empty(total_need)) {
+            let inhouse = getEmptyDefault(parent.find('.__inhouse').text(), 0, 'float');
+            parent.find('.__rest').parent().fadeIn();
+            parent.find('.__takeout').parent().fadeIn(); 
+            if (total_need > inhouse) {
+                parent.find('.__rest').text(0);
+                let lack = total_need - inhouse;
+                parent.find("input[name*='lack']").val(lack);
+                parent.find('.__takeout').text(inhouse);
+                parent.find('input.__avaliable_qty_supp_plan').val(inhouse);
+                parent.find('.__lack').text(lack);
+                parent.find('.__lack').parent().fadeIn();
+                parent.data('take', inhouse);     
+            }else{
+                parent.find("input[name*='lack']").val(0);
+                parent.find('.__rest').text(inhouse - total_need);
+                parent.find('.__takeout').text(total_need);
+                parent.find('input.__avaliable_qty_supp_plan').val(total_need);
+                parent.find('.__lack').text(0);
+                parent.find('.__lack').parent().fadeOut();
+                parent.data('take', total_need);  
+            }
+            updateHandleWareHouse($(this));
+        }else{
+            parent.find('.__takeout').parent().fadeOut();
+            parent.find('.__rest').parent().fadeOut();  
+            parent.find('.__lack').parent().fadeOut();    
+        }
     });
 }
 
@@ -269,6 +298,8 @@ var afterPlanSelectSupply = function(type, data, target, item, reset = false)
             nqty_input.trigger('change');
         }else if(type == 'plate') {
             target.find('input.input_elevate_change').trigger('change');
+        }else if(type == 'fix_width') {
+            target.find('input.fixNqtytInput').trigger('change');
         }
     }
 }

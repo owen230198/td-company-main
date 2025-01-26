@@ -230,9 +230,9 @@
                 }elseif ($table == 'fill_finishes') {
                     $data_supply->type = \TDConst::FILL_FINISH; 
                 }
-                if (getHandleSupplyStatus($data_supply->product, $data_supply->id, $data_supply->type) != CSupply::NOT_HANDLE) {
-                    return back()->with('error', 'Vật tư đang được xử lí bởi kế toán kho !');
-                }
+                // if (getHandleSupplyStatus($data_supply->product, $data_supply->id, $data_supply->type) != CSupply::NOT_HANDLE) {
+                //     return back()->with('error', 'Vật tư đang được xử lí bởi kế toán kho !');
+                // }
                 $supp_size = !empty($data_supply->size) ? json_decode($data_supply->size, true) : [];
                 if (!empty($data_supply)) {
                     if ($request->isMethod('GET')) {

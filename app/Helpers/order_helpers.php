@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\CPayment;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\SupplyOrigin;
 
@@ -785,5 +786,34 @@ use App\Models\SupplyOrigin;
                 return '';
             }
             return $payment_method == 1 ? 'Tiền mặt' : 'chuyển khoản';
+        }
+    }
+
+    if (!function_exists('updatePriceConfigSupply')) {
+        function updatePriceConfigSupply($table, $key_update, $data_handle, $supply)
+        {
+            $arr_stage = getArrHandleField($table);
+            $arr_stage[] = 'size';
+            $arr_stage[] = 'ext_price';
+            foreach ($supply->toArray() as $key => $value) {
+                $supply[$key] = in_array($key, $arr_stage) || $key == 'size' ? (!empty($value) ? json_decode($value, true) : []) : $value;
+            }
+            $supply[$key_update] = $data_handle;
+            $supply['id'] = $supply->id;
+            $supply['qty'] = $supply->product_qty;
+            $model = getModelByTable($table);
+            $data_update = $model->getDataHandle($supply, $supply);
+            $update = $model->where('id', $supply['id'])->update($data_update);
+            if ($update) {
+                $product = Product::find($supply->product);
+                if (!empty($product->order)) {
+                    $obj_refesh = Order::find($product->order);
+                    if (!empty($obj_refesh)) {
+                        refreshProfit($obj_refesh);
+                        RefreshQuotePrice($obj_refesh);
+                    }
+                }
+                logActionUserData('update', $table, $supply['id'], $supply);
+            }
         }
     }

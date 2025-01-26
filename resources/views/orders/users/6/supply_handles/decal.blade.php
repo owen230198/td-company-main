@@ -24,8 +24,10 @@
                 'key_supp' => \TDConst::DECAL, 
                 'note' => 'đề can nhung', 
                 'supp_price' => $supply_size['materal'],
-                'base_need' => $base_need,
                 'qtv' => $supply_size['qtv'],
+                'base_need' =>  $base_need,
+                'product_qty' => $supply_obj->product_qty,
+                'over_supply' => true
             ],
             'type' => \TDConst::FIX_WIDTH
         ])

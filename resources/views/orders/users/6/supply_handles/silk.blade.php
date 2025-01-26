@@ -23,12 +23,14 @@
         [
             'arr_items' => [
                 'key_supp' => \TDConst::SILK, 
-                'note' => 'vải lụa', 
+                'note' => 'Vải lụa', 
                 'supp_price' => $supply_size['materal'],
-                'base_need' => $base_need,
                 'qtv' => $supply_size['qtv'],
+                'base_need' =>  $base_need,
+                'product_qty' => $supply_obj->product_qty,
+                'over_supply' => true
             ],
-            'type' => \TDConst::HANK
+            'type' => \TDConst::FIX_WIDTH
         ])
 
 @endsection

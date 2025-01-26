@@ -85,7 +85,7 @@ var ajaxViewTarget = function (url, target_ajax, section_class, type = 1, data =
 }
 
 var empty = function (value) {
-	return value === '' || value == 'undefined' || value == null || value == undefined || value == 0 || !value;
+	return value === '' || value == 'undefined' || value == null || value == undefined || value == 0 || value == 'Infinity' || !value;
 }
 
 var getEmptyDefault = function (value, deflt = '', type = 'string') {
