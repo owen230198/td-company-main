@@ -546,10 +546,10 @@ use App\Models\SupplyOrigin;
     if (!function_exists('getStageActiveStartHandle')) {
         function getStageActiveStartHandle($table, $id, $except = ''){
             $arr_select = getArrHandleField($table, true);
-            $key_cover = array_search(\TDConst::COVER, $arr_select);
-            if ($arr_select !== FALSE) {
-                unset($arr_select[$key_cover]);
-            }
+            // $key_cover = array_search(\TDConst::COVER, $arr_select);
+            // if ($key_cover !== FALSE) {
+            //     unset($arr_select[$key_cover]);
+            // }
             if (!empty($except)) {
                 $slice = (int) array_search($except, $arr_select) + 1;
                 $arr_select = array_slice($arr_select, $slice);
