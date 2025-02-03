@@ -14,7 +14,6 @@
             'key_supp' => \TDConst::NILON, 
             'note' => 'màng nilon', 
             'supp_price' => $nilon['materal'],
-            'qtv' => $nilon['qtv'],
             'base_need' => $base_need_square
         ],
         'type' => \TDConst::HANK])

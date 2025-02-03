@@ -817,3 +817,10 @@ use App\Models\SupplyOrigin;
             }
         }
     }
+
+    if (!function_exists('checkNeedHandleMagnet')) {
+        function checkNeedHandleMagnet($magnet)
+        {
+            return !empty($magnet['materal']) && !empty($magnet['qtv']) && !empty($magnet['qty']);
+        }    
+    }

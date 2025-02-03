@@ -147,21 +147,12 @@ class WSalary extends Model
                 ];
                 break;
             case \TDConst::FILL:
-                if (!empty($handle['stage'])) {
-                    foreach ($handle['stage'] as $key => $stage) {
-                        $num = (int) $key + 1;
-                        $arr[] = [
-                            'id' => @$stage['machine'], 
-                            'name' => 'Công đoạn bồi hộp '.$num, 
-                            'value' => 'KT: '.$stage['length'] . ' x ' . $stage['width'] 
-                            .', CL: '.getFieldDataById('name', 'materals', @$stage['materal'])
-                            .', TB: '.getFieldDataById('name', 'devices', @$stage['machine'])
-                        ];   
-                    }
-                }
-                if ($get_extra) {
-                    $arr[] = ['name' => 'Phát sinh chi tiết bồi khó', 'value' => @$handle['ext_price']];
-                }
+                $arr = [
+                    ['name' => 'Kích thước', 'value' => $handle['length'] . ' x ' . $handle['width']],
+                    ['name' => 'Chất liệu bồi', 'value' => getFieldDataById('name', 'materals', @$handle['materal'])],
+                    ['name' => 'Máy bồi', 'value' => getFieldDataById('name', 'devices', @$handle['machine'])],
+                    ['name' => 'Số bát', 'value' => @$handle['nqty'] ?? 1],
+                ]; 
                 break;
             case \TDConst::FINISH:
                 if (!empty($handle['stage'])) {
@@ -282,13 +273,13 @@ class WSalary extends Model
         $insert_command['qty'] = !empty($data_command['qty']) ? $data_command['qty'] : (int) @$data_command['handle']['handle_qty'];
         if (!empty($data_command['handle'])) {
             $insert_command['handle'] = is_array($data_command['handle']) ? 
-            WSalary::getHandleDataJson($insert_command['type'], $data_command['handle']) : 
+            self::getHandleDataJson($insert_command['type'], $data_command['handle']) : 
             $data_command['handle'];
             $insert_command['factor'] = !empty($data_command['handle']['factor']) ? (int) $data_command['handle']['factor'] : 1;
         }
         $insert_command['status'] = Order::NOT_ACCEPTED;
         (new \BaseService)->configBaseDataAction($insert_command);
-        return WSalary::insert($insert_command);  
+        return self::insert($insert_command);  
     }
 
     static function checkSubmitedProduct($product_id)

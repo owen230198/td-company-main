@@ -3,42 +3,25 @@
     <div class="row my-4 pb-3">
         <div class="col-lg-6 border_right_green mb-lg-0 mb-3">
             <div class="bg_eb radius_5 box_shadow_3 h-100 p-lg-3 p-2">
-                <h3 class="fs-14 text-uppercase border_bot pb-1 mb-3 text-center handle_title color_green mx-auto">Thông tin đơn</h3>   
-                <p class="d-flex align-items-center color_green mb-2">
-                    <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
-                    <span>Mã đơn</span> : <strong class="color_main ml-1">{{ @$data_product->code }}.</strong>
-                </p>  
-                <p class="d-flex align-items-center color_green mb-2">
-                    <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
-                    Tên sản phẩm : <strong class="color_main ml-1">{{ @$data_product->name }}.</strong>
-                </p>  
-                <p class="d-flex align-items-center color_green mb-2">
-                    <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
-                    Nhóm sản phẩm : <strong class="color_main ml-1">{{ getFieldDataById('name', 'product_categories', $data_product->category) }}.</strong>
-                </p>
-                <p class="d-flex align-items-center color_green mb-2">
-                    <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
-                    Ngày đặt : <strong class="color_main ml-1">{{ getDateTimeFormat($data_product->created_at) }}.</strong>
-                </p>
+                <h3 class="fs-14 text-uppercase border_bot pb-1 mb-3 text-center handle_title color_green mx-auto">Thông tin đơn</h3>
+                @include('Worker::commands.info_item', ['note' => 'Mã đơn', 'value' => @$data_product->code])   
+                @include('Worker::commands.info_item', ['note' => 'Tên sản phẩm', 'value' => @$data_product->name])  
+                @include('Worker::commands.info_item', ['note' => 'Số lượng sản phẩm', 'value' => @$data_product->qty])  
+                @include('Worker::commands.info_item', ['note' => 'Nhóm sản phẩm', 'value' => getFieldDataById('name', 'product_categories', @$data_product->category)]) 
+                @include('Worker::commands.info_item', ['note' => 'Kiểu hộp', 'value' => getFieldDataById('name', 'product_styles', @$data_product->product_style)])
+                @include('Worker::commands.info_item', ['note' => 'Kích thước hộp', 'value' => getSizeTitleProduct($data_product)])
+                @include('Worker::commands.info_item', ['note' => 'Ngày đặt', 'value' => getDateTimeFormat($data_order->created_at)])
+                @include('Worker::commands.info_item', ['note' => 'Ngày trả', 'value' => getDateTimeFormat($data_order->return_time)])
+                @include('Worker::commands.info_item', ['note' => 'Kinh doanh', 'value' => getFieldDataById('name', 'n_users', @$data_order->created_by)])
+                @if (!empty($arr_handle['note']))
+                    @include('Worker::commands.info_item', ['note' => 'Ghi chú', 'value' => $arr_handle['note']])
+                @endif
             </div>
         </div>
         <div class="col-lg-6">
             <div class="bg_eb radius_5 box_shadow_3 h-100 p-lg-3 p-2">
                 <h3 class="fs-14 text-uppercase border_bot pb-1 mb-3 text-center handle_title color_green mx-auto">Thông tin sản xuất</h3>
-                @include('Worker::commands.base_command_info')
-                <p class="d-flex align-items-center color_green mb-2">
-                    <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
-                    Số lượng : <strong class="color_main ml-1">{{ (int) @$data_command->qty }}.</strong>
-                </p> 
-                <p class="d-flex align-items-center color_green mb-2">
-                    <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
-                    Loại thiết bị : <strong class="color_main ml-1">{{ getTextMachineType($view_type, @$data_command->machine_type) }}.</strong>
-                </p>
-                <p class="d-flex align-items-center color_green mb-2">
-                    <i class="fa fa-asterisk mr-1 fs-14 color_yellow" aria-hidden="true"></i>
-                    Trạng thái : <strong class="color_main ml-1">{{ getStatusWorkerCommand($data_command) }}.</strong>
-                </p>
-            </div>        
+                @include('Worker::commands.base_command_info')      
         </div>
     </div> 
     @include('Worker::commands.submit_modal', ['form' => 'form_checkout', 'm_name' => 'submit'])

@@ -36,7 +36,7 @@
                 $data['product_obj'] = $product;
                 $group_user = \GroupUser::getCurrent();
                 if ($group_user == \GroupUser::PLAN_HANDLE) {
-                    $data['elements'] = getProductElementData($product['category'], $product['id'], true, true, true);
+                    $data['elements'] = getProductElementData($product['category'], $product['id'], true, false, true);
                     $elements = collect($data['elements']);
                     $first_element = $elements->first();
                     $data['key_supply'] = !empty($request->get('key_supply')) ? $request->get('key_supply') : ($first_element['pro_field'] ?? \TDConst::PAPER);

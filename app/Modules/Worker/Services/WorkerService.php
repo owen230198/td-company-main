@@ -2,6 +2,7 @@
 namespace App\Modules\Worker\Services;
 
 use App\Models\Notify;
+use App\Models\Order;
 use App\Models\Paper;
 use App\Models\Product;
 use App\Services\BaseService;
@@ -85,12 +86,16 @@ class WorkerService extends BaseService
         }
         $data['supply'] = $supply;
         $data['data_command'] = $data_command;
-        $data['all_devices'] = getArrHandleField($data_command->table_supply);
+        $data['all_devices'] = getArrHandleField($data_command->table_supply, true);
         $data['title'] = 'Chi tiết lệnh sản xuất '.$data_command->command;
         $worker_type = @$worker['type'];
         $handle = !empty($supply->{$worker_type}) ? json_decode($supply->{$worker_type}, true) : [];
         $data['data_handle'] = WSalary::getHandleDataJson($worker_type, $handle, true);
-        $data['data_product'] = \DB::table('products')->find($supply->product);
+        $data_product = Product::find($supply->product);
+        $data['data_product'] = $data_product;
+        $data['data_order'] = Order::find(@$data_product->order);
+        $data['arr_handle'] = $handle;
+        $data['data_size'] = !empty($supply->size) ? json_decode($supply->size, true) : [];
         $data['view_type'] = $worker_type;
         return view('Worker::commands.view', $data);
     }

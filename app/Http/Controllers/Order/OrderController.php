@@ -218,6 +218,7 @@
 
         public function supplyHandle(Request $request)
         {
+            $is_post = $request->isMethod('POST');
             if (\GroupUser::isPlanHandle()) {
                 $table = $request->input('table');
                 $id = $request->input('id');
@@ -225,17 +226,25 @@
                 if (empty($data_supply)) {
                     return back()->with('error', 'Dữ liệu không hợp lệ !');
                 }
-                if ($table == 'papers') {
-                    $data_supply->type = \TDConst::PAPER;    
-                }elseif ($table == 'fill_finishes') {
-                    $data_supply->type = \TDConst::FILL_FINISH; 
+                
+                if ($table == 'fill_finishes') {
+                    $supp_size = !empty($data_supply->magnet) ? json_decode($data_supply->magnet, true) : [];
+                    $data_supply->type = \TDConst::FILL_FINISH;  
+                }else{
+                    $supp_size = !empty($data_supply->size) ? json_decode($data_supply->size, true) : [];
+                    if ((empty($supp_size['materal']) || empty($supp_size['qtv']) || empty($supp_size['supp_qty']))) {
+                        return customReturnMessage(false, $is_post, ['message' => 'Dữ liệu vật tư không hợp lệ, vui lòng thông báo bộ phận kỹ thuật kiểm tra lại !']);
+                    }
                 }
-                // if (getHandleSupplyStatus($data_supply->product, $data_supply->id, $data_supply->type) != CSupply::NOT_HANDLE) {
-                //     return back()->with('error', 'Vật tư đang được xử lí bởi kế toán kho !');
+                if ($table == 'papers') {
+                    $data_supply->type = \TDConst::PAPER;
+                }
+                // if (@$data_supply->status != Order::TECH_SUBMITED) {
+                //     return customReturnMessage(false, $is_post, ['message' => 'Dữ liệu không hợp lệ !']);
                 // }
-                $supp_size = !empty($data_supply->size) ? json_decode($data_supply->size, true) : [];
+                
                 if (!empty($data_supply)) {
-                    if ($request->isMethod('GET')) {
+                    if (!$is_post) {
                         $data['supply_obj'] = $data_supply;
                         $data['title'] = 'Xử lí vật tư sản xuất sản phẩm '.getFieldDataById('name', 'products', $data_supply->product);
                         $data['parent_url'] = ['link' => getBackUrl(), 'note' => 'Danh sách vật tư cần xử lí'];

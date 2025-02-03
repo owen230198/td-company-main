@@ -321,7 +321,7 @@
                 ['key' => self::METALAI, 'name' => 'Chất liệu cán metalai', 'table' => 'supply_types'],
                 ['key' => self::COVER, 'name' => 'Chất liệu cán phủ trên', 'table' => 'supply_types'],
                 ['key' => self::UV, 'name' => 'Mực in', 'table' => 'supply_types'],
-                ['key' => self::EMULSION, 'name' => 'Loại nhũ', 'table' => 'supply_names'],
+                ['key' => self::EMULSION, 'name' => 'Loại nhũ', 'table' => 'supply_types'],
             ],
             self::CARTON => [
                 ['key' => self::CARTON, 'name' => 'Loại vật tư carton', 'table' => 'supply_types'],

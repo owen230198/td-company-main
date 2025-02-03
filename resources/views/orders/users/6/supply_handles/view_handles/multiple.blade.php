@@ -8,7 +8,7 @@
 <div class="__module_multiple_handle_supply">
     <h3 class="fs-14 text-uppercase border_top_eb pt-3 mt-3 text-center handle_title">
         {{ @$arr_items['title_handle'] ?? 
-            'Xuất vật tư '. @$arr_items['note'].' | '.getFieldDataById('name', 'supply_types', $arr_items['supp_price']).' | '.getFieldDataById('name', 'supply_prices', $arr_items['qtv']) }}
+            'Xuất vật tư '. @$arr_items['note'].' | '.getFieldDataById('name', 'supply_types', $arr_items['supp_price']).' | '.getFieldDataById('name', 'supply_prices', @$arr_items['qtv']) }}
     </h3>
     <div class="__supply_handle_list" data-need ="{{ @$arr_items['base_need'] ?? 0 }}" data-type="{{ $type }}">
         @include('orders.users.6.supply_handles.view_handles.'.$type.'.item', $arr_items)

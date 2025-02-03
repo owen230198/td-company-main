@@ -1,4 +1,13 @@
 @php
+    $where_chose = [
+                        'type' => $key_supp,
+                        'target' => $supp_price,
+                        'except_value' => '{"field" :"id","value":"'.@$except_value.'"}',
+                        'status' => 'imported'
+                    ];
+    if (!empty($qtv)) {
+        $where_chose['qtv'] = $qtv;
+    }
     $chose_supp = [
         'name' => 'c_supply[square]['.$key_supp.']['.$index.'][size_type]',
         'type' => 'linking',
@@ -9,11 +18,7 @@
             'config' => ['search' => 1, 'except_linking' => 1], 
             'data' => [
                 'table' => 'supply_warehouses', 
-                'where' => ['type' => $key_supp,
-                            'target' => $supp_price,
-                            'qtv' => $qtv,
-                            'except_value' => '{"field" :"id","value":"'.@$except_value.'"}',
-                            'status' => 'imported']
+                'where' => $where_chose
             ]
         ]
     ]

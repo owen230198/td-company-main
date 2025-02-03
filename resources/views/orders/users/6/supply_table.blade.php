@@ -89,7 +89,7 @@
                                 href="{{ url('supply-handmade?table='.$element['table'].'&id='.$data->id) }}"
                                 title="Tính vật tư thủ công">
                                 <i class="fa fa-plus" aria-hidden="true"></i> 
-                            </a> 
+                            </a>
                         </div>
                     </td>
                 </tr>

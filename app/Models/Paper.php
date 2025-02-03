@@ -62,7 +62,6 @@ class Paper extends Model
             if (@$paper['handle_type'] == \TDConst::MADE_BY_PARTNER) {
                 $process_product['id'] = !empty($paper['id']) ? $paper['id'] : 0;
                 $process_product['name'] = $paper['name'];
-                $process_product['ext_name'] = $paper['ext_name'];
                 $process_product['qty'] = $paper['qty'];
                 $process_product['delivery'] = $paper['qty'];
                 $process_product['made_by'] = @$paper['made_by'];
@@ -83,6 +82,7 @@ class Paper extends Model
                 $dataItem = !empty($paper['id']) ? Paper::find($paper['id']) : '';
                 $data_process = $this->getDataHandle($paper, $dataItem);
                 $data_process['id'] = !empty($paper['id']) ? $paper['id'] : 0;
+                $data_process['ext_name'] = @$paper['ext_name'];
                 $data_process['name'] = $paper['name'];
                 $data_process['product_qty'] = $paper['qty'];
                 $data_process['product'] = $product_id;

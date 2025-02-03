@@ -167,7 +167,7 @@ class OrderService extends BaseService
     private function validateHankSupplyHandle($supp_qsuare, $type, $update_size = false)
     {
         foreach ($supp_qsuare as $square) {
-            if (@$square['qty'] == 0) {
+            if ((float) @$square['qty'] == 0) {
                 return returnMessageAjax(100, 'Số lượng vật tư '.getSupplyNameByKey($type).' Không hợp lệ !');
             }
             if ($update_size && (empty($square['cut_width']) || empty($square['cut_length']))) {
@@ -217,13 +217,15 @@ class OrderService extends BaseService
 
     private function planHandleBaseSupply($supplies, $supply, $type, $table)
     {
-        foreach ($supplies as $data) {
-            if (!empty($data['size_type'])) {
-                if (!empty($data['lack']) && !next($supplies)) {
-                    SupplyBuying::insertBuyExistData($data['size_type'], $data['lack'], SupplyBuying::FOR_ORDER);
-                    $data['qty'] += $data['lack'];
+        if (!empty($supplies)) {
+            foreach ($supplies as $data) {
+                if (!empty($data['size_type'])) {
+                    if (!empty($data['lack']) && !next($supplies)) {
+                        SupplyBuying::insertBuyExistData($data['size_type'], $data['lack'], SupplyBuying::FOR_ORDER);
+                        $data['qty'] += $data['lack'];
+                    }
+                    CSupply::insertCommand($data, $supply);
                 }
-                CSupply::insertCommand($data, $supply);
             }
         }
         $this->applySupplyToWorker($table, $supply->id);
@@ -325,26 +327,24 @@ class OrderService extends BaseService
     {
         $supp_key = \TDConst::MAGNET;
         $magnets = @$c_supply[$supp_key] ?? [];
-        if (!empty($magnets)) {
-            $validate = $this->validateHankSupplyHandle($magnets, $supp_key);
-            if (@$validate['code'] == 100) {
-                return $validate;
-            }
-            $this->planHandleBaseSupply($magnets, $supply, $supp_key, 'fill_finishes');
-            return returnMessageAjax(200, 'Đã gửi yêu cầu xử lí vật tư thành công!', getBackUrl());
-            
-        }else{
-            return returnMessageAjax(100, 'Bạn chưa chọn vật tư trong kho !');
+        if (checkNeedHandleMagnet($size) && empty($magnets)) {
+            return returnMessageAjax(100, 'Bạn chưa chọn vật tư nam châm để xuất !');
         }
+        $validate = $this->validateHankSupplyHandle($magnets, $supp_key);
+        if (@$validate['code'] == 100) {
+            return $validate;
+        }
+        $this->planHandleBaseSupply($magnets, $supply, $supp_key, 'fill_finishes');
+        return returnMessageAjax(200, 'Đã gửi yêu cầu xử lí vật tư thành công!', getBackUrl());
     }
 
     public function applySupplyToWorker($table, $id)
     {
         $supply = \DB::table($table)->find($id);
         $product_id = $supply->product;
-        if (@$supply->status != Order::TECH_SUBMITED) {
-            return back()->with('error', 'Dữ liệu không hợp lệ !');
-        }
+        // if (@$supply->status != Order::TECH_SUBMITED) {
+        //     return returnMessageAjax(100, 'Dữ liệu không hợp lệ !');
+        // }
         $process = $this->createWorkerCommandForSupply($table, $supply);
         if ($process) {
             $all_supply = Product::getAllSupply($product_id, ['id', 'status'], true);
@@ -384,12 +384,13 @@ class OrderService extends BaseService
             if ($type == \TDConst::FILL && !empty($data_handle['stage'])) {
                 foreach ($data_handle['stage'] as $fillkey => $stage) {
                     if (!empty($stage['cost'])) {
+                        $data_command['qty'] = @$stage['handle_qty'] ?? $data_handle['handle_qty'];
                         $data_command['name'] = getFieldDataById('name', 'products', $supply->product).'('.getFieldDataById('name', 'materals', @$stage['materal']).')';
                         $data_command['fill_handle'] = json_encode($stage);
                         $data_command['handle'] = $stage;
                         $data_command['machine_type'] = getFieldDataById('type', 'devices', $stage['machine']);
                         $data_command['fill_materal'] = $stage['materal'];
-                        $fill_code = $code.''.getCharaterByNum($fillkey);
+                        $fill_code = $code.'-'.getCharaterByNum($fillkey);
                         WSalary::commandStarted($fill_code, $data_command, $table_supply, $supply);
                     }
                 }

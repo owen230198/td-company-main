@@ -31,12 +31,15 @@
     <div class="d-flex justify-content-between align-items-center">
         <input type="number" name = 'product[{{ $pro_index }}][fill_finish][fill][stage][{{ $findex }}][length]' placeholder="KT chiều dài (cm)" 
         class="form-control short_input" step="any" value="{{ @$fill_data['length'] }}"> 
-        <span class="mx-2">X</span>
+        <span class="mx-1">X</span>
         <input type="number" name = 'product[{{ $pro_index }}][fill_finish][fill][stage][{{ $findex }}][width]' placeholder="KT chiều rộng (cm)" 
         class="form-control short_input" step="any" value="{{ @$fill_data['width'] }}"> 
-        <span class="mx-2">||</span> 
+        <span class="mx-1">||</span> 
         @include('view_update.linking', $data_select_fill)
-        <span class="mx-2">||</span> 
+        <span class="mx-1">||</span> 
         @include('view_update.linking', $fill_device_select)
+        <span class="mx-1">||</span>
+        <input type="number" name = 'product[{{ $pro_index }}][fill_finish][fill][stage][{{ $findex }}][nqty]' placeholder="Số bát" 
+        class="form-control short_input" step="any" value="{{ @$fill_data['nqty'] ?? 1 }}"> 
     </div>
 </div>

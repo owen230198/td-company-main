@@ -51,7 +51,11 @@ trait QSupplyTrait
             $shape_price = (float) @$data_machine['shape_price'];
             $fill['stage'][$key]['work_price'] = $work_price;
             $fill['stage'][$key]['shape_price'] = $shape_price;
-            $fill['stage'][$key]['cost'] =  (($fill['stage'][$key]['cost'] + $work_price) * self::$base_qty_pro) + $shape_price;
+            $stage_nqty = @$item['nqty'] ?? 1;
+            $fill['stage'][$key]['nqty'] = $stage_nqty;
+            $stage_handle_qty = ceil(self::$base_qty_pro / $stage_nqty);
+            $fill['stage'][$key]['handle_qty'] = $stage_handle_qty;
+            $fill['stage'][$key]['cost'] =  (($fill['stage'][$key]['cost'] + $work_price) * $stage_handle_qty) + $shape_price;
          }
          $fill_cost += $fill['stage'][$key]['cost'];
       }

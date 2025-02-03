@@ -58,8 +58,7 @@
                 ],
                 'other_data' => [
                     'data' => [
-                        'table' => 'paper_extends',
-                        'field_value' => 'name'
+                        'table' => 'paper_extends'
                     ]
                 ]
             ] 

@@ -55,16 +55,28 @@
                         <span class="mr-1">Giấy bồi : </span>
                         <p class="font_bold">{{ getFieldDataById('name', 'materals', @$fstage['materal']) }}</p>
                     </div>
+                    <div class="mb-2 d-flex align-items-center">
+                        <span class="mr-1">Thiết bị : </span>
+                        <p class="font_bold">{{ getFieldDataById('name', 'devices', @$fstage['machine']) }}</p>
+                    </div>
+                    <div class="mb-2 d-flex align-items-center">
+                        <span class="mr-1">Số bát : </span>
+                        <p class="font_bold">{{ @$fstage['nqty'] ?? 1 }}</p>
+                    </div>
                     @if (\GroupUser::isAdmin())
                         <div class="mb-2 d-flex align-items-center">
                             <span class="mr-1">ĐG giấy bồi : </span>
                             <p class="font_bold">{{ $fstage['qttv_price'] }}đ</p>
                         </div>
                         <div class="mb-2 d-flex align-items-center">
+                            <span class="mr-1">ĐG chỉnh máy : </span>
+                            <p class="font_bold">{{ @$fstage['shape_price'] }}đ</p>
+                        </div>
+                        <div class="mb-2 d-flex align-items-center">
                             <span class="mr-1">Chi phí : </span>
                             <p class="font_bold color_red">
-                                ((Dài x Rộng x ĐG giấy bồi + ĐG lượt) x SL sản phẩm) + ĐG chỉnh máy = 
-                                (({{ $fstage['length'] }} x {{ $fstage['width'] }} x {{ $fstage['qttv_price'] }} + {{ (float) @$fstage['work_price'] }}) x {{ $stage['qty_pro'] }}) + {{ (float) @$fstage['shape_price'] }}
+                                ((Dài x Rộng x ĐG giấy bồi + ĐG lượt) x (SL sản phẩm / số bát)) + ĐG chỉnh máy = 
+                                (({{ $fstage['length'] }} x {{ $fstage['width'] }} x {{ $fstage['qttv_price'] }} + {{ (float) @$fstage['work_price'] }}) x {{ $fstage['handle_qty'] }}) + {{ (float) @$fstage['shape_price'] }}
                                 = {{ number_format((float) @$fstage['cost']) }}đ
                             </p>
                         </div>
