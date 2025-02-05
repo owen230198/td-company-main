@@ -95,6 +95,7 @@ class WorkerService extends BaseService
         $data['data_product'] = $data_product;
         $data['data_order'] = Order::find(@$data_product->order);
         $data['arr_handle'] = $handle;
+        $data['handled'] = !empty($handle['handled']) ? $handle['handled'] : 0;
         $data['data_size'] = !empty($supply->size) ? json_decode($supply->size, true) : [];
         $data['view_type'] = $worker_type;
         return view('Worker::commands.view', $data);

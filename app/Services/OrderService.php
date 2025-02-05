@@ -209,13 +209,13 @@ class OrderService extends BaseService
             }
         }
         foreach ($squares as $key => $supp_qsuare) {
-            $this->planHandleBaseSupply($supp_qsuare, $supply, $key, 'papers');
+            $this->planHandleBaseSupply($supp_qsuare, $supply, 'papers', false);
         }
         $this->applySupplyToWorker('papers', $supply->id);
         return returnMessageAjax(200, 'Đã gửi yêu cầu xử lí vật tư thành công!', getBackUrl());
     }
 
-    private function planHandleBaseSupply($supplies, $supply, $type, $table)
+    private function planHandleBaseSupply($supplies, $supply, $table, $apply = true)
     {
         if (!empty($supplies)) {
             foreach ($supplies as $data) {
@@ -228,7 +228,9 @@ class OrderService extends BaseService
                 }
             }
         }
-        $this->applySupplyToWorker($table, $supply->id);
+        if ($apply) {
+            $this->applySupplyToWorker($table, $supply->id);
+        }
     }
 
     public function supply_handle_carton($supply, $size, $c_supply)
@@ -289,7 +291,7 @@ class OrderService extends BaseService
             if (@$validate_square['code'] == 100) {
                 return $validate_square;
             }
-            $this->planHandleBaseSupply($squares, $supply, $supp_key, $table);
+            $this->planHandleBaseSupply($squares, $supply, $table);
             return returnMessageAjax(200, 'Đã gửi yêu cầu xử lí vật tư thành công!', getBackUrl());
         }else{
             return returnMessageAjax(100, 'Bạn chưa chọn vật tư trong kho !');
@@ -304,7 +306,7 @@ class OrderService extends BaseService
             if (@$validate_square['code'] == 100) {
                 return $validate_square;
             }
-            $this->planHandleBaseSupply($supplies, $supply, $supp_key, 'supplies');
+            $this->planHandleBaseSupply($supplies, $supply, 'supplies');
             $supply_size = json_decode($supply->size, true);
             // updatePriceConfigSupply('supplies', 'size', $supply_size, $supply);
             return returnMessageAjax(200, 'Đã gửi yêu cầu xử lí vật tư thành công!', getBackUrl());
@@ -334,7 +336,7 @@ class OrderService extends BaseService
         if (@$validate['code'] == 100) {
             return $validate;
         }
-        $this->planHandleBaseSupply($magnets, $supply, $supp_key, 'fill_finishes');
+        $this->planHandleBaseSupply($magnets, $supply, 'fill_finishes');
         return returnMessageAjax(200, 'Đã gửi yêu cầu xử lí vật tư thành công!', getBackUrl());
     }
 

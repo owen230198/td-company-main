@@ -128,7 +128,7 @@ Route::middleware(['check_login'])->group(function () {
 	Route::any('supply-debt', [SupplyBuyingController::class, 'supplyDebt']);
 
 	//KCS route
-	Route::post('after-print-kcs/{id}',[ProductController::class, 'afterPrintKcs']);
+	Route::any('after-print-kcs/{id}',[ProductController::class, 'afterPrintKcs']);
 	Route::any('kcs-take-in-req/{id}', [ProductController::class, 'KCSTakeInRequirement']);
 	Route::any('product-require-rework/{id}', [ProductController::class, 'productRequireRework']);
 

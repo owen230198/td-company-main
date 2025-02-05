@@ -10,16 +10,16 @@
         </div>
         <div class="modal-body">
             <div class="form-group d-flex mb-2">
-                <label class="mb-0 min_150 fs-13 text-capitalize justify-content-end mr-3 d-flex mt-1">
-                    Số lượng hoàn thành
+                <label class="mb-0 min_150 fs-13 text-capitalize justify-content-end mr-3 d-flex">
+                    SL tốt cần
                 </label>
-                <input type="number" name="qty" class="form-control" min="1" value="{{ @$data_command->qty }}" placeholder="Hoàn thành hết">
+                <p>{{ @$supply->base_supp_qty }} {{ !empty($arr_handle['handled']) ? ' (đã hoàn thành được '.$arr_handle['handled'].')' : '' }}</p>
             </div>
             <div class="form-group d-flex mb-2">
                 <label class="mb-0 min_150 fs-13 text-capitalize justify-content-end mr-3 d-flex mt-1">
-                    Số lượng thừa
+                    SL tốt cần thực tế
                 </label>
-                <input type="number" name="exess" class="form-control" min="0" value="0" >
+                <input type="number" name="qty" class="form-control" min="1" value="{{ @$data_command->qty }}" placeholder="Hoàn thành hết">
             </div>
         </div>
         <div class="modal-footer">

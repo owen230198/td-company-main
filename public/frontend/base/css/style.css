@@ -807,6 +807,13 @@ input[type="checkbox"].toggle:disabled::after {
     cursor: pointer;
 }
 
+
+@media (max-width: 992px) {
+    .medium_popup .modalAction.modal .modal-dialog, .small_popup .modalAction.modal .modal-dialog{
+        max-width: 97%;
+    }
+}
+
 @media (min-width: 992px) {
     .col_lg_5 {
         -webkit-box-flex: 0;

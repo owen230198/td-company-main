@@ -9,7 +9,8 @@
     use App\Models\Order;
     use App\Models\Paper;
     use App\Models\Product;
-    use App\Models\WUser;
+use App\Models\WSalary;
+use App\Models\WUser;
     use Illuminate\Http\Request;
     class ProductController extends Controller
     {
@@ -443,8 +444,60 @@
         {
             if (\GroupUser::isKCS() || \GroupUser::isAdmin()) {
                 $obj = AfterPrint::find($id);
-                if (empty($obj) || @$obj->status != \StatusConst::PROCESSING) {
-                    return returnMessageAjax(100, 'Dữ liệu không hợp lệ !');
+                $is_post = $request->isMethod('POST');
+                if (@$obj->status != \StatusConst::PROCESSING) {
+                    return customReturnMessage(false, $is_post, ['message' => 'Dữ liệu không hợp lệ !']);
+                }
+                $data_salary = WSalary::find($obj->w_salary);
+                if (empty($data_salary)) {
+                    return customReturnMessage(false, $is_post, ['message' => 'Dữ liệu không hợp lệ !']);
+                }
+                $data_supply = getModelByTable($data_salary->table_supply)::find($data_salary->supply);
+                if (empty($data_supply)) {
+                    return customReturnMessage(false, $is_post, ['message' => 'Dữ liệu không hợp lệ !']);
+                }
+                if (!$is_post) {
+                    $data['title'] = 'KCS sau in lệnh '.$obj->code;
+                    $data['dataItem'] = $obj;
+                    $data['fields'] = [
+                        [
+                            'name' => '',
+                            'note' => 'Số lượng tốt cần',
+                            'attr' => ['readonly' => 1],
+                            'value' => @$data_supply->base_supp_qty,
+                            
+                        ],
+                        [
+                            'name' => '',
+                            'note' => 'Tên lệnh',
+                            'attr' => ['readonly' => 1],
+                            'value' => $obj->name,
+                        ],
+                        [
+                            'name' => '',
+                            'note' => 'Công nhân phụ trách',
+                            'attr' => ['readonly' => 1],
+                            'value' => getFieldDataById('name', 'w_users', $obj->worker),
+                        ],
+                        [
+                            'name' => '',
+                            'note' => 'Thợ in xác nhận tốt cần thực tế',
+                            'attr' => ['readonly' => 1],
+                            'value' => $obj->qty,
+                        ],
+                        [
+                            'name' => 'qty',
+                            'note' => 'KCS xác nhận (tốt cần)',
+                            'attr' => ['type_input' => 'number'],
+                            'value' => $obj->qty,
+                        ],
+                        [
+                            'name' => 'demo_qty',
+                            'note' => 'SL loại B (thử máy)',
+                            'attr' => ['type_input' => 'number'],
+                        ]
+                    ];
+                    return view('after_prints.view', $data);
                 }
                 $qty = (int) $request->input('qty');
                 $obj_qty = (int) $obj->qty;
@@ -452,7 +505,7 @@
                     return returnMessageAjax(100, 'Số lượng bạn nhập không hợp lệ !');
                 }
                 $obj_salary = \DB::table('w_salaries')->where('id', $obj->w_salary);
-                $data_salary = $obj_salary->find($obj->w_salary);
+                
                 if (empty($obj_salary)) {
                     return returnMessageAjax(100, 'Lệnh sản xuất không tồn tại hoặc đã bị xóa');
                 }
