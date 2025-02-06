@@ -15,6 +15,8 @@
                     <th scope="col">Mã lệnh</th>
                     <th scope="col">Tên lệnh</th>
                     <th scope="col">Số lượng</th>
+                    <th scope="col">Loại B nhận được</th>
+                    <th scope="col">Thử máy làm hỏng</th>
                     <th scope="col">ĐG lượt</th>
                     <th scope="col">ĐG lên khuôn</th>
                     <th scope="col">Hệ số</th>
@@ -35,6 +37,12 @@
                         </td>
                         <td data-label="Số lượng:">
                             {{ $item->qty }}
+                        </td>
+                        <td data-label="SL loại B nhận được:">
+                            {{ $item->demo_qty }}
+                        </td>
+                        <td data-label="SL loại B làm hỏng:">
+                            {{ $item->bad_demo_qty }}
                         </td>
                         <td data-label="ĐG lượt:">
                             {{ number_format($item->work_price) }}đ

@@ -18,7 +18,7 @@
             @include('view_update.view', [
                 'name' => '',
                 'note' => 'SL tốt cần',
-                'min_label' => 150,
+                'min_label' => 165,
                 'attr' => ['disable_field' => 1],
                 'value' => $base_qty_text
             ])
@@ -26,14 +26,14 @@
                 @include('view_update.view', [
                     'name' => '',
                     'note' => 'SL thợ in xác nhận',
-                    'min_label' => 150,
+                    'min_label' => 165,
                     'attr' => ['disable_field' => 1],
                     'value' => @$print_handle['print_confirmed']
                 ]) 
                  @include('view_update.view', [
                     'name' => '',
                     'note' => 'SL KCS xác nhận',
-                    'min_label' => 150,
+                    'min_label' => 165,
                     'attr' => ['disable_field' => 1],
                     'value' => @$print_handle['handled']
                 ])  
@@ -42,9 +42,17 @@
                 'name' => 'qty',
                 'note' => 'SL tốt cần (hỏng)',
                 'attr' => ['type_input' => 'number'],
-                'min_label' => 150,
-                'placeholder' => @$data_command->qty
+                'min_label' => 165,
+                'value' => @$data_command->qty
             ])
+            @if ($view_type != \TDConst::PRINT)
+                @include('view_update.view', [
+                    'name' => 'bad_demo_qty',
+                    'note' => 'SL loại B thử máy (hỏng)',
+                    'attr' => ['type_input' => 'number', 'placeholder' => 'SL loại B để thử máy chỉ còn lại ' .$data_command->demo_qty],
+                    'min_label' => 165
+                ])    
+            @endif
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>

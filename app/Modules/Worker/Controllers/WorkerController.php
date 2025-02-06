@@ -50,7 +50,7 @@
                     return $this->services->detailCommand($data_command, $worker, $supply);
                     break;
                 case 'submit':
-                    return $this->services->submitCommand($obj_command, $data_command, $worker, $supply, (int) $request->input('qty'));
+                    return $this->services->submitCommand($obj_command, $data_command, $worker, $supply, (int) $request->qty, (int) $request->bad_demo_qty);
                     break;
                 case 'feedback':
                     return $this->services->workerfeedBack($data_command, $worker, $request->except('_token'));

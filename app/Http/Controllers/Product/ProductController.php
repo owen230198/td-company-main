@@ -485,6 +485,8 @@ use App\Models\WUser;
                 }
                 $type = $worker['type'];
                 $data_handle = !empty($data_supply->{$type}) ? json_decode($data_supply->{$type}, true) : [];
+                $data_handle['print_confirmed'] = (int) @$data_handle['print_confirmed'];
+                $data_handle['print_confirmed'] += $obj_qty;
                 $confirm = (new \App\Modules\Worker\Services\WorkerService)
                 ->checkInWorkerSalary($data_salary, $type, $qty, $data_supply, $data_handle, $worker, $obj_salary, $table_supply, $demo_qty);
                 if ($confirm) {
@@ -497,10 +499,6 @@ use App\Models\WUser;
                         $data_rework['qty'] = $bad_qty; 
                         CRework::insertData($data_rework);
                     }
-                    $data_handle['print_confirmed'] = (int) @$data_handle['print_confirmed'];
-                    $data_handle['print_confirmed'] += $qty;
-                    $data_supply->print = json_encode($data_handle);
-                    $data_supply->save();
                     $obj_salary->update(['bad_qty' => $bad_qty, 'status' => \StatusConst::SUBMITED]);
                     $obj->status = \StatusConst::SUBMITED;
                     $obj->save();

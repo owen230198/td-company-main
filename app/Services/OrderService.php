@@ -399,6 +399,7 @@ class OrderService extends BaseService
             }else{
                 if (!empty($data_handle['machine'])) {
                     $data_command['name'] = getNameCommandWorker($supply, getFieldDataById('name', 'products', $supply->product));
+                    $data_command['demo_qty'] = @$supply->compent_percent;
                     WSalary::CommandStarted($code, $data_command, $table_supply, $supply); 
                 }   
             }

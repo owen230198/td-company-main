@@ -104,13 +104,14 @@ class WorkerService extends BaseService
         return view('Worker::commands.view', $data);
     }
 
-    public function checkInWorkerSalary($data_command, $type, $qty, $supply, $data_handle, $worker, $obj, $table_supply, $demo_qty)
+    public function checkInWorkerSalary($data_command, $type, $qty, $supply, $data_handle, $worker, $obj, $table_supply, $demo_qty, $bad_demo_qty = 0)
     {
         $handle_config = $type == \TDConst::FILL ? json_decode($data_command->fill_handle, true) : $data_handle;
         $obj_salary = new WSalary($supply, $handle_config, $worker);
         $data_update = $obj_salary->totalhandle($qty, $type);
         $data_update['status'] = \StatusConst::SUBMITED;
         $data_update['qty'] = $qty;
+        $data_update['bad_demo_qty'] = $bad_demo_qty;
         $data_update['submited_at'] = \Carbon\Carbon::now();
         $update = $obj->update($data_update);
         $this_qty = $qty;
@@ -123,11 +124,14 @@ class WorkerService extends BaseService
                 if ($need_multiply) {
                     //nếu CT lương của lệnh hiện tại tính bằng SL vật tư và CT lương của bước tiếp theo tính bằng sl sản phẩm
                     $next_qty = $qty * $supply->nqty;
+                    $next_demo_qty = $demo_qty * $supply->nqty;
                 }elseif (!isQtyFormulaBySupply($type) && isQtyFormulaBySupply($next_data['type'])) {
                     //nếu CT lương của lệnh hiện tại tính bằng SL sản phẩm và CT lương của bước tiếp theo tính bằng sl vật tư
                     $next_qty = ceil($qty / $supply->nqty);
+                    $next_demo_qty = ceil($demo_qty / $supply->nqty);
                 }else{
                     $next_qty = $qty;
+                    $next_demo_qty = $demo_qty;
                 }
                 if ($type == \TDConst::FILL) {
                     //Nếu là bước bồi thì cần phải hoàn tất cả các công đoạn bồi mới được xuống bước hoàn thiện cuối
@@ -152,11 +156,12 @@ class WorkerService extends BaseService
                         $next_data['created_by'] = $data_command->created_by;
                         $product_name = getFieldDataById('name', 'products', $supply->product);
                         $next_data['name'] = getNameCommandWorker($supply, $product_name);
-                        $next_data['demo_qty'] = $demo_qty;
+                        $next_data['demo_qty'] = $next_demo_qty;
                         WSalary::commandStarted($data_command->command, $next_data, $table_supply, $supply);
                     }else{
                         // nếu lệnh tiếp theo có tồn tại mà chưa được ai nhận thì chỉ update thêm số lượng
-                        $exist_command->qty = (int) $exist_command->qty + $next_qty;
+                        $exist_command->qty = $next_qty;
+                        $exist_command->demo_qty += $next_demo_qty;
                         $exist_command->save();
                     }
                 }
@@ -195,12 +200,15 @@ class WorkerService extends BaseService
         }
     }
 
-    public function submitCommand($obj, $data_command, $worker, $supply, $qty){
+    public function submitCommand($obj, $data_command, $worker, $supply, $qty, $bad_demo_qty){
         if ($data_command->worker != $worker['id']) {
             return returnMessageAjax(100, 'Chấm công không thành công, Lệnh này không phải của bạn !');
         }
         if($data_command->status != \StatusConst::PROCESSING){
             return returnMessageAjax(100, 'Dữ liệu không hợp lệ !');
+        }
+        if ($bad_demo_qty > $data_command->demo_qty) {
+            return returnMessageAjax(100, 'Số lượng sản phẩm loại B bạn làm hỏng đã vượt quá số lượng cho phép !');
         }
         $type = $worker['type'];
         $data_handle = !empty($supply->{$type}) ? json_decode($supply->{$type}, true) : [];
@@ -217,11 +225,15 @@ class WorkerService extends BaseService
                 return returnMessageAjax(200, 'Bạn đã trả lệnh thành công !', url('Worker'));
             }
         }else{
+            $demo_qty = (int) $data_command->demo_qty;
+            $rest_demo_qty = $demo_qty - $bad_demo_qty;
+            $next_demo_qty = $rest_demo_qty;
             //nếu chấm công với số lượng không hết thì thêm lệnh mới treo ở ngoài
             if ($qty < $handle_qty) {
                 $re_insert['type'] = $type;
                 $re_insert['machine_type'] = $data_command->machine_type;
                 $re_insert['qty'] = $handle_qty - $qty;
+                $re_insert['demo_qty'] = $rest_demo_qty;
                 $re_insert['created_by'] = $data_command->created_by;
                 $re_insert['name'] = $data_command->name;
                 if ($type == \TDConst::FILL) {
@@ -230,6 +242,7 @@ class WorkerService extends BaseService
                     $re_insert['handle'] = $data_command->handle;
                 }
                 WSalary::commandStarted($data_command->command, $re_insert, $table_supply, $supply);
+                $next_demo_qty = 0;
             }
             if ($type == \TDConst::PRINT) {
                 $table_after_print = 'after_prints';
@@ -251,7 +264,7 @@ class WorkerService extends BaseService
                 } 
             }
             //Tính lương công nhân & lưu bảng lương
-            $update = $this->checkInWorkerSalary($data_command, $type, $qty, $supply, $data_handle, $worker, $obj, $table_supply, $handle_qty);
+            $update = $this->checkInWorkerSalary($data_command, $type, $qty, $supply, $data_handle, $worker, $obj, $table_supply, $next_demo_qty, $bad_demo_qty);
             if (!empty($update)) {
                 return returnMessageAjax(200, 'Bạn đã chấm công thành công với số lượng : '.$qty.' !', url('Worker'));  
             }else{
