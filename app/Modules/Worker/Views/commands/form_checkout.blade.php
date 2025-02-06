@@ -9,18 +9,42 @@
             </button>
         </div>
         <div class="modal-body">
-            <div class="form-group d-flex mb-2">
-                <label class="mb-0 min_150 fs-13 text-capitalize justify-content-end mr-3 d-flex">
-                    SL tốt cần
-                </label>
-                <p>{{ @$supply->base_supp_qty }} {{ !empty($arr_handle['handled']) ? ' (đã hoàn thành được '.$arr_handle['handled'].')' : '' }}</p>
-            </div>
-            <div class="form-group d-flex mb-2">
-                <label class="mb-0 min_150 fs-13 text-capitalize justify-content-end mr-3 d-flex mt-1">
-                    SL tốt cần thực tế
-                </label>
-                <input type="number" name="qty" class="form-control" min="1" value="{{ @$data_command->qty }}" placeholder="Hoàn thành hết">
-            </div>
+            @php
+                $base_qty_text = @$supply->base_supp_qty ?? @$supply->product_qty;
+                if (!empty($arr_handle['handled'])) {
+                    $base_qty_text .= ' (đã hoàn thành được '.$arr_handle['handled'].')';
+                }
+            @endphp
+            @include('view_update.view', [
+                'name' => '',
+                'note' => 'SL tốt cần',
+                'min_label' => 150,
+                'attr' => ['disable_field' => 1],
+                'value' => $base_qty_text
+            ])
+            @if (!empty($print_handle))
+                @include('view_update.view', [
+                    'name' => '',
+                    'note' => 'SL thợ in xác nhận',
+                    'min_label' => 150,
+                    'attr' => ['disable_field' => 1],
+                    'value' => @$print_handle['print_confirmed']
+                ]) 
+                 @include('view_update.view', [
+                    'name' => '',
+                    'note' => 'SL KCS xác nhận',
+                    'min_label' => 150,
+                    'attr' => ['disable_field' => 1],
+                    'value' => @$print_handle['handled']
+                ])  
+            @endif
+            @include('view_update.view', [
+                'name' => 'qty',
+                'note' => 'SL tốt cần (hỏng)',
+                'attr' => ['type_input' => 'number'],
+                'min_label' => 150,
+                'placeholder' => @$data_command->qty
+            ])
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>

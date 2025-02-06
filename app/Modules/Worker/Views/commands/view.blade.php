@@ -26,15 +26,15 @@
     </div> 
     @include('Worker::commands.submit_modal', ['form' => 'form_checkout', 'm_name' => 'submit'])
     @include('Worker::commands.submit_modal', ['form' => 'form_feedback', 'm_name' => 'feedback'])
-    <div class="group_btn_worker_form text-center">
+    <div class="group_btn_worker_form d-flex justify-content-center align-items-center">
         <button 
-        type="button" data-toggle="modal" data-target="#worker-feedback-modal" class="radius_5 box_shadow_3 btn btn-primary main_button smooth  font_bold text-center bg_green color_white __worker_feedback_btn" 
+        type="button" data-toggle="modal" data-target="#worker-feedback-modal" class="radius_5 box_shadow_3 btn btn-primary main_button smooth  font_bold text-center bg_green color_white __worker_feedback_btn mr-1" 
         data-id={{ $data_command->id }}>
             <i class="fa fa-quote-right fs-14 mr-1" aria-hidden="true"></i> Phản hồi
         </button>
         @if (workerCommandIsProcessing($data_command))
             <button 
-            type="button" data-toggle="modal" data-target="#worker-submit-modal" class="radius_5 box_shadow_3 btn btn-primary main_button smooth  font_bold text-center bg_green color_white __worker_submit_btn" 
+            type="button" data-toggle="modal" data-target="#worker-submit-modal" class="radius_5 box_shadow_3 btn btn-primary main_button smooth  font_bold text-center bg_green color_white __worker_submit_btn mr-1" 
             data-id={{ $data_command->id }}>
                 <i class="fa fa-check fs-14 mr-1" aria-hidden="true"></i> Xác nhận lệnh
             </button>

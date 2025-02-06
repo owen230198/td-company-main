@@ -98,10 +98,13 @@ class WorkerService extends BaseService
         $data['handled'] = !empty($handle['handled']) ? $handle['handled'] : 0;
         $data['data_size'] = !empty($supply->size) ? json_decode($supply->size, true) : [];
         $data['view_type'] = $worker_type;
+        if (WSalary::showPrintHandle($worker_type, $supply)) {
+            $data['print_handle'] = json_decode($supply->print, true);
+        }
         return view('Worker::commands.view', $data);
     }
 
-    public function checkInWorkerSalary($data_command, $type, $qty, $supply, $data_handle, $worker, $obj, $table_supply, $handle_qty)
+    public function checkInWorkerSalary($data_command, $type, $qty, $supply, $data_handle, $worker, $obj, $table_supply, $demo_qty)
     {
         $handle_config = $type == \TDConst::FILL ? json_decode($data_command->fill_handle, true) : $data_handle;
         $obj_salary = new WSalary($supply, $handle_config, $worker);
@@ -111,7 +114,6 @@ class WorkerService extends BaseService
         $data_update['submited_at'] = \Carbon\Carbon::now();
         $update = $obj->update($data_update);
         $this_qty = $qty;
-        
         if ($update) {
             $qty_check_update = (int) @$data_handle['handle_qty'];
             $next_data = getStageActiveStartHandle($table_supply, $data_command->supply, $type);
@@ -150,6 +152,7 @@ class WorkerService extends BaseService
                         $next_data['created_by'] = $data_command->created_by;
                         $product_name = getFieldDataById('name', 'products', $supply->product);
                         $next_data['name'] = getNameCommandWorker($supply, $product_name);
+                        $next_data['demo_qty'] = $demo_qty;
                         WSalary::commandStarted($data_command->command, $next_data, $table_supply, $supply);
                     }else{
                         // nếu lệnh tiếp theo có tồn tại mà chưa được ai nhận thì chỉ update thêm số lượng

@@ -18,4 +18,46 @@ class AfterPrint extends Model
         ];
         return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];
     }
+
+    static function getFields($obj, $base_supp_qty)
+    {
+        return [
+            [
+                'name' => '',
+                'note' => 'Số lượng tốt cần',
+                'attr' => ['readonly' => 1],
+                'value' => @$base_supp_qty,
+                
+            ],
+            [
+                'name' => '',
+                'note' => 'Tên lệnh',
+                'attr' => ['readonly' => 1],
+                'value' => $obj->name,
+            ],
+            [
+                'name' => '',
+                'note' => 'Công nhân phụ trách',
+                'attr' => ['readonly' => 1],
+                'value' => getFieldDataById('name', 'w_users', $obj->worker),
+            ],
+            [
+                'name' => '',
+                'note' => 'Thợ in xác nhận tốt cần thực tế',
+                'attr' => ['readonly' => 1],
+                'value' => $obj->qty,
+            ],
+            [
+                'name' => 'qty',
+                'note' => 'KCS xác nhận (tốt cần)',
+                'attr' => ['type_input' => 'number'],
+                'value' => $obj->qty,
+            ],
+            [
+                'name' => 'demo_qty',
+                'note' => 'SL loại B (thử máy)',
+                'attr' => ['type_input' => 'number'],
+            ]
+        ];
+    }
 }

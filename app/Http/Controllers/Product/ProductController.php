@@ -442,89 +442,51 @@ use App\Models\WUser;
 
         public function afterPrintKcs(Request $request, $id)
         {
-            if (\GroupUser::isKCS() || \GroupUser::isAdmin()) {
-                $obj = AfterPrint::find($id);
-                $is_post = $request->isMethod('POST');
-                if (@$obj->status != \StatusConst::PROCESSING) {
-                    return customReturnMessage(false, $is_post, ['message' => 'Dữ liệu không hợp lệ !']);
+            $is_post = $request->isMethod('POST');
+            if (!\GroupUser::isKCS() && !\GroupUser::isAdmin()) {
+                return customReturnMessage(false, $is_post, 'Bạn không có quyền thực hiện tao tác KCS sau in !');    
+            }
+            $obj = AfterPrint::find($id);
+            if (@$obj->status != \StatusConst::PROCESSING) {
+                return customReturnMessage(false, $is_post, ['message' => 'Dữ liệu không hợp lệ !']);
+            }
+            $obj_salary = \DB::table('w_salaries')->where('id', $obj->w_salary);
+            $data_salary = $obj_salary->find($obj->w_salary);
+            if (empty($data_salary)) {
+                return customReturnMessage(false, $is_post, ['message' => 'Dữ liệu không hợp lệ !']);
+            }
+            $table_supply = $data_salary->table_supply;
+            $data_supply = getModelByTable($table_supply)::find($data_salary->supply);
+            if (empty($data_supply)) {
+                return customReturnMessage(false, $is_post, ['message' => 'Dữ liệu không hợp lệ !']);
+            }
+            if (!$is_post) {
+                $data['title'] = 'KCS sau in lệnh '.$obj->code;
+                $data['dataItem'] = $obj;
+                $data['fields'] = AfterPrint::getFields($obj, $data_supply->base_supp_qty);
+                return view('after_prints.view', $data);
+            }else{
+                if (empty($request->qty) || empty($request->demo_qty)) {
+                    return returnMessageAjax(100, 'Vui lòng nhập đầy đủ thông tin KCS tờ in !');
                 }
-                $data_salary = WSalary::find($obj->w_salary);
-                if (empty($data_salary)) {
-                    return customReturnMessage(false, $is_post, ['message' => 'Dữ liệu không hợp lệ !']);
-                }
-                $data_supply = getModelByTable($data_salary->table_supply)::find($data_salary->supply);
-                if (empty($data_supply)) {
-                    return customReturnMessage(false, $is_post, ['message' => 'Dữ liệu không hợp lệ !']);
-                }
-                if (!$is_post) {
-                    $data['title'] = 'KCS sau in lệnh '.$obj->code;
-                    $data['dataItem'] = $obj;
-                    $data['fields'] = [
-                        [
-                            'name' => '',
-                            'note' => 'Số lượng tốt cần',
-                            'attr' => ['readonly' => 1],
-                            'value' => @$data_supply->base_supp_qty,
-                            
-                        ],
-                        [
-                            'name' => '',
-                            'note' => 'Tên lệnh',
-                            'attr' => ['readonly' => 1],
-                            'value' => $obj->name,
-                        ],
-                        [
-                            'name' => '',
-                            'note' => 'Công nhân phụ trách',
-                            'attr' => ['readonly' => 1],
-                            'value' => getFieldDataById('name', 'w_users', $obj->worker),
-                        ],
-                        [
-                            'name' => '',
-                            'note' => 'Thợ in xác nhận tốt cần thực tế',
-                            'attr' => ['readonly' => 1],
-                            'value' => $obj->qty,
-                        ],
-                        [
-                            'name' => 'qty',
-                            'note' => 'KCS xác nhận (tốt cần)',
-                            'attr' => ['type_input' => 'number'],
-                            'value' => $obj->qty,
-                        ],
-                        [
-                            'name' => 'demo_qty',
-                            'note' => 'SL loại B (thử máy)',
-                            'attr' => ['type_input' => 'number'],
-                        ]
-                    ];
-                    return view('after_prints.view', $data);
-                }
-                $qty = (int) $request->input('qty');
-                $obj_qty = (int) $obj->qty;
+                $qty = (int) $request->qty;
+                $demo_qty = (int) $request->demo_qty;
+                $obj_qty  = $obj->qty;
                 if ($qty > $obj_qty) {
-                    return returnMessageAjax(100, 'Số lượng bạn nhập không hợp lệ !');
+                    return returnMessageAjax(100, 'Số lượng đạt yêu cầu bạn nhập không hợp lệ !');
                 }
-                $obj_salary = \DB::table('w_salaries')->where('id', $obj->w_salary);
                 
-                if (empty($obj_salary)) {
-                    return returnMessageAjax(100, 'Lệnh sản xuất không tồn tại hoặc đã bị xóa');
-                }
                 if (@$data_salary->status != \StatusConst::CHECKING) {
                     return returnMessageAjax(100, 'Dữ liệu không hợp lệ!');
-                }
-                $table_supply = @$data_salary->table_supply;
-                $supply = \DB::table($table_supply)->find(@$data_salary->supply);
-                if (empty($supply)) {
-                    return returnMessageAjax(100, 'Dữ liệu đơn hàng không tồn tại hoặc đã bị xóa');
                 }
                 $worker = WUser::find($obj->worker);
                 if (empty($worker)) {
                     return returnMessageAjax(100, 'Dữ liệu công nhân không tồn tại hoặc đã bị xóa !');
                 }
                 $type = $worker['type'];
-                $data_handle = !empty($supply->{$type}) ? json_decode($supply->{$type}, true) : [];
-                $handle_qty = @$data_salary->qty ?? 0;
-                $confirm = (new \App\Modules\Worker\Services\WorkerService)->checkInWorkerSalary($data_salary, $type, $qty, $supply, $data_handle, $worker, $obj_salary, $table_supply, $handle_qty);
+                $data_handle = !empty($data_supply->{$type}) ? json_decode($data_supply->{$type}, true) : [];
+                $confirm = (new \App\Modules\Worker\Services\WorkerService)
+                ->checkInWorkerSalary($data_salary, $type, $qty, $data_supply, $data_handle, $worker, $obj_salary, $table_supply, $demo_qty);
                 if ($confirm) {
                     $bad_qty = $obj_qty - $qty;
                     if ($bad_qty > 0) {
@@ -533,22 +495,19 @@ use App\Models\WUser;
                         $data_rework['type'] = $type;
                         $data_rework['worker'] = $worker['id'];
                         $data_rework['qty'] = $bad_qty; 
-                        $data_rework['status'] = \StatusConst::NOT_ACCEPTED;
-                        $data_rework['rework_status'] = Product::NEED_REWORK;
-                        (new \BaseService)->configBaseDataAction($data_rework);
-                        $insert_id = CRework::insertGetId($data_rework);
-                        CRework::where('id', $insert_id)->update(['code' => 'RW-'.formatCodeInsert($insert_id)]);
-                        logActionUserData('insert', 'c_reworks', $insert_id);
+                        CRework::insertData($data_rework);
                     }
+                    $data_handle['print_confirmed'] = (int) @$data_handle['print_confirmed'];
+                    $data_handle['print_confirmed'] += $qty;
+                    $data_supply->print = json_encode($data_handle);
+                    $data_supply->save();
                     $obj_salary->update(['bad_qty' => $bad_qty, 'status' => \StatusConst::SUBMITED]);
                     $obj->status = \StatusConst::SUBMITED;
                     $obj->save();
-                    return returnMessageAjax(200, "Đã xử lý KCS lệnh in ".$data_salary->name." thành công cho công nhân ". $worker['name'], \StatusConst::RELOAD);
+                    return returnMessageAjax(200, "Đã xử lý KCS lệnh in ".$data_salary->name." thành công cho công nhân ". $worker['name'], \StatusConst::CLOSE_POPUP);
                 }else{
                     return returnMessageAjax(100, "Đã có lỗi xảy ra, vui lòng thử lại !");
                 } 
-            }else{
-                return returnMessageAjax(100, 'Bạn không có quyền thực hiện tao tác KCS sau in !');
             }
         }
 

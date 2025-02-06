@@ -72,7 +72,7 @@ class WSalary extends Model
             case \TDConst::SIZE:
                 $arr =  [
                     ['name' => 'Chất liệu giấy', 'value' => getFieldDataById('name', 'materals', @$handle['materal'])],
-                    ['name' => 'Định lượng', 'value' => @$handle['qttv']],
+                    ['name' => 'Định lượng', 'value' => @$handle['qtv']],
                     ['name' => 'KT khổ giấy', 'value' => @$handle['length'] . ' x '.$handle['width']]
                 ];
                  break;
@@ -86,18 +86,20 @@ class WSalary extends Model
                 break;
             case \TDConst::NILON:
                 $arr = [
-                    ['name' => 'Chất liệu cán', 'value' => getFieldDataById('name', 'materals', @$handle['materal'])],
+                    ['name' => 'Chất liệu cán', 'value' => getFieldDataById('name', 'supply_types', @$handle['materal'])],
+                    ['name' => 'Định lượng', 'value' => getFieldDataById('name', 'supply_prices', @$handle['qtv'])],
                     ['name' => 'Số mặt cán', 'value' => @$handle['face']],
                     ['id' => @$handle['machine'], 'name' => 'Máy cán', 'value' => getFieldDataById('name', 'devices', @$handle['machine'])]
                 ];
                 break;
             case \TDConst::METALAI:
                 $arr =  [
-                    ['name' => 'Chất liệu cán', 'value' => getFieldDataById('name', 'materals', @$handle['materal'])],
+                    ['name' => 'Chất liệu cán', 'value' => getFieldDataById('name', 'supply_types', @$handle['materal'])],
+                    ['name' => 'Định lượng', 'value' => getFieldDataById('name', 'supply_prices', @$handle['qtv'])],
                     ['name' => 'Số mặt cán', 'value' => @$handle['face']],
                 ];
                 if (!empty($handle['cover_materal'])) {
-                    $arr[] = ['name' => 'Chất liệu cán phủ trên', 'value' => getFieldDataById('name', 'materals', @$handle['cover_materal'])];
+                    $arr[] = ['name' => 'Chất liệu cán phủ trên', 'value' => getFieldDataById('name', 'supply_types', @$handle['cover_materal'])];
                 }
                 if (!empty($handle['cover_face'])) {
                     $arr[] = ['name' => 'Số mặt cán phủ trên', 'value' => @$handle['cover_face']];
@@ -115,7 +117,8 @@ class WSalary extends Model
                 break;
             case \TDConst::UV:
                 $arr = [
-                    ['name' => 'Mực in', 'value' => getFieldDataById('name', 'materals', @$handle['materal'])],
+                    ['name' => 'Mực in', 'value' => getFieldDataById('name', 'supply_types', @$handle['materal'])],
+                    ['name' => 'Định lượng', 'value' => getFieldDataById('name', 'supply_prices', @$handle['qtv'])],
                     ['name' => 'Số mặt in', 'value' => @$handle['face']],
                     ['id' => @$handle['machine'], 'name' => 'Máy in', 'value' => getFieldDataById('name', 'devices', @$handle['machine'])]
                 ];
@@ -331,5 +334,10 @@ class WSalary extends Model
             }
         }
         return true;
+    }
+
+    static function showPrintHandle($type, $supply)
+    {
+        return $type != \TDConst::PRINT && !empty($supply->print);
     }
 }

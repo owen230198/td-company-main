@@ -341,6 +341,9 @@
                     $item_stage = json_decode($dataItem[$stage], true);
                     $item_stage['handled_qty'] = 0;
                     $item_stage['handled'] = 0;
+                    if ($stage == \TDConst::PRINT) {
+                        $item_stage['print_confirmed'] = 0;
+                    }
                     $dataItem->{$stage} = json_encode($item_stage);
                 }
             }

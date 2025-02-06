@@ -18,4 +18,19 @@ class CRework extends Model
         ];
         return !empty($role[\GroupUser::getCurrent()]) ? $role[\GroupUser::getCurrent()] : [];
     }
+
+    static function insertData($data_rework)
+    {
+        
+        $data_rework['status'] = \StatusConst::NOT_ACCEPTED;
+        $data_rework['rework_status'] = Product::NEED_REWORK;
+        (new \BaseService)->configBaseDataAction($data_rework);
+        $insert_id = CRework::insertGetId($data_rework);
+        self::getInsertCode($insert_id);
+        logActionUserData('insert', 'c_reworks', $insert_id);
+    }
+
+    static function getInsertCode($id){
+        CRework::where('id', $id)->update(['code' => 'RW-'.formatCodeInsert($id)]);
+    }
 }

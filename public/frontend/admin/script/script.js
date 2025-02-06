@@ -1017,18 +1017,18 @@ var removeItemBaseModule = function(button, callback = '')
         confirmButtonColor: "#459300",
         buttons: ['Hủy', 'Xóa dữ liệu']
     }).then((action) => {
-        button.parent().remove();
-        if (typeof callback == 'function') {
-            callback();   
-        }
-        if (!empty(id)) {
-            if (action) {
+        if (action) {
+            button.parent().remove();
+            if (typeof callback == 'function') {
+                callback();   
+            }
+            if (!empty(id)) {
                 ajaxBaseCall({
                     url: getBaseRoute('remove?ajax=1'),
                     type: 'DELETE',
                     data: { remove_id: id, table: table }
                 });
-            }
+            }   
         }
     });
 }
