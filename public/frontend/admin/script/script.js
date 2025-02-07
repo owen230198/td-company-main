@@ -646,21 +646,8 @@ var moduleSelectAjaxChild = function () {
 }
 
 var getUrlLinkingWarehouseSize = function (type) {
-    if (['carton', 'rubber', 'styrofoam', 'mica'].includes(type)) {
-        wh_table = 'supply_warehouses';
-    } else if (['magnet'].includes(type)) {
-        wh_table = 'other_warehouses';
-    } else if (['paper'].includes(type)) {
-        wh_table = 'print_warehouses';
-    }else if (['nilon', 'metalai', 'cover', 'decal', 'silk', 'emulsion', 'skrink'].includes(type)) {
-        wh_table = 'square_warehouses';
-    } else {
-        wh_table = 'extend_warehouses';
-    }
-    url = getBaseRoute('get-data-json-linking?except_linking=1&table=' + wh_table + '&field_search=name');
-    if (wh_table != 'extend_warehouses') {
-        url += '&type=' + type;    
-    }
+    url = getBaseRoute('get-data-json-linking?except_linking=1&table=supply_warehouses&field_search=name');
+    url += '&type=' + type; 
     return url;
 }
 
@@ -671,15 +658,12 @@ var changeSelectTypeTrigger = function(select, reset_input = 0)
     let url = getUrlLinkingWarehouseSize(value);
     let select_size = parent.find('select.__wh_select_size');
     select_size.data('url', url);
+    console.log(select_size.val());
+    
     if (reset_input == 1) {
         select_size.val('');
         select_size.data('id', '');
         select_size.data('label', '');
-        let module_qty = parent.closest('.__c_supply_warehouse').find('.__ajax_qty_type');
-        if (module_qty.length > 0) {
-            let url_get_qty = 'qty-by-supply-type?type=' + value;
-            ajaxViewTarget(url_get_qty, module_qty, module_qty);
-        }
     }
     initInputModuleAfterAjax(parent);
 }

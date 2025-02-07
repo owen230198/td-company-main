@@ -57,8 +57,7 @@
         static function insertCommand($data, $supply)
         {
             $type = $supply->type;
-            $table = tableWarehouseByType($type);
-            $data_command['name'] = getFieldDataById('name', $table, $data['size_type']); 
+            $data_command['name'] = getFieldDataById('name', 'supply_warehouses', $data['size_type']); 
             $data_command['size_type'] = $data['size_type'];
             $data_command['qty'] = $data['qty']; 
             $data_command['product'] = $supply->product;

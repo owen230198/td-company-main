@@ -18,11 +18,6 @@
                         @include('view_update.view', $arr)
                     @endforeach
                 </div>
-                <div class="__ajax_qty_type">
-                    @if (!empty($dataItem['supp_type']) && $dataItem['qty'] != '')
-                        @include('view_update.c_supply_qty', ['type' => $dataItem['supp_type'], 'value' => $dataItem['qty']])
-                    @endif
-                </div>
                 @foreach ($field_action as $action)
                     @php
                         $name = $action['name'];

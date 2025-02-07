@@ -295,41 +295,6 @@ use App\Models\SupplyOrigin;
         }
     }
 
-    if (!function_exists('getUnitSupply')) {
-        function getUnitSupply($type, $data = new \stdClass()) {
-            
-            if (!empty($data->unit)) {
-                return $data->unit;
-            }
-            if (empty($type)) {
-                return '';
-            }
-            switch ($type) {
-                case in_array($type, [\TDConst::CARTON, \TDConst::RUBBER, \TDConst::STYRO, \TDConst::MICA]):
-                    return 'plate';
-                    break;
-                // case in_array($type, [\TDConst::PAPER]):
-                //     return 'sheet';
-                //     break;
-                case in_array($type, [\TDConst::MAGNET]):
-                    return 'unit';
-                    break;
-                case \App\Models\SquareWarehouse::countPriceByWeight($type):
-                    return 'weight';
-                    break;
-                case \App\Models\SquareWarehouse::countPriceByHank($type):
-                    return 'hank';
-                    break;
-                case \App\Models\SquareWarehouse::countPriceBySquare($type):
-                    return 'square';
-                    break;
-                default:
-                    return '';
-                    break;
-            }    
-        }
-    }
-
     if (!function_exists('getUnitSupplyLogWarehouse')) {
         function getUnitSupplyLogWarehouse($type, $action = 'import', $get_feild = false, $data = new \stdClass()) {
             if (!empty($data->unit)) {
@@ -360,52 +325,6 @@ use App\Models\SupplyOrigin;
             }    
         }
     }
-
-    if (!function_exists('getUnitWarehouseItem')) {
-        function getUnitWarehouseItem($unit) {
-            switch ($unit) {
-                case 'plate':
-                    return 'Tấm';
-                    break;
-                case 'sheet':
-                    return 'Tờ';
-                    break;
-                case 'unit':
-                    return 'Cái';
-                    break;
-                case 'weight':
-                    return 'Kg';
-                    break;
-                case 'hank':
-                    return 'Cuộn';
-                    break;
-                case 'duo':
-                    return 'Đôi';
-                    break;
-                case 'bag':
-                    return 'Túi';
-                    break;
-                case 'bottle':
-                    return 'Hộp';
-                    break;
-                case 'bottle':
-                    return 'Lọ';
-                    break;
-                case 'box':
-                    return 'Thùng';
-                    break;
-                case 'tree':
-                    return 'Cây';
-                    break;
-                case 'square':
-                    return 'Cm';
-                    break;    
-                default:
-                    return '';
-                    break;
-            }    
-        }
-    }
     
     if (!function_exists('getUnitProductWarehouse')) {
         function getUnitProductWarehouse($unit) {
@@ -426,12 +345,6 @@ use App\Models\SupplyOrigin;
                     return '';
                     break;
             }    
-        }
-    }
-
-    if(!function_exists('getUnitNameByType')){
-        function getUnitNameByType($type){
-            return getUnitWarehouseItem(getUnitSupply($type));
         }
     }
 

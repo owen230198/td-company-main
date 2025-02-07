@@ -25,7 +25,6 @@ class NTable extends Model
                             'other_warehouses',
                             'extend_warehouses', 
                             'supply_buyings',
-                            'c_supplies',
                             'c_orders',
                         ],
                         'update' => [
@@ -40,7 +39,6 @@ class NTable extends Model
                             'other_warehouses',
                             'extend_warehouses', 
                             'supply_buyings',
-                            'c_supplies',
                             'c_orders',
                             'buying_items',
                         ],
