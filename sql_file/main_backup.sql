@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 08, 2025 at 05:37 PM
+-- Generation Time: Feb 09, 2025 at 01:11 PM
 -- Server version: 8.0.41-0ubuntu0.22.04.1
 -- PHP Version: 8.1.2-1ubuntu2.20
 
@@ -40,6 +40,14 @@ CREATE TABLE `after_prints` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `after_prints`
+--
+
+INSERT INTO `after_prints` (`id`, `code`, `name`, `w_salary`, `worker`, `qty`, `status`, `act`, `created_by`, `created_at`, `updated_at`) VALUES
+(1, 'QC-00000001', 'Hộp giấy UTRA BEE + Tem cuộn + Toa 10 x 20 test lần 3', 1, 10, '30', 'submited', 1, 10, '2025-02-09 12:11:53', '2025-02-09 13:09:29'),
+(2, 'QC-00000002', 'Hộp giấy UTRA BEE + Tem cuộn + Toa 10 x 20 test lần 3', 2, 10, '1245', 'submited', 1, 10, '2025-02-09 12:17:51', '2025-02-09 13:09:45');
 
 -- --------------------------------------------------------
 
@@ -93,6 +101,18 @@ CREATE TABLE `buying_items` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `buying_items`
+--
+
+INSERT INTO `buying_items` (`id`, `name`, `parent`, `type`, `target`, `qtv`, `status`, `width`, `length`, `qty`, `lenth_qty`, `weight`, `deliveried`, `sugg_provider`, `sugg_price`, `provider`, `price`, `total`, `note`, `act`, `created_by`, `contact_by`, `applied_by`, `created_at`, `updated_at`) VALUES
+(3, NULL, 3, 'paper', 56, 312, 'submited', 100, 100, 1, 100, 0.4, 1, 345, 0.00173, 345, 0.00173, '6920', NULL, 1, 6, 1, 1, '2025-02-09 11:54:55', '2025-02-09 11:55:53'),
+(4, NULL, 4, 'nilon', 69, 349, 'submited', 100, 100, 1, 100, 0.02, 1, 419, 0.0056, 419, 0.0056, '862', NULL, 1, 6, 1, 1, '2025-02-09 11:57:33', '2025-02-09 11:58:29'),
+(5, NULL, 5, 'paper', 56, 312, 'processing', 100, 100, 687, 68700, 274.8, NULL, 345, 0.00173, 345, 0.00173, '4754040', NULL, 1, 6, NULL, NULL, '2025-02-09 11:59:07', '2025-02-09 11:59:07'),
+(6, NULL, 6, 'nilon', 69, 349, 'processing', 100, 100, 481, 48100, 7.4074, NULL, 419, 0.0056, 419, 0.0056, '414814.4', NULL, 1, 6, NULL, NULL, '2025-02-09 11:59:07', '2025-02-09 11:59:07'),
+(7, NULL, 7, 'paper', 56, 312, 'processing', 100, 100, 700, 70000, 280, NULL, 345, 0.00173, 345, 0.00173, '4844000', NULL, 1, 6, NULL, NULL, '2025-02-09 12:18:37', '2025-02-09 12:18:37'),
+(8, NULL, 8, 'nilon', 69, 349, 'processing', 100, 100, 490, 49000, 7.546, NULL, 419, 0.0056, 419, 0.0056, '422576', NULL, 1, 6, NULL, NULL, '2025-02-09 12:18:37', '2025-02-09 12:18:37');
 
 -- --------------------------------------------------------
 
@@ -1213,6 +1233,14 @@ CREATE TABLE `c_designs` (
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
+--
+-- Dumping data for table `c_designs`
+--
+
+INSERT INTO `c_designs` (`id`, `code`, `name`, `order`, `product`, `customer`, `demo_expired`, `expired`, `note`, `status`, `act`, `created_by`, `assign_by`, `created_at`, `updated_at`) VALUES
+(1, 'TK-DH-00000034A', 'Hộp giấy UTRA BEE + Tem cuộn + Toa 10 x 20 test lần 3', 34, 38, NULL, NULL, NULL, NULL, 'design_submited', 1, 1, 1, '2025-02-09 11:41:28', '2025-02-09 11:42:25'),
+(2, 'TK-DH-00000033A', 'Hộp giấy UTRA BEE + Tem cuộn + Toa 10 x 20 TEST', 33, 36, NULL, NULL, NULL, NULL, 'design_submited', 1, 1, 1, '2025-02-09 11:41:42', '2025-02-09 11:42:01');
+
 -- --------------------------------------------------------
 
 --
@@ -1359,6 +1387,16 @@ CREATE TABLE `c_supplies` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `c_supplies`
+--
+
+INSERT INTO `c_supplies` (`id`, `code`, `name`, `size_type`, `qty`, `product`, `bill`, `supply`, `supp_type`, `note`, `status`, `act`, `created_by`, `created_at`, `updated_at`) VALUES
+(1, 'XVT-00000001', 'GIẤY IVOLRY - i400 - 100x100', 1, '688', 38, NULL, 5, 'paper', NULL, 'handling', 1, 6, '2025-02-09 11:59:07', '2025-02-09 11:59:07'),
+(2, 'XVT-00000002', 'NILON BÓNG - 12mic - Bóng nhiệt - 100x100', 2, '48125', 38, NULL, 5, 'paper', NULL, 'handling', 1, 6, '2025-02-09 11:59:07', '2025-02-09 11:59:07'),
+(3, 'XVT-00000003', 'GIẤY IVOLRY - i400 - 100x100', 1, '701', 36, NULL, 3, 'paper', NULL, 'handling', 1, 6, '2025-02-09 12:18:37', '2025-02-09 12:18:37'),
+(4, 'XVT-00000004', 'NILON BÓNG - 12mic - Bóng nhiệt - 100x100', 2, '49035', 36, NULL, 3, 'paper', NULL, 'handling', 1, 6, '2025-02-09 12:18:37', '2025-02-09 12:18:37');
 
 -- --------------------------------------------------------
 
@@ -2253,6 +2291,25 @@ CREATE TABLE `files` (
   `created_by` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
+--
+-- Dumping data for table `files`
+--
+
+INSERT INTO `files` (`id`, `name`, `base_name`, `dir`, `path`, `count`, `ext_file`, `act`, `created_at`, `updated_at`, `created_by`) VALUES
+(1, '9-2 Khuôn BEE', NULL, 'storages/uploads', 'storage/app/public/uploads/9-2 Khuôn BEE.ai', 1, 'ai', 1, '2025-02-09 09:18:49', '2025-02-09 11:16:25', 28),
+(2, '9-2 Khuôn BEE', NULL, 'storages/uploads', 'storage/app/public/uploads/9-2 Khuôn BEE(1).ai', NULL, 'ai', 1, '2025-02-09 11:16:25', '2025-02-09 11:16:25', 1),
+(3, 'File_Convert_Sau_Binh_00033627A_Túi chúc_0d_0a mừng năm mới UBND Huyện_-1', NULL, 'storages/uploads', 'storage/app/public/uploads/File_Convert_Sau_Binh_00033627A_Túi chúc_0d_0a mừng năm mới UBND Huyện_-1.pdf', NULL, 'pdf', 1, '2025-02-09 11:40:11', '2025-02-09 11:40:11', 1),
+(4, '11', NULL, 'storages/uploads', 'storage/app/public/uploads/11.jpg', 8, 'jpg', 1, '2025-02-09 11:40:16', '2025-02-09 11:58:18', 1),
+(5, '11', NULL, 'storages/uploads', 'storage/app/public/uploads/11(1).jpg', NULL, 'jpg', 1, '2025-02-09 11:41:40', '2025-02-09 11:41:40', 1),
+(6, '11', NULL, 'storages/uploads', 'storage/app/public/uploads/11(2).jpg', NULL, 'jpg', 1, '2025-02-09 11:41:54', '2025-02-09 11:41:54', 1),
+(7, '11', NULL, 'storages/uploads', 'storage/app/public/uploads/11(3).jpg', NULL, 'jpg', 1, '2025-02-09 11:41:57', '2025-02-09 11:41:57', 1),
+(8, '11', NULL, 'storages/uploads', 'storage/app/public/uploads/11(4).jpg', NULL, 'jpg', 1, '2025-02-09 11:42:00', '2025-02-09 11:42:00', 1),
+(9, '11', NULL, 'storages/uploads', 'storage/app/public/uploads/11(5).jpg', NULL, 'jpg', 1, '2025-02-09 11:42:13', '2025-02-09 11:42:13', 1),
+(10, '11', NULL, 'storages/uploads', 'storage/app/public/uploads/11(6).jpg', NULL, 'jpg', 1, '2025-02-09 11:42:18', '2025-02-09 11:42:18', 1),
+(11, '11', NULL, 'storages/uploads', 'storage/app/public/uploads/11(7).jpg', NULL, 'jpg', 1, '2025-02-09 11:42:22', '2025-02-09 11:42:22', 1),
+(12, '12', NULL, 'storages/uploads', 'storage/app/public/uploads/12.jpg', NULL, 'jpg', 1, '2025-02-09 11:55:50', '2025-02-09 11:55:50', 1),
+(13, '11', NULL, 'storages/uploads', 'storage/app/public/uploads/11(8).jpg', NULL, 'jpg', 1, '2025-02-09 11:58:18', '2025-02-09 11:58:18', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -2948,6 +3005,124 @@ CREATE TABLE `n_log_actions` (
   `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
+--
+-- Dumping data for table `n_log_actions`
+--
+
+INSERT INTO `n_log_actions` (`id`, `name`, `table_map`, `action`, `target`, `user`, `parent`, `detail_data`, `act`, `created_at`, `updated_at`) VALUES
+(1, 'Ms Huyền - Sales111', 'n_users', 'update', 28, 1, 0, '{\"username\":{\"old\":\"kinhdoanh\",\"new\":\"kd111\"},\"name\":{\"old\":\"Kinh doanh - TEST\",\"new\":\"Ms Huy\\u1ec1n - Sales111\"},\"email\":{\"old\":\"baobituandung.com\",\"new\":\"intuandung2000@gmail.com\"},\"note\":{\"old\":\"test nhan vien kinh doanh\",\"new\":null}}', 1, '2025-02-09 09:34:57', '2025-02-09 09:34:57'),
+(2, 'Mr Tú - Sales222', 'n_users', 'insert', 59, 1, 0, '{\"id\":59,\"username\":\"kd222\",\"password\":\"e10adc3949ba59abbe56e057f20f883e\",\"name\":\"Mr T\\u00fa - Sales222\",\"email\":\"intuandung2000@gmail.com\",\"phone\":\"0968303222\",\"group_user\":2,\"super_admin\":0,\"dev\":null,\"note\":null,\"supply_role\":null,\"ext_role\":null,\"act\":1,\"created_at\":\"2025-02-09 09:36:07\",\"updated_at\":\"2025-02-09 09:36:07\",\"created_by\":1}', 1, '2025-02-09 09:36:07', '2025-02-09 09:36:07'),
+(3, 'Ms Thuý - Sales333', 'n_users', 'insert', 60, 1, 0, '{\"id\":60,\"username\":\"kd333\",\"password\":\"e10adc3949ba59abbe56e057f20f883e\",\"name\":\"Ms Thu\\u00fd - Sales333\",\"email\":\"intuandung2000@gmail.com\",\"phone\":\"0967303333\",\"group_user\":2,\"super_admin\":0,\"dev\":null,\"note\":null,\"supply_role\":null,\"ext_role\":null,\"act\":1,\"created_at\":\"2025-02-09 09:38:51\",\"updated_at\":\"2025-02-09 09:38:51\",\"created_by\":1}', 1, '2025-02-09 09:38:51', '2025-02-09 09:38:51'),
+(4, 'Ms  - Sales444', 'n_users', 'insert', 61, 1, 0, '{\"id\":61,\"username\":\"kd444\",\"password\":\"e10adc3949ba59abbe56e057f20f883e\",\"name\":\"Ms  - Sales444\",\"email\":\"intuandung2000@gmail.com\",\"phone\":\"0964303444\",\"group_user\":2,\"super_admin\":0,\"dev\":null,\"note\":null,\"supply_role\":null,\"ext_role\":null,\"act\":1,\"created_at\":\"2025-02-09 09:39:34\",\"updated_at\":\"2025-02-09 09:39:34\",\"created_by\":1}', 1, '2025-02-09 09:39:34', '2025-02-09 09:39:34'),
+(5, 'Ms Huệ  - Sales555', 'n_users', 'insert', 62, 1, 0, '{\"id\":62,\"username\":\"kd555\",\"password\":\"e10adc3949ba59abbe56e057f20f883e\",\"name\":\"Ms Hu\\u1ec7  - Sales555\",\"email\":\"intuandung2000@gmail.com\",\"phone\":\"0976303555\",\"group_user\":2,\"super_admin\":0,\"dev\":null,\"note\":null,\"supply_role\":null,\"ext_role\":null,\"act\":1,\"created_at\":\"2025-02-09 09:40:11\",\"updated_at\":\"2025-02-09 09:40:11\",\"created_by\":1}', 1, '2025-02-09 09:40:11', '2025-02-09 09:40:11'),
+(6, 'Ms Phương  - Sales666', 'n_users', 'insert', 63, 1, 0, '{\"id\":63,\"username\":\"kd666\",\"password\":\"e10adc3949ba59abbe56e057f20f883e\",\"name\":\"Ms Ph\\u01b0\\u01a1ng  - Sales666\",\"email\":\"intuandung2000@gmail.com\",\"phone\":\"0969303666\",\"group_user\":2,\"super_admin\":0,\"dev\":null,\"note\":null,\"supply_role\":null,\"ext_role\":null,\"act\":1,\"created_at\":\"2025-02-09 09:40:49\",\"updated_at\":\"2025-02-09 09:40:49\",\"created_by\":1}', 1, '2025-02-09 09:40:49', '2025-02-09 09:40:49'),
+(7, 'Ms  - Sales777', 'n_users', 'insert', 64, 1, 0, '{\"id\":64,\"username\":\"kd777\",\"password\":\"e10adc3949ba59abbe56e057f20f883e\",\"name\":\"Ms  - Sales777\",\"email\":\"intuandung2000@gmail.com\",\"phone\":\"0979303777\",\"group_user\":2,\"super_admin\":0,\"dev\":null,\"note\":null,\"supply_role\":null,\"ext_role\":null,\"act\":1,\"created_at\":\"2025-02-09 09:41:42\",\"updated_at\":\"2025-02-09 09:41:42\",\"created_by\":1}', 1, '2025-02-09 09:41:42', '2025-02-09 09:41:42'),
+(8, 'Ms  - Sales777', 'n_users', 'update', 64, 1, 0, '{\"act\":{\"old\":1,\"new\":0}}', 1, '2025-02-09 09:41:49', '2025-02-09 09:41:49'),
+(9, 'Ms  - Sales444', 'n_users', 'update', 61, 1, 0, '{\"act\":{\"old\":1,\"new\":0}}', 1, '2025-02-09 09:41:56', '2025-02-09 09:41:56'),
+(10, 'Ms  - Sales000', 'n_users', 'insert', 65, 1, 0, '{\"id\":65,\"username\":\"kd000\",\"password\":\"e10adc3949ba59abbe56e057f20f883e\",\"name\":\"Ms  - Sales000\",\"email\":\"intuandung2000@gmail.com\",\"phone\":\"0964303000\",\"group_user\":2,\"super_admin\":0,\"dev\":null,\"note\":null,\"supply_role\":null,\"ext_role\":null,\"act\":0,\"created_at\":\"2025-02-09 09:42:39\",\"updated_at\":\"2025-02-09 09:42:39\",\"created_by\":1}', 1, '2025-02-09 09:42:39', '2025-02-09 09:42:39'),
+(11, 'Ms  - Sales000', 'n_users', 'update', 65, 1, 0, '{\"username\":{\"old\":\"kd000\",\"new\":\"kd\"}}', 1, '2025-02-09 09:43:02', '2025-02-09 09:43:02'),
+(15, 'GĐSX : Mr Dũng', 'n_users', 'update', 4, 1, 0, '{\"name\":{\"old\":\"Gi\\u00e1m \\u0111\\u1ed1c s\\u1ea3n xu\\u1ea5t : Mr D\\u0169ng\",\"new\":\"G\\u0110SX : Mr D\\u0169ng\"},\"email\":{\"old\":\"sanxuatitd@gmail.com\",\"new\":\"intuandung2000@gmail.com\"},\"note\":{\"old\":\"Technical apply order group tests\",\"new\":null}}', 1, '2025-02-09 09:56:49', '2025-02-09 09:56:49'),
+(16, 'Mr Dũng', 'n_users', 'update', 4, 1, 0, '{\"username\":{\"old\":\"duyetlenh\",\"new\":\"tpduyetlenh\"},\"name\":{\"old\":\"G\\u0110SX : Mr D\\u0169ng\",\"new\":\"Mr D\\u0169ng\"}}', 1, '2025-02-09 10:00:59', '2025-02-09 10:00:59'),
+(17, 'Mr Thông', 'n_users', 'insert', 66, 1, 0, '{\"id\":66,\"username\":\"duyetlenh\",\"password\":\"e10adc3949ba59abbe56e057f20f883e\",\"name\":\"Mr Th\\u00f4ng\",\"email\":\"intuandung2000@gmail.com\",\"phone\":\"034455882\",\"group_user\":3,\"super_admin\":0,\"dev\":null,\"note\":null,\"supply_role\":null,\"ext_role\":\"[\\\"apply_design\\\",\\\"design\\\",\\\"tech_handle\\\"]\",\"act\":1,\"created_at\":\"2025-02-09 10:02:26\",\"updated_at\":\"2025-02-09 10:02:26\",\"created_by\":1}', 1, '2025-02-09 10:02:26', '2025-02-09 10:02:26'),
+(18, 'Mr Thông', 'n_users', 'update', 66, 1, 0, '{\"username\":{\"old\":\"duyetlenh\",\"new\":\"ktduyetlenh\"}}', 1, '2025-02-09 10:02:41', '2025-02-09 10:02:41'),
+(19, 'Mr Việt', 'n_users', 'insert', 67, 1, 0, '{\"id\":67,\"username\":\"tk1\",\"password\":\"e10adc3949ba59abbe56e057f20f883e\",\"name\":\"Mr Vi\\u1ec7t\",\"email\":\"intuandung2000@gmail.com\",\"phone\":\"000\",\"group_user\":3,\"super_admin\":0,\"dev\":null,\"note\":null,\"supply_role\":null,\"ext_role\":\"[\\\"design\\\"]\",\"act\":1,\"created_at\":\"2025-02-09 10:04:58\",\"updated_at\":\"2025-02-09 10:04:58\",\"created_by\":1}', 1, '2025-02-09 10:04:58', '2025-02-09 10:04:58'),
+(20, 'Mr Việt', 'n_users', 'update', 67, 1, 0, '{\"phone\":{\"old\":\"000\",\"new\":\"0963303999\"}}', 1, '2025-02-09 10:06:19', '2025-02-09 10:06:19'),
+(21, 'Mr Việt', 'n_users', 'update', 67, 1, 0, '{\"username\":{\"old\":\"tk1\",\"new\":\"thietke1\"}}', 1, '2025-02-09 10:06:46', '2025-02-09 10:06:46'),
+(22, 'Mr Hùng', 'n_users', 'insert', 68, 1, 0, '{\"id\":68,\"username\":\"thietke2\",\"password\":\"e10adc3949ba59abbe56e057f20f883e\",\"name\":\"Mr H\\u00f9ng\",\"email\":\"intuandung2000@gmail.com\",\"phone\":\"0963303999\",\"group_user\":3,\"super_admin\":0,\"dev\":null,\"note\":null,\"supply_role\":null,\"ext_role\":\"[\\\"design\\\"]\",\"act\":1,\"created_at\":\"2025-02-09 10:07:37\",\"updated_at\":\"2025-02-09 10:07:37\",\"created_by\":1}', 1, '2025-02-09 10:07:37', '2025-02-09 10:07:37'),
+(23, 'Mr dự bị 1', 'n_users', 'insert', 69, 1, 0, '{\"id\":69,\"username\":\"thietke3\",\"password\":\"e10adc3949ba59abbe56e057f20f883e\",\"name\":\"Mr d\\u1ef1 b\\u1ecb 1\",\"email\":\"intuandung2000@gmail.com\",\"phone\":\"0963303999\",\"group_user\":3,\"super_admin\":0,\"dev\":null,\"note\":null,\"supply_role\":null,\"ext_role\":\"[\\\"design\\\"]\",\"act\":1,\"created_at\":\"2025-02-09 10:08:12\",\"updated_at\":\"2025-02-09 10:08:12\",\"created_by\":1}', 1, '2025-02-09 10:08:12', '2025-02-09 10:08:12'),
+(24, 'Mr dự bị 2', 'n_users', 'insert', 70, 1, 0, '{\"id\":70,\"username\":\"thietke4\",\"password\":\"e10adc3949ba59abbe56e057f20f883e\",\"name\":\"Mr d\\u1ef1 b\\u1ecb 2\",\"email\":\"intuandung2000@gmail.com\",\"phone\":\"0963303999\",\"group_user\":3,\"super_admin\":0,\"dev\":null,\"note\":null,\"supply_role\":null,\"ext_role\":\"[\\\"design\\\"]\",\"act\":1,\"created_at\":\"2025-02-09 10:08:28\",\"updated_at\":\"2025-02-09 10:08:28\",\"created_by\":1}', 1, '2025-02-09 10:08:28', '2025-02-09 10:08:28'),
+(25, 'Mr dự bị 2', 'n_users', 'update', 70, 1, 0, '{\"act\":{\"old\":1,\"new\":0}}', 1, '2025-02-09 10:08:40', '2025-02-09 10:08:40'),
+(26, 'Mr dự bị 1', 'n_users', 'update', 69, 1, 0, '{\"act\":{\"old\":1,\"new\":0}}', 1, '2025-02-09 10:08:41', '2025-02-09 10:08:41'),
+(27, 'K.hoạch - Ms Hường', 'n_users', 'update', 6, 1, 0, '{\"username\":{\"old\":\"kehoach\",\"new\":\"kehoach1\"}}', 1, '2025-02-09 10:13:55', '2025-02-09 10:13:55'),
+(28, 'K.hoạch - Mr Tuấn', 'n_users', 'insert', 71, 1, 0, '{\"id\":71,\"username\":\"kehoach2\",\"password\":\"cba46d1d20406eb6d12420463a291668\",\"name\":\"K.ho\\u1ea1ch - Mr Tu\\u1ea5n\",\"email\":\"kd1.intuandung@gmail.com\",\"phone\":\"0963303999\",\"group_user\":6,\"super_admin\":0,\"dev\":null,\"note\":null,\"supply_role\":null,\"ext_role\":null,\"act\":1,\"created_at\":\"2025-02-09 10:15:45\",\"updated_at\":\"2025-02-09 10:15:45\",\"created_by\":1}', 1, '2025-02-09 10:15:45', '2025-02-09 10:15:45'),
+(29, 'XN Vật tự - Ms Mai', 'n_users', 'update', 13, 1, 0, '{\"name\":{\"old\":\"Kho xu\\u1ea5t nh\\u1eadp v\\u1eadt t\\u01b0 - Ms H\\u01af\\u1edcNG\",\"new\":\"XN V\\u1eadt t\\u1ef1 - Ms Mai\"},\"supply_role\":{\"old\":\"[\\\"paper\\\",\\\"nilon\\\",\\\"metalai\\\",\\\"cover\\\",\\\"carton\\\",\\\"rubber\\\",\\\"styrofoam\\\",\\\"decal\\\",\\\"silk\\\",\\\"mica\\\",\\\"emulsion\\\",\\\"skrink\\\",\\\"magnet\\\",\\\"other\\\"]\",\"new\":null}}', 1, '2025-02-09 10:24:43', '2025-02-09 10:24:43'),
+(30, 'XN-T.Phẩm: Ms Trang', 'n_users', 'update', 20, 1, 0, '{\"username\":{\"old\":\"xuatkho\",\"new\":\"xnthanhpham1\"},\"name\":{\"old\":\"KHO TH\\u00c0NH PH\\u1ea8M XU\\u1ea4T - Ms\",\"new\":\"XN-T.Ph\\u1ea9m: Ms Trang\"},\"email\":{\"old\":\"khothanhpham@gmail.com\",\"new\":\"kd1.intuandung@gmail.com\"},\"phone\":{\"old\":\"123456789\",\"new\":\"000\"},\"note\":{\"old\":\"test nh\\u00e2n vi\\u00ean kho th\\u00e0nh ph\\u1ea9m\",\"new\":null}}', 1, '2025-02-09 10:31:09', '2025-02-09 10:31:09'),
+(31, 'XN-T.Phẩm: Ms Trang', 'n_users', 'update', 20, 1, 0, '{\"username\":{\"old\":\"xnthanhpham1\",\"new\":\"xntp1\"}}', 1, '2025-02-09 10:31:55', '2025-02-09 10:31:55'),
+(32, 'XN-T.Phẩm: Ms dự bị', 'n_users', 'insert', 72, 1, 0, '{\"id\":72,\"username\":\"xntp2\",\"password\":\"e10adc3949ba59abbe56e057f20f883e\",\"name\":\"XN-T.Ph\\u1ea9m: Ms d\\u1ef1 b\\u1ecb\",\"email\":\"kd1.intuandung@gmail.com\",\"phone\":\"000\",\"group_user\":12,\"super_admin\":0,\"dev\":null,\"note\":null,\"supply_role\":null,\"ext_role\":null,\"act\":1,\"created_at\":\"2025-02-09 10:32:20\",\"updated_at\":\"2025-02-09 10:32:20\",\"created_by\":1}', 1, '2025-02-09 10:32:20', '2025-02-09 10:32:20'),
+(33, 'XN-T.Phẩm: Ms dự bị', 'n_users', 'update', 72, 1, 0, '{\"act\":{\"old\":1,\"new\":0}}', 1, '2025-02-09 10:36:43', '2025-02-09 10:36:43'),
+(34, 'D.Mua - Ms Dung', 'n_users', 'update', 14, 1, 0, '{\"act\":{\"old\":1,\"new\":0}}', 1, '2025-02-09 10:37:15', '2025-02-09 10:37:15'),
+(35, 'XN Vật tự - Ms Mai', 'n_users', 'update', 13, 1, 0, '{\"phone\":{\"old\":\"000\",\"new\":\"0916478920\"}}', 1, '2025-02-09 10:40:06', '2025-02-09 10:40:06'),
+(36, 'XN Vật tự - Ms Mai', 'n_users', 'update', 13, 1, 0, '{\"username\":{\"old\":\"nhapkho\",\"new\":\"nkvt1\"}}', 1, '2025-02-09 10:40:30', '2025-02-09 10:40:30'),
+(37, 'XN Vật tự - Ms dự bị', 'n_users', 'insert', 73, 1, 0, '{\"id\":73,\"username\":\"nkvt2\",\"password\":\"e10adc3949ba59abbe56e057f20f883e\",\"name\":\"XN V\\u1eadt t\\u1ef1 - Ms d\\u1ef1 b\\u1ecb\",\"email\":\"kd1.intuandung@gmail.com\",\"phone\":\"0916478920\",\"group_user\":7,\"super_admin\":0,\"dev\":null,\"note\":null,\"supply_role\":null,\"ext_role\":null,\"act\":1,\"created_at\":\"2025-02-09 10:40:55\",\"updated_at\":\"2025-02-09 10:40:55\",\"created_by\":1}', 1, '2025-02-09 10:40:55', '2025-02-09 10:40:55'),
+(38, 'XN Vật tự - Ms dự bị', 'n_users', 'update', 73, 1, 0, '{\"act\":{\"old\":1,\"new\":0}}', 1, '2025-02-09 10:41:17', '2025-02-09 10:41:17'),
+(39, 'Kcs sau in: Ms Dung', 'n_users', 'update', 56, 1, 0, '{\"username\":{\"old\":\"kcs\",\"new\":\"kcsin1\"},\"name\":{\"old\":\"Test  KCS\",\"new\":\"Kcs sau in: Ms Dung\"}}', 1, '2025-02-09 10:46:06', '2025-02-09 10:46:06'),
+(40, 'Kcs sau in: Ms dự bị', 'n_users', 'insert', 74, 1, 0, '{\"id\":74,\"username\":\"kcsin2\",\"password\":\"e10adc3949ba59abbe56e057f20f883e\",\"name\":\"Kcs sau in: Ms d\\u1ef1 b\\u1ecb\",\"email\":\"kcs@gmail.com\",\"phone\":\"000\",\"group_user\":11,\"super_admin\":0,\"dev\":null,\"note\":null,\"supply_role\":null,\"ext_role\":null,\"act\":1,\"created_at\":\"2025-02-09 10:47:09\",\"updated_at\":\"2025-02-09 10:47:09\",\"created_by\":1}', 1, '2025-02-09 10:47:09', '2025-02-09 10:47:09'),
+(41, 'Kcs sau in: Ms dự bị 3', 'n_users', 'insert', 75, 1, 0, '{\"id\":75,\"username\":\"kcsin3\",\"password\":\"e10adc3949ba59abbe56e057f20f883e\",\"name\":\"Kcs sau in: Ms d\\u1ef1 b\\u1ecb 3\",\"email\":\"kcs@gmail.com\",\"phone\":\"000\",\"group_user\":11,\"super_admin\":0,\"dev\":null,\"note\":null,\"supply_role\":null,\"ext_role\":null,\"act\":1,\"created_at\":\"2025-02-09 10:47:29\",\"updated_at\":\"2025-02-09 10:47:29\",\"created_by\":1}', 1, '2025-02-09 10:47:29', '2025-02-09 10:47:29'),
+(42, 'Kcs sau in: Ms dự bị 4', 'n_users', 'insert', 76, 1, 0, '{\"id\":76,\"username\":\"kcsin4\",\"password\":\"e10adc3949ba59abbe56e057f20f883e\",\"name\":\"Kcs sau in: Ms d\\u1ef1 b\\u1ecb 4\",\"email\":\"kcs@gmail.com\",\"phone\":\"000\",\"group_user\":11,\"super_admin\":0,\"dev\":null,\"note\":null,\"supply_role\":null,\"ext_role\":null,\"act\":1,\"created_at\":\"2025-02-09 10:47:50\",\"updated_at\":\"2025-02-09 10:47:50\",\"created_by\":1}', 1, '2025-02-09 10:47:50', '2025-02-09 10:47:50'),
+(43, 'Kcs sau in: Ms dự bị 2', 'n_users', 'update', 74, 1, 0, '{\"name\":{\"old\":\"Kcs sau in: Ms d\\u1ef1 b\\u1ecb\",\"new\":\"Kcs sau in: Ms d\\u1ef1 b\\u1ecb 2\"}}', 1, '2025-02-09 10:48:15', '2025-02-09 10:48:15'),
+(44, 'Kcs sau in: Ms dự bị 4', 'n_users', 'update', 76, 1, 0, '{\"act\":{\"old\":1,\"new\":0}}', 1, '2025-02-09 10:48:39', '2025-02-09 10:48:39'),
+(45, 'Kcs sau in: Ms dự bị 3', 'n_users', 'update', 75, 1, 0, '{\"act\":{\"old\":1,\"new\":0}}', 1, '2025-02-09 10:48:41', '2025-02-09 10:48:41'),
+(46, 'Kcs sau in: Ms dự bị 2', 'n_users', 'update', 74, 1, 0, '{\"act\":{\"old\":1,\"new\":0}}', 1, '2025-02-09 10:48:44', '2025-02-09 10:48:44'),
+(47, 'Kcs TP: Ms 1', 'n_users', 'insert', 77, 1, 0, '{\"id\":77,\"username\":\"kcstp1\",\"password\":\"e10adc3949ba59abbe56e057f20f883e\",\"name\":\"Kcs TP: Ms 1\",\"email\":\"kcs@gmail.com\",\"phone\":\"000\",\"group_user\":11,\"super_admin\":0,\"dev\":null,\"note\":null,\"supply_role\":null,\"ext_role\":null,\"act\":0,\"created_at\":\"2025-02-09 10:49:46\",\"updated_at\":\"2025-02-09 10:49:46\",\"created_by\":1}', 1, '2025-02-09 10:49:46', '2025-02-09 10:49:46'),
+(48, 'Kcs TP: Ms 2', 'n_users', 'insert', 78, 1, 0, '{\"id\":78,\"username\":\"kcstp2\",\"password\":\"e10adc3949ba59abbe56e057f20f883e\",\"name\":\"Kcs TP: Ms 2\",\"email\":\"kcs@gmail.com\",\"phone\":\"000\",\"group_user\":11,\"super_admin\":0,\"dev\":null,\"note\":null,\"supply_role\":null,\"ext_role\":null,\"act\":0,\"created_at\":\"2025-02-09 10:50:13\",\"updated_at\":\"2025-02-09 10:50:13\",\"created_by\":1}', 1, '2025-02-09 10:50:14', '2025-02-09 10:50:14'),
+(49, 'Kcs TP: Ms 3', 'n_users', 'insert', 79, 1, 0, '{\"id\":79,\"username\":\"kcstp3\",\"password\":\"e10adc3949ba59abbe56e057f20f883e\",\"name\":\"Kcs TP: Ms 3\",\"email\":\"kcs@gmail.com\",\"phone\":\"000\",\"group_user\":11,\"super_admin\":0,\"dev\":null,\"note\":null,\"supply_role\":null,\"ext_role\":null,\"act\":1,\"created_at\":\"2025-02-09 10:50:42\",\"updated_at\":\"2025-02-09 10:50:42\",\"created_by\":1}', 1, '2025-02-09 10:50:42', '2025-02-09 10:50:42'),
+(50, 'Kcs TP: Ms 2', 'n_users', 'update', 78, 1, 0, '{\"act\":{\"old\":0,\"new\":1}}', 1, '2025-02-09 10:51:10', '2025-02-09 10:51:10'),
+(51, 'Kcs TP: Ms 1', 'n_users', 'update', 77, 1, 0, '{\"act\":{\"old\":0,\"new\":1}}', 1, '2025-02-09 10:51:12', '2025-02-09 10:51:12'),
+(52, 'Kcs sau in: Ms dự bị 4', 'n_users', 'update', 76, 1, 0, '{\"act\":{\"old\":0,\"new\":1}}', 1, '2025-02-09 10:51:14', '2025-02-09 10:51:14'),
+(53, 'Kcs sau in: Ms dự bị 3', 'n_users', 'update', 75, 1, 0, '{\"act\":{\"old\":0,\"new\":1}}', 1, '2025-02-09 10:51:17', '2025-02-09 10:51:17'),
+(54, 'Kcs sau in: Ms dự bị 3', 'n_users', 'update', 75, 1, 0, '{\"act\":{\"old\":1,\"new\":0}}', 1, '2025-02-09 10:51:23', '2025-02-09 10:51:23'),
+(55, 'Kcs sau in: Ms dự bị 4', 'n_users', 'update', 76, 1, 0, '{\"act\":{\"old\":1,\"new\":0}}', 1, '2025-02-09 10:51:26', '2025-02-09 10:51:26'),
+(56, 'Kcs TP: Ms 2', 'n_users', 'update', 78, 1, 0, '{\"act\":{\"old\":1,\"new\":0}}', 1, '2025-02-09 10:51:31', '2025-02-09 10:51:31'),
+(57, 'Kcs TP: Ms 3', 'n_users', 'update', 79, 1, 0, '{\"act\":{\"old\":1,\"new\":0}}', 1, '2025-02-09 10:51:33', '2025-02-09 10:51:33'),
+(58, 'Hộp giấy UTRA BEE + Tem cuộn + Toa 10 x 20', 'products', 'update', 34, 1, 0, '{\"name\":{\"old\":null,\"new\":\"H\\u1ed9p gi\\u1ea5y UTRA BEE + Tem cu\\u1ed9n + Toa 10 x 20\"},\"type\":{\"old\":null,\"new\":1},\"qty\":{\"old\":null,\"new\":\"5000\"},\"made_by\":{\"old\":null,\"new\":1},\"category\":{\"old\":null,\"new\":2},\"product_style\":{\"old\":null,\"new\":14},\"design\":{\"old\":null,\"new\":5},\"length\":{\"old\":null,\"new\":4},\"width\":{\"old\":null,\"new\":4},\"height\":{\"old\":null,\"new\":11.5},\"quote_id\":{\"old\":null,\"new\":2},\"sale_shape_file\":{\"old\":null,\"new\":\"{\\\"id\\\":\\\"2\\\",\\\"dir\\\":\\\"storages\\/uploads\\\",\\\"path\\\":\\\"storage\\/app\\/public\\/uploads\\/9-2 Khu\\u00f4n BEE(1).ai\\\",\\\"name\\\":\\\"9-2 Khu\\u00f4n BEE(1).ai\\\"}\"},\"note\":{\"old\":null,\"new\":\"null\"},\"act\":{\"old\":null,\"new\":1},\"delivery\":{\"old\":null,\"new\":5000},\"created_by\":{\"old\":null,\"new\":1}}', 1, '2025-02-09 11:27:01', '2025-02-09 11:27:01'),
+(61, 'Hộp giấy UTRA BEE   Tem cuộn   Toa 10 x 20', 'products', 'insert', 35, 1, 0, '{\"id\":35,\"code\":null,\"name\":\"H\\u1ed9p gi\\u1ea5y UTRA BEE   Tem cu\\u1ed9n   Toa 10 x 20\",\"type\":null,\"qty\":\"5000\",\"made_by\":3,\"category\":null,\"product_style\":null,\"design\":null,\"length\":null,\"width\":null,\"height\":null,\"quote_id\":null,\"order\":null,\"total_cost\":\"2500000\",\"profit\":null,\"ship_price\":null,\"base_total\":null,\"total_amount\":\"2500000\",\"custom_design_file\":null,\"sale_shape_file\":null,\"tech_shape_file\":null,\"design_file\":null,\"design_shape_file\":null,\"handle_shape_file\":null,\"note\":null,\"status\":null,\"act\":1,\"order_created\":null,\"detail\":null,\"product_warehouse\":null,\"delivery\":5000,\"created_at\":\"2025-02-09 11:27:02\",\"updated_at\":\"2025-02-09 11:27:02\",\"created_by\":1,\"parent\":34}', 1, '2025-02-09 11:27:02', '2025-02-09 11:27:02'),
+(63, 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 'quotes', 'insert', 3, 1, 0, '{\"id\":3,\"seri\":\"BG-00000003\",\"status\":\"not_accepted\",\"name\":\"CTY CP TH\\u01af\\u01a0NG M\\u1ea0I D\\u01af\\u1ee2C PH\\u1ea8M BIGFAM\",\"product_qty\":null,\"customer\":1,\"represent\":1,\"ship_price\":500000,\"profit\":15,\"total_cost\":\"7180000\",\"base_total\":\"8832000\",\"total_amount\":\"8830000\",\"note\":null,\"act\":1,\"src\":null,\"created_at\":\"2025-02-09 11:31:47\",\"updated_at\":\"2025-02-09 11:31:47\",\"created_by\":1}', 1, '2025-02-09 11:31:47', '2025-02-09 11:31:47'),
+(64, 'Hộp giấy UTRA BEE + Tem cuộn + Toa 10 x 20', 'products', 'insert', 36, 1, 0, '{\"id\":36,\"code\":null,\"name\":\"H\\u1ed9p gi\\u1ea5y UTRA BEE + Tem cu\\u1ed9n + Toa 10 x 20\",\"type\":1,\"qty\":\"5000\",\"made_by\":1,\"category\":2,\"product_style\":14,\"design\":5,\"length\":4,\"width\":4,\"height\":11.5,\"quote_id\":3,\"order\":0,\"total_cost\":\"7180000\",\"profit\":\"15\",\"ship_price\":\"500000\",\"base_total\":\"8832000\",\"total_amount\":\"8830000\",\"custom_design_file\":null,\"sale_shape_file\":\"{\\\"id\\\":\\\"2\\\",\\\"dir\\\":\\\"storages\\/uploads\\\",\\\"path\\\":\\\"storage\\/app\\/public\\/uploads\\/9-2 Khu\\u00f4n BEE(1).ai\\\",\\\"name\\\":\\\"9-2 Khu\\u00f4n BEE(1).ai\\\"}\",\"tech_shape_file\":null,\"design_file\":null,\"design_shape_file\":null,\"handle_shape_file\":null,\"note\":\"null\",\"status\":\"\",\"act\":1,\"order_created\":0,\"detail\":null,\"product_warehouse\":null,\"delivery\":5000,\"created_at\":\"2025-02-09 11:31:47\",\"updated_at\":\"2025-02-09 11:31:47\",\"created_by\":1,\"parent\":0}', 1, '2025-02-09 11:31:47', '2025-02-09 11:31:47'),
+(65, 'Hộp giấy UTRA BEE   Tem cuộn   Toa 10 x 20', 'papers', 'insert', 3, 1, 0, '{\"id\":3,\"code\":null,\"ext_name\":null,\"name\":\"H\\u1ed9p gi\\u1ea5y UTRA BEE   Tem cu\\u1ed9n   Toa 10 x 20\",\"product_qty\":5000,\"nqty\":4,\"double\":0,\"base_supp_qty\":1300,\"compent_percent\":\"75\",\"compent_plus\":0,\"supp_qty\":1375,\"size\":\"{\\\"materal\\\":\\\"56\\\",\\\"qtv\\\":\\\"312\\\",\\\"length\\\":\\\"35\\\",\\\"width\\\":\\\"36.3\\\",\\\"qtv_price\\\":\\\"0.00175\\\",\\\"qtv_num\\\":\\\"400\\\",\\\"supp_qty\\\":1375,\\\"act\\\":1,\\\"total\\\":1222856.2499999998}\",\"print\":\"{\\\"type\\\":\\\"1\\\",\\\"color\\\":\\\"4\\\",\\\"machine\\\":\\\"1\\\",\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"supp_qty\\\":300,\\\"handle_qty\\\":1275,\\\"model_price\\\":66000,\\\"work_price\\\":30,\\\"shape_price\\\":110000,\\\"printer\\\":3,\\\"act\\\":1,\\\"total\\\":740000,\\\"handled\\\":0,\\\"print_confirmed\\\":0}\",\"nilon\":\"{\\\"materal\\\":\\\"69\\\",\\\"qtv\\\":\\\"349\\\",\\\"face\\\":\\\"1\\\",\\\"machine\\\":\\\"46\\\",\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":0,\\\"shape_price\\\":50000,\\\"qtv_price\\\":\\\"0.02011\\\",\\\"qtv_num\\\":\\\"15.4\\\",\\\"supp_qty\\\":1275,\\\"handle_qty\\\":1275,\\\"materal_price\\\":0.309694,\\\"act\\\":1,\\\"total\\\":551669.439425,\\\"handled\\\":0}\",\"metalai\":\"{\\\"face\\\":\\\"0\\\",\\\"machine\\\":null,\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":0,\\\"shape_price\\\":0,\\\"qtv_price\\\":0,\\\"qtv_num\\\":1,\\\"supp_qty\\\":1375,\\\"handle_qty\\\":1275,\\\"materal_price\\\":0,\\\"act\\\":0,\\\"total\\\":0,\\\"handled\\\":0}\",\"cover\":\"{\\\"face\\\":\\\"0\\\",\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":0,\\\"shape_price\\\":0,\\\"qtv_price\\\":0,\\\"qtv_num\\\":1,\\\"supp_qty\\\":1275,\\\"handle_qty\\\":1275,\\\"materal_price\\\":0,\\\"act\\\":0,\\\"total\\\":0,\\\"handled\\\":0}\",\"compress\":\"{\\\"price\\\":\\\"0\\\",\\\"shape_price\\\":\\\"0\\\",\\\"machine\\\":null,\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"qty_pro\\\":5050,\\\"handle_qty\\\":1275,\\\"nqty\\\":4,\\\"act\\\":0,\\\"total\\\":0,\\\"handled\\\":0}\",\"uv\":\"{\\\"face\\\":\\\"0\\\",\\\"machine\\\":null,\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":0,\\\"shape_price\\\":0,\\\"qtv_price\\\":0,\\\"qtv_num\\\":1,\\\"supp_qty\\\":1275,\\\"handle_qty\\\":1275,\\\"materal_price\\\":0,\\\"act\\\":0,\\\"total\\\":0,\\\"handled\\\":0}\",\"elevate\":\"{\\\"ext_price\\\":\\\"0\\\",\\\"machine\\\":\\\"69\\\",\\\"float\\\":{\\\"act\\\":\\\"1\\\",\\\"price\\\":\\\"50\\\",\\\"shape_price\\\":\\\"50000\\\",\\\"qty_pro\\\":5050,\\\"nqty\\\":4,\\\"float_cost\\\":452500},\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":150,\\\"work_price\\\":150,\\\"shape_price\\\":150000,\\\"supp_qty\\\":1275,\\\"handle_qty\\\":1275,\\\"cost\\\":531825,\\\"act\\\":1,\\\"total\\\":984325,\\\"handled\\\":0}\",\"float\":null,\"peel\":\"{\\\"machine\\\":\\\"12\\\",\\\"nqty\\\":\\\"1\\\",\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":10,\\\"shape_price\\\":30000,\\\"qty_pro\\\":5050,\\\"handle_qty\\\":5100,\\\"act\\\":1,\\\"total\\\":80500,\\\"handled\\\":0}\",\"cut\":null,\"fold\":null,\"box_paste\":\"{\\\"machine\\\":\\\"6\\\",\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":50,\\\"shape_price\\\":100000,\\\"qty_pro\\\":5050,\\\"handle_qty\\\":5100,\\\"act\\\":1,\\\"total\\\":352500,\\\"handled\\\":0}\",\"bag_paste\":null,\"ext_cate\":2,\"ext_price\":\"{\\\"temp_price\\\":\\\"0\\\",\\\"prescript_price\\\":\\\"150\\\",\\\"supp_price\\\":\\\"0\\\",\\\"note\\\":null,\\\"qty_pro\\\":5000,\\\"act\\\":1,\\\"total\\\":750000}\",\"handle_type\":1,\"handle_elevate\":null,\"total_cost\":\"4681850.689425\",\"product\":36,\"note\":null,\"main\":1,\"parent\":0,\"is_join\":0,\"act\":1,\"status\":\"\",\"handled\":0,\"created_at\":\"2025-02-09 11:31:48\",\"updated_at\":\"2025-02-09 11:31:48\",\"created_by\":1}', 1, '2025-02-09 11:31:48', '2025-02-09 11:31:48'),
+(66, 'Hộp giấy UTRA BEE   Tem cuộn   Toa 10 x 20', 'papers', 'insert', 4, 1, 0, '{\"id\":4,\"code\":null,\"ext_name\":7,\"name\":\"H\\u1ed9p gi\\u1ea5y UTRA BEE   Tem cu\\u1ed9n   Toa 10 x 20\",\"product_qty\":5000,\"nqty\":null,\"double\":null,\"base_supp_qty\":null,\"compent_percent\":null,\"compent_plus\":null,\"supp_qty\":null,\"size\":null,\"print\":null,\"nilon\":null,\"metalai\":null,\"cover\":null,\"compress\":null,\"uv\":null,\"elevate\":null,\"float\":null,\"peel\":null,\"cut\":null,\"fold\":null,\"box_paste\":null,\"bag_paste\":null,\"ext_cate\":null,\"ext_price\":null,\"handle_type\":2,\"handle_elevate\":null,\"total_cost\":\"0\",\"product\":36,\"note\":null,\"main\":0,\"parent\":0,\"is_join\":0,\"act\":1,\"status\":\"\",\"handled\":0,\"created_at\":\"2025-02-09 11:31:48\",\"updated_at\":\"2025-02-09 11:31:48\",\"created_by\":1}', 1, '2025-02-09 11:31:48', '2025-02-09 11:31:48'),
+(67, 'Hộp giấy UTRA BEE + Tem cuộn + Toa 10 x 20 TEST', 'products', 'update', 36, 1, 0, '{\"name\":{\"old\":\"H\\u1ed9p gi\\u1ea5y UTRA BEE + Tem cu\\u1ed9n + Toa 10 x 20\",\"new\":\"H\\u1ed9p gi\\u1ea5y UTRA BEE + Tem cu\\u1ed9n + Toa 10 x 20 TEST\"}}', 1, '2025-02-09 11:31:56', '2025-02-09 11:31:56'),
+(68, 'Hộp giấy UTRA BEE + Tem cuộn + Toa 10 x 20 TEST', 'papers', 'update', 3, 1, 0, '{\"name\":{\"old\":\"H\\u1ed9p gi\\u1ea5y UTRA BEE   Tem cu\\u1ed9n   Toa 10 x 20\",\"new\":\"H\\u1ed9p gi\\u1ea5y UTRA BEE + Tem cu\\u1ed9n + Toa 10 x 20 TEST\"},\"print\":{\"old\":\"{\\\"type\\\":\\\"1\\\",\\\"color\\\":\\\"4\\\",\\\"machine\\\":\\\"1\\\",\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"supp_qty\\\":300,\\\"handle_qty\\\":1275,\\\"model_price\\\":66000,\\\"work_price\\\":30,\\\"shape_price\\\":110000,\\\"printer\\\":3,\\\"act\\\":1,\\\"total\\\":740000,\\\"handled\\\":0,\\\"print_confirmed\\\":0}\",\"new\":\"{\\\"type\\\":\\\"1\\\",\\\"color\\\":\\\"4\\\",\\\"machine\\\":\\\"1\\\",\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"supp_qty\\\":300,\\\"handle_qty\\\":1275,\\\"model_price\\\":66000,\\\"work_price\\\":30,\\\"shape_price\\\":110000,\\\"printer\\\":3,\\\"act\\\":1,\\\"total\\\":740000}\"},\"nilon\":{\"old\":\"{\\\"materal\\\":\\\"69\\\",\\\"qtv\\\":\\\"349\\\",\\\"face\\\":\\\"1\\\",\\\"machine\\\":\\\"46\\\",\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":0,\\\"shape_price\\\":50000,\\\"qtv_price\\\":\\\"0.02011\\\",\\\"qtv_num\\\":\\\"15.4\\\",\\\"supp_qty\\\":1275,\\\"handle_qty\\\":1275,\\\"materal_price\\\":0.309694,\\\"act\\\":1,\\\"total\\\":551669.439425,\\\"handled\\\":0}\",\"new\":\"{\\\"materal\\\":\\\"69\\\",\\\"qtv\\\":\\\"349\\\",\\\"face\\\":\\\"1\\\",\\\"machine\\\":\\\"46\\\",\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":0,\\\"shape_price\\\":50000,\\\"qtv_price\\\":\\\"0.02011\\\",\\\"qtv_num\\\":\\\"15.4\\\",\\\"supp_qty\\\":1275,\\\"handle_qty\\\":1275,\\\"materal_price\\\":0.309694,\\\"act\\\":1,\\\"total\\\":551669.439425}\"},\"metalai\":{\"old\":\"{\\\"face\\\":\\\"0\\\",\\\"machine\\\":null,\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":0,\\\"shape_price\\\":0,\\\"qtv_price\\\":0,\\\"qtv_num\\\":1,\\\"supp_qty\\\":1375,\\\"handle_qty\\\":1275,\\\"materal_price\\\":0,\\\"act\\\":0,\\\"total\\\":0,\\\"handled\\\":0}\",\"new\":\"{\\\"face\\\":\\\"0\\\",\\\"machine\\\":null,\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":0,\\\"shape_price\\\":0,\\\"qtv_price\\\":0,\\\"qtv_num\\\":1,\\\"supp_qty\\\":1375,\\\"handle_qty\\\":1275,\\\"materal_price\\\":0,\\\"act\\\":0,\\\"total\\\":0}\"},\"cover\":{\"old\":\"{\\\"face\\\":\\\"0\\\",\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":0,\\\"shape_price\\\":0,\\\"qtv_price\\\":0,\\\"qtv_num\\\":1,\\\"supp_qty\\\":1275,\\\"handle_qty\\\":1275,\\\"materal_price\\\":0,\\\"act\\\":0,\\\"total\\\":0,\\\"handled\\\":0}\",\"new\":\"{\\\"face\\\":\\\"0\\\",\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":0,\\\"shape_price\\\":0,\\\"qtv_price\\\":0,\\\"qtv_num\\\":1,\\\"supp_qty\\\":1275,\\\"handle_qty\\\":1275,\\\"materal_price\\\":0,\\\"act\\\":0,\\\"total\\\":0}\"},\"compress\":{\"old\":\"{\\\"price\\\":\\\"0\\\",\\\"shape_price\\\":\\\"0\\\",\\\"machine\\\":null,\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"qty_pro\\\":5050,\\\"handle_qty\\\":1275,\\\"nqty\\\":4,\\\"act\\\":0,\\\"total\\\":0,\\\"handled\\\":0}\",\"new\":\"{\\\"price\\\":\\\"0\\\",\\\"shape_price\\\":\\\"0\\\",\\\"machine\\\":null,\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"qty_pro\\\":5050,\\\"handle_qty\\\":1275,\\\"nqty\\\":4,\\\"act\\\":0,\\\"total\\\":0}\"},\"uv\":{\"old\":\"{\\\"face\\\":\\\"0\\\",\\\"machine\\\":null,\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":0,\\\"shape_price\\\":0,\\\"qtv_price\\\":0,\\\"qtv_num\\\":1,\\\"supp_qty\\\":1275,\\\"handle_qty\\\":1275,\\\"materal_price\\\":0,\\\"act\\\":0,\\\"total\\\":0,\\\"handled\\\":0}\",\"new\":\"{\\\"face\\\":\\\"0\\\",\\\"machine\\\":null,\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":0,\\\"shape_price\\\":0,\\\"qtv_price\\\":0,\\\"qtv_num\\\":1,\\\"supp_qty\\\":1275,\\\"handle_qty\\\":1275,\\\"materal_price\\\":0,\\\"act\\\":0,\\\"total\\\":0}\"},\"elevate\":{\"old\":\"{\\\"ext_price\\\":\\\"0\\\",\\\"machine\\\":\\\"69\\\",\\\"float\\\":{\\\"act\\\":\\\"1\\\",\\\"price\\\":\\\"50\\\",\\\"shape_price\\\":\\\"50000\\\",\\\"qty_pro\\\":5050,\\\"nqty\\\":4,\\\"float_cost\\\":452500},\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":150,\\\"work_price\\\":150,\\\"shape_price\\\":150000,\\\"supp_qty\\\":1275,\\\"handle_qty\\\":1275,\\\"cost\\\":531825,\\\"act\\\":1,\\\"total\\\":984325,\\\"handled\\\":0}\",\"new\":\"{\\\"ext_price\\\":\\\"0\\\",\\\"machine\\\":\\\"69\\\",\\\"float\\\":{\\\"act\\\":\\\"1\\\",\\\"price\\\":\\\"50\\\",\\\"shape_price\\\":\\\"50000\\\",\\\"qty_pro\\\":5050,\\\"nqty\\\":4,\\\"float_cost\\\":452500},\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":150,\\\"work_price\\\":150,\\\"shape_price\\\":150000,\\\"supp_qty\\\":1275,\\\"handle_qty\\\":1275,\\\"cost\\\":531825,\\\"act\\\":1,\\\"total\\\":984325}\"},\"peel\":{\"old\":\"{\\\"machine\\\":\\\"12\\\",\\\"nqty\\\":\\\"1\\\",\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":10,\\\"shape_price\\\":30000,\\\"qty_pro\\\":5050,\\\"handle_qty\\\":5100,\\\"act\\\":1,\\\"total\\\":80500,\\\"handled\\\":0}\",\"new\":\"{\\\"machine\\\":\\\"12\\\",\\\"nqty\\\":\\\"1\\\",\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":10,\\\"shape_price\\\":30000,\\\"qty_pro\\\":5050,\\\"handle_qty\\\":5100,\\\"act\\\":1,\\\"total\\\":80500}\"},\"box_paste\":{\"old\":\"{\\\"machine\\\":\\\"6\\\",\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":50,\\\"shape_price\\\":100000,\\\"qty_pro\\\":5050,\\\"handle_qty\\\":5100,\\\"act\\\":1,\\\"total\\\":352500,\\\"handled\\\":0}\",\"new\":\"{\\\"machine\\\":\\\"6\\\",\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":50,\\\"shape_price\\\":100000,\\\"qty_pro\\\":5050,\\\"handle_qty\\\":5100,\\\"act\\\":1,\\\"total\\\":352500}\"}}', 1, '2025-02-09 11:31:56', '2025-02-09 11:31:56'),
+(69, 'Hộp giấy UTRA BEE + Tem cuộn + Toa 10 x 20 TEST', 'papers', 'update', 4, 1, 0, '{\"name\":{\"old\":\"H\\u1ed9p gi\\u1ea5y UTRA BEE   Tem cu\\u1ed9n   Toa 10 x 20\",\"new\":\"H\\u1ed9p gi\\u1ea5y UTRA BEE + Tem cu\\u1ed9n + Toa 10 x 20 TEST\"}}', 1, '2025-02-09 11:31:56', '2025-02-09 11:31:56'),
+(70, 'Hộp giấy UTRA BEE + Tem cuộn + Toa 10 x 20 TEST', 'products', 'update', 37, 1, 0, '{\"name\":{\"old\":\"H\\u1ed9p gi\\u1ea5y UTRA BEE   Tem cu\\u1ed9n   Toa 10 x 20\",\"new\":\"H\\u1ed9p gi\\u1ea5y UTRA BEE + Tem cu\\u1ed9n + Toa 10 x 20 TEST\"}}', 1, '2025-02-09 11:31:56', '2025-02-09 11:31:56'),
+(71, 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 'quotes', 'apply', 3, 1, 0, '{\"status\":{\"old\":\"not_accepted\",\"new\":\"accepted\"}}', 1, '2025-02-09 11:32:03', '2025-02-09 11:32:03'),
+(72, 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 'orders', 'insert', 33, 1, 0, '{\"id\":33,\"code\":null,\"name\":\"CTY CP TH\\u01af\\u01a0NG M\\u1ea0I D\\u01af\\u1ee2C PH\\u1ea8M BIGFAM\",\"customer\":1,\"represent\":1,\"ship_price\":500000,\"profit\":15,\"vat\":0,\"total_cost\":7180000,\"base_total\":\"8832000\",\"amount\":\"8830000\",\"total_amount\":\"8830000\",\"advance\":null,\"rest\":\"8830000\",\"rest_bill\":null,\"status\":\"not_accepted\",\"rest_note\":null,\"ship_note\":null,\"quote\":3,\"act\":1,\"created_at\":\"2025-02-09 11:32:24\",\"return_time\":null,\"updated_at\":\"2025-02-09 11:32:24\",\"created_by\":1}', 1, '2025-02-09 11:32:24', '2025-02-09 11:32:24'),
+(73, 'Hộp giấy UTRA BEE + Tem cuộn + Toa 10 x 20 TEST', 'papers', 'update', 3, 1, 0, '{\"product_qty\":{\"old\":5000,\"new\":5100},\"base_supp_qty\":{\"old\":1300,\"new\":1325},\"compent_percent\":{\"old\":\"75\",\"new\":\"76\"},\"supp_qty\":{\"old\":1375,\"new\":1401},\"size\":{\"old\":\"{\\\"materal\\\":\\\"56\\\",\\\"qtv\\\":\\\"312\\\",\\\"length\\\":\\\"35\\\",\\\"width\\\":\\\"36.3\\\",\\\"qtv_price\\\":\\\"0.00175\\\",\\\"qtv_num\\\":\\\"400\\\",\\\"supp_qty\\\":1375,\\\"act\\\":1,\\\"total\\\":1222856.2499999998}\",\"new\":\"{\\\"materal\\\":\\\"56\\\",\\\"qtv\\\":\\\"312\\\",\\\"length\\\":\\\"35\\\",\\\"width\\\":\\\"36.3\\\",\\\"qtv_price\\\":\\\"0.00175\\\",\\\"qtv_num\\\":\\\"400\\\",\\\"supp_qty\\\":1401,\\\"act\\\":1,\\\"total\\\":1245979.3499999999}\"},\"print\":{\"old\":\"{\\\"type\\\":\\\"1\\\",\\\"color\\\":\\\"4\\\",\\\"machine\\\":\\\"1\\\",\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"supp_qty\\\":300,\\\"handle_qty\\\":1275,\\\"model_price\\\":66000,\\\"work_price\\\":30,\\\"shape_price\\\":110000,\\\"printer\\\":3,\\\"act\\\":1,\\\"total\\\":740000}\",\"new\":\"{\\\"type\\\":\\\"1\\\",\\\"color\\\":\\\"4\\\",\\\"machine\\\":\\\"1\\\",\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"supp_qty\\\":325,\\\"handle_qty\\\":1301,\\\"model_price\\\":66000,\\\"work_price\\\":30,\\\"shape_price\\\":110000,\\\"printer\\\":3,\\\"act\\\":1,\\\"total\\\":743000}\"},\"nilon\":{\"old\":\"{\\\"materal\\\":\\\"69\\\",\\\"qtv\\\":\\\"349\\\",\\\"face\\\":\\\"1\\\",\\\"machine\\\":\\\"46\\\",\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":0,\\\"shape_price\\\":50000,\\\"qtv_price\\\":\\\"0.02011\\\",\\\"qtv_num\\\":\\\"15.4\\\",\\\"supp_qty\\\":1275,\\\"handle_qty\\\":1275,\\\"materal_price\\\":0.309694,\\\"act\\\":1,\\\"total\\\":551669.439425}\",\"new\":\"{\\\"materal\\\":\\\"69\\\",\\\"qtv\\\":\\\"349\\\",\\\"face\\\":\\\"1\\\",\\\"machine\\\":\\\"46\\\",\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":0,\\\"shape_price\\\":50000,\\\"qtv_price\\\":\\\"0.02011\\\",\\\"qtv_num\\\":\\\"15.4\\\",\\\"supp_qty\\\":1301,\\\"handle_qty\\\":1301,\\\"materal_price\\\":0.309694,\\\"act\\\":1,\\\"total\\\":561899.561327}\"},\"metalai\":{\"old\":\"{\\\"face\\\":\\\"0\\\",\\\"machine\\\":null,\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":0,\\\"shape_price\\\":0,\\\"qtv_price\\\":0,\\\"qtv_num\\\":1,\\\"supp_qty\\\":1375,\\\"handle_qty\\\":1275,\\\"materal_price\\\":0,\\\"act\\\":0,\\\"total\\\":0}\",\"new\":\"{\\\"face\\\":\\\"0\\\",\\\"machine\\\":null,\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":0,\\\"shape_price\\\":0,\\\"qtv_price\\\":0,\\\"qtv_num\\\":1,\\\"supp_qty\\\":1401,\\\"handle_qty\\\":1301,\\\"materal_price\\\":0,\\\"act\\\":0,\\\"total\\\":0}\"},\"cover\":{\"old\":\"{\\\"face\\\":\\\"0\\\",\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":0,\\\"shape_price\\\":0,\\\"qtv_price\\\":0,\\\"qtv_num\\\":1,\\\"supp_qty\\\":1275,\\\"handle_qty\\\":1275,\\\"materal_price\\\":0,\\\"act\\\":0,\\\"total\\\":0}\",\"new\":\"{\\\"face\\\":\\\"0\\\",\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":0,\\\"shape_price\\\":0,\\\"qtv_price\\\":0,\\\"qtv_num\\\":1,\\\"supp_qty\\\":1301,\\\"handle_qty\\\":1301,\\\"materal_price\\\":0,\\\"act\\\":0,\\\"total\\\":0}\"},\"compress\":{\"old\":\"{\\\"price\\\":\\\"0\\\",\\\"shape_price\\\":\\\"0\\\",\\\"machine\\\":null,\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"qty_pro\\\":5050,\\\"handle_qty\\\":1275,\\\"nqty\\\":4,\\\"act\\\":0,\\\"total\\\":0}\",\"new\":\"{\\\"price\\\":\\\"0\\\",\\\"shape_price\\\":\\\"0\\\",\\\"machine\\\":null,\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"qty_pro\\\":5151,\\\"handle_qty\\\":1301,\\\"nqty\\\":4,\\\"act\\\":0,\\\"total\\\":0}\"},\"uv\":{\"old\":\"{\\\"face\\\":\\\"0\\\",\\\"machine\\\":null,\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":0,\\\"shape_price\\\":0,\\\"qtv_price\\\":0,\\\"qtv_num\\\":1,\\\"supp_qty\\\":1275,\\\"handle_qty\\\":1275,\\\"materal_price\\\":0,\\\"act\\\":0,\\\"total\\\":0}\",\"new\":\"{\\\"face\\\":\\\"0\\\",\\\"machine\\\":null,\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":0,\\\"shape_price\\\":0,\\\"qtv_price\\\":0,\\\"qtv_num\\\":1,\\\"supp_qty\\\":1301,\\\"handle_qty\\\":1301,\\\"materal_price\\\":0,\\\"act\\\":0,\\\"total\\\":0}\"},\"elevate\":{\"old\":\"{\\\"ext_price\\\":\\\"0\\\",\\\"machine\\\":\\\"69\\\",\\\"float\\\":{\\\"act\\\":\\\"1\\\",\\\"price\\\":\\\"50\\\",\\\"shape_price\\\":\\\"50000\\\",\\\"qty_pro\\\":5050,\\\"nqty\\\":4,\\\"float_cost\\\":452500},\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":150,\\\"work_price\\\":150,\\\"shape_price\\\":150000,\\\"supp_qty\\\":1275,\\\"handle_qty\\\":1275,\\\"cost\\\":531825,\\\"act\\\":1,\\\"total\\\":984325}\",\"new\":\"{\\\"ext_price\\\":\\\"0\\\",\\\"machine\\\":\\\"69\\\",\\\"float\\\":{\\\"act\\\":\\\"1\\\",\\\"price\\\":\\\"50\\\",\\\"shape_price\\\":\\\"50000\\\",\\\"qty_pro\\\":5151,\\\"nqty\\\":4,\\\"float_cost\\\":457550},\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":150,\\\"work_price\\\":150,\\\"shape_price\\\":150000,\\\"supp_qty\\\":1301,\\\"handle_qty\\\":1301,\\\"cost\\\":535725,\\\"act\\\":1,\\\"total\\\":993275}\"},\"peel\":{\"old\":\"{\\\"machine\\\":\\\"12\\\",\\\"nqty\\\":\\\"1\\\",\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":10,\\\"shape_price\\\":30000,\\\"qty_pro\\\":5050,\\\"handle_qty\\\":5100,\\\"act\\\":1,\\\"total\\\":80500}\",\"new\":\"{\\\"machine\\\":\\\"12\\\",\\\"nqty\\\":\\\"1\\\",\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":10,\\\"shape_price\\\":30000,\\\"qty_pro\\\":5151,\\\"handle_qty\\\":5204,\\\"act\\\":1,\\\"total\\\":81510}\"},\"box_paste\":{\"old\":\"{\\\"machine\\\":\\\"6\\\",\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":50,\\\"shape_price\\\":100000,\\\"qty_pro\\\":5050,\\\"handle_qty\\\":5100,\\\"act\\\":1,\\\"total\\\":352500}\",\"new\":\"{\\\"machine\\\":\\\"6\\\",\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":50,\\\"shape_price\\\":100000,\\\"qty_pro\\\":5151,\\\"handle_qty\\\":5204,\\\"act\\\":1,\\\"total\\\":357550}\"},\"ext_price\":{\"old\":\"{\\\"temp_price\\\":\\\"0\\\",\\\"prescript_price\\\":\\\"150\\\",\\\"supp_price\\\":\\\"0\\\",\\\"note\\\":null,\\\"qty_pro\\\":5000,\\\"act\\\":1,\\\"total\\\":750000}\",\"new\":\"{\\\"temp_price\\\":\\\"0\\\",\\\"prescript_price\\\":\\\"150\\\",\\\"supp_price\\\":\\\"0\\\",\\\"note\\\":null,\\\"qty_pro\\\":5100,\\\"act\\\":1,\\\"total\\\":765000}\"},\"total_cost\":{\"old\":\"4681850.689425\",\"new\":\"4748213.911327\"}}', 1, '2025-02-09 11:34:36', '2025-02-09 11:34:36'),
+(74, 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 'quotes', 'insert', 4, 1, 0, '{\"id\":4,\"seri\":\"BG-00000004\",\"status\":\"not_accepted\",\"name\":\"CTY CP TH\\u01af\\u01a0NG M\\u1ea0I D\\u01af\\u1ee2C PH\\u1ea8M BIGFAM\",\"product_qty\":null,\"customer\":1,\"represent\":1,\"ship_price\":500000,\"profit\":15,\"total_cost\":\"7180000\",\"base_total\":\"8832000\",\"total_amount\":\"8830000\",\"note\":null,\"act\":1,\"src\":null,\"created_at\":\"2025-02-09 11:36:03\",\"updated_at\":\"2025-02-09 11:36:03\",\"created_by\":1}', 1, '2025-02-09 11:36:03', '2025-02-09 11:36:03'),
+(75, 'Hộp giấy UTRA BEE + Tem cuộn + Toa 10 x 20', 'products', 'insert', 38, 1, 0, '{\"id\":38,\"code\":null,\"name\":\"H\\u1ed9p gi\\u1ea5y UTRA BEE + Tem cu\\u1ed9n + Toa 10 x 20\",\"type\":1,\"qty\":\"5000\",\"made_by\":1,\"category\":2,\"product_style\":14,\"design\":5,\"length\":4,\"width\":4,\"height\":11.5,\"quote_id\":4,\"order\":0,\"total_cost\":\"7180000\",\"profit\":\"15\",\"ship_price\":\"500000\",\"base_total\":\"8832000\",\"total_amount\":\"8830000\",\"custom_design_file\":null,\"sale_shape_file\":\"{\\\"id\\\":\\\"2\\\",\\\"dir\\\":\\\"storages\\/uploads\\\",\\\"path\\\":\\\"storage\\/app\\/public\\/uploads\\/9-2 Khu\\u00f4n BEE(1).ai\\\",\\\"name\\\":\\\"9-2 Khu\\u00f4n BEE(1).ai\\\"}\",\"tech_shape_file\":null,\"design_file\":null,\"design_shape_file\":null,\"handle_shape_file\":null,\"note\":\"null\",\"status\":\"\",\"act\":1,\"order_created\":0,\"detail\":null,\"product_warehouse\":null,\"delivery\":5000,\"created_at\":\"2025-02-09 11:36:03\",\"updated_at\":\"2025-02-09 11:36:03\",\"created_by\":1,\"parent\":0}', 1, '2025-02-09 11:36:03', '2025-02-09 11:36:03'),
+(76, 'Hộp giấy UTRA BEE   Tem cuộn   Toa 10 x 20', 'papers', 'insert', 5, 1, 0, '{\"id\":5,\"code\":null,\"ext_name\":null,\"name\":\"H\\u1ed9p gi\\u1ea5y UTRA BEE   Tem cu\\u1ed9n   Toa 10 x 20\",\"product_qty\":5000,\"nqty\":4,\"double\":0,\"base_supp_qty\":1300,\"compent_percent\":\"75\",\"compent_plus\":0,\"supp_qty\":1375,\"size\":\"{\\\"materal\\\":\\\"56\\\",\\\"qtv\\\":\\\"312\\\",\\\"length\\\":\\\"35\\\",\\\"width\\\":\\\"36.3\\\",\\\"qtv_price\\\":\\\"0.00175\\\",\\\"qtv_num\\\":\\\"400\\\",\\\"supp_qty\\\":1375,\\\"act\\\":1,\\\"total\\\":1222856.2499999998}\",\"print\":\"{\\\"type\\\":\\\"1\\\",\\\"color\\\":\\\"4\\\",\\\"machine\\\":\\\"1\\\",\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"supp_qty\\\":300,\\\"handle_qty\\\":1275,\\\"model_price\\\":66000,\\\"work_price\\\":30,\\\"shape_price\\\":110000,\\\"printer\\\":3,\\\"act\\\":1,\\\"total\\\":740000,\\\"handled\\\":0,\\\"print_confirmed\\\":0}\",\"nilon\":\"{\\\"materal\\\":\\\"69\\\",\\\"qtv\\\":\\\"349\\\",\\\"face\\\":\\\"1\\\",\\\"machine\\\":\\\"46\\\",\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":0,\\\"shape_price\\\":50000,\\\"qtv_price\\\":\\\"0.02011\\\",\\\"qtv_num\\\":\\\"15.4\\\",\\\"supp_qty\\\":1275,\\\"handle_qty\\\":1275,\\\"materal_price\\\":0.309694,\\\"act\\\":1,\\\"total\\\":551669.439425,\\\"handled\\\":0}\",\"metalai\":\"{\\\"face\\\":\\\"0\\\",\\\"machine\\\":null,\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":0,\\\"shape_price\\\":0,\\\"qtv_price\\\":0,\\\"qtv_num\\\":1,\\\"supp_qty\\\":1375,\\\"handle_qty\\\":1275,\\\"materal_price\\\":0,\\\"act\\\":0,\\\"total\\\":0,\\\"handled\\\":0}\",\"cover\":\"{\\\"face\\\":\\\"0\\\",\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":0,\\\"shape_price\\\":0,\\\"qtv_price\\\":0,\\\"qtv_num\\\":1,\\\"supp_qty\\\":1275,\\\"handle_qty\\\":1275,\\\"materal_price\\\":0,\\\"act\\\":0,\\\"total\\\":0,\\\"handled\\\":0}\",\"compress\":\"{\\\"price\\\":\\\"0\\\",\\\"shape_price\\\":\\\"0\\\",\\\"machine\\\":null,\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"qty_pro\\\":5050,\\\"handle_qty\\\":1275,\\\"nqty\\\":4,\\\"act\\\":0,\\\"total\\\":0,\\\"handled\\\":0}\",\"uv\":\"{\\\"face\\\":\\\"0\\\",\\\"machine\\\":null,\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":0,\\\"shape_price\\\":0,\\\"qtv_price\\\":0,\\\"qtv_num\\\":1,\\\"supp_qty\\\":1275,\\\"handle_qty\\\":1275,\\\"materal_price\\\":0,\\\"act\\\":0,\\\"total\\\":0,\\\"handled\\\":0}\",\"elevate\":\"{\\\"ext_price\\\":\\\"0\\\",\\\"machine\\\":\\\"69\\\",\\\"float\\\":{\\\"act\\\":\\\"1\\\",\\\"price\\\":\\\"50\\\",\\\"shape_price\\\":\\\"50000\\\",\\\"qty_pro\\\":5050,\\\"nqty\\\":4,\\\"float_cost\\\":452500},\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":150,\\\"work_price\\\":150,\\\"shape_price\\\":150000,\\\"supp_qty\\\":1275,\\\"handle_qty\\\":1275,\\\"cost\\\":531825,\\\"act\\\":1,\\\"total\\\":984325,\\\"handled\\\":0}\",\"float\":null,\"peel\":\"{\\\"machine\\\":\\\"12\\\",\\\"nqty\\\":\\\"1\\\",\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":10,\\\"shape_price\\\":30000,\\\"qty_pro\\\":5050,\\\"handle_qty\\\":5100,\\\"act\\\":1,\\\"total\\\":80500,\\\"handled\\\":0}\",\"cut\":null,\"fold\":null,\"box_paste\":\"{\\\"machine\\\":\\\"6\\\",\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":50,\\\"shape_price\\\":100000,\\\"qty_pro\\\":5050,\\\"handle_qty\\\":5100,\\\"act\\\":1,\\\"total\\\":352500,\\\"handled\\\":0}\",\"bag_paste\":null,\"ext_cate\":2,\"ext_price\":\"{\\\"temp_price\\\":\\\"0\\\",\\\"prescript_price\\\":\\\"150\\\",\\\"supp_price\\\":\\\"0\\\",\\\"note\\\":null,\\\"qty_pro\\\":5000,\\\"act\\\":1,\\\"total\\\":750000}\",\"handle_type\":1,\"handle_elevate\":null,\"total_cost\":\"4681850.689425\",\"product\":38,\"note\":null,\"main\":1,\"parent\":0,\"is_join\":0,\"act\":1,\"status\":\"\",\"handled\":0,\"created_at\":\"2025-02-09 11:36:03\",\"updated_at\":\"2025-02-09 11:36:03\",\"created_by\":1}', 1, '2025-02-09 11:36:04', '2025-02-09 11:36:04'),
+(77, 'Hộp giấy UTRA BEE   Tem cuộn   Toa 10 x 20', 'papers', 'insert', 6, 1, 0, '{\"id\":6,\"code\":null,\"ext_name\":7,\"name\":\"H\\u1ed9p gi\\u1ea5y UTRA BEE   Tem cu\\u1ed9n   Toa 10 x 20\",\"product_qty\":5000,\"nqty\":null,\"double\":null,\"base_supp_qty\":null,\"compent_percent\":null,\"compent_plus\":null,\"supp_qty\":null,\"size\":null,\"print\":null,\"nilon\":null,\"metalai\":null,\"cover\":null,\"compress\":null,\"uv\":null,\"elevate\":null,\"float\":null,\"peel\":null,\"cut\":null,\"fold\":null,\"box_paste\":null,\"bag_paste\":null,\"ext_cate\":null,\"ext_price\":null,\"handle_type\":2,\"handle_elevate\":null,\"total_cost\":\"0\",\"product\":38,\"note\":null,\"main\":0,\"parent\":0,\"is_join\":0,\"act\":1,\"status\":\"\",\"handled\":0,\"created_at\":\"2025-02-09 11:36:04\",\"updated_at\":\"2025-02-09 11:36:04\",\"created_by\":1}', 1, '2025-02-09 11:36:04', '2025-02-09 11:36:04'),
+(78, 'Hộp giấy UTRA BEE + Tem cuộn + Toa 10 x 20 test lần 3', 'products', 'update', 38, 1, 0, '{\"name\":{\"old\":\"H\\u1ed9p gi\\u1ea5y UTRA BEE + Tem cu\\u1ed9n + Toa 10 x 20\",\"new\":\"H\\u1ed9p gi\\u1ea5y UTRA BEE + Tem cu\\u1ed9n + Toa 10 x 20 test l\\u1ea7n 3\"}}', 1, '2025-02-09 11:36:16', '2025-02-09 11:36:16');
+INSERT INTO `n_log_actions` (`id`, `name`, `table_map`, `action`, `target`, `user`, `parent`, `detail_data`, `act`, `created_at`, `updated_at`) VALUES
+(79, 'Hộp giấy UTRA BEE + Tem cuộn + Toa 10 x 20 test lần 3', 'papers', 'update', 5, 1, 0, '{\"name\":{\"old\":\"H\\u1ed9p gi\\u1ea5y UTRA BEE   Tem cu\\u1ed9n   Toa 10 x 20\",\"new\":\"H\\u1ed9p gi\\u1ea5y UTRA BEE + Tem cu\\u1ed9n + Toa 10 x 20 test l\\u1ea7n 3\"},\"print\":{\"old\":\"{\\\"type\\\":\\\"1\\\",\\\"color\\\":\\\"4\\\",\\\"machine\\\":\\\"1\\\",\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"supp_qty\\\":300,\\\"handle_qty\\\":1275,\\\"model_price\\\":66000,\\\"work_price\\\":30,\\\"shape_price\\\":110000,\\\"printer\\\":3,\\\"act\\\":1,\\\"total\\\":740000,\\\"handled\\\":0,\\\"print_confirmed\\\":0}\",\"new\":\"{\\\"type\\\":\\\"1\\\",\\\"color\\\":\\\"4\\\",\\\"machine\\\":\\\"1\\\",\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"supp_qty\\\":300,\\\"handle_qty\\\":1275,\\\"model_price\\\":66000,\\\"work_price\\\":30,\\\"shape_price\\\":110000,\\\"printer\\\":3,\\\"act\\\":1,\\\"total\\\":740000}\"},\"nilon\":{\"old\":\"{\\\"materal\\\":\\\"69\\\",\\\"qtv\\\":\\\"349\\\",\\\"face\\\":\\\"1\\\",\\\"machine\\\":\\\"46\\\",\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":0,\\\"shape_price\\\":50000,\\\"qtv_price\\\":\\\"0.02011\\\",\\\"qtv_num\\\":\\\"15.4\\\",\\\"supp_qty\\\":1275,\\\"handle_qty\\\":1275,\\\"materal_price\\\":0.309694,\\\"act\\\":1,\\\"total\\\":551669.439425,\\\"handled\\\":0}\",\"new\":\"{\\\"materal\\\":\\\"69\\\",\\\"qtv\\\":\\\"349\\\",\\\"face\\\":\\\"1\\\",\\\"machine\\\":\\\"46\\\",\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":0,\\\"shape_price\\\":50000,\\\"qtv_price\\\":\\\"0.02011\\\",\\\"qtv_num\\\":\\\"15.4\\\",\\\"supp_qty\\\":1275,\\\"handle_qty\\\":1275,\\\"materal_price\\\":0.309694,\\\"act\\\":1,\\\"total\\\":551669.439425}\"},\"metalai\":{\"old\":\"{\\\"face\\\":\\\"0\\\",\\\"machine\\\":null,\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":0,\\\"shape_price\\\":0,\\\"qtv_price\\\":0,\\\"qtv_num\\\":1,\\\"supp_qty\\\":1375,\\\"handle_qty\\\":1275,\\\"materal_price\\\":0,\\\"act\\\":0,\\\"total\\\":0,\\\"handled\\\":0}\",\"new\":\"{\\\"face\\\":\\\"0\\\",\\\"machine\\\":null,\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":0,\\\"shape_price\\\":0,\\\"qtv_price\\\":0,\\\"qtv_num\\\":1,\\\"supp_qty\\\":1375,\\\"handle_qty\\\":1275,\\\"materal_price\\\":0,\\\"act\\\":0,\\\"total\\\":0}\"},\"cover\":{\"old\":\"{\\\"face\\\":\\\"0\\\",\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":0,\\\"shape_price\\\":0,\\\"qtv_price\\\":0,\\\"qtv_num\\\":1,\\\"supp_qty\\\":1275,\\\"handle_qty\\\":1275,\\\"materal_price\\\":0,\\\"act\\\":0,\\\"total\\\":0,\\\"handled\\\":0}\",\"new\":\"{\\\"face\\\":\\\"0\\\",\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":0,\\\"shape_price\\\":0,\\\"qtv_price\\\":0,\\\"qtv_num\\\":1,\\\"supp_qty\\\":1275,\\\"handle_qty\\\":1275,\\\"materal_price\\\":0,\\\"act\\\":0,\\\"total\\\":0}\"},\"compress\":{\"old\":\"{\\\"price\\\":\\\"0\\\",\\\"shape_price\\\":\\\"0\\\",\\\"machine\\\":null,\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"qty_pro\\\":5050,\\\"handle_qty\\\":1275,\\\"nqty\\\":4,\\\"act\\\":0,\\\"total\\\":0,\\\"handled\\\":0}\",\"new\":\"{\\\"price\\\":\\\"0\\\",\\\"shape_price\\\":\\\"0\\\",\\\"machine\\\":null,\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"qty_pro\\\":5050,\\\"handle_qty\\\":1275,\\\"nqty\\\":4,\\\"act\\\":0,\\\"total\\\":0}\"},\"uv\":{\"old\":\"{\\\"face\\\":\\\"0\\\",\\\"machine\\\":null,\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":0,\\\"shape_price\\\":0,\\\"qtv_price\\\":0,\\\"qtv_num\\\":1,\\\"supp_qty\\\":1275,\\\"handle_qty\\\":1275,\\\"materal_price\\\":0,\\\"act\\\":0,\\\"total\\\":0,\\\"handled\\\":0}\",\"new\":\"{\\\"face\\\":\\\"0\\\",\\\"machine\\\":null,\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":0,\\\"shape_price\\\":0,\\\"qtv_price\\\":0,\\\"qtv_num\\\":1,\\\"supp_qty\\\":1275,\\\"handle_qty\\\":1275,\\\"materal_price\\\":0,\\\"act\\\":0,\\\"total\\\":0}\"},\"elevate\":{\"old\":\"{\\\"ext_price\\\":\\\"0\\\",\\\"machine\\\":\\\"69\\\",\\\"float\\\":{\\\"act\\\":\\\"1\\\",\\\"price\\\":\\\"50\\\",\\\"shape_price\\\":\\\"50000\\\",\\\"qty_pro\\\":5050,\\\"nqty\\\":4,\\\"float_cost\\\":452500},\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":150,\\\"work_price\\\":150,\\\"shape_price\\\":150000,\\\"supp_qty\\\":1275,\\\"handle_qty\\\":1275,\\\"cost\\\":531825,\\\"act\\\":1,\\\"total\\\":984325,\\\"handled\\\":0}\",\"new\":\"{\\\"ext_price\\\":\\\"0\\\",\\\"machine\\\":\\\"69\\\",\\\"float\\\":{\\\"act\\\":\\\"1\\\",\\\"price\\\":\\\"50\\\",\\\"shape_price\\\":\\\"50000\\\",\\\"qty_pro\\\":5050,\\\"nqty\\\":4,\\\"float_cost\\\":452500},\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":150,\\\"work_price\\\":150,\\\"shape_price\\\":150000,\\\"supp_qty\\\":1275,\\\"handle_qty\\\":1275,\\\"cost\\\":531825,\\\"act\\\":1,\\\"total\\\":984325}\"},\"peel\":{\"old\":\"{\\\"machine\\\":\\\"12\\\",\\\"nqty\\\":\\\"1\\\",\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":10,\\\"shape_price\\\":30000,\\\"qty_pro\\\":5050,\\\"handle_qty\\\":5100,\\\"act\\\":1,\\\"total\\\":80500,\\\"handled\\\":0}\",\"new\":\"{\\\"machine\\\":\\\"12\\\",\\\"nqty\\\":\\\"1\\\",\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":10,\\\"shape_price\\\":30000,\\\"qty_pro\\\":5050,\\\"handle_qty\\\":5100,\\\"act\\\":1,\\\"total\\\":80500}\"},\"box_paste\":{\"old\":\"{\\\"machine\\\":\\\"6\\\",\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":50,\\\"shape_price\\\":100000,\\\"qty_pro\\\":5050,\\\"handle_qty\\\":5100,\\\"act\\\":1,\\\"total\\\":352500,\\\"handled\\\":0}\",\"new\":\"{\\\"machine\\\":\\\"6\\\",\\\"note\\\":null,\\\"handled_qty\\\":0,\\\"model_price\\\":0,\\\"work_price\\\":50,\\\"shape_price\\\":100000,\\\"qty_pro\\\":5050,\\\"handle_qty\\\":5100,\\\"act\\\":1,\\\"total\\\":352500}\"}}', 1, '2025-02-09 11:36:17', '2025-02-09 11:36:17'),
+(80, 'Hộp giấy UTRA BEE + Tem cuộn + Toa 10 x 20 test lần 3', 'papers', 'update', 6, 1, 0, '{\"name\":{\"old\":\"H\\u1ed9p gi\\u1ea5y UTRA BEE   Tem cu\\u1ed9n   Toa 10 x 20\",\"new\":\"H\\u1ed9p gi\\u1ea5y UTRA BEE + Tem cu\\u1ed9n + Toa 10 x 20 test l\\u1ea7n 3\"}}', 1, '2025-02-09 11:36:17', '2025-02-09 11:36:17'),
+(81, 'Hộp giấy UTRA BEE + Tem cuộn + Toa 10 x 20 test lần 3', 'products', 'update', 39, 1, 0, '{\"name\":{\"old\":\"H\\u1ed9p gi\\u1ea5y UTRA BEE   Tem cu\\u1ed9n   Toa 10 x 20\",\"new\":\"H\\u1ed9p gi\\u1ea5y UTRA BEE + Tem cu\\u1ed9n + Toa 10 x 20 test l\\u1ea7n 3\"}}', 1, '2025-02-09 11:36:17', '2025-02-09 11:36:17'),
+(82, 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 'quotes', 'apply', 4, 1, 0, '{\"status\":{\"old\":\"not_accepted\",\"new\":\"accepted\"}}', 1, '2025-02-09 11:36:33', '2025-02-09 11:36:33'),
+(83, 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 'orders', 'insert', 34, 1, 0, '{\"id\":34,\"code\":null,\"name\":\"CTY CP TH\\u01af\\u01a0NG M\\u1ea0I D\\u01af\\u1ee2C PH\\u1ea8M BIGFAM\",\"customer\":1,\"represent\":1,\"ship_price\":500000,\"profit\":15,\"vat\":0,\"total_cost\":7180000,\"base_total\":\"8832000\",\"amount\":\"8830000\",\"total_amount\":\"8830000\",\"advance\":null,\"rest\":\"8830000\",\"rest_bill\":null,\"status\":\"not_accepted\",\"rest_note\":null,\"ship_note\":null,\"quote\":4,\"act\":1,\"created_at\":\"2025-02-09 11:37:31\",\"return_time\":null,\"updated_at\":\"2025-02-09 11:37:31\",\"created_by\":1}', 1, '2025-02-09 11:37:31', '2025-02-09 11:37:31'),
+(84, 'Hộp giấy UTRA BEE + Tem cuộn + Toa 10 x 20 test lần 3', 'products', 'update', 38, 1, 0, '{\"tech_shape_file\":{\"old\":null,\"new\":\"{\\\"id\\\":\\\"4\\\",\\\"dir\\\":\\\"storages\\/uploads\\\",\\\"path\\\":\\\"storage\\/app\\/public\\/uploads\\/11.jpg\\\",\\\"name\\\":\\\"11.jpg\\\"}\"}}', 1, '2025-02-09 11:41:28', '2025-02-09 11:41:28'),
+(86, 'Hộp giấy UTRA BEE + Tem cuộn + Toa 10 x 20 test lần 3', 'products', 'to_design', 38, 1, 0, '{\"status\":{\"old\":\"not_accepted\",\"new\":\"to_design\"}}', 1, '2025-02-09 11:41:28', '2025-02-09 11:41:28'),
+(87, 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 'orders', 'to_design', 34, 1, 0, '{\"status\":{\"old\":\"not_accepted\",\"new\":\"to_design\"}}', 1, '2025-02-09 11:41:28', '2025-02-09 11:41:28'),
+(88, 'Hộp giấy UTRA BEE + Tem cuộn + Toa 10 x 20 TEST', 'products', 'update', 36, 1, 0, '{\"tech_shape_file\":{\"old\":null,\"new\":\"{\\\"id\\\":\\\"5\\\",\\\"dir\\\":\\\"storages\\/uploads\\\",\\\"path\\\":\\\"storage\\/app\\/public\\/uploads\\/11(1).jpg\\\",\\\"name\\\":\\\"11(1).jpg\\\"}\"}}', 1, '2025-02-09 11:41:42', '2025-02-09 11:41:42'),
+(90, 'Hộp giấy UTRA BEE + Tem cuộn + Toa 10 x 20 TEST', 'products', 'to_design', 36, 1, 0, '{\"status\":{\"old\":\"not_accepted\",\"new\":\"to_design\"}}', 1, '2025-02-09 11:41:42', '2025-02-09 11:41:42'),
+(91, 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 'orders', 'to_design', 33, 1, 0, '{\"status\":{\"old\":\"not_accepted\",\"new\":\"to_design\"}}', 1, '2025-02-09 11:41:42', '2025-02-09 11:41:42'),
+(93, 'Hộp giấy UTRA BEE + Tem cuộn + Toa 10 x 20 TEST', 'products', 'designing', 36, 1, 0, '{\"status\":{\"old\":\"to_design\",\"new\":\"designing\"}}', 1, '2025-02-09 11:41:47', '2025-02-09 11:41:47'),
+(94, 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 'orders', 'designing', 33, 1, 0, '{\"status\":{\"old\":\"to_design\",\"new\":\"designing\"}}', 1, '2025-02-09 11:41:47', '2025-02-09 11:41:47'),
+(95, 'Hộp giấy UTRA BEE + Tem cuộn + Toa 10 x 20 TEST', 'products', 'update', 36, 1, 0, '{\"design_file\":{\"old\":null,\"new\":\"{\\\"id\\\":\\\"6\\\",\\\"dir\\\":\\\"storages\\/uploads\\\",\\\"path\\\":\\\"storage\\/app\\/public\\/uploads\\/11(2).jpg\\\",\\\"name\\\":\\\"11(2).jpg\\\"}\"},\"design_shape_file\":{\"old\":null,\"new\":\"{\\\"id\\\":\\\"7\\\",\\\"dir\\\":\\\"storages\\/uploads\\\",\\\"path\\\":\\\"storage\\/app\\/public\\/uploads\\/11(3).jpg\\\",\\\"name\\\":\\\"11(3).jpg\\\"}\"},\"handle_shape_file\":{\"old\":null,\"new\":\"{\\\"id\\\":\\\"8\\\",\\\"dir\\\":\\\"storages\\/uploads\\\",\\\"path\\\":\\\"storage\\/app\\/public\\/uploads\\/11(4).jpg\\\",\\\"name\\\":\\\"11(4).jpg\\\"}\"}}', 1, '2025-02-09 11:42:01', '2025-02-09 11:42:01'),
+(97, 'Hộp giấy UTRA BEE + Tem cuộn + Toa 10 x 20 TEST', 'products', 'design_submited', 36, 1, 0, '{\"status\":{\"old\":\"designing\",\"new\":\"design_submited\"}}', 1, '2025-02-09 11:42:01', '2025-02-09 11:42:01'),
+(98, 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 'orders', 'design_submited', 33, 1, 0, '{\"status\":{\"old\":\"designing\",\"new\":\"design_submited\"},\"return_time\":{\"old\":null,\"new\":\"2025-02-17 11:32:24\"}}', 1, '2025-02-09 11:42:02', '2025-02-09 11:42:02'),
+(100, 'Hộp giấy UTRA BEE + Tem cuộn + Toa 10 x 20 test lần 3', 'products', 'designing', 38, 1, 0, '{\"status\":{\"old\":\"to_design\",\"new\":\"designing\"}}', 1, '2025-02-09 11:42:07', '2025-02-09 11:42:07'),
+(101, 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 'orders', 'designing', 34, 1, 0, '{\"status\":{\"old\":\"to_design\",\"new\":\"designing\"}}', 1, '2025-02-09 11:42:07', '2025-02-09 11:42:07'),
+(102, 'Hộp giấy UTRA BEE + Tem cuộn + Toa 10 x 20 test lần 3', 'products', 'update', 38, 1, 0, '{\"design_file\":{\"old\":null,\"new\":\"{\\\"id\\\":\\\"9\\\",\\\"dir\\\":\\\"storages\\/uploads\\\",\\\"path\\\":\\\"storage\\/app\\/public\\/uploads\\/11(5).jpg\\\",\\\"name\\\":\\\"11(5).jpg\\\"}\"},\"design_shape_file\":{\"old\":null,\"new\":\"{\\\"id\\\":\\\"10\\\",\\\"dir\\\":\\\"storages\\/uploads\\\",\\\"path\\\":\\\"storage\\/app\\/public\\/uploads\\/11(6).jpg\\\",\\\"name\\\":\\\"11(6).jpg\\\"}\"},\"handle_shape_file\":{\"old\":null,\"new\":\"{\\\"id\\\":\\\"11\\\",\\\"dir\\\":\\\"storages\\/uploads\\\",\\\"path\\\":\\\"storage\\/app\\/public\\/uploads\\/11(7).jpg\\\",\\\"name\\\":\\\"11(7).jpg\\\"}\"}}', 1, '2025-02-09 11:42:25', '2025-02-09 11:42:25'),
+(104, 'Hộp giấy UTRA BEE + Tem cuộn + Toa 10 x 20 test lần 3', 'products', 'design_submited', 38, 1, 0, '{\"status\":{\"old\":\"designing\",\"new\":\"design_submited\"}}', 1, '2025-02-09 11:42:25', '2025-02-09 11:42:25'),
+(105, 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 'orders', 'design_submited', 34, 1, 0, '{\"status\":{\"old\":\"designing\",\"new\":\"design_submited\"},\"return_time\":{\"old\":null,\"new\":\"2025-02-17 11:37:31\"}}', 1, '2025-02-09 11:42:25', '2025-02-09 11:42:25'),
+(106, 'Hộp giấy UTRA BEE + Tem cuộn + Toa 10 x 20 test lần 3', 'products', 'tech_submited', 38, 1, 0, '{\"status\":{\"old\":\"design_submited\",\"new\":\"tech_submited\"}}', 1, '2025-02-09 11:42:42', '2025-02-09 11:42:42'),
+(107, 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 'orders', 'tech_submited', 34, 1, 0, '{\"status\":{\"old\":\"design_submited\",\"new\":\"tech_submited\"}}', 1, '2025-02-09 11:42:42', '2025-02-09 11:42:42'),
+(108, 'Hộp giấy UTRA BEE + Tem cuộn + Toa 10 x 20 TEST', 'products', 'tech_submited', 36, 1, 0, '{\"status\":{\"old\":\"design_submited\",\"new\":\"tech_submited\"}}', 1, '2025-02-09 11:42:48', '2025-02-09 11:42:48'),
+(109, 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 'orders', 'tech_submited', 33, 1, 0, '{\"status\":{\"old\":\"design_submited\",\"new\":\"tech_submited\"}}', 1, '2025-02-09 11:42:48', '2025-02-09 11:42:48'),
+(114, '1', 'supply_buyings', 'insert', 3, 6, 0, '{\"id\":3,\"code\":null,\"name\":\"1\",\"type\":\"paper\",\"provider\":null,\"supply\":null,\"status\":\"processing\",\"payment_status\":null,\"payment_type\":0,\"ship_price\":null,\"other_price\":null,\"advance\":null,\"total\":null,\"rest\":null,\"bill\":null,\"note\":null,\"act\":1,\"created_by\":6,\"contact_by\":null,\"applied_by\":null,\"bought_by\":null,\"submited_by\":null,\"created_at\":\"2025-02-09 11:54:55\",\"updated_at\":\"2025-02-09 11:54:55\"}', 1, '2025-02-09 11:54:55', '2025-02-09 11:54:55'),
+(115, '1', 'supply_buyings', 'insert', 3, 6, 0, '{\"id\":3,\"code\":\"MVT-00000003\",\"name\":\"1\",\"type\":\"paper\",\"provider\":null,\"supply\":null,\"status\":\"processing\",\"payment_status\":null,\"payment_type\":0,\"ship_price\":null,\"other_price\":null,\"advance\":null,\"total\":null,\"rest\":null,\"bill\":null,\"note\":null,\"act\":1,\"created_by\":6,\"contact_by\":null,\"applied_by\":null,\"bought_by\":null,\"submited_by\":null,\"created_at\":\"2025-02-09 11:54:55\",\"updated_at\":\"2025-02-09 11:54:55\"}', 1, '2025-02-09 11:54:55', '2025-02-09 11:54:55'),
+(116, NULL, 'buying_items', 'contact_confirm', 3, 1, 0, '{\"status\":{\"old\":\"processing\",\"new\":\"not_accepted\"},\"contact_by\":{\"old\":null,\"new\":1}}', 1, '2025-02-09 11:55:24', '2025-02-09 11:55:24'),
+(117, NULL, 'buying_items', 'apply', 3, 1, 0, '{\"status\":{\"old\":\"not_accepted\",\"new\":\"bought\"},\"applied_by\":{\"old\":null,\"new\":1}}', 1, '2025-02-09 11:55:32', '2025-02-09 11:55:32'),
+(118, '1', 'supply_buyings', 'insert', 4, 6, 0, '{\"id\":4,\"code\":null,\"name\":\"1\",\"type\":\"nilon\",\"provider\":null,\"supply\":null,\"status\":\"processing\",\"payment_status\":null,\"payment_type\":0,\"ship_price\":null,\"other_price\":null,\"advance\":null,\"total\":null,\"rest\":null,\"bill\":null,\"note\":null,\"act\":1,\"created_by\":6,\"contact_by\":null,\"applied_by\":null,\"bought_by\":null,\"submited_by\":null,\"created_at\":\"2025-02-09 11:57:33\",\"updated_at\":\"2025-02-09 11:57:33\"}', 1, '2025-02-09 11:57:33', '2025-02-09 11:57:33'),
+(119, '1', 'supply_buyings', 'insert', 4, 6, 0, '{\"id\":4,\"code\":\"MVT-00000004\",\"name\":\"1\",\"type\":\"nilon\",\"provider\":null,\"supply\":null,\"status\":\"processing\",\"payment_status\":null,\"payment_type\":0,\"ship_price\":null,\"other_price\":null,\"advance\":null,\"total\":null,\"rest\":null,\"bill\":null,\"note\":null,\"act\":1,\"created_by\":6,\"contact_by\":null,\"applied_by\":null,\"bought_by\":null,\"submited_by\":null,\"created_at\":\"2025-02-09 11:57:33\",\"updated_at\":\"2025-02-09 11:57:33\"}', 1, '2025-02-09 11:57:34', '2025-02-09 11:57:34'),
+(120, NULL, 'buying_items', 'contact_confirm', 4, 1, 0, '{\"status\":{\"old\":\"processing\",\"new\":\"not_accepted\"},\"contact_by\":{\"old\":null,\"new\":1}}', 1, '2025-02-09 11:57:45', '2025-02-09 11:57:45'),
+(121, NULL, 'buying_items', 'apply', 4, 1, 0, '{\"status\":{\"old\":\"not_accepted\",\"new\":\"bought\"},\"applied_by\":{\"old\":null,\"new\":1}}', 1, '2025-02-09 11:57:55', '2025-02-09 11:57:55'),
+(122, '1', 'supply_buyings', 'insert', 5, 6, 0, '{\"id\":5,\"code\":null,\"name\":\"1\",\"type\":\"paper\",\"provider\":null,\"supply\":null,\"status\":\"processing\",\"payment_status\":null,\"payment_type\":0,\"ship_price\":null,\"other_price\":null,\"advance\":null,\"total\":null,\"rest\":null,\"bill\":null,\"note\":null,\"act\":1,\"created_by\":6,\"contact_by\":null,\"applied_by\":null,\"bought_by\":null,\"submited_by\":null,\"created_at\":\"2025-02-09 11:59:07\",\"updated_at\":\"2025-02-09 11:59:07\"}', 1, '2025-02-09 11:59:07', '2025-02-09 11:59:07'),
+(123, '1', 'supply_buyings', 'insert', 6, 6, 0, '{\"id\":6,\"code\":null,\"name\":\"1\",\"type\":\"nilon\",\"provider\":null,\"supply\":null,\"status\":\"processing\",\"payment_status\":null,\"payment_type\":0,\"ship_price\":null,\"other_price\":null,\"advance\":null,\"total\":null,\"rest\":null,\"bill\":null,\"note\":null,\"act\":1,\"created_by\":6,\"contact_by\":null,\"applied_by\":null,\"bought_by\":null,\"submited_by\":null,\"created_at\":\"2025-02-09 11:59:07\",\"updated_at\":\"2025-02-09 11:59:07\"}', 1, '2025-02-09 11:59:07', '2025-02-09 11:59:07'),
+(124, 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 'orders', 'making_process', 34, 6, 0, '{\"status\":{\"old\":\"tech_submited\",\"new\":\"making_process\"}}', 1, '2025-02-09 11:59:07', '2025-02-09 11:59:07'),
+(125, '1', 'supply_buyings', 'insert', 7, 6, 0, '{\"id\":7,\"code\":null,\"name\":\"1\",\"type\":\"paper\",\"provider\":null,\"supply\":null,\"status\":\"processing\",\"payment_status\":null,\"payment_type\":0,\"ship_price\":null,\"other_price\":null,\"advance\":null,\"total\":null,\"rest\":null,\"bill\":null,\"note\":null,\"act\":1,\"created_by\":6,\"contact_by\":null,\"applied_by\":null,\"bought_by\":null,\"submited_by\":null,\"created_at\":\"2025-02-09 12:18:37\",\"updated_at\":\"2025-02-09 12:18:37\"}', 1, '2025-02-09 12:18:37', '2025-02-09 12:18:37'),
+(126, '1', 'supply_buyings', 'insert', 8, 6, 0, '{\"id\":8,\"code\":null,\"name\":\"1\",\"type\":\"nilon\",\"provider\":null,\"supply\":null,\"status\":\"processing\",\"payment_status\":null,\"payment_type\":0,\"ship_price\":null,\"other_price\":null,\"advance\":null,\"total\":null,\"rest\":null,\"bill\":null,\"note\":null,\"act\":1,\"created_by\":6,\"contact_by\":null,\"applied_by\":null,\"bought_by\":null,\"submited_by\":null,\"created_at\":\"2025-02-09 12:18:37\",\"updated_at\":\"2025-02-09 12:18:37\"}', 1, '2025-02-09 12:18:37', '2025-02-09 12:18:37'),
+(127, 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 'orders', 'making_process', 33, 6, 0, '{\"status\":{\"old\":\"tech_submited\",\"new\":\"making_process\"}}', 1, '2025-02-09 12:18:37', '2025-02-09 12:18:37');
+
 -- --------------------------------------------------------
 
 --
@@ -3088,30 +3263,45 @@ CREATE TABLE `n_users` (
 
 INSERT INTO `n_users` (`id`, `username`, `password`, `name`, `email`, `phone`, `group_user`, `super_admin`, `dev`, `note`, `supply_role`, `ext_role`, `act`, `created_at`, `updated_at`, `created_by`) VALUES
 (1, 'CT9', 'cba46d1d20406eb6d12420463a291668', 'Nghiêm Thanh Tuấn', 'kd1.intuandung@gmail.com', '0963.303.999', 1, 0, 0, 'giám đốc', NULL, NULL, 1, '2023-07-14 02:02:00', '2024-07-08 15:57:01', 1),
-(3, 'thietke1', '32d25e1e30920cb1e6c8acbfac4aa568', 'Thietke - Mr DŨNG', 'design@gmail.com', '0989283033', 4, 0, NULL, 'test design', NULL, NULL, 0, '2023-07-14 02:02:00', '2024-12-07 13:01:37', 1),
-(4, 'duyetlenh', 'e10adc3949ba59abbe56e057f20f883e', 'Giám đốc sản xuất : Mr Dũng', 'sanxuatitd@gmail.com', '0989283033', 3, 0, NULL, 'Technical apply order group tests', NULL, '[\"apply_design\",\"design\",\"tech_handle\"]', 1, '2023-07-14 02:02:00', '2025-01-19 14:14:00', 1),
+(4, 'tpduyetlenh', 'e10adc3949ba59abbe56e057f20f883e', 'Mr Dũng', 'intuandung2000@gmail.com', '0989283033', 3, 0, NULL, NULL, NULL, '[\"apply_design\",\"design\",\"tech_handle\"]', 1, '2023-07-14 02:02:00', '2025-02-09 10:00:59', 1),
 (5, 'duyetsx1', 'e10adc3949ba59abbe56e057f20f883e', 'Kỹ Thuật sản xuất  - Mr Dũng', 'techhanle@gmail.com', '0989283033', 5, 0, NULL, NULL, NULL, NULL, 1, '2023-07-14 02:02:00', '2025-01-19 13:19:46', 1),
-(6, 'kehoach', 'e10adc3949ba59abbe56e057f20f883e', 'K.hoạch - Ms Hường', 'baobituandung@intuandung.vn', '0978088535', 6, 0, NULL, 'Test ke hoach san xuat', NULL, NULL, 1, '2023-07-14 02:02:00', '2025-01-22 11:52:44', 1),
+(6, 'kehoach1', 'e10adc3949ba59abbe56e057f20f883e', 'K.hoạch - Ms Hường', 'baobituandung@intuandung.vn', '0978088535', 6, 0, NULL, 'Test ke hoach san xuat', NULL, NULL, 1, '2023-07-14 02:02:00', '2025-02-09 10:13:54', 1),
 (10, 'HoangDung', '59aa841f18386f5c6a7c99e541ae022d', 'Hoàng Dung', 'intuandung2000@gmail.com', '0969303888', 1, 0, NULL, NULL, NULL, NULL, 1, '2023-09-23 14:24:46', '2024-04-22 14:35:30', 1),
 (12, 'duyetsx2', 'e10adc3949ba59abbe56e057f20f883e', 'Kỹ Thuật sản xuất - Mr Thông', 'techhanle@gmail.com', '0344558822', 5, 0, NULL, NULL, NULL, NULL, 0, '2023-09-23 15:14:41', '2024-12-07 13:02:02', 10),
-(13, 'nhapkho', 'e10adc3949ba59abbe56e057f20f883e', 'Kho xuất nhập vật tư - Ms HƯỜNG', 'kd1.intuandung@gmail.com', '000000000', 7, 0, NULL, NULL, '[\"paper\",\"nilon\",\"metalai\",\"cover\",\"carton\",\"rubber\",\"styrofoam\",\"decal\",\"silk\",\"mica\",\"emulsion\",\"skrink\",\"magnet\",\"other\"]', NULL, 1, '2023-09-29 15:18:49', '2025-01-19 13:54:14', 1),
-(14, 'duyetmua', 'e10adc3949ba59abbe56e057f20f883e', 'D.Mua - Ms Dung', 'intuandung2000@gmail.com', '0969303888', 8, 0, NULL, NULL, NULL, NULL, 1, '2023-09-29 15:20:35', '2025-01-22 11:55:14', 1),
+(13, 'nkvt1', 'e10adc3949ba59abbe56e057f20f883e', 'XN Vật tự - Ms Mai', 'kd1.intuandung@gmail.com', '0916478920', 7, 0, NULL, NULL, NULL, NULL, 1, '2023-09-29 15:18:49', '2025-02-09 10:40:30', 1),
+(14, 'duyetmua', 'e10adc3949ba59abbe56e057f20f883e', 'D.Mua - Ms Dung', 'intuandung2000@gmail.com', '0969303888', 8, 0, NULL, NULL, NULL, NULL, 0, '2023-09-29 15:20:35', '2025-02-09 10:37:15', 1),
 (15, 'phongkhuonmau', 'e10adc3949ba59abbe56e057f20f883e', 'PHÒNG KHUÔN MẪU', 'in88.vn@gmail.com', '0963303999', 9, 0, NULL, NULL, NULL, NULL, 1, '2023-09-29 15:21:33', '2023-10-06 06:50:57', 1),
-(18, 'phongmua', 'e10adc3949ba59abbe56e057f20f883e', 'P.Mua - Ms Phương', 'muahang1', '0963303999', 10, 0, NULL, 'Phòng mua vật tư', NULL, NULL, 1, '2023-11-16 03:40:59', '2025-01-22 11:53:48', 1),
-(20, 'xuatkho', 'e10adc3949ba59abbe56e057f20f883e', 'KHO THÀNH PHẨM XUẤT - Ms', 'khothanhpham@gmail.com', '123456789', 12, 0, NULL, 'test nhân viên kho thành phẩm', NULL, NULL, 1, '2023-12-06 09:53:44', '2025-01-19 13:54:49', 1),
-(21, 'thietke2', 'e10adc3949ba59abbe56e057f20f883e', 'Thietke - Mr Thông', 'design@gmail.com', '0344558822', 4, 0, NULL, 'test design', NULL, NULL, 0, '2024-02-22 05:04:58', '2024-12-07 13:01:40', 1),
+(18, 'phongmua', 'e10adc3949ba59abbe56e057f20f883e', 'P.Mua - Ms Phương', 'muahang1', '0963303999', 10, 0, NULL, 'Phòng mua vật tư', NULL, NULL, 1, '2023-11-16 03:40:59', '2025-02-09 10:38:05', 1),
+(20, 'xntp1', 'e10adc3949ba59abbe56e057f20f883e', 'XN-T.Phẩm: Ms Trang', 'kd1.intuandung@gmail.com', '000', 12, 0, NULL, NULL, NULL, NULL, 1, '2023-12-06 09:53:44', '2025-02-09 10:31:55', 1),
 (23, 'dev', 'bc6cfc276afdb8201b984986ae345c60', 'DEV', 'dev@gmail.com', '0987654321', 1, 1, 1, 'dev', NULL, NULL, 1, '2023-07-14 02:02:00', '2024-12-05 16:35:29', 1),
 (25, 'ketoan10', 'c516f57327496a5de755b40adcb83c74', 'Kế toán TỔNG HỢP: Ms Kiều', 'ketoan@gmail.com', '1234 56789', 13, 0, NULL, NULL, NULL, NULL, 1, '2024-03-21 15:50:54', '2024-12-05 06:40:12', 10),
 (26, 'ketoan2', 'e10adc3949ba59abbe56e057f20f883e', 'Kế toán TỔNG HỢP: Ms', 'ketoan@gmail.com', '1234 56789', 13, 0, NULL, NULL, NULL, NULL, 1, '2024-04-24 08:50:43', '2024-12-05 03:04:01', 10),
-(28, 'kinhdoanh', 'e10adc3949ba59abbe56e057f20f883e', 'Kinh doanh - TEST', 'baobituandung.com', '0946303111', 2, 0, NULL, 'test nhan vien kinh doanh', NULL, NULL, 1, '2024-06-21 10:52:48', '2025-01-21 10:41:03', 1),
-(37, 'thietke', 'e10adc3949ba59abbe56e057f20f883e', 'Thietke - Mr Tuấn TEST', 'design@gmail.com', '0000000', 4, 0, NULL, 'test design', NULL, NULL, 0, '2024-07-25 20:23:56', '2024-12-07 13:01:43', 1),
-(38, 'thietke4', 'e10adc3949ba59abbe56e057f20f883e', 'Thietke - Ms', 'design@gmail.com', '0000000', 4, 0, NULL, 'test design', NULL, NULL, 0, '2024-07-25 20:24:20', '2024-07-25 20:24:20', 1),
-(39, 'thietke5', 'e10adc3949ba59abbe56e057f20f883e', 'Thietke - Ms', 'design@gmail.com', '0000000', 4, 0, NULL, 'test design', NULL, NULL, 0, '2024-07-25 20:24:35', '2024-07-25 20:24:35', 1),
-(40, 'thietke7', 'e10adc3949ba59abbe56e057f20f883e', 'Thietke - Ms', 'design@gmail.com', '0000000', 4, 0, NULL, 'test design', NULL, NULL, 0, '2024-07-25 20:25:09', '2024-07-25 20:25:09', 1),
+(28, 'kd111', 'e10adc3949ba59abbe56e057f20f883e', 'Ms Huyền - Sales111', 'intuandung2000@gmail.com', '0946303111', 2, 0, NULL, NULL, NULL, NULL, 1, '2024-06-21 10:52:48', '2025-02-09 09:34:57', 1),
 (41, 'duyetsx', 'e10adc3949ba59abbe56e057f20f883e', 'Kỹ Thuật sản xuất - Mr Tuấn', 'techhanle@gmail.com', '0344558822', 5, 0, NULL, NULL, NULL, NULL, 0, '2024-07-25 20:28:07', '2024-12-07 13:02:00', 1),
 (42, 'duyetsx4', 'e10adc3949ba59abbe56e057f20f883e', 'Kỹ Thuật sản xuất - Mr', 'techhanle@gmail.com', '0344558822', 5, 0, NULL, NULL, NULL, NULL, 0, '2024-07-25 20:28:20', '2024-07-25 20:28:27', 1),
-(56, 'kcs', 'e10adc3949ba59abbe56e057f20f883e', 'Test  KCS', 'kcs@gmail.com', '000', 11, 0, NULL, 'test nhân viên phòng kcs', NULL, NULL, 1, '2024-07-25 21:10:21', '2025-01-23 20:00:57', 1),
-(58, 'Quandoc', '32d25e1e30920cb1e6c8acbfac4aa568', 'Quản đốc - Mr Dũng', 'baobituandung.com', '0979303777', 14, 0, NULL, NULL, NULL, NULL, 1, '2024-08-11 16:05:05', '2024-08-11 16:53:40', 1);
+(56, 'kcsin1', 'e10adc3949ba59abbe56e057f20f883e', 'Kcs sau in: Ms Dung', 'kcs@gmail.com', '000', 11, 0, NULL, 'test nhân viên phòng kcs', NULL, NULL, 1, '2024-07-25 21:10:21', '2025-02-09 10:46:06', 1),
+(58, 'Quandoc', '32d25e1e30920cb1e6c8acbfac4aa568', 'Quản đốc - Mr Dũng', 'baobituandung.com', '0979303777', 14, 0, NULL, NULL, NULL, NULL, 1, '2024-08-11 16:05:05', '2024-08-11 16:53:40', 1),
+(59, 'kd222', 'e10adc3949ba59abbe56e057f20f883e', 'Mr Tú - Sales222', 'intuandung2000@gmail.com', '0968303222', 2, 0, NULL, NULL, NULL, NULL, 1, '2025-02-09 09:36:07', '2025-02-09 09:36:07', 1),
+(60, 'kd333', 'e10adc3949ba59abbe56e057f20f883e', 'Ms Thuý - Sales333', 'intuandung2000@gmail.com', '0967303333', 2, 0, NULL, NULL, NULL, NULL, 1, '2025-02-09 09:38:51', '2025-02-09 09:38:51', 1),
+(61, 'kd444', 'e10adc3949ba59abbe56e057f20f883e', 'Ms  - Sales444', 'intuandung2000@gmail.com', '0964303444', 2, 0, NULL, NULL, NULL, NULL, 0, '2025-02-09 09:39:34', '2025-02-09 09:41:56', 1),
+(62, 'kd555', 'e10adc3949ba59abbe56e057f20f883e', 'Ms Huệ  - Sales555', 'intuandung2000@gmail.com', '0976303555', 2, 0, NULL, NULL, NULL, NULL, 1, '2025-02-09 09:40:11', '2025-02-09 09:40:11', 1),
+(63, 'kd666', 'e10adc3949ba59abbe56e057f20f883e', 'Ms Phương  - Sales666', 'intuandung2000@gmail.com', '0969303666', 2, 0, NULL, NULL, NULL, NULL, 1, '2025-02-09 09:40:49', '2025-02-09 09:40:49', 1),
+(64, 'kd777', 'e10adc3949ba59abbe56e057f20f883e', 'Ms  - Sales777', 'intuandung2000@gmail.com', '0979303777', 2, 0, NULL, NULL, NULL, NULL, 0, '2025-02-09 09:41:42', '2025-02-09 09:41:49', 1),
+(65, 'kd', 'e10adc3949ba59abbe56e057f20f883e', 'Ms  - Sales000', 'intuandung2000@gmail.com', '0964303000', 2, 0, NULL, NULL, NULL, NULL, 0, '2025-02-09 09:42:39', '2025-02-09 09:43:02', 1),
+(66, 'ktduyetlenh', 'e10adc3949ba59abbe56e057f20f883e', 'Mr Thông', 'intuandung2000@gmail.com', '034455882', 3, 0, NULL, NULL, NULL, '[\"apply_design\",\"design\",\"tech_handle\"]', 1, '2025-02-09 10:02:26', '2025-02-09 10:02:41', 1),
+(67, 'thietke1', 'e10adc3949ba59abbe56e057f20f883e', 'Mr Việt', 'intuandung2000@gmail.com', '0963303999', 3, 0, NULL, NULL, NULL, '[\"design\"]', 1, '2025-02-09 10:04:58', '2025-02-09 10:06:46', 1),
+(68, 'thietke2', 'e10adc3949ba59abbe56e057f20f883e', 'Mr Hùng', 'intuandung2000@gmail.com', '0963303999', 3, 0, NULL, NULL, NULL, '[\"design\"]', 1, '2025-02-09 10:07:37', '2025-02-09 10:07:37', 1),
+(69, 'thietke3', 'e10adc3949ba59abbe56e057f20f883e', 'Mr dự bị 1', 'intuandung2000@gmail.com', '0963303999', 3, 0, NULL, NULL, NULL, '[\"design\"]', 0, '2025-02-09 10:08:12', '2025-02-09 10:08:41', 1),
+(70, 'thietke4', 'e10adc3949ba59abbe56e057f20f883e', 'Mr dự bị 2', 'intuandung2000@gmail.com', '0963303999', 3, 0, NULL, NULL, NULL, '[\"design\"]', 0, '2025-02-09 10:08:28', '2025-02-09 10:08:40', 1),
+(71, 'kehoach2', 'cba46d1d20406eb6d12420463a291668', 'K.hoạch - Mr Tuấn', 'kd1.intuandung@gmail.com', '0963303999', 6, 0, NULL, NULL, NULL, NULL, 1, '2025-02-09 10:15:45', '2025-02-09 10:15:45', 1),
+(72, 'xntp2', 'e10adc3949ba59abbe56e057f20f883e', 'XN-T.Phẩm: Ms dự bị', 'kd1.intuandung@gmail.com', '000', 12, 0, NULL, NULL, NULL, NULL, 0, '2025-02-09 10:32:20', '2025-02-09 10:36:43', 1),
+(73, 'nkvt2', 'e10adc3949ba59abbe56e057f20f883e', 'XN Vật tự - Ms dự bị', 'kd1.intuandung@gmail.com', '0916478920', 7, 0, NULL, NULL, NULL, NULL, 0, '2025-02-09 10:40:55', '2025-02-09 10:41:17', 1),
+(74, 'kcsin2', 'e10adc3949ba59abbe56e057f20f883e', 'Kcs sau in: Ms dự bị 2', 'kcs@gmail.com', '000', 11, 0, NULL, NULL, NULL, NULL, 0, '2025-02-09 10:47:09', '2025-02-09 10:48:44', 1),
+(75, 'kcsin3', 'e10adc3949ba59abbe56e057f20f883e', 'Kcs sau in: Ms dự bị 3', 'kcs@gmail.com', '000', 11, 0, NULL, NULL, NULL, NULL, 0, '2025-02-09 10:47:29', '2025-02-09 10:51:23', 1),
+(76, 'kcsin4', 'e10adc3949ba59abbe56e057f20f883e', 'Kcs sau in: Ms dự bị 4', 'kcs@gmail.com', '000', 11, 0, NULL, NULL, NULL, NULL, 0, '2025-02-09 10:47:50', '2025-02-09 10:51:26', 1),
+(77, 'kcstp1', 'e10adc3949ba59abbe56e057f20f883e', 'Kcs TP: Ms 1', 'kcs@gmail.com', '000', 11, 0, NULL, NULL, NULL, NULL, 1, '2025-02-09 10:49:46', '2025-02-09 10:51:12', 1),
+(78, 'kcstp2', 'e10adc3949ba59abbe56e057f20f883e', 'Kcs TP: Ms 2', 'kcs@gmail.com', '000', 11, 0, NULL, NULL, NULL, NULL, 0, '2025-02-09 10:50:13', '2025-02-09 10:51:31', 1),
+(79, 'kcstp3', 'e10adc3949ba59abbe56e057f20f883e', 'Kcs TP: Ms 3', 'kcs@gmail.com', '000', 11, 0, NULL, NULL, NULL, NULL, 0, '2025-02-09 10:50:42', '2025-02-09 10:51:33', 1);
 
 -- --------------------------------------------------------
 
@@ -3152,7 +3342,7 @@ CREATE TABLE `orders` (
 
 INSERT INTO `orders` (`id`, `code`, `name`, `customer`, `represent`, `ship_price`, `profit`, `vat`, `total_cost`, `base_total`, `amount`, `total_amount`, `advance`, `rest`, `rest_bill`, `status`, `rest_note`, `ship_note`, `quote`, `act`, `created_at`, `return_time`, `updated_at`, `created_by`) VALUES
 (1, 'DH-00000001', 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 1, 1, 1000000, 100, 0, 233001000, '468002000', '464456000', '468002000', NULL, '468002000', NULL, 'submited', NULL, NULL, 1, 1, '2025-01-23 19:05:27', '2025-02-04 19:05:27', '2025-01-24 00:59:12', 1),
-(2, 'DH-00000002', 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 1, 1, 1000000, 100.191, 0, 2444870000, '4896400940.5243', '4896400000', '4896400000', NULL, '4896400000', NULL, 'making_process', NULL, NULL, 3, 1, '2025-01-23 22:23:12', '2025-02-04 22:23:12', '2025-01-24 01:19:13', 1),
+(2, 'DH-00000002', 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 1, 1, 1000000, 15, 0, 7180000, '8832000', '4896400000', '8830000', NULL, '8830000', NULL, 'making_process', NULL, NULL, 3, 1, '2025-01-23 22:23:12', '2025-02-04 22:23:12', '2025-02-09 11:32:24', 1),
 (3, 'DH-00000003', 'CTY TNHH VIETBRAND', 4, 3, 5000000, 50, 0, 1313070000, '1977105000', '1977120000', '1977120000', NULL, '1977120000', NULL, 'submited', NULL, NULL, 9, 1, '2025-01-24 01:56:08', '2025-02-05 01:56:08', '2025-01-24 02:53:13', 1),
 (4, 'DH-00000004', 'CTY TNHH VIETBRAND', 4, 3, 5000000, 50, 0, 658560000, '995340000', '995340000', '995340000', NULL, '995340000', NULL, 'making_process', NULL, NULL, 8, 1, '2025-01-24 03:31:04', '2025-02-05 03:31:04', '2025-01-24 03:38:20', 1),
 (5, 'DH-00000005', 'CTY TNHH VIETBRAND', 4, 3, 5000000, 50, 0, 2185750000, '3286125000', '3286150000', '3286150000', NULL, '3286150000', NULL, 'making_process', NULL, NULL, 11, 1, '2025-01-24 05:57:35', '2025-02-05 05:57:35', '2025-01-24 06:31:34', 1),
@@ -3160,7 +3350,7 @@ INSERT INTO `orders` (`id`, `code`, `name`, `customer`, `represent`, `ship_price
 (7, 'DH-00000007', 'CTY TNHH VIETBRAND', 4, 3, 5000000, 50, 0, 658560000, '995340000', '995340000', '995340000', NULL, '995340000', NULL, 'tech_submited', NULL, NULL, 7, 1, '2025-01-24 05:58:21', '2025-02-05 05:58:21', '2025-01-24 06:15:16', 1),
 (8, 'DH-00000008', 'CTY TNHH VIETBRAND', 4, 3, 5000000, 50, 0, 461350000, '699525000', '699530000', '699530000', NULL, '699530000', NULL, 'tech_submited', NULL, NULL, 6, 1, '2025-01-24 05:58:30', '2025-02-05 05:58:30', '2025-01-29 18:01:31', 1),
 (9, 'DH-00000009', 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 3, 2, 1000000, 100, 0, 4888660000, '9779320000', '9779320000', '9779320000', NULL, '9779320000', NULL, 'tech_submited', NULL, NULL, 5, 1, '2025-01-24 05:58:38', '2025-02-05 05:58:38', '2025-01-29 18:01:48', 1),
-(10, 'DH-00000010', 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 3, 2, 1000000, 100, 0, 24420300000, '48842600000', '48842600000', '48842600000', NULL, '48842600000', NULL, 'tech_submited', NULL, NULL, 4, 1, '2025-01-24 05:59:20', '2025-02-05 05:59:20', '2025-01-29 18:01:57', 1),
+(10, 'DH-00000010', 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 3, 2, 1000000, 15, 0, 7180000, '8832000', '48842600000', '8830000', NULL, '8830000', NULL, 'tech_submited', NULL, NULL, 4, 1, '2025-01-24 05:59:20', '2025-02-05 05:59:20', '2025-02-09 11:38:10', 1),
 (11, 'DH-00000011', 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 3, 2, 1000000, 100, 0, 24420300000, '48842600000', '48842600000', '48842600000', NULL, '48842600000', NULL, 'making_process', NULL, NULL, 13, 1, '2025-01-24 06:04:39', '2025-02-05 06:04:39', '2025-01-24 06:24:28', 1),
 (12, 'DH-00000012', 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 1, 1, 5000, 100, 0, 17270000, '34550000', '34550000', '34550000', NULL, '34550000', NULL, 'tech_submited', NULL, NULL, 17, 1, '2025-01-26 15:16:11', '2025-02-03 15:16:11', '2025-01-29 18:01:01', 1),
 (13, 'DH-00000013', 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 1, 1, 50000, 100, 0, 11360000, '22820000', '22820000', '22820000', NULL, '22820000', NULL, 'submited', NULL, NULL, 16, 1, '2025-01-26 15:16:20', '2025-02-03 15:16:20', '2025-01-26 16:10:23', 1),
@@ -3182,7 +3372,9 @@ INSERT INTO `orders` (`id`, `code`, `name`, `customer`, `represent`, `ship_price
 (29, 'DH-00000029', 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 4, 3, NULL, 0, 0, 222708000, '222708000', '222708000', '222708000', NULL, '222708000', NULL, 'making_process', NULL, NULL, 45, 1, '2025-02-08 10:32:35', '2025-02-20 10:32:35', '2025-02-08 10:51:12', 1),
 (30, 'DH-00000030', 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 1, 1, NULL, 0, 0, 222708000, '222708000', '222708000', '222708000', NULL, '222708000', NULL, 'tech_submited', NULL, NULL, 44, 1, '2025-02-08 10:32:55', '2025-02-20 10:32:55', '2025-02-08 10:35:35', 1),
 (31, 'DH-00000031', 'Mr.Tú - HQT', 975, 991, 300000, 20, 0, 4129500, '5315400', '5315500', '5315500', NULL, '5315500', NULL, 'to_design', NULL, NULL, 46, 1, '2025-02-08 13:51:22', NULL, '2025-02-08 14:35:20', 28),
-(32, 'DH-00000032', 'CÔNG TY TNHH DƯỢC PHẨM TÂM THÁI', 36, 992, 1000000, 10, 0, 27510000, '31361000', '31362000', '31362000', NULL, '31362000', NULL, 'to_design', NULL, NULL, 50, 1, '2025-02-08 14:33:19', NULL, '2025-02-08 14:35:01', 28);
+(32, 'DH-00000032', 'CÔNG TY TNHH DƯỢC PHẨM TÂM THÁI', 36, 992, 1000000, 10, 0, 27510000, '31361000', '31362000', '31362000', NULL, '31362000', NULL, 'to_design', NULL, NULL, 50, 1, '2025-02-08 14:33:19', NULL, '2025-02-08 14:35:01', 28),
+(33, 'DH-00000033', 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 1, 1, 500000, 15, 0, 7250000, '8912500', '8830000', '8915000', NULL, '8915000', NULL, 'making_process', NULL, NULL, 3, 1, '2025-02-09 11:32:24', '2025-02-17 11:32:24', '2025-02-09 12:18:37', 1),
+(34, 'DH-00000034', 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 1, 1, 500000, 15, 0, 7180000, '8832000', '8830000', '8830000', NULL, '8830000', NULL, 'making_process', NULL, NULL, 4, 1, '2025-02-09 11:37:31', '2025-02-17 11:37:31', '2025-02-09 11:59:07', 1);
 
 -- --------------------------------------------------------
 
@@ -3253,6 +3445,18 @@ CREATE TABLE `papers` (
   `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `created_by` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `papers`
+--
+
+INSERT INTO `papers` (`id`, `code`, `ext_name`, `name`, `product_qty`, `nqty`, `double`, `base_supp_qty`, `compent_percent`, `compent_plus`, `supp_qty`, `size`, `print`, `nilon`, `metalai`, `cover`, `compress`, `uv`, `elevate`, `float`, `peel`, `cut`, `fold`, `box_paste`, `bag_paste`, `ext_cate`, `ext_price`, `handle_type`, `handle_elevate`, `total_cost`, `product`, `note`, `main`, `parent`, `is_join`, `act`, `status`, `handled`, `created_at`, `updated_at`, `created_by`) VALUES
+(1, NULL, NULL, 'Hộp giấy UTRA BEE   Tem cuộn   Toa 10 x 20', 5000, 4, 0, 1300, '75', 0, 1375, '{\"materal\":\"56\",\"qtv\":\"312\",\"length\":\"35\",\"width\":\"36.3\",\"qtv_price\":\"0.00175\",\"qtv_num\":\"400\",\"supp_qty\":1375,\"act\":1,\"total\":1222856.2499999998}', '{\"type\":\"1\",\"color\":\"4\",\"machine\":\"1\",\"note\":null,\"handled_qty\":0,\"supp_qty\":300,\"handle_qty\":1275,\"model_price\":66000,\"work_price\":30,\"shape_price\":110000,\"printer\":3,\"act\":1,\"total\":740000}', '{\"materal\":\"69\",\"qtv\":\"349\",\"face\":\"1\",\"machine\":\"46\",\"note\":null,\"handled_qty\":0,\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"qtv_price\":\"0.02011\",\"qtv_num\":\"15.4\",\"supp_qty\":1275,\"handle_qty\":1275,\"materal_price\":0.309694,\"act\":1,\"total\":551669.439425}', '{\"face\":\"0\",\"machine\":null,\"note\":null,\"handled_qty\":0,\"model_price\":0,\"work_price\":0,\"shape_price\":0,\"qtv_price\":0,\"qtv_num\":1,\"supp_qty\":1375,\"handle_qty\":1275,\"materal_price\":0,\"act\":0,\"total\":0}', '{\"face\":\"0\",\"handled_qty\":0,\"model_price\":0,\"work_price\":0,\"shape_price\":0,\"qtv_price\":0,\"qtv_num\":1,\"supp_qty\":1275,\"handle_qty\":1275,\"materal_price\":0,\"act\":0,\"total\":0}', '{\"price\":\"0\",\"shape_price\":\"0\",\"machine\":null,\"note\":null,\"handled_qty\":0,\"qty_pro\":5050,\"handle_qty\":1275,\"nqty\":4,\"act\":0,\"total\":0}', '{\"face\":\"0\",\"machine\":null,\"note\":null,\"handled_qty\":0,\"model_price\":0,\"work_price\":0,\"shape_price\":0,\"qtv_price\":0,\"qtv_num\":1,\"supp_qty\":1275,\"handle_qty\":1275,\"materal_price\":0,\"act\":0,\"total\":0}', '{\"ext_price\":\"0\",\"machine\":\"69\",\"float\":{\"act\":\"1\",\"price\":\"50\",\"shape_price\":\"50000\",\"qty_pro\":5050,\"nqty\":4,\"float_cost\":452500},\"note\":null,\"handled_qty\":0,\"model_price\":150,\"work_price\":150,\"shape_price\":150000,\"supp_qty\":1275,\"handle_qty\":1275,\"cost\":531825,\"act\":1,\"total\":984325}', NULL, '{\"machine\":\"12\",\"nqty\":\"1\",\"note\":null,\"handled_qty\":0,\"model_price\":0,\"work_price\":10,\"shape_price\":30000,\"qty_pro\":5050,\"handle_qty\":5100,\"act\":1,\"total\":80500}', NULL, NULL, '{\"machine\":\"6\",\"note\":null,\"handled_qty\":0,\"model_price\":0,\"work_price\":50,\"shape_price\":100000,\"qty_pro\":5050,\"handle_qty\":5100,\"act\":1,\"total\":352500}', NULL, 2, '{\"temp_price\":\"0\",\"prescript_price\":\"150\",\"supp_price\":\"0\",\"note\":null,\"qty_pro\":5000,\"act\":1,\"total\":750000}', 1, NULL, '4681850.689425', 34, NULL, 1, 0, 0, 1, NULL, NULL, '2025-02-09 11:27:01', '2025-02-09 11:27:01', 1),
+(2, NULL, 7, 'Hộp giấy UTRA BEE   Tem cuộn   Toa 10 x 20', 5000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, '0', 34, NULL, 0, 0, 0, 1, NULL, NULL, '2025-02-09 11:27:01', '2025-02-09 11:27:01', 1),
+(3, 'DH-00000033AA', NULL, 'Hộp giấy UTRA BEE + Tem cuộn + Toa 10 x 20 TEST', 5100, 4, 0, 1325, '76', 0, 1401, '{\"materal\":\"56\",\"qtv\":\"312\",\"length\":\"35\",\"width\":\"36.3\",\"qtv_price\":\"0.00175\",\"qtv_num\":\"400\",\"supp_qty\":1401,\"act\":1,\"total\":1245979.3499999999}', '{\"type\":\"1\",\"color\":\"4\",\"machine\":\"1\",\"note\":null,\"handled_qty\":0,\"supp_qty\":325,\"handle_qty\":1301,\"model_price\":66000,\"work_price\":30,\"shape_price\":110000,\"printer\":3,\"act\":1,\"total\":743000}', '{\"materal\":\"69\",\"qtv\":\"349\",\"face\":\"1\",\"machine\":\"46\",\"note\":null,\"handled_qty\":0,\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"qtv_price\":\"0.02011\",\"qtv_num\":\"15.4\",\"supp_qty\":1301,\"handle_qty\":1301,\"materal_price\":0.309694,\"act\":1,\"total\":561899.561327}', '{\"face\":\"0\",\"machine\":null,\"note\":null,\"handled_qty\":0,\"model_price\":0,\"work_price\":0,\"shape_price\":0,\"qtv_price\":0,\"qtv_num\":1,\"supp_qty\":1401,\"handle_qty\":1301,\"materal_price\":0,\"act\":0,\"total\":0}', '{\"face\":\"0\",\"handled_qty\":0,\"model_price\":0,\"work_price\":0,\"shape_price\":0,\"qtv_price\":0,\"qtv_num\":1,\"supp_qty\":1301,\"handle_qty\":1301,\"materal_price\":0,\"act\":0,\"total\":0}', '{\"price\":\"0\",\"shape_price\":\"0\",\"machine\":null,\"note\":null,\"handled_qty\":0,\"qty_pro\":5151,\"handle_qty\":1301,\"nqty\":4,\"act\":0,\"total\":0}', '{\"face\":\"0\",\"machine\":null,\"note\":null,\"handled_qty\":0,\"model_price\":0,\"work_price\":0,\"shape_price\":0,\"qtv_price\":0,\"qtv_num\":1,\"supp_qty\":1301,\"handle_qty\":1301,\"materal_price\":0,\"act\":0,\"total\":0}', '{\"ext_price\":\"0\",\"machine\":\"69\",\"float\":{\"act\":\"1\",\"price\":\"50\",\"shape_price\":\"50000\",\"qty_pro\":5151,\"nqty\":4,\"float_cost\":457550},\"note\":null,\"handled_qty\":0,\"model_price\":150,\"work_price\":150,\"shape_price\":150000,\"supp_qty\":1301,\"handle_qty\":1301,\"cost\":535725,\"act\":1,\"total\":993275}', NULL, '{\"machine\":\"12\",\"nqty\":\"1\",\"note\":null,\"handled_qty\":0,\"model_price\":0,\"work_price\":10,\"shape_price\":30000,\"qty_pro\":5151,\"handle_qty\":5204,\"act\":1,\"total\":81510}', NULL, NULL, '{\"machine\":\"6\",\"note\":null,\"handled_qty\":0,\"model_price\":0,\"work_price\":50,\"shape_price\":100000,\"qty_pro\":5151,\"handle_qty\":5204,\"act\":1,\"total\":357550}', NULL, 2, '{\"temp_price\":\"0\",\"prescript_price\":\"150\",\"supp_price\":\"0\",\"note\":null,\"qty_pro\":5100,\"act\":1,\"total\":765000}', 1, NULL, '4748213.911327', 36, NULL, 1, 0, 0, 1, 'print', 0, '2025-02-09 11:31:48', '2025-02-09 12:18:37', 1),
+(4, 'DH-00000033AB', 7, 'Hộp giấy UTRA BEE + Tem cuộn + Toa 10 x 20 TEST', 5000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, '0', 36, NULL, 0, 0, 0, 1, 'waiting_join', 0, '2025-02-09 11:31:48', '2025-02-09 11:42:02', 1),
+(5, 'DH-00000034AA', NULL, 'Hộp giấy UTRA BEE + Tem cuộn + Toa 10 x 20 test lần 3', 5000, 4, 0, 1300, '75', 0, 1375, '{\"materal\":\"56\",\"qtv\":\"312\",\"length\":\"35\",\"width\":\"36.3\",\"qtv_price\":\"0.00175\",\"qtv_num\":\"400\",\"supp_qty\":1375,\"act\":1,\"total\":1222856.2499999998}', '{\"type\":\"1\",\"color\":\"4\",\"machine\":\"1\",\"note\":null,\"handled_qty\":0,\"supp_qty\":300,\"handle_qty\":1275,\"model_price\":66000,\"work_price\":30,\"shape_price\":110000,\"printer\":3,\"act\":2,\"total\":740000,\"print_confirmed\":1275,\"handled\":1275}', '{\"materal\":\"69\",\"qtv\":\"349\",\"face\":\"1\",\"machine\":\"46\",\"note\":null,\"handled_qty\":0,\"model_price\":0,\"work_price\":0,\"shape_price\":50000,\"qtv_price\":\"0.02011\",\"qtv_num\":\"15.4\",\"supp_qty\":1275,\"handle_qty\":1275,\"materal_price\":0.309694,\"act\":1,\"total\":551669.439425}', '{\"face\":\"0\",\"machine\":null,\"note\":null,\"handled_qty\":0,\"model_price\":0,\"work_price\":0,\"shape_price\":0,\"qtv_price\":0,\"qtv_num\":1,\"supp_qty\":1375,\"handle_qty\":1275,\"materal_price\":0,\"act\":0,\"total\":0}', '{\"face\":\"0\",\"handled_qty\":0,\"model_price\":0,\"work_price\":0,\"shape_price\":0,\"qtv_price\":0,\"qtv_num\":1,\"supp_qty\":1275,\"handle_qty\":1275,\"materal_price\":0,\"act\":0,\"total\":0}', '{\"price\":\"0\",\"shape_price\":\"0\",\"machine\":null,\"note\":null,\"handled_qty\":0,\"qty_pro\":5050,\"handle_qty\":1275,\"nqty\":4,\"act\":0,\"total\":0}', '{\"face\":\"0\",\"machine\":null,\"note\":null,\"handled_qty\":0,\"model_price\":0,\"work_price\":0,\"shape_price\":0,\"qtv_price\":0,\"qtv_num\":1,\"supp_qty\":1275,\"handle_qty\":1275,\"materal_price\":0,\"act\":0,\"total\":0}', '{\"ext_price\":\"0\",\"machine\":\"69\",\"float\":{\"act\":\"1\",\"price\":\"50\",\"shape_price\":\"50000\",\"qty_pro\":5050,\"nqty\":4,\"float_cost\":452500},\"note\":null,\"handled_qty\":0,\"model_price\":150,\"work_price\":150,\"shape_price\":150000,\"supp_qty\":1275,\"handle_qty\":1275,\"cost\":531825,\"act\":1,\"total\":984325}', NULL, '{\"machine\":\"12\",\"nqty\":\"1\",\"note\":null,\"handled_qty\":0,\"model_price\":0,\"work_price\":10,\"shape_price\":30000,\"qty_pro\":5050,\"handle_qty\":5100,\"act\":1,\"total\":80500}', NULL, NULL, '{\"machine\":\"6\",\"note\":null,\"handled_qty\":0,\"model_price\":0,\"work_price\":50,\"shape_price\":100000,\"qty_pro\":5050,\"handle_qty\":5100,\"act\":1,\"total\":352500}', NULL, 2, '{\"temp_price\":\"0\",\"prescript_price\":\"150\",\"supp_price\":\"0\",\"note\":null,\"qty_pro\":5000,\"act\":1,\"total\":750000}', 1, NULL, '4681850.689425', 38, NULL, 1, 0, 0, 1, 'nilon', 0, '2025-02-09 11:36:03', '2025-02-09 13:09:45', 1),
+(6, 'DH-00000034AB', 7, 'Hộp giấy UTRA BEE + Tem cuộn + Toa 10 x 20 test lần 3', 5000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, '0', 38, NULL, 0, 0, 0, 1, 'waiting_join', 0, '2025-02-09 11:36:04', '2025-02-09 11:42:25', 1);
 
 -- --------------------------------------------------------
 
@@ -3422,6 +3626,63 @@ INSERT INTO `print_techs` (`id`, `name`, `act`, `created_by`, `created_at`, `upd
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `products`
+--
+
+CREATE TABLE `products` (
+  `id` int NOT NULL,
+  `code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` tinyint DEFAULT NULL,
+  `qty` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `made_by` int DEFAULT NULL,
+  `category` int DEFAULT NULL,
+  `product_style` int DEFAULT NULL,
+  `design` int DEFAULT NULL,
+  `length` float DEFAULT NULL,
+  `width` float DEFAULT NULL,
+  `height` float DEFAULT NULL,
+  `quote_id` int DEFAULT NULL,
+  `order` int DEFAULT NULL,
+  `total_cost` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `profit` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ship_price` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `base_total` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `total_amount` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `custom_design_file` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `sale_shape_file` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `tech_shape_file` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `design_file` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `design_shape_file` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `handle_shape_file` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `act` tinyint DEFAULT NULL,
+  `order_created` tinyint DEFAULT NULL,
+  `detail` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `product_warehouse` int DEFAULT NULL,
+  `delivery` int DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `created_by` int DEFAULT NULL,
+  `parent` int DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `code`, `name`, `type`, `qty`, `made_by`, `category`, `product_style`, `design`, `length`, `width`, `height`, `quote_id`, `order`, `total_cost`, `profit`, `ship_price`, `base_total`, `total_amount`, `custom_design_file`, `sale_shape_file`, `tech_shape_file`, `design_file`, `design_shape_file`, `handle_shape_file`, `note`, `status`, `act`, `order_created`, `detail`, `product_warehouse`, `delivery`, `created_at`, `updated_at`, `created_by`, `parent`) VALUES
+(34, NULL, 'Hộp giấy UTRA BEE + Tem cuộn + Toa 10 x 20', 1, '5000', 1, 2, 14, 5, 4, 4, 11.5, 2, NULL, '7180000', '15', '500000', '8832000', '8830000', NULL, '{\"id\":\"2\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/9-2 Khuôn BEE(1).ai\",\"name\":\"9-2 Khuôn BEE(1).ai\"}', NULL, NULL, NULL, NULL, 'null', NULL, 1, NULL, NULL, NULL, 5000, '2025-02-09 11:27:01', '2025-02-09 11:28:06', 1, 0),
+(35, NULL, 'Hộp giấy UTRA BEE   Tem cuộn   Toa 10 x 20', NULL, '5000', 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2500000', NULL, NULL, '2500000', '2500000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, 5000, '2025-02-09 11:27:02', '2025-02-09 11:27:02', 1, 34),
+(36, 'DH-00000033A', 'Hộp giấy UTRA BEE + Tem cuộn + Toa 10 x 20 TEST', 1, '5000', 1, 2, 14, 5, 4, 4, 11.5, 3, 33, '7250000', '15', '500000', '8912500', '8915000', NULL, '{\"id\":\"2\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/9-2 Khuôn BEE(1).ai\",\"name\":\"9-2 Khuôn BEE(1).ai\"}', '{\"id\":\"5\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/11(1).jpg\",\"name\":\"11(1).jpg\"}', '{\"id\":\"6\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/11(2).jpg\",\"name\":\"11(2).jpg\"}', '{\"id\":\"7\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/11(3).jpg\",\"name\":\"11(3).jpg\"}', '{\"id\":\"8\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/11(4).jpg\",\"name\":\"11(4).jpg\"}', 'null', 'making_process', 1, 1, NULL, NULL, 5000, '2025-02-09 11:31:47', '2025-02-09 12:18:37', 1, 0),
+(37, NULL, 'Hộp giấy UTRA BEE + Tem cuộn + Toa 10 x 20 TEST', NULL, '5000', 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2500000', NULL, NULL, '2500000', '2500000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', 1, NULL, NULL, NULL, 5000, '2025-02-09 11:31:47', '2025-02-09 11:34:36', 1, 36),
+(38, 'DH-00000034A', 'Hộp giấy UTRA BEE + Tem cuộn + Toa 10 x 20 test lần 3', 1, '5000', 1, 2, 14, 5, 4, 4, 11.5, 4, 34, '7180000', '15', '500000', '8832000', '8830000', NULL, '{\"id\":\"2\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/9-2 Khuôn BEE(1).ai\",\"name\":\"9-2 Khuôn BEE(1).ai\"}', '{\"id\":\"4\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/11.jpg\",\"name\":\"11.jpg\"}', '{\"id\":\"9\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/11(5).jpg\",\"name\":\"11(5).jpg\"}', '{\"id\":\"10\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/11(6).jpg\",\"name\":\"11(6).jpg\"}', '{\"id\":\"11\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/11(7).jpg\",\"name\":\"11(7).jpg\"}', 'null', 'making_process', 1, 1, NULL, NULL, 5000, '2025-02-09 11:36:03', '2025-02-09 11:59:07', 1, 0),
+(39, NULL, 'Hộp giấy UTRA BEE + Tem cuộn + Toa 10 x 20 test lần 3', NULL, '5000', 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2500000', NULL, NULL, '2500000', '2500000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', 1, NULL, NULL, NULL, 5000, '2025-02-09 11:36:03', '2025-02-09 11:38:07', 1, 38);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `product_categories`
 --
 
@@ -3578,6 +3839,14 @@ CREATE TABLE `provider_debts` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `provider_debts`
+--
+
+INSERT INTO `provider_debts` (`id`, `code`, `name`, `type`, `supply`, `provider`, `price`, `other_price`, `total`, `advance`, `qty`, `rest`, `bill`, `note`, `act`, `created_by`, `created_at`, `updated_at`) VALUES
+(1, 'CNVT-00000001', 'GIẤY IVOLRY - i400 - 100x100', 'debt', 1, 345, 0.00173, 0, 6920, 0, 1, 6920, '{\"id\":\"12\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/12.jpg\",\"name\":\"12.jpg\"}', NULL, 1, 1, '2025-02-09 11:55:53', '2025-02-09 11:55:53'),
+(2, 'CNVT-00000002', 'NILON BÓNG - 12mic - Bóng nhiệt - 100x100', 'debt', 2, 419, 0.0056, 0, 862, 0, 1, 862, '{\"id\":\"13\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/11(8).jpg\",\"name\":\"11(8).jpg\"}', NULL, 1, 1, '2025-02-09 11:58:20', '2025-02-09 11:58:20');
 
 -- --------------------------------------------------------
 
@@ -3984,6 +4253,15 @@ CREATE TABLE `quotes` (
   `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `created_by` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `quotes`
+--
+
+INSERT INTO `quotes` (`id`, `seri`, `status`, `name`, `product_qty`, `customer`, `represent`, `ship_price`, `profit`, `total_cost`, `base_total`, `total_amount`, `note`, `act`, `src`, `created_at`, `updated_at`, `created_by`) VALUES
+(2, 'BG-00000002', 'not_accepted', 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', NULL, 1, 1, 500000, 15, '7180000', '8832000', '8830000', NULL, 1, NULL, '2025-02-09 11:27:01', '2025-02-09 11:28:06', 1),
+(3, 'BG-00000003', 'order_created', 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', NULL, 1, 1, 500000, 15, '7250000', '8912500', '8915000', NULL, 1, NULL, '2025-02-09 11:31:47', '2025-02-09 11:42:48', 1),
+(4, 'BG-00000004', 'order_created', 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', NULL, 1, 1, 500000, 15, '7180000', '8832000', '8830000', NULL, 1, NULL, '2025-02-09 11:36:03', '2025-02-09 11:42:42', 1);
 
 -- --------------------------------------------------------
 
@@ -5120,6 +5398,18 @@ CREATE TABLE `supply_buyings` (
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
+--
+-- Dumping data for table `supply_buyings`
+--
+
+INSERT INTO `supply_buyings` (`id`, `code`, `name`, `type`, `provider`, `supply`, `status`, `payment_status`, `payment_type`, `ship_price`, `other_price`, `advance`, `total`, `rest`, `bill`, `note`, `act`, `created_by`, `contact_by`, `applied_by`, `bought_by`, `submited_by`, `created_at`, `updated_at`) VALUES
+(3, 'MVT-00000003', '1', 'paper', NULL, NULL, 'bought', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 6, NULL, NULL, NULL, NULL, '2025-02-09 11:54:55', '2025-02-09 11:55:32'),
+(4, 'MVT-00000004', '1', 'nilon', NULL, NULL, 'bought', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 6, NULL, NULL, NULL, NULL, '2025-02-09 11:57:33', '2025-02-09 11:57:55'),
+(5, NULL, '1', 'paper', NULL, NULL, 'processing', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 6, NULL, NULL, NULL, NULL, '2025-02-09 11:59:07', '2025-02-09 11:59:07'),
+(6, NULL, '1', 'nilon', NULL, NULL, 'processing', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 6, NULL, NULL, NULL, NULL, '2025-02-09 11:59:07', '2025-02-09 11:59:07'),
+(7, NULL, '1', 'paper', NULL, NULL, 'processing', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 6, NULL, NULL, NULL, NULL, '2025-02-09 12:18:37', '2025-02-09 12:18:37'),
+(8, NULL, '1', 'nilon', NULL, NULL, 'processing', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 6, NULL, NULL, NULL, NULL, '2025-02-09 12:18:37', '2025-02-09 12:18:37');
+
 -- --------------------------------------------------------
 
 --
@@ -5526,6 +5816,14 @@ CREATE TABLE `supply_warehouses` (
   `created_by` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
+--
+-- Dumping data for table `supply_warehouses`
+--
+
+INSERT INTO `supply_warehouses` (`id`, `name`, `type`, `target`, `qtv`, `length`, `width`, `qty`, `lenth_qty`, `weight`, `source`, `status`, `note`, `act`, `created_at`, `updated_at`, `created_by`) VALUES
+(1, 'GIẤY IVOLRY - i400 - 100x100', 'paper', 56, 312, 100, 100, 1, 100, 0.4, NULL, 'imported', NULL, 1, '2025-02-09 11:55:52', '2025-02-09 11:55:53', 1),
+(2, 'NILON BÓNG - 12mic - Bóng nhiệt - 100x100', 'nilon', 69, 349, 100, 100, 1, 100, 0.02, NULL, 'imported', NULL, 1, '2025-02-09 11:58:20', '2025-02-09 11:58:20', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -5555,6 +5853,14 @@ CREATE TABLE `warehouse_histories` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `warehouse_histories`
+--
+
+INSERT INTO `warehouse_histories` (`id`, `code`, `name`, `target`, `imported`, `ex_inventory`, `exported`, `inventory`, `note`, `provider`, `price`, `other_price`, `bill`, `act`, `total`, `buying_item`, `product`, `c_supply`, `created_by`, `created_at`, `updated_at`) VALUES
+(1, NULL, 'GIẤY IVOLRY - i400 - 100x100', 1, '1', '0', '0', '312', NULL, 345, 0.00173, 0, '{\"id\":\"12\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/12.jpg\",\"name\":\"12.jpg\"}', 1, 6920, 3, 0, NULL, 1, '2025-02-09 11:55:53', '2025-02-09 11:55:53'),
+(2, NULL, 'NILON BÓNG - 12mic - Bóng nhiệt - 100x100', 2, '1', '0', '0', '349', NULL, 419, 0.0056, 0, '{\"id\":\"13\",\"dir\":\"storages/uploads\",\"path\":\"storage/app/public/uploads/11(8).jpg\",\"name\":\"11(8).jpg\"}', 1, 862, 4, 0, NULL, 1, '2025-02-09 11:58:20', '2025-02-09 11:58:20');
 
 -- --------------------------------------------------------
 
@@ -5656,6 +5962,16 @@ CREATE TABLE `w_salaries` (
   `fill_materal` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `fill_handle` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `w_salaries`
+--
+
+INSERT INTO `w_salaries` (`id`, `name`, `command`, `product`, `table_supply`, `supply`, `qty`, `bad_qty`, `demo_qty`, `bad_demo_qty`, `factor`, `work_price`, `shape_price`, `handle`, `total`, `type`, `machine_type`, `worker`, `status`, `note`, `act`, `submited_at`, `created_at`, `updated_at`, `created_by`, `fill_materal`, `fill_handle`) VALUES
+(1, 'Hộp giấy UTRA BEE + Tem cuộn + Toa 10 x 20 test lần 3', 'DH-00000034AA', 38, 'papers', 5, '30', 0, '75', '0', '1', '15', '24000', '[{\"name\":\"ki\\u1ec3u in\",\"value\":\"In 1 m\\u1eb7t\"},{\"name\":\"m\\u00e0u in\",\"value\":4},{\"name\":\"C\\u00f4ng ngh\\u1ec7 in\",\"value\":\"In offset\"}]', '96450', 'print', '1', 10, 'submited', NULL, 1, '2025-02-09 13:09:29', '2025-02-09 11:59:07', '2025-02-09 13:09:29', 6, NULL, NULL),
+(2, 'Hộp giấy UTRA BEE + Tem cuộn + Toa 10 x 20 test lần 3', 'DH-00000034AA', 38, 'papers', 5, '1245', 0, '75', '0', '1', '15', '24000', '[{\"name\":\"ki\\u1ec3u in\",\"value\":\"In 1 m\\u1eb7t\"},{\"name\":\"m\\u00e0u in\",\"value\":4},{\"name\":\"C\\u00f4ng ngh\\u1ec7 in\",\"value\":\"In offset\"}]', '114675', 'print', '1', 10, 'submited', NULL, 1, '2025-02-09 13:09:45', '2025-02-09 12:11:53', '2025-02-09 13:09:45', NULL, NULL, NULL),
+(3, 'Hộp giấy UTRA BEE + Tem cuộn + Toa 10 x 20 TEST', 'DH-00000033AA', 36, 'papers', 3, '1301', NULL, '76', NULL, '1', NULL, NULL, '[{\"name\":\"ki\\u1ec3u in\",\"value\":\"In 1 m\\u1eb7t\"},{\"name\":\"m\\u00e0u in\",\"value\":4},{\"name\":\"C\\u00f4ng ngh\\u1ec7 in\",\"value\":\"In offset\"}]', NULL, 'print', '1', 10, 'processing', NULL, 1, NULL, '2025-02-09 12:18:37', '2025-02-09 12:18:58', 6, NULL, NULL),
+(4, 'Hộp giấy UTRA BEE + Tem cuộn + Toa 10 x 20 test lần 3', 'DH-00000034AA', 38, 'papers', 5, '1245', NULL, '60', NULL, '1', NULL, NULL, '[{\"name\":\"Ch\\u1ea5t li\\u1ec7u c\\u00e1n\",\"value\":\"NILON B\\u00d3NG\"},{\"name\":\"\\u0110\\u1ecbnh l\\u01b0\\u1ee3ng\",\"value\":\"12mic - B\\u00f3ng nhi\\u1ec7t\"},{\"name\":\"S\\u1ed1 m\\u1eb7t c\\u00e1n\",\"value\":\"1\"},{\"id\":\"46\",\"name\":\"M\\u00e1y c\\u00e1n\",\"value\":\"T\\u1ef0 \\u0110\\u1ed8NG\"}]', NULL, 'nilon', 'auto', NULL, 'not_accepted', NULL, 1, NULL, '2025-02-09 13:09:29', '2025-02-09 13:09:45', 56, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -5952,6 +6268,12 @@ ALTER TABLE `print_techs`
   ADD KEY `index` (`id`,`name`) USING BTREE;
 
 --
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
 -- Indexes for table `product_categories`
 --
 ALTER TABLE `product_categories`
@@ -6106,7 +6428,7 @@ ALTER TABLE `w_users`
 -- AUTO_INCREMENT for table `after_prints`
 --
 ALTER TABLE `after_prints`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `base_receipts`
@@ -6118,7 +6440,7 @@ ALTER TABLE `base_receipts`
 -- AUTO_INCREMENT for table `buying_items`
 --
 ALTER TABLE `buying_items`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `citys`
@@ -6142,7 +6464,7 @@ ALTER TABLE `customers`
 -- AUTO_INCREMENT for table `c_designs`
 --
 ALTER TABLE `c_designs`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `c_expertises`
@@ -6178,7 +6500,7 @@ ALTER TABLE `c_reworks`
 -- AUTO_INCREMENT for table `c_supplies`
 --
 ALTER TABLE `c_supplies`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `design_types`
@@ -6202,7 +6524,7 @@ ALTER TABLE `districts`
 -- AUTO_INCREMENT for table `files`
 --
 ALTER TABLE `files`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `fill_finishes`
@@ -6244,7 +6566,7 @@ ALTER TABLE `n_group_users`
 -- AUTO_INCREMENT for table `n_log_actions`
 --
 ALTER TABLE `n_log_actions`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
 
 --
 -- AUTO_INCREMENT for table `n_regions`
@@ -6262,13 +6584,13 @@ ALTER TABLE `n_tables`
 -- AUTO_INCREMENT for table `n_users`
 --
 ALTER TABLE `n_users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `other_warehouses`
@@ -6280,7 +6602,7 @@ ALTER TABLE `other_warehouses`
 -- AUTO_INCREMENT for table `papers`
 --
 ALTER TABLE `papers`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `paper_extends`
@@ -6313,6 +6635,12 @@ ALTER TABLE `print_techs`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+
+--
 -- AUTO_INCREMENT for table `product_categories`
 --
 ALTER TABLE `product_categories`
@@ -6340,7 +6668,7 @@ ALTER TABLE `product_warehouses`
 -- AUTO_INCREMENT for table `provider_debts`
 --
 ALTER TABLE `provider_debts`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `provider_prices`
@@ -6352,7 +6680,7 @@ ALTER TABLE `provider_prices`
 -- AUTO_INCREMENT for table `quotes`
 --
 ALTER TABLE `quotes`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `quote_configs`
@@ -6376,7 +6704,7 @@ ALTER TABLE `supplies`
 -- AUTO_INCREMENT for table `supply_buyings`
 --
 ALTER TABLE `supply_buyings`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `supply_extends`
@@ -6406,13 +6734,13 @@ ALTER TABLE `supply_types`
 -- AUTO_INCREMENT for table `supply_warehouses`
 --
 ALTER TABLE `supply_warehouses`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `warehouse_histories`
 --
 ALTER TABLE `warehouse_histories`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `warehouse_providers`
@@ -6424,7 +6752,7 @@ ALTER TABLE `warehouse_providers`
 -- AUTO_INCREMENT for table `w_salaries`
 --
 ALTER TABLE `w_salaries`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `w_users`

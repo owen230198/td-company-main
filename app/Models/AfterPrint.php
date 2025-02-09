@@ -60,4 +60,9 @@ class AfterPrint extends Model
             ]
         ];
     }
+
+    static function getInsertCode($id)
+    {
+        AfterPrint::where(['id' => $id])->update(['code' => 'QC-'.sprintf("%08s", $id)]);
+    }
 }

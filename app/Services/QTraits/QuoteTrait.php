@@ -26,11 +26,10 @@ trait QuoteTrait
         static::$nqty = !empty($data['nqty']) ? (int) $data['nqty'] : 1;
         static::$base_supp_qty = !empty($data['base_supp_qty']) ? (int) $data['base_supp_qty'] : 0;
         static::$supp_qty = !empty($data['supp_qty']) ? (int) $data['supp_qty'] : 0;
-        static::$handle_qty = self::$supp_qty;
+        static::$handle_qty = !empty($data['handle_qty'])  ? (int) $data['handle_qty'] : self::$base_supp_qty;
         static::$handle_product =  self::$handle_qty * self::$nqty;
         $length = !empty($data['size']['length']) ? $data['size']['length'] : 0;
         $width = !empty($data['size']['width']) ? $data['size']['width'] : 0;
-        convertCmToMeter($length, $width);
         static::$length = $length;
         static::$width = $width;
     }

@@ -77,7 +77,9 @@
 
         static function getFieldConfirm($obj)
         {
-            
+            return [
+
+            ];
         }
     }
 

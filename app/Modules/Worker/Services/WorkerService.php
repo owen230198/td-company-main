@@ -1,6 +1,7 @@
 <?php
 namespace App\Modules\Worker\Services;
 
+use App\Models\AfterPrint;
 use App\Models\Notify;
 use App\Models\Order;
 use App\Models\Paper;
@@ -95,6 +96,7 @@ class WorkerService extends BaseService
         $data['data_product'] = $data_product;
         $data['data_order'] = Order::find(@$data_product->order);
         $data['arr_handle'] = $handle;
+        $data['label_checkout'] = $worker_type == \TDConst::PRINT ? 'Số lượng tốt cần thực tế' : 'SL tốt cần (hỏng)';
         $data['handled'] = !empty($handle['handled']) ? $handle['handled'] : 0;
         $data['data_size'] = !empty($supply->size) ? json_decode($supply->size, true) : [];
         $data['view_type'] = $worker_type;
@@ -200,76 +202,62 @@ class WorkerService extends BaseService
         }
     }
 
-    public function submitCommand($obj, $data_command, $worker, $supply, $qty, $bad_demo_qty){
+    public function submitCommand($obj, $data_command, $worker, $supply, $bad_qty, $bad_demo_qty, $not_handled){
         if ($data_command->worker != $worker['id']) {
             return returnMessageAjax(100, 'Chấm công không thành công, Lệnh này không phải của bạn !');
         }
         if($data_command->status != \StatusConst::PROCESSING){
             return returnMessageAjax(100, 'Dữ liệu không hợp lệ !');
         }
+        $handle_qty = @$data_command->qty ?? 0;
+        $type = $worker['type'];
+        if ($type == \TDConst::PRINT) {
+            $after_print['name'] = $supply->name;
+            $after_print['w_salary'] = $data_command->id;
+            $after_print['worker'] = $worker['id'];
+            $after_print['qty'] = $handle_qty;
+            $after_print['status'] = \StatusConst::PROCESSING;
+            $after_print['created_by'] = $worker['id'];
+            (new \BaseService)->configBaseDataAction($after_print, 'worker_login');
+            $insert_id = AfterPrint::insertGetId($after_print);
+            $update = $obj->update(['status' => \StatusConst::CHECKING]);
+            if ($insert_id) {
+                AfterPrint::getInsertCode($insert_id);
+                return returnMessageAjax(200, 'Đã gửi yêu cầu duyệt chấm công đến bộ phận KCS sau in !', url('Worker'));
+            }else{
+                return returnMessageAjax(100, 'Có lỗi xảy ra, vui lòng thử chấm công lại !'); 
+            } 
+        }
+        $demo_qty = (int) $data_command->demo_qty;
         if ($bad_demo_qty > $data_command->demo_qty) {
             return returnMessageAjax(100, 'Số lượng sản phẩm loại B bạn làm hỏng đã vượt quá số lượng cho phép !');
         }
-        $type = $worker['type'];
         $data_handle = !empty($supply->{$type}) ? json_decode($supply->{$type}, true) : [];
-        $handle_qty = @$data_command->qty ?? 0;
         $table_supply = $data_command->table_supply;
-        if ($qty > $handle_qty) {
-            return returnMessageAjax(100, 'Số lượng chấm công không hợp lệ !');
-        }elseif ((int) $qty == 0) {
-            //Trả lại trạng thái treo lệnh nếu nhập số lượng hoàn thành là 0
-            $data_update['status'] = \StatusConst::NOT_ACCEPTED;
-            $data_update['worker'] = 0;
-            $ret = $obj->update($data_update);
-            if ($ret) {
-                return returnMessageAjax(200, 'Bạn đã trả lệnh thành công !', url('Worker'));
+        $rest_demo_qty = $demo_qty - $bad_demo_qty;
+        $next_demo_qty = $rest_demo_qty;
+        //nếu chấm công với số lượng không hết thì thêm lệnh mới treo ở ngoài
+        if ($not_handled > 0) {
+            $re_insert['type'] = $type;
+            $re_insert['machine_type'] = $data_command->machine_type;
+            $re_insert['qty'] = $not_handled;
+            $re_insert['demo_qty'] = $rest_demo_qty;
+            $re_insert['created_by'] = $data_command->created_by;
+            $re_insert['name'] = $data_command->name;
+            if ($type == \TDConst::FILL) {
+                $re_insert['fill_materal'] = $data_command->fill_materal;
+                $re_insert['fill_handle'] = $data_command->fill_handle;
+                $re_insert['handle'] = $data_command->handle;
             }
+            WSalary::commandStarted($data_command->command, $re_insert, $table_supply, $supply);
+            $next_demo_qty = 0;
+        }
+        //Tính lương công nhân & lưu bảng lương
+        $update = $this->checkInWorkerSalary($data_command, $type, $qty, $supply, $data_handle, $worker, $obj, $table_supply, $next_demo_qty, $bad_demo_qty);
+        if (!empty($update)) {
+            return returnMessageAjax(200, 'Bạn đã chấm công thành công với số lượng : '.$qty.' !', url('Worker'));  
         }else{
-            $demo_qty = (int) $data_command->demo_qty;
-            $rest_demo_qty = $demo_qty - $bad_demo_qty;
-            $next_demo_qty = $rest_demo_qty;
-            //nếu chấm công với số lượng không hết thì thêm lệnh mới treo ở ngoài
-            if ($qty < $handle_qty) {
-                $re_insert['type'] = $type;
-                $re_insert['machine_type'] = $data_command->machine_type;
-                $re_insert['qty'] = $handle_qty - $qty;
-                $re_insert['demo_qty'] = $rest_demo_qty;
-                $re_insert['created_by'] = $data_command->created_by;
-                $re_insert['name'] = $data_command->name;
-                if ($type == \TDConst::FILL) {
-                    $re_insert['fill_materal'] = $data_command->fill_materal;
-                    $re_insert['fill_handle'] = $data_command->fill_handle;
-                    $re_insert['handle'] = $data_command->handle;
-                }
-                WSalary::commandStarted($data_command->command, $re_insert, $table_supply, $supply);
-                $next_demo_qty = 0;
-            }
-            if ($type == \TDConst::PRINT) {
-                $table_after_print = 'after_prints';
-                $after_print['name'] = $supply->name;
-                $after_print['w_salary'] = $data_command->id;
-                $after_print['worker'] = $worker['id'];
-                $after_print['qty'] = $qty;
-                $after_print['status'] = \StatusConst::PROCESSING;
-                $after_print['created_by'] = $worker['id'];
-                (new \BaseService)->configBaseDataAction($after_print, 'worker_login');
-                $after_prints = \DB::table($table_after_print);
-                $insert_id = $after_prints->insertGetId($after_print);
-                $update = $obj->update(['status' => \StatusConst::CHECKING]);
-                if ($insert_id) {
-                    $after_prints->where('id', $insert_id)->update(['code' => 'QC-'.formatCodeInsert($insert_id)]);
-                    return returnMessageAjax(200, 'Đã gửi yêu cầu duyệt chấm công đến bộ phận KCS sau in !', url('Worker'));
-                }else{
-                    return returnMessageAjax(100, 'Có lỗi xảy ra, vui lòng thử chấm công lại !'); 
-                } 
-            }
-            //Tính lương công nhân & lưu bảng lương
-            $update = $this->checkInWorkerSalary($data_command, $type, $qty, $supply, $data_handle, $worker, $obj, $table_supply, $next_demo_qty, $bad_demo_qty);
-            if (!empty($update)) {
-                return returnMessageAjax(200, 'Bạn đã chấm công thành công với số lượng : '.$qty.' !', url('Worker'));  
-            }else{
-                return returnMessageAjax(100, 'Có lỗi xảy ra, vui lòng thử chấm công lại !'); 
-            }
+            return returnMessageAjax(100, 'Có lỗi xảy ra, vui lòng thử chấm công lại !'); 
         }
     }
 }

@@ -99,7 +99,9 @@ trait QPaperTrait
     private function getDataActionPaper($data, $dataItem)
     {
         $data['supp_qty'] = !empty($data['supp_qty']) ? (int) $data['supp_qty'] - getPlusPaperNumber() : 0;
-        $data['base_supp_qty'] = !empty($data['base_supp_qty']) ? (int) $data['base_supp_qty'] - (int) getDataConfig('QuoteConfig', 'PLUS_DIRECT') : 0;
+        $base_supp_qty = !empty($data['base_supp_qty']) ? (int) $data['base_supp_qty'] : 0;
+        $data['handle_qty'] = $base_supp_qty;
+        $data['base_supp_qty'] = $base_supp_qty - (int) getDataConfig('QuoteConfig', 'PLUS_DIRECT');
         $this->newObjectSetProperty($data);
         $handle_type = (int) @$data['handle_type'];
         $data_action['handle_type'] = $handle_type;

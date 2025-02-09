@@ -17,8 +17,8 @@
             @endphp
             @include('view_update.view', [
                 'name' => '',
-                'note' => 'SL tốt cần',
-                'min_label' => 165,
+                'note' => 'Cty yêu cầu (tốt cần thực tế)',
+                'min_label' => 185,
                 'attr' => ['disable_field' => 1],
                 'value' => $base_qty_text
             ])
@@ -26,32 +26,24 @@
                 @include('view_update.view', [
                     'name' => '',
                     'note' => 'SL thợ in xác nhận',
-                    'min_label' => 165,
+                    'min_label' => 185,
                     'attr' => ['disable_field' => 1],
                     'value' => @$print_handle['print_confirmed']
                 ]) 
-                 @include('view_update.view', [
+                @include('view_update.view', [
                     'name' => '',
                     'note' => 'SL KCS xác nhận',
-                    'min_label' => 165,
+                    'min_label' => 185,
                     'attr' => ['disable_field' => 1],
                     'value' => @$print_handle['handled']
-                ])  
-            @endif
-            @include('view_update.view', [
-                'name' => 'qty',
-                'note' => 'SL tốt cần (hỏng)',
-                'attr' => ['type_input' => 'number'],
-                'min_label' => 165,
-                'value' => @$data_command->qty
-            ])
-            @if ($view_type != \TDConst::PRINT)
+                ])
                 @include('view_update.view', [
-                    'name' => 'bad_demo_qty',
-                    'note' => 'SL loại B thử máy (hỏng)',
-                    'attr' => ['type_input' => 'number', 'placeholder' => 'SL loại B để thử máy chỉ còn lại ' .$data_command->demo_qty],
-                    'min_label' => 165
-                ])    
+                    'name' => 'not_handled',
+                    'note' => 'Chưa hoàn thành',
+                    'attr' => ['type_input' => 'number'],
+                    'min_label' => 185,
+                    'value' => 0
+                ])
             @endif
         </div>
         <div class="modal-footer">
