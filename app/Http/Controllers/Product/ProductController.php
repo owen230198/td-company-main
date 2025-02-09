@@ -487,10 +487,10 @@ use App\Models\WUser;
                 $data_handle = !empty($data_supply->{$type}) ? json_decode($data_supply->{$type}, true) : [];
                 $data_handle['print_confirmed'] = (int) @$data_handle['print_confirmed'];
                 $data_handle['print_confirmed'] += $obj_qty;
+                $bad_qty = $obj_qty - $qty;
                 $confirm = (new \App\Modules\Worker\Services\WorkerService)
-                ->checkInWorkerSalary($data_salary, $type, $qty, $data_supply, $data_handle, $worker, $obj_salary, $table_supply, $demo_qty);
+                ->checkInWorkerSalary($data_salary, $type, $qty, $data_supply, $data_handle, $worker, $obj_salary, $table_supply, $demo_qty, 0, $bad_qty);
                 if ($confirm) {
-                    $bad_qty = $obj_qty - $qty;
                     if ($bad_qty > 0) {
                         $data_rework['name'] = $data_salary->name;
                         $data_rework['product'] = $data_salary->product;

@@ -106,13 +106,14 @@ class WorkerService extends BaseService
         return view('Worker::commands.view', $data);
     }
 
-    public function checkInWorkerSalary($data_command, $type, $qty, $supply, $data_handle, $worker, $obj, $table_supply, $demo_qty, $bad_demo_qty = 0)
+    public function checkInWorkerSalary($data_command, $type, $qty, $supply, $data_handle, $worker, $obj, $table_supply, $demo_qty, $bad_demo_qty, $bad_qty)
     {
         $handle_config = $type == \TDConst::FILL ? json_decode($data_command->fill_handle, true) : $data_handle;
         $obj_salary = new WSalary($supply, $handle_config, $worker);
         $data_update = $obj_salary->totalhandle($qty, $type);
         $data_update['status'] = \StatusConst::SUBMITED;
         $data_update['qty'] = $qty;
+        $data_update['bad_qty'] = $bad_qty;
         $data_update['bad_demo_qty'] = $bad_demo_qty;
         $data_update['submited_at'] = \Carbon\Carbon::now();
         $update = $obj->update($data_update);
@@ -162,7 +163,7 @@ class WorkerService extends BaseService
                         WSalary::commandStarted($data_command->command, $next_data, $table_supply, $supply);
                     }else{
                         // nếu lệnh tiếp theo có tồn tại mà chưa được ai nhận thì chỉ update thêm số lượng
-                        $exist_command->qty = $next_qty;
+                        $exist_command->qty += $next_qty;
                         $exist_command->demo_qty += $next_demo_qty;
                         $exist_command->save();
                     }
@@ -237,6 +238,7 @@ class WorkerService extends BaseService
         $rest_demo_qty = $demo_qty - $bad_demo_qty;
         $next_demo_qty = $rest_demo_qty;
         //nếu chấm công với số lượng không hết thì thêm lệnh mới treo ở ngoài
+        $qty = $handle_qty - $bad_qty;
         if ($not_handled > 0) {
             $re_insert['type'] = $type;
             $re_insert['machine_type'] = $data_command->machine_type;
@@ -251,9 +253,10 @@ class WorkerService extends BaseService
             }
             WSalary::commandStarted($data_command->command, $re_insert, $table_supply, $supply);
             $next_demo_qty = 0;
+            $qty -= $not_handled;
         }
         //Tính lương công nhân & lưu bảng lương
-        $update = $this->checkInWorkerSalary($data_command, $type, $qty, $supply, $data_handle, $worker, $obj, $table_supply, $next_demo_qty, $bad_demo_qty);
+        $update = $this->checkInWorkerSalary($data_command, $type, $qty, $supply, $data_handle, $worker, $obj, $table_supply, $next_demo_qty, $bad_demo_qty, $bad_qty);
         if (!empty($update)) {
             return returnMessageAjax(200, 'Bạn đã chấm công thành công với số lượng : '.$qty.' !', url('Worker'));  
         }else{

@@ -30,21 +30,48 @@
                     'attr' => ['disable_field' => 1],
                     'value' => @$print_handle['print_confirmed']
                 ]) 
-                @include('view_update.view', [
-                    'name' => '',
-                    'note' => 'SL KCS xác nhận',
-                    'min_label' => 185,
-                    'attr' => ['disable_field' => 1],
-                    'value' => @$print_handle['handled']
-                ])
-                @include('view_update.view', [
-                    'name' => 'not_handled',
-                    'note' => 'Chưa hoàn thành',
-                    'attr' => ['type_input' => 'number'],
-                    'min_label' => 185,
-                    'value' => 0
-                ])
             @endif
+            <div class="mt-1 pt-2 border_top_eb">
+                @if ($view_type != \TDConst::PRINT)
+                    <div class="d-lg-flex align-items-center">
+                        @include('view_update.view', [
+                            'name' => '',
+                            'note' => 'Tốt cần thực tế',
+                            'min_label' => 185,
+                            'attr' => ['disable_field' => 1, 'inject_class' => 'medium_input'],
+                            'value' => @$data_command->qty
+                        ])
+                        <div class="mb-2 ml-lg-1">
+                            @include('view_update.text', [
+                                'name' => 'bad_qty',
+                                'attr' => ['type_input' => 'number', 'inject_class' => 'medium_input', 'placeholder' => 'Số lượng hỏng']
+                            ])
+                        </div>
+                    </div>
+                    <div class="d-lg-flex align-items-center">
+                        @include('view_update.view', [
+                            'name' => '',
+                            'note' => 'Loại B thử máy',
+                            'min_label' => 185,
+                            'attr' => ['disable_field' => 1, 'inject_class' => 'medium_input'],
+                            'value' => @$data_command->demo_qty
+                        ])
+                        <div class="mb-2 ml-lg-1">
+                            @include('view_update.text', [
+                                'name' => 'bad_demo_qty',
+                                'attr' => ['type_input' => 'number', 'inject_class' => 'medium_input', 'placeholder' => 'Số lượng hỏng']
+                            ])
+                        </div>
+                    </div>
+                    @include('view_update.view', [
+                        'name' => 'not_handled',
+                        'note' => 'Chưa hoàn thành',
+                        'attr' => ['type_input' => 'number'],
+                        'min_label' => 185,
+                        'value' => 0
+                    ])
+                @endif
+            </div>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
