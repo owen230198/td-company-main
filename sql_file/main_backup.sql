@@ -1,0 +1,6438 @@
+-- phpMyAdmin SQL Dump
+-- version 5.1.1deb5ubuntu1
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost:3306
+-- Generation Time: Feb 08, 2025 at 05:37 PM
+-- Server version: 8.0.41-0ubuntu0.22.04.1
+-- PHP Version: 8.1.2-1ubuntu2.20
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `td_company_main`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `after_prints`
+--
+
+CREATE TABLE `after_prints` (
+  `id` int NOT NULL,
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `w_salary` int DEFAULT NULL,
+  `worker` int DEFAULT NULL,
+  `qty` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `act` tinyint DEFAULT NULL,
+  `created_by` int DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `base_receipts`
+--
+
+CREATE TABLE `base_receipts` (
+  `id` int NOT NULL,
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `hard_code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `hard_file` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `act` tinyint DEFAULT NULL,
+  `created_by` int DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `buying_items`
+--
+
+CREATE TABLE `buying_items` (
+  `id` int NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `parent` int DEFAULT NULL,
+  `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `target` int DEFAULT NULL,
+  `qtv` int DEFAULT NULL,
+  `status` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `width` float DEFAULT NULL,
+  `length` float DEFAULT NULL,
+  `qty` float DEFAULT NULL,
+  `lenth_qty` float DEFAULT NULL,
+  `weight` float DEFAULT NULL,
+  `deliveried` float DEFAULT NULL,
+  `sugg_provider` int DEFAULT NULL,
+  `sugg_price` float DEFAULT NULL,
+  `provider` int DEFAULT NULL,
+  `price` float DEFAULT NULL,
+  `total` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `act` tinyint DEFAULT NULL,
+  `created_by` int DEFAULT NULL,
+  `contact_by` int DEFAULT NULL,
+  `applied_by` int DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `citys`
+--
+
+CREATE TABLE `citys` (
+  `id` int NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT '' COMMENT 'Tên',
+  `parent` int DEFAULT NULL COMMENT 'Cha',
+  `ord` tinyint DEFAULT NULL COMMENT 'Sắp xếp',
+  `act` tinyint(1) DEFAULT NULL COMMENT 'Kích hoạt',
+  `created_at` datetime DEFAULT NULL COMMENT 'Ngày tạo',
+  `updated_at` datetime DEFAULT NULL COMMENT 'Ngày cập nhật'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `citys`
+--
+
+INSERT INTO `citys` (`id`, `name`, `parent`, `ord`, `act`, `created_at`, `updated_at`) VALUES
+(1, 'Hồ Chí Minh', 0, 1, 1, '2020-11-11 18:02:51', '2020-11-11 18:02:51'),
+(351, 'Hà Nội', 0, 1, 1, '2020-11-11 18:05:31', '2020-11-11 18:05:31'),
+(969, 'Đà Nẵng', 0, 1, 1, '2020-11-11 18:06:22', '2020-11-11 18:06:22'),
+(1035, 'Bình Dương', 0, 1, 1, '2020-11-11 18:07:11', '2020-11-11 18:07:11'),
+(1137, 'Đồng Nai', 0, 1, 1, '2020-11-11 18:08:27', '2020-11-11 18:08:27'),
+(1327, 'Khánh Hòa', 0, 1, 1, '2020-11-11 18:08:51', '2020-11-11 18:08:51'),
+(1478, 'Hải Phòng', 0, 1, 1, '2020-11-11 18:09:25', '2020-11-11 18:09:25'),
+(1723, 'Long An', 0, 1, 1, '2020-11-11 18:09:44', '2020-11-11 18:09:44'),
+(1933, 'Quảng Nam', 0, 1, 1, '2020-11-11 18:10:22', '2020-11-11 18:10:22'),
+(2198, 'Vũng Tàu', 0, 1, 1, '2020-11-11 18:10:39', '2020-11-11 18:10:39'),
+(2292, 'Đắk Lắk', 0, 1, 1, '2020-11-11 18:10:59', '2020-11-11 18:10:59'),
+(2493, 'Cần Thơ', 0, 1, 1, '2020-11-11 18:11:12', '2020-11-11 18:11:12'),
+(2592, 'Bình Thuận  ', 0, 1, 1, '2020-11-11 18:11:30', '2020-11-11 18:11:30'),
+(2731, 'Lâm Đồng', 0, 1, 1, '2020-11-11 18:11:41', '2020-11-11 18:11:41'),
+(2893, 'Thiên Huế', 0, 1, 1, '2020-11-11 18:11:54', '2020-11-11 18:11:54'),
+(3061, 'Kiên Giang', 0, 1, 1, '2020-11-11 18:12:08', '2020-11-11 18:12:08'),
+(3222, 'Bắc Ninh', 0, 1, 1, '2020-11-11 18:12:21', '2020-11-11 18:12:21'),
+(3359, 'Quảng Ninh', 0, 1, 1, '2020-11-11 18:12:32', '2020-11-11 18:12:32'),
+(3563, 'Thanh Hóa', 0, 1, 1, '2020-11-11 18:12:44', '2020-11-11 18:12:44'),
+(4230, 'Nghệ An', 0, 1, 1, '2020-11-11 18:13:07', '2020-11-11 18:13:07'),
+(4737, 'Hải Dương', 0, 1, 1, '2020-11-11 18:13:21', '2020-11-11 18:13:21'),
+(5017, 'Gia Lai', 0, 1, 1, '2020-11-11 18:13:32', '2020-11-11 18:13:32'),
+(5259, 'Bình Phước', 0, 1, 1, '2020-11-11 18:13:41', '2020-11-11 18:13:41'),
+(5385, 'Hưng Yên', 0, 1, 1, '2020-11-11 18:13:52', '2020-11-11 18:13:52'),
+(5558, 'Bình Định', 0, 1, 1, '2020-11-11 18:13:58', '2020-11-11 18:13:58'),
+(5730, 'Tiền Giang', 0, 1, 1, '2020-11-11 18:14:08', '2020-11-11 18:14:08'),
+(5922, 'Thái Bình', 0, 1, 1, '2020-11-11 18:14:22', '2020-11-11 18:14:22'),
+(6218, 'Bắc Giang', 0, 1, 1, '2020-11-11 18:14:31', '2020-11-11 18:14:31'),
+(6463, 'Hòa Bình', 0, 1, 1, '2020-11-11 18:14:39', '2020-11-11 18:14:39'),
+(6686, 'An Giang', 0, 1, 1, '2020-11-11 18:14:45', '2020-11-11 18:14:45'),
+(6854, 'Vĩnh Phúc', 0, 1, 1, '2020-11-11 18:15:00', '2020-11-11 18:15:00'),
+(7001, 'Tây Ninh', 0, 1, 1, '2020-11-11 18:15:06', '2020-11-11 18:15:06'),
+(7106, 'Thái Nguyên', 0, 1, 1, '2020-11-11 18:15:14', '2020-11-11 18:15:14'),
+(7298, 'Lào Cai', 0, 1, 1, '2020-11-11 18:15:20', '2020-11-11 18:15:20'),
+(7474, 'Nam Định', 0, 1, 1, '2020-11-11 18:15:29', '2020-11-11 18:15:29'),
+(7715, 'Quảng Ngãi', 0, 1, 1, '2020-11-11 18:15:38', '2020-11-11 18:15:38'),
+(7917, 'Bến Tre', 0, 1, 1, '2020-11-11 18:15:45', '2020-11-11 18:15:45'),
+(8095, 'Đắk Nông', 0, 1, 1, '2020-11-11 18:16:05', '2020-11-11 18:16:05'),
+(8175, 'Cà Mau', 0, 1, 1, '2020-11-11 18:16:13', '2020-11-11 18:16:13'),
+(8287, 'Vĩnh Long', 0, 1, 1, '2020-11-11 18:16:23', '2020-11-11 18:16:23'),
+(8405, 'Ninh Bình', 0, 1, 1, '2020-11-11 18:16:28', '2020-11-11 18:16:28'),
+(8560, 'Phú Thọ', 0, 1, 1, '2020-11-11 18:16:35', '2020-11-11 18:16:35'),
+(8851, 'Ninh Thuận', 0, 1, 1, '2020-11-11 18:16:43', '2020-11-11 18:16:43'),
+(8924, 'Phú Yên', 0, 1, 1, '2020-11-11 18:16:47', '2020-11-11 18:16:47'),
+(9047, 'Hà Nam', 0, 1, 1, '2020-11-11 18:16:52', '2020-11-11 18:16:52'),
+(9171, 'Hà Tĩnh', 0, 1, 1, '2020-11-11 18:16:57', '2020-11-11 18:16:57'),
+(9449, 'Đồng Tháp', 0, 1, 1, '2020-11-11 18:17:04', '2020-11-11 18:17:04'),
+(9607, 'Sóc Trăng', 0, 1, 1, '2020-11-11 18:17:13', '2020-11-11 18:17:13'),
+(9731, 'Kon Tum', 0, 1, 1, '2020-11-11 18:17:22', '2020-11-11 18:17:22'),
+(9845, 'Quảng Bình', 0, 1, 1, '2020-11-11 18:17:28', '2020-11-11 18:17:28'),
+(10025, 'Quảng Trị', 0, 1, 1, '2020-11-11 18:17:37', '2020-11-11 18:17:37'),
+(10177, 'Trà Vinh', 0, 1, 1, '2020-11-11 18:17:46', '2020-11-11 18:17:46'),
+(10301, 'Hậu Giang', 0, 1, 1, '2020-11-11 18:17:52', '2020-11-11 18:17:52'),
+(10387, 'Sơn La', 0, 1, 1, '2020-11-11 18:18:00', '2020-11-11 18:18:00'),
+(10604, 'Bạc Liêu', 0, 1, 1, '2020-11-11 18:18:07', '2020-11-11 18:18:07'),
+(10679, 'Yên Bái', 0, 1, 1, '2020-11-11 18:18:11', '2020-11-11 18:18:11'),
+(10869, 'Tuyên Quang', 0, 1, 1, '2020-11-11 18:18:17', '2020-11-11 18:18:17'),
+(11019, 'Điện Biên', 0, 1, 1, '2020-11-11 18:18:21', '2020-11-11 18:18:21'),
+(11162, 'Lai Châu', 0, 1, 1, '2020-11-11 18:18:25', '2020-11-11 18:18:25'),
+(11280, 'Lạng Sơn', 0, 1, 1, '2020-11-11 18:18:28', '2020-11-11 18:18:28'),
+(11525, 'Hà Giang', 0, 1, 1, '2020-11-11 18:18:35', '2020-11-11 18:18:35'),
+(11732, 'Bắc Kạn', 0, 1, 1, '2020-11-11 18:18:40', '2020-11-11 18:18:40'),
+(11863, 'Cao Bằng', 0, 1, 1, '2020-11-11 18:18:43', '2020-11-11 18:18:43');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `configs`
+--
+
+CREATE TABLE `configs` (
+  `id` int NOT NULL,
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `keyword` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `value` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `act` tinyint(1) DEFAULT '0',
+  `view_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `note` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ord` int DEFAULT NULL COMMENT 'Sắp xếp',
+  `default_data` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `required` tinyint DEFAULT NULL,
+  `region` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `configs`
+--
+
+INSERT INTO `configs` (`id`, `name`, `keyword`, `value`, `act`, `view_type`, `note`, `ord`, `default_data`, `required`, `region`, `created_at`, `updated_at`) VALUES
+(1, 'app_name', 'APP_NAME', 'Tuan Dung app', 1, 'text', 'Tên phần mềm', 0, NULL, NULL, '1', '2023-05-16 21:51:59', '2024-04-23 06:00:36'),
+(2, 'timezone', 'TIMEZONE', 'Asia/Ho_Chi_Minh', 1, 'text', 'Múi giờ', 0, NULL, NULL, '1', '2023-05-16 22:15:15', '2023-05-16 22:15:15'),
+(3, 'mail_host', 'MAIL_HOST', 'smtp.gmail.com', 1, 'text', 'Mail host', 0, NULL, NULL, '1', '2023-05-16 23:41:06', '2023-05-16 23:41:06'),
+(4, 'mail_port', 'MAIL_PORT', '587', 1, 'text', 'Mail port', 0, NULL, NULL, '1', '2023-05-16 23:41:15', '2023-05-16 23:41:15'),
+(5, 'mail_encryption', 'MAIL_ENCRYPTION', 'tls', 1, 'text', 'Giao thức gửi mail', 0, NULL, NULL, '1', '2023-05-16 23:44:05', '2023-05-16 23:44:05'),
+(6, 'mail_username', 'MAIL_USERNAME', 'nguyenduykhanh2323@gmail.com', 1, 'text', 'Mail gửi', 0, NULL, NULL, '1', '2023-05-16 23:42:40', '2023-05-16 23:42:40'),
+(7, 'mail_password', 'MAIL_PASSWORD', 'pass23', 1, 'text', 'Mail gửi', 0, NULL, NULL, '1', '2023-05-16 23:42:38', '2023-05-16 23:42:38');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customers`
+--
+
+CREATE TABLE `customers` (
+  `id` int NOT NULL,
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `city` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tax_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `act` int DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_by` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `customers`
+--
+
+INSERT INTO `customers` (`id`, `code`, `name`, `address`, `city`, `tax_code`, `note`, `status`, `act`, `created_at`, `updated_at`, `created_by`) VALUES
+(1, 'KH-00000001', 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 'Tòa R2 TTTM Royal City, 72A Nguyễn Trãi - Thanh Xuân - HN', '351', NULL, NULL, '1', 1, '2023-09-23 11:10:31', '2024-05-19 18:24:48', 1),
+(3, 'KH-00000003', 'CÔNG TY DỆT MAY THÀNH VƯỢNG', 'Hoa sơn - Ứng hòa - Hà nội', '351', NULL, NULL, '1', 1, '2023-09-23 13:39:43', '2024-07-05 08:27:02', 1),
+(4, 'KH-00000004', 'CTY TNHH VIETBRAND', 'Hà Nam', '9047', NULL, NULL, '1', 1, '2023-09-23 13:42:14', '2024-07-05 11:19:55', 1),
+(5, 'KH-00000005', 'CTY DƯỢC PHẨM DIAMOND PHÁP', 'KCN Đồng Văn - Hà Nam', '9047', NULL, NULL, '1', 1, '2023-09-23 14:16:26', '2024-05-19 18:24:48', 1),
+(6, 'KH-00000006', 'CTY TNHH IN & SẢN XUẤT BAO BÌ NGHỆ AN', 'TP Vinh - Nghệ An', '4230', NULL, NULL, '1', 1, '2023-09-23 14:18:56', '2024-05-19 18:24:48', 1),
+(7, 'KH-00000007', 'CÔNG TY CỔ PHẦN DƯỢC PHẨM CENOVA', 'TP Nam Định', '7474', NULL, NULL, '1', 1, '2023-09-23 14:22:24', '2024-06-21 10:20:14', 2),
+(8, 'KH-00000008', 'CTY HATACHI', 'Trung Kính - HN', '351', NULL, NULL, '1', 1, '2023-09-23 14:32:18', '2024-05-19 18:24:49', 1),
+(9, 'KH-00000009', 'CTY CP IN & SẢN XUẤT BAO BÌ TUẤN DUNG', 'Lô D5-16 Cụm Làng Nghề Triều khúc - Tân Triều - HN', '351', NULL, NULL, '1', 1, '2023-09-23 14:34:33', '2024-05-19 18:24:49', 1),
+(10, 'KH-00000010', 'Công ty TNHH phát triển y tế USA', 'NV1 Số 38 Tổng Cục V Tân Triều Thanh Trì TP.Hà Nội', '351', NULL, NULL, '1', 1, '2023-09-26 14:37:54', '2024-05-19 18:24:49', 10),
+(11, 'KH-00000011', 'CÔNG TY TNHH ĐẦU TƯ XUẤT NHẬP KHẨU VÀ THƯƠNG MẠI THÀNH ĐỨC', 'Số 3B, Ngách 144/4, Phố Quan Nhân, Phường Nhân Chính, Quận Thanh Xuân, Thành phố Hà Nội', '7474', NULL, 'TP Ninh bình 0988373219', '1', 1, '2023-09-26 16:14:25', '2024-05-19 18:24:49', 10),
+(12, 'KH-00000012', 'CÔNG TY DƯỢC PHẨM HADIPHACO', 'Số 65 ngõ 173/192 Lê Trọng Tấn, Định Công, Hoàng Mai, HN', '351', NULL, NULL, '1', 1, '2023-09-26 16:51:54', '2024-05-19 18:24:49', 10),
+(13, 'KH-00000013', 'Công ty TNHH dược phẩm Blue pharma', 'Số nhà 22, ngách 50/37 Đường Khuyến Lương, Trần phú', '351', NULL, NULL, '1', 1, '2023-09-26 16:59:34', '2024-05-19 18:24:49', 10),
+(14, 'KH-00000014', 'CÔNG TY CP DƯỢC MỸ PHẨM OLYMPUS', 'Ngõ 77 Bùi Xương Trạch - Thanh Xuân - HN', '351', NULL, NULL, '1', 1, '2023-09-28 10:01:06', '2024-05-19 18:24:49', 10),
+(15, 'KH-00000015', 'CÔNG TY TNHH ĐẦU TƯ THƯƠNG MẠI THẢO DƯỢC GLOBAL PHARMA', 'Số 63 ngõ 172/92 Lê trọng Tấn, Định Công, Hoàng Mai, HN', '351', NULL, NULL, '1', 1, '2023-09-28 11:16:29', '2024-05-19 18:24:49', 10),
+(16, 'KH-00000016', 'CÔNG TY TNHH ECOPHAR VIỆT NAM', 'Số 12, ngõ 4 Đường Đào Nguyên, Châu Quì, Gia Lâm, HN', '351', NULL, NULL, '1', 1, '2023-09-28 11:32:08', '2024-05-19 18:24:49', 10),
+(17, 'KH-00000017', 'CÔNG TY TNHH DƯỢC PHẨM MAILISA GROUP', 'Nhà LK2, lô 3, khu đô thị 379, đường Phan Bá Vành', '5922', NULL, NULL, '1', 1, '2023-09-30 14:11:20', '2024-05-19 18:24:49', 10),
+(18, 'KH-00000018', 'Công ty cổ phần LáArt', 'Số 66 Nguyễn Thái Học, Ba Đình, Hn', '351', NULL, NULL, '2', 1, '2023-10-09 14:57:14', '2024-05-19 18:24:49', 10),
+(21, 'KH-00000021', 'CÔNG TY HNA', '171 Kim Mã - HN', '351', NULL, NULL, '1', 1, '2023-11-02 08:41:33', '2024-05-19 18:24:49', 1),
+(22, 'KH-00000022', 'CÔNG TY TNHH DƯỢC PHẨM ĐĂNG NHI (C4805)', 'Tổ 1B Phường Tân Lập, Thành phố Thái Nguyên', '7106', NULL, NULL, '0', 1, '2024-02-29 10:10:42', '2024-02-29 10:10:42', 10),
+(23, 'KH-00000023', 'CÔNG TY TNHH TRIBAN VIỆT NAM', 'Thôn Thượng - Phùng xá - Mỹ Đức - Hà nội', '351', NULL, 'Giao hàng hỏi giang', '1', 1, '2024-02-29 15:03:21', '2024-02-29 15:03:21', 1),
+(25, 'KH-00000025', 'CÔNG TY CP DƯỢC PHẨM & CHUYỂN GIAO CÔNG NGHỆ VIỆT PHÁP', 'Số A1 KM2 Đường Phùng Hưng - P. Kiến Hưng - Q. Hà Đông - HN', '351', NULL, NULL, '0', 1, '2024-03-21 11:56:40', '2024-06-22 08:54:21', 1),
+(26, 'KH-00000026', 'CÔNG TY CỔ PHẦN HOÀNG ANH AGRITECH', 'Vĩnh Phúc', '6854', NULL, NULL, '1', 1, '2024-04-01 14:45:03', '2024-04-01 14:45:03', 1),
+(27, 'KH-00000027', 'CÔNG TY CỔ PHẦN LỤA NHA XÁ', 'HOÀNG ĐẠO THUÝ', '351', NULL, NULL, '1', 1, '2024-04-08 06:47:34', '2024-04-08 06:47:34', 1),
+(28, 'KH-00000028', 'CÔNG TY CP SMILEE VIỆT NAM', 'Kho số 15, ngách 22 ngõ 177 Cầu Diễn, Hà Nội Liên hệ: Anh Nam – 0902.202.126', '351', NULL, NULL, '1', 1, '2024-04-10 10:57:11', '2024-04-10 10:57:11', 10),
+(29, 'KH-00000029', 'CTY CP SẢN PHẨM THIÊN NHIÊN TÂM VIỆT', 'số 9 ngách 112/33 Phố Định Công Thượng - Hoàng Mai - HN', '351', NULL, NULL, '1', 1, '2024-04-11 16:33:08', '2024-04-11 16:33:08', 1),
+(30, 'KH-00000030', 'CÔNG TY CP SX DƯỢC LIỆU TRUNG ƯƠNG 28', 'Thạch Thất', '351', NULL, NULL, '1', 1, '2024-04-12 14:05:05', '2024-04-12 14:05:05', 1),
+(31, 'KH-00000031', 'Cty TNHH TM Dược Phẩm Viễn Dương', '43 Tuệ Tĩnh, phường An Tảo, TP Hưng Yên, tỉnh Hưng Yên.', '5385', NULL, NULL, '1', 1, '2024-04-23 16:28:43', '2024-04-23 16:28:43', 1),
+(32, 'KH-00000032', 'CÔNG TY TNHH THƯƠNG MẠI AN KHANG PHARCO', 'Tầng 1 số nhà 211 Trần Thái Tông, Phường Trần Hưng Đạo, Tp Thái Bình', '5922', NULL, NULL, '1', 1, '2024-04-24 06:08:25', '2024-05-19 18:24:49', 10),
+(33, 'KH-00000033', 'Công ty TNHH dược phẩm USHT Viêt Nam', 'Số 67, ngõ 126 đường Khuất Duy Tiến, Thanh Xuân, Hà Nội', '351', NULL, NULL, '1', 1, '2024-04-24 06:33:27', '2024-05-19 18:24:49', 10),
+(36, 'KH-00000036', 'CÔNG TY TNHH DƯỢC PHẨM TÂM THÁI', 'Xóm An Thái, Xã Hóa Thượng, Thái Nguyên', '7106', NULL, NULL, '1', 1, '2024-04-25 09:05:55', '2024-05-19 18:24:49', 10),
+(38, 'KH-00000038', 'CÔNG TY TNHH THẢO DƯỢC HƯNG PHÁT', 'Số nhà 25 ngõ 36 Phương Trạc, Vĩnh Ngọc, Gia Lâm, HN', '351', NULL, NULL, '1', 1, '2024-05-06 11:42:13', '2024-05-19 18:24:49', 10),
+(39, 'KH-00000039', 'CÔNG TY CỔ PHẦN ĐẦU TƯ SÂM VIỆT NAM', '184 Trương Hán Siêu, phường Duy Tân, TP Kon Tum', '9731', NULL, NULL, '1', 1, '2024-05-06 12:59:33', '2024-05-19 18:24:49', 10),
+(40, 'KH-00000040', 'CÔNG TY CP DƯỢC PHẨM MEDIFA', '149 Phố Trung Kiên - Tây Tựu - Từ Liêm - HN', '351', NULL, NULL, '1', 1, '2024-05-06 13:21:25', '2024-05-19 18:24:50', 10),
+(41, 'KH-00000041', 'CÔNG TY TNHH DƯỢC PHẨM TÂN MẠNH PHÁT', 'Số nhà 48 Tổ 9 P Phúc Lợi - Long Biên - HN', '351', NULL, NULL, '1', 1, '2024-05-13 11:44:28', '2024-05-19 18:24:50', 10),
+(42, 'KH-00000042', 'SHOP XUÂN GIANG', '812 Lê Thanh Nghị - TP Hải Dương', '4737', NULL, NULL, '1', 1, '2024-05-19 10:31:19', '2024-05-19 18:24:50', 10),
+(43, 'KH-00000043', 'Thời trang Đỗ Trịnh Hoài Nam', 'Tầng 2, số 324 Xuân Đỉnh, Bắc Từ Liêm HN', '351', NULL, NULL, '1', 1, '2024-05-19 11:19:06', '2024-05-21 14:03:41', 10),
+(44, 'KH00000044', 'CÔNG TY TNHH THẢO DƯỢC SAO BIỂN', 'Thôn Đình Dù, Xã Đình Dù, Văn Lâm, Hưng Yên', '5385', NULL, NULL, '1', 1, '2024-05-20 11:00:47', '2024-05-20 11:00:47', 10),
+(45, 'KH00000045', 'Cong ty TNHH Dược Phẩm Sao Mộc', '192 Đức Giang , phường Thượng Thanh , Long Biên, HN', '351', NULL, NULL, '1', 1, '2024-05-20 11:12:53', '2024-05-20 11:12:53', 10),
+(46, 'KH-00000046', 'CÔNG TY CP DƯỢC PHẨM TRUNG HƯƠNG HADUPHA', 'KCN 1A Cụm CN Quất Động - Thường Tín', '351', NULL, NULL, '2', 1, '2024-05-21 13:39:42', '2024-05-21 13:39:42', 10),
+(47, 'KH-00000047', 'CÔNG TY TNHH NDY GLOBAL', 'Xóm 7, thôn đoan nữa , xã an mỹ, huyện mỹ đức, hà nội', '351', NULL, NULL, '1', 1, '2024-05-22 07:20:48', '2024-05-22 07:20:48', 1),
+(48, 'KH-00000048', 'CÔNG TY CỔ PHẦN DƯỢC PHẨM OSHII', 'Thôn 6, Xã Phú Cát, Huyện Quốc Oai, Thành phố Hà Nội, Việt Nam', '351', NULL, NULL, '1', 1, '2024-05-23 14:11:35', '2024-05-23 14:11:35', 10),
+(49, 'KH-00000049', 'Công ty TNHH Nam Dược Bảo Tâm An', 'Khu 1 thị trấn thác bà huyện yên bình tỉnh yên bái', '10679', NULL, NULL, '1', 1, '2024-05-29 17:02:08', '2024-05-29 17:02:54', 1),
+(50, 'KH-00000050', 'TRUNG TÂM VĂN HÓA HUYỆN ỨNG HÒA', 'Thị Trấn Vân Đình - ứng Hòa - HN', '351', NULL, NULL, '1', 1, '2024-06-04 16:50:56', '2024-06-04 16:50:56', 1),
+(51, 'KH-00000051', 'CÔNG TY TNHH DƯỢC HUNMED', 'số 1 liền kề 12, khu đô thị xa la', '351', NULL, NULL, '0', 1, '2024-06-07 11:53:46', '2024-06-07 11:53:46', 2),
+(52, 'KH-00000052', 'CTY YẾN SÀO ANH NGUYỄN', '101 Dương Quảng Hàm - Quan Hoa - Cầu giấy', '351', NULL, NULL, '0', 1, '2024-06-07 14:56:22', '2024-06-07 14:56:22', 27),
+(54, 'KH-00000054', 'CÔNG TY TNHH SẢN XUẤT VÀ THƯƠNG MẠI DƯỢC PHẨM MIKOPHAR GROUP', 'KĐT An Hưng - Dương Nội', '351', NULL, NULL, '1', 1, '2024-06-12 09:31:02', '2024-06-12 09:31:02', 10),
+(55, 'KH-00000055', 'CÔNG TY CỔ PHẦN THƯƠNG MẠI DƯỢC THẢO THIÊN TÂM', 'Ngã Tư Chám , Định Trung, Vĩnh Yên', '6854', NULL, NULL, '1', 1, '2024-06-12 11:17:19', '2024-06-12 11:17:19', 10),
+(56, 'KH-00000056', 'CÔNG TY CP DƯỢC PHẨM XANH SK NATURAL', 'Lô CN1D cụm Quất Động mở rộng, Xã Nguyễn Trãi, Thường Tín', '351', NULL, NULL, '2', 1, '2024-06-12 13:37:19', '2024-06-12 13:37:19', 10),
+(57, 'KH-00000057', 'CÔNG TY TNHH IN TRUNG KIÊN', 'Lô D5-6 Cụm Làng nghề Triều Khúc - Tân Triều - Thanh Trì -HN', '351', NULL, NULL, '0', 1, '2024-06-13 15:59:58', '2024-06-13 15:59:58', 27),
+(58, 'KH-00000058', 'CÔNG TY CỔ PHẦN DƯỢC PHẨM TRUNG ƯƠNG AROVA', 'TECCO, Số 11 - TT06, Khu Đô Thị Mới, Thanh Trì, Hà Nội', '351', NULL, NULL, '0', 1, '2024-06-14 14:01:14', '2024-06-14 14:01:14', 2),
+(59, 'KH-00000059', NULL, NULL, '351', NULL, NULL, '0', 1, '2024-06-17 16:24:16', '2024-06-17 16:24:16', 2),
+(60, 'KH-00000060', NULL, NULL, '351', NULL, NULL, '0', 1, '2024-06-17 16:29:31', '2024-06-17 16:29:31', 2),
+(61, 'KH-00000061', NULL, NULL, '351', NULL, NULL, '0', 1, '2024-06-17 16:30:58', '2024-06-17 16:30:58', 2),
+(63, 'KH-00000063', 'CÔNG TY CỔ PHẦN EVER VIỆT NAM', '86 Linh Lang, Cống Vị, Ba Đình, Hà Nội', '351', '0110020432', NULL, NULL, 1, '2024-06-20 09:33:15', '2024-07-12 14:31:10', 2),
+(64, 'KH-00000064', 'Khách lẻ', 'Yên Bái', '10679', NULL, NULL, NULL, 1, '2024-06-22 16:23:32', '2024-06-22 16:24:46', 28),
+(67, 'KH-00000067', 'CÔNG TY TNHH VĂN HÓA VÀ TRUYỀN THÔNG AZ VIỆT NAM', 'Địa chỉ 	: Số 50, Đường 5 TTF361 An Dương – P. Yên Phụ - Q. Tây Hồ - TP. Hà Nội', '351', '0106749166', NULL, NULL, 1, '2024-06-28 10:53:15', '2024-06-28 10:53:15', 10),
+(68, 'KH-00000068', 'Công Ty TNHH Đại Khương Pharma- bình Phước', 'giao hàng về nhà máy Công ty Cổ phần dược phẩm Tradipha, Thôn Phục Thiện, Xã Hoàng Tiến, Thị xã Chí Linh, Tỉnh Hải Dương', '5259', NULL, NULL, NULL, 1, '2024-06-28 17:27:56', '2024-06-28 17:27:56', 10),
+(69, 'KH-00000069', 'CÔNG TY CỔ PHẦN THƯƠNG MẠI VÀ DỊCH VỤ SNA', 'Số 13,TT4, khu liền kề VOV Mễ Trì, Đường Lương Thế Vinh , Phường Mễ Trì, Quận Nam Từ Liêm, Thành phố Hà Nội, Việt Nam', '351', NULL, NULL, NULL, 1, '2024-07-02 12:57:58', '2024-07-02 12:57:58', 1),
+(70, 'KH-00000070', 'CÔNG TY DƯỢC PHẨM VÀ THƯƠNG MẠI PHƯƠNG ĐÔNG', 'TS 590 tờ bản đồ số 1, kcn Hạp Lĩnh', '3222', NULL, NULL, NULL, 1, '2024-07-02 17:08:38', '2024-07-02 17:09:50', 10),
+(71, 'KH-00000071', 'KHO TƯ LIỆU BÁO GIÁ', 'Lô D5-6 Cụm Làng nghề Triều Khúc - Tân Triều - Thanh Trì -HN', '351', NULL, 'Làm sẵn các dạng báo giá', NULL, 1, '2024-07-05 12:16:31', '2024-07-05 12:16:31', 1),
+(72, 'KH-00000072', 'Đại lý Lan Anh', '12A Ngõ Gạch - Hoàn Kiếm', '351', NULL, NULL, NULL, 1, '2024-07-06 09:48:01', '2024-07-06 09:48:01', 10),
+(73, 'KH-00000073', 'Công ty Bảo Việt Nhân thọ Bình Dương', '181 đại lộ BD, khu 3, Phú Thọ, Thủ Dầu Một, Bình Dương', '1035', '0102641429-008', NULL, NULL, 1, '2024-07-09 11:15:35', '2024-07-09 11:15:36', 2),
+(76, 'KH-00000076', 'CÔNG TY THÁI HÒA ( Chị Minh)', 'Số 161B Đại La - Hai Bà Trưng - HN', '351', NULL, NULL, NULL, 1, '2024-07-10 14:32:47', '2024-07-10 14:46:34', 10),
+(77, 'KH-00000077', 'CÔNG TY CỔ PHẦN DƯỢC PHẨM VÀ ĐẦU TƯ HDT', 'Số 01 - Liền kề 07 – KĐT Vinh Tân, Phường Vinh Tân, TP Vinh, Tỉnh Nghệ An', '4230', NULL, NULL, NULL, 1, '2024-07-10 15:07:26', '2024-07-10 15:07:26', 10),
+(78, 'KH-00000078', 'CÔNG TY CỔ PHẦN DU LỊCH VÀ TRUYỀN THÔNG HÀ THÁI', '161 P. An Trạch, Chợ Dừa, Đống Đa, Hà Nội', '351', '0104977784-001', NULL, NULL, 1, '2024-07-11 11:09:18', '2024-07-11 11:09:18', 2),
+(79, 'KH-00000079', 'CÔNG TY TNHH HAVIPHACO', '72A Đường An Dương Vương, P Tân Hải, TP Hải Dương', '4737', NULL, NULL, NULL, 1, '2024-07-12 15:45:10', '2024-07-12 15:45:10', 10),
+(80, 'KH-00000080', 'CÔNG TY CỔ PHẦN XUÂN THIỆU VIỆT NAM', 'P08SH03 Times City Park Hill, số 458, đường Minh Khai, Phường Mai Động, Quận Hoàng Mai, Thành phố Hà Nội, Việt Nam', '351', '0102328826', NULL, NULL, 1, '2024-07-13 09:55:43', '2024-07-13 09:55:43', 2),
+(81, 'KH-00000081', 'CÔNG TY KINH ĐÔ', 'Chưa có', '351', NULL, NULL, NULL, 1, '2024-07-19 10:07:44', '2024-07-19 10:07:44', 10),
+(82, 'KH-00000082', 'CÔNG TY TNHH DƯỢC TIN', 'Thôn Chánh Lộc, Xã Xuân Lộc, Thị xã Sông Cầu, Tỉnh Phú Yên', '8924', NULL, NULL, NULL, 1, '2024-07-20 08:52:45', '2024-07-20 08:52:45', 10),
+(83, 'KH-00000083', 'CÔNG TY CP DƯỢC ĐẠI XUÂN', '137 trần hữu tước ( khu TĐC phạm ngũ lão ),mỹ xá , TP nam định tỉnh nam định', '7474', NULL, NULL, NULL, 1, '2024-07-20 09:37:04', '2024-07-20 09:37:04', 10),
+(84, 'KH-00000084', 'Anh A Súa', 'Gửi xe về Sơn La', '10387', NULL, NULL, NULL, 1, '2024-07-20 22:14:23', '2024-07-20 22:16:50', 10),
+(86, 'KH-00000086', 'CÔNG TY TNHH DALACOPHARM', '46A - A Mí Đoan - P. Tân Lập - Tp. Buôn Ma Thuột - Đak Lak', '2292', NULL, NULL, NULL, 1, '2024-07-21 17:06:29', '2024-07-21 17:06:29', 10),
+(87, 'KH-00000087', 'CÔNG TY TNHH DƯỢC PHẨM ĐỨC MỸ', 'Số 24 ngách 43/1 Phố Kim Đồng, Phường Giáp Bát, Q Hoàng Mai.', '351', NULL, NULL, NULL, 1, '2024-07-22 11:15:47', '2024-07-22 11:15:47', 10),
+(88, 'KH-00000088', 'CÔNG TY TNHH HIỆP PHONG', 'Tầng 1,2 Tòa nhà CT2,3 Khu đô thị Dream Town, Đường 70, Phường Tây Mỗ, Quận Nam Từ Liêm, Thành Phố Hà Nội, Việt Nam.', '351', NULL, NULL, NULL, 1, '2024-07-25 16:18:57', '2024-07-25 16:18:57', 1),
+(89, 'KH-00000089', 'CÔNG TY TNHH DAPHARCO', 'KCN Thạch Thất - Quốc Oai', '351', NULL, NULL, NULL, 1, '2024-08-01 15:17:47', '2024-08-01 15:17:47', 10),
+(90, 'KH-00000090', 'CÔNG TY CỔ PHẦN TẬP ĐOÀN LOVE WORLD', 'òa nhà ADI, Khu tiểu thủ công nghiệp, làng nghề Vạn Phúc, Phường Vạn Phúc, Quận Hà Đông, Hà Nội', '351', '0110559633', NULL, NULL, 1, '2024-08-10 08:54:16', '2024-08-10 08:54:16', 2),
+(91, 'KH-00000091', 'CÔNG TY TNHH DƯỢC MỸ PHẨM AN KHANG', 'Số 5, ngõ 321 đường Phúc Lợi, Phường Phúc Lợi, Quận Long Biên, Thành phố Hà Nội, Việt Nam', '351', '0109216857', NULL, NULL, 1, '2024-08-10 15:03:58', '2024-08-10 15:03:58', 2),
+(92, 'KH-00000092', 'CÔNG TY TNHH SẢN XUẤT THƯƠNG MẠI XUẤT NHẬP KHẨU THÁI HÂN', 'Số 168 Tỉnh lộ 954, Thị Trấn Chợ Vàm, Huyện Phú Tân, Tỉnh An Giang, Việt Nam', '6686', '1602096357', NULL, NULL, 1, '2024-08-12 16:10:41', '2024-08-12 16:10:41', 2),
+(95, 'KH-00000095', 'CÔNG TY CP ĐẦU TƯ PHÁT TRIỂN TTB ( ANH BÌNH )', '32 Vinh Sơn – Bút Sơn – Hoằng Hóa – Thanh Hóa ( • Giao hàng tại R20924 joyal cty )', '3563', NULL, NULL, NULL, 1, '2024-08-14 11:59:35', '2024-08-14 11:59:35', 57),
+(96, 'KH-00000096', 'CÔNG TY THÀNH CÔNG TÂY BẮC', 'Thành phố - Tuyên Quang', '10869', NULL, NULL, NULL, 1, '2024-08-14 16:05:11', '2024-08-14 16:05:11', 33),
+(97, 'KH-00000097', 'CÔNG TY IN TẠI GIA LÂM', 'gia lâm', '351', NULL, NULL, NULL, 1, '2024-08-14 21:11:22', '2024-08-14 21:11:22', 1),
+(98, 'KH-00000098', 'công ty TNHH dapharco.tb ( Anh Đức )', 'khu công nghiệp thạch thất quốc oại hà nội', '351', NULL, NULL, NULL, 0, '2024-08-15 08:43:37', '2024-08-15 08:44:38', 57),
+(99, 'KH-00000099', 'NHÀ THUỐC TÂM MINH ĐƯỜNG', 'Nhà 138 Khương Đình - Phường Hạ Đình – Quận Thanh Xuân – Hà Nội', '351', NULL, NULL, NULL, 1, '2024-08-15 10:40:35', '2024-08-15 10:40:35', 10),
+(100, 'KH-00000100', 'CÔNG TY CỔ PHẦN DƯỢC PHẨM AN CHÂU.', 'Số nhà 87, TT12, Khu đô thị Văn Phú, Phường Phú La, Quận Hà Đông, TP.Hà Nội, Việt Nam', '351', NULL, NULL, NULL, 1, '2024-08-15 10:55:03', '2024-08-15 10:55:03', 33),
+(101, 'KH-00000101', 'Mr Dũng TENIS', '58 Ngõ 13 Khuất Duy Tiến', '351', NULL, NULL, NULL, 1, '2024-08-15 15:23:24', '2024-08-15 15:23:59', 1),
+(102, 'KH-00000102', 'CÔNG TY TNHH PHÁT TRIỂN THƯƠNG MẠI VÀ DỊCH VỤ ĐỨC VIỆT', 'Số 46, ngõ 82, phố Nghĩa Tân, Phường Nghĩa Tân, Quận Cầu Giấy, Thành phố Hà Nội, Việt Nam', '351', '0108196277', NULL, NULL, 1, '2024-08-16 13:44:52', '2024-08-16 13:44:52', 2),
+(103, 'KH-00000103', 'CÔNG TY CỔ PHẦN VINABIOTECH', '168 đường số 15, Phường Long Bình, Quận 9, Thành phố Hồ Chí Minh, Việt Nam', '1', '0315912225', NULL, NULL, 1, '2024-08-16 16:18:16', '2024-08-16 16:18:16', 2),
+(109, 'KH-00000109', 'CÔNG TY CỔ PHẦN DƯỢC QUỐC TẾ FOSHU ( Chị Tình)	Quận: Hà Đông', 'Số 6, Ngõ 14 Phố Ba La, Tổ 9 Phường Phú La,', '351', NULL, NULL, NULL, 1, '2024-08-20 08:49:38', '2024-08-20 08:49:38', 57),
+(110, 'KH-00000110', 'CÔNG TY CỔ PHẦN ĐẦU TƯ BẢO TÂM', '6, ngõ 162 Tôn Đức Thắng, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-08-20 11:45:52', '2024-08-20 11:45:53', 57),
+(111, 'KH-00000111', 'CÔNG TY CỔ PHẦN DƯỢC PHẨM DINH DƯỠNG GOLDEN VIỆT NAM', 'Số 179 đường 295B, Xã Tân Mỹ, Thành phố Bắc Giang, Tỉnh Bắc Giang, Việt Nam', '6218', '2400883610', NULL, NULL, 1, '2024-08-21 08:36:39', '2024-08-21 08:36:39', 2),
+(112, 'KH-00000112', 'CÔNG TY TNHH MỘT THÀNH VIÊN THÙY DUNG GIA LAI', '459 Lê Thánh Tôn, Phường Hội Phú, Thành phố Pleiku, Tỉnh Gia Lai, Việt Nam', '5017', '5900382199', NULL, NULL, 1, '2024-08-21 10:12:07', '2024-08-21 10:12:07', 2),
+(113, 'KH-00000113', 'CÔNG TY MỸ PHẨM LAN ANH SPA ( A Long )', '57 Khuất Duy Tiến- Hà Nội', '351', NULL, NULL, NULL, 1, '2024-08-22 10:46:59', '2024-08-22 10:46:59', 57),
+(114, 'KH-00000114', 'Trung Tâm NC và KD Dược ( Chị Lưu)', 'Số 324 Nguyễn Lương Bằng TP Hải Dương', '4737', NULL, NULL, NULL, 1, '2024-08-22 15:57:34', '2024-08-22 15:57:34', 57),
+(115, 'KH-00000115', 'Web3Labs DAO', 'Tầng 3, Số 9, ngõ 4 Duy Tân, Dịch Vọng Hậu, Cầu Giấy', '351', NULL, NULL, NULL, 1, '2024-08-23 10:15:03', '2024-08-23 10:15:03', 33),
+(116, 'KH-00000116', 'DMK Group', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-08-23 14:34:17', '2024-08-23 14:34:17', 2),
+(117, 'KH-00000117', 'CÔNG TY CỔ PHẦN DƯỢC LIỆU & VẬT TƯ Y TẾ HẢI PHÒNG', 'Số 654 Nguyễn Văn Linh, Phường Vĩnh Niệm, Quận Lê Chân, Thành phố Hải Phòng, Việt Nam', '1478', '0201037289', NULL, NULL, 1, '2024-08-24 08:47:20', '2024-08-24 08:47:20', 2),
+(118, 'KH-00000118', 'CÔNG TY TNHH BAO BÌ ÁNH DƯƠNG VIỆT NAM', 'Lô 31+55, Khu Công nghiệp Cái Lân, Phường Giếng Đáy, Thành phố Hạ Long, Tỉnh Quảng Ninh, Việt Nam', '3359', '5701494331', NULL, NULL, 1, '2024-08-24 16:23:42', '2024-08-24 16:23:42', 2),
+(119, 'KH-00000119', 'Hệ thồng phòng khám thẩm mỹ DR Hoàng Tuấn', 'Số 1/487 Hoàng Quốc Việt', '351', NULL, NULL, NULL, 1, '2024-08-25 09:54:01', '2024-08-25 09:54:01', 10),
+(120, 'KH-00000120', 'CÔNG TY TNHH HERBBANK VIỆT NAM', 'Thôn Đồng Tiến, Xã Quang Tiến, Huyện Tân Yên, Bắc Giang', '6218', '2400988363', NULL, NULL, 1, '2024-08-26 10:18:34', '2024-08-26 10:18:34', 2),
+(121, 'KH-00000121', 'Công ty TNHH truyền thông Cao Minh', 'Số nhà 186, Thôn 5, Xã Đông Mỹ, Huyện Thanh Trì, Thành phố Hà Nội, Việt Nam', '351', '0107431182', NULL, NULL, 1, '2024-08-27 08:17:13', '2024-08-27 08:17:13', 2),
+(122, 'KH-00000122', 'Khách lẻ', 'hà nội', '351', NULL, NULL, NULL, 1, '2024-08-27 09:54:46', '2024-08-27 09:54:46', 57),
+(123, 'KH-00000123', 'Khách lẻ', 'hà nội', '351', NULL, NULL, NULL, 1, '2024-08-27 09:55:25', '2024-08-27 09:55:25', 57),
+(124, 'KH-00000124', 'Anh Hưng', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-08-27 15:00:10', '2024-08-27 15:00:11', 57),
+(125, 'KH-00000125', 'CHI NHÁNH CÔNG TY CỔ PHẦN BÁNH KẸO HẢI CHÂU (NHÀ MÁY BÁNH KẸO HẢI CHÂU)', 'Khu Đồng Thuỷ, thôn Đông Khúc, Xã Vĩnh Khúc, Huyện Văn Giang, Tỉnh Hưng Yên, Việt Nam', '5385', '0100114184-011', NULL, NULL, 1, '2024-08-28 10:55:08', '2024-08-28 10:55:08', 2),
+(126, 'KH-00000126', 'Khách lẻ', 'Hà Nội', '351', NULL, 'Khách lẻ đặt hộp giấy 2000/c ạ', NULL, 1, '2024-08-28 16:43:15', '2024-08-28 16:43:15', 33),
+(127, 'KH-00000127', 'Khách lẻ', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-08-29 11:02:19', '2024-08-29 11:02:19', 2),
+(128, 'KH-00000128', 'CÔNG TY TNHH TMDV THIÊN LONG NGỌC ( A Long )', 'Số 40 Chợ Song Mai, Xã Song Mai, TP Bắc Giang', '6218', NULL, NULL, NULL, 1, '2024-08-30 09:16:56', '2024-08-30 09:16:57', 57),
+(129, 'KH-00000129', 'CÔNG TY CỔ PHẦN GIẢI PHÁP QUÀ TẶNG MAISON LUXURY', 'Số 40 ngõ 441 Đường Lĩnh Nam – Quận Hoàng Mai – Thành phố Hà Nộii', '351', '0110302853', NULL, NULL, 1, '2024-09-04 13:36:41', '2024-09-04 13:36:41', 10),
+(130, 'KH-00000130', 'CÔNG TY TNHH DƯỢC QUỐC TẾ 108 ( A Quí)', 'An Phú - Mỹ Đức', '351', NULL, NULL, NULL, 1, '2024-09-09 16:32:37', '2024-09-09 16:32:37', 57),
+(132, 'KH-00000132', 'khách lẻ', '6/17/43/178 Trần Quang Khải -TP Nam Định', '7474', NULL, NULL, NULL, 1, '2024-09-11 11:33:27', '2024-09-12 09:20:41', 35),
+(133, 'KH-00000133', 'khách lẻ', '190 Hạ Đình', '351', NULL, NULL, NULL, 1, '2024-09-11 11:38:09', '2024-09-11 12:01:46', 35),
+(134, 'KH-00000134', 'khách lẻ', 'sn 68 tổ 4 khu 1 phường Bạch Đằng- HẠ lONG - QN', '3359', NULL, NULL, NULL, 1, '2024-09-11 11:40:09', '2024-09-11 11:40:09', 35),
+(135, 'KH-00000135', 'Khách lẻ', 'Số 384 MB 155 P Đông Vệ TP Thanh Hoá', '3563', NULL, NULL, NULL, 1, '2024-09-11 11:42:19', '2024-09-11 11:50:05', 2),
+(136, 'KH-00000136', 'Anh Thành', 'đường Giáp Tân Cương, Tân Mỹ, Bắc Giang', '6218', NULL, NULL, NULL, 1, '2024-09-11 11:55:09', '2024-09-11 11:55:09', 2),
+(137, 'KH-00000137', 'Chị Nga', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-09-11 11:57:28', '2024-12-31 16:46:27', 28),
+(138, 'KH-00000138', 'Khách mua hộp trung thu', 'Quế Võ, Bắc Ninh', '3222', NULL, NULL, NULL, 1, '2024-09-11 11:58:37', '2024-09-11 11:58:37', 33),
+(139, 'KH-00000139', 'khách lẻ', '44 ngõ 153 phú đô', '351', NULL, NULL, NULL, 1, '2024-09-12 09:22:05', '2024-09-12 09:22:05', 35),
+(140, 'KH-00000140', 'In Hồng Đăng', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-09-12 09:23:20', '2024-09-12 09:23:20', 28),
+(141, 'KH-00000141', 'anh Dũng', '91 Hùng Vương, Tích Sơn, Vĩnh Yên, Vĩnh Phúc', '6854', NULL, NULL, NULL, 1, '2024-09-12 09:24:12', '2024-09-12 09:24:12', 2),
+(142, 'KH-00000142', 'Anh Chiến Bavico', 'Thôn Quang Ngọc, Xã Vạn Thắng, Huyện ba vì, Hà nội', '351', NULL, NULL, NULL, 1, '2024-09-12 09:32:27', '2024-09-12 09:32:28', 33),
+(143, 'KH-00000143', 'khách lẻ', 'Ngã 3 Đa Phúc', '1478', NULL, NULL, NULL, 1, '2024-09-12 11:41:59', '2024-09-12 11:41:59', 35),
+(144, 'KH-00000144', 'Hồng Tính', 'Số 01 Nguyễn phúc Khê Phường Nam Ngạn TP Thanh HÓA', '3563', NULL, NULL, NULL, 1, '2024-09-12 14:55:41', '2024-09-12 14:55:41', 28),
+(145, 'KH-00000145', 'Chị Phượng', '155 Đông Vệ, Thanh Hoá', '3563', NULL, NULL, NULL, 1, '2024-09-12 16:05:00', '2024-09-12 16:05:00', 2),
+(146, 'KH-00000146', 'Anh Hiệp', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-09-12 16:45:13', '2024-09-12 16:45:13', 2),
+(147, 'KH-00000147', 'Chị Thảo', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-09-12 16:46:19', '2024-09-12 16:46:19', 2),
+(148, 'KH-00000148', 'Anh Toàn', 'Long Biên, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-09-12 16:47:37', '2024-09-12 16:47:37', 2),
+(149, 'KH-00000149', 'Chị Hiền', '217 Phạm Văn Đồng, NTL, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-09-12 16:48:14', '2024-09-12 16:48:14', 2),
+(150, 'KH-00000150', 'Chị Hoàng Thương', 'Bắc Ninh', '3222', NULL, NULL, NULL, 1, '2024-09-12 16:48:55', '2024-09-12 16:48:56', 2),
+(151, 'KH-00000151', 'Khách làm hộp hàn quốc', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-09-12 17:21:29', '2024-09-12 17:21:29', 33),
+(152, 'KH-00000152', 'CÔNG TY TNHH DƯỢC PHẨM NASAKI ( Chị Nhâm )', 'Lô E8-E9 cụm công nghiệp đa nghề Đông Thọ, Xã Đông Thọ, Huyện Yên Phong, Tỉnh Bắc Ninh, Việt Nam.', '3222', NULL, NULL, NULL, 1, '2024-09-12 17:28:57', '2024-09-12 17:28:57', 57),
+(153, 'KH-00000153', 'Anh Quang - 89 Thiên Hiền', '89 Thiên Hiền, Mỹ Đình 1, NTL, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-09-13 15:09:13', '2024-09-13 15:09:13', 2),
+(154, 'KH-00000154', 'Chị Yến - số 5 Nguyễn Cơ Thạch', 'Số 5 Nguyễn Cơ Thạch, Mỹ Đình, HN', '351', NULL, NULL, NULL, 1, '2024-09-13 15:10:24', '2024-09-13 15:10:25', 2),
+(155, 'KH-00000155', 'Sầm Tiến Nam - Bắc Ninh', '334 Thiên Đức, Vệ An, Bắc Ninh', '3222', NULL, NULL, NULL, 1, '2024-09-13 15:12:32', '2024-09-13 15:12:32', 2),
+(156, 'KH-00000156', 'Chị Bích Thiên', 'Đ13 khu tỉnh đội Xa La, Hà Đông, Hn', '351', NULL, NULL, NULL, 1, '2024-09-13 15:13:11', '2024-09-13 15:13:11', 2),
+(157, 'KH-00000157', 'Chị Hồng - CTY An Hưng', 'Cụm làng nghề Triều Khúc, HN', '351', NULL, NULL, NULL, 1, '2024-09-13 15:13:53', '2024-09-13 15:13:53', 2),
+(158, 'KH-00000158', 'CÔNG TY TNHH DƯỢC PHẨM VICOPHAR', 'đường 3.7/1c KĐT Gamuda Trần Phú, Hoàng Mai, Hà Nội', '351', '2400799510', NULL, NULL, 1, '2024-09-13 15:18:00', '2024-09-13 15:18:00', 2),
+(159, 'KH-00000159', 'In Nguyên Phong', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-09-13 15:50:38', '2024-09-13 15:51:31', 28),
+(160, 'KH-00000160', 'In Nguyên Phong', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-09-13 15:50:44', '2024-09-13 15:51:27', 28),
+(161, 'KH-00000161', 'Công Ty TNHH  Truyền Thông Cao Minh', 'Số 4 ngách 88/83 Giáp Nhị, Phường Thịnh Liệt, quận Hoàng Mai, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-09-13 15:54:44', '2024-09-13 15:54:44', 28),
+(162, 'KH-00000162', 'CÔNG TY CỔ PHẦN IN LẠC HỒNG', 'Tầng 6 Số 14 Pháo Đài Láng, Q. Đống Đa, Tp.Hà Nội', '351', NULL, NULL, NULL, 1, '2024-09-13 16:00:40', '2024-09-13 16:00:41', 28),
+(163, 'KH-00000163', 'CÔNG TY CỔ PHẦN IN LẠC HỒNG', 'Tầng 6 Số 14 Pháo Đài Láng, Q. Đống Đa, Tp.Hà Nội', '351', NULL, NULL, NULL, 1, '2024-09-13 16:07:05', '2024-09-13 16:07:05', 28),
+(164, 'KH-00000164', 'Chị Hạnh Ngõ Gạch', 'Số 3 Ngõ Gạch- Hoàn Kiếm - Hà Nội', '351', NULL, NULL, NULL, 1, '2024-09-14 09:05:16', '2024-09-14 09:05:16', 28),
+(165, 'KH-00000165', 'Chị Thương', '21b4, green stars, 234 Phạm Văn Đồng, Cổ Nhuế 1', '351', NULL, NULL, NULL, 1, '2024-09-14 09:11:09', '2024-09-14 09:11:10', 28),
+(166, 'KH-00000166', 'Chị Hồng Nhung', 'Số 3 Nguyễn Văn Trỗi phường Ninh Xá tp Bắc Ninh', '3222', NULL, NULL, NULL, 1, '2024-09-14 13:45:14', '2024-09-14 13:45:14', 28),
+(167, 'KH-00000167', 'CÔNG TY CP DƯỢC PHẨM BAYER PHARM ( A Hà) C5120', 'Số 368 Đường Bưởi, P Vĩnh Phúc, Ba Đình, HN', '351', NULL, NULL, NULL, 1, '2024-09-14 15:01:16', '2024-09-14 15:01:16', 57),
+(168, 'KH-00000168', 'Công ty Cổ phần Đầu Tư AKINA Đông Á', NULL, NULL, NULL, 'Khách nợ lấy từ Misa', NULL, 1, '2024-09-20 23:03:49', '2024-12-05 03:10:26', 36),
+(169, 'KH-00000169', 'Anh Thọ Collagen', NULL, NULL, NULL, 'Khách nợ lấy từ Misa', NULL, 1, '2024-09-20 23:03:49', '2024-12-05 03:10:26', 36),
+(170, 'KH-00000170', 'Công ty TNHH thương mại dược phẩm Bách Nhi', 'chưa có', NULL, NULL, 'Khách nợ lấy từ Misa', NULL, 1, '2024-09-20 23:03:50', '2024-12-05 03:10:26', 36),
+(171, 'KH-00000171', 'CÔNG TY CỔ PHẦN ĐẦU TƯ VÀ THƯƠNG MẠI BEEHUB VIỆT NAM', NULL, NULL, NULL, 'Khách nợ lấy từ Misa', NULL, 1, '2024-09-20 23:03:50', '2024-12-05 03:10:26', 36),
+(172, 'KH-00000172', 'Chị Hiền Hàng Chiếu', 'Hàng Chiếu', '351', NULL, 'Khách nợ lấy từ Misa', NULL, 1, '2024-09-20 23:03:51', '2024-12-05 03:10:26', 36),
+(174, 'KH-00000174', 'Công ty TNHH Europhar USA', NULL, NULL, NULL, 'Khách nợ lấy từ Misa', NULL, 1, '2024-09-20 23:03:52', '2024-12-05 03:10:26', 36),
+(175, 'KH-00000175', 'CTY TNHH DƯỢC PHẨM FRANCE - ĐỨC', NULL, NULL, NULL, 'Khách nợ lấy từ Misa', NULL, 1, '2024-09-20 23:03:52', '2024-12-05 03:10:26', 36),
+(176, 'KH-00000176', 'Công ty in Lạc Hồng - Hộp bán sẵn', 'Tầng 6 Số 14 Pháo Đài Láng, Q. Đống Đa, Tp.Hà Nội', '351', NULL, 'Khách nợ lấy từ Misa', NULL, 1, '2024-09-20 23:03:53', '2024-12-05 03:10:26', 36),
+(177, 'KH-00000177', 'Tiệm bánh Thanh Lịch', NULL, NULL, NULL, 'Khách nợ lấy từ Misa', NULL, 1, '2024-09-20 23:03:53', '2024-12-05 03:10:26', 36),
+(178, 'KH-00000178', 'Dược phẩm Huy Anh', NULL, NULL, NULL, 'Khách nợ lấy từ Misa', NULL, 1, '2024-09-20 23:03:54', '2024-12-05 03:10:26', 36),
+(179, 'KH-00000179', 'Công ty In Lạc Hồng - Hộp dược', 'Tầng 6 Số 14 Pháo Đài Láng, Q. Đống Đa, Tp.Hà Nội', '351', NULL, 'Khách nợ lấy từ Misa', NULL, 1, '2024-09-20 23:03:54', '2024-12-05 03:10:26', 36),
+(180, 'KH-00000180', 'Chị Minh Châu', NULL, NULL, NULL, 'Khách nợ lấy từ Misa', NULL, 1, '2024-09-20 23:03:55', '2024-12-05 03:10:26', 36),
+(181, 'KH-00000181', 'Công ty CP dược phẩm quốc tế Norvatis Thụy Sỹ', NULL, NULL, NULL, 'Khách nợ lấy từ Misa', NULL, 1, '2024-09-20 23:03:55', '2024-12-05 03:10:26', 36),
+(182, 'KH-00000182', 'CTY TNHH XNK Đầu tư quốc tế Dược mỹ phẩm Phan An Green', 'Nhà B5-28 Vinhomes Gardenia, phố Hàm Nghi, phường Cầu Diễn, Quận Nam Từ Liêm, Thành phố Hà Nội, Việt Nam', '351', NULL, 'Khách nợ lấy từ Misa', NULL, 1, '2024-09-20 23:03:55', '2024-12-05 03:10:26', 36),
+(183, 'KH-00000183', 'CÔNG TY TNHH TM&SX THỊNH PHÁT ( A Thịnh) ', NULL, NULL, NULL, 'Khách nợ lấy từ Misa', NULL, 1, '2024-09-20 23:03:56', '2024-12-05 03:10:26', 36),
+(184, 'KH-00000184', 'CÔNG TY TNHH DƯỢC PHẨM TRUNG ƯƠNG VINAFA , Tdpharma2000.2@gmail.com', NULL, NULL, NULL, 'Khách nợ lấy từ Misa', NULL, 1, '2024-09-20 23:03:57', '2024-12-05 03:10:26', 36),
+(185, 'KH-00000185', 'CÔNG TY CỔ PHẦN DƯỢC PHẨM VINFACO, A.Quý', NULL, NULL, NULL, 'Khách nợ lấy từ Misa', NULL, 1, '2024-09-20 23:03:57', '2024-12-05 03:10:26', 36),
+(186, 'KH-00000186', 'khách lẻ', 'TP Vinh', '4230', NULL, NULL, NULL, 1, '2024-09-23 16:26:14', '2024-09-23 16:26:14', 35),
+(187, 'KH-00000187', 'Khách lẻ', '022 lê lai, kim tân, Lào Cai', '7298', NULL, NULL, NULL, 1, '2024-09-23 16:32:39', '2024-09-23 16:32:39', 33),
+(188, 'KH-00000188', 'Khách lẻ', '022 lê lai, kim tân, Lào Cai', '7298', NULL, NULL, NULL, 1, '2024-09-23 16:32:55', '2024-09-23 16:32:55', 33),
+(189, 'KH-00000189', 'khách lẻ', '108 Nguyễn Lân , Thanh Xuân', '351', NULL, NULL, NULL, 1, '2024-09-24 11:29:32', '2024-09-24 11:29:32', 35),
+(190, 'KH-00000190', 'Chị Châu', 'Số nhà 153, Khu phố 1, Phường Phố Mới, Quế Võ , Bắc Ninh', '3222', NULL, NULL, NULL, 1, '2024-09-24 14:41:04', '2024-09-24 14:41:05', 28),
+(191, 'KH-00000191', 'Cố phần dược phẩm công nghệ cao Beatexpharm', 'Phố Nối A, Xã Minh Hải, Huyện Văn Lâm, Tỉnh Hưng Yên', '5385', NULL, NULL, NULL, 1, '2024-09-25 09:14:36', '2024-09-25 09:14:36', 33),
+(192, 'KH-00000192', 'Vina AB', 'Bỉm Sơn - thanh hoá', '3563', NULL, NULL, NULL, 1, '2024-09-25 15:22:32', '2024-09-25 15:22:32', 35),
+(193, 'KH-00000193', 'King Green', 'Hồ Chí Minh', '1', NULL, NULL, NULL, 1, '2024-09-25 17:07:04', '2024-09-25 17:07:04', 33),
+(194, 'KH-00000194', '191 Thanh Xuân ( Gìfts & Services)', '32 Street 98 , Phuoc Long A Ward, Thu Duc City', '1', NULL, NULL, NULL, 1, '2024-09-26 11:00:57', '2024-09-26 11:00:57', 35),
+(195, 'KH-00000195', 'Khách lẻ- Phương', 'VP', '351', NULL, NULL, NULL, 1, '2024-09-27 11:32:19', '2024-09-27 11:32:19', 57),
+(196, 'KH-00000196', 'Khách lẻ - Tú', 'Giải Phóng, Hoàng Mai', '351', NULL, NULL, NULL, 1, '2024-09-28 16:13:48', '2024-09-28 16:13:48', 33),
+(197, 'KH-00000197', 'Trần Văn Thanh - Tú', 'Huyện Trấn Yên Yên bái', '10679', NULL, NULL, NULL, 1, '2024-09-30 15:06:09', '2024-09-30 15:06:09', 33),
+(198, 'KH-00000198', 'CÔNG TY CỔ PHẦN BAO BÌ WINCO', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-10-01 10:05:36', '2024-10-01 10:05:36', 57),
+(199, 'KH-00000199', 'THẾ GIỚI SỮA HÀ ĐÔ', 'Số 41, Phố Trì Chính, TT Phát Diệm, Kim Sơn, Ninh Bình', '8405', NULL, NULL, NULL, 1, '2024-10-02 15:23:18', '2024-10-02 15:23:18', 2),
+(200, 'KH-00000200', 'CÔNG TY TNHH THƯƠNG MẠI DỊCH VỤ KOGI VIỆT NAM ( Anh Hạnh)', '185 B1 Đường Số 8 Khu Số 1 Phường Linh Xuân, Q Thủ Đức, TP Hồ Chí Minh', '1', NULL, NULL, NULL, 1, '2024-10-02 17:24:54', '2024-10-02 17:24:54', 57),
+(201, 'KH-00000201', 'Chị Liên', 'khu công nghiệp tây bắc ga- thanh hoá', '3563', NULL, NULL, NULL, 1, '2024-10-04 16:51:41', '2024-10-04 16:51:41', 57),
+(202, 'KH-00000202', 'CÔNG TY TNHH ZII YẾN', 'số 26/36 đường vạn mỹ. phường vạn mỹ,. ngô quyền, hải phòng', '1478', NULL, NULL, NULL, 1, '2024-10-05 10:41:24', '2024-10-05 10:41:24', 57),
+(203, 'KH-00000203', 'công ty cổ phần dược phẩm VINOFA ( anh Khiêm )', 'số 36, ngõ 168 đường kim giang, đại kim hà nội', '351', NULL, NULL, NULL, 1, '2024-10-05 11:55:50', '2024-10-05 11:55:50', 57),
+(204, 'KH-00000204', 'Chị Chi', '34 phố Cúc ecopark Xuân Quan, Văn Giang, Hưng Yên, Việt Nam', '351', NULL, NULL, NULL, 1, '2024-10-07 10:56:50', '2024-10-07 10:56:50', 28),
+(205, 'KH-00000205', 'Chị Nga Vũ', 'Trường THPT Bắc Duyên Hà', '5922', NULL, NULL, NULL, 1, '2024-10-07 13:46:08', '2024-10-07 13:46:08', 35),
+(206, 'KH-00000206', 'CÔNG TY CỔ PHẦN THƯƠNG MẠI VÀ SẢN XUẤT BONITA NATURE', 'Lô CN10 cụm Công nghiệp vừa và nhỏ Nguyên Khê, xã Nguyễn Khê, Huyện Đông Anh, Thành phố Hà Nội, Việt Nam', '351', '0110708356', NULL, NULL, 1, '2024-10-07 15:37:21', '2024-10-07 15:37:21', 10),
+(207, 'KH-00000207', 'Trà Đức Nguyễn', 'Nam Định', '7474', NULL, NULL, NULL, 1, '2024-10-07 15:57:24', '2024-10-07 15:57:24', 2),
+(208, 'KH-00000208', 'Anh Đức', 'No7B Bán Đảo Linh Đàm', '351', NULL, NULL, NULL, 1, '2024-10-07 17:10:04', '2024-10-07 17:10:04', 57),
+(210, 'KH-00000210', 'Anh Lục', 'Thuận Thành, Bắc Ninh', '3222', NULL, NULL, NULL, 1, '2024-10-16 13:42:56', '2024-10-16 13:42:56', 28),
+(211, 'KH-00000211', 'Bánh kẹo Cường Duyên', 'Hoài Đức, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-10-16 13:49:07', '2024-10-16 13:49:07', 28),
+(212, 'KH-00000212', 'CÔNG TY CỔ PHẦN TTN VIỆT NAM', 'Lô 14D5, Khu làng nghề Triều Khúc, Thanh Trì, Hà Nội', '351', '0104938305', NULL, NULL, 1, '2024-10-16 13:49:50', '2024-10-16 13:49:50', 2),
+(213, 'KH-00000213', 'CÔNG TY CỔ PHẦN ĐẦU TƯ GIFTS VIỆT NAM', 'Số 101B - Q4, ngõ 99, ngách 147, phố Tân Mai, Phường Tân Mai, Quận Hoàng Mai, Thành phố Hà Nội, Việt Nam', '351', NULL, NULL, NULL, 1, '2024-10-16 14:14:05', '2024-10-16 14:14:06', 28),
+(214, 'KH-00000214', 'Anh Tình', 'Xóm 5, Giao Yến, Giao Thuỷ, Nam Định', '7474', NULL, NULL, NULL, 1, '2024-10-16 16:53:24', '2024-10-16 16:53:25', 2),
+(215, 'KH-00000215', 'Chị Hana Nguyễn', '109b9 Nghĩa Tân Cầu Giấy', '351', NULL, NULL, NULL, 1, '2024-10-17 10:54:03', '2024-10-17 10:54:03', 28),
+(216, 'KH-00000216', 'Công ty CP Tập đoàn Đức Phúc', '72 Trần Hưng Đạo, Hoàn Kiếm, HN', '351', NULL, NULL, NULL, 1, '2024-10-17 14:03:16', '2024-10-17 14:03:16', 28),
+(217, 'KH-00000217', 'Ms Đào Quyên - Túi Hoa Qủa', 'Móng Cái', '3359', NULL, NULL, NULL, 1, '2024-10-17 14:19:10', '2024-10-17 14:19:10', 33),
+(218, 'KH-00000218', 'Chị Hiền Hàng Chiếu', '66 Hàng Chiếu', '351', NULL, NULL, NULL, 1, '2024-10-17 14:31:45', '2024-10-17 14:31:45', 28),
+(219, 'KH-00000219', 'Chị Vân Anh', 'D6 lô 3 Geleximco, Lê Trọng Tấn, Hà Đông, HN', '351', NULL, NULL, NULL, 1, '2024-10-17 15:23:30', '2024-10-17 15:23:30', 2),
+(220, 'KH-00000220', 'Chị Mai Hương', 'Ngách 71, Ngõ 116 Nguyễn Xiển', '351', NULL, NULL, NULL, 1, '2024-10-17 15:47:01', '2024-10-17 15:47:01', 28),
+(221, 'KH-00000221', 'Betty Choice', 'Kim Giang', '351', NULL, NULL, NULL, 1, '2024-10-18 08:53:33', '2024-10-18 08:53:33', 33),
+(222, 'KH-00000222', 'Chị Bích Ngọc - Túi Hoa Quả', 'Ngã tư 27/7 thị xã Phú Thọ', '8560', NULL, NULL, NULL, 1, '2024-10-18 10:04:44', '2024-10-18 10:04:44', 2),
+(223, 'KH-00000223', 'Chị Như Quỳnh', '1C ngách 88 ngõ 281 Trương Định, Hoàng Mai, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-10-18 14:35:07', '2024-10-18 14:35:07', 2),
+(224, 'KH-00000224', 'Anh Đạt', 'Kho phụ kiện Giỏ Quà, đường Tân Lập, Vĩnh Ninh, Vĩnh Quỳnh, Thanh Trì', '351', NULL, NULL, NULL, 1, '2024-10-18 14:51:38', '2024-10-18 14:51:38', 28),
+(225, 'KH-00000225', 'Anh Mạnh Đan', 'VT28 LK5 KĐT Đại Thanh, Tả Thanh Oai, HN', '351', NULL, NULL, NULL, 1, '2024-10-18 15:10:47', '2024-10-18 15:10:47', 2),
+(226, 'KH-00000226', 'Chị Khánh An', 'số 1 Châu Văn Liêm, Mỹ Đình 2, HN', '351', NULL, NULL, NULL, 1, '2024-10-19 10:50:17', '2024-10-19 10:50:17', 2),
+(227, 'KH-00000227', 'CÔNG TY CỔ PHẦN THIẾT KẾ IN ẤN THÀNH ĐÔ', 'Số 652 Phúc Diễn, Xuân Phương, Nam Từ Liêm, Hà Nội', '351', '0107947234', NULL, NULL, 1, '2024-10-21 08:57:51', '2024-10-21 08:57:51', 2),
+(228, 'KH-00000228', 'CÔNG TY TNHH DƯỢC PHẨM HACOFA VIỆT NAM', 'Số nhà 15A Ngách 2 Ngõ 147A, Đường Tân Mai, Phường Tương Mai, Quận Hoàng Mai, Thành phố Hà Nội, Việt Nam', '351', '0109104060', NULL, NULL, 1, '2024-10-21 10:55:46', '2024-10-21 10:55:46', 2),
+(229, 'KH-00000229', 'Công ty Winhome', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-10-21 10:59:52', '2024-10-31 09:45:19', 28),
+(230, 'KH-00000230', 'Anh Khải', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-10-21 11:26:01', '2024-10-21 11:26:01', 2),
+(233, 'KH-00000233', 'Chị Bảo Quyên - Đà Nẵng', '51 lê bá trinh, hải châu, đà nẵng', '969', NULL, NULL, NULL, 1, '2024-10-21 15:12:34', '2024-10-21 15:12:34', 2),
+(234, 'KH-00000234', 'Ms.Bình - HQT', '127 Phan Bội Châu', '1478', NULL, NULL, NULL, 1, '2024-10-22 10:10:29', '2024-10-22 10:10:30', 33),
+(235, 'KH-00000235', 'Anh Thanh Hải - Bắc Ninh', 'TT văn hoá Kinh Bắc, Vũ Ninh, Bắc Ninh', '3222', NULL, NULL, NULL, 1, '2024-10-22 11:31:54', '2024-10-22 11:31:54', 2),
+(236, 'KH-00000236', 'Cửa Hàng Nhu Hùng', 'Đức Thượng, Hoài Đức', '351', NULL, NULL, NULL, 1, '2024-10-22 13:46:27', '2024-10-22 13:46:27', 28),
+(237, 'KH-00000237', 'Chị Ngọc Anh _ HCM', '41/11 mai lão bạng, p13, tân bình', '1', NULL, NULL, NULL, 1, '2024-10-22 16:05:36', '2024-10-22 16:05:36', 2),
+(238, 'KH-00000238', 'Chị Thuý _ Túi Hoa quả Đức Việt', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-10-23 10:48:25', '2024-10-23 10:48:54', 2),
+(239, 'KH-00000239', 'Phan Thế Anh', 'B18-TT6, KĐT Văn Quán - Phúc La - Hà Đông -HN', '351', NULL, NULL, NULL, 1, '2024-10-23 13:29:51', '2024-10-23 13:29:51', 28),
+(240, 'KH-00000240', 'Phan Thế Anh', 'B18-TT6, KĐT Văn Quán - Phúc La - Hà Đông -HN', '351', NULL, NULL, NULL, 1, '2024-10-23 13:29:59', '2024-10-23 13:29:59', 28),
+(241, 'KH-00000241', 'Chị Loan (Liz) _ Hà Đông', 'D04-L35 An Phú Shop Villas, Dương Nội', '351', NULL, NULL, NULL, 1, '2024-10-23 14:13:20', '2024-10-23 14:13:21', 2),
+(242, 'KH-00000242', 'Công ty TNHH TAKA An Phát', 'Số nhà 20 Khu nhà vườn Giai đoạn 1 KĐT Vĩnh Hoàng,P.Hoàng Văn Thụ,Q.Hoàng Mai, HN (tầng 1 là EMO Coffee Vĩnh Hoàng)', '351', NULL, NULL, NULL, 1, '2024-10-24 08:58:06', '2024-10-24 08:58:06', 33),
+(243, 'KH-00000243', 'Ms.Phương Anh - HQT', 'XaLa Hà Nội', '351', NULL, NULL, NULL, 1, '2024-10-24 09:46:59', '2024-10-24 09:46:59', 33),
+(244, 'KH-00000244', 'Chị Ngọc Ánh', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-10-25 08:52:15', '2024-10-25 08:52:15', 28),
+(245, 'KH-00000245', 'Ms.Thu Hà - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-10-25 10:07:45', '2024-10-25 10:07:45', 33),
+(246, 'KH-00000246', 'Trần Thảo', 'Số 7, Tôn Thất Thuyết', '351', NULL, NULL, NULL, 1, '2024-10-25 10:19:14', '2024-10-25 10:19:14', 28),
+(247, 'KH-00000247', 'CÔNG TY TNHH QUÀ TẶNG NGỌC MINH', 'CT7 KDT Dương Nội, Hà Đông, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-10-25 11:10:53', '2024-10-25 11:10:53', 2),
+(248, 'KH-00000248', 'CÔNG TY CỔ PHẦN BERYBEEGLOBAL', '200 Lạch Tray, Lạch Tray, Ngô Quyền, Hải Phòng', '1478', '0109507655', NULL, NULL, 1, '2024-10-25 11:27:26', '2024-10-25 11:27:26', 2),
+(249, 'KH-00000249', 'CÔNG TY TNHH THƯƠNG MẠI DỊCH VỤ KHAI SƠN', '42/47 Hoàng Diệu, P13, Quận 4, HCM', '1', '0314236655', NULL, NULL, 1, '2024-10-25 14:42:20', '2024-10-25 14:42:20', 2),
+(250, 'KH-00000250', 'Chị Đinh Ngọc Hà', '259 Khuất Duy Tiến', '351', NULL, NULL, NULL, 1, '2024-10-25 16:48:37', '2024-10-25 16:48:37', 2),
+(251, 'KH-00000251', 'Chị Phạm Hồng Vân', 'Số 357 Nguyễn Khang, Cầu Giấy, HN', '351', NULL, NULL, NULL, 1, '2024-10-26 08:09:09', '2024-10-26 08:09:09', 2),
+(252, 'KH-00000252', 'Hoài Thương', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-10-26 10:29:43', '2024-10-26 10:29:43', 28),
+(253, 'KH-00000253', 'Anh Đức Hiếu 92', '70 Trần Nhật Duật Hoàn Kiếm', '351', NULL, NULL, NULL, 1, '2024-10-26 11:54:55', '2024-10-26 11:54:55', 28),
+(254, 'KH-00000254', 'ST Việt Nam', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-10-26 15:06:43', '2024-10-26 15:06:43', 28),
+(255, 'KH-00000255', 'Chị Lan (Lanyuri)', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-10-26 16:00:57', '2024-10-26 16:00:57', 2),
+(256, 'KH-00000256', 'CÔNG TY TNHH THIẾT BỊ 2H', 'Số 16 ngõ 53 phố Cảm Hội, Phường Đống Mác, Quận Hai Bà Trưng, Thành phố Hà Nội, Việt Nam', '351', '0101473468', NULL, NULL, 1, '2024-10-28 08:38:25', '2024-10-28 08:38:25', 2),
+(257, 'KH-00000257', 'Chị Pham Thanh Ha', 'số 14 ngõ 169 Đại Mỗ, Nam Từ Liêm, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-10-28 09:08:00', '2024-10-28 09:08:00', 2),
+(258, 'KH-00000258', 'Ngọc Mây', 'Toà C1 Vinhome Trần Duy Hưng', '351', NULL, NULL, NULL, 1, '2024-10-28 09:15:37', '2024-10-28 09:15:37', 28),
+(259, 'KH-00000259', 'MS.Thoa Đỗ - HQT', 'số 106, L14-A7 khu chung cư Hoàng Huy, An Đồng, An Dương, Hải Phòng', '1478', NULL, NULL, NULL, 1, '2024-10-28 10:47:50', '2024-10-28 10:47:50', 33),
+(260, 'KH-00000260', 'Trình Thanh', 'Vinhomes Marina, Ngọc Trai 9.07, P. Vĩnh Niệm, Q. Lê Chân, TP. Hải Phòng', '1478', NULL, NULL, NULL, 1, '2024-10-28 10:57:38', '2024-10-28 10:57:38', 35),
+(261, 'KH-00000261', 'Ms.Thu Hiền', 'Hoàng Mai, HN', '351', NULL, NULL, NULL, 1, '2024-10-28 13:58:55', '2024-10-28 13:58:55', 33),
+(262, 'KH-00000262', 'CÔNG TY TNHH XUẤT NHẬP KHẨU MONTE CARLO', 'Nguyệt quế 25-05, vinhome Riverside, Phúc Đồng, Long Biên', '351', '0110201446', NULL, NULL, 1, '2024-10-28 14:31:58', '2024-10-28 14:31:58', 2),
+(263, 'KH-00000263', 'Anh Tiến Dũng', '91 Hùng Vương, Tích Sơn, Vĩnh Yên, Vĩnh Phúc', '6854', NULL, NULL, NULL, 1, '2024-10-28 15:47:12', '2024-10-28 15:47:12', 2),
+(264, 'KH-00000264', 'Chị Le Hoang Yen', 'số 3 BT6 KĐT Văn Phú, Hà Đông', '351', NULL, NULL, NULL, 1, '2024-10-29 08:47:47', '2024-10-29 08:47:47', 2),
+(265, 'KH-00000265', 'CÔNG TY TNHH ỨNG DỤNG KHOA HỌC CÔNG NGHỆ AN NAM', 'Xóm Chùa, thôn Nguyễn Xá, Xã Phương Tú, Huyện Ứng Hoà, Thành phố Hà Nội, Việt Nam', '351', NULL, NULL, NULL, 1, '2024-10-29 10:39:11', '2024-10-29 10:56:10', 33),
+(266, 'KH-00000266', 'Bùi Xiêm', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-10-29 15:10:31', '2024-10-29 15:10:31', 28),
+(267, 'KH-00000267', 'Rượu Ánh Vang', '108 Đ. Nguyễn Trãi, Thượng Đình, Thanh Xuân, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-10-29 16:00:55', '2024-10-29 16:00:55', 2),
+(268, 'KH-00000268', 'Ms.Thảo - HQT', 'từ sơn - bắc ninh', '3222', NULL, NULL, NULL, 1, '2024-10-30 08:08:35', '2024-10-30 08:08:35', 33),
+(269, 'KH-00000269', 'Hạnh Nguyễn', 'CT 10B KĐT Đại Thanh', '351', NULL, NULL, NULL, 1, '2024-10-30 08:14:10', '2024-10-30 08:14:10', 35),
+(270, 'KH-00000270', 'Anh Hải Muối', 'Phương Khê, Hồng Hưng, Gia Lộc, Hải Dương', '4737', NULL, NULL, NULL, 1, '2024-10-30 09:29:00', '2024-10-30 09:29:00', 2),
+(271, 'KH-00000271', 'Ms.Như - HQT', 'Số 8 Ngõ 20 Hào Nam', '351', NULL, NULL, NULL, 1, '2024-10-30 11:37:45', '2024-10-30 11:37:45', 33),
+(272, 'KH-00000272', 'Phuongduong', 'số 273 phố Vĩnh Hưng, Hoàng Mai, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-10-30 14:19:20', '2024-10-30 14:19:20', 2),
+(274, 'KH-00000274', 'MS.Alice Khuất- HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-10-30 15:47:13', '2024-10-30 16:00:01', 33),
+(275, 'KH-00000275', 'Mr. Hải - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-10-30 16:01:27', '2024-10-30 16:01:27', 35),
+(276, 'KH-00000276', 'Goda', '24 ngõ 20 ngụy Như Kon Tum, Thanh Xuân', '351', NULL, NULL, NULL, 1, '2024-10-31 08:48:33', '2024-10-31 08:48:33', 28),
+(277, 'KH-00000277', 'Mỹ Lan', 'b04 L 03 khu shop villa An Phú, phường Dương Nội, Quận Hà Đông, HN', '351', NULL, NULL, NULL, 1, '2024-10-31 14:20:43', '2024-10-31 14:20:43', 28),
+(278, 'KH-00000278', 'Thanh Tâm', '44 Lê Trọng Tấn, Khương Mai, Thanh Xuân, HN', '351', NULL, NULL, NULL, 1, '2024-10-31 14:53:58', '2024-10-31 14:53:58', 28),
+(279, 'KH-00000279', 'CÔNG TY TNHH IN ĐẠI LONG', 'Số 18 ngõ 69B, phố Hoàng Văn Thái, Phường Khương Trung, Quận Thanh Xuân, Thành phố Hà Nội, Việt Nam', '351', '0110083520', NULL, NULL, 1, '2024-10-31 15:37:47', '2024-10-31 15:37:47', 2),
+(280, 'KH-00000280', 'MS.Kim Hương - HQT', '86 Võ Như Hưng-Mỹ An- Ngũ Hành Sơn', '969', NULL, NULL, NULL, 1, '2024-10-31 16:30:22', '2024-10-31 16:30:22', 33),
+(281, 'KH-00000281', 'Chị Hoàng Kim Thảo - HQT', 'Cty Hoàng Lâm, c9 danatol, khối cửa tiền, phường Vinh Tân, tp vinh', '4230', NULL, NULL, NULL, 1, '2024-10-31 16:39:40', '2024-10-31 16:39:40', 2),
+(282, 'KH-00000282', 'Ms.Thu Nga - HQT', 'Tố Hữu - Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-01 08:26:08', '2024-11-01 08:26:08', 33),
+(283, 'KH-00000283', 'Chị Rượu Thuỷ Vũ - HQT', 'Toà nhà Lilama 10 Tố Hữu, Trung Văn, Nam Từ Liêm, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-01 09:53:38', '2024-11-01 09:53:38', 2),
+(284, 'KH-00000284', 'Shushi - HQT', '206 Lê Thánh Tông, Phú Mỹ, Phú Mỹ, BRVT', '2198', NULL, NULL, NULL, 1, '2024-11-01 11:25:18', '2024-11-01 11:25:18', 2),
+(285, 'KH-00000285', 'Công Ty Ngân Lợi', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-01 14:31:19', '2024-11-01 14:31:19', 33),
+(286, 'KH-00000286', 'Chị Lê Hạnh Dung - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-01 15:33:11', '2024-11-01 15:33:11', 2),
+(287, 'KH-00000287', 'Mr.Dũng', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-01 16:16:16', '2024-11-01 16:16:16', 33),
+(289, 'KH-00000289', 'Anh Thanh Tao - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-01 16:26:52', '2024-11-01 16:26:52', 2),
+(290, 'KH-00000290', 'Anh Phương Anh - HQT', 'SN 285, Yên Trung, Yên Thọ, Đông Triều, Quảng Ninh', '3359', NULL, NULL, NULL, 1, '2024-11-02 08:00:27', '2024-11-02 08:00:27', 2),
+(291, 'KH-00000291', 'Ms.Linh - HQT ( InWine)', '63 Nguyễn Hoàng, Mỹ Đình', '351', NULL, NULL, NULL, 1, '2024-11-02 08:13:08', '2024-11-05 10:06:24', 33),
+(292, 'KH-00000292', 'Ms.Diệp Tâm - HQT', 'Tân Triều, Thanh Trì', '351', NULL, NULL, NULL, 1, '2024-11-02 08:23:15', '2024-11-02 08:23:15', 33),
+(294, 'KH-00000294', 'Royal Wine', 'Royal city', '351', NULL, NULL, NULL, 1, '2024-11-02 15:32:01', '2024-11-02 15:32:01', 33),
+(295, 'KH-00000295', 'Royal Wine', 'Royal city', '351', NULL, NULL, NULL, 1, '2024-11-02 15:32:07', '2024-11-02 15:32:07', 33),
+(296, 'KH-00000296', 'CÔNG TY CỔ PHẦN INTIMEX ĐÀ NẴNG', '46 Phan Đình Phùng, Phường Hải Châu I, Quận Hải Châu, Thành phố Đà Nẵng, Việt Nam', '969', '0401513834', NULL, NULL, 1, '2024-11-02 16:23:26', '2024-11-02 16:23:26', 2),
+(297, 'KH-00000297', 'Anh Duy Anh - HQT', 'Ngõ 1 Tân Triều, Thanh Trì, HN', '351', NULL, NULL, NULL, 1, '2024-11-02 17:04:15', '2024-11-02 17:04:15', 2),
+(298, 'KH-00000298', 'Chị Trần Yến', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-02 17:18:52', '2024-11-02 17:18:52', 2),
+(299, 'KH-00000299', 'Chị Ngọc Anh Phạm (Hải Phòng) - HQT', '21 Trần Khánh Dư, Máy Tơ, Ngô Quyền, Hải Phòng', '1478', NULL, NULL, NULL, 1, '2024-11-04 08:43:26', '2024-11-20 10:56:51', 2),
+(300, 'KH-00000300', 'Chị Ngọc Anh Na - HQT', 'Chung cư Hồng Hà 89 Thịnh Liệt, Hoàng mai', '351', NULL, NULL, NULL, 1, '2024-11-04 08:57:50', '2024-11-04 08:57:50', 2),
+(301, 'KH-00000301', 'Mr.Đức Anh - HQT', 'Tạ Quang Bửu, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-04 09:40:27', '2024-11-04 09:40:27', 33),
+(302, 'KH-00000302', 'Mr.Hồng Phúc - 0348087896', 'HN', '351', NULL, NULL, NULL, 1, '2024-11-04 11:38:17', '2024-11-04 11:38:17', 33),
+(303, 'KH-00000303', 'Anh Hùng - Phạm Ngọc Thạch HQT', 'ngõ 46a Phạm Ngọc Thạch, Đống Đa, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-04 11:59:28', '2024-11-04 11:59:28', 2),
+(304, 'KH-00000304', 'Chị Thom Duong - HQT', '1 Hùng Vương, Điện Biên, Ba Đình, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-04 13:38:12', '2024-11-04 13:38:12', 2),
+(305, 'KH-00000305', 'Mr.Hãn-HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-04 14:05:25', '2024-11-04 14:06:44', 33),
+(306, 'KH-00000306', 'anh Đỗ Đạt in ấn - HQT', 'Triều Khúc', '351', NULL, NULL, NULL, 1, '2024-11-04 14:08:12', '2024-11-04 14:08:12', 2),
+(307, 'KH-00000307', 'Đào Thị Thu An', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-04 14:13:18', '2024-11-04 14:13:18', 28),
+(308, 'KH-00000308', 'Thoa', 'Số 47 Ngõ 76 An Dương, Phường Tứ Liên, Quận Tây Hồ, Hà Nội.', '351', NULL, NULL, NULL, 1, '2024-11-04 14:31:22', '2024-11-04 14:31:22', 28),
+(309, 'KH-00000309', 'Nam Ngọt', 'Sơn Tây, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-04 15:16:27', '2024-11-04 15:16:27', 28),
+(310, 'KH-00000310', 'Chị Phương - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-04 16:08:44', '2024-11-04 16:08:44', 2),
+(311, 'KH-00000311', 'Mr.Hiếu - Khay Thuyền', 'Thường Tín', '351', NULL, NULL, NULL, 1, '2024-11-05 08:05:32', '2024-11-05 08:05:32', 33),
+(312, 'KH-00000312', 'Ms.Tâm - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-05 08:18:46', '2024-11-05 08:18:46', 33),
+(313, 'KH-00000313', 'Công ty TNHH Thương Mại và Dịch Vụ Momoland', 'Chiến Thắng', '351', NULL, NULL, NULL, 1, '2024-11-05 08:39:05', '2024-11-05 08:39:05', 33),
+(314, 'KH-00000314', 'Mr.Dũng - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-05 08:59:53', '2024-11-05 08:59:53', 33),
+(315, 'KH-00000315', 'Ms.Hương Mai - HQT', 'Nhân Hoà, Thanh Xuân', '351', NULL, NULL, NULL, 1, '2024-11-05 09:30:16', '2024-11-05 09:30:16', 33),
+(316, 'KH-00000316', 'Chị Thanh Thanh - HQT', '45 Chương Dương Độ, Hoàn Kiếm, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-05 09:40:09', '2024-11-05 09:40:10', 2),
+(317, 'KH-00000317', 'Nguyễn Bá Kính', 'Số 10 Phố Thắng Lợi - Phường Hải Tân - TP. Hải Dương - Hải Dương', '4737', NULL, NULL, NULL, 1, '2024-11-05 09:41:24', '2024-11-05 09:41:24', 28),
+(318, 'KH-00000318', 'Công ty InWine', '150 Nguyễn Chánh', '351', NULL, NULL, NULL, 1, '2024-11-05 10:04:59', '2024-11-05 10:04:59', 33),
+(319, 'KH-00000319', 'Chị Thanh Phạm - HQT', 'LK 54, ngõ 100 Dịch Vọng Hậu, Cầu Giấy, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-05 11:31:33', '2024-11-05 11:31:33', 2),
+(320, 'KH-00000320', 'Chị Trần Hoài - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-05 13:44:46', '2024-11-05 13:44:46', 2),
+(321, 'KH-00000321', 'Hạnh Ngô', 'Hải Phòng', '1478', NULL, NULL, NULL, 1, '2024-11-05 14:41:00', '2024-11-05 14:41:00', 28),
+(322, 'KH-00000322', 'Khoruou Gourmet', '91 Hoàng Cầu, Đống Đa, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-05 14:45:11', '2024-11-05 14:45:11', 2),
+(323, 'KH-00000323', 'Thảo Nguyên plaza', 'Số 4 lk 6b Làng Việt Kiều Châu Âu', '351', NULL, NULL, NULL, 1, '2024-11-05 14:50:47', '2024-11-05 14:50:47', 28),
+(324, 'KH-00000324', 'Nguyễn Trung', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-05 14:56:04', '2024-11-05 14:56:04', 28),
+(325, 'KH-00000325', 'Ms.Doanh - HQT', '219A Phạm Viết Chánh, Phường Nguyễn Cư Trinh Q1', '1', NULL, NULL, NULL, 1, '2024-11-05 15:28:12', '2024-11-05 15:28:12', 33),
+(326, 'KH-00000326', 'Men Nguyễn', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-05 16:28:27', '2024-11-05 16:28:27', 28),
+(327, 'KH-00000327', 'Chị Hoài Bùi - HQT', 'KĐT Nam An Khánh, Hoài Đức, HN', '351', NULL, NULL, NULL, 1, '2024-11-05 16:29:00', '2024-11-05 16:29:00', 2);
+INSERT INTO `customers` (`id`, `code`, `name`, `address`, `city`, `tax_code`, `note`, `status`, `act`, `created_at`, `updated_at`, `created_by`) VALUES
+(328, 'KH-00000328', 'Chị Trần Nhật Huyền - HQT', 'Nam Đồng, Đống Đa, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-06 08:39:48', '2024-11-06 08:39:48', 2),
+(329, 'KH-00000329', 'Uyển San', '77 Giang Văn Minh', '351', NULL, NULL, NULL, 1, '2024-11-06 09:21:41', '2024-11-06 09:21:41', 28),
+(330, 'KH-00000330', 'Ms.An - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-06 09:23:41', '2024-11-06 09:23:41', 33),
+(331, 'KH-00000331', 'Phương Dung Libra', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-06 11:07:34', '2024-11-06 11:07:34', 28),
+(332, 'KH-00000332', 'Kho Quà Judy', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-06 14:11:34', '2024-11-06 14:11:34', 28),
+(333, 'KH-00000333', 'An Phú Farm ( Chị Thắm)', '50 Phan Đình Phùng, Hải Châu, Đà Nẵng', '969', NULL, NULL, NULL, 1, '2024-11-06 14:38:41', '2024-11-06 14:38:41', 2),
+(334, 'KH-00000334', 'Võ Tiến Dũng', '77 Minh Mạng/P Thuỷ Xuân/tp Huế', '2893', NULL, NULL, NULL, 1, '2024-11-06 15:39:10', '2024-11-06 15:39:10', 28),
+(335, 'KH-00000335', 'Chị Lại Thảo - HQT', 'Đường 42 Lê Duẩn, Liêm Chính, Phủ Lý, Hà Nam', '9047', NULL, NULL, NULL, 1, '2024-11-07 08:49:37', '2024-11-07 08:49:37', 2),
+(336, 'KH-00000336', 'Chị Cao Dung ( Công ty Staley)', 'Dương Xá, Gia Lâm,HN', '351', NULL, NULL, NULL, 1, '2024-11-07 10:39:21', '2024-11-07 10:39:21', 2),
+(337, 'KH-00000337', 'Chị Ly', '6 Nhân Trạch, Phú Lương, Hà Đông, HN', '351', NULL, NULL, NULL, 1, '2024-11-07 10:42:44', '2024-11-07 10:42:44', 2),
+(338, 'KH-00000338', 'Chị Xuân Hạ Long', 'Hạ Long', '3359', NULL, NULL, NULL, 1, '2024-11-07 10:58:32', '2024-11-07 10:58:32', 2),
+(339, 'KH-00000339', 'Ms.Thuỳ Linh - HQT', 'Hà Đông', '351', NULL, NULL, NULL, 1, '2024-11-07 13:33:36', '2024-11-07 13:33:36', 33),
+(340, 'KH-00000340', 'Ms.Mary Nguyen - HQT', '48 Vũ Trọng Phụng Thanh Xuân Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-07 13:49:50', '2024-11-07 13:49:50', 33),
+(341, 'KH-00000341', 'Chị Phượng ( Showroom Hải Đăng 36)', 'Số 384 MB 155 Đông Vệ', '3563', NULL, NULL, NULL, 1, '2024-11-07 14:05:33', '2024-11-07 14:05:33', 2),
+(342, 'KH-00000342', 'Chị Thanh Quý - HQT', '121 ĐƯỜNG Đồng Văn Cống, P.Thạnh Mỹ Lợi, TP.Thủ Đức, TP.Hồ Chí Minh', '1', NULL, NULL, NULL, 1, '2024-11-07 14:08:08', '2024-11-07 14:08:08', 2),
+(343, 'KH-00000343', 'Ms.Liên Đoàn', 'Hà Đông', '351', NULL, NULL, NULL, 1, '2024-11-07 14:29:25', '2024-11-07 14:29:26', 33),
+(344, 'KH-00000344', 'Ms.Mai Nhung - HQT', 'Hoài Đức', '351', NULL, NULL, NULL, 1, '2024-11-07 14:53:15', '2024-11-07 14:53:15', 33),
+(345, 'KH-00000345', 'Ms.Kim Dung - HQT', 'Quận Bình Thạnh', '1', NULL, NULL, NULL, 1, '2024-11-08 09:00:43', '2024-11-08 09:00:43', 33),
+(346, 'KH-00000346', 'Ms.Linh Hoàng - HQT', 'Đà Nẵng', '969', NULL, NULL, NULL, 1, '2024-11-08 09:02:48', '2024-11-08 09:03:43', 33),
+(347, 'KH-00000347', 'Mỹ Lan', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-08 11:51:46', '2024-11-08 11:51:46', 28),
+(348, 'KH-00000348', 'Mr.Đình Dũng - HQT', 'Thủ Đức', '1', NULL, '0907241919', NULL, 1, '2024-11-08 15:20:17', '2024-11-08 15:20:17', 33),
+(349, 'KH-00000349', 'Hùng Chu', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-09 08:17:41', '2024-11-09 08:17:41', 28),
+(350, 'KH-00000350', 'Chị Thanh Lê - HQT', '10A KĐT Sài Đồng, Việt Hưng, Long Biên, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-09 08:21:42', '2024-11-09 08:21:42', 2),
+(351, 'KH-00000351', 'CÔNG TY CỔ PHẦN FACOMAX VIỆT NAM', 'Thôn Đại Tự, Xã Kim Chung, Huyện Hoài Đức, Thành phố Hà Nội, Việt Nam', '351', '0106849019', NULL, NULL, 1, '2024-11-09 08:44:33', '2024-11-09 08:44:33', 2),
+(352, 'KH-00000352', 'CÔNG TY CỔ PHẦN FACOMAX VIỆT NAM', 'Thôn Đại Tự, Xã Kim Chung, Huyện Hoài Đức, Thành phố Hà Nội, Việt Nam', '351', '0106849019', NULL, NULL, 1, '2024-11-09 08:44:41', '2024-11-09 08:44:41', 2),
+(353, 'KH-00000353', 'Ms.Tô Linh - HQT', 'Thái Hà', '351', NULL, NULL, NULL, 1, '2024-11-09 08:44:54', '2024-11-23 15:40:12', 33),
+(354, 'KH-00000354', 'Chị Ngọc Anh Đoàn - HQT', '392 Kim Giang, Thanh Xuân', '351', NULL, NULL, NULL, 1, '2024-11-09 08:47:01', '2024-11-09 08:47:01', 2),
+(355, 'KH-00000355', 'CÔNG TY TNHH THƯƠNG MẠI DỊCH VỤ QUÀ TẶNG ANH MINH', 'Số 5 đường 105A Trịnh Quang Nghị, Phường 7, Quận 8, Thành phố Hồ Chí Minh, Việt Nam', '1', '0313432657', NULL, NULL, 1, '2024-11-09 08:53:24', '2024-11-09 08:53:24', 2),
+(356, 'KH-00000356', 'Chị Ngọc Dầu Tỏi', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-09 11:25:23', '2024-11-09 11:25:23', 57),
+(357, 'KH-00000357', 'Phụ Kiện Quà Tặng Ý An', 'Buôn Ma Thuật', NULL, NULL, NULL, NULL, 1, '2024-11-09 11:57:54', '2024-11-09 11:57:54', 28),
+(358, 'KH-00000358', 'Aliha Đông Triều', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-09 13:47:51', '2024-11-09 13:47:51', 28),
+(359, 'KH-00000359', 'Chị Huyền Giang - HQT', '023 Sơn Tùng, Cốc Lếu, Lào Cai', '7298', NULL, NULL, NULL, 1, '2024-11-09 14:48:12', '2024-11-09 14:48:12', 2),
+(360, 'KH-00000360', 'Vy Tuấn Anh - HQT', 'Cầu Giấy', '351', NULL, NULL, NULL, 1, '2024-11-09 15:16:44', '2024-11-09 15:16:44', 2),
+(361, 'KH-00000361', 'Ms.Thùy Dương - HQT', 'B19/397D Trần Đại Nghĩa Tân Nhựt Bình Chánh', '1', NULL, '0399961765', NULL, 1, '2024-11-11 08:29:16', '2024-11-11 08:29:31', 33),
+(362, 'KH-00000362', 'Linh Chi Shop - HQT', '52 đường 18M chợ Mỗ Lao, Hà Đông', '351', NULL, NULL, NULL, 1, '2024-11-11 08:46:28', '2024-11-11 08:46:28', 2),
+(363, 'KH-00000363', 'Happybox HN', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-11 08:57:39', '2024-11-11 08:57:39', 28),
+(364, 'KH-00000364', 'Giftone', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-11 09:07:36', '2024-11-11 09:07:37', 28),
+(365, 'KH-00000365', 'Chị Yến Nhi - HQT', 'Toà San, CC Dragon Castel Cái Lân, Hạ Long', '3359', NULL, NULL, NULL, 1, '2024-11-11 09:33:46', '2024-11-11 09:33:46', 2),
+(366, 'KH-00000366', 'Chị Thanh Vân - HQT', 'ổ dân phố gia bảy , khu đô thị picenza, phường đồng bẩm ,tp thái nguyên.', '7106', NULL, NULL, NULL, 1, '2024-11-11 10:03:28', '2024-11-11 10:03:28', 2),
+(367, 'KH-00000367', 'Công ty cổ phần tiếp vận số 1 Đồng Nai', '1b d3 kp Bình Dương, p long bình tân, biên hòa, đồng nai', '1137', NULL, NULL, NULL, 1, '2024-11-11 10:57:13', '2024-11-11 10:57:13', 33),
+(368, 'KH-00000368', 'Anh Dương Vinh - HQT', 'số nhà 22 ngõ 55 thôn lũng kênh , xã đức giang hoài đức', '351', NULL, NULL, NULL, 1, '2024-11-11 15:15:41', '2024-11-11 15:15:41', 2),
+(369, 'KH-00000369', 'Ms.Kiều Nga - HQT', 'Nguyễn Kiều Nga. Số nhà 76, tổ 3, Ba Hàng, Phổ Yên, Thái Nguyên', '7106', NULL, NULL, NULL, 1, '2024-11-11 15:20:53', '2024-11-11 15:20:54', 33),
+(370, 'KH-00000370', 'Mr.Đô Thành- HQT', 'Thanh Trì, Hà Nội', '351', NULL, '0976183366', NULL, 1, '2024-11-11 17:28:47', '2024-11-11 17:28:47', 33),
+(371, 'KH-00000371', 'Ms.Hồng Hạnh - HQT', 'P.Hải Tân', '4737', NULL, NULL, NULL, 1, '2024-11-12 09:04:23', '2024-11-12 09:04:23', 33),
+(372, 'KH-00000372', 'Chị Lan Anh - HQT', 'Số 16 lô TT02 KĐT HD Mon, Hàm Nghi, HN', '351', NULL, NULL, NULL, 1, '2024-11-12 10:08:01', '2024-11-12 10:08:01', 2),
+(373, 'KH-00000373', 'Chị Hải Yến - NETA STORE Food & Drink', '92/154 Ngọc Lâm - Long Biên - HN', '351', NULL, NULL, NULL, 1, '2024-11-12 11:08:12', '2024-11-12 11:08:12', 2),
+(374, 'KH-00000374', 'Hoà Nguyễn', '140 Chiến Thắng', '351', NULL, NULL, NULL, 1, '2024-11-12 11:31:47', '2024-11-12 11:31:47', 28),
+(375, 'KH-00000375', 'MS.Trang ( Khách hàng quen ) - HQT', '02 Hoà Sơn - thị trấn Chúc Sơn- huyện Chương Mỹ', '351', NULL, '0355563899', NULL, 1, '2024-11-12 11:50:20', '2024-11-12 11:50:21', 33),
+(376, 'KH-00000376', 'Thuận BNF', 'Trịnh Đình Thảo, khuê trung, Cẩm Lệ , Tp Đà Nẵng', '969', NULL, NULL, NULL, 1, '2024-11-12 11:55:51', '2024-11-12 11:55:51', 28),
+(377, 'KH-00000377', 'Hạnh Nguyễn', 'Hà Nội', '351', NULL, NULL, NULL, 0, '2024-11-12 14:48:51', '2024-11-12 14:50:14', 28),
+(378, 'KH-00000378', 'Anh Nam Vũ - HQT', '165 Hoàng Hoa Thám, Nguyễn Thái Học, Yên Bái', '10679', NULL, NULL, NULL, 1, '2024-11-12 14:49:14', '2024-11-12 14:49:14', 2),
+(379, 'KH-00000379', 'Thanh Tuyên', '462 Đường Bưởi', '351', NULL, NULL, NULL, 1, '2024-11-12 14:52:52', '2024-11-12 14:52:52', 28),
+(380, 'KH-00000380', 'Siêu thị Q Market,', 'Tầng1 Toà 903B TM1-2, Chung cư Starlake Daewoo, Khu đô thị Tây Hồ Tây, Bắc Từ Liêm,', '351', NULL, NULL, NULL, 1, '2024-11-12 16:48:21', '2024-11-12 16:48:21', 33),
+(381, 'KH-00000381', 'Mr.Tuấn - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-12 16:51:45', '2024-11-12 16:51:45', 33),
+(382, 'KH-00000382', 'Ms.Anna - HQT', 'Số 56 surmise k the manor Central Park Nguyễn xiển', '351', NULL, '0877111666', NULL, 1, '2024-11-12 16:58:47', '2024-11-12 16:58:48', 33),
+(383, 'KH-00000383', 'Baobihanoicomvn', '36 ngách 445 ngõ 192 lê trọng tấn thanh xuân', '351', NULL, NULL, NULL, 1, '2024-11-13 09:35:04', '2024-11-13 09:35:04', 2),
+(384, 'KH-00000384', 'Ms. Hằng - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-13 10:14:59', '2024-11-13 10:15:00', 33),
+(385, 'KH-00000385', 'Chị Hải Yến Vũ - HQT', 'Mỹ Đình, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-13 11:04:07', '2024-11-13 11:04:07', 2),
+(386, 'KH-00000386', 'Vân Phạm', 'Ninh Bình', '8405', NULL, NULL, NULL, 1, '2024-11-13 14:42:59', '2024-11-13 14:43:00', 28),
+(387, 'KH-00000387', 'CÔNG TY TNHH SAMMARCO VIỆT NAM', 'Tầng 1, dãy nhà Phú Gia 02-02 Vincom Plaza, Số 1 Lê Thánh Tông, Phường Máy Tơ, Quận Ngô Quyền, Thành phố Hải Phòng, Việt Nam', '1478', '0201815161', NULL, NULL, 1, '2024-11-13 15:39:18', '2024-11-13 15:39:18', 2),
+(388, 'KH-00000388', 'S&B ( anh Thịnh Tuấn) - HQT', 'chợ TT Đông Anh, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-13 16:42:14', '2024-11-13 16:42:14', 2),
+(389, 'KH-00000389', 'Rượu Tuấn Tú - Thanh Hoá', 'NQ 6-48 Đại Lộ Châu Âu, KĐT Vinhome, Đông Hương, Thanh Hoá', '3563', NULL, NULL, NULL, 1, '2024-11-14 09:44:44', '2024-11-14 09:44:44', 2),
+(390, 'KH-00000390', 'Cô Yến - HQT', 'Ngõ 788 Kim Giang', '351', NULL, NULL, NULL, 1, '2024-11-14 11:54:15', '2024-11-14 11:54:15', 2),
+(391, 'KH-00000391', 'CÔNG TY CỔ PHẦN ĐTPT CHÈ TAM ĐƯỜNG', 'Tổ 1, phường Tân Phong, Thành phố Lai Châu, Tỉnh Lai Châu.', '11162', NULL, NULL, NULL, 1, '2024-11-14 12:00:39', '2024-11-14 12:00:39', 10),
+(392, 'KH-00000392', 'Anh Duy Thuy - HQT', 'Triều Khúc', '351', NULL, NULL, NULL, 1, '2024-11-14 13:40:53', '2024-11-14 13:40:53', 2),
+(393, 'KH-00000393', 'CÔNG TY CỔ PHẦN CÔNG NGHỆ VÀ DỊCH VỤ IMEDIA', 'Tầng 5, tòa nhà 508 Trường Chinh, Phường Ngã Tư Sở, Quận Đống Đa, Thành phố Hà Nội, Việt Nam', '351', NULL, NULL, NULL, 1, '2024-11-14 14:06:25', '2024-11-14 14:06:25', 2),
+(394, 'KH-00000394', 'Chị Thuỳ Linh - THQ', 'Nhà văn hóa thôn nguyễn việt lập huyện tân yên tỉnh bắc giang', '6218', NULL, NULL, NULL, 1, '2024-11-14 15:13:26', '2024-11-14 15:13:26', 2),
+(395, 'KH-00000395', 'Phương Anh', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-14 15:36:01', '2024-11-14 15:36:01', 28),
+(396, 'KH-00000396', 'Ms.Hà (Nến trầm) - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-14 17:27:00', '2024-11-14 17:27:00', 33),
+(397, 'KH-00000397', 'KSM', 'Kho Kosame - Trường cao đẳng kinh tế kỹ thuật công nghiệp (Trường cao đẳng Duyên Hải cũ), số 156/109 Trường Chinh, Phường Đồng Hoà, Quận Kiến An, TP Hải Phòng.', '1478', NULL, NULL, NULL, 1, '2024-11-15 08:13:34', '2024-11-15 08:13:34', 28),
+(398, 'KH-00000398', 'Chị Phương Hải Phòng - HQT', 'BH1-52, Vinhome Imperia, Thượng Lý, Hồng Bàng, Hải Phòng (Mặt sau Vua Nệm)', '1478', NULL, NULL, NULL, 1, '2024-11-15 09:08:02', '2024-11-15 09:08:02', 2),
+(399, 'KH-00000399', 'Hoàng Mạnh', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-15 11:05:55', '2024-11-15 11:05:55', 28),
+(400, 'KH-00000400', 'Anh Công Phạm', 'VOV Mễ Trì', '351', NULL, NULL, NULL, 1, '2024-11-15 11:58:08', '2024-11-15 11:58:08', 2),
+(401, 'KH-00000401', 'Chị Lieu Nguyễn - HQT', '368 Gò Dầu, Tân Quý, Tân Phú, tphcm', '1', NULL, NULL, NULL, 1, '2024-11-15 14:06:00', '2024-11-15 14:06:00', 2),
+(402, 'KH-00000402', 'Chị Minh Hào - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-15 14:18:17', '2024-11-15 14:18:17', 2),
+(403, 'KH-00000403', 'Phạm Phương Quỳnh', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-15 14:26:34', '2024-11-15 14:26:34', 28),
+(404, 'KH-00000404', 'Ms.Thanh Socola - HQT', 'chung cư Green Dimond, Vựng Đâng, Yết Kiêu, Hạ Long, Quảng Ninh', '3359', NULL, NULL, NULL, 1, '2024-11-15 14:39:22', '2024-11-15 15:02:17', 33),
+(405, 'KH-00000405', 'Cửa Hàng Tuấn Hạnh - HQT', '87 Lý Thái Tổ, Trần Phú, Bắc Giang', '6218', NULL, NULL, NULL, 1, '2024-11-16 10:16:06', '2024-11-16 10:16:06', 2),
+(406, 'KH-00000406', 'Nguyễn Nga', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-16 14:00:37', '2024-11-16 14:00:37', 28),
+(407, 'KH-00000407', 'Ms.Kim Thoa - HQT', 'Hải Dương', '4737', NULL, NULL, NULL, 1, '2024-11-16 15:10:57', '2024-11-16 15:10:57', 33),
+(408, 'KH-00000408', 'In Đồng Lợi', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-16 15:23:53', '2024-11-16 15:23:53', 28),
+(409, 'KH-00000409', 'Ms.Hà Hiển - HQT', 'Thanh Xuân', '351', NULL, '0989482660', NULL, 1, '2024-11-16 15:44:08', '2024-11-16 15:44:08', 33),
+(410, 'KH-00000410', 'Công ty Hoàng Gia Bình Dương', '398-Đại lộ Bình Dương- phường Phú Lợi-Tp Thủ Dầu Một-Tỉnh Bình Dương', '1035', NULL, NULL, NULL, 1, '2024-11-18 14:19:08', '2024-11-18 14:19:08', 33),
+(411, 'KH-00000411', 'Ms.Trang Tomato - HQT', 'Đội Cấn, Ba đình', '351', NULL, NULL, NULL, 1, '2024-11-18 14:20:24', '2024-11-18 14:20:24', 33),
+(412, 'KH-00000412', 'Đào Lan Chi', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-18 14:21:21', '2024-11-18 14:21:21', 28),
+(413, 'KH-00000413', 'Chị Lê Hoà', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-19 09:10:13', '2024-11-19 09:10:13', 2),
+(414, 'KH-00000414', 'CÔNG TY CỔ PHẦN XÂY DỰNG VÀ THƯƠNG MẠI 5S VIỆT NAM', 'Số nhà 42, ngõ 51, phố Tương Mai, Phường Giáp Bát, Quận Hoàng Mai, Thành phố Hà Nội, Việt Nam', '351', NULL, NULL, NULL, 1, '2024-11-19 09:25:05', '2024-11-19 09:25:05', 2),
+(415, 'KH-00000415', 'Tie Vn', 'S402 Vinhomes Smart City Tây Mỗ Nam Từ Liêm', '351', NULL, NULL, NULL, 1, '2024-11-19 09:59:05', '2024-11-19 09:59:05', 2),
+(416, 'KH-00000416', 'Chị Thuý Đoàn - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-19 10:50:36', '2024-11-19 10:50:36', 2),
+(417, 'KH-00000417', 'Chị Huỳnh Phương - THQ', '44 đường số 17 phường 11 quận gò vấp', '1', NULL, NULL, NULL, 1, '2024-11-19 14:13:58', '2024-11-19 14:13:58', 2),
+(418, 'KH-00000418', 'Bích Phương', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-19 14:20:56', '2024-11-19 14:20:56', 28),
+(419, 'KH-00000419', 'Trang Nguyên Hồng', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-19 14:36:48', '2024-11-19 14:36:48', 28),
+(420, 'KH-00000420', 'Vườn trà Cherry-HQT', '129A Nguyễn Huệ, Quy Nhơn', '5558', NULL, NULL, NULL, 1, '2024-11-19 14:40:37', '2024-11-19 14:40:37', 2),
+(421, 'KH-00000421', 'Đoàn Tt Thuỳ', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-19 15:06:22', '2024-11-19 15:06:22', 28),
+(422, 'KH-00000422', 'Ms.Loan-HQT', '401AA Nguyễn văn cừ nối dài, an bình, ninh kiều, cần thơ', '2493', NULL, NULL, NULL, 1, '2024-11-19 16:31:27', '2024-11-19 16:31:27', 33),
+(423, 'KH-00000423', 'Ms.Hằng - (HQT)', 'Bình Dương - Bến Cát', '1035', NULL, NULL, NULL, 1, '2024-11-19 16:32:33', '2024-11-19 16:32:33', 33),
+(424, 'KH-00000424', 'Mr.Sáng - HQT', 'Vũ Trọng Phụng', '351', NULL, NULL, NULL, 1, '2024-11-19 17:02:48', '2024-11-19 17:02:48', 33),
+(425, 'KH-00000425', 'Anh Thư', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-20 10:53:29', '2024-11-20 10:53:29', 28),
+(426, 'KH-00000426', 'Anh Tuấn _ HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-20 14:47:34', '2024-11-20 14:47:34', 2),
+(427, 'KH-00000427', 'Chị Tran Ha Thu - In Hồ Gia', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-20 15:20:05', '2024-11-20 15:20:05', 2),
+(428, 'KH-00000428', 'Anh Lĩnh - SONA', 'CT2B VOV Mễ Trì', '351', NULL, NULL, NULL, 1, '2024-11-20 16:30:08', '2024-11-20 16:30:08', 2),
+(429, 'KH-00000429', 'Chị Liên Hải Phòng - HQT', '20/292 Lạch Tray, Kênh Dương, Lê Châu', '1478', NULL, NULL, NULL, 1, '2024-11-20 16:38:26', '2024-11-20 16:38:26', 2),
+(430, 'KH-00000430', 'Vũ Hằng', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-20 17:10:24', '2024-11-20 17:11:08', 28),
+(431, 'KH-00000431', 'Mr.Cao Dũng - HQT', 'Tây Sơn', '351', NULL, '0986212338', NULL, 1, '2024-11-21 08:07:44', '2024-11-21 08:07:44', 33),
+(432, 'KH-00000432', 'Mr.Quân - HQT', 'kdc Sa Đéc, p.Hùng Vương', '8560', NULL, NULL, NULL, 1, '2024-11-21 08:09:44', '2024-11-21 08:09:45', 33),
+(433, 'KH-00000433', 'CÔNG TY TNHH THƯƠNG MẠI ĐẠI LỢI', '59 Vĩnh Lưu, p. Đông Hải 1, q. hải An, HP', '1478', '0900220978', NULL, NULL, 1, '2024-11-21 08:43:55', '2024-11-21 08:44:09', 2),
+(434, 'KH-00000434', 'Ánh Nhung', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-21 09:10:28', '2024-11-21 09:10:28', 28),
+(435, 'KH-00000435', 'Chị Lê Kim - HQT', '88-90 võ văn kiệt ĐƯỜNG Võ Văn Kiệt, P.An Hoà, Q.Ninh Kiều, TP.Cần Thơ', '2493', NULL, NULL, NULL, 1, '2024-11-21 09:11:22', '2024-11-21 09:11:22', 2),
+(436, 'KH-00000436', 'Mr.Phạm Tuân - HQT', 'Hải Duơng', '4737', NULL, NULL, NULL, 1, '2024-11-21 13:53:37', '2024-11-21 13:53:37', 33),
+(437, 'KH-00000437', 'Ms.Nguyệt - HQT', 'Hà Nội', '351', NULL, '0983239119', NULL, 1, '2024-11-21 15:09:17', '2024-11-21 15:09:17', 33),
+(438, 'KH-00000438', 'Mr.Nam NAC - HQT', 'Hà Nội', '351', NULL, '086 2103902', NULL, 1, '2024-11-21 15:23:48', '2024-11-21 15:23:48', 33),
+(439, 'KH-00000439', 'Dương Liên', '11 Kim Đồng, Giáp Bát, Hoàng Mai, HN', '351', NULL, NULL, NULL, 1, '2024-11-22 10:01:05', '2024-11-22 10:01:05', 28),
+(440, 'KH-00000440', 'Ms.Tuyết - HQT', 'xã Hiệp Thuận, huyện Phúc Thọ', '351', NULL, '0989.746.458', NULL, 1, '2024-11-22 10:03:56', '2024-11-22 10:03:56', 33),
+(441, 'KH-00000441', 'Đại Lý Long Nga', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-22 10:47:23', '2024-11-22 10:47:23', 28),
+(442, 'KH-00000442', 'Ms.Võ Huyền - HQT', 'Kiên Giang', '3061', NULL, NULL, NULL, 1, '2024-11-22 13:51:31', '2024-11-22 13:51:44', 33),
+(443, 'KH-00000443', 'Can Rượu Vang Wineboss', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-22 14:10:02', '2024-11-22 14:10:02', 28),
+(444, 'KH-00000444', 'Hoài Thu', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-22 16:05:33', '2024-11-22 16:05:33', 28),
+(445, 'KH-00000445', 'Hưng smile', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-22 16:09:27', '2024-11-22 16:09:27', 28),
+(446, 'KH-00000446', 'CÔNG TY MÁY BAO BÌ VŨ GIA', 'Km số 3, đường Phan Trọng Tuệ (đường 70), Phường Tam Hiệp, Thanh Trì, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-23 01:42:08', '2024-11-23 01:42:08', 27),
+(447, 'KH-00000447', 'Chị Nga - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-23 08:11:20', '2024-11-23 08:11:20', 2),
+(448, 'KH-00000448', 'Chị Kim Chi - HQT', 'Số 23 ngõ 85 Hạ Đình', '351', NULL, NULL, NULL, 1, '2024-11-23 08:27:36', '2024-11-23 08:27:36', 2),
+(449, 'KH-00000449', 'Chị Oanh Konica - HQT', '66 Lê Đình Chinh, P.Hoà Quý, Q.Ngũ Hành Sơn, TP.Đà Nẵng', '969', NULL, NULL, NULL, 1, '2024-11-23 09:02:27', '2024-11-23 09:02:27', 2),
+(450, 'KH-00000450', 'Mr.Ngọc Duy - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-23 10:07:02', '2024-11-23 10:07:02', 33),
+(451, 'KH-00000451', 'Mr.Hoàng Hiếu - HQT', 'Quán Toan - Hải Phòng', NULL, NULL, NULL, NULL, 1, '2024-11-23 11:59:32', '2024-11-23 12:01:51', 33),
+(452, 'KH-00000452', 'Khoa TD- HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-23 15:34:44', '2024-11-23 15:34:44', 2),
+(453, 'KH-00000453', 'Chị Anh', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-23 15:37:59', '2024-12-05 03:10:26', 36),
+(454, 'KH-00000454', 'Chị Dung Kjn - HQT', 'số 1 ngõ 269 Giáp Bát', '351', NULL, NULL, NULL, 1, '2024-11-23 15:45:28', '2024-11-23 15:45:28', 2),
+(455, 'KH-00000455', 'Chị Trang Anh - HQT', 'Hà Đông', '351', NULL, NULL, NULL, 1, '2024-11-23 16:39:12', '2024-11-23 16:39:12', 2),
+(456, 'KH-00000456', 'Anh Diệp Trần', 'Ngõ 165 phố Yên Duyên, Yên Sở, Hoàng Mai.', '351', NULL, NULL, NULL, 1, '2024-11-23 16:43:50', '2024-11-23 16:43:50', 2),
+(457, 'KH-00000457', 'Ms.Hảo Nguyễn - HQT', 'Đà Nẵng', '969', NULL, NULL, NULL, 1, '2024-11-25 08:13:22', '2024-11-25 08:13:22', 33),
+(458, 'KH-00000458', 'Hoàng Phi', '492 lý thái tổ bến cam, Xã Phước Thiền, Huyện Nhơn Trạch, Đồng Nai', '1137', NULL, NULL, NULL, 1, '2024-11-25 08:20:51', '2024-11-25 08:22:25', 28),
+(459, 'KH-00000459', 'Chị Hạnh Hoàng - HQT', 'Sn 35 lk 11b kđt mỗ lao', '351', NULL, NULL, NULL, 1, '2024-11-25 09:03:14', '2024-11-25 09:03:14', 2),
+(460, 'KH-00000460', 'Nga Gầy', '238 quang trung tk3 phường hải hoà thị xã nghi sơn thanh hoá.', '3563', NULL, NULL, NULL, 1, '2024-11-25 09:18:45', '2024-11-25 09:20:08', 28),
+(461, 'KH-00000461', 'Ms.Kim Jung - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-25 10:15:27', '2024-11-25 10:20:16', 33),
+(462, 'KH-00000462', 'Ms.Hà Vy - HQT', 'Đông Anh', '351', NULL, NULL, NULL, 1, '2024-11-25 10:27:21', '2024-11-25 10:27:21', 33),
+(463, 'KH-00000463', 'Ms.Ngát Đinh - HQT', 'Gia Lâm', '351', NULL, '0365599988', NULL, 1, '2024-11-25 11:29:10', '2024-11-25 11:29:10', 33),
+(464, 'KH-00000464', 'CÔNG TY CỔ PHẦN PNA GLOBAL', 'XaLa Hà Nội', '351', NULL, '0969.00.99.66', NULL, 1, '2024-11-25 11:54:11', '2024-11-25 11:54:11', 33),
+(465, 'KH-00000465', 'Rượu Ngoại Rồng Xanh', 'Thanh Hoá', '3563', NULL, NULL, NULL, 1, '2024-11-25 11:54:50', '2024-11-25 11:57:29', 28),
+(466, 'KH-00000466', 'Rượu Ngoại Rồng Xanh', 'Thanh Hoá', '3563', NULL, NULL, NULL, 1, '2024-11-25 11:57:33', '2024-11-25 11:57:33', 28),
+(467, 'KH-00000467', 'In Offset', 'Triều Khúc', '351', NULL, NULL, NULL, 1, '2024-11-25 13:36:21', '2024-11-25 13:36:21', 2),
+(468, 'KH-00000468', 'Mai Hồng Bbg', '16 Thi Sách, Phạm Đình Hổ, HBT', '351', NULL, NULL, NULL, 1, '2024-11-25 14:15:14', '2024-11-25 14:15:14', 28),
+(469, 'KH-00000469', 'Chị Phương Dung - HQT', 'Triều Khúc', '351', NULL, NULL, NULL, 1, '2024-11-25 15:25:03', '2024-11-25 15:25:03', 2),
+(470, 'KH-00000470', 'Khiếu Kiều Anh', 'Thôn Thắng Cựu, xã Phú Xuân, Tp Thái Bình.', '351', NULL, NULL, NULL, 1, '2024-11-26 08:35:29', '2024-11-26 08:35:29', 28),
+(471, 'KH-00000471', 'Hường Lê', '386 trịnh đình cửu, định công, hoàng mai', '351', NULL, NULL, NULL, 1, '2024-11-26 08:53:17', '2024-11-26 08:56:57', 28),
+(472, 'KH-00000472', 'CÔNG TY TNHH THƯƠNG MẠI VÀ DỊCH VỤ VẬN TẢI GOLDEN CHOICE', 'Số 81 Vĩnh Tiến 1, Phường Vĩnh Niệm, Quận Lê Chân, Thành phố Hải Phòng, Việt Nam', '351', '0201859458', NULL, NULL, 1, '2024-11-26 10:16:07', '2024-11-26 10:16:07', 2),
+(473, 'KH-00000473', 'Chị Mai yến sào - HQT', '8 Tố Hữu, Thanh Xuân, HN', '351', NULL, NULL, NULL, 1, '2024-11-26 13:49:18', '2024-11-26 13:49:18', 2),
+(474, 'KH-00000474', 'C Thơm', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-26 14:30:37', '2024-11-26 14:30:37', 28),
+(475, 'KH-00000475', 'Ms.Thu Hà - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-26 15:21:42', '2024-11-26 15:21:42', 33),
+(476, 'KH-00000476', 'Chị Lê Nhung - HQT', 'Vạn Phúc, Hà Đông', '351', NULL, NULL, NULL, 1, '2024-11-26 15:50:52', '2024-11-26 15:50:52', 2),
+(477, 'KH-00000477', 'Thanh Thuỷ Nguyễn', 'Số 9 ngách 31 ngõ 138 Đường Ỷ La, Phường Dương Nội, Quận Hà Đông, Tp Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-26 16:59:55', '2024-11-26 16:59:55', 28),
+(478, 'KH-00000478', 'DungKr', 'số 97 phố bùi thị xuân , phường lê thanh nghị , tp Hải dương', '351', NULL, NULL, NULL, 1, '2024-11-27 08:30:46', '2024-11-27 08:30:46', 28),
+(479, 'KH-00000479', 'Chị Chi - HQT', 'Chung cư A1, ngõ 80 Hoàng Đạo Thành, Kim Giang', '351', NULL, NULL, NULL, 1, '2024-11-27 10:45:00', '2024-11-27 10:45:00', 2),
+(480, 'KH-00000480', 'CÔNG TY CP QUÝ PHÁT', '22OBT1 Khu đô thị Bắc Linh Đàm, P. Đại Kim, Quận Hoàng Mai, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-27 11:31:26', '2024-11-27 11:31:26', 2),
+(481, 'KH-00000481', 'Thu Hằng', '201 khâm thiên', '351', NULL, NULL, NULL, 1, '2024-11-27 13:30:22', '2024-11-27 13:30:22', 28),
+(482, 'KH-00000482', 'Ms.An - HQT', 'Bắc Từ Liêm', '351', NULL, NULL, NULL, 1, '2024-11-27 13:45:46', '2024-11-27 13:45:46', 33),
+(483, 'KH-00000483', 'Chị Hằng - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-27 15:47:45', '2024-11-27 15:47:45', 2),
+(484, 'KH-00000484', 'Chị Quỳnh Anh - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-27 17:28:47', '2024-11-27 17:28:47', 2),
+(485, 'KH-00000485', 'CÔNG TY TNHH ĐIỆN STANLEY VIỆT NAM', 'Thôn Yên Bình, Xã Dương Xá, Huyện Gia Lâm, Thành phố Hà Nội, Việt Nam', '351', '0100114515', NULL, NULL, 1, '2024-11-28 10:50:17', '2024-11-28 10:50:17', 2),
+(486, 'KH-00000486', 'Trunghaudo', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-28 11:42:53', '2024-11-28 11:42:53', 28),
+(487, 'KH-00000487', 'Mr.Văn Việt - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-28 12:00:18', '2024-11-28 12:00:18', 33),
+(488, 'KH-00000488', 'Ms.Cao Duyên - HQT', 'xã bình đông, huyện bình sơn', '7715', NULL, NULL, NULL, 1, '2024-11-28 14:26:11', '2024-11-28 14:26:11', 33),
+(489, 'KH-00000489', 'Shop đồ hàng không  Thế giới đồ hàng ko', 'chung cư erowindow, đông hội, đông anh', '351', NULL, NULL, NULL, 1, '2024-11-28 15:33:48', '2024-11-28 15:33:48', 28),
+(490, 'KH-00000490', 'Anh Việt UK', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-28 17:14:00', '2024-11-28 17:14:01', 28),
+(491, 'KH-00000491', 'Ms.Hồng Thanh - HQT', 'Duy Tân', '351', NULL, NULL, NULL, 1, '2024-11-29 09:01:49', '2024-11-29 09:01:49', 33),
+(492, 'KH-00000492', 'Hương Sam', 'Số 19 ngõ 27 Đại Cồ Việt Hai Bà Trưng Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-29 09:50:23', '2024-11-29 09:50:23', 28),
+(493, 'KH-00000493', 'Chị Hoa - HQT', 'Vincom Tuyên Quang', '10869', NULL, NULL, NULL, 1, '2024-11-29 11:44:19', '2024-11-29 11:44:19', 2),
+(494, 'KH-00000494', 'Chị Cẩm Tiên - HQT', '129 D1 Nguyễn Đình Chính, Phường 8 , Quận Phú Nhuận', '1', NULL, NULL, NULL, 1, '2024-11-29 11:47:38', '2024-11-29 11:47:39', 2),
+(495, 'KH-00000495', 'Ms.My - HQT', 'Trung Kính', '351', NULL, NULL, NULL, 1, '2024-11-29 16:17:43', '2024-11-29 16:17:43', 33),
+(496, 'KH-00000496', 'Ms.Hà Jin - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-29 16:35:44', '2024-11-29 16:36:27', 33),
+(497, 'KH-00000497', 'Chị Hiền - HQT', 'Số 132 đường Minh Cầu, Thái Nguyên', '7106', NULL, NULL, NULL, 1, '2024-11-30 08:25:52', '2024-11-30 08:25:52', 2),
+(498, 'KH-00000498', 'Hàng Nhật Nội Địa - HQT', 'Chung cư TSQ Mỗ Lao, Hà Đông', '351', NULL, NULL, NULL, 1, '2024-11-30 09:41:52', '2024-11-30 09:41:52', 2),
+(499, 'KH-00000499', 'Chị Ngô Phương Thảo - HQT', 'Sn 578 đặng châu tuệ, km12 quang hanh, cẩm phả, quảng ninh', '3359', NULL, NULL, NULL, 1, '2024-11-30 09:59:54', '2024-11-30 09:59:54', 2),
+(500, 'KH-00000500', 'Chị Thuỳ Dung (Ellie Moore) - HQT', '173 Trung Kính', '351', NULL, NULL, NULL, 1, '2024-11-30 10:12:20', '2024-11-30 10:12:20', 2),
+(501, 'KH-00000501', 'Chị Thu Huyền - HQT', 'HN', '351', NULL, NULL, NULL, 1, '2024-11-30 10:33:27', '2024-11-30 10:33:28', 2),
+(502, 'KH-00000502', 'Chị Thảo', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-30 14:24:06', '2024-11-30 14:24:07', 28),
+(503, 'KH-00000503', 'Anh Thái', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-30 14:25:02', '2024-11-30 14:25:02', 28),
+(504, 'KH-00000504', 'Ms.Lê Anh Minh - HQT', 'Mễ Trì', '351', NULL, NULL, NULL, 1, '2024-11-30 15:02:59', '2024-11-30 15:02:59', 33),
+(505, 'KH-00000505', 'Ms.Thuỳ Anh - HQT', 'Đà Nẵng', '969', NULL, NULL, NULL, 1, '2024-11-30 16:33:47', '2024-11-30 16:33:47', 33),
+(506, 'KH-00000506', 'Ms.Nguyễn Lệ - HQT', 'Hà Đông', '351', NULL, '0369800905', NULL, 1, '2024-11-30 16:43:22', '2024-12-22 14:07:11', 33),
+(507, 'KH-00000507', 'Ms.Hoà - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-11-30 16:48:57', '2024-11-30 16:49:44', 33),
+(508, 'KH-00000508', 'Chị Ngọc Bích - THQ', 'Thôn Thị Tứ, Võ Lao, Văn Bàn, Lào Cai', '7298', NULL, NULL, NULL, 1, '2024-12-02 08:10:38', '2024-12-02 08:10:38', 2),
+(509, 'KH-00000509', 'Chị Minh Nhi - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-02 10:34:55', '2024-12-02 10:34:55', 33),
+(510, 'KH-00000510', 'Ms.Mai  - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-02 10:41:24', '2024-12-02 10:41:57', 33),
+(511, 'KH-00000511', 'Công Ty Minh Hương', '51 Nguyễn Sơn, Phường Đông Vệ, TP Thanh Hóa', '3563', NULL, NULL, NULL, 1, '2024-12-02 10:42:33', '2024-12-02 10:42:33', 28),
+(512, 'KH-00000512', 'Mr.Mạnh Hùng - HQT', 'Nguyễn Khang', '351', NULL, NULL, NULL, 1, '2024-12-02 10:51:39', '2024-12-02 10:51:39', 33),
+(513, 'KH-00000513', 'công ty cổ phần Nisko Việt Nam', 'N09B2 Thành Thái, Dịch Vọng, Cầu Giấy', '351', NULL, NULL, NULL, 1, '2024-12-02 11:02:39', '2024-12-02 11:02:39', 10),
+(514, 'KH-00000514', 'Ms.Thanh Huyền - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-02 11:11:24', '2024-12-02 11:11:24', 33),
+(515, 'KH-00000515', 'Siêu Thị Huy Hùng', 'Từ Sơn, Bắc Ninh', '3222', NULL, NULL, NULL, 1, '2024-12-02 11:43:40', '2024-12-02 11:43:40', 28),
+(516, 'KH-00000516', 'Royal Wine - Nghĩa Tân', '109b9 nghĩa tân cầu giấy hà nội', '351', NULL, NULL, NULL, 1, '2024-12-02 13:44:01', '2024-12-02 13:44:01', 28),
+(517, 'KH-00000517', 'Ms.Mai Phương - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-02 14:25:37', '2024-12-02 14:25:37', 33),
+(518, 'KH-00000518', 'Anh Thắm - Royal wine', 'Số 15 ngách 39 ngõ 29 phố Khương Hạ, phường Khương Đình, quận Thanh Xuân, HN', '351', NULL, NULL, NULL, 1, '2024-12-03 08:30:46', '2024-12-03 08:30:46', 28),
+(519, 'KH-00000519', 'Tâm In An Anh  In Đẹp Tại Xưởng', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-03 09:04:59', '2024-12-03 09:04:59', 28),
+(520, 'KH-00000520', 'Vân Anh Gblife Sữa Non', 'Bt5.17 ngoại giao đoàn', '351', NULL, NULL, NULL, 1, '2024-12-03 09:12:39', '2024-12-03 09:12:39', 28),
+(521, 'KH-00000521', 'Phượng Hoàng', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-03 10:12:25', '2024-12-03 10:12:25', 28),
+(522, 'KH-00000522', 'Ms.Mai Anh - HQT', 'HN', '351', NULL, NULL, NULL, 1, '2024-12-03 11:09:14', '2024-12-03 11:09:14', 33),
+(523, 'KH-00000523', 'CÔNG TY TNHH THƯƠNG MẠI VÀ XUẤT NHẬP KHẨU PDV', 'Nhà số 9, Xóm Nhị Hà, Thôn Lực Canh, Xã Xuân Canh, Huyện Đông Anh, Thành phố Hà Nội, Việt Nam', '351', '0109780703', NULL, NULL, 1, '2024-12-03 11:52:51', '2024-12-03 11:52:51', 2),
+(524, 'KH-00000524', 'CÔNG TY TNHH THƯƠNG MẠI VÀ XUẤT NHẬP KHẨU PDV', 'Nhà số 9, Xóm Nhị Hà, Thôn Lực Canh, Xã Xuân Canh, Huyện Đông Anh, Thành phố Hà Nội, Việt Nam', '351', '0109780703', NULL, NULL, 1, '2024-12-03 11:52:55', '2024-12-03 11:54:22', 2),
+(525, 'KH-00000525', 'Mr.Hoàng Quân - HQT', 'Lô 35 Đường số 4, KCN An Đồn, An Hải Bắc, Sơn Trà', '969', NULL, NULL, NULL, 1, '2024-12-03 13:32:01', '2024-12-03 13:32:01', 33),
+(526, 'KH-00000526', 'Xpr Dental Care', '64 Cao Đức Lân p An Phú Q2', '1', NULL, NULL, NULL, 1, '2024-12-03 13:46:48', '2024-12-03 13:46:48', 28),
+(527, 'KH-00000527', 'Duong Yen', '79 dịch vọng hậu cầu giấy', '351', NULL, NULL, NULL, 1, '2024-12-03 14:03:25', '2024-12-03 14:03:25', 28),
+(528, 'KH-00000528', 'Chị Phương Lạc Trung', '46 ngõ 230 Lạc Trung', '351', NULL, NULL, NULL, 1, '2024-12-03 14:09:56', '2024-12-03 14:09:56', 26),
+(529, 'KH-00000529', 'CÔNG TY TNHH CÔNG NGHIỆP THƯƠNG MẠI NỘI BÀI', 'Số 161 phố Kim Anh, xã Thanh Xuân, Huyện Sóc Sơn, Thành phố Hà Nội.', '351', '0104046048', NULL, NULL, 1, '2024-12-03 14:22:42', '2024-12-21 19:22:52', 26),
+(530, 'KH-00000530', 'Chị Ánh Nguyệt - HQT', 'số 3 ngõ 286 Ngọc Thuỵ, Long Biên, HN', '351', NULL, NULL, NULL, 1, '2024-12-03 14:23:21', '2024-12-03 14:24:10', 2),
+(531, 'KH-00000531', 'Ms Thái', 'Số 309 đường trường chinh phường đồng Xuân phúc yên T.VP', '6854', NULL, NULL, NULL, 1, '2024-12-03 14:55:18', '2024-12-03 14:55:18', 35),
+(532, 'KH-00000532', 'Chị Trang Lê - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-03 15:31:20', '2024-12-03 15:31:20', 2),
+(533, 'KH-00000533', 'Chị Dung Quảng Bình', 'Đồng Hới', '9845', NULL, NULL, NULL, 1, '2024-12-03 15:53:37', '2024-12-03 15:53:37', 26),
+(534, 'KH-00000534', 'Thuỷ Hhc', 'B-TT8-6, khu nhà ở Him Lam Vạn Phúc, Phường Vạn Phúc, Quận Hà Đông, Thành phố Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-03 16:07:06', '2024-12-03 16:07:06', 28),
+(535, 'KH-00000535', 'Anh Tuấn Anh - HQT', '10/939 Trần Nhân Tông, Kiến An, Hải Phòng', '1478', NULL, NULL, NULL, 1, '2024-12-03 16:10:43', '2024-12-03 16:10:43', 2),
+(536, 'KH-00000536', 'Trần Thanh Mùi In Ấn Chuyên Nghiệp', 'Số 2 ngõ 65 Nguyễn Đổng Chí', '351', NULL, NULL, NULL, 1, '2024-12-03 16:34:08', '2024-12-03 16:34:08', 35),
+(537, 'KH-00000537', 'Chị Thơm- phúc diễn', '957 Phúc Diễn', '351', NULL, NULL, NULL, 1, '2024-12-04 08:31:02', '2024-12-04 08:36:46', 57),
+(538, 'KH-00000538', 'Minh lacoste', 'Số 27 Hải Đăng, Vinhomes Marina, Vĩnh Niệm, Lê Chân, Hải Phòng', '1478', NULL, NULL, NULL, 1, '2024-12-04 08:33:35', '2024-12-04 08:33:35', 28),
+(539, 'KH-00000539', 'Phan Mai', 'Thanh Hoá', '3563', NULL, NULL, NULL, 1, '2024-12-04 11:34:31', '2024-12-04 11:34:31', 28),
+(540, 'KH-00000540', 'Trinh Hong Dzung', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-04 11:38:46', '2024-12-04 11:38:46', 28),
+(541, 'KH-00000541', 'Hà Nguyễn', '31/78 Cầu Đất, Ngô Quyền', '1478', NULL, NULL, NULL, 1, '2024-12-04 13:04:04', '2024-12-04 13:04:04', 35),
+(542, 'KH-00000542', 'Gymekgroup', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-04 13:08:28', '2024-12-04 13:08:28', 28),
+(543, 'KH-00000543', 'Điện Hoa Minh Châu', '124 trần hưng đạo, thị trấn phú thái, kim thành, hải dương', '4737', NULL, NULL, NULL, 1, '2024-12-04 13:17:07', '2024-12-04 13:17:07', 28),
+(544, 'KH-00000544', 'Nhung', 'Bệnh viện đa khoa quang thành, quỳnh hồng, quỳnh lưu', '4230', NULL, NULL, NULL, 1, '2024-12-04 16:04:41', '2024-12-04 16:04:41', 35),
+(545, 'KH-00000545', 'K lẻ', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-04 16:32:02', '2024-12-04 16:32:02', 57),
+(546, 'KH-00000546', 'Hoa Ngô', '12, ĐƯỜNG Hồ Biểu Chánh, P.9, TP.Vũng Tàu, T.Bà Rịa - Vũng Tàu', '2198', NULL, NULL, NULL, 1, '2024-12-04 16:58:05', '2024-12-04 16:58:05', 35),
+(547, 'KH-00000547', 'Chị Phạm Hương - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-05 08:29:45', '2024-12-05 08:29:45', 2),
+(548, 'KH-00000548', 'Chị Nhung Roise', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-05 08:34:24', '2024-12-05 08:34:24', 2),
+(549, 'KH-00000549', 'Kami ( In Trung Kiên)', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-05 08:35:32', '2024-12-05 08:35:32', 2),
+(550, 'KH-00000550', 'Chị Ngọc Lan - HQT', 'Số 18 liền kề 8 tổng cục 5 Bộ Công An, yên xá , Tân triều , thanh trì', '351', NULL, NULL, NULL, 1, '2024-12-05 08:43:29', '2024-12-05 08:43:29', 2),
+(551, 'KH-00000551', 'Ms.Lệ Quyên - HQT', 'Hồ Giám', '351', NULL, '0974840488', NULL, 1, '2024-12-05 08:43:40', '2024-12-05 08:43:40', 33),
+(552, 'KH-00000552', 'Minh Moon', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-05 09:04:15', '2024-12-05 09:04:15', 28),
+(553, 'KH-00000553', 'Leona Trần - Vận tải Bắc Tiên Phong', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-05 09:19:43', '2024-12-05 09:19:43', 2),
+(554, 'KH-00000554', 'Mr.Ngọc - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-05 09:58:25', '2024-12-05 09:58:26', 33),
+(555, 'KH-00000555', 'Hiền Trà', 'Ninh Bình', '8405', NULL, NULL, NULL, 1, '2024-12-05 10:24:51', '2024-12-05 10:24:51', 28),
+(556, 'KH-00000556', 'Anh Trần Minh Tiến _ HQT', 'Ngô Quyền, Quang Trung, Hà Đông', '351', NULL, NULL, NULL, 1, '2024-12-05 11:20:58', '2024-12-05 11:20:58', 2),
+(557, 'KH-00000557', 'Chị Lương', 'hải dương', '4737', NULL, NULL, NULL, 1, '2024-12-05 11:41:52', '2024-12-05 11:41:52', 57),
+(558, 'KH-00000558', 'Tường Hi - HQT', 'K52/50 Lương Ngọc Quyến - Thuận Phước- Hải Châu Đà Nẵng', '969', NULL, NULL, NULL, 1, '2024-12-05 12:23:31', '2024-12-05 12:23:31', 2),
+(559, 'KH-00000559', 'Linh Lê', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-05 13:28:39', '2024-12-05 13:28:39', 28),
+(560, 'KH-00000560', 'Anh Phạm Văn Cường - HQT', 'Nhà hàng chim Hà Nam, Tân Triều', '351', NULL, NULL, NULL, 1, '2024-12-05 13:49:38', '2024-12-05 13:49:38', 2),
+(561, 'KH-00000561', 'Chị Hương - HQT', 'Hà Đông, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-05 15:27:52', '2024-12-05 15:27:52', 2),
+(562, 'KH-00000562', 'Fenfood', 'Số 2 ngách 72/3 Trần Vỹ, Cầu Giấy', '351', NULL, NULL, NULL, 1, '2024-12-05 15:29:08', '2024-12-05 15:29:08', 35),
+(563, 'KH-00000563', 'Ms.Hoàn - HQT', 'Long Biên', '351', NULL, NULL, NULL, 1, '2024-12-05 16:31:24', '2024-12-05 16:31:24', 33),
+(564, 'KH-00000564', 'Anh Sơn', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-05 17:09:53', '2024-12-05 17:09:53', 28),
+(565, 'KH-00000565', 'Hương Nguyễn Hospitality-pms', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-06 08:55:56', '2024-12-06 08:55:56', 28),
+(566, 'KH-00000566', 'Ms.Huyền Nguyễn - HQT', 'Mễ Trì', '351', NULL, NULL, NULL, 1, '2024-12-06 10:15:04', '2024-12-06 10:15:04', 33),
+(567, 'KH-00000567', 'UBND xã Hồng Minh  Phú Xuyên', 'Phú xuyên', '351', NULL, NULL, NULL, 1, '2024-12-06 11:10:21', '2024-12-06 11:10:21', 57),
+(568, 'KH-00000568', 'Ms.Ngọc Trà - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-06 11:30:40', '2024-12-06 11:30:40', 33),
+(569, 'KH-00000569', 'Duy Anh In Tiết Kiệm', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-06 13:29:23', '2024-12-06 13:29:23', 2),
+(570, 'KH-00000570', 'VuLen', 'Số 10 ngõ 51 Nguyễn Viết Xuân, Thanh Xuân, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-06 13:36:35', '2024-12-06 13:36:35', 35),
+(571, 'KH-00000571', 'Chị Minh Thương - HQT', 'số 12 ngõ 50 Nguỵ Như Kon Tum', '351', NULL, NULL, NULL, 1, '2024-12-06 14:23:42', '2024-12-06 14:23:42', 2),
+(572, 'KH-00000572', 'Hồ Nga', 'số 139 đường Phạm Đình Toái, Tp Vinh, Nghệ An', '4230', NULL, NULL, NULL, 1, '2024-12-06 15:46:08', '2024-12-06 15:46:08', 28),
+(573, 'KH-00000573', 'CÔNG TY CỔ PHẦN DƯỢC PHẨM EVER PHAR', 'Số 11 ngách 21 ngõ 111 Giáp Bát, Phường Giáp Bát, Quận Hoàng Mai, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-06 17:08:15', '2024-12-06 17:08:15', 35),
+(574, 'KH-00000574', 'Kim Dung', '38 Hoà Mã - Hai Bà Trưng', '351', NULL, NULL, NULL, 1, '2024-12-07 08:01:32', '2024-12-07 08:01:32', 28),
+(575, 'KH-00000575', 'Hanh Nguyen - HQT', '98, đường 3A, Khu dân cư Thới Nhựt 2, Phường An Khánh, Quận Ninh Kiều, Tp. Cần Thơ.', '2493', NULL, NULL, NULL, 1, '2024-12-07 09:11:42', '2024-12-07 09:11:42', 2),
+(576, 'KH-00000576', 'Chị Anna Nguyễn- HQT', '143 Nguyễn Tuân', '351', NULL, NULL, NULL, 1, '2024-12-07 10:03:08', '2024-12-07 10:03:09', 2),
+(577, 'KH-00000577', 'CÔNG TY CỔ PHẦN THƯƠNG MẠI VÀ DỊCH VỤ KỸ THUẬT THÀNH ĐẠT', 'Số 71 Đường Bờ Sông Quan Hoa, Phường Quan Hoa, Quận Cầu Giấy, TP Hà Nội, Việt Nam', '351', '0101516915', NULL, NULL, 1, '2024-12-07 10:29:39', '2024-12-07 10:29:39', 35),
+(578, 'KH-00000578', 'Rượu Vang Cao Minh - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-07 12:53:35', '2024-12-07 12:53:35', 33),
+(579, 'KH-00000579', 'Mr.Thế Thư - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-07 13:21:43', '2024-12-07 13:38:13', 33),
+(580, 'KH-00000580', 'Ms.Thanh Hiếu - HQT', 'Bắc Từ Liêm', '351', NULL, NULL, NULL, 1, '2024-12-07 13:29:08', '2024-12-07 13:29:08', 33),
+(581, 'KH-00000581', 'Chị Phương', 'Số 28a ngõ Kim Hoàng, Vân Canh, Hoài Đức', '351', NULL, NULL, NULL, 1, '2024-12-07 13:54:48', '2024-12-07 13:54:48', 35),
+(582, 'KH-00000582', 'In Ngân Hà Xanh', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-07 14:18:18', '2024-12-07 14:18:18', 28),
+(583, 'KH-00000583', 'Phạm Mạnh Tuấn', '16 Hàm Nghi', '351', NULL, NULL, NULL, 1, '2024-12-07 14:54:46', '2024-12-07 14:54:46', 28),
+(584, 'KH-00000584', 'Truong Duyen', 'Số 15 ngõ 521 cổ nhuế 2', '351', NULL, NULL, NULL, 1, '2024-12-07 15:29:45', '2024-12-07 15:29:45', 28),
+(585, 'KH-00000585', 'CÔNG TY CỔ PHẦN VINPHAM', '101-L03 KHU A, KĐT MỚI DƯƠNG NỘI, P. DƯƠNG NỘI, TP.HÀ NỘI', '351', '0110109899', NULL, NULL, 1, '2024-12-07 15:31:44', '2024-12-07 15:31:44', 35),
+(586, 'KH-00000586', 'Thanh Tâm', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-07 16:32:34', '2024-12-07 16:32:34', 28),
+(587, 'KH-00000587', 'Mr. Tuấn Hàng Buồm - HQT', 'Hàm Nghi', '351', NULL, NULL, NULL, 1, '2024-12-07 17:46:56', '2024-12-07 17:48:17', 33),
+(588, 'KH-00000588', 'Trần Thị Mão', '57A1 KĐT Đại Kim - P Định Công - Q Hoàng Mai - HN', '351', NULL, NULL, NULL, 1, '2024-12-09 08:53:54', '2024-12-09 08:53:55', 28),
+(589, 'KH-00000589', 'đinh hương', '272 Nguyễn Hoàng, Nam từ Liêm, HN', '351', NULL, NULL, NULL, 1, '2024-12-09 09:42:53', '2024-12-09 09:42:53', 28),
+(590, 'KH-00000590', 'Mazi Diot -HQT', 'số 12/183 đặng tiến đông đống đa', '351', NULL, NULL, NULL, 1, '2024-12-09 09:58:54', '2024-12-09 09:58:54', 2),
+(591, 'KH-00000591', 'Ha An Dang', 'sảnh văn phòng N01t2 Ngoại giao đoàn, bắc từ liêm, hà nội', '351', NULL, NULL, NULL, 1, '2024-12-09 10:26:46', '2024-12-09 10:26:46', 28),
+(592, 'KH-00000592', 'Phương', '25 Nguyễn Văn Cừ. TP Vinh, T. Nghệ An', '4230', NULL, NULL, NULL, 1, '2024-12-09 11:09:42', '2024-12-09 11:09:42', 35),
+(593, 'KH-00000593', 'Thu Thuỷ', 'Xuân Ngọc- Tam Anh Nam- Núi Thành- Quảng Nam', '1933', NULL, NULL, NULL, 1, '2024-12-09 11:50:40', '2024-12-09 11:50:40', 35),
+(594, 'KH-00000594', 'Công ty TNHH Cơ Điện Lạnh Vũ Lê Cường Phát', 'Tầng 3 Tòa B1 Tòa nhà Skycentral, 176 Định Công, Phường Định Công, Quận Hoàng Mai, Thành Phố Hà Nội, Việt Nam', '351', '0110197165', NULL, NULL, 1, '2024-12-09 11:57:19', '2024-12-09 11:57:19', 35),
+(595, 'KH-00000595', 'Ms.Tuyết Nhi - HQT', 'Long An', '1723', NULL, NULL, NULL, 1, '2024-12-09 13:18:56', '2024-12-09 13:18:56', 33),
+(596, 'KH-00000596', 'Thuỳ Dương', '140 quang trung hà đông', '351', NULL, NULL, NULL, 1, '2024-12-09 14:05:56', '2024-12-09 14:05:56', 35),
+(597, 'KH-00000597', 'Chị Thu Phương - HQT', 'số 46 ngõ 230 Lạc Trung, Thanh Lương, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-09 14:09:56', '2024-12-09 14:09:56', 2),
+(598, 'KH-00000598', 'Chị Vóc', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-09 14:18:29', '2024-12-09 14:18:29', 57),
+(599, 'KH-00000599', 'Thanh Thư', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-09 15:39:04', '2024-12-09 15:39:04', 28),
+(600, 'KH-00000600', 'Lê Thanh Lịch', '70/3 Nguyễn Du phường Thạch Thang quận Hải Châu TP Đà Nẵng.', '969', NULL, NULL, NULL, 1, '2024-12-10 08:20:23', '2024-12-10 08:20:23', 28),
+(601, 'KH-00000601', 'Ms.Linh Đỗ - HQT', 'Hoàn Kiếm', '351', NULL, NULL, NULL, 1, '2024-12-10 09:22:53', '2024-12-10 09:22:53', 33),
+(602, 'KH-00000602', 'Trang Nguyen', 'vietinbank minh đức- sài phi, minh đức, mỹ hào , hưng yên', '5385', NULL, NULL, NULL, 1, '2024-12-10 09:35:42', '2024-12-10 09:41:02', 28),
+(603, 'KH-00000603', 'Công ty TNHH MTV Bao bì giấy Giai Mỹ', 'Phường An Tây, Thành Phố Bến Cát', '1035', NULL, NULL, NULL, 1, '2024-12-10 09:56:49', '2024-12-10 09:56:49', 33),
+(604, 'KH-00000604', 'Vũ Lệ Thuỷ', 'Số 18.13 BT2 Khu nhà ở sinh thái Xuân Phương, Đường Foresa 3, Phường Xuân Phương, Quận Nam Từ Liêm, Thành phố Hà Nội, Việt Nam', '351', NULL, NULL, NULL, 1, '2024-12-10 11:22:50', '2024-12-10 11:22:50', 28),
+(605, 'KH-00000605', 'Tít Bông', 'Sơn La', '10387', NULL, NULL, NULL, 1, '2024-12-10 14:50:07', '2024-12-10 14:50:08', 28),
+(606, 'KH-00000606', 'Thế giới mỹ phẩm Eva', 'Chung cư Rivana, Vĩnh Phú, Thuận An, Bình Dương', '1035', NULL, NULL, NULL, 1, '2024-12-10 15:10:02', '2024-12-10 15:10:03', 35),
+(607, 'KH-00000607', 'Đinh võ', '63/9/9 phạm văn nghị. Quận thanh khê , đà nẵng', '969', NULL, NULL, NULL, 1, '2024-12-10 15:21:53', '2024-12-10 15:21:53', 28),
+(608, 'KH-00000608', 'Linh', '21 Ngõ Giếng, Ô Chợ Dừa, Đống Đa, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-10 15:44:56', '2024-12-10 15:44:56', 35),
+(609, 'KH-00000609', 'anh Trần Đức Trung - HQT', 'Số 17, ngách 63/22/1 Đại Mỗ, Nam Từ Liêm, Hà Nội. (Gần ngã tư Tố Hữu - Vạn Phúc)', '351', NULL, NULL, NULL, 1, '2024-12-10 15:53:47', '2024-12-10 15:53:47', 2),
+(610, 'KH-00000610', 'Ms.Gia Linh', 'Mễ Trì', '351', NULL, NULL, NULL, 1, '2024-12-10 15:54:20', '2024-12-10 15:54:21', 33),
+(611, 'KH-00000611', 'Chị Minh Loan - HQT', 'số 20 Lạc Trung', '351', NULL, NULL, NULL, 1, '2024-12-10 15:59:57', '2024-12-10 15:59:57', 2),
+(612, 'KH-00000612', 'Chị Kim Liên - HQT', 'P203 tòa nhà CT6, KĐT Văn Khê, Phường La Khê, quận Hà Đông, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-10 16:03:15', '2024-12-10 16:03:15', 2),
+(613, 'KH-00000613', 'Ms.Ái Vy - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-10 16:12:44', '2024-12-10 16:12:44', 33),
+(614, 'KH-00000614', 'Nguyễn Hồng Lụa', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-10 17:17:57', '2024-12-10 17:17:57', 28),
+(615, 'KH-00000615', 'Ms.Hạnh - HQT', 'Cầu Giấy', '351', NULL, NULL, NULL, 1, '2024-12-10 17:32:08', '2024-12-10 17:32:08', 33),
+(616, 'KH-00000616', 'Phương Linh', 'Hải Phòng', '1478', NULL, NULL, NULL, 1, '2024-12-11 09:08:13', '2024-12-11 09:08:13', 28),
+(617, 'KH-00000617', 'Thương Thương', 'Số 3 nguyễn cảnh dị, đại kim, hà nội', '351', NULL, NULL, NULL, 1, '2024-12-11 10:18:26', '2024-12-11 10:18:26', 35),
+(618, 'KH-00000618', 'Tạp hoá Minh Hiếu', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-11 10:27:14', '2024-12-11 10:27:14', 28),
+(619, 'KH-00000619', 'Chị Hoài Thanh - HQT', 'Triều Khúc', '351', NULL, NULL, NULL, 1, '2024-12-11 10:54:25', '2024-12-11 10:54:25', 2),
+(620, 'KH-00000620', 'Chị Hồng Phạm - HQT', '125 Hoàng Ngân, Trung Hoà, CG', '351', NULL, NULL, NULL, 1, '2024-12-11 12:41:59', '2024-12-11 12:41:59', 2),
+(621, 'KH-00000621', 'Linh Chi', 'Cây xăng Minh Phước, số 80, đường 720, thôn 2, Vũ Hoà, Đức Linh, Bình Thuận', '2592', NULL, NULL, NULL, 1, '2024-12-11 13:07:56', '2024-12-11 13:07:56', 35),
+(622, 'KH-00000622', 'Thanh Siêm', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-11 13:53:48', '2024-12-13 08:19:46', 35),
+(623, 'KH-00000623', 'Shop Mẹ Ỉn', 'Tân lập,vĩnh ninh,vĩnh quỳnh,thanh trì', '351', NULL, NULL, NULL, 1, '2024-12-11 14:24:45', '2024-12-11 14:24:45', 57),
+(624, 'KH-00000624', 'CN Đỉnh Yến', 'KĐT Tân Tây Đô, Tân Lập, Đan Phượng, Hà Nội, Vietnam', '351', NULL, NULL, NULL, 1, '2024-12-11 14:38:02', '2024-12-11 14:38:02', 35),
+(625, 'KH-00000625', 'chị Nguyen Phuong Paint V Adhesive -HQT', 'Số 21, ngõ 216 Định Công, Hoàng Mai, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-11 14:40:44', '2024-12-11 14:40:44', 2),
+(626, 'KH-00000626', 'Dung Vu Phuong - HQT', 'Số 7A ngõ 178 Tây Sơn', '351', NULL, NULL, NULL, 1, '2024-12-11 16:06:34', '2024-12-11 16:06:34', 2),
+(627, 'KH-00000627', 'My Mabu', 'LK 01-07 Roman Plaza Tố Hữu, Đại Mỗ, Nam Từ Liêm, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-11 16:10:27', '2024-12-11 16:10:27', 28),
+(628, 'KH-00000628', 'Nguyễn Thị Ngọc Tuyết', '277/51/7 Bến Vân Đồn, Phường 2, Quận 4', '1', NULL, NULL, NULL, 1, '2024-12-11 17:15:09', '2024-12-11 17:15:09', 35),
+(629, 'KH-00000629', 'Ms.Minh Nguyệt - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-11 17:18:42', '2024-12-11 17:18:42', 33),
+(630, 'KH-00000630', 'Chị Hoa', '7/164/192 lê trọng tấn thanh xuân', '351', NULL, NULL, NULL, 1, '2024-12-12 09:17:08', '2024-12-12 09:17:08', 35),
+(631, 'KH-00000631', 'Minh Huyền', '48 Trần Kim Xuyến, Cầu Giấy, HN', '351', NULL, NULL, NULL, 1, '2024-12-12 09:18:19', '2024-12-12 09:18:19', 28),
+(632, 'KH-00000632', 'Siêu thi Đức Thành Định Công', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-12 09:50:11', '2024-12-12 09:50:11', 57),
+(633, 'KH-00000633', 'Siêu thị Đức Thành Đại Từ', '32 đại từ', '351', NULL, NULL, NULL, 1, '2024-12-12 09:51:08', '2024-12-12 09:51:08', 57),
+(634, 'KH-00000634', 'Siêu thị Đức Thành Đền Lừ', 'tầng 1 nhà E, KĐT Đền lừ', '351', NULL, NULL, NULL, 1, '2024-12-12 09:52:06', '2024-12-12 09:52:06', 57),
+(635, 'KH-00000635', 'Siêu thi Đức Thành Tân Mai', '152 Tân Mai', '351', NULL, NULL, NULL, 1, '2024-12-12 09:58:32', '2024-12-12 09:58:32', 57),
+(636, 'KH-00000636', 'Ms.Trang Nguyễn - HQT', 'Nguyễn Chánh', '351', NULL, NULL, NULL, 1, '2024-12-12 10:23:11', '2024-12-12 10:23:11', 33),
+(637, 'KH-00000637', 'Ms.Nguyễn Phượng - HQT', 'Hoài Đức', '351', NULL, NULL, NULL, 1, '2024-12-12 10:25:17', '2024-12-12 10:25:17', 33),
+(638, 'KH-00000638', 'Trang Nguyễn', 'DV03-LK141 Khu đất dịch vụ Đào đất – Hàng Bè, p. Kiến Hưng – q. Hà Đông - Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-12 11:55:53', '2024-12-12 11:55:53', 28),
+(640, 'KH-00000640', 'Nguyễn Ngọc Bảo Hân', '3A Thi Sách, Phạm Đình Hổ, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-12 13:07:30', '2024-12-12 13:07:30', 35),
+(641, 'KH-00000641', 'ST Phương Linh', 'Đội 5, Dị Chế, Tiên Lữ, Hưng yên', '5385', NULL, NULL, NULL, 1, '2024-12-12 15:02:16', '2024-12-12 15:02:16', 35),
+(642, 'KH-00000642', 'Ms.Huyền Thanh Nguyễn - HQT', 'Lê Chân', '1478', NULL, NULL, NULL, 1, '2024-12-12 15:26:53', '2024-12-12 15:26:53', 33),
+(643, 'KH-00000643', 'Ms.Ngọc Hà - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-12 16:16:41', '2024-12-12 16:16:42', 33),
+(644, 'KH-00000644', 'Loan Phạm', 'số 9 Lk 11A KĐT Mỗ Lao, Hà Đông.', '351', NULL, NULL, NULL, 1, '2024-12-12 16:44:59', '2024-12-12 16:44:59', 28),
+(645, 'KH-00000645', 'Nguyệt Tâm', 'Số 28 Ngô Thì Nhậm- yết Kiêu- hạ Long- Quảng Ninh', '1478', NULL, NULL, NULL, 1, '2024-12-12 17:08:32', '2024-12-12 17:08:32', 28),
+(646, 'KH-00000646', 'Lan Hương', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-12 17:28:37', '2024-12-12 17:28:37', 28),
+(647, 'KH-00000647', 'Lưu Trần Quỳnh Anh', '274 xuân lộc nghi kim tp vinh nghệ an', '4230', NULL, NULL, NULL, 1, '2024-12-13 08:01:37', '2024-12-13 08:01:37', 28),
+(648, 'KH-00000648', 'Hale', 'Nhà số 8 dg 6B-KDC Dương Hồng - bình hưng, bình chánh.', '1', NULL, NULL, NULL, 1, '2024-12-13 09:14:18', '2024-12-13 09:14:18', 28),
+(649, 'KH-00000649', 'Ms.Huyền Bùi - HQT', 'Hải Phòng', '1478', NULL, NULL, NULL, 1, '2024-12-13 09:37:36', '2024-12-13 09:37:36', 33),
+(650, 'KH-00000650', 'Trang Nguyễn', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-13 10:11:43', '2024-12-13 10:11:43', 28),
+(651, 'KH-00000651', 'Ms.Vũ Ngoan - HQT', 'Số 458 đường 208 an đồng - an dương - hải phòng', '1478', NULL, NULL, NULL, 1, '2024-12-13 10:29:13', '2024-12-13 10:29:13', 33),
+(652, 'KH-00000652', 'Ngọc Anh', '30 ngõ 1197 Giải Phóng', '351', NULL, NULL, NULL, 1, '2024-12-13 10:43:24', '2024-12-13 10:43:24', 28),
+(653, 'KH-00000653', 'Đặng Như Hà', 'K654 H17/1 Trưng Nữ Vương, P. Hoà thuận tây- Q. Hải châu- Đà Nẵng', '969', NULL, NULL, NULL, 1, '2024-12-13 11:14:26', '2024-12-13 11:14:26', 35),
+(654, 'KH-00000654', 'Doanh Hạnh Hàng Chiếu', '17 Hàng Chiếu', '351', NULL, NULL, NULL, 1, '2024-12-13 11:38:36', '2024-12-13 11:38:36', 28),
+(655, 'KH-00000655', 'Hương Giang', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-13 13:10:20', '2024-12-13 13:10:20', 28),
+(656, 'KH-00000656', 'Chị Mai', '8 Tố Hữu -Nhân Chính Thanh Xuân', '351', NULL, NULL, NULL, 1, '2024-12-13 13:55:20', '2024-12-13 13:55:20', 35);
+INSERT INTO `customers` (`id`, `code`, `name`, `address`, `city`, `tax_code`, `note`, `status`, `act`, `created_at`, `updated_at`, `created_by`) VALUES
+(657, 'KH-00000657', 'Phương Anh', 'HD09-SP.BH-10, Đường Biển Hồ, KĐT Vinhomes Ocean Park, Xã Đa Tốn, Huyện Gia Lâm, Thành phố Hà Nội, Việt Nam', '351', NULL, NULL, NULL, 1, '2024-12-13 14:07:12', '2024-12-13 14:07:12', 35),
+(658, 'KH-00000658', 'Ms.Vũ Liên - HQT', 'Hoài Đức', '351', NULL, NULL, NULL, 1, '2024-12-13 14:30:15', '2024-12-13 14:30:15', 33),
+(659, 'KH-00000659', 'Loan HR', 'Siêu thị Kmart, Đông Tảo, KHoái Châu, Hưng Yên', '5385', NULL, NULL, NULL, 1, '2024-12-13 16:05:43', '2024-12-13 16:05:44', 28),
+(660, 'KH-00000660', 'Ms.Lê Phượng - HQT', 'Long Biên', '351', NULL, NULL, NULL, 1, '2024-12-13 16:24:31', '2024-12-13 16:24:31', 33),
+(661, 'KH-00000661', 'Ms.Nhung (Anh Tú) - HQT', 'HQT - Mạc Thị Bưởi', '351', NULL, '0988301839', NULL, 1, '2024-12-13 16:41:19', '2024-12-13 16:41:19', 33),
+(662, 'KH-00000662', 'Phương Mai', '48 lê duẩn khe sanh hướng hóa quảng trị', '10025', NULL, NULL, NULL, 1, '2024-12-13 16:55:11', '2024-12-13 16:55:11', 28),
+(663, 'KH-00000663', 'Kim Tuyến', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-14 08:58:46', '2024-12-14 08:58:46', 35),
+(664, 'KH-00000664', 'Ms.Trang - HQTT', 'Ba Đình', '351', NULL, NULL, NULL, 1, '2024-12-14 11:16:36', '2024-12-14 11:16:36', 33),
+(665, 'KH-00000665', 'Đoàn Mạnh Hùng', '537 Bát Khối, Thạch Bàn', '351', NULL, NULL, NULL, 1, '2024-12-14 11:43:07', '2024-12-14 11:43:07', 28),
+(666, 'KH-00000666', 'Anh Tú', '208 Hoàng Văn Thái Tú-Thanh Xuân', '351', NULL, NULL, NULL, 1, '2024-12-14 12:10:02', '2024-12-14 12:11:53', 35),
+(667, 'KH-00000667', 'Đặng Huệ', 'Sảnh A toà udic complex Hoàng Đạo Thuý, Trung Hoà, Cầu Giấy', '351', NULL, NULL, NULL, 1, '2024-12-14 13:35:55', '2024-12-14 13:35:55', 35),
+(668, 'KH-00000668', 'Linh Phạm', '222 điện biên phủ , p bình hàn, tp hải dương', '4737', NULL, NULL, NULL, 1, '2024-12-14 14:12:11', '2024-12-14 14:12:11', 28),
+(669, 'KH-00000669', 'Ms.Trần Nguyên - HQT', 'Hưng Yên', '5385', NULL, NULL, NULL, 1, '2024-12-14 14:16:13', '2024-12-14 14:16:13', 33),
+(670, 'KH-00000670', 'Ms Huyền S-tec Vina', 'Xóm 8, Thi Sơn, Kim Bảng, Hà Nam', '9047', NULL, NULL, NULL, 1, '2024-12-14 14:18:13', '2024-12-14 14:18:13', 28),
+(671, 'KH-00000671', 'Ms.Hiền HQT', 'Cầu Giấy', '351', NULL, NULL, NULL, 1, '2024-12-14 14:25:28', '2024-12-14 14:25:28', 33),
+(672, 'KH-00000672', 'Nguyễn Trường Giang', '05 ngách 02 ngõ 68 đường Xuân nương phường Nông trang thành phố việt trì tỉnh Phú thọ', '8560', NULL, NULL, NULL, 1, '2024-12-14 15:46:09', '2024-12-14 15:46:09', 35),
+(673, 'KH-00000673', 'Ms.Phương Ji -HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-14 16:06:58', '2024-12-14 16:06:59', 33),
+(674, 'KH-00000674', 'Ms.Thuy Linh Bao Bì Hupuna - HQT', 'Tân Triều, Thanh Trì', '351', NULL, NULL, NULL, 1, '2024-12-14 16:11:09', '2024-12-28 16:43:12', 33),
+(675, 'KH-00000675', 'Lona Nguyễn', 'Ngõ 68 Triều Khúc', '351', NULL, NULL, NULL, 1, '2024-12-14 16:21:25', '2024-12-14 16:21:36', 35),
+(676, 'KH-00000676', 'Siêu thi Đức Thành - Tân Tây Đô', 'toà HHb- KĐT Tân tây đô- đan phượng', '351', NULL, NULL, NULL, 1, '2024-12-14 17:02:23', '2024-12-14 17:02:23', 57),
+(677, 'KH-00000677', 'Siêu thi Đức Thành - Phan đình phùng', '90 phan đình phùng- đan phượng', '351', NULL, NULL, NULL, 1, '2024-12-14 17:09:13', '2024-12-14 17:09:13', 57),
+(678, 'KH-00000678', 'Chị Lan Anh phủ lý', 'hà nam', '9047', NULL, NULL, NULL, 1, '2024-12-14 17:30:23', '2024-12-14 17:30:23', 57),
+(679, 'KH-00000679', 'CTY Khánh Vượng', 'làng nghề triều khúc', '351', NULL, NULL, NULL, 1, '2024-12-14 17:54:14', '2024-12-14 17:54:15', 57),
+(680, 'KH-00000680', 'Siêu thị Đức Thành- Ngoại giao đoàn', 'Toà nhà N01T4- chung cư ngoại giao đoàn- Xuân đỉnh- từ liêm', '351', NULL, NULL, NULL, 1, '2024-12-15 10:25:21', '2024-12-15 10:25:21', 57),
+(681, 'KH-00000681', 'Sumo Cháo', '11 Nguyễn Huy Tưởng, Thanh Xuân', '351', NULL, NULL, NULL, 1, '2024-12-15 10:26:00', '2024-12-15 10:26:00', 35),
+(682, 'KH-00000682', 'Siêu thị Đức Thành -Lê Văn Lương', 'Ct1 thepride- An Hưng, La Khê', '351', NULL, NULL, NULL, 1, '2024-12-15 10:27:02', '2024-12-15 10:27:02', 57),
+(683, 'KH-00000683', 'Siêu thị Đức Thành- Bà Triệu', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-15 10:28:00', '2024-12-15 10:28:01', 57),
+(684, 'KH-00000684', 'Mrs Mùi Hcns', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-15 10:35:57', '2024-12-15 10:35:57', 28),
+(685, 'KH-00000685', 'Linh Linhh', 'Số nhà 45 ngõ 86 tô vĩnh diện, khương trung, thanh xuân', '351', NULL, NULL, NULL, 1, '2024-12-15 11:12:07', '2024-12-15 11:12:07', 28),
+(686, 'KH-00000686', 'Công Ty Hoàng Hải Phát', 'số nhà 46 ngõ 178 đường giải phóng phường phương liệt quận thanh xuân.', '351', NULL, NULL, NULL, 1, '2024-12-15 11:14:56', '2024-12-15 11:14:56', 28),
+(687, 'KH-00000687', 'Bùi Đức Hà', 'tttm the pride la khê hà đông', '351', NULL, NULL, NULL, 1, '2024-12-15 11:27:19', '2024-12-15 11:27:19', 28),
+(688, 'KH-00000688', 'Vũ kiều trang', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-16 08:35:00', '2024-12-16 08:35:00', 28),
+(689, 'KH-00000689', 'Tit  Mit', 'Hợp thung thanh sơn lương sơn hoà bình', '6463', NULL, NULL, NULL, 1, '2024-12-16 09:27:58', '2024-12-16 09:27:58', 28),
+(690, 'KH-00000690', 'Chị Nguyệt', 'Chung cư Đại Kim - Phố Trần Hòa - Hoàng Mai', '351', NULL, NULL, NULL, 1, '2024-12-16 10:53:55', '2024-12-16 10:53:55', 10),
+(691, 'KH-00000691', 'Nguyễn Tuấn', '63 vạn phúc , hà đông , hà nội (gian E4.3 Công ty Hưng Vượng ,trong kho len hà đông )', '351', NULL, NULL, NULL, 1, '2024-12-16 11:12:07', '2024-12-16 11:12:07', 28),
+(692, 'KH-00000692', 'Đặng Hạnh', '88 Láng Hạ, đống đa HN', '351', NULL, NULL, NULL, 1, '2024-12-16 14:02:48', '2024-12-16 14:02:48', 28),
+(693, 'KH-00000693', 'Vietsu', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-16 15:26:34', '2024-12-16 15:26:34', 28),
+(694, 'KH-00000694', 'Chị Linh', 'Nguyễn Trãi, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-16 15:34:58', '2024-12-16 15:34:58', 35),
+(695, 'KH-00000695', 'Thai Ha', 'Số 26, phố Dương Đình Nghệ, phường Yên Hoà, quận Cầu Giấy, Thành phố Hà Nội, Việt Nam', '351', NULL, NULL, NULL, 1, '2024-12-16 15:43:26', '2024-12-16 15:43:26', 28),
+(696, 'KH-00000696', 'Nguyen Thi Huyen', '143 Đốc Ngữ, Ba Đình, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-16 16:39:08', '2024-12-16 16:39:08', 28),
+(697, 'KH-00000697', 'Mr.Phan Hùng - HQT', '0966637580', '8560', NULL, NULL, NULL, 1, '2024-12-16 17:54:47', '2024-12-16 17:54:47', 33),
+(698, 'KH-00000698', 'Cửa hàng vua đặc sản', 'Vũ Trọng Phụng', '351', NULL, NULL, NULL, 1, '2024-12-17 08:10:58', '2024-12-17 08:10:58', 33),
+(699, 'KH-00000699', 'Ms.Lâm Lâm-HQT', 'Đường Láng', '351', NULL, NULL, NULL, 1, '2024-12-17 08:14:33', '2024-12-17 08:14:33', 33),
+(700, 'KH-00000700', 'Thi Trần', '55 ngõ 80 đường trần nhân tông vườn hoa ninh phúc, ninh bình', '8405', NULL, NULL, NULL, 1, '2024-12-17 08:35:32', '2024-12-17 08:35:32', 35),
+(701, 'KH-00000701', 'Mùa Đinh', 'Nhà số 2 ngách 8 ngõ 129 Đại đình - tân hồng từ sơn - bắc ninh', '3222', NULL, NULL, NULL, 1, '2024-12-17 09:34:29', '2024-12-17 09:34:30', 28),
+(702, 'KH-00000702', 'Ms.Loan - THQ', 'Hoà Bình', '6463', NULL, NULL, NULL, 1, '2024-12-17 09:49:48', '2024-12-17 09:49:48', 33),
+(703, 'KH-00000703', 'CÔNG TY TNHH BAO BI VÀ IN TOÀN PHÁT', '352 đường Giải Phóng, Quận Thanh Xuân, Hà Nội.', '351', NULL, NULL, NULL, 1, '2024-12-17 10:06:20', '2024-12-17 10:06:20', 33),
+(704, 'KH-00000704', 'Hoang Van', 'Đường Đoàn Bá Thừa, kp1, Đông Giang Đông Hà Quảng Trị', '10025', NULL, NULL, NULL, 1, '2024-12-17 10:07:47', '2024-12-17 10:07:47', 28),
+(705, 'KH-00000705', 'Mr.Tùng Linh - HQT', 'số 2 ngõ 279 Hoàng Mai', '351', NULL, NULL, NULL, 1, '2024-12-17 10:14:17', '2024-12-17 10:14:17', 33),
+(706, 'KH-00000706', 'Siêu thị Đức Thành -xala', 'Toà TTT1 xa la- hà đông', '351', NULL, NULL, NULL, 1, '2024-12-17 10:15:20', '2024-12-17 10:15:20', 57),
+(707, 'KH-00000707', 'Siêu thị Đức Thành -Thanh hà', 'HHC2- thanh hà', '351', NULL, NULL, NULL, 1, '2024-12-17 10:32:51', '2024-12-17 10:32:51', 57),
+(708, 'KH-00000708', 'Ms.Xuyến Rượu Vang - HQT', 'Ngõ 1A Tả Thanh Oai, Thanh Trì, HN', '351', NULL, NULL, NULL, 1, '2024-12-17 10:39:17', '2024-12-17 10:39:17', 33),
+(709, 'KH-00000709', 'Chị NguyenThanhHai - HQT', '20 Đại Từ Đại Kim quận Hoàng Mai Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-17 11:03:46', '2024-12-17 11:03:46', 2),
+(710, 'KH-00000710', 'Enkapharma', '12/7 Trần Công Hiến, phường Bình Hàn, TP Hải Dương', '4737', NULL, NULL, NULL, 1, '2024-12-17 11:12:32', '2024-12-17 11:12:32', 28),
+(711, 'KH-00000711', 'Cali Pharco - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-17 11:25:54', '2024-12-17 11:25:55', 2),
+(712, 'KH-00000712', 'Công ty Kara', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-17 11:39:13', '2024-12-17 11:39:13', 33),
+(713, 'KH-00000713', 'Ms.Huyền Trang - HQT', '125 Hoàng Ngân', '351', NULL, NULL, NULL, 1, '2024-12-17 11:52:53', '2024-12-17 11:52:53', 33),
+(714, 'KH-00000714', 'Hoàng Hà Vy', '306 võ văn tần p5 q3', '1', NULL, NULL, NULL, 1, '2024-12-17 12:04:12', '2024-12-17 12:04:12', 28),
+(715, 'KH-00000715', 'Duy Hiệp', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-17 14:23:54', '2024-12-17 14:23:54', 35),
+(716, 'KH-00000716', 'Thuỷ Koy - HQT', 'Nhà văn hoá Linh Đàm - phố Nam Sơn', '351', NULL, NULL, NULL, 1, '2024-12-17 14:56:43', '2024-12-17 14:56:43', 2),
+(717, 'KH-00000717', 'CÔNG TY TNHH ĐẦU TƯ SẢN XUẤT VÀ THƯƠNG MẠI SẮC MÀU VIỆT', 'P06, cầu thang 2, số nhà 30 phố Trần Quốc Toản, Phường Hàng Bài, Quận Hoàn Kiếm, Thành phố Hà Nội, Việt Nam', '351', '0105111846', NULL, NULL, 1, '2024-12-17 15:06:40', '2024-12-17 15:06:40', 2),
+(718, 'KH-00000718', 'Ms.Ngọc Anh - HQT', '384 Đại Kim, Hoàng Mai', '351', NULL, NULL, NULL, 1, '2024-12-17 15:07:48', '2024-12-17 15:07:48', 33),
+(719, 'KH-00000719', 'Anh Giáp', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-17 16:06:14', '2024-12-17 16:06:14', 28),
+(720, 'KH-00000720', 'Công ty In Bao Bì Trường Phát', 'Hoàng Mai', '351', NULL, NULL, NULL, 1, '2024-12-17 16:34:56', '2024-12-17 16:34:56', 33),
+(721, 'KH-00000721', 'Ms.Minh - HQT', 'Tây Mỗ', '351', NULL, NULL, NULL, 1, '2024-12-17 16:36:58', '2024-12-17 16:36:58', 33),
+(722, 'KH-00000722', 'Chị Bùi Thị Huyền', '381 Trường Chinh, Thanh Bình, Hải Dương', '4737', NULL, NULL, NULL, 1, '2024-12-17 16:44:28', '2024-12-17 16:44:28', 2),
+(723, 'KH-00000723', 'Chị Vân Ninh Bình', '78 Đinh Tiên Hoàng- Ninh BÌnh', '8405', NULL, NULL, NULL, 1, '2024-12-17 16:48:19', '2024-12-17 16:48:19', 57),
+(724, 'KH-00000724', 'Công ty Savino', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-17 16:57:43', '2024-12-17 16:57:43', 33),
+(725, 'KH-00000725', 'Bến Nông', 'số 1 ngõ 247 Nguyễn Văn Linh, Long Biên', '351', NULL, NULL, NULL, 1, '2024-12-18 07:56:11', '2024-12-18 07:56:11', 28),
+(726, 'KH-00000726', 'Thoa Huynh', '45 Ngô Lan Chi, Vĩnh Hoà, Nha Trang, Khánh Hoà', '1327', NULL, NULL, NULL, 1, '2024-12-18 09:43:37', '2024-12-18 09:43:37', 28),
+(727, 'KH-00000727', 'Nguyễn Kim Chi - An Lam Travel', '106 Thống Nhất - Nha Trang - Khánh Hòa', '1327', NULL, NULL, NULL, 1, '2024-12-18 10:15:51', '2024-12-18 10:15:51', 35),
+(728, 'KH-00000728', 'Hải Nguyễn Korea', 'Số 5 ngõ 129 Nguyễn Xiển', '351', NULL, NULL, NULL, 1, '2024-12-18 10:37:03', '2024-12-18 10:37:03', 35),
+(729, 'KH-00000729', 'Võ Thảo Ngân', 'Khu Đô Thị Nam Lê Lợi- Vinh', '4230', NULL, NULL, NULL, 1, '2024-12-18 11:01:24', '2024-12-18 11:01:24', 35),
+(730, 'KH-00000730', 'Hưởng Nguyễn', 'Bắc Ninh', '3222', NULL, NULL, NULL, 1, '2024-12-18 11:15:27', '2024-12-18 11:15:27', 28),
+(731, 'KH-00000731', 'Hưng Nguyễn', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-18 11:37:00', '2024-12-18 11:37:00', 28),
+(732, 'KH-00000732', 'CÔNG TY TNHH THƯƠNG MẠI VÀ XUẤT NHẬP KHẨU THẮNG LỢI', 'Hà Nội', '351', '0104895362', NULL, NULL, 1, '2024-12-18 12:05:34', '2024-12-18 12:05:35', 2),
+(733, 'KH-00000733', 'Hoàng Hồng Nhung', 'Số 4 ngõ 9 Liễu Giai', '351', NULL, NULL, NULL, 1, '2024-12-18 13:32:48', '2024-12-18 13:32:48', 28),
+(734, 'KH-00000734', 'Mr.Quy - HQT', 'Hà Nội', '351', NULL, '0972556685', NULL, 1, '2024-12-18 15:12:16', '2024-12-18 15:12:16', 33),
+(735, 'KH-00000735', 'TNHH DƯỢC MỸ PHẨM IRUBY', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-18 15:23:39', '2024-12-18 15:23:39', 28),
+(736, 'KH-00000736', 'Chị Bùi Thanh Giang - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-18 15:32:11', '2024-12-18 15:32:11', 2),
+(737, 'KH-00000737', 'Nguyễn Thị Hiền', '331f đường Bát Khối, phường Long Biên, quận Long Biên, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-18 15:49:26', '2024-12-18 15:49:26', 35),
+(738, 'KH-00000738', 'Lemay - HQT', 'nhà văn hoá TDP Hoàng Hanh', '351', NULL, NULL, NULL, 1, '2024-12-19 08:14:31', '2024-12-19 08:14:31', 2),
+(739, 'KH-00000739', 'In Hoàng Kim', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-19 09:00:14', '2024-12-19 09:00:14', 33),
+(740, 'KH-00000740', 'Anh Hà', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-19 10:05:49', '2024-12-19 10:05:49', 28),
+(741, 'KH-00000741', 'Lê Quân', 'Số 7, ngách 79/16, ngõ 79 cầu giấy', '351', NULL, NULL, NULL, 1, '2024-12-19 11:39:03', '2024-12-19 11:39:03', 28),
+(742, 'KH-00000742', 'Quỳnh Anh', 'số 139 khi Công Binh, p Vũ Ninh, tp Bắc Ninh', '3222', NULL, NULL, NULL, 1, '2024-12-19 12:06:34', '2024-12-19 12:06:34', 35),
+(743, 'KH-00000743', 'Ms.Lê Thảo - HQT', 'Hà Cầu, Hà Đông', '351', NULL, NULL, NULL, 1, '2024-12-19 12:55:30', '2024-12-19 12:55:30', 33),
+(744, 'KH-00000744', 'Mr.An - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-19 13:20:33', '2024-12-19 13:20:34', 33),
+(745, 'KH-00000745', 'Chị Linh', 'Trần Thủ Độ, Hoàng Mai', '351', NULL, NULL, NULL, 1, '2024-12-19 14:37:08', '2025-01-04 17:10:54', 35),
+(746, 'KH-00000746', 'Hương Bống In Ck', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-19 14:45:23', '2024-12-19 14:45:23', 28),
+(747, 'KH-00000747', 'Vũ Anh Tuấn', '32/112 Lê Lợi - Gia Viên - Ngô Quyền - HP', '1478', NULL, NULL, NULL, 1, '2024-12-19 14:58:19', '2024-12-19 14:58:19', 28),
+(748, 'KH-00000748', 'CÔNG TY TNHH XUẤT NHẬP KHẨU HÓA CHẤT MIỀN BẮC D.A.P', 'CL18-29 Khu đất dịch vụ La Dương, đường La Nội, Phường Dương Nội, Quận Hà Đông, Thành phố Hà Nội, Việt Nam', '351', '0110729902', NULL, NULL, 1, '2024-12-19 15:33:19', '2024-12-19 15:33:19', 35),
+(749, 'KH-00000749', 'Mr.Nguyễn Huynh - HQT', 'Dội Cấn', '6854', NULL, '0915140171', NULL, 1, '2024-12-19 15:41:22', '2024-12-19 15:41:22', 33),
+(750, 'KH-00000750', 'Công ty Việt Pháp', 'số 5A Biệt thự 5 bán đảo Linh Đàm, phường Hoàng Liệt, quận Hoàng Mai, TP Hà Nội,', '351', NULL, NULL, NULL, 1, '2024-12-19 16:39:55', '2024-12-19 16:39:55', 33),
+(751, 'KH-00000751', 'Khánh Nguyễn', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-20 09:03:56', '2024-12-20 09:03:56', 28),
+(752, 'KH-00000752', 'CÔNG TY TNHH UNITED TRANS VIỆT NAM', 'Số nhà 23 phố Thịnh Liệt, Phường Thịnh Liệt, Quận Hoàng Mai, Thành phố Hà Nội, Việt Nam', '351', '0108182066', NULL, NULL, 1, '2024-12-20 09:29:34', '2024-12-20 09:29:34', 2),
+(753, 'KH-00000753', 'Ms.Ngọc Hương - HQT', 'Sảnh A toà the zei - 8 lê đức thọ - nam từ liêm', '351', NULL, NULL, NULL, 1, '2024-12-20 10:00:44', '2024-12-20 10:00:44', 33),
+(754, 'KH-00000754', 'TOMITA', 'Lô TH1 KĐT mới Dịch Vọng, Quận Cầu Giấy, Hà Nội', '351', NULL, 'Trường Sakura \r\nLô TH1 KĐT mới Dịch Vọng, Quận Cầu Giấy, Hà Nội.\r\nSố điện thoại: 0796.231.579', NULL, 1, '2024-12-20 10:27:16', '2024-12-20 10:27:16', 10),
+(755, 'KH-00000755', 'Kiều Ly', 'Số 63 Đặng Thùy Trâm, P Dịch Vọng Hậu, Q Cầu Giấy, TP Hà Nội, Việt Nam', '351', NULL, NULL, NULL, 1, '2024-12-20 10:50:19', '2024-12-20 10:50:19', 28),
+(756, 'KH-00000756', 'Duy Polycarbonate', 'Số 27-29 Ngõ 91 Nguyễn Chí Thanh, P. Láng Hạ, Quận Đống Đa, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-20 10:55:53', '2024-12-20 10:55:53', 28),
+(757, 'KH-00000757', 'Khúc dương cầm', 'thôn bình an xã Đông Thọ huyện Yên Phong tỉnh Bắc Ninh', '3222', NULL, NULL, NULL, 1, '2024-12-20 11:21:46', '2024-12-20 11:21:46', 28),
+(758, 'KH-00000758', 'Ms.Ngân Thương - HQT', 'số 98, ngõ 13, thôn khúc thủy, cự khê, thanh oai', '351', NULL, NULL, NULL, 1, '2024-12-20 11:41:17', '2024-12-20 11:41:17', 33),
+(759, 'KH-00000759', 'Thang Tran', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-20 12:03:34', '2024-12-20 12:03:34', 28),
+(760, 'KH-00000760', 'Chị Thuỳ Dung - HQT', 'Số 51- Lê Nin - Vinh- Nghệ An', '4230', NULL, NULL, NULL, 1, '2024-12-20 15:11:57', '2024-12-20 15:11:57', 2),
+(761, 'KH-00000761', 'Ms.Linh Nhi - HQT', 'Vũ Trọng Phụng', '351', NULL, NULL, NULL, 1, '2024-12-20 15:28:28', '2024-12-20 15:28:28', 33),
+(762, 'KH-00000762', 'Bảo Ngọc', 'Khu 1, Thị Trấn Cồn, Hải Hậu, Nam Định', '7474', NULL, NULL, NULL, 1, '2024-12-20 15:43:48', '2024-12-20 15:43:48', 35),
+(763, 'KH-00000763', 'Chị Giang Phạm - HQT', 'CL21-31, khu đất dịch vụ La Dương, Dương Nội, Hà Đông', '351', NULL, NULL, NULL, 1, '2024-12-20 16:34:05', '2024-12-20 16:34:06', 2),
+(764, 'KH-00000764', 'Ms.Sh Flowers - HQT', 'Tân Triều, Thanh Trì', '351', NULL, NULL, NULL, 1, '2024-12-20 17:38:01', '2024-12-20 17:38:01', 33),
+(765, 'KH-00000765', 'Phạm Đình Sơn', 'Số 28 đường Dầu Lửa (An Trì) - Hùng Vương - Hồng Bàng - Hải Phòng', '1478', NULL, NULL, NULL, 1, '2024-12-21 08:35:55', '2024-12-21 08:35:55', 28),
+(766, 'KH-00000766', 'Nice Moon', 'ô 3, lô 4, Khu CN lai xá, Kim chung, Hoài Đức, HN', '351', NULL, NULL, NULL, 1, '2024-12-21 13:32:59', '2024-12-21 13:32:59', 28),
+(767, 'KH-00000767', 'CÔNG TY CỔ PHẦN  ĐIỆN VÀ CHIẾU SÁNG PHƯƠNG ĐÔNG', 'Thôn Đa Phúc, Xã Sài Sơn, Huyện Quốc Oai, TP Hà Nội', '351', '0108237484', NULL, NULL, 1, '2024-12-21 14:31:54', '2024-12-21 14:31:54', 35),
+(768, 'KH-00000768', 'Vina Mart - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-21 14:32:01', '2024-12-21 14:32:01', 2),
+(769, 'KH-00000769', 'Công ty CP Thực phẩm Trường Hảo', 'Số 1 đường nước phần Lan, Tứ Liên, Tây Hồ, HN', '351', NULL, NULL, NULL, 1, '2024-12-21 14:46:30', '2024-12-21 14:46:30', 2),
+(770, 'KH-00000770', 'Ms.Vũ Hạnh - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-21 14:50:24', '2024-12-21 14:50:25', 33),
+(771, 'KH-00000771', 'Trường Khánh', 'Hụi Happy, số 19, Chung Thành Châu, Phường 5, Cà Mau', '8175', NULL, NULL, NULL, 1, '2024-12-21 15:42:46', '2024-12-21 15:42:47', 28),
+(772, 'KH-00000772', 'Jenifer', 'Chung cư gemeek 2, lê trọng tấn, an khánh hoài đức, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-21 15:45:53', '2024-12-21 15:45:53', 35),
+(773, 'KH-00000773', 'Mr.Lê Luật - HQT', 'Xóm 4, Thôn Thượng, Xã Cảnh Hưng, Huyện Tiên Du, Tỉnh Bắc Ninh', '3222', NULL, NULL, NULL, 1, '2024-12-21 16:11:31', '2024-12-21 16:11:32', 33),
+(774, 'KH-00000774', 'Chị Hà Tùng', '11 Mac Thị Bưởi', '351', NULL, NULL, NULL, 1, '2024-12-21 16:48:28', '2024-12-21 16:48:28', 57),
+(775, 'KH-00000775', 'Thanh Trúc', 'HCM', '1', NULL, NULL, NULL, 1, '2024-12-22 09:07:27', '2024-12-22 09:07:27', 28),
+(776, 'KH-00000776', 'Nguyễn Hoà', 'xóm Đình, thôn Đình Tổ, xã Đình Tổ, Thuận Thành, Bắc Ninh', '3222', NULL, NULL, NULL, 1, '2024-12-22 10:02:06', '2024-12-22 10:02:06', 28),
+(777, 'KH-00000777', 'Anh Hoà', '246 Xuân Đỉnh, Bắc Từ Liêm, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-22 11:01:25', '2024-12-22 11:01:25', 35),
+(778, 'KH-00000778', 'Mr.Hoàng Thịnh - HQT', '121-123 Nguyễn Khang, Yên Hoà, Cầu Giấy, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-23 08:29:43', '2024-12-23 08:29:43', 33),
+(779, 'KH-00000779', 'Thắng Cận', 'số 9 phan bội châu', '351', NULL, NULL, NULL, 1, '2024-12-23 09:05:49', '2024-12-23 09:10:04', 28),
+(780, 'KH-00000780', 'Chị Hoa - HQT', '3v5v phố Cửa Quán, Văn Phú, Hà đông', '351', NULL, NULL, NULL, 1, '2024-12-23 09:49:32', '2024-12-23 09:49:32', 2),
+(781, 'KH-00000781', 'Minh Khang', 'số nhà 26, nhà vườn 5, Tổng cục V, Tân Triều, Thanh Trì, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-23 10:07:01', '2024-12-23 10:07:01', 28),
+(782, 'KH-00000782', 'Hà Phương', '176 phủ thượng đoạn. Đông Hải 1 , Hải an , Hải phòng', '1478', NULL, NULL, NULL, 1, '2024-12-23 10:28:50', '2024-12-23 10:28:50', 35),
+(783, 'KH-00000783', 'Phương Thảo', '54 Triều Khúc', '351', NULL, NULL, NULL, 1, '2024-12-23 10:52:33', '2024-12-23 10:52:33', 35),
+(784, 'KH-00000784', 'Hà Trần', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-23 12:03:01', '2024-12-23 12:03:01', 35),
+(785, 'KH-00000785', 'Ms.Phượng Vương - HQT', 'Hải Phòng', '1478', NULL, NULL, NULL, 1, '2024-12-23 13:48:09', '2024-12-23 13:48:09', 33),
+(786, 'KH-00000786', 'Công ty cổ phần BUFF FINTECH', 'Số 5 ngõ 63 đường Cổ Linh, Phường Thạch Bàn, Quận Long Biên, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-23 14:05:03', '2024-12-23 14:05:03', 35),
+(787, 'KH-00000787', 'Vũ Ly', '121 ngõ 401 Xuân Đỉnh, Bắc Từ Liêm, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-23 14:37:57', '2024-12-23 14:37:57', 35),
+(788, 'KH-00000788', 'Trịnh Thị Thu Hằng', 'Lô d2, kcn hapro, lệ chi gia lâm hn', '351', NULL, NULL, NULL, 1, '2024-12-23 14:41:29', '2024-12-23 14:41:29', 28),
+(789, 'KH-00000789', 'Chị Thuỷ - HQT', '155 Trần kiên, bắc sơn, kiến an, hải phòng', '1478', NULL, NULL, NULL, 1, '2024-12-23 14:54:59', '2024-12-23 14:54:59', 2),
+(790, 'KH-00000790', 'Đặng Thắm', 'toà vimeco E9 phạm hùng - cầu giấy - hà nội ( đối diện trung tâm hội nghị quốc gia )', '351', NULL, NULL, NULL, 1, '2024-12-23 15:50:40', '2024-12-23 15:50:40', 35),
+(791, 'KH-00000791', 'Chị Thắm', '614 chung cư 5b ngõ 5 lê đức thọ phường mai dịch, quận cầu giấy', '351', NULL, NULL, NULL, 1, '2024-12-23 16:18:09', '2024-12-23 16:18:55', 35),
+(792, 'KH-00000792', 'Cửa hàng quà tặng BLCgifts', 'Hải Phòng', '1478', NULL, NULL, NULL, 1, '2024-12-23 16:32:28', '2024-12-23 16:32:28', 33),
+(793, 'KH-00000793', 'anh Tuấn NPP NGÂN LINH', 'KHU 3 PHƯỜNG THỊ CẦU TP BẮC NINH', '3222', NULL, NULL, NULL, 1, '2024-12-23 16:56:48', '2024-12-23 16:56:48', 2),
+(794, 'KH-00000794', 'Ms.An Liên - HQT', 'Tiên Dược- Sóc Sơn', '351', NULL, NULL, NULL, 1, '2024-12-23 17:25:24', '2024-12-23 17:25:24', 33),
+(795, 'KH-00000795', 'Thúy Oanh', 'Hồ Chí Minh', '1', NULL, NULL, NULL, 1, '2024-12-23 17:32:52', '2024-12-23 17:32:52', 28),
+(796, 'KH-00000796', 'CÔNG TY TNHH DỊCH VỤ TRUYỀN THÔNG MINH PHÁT', 'Nhà 32B ngõ 90 phố Chính Kinh, Phường Nhân Chính, Quận Thanh Xuân, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-24 09:44:14', '2024-12-24 09:48:37', 28),
+(797, 'KH-00000797', 'Bụt Hiền', '602 Hùng Vương- P9- TP Tuy Hoà- Phú Yên', '8924', NULL, NULL, NULL, 1, '2024-12-24 14:46:48', '2024-12-24 14:46:48', 28),
+(798, 'KH-00000798', 'Việt Trinh', 'Số 10 ngõ 173/75/30 Hoàng Hoa Thám Ngọc Hà Ba Đình Hn.', '351', NULL, NULL, NULL, 1, '2024-12-25 08:29:57', '2024-12-25 08:29:57', 28),
+(799, 'KH-00000799', 'Anh Ngọc - HQT', '115 Định Công', '351', NULL, NULL, NULL, 1, '2024-12-25 08:57:51', '2024-12-25 08:57:51', 2),
+(800, 'KH-00000800', 'Gu Store', '101 lê thánh tông, máy chai, ngô quyền, HP', '1478', NULL, NULL, NULL, 1, '2024-12-25 09:17:04', '2024-12-25 09:17:04', 35),
+(801, 'KH-00000801', 'Nguyễn Nga', 'Dmart- 87 bà triệu - phường liên bảo- thành phố vĩnh yên - tỉnh Vĩnh phúc', '6854', NULL, NULL, NULL, 1, '2024-12-25 09:47:58', '2024-12-25 09:47:58', 35),
+(802, 'KH-00000802', 'Hảo Nguyễn', 'TIểu khu 10, thị trấn Mộc Châu, huyện Mộc Châu, tỉnh Sơn La', '10387', NULL, NULL, NULL, 1, '2024-12-25 10:10:31', '2024-12-25 10:10:31', 28),
+(803, 'KH-00000803', 'Cô Phương - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-25 10:45:12', '2024-12-25 10:45:12', 2),
+(804, 'KH-00000804', 'Thư Anh', '48 Tố Hữu, Nam Từ Liêm, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-25 15:02:25', '2024-12-25 15:02:25', 35),
+(805, 'KH-00000805', 'In Trung Kiên', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-25 15:27:21', '2024-12-25 15:27:21', 28),
+(806, 'KH-00000806', 'Linh Trang', 'chợ đồng xoài bình phước', '5259', NULL, NULL, NULL, 1, '2024-12-25 16:06:57', '2024-12-25 16:06:57', 28),
+(807, 'KH-00000807', 'CÔNG TY CỔ PHẦN THƯƠNG MẠI VÀ DỊCH VỤ NGỌC HÀ', 'Lô S10-3 cụm sản xuất làng nghề Triều Khúc', '351', NULL, NULL, NULL, 1, '2024-12-25 17:21:08', '2024-12-25 17:21:08', 33),
+(808, 'KH-00000808', 'Ms.Lê Hiền - HQT', 'Cổ Nhuế 2', '351', NULL, NULL, NULL, 1, '2024-12-25 17:37:25', '2024-12-25 17:37:25', 33),
+(809, 'KH-00000809', 'Minh Thư', 'Ngõ 33, phú thượng tây hồ  nhé', '351', NULL, NULL, NULL, 1, '2024-12-26 08:32:21', '2024-12-26 08:32:21', 35),
+(810, 'KH-00000810', 'Công ty TNHH giải pháp không khí sạch MIA Việt Nam', '35A ngõ 102 Trường Chinh', '351', NULL, NULL, NULL, 1, '2024-12-26 08:40:52', '2024-12-26 08:49:59', 28),
+(811, 'KH-00000811', 'Ms.Linh Thu - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-26 08:42:30', '2024-12-26 08:42:30', 33),
+(812, 'KH-00000812', 'Phạm Thị Vinh', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-26 09:23:49', '2024-12-26 09:23:49', 35),
+(813, 'KH-00000813', 'Thuy Thu', 'Hải Phòng', '1478', NULL, NULL, NULL, 1, '2024-12-26 10:02:28', '2024-12-26 10:02:28', 28),
+(814, 'KH-00000814', 'Ms.Hồng - HQT', 'Tân Triều, Thanh Trì', '351', NULL, NULL, NULL, 1, '2024-12-26 10:41:16', '2024-12-26 10:41:16', 33),
+(815, 'KH-00000815', 'Nguyenhuyen', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-26 11:04:44', '2024-12-26 11:04:44', 28),
+(816, 'KH-00000816', 'Cảnh Kỳ', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-26 11:27:01', '2024-12-26 11:27:01', 28),
+(817, 'KH-00000817', 'Tue An', '117 Võ Chí Công, Xuân La, Tây Hồ', '351', NULL, NULL, NULL, 1, '2024-12-26 14:22:27', '2024-12-26 14:22:27', 28),
+(818, 'KH-00000818', 'Nguyễn Đức Diễn', 'Yên Thái, Đồng Thịnh, Sông Lô, Vĩnh Phúc', '6854', NULL, NULL, NULL, 1, '2024-12-26 14:29:34', '2024-12-26 14:29:34', 35),
+(819, 'KH-00000819', 'Hoa Trà Nguyễn', '252 đường Thiên Đức, phường Tiền Ninh vệ, thành phố. Bắc Ninh', '3222', NULL, NULL, NULL, 1, '2024-12-26 14:40:16', '2024-12-26 14:40:16', 35),
+(820, 'KH-00000820', 'Long Cao', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-26 15:15:38', '2024-12-26 15:15:38', 35),
+(821, 'KH-00000821', 'Ngọc Ánh', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-26 16:23:34', '2024-12-26 16:23:34', 28),
+(822, 'KH-00000822', 'Thoa Lưu', '196-198 Đường 30/6, Phố Yết Kiêu, Phường Nam Thành, TP Ninh Bình', '8405', NULL, NULL, NULL, 1, '2024-12-26 16:37:58', '2024-12-26 16:37:58', 28),
+(823, 'KH-00000823', 'Chị Thu Anh - HQT', 'D04- L43 An Phú, Dương Nội, Hà Đông', '351', NULL, NULL, NULL, 1, '2024-12-26 17:45:35', '2024-12-26 17:45:35', 2),
+(824, 'KH-00000824', 'Phương Pt Oem Hoàng Đạt', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-26 17:58:22', '2024-12-26 17:58:22', 28),
+(825, 'KH-00000825', 'Hien Hanah', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-27 08:07:22', '2024-12-27 08:07:22', 28),
+(826, 'KH-00000826', 'Bạch Dương', 'Toà Icon4, 243A Đê La Thành', '351', NULL, NULL, NULL, 1, '2024-12-27 08:32:39', '2024-12-27 08:32:39', 35),
+(827, 'KH-00000827', 'Trần Công Thành', 'ct4 kđt hồng hà eco city tứ hiệp thanh trì', '351', NULL, NULL, NULL, 1, '2024-12-27 08:33:59', '2024-12-27 08:33:59', 28),
+(828, 'KH-00000828', 'Nguyễn Hữu Thành', 'Bắc Giang', '6218', NULL, NULL, NULL, 1, '2024-12-27 09:24:42', '2024-12-27 09:24:43', 28),
+(829, 'KH-00000829', 'Ms.Thu - HQT', 'E12 Khu đấu giá Ngô Thì Nhậm, Hà Cầu, Hà Đông', '351', NULL, NULL, NULL, 1, '2024-12-27 09:30:05', '2024-12-27 09:30:05', 33),
+(830, 'KH-00000830', 'thongtran', 'số nhà 12- ngõ 238 ngọc hồi- văn điển - thanh trì- hà nội', '351', NULL, NULL, NULL, 1, '2024-12-27 09:59:44', '2024-12-27 09:59:44', 28),
+(831, 'KH-00000831', 'Phạm Xuân Quyết', 'Phạm xuân quyết số nhà 155 trần phú phường ba đình thị xã bỉm sơn Tỉnh thanh hóa.', '3563', NULL, NULL, NULL, 1, '2024-12-27 10:02:52', '2024-12-27 10:02:52', 28),
+(832, 'KH-00000832', 'TÔN HUY SANG', 'ông ty tôn Huy sang thôn đình tổ xã Nguyễn Trãi huyện thường Tín thành phố Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-27 11:12:31', '2024-12-27 11:12:31', 28),
+(833, 'KH-00000833', 'Ms.Thoa Nguyễn - HQT', 'ThaKhách sạn Phương Anh tổ 4 phường tân lập tp thái nguyên', '7106', NULL, NULL, NULL, 1, '2024-12-27 11:50:59', '2024-12-27 11:50:59', 33),
+(834, 'KH-00000834', 'Bebong', 'Hải Phòng', '1478', NULL, NULL, NULL, 1, '2024-12-27 13:39:52', '2024-12-27 13:49:52', 28),
+(835, 'KH-00000835', 'An Lê', '124 Bà Triệu - Hà Cầu - Hà Đông', '351', NULL, NULL, NULL, 1, '2024-12-27 15:32:46', '2024-12-27 15:32:46', 35),
+(836, 'KH-00000836', 'Thư Skydoor', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-27 15:36:40', '2024-12-27 15:36:40', 28),
+(837, 'KH-00000837', 'Tuyen Van Cao', 'Hà Đông', '351', NULL, NULL, NULL, 1, '2024-12-27 17:08:57', '2024-12-27 17:08:57', 35),
+(838, 'KH-00000838', 'Nhat', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-27 17:23:15', '2024-12-27 17:23:15', 28),
+(839, 'KH-00000839', 'Tăng Anh', 'Sn 31 ngõ 367 tuệ tĩnh khu 7 ka long móng cái quảng ninh', '3359', NULL, NULL, NULL, 1, '2024-12-28 09:08:59', '2024-12-28 09:08:59', 35),
+(840, 'KH-00000840', 'Đoàn Kim Thu', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-28 09:50:20', '2024-12-28 09:50:20', 28),
+(841, 'KH-00000841', 'CÔNG TY CỔ PHẦN TẬP ĐOÀN TÂY SƠN HC', 'Thôn Hồng Tiến, Xã Quỳnh Hồng, Huyện Quỳnh Lưu, Tỉnh Nghệ An, Việt Nam', '4230', NULL, NULL, NULL, 1, '2024-12-28 10:02:45', '2024-12-28 10:02:45', 35),
+(842, 'KH-00000842', 'Minh Huệ', '23 Nguyễn Xiển', '351', NULL, NULL, NULL, 1, '2024-12-28 10:13:58', '2024-12-28 10:13:58', 2),
+(843, 'KH-00000843', 'in QA', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-28 10:39:08', '2024-12-28 10:39:08', 2),
+(844, 'KH-00000844', 'Thương Huyền', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-28 10:53:38', '2024-12-28 10:53:38', 28),
+(845, 'KH-00000845', 'Hà Trang', 'Số 18, ngõ 236 Đại Từ, Đại Kim, Hoàng Mai, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-28 11:10:51', '2024-12-28 11:10:51', 28),
+(846, 'KH-00000846', 'Chị Nga Tea - HQT', 'về 45/85 phố hạ đình', '351', NULL, NULL, NULL, 1, '2024-12-28 11:37:55', '2024-12-28 11:37:55', 2),
+(847, 'KH-00000847', 'Chị Linh Nguyễn - HQT', '115 ngõ 56 thạch cầu', '351', NULL, NULL, NULL, 1, '2024-12-28 12:07:42', '2024-12-28 12:07:42', 2),
+(848, 'KH-00000848', 'Huongdt', 'Toà CT11 kim văn kim lũ', '351', NULL, NULL, NULL, 1, '2024-12-28 13:55:06', '2024-12-28 13:55:06', 28),
+(849, 'KH-00000849', 'An Khang Land', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-28 15:22:09', '2024-12-28 15:22:09', 28),
+(850, 'KH-00000850', 'Nam Sâm Hàn Quốc', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-28 15:32:26', '2024-12-28 15:44:36', 35),
+(851, 'KH-00000851', 'Linh Spa', 'Cổ Điển A, Tứ Hiệp, Thanh Trì', '351', NULL, NULL, NULL, 1, '2024-12-28 16:06:08', '2024-12-28 16:06:08', 35),
+(852, 'KH-00000852', 'Uyên Nhi', '31/40A Ung Văn Khiêm, P.25, Q.Bình Thạnh, TP.Hồ Chí Minh', '1', NULL, NULL, NULL, 1, '2024-12-28 16:43:41', '2024-12-28 16:43:41', 35),
+(853, 'KH-00000853', 'Na Na', 'Số 1A, ngõ 91/18/32 ngô thì sỹ, hà đông, hà nội', '351', NULL, NULL, NULL, 1, '2024-12-28 17:02:25', '2024-12-28 17:02:25', 35),
+(854, 'KH-00000854', 'siêu thị Hải Uyên', '113 , điện biên1 , lê lợi , tp hưng yên', '5385', NULL, NULL, NULL, 1, '2024-12-29 11:12:40', '2024-12-29 11:12:40', 2),
+(855, 'KH-00000855', 'Do Thi Quynh Khuc', '25 Lạc Trung', '351', NULL, NULL, NULL, 1, '2024-12-29 11:42:00', '2024-12-29 11:42:00', 35),
+(856, 'KH-00000856', 'Ms.Nguyễn HIên - hQT', 'Gia Lâm', '351', NULL, NULL, NULL, 1, '2024-12-29 12:13:07', '2024-12-29 12:13:07', 33),
+(857, 'KH-00000857', 'Ms.Thu Hiền - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-29 15:29:14', '2024-12-29 15:29:14', 33),
+(858, 'KH-00000858', 'Sang Táo', 'Sảnh B Toà Geleximco 897 Giải Phóng', '351', NULL, NULL, NULL, 1, '2024-12-29 15:49:46', '2024-12-29 15:49:46', 35),
+(859, 'KH-00000859', 'Hường Bùi', 'quốc lộ 14 phường Tân Bình thành phố đồng xoài Bình Phước', '5259', NULL, NULL, NULL, 1, '2024-12-30 08:24:41', '2024-12-30 08:24:41', 28),
+(860, 'KH-00000860', 'Chị Minh Nguyệt', '54 Giáp Nhị', '351', NULL, NULL, NULL, 1, '2024-12-30 08:49:17', '2024-12-30 08:49:17', 2),
+(861, 'KH-00000861', 'Đặng Sen', 'Vĩnh thành - đồng văn- tân kỳ - nghệ an', '4230', NULL, NULL, NULL, 1, '2024-12-30 10:06:47', '2024-12-30 10:06:47', 28),
+(862, 'KH-00000862', 'Linhquà Biếu Galeria', '16 vạn phúc liễu giai ba đình', '351', NULL, NULL, NULL, 1, '2024-12-30 11:01:18', '2024-12-30 11:01:19', 28),
+(863, 'KH-00000863', 'Vũ Hồng Anh', 'Số 12DV8 KĐT Tây Nam Linh Đàm', '351', NULL, NULL, NULL, 1, '2024-12-30 11:35:34', '2024-12-30 11:35:34', 35),
+(864, 'KH-00000864', 'Mrs.Bắp', 'Ngõ 11 Trần Vỹ', '351', NULL, NULL, NULL, 1, '2024-12-30 13:38:13', '2024-12-30 13:38:13', 35),
+(865, 'KH-00000865', 'Cường', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-30 14:21:49', '2024-12-30 14:21:49', 35),
+(866, 'KH-00000866', 'Phạm Hiền', 'Khu tập thể công trình đường thuỷ , thôn 3 vạn phúc thanh trì hà nội', '351', NULL, NULL, NULL, 1, '2024-12-30 14:22:54', '2024-12-30 14:22:54', 28),
+(867, 'KH-00000867', 'Ds Tuấn Anh', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-30 15:09:00', '2024-12-30 15:09:01', 28),
+(868, 'KH-00000868', 'Nguyễn Linh', 'òa Tân Hồng Hà, số 2 Vương Thừa Vũ, Tòa nhà Tân Hồng Hà, Khương Trung, Thanh Xuân, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-30 15:15:23', '2024-12-30 15:15:23', 28),
+(869, 'KH-00000869', 'Kim Chung', 'Lê Đôn Complex, Ô 20-21 Lô A, KĐT Mới, Hoàng Mai', '351', NULL, NULL, NULL, 1, '2024-12-30 15:24:53', '2024-12-30 15:24:53', 35),
+(870, 'KH-00000870', 'Ms.Mai Lương - HQT', 'b2tt2b văn yên, phúc la, hà đông', '351', NULL, NULL, NULL, 1, '2024-12-30 16:11:13', '2024-12-30 16:11:13', 33),
+(871, 'KH-00000871', 'Vũ Quỳnh', 'Số nhà 225 đường Đông Tây, Vân Trì, xã Vân Nội, huyện Đông Anh, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-30 16:29:59', '2024-12-30 16:29:59', 35),
+(872, 'KH-00000872', 'Le Nhan', '19 Lê Văn Lương, Thanh xuân, HN', '351', NULL, NULL, NULL, 1, '2024-12-30 17:04:58', '2024-12-30 17:04:58', 35),
+(873, 'KH-00000873', 'Phạm Thị Diêu Linh', 'Đội 4 thôn Gia Cốc, Xã Tứ Cường, Huyện Thanh Miện', '4737', NULL, NULL, NULL, 1, '2024-12-30 17:26:07', '2024-12-30 17:26:07', 35),
+(874, 'KH-00000874', 'Ms.Minh Hằng - HQT', 'Lạc Long Quân - Tây Hộp', '351', NULL, NULL, NULL, 1, '2024-12-30 17:32:10', '2024-12-30 17:32:10', 33),
+(875, 'KH-00000875', 'Nguyễn Thị Ngọc Diệp', '50 Phố Kim Hoa, Phương Liên, Đống Đa, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-31 08:32:11', '2025-01-05 15:56:49', 35),
+(876, 'KH-00000876', 'Nguyễn Ánh Tuyết', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-31 08:38:56', '2024-12-31 08:38:56', 28),
+(877, 'KH-00000877', 'Chị Nguyệt', '28 lê thánh tôn pleiku gialai', '5017', NULL, NULL, NULL, 1, '2024-12-31 08:43:59', '2024-12-31 08:43:59', 35),
+(878, 'KH-00000878', 'Mai Huyền', 'lô 24 dịch vụ 10 khu đô thị tây nam linh đàm, hoàng mai', '351', NULL, NULL, NULL, 1, '2024-12-31 10:08:26', '2024-12-31 10:08:26', 35),
+(879, 'KH-00000879', 'Huyền Nguyễn Sarah', 'Phố Mới, Thị Xã Quế Võ', '3222', NULL, NULL, NULL, 1, '2024-12-31 10:26:36', '2024-12-31 10:26:36', 35),
+(880, 'KH-00000880', 'Ms.Thuỳ Linh - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-31 10:33:18', '2024-12-31 10:33:18', 33),
+(881, 'KH-00000881', 'Lê Ngọc Hân', 'số 5 Đoàn Thị Điểm, phường Quốc Tử Giám', '351', NULL, NULL, NULL, 1, '2024-12-31 11:09:52', '2024-12-31 11:09:52', 28),
+(882, 'KH-00000882', 'CÔNG TY TNHH SẢN XUẤT VÀ THƯƠNG MẠI INOX VIỆT NAM', 'Số 12 Đường Louis XVI, Phố Tân Mai, Phường Hoàng Văn Thụ, Quận Hoàng Mai, TP. Hà Nội, Việt Nam', '351', NULL, NULL, NULL, 1, '2024-12-31 11:19:15', '2024-12-31 11:19:15', 2),
+(883, 'KH-00000883', 'Ms.Hồng Soo - HQT', 'Nguyễn Xiển', '351', NULL, NULL, NULL, 1, '2024-12-31 11:54:57', '2024-12-31 11:54:57', 33),
+(884, 'KH-00000884', 'Ms.Thanh - HQT', '129D Trương Định', '351', NULL, NULL, NULL, 1, '2024-12-31 11:57:50', '2024-12-31 11:57:50', 33),
+(885, 'KH-00000885', 'Trần Phương', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-31 13:40:13', '2024-12-31 13:40:13', 35),
+(886, 'KH-00000886', 'Công ty TNHH Xuất Nhập Khẩu Rutop Việt Nam', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-31 13:54:32', '2024-12-31 13:54:32', 33),
+(887, 'KH-00000887', 'Anh Công Lý - HQT', 'NPP Lý Tài, Minh Phương, Việt Trì, Phú Thọ', '8560', NULL, NULL, NULL, 1, '2024-12-31 14:15:21', '2024-12-31 14:15:21', 2),
+(888, 'KH-00000888', 'Ngô Thu Hiền', 'Tập đoàn CEO Group, HH2-1, khu đô thị mới Mễ Trì Hạ, Nam Từ Liêm, Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-31 14:36:36', '2024-12-31 14:36:36', 28),
+(889, 'KH-00000889', 'Mr.Hưng Nhữ ĐÌnh - HQT', 'Bắc Từ Liêm', '351', NULL, NULL, NULL, 1, '2024-12-31 14:37:16', '2024-12-31 14:37:16', 33),
+(890, 'KH-00000890', 'Yên Trịnh', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-31 14:40:40', '2024-12-31 14:40:40', 28),
+(891, 'KH-00000891', 'Ms.Hải Yến - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-31 14:45:32', '2024-12-31 14:45:32', 33),
+(892, 'KH-00000892', 'Mỹ Diệu', '85-87 nguyên nghiêm phường nguyễn nghiêm, tp quảng ngãi', '7715', NULL, NULL, NULL, 1, '2024-12-31 15:55:15', '2024-12-31 15:55:15', 35),
+(893, 'KH-00000893', 'Cương Xưởng In Ấn', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-31 15:56:08', '2024-12-31 15:56:08', 28),
+(894, 'KH-00000894', 'Tú Phương', 'Helios Tower 75 Tam Trinh', '351', NULL, NULL, NULL, 1, '2024-12-31 16:04:17', '2024-12-31 16:04:17', 28),
+(895, 'KH-00000895', 'Chị Linh - HQT', 'Phúc Yên', '6854', NULL, NULL, NULL, 1, '2024-12-31 16:10:58', '2024-12-31 16:10:58', 2),
+(896, 'KH-00000896', 'Hiền Nguyễn', 'số nhà 11 ngách 64 ngõ 282 Kim Giang', '351', NULL, NULL, NULL, 1, '2024-12-31 16:11:25', '2024-12-31 16:11:26', 35),
+(897, 'KH-00000897', 'Nguyễn Huy', '580 Nguyễn Khoái, Hoàng Mai , Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-31 16:40:45', '2024-12-31 16:40:45', 35),
+(898, 'KH-00000898', 'Thuý Nga', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2024-12-31 16:53:49', '2024-12-31 16:53:50', 35),
+(899, 'KH-00000899', 'Công Ty Tâm việt', '6/D9 khu đô thị GELEXIMCO Lê Trọng Tấn, Hà Đông', '351', '0104873231', NULL, NULL, 1, '2024-12-31 17:22:59', '2025-01-03 13:49:11', 35),
+(900, 'KH-00000900', 'Chị Đỗ Hồng Nhung - HQT', 'Park 2 - Chung cư Eurowimdow Riverpark đông hội', '351', NULL, NULL, NULL, 1, '2025-01-02 08:14:46', '2025-01-02 08:14:46', 2),
+(901, 'KH-00000901', 'Hạnh Dung', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2025-01-02 08:46:12', '2025-01-02 08:46:13', 35),
+(902, 'KH-00000902', 'Ngọc Mai', 'Số 14 ngách 14 ngõ 62 đường Văn Phú Hà Đông HN', '351', NULL, NULL, NULL, 1, '2025-01-02 08:48:16', '2025-01-02 08:48:16', 35),
+(903, 'KH-00000903', 'Hale', 'SN 7 Xóm mới Phương Nhị, Liên Ninh, Thanh Trì, Hà Nội', '351', NULL, NULL, NULL, 1, '2025-01-02 09:21:17', '2025-01-02 09:21:17', 28),
+(904, 'KH-00000904', 'Siêu Thị Vinh Hiền - HQT', 'Diễn trường, diễn châu, nghệ An.', '4230', NULL, NULL, NULL, 1, '2025-01-02 10:21:44', '2025-01-02 10:21:44', 2),
+(905, 'KH-00000905', 'Trịnh My Hàng Nhập Khẩu', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2025-01-02 10:28:01', '2025-01-02 10:28:02', 28),
+(906, 'KH-00000906', 'Chị Thuý Hà - HQT', '68 ngõ 120 Trường Chinh', '351', NULL, NULL, NULL, 1, '2025-01-02 11:21:30', '2025-01-02 11:21:30', 2),
+(907, 'KH-00000907', 'Chị Thu Huyền - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2025-01-02 11:29:48', '2025-01-02 11:29:48', 2),
+(908, 'KH-00000908', 'Phạm Thị Huyền', 'Chợ Mới Như Quỳnh, Văn Lâm, Hưng Yên', '5385', NULL, NULL, NULL, 1, '2025-01-02 11:32:24', '2025-01-02 11:32:24', 35),
+(909, 'KH-00000909', 'Phạm Huyền', 'Ngõ 789, đường 208, thôn Vân Tra, xã An Đồng, huyện An Dương, Hải Phòng', '1478', NULL, NULL, NULL, 1, '2025-01-02 11:47:37', '2025-01-02 11:47:37', 28),
+(910, 'KH-00000910', 'Trangoilatrang', 'A3-09 đường 25/4 phường bạch đằng tp hạ long qn', '3359', NULL, NULL, NULL, 1, '2025-01-02 11:51:37', '2025-01-02 11:51:37', 28),
+(911, 'KH-00000911', 'Vi Nui', 'Tòa SG, số 5, ngõ 82 Phố Dịch Vọng Hậu, Cầu Giấy, HÀ Nội', '351', NULL, NULL, NULL, 1, '2025-01-02 14:14:10', '2025-01-02 14:14:10', 28),
+(912, 'KH-00000912', 'Minh Thu', 'Thôn Văn Trung, Tân Chi, Tiên Du, Bắc Ninh', '3222', NULL, NULL, NULL, 1, '2025-01-02 14:38:40', '2025-01-02 14:38:40', 35),
+(913, 'KH-00000913', 'Đào Ánh', '21 TT23 Khu đô thị Văn Phú', '351', NULL, NULL, NULL, 1, '2025-01-02 15:18:53', '2025-01-02 15:18:53', 35),
+(914, 'KH-00000914', 'Ngân Rượu Vang', 'SN 31B ngõ 131 Thái Hà', '351', NULL, NULL, NULL, 1, '2025-01-02 16:26:12', '2025-01-04 11:02:37', 35),
+(915, 'KH-00000915', 'Phạm Hồng Ngọc', 'số 4 ngách 14 ngõ 71 hoàng văn thái', '351', NULL, NULL, NULL, 1, '2025-01-02 16:31:05', '2025-01-02 16:31:05', 35),
+(916, 'KH-00000916', 'Thanh Dung Tulip', 'Số 57km5 lâm sản - sở dầu - Hồng bàng - Hải phòng', '351', NULL, NULL, NULL, 1, '2025-01-02 16:39:09', '2025-01-02 16:39:09', 35),
+(917, 'KH-00000917', 'Chị Hương', 'Nguyễn Trãi-Hà Nội', '351', NULL, NULL, NULL, 1, '2025-01-02 16:44:20', '2025-01-02 16:44:20', 35),
+(918, 'KH-00000918', 'Mai Mai', 'Số 2, hẻm 24 ngách 51 ngõ 816 kim giang', '351', NULL, NULL, NULL, 1, '2025-01-02 16:49:50', '2025-01-02 16:49:50', 35),
+(919, 'KH-00000919', 'Kenny Mạnh', '86 trần quốc vượng', '351', NULL, NULL, NULL, 1, '2025-01-02 17:01:43', '2025-01-02 17:01:43', 35),
+(920, 'KH-00000920', 'Anh Toại', 'Thường tín', '351', NULL, NULL, NULL, 1, '2025-01-02 17:43:57', '2025-01-02 17:43:57', 57),
+(921, 'KH-00000921', 'Nguyễn Hiệp', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2025-01-03 09:03:47', '2025-01-03 09:03:47', 35),
+(922, 'KH-00000922', 'Hoàng Minh Hường', 'B5 ngõ 193 trung kính', '351', NULL, NULL, NULL, 1, '2025-01-03 09:08:46', '2025-01-03 09:08:46', 35),
+(923, 'KH-00000923', 'Nguyễn Quỳnh Hoa', '39 hạ đoạn 1 - đông hải 2 - hải an - hải phòng', '351', NULL, NULL, NULL, 1, '2025-01-03 09:13:51', '2025-01-03 09:13:51', 35),
+(924, 'KH-00000924', 'Ngân Phạm', '19 TRần khánh Dư- máy tơ- ngô quyền - hải phòng', '1478', NULL, NULL, NULL, 1, '2025-01-03 09:42:37', '2025-01-03 09:42:37', 28),
+(925, 'KH-00000925', 'Anh Duy - In Nhật Quang', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2025-01-03 10:03:25', '2025-01-03 10:03:25', 2),
+(926, 'KH-00000926', 'Bông Xinh', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2025-01-03 11:38:32', '2025-01-03 11:38:32', 28),
+(927, 'KH-00000927', 'Chị Sen - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2025-01-03 11:52:58', '2025-01-03 11:52:58', 2),
+(928, 'KH-00000928', 'Chị Thảo- HQT', '188/1 Quán Thánh, Ba Đình, Hà Nội', '351', NULL, NULL, NULL, 1, '2025-01-03 13:42:05', '2025-01-03 13:42:05', 2),
+(929, 'KH-00000929', 'Chị Minh Hoà', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2025-01-03 15:01:19', '2025-01-03 15:01:19', 2),
+(930, 'KH-00000930', 'Ms.Nhung Ly - HQT', '25TT18 kdt văn phú- hà đông', '351', NULL, NULL, NULL, 1, '2025-01-03 15:21:07', '2025-01-03 15:21:07', 33),
+(931, 'KH-00000931', 'Anh Bình', 'Huỳnh thúc kháng', '351', NULL, NULL, NULL, 1, '2025-01-03 15:33:24', '2025-01-03 15:33:43', 57),
+(932, 'KH-00000932', 'Quỳnh Anh', '25 ngách 2 ngõ 208 đường Trần Cung', '351', NULL, NULL, NULL, 1, '2025-01-03 15:36:33', '2025-01-03 15:36:33', 35),
+(933, 'KH-00000933', 'Linhnga', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2025-01-03 15:45:21', '2025-01-03 15:45:22', 28),
+(934, 'KH-00000934', 'Nđ', '58 Tố Hữu, Toà Ecolife Capitol Nam Từ Liêm Hà Nội', '351', NULL, NULL, NULL, 1, '2025-01-03 18:02:59', '2025-01-03 18:02:59', 35),
+(935, 'KH-00000935', 'Thanh Trà', 'quán rượu anwine ngã ba bản mòn thị trấn mộc châu', '351', NULL, NULL, NULL, 1, '2025-01-04 08:51:13', '2025-01-04 08:51:13', 35),
+(936, 'KH-00000936', 'Chị Hải Yến - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2025-01-04 08:57:39', '2025-01-04 08:57:39', 2),
+(937, 'KH-00000937', 'Mai Nhân', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2025-01-04 09:09:05', '2025-01-04 09:09:06', 35),
+(938, 'KH-00000938', 'Xuân Ly In Nguyễn Kim', '918 Kim giang, thanh liệt, thanh trì', '351', NULL, NULL, NULL, 1, '2025-01-04 09:34:28', '2025-01-04 09:34:28', 35),
+(939, 'KH-00000939', 'Hà Chang', 'sảnh thương mại r4, royal city', '351', NULL, NULL, NULL, 1, '2025-01-04 09:44:04', '2025-01-04 09:44:04', 28),
+(940, 'KH-00000940', 'Chị Thanh Thảo - HQT', 'siêu thị BRG 275 Nguyễn Trãi, Thanh Xuân', '351', NULL, NULL, NULL, 1, '2025-01-04 09:55:36', '2025-01-04 09:55:36', 2),
+(941, 'KH-00000941', 'Vân Nguyễn', 'Khách sạn suối mây. Số 8, phố anh đào, bãi cháy, hạ long', '3359', NULL, NULL, NULL, 1, '2025-01-04 10:14:12', '2025-01-04 10:14:13', 35),
+(942, 'KH-00000942', 'Ms.Thu Nhỏ - HQT', 'Số 9 ngõ 243 Bùi Xương Trạch', '351', NULL, NULL, NULL, 1, '2025-01-04 10:23:05', '2025-01-04 10:23:05', 33),
+(943, 'KH-00000943', 'CÔNG TY TNHH DELI VIỆT NAM', 'CÔNG TY TNHH DELI VIỆT NAM Lô CN06-4 VÀ CN13-2, KCN Yên Phong (khu mở rộng), Xã Yên Trung, Xã Dũng Liệt, Huyện Yên Phong, Tỉnh Bắc Ninh', '3222', NULL, NULL, NULL, 1, '2025-01-04 10:26:24', '2025-01-04 10:26:24', 2),
+(944, 'KH-00000944', 'Huyền My My', '138 Nguyễn Văn Thoại, Mỹ An, Ngũ Hành Sơn, Đà Nẵng', '969', NULL, NULL, NULL, 1, '2025-01-04 11:28:30', '2025-01-04 11:28:30', 35),
+(945, 'KH-00000945', 'Ngọc Khánh', '563 Nguyễn Đức Thuận. Cổ bi, Gia Lâm', '351', NULL, NULL, NULL, 1, '2025-01-04 11:58:37', '2025-01-04 11:58:37', 35),
+(946, 'KH-00000946', 'Việt Nguyễn', '184 Tây Sơn', '351', NULL, NULL, NULL, 1, '2025-01-04 13:46:15', '2025-01-04 13:46:16', 35),
+(947, 'KH-00000947', 'Pham Anh', 'Tòa nhà IC, 82 Duy Tân, Cầu Giấy, HN.', '351', NULL, NULL, NULL, 1, '2025-01-04 13:55:02', '2025-01-04 13:55:03', 28),
+(948, 'KH-00000948', 'Quỳnh Nga', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2025-01-04 13:57:03', '2025-01-04 13:57:03', 28),
+(949, 'KH-00000949', 'Anh Trần Đạt - HQT', 'tầng 1, toà rainbow văn quán, sóo 79 đường 19/5, kđt văn quán', '351', NULL, NULL, NULL, 1, '2025-01-04 15:28:20', '2025-01-04 15:28:20', 2),
+(950, 'KH-00000950', 'Ms.Yến Nguyễn - HQT', 'số nhà 19A, ngõ 55 Thanh Lân, Thanh Trì, Hoàng Mai, Hà Nội', '351', NULL, NULL, NULL, 1, '2025-01-04 16:11:13', '2025-01-04 16:11:13', 33),
+(951, 'KH-00000951', 'Quyên', '280/3 Hiệp Thành 13, P.Hiệp Thành, Q.12, TP.Hồ Chí Minh', '1', NULL, NULL, NULL, 1, '2025-01-04 16:40:08', '2025-01-04 16:40:08', 35),
+(952, 'KH-00000952', 'Mr.Hương - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2025-01-04 17:34:15', '2025-01-04 17:34:15', 33),
+(953, 'KH-00000953', 'HÀNG NHẬT NỘI ĐỊA', 'CC Hồng Hà Tower 89 Thịnh Liệt, Thịnh Liệt, Hoàng Mai, Hà Nội.', '351', NULL, NULL, NULL, 1, '2025-01-05 08:59:02', '2025-01-05 08:59:02', 2),
+(954, 'KH-00000954', 'Mai Phương', '72 hoàng ngân, thái nguyên', '7106', NULL, NULL, NULL, 1, '2025-01-05 09:50:35', '2025-01-05 09:50:35', 28),
+(955, 'KH-00000955', 'Thu Thảo - Rượu Nhập Khẩu', '106 Trúc Khê, Láng Hạ, Đống Đa HN', '351', NULL, NULL, NULL, 1, '2025-01-05 14:57:28', '2025-01-05 14:57:28', 28),
+(956, 'KH-00000956', 'Tuyết Trinh', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2025-01-05 15:06:06', '2025-01-05 15:06:06', 35),
+(957, 'KH-00000957', 'Ms.Phạm Huyền - HQT', 'Số 28 Mai Anh Tuấn, P. Ô Chợ Dừa, Quận Đống Đa, Hà Nội', '351', NULL, NULL, NULL, 1, '2025-01-05 15:54:43', '2025-01-05 15:54:43', 33),
+(958, 'KH-00000958', 'Công ty Cổ Phần XD và TM Gia Khánh', 'Tam Hiệp, Phúc Thọ', '351', NULL, NULL, NULL, 1, '2025-01-05 17:31:24', '2025-01-05 17:31:24', 33),
+(959, 'KH-00000959', 'Tống Cúc', '241 lý nhân tông phường đông thọ tp thanh hóa', '3563', NULL, NULL, NULL, 1, '2025-01-06 08:19:23', '2025-01-06 08:19:23', 35),
+(960, 'KH-00000960', 'Nguyễn Thị Kiều Lan', 'Du Học Alpha Thạch Châu- Thach Hà- Hà Tĩnh', '9171', NULL, NULL, NULL, 1, '2025-01-06 08:22:17', '2025-01-06 08:22:17', 35),
+(961, 'KH-00000961', 'Hoàng Anh', '15/59 Lê Cảo, p. Đông Sơn, Tp Thanh Hoá', '3563', NULL, NULL, NULL, 1, '2025-01-06 08:53:00', '2025-01-06 08:53:00', 35),
+(962, 'KH-00000962', 'UBND Huyện Ứng Hòa', 'Thị trấn Vân Đình - Ứng Hoà', '351', NULL, NULL, NULL, 1, '2025-01-06 09:09:42', '2025-01-06 09:09:42', 1),
+(963, 'KH-00000963', 'Hiền Tuệ An', '523 nguyễn văn cừ TP.Bắc Ninh', '3222', NULL, NULL, NULL, 1, '2025-01-06 09:37:17', '2025-01-06 09:37:17', 35),
+(964, 'KH-00000964', 'Thúy Lại', '1064 đường trần hưng đạo', '8405', NULL, NULL, NULL, 1, '2025-01-06 09:44:34', '2025-01-06 09:44:34', 28),
+(965, 'KH-00000965', 'Ms.Phạm Linh - HQT', '157 Đường ỷ la dương nội hà nội đông', '351', NULL, NULL, NULL, 1, '2025-01-06 11:34:01', '2025-01-06 11:34:01', 33),
+(966, 'KH-00000966', 'Ms.Trang Cầu Diễn - HQT', 'số 26B, ngõ 31 Cầu Diễn, Phúc Diễn, Bắc Từ Liêm, HN', '351', NULL, NULL, NULL, 1, '2025-01-06 11:51:17', '2025-01-06 11:51:17', 33),
+(967, 'KH-00000967', 'Bách Xưởng In', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2025-01-06 11:58:56', '2025-01-06 11:58:56', 35),
+(968, 'KH-00000968', 'Sophie Lien Dinh', 'Số 6 , C4 ,Lô 2, Khu đô thị Nam Trung Yên, Trung Hoà, Cầu Giấy, Hà Nội', '351', NULL, NULL, NULL, 1, '2025-01-06 13:48:36', '2025-01-06 13:48:36', 28),
+(969, 'KH-00000969', 'Ngô Thu Hằng', 'Sn 15, ngõ 121/1 đường Hoàng Ngân, phường Phan Đình Phùng, TP Thái Nguyên', '351', NULL, NULL, NULL, 1, '2025-01-06 14:27:10', '2025-01-06 14:27:10', 28),
+(970, 'KH-00000970', 'Anh Quỳnh - HQT', 'Bắc Ninh', '3222', NULL, NULL, NULL, 1, '2025-01-06 15:11:29', '2025-01-06 15:11:29', 2),
+(971, 'KH-00000971', 'Ms.Anh Thư - HQT', 'Hà Nội', '351', NULL, NULL, NULL, 1, '2025-01-06 15:30:37', '2025-01-06 15:30:37', 33),
+(972, 'KH-00000972', 'Ms.Uyên - HQT', 'Thường Tín', '351', NULL, NULL, NULL, 1, '2025-01-06 16:12:34', '2025-01-06 16:12:34', 33),
+(973, 'KH-00000973', 'Chị Linh Đoàn - HQT', 'lô 15 liền kề 19 mậu lương', '351', NULL, NULL, NULL, 1, '2025-01-06 16:57:21', '2025-01-06 16:57:21', 2),
+(974, 'KH-00000974', 'Chị Hà', 'Triều Khúc - Thanh Xuân', '351', NULL, NULL, NULL, 1, '2025-02-08 13:43:53', '2025-02-08 13:43:53', 28),
+(975, 'KH-00000975', 'Mr.Tú - HQT', 'Sơn La', '10387', NULL, NULL, NULL, 1, '2025-02-08 13:44:29', '2025-02-08 13:44:29', 28),
+(976, 'KH-00000976', 'hoàng dung test', 'chưa có', NULL, NULL, NULL, NULL, 1, '2025-02-08 13:57:57', '2025-02-08 13:57:59', 28);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `c_designs`
+--
+
+CREATE TABLE `c_designs` (
+  `id` int NOT NULL,
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `order` int DEFAULT NULL,
+  `product` int DEFAULT NULL,
+  `customer` int DEFAULT NULL,
+  `demo_expired` datetime DEFAULT NULL,
+  `expired` datetime DEFAULT NULL,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `act` tinyint DEFAULT NULL,
+  `created_by` int DEFAULT NULL,
+  `assign_by` int DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `c_expertises`
+--
+
+CREATE TABLE `c_expertises` (
+  `id` int NOT NULL,
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `qty` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `product` int DEFAULT NULL,
+  `take_status` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `handle_problem` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `act` tinyint DEFAULT NULL,
+  `created_by` int DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `c_orders`
+--
+
+CREATE TABLE `c_orders` (
+  `id` int NOT NULL,
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `customer` int DEFAULT NULL,
+  `represent` int DEFAULT NULL,
+  `warehouse_type` int DEFAULT NULL,
+  `order` int DEFAULT NULL,
+  `object` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `return_date` datetime DEFAULT NULL,
+  `receipt` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `profit` float DEFAULT NULL,
+  `other_price` float DEFAULT NULL,
+  `total` float DEFAULT NULL,
+  `advance` float DEFAULT NULL,
+  `rest` float DEFAULT NULL,
+  `payment_type` tinyint DEFAULT NULL,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `act` tinyint DEFAULT NULL,
+  `confirm_warehouse` int DEFAULT NULL,
+  `created_by` int DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `c_payments`
+--
+
+CREATE TABLE `c_payments` (
+  `id` int NOT NULL,
+  `code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `object` int DEFAULT NULL,
+  `payment_value` float DEFAULT NULL,
+  `payment_method` tinyint DEFAULT NULL,
+  `receipt` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `act` tinyint DEFAULT NULL,
+  `paid_by` int DEFAULT NULL,
+  `paid_at` datetime DEFAULT NULL,
+  `paid_note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` int DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `c_products`
+--
+
+CREATE TABLE `c_products` (
+  `id` int NOT NULL,
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `product` int DEFAULT NULL,
+  `qty` int DEFAULT NULL,
+  `status` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `act` tinyint DEFAULT NULL,
+  `created_by` int DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `c_reworks`
+--
+
+CREATE TABLE `c_reworks` (
+  `id` int NOT NULL,
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `product` int DEFAULT NULL,
+  `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `worker` int DEFAULT NULL,
+  `qty` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `rework_status` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `act` tinyint DEFAULT NULL,
+  `created_by` int DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `c_supplies`
+--
+
+CREATE TABLE `c_supplies` (
+  `id` int NOT NULL,
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `size_type` int DEFAULT NULL,
+  `qty` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `product` int DEFAULT NULL,
+  `bill` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `supply` int DEFAULT NULL,
+  `supp_type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `act` tinyint DEFAULT NULL,
+  `created_by` int DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `design_types`
+--
+
+CREATE TABLE `design_types` (
+  `id` int NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `act` tinyint DEFAULT NULL,
+  `created_by` int DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `design_types`
+--
+
+INSERT INTO `design_types` (`id`, `name`, `act`, `created_by`, `created_at`, `updated_at`) VALUES
+(1, 'Thiết kế mới', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:23'),
+(2, 'Chế bản', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:23'),
+(3, 'File cũ có chỉnh sửa', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:23'),
+(4, 'File cũ không chỉnh sửa', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:23'),
+(5, 'File khách hàng gửi', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:23');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `devices`
+--
+
+CREATE TABLE `devices` (
+  `id` int NOT NULL COMMENT 'Mã nhóm',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Tên nhóm',
+  `model_price` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `work_price` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+  `shape_price` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+  `w_work_price` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `w_shape_price` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `key_device` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `supply` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `default_device` tinyint DEFAULT NULL,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Ghi chú',
+  `act` tinyint DEFAULT NULL,
+  `ord` int DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_by` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `devices`
+--
+
+INSERT INTO `devices` (`id`, `name`, `model_price`, `work_price`, `shape_price`, `w_work_price`, `w_shape_price`, `key_device`, `type`, `supply`, `default_device`, `note`, `act`, `ord`, `created_at`, `updated_at`, `created_by`) VALUES
+(2, 'TỰ ĐỘNG', '0', '0', '100000', '25', '50000', 'compress', 'auto', 'paper', 1, NULL, 1, 0, '2023-05-23 17:01:35', '2025-02-01 17:14:14', 0),
+(6, 'TỰ ĐỘNG', '0', '50', '100000', '10', '25000', 'box_paste', 'auto', 'paper', 1, NULL, 1, 1, '2023-05-23 17:01:35', '2025-02-02 09:33:59', 0),
+(7, 'TỰ ĐỘNG', '0', '100', '100000', '25', '35000', 'mill', 'auto', 'carton', 0, NULL, 1, 0, '2023-05-23 17:01:35', '2024-08-21 12:15:39', 0),
+(10, 'BÁN TỰ ĐỘNG', '80', '500', '200000', '150', '100000', 'uv', 'semi_auto', 'paper', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2025-02-01 17:04:37', 0),
+(12, 'BÓC LỀ', '0', '10', '30000', '5', '0', 'peel', 'semi_auto', 'paper', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-09-14 19:27:03', 0),
+(16, 'TỰ ĐỘNG', '0', '0', '100000', '40', '50000', 'metalai', 'auto', 'paper', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2025-02-01 16:50:08', 1),
+(18, 'MÁY XÉN', '0', '60', '100000', '20', '10000', 'cut', 'semi_auto', 'carton', 0, NULL, 1, 1, '2023-05-23 17:01:35', '2025-01-23 12:53:03', 0),
+(19, 'Máy Triết Quang - Thúc nổi', '0', '1000', '200000', '130', '50000', 'float', 'semi_auto', 'paper', 1, 'Chưa có máy', 1, 0, '2023-05-23 17:01:35', '2025-02-02 09:28:13', 0),
+(23, 'MÁY BẾ BTĐ', '150', '1000', '150000', '500', '70000', 'elevate', 'semi_auto', 'rubber', 0, NULL, 1, 1, '2023-05-23 17:01:35', '2025-01-23 12:59:46', 0),
+(25, 'MÁY BẾ BTĐ', '150', '1000', '120000', '500', '60000', 'elevate', 'semi_auto', 'styrofoam', NULL, '150d/cm', 1, 1, '2023-05-23 17:01:35', '2025-01-23 13:00:01', 0),
+(27, 'MÁY BẾ BTĐ', '0', '150', '150000', '50', '70000', 'elevate', 'semi_auto', 'mica', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2025-01-23 12:58:00', 0),
+(29, 'MÁY XÉN', '0', '150', '100000', '50', '0', 'cut', 'semi_auto', 'rubber', 0, NULL, 1, 1, '2023-05-23 17:01:35', '2025-01-23 12:53:49', 0),
+(31, 'BÁN TỰ ĐỘNG', '0', '60', '50000', '20', '0', 'cut', 'semi_auto', 'decal', 1, NULL, 1, 1, '2023-05-23 17:01:35', '2025-01-23 12:55:08', 0),
+(33, 'Máy xén bán tự động', '0', '60', '50000', '20', '0', 'cut', 'semi_auto', 'silk', 1, NULL, 1, 1, '2023-05-23 17:01:35', '2025-01-23 12:55:30', 0),
+(35, 'MÁY XÉN', '0', '150', '50000', '50', '0', 'cut', 'semi_auto', 'styrofoam', 1, NULL, 1, 1, '2023-05-23 17:01:35', '2025-01-23 12:54:15', 0),
+(37, 'Máy xén bán tự động', '0', '100', '50000', '10', '0', 'cut', 'semi_auto', 'mica', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2024-06-13 22:49:18', 0),
+(39, 'BÓC LỀ CARTON', '0', '20', '20000', '8', '0', 'peel', 'semi_auto', 'carton', 0, NULL, 1, 1, '2023-05-23 17:01:35', '2023-09-14 20:49:08', 0),
+(41, 'BÓC LỀ', '0', '30', '20000', '15', '0', 'peel', 'semi_auto', 'rubber', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-09-14 20:51:34', 0),
+(43, 'BÁN TỰ ĐỘNG', '0', '30', '20000', '15', '0', 'peel', 'semi_auto', 'styrofoam', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-10-06 13:17:44', 0),
+(45, 'Máy bóc lề bán tự động', '0', '15', '20000', '6', '0', 'peel', 'semi_auto', 'mica', NULL, NULL, 1, 1, '2023-05-23 17:01:35', '2023-10-01 15:00:35', 0),
+(46, 'TỰ ĐỘNG', '0', '0', '50000', '40', '25000', 'nilon', 'auto', 'paper', 0, NULL, 1, NULL, '2023-05-23 17:01:35', '2025-02-01 17:13:16', 1),
+(48, 'MÁY BỒI', '0', '400', '300000', '120', '50000', 'fill', 'semi_auto', 'fill_finish', 0, NULL, 1, NULL, '2023-05-23 17:01:35', '2024-08-06 09:28:33', 0),
+(49, 'Túi giấy khổ in  43 x 65', '0', '1500', '100000', '440', '50000', 'bag_paste', 'semi_auto', 'paper', NULL, '150d/cm', 1, NULL, '2023-05-23 17:01:35', '2024-02-22 04:34:04', 1),
+(50, 'Túi giấy khổ in  52 x 72', '0', '1700', '100000', '440', '50000', 'bag_paste', 'semi_auto', 'paper', NULL, '150d/cm', 1, NULL, '2023-05-23 17:01:35', '2024-02-22 04:33:54', 1),
+(51, 'Túi giấy khổ in  65 x 86', '0', '2000', '100000', '440', '50000', 'bag_paste', 'semi_auto', 'paper', NULL, '150d/cm', 1, NULL, '2023-05-23 17:01:35', '2024-02-22 04:33:38', 1),
+(52, 'Túi giấy khổ in 72 x 102', '0', '2300', '100000', '440', '50000', 'bag_paste', 'semi_auto', 'paper', NULL, '150d/cm', 1, NULL, '2023-05-23 17:01:35', '2024-02-22 04:33:28', 1),
+(53, 'GẮN BÌA VỚI THÀNH', '0', '500', '100000', '100', '0', 'finish', 'auto', 'fill_finish', NULL, NULL, 1, NULL, '2023-05-23 17:01:35', '2024-07-07 23:00:04', 1),
+(54, 'GẮN KHAY ĐỊNH HÌNH', '0', '150', '50000', '40', '0', 'finish', 'semi_auto', 'fill_finish', NULL, NULL, 1, NULL, '2023-05-23 17:01:35', '2023-09-15 05:45:45', 1),
+(55, 'GẮN CAO SU NON', '0', '150', '50000', '40', '0', 'finish', 'semi_auto', 'fill_finish', NULL, NULL, 1, NULL, '2023-05-23 17:01:35', '2023-09-15 05:45:38', 1),
+(56, 'GẮN MÚT PHẲNG', '0', '150', '50000', '40', '0', 'finish', 'semi_auto', 'fill_finish', NULL, NULL, 1, NULL, '2023-05-23 17:01:35', '2023-09-15 05:47:05', 1),
+(57, 'GẮN VẢI LỤA', '0', '600', '50000', '300', '0', 'finish', 'semi_auto', 'fill_finish', NULL, NULL, 1, NULL, '2023-05-23 17:01:35', '2023-09-15 05:49:28', 1),
+(58, 'GẮN PHỤ KIỆN', '0', '150', '50000', '50', '0', 'finish', 'semi_auto', 'fill_finish', NULL, NULL, 1, NULL, '2023-05-23 17:01:35', '2024-03-01 09:46:54', 1),
+(59, 'ĐỘT KHUYẾT', '0', '150', '50000', '40', '0', 'finish', 'semi_auto', 'fill_finish', NULL, NULL, 1, NULL, '2023-05-23 17:01:35', '2023-09-15 05:49:04', 1),
+(60, 'GẮN 2 THÀNH HỘP TRẢI PHẲNG', '0', '600', '200000', '300', '50000', 'finish', 'semi_auto', 'fill_finish', NULL, NULL, 1, NULL, '2023-05-23 17:01:35', '2023-09-15 05:45:06', 1),
+(61, 'BÁN TỰ ĐỘNG', '0', '50', '50000', '10', '10000', 'cut', 'semi_auto', 'paper', NULL, NULL, 1, NULL, '2023-05-23 17:01:35', '2024-06-13 22:33:24', 1),
+(62, 'TỰ ĐỘNG', '50', '35', '100000', '0', '0', 'fold', 'auto', 'paper', 0, NULL, 1, NULL, '2023-05-23 17:01:35', '2023-10-06 13:03:41', 1),
+(63, 'MÁY BỒI TĐ', '0', '400', '300000', '70', '100000', 'fill', 'auto', 'fill_finish', NULL, NULL, 1, NULL, '2023-09-15 06:11:13', '2024-07-23 00:15:25', 1),
+(64, 'BÓ GÓI', '0', '100', '200000', '50', '50000', 'finish', 'semi_auto', 'fill_finish', NULL, NULL, 1, NULL, '2023-10-05 09:31:58', '2023-10-05 09:32:34', 1),
+(65, 'GẮN THÀNH HỘP QUÀ TẾT 2024', '0', '800', '200000', '200', '50000', 'finish', 'semi_auto', 'fill_finish', NULL, NULL, 1, NULL, '2023-10-07 07:38:17', '2023-10-07 07:38:17', 1),
+(66, 'GẮN ĐÁY CHAI RƯỢU HỘP QUÀ TẾT 2024', '0', '500', '200000', '200', '50000', 'finish', 'semi_auto', 'fill_finish', NULL, NULL, 1, NULL, '2023-10-07 07:39:00', '2023-10-07 07:39:00', 1),
+(67, 'GẮN CỔ CHAI RƯỢU HỘP QUÀ TẾT 2024', '0', '500', '200000', '200', '50000', 'finish', 'semi_auto', 'fill_finish', NULL, NULL, 1, NULL, '2023-10-07 07:39:22', '2023-10-07 07:39:22', 1),
+(68, 'BÓ GÓI HỘP QUÀ TẾT 2024', '0', '300', '200000', '100', '50000', 'finish', 'semi_auto', 'fill_finish', NULL, NULL, 1, NULL, '2023-10-07 07:40:32', '2023-10-07 07:40:42', 1),
+(69, 'BÁN TỰ ĐỘNG', '150', '150', '150000', '50', '60000', 'elevate', 'semi_auto', 'paper', NULL, NULL, 1, NULL, '2024-02-21 13:07:31', '2025-02-02 09:17:16', 1),
+(70, 'THẢ LÓT', '0', '100', '50000', '30', '0', 'finish', 'semi_auto', 'fill_finish', NULL, NULL, 1, NULL, '2024-03-01 09:45:43', '2024-03-01 09:46:06', 1),
+(71, 'MÁY BẾ TĐ', '150', '150', '150000', '50', '70000', 'elevate', 'auto', 'carton', 0, '150đ/cm áp dụng cho tất cả các khuôn máy bế, Khuôn phức tạp + thêm ngoài theo cảm nhận', 1, 1, '2024-04-24 01:24:35', '2025-01-23 12:59:24', 1),
+(72, 'ÉP TRÊN MẶT HỘP', '0', '0', '100000', '100', '35000', 'compress', 'semi_auto', 'paper', 1, NULL, 1, 0, '2025-02-01 16:59:21', '2025-02-01 17:00:59', 1),
+(73, 'TỰ ĐỘNG', '150', '150', '150000', '40', '70000', 'elevate', 'auto', 'paper', NULL, NULL, 1, NULL, '2025-02-01 17:18:12', '2025-02-01 17:18:12', 1),
+(74, 'THỦ CÔNG - RÁN TAY', '0', '200', '100000', '70', '25000', 'box_paste', 'semi_auto', 'paper', NULL, NULL, 1, 2, '2025-02-02 09:33:21', '2025-02-02 09:35:23', 1),
+(75, 'CHUỒN CHUỒN NHỎ', '0', '0', '100000', '10', '25000', 'compress', 'auto', 'paper', 1, NULL, 1, 0, '2025-02-03 11:49:27', '2025-02-03 11:49:27', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `districts`
+--
+
+CREATE TABLE `districts` (
+  `id` int NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `note` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `ord` tinyint DEFAULT NULL,
+  `parent` int DEFAULT NULL,
+  `act` tinyint(1) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `districts`
+--
+
+INSERT INTO `districts` (`id`, `name`, `note`, `ord`, `parent`, `act`, `created_at`, `updated_at`) VALUES
+(2, 'An Phú', NULL, 1, 1, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(3, 'Châu Đốc', NULL, 1, 1, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(4, 'Châu Phú', NULL, 1, 1, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(5, 'Châu Thành', NULL, 1, 1, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(6, 'Chợ Mới', NULL, 1, 1, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(7, 'Long Xuyên', NULL, 1, 1, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(8, 'Phú Tân', NULL, 1, 1, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(9, 'Tân Châu', NULL, 1, 1, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(10, 'Thoại Sơn', NULL, 1, 1, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(11, 'Tịnh Biên', NULL, 1, 1, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(12, 'Tri Tôn', NULL, 1, 1, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(14, 'Côn Đảo', NULL, 1, 13, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(15, 'Đất Đỏ', NULL, 1, 13, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(16, 'Tân Thành', NULL, 1, 13, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(17, 'Vũng Tàu', NULL, 1, 13, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(18, 'Xuyên Mộc', NULL, 1, 13, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(19, 'Bà Rịa-Vũng Tàu', NULL, 1, 13, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(20, 'Bà Rịa', NULL, 1, 13, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(21, 'Châu Đức', NULL, 1, 13, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(22, 'Long Điền', NULL, 1, 13, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(24, 'Bàu Bàng', NULL, 1, 23, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(25, 'Bắc Tân Uyên', NULL, 1, 23, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(26, 'Bến Cát', NULL, 1, 23, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(27, 'Dầu Tiếng', NULL, 1, 23, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(28, 'Dĩ An', NULL, 1, 23, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(29, 'Phú Giáo', NULL, 1, 23, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(30, 'Tân Uyên', NULL, 1, 23, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(31, 'Thủ Dầu Một', NULL, 1, 23, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(32, 'Thuận An', NULL, 1, 23, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(34, 'Bình Long', NULL, 1, 33, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(35, 'Bù Đăng', NULL, 1, 33, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(36, 'Bù Đốp', NULL, 1, 33, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(37, 'Bù Gia Mập', NULL, 1, 33, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(38, 'Chơn Thành', NULL, 1, 33, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(39, 'Đồng Phú', NULL, 1, 33, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(40, 'Đồng Xoài', NULL, 1, 33, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(41, 'Hớn Quản', NULL, 1, 33, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(42, 'Lộc Ninh', NULL, 1, 33, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(43, 'Phú Riềng', NULL, 1, 33, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(44, 'Phước Long', NULL, 1, 33, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(46, 'Bắc Bình', NULL, 1, 45, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(47, 'Đức Linh', NULL, 1, 45, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(48, 'Hàm Tân', NULL, 1, 45, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(49, 'Hàm Thuận Bắc', NULL, 1, 45, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(50, 'Hàm Thuận Nam', NULL, 1, 45, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(51, 'La Gi', NULL, 1, 45, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(52, 'Phan Thiết', NULL, 1, 45, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(53, 'Phú Quý', NULL, 1, 45, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(54, 'Tánh Linh', NULL, 1, 45, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(55, 'Tuy Phong', NULL, 1, 45, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(57, 'An Lão', NULL, 1, 56, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(58, 'An Nhơn', NULL, 1, 56, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(59, 'Hoài Ân', NULL, 1, 56, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(60, 'Hoài Nhơn', NULL, 1, 56, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(61, 'Phù Cát', NULL, 1, 56, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(62, 'Phù Mỹ', NULL, 1, 56, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(63, 'Quy Nhơn', NULL, 1, 56, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(64, 'Tây Sơn', NULL, 1, 56, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(65, 'Tuy Phước', NULL, 1, 56, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(66, 'Vân Canh', NULL, 1, 56, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(67, 'Vĩnh Thạnh', NULL, 1, 56, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(69, 'Bạc Liêu', NULL, 1, 68, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(70, 'Đông Hải', NULL, 1, 68, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(71, 'Giá Rai', NULL, 1, 68, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(72, 'Hoà Bình', NULL, 1, 68, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(73, 'Hồng Dân', NULL, 1, 68, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(74, 'Phước Long', NULL, 1, 68, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(75, 'Vĩnh Lợi', NULL, 1, 68, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(77, 'Bắc Giang', NULL, 1, 76, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(78, 'Hiệp Hòa', NULL, 1, 76, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(79, 'Lạng Giang', NULL, 1, 76, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(80, 'Lục Nam', NULL, 1, 76, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(81, 'Lục Ngạn', NULL, 1, 76, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(82, 'Sơn Động', NULL, 1, 76, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(83, 'Tân Yên', NULL, 1, 76, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(84, 'Việt Yên', NULL, 1, 76, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(85, 'Yên Dũng', NULL, 1, 76, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(86, 'Yên Thế', NULL, 1, 76, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(88, 'Ba Bể', NULL, 1, 87, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(89, 'Bạch Thông', NULL, 1, 87, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(90, 'Bắc Kạn', NULL, 1, 87, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(91, 'Chợ Đồn', NULL, 1, 87, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(92, 'Chợ Mới', NULL, 1, 87, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(93, 'Na Rì', NULL, 1, 87, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(94, 'Ngân Sơn', NULL, 1, 87, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(95, 'Pác Nặm', NULL, 1, 87, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(97, 'Bắc Ninh', NULL, 1, 96, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(98, 'Gia Bình', NULL, 1, 96, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(99, 'Lương Tài', NULL, 1, 96, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(100, 'Quế Võ', NULL, 1, 96, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(101, 'Thuận Thành', NULL, 1, 96, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(102, 'Tiên Du', NULL, 1, 96, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(103, 'Từ Sơn', NULL, 1, 96, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(104, 'Yên Phong', NULL, 1, 96, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(106, 'Ba Tri', NULL, 1, 105, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(107, 'Bến Tre', NULL, 1, 105, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(108, 'Bình Đại', NULL, 1, 105, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(109, 'Châu Thành', NULL, 1, 105, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(110, 'Chợ Lách', NULL, 1, 105, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(111, 'Giồng Trôm', NULL, 1, 105, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(112, 'Mỏ Cày Bắc', NULL, 1, 105, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(113, 'Mỏ Cày Nam', NULL, 1, 105, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(114, 'Thạnh Phú', NULL, 1, 105, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(116, 'Bảo Lạc', NULL, 1, 115, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(117, 'Bảo Lâm', NULL, 1, 115, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(118, 'Cao Bằng', NULL, 1, 115, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(119, 'Hà Quảng', NULL, 1, 115, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(120, 'Hạ Lang', NULL, 1, 115, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(121, 'Hòa An', NULL, 1, 115, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(122, 'Nguyên Bình', NULL, 1, 115, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(123, 'Phục Hòa', NULL, 1, 115, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(124, 'Quảng Uyên', NULL, 1, 115, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(125, 'Thạch An', NULL, 1, 115, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(126, 'Thông Nông', NULL, 1, 115, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(127, 'Trà Lĩnh', NULL, 1, 115, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(128, 'Trùng Khánh', NULL, 1, 115, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(130, 'Cà Mau', NULL, 1, 129, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(131, 'Cái Nước', NULL, 1, 129, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(132, 'Đầm Dơi', NULL, 1, 129, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(133, 'Năm Căn', NULL, 1, 129, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(134, 'Ngọc Hiển', NULL, 1, 129, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(135, 'Phú Tân', NULL, 1, 129, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(136, 'Thới Bình', NULL, 1, 129, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(137, 'Trần Văn Thời', NULL, 1, 129, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(138, 'U Minh', NULL, 1, 129, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(140, 'Bình Thủy', NULL, 1, 139, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(141, 'Cái Răng', NULL, 1, 139, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(142, 'Cờ Đỏ', NULL, 1, 139, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(143, 'Ninh Kiều', NULL, 1, 139, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(144, 'Ô Môn', NULL, 1, 139, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(145, 'Phong Điền', NULL, 1, 139, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(146, 'Thốt Nốt', NULL, 1, 139, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(147, 'Thới Lai', NULL, 1, 139, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(148, 'Vĩnh Thạnh', NULL, 1, 139, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(150, 'An Khê', NULL, 1, 149, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(151, 'Ayun Pa', NULL, 1, 149, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(152, 'Chư Păh', NULL, 1, 149, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(153, 'Chư Prông', NULL, 1, 149, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(154, 'Chư Pưh', NULL, 1, 149, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(155, 'Chư Sê', NULL, 1, 149, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(156, 'Đắk Đoa', NULL, 1, 149, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(157, 'Đak Pơ', NULL, 1, 149, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(158, 'Đức Cơ', NULL, 1, 149, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(159, 'Ia Grai', NULL, 1, 149, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(160, 'Ia Pa', NULL, 1, 149, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(161, 'KBang', NULL, 1, 149, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(162, 'Kông Chro', NULL, 1, 149, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(163, 'Krông Pa', NULL, 1, 149, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(164, 'Mang Yang', NULL, 1, 149, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(165, 'Phú Thiện', NULL, 1, 149, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(166, 'Pleiku', NULL, 1, 149, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(168, 'Cao Phong', NULL, 1, 167, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(169, 'Đà Bắc', NULL, 1, 167, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(170, 'Hoà Bình', NULL, 1, 167, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(171, 'Kim Bôi', NULL, 1, 167, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(172, 'Kỳ Sơn', NULL, 1, 167, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(173, 'Lạc Sơn', NULL, 1, 167, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(174, 'Lạc Thủy', NULL, 1, 167, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(175, 'Lương Sơn', NULL, 1, 167, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(176, 'Mai Châu', NULL, 1, 167, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(177, 'Tân Lạc', NULL, 1, 167, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(178, 'Yên Thủy', NULL, 1, 167, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(180, 'Bắc Mê', NULL, 1, 179, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(181, 'Bắc Quang', NULL, 1, 179, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(182, 'Đồng Văn', NULL, 1, 179, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(183, 'Hà Giang', NULL, 1, 179, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(184, 'Hoàng Su Phì', NULL, 1, 179, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(185, 'Mèo Vạc', NULL, 1, 179, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(186, 'Quản Bạ', NULL, 1, 179, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(187, 'Quang Bình', NULL, 1, 179, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(188, 'Vị Xuyên', NULL, 1, 179, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(189, 'Xín Mần', NULL, 1, 179, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(190, 'Yên Minh', NULL, 1, 179, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(192, 'Bình Lục', NULL, 1, 191, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(193, 'Duy Tiên', NULL, 1, 191, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(194, 'Kim Bảng', NULL, 1, 191, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(195, 'Lý Nhân', NULL, 1, 191, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(196, 'Phủ Lý', NULL, 1, 191, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(197, 'Thanh Liêm', NULL, 1, 191, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(199, 'Ba Đình', NULL, 1, 198, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(200, 'Ba Vì', NULL, 1, 198, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(201, 'Bắc Từ Liêm', NULL, 1, 198, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(202, 'Cầu Giấy', NULL, 1, 198, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(203, 'Chương Mỹ', NULL, 1, 198, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(204, 'Đan Phượng', NULL, 1, 198, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(205, 'Đông Anh', NULL, 1, 198, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(206, 'Đống Đa', NULL, 1, 198, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(207, 'Gia Lâm', NULL, 1, 198, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(208, 'Hà Đông', NULL, 1, 198, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(209, 'Hai Bà Trưng', NULL, 1, 198, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(210, 'Hoài Đức', NULL, 1, 198, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(211, 'Hoàn Kiếm', NULL, 1, 198, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(212, 'Hoàng Mai', NULL, 1, 198, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(213, 'Long Biên', NULL, 1, 198, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(214, 'Mê Linh', NULL, 1, 198, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(215, 'Mỹ Đức', NULL, 1, 198, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(216, 'Nam Từ Liêm', NULL, 1, 198, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(217, 'Phú Xuyên', NULL, 1, 198, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(218, 'Phúc Thọ', NULL, 1, 198, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(219, 'Quốc Oai', NULL, 1, 198, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(220, 'Sóc Sơn', NULL, 1, 198, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(221, 'Sơn Tây', NULL, 1, 198, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(222, 'Tây Hồ', NULL, 1, 198, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(223, 'Thạch Thất', NULL, 1, 198, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(224, 'Thanh Oai', NULL, 1, 198, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(225, 'Thanh Trì', NULL, 1, 198, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(226, 'Thanh Xuân', NULL, 1, 198, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(227, 'Thường Tín', NULL, 1, 198, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(228, 'Ứng Hòa', NULL, 1, 198, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(230, 'Can Lộc', NULL, 1, 229, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(231, 'Cẩm Xuyên', NULL, 1, 229, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(232, 'Đức Thọ', NULL, 1, 229, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(233, 'Hà Tĩnh', NULL, 1, 229, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(234, 'Hồng Lĩnh', NULL, 1, 229, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(235, 'Hương Khê', NULL, 1, 229, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(236, 'Hương Sơn', NULL, 1, 229, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(237, 'Kỳ Anh', NULL, 1, 229, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(238, 'Kỳ Anh', NULL, 1, 229, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(239, 'Lộc Hà', NULL, 1, 229, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(240, 'Nghi Xuân', NULL, 1, 229, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(241, 'Thạch Hà', NULL, 1, 229, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(242, 'Vũ Quang', NULL, 1, 229, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(244, 'Ân Thi', NULL, 1, 243, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(245, 'Hưng Yên', NULL, 1, 243, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(246, 'Khoái Châu', NULL, 1, 243, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(247, 'Kim Động', NULL, 1, 243, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(248, 'Mỹ Hào', NULL, 1, 243, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(249, 'Phù Cừ', NULL, 1, 243, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(250, 'Tiên Lữ', NULL, 1, 243, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(251, 'Văn Giang', NULL, 1, 243, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(252, 'Văn Lâm', NULL, 1, 243, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(253, 'Yên Mỹ', NULL, 1, 243, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(255, 'Bình Giang', NULL, 1, 254, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(256, 'Cẩm Giàng', NULL, 1, 254, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(257, 'Chí Linh', NULL, 1, 254, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(258, 'Gia Lộc', NULL, 1, 254, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(259, 'Hải Dương', NULL, 1, 254, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(260, 'Kim Thành', NULL, 1, 254, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(261, 'Kinh Môn', NULL, 1, 254, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(262, 'Nam Sách', NULL, 1, 254, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(263, 'Ninh Giang', NULL, 1, 254, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(264, 'Thanh Hà', NULL, 1, 254, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(265, 'Thanh Miện', NULL, 1, 254, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(266, 'Tứ Kỳ', NULL, 1, 254, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(268, 'An Dương', NULL, 1, 267, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(269, 'An Lão', NULL, 1, 267, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(270, 'Bạch Long Vĩ', NULL, 1, 267, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(271, 'Cát Hải', NULL, 1, 267, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(272, 'Dương Kinh', NULL, 1, 267, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(273, 'Đồ Sơn', NULL, 1, 267, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(274, 'Hải An', NULL, 1, 267, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(275, 'Hồng Bàng', NULL, 1, 267, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(276, 'Kiến An', NULL, 1, 267, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(277, 'Kiến Thụy', NULL, 1, 267, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(278, 'Lê Chân', NULL, 1, 267, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(279, 'Ngô Quyền', NULL, 1, 267, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(280, 'Thuỷ Nguyên', NULL, 1, 267, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(281, 'Tiên Lãng', NULL, 1, 267, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(282, 'Vĩnh Bảo', NULL, 1, 267, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(284, 'Châu Thành', NULL, 1, 283, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(285, 'Châu Thành A', NULL, 1, 283, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(286, 'Long Mỹ', NULL, 1, 283, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(287, 'Long Mỹ', NULL, 1, 283, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(288, 'Ngã Bảy', NULL, 1, 283, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(289, 'Phụng Hiệp', NULL, 1, 283, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(290, 'Vị Thanh', NULL, 1, 283, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(291, 'Vị Thủy', NULL, 1, 283, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(293, 'Cam Lâm', NULL, 1, 292, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(294, 'Cam Ranh', NULL, 1, 292, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(295, 'Diên Khánh', NULL, 1, 292, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(296, 'Khánh Sơn', NULL, 1, 292, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(297, 'Khánh Vĩnh', NULL, 1, 292, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(298, 'Nha Trang', NULL, 1, 292, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(299, 'Ninh Hòa', NULL, 1, 292, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(300, 'Trường Sa', NULL, 1, 292, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(301, 'Vạn Ninh', NULL, 1, 292, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(303, 'An Biên', NULL, 1, 302, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(304, 'An Minh', NULL, 1, 302, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(305, 'Châu Thành', NULL, 1, 302, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(306, 'Giang Thành', NULL, 1, 302, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(307, 'Giồng Riềng', NULL, 1, 302, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(308, 'Gò Quao', NULL, 1, 302, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(309, 'Hà Tiên', NULL, 1, 302, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(310, 'Hòn Đất', NULL, 1, 302, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(311, 'Kiên Hải', NULL, 1, 302, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(312, 'Kiên Lương', NULL, 1, 302, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(313, 'Phú Quốc', NULL, 1, 302, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(314, 'Rạch Giá', NULL, 1, 302, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(315, 'Tân Hiệp', NULL, 1, 302, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(316, 'U Minh Thượng', NULL, 1, 302, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(317, 'Vĩnh Thuận', NULL, 1, 302, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(319, 'Đắk Glei', NULL, 1, 318, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(320, 'Đắk Hà', NULL, 1, 318, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(321, 'Đăk Tô', NULL, 1, 318, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(322, 'Ia H\'Drai', NULL, 1, 318, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(323, 'Kon Plông', NULL, 1, 318, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(324, 'Kon Rẫy', NULL, 1, 318, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(325, 'Kon Tum', NULL, 1, 318, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(326, 'Ngọc Hồi', NULL, 1, 318, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(327, 'Sa Thầy', NULL, 1, 318, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(328, 'Tu Mơ Rông', NULL, 1, 318, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(330, 'Lai Châu', NULL, 1, 329, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(331, 'Mường Tè', NULL, 1, 329, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(332, 'Nậm Nhùn', NULL, 1, 329, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(333, 'Phong Thổ', NULL, 1, 329, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(334, 'Sìn Hồ', NULL, 1, 329, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(335, 'Tam Đường', NULL, 1, 329, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(336, 'Tân Uyên', NULL, 1, 329, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(337, 'Than Uyên', NULL, 1, 329, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(339, 'Bến Lức', NULL, 1, 338, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(340, 'Cần Đước', NULL, 1, 338, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(341, 'Cần Giuộc', NULL, 1, 338, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(342, 'Châu Thành', NULL, 1, 338, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(343, 'Đức Hòa', NULL, 1, 338, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(344, 'Đức Huệ', NULL, 1, 338, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(345, 'Kiến Tường', NULL, 1, 338, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(346, 'Mộc Hóa', NULL, 1, 338, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(347, 'Tân An', NULL, 1, 338, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(348, 'Tân Hưng', NULL, 1, 338, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(349, 'Tân Thạnh', NULL, 1, 338, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(350, 'Tân Trụ', NULL, 1, 338, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(351, 'Thạnh Hóa', NULL, 1, 338, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(352, 'Thủ Thừa', NULL, 1, 338, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(353, 'Vĩnh Hưng', NULL, 1, 338, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(355, 'Bảo Thắng', NULL, 1, 354, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(356, 'Bảo Yên', NULL, 1, 354, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(357, 'Bát Xát', NULL, 1, 354, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(358, 'Bắc Hà', NULL, 1, 354, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(359, 'Lào Cai', NULL, 1, 354, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(360, 'Mường Khương', NULL, 1, 354, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(361, 'Sa Pa', NULL, 1, 354, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(362, 'Si Ma Cai', NULL, 1, 354, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(363, 'Văn Bàn', NULL, 1, 354, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(365, 'Bảo Lâm', NULL, 1, 364, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(366, 'Bảo Lộc', NULL, 1, 364, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(367, 'Cát Tiên', NULL, 1, 364, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(368, 'Di Linh', NULL, 1, 364, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(369, 'Đà Lạt', NULL, 1, 364, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(370, 'Đạ Huoai', NULL, 1, 364, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(371, 'Đạ Tẻh', NULL, 1, 364, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(372, 'Đam Rông', NULL, 1, 364, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(373, 'Đơn Dương', NULL, 1, 364, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(374, 'Đức Trọng', NULL, 1, 364, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(375, 'Lạc Dương', NULL, 1, 364, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(376, 'Lâm Hà', NULL, 1, 364, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(378, 'Bắc Sơn', NULL, 1, 377, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(379, 'Bình Gia', NULL, 1, 377, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(380, 'Cao Lộc', NULL, 1, 377, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(381, 'Chi Lăng', NULL, 1, 377, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(382, 'Đình Lập', NULL, 1, 377, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(383, 'Hữu Lũng', NULL, 1, 377, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(384, 'Lạng Sơn', NULL, 1, 377, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(385, 'Lộc Bình', NULL, 1, 377, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(386, 'Tràng Định', NULL, 1, 377, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(387, 'Vãn Lãng', NULL, 1, 377, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(388, 'Văn Quan', NULL, 1, 377, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(390, 'Giao Thủy', NULL, 1, 389, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(391, 'Hải Hậu', NULL, 1, 389, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(392, 'Mỹ Lộc', NULL, 1, 389, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(393, 'Nam Định', NULL, 1, 389, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(394, 'Nam Trực', NULL, 1, 389, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(395, 'Nghĩa Hưng', NULL, 1, 389, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(396, 'Trực Ninh', NULL, 1, 389, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(397, 'Vụ Bản', NULL, 1, 389, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(398, 'Xuân Trường', NULL, 1, 389, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(399, 'Ý Yên', NULL, 1, 389, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(401, 'Anh Sơn', NULL, 1, 400, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(402, 'Con Cuông', NULL, 1, 400, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(403, 'Cửa Lò', NULL, 1, 400, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(404, 'Diễn Châu', NULL, 1, 400, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(405, 'Đô Lương', NULL, 1, 400, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(406, 'Hoàng Mai', NULL, 1, 400, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(407, 'Hưng Nguyên', NULL, 1, 400, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(408, 'Kỳ Sơn', NULL, 1, 400, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(409, 'Nam Đàn', NULL, 1, 400, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(410, 'Nghi Lộc', NULL, 1, 400, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(411, 'Nghĩa Đàn', NULL, 1, 400, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(412, 'Quế Phong', NULL, 1, 400, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(413, 'Quỳ Châu', NULL, 1, 400, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(414, 'Quỳ Hợp', NULL, 1, 400, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(415, 'Quỳnh Lưu', NULL, 1, 400, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(416, 'Tân Kỳ', NULL, 1, 400, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(417, 'Thái Hòa', NULL, 1, 400, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(418, 'Thanh Chương', NULL, 1, 400, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(419, 'Tương Dương', NULL, 1, 400, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(420, 'Vinh', NULL, 1, 400, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(421, 'Yên Thành', NULL, 1, 400, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(423, 'Gia Viễn', NULL, 1, 422, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(424, 'Hoa Lư', NULL, 1, 422, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(425, 'Kim Sơn', NULL, 1, 422, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(426, 'Nho Quan', NULL, 1, 422, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(427, 'Ninh Bình', NULL, 1, 422, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(428, 'Tam Điệp', NULL, 1, 422, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(429, 'Yên Khánh', NULL, 1, 422, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(430, 'Yên Mô', NULL, 1, 422, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(432, 'Bác Ái', NULL, 1, 431, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(433, 'Ninh Hải', NULL, 1, 431, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(434, 'Ninh Phước', NULL, 1, 431, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(435, 'Ninh Sơn', NULL, 1, 431, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(436, 'Phan Rang-Tháp Chàm', NULL, 1, 431, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(437, 'Thuận Bắc', NULL, 1, 431, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(438, 'Thuận Nam', NULL, 1, 431, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(440, 'Cẩm Khê', NULL, 1, 439, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(441, 'Đoan Hùng', NULL, 1, 439, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(442, 'Hạ Hòa', NULL, 1, 439, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(443, 'Lâm Thao', NULL, 1, 439, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(444, 'Phú Thọ', NULL, 1, 439, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(445, 'Phù Ninh', NULL, 1, 439, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(446, 'Tam Nông', NULL, 1, 439, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(447, 'Tân Sơn', NULL, 1, 439, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(448, 'Thanh Ba', NULL, 1, 439, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(449, 'Thanh Sơn', NULL, 1, 439, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(450, 'Thanh Thủy', NULL, 1, 439, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(451, 'Việt Trì', NULL, 1, 439, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(452, 'Yên Lập', NULL, 1, 439, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(454, 'Đông Hòa', NULL, 1, 453, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(455, 'Đồng Xuân', NULL, 1, 453, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(456, 'Phú Hòa', NULL, 1, 453, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(457, 'Sông Cầu', NULL, 1, 453, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(458, 'Sông Hinh', NULL, 1, 453, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(459, 'Sơn Hòa', NULL, 1, 453, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(460, 'Tây Hòa', NULL, 1, 453, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(461, 'Tuy An', NULL, 1, 453, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(462, 'Tuy Hòa', NULL, 1, 453, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(464, 'Ba Đồn', NULL, 1, 463, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(465, 'Bố Trạch', NULL, 1, 463, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(466, 'Đồng Hới', NULL, 1, 463, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(467, 'Lệ Thủy', NULL, 1, 463, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(468, 'Minh Hóa', NULL, 1, 463, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(469, 'Quảng Ninh', NULL, 1, 463, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(470, 'Quảng Trạch', NULL, 1, 463, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(471, 'Tuyên Hóa', NULL, 1, 463, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(473, 'Bắc Trà My', NULL, 1, 472, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(474, 'Duy Xuyên', NULL, 1, 472, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(475, 'Đại Lộc', NULL, 1, 472, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(476, 'Điện Bàn', NULL, 1, 472, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(477, 'Đông Giang', NULL, 1, 472, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(478, 'Hiệp Đức', NULL, 1, 472, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(479, 'Hội An', NULL, 1, 472, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(480, 'Nam Giang', NULL, 1, 472, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(481, 'Nam Trà My', NULL, 1, 472, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(482, 'Nông Sơn', NULL, 1, 472, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(483, 'Núi Thành', NULL, 1, 472, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(484, 'Phú Ninh', NULL, 1, 472, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(485, 'Phước Sơn', NULL, 1, 472, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(486, 'Quế Sơn', NULL, 1, 472, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(487, 'Tam Kỳ', NULL, 1, 472, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(488, 'Tây Giang', NULL, 1, 472, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(489, 'Thăng Bình', NULL, 1, 472, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(490, 'Tiên Phước', NULL, 1, 472, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(492, 'Ba Tơ', NULL, 1, 491, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(493, 'Bình Sơn', NULL, 1, 491, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(494, 'Đức Phổ', NULL, 1, 491, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(495, 'Lý Sơn', NULL, 1, 491, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(496, 'Minh Long', NULL, 1, 491, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(497, 'Mộ Đức', NULL, 1, 491, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(498, 'Nghĩa Hành', NULL, 1, 491, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(499, 'Quảng Ngãi', NULL, 1, 491, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(500, 'Sơn Hà', NULL, 1, 491, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(501, 'Sơn Tây', NULL, 1, 491, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(502, 'Sơn Tịnh', NULL, 1, 491, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(503, 'Tây Trà', NULL, 1, 491, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(504, 'Trà Bồng', NULL, 1, 491, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(505, 'Tư Nghĩa', NULL, 1, 491, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(507, 'Ba Chẽ', NULL, 1, 506, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(508, 'Bình Liêu', NULL, 1, 506, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(509, 'Cẩm Phả', NULL, 1, 506, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(510, 'Cô Tô', NULL, 1, 506, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(511, 'Đầm Hà', NULL, 1, 506, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(512, 'Đông Triều', NULL, 1, 506, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(513, 'Hạ Long', NULL, 1, 506, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(514, 'Hải Hà', NULL, 1, 506, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(515, 'Hoành Bồ', NULL, 1, 506, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(516, 'Móng Cái', NULL, 1, 506, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(517, 'Quảng Yên', NULL, 1, 506, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(518, 'Tiên Yên', NULL, 1, 506, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(519, 'Uông Bí', NULL, 1, 506, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(520, 'Vân Đồn', NULL, 1, 506, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(522, 'Cam Lộ', NULL, 1, 521, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(523, 'Cồn Cỏ', NULL, 1, 521, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(524, 'Đa Krông', NULL, 1, 521, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(525, 'Đông Hà', NULL, 1, 521, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(526, 'Gio Linh', NULL, 1, 521, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(527, 'Hải Lăng', NULL, 1, 521, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(528, 'Hướng Hóa', NULL, 1, 521, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(529, 'Quảng Trị', NULL, 1, 521, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(530, 'Triệu Phong', NULL, 1, 521, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(531, 'Vĩnh Linh', NULL, 1, 521, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(533, 'Châu Thành', NULL, 1, 532, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(534, 'Cù Lao Dung', NULL, 1, 532, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(535, 'Kế Sách', NULL, 1, 532, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(536, 'Long Phú', NULL, 1, 532, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(537, 'Mỹ Tú', NULL, 1, 532, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(538, 'Mỹ Xuyên', NULL, 1, 532, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(539, 'Ngã Năm', NULL, 1, 532, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(540, 'Sóc Trăng', NULL, 1, 532, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(541, 'Thạnh Trị', NULL, 1, 532, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(542, 'Trần Đề', NULL, 1, 532, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(543, 'Vĩnh Châu', NULL, 1, 532, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(545, 'Bắc Yên', NULL, 1, 544, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(546, 'Mai Sơn', NULL, 1, 544, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(547, 'Mộc Châu', NULL, 1, 544, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(548, 'Mường La', NULL, 1, 544, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(549, 'Phù Yên', NULL, 1, 544, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(550, 'Quỳnh Nhai', NULL, 1, 544, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(551, 'Sông Mã', NULL, 1, 544, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(552, 'Sốp Cộp', NULL, 1, 544, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(553, 'Sơn La', NULL, 1, 544, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(554, 'Thuận Châu', NULL, 1, 544, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(555, 'Vân Hồ', NULL, 1, 544, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(556, 'Yên Châu', NULL, 1, 544, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(558, 'Bá Thước', NULL, 1, 557, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(559, 'Bỉm Sơn', NULL, 1, 557, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(560, 'Cẩm Thủy', NULL, 1, 557, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(561, 'Đông Sơn', NULL, 1, 557, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(562, 'Hà Trung', NULL, 1, 557, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(563, 'Hậu Lộc', NULL, 1, 557, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(564, 'Hoằng Hóa', NULL, 1, 557, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(565, 'Lang Chánh', NULL, 1, 557, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(566, 'Mường Lát', NULL, 1, 557, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(567, 'Nga Sơn', NULL, 1, 557, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(568, 'Ngọc Lặc', NULL, 1, 557, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(569, 'Như Thanh', NULL, 1, 557, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(570, 'Như Xuân', NULL, 1, 557, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(571, 'Nông Cống', NULL, 1, 557, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(572, 'Quan Hóa', NULL, 1, 557, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(573, 'Quan Sơn', NULL, 1, 557, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(574, 'Quảng Xương', NULL, 1, 557, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(575, 'Sầm Sơn', NULL, 1, 557, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(576, 'Thạch Thành', NULL, 1, 557, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(577, 'Thanh Hóa', NULL, 1, 557, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(578, 'Thiệu Hóa', NULL, 1, 557, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(579, 'Thọ Xuân', NULL, 1, 557, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(580, 'Thường Xuân', NULL, 1, 557, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(581, 'Tĩnh Gia', NULL, 1, 557, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(582, 'Triệu Sơn', NULL, 1, 557, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(583, 'Vĩnh Lộc', NULL, 1, 557, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(584, 'Yên Định', NULL, 1, 557, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(586, 'Đông Hưng', NULL, 1, 585, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(587, 'Hưng Hà', NULL, 1, 585, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(588, 'Kiến Xương', NULL, 1, 585, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(589, 'Quỳnh Phụ', NULL, 1, 585, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(590, 'Thái Bình', NULL, 1, 585, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(591, 'Thái Thụy', NULL, 1, 585, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(592, 'Tiền Hải', NULL, 1, 585, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(593, 'Vũ Thư', NULL, 1, 585, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(595, 'Đại Từ', NULL, 1, 594, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(596, 'Định Hóa', NULL, 1, 594, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(597, 'Đồng Hỷ', NULL, 1, 594, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(598, 'Phổ Yên', NULL, 1, 594, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(599, 'Phú Bình', NULL, 1, 594, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(600, 'Phú Lương', NULL, 1, 594, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(601, 'Sông Công', NULL, 1, 594, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(602, 'Thái Nguyên', NULL, 1, 594, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(603, 'Võ Nhai', NULL, 1, 594, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(605, 'Huế', NULL, 1, 604, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(606, 'Hương Thủy', NULL, 1, 604, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(607, 'Hương Trà', NULL, 1, 604, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(608, 'Nam Đông', NULL, 1, 604, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(609, 'Thừa Thiên-Huế', NULL, 1, 604, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(610, 'A Lưới', NULL, 1, 604, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(611, 'Phong Điền', NULL, 1, 604, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(612, 'Phú Lộc', NULL, 1, 604, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(613, 'Phú Vang', NULL, 1, 604, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(614, 'Quảng Điền', NULL, 1, 604, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(616, 'Cai Lậy', NULL, 1, 615, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(617, 'Cai Lậy', NULL, 1, 615, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(618, 'Cái Bè', NULL, 1, 615, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(619, 'Châu Thành', NULL, 1, 615, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(620, 'Chợ Gạo', NULL, 1, 615, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(621, 'Gò Công', NULL, 1, 615, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(622, 'Gò Công Đông', NULL, 1, 615, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(623, 'Gò Công Tây', NULL, 1, 615, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(624, 'Mỹ Tho', NULL, 1, 615, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(625, 'Tân Phú Đông', NULL, 1, 615, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(626, 'Tân Phước', NULL, 1, 615, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(628, 'Bình Chánh', NULL, 1, 627, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(629, 'Bình Tân', NULL, 1, 627, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(630, 'Bình Thạnh', NULL, 1, 627, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(631, 'Cần Giờ', NULL, 1, 627, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(632, 'Củ Chi', NULL, 1, 627, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(633, 'Gò Vấp', NULL, 1, 627, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(634, 'Hóc Môn', NULL, 1, 627, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(635, 'Nhà Bè', NULL, 1, 627, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(636, 'Phú Nhuận', NULL, 1, 627, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(637, 'Quận 1', NULL, 1, 627, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(638, 'Quận 2', NULL, 1, 627, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(639, 'Quận 3', NULL, 1, 627, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(640, 'Quận 4', NULL, 1, 627, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(641, 'Quận 5', NULL, 1, 627, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(642, 'Quận 6', NULL, 1, 627, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(643, 'Quận 7', NULL, 1, 627, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(644, 'Quận 8', NULL, 1, 627, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(645, 'Quận 9', NULL, 1, 627, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(646, 'Quận 10', NULL, 1, 627, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(647, 'Quận 11', NULL, 1, 627, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(648, 'Quận 12', NULL, 1, 627, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(649, 'Tân Bình', NULL, 1, 627, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(650, 'Tân Phú', NULL, 1, 627, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(651, 'Thủ Đức', NULL, 1, 627, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(653, 'Càng Long', NULL, 1, 652, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(654, 'Cầu Kè', NULL, 1, 652, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(655, 'Cầu Ngang', NULL, 1, 652, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(656, 'Châu Thành', NULL, 1, 652, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(657, 'Duyên Hải', NULL, 1, 652, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(658, 'Duyên Hải', NULL, 1, 652, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(659, 'Tiểu Cần', NULL, 1, 652, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(660, 'Trà Cú', NULL, 1, 652, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(661, 'Trà Vinh', NULL, 1, 652, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(663, 'Chiêm Hóa', NULL, 1, 662, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(664, 'Hàm Yên', NULL, 1, 662, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(665, 'Lâm Bình', NULL, 1, 662, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(666, 'Na Hang', NULL, 1, 662, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(667, 'Sơn Dương', NULL, 1, 662, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(668, 'Tuyên Quang', NULL, 1, 662, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(669, 'Yên Sơn', NULL, 1, 662, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(671, 'Bến Cầu', NULL, 1, 670, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(672, 'Châu Thành', NULL, 1, 670, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(673, 'Dương Minh Châu', NULL, 1, 670, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(674, 'Gò Dầu', NULL, 1, 670, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(675, 'Hòa Thành', NULL, 1, 670, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(676, 'Tân Biên', NULL, 1, 670, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(677, 'Tân Châu', NULL, 1, 670, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(678, 'Tây Ninh', NULL, 1, 670, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(679, 'Trảng Bàng', NULL, 1, 670, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25');
+INSERT INTO `districts` (`id`, `name`, `note`, `ord`, `parent`, `act`, `created_at`, `updated_at`) VALUES
+(681, 'Bình Minh', NULL, 1, 680, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(682, 'Bình Tân', NULL, 1, 680, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(683, 'Long Hồ', NULL, 1, 680, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(684, 'Mang Thít', NULL, 1, 680, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(685, 'Tam Bình', NULL, 1, 680, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(686, 'Trà Ôn', NULL, 1, 680, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(687, 'Vĩnh Long', NULL, 1, 680, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(688, 'Vũng Liêm', NULL, 1, 680, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(690, 'Bình Xuyên', NULL, 1, 689, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(691, 'Lập Thạch', NULL, 1, 689, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(692, 'Phúc Yên', NULL, 1, 689, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(693, 'Sông Lô', NULL, 1, 689, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(694, 'Tam Dương', NULL, 1, 689, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(695, 'Tam Đảo', NULL, 1, 689, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(696, 'Vĩnh Tường', NULL, 1, 689, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(697, 'Vĩnh Yên', NULL, 1, 689, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(698, 'Yên Lạc', NULL, 1, 689, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(700, 'Lục Yên', NULL, 1, 699, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(701, 'Mù Căng Chải', NULL, 1, 699, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(702, 'Nghĩa Lộ', NULL, 1, 699, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(703, 'Trạm Tấu', NULL, 1, 699, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(704, 'Trấn Yên', NULL, 1, 699, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(705, 'Văn Chấn', NULL, 1, 699, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(706, 'Văn Yên', NULL, 1, 699, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(707, 'Yên Bái', NULL, 1, 699, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(708, 'Yên Bình', NULL, 1, 699, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(710, 'Điện Biên', NULL, 1, 709, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(711, 'Điện Biên Đông', NULL, 1, 709, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(712, 'Điện Biên Phủ', NULL, 1, 709, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(713, 'Mường Ảng', NULL, 1, 709, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(714, 'Mường Chà', NULL, 1, 709, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(715, 'Mường Lay', NULL, 1, 709, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(716, 'Mường Nhé', NULL, 1, 709, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(717, 'Nậm Pồ', NULL, 1, 709, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(718, 'Tủa Chùa', NULL, 1, 709, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(719, 'Tuần Giáo', NULL, 1, 709, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(721, 'Cẩm Lệ', NULL, 1, 720, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(722, 'Hải Châu', NULL, 1, 720, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(723, 'Hòa Vang', NULL, 1, 720, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(724, 'Hoàng Sa', NULL, 1, 720, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(725, 'Liên Chiểu', NULL, 1, 720, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(726, 'Ngũ Hành Sơn', NULL, 1, 720, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(727, 'Sơn Trà', NULL, 1, 720, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(728, 'Thanh Khê', NULL, 1, 720, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(730, 'Gia Nghĩa', NULL, 1, 729, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(731, 'Tuy Đức', NULL, 1, 729, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(733, 'Buôn Đôn', NULL, 1, 732, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(734, 'Buôn Hồ', NULL, 1, 732, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(735, 'Buôn Ma Thuột', NULL, 1, 732, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(736, 'Cư Kuin', NULL, 1, 732, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(737, 'Cư M\'gar', NULL, 1, 732, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(738, 'Ea H\'leo', NULL, 1, 732, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(739, 'Ea Kar', NULL, 1, 732, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(740, 'Ea Súp', NULL, 1, 732, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(741, 'Krông Ana', NULL, 1, 732, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(742, 'Krông Bông', NULL, 1, 732, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(743, 'Krông Búk', NULL, 1, 732, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(744, 'Krông Năng', NULL, 1, 732, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(745, 'Krông Pắk', NULL, 1, 732, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(746, 'Lắk', NULL, 1, 732, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(747, 'M\'Đrăk', NULL, 1, 732, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(749, 'Cư Jút', NULL, 1, 748, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(750, 'Đắk Glong', NULL, 1, 748, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(751, 'Đắk Mil', NULL, 1, 748, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(752, 'Đắk R\'lấp', NULL, 1, 748, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(753, 'Đăk Song', NULL, 1, 748, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(754, 'Krông Nô', NULL, 1, 748, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(756, 'Biên Hòa', NULL, 1, 755, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(757, 'Cẩm Mỹ', NULL, 1, 755, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(758, 'Định Quán', NULL, 1, 755, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(759, 'Long Khánh', NULL, 1, 755, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(760, 'Long Thành', NULL, 1, 755, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(761, 'Nhơn Trạch', NULL, 1, 755, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(762, 'Tân Phú', NULL, 1, 755, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(763, 'Thống Nhất', NULL, 1, 755, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(764, 'Trảng Bom', NULL, 1, 755, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(765, 'Vĩnh Cửu', NULL, 1, 755, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(766, 'Xuân Lộc', NULL, 1, 755, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(768, 'Cao Lãnh', NULL, 1, 767, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(769, 'Cao Lãnh', NULL, 1, 767, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(770, 'Châu Thành', NULL, 1, 767, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(771, 'Hồng Ngự', NULL, 1, 767, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(772, 'Hồng Ngự', NULL, 1, 767, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(773, 'Lai Vung', NULL, 1, 767, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(774, 'Lấp Vò', NULL, 1, 767, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(775, 'Sa Đéc', NULL, 1, 767, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(776, 'Tam Nông', NULL, 1, 767, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(777, 'Tân Hồng', NULL, 1, 767, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(778, 'Thanh Bình', NULL, 1, 767, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25'),
+(779, 'Tháp Mười', NULL, 1, 767, 1, '2022-06-21 14:53:25', '2022-06-21 14:53:25');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `domains`
+--
+
+CREATE TABLE `domains` (
+  `id` int NOT NULL COMMENT 'Mã',
+  `name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL COMMENT 'Tên',
+  `note` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL COMMENT 'Ghi chú',
+  `ord` tinyint DEFAULT NULL COMMENT 'Sắp xếp',
+  `act` tinyint(1) DEFAULT NULL COMMENT 'Kích hoạt',
+  `created_at` datetime DEFAULT NULL COMMENT 'Thời gian tạo',
+  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT 'Thời gian sửa',
+  `pos_x` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL COMMENT 'Kính tuyến',
+  `pos_y` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL COMMENT 'Vĩ tuyến'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `domains`
+--
+
+INSERT INTO `domains` (`id`, `name`, `note`, `ord`, `act`, `created_at`, `updated_at`, `pos_x`, `pos_y`) VALUES
+(1, 'Miền bắc', NULL, 1, 1, '2022-06-21 14:54:02', '2022-06-21 14:54:02', '21.0205873', '105.8081512'),
+(2, 'Miền trung', NULL, 2, 1, '2022-06-21 14:54:02', '2022-06-21 14:54:02', '16.4322431', '107.3452953'),
+(3, 'Miền nam', NULL, 3, 1, '2022-06-21 14:54:02', '2022-06-21 14:54:02', '11.5844862', '106.9994653');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `files`
+--
+
+CREATE TABLE `files` (
+  `id` int NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `base_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `dir` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `path` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `count` bigint DEFAULT NULL,
+  `ext_file` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `act` tinyint DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `created_by` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fill_finishes`
+--
+
+CREATE TABLE `fill_finishes` (
+  `id` bigint NOT NULL,
+  `code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `product_qty` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fill` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `finish` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `magnet` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `handled` int DEFAULT NULL,
+  `total_cost` bigint DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `product` int DEFAULT NULL,
+  `act` tinyint DEFAULT NULL,
+  `created_by` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `materals`
+--
+
+CREATE TABLE `materals` (
+  `id` int NOT NULL COMMENT 'Mã nhóm',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Tên nhóm',
+  `price` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `factor` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Cha',
+  `default` tinyint DEFAULT NULL,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Ghi chú',
+  `act` tinyint DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_by` int NOT NULL,
+  `ord` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `materals`
+--
+
+INSERT INTO `materals` (`id`, `name`, `price`, `factor`, `type`, `default`, `note`, `act`, `created_at`, `updated_at`, `created_by`, `ord`) VALUES
+(3, 'IN MỰC PHỦ MỜ', '0.08', NULL, 'cover', 1, '0.08 = 800đ/m2', 1, '2023-07-17 20:26:21', '2023-09-16 01:59:46', 0, NULL),
+(10, 'MỰC UV - BÓNG', '0', NULL, 'uv', 1, 'CT này không áp dụng tính khách hàng, chỉ áp dụng đo lường vật tư', 1, '2023-07-17 20:26:21', '2025-01-17 02:22:48', 0, NULL),
+(11, 'MỰC UV - SẦN CÁT', '0', NULL, 'uv', 1, 'CT này không áp dụng tính khách hàng, chỉ áp dụng đo lường vật tư', 1, '2023-07-17 20:26:21', '2025-01-17 02:23:05', 0, NULL),
+(12, 'GIẤY COUCHES', '0.00224', NULL, 'paper', 0, '0.0022 = 22triệu/ tấn', 1, '2023-07-17 20:26:21', '2025-01-21 10:50:36', 0, NULL),
+(13, 'GIẤY IVOLRY', '0.00187', NULL, 'paper', 0, '0.00192 = 19.2 triệu/ tấn', 1, '2023-07-17 20:26:21', '2025-01-21 10:50:46', 0, NULL),
+(14, 'GIẤY DUPLEX', '0.0016', NULL, 'paper', 0, '0.00145 = 16 triệu/ tấn', 1, '2023-07-17 20:26:21', '2025-01-21 10:50:53', 0, NULL),
+(15, 'GIẤY OFFSET', '0.0028', NULL, 'paper', 0, '0.0024 = 24 triệu/ tấn', 1, '2023-07-17 20:26:21', '2023-08-08 14:55:23', 0, NULL),
+(16, 'CHI PHÍ BỒI NẮP', '0.5', NULL, 'fill', 0, '0.5 = 5000đ/m2 keo bồi ( CT dành cho tính chi phí keo bồi )', 1, '2023-08-14 17:23:12', '2024-05-24 08:37:03', 0, NULL),
+(17, 'Nam châm nhỏ  ( KHÔNG PHÙ HỢP CÔNG THỨC NÀY )', '500', NULL, 'magnet', 0, '0', 1, '2023-08-14 12:39:31', '2025-01-12 15:33:15', 1, NULL),
+(18, 'CHI PHÍ BỒI ĐÁY', '0.5', NULL, 'fill', 0, '0.5 = 5000đ/m2 keo bồi ( CT dành cho tính chi phí keo bồi )', 1, '2023-08-14 17:23:49', '2024-05-24 08:36:58', 0, NULL),
+(19, 'CHI PHÍ BỒI THÀNH', '0.5', NULL, 'fill', 0, '0.5 = 5000đ/m2 keo bồi ( CT dành cho tính chi phí keo bồi )', 1, '2023-07-20 10:21:00', '2024-05-24 08:36:47', 1, NULL),
+(20, 'CHI PHÍ BỒI BÌA', '0.5', NULL, 'fill', 0, '0.5 = 5000đ/m2 keo bồi ( CT dành cho tính chi phí keo bồi )', 1, '2023-07-20 10:21:00', '2024-05-24 08:36:41', 1, NULL),
+(21, 'CHI PHÍ BỒI MẶT THÉP', '0.5', NULL, 'fill', 0, '0.5 = 5000đ/m2 keo bồi ( CT dành cho tính chi phí keo bồi )', 1, '2023-07-20 10:21:00', '2024-05-24 08:36:36', 1, NULL),
+(23, 'CHI PHÍ KHAY ĐỊNH HÌNH', '0.2', NULL, 'fill', 0, '0.5 = 5000đ/m2 keo bồi ( CT dành cho tính chi phí keo bồi )', 1, '2023-07-20 10:21:00', '2024-06-16 17:16:24', 1, NULL),
+(24, 'CHI PHÍ BỒI MẶT PHẲNG', '0.2', NULL, 'fill', 0, '0.5 = 5000đ/m2 keo bồi ( CT dành cho tính chi phí keo bồi )', 1, '2023-07-20 10:21:00', '2024-06-16 17:15:17', 1, NULL),
+(26, 'VẢI LỤA THƯỜNG', '0.6', NULL, 'silk', 0, '1.5m = 8000đ/đ\r\n1m = 6000đ cả công cắt lụa', 1, '2023-08-14 17:51:05', '2024-04-11 16:55:20', 1, NULL),
+(27, 'CHI PHÍ BỒI PHỤ KIỆN', '0.5', NULL, 'fill', NULL, '0.5 = 5000đ/m2 keo bồi ( CT dành cho tính chi phí keo bồi )', 1, '2023-09-15 05:11:08', '2024-05-24 08:36:04', 1, NULL),
+(29, 'IN MỰC PHỦ BÓNG', '0.08', NULL, 'cover', 1, '0.08 = 800đ/m2', 1, '2023-09-16 01:59:37', '2023-09-16 01:59:37', 1, NULL),
+(30, 'PHỦ BÓNG GỐC DẦU - CTY NHẬT SƠN', '1.5', NULL, 'cover', 1, '1.5 = 1500đ/m2', 1, '2023-09-16 02:00:33', '2023-09-16 02:00:33', 1, NULL),
+(31, 'Nam châm nhỡ', '800', NULL, 'magnet', 0, '0', 1, '2023-09-16 02:54:18', '2023-09-16 02:54:18', 1, NULL),
+(32, 'Nam châm to', '1200', NULL, 'magnet', 0, '0', 1, '2023-09-16 02:54:37', '2023-09-16 02:54:37', 1, NULL),
+(33, 'GIẤY KRAFT', '0.005', NULL, 'paper', 0, '0.005 = 50 triệu/ tấn', 1, '2023-09-19 01:14:55', '2025-01-21 10:52:32', 1, NULL),
+(34, 'ĐỀ CAN GIẤY', '0.0033', NULL, 'paper', 0, '0.0032 = 32 triệu/ tấn', 1, '2023-09-26 18:05:21', '2023-10-04 06:40:53', 1, NULL),
+(39, 'GIẤY MỸ THUẬT ĐEN', '0.00155', NULL, 'paper', 0, '0.00155 = 15.5 triệu/ tấn', 1, '2024-06-22 15:05:16', '2025-01-21 10:52:59', 1, NULL),
+(40, 'GIẤY MỸ THUẬT CÁC LOẠI', '0.00105', NULL, 'paper', 0, '0.00105 = 10.5 triệu/ tấn', 1, '2024-06-22 15:50:13', '2025-01-21 10:53:18', 1, NULL),
+(46, 'MÀNG BÓNG - MỜ - METALAI BẠC ok', '0', '757600', 'nilon', 0, '0.9 = 9000đ/m2', 1, '2024-07-02 09:25:55', '2025-01-12 15:31:11', 1, NULL),
+(47, 'GIẤY KHÁC', '0.0015', NULL, 'paper', NULL, NULL, 1, '2024-07-12 14:32:15', '2025-01-21 10:54:05', 10, NULL),
+(48, 'ĐỀ CAN NHUNG - LÔNG NGẮN', '0', NULL, 'decal', 0, NULL, 1, '2024-07-12 14:44:03', '2025-01-16 17:47:29', 10, NULL),
+(57, 'Màng METALAI - METALAI ĐẶC BIỆT ok', '0.8', NULL, 'metalai', 1, '0.8 = 8000d/ M2', 1, '2024-10-07 11:09:42', '2025-01-12 15:31:20', 1, NULL),
+(59, 'ĐỀ CAN NHUNG - LÔNG DÀI chưa có giá', '0', NULL, 'decal', 0, NULL, 1, '2025-01-16 17:53:31', '2025-01-16 17:57:47', 1, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `move_warehouses`
+--
+
+CREATE TABLE `move_warehouses` (
+  `id` int NOT NULL,
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `product_warehouse` int DEFAULT NULL,
+  `warehouse_from` int DEFAULT NULL,
+  `warehouse_to` int DEFAULT NULL,
+  `qty` int DEFAULT NULL,
+  `unit` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `price` float DEFAULT NULL,
+  `parent` int DEFAULT NULL,
+  `receipt_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `receipt` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `act` tinyint DEFAULT NULL,
+  `created_by` int DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notifies`
+--
+
+CREATE TABLE `notifies` (
+  `id` int NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `group_user` int DEFAULT NULL,
+  `user` int DEFAULT NULL,
+  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `handle_method` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `param` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `act` tinyint DEFAULT NULL,
+  `table_created` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` int DEFAULT NULL,
+  `handle_by` int DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `n_detail_tables`
+--
+
+CREATE TABLE `n_detail_tables` (
+  `id` int NOT NULL,
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `attr` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `note` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `table_map` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ord` int DEFAULT NULL,
+  `view` tinyint DEFAULT NULL,
+  `insert` tinyint DEFAULT NULL,
+  `update` tinyint DEFAULT NULL,
+  `search` tinyint DEFAULT NULL,
+  `rp_search` tinyint DEFAULT NULL,
+  `rp_view` tinyint DEFAULT NULL,
+  `get_other` tinyint DEFAULT NULL,
+  `history` tinyint DEFAULT NULL,
+  `parent` int DEFAULT NULL,
+  `other_data` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `default_value` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `group_user` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `condition` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `region` int DEFAULT NULL,
+  `act` tinyint DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `n_detail_tables`
+--
+
+INSERT INTO `n_detail_tables` (`id`, `name`, `attr`, `note`, `type`, `table_map`, `ord`, `view`, `insert`, `update`, `search`, `rp_search`, `rp_view`, `get_other`, `history`, `parent`, `other_data`, `default_value`, `group_user`, `condition`, `region`, `act`, `created_at`, `updated_at`) VALUES
+(1, 'code', '{\"disable_field\":1,\"required\":1}', 'Mã KH', 'text', 'customers', 0, 1, 0, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-06-12 13:21:35'),
+(2, 'name', '{\"required\":1}', 'Tên công ty', 'text', 'customers', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-06-16 20:31:48'),
+(3, 'name', '{\"required\":1}', 'Tên người liên hệ', 'text', 'represents', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-06-17 13:53:32'),
+(4, 'phone', '{\"required\":1, \"unique\":1}', 'SĐT di động', 'text', 'represents', 1, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-10-19 11:06:10'),
+(5, 'telephone', '', 'SĐT cố định', 'text', 'represents', 2, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-06-16 22:26:20'),
+(6, 'email', '{\"required\":1}', 'Email', 'text', 'represents', 3, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-06-16 22:26:26'),
+(7, 'address', '{\"required\":1}', 'Địa chỉ', 'text', 'customers', 1, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-06-16 20:32:11'),
+(8, 'city', '{\"required\":1}', 'Tỉnh/TP', 'linking', 'customers', 2, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"citys\",\r\n		\"where\":{\"parent\":0}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-06-16 20:32:13'),
+(9, 'tax_code', '', 'Mã số thuế', 'text', 'customers', 3, 0, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:45:08', '2024-06-16 20:32:37'),
+(10, 'status', '{\"required\":1}', 'Trạng thái', 'select', 'customers', 0, 1, 0, 0, 1, NULL, NULL, NULL, 0, 0, '{\"data\":{\n		\"options\":{\"\":\"Loại KH\", \"1\":\"KH cũ\", \"2\":\"KH mới\"}\n	}\n}', NULL, NULL, NULL, 1, 0, '2023-05-11 11:18:58', '2024-06-24 14:11:57'),
+(11, 'note', '', 'Ghi chú', 'textarea', 'customers', 4, 0, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-08 00:05:12', '2024-06-16 20:32:41'),
+(12, 'act', '', 'Kích hoạt', 'checkbox', 'customers', 5, 0, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-08 00:05:47', '2024-06-16 20:33:42'),
+(13, 'created_by', '', 'Người tạo', 'linking', 'customers', 7, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-12-06 18:20:51'),
+(14, 'created_at', '', 'Ngày tạo', 'datetime', 'customers', 8, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-06-24 14:11:42'),
+(15, 'updated_at', NULL, 'Ngày sửa', 'datetime', 'customers', 6, 0, 0, 0, 0, NULL, NULL, NULL, 0, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-08 00:12:15', '2024-06-16 20:34:22'),
+(16, 'name', '{\"required\":1}', 'Tên thiết bị', 'text', 'devices', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-08 00:51:39', '2024-06-12 13:21:35'),
+(17, 'model_price', '{\"required\":1}', 'Chi phí khuôn', 'text', 'devices', 1, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-08 01:02:39', '2024-06-12 13:21:35'),
+(18, '', '', 'ĐG chỉnh máy', 'group', 'devices', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 0, 1, '2023-04-08 00:51:39', '2024-06-12 13:21:35'),
+(19, '', '', 'ĐG lượt', 'group', 'devices', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 0, 1, '2023-04-08 00:51:39', '2024-06-12 13:21:35'),
+(20, 'shape_price', '{\"required\":1}', 'Khách', 'text', 'devices', 0, 1, 1, 1, 0, NULL, NULL, NULL, 1, 18, '', NULL, NULL, NULL, 12, 1, '2023-04-27 04:39:05', '2024-06-12 13:21:35'),
+(21, 'w_shape_price', '{\"required\":1}', 'Thợ', 'text', 'devices', 0, 1, 1, 1, 0, NULL, NULL, NULL, 1, 18, '', NULL, NULL, NULL, 12, 1, '2023-04-27 04:39:20', '2024-06-12 13:21:35'),
+(22, 'work_price', '{\"required\":1}', 'Khách', 'text', 'devices', 0, 1, 1, 1, 0, NULL, NULL, NULL, 1, 19, '', NULL, NULL, NULL, 13, 1, '2023-04-27 04:39:22', '2024-06-12 13:21:35'),
+(23, 'w_work_price', '{\"required\":1}', 'Thợ', 'text', 'devices', 0, 1, 1, 1, 0, NULL, NULL, NULL, 1, 19, '', NULL, NULL, NULL, 13, 1, '2023-04-27 04:39:26', '2024-06-12 13:21:35'),
+(24, 'act', '', 'Kích hoạt', 'checkbox', 'devices', 3, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-30 10:39:49', '2024-06-12 13:21:35'),
+(25, 'created_at', '', 'Ngày tạo', 'datetime', 'devices', 3, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-30 10:39:49', '2024-06-12 13:21:35'),
+(26, 'updated_at', '', 'Ngày sửa', 'datetime', 'devices', 3, 0, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-30 10:45:00', '2024-06-12 13:21:35'),
+(27, 'seri', '{\"disable_field\":1,\"required\":1}', 'Mã BG', 'text', 'quotes', 0, 1, 0, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-06-12 13:21:35'),
+(28, 'customer', '{\"required\":1,\"inject_class\":\"__select_parent\"}', 'Công ty', 'linking', 'quotes', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 359, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"customers\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-11 11:18:58', '2024-06-21 22:03:57'),
+(30, 'profit', '{\"required\":1, \"type_input\":\"number\"}', 'Lợi nhuận', 'text', 'quotes', 8, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-30 11:00:22', '2024-08-11 10:17:03'),
+(31, 'ship_price', '{\"required\":1, \"type_input\":\"price\"}', 'Phí Ship', 'text', 'quotes', 7, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-30 11:00:13', '2024-06-25 19:11:23'),
+(32, 'total_amount', '{\"required\":1, \"type_input\":\"price\"}', 'Giá trị BG', 'text', 'quotes', 9, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-30 11:00:33', '2024-06-25 19:11:33'),
+(33, 'status', '{\"required\":1}', 'Trạng thái', 'select', 'quotes', 12, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '{\"data\":{\r\n		\"options\":{\"\":\"Trạng thái\", \"not_accepted\":\"Chưa duyệt\", \"accepted\":\"Đã duyệt\", \"order_created\":\"Đã tạo đơn\"}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-11 11:19:48', '2024-06-25 19:13:57'),
+(34, 'created_by', NULL, 'Kinh doanh', 'linking', 'quotes', 10, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-06-25 19:13:52'),
+(35, 'created_at', NULL, 'Ngày tạo', 'datetime', 'quotes', 11, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-30 11:00:43', '2024-06-25 19:13:53'),
+(36, 'updated_at', NULL, 'Ngày sửa', 'datetime', 'quotes', 0, 0, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-08 00:12:15', '2024-06-12 13:21:35'),
+(46, 'name', '{\"required\":1}', 'Tên vật tư', 'text', 'materals', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 11:32:02', '2024-06-12 13:21:35'),
+(47, 'price', '{\"required\":1,\"type_input\":\"number\"}', 'Đơn giá', 'text', 'materals', 1, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 11:32:02', '2024-07-13 17:40:21'),
+(48, 'default', '', 'Lựa chọn mặc định', 'checkbox', 'materals', 5, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 11:32:02', '2024-07-13 17:40:52'),
+(49, 'act', '', 'Kích hoạt', 'checkbox', 'materals', 4, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 11:32:02', '2024-07-13 17:40:35'),
+(50, 'note', '', 'Ghi chú', 'textarea', 'materals', 6, 0, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 11:32:40', '2024-07-13 17:40:59'),
+(51, 'created_at', '', 'Ngày tạo', 'datetime', 'materals', 6, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 00:28:28', '2024-07-13 17:40:56'),
+(52, 'updated_at', '', 'Ngày sửa', 'datetime', 'materals', 8, 0, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 00:28:28', '2024-07-13 17:41:01'),
+(53, 'name', '{\"required\":1}', 'Tên định lượng', 'text', 'supply_prices', 1, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 11:38:57', '2025-01-10 17:20:49'),
+(54, 'price', '{\"required\":1,\"type_input\":\"number\"}', 'Đơn giá  (P.Kinh doanh tính)', 'text', 'supply_prices', 2, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 11:38:57', '2025-01-08 15:49:13'),
+(55, 'act', '', 'Kích hoạt', 'checkbox', 'supply_prices', 5, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 11:38:57', '2024-12-27 23:52:11'),
+(56, 'note', '', 'Ghi chú', 'textarea', 'supply_prices', 4, 0, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 11:38:57', '2024-12-27 23:52:08'),
+(57, 'created_at', '', 'Ngày tạo', 'datetime', 'supply_prices', 7, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 11:38:57', '2024-12-27 23:52:20'),
+(58, 'updated_at', '', 'Ngày sửa', 'datetime', 'supply_prices', 8, 0, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 11:38:57', '2024-12-27 23:52:40'),
+(59, 'name', '{\"required\":1}', 'Tên vật tư', 'text', 'supply_types', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 11:43:12', '2024-06-12 13:21:35'),
+(60, 'act', '', 'Kích hoạt', 'checkbox', 'supply_types', 0, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 11:43:12', '2024-06-12 13:21:35'),
+(61, 'note', '', 'Ghi chú', 'textarea', 'supply_types', 0, 0, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 11:43:12', '2024-06-12 13:21:35'),
+(62, 'created_at', '', 'Ngày tạo', 'datetime', 'supply_types', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 11:43:12', '2024-06-12 13:21:35'),
+(63, 'updated_at', '', 'Ngày sửa', 'datetime', 'supply_types', 0, 0, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 11:43:12', '2024-06-12 13:21:35'),
+(64, 'note', '', 'Ghi chú', 'textarea', 'devices', 2, 0, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-08 00:05:12', '2024-06-12 13:21:35'),
+(66, 'product', NULL, 'Tên sản phẩm', 'child_linking', 'quotes', 6, 1, 0, 0, 1, NULL, NULL, NULL, 0, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"products\",\r\n		\"field_query\":\"quote_id\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-30 11:17:52', '2024-06-25 19:09:15'),
+(67, 'name', '{\"required\":1}', 'Tên nhân viên', 'text', 'n_users', 1, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-05-23 14:40:33', '2024-07-25 20:15:50'),
+(68, 'email', '{\"required\":1}', 'Email', 'text', 'n_users', 5, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-05-23 14:28:34', '2024-07-26 14:38:04'),
+(69, 'phone', '{\"required\":1}', 'SĐT', 'text', 'n_users', 4, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-05-23 14:38:05', '2024-07-26 14:38:03'),
+(70, 'created_at', '', 'Ngày tạo', 'datetime', 'n_users', 10, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-05-23 14:38:05', '2024-07-25 20:16:42'),
+(71, 'created_by', '', 'Người tạo', 'linking', 'n_users', 8, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', NULL, NULL, NULL, 0, 1, '2023-05-23 14:38:05', '2024-07-25 20:16:32'),
+(72, 'act', '', 'Kích hoạt', 'checkbox', 'n_users', 9, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 4, 1, '2023-05-23 14:42:33', '2024-07-25 20:16:35'),
+(73, 'note', '', 'Ghi chú', 'textarea', 'n_users', 7, 0, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-05-23 14:38:05', '2024-07-25 20:16:28'),
+(74, 'username', '{\"required\":1,\"unique\":1}', 'Username', 'text', 'n_users', 2, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 4, 1, '2023-05-23 15:22:01', '2024-07-25 20:15:57'),
+(75, 'password', '{\"required\":1,\"type_input\":\"password\"}', 'Password', 'text', 'n_users', 3, 0, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 4, 1, '2023-05-23 14:41:41', '2024-07-25 20:16:01'),
+(76, 'group_user', '', 'Vai trò', 'linking', 'n_users', 6, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_group_users\"\r\n	}\r\n}', NULL, NULL, NULL, 4, 1, '2023-05-23 14:41:40', '2024-07-25 20:16:16'),
+(77, 'code', '{\"disable_field\":1,\"required\":1}', 'Mã đơn', 'text', 'orders', 0, 1, 0, 1, 1, NULL, 1, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-09-04 16:02:06'),
+(78, 'list_product', '', 'Tên sản phẩm', 'child_linking', 'orders', 6, 1, 0, 0, 1, NULL, 0, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"products\",\r\n		\"field_query\":\"order\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-12-26 11:07:41'),
+(79, 'status', '', 'Trạng thái', 'select', 'orders', 10, 1, 0, 1, 1, 1, 1, NULL, 1, 0, '{\"data\":{\n		\"options\":{\n			\"\":\"Trạng thái đơn\", \n			\"not_accepted\":\"Chưa duyệt\", \n			\"accepted\":\"Đã duyệt thiết kế\", \n			\"to_design\":\"Chờ thiết kế nhận lệnh\",\n			\"designing\":\"Đang thiết kế\",\n			\"design_submited\":\"Đã xong thiết kế\",\n			\"tech_submited\":\"Kế hoạch đang xử lí\",\n			\"making_process\":\"Đang gia công\",\n			\"submited\":\"hoàn thành gia công\",\n			\"waiting_warehouse\":\"Chờ nhập kho\",\n			\"imported\":\"Đã nhập kho\",\n			\"deliveried\":\"Đã giao hàng\"\n		}\n	}\n}', NULL, NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-09-20 14:27:35'),
+(80, 'advance', '{\"type_input\":\"price\"}', 'Tạm ứng', 'text', 'orders', 5, 0, 0, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-06-25 19:45:15'),
+(81, 'total_amount', '{\"type_input\":\"price\"}', 'Tổng tiền', 'text', 'orders', 6, 1, 0, 1, 0, NULL, 1, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-09-04 16:02:37'),
+(82, 'created_at', '', 'Ngày nhận hàng', 'datetime', 'orders', 8, 1, 0, 1, 1, 1, 1, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-09-04 16:03:15'),
+(83, 'created_by', '', 'Kinh doanh', 'linking', 'orders', 7, 1, 0, 1, 1, 1, 1, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-09-04 16:02:58'),
+(84, 'code', '{\"disable_field\":1}', 'Mã lệnh', 'text', 'c_designs', 0, 1, 0, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-06-12 13:21:35'),
+(85, 'order', '', 'Đơn hàng', 'linking', 'c_designs', 0, 1, 0, 1, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"orders\",\r\n		\"field_title\":\"code\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-06-15 07:02:19', '2024-06-12 13:21:35'),
+(86, 'name', '', 'Sản phẩm', 'text', 'c_designs', 0, 1, 0, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-06-12 13:21:35'),
+(87, 'status', '', 'Trạng thái', 'select', 'c_designs', 0, 1, 0, 1, 0, NULL, NULL, NULL, 1, 0, '{\"data\":{\r\n		\"options\":{\"not_accepted\":\"Chưa duyệt\", \"designing\":\"Đang thiết kế\", \"design_submited\":\"Đã hoàn thành\"}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-06-12 13:21:35'),
+(88, 'created_at', '', 'Ngày tạo', 'datetime', 'c_designs', 0, 1, 0, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-06-12 13:21:35'),
+(89, 'created_by', '', 'Tạo bởi', 'linking', 'c_designs', 0, 1, 0, 1, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-06-12 13:21:35'),
+(90, 'assign_by', '', 'Nhận bởi', 'linking', 'c_designs', 0, 1, 0, 1, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-06-15 10:42:46', '2024-06-12 13:21:35'),
+(91, 'code', '{\"disable_field\":1,\"required\":1}', 'Mã Lệnh', 'text', 'c_supplies', 0, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-07-14 02:55:30', '2024-07-26 18:08:01'),
+(92, 'size_type', '{\"required\":1,\"inject_class\":\"__wh_select_size\"}', 'Tên vật tư', 'linking', 'c_supplies', 2, 0, 0, 0, 0, NULL, NULL, NULL, 1, 148, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":{\r\n			\"getFunc\":\"getTableWarehouseByType\"\r\n		}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-07-14 02:55:31', '2024-07-26 18:04:47'),
+(93, 'qty', '{\"required\":1, \"type_input\":\"number\"}', 'SL cần xuất', 'c_supply_qty', 'c_supplies', 3, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-07-14 02:55:32', '2024-07-26 18:03:28'),
+(94, 'order', '', 'Xuất cho đơn', 'linking', 'c_supplies', 4, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"orders\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 0, '2023-07-14 02:56:31', '2024-07-26 18:02:11'),
+(95, 'name', '', 'Vật tư', 'text', 'c_supplies', 0, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-07-14 03:16:25', '2024-07-26 17:45:30'),
+(96, 'status', '', 'Trạng thái', 'select', 'c_supplies', 3, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '{\r\n		\"data\":{\r\n				\"options\":{\"\":\"Chưa gửi yêu cầu xuất\", \"handling\":\"Đang chờ xuất kho\", \"handled\":\"Đã xuất kho\"}\r\n		}\r\n}', NULL, NULL, NULL, 1, 1, '2023-07-14 02:50:55', '2024-07-26 18:04:27'),
+(97, 'created_by', '', 'Người tạo', 'linking', 'c_supplies', 7, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-07-14 03:11:41', '2024-07-26 18:02:44'),
+(98, 'assign_by', '', 'Phụ trách', 'linking', 'c_supplies', 8, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-07-14 03:11:21', '2024-07-26 18:02:46'),
+(99, 'created_at', '', 'Ngày tạo', 'datetime', 'c_supplies', 9, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-07-14 02:56:03', '2025-01-18 09:18:28'),
+(100, 'table_map', '', 'Bảng dữ liệu', 'linking', 'n_log_actions', 0, 0, 0, 0, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_tables\",\r\n		\"field_title\":\"note\"\r\n	}\r\n}', NULL, NULL, NULL, NULL, 0, '2023-05-26 03:19:12', '2024-06-12 13:21:35'),
+(101, 'action', '', 'Hoạt động', 'select', 'n_log_actions', 0, 0, 0, 1, 1, NULL, NULL, NULL, 1, 0, '{\"data\":{\r\n		\"options\":{\r\n				\"\":\"Chọn hành động\", \r\n				\"insert\":\"Thêm mới\", \r\n				\"update\":\"Cập nhật\", \r\n				\"remove\":\"Xóa\"\r\n			}\r\n	}\r\n}', NULL, NULL, NULL, NULL, 1, '2023-05-26 03:19:12', '2024-06-12 13:21:35'),
+(102, 'user', '', 'Nhân viên', 'linking', 'n_log_actions', 0, 0, 0, 0, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', NULL, NULL, NULL, NULL, 1, '2023-05-26 03:19:12', '2024-06-12 13:21:35'),
+(103, 'created_at', '', 'Thời gian', 'datetime', 'n_log_actions', 0, 0, 0, 0, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, NULL, 1, '2023-06-15 06:55:51', '2024-06-12 13:21:35'),
+(104, 'ord', '{\"type_input\":\"number\"}', 'Sắp xếp', 'text', 'supply_types', 3, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-30 11:00:22', '2024-06-12 13:21:35'),
+(105, 'ord', '{\"type_input\":\"number\"}', 'Sắp xếp', 'text', 'supply_prices', 4, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-30 11:00:22', '2024-12-27 23:50:17'),
+(106, 'ord', '', 'Sắp xếp', 'text', 'materals', 3, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-30 11:00:22', '2024-06-12 13:21:36'),
+(108, 'ord', '{\"type_input\":\"number\"}', 'Sắp xếp', 'text', 'devices', 3, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-30 11:00:22', '2024-06-12 13:21:36'),
+(109, 'default_device', '', 'Lựa chọn mặc định', 'checkbox', 'devices', 2, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 11:32:02', '2024-06-12 13:21:36'),
+(110, 'name', '{\"required\":1}', 'Tên công nhân', 'text', 'w_users', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-05-23 14:40:33', '2024-06-12 13:21:36'),
+(111, 'phone', '{\"required\":1}', 'SĐT', 'text', 'w_users', 2, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-05-23 14:38:05', '2024-07-26 14:38:34'),
+(112, 'created_at', '', 'Ngày tạo', 'datetime', 'w_users', 4, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-05-23 14:38:05', '2024-06-12 13:21:36'),
+(113, 'created_by', '', 'Người tạo', 'linking', 'w_users', 3, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', NULL, NULL, NULL, 0, 1, '2023-05-23 14:38:05', '2024-06-12 13:21:36'),
+(114, 'act', '', 'Kích hoạt', 'checkbox', 'w_users', 5, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 4, 1, '2023-05-23 14:42:33', '2024-06-12 13:21:36'),
+(115, 'note', '', 'Ghi chú', 'textarea', 'w_users', 0, 0, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-05-23 14:38:05', '2024-06-12 13:21:36'),
+(116, 'username', '{\"required\":1,\"unique\":1}', 'Username', 'text', 'w_users', 1, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 4, 1, '2023-05-23 15:22:01', '2024-07-26 14:38:29'),
+(117, 'password', '{\"required\":1,\"type_input\":\"password\"}', 'Password', 'text', 'w_users', 0, 0, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 4, 1, '2023-05-23 14:41:41', '2024-06-12 13:21:36'),
+(118, 'group_user', '', 'Thiết bị máy', 'group', 'w_users', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"group_class\":\"__module_select_ajax_value_child\",\r\n	\"inject_attr\":\"link=get-device-by-type\",\r\n	\"width\":\"8\",\r\n	\"width_child\":\"6\"\r\n}', NULL, NULL, NULL, 4, 0, '2023-05-23 14:41:40', '2024-06-12 13:21:36'),
+(119, 'type', '{\"required\":1,\"inject_class\":\"__select_parent\"}', 'Tổ máy', 'select', 'w_users', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 118, '{\r\n	\"config\":{\r\n		\"searchbox\":1\r\n	},\r\n	\"data\":{\r\n		\"options\":{\r\n			\"0\":\"Chọn tổ máy\",\r\n			\"print\":\"Tổ in\", \r\n			\"nilon\":\"Cán màng\", \r\n			\"metalai\":\"Tổ cán metalai\",\r\n			\"compress\":\"Tổ ép nhũ\",\r\n			\"float\":\"Tổ thúc nổi\",\r\n			\"uv\":\"Tổ in UV\",\r\n			\"elevate\":\"Tổ bế\",\r\n			\"peel\":\"Tổ bóc lề\",\r\n			\"mill\":\"Tổ máy phay\",\r\n			\"cut\":\"Tổ máy xén\",\r\n			\"fill\":\"Tổ máy bồi\",\r\n			\"box_paste\":\"Tổ dán hộp giấy\",\r\n			\"bag_paste\":\"Tổ dán túi giấy\",\r\n			\"finish\":\"Tổ hoàn thiện cuối\"\r\n		}\r\n	}\r\n}', NULL, NULL, NULL, 1, 0, '2023-06-15 06:55:51', '2024-06-12 13:21:36'),
+(120, 'device', '{\"required\":1,\"disable_field\":1,\"inject_class\":\"__select_child\"}', 'Thiết bị', 'select', 'w_users', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 118, '{\r\n	\"data\":{\r\n		\"options\":{\r\n			\"\":\"Chọn loại thiết bị\",\r\n			\"1\":\"In offset\",\r\n			\"2\":\"In offset uv\",\r\n			\"3\":\"In label\",\r\n			\"4\":\"In KTS\",\r\n			\"auto\":\"Thiết bị tự động\",\r\n			\"semi_auto\":\"Thiết bị bán tự động\"\r\n		}\r\n	}\r\n}', NULL, NULL, NULL, 1, 0, '2023-06-15 06:55:51', '2024-06-12 13:21:36'),
+(121, 'name', '{\"required\":\"1\",\"unique\":\"1\"}', 'Tên vật tư', 'text', 'paper_extends', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 11:43:12', '2024-06-12 13:21:36'),
+(122, 'category', '', 'Nhóm sản phẩm', 'select', 'paper_extends', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '{\"data\":{\r\n		\"options\":{\r\n			\"0\":\"Chọn nhóm\", \r\n			\"2\":\"Hộp giấy\", \r\n			\"3\":\"Túi giấy\",\r\n			\"4\":\"Tem rời dán tay\",\r\n			\"5\":\"Mác giấy\",\r\n			\"6\":\"Toa - Tờ rơi - Tờ gấp\"\r\n		}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-06-12 13:21:36'),
+(123, 'ord', '{\"type_input\":\"number\"}', 'Sắp xếp', 'text', 'paper_extends', 3, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-30 11:00:22', '2024-06-12 13:21:36'),
+(124, 'act', '', 'Kích hoạt', 'checkbox', 'paper_extends', 0, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 11:43:12', '2024-06-12 13:21:36'),
+(125, 'note', '', 'Ghi chú', 'textarea', 'paper_extends', 0, 0, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 11:43:12', '2024-06-12 13:21:36'),
+(126, 'created_at', '', 'Ngày tạo', 'datetime', 'paper_extends', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 11:43:12', '2024-06-12 13:21:36'),
+(127, 'updated_at', '', 'Ngày sửa', 'datetime', 'paper_extends', 0, 0, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 11:43:12', '2024-06-12 13:21:36'),
+(128, 'type', '{\"required\":1}', 'Loại thiết bị', 'select', 'devices', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '{\"data\":{\r\n		\"options\":{\"\":\"Loại Thiết bị\", \"auto\":\"Tự động\", \"semi_auto\":\"Bán tự động\"}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-11 11:18:58', '2024-06-12 13:21:36'),
+(129, 'group_supply', '', 'Dạng vật tư', 'group', 'supply_warehouses', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"group_class\":\"__module_select_type_warehouse\",\r\n	\"width\":\"8\",\r\n	\"width_child\":\"6\"\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-23 14:41:40', '2025-01-22 10:48:55'),
+(130, 'type', '{\"required\":1,\"inject_class\":\"__supply_origin_select_type\",\"readonly\":2}', 'Nhóm vật tư', 'select', 'supply_warehouses', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 129, '{\r\n	\"config\":{\r\n		\"searchbox\":1\r\n	},\r\n	\"data\":{\r\n		\"options\":{\r\n			\"\":\"Chọn loại vật tư\",\r\n			\"paper\":\"Giấy in\", \r\n			\"nilon\":\"Màng nilon\", \r\n			\"metalai\":\"Màng metalai\",\r\n			\"cover\":\"Màng phủ trên\",\r\n			\"carton\":\"Carton\",\r\n			\"rubber\":\"Cao su\",\r\n			\"styrofoam\":\"Mút phẳng\",\r\n			\"decal\":\"Nhung\",\r\n			\"silk\":\"Vải lụa\",\r\n			\"mica\":\"Màng PET\",\r\n			\"emulsion\":\"Nhũ\",\r\n			\"skrink\":\"Màng co\",\r\n			\"magnet\":\"Nam châm\",\r\n			\"uv\":\"Mực in\",\r\n			\"other_supply\":\"Vật tư khác\"\r\n		}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-11 11:18:58', '2025-01-22 10:48:55'),
+(131, 'target', '{\"required\":1,\"inject_class\":\"__supply_origin_select_parent\",\"readonly\":2}', 'Vật tư', 'linking', 'supply_warehouses', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 129, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"supply_types\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-07-14 02:55:31', '2025-01-22 10:48:55'),
+(132, 'name', '', 'Tên vậ t tư', 'text', 'supply_warehouses', 1, 0, 1, 1, 1, NULL, NULL, NULL, 1, NULL, '', NULL, NULL, NULL, 16, 1, '2023-04-07 23:41:47', '2025-01-22 12:13:19'),
+(133, 'group_size', '', 'KT khổ', 'group', 'supply_warehouses', 2, 1, 1, 0, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-05-23 14:41:40', '2025-01-22 12:14:29'),
+(134, 'length', '{\r\n	\"required\":1,\r\n	\"inject_class\":\"__paper_length_input __buying_change_input\"\r\n}', 'KT dài', 'text', 'supply_warehouses', 2, 1, 0, 0, 0, NULL, NULL, NULL, 1, 133, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2025-01-22 12:15:47'),
+(135, 'width', '{\r\n	\"required\":1,\r\n	\"inject_class\":\"__paper_width_input __buying_change_input\"\r\n}', 'KT rộng', 'text', 'supply_warehouses', 2, 1, 0, 0, 0, NULL, NULL, NULL, 1, 133, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2025-01-22 12:14:41'),
+(136, 'name', '{\"required\":1}', 'Tên vật tư', 'text', 'print_warehouse', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-06-12 13:21:36'),
+(137, 'length', '{\"required\":1}', 'KT dài', 'text', 'print_warehouse', 0, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-06-12 13:21:36'),
+(138, 'width', '{\"required\":1}', 'KT rộng', 'text', 'print_warehouse', 0, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-06-12 13:21:36'),
+(139, 'qty', '{\"type_input\":\"number\",\"required\":1}', 'Tồn kho', 'text', 'print_warehouse', 0, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-30 11:00:22', '2024-08-01 17:07:51'),
+(140, 'name', '{\"disable_field\":1}', 'Tên vật tư', 'text', 'print_warehouses', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-07-12 18:58:24'),
+(141, 'length', '{\r\n	\"required\":1,\r\n	\"inject_class\":\"__paper_length_input __buying_change_input\"\r\n}', 'KT dài', 'text', 'print_warehouses', 2, 1, 0, 0, 0, NULL, NULL, 1, 1, 328, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-08-01 09:52:37'),
+(142, 'width', '{\r\n	\"required\":1,\r\n	\"inject_class\":\"__paper_width_input __buying_change_input\"\r\n}', 'KT rộng', 'text', 'print_warehouses', 3, 1, 0, 0, 0, NULL, NULL, 1, 1, 328, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-08-01 09:52:39'),
+(143, 'qty', '{\"type_input\":\"number\",\"disable_field\":1}', 'Tồn kho', 'text', 'print_warehouses', 4, 1, 0, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-30 11:00:22', '2024-08-01 17:07:52'),
+(144, 'supp_price', '', 'Loại giấy', 'linking', 'print_warehouses', 0, 1, 0, 0, 0, NULL, NULL, 1, 1, 327, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"materals\",\r\n		\"where_default\":{\"type\":\"type\"}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-11 11:18:58', '2024-06-28 23:47:58'),
+(145, 'name', '{\"required\":1, \"readonly\":2}', 'Tên vật tư', 'text', 'other_warehouses', 0, 1, 1, 1, 0, NULL, NULL, 1, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-08-01 18:51:38'),
+(146, 'qty', '{\"type_input\":\"number\",\"disable_field\":1}', 'Tồn kho', 'text', 'other_warehouses', 1, 1, 0, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-30 11:00:22', '2024-08-01 17:08:02'),
+(147, 'supp_price', '{\"required\":1}', 'Loại nam châm', 'linking', 'other_warehouses', 0, 1, 1, 0, 1, NULL, NULL, 1, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"materals\",\r\n		\"where_default\":{\"type\":\"type\"}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-11 11:18:58', '2024-06-28 23:49:19'),
+(148, 'group_supply', '', 'Dạng vật tư', 'group', 'c_supplies', 1, 0, 1, 1, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"group_class\":\"__module_select_type_warehouse\",\r\n	\"width\":\"8\",\r\n	\"width_child\":\"6\"\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-23 14:41:40', '2024-07-26 18:01:46'),
+(149, 'supp_type', '{\"required\":1,\"inject_class\":\"__wh_select_type __c_supply_select_type\"}', 'Loại vật tư', 'select', 'c_supplies', 1, 0, 0, 0, 0, NULL, NULL, NULL, 1, 148, '{\r\n	\"config\":{\r\n		\"searchbox\":1\r\n	},\r\n	\"data\":{\r\n		\"options\":{\r\n			\"\":\"Chọn loại vật tư\",\r\n			\"paper\":\"Giấy in\", \r\n			\"nilon\":\"Màng nilon\", \r\n			\"metalai\":\"Màng metalai\",\r\n			\"cover\":\"Màng phủ trên\",\r\n			\"carton\":\"Carton\",\r\n			\"rubber\":\"Cao su\",\r\n			\"styrofoam\":\"Mút phẳng\",\r\n			\"decal\":\"Nhung\",\r\n			\"silk\":\"Vải lụa\",\r\n			\"mica\":\"Màng PET\",\r\n			\"emulsion\":\"Nhũ\",\r\n			\"skrink\":\"Màng co\",\r\n			\"magnet\":\"Nam châm\",\r\n			\"uv\":\"Mực in\",\r\n			\"other_supply\":\"Vật tư khác\"\r\n		}\r\n	}\r\n}', NULL, NULL, '{\r\n	\"config\":{\r\n		\"searchbox\":1\r\n	},\r\n	\"data\":{\r\n		\"options\":{\r\n			\"\":\"Chọn loại vật tư\",\r\n			\"paper\":\"Giấy in\", \r\n			\"nilon\":\"Màng nilon\", \r\n			\"metalai\":\"Màng metalai\",\r\n			\"cover\":\"Màng phủ trên\",\r\n			\"carton\":\"Carton\",\r\n			\"rubber\":\"Cao su\",\r\n			\"styrofoam\":\"Mút phẳng\",\r\n			\"decal\":\"Nhung\",\r\n			\"silk\":\"Vải lụa\",\r\n			\"mica\":\"Màng PET\",\r\n			\"emulsion\":\"Nhũ\",\r\n			\"skrink\":\"Màng co\",\r\n			\"magnet\":\"Nam châm\",\r\n			\"uv\":\"Mực in\",\r\n			\"other_supply\":\"Vật tư khác\"\r\n		}\r\n	}\r\n}', 1, 1, '2023-05-11 11:18:58', '2025-01-18 09:20:24'),
+(150, 'name', '{\"required\":1, \"readonly\":2}', 'Tên vật tư', 'text', 'square_warehouses', 2, 1, 1, 1, 1, NULL, NULL, 1, 1, 0, '', NULL, '', '[\r\n	{\"key\":\"type\", \"value\":\"emulsion\"}\r\n]', 1, 1, '2023-04-07 23:41:47', '2024-08-01 18:50:27'),
+(151, 'qty', '{\"type_input\":\"number\",\"disable_field\":1}', 'Số cm chiều dài', 'text', 'square_warehouses', 4, 1, 0, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, '[\n	{\"key\":\"type\", \"value\":\"nilon\"},\n	{\"key\":\"type\", \"value\":\"metalai\"},\n	{\"key\":\"type\", \"value\":\"cover\"},\n	{\"key\":\"type\", \"value\":\"decal\"},\n	{\"key\":\"type\", \"value\":\"silk\"}\n]', 1, 1, '2023-04-30 11:00:22', '2024-07-31 17:42:31'),
+(152, 'supp_price', '{\"required\":1, \"readonly\":2}', 'Vật tư', 'linking', 'square_warehouses', 1, 1, 1, 1, 1, NULL, NULL, 1, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"materals\",\r\n		\"where_default\":{\"type\":\"type\"}\r\n	}\r\n}', NULL, NULL, '[\r\n	{\"key\":\"type\", \"value\":\"nilon\"},\r\n	{\"key\":\"type\", \"value\":\"metalai\"},\r\n	{\"key\":\"type\", \"value\":\"cover\"},\r\n	{\"key\":\"type\", \"value\":\"decal\"},\r\n	{\"key\":\"type\", \"value\":\"silk\"}\r\n]', 1, 1, '2023-05-11 11:18:58', '2024-08-01 18:50:57'),
+(153, 'created_by', NULL, 'Người tạo', 'linking', 'other_warehouses', 2, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-12-06 18:20:51'),
+(154, 'created_at', NULL, 'Ngày thêm', 'datetime', 'other_warehouses', 3, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-06-12 13:21:36'),
+(155, 'created_by', NULL, 'Người tạo', 'linking', 'square_warehouses', 7, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-12-06 18:20:51'),
+(156, 'created_at', NULL, 'Ngày thêm', 'datetime', 'square_warehouses', 8, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-07-19 03:23:52'),
+(157, 'order', NULL, 'Đơn hàng', 'linking', 'products', 0, 0, NULL, NULL, 1, NULL, NULL, NULL, 0, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"orders\",\r\n		\"field_title\":\"code\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-08-22 03:54:31', '2024-06-12 06:23:59'),
+(158, 'code', '{\"disable_field\":1,\"required\":1}', 'Mã', 'text', 'products', 0, 1, 0, 1, 1, NULL, NULL, NULL, 0, 0, '', NULL, NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-06-12 06:25:52'),
+(159, 'name', '', 'Tên', 'text', 'products', 1, 1, 0, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-06-12 13:21:36'),
+(160, 'category', NULL, 'Nhóm sản phẩm', 'linking', 'products', 0, 0, NULL, NULL, 0, 1, 1, NULL, 0, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"product_categories\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 0, '2023-08-22 03:54:31', '2024-09-04 16:20:48'),
+(161, 'qty', '{\"type_input\":\"number\",\"required\":1}', 'Số lượng sx', 'text', 'products', 2, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-30 11:00:22', '2024-06-12 13:21:36'),
+(162, 'total_amount', '{\"type_input\":\"price\"}', 'Tổng giá', 'text', 'products', 3, 1, 0, 1, 0, NULL, NULL, NULL, 0, 0, '', NULL, '1,2,13', NULL, 1, 1, '2023-05-26 03:19:12', '2024-07-24 12:13:57'),
+(163, 'created_by', NULL, 'Người tạo', 'linking', 'products', 3, 1, 0, 0, 1, NULL, NULL, NULL, 0, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-12-06 18:20:51'),
+(164, 'created_at', NULL, 'Ngày thêm', 'datetime', 'products', 4, 1, 1, 1, 1, NULL, NULL, NULL, 0, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-06-12 06:26:22'),
+(165, 'width', '{\"type_input\":\"number\",\"required\":1}', 'Kích thước khổ', 'text', 'square_warehouses', 3, 1, 1, 0, 1, NULL, NULL, 1, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-30 11:00:22', '2024-08-01 18:43:45'),
+(166, 'qtv', '{\r\n	\"required\":1,\r\n	\"inject_class\":\"__paper_qtv_input\"\r\n}', 'Định lượng', 'text', 'print_warehouses', 1, 1, 0, 0, 0, NULL, NULL, 1, 1, 327, '{\r\n		\"config\":{\r\n				\"search\":1,\r\n				\"direct_show\":1\r\n		},\r\n		\"data\":{\r\n				\"options\":{\"\":\"Chọn định lượng\"}\r\n		}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-30 11:00:22', '2024-07-21 16:40:42'),
+(171, 'name', '', 'Tên lệnh', 'text', 'w_salaries', 0, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-06-12 13:21:36'),
+(172, 'command', '', 'Mã lệnh', 'text', 'w_salaries', 1, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-07-22 17:34:51'),
+(173, 'qty', '', 'Số lượng', 'text', 'w_salaries', 2, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-07-22 17:35:14'),
+(174, 'work_price', '', 'ĐG lượt', 'text', 'w_salaries', 4, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-07-22 17:35:18'),
+(175, 'shape_price', '', 'ĐG chỉnh máy', 'text', 'w_salaries', 3, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-07-22 17:35:17'),
+(176, 'handle', '', 'Thông tin SX', 'json_name', 'w_salaries', 9, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-07-22 17:36:54'),
+(177, 'total', '', 'Thành tiền', 'text', 'w_salaries', 6, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-07-22 17:35:46'),
+(178, 'group_user', '', 'Thiết bị máy', 'group', 'w_salaries', 7, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"group_class\":\"__module_select_type_worker\"\r\n}', NULL, NULL, NULL, 4, 1, '2023-05-23 14:41:40', '2024-07-22 17:36:21'),
+(179, 'type', '{\"inject_class\":\"__worker_select_type\"}', 'Tổ máy', 'select', 'w_salaries', 7, 1, 0, 0, 0, NULL, NULL, NULL, 1, 178, '{\r\n	\"config\":{\r\n		\"searchbox\":1\r\n	},\r\n	\"data\":{\r\n		\"options\":{\r\n			\"\":\"Chọn tổ máy\",\r\n			\"print\":\"Tổ in\", \r\n			\"nilon\":\"Cán màng\", \r\n			\"metalai\":\"Tổ cán metalai\",\r\n			\"compress\":\"Tổ ép nhũ\",\r\n			\"uv\":\"Tổ in UV\",\r\n			\"elevate\":\"Tổ bế\",\r\n			\"float\":\"Tổ thúc nổi\",\r\n			\"peel\":\"Tổ bóc lề\",\r\n			\"mill\":\"Tổ máy phay\",\r\n			\"cut\":\"Tổ máy xén\",\r\n			\"fold\":\"Tổ gấp vạch\",\r\n			\"fill\":\"Tổ máy bồi\",\r\n			\"box_paste\":\"Tổ dán hộp giấy\",\r\n			\"bag_paste\":\"Tổ dán túi giấy\",\r\n			\"finish\":\"Tổ hoàn thiện cuối\"\r\n		}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-07-22 17:36:22'),
+(180, 'worker', '{\"inject_class\":\"__worker_select_worker\"}', 'Công nhân', 'linking', 'w_salaries', 7, 1, 0, 0, 0, NULL, NULL, NULL, 1, 178, '{\n	\"config\":{\n		\"search\":1\n	},\n	\"data\":{\n		\"table\":\"w_users\",\n		\"where_default\":{\"type\":\"type\"}\n	}\n}', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-08-07 22:04:35'),
+(181, 'submited_at', '', 'TG Chấm công', 'datetime', 'w_salaries', 8, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-05-23 14:38:05', '2024-07-22 17:36:44'),
+(182, 'created_by', '', 'Tạo lệnh', 'linking', 'w_salaries', 10, 0, 0, 0, 0, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-23 14:38:05', '2024-07-22 17:39:06'),
+(183, 'name', '{\"required\":1}', 'Tên máy in', 'text', 'printers', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 00:28:28', '2024-06-12 13:21:36'),
+(184, 'print_length', '{\"required\":1,\"type_input\":\"number\"}', 'Chiều dài cho phép', 'text', 'printers', 0, 0, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 00:28:28', '2024-06-12 13:21:36'),
+(185, 'print_width', '{\"required\":1,\"type_input\":\"number\"}', 'Chiều rộng cho phép', 'text', 'printers', 0, 0, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 00:28:28', '2024-06-12 13:21:36'),
+(186, 'model_price', '{\"required\":1,\"type_input\":\"number\"}', 'Chi phí khuôn mẫu', 'text', 'printers', 0, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 14, 1, '2023-04-28 00:28:28', '2024-06-12 13:21:36'),
+(187, '', '', 'ĐG chỉnh máy', 'group', 'printers', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 0, 1, '2023-04-08 00:51:39', '2024-06-12 13:21:36'),
+(188, '', '', 'ĐG lượt', 'group', 'printers', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 0, 1, '2023-04-08 00:51:39', '2024-06-12 13:21:36'),
+(189, 'shape_price', '{\"required\":1}', 'Khách', 'text', 'printers', 0, 1, 1, 1, 0, NULL, NULL, NULL, 1, 187, '', NULL, NULL, NULL, 12, 1, '2023-04-27 04:39:05', '2024-06-12 13:21:36'),
+(190, 'w_shape_price', '{\"required\":1}', 'Thợ', 'text', 'printers', 0, 1, 1, 1, 0, NULL, NULL, NULL, 1, 187, '', NULL, NULL, NULL, 12, 1, '2023-04-27 04:39:20', '2024-06-12 13:21:36'),
+(191, 'work_price', '{\"required\":1}', 'Khách', 'text', 'printers', 0, 1, 1, 1, 0, NULL, NULL, NULL, 1, 188, '', NULL, NULL, NULL, 13, 1, '2023-04-27 04:39:22', '2024-06-12 13:21:36'),
+(192, 'w_work_price', '{\"required\":1}', 'Thợ', 'text', 'printers', 0, 1, 1, 1, 0, NULL, NULL, NULL, 1, 188, '', NULL, NULL, NULL, 13, 1, '2023-04-27 04:39:26', '2024-06-12 13:21:36'),
+(193, 'act', '', 'Kích hoạt', 'checkbox', 'printers', 0, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-30 10:44:01', '2024-06-12 13:21:36'),
+(194, 'created_at', '', 'Ngày tạo', 'datetime', 'printers', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-30 10:43:59', '2024-06-12 13:21:36'),
+(195, 'ord', '{\"type_input\":\"number\"}', 'Sắp xếp', 'text', 'printers', 0, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-30 11:00:22', '2024-06-12 13:21:36'),
+(196, 'name', '{\"required\":1}', 'Tên vật tư', 'text', 'supply_names', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 11:43:12', '2024-06-12 13:21:36'),
+(197, 'factor', '{\"type_input\":\"number\"}', 'Hệ số máy phay', 'text', 'supply_names', 1, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, '[\r\n	{\"key\":\"type\", \"value\":\"carton\"}\r\n]', 1, 1, '2023-04-28 11:43:12', '2024-07-15 17:26:28'),
+(198, 'act', '', 'Kích hoạt', 'checkbox', 'supply_names', 3, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 11:43:12', '2024-07-15 17:26:43'),
+(199, 'note', '', 'Ghi chú', 'textarea', 'supply_names', 2, 0, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 11:43:12', '2024-07-15 17:26:37'),
+(200, 'created_at', '', 'Ngày tạo', 'datetime', 'supply_names', 5, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 11:43:12', '2024-07-15 17:27:04'),
+(201, 'updated_at', '', 'Ngày sửa', 'datetime', 'supply_names', 6, 0, 0, 0, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 11:43:12', '2024-07-15 17:27:28'),
+(202, 'ord', '{\"type_input\":\"number\"}', 'Sắp xếp', 'text', 'supply_names', 4, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-30 11:00:22', '2024-07-15 17:26:44'),
+(203, 'name', '', 'Tên vật tư', 'text', 'papers', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-06-12 13:21:36'),
+(204, 'product_qty', '', 'SL sản phẩm', 'text', 'papers', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-06-12 13:21:36'),
+(205, 'nqty', '', 'Số bát', 'text', 'papers', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-06-12 13:21:36'),
+(206, 'supp_qty', '', 'Số L vật tư', 'text', 'papers', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-10-08 17:33:39'),
+(207, 'print', '', 'In', 'handle_stage', 'papers', 1, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-10-08 17:33:23'),
+(208, 'nilon', '', 'Cán nilon', 'handle_stage', 'papers', 1, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-10-08 17:33:22'),
+(209, 'metalai', '', 'Cán metalai', 'handle_stage', 'papers', 1, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-10-08 17:33:22'),
+(210, 'compress', '', 'Ép nhũ', 'handle_stage', 'papers', 1, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-10-08 17:33:20'),
+(211, 'uv', '', 'In UV', 'handle_stage', 'papers', 1, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-10-08 17:33:20'),
+(212, 'elevate', '', 'Bế', 'handle_stage', 'papers', 1, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-10-08 17:33:19'),
+(213, 'float', '', 'Thúc nổi', 'handle_stage', 'papers', 1, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-10-08 17:33:18'),
+(214, 'peel', '', 'Bóc lề', 'handle_stage', 'papers', 1, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-10-08 17:33:18'),
+(215, 'fold', '', 'Gấp vạch', 'handle_stage', 'papers', 1, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-10-08 17:33:17'),
+(216, 'box_paste', '', 'Dán hộp', 'handle_stage', 'papers', 1, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-10-08 17:33:16'),
+(217, 'bag_paste', '', 'Dán túi', 'handle_stage', 'papers', 1, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-10-08 17:33:16'),
+(218, 'status', '', 'Trạng thái', 'text', 'papers', 0, 0, 0, 0, 0, NULL, NULL, NULL, 0, 0, '', NULL, NULL, NULL, 1, 0, '2023-04-07 23:41:47', '2024-06-13 14:37:56'),
+(219, 'name', '', 'Tên vật tư', 'linking', 'supplies', 0, 0, 0, 0, 0, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"supply_names\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-06-15 23:12:57'),
+(220, 'product_qty', '', 'SL sản phẩm', 'text', 'supplies', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-06-12 13:21:36'),
+(221, 'nqty', '', 'Số bát', 'text', 'supplies', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-06-12 13:21:36'),
+(222, 'supp_qty', '', 'Số L vật tư', 'text', 'supplies', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-06-12 13:21:36'),
+(223, 'cut', '', 'Xén', 'handle_stage', 'supplies', 1, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-10-08 17:34:42'),
+(224, 'elevate', '', 'Bế', 'handle_stage', 'supplies', 1, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-10-08 17:34:41'),
+(225, 'peel', '', 'Bóc lề', 'handle_stage', 'supplies', 1, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-10-08 17:34:41'),
+(226, 'mill', '', 'Phay', 'handle_stage', 'supplies', 1, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-10-08 17:34:40'),
+(227, 'status', '', 'Trạng thái', 'text', 'supplies', 0, 0, 0, 0, 0, NULL, NULL, NULL, 0, 0, '', NULL, NULL, NULL, 1, 0, '2023-04-07 23:41:47', '2024-06-15 23:37:10'),
+(228, 'product_qty', '', 'SL sản phẩm', 'text', 'fill_finishes', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-06-12 13:21:36'),
+(229, 'fill', '', 'Bồi', 'handle_stage', 'fill_finishes', 1, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-10-08 17:35:23'),
+(230, 'finish', '', 'Hoàn thiện cuối', 'handle_stage', 'fill_finishes', 1, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-10-08 17:35:24'),
+(231, 'status', '', 'Trạng thái', 'text', 'fill_finishes', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 0, '2023-04-07 23:41:47', '2024-06-12 13:21:36'),
+(232, 'category', NULL, 'Nhóm sản phẩm', 'group_product', 'quotes', 5, 0, 0, 0, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"table_target\":\"orders\",\r\n	\"field_pluck\":\"quote_id\"\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-30 11:17:52', '2024-06-25 19:09:04'),
+(233, 'size', NULL, 'Kích thước khuôn', 'product_size', 'quotes', 10, 0, 0, 0, 1, NULL, NULL, NULL, 1, 0, '{\"data\":{\n		\"key_pluck\":\"quote_id\"\n	}\n}', NULL, NULL, NULL, 1, 1, '2023-04-30 11:17:52', '2024-12-04 17:48:42'),
+(234, 'name', '{\"required\":1,\"disable_field\":1}', 'Tên', 'text', 'product_categories', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-06-12 13:21:36'),
+(235, 'design_factor', '{\"required\":1,\"type_input\":\"number\"}', 'Hệ số tính điểm cho TK', 'text', 'product_categories', 0, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-06-12 13:21:36');
+INSERT INTO `n_detail_tables` (`id`, `name`, `attr`, `note`, `type`, `table_map`, `ord`, `view`, `insert`, `update`, `search`, `rp_search`, `rp_view`, `get_other`, `history`, `parent`, `other_data`, `default_value`, `group_user`, `condition`, `region`, `act`, `created_at`, `updated_at`) VALUES
+(236, 'act', '', 'Kích hoạt', 'checkbox', 'product_categories', 0, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-08 00:05:47', '2024-06-12 13:21:36'),
+(237, 'name', '{\"required\":1}', 'Tên', 'text', 'product_styles', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-06-12 13:21:36'),
+(238, 'category', NULL, 'Nhóm sản phẩm', 'linking', 'product_styles', 0, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"product_categories\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-06-12 13:21:36'),
+(239, 'created_at', NULL, 'Ngày tạo', 'datetime', 'product_styles', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-06-12 13:21:36'),
+(240, 'updated_at', NULL, 'Ngày sửa', 'datetime', 'product_styles', 0, 0, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-08 00:12:15', '2024-06-12 13:21:36'),
+(241, 'act', '', 'Kích hoạt', 'checkbox', 'product_styles', 0, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-08 00:05:47', '2024-06-12 13:21:36'),
+(242, 'status', '', 'Trạng thái', 'select', 'products', 5, 1, 0, 1, 1, NULL, NULL, NULL, 1, 0, '{\"data\":{\r\n		\"options\":{\r\n			\"\":\"Chọn trạng thái\", \r\n			\"not_accepted\":\"Chưa duyệt\", \r\n			\"accepted\":\"Đã duyệt thiết kế\", \r\n			\"to_design\":\"Chờ thiết kế nhận lệnh\",\r\n			\"designing\":\"Đang thiết kế\",\r\n			\"design_submited\":\"Đã xong thiết kế\",\r\n			\"tech_submited\":\"Kế hoạch đang xử lí\",\r\n			\"making_process\":\"Đang gia công\",\r\n			\"submited\":\"Hoàn tất gia công\",\r\n			\"need_rework\":\"Cần sản xuất lại\",\r\n			\"waiting_warehouse\":\"Chờ nhập kho\",\r\n			\"imported\":\"Đã nhập kho\"\r\n		}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-08-14 02:45:06'),
+(243, 'category', NULL, 'Nhóm sản phẩm', 'group_product', 'products', 0, 0, 0, 0, 1, NULL, NULL, NULL, 0, 0, '{\n	\"table_target\":\"products\",\n	\"field_pluck\":\"id\"\n}', NULL, NULL, NULL, 1, 1, '2023-04-30 11:17:52', '2024-06-12 06:24:03'),
+(244, 'size', NULL, 'Kích thước', 'product_size', 'products', 0, 0, 0, 0, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-30 11:17:52', '2024-12-04 17:49:02'),
+(245, 'name', '{\"required\":1, \"unique\":1}', 'Tên nhà cung cấp', 'text', 'warehouse_providers', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 11:43:12', '2025-01-11 16:33:29'),
+(246, 'act', '', 'Kích hoạt', 'checkbox', 'warehouse_providers', 1, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 11:43:12', '2024-06-12 13:21:36'),
+(247, 'note', '', 'Ghi chú', 'textarea', 'warehouse_providers', 2, 0, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 11:43:12', '2024-06-12 13:21:36'),
+(248, 'created_at', '', 'Ngày tạo', 'datetime', 'warehouse_providers', 3, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 11:43:12', '2025-01-11 16:30:46'),
+(249, 'updated_at', '', 'Ngày sửa', 'datetime', 'warehouse_providers', 4, 0, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 11:43:12', '2025-01-11 16:30:41'),
+(250, 'ord', '{\"type_input\":\"number\"}', 'Sắp xếp', 'text', 'warehouse_providers', 5, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-30 11:00:22', '2024-06-12 13:21:36'),
+(251, 'code', '{\"disable_field\":1,\"required\":1}', 'Mã', 'text', 'supply_buyings', 0, 1, 0, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-06-12 13:21:36'),
+(252, 'name', '{\"required\":1}', 'Tiêu đề', 'select', 'supply_buyings', 1, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '{\"data\":{\r\n		\"options\":{\r\n			\"\":\"Chọn kiểu mua\",\r\n			\"1\":\"Mua theo đơn\",\r\n			\"2\":\"Mua dự trữ\"\r\n		}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2025-01-23 18:55:14'),
+(253, 'provider', '', 'Nhà cung cấp', 'linking', 'supply_buyings', 2, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"warehouse_providers\"\r\n	}\r\n}', NULL, '1, 10, 13', NULL, 1, 0, '2023-04-08 00:08:00', '2025-01-07 13:46:26'),
+(254, 'supply', '', 'Vật tư cần mua', 'json_supply', 'supply_buyings', 3, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-06-12 13:21:36'),
+(255, 'status', '', 'Trạng thái', 'select', 'supply_buyings', 4, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '{\"data\":{\n		\"options\":{\n			\"\":\"Chọn trạng thái\",\n			\"processing\":\"Chờ liên hệ NCC\",\n			\"not_accepted\":\"Chưa duyệt\", \n			\"accepted\":\"Đã duyệt mua\", \n			\"buying\":\"Đang chờ mua\",\n			\"bought\":\"Đã mua\",\n			\"submited\":\"Đã nhập kho\"\n		}\n	}\n}', NULL, NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-08-07 22:25:26'),
+(256, 'payment_status', '', 'Công nợ', 'select', 'supply_buyings', 5, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '{\"data\":{\n		\"options\":{\n			\"\":\"Chọn trạng thái thanh toán\",\n			\"not_payment\":\"Chưa thanh toán\",\n			\"paid_off\":\"Đã thanh toán hết\"\n		}\n	}\n}', NULL, '1, 10', '[\r\n	{\"key\":\"status\", \"value\":\"not_accepted\"},\r\n	{\"key\":\"status\", \"value\":\"accepted\"},\r\n	{\"key\":\"status\", \"value\":\"bought\"},\r\n	{\"key\":\"status\", \"value\":\"submited\"}\r\n]', 1, 0, '2023-05-26 03:19:12', '2025-01-07 14:19:29'),
+(257, 'note', '', 'Ghi chú', 'textarea', 'supply_buyings', 6, 0, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 11:43:12', '2024-06-12 13:21:36'),
+(258, 'created_at', '', 'Ngày tạo', 'datetime', 'supply_buyings', 7, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '{\"data\":{\n		\"options\":{\n			\"not_payment\":\"Chưa thanh toán\",\n			\"paid_off\":\"Đã thanh toán hết\"\n		}\n	}\n}', NULL, NULL, NULL, 1, 1, '2023-04-28 11:43:12', '2024-07-21 15:50:22'),
+(259, 'updated_at', '', 'Ngày sửa', 'datetime', 'supply_buyings', 8, 0, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 11:43:12', '2024-06-12 13:21:36'),
+(260, 'created_by', NULL, 'Người tạo', 'linking', 'supply_buyings', 9, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-12-06 18:20:51'),
+(264, 'outside_qty', '{\"type_input\":\"number\",\"required\":1}', 'Sản phẩm lỗi', 'text', 'products', 2, 1, 1, 1, 0, NULL, NULL, NULL, 0, 0, '', NULL, NULL, NULL, 1, 0, '2023-04-30 11:00:22', '2024-06-12 06:25:58'),
+(265, 'code', '{\"disable_field\":1}', 'Mã lệnh', 'text', 'c_expertises', 0, 1, 0, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-06-12 13:21:36'),
+(266, 'name', '{\"disable_field\":1}', 'Tiêu đề', 'text', 'c_expertises', 0, 1, 0, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-06-12 13:21:36'),
+(267, 'qty', '{\"required\":1, \"type_input\":\"number\"}', 'SL nhập kho', 'text', 'c_expertises', 0, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-07-14 02:55:32', '2024-06-12 13:21:36'),
+(268, 'product', '', 'Sản phẩm', 'linking', 'c_expertises', 0, 1, 0, 1, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"products\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-06-12 13:21:36'),
+(269, 'take_status', '', 'Kiểu nhập kho', 'select', 'c_expertises', 0, 1, 0, 1, 0, NULL, NULL, NULL, 1, 0, '{\"data\":{\r\n		\"options\":{\"full\":\"Nhập kho đủ\", \"prob\":\"Nhập kho thiếu do lỗi kỹ thuật\"}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-06-12 13:21:36'),
+(270, 'handle_problem', '', 'Sản xuất lại', 'select', 'c_expertises', 0, 1, 0, 1, 0, NULL, NULL, NULL, 1, 0, '{\"data\":{\r\n		\"options\":{\"not_rework\":\"Không sản xuất lại\", \"rework\":\"Yêu cầu sản xuất lại\", \"reworked\":\"Đã sản xuất lại\"}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-06-12 13:21:36'),
+(271, 'created_at', '', 'Ngày tạo', 'datetime', 'c_expertises', 0, 1, 0, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-06-12 13:21:36'),
+(272, 'created_by', '', 'Tạo bởi', 'linking', 'c_expertises', 0, 1, 0, 1, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-06-12 13:21:36'),
+(281, 'code', '{\"disable_field\":1,\"required\":1}', 'Mã sản phẩm', 'text', 'product_warehouses', 0, 1, 0, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-06-12 13:21:36'),
+(282, 'name', '', 'Tên Sản Phẩm', 'text', 'product_warehouses', 1, 1, 0, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-11-22 16:48:46'),
+(283, 'qty', '{\"type_input\":\"number\",\"required\":1}', 'Số lượng', 'text', 'product_warehouses', 5, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-30 11:00:22', '2024-08-14 02:41:17'),
+(284, 'price', '{\"type_input\":\"price\"}', 'Giá', 'text', 'product_warehouses', 7, 1, 0, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-08-14 02:41:26'),
+(285, 'category', NULL, 'Nhóm sản phẩm', 'linking', 'product_warehouses', 2, 1, NULL, NULL, 0, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"product_categories\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-08-22 03:54:31', '2024-08-14 02:40:48'),
+(286, 'category', NULL, 'Nhóm sản phẩm', 'group_product', 'product_warehouses', 2, 0, 0, 0, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"table_target\":\"quotes\"\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-30 11:17:52', '2024-08-14 02:40:50'),
+(287, 'size', NULL, 'Kích thước', 'product_size', 'product_warehouses', 3, 0, 0, 0, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"table_target\":\"quotes\"\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-30 11:17:52', '2024-08-14 02:40:55'),
+(288, 'created_by', NULL, 'Người tạo', 'linking', 'product_warehouses', 8, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-12-06 18:20:51'),
+(289, 'created_at', NULL, 'Ngày thêm', 'datetime', 'product_warehouses', 9, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-08-14 02:41:34'),
+(290, 'code', '{\"disable_field\":1,\"required\":1}', 'Mã đối tác', 'text', 'partners', 0, 1, 0, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-06-12 13:21:36'),
+(291, 'name', '{\"required\":1}', 'Tên KH/Cty', 'text', 'partners', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-06-12 13:21:36'),
+(292, 'contacter', '{\"required\":1}', 'Người liên hệ', 'text', 'partners', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-06-12 13:21:36'),
+(293, 'phone', '{\"required\":1}', 'SĐT di động', 'text', 'partners', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-06-12 13:21:36'),
+(294, 'telephone', '', 'SĐT cố định', 'text', 'partners', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-06-12 13:21:36'),
+(295, 'email', '{\"required\":1}', 'Email', 'text', 'partners', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-06-12 13:21:36'),
+(296, 'address', '{\"required\":1}', 'Địa chỉ', 'text', 'partners', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-06-12 13:21:36'),
+(297, 'city', '{\"required\":1}', 'Tỉnh/TP', 'linking', 'partners', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"citys\",\r\n		\"where\":{\"parent\":0}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-06-12 13:21:36'),
+(298, 'tax_code', '', 'Mã số thuế', 'text', 'partners', 0, 0, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:45:08', '2024-06-12 13:21:36'),
+(299, 'type', '{\"required\":1}', 'Phân loại', 'select', 'partners', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '{\"data\":{\r\n		\"options\":{\"\":\"Phân loại đối tác\", \"2\":\"Đối tác thương mại\", \"1\":\"Tính giá sản xuất\"}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-11 11:18:58', '2024-06-12 13:21:36'),
+(300, 'note', '', 'Ghi chú', 'textarea', 'partners', 0, 0, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-08 00:05:12', '2024-06-12 13:21:36'),
+(301, 'act', '', 'Kích hoạt', 'checkbox', 'partners', 0, 0, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-08 00:05:47', '2024-06-12 13:21:36'),
+(302, 'created_by', NULL, 'Phụ trách', 'linking', 'partners', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-06-12 13:21:36'),
+(303, 'created_at', NULL, 'Ngày tạo', 'datetime', 'partners', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-06-12 13:21:36'),
+(304, 'updated_at', NULL, 'Ngày sửa', 'datetime', 'partners', 0, 0, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-08 00:12:15', '2024-06-12 13:21:36'),
+(305, 'price', '{\"type_input\":\"price\"}', 'Đơn giá', 'calc_price', 'products', 3, 1, 0, 0, 0, NULL, NULL, NULL, 0, 0, '', NULL, '1,2,13', NULL, 1, 1, '2023-05-26 03:19:12', '2024-07-24 12:13:31'),
+(306, 'code', '{\"disable_field\":1}', 'Mã lệnh', 'text', 'after_prints', 0, 1, 0, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-06-12 13:21:36'),
+(307, 'name', '{\"disable_field\":1}', 'Tên', 'text', 'after_prints', 0, 1, 0, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-06-12 13:21:36'),
+(308, 'qty', '{\"required\":1, \"type_input\":\"number\"}', 'Số lượng', 'text', 'after_prints', 0, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-07-14 02:55:32', '2024-06-12 13:21:36'),
+(309, 'worker', '', 'Công nhân', 'linking', 'after_prints', 0, 1, 0, 1, 1, NULL, NULL, NULL, 1, 0, '{\n	\"config\":{\n		\"search\":1\n	},\n	\"data\":{\n		\"table\":\"w_users\",\n		\"where\":{\"type\":\"print\"}\n	}\n}', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-06-12 13:21:36'),
+(310, 'status', '', 'Trạng thái', 'select', 'after_prints', 0, 1, 0, 1, 0, NULL, NULL, NULL, 1, 0, '{\"data\":{\r\n		\"options\":{\"processing\":\"Chờ KCS\", \"submited\":\"Đã xử lí\"}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-06-12 13:21:36'),
+(311, 'created_at', '', 'Ngày gửi', 'datetime', 'after_prints', 0, 1, 0, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-06-12 13:21:37'),
+(312, 'code', '{\"disable_field\":1}', 'Mã lệnh', 'text', 'c_reworks', 0, 1, 0, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-06-12 13:21:37'),
+(313, 'name', '{\"disable_field\":1}', 'Tên', 'text', 'c_reworks', 0, 1, 0, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-06-12 13:21:37'),
+(314, 'product', '', 'Sản phẩm sx lại', 'linking', 'c_reworks', 1, 1, 0, 1, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"products\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-06-12 13:21:37'),
+(315, 'type', '', 'Khâu sản xuất lỗi', 'select', 'c_reworks', 1, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"searchbox\":1\r\n	},\r\n	\"data\":{\r\n		\"options\":{\r\n			\"\":\"Chọn tổ máy\",\r\n			\"print\":\"Tổ in\", \r\n			\"nilon\":\"Cán màng\", \r\n			\"metalai\":\"Tổ cán metalai\",\r\n			\"compress\":\"Tổ ép nhũ\",\r\n			\"float\":\"Tổ thúc nổi\",\r\n			\"uv\":\"Tổ in UV\",\r\n			\"elevate\":\"Tổ bế\",\r\n			\"peel\":\"Tổ bóc lề\",\r\n			\"mill\":\"Tổ máy phay\",\r\n			\"cut\":\"Tổ máy xén\",\r\n			\"fill\":\"Tổ máy bồi\",\r\n			\"box_paste\":\"Tổ dán hộp giấy\",\r\n			\"bag_paste\":\"Tổ dán túi giấy\",\r\n			\"finish\":\"Tổ hoàn thiện cuối\"\r\n		}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-06-12 13:21:37'),
+(316, 'worker', '', 'Công nhân', 'linking', 'c_reworks', 1, 1, 0, 1, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"w_users\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-06-12 13:21:37'),
+(317, 'status', '', 'Trạng thái', 'select', 'c_reworks', 1, 1, 0, 1, 0, NULL, NULL, NULL, 1, 0, '{\"data\":{\r\n		\"options\":{\"not_accepted\":\"Chờ xử lí\", \"submited\":\"Đã xử lí\"}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-06-12 13:21:37'),
+(318, 'rework_status', '', 'Trạng thái sx', 'select', 'c_reworks', 1, 1, 0, 1, 0, NULL, NULL, NULL, 1, 0, '{\"data\":{\r\n		\"options\":{\"need_rework\":\"Cần sản xuất lại\", \"no_rework\":\"Không cần sản xuất lại\", \"reworked\":\"Đã sản xuất lại\"}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-06-12 13:21:37'),
+(319, 'note', '', 'Ghi chú', 'textarea', 'c_reworks', 1, 0, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-06-12 13:21:37'),
+(320, 'created_at', '', 'Ngày gửi', 'datetime', 'c_reworks', 1, 1, 0, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-06-12 13:21:37'),
+(322, 'qty', '', 'Số lượng', 'text', 'c_reworks', 0, 1, 0, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-06-12 13:21:37'),
+(323, 'customer', '{\"required\":1,\"inject_class\":\"__select_parent\"}', 'Công ty', 'linking', 'orders', 0, 1, 0, 0, 0, 0, 1, NULL, 1, 360, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"customers\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-11 11:18:58', '2024-09-04 17:25:47'),
+(324, 'represent', '{\"required\":1,\"inject_class\":\"__select_child\"}', 'Người liên hệ', 'linking', 'orders', 3, 1, 0, 0, 0, NULL, 1, NULL, 1, 360, '{\r\n	\"config\":{\r\n		\"searchbox\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"represents\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-11 11:18:58', '2024-09-04 17:25:50'),
+(325, 'category', NULL, 'Nhóm sản phẩm', 'group_product', 'orders', 5, 0, 0, 0, 1, 1, 0, NULL, 1, 0, '{\r\n	\"table_target\":\"orders\",\r\n	\"field_pluck\":\"order\"\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-30 11:17:52', '2024-09-04 16:28:03'),
+(326, 'return_time', '', 'Ngày phải  trả hàng', 'datetime', 'orders', 9, 1, 0, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-06-25 19:42:39'),
+(327, 'group_paper', '', 'Dạng giấy', 'group', 'print_warehouses', 0, 1, 1, 0, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-05-23 14:41:40', '2024-06-12 13:21:37'),
+(328, 'group_size', '', 'KT khổ', 'group', 'print_warehouses', 0, 1, 1, 0, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-05-23 14:41:40', '2024-08-01 09:52:52'),
+(329, 'group_qty', '', 'Tồn kho', 'group', 'supply_warehouses', 3, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '{\r\n	\"group_class\":\"__module_select_type_warehouse\",\r\n	\"width\":\"8\",\r\n	\"width_child\":\"6\"\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-23 14:41:40', '2025-01-22 12:15:56'),
+(330, 'created_by', NULL, 'Chịu trách nhiệm', 'linking', 'warehouse_histories', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-06-12 13:21:37'),
+(331, 'action', '', 'Hành động', 'select', 'warehouse_histories', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '{\"data\":{\r\n		\"options\":{\"insert\":\"Thêm mới NVL\", \"update\":\"Nhập thêm NVL\"}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-06-12 13:21:37'),
+(332, 'name', '', 'Tên NVL', 'text', 'warehouse_histories', 0, 1, 0, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-06-12 13:21:37'),
+(333, 'qty', '', 'Số lượng', 'text', 'warehouse_histories', 0, 1, 0, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-06-12 13:21:37'),
+(335, 'bill', '', 'Hóa đơn', 'filev2', 'warehouse_histories', 0, 1, 0, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-06-12 13:21:37'),
+(336, 'new_qty', '', 'Tồn kho', 'text', 'warehouse_histories', 0, 1, 0, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-06-12 13:21:37'),
+(337, 'created_at', '', 'Ngày thực hiện', 'datetime', 'warehouse_histories', 0, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, NULL, 1, '2023-06-15 06:55:51', '2024-06-12 13:21:37'),
+(338, 'design', NULL, 'Thiết kế', 'linking', 'products', 0, 0, 0, 0, 0, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"design_types\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-08-22 03:54:31', '2024-06-12 06:44:37'),
+(339, 'Length', '', 'Dài', 'text', 'products', 1, 0, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-06-12 07:01:14'),
+(340, 'width', '', 'Rộng', 'text', 'products', 1, 0, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-06-12 07:01:14'),
+(341, 'height', '', 'Cao', 'text', 'products', 1, 0, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-06-12 07:01:14'),
+(342, 'custom_design_file', '', 'File thiết kế khách gửi', 'filev2', 'products', 0, 0, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-06-12 07:15:46'),
+(343, 'sale_shape_file', '', 'Khuôn KD tính giá', 'filev2', 'products', 0, 0, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-06-12 07:04:52'),
+(344, 'tech_shape_file', '', 'Khuôn Sản Xuất (Kỹ Thuật)', 'filev2', 'products', 0, 0, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-06-12 07:04:52'),
+(345, 'design_file', '', 'File Gốc (P. Thiết Kế)', 'filev2', 'products', 0, 0, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-06-12 07:10:08'),
+(346, 'tech_design_file', '', 'File bình theo khuôn (P. thiết kế)', 'filev2', 'products', 0, 0, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-06-12 07:10:07'),
+(347, 'handle_shape_file', '', 'Khuôn Ép Nhũ, Thúc Nổi, In UV', 'filev2', 'products', 0, 0, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-06-12 07:10:07'),
+(348, 'detail', '', 'Ghi chú', 'textarea', 'products', 1, 0, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-06-12 13:21:36'),
+(349, 'note', '', 'Ghi chú Gia công', 'pro_note_handle', 'products', 1, 0, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-06-12 13:21:36'),
+(350, 'size', '', 'Vật liệu giấy', 'handle_stage', 'papers', 0, 0, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-06-12 13:21:36'),
+(351, 'ext_price', '', 'Chi phí phát sinh', 'handle_stage', 'papers', 0, 0, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-06-12 13:21:36'),
+(352, 'customer', '{\"required\":1}', 'Khách hàng', 'linking', 'represents', 4, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '{\n	\"config\":{\n		\"search\":1,\n		\"except_linking\":1\n	},\n	\"data\":{\n		\"table\":\"customers\"\n	}\n}', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-06-19 17:07:28'),
+(353, 'sale', '', 'Phụ trách', 'multiplelinking', 'represents', 5, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\",\r\n		\"where\":{\"group_user\":2}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-06-16 22:26:30'),
+(354, 'note', '', 'Ghi chú', 'textarea', 'represents', 6, 0, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-08 00:05:12', '2024-06-16 22:26:36'),
+(355, 'act', '', 'Kích hoạt', 'checkbox', 'represents', 7, 0, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-08 00:05:47', '2024-06-16 22:26:38'),
+(356, 'created_by', NULL, 'Người tạo', 'linking', 'represents', 8, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-06-19 17:10:44'),
+(357, 'created_at', NULL, 'Ngày tạo', 'datetime', 'represents', 9, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-06-16 22:26:42'),
+(358, 'represent', '{\"required\":1,\"inject_class\":\"__select_child\"}', 'Người liên hệ', 'linking', 'quotes', 3, 1, 0, 0, 0, NULL, NULL, NULL, 1, 359, '{\r\n	\"config\":{\r\n		\"searchbox\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"represents\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-11 11:18:58', '2024-06-26 11:00:16'),
+(359, 'group_customer', '', 'Khách hàng', 'group', 'quotes', 0, 1, 0, 0, 1, NULL, NULL, NULL, 0, 0, '{\r\n	\"group_class\":\"__module_select_ajax_value_child\",\r\n	\"inject_attr\":\"link=option-ajax-child/represents/customer\",\r\n	\"width\":\"8\",\r\n	\"width_child\":\"6\"\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-23 14:41:40', '2024-06-26 11:00:03'),
+(360, 'group_customer', '', 'Khách hàng', 'group', 'orders', 0, 1, 0, 0, 1, 1, 1, NULL, 0, 0, '{\r\n	\"group_class\":\"__module_select_ajax_value_child\",\r\n	\"inject_attr\":\"link=option-ajax-child/represents/customer\",\r\n	\"width\":\"8\",\r\n	\"width_child\":\"6\"\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-23 14:41:40', '2024-09-04 16:23:38'),
+(361, 'customer_name', '', 'Tên công ty', 'link_data', 'quotes', 1, 0, 0, 0, 1, NULL, NULL, NULL, 0, 0, '{\r\n	\"data\":{\r\n		\"table_get\":\"customers\",\r\n		\"field_get\":\"name\",\r\n		\"field_data\":\"customer\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-23 14:41:40', '2024-06-25 19:08:22'),
+(362, 'customer_address', '', 'Địa chỉ', 'link_data', 'quotes', 2, 0, 0, 0, 1, NULL, NULL, NULL, 0, 0, '{\r\n	\"data\":{\r\n		\"table_get\":\"customers\",\r\n		\"field_get\":\"address\",\r\n		\"field_data\":\"customer\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-23 14:41:40', '2024-06-25 19:08:27'),
+(363, 'represent_phone', '', 'SĐT', 'link_data', 'quotes', 4, 0, 0, 0, 1, NULL, NULL, NULL, 0, 0, '{\r\n	\"data\":{\r\n		\"table_get\":\"represents\",\r\n		\"field_get\":\"phone\",\r\n		\"field_data\":\"represent\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-23 14:41:40', '2024-06-25 19:08:43'),
+(364, 'customer_name', '', 'Tên công ty', 'link_data', 'orders', 1, 0, 0, 0, 1, NULL, NULL, NULL, 0, 0, '{\r\n	\"data\":{\r\n		\"table_get\":\"customers\",\r\n		\"field_get\":\"name\",\r\n		\"field_data\":\"customer\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-23 14:41:40', '2024-09-04 16:01:38'),
+(365, 'customer_address', '', 'Địa chỉ', 'link_data', 'orders', 2, 0, 0, 0, 1, NULL, NULL, NULL, 0, 0, '{\r\n	\"data\":{\r\n		\"table_get\":\"customers\",\r\n		\"field_get\":\"address\",\r\n		\"field_data\":\"customer\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-23 14:41:40', '2024-06-25 19:39:04'),
+(366, 'represent_phone', '', 'SĐT', 'link_data', 'orders', 4, 0, 0, 0, 1, NULL, NULL, NULL, 0, 0, '{\r\n	\"data\":{\r\n		\"table_get\":\"represents\",\r\n		\"field_get\":\"phone\",\r\n		\"field_data\":\"represent\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-23 14:41:40', '2024-06-25 19:39:04'),
+(367, 'size', NULL, 'Kích thước khuôn', 'product_size', 'orders', 7, 0, 0, 0, 1, NULL, NULL, NULL, 1, 0, '{\"data\":{\r\n		\"key_pluck\":\"order\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-30 11:17:52', '2024-06-25 19:52:13'),
+(369, 'unit', '{\"required\":1, \"readonly\":2}', 'ĐVT', 'select', 'print_warehouses', 5, 1, 1, 1, 0, NULL, NULL, 1, 0, 0, '{\"data\":{\r\n		\"options\":{\"\":\"ĐVT\", \"sheet\":\"Tờ\", \"weight\":\"Kg\"}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-11 11:18:58', '2024-08-02 00:34:20'),
+(370, 'name', '{\"required\":1,\"unique\":1}', 'Tên', 'text', 'supply_extends', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-12-25 21:45:51'),
+(371, 'note', '', 'Ghi chú', 'textarea', 'supply_extends', 4, 0, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-08 00:05:12', '2024-07-11 22:15:22'),
+(372, 'created_by', '', 'Người tạo', 'linking', 'supply_extends', 7, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-12-06 18:20:51'),
+(373, 'created_at', '', 'Ngày tạo', 'datetime', 'supply_extends', 8, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-07-11 22:15:22'),
+(374, 'type', '{\"required\":1, \"readonly\":2}', 'Dạng vật tư', 'linking', 'extend_warehouses', 0, 1, 1, 1, 1, NULL, NULL, 1, 1, 0, '{\n	\"config\":{\n		\"search\":1\n	},\n	\"data\":{\n		\"table\":\"supply_extends\",\n		\"where\":{\"type\":\"warehouse\"}\n	}\n}', NULL, NULL, NULL, 1, 1, '2023-05-11 11:18:58', '2024-08-16 10:52:20'),
+(375, 'name', '{\"required\":1, \"readonly\":2}', 'Tên vật tư', 'text', 'extend_warehouses', 0, 1, 1, 1, 1, NULL, NULL, 1, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-08-01 18:52:24'),
+(376, 'qty', '{\"type_input\":\"number\",\"disable_field\":1}', 'Tồn kho', 'text', 'extend_warehouses', 2, 1, 0, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-30 11:00:22', '2024-08-01 18:52:49'),
+(377, 'unit', '{\"required\":1, \"readonly\":2}', 'ĐVT', 'select', 'extend_warehouses', 3, 1, 1, 1, 0, NULL, NULL, 1, 0, 0, '{\r\n	\"config\":{\r\n			\"searchbox\":1\r\n		},\r\n	\"data\":{\r\n		\"options\":{\"\":\"ĐVT\", \r\n			\"sheet\":\"Tờ\", \r\n			\"plate\":\"Tấm\", \r\n			\"unit\":\"Cái\",\r\n			\"square\":\"Cm\", \r\n			\"weight\":\"Kg\", \r\n			\"hank\":\"Cuộn\",\r\n			\"duo\":\"Đôi\",\r\n			\"bag\":\"Tải\",\r\n			\"bottle\":\"Hộp\",\r\n			\"box\":\"Thùng\",\r\n			\"tree\":\"Cây\"}\r\n		}\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-11 11:18:58', '2024-08-01 18:53:34'),
+(378, 'created_by', NULL, 'Người tạo', 'linking', 'extend_warehouses', 4, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-12-06 18:20:51'),
+(379, 'created_at', NULL, 'Ngày thêm', 'datetime', 'extend_warehouses', 5, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-07-19 01:27:36'),
+(380, 'weight', '', 'Số kg', 'text', 'square_warehouses', 6, 1, 0, 0, 0, NULL, NULL, 0, 0, 0, '', NULL, NULL, '[\r\n	{\"key\":\"type\", \"value\":\"nilon\"},\r\n	{\"key\":\"type\", \"value\":\"metalai\"},\r\n	{\"key\":\"type\", \"value\":\"emulsion\"},\r\n	{\"key\":\"type\", \"value\":\"skrink\"}\r\n]', 1, 1, '2023-04-30 11:00:22', '2024-07-26 02:12:50'),
+(381, 'factor', '{\"type_input\":\"number\"}', 'Hệ số đổi', 'text', 'materals', 2, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, '[\n	{\"key\":\"type\", \"value\":\"nilon\"},\n	{\"key\":\"type\", \"value\":\"metalai\"}\n]', 1, 1, '2023-04-28 11:32:02', '2024-12-10 19:49:32'),
+(382, 'device', '{\"required\":1, \"readonly\":2}', 'Loại', 'linking', 'square_warehouses', 0, 1, 1, 1, 1, NULL, NULL, 1, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"supply_names\",\r\n		\"where_default\":{\"type\":\"type\"}\r\n	}\r\n}', NULL, NULL, '[\r\n	{\"key\":\"type\", \"value\":\"nilon\"},\r\n	{\"key\":\"type\", \"value\":\"metalai\"},\r\n	{\"key\":\"type\", \"value\":\"emulsion\"},\r\n	{\"key\":\"type\", \"value\":\"skrink\"}\r\n]', 1, 1, '2023-05-11 11:18:58', '2024-08-01 18:51:16'),
+(383, 'hank', '', 'Số cuộn', 'text', 'square_warehouses', 5, 1, 0, 0, 0, NULL, NULL, 0, 1, 0, '', NULL, NULL, '[\r\n	{\"key\":\"type\", \"value\":\"nilon\"},\r\n	{\"key\":\"type\", \"value\":\"metalai\"},\r\n	{\"key\":\"type\", \"value\":\"decal\"},\r\n	{\"key\":\"type\", \"value\":\"emulsion\"},\r\n	{\"key\":\"type\", \"value\":\"skrink\"}\r\n]', 1, 1, '2023-05-11 11:18:58', '2024-07-31 15:45:18'),
+(384, 'ver', '', 'Bản', 'text', 'extend_warehouses', 1, 1, 1, 0, 1, NULL, NULL, 1, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-07-18 13:57:11'),
+(385, 'product', '{\"required\":1}', 'Đơn cần xuất', 'linking', 'c_supplies', 5, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"products\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-07-14 02:55:31', '2024-07-26 18:02:16'),
+(386, 'note', '{\"required\":1}', 'Ghi chú xuất', 'textarea', 'c_supplies', 6, 0, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-07-14 02:55:31', '2024-07-26 18:02:37'),
+(388, 'factor', '', 'Hệ số', 'text', 'w_salaries', 5, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-07-22 17:35:41'),
+(389, 'supply_role', '', 'Quyền kho vật tư', 'select', 'n_users', 7, 0, 1, 1, 0, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"searchbox\":1\r\n	},\r\n	\"data\":{\r\n		\"options\":{\r\n			\"\":\"Chọn loại vật tư\",\r\n			\"paper\":\"Giấy in\", \r\n			\"nilon\":\"Màng nilon\", \r\n			\"metalai\":\"Màng metalai\",\r\n			\"cover\":\"Màng phủ trên\",\r\n			\"carton\":\"Carton\",\r\n			\"rubber\":\"Cao su\",\r\n			\"styrofoam\":\"Mút phẳng\",\r\n			\"decal\":\"Nhung\",\r\n			\"silk\":\"Vải lụa\",\r\n			\"mica\":\"Màng PET\",\r\n			\"emulsion\":\"Nhũ\",\r\n			\"skrink\":\"Màng co\",\r\n			\"magnet\":\"Nam châm\",\r\n			\"uv\":\"Mực in\",\r\n			\"other_supply\":\"Vật tư khác\"\r\n		}\r\n	}\r\n}', NULL, NULL, '[\r\n	{\"key\":\"group_user\", \"value\":7}\r\n]', 1, 1, '2023-05-23 14:38:05', '2025-01-18 09:20:24'),
+(391, 'type', '{\"required\":1,\"inject_class\":\"__supply_buying_select_type\"}', 'Nhóm vật tư', 'select', 'supply_buyings', 1, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"searchbox\":1\r\n	},\r\n	\"data\":{\r\n		\"options\":{\r\n			\"\":\"Chọn loại vật tư\",\r\n			\"paper\":\"Giấy in\", \r\n			\"nilon\":\"Màng nilon\", \r\n			\"metalai\":\"Màng metalai\",\r\n			\"cover\":\"Màng phủ trên\",\r\n			\"carton\":\"Carton\",\r\n			\"rubber\":\"Cao su\",\r\n			\"styrofoam\":\"Mút phẳng\",\r\n			\"decal\":\"Nhung\",\r\n			\"silk\":\"Vải lụa\",\r\n			\"mica\":\"Màng PET\",\r\n			\"emulsion\":\"Nhũ\",\r\n			\"skrink\":\"Màng co\",\r\n			\"magnet\":\"Nam châm\",\r\n			\"uv\":\"Mực in\",\r\n			\"other_supply\":\"Vật tư khác\"\r\n		}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-11 11:18:58', '2025-01-16 15:04:49'),
+(392, 'unit', '{\"required\":1, \"readonly\":2}', 'ĐVT', 'select', 'product_warehouses', 6, 1, 1, 1, 0, NULL, NULL, 1, 0, 0, '{\n	\"data\":{\n		\"options\":{\"\":\"ĐVT\", \n			\"combo\":\"Bộ\", \n			\"box\":\"Hộp\", \n			\"sheet\":\"Tờ\",\n			\"unit\":\"Chiếc\"}\n		}\n}', NULL, NULL, NULL, 1, 1, '2023-05-11 11:18:58', '2024-09-11 10:49:48'),
+(393, 'made_by', NULL, 'Đơn vị sản xuất', 'linking', 'product_warehouses', 4, 1, 0, 1, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"partners\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-08-14 02:41:13'),
+(394, 'code', '{\"disable_field\":1,\"required\":1}', 'Mã', 'text', 'c_orders', 0, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-08-16 04:56:51'),
+(395, 'name', '{\"required\":1,\"inject_class\":\"length_input\"}', 'Tên', 'text', 'c_orders', 1, 0, 0, 0, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-08-16 04:56:57'),
+(396, 'type', '{\"required\":1,\"inject_class\":\"__select_type_c_order\"}', 'Loại phiếu', 'select', 'c_orders', 2, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '{\"data\":{\n		\"options\":{\n			\"\":\"Loại phiếu\",\n			\"order\":\"Phiếu trả đơn đặt hàng\",\n			\"sell\":\"Phiếu bán hàng bán sẵn\",\n			\"advance\":\"Phiếu tạm ứng\",\n			\"bought\":\"Phiếu mua hàng\",\n			\"payment\":\"Phiếu thanh toán\",\n			\"other\":\"Phiếu khác\"\n		}\n	}\n}', NULL, NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-09-17 21:47:28'),
+(397, 'customer', '{\"required\":1,\"inject_class\":\"__select_parent length_input __select_customer_c_order\"}', 'Công ty', 'linking', 'c_orders', 4, 1, 0, 0, 0, NULL, NULL, NULL, 1, 399, '{\r\n	\"config\":{\r\n		\"search\":1,\r\n		\"except_linking\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"customers\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-11 11:18:58', '2025-01-16 12:14:28'),
+(398, 'represent', '{\"required\":1,\"inject_class\":\"__select_child length_input __select_represent_c_order\"}', 'Người liên hệ', 'linking', 'c_orders', 4, 1, 0, 0, 0, NULL, NULL, NULL, 1, 399, '{\r\n	\"config\":{\r\n		\"searchbox\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"represents\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-11 11:18:58', '2024-08-15 04:40:22'),
+(399, 'group_customer', '', 'Khách hàng', 'group', 'c_orders', 3, 1, 1, 1, 1, NULL, NULL, NULL, 0, 0, '{\r\n	\"group_class\":\"__module_select_ajax_value_child\",\r\n	\"inject_attr\":\"link=option-ajax-child/represents/customer\",\r\n	\"width\":\"8\",\r\n	\"width_child\":\"6\"\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-23 14:41:40', '2024-08-16 04:57:07'),
+(400, 'object', '', 'Danh sách thành phẩm', 'json_product', 'c_orders', 5, 0, 1, 1, 0, NULL, NULL, 1, NULL, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-08-27 22:48:46'),
+(401, 'profit', '{\"type_input\":\"number\",\"inject_class\":\"__selling_input_count __selling_profit_input\"}', 'Lấy VAT', 'text', 'c_orders', 7, 0, 1, 1, 0, NULL, NULL, 1, NULL, 0, '', NULL, NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-11-25 09:05:42'),
+(402, 'other_price', '{\"type_input\":\"price\",\"inject_class\":\"__selling_input_count __selling_other_price_input\"}', 'Chi phí khác', 'text', 'c_orders', 6, 0, 1, 1, 0, NULL, NULL, 1, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-11-25 09:05:46'),
+(403, 'total', '{\"type_input\":\"price\",\"readonly\":1,\"inject_class\":\"__selling_total_input\"}', 'Tổng chi phí', 'text', 'c_orders', 8, 1, 1, 1, 0, NULL, NULL, 1, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-12-16 14:47:59'),
+(404, 'advance', '{\"type_input\":\"price\",\"inject_class\":\"__selling_input_count __selling_advance_input\"}', 'Tạm ứng - Thanh toán', 'text', 'c_orders', 9, 1, 1, 1, 0, NULL, NULL, 1, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-12-16 14:48:02'),
+(405, 'rest', '{\"type_input\":\"price\",\"readonly\":1,\"inject_class\":\"__selling_rest_input\"}', 'Công nợ còn lại', 'text', 'c_orders', 10, 1, 1, 1, 0, NULL, NULL, 1, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-11-25 09:07:27'),
+(406, 'note', '', 'Ghi chú', 'textarea', 'c_orders', 11, 0, 1, 1, 0, NULL, NULL, 1, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-08 00:05:12', '2024-08-27 22:49:13'),
+(407, 'created_by', '', 'Người tạo', 'linking', 'c_orders', 12, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-12-06 18:20:51'),
+(408, 'confirm_warehouse', '', 'người xuất kho', 'linking', 'c_orders', 13, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-08-16 04:15:46'),
+(410, 'created_at', '', 'Ngày tạo', 'datetime', 'c_orders', 14, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-08-16 03:08:45'),
+(411, 'warehouse_type', '{\"required\":1, \"readonly\":2}', 'Địa điểm kho', 'linking', 'product_warehouses', 7, 1, 1, 1, 1, NULL, NULL, 1, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"supply_extends\",\r\n		\"where\":{\"type\":\"warehouse_type\"}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-11 11:18:58', '2024-08-17 12:10:03'),
+(412, 'order', '', 'Đơn hàng', 'linking', 'c_orders', 5, 0, 0, 0, 0, NULL, NULL, NULL, 0, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"orders\",\r\n		\"field_title\":\"code\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-08-27 21:32:58'),
+(413, 'code', '{\"disable_field\":1}', 'Mã lệnh', 'text', 'c_products', 0, 1, 0, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-09-25 23:29:18'),
+(414, 'name', '{\"disable_field\":1}', 'Tên', 'text', 'c_products', 0, 1, 0, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-09-25 23:29:18'),
+(415, 'qty', '{\"required\":1, \"type_input\":\"number\"}', 'Số lượng', 'text', 'c_products', 0, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-07-14 02:55:32', '2024-09-25 23:29:18'),
+(416, 'created_by', '', 'Phụ trách', 'linking', 'c_products', 0, 1, 0, 1, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\",\r\n		\"where\":{\"group_user\":11}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-09-25 23:29:18'),
+(417, 'status', '', 'Trạng thái', 'select', 'c_products', 0, 1, 0, 1, 0, NULL, NULL, NULL, 1, 0, '{\"data\":{\r\n		\"options\":{\"processing\":\"Chờ KCS\", \"submited\":\"Đã xử lí\"}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-09-25 23:29:18'),
+(418, 'created_at', '', 'Ngày gửi', 'datetime', 'c_products', 0, 1, 0, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-09-25 23:29:18'),
+(419, 'handled', '', 'Đã SX', 'text', 'papers', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-06-12 13:21:36'),
+(420, 'handled', '', 'Đã SX', 'text', 'supplies', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-10-08 17:34:16'),
+(421, 'handled', '', 'Đã SX', 'text', 'fill_finishes', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-10-08 17:35:19'),
+(422, 'payment_type', '', 'Phương thức thanh toán', 'select', 'c_orders', 10, 0, 1, 1, 0, NULL, NULL, 1, 1, 0, '{\"data\":{\r\n		\"options\":{\r\n			\"\":\"Chọn hình thức thanh toán\",\r\n			\"1\":\"Tiền mặt\",\r\n			\"2\":\"Chuyển khoản\" \r\n		}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-11-25 09:07:10'),
+(423, 'warehouse_type', '{\"readonly\":\"2\",\"inject_class\":\"__select_warehouse_type\"}', 'Địa điểm kho', 'linking', 'c_orders', 1, 1, 0, 0, 1, NULL, NULL, 1, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"supply_extends\",\r\n		\"where\":{\"type\":\"warehouse_type\"}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-08-16 04:56:57'),
+(424, 'code', '{\"disable_field\":1,\"required\":1}', 'Mã Phiếu', 'text', 'base_receipts', 0, 1, 0, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-11-04 16:57:11'),
+(425, 'created_at', '', 'Ngày hạch toán', 'datetime', 'base_receipts', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-11-04 16:57:11'),
+(426, 'created_at', '', 'Ngày chứng từ', 'datetime', 'base_receipts', 0, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-11-04 16:57:11'),
+(427, 'name', '', 'Diễn Giải', 'text', 'base_receipts', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-11-04 16:57:11'),
+(428, 'hard_code', '', 'Mã phiếu cứng', 'text', 'base_receipts', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-11-04 16:57:11'),
+(429, 'hard_file', '', 'Phiếu chuyển (bản cứng)', 'filev2', 'base_receipts', 0, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-11-04 17:00:45'),
+(430, 'created_by', '', 'Người tạo', 'linking', 'base_receipts', 0, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-11-04 16:57:11'),
+(431, 'name', '', 'Tên hàng', 'text', 'move_warehouses', 0, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-11-04 17:10:52'),
+(432, 'warehouse_from', '', 'Xuất tại kho', 'linking', 'move_warehouses', 0, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"supply_extends\",\r\n		\"where\":{\"type\":\"warehouse_type\"}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-11-04 17:10:10'),
+(433, 'warehouse_to', '', 'Nhập tại kho', 'linking', 'move_warehouses', 0, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"supply_extends\",\r\n		\"where\":{\"type\":\"warehouse_type\"}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-11-04 17:10:10'),
+(434, 'qty', '', 'Số lượng', 'text', 'move_warehouses', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-11-04 17:10:53'),
+(435, 'unit', '{\"required\":1, \"readonly\":2}', 'ĐVT', 'select', 'move_warehouses', 0, 1, 0, 0, 0, NULL, NULL, 1, 0, 0, '{\n	\"data\":{\n		\"options\":{\"\":\"ĐVT\", \n			\"combo\":\"Bộ\", \n			\"box\":\"Hộp\", \n			\"sheet\":\"Tờ\",\n			\"unit\":\"Chiếc\"}\n		}\n}', NULL, NULL, NULL, 1, 1, '2023-05-11 11:18:58', '2024-11-04 17:10:53'),
+(436, 'price', '{\"type_input\":\"price\"}', 'Giá', 'text', 'move_warehouses', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-11-04 17:10:53'),
+(437, 'type', NULL, 'Loại hàng', 'select', 'products', 0, 0, 0, 0, 0, NULL, NULL, NULL, 1, 0, '{\r\n	\"data\":{\r\n		\"options\":{\r\n			\"\":\"Chưa chọn loại hàng\",\r\n			\"1\":\"Hàng đặt\",\r\n			\"2\":\"Hàng Cty Tuấn Dung\"\r\n		}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-08-22 03:54:31', '2024-11-20 15:39:49'),
+(438, 'type', '', 'Loại hàng', 'select', 'product_warehouses', 1, 1, 0, 1, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"data\":{\r\n		\"options\":{\r\n			\"\":\"Chưa chọn loại hàng\",\r\n			\"1\":\"Hàng đặt\",\r\n			\"2\":\"Hàng Cty Tuấn Dung\"\r\n		}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-11-20 23:11:16'),
+(439, 'return_date', '', 'Ngày trả hàng', 'datetime', 'c_orders', 5, 0, 1, 1, 0, NULL, NULL, 1, NULL, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-08-27 22:48:46'),
+(440, 'code', '{\"disable_field\":1,\"required\":1}', 'Mã phiếu', 'text', 'c_payments', 0, 1, 0, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-12-05 02:13:25'),
+(441, 'name', '{\"required\":1}', 'Tiêu đề', 'textarea', 'c_payments', 0, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2024-12-05 02:08:51'),
+(442, 'type', '{\"required\":1,\"inject_class\":\"__select_type_c_payment\"}', 'Loại Phiếu chi', 'select', 'c_payments', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 444, '{\r\n	\"data\":{\r\n		\"options\":{\r\n			\"\":\"Chọn loại phiếu chi\",\r\n			\"general\":\"Phiếu chi chung\",\r\n			\"order\":\"Phiếu chi đơn hàng\",\r\n			\"supplier\":\"Phiếu chi NCC\",\r\n			\"partner\":\"Phiếu chi đối tác SX\"\r\n		}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-12-05 01:39:40'),
+(443, 'object', '{\"required\":1,\"inject_class\":\"__pm_select_object\"}', 'Đối tượng chi', 'linking', 'c_payments', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 444, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":{\r\n			\"getFunc\":\"getTablePaymentByReceiptType\"\r\n		}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-07-14 02:55:31', '2024-12-05 00:59:01'),
+(444, 'payment_to', '', 'Thông tin phiếu chi', 'group', 'c_payments', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"group_class\":\"__module_select_type_payment_require\",\r\n	\"width\":\"8\",\r\n	\"width_child\":\"6\"\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-23 14:41:40', '2024-12-05 01:12:59'),
+(445, 'payment_value', '{\"type_input\":\"price\"}', 'Số tiền chi', 'text', 'c_payments', 0, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-12-05 01:40:00'),
+(446, 'payment_method', '{\"required\":1}', 'Phương thức', 'select', 'c_payments', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '{\"data\":{\r\n		\"options\":{\r\n			\"\":\"Chọn hình thức thanh toán\",\r\n			\"1\":\"Tiền mặt\",\r\n			\"2\":\"Chuyển khoản\" \r\n		}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-12-05 01:59:35'),
+(447, 'note', '', 'Ghi chú', 'textarea', 'c_payments', 0, 0, 1, 1, 0, NULL, NULL, 1, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-08 00:05:12', '2024-12-05 01:41:27'),
+(448, 'status', '{\"disable_field\":1,\"required\":1}', 'Trạng thái', 'select', 'c_payments', 0, 1, 0, 1, 1, NULL, NULL, NULL, 1, 0, '{\"data\":{\r\n		\"options\":{\"processing\":\"Chờ duyệt\", \"accepted\":\"Đã duyệt\", \"not_accepted\":\"Không duyệt\"}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-12-05 02:13:37');
+INSERT INTO `n_detail_tables` (`id`, `name`, `attr`, `note`, `type`, `table_map`, `ord`, `view`, `insert`, `update`, `search`, `rp_search`, `rp_view`, `get_other`, `history`, `parent`, `other_data`, `default_value`, `group_user`, `condition`, `region`, `act`, `created_at`, `updated_at`) VALUES
+(449, 'created_by', '{\"disable_field\":1,\"required\":1}', 'Người đề xuất', 'linking', 'c_payments', 0, 1, 0, 1, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\",\r\n		\"where\":{\"group_user\":11}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-12-05 02:13:44'),
+(450, 'created_at', '{\"disable_field\":1,\"required\":1}', 'Ngày đề xuất', 'datetime', 'c_payments', 0, 1, 0, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-12-05 01:41:27'),
+(451, 'paid_by', '{\"disable_field\":1,\"required\":1}', 'Người duyệt', 'linking', 'c_payments', 0, 0, 0, 1, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\",\r\n		\"where\":{\"group_user\":11}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-12-05 02:13:30'),
+(452, 'paid_at', '{\"disable_field\":1,\"required\":1}', 'Ngày duyệt', 'datetime', 'c_payments', 0, 0, 0, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-06-15 06:55:51', '2024-12-05 01:41:27'),
+(453, 'ext_role', '', 'Quyền xử lí kỹ thuật', 'select', 'n_users', 7, 0, 1, 1, 0, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"multiple\":1\r\n	},\r\n	\"data\":{\r\n		\"options\":{\r\n			\"apply_design\":\"Duyệt thiết kế\", \r\n			\"design\":\"Thiết kế - bình file\", \r\n			\"tech_handle\":\"Xử lí lỹ thuật\"\r\n		}\r\n	}\r\n}', NULL, NULL, '[\r\n	{\"key\":\"group_user\", \"value\":3}\r\n]', 1, 1, '2023-05-23 14:38:05', '2024-07-29 17:54:34'),
+(454, 'receipt', '', 'Phiếu giao dịch', 'filev2', 'c_payments', 0, 0, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2024-12-13 00:19:44'),
+(455, 'group_supply', '', 'Dạng vật tư', 'group', 'supply_prices', 0, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '{\r\n	\"group_class\":\"__module_select_type_warehouse\",\r\n	\"width\":\"8\",\r\n	\"width_child\":\"6\"\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-23 14:41:40', '2025-01-10 17:19:56'),
+(456, 'type', '{\"required\":1,\"inject_class\":\"__supply_origin_select_type\",\"readonly\":1}', 'Nhóm vật tư', 'select', 'supply_prices', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 455, '{\r\n	\"config\":{\r\n		\"searchbox\":1\r\n	},\r\n	\"data\":{\r\n		\"options\":{\r\n			\"\":\"Chọn loại vật tư\",\r\n			\"paper\":\"Giấy in\", \r\n			\"nilon\":\"Màng nilon\", \r\n			\"metalai\":\"Màng metalai\",\r\n			\"cover\":\"Màng phủ trên\",\r\n			\"carton\":\"Carton\",\r\n			\"rubber\":\"Cao su\",\r\n			\"styrofoam\":\"Mút phẳng\",\r\n			\"decal\":\"Nhung\",\r\n			\"silk\":\"Vải lụa\",\r\n			\"mica\":\"Màng PET\",\r\n			\"emulsion\":\"Nhũ\",\r\n			\"skrink\":\"Màng co\",\r\n			\"magnet\":\"Nam châm\",\r\n			\"uv\":\"Mực in\",\r\n			\"other_supply\":\"Vật tư khác\"\r\n		}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-11 11:18:58', '2025-01-18 09:20:26'),
+(457, 'supply_id', '{\"required\":1,\"inject_class\":\"__supply_origin_select_parent\",\"readonly\":1}', 'Vật tư', 'linking', 'supply_prices', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 455, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"supply_types\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-07-14 02:55:31', '2025-01-20 15:39:51'),
+(458, 'name', '{\"required\":1}', 'Xuất xứ', 'text', 'supply_origins', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"data\":{\r\n		\"table\":\"provider_prices\",\r\n		\"field_query\":\"supp_price\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2025-01-10 08:20:34'),
+(459, 'provider_price', '{\"required\":1}', 'Bảng giá mua theo NCC', 'child_linking', 'supply_prices', 3, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '{\r\n	\"data\":{\r\n		\"table\":\"provider_prices\",\r\n		\"field_query\":\"supp_price\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-26 03:19:12', '2025-01-10 16:27:11'),
+(460, 'supp_price', '', 'Định lượng', 'linking', 'provider_prices', NULL, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"supply_origins\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2025-01-10 16:26:30'),
+(461, 'provider', '{\"required\":1}', 'Nhà cung cấp', 'linking', 'provider_prices', NULL, 1, 1, 1, 1, NULL, NULL, 1, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"warehouse_providers\",\r\n		\"where_default\":{\"type\":\"type\"}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2025-01-15 17:28:44'),
+(462, 'price', '{\"required\":1, \"type_input\":\"price\"}', 'Đơn giá', 'text', 'provider_prices', NULL, 1, 1, 1, 0, NULL, NULL, 1, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-30 11:00:13', '2024-12-26 15:16:34'),
+(463, 'note', '', 'Ghi chú', 'textarea', 'supply_origins', 4, 0, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-08 00:05:12', '2024-12-26 21:21:10'),
+(464, 'created_by', '', 'Người tạo', 'linking', 'supply_origins', 7, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-12-26 21:20:51'),
+(465, 'created_at', '', 'Ngày tạo', 'datetime', 'supply_origins', 8, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-12-26 21:20:46'),
+(466, 'price_purchase', '{\"required\":1,\"type_input\":\"number\"}', 'Định lượng', 'text', 'supply_prices', 1, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 11:38:57', '2025-01-08 15:49:24'),
+(467, 'created_by', '', 'Người tạo', 'linking', 'supply_prices', 6, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2024-12-27 23:53:29'),
+(468, 'type', '', 'Nhóm vật tư', 'select', 'warehouse_providers', 1, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"searchbox\":1,\r\n		\"multiple\":1\r\n	},\r\n	\"data\":{\r\n		\"options\":{\r\n			\"paper\":\"Giấy in\", \r\n			\"nilon\":\"Màng nilon\", \r\n			\"metalai\":\"Màng metalai\",\r\n			\"cover\":\"Màng phủ trên\",\r\n			\"carton\":\"Carton\",\r\n			\"rubber\":\"Cao su\",\r\n			\"styrofoam\":\"Mút phẳng\",\r\n			\"decal\":\"Nhung\",\r\n			\"silk\":\"Vải lụa\",\r\n			\"mica\":\"Màng PET\",\r\n			\"emulsion\":\"Nhũ\",\r\n			\"magnet\":\"Nam châm\",\r\n			\"uv\":\"Mực in\",\r\n			\"other_supply\":\"Vật tư khác\"\r\n		}\r\n	}\r\n}', NULL, NULL, '', 1, 1, '2023-05-23 14:38:05', '2025-01-22 10:12:03'),
+(469, 'created_by', '', 'Người tạo', 'linking', 'warehouse_providers', 6, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2025-01-11 16:32:43'),
+(470, 'phone', '{ \"required\":1,\"unique\":1}', 'SĐT di động', 'text', 'warehouse_providers', 1, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2025-01-15 08:31:22'),
+(471, 'address', '', 'Địa chỉ', 'text', 'warehouse_providers', 1, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2025-01-11 16:41:53'),
+(472, 'contacter', '{\"required\":1}', 'Người liên hệ', 'text', 'warehouse_providers', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-28 11:43:12', '2025-01-11 16:33:29'),
+(473, 'group_supply', '', 'Dạng vật tư', 'group', 'buying_items', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"group_class\":\"__module_select_type_warehouse\",\r\n	\"width\":\"8\",\r\n	\"width_child\":\"6\"\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-23 14:41:40', '2025-01-16 17:39:11'),
+(474, 'type', '{\"required\":1,\"inject_class\":\"__supply_origin_select_type\",\"readonly\":2}', 'Nhóm vật tư', 'select', 'buying_items', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 473, '{\r\n	\"config\":{\r\n		\"searchbox\":1\r\n	},\r\n	\"data\":{\r\n		\"options\":{\r\n			\"\":\"Chọn loại vật tư\",\r\n			\"paper\":\"Giấy in\", \r\n			\"nilon\":\"Màng nilon\", \r\n			\"metalai\":\"Màng metalai\",\r\n			\"cover\":\"Màng phủ trên\",\r\n			\"carton\":\"Carton\",\r\n			\"rubber\":\"Cao su\",\r\n			\"styrofoam\":\"Mút phẳng\",\r\n			\"decal\":\"Nhung\",\r\n			\"silk\":\"Vải lụa\",\r\n			\"mica\":\"Màng PET\",\r\n			\"emulsion\":\"Nhũ\",\r\n			\"skrink\":\"Màng co\",\r\n			\"magnet\":\"Nam châm\",\r\n			\"uv\":\"Mực in\",\r\n			\"other_supply\":\"Vật tư khác\"\r\n		}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-11 11:18:58', '2025-01-18 09:20:29'),
+(475, 'target', '{\"required\":1,\"inject_class\":\"__supply_origin_select_parent\",\"readonly\":2}', 'Vật tư', 'linking', 'buying_items', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 473, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"supply_types\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-07-14 02:55:31', '2025-01-20 16:38:19'),
+(476, 'qtv', '{\"required\":1,\"inject_class\":\"__supply_origin_select_parent\",\"readonly\":2}', 'Định lượng', 'linking', 'buying_items', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 473, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"supply_prices\",\r\n		\"where_default\":{\"supply_id\":\"target\"}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-07-14 02:55:31', '2025-01-16 17:39:51'),
+(477, 'group_size', '', 'KT khổ', 'group', 'buying_items', 0, 1, 1, 0, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-05-23 14:41:40', '2025-01-16 18:01:25'),
+(478, 'length', '{\r\n	\"required\":1,\r\n	\"inject_class\":\"__paper_length_input __buying_change_input\"\r\n}', 'KT dài', 'text', 'buying_items', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 477, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2025-01-16 18:01:25'),
+(479, 'width', '{\r\n	\"required\":1,\r\n	\"inject_class\":\"__paper_width_input __buying_change_input\"\r\n}', 'KT rộng', 'text', 'buying_items', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 477, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2025-01-16 18:01:25'),
+(480, 'group_qty', '', 'SL đề xuất', 'group', 'buying_items', 0, 1, 1, 1, 0, NULL, NULL, NULL, 1, 0, '{\r\n	\"group_class\":\"__module_select_type_warehouse\",\r\n	\"width\":\"8\",\r\n	\"width_child\":\"6\"\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-23 14:41:40', '2025-01-16 18:09:04'),
+(481, 'lenth_qty', '{\"required\":1,\"type_input\":\"number\"}', 'Số m dài', 'text', 'buying_items', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 480, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2025-01-18 09:46:07'),
+(482, 'qty', '{\"required\":1,\"type_input\":\"number\"}', 'Số lượng', 'text', 'buying_items', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 480, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2025-01-18 09:46:05'),
+(483, 'weight', '{\"required\":1,\"type_input\":\"number\"}', 'Số kg', 'text', 'buying_items', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 480, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2025-01-18 09:46:10'),
+(484, 'group_sugg', '', 'NCC đề xuất', 'group', 'buying_items', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 15, 1, '2023-05-23 14:41:40', '2025-01-16 18:32:02'),
+(485, 'sugg_provider', '{\"required\":1,\"readonly\":2}', 'Tên NCC', 'linking', 'buying_items', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 484, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"provider_prices\"\r\n	}\r\n}', NULL, NULL, NULL, 15, 1, '2023-05-11 11:18:58', '2025-01-18 09:28:24'),
+(486, 'sugg_price', '{\"required\":1,\"readonly\":2}', 'ĐG', 'text', 'buying_items', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 484, '', NULL, NULL, NULL, 15, 1, '2023-04-07 23:41:47', '2025-01-18 09:28:27'),
+(487, 'group_real', '', 'NCC thực tế', 'group', 'buying_items', 0, 1, 1, 1, 1, NULL, NULL, NULL, 1, 0, '{\r\n	\"group_class\":\"module_sugest_provider_buying\"\r\n}', NULL, NULL, NULL, 16, 1, '2023-05-23 14:41:40', '2025-01-18 09:34:27'),
+(488, 'provider', '{\"inject_class\":\"__provider_suggest_module\"}', 'Tên NCC', 'linking', 'buying_items', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 487, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"provider_prices\"\r\n	}\r\n}', NULL, NULL, NULL, 16, 1, '2023-05-11 11:18:58', '2025-01-18 11:37:30'),
+(489, 'price', '{\"inject_class\":\"__buying_price_input\"}', 'ĐG', 'text', 'buying_items', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 487, '', NULL, NULL, NULL, 16, 1, '2023-04-07 23:41:47', '2025-01-18 11:37:36'),
+(490, 'created_at', '', 'Ngày tạo', 'datetime', 'buying_items', 0, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2025-01-16 18:25:53'),
+(491, 'group_by', '', 'Phụ trách', 'group', 'buying_items', 0, 1, 0, 0, 1, NULL, NULL, NULL, 1, 0, '', NULL, NULL, NULL, 1, 1, '2023-05-23 14:41:40', '2025-01-16 18:15:36'),
+(492, 'created_by', '', 'Đề xuất', 'linking', 'buying_items', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 491, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2025-01-16 18:27:22'),
+(493, 'contact_by', '', 'Hỏi mua', 'linking', 'buying_items', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 491, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2025-01-16 18:27:22'),
+(494, 'apply_by', '', 'Duyệt mua', 'linking', 'buying_items', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 491, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"n_users\"\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-04-08 00:08:00', '2025-01-16 18:27:22'),
+(495, 'total', '{\"required\":1,\"readonly\":2,\"type_input\":\"price\"}', 'Tổng tiền', 'text', 'buying_items', 0, 0, 0, 1, 0, NULL, NULL, NULL, 1, NULL, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2025-01-18 09:44:25'),
+(496, 'note', '', 'Ghi chú', 'textarea', 'buying_items', 0, 0, 0, 1, 0, NULL, NULL, NULL, 1, NULL, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2025-01-18 09:44:24'),
+(497, 'type', '{\"required\":1,\"inject_class\":\"__supply_origin_select_type\",\"readonly\":2}', 'Nhóm vật tư', 'select', 'buying_items', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 135, '{\r\n	\"config\":{\r\n		\"searchbox\":1\r\n	},\r\n	\"data\":{\r\n		\"options\":{\r\n			\"\":\"Chọn loại vật tư\",\r\n			\"paper\":\"Giấy in\", \r\n			\"nilon\":\"Màng nilon\", \r\n			\"metalai\":\"Màng metalai\",\r\n			\"cover\":\"Màng phủ trên\",\r\n			\"carton\":\"Carton\",\r\n			\"rubber\":\"Cao su\",\r\n			\"styrofoam\":\"Mút phẳng\",\r\n			\"decal\":\"Nhung\",\r\n			\"silk\":\"Vải lụa\",\r\n			\"mica\":\"Màng PET\",\r\n			\"emulsion\":\"Nhũ\",\r\n			\"skrink\":\"Màng co\",\r\n			\"magnet\":\"Nam châm\",\r\n			\"uv\":\"Mực in\",\r\n			\"other_supply\":\"Vật tư khác\"\r\n		}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-05-11 11:18:58', '2025-01-22 10:36:34'),
+(498, 'lenth_qty', '{\"required\":1,\"type_input\":\"number\"}', 'Số m dài', 'text', 'supply_warehouses', 3, 1, 0, 0, 0, NULL, NULL, NULL, 1, 329, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2025-01-22 12:16:04'),
+(499, 'qty', '{\"required\":1,\"type_input\":\"number\"}', 'Số lượng', 'text', 'supply_warehouses', 3, 1, 0, 0, 0, NULL, NULL, NULL, 1, 329, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2025-01-22 12:16:06'),
+(500, 'weight', '{\"required\":1,\"type_input\":\"number\"}', 'Số kg', 'text', 'supply_warehouses', 3, 1, 0, 0, 0, NULL, NULL, NULL, 1, 329, '', NULL, NULL, NULL, 1, 1, '2023-04-07 23:41:47', '2025-01-22 12:16:08'),
+(501, 'qtv', '{\"required\":1,\"inject_class\":\"__supply_origin_select_parent\",\"readonly\":2}', 'Định lượng', 'linking', 'supply_warehouses', 0, 1, 0, 0, 0, NULL, NULL, NULL, 1, 129, '{\r\n	\"config\":{\r\n		\"search\":1\r\n	},\r\n	\"data\":{\r\n		\"table\":\"supply_prices\",\r\n		\"where_default\":{\"supply_id\":\"target\"}\r\n	}\r\n}', NULL, NULL, NULL, 1, 1, '2023-07-14 02:55:31', '2025-01-22 12:13:46');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `n_group_users`
+--
+
+CREATE TABLE `n_group_users` (
+  `id` int NOT NULL,
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `act` tinyint DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_by` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `n_group_users`
+--
+
+INSERT INTO `n_group_users` (`id`, `name`, `note`, `act`, `created_at`, `updated_at`, `created_by`) VALUES
+(1, 'Admin', 'Admin cao nhất có mọi quyền truy cập', 1, '2023-05-23 14:44:18', '2023-05-23 14:44:18', 1),
+(2, 'Phòng Kinh Doanh', 'Phòng Kinh Doanh', 1, '2023-05-23 14:44:18', '2023-05-23 14:44:18', 1),
+(3, 'Phòng Kỹ thuật duyệt lệnh', 'Phòng Kỹ thuật duyệt lệnh', 1, '2023-05-23 14:44:18', '2023-05-23 14:44:18', 1),
+(4, 'Phòng thiết kế', 'Phòng thiết kế', 1, '2023-05-23 14:44:18', '2023-05-23 14:44:18', 1),
+(5, 'Phòng Kỹ thuật sản xuất', 'Phòng Kỹ thuật sản xuất', 1, '2023-05-23 14:44:18', '2023-05-23 14:44:18', 1),
+(6, 'Phòng Kế hoạch', 'Phòng Kế hoạch', 1, '2023-05-23 14:44:18', '2023-05-23 14:44:18', 1),
+(7, 'Kho vật tư xuất - nhập', 'Kho vật tư xuất - nhập', 1, '2023-05-23 14:44:18', '2023-05-23 14:44:18', 1),
+(8, 'Phòng duyệt mua', 'Phòng duyệt mua', 1, '2023-05-23 14:44:18', '2023-11-16 01:11:53', 1),
+(9, 'Phòng khuôn mẫu', 'Khuôn mẫu', 0, '2023-05-23 14:44:18', '2023-12-05 11:38:54', 1),
+(10, 'Phòng mua hàng', 'Phòng mua hàng', 1, '2023-05-23 14:44:18', '2023-11-16 03:40:13', 1),
+(11, 'Phòng KCS sản phẩm', 'Phòng KCS sản phẩm', 1, '2023-05-23 14:44:18', '2023-11-16 03:40:13', 1),
+(12, 'Kho thành phẩm xuất - nhập', 'Kho thành phẩm xuất - nhập', 1, '2023-05-23 14:44:18', '2023-11-16 03:40:13', 1),
+(13, 'Kế toán tổng hợp', 'Kế toán tổng hợp', 1, '2023-05-23 14:44:18', '2023-11-16 03:40:13', 1),
+(14, 'Quản đốc', 'Quản đốc', 1, '2023-05-23 14:44:18', '2023-11-16 03:40:13', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `n_log_actions`
+--
+
+CREATE TABLE `n_log_actions` (
+  `id` int NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `table_map` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `action` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `target` int DEFAULT NULL,
+  `user` int DEFAULT NULL,
+  `parent` int DEFAULT NULL,
+  `detail_data` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `act` tinyint DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `n_regions`
+--
+
+CREATE TABLE `n_regions` (
+  `id` int NOT NULL,
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `n_regions`
+--
+
+INSERT INTO `n_regions` (`id`, `name`) VALUES
+(1, 'Thông tin'),
+(2, 'Chi tiết'),
+(3, 'Thông tin cá nhân'),
+(4, 'Thông tin tài khoản'),
+(7, 'Thông tin liên hệ'),
+(8, 'Khác'),
+(9, 'Thông tin khách hàng'),
+(10, 'Thông tin báo giá'),
+(11, 'Thông số bù hao'),
+(12, 'ĐG chỉnh máy'),
+(13, 'ĐG lượt'),
+(14, 'Đơn giá & chi phí');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `n_tables`
+--
+
+CREATE TABLE `n_tables` (
+  `id` int NOT NULL,
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `parent` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `admin_paginate` int DEFAULT NULL,
+  `view_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `search_view` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ext_action` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `ext_fucn` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `insert` tinyint DEFAULT NULL,
+  `update` tinyint DEFAULT NULL,
+  `remove` tinyint DEFAULT NULL,
+  `copy` tinyint DEFAULT NULL,
+  `import` tinyint DEFAULT NULL,
+  `export` tinyint DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `n_tables`
+--
+
+INSERT INTO `n_tables` (`id`, `name`, `note`, `parent`, `admin_paginate`, `view_type`, `search_view`, `ext_action`, `ext_fucn`, `insert`, `update`, `remove`, `copy`, `import`, `export`, `created_at`, `updated_at`) VALUES
+(1, 'n_users', 'Nhân viên', NULL, 10, 'view', NULL, NULL, NULL, 1, 1, 1, 1, NULL, NULL, '2023-05-23 14:43:41', '2023-08-16 19:42:33'),
+(2, 'n_group_users', 'Nhóm quyền', NULL, 10, 'view', NULL, NULL, NULL, 1, 1, 1, 1, NULL, NULL, '2023-04-23 11:30:46', '2023-08-16 19:42:33'),
+(3, 'n_roles', 'Phân quyền', NULL, 10, 'view', '', NULL, NULL, 1, 1, 1, 1, NULL, NULL, '2023-04-23 11:30:46', '2024-04-26 05:36:37'),
+(4, 'files', 'Kho Lưu trữ', NULL, 24, 'media', NULL, NULL, NULL, 1, 1, 1, 1, NULL, NULL, '2023-04-23 11:30:46', '2023-08-16 19:42:33'),
+(5, 'quote_configs', 'Thông tin chung & Giá thành', NULL, 100, 'config', NULL, NULL, NULL, 1, 1, 1, 1, NULL, NULL, '2023-05-09 16:15:02', '2023-08-16 19:42:33'),
+(6, 'customers', 'Khách hàng', NULL, 10, 'view', NULL, NULL, NULL, 1, 1, 1, 1, NULL, NULL, '2023-04-23 11:30:46', '2023-08-16 19:42:33'),
+(7, 'quotes', 'Báo giá', NULL, 10, 'view', NULL, '[\n	{\n		\"icon\":\"plus\",\n		\"note\":\"Thêm đơn hàng\", \n		\"link\":\"insert/orders?quote=\",\n		\"condition\":[\n			{\"key\":\"status\", \"value\":\"accepted\"}\n		]\n	},\n	{\n		\"icon\":\"check\",\n		\"note\":\"Khách đã chốt giá\", \n		\"link\":\"apply-quote/\",\n		\"condition\":[\n			{\"key\":\"status\", \"value\":\"not_accepted\"}\n		]\n	},\n	{\n		\"icon\":\"info\",\n		\"note\":\"File báo giá\", \n		\"link\":\"quote-file-export/\"\n	}\n]', NULL, 1, 1, 1, 2, NULL, NULL, '2023-05-19 14:09:25', '2024-08-29 22:44:48'),
+(8, 'q_papers', 'Tờ in', NULL, 10, 'view', NULL, NULL, NULL, 1, 1, 1, 1, NULL, NULL, '2023-04-23 11:30:46', '2023-08-16 19:42:33'),
+(9, 'devices', 'Thiết bị & Chi phí', '{\r\n	\"link\":\"config-device-price/supply_types?type=devices\", \r\n	\"note\":\"Danh sách thiết bị máy theo vật tư\"\r\n}', 10, 'view', NULL, NULL, NULL, 1, 1, 1, 1, NULL, NULL, '2023-04-23 11:30:46', '2023-08-30 04:55:37'),
+(10, 'materals', 'Chất liệu vật tư', NULL, 10, 'view', NULL, NULL, NULL, 1, 1, 1, 1, NULL, NULL, '2023-04-28 10:32:23', '2023-08-16 19:42:33'),
+(11, 'printers', 'Máy in & chi phí', NULL, 10, 'view', NULL, NULL, NULL, 1, 1, 1, 1, NULL, NULL, '2023-04-28 00:18:55', '2023-08-16 19:42:33'),
+(13, 'supply_types', 'Vật tư tham gia sx', NULL, 10, 'view', NULL, '[\r\n	{\r\n	\"icon\":\"list-ul\",\r\n	\"note\":\"Đơn giá định lượng\", \r\n	\"link\":\"view/supply_prices?default_data=%7B%22supply_id%22%3A%22<id>%22%7D\"\r\n	}\r\n]', NULL, 1, 1, 1, 1, NULL, NULL, '2023-07-17 19:30:41', '2025-01-21 19:52:29'),
+(14, 'supply_prices', 'Đơn giá vật tư', NULL, 20, 'view', NULL, NULL, NULL, 1, 1, 1, 1, NULL, NULL, '2023-04-28 10:33:01', '2023-08-16 19:42:34'),
+(18, 'orders', 'Đơn hàng', NULL, 20, 'view', NULL, '[\n	{\n	\"type\":2,\n	\"class\":\"load_view_popup\",\n	\"icon\":\"list-ul\",\n	\"note\":\"DS sản phẩm\", \n	\"link\":\"view/products?default_data=%7B%22order%22%3A%22<id>%22%7D&nosidebar=1\"\n	},\n	{\n		\"icon\":\"print\",\n		\"note\":\"In đơn\", \n		\"blank\":1,\n		\"link\":\"print-data/orders/<id>\"\n	}\n]', NULL, 0, 1, 1, 2, 1, 1, '2023-06-21 13:22:33', '2024-12-03 16:11:38'),
+(19, 'base_receipts', 'Phiếu chuyển kho', NULL, 50, 'view', NULL, '[\r\n	{\r\n	\"type\":2,\r\n	\"class\":\"load_view_popup\",\r\n	\"icon\":\"list-ol\",\r\n	\"note\":\"Danh sách sản phẩm\", \r\n	\"link\":\"view/move_warehouses?default_data=%7B%22parent%22%3A%22<id>%22%7D&nosidebar=1\"\r\n	}\r\n]', NULL, 0, 1, 1, 0, NULL, 1, '2023-04-23 11:30:46', '2024-11-04 16:03:36'),
+(20, 'product_categories', 'Nhóm sản phẩm', '', 20, 'view', NULL, '[\r\n	{\r\n	\"icon\":\"list-ul\",\r\n	\"note\":\"Kiểu hộp\", \r\n	\"link\":\"view/product_styles?default_data=%7B%22category%22%3A%22<id>%22%7D\"\r\n	}\r\n]', NULL, 0, 1, 0, 0, NULL, NULL, '2023-04-23 11:30:46', '2024-04-15 05:56:48'),
+(21, 'products', 'Sản xuất sản phẩm', NULL, 20, 'view', NULL, '[\r\n	{\r\n		\"icon\":\"print\",\r\n		\"note\":\"In lệnh\",\r\n		\"link\":\"print-data/products/<id>\",\r\n		\"blank\":1\r\n	},\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"spinner\",\r\n		\"note\":\"Vật tư sản xuất\", \r\n		\"class\":\"__product_list_supp_process\"\r\n	}\r\n]', NULL, 0, 1, 1, 2, NULL, NULL, '2023-04-23 11:30:46', '2024-09-25 23:08:18'),
+(22, 'c_designs', 'Lệnh thiết kế', NULL, 20, 'view', NULL, '[\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"level-down\",\"note\":\"Nhận lệnh\", \r\n		\"class\":\"__receive_command\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"not_accepted\"}\r\n		]\r\n	}\r\n]', NULL, 0, 1, 1, 0, NULL, NULL, '2023-06-30 17:43:12', '2023-08-16 19:42:34'),
+(23, 'c_supplies', 'Phiếu xuất vật tư', NULL, 10, 'view', NULL, '[\n	{\n		\"type\":2,\n		\"detailonly\":1,\n		\"icon\":\"share\",\"note\":\"Xác nhận xuất vật tư\", \n		\"class\":\"__confirm_ex_supp\",\n		\"datas\":[\"supp_type\"],\n		\"condition\":[\n			{\"key\":\"status\", \"value\":\"handling\"}\n		]\n	}\n]', NULL, 1, 1, 1, 0, NULL, NULL, '2023-07-14 03:17:55', '2024-07-28 21:36:04'),
+(24, 'n_log_actions', 'Lịch sử thao tác', NULL, 100, 'history', NULL, NULL, NULL, 0, 0, 1, 0, NULL, NULL, '2023-05-23 14:43:41', '2024-10-22 22:39:23'),
+(25, 'w_users', 'Công nhân', '{\r\n	\"link\":\"list-worker-by-device/machine\", \r\n	\"note\":\"DS tổ máy\"\r\n}', 10, 'view', NULL, '', NULL, 1, 1, 1, 1, NULL, NULL, '2023-05-23 14:43:41', '2023-09-11 11:17:39'),
+(26, 'paper_extends', 'Tên phụ giấy in', NULL, 10, 'view', NULL, '', NULL, 1, 1, 1, 1, NULL, NULL, '2023-07-17 19:30:41', '2023-08-16 19:42:34'),
+(27, 'supply_warehouses', 'Kho vật tư (carton, cao su, mút xốp, mica,...)', '{\r\n	\"link\":\"warehouse-management\", \r\n	\"note\":\"Quản lí kho vật tư\"\r\n}', 10, 'view', NULL, '[\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"undo\",\"note\":\"Xác nhận nhập kho vật tư\", \r\n		\"class\":\"__confirm_im_supp\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"waiting\"}\r\n		]\r\n	}\r\n]', NULL, 1, 1, 1, 1, 1, 1, '2023-07-14 03:17:55', '2024-07-12 18:24:25'),
+(28, 'print_warehouses', 'Kho vật tư (giấy in)', '{\r\n	\"link\":\"warehouse-management\", \r\n	\"note\":\"Quản lí kho vật tư\"\r\n}', 10, 'ingredients.print_warehouses.view', 'ingredients.print_warehouses.form_search', '[\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"undo\",\"note\":\"Xác nhận nhập kho vật tư\", \r\n		\"class\":\"__confirm_im_supp\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"waiting\"}\r\n		]\r\n	}\r\n]', NULL, 1, 1, 1, 1, 0, 1, '2023-07-14 03:17:55', '2024-07-10 00:02:02'),
+(29, 'other_warehouses', 'Kho vật tư (nam châm)', '{\r\n	\"link\":\"warehouse-management\", \r\n	\"note\":\"Quản lí kho vật tư\"\r\n}', 10, 'view', NULL, '', NULL, 1, 1, 1, 1, NULL, NULL, '2023-07-14 03:17:55', '2023-09-11 11:17:42'),
+(30, 'square_warehouses', 'Kho vật tư (vật tư màng, nhung, vải lụa)', '{\r\n	\"link\":\"warehouse-management\", \r\n	\"note\":\"Quản lí kho vật tư\"\r\n}', 10, 'view', NULL, '', NULL, 1, 1, 1, 1, 1, 1, '2023-07-14 03:17:55', '2024-07-12 18:23:43'),
+(32, 'w_salaries', 'Bảng lương chấm công - công nhân', '', 10, 'view', NULL, '', NULL, 0, 0, 1, 0, NULL, 1, '2023-07-14 03:17:55', '2024-06-20 17:49:17'),
+(33, 'supply_names', 'Tên phụ vật tư', NULL, 10, 'view', NULL, '', NULL, 1, 1, 1, 1, NULL, NULL, '2023-07-17 19:30:41', '2023-08-16 19:42:34'),
+(34, 'papers', 'Vật tư giấy', NULL, 20, 'view', NULL, '', NULL, 0, 0, 0, 0, NULL, NULL, '2023-06-21 13:22:33', '2025-02-06 23:36:57'),
+(35, 'supplies', 'Vật tư hộp cứng', NULL, 20, 'view', NULL, '', NULL, 0, 0, 0, 0, NULL, NULL, '2023-06-21 13:22:33', '2025-02-06 23:36:45'),
+(36, 'fill_finishes', 'Bồi & hoàn thiện', NULL, 20, 'view', NULL, '', NULL, 0, 0, 0, 0, NULL, NULL, '2023-06-21 13:22:33', '2025-02-06 23:36:53'),
+(37, 'product_styles', 'Kiểu hộp', '{\r\n	\"link\":\"view/product_categories\", \r\n	\"note\":\"Nhóm sản phẩm\"\r\n}', 20, 'view', NULL, '', NULL, 1, 1, 1, 1, NULL, NULL, '2023-06-21 13:22:33', '2023-09-20 15:05:49'),
+(38, 'warehouse_providers', 'Nhà cung cấp vật tư', NULL, 10, 'view', NULL, '', NULL, 1, 1, 1, 1, NULL, NULL, '2023-07-17 19:30:41', '2023-08-16 19:42:34'),
+(39, 'supply_buyings', 'Chứng từ mua vật tư', NULL, 10, 'view', NULL, '[\n	{\n		\"type\":2,\n		\"detailonly\":1,\n		\"icon\":\"check-square-o\",\"note\":\"Xác nhận đã liên hệ NCC\", \n		\"class\":\"__confirm_bought\",\n		\"datas\":[\"status\"],\n		\"condition\":[\n			{\"key\":\"status\", \"value\":\"processing\"}\n		]\n	},\n	{\n		\"type\":2,\n		\"detailonly\":1,\n		\"icon\":\"check-circle-o\",\n		\"note\":\"Duyệt mua vật tư\", \n		\"class\":\"__confirm_bought\",\n		\"datas\":[\"status\"],\n		\"condition\":[\n			{\"key\":\"status\", \"value\":\"not_accepted\"}\n		]\n	},\n	{\n		\"type\":2,\n		\"detailonly\":1,\n		\"icon\":\"check-square-o\",\"note\":\"Xác nhận đã mua\", \n		\"class\":\"__confirm_bought\",\n		\"datas\":[\"status\"],\n		\"condition\":[\n			{\"key\":\"status\", \"value\":\"accepted\"}\n		]\n	},\n	{\n		\"type\":2,\n		\"detailonly\":1,\n		\"icon\":\"check-square\",\"note\":\"Xác nhận nhập kho\", \n		\"class\":\"__confirm_warehouse_imported\",\n		\"condition\":[\n			{\"key\":\"status\", \"value\":\"bought\"}\n		]\n	}\n]', NULL, 1, 1, 1, 1, NULL, NULL, '2023-07-17 19:30:41', '2024-07-26 16:40:14'),
+(40, 'c_expertises', 'Yêu cầu nhập kho thành phẩm', NULL, 10, 'view', NULL, '[\n	{\n		\"type\":2,\n		\"icon\":\"reply-all\",\n		\"note\":\"Duyệt nhập kho sản phẩm\", \n		\"class\":\"__confirm_product_warehouse\",\n		\"condition\":[\n			{\"key\":\"status\", \"value\":\"not_accepted\"}\n		]\n	}\n]', NULL, 0, 0, 1, 0, NULL, NULL, '2023-07-17 19:30:41', '2024-08-14 04:34:14'),
+(41, 'product_warehouses', 'Kho thành phẩm', NULL, 20, 'view', NULL, '[\n	{\n		\"type\":2,\n		\"icon\":\"retweet\",\n		\"note\":\"Chuyển kho\", \n		\"class\":\"load_view_popup\",\n		\"link\":\"ajax-respone/productMoveWarehouse?id=<id>\",\n		\"size_popup\":\"medium_popup\"\n	}\n]', '[\n	{\n		\"type\":2,\n		\"icon\":\"recycle\",\n		\"note\":\"Chuyển kho\", \n		\"class\":\"load_view_popup\",\n		\"link\":\"ajax-respone/multipleProductMoveWarehouse\",\n		\"size_popup\":\"\"\n	}\n]', 0, 1, 1, 1, 1, NULL, '2023-04-23 11:30:46', '2024-10-24 22:23:49'),
+(42, 'partners', 'Đối tác sản xuất', NULL, 10, 'view', NULL, NULL, NULL, 1, 1, 1, 1, NULL, NULL, '2023-04-23 11:30:46', '2023-08-16 19:42:33'),
+(43, 'after_prints', 'KCS sau in', NULL, 10, 'view', NULL, '[\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"check-square-o\",\r\n		\"size_popup\":\"medium_popup\",\r\n		\"note\":\"Duyệt chấm công cho công nhân\", \r\n		\"class\":\"load_view_popup\",\r\n		\"link\":\"after-print-kcs/<id>?nosidebar=1\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"processing\"}\r\n		]\r\n	}\r\n]', NULL, 0, 0, 1, 0, NULL, NULL, '2023-07-17 19:30:41', '2025-02-05 22:30:26'),
+(44, 'c_reworks', 'Yêu cầu sản xuất lại', NULL, 10, 'view', '', '[\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"check-square-o\",\r\n		\"note\":\"Khởi tạo lại đơn\", \r\n		\"class\":\"__confirm_rework\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"not_accepted\"}\r\n		]\r\n	},\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"circle-thin\",\r\n		\"note\":\"Không cần thiết sản xuất lại\", \r\n		\"class\":\"__not_need_rework\",\r\n		\"datas\":[\"name\", \"qty\"],\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"not_accepted\"}\r\n		]\r\n	}\r\n]', NULL, 0, 0, 1, 0, NULL, NULL, '2023-07-17 19:30:41', '2024-04-25 14:53:53'),
+(45, 'warehouse_histories', 'Nguyên vật liệu (Xuất, nhập, tồn)', '', 10, 'view', NULL, '', NULL, 0, 0, 1, 0, NULL, NULL, '2023-07-14 03:17:55', '2023-08-16 19:43:11'),
+(46, 'represents', 'Người liên hệ', NULL, 10, 'view', NULL, NULL, NULL, 1, 1, 1, 1, NULL, NULL, '2023-04-23 11:30:46', '2024-06-17 12:06:36'),
+(47, 'extend_warehouses', 'Vật tư khác', '{\r\n	\"link\":\"warehouse-management\", \r\n	\"note\":\"Quản lí kho vật tư\"\r\n}', 10, 'view', NULL, '', NULL, 1, 1, 1, 1, 1, 1, '2023-07-14 03:17:55', '2024-07-10 00:01:58'),
+(48, 'supply_extends', 'Các loại vật tư khác', '', 10, 'view', NULL, '', NULL, 1, 1, 1, 1, 0, 1, '2023-07-14 03:17:55', '2024-07-11 22:15:43'),
+(49, 'c_orders', 'Chứng từ bán hàng', '', 50, 'view', '', '[\n	{\n		\"type\":2,\n		\"detailonly\":1,\n		\"icon\":\"hand-o-right\",\n		\"note\":\"Xác nhận xuất hàng\", \n		\"class\":\"__confirm_ex_selling\",\n		\"condition\":[\n			{\"key\":\"status\", \"value\":\"not_accepted\"},\n			{\"key\":\"type\", \"value\":\"sell\"}\n		]\n	},\n	{\n		\"icon\":\"print\",\n		\"note\":\"In lệnh\",\n		\"link\":\"print-data/c_orders/<id>\",\n		\"blank\":1,\n		\"condition\":[\n			{\"key\":\"type\", \"value\":\"sell\"}\n		]\n	}\n]', NULL, 1, 1, 1, 1, 1, 1, '2023-07-14 03:17:55', '2025-01-10 19:53:35'),
+(50, 'c_products', 'KCS thành phẩm', NULL, 10, 'view', NULL, '[\r\n	{\r\n		\"type\":2,\r\n		\"icon\":\"calendar-check-o\",\r\n		\"note\":\"Yêu cầu nhập kho\",\r\n		\"class\":\"__product_takein_req\",\r\n		\"condition\":[\r\n			{\"key\":\"status\", \"value\":\"processing\"}\r\n		]\r\n	}\r\n]', NULL, 0, 1, 1, 2, NULL, NULL, '2023-04-23 11:30:46', '2024-09-25 23:12:25'),
+(51, 'move_warehouses', 'Sản phẩm chuyển kho', NULL, 100, 'view', NULL, '', NULL, 0, 0, 1, 0, NULL, NULL, '2023-07-17 19:30:41', '2024-04-15 05:52:58'),
+(52, 'c_payments', 'Đề xuất chi', '', 10, 'view', '', '[ 	{ 		\"type\":2, 		\"icon\":\"check\", 		\"note\":\"Xác nhận chi\", 		\"class\":\"__confirm_cpayment\", 		\"condition\":[ 			{\"con\":\"or\",\"key\":\"status\",\"value\":\"processing\"}, 			{\"con\":\"or\",\"key\":\"status\",\"value\":\"not_accepted\"} 		] 	} ]', NULL, 1, 1, 1, 1, 0, 1, '2023-07-14 03:17:55', '2024-12-13 00:17:56'),
+(53, 'buying_items', 'Vật tư cần mua', '', 10, 'view', '', '[\n	{\n		\"type\":2,\n		\"detailonly\":1,\n		\"icon\":\"check-square-o\",\"note\":\"Xác nhận đã liên hệ NCC\", \n		\"class\":\"__confirm_bought\",\n		\"datas\":[\"status\"],\n		\"condition\":[\n			{\"key\":\"status\", \"value\":\"processing\"}\n		]\n	},\n	{\n		\"type\":2,\n		\"detailonly\":1,\n		\"icon\":\"check-circle-o\",\n		\"note\":\"Duyệt mua vật tư\", \n		\"class\":\"__confirm_bought\",\n		\"datas\":[\"status\"],\n		\"condition\":[\n			{\"key\":\"status\", \"value\":\"not_accepted\"}\n		]\n	},\n	{\n		\"type\":2,\n		\"detailonly\":1,\n		\"icon\":\"check-square-o\",\"note\":\"Xác nhận đã mua\", \n		\"class\":\"__confirm_bought\",\n		\"datas\":[\"status\"],\n		\"condition\":[\n			{\"key\":\"status\", \"value\":\"accepted\"}\n		]\n	},\n	{\n		\"type\":2,\n		\"detailonly\":1,\n		\"icon\":\"check-square\",\"note\":\"Xác nhận nhập kho\", \n		\"class\":\"__confirm_warehouse_imported\",\n		\"condition\":[\n			{\"key\":\"status\", \"value\":\"bought\"}\n		]\n	}\n]', NULL, 0, 1, 1, 0, 0, 0, '2023-07-14 03:17:55', '2025-01-18 09:25:52');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `n_users`
+--
+
+CREATE TABLE `n_users` (
+  `id` int NOT NULL,
+  `username` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `group_user` int DEFAULT NULL,
+  `super_admin` tinyint DEFAULT '0',
+  `dev` tinyint DEFAULT NULL,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `supply_role` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `ext_role` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `act` tinyint DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_by` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `n_users`
+--
+
+INSERT INTO `n_users` (`id`, `username`, `password`, `name`, `email`, `phone`, `group_user`, `super_admin`, `dev`, `note`, `supply_role`, `ext_role`, `act`, `created_at`, `updated_at`, `created_by`) VALUES
+(1, 'CT9', 'cba46d1d20406eb6d12420463a291668', 'Nghiêm Thanh Tuấn', 'kd1.intuandung@gmail.com', '0963.303.999', 1, 0, 0, 'giám đốc', NULL, NULL, 1, '2023-07-14 02:02:00', '2024-07-08 15:57:01', 1),
+(3, 'thietke1', '32d25e1e30920cb1e6c8acbfac4aa568', 'Thietke - Mr DŨNG', 'design@gmail.com', '0989283033', 4, 0, NULL, 'test design', NULL, NULL, 0, '2023-07-14 02:02:00', '2024-12-07 13:01:37', 1),
+(4, 'duyetlenh', 'e10adc3949ba59abbe56e057f20f883e', 'Giám đốc sản xuất : Mr Dũng', 'sanxuatitd@gmail.com', '0989283033', 3, 0, NULL, 'Technical apply order group tests', NULL, '[\"apply_design\",\"design\",\"tech_handle\"]', 1, '2023-07-14 02:02:00', '2025-01-19 14:14:00', 1),
+(5, 'duyetsx1', 'e10adc3949ba59abbe56e057f20f883e', 'Kỹ Thuật sản xuất  - Mr Dũng', 'techhanle@gmail.com', '0989283033', 5, 0, NULL, NULL, NULL, NULL, 1, '2023-07-14 02:02:00', '2025-01-19 13:19:46', 1),
+(6, 'kehoach', 'e10adc3949ba59abbe56e057f20f883e', 'K.hoạch - Ms Hường', 'baobituandung@intuandung.vn', '0978088535', 6, 0, NULL, 'Test ke hoach san xuat', NULL, NULL, 1, '2023-07-14 02:02:00', '2025-01-22 11:52:44', 1),
+(10, 'HoangDung', '59aa841f18386f5c6a7c99e541ae022d', 'Hoàng Dung', 'intuandung2000@gmail.com', '0969303888', 1, 0, NULL, NULL, NULL, NULL, 1, '2023-09-23 14:24:46', '2024-04-22 14:35:30', 1),
+(12, 'duyetsx2', 'e10adc3949ba59abbe56e057f20f883e', 'Kỹ Thuật sản xuất - Mr Thông', 'techhanle@gmail.com', '0344558822', 5, 0, NULL, NULL, NULL, NULL, 0, '2023-09-23 15:14:41', '2024-12-07 13:02:02', 10),
+(13, 'nhapkho', 'e10adc3949ba59abbe56e057f20f883e', 'Kho xuất nhập vật tư - Ms HƯỜNG', 'kd1.intuandung@gmail.com', '000000000', 7, 0, NULL, NULL, '[\"paper\",\"nilon\",\"metalai\",\"cover\",\"carton\",\"rubber\",\"styrofoam\",\"decal\",\"silk\",\"mica\",\"emulsion\",\"skrink\",\"magnet\",\"other\"]', NULL, 1, '2023-09-29 15:18:49', '2025-01-19 13:54:14', 1),
+(14, 'duyetmua', 'e10adc3949ba59abbe56e057f20f883e', 'D.Mua - Ms Dung', 'intuandung2000@gmail.com', '0969303888', 8, 0, NULL, NULL, NULL, NULL, 1, '2023-09-29 15:20:35', '2025-01-22 11:55:14', 1),
+(15, 'phongkhuonmau', 'e10adc3949ba59abbe56e057f20f883e', 'PHÒNG KHUÔN MẪU', 'in88.vn@gmail.com', '0963303999', 9, 0, NULL, NULL, NULL, NULL, 1, '2023-09-29 15:21:33', '2023-10-06 06:50:57', 1),
+(18, 'phongmua', 'e10adc3949ba59abbe56e057f20f883e', 'P.Mua - Ms Phương', 'muahang1', '0963303999', 10, 0, NULL, 'Phòng mua vật tư', NULL, NULL, 1, '2023-11-16 03:40:59', '2025-01-22 11:53:48', 1),
+(20, 'xuatkho', 'e10adc3949ba59abbe56e057f20f883e', 'KHO THÀNH PHẨM XUẤT - Ms', 'khothanhpham@gmail.com', '123456789', 12, 0, NULL, 'test nhân viên kho thành phẩm', NULL, NULL, 1, '2023-12-06 09:53:44', '2025-01-19 13:54:49', 1),
+(21, 'thietke2', 'e10adc3949ba59abbe56e057f20f883e', 'Thietke - Mr Thông', 'design@gmail.com', '0344558822', 4, 0, NULL, 'test design', NULL, NULL, 0, '2024-02-22 05:04:58', '2024-12-07 13:01:40', 1),
+(23, 'dev', 'bc6cfc276afdb8201b984986ae345c60', 'DEV', 'dev@gmail.com', '0987654321', 1, 1, 1, 'dev', NULL, NULL, 1, '2023-07-14 02:02:00', '2024-12-05 16:35:29', 1),
+(25, 'ketoan10', 'c516f57327496a5de755b40adcb83c74', 'Kế toán TỔNG HỢP: Ms Kiều', 'ketoan@gmail.com', '1234 56789', 13, 0, NULL, NULL, NULL, NULL, 1, '2024-03-21 15:50:54', '2024-12-05 06:40:12', 10),
+(26, 'ketoan2', 'e10adc3949ba59abbe56e057f20f883e', 'Kế toán TỔNG HỢP: Ms', 'ketoan@gmail.com', '1234 56789', 13, 0, NULL, NULL, NULL, NULL, 1, '2024-04-24 08:50:43', '2024-12-05 03:04:01', 10),
+(28, 'kinhdoanh', 'e10adc3949ba59abbe56e057f20f883e', 'Kinh doanh - TEST', 'baobituandung.com', '0946303111', 2, 0, NULL, 'test nhan vien kinh doanh', NULL, NULL, 1, '2024-06-21 10:52:48', '2025-01-21 10:41:03', 1),
+(37, 'thietke', 'e10adc3949ba59abbe56e057f20f883e', 'Thietke - Mr Tuấn TEST', 'design@gmail.com', '0000000', 4, 0, NULL, 'test design', NULL, NULL, 0, '2024-07-25 20:23:56', '2024-12-07 13:01:43', 1),
+(38, 'thietke4', 'e10adc3949ba59abbe56e057f20f883e', 'Thietke - Ms', 'design@gmail.com', '0000000', 4, 0, NULL, 'test design', NULL, NULL, 0, '2024-07-25 20:24:20', '2024-07-25 20:24:20', 1),
+(39, 'thietke5', 'e10adc3949ba59abbe56e057f20f883e', 'Thietke - Ms', 'design@gmail.com', '0000000', 4, 0, NULL, 'test design', NULL, NULL, 0, '2024-07-25 20:24:35', '2024-07-25 20:24:35', 1),
+(40, 'thietke7', 'e10adc3949ba59abbe56e057f20f883e', 'Thietke - Ms', 'design@gmail.com', '0000000', 4, 0, NULL, 'test design', NULL, NULL, 0, '2024-07-25 20:25:09', '2024-07-25 20:25:09', 1),
+(41, 'duyetsx', 'e10adc3949ba59abbe56e057f20f883e', 'Kỹ Thuật sản xuất - Mr Tuấn', 'techhanle@gmail.com', '0344558822', 5, 0, NULL, NULL, NULL, NULL, 0, '2024-07-25 20:28:07', '2024-12-07 13:02:00', 1),
+(42, 'duyetsx4', 'e10adc3949ba59abbe56e057f20f883e', 'Kỹ Thuật sản xuất - Mr', 'techhanle@gmail.com', '0344558822', 5, 0, NULL, NULL, NULL, NULL, 0, '2024-07-25 20:28:20', '2024-07-25 20:28:27', 1),
+(56, 'kcs', 'e10adc3949ba59abbe56e057f20f883e', 'Test  KCS', 'kcs@gmail.com', '000', 11, 0, NULL, 'test nhân viên phòng kcs', NULL, NULL, 1, '2024-07-25 21:10:21', '2025-01-23 20:00:57', 1),
+(58, 'Quandoc', '32d25e1e30920cb1e6c8acbfac4aa568', 'Quản đốc - Mr Dũng', 'baobituandung.com', '0979303777', 14, 0, NULL, NULL, NULL, NULL, 1, '2024-08-11 16:05:05', '2024-08-11 16:53:40', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int NOT NULL,
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `customer` int DEFAULT NULL,
+  `represent` int DEFAULT NULL,
+  `ship_price` float DEFAULT NULL,
+  `profit` float DEFAULT NULL,
+  `vat` tinyint DEFAULT NULL,
+  `total_cost` float DEFAULT NULL,
+  `base_total` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `amount` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `total_amount` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `advance` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `rest` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `rest_bill` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `status` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `rest_note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ship_note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `quote` int DEFAULT NULL,
+  `act` tinyint DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `return_time` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_by` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `code`, `name`, `customer`, `represent`, `ship_price`, `profit`, `vat`, `total_cost`, `base_total`, `amount`, `total_amount`, `advance`, `rest`, `rest_bill`, `status`, `rest_note`, `ship_note`, `quote`, `act`, `created_at`, `return_time`, `updated_at`, `created_by`) VALUES
+(1, 'DH-00000001', 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 1, 1, 1000000, 100, 0, 233001000, '468002000', '464456000', '468002000', NULL, '468002000', NULL, 'submited', NULL, NULL, 1, 1, '2025-01-23 19:05:27', '2025-02-04 19:05:27', '2025-01-24 00:59:12', 1),
+(2, 'DH-00000002', 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 1, 1, 1000000, 100.191, 0, 2444870000, '4896400940.5243', '4896400000', '4896400000', NULL, '4896400000', NULL, 'making_process', NULL, NULL, 3, 1, '2025-01-23 22:23:12', '2025-02-04 22:23:12', '2025-01-24 01:19:13', 1),
+(3, 'DH-00000003', 'CTY TNHH VIETBRAND', 4, 3, 5000000, 50, 0, 1313070000, '1977105000', '1977120000', '1977120000', NULL, '1977120000', NULL, 'submited', NULL, NULL, 9, 1, '2025-01-24 01:56:08', '2025-02-05 01:56:08', '2025-01-24 02:53:13', 1),
+(4, 'DH-00000004', 'CTY TNHH VIETBRAND', 4, 3, 5000000, 50, 0, 658560000, '995340000', '995340000', '995340000', NULL, '995340000', NULL, 'making_process', NULL, NULL, 8, 1, '2025-01-24 03:31:04', '2025-02-05 03:31:04', '2025-01-24 03:38:20', 1),
+(5, 'DH-00000005', 'CTY TNHH VIETBRAND', 4, 3, 5000000, 50, 0, 2185750000, '3286125000', '3286150000', '3286150000', NULL, '3286150000', NULL, 'making_process', NULL, NULL, 11, 1, '2025-01-24 05:57:35', '2025-02-05 05:57:35', '2025-01-24 06:31:34', 1),
+(6, 'DH-00000006', 'CTY TNHH VIETBRAND', 4, 3, 5000000, 50, 0, 2185750000, '3286125000', '3286150000', '3286150000', NULL, '3286150000', NULL, 'tech_submited', NULL, NULL, 10, 1, '2025-01-24 05:58:00', '2025-02-05 05:58:00', '2025-01-24 06:15:07', 1),
+(7, 'DH-00000007', 'CTY TNHH VIETBRAND', 4, 3, 5000000, 50, 0, 658560000, '995340000', '995340000', '995340000', NULL, '995340000', NULL, 'tech_submited', NULL, NULL, 7, 1, '2025-01-24 05:58:21', '2025-02-05 05:58:21', '2025-01-24 06:15:16', 1),
+(8, 'DH-00000008', 'CTY TNHH VIETBRAND', 4, 3, 5000000, 50, 0, 461350000, '699525000', '699530000', '699530000', NULL, '699530000', NULL, 'tech_submited', NULL, NULL, 6, 1, '2025-01-24 05:58:30', '2025-02-05 05:58:30', '2025-01-29 18:01:31', 1),
+(9, 'DH-00000009', 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 3, 2, 1000000, 100, 0, 4888660000, '9779320000', '9779320000', '9779320000', NULL, '9779320000', NULL, 'tech_submited', NULL, NULL, 5, 1, '2025-01-24 05:58:38', '2025-02-05 05:58:38', '2025-01-29 18:01:48', 1),
+(10, 'DH-00000010', 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 3, 2, 1000000, 100, 0, 24420300000, '48842600000', '48842600000', '48842600000', NULL, '48842600000', NULL, 'tech_submited', NULL, NULL, 4, 1, '2025-01-24 05:59:20', '2025-02-05 05:59:20', '2025-01-29 18:01:57', 1),
+(11, 'DH-00000011', 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 3, 2, 1000000, 100, 0, 24420300000, '48842600000', '48842600000', '48842600000', NULL, '48842600000', NULL, 'making_process', NULL, NULL, 13, 1, '2025-01-24 06:04:39', '2025-02-05 06:04:39', '2025-01-24 06:24:28', 1),
+(12, 'DH-00000012', 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 1, 1, 5000, 100, 0, 17270000, '34550000', '34550000', '34550000', NULL, '34550000', NULL, 'tech_submited', NULL, NULL, 17, 1, '2025-01-26 15:16:11', '2025-02-03 15:16:11', '2025-01-29 18:01:01', 1),
+(13, 'DH-00000013', 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 1, 1, 50000, 100, 0, 11360000, '22820000', '22820000', '22820000', NULL, '22820000', NULL, 'submited', NULL, NULL, 16, 1, '2025-01-26 15:16:20', '2025-02-03 15:16:20', '2025-01-26 16:10:23', 1),
+(14, 'DH-00000014', 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 1, 1, 50000, 100, 0, 11360000, '22820000', '22820000', '22820000', NULL, '22820000', NULL, 'submited', NULL, NULL, 15, 1, '2025-01-26 15:16:27', '2025-02-03 15:16:27', '2025-01-26 16:11:33', 1),
+(15, 'DH-00000015', 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 1, 1, 400000, 60, 0, 540760000, '865856000', '865860000', '865860000', NULL, '865860000', NULL, 'tech_submited', NULL, NULL, 20, 1, '2025-01-27 15:50:07', '2025-02-08 15:50:07', '2025-01-27 15:51:54', 1),
+(16, 'DH-00000016', 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 1, 1, 5000000, 50, 0, 1116930000, '1682895000', '1682900000', '1682900000', NULL, '1682900000', NULL, 'tech_submited', NULL, NULL, 22, 1, '2025-01-29 17:39:31', '2025-02-10 17:39:31', '2025-01-29 17:58:40', 1),
+(17, 'DH-00000017', 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 1, 1, 5000000, 50, 0, 1125130000, '1695195000', '1695200000', '1695200000', NULL, '1695200000', NULL, 'tech_submited', NULL, NULL, 21, 1, '2025-01-29 17:39:39', '2025-02-10 17:39:39', '2025-01-29 17:58:57', 1),
+(18, 'DH-00000018', 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 1, 1, 400000, 60, 0, 540760000, '865856000', '865860000', '865860000', NULL, '865860000', NULL, 'tech_submited', NULL, NULL, 19, 1, '2025-01-29 17:39:48', '2025-02-10 17:39:48', '2025-01-29 18:00:42', 1),
+(19, 'DH-00000019', 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 1, 1, 400000, 60, 0, 281640000, '451264000', '451260000', '451260000', NULL, '451260000', NULL, 'tech_submited', NULL, NULL, 18, 1, '2025-01-29 17:39:57', '2025-02-10 17:39:57', '2025-01-29 18:00:51', 1),
+(20, 'DH-00000020', 'CTY TNHH VIETBRAND', 4, 3, 5000000, 50, 0, 4367400000, '6558600000', '6558600000', '6558600000', NULL, '6558600000', NULL, 'tech_submited', NULL, NULL, 14, 1, '2025-01-29 17:40:06', '2025-02-10 17:40:06', '2025-01-29 18:01:11', 1),
+(21, 'DH-00000021', 'CTY TNHH VIETBRAND', 4, 3, 5000000, 50, 0, 4367400000, '6558600000', '6558600000', '6558600000', NULL, '6558600000', NULL, 'tech_submited', NULL, NULL, 12, 1, '2025-01-29 17:40:14', '2025-02-10 17:40:14', '2025-01-29 18:01:20', 1),
+(22, 'DH-00000022', 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 1, 1, 50, 60, 0, 1205000, '1928080', '1928000', '1928000', NULL, '1928000', NULL, 'designing', NULL, NULL, 31, 1, '2025-02-01 20:24:29', NULL, '2025-02-03 13:23:18', 1),
+(23, 'DH-00000023', 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 1, 1, 50, 60, 0, 1205000, '1928080', '1928000', '1928000', '0', '1928000', '', 'making_process', NULL, NULL, 0, 1, '2025-02-01 20:26:28', '2025-02-09 20:26:28', '2025-02-01 20:28:57', 1),
+(24, 'DH-00000024', 'CTY DƯỢC PHẨM DIAMOND PHÁP', 5, 133, 500000, 10, 0, 16690000, '18909000', '16380000', '18910000', NULL, '18910000', NULL, 'making_process', NULL, NULL, 32, 1, '2025-02-01 20:32:49', '2025-02-09 20:32:49', '2025-02-02 09:41:53', 1),
+(25, 'DH-00000025', 'CÔNG TY DỆT MAY THÀNH VƯỢNG', 3, 2, NULL, 0, 0, 2101000, '2101000', '2101000', '2101000', NULL, '2101000', NULL, 'making_process', NULL, NULL, 33, 1, '2025-02-01 21:13:34', '2025-02-13 21:13:34', '2025-02-01 21:22:59', 23),
+(26, 'DH-00000026', 'CTY TNHH VIETBRAND', 4, 3, 10000000, 30, 0, 1439610000, '1884493000', '1884606000', '1884606000', NULL, '1884606000', NULL, 'tech_submited', NULL, NULL, 35, 1, '2025-02-03 13:21:07', '2025-02-15 13:21:07', '2025-02-03 13:24:05', 1),
+(27, 'DH-00000027', 'CTY TNHH VIETBRAND', 4, 3, 10000000, 30, 0, 1665770000, '2178506200', '2178450000', '2178450000', NULL, '2178450000', NULL, 'making_process', NULL, NULL, 34, 1, '2025-02-03 13:21:28', '2025-02-15 13:21:28', '2025-02-03 13:38:00', 1),
+(28, 'DH-00000028', 'CTY TNHH VIETBRAND', 4, 3, 10000000, 19.8134, 0, 4153860000, '5413018000', '5412990000', '5412990000', NULL, '5412990000', NULL, 'making_process', NULL, NULL, 40, 1, '2025-02-03 15:18:38', '2025-02-15 15:18:38', '2025-02-03 15:27:22', 1),
+(29, 'DH-00000029', 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 4, 3, NULL, 0, 0, 222708000, '222708000', '222708000', '222708000', NULL, '222708000', NULL, 'making_process', NULL, NULL, 45, 1, '2025-02-08 10:32:35', '2025-02-20 10:32:35', '2025-02-08 10:51:12', 1),
+(30, 'DH-00000030', 'CTY CP THƯƠNG MẠI DƯỢC PHẨM BIGFAM', 1, 1, NULL, 0, 0, 222708000, '222708000', '222708000', '222708000', NULL, '222708000', NULL, 'tech_submited', NULL, NULL, 44, 1, '2025-02-08 10:32:55', '2025-02-20 10:32:55', '2025-02-08 10:35:35', 1),
+(31, 'DH-00000031', 'Mr.Tú - HQT', 975, 991, 300000, 20, 0, 4129500, '5315400', '5315500', '5315500', NULL, '5315500', NULL, 'to_design', NULL, NULL, 46, 1, '2025-02-08 13:51:22', NULL, '2025-02-08 14:35:20', 28),
+(32, 'DH-00000032', 'CÔNG TY TNHH DƯỢC PHẨM TÂM THÁI', 36, 992, 1000000, 10, 0, 27510000, '31361000', '31362000', '31362000', NULL, '31362000', NULL, 'to_design', NULL, NULL, 50, 1, '2025-02-08 14:33:19', NULL, '2025-02-08 14:35:01', 28);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `other_warehouses`
+--
+
+CREATE TABLE `other_warehouses` (
+  `id` int NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `qty` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `supp_price` int DEFAULT NULL,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `act` tinyint DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_by` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `papers`
+--
+
+CREATE TABLE `papers` (
+  `id` bigint NOT NULL,
+  `code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ext_name` int DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `product_qty` bigint DEFAULT NULL,
+  `nqty` int DEFAULT NULL,
+  `double` tinyint DEFAULT NULL,
+  `base_supp_qty` bigint DEFAULT NULL,
+  `compent_percent` decimal(10,0) DEFAULT NULL,
+  `compent_plus` bigint DEFAULT NULL,
+  `supp_qty` bigint DEFAULT NULL,
+  `size` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `print` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `nilon` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `metalai` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `cover` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `compress` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `uv` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `elevate` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `float` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `peel` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `cut` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `fold` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `box_paste` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `bag_paste` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `ext_cate` int DEFAULT NULL,
+  `ext_price` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `handle_type` tinyint DEFAULT NULL,
+  `handle_elevate` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `total_cost` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `product` int DEFAULT NULL,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `main` tinyint DEFAULT NULL,
+  `parent` int DEFAULT '0',
+  `is_join` tinyint DEFAULT '0',
+  `act` tinyint DEFAULT NULL,
+  `status` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `handled` int DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_by` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `paper_extends`
+--
+
+CREATE TABLE `paper_extends` (
+  `id` int NOT NULL COMMENT 'Mã nhóm',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Tên nhóm',
+  `category` int DEFAULT NULL COMMENT 'Cha',
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Ghi chú',
+  `act` tinyint DEFAULT NULL,
+  `ord` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_by` int NOT NULL,
+  `is_name` tinyint DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `paper_extends`
+--
+
+INSERT INTO `paper_extends` (`id`, `name`, `category`, `note`, `act`, `ord`, `created_at`, `updated_at`, `created_by`, `is_name`) VALUES
+(1, 'TỜ BỒI THÀNH', 6, NULL, 1, NULL, '2023-07-26 07:51:00', '2023-09-14 19:49:42', 1, 1),
+(3, 'TỜ BỒI MẶT THÉP', 6, NULL, 1, NULL, '2023-07-26 07:52:00', '2023-07-27 15:57:22', 1, 1),
+(4, 'TỜ BỒI NẮP HỘP', 6, NULL, 1, NULL, '2023-07-26 07:52:00', '2023-07-27 15:57:07', 1, 1),
+(5, 'TỜ BỒI ĐÁY HỘP', 6, NULL, 1, NULL, '2023-07-26 07:52:00', '2023-07-27 15:56:54', 1, 1),
+(6, 'TEM CUỘN', 4, NULL, 1, NULL, '2023-07-26 00:00:00', '2024-12-05 04:31:56', 1, 1),
+(7, 'TOA - TỜ RƠI - TỜ GẤP', 6, NULL, 1, NULL, '2023-07-26 07:53:00', '2024-12-05 04:31:44', 1, 1),
+(56, 'HỘP GIẤY', 2, NULL, 1, NULL, '2023-07-27 18:15:17', '2023-09-14 19:48:54', 1, 1),
+(57, 'TÚI GIẤY', 3, NULL, 1, NULL, '2023-08-30 09:25:34', '2023-08-30 09:25:34', 1, NULL),
+(58, 'KHAY GIẤY ĐỊNH HÌNH', 2, NULL, 1, NULL, '2023-09-14 19:49:07', '2024-12-05 04:34:14', 1, NULL),
+(59, 'TEM RỜI', 4, NULL, 1, NULL, '2024-04-07 18:26:23', '2024-12-05 04:27:47', 1, NULL),
+(61, 'TỜ BỒI', 6, NULL, 1, NULL, '2024-12-05 04:34:49', '2024-12-05 04:34:49', 1, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `partners`
+--
+
+CREATE TABLE `partners` (
+  `id` int NOT NULL,
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `contacter` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `manager` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `telephone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `city` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tax_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` tinyint DEFAULT NULL,
+  `internal` tinyint DEFAULT NULL,
+  `act` int DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_by` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `partners`
+--
+
+INSERT INTO `partners` (`id`, `code`, `name`, `contacter`, `manager`, `phone`, `telephone`, `email`, `address`, `city`, `tax_code`, `note`, `type`, `internal`, `act`, `created_at`, `updated_at`, `created_by`) VALUES
+(1, 'DTSX-000001', 'CTY CP IN & SẢN XUẤT BAO BÌ TUẤN DUNG', 'Mr Tuấn', NULL, '0963303999', '02438303888', 'kd1.intuandung@gmail.com', 'Lô D5-16 Cụm Làng Nghề Triều khúc - Tân Triều - HN', '351', NULL, NULL, 1, 1, 1, '2023-09-23 14:34:33', '2024-08-13 08:57:40', 1),
+(3, 'DTSX-00000003', 'Ms HỒNG TEM CUỘN', 'Ms HỒNG TEM CUỘN', NULL, '0904941286', '0904941286', 'ZALO', 'GIA LÂM', '351', NULL, NULL, 2, 0, 1, '2024-03-13 22:17:39', '2024-08-16 11:08:44', 1),
+(4, 'DTSX-00000004', 'TUẤN IN TUẤN DUNG', 'Mr Tuấn', NULL, '2345678', '2345678', 'ZALO', 'hoa sơn', '351', NULL, NULL, 1, NULL, 1, '2024-03-13 22:18:35', '2024-03-13 22:18:35', 1),
+(5, 'DTSX-00000005', 'TEM 7 MÀU CHỐNG GIẢ', 'Mr Vương', NULL, '0989666869', '0989666869', 'zalo', 'Nam Định', '7474', NULL, NULL, 2, 0, 1, '2024-04-01 14:56:21', '2024-08-16 11:08:50', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `printers`
+--
+
+CREATE TABLE `printers` (
+  `id` int NOT NULL COMMENT 'Mã nhóm',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Tên nhóm',
+  `print_length` float(10,0) DEFAULT NULL,
+  `print_width` float(10,0) DEFAULT NULL,
+  `model_price` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `work_price` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT '0',
+  `shape_price` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT '0',
+  `w_work_price` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `w_shape_price` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `note` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Ghi chú',
+  `act` tinyint DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `device` tinyint DEFAULT NULL,
+  `created_by` int NOT NULL,
+  `ord` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `printers`
+--
+
+INSERT INTO `printers` (`id`, `name`, `print_length`, `print_width`, `model_price`, `work_price`, `shape_price`, `w_work_price`, `w_shape_price`, `note`, `act`, `created_at`, `updated_at`, `device`, `created_by`, `ord`) VALUES
+(3, 'Máy in 36 x 52', 52, 72, '66000', '30', '110000', '15', '24000', NULL, 1, '2023-09-01 00:00:00', '2025-02-01 16:36:59', 1, 1, NULL),
+(7, 'Máy in uv 36x52', 36, 52, '66000', '150', '250000', '45', '50000', NULL, 1, '2023-09-01 00:00:00', '2024-07-20 09:29:21', 2, 0, NULL),
+(8, 'Máy in uv 47x65', 47, 65, '66000', '150', '300000', '45', '50000', NULL, 1, '2023-09-01 00:00:00', '2024-07-20 09:31:04', 2, 0, NULL),
+(9, 'Máy in uv 52x72', 52, 72, '66000', '180', '330000', '45', '50000', NULL, 1, '2023-09-01 00:00:00', '2024-07-20 09:30:52', 2, 1, NULL),
+(10, 'Máy in uv 54x79', 54, 79, '123600', '220', '500000', '45', '70000', NULL, 1, '2023-09-01 00:00:00', '2024-07-20 09:30:05', 2, 1, NULL),
+(11, 'Máy in uv 72x102', 72, 102, '123600', '300', '600000', '60', '100000', NULL, 1, '2023-09-01 00:00:00', '2024-07-20 09:30:14', 2, 0, NULL),
+(12, 'Máy in 47 x 65', 52, 72, '66000', '30', '110000', '15', '24000', NULL, 1, '2025-02-01 16:25:39', '2025-02-01 16:32:01', 1, 1, NULL),
+(13, 'Máy in 52 x 72', 52, 72, '66000', '35', '110000', '15', '24000', NULL, 1, '2025-02-01 16:27:34', '2025-02-01 16:28:37', 1, 1, NULL),
+(14, 'Máy in 54 x 79', 55, 80, '124000', '50', '180000', '20', '30000', NULL, 1, '2025-02-01 16:30:59', '2025-02-01 16:37:15', 1, 1, NULL),
+(15, 'Máy in 72 x 102', 72, 102, '124000', '80', '220000', '30', '30000', NULL, 1, '2025-02-01 16:35:43', '2025-02-01 16:36:03', 1, 1, NULL),
+(16, 'Máy in 79 x 109 thuê ngoài', 79, 109, '160000', '100', '300000', '0', '30000', NULL, 1, '2025-02-01 16:39:35', '2025-02-01 16:40:20', 1, 1, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `print_notes`
+--
+
+CREATE TABLE `print_notes` (
+  `id` int NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `act` tinyint DEFAULT NULL,
+  `created_by` int DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `print_notes`
+--
+
+INSERT INTO `print_notes` (`id`, `name`, `act`, `created_by`, `created_at`, `updated_at`) VALUES
+(1, 'In theo màn hình Dell ultra', 1, 1, '2023-05-22 10:29:05', '2023-05-22 10:29:05'),
+(2, 'In theo mẫu đã in trước', 1, 1, '2023-05-22 10:29:05', '2023-05-22 10:29:05'),
+(3, 'In theo mẫu khách hàng gửi', 1, 1, '2023-05-22 10:29:05', '2023-05-22 10:29:05'),
+(4, 'Khách hàng duyệt màu', 1, 1, '2023-05-22 10:29:05', '2023-05-22 10:29:05');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `print_techs`
+--
+
+CREATE TABLE `print_techs` (
+  `id` int NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `act` tinyint DEFAULT NULL,
+  `created_by` int DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `print_techs`
+--
+
+INSERT INTO `print_techs` (`id`, `name`, `act`, `created_by`, `created_at`, `updated_at`) VALUES
+(1, 'In offset', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:25'),
+(2, 'In UV Offset', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:25'),
+(3, 'In Label', 1, 1, '2023-03-11 15:10:23', '2023-03-11 15:10:25'),
+(4, 'offset & UV offset', 1, 1, '2023-03-11 15:25:31', '2023-03-11 15:25:33');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_categories`
+--
+
+CREATE TABLE `product_categories` (
+  `id` int NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `design_factor` decimal(10,0) DEFAULT NULL,
+  `act` tinyint DEFAULT NULL,
+  `created_by` int DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `product_categories`
+--
+
+INSERT INTO `product_categories` (`id`, `name`, `design_factor`, `act`, `created_by`, `created_at`, `updated_at`) VALUES
+(1, 'Hộp cứng', '0', 1, 1, '2022-11-02 11:34:00', '2022-11-02 11:34:00'),
+(2, 'Hộp giấy', '0', 1, 1, '2022-11-02 23:34:00', '2022-11-02 23:34:00'),
+(3, 'Túi giấy', '0', 1, 1, '2022-11-02 23:34:00', '2022-11-02 23:34:00'),
+(4, 'Tem', '0', 1, 1, '2022-11-02 23:34:00', '2024-12-04 17:00:37'),
+(5, 'Mác giấy', '0', 1, 1, '2022-11-02 23:34:00', '2024-12-04 17:01:32'),
+(6, 'Toa - Tờ rơi - Tờ gấp', '1', 1, 1, '2022-11-02 23:34:00', '2024-12-05 13:56:14');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_histories`
+--
+
+CREATE TABLE `product_histories` (
+  `id` int NOT NULL,
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `target` int DEFAULT NULL,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `imported` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ex_inventory` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `exported` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `inventory` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `unit` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `source` int DEFAULT NULL,
+  `price` float DEFAULT NULL,
+  `receipt` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `act` tinyint DEFAULT NULL,
+  `c_order` int DEFAULT NULL,
+  `product` int DEFAULT NULL,
+  `created_by` int DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_styles`
+--
+
+CREATE TABLE `product_styles` (
+  `id` int NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `category` int DEFAULT NULL,
+  `act` tinyint DEFAULT NULL,
+  `created_by` int DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `product_styles`
+--
+
+INSERT INTO `product_styles` (`id`, `name`, `category`, `act`, `created_by`, `created_at`, `updated_at`) VALUES
+(10, 'HỘP ÂM DƯƠNG', 1, 1, 1, '2023-09-20 15:01:31', '2024-11-30 14:56:39'),
+(11, 'HỘP ÂM DƯƠNG CÓ THÀNH', 1, 1, 1, '2023-09-20 15:04:09', '2024-11-30 14:56:56'),
+(12, 'HỘP NAM CHÂM', 1, 1, 1, '2023-09-20 15:04:34', '2024-11-30 14:57:06'),
+(13, 'CÀI ĐÁY', 2, 1, 1, '2023-09-21 23:28:50', '2023-09-21 23:28:50'),
+(14, 'KHÓA ĐÁY', 2, 1, 1, '2023-09-21 23:29:05', '2023-09-21 23:29:05'),
+(15, 'RÁN MÓC ĐÁY', 2, 1, 1, '2023-09-21 23:29:19', '2023-09-21 23:29:19'),
+(16, 'KHAY THUYỀN QUÀ TẾT', 1, 1, 1, '2023-10-04 08:48:19', '2024-11-30 14:57:34'),
+(17, 'KHAY GỖ MDF', 1, 1, 1, '2023-10-05 21:39:00', '2024-11-30 14:57:49'),
+(18, 'TÚI 1 MẢNH LIỀN', 3, 1, 1, '2024-04-23 17:39:57', '2024-04-23 17:39:57'),
+(19, 'TÚI 2 MẢNH GHÉP', 3, 1, 1, '2024-04-23 17:40:14', '2024-04-23 17:40:14'),
+(20, 'TEM CUỘN RÁN MÁY', 4, 1, 1, '2024-04-23 17:42:09', '2024-04-23 17:42:55'),
+(21, 'TEM RỜI RÁN TAY', 4, 1, 1, '2024-04-23 17:42:41', '2024-04-23 17:42:41'),
+(22, 'TỜ GẤP', 6, 1, 1, '2024-04-23 17:44:04', '2024-04-23 17:46:48'),
+(23, 'TỜ RƠI', 6, 1, 1, '2024-04-23 17:44:16', '2024-04-23 17:44:16'),
+(24, 'TOA - HDSD', 6, 1, 1, '2024-04-23 17:44:26', '2025-01-23 15:08:38'),
+(26, 'HỘP QUÀ TẾT PHỔ THÔNG', 1, 1, 1, '2024-11-30 14:58:50', '2024-11-30 15:12:26'),
+(27, 'HỘP QUÀ TẾT CAO CẤP', 1, 1, 1, '2024-11-30 14:59:34', '2024-11-30 15:12:36'),
+(28, 'HỘP TRUNG THU PHỔ THÔNG', 1, 1, 1, '2024-11-30 15:05:19', '2024-11-30 15:12:48'),
+(29, 'HỘP TRUNG THU CAO CẤP', 1, 1, 1, '2024-11-30 15:07:01', '2024-11-30 15:12:57'),
+(30, 'HỘP QUÀ TẶNG PHỔ THÔNG', 1, 1, 1, '2024-11-30 15:13:27', '2024-11-30 15:13:27'),
+(31, 'HỘP QUÀ TẶNG CAO CẤP', 1, 1, 1, '2024-11-30 15:13:37', '2024-11-30 15:13:37'),
+(32, 'KIỂU KHÁC', 2, 1, 1, '2024-12-10 13:32:56', '2024-12-10 13:32:56'),
+(33, 'KIỂU KHÁC', 3, 1, 1, '2024-12-10 13:33:45', '2024-12-10 13:33:45'),
+(34, 'KIỂU KHÁC', 1, 1, 1, '2024-12-10 13:34:14', '2024-12-10 13:34:14');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_warehouses`
+--
+
+CREATE TABLE `product_warehouses` (
+  `id` int NOT NULL,
+  `code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` tinyint DEFAULT NULL,
+  `category` int DEFAULT NULL,
+  `style` int DEFAULT NULL,
+  `qty` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `length` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `width` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `height` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `produce_price` float DEFAULT NULL,
+  `add_on` float DEFAULT NULL,
+  `price` float DEFAULT NULL,
+  `unit` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `warehouse_type` int DEFAULT NULL,
+  `note` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `status` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `made_by` int DEFAULT NULL,
+  `act` tinyint DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `created_by` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `provider_debts`
+--
+
+CREATE TABLE `provider_debts` (
+  `id` int NOT NULL,
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `supply` int DEFAULT NULL,
+  `provider` int DEFAULT NULL,
+  `price` float DEFAULT NULL,
+  `other_price` float DEFAULT '0',
+  `total` float DEFAULT NULL,
+  `advance` float DEFAULT NULL,
+  `qty` float DEFAULT NULL,
+  `rest` float DEFAULT NULL,
+  `bill` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `act` tinyint DEFAULT NULL,
+  `created_by` int DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `provider_prices`
+--
+
+CREATE TABLE `provider_prices` (
+  `id` int NOT NULL COMMENT 'Mã nhóm',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `supp_price` int DEFAULT NULL,
+  `provider` int DEFAULT NULL,
+  `price` double DEFAULT NULL,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Ghi chú',
+  `act` tinyint DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_by` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `provider_prices`
+--
+
+INSERT INTO `provider_prices` (`id`, `name`, `supp_price`, `provider`, `price`, `note`, `act`, `created_at`, `updated_at`, `created_by`) VALUES
+(270, 'GIẤY ANH ĐẠT', 271, 49, 0.0021, NULL, 1, '2025-01-10 16:27:26', '2025-01-10 16:27:26', 23),
+(271, 'GIẤY VẠN PHÚ GIA', 271, 50, 0.0022, NULL, 1, '2025-01-10 16:27:26', '2025-01-10 16:27:26', 23),
+(272, 'GIẤY NGỌC VIỆT', 271, 51, 0.0023, NULL, 1, '2025-01-10 16:27:26', '2025-01-10 16:27:26', 23),
+(273, 'NCC ANH ĐẠT', 288, 49, 0.00228, NULL, 1, '2025-01-10 17:24:34', '2025-02-04 16:34:53', 1),
+(274, 'NCC VẠN PHÚ GIA', 288, 50, 0.0023, NULL, 1, '2025-01-10 17:24:34', '2025-02-04 16:34:53', 1),
+(275, 'NCC NGỌC VIỆT', 288, 51, 0.00229, NULL, 1, '2025-01-10 17:24:34', '2025-02-04 16:34:53', 1),
+(276, 'GIẤY ANH ĐẠT', 289, 49, 0.0021, NULL, 1, '2025-01-10 17:27:03', '2025-01-10 17:29:19', 1),
+(277, 'GIẤY VẠN PHÚ GIA', 289, 50, 0.00212, NULL, 1, '2025-01-10 17:27:03', '2025-01-10 17:29:19', 1),
+(278, 'GIẤY NGỌC VIỆT', 289, 51, 0.00213, NULL, 1, '2025-01-10 17:27:03', '2025-01-10 17:29:19', 1),
+(279, 'GIẤY ANH ĐẠT', 290, 49, 0.0021, NULL, 1, '2025-01-10 17:28:34', '2025-01-10 17:29:09', 1),
+(280, 'GIẤY VẠN PHÚ GIA', 290, 50, 0.00212, NULL, 1, '2025-01-10 17:28:34', '2025-01-10 17:29:09', 1),
+(281, 'GIẤY NGỌC VIỆT', 290, 51, 0.00213, NULL, 1, '2025-01-10 17:28:34', '2025-01-10 17:29:09', 1),
+(282, 'GIẤY ANH ĐẠT', 291, 49, 0.0021, NULL, 1, '2025-01-11 15:23:42', '2025-01-11 15:23:42', 1),
+(283, 'GIẤY VẠN PHÚ GIA', 291, 50, 0.00212, NULL, 1, '2025-01-11 15:23:42', '2025-01-11 15:23:42', 1),
+(284, 'GIẤY NGỌC VIỆT', 291, 51, 0.00213, NULL, 1, '2025-01-11 15:23:42', '2025-01-11 15:23:42', 1),
+(285, 'GIẤY ANH ĐẠT', 292, 49, 0.0021, NULL, 1, '2025-01-11 15:24:47', '2025-01-11 15:24:47', 1),
+(286, 'GIẤY VẠN PHÚ GIA', 292, 50, 0.00212, NULL, 1, '2025-01-11 15:24:47', '2025-01-11 15:24:47', 1),
+(287, 'GIẤY NGỌC VIỆT', 292, 51, 0.00213, NULL, 1, '2025-01-11 15:24:47', '2025-01-11 15:24:47', 1),
+(288, 'GIẤY ANH ĐẠT', 293, 49, 0.0021, NULL, 1, '2025-01-11 15:25:38', '2025-01-11 15:25:53', 1),
+(289, 'GIẤY VẠN PHÚ GIA', 293, 50, 0.00212, NULL, 1, '2025-01-11 15:25:38', '2025-01-11 15:25:53', 1),
+(290, 'GIẤY NGỌC VIỆT', 293, 51, 0.00213, NULL, 1, '2025-01-11 15:25:38', '2025-01-11 15:25:53', 1),
+(291, 'GIẤY ANH ĐẠT', 294, 49, 0.0021, NULL, 1, '2025-01-11 15:26:40', '2025-01-11 15:26:40', 1),
+(292, 'GIẤY VẠN PHÚ GIA', 294, 50, 0.00212, NULL, 1, '2025-01-11 15:26:40', '2025-01-11 15:26:40', 1),
+(293, 'GIẤY NGỌC VIỆT', 294, 51, 0.00213, NULL, 1, '2025-01-11 15:26:40', '2025-01-11 15:26:40', 1),
+(294, 'GIẤY ANH ĐẠT', 295, 49, 0.0021, NULL, 1, '2025-01-11 15:27:24', '2025-01-11 15:27:24', 1),
+(295, 'GIẤY VẠN PHÚ GIA', 295, 50, 0.00212, NULL, 1, '2025-01-11 15:27:24', '2025-01-11 15:27:24', 1),
+(296, 'GIẤY NGỌC VIỆT', 295, 51, 0.00213, NULL, 1, '2025-01-11 15:27:24', '2025-01-11 15:27:24', 1),
+(297, 'GIẤY ANH ĐẠT', 296, 49, 0.0021, NULL, 1, '2025-01-11 15:28:10', '2025-01-11 15:28:10', 1),
+(298, 'GIẤY VẠN PHÚ GIA', 296, 50, 0.00212, NULL, 1, '2025-01-11 15:28:10', '2025-01-11 15:28:10', 1),
+(299, 'GIẤY NGỌC VIỆT', 296, 51, 0.00213, NULL, 1, '2025-01-11 15:28:10', '2025-01-11 15:28:11', 1),
+(300, 'GIẤY ANH ĐẠT', 297, 49, 0.00183, NULL, 1, '2025-01-11 15:30:35', '2025-01-11 15:30:36', 1),
+(301, 'GIẤY VẠN PHÚ GIA', 297, 50, 0.00184, NULL, 1, '2025-01-11 15:30:35', '2025-01-11 15:30:36', 1),
+(302, 'GIẤY NGỌC VIỆT', 297, 51, 0.00185, NULL, 1, '2025-01-11 15:30:35', '2025-01-11 15:30:36', 1),
+(303, 'GIẤY ANH ĐẠT', 298, 49, 0.0017, NULL, 1, '2025-01-11 15:32:35', '2025-01-11 15:32:36', 1),
+(304, 'GIẤY VẠN PHÚ GIA', 298, 50, 0.00171, NULL, 1, '2025-01-11 15:32:35', '2025-01-11 15:32:36', 1),
+(305, 'GIẤY NGỌC VIỆT', 298, 51, 0.00173, NULL, 1, '2025-01-11 15:32:35', '2025-01-11 15:32:36', 1),
+(306, 'GIẤY ANH ĐẠT', 299, 49, 0.00173, NULL, 1, '2025-01-11 15:47:05', '2025-01-11 16:16:12', 1),
+(307, 'GIẤY VẠN PHÚ GIA', 299, 50, 0.00174, NULL, 1, '2025-01-11 15:47:05', '2025-01-11 16:16:13', 1),
+(308, 'GIẤY NGỌC VIỆT', 299, 51, 0.00175, NULL, 1, '2025-01-11 15:47:05', '2025-01-11 16:16:13', 1),
+(309, 'GIẤY ANH ĐẠT', 300, 49, 0.0017, NULL, 1, '2025-01-11 15:47:50', '2025-01-11 15:48:11', 1),
+(310, 'GIẤY VẠN PHÚ GIA', 300, 50, 0.00171, NULL, 1, '2025-01-11 15:47:50', '2025-01-11 15:48:11', 1),
+(311, 'GIẤY VẠN PHÚ GIA', 300, 50, 0.00173, NULL, 1, '2025-01-11 15:47:50', '2025-01-11 15:48:12', 1),
+(312, 'GIẤY ANH ĐẠT', 301, 49, 0.0017, NULL, 1, '2025-01-11 15:49:05', '2025-01-11 15:49:06', 1),
+(313, 'GIẤY VẠN PHÚ GIA', 301, 50, 0.00171, NULL, 1, '2025-01-11 15:49:05', '2025-01-11 15:49:06', 1),
+(314, 'GIẤY NGỌC VIỆT', 301, 51, 0.00173, NULL, 1, '2025-01-11 15:49:05', '2025-01-11 15:49:06', 1),
+(315, 'GIẤY ANH ĐẠT', 302, 49, 0.0017, NULL, 1, '2025-01-11 15:50:23', '2025-01-11 15:50:23', 1),
+(316, 'GIẤY VẠN PHÚ GIA', 302, 50, 0.00171, NULL, 1, '2025-01-11 15:50:23', '2025-01-11 15:50:24', 1),
+(317, 'GIẤY NGỌC VIỆT', 302, 51, 0.00173, NULL, 1, '2025-01-11 15:50:23', '2025-01-11 15:50:24', 1),
+(318, 'GIẤY ANH ĐẠT', 303, 49, 0.0017, NULL, 1, '2025-01-11 15:51:01', '2025-01-11 15:51:01', 1),
+(319, 'GIẤY VẠN PHÚ GIA', 303, 50, 0.00171, NULL, 1, '2025-01-11 15:51:01', '2025-01-11 15:51:01', 1),
+(320, 'GIẤY NGỌC VIỆT', 303, 51, 0.00173, NULL, 1, '2025-01-11 15:51:01', '2025-01-11 15:51:01', 1),
+(321, 'GIẤY ANH ĐẠT', 304, 49, 0.0017, NULL, 1, '2025-01-11 15:52:01', '2025-01-11 15:52:01', 1),
+(322, 'GIẤY VẠN PHÚ GIA', 304, 50, 0.00171, NULL, 1, '2025-01-11 15:52:01', '2025-01-11 15:52:01', 1),
+(323, 'GIẤY NGỌC VIỆT', 304, 51, 0.00173, NULL, 1, '2025-01-11 15:52:01', '2025-01-11 15:52:02', 1),
+(324, 'GIẤY ANH ĐẠT', 305, 49, 0.0017, NULL, 1, '2025-01-11 15:52:48', '2025-01-11 15:52:48', 1),
+(325, 'GIẤY VẠN PHÚ GIA', 305, 50, 0.00171, NULL, 1, '2025-01-11 15:52:48', '2025-01-11 15:52:49', 1),
+(326, 'GIẤY NGỌC VIỆT', 305, 51, 0.00173, NULL, 1, '2025-01-11 15:52:48', '2025-01-11 15:52:49', 1),
+(327, 'GIẤY ANH ĐẠT', 306, 49, 0.00173, NULL, 1, '2025-01-11 16:16:33', '2025-01-11 16:16:34', 1),
+(328, 'GIẤY VẠN PHÚ GIA', 306, 50, 0.00174, NULL, 1, '2025-01-11 16:16:33', '2025-01-11 16:16:34', 1),
+(329, 'GIẤY NGỌC VIỆT', 306, 51, 0.00175, NULL, 1, '2025-01-11 16:16:33', '2025-01-11 16:16:34', 1),
+(330, 'GIẤY ANH ĐẠT', 307, 49, 0.00173, NULL, 1, '2025-01-11 16:16:44', '2025-01-11 16:16:44', 1),
+(331, 'GIẤY VẠN PHÚ GIA', 307, 50, 0.00174, NULL, 1, '2025-01-11 16:16:44', '2025-01-11 16:16:44', 1),
+(332, 'GIẤY NGỌC VIỆT', 307, 51, 0.00175, NULL, 1, '2025-01-11 16:16:44', '2025-01-11 16:16:44', 1),
+(333, 'GIẤY ANH ĐẠT', 308, 49, 0.00173, NULL, 1, '2025-01-11 16:17:00', '2025-01-11 16:17:00', 1),
+(334, 'GIẤY VẠN PHÚ GIA', 308, 50, 0.00174, NULL, 1, '2025-01-11 16:17:00', '2025-01-11 16:17:00', 1),
+(335, 'GIẤY NGỌC VIỆT', 308, 51, 0.00175, NULL, 1, '2025-01-11 16:17:00', '2025-01-11 16:17:01', 1),
+(336, 'GIẤY ANH ĐẠT', 309, 49, 0.00173, NULL, 1, '2025-01-11 16:17:10', '2025-01-11 16:17:31', 1),
+(337, 'GIẤY VẠN PHÚ GIA', 309, 50, 0.00174, NULL, 1, '2025-01-11 16:17:10', '2025-01-11 16:17:32', 1),
+(338, 'GIẤY NGỌC VIỆT', 309, 51, 0.00175, NULL, 1, '2025-01-11 16:17:10', '2025-01-11 16:17:32', 1),
+(339, 'GIẤY ANH ĐẠT', 310, 49, 0.00173, NULL, 1, '2025-01-11 16:17:21', '2025-01-11 16:17:21', 1),
+(340, 'GIẤY VẠN PHÚ GIA', 310, 50, 0.00174, NULL, 1, '2025-01-11 16:17:21', '2025-01-11 16:17:21', 1),
+(341, 'GIẤY NGỌC VIỆT', 310, 51, 0.00175, NULL, 1, '2025-01-11 16:17:21', '2025-01-11 16:17:21', 1),
+(342, 'GIẤY ANH ĐẠT', 311, 49, 0.00173, NULL, 1, '2025-01-11 16:17:43', '2025-01-11 16:17:43', 1),
+(343, 'GIẤY VẠN PHÚ GIA', 311, 50, 0.00174, NULL, 1, '2025-01-11 16:17:43', '2025-01-11 16:17:44', 1),
+(344, 'GIẤY NGỌC VIỆT', 311, 51, 0.00175, NULL, 1, '2025-01-11 16:17:43', '2025-01-11 16:17:44', 1),
+(345, 'GIẤY ANH ĐẠT', 312, 49, 0.00173, NULL, 1, '2025-01-11 16:17:55', '2025-01-11 16:17:56', 1),
+(346, 'GIẤY VẠN PHÚ GIA', 312, 50, 0.00174, NULL, 1, '2025-01-11 16:17:55', '2025-01-11 16:17:56', 1),
+(347, 'GIẤY NGỌC VIỆT', 312, 51, 0.00175, NULL, 1, '2025-01-11 16:17:55', '2025-01-11 16:17:56', 1),
+(348, 'GIẤY VẠN PHÚ GIA', 313, 50, 0.00167, NULL, 1, '2025-01-11 16:21:42', '2025-01-11 16:32:07', 1),
+(349, 'GIẤY BAO BÌ HÀ NỘI', 313, 90, 0.00155, NULL, 1, '2025-01-11 16:21:42', '2025-01-11 16:32:07', 1),
+(351, 'GIẤY VẠN PHÚ GIA', 314, 50, 0.00167, NULL, 1, '2025-01-11 16:28:56', '2025-01-11 16:34:03', 1),
+(352, 'GIẤY BAO BÌ HÀ NỘI', 314, 90, 0.00155, NULL, 1, '2025-01-11 16:28:56', '2025-01-11 16:34:03', 1),
+(353, 'GIẤY VẠN PHÚ GIA', 315, 50, 0.00167, NULL, 1, '2025-01-11 16:29:06', '2025-01-11 16:33:51', 1),
+(354, 'GIẤY BAO BÌ HÀ NỘI', 315, 90, 0.00155, NULL, 1, '2025-01-11 16:29:06', '2025-01-11 16:33:51', 1),
+(355, 'GIẤY VẠN PHÚ GIA', 316, 50, 0.00167, NULL, 1, '2025-01-11 16:29:18', '2025-01-11 16:33:41', 1),
+(356, 'GIẤY BAO BÌ HÀ NỘI', 316, 90, 0.00155, NULL, 1, '2025-01-11 16:29:18', '2025-01-11 16:33:41', 1),
+(357, 'GIẤY VẠN PHÚ GIA', 317, 50, 0.00167, NULL, 1, '2025-01-11 16:29:41', '2025-01-11 16:33:29', 1),
+(358, 'GIẤY BAO BÌ HÀ NỘI', 317, 90, 0.00155, NULL, 1, '2025-01-11 16:29:41', '2025-01-11 16:33:29', 1),
+(359, 'GIẤY VẠN PHÚ GIA', 318, 50, 0.00167, NULL, 1, '2025-01-11 16:29:56', '2025-01-11 16:33:19', 1),
+(360, 'GIẤY BAO BÌ HÀ NỘI', 318, 90, 0.00155, NULL, 1, '2025-01-11 16:29:56', '2025-01-11 16:33:19', 1),
+(361, 'GIẤY VẠN PHÚ GIA', 319, 50, 0.00167, NULL, 1, '2025-01-11 16:30:14', '2025-01-11 16:31:48', 1),
+(362, 'GIẤY BAO BÌ HÀ NỘI', 319, 90, 0.00155, NULL, 1, '2025-01-11 16:30:14', '2025-01-11 16:31:48', 1),
+(363, 'GIẤY VẠN PHÚ GIA', 320, 50, 0.00167, NULL, 1, '2025-01-11 16:30:24', '2025-01-11 16:31:37', 1),
+(364, 'GIẤY BAO BÌ HÀ NỘI', 320, 90, 0.0017, NULL, 1, '2025-01-11 16:30:24', '2025-01-11 16:31:37', 1),
+(365, 'GIẤY VẠN PHÚ GIA', 321, 50, 0.00163, NULL, 1, '2025-01-11 16:34:43', '2025-01-11 16:34:43', 1),
+(366, 'GIẤY BAO BÌ HÀ NỘI', 321, 90, 0.0017, NULL, 1, '2025-01-11 16:34:43', '2025-01-11 16:34:43', 1),
+(367, 'GIẤY VẠN PHÚ GIA', 322, 50, 0.00163, NULL, 1, '2025-01-11 16:35:20', '2025-01-11 16:35:20', 1),
+(368, 'GIẤY BAO BÌ HÀ NỘI', 322, 90, 0.0017, NULL, 1, '2025-01-11 16:35:20', '2025-01-11 16:35:20', 1),
+(369, 'GIẤY VẠN PHÚ GIA', 323, 50, 0.00156, NULL, 1, '2025-01-11 16:36:19', '2025-01-11 16:40:20', 1),
+(370, 'GIẤY BAO BÌ HÀ NỘI', 323, 90, 0.0016, NULL, 1, '2025-01-11 16:36:19', '2025-01-11 16:40:20', 1),
+(371, 'GIẤY VẠN PHÚ GIA', 324, 50, 0.00156, NULL, 1, '2025-01-11 16:36:33', '2025-01-11 16:40:29', 1),
+(372, 'GIẤY BAO BÌ HÀ NỘI', 324, 90, 0.0016, NULL, 1, '2025-01-11 16:36:33', '2025-01-11 16:40:29', 1),
+(373, 'GIẤY VẠN PHÚ GIA', 325, 50, 0.00152, NULL, 1, '2025-01-11 16:38:20', '2025-01-11 16:38:21', 1),
+(374, 'GIẤY BAO BÌ HÀ NỘI', 325, 90, 0.0016, NULL, 1, '2025-01-11 16:38:20', '2025-01-11 16:38:21', 1),
+(375, 'GIẤY VẠN PHÚ GIA', 326, 50, 0.00152, NULL, 1, '2025-01-11 16:38:32', '2025-01-11 16:38:32', 1),
+(376, 'GIẤY BAO BÌ HÀ NỘI', 326, 90, 0.0016, NULL, 1, '2025-01-11 16:38:32', '2025-01-11 16:38:33', 1),
+(377, 'GIẤY VẠN PHÚ GIA', 327, 50, 0.00152, NULL, 1, '2025-01-11 16:38:54', '2025-01-11 16:38:55', 1),
+(378, 'GIẤY BAO BÌ HÀ NỘI', 327, 90, 0.0016, NULL, 1, '2025-01-11 16:38:54', '2025-01-11 16:38:55', 1),
+(379, 'GIẤY VẠN PHÚ GIA', 328, 50, 0.00152, NULL, 1, '2025-01-11 16:39:08', '2025-01-11 16:39:08', 1),
+(380, 'GIẤY BAO BÌ HÀ NỘI', 328, 90, 0.0016, NULL, 1, '2025-01-11 16:39:08', '2025-01-11 16:39:09', 1),
+(381, 'GIẤY VẠN PHÚ GIA', 329, 50, 0.00152, NULL, 1, '2025-01-11 16:39:19', '2025-01-11 16:39:19', 1),
+(382, 'GIẤY BAO BÌ HÀ NỘI', 329, 90, 0.0016, NULL, 1, '2025-01-11 16:39:19', '2025-01-11 16:39:19', 1),
+(383, 'GIẤY VẠN PHÚ GIA', 330, 50, 0.00152, NULL, 1, '2025-01-11 16:39:29', '2025-01-11 16:39:29', 1),
+(384, 'GIẤY BAO BÌ HÀ NỘI', 330, 90, 0.0016, NULL, 1, '2025-01-11 16:39:29', '2025-01-11 16:39:29', 1),
+(385, 'GIẤY VẠN PHÚ GIA', 331, 50, 0.00152, NULL, 1, '2025-01-11 16:39:44', '2025-01-11 16:39:44', 1),
+(386, 'GIẤY BAO BÌ HÀ NỘI', 331, 90, 0.0016, NULL, 1, '2025-01-11 16:39:44', '2025-01-11 16:39:44', 1),
+(388, 'HƯNG TIẾN', 332, 57, 0.0053, NULL, 1, '2025-01-11 17:49:49', '2025-01-12 10:02:57', 1),
+(399, 'NCC HƯNG TIẾN', 333, 57, 0.0063, NULL, 1, '2025-01-12 09:00:49', '2025-02-01 17:40:28', 1),
+(400, 'NCC SANSIN', 333, 61, 0.0064, NULL, 1, '2025-01-12 09:04:08', '2025-02-01 17:40:28', 1),
+(401, 'NCC HÒA TRUNG', 333, 56, 0.0065, NULL, 1, '2025-01-12 09:04:08', '2025-02-01 17:40:28', 1),
+(402, 'HƯNG TIẾN', 334, 57, 0.0063, NULL, 1, '2025-01-12 09:18:41', '2025-01-12 09:19:22', 1),
+(403, 'SANSIN', 335, 61, 0.025, NULL, 1, '2025-01-12 09:23:12', '2025-01-12 09:25:24', 1),
+(404, 'SANSIN', 336, 61, 0.025, NULL, 1, '2025-01-12 09:24:41', '2025-01-12 09:24:42', 1),
+(405, 'SANSIN', 337, 61, 0.025, NULL, 1, '2025-01-12 09:25:02', '2025-01-12 09:25:03', 1),
+(406, 'SANSIN', 338, 61, 0.025, NULL, 1, '2025-01-12 09:25:57', '2025-01-12 09:25:58', 1),
+(407, 'CTY SANSIN', 339, 61, 0.025, NULL, 1, '2025-01-12 09:46:51', '2025-01-21 13:39:54', 1),
+(408, 'CTY SANSIN', 340, 61, 0.025, NULL, 1, '2025-01-12 09:47:23', '2025-01-21 13:40:06', 1),
+(409, 'SANSIN', 341, 61, 0.025, NULL, 1, '2025-01-12 09:47:33', '2025-01-12 09:47:34', 1),
+(410, 'SANSIN', 342, 61, 0.025, NULL, 1, '2025-01-12 09:47:43', '2025-01-12 09:47:44', 1),
+(411, 'HƯNG TIẾN', 343, 57, 0.0048, NULL, 1, '2025-01-12 09:56:59', '2025-01-12 10:07:27', 1),
+(414, 'NCC HƯNG TIẾN', 344, 57, 0.0048, NULL, 1, '2025-01-12 09:58:52', '2025-02-01 17:41:49', 1),
+(415, 'MÀNG NILON - NCC HƯNG TIẾN', 345, 57, 0.0045, NULL, 1, '2025-01-12 10:15:09', '2025-01-21 16:59:15', 1),
+(416, 'MÀNG NILON - NCC HƯNG TIẾN', 346, 57, 0.0053, NULL, 1, '2025-01-12 10:15:34', '2025-01-21 16:58:43', 1),
+(417, 'MÀNG NILON - NCC HƯNG TIẾN', 347, 57, 0.0053, NULL, 1, '2025-01-12 10:15:51', '2025-01-21 16:58:54', 1),
+(418, 'HƯNG TIẾN', 348, 57, 0.0061, NULL, 1, '2025-01-12 10:34:40', '2025-01-12 11:47:39', 1),
+(419, 'NCC HƯNG TIẾN', 349, 57, 0.0056, NULL, 1, '2025-01-12 10:35:54', '2025-02-08 14:34:26', 1),
+(420, 'HƯNG TIẾN', 350, 57, 0.0063, NULL, 1, '2025-01-12 10:36:53', '2025-01-12 11:48:07', 1),
+(421, 'NCC GP', 105, 72, 0.00095, NULL, 1, '2025-01-12 11:49:52', '2025-02-03 12:56:58', 1),
+(422, 'GPV carton', 287, 72, 0.00095, NULL, 1, '2025-01-12 11:52:04', '2025-01-12 11:52:05', 1),
+(423, 'NCC TIẾN VĂN', 105, 85, 0.00095, NULL, 1, '2025-01-12 14:23:45', '2025-02-03 12:56:58', 1),
+(424, 'NCC MAK', 105, 84, 0.00095, NULL, 1, '2025-01-12 14:24:09', '2025-02-03 12:56:58', 1),
+(425, 'NCC GP', 351, 72, 0.00095, NULL, 1, '2025-01-12 14:24:33', '2025-02-03 12:55:52', 1),
+(426, 'NCC TIẾN VĂN', 351, 85, 0.00095, NULL, 1, '2025-01-12 14:24:33', '2025-02-03 12:55:52', 1),
+(427, 'NCC MAK', 351, 84, 0.00095, NULL, 1, '2025-01-12 14:24:33', '2025-02-03 12:55:52', 1),
+(428, 'NCC GP', 352, 72, 0.00095, NULL, 1, '2025-01-12 14:25:02', '2025-02-03 12:56:47', 1),
+(429, 'NCC TIẾN VĂN', 352, 85, 0.00095, NULL, 1, '2025-01-12 14:25:02', '2025-02-03 12:56:47', 1),
+(430, 'NCC MAK', 352, 84, 0.00095, NULL, 1, '2025-01-12 14:25:02', '2025-02-03 12:56:48', 1),
+(431, 'NCC GP', 353, 72, 0.00095, NULL, 1, '2025-01-12 14:25:36', '2025-02-03 12:56:37', 1),
+(432, 'NCC TIẾN VĂN', 353, 85, 0.00095, NULL, 1, '2025-01-12 14:25:36', '2025-02-03 12:56:37', 1),
+(433, 'NCC MAK', 353, 84, 0.00095, NULL, 1, '2025-01-12 14:25:36', '2025-02-03 12:56:37', 1),
+(434, 'CARTON - NCC GP Việt nam', 354, 72, 0.00095, NULL, 1, '2025-01-12 14:26:14', '2025-01-21 19:45:58', 1),
+(435, 'CARTON - NCC TIẾN VĂN', 354, 85, 0.00095, NULL, 1, '2025-01-12 14:26:14', '2025-01-21 19:45:58', 1),
+(436, 'CARTON - NCC MAK', 354, 84, 0.00095, NULL, 1, '2025-01-12 14:26:14', '2025-01-21 19:45:58', 1),
+(437, 'NCC GP', 355, 72, 0.00095, NULL, 1, '2025-01-12 14:26:41', '2025-02-03 12:56:26', 1),
+(438, 'NCC TIẾN VĂN', 355, 85, 0.00095, NULL, 1, '2025-01-12 14:26:41', '2025-02-03 12:56:27', 1),
+(439, 'NCC MAK', 355, 84, 0.00095, NULL, 1, '2025-01-12 14:26:41', '2025-02-03 12:56:27', 1),
+(440, 'NCC GP', 356, 72, 0.00095, NULL, 1, '2025-01-12 14:27:09', '2025-02-03 12:56:17', 1),
+(441, 'NCC TIẾN VĂN', 356, 85, 0.00095, NULL, 1, '2025-01-12 14:27:09', '2025-02-03 12:56:17', 1),
+(442, 'NCC MAK', 356, 84, 0.00095, NULL, 1, '2025-01-12 14:27:09', '2025-02-03 12:56:17', 1),
+(443, 'NCC GP', 357, 72, 0.00095, NULL, 1, '2025-01-12 14:27:28', '2025-02-03 12:56:05', 1),
+(444, 'NCC TIẾN VĂN', 357, 85, 0.00095, NULL, 1, '2025-01-12 14:27:28', '2025-02-03 12:56:05', 1),
+(445, 'NCC MAK', 357, 84, 0.00095, NULL, 1, '2025-01-12 14:27:28', '2025-02-03 12:56:05', 1),
+(447, 'BAO BÌ PHƯƠNG ANH', 359, 71, 0.76, NULL, 1, '2025-01-12 14:38:16', '2025-01-12 14:46:59', 1),
+(449, 'CAO SU NON ĐẠI THÀNH', 236, 52, 0.00352, NULL, 1, '2025-01-12 15:19:08', '2025-01-16 16:45:55', 1),
+(450, 'CAO SU NON ĐẠI THÀNH', 233, 52, 3.52, NULL, 1, '2025-01-12 15:22:24', '2025-01-12 15:22:42', 1),
+(451, 'CAO SU NON ĐẠI THÀNH', 234, 52, 3.52, NULL, 1, '2025-01-12 15:23:15', '2025-01-12 15:23:15', 1),
+(452, 'CAO SU NON ĐẠI THÀNH', 235, 52, 3.52, NULL, 1, '2025-01-12 15:23:46', '2025-01-12 15:23:47', 1),
+(453, 'CAO SU NON ĐẠI THÀNH', 237, 52, 3.52, NULL, 1, '2025-01-12 15:24:11', '2025-01-12 15:24:12', 1),
+(454, 'CAO SU NON ĐẠI THÀNH', 238, 52, 3.52, NULL, 1, '2025-01-12 15:24:36', '2025-01-12 15:24:36', 1),
+(455, 'CAO SU NON ĐẠI THÀNH', 239, 52, 3.52, NULL, 1, '2025-01-12 15:25:13', '2025-01-12 15:25:14', 1),
+(456, 'CAO SU NON ĐẠI THÀNH', 240, 52, 3.52, NULL, 1, '2025-01-12 15:25:33', '2025-01-12 15:25:33', 1),
+(457, 'CAO SU NON ĐẠI THÀNH', 241, 52, 3.52, NULL, 1, '2025-01-12 15:25:51', '2025-01-12 15:25:52', 1),
+(458, 'CAO SU NON ĐẠI THÀNH', 242, 52, 3.52, NULL, 1, '2025-01-12 15:26:12', '2025-01-12 15:26:13', 1),
+(459, 'CAO SU NON ĐẠI THÀNH', 243, 52, 3.52, NULL, 1, '2025-01-12 15:26:34', '2025-01-12 15:26:34', 1),
+(460, 'CAO SU NON ĐẠI THÀNH', 244, 52, 3.52, NULL, 1, '2025-01-12 15:26:51', '2025-01-12 15:26:51', 1),
+(461, 'SANSIN', 360, 61, 0.17, NULL, 1, '2025-01-15 06:18:20', '2025-01-15 06:31:32', 1),
+(462, 'CAO SU NON ĐẠI THÀNH', 61, 52, 0.00222, NULL, 1, '2025-01-16 15:54:51', '2025-01-16 15:54:51', 1),
+(463, 'CAO SU NON ĐẠI THÀNH', 186, 52, 0.00222222, NULL, 1, '2025-01-16 15:55:29', '2025-01-16 16:02:20', 1),
+(464, 'CSN ĐẠI THÀNH', 361, 52, 0.00152778, NULL, 1, '2025-01-16 16:05:35', '2025-01-21 23:48:05', 1),
+(465, 'CSN ĐẠI THÀNH', 362, 52, 0.00152778, NULL, 1, '2025-01-16 16:06:02', '2025-01-21 23:48:17', 1),
+(466, 'CSN ĐẠI THÀNH', 363, 52, 0.00152778, NULL, 1, '2025-01-16 16:06:12', '2025-01-21 23:48:26', 1),
+(467, 'CSN ĐẠI THÀNH', 364, 52, 0.00152778, NULL, 1, '2025-01-16 16:06:29', '2025-01-21 23:51:13', 1),
+(468, 'CSN ĐẠI THÀNH', 365, 52, 0.00152778, NULL, 1, '2025-01-16 16:06:56', '2025-01-21 23:51:06', 1),
+(469, 'CSN ĐẠI THÀNH', 366, 52, 0.00152778, NULL, 1, '2025-01-16 16:07:07', '2025-01-21 23:50:57', 1),
+(470, 'CSN ĐẠI THÀNH', 367, 52, 0.00152778, NULL, 1, '2025-01-16 16:07:21', '2025-01-21 23:49:08', 1),
+(471, 'CSN ĐẠI THÀNH', 368, 52, 0.00152778, NULL, 1, '2025-01-16 16:07:32', '2025-01-21 23:49:01', 1),
+(472, 'CSN ĐẠI THÀNH', 369, 52, 0.00152778, NULL, 1, '2025-01-16 16:07:54', '2025-01-21 23:48:55', 1),
+(473, 'CSN ĐẠI THÀNH', 370, 52, 0.00152778, NULL, 1, '2025-01-16 16:08:06', '2025-01-21 23:48:48', 1),
+(474, 'CSN ĐẠI THÀNH', 371, 52, 0.00152778, NULL, 1, '2025-01-16 16:08:19', '2025-01-21 23:48:41', 1),
+(475, 'CSN ĐẠI THÀNH', 372, 52, 0.00152778, NULL, 1, '2025-01-16 16:08:32', '2025-01-21 23:48:34', 1),
+(476, 'CSN ĐẠI THÀNH', 197, 52, 0.00222222, NULL, 1, '2025-01-16 16:22:40', '2025-01-21 23:51:32', 1),
+(477, 'CSN ĐẠI THÀNH', 373, 52, 0.00222222, NULL, 1, '2025-01-16 16:23:04', '2025-01-21 23:52:49', 1),
+(478, 'CSN ĐẠI THÀNH', 374, 52, 0.00222222, NULL, 1, '2025-01-16 16:26:08', '2025-01-21 23:52:41', 1),
+(479, 'CSN ĐẠI THÀNH', 375, 52, 0.00222222, NULL, 1, '2025-01-16 16:26:23', '2025-01-21 23:52:34', 1),
+(480, 'CSN ĐẠI THÀNH', 376, 52, 0.00222222, NULL, 1, '2025-01-16 16:27:31', '2025-01-21 23:52:26', 1),
+(481, 'CSN ĐẠI THÀNH', 377, 52, 0.00222222, NULL, 1, '2025-01-16 16:27:43', '2025-01-21 23:52:20', 1),
+(482, 'CSN ĐẠI THÀNH', 378, 52, 0.00222222, NULL, 1, '2025-01-16 16:27:54', '2025-01-21 23:52:13', 1),
+(483, 'CSN ĐẠI THÀNH', 379, 52, 0.00222222, NULL, 1, '2025-01-16 16:28:10', '2025-01-21 23:52:07', 1),
+(484, 'CSN ĐẠI THÀNH', 380, 52, 0.00222222, NULL, 1, '2025-01-16 16:28:25', '2025-01-21 23:52:00', 1),
+(485, 'CSN ĐẠI THÀNH', 381, 52, 0.00222222, NULL, 1, '2025-01-16 16:28:38', '2025-01-21 23:51:53', 1),
+(486, 'CSN ĐẠI THÀNH', 382, 52, 0.00222222, NULL, 1, '2025-01-16 16:28:53', '2025-01-21 23:51:47', 1),
+(487, 'CSN ĐẠI THÀNH', 383, 52, 0.00222222, NULL, 1, '2025-01-16 16:29:07', '2025-01-21 23:51:39', 1),
+(488, 'CSN ĐẠI THÀNH', 207, 52, 0.00291666, NULL, 1, '2025-01-16 16:35:51', '2025-01-21 23:54:27', 1),
+(489, 'CSN ĐẠI THÀNH', 384, 52, 0.00291666, NULL, 1, '2025-01-16 16:36:06', '2025-01-21 23:54:19', 1),
+(490, 'CSN ĐẠI THÀNH', 385, 52, 0.00291666, NULL, 1, '2025-01-16 16:36:19', '2025-01-21 23:54:12', 1),
+(491, 'CSN ĐẠI THÀNH', 386, 52, 0.00291666, NULL, 1, '2025-01-16 16:36:31', '2025-01-21 23:54:05', 1),
+(492, 'CSN ĐẠI THÀNH', 387, 52, 0.00291666, NULL, 1, '2025-01-16 16:36:43', '2025-01-21 23:53:58', 1),
+(493, 'CSN ĐẠI THÀNH', 388, 52, 0.00291666, NULL, 1, '2025-01-16 16:36:54', '2025-01-21 23:53:50', 1),
+(494, 'CSN ĐẠI THÀNH', 389, 52, 0.00291666, NULL, 1, '2025-01-16 16:37:16', '2025-01-21 23:53:44', 1),
+(495, 'CSN ĐẠI THÀNH', 390, 52, 0.00291666, NULL, 1, '2025-01-16 16:37:30', '2025-01-21 23:53:38', 1),
+(496, 'CSN ĐẠI THÀNH', 391, 52, 0.00291666, NULL, 1, '2025-01-16 16:37:41', '2025-01-21 23:53:32', 1),
+(497, 'CSN ĐẠI THÀNH', 392, 52, 0.00291666, NULL, 1, '2025-01-16 16:37:55', '2025-01-21 23:53:24', 1),
+(498, 'CSN ĐẠI THÀNH', 393, 52, 0.00291666, NULL, 1, '2025-01-16 16:38:06', '2025-01-21 23:53:19', 1),
+(499, 'CSN ĐẠI THÀNH', 394, 52, 0.00291666, NULL, 1, '2025-01-16 16:38:17', '2025-01-21 23:53:13', 1),
+(500, 'CAO SU NON ĐẠI THÀNH', 395, 52, 0.00352, NULL, 1, '2025-01-16 16:46:15', '2025-01-21 19:26:35', 1),
+(501, 'CSN ĐẠI THÀNH', 396, 52, 0.00352, NULL, 1, '2025-01-16 16:46:27', '2025-01-21 19:52:01', 1),
+(502, 'CSN ĐẠI THÀNH', 397, 52, 0.00352, NULL, 1, '2025-01-16 16:47:48', '2025-01-21 19:52:12', 1),
+(503, 'CSN ĐẠI THÀNH', 398, 52, 0.00352, NULL, 1, '2025-01-16 16:47:59', '2025-01-21 19:52:38', 1),
+(504, 'CSN ĐẠI THÀNH', 399, 52, 0.00352, NULL, 1, '2025-01-16 16:48:15', '2025-01-21 19:55:22', 1),
+(505, 'CSN ĐẠI THÀNH', 400, 52, 0.00352, NULL, 1, '2025-01-16 16:48:25', '2025-01-21 19:55:33', 1),
+(506, 'CSN ĐẠI THÀNH', 401, 52, 0.00352, NULL, 1, '2025-01-16 16:48:38', '2025-01-21 19:55:43', 1),
+(507, 'CSN ĐẠI THÀNH', 402, 52, 0.00352, NULL, 1, '2025-01-16 16:48:51', '2025-01-21 19:55:58', 1),
+(508, 'CSN ĐẠI THÀNH', 403, 52, 0.00352, NULL, 1, '2025-01-16 16:49:10', '2025-01-21 19:56:21', 1),
+(509, 'CSN ĐẠI THÀNH', 404, 52, 0.00352, NULL, 1, '2025-01-16 16:49:21', '2025-01-21 19:56:33', 1),
+(510, 'CSN ĐẠI THÀNH', 405, 52, 0.00352, NULL, 1, '2025-01-16 16:49:31', '2025-01-21 19:56:43', 1),
+(511, 'CSN ĐẠI THÀNH', 406, 52, 0.00352, NULL, 1, '2025-01-16 16:49:41', '2025-01-21 19:56:54', 1),
+(512, 'CARTON - NCC TIẾN VĂN', 407, 85, 0.4, NULL, 1, '2025-01-16 16:58:33', '2025-01-16 16:58:33', 1),
+(513, 'CARTON - NCC TIẾN VĂN', 408, 85, 0.0038, NULL, 1, '2025-01-16 16:59:05', '2025-01-16 17:23:23', 1),
+(514, 'NCC SANSIN', 409, 61, 0.020146, NULL, 1, '2025-01-16 17:43:49', '2025-01-21 23:28:38', 1),
+(515, 'NCC SANSIN', 410, 61, 0.020146, NULL, 1, '2025-01-16 17:45:44', '2025-01-21 23:28:27', 1),
+(516, 'NCC SANSIN', 411, 61, 0.020146, NULL, 1, '2025-01-16 17:45:56', '2025-01-21 23:28:18', 1),
+(517, 'NCC SANSIN', 412, 61, 0.020146, NULL, 1, '2025-01-16 17:46:09', '2025-01-21 23:28:07', 1),
+(518, 'NCC CÔ HIỀN', 413, 63, 0.076666, NULL, 1, '2025-01-16 18:02:18', '2025-01-21 23:55:21', 1),
+(519, 'NCC CÔ HIỀN', 414, 63, 0.1, NULL, 1, '2025-01-16 18:07:22', '2025-01-21 23:55:28', 1),
+(520, 'NCC CÔ HIỀN', 415, 63, 0.2, NULL, 1, '2025-01-16 18:09:11', '2025-01-21 23:55:35', 1),
+(521, 'NCC SANSIN', 416, 61, 0.192308, NULL, 1, '2025-01-16 18:23:39', '2025-02-01 18:00:37', 1),
+(524, 'NHŨ THÀNH TÍN', 417, 88, 0.0192308, NULL, 1, '2025-01-16 20:19:30', '2025-01-16 20:19:31', 1),
+(525, 'MÀNG CO - NCC VINAPHAT', 418, 60, 0.035, NULL, 1, '2025-01-16 20:57:35', '2025-01-16 21:01:28', 1),
+(526, 'CTY SANSIN', 419, 61, 36000, NULL, 1, '2025-01-17 01:29:24', '2025-01-17 01:45:46', 1),
+(527, 'CTY SANSIN', 420, 61, 36000, NULL, 1, '2025-01-17 01:31:34', '2025-01-17 01:45:59', 1),
+(528, 'CTY SANSIN', 421, 61, 36000, NULL, 1, '2025-01-17 01:32:16', '2025-01-17 01:46:12', 1),
+(529, 'NCC AN HÙNG MINH', 422, 68, 120000, NULL, 1, '2025-01-17 01:35:06', '2025-02-04 16:43:57', 1),
+(530, 'MỰC IN OFFSET - NCC AN HÙNG MINH', 423, 68, 120000, NULL, 1, '2025-01-17 01:35:24', '2025-01-17 01:35:26', 1),
+(531, 'MỰC IN OFFSET - NCC AN HÙNG MINH', 424, 68, 120000, NULL, 1, '2025-01-17 01:35:34', '2025-01-17 01:35:34', 1),
+(532, 'MỰC IN OFFSET - NCC AN HÙNG MINH', 425, 68, 120000, NULL, 1, '2025-01-17 01:35:45', '2025-01-17 01:35:46', 1),
+(533, 'CTY SANSIN', 426, 61, 6800, NULL, 1, '2025-01-17 01:50:20', '2025-01-17 01:50:21', 1),
+(534, 'CTY SANSIN', 427, 61, 250, NULL, 1, '2025-01-17 01:52:34', '2025-01-17 01:52:34', 1),
+(535, 'CTY SANSIN', 428, 61, 270, NULL, 1, '2025-01-17 01:52:47', '2025-01-17 01:52:56', 1),
+(536, 'MÀNG CO - NCC VINAPHAT', 429, 60, 65000, NULL, 1, '2025-01-17 01:56:24', '2025-01-17 01:56:24', 1),
+(537, 'MỰC IN OFFSET - NCC AN HÙNG MINH', 431, 68, 0.08, NULL, 1, '2025-01-21 10:26:29', '2025-01-21 10:26:29', 1),
+(538, 'MỰC IN OFFSET - NCC AN HÙNG MINH', 446, 68, 0.08, NULL, 1, '2025-01-21 10:27:11', '2025-01-21 10:27:11', 1),
+(539, 'NCC HƯNG TIẾN', 436, 57, 0.0056, NULL, 1, '2025-01-21 10:34:12', '2025-01-23 12:45:45', 1),
+(540, 'NCC HƯNG TIẾN', 447, 57, 0.0061, NULL, 1, '2025-01-21 10:36:08', '2025-01-23 12:45:38', 1),
+(541, 'CTY  NHẬT SƠN', 437, 95, 0.15, NULL, 1, '2025-01-21 10:39:54', '2025-01-26 21:46:04', 1),
+(542, 'KHO TUẤN DUNG', 441, 91, 0.005, NULL, 1, '2025-01-21 11:14:40', '2025-01-21 11:18:30', 1),
+(543, 'KHO TUẤN DUNG', 448, 91, 0.005, NULL, 1, '2025-01-21 11:17:34', '2025-01-21 11:17:35', 1),
+(544, 'KHO TUẤN DUNG', 449, 91, 0.005, NULL, 1, '2025-01-21 11:18:48', '2025-01-21 11:21:31', 1),
+(545, 'KHO TUẤN DUNG', 450, 91, 0.005, NULL, 1, '2025-01-21 11:19:09', '2025-01-21 11:21:38', 1),
+(546, 'KHO TUẤN DUNG', 451, 91, 0.005, NULL, 1, '2025-01-21 11:20:00', '2025-01-21 11:21:45', 1),
+(547, 'KHO TUẤN DUNG', 452, 91, 0.005, NULL, 1, '2025-01-21 11:20:11', '2025-01-21 11:21:51', 1),
+(548, 'KHO TUẤN DUNG', 453, 91, 0.005, NULL, 1, '2025-01-21 11:20:31', '2025-01-21 11:21:56', 1),
+(549, 'KHO TUẤN DUNG', 454, 91, 0.005, NULL, 1, '2025-01-21 11:20:44', '2025-01-21 11:22:02', 1),
+(551, 'DECAN NHẬT LINH', 440, 76, 0.0044, NULL, 1, '2025-01-21 11:31:57', '2025-02-04 11:33:15', 1),
+(552, 'VẬT TƯ IN LƯỚI - NCC HOÀ KHÍ', 432, 67, 200000, NULL, 1, '2025-01-21 13:02:16', '2025-01-21 17:28:00', 1),
+(553, 'VẬT TƯ IN LƯỚI - NCC HOÀ KHÍ', 455, 67, 200000, NULL, 1, '2025-01-21 13:02:53', '2025-01-21 17:28:14', 1),
+(554, 'VẬT TƯ IN LƯỚI - NCC HOÀ KHÍ', 456, 67, 200000, NULL, 1, '2025-01-21 13:03:10', '2025-01-21 17:28:22', 1),
+(555, 'MỰC IN OFFSET - NCC AN HÙNG MINH', 433, 68, 120000, NULL, 1, '2025-01-21 17:12:34', '2025-01-21 18:01:03', 1),
+(556, 'MỰC IN OFFSET - NCC AN HÙNG MINH', 457, 68, 120000, NULL, 1, '2025-01-21 17:58:23', '2025-01-21 18:01:13', 1),
+(557, 'MỰC IN OFFSET - NCC AN HÙNG MINH', 458, 68, 120000, NULL, 1, '2025-01-21 17:59:25', '2025-01-21 18:01:29', 1),
+(558, 'MỰC IN OFFSET - NCC AN HÙNG MINH', 459, 68, 120000, NULL, 1, '2025-01-21 17:59:38', '2025-01-21 18:01:40', 1),
+(559, 'CTY SANSIN', 435, 61, 360, NULL, 1, '2025-01-21 19:02:00', '2025-01-21 19:02:00', 1),
+(560, 'CTY SANSIN', 460, 61, 350, NULL, 1, '2025-01-21 19:02:32', '2025-01-21 19:07:31', 1),
+(561, 'CTY SANSIN', 461, 61, 650, NULL, 1, '2025-01-21 19:02:52', '2025-01-21 19:02:52', 1),
+(562, 'CTY SANSIN', 462, 61, 450, NULL, 1, '2025-01-21 19:06:49', '2025-01-21 19:07:49', 1),
+(563, 'CTY SANSIN', 463, 61, 650, NULL, 1, '2025-01-21 19:07:20', '2025-01-21 19:07:59', 1),
+(564, 'CAO SU NON ĐẠI THÀNH', 464, 52, 0.00352, NULL, 1, '2025-01-21 19:29:41', '2025-01-21 19:29:41', 1),
+(565, 'CSN ĐẠI THÀNH', 465, 52, 0.00352, NULL, 1, '2025-01-21 19:34:10', '2025-01-21 19:34:10', 1),
+(566, 'CSN ĐẠI THÀNH', 466, 52, 0.00352, NULL, 1, '2025-01-21 19:57:42', '2025-01-21 19:57:42', 1),
+(567, 'CSN ĐẠI THÀNH', 467, 52, 0.00352, NULL, 1, '2025-01-21 19:57:51', '2025-01-21 19:57:51', 1),
+(568, 'CSN ĐẠI THÀNH', 468, 52, 0.00352, NULL, 1, '2025-01-21 19:58:01', '2025-01-21 19:58:02', 1),
+(569, 'CSN ĐẠI THÀNH', 469, 52, 0.00352, NULL, 1, '2025-01-21 19:58:11', '2025-01-21 19:58:11', 1),
+(570, 'CSN ĐẠI THÀNH', 470, 52, 0.00352, NULL, 1, '2025-01-21 19:58:21', '2025-01-21 19:58:21', 1),
+(571, 'CSN ĐẠI THÀNH', 471, 52, 0.00352, NULL, 1, '2025-01-21 19:58:32', '2025-01-21 19:58:32', 1),
+(572, 'CSN ĐẠI THÀNH', 472, 52, 0.00352, NULL, 1, '2025-01-21 19:58:42', '2025-01-21 19:58:42', 1),
+(573, 'CSN ĐẠI THÀNH', 473, 52, 0.00352, NULL, 1, '2025-01-21 19:58:54', '2025-01-21 19:58:55', 1),
+(574, 'CSN ĐẠI THÀNH', 474, 52, 0.00352, NULL, 1, '2025-01-21 19:59:05', '2025-01-21 19:59:06', 1),
+(575, 'CSN ĐẠI THÀNH', 475, 52, 0.00352, NULL, 1, '2025-01-21 19:59:16', '2025-01-21 19:59:16', 1),
+(576, 'NCC SANSIN', 476, 61, 0.025, NULL, 1, '2025-01-21 21:35:38', '2025-01-21 21:37:16', 1),
+(577, 'NCC SANSIN', 477, 61, 0.025, NULL, 1, '2025-01-21 21:37:36', '2025-01-21 21:37:36', 1),
+(578, 'NCC SANSIN', 478, 61, 0.025, NULL, 1, '2025-01-21 21:37:50', '2025-01-21 21:37:50', 1),
+(579, 'NCC HƯNG TIẾN', 479, 57, 10, NULL, 1, '2025-01-21 21:51:36', '2025-01-21 21:53:25', 1),
+(580, 'NCC HƯNG TIẾN', 480, 57, 10, NULL, 1, '2025-01-21 21:52:28', '2025-01-21 21:53:19', 1),
+(581, 'NCC SANSIN', 445, 61, 0, NULL, 1, '2025-01-21 23:29:57', '2025-01-21 23:29:57', 1),
+(582, 'NCC HƯNG TIẾN', 481, 57, 0.0061, NULL, 1, '2025-01-23 01:25:14', '2025-02-01 17:43:30', 1),
+(583, 'NCC HƯNG TIẾN', 482, 57, 0.0053, NULL, 1, '2025-01-23 01:26:08', '2025-02-01 17:43:17', 1),
+(584, 'MÀNG PET - NCC ENOMI', 225, 74, 0.1, NULL, 1, '2025-01-30 10:04:08', '2025-01-30 10:04:09', 1),
+(585, 'MÀNG PET - CTY ĐẠO AN', 225, 92, 0.01, NULL, 1, '2025-01-30 10:04:09', '2025-01-30 10:04:10', 1),
+(586, 'NCC HƯNG TIẾN', 483, 57, 0.012, NULL, 1, '2025-02-01 17:29:10', '2025-02-01 17:40:53', 1),
+(587, 'NCC SANSIN', 483, 61, 0.013, NULL, 1, '2025-02-01 17:29:10', '2025-02-01 17:40:53', 1),
+(588, 'NCC HÒA TRUNG', 483, 56, 0.014, NULL, 1, '2025-02-01 17:29:10', '2025-02-01 17:40:53', 1),
+(589, 'NCC SANSIN', 484, 61, 0.0192308, NULL, 1, '2025-02-01 17:56:05', '2025-02-01 17:56:06', 1),
+(590, 'NCC SANSIN', 485, 61, 0.0192308, NULL, 1, '2025-02-01 17:56:16', '2025-02-01 17:56:17', 1),
+(591, 'NCC SANSIN', 486, 61, 0.0192308, NULL, 1, '2025-02-01 17:56:26', '2025-02-01 17:56:26', 1),
+(592, 'NCC SANSIN', 487, 61, 0.0192308, NULL, 1, '2025-02-01 17:56:38', '2025-02-01 17:56:38', 1),
+(593, 'NCC PHÚC ANH', 488, 96, 0.007775, NULL, 1, '2025-02-03 10:01:41', '2025-02-03 10:02:47', 1),
+(594, 'NCC SANSIN', 489, 61, 0.0192308, NULL, 1, '2025-02-03 11:54:09', '2025-02-03 11:54:09', 1),
+(595, 'NHŨ THÀNH TÍN', 489, 88, 0.02, NULL, 1, '2025-02-03 11:54:09', '2025-02-03 11:54:10', 1),
+(596, 'MỰC IN LƯỚI UV - NCC DKT', 490, 66, 200000, NULL, 1, '2025-02-03 14:49:06', '2025-02-03 14:49:06', 1),
+(597, 'MỰC IN LƯỚI UV - NCC DKT', 491, 66, 200000, NULL, 1, '2025-02-03 14:51:09', '2025-02-03 14:51:10', 1),
+(598, 'MỰC IN LƯỚI UV - NCC DKT', 492, 66, 200000, NULL, 1, '2025-02-03 14:52:15', '2025-02-03 14:52:16', 1),
+(599, 'MỰC IN LƯỚI UV - NCC DKT', 493, 66, 200000, NULL, 1, '2025-02-03 14:52:38', '2025-02-03 14:52:39', 1),
+(600, 'DECAN NHẬT LINH', 494, 76, 0.0048, NULL, 1, '2025-02-04 11:24:32', '2025-02-04 11:33:49', 1),
+(601, 'DECAN NHẬT LINH', 495, 76, 0.0043, NULL, 1, '2025-02-04 11:24:47', '2025-02-04 11:34:04', 1),
+(602, 'DECAN NHẬT LINH', 496, 76, 0.0056, NULL, 1, '2025-02-04 11:25:22', '2025-02-04 11:34:24', 1),
+(603, 'DECAN NHẬT LINH', 497, 76, 0.0056, NULL, 1, '2025-02-04 11:36:43', '2025-02-04 11:36:43', 1),
+(604, 'DECAN NHẬT LINH', 498, 76, 0.0046, NULL, 1, '2025-02-04 11:37:00', '2025-02-04 11:38:58', 1),
+(605, 'DECAN NHẬT LINH', 499, 76, 0.0042, NULL, 1, '2025-02-04 11:42:29', '2025-02-04 11:48:16', 1),
+(606, 'DECAN NHẬT LINH', 500, 76, 0, NULL, 1, '2025-02-04 11:44:41', '2025-02-04 11:49:53', 1),
+(607, 'DECAN NHẬT LINH', 501, 76, 0.0049, NULL, 1, '2025-02-04 11:44:59', '2025-02-04 11:49:13', 1),
+(608, 'DECAN NHẬT LINH', 502, 76, 0.035, NULL, 1, '2025-02-04 11:51:44', '2025-02-04 11:56:27', 1),
+(609, 'DECAN NHẬT LINH', 503, 76, 0.053, NULL, 1, '2025-02-04 11:52:09', '2025-02-04 11:56:46', 1),
+(610, 'DECAN NHẬT LINH', 504, 76, 0.0095, NULL, 1, '2025-02-04 12:57:34', '2025-02-04 13:15:47', 1),
+(611, 'DECAN NHẬT LINH', 505, 76, 0.0095, NULL, 1, '2025-02-04 12:57:56', '2025-02-04 13:16:03', 1),
+(612, 'DECAN NHẬT LINH', 506, 76, 0.0055, NULL, 1, '2025-02-04 13:00:34', '2025-02-04 14:27:05', 1),
+(613, 'DECAN NHẬT LINH', 507, 76, 0.008, NULL, 1, '2025-02-04 13:29:40', '2025-02-04 13:34:15', 1),
+(614, 'DECAN NHẬT LINH', 508, 76, 0.0055, NULL, 1, '2025-02-04 13:30:23', '2025-02-04 13:30:23', 1),
+(615, 'DECAN NHẬT LINH', 509, 76, 0.009, NULL, 1, '2025-02-04 13:31:39', '2025-02-04 13:34:39', 1),
+(616, 'DECAN NHẬT LINH', 510, 76, 0.008, NULL, 1, '2025-02-04 13:35:41', '2025-02-04 13:36:15', 1),
+(617, 'DECAN NHẬT LINH', 511, 76, 0.0093, NULL, 1, '2025-02-04 13:37:51', '2025-02-04 13:41:26', 1),
+(618, 'DECAN NHẬT LINH', 512, 76, 0.0093, NULL, 1, '2025-02-04 13:41:05', '2025-02-04 13:41:05', 1),
+(619, 'DECAN NHẬT LINH', 513, 76, 0.0093, NULL, 1, '2025-02-04 13:41:48', '2025-02-04 13:41:48', 1),
+(620, 'DECAN NHẬT LINH', 514, 76, 0.0072, NULL, 1, '2025-02-04 13:48:12', '2025-02-04 13:48:12', 1),
+(621, 'DECAN NHẬT LINH', 515, 76, 0.0066, NULL, 1, '2025-02-04 13:51:33', '2025-02-04 13:54:06', 1),
+(622, 'DECAN NHẬT LINH', 516, 76, 0.006, NULL, 1, '2025-02-04 13:52:00', '2025-02-04 13:53:16', 1),
+(623, 'DECAN NHẬT LINH', 517, 76, 0.0142, NULL, 1, '2025-02-04 13:59:51', '2025-02-04 13:59:51', 1),
+(624, 'DECAN NHẬT LINH', 518, 76, 0.0075, NULL, 1, '2025-02-04 14:03:11', '2025-02-04 14:07:43', 1),
+(625, 'DECAN NHẬT LINH', 519, 76, 0.01, NULL, 1, '2025-02-04 14:05:03', '2025-02-04 14:09:49', 1),
+(626, 'DECAN NHẬT LINH', 520, 76, 0.0094, NULL, 1, '2025-02-04 14:10:50', '2025-02-04 14:15:10', 1),
+(627, 'DECAN NHẬT LINH', 521, 76, 0.0086, NULL, 1, '2025-02-04 14:12:05', '2025-02-04 14:14:08', 1),
+(628, 'NCC ANH ĐẠT', 522, 49, 0.00213, NULL, 1, '2025-02-04 14:56:42', '2025-02-04 14:58:06', 1),
+(629, 'NCC ANH ĐẠT', 523, 49, 0.00213, NULL, 1, '2025-02-04 14:58:23', '2025-02-04 14:58:23', 1),
+(630, 'NCC ANH ĐẠT', 524, 49, 0.00213, NULL, 1, '2025-02-04 14:58:35', '2025-02-04 14:58:35', 1),
+(631, 'NCC ANH ĐẠT', 525, 49, 0.00213, NULL, 1, '2025-02-04 14:58:51', '2025-02-04 14:58:52', 1),
+(632, 'NCC ANH ĐẠT', 526, 49, 0.00213, NULL, 1, '2025-02-04 14:59:11', '2025-02-04 14:59:11', 1),
+(633, 'NCC ANH ĐẠT', 527, 49, 0.00273, NULL, 1, '2025-02-04 14:59:36', '2025-02-04 14:59:49', 1),
+(634, 'NCC ANH ĐẠT', 528, 49, 0.00273, NULL, 1, '2025-02-04 15:00:07', '2025-02-04 15:00:18', 1),
+(635, 'NCC ANH ĐẠT', 529, 49, 0.00273, NULL, 1, '2025-02-04 15:00:31', '2025-02-04 15:00:31', 1),
+(636, 'NCC ANH ĐẠT', 530, 49, 0.003, NULL, 1, '2025-02-04 15:04:30', '2025-02-04 15:37:36', 1),
+(637, 'NCC ANH ĐẠT', 531, 49, 0.003, NULL, 1, '2025-02-04 15:05:00', '2025-02-04 15:37:45', 1),
+(638, 'NCC ANH ĐẠT', 532, 49, 0.003, NULL, 1, '2025-02-04 15:10:51', '2025-02-04 15:37:54', 1),
+(639, 'NCC ANH ĐẠT', 533, 49, 0.003, NULL, 1, '2025-02-04 15:34:59', '2025-02-04 15:42:19', 1),
+(640, 'MÀNG PET - CTY ĐẠO AN', 230, 92, 0.001, NULL, 1, '2025-02-08 10:48:08', '2025-02-08 10:48:08', 1),
+(641, 'MÀNG PET - NCC ENOMI', 230, 74, 0.0011, NULL, 1, '2025-02-08 10:48:08', '2025-02-08 10:48:08', 1),
+(642, 'MÀNG PET - NCC ENOMI', 172, 74, 1000, NULL, 1, '2025-02-08 10:48:55', '2025-02-08 10:48:55', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `quotes`
+--
+
+CREATE TABLE `quotes` (
+  `id` int NOT NULL,
+  `seri` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `product_qty` bigint DEFAULT NULL,
+  `customer` int DEFAULT NULL,
+  `represent` int DEFAULT NULL,
+  `ship_price` float DEFAULT NULL,
+  `profit` float DEFAULT NULL,
+  `total_cost` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `base_total` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `total_amount` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `act` tinyint DEFAULT NULL,
+  `src` tinyint DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_by` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `quote_configs`
+--
+
+CREATE TABLE `quote_configs` (
+  `id` int NOT NULL,
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `keyword` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `value` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `act` tinyint(1) DEFAULT '0',
+  `type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `note` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ord` int DEFAULT NULL COMMENT 'Sắp xếp',
+  `other_data` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `required` tinyint DEFAULT NULL,
+  `region` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_by` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `quote_configs`
+--
+
+INSERT INTO `quote_configs` (`id`, `name`, `keyword`, `value`, `act`, `type`, `note`, `ord`, `other_data`, `required`, `region`, `created_at`, `updated_at`, `created_by`) VALUES
+(1, 'office_add', 'OFFICE_ADD', 'Lô D5-16 Cụm Làng Nghề Triều Khúc - HN', 1, 'text', 'Địa chỉ văn phòng', 2, NULL, 0, '1', '2023-05-09 17:09:41', '2023-10-14 16:40:38', 0),
+(2, 'office_phone', 'OFFICE_PHONE', '38.303.666 - 38.303.888', 1, 'text', 'SĐT văn phòng', 2, NULL, 0, '1', '2023-05-09 17:09:41', '2023-05-09 17:09:41', 0),
+(3, 'site', 'SITE', 'baobituandung.com', 1, 'text', 'Website', 2, NULL, 0, '1', '2023-05-09 17:09:42', '2023-10-14 16:29:56', 0),
+(4, 'fact_add', 'FACT_ADD', 'KCN Hoa Sơn - Ứng Hòa - TP Hà Nội', 1, 'text', 'Địa chỉ nhà xưởng', 2, NULL, 0, '1', '2023-05-09 17:09:43', '2023-05-09 17:09:43', 0),
+(5, 'fact_phone', 'FACT_PHONE', '0963303999 Mr Tuấn', 1, 'text', 'SĐT nhà xưởng', 2, NULL, 0, '1', '2023-05-09 17:09:44', '2024-04-23 10:47:53', 0),
+(6, 'quote_wish', 'QUOTE_WISH', 'Cty CP in & SX bao bì Tuấn Dung xin gửi báo giá theo yêu cầu của quý khách. </br> \r\n          Chúc quý khách Mạnh Khỏe – Hạnh Phúc – An Khang Thịnh Vượng!', 1, 'textarea', 'Lời chúc', 2, NULL, 0, '1', '2023-05-09 17:09:44', '2023-05-09 17:09:44', 0),
+(7, 'dvt', 'DVT', 'Sản phẩm', 1, 'text', 'Đơn vị tính', 2, NULL, 0, '1', '2023-05-09 17:09:45', '2023-05-09 17:09:45', 0),
+(8, 'attention', 'ATTENTION', '<p style=\"text-align: left;\">1. Giao h&agrave;ng tận nơi theo y&ecirc;u cầu của qu&yacute; kh&aacute;ch</p>\r\n<p class=\"font-italic mb-1\">2. Đơn gi&aacute; chưa bao gồm 10% VAT.</p>\r\n<p class=\"font-italic mb-1\">3&nbsp; B&aacute;o gi&aacute; c&oacute; hiệu lực trong v&ograve;ng 30 ng&agrave;y.</p>\r\n<p class=\"font-italic mb-1\"><strong>4. Xin Q&uacute;y kh&aacute;ch Lưu &yacute;:</strong></p>\r\n<p class=\"font-italic mb-1\"><strong>* Thời gian thực hiện sản xuất đối với hộp giấy mềm l&agrave; từ 5-8&nbsp;ng&agrave;y, T&ugrave;y theo y&ecirc;u cầu của kh&aacute;ch h&agrave;ng &amp; Thời điểm đặt h&agrave;ng hiện tại</strong></p>\r\n<p class=\"font-italic mb-1\"><strong>* Thời gian thực hiện sản xuất đối với hộp Cứng&nbsp;l&agrave; từ&nbsp;7-15&nbsp;ng&agrave;y, T&ugrave;y theo y&ecirc;u cầu của kh&aacute;ch h&agrave;ng &amp; Thời điểm đặt h&agrave;ng hiện tại</strong></p>\r\n<p class=\"font-italic mb-1\">5. Phương thức thanh to&aacute;n: Theo thỏa thuận 2 b&ecirc;n</p>\r\n<div class=\"font-italic ml-md-3\">\r\n<p class=\"font-italic mb-1\"><span style=\"color: #ff0000;\"><strong>&nbsp;</strong></span></p>\r\n</div>', 1, 'editor', 'Lưu ý khách hàng', 2, NULL, 0, '1', '2023-05-09 17:09:46', '2023-05-09 17:09:46', 0),
+(9, 'quote_percent', 'QUOTE_PERCENT', '5', 1, 'text', '% Lợi nhận báo giá', 1, NULL, 0, '1', '2023-05-09 17:09:48', '2024-04-23 10:24:51', 0),
+(10, 'office_tel', 'OFFICE_TEL', '0969.303.888 Ms Dung', 1, 'text', 'SĐT văn phòng', 2, NULL, 0, '1', '2023-05-09 17:09:49', '2023-05-09 17:09:49', 0),
+(11, 'fact_tel', 'FACT_TEL', '0963.303.999 Mr Tuấn', 1, 'text', 'SĐT nhà xưởng', 2, NULL, 0, '1', '2023-05-09 17:09:56', '2023-05-09 17:09:56', 0),
+(12, 'apla_price_fac', 'APLA_PRICE_FACTOR', '0.08', 1, 'text', 'ĐG lượt in áp la', 0, NULL, 0, '14', '2023-05-09 17:32:17', '2024-06-24 11:34:23', 0),
+(13, 'apla_price_plus', 'APLA_PRICE_PLUS', '100000', 1, 'text', 'ĐG khuôn in áp la', 0, NULL, 0, '14', '2023-05-09 17:32:57', '2023-05-09 17:32:57', 0),
+(14, 'compen_percent', 'COMPEN_PERCENT', '2', 1, 'text', 'Bù hao giấy in (%)', 1, NULL, 0, '11', '2023-05-09 19:03:02', '2023-09-28 12:09:20', 0),
+(15, 'carton_compen_percent', 'CARTON_COMPEN_PERCENT', '2', 1, 'text', 'Bù hao vật tư carton (%)', 2, NULL, 0, '11', '2023-05-09 19:03:01', '2023-09-30 20:31:08', 0),
+(16, 'compen_percent_pro', 'COMPEN_PERCENT_PRO', '1', 1, 'text', 'Bù hao sản phẩm (%)', 0, NULL, 0, '11', '2023-05-09 19:03:00', '2023-09-24 08:41:45', 0),
+(17, 'plus_direct', 'PLUS_DIRECT', '50', 1, 'text', 'Tờ in cộng thẳng', 8, NULL, 0, '11', '2023-05-09 19:02:59', '2023-09-28 04:19:02', 0),
+(18, 'plus_paper_metalai', 'PLUS_PAPER_METALAI', '100', 1, 'text', 'Bù hao giấy in khi cán metalai', 11, NULL, 0, '11', '2023-05-09 19:02:58', '2023-09-24 08:42:04', 0),
+(19, 'print_subtract_paper', 'PRINT_SUBTRACT_PAPER', '1000', 1, 'text', 'Trừ vật tư giấy trước in', 9, NULL, 0, '11', '2023-05-09 19:02:56', '2023-09-24 08:41:55', 0),
+(20, 'plus_paper_device', 'PLUS_PAPER_DEVICE', '50', 1, 'text', 'Bù hao máy in', 10, NULL, 0, '11', '2023-05-10 10:36:53', '2023-09-24 08:41:57', 0),
+(21, 'magnet_perc', 'MAGNET_PERC', '1.05', 1, 'text', 'Hệ số nam châm', 0, NULL, 0, '14', '2023-05-09 18:54:04', '2023-09-30 17:35:12', 0),
+(22, 'vat_perc', 'VAT_PERC', '8', 1, 'text', 'VAT (%)', 1, NULL, 0, '1', '2023-05-09 17:09:48', '2023-05-09 17:09:48', 0),
+(23, 'rubber_compen_percent', 'RUBBER_COMPEN_PERCENT', '1', 1, 'text', 'Bù hao vật tư cao su non (%)', 3, NULL, 0, '11', '2023-05-09 19:03:01', '2023-09-24 08:40:44', 0),
+(24, 'styro_compen_percent', 'STYRO_COMPEN_PERCENT', '1', 1, 'text', 'Bù hao vật tư mút phẳng (%)', 4, NULL, 0, '11', '2023-05-09 19:03:01', '2023-09-24 15:52:37', 0),
+(25, 'decal_compen_percent', 'DECAL_COMPEN_PERCENT', '1', 1, 'text', 'Bù hao vật tư đề can nhung (%)', 5, NULL, 0, '11', '2023-05-09 19:03:01', '2023-09-24 15:52:48', 0),
+(26, 'silk_compen_percent', 'SILK_COMPEN_PERCENT', '1', 1, 'text', 'Bù hao vật tư vải lụa (%)', 6, NULL, 0, '11', '2023-05-09 19:03:01', '2023-09-24 15:54:04', 0),
+(27, 'mica_compen_percent', 'MICA_COMPEN_PERCENT', '1', 1, 'text', 'Bù hao vật tư mica (%)', 7, NULL, 0, '11', '2023-05-09 19:03:01', '2023-09-24 15:54:08', 0),
+(28, 'plus_to_percent', 'PLUS_TO_PERCENT', '50', 1, 'text', 'Tờ in cộng thêm vào % BH', 8, NULL, 0, '11', '2023-05-09 19:02:59', '2023-09-28 04:09:01', 0),
+(29, 'plus_to_device_worker', 'PLUS_TO_DEVICE_WORKER', '50', 1, 'text', 'Bù hao máy in', 10, NULL, 0, '11', '2023-05-10 10:36:53', '2023-09-24 08:41:57', 0),
+(30, 'office_email', 'OFFICE_EMAIL', 'intuandung2000@gmail.com', 1, 'text', 'SĐT văn phòng', 2, NULL, 0, '1', '2023-05-09 17:09:41', '2023-05-09 17:09:41', 0),
+(31, 'magnet_compen_percent', 'MAGNET_COMPEN_PERCENT', '1', 1, 'text', 'Bù hao vật tư nam châm (%)', 7, NULL, 0, '11', '2023-05-09 19:03:01', '2023-12-12 22:17:54', 0),
+(32, 'elev_float_price', 'ELEV_FLOAT_PRICE', '30000', 1, 'text', 'Giá cộng thêm cho thợ bế thúc nổi', 0, NULL, 0, '14', '2023-05-09 17:32:17', '2024-06-24 11:34:23', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `represents`
+--
+
+CREATE TABLE `represents` (
+  `id` int NOT NULL,
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `telephone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `customer` int DEFAULT NULL,
+  `sale` json DEFAULT NULL,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `act` int DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_by` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `represents`
+--
+
+INSERT INTO `represents` (`id`, `name`, `phone`, `telephone`, `email`, `customer`, `sale`, `note`, `act`, `created_at`, `updated_at`, `created_by`) VALUES
+(1, 'Ms Thảo', '0325544040', '0325544040', 'zalo', 1, '[\"1\", \"28\"]', NULL, 1, '2023-09-23 11:10:31', '2025-01-19 14:07:41', 1),
+(2, 'Ms Vân', '0972357688', '0972357688', 'zalo', 3, '[\"1\", \"27\"]', NULL, 1, '2023-09-23 13:39:43', '2024-12-05 01:48:26', 1),
+(3, 'Ms Phương', '0977070289', '0977070289', 'Phuongn@vietbrandco.vn', 4, '[\"27\"]', NULL, 1, '2023-09-23 13:42:14', '2024-12-06 18:20:31', 1),
+(4, 'Ms Hải', '0917129458', '0917129458', 'zalo', 5, '[1]', NULL, 1, '2023-09-23 14:16:26', '2024-05-19 18:24:48', 1),
+(5, 'Mr Dũng', '0912188628', '0912188628', 'zalo', 6, '[\"2\"]', NULL, 1, '2023-09-23 14:18:56', '2024-06-20 10:07:35', 1),
+(6, 'Mr Hải', '0914755299', '0914755299', 'zalo', 7, '[\"1\", \"2\"]', NULL, 1, '2023-09-23 14:22:24', '2024-06-21 10:45:57', 1),
+(7, 'Mr Phúc', '0358866868', '0358866868', 'zalo', 8, '[1]', NULL, 1, '2023-09-23 14:32:18', '2024-05-19 18:24:49', 1),
+(8, 'Mr Tuấn', '0979303777', '02438303888', 'kd1.intuandung@gmail.com', 9, '[\"1\", \"27\"]', NULL, 1, '2023-09-23 14:34:33', '2024-11-20 14:21:44', 1),
+(9, 'Ms Dịu', '0983 580 635', '0983 580 635', 'chưa có', 10, '[10]', NULL, 1, '2023-09-26 14:37:54', '2024-05-19 18:24:49', 10),
+(10, 'Anh Cương', '0988373219', '0988373219', 'zalo', 11, '[10]', 'TP Ninh bình 0988373219', 1, '2023-09-26 16:14:25', '2024-05-19 18:24:49', 10),
+(11, 'Mr Hải', '0968 754 654', '0968 754 654', 'duocphamhadiphaco@gmail.com', 12, '[10]', NULL, 1, '2023-09-26 16:51:54', '2024-05-19 18:24:49', 10),
+(12, 'Mr Hải', '0968754654', '0968754654', 'zalo', 13, '[10]', NULL, 1, '2023-09-26 16:59:34', '2024-05-19 18:24:49', 10),
+(13, 'Mr Tú', '0966969622', '0966969622', 'zalo', 14, '[10]', NULL, 1, '2023-09-28 10:01:06', '2024-05-19 18:24:49', 10),
+(14, 'Mr Dự', '0982123263', '0982123263', 'globalpharma88@gmail.com', 15, '[10]', NULL, 1, '2023-09-28 11:16:29', '2024-05-19 18:24:49', 10),
+(15, 'Mr Cường', '0987608052', '0987608052', 'zalo', 16, '[10]', NULL, 1, '2023-09-28 11:32:08', '2024-05-19 18:24:49', 10),
+(16, 'Chị Phương', '0908737986', '0908737986', 'mainguyendv@gmail.com', 17, '[10]', NULL, 1, '2023-09-30 14:11:20', '2024-05-19 18:24:49', 10),
+(17, 'Lê Bắc', '0373375882', '0373375882', 'zalo', 18, '[10]', NULL, 1, '2023-10-09 14:57:14', '2024-05-19 18:24:49', 10),
+(18, 'Mr Đức', '0382700882', '0382700882', 'zalo', 21, '[1]', NULL, 1, '2023-11-02 08:41:33', '2024-05-19 18:24:49', 1),
+(19, 'A Đông', '0989310396', '0989310396', 'zalo', 22, '[10]', NULL, 1, '2024-02-29 10:10:42', '2024-02-29 10:10:42', 10),
+(20, 'Ms Giang', '0346946032', '0346946032', 'zalo', 23, '[1]', 'Giao hàng hỏi giang', 1, '2024-02-29 15:03:21', '2024-02-29 15:03:21', 1),
+(21, 'Chi Chanh', '0976582885', '0976582885', 'zalo', 24, '[1]', NULL, 1, '2024-03-18 10:23:20', '2024-03-18 10:23:20', 1),
+(22, 'Chi Chanh', '0976582885', '0976582885', 'zalo', 25, '[1]', NULL, 1, '2024-03-21 11:56:40', '2024-03-21 11:56:40', 1),
+(23, 'Mr Ngọc', '0816.279.777', '0816.279.777', 'zalo', 26, '[1]', NULL, 1, '2024-04-01 14:45:03', '2024-04-01 14:45:03', 1),
+(24, 'Mr Phú', '0943549019', '0943549019', 'LUANHAXA.VN@GMAIL.COM', 27, '[1]', NULL, 1, '2024-04-08 06:47:34', '2024-04-08 06:47:34', 1),
+(25, 'Miss Thúy', '0966085620', '0966085620', 'zalo', 28, '[10]', NULL, 1, '2024-04-10 10:57:11', '2024-04-10 10:57:11', 10),
+(26, 'Ms Thu', '0982841999', '0982841999', 'buithudl@gmail.com', 29, '[\"1\", \"34\"]', NULL, 1, '2024-04-11 16:33:08', '2024-12-10 18:42:47', 1),
+(27, 'Ms Phương', '0974105232', '0974105232', 'pmp28.jsc@gmail.com', 30, '[1]', NULL, 1, '2024-04-12 14:05:05', '2024-04-12 14:05:05', 1),
+(28, 'Mr Chính', '0977641981', '0977641981', 'ZALO', 31, '[1]', NULL, 1, '2024-04-23 16:28:43', '2024-04-23 16:28:43', 1),
+(29, 'A Thọ', '0988328388', '0988328388', 'dinhthotb@gmail.com', 32, '[10]', NULL, 1, '2024-04-24 06:08:25', '2024-05-19 18:24:49', 10),
+(30, 'Chị Huyền', '0915 178 788', '0915 178 788', 'huyenus@gmail.com', 33, '[10]', NULL, 1, '2024-04-24 06:33:27', '2024-05-19 18:24:49', 10),
+(31, 'Anh Thái', '0396327952 (Mr Thái)', '036 2331985 (Ms Lệ)', 'zalo', 36, '[10]', NULL, 1, '2024-04-25 09:05:55', '2024-05-19 18:24:49', 10),
+(32, 'Anh Hoành', '0813902225', '0813902225', 'zalo', 38, '[10]', NULL, 1, '2024-05-06 11:42:13', '2024-05-19 18:24:49', 10),
+(33, 'C Loan', '0905064579', '0905064579', 'zalo', 39, '[10]', NULL, 1, '2024-05-06 12:59:33', '2024-05-19 18:24:49', 10),
+(34, 'A Quý', '‭0918870111', '‭0918870111', 'zalo', 40, '[10]', NULL, 1, '2024-05-06 13:21:25', '2024-05-19 18:24:50', 10),
+(35, 'A Mạnh', '0964137393', '0964137393', 'zalo', 41, '[10]', NULL, 1, '2024-05-13 11:44:28', '2024-05-19 18:24:50', 10),
+(36, 'Chị Giang', '0986970999', '0986970999', 'zalo', 42, '[10]', NULL, 1, '2024-05-19 10:31:19', '2024-05-19 18:24:50', 10),
+(37, 'Chị Huế', '0397869354 (Ms Huế)', '0969651339', 'zalo', 43, '[10]', NULL, 1, '2024-05-19 11:19:06', '2024-05-21 14:03:41', 10),
+(38, 'Anh Nam', '0966242160', '0966242160', 'zalo', 44, '[10]', NULL, 1, '2024-05-20 11:00:47', '2024-05-20 11:00:47', 10),
+(39, 'Chị Trang', '0918.921.368', '0918.921.368', 'zalo', 45, '[10]', NULL, 1, '2024-05-20 11:12:53', '2024-05-20 11:12:53', 10),
+(40, 'Ms Hạnh', 'chưa có c', 'chưa có', 'zalo', 46, '[10]', NULL, 1, '2024-05-21 13:39:42', '2024-05-21 13:39:42', 10),
+(41, 'Ms Hạnh', '0967342045', '0967342045', 'zalo', 47, '[\"1\", \"27\"]', NULL, 1, '2024-05-22 07:20:48', '2024-12-10 12:08:00', 1),
+(42, 'A Hòa', '0918210284', 'zalo', 'duchoaicic@gmail.com', 48, '[10]', NULL, 1, '2024-05-23 14:11:35', '2024-05-23 14:11:35', 10),
+(43, 'Mr Tuấn', '0888358888', '0989366899', 'zalo', 49, '[1]', NULL, 1, '2024-05-29 17:02:08', '2024-05-29 17:02:54', 1),
+(44, 'Mr Lào', '0989062718', '0989062718', 'Zalo', 50, '[1]', NULL, 1, '2024-06-04 16:50:56', '2024-06-04 16:50:56', 1),
+(45, 'Ms Linh', '098 7132764', '098 7132764', 'zalo', 51, '[2]', NULL, 1, '2024-06-07 11:53:46', '2024-06-07 11:53:46', 2),
+(46, 'Ms Anh Nguyễn', '0918195558', '0918195558', 'zalo', 52, '[27]', NULL, 1, '2024-06-07 14:56:22', '2024-06-07 14:56:22', 27),
+(47, 'A Khuất', '0978.099.163', '0978.099.163', 'zalo', 54, '[10]', NULL, 1, '2024-06-12 09:31:02', '2024-06-12 09:31:02', 10),
+(48, 'Chị Quỳnh Anh', '097 2701846', '097 2701846', 'zalo', 55, '[10]', NULL, 1, '2024-06-12 11:17:19', '2024-06-12 11:17:19', 10),
+(49, 'Chị Ánh', '0989063733', '0989063733', 'zalo', 56, '[\"10\", \"57\"]', NULL, 1, '2024-06-12 13:37:19', '2024-08-13 14:24:13', 10),
+(50, 'Ms Yến', '0989460406', '0989460406', 'zalo', 57, '[\"27\"]', NULL, 1, '2024-06-13 15:59:58', '2024-06-21 10:42:33', 27),
+(51, 'Kế toán Arova', '0983000856', '0983000856', 'zalo', 58, '[2]', NULL, 1, '2024-06-14 14:01:14', '2024-06-14 14:01:14', 2),
+(52, 'Mr Sơn VQC', NULL, NULL, 'zalo', 59, '[2]', NULL, 1, '2024-06-17 16:24:16', '2024-06-17 16:24:16', 2),
+(53, 'Mr Sơn VQC', NULL, NULL, NULL, 60, '[2]', NULL, 1, '2024-06-17 16:29:31', '2024-06-17 16:29:31', 2),
+(54, 'Mr Sơn VQC', NULL, NULL, 'zalo', 61, '[2]', NULL, 1, '2024-06-17 16:30:58', '2024-06-17 16:30:58', 2),
+(55, 'Anh Dũng Phan', '0912.188.628', '0912.188.628', 'zalo', 62, '[2]', NULL, 1, '2024-06-18 17:26:08', '2024-06-18 17:26:08', 2),
+(61, 'Hạnh An', '1111', NULL, 'fanpage', 64, NULL, NULL, 1, '2024-06-22 16:26:31', '2024-06-22 16:26:38', 28),
+(63, 'Ms Thúy', '0974169166', '0974169166', 'zalo', 67, NULL, NULL, 1, '2024-06-28 10:53:15', '2024-06-28 10:53:15', 10),
+(64, 'Anh Khương', '0967309292', '0834309292', 'zalo', 68, NULL, NULL, 1, '2024-06-28 17:27:57', '2024-06-28 17:27:57', 10),
+(65, 'Mr Khánh', '0914463259', '0914463259', 'zalo', 69, NULL, NULL, 1, '2024-07-02 12:57:59', '2024-07-02 12:57:59', 1),
+(66, 'Anh Doanh', 'chưuacos', 'chưua', 'zalo', 70, NULL, NULL, 1, '2024-07-02 17:08:38', '2024-07-02 17:09:50', 10),
+(67, 'Người Tính giá', '0963303999', '0963303999', 'zalo', 71, NULL, NULL, 1, '2024-07-05 12:16:31', '2024-07-05 12:16:31', 1),
+(68, 'Anh Thắng', '0889770669', '0889770669', 'zalo', 72, '[\"36\"]', NULL, 1, '2024-07-06 09:48:01', '2024-12-05 16:17:54', 10),
+(69, 'Anh Trí Lê', '0889065968', '0889065968', 'zalo', 73, NULL, NULL, 1, '2024-07-09 11:15:36', '2024-07-09 11:15:47', 2),
+(70, 'Chị Minh', '0978717843', 'zalo', 'zalo', 76, NULL, NULL, 1, '2024-07-10 14:45:54', '2024-07-10 14:46:34', 10),
+(71, 'Chị Oanh', '0971550920', 'zalo', 'zalo', 77, NULL, NULL, 1, '2024-07-10 15:07:26', '2024-07-10 15:07:26', 10),
+(72, 'Ms Warm', '02435380552', '02435380552', 'zalo', 78, NULL, NULL, 1, '2024-07-11 11:09:18', '2024-07-11 11:09:18', 2),
+(73, 'Mr Sơn VQC', '0903408011', '0903408011', 'zalo', 63, NULL, NULL, 1, '2024-07-12 14:31:10', '2024-07-12 14:31:10', 2),
+(74, 'Chị Hạnh', '0396953829', 'zalo', 'vuhanh.th@gmail.com', 79, NULL, NULL, 1, '2024-07-12 15:45:10', '2024-07-12 15:45:10', 10),
+(75, 'Ms Hương', '0915178178', '0915178178', 'zalo', 80, NULL, NULL, 1, '2024-07-13 09:55:43', '2024-07-13 09:55:43', 2),
+(76, 'Anh Phương', '0584826666', 'zalo', 'chua co', 81, NULL, NULL, 1, '2024-07-19 10:07:44', '2024-07-19 10:07:44', 10),
+(77, 'Anh Tình', '0963579747', 'zalo', 'zalo', 82, NULL, NULL, 1, '2024-07-20 08:52:45', '2024-07-20 08:52:45', 10),
+(78, 'Anh Quân', '0916136422', 'zalo', 'zalo', 83, NULL, NULL, 1, '2024-07-20 09:37:04', '2024-07-20 09:37:04', 10),
+(80, 'A Súa', '037252599', 'zalo', 'zalo', 84, NULL, NULL, 1, '2024-07-20 22:16:50', '2024-07-20 22:16:50', 10),
+(81, 'Anh Cường', '0905349700', 'zalo', 'zalo', 86, NULL, NULL, 1, '2024-07-21 17:06:29', '2024-07-21 17:06:29', 10),
+(82, 'A Tiến', '0915506768', 'zalo', 'zalo', 87, NULL, NULL, 1, '2024-07-22 11:15:47', '2024-07-22 11:15:47', 10),
+(83, 'Mr Hải', '0377371317', '0377371317', 'zalo', 88, NULL, NULL, 1, '2024-07-25 16:18:57', '2024-07-25 16:18:57', 1),
+(84, 'Anh Đức', '0973714880', 'zalo', 'zalo', 89, NULL, NULL, 1, '2024-08-01 15:17:47', '2024-08-01 15:17:47', 10),
+(85, 'Khách sếp Tuấn', '02432019109', '02432019109', 'zalo', 90, NULL, NULL, 1, '2024-08-10 08:54:16', '2024-08-10 08:54:16', 2),
+(86, 'Ms Hương', '0926643333', '0926643333', 'zalo', 91, NULL, NULL, 1, '2024-08-10 15:03:58', '2024-08-10 15:03:58', 2),
+(87, 'Mr Thái', '0916905777', '0916905777', 'zalo', 92, NULL, NULL, 1, '2024-08-12 16:10:42', '2024-08-12 16:10:42', 2),
+(90, 'Mr Tú', '0966969622', NULL, 'zalo', 14, '[\"57\"]', NULL, 1, '2024-08-14 08:30:19', '2024-08-14 08:30:19', 57),
+(91, 'Anh Bình', '0932228777', NULL, 'zalo', 95, '[\"57\"]', NULL, 1, '2024-08-14 11:59:35', '2024-08-14 12:00:46', 57),
+(92, 'Chị Huyền', '0915178788', NULL, 'zalo', 33, '[\"57\"]', NULL, 1, '2024-08-14 14:48:24', '2024-08-14 14:48:24', 57),
+(93, 'Mr Nam', '0982815818', '0982815818', 'zalo', 96, NULL, NULL, 1, '2024-08-14 16:05:11', '2024-08-14 16:05:11', 33),
+(94, 'A Đông', '0989310396', NULL, 'zalo', 22, '[\"57\"]', NULL, 1, '2024-08-14 17:18:17', '2024-08-14 17:18:17', 57),
+(95, 'Mr HUẤN', '00000', '0000', 'ZALO', 97, NULL, NULL, 1, '2024-08-14 21:11:22', '2024-08-14 21:11:22', 1),
+(96, 'A Đức', '0973714880', '0973714880', 'zalo', 98, NULL, NULL, 1, '2024-08-15 08:43:37', '2024-08-15 08:45:02', 57),
+(97, 'Anh Đức', '0973714880', '0973714880', 'zalo', 89, '[\"57\"]', NULL, 1, '2024-08-15 08:49:01', '2024-08-15 08:49:38', 57),
+(98, 'Chị Trang', '0904633860', 'zalo', 'zalo', 99, NULL, NULL, 1, '2024-08-15 10:40:35', '2024-08-15 10:40:35', 10),
+(99, 'Ngô Thanh Hải', '02466846285', '02466846285', 'zalo', 100, NULL, NULL, 1, '2024-08-15 10:55:03', '2024-08-15 10:56:09', 33),
+(100, 'Mr Dũng', '0948919228', '000', 'zalo', 101, NULL, NULL, 1, '2024-08-15 15:23:24', '2024-08-15 15:23:59', 1),
+(101, 'Ms Thuý', '0375639987', '0375639987', 'zalo', 102, NULL, NULL, 1, '2024-08-16 13:44:52', '2024-08-16 13:44:52', 2),
+(102, 'A Quý', '0918870111', NULL, 'zalo', 40, '[\"57\"]', NULL, 1, '2024-08-16 14:00:47', '2024-08-16 14:00:47', 57),
+(103, 'Ms Vân Anh', '0348420583', '0348420583', 'zalo', 103, NULL, NULL, 1, '2024-08-16 16:18:16', '2024-08-16 16:18:16', 2),
+(106, 'C Loan', '0905064579', '0905064579', 'zalo', 39, '[\"57\"]', NULL, 1, '2024-08-19 14:35:54', '2024-08-19 14:35:54', 57),
+(107, 'Chị Tình', '0974941928', '0974941928', 'zalo', 109, NULL, NULL, 1, '2024-08-20 08:49:38', '2024-08-20 08:49:38', 57),
+(108, 'Chị Tình', '0974941928', '0974941928', 'zalo', 109, '[\"57\"]', NULL, 1, '2024-08-20 08:50:41', '2024-08-20 08:50:41', 57),
+(109, 'A Thành', '02435553282', NULL, 'zalo', 110, NULL, NULL, 0, '2024-08-20 11:45:53', '2024-08-20 11:50:02', 57),
+(110, 'A Thành', '02435553282', NULL, 'zalo', 110, '[\"57\"]', NULL, 1, '2024-08-20 11:46:39', '2024-08-20 11:46:39', 57),
+(111, 'Mr Thành', '0389410000', '0389410000', 'zalo', 111, NULL, NULL, 1, '2024-08-21 08:36:39', '2024-08-21 08:36:39', 2),
+(112, 'Hạnh An', '0969303666', NULL, 'zalo', 64, '[\"57\"]', NULL, 1, '2024-08-21 09:55:42', '2024-09-27 11:30:48', 57),
+(113, 'Mr Brain', '0967303333', NULL, 'zalo', 112, NULL, NULL, 1, '2024-08-21 10:12:07', '2024-08-21 10:12:07', 2),
+(114, 'Anh Cường', '0905349700', NULL, 'zalo', 86, '[\"57\"]', NULL, 1, '2024-08-21 17:06:08', '2024-08-21 17:06:08', 57),
+(115, 'A Long', '0899990085', NULL, 'zalo', 113, NULL, NULL, 1, '2024-08-22 10:46:59', '2024-08-22 10:46:59', 57),
+(116, 'C Lưu', '0978740119', '0978740119', 'zalo', 114, NULL, NULL, 1, '2024-08-22 15:57:34', '2024-08-22 15:57:34', 57),
+(117, 'Chị Phương', '0966460680', '0966460680', 'zalo', 17, '[\"57\"]', NULL, 1, '2024-08-22 17:09:14', '2024-08-22 17:09:14', 57),
+(118, 'Ms.Huyền', '0868695666', '0868695666', 'Zalo', 115, NULL, NULL, 1, '2024-08-23 10:15:03', '2024-08-23 10:37:28', 33),
+(119, 'Ms Yến', '0972892442', NULL, 'zalo', 116, NULL, NULL, 1, '2024-08-23 14:34:17', '2024-08-23 14:34:17', 2),
+(120, 'Mr Tiến', '0944665770', '0944665770', 'zalo', 117, NULL, NULL, 1, '2024-08-24 08:47:20', '2024-08-24 08:47:20', 2),
+(121, 'A Thọ', '0988328388', NULL, 'zalo', 32, '[\"57\"]', NULL, 1, '2024-08-24 11:17:14', '2024-08-24 11:17:14', 57),
+(122, 'Ms Minh', '0904944885', NULL, 'zalo', 118, NULL, NULL, 1, '2024-08-24 16:23:42', '2024-08-24 16:23:42', 2),
+(123, 'Anh Bình', '0977771268', 'zalo', 'zalo', 119, NULL, NULL, 1, '2024-08-25 09:54:01', '2024-08-25 09:54:01', 10),
+(124, 'Ms Ngọc', '0967710572', NULL, 'zalo', 120, NULL, NULL, 1, '2024-08-26 10:18:34', '2024-08-26 10:18:34', 2),
+(125, 'Ms Mai Anh', '0985506300', NULL, 'zalo', 121, NULL, NULL, 1, '2024-08-27 08:17:13', '2024-08-27 08:17:13', 2),
+(126, 'C Dung', '0969303888', NULL, 'zalo', 123, NULL, NULL, 1, '2024-08-27 09:55:25', '2024-08-27 09:55:25', 57),
+(127, 'Anh Hưng', '0981485699', NULL, 'zalo', 124, '[\"28\"]', NULL, 1, '2024-08-27 15:00:11', '2024-12-05 10:12:56', 57),
+(128, 'Ms Phương', '0904363117', NULL, 'zalo', 125, NULL, NULL, 1, '2024-08-28 10:55:09', '2024-08-28 10:55:09', 2),
+(129, 'Mr Phương', '0904363117', NULL, 'zalo', 125, '[\"57\"]', NULL, 1, '2024-08-28 11:12:44', '2024-08-28 11:12:44', 57),
+(130, 'A Khuất', '0978099163', '0978099163', 'zalo', 54, '[\"57\"]', NULL, 1, '2024-08-28 14:58:15', '2024-08-28 14:58:15', 57),
+(131, 'MS.Thanh Tâm', '0964158386', '0964158386', 'Zalo', 126, NULL, NULL, 1, '2024-08-28 16:43:16', '2024-10-01 09:05:04', 33),
+(132, 'Ms Thanh', '0974161030', NULL, 'zalo', 127, NULL, NULL, 1, '2024-08-29 11:02:20', '2024-08-29 11:02:20', 2),
+(133, 'Ms Hải', '0917129458', NULL, 'zalo', 5, '[\"57\"]', NULL, 1, '2024-08-29 11:04:05', '2024-08-29 11:04:05', 57),
+(134, 'Mr Hải', '0968754654', '0968754654', 'zalo', 13, '[\"57\"]', NULL, 1, '2024-08-30 08:43:37', '2024-08-30 08:43:37', 57),
+(135, 'A Long', '0369994499', '0369994499', 'zalo', 128, NULL, NULL, 1, '2024-08-30 09:16:57', '2024-08-30 09:16:57', 57),
+(136, 'Anh Thắng', '0981935885', NULL, 'zalo', 72, '[\"28\"]', NULL, 1, '2024-08-31 09:05:18', '2024-08-31 09:05:18', 28),
+(137, 'Ms Quyên', '0937303333', NULL, 'zalo', 127, '[\"2\"]', NULL, 1, '2024-08-31 13:34:49', '2024-08-31 13:34:49', 2),
+(138, 'Anh Cương', '0988373219', NULL, 'zalo', 11, NULL, NULL, 1, '2024-09-03 10:29:14', '2024-09-03 10:29:14', 57),
+(139, 'Anh Thọ', '0971888369', 'zalo', 'zalo', 129, NULL, NULL, 1, '2024-09-04 13:36:41', '2024-09-04 13:36:41', 10),
+(140, 'Anh Thái', '0396327952', '0396327952', 'zalo', 36, '[\"57\"]', NULL, 1, '2024-09-06 08:35:46', '2024-09-06 08:35:46', 57),
+(141, 'Mr Hải', '0968754654', '0968754654', 'zalo', 13, '[\"57\"]', NULL, 1, '2024-09-06 14:32:18', '2024-09-06 14:32:18', 57),
+(142, 'Mr Hải', '0968754654', '0968754654', 'zalo', 12, '[\"57\"]', NULL, 1, '2024-09-07 09:27:19', '2024-09-07 09:27:19', 57),
+(143, 'A Quý', '0983083895', '0983083895', 'zalo', 130, NULL, NULL, 1, '2024-09-09 16:32:38', '2024-09-09 16:32:38', 57),
+(144, 'Ms Phượng', '0916856269', NULL, 'zalo', 135, NULL, NULL, 1, '2024-09-11 11:42:20', '2024-09-11 11:50:06', 2),
+(145, 'Anh Thành', '0389410000', NULL, 'zalo', 136, NULL, NULL, 1, '2024-09-11 11:55:09', '2024-09-11 11:55:09', 2),
+(146, 'Chị Nga', '0916597388', NULL, 'zalo', 137, '[\"33\"]', NULL, 1, '2024-09-11 11:57:28', '2024-12-31 16:46:27', 28),
+(147, 'Mr.Huỳnh', '0968899112', '0968899112', 'Zalo', 138, NULL, NULL, 1, '2024-09-11 11:58:37', '2024-09-11 11:58:37', 33),
+(148, 'Chị Ánh', '0989063733', '0989063733', 'zalo', 56, NULL, NULL, 1, '2024-09-11 14:46:59', '2024-09-11 14:46:59', 57),
+(149, 'Chị Oanh', '0971550920', '0971550920', 'zalo', 77, '[\"57\"]', NULL, 1, '2024-09-11 15:21:26', '2024-09-11 15:21:26', 57),
+(150, 'A Tiến', '0915506768', '0915506768', 'zalo', 87, '[\"57\"]', NULL, 1, '2024-09-11 16:41:05', '2024-09-11 16:41:05', 57),
+(151, 'Chị Phượng', '0975167989', NULL, 'zalo', 140, NULL, NULL, 1, '2024-09-12 09:23:20', '2024-09-12 09:23:20', 28),
+(152, 'Anh Dũng', '0973913476', NULL, 'zalo', 141, NULL, NULL, 1, '2024-09-12 09:24:12', '2024-09-12 09:24:12', 2),
+(153, 'Phùng văn chiến', '0987811440', '0987811440', 'zalo', 142, NULL, NULL, 1, '2024-09-12 09:32:28', '2024-09-19 13:52:46', 33),
+(155, 'ánh nguyệt', '0398218610', '0398218610', 'ánh nguyệt', 139, NULL, NULL, 1, '2024-09-12 09:44:08', '2024-09-12 09:44:08', 35),
+(156, 'Phương', '0846717945', '0846717845', 'phương', 143, NULL, NULL, 1, '2024-09-12 11:41:59', '2024-09-12 11:41:59', 35),
+(157, 'Hồng Tính', '0947047686', NULL, 'zalo', 144, NULL, NULL, 1, '2024-09-12 14:55:41', '2024-09-12 14:55:41', 28),
+(158, 'Ms Phượng', '0916856269', NULL, 'zalo', 145, NULL, NULL, 1, '2024-09-12 16:05:00', '2024-09-12 16:05:00', 2),
+(159, 'Anh Hiệp', '0967303333', NULL, 'zalo', 146, NULL, NULL, 1, '2024-09-12 16:45:13', '2024-09-12 16:45:13', 2),
+(160, 'Ms Thảo', '0967303333', NULL, 'zalo', 147, NULL, NULL, 1, '2024-09-12 16:46:19', '2024-09-12 16:46:19', 2),
+(161, 'Mr Toàn', '0392282116', NULL, 'zalo', 148, NULL, NULL, 1, '2024-09-12 16:47:37', '2024-09-12 16:47:37', 2),
+(162, 'Ms Hiền', '0772311250', NULL, 'zalo', 149, NULL, NULL, 1, '2024-09-12 16:48:15', '2024-09-12 16:48:15', 2),
+(163, 'Ms Thương', '0869791355', NULL, 'zalo', 150, NULL, NULL, 1, '2024-09-12 16:48:56', '2024-09-12 16:48:56', 2),
+(164, 'Mr.Hưng', '0983299683', '0983299683', 'zalo', 151, NULL, NULL, 1, '2024-09-12 17:21:29', '2024-09-12 17:21:29', 33),
+(165, 'Chị Nhâm', '0985134818', '0985134818', 'zalo', 152, NULL, NULL, 1, '2024-09-12 17:28:57', '2024-09-12 17:28:57', 57),
+(166, 'Mr Quang', '0919618635', NULL, 'zalo', 153, NULL, NULL, 1, '2024-09-13 15:09:13', '2024-09-13 15:09:13', 2),
+(167, 'Ms Yến', '0972892442', NULL, 'zalo', 154, NULL, NULL, 1, '2024-09-13 15:10:25', '2024-09-13 15:10:25', 2),
+(168, 'Ms Nam', '0366912682', NULL, 'zalo', 155, NULL, NULL, 1, '2024-09-13 15:12:32', '2024-09-13 15:12:32', 2),
+(169, 'Ms Thiên', '0981063290', NULL, 'zalo', 156, NULL, NULL, 1, '2024-09-13 15:13:11', '2024-09-13 15:13:11', 2),
+(170, 'Ms Hồng', '0969816229', NULL, 'zalo', 157, NULL, NULL, 1, '2024-09-13 15:13:53', '2024-09-13 15:13:53', 2),
+(171, 'Ms Châu', '0922693666', NULL, 'zalo', 158, NULL, NULL, 1, '2024-09-13 15:18:00', '2024-09-13 15:18:00', 2),
+(172, 'Chị Tâm', '0968198093', NULL, 'zalo', 160, NULL, NULL, 1, '2024-09-13 15:50:44', '2024-09-13 15:51:27', 28),
+(173, 'Chị Giang', '0904914119', NULL, 'zalo', 161, NULL, NULL, 1, '2024-09-13 15:54:44', '2024-09-13 15:54:44', 28),
+(174, 'Chị Nga', '0934861222', NULL, 'zalo', 163, NULL, NULL, 1, '2024-09-13 16:07:06', '2024-09-13 16:07:06', 28),
+(175, 'Chị Hạnh', '0919735136', NULL, 'zalo', 164, '[\"57\"]', NULL, 1, '2024-09-14 09:05:16', '2024-12-03 16:09:55', 28),
+(176, 'Chị Thương', '09650093748', NULL, 'zalo', 165, NULL, NULL, 1, '2024-09-14 09:11:10', '2024-09-14 09:11:10', 28),
+(177, 'Chị Nhung', '0938550335', NULL, 'zalo', 166, NULL, NULL, 1, '2024-09-14 13:45:14', '2024-09-14 13:45:14', 28),
+(178, 'Anh Hà', '0979860801', '0979860801', 'zalo', 167, NULL, NULL, 1, '2024-09-14 15:01:17', '2024-09-14 15:01:17', 57),
+(179, 'Anh Nam', '0966242160', '0966242160', 'zalo', 44, '[\"57\"]', NULL, 1, '2024-09-18 09:56:39', '2024-09-18 09:56:39', 57),
+(180, 'Miss Thuý', '0966085620', '0966085620', 'zalo', 28, '[\"57\"]', NULL, 1, '2024-09-19 15:09:08', '2024-09-19 15:09:08', 57),
+(181, 'Ms Diễm', '0967303333', NULL, 'zalo', 127, '[\"2\"]', NULL, 1, '2024-09-20 14:20:03', '2024-09-20 14:20:03', 2),
+(182, 'Công ty Cổ phần Đầu Tư AKINA Đông Á', NULL, NULL, NULL, 168, NULL, 'Khách nợ lấy từ Misa', 1, '2024-09-20 23:03:49', '2024-12-05 03:11:17', 36),
+(183, 'Anh Thọ Collagen', NULL, NULL, NULL, 169, NULL, 'Khách nợ lấy từ Misa', 1, '2024-09-20 23:03:49', '2024-12-05 03:11:17', 36),
+(184, 'Anh Tuấn', '0942311515', '0942311515', '0942311515', 170, NULL, 'Khách nợ lấy từ Misa', 1, '2024-09-20 23:03:50', '2024-12-05 03:11:17', 36),
+(185, 'Anh Dương', '0984111128', '0984111128', '0984111128', 171, NULL, 'Khách nợ lấy từ Misa', 1, '2024-09-20 23:03:50', '2024-12-05 03:11:17', 36),
+(186, 'Chị Hiền', '0901750758', '0901750758', '0901750758', 172, NULL, 'Khách nợ lấy từ Misa', 1, '2024-09-20 23:03:51', '2024-12-05 03:11:17', 36),
+(188, 'Công ty TNHH Europhar USA', NULL, NULL, NULL, 174, NULL, 'Khách nợ lấy từ Misa', 1, '2024-09-20 23:03:52', '2024-12-05 03:11:17', 36),
+(189, 'A Dự', '0982123263', '0982123263', '0982123263', 175, NULL, 'Khách nợ lấy từ Misa', 1, '2024-09-20 23:03:52', '2024-12-05 03:11:17', 36),
+(190, 'Chị Nga', '0934861222', '0934861222', '0934861222', 176, NULL, 'Khách nợ lấy từ Misa', 1, '2024-09-20 23:03:53', '2024-12-05 03:11:17', 36),
+(191, 'chú Nhuận', '0912241372', '0912241372', '0912241372', 177, NULL, 'Khách nợ lấy từ Misa', 1, '2024-09-20 23:03:54', '2024-12-05 03:11:17', 36),
+(192, 'Dược phẩm Huy Anh', '0975156365', '0975156365', '0975156365', 178, NULL, 'Khách nợ lấy từ Misa', 1, '2024-09-20 23:03:54', '2024-12-05 03:11:17', 36),
+(193, 'Chị Nga', '0934861222', '0934861222', '0934861222', 179, NULL, 'Khách nợ lấy từ Misa', 1, '2024-09-20 23:03:54', '2024-12-05 03:11:17', 36),
+(194, 'Chị Minh Châu', '0904102882a', '0904102882a', '0904102882a', 180, NULL, 'Khách nợ lấy từ Misa', 1, '2024-09-20 23:03:55', '2024-12-14 17:22:35', 36),
+(195, 'Công ty CP dược phẩm quốc tế Norvatis Thụy Sỹ', NULL, NULL, NULL, 181, NULL, 'Khách nợ lấy từ Misa', 1, '2024-09-20 23:03:55', '2024-12-05 03:11:17', 36),
+(196, 'chị Miền', '0942982838', '0942982838', '0942982838', 182, NULL, 'Khách nợ lấy từ Misa', 1, '2024-09-20 23:03:55', '2024-12-05 03:11:17', 36),
+(197, 'A Thịnh', '0963786798', '0963786798', '0963786798', 183, NULL, 'Khách nợ lấy từ Misa', 1, '2024-09-20 23:03:56', '2024-12-05 03:11:17', 36),
+(198, 'CÔNG TY TNHH DƯỢC PHẨM TRUNG ƯƠNG VINAFA , Tdpharma2000.2@gmail.com', NULL, NULL, NULL, 184, NULL, 'Khách nợ lấy từ Misa', 1, '2024-09-20 23:03:57', '2024-12-05 03:11:17', 36),
+(199, 'A.Quý', '0918870111', '0918870111', '0918870111', 185, NULL, 'Khách nợ lấy từ Misa', 1, '2024-09-20 23:03:57', '2024-12-05 03:11:17', 36),
+(200, 'Vân Anh', '0948489288', '0948489288', '0948489288', 185, NULL, NULL, 1, '2024-09-20 23:36:05', '2024-12-05 03:11:17', 36),
+(201, 'Ms Linh Anh', '0967303333', NULL, 'zalo', 127, '[\"2\"]', NULL, 1, '2024-09-21 08:27:05', '2024-09-21 08:27:05', 2),
+(202, 'Tuệ Đăng', '0967303333', NULL, 'zalo', 127, '[\"2\"]', NULL, 1, '2024-09-21 14:01:33', '2024-09-21 14:01:33', 2),
+(203, 'Điều khiển TV', '0966276586', NULL, 'zalo', 127, '[\"2\"]', NULL, 1, '2024-09-23 08:19:59', '2024-09-23 08:19:59', 2),
+(204, 'Chị Giang', '0986970999', '0986970999', 'zalo', 42, '[\"57\"]', NULL, 1, '2024-09-23 10:09:31', '2024-09-23 10:09:31', 57),
+(205, 'Dương', '0946674222', NULL, 'zalo', 186, NULL, NULL, 1, '2024-09-23 16:26:14', '2024-09-23 16:26:14', 35),
+(206, 'Ms.Phượng', '0363977779', '0968572696', 'zalo', 188, NULL, NULL, 1, '2024-09-23 16:32:55', '2024-09-23 16:32:55', 33),
+(207, 'Vũ Cường', '0919899692', NULL, 'fb', 189, NULL, NULL, 1, '2024-09-24 11:29:32', '2024-09-24 11:29:32', 35),
+(208, 'Châu', '0336005095', NULL, 'zalo', 190, NULL, NULL, 1, '2024-09-24 14:41:05', '2024-09-24 14:41:05', 28),
+(209, 'Mr. Thái Hoàng', '0905161990', '0905161990', 'Zalo', 191, NULL, NULL, 1, '2024-09-25 09:14:36', '2024-09-25 09:14:36', 33),
+(210, 'Mr Duy', '0898223372', '0898223372', 'zalo', 47, '[\"57\"]', NULL, 1, '2024-09-25 11:48:37', '2024-09-25 11:48:37', 57),
+(211, 'Ms Hà', '0943840239', NULL, 'zalo', 127, '[\"2\"]', NULL, 1, '2024-09-25 14:58:35', '2024-09-25 14:58:35', 2),
+(212, 'Vina AB', '0972866156', NULL, 'zalo', 192, NULL, NULL, 1, '2024-09-25 15:22:32', '2024-09-25 15:22:32', 35),
+(213, 'Mr.Khang', '0865607681', '0865607681', 'zalo', 193, NULL, NULL, 1, '2024-09-25 17:07:04', '2024-09-25 17:07:04', 33),
+(214, 'Minh Khuê', '0963362570', NULL, 'zalo', 194, NULL, NULL, 1, '2024-09-26 11:00:57', '2024-09-26 11:00:57', 35),
+(215, 'Ms Thuý', '0974169166', '0974169166', 'zalo', 67, '[\"57\"]', NULL, 1, '2024-09-26 11:41:00', '2024-09-26 11:41:00', 57),
+(216, 'Phương', '0969303666', NULL, 'zalo', 195, NULL, NULL, 1, '2024-09-27 11:32:19', '2024-09-27 11:32:19', 57),
+(217, 'Ms.Bily', '0911651995', '0911651995', 'Zalo', 196, NULL, NULL, 1, '2024-09-28 16:13:48', '2024-09-28 16:13:48', 33),
+(218, 'Trần Văn Thanh', '0977088797', '0977088797', 'zalo', 197, NULL, NULL, 1, '2024-09-30 15:06:09', '2024-09-30 15:06:09', 33),
+(219, 'Chị Vân Anh', '0368223445', '0368223445', 'zalo', 198, NULL, NULL, 1, '2024-10-01 10:05:36', '2024-10-01 10:05:36', 57),
+(220, 'Mr Diễn', '0354351803', NULL, 'zalo', 127, '[\"2\"]', NULL, 1, '2024-10-01 16:53:27', '2024-10-01 16:53:27', 2),
+(221, 'Mr Hải', '0914755299', '0914755299', 'zalo', 7, '[\"57\"]', NULL, 1, '2024-10-02 09:40:03', '2024-10-02 09:40:03', 57),
+(222, 'Ms Đỗ Trang', '0888386828', NULL, 'zalo', 199, NULL, NULL, 1, '2024-10-02 15:23:18', '2024-10-02 15:23:18', 2),
+(223, 'Anh Hạnh', '0963665005', '0963665005', 'zalo', 200, NULL, NULL, 1, '2024-10-02 17:24:54', '2024-10-02 17:24:54', 57),
+(224, 'Chị Liên', '0945241637', '0945241637', 'zalo', 201, NULL, NULL, 1, '2024-10-04 16:51:42', '2024-10-04 16:51:42', 57),
+(225, 'Chị Nhường', '0201971770', '0201971770', 'zalo', 202, NULL, NULL, 1, '2024-10-05 10:41:25', '2024-10-25 16:26:53', 57),
+(226, 'A Khiêm', '0963620867', '0963620867', 'zalo', 203, NULL, NULL, 1, '2024-10-05 11:55:51', '2024-10-05 11:55:51', 57),
+(227, 'chị Miền', '0942982838', '0942982838', 'zalo', 182, '[\"57\"]', NULL, 1, '2024-10-05 14:51:01', '2024-10-05 14:51:01', 57),
+(228, 'Chị Chi', '0912843381', NULL, 'zalo', 204, NULL, NULL, 1, '2024-10-07 10:56:50', '2024-10-07 10:56:50', 28),
+(229, 'Nga vũ', '0396905271', NULL, 'fb', 205, NULL, NULL, 1, '2024-10-07 13:46:08', '2024-10-07 13:46:08', 35),
+(230, 'Chị Thu', '0986628805', 'zalo', 'zalo', 206, NULL, NULL, 1, '2024-10-07 15:37:21', '2024-10-07 15:37:21', 10),
+(231, 'Mr Đức', '0966507293', NULL, 'zalo', 207, NULL, NULL, 1, '2024-10-07 15:57:24', '2024-10-07 15:57:24', 2),
+(232, 'Anh Đức', '0962831385', '0962831385', 'zalo', 208, NULL, NULL, 1, '2024-10-07 17:10:04', '2024-10-07 17:10:04', 57),
+(234, 'A Hoà', '0918210284', '0918210284', 'zalo', 48, '[\"57\"]', NULL, 1, '2024-10-09 14:10:56', '2024-10-09 14:10:56', 57),
+(235, 'Mr Duy', '0898223372', '0898223372', 'zalo', 47, '[\"57\"]', NULL, 1, '2024-10-15 11:33:48', '2024-10-15 11:33:48', 57),
+(236, 'Anh Lục', '0359338999', NULL, 'zalo', 210, NULL, NULL, 1, '2024-10-16 13:42:56', '2024-10-16 13:42:56', 28),
+(237, 'Anh Cường', '0986554682', NULL, 'zalo', 211, '[\"36\"]', NULL, 1, '2024-10-16 13:49:08', '2024-12-05 16:09:19', 28),
+(238, 'Mr Đức Tú', '0986410790', NULL, 'zalo', 212, NULL, NULL, 1, '2024-10-16 13:49:50', '2024-10-16 13:49:50', 2),
+(239, 'Anh Hãn', '0936689911', NULL, 'zalo', 213, NULL, NULL, 1, '2024-10-16 14:14:06', '2024-10-16 14:14:06', 28),
+(240, 'Mr Tình', '0359386995', NULL, 'zalo', 214, NULL, NULL, 1, '2024-10-16 16:53:25', '2024-10-16 16:53:25', 2),
+(241, 'Hana Nguyễn', '0967578888', NULL, 'zalo', 215, NULL, NULL, 1, '2024-10-17 10:54:03', '2024-10-17 10:54:03', 28),
+(242, 'Văn Tiến Hiếu', '0912790791', NULL, 'zalo', 216, NULL, NULL, 1, '2024-10-17 14:03:16', '2024-10-17 14:03:16', 28),
+(243, 'Trang', '0349699639', NULL, 'zalo', 216, NULL, NULL, 1, '2024-10-17 14:03:16', '2024-10-17 14:03:16', 28),
+(244, 'Ms.Đào Quyên', '0916195300', '0916195300', 'zalo', 217, NULL, NULL, 1, '2024-10-17 14:19:10', '2024-10-17 14:19:10', 33),
+(245, 'Chị Hiền', '0901750758', NULL, 'zalo', 218, NULL, NULL, 1, '2024-10-17 14:31:46', '2024-10-17 14:31:46', 28),
+(246, 'Ms Vân Anh', '0348420583', NULL, 'zalo', 219, NULL, NULL, 1, '2024-10-17 15:23:30', '2024-10-17 15:23:30', 2),
+(247, 'Mai Hương', '0966903682', NULL, 'zalo', 220, NULL, NULL, 1, '2024-10-17 15:47:02', '2024-10-17 15:47:02', 28),
+(248, 'Mai Bá Linh', '0966999591', '0966999591', 'zalo', 221, NULL, NULL, 1, '2024-10-18 08:53:33', '2024-10-18 08:53:33', 33),
+(249, 'Ms Bích Ngọc', '0911237458', NULL, 'zalo', 222, NULL, NULL, 1, '2024-10-18 10:04:44', '2024-10-18 10:04:44', 2),
+(250, 'Minh Châu', '0904102882', NULL, 'zalo', 180, '[\"28\", \"57\"]', NULL, 1, '2024-10-18 10:09:03', '2024-12-14 17:22:57', 28),
+(251, 'C Hiền', '0901750758', NULL, 'zalo', 172, '[\"28\"]', NULL, 1, '2024-10-18 11:17:46', '2024-10-18 11:17:46', 28),
+(252, 'Ms Như Quỳnh', '0967554295', NULL, 'zalo', 223, NULL, NULL, 1, '2024-10-18 14:35:07', '2024-10-18 14:35:07', 2),
+(253, 'A Đạt', '0902283882', NULL, 'zalo', 224, NULL, NULL, 1, '2024-10-18 14:51:38', '2024-10-18 14:51:38', 28),
+(254, 'Mr Mạnh Đan', '0983948550', NULL, 'zalo', 225, NULL, NULL, 1, '2024-10-18 15:10:47', '2024-10-18 15:10:47', 2),
+(255, 'Chị Xuân Giang', '0986970999', NULL, 'zalo', 42, '[\"28\"]', NULL, 1, '2024-10-19 10:13:15', '2024-10-19 10:13:15', 28),
+(256, 'Ms Khánh An', '0969758383', NULL, 'zalo', 226, NULL, NULL, 1, '2024-10-19 10:50:17', '2024-10-19 10:50:17', 2),
+(257, 'Ms Trang', '0869869720', NULL, 'zalo', 227, NULL, NULL, 1, '2024-10-21 08:57:51', '2024-10-21 08:57:51', 2),
+(258, 'Mr Công', '0977389782', NULL, 'zalo', 228, NULL, NULL, 1, '2024-10-21 10:55:46', '2024-10-21 10:55:46', 2),
+(259, 'Chị Thảo', '0946912203', NULL, 'zalo', 229, NULL, NULL, 1, '2024-10-21 10:59:52', '2024-10-31 09:45:19', 28),
+(260, 'Mr Khải', '0984706629', NULL, 'zalo', 230, NULL, NULL, 1, '2024-10-21 11:26:02', '2024-10-21 11:26:02', 2),
+(261, 'Ms Quyên', '0905594288', NULL, 'zalo', 233, NULL, NULL, 1, '2024-10-21 15:12:34', '2024-10-21 15:12:34', 2),
+(262, 'Ms.Bình', '0934353565', '0934353565', 'Zalo', 234, NULL, NULL, 1, '2024-10-22 10:10:30', '2024-10-22 10:10:30', 33),
+(263, 'Mr Hải', '0342821204', NULL, 'zalo', 235, NULL, NULL, 1, '2024-10-22 11:31:55', '2024-10-22 11:31:55', 2),
+(264, 'Chị Vũ Hương Nhu', '0966038181', NULL, 'zalo', 236, '[\"57\"]', NULL, 1, '2024-10-22 13:46:27', '2024-12-09 13:35:33', 28),
+(265, 'Ms Ngọc Anh', '0772273456', NULL, 'zalo', 237, NULL, NULL, 1, '2024-10-22 16:05:36', '2024-10-22 16:05:36', 2),
+(266, 'Bắc', '0913531885', NULL, 'zalo', 240, NULL, NULL, 1, '2024-10-23 13:29:59', '2024-10-23 13:29:59', 28),
+(267, 'Ms Liz', '0936321515', NULL, 'zalo', 241, NULL, NULL, 1, '2024-10-23 14:13:21', '2024-10-23 14:13:21', 2),
+(268, 'Ms. Lan Anh', '0972699555', '0972699555', 'Zalo', 242, NULL, NULL, 1, '2024-10-24 08:58:06', '2024-10-24 08:58:06', 33),
+(269, 'Ms.Phương Anh', '0981237706', '0981237706', 'Zalo', 243, NULL, NULL, 1, '2024-10-24 09:46:59', '2024-10-24 09:46:59', 33),
+(270, 'Ngọc Ánh', '0869230079', NULL, 'zalo', 244, NULL, NULL, 1, '2024-10-25 08:52:15', '2024-10-25 08:52:15', 28),
+(271, 'Ms.Đỗ Thu Hà', '0398298297', '0398298297', 'Zalo', 245, NULL, NULL, 1, '2024-10-25 10:07:45', '2024-12-20 08:41:59', 33),
+(272, 'C Thảo', '0389338615', NULL, 'zalo', 246, NULL, NULL, 1, '2024-10-25 10:19:14', '2024-10-25 10:19:14', 28),
+(273, 'Ms Đặng Hoa Lan', '0981156586', NULL, 'zalo', 247, NULL, NULL, 1, '2024-10-25 11:10:54', '2024-10-25 11:10:54', 2),
+(274, 'Ms Hoài', '0967258592', NULL, 'zalo', 248, NULL, NULL, 1, '2024-10-25 11:27:27', '2024-10-25 11:27:27', 2),
+(275, 'Ms Ngọc Linh', '0916372911', NULL, 'zalo', 249, NULL, NULL, 1, '2024-10-25 14:42:20', '2024-10-25 14:42:20', 2),
+(276, 'Ms Hà', '0988836743', NULL, 'zalo', 250, NULL, NULL, 1, '2024-10-25 16:48:37', '2024-10-25 16:48:37', 2),
+(277, 'Ms Vân', '0946605885', NULL, 'zalo', 251, NULL, NULL, 1, '2024-10-26 08:09:09', '2024-10-26 08:09:09', 2),
+(278, 'Chị Thương', '0332616673', NULL, 'zalo', 252, NULL, NULL, 1, '2024-10-26 10:29:43', '2024-10-26 10:29:43', 28),
+(279, 'Anh Quân', '0986390000', NULL, 'zalo', 253, '[\"57\"]', NULL, 1, '2024-10-26 11:54:55', '2024-12-09 13:37:33', 28),
+(280, 'Anh Sức', '0963770606', NULL, 'zalo', 254, NULL, NULL, 1, '2024-10-26 15:06:43', '2024-10-26 15:06:43', 28),
+(281, 'Ms Lan', '0868071313', NULL, 'zalo', 255, NULL, NULL, 1, '2024-10-26 16:00:58', '2024-10-26 16:00:58', 2),
+(282, 'Ms Thu', '0362704228', NULL, 'zalo', 256, NULL, NULL, 1, '2024-10-28 08:38:25', '2024-10-28 08:38:25', 2),
+(283, 'Ms Hà', '0903218336', NULL, 'zalo', 257, NULL, NULL, 1, '2024-10-28 09:08:00', '2024-10-28 09:08:00', 2),
+(284, 'Chị Mây', '0868183666', NULL, 'zalo', 258, NULL, NULL, 1, '2024-10-28 09:15:37', '2024-10-28 09:15:37', 28),
+(285, 'Ms. Thoa Đỗ', '0931528882', '0931528882', 'Zalo', 259, NULL, NULL, 1, '2024-10-28 10:47:50', '2024-10-28 10:47:50', 33),
+(286, 'Chị Thanh', '0585758888', NULL, 'zalo', 260, NULL, NULL, 1, '2024-10-28 10:57:38', '2024-10-28 10:57:38', 35),
+(287, 'Ms. Hoàng Thu Hiền', '0986489625', '0986489625', 'zalo', 261, NULL, NULL, 1, '2024-10-28 13:58:56', '2024-10-28 13:58:56', 33),
+(288, 'Ms Van Anh', '0982853293', NULL, 'zalo', 262, NULL, NULL, 1, '2024-10-28 14:31:58', '2024-10-28 14:31:58', 2),
+(289, 'Ms Yến', '0985801062', NULL, 'zalo', 264, NULL, NULL, 1, '2024-10-29 08:47:47', '2024-10-29 08:47:47', 2),
+(290, 'Ms.Nhung', '0968094220', '0968094220', 'annam79.vn@gmail.com', 265, NULL, NULL, 1, '2024-10-29 10:39:12', '2024-10-29 10:56:10', 33),
+(291, 'Chị Xiêm', '0908455999', NULL, 'zalo', 266, NULL, NULL, 1, '2024-10-29 15:10:31', '2024-10-29 15:10:31', 28),
+(292, 'Mr Anh', '0356707325', NULL, 'zalo', 267, NULL, NULL, 1, '2024-10-29 16:00:55', '2024-10-29 16:00:55', 2),
+(293, 'Ms.Thảo', '0377458557', '0377458557', 'Zalo', 268, NULL, NULL, 1, '2024-10-30 08:08:35', '2024-10-30 08:08:35', 33),
+(294, 'Chị Hạnh', '0979848284', NULL, 'zalo', 269, '[\"28\"]', NULL, 1, '2024-10-30 08:14:10', '2024-11-12 15:26:00', 35),
+(295, 'Mr Hải', '0981956658', NULL, 'zalo', 270, NULL, NULL, 1, '2024-10-30 09:29:00', '2024-10-30 09:29:00', 2),
+(296, 'Ms.Hải Như', '0936285065', '0936285065', 'Zalo', 271, NULL, NULL, 1, '2024-10-30 11:37:45', '2024-10-30 11:37:45', 33),
+(297, 'Ms Phương', '0775257272', NULL, 'zalo', 272, NULL, NULL, 1, '2024-10-30 14:19:20', '2024-10-30 14:19:20', 2),
+(298, 'Ms.Alice Khuất', '0913074113', '0913074113', 'Zalo', 274, NULL, NULL, 1, '2024-10-30 15:47:13', '2024-10-30 16:00:01', 33),
+(299, 'Mr. Hải', '0378983148', NULL, 'zalo', 275, NULL, NULL, 1, '2024-10-30 16:01:28', '2024-10-30 16:01:28', 35),
+(300, 'Chị Phương', '0396521168', NULL, 'zalo', 276, NULL, NULL, 1, '2024-10-31 08:48:33', '2024-10-31 08:48:33', 28),
+(301, 'Chị Lan', '0904889112', NULL, 'zalo', 277, NULL, NULL, 1, '2024-10-31 14:20:43', '2024-10-31 14:20:43', 28),
+(302, 'Chị Tâm', '0395073593', NULL, 'zalo', 278, NULL, NULL, 1, '2024-10-31 14:53:58', '2024-10-31 14:53:58', 28),
+(303, 'Mr Hùng', '0989481452', NULL, 'zalo', 279, NULL, NULL, 1, '2024-10-31 15:37:47', '2024-10-31 15:37:47', 2),
+(304, 'Ms.Hương', '0964604886', '0964604886', 'Zalo', 280, NULL, NULL, 1, '2024-10-31 16:30:22', '2024-10-31 16:30:22', 33),
+(305, 'Ms Thảo', '0984598692', NULL, 'zalo', 281, NULL, NULL, 1, '2024-10-31 16:39:40', '2024-10-31 16:39:40', 2),
+(306, 'Ms.Thu Nga', '0969009966', '0969009966', 'Zalo', 282, NULL, NULL, 1, '2024-11-01 08:26:08', '2024-11-01 08:26:08', 33),
+(307, 'Ms Vũ Lệ Thuỷ', '0918150890', NULL, 'zalo', 283, NULL, NULL, 1, '2024-11-01 09:53:39', '2024-11-01 09:53:39', 2),
+(308, 'Ms Kim', '0979655368', NULL, 'zalo', 284, NULL, NULL, 1, '2024-11-01 11:25:18', '2024-11-01 11:25:18', 2),
+(309, 'MS.Thanh Tâm ( Ép nhũ)', '0981591658', '0981591658', 'Zalo', 285, NULL, NULL, 1, '2024-11-01 14:31:19', '2024-11-18 16:03:26', 33),
+(310, 'Ms Dung', '0987386368', NULL, 'zalo', 286, NULL, NULL, 1, '2024-11-01 15:33:11', '2024-11-01 15:33:11', 2),
+(311, 'Mr.Dũng', '0962631536', '0962631536', 'Zalo', 287, '[\"35\"]', NULL, 1, '2024-11-01 16:16:17', '2024-12-16 16:57:26', 33),
+(312, 'Mr Tào', '0912896632', NULL, 'zalo', 289, NULL, NULL, 1, '2024-11-01 16:26:52', '2024-11-01 16:26:52', 2),
+(313, 'Mr Phương Anh', '0968448472', NULL, 'zalo', 290, NULL, NULL, 1, '2024-11-02 08:00:27', '2024-11-02 08:00:27', 2),
+(314, 'Ms.Linh', '0984389346', '0984389346', 'Zalo', 291, NULL, NULL, 1, '2024-11-02 08:13:08', '2024-11-05 10:06:24', 33),
+(315, 'Ms.Diệp Tâm', '0944826886', '0944826886', 'Zalo', 292, NULL, NULL, 1, '2024-11-02 08:23:15', '2024-11-02 08:23:15', 33),
+(317, 'Mr.Vang', '0964583756', '0964583756', 'Zalo', 295, NULL, NULL, 1, '2024-11-02 15:32:07', '2024-11-02 15:32:07', 33),
+(318, 'Ms Thảo', '0989181188', NULL, 'zalo', 296, NULL, NULL, 1, '2024-11-02 16:23:27', '2024-11-02 16:23:27', 2),
+(319, 'Mr Duy Anh', '0912456562', NULL, 'zalo', 297, NULL, NULL, 1, '2024-11-02 17:04:15', '2024-11-02 17:04:15', 2),
+(320, 'Ms Yến', '0954521244', NULL, 'zalo', 298, NULL, NULL, 1, '2024-11-02 17:18:52', '2024-11-02 17:18:52', 2),
+(321, 'Ms Ngọc Anh Phạm', '0705890333', NULL, 'zalo', 299, NULL, NULL, 1, '2024-11-04 08:43:26', '2024-11-20 10:56:51', 2),
+(322, 'Ms Ngọc Anh Na', '0988001040', NULL, 'zalo', 300, NULL, NULL, 1, '2024-11-04 08:57:50', '2024-11-04 08:57:50', 2),
+(323, 'Mr.Đức Anh', '0915009699', '0915009699', 'Zalo', 301, NULL, NULL, 1, '2024-11-04 09:40:28', '2024-11-04 09:40:28', 33),
+(324, 'Mr.Hồng Phúc', '0348087896', '0348087896', 'Zalo', 302, NULL, NULL, 1, '2024-11-04 11:38:17', '2024-11-04 11:38:17', 33),
+(325, 'Mr Hùng', '0984556225', NULL, 'zalo', 303, NULL, NULL, 1, '2024-11-04 11:59:28', '2024-11-04 11:59:28', 2),
+(326, 'Ms Thơm', '0986162667', NULL, 'zalo', 304, NULL, NULL, 1, '2024-11-04 13:38:13', '2024-11-04 13:38:13', 2),
+(327, 'Mr.Hãn', '0865607682', '0865607682', 'Zalo', 305, NULL, NULL, 1, '2024-11-04 14:06:44', '2024-11-04 14:06:44', 33),
+(328, 'Mr Đạt', '0345538066', NULL, 'zalo', 306, NULL, NULL, 1, '2024-11-04 14:08:12', '2024-11-04 14:08:12', 2),
+(329, 'Chị An', '0923850673', NULL, 'zalo', 307, NULL, NULL, 1, '2024-11-04 14:13:18', '2024-11-04 14:13:18', 28),
+(330, 'Chị Thoa', '0375139542', NULL, 'zalo', 308, NULL, NULL, 1, '2024-11-04 14:31:22', '2024-11-04 14:31:22', 28),
+(331, 'Chị Nam Ngọt', '0989620066', NULL, 'zalo', 309, NULL, NULL, 1, '2024-11-04 15:16:27', '2024-11-04 15:16:27', 28),
+(332, 'Ms Phương', '0979215797', NULL, 'zalo', 310, NULL, NULL, 1, '2024-11-04 16:08:44', '2024-11-04 16:08:44', 2),
+(333, 'Chị Nga', '0965861333', NULL, 'zalo', 176, '[\"57\"]', NULL, 1, '2024-11-04 16:28:08', '2024-12-03 16:10:15', 28),
+(334, 'Mr.Hiếu', '0967861896', '0967861896', 'Zalo', 311, NULL, NULL, 1, '2024-11-05 08:05:32', '2024-11-05 08:05:32', 33),
+(335, 'Ms.Tâm', '0862371689', '0862371689', 'Zalo', 312, NULL, NULL, 1, '2024-11-05 08:18:46', '2024-11-05 08:18:46', 33),
+(336, 'Tổng kho túi giấy hoa quả', '0989681057', '0989681057', 'Zalo', 313, NULL, NULL, 1, '2024-11-05 08:39:05', '2024-11-05 08:39:05', 33),
+(337, 'Ms.Hương Mai', '0963936946', '0963936946', 'Zalo', 315, NULL, NULL, 1, '2024-11-05 09:30:16', '2024-11-05 09:30:16', 33),
+(338, 'Ms Thanh', '0906350839', NULL, 'zalo', 316, NULL, NULL, 1, '2024-11-05 09:40:10', '2024-11-05 09:40:10', 2),
+(339, 'Anh Kính', '0978031089', NULL, 'zalo', 317, NULL, NULL, 1, '2024-11-05 09:41:24', '2024-11-05 09:41:24', 28),
+(340, 'Ms Thanh', '0988265482', NULL, 'zalo', 319, NULL, NULL, 1, '2024-11-05 11:31:33', '2024-11-05 11:31:33', 2),
+(341, 'Ms Hoài', '0245125112', NULL, 'zalo', 320, NULL, NULL, 1, '2024-11-05 13:44:46', '2024-11-05 13:44:46', 2),
+(342, 'C Hạnh', '0969444889', NULL, 'zalo', 321, NULL, NULL, 1, '2024-11-05 14:41:00', '2024-11-05 14:41:00', 28),
+(343, 'Ms Gourmet', '0964280606', NULL, 'zalo', 322, NULL, NULL, 1, '2024-11-05 14:45:11', '2024-11-05 14:45:11', 2),
+(344, 'C Thảo Nguyên', '0983903990', NULL, 'zalo', 323, NULL, NULL, 1, '2024-11-05 14:50:47', '2024-11-05 14:50:47', 28),
+(345, 'Anh Trung', '0979115222', NULL, 'zalo', 324, NULL, NULL, 1, '2024-11-05 14:56:04', '2024-11-05 14:56:04', 28),
+(346, 'Ms.Doanh', '0931432193', '0931432193', 'Zalo', 325, NULL, NULL, 1, '2024-11-05 15:28:12', '2024-11-05 15:28:12', 33),
+(347, 'Chị Men Nguyễn', '0971023897', NULL, 'zalo', 326, NULL, NULL, 1, '2024-11-05 16:28:27', '2024-11-05 16:28:27', 28),
+(348, 'Ms Hoài', '0981141637', NULL, 'zalo', 327, NULL, NULL, 1, '2024-11-05 16:29:00', '2024-11-05 16:29:00', 2),
+(349, 'Ms Huyền', '0926925555', NULL, 'zalo', 328, NULL, NULL, 1, '2024-11-06 08:39:48', '2024-11-06 08:39:48', 2),
+(350, 'C Uyển San', '0962361668', NULL, 'zalo', 329, NULL, NULL, 1, '2024-11-06 09:21:41', '2024-11-06 09:21:41', 28),
+(351, 'Ms.An', '0912865786', '0912865786', 'Zalo', 330, NULL, NULL, 1, '2024-11-06 09:23:42', '2024-11-06 09:23:42', 33),
+(352, 'Ms Dung', '0936913698', NULL, 'zalo', 331, NULL, NULL, 1, '2024-11-06 11:07:34', '2024-11-06 11:07:34', 28),
+(353, 'Mr Tuân', '0984180995', NULL, 'zalo', 332, '[\"57\"]', NULL, 1, '2024-11-06 14:11:34', '2024-12-09 13:35:15', 28),
+(354, 'Ms Thắm', '0903513721', NULL, 'zalo', 333, NULL, NULL, 1, '2024-11-06 14:38:41', '2024-11-06 14:38:41', 2),
+(355, 'Mr Dũng', '0931981696', NULL, 'zalo', 334, NULL, NULL, 1, '2024-11-06 15:39:10', '2024-11-06 15:39:10', 28),
+(356, 'Ms Thảo', '0366002320', NULL, 'zalo', 335, NULL, NULL, 1, '2024-11-07 08:49:37', '2024-11-07 08:49:37', 2),
+(357, 'Ms Dung', '0865588690', NULL, 'zalo', 336, NULL, NULL, 1, '2024-11-07 10:39:21', '2024-11-07 10:39:21', 2),
+(358, 'Ms Ly', '0979904830', NULL, 'zalo', 337, NULL, NULL, 1, '2024-11-07 10:42:45', '2024-11-07 10:42:45', 2),
+(359, 'Ms Xuân', '0963718902', NULL, 'zalo', 338, NULL, NULL, 1, '2024-11-07 10:58:32', '2024-11-07 10:58:32', 2),
+(360, 'Ms.Thuỳ Linh', '0964217262', '0964217262', 'Zalo', 339, NULL, NULL, 1, '2024-11-07 13:33:36', '2024-11-07 13:33:36', 33),
+(361, 'Ms.Mary Nguyen', '0968688879', '0968688879', 'Zalo', 340, NULL, NULL, 1, '2024-11-07 13:49:51', '2024-11-07 13:49:51', 33),
+(362, 'Ms Quý', '0789740151', NULL, 'zalo', 342, NULL, NULL, 1, '2024-11-07 14:08:08', '2024-11-07 14:08:08', 2),
+(363, 'Ms.Liên Đoàn', '0981929894', '0981929894', 'Zalo', 343, NULL, NULL, 1, '2024-11-07 14:29:26', '2024-11-07 14:29:26', 33),
+(364, 'Ms.Nguyễn Mai Nhung', '0985012093', '0985012093', 'Zalo', 344, NULL, NULL, 1, '2024-11-07 14:53:15', '2024-11-07 14:53:15', 33),
+(365, 'Ms.Kim Dung', '0903333326', '0903333326', 'Zalo', 345, NULL, NULL, 1, '2024-11-08 09:00:43', '2024-11-08 09:00:43', 33),
+(366, 'Ms.Linh Hoàng', '0778837464', '0778837464', 'Zalo', 346, NULL, NULL, 1, '2024-11-08 09:03:43', '2024-11-08 09:03:43', 33),
+(367, 'Mr.Đình Dũng', '0907241919', '0907241919', 'Zalo', 348, NULL, NULL, 1, '2024-11-08 15:20:17', '2024-11-08 15:20:17', 33),
+(368, 'Mr Hùng', '0917999983', NULL, 'zalo', 349, NULL, NULL, 1, '2024-11-09 08:17:41', '2024-11-09 08:17:41', 28),
+(369, 'Ms Thanh', '0944995515', NULL, 'zalo', 350, NULL, NULL, 1, '2024-11-09 08:21:42', '2024-11-09 08:21:42', 2),
+(370, 'Ms Thuỳ Anh', '0947188188', NULL, 'zalo', 352, NULL, NULL, 1, '2024-11-09 08:44:41', '2024-11-09 08:44:41', 2),
+(371, 'Ms.Linh', '0934488600', '0934488600', 'Zalo', 353, NULL, NULL, 1, '2024-11-09 08:44:54', '2024-11-23 15:40:12', 33),
+(372, 'Ms Trang', '0967111295', NULL, 'zalo', 354, NULL, NULL, 1, '2024-11-09 08:47:01', '2024-11-09 08:47:01', 2),
+(373, 'Ms Hiền', '0901188546', NULL, 'zalo', 355, NULL, NULL, 1, '2024-11-09 08:53:24', '2024-11-09 08:53:24', 2),
+(374, 'Chị Ngọc', '1234567891', NULL, 'zalo', 356, NULL, NULL, 1, '2024-11-09 11:25:24', '2024-11-09 11:25:24', 57),
+(375, 'Mr Hoàng Nam', '0985833298', NULL, 'zalo', 358, NULL, NULL, 1, '2024-11-09 13:47:51', '2024-11-09 13:47:51', 28),
+(376, 'Ms Giang', '0868859999', NULL, 'zalo', 359, NULL, NULL, 1, '2024-11-09 14:48:12', '2024-11-09 14:48:12', 2),
+(377, 'Mr Tuấn Anh', '0934664262', NULL, 'zalo', 360, NULL, NULL, 1, '2024-11-09 15:16:44', '2024-11-09 15:16:44', 2),
+(378, 'Ms.Thùy Dương', '0399961765', '0399961765', 'Zalo', 361, NULL, NULL, 1, '2024-11-11 08:29:16', '2024-11-11 08:29:31', 33),
+(379, 'Ms Linh Chi', '0834566848', NULL, 'zalo', 362, NULL, NULL, 1, '2024-11-11 08:46:28', '2024-11-11 08:46:28', 2),
+(380, 'Anh Trụ', '0948330360', NULL, 'zalo', 363, NULL, NULL, 1, '2024-11-11 08:57:39', '2024-11-11 08:57:39', 28),
+(381, 'Mr Tùng', '0973399869', NULL, 'zalo', 364, NULL, NULL, 1, '2024-11-11 09:07:37', '2024-11-11 09:07:37', 28),
+(382, 'Ms Nhi', '0333735651', NULL, 'zalo', 365, NULL, NULL, 1, '2024-11-11 09:33:46', '2024-11-11 09:33:46', 2),
+(383, 'Ms Vân', '0968777888', NULL, 'zalo', 366, NULL, NULL, 1, '2024-11-11 10:03:28', '2024-11-11 10:03:28', 2),
+(384, 'Ms.Ngọc Anh', '0919709189', '0919709189', 'zalo', 367, NULL, NULL, 1, '2024-11-11 10:57:13', '2024-11-11 10:57:13', 33),
+(385, 'Ms Vinh', '0988691266', NULL, 'zalo', 368, NULL, NULL, 1, '2024-11-11 15:15:41', '2024-11-11 15:15:41', 2),
+(386, 'Ms.Kiều Nga', '0943554888', '0943554888', 'Zalo', 369, NULL, NULL, 1, '2024-11-11 15:20:54', '2024-11-11 15:20:54', 33),
+(387, 'Mr.Đô Thành', '0976183366', '0976183366', 'Zalo', 370, NULL, NULL, 1, '2024-11-11 17:28:47', '2024-11-11 17:28:47', 33),
+(388, 'Ms.Hồng Hạnh', '0983928688', '0983928688', 'zalo', 371, NULL, NULL, 1, '2024-11-12 09:04:23', '2024-11-12 09:04:23', 33),
+(389, 'Ms Ý An', '0905686066', NULL, 'zalo', 357, NULL, NULL, 1, '2024-11-12 09:42:29', '2024-11-12 09:42:29', 28),
+(390, 'Ms Lan Anh', '0329953955', NULL, 'zalo', 372, NULL, NULL, 1, '2024-11-12 10:08:01', '2024-11-12 10:08:01', 2),
+(391, 'Ms Hải Yến', '0983988384', NULL, 'zalo', 373, NULL, NULL, 1, '2024-11-12 11:08:13', '2024-11-12 11:08:13', 2),
+(392, 'Ms Hoà', '0971473989', NULL, 'zalo', 374, NULL, NULL, 1, '2024-11-12 11:31:48', '2024-11-12 11:31:48', 28),
+(393, 'Ms.Trang', '0355563899', '0355563899', 'Zalo', 375, NULL, NULL, 1, '2024-11-12 11:50:21', '2024-11-12 11:50:21', 33),
+(394, 'Mr Thuận', '0939329568', NULL, 'zalo', 376, NULL, NULL, 1, '2024-11-12 11:55:51', '2024-11-12 11:55:51', 28),
+(395, 'Ms Nam', '0363721363', NULL, 'zalo', 378, NULL, NULL, 1, '2024-11-12 14:49:15', '2024-11-12 14:49:15', 2),
+(396, 'Ms Tuyên', '0364907246', NULL, 'zalo', 379, NULL, NULL, 1, '2024-11-12 14:52:52', '2024-11-12 14:52:52', 28),
+(397, 'Ms.Quỳnh', '0936233699', '0936233699', 'Zalo', 380, NULL, NULL, 1, '2024-11-12 16:48:21', '2024-11-12 16:48:21', 33),
+(398, 'Ms.Anna', '0877111666', '0877111666', 'Zalo', 382, NULL, NULL, 1, '2024-11-12 16:58:48', '2024-11-12 16:58:48', 33),
+(399, 'Mr Thanh', '0982893666', NULL, 'zalo', 383, NULL, NULL, 1, '2024-11-13 09:35:04', '2024-11-13 09:35:04', 2),
+(400, 'Ms.Hằng', '0902310166', '0902310166', 'Zalo', 384, NULL, NULL, 1, '2024-11-13 10:15:00', '2024-11-13 10:15:00', 33),
+(401, 'Ms Yến', '0989836310', NULL, 'zalo', 385, NULL, NULL, 1, '2024-11-13 11:04:08', '2024-11-13 11:04:08', 2),
+(402, 'Ms Vân', '0948885566', NULL, 'zalo', 386, '[\"57\"]', NULL, 1, '2024-11-13 14:43:00', '2024-12-17 17:13:39', 28),
+(403, 'Ms Thu Quyên', '0936932839', NULL, 'zalo', 387, NULL, NULL, 1, '2024-11-13 15:39:18', '2024-11-13 15:39:18', 2),
+(404, 'Mr Tuấn', '0968685484', NULL, 'zalo', 388, NULL, NULL, 1, '2024-11-13 16:42:14', '2024-11-13 16:42:14', 2),
+(405, 'Mr Tuấn', '0982299789', NULL, 'zalo', 389, NULL, NULL, 1, '2024-11-14 09:44:44', '2024-11-14 09:44:44', 2),
+(406, 'Ms Yến', '0855133555', NULL, 'zalo', 390, NULL, NULL, 1, '2024-11-14 11:54:15', '2024-11-14 11:54:15', 2),
+(407, 'Mr Tuấn', '0911647888', 'zalo', 'zalo', 391, NULL, NULL, 1, '2024-11-14 12:00:39', '2024-11-14 12:00:39', 10),
+(408, 'Ms Duy Thuy', '0904627472', NULL, 'zalo', 392, NULL, NULL, 1, '2024-11-14 13:40:53', '2024-11-14 13:40:53', 2),
+(409, 'Ms Phương Anh', '0902240884', NULL, 'zalo', 393, NULL, NULL, 1, '2024-11-14 14:06:25', '2024-11-14 14:06:25', 2),
+(410, 'Ms Linh', '0392176712', NULL, 'zalo', 394, NULL, NULL, 1, '2024-11-14 15:13:26', '2024-11-14 15:13:26', 2),
+(411, 'Ms P. Anh', '0964168218', NULL, 'zalo', 395, NULL, NULL, 1, '2024-11-14 15:36:01', '2024-11-14 15:36:01', 28),
+(412, 'Ms.Hà', '0902486889', '0902486889', 'Zalo', 396, NULL, NULL, 1, '2024-11-14 17:27:00', '2024-11-14 17:27:00', 33),
+(413, 'Ms Hương', '0904184555', NULL, 'zalo', 397, NULL, NULL, 1, '2024-11-15 08:13:34', '2024-11-15 08:13:34', 28),
+(414, 'Ms Phương', '0987968420', NULL, 'zalo', 398, NULL, NULL, 1, '2024-11-15 09:08:02', '2024-11-15 09:08:02', 2),
+(415, 'Mr Mạnh', '0903239555', NULL, 'zalo', 399, NULL, NULL, 1, '2024-11-15 11:05:55', '2024-11-15 11:05:55', 28),
+(416, 'Mr Công', '0942312668', NULL, 'zalo', 400, NULL, NULL, 1, '2024-11-15 11:58:08', '2024-11-15 11:58:08', 2),
+(417, 'Ms Liễu', '0903494825', NULL, 'zalo', 401, NULL, NULL, 1, '2024-11-15 14:06:01', '2024-11-15 14:06:01', 2),
+(418, 'Ms Hào', '0982017835', NULL, 'zalo', 402, NULL, NULL, 1, '2024-11-15 14:18:18', '2024-11-15 14:18:18', 2),
+(419, 'Ms Quỳnh', '0966613143', NULL, 'zalo', 403, NULL, NULL, 1, '2024-11-15 14:26:34', '2024-11-15 14:26:34', 28),
+(420, 'Ms.Thanh Socola', '0329908690', '0329908690', 'zalo', 404, NULL, NULL, 1, '2024-11-15 14:40:02', '2024-11-15 15:02:17', 33),
+(421, 'Ms Nhu', '0889622065', NULL, 'zalo', 405, NULL, NULL, 1, '2024-11-16 10:16:06', '2024-11-16 10:16:06', 2),
+(422, 'Ms Nga', '0985638755', NULL, 'zalo', 406, NULL, NULL, 1, '2024-11-16 14:00:37', '2024-11-16 14:00:37', 28),
+(423, 'Ms.Kim Thoa', '0963921869', '0963921869', 'Zalo', 407, NULL, NULL, 1, '2024-11-16 15:10:58', '2024-12-04 08:17:24', 33),
+(424, 'Ms Lan', '0918367925', NULL, 'zalo', 408, '[\"57\"]', NULL, 1, '2024-11-16 15:23:53', '2024-12-05 10:56:17', 28),
+(425, 'Ms.Hà Hiển', '0989482660', '0989482660', 'Zalo', 409, NULL, NULL, 1, '2024-11-16 15:44:08', '2024-11-16 15:44:08', 33),
+(426, 'Ms.Hồng Ngọc', '0965997878', '0965997878', 'Zalo', 410, '[\"33\", \"28\"]', NULL, 1, '2024-11-18 14:19:08', '2024-12-13 15:30:13', 33);
+INSERT INTO `represents` (`id`, `name`, `phone`, `telephone`, `email`, `customer`, `sale`, `note`, `act`, `created_at`, `updated_at`, `created_by`) VALUES
+(427, 'Ms.Trang-Tomato', '0986261619', '0986261619', 'Zalo', 411, NULL, NULL, 1, '2024-11-18 14:20:24', '2024-11-18 14:20:24', 33),
+(428, 'Ms Chi', '0913138251', NULL, 'zalo', 412, NULL, NULL, 1, '2024-11-18 14:21:21', '2024-11-18 14:21:21', 28),
+(429, 'Ms Hoà', '0981454366', NULL, 'zalo', 413, NULL, NULL, 1, '2024-11-19 09:10:13', '2024-11-19 09:10:13', 2),
+(430, 'Ms Yến', '0975199000', NULL, 'zalo', 414, NULL, NULL, 1, '2024-11-19 09:25:05', '2024-11-19 09:25:05', 2),
+(431, 'Ms Loan', '0902503866', NULL, 'zalo', 415, NULL, NULL, 1, '2024-11-19 09:59:06', '2024-11-19 09:59:06', 2),
+(432, 'Ms Thuý', '0658425222', NULL, 'zalo', 416, NULL, NULL, 1, '2024-11-19 10:50:36', '2024-11-19 10:50:36', 2),
+(433, 'Ms Phương', '0822570990', NULL, 'zalo', 417, '[\"35\"]', NULL, 1, '2024-11-19 14:13:58', '2024-12-25 14:24:14', 2),
+(434, 'Ms Phương', '0364264263', NULL, 'zalo', 418, NULL, NULL, 1, '2024-11-19 14:20:56', '2024-11-19 14:20:56', 28),
+(435, 'Ms Trang', '0822323237', NULL, 'zalo', 419, NULL, NULL, 1, '2024-11-19 14:36:48', '2024-11-19 14:36:48', 28),
+(436, 'Ms Lan', '0903573769', NULL, 'zalo', 420, NULL, NULL, 1, '2024-11-19 14:40:37', '2024-11-19 14:40:37', 2),
+(437, 'Ms Thuỳ', '0985084029', NULL, 'zalo', 421, NULL, NULL, 1, '2024-11-19 15:06:22', '2024-11-19 15:06:22', 28),
+(438, 'Ms.Loan', '0966202244', '0966202244', 'Zalo', 422, NULL, NULL, 1, '2024-11-19 16:31:27', '2024-11-19 16:31:27', 33),
+(439, 'Ms.Hằng', '0909177808', '0909177808', 'Zalo', 423, NULL, NULL, 1, '2024-11-19 16:32:33', '2024-11-19 16:32:33', 33),
+(440, 'Mr. Sáng', '0907266388', '0907266388', 'Zalo', 424, NULL, NULL, 1, '2024-11-19 17:02:48', '2024-11-19 17:02:48', 33),
+(441, 'Ms Thư', '0943595799', NULL, 'zalo', 425, NULL, NULL, 1, '2024-11-20 10:53:29', '2024-11-20 10:53:29', 28),
+(442, 'Mr Tuấn', '0968303999', NULL, 'zalo', 426, NULL, NULL, 1, '2024-11-20 14:47:34', '2024-11-20 14:47:34', 2),
+(443, 'Ms Thu', '0945656904', NULL, 'zalo', 427, NULL, NULL, 1, '2024-11-20 15:20:05', '2024-11-20 15:20:05', 2),
+(444, 'Mr Lĩnh', '0334265547', NULL, 'zalo', 428, NULL, NULL, 1, '2024-11-20 16:30:08', '2024-11-20 16:30:08', 2),
+(445, 'Ms Liên', '0936738766', NULL, 'zalo', 429, NULL, NULL, 1, '2024-11-20 16:38:26', '2024-11-20 16:38:26', 2),
+(446, 'Ms Hằng', '0982976795', NULL, 'zalo', 430, '[\"57\"]', NULL, 1, '2024-11-20 17:10:24', '2024-12-09 13:45:52', 28),
+(447, 'Mr.Cao Dũng', '0986212338', '0986212338', 'zalo', 431, NULL, NULL, 1, '2024-11-21 08:07:44', '2024-11-21 08:07:44', 33),
+(448, 'Mr.Quân - HQt', '0984885418', '0984885418', 'Zalo', 432, NULL, NULL, 1, '2024-11-21 08:09:45', '2024-11-21 08:09:45', 33),
+(449, 'Ms Nga', '0936655088', NULL, 'zalo', 433, NULL, NULL, 1, '2024-11-21 08:43:56', '2024-11-21 08:44:09', 2),
+(450, 'Ms Nhung', '0978582296', NULL, 'zalo', 434, NULL, NULL, 1, '2024-11-21 09:10:28', '2024-11-21 09:10:28', 28),
+(451, 'Ms Kim', '0907990836', NULL, 'zalo', 435, NULL, NULL, 1, '2024-11-21 09:11:22', '2024-11-21 09:11:22', 2),
+(452, 'chị Nga', '0969303667', NULL, 'zalo', 433, '[\"57\"]', NULL, 1, '2024-11-21 09:52:28', '2024-11-21 09:52:28', 57),
+(453, 'Chị Minh', '1234567897', NULL, 'zalo', 76, '[\"57\"]', NULL, 1, '2024-11-21 11:52:03', '2024-11-21 11:52:03', 57),
+(454, 'Mr.Phạm Tuân', '0979884229', '0979884229', 'Zalo', 436, NULL, NULL, 1, '2024-11-21 13:53:38', '2024-11-21 13:53:38', 33),
+(455, 'Ms.Nguyệt', '0983239119', '0983239119', 'Zalo', 437, NULL, NULL, 1, '2024-11-21 15:09:17', '2024-11-21 15:09:17', 33),
+(456, 'Mr.Nam', '0862103902', '0862103902', 'Zalo', 438, NULL, NULL, 1, '2024-11-21 15:23:48', '2024-11-21 15:23:48', 33),
+(457, 'Ms Liên', '0963209795', NULL, 'zalo', 439, NULL, NULL, 1, '2024-11-22 10:01:05', '2024-11-22 10:01:05', 28),
+(458, 'Ms. Tuyết', '0989746458', '0989746458', 'Zalo', 440, NULL, NULL, 1, '2024-11-22 10:03:56', '2024-11-22 10:03:56', 33),
+(459, 'Mr Vũ Anh Tú', '0974906588', NULL, 'zalo', 441, NULL, NULL, 1, '2024-11-22 10:47:23', '2024-11-22 10:47:23', 28),
+(460, 'Ms.Võ Huyền', '0899487587', '0899487587', 'Zalo', 442, NULL, NULL, 1, '2024-11-22 13:51:31', '2024-11-22 13:51:45', 33),
+(461, 'Mr Can', '0963117483', NULL, 'zalo', 443, NULL, NULL, 1, '2024-11-22 14:10:02', '2024-11-22 14:10:02', 28),
+(462, 'Ms Thu', '0356846567', NULL, 'zalo', 444, NULL, NULL, 1, '2024-11-22 16:05:34', '2024-11-22 16:05:34', 28),
+(463, 'Mr Hưng', '0929859999', NULL, 'zalo', 445, NULL, NULL, 1, '2024-11-22 16:09:27', '2024-11-22 16:09:27', 28),
+(464, 'Vũ Anh Minh', '0902265885', NULL, 'zalo', 446, NULL, NULL, 1, '2024-11-23 01:42:08', '2024-11-23 01:42:08', 27),
+(465, 'Ms Nga', '0375322247', NULL, 'zalo', 447, NULL, NULL, 1, '2024-11-23 08:11:21', '2024-11-23 08:11:21', 2),
+(466, 'Ms Chi', '0904655518', NULL, 'zalo', 448, NULL, NULL, 1, '2024-11-23 08:27:36', '2024-11-23 08:27:36', 2),
+(467, 'Ms Oanh', '0946596718', NULL, 'zalo', 449, NULL, NULL, 1, '2024-11-23 09:02:27', '2024-11-23 09:02:27', 2),
+(468, 'Mr.Duy', '0976242196', '0976242196', 'Zalo', 450, NULL, NULL, 1, '2024-11-23 10:07:02', '2024-11-23 10:07:02', 33),
+(469, 'Mr.Hoàng Hiếu', '0974882222', '0974882222', 'zalo', 451, NULL, NULL, 1, '2024-11-23 12:01:51', '2024-11-23 12:01:51', 33),
+(470, 'Mr Khoa', '0914178348', NULL, 'zalo', 452, NULL, NULL, 1, '2024-11-23 15:34:44', '2024-11-23 15:34:44', 2),
+(471, 'Chị Anh', '0936206635', NULL, 'Zalo', 453, NULL, NULL, 1, '2024-11-23 15:37:59', '2024-12-05 03:11:17', 36),
+(472, 'Ms Dung', '0936291090', NULL, 'zalo', 454, NULL, NULL, 1, '2024-11-23 15:45:28', '2024-11-23 15:45:28', 2),
+(473, 'Ms Trang Anh', '0988558291', NULL, 'zalo', 455, NULL, NULL, 1, '2024-11-23 16:39:12', '2024-11-23 16:39:12', 2),
+(474, 'Mr Diệp', '0947855866', NULL, 'zalo', 456, NULL, NULL, 1, '2024-11-23 16:43:51', '2024-11-23 16:43:51', 2),
+(475, 'Ms.Hảo', '0335659720', '0335659720', 'Zalo', 457, NULL, NULL, 1, '2024-11-25 08:13:23', '2024-11-25 08:13:23', 33),
+(476, 'Mr Phi', '0352985141', NULL, 'zalo', 458, NULL, NULL, 1, '2024-11-25 08:20:51', '2024-11-25 08:22:25', 28),
+(477, 'Ms Hạnh', '0989316969', NULL, 'zalo', 459, NULL, NULL, 1, '2024-11-25 09:03:14', '2024-11-25 09:03:14', 2),
+(478, 'Ms Nga', '0944170666', NULL, 'zalo', 460, NULL, NULL, 1, '2024-11-25 09:18:46', '2024-11-25 09:20:08', 28),
+(479, 'Ms.Kim Jung', '0344931392', '0344931392', 'Zalo', 461, NULL, NULL, 1, '2024-11-25 10:15:28', '2024-11-25 10:20:16', 33),
+(480, 'Ms.Hà Vy', '0975658822', '0975658822', 'Zalo', 462, NULL, NULL, 1, '2024-11-25 10:27:21', '2024-11-25 10:27:21', 33),
+(481, 'Ms.Ngát Đinh', '0365599988', '0365599988', 'Zalo', 463, NULL, NULL, 1, '2024-11-25 11:29:10', '2024-11-25 11:29:10', 33),
+(482, 'Ms.Thu Nga', '0969009965', '0969009965', 'Zalo', 464, NULL, NULL, 1, '2024-11-25 11:54:11', '2024-11-25 11:54:11', 33),
+(483, 'Mr Lương', '0917530688', NULL, 'zalo', 465, NULL, NULL, 1, '2024-11-25 11:54:50', '2024-11-25 11:57:29', 28),
+(484, 'Ms Lụa', '0989996010', NULL, 'zalo', 467, NULL, NULL, 1, '2024-11-25 13:36:21', '2024-11-25 13:36:21', 2),
+(485, 'Ms Hồng', '0902164886', NULL, 'zalo', 468, NULL, NULL, 1, '2024-11-25 14:15:14', '2024-11-25 14:15:14', 28),
+(486, 'Ms Dung', '0978658057', NULL, 'zalo', 469, NULL, NULL, 1, '2024-11-25 15:25:03', '2024-11-25 15:25:03', 2),
+(487, 'Ms Kiều Anh', '0974888741', NULL, 'zalo', 470, NULL, NULL, 1, '2024-11-26 08:35:29', '2024-11-26 08:35:29', 28),
+(488, 'Ms Hường', '0976189286', NULL, 'zalo', 471, NULL, NULL, 1, '2024-11-26 08:53:17', '2024-11-26 08:56:57', 28),
+(489, 'Ms Hoàng Anh', '0982215960', NULL, 'zalo', 472, NULL, NULL, 1, '2024-11-26 10:16:07', '2024-11-26 10:16:07', 2),
+(490, 'Ms Mai', '0817151818', NULL, 'zalo', 473, NULL, NULL, 1, '2024-11-26 13:49:19', '2024-11-26 13:49:19', 2),
+(491, 'Ms Thơm', '0974010750', NULL, 'zalo', 474, NULL, NULL, 1, '2024-11-26 14:30:37', '2024-11-26 14:30:37', 28),
+(492, 'Ms.Thu Hà', '0393487563', '0393487563', 'Zalo', 475, NULL, NULL, 1, '2024-11-26 15:21:42', '2024-11-26 15:21:42', 33),
+(493, 'Ms Nhung', '0964339138', NULL, 'zalo', 476, NULL, NULL, 1, '2024-11-26 15:50:52', '2024-11-26 15:50:52', 2),
+(494, 'Ms Thuỷ', '0979375764', NULL, 'zalo', 477, NULL, NULL, 1, '2024-11-26 16:59:55', '2024-11-26 16:59:55', 28),
+(495, 'Mr Dung', '0852399599', NULL, 'zalo', 478, NULL, NULL, 1, '2024-11-27 08:30:46', '2024-11-27 08:30:46', 28),
+(496, 'Ms Chi', '0917908866', NULL, 'zalo', 479, NULL, NULL, 1, '2024-11-27 10:45:01', '2024-11-27 10:45:01', 2),
+(497, 'Ms Thuỳ Dương', '0912484099', NULL, 'zalo', 480, NULL, NULL, 1, '2024-11-27 11:31:26', '2024-11-27 11:31:26', 2),
+(498, 'Ms Hằng', '0948008898', NULL, 'zalo', 481, NULL, NULL, 1, '2024-11-27 13:30:22', '2024-11-27 13:30:22', 28),
+(499, 'Ms Hằng', '0337661755', NULL, 'zalo', 483, NULL, NULL, 1, '2024-11-27 15:47:45', '2024-11-27 15:47:45', 2),
+(500, 'Ms Quỳnh Anh', '0966450736', NULL, 'zalo', 484, NULL, NULL, 1, '2024-11-27 17:28:47', '2024-11-27 17:28:47', 2),
+(501, 'Mr Hậu', '0983130690', NULL, 'zalo', 486, NULL, NULL, 1, '2024-11-28 11:42:53', '2024-11-28 11:42:53', 28),
+(502, 'Mr.Văn Việt', '0988650868', '0988650868', 'Zalo', 487, NULL, NULL, 1, '2024-11-28 12:00:18', '2024-11-28 12:00:18', 33),
+(503, 'Ms.Cao Duyên', '0383089956', '0383089956', 'zalo', 488, NULL, NULL, 1, '2024-11-28 14:26:11', '2024-11-28 14:26:11', 33),
+(504, 'Ms Nhung', '0977610678', NULL, 'zalo', 489, NULL, NULL, 1, '2024-11-28 15:33:48', '2024-11-28 15:33:48', 28),
+(505, 'Mr Việt', '0988419956', NULL, 'zalo', 490, '[\"57\"]', NULL, 1, '2024-11-28 17:14:01', '2024-12-04 11:49:26', 28),
+(506, 'Ms. Hồng Thanh', '0967772555', '0967772555', 'zalo', 491, NULL, NULL, 1, '2024-11-29 09:01:49', '2024-11-29 09:01:49', 33),
+(507, 'Ms Hương', '0984205992', NULL, 'zalo', 492, NULL, NULL, 1, '2024-11-29 09:50:23', '2024-11-29 09:50:23', 28),
+(508, 'Ms Hoa', '0983411288', NULL, 'zalo', 493, NULL, NULL, 1, '2024-11-29 11:44:19', '2024-11-29 11:44:19', 2),
+(509, 'Ms Tiên', '0382388056', NULL, 'zalo', 494, NULL, NULL, 1, '2024-11-29 11:47:39', '2024-11-29 11:47:39', 2),
+(510, 'Ms.My', '0939711982', '0939711981', 'zalo', 495, NULL, NULL, 1, '2024-11-29 16:17:43', '2024-11-29 16:17:43', 33),
+(511, 'Ms.Hà', '0976149431', '0976149431', 'Zalo', 496, NULL, NULL, 1, '2024-11-29 16:36:27', '2024-11-29 16:36:27', 33),
+(512, 'Ms Hiền', '0972769106', NULL, 'zalo', 497, NULL, NULL, 1, '2024-11-30 08:25:52', '2024-11-30 08:25:52', 2),
+(513, 'Ms Thu', '0846207333', NULL, 'zalo', 498, NULL, NULL, 1, '2024-11-30 09:41:52', '2024-11-30 09:41:52', 2),
+(514, 'Ms Thảo', '0333542595', NULL, 'zalo', 499, NULL, NULL, 1, '2024-11-30 09:59:54', '2024-11-30 09:59:54', 2),
+(515, 'Ms Dung', '0793742113', NULL, 'zalo', 500, NULL, NULL, 1, '2024-11-30 10:12:20', '2024-11-30 10:12:20', 2),
+(516, 'Ms Huyền', '0985555644', NULL, 'zalo', 501, NULL, NULL, 1, '2024-11-30 10:33:28', '2024-11-30 10:33:28', 2),
+(517, 'Ms Thảo', '0934685327', NULL, 'zalo', 502, NULL, NULL, 1, '2024-11-30 14:24:07', '2024-11-30 14:24:07', 28),
+(518, 'Mr Thái', '0936460825', NULL, 'zalo', 503, NULL, NULL, 1, '2024-11-30 14:25:02', '2024-11-30 14:25:02', 28),
+(519, 'Ms. Anh Minh', '0379178936', '0379178936', 'zalo', 504, NULL, NULL, 1, '2024-11-30 15:02:59', '2024-11-30 15:02:59', 33),
+(520, 'Ms.Thuỳ Anh', '0905529099', '0905529099', 'zalo', 505, NULL, NULL, 1, '2024-11-30 16:33:47', '2024-11-30 16:33:47', 33),
+(521, 'Ms.Nguyễn Lệ', '0369800905', '0369800905', 'Zalo', 506, NULL, NULL, 1, '2024-11-30 16:43:22', '2024-12-22 14:07:11', 33),
+(522, 'Ms.Hoà', '0903462780', '0903462780', 'Zalo', 507, NULL, NULL, 1, '2024-11-30 16:49:30', '2024-11-30 16:49:44', 33),
+(523, 'Ms Bích', '0865885832', NULL, 'zalo', 508, NULL, NULL, 1, '2024-12-02 08:10:38', '2024-12-02 08:10:38', 2),
+(524, 'Ms.Minh Nhi', '0326664104', '0326664104', 'zalo', 509, NULL, NULL, 1, '2024-12-02 10:34:55', '2024-12-02 10:34:55', 33),
+(525, 'Ms.Mai', '0347197886', '0347197886', 'Zalo', 510, NULL, NULL, 1, '2024-12-02 10:41:24', '2024-12-02 10:41:58', 33),
+(526, 'Ms Loan', '0989068750', NULL, 'zalo', 511, NULL, NULL, 1, '2024-12-02 10:42:33', '2024-12-02 10:42:33', 28),
+(527, 'Mr.Mạnh Hùng', '0901848666', '0901848666', 'Zalo', 512, NULL, NULL, 1, '2024-12-02 10:51:39', '2024-12-02 10:51:39', 33),
+(528, 'Chị Hiền', '037467615', '037467615', 'Đinh Hiền Fulco', 513, NULL, NULL, 1, '2024-12-02 11:02:39', '2024-12-02 11:02:39', 10),
+(529, 'Ms.Thanh Huyền', '0912511054', '0912511054', 'Zalo', 514, NULL, NULL, 1, '2024-12-02 11:11:24', '2024-12-02 11:11:24', 33),
+(530, 'Anh Thắng', '0335758879', NULL, 'zalo', 72, '[\"57\"]', NULL, 1, '2024-12-02 11:18:38', '2024-12-02 11:18:38', 57),
+(531, 'Ms Hoai An', '0978290989', NULL, 'zalo', 515, NULL, NULL, 1, '2024-12-02 11:43:40', '2024-12-02 11:43:40', 28),
+(532, 'Mr Royal wine', '0913151357', NULL, 'zalo', 516, NULL, NULL, 1, '2024-12-02 13:44:02', '2024-12-02 13:44:02', 28),
+(533, 'Ms.Mai Phương', '0337595511', '0337595511', 'Zalo', 517, NULL, NULL, 1, '2024-12-02 14:25:38', '2024-12-02 14:25:38', 33),
+(534, 'C nga', '0965113222', NULL, 'zalo', 176, '[\"57\"]', NULL, 1, '2024-12-02 16:25:25', '2024-12-02 16:25:25', 57),
+(535, 'Ms Thắm', '0912580627', NULL, 'zalo', 518, NULL, NULL, 1, '2024-12-03 08:30:46', '2024-12-03 08:30:46', 28),
+(536, 'Mr Tâm', '0934510662', NULL, 'zalo', 519, NULL, NULL, 1, '2024-12-03 09:04:59', '2024-12-03 09:04:59', 28),
+(537, 'Ms Vân Anh', '0982771389', NULL, 'zalo', 520, NULL, NULL, 1, '2024-12-03 09:12:39', '2024-12-03 09:12:39', 28),
+(538, 'Ms Phượng', '0814996333', NULL, 'zalo', 521, NULL, NULL, 1, '2024-12-03 10:12:25', '2024-12-03 10:12:25', 28),
+(539, 'Ms.Mai Anh', '0936877188', '0936877188', 'Zalo', 522, NULL, NULL, 1, '2024-12-03 11:09:14', '2024-12-03 11:09:14', 33),
+(540, 'Ms Huế Lê', '0819901389', NULL, 'zalo', 524, NULL, NULL, 1, '2024-12-03 11:54:22', '2024-12-03 11:54:22', 2),
+(541, 'Mr.Hoàng Quân', '0927925793', '0927925793', 'zalo', 525, NULL, NULL, 1, '2024-12-03 13:32:01', '2024-12-03 13:32:01', 33),
+(542, 'Ms Linh', '0888257572', NULL, 'zalo', 526, NULL, NULL, 1, '2024-12-03 13:46:48', '2024-12-03 13:46:48', 28),
+(543, 'Ms Yến', '0382776188', NULL, 'zalo', 527, NULL, NULL, 1, '2024-12-03 14:03:25', '2024-12-03 14:03:25', 28),
+(544, 'Chị Phương', '0988656561', NULL, 'zalo', 528, NULL, NULL, 1, '2024-12-03 14:09:56', '2024-12-03 14:09:56', 26),
+(545, 'Chị An', '0914555280', NULL, 'zalo', 529, NULL, NULL, 1, '2024-12-03 14:22:42', '2024-12-21 19:22:52', 26),
+(546, 'Ms Nguyệt', '0983239110', NULL, 'zalo', 530, NULL, NULL, 1, '2024-12-03 14:24:11', '2024-12-03 14:24:11', 2),
+(547, 'Ms Thái', '0989993114', NULL, 'zalo', 531, NULL, NULL, 1, '2024-12-03 14:55:18', '2024-12-03 14:55:18', 35),
+(548, 'Ms Trang', '0945245146', NULL, 'zalo', 532, NULL, NULL, 1, '2024-12-03 15:31:20', '2024-12-03 15:31:20', 2),
+(549, 'Chị Dung', '0934885588', NULL, 'zalo', 533, '[\"57\"]', NULL, 1, '2024-12-03 15:53:37', '2024-12-31 15:42:05', 26),
+(550, 'Ms Thuỷ', '0934641686', NULL, 'zalo', 534, NULL, NULL, 1, '2024-12-03 16:07:07', '2024-12-03 16:07:07', 28),
+(551, 'Mr Tuấn Anh', '0944081360', NULL, 'zalo', 535, NULL, NULL, 1, '2024-12-03 16:10:43', '2024-12-03 16:10:43', 2),
+(552, 'Trần Thanh Mùi In Ấn Chuyên Nghiệp', '0347305466', NULL, 'zalo', 536, NULL, NULL, 1, '2024-12-03 16:34:08', '2024-12-03 16:34:08', 35),
+(553, 'Mr Minh', '0943228657', NULL, 'zalo', 538, NULL, NULL, 1, '2024-12-04 08:33:35', '2024-12-04 08:33:35', 28),
+(554, 'Chị Thơm', '0963303777', NULL, 'zalo', 537, NULL, NULL, 1, '2024-12-04 08:36:46', '2024-12-04 08:36:46', 57),
+(555, 'Ms Mai', '0915050519', NULL, 'zalo', 539, NULL, NULL, 1, '2024-12-04 11:34:31', '2024-12-04 11:34:31', 28),
+(556, 'Mr Dũng', '0961099303', NULL, 'zalo', 540, NULL, NULL, 1, '2024-12-04 11:38:46', '2024-12-04 11:38:46', 28),
+(557, 'Hà Nguyễn', '0702222699', NULL, 'zalo', 541, NULL, NULL, 1, '2024-12-04 13:04:04', '2024-12-04 13:04:04', 35),
+(558, 'Ms Hạnh', '0947692626', NULL, 'zalo', 542, NULL, NULL, 1, '2024-12-04 13:08:28', '2024-12-04 13:08:28', 28),
+(559, 'Ms Mai', '0965111996', NULL, 'zalo', 543, NULL, NULL, 1, '2024-12-04 13:17:07', '2024-12-04 13:17:07', 28),
+(560, 'Nhung', '0921398848', NULL, 'zalo', 544, NULL, NULL, 1, '2024-12-04 16:04:41', '2024-12-04 16:04:41', 35),
+(561, 'K lẻ', '0822574090', NULL, 'zalo', 545, NULL, NULL, 1, '2024-12-04 16:32:02', '2024-12-04 16:32:02', 57),
+(562, 'Hoa Ngô', '0939200643', NULL, 'zalo', 546, NULL, NULL, 1, '2024-12-04 16:58:05', '2024-12-04 16:58:05', 35),
+(563, 'Ms Hương', '0987798097', NULL, 'zalo', 547, NULL, NULL, 1, '2024-12-05 08:29:45', '2024-12-05 08:29:45', 2),
+(564, 'Ms Nhung', '0966990386', NULL, 'zalo', 548, NULL, NULL, 1, '2024-12-05 08:34:24', '2024-12-05 08:34:24', 2),
+(565, 'Ms Kami', '0944899865', NULL, 'zalo', 549, NULL, NULL, 1, '2024-12-05 08:35:32', '2024-12-05 08:35:32', 2),
+(566, 'Ms Lan', '0984961939', NULL, 'zalo', 550, NULL, NULL, 1, '2024-12-05 08:43:30', '2024-12-05 08:43:30', 2),
+(567, 'Ms.Lệ Quyên', '0974840488', '0974840488', 'Zalo', 551, NULL, NULL, 1, '2024-12-05 08:43:40', '2024-12-05 08:43:40', 33),
+(568, 'Ms Minh', '0979794231', NULL, 'zalo', 552, NULL, NULL, 1, '2024-12-05 09:04:15', '2024-12-05 09:04:15', 28),
+(569, 'Ms Leona', '0974266637', NULL, 'zalo', 553, NULL, NULL, 1, '2024-12-05 09:19:43', '2024-12-05 09:19:43', 2),
+(570, 'Mr.Ngọc', '0986118911', '0986118911', 'Zalo', 554, NULL, NULL, 1, '2024-12-05 09:58:26', '2024-12-05 09:58:26', 33),
+(571, 'Ms Hiền', '0985915591', NULL, 'zalo', 555, NULL, NULL, 1, '2024-12-05 10:24:51', '2024-12-05 10:24:51', 28),
+(572, 'Mr Tiến', '0705150541', NULL, 'zalo', 556, NULL, NULL, 1, '2024-12-05 11:20:58', '2024-12-05 11:20:58', 2),
+(573, 'Chị Lương', '0344023153', NULL, 'zalo', 557, NULL, NULL, 1, '2024-12-05 11:41:52', '2024-12-05 11:41:52', 57),
+(574, 'Ms Tường Hi', '0904995812', NULL, 'zalo', 558, NULL, NULL, 1, '2024-12-05 12:23:31', '2024-12-05 12:23:31', 2),
+(575, 'Ms Linh', '0978354994', NULL, 'zalo', 559, NULL, NULL, 1, '2024-12-05 13:28:39', '2024-12-05 13:28:39', 28),
+(576, 'Mr Cường', '0947924429', NULL, 'zalo', 560, NULL, NULL, 1, '2024-12-05 13:49:38', '2024-12-05 13:49:38', 2),
+(577, 'Ms Hương', '0389751158', NULL, 'zalo', 561, NULL, NULL, 1, '2024-12-05 15:27:52', '2024-12-05 15:27:52', 2),
+(578, 'Chị Yến', '0931474886', NULL, 'zalo', 562, NULL, NULL, 1, '2024-12-05 15:29:08', '2024-12-05 15:29:08', 35),
+(579, 'Ms.Hoàn', '0867715286', '0867715286', 'zalo', 563, NULL, NULL, 1, '2024-12-05 16:31:24', '2024-12-05 16:31:24', 33),
+(580, 'Mr Sơn', '0946668883', NULL, 'zalo', 564, '[\"35\"]', NULL, 1, '2024-12-05 17:09:53', '2024-12-19 17:20:36', 28),
+(581, 'Ms Hương', '0904686916', NULL, 'zalo', 565, NULL, NULL, 1, '2024-12-06 08:55:56', '2024-12-06 08:55:56', 28),
+(582, 'Ms.Huyền Nguyễn', '0968802034', '0968802034', 'zalo', 566, NULL, NULL, 1, '2024-12-06 10:15:04', '2024-12-06 10:15:04', 33),
+(583, 'Khoai Tây', '0358509866', NULL, 'zalo', 567, NULL, NULL, 1, '2024-12-06 11:10:21', '2024-12-06 11:10:21', 57),
+(584, 'Ms.Ngọc Trà', '0978460419', '0978460419', 'Zalo', 568, NULL, NULL, 1, '2024-12-06 11:30:40', '2024-12-06 11:30:40', 33),
+(585, 'Mr Duy Anh', '0943564488', NULL, 'zalo', 569, NULL, NULL, 1, '2024-12-06 13:29:23', '2024-12-06 13:29:23', 2),
+(586, 'Vũ Len', '0981232340', NULL, 'zalo', 570, NULL, NULL, 1, '2024-12-06 13:36:35', '2024-12-06 13:36:35', 35),
+(587, 'Ms Thương', '0969930885', NULL, 'zalo', 571, NULL, NULL, 1, '2024-12-06 14:23:43', '2024-12-06 14:23:43', 2),
+(588, 'Ms Nga', '0978161517', NULL, 'zalo', 572, NULL, NULL, 1, '2024-12-06 15:46:08', '2024-12-06 15:46:08', 28),
+(589, 'Harvey', '0325328376', NULL, 'zalo', 573, NULL, NULL, 1, '2024-12-06 17:08:16', '2024-12-06 17:08:16', 35),
+(590, 'Ms Dung', '0943978889', NULL, 'zalo', 574, NULL, NULL, 1, '2024-12-07 08:01:32', '2024-12-07 08:01:32', 28),
+(591, 'Ms Hạnh', '0378902777', NULL, 'zalo', 575, NULL, NULL, 1, '2024-12-07 09:11:42', '2024-12-07 09:11:42', 2),
+(592, 'Ms Anna', '0967807621', NULL, 'zalo', 576, NULL, NULL, 1, '2024-12-07 10:03:09', '2024-12-07 10:03:09', 2),
+(593, 'Hương', '0984891668', NULL, 'zalo', 577, NULL, NULL, 1, '2024-12-07 10:29:39', '2024-12-07 10:29:39', 35),
+(594, 'Mr.Hải Đăng', '0862951825', '0862951825', 'zalo', 578, NULL, NULL, 1, '2024-12-07 12:53:35', '2024-12-07 12:53:35', 33),
+(595, 'Mr.Thư', '0971998369', '0971998369', 'Zalo', 579, NULL, NULL, 1, '2024-12-07 13:21:44', '2024-12-07 13:38:13', 33),
+(596, 'Ms.Thanh Hiếu', '0985737797', '0985737797', 'Zalo', 580, NULL, NULL, 1, '2024-12-07 13:29:08', '2024-12-07 13:29:08', 33),
+(597, 'Chị Phương', '0966840445', NULL, 'zalo', 581, NULL, NULL, 1, '2024-12-07 13:54:48', '2024-12-07 13:54:48', 35),
+(598, 'In Ngân Hà Xanh', '0935531567', NULL, 'zalo', 582, NULL, NULL, 1, '2024-12-07 14:18:18', '2024-12-07 14:18:18', 28),
+(599, 'Mr Tuấn', '0948977988', NULL, 'zalo', 583, NULL, NULL, 1, '2024-12-07 14:54:46', '2024-12-07 14:54:46', 28),
+(600, 'Ms Duyen', '0966724244', NULL, 'zalo', 584, NULL, NULL, 1, '2024-12-07 15:29:45', '2024-12-07 15:29:45', 28),
+(601, 'Bùi Hương', '0979317899', NULL, 'zalo', 585, NULL, NULL, 1, '2024-12-07 15:31:44', '2024-12-07 15:31:44', 35),
+(602, 'Ms Tâm', '0988800101', NULL, 'zalo', 586, NULL, NULL, 1, '2024-12-07 16:32:34', '2024-12-07 16:32:34', 28),
+(603, 'Mr. Tuấn Hàng Buồm', '0948977986', '0948977986', 'Zalo', 587, NULL, NULL, 1, '2024-12-07 17:46:56', '2024-12-07 17:48:17', 33),
+(604, 'Ms Mão', '0356590034', NULL, 'zalo', 588, NULL, NULL, 1, '2024-12-09 08:53:55', '2024-12-09 08:53:55', 28),
+(605, 'Ms Hương', '0969042829', NULL, 'zalo', 589, NULL, NULL, 1, '2024-12-09 09:42:53', '2024-12-09 09:42:53', 28),
+(606, 'Mr Mazi', '0936163386', NULL, 'zalo', 590, NULL, NULL, 1, '2024-12-09 09:58:54', '2024-12-09 09:58:54', 2),
+(607, 'Ms An', '0398056681', NULL, 'zalo', 591, NULL, NULL, 1, '2024-12-09 10:26:46', '2024-12-09 10:26:46', 28),
+(608, 'Phương', '0962772126', NULL, 'zalo', 592, NULL, NULL, 1, '2024-12-09 11:09:43', '2024-12-09 11:09:43', 35),
+(609, 'Thu Thuỷ', '0934728793', NULL, 'zalo', 593, NULL, NULL, 1, '2024-12-09 11:50:40', '2024-12-09 11:50:40', 35),
+(610, 'Daisy Trần', '0967608123', NULL, 'zalo', 594, NULL, NULL, 1, '2024-12-09 11:57:19', '2024-12-09 11:57:19', 35),
+(611, 'Ms.Tuyết Nhi', '0915606868', '0915606868', 'zalo', 595, NULL, NULL, 1, '2024-12-09 13:18:57', '2024-12-09 13:18:57', 33),
+(612, 'Thuỳ Dương', '0372830383', NULL, 'zalo', 596, NULL, NULL, 1, '2024-12-09 14:05:56', '2024-12-09 14:05:56', 35),
+(613, 'Ms Phương', '0988656560', NULL, 'zalo', 597, NULL, NULL, 1, '2024-12-09 14:09:56', '2024-12-09 14:09:56', 2),
+(614, 'Chị vóc', '0988070884', NULL, 'zalo', 598, '[\"28\"]', NULL, 1, '2024-12-09 14:18:30', '2024-12-21 10:22:43', 57),
+(615, 'Ms Thư', '0985539809', NULL, 'zalo', 599, NULL, NULL, 1, '2024-12-09 15:39:04', '2024-12-09 15:39:04', 28),
+(616, 'Ms Lịch', '0905202343', NULL, 'zalo', 600, NULL, NULL, 1, '2024-12-10 08:20:23', '2024-12-10 08:20:23', 28),
+(617, 'Ms.Linh Đỗ', '0935188866', '0935188866', 'Zalo', 601, NULL, NULL, 1, '2024-12-10 09:22:54', '2024-12-10 09:22:54', 33),
+(618, 'Ms Trang', '0968801955', NULL, 'zalo', 602, NULL, NULL, 1, '2024-12-10 09:35:42', '2024-12-10 09:41:02', 28),
+(619, 'Ms.Hằng', '02743834331', '02743834331', 'zalo', 603, NULL, NULL, 1, '2024-12-10 09:56:49', '2024-12-10 09:56:49', 33),
+(620, 'Ms Thuỷ', '0979812069', NULL, 'zalo', 604, NULL, NULL, 1, '2024-12-10 11:22:50', '2024-12-10 11:22:50', 28),
+(621, 'Ms Tit Bông', '0865455299', NULL, 'zalo', 605, NULL, NULL, 1, '2024-12-10 14:50:08', '2024-12-10 14:50:08', 28),
+(622, 'Chị Trâm', '0903108079', NULL, 'zalo', 606, NULL, NULL, 1, '2024-12-10 15:10:03', '2024-12-10 15:10:03', 35),
+(623, 'Mr Đinh', '0763567823', NULL, 'zalo', 607, NULL, NULL, 1, '2024-12-10 15:21:53', '2024-12-10 15:21:53', 28),
+(624, 'Linh', '0828152525', NULL, 'zalo', 608, NULL, NULL, 1, '2024-12-10 15:44:56', '2024-12-10 15:44:56', 35),
+(625, 'Mr Trung', '0931080555', NULL, 'zalo', 609, NULL, NULL, 1, '2024-12-10 15:53:47', '2024-12-10 15:53:47', 2),
+(626, 'Ms.Gia Linh', '0978807492', '0978807492', 'Zalo', 610, NULL, NULL, 1, '2024-12-10 15:54:21', '2024-12-10 15:54:21', 33),
+(627, 'Ms Loan', '0919331975', NULL, 'zalo', 611, NULL, NULL, 1, '2024-12-10 15:59:57', '2024-12-10 15:59:57', 2),
+(628, 'Ms Liên', '0947751959', NULL, 'zalo', 612, NULL, NULL, 1, '2024-12-10 16:03:16', '2024-12-10 16:03:16', 2),
+(629, 'Ms.Ái Vy', '0896555888', '0896555888', 'zalo', 613, NULL, NULL, 1, '2024-12-10 16:12:44', '2024-12-10 16:12:44', 33),
+(630, 'Ms Lụa', '0975911341', NULL, 'zalo', 614, NULL, NULL, 1, '2024-12-10 17:17:57', '2024-12-10 17:17:57', 28),
+(631, 'Ms.Hạnh', '0973363615', '0973363615', 'Zalo', 615, NULL, NULL, 1, '2024-12-10 17:32:08', '2024-12-10 17:32:08', 33),
+(632, 'Ms Linh', '0978190939', NULL, 'zalo', 616, NULL, NULL, 1, '2024-12-11 09:08:13', '2024-12-11 09:08:13', 28),
+(633, 'Thương Thương', '0975370657', NULL, 'zalo', 617, NULL, NULL, 1, '2024-12-11 10:18:26', '2024-12-11 10:18:26', 35),
+(634, 'Ms Hiếu', '0976156486', NULL, 'zalo', 618, NULL, NULL, 1, '2024-12-11 10:27:14', '2024-12-11 10:27:14', 28),
+(635, 'Ms Thanh', '0849188121', NULL, 'zalo', 619, NULL, NULL, 1, '2024-12-11 10:54:26', '2024-12-11 10:54:26', 2),
+(636, 'Ms Hồng', '0963025845', NULL, 'zalo', 620, NULL, NULL, 1, '2024-12-11 12:41:59', '2024-12-11 12:41:59', 2),
+(637, 'Linh Chi', '0979666340', NULL, 'zalo', 621, NULL, NULL, 1, '2024-12-11 13:07:56', '2024-12-11 13:07:56', 35),
+(638, 'Thiều Hường', '0988318980', NULL, 'zalo', 622, NULL, NULL, 1, '2024-12-11 13:53:48', '2024-12-13 08:19:46', 35),
+(639, 'Chị Hồng', '0915945689', NULL, 'zalo', 623, NULL, NULL, 1, '2024-12-11 14:24:45', '2024-12-11 14:24:45', 57),
+(640, 'Nguyễn Danh Nam', '0981866388', NULL, 'zalo', 624, NULL, NULL, 1, '2024-12-11 14:38:02', '2024-12-11 14:38:02', 35),
+(641, 'Ms Phương', '0908847884', NULL, 'zalo', 625, NULL, NULL, 1, '2024-12-11 14:40:44', '2024-12-11 14:40:44', 2),
+(642, 'Ms Phương', '0946789520', NULL, 'zalo', 626, NULL, NULL, 1, '2024-12-11 16:06:34', '2024-12-11 16:06:34', 2),
+(643, 'Ms My', '0911063757', NULL, 'zalo', 627, NULL, NULL, 1, '2024-12-11 16:10:27', '2024-12-11 16:10:27', 28),
+(644, 'Nguyễn Thị Ngọc Tuyết', '0933938282', NULL, 'zalo', 628, NULL, NULL, 1, '2024-12-11 17:15:09', '2024-12-11 17:15:09', 35),
+(645, 'Ms.Minh Nguyệt', '0969357625', '0969357625', 'Zalo', 629, NULL, NULL, 1, '2024-12-11 17:18:42', '2024-12-11 17:18:42', 33),
+(646, 'Chị Hoa', '0985924756', NULL, 'zalo', 630, NULL, NULL, 1, '2024-12-12 09:17:08', '2024-12-12 09:17:08', 35),
+(647, 'Ms Huyền', '0961445697', NULL, 'zalo', 631, NULL, NULL, 1, '2024-12-12 09:18:19', '2024-12-12 09:18:19', 28),
+(648, 'Chị Ngọc', '0375985179', NULL, 'zalo', 632, NULL, NULL, 1, '2024-12-12 09:50:11', '2024-12-12 09:50:11', 57),
+(649, 'Chi Xuyến', '0399080232', NULL, 'zalo', 633, NULL, NULL, 1, '2024-12-12 09:51:08', '2024-12-12 09:51:08', 57),
+(650, 'Chi Cúc', '0943468677', NULL, 'zalo', 634, NULL, NULL, 1, '2024-12-12 09:52:06', '2024-12-12 09:52:06', 57),
+(651, 'Chị Hiền', '0904206482', NULL, 'zalo', 635, NULL, NULL, 1, '2024-12-12 09:58:33', '2024-12-12 09:58:33', 57),
+(652, 'Ms.Trang Nguyễn', '0972113333', '0972113333', 'Zalo', 636, NULL, NULL, 1, '2024-12-12 10:23:11', '2024-12-12 10:23:11', 33),
+(653, 'Ms.Nguyễn Phượng', '0966749458', '0966749458', 'Zalo', 637, NULL, NULL, 1, '2024-12-12 10:25:17', '2024-12-12 10:25:17', 33),
+(654, 'Ms Trang', '0392721413', NULL, 'zalo', 638, NULL, NULL, 1, '2024-12-12 11:55:53', '2024-12-12 11:55:53', 28),
+(656, 'Nguyễn Ngọc Bảo Hân', '0828807852', NULL, 'zalo', 640, NULL, NULL, 1, '2024-12-12 13:07:30', '2024-12-12 13:07:30', 35),
+(657, 'ST Phương Linh', '0977208613', NULL, 'zalo', 641, NULL, NULL, 1, '2024-12-12 15:02:16', '2024-12-12 15:02:16', 35),
+(658, 'Ms.Thanh Huyền', '0985470666', '0985470666', 'Zalo', 642, NULL, NULL, 1, '2024-12-12 15:26:53', '2024-12-12 15:26:53', 33),
+(659, 'Ms.Ngọc Hà', '0961473542', '0961473542', 'Zalo', 643, NULL, NULL, 1, '2024-12-12 16:16:42', '2024-12-12 16:16:42', 33),
+(660, 'Ms Loan', '0902278373', NULL, 'zalo', 644, NULL, NULL, 1, '2024-12-12 16:44:59', '2024-12-12 16:44:59', 28),
+(661, 'Nguyệt Tâm', '0982810831', NULL, 'zalo', 645, NULL, NULL, 1, '2024-12-12 17:08:32', '2024-12-12 17:08:32', 28),
+(662, 'Ms Hương', '0979572284', NULL, 'zalo', 646, '[\"35\"]', NULL, 1, '2024-12-12 17:28:37', '2024-12-25 11:02:50', 28),
+(663, 'Ms Quỳnh Anh', '0822379797', NULL, 'zalo', 647, NULL, NULL, 1, '2024-12-13 08:01:38', '2024-12-13 08:01:38', 28),
+(664, 'Ms Hà', '0939102173', NULL, 'zalo', 648, NULL, NULL, 1, '2024-12-13 09:14:18', '2024-12-13 09:14:18', 28),
+(665, 'Ms. Huyền Bùi', '0963900668', '0963900668', 'zalo', 649, NULL, NULL, 1, '2024-12-13 09:37:36', '2024-12-13 09:37:36', 33),
+(666, 'Ms Trang', '0912021218', NULL, 'zalo', 650, NULL, NULL, 1, '2024-12-13 10:11:43', '2024-12-13 10:11:43', 28),
+(667, 'Ms.Vũ Ngoan', '0906045869', '0906045869', 'Zalo', 651, NULL, NULL, 1, '2024-12-13 10:29:13', '2024-12-13 10:29:13', 33),
+(668, 'Ms Ngọc Anh', '0915122202', NULL, 'zalo', 652, NULL, NULL, 1, '2024-12-13 10:43:24', '2024-12-13 10:43:24', 28),
+(669, 'Đặng Như Hà', '0908800802', NULL, 'zalo', 653, NULL, NULL, 1, '2024-12-13 11:14:26', '2024-12-13 11:14:26', 35),
+(670, 'Ms Hạnh', '0916602008', NULL, 'zalo', 654, NULL, NULL, 1, '2024-12-13 11:38:36', '2024-12-13 11:38:36', 28),
+(671, 'Ms Hương Giang', '0982239080', NULL, 'zalo', 655, NULL, NULL, 1, '2024-12-13 13:10:20', '2024-12-13 13:10:20', 28),
+(672, 'Chị Mai', '0904798842', NULL, 'zalo', 656, NULL, NULL, 1, '2024-12-13 13:55:20', '2024-12-13 13:55:20', 35),
+(673, 'Phương Anh', '0332434111', NULL, 'zalo', 657, NULL, NULL, 1, '2024-12-13 14:07:12', '2024-12-13 14:07:12', 35),
+(674, 'Ms.Vũ Liên', '0964327873', '0964327873', 'Zalo', 658, NULL, NULL, 1, '2024-12-13 14:30:15', '2024-12-13 14:30:15', 33),
+(675, 'Ms Loan', '0948851158', NULL, 'zalo', 659, NULL, NULL, 1, '2024-12-13 16:05:44', '2024-12-13 16:05:44', 28),
+(676, 'Ms.Lê Phượng', '0966222383', '0966222383', 'zalo', 660, NULL, NULL, 1, '2024-12-13 16:24:31', '2024-12-13 16:24:31', 33),
+(677, 'Ms.Nhung', '0988301839', '0988301839', 'zalo', 661, NULL, NULL, 1, '2024-12-13 16:41:19', '2024-12-13 16:41:19', 33),
+(678, 'Ms Mai', '0987067208', NULL, 'zalo', 662, NULL, NULL, 1, '2024-12-13 16:55:11', '2024-12-13 16:55:11', 28),
+(679, 'Cô Kim Tuyến', '0946926898', NULL, 'zalo', 663, NULL, NULL, 1, '2024-12-14 08:58:46', '2024-12-14 08:58:46', 35),
+(680, 'Ms.Trang (1)', '0916053929', '0916053929', 'zalo', 664, NULL, NULL, 1, '2024-12-14 11:16:36', '2024-12-14 11:16:36', 33),
+(681, 'Mr Hùng', '0969607233', NULL, 'zalo', 665, NULL, NULL, 1, '2024-12-14 11:43:07', '2024-12-14 11:43:07', 28),
+(682, 'Anh Tú', '0966523888', NULL, 'zalo', 666, NULL, NULL, 1, '2024-12-14 12:10:02', '2024-12-14 12:11:53', 35),
+(683, 'Đặng Huệ', '0986489988', NULL, 'zalo', 667, NULL, NULL, 1, '2024-12-14 13:35:56', '2024-12-14 13:35:56', 35),
+(684, 'Ms Linh', '0962826898', NULL, 'zalo', 668, NULL, NULL, 1, '2024-12-14 14:12:11', '2024-12-14 14:12:11', 28),
+(685, 'Ms.Trần Nguyên', '0859575998', '0859575998', 'zalo', 669, NULL, NULL, 1, '2024-12-14 14:16:13', '2024-12-14 14:16:13', 33),
+(686, 'Ms Huyền', '0975033074', NULL, 'zalo', 670, NULL, NULL, 1, '2024-12-14 14:18:14', '2024-12-14 14:18:14', 28),
+(687, 'Ms.Hiền', '0983260509', '0983260509', 'Zalo', 671, NULL, NULL, 1, '2024-12-14 14:25:28', '2024-12-14 14:25:28', 33),
+(688, 'Nguyễn Trường Giang', '0973365755', NULL, 'zalo', 672, NULL, NULL, 1, '2024-12-14 15:46:10', '2024-12-14 15:46:10', 35),
+(689, 'Ms.Phương Ji', '0983512212', '0983512212', 'Zalo', 673, NULL, NULL, 1, '2024-12-14 16:06:59', '2024-12-14 16:06:59', 33),
+(690, 'Ms.Thuy Linh', '0395278661', '0395278661', 'zalo', 674, NULL, NULL, 1, '2024-12-14 16:11:09', '2024-12-28 16:43:12', 33),
+(691, 'Lona Nguyễn', '0973019889', NULL, 'zalo', 675, NULL, NULL, 1, '2024-12-14 16:21:25', '2024-12-14 16:21:36', 35),
+(692, 'Chị Thuý', '0854019044', NULL, 'zalo', 676, NULL, NULL, 1, '2024-12-14 17:02:23', '2024-12-14 17:02:23', 57),
+(693, 'Chị Cúc', '0916355259', NULL, 'zalo', 677, NULL, NULL, 1, '2024-12-14 17:09:14', '2024-12-14 17:09:14', 57),
+(694, 'Chị Lan Anh', '0977269435', NULL, 'zalo', 678, NULL, NULL, 1, '2024-12-14 17:30:23', '2024-12-14 17:30:23', 57),
+(695, 'Mạnh', '0987688087', NULL, 'zalo', 679, NULL, NULL, 1, '2024-12-14 17:54:15', '2024-12-14 17:54:15', 57),
+(696, 'Chị Anh', '0916978095', NULL, 'zalo', 680, NULL, NULL, 1, '2024-12-15 10:25:21', '2024-12-15 10:25:21', 57),
+(697, 'Nguyễn Kiều Oanh', '0823220000', NULL, 'zalo', 681, NULL, NULL, 1, '2024-12-15 10:26:00', '2024-12-15 10:26:00', 35),
+(698, 'Chị Hiền', '0977199788', NULL, 'zalo', 682, NULL, NULL, 1, '2024-12-15 10:27:03', '2024-12-15 10:27:03', 57),
+(699, 'Chị', '0971800066', NULL, 'zalo', 683, NULL, NULL, 1, '2024-12-15 10:28:01', '2024-12-15 10:28:01', 57),
+(700, 'Ms Mùi', '0822455999', NULL, 'zalo', 684, NULL, NULL, 1, '2024-12-15 10:35:58', '2024-12-15 10:35:58', 28),
+(701, 'Ms Linh', '0962994333', NULL, 'zalo', 685, NULL, NULL, 1, '2024-12-15 11:12:07', '2024-12-15 11:12:07', 28),
+(702, 'Ms Thanh Thuý', '0356086383', NULL, 'zalo', 686, NULL, NULL, 1, '2024-12-15 11:14:57', '2024-12-15 11:14:57', 28),
+(703, 'Mr Hà', '0944198858', NULL, 'zalo', 687, NULL, NULL, 1, '2024-12-15 11:27:19', '2024-12-15 11:27:19', 28),
+(704, 'Ms Trang', '0375482835', NULL, 'zalo', 688, NULL, NULL, 1, '2024-12-16 08:35:01', '2024-12-16 08:35:01', 28),
+(705, 'Ms Tit Mít', '0982995712', NULL, 'zalo', 689, NULL, NULL, 1, '2024-12-16 09:27:58', '2024-12-16 09:27:58', 28),
+(706, 'Chị Nguyệt', '0915558000', 'zalo', 'zalo', 690, NULL, NULL, 1, '2024-12-16 10:53:55', '2024-12-16 10:53:55', 10),
+(707, 'Mr Tuấn', '0977029666', NULL, 'zalo', 691, NULL, NULL, 1, '2024-12-16 11:12:07', '2024-12-16 11:12:07', 28),
+(708, 'Ms Hạnh', '0984379883', NULL, 'zalo', 692, NULL, NULL, 1, '2024-12-16 14:02:48', '2024-12-16 14:02:48', 28),
+(709, 'Ms Nga', '0936121512', NULL, 'zalo', 693, NULL, NULL, 1, '2024-12-16 15:26:35', '2024-12-16 15:26:35', 28),
+(710, 'Ái Linh', '0982222221', NULL, 'zalo', 694, NULL, NULL, 1, '2024-12-16 15:34:58', '2024-12-16 15:34:58', 35),
+(711, 'Ms Hà', '0968793429', NULL, 'zalo', 695, NULL, NULL, 1, '2024-12-16 15:43:26', '2024-12-16 15:43:26', 28),
+(712, 'Ms Huyền', '0918333326', NULL, 'zalo', 696, NULL, NULL, 1, '2024-12-16 16:39:08', '2024-12-16 16:39:08', 28),
+(713, 'Mr.Phan Hùng', '0966637580', '0966637580', 'Zalo', 697, NULL, NULL, 1, '2024-12-16 17:54:47', '2024-12-16 17:54:47', 33),
+(714, 'Cửa hàng vua đặc sản', '0936103102', '0936103102', 'Zalo', 698, NULL, NULL, 1, '2024-12-17 08:10:58', '2024-12-17 08:10:58', 33),
+(715, 'Ms.Lâm', '0974150967', '0974150967', 'Zalo', 699, NULL, NULL, 1, '2024-12-17 08:14:33', '2024-12-17 08:14:33', 33),
+(716, 'Thi Trần', '0986627199', NULL, 'zalo', 700, NULL, NULL, 1, '2024-12-17 08:35:32', '2024-12-17 08:35:32', 35),
+(717, 'Ms Mùa', '0948279783', NULL, 'zalo', 701, NULL, NULL, 1, '2024-12-17 09:34:30', '2024-12-17 09:34:30', 28),
+(718, 'Ms.Loan', '0945089099', '0945089099', 'Zalo', 702, NULL, NULL, 1, '2024-12-17 09:49:48', '2024-12-17 09:49:48', 33),
+(719, 'Ms.Trang Duy', '0036621553', '036621553', 'zalo', 703, NULL, NULL, 1, '2024-12-17 10:06:20', '2024-12-17 10:06:20', 33),
+(720, 'Ms Vân', '0905026517', NULL, 'zalo', 704, NULL, NULL, 1, '2024-12-17 10:07:47', '2024-12-17 10:07:47', 28),
+(721, 'Mr.Tùng Linh', '0822250719', '0822250719', 'Zalo', 705, NULL, NULL, 1, '2024-12-17 10:14:17', '2024-12-17 10:14:17', 33),
+(722, 'Nhân viên', '0966849598', NULL, 'zalo', 706, NULL, NULL, 1, '2024-12-17 10:15:20', '2024-12-17 10:15:20', 57),
+(723, 'Chị Mừng', '0974686840', NULL, 'zalo', 707, NULL, NULL, 1, '2024-12-17 10:32:51', '2024-12-17 10:32:51', 57),
+(724, 'Ms.Xuyến Rượu Vang', '0936888906', '0936888906', 'Zalo', 708, NULL, NULL, 1, '2024-12-17 10:39:18', '2024-12-17 10:39:18', 33),
+(725, 'Ms Hải', '0906006786', NULL, 'zalo', 709, NULL, NULL, 1, '2024-12-17 11:03:46', '2024-12-17 11:03:46', 2),
+(726, 'Mr Trang', '0376400922', NULL, 'zalo', 710, NULL, NULL, 1, '2024-12-17 11:12:32', '2024-12-17 11:12:32', 28),
+(727, 'Ms Giang', '0564882111', NULL, 'zalo', 711, NULL, NULL, 1, '2024-12-17 11:25:55', '2024-12-17 11:25:55', 2),
+(728, 'Ms.Nga - Kara', '0913597556', '0913597556', 'Zalo', 712, NULL, NULL, 1, '2024-12-17 11:39:13', '2024-12-17 11:39:13', 33),
+(729, 'MS.Huyền Trang', '0914788164', '0914788164', 'Zalo', 713, NULL, NULL, 1, '2024-12-17 11:52:53', '2024-12-17 11:52:53', 33),
+(730, 'Ms Vy', '0948274841', NULL, 'zalo', 714, NULL, NULL, 1, '2024-12-17 12:04:12', '2024-12-17 12:04:12', 28),
+(731, 'Duy Hiệp', '0978985489', NULL, 'facebook', 715, NULL, NULL, 1, '2024-12-17 14:23:55', '2024-12-17 14:23:55', 35),
+(732, 'Ms Thuỷ', '0963891591', NULL, 'zalo', 716, NULL, NULL, 1, '2024-12-17 14:56:43', '2024-12-17 14:56:43', 2),
+(733, 'Ms Nguyệt', '0983239111', NULL, 'zalo', 717, NULL, NULL, 1, '2024-12-17 15:06:40', '2024-12-17 15:06:40', 2),
+(734, 'Ms.Ngọc Anh - HQT', '0858006714', '0858006714', 'Zalo', 718, NULL, NULL, 1, '2024-12-17 15:07:48', '2024-12-17 15:07:48', 33),
+(735, 'Mr Giáp', '09868246617', NULL, 'zalo', 719, NULL, NULL, 1, '2024-12-17 16:06:14', '2024-12-17 16:06:14', 28),
+(736, 'Ms. In Trường Phát', '0916271984', '0916271984', 'zalo', 720, NULL, NULL, 1, '2024-12-17 16:34:56', '2024-12-17 16:34:56', 33),
+(737, 'Ms.Minh', '0982155329', '0982155329', 'Zalo', 721, NULL, NULL, 1, '2024-12-17 16:36:58', '2024-12-17 16:36:58', 33),
+(738, 'Ms Huyền', '0395258763', NULL, 'zalo', 722, NULL, NULL, 1, '2024-12-17 16:44:28', '2024-12-17 16:44:28', 2),
+(739, 'Chị Vân', '09488855662', NULL, 'zalo', 723, NULL, NULL, 1, '2024-12-17 16:48:19', '2024-12-17 16:48:19', 57),
+(740, 'Ms.Bích Huệ', '0963526970', '0963526970', 'Zalo', 724, NULL, NULL, 1, '2024-12-17 16:57:43', '2024-12-17 16:57:43', 33),
+(741, 'Ms Bến Bông', '0986840098', NULL, 'zalo', 725, NULL, NULL, 1, '2024-12-18 07:56:11', '2024-12-18 07:56:11', 28),
+(742, 'Ms Thoa', '0336837502', NULL, 'zalo', 726, NULL, NULL, 1, '2024-12-18 09:43:38', '2024-12-18 09:43:38', 28),
+(743, 'Chị Chi', '0905339186', NULL, 'zalo', 727, NULL, NULL, 1, '2024-12-18 10:15:51', '2024-12-18 10:15:51', 35),
+(744, 'Hải Nguyễn Korea', '0842434334', NULL, 'zalo', 728, NULL, NULL, 1, '2024-12-18 10:37:03', '2024-12-18 10:37:03', 35),
+(745, 'Chị Ngân', '0938171654', NULL, 'zalo', 729, NULL, NULL, 1, '2024-12-18 11:01:24', '2024-12-18 11:01:24', 35),
+(746, 'Mr Hưởng', '0989916542', NULL, 'zalo', 730, NULL, NULL, 1, '2024-12-18 11:15:27', '2024-12-18 11:15:27', 28),
+(747, 'Mr Hưng', '0905344888', NULL, 'zalo', 731, NULL, NULL, 1, '2024-12-18 11:37:00', '2024-12-18 11:37:00', 28),
+(748, 'Ms Phạm Lợi', '0962613133', NULL, 'zalo', 732, NULL, NULL, 1, '2024-12-18 12:05:35', '2024-12-18 12:05:35', 2),
+(749, 'Ms Nhung', '0904158158', NULL, 'zalo', 733, NULL, NULL, 1, '2024-12-18 13:32:48', '2024-12-18 13:32:48', 28),
+(750, 'Mr.Quy', '0972556685', '0972556685', 'Zalo', 734, NULL, NULL, 1, '2024-12-18 15:12:16', '2024-12-18 15:12:16', 33),
+(751, 'Ms Trà', '0968609298', NULL, 'zalo', 735, NULL, NULL, 1, '2024-12-18 15:23:40', '2024-12-18 15:23:40', 28),
+(752, 'Ms Giang', '0986969717', NULL, 'zalo', 736, NULL, NULL, 1, '2024-12-18 15:32:11', '2024-12-18 15:32:11', 2),
+(753, 'Nguyễn Thị Hiền', '0983401929', NULL, 'zalo', 737, NULL, NULL, 1, '2024-12-18 15:49:26', '2024-12-18 15:49:26', 35),
+(754, 'Ms Mây', '0974726272', NULL, 'zalo', 738, NULL, NULL, 1, '2024-12-19 08:14:31', '2024-12-19 08:14:31', 2),
+(755, 'Mr.Khoa', '0941570066', '0941570066', 'Zalo', 739, NULL, NULL, 1, '2024-12-19 09:00:14', '2024-12-19 09:00:14', 33),
+(756, 'Ms Hà', '0916022021', NULL, 'zalo', 740, NULL, NULL, 1, '2024-12-19 10:05:49', '2024-12-19 10:05:49', 28),
+(757, 'Mr Quân', '0984289138', NULL, 'zalo', 741, NULL, NULL, 1, '2024-12-19 11:39:03', '2024-12-19 11:39:03', 28),
+(758, 'Quỳnh Anh', '0902212929', NULL, 'zalo', 742, NULL, NULL, 1, '2024-12-19 12:06:35', '2024-12-19 12:06:35', 35),
+(759, 'Ms.Lê Thảo', '0978861961', '0978861961', 'zalo', 743, NULL, NULL, 1, '2024-12-19 12:55:30', '2024-12-19 12:55:30', 33),
+(760, 'Mr.An - BiDesign', '0973062182', '0973062182', 'zalo', 744, NULL, NULL, 1, '2024-12-19 13:20:34', '2024-12-19 13:20:34', 33),
+(761, 'Chị Linh', '0973002105', NULL, 'zalo', 745, NULL, NULL, 1, '2024-12-19 14:37:08', '2025-01-04 17:10:54', 35),
+(762, 'Ms Hương', '0972146331', NULL, 'zalo', 746, NULL, NULL, 1, '2024-12-19 14:45:23', '2024-12-19 14:45:23', 28),
+(763, 'Mr Tuấn', '0978598866', NULL, 'zalo', 747, NULL, NULL, 1, '2024-12-19 14:58:19', '2024-12-19 14:58:19', 28),
+(764, 'Nhung Vũ', '0358502365', NULL, 'zalo', 748, NULL, NULL, 1, '2024-12-19 15:33:19', '2024-12-19 15:33:19', 35),
+(765, 'Mr.Nguyễn Huynh', '0915140171', '0915140171', 'zalo', 749, NULL, NULL, 1, '2024-12-19 15:41:23', '2024-12-19 15:41:23', 33),
+(766, 'Ms.Ngọc Tú', '0974671516', '0974671516', 'zalo', 750, NULL, NULL, 1, '2024-12-19 16:39:55', '2024-12-19 16:39:55', 33),
+(767, 'Mr Khánh', '0977082278', NULL, 'zalo', 751, NULL, NULL, 1, '2024-12-20 09:03:56', '2024-12-20 09:03:56', 28),
+(768, 'Ms Hiền', '0963584958', NULL, 'zalo', 752, NULL, NULL, 1, '2024-12-20 09:29:34', '2024-12-20 09:29:34', 2),
+(769, 'Ms.Ngọc Hương', '0946170291', '0946170291', 'zalo', 753, NULL, NULL, 1, '2024-12-20 10:00:44', '2024-12-20 10:00:44', 33),
+(770, 'Chị Thu', '098104010', 'zalo', 'zalo', 754, NULL, NULL, 1, '2024-12-20 10:27:16', '2024-12-20 10:27:16', 10),
+(771, 'Ms Ly', '0989645504', NULL, 'zalo', 755, NULL, NULL, 1, '2024-12-20 10:50:19', '2024-12-20 10:50:19', 28),
+(772, 'Mr Duy', '0903021798', NULL, 'zalo', 756, NULL, NULL, 1, '2024-12-20 10:55:53', '2024-12-20 10:55:53', 28),
+(773, 'Mr Dương', '0981535133', NULL, 'zalo', 757, NULL, NULL, 1, '2024-12-20 11:21:46', '2024-12-20 11:21:46', 28),
+(774, 'Ms.Ngân Thương', '0978127832', '0978127832', 'zalo', 758, NULL, NULL, 1, '2024-12-20 11:41:18', '2024-12-20 11:41:18', 33),
+(775, 'MR Thắng', '0904822729', NULL, 'zalo', 759, NULL, NULL, 1, '2024-12-20 12:03:35', '2024-12-20 12:03:35', 28),
+(776, 'Ms Dung', '0986193893', NULL, 'zalo', 760, NULL, NULL, 1, '2024-12-20 15:11:58', '2024-12-20 15:11:58', 2),
+(777, 'Ms.Linh Nhi', '0912785222', '0912785222', 'zalo', 761, NULL, NULL, 1, '2024-12-20 15:28:28', '2024-12-20 15:28:28', 33),
+(778, 'Ms.Ngọc', '0974858646', NULL, 'zalo', 762, NULL, NULL, 1, '2024-12-20 15:43:48', '2024-12-20 15:43:48', 35),
+(779, 'Ms Giang', '0962523291', NULL, 'zalo', 763, NULL, NULL, 1, '2024-12-20 16:34:06', '2024-12-20 16:34:06', 2),
+(780, 'Ms. Hoa Flowers', '0971791128', '0971791128', 'zalo', 764, NULL, '0971791128', 1, '2024-12-20 17:38:01', '2024-12-31 17:42:44', 33),
+(781, 'Mrs Hằng', '0936764366', NULL, 'zalo', 765, NULL, NULL, 1, '2024-12-21 08:35:55', '2024-12-21 08:35:55', 28),
+(782, 'Ms Hằng', '0988737572', NULL, 'zalo', 766, NULL, NULL, 1, '2024-12-21 13:32:59', '2024-12-21 13:32:59', 28),
+(783, 'Chị Vân', '0965639089', NULL, 'zalo', 767, NULL, NULL, 1, '2024-12-21 14:31:54', '2024-12-21 14:31:54', 35),
+(784, 'Mr Hải', '0962773999', NULL, 'zalo', 768, NULL, NULL, 1, '2024-12-21 14:32:01', '2024-12-21 14:32:01', 2),
+(785, 'Ms Hạnh', '0378419764', NULL, 'zalo', 769, NULL, NULL, 1, '2024-12-21 14:46:30', '2024-12-21 14:46:30', 2),
+(786, 'Ms.Vũ Hạnh', '0963793444', '0963793444', 'Zalo', 770, NULL, NULL, 1, '2024-12-21 14:50:25', '2024-12-21 14:50:25', 33),
+(787, 'Mr Khánh', '0768694922', NULL, 'zalo', 771, NULL, NULL, 1, '2024-12-21 15:42:47', '2024-12-21 15:42:47', 28),
+(788, 'Ms.Jenifer', '0932223000', NULL, 'zalo', 772, NULL, NULL, 1, '2024-12-21 15:45:53', '2024-12-21 15:45:53', 35),
+(789, 'Mr.Lê Luật', '0964805385', '0964805385', 'zalo', 773, NULL, NULL, 1, '2024-12-21 16:11:32', '2024-12-21 16:11:32', 33),
+(790, 'Chị Hà Tùng', '0906261234', NULL, 'zalo', 774, NULL, NULL, 1, '2024-12-21 16:48:28', '2024-12-21 16:48:28', 57),
+(791, 'Ms Trúc', '0968156315', NULL, 'zalo', 775, NULL, NULL, 1, '2024-12-22 09:07:27', '2024-12-22 09:07:27', 28),
+(792, 'Ms Hoà', '0397785899', NULL, 'zalo', 776, NULL, NULL, 1, '2024-12-22 10:02:06', '2024-12-22 10:02:06', 28),
+(793, 'Mr.Hoà', '0912886885', NULL, 'zalo', 777, NULL, NULL, 1, '2024-12-22 11:01:26', '2024-12-22 11:01:26', 35),
+(794, 'Ms.Hoàng Thịnh', '0945133368', '0945133368', 'Zalo', 778, NULL, NULL, 1, '2024-12-23 08:29:43', '2024-12-23 08:29:43', 33),
+(795, 'Mr Thắng', '0902164888', NULL, 'zalo', 779, NULL, NULL, 1, '2024-12-23 09:05:49', '2024-12-23 09:10:04', 28),
+(796, 'Ms Hoa', '0818185555', NULL, 'zalo', 780, NULL, NULL, 1, '2024-12-23 09:49:32', '2024-12-23 09:49:32', 2),
+(797, 'Ms Minh Khang', '0787183939', NULL, 'zalo', 781, NULL, NULL, 1, '2024-12-23 10:07:02', '2024-12-23 10:07:02', 28),
+(798, 'Hà Phương', '0332593381', NULL, 'zalo', 782, NULL, NULL, 1, '2024-12-23 10:28:50', '2024-12-23 10:28:50', 35),
+(799, 'Ms.Thảo', '0966193681', NULL, 'zalo', 783, NULL, NULL, 1, '2024-12-23 10:52:34', '2024-12-23 10:52:34', 35),
+(800, 'Ms.Hà', '0819816888', NULL, 'zalo', 784, NULL, NULL, 1, '2024-12-23 12:03:01', '2024-12-23 12:03:01', 35),
+(801, 'Ms.Phượng Vương', '123456', '123456', 'zalo', 785, NULL, NULL, 1, '2024-12-23 13:48:09', '2024-12-23 13:48:09', 33),
+(802, 'Thuỳ Dương', '0988274754', NULL, 'zalo', 786, NULL, NULL, 1, '2024-12-23 14:05:03', '2024-12-23 14:06:57', 35),
+(803, 'Ms.Ly', '0949099486', NULL, 'zalo', 787, NULL, NULL, 1, '2024-12-23 14:37:57', '2024-12-23 14:37:57', 35),
+(804, 'Ms Hằng', '0971257268', NULL, 'zalo', 788, NULL, NULL, 1, '2024-12-23 14:41:30', '2024-12-23 14:41:30', 28),
+(805, 'Ms Thuỷ', '0914665098', NULL, 'zalo', 789, NULL, NULL, 1, '2024-12-23 14:54:59', '2024-12-23 14:54:59', 2),
+(806, 'Ms.Thắm', '0912715649', NULL, 'zalo', 790, NULL, NULL, 1, '2024-12-23 15:50:41', '2024-12-23 15:50:41', 35),
+(807, 'Chị Thêu', '0986917883', NULL, 'zalo', 791, NULL, NULL, 1, '2024-12-23 16:18:10', '2024-12-23 16:58:13', 35),
+(808, 'Ms.Thanh Thu', '0789338859', '0789338859', 'Zalo', 792, NULL, NULL, 1, '2024-12-23 16:32:29', '2024-12-23 16:32:29', 33),
+(809, 'Mr Tuấn', '0987921272', NULL, 'zalo', 793, NULL, NULL, 1, '2024-12-23 16:56:48', '2024-12-23 16:56:48', 2),
+(810, 'Ms.An Liên', '0906262086', '0906262086', 'zalo', 794, NULL, NULL, 1, '2024-12-23 17:25:24', '2024-12-23 17:25:24', 33),
+(811, 'Ms Oanh', '0907397747', NULL, 'zalo', 795, NULL, NULL, 1, '2024-12-23 17:32:52', '2024-12-23 17:32:52', 28),
+(812, 'Ms Mai Anh', '0962091592', NULL, 'zalo', 796, NULL, NULL, 1, '2024-12-24 09:44:14', '2024-12-24 09:48:37', 28),
+(813, 'Ms Hiền', '0918161036', NULL, 'zalo', 797, NULL, NULL, 1, '2024-12-24 14:46:48', '2024-12-24 14:46:48', 28),
+(814, 'Mr Trinh', '0373723342', NULL, 'zalo', 798, NULL, NULL, 1, '2024-12-25 08:29:57', '2024-12-25 08:29:57', 28),
+(815, 'Mr Ngọc', '0961138828', NULL, 'zalo', 799, NULL, NULL, 1, '2024-12-25 08:57:51', '2024-12-25 08:57:51', 2),
+(816, 'Chị Hương', '0906156599', NULL, 'zalo', 800, NULL, NULL, 1, '2024-12-25 09:17:04', '2024-12-25 09:17:04', 35),
+(817, 'Chị Nga', '0326805656', NULL, 'zalo', 801, NULL, NULL, 1, '2024-12-25 09:47:59', '2024-12-25 09:47:59', 35),
+(818, 'Ms Hảo', '0974844862', NULL, 'zalo', 802, NULL, NULL, 1, '2024-12-25 10:10:31', '2024-12-25 10:10:31', 28),
+(819, 'Ms Phương', '0914855781', NULL, 'zalo', 803, NULL, NULL, 1, '2024-12-25 10:45:12', '2024-12-25 10:45:12', 2),
+(820, 'Chị Thư Anh', '0979717428', NULL, 'zalo', 804, NULL, NULL, 1, '2024-12-25 15:02:26', '2024-12-25 15:02:26', 35),
+(821, 'Ms Uyên', '0933279617', NULL, 'zalo', 805, NULL, NULL, 1, '2024-12-25 15:27:21', '2024-12-25 15:27:21', 28),
+(822, 'Ms Trang', '0937679686', NULL, 'zalo', 806, NULL, NULL, 1, '2024-12-25 16:06:57', '2024-12-25 16:06:57', 28),
+(823, 'Ms.Mt Thảo', '0979817933', '0979817933', 'zalo', 807, NULL, NULL, 1, '2024-12-25 17:21:08', '2024-12-25 17:21:08', 33),
+(824, 'Ms.Lê Hiền', '0902119696', '0902119696', 'zalo', 808, NULL, NULL, 1, '2024-12-25 17:37:25', '2024-12-25 17:37:25', 33),
+(825, 'Chị Thư', '0349348916', NULL, 'zalo', 809, NULL, NULL, 1, '2024-12-26 08:32:21', '2024-12-26 08:32:21', 35),
+(826, 'Ms Thuỷ', '0928922989', NULL, 'zalo', 810, NULL, NULL, 1, '2024-12-26 08:40:53', '2024-12-26 08:49:59', 28),
+(827, 'Ms.Linh Thu', '0981970916', '0981970916', 'zalo', 811, NULL, NULL, 1, '2024-12-26 08:42:30', '2024-12-26 08:42:30', 33),
+(828, 'Chị Vinh', '0973860728', NULL, 'zalo', 812, NULL, NULL, 1, '2024-12-26 09:23:49', '2024-12-26 09:23:49', 35),
+(829, 'Ms Thu', '0936636856', NULL, 'zalo', 813, NULL, NULL, 1, '2024-12-26 10:02:28', '2024-12-26 10:02:28', 28),
+(830, 'Ms.Hồng', '0971791128', '0971791128', 'zalo', 814, NULL, NULL, 1, '2024-12-26 10:41:16', '2024-12-26 10:41:16', 33),
+(831, 'Ms Huyền', '0984354235', NULL, 'zalo', 815, NULL, NULL, 1, '2024-12-26 11:04:45', '2024-12-26 11:04:45', 28),
+(832, 'Mr Cảnh', '0375035713', NULL, 'zalo', 816, NULL, NULL, 1, '2024-12-26 11:27:01', '2024-12-26 11:27:01', 28),
+(833, 'Ms Tuệ An', '0989466622', NULL, 'zalo', 817, NULL, NULL, 1, '2024-12-26 14:22:27', '2024-12-26 14:22:27', 28),
+(834, 'Anh Diễn', '0973361168', NULL, 'zalo', 818, NULL, NULL, 1, '2024-12-26 14:29:34', '2024-12-26 14:29:34', 35),
+(835, 'Chị Hoa', '0389316389', NULL, 'zalo', 819, NULL, NULL, 1, '2024-12-26 14:40:16', '2024-12-26 14:40:16', 35),
+(836, 'Long Cao', '0774212595', NULL, 'zalo', 820, NULL, NULL, 1, '2024-12-26 15:15:38', '2024-12-26 15:15:38', 35),
+(837, 'Ms Ánh', '0965466158', NULL, 'zalo', 821, NULL, NULL, 1, '2024-12-26 16:23:34', '2024-12-26 16:23:34', 28),
+(838, 'Ms Thoa', '0363879333', NULL, 'zalo', 822, NULL, NULL, 1, '2024-12-26 16:37:58', '2024-12-26 16:37:58', 28),
+(839, 'Ms Thu Anh', '0816856669', NULL, 'zalo', 823, NULL, NULL, 1, '2024-12-26 17:45:35', '2024-12-26 17:45:35', 2),
+(840, 'Ms Phương', '0975389698', NULL, 'zalo', 824, NULL, NULL, 1, '2024-12-26 17:58:22', '2024-12-26 17:58:22', 28),
+(841, 'Ms Hien', '0773388686', NULL, 'zalo', 825, NULL, NULL, 1, '2024-12-27 08:07:22', '2024-12-27 08:07:22', 28),
+(842, 'Chị Dương', '0971786304', NULL, 'zalo', 826, NULL, NULL, 1, '2024-12-27 08:32:39', '2024-12-27 08:32:39', 35),
+(843, 'Mr Thành', '0916888916', NULL, 'zalo', 827, NULL, NULL, 1, '2024-12-27 08:33:59', '2024-12-27 08:33:59', 28),
+(844, 'Mr Thành', '0982601256', NULL, 'zalo', 828, NULL, NULL, 1, '2024-12-27 09:24:43', '2024-12-27 09:24:43', 28),
+(845, 'Ms.Thu', '0339453631', '0339453631', 'zalo', 829, NULL, NULL, 1, '2024-12-27 09:30:05', '2024-12-27 09:30:05', 33),
+(846, 'Ms thongtran', '0976391604', NULL, 'zalo', 830, NULL, NULL, 1, '2024-12-27 09:59:45', '2024-12-27 09:59:45', 28),
+(847, 'Mr Quyết', '0936014696', NULL, 'zalo', 831, NULL, NULL, 1, '2024-12-27 10:02:52', '2024-12-27 10:02:52', 28),
+(848, 'Mr Sang', '0363567716', NULL, 'zalo', 832, NULL, NULL, 1, '2024-12-27 11:12:31', '2024-12-27 11:12:31', 28),
+(849, 'Ms.Thoa Nguyễn', '0986482222', '0986482222', 'zalo', 833, NULL, NULL, 1, '2024-12-27 11:50:59', '2024-12-27 11:50:59', 33),
+(850, 'Ms Nhung', '0906028828', NULL, 'zalo', 834, NULL, NULL, 1, '2024-12-27 13:39:52', '2024-12-27 13:49:52', 28);
+INSERT INTO `represents` (`id`, `name`, `phone`, `telephone`, `email`, `customer`, `sale`, `note`, `act`, `created_at`, `updated_at`, `created_by`) VALUES
+(851, 'An Lê', '0967626136', NULL, 'zalo', 835, NULL, NULL, 1, '2024-12-27 15:32:46', '2024-12-27 15:32:46', 35),
+(852, 'Ms Thư', '0966279284', NULL, 'zalo', 836, NULL, NULL, 1, '2024-12-27 15:36:40', '2024-12-27 15:36:40', 28),
+(853, 'Mr.Tuyên', '0978433535', NULL, 'zalo', 837, NULL, NULL, 1, '2024-12-27 17:08:58', '2024-12-27 17:08:58', 35),
+(854, 'Ms Nhất', '0904002968', NULL, 'zalo', 838, NULL, NULL, 1, '2024-12-27 17:23:15', '2024-12-27 17:23:15', 28),
+(855, 'Tăng Anh', '0969336783', NULL, 'zalo', 839, NULL, NULL, 1, '2024-12-28 09:08:59', '2024-12-28 09:08:59', 35),
+(856, 'Ms Thu', '0974026812', NULL, 'zalo', 840, NULL, NULL, 1, '2024-12-28 09:50:21', '2024-12-28 09:50:21', 28),
+(857, 'Mr.Hùng', '0344555567', NULL, 'zalo', 841, NULL, NULL, 1, '2024-12-28 10:02:45', '2024-12-28 10:02:45', 35),
+(858, 'Ms Huệ', '0397540027', NULL, 'zalo', 842, NULL, NULL, 1, '2024-12-28 10:13:58', '2024-12-28 10:13:58', 2),
+(859, 'Ms Hoài', '0912357369', NULL, 'zalo', 843, NULL, NULL, 1, '2024-12-28 10:39:08', '2024-12-28 10:39:08', 2),
+(860, 'Ms Huyền', '09477537666', NULL, 'zalo', 844, NULL, NULL, 1, '2024-12-28 10:53:38', '2024-12-28 10:53:38', 28),
+(861, 'Ms Trang', '0919306275', NULL, 'zalo', 845, NULL, NULL, 1, '2024-12-28 11:10:51', '2024-12-28 11:10:51', 28),
+(862, 'Ms Nga', '0972557369', NULL, 'zalo', 846, NULL, NULL, 1, '2024-12-28 11:37:55', '2024-12-28 11:37:55', 2),
+(863, 'Ms Linh', '0969576572', NULL, 'zalo', 847, NULL, NULL, 1, '2024-12-28 12:07:42', '2024-12-28 12:07:42', 2),
+(864, 'Ms Hương', '0932310268', NULL, 'zalo', 848, NULL, NULL, 1, '2024-12-28 13:55:06', '2024-12-28 13:55:06', 28),
+(865, 'Ms An Khang', '0915427812', NULL, 'zalo', 849, NULL, NULL, 1, '2024-12-28 15:22:09', '2024-12-28 15:22:09', 28),
+(866, 'Mr.Nam', '0983681194', NULL, 'zalo', 850, NULL, NULL, 1, '2024-12-28 15:32:26', '2024-12-28 15:44:36', 35),
+(867, 'Mr.Cường', '0858655585', NULL, 'zalo', 851, NULL, NULL, 1, '2024-12-28 16:06:08', '2024-12-28 16:06:08', 35),
+(868, 'Uyên Nhi', '0937734896', NULL, 'zalo', 852, NULL, NULL, 1, '2024-12-28 16:43:41', '2024-12-28 16:43:41', 35),
+(869, 'Na na', '0986276166', NULL, 'zalo', 853, NULL, NULL, 1, '2024-12-28 17:02:25', '2024-12-28 17:02:25', 35),
+(870, 'Ms Mai', '0971731983', NULL, 'zalo', 854, NULL, NULL, 1, '2024-12-29 11:12:41', '2024-12-29 11:12:41', 2),
+(871, 'Ms.Khuc', '0987218160', NULL, 'zalo', 855, NULL, NULL, 1, '2024-12-29 11:42:00', '2024-12-29 11:42:00', 35),
+(872, 'Ms.Nguyễn Hiên', '0962799483', '0962799483', 'Zalo', 856, NULL, NULL, 1, '2024-12-29 12:13:07', '2024-12-29 12:13:07', 33),
+(873, 'Ms.Thu Hiền', '0989340190', '0989340190', 'Zalo', 857, NULL, NULL, 1, '2024-12-29 15:29:14', '2024-12-29 15:29:14', 33),
+(874, 'Anh', '0877544444', NULL, 'zalo', 858, NULL, NULL, 1, '2024-12-29 15:49:46', '2024-12-29 15:49:46', 35),
+(875, 'Ms Hường', '0979540010', NULL, 'zalo', 859, NULL, NULL, 1, '2024-12-30 08:24:41', '2024-12-30 08:24:41', 28),
+(876, 'Ms Nguyệt', '0394352941', NULL, 'zalo', 860, NULL, NULL, 1, '2024-12-30 08:49:17', '2024-12-30 08:49:17', 2),
+(877, 'Ms Sen', '0328947346', NULL, 'zalo', 861, NULL, NULL, 1, '2024-12-30 10:06:47', '2024-12-30 10:06:47', 28),
+(878, 'Ms Linh', '0392638998', NULL, 'zalo', 862, NULL, NULL, 1, '2024-12-30 11:01:19', '2024-12-30 11:01:19', 28),
+(879, 'Ms.Hồng Anh', '0986819783', NULL, 'zalo', 863, NULL, NULL, 1, '2024-12-30 11:35:34', '2024-12-30 11:35:34', 35),
+(880, 'Mrs. Bắp', '0906196119', NULL, 'zalo', 864, NULL, NULL, 1, '2024-12-30 13:38:13', '2024-12-30 13:38:13', 35),
+(881, 'Mr.Cường', '0904759489', NULL, 'zalo', 865, NULL, NULL, 1, '2024-12-30 14:21:49', '2024-12-30 14:21:49', 35),
+(882, 'Ms Hiền', '0983994969', NULL, 'zalo', 866, NULL, NULL, 1, '2024-12-30 14:22:54', '2024-12-30 14:22:54', 28),
+(883, 'Mr Tuấn Anh', '0867070222', NULL, 'zalo', 867, NULL, NULL, 1, '2024-12-30 15:09:01', '2024-12-30 15:09:01', 28),
+(884, 'Ms Linh', '0348312601', NULL, 'zalo', 868, NULL, NULL, 1, '2024-12-30 15:15:23', '2024-12-30 15:15:23', 28),
+(885, 'Ms.Chung', '0393499922', NULL, 'zalo', 869, NULL, NULL, 1, '2024-12-30 15:24:53', '2024-12-30 15:24:53', 35),
+(886, 'Ms.Mai Lương', '0359426888', '0359426888', 'Zalo', 870, NULL, NULL, 1, '2024-12-30 16:11:13', '2024-12-30 16:11:13', 33),
+(887, 'Mrs. Quỳnh', '0916016123', NULL, 'zalo', 871, NULL, NULL, 1, '2024-12-30 16:29:59', '2024-12-30 16:29:59', 35),
+(888, 'Le Nhan', '0912838339', NULL, 'zalo', 872, NULL, NULL, 1, '2024-12-30 17:04:59', '2024-12-30 17:04:59', 35),
+(889, 'Ms.Linh', '0978303551', NULL, 'zalo', 873, NULL, NULL, 1, '2024-12-30 17:26:07', '2024-12-30 17:26:07', 35),
+(890, 'Ms.Minh Hằng', '0972938669', '0972938669', 'zalo', 874, NULL, NULL, 1, '2024-12-30 17:32:10', '2024-12-30 17:32:10', 33),
+(891, 'Ms.Diệp', '0965472128', NULL, 'zalo', 875, NULL, NULL, 1, '2024-12-31 08:32:12', '2025-01-05 15:56:49', 35),
+(892, 'Ms Tuyết', '0969002294', NULL, 'zalo', 876, NULL, NULL, 1, '2024-12-31 08:38:57', '2024-12-31 08:38:57', 28),
+(893, 'Chị Nguyệt', '0907655156', NULL, 'zalo', 877, NULL, NULL, 1, '2024-12-31 08:43:59', '2024-12-31 08:43:59', 35),
+(894, 'Ms.Huyền', '0928545356', NULL, 'zalo', 878, NULL, NULL, 1, '2024-12-31 10:08:26', '2024-12-31 10:08:26', 35),
+(895, 'Ms.Huyền', '0967591028', NULL, 'zalo', 879, NULL, NULL, 1, '2024-12-31 10:26:37', '2024-12-31 10:26:37', 35),
+(896, 'Ms.Thuỳ Linh', '0987520527', '0987520527', 'zalo', 880, NULL, NULL, 1, '2024-12-31 10:33:19', '2024-12-31 10:33:19', 33),
+(897, 'Ms Hân', '0353818822', NULL, 'zalo', 881, NULL, NULL, 1, '2024-12-31 11:09:53', '2024-12-31 11:09:53', 28),
+(898, 'Ms Thương', '0373451585', NULL, 'zalo', 882, NULL, NULL, 1, '2024-12-31 11:19:15', '2024-12-31 11:19:15', 2),
+(899, 'Ms.Hồng Seo', '0972724626', '0972724626', 'Zalo', 883, NULL, NULL, 1, '2024-12-31 11:54:57', '2024-12-31 11:54:57', 33),
+(900, 'Ms.Thanh', '0988555034', '0988555034', 'Zalo', 884, NULL, NULL, 1, '2024-12-31 11:57:50', '2024-12-31 11:57:50', 33),
+(901, 'Chị Phương', '0984513643', NULL, 'zalo', 885, NULL, NULL, 1, '2024-12-31 13:40:13', '2024-12-31 13:40:13', 35),
+(902, 'Ms.Huệ Dư', '0327947060', '0327947060', 'Zalo', 886, '[\"28\"]', NULL, 1, '2024-12-31 13:54:32', '2024-12-31 16:32:55', 33),
+(903, 'Mr Công Lý', '0365658877', NULL, 'zalo', 887, NULL, NULL, 1, '2024-12-31 14:15:22', '2024-12-31 14:15:22', 2),
+(904, 'Ms Hiền', '0384594286', NULL, 'zalo', 888, NULL, NULL, 1, '2024-12-31 14:36:36', '2024-12-31 14:36:36', 28),
+(905, 'Mr.Hưng Nhữ ĐÌnh', '0976820693', '0976820693', 'Zalo', 889, NULL, NULL, 1, '2024-12-31 14:37:16', '2024-12-31 14:37:16', 33),
+(906, 'Ms Yên', '0978621070', NULL, 'zalo', 890, NULL, NULL, 1, '2024-12-31 14:40:40', '2024-12-31 14:40:40', 28),
+(907, 'Ms.Hải Yến', '0915036775', '0915036775', 'Zalo', 891, NULL, NULL, 1, '2024-12-31 14:45:33', '2024-12-31 14:45:33', 33),
+(908, 'Chị Diệu', '0944009413', NULL, 'zalo', 892, NULL, NULL, 1, '2024-12-31 15:55:15', '2024-12-31 15:55:15', 35),
+(909, 'Mr Cương', '0988186862', NULL, 'zalo', 893, NULL, NULL, 1, '2024-12-31 15:56:08', '2024-12-31 15:56:08', 28),
+(910, 'Ms Phương', '0987904542', NULL, 'zalo', 894, NULL, NULL, 1, '2024-12-31 16:04:18', '2024-12-31 16:04:18', 28),
+(911, 'Ms Linh', '0989667427', NULL, 'zalo', 895, NULL, NULL, 1, '2024-12-31 16:10:58', '2024-12-31 16:10:58', 2),
+(912, 'Ms.Hiền', '0346516589', NULL, 'zalo', 896, NULL, NULL, 1, '2024-12-31 16:11:26', '2024-12-31 16:11:26', 35),
+(913, 'Nguyễn Huy', '0941688989', NULL, 'zalo', 897, NULL, NULL, 1, '2024-12-31 16:40:45', '2024-12-31 16:40:45', 35),
+(914, 'Ms.Nga', '0987170575', NULL, 'zalo', 898, NULL, NULL, 1, '2024-12-31 16:53:50', '2024-12-31 16:53:50', 35),
+(915, 'Chị Hoa', '0983382848', NULL, 'zalo', 899, NULL, NULL, 1, '2024-12-31 17:22:59', '2025-01-03 13:49:11', 35),
+(916, 'Ms Nhung', '0969901429', NULL, 'zalo', 900, NULL, NULL, 1, '2025-01-02 08:14:46', '2025-01-02 08:14:46', 2),
+(917, 'Ms.Dung', '0966032686', NULL, 'zalo', 901, NULL, NULL, 1, '2025-01-02 08:46:13', '2025-01-02 08:46:13', 35),
+(918, 'Ms.Mai', '0947871181', NULL, 'zalo', 902, NULL, NULL, 1, '2025-01-02 08:48:16', '2025-01-02 08:48:16', 35),
+(919, 'Ms Hà', '0914393559', NULL, 'zalo', 903, NULL, NULL, 1, '2025-01-02 09:21:17', '2025-01-02 09:21:17', 28),
+(920, 'Ms Hiền', '0346266640', NULL, 'zalo', 904, NULL, NULL, 1, '2025-01-02 10:21:45', '2025-01-02 10:21:45', 2),
+(921, 'Ms My', '0936175366', NULL, 'zalo', 905, NULL, NULL, 1, '2025-01-02 10:28:02', '2025-01-02 10:28:02', 28),
+(922, 'Ms Hà', '0966228088', NULL, 'zalo', 906, NULL, NULL, 1, '2025-01-02 11:21:30', '2025-01-02 11:21:30', 2),
+(923, 'Ms Huyền', '0975761843', NULL, 'zalo', 907, NULL, NULL, 1, '2025-01-02 11:29:48', '2025-01-02 11:29:48', 2),
+(924, 'Ms.Huyền', '09466284648', NULL, 'zalo', 908, NULL, NULL, 1, '2025-01-02 11:32:24', '2025-01-02 11:32:24', 35),
+(925, 'Ms Huyền', '0948511009', NULL, 'zalo', 909, NULL, NULL, 1, '2025-01-02 11:47:38', '2025-01-02 11:47:38', 28),
+(926, 'Ms Trang', '0845321889', NULL, 'zalo', 910, NULL, NULL, 1, '2025-01-02 11:51:37', '2025-01-02 11:51:37', 28),
+(927, 'Ms Vi Nui', '0365297987', NULL, 'zalo', 911, NULL, NULL, 1, '2025-01-02 14:14:10', '2025-01-02 14:14:10', 28),
+(928, 'Ms.Thu', '0973381696', NULL, 'zalo', 912, NULL, NULL, 1, '2025-01-02 14:38:41', '2025-01-02 14:38:41', 35),
+(929, 'Chị Ánh', '0365664858', NULL, 'zalo', 913, NULL, NULL, 1, '2025-01-02 15:18:53', '2025-01-02 15:18:53', 35),
+(930, 'Ms.Ngân', '0975605779', NULL, 'zalo', 914, NULL, NULL, 1, '2025-01-02 16:26:12', '2025-01-04 11:02:37', 35),
+(931, 'Ms.Ngọc', '0818582266', NULL, 'zalo', 915, NULL, NULL, 1, '2025-01-02 16:31:06', '2025-01-02 16:31:06', 35),
+(932, 'Ms.Dung', '0978981088', NULL, 'zalo', 916, NULL, NULL, 1, '2025-01-02 16:39:09', '2025-01-02 16:39:09', 35),
+(933, 'Chị Hương', '0979813269', NULL, 'zalo', 917, NULL, NULL, 1, '2025-01-02 16:44:20', '2025-01-02 16:44:20', 35),
+(934, 'Ms.Mai', '0846799988', NULL, 'zalo', 918, NULL, NULL, 1, '2025-01-02 16:49:50', '2025-01-02 16:49:50', 35),
+(935, 'Mr.Kenny', '0935783886', NULL, 'zalo', 919, NULL, NULL, 1, '2025-01-02 17:01:43', '2025-01-02 17:01:43', 35),
+(936, 'A Toại', '0243123456', NULL, 'zalo', 920, NULL, NULL, 1, '2025-01-02 17:43:57', '2025-01-02 17:43:57', 57),
+(937, 'Mr.Hiệp', '0964209135', NULL, 'zalo', 921, NULL, NULL, 1, '2025-01-03 09:03:47', '2025-01-03 09:03:47', 35),
+(938, 'Ms.Hường', '0977783223', NULL, 'zalo', 922, NULL, NULL, 1, '2025-01-03 09:08:47', '2025-01-03 09:08:47', 35),
+(939, 'Ms.Hoa', '0961036001', NULL, 'zalo', 923, NULL, NULL, 1, '2025-01-03 09:13:51', '2025-01-03 09:13:51', 35),
+(940, 'Ms Ngân', '0988073872', NULL, 'zalo', 924, NULL, NULL, 1, '2025-01-03 09:42:37', '2025-01-03 09:42:37', 28),
+(941, 'Mr Duy', '0868331111', NULL, 'zalo', 925, NULL, NULL, 1, '2025-01-03 10:03:25', '2025-01-03 10:03:25', 2),
+(942, 'Ms Bông Xinh', '0989521280', NULL, 'zalo', 926, NULL, NULL, 1, '2025-01-03 11:38:32', '2025-01-03 11:38:32', 28),
+(943, 'Ms Sen', '0966221215', NULL, 'zalo', 927, NULL, NULL, 1, '2025-01-03 11:52:58', '2025-01-03 11:52:58', 2),
+(944, 'Ms Thảo', '0328096064', NULL, 'zalo', 928, NULL, NULL, 1, '2025-01-03 13:42:05', '2025-01-03 13:42:05', 2),
+(945, 'Ms Hoà', '0338006774', NULL, 'zalo', 929, NULL, NULL, 1, '2025-01-03 15:01:20', '2025-01-03 15:01:20', 2),
+(946, 'Ms.Nhung', '0975138199', '0975138199', 'Zalo', 930, NULL, NULL, 1, '2025-01-03 15:21:07', '2025-01-03 15:21:07', 33),
+(947, 'A Bình', '0902051953', NULL, 'zalo', 931, NULL, NULL, 1, '2025-01-03 15:33:25', '2025-01-03 15:33:43', 57),
+(948, 'Quỳnh Anh', '0394258806', NULL, 'zalo', 932, NULL, NULL, 1, '2025-01-03 15:36:33', '2025-01-03 15:36:33', 35),
+(949, 'Ms Nga', '0932315226', NULL, 'zalo', 933, NULL, NULL, 1, '2025-01-03 15:45:22', '2025-01-03 15:45:22', 28),
+(950, 'Chị', '0901598598', NULL, 'zalo', 934, NULL, NULL, 1, '2025-01-03 18:02:59', '2025-01-03 18:02:59', 35),
+(951, 'Ms.Trà', '0877736333', NULL, 'zalo', 935, NULL, NULL, 1, '2025-01-04 08:51:13', '2025-01-04 08:51:13', 35),
+(952, 'Ms Yến', '0986893963', NULL, 'zalo', 936, NULL, NULL, 1, '2025-01-04 08:57:40', '2025-01-04 08:57:40', 2),
+(953, 'Mai Nhân', '0964725163', NULL, 'zalo', 937, NULL, NULL, 1, '2025-01-04 09:09:06', '2025-01-04 09:09:06', 35),
+(954, 'Ms.Ly', '0969834515', NULL, 'zalo', 938, NULL, NULL, 1, '2025-01-04 09:34:28', '2025-01-04 09:34:28', 35),
+(955, 'Ms Trang', '0344412517', NULL, 'zalo', 939, NULL, NULL, 1, '2025-01-04 09:44:04', '2025-01-04 09:44:04', 28),
+(956, 'Ms Thảo', '0767065783', NULL, 'zalo', 940, NULL, NULL, 1, '2025-01-04 09:55:36', '2025-01-04 09:55:36', 2),
+(957, 'Ms.Nguyễn', '0943267413', NULL, 'zalo', 941, NULL, NULL, 1, '2025-01-04 10:14:13', '2025-01-04 10:14:13', 35),
+(958, 'Ms.Thu', '0334904097', '0334904097', 'Zalo', 942, NULL, NULL, 1, '2025-01-04 10:23:05', '2025-01-04 10:23:05', 33),
+(959, 'Ms Hằng', '0377883507', NULL, 'zalo', 943, NULL, NULL, 1, '2025-01-04 10:26:24', '2025-01-04 10:26:24', 2),
+(960, 'Ms.My', '0862799095', NULL, 'zalo', 944, NULL, NULL, 1, '2025-01-04 11:28:30', '2025-01-04 11:28:30', 35),
+(961, 'Ms.Khánh', '0383161725', NULL, 'zalo', 945, NULL, NULL, 1, '2025-01-04 11:58:37', '2025-01-04 11:58:37', 35),
+(962, 'Chị Việt', '0922934668', NULL, 'zalo', 946, NULL, NULL, 1, '2025-01-04 13:46:16', '2025-01-04 13:46:16', 35),
+(963, 'Ms Anh', '0984007636', NULL, 'zalo', 947, NULL, NULL, 1, '2025-01-04 13:55:03', '2025-01-04 13:55:03', 28),
+(964, 'Ms Nga', '0949782233', NULL, 'zalo', 948, NULL, NULL, 1, '2025-01-04 13:57:03', '2025-01-04 13:57:03', 28),
+(965, 'Mr Đạt', '0912346282', NULL, 'zalo', 949, NULL, NULL, 1, '2025-01-04 15:28:20', '2025-01-04 15:28:20', 2),
+(966, 'Ms.Yến Nguyễn', '0346358556', '0346358556', 'Zalo', 950, NULL, NULL, 1, '2025-01-04 16:11:14', '2025-01-04 16:11:14', 33),
+(967, 'Ms.Quyên', '0965296039', NULL, 'zalo', 951, NULL, NULL, 1, '2025-01-04 16:40:08', '2025-01-04 16:40:08', 35),
+(968, 'Ms.Hương', '0982854589', '0982854589', 'Zalo', 952, NULL, NULL, 1, '2025-01-04 17:34:15', '2025-01-04 17:34:15', 33),
+(969, 'Ms Minh Huyền', '0969118689', NULL, 'zalo', 953, NULL, NULL, 1, '2025-01-05 08:59:02', '2025-01-05 08:59:02', 2),
+(970, 'Ms Phương', '0363008642', NULL, 'zalo', 954, NULL, NULL, 1, '2025-01-05 09:50:35', '2025-01-05 09:50:35', 28),
+(971, 'Ms Thảo', '0912334567', NULL, 'zalo', 955, NULL, NULL, 1, '2025-01-05 14:57:28', '2025-01-05 14:57:28', 28),
+(972, 'Ms.Trinh', '0335496929', NULL, 'zalo', 956, NULL, NULL, 1, '2025-01-05 15:06:06', '2025-01-05 15:06:06', 35),
+(973, 'Ms.Phạm Huyền', '0917661362', '0917661362', 'Zalo', 957, NULL, NULL, 1, '2025-01-05 15:54:43', '2025-01-05 15:54:43', 33),
+(974, 'Ms.Yến', '0913006462', '0913006462', 'Zalo', 958, NULL, NULL, 1, '2025-01-05 17:31:24', '2025-01-05 17:31:24', 33),
+(975, 'Ms.Cúc', '0335658336', NULL, 'zalo', 959, NULL, NULL, 1, '2025-01-06 08:19:23', '2025-01-06 08:19:23', 35),
+(976, 'Ms.Lan', '0857754446', NULL, 'zalo', 960, NULL, NULL, 1, '2025-01-06 08:22:18', '2025-01-06 08:22:18', 35),
+(977, 'Hoàng Anh', '0913750282', NULL, 'zalo', 961, NULL, NULL, 1, '2025-01-06 08:53:00', '2025-01-06 08:53:00', 35),
+(978, 'Quên Tên', '00000000', '000000', 'zalo', 962, NULL, NULL, 1, '2025-01-06 09:09:42', '2025-01-06 09:09:42', 1),
+(979, 'Ms.An', '0868496686', NULL, 'zalo', 963, NULL, NULL, 1, '2025-01-06 09:37:17', '2025-01-06 09:37:17', 35),
+(980, 'Ms Thuý Lại', '0916641555', NULL, 'zalo', 964, NULL, NULL, 1, '2025-01-06 09:44:35', '2025-01-06 09:44:35', 28),
+(981, 'Ms.Phạm Linh', '0974029704', '0974029704', 'Zalo', 965, NULL, NULL, 1, '2025-01-06 11:34:02', '2025-01-06 11:34:02', 33),
+(982, 'Ms.Trang', '0388589595', '0388589595', 'Zalo', 966, NULL, NULL, 1, '2025-01-06 11:51:18', '2025-01-06 11:51:18', 33),
+(983, 'Bách', '0886633689', NULL, 'zalo', 967, NULL, NULL, 1, '2025-01-06 11:58:57', '2025-01-06 11:58:57', 35),
+(984, 'Ms Liên', '0986598593', NULL, 'zalo', 968, NULL, NULL, 1, '2025-01-06 13:48:37', '2025-01-06 13:48:37', 28),
+(985, 'Ms Hằng', '0975888224', NULL, 'zalo', 969, NULL, NULL, 1, '2025-01-06 14:27:10', '2025-01-06 14:27:10', 28),
+(986, 'Mr Quỳnh', '0332966889', NULL, 'zalo', 970, NULL, NULL, 1, '2025-01-06 15:11:29', '2025-01-06 15:11:29', 2),
+(987, 'Ms.Anh Thư', '0973523590', '0973523590', 'Zalo', 971, NULL, NULL, 1, '2025-01-06 15:30:37', '2025-01-06 15:30:37', 33),
+(988, 'Ms.Uyên', '0862273936', '0862273936', 'Zalo', 972, NULL, NULL, 1, '2025-01-06 16:12:34', '2025-01-06 16:12:34', 33),
+(989, 'Ms Linh', '0986846015', NULL, 'zalo', 973, NULL, NULL, 1, '2025-01-06 16:57:22', '2025-01-06 16:57:22', 2),
+(990, 'Ms Hoà', '0123456789', NULL, 'zalo', 974, NULL, NULL, 1, '2025-02-08 13:43:54', '2025-02-08 13:43:54', 28),
+(991, 'Mr.Tú', '0968303222', '0968303222', 'zalo', 975, NULL, NULL, 1, '2025-02-08 13:44:29', '2025-02-08 13:44:29', 28),
+(992, 'A Thái', '03963279521', NULL, 'zalo', 36, '[\"28\"]', NULL, 1, '2025-02-08 13:48:31', '2025-02-08 13:48:31', 28),
+(993, 'hoang dung', '0961303555', '0000', 'zalo', 976, NULL, NULL, 1, '2025-02-08 13:58:00', '2025-02-08 13:58:00', 28);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `supplies`
+--
+
+CREATE TABLE `supplies` (
+  `id` int NOT NULL,
+  `code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` int DEFAULT NULL,
+  `product_qty` bigint DEFAULT NULL,
+  `nqty` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `double` tinyint DEFAULT NULL,
+  `base_supp_qty` bigint DEFAULT NULL,
+  `compent_percent` decimal(10,0) DEFAULT NULL,
+  `compent_plus` bigint DEFAULT NULL,
+  `supp_qty` bigint DEFAULT NULL,
+  `size` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `cut` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `elevate` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `peel` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `mill` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `handle_elevate` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `handled` int DEFAULT NULL,
+  `product` int DEFAULT NULL,
+  `total_cost` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `act` tinyint DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `created_by` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `supply_buyings`
+--
+
+CREATE TABLE `supply_buyings` (
+  `id` int NOT NULL,
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `provider` int DEFAULT NULL,
+  `supply` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `status` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `payment_status` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `payment_type` tinyint DEFAULT '0',
+  `ship_price` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `other_price` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `advance` float DEFAULT NULL,
+  `total` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `rest` float DEFAULT NULL,
+  `bill` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `act` tinyint DEFAULT NULL,
+  `created_by` int DEFAULT NULL,
+  `contact_by` int DEFAULT NULL,
+  `applied_by` int DEFAULT NULL,
+  `bought_by` int DEFAULT NULL,
+  `submited_by` int DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `supply_extends`
+--
+
+CREATE TABLE `supply_extends` (
+  `id` int NOT NULL COMMENT 'Mã nhóm',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Tên nhóm',
+  `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Ghi chú',
+  `act` tinyint DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_by` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `supply_extends`
+--
+
+INSERT INTO `supply_extends` (`id`, `name`, `type`, `note`, `act`, `created_at`, `updated_at`, `created_by`) VALUES
+(1, 'KHO NHÀ MÁY', 'warehouse_type', NULL, 1, '2025-01-23 20:20:48', '2025-01-23 20:20:48', 1),
+(2, 'KHO VĂN PHÒNG', 'warehouse_type', NULL, 1, '2025-01-23 20:20:59', '2025-01-23 20:20:59', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `supply_names`
+--
+
+CREATE TABLE `supply_names` (
+  `id` int NOT NULL COMMENT 'Mã nhóm',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Tên nhóm',
+  `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Cha',
+  `factor` bigint DEFAULT NULL,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Ghi chú',
+  `act` tinyint DEFAULT NULL,
+  `ord` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_by` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `supply_names`
+--
+
+INSERT INTO `supply_names` (`id`, `name`, `type`, `factor`, `note`, `act`, `ord`, `created_at`, `updated_at`, `created_by`) VALUES
+(49, 'CARTON BÌA', 'carton', 1, 'chỉ là tên vật tư cho lệnh sản xuất', 1, NULL, '2023-07-20 10:21:00', '2023-09-15 02:05:25', 1),
+(50, 'Carton THÀNH', 'carton', 2, 'chỉ là tên vật tư cho lệnh sản xuất', 1, NULL, '2023-07-20 10:21:00', '2023-09-15 02:49:21', 1),
+(51, 'Carton NẮP', 'carton', 2, 'chỉ là tên vật tư cho lệnh sản xuất', 1, NULL, '2023-07-20 10:21:00', '2023-09-15 04:25:55', 1),
+(52, 'CARTON ĐÁY', 'carton', 2, 'chỉ là tên vật tư cho lệnh sản xuất', 1, NULL, '2023-07-20 10:21:00', '2023-09-15 04:25:44', 1),
+(53, 'CARTON GHÉP NẮP + ĐÁY', 'carton', 4, 'chỉ là tên vật tư cho lệnh sản xuất', 1, NULL, '2023-07-20 10:21:00', '2023-09-15 04:25:31', 1),
+(54, 'CARTON KHAY ĐỊNH HÌNH', 'carton', 2, 'chỉ là tên vật tư cho lệnh sản xuất', 1, NULL, '2023-07-20 10:21:00', '2023-09-15 04:25:10', 1),
+(55, 'SÓNG E 3 lớp', 'carton', 2, 'chỉ là tên vật tư cho lệnh sản xuất', 1, NULL, '2023-10-06 08:09:30', '2023-10-06 08:09:30', 1),
+(73, 'NHŨ TUẤN DUNG', 'emulsion', NULL, NULL, 1, NULL, '2025-02-01 18:15:24', '2025-02-01 18:15:24', 1),
+(74, 'TUÂN DUNG 2222', 'emulsion', NULL, NULL, 1, NULL, '2025-02-01 18:23:12', '2025-02-01 18:23:12', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `supply_prices`
+--
+
+CREATE TABLE `supply_prices` (
+  `id` int NOT NULL COMMENT 'Mã nhóm',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Tên nhóm',
+  `price` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `price_purchase` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `supply_id` int DEFAULT NULL COMMENT 'Cha',
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Ghi chú',
+  `act` tinyint DEFAULT NULL,
+  `ord` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_by` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `supply_prices`
+--
+
+INSERT INTO `supply_prices` (`id`, `name`, `price`, `price_purchase`, `type`, `supply_id`, `note`, `act`, `ord`, `created_at`, `updated_at`, `created_by`) VALUES
+(9, '1.0cm', '40000', NULL, 'rubber', 6, 'Tính theo m2 là 1.25 x 2.5 = 3.125m2 ( tính ra là 40.000đ/m2 )', 1, NULL, '2023-07-20 10:21:00', '2023-07-20 10:21:00', 0),
+(10, '1.5cm', '60000', NULL, 'rubber', 6, '', 1, NULL, '2023-07-20 10:21:00', '2023-07-20 10:21:00', 0),
+(11, '2.0cm', '80000', NULL, 'rubber', 6, '', 1, NULL, '2023-07-20 10:21:00', '2023-07-20 10:21:00', 0),
+(12, '2.5cm', '100000', NULL, 'rubber', 6, '', 1, NULL, '2023-07-20 10:21:00', '2023-07-20 10:21:00', 0),
+(13, '3.0cm', '120000', NULL, 'rubber', 6, '', 1, NULL, '2023-07-20 10:21:00', '2023-07-20 10:21:00', 0),
+(14, '3.5cm', '140000', NULL, 'rubber', 6, '', 1, NULL, '2023-07-20 10:21:00', '2023-07-20 10:21:00', 0),
+(15, '4.0cm', '160000', NULL, 'rubber', 6, '', 1, NULL, '2023-07-20 10:21:00', '2023-07-20 10:21:00', 0),
+(16, '4.5cm', '180000', NULL, 'rubber', 6, '', 1, NULL, '2023-07-20 10:21:00', '2023-07-20 10:21:00', 0),
+(17, '5.0cm', '200000', NULL, 'rubber', 6, '', 1, NULL, '2023-07-20 10:21:00', '2023-07-20 10:21:00', 0),
+(68, '0.5cm', '60000', NULL, 'styrofoam', 6, '', 1, NULL, '2023-07-20 10:21:00', '2023-07-20 10:21:00', 0),
+(69, '0.8cm', '60000', NULL, 'styrofoam', 6, '', 1, NULL, '2023-07-20 10:21:00', '2023-07-20 10:21:00', 0),
+(72, '1 cm', '6', NULL, 'styrofoam', 7, '60.000đ/m2 ( Cao su non 35k/m2 + Nhung 25k/m2 )', 1, NULL, '2023-07-20 10:21:00', '2023-07-20 10:21:00', 1),
+(105, 'Carton 0.8ly', '0.001', '560', 'carton', 21, '0.01 là 10 triệu 1 tấn', 1, NULL, '2023-07-20 10:21:00', '2025-02-03 12:56:57', 0),
+(154, 'Cao su non bồi nhung 0.8cm', '1', NULL, 'rubber', 22, NULL, 1, NULL, '2023-07-20 10:21:00', '2025-01-10 17:17:10', 1),
+(155, 'Cao su non bồi nhung 1cm', '14.6', NULL, 'rubber', 23, NULL, 1, NULL, '2023-07-20 10:21:00', '2025-01-10 17:17:14', 1),
+(172, 'PET 0.15', '200', '0.15', 'mica', 37, NULL, 1, NULL, '2023-07-20 10:21:00', '2025-02-08 10:48:55', 1),
+(197, 'K30-0.3cm', '0.00245', '300', 'styrofoam', 9, 'Chỉ mua 180 x 200cm, giá 22.22 triệu/ tấn', 1, NULL, '2023-09-16 02:43:32', '2025-01-21 23:51:32', 1),
+(207, 'K40-0.3cm', '0.0034', '300', 'styrofoam', 8, 'Chỉ mua khổ 180 x 200cm, giá là 29.1666 triệu/ tấn', 1, NULL, '2023-09-16 02:48:52', '2025-01-21 23:54:26', 1),
+(225, 'PET 0.18', '200', '0.18', 'mica', 37, NULL, 1, NULL, '2024-01-10 10:13:35', '2025-01-30 10:04:09', 1),
+(226, 'PET 0.2', '200', NULL, 'mica', 37, NULL, 1, NULL, '2024-01-10 10:13:47', '2025-01-06 20:35:51', 1),
+(227, 'PET 0.25', '200', NULL, 'mica', 37, NULL, 1, NULL, '2024-01-10 10:13:53', '2025-01-06 20:35:51', 1),
+(228, 'PET 0.3', '200', NULL, 'mica', 37, NULL, 1, NULL, '2024-01-10 10:14:09', '2025-01-06 20:35:51', 1),
+(229, 'PET 0.4', '200', NULL, 'mica', 37, NULL, 1, NULL, '2024-01-10 10:14:15', '2025-01-06 20:35:51', 1),
+(230, 'PET 0.5', '200', '0.5', 'mica', 37, NULL, 1, NULL, '2024-01-10 10:14:23', '2025-02-08 10:48:08', 1),
+(288, 'C80', '0.0023', '80', 'paper', 55, 'giá giấy a đạt: 18.4', 1, NULL, '2025-01-10 17:24:34', '2025-02-04 16:34:53', 1),
+(289, 'C100', '0.00213', '100', 'paper', 55, NULL, 1, NULL, '2025-01-10 17:27:03', '2025-01-20 15:38:39', 1),
+(290, 'C120', '0.00213', '120', 'paper', 55, NULL, 1, NULL, '2025-01-10 17:28:34', '2025-01-20 15:38:39', 1),
+(291, 'C140', '0.00213', '140', 'paper', 55, NULL, 1, NULL, '2025-01-11 15:23:42', '2025-01-20 15:38:39', 1),
+(292, 'C150', '0.00213', '150', 'paper', 55, NULL, 1, NULL, '2025-01-11 15:24:47', '2025-01-20 15:38:39', 1),
+(293, 'C200', '0.00213', '200', 'paper', 55, NULL, 1, NULL, '2025-01-11 15:25:38', '2025-01-20 15:38:39', 1),
+(294, 'C230', '0.00213', '230', 'paper', 55, NULL, 1, NULL, '2025-01-11 15:26:40', '2025-01-20 15:38:39', 1),
+(295, 'C250', '0.00213', '250', 'paper', 55, NULL, 1, NULL, '2025-01-11 15:27:24', '2025-01-20 15:38:39', 1),
+(296, 'C300', '0.00213', '300', 'paper', 55, NULL, 1, NULL, '2025-01-11 15:28:10', '2025-01-20 15:38:39', 1),
+(297, 'i210', '0.00185', '210', 'paper', 56, NULL, 1, NULL, '2025-01-11 15:30:35', '2025-01-20 15:38:39', 1),
+(299, 'i230', '0.00175', '230', 'paper', 56, NULL, 1, NULL, '2025-01-11 15:47:05', '2025-01-20 15:38:39', 1),
+(306, 'i250', '0.00175', '250', 'paper', 56, NULL, 1, NULL, '2025-01-11 16:16:33', '2025-01-20 15:38:39', 1),
+(307, 'i280', '0.00175', '280', 'paper', 56, NULL, 1, NULL, '2025-01-11 16:16:44', '2025-01-20 15:38:39', 1),
+(308, 'i300', '0.00175', '300', 'paper', 56, NULL, 1, NULL, '2025-01-11 16:17:00', '2025-01-20 15:38:39', 1),
+(309, 'i330', '0.00175', '330', 'paper', 56, NULL, 1, NULL, '2025-01-11 16:17:10', '2025-01-20 15:38:39', 1),
+(310, 'i350', '0.00175', '350', 'paper', 56, NULL, 1, NULL, '2025-01-11 16:17:21', '2025-01-20 15:38:39', 1),
+(311, 'i380', '0.00175', '380', 'paper', 56, NULL, 1, NULL, '2025-01-11 16:17:43', '2025-01-20 15:38:39', 1),
+(312, 'i400', '0.00175', '400', 'paper', 56, NULL, 1, NULL, '2025-01-11 16:17:55', '2025-01-20 15:38:39', 1),
+(313, 'Duplex130', '0.00167', '130', 'paper', 57, '0.00167 là 16.7 triệu/ tấn', 1, NULL, '2025-01-11 16:21:42', '2025-01-20 15:38:39', 1),
+(314, 'Duplex140', '0.00167', '140', 'paper', 57, '0.00167 là 16.7 triệu/ tấn', 1, NULL, '2025-01-11 16:28:56', '2025-01-20 15:38:39', 1),
+(315, 'Duplex150', '0.00167', '150', 'paper', 57, '0.00167 là 16.7 triệu/ tấn', 1, NULL, '2025-01-11 16:29:06', '2025-01-20 15:38:39', 1),
+(316, 'Duplex160', '0.00167', '160', 'paper', 57, '0.00167 là 16.7 triệu/ tấn', 1, NULL, '2025-01-11 16:29:18', '2025-01-20 15:38:39', 1),
+(317, 'Duplex170', '0.00167', '170', 'paper', 57, '0.00167 là 16.7 triệu/ tấn', 1, NULL, '2025-01-11 16:29:41', '2025-01-20 15:38:39', 1),
+(318, 'Duplex181', '0.00167', '181', 'paper', 57, '0.00167 là 16.7 triệu/ tấn', 1, NULL, '2025-01-11 16:29:56', '2025-01-20 15:38:39', 1),
+(319, 'Duplex200', '0.00167', '200', 'paper', 57, '0.00167 là 16.7 triệu/ tấn', 1, NULL, '2025-01-11 16:30:14', '2025-01-20 15:38:39', 1),
+(320, 'Duplex230', '0.00167', '230', 'paper', 57, '0.00167 là 16.7 triệu/ tấn', 1, NULL, '2025-01-11 16:30:24', '2025-01-20 15:38:39', 1),
+(321, 'Duplex250', '0.00163', '250', 'paper', 57, '0.00167 là 16.7 triệu/ tấn', 1, NULL, '2025-01-11 16:34:43', '2025-01-20 15:38:39', 1),
+(322, 'Duplex280', '0.00163', '280', 'paper', 57, '0.00167 là 16.7 triệu/ tấn', 1, NULL, '2025-01-11 16:35:20', '2025-01-20 15:38:39', 1),
+(323, 'Duplex300', '0.0016', '300', 'paper', 57, '0.00167 là 16.7 triệu/ tấn', 1, NULL, '2025-01-11 16:36:19', '2025-01-20 15:38:39', 1),
+(324, 'Duplex330', '0.0016', '330', 'paper', 57, '0.00167 là 16.7 triệu/ tấn', 1, NULL, '2025-01-11 16:36:33', '2025-01-20 15:38:39', 1),
+(325, 'Duplex350', '0.0016', '350', 'paper', 57, '0.00167 là 16.7 triệu/ tấn', 1, NULL, '2025-01-11 16:38:20', '2025-01-20 15:38:39', 1),
+(326, 'Duplex380', '0.0016', '380', 'paper', 57, '0.00167 là 16.7 triệu/ tấn', 1, NULL, '2025-01-11 16:38:32', '2025-01-20 15:38:39', 1),
+(327, 'Duplex400', '0.0016', '400', 'paper', 57, '0.00167 là 16.7 triệu/ tấn', 1, NULL, '2025-01-11 16:38:54', '2025-01-20 15:38:39', 1),
+(328, 'Duplex430', '0.0016', '430', 'paper', 57, '0.00167 là 16.7 triệu/ tấn', 1, NULL, '2025-01-11 16:39:08', '2025-01-20 15:38:39', 1),
+(329, 'Duplex450', '0.0016', '450', 'paper', 57, '0.00167 là 16.7 triệu/ tấn', 1, NULL, '2025-01-11 16:39:19', '2025-01-20 15:38:39', 1),
+(330, 'Duplex480', '0.0016', '480', 'paper', 57, '0.00167 là 16.7 triệu/ tấn', 1, NULL, '2025-01-11 16:39:29', '2025-01-20 15:38:39', 1),
+(331, 'Duplex500', '0.0016', '500', 'paper', 57, '0.00167 là 16.7 triệu/ tấn', 1, NULL, '2025-01-11 16:39:44', '2025-01-20 15:38:39', 1),
+(333, 'Metalai bạc', '0.0165', '17', 'metalai', 72, '12mic metalai quy đổi ra hệ số định lượng = 17\r\n1: giá Kinh doanh bán: Khoảng 2800đ/ 2', 1, NULL, '2025-01-12 09:00:49', '2025-02-01 17:40:28', 1),
+(334, 'Metalai bạc 12mic', '0.28', '17', 'nilon', 59, NULL, 1, NULL, '2025-01-12 09:18:41', '2025-01-12 09:19:22', 1),
+(335, 'Metailai ĐẶC BIÊT 17mic - Sần đỏ', '6000', '17', 'nilon', 60, NULL, 1, NULL, '2025-01-12 09:23:12', '2025-01-12 09:25:23', 1),
+(336, 'Metailai ĐẶC BIÊT 17mic - Sần Xanh', '6000', '17', 'nilon', 60, NULL, 1, NULL, '2025-01-12 09:24:41', '2025-01-12 09:24:41', 1),
+(337, 'Metailai ĐẶC BIÊT 17mic - Sần Vàng', '6000', '17', 'nilon', 60, NULL, 1, NULL, '2025-01-12 09:25:02', '2025-01-12 09:25:02', 1),
+(338, 'Metailai ĐẶC BIÊT 17mic - Sần Bạc', '6000', '17', 'nilon', 60, NULL, 1, NULL, '2025-01-12 09:25:57', '2025-01-12 09:25:57', 1),
+(344, '12mic - Bóng nước', '0.02011', '10.94', 'nilon', 69, '12mic = ĐL 10.94', 1, NULL, '2025-01-12 09:58:52', '2025-02-01 17:41:49', 1),
+(349, '12mic - Bóng nhiệt', '0.02011', '15.4', 'nilon', 69, '12mic = ĐL 15.4 OK ( 0.2 xem phần tính giá )', 1, NULL, '2025-01-12 10:35:54', '2025-02-08 14:34:26', 1),
+(351, 'Carton 1ly', '0.001', '700', 'carton', 21, '0.01 là 10 triệu 1 tấn', 1, NULL, '2025-01-12 14:24:33', '2025-02-03 12:55:51', 1),
+(352, 'Carton 1.2ly', '0.001', '840', 'carton', 21, '0.01 là 10 triệu 1 tấn', 1, NULL, '2025-01-12 14:25:02', '2025-02-03 12:56:47', 1),
+(353, 'Carton 1.5ly', '0.001', '1050', 'carton', 21, '0.01 là 10 triệu 1 tấn', 1, NULL, '2025-01-12 14:25:36', '2025-02-03 12:56:37', 1),
+(354, 'Carton 1.8ly', '0.001', '1260', 'carton', 21, '0.01 là 10 triệu 1 tấn', 1, NULL, '2025-01-12 14:26:14', '2025-01-21 19:45:57', 1),
+(355, 'Carton 2ly', '0.001', '1400', 'carton', 21, '0.01 là 10 triệu 1 tấn', 1, NULL, '2025-01-12 14:26:41', '2025-02-03 12:56:26', 1),
+(356, 'Carton 2.2ly', '0.001', '1540', 'carton', 21, '0.01 là 10 triệu 1 tấn', 1, NULL, '2025-01-12 14:27:09', '2025-02-03 12:56:17', 1),
+(357, 'Carton 2.5ly', '0.001', '1750', 'carton', 21, '0.01 là 10 triệu 1 tấn', 1, NULL, '2025-01-12 14:27:28', '2025-02-03 12:56:04', 1),
+(358, 'SÓNG E 2 lớp - MẶT KPP', '0', '100', 'carton', 48, 'MẶT KPP = 3500/m2', 1, NULL, '2025-01-12 14:37:58', '2025-01-16 17:22:35', 1),
+(361, 'K21-0.3cm', '0.00166', '300', 'styrofoam', 10, 'Chỉ mua khổ 180 x 200cm, giá là 15.2778 triệu/ tấn', 1, NULL, '2025-01-16 16:05:35', '2025-01-21 23:48:05', 1),
+(362, 'K21-0.5cm', '0.00166', '500', 'styrofoam', 10, 'Chỉ mua khổ 180 x 200cm, giá là 15.2778 triệu/ tấn', 1, NULL, '2025-01-16 16:06:02', '2025-01-21 23:48:16', 1),
+(363, 'K21-0.8cm', '0.00166', '800', 'styrofoam', 10, 'Chỉ mua khổ 180 x 200cm, giá là 15.2778 triệu/ tấn', 1, NULL, '2025-01-16 16:06:12', '2025-01-21 23:48:26', 1),
+(364, 'K21-1cm', '0.00166', '1000', 'styrofoam', 10, 'Chỉ mua khổ 180 x 200cm, giá là 22.2 triệu/ tấn', 1, NULL, '2025-01-16 16:06:29', '2025-01-21 23:51:13', 1),
+(365, 'K21-1.2cm', '0.00166', '1200', 'styrofoam', 10, 'Chỉ mua khổ 180 x 200cm, giá là 15.2778 triệu/ tấn', 1, NULL, '2025-01-16 16:06:56', '2025-01-21 23:51:06', 1),
+(366, 'K21-1.5cm', '0.00166', '1500', 'styrofoam', 10, 'Chỉ mua khổ 180 x 200cm, giá là 15.2778 triệu/ tấn', 1, NULL, '2025-01-16 16:07:07', '2025-01-21 23:50:57', 1),
+(367, 'K21-1.8cm', '0.00166', '1800', 'styrofoam', 10, 'Chỉ mua khổ 180 x 200cm, giá là 22.2 triệu/ tấn', 1, NULL, '2025-01-16 16:07:21', '2025-01-21 23:49:08', 1),
+(368, 'K21-2cm', '0.00166', '2000', 'styrofoam', 10, 'Chỉ mua khổ 180 x 200cm, giá là 15.2778 triệu/ tấn', 1, NULL, '2025-01-16 16:07:32', '2025-01-21 23:49:01', 1),
+(369, 'K21-2.5cm', '0.00166', '2500', 'styrofoam', 10, 'Chỉ mua khổ 180 x 200cm, giá là 15.2778 triệu/ tấn', 1, NULL, '2025-01-16 16:07:54', '2025-01-21 23:48:54', 1),
+(370, 'K21-3cm', '0.00166', '3000', 'styrofoam', 10, 'Chỉ mua khổ 180 x 200cm, giá là 15.2778 triệu/ tấn', 1, NULL, '2025-01-16 16:08:06', '2025-01-21 23:48:48', 1),
+(371, 'K21-3.5cm', '0.00166', '3500', 'styrofoam', 10, 'Chỉ mua khổ 180 x 200cm, giá là 15.2778 triệu/ tấn', 1, NULL, '2025-01-16 16:08:19', '2025-01-21 23:48:41', 1),
+(372, 'K21-4cm', '0.00166', '4000', 'styrofoam', 10, 'Chỉ mua khổ 180 x 200cm, giá là 15.2778 triệu/ tấn', 1, NULL, '2025-01-16 16:08:32', '2025-01-21 23:48:34', 1),
+(373, 'K30-0.5cm', '0.00245', '500', 'styrofoam', 9, 'Chỉ mua 180 x 200cm, giá 22.22 triệu/ tấn', 1, NULL, '2025-01-16 16:23:04', '2025-01-21 23:52:48', 1),
+(374, 'K30-0.8cm', '0.00245', '800', 'styrofoam', 9, 'Chỉ mua 180 x 200cm, giá 22.22 triệu/ tấn', 1, NULL, '2025-01-16 16:26:08', '2025-01-21 23:52:41', 1),
+(375, 'K30-1cm', '0.00245', '1000', 'styrofoam', 9, 'Chỉ mua 180 x 200cm, giá 22.22 triệu/ tấn', 1, NULL, '2025-01-16 16:26:23', '2025-01-21 23:52:34', 1),
+(376, 'K30-1.2cm', '0.00245', '1200', 'styrofoam', 9, 'Chỉ mua 180 x 200cm, giá 22.22 triệu/ tấn', 1, NULL, '2025-01-16 16:27:31', '2025-01-21 23:52:26', 1),
+(377, 'K30-1.5cm', '0.00245', '1500', 'styrofoam', 9, 'Chỉ mua 180 x 200cm, giá 22.22 triệu/ tấn', 1, NULL, '2025-01-16 16:27:43', '2025-01-21 23:52:20', 1),
+(378, 'K30-1.8cm', '0.00245', '1800', 'styrofoam', 9, 'Chỉ mua 180 x 200cm, giá 22.22 triệu/ tấn', 1, NULL, '2025-01-16 16:27:54', '2025-01-21 23:52:13', 1),
+(379, 'K30-2cm', '0.00245', '2000', 'styrofoam', 9, 'Chỉ mua 180 x 200cm, giá 22.22 triệu/ tấn', 1, NULL, '2025-01-16 16:28:10', '2025-01-21 23:52:07', 1),
+(380, 'K30-2.5cm', '0.00245', '2500', 'styrofoam', 9, 'Chỉ mua 180 x 200cm, giá 22.22 triệu/ tấn', 1, NULL, '2025-01-16 16:28:25', '2025-01-21 23:52:00', 1),
+(381, 'K30-3cm', '0.00245', '3000', 'styrofoam', 9, 'Chỉ mua 180 x 200cm, giá 22.22 triệu/ tấn', 1, NULL, '2025-01-16 16:28:38', '2025-01-21 23:51:53', 1),
+(382, 'K30-3.5cm', '0.00245', '3500', 'styrofoam', 9, 'Chỉ mua 180 x 200cm, giá 22.22 triệu/ tấn', 1, NULL, '2025-01-16 16:28:53', '2025-01-21 23:51:47', 1),
+(383, 'K30-4cm', '0.00245', '4000', 'styrofoam', 9, 'Chỉ mua 180 x 200cm, giá 22.22 triệu/ tấn', 1, NULL, '2025-01-16 16:29:07', '2025-01-21 23:51:39', 1),
+(384, 'K40-0.5cm', '0.0034', '500', 'styrofoam', 8, 'Chỉ mua khổ 180 x 200cm, giá là 29.1666 triệu/ tấn', 1, NULL, '2025-01-16 16:36:06', '2025-01-21 23:54:19', 1),
+(385, 'K40-0.8cm', '0.0034', '800', 'styrofoam', 8, 'Chỉ mua khổ 180 x 200cm, giá là 29.1666 triệu/ tấn', 1, NULL, '2025-01-16 16:36:19', '2025-01-21 23:54:12', 1),
+(386, 'K40-1cm', '0.0034', '1000', 'styrofoam', 8, 'Chỉ mua khổ 180 x 200cm, giá là 29.1666 triệu/ tấn', 1, NULL, '2025-01-16 16:36:31', '2025-01-21 23:54:05', 1),
+(387, 'K40-1.2cm', '0.0034', '1200', 'styrofoam', 8, 'Chỉ mua khổ 180 x 200cm, giá là 29.1666 triệu/ tấn', 1, NULL, '2025-01-16 16:36:43', '2025-01-21 23:53:57', 1),
+(388, 'K40-1.5cm', '0.0034', '1500', 'styrofoam', 8, 'Chỉ mua khổ 180 x 200cm, giá là 29.1666 triệu/ tấn', 1, NULL, '2025-01-16 16:36:54', '2025-01-21 23:53:50', 1),
+(389, 'K40-1.8cm', '0.0034', '1800', 'styrofoam', 8, 'Chỉ mua khổ 180 x 200cm, giá là 29.1666 triệu/ tấn', 1, NULL, '2025-01-16 16:37:16', '2025-01-21 23:53:44', 1),
+(390, 'K40-2cm', '0.0034', '2000', 'styrofoam', 8, 'Chỉ mua khổ 180 x 200cm, giá là 29.1666 triệu/ tấn', 1, NULL, '2025-01-16 16:37:30', '2025-01-21 23:53:38', 1),
+(391, 'K40-2.5cm', '0.0034', '2500', 'styrofoam', 8, 'Chỉ mua khổ 180 x 200cm, giá là 29.1666 triệu/ tấn', 1, NULL, '2025-01-16 16:37:41', '2025-01-21 23:53:32', 1),
+(392, 'K40-3cm', '0.0034', '3000', 'styrofoam', 8, 'Chỉ mua khổ 180 x 200cm, giá là 29.1666 triệu/ tấn', 1, NULL, '2025-01-16 16:37:55', '2025-01-21 23:53:24', 1),
+(393, 'K40-3.5cm', '0.0034', '3500', 'styrofoam', 8, 'Chỉ mua khổ 180 x 200cm, giá là 29.1666 triệu/ tấn', 1, NULL, '2025-01-16 16:38:06', '2025-01-21 23:53:18', 1),
+(394, 'K40-4cm', '0.0034', '4000', 'styrofoam', 8, 'Chỉ mua khổ 180 x 200cm, giá là 29.1666 triệu/ tấn', 1, NULL, '2025-01-16 16:38:17', '2025-01-21 23:53:13', 1),
+(395, 'CSN ĐEN 0.3cm', '0.00384', '300', 'rubber', 51, 'Chỉ mua KT 125 x 250cm, giá 35.2 triệu/ tấn', 1, NULL, '2025-01-16 16:46:16', '2025-01-21 19:26:35', 1),
+(396, 'CSN ĐEN 0.5cm', '0.00384', '500', 'rubber', 51, 'Chỉ mua KT 125 x 250cm, giá 35.2 triệu/ tấn', 1, NULL, '2025-01-16 16:46:27', '2025-01-21 19:52:01', 1),
+(397, 'CSN ĐEN 0.8cm', '0.00384', '800', 'rubber', 51, 'Chỉ mua KT 125 x 250cm, giá 35.2 triệu/ tấn', 1, NULL, '2025-01-16 16:47:48', '2025-01-21 19:52:11', 1),
+(398, 'CSN ĐEN 1cm', '0.00384', '1000', 'rubber', 51, 'Chỉ mua KT 125 x 250cm, giá 35.2 triệu/ tấn', 1, NULL, '2025-01-16 16:47:59', '2025-01-21 19:52:38', 1),
+(399, 'CSN ĐEN 1.2cm', '0.00384', '1200', 'rubber', 51, 'Chỉ mua KT 125 x 250cm, giá 35.2 triệu/ tấn', 1, NULL, '2025-01-16 16:48:15', '2025-01-21 19:55:22', 1),
+(400, 'CSN ĐEN 1.5cm', '0.00384', '1500', 'rubber', 51, 'Chỉ mua KT 125 x 250cm, giá 35.2 triệu/ tấn', 1, NULL, '2025-01-16 16:48:25', '2025-01-21 19:55:33', 1),
+(401, 'CSN ĐEN 1.8cm', '0.00384', '1800', 'rubber', 51, 'Chỉ mua KT 125 x 250cm, giá 35.2 triệu/ tấn', 1, NULL, '2025-01-16 16:48:38', '2025-01-21 19:55:43', 1),
+(402, 'CSN ĐEN 2cm', '0.00384', '2000', 'rubber', 51, 'Chỉ mua KT 125 x 250cm, giá 35.2 triệu/ tấn', 1, NULL, '2025-01-16 16:48:51', '2025-01-21 19:55:58', 1),
+(403, 'CSN ĐEN 2.5cm', '0.00384', '2500', 'rubber', 51, 'Chỉ mua KT 125 x 250cm, giá 35.2 triệu/ tấn', 1, NULL, '2025-01-16 16:49:10', '2025-01-21 19:56:21', 1),
+(404, 'CSN ĐEN 3cm', '0.00384', '3000', 'rubber', 51, 'Chỉ mua KT 125 x 250cm, giá 35.2 triệu/ tấn', 1, NULL, '2025-01-16 16:49:21', '2025-01-21 19:56:33', 1),
+(405, 'CSN ĐEN 3.5cm', '0.00384', '3500', 'rubber', 51, 'Chỉ mua KT 125 x 250cm, giá 35.2 triệu/ tấn', 1, NULL, '2025-01-16 16:49:31', '2025-01-21 19:56:43', 1),
+(406, 'CSN ĐEN 4cm', '0.00384', '4000', 'rubber', 51, 'Chỉ mua KT 125 x 250cm, giá 35.2 triệu/ tấn', 1, NULL, '2025-01-16 16:49:41', '2025-01-21 19:56:54', 1),
+(409, 'MÀU ĐỎ - Lông ngắn', '0.0212', '100', 'decal', 71, NULL, 1, NULL, '2025-01-16 17:43:49', '2025-01-21 23:28:38', 1),
+(410, 'MÀU XANH - Lông ngắn', '0.0212', '100', 'decal', 71, NULL, 1, NULL, '2025-01-16 17:45:44', '2025-01-21 23:28:26', 1),
+(411, 'MÀU VÀNG - Lông ngắn', '0.0212', '100', 'decal', 71, NULL, 1, NULL, '2025-01-16 17:45:56', '2025-01-21 23:28:18', 1),
+(412, 'MÀU TRẮNG - Lông ngắn', '0.0212', '100', 'decal', 71, NULL, 1, NULL, '2025-01-16 17:46:09', '2025-01-21 23:28:07', 1),
+(413, 'MÀU VÀNG', '0.083', '10', 'silk', 60, NULL, 1, NULL, '2025-01-16 18:02:18', '2025-01-21 23:55:20', 1),
+(414, 'PHI BÓNG', '0.11', '10', 'silk', 60, NULL, 1, NULL, '2025-01-16 18:07:22', '2025-01-21 23:55:28', 1),
+(415, 'BĂNG LÔNG NHUNG', '0.22', '10', 'silk', 60, NULL, 1, NULL, '2025-01-16 18:09:11', '2025-01-21 23:55:35', 1),
+(416, 'Bạc - Mã', '0', '10', 'emulsion', 81, 'công thức đã chuẩn', 1, NULL, '2025-01-16 18:23:39', '2025-02-01 18:00:37', 1),
+(418, 'KEO NHIỆT BỒI HỘP Mã 301', '0', '1', 'skrink', 82, NULL, 1, NULL, '2025-01-16 20:57:35', '2025-01-20 15:38:39', 1),
+(419, 'KEO NHIỆT BỒI HỘP - Mã 301', '0', '1', 'other_supply', 76, NULL, 1, NULL, '2025-01-17 01:29:24', '2025-01-20 15:38:39', 1),
+(420, 'KEO NHIỆT BỒI HỘP - Mã 308', '0', '1', 'other_supply', 76, NULL, 1, NULL, '2025-01-17 01:31:34', '2025-01-20 15:38:39', 1),
+(421, 'KEO SỮA', '0', '1', 'other_supply', 76, NULL, 1, NULL, '2025-01-17 01:32:16', '2025-01-20 15:38:39', 1),
+(422, 'MỰC OFFSET - C', '0', '1', 'other_supply', 75, NULL, 1, NULL, '2025-01-17 01:35:06', '2025-02-04 16:43:57', 1),
+(423, 'MỰC IN OFFSET - M', '0', '1', 'other_supply', 75, NULL, 0, NULL, '2025-01-17 01:35:24', '2025-01-21 17:08:30', 1),
+(424, 'MỰC IN OFFSET - Y', '0', '1', 'other_supply', 75, NULL, 0, NULL, '2025-01-17 01:35:34', '2025-01-21 17:08:28', 1),
+(425, 'MỰC IN OFFSET - K', '0', '1', 'other_supply', 75, NULL, 0, NULL, '2025-01-17 01:35:45', '2025-01-21 17:08:26', 1),
+(426, 'TAY XÁCH - Mã TD 01', '0', '1', 'other_supply', 77, NULL, 1, NULL, '2025-01-17 01:50:20', '2025-01-20 15:38:39', 1),
+(427, 'TƠ BÓNG 4 - Màu Vàng', '0', '1', 'other_supply', 78, NULL, 1, NULL, '2025-01-17 01:52:34', '2025-01-20 15:38:39', 1),
+(428, 'TƠ BÓNG 5 - Màu Vàng', '0', '1', 'other_supply', 78, NULL, 1, NULL, '2025-01-17 01:52:47', '2025-01-20 15:38:39', 1),
+(429, 'MÀNG CO - Khổ 65', '0', '1', 'other_supply', 79, NULL, 1, NULL, '2025-01-17 01:56:24', '2025-01-20 15:38:39', 1),
+(430, 'Dây CUROA - Bản 1 x 20 x 4550mm', '0', '1', 'other_supply', 80, NULL, 1, NULL, '2025-01-17 02:05:05', '2025-01-20 15:38:39', 1),
+(437, 'Phủ UV BÓNG', '0.16', '1', 'cover', 62, '1.5 = 1500đ/m2', 1, NULL, NULL, '2025-01-26 21:46:03', 0),
+(438, 'Nam châm nhỡ', '800', '1', 'magnet', 63, '0', NULL, NULL, NULL, NULL, 0),
+(439, 'Nam châm to', '1200', '1', 'magnet', 64, '0', NULL, NULL, NULL, NULL, 0),
+(440, 'G Đế vàng - logo Amazon xanh', '0.0047', '200', 'paper', 65, '1: G kí hiệu là đề can giấy', 1, NULL, NULL, '2025-02-04 11:33:15', 0),
+(445, 'MÀU ĐỎ - Lông dài', '0', '1', 'decal', 74, NULL, NULL, NULL, NULL, '2025-01-21 23:29:57', 0),
+(449, 'GIẤY MT ĐEN 120 - Nguồn TD', '0.005', '120', 'paper', 66, '0.005 = 50 triệu/ tấn', 1, NULL, '2025-01-21 11:18:48', '2025-01-21 11:21:31', 1),
+(450, 'GIẤY MT ĐEN 180 - Nguồn TD', '0.005', '180', 'paper', 66, '0.005 = 50 triệu/ tấn', 1, NULL, '2025-01-21 11:19:09', '2025-01-21 11:21:37', 1),
+(451, 'GIẤY MT ĐEN 230 - Nguồn TD', '0.005', '230', 'paper', 66, '0.005 = 50 triệu/ tấn', 1, NULL, '2025-01-21 11:20:00', '2025-01-21 11:21:45', 1),
+(452, 'GIẤY MT ĐEN 250 - Nguồn TD', '0.005', '250', 'paper', 66, '0.005 = 50 triệu/ tấn', 1, NULL, '2025-01-21 11:20:11', '2025-01-21 11:21:51', 1),
+(453, 'GIẤY MT ĐEN 350 - Nguồn TD', '0.005', '350', 'paper', 66, '0.005 = 50 triệu/ tấn', 1, NULL, '2025-01-21 11:20:31', '2025-01-21 11:21:56', 1),
+(454, 'GIẤY MT ĐEN 400 - Nguồn TD', '0.005', '400', 'paper', 66, '0.005 = 50 triệu/ tấn', 1, NULL, '2025-01-21 11:20:44', '2025-01-21 11:22:02', 1),
+(460, 'Loại nhỏ ( KT )', '450', '1', 'magnet', 59, '0', 1, NULL, '2025-01-21 19:02:32', '2025-01-21 19:07:31', 1),
+(462, 'Loại trung ( KT )', '550', '1', 'magnet', 59, '0', 1, NULL, '2025-01-21 19:06:49', '2025-01-21 19:07:49', 1),
+(463, 'Loại to ( KT )', '750', '1', 'magnet', 59, '0', 1, NULL, '2025-01-21 19:07:20', '2025-01-21 19:07:59', 1),
+(464, 'CSN TRẮNG 0.3cm', '0.00384', '300', 'rubber', 84, NULL, 1, NULL, '2025-01-21 19:29:41', '2025-01-21 19:29:41', 1),
+(465, 'CSN TRẮNG 0.5cm', '0.00384', '500', 'rubber', 84, NULL, 1, NULL, '2025-01-21 19:34:10', '2025-01-21 19:34:10', 1),
+(466, 'CSN TRẮNG 0.8cm', '0.00384', '800', 'rubber', 84, NULL, 1, NULL, '2025-01-21 19:57:42', '2025-01-21 19:57:42', 1),
+(467, 'CSN TRẮNG 1cm', '0.00384', '1000', 'rubber', 84, NULL, 1, NULL, '2025-01-21 19:57:51', '2025-01-21 19:57:51', 1),
+(468, 'CSN TRẮNG 1.2cm', '0.00384', '1200', 'rubber', 84, NULL, 1, NULL, '2025-01-21 19:58:01', '2025-01-21 19:58:01', 1),
+(469, 'CSN TRẮNG 1.5cm', '0.00384', '1500', 'rubber', 84, NULL, 1, NULL, '2025-01-21 19:58:11', '2025-01-21 19:58:11', 1),
+(470, 'CSN TRẮNG 1.8cm', '0.00384', '1800', 'rubber', 84, NULL, 1, NULL, '2025-01-21 19:58:21', '2025-01-21 19:58:21', 1),
+(471, 'CSN TRẮNG 2cm', '0.00384', '2000', 'rubber', 84, NULL, 1, NULL, '2025-01-21 19:58:32', '2025-01-21 19:58:32', 1),
+(472, 'CSN TRẮNG 2.5cm', '0.00384', '2500', 'rubber', 84, NULL, 1, NULL, '2025-01-21 19:58:42', '2025-01-21 19:58:42', 1),
+(473, 'CSN TRẮNG 3cm', '0.00384', '3000', 'rubber', 84, NULL, 1, NULL, '2025-01-21 19:58:54', '2025-01-21 19:58:54', 1),
+(474, 'CSN TRẮNG 3.5cm', '0.00384', '3500', 'rubber', 84, NULL, 1, NULL, '2025-01-21 19:59:05', '2025-01-21 19:59:05', 1),
+(475, 'CSN TRẮNG 4cm', '0.00384', '4000', 'rubber', 84, NULL, 1, NULL, '2025-01-21 19:59:16', '2025-01-21 19:59:16', 1),
+(476, 'SẦN CÁT ĐỎ - Mã TD6', '0.038', '17', 'metalai', 89, NULL, 1, NULL, '2025-01-21 21:35:38', '2025-01-21 21:37:15', 1),
+(477, 'SẦN CÁT VÀNG - Mã TD7', '0.038', '17', 'metalai', 89, NULL, 1, NULL, '2025-01-21 21:37:36', '2025-01-21 21:37:36', 1),
+(478, 'SẦN CÁT XANH - Mã TD8', '0.038', '17', 'metalai', 89, NULL, 1, NULL, '2025-01-21 21:37:50', '2025-01-21 21:37:50', 1),
+(481, '12mic - Mờ nhiệt', '0.2', '15.38', 'nilon', 90, NULL, 1, NULL, '2025-01-23 01:25:14', '2025-02-01 17:43:30', 1),
+(482, '12mic - Mờ nước', '0.2', '12', 'nilon', 90, NULL, 1, NULL, '2025-01-23 01:26:08', '2025-02-01 17:43:17', 1),
+(483, 'Metalai bạc 7 màu', '0.025', '17', 'metalai', 72, '12mic metalai quy đổi ra hệ số định lượng = 17\r\n1: giá Kinh doanh bán: Khoảng 4250đ/ 2 CHI CHÚ, GIÁ NÀY CHƯA CHÍNH XÃC', 1, NULL, '2025-02-01 17:29:10', '2025-02-01 17:40:53', 1),
+(484, 'Vàng 14k - Mã', '0', '10', 'emulsion', 81, 'công thức đã chuẩn', 1, NULL, '2025-02-01 17:56:05', '2025-02-01 17:56:05', 1),
+(485, 'Vàng 16k - Mã', '0', '10', 'emulsion', 81, 'công thức đã chuẩn', 1, NULL, '2025-02-01 17:56:16', '2025-02-01 17:56:16', 1),
+(486, 'Vàng 18k - Mã', '0', '10', 'emulsion', 81, 'công thức đã chuẩn', 1, NULL, '2025-02-01 17:56:26', '2025-02-01 17:56:26', 1),
+(487, 'Vàng 24k - Mã', '0', '10', 'emulsion', 81, 'công thức đã chuẩn', 1, NULL, '2025-02-01 17:56:38', '2025-02-01 17:56:38', 1),
+(488, 'GIẤY MT LINEN 115mgr', '0.008', '115', 'paper', 66, '0.005 = 80 triệu/ tấn', 1, NULL, '2025-02-03 10:01:41', '2025-02-03 10:02:47', 1),
+(489, 'Màu Đen', '0', '10', 'emulsion', 81, 'công thức đã chuẩn', 1, NULL, '2025-02-03 11:54:09', '2025-02-03 11:54:09', 1),
+(490, 'Mực UV Bóng', '0', '1', 'uv', 83, NULL, 1, NULL, '2025-02-03 14:49:06', '2025-02-03 14:49:06', 1),
+(491, 'Mực UV Sần', '0', '1', 'uv', 83, NULL, 1, NULL, '2025-02-03 14:51:09', '2025-02-03 14:51:09', 1),
+(492, 'Mực UV Bóng kim tuyến', '0', '1', 'uv', 83, NULL, 1, NULL, '2025-02-03 14:52:16', '2025-02-03 14:52:16', 1),
+(493, 'Mực UV Sần kim tuyến', '0', '1', 'uv', 83, NULL, 1, NULL, '2025-02-03 14:52:38', '2025-02-03 14:52:38', 1),
+(494, 'G Đế vàng - logo Amazon đỏ', '0.0051', '200', 'paper', 65, '1: G kí hiệu là đề can giấy', 1, NULL, '2025-02-04 11:24:32', '2025-02-04 11:33:49', 1),
+(495, 'G Đế vàng - logo Amazon xám', '0.0046', '200', 'paper', 65, '1: G kí hiệu là đề can giấy', 1, NULL, '2025-02-04 11:24:47', '2025-02-04 11:34:03', 1),
+(496, 'G Đế vàng - logo 3 ngôi sao', '0.0059', '200', 'paper', 65, '1: G kí hiệu là đề can giấy', 1, NULL, '2025-02-04 11:25:22', '2025-02-04 11:34:23', 1),
+(497, 'G Đế trắng - logo Oji', '0.0059', '200', 'paper', 65, '1: G kí hiệu là đề can giấy', 1, NULL, '2025-02-04 11:36:43', '2025-02-04 11:36:43', 1),
+(498, 'G Đế trắng - Không logo', '0.0049', '200', 'paper', 65, '1: G kí hiệu là đề can giấy', 1, NULL, '2025-02-04 11:37:00', '2025-02-04 11:38:58', 1),
+(499, 'G Đế Glassine trắng: HAL-W', '0.0045', '200', 'paper', 65, '1: G kí hiệu là đề can giấy', 1, NULL, '2025-02-04 11:42:29', '2025-02-04 11:48:46', 1),
+(500, 'G Đế Glassine xanh: HAL-BL', '0', '0', 'paper', 65, 'KHÔNG CÓ GIÁ', 0, NULL, '2025-02-04 11:44:41', '2025-02-04 11:49:53', 1),
+(501, 'G Đế Glassine xanh: HAL-BL không logo', '0.0052', '200', 'paper', 65, '1: G kí hiệu là đề can giấy', 1, NULL, '2025-02-04 11:44:59', '2025-02-04 11:49:13', 1),
+(502, 'ĐỀ CAN VỠ - Logo Amazon', '0.04', '200', 'paper', 65, '1: G kí hiệu là đề can giấy', 1, NULL, '2025-02-04 11:51:45', '2025-02-04 11:56:27', 1),
+(503, 'ĐỀ CAN VỠ - Logo Koan hao', '0.058', '200', 'paper', 65, '1: G kí hiệu là đề can giấy', 1, NULL, '2025-02-04 11:52:09', '2025-02-04 11:56:45', 1),
+(504, 'G MẶT NHŨ BẠC MỜ - logo Amazon đen đế vàng', '0.01', '200', 'paper', 65, '1: G kí hiệu là đề can giấy', 1, NULL, '2025-02-04 12:57:34', '2025-02-04 13:15:47', 1),
+(505, 'G MẶT NHŨ VÀNG MỜ - logo Amazon đen đế vàng', '0.01', '200', 'paper', 65, '1: G kí hiệu là đề can giấy', 1, NULL, '2025-02-04 12:57:56', '2025-02-04 13:16:03', 1),
+(506, 'G DA BÒ ( màu giống giấy kratf ): AL - KL', '0.0058', '200', 'paper', 65, '1: G kí hiệu là đề can giấy', 1, NULL, '2025-02-04 13:00:34', '2025-02-04 14:27:04', 1),
+(507, 'BẠC BÓNG TLS#25 PET - Logo Amazon đỏ. đế trắng', '0.0085', '200', 'paper', 65, '1: G kí hiệu là đề can giấy', 1, NULL, '2025-02-04 13:29:40', '2025-02-04 13:34:14', 1),
+(509, 'BẠC BÓNG TLS#50 PET - Logo Amazon đỏ. đế trắng', '0.0095', '200', 'paper', 65, '1: G kí hiệu là đề can giấy', 1, NULL, '2025-02-04 13:31:39', '2025-02-04 13:34:39', 1),
+(510, 'BẠC MỜ TLSM#25 PET - Logo Amazon đỏ. đế trắng', '0.0085', '200', 'paper', 65, '1: G kí hiệu là đề can giấy', 1, NULL, '2025-02-04 13:35:41', '2025-02-04 13:36:15', 1),
+(511, 'GƯƠNG VÀNG ( vàng xanh ) 6V2#25 PET - Logo Amazon đỏ. đế trắng', '0.0098', '200', 'paper', 65, '1: G kí hiệu là đề can giấy', 1, NULL, '2025-02-04 13:37:51', '2025-02-04 13:41:26', 1),
+(512, 'GƯƠNG VÀNG ( vàng chùa ) 6V3#25 PET - Logo Amazon đỏ. đế trắng', '0.0098', '200', 'paper', 65, '1: G kí hiệu là đề can giấy', 1, NULL, '2025-02-04 13:41:05', '2025-02-04 13:41:05', 1),
+(513, 'GƯƠNG VÀNG ( vàng đỏ ) 6V4#25 PET - Logo Amazon đỏ. đế trắng', '0.0098', '200', 'paper', 65, '1: G kí hiệu là đề can giấy', 1, NULL, '2025-02-04 13:41:48', '2025-02-04 13:41:48', 1),
+(514, 'DECAN TRONG PET TLT#25 - logo Amazon đỏ. đế trắng', '0.0075', '200', 'paper', 65, '1: G kí hiệu là đề can giấy', 1, NULL, '2025-02-04 13:48:12', '2025-02-04 13:48:12', 1),
+(515, 'DECAN PP - Đế trắng', '0.0071', '200', 'paper', 65, '1: G kí hiệu là đề can giấy', 1, NULL, '2025-02-04 13:51:33', '2025-02-04 13:54:05', 1),
+(516, 'DECAN PP75 vàng - Đế trắng', '0.0065', '200', 'paper', 65, '1: G kí hiệu là đề can giấy', 1, NULL, '2025-02-04 13:52:00', '2025-02-04 13:53:15', 1),
+(517, 'DECAN 7 Màu - Logo Amazon. Đế trắng', '0.0147', '200', 'paper', 65, '1: G kí hiệu là đề can giấy', 1, NULL, '2025-02-04 13:59:51', '2025-02-04 13:59:51', 1),
+(518, 'DECAN PVC Trong HVLT#40 - logo Amazo đỏ. đế trắng', '0.008', '200', 'paper', 65, '1: G kí hiệu là đề can giấy', 1, NULL, '2025-02-04 14:03:11', '2025-02-04 14:07:42', 1),
+(519, 'DECAN PVC Trong PSK#60 - logo Khamisticker', '0.0105', '200', 'paper', 65, '1: G kí hiệu là đề can giấy', 1, NULL, '2025-02-04 14:05:03', '2025-02-04 14:09:49', 1),
+(520, 'DECAN PVC trắng Đục PSK#60 - logo Khamisticker', '0.01', '200', 'paper', 65, '1: G kí hiệu là đề can giấy', 1, NULL, '2025-02-04 14:10:50', '2025-02-04 14:15:09', 1),
+(521, 'DECAN PVC trắng Đục PSK#60 - logo Amazon đen. đế trắng', '0.0091', '200', 'paper', 65, '1: G kí hiệu là đề can giấy', 1, NULL, '2025-02-04 14:12:05', '2025-02-04 14:14:08', 1),
+(522, 'OF70', '0.00216', '70', 'paper', 58, NULL, 1, NULL, '2025-02-04 14:56:42', '2025-02-04 14:58:06', 1),
+(523, 'OF80', '0.00216', '80', 'paper', 58, NULL, 1, NULL, '2025-02-04 14:58:23', '2025-02-04 14:58:23', 1),
+(524, 'OF100', '0.00216', '100', 'paper', 58, NULL, 1, NULL, '2025-02-04 14:58:35', '2025-02-04 14:58:35', 1),
+(525, 'OF120', '0.00216', '120', 'paper', 58, NULL, 1, NULL, '2025-02-04 14:58:51', '2025-02-04 14:58:51', 1),
+(526, 'OF150', '0.00216', '150', 'paper', 58, NULL, 1, NULL, '2025-02-04 14:59:11', '2025-02-04 14:59:11', 1),
+(527, 'OF200', '0.00276', '200', 'paper', 58, NULL, 1, NULL, '2025-02-04 14:59:36', '2025-02-04 14:59:48', 1),
+(528, 'OF230', '0.00276', '230', 'paper', 58, NULL, 1, NULL, '2025-02-04 15:00:07', '2025-02-04 15:00:17', 1),
+(529, 'OF250', '0.00276', '250', 'paper', 58, NULL, 1, NULL, '2025-02-04 15:00:31', '2025-02-04 15:00:31', 1),
+(530, 'Kraft70 - 2 mặt trắng', '0.00303', '70', 'paper', 68, NULL, 0, NULL, '2025-02-04 15:04:30', '2025-02-04 15:37:35', 1),
+(531, 'Kraft80 - 2 mặt trắng', '0.00303', '80', 'paper', 68, NULL, 0, NULL, '2025-02-04 15:05:00', '2025-02-04 15:37:45', 1),
+(532, 'Kraft100 - 2 mặt trắng', '0.00303', '100', 'paper', 68, NULL, 0, NULL, '2025-02-04 15:10:51', '2025-02-04 15:37:54', 1),
+(533, 'Kraft120 - 2 mặt trắng', '0.00303', '120', 'paper', 68, NULL, 1, NULL, '2025-02-04 15:34:59', '2025-02-04 15:42:19', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `supply_types`
+--
+
+CREATE TABLE `supply_types` (
+  `id` int NOT NULL COMMENT 'Mã nhóm',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Tên nhóm',
+  `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Cha',
+  `factor` bigint DEFAULT NULL,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Ghi chú',
+  `act` tinyint DEFAULT NULL,
+  `ord` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_by` int NOT NULL,
+  `is_name` tinyint DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `supply_types`
+--
+
+INSERT INTO `supply_types` (`id`, `name`, `type`, `factor`, `note`, `act`, `ord`, `created_at`, `updated_at`, `created_by`, `is_name`) VALUES
+(8, 'Mút phẳng K40', 'styrofoam', 0, '1: Chiều rộng 180cm\r\n2: Chiều dài  200cm\r\nghi chú 1: Nhập KT theo thứ tự: 180 x 200\r\nghi chú 2:  Số lượng: 1....10 .. Tính theo tấm\r\nlưu ý: Hết khổ 180 x 200 thì mua 160 x 200cm', 1, NULL, '2023-07-20 10:21:00', '2025-01-21 23:39:19', 1, 0),
+(9, 'Mút phẳng K30', 'styrofoam', 0, '1: Chiều rộng 180cm\r\n2: Chiều dài  200cm\r\nghi chú 1: Nhập KT theo thứ tự: 180 x 200\r\nghi chú 2:  Số lượng: 1....10 .. Tính theo tấm\r\nlưu ý: Hết khổ 180 x 200 thì mua 160 x 200cm', 1, NULL, '2023-07-20 10:21:00', '2025-01-21 23:39:13', 1, 0),
+(10, 'Mút phẳng K21', 'styrofoam', 0, '1: Chiều rộng 180cm\r\n2: Chiều dài  200cm\r\nghi chú 1: Nhập KT theo thứ tự: 180 x 200\r\nghi chú 2:  Số lượng: 1....10 .. Tính theo tấm\r\nlưu ý: Hết khổ 180 x 200 thì mua 160 x 200cm', 1, NULL, '2023-07-20 10:21:00', '2025-01-21 23:39:07', 1, 0),
+(21, '2 MẶT THƯỜNG', 'carton', NULL, NULL, 1, NULL, '2023-07-20 10:21:00', '2025-01-21 23:56:59', 1, 0),
+(37, 'MÀNG PET ( Chưa có giá chuẩn )', 'mica', NULL, NULL, 1, NULL, '2023-07-20 10:21:00', '2025-01-29 17:23:38', 1, 0),
+(48, 'SÓNG E 2 Lớp', 'carton', NULL, NULL, 1, NULL, '2023-08-30 09:32:57', '2025-01-21 23:58:35', 1, NULL),
+(51, 'CSN ĐEN', 'rubber', NULL, '1: Chiều rộng 125cm\r\n2: Chiều dài  250cm\r\nghi chú 1: Nhập KT theo thứ tự: 125 x 250 \r\nghi chú 2:  Số lượng: 1....10 .. Tính theo tấm', 1, NULL, '2024-10-23 16:06:36', '2025-01-21 23:36:51', 1, 0),
+(55, 'GIẤY COUCHES', 'paper', NULL, NULL, 1, NULL, '2023-07-17 20:26:21', '2025-02-04 16:35:29', 0, 0),
+(56, 'GIẤY IVOLRY', 'paper', NULL, '0.00192 = 19.2 triệu/ tấn', 1, NULL, '2023-07-17 20:26:21', '2025-01-21 10:47:20', 0, 0),
+(57, 'GIẤY DUPLEX', 'paper', NULL, '0.00145 = 16 triệu/ tấn', 1, NULL, '2023-07-17 20:26:21', '2025-01-21 10:47:26', 0, 0),
+(58, 'GIẤY OFFSET', 'paper', NULL, '0.0024 = 24 triệu/ tấn', 1, NULL, '2023-07-17 20:26:21', NULL, 0, 0),
+(59, 'NAM CHÂM', 'magnet', NULL, '0', 1, NULL, '2023-08-14 12:39:31', '2025-01-21 18:59:28', 1, 0),
+(60, 'VẢI LỤA THƯỜNG', 'silk', NULL, '1: Chiều rộng: 150cm\r\n2: Chiều dài:  Hỏi trước khi nhập\r\nghi chú 1: Nhập KT theo thứ tự: 180 x hỏi \r\nghi chú 2:  Số lượng: 1....10 .. Tính theo cuộn', 1, NULL, '2023-08-14 17:51:05', '2025-01-21 23:41:06', 1, 0),
+(62, 'Phủ bóng UV', 'cover', NULL, '1.5 = 1500đ/m2', 1, NULL, '2023-09-16 02:00:33', '2025-01-26 21:39:44', 1, 0),
+(63, 'NAM CHÂM DẸT', 'magnet', NULL, '0', 0, NULL, '2023-09-16 02:54:18', '2025-01-21 19:03:29', 1, 0),
+(64, 'NAM CHÂM ĐẶC BIỆT', 'magnet', NULL, '0', 0, NULL, '2023-09-16 02:54:37', '2025-01-21 19:03:48', 1, 0),
+(65, 'ĐỀ CAN CÁC LOẠI', 'paper', NULL, 'Kinh doanh bắt buộc tính khổ cố định là 53cm', 1, NULL, '2023-09-19 01:14:55', '2025-02-04 11:01:47', 1, 0),
+(66, 'GIẤY MỸ THUẬT', 'paper', NULL, '0.005 = 50triệu/ tấn', 1, NULL, '2023-09-26 18:05:21', '2025-02-03 09:59:31', 1, 0),
+(68, 'GIẤY KRAFT', 'paper', NULL, '0.00105 = 10.5 triệu/ tấn', 1, NULL, '2024-06-22 15:50:13', '2025-01-21 10:59:02', 1, 0),
+(69, 'NILON BÓNG', 'nilon', NULL, '1: Màng bóng 12mic chiều dài 550.000cm/1 cuộn\r\n2: Màng mờ 12mic chiều dài 500.000cm/1 cuộn', 1, NULL, '2024-07-02 09:25:55', '2025-01-23 01:20:35', 1, 0),
+(71, 'NHUNG - LÔNG NGẮN', 'decal', NULL, '1: Chiều rộng 150cm\r\n2: Chiều dài cuộn 9100cm\r\nghi chú 1: Nhập KT theo thứ tự: 150 x 9100 \r\nghi chú 2:  Số lượng: 1....10....15...cuộn', 1, NULL, '2024-07-12 14:44:03', '2025-01-21 23:33:48', 10, 0),
+(72, 'METALAI -IN', 'metalai', NULL, '0.8 = 8000d/ M2', 1, NULL, '2024-10-07 11:09:42', '2025-02-01 17:24:54', 1, 0),
+(74, 'NHUNG - LÔNG DÀI chưa có giá', 'decal', NULL, '1: Chiều rộng 150cm\r\n2: Chiều dài cuộn 9100cm\r\nghi chú 1: Nhập KT theo thứ tự: 150 x 9100 \r\nghi chú 2:  Số lượng: 1....10....15...cuộn', 1, NULL, '2025-01-16 17:53:31', '2025-01-21 23:33:59', 1, 0),
+(75, 'VẬT TƯ  MÁY IN - MÁY KẼM', 'other_supply', NULL, NULL, 1, NULL, '2025-01-17 01:16:32', '2025-01-21 21:54:37', 1, 0),
+(76, 'KEO BỒI - CÁC LOẠI KEO', 'other_supply', NULL, NULL, 1, NULL, '2025-01-17 01:24:55', NULL, 1, 0),
+(77, 'PHỤ KIỆN HỘP QUÀ TẶNG', 'other_supply', NULL, NULL, 1, NULL, '2025-01-17 01:25:18', NULL, 1, 0),
+(78, 'DÂY XÁCH - ORE', 'other_supply', NULL, NULL, 1, NULL, '2025-01-17 01:25:48', NULL, 1, 0),
+(79, 'VẬT TƯ PHỤ', 'other_supply', NULL, NULL, 1, NULL, '2025-01-17 01:27:07', NULL, 1, 0),
+(80, 'LINH PHỤ KIỆN CHO THIẾT BỊ MÁY', 'other_supply', NULL, NULL, 1, NULL, '2025-01-17 01:27:25', NULL, 1, 0),
+(81, 'NHŨ BÓNG', 'emulsion', NULL, '1: Chiều rộng: 64cm\r\n2: Chiều dài:  2400cm\r\nghi chú 1: Nhập KT theo thứ tự: 64 x 2400\r\nghi chú 2:  Số lượng: 1....10 .. Tính theo cuộn', 1, NULL, '2024-07-18 16:21:20', '2025-01-21 23:42:36', 23, 0),
+(82, 'Màng co ( TÍNH THỬ KEO BỒI  )', 'skrink', NULL, NULL, 1, NULL, '2024-07-19 03:07:37', NULL, 23, 0),
+(83, 'MỰC IN UV', 'uv', NULL, 'CT này không áp dụng tính khách hàng, chỉ áp dụng đo lường vật tư', 1, NULL, '2025-01-21 17:33:30', '2025-02-03 14:41:48', 1, NULL),
+(84, 'CSN TRẮNG', 'rubber', NULL, '1: Chiều rộng 125cm\r\n2: Chiều dài  250cm\r\nghi chú 1: Nhập KT theo thứ tự: 125 x 250 \r\nghi chú 2:  Số lượng: 1....10 .. Tính theo tấm', 1, NULL, '2025-01-21 19:27:26', '2025-01-21 23:36:57', 1, NULL),
+(86, 'CSN ĐỎ', 'rubber', NULL, '1: Chiều rộng 125cm\r\n2: Chiều dài  250cm\r\nghi chú 1: Nhập KT theo thứ tự: 125 x 250 \r\nghi chú 2:  Số lượng: 1....10 .. Tính theo tấm', 0, NULL, '2025-01-21 19:39:06', '2025-01-21 23:37:03', 1, NULL),
+(87, 'CSN XANH', 'rubber', NULL, '1: Chiều rộng 125cm\r\n2: Chiều dài  250cm\r\nghi chú 1: Nhập KT theo thứ tự: 125 x 250 \r\nghi chú 2:  Số lượng: 1....10 .. Tính theo tấm', 0, NULL, '2025-01-21 19:39:15', '2025-01-21 23:37:07', 1, NULL),
+(88, 'CSN VÀNG', 'rubber', NULL, '1: Chiều rộng 125cm\r\n2: Chiều dài  250cm\r\nghi chú 1: Nhập KT theo thứ tự: 125 x 250 \r\nghi chú 2:  Số lượng: 1....10 .. Tính theo tấm', 0, NULL, '2025-01-21 19:39:26', '2025-01-21 23:37:12', 1, NULL),
+(89, 'METALAI ĐẶC BIÊT', 'metalai', NULL, '0.8 = 8000d/ M2', 1, NULL, '2025-01-21 21:17:21', '2025-02-01 17:24:21', 1, NULL),
+(90, 'NILON MỜ', 'nilon', NULL, NULL, 1, NULL, '2025-01-21 21:50:00', '2025-01-23 01:20:21', 1, NULL),
+(91, 'SÓNG E 3 Lớp', 'carton', NULL, NULL, 1, NULL, '2025-01-21 23:58:11', '2025-01-21 23:58:11', 1, NULL),
+(92, 'NILON ĐẶC BIỆT', 'nilon', NULL, NULL, 1, NULL, '2025-01-23 01:19:31', '2025-01-26 21:48:01', 1, NULL),
+(93, 'NHŨ MỜ', 'emulsion', NULL, '1: Chiều rộng: 64cm\r\n2: Chiều dài:  2400cm\r\nghi chú 1: Nhập KT theo thứ tự: 64 x 2400\r\nghi chú 2:  Số lượng: 1....10 .. Tính theo cuộn', 1, NULL, '2025-02-03 12:25:23', '2025-02-03 12:25:23', 1, NULL),
+(94, 'NHŨ 7 MÀU', 'emulsion', NULL, '1: Chiều rộng: 64cm\r\n2: Chiều dài:  2400cm\r\nghi chú 1: Nhập KT theo thứ tự: 64 x 2400\r\nghi chú 2:  Số lượng: 1....10 .. Tính theo cuộn', 1, NULL, '2025-02-03 12:25:33', '2025-02-03 12:25:33', 1, NULL),
+(95, 'NHŨ ĐẶC BIỆT', 'emulsion', NULL, '1: Chiều rộng: 64cm\r\n2: Chiều dài:  2400cm\r\nghi chú 1: Nhập KT theo thứ tự: 64 x 2400\r\nghi chú 2:  Số lượng: 1....10 .. Tính theo cuộn', 1, NULL, '2025-02-03 12:25:54', '2025-02-03 12:25:54', 1, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `supply_warehouses`
+--
+
+CREATE TABLE `supply_warehouses` (
+  `id` int NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `target` int DEFAULT NULL,
+  `qtv` int DEFAULT NULL,
+  `length` float DEFAULT NULL,
+  `width` float DEFAULT NULL,
+  `qty` float DEFAULT NULL,
+  `lenth_qty` float DEFAULT NULL,
+  `weight` float DEFAULT NULL,
+  `source` tinyint DEFAULT NULL,
+  `status` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `act` tinyint DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_by` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `warehouse_histories`
+--
+
+CREATE TABLE `warehouse_histories` (
+  `id` int NOT NULL,
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `target` int DEFAULT NULL,
+  `imported` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ex_inventory` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `exported` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `inventory` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `provider` int DEFAULT NULL,
+  `price` float DEFAULT NULL,
+  `other_price` float DEFAULT NULL,
+  `bill` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `act` tinyint DEFAULT NULL,
+  `total` float DEFAULT NULL,
+  `buying_item` int DEFAULT NULL,
+  `product` int DEFAULT NULL,
+  `c_supply` int DEFAULT NULL,
+  `created_by` int DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `warehouse_providers`
+--
+
+CREATE TABLE `warehouse_providers` (
+  `id` int NOT NULL COMMENT 'Mã nhóm',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Tên nhóm',
+  `contacter` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Cha',
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Ghi chú',
+  `act` tinyint DEFAULT NULL,
+  `ord` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_by` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `warehouse_providers`
+--
+
+INSERT INTO `warehouse_providers` (`id`, `name`, `contacter`, `phone`, `address`, `type`, `note`, `act`, `ord`, `created_at`, `updated_at`, `created_by`) VALUES
+(49, 'NCC ANH ĐẠT', 'Ms Chưa hỏi tên', '0913093536', 'Làng nghề Triều Khúc', '[\"paper\"]', NULL, 1, NULL, '2023-09-25 20:55:27', '2025-01-21 20:04:28', 10),
+(50, 'NCC VẠN PHÚ GIA', 'Ms NGA', '0902179719', 'Hưng Yên', '[\"paper\"]', NULL, 1, NULL, '2023-09-25 20:55:48', '2025-01-21 20:04:09', 10),
+(51, 'NCC NGỌC VIỆT', 'Mr Ka', '0974152288', 'Trúc Sơn - HN', '[\"paper\"]', NULL, 1, NULL, '2023-09-25 20:55:57', '2025-01-21 20:03:57', 10),
+(52, 'CSN ĐẠI THÀNH', 'Ms Thảo', '0968204477', 'Văn giang - Hưng Yên', '[\"rubber\",\"styrofoam\"]', NULL, 1, NULL, '2023-09-29 15:50:29', '2025-01-21 20:08:13', 1),
+(54, 'VẬT TƯ PHƯƠNG ANH', 'Ms Phương Anh', '0906008392', 'Minh Khai - HN', '[\"emulsion\",\"other_supply\"]', NULL, 1, NULL, '2023-09-29 15:51:00', '2025-01-17 01:31:21', 1),
+(56, 'NCC HÒA TRUNG', 'Ms Dung', '0933133108', 'Ngọc Hồi - HN', '[\"nilon\"]', NULL, 1, NULL, '2024-04-12 14:24:43', '2025-01-21 20:05:23', 23),
+(57, 'NCC HƯNG TIẾN', 'Ms HÀ', '0985816585', 'Trương Định - HN', '[\"nilon\",\"metalai\",\"cover\"]', NULL, 1, NULL, '2024-04-12 14:25:03', '2025-01-21 20:05:10', 23),
+(60, 'MÀNG CO - NCC VINAPHAT', 'Mr THỨC', '0387999333', 'THỊNH LIỆT - HN', '[\"skrink\",\"other_supply\"]', NULL, 1, NULL, '2024-05-23 08:12:59', '2025-01-17 01:31:11', 6),
+(61, 'NCC SANSIN', 'Ms Bắc', '0906868361', 'BẮC NINH', '[\"nilon\",\"metalai\",\"decal\",\"emulsion\",\"magnet\",\"other_supply\"]', NULL, 1, NULL, '2024-05-23 09:39:04', '2025-01-21 21:34:58', 6),
+(62, 'DECAN LINH HIẾU', 'Mr Hiếu', '0904548484', 'ĐỘI CẤN - HN', '[\"paper\"]', NULL, 1, NULL, '2024-05-27 16:48:26', '2025-01-16 12:37:29', 6),
+(63, 'NCC CÔ HIỀN', 'Cô Hiền', '0974792000', 'Chợ Đồng Xuân', '[null,\"silk\"]', NULL, 1, NULL, '2024-05-29 16:15:52', '2025-01-21 20:09:42', 6),
+(65, 'KẼM IN - NCC A ĐỒNG', 'Mr Đồng', '0916226188', 'Làng nghề Triều Khúc', '[\"other_supply\"]', NULL, 1, NULL, '2024-07-27 08:23:35', '2025-01-17 01:30:56', 18),
+(66, 'MỰC IN LƯỚI UV - NCC DKT', 'Mr Dũng', '0989995156', 'Phan Trọng Tuệ', '[\"uv\"]', NULL, 1, NULL, '2024-07-27 15:20:12', '2025-02-03 14:47:16', 18),
+(67, 'NCC HOÀ KHÍ', 'Mr', '123', 'CẦU TÓ - HN', '[\"other_supply\"]', NULL, 1, NULL, '2024-07-27 15:20:35', '2025-01-21 20:07:03', 18),
+(68, 'NCC AN HÙNG MINH', 'Mr ĐẠT', '0912939507', 'Làng nghề Triều Khúc', '[\"cover\",\"uv\"]', NULL, 1, NULL, '2024-07-31 14:31:03', '2025-01-21 20:06:26', 18),
+(69, 'MUA NGOÀI', NULL, NULL, NULL, NULL, NULL, 1, NULL, '2024-08-01 08:30:03', '2024-08-01 08:30:03', 18),
+(70, 'NCC LINH DUY', 'Ms HUƠNG', '0356086187', 'Từ châu - Liên châu', '[\"carton\"]', NULL, 1, NULL, '2024-08-03 13:41:41', '2025-01-21 20:01:17', 6),
+(71, 'THÙNG - NCC PHƯƠNG ANH', 'Ms QUỲNH', '0916869932', 'Kiến Hưng - HN', '[\"other_supply\"]', NULL, 1, NULL, '2024-08-10 16:04:35', '2025-01-17 02:12:00', 18),
+(72, 'NCC GP', 'Mr TRUNG', '0965633395', 'Hoàng Dương - ứng Hòa', '[\"carton\"]', NULL, 1, NULL, '2024-08-13 15:36:10', '2025-01-21 20:01:32', 6),
+(73, 'DÂY TÚI - NCC Ms LOAN', 'Ms LOAN', '0904736076', 'Triều Khúc - HN', '[\"other_supply\"]', NULL, 1, '0', '2024-08-17 10:05:26', '2025-01-17 01:29:03', 18),
+(74, 'MÀNG PET - NCC ENOMI', 'Mr KIÊN', '0978656066', 'Đền Lừ - HN', '[\"mica\",\"emulsion\"]', NULL, 1, NULL, '2024-08-23 08:37:39', '2025-01-17 02:11:47', 18),
+(76, 'DECAN NHẬT LINH', 'A TUẤN', '0913308338', 'Trần Quý Cáp - HN', '[\"paper\"]', NULL, 1, NULL, '2024-08-29 14:35:43', '2025-01-17 02:11:38', 18),
+(77, 'VẬT TƯ CỒN - NCC TOÀN CẦU', 'Ms Chưa rõ', '0', 'chưa rõ', '[\"other_supply\"]', NULL, 1, NULL, '2024-09-24 16:24:17', '2025-01-17 02:13:33', 18),
+(81, 'KEO CÁN - NCC HẰNG LỰC', 'Ms HẰNG', '0971053579', 'KCN Thanh Oai - HN', '[\"other_supply\"]', NULL, 1, NULL, '2024-10-03 13:48:08', '2025-01-17 02:14:01', 18),
+(82, 'DÂY CHUN - NCC Mr QUỐC', 'Mr QUỐC', '0917956282', 'THỊNH LIỆT - HN', '[\"other_supply\"]', NULL, 1, NULL, '2024-10-05 16:26:12', '2025-01-17 01:28:24', 18),
+(83, 'RẺ LAU MÁY THIÊN BẰNG', 'Ms LY', '0961203270', 'BẮC TỪ LIÊM - HN', '[\"other_supply\"]', NULL, 1, NULL, '2024-10-08 15:54:11', '2025-01-17 02:13:48', 18),
+(84, 'NCC MAK', 'Mr TÂM', '0936523563', 'Từ châu - Thanh oai', '[\"carton\"]', NULL, 1, NULL, '2024-10-23 16:26:46', '2025-01-21 20:01:44', 18),
+(85, 'NCC TIẾN VĂN', 'A THẮNG', '0989878760', 'Từ châu - Thanh oai', '[\"carton\"]', NULL, 1, NULL, '2024-10-29 14:12:00', '2025-01-21 20:01:56', 18),
+(86, 'NCC THÀNH PHÚC', 'Mr PHÚC', '0966001899', 'Từ châu - Liên châu', '[\"carton\"]', NULL, 1, NULL, '2024-11-06 08:59:51', '2025-01-21 20:02:09', 18),
+(87, 'KEO CÁN - NCC VIỆT TIẾN', 'A CƯỜNG', '0912070811', 'Phương Liệt - HN', '[\"other_supply\"]', NULL, 1, NULL, '2024-11-09 10:28:08', '2025-01-17 02:11:07', 18),
+(88, 'NHŨ THÀNH TÍN', 'Mr TUÂN', '0344890536', 'Ngọc Hồi - HN', '[\"emulsion\"]', NULL, 1, NULL, '2024-11-14 08:31:04', '2025-01-17 02:10:56', 18),
+(90, 'NCC TRÂM ANH', 'Mr HOÀNG ANH', '0934455120', 'Đông Anh - HN', '[\"paper\"]', NULL, 1, NULL, '2025-01-11 16:24:22', '2025-01-21 20:03:34', 1),
+(91, 'KHO TUẤN DUNG', 'Mr Tuấn', '0963303999', 'Miêng Hạ - Ứng Hòa - HN', '[\"paper\",\"carton\",\"emulsion\",\"other_supply\"]', NULL, 1, NULL, '2025-01-15 18:25:45', '2025-02-04 16:21:35', 1),
+(92, 'MÀNG PET - CTY ĐẠO AN', 'Mr LUẬN', '0936005069', 'Chương Mỹ - HN', '[\"mica\"]', NULL, 1, NULL, '2025-01-16 14:33:14', '2025-01-16 14:33:14', 1),
+(93, 'LINH PHỤ KIỆN -  CTY ÁNH THIÊN', 'Ms TRANG', '0974484699', '559 giải Phóng - HN', '[\"other_supply\"]', 'Chuyên các dây đai - Dây curoa các loại', 1, NULL, '2025-01-17 02:02:49', '2025-01-17 02:10:37', 1),
+(94, 'LINH PHỤ KIỆN -  CTY VŨ GIA', 'Mr THƯỞNG', '0988410550', 'Phan Trọng Tuệ - HN', '[\"other_supply\"]', 'Buôn bán máy - sửa chữa', 1, NULL, '2025-01-17 02:10:05', '2025-01-17 02:10:05', 1),
+(95, 'CTY  NHẬT SƠN', 'A Tuấn', '0913032772', 'Làng nghề Triều Khúc', '[\"cover\"]', NULL, 1, NULL, '2025-01-21 10:39:35', '2025-01-21 20:06:09', 1),
+(96, 'NCC PHÚC ANH', 'Mr Thiết', '0976132168', 'BẮC NINH', '[\"paper\"]', NULL, 1, NULL, '2025-02-03 09:58:29', '2025-02-03 09:59:04', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `w_salaries`
+--
+
+CREATE TABLE `w_salaries` (
+  `id` int NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `command` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `product` int DEFAULT NULL,
+  `table_supply` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `supply` int DEFAULT NULL,
+  `qty` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `bad_qty` bigint DEFAULT NULL,
+  `demo_qty` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `bad_demo_qty` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `factor` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `work_price` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `shape_price` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `handle` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `total` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `machine_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `worker` int DEFAULT NULL,
+  `status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `act` tinyint DEFAULT NULL,
+  `submited_at` datetime DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_by` int DEFAULT NULL,
+  `fill_materal` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fill_handle` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `w_users`
+--
+
+CREATE TABLE `w_users` (
+  `id` int NOT NULL,
+  `username` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `device` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `act` tinyint DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_by` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `w_users`
+--
+
+INSERT INTO `w_users` (`id`, `username`, `password`, `name`, `phone`, `type`, `device`, `note`, `act`, `created_at`, `updated_at`, `created_by`) VALUES
+(10, 'mayin52', 'e10adc3949ba59abbe56e057f20f883e', 'Mr Quý - Mr Hồng', '0963303999', 'print', '1', NULL, 1, '2023-07-27 23:54:44', '2025-02-05 22:50:23', 1),
+(18, 'inuvtd', 'e10adc3949ba59abbe56e057f20f883e', 'Mr Thành', '11', 'uv', 'auto', NULL, 0, '2023-09-11 23:56:24', '2023-10-01 14:26:49', 1),
+(20, 'trietquang', 'e10adc3949ba59abbe56e057f20f883e', 'Mr Tùng', '111', 'float', 'semi_auto', NULL, 1, '2023-09-12 10:33:53', '2025-01-23 21:26:32', 1),
+(23, 'bocle', 'e10adc3949ba59abbe56e057f20f883e', 'Ms Lan', '111', 'peel', 'semi_auto', NULL, 1, '2023-09-12 10:39:39', '2025-01-24 00:28:37', 1),
+(26, 'inuv', 'e10adc3949ba59abbe56e057f20f883e', 'Mr Huỳnh', '123', 'uv', 'semi_auto', NULL, 1, '2023-09-12 21:49:07', '2025-01-23 21:27:50', 1),
+(27, 'ranhop', 'e10adc3949ba59abbe56e057f20f883e', 'Ms Lan', '123', 'box_paste', 'auto', NULL, 1, '2023-09-14 22:02:45', '2025-01-23 21:35:32', 1),
+(28, 'rantui', 'e10adc3949ba59abbe56e057f20f883e', 'GD Bà Hiệp', '123', 'bag_paste', 'semi_auto', NULL, 1, '2023-09-14 22:03:58', '2025-01-23 21:35:00', 1),
+(29, 'mayxen', 'e10adc3949ba59abbe56e057f20f883e', 'Mr Dũng', '123456', 'cut', 'semi_auto', NULL, 1, '2023-09-14 22:05:27', '2025-01-24 00:45:14', 1),
+(30, 'maygap', 'e10adc3949ba59abbe56e057f20f883e', 'Ms Kiều', '12', 'fold', 'auto', NULL, 0, '2023-09-14 22:06:28', '2024-06-13 22:59:23', 1),
+(34, 'mayphay', 'e10adc3949ba59abbe56e057f20f883e', 'Mr Biên', '0977496697', 'mill', 'auto', NULL, 1, '2023-09-15 01:45:12', '2025-01-23 21:36:45', 1),
+(37, 'mayin102uv', 'e10adc3949ba59abbe56e057f20f883e', 'Mr Hồng (UV)', '0963303999', 'print', '2', NULL, 1, '2023-10-01 13:54:44', '2024-08-05 16:15:51', 1),
+(38, 'mayin52uv', 'e10adc3949ba59abbe56e057f20f883e', 'Mr Quý - Đích (UV)', '0963303999', 'print', '2', NULL, 1, '2023-10-01 13:55:21', '2024-08-05 16:15:42', 1),
+(43, 'maybe', 'e10adc3949ba59abbe56e057f20f883e', 'Ms Thảo', '444', 'elevate', 'semi_auto', NULL, 0, '2023-10-01 14:40:05', '2025-01-23 21:24:22', 1),
+(66, 'hoanthien', 'e10adc3949ba59abbe56e057f20f883e', 'T. Bà Vĩnh', '0972246023', 'finish', 'semi_auto', NULL, 1, '2023-10-05 16:15:21', '2025-01-23 21:38:54', 1),
+(67, 'metalai', 'e10adc3949ba59abbe56e057f20f883e', 'Mr Tùng', '0963303999', 'metalai', 'auto', NULL, 1, '2024-02-22 05:35:22', '2025-01-23 22:04:32', 1),
+(74, 'rantay1', 'e10adc3949ba59abbe56e057f20f883e', 'Tổ công nhật 1', '111', 'box_paste', 'semi_auto', NULL, 0, '2024-07-22 23:21:59', '2025-01-23 21:32:07', 1),
+(75, 'rantay2', 'e10adc3949ba59abbe56e057f20f883e', 'Tổ công nhật 2', '222', 'box_paste', 'semi_auto', NULL, 0, '2024-07-22 23:23:53', '2025-01-23 21:32:05', 1),
+(81, 'mayboi', 'e10adc3949ba59abbe56e057f20f883e', 'Ms Thắm', '666', 'fill', 'semi_auto', NULL, 1, '2024-07-22 23:37:45', '2025-01-23 21:38:02', 1),
+(88, 'maycan', 'e10adc3949ba59abbe56e057f20f883e', 'Ms Thúy', '678', 'nilon', 'auto', NULL, 1, '2024-07-23 22:23:38', '2025-01-23 22:03:58', 1),
+(94, 'epnhu', 'e10adc3949ba59abbe56e057f20f883e', 'Ép nhũ', '333', 'compress', 'auto', NULL, 1, '2024-07-25 22:53:31', '2025-01-23 21:17:35', 1),
+(96, 'maybe', 'e10adc3949ba59abbe56e057f20f883e', 'Mr Đức', '000', 'elevate', 'auto', NULL, 1, '2024-07-25 23:03:07', '2025-01-23 21:25:06', 1);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `after_prints`
+--
+ALTER TABLE `after_prints`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `base_receipts`
+--
+ALTER TABLE `base_receipts`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `index` (`id`,`name`) USING BTREE;
+
+--
+-- Indexes for table `buying_items`
+--
+ALTER TABLE `buying_items`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `citys`
+--
+ALTER TABLE `citys`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `idx_act` (`act`) USING BTREE,
+  ADD KEY `idx_parent` (`parent`) USING BTREE,
+  ADD KEY `idx_parent_act` (`parent`,`act`) USING BTREE;
+
+--
+-- Indexes for table `configs`
+--
+ALTER TABLE `configs`
+  ADD PRIMARY KEY (`id`,`keyword`) USING BTREE,
+  ADD KEY `_index` (`id`,`keyword`,`act`) USING BTREE;
+
+--
+-- Indexes for table `customers`
+--
+ALTER TABLE `customers`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `name_index` (`name`) USING BTREE,
+  ADD KEY `infor_index` (`address`) USING BTREE;
+
+--
+-- Indexes for table `c_designs`
+--
+ALTER TABLE `c_designs`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `c_expertises`
+--
+ALTER TABLE `c_expertises`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `c_orders`
+--
+ALTER TABLE `c_orders`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `c_payments`
+--
+ALTER TABLE `c_payments`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `c_products`
+--
+ALTER TABLE `c_products`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `c_reworks`
+--
+ALTER TABLE `c_reworks`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `c_supplies`
+--
+ALTER TABLE `c_supplies`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `design_types`
+--
+ALTER TABLE `design_types`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `index` (`id`,`name`) USING BTREE;
+
+--
+-- Indexes for table `devices`
+--
+ALTER TABLE `devices`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `districts`
+--
+ALTER TABLE `districts`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `domains`
+--
+ALTER TABLE `domains`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `files`
+--
+ALTER TABLE `files`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `fill_finishes`
+--
+ALTER TABLE `fill_finishes`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `quote_index` (`product`) USING BTREE;
+
+--
+-- Indexes for table `materals`
+--
+ALTER TABLE `materals`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `move_warehouses`
+--
+ALTER TABLE `move_warehouses`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `notifies`
+--
+ALTER TABLE `notifies`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `index` (`id`,`name`) USING BTREE;
+
+--
+-- Indexes for table `n_detail_tables`
+--
+ALTER TABLE `n_detail_tables`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `map_view` (`table_map`,`view`) USING BTREE,
+  ADD KEY `map_insert` (`table_map`,`insert`) USING BTREE,
+  ADD KEY `map_update` (`table_map`,`update`) USING BTREE,
+  ADD KEY `map_search` (`table_map`,`search`) USING BTREE;
+
+--
+-- Indexes for table `n_group_users`
+--
+ALTER TABLE `n_group_users`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `n_log_actions`
+--
+ALTER TABLE `n_log_actions`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `n_regions`
+--
+ALTER TABLE `n_regions`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `n_tables`
+--
+ALTER TABLE `n_tables`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `indx` (`id`,`name`) USING BTREE;
+
+--
+-- Indexes for table `n_users`
+--
+ALTER TABLE `n_users`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `idx` (`created_by`) USING BTREE;
+
+--
+-- Indexes for table `other_warehouses`
+--
+ALTER TABLE `other_warehouses`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `papers`
+--
+ALTER TABLE `papers`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `quote_indx` (`product`) USING BTREE,
+  ADD KEY `main_index` (`main`) USING BTREE;
+
+--
+-- Indexes for table `paper_extends`
+--
+ALTER TABLE `paper_extends`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `name_index` (`name`) USING BTREE,
+  ADD KEY `type_index` (`category`) USING BTREE,
+  ADD KEY `act_indx` (`act`) USING BTREE;
+
+--
+-- Indexes for table `partners`
+--
+ALTER TABLE `partners`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `name_index` (`name`) USING BTREE,
+  ADD KEY `infor_index` (`address`,`email`,`phone`) USING BTREE,
+  ADD KEY `conttacter_index` (`contacter`) USING BTREE;
+
+--
+-- Indexes for table `printers`
+--
+ALTER TABLE `printers`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `print_notes`
+--
+ALTER TABLE `print_notes`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `index` (`id`,`name`) USING BTREE;
+
+--
+-- Indexes for table `print_techs`
+--
+ALTER TABLE `print_techs`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `index` (`id`,`name`) USING BTREE;
+
+--
+-- Indexes for table `product_categories`
+--
+ALTER TABLE `product_categories`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `index` (`id`,`name`,`design_factor`) USING BTREE;
+
+--
+-- Indexes for table `product_histories`
+--
+ALTER TABLE `product_histories`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `name` (`name`,`created_at`) USING BTREE;
+
+--
+-- Indexes for table `product_styles`
+--
+ALTER TABLE `product_styles`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `index` (`id`,`name`) USING BTREE;
+
+--
+-- Indexes for table `product_warehouses`
+--
+ALTER TABLE `product_warehouses`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `provider_debts`
+--
+ALTER TABLE `provider_debts`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `provider_prices`
+--
+ALTER TABLE `provider_prices`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `type_index` (`provider`) USING BTREE,
+  ADD KEY `carton_foam_index` (`price`) USING BTREE,
+  ADD KEY `name_index` (`name`) USING BTREE,
+  ADD KEY `act_indx` (`act`) USING BTREE;
+
+--
+-- Indexes for table `quotes`
+--
+ALTER TABLE `quotes`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `_index` (`seri`,`name`,`represent`) USING BTREE;
+
+--
+-- Indexes for table `quote_configs`
+--
+ALTER TABLE `quote_configs`
+  ADD PRIMARY KEY (`id`,`keyword`) USING BTREE;
+
+--
+-- Indexes for table `represents`
+--
+ALTER TABLE `represents`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `name_index` (`name`) USING BTREE,
+  ADD KEY `infor_index` (`email`,`phone`) USING BTREE;
+
+--
+-- Indexes for table `supplies`
+--
+ALTER TABLE `supplies`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `quote_index` (`product`) USING BTREE;
+
+--
+-- Indexes for table `supply_buyings`
+--
+ALTER TABLE `supply_buyings`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `supply_extends`
+--
+ALTER TABLE `supply_extends`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `name_index` (`name`) USING BTREE,
+  ADD KEY `act_indx` (`act`) USING BTREE;
+
+--
+-- Indexes for table `supply_names`
+--
+ALTER TABLE `supply_names`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `name_index` (`name`) USING BTREE,
+  ADD KEY `type_index` (`type`) USING BTREE,
+  ADD KEY `act_indx` (`act`) USING BTREE;
+
+--
+-- Indexes for table `supply_prices`
+--
+ALTER TABLE `supply_prices`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `type_index` (`type`) USING BTREE,
+  ADD KEY `carton_foam_index` (`supply_id`) USING BTREE,
+  ADD KEY `name_index` (`name`) USING BTREE,
+  ADD KEY `act_indx` (`act`) USING BTREE;
+
+--
+-- Indexes for table `supply_types`
+--
+ALTER TABLE `supply_types`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `name_index` (`name`) USING BTREE,
+  ADD KEY `type_index` (`type`) USING BTREE,
+  ADD KEY `act_indx` (`act`) USING BTREE;
+
+--
+-- Indexes for table `supply_warehouses`
+--
+ALTER TABLE `supply_warehouses`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `warehouse_histories`
+--
+ALTER TABLE `warehouse_histories`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `name` (`name`,`created_at`) USING BTREE;
+
+--
+-- Indexes for table `warehouse_providers`
+--
+ALTER TABLE `warehouse_providers`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `name_index` (`name`) USING BTREE,
+  ADD KEY `type_index` (`type`) USING BTREE,
+  ADD KEY `act_indx` (`act`) USING BTREE;
+
+--
+-- Indexes for table `w_salaries`
+--
+ALTER TABLE `w_salaries`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `w_users`
+--
+ALTER TABLE `w_users`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `after_prints`
+--
+ALTER TABLE `after_prints`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `base_receipts`
+--
+ALTER TABLE `base_receipts`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `buying_items`
+--
+ALTER TABLE `buying_items`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `citys`
+--
+ALTER TABLE `citys`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11864;
+
+--
+-- AUTO_INCREMENT for table `configs`
+--
+ALTER TABLE `configs`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `customers`
+--
+ALTER TABLE `customers`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=977;
+
+--
+-- AUTO_INCREMENT for table `c_designs`
+--
+ALTER TABLE `c_designs`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `c_expertises`
+--
+ALTER TABLE `c_expertises`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `c_orders`
+--
+ALTER TABLE `c_orders`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `c_payments`
+--
+ALTER TABLE `c_payments`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `c_products`
+--
+ALTER TABLE `c_products`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `c_reworks`
+--
+ALTER TABLE `c_reworks`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `c_supplies`
+--
+ALTER TABLE `c_supplies`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `design_types`
+--
+ALTER TABLE `design_types`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `devices`
+--
+ALTER TABLE `devices`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT COMMENT 'Mã nhóm', AUTO_INCREMENT=76;
+
+--
+-- AUTO_INCREMENT for table `districts`
+--
+ALTER TABLE `districts`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=780;
+
+--
+-- AUTO_INCREMENT for table `files`
+--
+ALTER TABLE `files`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `fill_finishes`
+--
+ALTER TABLE `fill_finishes`
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `materals`
+--
+ALTER TABLE `materals`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT COMMENT 'Mã nhóm', AUTO_INCREMENT=60;
+
+--
+-- AUTO_INCREMENT for table `move_warehouses`
+--
+ALTER TABLE `move_warehouses`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `notifies`
+--
+ALTER TABLE `notifies`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `n_detail_tables`
+--
+ALTER TABLE `n_detail_tables`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=502;
+
+--
+-- AUTO_INCREMENT for table `n_group_users`
+--
+ALTER TABLE `n_group_users`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `n_log_actions`
+--
+ALTER TABLE `n_log_actions`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `n_regions`
+--
+ALTER TABLE `n_regions`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `n_tables`
+--
+ALTER TABLE `n_tables`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+
+--
+-- AUTO_INCREMENT for table `n_users`
+--
+ALTER TABLE `n_users`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
+-- AUTO_INCREMENT for table `other_warehouses`
+--
+ALTER TABLE `other_warehouses`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `papers`
+--
+ALTER TABLE `papers`
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `paper_extends`
+--
+ALTER TABLE `paper_extends`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT COMMENT 'Mã nhóm', AUTO_INCREMENT=62;
+
+--
+-- AUTO_INCREMENT for table `partners`
+--
+ALTER TABLE `partners`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `printers`
+--
+ALTER TABLE `printers`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT COMMENT 'Mã nhóm', AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `print_notes`
+--
+ALTER TABLE `print_notes`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `print_techs`
+--
+ALTER TABLE `print_techs`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `product_categories`
+--
+ALTER TABLE `product_categories`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `product_histories`
+--
+ALTER TABLE `product_histories`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `product_styles`
+--
+ALTER TABLE `product_styles`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
+--
+-- AUTO_INCREMENT for table `product_warehouses`
+--
+ALTER TABLE `product_warehouses`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `provider_debts`
+--
+ALTER TABLE `provider_debts`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `provider_prices`
+--
+ALTER TABLE `provider_prices`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT COMMENT 'Mã nhóm', AUTO_INCREMENT=643;
+
+--
+-- AUTO_INCREMENT for table `quotes`
+--
+ALTER TABLE `quotes`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `quote_configs`
+--
+ALTER TABLE `quote_configs`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
+-- AUTO_INCREMENT for table `represents`
+--
+ALTER TABLE `represents`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=994;
+
+--
+-- AUTO_INCREMENT for table `supplies`
+--
+ALTER TABLE `supplies`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `supply_buyings`
+--
+ALTER TABLE `supply_buyings`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `supply_extends`
+--
+ALTER TABLE `supply_extends`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT COMMENT 'Mã nhóm', AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `supply_names`
+--
+ALTER TABLE `supply_names`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT COMMENT 'Mã nhóm', AUTO_INCREMENT=75;
+
+--
+-- AUTO_INCREMENT for table `supply_prices`
+--
+ALTER TABLE `supply_prices`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT COMMENT 'Mã nhóm', AUTO_INCREMENT=534;
+
+--
+-- AUTO_INCREMENT for table `supply_types`
+--
+ALTER TABLE `supply_types`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT COMMENT 'Mã nhóm', AUTO_INCREMENT=96;
+
+--
+-- AUTO_INCREMENT for table `supply_warehouses`
+--
+ALTER TABLE `supply_warehouses`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `warehouse_histories`
+--
+ALTER TABLE `warehouse_histories`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `warehouse_providers`
+--
+ALTER TABLE `warehouse_providers`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT COMMENT 'Mã nhóm', AUTO_INCREMENT=97;
+
+--
+-- AUTO_INCREMENT for table `w_salaries`
+--
+ALTER TABLE `w_salaries`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `w_users`
+--
+ALTER TABLE `w_users`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

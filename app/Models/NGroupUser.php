@@ -225,11 +225,6 @@ class NGroupUser extends Model
             'link' => 'view/warehouse_providers',
             'group' => 'quote_price_config'
         ],
-        'supply_role' => [
-            'name' => 'Quyền quản lí vật tư',
-            'link' => 'view/n_users?default_data=%7B%22group_user%22%3A%22'.self::WAREHOUSE.'%22%7D',
-            'group' => 'quote_price_config'
-        ],
         'ex_supply' => [
             'name' => 'Yêu cầu xuất vật tư',
             'link' => 'view/c_supplies?default_data=%7B%22status%22%3A%22handling%22%7D',

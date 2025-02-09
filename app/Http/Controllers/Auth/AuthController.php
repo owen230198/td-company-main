@@ -45,16 +45,10 @@ class AuthController extends Controller
             return view('acount_detail', $data);
         }else{
             $email = $request->input('email');
-            $phone = $request->input('phone');
             if (empty($email)) {
                 return returnMessageAjax(100, 'Bạn chưa nhập thông tin email!');
             }
-
-            if (empty($phone)) {
-                return returnMessageAjax(100, 'Bạn chưa nhập thông tin Số điện thoại của bạn !');
-            }
             $data_user->email = $email;
-            $data_user->phone = $phone;
             $update = $data_user->save();
             if ($update) {
                 return returnMessageAjax(200, 'Cập nhật thông tin thành công !');

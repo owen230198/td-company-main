@@ -27,16 +27,18 @@
                                 'attr' => ['disable_field' => 1],
                                 'value' => @$profile['group_user']
                             ],
+                            
+                            [
+                                'name' => 'phone',
+                                'attr' => ['disable_field' => 1],
+                                'note' => 'SĐT',
+                                'value' => $profile['phone']
+                            ],
                             [
                                 'name' => 'email',
                                 'note' => 'Email',
                                 'value' => @$profile['email']
-                            ],
-                            [
-                                'name' => 'phone',
-                                'note' => 'SĐT',
-                                'value' => $profile['phone']
-                            ],
+                            ]
                         ]
                     @endphp 
                     @foreach ($arr_field as $field)

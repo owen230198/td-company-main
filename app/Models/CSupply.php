@@ -74,6 +74,11 @@
         {
             CSupply::where(['id' => $id])->update(['code' => 'XVT-'.sprintf("%08s", $id)]);
         }
+
+        static function getFieldConfirm($obj)
+        {
+            
+        }
     }
 
 ?>

@@ -553,60 +553,6 @@ var reImportEmulsion = function(id, back_url) {
     }); 
 }
 
-var confirmTakeOutSupply = function () {
-    $(document).on('click', '.__confirm_ex_supp', function (event) {
-        event.preventDefault();
-        let _this = $(this);
-        let id = _this.data('id');
-        let form = _this.closest('form');
-        let supp_type = _this.data('supp_type');
-        $('#loader').fadeIn(200);
-        $.ajax({
-            url: getBaseRoute('take-out-supply/' + id),
-            type: 'POST',
-            data: form.serialize(),
-        }).done(function (data) {
-            if (supp_type == 'emulsion') {
-                if (data.code == 200) {
-                    swal({
-                        title: "Nhập lại kho cuộn nhũ đã cắt ?",
-                        text: 'Nếu cắt cuộn nhũ còn thừa buộc phải nhập lại kho, nếu không vui lòng bỏ qua',
-                        icon: 'info',
-                        buttons: true,
-                        confirmButtonColor: "#459300",
-                        buttons: ['Bỏ qua', 'Nhập lại kho']
-                    }).then((action) => {
-                        if (action) {
-                            reImportEmulsion(id, data.url);    
-                        } else {
-                            window.location = data.url;
-                        }
-                    });   
-                }else{
-                    swal('Không thành công !', data.message, 'error');
-                }
-            }else{
-                let title = data.code == 200 ? 'Thành công' : 'Không thành công';
-                let key = data.code == 200 ? 'success' : 'error';
-                if (!empty(data.message)) {
-                    if (!empty(data.url)) {
-                        swal(title, data.message, key).then(function () {
-                            window.location = data.url;
-                        });
-                    }else{
-                        swal(title, data.message, key);
-                    }
-                } else {
-                    swal('Lỗi không xác định !', data.message, 'error');
-                }
-                $('#loader').delay(200).fadeOut(500);
-            }
-        })
-        $('#loader').delay(200).fadeOut(500);
-        
-    });
-}
-
 var confirmImportSupply = function () {
     $(document).on('click', '.__confirm_im_supp', function (event) {
         event.preventDefault();
@@ -658,8 +604,6 @@ var changeSelectTypeTrigger = function(select, reset_input = 0)
     let url = getUrlLinkingWarehouseSize(value);
     let select_size = parent.find('select.__wh_select_size');
     select_size.data('url', url);
-    console.log(select_size.val());
-    
     if (reset_input == 1) {
         select_size.val('');
         select_size.data('id', '');
@@ -1701,7 +1645,6 @@ $(function () {
     phoneInputPrevent();
     fileProcessModule();
     receiveCommand();
-    confirmTakeOutSupply();
     moduleSelectAjaxChild();
     selectTypeSuppWarehouse();
     selectTypePaymentRequire();

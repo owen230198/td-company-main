@@ -372,3 +372,18 @@ if (!function_exists('getRangeFloatNumber')) {
         return [$number - $step, $number + $step];
     }
 }
+
+if (!function_exists('getDataLinkButton')) {
+    function getDataLinkButton($link, $data){
+        $ret = $link;
+        if (!empty($ret)) {
+            $pattern = '/<(\w+)>/';
+            if (preg_match($pattern, $ret, $matches)) {
+                $ret = replaceValueParam($pattern, $ret, $data);
+            }else{
+                $ret .= $data->id;    
+            }
+        }
+        return $ret;
+    }
+}

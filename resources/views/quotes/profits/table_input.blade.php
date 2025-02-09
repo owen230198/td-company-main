@@ -11,14 +11,18 @@
         <tr>
             <td class="text-center align-middle font_bold color_green">{{ $data_quote->seri }}</td>
             <td class="align-middle">
-                <div class="form-group d-flex align-items-center justify-content-center mb-0">
-                    <input type="number" step="any" class="form-control" name="ship_price" value="{{ @$data_quote->ship_price }}" placeholder="Nhập chi phí vận chuyển (VNĐ)">
-                </div>
+                @include('view_update.text', [
+                    'name' => 'ship_price',
+                    'value' => @$data_quote->ship_price,
+                    'attr' => ['type_input' => 'price', 'placeholder' => 'Nhập chi phí vận chuyển (VNĐ)']
+                ])
             </td>
             <td class="align-middle">
-                <div class="form-group d-flex align-items-center justify-content-center mb-0">
-                    <input type="number" step="any" class="form-control" name="profit" value="{{ @$data_quote->profit }}" placeholder="Nhập lợi nhuận sản phẩm (%)">
-                </div>
+                @include('view_update.text', [
+                    'name' => 'profit',
+                    'value' => @$data_quote->profit,
+                    'attr' => ['type_input' => 'number', 'placeholder' => 'Nhập % lợi nhuận']
+                ])
             </td>
         </tr>
     </tbody>

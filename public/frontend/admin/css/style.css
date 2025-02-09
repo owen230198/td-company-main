@@ -227,7 +227,7 @@ a.device_supp_item {
 .breadcrumb_section {
     position: sticky;
     top: 55px;
-    z-index: 2;
+    z-index: 1;
 }
 
 .pagination {

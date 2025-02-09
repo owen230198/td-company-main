@@ -1,13 +1,5 @@
 @php
-    $link_ext_btn = @$button['link'];
-    if (!empty($link_ext_btn)) {
-        $pattern = '/<(\w+)>/';
-        if (preg_match($pattern, $link_ext_btn, $matches)) {
-            $link_ext_btn = replaceValueParam($pattern, $link_ext_btn, $data);
-        }else{
-            $link_ext_btn = $link_ext_btn.''.$data->id;    
-        }
-    }
+    $link_ext_btn = getDataLinkButton(@$button['link'], $data);
 @endphp
 @if (@$button['type'] == 2)
     <button type="button" class="table-btn mr-2 mb-2 {{ @$button['class'] }}" title="{{ @$button['note'] }}" data-table="{{ $tableItem['name'] }}" data-id="{{ $data->id }}"

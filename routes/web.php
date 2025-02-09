@@ -122,7 +122,7 @@ Route::middleware(['check_login'])->group(function () {
 	Route::get('field-search-supply-history', [SupplyBuyingController::class, 'fieldSearchHistory']);
 	Route::get('get-view-buying-supply-type', [SupplyBuyingController::class, 'getViewBuyingSupplyType']);
 	Route::get('qty-by-supply-type', [CSupplyController::class, 'qtyBySupplyType']);
-	Route::post('take-out-supply/{id}', [CSupplyController::class, 'takeOutSupply']);
+	Route::any('take-out-supply/{id}', [CSupplyController::class, 'takeOutSupply']);
 	Route::post('re-import-emulsion/{id}', [CSupplyController::class, 'reImportEmulsion']);
 	Route::get('list-product-warehouse/{id}', [ProductController::class, 'listProductWaehouse']);
 	Route::any('supply-debt', [SupplyBuyingController::class, 'supplyDebt']);
