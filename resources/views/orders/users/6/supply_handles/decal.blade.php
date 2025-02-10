@@ -7,6 +7,8 @@
         $decal_plus = \TDConst::DECAL_SIZE_PLUS;
         $base_need = getBaseNeedQtySquareSupply($supply_obj->supp_qty, $supply_size);
         $disable_all = 1;
+        $bigger_width = getBigerWidthSize($supply_size);
+    @endphp
     @endphp
     @include('quotes.products.supplies.title_config', ['divide' => $decal_divide, 'name' => 'đề can nhung'])
     
@@ -28,6 +30,11 @@
                 'base_need' =>  $base_need,
                 'product_qty' => $supply_obj->product_qty,
                 'over_supply' => true
+            ],
+            'sug_buying' => [
+                'target' => $supply_size['materal'],
+                'qtv' => $supply_size['qtv'],
+                'width' => $bigger_width
             ],
             'type' => \TDConst::FIX_WIDTH
         ])

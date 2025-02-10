@@ -1,5 +1,5 @@
 @php
-    $base_name = 'product['.$pro_index.']['.$key_supp.']['.$supp_index .']['.$key_stage.']';
+    $base_name = !empty($base_name) ? $base_name : 'product['.$pro_index.']['.$key_supp.']['.$supp_index .']['.$key_stage.']';
 @endphp
 <div class="d-flex align-items-center mb-2 fs-13">
     <label class="mb-0 min_210 text-capitalize text-right mr-3">

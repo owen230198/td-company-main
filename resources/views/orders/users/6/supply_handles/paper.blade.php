@@ -38,6 +38,11 @@
                 'base_need' => $base_need_square,
                 'qtv' => $metalai['qtv'],
             ],
+            'sug_buying' => [
+                'target' => $metalai['materal'],
+                'qtv' => $metalai['qtv'],
+                'width' => $bigger_width
+            ],
             'type' => \TDConst::HANK
         ])
     @endif 
@@ -52,6 +57,11 @@
                     'supp_price' => $cover['materal'],
                     'base_need' => $base_need_square,
                     'qtv' => $cover['qtv'],
+                ],
+                'sug_buying' => [
+                    'target' => $cover['materal'],
+                    'qtv' => $cover['qtv'],
+                    'width' => $bigger_width
                 ],
                 'type' => \TDConst::HANK
             ])
@@ -72,7 +82,17 @@
                 }
             @endphp
             @include('orders.users.6.supply_handles.view_handles.multiple', 
-            ['arr_items' => $arr_items, 'type' => \TDConst::PAPER])
+            [
+                'arr_items' => $arr_items, 
+                'type' => \TDConst::PAPER,
+                'sug_buying' => [
+                    'target' => $supply_size['materal'],
+                    'qtv' => $supply_size['qtv'],
+                    'width' => $supply_size['width'],
+                    'length' => $supply_size['length'],
+                    'qty' => $supply_obj->supp_qty,
+                ],
+            ])
         </div> 
     </div>
 @endsection

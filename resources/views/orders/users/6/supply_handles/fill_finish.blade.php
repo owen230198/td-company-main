@@ -36,6 +36,11 @@
                 'base_need' => $take_need_qty,
                 'qtv' => $supply_size['qtv'],
             ],
+            'sug_buying' => [
+                'target' => $supply_size['materal'],
+                'qtv' => $supply_size['qtv'],
+                'qty' => $base_need_supp
+            ],
             'type' => \TDConst::MAGNET
         ])
     @else

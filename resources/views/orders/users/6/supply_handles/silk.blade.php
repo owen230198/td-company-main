@@ -7,6 +7,7 @@
         $silk_plus = \TDConst::SILK_SIZE_PLUS;
         $base_need = getBaseNeedQtySquareSupply($supply_obj->supp_qty, $supply_size);
         $disable_all = 1;
+        $bigger_width = getBigerWidthSize($supply_size);
     @endphp
     
     @include('quotes.products.supplies.title_config', ['divide' => $silk_divide, 'name' => 'vải lụa'])
@@ -30,7 +31,11 @@
                 'product_qty' => $supply_obj->product_qty,
                 'over_supply' => true
             ],
+            'sug_buying' => [
+                'target' => $supply_size['materal'],
+                'qtv' => $supply_size['qtv'],
+                'width' => $bigger_width
+            ],
             'type' => \TDConst::FIX_WIDTH
         ])
-
 @endsection
