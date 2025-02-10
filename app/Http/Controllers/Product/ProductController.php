@@ -133,7 +133,7 @@ use App\Models\WUser;
                     $data['title'] = 'Thẩm định sau sản xuất sản phẩm '.$product_obj->name;
                     $data['nosidebar'] = true;
                     $data['data_product'] = $obj;
-                    $data['status_exper_option'] = [CExpertise::FULL => 'Nhập kho toàn bộ lệnh ('.$obj->qty.' sản phẩm)', CExpertise::PROBLEM => 'Nhập kho thiếu do lỗi kỹ thuật'];
+                    $data['status_exper_option'] = [CExpertise::FULL => 'Số lượng đủ ('.$obj->qty.' sản phẩm)', CExpertise::PROBLEM => 'Số lượn thiếu'];
                     $data['prob_handle_option'] = ['' => 'Xử lí sản phẩm lỗi',CExpertise::NOT_REWORK => 'Không sản xuất lại', CExpertise::REWORK => 'Sản xuất lại'];
                     $data['field_group_user'] = WUser::getGroupUserFields();
                     return view('kcs.requrirements.view', $data);

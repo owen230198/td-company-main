@@ -1,5 +1,5 @@
 @php
-    $link_ext_btn = getDataLinkButton($button['link'], $dataItem);
+    $link_ext_btn = getDataLinkButton(@$button['link'], $dataItem);
 @endphp
 @if (@$button['type'] == 2)
     <button type="button" 

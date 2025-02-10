@@ -13,13 +13,6 @@
             <button type="submit" disabled class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-2">
               <i class="fa fa-check mr-2 fs-14" aria-hidden="true"></i>Hoàn tất
             </button>
-            @if (\GroupUser::isPlanHandle())        
-                <button type="button" data-src = "{{ url('insert/supply_buyings?nosidebar=1') }}" 
-                class="main_button color_white bg_green border_green radius_5 font_bold smooth mr-2 load_view_popup"
-                data-toggle="modal" data-target="#actionModal">
-                    <i class="fa fa-lightbulb-o mr-2 fs-14" aria-hidden="true"></i>Đề xuất mua
-                </button>   
-            @endif
             <a href="{{ url('') }}" class="main_button bg_red color_white radius_5 font_bold smooth red_btn">
               <i class="fa fa-times mr-2 fs-14" aria-hidden="true"></i>Hủy
             </a>

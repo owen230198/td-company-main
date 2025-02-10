@@ -45,13 +45,10 @@
             if (!$request->isMethod('POST')) {
                 $data = $this->admins->getDataActionView($table, __FUNCTION__, 'Thêm mới');
                 $data['action_url'] = url('insert/'.$table);
-                if (!empty($request->input('name'))) {
-                    if ($nosidebar) {
-                        $data['action_url'] .= '?nosidebar=1';
-                    }
-                    $dataItem['name'] = $request->input('name');
-                    $dataItem['note'] = 'Mua vật tư cho đơn hàng: '.$request->input('name');
-                    $data['dataItem'] = collect($dataItem);
+                if (!empty($request->has_data)) {
+                    $dataItem['type'] = $request->type;
+                    $data['dataItem'] = $dataItem;
+                    return view('supply_buyings.insert_has_data', $data);
                 }
                 return view('action.view', $data);
             }else{

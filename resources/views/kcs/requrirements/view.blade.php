@@ -46,7 +46,7 @@
             $problem_handle_fields = [
                 [
                     'name' => 'qty',
-                    'note' => 'SL đủ tiêu chuẩn nhập kho',
+                    'note' => 'SL nhập kho thực tế',
                     'type' => 'text',
                     'attr' => ['type_input' => 'number', 'inject_class' => '__expertise_qty']
                 ],

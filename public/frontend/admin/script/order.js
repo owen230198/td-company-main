@@ -308,7 +308,7 @@ var planAddSupplyHandle = function()
 {
     $(document).on('click', 'button.__supply_handle_button_add', function(event){
         event.preventDefault();
-        let parent = $(this).parent();
+        let parent = $(this).closest('.__module_multiple_handle_supply');
         let ajax_target = parent.find('.__supply_handle_list');
         let param = $(this).data('param');
         let items = ajax_target.find('.__handle_supply_item');

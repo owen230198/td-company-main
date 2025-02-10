@@ -223,7 +223,7 @@
                         'type' => 'select',
                         'attr' => ['inject_class' => '__select_import_product_warehouse_method'],
                         'other_data' => ['data' => 
-                            ['options' => ['' => 'Chọn phương thức', 'insert' => 'Thêm mới sản phẩm', 'update' => 'Cập nhật thêm số lượng']]
+                            ['options' => ['' => 'Chọn phương thức', 'insert' => 'Sản phẩm mới', 'update' => 'Sản phẩm cùng thông số - bán sẵn']]
                         ]
                     ];
                     $data['field_note'] = [
