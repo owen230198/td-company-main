@@ -7,16 +7,24 @@
         $cover = json_decode($supply_obj->cover, true);
         $base_supp_qty = $supply_obj->supp_qty;
         $base_need_square = getBaseNeedQtySquareSupply($base_supp_qty, $supply_size);
+        $bigger_width = getBigerWidthSize($supply_size);
     @endphp
     @if (!empty($nilon['materal']) && !empty($nilon['qtv']))
         @include('orders.users.6.supply_handles.view_handles.multiple', 
-        ['arr_items' => [
-            'key_supp' => \TDConst::NILON, 
-            'note' => 'màng nilon', 
-            'supp_price' => $nilon['materal'],
-            'base_need' => $base_need_square
-        ],
-        'type' => \TDConst::HANK])
+        [
+            'arr_items' => [
+                'key_supp' => \TDConst::NILON, 
+                'note' => 'màng nilon', 
+                'supp_price' => $nilon['materal'],
+                'base_need' => $base_need_square
+            ],
+            'sug_buying' => [
+                'target' => $nilon['materal'],
+                'qtv' => $nilon['qtv'],
+                'width' => $bigger_width
+            ],
+            'type' => \TDConst::HANK
+        ])
     @endif
 
     {{-- chọn vật tư cán metalai --}}

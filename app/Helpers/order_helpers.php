@@ -618,6 +618,13 @@ use App\Models\SupplyOrigin;
 		}
 	}
 
+    if (!function_exists('getBigerWidthSize')) {
+        function getBigerWidthSize($supply_size)
+        {
+            return (float) @$supply_size['width'] > (float) @$supply_size['length'] ? (float) @$supply_size['width'] : (float) @$supply_size['length'];
+        }
+    }
+
     if (!function_exists('getViewSuppluBuyingByType')) {
         function getViewSuppluBuyingByType($type, $index, $value = [])
         {
@@ -626,7 +633,7 @@ use App\Models\SupplyOrigin;
             if (!empty($value['target'])) {
                 $where_child['supply_id'] = $value['target'];
             }
-            $data['fields'] =[
+            $data['fields'] = [
                 [
                     'name' => 'target',
                     'note' => 'Loại vật tư',

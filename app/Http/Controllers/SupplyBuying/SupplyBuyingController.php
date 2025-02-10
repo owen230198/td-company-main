@@ -49,6 +49,9 @@
                     $dataItem['type'] = $request->type;
                     $supply_data['target'] = $request->target;
                     $supply_data['qtv'] = $request->qtv;
+                    $supply_data['width'] = $request->width;
+                    $supply_data['length'] = $request->length;
+                    $dataItem['supply'] = [$supply_data];
                     $data['dataItem'] = $dataItem;
                     return view('supply_buyings.insert_has_data', $data);
                 }

@@ -5,6 +5,11 @@
         $param .= '&'.$key.'='.$value;
     }
     $link_buying = 'insert/supply_buyings?nosidebar=1&has_data=1&type='.$arr_items['key_supp'].'&name=1';
+    if (!empty($sug_buying)) {
+        foreach ($sug_buying as $key_b => $value_b) {
+            $link_buying .= '&'.$key_b.'='.$value_b;
+        }
+    }
 @endphp
 <div class="__module_multiple_handle_supply">
     <h3 class="fs-14 text-uppercase border_top_eb pt-3 mt-3 text-center handle_title">
