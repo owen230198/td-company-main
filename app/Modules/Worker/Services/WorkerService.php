@@ -91,7 +91,7 @@ class WorkerService extends BaseService
         $data['title'] = 'Chi tiết lệnh sản xuất '.$data_command->command;
         $worker_type = @$worker['type'];
         $handle = !empty($supply->{$worker_type}) ? json_decode($supply->{$worker_type}, true) : [];
-        $data['data_handle'] = WSalary::getHandleDataJson($worker_type, $handle, true);
+        $data['data_handle'] = json_decode($data_command->handle, true);
         $data_product = Product::find($supply->product);
         $data['data_product'] = $data_product;
         $data['data_order'] = Order::find(@$data_product->order);

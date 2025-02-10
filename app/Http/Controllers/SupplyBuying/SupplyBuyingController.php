@@ -47,6 +47,8 @@
                 $data['action_url'] = url('insert/'.$table);
                 if (!empty($request->has_data)) {
                     $dataItem['type'] = $request->type;
+                    $supply_data['target'] = $request->target;
+                    $supply_data['qtv'] = $request->qtv;
                     $data['dataItem'] = $dataItem;
                     return view('supply_buyings.insert_has_data', $data);
                 }

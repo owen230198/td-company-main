@@ -4,6 +4,7 @@
     foreach ($arr_items as $key => $value) {
         $param .= '&'.$key.'='.$value;
     }
+    $link_buying = 'insert/supply_buyings?nosidebar=1&has_data=1&type='.$arr_items['key_supp'].'&name=1';
 @endphp
 <div class="__module_multiple_handle_supply">
     <h3 class="fs-14 text-uppercase border_top_eb pt-3 mt-3 text-center handle_title">
@@ -18,7 +19,7 @@
             <i class="fa fa-plus mr-2 fs-14"></i>Thêm
         </button> 
         @if (\GroupUser::isPlanHandle())     
-            <button type="button" data-src = "{{ url('insert/supply_buyings?nosidebar=1&has_data=1&type='.$arr_items['key_supp'].'&name=1') }}" 
+            <button type="button" data-src = "{{ url($link_buying) }}" 
             class="main_button color_white bg_green border_green radius_5 font_bold smooth ml-1 load_view_popup"
             data-toggle="modal" data-target="#actionModal">
                 <i class="fa fa-lightbulb-o mr-2 fs-14" aria-hidden="true"></i>Đề xuất mua
