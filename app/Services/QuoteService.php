@@ -268,8 +268,8 @@ class QuoteService extends BaseService
     {
         $arr['pro_num'] = $num;
         $arr['pro_name'] = $product['name'];
-        $arr['paper_materal'] = getFieldDataById('name', 'materals', $main_paper['size']['materal']);
-        $arr['paper_qttv'] = @$main_paper['size']['qttv'];
+        $arr['paper_materal'] = getFieldDataById('name', 'supply_types', $main_paper['size']['materal']);
+        $arr['paper_qttv'] = getFieldDataById('name', 'supply_prices', $main_paper['size']['qtv']);
         $arr['pro_size'] = getSizeTitleProduct($product);
         $arr['pro_design'] = getFieldDataById('name', 'design_types', $product['design']);
         if (!empty($main_paper['print'])) {

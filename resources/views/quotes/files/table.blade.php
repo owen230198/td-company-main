@@ -22,11 +22,11 @@
                     </p>
                     <p class="mb-1">
                         <span class="font_bold mr-1"><i class="dot"></i> Chất liệu giấy: </span>
-                        {{ getFieldDataById('name', 'materals', @$main_paper['size']['materal']) }}
+                        {{ getFieldDataById('name', 'supply_types', @$main_paper['size']['materal']) }}
                     </p>
                     <p class="mb-1">
                         <span class="font_bold mr-1"><i class="dot"></i> Định lượng: </span>
-                        {{ @$main_paper['size']['qttv'] }}
+                        {{ getFieldDataById('name', 'supply_prices', @$main_paper['size']['qtv']) }}
                     </p>
                     <p class="mb-1">
                         <span class="font_bold mr-1"><i class="dot"></i> Kích thước: </span>
